@@ -1,10 +1,6 @@
-import os
-import feedparser
-import requests
+import os, feedparser, requests, json, time
 from bs4 import BeautifulSoup
 from google import genai
-import json
-import time
 
 # --- CONFIGURAZIONE ---
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
@@ -20,21 +16,8 @@ FEEDS = [
     "https://www.ringsidenews.com/feed/"
 ]
 
-def is_duplicate_url(original_url):
-    """Controlla se l'URL originale è già stato usato tramite i metadati di WP"""
-    try:
-        # Cerchiamo nei custom fields (post meta) di WordPress
-        # Nota: richiede che le REST API siano configurate per leggere i meta
-        params = {
-            'meta_key': 'original_url',
-            'meta_value': original_url
-        }
-        res = requests.get(WP_API_URL, params=params, auth=(WP_USER, WP_PASSWORD), timeout=10)
-        return len(res.json()) > 0
-    except:
-        return False
-
 def get_clean_text(url):
+    """Estrae il testo pulito dall'articolo originale"""
     try:
         res = requests.get(url, timeout=10)
         soup = BeautifulSoup(res.text, 'html.parser')
@@ -45,6 +28,7 @@ def get_clean_text(url):
         return ""
 
 def upload_image_to_wp(image_url):
+    """Scarica l'immagine e la carica nei media di WordPress"""
     try:
         img_res = requests.get(image_url, timeout=10)
         if img_res.status_code != 200: return None
@@ -58,72 +42,95 @@ def upload_image_to_wp(image_url):
     except:
         return None
 
-def translate_and_format(text):
+def get_ai_analysis(title, summary):
+    """Valuta importanza e genera ID univoco della notizia"""
+    prompt = f"Analizza questa notizia di wrestling: {title}. Sommario: {summary}. " \
+             f"Restituisci SOLO JSON: {{\"priority\": 1-10, \"semantic_id\": \"slug-3-parole-chiave\", \"is_update\": bool}}"
+    try:
+        res = client.models.generate_content(model="gemini-2.5-flash-lite", contents=prompt)
+        return json.loads(res.text.strip().replace('```json', '').replace('```', ''))
+    except:
+        return {"priority": 5, "semantic_id": title[:20], "is_update": False}
+
+def is_duplicate(semantic_id):
+    """Controlla se l'ID notizia esiste già su WP"""
+    try:
+        res = requests.get(f"{WP_API_URL}?meta_key=semantic_id&meta_value={semantic_id}", auth=(WP_USER, WP_PASSWORD))
+        return len(res.json()) > 0
+    except: return False
+
+def translate_news(text, priority):
+    """Traduzione professionale con le regole di stile concordate"""
+    stile = "URGENTE / BREAKING NEWS" if priority >= 9 else "Giornalistico professionale e asciutto"
     prompt = f"""
     Sei un esperto giornalista italiano di Wrestling. 
-    Traduci e rielabora il testo.
-    1. NO termini tecnici tradotti (Main Event, Heel, Face, ecc.).
-    2. Tono professionale e asciutto.
-    3. Restituisci SOLO JSON:
-    {{
-      "titolo": "Titolo giornalistico",
-      "testo": "HTML pulito",
-      "categoria": (WWE=4, AEW=5, NXT=6, TNA=7, Altro=8)
-    }}
-    Testo: {text}
+    Traduci e rielabora il testo seguendo queste REGOLE:
+    1. NON tradurre termini tecnici (Main Event, Heel, Face, Feud, Gimmick, Pinfall, ecc.).
+    2. Tono: {stile}. Evita frasi fatte da AI (niente 'scintille' o 'palco delle stelle').
+    3. Usa <b> per i wrestler al primo riferimento.
+    4. Restituisci SOLO JSON: {{"titolo": "...", "testo": "...", "categoria": ID_WP}}
+    
+    ID Categorie: WWE=4, AEW=5, NXT=6, TNA=7, Altro=8.
+    
+    Testo da tradurre:
+    {text}
     """
-    response = client.models.generate_content(model="gemini-2.5-flash-lite", contents=prompt)
-    raw_json = response.text.strip().replace('```json', '').replace('```', '')
-    return json.loads(raw_json)
+    res = client.models.generate_content(model="gemini-2.5-flash-lite", contents=prompt)
+    return json.loads(res.text.strip().replace('```json', '').replace('```', ''))
 
-def post_to_wp(data, image_id, original_url):
-    """Pubblica salvando l'URL originale come metadato"""
+def post_to_wp(data, img_id, sem_id, url):
     payload = {
         'title': data['titolo'],
         'content': data['testo'],
         'categories': [data['categoria']],
         'status': 'publish',
-        'featured_media': image_id,
-        'meta': {
-            'original_url': original_url
-        }
+        'featured_media': img_id,
+        'meta': {'semantic_id': sem_id, 'original_url': url}
     }
-    res = requests.post(WP_API_URL, json=payload, auth=(WP_USER, WP_PASSWORD), timeout=20)
-    return res.status_code
+    return requests.post(WP_API_URL, json=payload, auth=(WP_USER, WP_PASSWORD)).status_code
 
 def run_bot():
+    queue = []
     for url_feed in FEEDS:
-        print(f"\n--- Scansione: {url_feed} ---")
-        feed = feedparser.parse(url_feed)
-        for entry in feed.entries[:2]:
-            print(f"Verifica: {entry.link}")
+        print(f"Scansione feed: {url_feed}")
+        f = feedparser.parse(url_feed)
+        for e in f.entries[:5]:
+            info = get_ai_analysis(e.title, e.summary)
+            if not is_duplicate(info['semantic_id']):
+                info['entry'] = e
+                queue.append(info)
+    
+    # Ordina per priorità (le Breaking News balzano in cima)
+    queue.sort(key=lambda x: x['priority'], reverse=True)
+
+    for item in queue:
+        if item['is_update'] and item['priority'] < 7:
+            print(f"Saltato aggiornamento minore: {item['entry'].title}")
+            continue
+        
+        print(f"Elaborazione: {item['entry'].title} (Priorità: {item['priority']})")
+        full_text = get_clean_text(item['entry'].link)
+        
+        if len(full_text) < 500: continue
+
+        try:
+            news = translate_news(full_text, item['priority'])
             
-            # Controllo URL unico (Molto più sicuro del titolo)
-            if is_duplicate_url(entry.link):
-                print("Saltata: URL già presente nel database.")
-                continue
+            # Gestione Immagine
+            img_url = None
+            if 'media_content' in item['entry']: img_url = item['entry'].media_content[0]['url']
+            elif 'links' in item['entry']:
+                for link in item['entry'].links:
+                    if 'image' in link.get('type', ''): img_url = link.get('href')
+            
+            img_id = upload_image_to_wp(img_url) if img_url else None
+            
+            # Pubblicazione
+            status = post_to_wp(news, img_id, item['semantic_id'], item['entry'].link)
+            print(f"Pubblicato! Status WP: {status}")
+            time.sleep(10)
+        except Exception as e: 
+            print(f"Errore: {e}")
 
-            article_text = get_clean_text(entry.link)
-            if len(article_text) < 600:
-                print("Saltata: Testo troppo breve.")
-                continue
-
-            try:
-                print("Elaborazione...")
-                news_data = translate_and_format(article_text)
-                
-                image_url = None
-                if 'media_content' in entry: image_url = entry.media_content[0]['url']
-                elif 'links' in entry:
-                    for link in entry.links:
-                        if 'image' in link.get('type', ''): image_url = link.get('href')
-
-                img_id = upload_image_to_wp(image_url) if image_url else None
-                status = post_to_wp(news_data, img_id, entry.link)
-                print(f"Pubblicato! Status: {status}")
-                time.sleep(10)
-            except Exception as e:
-                print(f"Errore: {e}")
-
-if __name__ == "__main__":
+if __name__ == "__main__": 
     run_bot()
