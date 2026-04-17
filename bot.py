@@ -106,4 +106,7 @@ def run_bot():
                 
                 # 5. Pubblica Post
                 status = post_to_wp(news_data, image_id)
-                print(f"Pubblicato! Status
+                print(f"Pubblicato! Status WP: {status}, Media ID: {image_id}")
+                
+            except Exception as e:
+                print(f"Errore: {e}")
