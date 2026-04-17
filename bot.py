@@ -11,7 +11,6 @@ WP_MEDIA_URL = WP_API_URL.replace('/posts', '/media')
 
 client = genai.Client(api_key=GEMINI_API_KEY)
 
-# URL DIRETTI (Più stabili di feedburner)
 FEEDS = [
     "https://www.wrestlinginc.com/feed/",
     "https://www.ringsidenews.com/feed/"
@@ -34,30 +33,24 @@ def get_ai_analysis(title, summary):
         res = client.models.generate_content(model="gemini-2.5-flash-lite", contents=prompt)
         return json.loads(res.text.strip().replace('```json', '').replace('```', ''))
     except:
-        return {"priority": 5, "semantic_id": title[:20], "is_update": False}
+        return {"priority": 5, "semantic_id": "errore-id", "is_update": False}
 
 def is_duplicate(semantic_id):
-     return False
+    """Controlla se l'ID notizia esiste già su WP"""
+    try:
+        res = requests.get(f"{WP_API_URL}?meta_key=semantic_id&meta_value={semantic_id}", auth=(WP_USER, WP_PASSWORD), timeout=10)
+        return len(res.json()) > 0
+    except:
+        return False
 
 def translate_news(text, priority):
     stile = "BREAKING NEWS" if priority >= 9 else "Giornalistico professionale"
     prompt = f"Sei un esperto giornalista italiano di Wrestling. Traduci e rielabora (HTML). " \
              f"Stile: {stile}. NO termini tecnici tradotti. Usa <b> per i wrestler. " \
-             f"Restituisci JSON: {{\"titolo\": \"...\", \"testo\": \"...\", \"categoria\": ID_WP}}" \
+             f"Restituisci JSON: {{\"titolo\": \"...\", \"testo\": \"...\", \"categoria\": 4}}" \
              f"\n\nTesto: {text}"
     res = client.models.generate_content(model="gemini-2.5-flash-lite", contents=prompt)
     return json.loads(res.text.strip().replace('```json', '').replace('```', ''))
-
-def post_to_wp(data, img_id, sem_id, url):
-    payload = {
-        'title': data['titolo'],
-        'content': data['testo'],
-        'categories': [data['categoria']],
-        'status': 'publish',
-        'featured_media': img_id,
-        'meta': {'semantic_id': sem_id, 'original_url': url}
-    }
-    return requests.post(WP_API_URL, json=payload, auth=(WP_USER, WP_PASSWORD)).status_code
 
 def upload_image_to_wp(image_url):
     try:
@@ -68,18 +61,29 @@ def upload_image_to_wp(image_url):
         return res.json()['id'] if res.status_code == 201 else None
     except: return None
 
+def post_to_wp(data, img_id, sem_id, url):
+    payload = {
+        'title': data['titolo'],
+        'content': data['testo'],
+        'categories': [data.get('categoria', 8)],
+        'status': 'publish',
+        'featured_media': img_id,
+        'meta': {'semantic_id': sem_id, 'original_url': url}
+    }
+    res = requests.post(WP_API_URL, json=payload, auth=(WP_USER, WP_PASSWORD))
+    return res.status_code
+
 def run_bot():
     queue = []
     for url in FEEDS:
         print(f"Scansione feed: {url}")
         f = feedparser.parse(url)
-        print(f"Numero di notizie trovate nel feed: {len(f.entries)}")
+        print(f"Numero di notizie trovate: {len(f.entries)}")
         
         for e in f.entries[:10]:
             info = get_ai_analysis(e.title, e.summary)
             sem_id = info['semantic_id']
             
-            # DEBUG: Vediamo cosa decide per ogni news
             if is_duplicate(sem_id):
                 print(f"SCARTATA (Duplicato): {e.title} | ID: {sem_id}")
                 continue
@@ -91,30 +95,23 @@ def run_bot():
     queue.sort(key=lambda x: x['priority'], reverse=True)
 
     for item in queue:
+        # Filtro Update
+        if item['is_update'] and item['priority'] < 4: 
+            print(f"Saltato update minore: {item['entry'].title}")
+            continue
+        
         full_text = get_clean_text(item['entry'].link)
         print(f"DEBUG TESTO: {item['entry'].title} | Caratteri: {len(full_text)}")
         
         if len(full_text) < 200:
-            print("SCARTATA: Troppo breve.")
+            print("SCARTATA: Testo troppo breve.")
             continue
             
         try:
-            print(f"PUBBLICAZIONE IN CORSO: {item['entry'].title}")
-            # ... resto del codice per tradurre e pubblicare ...
-        
-        full_text = get_clean_text(item['entry'].link)
-        # DEBUG: Vediamo quanto testo legge il bot
-        print(f"DEBUG: {item['entry'].title} | Testo estratto: {len(full_text)} caratteri")
-        
-        # Filtro lunghezza abbassato a 200 per il test
-        if len(full_text) < 200:
-            print("News troppo breve, salto.")
-            continue
-        
-        try:
-            print(f"Elaborazione: {item['entry'].title} (Priorità: {item['priority']})")
-            news = translate_news(full_text, item['priority'])
+            print(f"PUBBLICAZIONE: {item['entry'].title} (Priorità: {item['priority']})")
+            news_data = translate_news(full_text, item['priority'])
             
+            # Recupero Immagine
             img_url = None
             if 'media_content' in item['entry']: img_url = item['entry'].media_content[0]['url']
             elif 'links' in item['entry']:
@@ -122,9 +119,11 @@ def run_bot():
                     if 'image' in link.get('type', ''): img_url = link.get('href')
             
             img_id = upload_image_to_wp(img_url) if img_url else None
-            status = post_to_wp(news, img_id, item['semantic_id'], item['entry'].link)
-            print(f"Pubblicato! Status WP: {status}")
+            status = post_to_wp(news_data, img_id, item['semantic_id'], item['entry'].link)
+            print(f"SUCCESSO! Status WP: {status}")
             time.sleep(10)
-        except Exception as e: print(f"Errore: {e}")
+        except Exception as e:
+            print(f"Errore durante la pubblicazione: {e}")
 
-if __name__ == "__main__": run_bot()
+if __name__ == "__main__":
+    run_bot()
