@@ -76,29 +76,34 @@ def run_bot():
     for url in FEEDS:
         print(f"Scansione feed: {url}")
         f = feedparser.parse(url)
-        
-        # DEBUG: Vediamo se il feed ha risposto qualcosa
         print(f"Numero di notizie trovate nel feed: {len(f.entries)}")
         
-        if len(f.entries) == 0:
-            print(f"ATTENZIONE: Il feed {url} sembra vuoto o bloccato.")
-            # Proviamo a stampare lo stato per capire il motivo
-            if hasattr(f, 'status'): print(f"Status HTTP: {f.status}")
-            continue
-
-        for e in f.entries[:15]:
+        for e in f.entries[:10]:
             info = get_ai_analysis(e.title, e.summary)
-            if not is_duplicate(info['semantic_id']):
-                info['entry'] = e
-                queue.append(info)
+            sem_id = info['semantic_id']
+            
+            # DEBUG: Vediamo cosa decide per ogni news
+            if is_duplicate(sem_id):
+                print(f"SCARTATA (Duplicato): {e.title} | ID: {sem_id}")
+                continue
+            
+            print(f"OK (Nuova): {e.title} | ID: {sem_id}")
+            info['entry'] = e
+            queue.append(info)
     
     queue.sort(key=lambda x: x['priority'], reverse=True)
 
     for item in queue:
-        # Filtro Update abbassato per il test
-        if item['is_update'] and item['priority'] < 3: 
-            print(f"Saltato update minore: {item['entry'].title}")
+        full_text = get_clean_text(item['entry'].link)
+        print(f"DEBUG TESTO: {item['entry'].title} | Caratteri: {len(full_text)}")
+        
+        if len(full_text) < 200:
+            print("SCARTATA: Troppo breve.")
             continue
+            
+        try:
+            print(f"PUBBLICAZIONE IN CORSO: {item['entry'].title}")
+            # ... resto del codice per tradurre e pubblicare ...
         
         full_text = get_clean_text(item['entry'].link)
         # DEBUG: Vediamo quanto testo legge il bot
