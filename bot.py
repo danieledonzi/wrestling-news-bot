@@ -18,12 +18,26 @@ def get_clean_text(url):
         return ""
 
 def translate_news(text):
-    prompt = f"Sei un giornalista di wrestling. Traduci/Riassumi in italiano (HTML): {text}"
-    # Nuovo metodo di chiamata 2026
-    response = client.models.generate_content(
-        model="gemini-2.0-flash", contents=prompt
-    )
-    return response.text
+    prompt = f"Sei un giornalista di wrestling esperto. Traduci/Riassumi in italiano (HTML): {text}"
+    
+    # La lista aggiornata al 2026
+    # Usiamo 'gemini-3-flash' come primario e 'gemini-2.5-flash-lite' come backup
+    models_2026 = ["gemini-3-flash", "gemini-2.5-flash-lite"]
+    
+    for model_name in models_2026:
+        try:
+            print(f"Tentativo con modello 2026: {model_name}")
+            response = client.models.generate_content(
+                model=model_name, 
+                contents=prompt
+            )
+            return response.text
+        except Exception as e:
+            # Se ricevi un 503 (High Demand), il loop proverà il Lite
+            print(f"Modello {model_name} non disponibile (503 o altro). Errore: {e}")
+            continue 
+            
+    raise Exception("Nessun modello di nuova generazione disponibile.")
 
 # Esecuzione
 feed = feedparser.parse("https://www.wrestlinginc.com/feed/")
