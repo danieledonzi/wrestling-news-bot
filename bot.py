@@ -42,13 +42,24 @@ def get_ai_analysis(title, summary):
     except:
         return {"priority": 5, "semantic_id": title[:30].replace(" ", "-"), "is_update": False}
 
-def is_duplicate(semantic_id):
-    """Controlla se la notizia è già stata trattata (anche da altra fonte)"""
+def is_duplicate(title):
+    """Controlla se il titolo (o parte di esso) esiste già tra gli ultimi post pubblicati"""
     try:
-        res = requests.get(f"{WP_API_URL}?meta_key=semantic_id&meta_value={semantic_id}", 
-                          auth=(WP_USER, WP_PASSWORD), timeout=10)
-        return len(res.json()) > 0
-    except:
+        # Chiediamo gli ultimi 20 post pubblicati
+        res = requests.get(f"{WP_API_URL}?per_page=20&status=publish", auth=(WP_USER, WP_PASSWORD), timeout=10)
+        posts = res.json()
+        
+        # Puliamo il titolo attuale per un confronto sicuro
+        current_title_clean = title.lower().strip()
+        
+        for post in posts:
+            existing_title = post.get('title', {}).get('rendered', '').lower().strip()
+            # Se il titolo è molto simile (o contenuto), lo consideriamo duplicato
+            if current_title_clean in existing_title or existing_title in current_title_clean:
+                return True
+        return False
+    except Exception as e:
+        print(f"Errore controllo duplicati: {e}")
         return False
 
 def translate_news(text, priority):
@@ -107,9 +118,10 @@ def run_bot():
             info = get_ai_analysis(e.title, e.summary)
             sem_id = info['semantic_id']
             
-            if is_duplicate(sem_id):
-                print(f"SCARTATA (Duplicato): {e.title}")
-                continue
+            # NUOVO
+  if is_duplicate(e.title):
+    print(f"SCARTATA (Titolo già presente): {e.title}")
+    continue
             
             print(f"OK (Nuova): {e.title} [Priorità: {info['priority']}]")
             info['entry'] = e
