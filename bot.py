@@ -21,17 +21,30 @@ FEEDS = [
     "https://www.ringsidenews.com/feed/"
 ]
 
-def is_duplicate(title):
-    """Controlla se esiste già un post con un titolo simile su WordPress"""
+def is_duplicate(original_url):
+    """Controlla se esiste già un post basato sull'URL originale inglese"""
     try:
-        # Puliamo il titolo da caratteri speciali per la ricerca
-        clean_title = ''.join(e for e in title if e.isalnum() or e.isspace())
-        res = requests.get(f"{WP_API_URL}?search={clean_title}", auth=(WP_USER, WP_PASSWORD), timeout=10)
+        # Cerchiamo tra i meta-dati di WordPress
+        res = requests.get(f"{WP_API_URL}?meta_key=original_article_url&meta_value={original_url}", auth=(WP_USER, WP_PASSWORD))
         posts = res.json()
-        # Se la ricerca restituisce risultati, consideriamolo un potenziale duplicato
         return len(posts) > 0
     except:
         return False
+
+def post_to_wp(data, image_id, original_url):
+    """Pubblica aggiungendo l'URL originale nei metadati"""
+    payload = {
+        'title': data['titolo'],
+        'content': data['testo'],
+        'categories': [data['categoria']],
+        'status': 'publish',
+        'featured_media': image_id,
+        'meta': {
+            'original_article_url': original_url # Salviamo il DNA della news
+        }
+    }
+    res = requests.post(WP_API_URL, json=payload, auth=(WP_USER, WP_PASSWORD))
+    return res.status_code
 
 def get_clean_text(url):
     """Estrae i paragrafi dall'articolo originale"""
