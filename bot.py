@@ -21,7 +21,7 @@ def translate_news(text):
     prompt = f"Sei un giornalista di wrestling. Traduci/Riassumi in italiano (HTML): {text}"
     # Nuovo metodo di chiamata 2026
     response = client.models.generate_content(
-        model="gemini-1.5-flash", contents=prompt
+        model="gemini-2.5-flash", contents=prompt
     )
     return response.text
 
