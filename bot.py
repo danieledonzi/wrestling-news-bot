@@ -37,10 +37,7 @@ def get_ai_analysis(title, summary):
         return {"priority": 5, "semantic_id": title[:20], "is_update": False}
 
 def is_duplicate(semantic_id):
-    try:
-        res = requests.get(f"{WP_API_URL}?meta_key=semantic_id&meta_value={semantic_id}", auth=(WP_USER, WP_PASSWORD))
-        return len(res.json()) > 0
-    except: return False
+     return False
 
 def translate_news(text, priority):
     stile = "BREAKING NEWS" if priority >= 9 else "Giornalistico professionale"
