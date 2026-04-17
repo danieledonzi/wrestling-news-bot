@@ -11,7 +11,6 @@ WP_MEDIA_URL = WP_API_URL.replace('/posts', '/media')
 
 client = genai.Client(api_key=GEMINI_API_KEY)
 
-# User-Agent per non essere bloccati dai siti
 HEADERS = {
     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
 }
@@ -22,7 +21,6 @@ FEEDS = [
 ]
 
 def get_clean_text(url):
-    """Estrae il testo degli articoli con timeout"""
     try:
         res = requests.get(url, headers=HEADERS, timeout=10)
         soup = BeautifulSoup(res.text, 'html.parser')
@@ -33,7 +31,6 @@ def get_clean_text(url):
         return ""
 
 def get_ai_analysis(title, summary):
-    """Chiede a Gemini l'importanza della news e un ID unico"""
     prompt = f"Analizza la notizia: {title}. Sommario: {summary}. " \
              f"Restituisci SOLO JSON: {{\"priority\": 1-10, \"semantic_id\": \"slug-3-parole\", \"is_update\": bool}}"
     try:
@@ -42,38 +39,38 @@ def get_ai_analysis(title, summary):
     except:
         return {"priority": 5, "semantic_id": title[:30].replace(" ", "-"), "is_update": False}
 
-def is_duplicate(title):
-    """Controlla se il titolo (o parte di esso) esiste già tra gli ultimi post pubblicati"""
+def is_duplicate(original_title):
+    """Controlla se il titolo inglese è già presente negli ultimi post (metodo sicuro)"""
     try:
-        # Chiediamo gli ultimi 20 post pubblicati
-        res = requests.get(f"{WP_API_URL}?per_page=20&status=publish", auth=(WP_USER, WP_PASSWORD), timeout=10)
+        # Chiediamo gli ultimi 30 post pubblicati per avere un margine ampio
+        res = requests.get(f"{WP_API_URL}?per_page=30&status=publish", auth=(WP_USER, WP_PASSWORD), timeout=10)
+        if res.status_code != 200: return False
         posts = res.json()
         
-        # Puliamo il titolo attuale per un confronto sicuro
-        current_title_clean = title.lower().strip()
+        # Pulizia titolo per confronto
+        clean_target = original_title.lower().strip()
         
         for post in posts:
-            existing_title = post.get('title', {}).get('rendered', '').lower().strip()
-            # Se il titolo è molto simile (o contenuto), lo consideriamo duplicato
-            if current_title_clean in existing_title or existing_title in current_title_clean:
+            # Controlliamo se l'URL originale o il titolo semantico è salvato nei meta
+            # o se il titolo attuale è troppo simile a quello pubblicato
+            existing_title = post.get('title', {}).get('rendered', '').lower()
+            if clean_target in existing_title:
                 return True
         return False
-    except Exception as e:
-        print(f"Errore controllo duplicati: {e}")
+    except:
         return False
 
 def translate_news(text, priority):
-    """Traduzione professionale con glossario tecnico e stile AI-free"""
     stile = "URGENTE / BREAKING NEWS" if priority >= 9 else "Professionale e asciutto"
     prompt = f"""
     Sei un esperto giornalista italiano di Wrestling. 
     Traduci e rielabora seguendo queste REGOLE:
     1. NON tradurre termini tecnici (Main Event, Heel, Face, Feud, Gimmick, Pinfall, ecc.).
-    2. Stile: {stile}. Evita parole come 'scintille', 'palco delle stelle', 'colosso'.
+    2. Stile: {stile}. Evita parole come 'scintille', 'palco delle stelle'.
     3. Usa <b> per i wrestler al primo riferimento.
     4. Restituisci SOLO JSON: {{"titolo": "...", "testo": "...", "categoria": ID}}
     
-    Categorie: WWE=4, AEW=5, NXT=6, TNA=7, Altro=8.
+    Categorie ID: WWE=4, AEW=5, NXT=6, TNA=7, Altro=8.
     
     Testo: {text}
     """
@@ -81,21 +78,16 @@ def translate_news(text, priority):
     return json.loads(res.text.strip().replace('```json', '').replace('```', ''))
 
 def upload_image_to_wp(image_url):
-    """Carica l'immagine su WordPress con timeout"""
     try:
         img_res = requests.get(image_url, headers=HEADERS, timeout=15)
         filename = f"news_{os.urandom(4).hex()}.jpg"
-        files = {
-            'Content-Type': 'image/jpeg',
-            'Content-Disposition': f'attachment; filename={filename}'
-        }
+        files = {'Content-Type': 'image/jpeg', 'Content-Disposition': f'attachment; filename={filename}'}
         res = requests.post(WP_MEDIA_URL, auth=(WP_USER, WP_PASSWORD), headers=files, data=img_res.content, timeout=20)
         return res.json()['id'] if res.status_code == 201 else None
     except:
         return None
 
 def post_to_wp(data, img_id, sem_id, url):
-    """Pubblica l'articolo finale"""
     payload = {
         'title': data['titolo'],
         'content': data['testo'],
@@ -115,23 +107,21 @@ def run_bot():
         print(f"Trovate {len(f.entries)} notizie.")
         
         for e in f.entries[:10]:
+            # Controllo duplicati basato sul titolo originale
+            if is_duplicate(e.title):
+                print(f"SCARTATA (Già presente): {e.title}")
+                continue
+            
+            # Se non è un duplicato, procediamo all'analisi
             info = get_ai_analysis(e.title, e.summary)
-            sem_id = info['semantic_id']
-            
-            # NUOVO
-  if is_duplicate(e.title):
-    print(f"SCARTATA (Titolo già presente): {e.title}")
-    continue
-            
-            print(f"OK (Nuova): {e.title} [Priorità: {info['priority']}]")
+            print(f"OK (Nuova): {e.title} [Prio: {info['priority']}]")
             info['entry'] = e
             queue.append(info)
     
-    # Ordina: prima le breaking news
+    # Ordina per priorità
     queue.sort(key=lambda x: x['priority'], reverse=True)
 
     for item in queue:
-        # Filtro Update
         if item['is_update'] and item['priority'] < 5:
             print(f"Salto update minore: {item['entry'].title}")
             continue
@@ -140,11 +130,9 @@ def run_bot():
         full_text = get_clean_text(item['entry'].link)
         
         if len(full_text) < 250:
-            print(f"Testo troppo corto ({len(full_text)} char), salto.")
             continue
             
         try:
-            print(f"Traduzione e pubblicazione...")
             news_data = translate_news(full_text, item['priority'])
             
             img_url = None
@@ -155,7 +143,7 @@ def run_bot():
             
             img_id = upload_image_to_wp(img_url) if img_url else None
             status = post_to_wp(news_data, img_id, item['semantic_id'], item['entry'].link)
-            print(f"PUBBLICATO! Status WP: {status}")
+            print(f"PUBBLICATO! Status: {status}")
             time.sleep(5)
         except Exception as e:
             print(f"Errore: {e}")
