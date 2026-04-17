@@ -94,7 +94,7 @@ def run_bot():
     for url_feed in FEEDS:
         print(f"Scansione feed: {url_feed}")
         f = feedparser.parse(url_feed)
-        for e in f.entries[:5]:
+        for e in f.entries[:15]:
             info = get_ai_analysis(e.title, e.summary)
             if not is_duplicate(info['semantic_id']):
                 info['entry'] = e
@@ -104,14 +104,15 @@ def run_bot():
     queue.sort(key=lambda x: x['priority'], reverse=True)
 
     for item in queue:
-        if item['is_update'] and item['priority'] < 7:
+        if item['is_update'] and item['priority'] < 3:
             print(f"Saltato aggiornamento minore: {item['entry'].title}")
             continue
         
         print(f"Elaborazione: {item['entry'].title} (Priorità: {item['priority']})")
         full_text = get_clean_text(item['entry'].link)
+        print(f"DEBUG: Testo estratto per {item['entry'].title}: {len(full_text)} caratteri")
         
-        if len(full_text) < 500: continue
+        if len(full_text) < 200: continue
 
         try:
             news = translate_news(full_text, item['priority'])
