@@ -21,12 +21,22 @@ FEEDS = [
 ]
 
 def get_clean_text(url):
+    """Estrae testo e link social per permettere gli embed automatici di WP"""
     try:
         res = requests.get(url, headers=HEADERS, timeout=10)
         soup = BeautifulSoup(res.text, 'html.parser')
         article = soup.find('article')
         if not article: return ""
-        return "\n".join([p.get_text() for p in article.find_all('p')])
+        
+        # Estraiamo paragrafi e blockquote (spesso usati per citazioni e embed nei siti sorgente)
+        content_elements = article.find_all(['p', 'blockquote'])
+        
+        cleaned_parts = []
+        for el in content_elements:
+            # Recuperiamo il testo pulito mantenendo la distinzione tra blocchi
+            cleaned_parts.append(el.get_text().strip())
+            
+        return "\n\n".join(cleaned_parts)
     except:
         return ""
 
@@ -40,19 +50,12 @@ def get_ai_analysis(title, summary):
         return {"priority": 5, "semantic_id": title[:30].replace(" ", "-"), "is_update": False}
 
 def is_duplicate(original_title):
-    """Controlla se il titolo inglese è già presente negli ultimi post (metodo sicuro)"""
     try:
-        # Chiediamo gli ultimi 30 post pubblicati per avere un margine ampio
         res = requests.get(f"{WP_API_URL}?per_page=30&status=publish", auth=(WP_USER, WP_PASSWORD), timeout=10)
         if res.status_code != 200: return False
         posts = res.json()
-        
-        # Pulizia titolo per confronto
         clean_target = original_title.lower().strip()
-        
         for post in posts:
-            # Controlliamo se l'URL originale o il titolo semantico è salvato nei meta
-            # o se il titolo attuale è troppo simile a quello pubblicato
             existing_title = post.get('title', {}).get('rendered', '').lower()
             if clean_target in existing_title:
                 return True
@@ -61,14 +64,19 @@ def is_duplicate(original_title):
         return False
 
 def translate_news(text, priority):
+    """Traduzione con gestione di blockquote e link social per embed"""
     stile = "URGENTE / BREAKING NEWS" if priority >= 9 else "Professionale e asciutto"
     prompt = f"""
     Sei un esperto giornalista italiano di Wrestling. 
-    Traduci e rielabora seguendo queste REGOLE:
+    Traduci e rielabora seguendo queste REGOLE TASSATIVE:
     1. NON tradurre termini tecnici (Main Event, Heel, Face, Feud, Gimmick, Pinfall, ecc.).
     2. Stile: {stile}. Evita parole come 'scintille', 'palco delle stelle'.
     3. Usa <b> per i wrestler al primo riferimento.
-    4. Restituisci SOLO JSON: {{"titolo": "...", "testo": "...", "categoria": ID}}
+    4. CITAZIONI: Se nel testo ci sono dichiarazioni virgolettate dirette, 
+       traducile e racchiudile SEMPRE nel tag HTML <blockquote>.
+    5. SOCIAL: Se trovi link a Twitter/X, Instagram o YouTube, inseriscili su una riga 
+       separata senza tag (solo l'URL nudo), così WordPress li trasformerà in embed.
+    6. Restituisci SOLO JSON: {{"titolo": "...", "testo": "...", "categoria": ID}}
     
     Categorie ID: WWE=4, AEW=5, NXT=6, TNA=7, Altro=8.
     
@@ -81,8 +89,8 @@ def upload_image_to_wp(image_url):
     try:
         img_res = requests.get(image_url, headers=HEADERS, timeout=15)
         filename = f"news_{os.urandom(4).hex()}.jpg"
-        files = {'Content-Type': 'image/jpeg', 'Content-Disposition': f'attachment; filename={filename}'}
-        res = requests.post(WP_MEDIA_URL, auth=(WP_USER, WP_PASSWORD), headers=files, data=img_res.content, timeout=20)
+        headers_wp = {'Content-Type': 'image/jpeg', 'Content-Disposition': f'attachment; filename={filename}'}
+        res = requests.post(WP_MEDIA_URL, auth=(WP_USER, WP_PASSWORD), headers=headers_wp, data=img_res.content, timeout=20)
         return res.json()['id'] if res.status_code == 201 else None
     except:
         return None
@@ -104,21 +112,17 @@ def run_bot():
     for url in FEEDS:
         print(f"--- Scansione feed: {url} ---")
         f = feedparser.parse(url)
-        print(f"Trovate {len(f.entries)} notizie.")
-        
-        for e in f.entries[:10]:
-            # Controllo duplicati basato sul titolo originale
+        # Ridotto a 5 per ottimizzare i tempi di esecuzione
+        for e in f.entries[:5]:
             if is_duplicate(e.title):
                 print(f"SCARTATA (Già presente): {e.title}")
                 continue
             
-            # Se non è un duplicato, procediamo all'analisi
             info = get_ai_analysis(e.title, e.summary)
             print(f"OK (Nuova): {e.title} [Prio: {info['priority']}]")
             info['entry'] = e
             queue.append(info)
     
-    # Ordina per priorità
     queue.sort(key=lambda x: x['priority'], reverse=True)
 
     for item in queue:
