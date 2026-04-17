@@ -1,0 +1,32 @@
+name: Wrestling News Bot Automation
+
+on:
+  schedule:
+    # Questo comando dice a GitHub di girare ogni 15 minuti
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+    # Questo ti permette di avviare il bot manualmente per fare i test
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del codice
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Installazione librerie
+        run: pip install -r requirements.txt
+
+      - name: Esecuzione Bot
+        env:
+          # Qui colleghiamo i Secret che hai salvato prima alle variabili del codice
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
+          WP_URL: ${{ secrets.WP_URL }}
+        run: python bot.py
