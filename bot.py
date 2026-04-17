@@ -76,7 +76,16 @@ def run_bot():
     for url in FEEDS:
         print(f"Scansione feed: {url}")
         f = feedparser.parse(url)
-        # Aumentiamo il raggio d'azione per il test
+        
+        # DEBUG: Vediamo se il feed ha risposto qualcosa
+        print(f"Numero di notizie trovate nel feed: {len(f.entries)}")
+        
+        if len(f.entries) == 0:
+            print(f"ATTENZIONE: Il feed {url} sembra vuoto o bloccato.")
+            # Proviamo a stampare lo stato per capire il motivo
+            if hasattr(f, 'status'): print(f"Status HTTP: {f.status}")
+            continue
+
         for e in f.entries[:15]:
             info = get_ai_analysis(e.title, e.summary)
             if not is_duplicate(info['semantic_id']):
