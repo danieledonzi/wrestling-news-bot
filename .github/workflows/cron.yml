@@ -30,3 +30,10 @@ jobs:
           WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
           WP_URL: ${{ secrets.WP_URL }}
         run: python bot.py
+        - name: Commit e Push del polmone
+        run: |
+          git config --global user.name "Bot Polmone"
+          git config --global user.email "bot@wrestlingnews.com"
+          git add history.txt
+          git commit -m "Aggiornamento polmone news [skip ci]" || echo "Nessuna modifica"
+          git push
