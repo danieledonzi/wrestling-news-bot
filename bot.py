@@ -60,8 +60,11 @@ def get_ai_analysis(title, summary):
 def translate_news(text, priority):
     stile = "URGENTE" if priority >= 9 else "Professionale"
     prompt = f"""Sei un giornalista di Wrestling. Rielabora in HTML. Stile: {stile}.
-    1. Termini tecnici NO tradotti. 2. <b> per i wrestler. 
-    3. <blockquote> per le citazioni. 4. Link social su riga separata.
+    1. Termini tecnici NO tradotti. 
+    2. Usa <b> per i wrestler. 
+    3. Usa <blockquote> per le citazioni. 
+    4. SOCIAL: Se trovi link social (X, Instagram, YouTube), inserisci l'URL nudo (senza tag <a>) su una riga isolata. Non aggiungere altro testo su quella riga.
+    5. CATEGORIA: Scegli l'ID corretto: WWE=4, AEW=5, NXT=6, TNA=7, World/Indies=8.
     Restituisci SOLO JSON: {{"titolo": "...", "testo": "...", "categoria": ID}}
     Testo: {text}"""
     res = client.models.generate_content(model="gemini-2.5-flash-lite", contents=prompt)
@@ -79,9 +82,18 @@ def upload_image_to_wp(image_url):
     except: return None
 
 def post_to_wp(data, img_id, sem_id, url):
+    # Forza la categoria a intero per evitare "Uncategorized"
+    try:
+        cat_id = int(data.get('categoria', 8))
+    except:
+        cat_id = 8
+        
     payload = {
-        'title': data['titolo'], 'content': data['testo'], 'categories': [data.get('categoria', 8)],
-        'status': 'publish', 'featured_media': img_id,
+        'title': data['titolo'], 
+        'content': data['testo'], 
+        'categories': [cat_id],
+        'status': 'publish', 
+        'featured_media': img_id,
         'meta': {'semantic_id': sem_id, 'original_url': url}
     }
     res = requests.post(WP_API_URL, json=payload, auth=(WP_USER, WP_PASSWORD), timeout=20)
@@ -110,15 +122,11 @@ def run_bot():
         try:
             news_data = translate_news(full_text, item['priority'])
             
-            # --- RECUPERO IMMAGINE POTENZIATO ---
             img_url = None
-            # 1. Prova media_content (WrestlingInc)
             if 'media_content' in item['entry']: 
                 img_url = item['entry'].media_content[0]['url']
-            # 2. Prova enclosure
             elif 'enclosures' in item['entry'] and item['entry'].enclosures:
                 img_url = item['entry'].enclosures[0].href
-            # 3. Prova nei links (RingsideNews)
             elif 'links' in item['entry']:
                 for link in item['entry'].links:
                     if 'image' in link.get('type', ''):
