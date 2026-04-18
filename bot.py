@@ -42,8 +42,22 @@ def get_clean_text(url):
         soup = BeautifulSoup(res.text, 'html.parser')
         article = soup.find('article')
         if not article: return ""
-        content_elements = article.find_all(['p', 'blockquote'])
-        cleaned_parts = [el.get_text().strip() for el in content_elements]
+        
+        # Cerchiamo paragrafi, blockquote e i link diretti ai social
+        content_elements = article.find_all(['p', 'blockquote', 'a'])
+        
+        cleaned_parts = []
+        for el in content_elements:
+            # Se è un link, controlliamo se punta a un social
+            if el.name == 'a':
+                href = el.get('href', '')
+                if any(social in href for social in ['twitter.com', 'x.com', 'instagram.com', 'youtube.com']):
+                    cleaned_parts.append(href)
+            else:
+                text = el.get_text().strip()
+                if text:
+                    cleaned_parts.append(text)
+            
         return "\n\n".join(cleaned_parts)
     except:
         return ""
