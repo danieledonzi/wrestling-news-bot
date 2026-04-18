@@ -28,12 +28,9 @@ def get_clean_text(url):
         article = soup.find('article')
         if not article: return ""
         
-        # Estraiamo paragrafi e blockquote (spesso usati per citazioni e embed nei siti sorgente)
         content_elements = article.find_all(['p', 'blockquote'])
-        
         cleaned_parts = []
         for el in content_elements:
-            # Recuperiamo il testo pulito mantenendo la distinzione tra blocchi
             cleaned_parts.append(el.get_text().strip())
             
         return "\n\n".join(cleaned_parts)
@@ -41,30 +38,32 @@ def get_clean_text(url):
         return ""
 
 def get_ai_analysis(title, summary):
+    """Genera ID semantico e priorità della notizia"""
     prompt = f"Analizza la notizia: {title}. Sommario: {summary}. " \
+             f"Genera un 'semantic_id' unico di 3 parole che identifichi l'evento (es: 'punk-ritorno-wwe'). " \
              f"Restituisci SOLO JSON: {{\"priority\": 1-10, \"semantic_id\": \"slug-3-parole\", \"is_update\": bool}}"
     try:
         res = client.models.generate_content(model="gemini-2.5-flash-lite", contents=prompt)
         return json.loads(res.text.strip().replace('```json', '').replace('```', ''))
     except:
-        return {"priority": 5, "semantic_id": title[:30].replace(" ", "-"), "is_update": False}
+        return {"priority": 5, "semantic_id": title[:30].replace(" ", "-").lower(), "is_update": False}
 
-def is_duplicate(original_title):
+def is_duplicate_semantic(semantic_id):
+    """Controlla se l'ID semantico esiste già su WordPress"""
     try:
-        res = requests.get(f"{WP_API_URL}?per_page=30&status=publish", auth=(WP_USER, WP_PASSWORD), timeout=10)
-        if res.status_code != 200: return False
-        posts = res.json()
-        clean_target = original_title.lower().strip()
-        for post in posts:
-            existing_title = post.get('title', {}).get('rendered', '').lower()
-            if clean_target in existing_title:
-                return True
-        return False
+        # Cerchiamo tra i post che hanno la meta_key 'semantic_id'
+        params = {
+            'meta_key': 'semantic_id',
+            'meta_value': semantic_id,
+            'status': 'publish'
+        }
+        res = requests.get(WP_API_URL, params=params, auth=(WP_USER, WP_PASSWORD), timeout=10)
+        # Se la lista restituita non è vuota, il duplicato esiste
+        return len(res.json()) > 0
     except:
         return False
 
 def translate_news(text, priority):
-    """Traduzione con gestione di blockquote e link social per embed"""
     stile = "URGENTE / BREAKING NEWS" if priority >= 9 else "Professionale e asciutto"
     prompt = f"""
     Sei un esperto giornalista italiano di Wrestling. 
@@ -102,7 +101,10 @@ def post_to_wp(data, img_id, sem_id, url):
         'categories': [data.get('categoria', 8)],
         'status': 'publish',
         'featured_media': img_id,
-        'meta': {'semantic_id': sem_id, 'original_url': url}
+        'meta': {
+            'semantic_id': sem_id,  # Salviamo l'ID per i controlli futuri
+            'original_url': url
+        }
     }
     res = requests.post(WP_API_URL, json=payload, auth=(WP_USER, WP_PASSWORD), timeout=15)
     return res.status_code
@@ -112,14 +114,17 @@ def run_bot():
     for url in FEEDS:
         print(f"--- Scansione feed: {url} ---")
         f = feedparser.parse(url)
-        # Ridotto a 5 per ottimizzare i tempi di esecuzione
         for e in f.entries[:5]:
-            if is_duplicate(e.title):
-                print(f"SCARTATA (Già presente): {e.title}")
+            # Analisi AI per ottenere l'ID semantico prima di decidere se pubblicare
+            info = get_ai_analysis(e.title, e.summary)
+            sem_id = info['semantic_id']
+
+            # Se l'ID semantico o il titolo sono già presenti, saltiamo
+            if is_duplicate_semantic(sem_id):
+                print(f"SCARTATA (Duplicato semantico): {e.title}")
                 continue
             
-            info = get_ai_analysis(e.title, e.summary)
-            print(f"OK (Nuova): {e.title} [Prio: {info['priority']}]")
+            print(f"OK (Nuova): {e.title} [ID: {sem_id}]")
             info['entry'] = e
             queue.append(info)
     
@@ -127,7 +132,6 @@ def run_bot():
 
     for item in queue:
         if item['is_update'] and item['priority'] < 5:
-            print(f"Salto update minore: {item['entry'].title}")
             continue
         
         print(f"Processo: {item['entry'].title}")
