@@ -1,40 +1,43 @@
-name: Wrestling News Bot Automation
+name: News Bot Cron
 
 on:
   schedule:
-    # Questo comando dice a GitHub di girare ogni 15 minuti
-    - cron: '*/15 * * * *'
-  workflow_dispatch:
-    # Questo ti permette di avviare il bot manualmente per fare i test
+    - cron: '0 * * * *' # Gira ogni ora
+  workflow_dispatch: # Permette l'invio manuale
 
 jobs:
-  run-bot:
+  build:
     runs-on: ubuntu-latest
+    # IMPORTANTE: Permessi per scrivere nel repository
+    permissions:
+      contents: write
+
     steps:
-      - name: Checkout del codice
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/close-python@v5
         with:
-          python-version: '3.11'
+          python-version: '3.10'
 
-      - name: Installazione librerie
-        run: pip install -r requirements.txt
+      - name: Install dependencies
+        run: |
+          pip install feedparser requests beautifulsoup4 google-genai
 
-      - name: Esecuzione Bot
+      - name: Run bot
         env:
-          # Qui colleghiamo i Secret che hai salvato prima alle variabili del codice
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          WP_URL: ${{ secrets.WP_URL }}
           WP_USER: ${{ secrets.WP_USER }}
           WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
-          WP_URL: ${{ secrets.WP_URL }}
         run: python bot.py
-        
-        - name: Commit e Push del polmone
+
+      - name: Commit e Push del polmone
         run: |
           git config --global user.name "Bot Polmone"
           git config --global user.email "bot@wrestlingnews.com"
           git add history.txt
-          git commit -m "Aggiornamento polmone news [skip ci]" || echo "Nessuna modifica"
+          # Il comando commit non deve fallire se non ci sono nuove news
+          git commit -m "Aggiornamento polmone news [skip ci]" || echo "Nessuna modifica da salvare"
           git push
