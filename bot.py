@@ -84,17 +84,36 @@ def upload_image_to_wp(image_url):
 
 def post_to_wp(data, img_id, sem_id, url):
     try:
-        cat_id = int(data.get('categoria', 4)) # Default 4 (WWE) per questo periodo
+        cat_id = int(data.get('categoria', 4))
     except: cat_id = 4
     
+    testo_pulito = data['testo']
+    # Rimuoviamo eventuali tag <a> che avvolgono i link social
+    social_patterns = ['instagram.com', 'twitter.com', 'x.com', 'youtube.com', 'youtu.be']
+    
+    # Questo ciclo cerca i link social e li trasforma in testo piano
+    for pattern in social_patterns:
+        if pattern in testo_pulito:
+            # Una pulizia brutale: se Gemini ha creato un link HTML, noi lo trasformiamo in testo nudo
+            soup_temp = BeautifulSoup(testo_pulito, 'html.parser')
+            for a in soup_temp.find_all('a'):
+                href = a.get('href', '')
+                if any(sp in href for sp in social_patterns):
+                    # Sostituiamo il tag <a> con l'URL nudo seguito da un a capo
+                    a.replace_with(f"\n{href}\n")
+            testo_pulito = str(soup_temp)
+
     payload = {
-        'title': data['titolo'], 'content': data['testo'], 'categories': [cat_id],
-        'status': 'publish', 'featured_media': img_id,
+        'title': data['titolo'], 
+        'content': testo_pulito, # Usiamo il testo con i social "ripuliti"
+        'categories': [cat_id],
+        'status': 'publish', 
+        'featured_media': img_id,
         'meta': {'semantic_id': sem_id, 'original_url': url}
     }
     res = requests.post(WP_API_URL, json=payload, auth=(WP_USER, WP_PASSWORD), timeout=30)
     return res.status_code
-
+    
 def run_bot():
     history = load_history()
     queue = []
@@ -111,7 +130,7 @@ def run_bot():
     
     for item in queue:
         full_text = get_clean_text(item['entry'].link)
-        if len(full_text) < 150: # Più permissivo per i breaking news
+        if len(full_text) < 50: # Più permissivo per i breaking news
             print(f"SALTA (Corta): {item['entry'].title}")
             continue
             
