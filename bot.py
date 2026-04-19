@@ -40,14 +40,18 @@ HEADERS = {
 
 SOCIAL_DOMAINS = ["twitter.com", "x.com", "instagram.com", "youtube.com", "youtu.be"]
 
-# Quanti articoli massimi pubblicare per ogni run
-MAX_POSTS_PER_RUN = 5
-
-# Timeout e retry Gemini
+MAX_POSTS_PER_RUN = 3
 GEMINI_MAX_ATTEMPTS = 3
 GEMINI_RETRY_DELAY = 8
 
+REQUEST_TIMEOUT_SCRAPE = 20
+REQUEST_TIMEOUT_WP = 15
+REQUEST_TIMEOUT_IMAGE = 15
+
 client = genai.Client(api_key=GEMINI_API_KEY)
+
+session = requests.Session()
+session.headers.update(HEADERS)
 
 
 # =========================
@@ -58,7 +62,7 @@ def load_history():
     Formato history.txt:
     url|semantic_id
 
-    Compatibile anche con il vecchio formato:
+    Compatibile anche con vecchio formato:
     url
     """
     history = {"urls": set(), "semantic_ids": set()}
@@ -130,10 +134,6 @@ def normalize_for_check(text):
 
 
 def is_translation_coherent(source_title, generated_title):
-    """
-    Controllo minimo per evitare output completamente fuori tema.
-    Non è perfetto, ma blocca le allucinazioni più vistose.
-    """
     src = set(normalize_for_check(source_title).split())
     gen = set(normalize_for_check(generated_title).split())
 
@@ -192,7 +192,7 @@ def extract_image_url(entry):
 
 def get_clean_text(url):
     try:
-        res = requests.get(url, headers=HEADERS, timeout=20)
+        res = session.get(url, timeout=REQUEST_TIMEOUT_SCRAPE)
         res.raise_for_status()
 
         soup = BeautifulSoup(res.text, "html.parser")
@@ -225,16 +225,13 @@ def get_clean_text(url):
 
         full_text = "\n\n".join(cleaned_parts)
         return full_text[:20000]
+
     except Exception as e:
         print(f"[SCRAPE] Errore su {url}: {e}")
         return ""
 
 
 def detect_category_hint(title, text):
-    """
-    Fallback locale se Gemini sbaglia o restituisce categorie strane.
-    Tutto ciò che non rientra chiaramente in WWE/AEW/NXT/TNA va in 8 (World/Indies).
-    """
     blob = f"{title} {text}".lower()
 
     if "nxt" in blob:
@@ -275,7 +272,11 @@ def generate_with_retry(prompt, max_attempts=GEMINI_MAX_ATTEMPTS, delay=GEMINI_R
 
 def check_gemini():
     try:
-        res = generate_with_retry('Rispondi solo con questo JSON: {"ok": true}', max_attempts=2, delay=3)
+        res = generate_with_retry(
+            'Rispondi solo con questo JSON: {"ok": true}',
+            max_attempts=2,
+            delay=3
+        )
         if res and getattr(res, "text", None):
             print(f"[GEMINI] Modello attivo: {GEMINI_MODEL}")
             return True
@@ -394,7 +395,6 @@ JSON richiesto:
         if categoria not in [4, 5, 6, 7, 8]:
             categoria = detect_category_hint(source_title, text)
 
-        # fallback locale finale
         categoria = detect_category_hint(source_title, text) if categoria not in [4, 5, 6, 7, 8] else categoria
 
         return {
@@ -416,7 +416,7 @@ def upload_image_to_wp(image_url):
         return None
 
     try:
-        img_res = requests.get(image_url, headers=HEADERS, timeout=20)
+        img_res = session.get(image_url, timeout=REQUEST_TIMEOUT_IMAGE)
         img_res.raise_for_status()
 
         content_type = img_res.headers.get("Content-Type", "").split(";")[0].strip().lower()
@@ -438,12 +438,12 @@ def upload_image_to_wp(image_url):
             "Content-Disposition": f'attachment; filename="{filename}"'
         }
 
-        res = requests.post(
+        res = session.post(
             WP_MEDIA_URL,
             auth=(WP_USER, WP_PASSWORD),
             headers=headers_wp,
             data=img_res.content,
-            timeout=40
+            timeout=REQUEST_TIMEOUT_WP
         )
 
         if res.status_code == 201:
@@ -484,11 +484,11 @@ def post_to_wp(data, img_id, sem_id, url, priority):
         if img_id:
             payload["featured_media"] = img_id
 
-        res = requests.post(
+        res = session.post(
             WP_API_URL,
             json=payload,
             auth=(WP_USER, WP_PASSWORD),
-            timeout=40
+            timeout=REQUEST_TIMEOUT_WP
         )
 
         print(f"[WP] Status: {res.status_code}")
