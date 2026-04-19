@@ -70,7 +70,7 @@ def translate_news(text, priority):
     Testo: {text}"""
     
     try:
-        res = client.models.generate_content(model="gemini-2.5-flash-lite", contents=prompt)
+        res = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
         if not res.text:
             raise ValueError("Risposta vuota da Gemini")
             
