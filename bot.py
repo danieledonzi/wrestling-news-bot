@@ -81,14 +81,43 @@ def translate_news(text, priority):
         return None # Ritorna None invece di crashare
 
 def upload_image_to_wp(image_url):
+    if not image_url: return None
     try:
+        # Download dell'immagine con timeout
         img_res = requests.get(image_url, headers=HEADERS, timeout=15)
-        if img_res.status_code != 200: return None
-        filename = f"news_{os.urandom(4).hex()}.jpg"
-        headers_wp = {'Content-Type': 'image/jpeg', 'Content-Disposition': f'attachment; filename={filename}'}
-        res = requests.post(WP_MEDIA_URL, auth=(WP_USER, WP_PASSWORD), headers=headers_wp, data=img_res.content, timeout=30)
-        return res.json()['id'] if res.status_code == 201 else None
-    except: return None
+        if img_res.status_code != 200: 
+            print(f"Errore download immagine: {img_res.status_code}")
+            return None
+        
+        # Determina l'estensione e il tipo
+        ext = image_url.split('.')[-1].split('?')[0].lower()
+        if ext not in ['jpg', 'jpeg', 'png', 'webp']: ext = 'jpg'
+        mime = 'image/png' if ext == 'png' else 'image/jpeg'
+        
+        filename = f"news_{os.urandom(4).hex()}.{ext}"
+        
+        headers_wp = {
+            'Content-Type': mime,
+            'Content-Disposition': f'attachment; filename={filename}'
+        }
+        
+        # Invio a WordPress
+        res = requests.post(
+            WP_MEDIA_URL, 
+            auth=(WP_USER, WP_PASSWORD), 
+            headers=headers_wp, 
+            data=img_res.content, 
+            timeout=30
+        )
+        
+        if res.status_code == 201:
+            return res.json()['id']
+        else:
+            print(f"WP Media Error: {res.status_code} - {res.text}")
+            return None
+    except Exception as e:
+        print(f"Eccezione upload immagine: {e}")
+        return None
 
 def post_to_wp(data, img_id, sem_id, url):
     try:
