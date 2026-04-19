@@ -60,17 +60,25 @@ def get_ai_analysis(title, summary):
 def translate_news(text, priority):
     stile = "URGENTE" if priority >= 8 else "Professionale"
     prompt = f"""Sei un giornalista italiano di Wrestling. 
-    COMPITO: Traduci e rielabora in ITALIANO. È tassativo scrivere in ITALIANO.
+    COMPITO: Traduci e rielabora in ITALIANO.
     
     1. <b> per wrestler. 2. <blockquote> per citazioni.
-    3. SOCIAL: URL nudo su riga isolata (fondamentale per embed). No tag <a>.
-    4. CATEGORIA: WWE=4, AEW=5, NXT=6, TNA=7, World/Indies=8. (Default per WrestleMania=4).
+    3. SOCIAL: URL nudo su riga isolata.
+    4. CATEGORIA: WWE=4, AEW=5, NXT=6, TNA=7, World/Indies=8.
     
     RESTITUISCI SOLO JSON: {{"titolo": "...", "testo": "...", "categoria": ID}}
     Testo: {text}"""
-    res = client.models.generate_content(model="gemini-2.5-flash-lite", contents=prompt)
-    clean_res = res.text.strip().replace('```json', '').replace('```', '').replace('\n', ' ')
-    return json.loads(clean_res)
+    
+    try:
+        res = client.models.generate_content(model="gemini-2.5-flash-lite", contents=prompt)
+        if not res.text:
+            raise ValueError("Risposta vuota da Gemini")
+            
+        clean_res = res.text.strip().replace('```json', '').replace('```', '').replace('\n', ' ')
+        return json.loads(clean_res)
+    except Exception as e:
+        print(f"Errore traduzione IA: {e}")
+        return None # Ritorna None invece di crashare
 
 def upload_image_to_wp(image_url):
     try:
@@ -120,38 +128,58 @@ def run_bot():
     for url in FEEDS:
         print(f"--- Scansione: {url} ---")
         f = feedparser.parse(url)
-        for e in f.entries[:15]: # Prendiamo un po' più di news
+        # Aumentiamo a 20 per non perdere nulla durante WrestleMania
+        for e in f.entries[:20]: 
             if e.link in history: continue
             info = get_ai_analysis(e.title, e.summary)
             info['entry'] = e
             queue.append(info)
     
+    # Ordina per priorità (le più importanti prima)
     queue.sort(key=lambda x: x['priority'], reverse=True)
     
     for item in queue:
         full_text = get_clean_text(item['entry'].link)
         
-        # COMMENTA O RIMUOVI QUESTE RIGHE PER ORA:
+        # Filtro lunghezza disattivato per i flash di WrestleMania
+        # Se vuoi riattivarlo in futuro, decommenta le righe sotto
         # if len(full_text) < 50: 
         #    print(f"SALTA (Corta): {item['entry'].title}")
         #    continue
             
         try:
+            # Chiamata alla nuova translate_news con gestione errori interna
             news_data = translate_news(full_text, item['priority'])
+            
+            # Se l'IA ha restituito None (errore/vuoto), saltiamo il post senza bloccare il bot
+            if not news_data:
+                print(f"RETRY PROSSIMA RUN: Errore IA su {item['entry'].title}")
+                continue
+
             img_url = None
-            if 'media_content' in item['entry']: img_url = item['entry'].media_content[0]['url']
-            elif 'enclosures' in item['entry'] and item['entry'].enclosures: img_url = item['entry'].enclosures[0].href
+            if 'media_content' in item['entry']: 
+                img_url = item['entry'].media_content[0]['url']
+            elif 'enclosures' in item['entry'] and item['entry'].enclosures: 
+                img_url = item['entry'].enclosures[0].href
+            elif 'links' in item['entry']:
+                for link in item['entry'].links:
+                    if 'image' in link.get('type', ''):
+                        img_url = link.get('href')
             
             img_id = upload_image_to_wp(img_url) if img_url else None
+            
+            # post_to_wp ora include la pulizia automatica dei link social per gli embed
             status = post_to_wp(news_data, img_id, item['semantic_id'], item['entry'].link)
             
             if status == 201:
                 print(f"PUBBLICATO! {item['entry'].title}")
                 save_to_history(item['entry'].link)
             
-            time.sleep(2) # Pausa ridotta per smaltire la coda
+            # Pausa breve per non intasare il server ma essere veloci
+            time.sleep(2) 
+            
         except Exception as e:
-            print(f"Errore su {item['entry'].title}: {e}")
+            print(f"ERRORE CRITICO su {item['entry'].title}: {e}")
 
 if __name__ == "__main__":
     run_bot()
