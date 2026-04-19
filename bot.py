@@ -125,24 +125,26 @@ def post_to_wp(data, img_id, sem_id, url):
     except: cat_id = 4
     
     testo_pulito = data['testo']
-    # Rimuoviamo eventuali tag <a> che avvolgono i link social
     social_patterns = ['instagram.com', 'twitter.com', 'x.com', 'youtube.com', 'youtu.be']
     
-    # Questo ciclo cerca i link social e li trasforma in testo piano
-    for pattern in social_patterns:
-        if pattern in testo_pulito:
-            # Una pulizia brutale: se Gemini ha creato un link HTML, noi lo trasformiamo in testo nudo
-            soup_temp = BeautifulSoup(testo_pulito, 'html.parser')
-            for a in soup_temp.find_all('a'):
-                href = a.get('href', '')
-                if any(sp in href for sp in social_patterns):
-                    # Sostituiamo il tag <a> con l'URL nudo seguito da un a capo
-                    a.replace_with(f"\n{href}\n")
-            testo_pulito = str(soup_temp)
+    # Usiamo BeautifulSoup per una pulizia chirurgica dei tag <a>
+    soup_temp = BeautifulSoup(testo_pulito, 'html.parser')
+    link_trovati = False
+    
+    for a in soup_temp.find_all('a'):
+        href = a.get('href', '')
+        if any(sp in href for sp in social_patterns):
+            # Sostituiamo il tag <a> con l'URL nudo circondato da doppie linee vuote
+            # Questo garantisce che WordPress lo veda come un embed
+            a.replace_with(f"\n\n{href}\n\n")
+            link_trovati = True
+            
+    if link_trovati:
+        testo_pulito = str(soup_temp)
 
     payload = {
         'title': data['titolo'], 
-        'content': testo_pulito, # Usiamo il testo con i social "ripuliti"
+        'content': testo_pulito,
         'categories': [cat_id],
         'status': 'publish', 
         'featured_media': img_id,
