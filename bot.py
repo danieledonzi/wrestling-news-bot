@@ -176,7 +176,7 @@ def run_bot():
                 save_to_history(item['entry'].link)
             
             # Pausa breve per non intasare il server ma essere veloci
-            time.sleep(2) 
+            time.sleep(5) 
             
         except Exception as e:
             print(f"ERRORE CRITICO su {item['entry'].title}: {e}")
