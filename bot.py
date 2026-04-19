@@ -52,13 +52,13 @@ def get_clean_text(url):
 def get_ai_analysis(title, summary):
     prompt = f"Analizza: {title}. Sommario: {summary}. Restituisci SOLO JSON: {{\"priority\": 1-10, \"semantic_id\": \"slug-3-parole\", \"is_update\": bool}}"
     try:
-        res = client.models.generate_content(model="gemini-2.5-flash-lite", contents=prompt)
+        res = client.models.generate_content(model="gemini-2.5-flash", contents=prompt)
         clean_res = res.text.strip().replace('```json', '').replace('```', '').replace('\n', ' ')
         return json.loads(clean_res)
     except: return {"priority": 5, "semantic_id": title[:30].replace(" ", "-"), "is_update": False}
 
 def translate_news(text, priority):
-    stile = "URGENTE" if priority >= 8 else "Professionale"
+    stile = "BREAKING-NEWS" if priority >= 8 else "Professionale"
     prompt = f"""Sei un giornalista italiano di Wrestling. 
     COMPITO: Traduci e rielabora in ITALIANO.
     
