@@ -28,11 +28,11 @@ def load_history():
 def save_to_history(url):
     history = load_history()
     history.append(url)
-    with open(HISTORY_FILE, "w") as f: f.write("\n".join(history[-50:]))
+    with open(HISTORY_FILE, "w") as f: f.write("\n".join(history[-100:])) # Polmone più capiente
 
 def get_clean_text(url):
     try:
-        res = requests.get(url, headers=HEADERS, timeout=10)
+        res = requests.get(url, headers=HEADERS, timeout=15)
         soup = BeautifulSoup(res.text, 'html.parser')
         article = soup.find('article')
         if not article: return ""
@@ -58,21 +58,16 @@ def get_ai_analysis(title, summary):
     except: return {"priority": 5, "semantic_id": title[:30].replace(" ", "-"), "is_update": False}
 
 def translate_news(text, priority):
-    stile = "URGENTE" if priority >= 9 else "Professionale"
-    prompt = f"""Sei un giornalista italiano esperto di Wrestling. 
-    COMPITO: Traduci integralmente in ITALIANO e rielabora in HTML.
+    stile = "URGENTE" if priority >= 8 else "Professionale"
+    prompt = f"""Sei un giornalista italiano di Wrestling. 
+    COMPITO: Traduci e rielabora in ITALIANO. È tassativo scrivere in ITALIANO.
     
-    REGOLE TASSATIVE:
-    1. LINGUA: Il testo finale deve essere ESCLUSIVAMENTE in italiano. È vietato lasciare frasi in inglese.
-    2. TERMINI TECNICI: Mantieni in inglese SOLO termini specifici (Heel, Face, Main Event, Feud, Pinfall, ecc.).
-    3. FORMATTAZIONE: Usa <b> per i wrestler al primo riferimento. Usa <blockquote> per le citazioni dirette.
-    4. SOCIAL: Inserisci gli URL dei social (X, YouTube, IG) nudi su una riga isolata per l'embed.
-    5. CATEGORIA: Scegli l'ID corretto: WWE=4, AEW=5, NXT=6, TNA=7, World/Indies=8.
+    1. <b> per wrestler. 2. <blockquote> per citazioni.
+    3. SOCIAL: URL nudo su riga isolata (fondamentale per embed). No tag <a>.
+    4. CATEGORIA: WWE=4, AEW=5, NXT=6, TNA=7, World/Indies=8. (Default per WrestleMania=4).
     
     RESTITUISCI SOLO JSON: {{"titolo": "...", "testo": "...", "categoria": ID}}
-    
-    Testo da tradurre: {text}"""
-    
+    Testo: {text}"""
     res = client.models.generate_content(model="gemini-2.5-flash-lite", contents=prompt)
     clean_res = res.text.strip().replace('```json', '').replace('```', '').replace('\n', ' ')
     return json.loads(clean_res)
@@ -83,26 +78,21 @@ def upload_image_to_wp(image_url):
         if img_res.status_code != 200: return None
         filename = f"news_{os.urandom(4).hex()}.jpg"
         headers_wp = {'Content-Type': 'image/jpeg', 'Content-Disposition': f'attachment; filename={filename}'}
-        res = requests.post(WP_MEDIA_URL, auth=(WP_USER, WP_PASSWORD), headers=headers_wp, data=img_res.content, timeout=20)
+        res = requests.post(WP_MEDIA_URL, auth=(WP_USER, WP_PASSWORD), headers=headers_wp, data=img_res.content, timeout=30)
         return res.json()['id'] if res.status_code == 201 else None
     except: return None
 
 def post_to_wp(data, img_id, sem_id, url):
-    # Forza la categoria a intero per evitare "Uncategorized"
     try:
-        cat_id = int(data.get('categoria', 8))
-    except:
-        cat_id = 8
-        
+        cat_id = int(data.get('categoria', 4)) # Default 4 (WWE) per questo periodo
+    except: cat_id = 4
+    
     payload = {
-        'title': data['titolo'], 
-        'content': data['testo'], 
-        'categories': [cat_id],
-        'status': 'publish', 
-        'featured_media': img_id,
+        'title': data['titolo'], 'content': data['testo'], 'categories': [cat_id],
+        'status': 'publish', 'featured_media': img_id,
         'meta': {'semantic_id': sem_id, 'original_url': url}
     }
-    res = requests.post(WP_API_URL, json=payload, auth=(WP_USER, WP_PASSWORD), timeout=20)
+    res = requests.post(WP_API_URL, json=payload, auth=(WP_USER, WP_PASSWORD), timeout=30)
     return res.status_code
 
 def run_bot():
@@ -111,40 +101,36 @@ def run_bot():
     for url in FEEDS:
         print(f"--- Scansione: {url} ---")
         f = feedparser.parse(url)
-        for e in f.entries[:10]:
-            if e.link in history:
-                print(f"SCARTATA (Polmone): {e.title}")
-                continue
+        for e in f.entries[:15]: # Prendiamo un po' più di news
+            if e.link in history: continue
             info = get_ai_analysis(e.title, e.summary)
-            print(f"OK (Nuova): {e.title}")
             info['entry'] = e
             queue.append(info)
     
     queue.sort(key=lambda x: x['priority'], reverse=True)
+    
     for item in queue:
-        if item['is_update'] and item['priority'] < 5: continue
         full_text = get_clean_text(item['entry'].link)
-        if len(full_text) < 250: continue
+        if len(full_text) < 150: # Più permissivo per i breaking news
+            print(f"SALTA (Corta): {item['entry'].title}")
+            continue
+            
         try:
             news_data = translate_news(full_text, item['priority'])
-            
             img_url = None
-            if 'media_content' in item['entry']: 
-                img_url = item['entry'].media_content[0]['url']
-            elif 'enclosures' in item['entry'] and item['entry'].enclosures:
-                img_url = item['entry'].enclosures[0].href
-            elif 'links' in item['entry']:
-                for link in item['entry'].links:
-                    if 'image' in link.get('type', ''):
-                        img_url = link.get('href')
+            if 'media_content' in item['entry']: img_url = item['entry'].media_content[0]['url']
+            elif 'enclosures' in item['entry'] and item['entry'].enclosures: img_url = item['entry'].enclosures[0].href
             
             img_id = upload_image_to_wp(img_url) if img_url else None
             status = post_to_wp(news_data, img_id, item['semantic_id'], item['entry'].link)
+            
             if status == 201:
                 print(f"PUBBLICATO! {item['entry'].title}")
                 save_to_history(item['entry'].link)
-            time.sleep(5)
-        except Exception as e: print(f"Errore: {e}")
+            
+            time.sleep(2) # Pausa ridotta per smaltire la coda
+        except Exception as e:
+            print(f"Errore su {item['entry'].title}: {e}")
 
 if __name__ == "__main__":
     run_bot()
