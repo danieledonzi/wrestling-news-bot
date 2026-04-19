@@ -33,11 +33,12 @@ jobs:
           WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
         run: python bot.py
 
-      - name: Commit e Push del polmone
+     - name: Commit e Push del polmone
         run: |
           git config --global user.name "Bot Polmone"
           git config --global user.email "bot@wrestlingnews.com"
+          git fetch origin main
+          git pull origin main --rebase
           git add history.txt
-          # Il comando commit non deve fallire se non ci sono nuove news
           git commit -m "Aggiornamento polmone news [skip ci]" || echo "Nessuna modifica da salvare"
-          git push
+          git push origin main
