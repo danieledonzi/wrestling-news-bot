@@ -34,21 +34,30 @@ def get_clean_text(url):
     try:
         res = requests.get(url, headers=HEADERS, timeout=15)
         soup = BeautifulSoup(res.text, 'html.parser')
-        article = soup.find('article')
-        if not article: return ""
-        # Cerchiamo di prendere solo i paragrafi reali per evitare spazzatura
-        content_elements = article.find_all(['p', 'blockquote', 'a'])
+        
+        # Prova diverse zone di contenuto per evitare stringhe vuote
+        content = soup.find('article') or soup.find('div', class_='post-content') or soup.find('main')
+        if not content: content = soup.body # Fallback estremo
+
+        # Rimuovi elementi di disturbo
+        for trash in content(["script", "style", "nav", "footer", "header", "aside", "form"]):
+            trash.decompose()
+
         cleaned_parts = []
-        for el in content_elements:
+        # Estraiamo paragrafi, citazioni e link social
+        for el in content.find_all(['p', 'blockquote', 'a']):
             if el.name == 'a':
                 href = el.get('href', '')
                 if any(social in href for social in ['twitter.com', 'x.com', 'instagram.com', 'youtube.com']):
                     cleaned_parts.append(href)
             else:
                 text = el.get_text().strip()
-                if text and len(text) > 10: cleaned_parts.append(text)
+                if len(text) > 5: # Filtra micro-frammenti
+                    cleaned_parts.append(text)
+        
         return "\n\n".join(cleaned_parts)
-    except: return ""
+    except:
+        return ""
 
 def get_ai_analysis(title, summary):
     prompt = f"Analizza: {title}. Sommario: {summary}. Restituisci SOLO JSON: {{\"priority\": 1-10, \"semantic_id\": \"slug-3-parole\", \"is_update\": bool}}"
@@ -56,35 +65,40 @@ def get_ai_analysis(title, summary):
         res = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
         clean_res = res.text.strip().replace('```json', '').replace('```', '').replace('\n', ' ')
         return json.loads(clean_res)
-    except: return {"priority": 5, "semantic_id": title[:30].replace(" ", "-"), "is_update": False}
+    except:
+        return {"priority": 5, "semantic_id": title[:30].replace(" ", "-"), "is_update": False}
 
 def translate_news(text, priority):
-    if not text or len(text) < 20: return None
+    # Abbassiamo drasticamente la soglia per catturare anche i "Flash" di WrestleMania
+    if not text or len(text) < 15: return None
     
-    prompt = f"""Sei un giornalista italiano di Wrestling. 
+    prompt = f"""Sei un giornalista italiano esperto di Wrestling. 
     COMPITO: Traduci e rielabora in ITALIANO.
     
-    REGOLE RIGIDE:
-    1. TITOLO: Deve essere pulito, accattivante, MAI usare tag HTML (niente <b> o <i>).
-    2. TESTO: Se il testo sorgente è molto breve, espandilo leggermente con il tuo sapere o descrivi la notizia in modo professionale. Usa <b> per i nomi dei wrestler. Usa <blockquote> per le citazioni.
-    3. SOCIAL: Gli URL social devono essere lasciati nudi su una riga isolata.
+    REGOLE DI FORMATTAZIONE:
+    1. TITOLO: Pulito, NO HTML.
+    2. TESTO: Usa <b> per i nomi dei wrestler. Usa <blockquote> per le citazioni. Non tradurre i termini tecnici o i nomi degli eventi.
+    3. SOCIAL: Se trovi link Twitter/X/Instagram, mettili su una riga da soli con una riga vuota sopra e sotto.
     4. CATEGORIA: WWE=4, AEW=5, NXT=6, TNA=7, World/Indies=8.
     
     RESTITUISCI SOLO JSON: {{"titolo": "...", "testo": "...", "categoria": ID}}
-    Testo da elaborare: {text}"""
+    
+    Testo sorgente:
+    {text}"""
     
     try:
         res = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
         raw_text = res.text.strip().replace('```json', '').replace('```', '')
-        data = json.loads(raw_text)
         
-        # Pulizia forzata del titolo da eventuali tag HTML residui
+        # Pulizia per estrarre solo il JSON se l'IA aggiunge chiacchiere
+        start = raw_text.find('{')
+        end = raw_text.rfind('}') + 1
+        data = json.loads(raw_text[start:end])
+        
+        # Pulizia Titolo da HTML indesiderato
         data['titolo'] = re.sub('<[^<]+?>', '', data['titolo'])
         
-        # Se l'IA risponde con un messaggio di errore nel titolo o testo, scartiamo
-        if "testo" in data['titolo'].lower() or "errore" in data['titolo'].lower():
-            return None
-            
+        if not data.get('testo') or len(data['testo']) < 20: return None
         return data
     except:
         return None
@@ -95,6 +109,7 @@ def upload_image_to_wp(image_url):
         img_res = requests.get(image_url, headers=HEADERS, timeout=15)
         if img_res.status_code != 200: return None
         
+        # Estrazione estensione pulita
         ext = image_url.split('.')[-1].split('?')[0].lower()
         if ext not in ['jpg', 'jpeg', 'png', 'webp']: ext = 'jpg'
         mime = 'image/png' if ext == 'png' else 'image/jpeg'
@@ -104,21 +119,22 @@ def upload_image_to_wp(image_url):
         
         res = requests.post(WP_MEDIA_URL, auth=(WP_USER, WP_PASSWORD), headers=headers_wp, data=img_res.content, timeout=30)
         return res.json()['id'] if res.status_code == 201 else None
-    except: return None
+    except:
+        return None
 
 def post_to_wp(data, img_id, sem_id, url):
     try:
         cat_id = int(data.get('categoria', 4))
-        testo_pulito = data['testo']
+        testo_html = data['testo']
         social_patterns = ['instagram.com', 'twitter.com', 'x.com', 'youtube.com', 'youtu.be']
         
-        # Pulizia chirurgica degli embed social
-        soup_temp = BeautifulSoup(testo_pulito, 'html.parser')
+        # Trasforma i link social nudi in blocchi che WordPress riconosce
+        soup_temp = BeautifulSoup(testo_html, 'html.parser')
         for a in soup_temp.find_all('a'):
             href = a.get('href', '')
             if any(sp in href for sp in social_patterns):
-                # Isola l'URL con molti a capo per forzare l'embed di WordPress
-                a.replace_with(f"\n\n\n{href}\n\n\n")
+                # Isola il link social per forzare l'embed grafico
+                a.replace_with(f"\n\n{href}\n\n")
         
         testo_finale = str(soup_temp)
 
@@ -132,7 +148,8 @@ def post_to_wp(data, img_id, sem_id, url):
         }
         res = requests.post(WP_API_URL, json=payload, auth=(WP_USER, WP_PASSWORD), timeout=30)
         return res.status_code
-    except: return 500
+    except:
+        return 500
     
 def run_bot():
     history = load_history()
@@ -140,7 +157,7 @@ def run_bot():
     for url in FEEDS:
         print(f"--- Scansione: {url} ---")
         f = feedparser.parse(url)
-        for e in f.entries[:15]: 
+        for e in f.entries[:20]: # Leggermente più profonda
             if e.link in history: continue
             info = get_ai_analysis(e.title, e.summary)
             info['entry'] = e
@@ -153,10 +170,10 @@ def run_bot():
         news_data = translate_news(full_text, item['priority'])
         
         if not news_data:
-            print(f"SALTO: Contenuto non valido per {item['entry'].title}")
+            print(f"SALTO: Contenuto insufficiente per {item['entry'].title}")
             continue
 
-        # Ricerca immagine avanzata
+        # Logica immagine migliorata
         img_url = None
         e = item['entry']
         if 'media_content' in e: img_url = e.media_content[0]['url']
@@ -166,11 +183,14 @@ def run_bot():
                 if 'image' in l.get('type', ''): img_url = l.get('href')
 
         img_id = upload_image_to_wp(img_url) if img_url else None
+        
         status = post_to_wp(news_data, img_id, item['semantic_id'], item['entry'].link)
         
         if status == 201:
             print(f"PUBBLICATO! {news_data['titolo']}")
             save_to_history(item['entry'].link)
+        else:
+            print(f"ERRORE WP: {status} per {news_data['titolo']}")
         
         time.sleep(5) 
 
