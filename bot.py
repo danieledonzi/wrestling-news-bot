@@ -130,9 +130,11 @@ def run_bot():
     
     for item in queue:
         full_text = get_clean_text(item['entry'].link)
-        if len(full_text) < 50: # Più permissivo per i breaking news
-            print(f"SALTA (Corta): {item['entry'].title}")
-            continue
+        
+        # COMMENTA O RIMUOVI QUESTE RIGHE PER ORA:
+        # if len(full_text) < 50: 
+        #    print(f"SALTA (Corta): {item['entry'].title}")
+        #    continue
             
         try:
             news_data = translate_news(full_text, item['priority'])
