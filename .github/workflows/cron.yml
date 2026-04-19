@@ -2,8 +2,12 @@ name: News Bot Cron
 
 on:
   schedule:
-    - cron: '0 * * * *' # Gira ogni ora
-  workflow_dispatch: # Permette l'invio manuale
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: news-bot
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -14,6 +18,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -22,6 +28,7 @@ jobs:
 
       - name: Install dependencies
         run: |
+          pip install --upgrade pip
           pip install feedparser requests beautifulsoup4 google-genai
 
       - name: Run bot
@@ -32,15 +39,18 @@ jobs:
           WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
         run: python bot.py
 
-      - name: Commit e Push del polmone
+      - name: Save history
         run: |
-          git config --global user.name "Bot Polmone"
+          git config --global user.name "News Bot"
           git config --global user.email "bot@wrestlingnews.com"
-          # 1. Aggiungiamo i file prima di fare il pull
+
           git add history.txt
-          # 2. Scarichiamo gli aggiornamenti con rebase (autostash mette al sicuro history.txt)
-          git pull origin main --rebase --autostash
-          # 3. Facciamo il commit (solo se ci sono modifiche effettive)
-          git commit -m "Aggiornamento polmone news [skip ci]" || echo "Nessuna modifica da salvare"
-          # 4. Push finale
-          git push origin main
+
+          git pull origin main --rebase --autostash || true
+
+          if ! git diff --cached --quiet; then
+            git commit -m "Update history [skip ci]"
+            git push origin main
+          else
+            echo "Nessuna modifica da salvare"
+          fi
