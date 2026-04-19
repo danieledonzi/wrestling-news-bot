@@ -12,6 +12,7 @@ from google import genai
 # CONFIG
 # =========================
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 WP_USER = os.getenv("WP_USER")
 WP_PASSWORD = os.getenv("WP_PASSWORD")
 WP_API_URL = os.getenv("WP_URL")
@@ -39,14 +40,12 @@ HEADERS = {
 
 SOCIAL_DOMAINS = ["twitter.com", "x.com", "instagram.com", "youtube.com", "youtu.be"]
 
-CATEGORY_MAP = {
-    "WWE": 4,
-    "AEW": 5,
-    "NXT": 6,
-    "TNA": 7,
-    "WORLD": 8,
-    "INDIES": 8
-}
+# Quanti articoli massimi pubblicare per ogni run
+MAX_POSTS_PER_RUN = 5
+
+# Timeout e retry Gemini
+GEMINI_MAX_ATTEMPTS = 3
+GEMINI_RETRY_DELAY = 8
 
 client = genai.Client(api_key=GEMINI_API_KEY)
 
@@ -58,6 +57,9 @@ def load_history():
     """
     Formato history.txt:
     url|semantic_id
+
+    Compatibile anche con il vecchio formato:
+    url
     """
     history = {"urls": set(), "semantic_ids": set()}
 
@@ -73,10 +75,13 @@ def load_history():
 
                 if "|" in line:
                     url, semantic_id = line.split("|", 1)
-                    if url.strip():
-                        history["urls"].add(url.strip())
-                    if semantic_id.strip():
-                        history["semantic_ids"].add(semantic_id.strip())
+                    url = url.strip()
+                    semantic_id = semantic_id.strip()
+
+                    if url:
+                        history["urls"].add(url)
+                    if semantic_id:
+                        history["semantic_ids"].add(semantic_id)
                 else:
                     history["urls"].add(line)
     except Exception as e:
@@ -99,7 +104,6 @@ def save_to_history(url, semantic_id):
     if new_record not in records:
         records.append(new_record)
 
-    # tieni gli ultimi 300 record
     records = records[-300:]
 
     try:
@@ -116,6 +120,30 @@ def sanitize_text(text):
     if not text:
         return ""
     return re.sub(r"\s+", " ", text).strip()
+
+
+def normalize_for_check(text):
+    text = text.lower()
+    text = re.sub(r"[^a-z0-9\s]", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+
+def is_translation_coherent(source_title, generated_title):
+    """
+    Controllo minimo per evitare output completamente fuori tema.
+    Non è perfetto, ma blocca le allucinazioni più vistose.
+    """
+    src = set(normalize_for_check(source_title).split())
+    gen = set(normalize_for_check(generated_title).split())
+
+    if not src or not gen:
+        return False
+
+    common = src.intersection(gen)
+    overlap_ratio = len(common) / max(1, len(src))
+
+    return overlap_ratio >= 0.25
 
 
 def get_entry_summary(entry):
@@ -196,18 +224,70 @@ def get_clean_text(url):
                     cleaned_parts.append(text)
 
         full_text = "\n\n".join(cleaned_parts)
-        return full_text[:20000]  # evita input esagerati
+        return full_text[:20000]
     except Exception as e:
         print(f"[SCRAPE] Errore su {url}: {e}")
         return ""
 
 
+def detect_category_hint(title, text):
+    """
+    Fallback locale se Gemini sbaglia o restituisce categorie strane.
+    Tutto ciò che non rientra chiaramente in WWE/AEW/NXT/TNA va in 8 (World/Indies).
+    """
+    blob = f"{title} {text}".lower()
+
+    if "nxt" in blob:
+        return 6
+    if "aew" in blob or "dynamite" in blob or "collision" in blob or "rampage" in blob:
+        return 5
+    if "tna" in blob or "impact wrestling" in blob:
+        return 7
+
+    wwe_terms = [
+        "wwe", "wrestlemania", "raw", "smackdown", "royal rumble",
+        "survivor series", "money in the bank", "triple h", "nick khan"
+    ]
+    if any(term in blob for term in wwe_terms):
+        return 4
+
+    return 8
+
+
 # =========================
-# AI
+# GEMINI
 # =========================
+def generate_with_retry(prompt, max_attempts=GEMINI_MAX_ATTEMPTS, delay=GEMINI_RETRY_DELAY):
+    for attempt in range(1, max_attempts + 1):
+        try:
+            res = client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=prompt
+            )
+            return res
+        except Exception as e:
+            print(f"[GEMINI] Tentativo {attempt}/{max_attempts} fallito: {e}")
+            if attempt < max_attempts:
+                time.sleep(delay * attempt)
+            else:
+                raise
+
+
+def check_gemini():
+    try:
+        res = generate_with_retry('Rispondi solo con questo JSON: {"ok": true}', max_attempts=2, delay=3)
+        if res and getattr(res, "text", None):
+            print(f"[GEMINI] Modello attivo: {GEMINI_MODEL}")
+            return True
+        return False
+    except Exception as e:
+        print(f"[GEMINI] Modello non disponibile ({GEMINI_MODEL}): {e}")
+        return False
+
+
 def get_ai_analysis(title, summary):
     prompt = f"""
-Analizza questa notizia di wrestling.
+Analizza questa notizia di wrestling/combat sports/news correlate.
 
 Titolo: {title}
 Sommario: {summary}
@@ -221,12 +301,9 @@ Rispondi SOLO con JSON valido, senza markdown, senza testo extra:
 """
 
     try:
-        res = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt
-        )
-
+        res = generate_with_retry(prompt)
         raw = res.text.strip().replace("```json", "").replace("```", "").strip()
+
         start = raw.find("{")
         end = raw.rfind("}") + 1
         data = json.loads(raw[start:end])
@@ -238,12 +315,14 @@ Rispondi SOLO con JSON valido, senza markdown, senza testo extra:
 
         if not semantic_id:
             semantic_id = re.sub(r"[^a-z0-9\-]", "-", title.lower().replace(" ", "-"))[:80]
+            semantic_id = re.sub(r"-{2,}", "-", semantic_id).strip("-")
 
         return {
             "priority": max(1, min(priority, 10)),
-            "semantic_id": semantic_id,
+            "semantic_id": semantic_id or f"news-{int(time.time())}",
             "is_update": bool(data.get("is_update", False))
         }
+
     except Exception as e:
         print(f"[AI_ANALYSIS] Errore: {e}")
         fallback_semantic = re.sub(r"[^a-z0-9\-]", "-", title.lower().replace(" ", "-"))[:80]
@@ -255,26 +334,35 @@ Rispondi SOLO con JSON valido, senza markdown, senza testo extra:
         }
 
 
-def translate_news(text):
+def translate_news(source_title, text):
     if not text or len(text) < 50:
         return None
 
     prompt = f"""
-Sei un giornalista italiano esperto di wrestling.
+Sei un giornalista italiano esperto di wrestling e sport da combattimento.
 
-COMPITO:
-Traduci e rielabora in italiano in stile giornalistico chiaro e naturale.
+Devi tradurre e rielaborare questa specifica notizia in italiano.
 
-REGOLE:
-1. Restituisci SOLO JSON valido.
-2. Nessun markdown.
-3. titolo: pulito, senza HTML.
-4. testo: HTML consentito solo con <p>, <b>, <blockquote>, <a>.
-5. Usa <b> per i nomi dei wrestler quando appropriato.
-6. Usa <blockquote> per citazioni testuali importanti.
-7. Non inventare dettagli.
-8. Non riassumere eccessivamente: mantieni sostanza e contesto.
-9. categoria deve essere uno di questi numeri: 4, 5, 6, 7, 8.
+REGOLE OBBLIGATORIE:
+1. L'articolo generato deve parlare SOLO della notizia fornita.
+2. Non devi mescolare questa notizia con altre notizie.
+3. Non devi riutilizzare temi, eventi o dettagli di articoli precedenti.
+4. Il titolo deve restare semanticamente aderente al testo sorgente.
+5. Non inventare dettagli, arresti, incidenti, match o dichiarazioni non presenti nel testo.
+6. Restituisci SOLO JSON valido.
+7. Nessun markdown.
+8. titolo: senza HTML.
+9. testo: HTML consentito solo con <p>, <b>, <blockquote>, <a>.
+10. categoria deve essere uno di questi numeri: 4, 5, 6, 7, 8.
+11. Se la notizia non è chiaramente WWE, AEW, NXT o TNA, usa categoria 8.
+12. Le citazioni importanti vanno in <blockquote>.
+13. I link social, se presenti nel testo, possono restare come <a href="...">...</a>.
+
+TITOLO ORIGINALE:
+{source_title}
+
+TESTO SORGENTE:
+{text}
 
 JSON richiesto:
 {{
@@ -282,37 +370,39 @@ JSON richiesto:
   "testo": "html",
   "categoria": 4
 }}
-
-Testo sorgente:
-{text}
 """
 
     try:
-        res = client.models.generate_content(
-            model="gemini-2.5-flash",
-            contents=prompt
-        )
-
+        res = generate_with_retry(prompt)
         raw = res.text.strip().replace("```json", "").replace("```", "").strip()
+
         start = raw.find("{")
         end = raw.rfind("}") + 1
         data = json.loads(raw[start:end])
 
         titolo = re.sub(r"<[^<]+?>", "", data.get("titolo", "")).strip()
         testo = data.get("testo", "").strip()
-        categoria = int(data.get("categoria", 4))
 
         if not titolo or not testo or len(testo) < 50:
             return None
 
+        try:
+            categoria = int(data.get("categoria", 8))
+        except Exception:
+            categoria = 8
+
         if categoria not in [4, 5, 6, 7, 8]:
-            categoria = 4
+            categoria = detect_category_hint(source_title, text)
+
+        # fallback locale finale
+        categoria = detect_category_hint(source_title, text) if categoria not in [4, 5, 6, 7, 8] else categoria
 
         return {
             "titolo": titolo,
             "testo": testo,
             "categoria": categoria
         }
+
     except Exception as e:
         print(f"[TRANSLATE] Errore: {e}")
         return None
@@ -372,7 +462,6 @@ def upload_image_to_wp(image_url):
 def post_to_wp(data, img_id, sem_id, url, priority):
     try:
         testo_html = data["testo"]
-
         soup_temp = BeautifulSoup(testo_html, "html.parser")
 
         for a in soup_temp.find_all("a"):
@@ -383,7 +472,7 @@ def post_to_wp(data, img_id, sem_id, url, priority):
         payload = {
             "title": data["titolo"],
             "content": str(soup_temp),
-            "categories": [int(data.get("categoria", 4))],
+            "categories": [int(data.get("categoria", 8))],
             "status": "publish",
             "meta": {
                 "semantic_id": sem_id,
@@ -417,6 +506,10 @@ def post_to_wp(data, img_id, sem_id, url, priority):
 # MAIN
 # =========================
 def run_bot():
+    if not check_gemini():
+        print("[BOT] Stop: Gemini non disponibile")
+        return
+
     history = load_history()
     queue = []
 
@@ -424,6 +517,7 @@ def run_bot():
 
     for feed_url in FEEDS:
         print(f"[BOT] Scansione feed: {feed_url}")
+
         try:
             parsed = feedparser.parse(feed_url)
 
@@ -459,6 +553,7 @@ def run_bot():
         return
 
     queue.sort(key=lambda x: x["priority"], reverse=True)
+    queue = queue[:MAX_POSTS_PER_RUN]
 
     print(f"[BOT] News candidate in coda: {len(queue)}")
 
@@ -477,9 +572,13 @@ def run_bot():
             print(f"[SKIP] Testo insufficiente: {title}")
             continue
 
-        news_data = translate_news(full_text)
+        news_data = translate_news(title, full_text)
         if not news_data:
             print(f"[SKIP] Traduzione fallita: {title}")
+            continue
+
+        if not is_translation_coherent(title, news_data["titolo"]):
+            print(f"[SKIP] Titolo incoerente. Orig: {title} | Gen: {news_data['titolo']}")
             continue
 
         img_url = extract_image_url(entry)
