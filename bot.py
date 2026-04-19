@@ -222,7 +222,7 @@ Rispondi SOLO con JSON valido, senza markdown, senza testo extra:
 
     try:
         res = client.models.generate_content(
-            model="gemini-2.0-flash",
+            model="gemini-2.5-flash",
             contents=prompt
         )
 
@@ -289,7 +289,7 @@ Testo sorgente:
 
     try:
         res = client.models.generate_content(
-            model="gemini-2.0-flash",
+            model="gemini-2.5-flash",
             contents=prompt
         )
 
