@@ -59,14 +59,14 @@ def get_ai_analysis(title, summary):
     except: return {"priority": 5, "semantic_id": title[:30].replace(" ", "-"), "is_update": False}
 
 def translate_news(text, priority):
-    if not text or len(text) < 100: return None
+    if not text or len(text) < 20: return None
     
     prompt = f"""Sei un giornalista italiano di Wrestling. 
     COMPITO: Traduci e rielabora in ITALIANO.
     
     REGOLE RIGIDE:
     1. TITOLO: Deve essere pulito, accattivante, MAI usare tag HTML (niente <b> o <i>).
-    2. TESTO: Usa <b> per i nomi dei wrestler. Usa <blockquote> per le citazioni.
+    2. TESTO: Se il testo sorgente è molto breve, espandilo leggermente con il tuo sapere o descrivi la notizia in modo professionale. Usa <b> per i nomi dei wrestler. Usa <blockquote> per le citazioni.
     3. SOCIAL: Gli URL social devono essere lasciati nudi su una riga isolata.
     4. CATEGORIA: WWE=4, AEW=5, NXT=6, TNA=7, World/Indies=8.
     
