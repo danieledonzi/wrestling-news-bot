@@ -59,14 +59,20 @@ def get_ai_analysis(title, summary):
 
 def translate_news(text, priority):
     stile = "URGENTE" if priority >= 9 else "Professionale"
-    prompt = f"""Sei un giornalista di Wrestling. Rielabora in HTML. Stile: {stile}.
-    1. Termini tecnici NO tradotti. 
-    2. Usa <b> per i wrestler. 
-    3. Usa <blockquote> per le citazioni. 
-    4. SOCIAL: Se trovi link social (X, Instagram, YouTube), inserisci l'URL nudo (senza tag <a>) su una riga isolata. Non aggiungere altro testo su quella riga.
+    prompt = f"""Sei un giornalista italiano esperto di Wrestling. 
+    COMPITO: Traduci integralmente in ITALIANO e rielabora in HTML.
+    
+    REGOLE TASSATIVE:
+    1. LINGUA: Il testo finale deve essere ESCLUSIVAMENTE in italiano. È vietato lasciare frasi in inglese.
+    2. TERMINI TECNICI: Mantieni in inglese SOLO termini specifici (Heel, Face, Main Event, Feud, Pinfall, ecc.).
+    3. FORMATTAZIONE: Usa <b> per i wrestler al primo riferimento. Usa <blockquote> per le citazioni dirette.
+    4. SOCIAL: Inserisci gli URL dei social (X, YouTube, IG) nudi su una riga isolata per l'embed.
     5. CATEGORIA: Scegli l'ID corretto: WWE=4, AEW=5, NXT=6, TNA=7, World/Indies=8.
-    Restituisci SOLO JSON: {{"titolo": "...", "testo": "...", "categoria": ID}}
-    Testo: {text}"""
+    
+    RESTITUISCI SOLO JSON: {{"titolo": "...", "testo": "...", "categoria": ID}}
+    
+    Testo da tradurre: {text}"""
+    
     res = client.models.generate_content(model="gemini-2.5-flash-lite", contents=prompt)
     clean_res = res.text.strip().replace('```json', '').replace('```', '').replace('\n', ' ')
     return json.loads(clean_res)
