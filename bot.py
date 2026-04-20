@@ -41,6 +41,8 @@ HEADERS = {
 SOCIAL_DOMAINS = ["twitter.com", "x.com", "instagram.com", "youtube.com", "youtu.be"]
 
 MAX_POSTS_PER_RUN = 3
+MAX_CANDIDATES_TO_TRY = 15
+
 GEMINI_MAX_ATTEMPTS = 3
 GEMINI_RETRY_DELAY = 8
 
@@ -48,10 +50,23 @@ REQUEST_TIMEOUT_SCRAPE = 20
 REQUEST_TIMEOUT_WP = 15
 REQUEST_TIMEOUT_IMAGE = 15
 
+STOPWORDS = {
+    "wwe", "aew", "tna", "nxt", "ufc", "mma",
+    "wrestlemania", "night", "title", "titles", "match", "matches",
+    "wins", "win", "revealed", "reportedly", "report", "plans",
+    "sunday", "saturday", "2026", "42", "vs", "at", "for", "the",
+    "and", "of", "to", "in", "on", "with", "after", "before",
+    "from", "new", "former", "status", "original", "internal"
+}
+
 client = genai.Client(api_key=GEMINI_API_KEY)
 
 session = requests.Session()
 session.headers.update(HEADERS)
+session.headers.update({
+    "Accept": "application/json",
+    "Cache-Control": "no-cache"
+})
 
 
 # =========================
@@ -108,7 +123,7 @@ def save_to_history(url, semantic_id):
     if new_record not in records:
         records.append(new_record)
 
-    records = records[-300:]
+    records = records[-500:]
 
     try:
         with open(HISTORY_FILE, "w", encoding="utf-8") as f:
@@ -133,17 +148,33 @@ def normalize_for_check(text):
     return text
 
 
+def get_distinctive_words(text):
+    words = normalize_for_check(text).split()
+    return {w for w in words if len(w) > 2 and w not in STOPWORDS}
+
+
 def is_translation_coherent(source_title, generated_title):
-    src = set(normalize_for_check(source_title).split())
-    gen = set(normalize_for_check(generated_title).split())
+    src = get_distinctive_words(source_title)
+    gen = get_distinctive_words(generated_title)
 
     if not src or not gen:
         return False
 
     common = src.intersection(gen)
-    overlap_ratio = len(common) / max(1, len(src))
 
-    return overlap_ratio >= 0.25
+    if len(common) < 2:
+        return False
+
+    overlap_ratio = len(common) / max(1, len(src))
+    return overlap_ratio >= 0.34
+
+
+def make_semantic_id_from_title(title):
+    slug = title.lower()
+    slug = re.sub(r"[^a-z0-9\s-]", "", slug)
+    slug = re.sub(r"\s+", "-", slug)
+    slug = re.sub(r"-{2,}", "-", slug).strip("-")
+    return slug[:80]
 
 
 def get_entry_summary(entry):
@@ -243,7 +274,8 @@ def detect_category_hint(title, text):
 
     wwe_terms = [
         "wwe", "wrestlemania", "raw", "smackdown", "royal rumble",
-        "survivor series", "money in the bank", "triple h", "nick khan"
+        "survivor series", "money in the bank", "triple h", "nick khan",
+        "clash in italy"
     ]
     if any(term in blob for term in wwe_terms):
         return 4
@@ -273,7 +305,7 @@ def generate_with_retry(prompt, max_attempts=GEMINI_MAX_ATTEMPTS, delay=GEMINI_R
 def check_gemini():
     try:
         res = generate_with_retry(
-            'Rispondi solo con questo JSON: {"ok": true}',
+            'Rispondi solo con questo JSON in una riga: {"ok": true}',
             max_attempts=2,
             delay=3
         )
@@ -293,12 +325,8 @@ Analizza questa notizia di wrestling/combat sports/news correlate.
 Titolo: {title}
 Sommario: {summary}
 
-Rispondi SOLO con JSON valido, senza markdown, senza testo extra:
-{{
-  "priority": numero intero da 1 a 10,
-  "semantic_id": "slug-di-tre-o-quattro-parole",
-  "is_update": true o false
-}}
+Rispondi SOLO con JSON valido in UNA SOLA RIGA, senza markdown, senza testo extra:
+{{"priority": 1-10, "is_update": true o false}}
 """
 
     try:
@@ -310,27 +338,16 @@ Rispondi SOLO con JSON valido, senza markdown, senza testo extra:
         data = json.loads(raw[start:end])
 
         priority = int(data.get("priority", 5))
-        semantic_id = sanitize_text(data.get("semantic_id", ""))[:80].lower()
-        semantic_id = re.sub(r"[^a-z0-9\-]", "-", semantic_id)
-        semantic_id = re.sub(r"-{2,}", "-", semantic_id).strip("-")
-
-        if not semantic_id:
-            semantic_id = re.sub(r"[^a-z0-9\-]", "-", title.lower().replace(" ", "-"))[:80]
-            semantic_id = re.sub(r"-{2,}", "-", semantic_id).strip("-")
 
         return {
             "priority": max(1, min(priority, 10)),
-            "semantic_id": semantic_id or f"news-{int(time.time())}",
             "is_update": bool(data.get("is_update", False))
         }
 
     except Exception as e:
         print(f"[AI_ANALYSIS] Errore: {e}")
-        fallback_semantic = re.sub(r"[^a-z0-9\-]", "-", title.lower().replace(" ", "-"))[:80]
-        fallback_semantic = re.sub(r"-{2,}", "-", fallback_semantic).strip("-")
         return {
             "priority": 5,
-            "semantic_id": fallback_semantic or f"news-{int(time.time())}",
             "is_update": False
         }
 
@@ -350,14 +367,13 @@ REGOLE OBBLIGATORIE:
 3. Non devi riutilizzare temi, eventi o dettagli di articoli precedenti.
 4. Il titolo deve restare semanticamente aderente al testo sorgente.
 5. Non inventare dettagli, arresti, incidenti, match o dichiarazioni non presenti nel testo.
-6. Restituisci SOLO JSON valido.
+6. Restituisci SOLO JSON valido in UNA SOLA RIGA.
 7. Nessun markdown.
 8. titolo: senza HTML.
-9. testo: HTML consentito solo con <p>, <b>, <blockquote>, <a>.
+9. testo: HTML consentito solo con <p>, <b>, <blockquote>, <a>, serializzato correttamente dentro JSON con virgolette escape.
 10. categoria deve essere uno di questi numeri: 4, 5, 6, 7, 8.
 11. Se la notizia non è chiaramente WWE, AEW, NXT o TNA, usa categoria 8.
 12. Le citazioni importanti vanno in <blockquote>.
-13. I link social, se presenti nel testo, possono restare come <a href="...">...</a>.
 
 TITOLO ORIGINALE:
 {source_title}
@@ -366,11 +382,7 @@ TESTO SORGENTE:
 {text}
 
 JSON richiesto:
-{{
-  "titolo": "stringa",
-  "testo": "html",
-  "categoria": 4
-}}
+{{"titolo":"stringa","testo":"html","categoria":4}}
 """
 
     try:
@@ -394,8 +406,6 @@ JSON richiesto:
 
         if categoria not in [4, 5, 6, 7, 8]:
             categoria = detect_category_hint(source_title, text)
-
-        categoria = detect_category_hint(source_title, text) if categoria not in [4, 5, 6, 7, 8] else categoria
 
         return {
             "titolo": titolo,
@@ -451,7 +461,9 @@ def upload_image_to_wp(image_url):
             print(f"[MEDIA] Immagine caricata: {media_id}")
             return media_id
 
-        print(f"[MEDIA] Errore upload WP: {res.status_code} - {res.text[:300]}")
+        print(f"[MEDIA] Status: {res.status_code}")
+        print(f"[MEDIA] Content-Type risposta: {res.headers.get('Content-Type')}")
+        print(f"[MEDIA] Risposta: {res.text[:500]}")
         return None
 
     except Exception as e:
@@ -493,6 +505,7 @@ def post_to_wp(data, img_id, sem_id, url, priority):
 
         print(f"[WP] Status: {res.status_code}")
         if res.status_code not in [200, 201]:
+            print(f"[WP] Content-Type risposta: {res.headers.get('Content-Type')}")
             print(f"[WP] Risposta: {res.text[:500]}")
 
         return res.status_code
@@ -531,17 +544,19 @@ def run_bot():
                 if not link:
                     continue
 
+                sem_id = make_semantic_id_from_title(title)
+
                 if link in history["urls"]:
                     print(f"[SKIP] URL già in history: {link}")
                     continue
 
-                summary = get_entry_summary(entry)
-                info = get_ai_analysis(title, summary)
-
-                if info["semantic_id"] in history["semantic_ids"]:
-                    print(f"[SKIP] semantic_id già in history: {info['semantic_id']}")
+                if sem_id in history["semantic_ids"]:
+                    print(f"[SKIP] semantic_id già in history: {sem_id}")
                     continue
 
+                summary = get_entry_summary(entry)
+                info = get_ai_analysis(title, summary)
+                info["semantic_id"] = sem_id
                 info["entry"] = entry
                 queue.append(info)
 
@@ -553,11 +568,22 @@ def run_bot():
         return
 
     queue.sort(key=lambda x: x["priority"], reverse=True)
-    queue = queue[:MAX_POSTS_PER_RUN]
 
-    print(f"[BOT] News candidate in coda: {len(queue)}")
+    published_count = 0
+    processed_count = 0
+
+    print(f"[BOT] News candidate totali: {len(queue)}")
 
     for item in queue:
+        if published_count >= MAX_POSTS_PER_RUN:
+            break
+
+        if processed_count >= MAX_CANDIDATES_TO_TRY:
+            print("[BOT] Raggiunto limite massimo candidati provati")
+            break
+
+        processed_count += 1
+
         entry = item["entry"]
         link = entry.link
         title = getattr(entry, "title", "Senza titolo")
@@ -600,10 +626,13 @@ def run_bot():
         if status == 201:
             print(f"[OK] Pubblicato: {news_data['titolo']}")
             save_to_history(link, sem_id)
+            published_count += 1
         else:
             print(f"[FAIL] Errore WP ({status}) per: {news_data['titolo']}")
 
         time.sleep(5)
+
+    print(f"[BOT] Pubblicati {published_count} articoli su {processed_count} candidati provati")
 
 
 if __name__ == "__main__":
