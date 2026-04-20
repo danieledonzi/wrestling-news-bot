@@ -359,6 +359,16 @@ def parse_content_container(soup, url):
 
     return soup.body
 
+def normalize_social_url(url: str) -> str:
+    url = (url or "").strip()
+    if re.match(r"^https?://x\.com/", url, re.I):
+        url = re.sub(r"^https?://x\.com/", "https://twitter.com/", url, flags=re.I)
+    return url
+
+
+def normalize_x_links_in_text(text: str) -> str:
+    return re.sub(r"https?://x\.com/", "https://twitter.com/", text, flags=re.I)
+
 
 def clean_article_text_from_container(content):
     if not content:
@@ -381,7 +391,7 @@ def clean_article_text_from_container(content):
         if el.name == "a":
             href = (el.get("href") or "").strip()
             if href and any(domain in href for domain in SOCIAL_DOMAINS):
-                cleaned_parts.append(href)
+                cleaned_parts.append(normalize_social_url(href))
         else:
             text = sanitize_text(el.get_text(" ", strip=True))
             if len(text) > 20:
@@ -609,7 +619,7 @@ REGOLE OBBLIGATORIE:
 12. Se la notizia non è chiaramente WWE, AEW, NXT o TNA, usa categoria 8.
 13. Le citazioni importanti vanno in <blockquote>.
 14. Non scrivere frasi meta come "il testo originale", "non è chiaro", "non specifica", "secondo quanto riportato" se non sono davvero parte della notizia.
-15. Se nel testo sorgente trovi URL social (X/Twitter, Instagram, YouTube), riportali invariati nel campo "testo" su una riga autonoma, senza modificarli.
+15. Se nel testo sorgente trovi URL social (X/Twitter, Instagram, YouTube), riportali invariati nel campo "testo" su una riga autonoma, convertendo eventuali link x.com in twitter.com.
 
 TITOLO ORIGINALE:
 {source_title}
@@ -714,9 +724,11 @@ def create_post_without_image(data, sem_id, url):
         for a in soup_temp.find_all("a"):
             href = a.get("href", "")
             if any(sp in href for sp in SOCIAL_DOMAINS):
+                href = normalize_social_url(href)
                 a.replace_with(f"\n\n{href}\n\n")
 
         content_html = str(soup_temp)
+        content_html = normalize_x_links_in_text(content_html)
 
         for domain in SOCIAL_DOMAINS:
             pattern = rf'(?<!["\'>])(https?://[^\s<"]*{re.escape(domain)}[^\s<"]*)'
