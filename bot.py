@@ -419,42 +419,30 @@ def clean_article_text_from_container(content):
             node.decompose()
 
     cleaned_parts = []
+    seen = set()
 
     for el in content.find_all(["p", "blockquote", "h2", "h3", "li"]):
         text = sanitize_text(el.get_text(" ", strip=True))
-        if len(text) > 20:
+        if len(text) > 20 and text not in seen:
+            seen.add(text)
             cleaned_parts.append(text)
 
     full_text = "\n\n".join(cleaned_parts)
     return full_text[:20000]
 
 
-def extract_embeds_from_article_html(html):
-    soup = BeautifulSoup(html, "html.parser")
-    embeds = []
+def is_valid_embed_url(url: str) -> bool:
+    url = normalize_embed_url(url)
 
-    # Twitter / Instagram blockquote embeds
-    for blockquote in soup.find_all("blockquote"):
-        classes = " ".join(blockquote.get("class", []))
-        if "twitter-tweet" in classes or "instagram-media" in classes:
-            for a in blockquote.find_all("a", href=True):
-                href = normalize_embed_url(a["href"])
-                if any(domain in href for domain in EMBED_DOMAINS):
-                    embeds.append(href)
+    patterns = [
+        r"^https?://(www\.)?twitter\.com/[^/]+/status/\d+",
+        r"^https?://(www\.)?instagram\.com/(p|reel|tv)/[^/?#]+",
+        r"^https?://(www\.)?youtube\.com/watch\?v=[^&]+",
+        r"^https?://youtu\.be/[^/?#]+",
+        r"^https?://(www\.)?tiktok\.com/@[^/]+/video/\d+",
+    ]
 
-    # Direct anchors in article body
-    for a in soup.select("article a[href], .columns-holder a[href], .cntn-wrp.artl-cnt a[href], .sp-cnt a[href]"):
-        href = normalize_embed_url(a.get("href", ""))
-        if any(domain in href for domain in EMBED_DOMAINS):
-            embeds.append(href)
-
-    # iframe embeds (YouTube etc.)
-    for iframe in soup.find_all("iframe", src=True):
-        src = normalize_embed_url(iframe["src"])
-        if any(domain in src for domain in EMBED_DOMAINS):
-            embeds.append(src)
-
-    return dedupe_preserve_order(embeds)
+    return any(re.match(p, url, re.I) for p in patterns)
 
 
 def extract_image_from_article_html(html):
