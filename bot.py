@@ -24,11 +24,10 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if not GEMINI_API_KEY:
     raise ValueError("GEMINI_API_KEY mancante")
 
-# Ordine modelli: più leggero/disponibile -> più robusto -> ultimo fallback
+# Ordine modelli: leggero -> robusto
 MODEL_CHAIN = [
     "gemini-2.5-flash-lite",
     "gemini-2.5-flash",
-    "gemini-3.0-flash",
 ]
 
 MODEL_FAIL_THRESHOLD = 2
@@ -38,7 +37,7 @@ HISTORY_FILE = "history.txt"
 
 FEEDS = [
     "https://www.wrestlinginc.com/feed/",
-    "https://www.ringsidenews.com/feed/"
+    "https://www.ringsidenews.com/feed/",
 ]
 
 HEADERS = {
@@ -82,6 +81,28 @@ NAME_STOPWORDS = {
     "WrestleMania", "Night", "Title", "Sunday", "Saturday",
     "Raw", "SmackDown", "Collision", "Dynamite", "Rampage"
 }
+
+SPECIAL_TITLE_TERMS = [
+    "preview", "results", "report", "how to watch",
+    "start time", "confirmed matches"
+]
+
+STRONG_NAMES = [
+    "roman reigns", "cm punk", "brock lesnar", "rhea ripley",
+    "jade cargill", "trick williams", "cody rhodes", "oba femi",
+    "triple h", "randy orton", "bella twins", "nikki bella", "brie bella"
+]
+
+BODY_BAD_PATTERNS = [
+    "il testo originale",
+    "non specifica",
+    "non è chiaro",
+    "secondo quanto riportato",
+    "the original text",
+    "the source text",
+    "does not specify",
+    "it is not clear",
+]
 
 client = genai.Client(api_key=GEMINI_API_KEY)
 
@@ -193,8 +214,32 @@ def extract_named_entities_from_title(title):
     return list(dict.fromkeys(cleaned))
 
 
+def special_title_consistent(source_title, generated_title):
+    src = source_title.lower()
+    gen = generated_title.lower()
+    for term in SPECIAL_TITLE_TERMS:
+        if term in src and term not in gen:
+            return False
+    return True
+
+
+def strong_name_drift(source_title, generated_title):
+    src = source_title.lower()
+    gen = generated_title.lower()
+
+    src_names = [name for name in STRONG_NAMES if name in src]
+    gen_names = [name for name in STRONG_NAMES if name in gen]
+
+    if not src_names and gen_names:
+        return True
+
+    if src_names and gen_names and not any(name in gen for name in src_names):
+        return True
+
+    return False
+
+
 def is_translation_coherent(source_title, generated_title):
-    src_norm = normalize_for_check(source_title)
     gen_norm = normalize_for_check(generated_title)
 
     names = extract_named_entities_from_title(source_title)
@@ -204,7 +249,7 @@ def is_translation_coherent(source_title, generated_title):
             parts = [p.lower() for p in name.split() if len(p) > 2]
             if parts and all(p in gen_norm for p in parts):
                 matched_names += 1
-        if matched_names >= 1:
+        if matched_names >= 1 and special_title_consistent(source_title, generated_title) and not strong_name_drift(source_title, generated_title):
             return True
 
     src = get_distinctive_words(source_title)
@@ -214,11 +259,15 @@ def is_translation_coherent(source_title, generated_title):
         return False
 
     common = src.intersection(gen)
-    if len(common) >= 2:
-        return True
-
     overlap_ratio = len(common) / max(1, len(src))
-    return overlap_ratio >= 0.28
+
+    if strong_name_drift(source_title, generated_title):
+        return False
+
+    if not special_title_consistent(source_title, generated_title):
+        return False
+
+    return len(common) >= 2 or overlap_ratio >= 0.28
 
 
 def get_entry_summary(entry):
@@ -277,49 +326,154 @@ def extract_image_url(entry):
     return None
 
 
+def parse_content_container(soup, url):
+    domain = get_domain(url)
+
+    # piccoli override per domini noti, con fallback generico
+    selectors = []
+    if "ringsidenews.com" in domain:
+        selectors = [
+            "div.cntn-wrp.artl-cnt",
+            "div.sp-cnt",
+            "article",
+            "main",
+        ]
+    elif "wrestlinginc.com" in domain:
+        selectors = [
+            "article",
+            "div.post-content",
+            "div.entry-content",
+            "main",
+        ]
+    else:
+        selectors = [
+            "article",
+            "div.post-content",
+            "div.entry-content",
+            "main",
+            "body",
+        ]
+
+    for sel in selectors:
+        node = soup.select_one(sel)
+        if node:
+            return node
+
+    return soup.body
+
+
+def clean_article_text_from_container(content):
+    if not content:
+        return ""
+
+    for trash in content(["script", "style", "nav", "footer", "header", "aside", "form", "noscript"]):
+        trash.decompose()
+
+    # elimina blocchi social/menus più rumorosi
+    for bad_sel in [
+        ".social_holder", ".social_icons", ".m-s-i", ".google-news", ".contest",
+        ".breadcrumbs", ".breadcrumb", "#pagination", ".srp", ".related_link",
+        ".amp-related-posts-title", ".amp-sidebar", ".amp-ad-wrapper", "amp-ad"
+    ]:
+        for node in content.select(bad_sel):
+            node.decompose()
+
+    cleaned_parts = []
+
+    for el in content.find_all(["p", "blockquote", "h2", "h3", "li"]):
+        text = sanitize_text(el.get_text(" ", strip=True))
+        if len(text) > 20:
+            cleaned_parts.append(text)
+
+    full_text = "\n\n".join(cleaned_parts)
+    return full_text[:20000]
+
+
+def extract_image_from_article_html(html):
+    soup = BeautifulSoup(html, "html.parser")
+
+    # 1) OpenGraph/Twitter
+    for selector in [
+        ('meta', {'property': 'og:image'}),
+        ('meta', {'name': 'twitter:image'}),
+    ]:
+        tag = soup.find(selector[0], attrs=selector[1])
+        if tag and tag.get("content"):
+            return tag["content"]
+
+    # 2) JSON-LD
+    for script in soup.find_all("script", attrs={"type": "application/ld+json"}):
+        try:
+            raw = script.get_text(strip=True)
+            if not raw:
+                continue
+            data = json.loads(raw)
+
+            def walk(obj):
+                if isinstance(obj, dict):
+                    for key in ["thumbnailUrl", "contentUrl", "url"]:
+                        val = obj.get(key)
+                        if isinstance(val, str) and re.search(r"\.(jpg|jpeg|png|webp)(\?.*)?$", val, re.I):
+                            return val
+                    for v in obj.values():
+                        found = walk(v)
+                        if found:
+                            return found
+                elif isinstance(obj, list):
+                    for item in obj:
+                        found = walk(item)
+                        if found:
+                            return found
+                return None
+
+            found = walk(data)
+            if found:
+                return found
+        except Exception:
+            pass
+
+    # 3) hero image note
+    hero = soup.select_one(
+        ".ringside-featured-image-holder amp-img[src], "
+        ".sf-img amp-img[src], "
+        "article amp-img[src], "
+        "article img[src]"
+    )
+    if hero and hero.get("src"):
+        return hero["src"]
+
+    # 4) fallback immagine qualunque
+    img = soup.find(["img", "amp-img"], src=True)
+    if img:
+        return img["src"]
+
+    return None
+
+
 def get_clean_text(url):
     try:
         res = session.get(url, timeout=REQUEST_TIMEOUT_SCRAPE)
         res.raise_for_status()
 
-        soup = BeautifulSoup(res.text, "html.parser")
-
-        content = (
-            soup.find("article")
-            or soup.find("div", class_="post-content")
-            or soup.find("div", class_="entry-content")
-            or soup.find("main")
-            or soup.body
-        )
+        html = res.text
+        soup = BeautifulSoup(html, "html.parser")
+        content = parse_content_container(soup, url)
 
         if not content:
-            return "", "empty"
+            return "", "empty", html, None
 
-        for trash in content(["script", "style", "nav", "footer", "header", "aside", "form", "noscript"]):
-            trash.decompose()
+        full_text = clean_article_text_from_container(content)
+        page_img = extract_image_from_article_html(html)
 
-        cleaned_parts = []
-
-        for el in content.find_all(["p", "blockquote", "a", "h2", "h3", "li"]):
-            if el.name == "a":
-                href = el.get("href", "")
-                if any(domain in href for domain in SOCIAL_DOMAINS):
-                    cleaned_parts.append(href)
-            else:
-                text = sanitize_text(el.get_text(" ", strip=True))
-                if len(text) > 20:
-                    cleaned_parts.append(text)
-
-        full_text = "\n\n".join(cleaned_parts)[:20000]
-        return full_text, None
+        return full_text, None, html, page_img
 
     except requests.HTTPError as e:
         code = getattr(e.response, "status_code", None)
         print(f"[SCRAPE] HTTP {code} su {url}")
-        return "", f"http_{code}"
+        return "", f"http_{code}", "", None
     except Exception as e:
         print(f"[SCRAPE] Errore su {url}: {e}")
-        return "", "generic"
+        return "", "generic", "", None
 
 
 def detect_category_hint(title, text):
@@ -343,6 +497,19 @@ def detect_category_hint(title, text):
     return 8
 
 
+def body_looks_suspicious(text):
+    t = sanitize_text(BeautifulSoup(text or "", "html.parser").get_text(" ", strip=True)).lower()
+
+    if len(t) < 120:
+        return True
+
+    bad_hits = sum(1 for pat in BODY_BAD_PATTERNS if pat in t)
+    if bad_hits >= 1:
+        return True
+
+    return False
+
+
 # =========================
 # GEMINI
 # =========================
@@ -364,42 +531,7 @@ def extract_json_object(raw_text):
     return json.loads(raw[start:end])
 
 
-def generate_with_model_fallback(prompt):
-    last_exception = None
-
-    for model in MODEL_CHAIN:
-        if model_fail_counts.get(model, 0) >= MODEL_FAIL_THRESHOLD:
-            print(f"[GEMINI] Skip modello saturo in questa run: {model}")
-            continue
-
-        for attempt in range(1, MAX_ATTEMPTS_PER_MODEL + 1):
-            try:
-                print(f"[GEMINI] Uso modello: {model}")
-                res = client.models.generate_content(
-                    model=model,
-                    contents=prompt
-                )
-                return res, model
-
-            except Exception as e:
-                last_exception = e
-                print(f"[GEMINI] Modello {model} fallito (tentativo {attempt}/{MAX_ATTEMPTS_PER_MODEL}): {e}")
-
-                if is_capacity_error(e):
-                    model_fail_counts[model] = model_fail_counts.get(model, 0) + 1
-                    break
-                else:
-                    raise
-
-    raise last_exception if last_exception else RuntimeError("Nessun modello Gemini disponibile")
-
-
 def generate_and_parse_json(prompt, source_title=None):
-    """
-    Prova i modelli in ordine.
-    Se un modello restituisce testo ma JSON malformato o titolo incoerente,
-    passa al successivo invece di fermarsi.
-    """
     last_exception = None
 
     for model in MODEL_CHAIN:
@@ -416,7 +548,6 @@ def generate_and_parse_json(prompt, source_title=None):
 
             data = extract_json_object(res.text)
 
-            # Se c'è un titolo sorgente, possiamo controllare già qui la coerenza
             if source_title is not None:
                 generated_title = re.sub(r"<[^<]+?>", "", data.get("titolo", "")).strip()
                 if not generated_title:
@@ -428,14 +559,11 @@ def generate_and_parse_json(prompt, source_title=None):
 
         except Exception as e:
             last_exception = e
-            msg = str(e)
             print(f"[GEMINI] Modello {model} scartato: {e}")
 
             if is_capacity_error(e):
                 model_fail_counts[model] = model_fail_counts.get(model, 0) + 1
-                continue
 
-            # JSON sporco o incoerenza: proviamo il modello successivo
             continue
 
     raise last_exception if last_exception else RuntimeError("Nessun modello ha prodotto un output valido")
@@ -478,6 +606,7 @@ REGOLE OBBLIGATORIE:
 11. categoria deve essere uno di questi numeri: 4, 5, 6, 7, 8.
 12. Se la notizia non è chiaramente WWE, AEW, NXT o TNA, usa categoria 8.
 13. Le citazioni importanti vanno in <blockquote>.
+14. Non scrivere frasi meta come "il testo originale", "non è chiaro", "non specifica", "secondo quanto riportato" se non sono davvero parte della notizia.
 
 TITOLO ORIGINALE:
 {source_title}
@@ -498,6 +627,9 @@ JSON richiesto:
 
         if not titolo or not testo or len(testo) < 50:
             return None
+
+        if body_looks_suspicious(testo):
+            raise ValueError("Body sospetto o troppo meta")
 
         try:
             categoria = int(data.get("categoria", 8))
@@ -746,7 +878,7 @@ def run_bot():
             print(f"[SKIP] Dominio temporaneamente escluso in questa run: {domain}")
             continue
 
-        full_text, scrape_error = get_clean_text(link)
+        full_text, scrape_error, page_html, page_img = get_clean_text(link)
 
         if not full_text:
             fallback_text = get_summary_fallback(entry)
@@ -771,7 +903,6 @@ def run_bot():
             print(f"[SKIP] Titolo incoerente. Orig: {title} | Gen: {news_data['titolo']}")
             continue
 
-        # 1) crea prima il post senza immagine
         post_id, post_json = create_post_without_image(
             data=news_data,
             sem_id=sem_id,
@@ -783,11 +914,9 @@ def run_bot():
             print(f"[FAIL] Creazione post fallita per: {news_data['titolo']} (wp_streak={wp_fail_streak})")
             continue
 
-        # il post esiste, quindi resettiamo lo streak WP
         wp_fail_streak = 0
 
-        # 2) poi proviamo eventualmente a caricare e associare l'immagine
-        img_url = extract_image_url(entry)
+        img_url = extract_image_url(entry) or page_img
         if img_url:
             print(f"[BOT] Immagine trovata: {img_url}")
             img_id = upload_image_to_wp(img_url)
