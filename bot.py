@@ -445,6 +445,35 @@ def is_valid_embed_url(url: str) -> bool:
     return any(re.match(p, url, re.I) for p in patterns)
 
 
+
+
+def extract_embeds_from_article_html(html):
+    soup = BeautifulSoup(html, "html.parser")
+    embeds = []
+
+    # Twitter / Instagram blockquote embeds: keep only real post URLs
+    for blockquote in soup.find_all("blockquote"):
+        classes = " ".join(blockquote.get("class", []))
+        if "twitter-tweet" in classes or "instagram-media" in classes:
+            for a in blockquote.find_all("a", href=True):
+                href = normalize_embed_url(a["href"])
+                if is_valid_embed_url(href):
+                    embeds.append(href)
+
+    # iframe embeds (YouTube etc.)
+    for iframe in soup.find_all("iframe", src=True):
+        src = normalize_embed_url(iframe["src"])
+        if is_valid_embed_url(src):
+            embeds.append(src)
+
+    # fallback: direct anchors in article body, but only if they are real embeddable posts
+    for a in soup.select("article a[href], .columns-holder a[href], .cntn-wrp.artl-cnt a[href], .sp-cnt a[href]"):
+        href = normalize_embed_url(a.get("href", ""))
+        if is_valid_embed_url(href):
+            embeds.append(href)
+
+    return dedupe_preserve_order(embeds)
+
 def extract_image_from_article_html(html):
     soup = BeautifulSoup(html, "html.parser")
 
