@@ -24,7 +24,6 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if not GEMINI_API_KEY:
     raise ValueError("GEMINI_API_KEY mancante")
 
-# Ordine modelli: leggero -> robusto
 MODEL_CHAIN = [
     "gemini-2.5-flash-lite",
     "gemini-2.5-flash",
@@ -48,7 +47,8 @@ HEADERS = {
     )
 }
 
-SOCIAL_DOMAINS = ["twitter.com", "x.com", "instagram.com", "youtube.com", "youtu.be"]
+SOCIAL_DOMAINS = ["twitter.com", "x.com", "instagram.com", "youtube.com", "youtu.be", "tiktok.com"]
+EMBED_DOMAINS = ["twitter.com", "x.com", "instagram.com", "youtube.com", "youtu.be", "tiktok.com"]
 
 MAX_POSTS_PER_RUN = 5
 MAX_CANDIDATES_TO_TRY = 10
@@ -62,8 +62,6 @@ MAX_RUN_SECONDS = 15 * 60
 REQUEST_TIMEOUT_SCRAPE = 12
 REQUEST_TIMEOUT_WP = 8
 REQUEST_TIMEOUT_IMAGE = 8
-
-MAX_ATTEMPTS_PER_MODEL = 1
 
 STOPWORDS = {
     "wwe", "aew", "tna", "nxt", "ufc", "mma",
@@ -291,6 +289,50 @@ def get_domain(url):
         return ""
 
 
+def dedupe_preserve_order(items):
+    seen = set()
+    out = []
+    for item in items:
+        item = (item or "").strip()
+        if not item or item in seen:
+            continue
+        seen.add(item)
+        out.append(item)
+    return out
+
+
+def normalize_social_url(url: str) -> str:
+    url = (url or "").strip()
+    if re.match(r"^https?://x\.com/", url, re.I):
+        url = re.sub(r"^https?://x\.com/", "https://twitter.com/", url, flags=re.I)
+    return url
+
+
+def normalize_embed_url(url: str) -> str:
+    url = normalize_social_url(url)
+
+    if "youtube.com/embed/" in url:
+        video_id = url.split("/embed/")[-1].split("?")[0].strip("/")
+        if video_id:
+            return f"https://www.youtube.com/watch?v={video_id}"
+
+    if "youtube-nocookie.com/embed/" in url:
+        video_id = url.split("/embed/")[-1].split("?")[0].strip("/")
+        if video_id:
+            return f"https://www.youtube.com/watch?v={video_id}"
+
+    if "youtu.be/" in url:
+        video_id = url.split("youtu.be/")[-1].split("?")[0].strip("/")
+        if video_id:
+            return f"https://www.youtube.com/watch?v={video_id}"
+
+    return url
+
+
+def normalize_x_links_in_text(text: str) -> str:
+    return re.sub(r"https?://x\.com/", "https://twitter.com/", text, flags=re.I)
+
+
 def extract_image_url(entry):
     try:
         if hasattr(entry, "media_content") and entry.media_content:
@@ -338,6 +380,7 @@ def parse_content_container(soup, url):
         ]
     elif "wrestlinginc.com" in domain:
         selectors = [
+            ".columns-holder",
             "article",
             "div.post-content",
             "div.entry-content",
@@ -359,22 +402,12 @@ def parse_content_container(soup, url):
 
     return soup.body
 
-def normalize_social_url(url: str) -> str:
-    url = (url or "").strip()
-    if re.match(r"^https?://x\.com/", url, re.I):
-        url = re.sub(r"^https?://x\.com/", "https://twitter.com/", url, flags=re.I)
-    return url
-
-
-def normalize_x_links_in_text(text: str) -> str:
-    return re.sub(r"https?://x\.com/", "https://twitter.com/", text, flags=re.I)
-
 
 def clean_article_text_from_container(content):
     if not content:
         return ""
 
-    for trash in content(["script", "style", "nav", "footer", "header", "aside", "form", "noscript"]):
+    for trash in content(["script", "style", "nav", "footer", "header", "aside", "form", "noscript", "iframe"]):
         trash.decompose()
 
     for bad_sel in [
@@ -387,26 +420,49 @@ def clean_article_text_from_container(content):
 
     cleaned_parts = []
 
-    for el in content.find_all(["p", "blockquote", "h2", "h3", "li", "a"]):
-        if el.name == "a":
-            href = (el.get("href") or "").strip()
-            if href and any(domain in href for domain in SOCIAL_DOMAINS):
-                cleaned_parts.append(normalize_social_url(href))
-        else:
-            text = sanitize_text(el.get_text(" ", strip=True))
-            if len(text) > 20:
-                cleaned_parts.append(text)
+    for el in content.find_all(["p", "blockquote", "h2", "h3", "li"]):
+        text = sanitize_text(el.get_text(" ", strip=True))
+        if len(text) > 20:
+            cleaned_parts.append(text)
 
     full_text = "\n\n".join(cleaned_parts)
     return full_text[:20000]
+
+
+def extract_embeds_from_article_html(html):
+    soup = BeautifulSoup(html, "html.parser")
+    embeds = []
+
+    # Twitter / Instagram blockquote embeds
+    for blockquote in soup.find_all("blockquote"):
+        classes = " ".join(blockquote.get("class", []))
+        if "twitter-tweet" in classes or "instagram-media" in classes:
+            for a in blockquote.find_all("a", href=True):
+                href = normalize_embed_url(a["href"])
+                if any(domain in href for domain in EMBED_DOMAINS):
+                    embeds.append(href)
+
+    # Direct anchors in article body
+    for a in soup.select("article a[href], .columns-holder a[href], .cntn-wrp.artl-cnt a[href], .sp-cnt a[href]"):
+        href = normalize_embed_url(a.get("href", ""))
+        if any(domain in href for domain in EMBED_DOMAINS):
+            embeds.append(href)
+
+    # iframe embeds (YouTube etc.)
+    for iframe in soup.find_all("iframe", src=True):
+        src = normalize_embed_url(iframe["src"])
+        if any(domain in src for domain in EMBED_DOMAINS):
+            embeds.append(src)
+
+    return dedupe_preserve_order(embeds)
 
 
 def extract_image_from_article_html(html):
     soup = BeautifulSoup(html, "html.parser")
 
     for selector in [
-        ('meta', {'property': 'og:image'}),
-        ('meta', {'name': 'twitter:image'}),
+        ("meta", {"property": "og:image"}),
+        ("meta", {"name": "twitter:image"}),
     ]:
         tag = soup.find(selector[0], attrs=selector[1])
         if tag and tag.get("content"):
@@ -464,24 +520,26 @@ def get_clean_text(url):
         res.raise_for_status()
 
         html = res.text
+        embeds = extract_embeds_from_article_html(html)
+
         soup = BeautifulSoup(html, "html.parser")
         content = parse_content_container(soup, url)
 
         if not content:
-            return "", "empty", html, None
+            return "", "empty", html, None, embeds
 
         full_text = clean_article_text_from_container(content)
         page_img = extract_image_from_article_html(html)
 
-        return full_text, None, html, page_img
+        return full_text, None, html, page_img, embeds
 
     except requests.HTTPError as e:
         code = getattr(e.response, "status_code", None)
         print(f"[SCRAPE] HTTP {code} su {url}")
-        return "", f"http_{code}", "", None
+        return "", f"http_{code}", "", None, []
     except Exception as e:
         print(f"[SCRAPE] Errore su {url}: {e}")
-        return "", "generic", "", None
+        return "", "generic", "", None, []
 
 
 def detect_category_hint(title, text):
@@ -534,13 +592,21 @@ def is_capacity_error(exc):
     )
 
 
-def extract_json_object(raw_text):
+def clean_json_string(raw_text):
     raw = raw_text.strip().replace("```json", "").replace("```", "").strip()
     start = raw.find("{")
     end = raw.rfind("}") + 1
     if start == -1 or end <= start:
         raise ValueError("JSON object non trovato nella risposta")
-    return json.loads(raw[start:end])
+    raw = raw[start:end]
+    raw = re.sub(r'\\(?!["\\/bfnrtu])', r"\\\\", raw)
+    raw = re.sub(r"[\x00-\x08\x0B\x0C\x0E-\x1F]", " ", raw)
+    return raw
+
+
+def extract_json_object(raw_text):
+    raw = clean_json_string(raw_text)
+    return json.loads(raw)
 
 
 def generate_and_parse_json(prompt, source_title=None):
@@ -599,7 +665,7 @@ def translate_news(source_title, text):
     if not text or len(text) < 50:
         return None
 
-    prompt = f"""
+    prompt = f'''
 Sei un giornalista italiano esperto di wrestling e sport da combattimento.
 
 Devi tradurre e rielaborare questa specifica notizia in italiano.
@@ -614,12 +680,12 @@ REGOLE OBBLIGATORIE:
 7. Restituisci SOLO JSON valido in UNA SOLA RIGA.
 8. Nessun markdown.
 9. titolo: senza HTML.
-10. testo: HTML consentito solo con <p>, <b>, <blockquote>, <a>, serializzato correttamente dentro JSON con virgolette escape.
+10. testo: HTML consentito solo con <p>, <b>, <blockquote>, serializzato correttamente dentro JSON con virgolette escape.
 11. categoria deve essere uno di questi numeri: 4, 5, 6, 7, 8.
 12. Se la notizia non è chiaramente WWE, AEW, NXT o TNA, usa categoria 8.
 13. Le citazioni importanti vanno in <blockquote>.
 14. Non scrivere frasi meta come "il testo originale", "non è chiaro", "non specifica", "secondo quanto riportato" se non sono davvero parte della notizia.
-15. Se nel testo sorgente trovi URL social (X/Twitter, Instagram, YouTube), riportali invariati nel campo "testo" su una riga autonoma, convertendo eventuali link x.com in twitter.com.
+15. Non inserire link social o embed nel testo: ci penserà il sistema dopo.
 
 TITOLO ORIGINALE:
 {source_title}
@@ -629,7 +695,7 @@ TESTO SORGENTE:
 
 JSON richiesto:
 {{"titolo":"stringa","testo":"html","categoria":4}}
-"""
+'''
 
     try:
         data, used_model = generate_and_parse_json(prompt, source_title=source_title)
@@ -716,7 +782,26 @@ def upload_image_to_wp(image_url):
         return None
 
 
-def create_post_without_image(data, sem_id, url):
+def append_embeds_to_html(content_html, embed_urls):
+    if not embed_urls:
+        return content_html
+
+    embed_urls = [normalize_embed_url(url) for url in embed_urls if url]
+    embed_urls = dedupe_preserve_order(embed_urls)
+    if not embed_urls:
+        return content_html
+
+    embed_block = "".join(f"\n\n{url}\n\n" for url in embed_urls)
+
+    paragraphs = re.findall(r"<p\b[^>]*>.*?</p>", content_html, flags=re.I | re.S)
+    if paragraphs:
+        first = paragraphs[0]
+        return content_html.replace(first, first + embed_block, 1)
+
+    return content_html + embed_block
+
+
+def create_post_without_image(data, sem_id, url, embed_urls=None):
     try:
         testo_html = data["testo"]
         soup_temp = BeautifulSoup(testo_html, "html.parser")
@@ -724,7 +809,7 @@ def create_post_without_image(data, sem_id, url):
         for a in soup_temp.find_all("a"):
             href = a.get("href", "")
             if any(sp in href for sp in SOCIAL_DOMAINS):
-                href = normalize_social_url(href)
+                href = normalize_embed_url(href)
                 a.replace_with(f"\n\n{href}\n\n")
 
         content_html = str(soup_temp)
@@ -733,6 +818,8 @@ def create_post_without_image(data, sem_id, url):
         for domain in SOCIAL_DOMAINS:
             pattern = rf'(?<!["\'>])(https?://[^\s<"]*{re.escape(domain)}[^\s<"]*)'
             content_html = re.sub(pattern, r"\n\n\1\n\n", content_html)
+
+        content_html = append_embeds_to_html(content_html, embed_urls or [])
 
         payload = {
             "title": data["titolo"],
@@ -899,7 +986,10 @@ def run_bot():
             print(f"[SKIP] Dominio temporaneamente escluso in questa run: {domain}")
             continue
 
-        full_text, scrape_error, page_html, page_img = get_clean_text(link)
+        full_text, scrape_error, page_html, page_img, embed_urls = get_clean_text(link)
+
+        if embed_urls:
+            print(f"[BOT] Embed trovati: {len(embed_urls)}")
 
         if not full_text:
             fallback_text = get_summary_fallback(entry)
@@ -927,7 +1017,8 @@ def run_bot():
         post_id, post_json = create_post_without_image(
             data=news_data,
             sem_id=sem_id,
-            url=link
+            url=link,
+            embed_urls=embed_urls
         )
 
         if not post_id:
