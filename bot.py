@@ -329,8 +329,6 @@ def extract_image_url(entry):
 def parse_content_container(soup, url):
     domain = get_domain(url)
 
-    # piccoli override per domini noti, con fallback generico
-    selectors = []
     if "ringsidenews.com" in domain:
         selectors = [
             "div.cntn-wrp.artl-cnt",
@@ -369,7 +367,6 @@ def clean_article_text_from_container(content):
     for trash in content(["script", "style", "nav", "footer", "header", "aside", "form", "noscript"]):
         trash.decompose()
 
-    # elimina blocchi social/menus più rumorosi
     for bad_sel in [
         ".social_holder", ".social_icons", ".m-s-i", ".google-news", ".contest",
         ".breadcrumbs", ".breadcrumb", "#pagination", ".srp", ".related_link",
@@ -380,10 +377,15 @@ def clean_article_text_from_container(content):
 
     cleaned_parts = []
 
-    for el in content.find_all(["p", "blockquote", "h2", "h3", "li"]):
-        text = sanitize_text(el.get_text(" ", strip=True))
-        if len(text) > 20:
-            cleaned_parts.append(text)
+    for el in content.find_all(["p", "blockquote", "h2", "h3", "li", "a"]):
+        if el.name == "a":
+            href = (el.get("href") or "").strip()
+            if href and any(domain in href for domain in SOCIAL_DOMAINS):
+                cleaned_parts.append(href)
+        else:
+            text = sanitize_text(el.get_text(" ", strip=True))
+            if len(text) > 20:
+                cleaned_parts.append(text)
 
     full_text = "\n\n".join(cleaned_parts)
     return full_text[:20000]
@@ -392,7 +394,6 @@ def clean_article_text_from_container(content):
 def extract_image_from_article_html(html):
     soup = BeautifulSoup(html, "html.parser")
 
-    # 1) OpenGraph/Twitter
     for selector in [
         ('meta', {'property': 'og:image'}),
         ('meta', {'name': 'twitter:image'}),
@@ -401,7 +402,6 @@ def extract_image_from_article_html(html):
         if tag and tag.get("content"):
             return tag["content"]
 
-    # 2) JSON-LD
     for script in soup.find_all("script", attrs={"type": "application/ld+json"}):
         try:
             raw = script.get_text(strip=True)
@@ -432,7 +432,6 @@ def extract_image_from_article_html(html):
         except Exception:
             pass
 
-    # 3) hero image note
     hero = soup.select_one(
         ".ringside-featured-image-holder amp-img[src], "
         ".sf-img amp-img[src], "
@@ -442,7 +441,6 @@ def extract_image_from_article_html(html):
     if hero and hero.get("src"):
         return hero["src"]
 
-    # 4) fallback immagine qualunque
     img = soup.find(["img", "amp-img"], src=True)
     if img:
         return img["src"]
@@ -505,6 +503,10 @@ def body_looks_suspicious(text):
 
     bad_hits = sum(1 for pat in BODY_BAD_PATTERNS if pat in t)
     if bad_hits >= 1:
+        return True
+
+    sentence_count = len([s for s in re.split(r"[.!?]+", t) if s.strip()])
+    if sentence_count < 2:
         return True
 
     return False
@@ -607,6 +609,7 @@ REGOLE OBBLIGATORIE:
 12. Se la notizia non è chiaramente WWE, AEW, NXT o TNA, usa categoria 8.
 13. Le citazioni importanti vanno in <blockquote>.
 14. Non scrivere frasi meta come "il testo originale", "non è chiaro", "non specifica", "secondo quanto riportato" se non sono davvero parte della notizia.
+15. Se nel testo sorgente trovi URL social (X/Twitter, Instagram, YouTube), riportali invariati nel campo "testo" su una riga autonoma, senza modificarli.
 
 TITOLO ORIGINALE:
 {source_title}
@@ -713,9 +716,15 @@ def create_post_without_image(data, sem_id, url):
             if any(sp in href for sp in SOCIAL_DOMAINS):
                 a.replace_with(f"\n\n{href}\n\n")
 
+        content_html = str(soup_temp)
+
+        for domain in SOCIAL_DOMAINS:
+            pattern = rf'(?<!["\'>])(https?://[^\s<"]*{re.escape(domain)}[^\s<"]*)'
+            content_html = re.sub(pattern, r"\n\n\1\n\n", content_html)
+
         payload = {
             "title": data["titolo"],
-            "content": str(soup_temp),
+            "content": content_html,
             "categories": [int(data.get("categoria", 8))],
             "status": "publish",
             "meta": {
