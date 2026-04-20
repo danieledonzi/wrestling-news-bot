@@ -3,6 +3,8 @@ import re
 import json
 import time
 import mimetypes
+from urllib.parse import urlparse
+
 import requests
 import feedparser
 from bs4 import BeautifulSoup
@@ -11,16 +13,26 @@ from google import genai
 # =========================
 # CONFIG
 # =========================
-GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 WP_USER = os.getenv("WP_USER")
 WP_PASSWORD = os.getenv("WP_PASSWORD")
 WP_API_URL = os.getenv("WP_URL")
 
-if not GEMINI_API_KEY:
-    raise ValueError("GEMINI_API_KEY mancante")
 if not WP_USER or not WP_PASSWORD or not WP_API_URL:
     raise ValueError("Configurazione WordPress incompleta")
+
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+if not GEMINI_API_KEY:
+    raise ValueError("GEMINI_API_KEY mancante")
+
+# Ordine modelli: principale -> fallback -> fallback finale
+MODEL_CHAIN = [
+    "gemini-2.5-flash",
+    "gemini-2.5-flash-lite",
+    "gemini-3.0-flash",
+]
+
+# Se un modello dà 503 per questa soglia, lo saltiamo per il resto della run
+MODEL_FAIL_THRESHOLD = 2
 
 WP_MEDIA_URL = WP_API_URL.replace("/posts", "/media")
 HISTORY_FILE = "history.txt"
@@ -40,15 +52,27 @@ HEADERS = {
 
 SOCIAL_DOMAINS = ["twitter.com", "x.com", "instagram.com", "youtube.com", "youtu.be"]
 
+# Quanti articoli vuoi pubblicare per run
 MAX_POSTS_PER_RUN = 5
-MAX_CANDIDATES_TO_TRY = 20
 
-GEMINI_MAX_ATTEMPTS = 3
-GEMINI_RETRY_DELAY = 6
+# Quanti candidati massimi vuoi provare in una run
+MAX_CANDIDATES_TO_TRY = 10
 
-REQUEST_TIMEOUT_SCRAPE = 20
+# Se Gemini fallisce troppe volte di fila, si interrompe la run
+MAX_GEMINI_FAIL_STREAK = 4
+
+# Se un dominio fallisce troppe volte di fila per scraping, viene saltato per la run
+MAX_SOURCE_FAILS_PER_DOMAIN = 3
+
+# Timeout totale run in secondi (15 minuti)
+MAX_RUN_SECONDS = 15 * 60
+
+REQUEST_TIMEOUT_SCRAPE = 15
 REQUEST_TIMEOUT_WP = 15
 REQUEST_TIMEOUT_IMAGE = 15
+
+# Nessun retry per modello oltre al fallback modello successivo
+MAX_ATTEMPTS_PER_MODEL = 1
 
 STOPWORDS = {
     "wwe", "aew", "tna", "nxt", "ufc", "mma",
@@ -74,6 +98,9 @@ session.headers.update({
     "Accept": "application/json",
     "Cache-Control": "no-cache"
 })
+
+# Stato modelli per la singola run
+model_fail_counts = {model: 0 for model in MODEL_CHAIN}
 
 
 # =========================
@@ -162,10 +189,6 @@ def make_semantic_id_from_title(title):
 
 
 def extract_named_entities_from_title(title):
-    """
-    Estrae coppie di parole capitalizzate utili come nomi propri:
-    es. Roman Reigns, CM Punk, Rhea Ripley, Brock Lesnar.
-    """
     candidates = re.findall(r"\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+|[A-Z]{2,}(?:\s+[A-Z][a-z]+)*)\b", title)
     cleaned = []
     for c in candidates:
@@ -182,7 +205,7 @@ def is_translation_coherent(source_title, generated_title):
     src_norm = normalize_for_check(source_title)
     gen_norm = normalize_for_check(generated_title)
 
-    # 1) controllo su nomi propri forti
+    # Prima regola: se il titolo sorgente ha nomi forti, almeno uno deve restare
     names = extract_named_entities_from_title(source_title)
     if names:
         matched_names = 0
@@ -190,12 +213,10 @@ def is_translation_coherent(source_title, generated_title):
             parts = [p.lower() for p in name.split() if len(p) > 2]
             if parts and all(p in gen_norm for p in parts):
                 matched_names += 1
-
-        # se ci sono nomi forti, almeno uno deve comparire bene
         if matched_names >= 1:
             return True
 
-    # 2) fallback più morbido
+    # Fallback più morbido
     src = get_distinctive_words(source_title)
     gen = get_distinctive_words(generated_title)
 
@@ -217,6 +238,18 @@ def get_entry_summary(entry):
     elif hasattr(entry, "description"):
         summary = entry.description
     return BeautifulSoup(summary, "html.parser").get_text(" ", strip=True)
+
+
+def get_summary_fallback(entry):
+    summary = get_entry_summary(entry)
+    return summary if summary and len(summary) >= 120 else ""
+
+
+def get_domain(url):
+    try:
+        return urlparse(url).netloc.lower()
+    except Exception:
+        return ""
 
 
 def extract_image_url(entry):
@@ -270,7 +303,7 @@ def get_clean_text(url):
         )
 
         if not content:
-            return ""
+            return "", "empty"
 
         for trash in content(["script", "style", "nav", "footer", "header", "aside", "form", "noscript"]):
             trash.decompose()
@@ -287,11 +320,16 @@ def get_clean_text(url):
                 if len(text) > 20:
                     cleaned_parts.append(text)
 
-        return "\n\n".join(cleaned_parts)[:20000]
+        full_text = "\n\n".join(cleaned_parts)[:20000]
+        return full_text, None
 
+    except requests.HTTPError as e:
+        code = getattr(e.response, "status_code", None)
+        print(f"[SCRAPE] HTTP {code} su {url}")
+        return "", f"http_{code}"
     except Exception as e:
         print(f"[SCRAPE] Errore su {url}: {e}")
-        return ""
+        return "", "generic"
 
 
 def detect_category_hint(title, text):
@@ -318,34 +356,56 @@ def detect_category_hint(title, text):
 # =========================
 # GEMINI
 # =========================
-def generate_with_retry(prompt, max_attempts=GEMINI_MAX_ATTEMPTS, delay=GEMINI_RETRY_DELAY):
-    for attempt in range(1, max_attempts + 1):
-        try:
-            return client.models.generate_content(
-                model=GEMINI_MODEL,
-                contents=prompt
-            )
-        except Exception as e:
-            print(f"[GEMINI] Tentativo {attempt}/{max_attempts} fallito: {e}")
-            if attempt < max_attempts:
-                time.sleep(delay * attempt)
-            else:
-                raise
+def is_capacity_error(exc):
+    msg = str(exc)
+    return (
+        "503" in msg
+        or "UNAVAILABLE" in msg
+        or "high demand" in msg.lower()
+    )
+
+
+def generate_with_model_fallback(prompt):
+    last_exception = None
+
+    for model in MODEL_CHAIN:
+        if model_fail_counts.get(model, 0) >= MODEL_FAIL_THRESHOLD:
+            print(f"[GEMINI] Skip modello saturo in questa run: {model}")
+            continue
+
+        for attempt in range(1, MAX_ATTEMPTS_PER_MODEL + 1):
+            try:
+                print(f"[GEMINI] Uso modello: {model}")
+                res = client.models.generate_content(
+                    model=model,
+                    contents=prompt
+                )
+                return res, model
+
+            except Exception as e:
+                last_exception = e
+                print(f"[GEMINI] Modello {model} fallito (tentativo {attempt}/{MAX_ATTEMPTS_PER_MODEL}): {e}")
+
+                if is_capacity_error(e):
+                    model_fail_counts[model] = model_fail_counts.get(model, 0) + 1
+                    break
+                else:
+                    raise
+
+    raise last_exception if last_exception else RuntimeError("Nessun modello Gemini disponibile")
 
 
 def check_gemini():
     try:
-        res = generate_with_retry(
-            'Rispondi solo con questo JSON in una riga: {"ok": true}',
-            max_attempts=2,
-            delay=3
+        res, used_model = generate_with_model_fallback(
+            'Rispondi solo con questo JSON in una riga: {"ok": true}'
         )
         if res and getattr(res, "text", None):
-            print(f"[GEMINI] Modello attivo: {GEMINI_MODEL}")
+            print(f"[GEMINI] Modello attivo: {used_model}")
             return True
         return False
     except Exception as e:
-        print(f"[GEMINI] Modello non disponibile ({GEMINI_MODEL}): {e}")
+        print(f"[GEMINI] Nessun modello disponibile: {e}")
         return False
 
 
@@ -384,7 +444,9 @@ JSON richiesto:
 """
 
     try:
-        res = generate_with_retry(prompt)
+        res, used_model = generate_with_model_fallback(prompt)
+        print(f"[GEMINI] Traduzione ottenuta con: {used_model}")
+
         raw = res.text.strip().replace("```json", "").replace("```", "").strip()
 
         start = raw.find("{")
@@ -563,8 +625,10 @@ def build_candidates(history):
 
 
 def run_bot():
+    run_start = time.time()
+
     if not check_gemini():
-        print("[BOT] Stop: Gemini non disponibile")
+        print("[BOT] Stop: nessun modello Gemini disponibile")
         return
 
     history = load_history()
@@ -578,8 +642,14 @@ def run_bot():
 
     published_count = 0
     processed_count = 0
+    gemini_fail_streak = 0
+    source_fail_counts = {}
 
     for item in queue:
+        if time.time() - run_start > MAX_RUN_SECONDS:
+            print("[BOT] Stop anticipato: superato timeout massimo run")
+            break
+
         if published_count >= MAX_POSTS_PER_RUN:
             break
 
@@ -597,15 +667,37 @@ def run_bot():
         print(f"[BOT] Elaborazione: {title}")
         print(f"[BOT] semantic_id={sem_id}")
 
-        full_text = get_clean_text(link)
-        if not full_text or len(full_text) < 50:
-            print(f"[SKIP] Testo insufficiente: {title}")
+        domain = get_domain(link)
+
+        if source_fail_counts.get(domain, 0) >= MAX_SOURCE_FAILS_PER_DOMAIN:
+            print(f"[SKIP] Dominio temporaneamente escluso in questa run: {domain}")
             continue
+
+        full_text, scrape_error = get_clean_text(link)
+
+        if not full_text:
+            fallback_text = get_summary_fallback(entry)
+            if fallback_text:
+                print(f"[BOT] Uso summary fallback per: {title}")
+                full_text = fallback_text
+            else:
+                print(f"[SKIP] Testo insufficiente: {title}")
+                if scrape_error and scrape_error.startswith("http_"):
+                    source_fail_counts[domain] = source_fail_counts.get(domain, 0) + 1
+                continue
 
         news_data = translate_news(title, full_text)
         if not news_data:
-            print(f"[SKIP] Traduzione fallita: {title}")
+            gemini_fail_streak += 1
+            print(f"[SKIP] Traduzione fallita: {title} (streak={gemini_fail_streak})")
+
+            if gemini_fail_streak >= MAX_GEMINI_FAIL_STREAK:
+                print("[BOT] Stop anticipato: troppi errori consecutivi da Gemini")
+                break
+
             continue
+
+        gemini_fail_streak = 0
 
         if not is_translation_coherent(title, news_data["titolo"]):
             print(f"[SKIP] Titolo incoerente. Orig: {title} | Gen: {news_data['titolo']}")
@@ -633,7 +725,7 @@ def run_bot():
         else:
             print(f"[FAIL] Errore WP ({status}) per: {news_data['titolo']}")
 
-        time.sleep(3)
+        time.sleep(1)
 
     print(f"[BOT] Pubblicati {published_count} articoli su {processed_count} candidati provati")
 
