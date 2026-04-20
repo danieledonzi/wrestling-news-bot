@@ -24,14 +24,13 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 if not GEMINI_API_KEY:
     raise ValueError("GEMINI_API_KEY mancante")
 
-# Ordine modelli: principale -> fallback -> fallback finale
+# Ordine modelli: più leggero/disponibile -> più robusto -> ultimo fallback
 MODEL_CHAIN = [
-    "gemini-2.5-flash",
     "gemini-2.5-flash-lite",
+    "gemini-2.5-flash",
     "gemini-3.0-flash",
 ]
 
-# Se un modello dà 503 per questa soglia, lo saltiamo per il resto della run
 MODEL_FAIL_THRESHOLD = 2
 
 WP_MEDIA_URL = WP_API_URL.replace("/posts", "/media")
@@ -52,26 +51,19 @@ HEADERS = {
 
 SOCIAL_DOMAINS = ["twitter.com", "x.com", "instagram.com", "youtube.com", "youtu.be"]
 
-# Quanti articoli vuoi pubblicare per run
 MAX_POSTS_PER_RUN = 5
-
-# Quanti candidati massimi vuoi provare in una run
 MAX_CANDIDATES_TO_TRY = 10
 
-# Se Gemini fallisce troppe volte di fila, si interrompe la run
 MAX_GEMINI_FAIL_STREAK = 4
-
-# Se un dominio fallisce troppe volte di fila per scraping, viene saltato per la run
 MAX_SOURCE_FAILS_PER_DOMAIN = 3
+MAX_WP_FAIL_STREAK = 3
 
-# Timeout totale run in secondi (15 minuti)
 MAX_RUN_SECONDS = 15 * 60
 
-REQUEST_TIMEOUT_SCRAPE = 15
-REQUEST_TIMEOUT_WP = 15
-REQUEST_TIMEOUT_IMAGE = 15
+REQUEST_TIMEOUT_SCRAPE = 12
+REQUEST_TIMEOUT_WP = 8
+REQUEST_TIMEOUT_IMAGE = 8
 
-# Nessun retry per modello oltre al fallback modello successivo
 MAX_ATTEMPTS_PER_MODEL = 1
 
 STOPWORDS = {
@@ -81,7 +73,8 @@ STOPWORDS = {
     "sunday", "saturday", "2026", "42", "vs", "at", "for", "the",
     "and", "of", "to", "in", "on", "with", "after", "before",
     "from", "new", "former", "status", "original", "internal",
-    "beats", "defeats", "conquers", "retains", "claims", "announces"
+    "beats", "defeats", "conquers", "retains", "claims", "announces",
+    "preview", "how", "watch", "things", "loved", "hated"
 }
 
 NAME_STOPWORDS = {
@@ -99,7 +92,6 @@ session.headers.update({
     "Cache-Control": "no-cache"
 })
 
-# Stato modelli per la singola run
 model_fail_counts = {model: 0 for model in MODEL_CHAIN}
 
 
@@ -205,7 +197,6 @@ def is_translation_coherent(source_title, generated_title):
     src_norm = normalize_for_check(source_title)
     gen_norm = normalize_for_check(generated_title)
 
-    # Prima regola: se il titolo sorgente ha nomi forti, almeno uno deve restare
     names = extract_named_entities_from_title(source_title)
     if names:
         matched_names = 0
@@ -216,7 +207,6 @@ def is_translation_coherent(source_title, generated_title):
         if matched_names >= 1:
             return True
 
-    # Fallback più morbido
     src = get_distinctive_words(source_title)
     gen = get_distinctive_words(generated_title)
 
@@ -365,6 +355,15 @@ def is_capacity_error(exc):
     )
 
 
+def extract_json_object(raw_text):
+    raw = raw_text.strip().replace("```json", "").replace("```", "").strip()
+    start = raw.find("{")
+    end = raw.rfind("}") + 1
+    if start == -1 or end <= start:
+        raise ValueError("JSON object non trovato nella risposta")
+    return json.loads(raw[start:end])
+
+
 def generate_with_model_fallback(prompt):
     last_exception = None
 
@@ -395,12 +394,59 @@ def generate_with_model_fallback(prompt):
     raise last_exception if last_exception else RuntimeError("Nessun modello Gemini disponibile")
 
 
+def generate_and_parse_json(prompt, source_title=None):
+    """
+    Prova i modelli in ordine.
+    Se un modello restituisce testo ma JSON malformato o titolo incoerente,
+    passa al successivo invece di fermarsi.
+    """
+    last_exception = None
+
+    for model in MODEL_CHAIN:
+        if model_fail_counts.get(model, 0) >= MODEL_FAIL_THRESHOLD:
+            print(f"[GEMINI] Skip modello saturo in questa run: {model}")
+            continue
+
+        try:
+            print(f"[GEMINI] Uso modello: {model}")
+            res = client.models.generate_content(
+                model=model,
+                contents=prompt
+            )
+
+            data = extract_json_object(res.text)
+
+            # Se c'è un titolo sorgente, possiamo controllare già qui la coerenza
+            if source_title is not None:
+                generated_title = re.sub(r"<[^<]+?>", "", data.get("titolo", "")).strip()
+                if not generated_title:
+                    raise ValueError("Titolo mancante nel JSON")
+                if not is_translation_coherent(source_title, generated_title):
+                    raise ValueError(f"Titolo incoerente: {generated_title}")
+
+            return data, model
+
+        except Exception as e:
+            last_exception = e
+            msg = str(e)
+            print(f"[GEMINI] Modello {model} scartato: {e}")
+
+            if is_capacity_error(e):
+                model_fail_counts[model] = model_fail_counts.get(model, 0) + 1
+                continue
+
+            # JSON sporco o incoerenza: proviamo il modello successivo
+            continue
+
+    raise last_exception if last_exception else RuntimeError("Nessun modello ha prodotto un output valido")
+
+
 def check_gemini():
     try:
-        res, used_model = generate_with_model_fallback(
+        data, used_model = generate_and_parse_json(
             'Rispondi solo con questo JSON in una riga: {"ok": true}'
         )
-        if res and getattr(res, "text", None):
+        if data:
             print(f"[GEMINI] Modello attivo: {used_model}")
             return True
         return False
@@ -444,14 +490,8 @@ JSON richiesto:
 """
 
     try:
-        res, used_model = generate_with_model_fallback(prompt)
+        data, used_model = generate_and_parse_json(prompt, source_title=source_title)
         print(f"[GEMINI] Traduzione ottenuta con: {used_model}")
-
-        raw = res.text.strip().replace("```json", "").replace("```", "").strip()
-
-        start = raw.find("{")
-        end = raw.rfind("}") + 1
-        data = json.loads(raw[start:end])
 
         titolo = re.sub(r"<[^<]+?>", "", data.get("titolo", "")).strip()
         testo = data.get("testo", "").strip()
@@ -531,7 +571,7 @@ def upload_image_to_wp(image_url):
         return None
 
 
-def post_to_wp(data, img_id, sem_id, url):
+def create_post_without_image(data, sem_id, url):
     try:
         testo_html = data["testo"]
         soup_temp = BeautifulSoup(testo_html, "html.parser")
@@ -552,9 +592,6 @@ def post_to_wp(data, img_id, sem_id, url):
             }
         }
 
-        if img_id:
-            payload["featured_media"] = img_id
-
         res = session.post(
             WP_API_URL,
             json=payload,
@@ -562,16 +599,43 @@ def post_to_wp(data, img_id, sem_id, url):
             timeout=REQUEST_TIMEOUT_WP
         )
 
-        print(f"[WP] Status: {res.status_code}")
-        if res.status_code not in [200, 201]:
-            print(f"[WP] Content-Type risposta: {res.headers.get('Content-Type')}")
-            print(f"[WP] Risposta: {res.text[:500]}")
+        print(f"[WP] Status create: {res.status_code}")
+        if res.status_code == 201:
+            data_json = res.json()
+            return data_json.get("id"), data_json
 
-        return res.status_code
+        print(f"[WP] Content-Type risposta: {res.headers.get('Content-Type')}")
+        print(f"[WP] Risposta: {res.text[:500]}")
+        return None, None
 
     except Exception as e:
-        print(f"[WP] Errore pubblicazione: {e}")
-        return 500
+        print(f"[WP] Errore creazione post: {e}")
+        return None, None
+
+
+def attach_featured_media(post_id, media_id):
+    try:
+        payload = {"featured_media": media_id}
+        post_url = f"{WP_API_URL}/{post_id}"
+
+        res = session.post(
+            post_url,
+            json=payload,
+            auth=(WP_USER, WP_PASSWORD),
+            timeout=REQUEST_TIMEOUT_WP
+        )
+
+        print(f"[WP] Status attach image: {res.status_code}")
+        if res.status_code in [200, 201]:
+            return True
+
+        print(f"[WP] Content-Type risposta: {res.headers.get('Content-Type')}")
+        print(f"[WP] Risposta attach: {res.text[:500]}")
+        return False
+
+    except Exception as e:
+        print(f"[WP] Errore attach immagine al post {post_id}: {e}")
+        return False
 
 
 # =========================
@@ -644,6 +708,7 @@ def run_bot():
     processed_count = 0
     gemini_fail_streak = 0
     source_fail_counts = {}
+    wp_fail_streak = 0
 
     for item in queue:
         if time.time() - run_start > MAX_RUN_SECONDS:
@@ -655,6 +720,14 @@ def run_bot():
 
         if processed_count >= MAX_CANDIDATES_TO_TRY:
             print("[BOT] Raggiunto limite massimo candidati provati")
+            break
+
+        if gemini_fail_streak >= MAX_GEMINI_FAIL_STREAK:
+            print("[BOT] Stop anticipato: troppi errori consecutivi da Gemini")
+            break
+
+        if wp_fail_streak >= MAX_WP_FAIL_STREAK:
+            print("[BOT] Stop anticipato: troppi errori consecutivi da WordPress")
             break
 
         processed_count += 1
@@ -690,11 +763,6 @@ def run_bot():
         if not news_data:
             gemini_fail_streak += 1
             print(f"[SKIP] Traduzione fallita: {title} (streak={gemini_fail_streak})")
-
-            if gemini_fail_streak >= MAX_GEMINI_FAIL_STREAK:
-                print("[BOT] Stop anticipato: troppi errori consecutivi da Gemini")
-                break
-
             continue
 
         gemini_fail_streak = 0
@@ -703,27 +771,36 @@ def run_bot():
             print(f"[SKIP] Titolo incoerente. Orig: {title} | Gen: {news_data['titolo']}")
             continue
 
-        img_url = extract_image_url(entry)
-        if img_url:
-            print(f"[BOT] Immagine trovata: {img_url}")
-        else:
-            print(f"[BOT] Nessuna immagine trovata per: {title}")
-
-        img_id = upload_image_to_wp(img_url) if img_url else None
-
-        status = post_to_wp(
+        # 1) crea prima il post senza immagine
+        post_id, post_json = create_post_without_image(
             data=news_data,
-            img_id=img_id,
             sem_id=sem_id,
             url=link
         )
 
-        if status == 201:
-            print(f"[OK] Pubblicato: {news_data['titolo']}")
-            save_to_history(link, sem_id)
-            published_count += 1
+        if not post_id:
+            wp_fail_streak += 1
+            print(f"[FAIL] Creazione post fallita per: {news_data['titolo']} (wp_streak={wp_fail_streak})")
+            continue
+
+        # il post esiste, quindi resettiamo lo streak WP
+        wp_fail_streak = 0
+
+        # 2) poi proviamo eventualmente a caricare e associare l'immagine
+        img_url = extract_image_url(entry)
+        if img_url:
+            print(f"[BOT] Immagine trovata: {img_url}")
+            img_id = upload_image_to_wp(img_url)
+            if img_id:
+                attached = attach_featured_media(post_id, img_id)
+                if not attached:
+                    print(f"[WP] Immagine non associata al post {post_id}, ma il post è già pubblicato")
         else:
-            print(f"[FAIL] Errore WP ({status}) per: {news_data['titolo']}")
+            print(f"[BOT] Nessuna immagine trovata per: {title}")
+
+        print(f"[OK] Pubblicato: {news_data['titolo']}")
+        save_to_history(link, sem_id)
+        published_count += 1
 
         time.sleep(1)
 
