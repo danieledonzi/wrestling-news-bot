@@ -66,12 +66,12 @@ REQUEST_TIMEOUT_IMAGE = 8
 STOPWORDS = {
     "wwe", "aew", "tna", "nxt", "ufc", "mma",
     "wrestlemania", "night", "title", "titles", "match", "matches",
-    "wins", "win", "revealed", "reportedly", "report", "plans",
+    "wins", "win", "revealed", "reportedly", "plans",
     "sunday", "saturday", "2026", "42", "vs", "at", "for", "the",
     "and", "of", "to", "in", "on", "with", "after", "before",
     "from", "new", "former", "status", "original", "internal",
     "beats", "defeats", "conquers", "retains", "claims", "announces",
-    "preview", "how", "watch", "things", "loved", "hated"
+    "things"
 }
 
 NAME_STOPWORDS = {
@@ -231,12 +231,33 @@ def extract_named_entities_from_title(title):
     return list(dict.fromkeys(cleaned))
 
 
+def contains_any(text, terms):
+    t = normalize_for_check(text)
+    return any(normalize_for_check(term) in t for term in terms)
+
+
 def special_title_consistent(source_title, generated_title):
     src = source_title.lower()
     gen = generated_title.lower()
-    for term in STRICT_TITLE_TERMS:
-        if term in src and term not in gen:
+
+    checks = [
+        ("spoilers", ["spoilers"]),
+        ("results", ["results", "risultati"]),
+        ("report", ["report"]),
+        ("preview", ["preview"]),
+        ("viewership", ["viewership", "ascolti", "auditel"]),
+        ("ratings", ["ratings", "rating"]),
+        ("how to watch", ["come vedere", "how to watch"]),
+        ("confirmed matches", ["match confermati", "confirmed matches"]),
+        ("start time", ["orario", "start time"]),
+        ("winners", ["vincitori", "winner", "winners"]),
+        ("losers", ["sconfitti", "perdenti", "losers"]),
+    ]
+
+    for src_term, gen_terms in checks:
+        if src_term in src and not any(term in gen for term in gen_terms):
             return False
+
     return True
 
 
@@ -256,6 +277,32 @@ def strong_name_drift(source_title, generated_title):
     return False
 
 
+def title_has_core_brands(source_title, generated_title):
+    source = source_title.lower()
+    generated = generated_title.lower()
+
+    brand_groups = [
+        ["wwe"],
+        ["aew"],
+        ["nxt"],
+        ["tna"],
+        ["ufc"],
+        ["raw"],
+        ["smackdown"],
+        ["collision"],
+        ["dynamite"],
+        ["wrestlemania"],
+        ["backlash"],
+    ]
+
+    for group in brand_groups:
+        if any(term in source for term in group):
+            if not any(term in generated for term in group):
+                return False
+
+    return True
+
+
 def is_translation_coherent(source_title, generated_title):
     gen_norm = normalize_for_check(generated_title)
 
@@ -263,6 +310,9 @@ def is_translation_coherent(source_title, generated_title):
         return False
 
     if not special_title_consistent(source_title, generated_title):
+        return False
+
+    if not title_has_core_brands(source_title, generated_title):
         return False
 
     names = extract_named_entities_from_title(source_title)
@@ -275,16 +325,31 @@ def is_translation_coherent(source_title, generated_title):
         if matched_names >= 1:
             return True
 
-    src = get_distinctive_words(source_title)
-    gen = get_distinctive_words(generated_title)
+    src_words = get_distinctive_words(source_title)
+    gen_words = get_distinctive_words(generated_title)
 
-    if not src or not gen:
-        return False
+    if len(src_words) <= 2 or len(gen_words) <= 2:
+        editorial_terms = [
+            ("spoilers", ["spoilers"]),
+            ("results", ["results", "risultati"]),
+            ("report", ["report"]),
+            ("preview", ["preview"]),
+            ("viewership", ["viewership", "ascolti", "auditel"]),
+            ("ratings", ["ratings", "rating"]),
+            ("winners", ["vincitori", "winner", "winners"]),
+            ("losers", ["sconfitti", "perdenti", "losers"]),
+        ]
 
-    common = src.intersection(gen)
-    overlap_ratio = len(common) / max(1, len(src))
+        for src_term, gen_terms in editorial_terms:
+            if src_term in normalize_for_check(source_title) and not contains_any(generated_title, gen_terms):
+                return False
 
-    return len(common) >= 1 or overlap_ratio >= 0.18
+        return True
+
+    common = src_words.intersection(gen_words)
+    overlap_ratio = len(common) / max(1, len(src_words))
+
+    return len(common) >= 1 or overlap_ratio >= 0.15
 
 
 def get_entry_summary(entry):
@@ -824,6 +889,35 @@ def upload_image_to_wp(image_url):
         return None
 
 
+def get_embed_provider_slug(url):
+    u = normalize_embed_url(url).lower()
+    if "twitter.com/" in u or "x.com/" in u:
+        return "twitter"
+    if "instagram.com/" in u:
+        return "instagram"
+    if "youtube.com/" in u or "youtu.be/" in u:
+        return "youtube"
+    if "tiktok.com/" in u:
+        return "tiktok"
+    return ""
+
+
+def make_wp_embed_block(url):
+    url = normalize_embed_url(url)
+    provider = get_embed_provider_slug(url)
+    safe_url = url.replace('"', '&quot;')
+
+    if provider:
+        return (
+            f'<!-- wp:embed {{"url":"{safe_url}","type":"rich","providerNameSlug":"{provider}","responsive":true}} -->'
+            f'<figure class="wp-block-embed is-type-rich is-provider-{provider} wp-block-embed-{provider}>'
+            f'<div class="wp-block-embed__wrapper">{safe_url}</div></figure>'
+            f'<!-- /wp:embed -->'
+        )
+
+    return url
+
+
 def append_embeds_to_html(content_html, embed_urls):
     if not embed_urls:
         return content_html
@@ -833,9 +927,15 @@ def append_embeds_to_html(content_html, embed_urls):
     if not embed_urls:
         return content_html
 
-    embed_block = "".join(f"\n\n{url}\n\n" for url in embed_urls)
+    embed_block = "
 
-    paragraphs = re.findall(r"<p\b[^>]*>.*?</p>", content_html, flags=re.I | re.S)
+" + "
+
+".join(make_wp_embed_block(url) for url in embed_urls) + "
+
+"
+
+    paragraphs = re.findall(r"<p[^>]*>.*?</p>", content_html, flags=re.I | re.S)
     if paragraphs:
         first = paragraphs[0]
         return content_html.replace(first, first + embed_block, 1)
@@ -852,14 +952,18 @@ def create_post_without_image(data, sem_id, url, embed_urls=None):
             href = a.get("href", "")
             if any(sp in href for sp in SOCIAL_DOMAINS):
                 href = normalize_embed_url(href)
-                a.replace_with(f"\n\n{href}\n\n")
+                a.replace_with("\n\n" + make_wp_embed_block(href) + "\n\n")
 
         content_html = str(soup_temp)
         content_html = normalize_x_links_in_text(content_html)
 
         for domain in SOCIAL_DOMAINS:
             pattern = rf'(?<!["\'>])(https?://[^\s<"]*{re.escape(domain)}[^\s<"]*)'
-            content_html = re.sub(pattern, r"\n\n\1\n\n", content_html)
+            content_html = re.sub(
+                pattern,
+                lambda m: "\n\n" + make_wp_embed_block(m.group(1)) + "\n\n",
+                content_html
+            )
 
         content_html = append_embeds_to_html(content_html, embed_urls or [])
 
@@ -1026,6 +1130,7 @@ def run_bot():
         link = entry.link
         title = getattr(entry, "title", "Senza titolo")
         sem_id = item["semantic_id"]
+        title_key = item["title_key"]
 
         print(f"[BOT] Elaborazione: {title}")
         print(f"[BOT] semantic_id={sem_id}")
@@ -1090,7 +1195,7 @@ def run_bot():
             print(f"[BOT] Nessuna immagine trovata per: {title}")
 
         print(f"[OK] Pubblicato: {news_data['titolo']}")
-        save_to_history(link, sem_id)
+        save_to_history(link, sem_id, title_key)
         published_count += 1
 
         time.sleep(1)
