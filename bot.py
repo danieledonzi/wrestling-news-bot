@@ -168,9 +168,40 @@ def save_to_history(url, semantic_id, title_key=""):
 # =========================
 # HELPERS
 # =========================
+
+def fix_mojibake(text):
+    if not text:
+        return text
+
+    suspects = ["Ã", "â€", "â€™", "â€œ", "â€", "â€“", "Â", "¢", ""]
+    if not any(s in text for s in suspects):
+        return text
+
+    candidates = [text]
+
+    try:
+        candidates.append(text.encode("latin1", errors="ignore").decode("utf-8", errors="ignore"))
+    except Exception:
+        pass
+
+    try:
+        step1 = text.encode("latin1", errors="ignore").decode("utf-8", errors="ignore")
+        candidates.append(step1.encode("latin1", errors="ignore").decode("utf-8", errors="ignore"))
+    except Exception:
+        pass
+
+    def score(s):
+        bad = sum(s.count(ch) for ch in ["Ã", "â", "Â", "¢", "", " "])
+        good = sum(s.count(ch) for ch in ["è", "é", "à", "ì", "ò", "ù", "’", "“", "”", "–", "—"])
+        return good - bad
+
+    best = max(candidates, key=score)
+    return best
+
 def sanitize_text(text):
     if not text:
         return ""
+    text = fix_mojibake(text)
     return re.sub(r"\s+", " ", text).strip()
 
 
@@ -816,8 +847,8 @@ JSON richiesto:
         data, used_model = generate_and_parse_json(prompt, source_title=source_title)
         print(f"[GEMINI] Traduzione ottenuta con: {used_model}")
 
-        titolo = re.sub(r"<[^<]+?>", "", data.get("titolo", "")).strip()
-        testo = data.get("testo", "").strip()
+        titolo = fix_mojibake(re.sub(r"<[^<]+?>", "", data.get("titolo", "")).strip())
+        testo = fix_mojibake(data.get("testo", "").strip())
 
         if not titolo or not testo or len(testo) < 50:
             return None
@@ -910,7 +941,7 @@ def make_wp_embed_block(url):
     if provider:
         return (
             f'<!-- wp:embed {{"url":"{safe_url}","type":"rich","providerNameSlug":"{provider}","responsive":true}} -->'
-            f'<figure class="wp-block-embed is-type-rich is-provider-{provider} wp-block-embed-{provider}>'
+            f'<figure class="wp-block-embed is-type-rich is-provider-{provider} wp-block-embed-{provider}">'
             f'<div class="wp-block-embed__wrapper">{safe_url}</div></figure>'
             f'<!-- /wp:embed -->'
         )
@@ -935,7 +966,7 @@ def append_embeds_to_html(content_html, embed_urls):
 
 "
 
-    paragraphs = re.findall(r"<p[^>]*>.*?</p>", content_html, flags=re.I | re.S)
+    paragraphs = re.findall(r"<p\b[^>]*>.*?</p>", content_html, flags=re.I | re.S)
     if paragraphs:
         first = paragraphs[0]
         return content_html.replace(first, first + embed_block, 1)
