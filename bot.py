@@ -958,13 +958,9 @@ def append_embeds_to_html(content_html, embed_urls):
     if not embed_urls:
         return content_html
 
-    embed_block = "
-
-" + "
-
-".join(make_wp_embed_block(url) for url in embed_urls) + "
-
-"
+    embed_block = "\n\n" + "\n\n".join(
+        make_wp_embed_block(url) for url in embed_urls
+    ) + "\n\n"
 
     paragraphs = re.findall(r"<p\b[^>]*>.*?</p>", content_html, flags=re.I | re.S)
     if paragraphs:
