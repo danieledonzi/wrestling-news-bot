@@ -80,9 +80,9 @@ NAME_STOPWORDS = {
     "Raw", "SmackDown", "Collision", "Dynamite", "Rampage"
 }
 
-SPECIAL_TITLE_TERMS = [
-    "preview", "results", "report", "how to watch",
-    "start time", "confirmed matches"
+STRICT_TITLE_TERMS = [
+    "preview", "results", "report", "spoilers", "how to watch",
+    "start time", "confirmed matches", "viewership", "ratings"
 ]
 
 STRONG_NAMES = [
@@ -118,7 +118,7 @@ model_fail_counts = {model: 0 for model in MODEL_CHAIN}
 # HISTORY
 # =========================
 def load_history():
-    history = {"urls": set(), "semantic_ids": set()}
+    history = {"urls": set(), "semantic_ids": set(), "title_keys": set()}
 
     if not os.path.exists(HISTORY_FILE):
         return history
@@ -130,24 +130,19 @@ def load_history():
                 if not line:
                     continue
 
-                if "|" in line:
-                    url, semantic_id = line.split("|", 1)
-                    url = url.strip()
-                    semantic_id = semantic_id.strip()
-
-                    if url:
-                        history["urls"].add(url)
-                    if semantic_id:
-                        history["semantic_ids"].add(semantic_id)
-                else:
-                    history["urls"].add(line)
+                parts = line.split("|")
+                if len(parts) >= 1 and parts[0].strip():
+                    history["urls"].add(parts[0].strip())
+                if len(parts) >= 2 and parts[1].strip():
+                    history["semantic_ids"].add(parts[1].strip())
+                if len(parts) >= 3 and parts[2].strip():
+                    history["title_keys"].add(parts[2].strip())
     except Exception as e:
         print(f"[HISTORY] Errore lettura history: {e}")
 
     return history
 
-
-def save_to_history(url, semantic_id):
+def save_to_history(url, semantic_id, title_key=""):
     records = []
 
     if os.path.exists(HISTORY_FILE):
@@ -157,11 +152,11 @@ def save_to_history(url, semantic_id):
         except Exception as e:
             print(f"[HISTORY] Errore lettura pre-salvataggio: {e}")
 
-    new_record = f"{url}|{semantic_id}"
+    new_record = f"{url}|{semantic_id}|{title_key}".rstrip("|")
     if new_record not in records:
         records.append(new_record)
 
-    records = records[-800:]
+    records = records[-1200:]
 
     try:
         with open(HISTORY_FILE, "w", encoding="utf-8") as f:
@@ -185,6 +180,30 @@ def normalize_for_check(text):
     text = re.sub(r"\s+", " ", text).strip()
     return text
 
+def make_title_key(title):
+    norm = normalize_for_check(title)
+    words = [w for w in norm.split() if w not in STOPWORDS]
+    return "-".join(words[:10])[:160]
+
+def detect_source_category(title, text="", url=""):
+    blob = f"{title} {text} {url}".lower()
+
+    if "nxt" in blob:
+        return 6
+    if "aew" in blob or "dynamite" in blob or "collision" in blob or "rampage" in blob or "all elite" in blob:
+        return 5
+    if "tna" in blob or "impact wrestling" in blob:
+        return 7
+
+    wwe_terms = [
+        "wwe", "wrestlemania", "raw", "smackdown", "royal rumble",
+        "survivor series", "money in the bank", "triple h", "nick khan",
+        "clash in italy", "backlash"
+    ]
+    if any(term in blob for term in wwe_terms):
+        return 4
+
+    return 8
 
 def get_distinctive_words(text):
     words = normalize_for_check(text).split()
@@ -215,7 +234,7 @@ def extract_named_entities_from_title(title):
 def special_title_consistent(source_title, generated_title):
     src = source_title.lower()
     gen = generated_title.lower()
-    for term in SPECIAL_TITLE_TERMS:
+    for term in STRICT_TITLE_TERMS:
         if term in src and term not in gen:
             return False
     return True
@@ -240,6 +259,12 @@ def strong_name_drift(source_title, generated_title):
 def is_translation_coherent(source_title, generated_title):
     gen_norm = normalize_for_check(generated_title)
 
+    if strong_name_drift(source_title, generated_title):
+        return False
+
+    if not special_title_consistent(source_title, generated_title):
+        return False
+
     names = extract_named_entities_from_title(source_title)
     if names:
         matched_names = 0
@@ -247,7 +272,7 @@ def is_translation_coherent(source_title, generated_title):
             parts = [p.lower() for p in name.split() if len(p) > 2]
             if parts and all(p in gen_norm for p in parts):
                 matched_names += 1
-        if matched_names >= 1 and special_title_consistent(source_title, generated_title) and not strong_name_drift(source_title, generated_title):
+        if matched_names >= 1:
             return True
 
     src = get_distinctive_words(source_title)
@@ -259,13 +284,7 @@ def is_translation_coherent(source_title, generated_title):
     common = src.intersection(gen)
     overlap_ratio = len(common) / max(1, len(src))
 
-    if strong_name_drift(source_title, generated_title):
-        return False
-
-    if not special_title_consistent(source_title, generated_title):
-        return False
-
-    return len(common) >= 2 or overlap_ratio >= 0.28
+    return len(common) >= 1 or overlap_ratio >= 0.18
 
 
 def get_entry_summary(entry):
@@ -623,8 +642,20 @@ def clean_json_string(raw_text):
 
 def extract_json_object(raw_text):
     raw = clean_json_string(raw_text)
-    return json.loads(raw)
+    try:
+        return json.loads(raw)
+    except Exception:
+        title_match = re.search(r'"titolo"\s*:\s*"(.*?)"', raw, re.S)
+        text_match = re.search(r'"testo"\s*:\s*"(.*?)"\s*,\s*"categoria"', raw, re.S)
+        cat_match = re.search(r'"categoria"\s*:\s*(\d+)', raw)
 
+        if title_match and text_match:
+            return {
+                "titolo": bytes(title_match.group(1), "utf-8").decode("unicode_escape", errors="ignore"),
+                "testo": bytes(text_match.group(1), "utf-8").decode("unicode_escape", errors="ignore"),
+                "categoria": int(cat_match.group(1)) if cat_match else 8,
+            }
+        raise
 
 def generate_and_parse_json(prompt, source_title=None):
     last_exception = None
@@ -678,9 +709,11 @@ def check_gemini():
         return False
 
 
-def translate_news(source_title, text):
+def translate_news(source_title, text, source_url=""):
     if not text or len(text) < 50:
         return None
+
+    forced_category = detect_source_category(source_title, text, source_url)
 
     prompt = f'''
 Sei un giornalista italiano esperto di wrestling e sport da combattimento.
@@ -699,7 +732,7 @@ REGOLE OBBLIGATORIE:
 9. titolo: senza HTML.
 10. testo: HTML consentito solo con <p>, <b>, <blockquote>, serializzato correttamente dentro JSON con virgolette escape.
 11. categoria deve essere uno di questi numeri: 4, 5, 6, 7, 8.
-12. Se la notizia non è chiaramente WWE, AEW, NXT o TNA, usa categoria 8.
+12. Usa la categoria {forced_category} per questa notizia.
 13. Le citazioni importanti vanno in <blockquote>.
 14. Non scrivere frasi meta come "il testo originale", "non è chiaro", "non specifica", "secondo quanto riportato" se non sono davvero parte della notizia.
 15. Non inserire link social o embed nel testo: ci penserà il sistema dopo.
@@ -711,7 +744,7 @@ TESTO SORGENTE:
 {text}
 
 JSON richiesto:
-{{"titolo":"stringa","testo":"html","categoria":4}}
+{{"titolo":"stringa","testo":"html","categoria":{forced_category}}}
 '''
 
     try:
@@ -727,18 +760,10 @@ JSON richiesto:
         if body_looks_suspicious(testo):
             raise ValueError("Body sospetto o troppo meta")
 
-        try:
-            categoria = int(data.get("categoria", 8))
-        except Exception:
-            categoria = 8
-
-        if categoria not in [4, 5, 6, 7, 8]:
-            categoria = detect_category_hint(source_title, text)
-
         return {
             "titolo": titolo,
             "testo": testo,
-            "categoria": categoria
+            "categoria": forced_category
         }
 
     except Exception as e:
@@ -901,6 +926,7 @@ def attach_featured_media(post_id, media_id):
 def build_candidates(history):
     queue = []
     seen_in_this_run = set()
+    seen_title_keys = set(history["title_keys"])
 
     print("[BOT] Avvio scansione feed")
 
@@ -921,6 +947,7 @@ def build_candidates(history):
                     continue
 
                 sem_id = make_semantic_id_from_title(title)
+                title_key = make_title_key(title)
 
                 if link in history["urls"]:
                     print(f"[SKIP] URL già in history: {link}")
@@ -930,20 +957,26 @@ def build_candidates(history):
                     print(f"[SKIP] semantic_id già in history: {sem_id}")
                     continue
 
-                if sem_id in seen_in_this_run:
+                if title_key and title_key in seen_title_keys:
+                    print(f"[SKIP] titolo già visto: {title}")
+                    continue
+
+                if sem_id in seen_in_this_run or title_key in seen_in_this_run:
                     continue
 
                 seen_in_this_run.add(sem_id)
+                seen_in_this_run.add(title_key)
+
                 queue.append({
                     "entry": entry,
-                    "semantic_id": sem_id
+                    "semantic_id": sem_id,
+                    "title_key": title_key
                 })
 
         except Exception as e:
             print(f"[BOT] Errore feed {feed_url}: {e}")
 
     return queue
-
 
 def run_bot():
     run_start = time.time()
@@ -1019,7 +1052,7 @@ def run_bot():
                     source_fail_counts[domain] = source_fail_counts.get(domain, 0) + 1
                 continue
 
-        news_data = translate_news(title, full_text)
+        news_data = translate_news(title, full_text, source_url=link)
         if not news_data:
             gemini_fail_streak += 1
             print(f"[SKIP] Traduzione fallita: {title} (streak={gemini_fail_streak})")
