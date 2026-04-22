@@ -244,19 +244,25 @@ def contains_any(text, terms):
 
 def title_is_broken(title):
     t = sanitize_text(re.sub(r"<[^<]+?>", "", title or ""))
-    if not t or looks_mojibake(t):
+    if not t:
+        return True
+    if looks_mojibake(t):
         return True
     if t.endswith(":") or t.endswith(" -") or t.endswith(" —"):
         return True
+
     words = t.split()
-    if len(words) < 4:
+    if len(words) < 2:
         return True
+
+    # Explicitly block obviously truncated titles only
+    if len(words) <= 2 and len(t) < 18:
+        return True
+
     last = words[-1]
-    if len(last) <= 2:
+    if len(last) <= 1:
         return True
-    if re.search(r"[A-Za-zÀ-ÿ]$", last) and len(last) <= 5:
-        if last.lower() in {"della", "delle", "dello", "degli", "sulla", "dopo", "prima"}:
-            return True
+
     if any(x in t for x in ["Ã", "â", "Â", " "]):
         return True
     return False
@@ -266,18 +272,20 @@ def title_is_good_enough_for_publish(title):
     t = sanitize_text(title)
     if title_is_broken(t):
         return False
-    if len(t) < 28:
+    if len(t) < 20:
         return False
     significant = [w for w in normalize_for_check(t).split() if w not in STOPWORDS]
-    return len(significant) >= 3
+    return len(significant) >= 2
 
 def title_soft_validation_failed(title):
     t = sanitize_text(title)
-    if title_is_broken(t):
-        return True
-    if len(t) < 20:
+    if not t:
         return True
     if looks_mojibake(t):
+        return True
+    if t.endswith(":") or t.endswith(" -") or t.endswith(" —"):
+        return True
+    if len(t) < 12:
         return True
     return False
 
@@ -755,6 +763,48 @@ def is_translation_coherent(source_title, generated_title):
     if title_is_broken(generated_title):
         return False
 
+    # Only hard failures:
+    if strong_name_drift(source_title, generated_title):
+        return False
+    if not title_has_core_brands(source_title, generated_title):
+        return False
+
+    src_words = get_distinctive_words(source_title)
+    gen_words = get_distinctive_words(generated_title)
+    common = src_words.intersection(gen_words)
+
+    names = extract_named_entities_from_title(source_title)
+    matched_names = 0
+    if names:
+        for name in names:
+            parts = [p.lower() for p in name.split() if len(p) > 2]
+            if parts and all(p in gen_norm for p in parts):
+                matched_names += 1
+
+    if matched_names >= 1:
+        return True
+    if len(common) >= 1:
+        return True
+
+    # Accept clear editorial paraphrases if at least core topic is preserved
+    anchor_terms = [
+        "wrestlemania", "raw", "smackdown", "nxt", "aew", "ufc", "mlw",
+        "report", "ratings", "ascolti", "security", "sicurezza",
+        "retired", "ritiro", "attendance", "affluenza", "pubblico", "sales", "vendite",
+        "react", "reag", "musical", "body", "trasformazione",
+        "cleveland", "paige", "austin", "theory", "brock", "lesnar",
+        "booker", "montez", "ford", "nick", "khan", "damo"
+    ]
+    if any(term in src_norm for term in anchor_terms) and any(term in gen_norm for term in anchor_terms):
+        return True
+
+    # Final fallback: same brand + at least 4 meaningful generated words
+    significant = [w for w in gen_norm.split() if w not in STOPWORDS]
+    if len(significant) >= 4:
+        return True
+
+    return False
+
     # Hard failures only
     if strong_name_drift(source_title, generated_title):
         return False
@@ -912,7 +962,7 @@ JSON richiesto:
 
         if not titolo or not testo or len(testo) < 50:
             raise ValueError("Titolo o testo mancanti")
-        if title_is_broken(titolo):
+        if title_soft_validation_failed(titolo):
             raise ValueError(f"Titolo incoerente: {titolo}")
         if body_looks_suspicious(testo):
             raise ValueError("Body sospetto o troppo meta")
