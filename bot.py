@@ -1,4 +1,3 @@
-
 import os
 import re
 import json
@@ -271,6 +270,16 @@ def title_is_good_enough_for_publish(title):
         return False
     significant = [w for w in normalize_for_check(t).split() if w not in STOPWORDS]
     return len(significant) >= 3
+
+def title_soft_validation_failed(title):
+    t = sanitize_text(title)
+    if title_is_broken(t):
+        return True
+    if len(t) < 20:
+        return True
+    if looks_mojibake(t):
+        return True
+    return False
 
 
 def get_domain(url):
@@ -745,41 +754,54 @@ def is_translation_coherent(source_title, generated_title):
 
     if title_is_broken(generated_title):
         return False
+
+    # Hard failures only
     if strong_name_drift(source_title, generated_title):
-        return False
-    if not special_title_consistent(source_title, generated_title):
         return False
     if not title_has_core_brands(source_title, generated_title):
         return False
 
-    names = extract_named_entities_from_title(source_title)
-    if names:
-        matched = 0
-        for name in names:
-            parts = [p.lower() for p in name.split() if len(p) > 2]
-            if parts and all(p in gen_norm for p in parts):
-                matched += 1
-        if matched >= 1:
-            return True
+    # Special patterns are advisory, not blocking, except on clearly broken titles
+    special_ok = special_title_consistent(source_title, generated_title)
 
     src_words = get_distinctive_words(source_title)
     gen_words = get_distinctive_words(generated_title)
     common = src_words.intersection(gen_words)
 
-    if "winners" in src_norm and "losers" in src_norm and ("vincitori" in gen_norm or "perdenti" in gen_norm):
+    names = extract_named_entities_from_title(source_title)
+    matched_names = 0
+    if names:
+        for name in names:
+            parts = [p.lower() for p in name.split() if len(p) > 2]
+            if parts and all(p in gen_norm for p in parts):
+                matched_names += 1
+
+    # Strong pass conditions
+    if matched_names >= 1:
         return True
-    if "viewership" in src_norm or "ratings" in src_norm:
-        if "ascolti" in gen_norm or "rating" in gen_norm or "report" in gen_norm:
-            return True
-    if "reportedly" in src_norm and ("secondo" in gen_norm or "avrebbe" in gen_norm or "riport" in gen_norm):
-        return True
-    if "react" in src_norm and ("reag" in gen_norm or "reaction" in gen_norm):
-        return True
-    if "says" in src_norm and any(x in gen_norm for x in ["dice", "afferma", "spiega", "ammette", "sostiene"]):
+    if len(common) >= 2:
         return True
 
+    # Softer pass conditions for editorial paraphrases
     overlap_ratio = len(common) / max(1, len(src_words))
-    return len(common) >= 1 or overlap_ratio >= 0.12
+    if len(common) >= 1 and overlap_ratio >= 0.08:
+        return True
+
+    # Titles with brand + one strong name/anchor term are acceptable
+    anchor_terms = [
+        "wrestlemania", "raw", "smackdown", "nxt", "aew", "ufc", "mlw",
+        "report", "ratings", "ascolti", "security", "sicurezza",
+        "retired", "ritiro", "attendance", "pubblico", "sales", "vendite",
+        "react", "reag", "musical", "broadway", "body", "trasformazione"
+    ]
+    if any(term in src_norm for term in anchor_terms) and any(term in gen_norm for term in anchor_terms):
+        return True
+
+    # If special-pattern checker says it's fine and there is at least one overlap, allow it
+    if special_ok and len(common) >= 1:
+        return True
+
+    return False
 
 
 def is_capacity_error(exc):
@@ -854,7 +876,7 @@ def translate_news(source_title, text, source_url=""):
 
     forced_category = detect_source_category(source_title, text, source_url)
 
-    prompt = f'''
+    prompt = f"""
 Sei un giornalista italiano esperto di wrestling e sport da combattimento.
 
 Devi tradurre e rielaborare questa specifica notizia in italiano.
@@ -882,7 +904,7 @@ TESTO SORGENTE:
 
 JSON richiesto:
 {{"titolo":"stringa","testo":"html","categoria":{forced_category}}}
-'''
+"""
     try:
         data, used_model = generate_and_parse_json(prompt)
         titolo = sanitize_text(re.sub(r"<[^<]+?>", "", data.get("titolo", "")).strip())
@@ -892,10 +914,16 @@ JSON richiesto:
             raise ValueError("Titolo o testo mancanti")
         if title_is_broken(titolo):
             raise ValueError(f"Titolo incoerente: {titolo}")
-        if not is_translation_coherent(source_title, titolo):
-            raise ValueError(f"Titolo incoerente: {titolo}")
         if body_looks_suspicious(testo):
             raise ValueError("Body sospetto o troppo meta")
+
+        if not is_translation_coherent(source_title, titolo):
+            print(f"[TRANSLATE] Soft mismatch titolo: {titolo}")
+            return {
+                "titolo": titolo,
+                "testo": testo,
+                "categoria": forced_category
+            }, "soft_mismatch"
 
         print(f"[GEMINI] Traduzione ottenuta con: {used_model}")
         return {"titolo": titolo, "testo": testo, "categoria": forced_category}, "ok"
@@ -1192,13 +1220,24 @@ def run_bot():
             print(f"[SKIP] Traduzione fallita: {title} (model_streak={model_fail_streak}, validation_streak={validation_fail_streak})")
             continue
 
-        model_fail_streak = 0
-        validation_fail_streak = 0
+        if err_type == "model":
+            model_fail_streak += 1
+        else:
+            model_fail_streak = 0
 
-        if not title_is_good_enough_for_publish(news_data["titolo"]):
+        if err_type == "ok":
+            validation_fail_streak = 0
+        elif err_type == "soft_mismatch":
+            print(f"[BOT] Titolo parafrasato ma accettato: {news_data['titolo']}")
+        else:
+            validation_fail_streak += 1
+
+        if title_soft_validation_failed(news_data["titolo"]) or not title_is_good_enough_for_publish(news_data["titolo"]):
             validation_fail_streak += 1
             print(f"[SKIP] Titolo non pubblicabile: {news_data['titolo']}")
             continue
+
+        model_fail_streak = 0
 
         post_id, post_json = create_post_without_image(
             data=news_data,
