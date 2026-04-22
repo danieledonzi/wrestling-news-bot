@@ -290,6 +290,19 @@ def title_soft_validation_failed(title):
     return False
 
 
+def title_hard_invalid(source_title, generated_title):
+    titolo = sanitize_text(generated_title)
+    if title_soft_validation_failed(titolo):
+        return True
+    if title_is_broken(titolo):
+        return True
+    if strong_name_drift(source_title, titolo):
+        return True
+    if not title_has_core_brands(source_title, titolo):
+        return True
+    return False
+
+
 def get_domain(url):
     try:
         return urlparse(url).netloc.lower()
@@ -763,7 +776,7 @@ def is_translation_coherent(source_title, generated_title):
     if title_is_broken(generated_title):
         return False
 
-    # Hard failures only
+    # Hard mismatch only if brand/promotion or strong names drift
     if strong_name_drift(source_title, generated_title):
         return False
     if not title_has_core_brands(source_title, generated_title):
@@ -773,125 +786,38 @@ def is_translation_coherent(source_title, generated_title):
     gen_words = get_distinctive_words(generated_title)
     common = src_words.intersection(gen_words)
 
+    # Named entities
     names = extract_named_entities_from_title(source_title)
     matched_names = 0
-    if names:
-        for name in names:
-            parts = [p.lower() for p in name.split() if len(p) > 2]
-            if parts and all(p in gen_norm for p in parts):
-                matched_names += 1
+    for name in names:
+        parts = [p.lower() for p in name.split() if len(p) > 2]
+        if parts and all(p in gen_norm for p in parts):
+            matched_names += 1
 
     if matched_names >= 1:
         return True
     if len(common) >= 1:
         return True
 
-    # accept most editorial paraphrases if brand/topic is preserved
+    # Soft acceptance for editorial paraphrases around same topic
     soft_terms = [
         "wrestlemania", "raw", "smackdown", "nxt", "aew", "ufc", "mlw",
         "paige", "austin", "theory", "brock", "lesnar", "booker", "nick", "khan",
         "montez", "ford", "damo", "security", "sicurezza", "musical",
-        "attendance", "affluenza", "vendite", "pubblico", "masked", "man"
+        "attendance", "affluenza", "vendite", "pubblico", "masked", "man",
+        "cody", "rhodes", "cleveland", "ritiro", "retired", "update", "aggiornamento",
+        "positive", "positivo", "protection", "protezione"
     ]
     if any(t in src_norm for t in soft_terms) and any(t in gen_norm for t in soft_terms):
         return True
 
-    # final permissive fallback: same brand + non-trivial title
+    # Last fallback: non-trivial title with same brand is acceptable
     sig = [w for w in gen_norm.split() if w not in STOPWORDS]
     return len(sig) >= 4
 
-    # Only hard failures:
-    if strong_name_drift(source_title, generated_title):
-        return False
-    if not title_has_core_brands(source_title, generated_title):
-        return False
-
-    src_words = get_distinctive_words(source_title)
-    gen_words = get_distinctive_words(generated_title)
-    common = src_words.intersection(gen_words)
-
-    names = extract_named_entities_from_title(source_title)
-    matched_names = 0
-    if names:
-        for name in names:
-            parts = [p.lower() for p in name.split() if len(p) > 2]
-            if parts and all(p in gen_norm for p in parts):
-                matched_names += 1
-
-    if matched_names >= 1:
-        return True
-    if len(common) >= 1:
-        return True
-
-    # Accept clear editorial paraphrases if at least core topic is preserved
-    anchor_terms = [
-        "wrestlemania", "raw", "smackdown", "nxt", "aew", "ufc", "mlw",
-        "report", "ratings", "ascolti", "security", "sicurezza",
-        "retired", "ritiro", "attendance", "affluenza", "pubblico", "sales", "vendite",
-        "react", "reag", "musical", "body", "trasformazione",
-        "cleveland", "paige", "austin", "theory", "brock", "lesnar",
-        "booker", "montez", "ford", "nick", "khan", "damo"
-    ]
-    if any(term in src_norm for term in anchor_terms) and any(term in gen_norm for term in anchor_terms):
-        return True
-
-    # Final fallback: same brand + at least 4 meaningful generated words
-    significant = [w for w in gen_norm.split() if w not in STOPWORDS]
-    if len(significant) >= 4:
-        return True
-
-    return False
-
-    # Hard failures only
-    if strong_name_drift(source_title, generated_title):
-        return False
-    if not title_has_core_brands(source_title, generated_title):
-        return False
-
-    # Special patterns are advisory, not blocking, except on clearly broken titles
-    special_ok = special_title_consistent(source_title, generated_title)
-
-    src_words = get_distinctive_words(source_title)
-    gen_words = get_distinctive_words(generated_title)
-    common = src_words.intersection(gen_words)
-
-    names = extract_named_entities_from_title(source_title)
-    matched_names = 0
-    if names:
-        for name in names:
-            parts = [p.lower() for p in name.split() if len(p) > 2]
-            if parts and all(p in gen_norm for p in parts):
-                matched_names += 1
-
-    # Strong pass conditions
-    if matched_names >= 1:
-        return True
-    if len(common) >= 2:
-        return True
-
-    # Softer pass conditions for editorial paraphrases
-    overlap_ratio = len(common) / max(1, len(src_words))
-    if len(common) >= 1 and overlap_ratio >= 0.08:
-        return True
-
-    # Titles with brand + one strong name/anchor term are acceptable
-    anchor_terms = [
-        "wrestlemania", "raw", "smackdown", "nxt", "aew", "ufc", "mlw",
-        "report", "ratings", "ascolti", "security", "sicurezza",
-        "retired", "ritiro", "attendance", "pubblico", "sales", "vendite",
-        "react", "reag", "musical", "broadway", "body", "trasformazione"
-    ]
-    if any(term in src_norm for term in anchor_terms) and any(term in gen_norm for term in anchor_terms):
-        return True
-
-    # If special-pattern checker says it's fine and there is at least one overlap, allow it
-    if special_ok and len(common) >= 1:
-        return True
-
-    return False
-
 
 def is_capacity_error(exc):
+(exc):
     msg = str(exc)
     return "503" in msg or "UNAVAILABLE" in msg or "high demand" in msg.lower()
 
@@ -999,7 +925,7 @@ JSON richiesto:
 
         if not titolo or not testo or len(testo) < 50:
             raise ValueError("Titolo o testo mancanti")
-        if title_soft_validation_failed(titolo):
+        if title_hard_invalid(source_title, titolo):
             raise ValueError(f"Titolo incoerente: {titolo}")
         if body_looks_suspicious(testo):
             raise ValueError("Body sospetto o troppo meta")
