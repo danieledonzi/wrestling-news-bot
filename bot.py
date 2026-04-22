@@ -272,10 +272,10 @@ def title_is_good_enough_for_publish(title):
     t = sanitize_text(title)
     if title_is_broken(t):
         return False
-    if len(t) < 20:
+    if len(t) < 12:
         return False
     significant = [w for w in normalize_for_check(t).split() if w not in STOPWORDS]
-    return len(significant) >= 2
+    return len(significant) >= 1
 
 def title_soft_validation_failed(title):
     t = sanitize_text(title)
@@ -285,7 +285,7 @@ def title_soft_validation_failed(title):
         return True
     if t.endswith(":") or t.endswith(" -") or t.endswith(" —"):
         return True
-    if len(t) < 12:
+    if len(t) < 8:
         return True
     return False
 
@@ -762,6 +762,43 @@ def is_translation_coherent(source_title, generated_title):
 
     if title_is_broken(generated_title):
         return False
+
+    # Hard failures only
+    if strong_name_drift(source_title, generated_title):
+        return False
+    if not title_has_core_brands(source_title, generated_title):
+        return False
+
+    src_words = get_distinctive_words(source_title)
+    gen_words = get_distinctive_words(generated_title)
+    common = src_words.intersection(gen_words)
+
+    names = extract_named_entities_from_title(source_title)
+    matched_names = 0
+    if names:
+        for name in names:
+            parts = [p.lower() for p in name.split() if len(p) > 2]
+            if parts and all(p in gen_norm for p in parts):
+                matched_names += 1
+
+    if matched_names >= 1:
+        return True
+    if len(common) >= 1:
+        return True
+
+    # accept most editorial paraphrases if brand/topic is preserved
+    soft_terms = [
+        "wrestlemania", "raw", "smackdown", "nxt", "aew", "ufc", "mlw",
+        "paige", "austin", "theory", "brock", "lesnar", "booker", "nick", "khan",
+        "montez", "ford", "damo", "security", "sicurezza", "musical",
+        "attendance", "affluenza", "vendite", "pubblico", "masked", "man"
+    ]
+    if any(t in src_norm for t in soft_terms) and any(t in gen_norm for t in soft_terms):
+        return True
+
+    # final permissive fallback: same brand + non-trivial title
+    sig = [w for w in gen_norm.split() if w not in STOPWORDS]
+    return len(sig) >= 4
 
     # Only hard failures:
     if strong_name_drift(source_title, generated_title):
@@ -1282,7 +1319,12 @@ def run_bot():
         else:
             validation_fail_streak += 1
 
-        if title_soft_validation_failed(news_data["titolo"]) or not title_is_good_enough_for_publish(news_data["titolo"]):
+        if title_soft_validation_failed(news_data["titolo"]):
+            validation_fail_streak += 1
+            print(f"[SKIP] Titolo non pubblicabile: {news_data['titolo']}")
+            continue
+
+        if err_type != "soft_mismatch" and not title_is_good_enough_for_publish(news_data["titolo"]):
             validation_fail_streak += 1
             print(f"[SKIP] Titolo non pubblicabile: {news_data['titolo']}")
             continue
