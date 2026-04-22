@@ -63,7 +63,7 @@ MAX_WP_FAIL_STREAK = 3
 MAX_RUN_SECONDS = 15 * 60
 
 REQUEST_TIMEOUT_SCRAPE = 12
-REQUEST_TIMEOUT_WP = 8
+REQUEST_TIMEOUT_WP = 20
 REQUEST_TIMEOUT_IMAGE = 8
 REQUEST_TIMEOUT_SOCIAL_CHECK = 8
 
@@ -88,6 +88,18 @@ STRONG_NAMES = [
     "roman reigns", "cm punk", "brock lesnar", "rhea ripley",
     "jade cargill", "trick williams", "cody rhodes", "oba femi",
     "triple h", "randy orton", "bella twins", "nikki bella", "brie bella"
+]
+
+TOP_INTEREST_NAMES = [
+    "john cena", "the rock", "dwayne johnson", "roman reigns", "cm punk",
+    "cody rhodes", "randy orton", "brock lesnar", "becky lynch",
+    "rhea ripley", "seth rollins", "triple h", "undertaker"
+]
+
+EXTRA_ENTERTAINMENT_TERMS = [
+    "trailer", "movie", "film", "series", "tv", "television", "netflix",
+    "hbo", "amazon prime", "disney", "lawyer", "actor", "actress",
+    "box office", "hollywood", "cinema", "cartoon", "animated"
 ]
 
 BODY_BAD_PATTERNS = [
@@ -172,30 +184,35 @@ def fix_mojibake(text):
     if not text:
         return text
 
-    suspects = ["Ã", "â€", "â€™", "â€œ", "â€\x9d", "â€“", "Â", "¢", ""]
-    if not any(s in text for s in suspects):
-        return text
-
+    text = str(text)
     candidates = [text]
 
-    try:
-        candidates.append(text.encode("latin1", errors="ignore").decode("utf-8", errors="ignore"))
-    except Exception:
-        pass
+    if any(s in text for s in ["Ã", "â€", "â€™", "â€œ", "Â", "¢", "", "Ð", "Ñ"]):
+        try:
+            candidates.append(text.encode("latin1", errors="ignore").decode("utf-8", errors="ignore"))
+        except Exception:
+            pass
+        try:
+            step1 = text.encode("latin1", errors="ignore").decode("utf-8", errors="ignore")
+            candidates.append(step1.encode("latin1", errors="ignore").decode("utf-8", errors="ignore"))
+        except Exception:
+            pass
 
-    try:
-        step1 = text.encode("latin1", errors="ignore").decode("utf-8", errors="ignore")
-        candidates.append(step1.encode("latin1", errors="ignore").decode("utf-8", errors="ignore"))
-    except Exception:
-        pass
+    repaired = text
+    common_repairs = {
+        "â€™": "’", "â€˜": "‘", "â€œ": "“", "â€\x9d": "”", "â€“": "–", "â€”": "—",
+        "Â ": " ", "Â": "", "Ã¨": "è", "Ã©": "é", "Ã ": "à", "Ã¬": "ì", "Ã²": "ò", "Ã¹": "ù",
+    }
+    for bad, good in common_repairs.items():
+        repaired = repaired.replace(bad, good)
+    candidates.append(repaired)
 
     def score(s):
-        bad = sum(s.count(ch) for ch in ["Ã", "â", "Â", "¢", "", " "])
+        bad = sum(s.count(ch) for ch in ["Ã", "â", "Â", "¢", "", " ", "Ð", "Ñ"])
         good = sum(s.count(ch) for ch in ["è", "é", "à", "ì", "ò", "ù", "’", "“", "”", "–", "—"])
-        return good - bad
+        return good - (bad * 3)
 
-    best = max(candidates, key=score)
-    return best
+    return max(candidates, key=score)
 
 
 def sanitize_text(text):
@@ -221,12 +238,17 @@ def make_title_key(title):
 def detect_source_category(title, text="", url=""):
     blob = f"{title} {text} {url}".lower()
 
+    if any(name in blob for name in TOP_INTEREST_NAMES) and any(term in blob for term in EXTRA_ENTERTAINMENT_TERMS):
+        return 8
+
     if "nxt" in blob:
         return 6
     if "aew" in blob or "dynamite" in blob or "collision" in blob or "rampage" in blob or "all elite" in blob:
         return 5
     if "tna" in blob or "impact wrestling" in blob:
         return 7
+    if "mlw" in blob or "bloodsport" in blob or "njpw" in blob or "new japan" in blob or "power slap" in blob:
+        return 8
 
     wwe_terms = [
         "wwe", "wrestlemania", "raw", "smackdown", "royal rumble",
@@ -268,6 +290,54 @@ def extract_named_entities_from_title(title):
 def contains_any(text, terms):
     t = normalize_for_check(text)
     return any(normalize_for_check(term) in t for term in terms)
+
+
+def source_title_patterns(source_title):
+    src = normalize_for_check(source_title)
+    patterns = []
+
+    mapping = [
+        (["spoilers"], ["spoilers", "spoiler"]),
+        (["results"], ["results", "risultati"]),
+        (["report"], ["report"]),
+        (["preview"], ["preview"]),
+        (["viewership"], ["viewership", "ascolti", "auditel"]),
+        (["ratings"], ["ratings", "rating"]),
+        (["winners"], ["vincitori", "winner", "winners"]),
+        (["losers"], ["sconfitti", "perdenti", "losers"]),
+        (["attendance"], ["attendance", "spettatori", "affluenza", "presenze"]),
+        (["highest grossing", "highest-grossing", "grossing"], ["incassi", "incasso", "grossing"]),
+        (["retired", "retire", "retirement"], ["ritir", "retired", "retire"]),
+        (["reportedly"], ["riport", "reportedly", "sarebbe", "avrebbe"]),
+    ]
+
+    for src_terms, gen_terms in mapping:
+        if any(term in src for term in src_terms):
+            patterns.append(gen_terms)
+
+    return patterns
+
+
+def validate_generated_title(title):
+    title = fix_mojibake((title or "").strip())
+    if not title:
+        return False, "Titolo vuoto"
+    if len(title) < 12:
+        return False, f"Titolo troppo corto: {title}"
+    if title.endswith(":"):
+        return False, f"Titolo troncato: {title}"
+    if re.search(r"[ÃâÂ ]", title):
+        return False, f"Titolo con encoding rotto: {title}"
+
+    words = [w for w in re.split(r"\s+", title) if w]
+    if len(words) < 3:
+        return False, f"Titolo troppo breve: {title}"
+
+    last_word = re.sub(r"[^A-Za-zÀ-ÿ0-9'’-]", "", words[-1])
+    if len(last_word) <= 2 and len(words) >= 4:
+        return False, f"Titolo sospetto: {title}"
+
+    return True, ""
 
 
 def special_title_consistent(source_title, generated_title):
@@ -330,6 +400,10 @@ def title_has_core_brands(source_title, generated_title):
 
 
 def is_translation_coherent(source_title, generated_title):
+    ok, _reason = validate_generated_title(generated_title)
+    if not ok:
+        return False
+
     gen_norm = normalize_for_check(generated_title)
 
     if strong_name_drift(source_title, generated_title):
@@ -343,39 +417,33 @@ def is_translation_coherent(source_title, generated_title):
 
     names = extract_named_entities_from_title(source_title)
     if names:
-        matched_names = 0
+        src_name_tokens = set()
         for name in names:
-            parts = [p.lower() for p in name.split() if len(p) > 2]
-            if parts and all(p in gen_norm for p in parts):
-                matched_names += 1
-        if matched_names >= 1:
-            return True
+            for p in name.split():
+                p = p.lower()
+                if len(p) > 2 and p not in STOPWORDS:
+                    src_name_tokens.add(p)
+        matched = sum(1 for tok in src_name_tokens if tok in gen_norm)
+        if src_name_tokens and matched < max(1, min(2, len(src_name_tokens) // 2)) and len(src_name_tokens) >= 2:
+            return False
+
+    for acceptable_terms in source_title_patterns(source_title):
+        if not contains_any(generated_title, acceptable_terms):
+            return False
 
     src_words = get_distinctive_words(source_title)
     gen_words = get_distinctive_words(generated_title)
 
-    if len(src_words) <= 2 or len(gen_words) <= 2:
-        editorial_terms = [
-            ("spoilers", ["spoilers", "spoiler"]),
-            ("results", ["results", "risultati"]),
-            ("report", ["report"]),
-            ("preview", ["preview"]),
-            ("viewership", ["viewership", "ascolti", "auditel"]),
-            ("ratings", ["ratings", "rating"]),
-            ("winners", ["vincitori", "winner", "winners"]),
-            ("losers", ["sconfitti", "perdenti", "losers"]),
-        ]
-
-        for src_term, gen_terms in editorial_terms:
-            if src_term in normalize_for_check(source_title) and not contains_any(generated_title, gen_terms):
-                return False
-
-        return True
-
     common = src_words.intersection(gen_words)
     overlap_ratio = len(common) / max(1, len(src_words))
 
-    return len(common) >= 1 or overlap_ratio >= 0.15
+    if len(common) >= 1 or overlap_ratio >= 0.10:
+        return True
+
+    if source_title_patterns(source_title):
+        return True
+
+    return False
 
 
 def get_entry_summary(entry):
@@ -536,6 +604,17 @@ def is_valid_embed_url(url: str) -> bool:
     return any(re.match(p, url, re.I) for p in patterns)
 
 
+def is_probably_real_facebook_content(url: str) -> bool:
+    u = normalize_embed_url(url).lower()
+    if "facebook.com/" not in u and "fb.watch/" not in u and "m.facebook.com/" not in u:
+        return False
+    good = ["/posts/", "/videos/", "/watch/", "/reel/", "/share/", "story_fbid=", "fb.watch/"]
+    bad = ["/subhojeet.mukherjee.3", "/sharer.php", "/plugins/", "/dialog/", "/share.php", "/profile.php"]
+    if any(b in u for b in bad):
+        return False
+    return any(g in u for g in good)
+
+
 def social_url_is_embeddable(url: str) -> bool:
     url = normalize_embed_url(url)
     provider = get_embed_provider_slug(url)
@@ -543,6 +622,9 @@ def social_url_is_embeddable(url: str) -> bool:
     try:
         if provider == "youtube":
             return True
+
+        if provider == "facebook" and not is_probably_real_facebook_content(url):
+            return False
 
         if provider == "x":
             endpoint = "https://publish.twitter.com/oembed"
@@ -675,31 +757,36 @@ def extract_embeds_from_article_html(html):
     soup = BeautifulSoup(html, "html.parser")
     embeds = []
 
-    for blockquote in soup.find_all("blockquote"):
+    content = soup.select_one("article") or soup.select_one(".columns-holder") or soup.select_one(".cntn-wrp.artl-cnt") or soup.select_one(".sp-cnt") or soup
+
+    for blockquote in content.find_all("blockquote"):
         classes = " ".join(blockquote.get("class", []))
-        if "twitter-tweet" in classes or "instagram-media" in classes:
+        if "twitter-tweet" in classes or "instagram-media" in classes or "tiktok-embed" in classes:
             for a in blockquote.find_all("a", href=True):
                 href = normalize_embed_url(a["href"])
                 if is_valid_embed_url(href):
-                    embeds.append(href)
+                    if get_embed_provider_slug(href) != "facebook" or is_probably_real_facebook_content(href):
+                        embeds.append(href)
 
-    for iframe in soup.find_all("iframe", src=True):
+    for iframe in content.find_all("iframe", src=True):
         src = iframe["src"]
         fb_href = extract_facebook_url_from_iframe(src)
         if fb_href:
             fb_href = normalize_embed_url(fb_href)
-            if is_valid_embed_url(fb_href):
+            if is_valid_embed_url(fb_href) and is_probably_real_facebook_content(fb_href):
                 embeds.append(fb_href)
                 continue
 
         src = normalize_embed_url(src)
         if is_valid_embed_url(src):
-            embeds.append(src)
+            if get_embed_provider_slug(src) != "facebook" or is_probably_real_facebook_content(src):
+                embeds.append(src)
 
-    for a in soup.select("article a[href], .columns-holder a[href], .cntn-wrp.artl-cnt a[href], .sp-cnt a[href]"):
+    for a in content.find_all("a", href=True):
         href = normalize_embed_url(a.get("href", ""))
         if is_valid_embed_url(href):
-            embeds.append(href)
+            if get_embed_provider_slug(href) != "facebook" or is_probably_real_facebook_content(href):
+                embeds.append(href)
 
     return dedupe_preserve_order(embeds)
 
@@ -790,9 +877,13 @@ def get_clean_text(url):
 
 
 def body_looks_suspicious(text):
-    t = sanitize_text(BeautifulSoup(text or "", "html.parser").get_text(" ", strip=True)).lower()
+    raw = text or ""
+    t = sanitize_text(BeautifulSoup(raw, "html.parser").get_text(" ", strip=True)).lower()
 
     if len(t) < 120:
+        return True
+
+    if any(bad in raw for bad in ["Ã", "â", "Â", " "]):
         return True
 
     bad_hits = sum(1 for pat in BODY_BAD_PATTERNS if pat in t)
@@ -806,6 +897,8 @@ def body_looks_suspicious(text):
     return False
 
 
+# =========================
+# GEMINI
 # =========================
 # GEMINI
 # =========================
@@ -904,7 +997,7 @@ def translate_news(source_title, text, source_url=""):
 
     forced_category = detect_source_category(source_title, text, source_url)
 
-    prompt = f'''
+    prompt = f"""
 Sei un giornalista italiano esperto di wrestling e sport da combattimento.
 
 Devi tradurre e rielaborare questa specifica notizia in italiano.
@@ -913,7 +1006,7 @@ REGOLE OBBLIGATORIE:
 1. L'articolo generato deve parlare SOLO della notizia fornita.
 2. Non devi mescolare questa notizia con altre notizie.
 3. Non devi riutilizzare temi, eventi o dettagli di articoli precedenti.
-4. Il titolo deve restare semanticamente aderente al testo sorgente.
+4. Il titolo deve restare semanticamente aderente al testo sorgente ma può essere tradotto in modo naturale in italiano.
 5. Mantieni i nomi propri principali del titolo originale.
 6. Non inventare dettagli, arresti, incidenti, match o dichiarazioni non presenti nel testo.
 7. Restituisci SOLO JSON valido in UNA SOLA RIGA.
@@ -925,6 +1018,8 @@ REGOLE OBBLIGATORIE:
 13. Le citazioni importanti vanno in <blockquote>.
 14. Non scrivere frasi meta come "il testo originale", "non è chiaro", "non specifica", "secondo quanto riportato" se non sono davvero parte della notizia.
 15. Non inserire link social o embed nel testo: ci penserà il sistema dopo.
+16. Non troncare mai il titolo. Non terminare mai con due punti.
+17. Usa correttamente gli accenti italiani: à è é ì ò ù.
 
 TITOLO ORIGINALE:
 {source_title}
@@ -934,7 +1029,7 @@ TESTO SORGENTE:
 
 JSON richiesto:
 {{"titolo":"stringa","testo":"html","categoria":{forced_category}}}
-'''
+"""
 
     try:
         data, used_model = generate_and_parse_json(prompt, source_title=source_title)
@@ -942,6 +1037,10 @@ JSON richiesto:
 
         titolo = fix_mojibake(re.sub(r"<[^<]+?>", "", data.get("titolo", "")).strip())
         testo = fix_mojibake(data.get("testo", "").strip())
+
+        ok_title, reason = validate_generated_title(titolo)
+        if not ok_title:
+            raise ValueError(reason)
 
         if not titolo or not testo or len(testo) < 50:
             return None
@@ -960,6 +1059,8 @@ JSON richiesto:
         return None
 
 
+# =========================
+# WORDPRESS
 # =========================
 # WORDPRESS
 # =========================
@@ -1041,6 +1142,28 @@ def append_embeds_to_html(content_html, embed_urls):
     return content_html + embed_block
 
 
+def find_existing_post_by_source(url, title):
+    try:
+        res = session.get(
+            WP_API_URL,
+            params={"search": title[:40], "per_page": 10, "_fields": "id,title,meta,link"},
+            auth=(WP_USER, WP_PASSWORD),
+            timeout=REQUEST_TIMEOUT_WP
+        )
+        if res.status_code != 200:
+            return None, None
+
+        items = res.json()
+        for item in items:
+            meta = item.get("meta", {}) or {}
+            item_title = BeautifulSoup((item.get("title", {}) or {}).get("rendered", ""), "html.parser").get_text(" ", strip=True)
+            if meta.get("original_url") == url or normalize_for_check(item_title) == normalize_for_check(title):
+                return item.get("id"), item
+    except Exception as e:
+        print(f"[WP] Verifica duplicato fallita: {e}")
+    return None, None
+
+
 def create_post_without_image(data, sem_id, url, embed_urls=None):
     try:
         testo_html = data["testo"]
@@ -1097,6 +1220,14 @@ def create_post_without_image(data, sem_id, url, embed_urls=None):
         print(f"[WP] Risposta: {res.text[:500]}")
         return None, None
 
+    except requests.exceptions.ReadTimeout:
+        print("[WP] Timeout creazione post, verifico se il post è stato creato comunque")
+        existing_id, existing_json = find_existing_post_by_source(url, data["titolo"])
+        if existing_id:
+            print(f"[WP] Post trovato dopo timeout: {existing_id}")
+            return existing_id, existing_json
+        print("[WP] Nessun post trovato dopo timeout")
+        return None, None
     except Exception as e:
         print(f"[WP] Errore creazione post: {e}")
         return None, None
