@@ -3,7 +3,7 @@ import re
 import json
 import time
 import mimetypes
-from urllib.parse import urlparse
+from urllib.parse import urlparse, parse_qs, unquote, urlunparse
 
 import requests
 import feedparser
@@ -47,8 +47,11 @@ HEADERS = {
     )
 }
 
-SOCIAL_DOMAINS = ["twitter.com", "x.com", "instagram.com", "youtube.com", "youtu.be", "tiktok.com"]
-EMBED_DOMAINS = ["twitter.com", "x.com", "instagram.com", "youtube.com", "youtu.be", "tiktok.com"]
+SOCIAL_DOMAINS = [
+    "twitter.com", "x.com", "instagram.com",
+    "youtube.com", "youtu.be", "tiktok.com",
+    "facebook.com", "fb.watch", "m.facebook.com"
+]
 
 MAX_POSTS_PER_RUN = 5
 MAX_CANDIDATES_TO_TRY = 10
@@ -62,6 +65,7 @@ MAX_RUN_SECONDS = 15 * 60
 REQUEST_TIMEOUT_SCRAPE = 12
 REQUEST_TIMEOUT_WP = 8
 REQUEST_TIMEOUT_IMAGE = 8
+REQUEST_TIMEOUT_SOCIAL_CHECK = 8
 
 STOPWORDS = {
     "wwe", "aew", "tna", "nxt", "ufc", "mma",
@@ -79,11 +83,6 @@ NAME_STOPWORDS = {
     "WrestleMania", "Night", "Title", "Sunday", "Saturday",
     "Raw", "SmackDown", "Collision", "Dynamite", "Rampage"
 }
-
-STRICT_TITLE_TERMS = [
-    "preview", "results", "report", "spoilers", "how to watch",
-    "start time", "confirmed matches", "viewership", "ratings"
-]
 
 STRONG_NAMES = [
     "roman reigns", "cm punk", "brock lesnar", "rhea ripley",
@@ -142,6 +141,7 @@ def load_history():
 
     return history
 
+
 def save_to_history(url, semantic_id, title_key=""):
     records = []
 
@@ -168,12 +168,11 @@ def save_to_history(url, semantic_id, title_key=""):
 # =========================
 # HELPERS
 # =========================
-
 def fix_mojibake(text):
     if not text:
         return text
 
-    suspects = ["Ã", "â€", "â€™", "â€œ", "â€", "â€“", "Â", "¢", ""]
+    suspects = ["Ã", "â€", "â€™", "â€œ", "â€\x9d", "â€“", "Â", "¢", ""]
     if not any(s in text for s in suspects):
         return text
 
@@ -198,6 +197,7 @@ def fix_mojibake(text):
     best = max(candidates, key=score)
     return best
 
+
 def sanitize_text(text):
     if not text:
         return ""
@@ -211,10 +211,12 @@ def normalize_for_check(text):
     text = re.sub(r"\s+", " ", text).strip()
     return text
 
+
 def make_title_key(title):
     norm = normalize_for_check(title)
     words = [w for w in norm.split() if w not in STOPWORDS]
     return "-".join(words[:10])[:160]
+
 
 def detect_source_category(title, text="", url=""):
     blob = f"{title} {text} {url}".lower()
@@ -235,6 +237,7 @@ def detect_source_category(title, text="", url=""):
         return 4
 
     return 8
+
 
 def get_distinctive_words(text):
     words = normalize_for_check(text).split()
@@ -272,7 +275,7 @@ def special_title_consistent(source_title, generated_title):
     gen = generated_title.lower()
 
     checks = [
-        ("spoilers", ["spoilers"]),
+        ("spoilers", ["spoilers", "spoiler"]),
         ("results", ["results", "risultati"]),
         ("report", ["report"]),
         ("preview", ["preview"]),
@@ -313,17 +316,9 @@ def title_has_core_brands(source_title, generated_title):
     generated = generated_title.lower()
 
     brand_groups = [
-        ["wwe"],
-        ["aew"],
-        ["nxt"],
-        ["tna"],
-        ["ufc"],
-        ["raw"],
-        ["smackdown"],
-        ["collision"],
-        ["dynamite"],
-        ["wrestlemania"],
-        ["backlash"],
+        ["wwe"], ["aew"], ["nxt"], ["tna"], ["ufc"],
+        ["raw"], ["smackdown"], ["collision"], ["dynamite"],
+        ["wrestlemania"], ["backlash"],
     ]
 
     for group in brand_groups:
@@ -361,7 +356,7 @@ def is_translation_coherent(source_title, generated_title):
 
     if len(src_words) <= 2 or len(gen_words) <= 2:
         editorial_terms = [
-            ("spoilers", ["spoilers"]),
+            ("spoilers", ["spoilers", "spoiler"]),
             ("results", ["results", "risultati"]),
             ("report", ["report"]),
             ("preview", ["preview"]),
@@ -418,9 +413,63 @@ def dedupe_preserve_order(items):
 
 def normalize_social_url(url: str) -> str:
     url = (url or "").strip()
+    if not url:
+        return url
     if re.match(r"^https?://x\.com/", url, re.I):
         url = re.sub(r"^https?://x\.com/", "https://twitter.com/", url, flags=re.I)
     return url
+
+
+def extract_facebook_url_from_iframe(src: str) -> str:
+    if not src:
+        return ""
+    try:
+        parsed = urlparse(src)
+        qs = parse_qs(parsed.query)
+        href = qs.get("href", [""])[0]
+        if href:
+            return unquote(href)
+    except Exception:
+        pass
+    return ""
+
+
+def clean_tracking_params(url: str) -> str:
+    if not url:
+        return url
+
+    try:
+        parsed = urlparse(url)
+        netloc = parsed.netloc.lower()
+        path = parsed.path
+        query = parse_qs(parsed.query)
+
+        if "youtube.com" in netloc and "/watch" in path:
+            v = query.get("v", [""])[0]
+            if v:
+                return f"https://www.youtube.com/watch?v={v}"
+
+        if "youtu.be" in netloc:
+            video_id = path.strip("/").split("/")[0]
+            if video_id:
+                return f"https://www.youtube.com/watch?v={video_id}"
+
+        if "instagram.com" in netloc:
+            clean_path = re.sub(r"/+$", "/", path)
+            return f"https://www.instagram.com{clean_path}"
+
+        if "twitter.com" in netloc or "x.com" in netloc:
+            return f"https://twitter.com{path}"
+
+        if "facebook.com" in netloc or "fb.watch" in netloc or "m.facebook.com" in netloc:
+            return f"https://{netloc}{path}"
+
+        if "tiktok.com" in netloc:
+            return f"https://{netloc}{path}"
+
+        return urlunparse((parsed.scheme, parsed.netloc, parsed.path, "", "", "")) or url
+    except Exception:
+        return url
 
 
 def normalize_embed_url(url: str) -> str:
@@ -436,16 +485,92 @@ def normalize_embed_url(url: str) -> str:
         if video_id:
             return f"https://www.youtube.com/watch?v={video_id}"
 
-    if "youtu.be/" in url:
-        video_id = url.split("youtu.be/")[-1].split("?")[0].strip("/")
-        if video_id:
-            return f"https://www.youtube.com/watch?v={video_id}"
-
-    return url
+    return clean_tracking_params(url)
 
 
 def normalize_x_links_in_text(text: str) -> str:
     return re.sub(r"https?://x\.com/", "https://twitter.com/", text, flags=re.I)
+
+
+def get_embed_provider_slug(url):
+    u = normalize_embed_url(url).lower()
+    if "twitter.com/" in u or "x.com/" in u:
+        return "x"
+    if "instagram.com/" in u:
+        return "instagram"
+    if "youtube.com/" in u or "youtu.be/" in u:
+        return "youtube"
+    if "tiktok.com/" in u:
+        return "tiktok"
+    if "facebook.com/" in u or "fb.watch/" in u or "m.facebook.com/" in u:
+        return "facebook"
+    return ""
+
+
+def get_social_fallback_html(url):
+    provider = get_embed_provider_slug(url)
+    label_map = {
+        "x": "Guarda il post su X",
+        "instagram": "Guarda il post su Instagram",
+        "facebook": "Guarda il post su Facebook",
+        "tiktok": "Guarda il post su TikTok",
+        "youtube": "Guarda il video su YouTube",
+    }
+    label = label_map.get(provider, "Apri il contenuto sul social")
+    safe_url = url.replace('"', "&quot;")
+    return f'<p><a href="{safe_url}" target="_blank" rel="noopener noreferrer">{label}</a></p>'
+
+
+def is_valid_embed_url(url: str) -> bool:
+    url = normalize_embed_url(url)
+
+    patterns = [
+        r"^https?://(www\.)?twitter\.com/[^/]+/status/\d+",
+        r"^https?://(www\.)?instagram\.com/(p|reel|tv)/[^/?#]+/?$",
+        r"^https?://(www\.)?youtube\.com/watch\?v=[^&]+",
+        r"^https?://youtu\.be/[^/?#]+",
+        r"^https?://(www\.)?tiktok\.com/@[^/]+/video/\d+",
+        r"^https?://(www\.)?(facebook\.com|m\.facebook\.com)/.+",
+        r"^https?://(www\.)?fb\.watch/.+",
+    ]
+    return any(re.match(p, url, re.I) for p in patterns)
+
+
+def social_url_is_embeddable(url: str) -> bool:
+    url = normalize_embed_url(url)
+    provider = get_embed_provider_slug(url)
+
+    try:
+        if provider == "youtube":
+            return True
+
+        if provider == "x":
+            endpoint = "https://publish.twitter.com/oembed"
+            res = session.get(endpoint, params={"url": url, "omit_script": "true"}, timeout=REQUEST_TIMEOUT_SOCIAL_CHECK)
+            return res.status_code == 200
+
+        if provider in {"instagram", "facebook", "tiktok"}:
+            res = session.get(url, timeout=REQUEST_TIMEOUT_SOCIAL_CHECK, allow_redirects=True)
+            if res.status_code != 200:
+                return False
+
+            final_url = res.url.lower()
+            body = res.text.lower()
+
+            blocked_markers = [
+                "/accounts/login", "login", "sign up", "log in",
+                "content isn't available", "page isn't available",
+                "contenuto non disponibile", "pagina non disponibile",
+            ]
+            if any(marker in final_url or marker in body for marker in blocked_markers):
+                return False
+
+            return True
+
+    except Exception as e:
+        print(f"[EMBED] Verifica pubblica fallita su {url}: {e}")
+
+    return False
 
 
 def extract_image_url(entry):
@@ -546,27 +671,10 @@ def clean_article_text_from_container(content):
     return full_text[:20000]
 
 
-def is_valid_embed_url(url: str) -> bool:
-    url = normalize_embed_url(url)
-
-    patterns = [
-        r"^https?://(www\.)?twitter\.com/[^/]+/status/\d+",
-        r"^https?://(www\.)?instagram\.com/(p|reel|tv)/[^/?#]+",
-        r"^https?://(www\.)?youtube\.com/watch\?v=[^&]+",
-        r"^https?://youtu\.be/[^/?#]+",
-        r"^https?://(www\.)?tiktok\.com/@[^/]+/video/\d+",
-    ]
-
-    return any(re.match(p, url, re.I) for p in patterns)
-
-
-
-
 def extract_embeds_from_article_html(html):
     soup = BeautifulSoup(html, "html.parser")
     embeds = []
 
-    # Twitter / Instagram blockquote embeds: keep only real post URLs
     for blockquote in soup.find_all("blockquote"):
         classes = " ".join(blockquote.get("class", []))
         if "twitter-tweet" in classes or "instagram-media" in classes:
@@ -575,19 +683,26 @@ def extract_embeds_from_article_html(html):
                 if is_valid_embed_url(href):
                     embeds.append(href)
 
-    # iframe embeds (YouTube etc.)
     for iframe in soup.find_all("iframe", src=True):
-        src = normalize_embed_url(iframe["src"])
+        src = iframe["src"]
+        fb_href = extract_facebook_url_from_iframe(src)
+        if fb_href:
+            fb_href = normalize_embed_url(fb_href)
+            if is_valid_embed_url(fb_href):
+                embeds.append(fb_href)
+                continue
+
+        src = normalize_embed_url(src)
         if is_valid_embed_url(src):
             embeds.append(src)
 
-    # fallback: direct anchors in article body, but only if they are real embeddable posts
     for a in soup.select("article a[href], .columns-holder a[href], .cntn-wrp.artl-cnt a[href], .sp-cnt a[href]"):
         href = normalize_embed_url(a.get("href", ""))
         if is_valid_embed_url(href):
             embeds.append(href)
 
     return dedupe_preserve_order(embeds)
+
 
 def extract_image_from_article_html(html):
     soup = BeautifulSoup(html, "html.parser")
@@ -674,27 +789,6 @@ def get_clean_text(url):
         return "", "generic", "", None, []
 
 
-def detect_category_hint(title, text):
-    blob = f"{title} {text}".lower()
-
-    if "nxt" in blob:
-        return 6
-    if "aew" in blob or "dynamite" in blob or "collision" in blob or "rampage" in blob:
-        return 5
-    if "tna" in blob or "impact wrestling" in blob:
-        return 7
-
-    wwe_terms = [
-        "wwe", "wrestlemania", "raw", "smackdown", "royal rumble",
-        "survivor series", "money in the bank", "triple h", "nick khan",
-        "clash in italy"
-    ]
-    if any(term in blob for term in wwe_terms):
-        return 4
-
-    return 8
-
-
 def body_looks_suspicious(text):
     t = sanitize_text(BeautifulSoup(text or "", "html.parser").get_text(" ", strip=True)).lower()
 
@@ -743,7 +837,7 @@ def extract_json_object(raw_text):
     except Exception:
         title_match = re.search(r'"titolo"\s*:\s*"(.*?)"', raw, re.S)
         text_match = re.search(r'"testo"\s*:\s*"(.*?)"\s*,\s*"categoria"', raw, re.S)
-        cat_match = re.search(r'"categoria"\s*:\s*(\d+)', raw)
+        cat_match = re.search(r'"categoria"\s*:\s*(\d+)', raw, re.S)
 
         if title_match and text_match:
             return {
@@ -752,6 +846,7 @@ def extract_json_object(raw_text):
                 "categoria": int(cat_match.group(1)) if cat_match else 8,
             }
         raise
+
 
 def generate_and_parse_json(prompt, source_title=None):
     last_exception = None
@@ -793,9 +888,7 @@ def generate_and_parse_json(prompt, source_title=None):
 
 def check_gemini():
     try:
-        data, used_model = generate_and_parse_json(
-            'Rispondi solo con questo JSON in una riga: {"ok": true}'
-        )
+        data, used_model = generate_and_parse_json('Rispondi solo con questo JSON in una riga: {"ok": true}')
         if data:
             print(f"[GEMINI] Modello attivo: {used_model}")
             return True
@@ -920,47 +1013,25 @@ def upload_image_to_wp(image_url):
         return None
 
 
-def get_embed_provider_slug(url):
-    u = normalize_embed_url(url).lower()
-    if "twitter.com/" in u or "x.com/" in u:
-        return "twitter"
-    if "instagram.com/" in u:
-        return "instagram"
-    if "youtube.com/" in u or "youtu.be/" in u:
-        return "youtube"
-    if "tiktok.com/" in u:
-        return "tiktok"
-    return ""
-
-
-def make_wp_embed_block(url):
-    url = normalize_embed_url(url)
-    provider = get_embed_provider_slug(url)
-    safe_url = url.replace('"', '&quot;')
-
-    if provider:
-        return (
-            f'<!-- wp:embed {{"url":"{safe_url}","type":"rich","providerNameSlug":"{provider}","responsive":true}} -->'
-            f'<figure class="wp-block-embed is-type-rich is-provider-{provider} wp-block-embed-{provider}">'
-            f'<div class="wp-block-embed__wrapper">{safe_url}</div></figure>'
-            f'<!-- /wp:embed -->'
-        )
-
-    return url
-
-
 def append_embeds_to_html(content_html, embed_urls):
     if not embed_urls:
         return content_html
 
-    embed_urls = [normalize_embed_url(url) for url in embed_urls if url]
-    embed_urls = dedupe_preserve_order(embed_urls)
-    if not embed_urls:
+    chunks = []
+    for url in dedupe_preserve_order(embed_urls):
+        clean_url = normalize_embed_url(url)
+        if not clean_url:
+            continue
+
+        if social_url_is_embeddable(clean_url):
+            chunks.append(clean_url)
+        else:
+            chunks.append(get_social_fallback_html(clean_url))
+
+    if not chunks:
         return content_html
 
-    embed_block = "\n\n" + "\n\n".join(
-        make_wp_embed_block(url) for url in embed_urls
-    ) + "\n\n"
+    embed_block = "\n\n" + "\n\n".join(chunks) + "\n\n"
 
     paragraphs = re.findall(r"<p\b[^>]*>.*?</p>", content_html, flags=re.I | re.S)
     if paragraphs:
@@ -979,7 +1050,8 @@ def create_post_without_image(data, sem_id, url, embed_urls=None):
             href = a.get("href", "")
             if any(sp in href for sp in SOCIAL_DOMAINS):
                 href = normalize_embed_url(href)
-                a.replace_with("\n\n" + make_wp_embed_block(href) + "\n\n")
+                replacement = href if social_url_is_embeddable(href) else get_social_fallback_html(href)
+                a.replace_with("\n\n" + replacement + "\n\n")
 
         content_html = str(soup_temp)
         content_html = normalize_x_links_in_text(content_html)
@@ -988,7 +1060,11 @@ def create_post_without_image(data, sem_id, url, embed_urls=None):
             pattern = rf'(?<!["\'>])(https?://[^\s<"]*{re.escape(domain)}[^\s<"]*)'
             content_html = re.sub(
                 pattern,
-                lambda m: "\n\n" + make_wp_embed_block(m.group(1)) + "\n\n",
+                lambda m: "\n\n" + (
+                    normalize_embed_url(m.group(1))
+                    if social_url_is_embeddable(m.group(1))
+                    else get_social_fallback_html(normalize_embed_url(m.group(1)))
+                ) + "\n\n",
                 content_html
             )
 
@@ -1108,6 +1184,7 @@ def build_candidates(history):
             print(f"[BOT] Errore feed {feed_url}: {e}")
 
     return queue
+
 
 def run_bot():
     run_start = time.time()
