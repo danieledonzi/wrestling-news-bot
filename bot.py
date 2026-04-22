@@ -817,7 +817,6 @@ def is_translation_coherent(source_title, generated_title):
 
 
 def is_capacity_error(exc):
-(exc):
     msg = str(exc)
     return "503" in msg or "UNAVAILABLE" in msg or "high demand" in msg.lower()
 
