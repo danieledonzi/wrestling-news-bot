@@ -255,8 +255,8 @@ def title_is_broken(title):
     if len(words) < 2:
         return True
 
-    # Explicitly block obviously truncated titles only
-    if len(words) <= 2 and len(t) < 18:
+    # Blocca solo casi davvero troncati
+    if len(words) <= 2 and len(t) < 16:
         return True
 
     last = words[-1]
