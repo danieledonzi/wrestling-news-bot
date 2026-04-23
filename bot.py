@@ -817,10 +817,8 @@ def is_translation_coherent(source_title, generated_title):
 
 
 def is_capacity_error(exc):
-(exc):
     msg = str(exc)
     return "503" in msg or "UNAVAILABLE" in msg or "high demand" in msg.lower()
-
 
 def clean_json_string(raw_text):
     raw = raw_text.strip().replace("```json", "").replace("```", "").strip()
