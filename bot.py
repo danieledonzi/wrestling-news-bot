@@ -198,7 +198,109 @@ def sanitize_text(text):
     if not text:
         return ""
     return normalize_whitespace(fix_mojibake(text))
+def refine_title_italian(title):
+    if not title:
+        return title
 
+    t = sanitize_text(title)
+
+    fixes = {
+        "odato": "odiato",
+        "odate": "odiate",
+        "Odato": "Odiato",
+        "Odate": "Odiate",
+        "stella UFC": "fighter UFC",
+        "Stella UFC": "Fighter UFC",
+        "si guadagna un match": "ottiene un match",
+        "Si guadagna un match": "Ottiene un match",
+        "promotion": "promozione",
+        "Promotion": "Promozione",
+        "prevalenza nella cultura pop": "presenza nella cultura pop",
+        "Prevalenza nella cultura pop": "Presenza nella cultura pop",
+        "lancia una sfida rivelatrice": "lancia una sfida",
+        "Lancia una sfida rivelatrice": "Lancia una sfida",
+        "in un'audizione congressuale": "in udienza al Congresso",
+        "In un'audizione congressuale": "In udienza al Congresso",
+    }
+
+    for old, new in fixes.items():
+        t = t.replace(old, new)
+
+    # pulizia spazi
+    t = re.sub(r"\s{2,}", " ", t).strip()
+
+    # snellimento espressioni ridondanti
+    t = re.sub(r"\b(potenzialmente|importante|maggiore)\b", "", t, flags=re.IGNORECASE)
+    t = re.sub(r"\s{2,}", " ", t).strip()
+
+    # titoli opinion/recap più naturali
+    t = re.sub(
+        r"(?i)\b3 cose che ci sono piaciute e 3 che abbiamo odiato\b",
+        "3 cose che ci sono piaciute e 3 no",
+        t,
+    )
+    t = re.sub(
+        r"(?i)\b3 cose che ci sono piaciute e 3 che non ci sono piaciute\b",
+        "3 cose che ci sono piaciute e 3 no",
+        t,
+    )
+
+    # capitalizzazione più naturale
+    if len(t.split()) > 2:
+        t = t[0].upper() + t[1:]
+
+    # limite morbido lunghezza
+    if len(t) > 88:
+        t = t[:85].rsplit(" ", 1)[0].rstrip(" ,:;-") + "..."
+
+    return t
+
+
+def title_needs_soft_cleanup(title):
+    if not title:
+        return True
+    low = title.lower()
+    bad_patterns = [
+        "stella ufc",
+        "rivelatrice",
+        "odato",
+        "odate",
+        "prevalenza",
+    ]
+    if any(p in low for p in bad_patterns):
+        return True
+    if len(title) > 95:
+        return True
+    return False
+
+
+def refine_body_text(text):
+    if not text:
+        return text
+
+    t = text
+
+    # fix lessicali leggeri
+    fixes = {
+        "si guadagna un match": "ottiene un match",
+        "Si guadagna un match": "Ottiene un match",
+        "stella UFC": "fighter UFC",
+        "Stella UFC": "Fighter UFC",
+        "promotion": "promozione",
+        "Promotion": "Promozione",
+        "prevalenza nella cultura pop": "presenza nella cultura pop",
+        "Prevalenza nella cultura pop": "Presenza nella cultura pop",
+    }
+    for old, new in fixes.items():
+        t = t.replace(old, new)
+
+    # spazi doppi
+    t = re.sub(r"\s{2,}", " ", t)
+
+    # sistema spazi tra tag HTML
+    t = re.sub(r">\s+<", "><", t)
+
+    return t.strip()
 
 def normalize_for_check(text):
     text = sanitize_text(text).lower()
@@ -907,8 +1009,8 @@ Sei un giornalista italiano esperto di wrestling e sport da combattimento.
 
 Devi tradurre e rielaborare questa specifica notizia in italiano.
 
-REGOLE OBBLIGATORIE:
-1. L'articolo generato deve parlare SOLO della notizia fornita.
+VINCOLI OBBLIGATORI:
+1. L'articolo deve parlare SOLO della notizia fornita.
 2. Non devi mescolare questa notizia con altre notizie.
 3. Non devi riutilizzare temi, eventi o dettagli di articoli precedenti.
 4. Il titolo deve restare semanticamente aderente al testo sorgente.
@@ -916,11 +1018,36 @@ REGOLE OBBLIGATORIE:
 6. Non inventare dettagli non presenti nel testo.
 7. Restituisci SOLO JSON valido in UNA SOLA RIGA.
 8. Nessun markdown.
-9. titolo: senza HTML.
-10. testo: HTML consentito solo con <p>, <b>, <blockquote>, serializzato correttamente dentro JSON.
-11. categoria deve essere {forced_category}.
+9. "titolo": senza HTML.
+10. "testo": HTML consentito solo con <p>, <b>, <blockquote>, serializzato correttamente dentro JSON.
+11. "categoria" deve essere {forced_category}.
 12. Le citazioni importanti vanno in <blockquote>.
 13. Non inserire link social o embed nel testo.
+
+STILE EDITORIALE:
+- Scrivi in italiano naturale, fluido e giornalistico.
+- NON tradurre parola per parola.
+- Il titolo deve essere breve, chiaro e leggibile.
+- Evita titoli troppo lunghi o enfatici.
+- Evita parole innaturali o rigide come: "stella", "rivelatrice", "insignito", "prevalenza".
+- Nel testo usa frasi medio-brevi e paragrafi ben separati.
+- Evita ripetizioni e formulazioni artificiali.
+- Se c'è una dichiarazione importante, mantienila fedelmente e valorizzala nel pezzo.
+- Non usare tono accademico o burocratico.
+- Il titolo deve sembrare scritto per un sito italiano di news wrestling/sport.
+
+OBIETTIVO:
+Produrre un titolo naturale da sito di news italiano e un articolo scorrevole, fedele e leggibile.
+
+TITOLO ORIGINALE:
+{source_title}
+
+TESTO SORGENTE:
+{text}
+
+JSON richiesto:
+{{"titolo":"stringa","testo":"html","categoria":{forced_category}}}
+"""
 
 TITOLO ORIGINALE:
 {source_title}
@@ -934,8 +1061,14 @@ JSON richiesto:
     try:
         data, used_model = generate_and_parse_json(prompt)
         titolo = sanitize_text(re.sub(r"<[^<]+?>", "", data.get("titolo", "")).strip())
-        testo = sanitize_text(data.get("testo", "").strip())
+        titolo = refine_title_italian(titolo)
 
+        testo = sanitize_text(data.get("testo", "").strip())
+        testo = refine_body_text(testo)
+
+        if title_needs_soft_cleanup(titolo):
+            titolo = refine_title_italian(titolo)
+        
         if not titolo or not testo or len(testo) < 50:
             raise ValueError("Titolo o testo mancanti")
         if title_hard_invalid(source_title, titolo):
