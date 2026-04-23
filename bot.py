@@ -165,7 +165,7 @@ def normalize_whitespace(text):
 def looks_mojibake(text):
     if not text:
         return False
-    suspects = ["Ã", "â€", "â€™", "â€œ", "â€\\x9d", "â€“", "Â", "¢", "", " "]
+    suspects = ["Ã", "â€", "â€™", "â€œ", "â€\\x9d", "â€“", "Â", "¢", "", "�"]
     return any(s in text for s in suspects)
 
 
@@ -188,12 +188,11 @@ def fix_mojibake(text):
         candidates.extend(new_candidates)
 
     def score(s):
-        bad = sum(s.count(ch) for ch in ["Ã", "â", "Â", "¢", "", " "])
+        bad = sum(s.count(ch) for ch in ["Ã", "â", "Â", "¢", "", "�"])
         good = sum(s.count(ch) for ch in ["è", "é", "à", "ì", "ò", "ù", "’", "“", "”", "–", "—", "È", "É", "À"])
         return good - bad
 
     return max(candidates, key=score)
-
 
 def sanitize_text(text):
     if not text:
@@ -254,8 +253,6 @@ def title_is_broken(title):
     words = t.split()
     if len(words) < 2:
         return True
-
-    # Blocca solo casi davvero troncati
     if len(words) <= 2 and len(t) < 16:
         return True
 
@@ -263,7 +260,7 @@ def title_is_broken(title):
     if len(last) <= 1:
         return True
 
-    if any(x in t for x in ["Ã", "â", "Â", " "]):
+    if any(x in t for x in ["Ã", "â", "Â", "�"]):
         return True
     return False
 
