@@ -165,7 +165,7 @@ def normalize_whitespace(text):
 def looks_mojibake(text):
     if not text:
         return False
-    suspects = ["Ã", "â€", "â€™", "â€œ", "â€\\x9d", "â€“", "Â", "¢", "", "�"]
+    suspects = ["Ã", "â€", "â€™", "â€œ", "â€\\x9d", "â€“", "Â", "¢", "", " "]
     return any(s in text for s in suspects)
 
 
@@ -188,7 +188,7 @@ def fix_mojibake(text):
         candidates.extend(new_candidates)
 
     def score(s):
-        bad = sum(s.count(ch) for ch in ["Ã", "â", "Â", "¢", "", "�"])
+        bad = sum(s.count(ch) for ch in ["Ã", "â", "Â", "¢", "", " "])
         good = sum(s.count(ch) for ch in ["è", "é", "à", "ì", "ò", "ù", "’", "“", "”", "–", "—", "È", "É", "À"])
         return good - bad
 
@@ -260,7 +260,7 @@ def title_is_broken(title):
     if len(last) <= 1:
         return True
 
-    if any(x in t for x in ["Ã", "â", "Â", "�"]):
+    if any(x in t for x in ["Ã", "â", "Â", " "]):
         return True
     return False
 
@@ -540,7 +540,10 @@ def parse_content_container(soup, url):
     if "ringsidenews.com" in domain:
         selectors = ["div.cntn-wrp.artl-cnt", "div.sp-cnt", "article", "main"]
     elif "wrestlinginc.com" in domain:
-        selectors = [".columns-holder", "article", "div.post-content", "div.entry-content", "main"]
+        # Important: on WrestlingInc opinion/gallery pages the first .columns-holder
+        # often contains only the intro, while the rest of the article is split across
+        # multiple sibling .news-article sections inside <article>.
+        selectors = ["article", "div.post-content", "div.entry-content", "main", ".columns-holder"]
     else:
         selectors = ["article", "div.post-content", "div.entry-content", "main", "body"]
     for sel in selectors:
@@ -669,7 +672,24 @@ def get_clean_text(url):
         content = parse_content_container(soup, url)
         if not content:
             return "", "empty", html, None, embeds
-        full_text = clean_article_text_from_container(content)
+
+        domain = get_domain(url)
+        if "wrestlinginc.com" in domain and getattr(content, "name", "") == "article":
+            sub_blocks = content.select(".news-article .columns-holder")
+            if sub_blocks:
+                parts = []
+                for block in sub_blocks:
+                    chunk = clean_article_text_from_container(block)
+                    if chunk:
+                        parts.append(chunk)
+                full_text = "
+
+".join(parts)[:20000]
+            else:
+                full_text = clean_article_text_from_container(content)
+        else:
+            full_text = clean_article_text_from_container(content)
+
         page_img = extract_image_from_article_html(html)
         return full_text, None, html, page_img, embeds
     except requests.HTTPError as e:
