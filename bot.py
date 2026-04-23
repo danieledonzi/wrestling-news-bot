@@ -1007,7 +1007,7 @@ def translate_news(source_title, text, source_url=""):
 
     forced_category = detect_source_category(source_title, text, source_url)
 
-prompt = f"""
+    prompt = f"""
 Sei un giornalista italiano esperto di wrestling e sport da combattimento.
 
 Devi tradurre e rielaborare questa specifica notizia in italiano.
@@ -1022,25 +1022,18 @@ VINCOLI OBBLIGATORI:
 7. Restituisci SOLO JSON valido in UNA SOLA RIGA.
 8. Nessun markdown.
 9. "titolo": senza HTML.
-10. "testo": HTML consentito solo con <p>, <b>, <blockquote>, serializzato correttamente dentro JSON.
+10. "testo": HTML consentito solo con <p>, <b>, <blockquote>.
 11. "categoria" deve essere {forced_category}.
 12. Le citazioni importanti vanno in <blockquote>.
 13. Non inserire link social o embed nel testo.
 
 STILE EDITORIALE:
-- Scrivi in italiano naturale, fluido e giornalistico.
+- Scrivi in italiano naturale e giornalistico.
 - NON tradurre parola per parola.
-- Il titolo deve essere breve, chiaro e leggibile.
-- Evita titoli troppo lunghi o enfatici.
-- Evita parole innaturali o rigide come: "stella", "rivelatrice", "insignito", "prevalenza".
-- Nel testo usa frasi medio-brevi e paragrafi ben separati.
-- Evita ripetizioni e formulazioni artificiali.
-- Se c'è una dichiarazione importante, mantienila fedelmente e valorizzala nel pezzo.
-- Non usare tono accademico o burocratico.
-- Il titolo deve sembrare scritto per un sito italiano di news wrestling/sport.
-
-OBIETTIVO:
-Produrre un titolo naturale da sito di news italiano e un articolo scorrevole, fedele e leggibile.
+- Il titolo deve essere breve e leggibile.
+- Evita parole come: "stella", "rivelatrice", "prevalenza".
+- Frasi medio-brevi e fluide.
+- Niente tono accademico.
 
 TITOLO ORIGINALE:
 {source_title}
@@ -1051,8 +1044,10 @@ TESTO SORGENTE:
 JSON richiesto:
 {{"titolo":"stringa","testo":"html","categoria":{forced_category}}}
 """
+
     try:
         data, used_model = generate_and_parse_json(prompt)
+
         titolo = sanitize_text(re.sub(r"<[^<]+?>", "", data.get("titolo", "")).strip())
         titolo = refine_title_italian(titolo)
 
@@ -1062,13 +1057,13 @@ JSON richiesto:
 
         if title_needs_soft_cleanup(titolo):
             titolo = refine_title_italian(titolo)
-        
+
         if not titolo or not testo or len(testo) < 50:
             raise ValueError("Titolo o testo mancanti")
-        if title_needs_soft_cleanup(titolo):
-            titolo = refine_title_italian(titolo)
+
         if title_hard_invalid(source_title, titolo):
             raise ValueError(f"Titolo incoerente: {titolo}")
+
         if body_looks_suspicious(testo):
             raise ValueError("Body sospetto o troppo meta")
 
@@ -1082,6 +1077,7 @@ JSON richiesto:
 
         print(f"[GEMINI] Traduzione ottenuta con: {used_model}")
         return {"titolo": titolo, "testo": testo, "categoria": forced_category}, "ok"
+
     except Exception as e:
         print(f"[TRANSLATE] Errore: {e}")
         return None, ("model" if is_capacity_error(e) else "validation")
