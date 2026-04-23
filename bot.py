@@ -682,9 +682,7 @@ def get_clean_text(url):
                     chunk = clean_article_text_from_container(block)
                     if chunk:
                         parts.append(chunk)
-                full_text = "
-
-".join(parts)[:20000]
+                full_text = "\n\n".join(parts)[:20000]
             else:
                 full_text = clean_article_text_from_container(content)
         else:
