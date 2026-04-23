@@ -57,7 +57,7 @@ MAX_CANDIDATES_TO_TRY = 12
 MAX_RUN_SECONDS = 15 * 60
 
 MAX_MODEL_FAIL_STREAK = 5
-MAX_VALIDATION_FAIL_STREAK = 8
+MAX_VALIDATION_FAIL_STREAK = 12
 MAX_WP_FAIL_STREAK = 3
 
 MODEL_COOLDOWN_THRESHOLD = 4
@@ -221,6 +221,12 @@ def refine_title_italian(title):
         "Lancia una sfida rivelatrice": "Lancia una sfida",
         "in un'audizione congressuale": "in udienza al Congresso",
         "In un'audizione congressuale": "In udienza al Congresso",
+        "ha già il suo prossimo sfidante designato": "ha già il prossimo sfidante",
+        "ha già il suo prossimo sfidante": "ha già il prossimo sfidante",
+        "difende con successo il titolo": "mantiene il titolo",
+        "la partnership con Netflix ha portato la WWE nella cultura pop": "Netflix ha spinto la WWE nella cultura pop",
+        "Lancia Una Sfida Rivelatrice": "Lancia una sfida",
+        "Grande Sfida Per I Titoli Mondiali Di Coppia AEW": "Sfida per i titoli di coppia AEW",
     }
 
     for old, new in fixes.items():
@@ -278,9 +284,8 @@ def refine_body_text(text):
     if not text:
         return text
 
-    t = text
+    t = fix_mojibake(text)
 
-    # fix lessicali leggeri
     fixes = {
         "si guadagna un match": "ottiene un match",
         "Si guadagna un match": "Ottiene un match",
@@ -294,11 +299,9 @@ def refine_body_text(text):
     for old, new in fixes.items():
         t = t.replace(old, new)
 
-    # spazi doppi
-    t = re.sub(r"\s{2,}", " ", t)
-
-    # sistema spazi tra tag HTML
-    t = re.sub(r">\s+<", "><", t)
+    # pulizia spazi solo fuori dai tag
+    t = re.sub(r"[ \t]{2,}", " ", t)
+    t = re.sub(r"\n{3,}", "\n\n", t)
 
     return t.strip()
 
@@ -1048,22 +1051,13 @@ TESTO SORGENTE:
 JSON richiesto:
 {{"titolo":"stringa","testo":"html","categoria":{forced_category}}}
 """
-
-TITOLO ORIGINALE:
-{source_title}
-
-TESTO SORGENTE:
-{text}
-
-JSON richiesto:
-{{"titolo":"stringa","testo":"html","categoria":{forced_category}}}
-"""
     try:
         data, used_model = generate_and_parse_json(prompt)
         titolo = sanitize_text(re.sub(r"<[^<]+?>", "", data.get("titolo", "")).strip())
         titolo = refine_title_italian(titolo)
 
-        testo = sanitize_text(data.get("testo", "").strip())
+        testo = (data.get("testo", "") or "").strip()
+        testo = fix_mojibake(testo)
         testo = refine_body_text(testo)
 
         if title_needs_soft_cleanup(titolo):
@@ -1071,6 +1065,8 @@ JSON richiesto:
         
         if not titolo or not testo or len(testo) < 50:
             raise ValueError("Titolo o testo mancanti")
+        if title_needs_soft_cleanup(titolo):
+            titolo = refine_title_italian(titolo)
         if title_hard_invalid(source_title, titolo):
             raise ValueError(f"Titolo incoerente: {titolo}")
         if body_looks_suspicious(testo):
@@ -1090,6 +1086,23 @@ JSON richiesto:
         print(f"[TRANSLATE] Errore: {e}")
         return None, ("model" if is_capacity_error(e) else "validation")
 
+def wp_media_upload_request(headers_wp, content, retries=2):
+    last_exc = None
+    for attempt in range(retries + 1):
+        try:
+            return session.post(
+                WP_MEDIA_URL,
+                auth=(WP_USER, WP_PASSWORD),
+                headers=headers_wp,
+                data=content,
+                timeout=REQUEST_TIMEOUT_WP
+            )
+        except (requests.Timeout, requests.ConnectionError, requests.RequestException) as e:
+            last_exc = e
+            print(f"[MEDIA] Errore upload (tentativo {attempt + 1}/{retries + 1}): {e}")
+            if attempt < retries:
+                time.sleep(2)
+    raise last_exc
 
 def upload_image_to_wp(image_url):
     if not image_url:
@@ -1116,13 +1129,7 @@ def upload_image_to_wp(image_url):
             "Content-Disposition": f'attachment; filename="{filename}"'
         }
 
-        res = session.post(
-            WP_MEDIA_URL,
-            auth=(WP_USER, WP_PASSWORD),
-            headers=headers_wp,
-            data=img_res.content,
-            timeout=REQUEST_TIMEOUT_WP
-        )
+        res = wp_media_upload_request(headers_wp, img_res.content, retries=2)
 
         if res.status_code == 201:
             media_id = res.json().get("id")
