@@ -1182,6 +1182,25 @@ def find_existing_post_by_url(url):
         print(f"[WP] Verifica post esistente fallita: {e}")
     return None
 
+def wp_create_post_request(payload, retries=2):
+    last_exc = None
+
+    for attempt in range(retries + 1):
+        try:
+            res = session.post(
+                WP_API_URL,
+                json=payload,
+                auth=(WP_USER, WP_PASSWORD),
+                timeout=REQUEST_TIMEOUT_WP
+            )
+            return res
+        except (requests.Timeout, requests.ConnectionError, requests.RequestException) as e:
+            last_exc = e
+            print(f"[WP] Errore creazione post (tentativo {attempt + 1}/{retries + 1}): {e}")
+            if attempt < retries:
+                time.sleep(2)
+
+    raise last_exc
 
 def create_post_without_image(data, sem_id, url, embed_urls=None):
     try:
@@ -1207,20 +1226,17 @@ def create_post_without_image(data, sem_id, url, embed_urls=None):
             "status": "publish",
             "meta": {"semantic_id": sem_id, "original_url": url}
         }
-
+        
         try:
-            res = session.post(
-                WP_API_URL,
-                json=payload,
-                auth=(WP_USER, WP_PASSWORD),
-                timeout=REQUEST_TIMEOUT_WP
-            )
+            res = wp_create_post_request(payload, retries=2)
             print(f"[WP] Status create: {res.status_code}")
             if res.status_code == 201:
                 data_json = res.json()
                 return data_json.get("id"), data_json
+
             print(f"[WP] Risposta: {res.text[:500]}")
             return None, None
+
         except requests.Timeout:
             print("[WP] Timeout in creazione post, controllo se è stato creato comunque...")
             existing_id = find_existing_post_by_url(url)
@@ -1228,7 +1244,6 @@ def create_post_without_image(data, sem_id, url, embed_urls=None):
                 print(f"[WP] Post già presente dopo timeout: {existing_id}")
                 return existing_id, {"id": existing_id}
             raise
-
     except Exception as e:
         print(f"[WP] Errore creazione post: {e}")
         return None, None
