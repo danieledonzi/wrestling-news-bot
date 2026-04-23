@@ -165,7 +165,7 @@ def normalize_whitespace(text):
 def looks_mojibake(text):
     if not text:
         return False
-    suspects = ["Ã", "â€", "â€™", "â€œ", "â€\x9d", "â€“", "Â", "¢", "", " "]
+    suspects = ["Ã", "â€", "â€™", "â€œ", "â€\\x9d", "â€“", "Â", "¢", "", " "]
     return any(s in text for s in suspects)
 
 
@@ -817,6 +817,7 @@ def is_translation_coherent(source_title, generated_title):
 
 
 def is_capacity_error(exc):
+(exc):
     msg = str(exc)
     return "503" in msg or "UNAVAILABLE" in msg or "high demand" in msg.lower()
 
