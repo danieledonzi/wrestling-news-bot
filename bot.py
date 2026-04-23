@@ -1004,7 +1004,7 @@ def translate_news(source_title, text, source_url=""):
 
     forced_category = detect_source_category(source_title, text, source_url)
 
-    prompt = f"""
+prompt = f"""
 Sei un giornalista italiano esperto di wrestling e sport da combattimento.
 
 Devi tradurre e rielaborare questa specifica notizia in italiano.
