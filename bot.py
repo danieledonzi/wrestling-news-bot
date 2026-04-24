@@ -686,9 +686,56 @@ def clean_article_text_from_container(content):
 def extract_embeds_from_article_html(html):
     soup = BeautifulSoup(html, "html.parser")
     embeds = []
+
+    # 1. JSON-LD: alcuni siti, soprattutto AMP, mettono il tweet qui
+    for script in soup.find_all("script", attrs={"type": "application/ld+json"}):
+        try:
+            raw = script.get_text(strip=True)
+            if not raw:
+                continue
+
+            data = json.loads(raw)
+
+            def walk_json(obj):
+                if isinstance(obj, dict):
+                    embed_url = obj.get("embedUrl")
+                    if isinstance(embed_url, str):
+                        href = normalize_embed_url(embed_url)
+                        if is_valid_embed_url(href):
+                            embeds.append(href)
+
+                    for v in obj.values():
+                        walk_json(v)
+
+                elif isinstance(obj, list):
+                    for item in obj:
+                        walk_json(item)
+
+            walk_json(data)
+
+        except Exception:
+            pass
+
     roots = soup.select("article, .columns-holder, .cntn-wrp.artl-cnt, .sp-cnt, main") or [soup]
 
     for root in roots:
+        # 2. Twitter AMP
+        for amp_tw in root.find_all("amp-twitter"):
+            tweet_id = amp_tw.get("data-tweetid")
+            if tweet_id:
+                href = f"https://twitter.com/i/status/{tweet_id}"
+                if is_valid_embed_url(href):
+                    embeds.append(href)
+
+        # 3. Instagram AMP, se mai comparisse
+        for amp_ig in root.find_all("amp-instagram"):
+            shortcode = amp_ig.get("data-shortcode")
+            if shortcode:
+                href = f"https://www.instagram.com/p/{shortcode}/"
+                if is_valid_embed_url(href):
+                    embeds.append(href)
+
+        # 4. Blockquote social classici
         for blockquote in root.find_all("blockquote"):
             classes = " ".join(blockquote.get("class", []))
             if "twitter-tweet" in classes or "instagram-media" in classes:
@@ -697,6 +744,7 @@ def extract_embeds_from_article_html(html):
                     if is_valid_embed_url(href):
                         embeds.append(href)
 
+        # 5. Iframe, incluso Facebook
         for iframe in root.find_all("iframe", src=True):
             src = iframe["src"]
             fb_href = extract_facebook_url_from_iframe(src)
@@ -705,10 +753,12 @@ def extract_embeds_from_article_html(html):
                 if is_valid_embed_url(fb_href):
                     embeds.append(fb_href)
                     continue
+
             src = normalize_embed_url(src)
             if is_valid_embed_url(src):
                 embeds.append(src)
 
+        # 6. Link normali
         for a in root.find_all("a", href=True):
             href = normalize_embed_url(a.get("href", ""))
             if is_valid_embed_url(href):
