@@ -227,6 +227,11 @@ def refine_title_italian(title):
         "la partnership con Netflix ha portato la WWE nella cultura pop": "Netflix ha spinto la WWE nella cultura pop",
         "Lancia Una Sfida Rivelatrice": "Lancia una sfida",
         "Grande Sfida Per I Titoli Mondiali Di Coppia AEW": "Sfida per i titoli di coppia AEW",
+        "malattia quasi le fece saltare": "un malore rischiò di farle saltare",
+        "Malattia quasi le fece saltare": "Un malore rischiò di farle saltare",
+        "quasi le fece saltare": "rischiò di farle saltare",
+        "conserva il titolo": "mantiene il titolo",
+        "Conserva il titolo": "Mantiene il titolo",
     }
 
     for old, new in fixes.items():
@@ -295,6 +300,15 @@ def refine_body_text(text):
         "Promotion": "Promozione",
         "prevalenza nella cultura pop": "presenza nella cultura pop",
         "Prevalenza nella cultura pop": "Presenza nella cultura pop",
+        "la migliore partita": "il miglior match",
+        "partita": "match",
+        "malattia quasi le fece saltare": "un malore rischiò di farle saltare",
+        "quasi le fece saltare": "rischiò di farle saltare",
+        "Ricordo Randy Orton dire": "Ricordo Randy Orton dirmi",
+        "Tu e IYO, avete creato Wrestlemania": "Tu e IYO avete fatto WrestleMania",
+        "creato Wrestlemania": "fatto WrestleMania",
+        "creato WrestleMania": "fatto WrestleMania",
+        "ha detto che": "ha spiegato che",
     }
     for old, new in fixes.items():
         t = t.replace(old, new)
@@ -425,17 +439,19 @@ def dedupe_preserve_order(items):
 
 
 def detect_source_category(title, text="", url=""):
-    blob = f"{title} {text} {url}".lower()
+    title_l = sanitize_text(title).lower()
+    url_l = (url or "").lower()
+    text_l = sanitize_text(text[:1200]).lower()
 
-    if any(name in blob for name in TOP_STAR_NAMES):
-        if not any(term in blob for term in ["wwe", "aew", "nxt", "tna", "mlw", "raw", "smackdown", "collision", "dynamite", "wrestlemania"]):
-            return 8
+    primary = f"{title_l} {url_l}"
 
-    if "nxt" in blob:
+    if "nxt" in primary:
         return 6
-    if "aew" in blob or "dynamite" in blob or "collision" in blob or "rampage" in blob or "all elite" in blob:
+    if any(x in primary for x in ["aew", "dynamite", "collision", "rampage", "all elite"]):
         return 5
-    if "tna" in blob or "impact wrestling" in blob or "mlw" in blob or "indies" in blob:
+    if any(x in primary for x in ["tna", "impact wrestling"]):
+        return 7
+    if any(x in primary for x in ["mlw", "aaa", "njpw", "roh", "indie", "indy"]):
         return 7
 
     wwe_terms = [
@@ -443,8 +459,21 @@ def detect_source_category(title, text="", url=""):
         "survivor series", "money in the bank", "triple h", "nick khan",
         "backlash", "hall of fame", "clash in italy"
     ]
-    if any(term in blob for term in wwe_terms):
+    if any(term in primary for term in wwe_terms):
         return 4
+
+    # fallback sul testo, ma solo se il termine è davvero ricorrente
+    scores = {
+        5: sum(text_l.count(x) for x in ["aew", "dynamite", "collision", "all elite"]),
+        7: sum(text_l.count(x) for x in ["tna", "impact wrestling", "mlw", "aaa", "njpw", "roh"]),
+        6: text_l.count("nxt"),
+        4: sum(text_l.count(x) for x in ["wwe", "raw", "smackdown", "wrestlemania"]),
+    }
+
+    best_cat, best_score = max(scores.items(), key=lambda x: x[1])
+    if best_score >= 2:
+        return best_cat
+
     return 8
 
 
@@ -1084,6 +1113,14 @@ STILE EDITORIALE:
 - Evita parole come: "stella", "rivelatrice", "prevalenza".
 - Frasi medio-brevi e fluide.
 - Niente tono accademico.
+- Se nel testo sorgente è presente una citazione proveniente da tweet, post social o embed, traducila in italiano nel corpo dell'articolo come normale citazione o frase di contesto.
+- L'embed social verrà aggiunto automaticamente dopo: tu non devi inserire URL, ma devi tradurre eventuali frasi o dichiarazioni contenute nel testo sorgente.
+- Usa sempre "match" e non "partita" quando parli di wrestling.
+- Evita traduzioni letterali dall'inglese: privilegia formule naturali per un lettore italiano.
+- Evita titoli costruiti come traduzioni parola-per-parola.
+- Se il titolo suona innaturale, riscrivilo mantenendo il significato.
+- Esempi: "illness almost cost her the title win" diventa "un malore rischiò di farle saltare la vittoria del titolo".
+- Le frasi citate devono restare fedeli, ma in italiano naturale.
 
 TITOLO ORIGINALE:
 {source_title}
