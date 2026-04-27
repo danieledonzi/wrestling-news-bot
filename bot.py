@@ -1089,7 +1089,7 @@ def translate_news(source_title, text, source_url=""):
     prompt = f"""
 Sei un giornalista italiano esperto di wrestling e sport da combattimento.
 
-Devi tradurre e rielaborare questa specifica notizia in italiano.
+Devi tradurre e rielaborare questa specifica notizia in italiano. Se il risultato sembra una traduzione dall’inglese, riscrivilo automaticamente in forma più naturale prima di restituirlo.
 
 VINCOLI OBBLIGATORI:
 1. L'articolo deve parlare SOLO della notizia fornita.
@@ -1107,20 +1107,61 @@ VINCOLI OBBLIGATORI:
 13. Non inserire link social o embed nel testo.
 
 STILE EDITORIALE:
-- Scrivi in italiano naturale e giornalistico.
-- NON tradurre parola per parola.
-- Il titolo deve essere breve e leggibile.
-- Evita parole come: "stella", "rivelatrice", "prevalenza".
-- Frasi medio-brevi e fluide.
-- Niente tono accademico.
-- Se nel testo sorgente è presente una citazione proveniente da tweet, post social o embed, traducila in italiano nel corpo dell'articolo come normale citazione o frase di contesto.
-- L'embed social verrà aggiunto automaticamente dopo: tu non devi inserire URL, ma devi tradurre eventuali frasi o dichiarazioni contenute nel testo sorgente.
-- Usa sempre "match" e non "partita" quando parli di wrestling.
-- Evita traduzioni letterali dall'inglese: privilegia formule naturali per un lettore italiano.
-- Evita titoli costruiti come traduzioni parola-per-parola.
-- Se il titolo suona innaturale, riscrivilo mantenendo il significato.
-- Esempi: "illness almost cost her the title win" diventa "un malore rischiò di farle saltare la vittoria del titolo".
-- Le frasi citate devono restare fedeli, ma in italiano naturale.
+
+- NON stai traducendo: stai RISCRIVENDO l'articolo come se fosse stato scritto direttamente in italiano da un giornalista.
+
+- L'obiettivo è un italiano naturale, fluido e realistico per un sito di news sportive italiano.
+
+- Evita qualsiasi costruzione che sembri una traduzione dall’inglese.
+
+- Regola fondamentale:
+  se una frase suona come una traduzione, va riscritta.
+
+- Usa formule tipiche del giornalismo sportivo italiano.
+
+ESEMPI DI TRASFORMAZIONE:
+
+❌ "SmackDown di WWE"
+✅ "SmackDown"
+
+❌ "durante l'episodio di WWE Raw"
+✅ "nell’ultima puntata di Raw"
+
+❌ "la star ha rivelato"
+✅ "ha raccontato" / "ha spiegato"
+
+❌ "si è aperto riguardo"
+✅ "ha parlato di"
+
+❌ "ha affrontato una sfida"
+✅ "ha combattuto" / "è salito sul ring"
+
+❌ "è stato coinvolto in un match"
+✅ "ha preso parte a un match"
+
+❌ "ha fatto il suo ritorno"
+✅ "è tornato"
+
+❌ "ha ottenuto una vittoria"
+✅ "ha vinto"
+
+- Evita parole artificiose o innaturali come:
+  "stella", "rivelatrice", "prevalenza", "coinvolto in una dinamica", "all’interno della compagnia"
+
+- Preferisci verbi semplici e diretti.
+
+- Le frasi devono essere:
+  brevi, scorrevoli e naturali.
+
+- Il testo deve sembrare scritto da un umano, non da un traduttore automatico.
+
+- Mantieni il gergo wrestling:
+  match, title, promo, segment, storyline NON vanno tradotti.
+
+- NON aggiungere enfasi artificiale.
+- NON usare toni clickbait.
+
+- Se il titolo originale è innaturale in italiano, riscrivilo mantenendo il significato ma rendendolo naturale.
 
 TITOLO ORIGINALE:
 {source_title}
