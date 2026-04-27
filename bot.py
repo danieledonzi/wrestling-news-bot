@@ -101,7 +101,30 @@ BODY_BAD_PATTERNS = [
     "the source text",
     "does not specify",
     "it is not clear",
+    "ringside news",
+    "wrestling inc",
+    "copertura live",
+    "hub dedicato",
+    "share your thoughts",
+    "stay tuned",
 ]
+
+SOURCE_PROMO_PATTERNS = [
+    r"ringside\s+news",
+    r"wrestling\s+inc",
+    r"wrestlinginc",
+    r"continuer(à|a)\s+a\s+(fornire|seguire|coprire)",
+    r"copertura\s+live",
+    r"copertura\s+punto\s+per\s+punto",
+    r"hub\s+dedicato",
+    r"resta(te)?\s+sintonizzat",
+    r"condivid(i|ete)\s+(la tua|le vostre)?\s*(opinione|opinioni|pensieri)",
+    r"sezione\s+commenti",
+    r"commenti\s+qui\s+sotto",
+    r"fateci\s+sapere",
+]
+
+SOURCE_PROMO_RE = re.compile("|".join(SOURCE_PROMO_PATTERNS), re.I)
 
 client = genai.Client(api_key=GEMINI_API_KEY)
 
@@ -318,6 +341,19 @@ def refine_body_text(text):
     t = re.sub(r"\n{3,}", "\n\n", t)
 
     return t.strip()
+
+def remove_source_promos_from_html(html):
+    if not html:
+        return html
+
+    soup = BeautifulSoup(html, "html.parser")
+
+    for tag in soup.find_all(["p", "blockquote", "li"]):
+        txt = sanitize_text(tag.get_text(" ", strip=True))
+        if SOURCE_PROMO_RE.search(txt):
+            tag.decompose()
+
+    return str(soup)
 
 def normalize_for_check(text):
     text = sanitize_text(text).lower()
@@ -1105,6 +1141,8 @@ VINCOLI OBBLIGATORI:
 11. "categoria" deve essere {forced_category}.
 12. Le citazioni importanti vanno in <blockquote>.
 13. Non inserire link social o embed nel testo.
+14. Rimuovi completamente ogni riferimento alla testata originale, alla fonte, al sito sorgente, alla copertura live, agli hub dedicati e agli inviti ai commenti.
+15. Queste frasi non devono essere tradotte né riformulate: vanno eliminate.
 
 STILE EDITORIALE:
 
@@ -1162,6 +1200,8 @@ ESEMPI DI TRASFORMAZIONE:
 - NON usare toni clickbait.
 
 - Se il titolo originale è innaturale in italiano, riscrivilo mantenendo il significato ma rendendolo naturale.
+- Non citare mai Ringside News, Wrestling Inc. o la testata originale nel corpo dell'articolo.
+- La fonte verrà gestita automaticamente a fondo pagina.
 
 TITOLO ORIGINALE:
 {source_title}
@@ -1182,6 +1222,7 @@ JSON richiesto:
         testo = (data.get("testo", "") or "").strip()
         testo = fix_mojibake(testo)
         testo = refine_body_text(testo)
+        testo = remove_source_promos_from_html(testo)
 
         if title_needs_soft_cleanup(titolo):
             titolo = refine_title_italian(titolo)
@@ -1349,6 +1390,8 @@ def create_post_without_image(data, sem_id, url, embed_urls=None):
 
         content_html = normalize_x_links_in_text(str(soup_temp))
         content_html = append_embeds_to_html(content_html, embed_urls or [])
+        safe_source_url = url.replace('"', "&quot;")
+        content_html += f'\n\n<hr><p><a href="{safe_source_url}" target="_blank" rel="nofollow noopener noreferrer"><b>FONTE</b></a></p>'
 
         payload = {
             "title": data["titolo"],
