@@ -461,16 +461,75 @@ def get_domain(url):
     except Exception:
         return ""
 
+def canonical_embed_key(url: str) -> str:
+    """
+    Chiave unica per deduplicare embed social equivalenti.
+    Esempio:
+    https://www.instagram.com/p/DXm0Tz2kbdA/
+    https://www.instagram.com/reel/DXm0Tz2kbdA/
+    diventano entrambi:
+    instagram:DXm0Tz2kbdA
+    """
+    url = normalize_embed_url(url or "").strip()
 
+    try:
+        parsed = urlparse(url)
+        netloc = parsed.netloc.lower().replace("www.", "")
+        path = parsed.path.strip("/")
+
+        # Instagram: p/reel/tv con stesso shortcode = stesso contenuto
+        if netloc == "instagram.com":
+            m = re.match(r"^(p|reel|tv)/([^/?#]+)/?$", path, re.I)
+            if m:
+                shortcode = m.group(2)
+                return f"instagram:{shortcode}"
+
+        # Twitter/X
+        if netloc in {"twitter.com", "x.com"}:
+            m = re.search(r"/status/(\d+)", parsed.path)
+            if m:
+                return f"x:{m.group(1)}"
+
+        # YouTube
+        if "youtube.com" in netloc:
+            qs = parse_qs(parsed.query)
+            video_id = qs.get("v", [""])[0]
+            if video_id:
+                return f"youtube:{video_id}"
+
+        if "youtu.be" in netloc:
+            video_id = path.split("/")[0]
+            if video_id:
+                return f"youtube:{video_id}"
+
+        # TikTok
+        if netloc.endswith("tiktok.com"):
+            m = re.search(r"/video/(\d+)", parsed.path)
+            if m:
+                return f"tiktok:{m.group(1)}"
+
+        return url.lower().rstrip("/")
+
+    except Exception:
+        return url.lower().rstrip("/")
+        
 def dedupe_preserve_order(items):
     seen = set()
     out = []
+
     for item in items:
         item = (item or "").strip()
-        if not item or item in seen:
+        if not item:
             continue
-        seen.add(item)
+
+        key = canonical_embed_key(item)
+
+        if key in seen:
+            continue
+
+        seen.add(key)
         out.append(item)
+
     return out
 
 
@@ -829,7 +888,7 @@ def extract_embeds_from_article_html(html):
             if is_valid_embed_url(href):
                 embeds.append(href)
 
-    return dedupe_preserve_order(embeds)
+    return dedupe_preserve_order([normalize_embed_url(e) for e in embeds])
 
 
 def extract_image_from_article_html(html):
