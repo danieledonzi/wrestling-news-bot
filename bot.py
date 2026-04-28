@@ -284,11 +284,53 @@ def refine_title_italian(title):
         t = t[0].upper() + t[1:]
 
     # limite morbido lunghezza
-    if len(t) > 88:
-        t = t[:85].rsplit(" ", 1)[0].rstrip(" ,:;-") + "..."
+    # limite morbido lunghezza: NON troncare frasi in modo cieco
+MAX_TITLE_LEN = 115
+
+if len(t) > MAX_TITLE_LEN:
+    cut = t[:MAX_TITLE_LEN].rsplit(" ", 1)[0].rstrip(" ,:;-")
+    if len(cut) >= 45:
+        t = cut + "..."
 
     return t
 
+def canonical_embed_key(url: str) -> str:
+    url = normalize_embed_url(url or "").strip()
+
+    try:
+        parsed = urlparse(url)
+        netloc = parsed.netloc.lower().replace("www.", "")
+        path = parsed.path.strip("/")
+
+        if netloc == "instagram.com":
+            m = re.match(r"^(p|reel|tv)/([^/?#]+)/?$", path, re.I)
+            if m:
+                return f"instagram:{m.group(2)}"
+
+        if netloc in {"twitter.com", "x.com"}:
+            m = re.search(r"/status/(\d+)", parsed.path)
+            if m:
+                return f"x:{m.group(1)}"
+
+        if "youtube.com" in netloc:
+            video_id = parse_qs(parsed.query).get("v", [""])[0]
+            if video_id:
+                return f"youtube:{video_id}"
+
+        if "youtu.be" in netloc:
+            video_id = path.split("/")[0]
+            if video_id:
+                return f"youtube:{video_id}"
+
+        if netloc.endswith("tiktok.com"):
+            m = re.search(r"/video/(\d+)", parsed.path)
+            if m:
+                return f"tiktok:{m.group(1)}"
+
+        return url.lower().rstrip("/")
+
+    except Exception:
+        return url.lower().rstrip("/")
 
 def title_needs_soft_cleanup(title):
     if not title:
@@ -439,6 +481,21 @@ def title_soft_validation_failed(title):
         return True
     if len(t) < 8:
         return True
+
+    bad_endings = [
+        "è stata",
+        "è stato",
+        "ha detto",
+        "ha spiegato",
+        "secondo",
+        "dopo",
+        "prima di",
+        "con",
+        "per",
+        "su",
+        "di",
+        "che",
+    ]
     return False
 
 
@@ -523,15 +580,13 @@ def dedupe_preserve_order(items):
             continue
 
         key = canonical_embed_key(item)
-
         if key in seen:
             continue
 
         seen.add(key)
-        out.append(item)
+        out.append(normalize_embed_url(item))
 
     return out
-
 
 def detect_source_category(title, text="", url=""):
     title_l = sanitize_text(title).lower()
@@ -888,8 +943,7 @@ def extract_embeds_from_article_html(html):
             if is_valid_embed_url(href):
                 embeds.append(href)
 
-    return dedupe_preserve_order([normalize_embed_url(e) for e in embeds])
-
+    return dedupe_preserve_order(embeds)
 
 def extract_image_from_article_html(html):
     soup = BeautifulSoup(html, "html.parser")
