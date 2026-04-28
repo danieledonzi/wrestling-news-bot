@@ -221,6 +221,7 @@ def sanitize_text(text):
     if not text:
         return ""
     return normalize_whitespace(fix_mojibake(text))
+    
 def refine_title_italian(title):
     if not title:
         return title
@@ -260,14 +261,11 @@ def refine_title_italian(title):
     for old, new in fixes.items():
         t = t.replace(old, new)
 
-    # pulizia spazi
     t = re.sub(r"\s{2,}", " ", t).strip()
 
-    # snellimento espressioni ridondanti
     t = re.sub(r"\b(potenzialmente|importante|maggiore)\b", "", t, flags=re.IGNORECASE)
     t = re.sub(r"\s{2,}", " ", t).strip()
 
-    # titoli opinion/recap più naturali
     t = re.sub(
         r"(?i)\b3 cose che ci sono piaciute e 3 che abbiamo odiato\b",
         "3 cose che ci sono piaciute e 3 no",
@@ -279,21 +277,17 @@ def refine_title_italian(title):
         t,
     )
 
-    # capitalizzazione più naturale
     if len(t.split()) > 2:
         t = t[0].upper() + t[1:]
 
-    # limite morbido lunghezza
-    # limite morbido lunghezza: NON troncare frasi in modo cieco
-MAX_TITLE_LEN = 115
+    MAX_TITLE_LEN = 115
 
-if len(t) > MAX_TITLE_LEN:
-    cut = t[:MAX_TITLE_LEN].rsplit(" ", 1)[0].rstrip(" ,:;-")
-    if len(cut) >= 45:
-        t = cut + "..."
+    if len(t) > MAX_TITLE_LEN:
+        cut = t[:MAX_TITLE_LEN].rsplit(" ", 1)[0].rstrip(" ,:;-")
+        if len(cut) >= 45:
+            t = cut + "..."
 
     return t
-
 def canonical_embed_key(url: str) -> str:
     url = normalize_embed_url(url or "").strip()
 
@@ -496,6 +490,11 @@ def title_soft_validation_failed(title):
         "di",
         "che",
     ]
+
+    low = t.lower().strip(" .,:;!?")
+    if any(low.endswith(ending) for ending in bad_endings):
+        return True
+
     return False
 
 
