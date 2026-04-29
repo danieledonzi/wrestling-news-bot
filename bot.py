@@ -139,29 +139,46 @@ model_fail_counts = {model: 0 for model in MODEL_CHAIN}
 
 
 def load_history():
-    history = {"urls": set(), "semantic_ids": set(), "title_keys": set()}
+    history = {
+        "urls": set(),
+        "semantic_ids": set(),
+        "title_keys": set(),
+        "story_fingerprints": set(),
+        "news_core_keys": set(),
+    }
+
     if not os.path.exists(HISTORY_FILE):
         return history
+
     try:
         with open(HISTORY_FILE, "r", encoding="utf-8") as f:
             for line in f.read().splitlines():
                 line = line.strip()
                 if not line:
                     continue
+
                 parts = line.split("|")
+
                 if len(parts) >= 1 and parts[0].strip():
                     history["urls"].add(parts[0].strip())
                 if len(parts) >= 2 and parts[1].strip():
                     history["semantic_ids"].add(parts[1].strip())
                 if len(parts) >= 3 and parts[2].strip():
                     history["title_keys"].add(parts[2].strip())
+                if len(parts) >= 4 and parts[3].strip():
+                    history["story_fingerprints"].add(parts[3].strip())
+                if len(parts) >= 5 and parts[4].strip():
+                    history["news_core_keys"].add(parts[4].strip())
+
     except Exception as e:
         print(f"[HISTORY] Errore lettura history: {e}")
+
     return history
 
 
-def save_to_history(url, semantic_id, title_key=""):
+def save_to_history(url, semantic_id, title_key="", story_fingerprint="", news_core_key=""):
     records = []
+
     if os.path.exists(HISTORY_FILE):
         try:
             with open(HISTORY_FILE, "r", encoding="utf-8") as f:
@@ -169,11 +186,13 @@ def save_to_history(url, semantic_id, title_key=""):
         except Exception as e:
             print(f"[HISTORY] Errore lettura pre-salvataggio: {e}")
 
-    new_record = f"{url}|{semantic_id}|{title_key}".rstrip("|")
+    new_record = f"{url}|{semantic_id}|{title_key}|{story_fingerprint}|{news_core_key}".rstrip("|")
+
     if new_record not in records:
         records.append(new_record)
 
     records = records[-1500:]
+
     try:
         with open(HISTORY_FILE, "w", encoding="utf-8") as f:
             f.write("\n".join(records) + "\n")
@@ -221,7 +240,6 @@ def sanitize_text(text):
     if not text:
         return ""
     return normalize_whitespace(fix_mojibake(text))
-    
 def refine_title_italian(title):
     if not title:
         return title
@@ -258,21 +276,20 @@ def refine_title_italian(title):
         "Conserva il titolo": "Mantiene il titolo",
     }
 
-    for old, new in fixes.items():
-        t = t.replace(old, new)
+    for old, new_value in fixes.items():
+        t = t.replace(old, new_value)
 
     t = re.sub(r"\s{2,}", " ", t).strip()
-
-    t = re.sub(r"\b(potenzialmente|importante|maggiore)\b", "", t, flags=re.IGNORECASE)
+    t = re.sub(r"(potenzialmente|importante|maggiore)", "", t, flags=re.IGNORECASE)
     t = re.sub(r"\s{2,}", " ", t).strip()
 
     t = re.sub(
-        r"(?i)\b3 cose che ci sono piaciute e 3 che abbiamo odiato\b",
+        r"(?i)3 cose che ci sono piaciute e 3 che abbiamo odiato",
         "3 cose che ci sono piaciute e 3 no",
         t,
     )
     t = re.sub(
-        r"(?i)\b3 cose che ci sono piaciute e 3 che non ci sono piaciute\b",
+        r"(?i)3 cose che ci sono piaciute e 3 che non ci sono piaciute",
         "3 cose che ci sono piaciute e 3 no",
         t,
     )
@@ -288,6 +305,7 @@ def refine_title_italian(title):
             t = cut + "..."
 
     return t
+
 def canonical_embed_key(url: str) -> str:
     url = normalize_embed_url(url or "").strip()
 
@@ -403,6 +421,106 @@ def make_title_key(title):
     return "-".join(words[:12])[:180]
 
 
+def make_story_fingerprint(title, text):
+    """
+    Fingerprint semantico leggero per evitare la stessa news da fonti diverse.
+    Usa titolo + prime frasi dell'articolo.
+    """
+    title = sanitize_text(title)
+    text = sanitize_text(text)
+
+    sentences = re.split(r"(?<=[.!?])\s+", text)
+    lead = " ".join(sentences[:6])
+
+    combined = normalize_for_check(f"{title} {lead}")
+
+    extra_stopwords = {
+        "said", "says", "say", "told", "reveals", "revealed",
+        "report", "reports", "reported", "according", "source",
+        "news", "article", "update", "updates", "officially",
+        "during", "while", "another", "latest", "recent",
+        "could", "would", "should", "also", "now",
+    }
+
+    words = []
+    seen = set()
+
+    for w in combined.split():
+        if len(w) <= 2:
+            continue
+        if w in STOPWORDS or w in extra_stopwords:
+            continue
+        if w in seen:
+            continue
+
+        seen.add(w)
+        words.append(w)
+
+    return "-".join(words[:24])[:220]
+
+
+def story_fingerprint_similarity(a, b):
+    if not a or not b:
+        return 0.0
+
+    sa = set(a.split("-"))
+    sb = set(b.split("-"))
+
+    if not sa or not sb:
+        return 0.0
+
+    intersection = len(sa.intersection(sb))
+    smaller = min(len(sa), len(sb))
+
+    return intersection / smaller if smaller else 0.0
+
+
+def is_duplicate_story_fingerprint(candidate_fp, known_fps):
+    if not candidate_fp:
+        return False
+
+    for old_fp in known_fps:
+        if not old_fp:
+            continue
+
+        if candidate_fp == old_fp:
+            return True
+
+        similarity = story_fingerprint_similarity(candidate_fp, old_fp)
+
+        # Soglia prudente: blocca doppioni evidenti ma non news solo vagamente simili.
+        if similarity >= 0.72:
+            return True
+
+    return False
+
+
+def make_news_core_key(title, text):
+    """
+    Chiave tematica per bloccare news uguali con titoli diversi tra fonti diverse.
+    Esempio: NXT + CW + PLE + broadcast rights + deal.
+    """
+    combined = normalize_for_check(f"{title} {text[:1500]}")
+    tokens = set(combined.split())
+
+    core_terms = [
+        "wwe", "aew", "nxt", "tna", "ufc", "mlw",
+        "cw", "netflix", "espn", "peacock", "youtube",
+        "premium", "live", "events", "ple", "ples", "broadcast",
+        "rights", "deal", "network", "exclusive",
+        "raw", "smackdown", "dynamite", "collision", "rampage",
+        "contract", "multi", "year", "streaming", "television",
+    ]
+
+    found = [term for term in core_terms if term in tokens]
+
+    # Evita chiavi troppo generiche, tipo solo "wwe-nxt".
+    if len(found) < 4:
+        return ""
+
+    return "-".join(sorted(set(found)))
+
+
 def get_distinctive_words(text):
     words = normalize_for_check(text).split()
     return {w for w in words if len(w) > 2 and w not in STOPWORDS}
@@ -490,11 +608,6 @@ def title_soft_validation_failed(title):
         "di",
         "che",
     ]
-
-    low = t.lower().strip(" .,:;!?")
-    if any(low.endswith(ending) for ending in bad_endings):
-        return True
-
     return False
 
 
@@ -1608,6 +1721,8 @@ def run_bot():
 
     history = load_history()
     queue = build_candidates(history)
+    seen_story_fingerprints = set(history.get("story_fingerprints", set()))
+    seen_news_core_keys = set(history.get("news_core_keys", set()))
 
     if not queue:
         print("[BOT] Nessuna news nuova trovata")
@@ -1671,6 +1786,19 @@ def run_bot():
                     source_fail_counts[domain] = source_fail_counts.get(domain, 0) + 1
                 continue
 
+        story_fingerprint = make_story_fingerprint(title, full_text)
+        news_core_key = make_news_core_key(title, full_text)
+
+        if is_duplicate_story_fingerprint(story_fingerprint, seen_story_fingerprints):
+            print(f"[SKIP] News probabilmente già pubblicata da altra fonte: {title}")
+            print(f"[SKIP] story_fingerprint={story_fingerprint}")
+            continue
+
+        if news_core_key and news_core_key in seen_news_core_keys:
+            print(f"[SKIP] News core già pubblicata da altra fonte: {title}")
+            print(f"[SKIP] news_core_key={news_core_key}")
+            continue
+
         news_data, err_type = translate_news(title, full_text, source_url=link)
         if not news_data:
             if err_type == "model":
@@ -1730,7 +1858,10 @@ def run_bot():
             print(f"[BOT] Nessuna immagine trovata per: {title}")
 
         print(f"[OK] Pubblicato: {news_data['titolo']}")
-        save_to_history(link, sem_id, title_key)
+        save_to_history(link, sem_id, title_key, story_fingerprint, news_core_key)
+        seen_story_fingerprints.add(story_fingerprint)
+        if news_core_key:
+            seen_news_core_keys.add(news_core_key)
         published_count += 1
         time.sleep(1)
 
