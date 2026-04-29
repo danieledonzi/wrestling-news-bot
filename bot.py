@@ -386,6 +386,12 @@ def refine_body_text(text):
         "creato Wrestlemania": "fatto WrestleMania",
         "creato WrestleMania": "fatto WrestleMania",
         "ha detto che": "ha spiegato che",
+        "degli chop": "delle chop",
+        "Degli chop": "Delle chop",
+        "gli chop": "le chop",
+        "Gli chop": "Le chop",
+        "match a squadre miste": "mixed tag team match",
+        "Match a squadre miste": "Mixed tag team match",
     }
     for old, new in fixes.items():
         t = t.replace(old, new)
@@ -949,7 +955,7 @@ def parse_content_container(soup, url):
     return soup.body
 
 
-def clean_article_text_from_container(content):
+def clean_article_text_from_container(content, max_chars=20000):
     if not content:
         return ""
     for trash in content(["script", "style", "nav", "footer", "header", "aside", "form", "noscript", "iframe"]):
@@ -959,7 +965,8 @@ def clean_article_text_from_container(content):
         ".breadcrumbs", ".breadcrumb", "#pagination", ".srp", ".related_link",
         ".amp-related-posts-title", ".amp-sidebar", ".amp-ad-wrapper", "amp-ad",
         ".sharethis-inline-share-buttons", ".social-share", ".social-wrap", ".sharedaddy",
-        ".author-box", ".byline", ".sidebar", ".comment-respond"
+        ".author-box", ".byline", ".sidebar", ".comment-respond",
+        ".disqus-comment-container", ".under-art", ".zergnet-widget"
     ]:
         for node in content.select(bad_sel):
             node.decompose()
@@ -971,8 +978,97 @@ def clean_article_text_from_container(content):
         if len(text) > 20 and text not in seen:
             seen.add(text)
             cleaned_parts.append(text)
-    return "\n\n".join(cleaned_parts)[:20000]
 
+    full = "\n\n".join(cleaned_parts)
+    if max_chars is not None and max_chars > 0:
+        return full[:max_chars]
+    return full
+
+
+def is_results_article(source_title="", source_url="", text=""):
+    probe = normalize_for_check(f"{source_title} {source_url} {text[:500]}")
+    if not probe:
+        return False
+    result_terms = ["results", "risultati", "risultato"]
+    show_terms = ["raw", "smackdown", "nxt", "dynamite", "collision", "rampage", "impact", "wwe", "aew", "tna"]
+    return any(term in probe for term in result_terms) and any(term in probe for term in show_terms)
+
+
+def extract_wrestlinginc_article_text(content, source_title="", source_url=""):
+    sections = content.select(".news-article")
+    if not sections:
+        return clean_article_text_from_container(content)
+
+    parts = []
+    seen = set()
+
+    for section in sections:
+        heading = section.find(["h2", "h3"])
+        if heading:
+            h_text = sanitize_text(heading.get_text(" ", strip=True))
+            if len(h_text) > 3 and h_text not in seen:
+                seen.add(h_text)
+                parts.append(h_text)
+
+        blocks = section.select(".columns-holder") or [section]
+        for block in blocks:
+            chunk = clean_article_text_from_container(block, max_chars=None)
+            if not chunk:
+                continue
+            for piece in [x.strip() for x in chunk.split("\n\n") if x.strip()]:
+                if piece not in seen:
+                    seen.add(piece)
+                    parts.append(piece)
+
+    full_text = "\n\n".join(parts)
+
+    if is_results_article(source_title, source_url, full_text):
+        print(f"[SCRAPE] Articolo results rilevato: testo completo ({len(full_text)} caratteri)")
+        return full_text[:60000]
+
+    return full_text[:20000]
+
+
+def extract_result_match_terms(source_text):
+    terms = []
+    for line in (source_text or "").splitlines():
+        clean = sanitize_text(line).strip()
+        if not clean or len(clean) > 180:
+            continue
+        low = clean.lower()
+        if " vs" in low or "winner" in low or "winners" in low or "we hear from" in low:
+            words = re.findall(r"\b[A-Z][A-Za-z'’.:-]{2,}(?:\s+[A-Z][A-Za-z'’.:-]{2,}){0,2}", clean)
+            names = []
+            for w in words:
+                nw = normalize_for_check(w)
+                if nw and nw not in {"winner", "winners", "north american championship"}:
+                    names.append(nw)
+            if names:
+                terms.append(names[:4])
+    return terms
+
+
+def result_article_integrity_warning(source_text, generated_html):
+    checks = extract_result_match_terms(source_text)
+    if not checks:
+        return ""
+
+    generated = normalize_for_check(BeautifulSoup(generated_html or "", "html.parser").get_text(" ", strip=True))
+    important = []
+    important.append(checks[0])
+    important.append(checks[-1])
+    if len(checks) > 2:
+        important.append(checks[len(checks)//2])
+
+    missing_groups = []
+    for group in important:
+        present = sum(1 for term in group if term in generated)
+        if group and present == 0:
+            missing_groups.append(group)
+
+    if missing_groups:
+        return f"Possibile articolo results incompleto: mancano riferimenti a {missing_groups[:2]}"
+    return ""
 
 def extract_embeds_from_article_html(html):
     soup = BeautifulSoup(html, "html.parser")
@@ -1119,19 +1215,15 @@ def get_clean_text(url):
             return "", "empty", html, None, embeds
 
         domain = get_domain(url)
+        page_title = sanitize_text(soup.title.get_text(" ", strip=True)) if soup.title else ""
         if "wrestlinginc.com" in domain and getattr(content, "name", "") == "article":
-            sub_blocks = content.select(".news-article .columns-holder")
-            if sub_blocks:
-                parts = []
-                for block in sub_blocks:
-                    chunk = clean_article_text_from_container(block)
-                    if chunk:
-                        parts.append(chunk)
-                full_text = "\n\n".join(parts)[:20000]
-            else:
-                full_text = clean_article_text_from_container(content)
+            full_text = extract_wrestlinginc_article_text(content, page_title, url)
         else:
-            full_text = clean_article_text_from_container(content)
+            max_chars = None if is_results_article(page_title, url, "") else 20000
+            full_text = clean_article_text_from_container(content, max_chars=max_chars)
+            if is_results_article(page_title, url, full_text):
+                print(f"[SCRAPE] Articolo results rilevato: testo completo ({len(full_text)} caratteri)")
+                full_text = full_text[:60000]
 
         page_img = extract_image_from_article_html(html)
         return full_text, None, html, page_img, embeds
@@ -1346,6 +1438,24 @@ def translate_news(source_title, text, source_url=""):
         return None, "validation"
 
     forced_category = detect_source_category(source_title, text, source_url)
+    results_mode = is_results_article(source_title, source_url, text)
+
+    results_instructions = """
+MODALITA SPECIALE RISULTATI SHOW:
+- Questo e' un articolo di risultati/recap di uno show.
+- Non devi trattarlo come una news breve.
+- Devi coprire l'intero show dall'inizio alla fine.
+- Se il testo sorgente e' lungo, puoi accorciare i dettagli delle fasi di lotta, ma NON devi saltare match, promo, segmenti, vincitori o sviluppi finali.
+- Mantieni l'ordine cronologico dello show.
+- Usa una struttura chiara con paragrafi e, quando utile, <b>Nome match/segmento</b> all'inizio del paragrafo.
+- Ogni match deve indicare il vincitore se presente nel sorgente.
+- L'ultimo segmento dello show deve essere incluso.
+- I nomi dei tipi di match e delle stipulazioni restano in inglese: tag team match, mixed tag team match, triple threat match, fatal four-way, cage match, ladder match, street fight, no disqualification match.
+- "chop" e' femminile: scrivi "le chop", "delle chop".
+""" if results_mode else """
+- I nomi dei tipi di match e delle stipulazioni restano in inglese: tag team match, mixed tag team match, triple threat match, fatal four-way, cage match, ladder match, street fight, no disqualification match.
+- "chop" e' femminile: scrivi "le chop", "delle chop".
+"""
 
     prompt = f"""
 Sei un giornalista italiano esperto di wrestling e sport da combattimento.
@@ -1426,7 +1536,9 @@ ESEMPI DI TRASFORMAZIONE:
 
 - Se il titolo originale è innaturale in italiano, riscrivilo mantenendo il significato ma rendendolo naturale.
 - Non citare mai Ringside News, Wrestling Inc. o la testata originale nel corpo dell'articolo.
-- La fonte verrà gestita automaticamente a fondo pagina.
+- La fonte verra gestita automaticamente a fondo pagina.
+
+{results_instructions}
 
 TITOLO ORIGINALE:
 {source_title}
@@ -1460,6 +1572,11 @@ JSON richiesto:
 
         if body_looks_suspicious(testo):
             raise ValueError("Body sospetto o troppo meta")
+
+        if results_mode:
+            integrity_warning = result_article_integrity_warning(text, testo)
+            if integrity_warning:
+                print(f"[TRANSLATE] Warning results: {integrity_warning}")
 
         if not is_translation_coherent(source_title, titolo):
             print(f"[TRANSLATE] Soft mismatch titolo: {titolo}")
