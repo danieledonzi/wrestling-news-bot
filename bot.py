@@ -1528,8 +1528,47 @@ ESEMPI DI TRASFORMAZIONE:
 
 - Il testo deve sembrare scritto da un umano, non da un traduttore automatico.
 
-- Mantieni il gergo wrestling:
-  match, title, promo, segment, storyline NON vanno tradotti.
+GERGO E NOMI DEL WRESTLING (OBBLIGATORIO):
+
+1. Mantieni in inglese il gergo:
+- match
+- promo
+- segment
+- storyline
+- push
+- turn
+- feud
+
+2. Mantieni SEMPRE in inglese i nomi ufficiali:
+- titoli (es. World Heavyweight Championship, Intercontinental Championship)
+- eventi (es. WrestleMania, Backlash)
+- nomi di match (es. Royal Rumble match, Money in the Bank ladder match)
+- stable/fazioni (es. The Bloodline)
+
+3. NON tradurre e NON reinterpretare i titoli.
+Esempio:
+- "World Heavyweight Championship" deve restare ESATTAMENTE così.
+- NON trasformarlo in "titolo mondiale" o altro.
+
+4. NON sostituire mai un titolo con un altro.
+(World Heavyweight Championship ≠ Intercontinental Championship)
+  
+- NOMI DEI TITOLI (REGOLA OBBLIGATORIA):
+ Tutti i nomi dei titoli devono rimanere in inglese originale.
+
+Esempi:
+- World Heavyweight Championship
+- WWE Championship
+- Intercontinental Championship
+- United States Championship
+- Tag Team Championship
+- Women's World Championship
+- NXT Championship
+
+NON tradurre mai i nomi dei titoli in italiano.
+NON usare forme come "titolo mondiale", "titolo intercontinentale", ecc.
+
+Mantieni sempre la forma originale inglese.
 
 - NON aggiungere enfasi artificiale.
 - NON usare toni clickbait.
