@@ -1445,22 +1445,32 @@ MODALITA SPECIALE RISULTATI SHOW:
 - Questo e' un articolo di risultati/recap di uno show.
 - Non devi trattarlo come una news breve.
 - Devi coprire l'intero show dall'inizio alla fine.
-- Se il testo sorgente e' lungo, puoi accorciare i dettagli delle fasi di lotta, ma NON devi saltare match, promo, segmenti, vincitori o sviluppi finali.
+- NON saltare nessun match, promo, segmento o sviluppo importante.
 - Mantieni l'ordine cronologico dello show.
-- Usa una struttura chiara con paragrafi e, quando utile, <b>Nome match/segmento</b> all'inizio del paragrafo.
-- Ogni match deve indicare il vincitore se presente nel sorgente.
-- L'ultimo segmento dello show deve essere incluso.
-- I nomi dei tipi di match e delle stipulazioni restano in inglese: tag team match, mixed tag team match, triple threat match, fatal four-way, cage match, ladder match, street fight, no disqualification match.
+- Se il testo sorgente e' lungo, puoi accorciare i dettagli delle fasi di lotta, ma NON devi mai tagliare l'inizio o la fine dello show.
+- Ogni match deve includere il vincitore se presente nel testo originale.
+- L'ultimo segmento dello show deve essere SEMPRE incluso.
+
+STRUTTURA:
+- Usa paragrafi chiari.
+- Quando utile, usa <b>Nome match/segmento</b> all'inizio del paragrafo.
+- Non creare elenchi puntati.
+
+GERGO:
+- I nomi dei tipi di match e delle stipulazioni restano in inglese:
+  tag team match, mixed tag team match, triple threat match, fatal four-way match, cage match, ladder match, street fight, no disqualification match.
 - "chop" e' femminile: scrivi "le chop", "delle chop".
 """ if results_mode else """
-- I nomi dei tipi di match e delle stipulazioni restano in inglese: tag team match, mixed tag team match, triple threat match, fatal four-way, cage match, ladder match, street fight, no disqualification match.
+GERGO:
+- I nomi dei tipi di match e delle stipulazioni restano in inglese:
+  tag team match, mixed tag team match, triple threat match, fatal four-way match, cage match, ladder match, street fight, no disqualification match.
 - "chop" e' femminile: scrivi "le chop", "delle chop".
 """
 
     prompt = f"""
 Sei un giornalista italiano esperto di wrestling e sport da combattimento.
 
-Devi tradurre e rielaborare questa specifica notizia in italiano. Se il risultato sembra una traduzione dall’inglese, riscrivilo automaticamente in forma più naturale prima di restituirlo.
+Devi riscrivere in italiano questa specifica notizia come se fosse stata scritta direttamente per un sito italiano di news sportive. Non devi fare una traduzione letterale: devi conservare tutti i fatti, ma rendere il testo naturale, fluido e giornalistico.
 
 VINCOLI OBBLIGATORI:
 1. L'articolo deve parlare SOLO della notizia fornita.
@@ -1477,105 +1487,38 @@ VINCOLI OBBLIGATORI:
 12. Le citazioni importanti vanno in <blockquote>.
 13. Non inserire link social o embed nel testo.
 14. Rimuovi completamente ogni riferimento alla testata originale, alla fonte, al sito sorgente, alla copertura live, agli hub dedicati e agli inviti ai commenti.
-15. Queste frasi non devono essere tradotte né riformulate: vanno eliminate.
+15. Le frasi promozionali della fonte non devono essere tradotte né riformulate: vanno eliminate.
 
 STILE EDITORIALE:
-
-- NON stai traducendo: stai RISCRIVENDO l'articolo come se fosse stato scritto direttamente in italiano da un giornalista.
-
-- L'obiettivo è un italiano naturale, fluido e realistico per un sito di news sportive italiano.
-
-- Evita qualsiasi costruzione che sembri una traduzione dall’inglese.
-
-- Regola fondamentale:
-  se una frase suona come una traduzione, va riscritta.
-
-- Usa formule tipiche del giornalismo sportivo italiano.
-
-ESEMPI DI TRASFORMAZIONE:
-
-❌ "SmackDown di WWE"
-✅ "SmackDown"
-
-❌ "durante l'episodio di WWE Raw"
-✅ "nell’ultima puntata di Raw"
-
-❌ "la star ha rivelato"
-✅ "ha raccontato" / "ha spiegato"
-
-❌ "si è aperto riguardo"
-✅ "ha parlato di"
-
-❌ "ha affrontato una sfida"
-✅ "ha combattuto" / "è salito sul ring"
-
-❌ "è stato coinvolto in un match"
-✅ "ha preso parte a un match"
-
-❌ "ha fatto il suo ritorno"
-✅ "è tornato"
-
-❌ "ha ottenuto una vittoria"
-✅ "ha vinto"
-
-- Evita parole artificiose o innaturali come:
-  "stella", "rivelatrice", "prevalenza", "coinvolto in una dinamica", "all’interno della compagnia"
-
+- Scrivi in italiano naturale, come un giornalista sportivo italiano.
+- Non tradurre parola per parola.
+- Se una frase sembra tradotta dall’inglese, riscrivila in forma più naturale.
+- Usa frasi brevi, chiare e leggibili.
+- Mantieni un tono neutro, giornalistico e non clickbait.
+- Non aggiungere enfasi artificiale.
+- Non ripetere continuamente nomi e cognomi: dopo la prima occorrenza puoi usare "il wrestler", "la star", "il duo", "la coppia", "l'atleta", "l'ex campione", se il riferimento è chiaro.
 - Preferisci verbi semplici e diretti.
 
-- Le frasi devono essere:
-  brevi, scorrevoli e naturali.
+GERGO E NOMI UFFICIALI:
+- Mantieni in inglese il gergo wrestling: match, title, promo, segment, storyline, push, turn, feud, stable, tag team.
+- Mantieni SEMPRE in inglese i nomi ufficiali di titoli, eventi, stable/fazioni e stipulazioni.
+- Non tradurre, non parafrasare e non reinterpretare mai i nomi ufficiali.
+- Non sostituire mai un titolo con un altro.
+- Esempio obbligatorio: "World Heavyweight Championship" deve restare "World Heavyweight Championship". Non può diventare "titolo mondiale", "titolo dei pesi massimi" o "titolo intercontinentale".
+- "Intercontinental Championship" deve restare "Intercontinental Championship".
+- "United States Championship" deve restare "United States Championship".
+- "AEW World Tag Team Championship" deve restare "AEW World Tag Team Championship".
+- I nomi dei match e delle stipulazioni restano in inglese: mixed tag team match, tag team match, triple threat match, fatal four-way match, ladder match, cage match, steel cage match, street fight, no disqualification match, title match.
 
-- Il testo deve sembrare scritto da un umano, non da un traduttore automatico.
-
-GERGO E NOMI DEL WRESTLING (OBBLIGATORIO):
-
-1. Mantieni in inglese il gergo:
-- match
-- promo
-- segment
-- storyline
-- push
-- turn
-- feud
-
-2. Mantieni SEMPRE in inglese i nomi ufficiali:
-- titoli (es. World Heavyweight Championship, Intercontinental Championship)
-- eventi (es. WrestleMania, Backlash)
-- nomi di match (es. Royal Rumble match, Money in the Bank ladder match)
-- stable/fazioni (es. The Bloodline)
-
-3. NON tradurre e NON reinterpretare i titoli.
-Esempio:
-- "World Heavyweight Championship" deve restare ESATTAMENTE così.
-- NON trasformarlo in "titolo mondiale" o altro.
-
-4. NON sostituire mai un titolo con un altro.
-(World Heavyweight Championship ≠ Intercontinental Championship)
-  
-- NOMI DEI TITOLI (REGOLA OBBLIGATORIA):
- Tutti i nomi dei titoli devono rimanere in inglese originale.
-
-Esempi:
-- World Heavyweight Championship
-- WWE Championship
-- Intercontinental Championship
-- United States Championship
-- Tag Team Championship
-- Women's World Championship
-- NXT Championship
-
-NON tradurre mai i nomi dei titoli in italiano.
-NON usare forme come "titolo mondiale", "titolo intercontinentale", ecc.
-
-Mantieni sempre la forma originale inglese.
-
-- NON aggiungere enfasi artificiale.
-- NON usare toni clickbait.
-
-- Se il titolo originale è innaturale in italiano, riscrivilo mantenendo il significato ma rendendolo naturale.
-- Non citare mai Ringside News, Wrestling Inc. o la testata originale nel corpo dell'articolo.
-- La fonte verra gestita automaticamente a fondo pagina.
+FORME DA EVITARE:
+- "SmackDown di WWE" usa "SmackDown"
+- "durante l'episodio di WWE Raw" usa "nell’ultima puntata di Raw"
+- "si è aperto riguardo" usa "ha parlato di"
+- "ha affrontato una sfida" usa "ha combattuto" o "è salito sul ring"
+- "è stato coinvolto in un match" usa "ha preso parte a un match"
+- "ha fatto il suo ritorno" usa "è tornato"
+- "ha ottenuto una vittoria" usa "ha vinto"
+- evita parole innaturali come "stella", "rivelatrice", "prevalenza", "coinvolto in una dinamica", "all’interno della compagnia", "televisione nazionale", "si sono ritrovati come tag team".
 
 {results_instructions}
 
