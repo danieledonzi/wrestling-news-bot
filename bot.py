@@ -235,11 +235,37 @@ def fix_mojibake(text):
         return good - bad
 
     return max(candidates, key=score)
+    
+def normalize_unicode_punctuation(text):
+    if not text:
+        return text
+
+    replacements = {
+        "“": '"',
+        "”": '"',
+        "„": '"',
+        "«": '"',
+        "»": '"',
+        "‘": "'",
+        "’": "'",
+        "‚": "'",
+        "–": "-",
+        "—": "-",
+        "…": "...",
+        "\u00a0": " ",
+    }
+
+    for old, new_value in replacements.items():
+        text = text.replace(old, new_value)
+
+    return text
 
 def sanitize_text(text):
     if not text:
         return ""
+    text = normalize_unicode_punctuation(text)
     return normalize_whitespace(fix_mojibake(text))
+
 def refine_title_italian(title):
     if not title:
         return title
@@ -280,11 +306,11 @@ def refine_title_italian(title):
         t = t.replace(old, new_value)
 
     t = re.sub(r"\s{2,}", " ", t).strip()
-    t = re.sub(r"(potenzialmente|importante|maggiore)", "", t, flags=re.IGNORECASE)
+    t = re.sub(r"\b(potenzialmente|importante|maggiore)\b", "", t, flags=re.IGNORECASE)
     t = re.sub(r"\s{2,}", " ", t).strip()
 
     t = re.sub(
-        r"(?i)3 cose che ci sono piaciute e 3 che abbiamo odiato",
+        r"(?i)\b3 cose che ci sono piaciute e 3 che abbiamo odiato\b",
         "3 cose che ci sono piaciute e 3 no",
         t,
     )
