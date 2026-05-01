@@ -21,6 +21,7 @@ if not GEMINI_API_KEY:
     raise ValueError("GEMINI_API_KEY mancante")
 
 WP_MEDIA_URL = WP_API_URL.replace("/posts", "/media")
+WP_HEALTHCHECK_URL = WP_API_URL.split("/wp-json/")[0].rstrip("/") + "/wp-json/"
 HISTORY_FILE = "history.txt"
 
 FEEDS = [
@@ -48,7 +49,8 @@ SOCIAL_DOMAINS = [
 ]
 
 REQUEST_TIMEOUT_SCRAPE = 12
-REQUEST_TIMEOUT_WP = 20
+REQUEST_TIMEOUT_WP = 10
+REQUEST_TIMEOUT_WP_HEALTHCHECK = 8
 REQUEST_TIMEOUT_IMAGE = 10
 REQUEST_TIMEOUT_SOCIAL_CHECK = 8
 
@@ -58,7 +60,7 @@ MAX_RUN_SECONDS = 15 * 60
 
 MAX_MODEL_FAIL_STREAK = 5
 MAX_VALIDATION_FAIL_STREAK = 12
-MAX_WP_FAIL_STREAK = 3
+MAX_WP_FAIL_STREAK = 2
 
 MODEL_COOLDOWN_THRESHOLD = 4
 MAX_SOURCE_FAILS_PER_DOMAIN = 3
@@ -1548,6 +1550,27 @@ def check_gemini():
         return False
 
 
+def wordpress_is_available():
+    """
+    Health check leggero prima di chiamare Gemini.
+    Se WordPress non risponde, la run esce subito e non consuma API/minuti inutili.
+    """
+    try:
+        res = session.get(
+            WP_HEALTHCHECK_URL,
+            auth=(WP_USER, WP_PASSWORD),
+            timeout=REQUEST_TIMEOUT_WP_HEALTHCHECK
+        )
+        if res.status_code < 500:
+            print(f"[WP] Health check OK: {res.status_code}")
+            return True
+        print(f"[WP] Health check fallito: status {res.status_code}")
+        return False
+    except requests.RequestException as e:
+        print(f"[WP] WordPress non raggiungibile: {e}")
+        return False
+
+
 def translate_news(source_title, text, source_url=""):
     if not text or len(text) < 50:
         return None, "validation"
@@ -1660,14 +1683,14 @@ JSON richiesto:
         quality_issues = italian_quality_issues(titolo, testo)
 
         if quality_issues:
-        print(f"[QUALITY] Problemi rilevati: {quality_issues}")
-        repaired = repair_italian_output(
-        {"titolo": titolo, "testo": testo, "categoria": forced_category},
-        source_title
-        )
+            print(f"[QUALITY] Problemi rilevati: {quality_issues}")
+            repaired = repair_italian_output(
+                {"titolo": titolo, "testo": testo, "categoria": forced_category},
+                source_title
+            )
 
-        titolo = repaired["titolo"]
-        testo = repaired["testo"]
+            titolo = repaired["titolo"]
+            testo = repaired["testo"]
 
         remaining_issues = italian_quality_issues(titolo, testo)
         if remaining_issues:
@@ -1808,7 +1831,7 @@ def find_existing_post_by_url(url):
         print(f"[WP] Verifica post esistente fallita: {e}")
     return None
 
-def wp_create_post_request(payload, retries=2):
+def wp_create_post_request(payload, retries=1):
     last_exc = None
 
     for attempt in range(retries + 1):
@@ -1856,7 +1879,7 @@ def create_post_without_image(data, sem_id, url, embed_urls=None):
         }
         
         try:
-            res = wp_create_post_request(payload, retries=2)
+            res = wp_create_post_request(payload, retries=1)
             print(f"[WP] Status create: {res.status_code}")
             if res.status_code == 201:
                 data_json = res.json()
@@ -1944,6 +1967,10 @@ def build_candidates(history):
 def run_bot():
     run_start = time.time()
 
+    if not wordpress_is_available():
+        print("[BOT] Stop: WordPress offline o non raggiungibile. Esco senza chiamare Gemini.")
+        return
+
     if not check_gemini():
         print("[BOT] Stop: nessun modello Gemini disponibile")
         return
@@ -1982,7 +2009,7 @@ def run_bot():
             print("[BOT] Stop anticipato: troppi errori consecutivi di validazione")
             break
         if wp_fail_streak >= MAX_WP_FAIL_STREAK:
-            print("[BOT] Stop anticipato: troppi errori consecutivi da WordPress")
+            print("[BOT] Stop anticipato: WordPress non raggiungibile, interrompo la run per evitare spreco di tempo/API")
             break
 
         processed_count += 1
@@ -2071,6 +2098,9 @@ def run_bot():
         if not post_id:
             wp_fail_streak += 1
             print(f"[FAIL] Creazione post fallita per: {news_data['titolo']} (wp_streak={wp_fail_streak})")
+            if wp_fail_streak >= MAX_WP_FAIL_STREAK:
+                print("[BOT] WordPress non raggiungibile, interrompo la run per evitare spreco di tempo/API")
+                break
             continue
 
         wp_fail_streak = 0
