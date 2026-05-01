@@ -23,6 +23,8 @@ if not GEMINI_API_KEY:
 WP_MEDIA_URL = WP_API_URL.replace("/posts", "/media")
 WP_HEALTHCHECK_URL = WP_API_URL.split("/wp-json/")[0].rstrip("/") + "/wp-json/"
 HISTORY_FILE = "history.txt"
+PENDING_FILE = "pending_articles.json"
+
 
 FEEDS = [
     "https://www.wrestlinginc.com/feed/",
@@ -54,7 +56,10 @@ REQUEST_TIMEOUT_WP_HEALTHCHECK = 8
 REQUEST_TIMEOUT_IMAGE = 10
 REQUEST_TIMEOUT_SOCIAL_CHECK = 8
 
-MAX_POSTS_PER_RUN = 5
+# v39: limiti editoriali dinamici
+MAX_NEW_POSTS_NORMAL = 3
+MAX_NEW_POSTS_STORM = 5
+MAX_PENDING_RECOVERY_PER_RUN = 5
 MAX_CANDIDATES_TO_TRY = 12
 MAX_RUN_SECONDS = 15 * 60
 
@@ -64,6 +69,23 @@ MAX_WP_FAIL_STREAK = 2
 
 MODEL_COOLDOWN_THRESHOLD = 4
 MAX_SOURCE_FAILS_PER_DOMAIN = 3
+
+# v39: priorita, coda pending, storm mode e breaking decay
+PENDING_TTL_SECONDS = 36 * 60 * 60
+PENDING_DECAY_12H = 10
+PENDING_DECAY_24H = 20
+MAX_PENDING_ITEMS = 30
+HIGH_PRIORITY_SCORE = 80
+MEDIUM_PRIORITY_SCORE = 60
+LOW_PRIORITY_SCORE = 40
+MIN_PUBLISH_SCORE = 75
+STORM_HIGH_THRESHOLD = 5      # almeno 5 news >= 80
+STORM_TOP_THRESHOLD = 3       # oppure almeno 3 news >= 90
+BREAKING_SCORE_BOOST = 20
+BREAKING_TITLE_MIN_SCORE = 90
+BREAKING_ACTIVE_SECONDS = 6 * 60 * 60
+
+
 
 STOPWORDS = {
     "wwe", "aew", "tna", "nxt", "ufc", "mma", "mlw",
@@ -93,6 +115,37 @@ STRONG_NAMES = [
 TOP_STAR_NAMES = [
     "john cena", "cm punk", "roman reigns", "brock lesnar", "cody rhodes",
     "rhea ripley", "becky lynch", "randy orton", "undertaker", "the rock",
+]
+
+
+# v38: mappa nomi -> promotion per categoria e scoring.
+# Deve restare deterministica e modificabile a mano.
+WWE_NAMES = [
+    "liv morgan", "roman reigns", "cm punk", "cody rhodes", "john cena",
+    "seth rollins", "becky lynch", "rhea ripley", "randy orton", "logan paul",
+    "bianca belair", "montez ford", "aj styles", "nick khan", "triple h",
+    "bray wyatt", "braun strowman", "brock lesnar", "jey uso", "jimmy uso",
+    "solo sikoa", "jade cargill", "tiffany stratton", "drew mcintyre",
+    "dominik mysterio", "penta", "rusev", "kairi sane", "stephanie vaquer",
+    "alexa bliss", "charlotte flair", "bayley", "iyo sky", "gunther", "oba femi",
+    "lexis king", "booker t", "bully ray", "giovanni vinci",
+]
+
+AEW_NAMES = [
+    "darby allin", "mjf", "jon moxley", "kenny omega", "hangman page",
+    "tony khan", "chris jericho", "adam copeland", "samoa joe", "will osprey",
+    "mercedes mone", "toni storm", "britt baker", "anna jay", "jack perry",
+    "orange cassidy", "the young bucks", "tanea brooks", "rebel", "brodie lee",
+]
+
+NXT_NAMES = [
+    "trick williams", "roxanne perez", "sol ruca", "lexis king", "lash legend",
+    "ethan page", "tony d'angelo", "jaida parker", "lola vice", "kelani jordan",
+]
+
+TNA_OTHER_NAMES = [
+    "matt hardy", "jeff hardy", "mustafa ali", "joe hendry", "nic nemeth",
+    "ash by elegance", "jordynne grace", "moose", "masha slamovich", "santino marella",
 ]
 
 BODY_BAD_PATTERNS = [
@@ -147,6 +200,7 @@ def load_history():
         "title_keys": set(),
         "story_fingerprints": set(),
         "news_core_keys": set(),
+        "event_keys": set(),
     }
 
     if not os.path.exists(HISTORY_FILE):
@@ -171,6 +225,15 @@ def load_history():
                     history["story_fingerprints"].add(parts[3].strip())
                 if len(parts) >= 5 and parts[4].strip():
                     history["news_core_keys"].add(parts[4].strip())
+                if len(parts) >= 6 and parts[5].strip():
+                    history["event_keys"].add(parts[5].strip())
+
+                # v38: retrocompatibilita. Genera event_key anche dai vecchi record
+                # che non avevano il sesto campo, usando URL/slug/title_key/fingerprint.
+                legacy_probe = " ".join(parts[:5])
+                legacy_event_key = make_event_key(legacy_probe, "", "")
+                if legacy_event_key:
+                    history["event_keys"].add(legacy_event_key)
 
     except Exception as e:
         print(f"[HISTORY] Errore lettura history: {e}")
@@ -178,7 +241,7 @@ def load_history():
     return history
 
 
-def save_to_history(url, semantic_id, title_key="", story_fingerprint="", news_core_key=""):
+def save_to_history(url, semantic_id, title_key="", story_fingerprint="", news_core_key="", event_key=""):
     records = []
 
     if os.path.exists(HISTORY_FILE):
@@ -188,12 +251,12 @@ def save_to_history(url, semantic_id, title_key="", story_fingerprint="", news_c
         except Exception as e:
             print(f"[HISTORY] Errore lettura pre-salvataggio: {e}")
 
-    new_record = f"{url}|{semantic_id}|{title_key}|{story_fingerprint}|{news_core_key}".rstrip("|")
+    new_record = f"{url}|{semantic_id}|{title_key}|{story_fingerprint}|{news_core_key}|{event_key}".rstrip("|")
 
     if new_record not in records:
         records.append(new_record)
 
-    records = records[-1500:]
+    records = records[-2000:]
 
     try:
         with open(HISTORY_FILE, "w", encoding="utf-8") as f:
@@ -826,10 +889,12 @@ def dedupe_preserve_order(items):
 def detect_source_category(title, text="", url=""):
     title_l = sanitize_text(title).lower()
     url_l = (url or "").lower()
-    text_l = sanitize_text(text[:1200]).lower()
+    text_l = sanitize_text(text[:2500]).lower()
 
     primary = f"{title_l} {url_l}"
+    full_probe = normalize_for_check(f"{title_l} {url_l} {text_l}")
 
+    # 1) Keyword esplicite in titolo/URL: massima affidabilita.
     if "nxt" in primary:
         return 6
     if any(x in primary for x in ["aew", "dynamite", "collision", "rampage", "all elite"]):
@@ -847,7 +912,18 @@ def detect_source_category(title, text="", url=""):
     if any(term in primary for term in wwe_terms):
         return 4
 
-    # fallback sul testo, ma solo se il termine è davvero ricorrente
+    # 2) Nomi noti. Serve per casi come Liv Morgan, dove titolo/URL non dicono WWE.
+    name_scores = {
+        4: count_keyword_hits(full_probe, WWE_NAMES),
+        5: count_keyword_hits(full_probe, AEW_NAMES),
+        6: count_keyword_hits(full_probe, NXT_NAMES),
+        7: count_keyword_hits(full_probe, TNA_OTHER_NAMES),
+    }
+    best_name_cat, best_name_score = max(name_scores.items(), key=lambda x: x[1])
+    if best_name_score >= 1:
+        return best_name_cat
+
+    # 3) Fallback sul testo: solo se il termine e' ricorrente.
     scores = {
         5: sum(text_l.count(x) for x in ["aew", "dynamite", "collision", "all elite"]),
         7: sum(text_l.count(x) for x in ["tna", "impact wrestling", "mlw", "aaa", "njpw", "roh"]),
@@ -1424,6 +1500,15 @@ def title_has_core_brands(source_title, generated_title):
     source = sanitize_text(source_title).lower()
     generated = sanitize_text(generated_title).lower()
 
+    # v38: non bocciare titoli coerenti solo perche manca "WWE/AEW".
+    # Se il titolo generato conserva un nome proprio forte, e' accettabile.
+    src_names = extract_named_entities_from_title(source_title)
+    gen_norm = normalize_for_check(generated_title)
+    for name in src_names:
+        parts = [p.lower() for p in name.split() if len(p) > 2]
+        if parts and all(p in gen_norm for p in parts):
+            return True
+
     brand_groups = [
         ["wwe"], ["aew"], ["nxt"], ["tna"], ["ufc"], ["mlw"],
         ["raw"], ["smackdown"], ["collision"], ["dynamite"],
@@ -1432,6 +1517,10 @@ def title_has_core_brands(source_title, generated_title):
     for group in brand_groups:
         if any(term in source for term in group):
             if not any(term in generated for term in group):
+                # brand mancante: accetta solo se c'e un nome forte condiviso
+                src_strong = [n for n in STRONG_NAMES + WWE_NAMES + AEW_NAMES if n in source]
+                if src_strong and any(n in generated for n in src_strong):
+                    return True
                 return False
     return True
 
@@ -1920,6 +2009,382 @@ def attach_featured_media(post_id, media_id):
         return False
 
 
+
+def make_event_key(title, text="", url=""):
+    """
+    v38: chiave deterministica per duplicati forti tra fonti/run diverse.
+    Non sostituisce story_fingerprint: lo affianca per eventi chiari.
+    """
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:2500]}")
+    if not probe:
+        return ""
+
+    # Alias / entita principali
+    entities = []
+    entity_groups = [
+        ("tanea-brooks-rebel", ["tanea brooks", "rebel"]),
+        ("liv-morgan", ["liv morgan"]),
+        ("cm-punk", ["cm punk"]),
+        ("smackdown", ["smackdown"]),
+        ("nick-khan", ["nick khan"]),
+        ("logan-paul", ["logan paul"]),
+        ("aj-styles", ["aj styles"]),
+        ("braun-strowman", ["braun strowman"]),
+        ("bray-wyatt", ["bray wyatt"]),
+        ("brodie-lee", ["brodie lee", "brody lee"]),
+        ("stephanie-vaquer", ["stephanie vaquer"]),
+        ("anna-jay", ["anna jay"]),
+        ("darby-allin", ["darby allin"]),
+        ("brock-lesnar", ["brock lesnar"]),
+        ("cody-rhodes", ["cody rhodes"]),
+        ("roman-reigns", ["roman reigns"]),
+    ]
+    for key, aliases in entity_groups:
+        if any(alias in probe for alias in aliases):
+            entities.append(key)
+
+    # Eventi specifici visti/attesi
+    if ("tanea-brooks-rebel" in entities) and any(x in probe for x in ["als", "sla", "terminal", "diagnosis", "diagnosi"]):
+        return "event:tanea-brooks-rebel-als-diagnosis"
+    if "liv-morgan" in entities and any(x in probe for x in ["trouble", "theme", "entrance", "song", "music"]):
+        return "event:liv-morgan-trouble-theme"
+    if "smackdown" in entities and any(x in probe for x in ["two hour", "two hours", "2 hour", "2 hours", "due ore"]):
+        return "event:smackdown-two-hour-format"
+    if "cm-punk" in entities and any(x in probe for x in ["fan altercation", "altercation", "lite", "confrontation"]):
+        return "event:cm-punk-fan-altercation"
+    if "nick-khan" in entities and any(x in probe for x in ["ali act", "hearing", "udienza"]):
+        return "event:nick-khan-ali-act-hearing"
+    if "logan-paul" in entities and any(x in probe for x in ["2017", "controversy", "controversia", "backlash"]):
+        return "event:logan-paul-2017-controversy"
+    if "aj-styles" in entities and any(x in probe for x in ["coach", "personal", "performance center", " pc "]):
+        return "event:aj-styles-personal-coach-pc"
+    if "braun-strowman" in entities and ("bray-wyatt" in entities or "brodie-lee" in entities):
+        if any(x in probe for x in ["losing", "loss", "perdita", "morte", "died", "passed"]):
+            return "event:braun-strowman-bray-wyatt-brodie-lee-loss"
+
+    # Event key generica: solo quando c'e almeno una entita forte e un tipo evento chiaro.
+    event_groups = [
+        ("diagnosis", ["diagnosis", "diagnosi", "als", "sla", "cancer", "terminal"]),
+        ("injury", ["injury", "injured", "infortunio", "surgery", "surgery", "operazione"]),
+        ("release", ["release", "released", "rilascio", "licenziamento", "departure", "departures"]),
+        ("contract", ["contract", "contratto", "free agent", "expires", "coming to an end"]),
+        ("return", ["return", "returns", "ritorno", "tornare", "debut", "debutto"]),
+        ("lawsuit", ["lawsuit", "legal", "cause", "janel grant"]),
+        ("title", ["championship", "title", "titolo", "champion"]),
+    ]
+    event_type = ""
+    for key, terms in event_groups:
+        if any(term in probe for term in terms):
+            event_type = key
+            break
+
+    if entities and event_type:
+        return "event:" + "-".join(sorted(set(entities))[:3]) + "-" + event_type
+
+    return ""
+
+
+def history_has_event_key(history, event_key):
+    return bool(event_key and event_key in history.get("event_keys", set()))
+
+def clamp_score(value, low=0, high=100):
+    return max(low, min(high, int(value)))
+
+
+def count_keyword_hits(text, keywords):
+    norm = normalize_for_check(text)
+    return sum(1 for kw in keywords if normalize_for_check(kw) in norm)
+
+
+def calculate_importance_score(title, text="", url=""):
+    """
+    Score deterministico 0-100. Non usa Gemini.
+    Prima applicazione: title/feed/url. Dopo lo scraping puo essere raffinato con il body.
+    """
+    title = sanitize_text(title)
+    text = sanitize_text(text or "")
+    url = url or ""
+    probe = f"{title} {url} {text[:1800]}"
+    norm = normalize_for_check(probe)
+
+    score = 0
+    reasons = []
+
+    # Promotion / contesto
+    if any(x in norm for x in ["wwe", "raw", "smackdown", "wrestlemania", "royal rumble", "summerslam", "survivor series"]):
+        score += 20; reasons.append("WWE/main roster")
+    elif any(x in norm for x in ["aew", "dynamite", "collision", "all elite", "all in", "double or nothing", "full gear"]):
+        score += 18; reasons.append("AEW")
+    elif "nxt" in norm:
+        score += 12; reasons.append("NXT")
+    elif any(x in norm for x in ["tna", "impact wrestling"]):
+        score += 10; reasons.append("TNA")
+    elif any(x in norm for x in ["ufc", "mma"]):
+        score += 8; reasons.append("UFC/MMA")
+    elif any(x in norm for x in ["mlw", "roh", "aaa", "njpw", "indie", "indy"]):
+        score += 5; reasons.append("altre promotion")
+
+    # Nomi coinvolti
+    top_hits = [name for name in TOP_STAR_NAMES if name in norm]
+    strong_hits = [name for name in STRONG_NAMES if name in norm and name not in top_hits]
+    wwe_name_hits = [name for name in WWE_NAMES if name in norm]
+    aew_name_hits = [name for name in AEW_NAMES if name in norm]
+    if top_hits:
+        score += min(25, 15 + 5 * len(top_hits)); reasons.append("top star: " + ", ".join(top_hits[:3]))
+    if strong_hits:
+        score += min(15, 8 + 3 * len(strong_hits)); reasons.append("nomi forti: " + ", ".join(strong_hits[:3]))
+    if wwe_name_hits and not any(x in norm for x in ["wwe", "raw", "smackdown", "nxt"]):
+        score += 10; reasons.append("nome WWE: " + ", ".join(wwe_name_hits[:2]))
+    if aew_name_hits and not any(x in norm for x in ["aew", "dynamite", "collision"]):
+        score += 8; reasons.append("nome AEW: " + ", ".join(aew_name_hits[:2]))
+
+    # Tipo notizia
+    type_rules = [
+        (20, ["breaking", "major update", "huge update", "shocking", "emergency"], "breaking/major update"),
+        (18, ["return", "returns", "returned", "debut", "debuts", "appears", "appearance"], "ritorno/debutto"),
+        (16, ["injury", "injured", "medical", "hospital", "surgery", "out of action"], "infortunio"),
+        (16, ["released", "release", "fired", "cut", "departure", "exits", "leaves"], "release/addio"),
+        (14, ["contract", "deal", "re-sign", "re-signs", "free agent", "coming to an end", "expires"], "contratto"),
+        (14, ["champion", "championship", "title change", "wins title", "new champion", "vacated"], "titolo/championship"),
+        (12, ["tv deal", "rights", "netflix", "espn", "cw", "peacock", "broadcast", "streaming"], "business/media rights"),
+        (10, ["announced", "confirmed", "set for", "match announced", "added to"], "match/segmento annunciato"),
+        (8, ["backstage", "report", "reported", "reportedly", "rumor", "rumour", "plans"], "rumor/backstage"),
+        (6, ["arrest", "lawsuit", "legal", "controversy", "scandal"], "controversia/legal"),
+        (4, ["says", "explains", "reveals", "discusses", "reflects", "believes", "thinks"], "intervista/opinione"),
+    ]
+    for points, keywords, label in type_rules:
+        if any(k in norm for k in keywords):
+            score += points
+            reasons.append(label)
+            break
+
+    # Rilevanza temporale / show
+    if any(x in norm for x in ["wrestlemania", "summerslam", "royal rumble", "survivor series", "all in", "double or nothing", "full gear", "ple", "ppv"]):
+        score += 15; reasons.append("PLE/PPV")
+    elif any(x in norm for x in ["raw", "smackdown", "nxt", "dynamite", "collision", "rampage", "impact"]):
+        score += 8; reasons.append("show settimanale")
+
+    # Penalita
+    penalties = [
+        (-12, ["3 things", "things we loved", "things we hated", "winners and losers", "best and worst"], "lista/opinione ricorrente"),
+        (-10, ["ufc", "mma"], "non wrestling puro"),
+        (-8, ["believes", "thinks", "discusses", "reflects", "podcast"], "opinione generica"),
+        (-6, ["whatculture", "gallery", "photos"], "contenuto leggero"),
+    ]
+    for points, keywords, label in penalties:
+        if any(k in norm for k in keywords):
+            score += points
+            reasons.append(label)
+
+    # Se il titolo e' molto vago, piccolo malus
+    if len([w for w in normalize_for_check(title).split() if w not in STOPWORDS]) <= 2:
+        score -= 5; reasons.append("titolo vago")
+
+    return clamp_score(score), reasons[:8]
+
+
+def priority_label(score):
+    if score >= HIGH_PRIORITY_SCORE:
+        return "high"
+    if score >= MEDIUM_PRIORITY_SCORE:
+        return "medium"
+    if score >= LOW_PRIORITY_SCORE:
+        return "low"
+    return "skip"
+
+
+
+def get_entry_timestamp(entry):
+    """Ritorna un timestamp unix da published_parsed/updated_parsed se disponibile."""
+    if not entry:
+        return time.time()
+    for attr in ["published_parsed", "updated_parsed"]:
+        value = getattr(entry, attr, None)
+        if value:
+            try:
+                return time.mktime(value)
+            except Exception:
+                pass
+    return time.time()
+
+
+def title_has_breaking_marker(title):
+    t = normalize_for_check(title)
+    return any(marker in t for marker in ["breaking", "breaking news", "major update", "huge update"])
+
+
+def is_breaking_active(item):
+    if not item.get("is_breaking"):
+        return False
+    expires_at = float(item.get("breaking_expires_at", 0) or 0)
+    return expires_at >= time.time()
+
+
+def maybe_add_breaking_prefix(title, item):
+    title = sanitize_text(title)
+    if not is_breaking_active(item):
+        return title
+    if int(item.get("score", 0)) < BREAKING_TITLE_MIN_SCORE:
+        return title
+    if title.upper().startswith("[BREAKING]"):
+        return title
+    return f"[BREAKING] {title}"
+
+
+def apply_pending_decay(item):
+    """Penalizza i pending vecchi senza cancellare subito quelli ancora entro TTL."""
+    now = time.time()
+    created_at = float(item.get("created_at", now) or now)
+    age = max(0, now - created_at)
+    base_score = int(item.get("score", 0) or 0)
+    penalty = 0
+    if age >= 24 * 60 * 60:
+        penalty = PENDING_DECAY_24H
+    elif age >= 12 * 60 * 60:
+        penalty = PENDING_DECAY_12H
+    item["score"] = clamp_score(base_score - penalty)
+    if penalty:
+        reasons = list(item.get("score_reasons") or item.get("reasons") or [])
+        reasons.append(f"pending decay -{penalty}")
+        item["score_reasons"] = reasons
+    return item
+
+
+def determine_run_mode(queue):
+    top_count = sum(1 for item in queue if int(item.get("score", 0)) >= 90)
+    high_count = sum(1 for item in queue if int(item.get("score", 0)) >= HIGH_PRIORITY_SCORE)
+    if top_count >= STORM_TOP_THRESHOLD or high_count >= STORM_HIGH_THRESHOLD:
+        print(f"[MODE] Storm mode attiva: {top_count} news >=90, {high_count} news >=80")
+        return "storm"
+    print(f"[MODE] Modalita normale: {top_count} news >=90, {high_count} news >=80")
+    return "normal"
+
+
+def new_post_limit_for_mode(mode):
+    return MAX_NEW_POSTS_STORM if mode == "storm" else MAX_NEW_POSTS_NORMAL
+
+
+def load_pending_articles(history=None):
+    if not os.path.exists(PENDING_FILE):
+        return []
+    now = time.time()
+    try:
+        with open(PENDING_FILE, "r", encoding="utf-8") as f:
+            items = json.load(f)
+        if not isinstance(items, list):
+            return []
+    except Exception as e:
+        print(f"[PENDING] Errore lettura pending: {e}")
+        return []
+
+    cleaned = []
+    seen = set()
+    history_urls = set(history.get("urls", set())) if history else set()
+    for item in items:
+        if not isinstance(item, dict):
+            continue
+        url = item.get("url")
+        if not url or url in seen or url in history_urls:
+            continue
+        created_at = float(item.get("created_at", now))
+        if now - created_at > PENDING_TTL_SECONDS:
+            print(f"[PENDING] Scarto pending scaduto: {item.get('title', url)}")
+            continue
+        item = apply_pending_decay(item)
+        if int(item.get("score", 0)) < MIN_PUBLISH_SCORE:
+            print(f"[PENDING] Scarto pending sotto soglia dopo decay: {item.get('score')} - {item.get('title', url)}")
+            continue
+        seen.add(url)
+        cleaned.append(item)
+    cleaned.sort(key=lambda x: (int(x.get("score", 0)), float(x.get("created_at", 0))), reverse=True)
+    return cleaned[:MAX_PENDING_ITEMS]
+
+
+def save_pending_articles(items):
+    try:
+        items = sorted(items, key=lambda x: (int(x.get("score", 0)), float(x.get("created_at", 0))), reverse=True)[:MAX_PENDING_ITEMS]
+        with open(PENDING_FILE, "w", encoding="utf-8") as f:
+            json.dump(items, f, ensure_ascii=False, indent=2)
+        print(f"[PENDING] Coda salvata: {len(items)} elementi")
+    except Exception as e:
+        print(f"[PENDING] Errore scrittura pending: {e}")
+
+
+def add_pending_article(item, reason="wp_down"):
+    score = int(item.get("score", 0))
+    if score < MIN_PUBLISH_SCORE:
+        print(f"[PENDING] Non salvo, sotto soglia editoriale ({score}/{MIN_PUBLISH_SCORE}): {item.get('title')}")
+        return
+
+    pending = load_pending_articles()
+    urls = {x.get("url") for x in pending}
+    url = item.get("url") or (getattr(item.get("entry"), "link", None) if item.get("entry") else None)
+    if not url or url in urls:
+        return
+
+    title = item.get("title") or sanitize_text(getattr(item.get("entry"), "title", "Senza titolo"))
+    sem_id = item.get("semantic_id") or make_semantic_id_from_title(title)
+    title_key = item.get("title_key") or make_title_key(title)
+
+    pending.append({
+        "url": url,
+        "title": title,
+        "semantic_id": sem_id,
+        "title_key": title_key,
+        "score": score,
+        "priority": priority_label(score),
+        "event_key": item.get("event_key") or make_event_key(title, "", url),
+        "reasons": item.get("score_reasons", []),
+        "score_reasons": item.get("score_reasons", []),
+        "is_breaking": bool(item.get("is_breaking", title_has_breaking_marker(title))),
+        "breaking_expires_at": float(item.get("breaking_expires_at", time.time() + BREAKING_ACTIVE_SECONDS)),
+        "status": "raw",
+        "reason": reason,
+        "created_at": item.get("created_at", time.time()),
+        "attempts": int(item.get("attempts", 0)),
+    })
+    save_pending_articles(pending)
+    print(f"[PENDING] Salvata news {priority_label(score)} ({score}): {title}")
+
+
+def remove_pending_url(url):
+    if not os.path.exists(PENDING_FILE):
+        return
+    pending = load_pending_articles()
+    pending = [x for x in pending if x.get("url") != url]
+    save_pending_articles(pending)
+
+
+def save_selected_candidates_to_pending(queue, reason="wp_down", limit=3):
+    """Salva solo le news che sarebbero state pubblicate in questa run."""
+    saved = 0
+    for item in queue:
+        if saved >= limit:
+            break
+        if int(item.get("score", 0)) >= MIN_PUBLISH_SCORE:
+            add_pending_article(item, reason=reason)
+            saved += 1
+    print(f"[PENDING] Candidati salvati per dopo: {saved}")
+
+
+def make_pending_item_from_candidate(item):
+    entry = item.get("entry")
+    title = item.get("title") or sanitize_text(getattr(entry, "title", "Senza titolo"))
+    url = item.get("url") or getattr(entry, "link", "")
+    return {
+        "url": url,
+        "title": title,
+        "semantic_id": item.get("semantic_id") or make_semantic_id_from_title(title),
+        "title_key": item.get("title_key") or make_title_key(title),
+        "score": int(item.get("score", 0)),
+        "score_reasons": item.get("score_reasons", []),
+        "event_key": item.get("event_key") or make_event_key(title, "", url),
+        "created_at": item.get("created_at", time.time()),
+        "attempts": int(item.get("attempts", 0)),
+        "entry": entry,
+    }
+
+
 def build_candidates(history):
     queue = []
     seen_in_this_run = set()
@@ -1934,9 +2399,9 @@ def build_candidates(history):
             if getattr(parsed, "bozo", False):
                 print(f"[BOT] Warning feed malformato: {feed_url}")
 
-            for entry in parsed.entries[:25]:
+            for idx, entry in enumerate(parsed.entries[:25]):
                 link = getattr(entry, "link", None)
-                title = getattr(entry, "title", "Senza titolo")
+                title = sanitize_text(getattr(entry, "title", "Senza titolo"))
                 if not link:
                     continue
 
@@ -1955,52 +2420,254 @@ def build_candidates(history):
                 if sem_id in seen_in_this_run or title_key in seen_in_this_run:
                     continue
 
+                summary = get_entry_summary(entry)
+                event_key = make_event_key(title, summary, link)
+                if history_has_event_key(history, event_key):
+                    print(f"[SKIP] event_key già pubblicata: {event_key} - {title}")
+                    continue
+
+                entry_ts = get_entry_timestamp(entry)
+                is_breaking = title_has_breaking_marker(title)
+                breaking_expires_at = entry_ts + BREAKING_ACTIVE_SECONDS
+
+                score, reasons = calculate_importance_score(title, summary, link)
+                if is_breaking and breaking_expires_at < time.time():
+                    score = clamp_score(score - BREAKING_SCORE_BOOST)
+                    reasons.append("breaking scaduto")
+                prio = priority_label(score)
+
+                if score < MIN_PUBLISH_SCORE:
+                    print(f"[SKIP] Score sotto soglia editoriale ({score}/{MIN_PUBLISH_SCORE}): {title}")
+                    continue
+
                 seen_in_this_run.add(sem_id)
                 seen_in_this_run.add(title_key)
-                queue.append({"entry": entry, "semantic_id": sem_id, "title_key": title_key})
+                queue.append({
+                    "entry": entry,
+                    "url": link,
+                    "title": title,
+                    "semantic_id": sem_id,
+                    "title_key": title_key,
+                    "score": score,
+                    "score_reasons": reasons,
+                    "priority": prio,
+                    "event_key": event_key,
+                    "feed_order": idx,
+                    "source_feed": feed_url,
+                    "created_at": time.time(),
+                    "source_timestamp": entry_ts,
+                    "is_breaking": is_breaking,
+                    "breaking_expires_at": breaking_expires_at,
+                    "attempts": 0,
+                })
         except Exception as e:
             print(f"[BOT] Errore feed {feed_url}: {e}")
 
+    queue.sort(key=lambda x: (int(x.get("score", 0)), -int(x.get("feed_order", 0))), reverse=True)
+    for item in queue[:10]:
+        print(f"[SCORE] {item['score']} {item['priority']} - {item['title']} | {', '.join(item.get('score_reasons', []))}")
     return queue
+
+
+def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, source_fail_counts):
+    entry = item.get("entry")
+    link = item.get("url") or (getattr(entry, "link", None) if entry else None)
+    title = sanitize_text(item.get("title") or (getattr(entry, "title", "Senza titolo") if entry else "Senza titolo"))
+    sem_id = item.get("semantic_id") or make_semantic_id_from_title(title)
+    title_key = item.get("title_key") or make_title_key(title)
+
+    print(f"[BOT] Elaborazione: {title}")
+    print(f"[BOT] semantic_id={sem_id}")
+    print(f"[SCORE] iniziale={item.get('score', 0)} priority={priority_label(int(item.get('score', 0)))}")
+
+    if not link:
+        print("[SKIP] URL mancante")
+        return "skipped"
+
+    if link in history["urls"] or sem_id in history["semantic_ids"]:
+        print(f"[SKIP] Già pubblicato o già in history: {title}")
+        remove_pending_url(link)
+        return "skipped"
+
+    domain = get_domain(link)
+    if source_fail_counts.get(domain, 0) >= MAX_SOURCE_FAILS_PER_DOMAIN:
+        print(f"[SKIP] Dominio temporaneamente escluso in questa run: {domain}")
+        return "skipped"
+
+    full_text, scrape_error, page_html, page_img, embed_urls = get_clean_text(link)
+    if embed_urls:
+        print(f"[BOT] Embed trovati: {len(embed_urls)}")
+
+    if not full_text:
+        if entry:
+            fallback_text = get_summary_fallback(entry)
+        else:
+            fallback_text = ""
+        if fallback_text:
+            print(f"[BOT] Uso summary fallback per: {title}")
+            full_text = fallback_text
+        else:
+            print(f"[SKIP] Testo insufficiente: {title}")
+            if scrape_error and scrape_error.startswith("http_"):
+                source_fail_counts[domain] = source_fail_counts.get(domain, 0) + 1
+            return "skipped"
+
+    refined_score, refined_reasons = calculate_importance_score(title, full_text, link)
+    item["score"] = max(int(item.get("score", 0)), refined_score)
+    item["score_reasons"] = refined_reasons
+    print(f"[SCORE] raffinato={item['score']} priority={priority_label(item['score'])} | {', '.join(refined_reasons)}")
+
+    if item["score"] < MIN_PUBLISH_SCORE:
+        print(f"[SKIP] Score sotto soglia editoriale dopo raffinamento: {item['score']}/{MIN_PUBLISH_SCORE} - {title}")
+        return "skipped"
+
+    story_fingerprint = make_story_fingerprint(title, full_text)
+    news_core_key = make_news_core_key(title, full_text)
+    event_key = item.get("event_key") or make_event_key(title, full_text, link)
+    item["event_key"] = event_key
+
+    if event_key and (event_key in seen_event_keys or history_has_event_key(history, event_key)):
+        print(f"[SKIP] Event key già pubblicata: {event_key} - {title}")
+        remove_pending_url(link)
+        return "skipped"
+
+    if is_duplicate_story_fingerprint(story_fingerprint, seen_story_fingerprints):
+        print(f"[SKIP] News probabilmente già pubblicata da altra fonte: {title}")
+        print(f"[SKIP] story_fingerprint={story_fingerprint}")
+        remove_pending_url(link)
+        return "skipped"
+
+    if news_core_key and news_core_key in seen_news_core_keys:
+        print(f"[SKIP] News core già pubblicata da altra fonte: {title}")
+        print(f"[SKIP] news_core_key={news_core_key}")
+        remove_pending_url(link)
+        return "skipped"
+
+    if not wordpress_is_available():
+        add_pending_article(item, reason="wp_down_before_gemini")
+        return "wp_down"
+
+    news_data, err_type = translate_news(title, full_text, source_url=link)
+    if not news_data:
+        print(f"[SKIP] Traduzione fallita: {title} (err_type={err_type})")
+        return "model_fail" if err_type == "model" else "validation_fail"
+
+    if title_soft_validation_failed(news_data["titolo"]):
+        print(f"[SKIP] Titolo non pubblicabile: {news_data['titolo']}")
+        return "validation_fail"
+
+    if err_type != "soft_mismatch" and not title_is_good_enough_for_publish(news_data["titolo"]):
+        print(f"[SKIP] Titolo non pubblicabile: {news_data['titolo']}")
+        return "validation_fail"
+
+    # v39: Breaking controllato dal bot, non da Gemini. Scade automaticamente.
+    news_data["titolo"] = maybe_add_breaking_prefix(news_data["titolo"], item)
+
+    post_id, post_json = create_post_without_image(
+        data=news_data,
+        sem_id=sem_id,
+        url=link,
+        embed_urls=embed_urls
+    )
+
+    if not post_id:
+        add_pending_article(item, reason="wp_publish_failed")
+        print(f"[FAIL] Creazione post fallita per: {news_data['titolo']}")
+        return "wp_fail"
+
+    img_url = (extract_image_url(entry) if entry else None) or page_img
+    if img_url:
+        print(f"[BOT] Immagine trovata: {img_url}")
+        img_id = upload_image_to_wp(img_url)
+        if img_id:
+            attached = attach_featured_media(post_id, img_id)
+            if not attached:
+                print(f"[WP] Immagine non associata al post {post_id}, ma il post è già pubblicato")
+    else:
+        print(f"[BOT] Nessuna immagine trovata per: {title}")
+
+    print(f"[OK] Pubblicato: {news_data['titolo']}")
+    save_to_history(link, sem_id, title_key, story_fingerprint, news_core_key, event_key)
+    seen_story_fingerprints.add(story_fingerprint)
+    if news_core_key:
+        seen_news_core_keys.add(news_core_key)
+    if event_key:
+        seen_event_keys.add(event_key)
+    remove_pending_url(link)
+    time.sleep(1)
+    return "published"
 
 
 def run_bot():
     run_start = time.time()
+    history = load_history()
+    seen_story_fingerprints = set(history.get("story_fingerprints", set()))
+    seen_news_core_keys = set(history.get("news_core_keys", set()))
+    seen_event_keys = set(history.get("event_keys", set()))
 
-    if not wordpress_is_available():
-        print("[BOT] Stop: WordPress offline o non raggiungibile. Esco senza chiamare Gemini.")
+    wp_available = wordpress_is_available()
+    pending = load_pending_articles(history)
+
+    # Costruiamo sempre la queue feed: serve sia per decidere normal/storm, sia per salvare pending se WP e' giu.
+    queue = build_candidates(history)
+    mode = determine_run_mode(queue)
+    new_post_limit = new_post_limit_for_mode(mode)
+
+    if not wp_available:
+        print("[BOT] WordPress offline: assegno score e salvo solo i candidati che sarebbero stati pubblicati, senza chiamare Gemini.")
+        save_selected_candidates_to_pending(queue, reason=f"wp_down_initial_{mode}", limit=new_post_limit)
         return
 
     if not check_gemini():
         print("[BOT] Stop: nessun modello Gemini disponibile")
         return
 
-    history = load_history()
-    queue = build_candidates(history)
-    seen_story_fingerprints = set(history.get("story_fingerprints", set()))
-    seen_news_core_keys = set(history.get("news_core_keys", set()))
-
-    if not queue:
-        print("[BOT] Nessuna news nuova trovata")
-        return
-
-    print(f"[BOT] News candidate totali: {len(queue)}")
-
-    published_count = 0
-    processed_count = 0
+    pending_published = 0
+    new_published = 0
+    pending_processed = 0
+    new_processed = 0
     model_fail_streak = 0
     validation_fail_streak = 0
     wp_fail_streak = 0
     source_fail_counts = {}
 
-    for item in queue:
+    # 1) Recupero pending PRIMA, ma senza consumare lo slot delle nuove news.
+    if pending:
+        print(f"[PENDING] Elementi da recuperare: {len(pending)}")
+        for pitem in pending[:MAX_PENDING_RECOVERY_PER_RUN]:
+            if time.time() - run_start > MAX_RUN_SECONDS:
+                print("[BOT] Stop anticipato durante pending: superato timeout massimo run")
+                break
+            status = process_candidate_item(pitem, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, source_fail_counts)
+            pending_processed += 1
+            if status == "published":
+                pending_published += 1
+                wp_fail_streak = 0
+            elif status in {"wp_fail", "wp_down"}:
+                wp_fail_streak += 1
+                if wp_fail_streak >= MAX_WP_FAIL_STREAK:
+                    print("[BOT] WordPress instabile durante pending: stop per evitare spreco API")
+                    return
+            elif status == "model_fail":
+                model_fail_streak += 1
+            elif status == "validation_fail":
+                validation_fail_streak += 1
+
+    # 2) Nuove news: fino a 3 in normal, fino a 5 in storm.
+    if not queue and pending_published == 0:
+        print("[BOT] Nessuna news nuova trovata")
+        return
+
+    print(f"[BOT] News candidate totali: {len(queue)} | mode={mode} | max nuove={new_post_limit} | pending pubblicati={pending_published}")
+
+    for idx, item in enumerate(queue):
         if time.time() - run_start > MAX_RUN_SECONDS:
             print("[BOT] Stop anticipato: superato timeout massimo run")
             break
-        if published_count >= MAX_POSTS_PER_RUN:
+        if new_published >= new_post_limit:
             break
-        if processed_count >= MAX_CANDIDATES_TO_TRY:
-            print("[BOT] Raggiunto limite massimo candidati provati")
+        if new_processed >= MAX_CANDIDATES_TO_TRY:
+            print("[BOT] Raggiunto limite massimo candidati nuovi provati")
             break
         if model_fail_streak >= MAX_MODEL_FAIL_STREAK:
             print("[BOT] Stop anticipato: troppi errori consecutivi di modello")
@@ -2009,122 +2676,38 @@ def run_bot():
             print("[BOT] Stop anticipato: troppi errori consecutivi di validazione")
             break
         if wp_fail_streak >= MAX_WP_FAIL_STREAK:
-            print("[BOT] Stop anticipato: WordPress non raggiungibile, interrompo la run per evitare spreco di tempo/API")
+            remaining_slots = max(0, new_post_limit - new_published)
+            print("[BOT] Stop anticipato: WordPress non raggiungibile, salvo candidati pubblicabili rimanenti")
+            save_selected_candidates_to_pending(queue[idx:], reason=f"wp_down_mid_run_{mode}", limit=remaining_slots)
             break
 
-        processed_count += 1
-        entry = item["entry"]
-        link = entry.link
-        title = sanitize_text(getattr(entry, "title", "Senza titolo"))
-        sem_id = item["semantic_id"]
-        title_key = item["title_key"]
+        new_processed += 1
+        status = process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, source_fail_counts)
 
-        print(f"[BOT] Elaborazione: {title}")
-        print(f"[BOT] semantic_id={sem_id}")
-
-        domain = get_domain(link)
-        if source_fail_counts.get(domain, 0) >= MAX_SOURCE_FAILS_PER_DOMAIN:
-            print(f"[SKIP] Dominio temporaneamente escluso in questa run: {domain}")
-            continue
-
-        full_text, scrape_error, page_html, page_img, embed_urls = get_clean_text(link)
-        if embed_urls:
-            print(f"[BOT] Embed trovati: {len(embed_urls)}")
-
-        if not full_text:
-            fallback_text = get_summary_fallback(entry)
-            if fallback_text:
-                print(f"[BOT] Uso summary fallback per: {title}")
-                full_text = fallback_text
-            else:
-                print(f"[SKIP] Testo insufficiente: {title}")
-                if scrape_error and scrape_error.startswith("http_"):
-                    source_fail_counts[domain] = source_fail_counts.get(domain, 0) + 1
-                continue
-
-        story_fingerprint = make_story_fingerprint(title, full_text)
-        news_core_key = make_news_core_key(title, full_text)
-
-        if is_duplicate_story_fingerprint(story_fingerprint, seen_story_fingerprints):
-            print(f"[SKIP] News probabilmente già pubblicata da altra fonte: {title}")
-            print(f"[SKIP] story_fingerprint={story_fingerprint}")
-            continue
-
-        if news_core_key and news_core_key in seen_news_core_keys:
-            print(f"[SKIP] News core già pubblicata da altra fonte: {title}")
-            print(f"[SKIP] news_core_key={news_core_key}")
-            continue
-
-        news_data, err_type = translate_news(title, full_text, source_url=link)
-        if not news_data:
-            if err_type == "model":
-                model_fail_streak += 1
-            else:
-                validation_fail_streak += 1
-            print(f"[SKIP] Traduzione fallita: {title} (model_streak={model_fail_streak}, validation_streak={validation_fail_streak})")
-            continue
-
-        if err_type == "model":
-            model_fail_streak += 1
-        else:
+        if status == "published":
+            new_published += 1
+            wp_fail_streak = 0
             model_fail_streak = 0
-
-        if err_type == "ok":
             validation_fail_streak = 0
-        elif err_type == "soft_mismatch":
-            print(f"[BOT] Titolo parafrasato ma accettato: {news_data['titolo']}")
-        else:
-            validation_fail_streak += 1
-
-        if title_soft_validation_failed(news_data["titolo"]):
-            validation_fail_streak += 1
-            print(f"[SKIP] Titolo non pubblicabile: {news_data['titolo']}")
-            continue
-
-        if err_type != "soft_mismatch" and not title_is_good_enough_for_publish(news_data["titolo"]):
-            validation_fail_streak += 1
-            print(f"[SKIP] Titolo non pubblicabile: {news_data['titolo']}")
-            continue
-
-        model_fail_streak = 0
-
-        post_id, post_json = create_post_without_image(
-            data=news_data,
-            sem_id=sem_id,
-            url=link,
-            embed_urls=embed_urls
-        )
-
-        if not post_id:
+        elif status in {"wp_fail", "wp_down"}:
             wp_fail_streak += 1
-            print(f"[FAIL] Creazione post fallita per: {news_data['titolo']} (wp_streak={wp_fail_streak})")
             if wp_fail_streak >= MAX_WP_FAIL_STREAK:
-                print("[BOT] WordPress non raggiungibile, interrompo la run per evitare spreco di tempo/API")
+                remaining_slots = max(0, new_post_limit - new_published)
+                print("[BOT] WordPress non raggiungibile, salvo candidati pubblicabili rimanenti e interrompo")
+                save_selected_candidates_to_pending(queue[idx + 1:], reason=f"wp_down_mid_run_{mode}", limit=remaining_slots)
                 break
-            continue
+        elif status == "model_fail":
+            model_fail_streak += 1
+        elif status == "validation_fail":
+            validation_fail_streak += 1
 
-        wp_fail_streak = 0
-
-        img_url = extract_image_url(entry) or page_img
-        if img_url:
-            print(f"[BOT] Immagine trovata: {img_url}")
-            img_id = upload_image_to_wp(img_url)
-            if img_id:
-                attached = attach_featured_media(post_id, img_id)
-                if not attached:
-                    print(f"[WP] Immagine non associata al post {post_id}, ma il post è già pubblicato")
-        else:
-            print(f"[BOT] Nessuna immagine trovata per: {title}")
-
-        print(f"[OK] Pubblicato: {news_data['titolo']}")
-        save_to_history(link, sem_id, title_key, story_fingerprint, news_core_key)
-        seen_story_fingerprints.add(story_fingerprint)
-        if news_core_key:
-            seen_news_core_keys.add(news_core_key)
-        published_count += 1
-        time.sleep(1)
-
-    print(f"[BOT] Pubblicati {published_count} articoli su {processed_count} candidati provati")
+    total_published = pending_published + new_published
+    total_processed = pending_processed + new_processed
+    print(
+        f"[BOT] Pubblicati {total_published} articoli "
+        f"({pending_published} pending + {new_published} nuove) "
+        f"su {total_processed} candidati provati | mode={mode}"
+    )
 
 
 if __name__ == "__main__":
