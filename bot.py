@@ -2130,7 +2130,7 @@ def calculate_importance_score(title, text="", url=""):
     wwe_name_hits = [name for name in WWE_NAMES if name in norm]
     aew_name_hits = [name for name in AEW_NAMES if name in norm]
     if top_hits:
-        score += min(25, 15 + 5 * len(top_hits)); reasons.append("top star: " + ", ".join(top_hits[:3]))
+        score += 25; reasons.append("top star: " + ", ".join(top_hits[:3]))
     if strong_hits:
         score += min(15, 8 + 3 * len(strong_hits)); reasons.append("nomi forti: " + ", ".join(strong_hits[:3]))
     if wwe_name_hits and not any(x in norm for x in ["wwe", "raw", "smackdown", "nxt"]):
@@ -2139,17 +2139,35 @@ def calculate_importance_score(title, text="", url=""):
         score += 8; reasons.append("nome AEW: " + ", ".join(aew_name_hits[:2]))
 
     # Tipo notizia
+    # v40: eventi forti e combo top name + evento forte.
+    # Non esistono bonus ad personam: tutti i top name usano la stessa logica.
+    major_event_terms = [
+        "death", "dies", "dead", "passed away", "passing",
+        "arrest", "arrested", "police", "911", "9-1-1", "emergency call",
+        "lawsuit", "legal", "investigation", "trial", "settlement",
+        "released", "release", "fired", "cut", "departure", "departs", "exits", "leaves",
+        "injury", "injured", "medical", "hospital", "surgery", "out of action",
+        "return", "returns", "returned", "comeback", "debut", "debuts",
+        "retirement", "retires", "retired",
+        "contract", "deal", "re-sign", "re-signs", "free agent", "coming to an end", "expires",
+        "title change", "wins title", "new champion", "vacated",
+        "acquisition", "merger", "netflix", "tv deal", "rights", "espn", "cw", "peacock", "broadcast", "streaming",
+        "scandal", "controversy", "altercation", "incident", "hotel incident"
+    ]
+    has_major_event = any(k in norm for k in major_event_terms)
+
     type_rules = [
         (20, ["breaking", "major update", "huge update", "shocking", "emergency"], "breaking/major update"),
-        (18, ["return", "returns", "returned", "debut", "debuts", "appears", "appearance"], "ritorno/debutto"),
+        (18, ["death", "dies", "dead", "passed away", "passing"], "morte"),
+        (18, ["arrest", "arrested", "police", "911", "9-1-1", "lawsuit", "legal", "investigation", "altercation", "incident"], "evento legale/controversia"),
+        (18, ["return", "returns", "returned", "comeback", "debut", "debuts", "appears", "appearance"], "ritorno/debutto"),
         (16, ["injury", "injured", "medical", "hospital", "surgery", "out of action"], "infortunio"),
-        (16, ["released", "release", "fired", "cut", "departure", "exits", "leaves"], "release/addio"),
+        (16, ["released", "release", "fired", "cut", "departure", "departs", "exits", "leaves"], "release/addio"),
         (14, ["contract", "deal", "re-sign", "re-signs", "free agent", "coming to an end", "expires"], "contratto"),
         (14, ["champion", "championship", "title change", "wins title", "new champion", "vacated"], "titolo/championship"),
-        (12, ["tv deal", "rights", "netflix", "espn", "cw", "peacock", "broadcast", "streaming"], "business/media rights"),
+        (12, ["tv deal", "rights", "netflix", "espn", "cw", "peacock", "broadcast", "streaming", "acquisition", "merger"], "business/media rights"),
         (10, ["announced", "confirmed", "set for", "match announced", "added to"], "match/segmento annunciato"),
         (8, ["backstage", "report", "reported", "reportedly", "rumor", "rumour", "plans"], "rumor/backstage"),
-        (6, ["arrest", "lawsuit", "legal", "controversy", "scandal"], "controversia/legal"),
         (4, ["says", "explains", "reveals", "discusses", "reflects", "believes", "thinks"], "intervista/opinione"),
     ]
     for points, keywords, label in type_rules:
@@ -2157,6 +2175,10 @@ def calculate_importance_score(title, text="", url=""):
             score += points
             reasons.append(label)
             break
+
+    if top_hits and has_major_event:
+        score += 15
+        reasons.append("combo top name + evento forte")
 
     # Rilevanza temporale / show
     if any(x in norm for x in ["wrestlemania", "summerslam", "royal rumble", "survivor series", "all in", "double or nothing", "full gear", "ple", "ppv"]):
