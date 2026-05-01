@@ -2083,6 +2083,79 @@ def find_existing_post_by_url(url):
         print(f"[WP] Verifica post esistente fallita: {e}")
     return None
 
+
+
+def wp_has_published_event(event_key, title="", url=""):
+    """
+    v42: evita falsi positivi da history sporca.
+    Se un event_key risulta in history, prima di skippare prova a verificare
+    che WordPress abbia davvero un post riconducibile a quell'evento.
+    In caso di dubbio ritorna False: meglio riprovare a pubblicare che perdere una news.
+    """
+    event_key = (event_key or "").strip()
+    if not event_key:
+        return False
+
+    if url and find_existing_post_by_url(url):
+        return True
+
+    raw_key = re.sub(r"^(event|report):", "", event_key)
+    key_tokens = [t for t in raw_key.split("-") if len(t) > 2]
+    title_tokens = [t for t in normalize_for_check(title).split() if len(t) > 2 and t not in STOPWORDS]
+
+    queries = []
+    if title:
+        queries.append(title[:80])
+    if key_tokens:
+        queries.append(" ".join(key_tokens[:5]))
+        if len(key_tokens) > 5:
+            queries.append(" ".join(key_tokens[-5:]))
+    if title_tokens:
+        queries.append(" ".join(title_tokens[:5]))
+
+    seen_queries = []
+    for q in queries:
+        q = sanitize_text(q)
+        if q and q not in seen_queries:
+            seen_queries.append(q)
+
+    for query in seen_queries[:4]:
+        try:
+            res = session.get(
+                WP_API_URL,
+                params={"search": query, "per_page": 20, "status": "publish"},
+                auth=(WP_USER, WP_PASSWORD),
+                timeout=REQUEST_TIMEOUT_WP
+            )
+            if res.status_code != 200:
+                continue
+
+            for post in res.json():
+                content = json.dumps(post, ensure_ascii=False)
+                norm_content = normalize_for_check(content)
+
+                if event_key in content or (url and url in content):
+                    return True
+
+                if key_tokens and all(tok in norm_content for tok in key_tokens):
+                    return True
+        except Exception as e:
+            print(f"[WP] Verifica event_key fallita ({event_key}): {e}")
+
+    return False
+
+
+def should_skip_event_key(history, event_key, title="", url=""):
+    """Ritorna True solo se l'event_key e' in history e WP conferma il post."""
+    if not history_has_event_key(history, event_key):
+        return False
+
+    if wp_has_published_event(event_key, title=title, url=url):
+        return True
+
+    print(f"[FIX] Event key in history ma non confermata su WordPress: {event_key} - provo a pubblicare")
+    return False
+
 def wp_create_post_request(payload, retries=1):
     last_exc = None
 
@@ -2103,7 +2176,7 @@ def wp_create_post_request(payload, retries=1):
 
     raise last_exc
 
-def create_post_without_image(data, sem_id, url, embed_urls=None):
+def create_post_without_image(data, sem_id, url, embed_urls=None, event_key=""):
     try:
         testo_html = data["testo"]
         soup_temp = BeautifulSoup(testo_html, "html.parser")
@@ -2127,7 +2200,7 @@ def create_post_without_image(data, sem_id, url, embed_urls=None):
             "content": content_html,
             "categories": [int(data.get("categoria", 8))],
             "status": "publish",
-            "meta": {"semantic_id": sem_id, "original_url": url}
+            "meta": {"semantic_id": sem_id, "original_url": url, "event_key": event_key}
         }
         
         try:
@@ -2700,8 +2773,8 @@ def build_candidates(history):
 
                 summary = get_entry_summary(entry)
                 event_key = make_event_key(title, summary, link)
-                if history_has_event_key(history, event_key):
-                    print(f"[SKIP] event_key già pubblicata: {event_key} - {title}")
+                if event_key and should_skip_event_key(history, event_key, title=title, url=link):
+                    print(f"[SKIP] event_key confermata su WordPress: {event_key} - {title}")
                     continue
 
                 entry_ts = get_entry_timestamp(entry)
@@ -2876,8 +2949,13 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     event_key = item.get("event_key") or make_event_key(title, full_text, link)
     item["event_key"] = event_key
 
-    if event_key and (event_key in seen_event_keys or history_has_event_key(history, event_key)):
-        print(f"[SKIP] Event key già pubblicata: {event_key} - {title}")
+    if event_key and event_key in seen_event_keys and wp_has_published_event(event_key, title=title, url=link):
+        print(f"[SKIP] Event key già pubblicata nella run e confermata su WordPress: {event_key} - {title}")
+        remove_pending_url(link)
+        return "skipped"
+
+    if event_key and should_skip_event_key(history, event_key, title=title, url=link):
+        print(f"[SKIP] Event key confermata su WordPress: {event_key} - {title}")
         remove_pending_url(link)
         return "skipped"
 
@@ -2917,7 +2995,8 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         data=news_data,
         sem_id=sem_id,
         url=link,
-        embed_urls=embed_urls
+        embed_urls=embed_urls,
+        event_key=event_key
     )
 
     if not post_id:
