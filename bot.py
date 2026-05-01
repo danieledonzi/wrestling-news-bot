@@ -25,6 +25,12 @@ WP_HEALTHCHECK_URL = WP_API_URL.split("/wp-json/")[0].rstrip("/") + "/wp-json/"
 HISTORY_FILE = "history.txt"
 PENDING_FILE = "pending_articles.json"
 
+# v41: gestione speciale report live/results senza alterare scoring/pending generale
+REPORT_WEEKLY_DELAY_SECONDS = int(3.5 * 60 * 60)
+REPORT_PLE_DELAY_SECONDS = int(5.5 * 60 * 60)
+REPORT_DEFAULT_DELAY_SECONDS = int(4 * 60 * 60)
+REPORT_MIN_COMPLETENESS_SCORE = 80
+
 
 FEEDS = [
     "https://www.wrestlinginc.com/feed/",
@@ -1187,6 +1193,163 @@ def is_results_article(source_title="", source_url="", text=""):
     return any(term in probe for term in result_terms) and any(term in probe for term in show_terms)
 
 
+def report_is_ple_or_ppv(title="", url="", text=""):
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:1200]}")
+    ple_terms = [
+        "wrestlemania", "summerslam", "royal rumble", "survivor series",
+        "money in the bank", "backlash", "crown jewel", "elimination chamber",
+        "clash at the castle", "clash in italy", "all in", "all out",
+        "double or nothing", "full gear", "revolution", "worlds end",
+        "forbidden door", "slammiversary", "bound for glory", "ple", "ppv"
+    ]
+    return any(term in probe for term in ple_terms)
+
+
+def report_delay_seconds(title="", url="", text=""):
+    if report_is_ple_or_ppv(title, url, text):
+        return REPORT_PLE_DELAY_SECONDS
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:600]}")
+    weekly_terms = ["raw", "smackdown", "nxt", "dynamite", "collision", "rampage", "impact"]
+    if any(term in probe for term in weekly_terms):
+        return REPORT_WEEKLY_DELAY_SECONDS
+    return REPORT_DEFAULT_DELAY_SECONDS
+
+
+def _extract_report_date_key(title="", url="", text=""):
+    probe = f"{title} {url} {(text or '')[:500]}"
+
+    patterns = [
+        r"\b(\d{1,2})[/-](\d{1,2})(?:[/-](\d{2,4}))?\b",       # 4/29 or 04-29-2026
+        r"\b(\d{4})[/-](\d{1,2})[/-](\d{1,2})\b",                # 2026-04-29
+    ]
+
+    m = re.search(patterns[1], probe)
+    if m:
+        return f"{int(m.group(1)):04d}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+
+    m = re.search(patterns[0], probe)
+    if m:
+        month = int(m.group(1))
+        day = int(m.group(2))
+        year = m.group(3) or "2026"
+        if len(year) == 2:
+            year = "20" + year
+        return f"{int(year):04d}-{month:02d}-{day:02d}"
+
+    return ""
+
+
+def make_report_event_key(title="", url="", text=""):
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:1200]}")
+    if not probe:
+        return ""
+
+    show_map = [
+        ("raw", "wwe-raw"),
+        ("smackdown", "wwe-smackdown"),
+        ("nxt", "wwe-nxt"),
+        ("dynamite", "aew-dynamite"),
+        ("collision", "aew-collision"),
+        ("rampage", "aew-rampage"),
+        ("impact", "tna-impact"),
+        ("wrestlemania", "wwe-wrestlemania"),
+        ("summerslam", "wwe-summerslam"),
+        ("royal rumble", "wwe-royal-rumble"),
+        ("survivor series", "wwe-survivor-series"),
+        ("money in the bank", "wwe-money-in-the-bank"),
+        ("backlash", "wwe-backlash"),
+        ("crown jewel", "wwe-crown-jewel"),
+        ("elimination chamber", "wwe-elimination-chamber"),
+        ("all in", "aew-all-in"),
+        ("all out", "aew-all-out"),
+        ("double or nothing", "aew-double-or-nothing"),
+        ("full gear", "aew-full-gear"),
+        ("revolution", "aew-revolution"),
+        ("worlds end", "aew-worlds-end"),
+        ("forbidden door", "aew-forbidden-door"),
+        ("slammiversary", "tna-slammiversary"),
+        ("bound for glory", "tna-bound-for-glory"),
+    ]
+
+    show = ""
+    for key, value in show_map:
+        if key in probe:
+            show = value
+            break
+
+    if not show:
+        show = make_title_key(title)[:70] or make_semantic_id_from_title(title)[:70]
+
+    date_key = _extract_report_date_key(title, url, text)
+    if date_key:
+        return f"report:{show}-{date_key}"
+
+    # Per i PLE senza data nel titolo, un solo report per evento/titolo.
+    return f"report:{show}-{make_title_key(title)[:60]}"
+
+
+def report_source_completeness_score(title, text):
+    plain = sanitize_text(text or "")
+    low = plain.lower()
+    paragraphs = [p for p in plain.split("\n\n") if len(p.strip()) > 40]
+
+    score = 0
+    score += min(len(plain) / 100, 300)
+    score += min(len(paragraphs) * 3, 90)
+
+    match_markers = len(re.findall(
+        r"\b(vs\.?|def\.?|defeated|winner|winners|batte|sconfigge|sconfiggono|mantiene|vince)\b",
+        low,
+        re.I,
+    ))
+    score += min(match_markers * 10, 120)
+
+    incomplete_markers = [
+        "stay tuned", "refresh", "updates throughout the night", "will provide live",
+        "match-by-match updates", "as the action unfolds", "latest results",
+        "resta sintonizzato", "aggiornamenti live", "copertura live"
+    ]
+    if any(marker in low for marker in incomplete_markers):
+        score -= 120
+
+    if len(plain) < 2500:
+        score -= 120
+
+    # Bonus leggero se il testo sembra avere un finale/chiusura.
+    if any(x in low[-1200:] for x in ["main event", "went off the air", "show ended", "closed the show", "final"]):
+        score += 25
+
+    return int(score)
+
+
+def choose_best_report_source(report_item):
+    best = None
+    for src in report_item.get("sources", []):
+        url = src.get("url", "")
+        title = src.get("title", report_item.get("title", ""))
+        if not url:
+            continue
+
+        full_text, scrape_error, page_html, page_img, embed_urls = get_clean_text(url)
+        if not full_text:
+            continue
+
+        score = report_source_completeness_score(title, full_text)
+        candidate = {
+            "url": url,
+            "title": title,
+            "text": full_text,
+            "image": page_img,
+            "embeds": embed_urls,
+            "score": score,
+            "source": src.get("source", get_domain(url)),
+        }
+        if best is None or candidate["score"] > best["score"]:
+            best = candidate
+
+    return best
+
+
 def extract_wrestlinginc_article_text(content, source_title="", source_url=""):
     sections = content.select(".news-article")
     if not sections:
@@ -2305,18 +2468,29 @@ def load_pending_articles(history=None):
     for item in items:
         if not isinstance(item, dict):
             continue
+
+        is_report = item.get("kind") == "report"
         url = item.get("url")
-        if not url or url in seen or url in history_urls:
+        dedupe_key = item.get("report_event_key") if is_report else url
+
+        if not url or not dedupe_key or dedupe_key in seen:
             continue
+        if (not is_report) and url in history_urls:
+            continue
+
         created_at = float(item.get("created_at", now))
         if now - created_at > PENDING_TTL_SECONDS:
             print(f"[PENDING] Scarto pending scaduto: {item.get('title', url)}")
             continue
-        item = apply_pending_decay(item)
-        if int(item.get("score", 0)) < MIN_PUBLISH_SCORE:
-            print(f"[PENDING] Scarto pending sotto soglia dopo decay: {item.get('score')} - {item.get('title', url)}")
-            continue
-        seen.add(url)
+
+        # v41: i report live non subiscono decay editoriale: aspettano la maturazione temporale.
+        if not is_report:
+            item = apply_pending_decay(item)
+            if int(item.get("score", 0)) < MIN_PUBLISH_SCORE:
+                print(f"[PENDING] Scarto pending sotto soglia dopo decay: {item.get('score')} - {item.get('title', url)}")
+                continue
+
+        seen.add(dedupe_key)
         cleaned.append(item)
     cleaned.sort(key=lambda x: (int(x.get("score", 0)), float(x.get("created_at", 0))), reverse=True)
     return cleaned[:MAX_PENDING_ITEMS]
@@ -2367,6 +2541,88 @@ def add_pending_article(item, reason="wp_down"):
     })
     save_pending_articles(pending)
     print(f"[PENDING] Salvata news {priority_label(score)} ({score}): {title}")
+
+
+def add_pending_report_article(item, full_text="", reason="report_live_delay"):
+    """v41: accoda/aggrega i report live nello stesso pending generale, senza pubblicarli subito."""
+    title = sanitize_text(item.get("title") or "Senza titolo")
+    url = item.get("url") or ""
+    if not url:
+        return
+
+    report_event_key = make_report_event_key(title, url, full_text)
+    if not report_event_key:
+        return
+
+    pending = load_pending_articles()
+    now = time.time()
+    delay = report_delay_seconds(title, url, full_text)
+    not_before = now + delay
+    domain = get_domain(url)
+
+    existing = None
+    for p in pending:
+        if p.get("kind") == "report" and p.get("report_event_key") == report_event_key:
+            existing = p
+            break
+
+    source_record = {
+        "url": url,
+        "title": title,
+        "source": domain,
+        "first_seen": now,
+        "last_seen": now,
+        "last_text_len": len(full_text or ""),
+    }
+
+    if existing:
+        existing["last_seen"] = now
+        existing["score"] = max(int(existing.get("score", 0)), int(item.get("score", 0)))
+        existing["not_before"] = min(float(existing.get("not_before", not_before)), not_before)
+        existing["score_reasons"] = list(dict.fromkeys((existing.get("score_reasons") or []) + ["report live aggregato"]))
+        sources = existing.setdefault("sources", [])
+        for src in sources:
+            if src.get("url") == url:
+                src["last_seen"] = now
+                src["last_text_len"] = max(int(src.get("last_text_len", 0)), len(full_text or ""))
+                break
+        else:
+            sources.append(source_record)
+    else:
+        pending.append({
+            "kind": "report",
+            "url": url,
+            "title": title,
+            "semantic_id": report_event_key.replace("report:", "report-"),
+            "title_key": make_title_key(title),
+            "score": int(item.get("score", MIN_PUBLISH_SCORE)),
+            "priority": priority_label(int(item.get("score", MIN_PUBLISH_SCORE))),
+            "event_key": report_event_key,
+            "report_event_key": report_event_key,
+            "reasons": item.get("score_reasons", []),
+            "score_reasons": list(dict.fromkeys((item.get("score_reasons", []) or []) + ["report live: pubblicazione ritardata"])),
+            "is_breaking": False,
+            "breaking_expires_at": 0,
+            "status": "waiting_report_completion",
+            "reason": reason,
+            "created_at": now,
+            "first_seen": now,
+            "last_seen": now,
+            "not_before": not_before,
+            "attempts": int(item.get("attempts", 0)),
+            "sources": [source_record],
+        })
+
+    save_pending_articles(pending)
+    print(f"[REPORT] Salvato/aggiornato pending report: {report_event_key} | pronto tra {int(delay/60)} min")
+
+
+def remove_pending_report_key(report_event_key):
+    if not report_event_key or not os.path.exists(PENDING_FILE):
+        return
+    pending = load_pending_articles()
+    pending = [x for x in pending if x.get("report_event_key") != report_event_key]
+    save_pending_articles(pending)
 
 
 def remove_pending_url(url):
@@ -2491,7 +2747,65 @@ def build_candidates(history):
     return queue
 
 
+def process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, source_fail_counts):
+    report_event_key = item.get("report_event_key") or item.get("event_key")
+    now = time.time()
+    not_before = float(item.get("not_before", 0) or 0)
+
+    if now < not_before:
+        remaining = int((not_before - now) / 60)
+        print(f"[REPORT] Non ancora maturo: {report_event_key} ({remaining} min rimanenti)")
+        return "skipped"
+
+    if report_event_key and (report_event_key in seen_event_keys or history_has_event_key(history, report_event_key)):
+        print(f"[REPORT] Già pubblicato: {report_event_key}")
+        remove_pending_report_key(report_event_key)
+        return "skipped"
+
+    print(f"[REPORT] Valuto fonti per report: {report_event_key}")
+    best = choose_best_report_source(item)
+    if not best:
+        print(f"[REPORT] Nessuna fonte valida per report: {report_event_key}")
+        return "skipped"
+
+    print(f"[REPORT] Fonte migliore: score_completezza={best['score']} | {best['source']} | {best['title']}")
+    if best["score"] < REPORT_MIN_COMPLETENESS_SCORE:
+        print(f"[REPORT] Report ancora debole/incompleto: {report_event_key} score={best['score']}/{REPORT_MIN_COMPLETENESS_SCORE}")
+        return "skipped"
+
+    normal_item = dict(item)
+    normal_item.update({
+        "kind": "report_ready",
+        "url": best["url"],
+        "title": sanitize_text(best["title"]),
+        "semantic_id": (report_event_key or make_semantic_id_from_title(best["title"])).replace("report:", "report-"),
+        "title_key": make_title_key(best["title"]),
+        "event_key": report_event_key,
+        "force_process_report": True,
+        "prefetched_text": best["text"],
+        "prefetched_image": best.get("image"),
+        "prefetched_embeds": best.get("embeds", []),
+    })
+
+    status = process_candidate_item(
+        normal_item,
+        history,
+        seen_story_fingerprints,
+        seen_news_core_keys,
+        seen_event_keys,
+        source_fail_counts,
+    )
+
+    if status == "published":
+        remove_pending_report_key(report_event_key)
+
+    return status
+
+
 def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, source_fail_counts):
+    if item.get("kind") == "report":
+        return process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, source_fail_counts)
+
     entry = item.get("entry")
     link = item.get("url") or (getattr(entry, "link", None) if entry else None)
     title = sanitize_text(item.get("title") or (getattr(entry, "title", "Senza titolo") if entry else "Senza titolo"))
@@ -2516,7 +2830,15 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         print(f"[SKIP] Dominio temporaneamente escluso in questa run: {domain}")
         return "skipped"
 
-    full_text, scrape_error, page_html, page_img, embed_urls = get_clean_text(link)
+    if item.get("prefetched_text"):
+        full_text = item.get("prefetched_text")
+        scrape_error = None
+        page_html = ""
+        page_img = item.get("prefetched_image")
+        embed_urls = item.get("prefetched_embeds", [])
+        print(f"[REPORT] Uso testo prefetched per report maturo ({len(full_text)} caratteri)")
+    else:
+        full_text, scrape_error, page_html, page_img, embed_urls = get_clean_text(link)
     if embed_urls:
         print(f"[BOT] Embed trovati: {len(embed_urls)}")
 
@@ -2533,6 +2855,12 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
             if scrape_error and scrape_error.startswith("http_"):
                 source_fail_counts[domain] = source_fail_counts.get(domain, 0) + 1
             return "skipped"
+
+    # v41: i report live/results non vanno pubblicati appena entrano nel feed.
+    # Li accodiamo nello stesso pending generale e li riprendiamo dopo il delay.
+    if is_results_article(title, link, full_text) and not item.get("force_process_report"):
+        add_pending_report_article(item, full_text=full_text, reason="report_live_delay")
+        return "skipped"
 
     refined_score, refined_reasons = calculate_importance_score(title, full_text, link)
     item["score"] = max(int(item.get("score", 0)), refined_score)
