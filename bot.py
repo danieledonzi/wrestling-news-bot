@@ -2210,6 +2210,11 @@ def create_post_without_image(data, sem_id, url, embed_urls=None, event_key=""):
                 data_json = res.json()
                 return data_json.get("id"), data_json
 
+            if response_is_imunify_block(res):
+                print("[WP] Blocco Imunify360 rilevato: interrompo dopo questa news per evitare spreco API")
+                print(f"[WP] Risposta: {res.text[:500]}")
+                return None, {"firewall_block": "imunify360"}
+
             print(f"[WP] Risposta: {res.text[:500]}")
             return None, None
 
@@ -2322,6 +2327,30 @@ def make_event_key(title, text="", url=""):
 
 def history_has_event_key(history, event_key):
     return bool(event_key and event_key in history.get("event_keys", set()))
+
+
+def pending_dedupe_key(item):
+    """v43: pending deduplica per event_key quando disponibile, altrimenti per URL.
+    I report continuano a usare report_event_key.
+    """
+    if not isinstance(item, dict):
+        return ""
+    if item.get("kind") == "report":
+        return item.get("report_event_key") or item.get("event_key") or item.get("url", "")
+    return item.get("event_key") or item.get("url", "")
+
+
+def response_is_imunify_block(res):
+    """Riconosce il blocco Imunify360 senza cambiare il comportamento generale del bot."""
+    try:
+        body = (res.text or "").lower()
+    except Exception:
+        body = ""
+    return (
+        "imunify360" in body
+        or "bot-protection" in body
+        or "ips used for automation should be whitelisted" in body
+    )
 
 def clamp_score(value, low=0, high=100):
     return max(low, min(high, int(value)))
@@ -2544,7 +2573,7 @@ def load_pending_articles(history=None):
 
         is_report = item.get("kind") == "report"
         url = item.get("url")
-        dedupe_key = item.get("report_event_key") if is_report else url
+        dedupe_key = pending_dedupe_key(item)
 
         if not url or not dedupe_key or dedupe_key in seen:
             continue
@@ -2586,14 +2615,38 @@ def add_pending_article(item, reason="wp_down"):
         return
 
     pending = load_pending_articles()
-    urls = {x.get("url") for x in pending}
     url = item.get("url") or (getattr(item.get("entry"), "link", None) if item.get("entry") else None)
-    if not url or url in urls:
+    if not url:
         return
 
     title = item.get("title") or sanitize_text(getattr(item.get("entry"), "title", "Senza titolo"))
     sem_id = item.get("semantic_id") or make_semantic_id_from_title(title)
     title_key = item.get("title_key") or make_title_key(title)
+    event_key = item.get("event_key") or make_event_key(title, "", url)
+    new_dedupe_key = event_key or url
+
+    # v43: evita duplicati in pending non solo per URL, ma anche per event_key.
+    for existing in pending:
+        if pending_dedupe_key(existing) == new_dedupe_key:
+            if score > int(existing.get("score", 0) or 0):
+                existing.update({
+                    "url": url,
+                    "title": title,
+                    "semantic_id": sem_id,
+                    "title_key": title_key,
+                    "score": score,
+                    "priority": priority_label(score),
+                    "event_key": event_key,
+                    "reasons": item.get("score_reasons", []),
+                    "score_reasons": item.get("score_reasons", []),
+                    "reason": reason,
+                    "attempts": int(existing.get("attempts", 0)),
+                })
+                save_pending_articles(pending)
+                print(f"[PENDING] Aggiornata news già in coda per event_key/URL ({score}): {title}")
+            else:
+                print(f"[PENDING] Già in coda per event_key/URL: {title}")
+            return
 
     pending.append({
         "url": url,
@@ -2602,7 +2655,7 @@ def add_pending_article(item, reason="wp_down"):
         "title_key": title_key,
         "score": score,
         "priority": priority_label(score),
-        "event_key": item.get("event_key") or make_event_key(title, "", url),
+        "event_key": event_key,
         "reasons": item.get("score_reasons", []),
         "score_reasons": item.get("score_reasons", []),
         "is_breaking": bool(item.get("is_breaking", title_has_breaking_marker(title))),
@@ -3000,6 +3053,10 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     )
 
     if not post_id:
+        if post_json and post_json.get("firewall_block") == "imunify360":
+            add_pending_article(item, reason="wp_firewall_imunify360")
+            print(f"[FAIL] Creazione post bloccata da Imunify360 per: {news_data['titolo']}")
+            return "wp_firewall"
         add_pending_article(item, reason="wp_publish_failed")
         print(f"[FAIL] Creazione post fallita per: {news_data['titolo']}")
         return "wp_fail"
@@ -3072,6 +3129,9 @@ def run_bot():
             if status == "published":
                 pending_published += 1
                 wp_fail_streak = 0
+            elif status == "wp_firewall":
+                print("[BOT] Firewall Imunify360 rilevato durante pending: stop per evitare spreco API")
+                return
             elif status in {"wp_fail", "wp_down"}:
                 wp_fail_streak += 1
                 if wp_fail_streak >= MAX_WP_FAIL_STREAK:
@@ -3118,6 +3178,11 @@ def run_bot():
             wp_fail_streak = 0
             model_fail_streak = 0
             validation_fail_streak = 0
+        elif status == "wp_firewall":
+            remaining_slots = max(0, new_post_limit - new_published)
+            print("[BOT] Firewall Imunify360 rilevato: salvo candidati pubblicabili rimanenti e interrompo")
+            save_selected_candidates_to_pending(queue[idx + 1:], reason=f"wp_firewall_mid_run_{mode}", limit=remaining_slots)
+            break
         elif status in {"wp_fail", "wp_down"}:
             wp_fail_streak += 1
             if wp_fail_streak >= MAX_WP_FAIL_STREAK:
