@@ -266,6 +266,95 @@ def sanitize_text(text):
     text = normalize_unicode_punctuation(text)
     return normalize_whitespace(fix_mojibake(text))
 
+def italian_quality_issues(title, html_text):
+    issues = []
+
+    plain = BeautifulSoup(html_text or "", "html.parser").get_text(" ", strip=True)
+    combined = sanitize_text(f"{title} {plain}")
+
+    suspicious_patterns = [
+        r"\b\w+\s+a\b",  # casi tipo "torner a", "arriver a" da accento rotto
+        r"\bpiu\b",
+        r"\bperche\b",
+        r"\be\b",       # attenzione: intercetta anche congiunzione, quindi solo come warning debole
+        r"\bqualita\b",
+        r"\battivita\b",
+        r"\bpossibilita\b",
+        r"\bsara\b",
+        r"\bfara\b",
+        r"\bpotra\b",
+        r"\bdovra\b",
+    ]
+
+    # Pattern specifici più affidabili
+    hard_patterns = [
+        r"\btorner\s+a\b",
+        r"\barriver\s+a\b",
+        r"\bpasser\s+a\b",
+        r"\bsar\s+a\b",
+        r"\bfar\s+a\b",
+        r"\bpotr\s+a\b",
+        r"\bdovr\s+a\b",
+        r"\bperch\s+e\b",
+        r"\bpi\s+u\b",
+    ]
+
+    for pat in hard_patterns:
+        if re.search(pat, combined, flags=re.IGNORECASE):
+            issues.append(f"Possibile accento rotto: {pat}")
+
+    if looks_mojibake(combined):
+        issues.append("Possibile mojibake")
+
+    if title_soft_validation_failed(title):
+        issues.append("Titolo sospeso o incompleto")
+
+    if body_looks_suspicious(html_text):
+        issues.append("Testo sospetto o troppo breve")
+
+    return issues
+
+def repair_italian_output(news_data, source_title):
+    title = news_data.get("titolo", "")
+    text = news_data.get("testo", "")
+    category = news_data.get("categoria", 8)
+
+    prompt = f"""
+Sei un revisore editoriale italiano.
+
+Correggi SOLO errori grammaticali, sintattici, accenti rotti, frasi tronche e formulazioni innaturali.
+NON aggiungere informazioni.
+NON cambiare il significato.
+NON cambiare categoria.
+NON inserire link.
+Mantieni HTML solo con <p>, <b>, <blockquote>.
+Restituisci SOLO JSON valido in una riga.
+
+Titolo originale sorgente:
+{source_title}
+
+Titolo da correggere:
+{title}
+
+Testo da correggere:
+{text}
+
+JSON richiesto:
+{{"titolo":"stringa","testo":"html","categoria":{category}}}
+"""
+
+    repaired, used_model = generate_and_parse_json(prompt)
+
+    repaired["titolo"] = refine_title_italian(
+        sanitize_text(re.sub(r"<[^<]+?>", "", repaired.get("titolo", "")))
+    )
+    repaired["testo"] = remove_source_promos_from_html(
+        refine_body_text(repaired.get("testo", ""))
+    )
+    repaired["categoria"] = category
+
+    return repaired
+
 def refine_title_italian(title):
     if not title:
         return title
@@ -1568,6 +1657,21 @@ JSON richiesto:
         testo = fix_mojibake(testo)
         testo = refine_body_text(testo)
         testo = remove_source_promos_from_html(testo)
+        quality_issues = italian_quality_issues(titolo, testo)
+
+        if quality_issues:
+        print(f"[QUALITY] Problemi rilevati: {quality_issues}")
+        repaired = repair_italian_output(
+        {"titolo": titolo, "testo": testo, "categoria": forced_category},
+        source_title
+        )
+
+        titolo = repaired["titolo"]
+        testo = repaired["testo"]
+
+        remaining_issues = italian_quality_issues(titolo, testo)
+        if remaining_issues:
+            raise ValueError(f"Output ancora sospetto dopo revisione: {remaining_issues}")
 
         if title_needs_soft_cleanup(titolo):
             titolo = refine_title_italian(titolo)
