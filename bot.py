@@ -1905,37 +1905,190 @@ def wordpress_is_available():
         return False
 
 
-def validate_protected_source_facts(source_title, source_text, generated_title, generated_html):
-    """v44: impedisce che Gemini cambi nomi propri/ring name o numeri di eventi.
-    Esempi reali: Ricky Saints -> Ricky Starks, WrestleMania 42 -> WrestleMania 40.
+def extract_protected_source_facts(source_title="", source_text=""):
+    """v49: estrae fatti che il modello NON deve alterare.
+    Non serve solo a bloccare: viene usato anche nel prompt per guidare Gemini.
     """
-    source = normalize_for_check(f"{source_title} {source_text[:3000]}")
+    raw = sanitize_text(f"{source_title}\n{(source_text or '')[:5000]}")
+    facts = []
+
+    def add(value):
+        value = sanitize_text(value)
+        if value and value not in facts:
+            facts.append(value)
+
+    # Eventi con numerazione/anno: WrestleMania 42, SummerSlam 2026, ecc.
+    event_patterns = [
+        r"\bWrestleMania\s+\d+\b",
+        r"\bSummerSlam\s+\d+\b",
+        r"\bRoyal\s+Rumble\s+\d+\b",
+        r"\bSurvivor\s+Series\s+\d+\b",
+        r"\bMoney\s+in\s+the\s+Bank\s+\d+\b",
+        r"\bBacklash\s+\d+\b",
+        r"\bCrown\s+Jewel\s+\d+\b",
+        r"\bAll\s+In\s+\d+\b",
+        r"\bAll\s+Out\s+\d+\b",
+        r"\bDouble\s+or\s+Nothing\s+\d+\b",
+        r"\bFull\s+Gear\s+\d+\b",
+        r"\bRevolution\s+\d+\b",
+        r"\bForbidden\s+Door\s+\d+\b",
+    ]
+    for pat in event_patterns:
+        for m in re.finditer(pat, raw, flags=re.I):
+            add(m.group(0))
+
+    # Eventi/titoli ufficiali senza numero che spesso vengono normalizzati male.
+    official_phrases = [
+        "Saturday Night's Main Event", "Saturday Night Main Event",
+        "Clash in Italy", "Clash at the Castle",
+        "World Heavyweight Championship", "Undisputed WWE Championship",
+        "WWE Championship", "Intercontinental Championship",
+        "United States Championship", "WWE Women's Tag Team Championship",
+        "AEW World Championship", "AEW World Tag Team Championship",
+        "TNA International Championship",
+    ]
+    raw_low = raw.lower()
+    for phrase in official_phrases:
+        if phrase.lower() in raw_low:
+            # recupera la capitalizzazione dal sorgente quando possibile
+            m = re.search(re.escape(phrase), raw, flags=re.I)
+            add(m.group(0) if m else phrase)
+
+    # Date e numeri espliciti ricorrenti nei titoli/news.
+    date_patterns = [
+        r"\b\d{1,2}/\d{1,2}/\d{2,4}\b",
+        r"\b\d{4}-\d{1,2}-\d{1,2}\b",
+        r"\b(?:Jan|January|Feb|February|Mar|March|Apr|April|May|Jun|June|Jul|July|Aug|August|Sep|Sept|September|Oct|October|Nov|November|Dec|December)\s+\d{1,2}(?:st|nd|rd|th)?(?:,?\s+\d{4})?\b",
+    ]
+    for pat in date_patterns:
+        for m in re.finditer(pat, raw, flags=re.I):
+            add(m.group(0))
+
+    # Nomi propri nel titolo: sono più critici dei nomi dispersi nel corpo.
+    for name in extract_named_entities_from_title(source_title or ""):
+        if len(name) >= 4:
+            add(name)
+
+    return facts[:30]
+
+
+def build_fact_preservation_prompt_block(source_title="", source_text=""):
+    facts = extract_protected_source_facts(source_title, source_text)
+    if not facts:
+        facts_text = "- Nessun elemento specifico estratto automaticamente: resta comunque obbligatorio non alterare nomi, date, numeri, eventi e titoli ufficiali."
+    else:
+        facts_text = "\n".join(f"- {fact}" for fact in facts)
+
+    return f"""
+REGOLE CRITICHE DI FEDELTA' AI FATTI:
+- NON correggere il testo originale, anche se un nome, una data o un numero ti sembrano strani.
+- NON aggiornare nomi di ring name, eventi, numeri di WrestleMania, date o titoli ufficiali in base alla tua conoscenza.
+- Se il sorgente dice \"WrestleMania 42\", deve restare \"WrestleMania 42\". Non può diventare \"WrestleMania 40\", \"WrestleMania 43\" o altro.
+- Se il sorgente usa un ring name specifico, mantieni quel ring name. Non sostituirlo con nomi precedenti o alternativi.
+- Mantieni in inglese i nomi ufficiali di eventi, stable, titoli e stipulazioni.
+- Se non sei sicuro di un nome, data, numero o titolo, COPIALO ESATTAMENTE dal sorgente.
+
+PRIMA DI SCRIVERE L'ARTICOLO, USA QUESTO CONTROLLO INTERNO:
+1. Identifica nomi propri, eventi, date, numeri e titoli ufficiali nel sorgente.
+2. Scrivi la traduzione mantenendo questi elementi invariati.
+3. Prima di restituire il JSON, verifica di non aver alterato nessuno di questi elementi.
+
+ELEMENTI PROTETTI RILEVATI NEL SORGENTE:
+{facts_text}
+"""
+
+
+def _norm_fact(text):
+    return normalize_for_check(text)
+
+
+def repair_protected_source_facts(source_title, source_text, generated_title, generated_html):
+    """v49: repair locale e deterministico. Non inventa: ripristina solo elementi presenti nel sorgente."""
+    source_raw = sanitize_text(f"{source_title}\n{(source_text or '')[:5000]}")
+    title = sanitize_text(generated_title)
+    html = generated_html or ""
+
+    def replace_everywhere(pattern, replacement, flags=re.I):
+        nonlocal title, html
+        title = re.sub(pattern, replacement, title, flags=flags)
+        html = re.sub(pattern, replacement, html, flags=flags)
+
+    # Eventi numerati: se Gemini cambia il numero dello stesso evento, rimetti quello del sorgente.
+    numbered_event_bases = [
+        "WrestleMania", "SummerSlam", "Royal Rumble", "Survivor Series",
+        "Money in the Bank", "Backlash", "Crown Jewel", "All In", "All Out",
+        "Double or Nothing", "Full Gear", "Revolution", "Forbidden Door",
+    ]
+    for base in numbered_event_bases:
+        m = re.search(rf"\b{re.escape(base)}\s+(\d+)\b", source_raw, flags=re.I)
+        if not m:
+            continue
+        source_fact = m.group(0)
+        replace_everywhere(rf"\b{re.escape(base)}\s+\d+\b", source_fact)
+
+    # Alias/ring name noti che il modello tende a sostituire con conoscenza pregressa.
+    alias_conflicts = {
+        "Ricky Saints": ["Ricky Starks"],
+    }
+    source_low = source_raw.lower()
+    for correct, wrong_aliases in alias_conflicts.items():
+        if correct.lower() not in source_low:
+            continue
+        for wrong in wrong_aliases:
+            replace_everywhere(rf"\b{re.escape(wrong)}\b", correct)
+
+    # Eventi ufficiali senza numero: ripristina apostrofi/forma ufficiale se il sorgente la contiene.
+    official_event_variants = {
+        "Saturday Night's Main Event": ["Saturday Night Main Event", "Saturday Nights Main Event"],
+        "Clash in Italy": ["Clash In Italy"],
+    }
+    for correct, variants in official_event_variants.items():
+        if correct.lower() not in source_low:
+            continue
+        for variant in variants:
+            replace_everywhere(rf"\b{re.escape(variant)}\b", correct)
+
+    return title, html
+
+
+def validate_protected_source_facts(source_title, source_text, generated_title, generated_html):
+    """v49: controllo generale su fatti protetti, nomi e numeri alterati."""
+    source = normalize_for_check(f"{source_title} {source_text[:5000]}")
     generated_plain = BeautifulSoup(generated_html or "", "html.parser").get_text(" ", strip=True)
     generated = normalize_for_check(f"{generated_title} {generated_plain}")
     issues = []
 
-    protected_names = [
-        "ricky saints",
+    # I fatti protetti estratti dal sorgente devono restare presenti, almeno come token normalizzati.
+    for fact in extract_protected_source_facts(source_title, source_text):
+        nf = _norm_fact(fact)
+        if nf and nf not in generated:
+            issues.append(f"Elemento protetto mancante o alterato: {fact}")
+
+    # Controllo eventi numerati: stesso evento non può cambiare numero.
+    numbered_event_bases = [
+        "wrestlemania", "summerslam", "royal rumble", "survivor series",
+        "money in the bank", "backlash", "crown jewel", "all in", "all out",
+        "double or nothing", "full gear", "revolution", "forbidden door",
     ]
-    forbidden_substitutions = {
+    for base in numbered_event_bases:
+        src_nums = set(re.findall(rf"\b{re.escape(base)}\s+(\d+)\b", source, flags=re.I))
+        gen_nums = set(re.findall(rf"\b{re.escape(base)}\s+(\d+)\b", generated, flags=re.I))
+        if src_nums and gen_nums and not gen_nums.issubset(src_nums):
+            issues.append(f"Numero evento alterato per {base}: sorgente={sorted(src_nums)} generato={sorted(gen_nums)}")
+
+    # Alias vietati quando il sorgente usa il nome nuovo/specifico.
+    alias_conflicts = {
         "ricky saints": ["ricky starks"],
     }
-
-    for name in protected_names:
-        if name in source:
-            if name not in generated:
-                issues.append(f"Nome proprio non preservato: {name}")
-            for bad in forbidden_substitutions.get(name, []):
+    for correct, wrong_aliases in alias_conflicts.items():
+        if correct in source:
+            if correct not in generated:
+                issues.append(f"Nome proprio non preservato: {correct}")
+            for bad in wrong_aliases:
                 if bad in generated:
-                    issues.append(f"Sostituzione vietata: {name} -> {bad}")
+                    issues.append(f"Sostituzione vietata: {correct} -> {bad}")
 
-    source_wm = set(re.findall(r"wrestlemania\s+(\d+)", source, flags=re.I))
-    generated_wm = set(re.findall(r"wrestlemania\s+(\d+)", generated, flags=re.I))
-    if source_wm and generated_wm and not generated_wm.issubset(source_wm):
-        issues.append(f"Numero WrestleMania alterato: sorgente={sorted(source_wm)} generato={sorted(generated_wm)}")
-
-    return issues
-
+    return list(dict.fromkeys(issues))
 
 def translate_news(source_title, text, source_url=""):
     if not text or len(text) < 50:
@@ -1943,6 +2096,7 @@ def translate_news(source_title, text, source_url=""):
 
     forced_category = detect_source_category(source_title, text, source_url)
     results_mode = is_results_article(source_title, source_url, text)
+    protected_block = build_fact_preservation_prompt_block(source_title, text)
 
     results_instructions = """
 MODALITA SPECIALE RISULTATI SHOW:
@@ -1976,13 +2130,14 @@ Sei un giornalista italiano esperto di wrestling e sport da combattimento.
 
 Devi riscrivere in italiano questa specifica notizia come se fosse stata scritta direttamente per un sito italiano di news sportive. Non devi fare una traduzione letterale: devi conservare tutti i fatti, ma rendere il testo naturale, fluido e giornalistico.
 
+{protected_block}
 VINCOLI OBBLIGATORI:
 1. L'articolo deve parlare SOLO della notizia fornita.
 2. Non devi mescolare questa notizia con altre notizie.
 3. Non devi riutilizzare temi, eventi o dettagli di articoli precedenti.
 4. Il titolo deve restare semanticamente aderente al testo sorgente.
-5. Mantieni i nomi propri principali del titolo originale.
-6. Non inventare dettagli non presenti nel testo.
+5. Mantieni i nomi propri principali del titolo originale ESATTAMENTE come sono scritti.
+6. Non inventare dettagli non presenti nel testo e non correggere date, numeri o ring name in base alla tua conoscenza.
 7. Restituisci SOLO JSON valido in UNA SOLA RIGA.
 8. Nessun markdown.
 9. "titolo": senza HTML.
@@ -2049,7 +2204,11 @@ JSON richiesto:
 
         protected_issues = validate_protected_source_facts(source_title, text, titolo, testo)
         if protected_issues:
-            raise ValueError(f"Fatti/nomi sorgente alterati: {protected_issues}")
+            print(f"[FACTS] Problemi rilevati prima del repair: {protected_issues}")
+            titolo, testo = repair_protected_source_facts(source_title, text, titolo, testo)
+            protected_issues = validate_protected_source_facts(source_title, text, titolo, testo)
+            if protected_issues:
+                raise ValueError(f"Fatti/nomi sorgente alterati: {protected_issues}")
 
         quality_issues = italian_quality_issues(titolo, testo)
 
@@ -2065,7 +2224,11 @@ JSON richiesto:
 
             protected_issues = validate_protected_source_facts(source_title, text, titolo, testo)
             if protected_issues:
-                raise ValueError(f"Fatti/nomi sorgente alterati dopo revisione: {protected_issues}")
+                print(f"[FACTS] Problemi dopo revisione, tento repair locale: {protected_issues}")
+                titolo, testo = repair_protected_source_facts(source_title, text, titolo, testo)
+                protected_issues = validate_protected_source_facts(source_title, text, titolo, testo)
+                if protected_issues:
+                    raise ValueError(f"Fatti/nomi sorgente alterati dopo revisione: {protected_issues}")
 
         remaining_issues = italian_quality_issues(titolo, testo)
         if remaining_issues:
