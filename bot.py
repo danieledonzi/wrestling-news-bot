@@ -1823,6 +1823,38 @@ def wordpress_is_available():
         return False
 
 
+def validate_protected_source_facts(source_title, source_text, generated_title, generated_html):
+    """v44: impedisce che Gemini cambi nomi propri/ring name o numeri di eventi.
+    Esempi reali: Ricky Saints -> Ricky Starks, WrestleMania 42 -> WrestleMania 40.
+    """
+    source = normalize_for_check(f"{source_title} {source_text[:3000]}")
+    generated_plain = BeautifulSoup(generated_html or "", "html.parser").get_text(" ", strip=True)
+    generated = normalize_for_check(f"{generated_title} {generated_plain}")
+    issues = []
+
+    protected_names = [
+        "ricky saints",
+    ]
+    forbidden_substitutions = {
+        "ricky saints": ["ricky starks"],
+    }
+
+    for name in protected_names:
+        if name in source:
+            if name not in generated:
+                issues.append(f"Nome proprio non preservato: {name}")
+            for bad in forbidden_substitutions.get(name, []):
+                if bad in generated:
+                    issues.append(f"Sostituzione vietata: {name} -> {bad}")
+
+    source_wm = set(re.findall(r"wrestlemania\s+(\d+)", source, flags=re.I))
+    generated_wm = set(re.findall(r"wrestlemania\s+(\d+)", generated, flags=re.I))
+    if source_wm and generated_wm and not generated_wm.issubset(source_wm):
+        issues.append(f"Numero WrestleMania alterato: sorgente={sorted(source_wm)} generato={sorted(generated_wm)}")
+
+    return issues
+
+
 def translate_news(source_title, text, source_url=""):
     if not text or len(text) < 50:
         return None, "validation"
@@ -1932,6 +1964,11 @@ JSON richiesto:
         testo = fix_mojibake(testo)
         testo = refine_body_text(testo)
         testo = remove_source_promos_from_html(testo)
+
+        protected_issues = validate_protected_source_facts(source_title, text, titolo, testo)
+        if protected_issues:
+            raise ValueError(f"Fatti/nomi sorgente alterati: {protected_issues}")
+
         quality_issues = italian_quality_issues(titolo, testo)
 
         if quality_issues:
@@ -1943,6 +1980,10 @@ JSON richiesto:
 
             titolo = repaired["titolo"]
             testo = repaired["testo"]
+
+            protected_issues = validate_protected_source_facts(source_title, text, titolo, testo)
+            if protected_issues:
+                raise ValueError(f"Fatti/nomi sorgente alterati dopo revisione: {protected_issues}")
 
         remaining_issues = italian_quality_issues(titolo, testo)
         if remaining_issues:
@@ -2320,7 +2361,13 @@ def make_event_key(title, text="", url=""):
             break
 
     if entities and event_type:
-        return "event:" + "-".join(sorted(set(entities))[:3]) + "-" + event_type
+        # v44: evita event_key troppo generiche basate solo sullo show, es. event:smackdown-title.
+        # Queste chiavi possono bloccare news diverse nella stessa puntata. La chiave generica nasce
+        # solo se c'e' almeno una persona/entita forte oltre al nome dello show.
+        show_only_entities = {"smackdown"}
+        strong_entities = [e for e in sorted(set(entities)) if e not in show_only_entities]
+        if strong_entities:
+            return "event:" + "-".join(strong_entities[:3]) + "-" + event_type
 
     return ""
 
@@ -2789,7 +2836,7 @@ def make_pending_item_from_candidate(item):
     }
 
 
-def build_candidates(history):
+def build_candidates(history, wp_available=True):
     queue = []
     seen_in_this_run = set()
     seen_title_keys = set(history["title_keys"])
@@ -2825,11 +2872,6 @@ def build_candidates(history):
                     continue
 
                 summary = get_entry_summary(entry)
-                event_key = make_event_key(title, summary, link)
-                if event_key and should_skip_event_key(history, event_key, title=title, url=link):
-                    print(f"[SKIP] event_key confermata su WordPress: {event_key} - {title}")
-                    continue
-
                 entry_ts = get_entry_timestamp(entry)
                 is_breaking = title_has_breaking_marker(title)
                 breaking_expires_at = entry_ts + BREAKING_ACTIVE_SECONDS
@@ -2840,9 +2882,25 @@ def build_candidates(history):
                     reasons.append("breaking scaduto")
                 prio = priority_label(score)
 
-                if score < MIN_PUBLISH_SCORE:
+                is_report_candidate = is_results_article(title, link, summary)
+
+                # v44: i report/results non devono essere scartati dalla soglia editoriale normale.
+                # Devono entrare nella pipeline report, che li mette in pending e aspetta la maturazione.
+                if score < MIN_PUBLISH_SCORE and not is_report_candidate:
                     print(f"[SKIP] Score sotto soglia editoriale ({score}/{MIN_PUBLISH_SCORE}): {title}")
                     continue
+
+                # v44: verifica event_key su WordPress solo dopo lo scoring e solo se WP e' disponibile.
+                # Se WP e' offline, non fare chiamate di verifica che causano timeout: la verifica verra' rimandata.
+                event_key = make_event_key(title, summary, link)
+                if event_key and wp_available and should_skip_event_key(history, event_key, title=title, url=link):
+                    print(f"[SKIP] event_key confermata su WordPress: {event_key} - {title}")
+                    continue
+
+                if score < MIN_PUBLISH_SCORE and is_report_candidate:
+                    reasons.append("report/results: bypass soglia editoriale")
+                    score = MIN_PUBLISH_SCORE
+                    prio = priority_label(score)
 
                 seen_in_this_run.add(sem_id)
                 seen_in_this_run.add(title_key)
@@ -3095,7 +3153,7 @@ def run_bot():
     pending = load_pending_articles(history)
 
     # Costruiamo sempre la queue feed: serve sia per decidere normal/storm, sia per salvare pending se WP e' giu.
-    queue = build_candidates(history)
+    queue = build_candidates(history, wp_available=wp_available)
     mode = determine_run_mode(queue)
     new_post_limit = new_post_limit_for_mode(mode)
 
