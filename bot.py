@@ -1185,11 +1185,18 @@ def clean_article_text_from_container(content, max_chars=20000):
 
 
 def is_results_article(source_title="", source_url="", text=""):
-    probe = normalize_for_check(f"{source_title} {source_url} {text[:500]}")
+    probe = normalize_for_check(f"{source_title} {source_url} {text[:700]}")
     if not probe:
         return False
-    result_terms = ["results", "risultati", "risultato"]
-    show_terms = ["raw", "smackdown", "nxt", "dynamite", "collision", "rampage", "impact", "wwe", "aew", "tna"]
+    # v45: regola generale per tutti gli show, non solo SmackDown.
+    # Riconosce results/recap/highlights/key moments quando c'e' anche un riferimento a uno show.
+    result_terms = ["results", "risultati", "risultato", "highlights", "key moments", "recap", "report"]
+    show_terms = [
+        "raw", "smackdown", "nxt", "dynamite", "collision", "rampage", "impact",
+        "wwe", "aew", "tna", "wrestlemania", "summerslam", "royal rumble",
+        "survivor series", "money in the bank", "backlash", "all in", "all out",
+        "double or nothing", "full gear", "revolution", "slammiversary", "bound for glory"
+    ]
     return any(term in probe for term in result_terms) and any(term in probe for term in show_terms)
 
 
@@ -1200,9 +1207,12 @@ def report_is_ple_or_ppv(title="", url="", text=""):
         "money in the bank", "backlash", "crown jewel", "elimination chamber",
         "clash at the castle", "clash in italy", "all in", "all out",
         "double or nothing", "full gear", "revolution", "worlds end",
-        "forbidden door", "slammiversary", "bound for glory", "ple", "ppv"
+        "forbidden door", "slammiversary", "bound for glory"
     ]
-    return any(term in probe for term in ple_terms)
+    if any(term in probe for term in ple_terms):
+        return True
+    # v45: PLE/PPV solo come parole intere. Evita falsi positivi dentro altre parole.
+    return bool(re.search(r"\b(ple|ppv)\b", probe, flags=re.I))
 
 
 def report_delay_seconds(title="", url="", text=""):
@@ -1235,6 +1245,30 @@ def _extract_report_date_key(title="", url="", text=""):
         if len(year) == 2:
             year = "20" + year
         return f"{int(year):04d}-{month:02d}-{day:02d}"
+
+    # v45: date testuali nei titoli/URL, es. "May 1, 2026" o "may-1".
+    month_map = {
+        "jan": 1, "january": 1,
+        "feb": 2, "february": 2,
+        "mar": 3, "march": 3,
+        "apr": 4, "april": 4,
+        "may": 5,
+        "jun": 6, "june": 6,
+        "jul": 7, "july": 7,
+        "aug": 8, "august": 8,
+        "sep": 9, "sept": 9, "september": 9,
+        "oct": 10, "october": 10,
+        "nov": 11, "november": 11,
+        "dec": 12, "december": 12,
+    }
+    low = probe.lower()
+    month_alt = "|".join(sorted(month_map.keys(), key=len, reverse=True))
+    m = re.search(rf"\b({month_alt})[\s_-]+(\d{{1,2}})(?:st|nd|rd|th)?(?:[\s,_-]+(\d{{4}}))?\b", low)
+    if m:
+        month = month_map[m.group(1)]
+        day = int(m.group(2))
+        year = int(m.group(3) or "2026")
+        return f"{year:04d}-{month:02d}-{day:02d}"
 
     return ""
 
@@ -2620,6 +2654,16 @@ def load_pending_articles(history=None):
 
         is_report = item.get("kind") == "report"
         url = item.get("url")
+
+        # v45: migra i report pending creati con chiavi vecchie/non datate.
+        # Esempio: report:wwe-smackdown-smackdown-results... -> report:wwe-smackdown-2026-05-01
+        if is_report:
+            migrated_key = make_report_event_key(item.get("title", ""), url or "", "")
+            if migrated_key:
+                item["report_event_key"] = migrated_key
+                item["event_key"] = migrated_key
+                item["semantic_id"] = migrated_key.replace("report:", "report-")
+
         dedupe_key = pending_dedupe_key(item)
 
         if not url or not dedupe_key or dedupe_key in seen:
@@ -2730,7 +2774,10 @@ def add_pending_report_article(item, full_text="", reason="report_live_delay"):
     pending = load_pending_articles()
     now = time.time()
     delay = report_delay_seconds(title, url, full_text)
-    not_before = now + delay
+    # v45: il delay decorre dalla pubblicazione/visibilita nel feed, non da quando il bot lo vede.
+    # Se il report e' uscito durante la notte, al mattino puo' essere gia' maturo.
+    source_ts = float(item.get("source_timestamp", 0) or item.get("first_seen", 0) or now)
+    not_before = source_ts + delay
     domain = get_domain(url)
 
     existing = None
@@ -2743,7 +2790,7 @@ def add_pending_report_article(item, full_text="", reason="report_live_delay"):
         "url": url,
         "title": title,
         "source": domain,
-        "first_seen": now,
+        "first_seen": source_ts,
         "last_seen": now,
         "last_text_len": len(full_text or ""),
     }
@@ -2778,8 +2825,8 @@ def add_pending_report_article(item, full_text="", reason="report_live_delay"):
             "breaking_expires_at": 0,
             "status": "waiting_report_completion",
             "reason": reason,
-            "created_at": now,
-            "first_seen": now,
+            "created_at": source_ts,
+            "first_seen": source_ts,
             "last_seen": now,
             "not_before": not_before,
             "attempts": int(item.get("attempts", 0)),
@@ -2787,7 +2834,12 @@ def add_pending_report_article(item, full_text="", reason="report_live_delay"):
         })
 
     save_pending_articles(pending)
-    print(f"[REPORT] Salvato/aggiornato pending report: {report_event_key} | pronto tra {int(delay/60)} min")
+    remaining = max(0, int((not_before - now) / 60))
+    if remaining:
+        print(f"[REPORT] Salvato/aggiornato pending report: {report_event_key} | pronto tra {remaining} min")
+    else:
+        print(f"[REPORT] Salvato/aggiornato pending report: {report_event_key} | gia' maturo")
+    return report_event_key, not_before
 
 
 def remove_pending_report_key(report_event_key):
@@ -2942,9 +2994,11 @@ def process_report_pending_item(item, history, seen_story_fingerprints, seen_new
         return "skipped"
 
     if report_event_key and (report_event_key in seen_event_keys or history_has_event_key(history, report_event_key)):
-        print(f"[REPORT] Già pubblicato: {report_event_key}")
-        remove_pending_report_key(report_event_key)
-        return "skipped"
+        if wp_has_published_event(report_event_key, title=item.get("title", ""), url=item.get("url", "")):
+            print(f"[REPORT] Già pubblicato: {report_event_key}")
+            remove_pending_report_key(report_event_key)
+            return "skipped"
+        print(f"[REPORT] Event key in history ma non confermata su WordPress: {report_event_key} - provo recupero")
 
     print(f"[REPORT] Valuto fonti per report: {report_event_key}")
     best = choose_best_report_source(item)
@@ -3043,7 +3097,23 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     # v41: i report live/results non vanno pubblicati appena entrano nel feed.
     # Li accodiamo nello stesso pending generale e li riprendiamo dopo il delay.
     if is_results_article(title, link, full_text) and not item.get("force_process_report"):
-        add_pending_report_article(item, full_text=full_text, reason="report_live_delay")
+        report_saved = add_pending_report_article(item, full_text=full_text, reason="report_live_delay")
+        # v45: se il report e' gia' maturo, prova a pubblicarlo nella stessa run.
+        # Questo evita di aspettare un'altra schedulazione quando il report e' uscito ore prima.
+        if report_saved:
+            report_event_key, not_before = report_saved
+            if not_before <= time.time():
+                pending_now = load_pending_articles(history)
+                for report_item in pending_now:
+                    if report_item.get("kind") == "report" and report_item.get("report_event_key") == report_event_key:
+                        return process_report_pending_item(
+                            report_item,
+                            history,
+                            seen_story_fingerprints,
+                            seen_news_core_keys,
+                            seen_event_keys,
+                            source_fail_counts,
+                        )
         return "skipped"
 
     refined_score, refined_reasons = calculate_importance_score(title, full_text, link)
