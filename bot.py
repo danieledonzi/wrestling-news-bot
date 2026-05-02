@@ -2139,11 +2139,13 @@ GERGO:
 - I nomi dei tipi di match e delle stipulazioni restano in inglese:
   tag team match, mixed tag team match, triple threat match, fatal four-way match, cage match, ladder match, street fight, no disqualification match.
 - "chop" e' femminile: scrivi "le chop", "delle chop".
+- "grudge match" non va tradotto letteralmente: usa "regolamento di conti".
 """ if results_mode else """
 GERGO:
 - I nomi dei tipi di match e delle stipulazioni restano in inglese:
   tag team match, mixed tag team match, triple threat match, fatal four-way match, cage match, ladder match, street fight, no disqualification match.
 - "chop" e' femminile: scrivi "le chop", "delle chop".
+- "grudge match" non va tradotto letteralmente: usa "regolamento di conti".
 """
 
     prompt = f"""
@@ -2199,6 +2201,7 @@ GERGO E NOMI UFFICIALI:
 - "United States Championship" deve restare "United States Championship".
 - "AEW World Tag Team Championship" deve restare "AEW World Tag Team Championship".
 - I nomi dei match e delle stipulazioni restano in inglese: mixed tag team match, tag team match, triple threat match, fatal four-way match, ladder match, cage match, steel cage match, street fight, no disqualification match, title match.
+- Eccezione lessicale importante: "grudge match" si traduce come "regolamento di conti". Se sono due, usa "due regolamenti di conti".
 
 FORME DA EVITARE:
 - "SmackDown di WWE" usa "SmackDown"
@@ -2231,6 +2234,7 @@ JSON richiesto:
         testo = (data.get("testo", "") or "").strip()
         testo = fix_mojibake(testo)
         testo = refine_body_text(testo)
+        titolo, testo = apply_translation_glossary(titolo, testo)
         testo = remove_source_promos_from_html(testo)
 
         # v50: prima prova un repair locale deterministico su alias/numero evento.
@@ -2250,6 +2254,7 @@ JSON richiesto:
 
             titolo = repaired["titolo"]
             testo = repaired["testo"]
+            titolo, testo = apply_translation_glossary(titolo, testo)
 
             titolo, testo = repair_protected_source_facts(source_title, text, titolo, testo)
             protected_issues = validate_protected_source_facts(source_title, text, titolo, testo)
@@ -2266,7 +2271,7 @@ JSON richiesto:
         if not titolo or not testo or len(testo) < 50:
             raise ValueError("Titolo o testo mancanti")
 
-        if title_hard_invalid(source_title, titolo):
+        if title_hard_invalid_with_context(source_title, text, titolo):
             raise ValueError(f"Titolo incoerente: {titolo}")
 
         if body_looks_suspicious(testo):
@@ -2683,6 +2688,60 @@ def clamp_score(value, low=0, high=100):
 def count_keyword_hits(text, keywords):
     norm = normalize_for_check(text)
     return sum(1 for kw in keywords if normalize_for_check(kw) in norm)
+
+
+def extract_main_scoring_text(text, max_paragraphs=3, max_chars=2500):
+    """v51: usa solo il corpo principale iniziale per scoring/event_key.
+    Evita che sidebar, correlati, footer o articoli suggeriti sporchino score ed event_key.
+    """
+    text = sanitize_text(text or "")
+    if not text:
+        return ""
+    parts = [p.strip() for p in re.split(r"\n\s*\n+", text) if p.strip()]
+    if parts:
+        main = "\n\n".join(parts[:max_paragraphs])
+    else:
+        sentences = re.split(r"(?<=[.!?])\s+", text)
+        main = " ".join(sentences[:6])
+    return main[:max_chars]
+
+
+def apply_translation_glossary(title, html_text):
+    """v51: post-processing lessicale per traduzioni wrestling troppo letterali."""
+    title = title or ""
+    html_text = html_text or ""
+    replacements = {
+        "match per vendetta": "regolamento di conti",
+        "match di vendetta": "regolamento di conti",
+        "match per la vendetta": "regolamento di conti",
+        "match di rancore": "regolamento di conti",
+        "incontri per vendetta": "regolamenti di conti",
+        "incontri di vendetta": "regolamenti di conti",
+        "match rancorosi": "regolamenti di conti",
+        "grudge match": "regolamento di conti",
+        "grudge matches": "regolamenti di conti",
+    }
+    for wrong, right in replacements.items():
+        title = re.sub(re.escape(wrong), right, title, flags=re.I)
+        html_text = re.sub(re.escape(wrong), right, html_text, flags=re.I)
+    return title, html_text
+
+
+def title_hard_invalid_with_context(source_title, source_text, generated_title):
+    """v51: valida il titolo usando anche il corpo sorgente.
+    Serve per titoli originali vaghi: se il modello esplicita un nome forte presente nel testo, non e' drift.
+    """
+    titolo = sanitize_text(generated_title)
+    if title_soft_validation_failed(titolo):
+        return True
+    if title_is_broken(titolo):
+        return True
+    context_probe = f"{source_title} {(source_text or '')[:2500]}"
+    if strong_name_drift(context_probe, titolo):
+        return True
+    if not title_has_core_brands(context_probe, titolo):
+        return True
+    return False
 
 
 def calculate_importance_score(title, text="", url=""):
@@ -3442,7 +3501,8 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
                         )
         return "skipped"
 
-    refined_score, refined_reasons = calculate_importance_score(title, full_text, link)
+    scoring_text = extract_main_scoring_text(full_text)
+    refined_score, refined_reasons = calculate_importance_score(title, scoring_text, link)
     item["score"] = max(int(item.get("score", 0)), refined_score)
     item["score_reasons"] = refined_reasons
     print(f"[SCORE] raffinato={item['score']} priority={priority_label(item['score'])} | {', '.join(refined_reasons)}")
@@ -3458,10 +3518,10 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
 
     story_fingerprint = make_story_fingerprint(title, full_text)
     news_core_key = make_news_core_key(title, full_text)
-    event_key = item.get("event_key") or make_event_key(title, full_text, link)
+    event_key = item.get("event_key") or make_event_key(title, scoring_text, link)
     item["event_key"] = event_key
 
-    if event_key and is_followup_angle(title, full_text, event_key):
+    if event_key and is_followup_angle(title, scoring_text, event_key):
         original_event_key = event_key
         event_key = make_followup_event_key(event_key, title)
         item["event_key"] = event_key
