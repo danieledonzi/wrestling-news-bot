@@ -85,6 +85,12 @@ HIGH_PRIORITY_SCORE = 80
 MEDIUM_PRIORITY_SCORE = 60
 LOW_PRIORITY_SCORE = 40
 MIN_PUBLISH_SCORE = 75
+# v48: linea editoriale a tier. La soglia 75 resta il top tier, ma non blocca il sito.
+MIN_EDITORIAL_SCORE = 40
+TIER2_SCORE = 55
+TIER3_SCORE = 45
+TIER4_SCORE = 40
+MAX_TIER4_PER_RUN = 1
 STORM_HIGH_THRESHOLD = 5      # almeno 5 news >= 80
 STORM_TOP_THRESHOLD = 3       # oppure almeno 3 news >= 90
 BREAKING_SCORE_BOOST = 20
@@ -2263,8 +2269,14 @@ def wp_has_published_event(event_key, title="", url=""):
 
 
 def should_skip_event_key(history, event_key, title="", url=""):
-    """Ritorna True solo se l'event_key e' in history e WP conferma il post."""
+    """Ritorna True solo se l'event_key e' in history e WP conferma il post.
+    v48: i follow-up con un angolo autonomo non sono duplicati secchi.
+    """
     if not history_has_event_key(history, event_key):
+        return False
+
+    if is_followup_angle(title, "", event_key):
+        print(f"[FOLLOWUP] Event key gia' vista ma angolo autonomo consentito: {event_key} - {title}")
         return False
 
     if wp_has_published_event(event_key, title=title, url=url):
@@ -2930,6 +2942,76 @@ def make_pending_item_from_candidate(item):
     }
 
 
+
+def editorial_hard_excluded(title, text="", url=""):
+    """v48: filtri duri. Questi contenuti non entrano nemmeno in fallback."""
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:800]}")
+
+    hard_patterns = [
+        "things we hated", "things we loved", "3 things", "best and worst",
+        "wild wrestling bloopers", "photos", "pics of", "unrecognizable in old",
+    ]
+    if any(p in probe for p in hard_patterns):
+        return True, "listicle/gallery"
+
+    # UFC/MMA puro: escluso salvo coinvolgimento diretto WWE/AEW/TNA o wrestler rilevante.
+    if any(x in probe for x in ["ufc", "mma"]) and not any(x in probe for x in ["wwe", "aew", "tna", "wrestling", "ronda rousey", "logan paul"]):
+        return True, "UFC/MMA puro"
+
+    if "scott steiner trashes christmas" in probe:
+        return True, "contenuto troppo leggero"
+
+    return False, ""
+
+
+def editorial_tier(score, title="", text="", url=""):
+    """v48: classifica editoriale. La soglia seleziona, non spegne il sito."""
+    score = int(score or 0)
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:800]}")
+
+    excluded, reason = editorial_hard_excluded(title, text, url)
+    if excluded:
+        return "exclude", reason
+
+    if score >= MIN_PUBLISH_SCORE:
+        return "tier1", ">=75"
+    if score >= TIER2_SCORE:
+        return "tier2", "55-74"
+
+    contextual_terms = [
+        "wwe", "aew", "raw", "smackdown", "nxt", "dynamite", "collision",
+        "backlash", "wrestlemania", "title", "championship", "debut", "return",
+        "attacked", "attack", "gunther", "cody rhodes", "cm punk", "jacob fatu",
+        "ricky saints", "paige", "brie bella", "damian priest", "truth",
+        "viewership", "ratings", "rating", "future", "segment", "added", "match",
+    ]
+
+    if score >= TIER3_SCORE and any(t in probe for t in contextual_terms):
+        return "tier3", "45-54 contestuale"
+
+    # Tier 4 solo se WWE/AEW e legato a show/titoli/personaggi. Max uno a run.
+    tier4_terms = ["wwe", "aew", "smackdown", "raw", "nxt", "dynamite", "title", "match", "backlash"]
+    if score >= TIER4_SCORE and any(t in probe for t in tier4_terms):
+        return "tier4", "40-44 riempimento controllato"
+
+    return "skip", "sotto tier editoriale"
+
+
+def is_followup_angle(title="", text="", event_key=""):
+    """v48: uno stesso macro-evento puo' generare follow-up editorialmente autonomi."""
+    probe = normalize_for_check(f"{title} {(text or '')[:600]} {event_key}")
+    followup_terms = ["says", "said", "reacts", "reaction", "comments", "fallout", "why", "wasnt", "wasn t", "explains", "believes", "discusses"]
+    named_angle_terms = ["kevin nash", "cody rhodes", "triple h", "nick khan", "tony khan", "dave meltzer", "booker t", "bully ray"]
+    if any(t in probe for t in followup_terms) and any(n in probe for n in named_angle_terms):
+        return True
+    return False
+
+
+def make_followup_event_key(event_key, title):
+    base = (event_key or "event:followup").strip()
+    angle = make_title_key(title)[:70]
+    return f"{base}-followup-{angle}" if angle else base
+
 def build_candidates(history, wp_available=True):
     queue = []
     seen_in_this_run = set()
@@ -2977,12 +3059,20 @@ def build_candidates(history, wp_available=True):
                 prio = priority_label(score)
 
                 is_report_candidate = is_results_article(title, link, summary)
+                tier, tier_reason = editorial_tier(score, title, summary, link)
 
-                # v44: i report/results non devono essere scartati dalla soglia editoriale normale.
-                # Devono entrare nella pipeline report, che li mette in pending e aspetta la maturazione.
-                if score < MIN_PUBLISH_SCORE and not is_report_candidate:
+                # v48: la soglia 75 non e' piu' un blocco assoluto. I contenuti editorialmente utili
+                # entrano in coda anche sotto soglia, divisi per tier. Restano fuori solo gli esclusi duri.
+                if (score < MIN_PUBLISH_SCORE and not is_report_candidate and tier in {"skip", "exclude"}):
                     print(f"[SKIP] Score sotto soglia editoriale ({score}/{MIN_PUBLISH_SCORE}): {title}")
                     continue
+
+                if tier == "exclude":
+                    print(f"[SKIP] Esclusione editoriale dura ({tier_reason}): {title}")
+                    continue
+
+                if score < MIN_PUBLISH_SCORE and not is_report_candidate:
+                    reasons.append(f"v48 {tier}: {tier_reason}")
 
                 # v44: verifica event_key su WordPress solo dopo lo scoring e solo se WP e' disponibile.
                 # Se WP e' offline, non fare chiamate di verifica che causano timeout: la verifica verra' rimandata.
@@ -3007,6 +3097,8 @@ def build_candidates(history, wp_available=True):
                     "score": score,
                     "score_reasons": reasons,
                     "priority": prio,
+                    "editorial_tier": tier,
+                    "editorial_tier_reason": tier_reason,
                     "event_key": event_key,
                     "feed_order": idx,
                     "source_feed": feed_url,
@@ -3172,6 +3264,12 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     event_key = item.get("event_key") or make_event_key(title, full_text, link)
     item["event_key"] = event_key
 
+    if event_key and is_followup_angle(title, full_text, event_key):
+        original_event_key = event_key
+        event_key = make_followup_event_key(event_key, title)
+        item["event_key"] = event_key
+        print(f"[FOLLOWUP] Pubblicabile come angolo autonomo: {original_event_key} -> {event_key}")
+
     if event_key and event_key in seen_event_keys and wp_has_published_event(event_key, title=title, url=link):
         print(f"[SKIP] Event key già pubblicata nella run e confermata su WordPress: {event_key} - {title}")
         remove_pending_url(link)
@@ -3319,6 +3417,7 @@ def run_bot():
 
     print(f"[BOT] News candidate totali: {len(queue)} | mode={mode} | max nuove={new_post_limit} | pending pubblicati={pending_published}")
 
+    tier4_published = 0
     for idx, item in enumerate(queue):
         if time.time() - run_start > MAX_RUN_SECONDS:
             print("[BOT] Stop anticipato: superato timeout massimo run")
@@ -3340,11 +3439,17 @@ def run_bot():
             save_selected_candidates_to_pending(queue[idx:], reason=f"wp_down_mid_run_{mode}", limit=remaining_slots)
             break
 
+        if item.get("editorial_tier") == "tier4" and tier4_published >= MAX_TIER4_PER_RUN:
+            print(f"[SKIP] Tier4 gia' usato in questa run: {item.get('title')}")
+            continue
+
         new_processed += 1
         status = process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, source_fail_counts)
 
         if status == "published":
             new_published += 1
+            if item.get("editorial_tier") == "tier4":
+                tier4_published += 1
             wp_fail_streak = 0
             model_fail_streak = 0
             validation_fail_streak = 0
