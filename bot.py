@@ -24,6 +24,9 @@ WP_MEDIA_URL = WP_API_URL.replace("/posts", "/media")
 WP_HEALTHCHECK_URL = WP_API_URL.split("/wp-json/")[0].rstrip("/") + "/wp-json/"
 HISTORY_FILE = "history.txt"
 PENDING_FILE = "pending_articles.json"
+FAILED_FILE = "failed_articles.json"
+VALIDATION_FAIL_TTL_SECONDS = 24 * 60 * 60
+VALIDATION_FAIL_LIMIT = 2
 
 # v41: gestione speciale report live/results senza alterare scoring/pending generale
 REPORT_WEEKLY_DELAY_SECONDS = int(3.5 * 60 * 60)
@@ -1192,58 +1195,58 @@ def clean_article_text_from_container(content, max_chars=20000):
 
 def is_results_article(source_title="", source_url="", text=""):
     """
-    v47: riconoscimento stretto dei veri report/results.
-    Passano solo recap/results/highlights/key moments di show reali (weekly o PLE/PPV).
-    Non passano ratings/viewership/backstage report/rumor/contratti/news generiche.
+    v52: riconoscimento molto stretto dei veri report/results.
+    Deve esserci una parola esplicita da report (results/recap/highlights/key moments)
+    e uno show/evento. Esclude news singole con parole come debut, botched, future revealed.
     """
-    probe = normalize_for_check(f"{source_title} {source_url} {(text or '')[:900]}")
+    title_probe = normalize_for_check(source_title or "")
+    url_probe = normalize_for_check(source_url or "")
+    body_probe = normalize_for_check((text or "")[:900])
+    probe = normalize_whitespace(f"{title_probe} {url_probe} {body_probe}")
     if not probe:
         return False
 
     report_terms = [
-        "results", "risultati", "risultato", "highlights", "key moments", "recap"
+        "results", "risultati", "risultato", "highlights", "key moments", "recap", "live results",
+        "show report", "full results", "quick results"
     ]
+
+    # Esclusioni: contengono spesso nomi di show/date ma sono news singole, preview o contesto.
+    exclude_terms = [
+        "viewership", "ratings", "rating", "backstage report", "additional details",
+        "rumored", "rumour", "rumor", "contract", "signs", "signed", "nfl", "update",
+        "pay per view to debut", "pay-per-view to debut", "ppv to debut", "announces", "announced",
+        "partnership", "preview", "confirmed matches", "start time", "how to watch",
+        "botched", "name", "slip up", "slip-up", "awkward slip", "debut", "future revealed",
+        "role revealed", "added to", "adds", "title match added", "segment revealed", "spoiler"
+    ]
+    if any(term in probe for term in exclude_terms):
+        return False
+
+    # La parola report/results deve comparire almeno in titolo o URL. Se compare solo nel corpo,
+    # rischia di essere un riferimento a correlati o testo promozionale.
+    title_url_probe = f"{title_probe} {url_probe}"
+    has_report_term = any(term in title_url_probe for term in report_terms)
+    if not has_report_term:
+        return False
 
     weekly_shows = [
         "raw", "smackdown", "nxt", "dynamite", "collision", "rampage", "impact"
     ]
 
     ppv_shows = [
-        # WWE
-        "wrestlemania", "royal rumble", "survivor series",
-        "money in the bank", "backlash", "summerslam", "summer slam",
-        "fastlane", "crown jewel", "elimination chamber",
-        "saturday night main event", "saturday nights main event",
-        "saturday night s main event", "clash in italy", "clash at the castle",
-        # AEW
-        "all in", "all out", "double or nothing", "full gear",
-        "revolution", "forbidden door", "worlds end",
-        # TNA/other
-        "slammiversary", "bound for glory"
+        "wrestlemania", "royal rumble", "survivor series", "money in the bank", "backlash",
+        "summerslam", "summer slam", "fastlane", "crown jewel", "elimination chamber",
+        "saturday night main event", "saturday nights main event", "saturday night s main event",
+        "clash in italy", "clash at the castle", "all in", "all out", "double or nothing",
+        "full gear", "revolution", "forbidden door", "worlds end", "slammiversary", "bound for glory"
     ]
-
-    exclude_terms = [
-        "viewership", "ratings", "rating", "backstage report",
-        "additional details", "rumored", "rumour", "rumor",
-        "contract", "signs", "signed", "nfl", "update",
-        "pay per view to debut", "pay-per-view to debut", "ppv to debut",
-        "announces", "announced", "partnership"
-    ]
-
-    if any(term in probe for term in exclude_terms):
-        return False
-
-    has_report_term = any(term in probe for term in report_terms)
-    if not has_report_term:
-        return False
 
     if any(show in probe for show in weekly_shows + ppv_shows):
         return True
 
-    # Fallback controllato per nuovi PLE/PPV WWE/AEW non ancora in lista.
-    # Serve a catturare casi tipo "WWE Clash in Italy Results" o nuovi nomi evento,
-    # senza far passare rumor/ratings/backstage grazie alle esclusioni sopra.
-    if any(brand in probe for brand in ["wwe", "aew"]) and has_report_term:
+    # Fallback per nuovi PLE/PPV: solo se il titolo/URL dice esplicitamente WWE/AEW + results.
+    if any(brand in title_url_probe for brand in ["wwe", "aew"]) and has_report_term:
         return True
 
     return False
@@ -1412,7 +1415,7 @@ def choose_best_report_source(report_item):
         if not url:
             continue
 
-        full_text, scrape_error, page_html, page_img, embed_urls = get_clean_text(url)
+        full_text, scrape_error, page_html, page_img, embed_urls, inline_images = get_clean_text(url)
         if not full_text:
             continue
 
@@ -1423,6 +1426,7 @@ def choose_best_report_source(report_item):
             "text": full_text,
             "image": page_img,
             "embeds": embed_urls,
+            "inline_images": inline_images,
             "score": score,
             "source": src.get("source", get_domain(url)),
         }
@@ -1591,6 +1595,109 @@ def extract_embeds_from_article_html(html):
 
     return dedupe_preserve_order(embeds)
 
+def image_url_base(url):
+    if not url:
+        return ""
+    try:
+        parsed = urlparse(clean_tracking_params(url))
+        return f"{parsed.netloc.lower()}{parsed.path}".lower()
+    except Exception:
+        return (url or "").split("?", 1)[0].lower()
+
+
+def extract_inline_images_from_article_html(html, featured_url=""):
+    """v52: estrae immagini editoriali inline da figure.wp-block-image, img e amp-img.
+    Serve per screenshot social/Instagram story presenti nel corpo articolo.
+    """
+    soup = BeautifulSoup(html or "", "html.parser")
+    roots = soup.select("article, .cntn-wrp.artl-cnt, .sp-cnt, main") or [soup]
+    featured_base = image_url_base(featured_url)
+    images = []
+    seen = set()
+
+    for root in roots:
+        figures = root.select("figure.wp-block-image, figure")
+        for fig in figures:
+            img = fig.find(["amp-img", "img"], src=True)
+            if not img:
+                continue
+            src = clean_tracking_params(img.get("src", ""))
+            if not src:
+                continue
+            low = src.lower()
+            if low.startswith("data:image"):
+                continue
+            if any(x in low for x in ["logo", "avatar", "sprite", "placeholder", "default.jpg", "favicon"]):
+                continue
+            if not re.search(r"\.(jpg|jpeg|png|webp)(\?.*)?$", src, re.I):
+                continue
+
+            base = image_url_base(src)
+            if not base or base in seen:
+                continue
+            if featured_base and base == featured_base:
+                continue
+
+            alt = sanitize_text(img.get("alt", ""))
+            width = img.get("width", "") or ""
+            height = img.get("height", "") or ""
+            try:
+                width_i = int(width) if str(width).isdigit() else 0
+            except Exception:
+                width_i = 0
+            try:
+                height_i = int(height) if str(height).isdigit() else 0
+            except Exception:
+                height_i = 0
+
+            # scarta micro immagini; conserva screenshot verticali/orizzontali reali.
+            if width_i and height_i and (width_i < 180 or height_i < 140):
+                continue
+
+            seen.add(base)
+            images.append({"src": src, "alt": alt, "width": width_i, "height": height_i})
+            if len(images) >= 2:
+                return images
+
+    return images
+
+
+def append_inline_images_to_html(content_html, inline_images, featured_url=""):
+    """v52: inserisce max 1-2 immagini inline prima della fonte."""
+    if not inline_images:
+        return content_html
+
+    featured_base = image_url_base(featured_url)
+    blocks = []
+    seen = set()
+    for img in inline_images:
+        src = clean_tracking_params(img.get("src", ""))
+        base = image_url_base(src)
+        if not src or not base or base in seen:
+            continue
+        if featured_base and base == featured_base:
+            continue
+        seen.add(base)
+        alt = sanitize_text(img.get("alt", "")).replace('"', "&quot;")
+        src_safe = src.replace('"', "&quot;")
+        blocks.append(f'<figure class="wp-block-image"><img src="{src_safe}" alt="{alt}" loading="lazy" /></figure>')
+        if len(blocks) >= 2:
+            break
+
+    if not blocks:
+        return content_html
+
+    image_block = "\n\n" + "\n\n".join(blocks) + "\n\n"
+
+    # Inserisci dopo il secondo paragrafo, cioe' nel corpo dell'articolo ma prima della FONTE.
+    paragraphs = re.findall(r"<p\b[^>]*>.*?</p>", content_html, flags=re.I | re.S)
+    if len(paragraphs) >= 2:
+        return content_html.replace(paragraphs[1], paragraphs[1] + image_block, 1)
+    if paragraphs:
+        return content_html.replace(paragraphs[0], paragraphs[0] + image_block, 1)
+    return content_html + image_block
+
+
 def extract_image_from_article_html(html):
     soup = BeautifulSoup(html, "html.parser")
     for selector in [("meta", {"property": "og:image"}), ("meta", {"name": "twitter:image"})]:
@@ -1648,9 +1755,11 @@ def get_clean_text(url):
         html = res.text
         embeds = extract_embeds_from_article_html(html)
         soup = BeautifulSoup(html, "html.parser")
+        page_img = extract_image_from_article_html(html)
+        inline_images = extract_inline_images_from_article_html(html, featured_url=page_img)
         content = parse_content_container(soup, url)
         if not content:
-            return "", "empty", html, None, embeds
+            return "", "empty", html, None, embeds, inline_images
 
         domain = get_domain(url)
         page_title = sanitize_text(soup.title.get_text(" ", strip=True)) if soup.title else ""
@@ -1663,15 +1772,14 @@ def get_clean_text(url):
                 print(f"[SCRAPE] Articolo results rilevato: testo completo ({len(full_text)} caratteri)")
                 full_text = full_text[:60000]
 
-        page_img = extract_image_from_article_html(html)
-        return full_text, None, html, page_img, embeds
+        return full_text, None, html, page_img, embeds, inline_images
     except requests.HTTPError as e:
         code = getattr(e.response, "status_code", None)
         print(f"[SCRAPE] HTTP {code} su {url}")
-        return "", f"http_{code}", "", None, []
+        return "", f"http_{code}", "", None, [], []
     except Exception as e:
         print(f"[SCRAPE] Errore su {url}: {e}")
-        return "", "generic", "", None, []
+        return "", "generic", "", None, [], []
 
 
 def get_entry_summary(entry):
@@ -2499,7 +2607,7 @@ def wp_create_post_request(payload, retries=1):
 
     raise last_exc
 
-def create_post_without_image(data, sem_id, url, embed_urls=None, event_key=""):
+def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
     try:
         testo_html = data["testo"]
         soup_temp = BeautifulSoup(testo_html, "html.parser")
@@ -2515,6 +2623,7 @@ def create_post_without_image(data, sem_id, url, embed_urls=None, event_key=""):
 
         content_html = normalize_x_links_in_text(str(soup_temp))
         content_html = append_embeds_to_html(content_html, embed_urls or [])
+        content_html = append_inline_images_to_html(content_html, inline_images or [], featured_url=featured_image_url)
         safe_source_url = url.replace('"', "&quot;")
         content_html += f'\n\n<hr><p><a href="{safe_source_url}" target="_blank" rel="nofollow noopener noreferrer"><b>FONTE</b></a></p>'
 
@@ -2579,7 +2688,9 @@ def make_event_key(title, text="", url=""):
     v38: chiave deterministica per duplicati forti tra fonti/run diverse.
     Non sostituisce story_fingerprint: lo affianca per eventi chiari.
     """
-    probe = normalize_for_check(f"{title} {url} {(text or '')[:2500]}")
+    # v52: event_key deve basarsi solo su titolo + lead pulito, mai su correlati/sidebar.
+    lead_text = extract_main_scoring_text(text, max_paragraphs=3, max_chars=1800) if text else ""
+    probe = normalize_for_check(f"{title} {url} {lead_text}")
     if not probe:
         return ""
 
@@ -2965,6 +3076,11 @@ def load_pending_articles(history=None):
                 item["report_event_key"] = migrated_key
                 item["event_key"] = migrated_key
                 item["semantic_id"] = migrated_key.replace("report:", "report-")
+            report_key = item.get("report_event_key") or item.get("event_key")
+            if report_key and history and history_has_event_key(history, report_key):
+                if wp_has_published_event(report_key, title=item.get("title", ""), url=url or ""):
+                    print(f"[PENDING] Rimuovo report già pubblicato: {report_key}")
+                    continue
 
         dedupe_key = pending_dedupe_key(item)
 
@@ -2981,7 +3097,7 @@ def load_pending_articles(history=None):
         # v41: i report live non subiscono decay editoriale: aspettano la maturazione temporale.
         if not is_report:
             item = apply_pending_decay(item)
-            if int(item.get("score", 0)) < MIN_PUBLISH_SCORE:
+            if int(item.get("score", 0)) < MIN_EDITORIAL_SCORE:
                 print(f"[PENDING] Scarto pending sotto soglia dopo decay: {item.get('score')} - {item.get('title', url)}")
                 continue
 
@@ -3263,6 +3379,76 @@ def make_followup_event_key(event_key, title):
     angle = make_title_key(title)[:70]
     return f"{base}-followup-{angle}" if angle else base
 
+def load_failed_articles():
+    now = time.time()
+    if not os.path.exists(FAILED_FILE):
+        return {}
+    try:
+        with open(FAILED_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        if not isinstance(data, dict):
+            return {}
+    except Exception as e:
+        print(f"[FAILED] Errore lettura failed: {e}")
+        return {}
+
+    cleaned = {}
+    for url, rec in data.items():
+        if not isinstance(rec, dict):
+            continue
+        last = float(rec.get("last_fail", 0) or 0)
+        if now - last <= VALIDATION_FAIL_TTL_SECONDS:
+            cleaned[url] = rec
+    if len(cleaned) != len(data):
+        save_failed_articles(cleaned)
+    return cleaned
+
+
+def save_failed_articles(data):
+    try:
+        with open(FAILED_FILE, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"[FAILED] Errore scrittura failed: {e}")
+
+
+def is_recent_validation_failed(url):
+    if not url:
+        return False
+    data = load_failed_articles()
+    rec = data.get(url)
+    if not rec:
+        return False
+    count = int(rec.get("count", 0) or 0)
+    last = float(rec.get("last_fail", 0) or 0)
+    if count >= VALIDATION_FAIL_LIMIT and time.time() - last <= VALIDATION_FAIL_TTL_SECONDS:
+        return True
+    return False
+
+
+def record_validation_failure(url, title=""):
+    if not url:
+        return
+    data = load_failed_articles()
+    rec = data.get(url, {"count": 0})
+    rec["count"] = int(rec.get("count", 0) or 0) + 1
+    rec["last_fail"] = time.time()
+    rec["title"] = title
+    data[url] = rec
+    save_failed_articles(data)
+    if rec["count"] >= VALIDATION_FAIL_LIMIT:
+        print(f"[FAILED] URL sospeso 24h dopo {rec['count']} validation fail: {title}")
+
+
+def clear_validation_failure(url):
+    if not url or not os.path.exists(FAILED_FILE):
+        return
+    data = load_failed_articles()
+    if url in data:
+        data.pop(url, None)
+        save_failed_articles(data)
+
+
 def build_candidates(history, wp_available=True):
     queue = []
     seen_in_this_run = set()
@@ -3281,6 +3467,9 @@ def build_candidates(history, wp_available=True):
                 link = getattr(entry, "link", None)
                 title = sanitize_text(getattr(entry, "title", "Senza titolo"))
                 if not link:
+                    continue
+                if is_recent_validation_failed(link):
+                    print(f"[SKIP] URL sospeso per validation fail recenti: {link}")
                     continue
 
                 sem_id = make_semantic_id_from_title(title)
@@ -3408,6 +3597,7 @@ def process_report_pending_item(item, history, seen_story_fingerprints, seen_new
         "prefetched_text": best["text"],
         "prefetched_image": best.get("image"),
         "prefetched_embeds": best.get("embeds", []),
+        "prefetched_inline_images": best.get("inline_images", []),
     })
 
     status = process_candidate_item(
@@ -3459,11 +3649,14 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         page_html = ""
         page_img = item.get("prefetched_image")
         embed_urls = item.get("prefetched_embeds", [])
+        inline_images = item.get("prefetched_inline_images", [])
         print(f"[REPORT] Uso testo prefetched per report maturo ({len(full_text)} caratteri)")
     else:
-        full_text, scrape_error, page_html, page_img, embed_urls = get_clean_text(link)
+        full_text, scrape_error, page_html, page_img, embed_urls, inline_images = get_clean_text(link)
     if embed_urls:
         print(f"[BOT] Embed trovati: {len(embed_urls)}")
+    if inline_images:
+        print(f"[BOT] Immagini inline trovate: {len(inline_images)}")
 
     if not full_text:
         if entry:
@@ -3556,25 +3749,33 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     news_data, err_type = translate_news(title, full_text, source_url=link)
     if not news_data:
         print(f"[SKIP] Traduzione fallita: {title} (err_type={err_type})")
+        if err_type == "validation":
+            record_validation_failure(link, title)
         return "model_fail" if err_type == "model" else "validation_fail"
 
     if title_soft_validation_failed(news_data["titolo"]):
         print(f"[SKIP] Titolo non pubblicabile: {news_data['titolo']}")
+        record_validation_failure(link, title)
         return "validation_fail"
 
     if err_type != "soft_mismatch" and not title_is_good_enough_for_publish(news_data["titolo"]):
         print(f"[SKIP] Titolo non pubblicabile: {news_data['titolo']}")
+        record_validation_failure(link, title)
         return "validation_fail"
 
     # v39: Breaking controllato dal bot, non da Gemini. Scade automaticamente.
     news_data["titolo"] = maybe_add_breaking_prefix(news_data["titolo"], item)
+
+    img_url = (extract_image_url(entry) if entry else None) or page_img
 
     post_id, post_json = create_post_without_image(
         data=news_data,
         sem_id=sem_id,
         url=link,
         embed_urls=embed_urls,
-        event_key=event_key
+        event_key=event_key,
+        inline_images=inline_images,
+        featured_image_url=img_url
     )
 
     if not post_id:
@@ -3586,7 +3787,6 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         print(f"[FAIL] Creazione post fallita per: {news_data['titolo']}")
         return "wp_fail"
 
-    img_url = (extract_image_url(entry) if entry else None) or page_img
     if img_url:
         print(f"[BOT] Immagine trovata: {img_url}")
         img_id = upload_image_to_wp(img_url)
@@ -3605,6 +3805,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     if event_key:
         seen_event_keys.add(event_key)
     remove_pending_url(link)
+    clear_validation_failure(link)
     time.sleep(1)
     return "published"
 
