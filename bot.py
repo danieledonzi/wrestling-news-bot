@@ -1184,22 +1184,84 @@ def clean_article_text_from_container(content, max_chars=20000):
     return full
 
 
-def is_results_article(source_title="", source_url="", text=""):
-    probe = normalize_for_check(f"{source_title} {source_url} {text[:700]}")
-    if not probe:
-        return False
-    # v45: regola generale per tutti gli show, non solo SmackDown.
-    # Riconosce results/recap/highlights/key moments quando c'e' anche un riferimento a uno show.
-    result_terms = ["results", "risultati", "risultato", "highlights", "key moments", "recap", "report"]
-    show_terms = [
-        "raw", "smackdown", "nxt", "dynamite", "collision", "rampage", "impact",
-        "wwe", "aew", "tna", "wrestlemania", "summerslam", "royal rumble",
-        "survivor series", "money in the bank", "backlash", "all in", "all out",
-        "double or nothing", "full gear", "revolution", "slammiversary", "bound for glory"
+def is_report_article(title):
+    t = title.lower()
+
+    REPORT_TERMS = [
+        "results",
+        "risultati",
+        "highlights",
+        "key moments",
+        "recap"
     ]
-    return any(term in probe for term in result_terms) and any(term in probe for term in show_terms)
 
+    WEEKLY_SHOWS = [
+        "raw",
+        "smackdown",
+        "nxt",
+        "dynamite",
+        "collision",
+        "rampage",
+        "impact"
+    ]
 
+    PPV_SHOWS = [
+        # WWE
+        "wrestlemania",
+        "royal rumble",
+        "survivor series",
+        "money in the bank",
+        "backlash",
+        "summer slam",
+        "fastlane",
+        "crown jewel",
+        "elimination chamber",
+        "saturday night's main event",
+        "saturday night main event",
+        "clash in italy",
+
+        # AEW
+        "all in",
+        "all out",
+        "double or nothing",
+        "full gear",
+        "revolution",
+        "forbidden door"
+    ]
+
+    EXCLUDE = [
+        "viewership",
+        "ratings",
+        "rating",
+        "backstage report",
+        "additional details",
+        "rumored",
+        "rumour",
+        "contract",
+        "signs",
+        "nfl",
+        "update",
+    ]
+
+    # ❌ esclusioni
+    if any(x in t for x in EXCLUDE):
+        return False
+
+    # ✅ deve avere parola report valida
+    has_report_term = any(term in t for term in REPORT_TERMS)
+    if not has_report_term:
+        return False
+
+    # ✅ deve avere show noto
+    if any(show in t for show in WEEKLY_SHOWS + PPV_SHOWS):
+        return True
+
+    # ✅ fallback intelligente per nuovi PLE
+    if ("wwe" in t or "aew" in t) and has_report_term:
+        return True
+
+    return False
+    
 def report_is_ple_or_ppv(title="", url="", text=""):
     probe = normalize_for_check(f"{title} {url} {(text or '')[:1200]}")
     ple_terms = [
@@ -1412,7 +1474,7 @@ def extract_wrestlinginc_article_text(content, source_title="", source_url=""):
 
     full_text = "\n\n".join(parts)
 
-    if is_results_article(source_title, source_url, full_text):
+    if is_report_article(source_title, source_url, full_text):
         print(f"[SCRAPE] Articolo results rilevato: testo completo ({len(full_text)} caratteri)")
         return full_text[:60000]
 
@@ -1609,9 +1671,9 @@ def get_clean_text(url):
         if "wrestlinginc.com" in domain and getattr(content, "name", "") == "article":
             full_text = extract_wrestlinginc_article_text(content, page_title, url)
         else:
-            max_chars = None if is_results_article(page_title, url, "") else 20000
+            max_chars = None if is_report_article(page_title, url, "") else 20000
             full_text = clean_article_text_from_container(content, max_chars=max_chars)
-            if is_results_article(page_title, url, full_text):
+            if is_report_article(page_title, url, full_text):
                 print(f"[SCRAPE] Articolo results rilevato: testo completo ({len(full_text)} caratteri)")
                 full_text = full_text[:60000]
 
@@ -1894,7 +1956,7 @@ def translate_news(source_title, text, source_url=""):
         return None, "validation"
 
     forced_category = detect_source_category(source_title, text, source_url)
-    results_mode = is_results_article(source_title, source_url, text)
+    results_mode = is_report_article(source_title, source_url, text)
 
     results_instructions = """
 MODALITA SPECIALE RISULTATI SHOW:
@@ -2934,7 +2996,7 @@ def build_candidates(history, wp_available=True):
                     reasons.append("breaking scaduto")
                 prio = priority_label(score)
 
-                is_report_candidate = is_results_article(title, link, summary)
+                is_report_candidate = is_report_article(title, link, summary)
 
                 # v44: i report/results non devono essere scartati dalla soglia editoriale normale.
                 # Devono entrare nella pipeline report, che li mette in pending e aspetta la maturazione.
@@ -3096,7 +3158,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
 
     # v41: i report live/results non vanno pubblicati appena entrano nel feed.
     # Li accodiamo nello stesso pending generale e li riprendiamo dopo il delay.
-    if is_results_article(title, link, full_text) and not item.get("force_process_report"):
+    if is_report_article(title, link, full_text) and not item.get("force_process_report"):
         report_saved = add_pending_report_article(item, full_text=full_text, reason="report_live_delay")
         # v45: se il report e' gia' maturo, prova a pubblicarlo nella stessa run.
         # Questo evita di aspettare un'altra schedulazione quando il report e' uscito ore prima.
