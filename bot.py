@@ -4,6 +4,85 @@ import json
 import time
 import mimetypes
 from urllib.parse import urlparse, parse_qs, unquote, urlunparse
+from datetime import datetime
+from pathlib import Path
+import sys
+
+
+BOT_VERSION = "v53"
+
+LOG_DIR = Path("logs")
+LOG_DIR.mkdir(exist_ok=True)
+LOG_FILE = LOG_DIR / "master_log.log"
+LOG_STATE_FILE = LOG_DIR / "master_log_state.json"
+RESET_HOURS = 72
+RUN_ID = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+GIT_SHA = os.getenv("GITHUB_SHA", "local")
+GIT_SHA_SHORT = GIT_SHA[:7] if GIT_SHA != "local" else "local"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+
+def _maybe_reset_master_log():
+    now = time.time()
+    created_at = None
+
+    if LOG_STATE_FILE.exists():
+        try:
+            with open(LOG_STATE_FILE, "r", encoding="utf-8") as f:
+                state = json.load(f)
+            created_at = float(state.get("created_at", 0) or 0)
+        except Exception:
+            created_at = None
+
+    if created_at is None:
+        if LOG_FILE.exists():
+            created_at = LOG_FILE.stat().st_mtime
+        else:
+            created_at = now
+
+    if LOG_FILE.exists() and now - created_at > RESET_HOURS * 3600:
+        LOG_FILE.unlink()
+        created_at = now
+
+    try:
+        with open(LOG_STATE_FILE, "w", encoding="utf-8") as f:
+            json.dump({"created_at": created_at, "reset_hours": RESET_HOURS}, f, ensure_ascii=False, indent=2)
+    except Exception:
+        pass
+
+
+_maybe_reset_master_log()
+
+_ORIGINAL_STDOUT = sys.stdout
+_ORIGINAL_STDERR = sys.stderr
+_LOG_HANDLE = open(LOG_FILE, "a", encoding="utf-8", buffering=1)
+
+
+class TeeStream:
+    def __init__(self, *streams):
+        self.streams = streams
+
+    def write(self, data):
+        for stream in self.streams:
+            stream.write(data)
+            stream.flush()
+
+    def flush(self):
+        for stream in self.streams:
+            stream.flush()
+
+
+sys.stdout = TeeStream(_ORIGINAL_STDOUT, _LOG_HANDLE)
+sys.stderr = TeeStream(_ORIGINAL_STDERR, _LOG_HANDLE)
+
+
+def log_run_start():
+    print(f"\n===== RUN START [{RUN_ID}] VERSION [{BOT_VERSION_FULL}] =====")
+
+
+def log_run_end():
+    print(f"===== RUN END [{RUN_ID}] VERSION [{BOT_VERSION_FULL}] =====\n")
+
 
 import requests
 import feedparser
@@ -3938,4 +4017,8 @@ def run_bot():
 
 
 if __name__ == "__main__":
-    run_bot()
+    log_run_start()
+    try:
+        run_bot()
+    finally:
+        log_run_end()
