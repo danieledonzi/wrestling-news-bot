@@ -41,16 +41,26 @@ jobs:
           WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
         run: python bot.py
 
-      - name: Save history
+      - name: Upload master log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: master-log
+          path: logs/master_log.log
+          if-no-files-found: warn
+
+      - name: Save bot state and logs
+        if: always()
         run: |
           git config --global user.name "News Bot"
           git config --global user.email "bot@wrestlingnews.com"
 
-          git add history.txt
           git pull origin main --rebase --autostash || true
 
+          git add history.txt pending_articles.json failed_articles.json logs/master_log.log logs/master_log_state.json 2>/dev/null || true
+
           if ! git diff --cached --quiet; then
-            git commit -m "Update history [skip ci]"
+            git commit -m "Update bot state and logs [skip ci]"
             git push origin main
           else
             echo "Nessuna modifica da salvare"
