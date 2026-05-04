@@ -258,3 +258,133 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
 ===== RUN END [2026-05-04 07:26:25] VERSION [v53 (d95e0d9)] =====
 
+
+===== RUN START [2026-05-04 07:48:15] VERSION [v54 (1620d5c)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (20/75): Giovanni Vinci Experienced 'Avalanche' Of Emotions Missing Imperium's WWE Call-Up
+[SKIP] URL già in history: https://www.wrestlinginc.com/2162318/wwe-royal-rumble-2026-royce-keys-debut-huge-test/
+[SKIP] Score sotto soglia editoriale (24/75): Charlotte Flair Describes Her Onscreen WWE Persona As 'Armor'
+[SKIP] Score sotto soglia editoriale (20/75): Former WWE Star Dakota Kai Details Origin Of Damage CTRL
+[SKIP] Score sotto soglia editoriale (36/75): WWE Release 25-Year Production Veteran In Latest Round Of TKO Layoffs
+[SKIP] Score sotto soglia editoriale (18/75): Tony Khan Compares Celebrated AEW & NJPW Rivalry To The Godfather
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163182/colten-gunn-return-aew-reunites-brother/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2161844/wwe-matt-cardona-zack-ryder-john-cena-tournament/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163146/wwe-wrestlemania-42-paige-return-backstage-report/
+[SKIP] Score sotto soglia editoriale (27/75): WWE Hall Of Famer Bully Ray Believes Bron Breakker Needs A New Name
+[SKIP] Score sotto soglia editoriale (20/75): JBL Wishes He Wrestled This Rising WWE Star: 'One Of The Best Workers In The World'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2161173/wwe-wrestlemania-34-triple-h-paul-levesque-stephanie-mcmahon-favorite-nights/
+[SKIP] Score sotto soglia editoriale (38/75): Tony Schiavone Says He'll 'Never Forget' This Recent AEW Dynamite Moment
+[SKIP] Score sotto soglia editoriale (28/75): WWE's Raquel Rodriguez On Post-Finn Balor Judgment Day: 'It's A Women's Club Now'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2160864/wwe-cody-rhodes-dominik-mysterio-uncool/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (34/75): Tony Khan Accused of Purposely Benching Talent, Avoiding Conflict & 'Ghosting' Executives
+[SKIP] Score sotto soglia editoriale (28/75): Tony Khan Allegedly Already Shopping AEW Around With No Deal in Place
+[SKIP] Score sotto soglia editoriale (0/75): Bill Goldberg Trends After Viral Clip Claims Fans 'Just Found Out He's Jewish'
+[SKIP] Score sotto soglia editoriale (20/75): WWE EVOLVE Succession III Date Revealed
+[SKIP] Score sotto soglia editoriale (18/75): Nick LoPiccolo Claims AEW 'Tried to Nuke' His Account After Second Twitter Lockout
+[SKIP] Score sotto soglia editoriale (20/75): Rikishi Announces Leave From KnokX Pro
+[SKIP] event_key confermata su WordPress: event:smackdown-two-hour-format - Ex-WWE Star Carmella Shows Off Bruising After Eye Surgery
+[SKIP] Score sotto soglia editoriale (43/75): Kevin Hart Claims He Called The Cops On The Rock After Traffic Stop
+[SKIP] Score sotto soglia editoriale (30/75): Nick LoPiccolo Fires Back at AEW and WBD Denials With Blunt Response
+[SCORE] 69 medium - Pat McAfee WWE Exit Scrapped Backlash Main Event Plans | WWE/main roster, WWE main roster + storyline/evento, release/addio, PLE/PPV, v48 tier2: 55-74
+[SCORE] 63 medium - Reason Revealed For Roman Reigns Being Pulled From WWE June TV Dates | WWE/main roster, top star: roman reigns, WWE main roster + storyline/evento, v48 tier2: 55-74
+[SCORE] 60 medium - Seth Rollins Says WWE Star 'Doesn't Know His Own Speed' | WWE/main roster, nomi forti: seth rollins, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, opinione generica, v48 tier2: 55-74
+[SCORE] 56 low - WWE LFG Preview for May 3, 2026: First Tag Match Heats Up As Bubba Ray Dudley Gets Brutally Honest | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, v48 tier2: 55-74
+[SCORE] 55 low - WWE LFG May 3 Episode Sees Drake Morreaux Pulled from the Performance Center | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - Ex-WWE LFG Star BJ Ray Name Drops MJF and Claims He'd "Eat Him Alive" on The Mic | WWE/main roster, nome AEW: mjf, WWE main roster + storyline/evento, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - WWE NXT's Tatum Paxley Recalls Conversation With Shawn Michaels That Altered Career | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, show settimanale, opinione generica, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 50 low - Tiffany Stratton Flexes Women's WWE U.S. Title With Bikini Boat Video | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, v48 tier3: 45-54 contestuale
+[SCORE] 43 low - Booker T Was 'Happy As Hell' When Radicalz Left WCW For WWE | WWE/main roster, nomi forti: booker t, business/media rights, v48 tier4: 40-44 riempimento controllato
+[SCORE] 42 low - Bully Ray & Tommy Dreamer Discuss AI-Generated Video Presented On WWE NXT | WWE/main roster, nomi forti: bully ray, tommy dreamer, show settimanale, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 11 | mode=normal | max nuove=5 | pending pubblicati=0
+[BOT] Elaborazione: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans
+[BOT] semantic_id=pat-mcafee-wwe-exit-scrapped-backlash-main-event-plans
+[SCORE] iniziale=69 priority=medium
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: cody rhodes, randy orton, WWE main roster + storyline/evento, infortunio, combo top name + evento forte, PLE/PPV, opinione generica
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:cody-rhodes-diagnosis -> event:cody-rhodes-diagnosis-followup-pat-mcafee-exit-scrapped-backlash-main-event
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Titolo incoerente: L'uscita di Pat McAfee ha fatto saltare i piani per il main event di Backlash
+[SKIP] Traduzione fallita: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans (err_type=validation)
+[BOT] Elaborazione: Reason Revealed For Roman Reigns Being Pulled From WWE June TV Dates
+[BOT] semantic_id=reason-revealed-for-roman-reigns-being-pulled-from-wwe-june-tv-dates
+[SCORE] iniziale=63 priority=medium
+[BOT] Embed trovati: 1
+[SCORE] raffinato=96 priority=high | WWE/main roster, top star: roman reigns, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[SKIP] Event key già pubblicata nella run e confermata su WordPress: event:roman-reigns-title - Reason Revealed For Roman Reigns Being Pulled From WWE June TV Dates
+[BOT] Elaborazione: Seth Rollins Says WWE Star 'Doesn't Know His Own Speed'
+[BOT] semantic_id=seth-rollins-says-wwe-star-doesnt-know-his-own-speed
+[SCORE] iniziale=60 priority=medium
+[BOT] Embed trovati: 1
+[SCORE] raffinato=82 priority=high | WWE/main roster, nomi forti: seth rollins, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/seth-rollins-says-wwe-star-doesnt-know-his-own-speed/l-intro-1777644816.jpg
+[MEDIA] Immagine caricata: 3335
+[WP] Status attach image: 200
+[OK] Pubblicato: Seth Rollins: "Bron Breakker non conosce la sua stessa velocità"
+[BOT] Elaborazione: WWE LFG Preview for May 3, 2026: First Tag Match Heats Up As Bubba Ray Dudley Gets Brutally Honest
+[BOT] semantic_id=wwe-lfg-preview-for-may-3-2026-first-tag-match-heats-up-as-bubba-ray-dudley-gets-brutally-honest
+[SCORE] iniziale=56 priority=low
+[SCORE] raffinato=56 priority=low | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - WWE LFG Preview for May 3, 2026: First Tag Match Heats Up As Bubba Ray Dudley Gets Brutally Honest
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-lfg-preview-for-may-3-2026-first-tag-match-heats-up-as-bubba-ray-dudley-gets-brutally-honest-09.jpg
+[MEDIA] Immagine caricata: 3339
+[WP] Status attach image: 200
+[OK] Pubblicato: WWE LFG Preview 3 Maggio 2026: Primo Tag Match Infuocato, Bubba Ray Dudley Senza Filtri
+[BOT] Elaborazione: WWE LFG May 3 Episode Sees Drake Morreaux Pulled from the Performance Center
+[BOT] semantic_id=wwe-lfg-may-3-episode-sees-drake-morreaux-pulled-from-the-performance-center
+[SCORE] iniziale=55 priority=low
+[SCORE] raffinato=69 priority=medium | WWE/main roster, WWE main roster + storyline/evento, release/addio, PLE/PPV
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - WWE LFG May 3 Episode Sees Drake Morreaux Pulled from the Performance Center
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-lfg-may-3-episode-sees-drake-morreaux-pulled-from-the-performance-center-22.jpg
+[MEDIA] Immagine caricata: 3342
+[WP] Status attach image: 200
+[OK] Pubblicato: Drake Morreaux escluso dal Performance Center di WWE LFG il 3 Maggio
+[BOT] Elaborazione: Ex-WWE LFG Star BJ Ray Name Drops MJF and Claims He'd "Eat Him Alive" on The Mic
+[BOT] semantic_id=ex-wwe-lfg-star-bj-ray-name-drops-mjf-and-claims-hed-eat-him-alive-on-the-mic
+[SCORE] iniziale=55 priority=low
+[BOT] Embed trovati: 2
+[SCORE] raffinato=57 priority=low | WWE/main roster, nome AEW: mjf, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, opinione generica
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Ex-WWE LFG Star BJ Ray Name Drops MJF and Claims He'd "Eat Him Alive" on The Mic
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/ex-wwe-lfg-star-bj-ray-name-drops-mjf-and-claims-hed-eat-him-alive-on-the-mic-05.jpg
+[MEDIA] Immagine caricata: 3345
+[WP] Status attach image: 200
+[OK] Pubblicato: BJ Ray, ex stella WWE LFG, cita MJF e afferma che lo
+[BOT] Elaborazione: WWE NXT's Tatum Paxley Recalls Conversation With Shawn Michaels That Altered Career
+[BOT] semantic_id=wwe-nxts-tatum-paxley-recalls-conversation-with-shawn-michaels-that-altered-career
+[SCORE] iniziale=55 priority=low
+[BOT] Embed trovati: 1
+[SCORE] raffinato=57 priority=low | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, PLE/PPV
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - WWE NXT's Tatum Paxley Recalls Conversation With Shawn Michaels That Altered Career
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Soft mismatch titolo: Tatum Paxley ricorda la conversazione con Shawn Michaels che ha cambiato la sua carriera in NXT
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-nxts-tatum-paxley-recalls-conversation-with-shawn-michaels-that-altered-career/l-intro-1777593229.jpg
+[MEDIA] Immagine caricata: 3348
+[WP] Status attach image: 200
+[OK] Pubblicato: Tatum Paxley ricorda la conversazione con Shawn Michaels che ha cambiato la sua carriera in NXT
+[BOT] Pubblicati 5 articoli (0 pending + 5 nuove) su 7 candidati provati | mode=normal
+===== RUN END [2026-05-04 07:48:15] VERSION [v54 (1620d5c)] =====
+
