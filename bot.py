@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v56"
+BOT_VERSION = "v57"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -243,10 +243,27 @@ WWE_DEVELOPMENTAL_SECONDARY_TERMS = [
     "performance center", "wwe id", "developmental",
 ]
 
-# v55: pattern tipici di articoli trash-talk/clickbait da non spingere.
+# v57: pattern tipici di articoli trash-talk/clickbait da non spingere.
 LOW_VALUE_TRASH_TALK_TERMS = [
     "name drops", "eat him alive", "on the mic", "claims he'd",
     "claims he would", "fires back", "blunt response", "calls out fans",
+    "jockstrap", "bigger draw", "brutal tweet", "cryptic jab",
+    "destroys", "trashes", "rips", "rips into", "claps back",
+    "funding bot attacks", "bot attacks", "fake ai video",
+]
+
+# v57: segnali editoriali forti, piu importanti del semplice nome citato nel corpo.
+EDITORIAL_BUSINESS_TERMS = [
+    "tko", "pay cut", "pay cuts", "salary", "salaries", "wage", "wages",
+    "contract changes", "contract change", "talent cuts", "budget cuts",
+    "asking talent", "approach talent", "take pay cuts", "50%", "fifty percent",
+    "tv deal", "media rights", "broadcast rights", "netflix", "espn", "cw", "peacock",
+]
+
+EDITORIAL_ROSTER_IMPACT_TERMS = [
+    "released", "release", "departure", "departures", "exit", "exits", "leaves",
+    "leaving", "cut", "cuts", "fired", "contract", "free agent", "return", "returns",
+    "debut", "injury", "injured", "pulled", "scrapped", "plans", "backstage report",
 ]
 
 # v55: finali sospesi/tronchi nei titoli italiani. Se il titolo finisce cosi,
@@ -3215,6 +3232,8 @@ def calculate_importance_score(title, text="", url=""):
     url = url or ""
     probe = f"{title} {url} {text[:1800]}"
     norm = normalize_for_check(probe)
+    title_norm = normalize_for_check(f"{title} {url}")
+    lead_norm = normalize_for_check(f"{title} {url} {text[:450]}")
 
     score = 0
     reasons = []
@@ -3234,14 +3253,24 @@ def calculate_importance_score(title, text="", url=""):
         score += 5; reasons.append("altre promotion")
 
     # Nomi coinvolti
-    top_hits = [name for name in TOP_STAR_NAMES if name in norm]
-    strong_hits = [name for name in STRONG_NAMES if name in norm and name not in top_hits]
-    wwe_name_hits = [name for name in WWE_NAMES if name in norm]
-    aew_name_hits = [name for name in AEW_NAMES if name in norm]
-    if top_hits:
-        score += 25; reasons.append("top star: " + ", ".join(top_hits[:3]))
-    if strong_hits:
-        score += min(15, 8 + 3 * len(strong_hits)); reasons.append("nomi forti: " + ", ".join(strong_hits[:3]))
+    # v57: i nomi citati solo nel corpo non devono drogare lo score.
+    # Pesiamo pienamente i nomi nel titolo/URL, e solo leggermente quelli nel lead.
+    top_hits_title = [name for name in TOP_STAR_NAMES if name in title_norm]
+    strong_hits_title = [name for name in STRONG_NAMES if name in title_norm and name not in top_hits_title]
+    top_hits_lead = [name for name in TOP_STAR_NAMES if name in lead_norm and name not in top_hits_title]
+    strong_hits_lead = [name for name in STRONG_NAMES if name in lead_norm and name not in top_hits_title and name not in strong_hits_title]
+    top_hits = top_hits_title + top_hits_lead
+    strong_hits = strong_hits_title + strong_hits_lead
+    wwe_name_hits = [name for name in WWE_NAMES if name in title_norm or name in lead_norm]
+    aew_name_hits = [name for name in AEW_NAMES if name in title_norm or name in lead_norm]
+    if top_hits_title:
+        score += 25; reasons.append("top star titolo: " + ", ".join(top_hits_title[:3]))
+    elif top_hits_lead:
+        score += 10; reasons.append("top star lead: " + ", ".join(top_hits_lead[:2]))
+    if strong_hits_title:
+        score += min(15, 8 + 3 * len(strong_hits_title)); reasons.append("nomi forti titolo: " + ", ".join(strong_hits_title[:3]))
+    elif strong_hits_lead:
+        score += min(8, 4 + 2 * len(strong_hits_lead)); reasons.append("nomi forti lead: " + ", ".join(strong_hits_lead[:2]))
     if wwe_name_hits and not any(x in norm for x in ["wwe", "raw", "smackdown", "nxt"]):
         score += 10; reasons.append("nome WWE: " + ", ".join(wwe_name_hits[:2]))
     if aew_name_hits and not any(x in norm for x in ["aew", "dynamite", "collision"]):
@@ -3259,11 +3288,23 @@ def calculate_importance_score(title, text="", url=""):
         "return", "returns", "returned", "comeback", "debut", "debuts",
         "retirement", "retires", "retired",
         "contract", "deal", "re-sign", "re-signs", "free agent", "coming to an end", "expires",
+        "pay cut", "pay cuts", "salary", "salaries", "contract changes", "contract change",
         "title change", "wins title", "new champion", "vacated",
         "acquisition", "merger", "netflix", "tv deal", "rights", "espn", "cw", "peacock", "broadcast", "streaming",
         "scandal", "controversy", "altercation", "incident", "hotel incident"
     ]
     has_major_event = any(k in norm for k in major_event_terms)
+    business_hit = any(k in norm for k in EDITORIAL_BUSINESS_TERMS)
+    roster_impact_hit = any(k in norm for k in EDITORIAL_ROSTER_IMPACT_TERMS)
+
+    # v57: gerarchia editoriale da redazione. Business WWE/TKO, tagli, contratti e
+    # impatto roster hanno priorita superiore a drama/social/trash talk.
+    if business_hit and any(x in norm for x in ["wwe", "tko", "talent", "roster"]):
+        score += 24
+        reasons.append("business/contratti WWE-TKO")
+    if roster_impact_hit and any(x in norm for x in ["wwe", "raw", "smackdown", "nxt", "aew"]):
+        score += 12
+        reasons.append("impatto roster/storyline")
 
     # v54: riconoscimento non nominale della rilevanza WWE main roster.
     # Una news WWE/Raw/SmackDown che tocca storyline, match, titoli, eventi, card,
@@ -3308,9 +3349,12 @@ def calculate_importance_score(title, text="", url=""):
             reasons.append(label)
             break
 
-    if top_hits and has_major_event:
+    if top_hits_title and has_major_event:
         score += 15
-        reasons.append("combo top name + evento forte")
+        reasons.append("combo top name titolo + evento forte")
+    elif top_hits_lead and has_major_event:
+        score += 5
+        reasons.append("combo top name lead + evento forte")
 
     # Rilevanza temporale / show
     if any(x in norm for x in ["wrestlemania", "summerslam", "royal rumble", "survivor series", "all in", "double or nothing", "full gear", "ple", "ppv"]):
@@ -3341,8 +3385,14 @@ def calculate_importance_score(title, text="", url=""):
         score -= 12
         reasons.append("developmental secondario")
     if trash_talk_hit:
-        score -= 14
-        reasons.append("trash talk/clickbait")
+        score -= 28
+        reasons.append("trash talk/clickbait forte")
+
+    # v57: se il corpo contiene molti nomi forti ma il titolo e' drama/clickbait,
+    # limita il punteggio per evitare falsi 100 stile Ringside.
+    if trash_talk_hit and not business_hit and not roster_impact_hit:
+        score = min(score, 39)
+        reasons.append("cap anti-clickbait")
 
     # Se il titolo e' molto vago, piccolo malus
     if len([w for w in normalize_for_check(title).split() if w not in STOPWORDS]) <= 2:
@@ -3704,6 +3754,9 @@ def editorial_hard_excluded(title, text="", url=""):
     hard_patterns = [
         "things we hated", "things we loved", "3 things", "best and worst",
         "wild wrestling bloopers", "photos", "pics of", "unrecognizable in old",
+        "jockstrap", "bigger draw than", "claims his jockstrap",
+        "funding bot attacks", "bot attacks on aew stars", "fake ai video",
+        "brutal tweet", "cryptic jab", "destroys val venis",
     ]
     if any(p in probe for p in hard_patterns):
         return True, "listicle/gallery"
@@ -3714,6 +3767,10 @@ def editorial_hard_excluded(title, text="", url=""):
 
     if "scott steiner trashes christmas" in probe:
         return True, "contenuto troppo leggero"
+
+    # v57: trash talk puro/clickbait social non deve entrare in coda anche se cita WWE o top star.
+    if any(term in probe for term in ["val venis", "jockstrap", "bigger draw", "eat him alive"]):
+        return True, "trash talk/clickbait duro"
 
     return False, ""
 
