@@ -1,5 +1,94 @@
 [
   {
+    "url": "https://www.wrestlinginc.com/2164069/wwe-john-cena-backstage-update-schedule-post-retirement/",
+    "title": "Backstage Update On John Cena's WWE Schedule Post-Retirement",
+    "semantic_id": "backstage-update-on-john-cenas-wwe-schedule-post-retirement",
+    "title_key": "backstage-update-john-cena-s-schedule-post-retirement",
+    "score": 100,
+    "priority": "high",
+    "event_key": "",
+    "reasons": [
+      "WWE/main roster",
+      "top star: john cena",
+      "WWE main roster + storyline/evento",
+      "rumor/backstage",
+      "combo top name + evento forte",
+      "PLE/PPV"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "top star: john cena",
+      "WWE main roster + storyline/evento",
+      "rumor/backstage",
+      "combo top name + evento forte",
+      "PLE/PPV"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1777937546.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1777922447.5744824,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.ringsidenews.com/mjf-destroys-val-venis-brutal-cody-rhodes-tweet-cryptic-jab/",
+    "title": "MJF Destroys Val Venis With Brutal Cody Rhodes Tweet After Cryptic Jab",
+    "semantic_id": "mjf-destroys-val-venis-with-brutal-cody-rhodes-tweet-after-cryptic-jab",
+    "title_key": "mjf-destroys-val-venis-brutal-cody-rhodes-tweet-cryptic-jab",
+    "score": 86,
+    "priority": "high",
+    "event_key": "",
+    "reasons": [
+      "WWE/main roster",
+      "top star: cody rhodes",
+      "nome AEW: mjf",
+      "WWE main roster + storyline/evento",
+      "PLE/PPV"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "top star: cody rhodes",
+      "nome AEW: mjf",
+      "WWE main roster + storyline/evento",
+      "PLE/PPV"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1777942604.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1777922447.8068144,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.wrestlinginc.com/2164146/johnny-tv-aew-roh-brodie-lee-jr-wwe-wrestlemania-weekend/",
+    "title": "AEW & ROH Star Comments On Brodie Lee Jr.'s Match Over WWE WrestleMania Weekend",
+    "semantic_id": "aew-roh-star-comments-on-brodie-lee-jrs-match-over-wwe-wrestlemania-weekend",
+    "title_key": "roh-star-comments-brodie-lee-jr-s-over-weekend",
+    "score": 71,
+    "priority": "medium",
+    "event_key": "event:brodie-lee-return",
+    "reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "PLE/PPV",
+      "v48 tier2: 55-74"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "PLE/PPV",
+      "v48 tier2: 55-74"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1777940434.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1777922447.5733876,
+    "attempts": 0
+  },
+  {
     "url": "https://www.ringsidenews.com/pat-mcafee-wwe-exit-scrapped-backlash-main-event-plans/",
     "title": "Pat McAfee WWE Exit Scrapped Backlash Main Event Plans",
     "semantic_id": "pat-mcafee-wwe-exit-scrapped-backlash-main-event-plans",

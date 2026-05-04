@@ -1125,3 +1125,53 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 4 candidati provati | mode=normal
 ===== RUN END [2026-05-04 17:28:25] VERSION [v55 (08fb5a4)] =====
 
+
+===== RUN START [2026-05-04 19:20:37] VERSION [v55 (d4622cd)] =====
+[WP] WordPress non raggiungibile: HTTPSConnectionPool(host='www.openwrestlingtv.space', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.openwrestlingtv.space', port=443) at 0x7fc3e6227fa0>, 'Connection to www.openwrestlingtv.space timed out. (connect timeout=8)'))
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (0/75): Luke Thomas: UFC Freedom 250 Will Likely Cost US Taxpayers Millions
+[SKIP] Score sotto soglia editoriale (28/75): Brooke Hogan Discusses Her Erasure From Hulk Hogan Documentary
+[SKIP] Score sotto soglia editoriale (36/75): AEW Star Will Ospreay Captures NJPW Title Alongside United Empire Allies
+[SKIP] Score sotto soglia editoriale (34/75): AEW Star Persephone Sidelined Indefinitely, Forcing Change To ROH Title Match
+[SKIP] Score sotto soglia editoriale (32/75): Andrade Captures IWGP Global Heavyweight Championship At NJPW Wrestling Dontaku 2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163566/wwe-wrestlemania-42-cody-rhodes-triple-h-randy-orton-eye-patch-idea-shut-down/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163863/wwe-roman-reigns-changes-schedule-backstage-report-saudi-arabia-night-champions/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163537/wwe-bully-ray-blake-monroe-nikki-cross-perfect-main-roster-opponent/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163844/wwe-backlash-john-cena-appearance-teases-history-making-news/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163485/seth-rollins-reflects-recent-wwe-injury-hiatus/
+[SKIP] Score sotto soglia editoriale (34/75): AEW Dynamite Viewership & Ratings Report, 4/29/2026
+[SKIP] Score sotto soglia editoriale (18/75): Tony Khan: Quality Of AEW Right Now Is 'The Best It's Ever Been'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163098/wwe-dakota-kai-stephanie-mcmahon-ronda-rousey-recalls-training/
+[SKIP] Score sotto soglia editoriale (20/75): Giovanni Vinci Experienced 'Avalanche' Of Emotions Missing Imperium's WWE Call-Up
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (36/75): Zelina Vega Shuts Down Fake AI Video Claiming She Was Humiliated By WWE Release
+[SKIP] URL già in history: https://www.ringsidenews.com/why-rhea-ripley-didnt-sign-talent-agency-revealed/
+[SKIP] Score sotto soglia editoriale (6/75): Charlotte Flair Hopes Ric Flair Stays Off Social Media During Her Matches
+[SKIP] Score sotto soglia editoriale (4/75): Nick LoPiccolo Fires Back After "Coke" Accusations Over Anti-AEW Tweets
+[SKIP] URL già in history: https://www.ringsidenews.com/kevin-owens-announces-wwes-canada-return-personal-update-neck-surgery/
+[SKIP] URL già in history: https://www.ringsidenews.com/espn-edits-cm-punks-wrestlemania-42-entrance-replaces-afi-theme-stock-music/
+[SKIP] Score sotto soglia editoriale (15/75): Where Things Stand With Bringing Lucha Underground Back After Surprise Tease
+[SKIP] Score sotto soglia editoriale (31/75): Sports Agent Nick LoPiccolo Explains How He Accidentally Stole John Cena's Escalade
+[SKIP] Score sotto soglia editoriale (0/75): Sports Talent Agent Nick LoPiccolo Turned Down Hook As Client and Explains Why
+[SCORE] 100 high - Backstage Update On John Cena's WWE Schedule Post-Retirement | WWE/main roster, top star: john cena, WWE main roster + storyline/evento, rumor/backstage, combo top name + evento forte, PLE/PPV
+[SCORE] 86 high - MJF Destroys Val Venis With Brutal Cody Rhodes Tweet After Cryptic Jab | WWE/main roster, top star: cody rhodes, nome AEW: mjf, WWE main roster + storyline/evento, PLE/PPV
+[SCORE] 71 medium - AEW & ROH Star Comments On Brodie Lee Jr.'s Match Over WWE WrestleMania Weekend | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v48 tier2: 55-74
+[SCORE] 64 medium - Netflix Exec Wants Movies With CM Punk and Liv Morgan After WWE Push | WWE/main roster, top star: cm punk, business/media rights, combo top name + evento forte, opinione generica, v48 tier2: 55-74
+[SCORE] 63 medium - WWE's Jade Cargill 'Would've Loved To Wrestle Way More' As Champion | WWE/main roster, nomi forti: jade cargill, WWE main roster + storyline/evento, titolo/championship, v48 tier2: 55-74
+[SCORE] 60 medium - Unexpected Name Claims Involvement in Drew McIntyre WWE Title Win | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, v48 tier2: 55-74
+[SCORE] 55 low - Val Venis Claims His Jockstrap Is a Bigger Draw Than Sami Zayn | WWE/main roster, WWE main roster + storyline/evento, show settimanale, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - Tony Khan Accused of Funding Bot Attacks on AEW Stars Who Join WWE | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - WWE Adds Emmy-Nominated Talent With New Production Hire | WWE/main roster, WWE main roster + storyline/evento, match/segmento annunciato, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - Retired WWE Star AJ Styles Talks Getting To Enjoy His First WrestleMania 'As A Fan' | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v48 tier2: 55-74
+[MODE] Modalita normale: 1 news >=90, 2 news >=80
+[BOT] WordPress offline: assegno score e salvo solo i candidati che sarebbero stati pubblicati, senza chiamare Gemini.
+[PENDING] Coda salvata: 2 elementi
+[PENDING] Salvata news high (100): Backstage Update On John Cena's WWE Schedule Post-Retirement
+[PENDING] Coda salvata: 3 elementi
+[PENDING] Salvata news high (86): MJF Destroys Val Venis With Brutal Cody Rhodes Tweet After Cryptic Jab
+[PENDING] Coda salvata: 4 elementi
+[PENDING] Salvata news medium (71): AEW & ROH Star Comments On Brodie Lee Jr.'s Match Over WWE WrestleMania Weekend
+[PENDING] Candidati salvati per dopo: 3
+===== RUN END [2026-05-04 19:20:37] VERSION [v55 (d4622cd)] =====
+
