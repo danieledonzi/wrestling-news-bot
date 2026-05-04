@@ -878,3 +878,145 @@
 [BOT] Pubblicati 2 articoli (0 pending + 2 nuove) su 7 candidati provati | mode=normal
 ===== RUN END [2026-05-04 13:29:47] VERSION [v55 (4ad6564)] =====
 
+
+===== RUN START [2026-05-04 15:57:10] VERSION [v55 (d3377fe)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (34/75): AEW Dynamite Viewership & Ratings Report, 4/29/2026
+[SKIP] Score sotto soglia editoriale (18/75): Tony Khan: Quality Of AEW Right Now Is 'The Best It's Ever Been'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163098/wwe-dakota-kai-stephanie-mcmahon-ronda-rousey-recalls-training/
+[SKIP] Score sotto soglia editoriale (20/75): Giovanni Vinci Experienced 'Avalanche' Of Emotions Missing Imperium's WWE Call-Up
+[SKIP] URL già in history: https://www.wrestlinginc.com/2162318/wwe-royal-rumble-2026-royce-keys-debut-huge-test/
+[SKIP] Score sotto soglia editoriale (24/75): Charlotte Flair Describes Her Onscreen WWE Persona As 'Armor'
+[SKIP] Score sotto soglia editoriale (20/75): Former WWE Star Dakota Kai Details Origin Of Damage CTRL
+[SKIP] Score sotto soglia editoriale (36/75): WWE Release 25-Year Production Veteran In Latest Round Of TKO Layoffs
+[SKIP] Score sotto soglia editoriale (18/75): Tony Khan Compares Celebrated AEW & NJPW Rivalry To The Godfather
+[SKIP] URL già in history: https://www.wrestlinginc.com/2161939/seth-rollins-wwe-star-doesnt-know-speed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163182/colten-gunn-return-aew-reunites-brother/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163179/aew-jack-perry-retains-national-title-cmll-mascara-dorada/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2161844/wwe-matt-cardona-zack-ryder-john-cena-tournament/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2161705/booker-t-happy-hell-radicalz-left-wcw-wwe/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (15/75): Where Things Stand With Bringing Lucha Underground Back After Surprise Tease
+[SKIP] Score sotto soglia editoriale (31/75): Sports Agent Nick LoPiccolo Explains How He Accidentally Stole John Cena's Escalade
+[SKIP] Score sotto soglia editoriale (0/75): Sports Talent Agent Nick LoPiccolo Turned Down Hook As Client and Explains Why
+[SKIP] Score sotto soglia editoriale (32/75): Tony Khan Accused of Leaking AEW Contract Talks To Dave Meltzer During Talent Negotiations
+[SKIP] Score sotto soglia editoriale (24/75): Nick LoPiccolo Says WWE Doesn't Care About AEW and Never Negotiates Against Them
+[SKIP] Score sotto soglia editoriale (16/75): Kevin Nash Reveals What Was Cut From Hulk Hogan Netflix Documentary
+[SKIP] URL già in history: https://www.ringsidenews.com/john-cena-teases-history-making-news-wwe-backlash/
+[SKIP] Score sotto soglia editoriale (18/75): AEW Administration Coordinator Will Washington Allegedly Blocked By Talent Over 'Weird' Claims
+[SKIP] Score sotto soglia editoriale (4/75): Rich Swann Reveals How Encounter With Ex-Skinhead in Jail Helped Save His Life
+[SKIP] Score sotto soglia editoriale (18/75): Joey Ryan Claims He Turned Down Offer to Join AEW
+[SCORE] 97 high - ESPN Edits CM Punk's WrestleMania 42 Entrance, Replaces AFI Theme With Stock Music | WWE/main roster, top star: cm punk, nome WWE: cm punk, business/media rights, combo top name + evento forte, PLE/PPV
+[SCORE] 96 high - John Cena Announces WWE Backlash Appearance, Teases 'History-Making News' | WWE/main roster, top star: john cena, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[SCORE] 92 high - Backstage Report On Changes To Roman Reigns' Upcoming WWE Schedule | WWE/main roster, top star: roman reigns, WWE main roster + storyline/evento, titolo/championship, PLE/PPV
+[SCORE] 59 low - Seth Rollins Reflects On Recent WWE Injury Hiatus | WWE/main roster, nomi forti: seth rollins, WWE main roster + storyline/evento, ritorno/debutto, opinione generica, v48 tier2: 55-74
+[SCORE] 57 low - Bully Ray Believes WWE Just Got Rid Of Perfect Main Roster Opponent For Blake Monroe | WWE/main roster, nomi forti: bully ray, WWE main roster + storyline/evento, release/addio, opinione generica, v48 tier2: 55-74
+[SCORE] 56 low - Kevin Owens Announces WWE's Canada Return With Personal Update After Neck Surgery | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, v48 tier2: 55-74
+[SCORE] 55 low - WWE Adds Emmy-Nominated Talent With New Production Hire | WWE/main roster, WWE main roster + storyline/evento, match/segmento annunciato, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - Retired WWE Star AJ Styles Talks Getting To Enjoy His First WrestleMania 'As A Fan' | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - Booker T Says Recent WWE NXT Release Needs To 'Figure It Out' | WWE/main roster, nomi forti: booker t, release/addio, show settimanale, v48 tier2: 55-74
+[SCORE] 54 low - Ridge Holland Calls Out Shawn Michaels' "TikTok Style" NXT Direction After Triple H Era Shift | WWE/main roster, nomi forti: triple h, WWE main roster + storyline/evento, PLE/PPV, v48 tier3: 45-54 contestuale
+[MODE] Storm mode attiva: 3 news >=90, 3 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 1
+[BOT] Elaborazione: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans
+[BOT] semantic_id=pat-mcafee-wwe-exit-scrapped-backlash-main-event-plans
+[SCORE] iniziale=69 priority=medium
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: cody rhodes, randy orton, WWE main roster + storyline/evento, infortunio, combo top name + evento forte, PLE/PPV, opinione generica
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:cody-rhodes-diagnosis -> event:cody-rhodes-diagnosis-followup-pat-mcafee-exit-scrapped-backlash-main-event
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Titolo incoerente: L'uscita di Pat McAfee fa saltare i piani per il main event di Backlash e un piano a lungo termine
+[SKIP] Traduzione fallita: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans (err_type=validation)
+[FAILED] URL sospeso 24h dopo 7 validation fail: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans
+[BOT] News candidate totali: 11 | mode=storm | max nuove=5 | pending pubblicati=0
+[BOT] Elaborazione: ESPN Edits CM Punk's WrestleMania 42 Entrance, Replaces AFI Theme With Stock Music
+[BOT] semantic_id=espn-edits-cm-punks-wrestlemania-42-entrance-replaces-afi-theme-with-stock-music
+[SCORE] iniziale=97 priority=high
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: cm punk, WWE main roster + storyline/evento, business/media rights, combo top name + evento forte, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/espn-edits-cm-punks-wrestlemania-42-entrance-replaces-afi-theme-with-stock-music-59.jpg
+[MEDIA] Immagine caricata: 3376
+[WP] Status attach image: 200
+[OK] Pubblicato: ESPN modifica l'entrata di CM Punk a WrestleMania 42, sostituendo la musica degli AFI
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: John Cena Announces WWE Backlash Appearance, Teases 'History-Making News'
+[BOT] semantic_id=john-cena-announces-wwe-backlash-appearance-teases-history-making-news
+[SCORE] iniziale=96 priority=high
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: john cena, roman reigns, nomi forti: danhausen, WWE main roster + storyline/evento, ritorno/debutto, combo top name + evento forte, PLE/PPV
+[FIX] Event key in history ma non confermata su WordPress: event:roman-reigns-diagnosis - provo a pubblicare
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[QUALITY] Problemi rilevati: ['Titolo sospeso o incompleto']
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Output ancora sospetto dopo revisione: ['Titolo sospeso o incompleto']
+[SKIP] Traduzione fallita: John Cena Announces WWE Backlash Appearance, Teases 'History-Making News' (err_type=validation)
+[BOT] Elaborazione: Backstage Report On Changes To Roman Reigns' Upcoming WWE Schedule
+[BOT] semantic_id=backstage-report-on-changes-to-roman-reigns-upcoming-wwe-schedule
+[SCORE] iniziale=92 priority=high
+[BOT] Embed trovati: 2
+[SCORE] raffinato=92 priority=high | WWE/main roster, top star: cm punk, roman reigns, WWE main roster + storyline/evento, titolo/championship, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/backstage-report-on-changes-to-roman-reigns-upcoming-wwe-schedule/l-intro-1777908497.jpg
+[MEDIA] Immagine caricata: 3379
+[WP] Status attach image: 200
+[OK] Pubblicato: Roman Reigns: Modifiche Improvvise al Calendario WWE
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Seth Rollins Reflects On Recent WWE Injury Hiatus
+[BOT] semantic_id=seth-rollins-reflects-on-recent-wwe-injury-hiatus
+[SCORE] iniziale=59 priority=low
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: cm punk, nomi forti: seth rollins, WWE main roster + storyline/evento, ritorno/debutto, combo top name + evento forte, PLE/PPV, opinione generica
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/seth-rollins-reflects-on-recent-wwe-injury-hiatus/l-intro-1777887042.jpg
+[MEDIA] Immagine caricata: 3382
+[WP] Status attach image: 200
+[OK] Pubblicato: Seth Rollins ripensa al recente stop per infortunio in WWE
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Bully Ray Believes WWE Just Got Rid Of Perfect Main Roster Opponent For Blake Monroe
+[BOT] semantic_id=bully-ray-believes-wwe-just-got-rid-of-perfect-main-roster-opponent-for-blake-monroe
+[SCORE] iniziale=57 priority=low
+[SCORE] raffinato=72 priority=medium | WWE/main roster, nomi forti: bully ray, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Bully Ray Believes WWE Just Got Rid Of Perfect Main Roster Opponent For Blake Monroe
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/bully-ray-believes-wwe-just-got-rid-of-perfect-main-roster-opponent-for-blake-monroe/l-intro-1777892666.jpg
+[MEDIA] Immagine caricata: 3386
+[WP] Status attach image: 200
+[OK] Pubblicato: Bully Ray: La WWE si è liberata di un avversario ideale per Blake Monroe
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Kevin Owens Announces WWE's Canada Return With Personal Update After Neck Surgery
+[BOT] semantic_id=kevin-owens-announces-wwes-canada-return-with-personal-update-after-neck-surgery
+[SCORE] iniziale=56 priority=low
+[BOT] Embed trovati: 1
+[SCORE] raffinato=64 priority=medium | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, show settimanale
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Kevin Owens Announces WWE's Canada Return With Personal Update After Neck Surgery
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/kevin-owens-announces-wwes-canada-return-with-personal-update-after-neck-surgery-28.jpg
+[MEDIA] Immagine caricata: 3389
+[WP] Status attach image: 200
+[OK] Pubblicato: Kevin Owens annuncia il ritorno della WWE in Canada con aggiornamento personale post-chirurgia al collo
+[PENDING] Coda salvata: 1 elementi
+[BOT] Pubblicati 5 articoli (0 pending + 5 nuove) su 7 candidati provati | mode=storm
+===== RUN END [2026-05-04 15:57:10] VERSION [v55 (d3377fe)] =====
+
