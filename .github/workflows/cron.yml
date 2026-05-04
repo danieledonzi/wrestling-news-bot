@@ -39,6 +39,7 @@ jobs:
           WP_URL: ${{ secrets.WP_URL }}
           WP_USER: ${{ secrets.WP_USER }}
           WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
+          GITHUB_SHA: ${{ github.sha }}
         run: python bot.py
 
       - name: Upload master log
@@ -65,14 +66,3 @@ jobs:
           else
             echo "Nessuna modifica da salvare"
           fi
-
-      - name: Commit history and logs
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-    
-    git add history.txt logs/master_log.log
-    
-    git commit -m "Update history and logs [skip ci]" || echo "No changes"
-    
-    git push
