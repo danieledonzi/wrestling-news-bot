@@ -440,3 +440,142 @@
 [PENDING] Candidati salvati per dopo: 3
 ===== RUN END [2026-05-04 07:58:59] VERSION [v55 (b3d7ba6)] =====
 
+
+===== RUN START [2026-05-04 09:13:30] VERSION [v55 (c9e8a61)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (20/75): Giovanni Vinci Experienced 'Avalanche' Of Emotions Missing Imperium's WWE Call-Up
+[SKIP] URL già in history: https://www.wrestlinginc.com/2162318/wwe-royal-rumble-2026-royce-keys-debut-huge-test/
+[SKIP] Score sotto soglia editoriale (24/75): Charlotte Flair Describes Her Onscreen WWE Persona As 'Armor'
+[SKIP] Score sotto soglia editoriale (20/75): Former WWE Star Dakota Kai Details Origin Of Damage CTRL
+[SKIP] Score sotto soglia editoriale (36/75): WWE Release 25-Year Production Veteran In Latest Round Of TKO Layoffs
+[SKIP] Score sotto soglia editoriale (18/75): Tony Khan Compares Celebrated AEW & NJPW Rivalry To The Godfather
+[SKIP] URL già in history: https://www.wrestlinginc.com/2161939/seth-rollins-wwe-star-doesnt-know-speed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163182/colten-gunn-return-aew-reunites-brother/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2161844/wwe-matt-cardona-zack-ryder-john-cena-tournament/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163146/wwe-wrestlemania-42-paige-return-backstage-report/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2161701/wwe-nxt-tatum-paxley-shawn-michaels-conversation-altered-career/
+[SKIP] Score sotto soglia editoriale (27/75): WWE Hall Of Famer Bully Ray Believes Bron Breakker Needs A New Name
+[SKIP] Score sotto soglia editoriale (20/75): JBL Wishes He Wrestled This Rising WWE Star: 'One Of The Best Workers In The World'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2161173/wwe-wrestlemania-34-triple-h-paul-levesque-stephanie-mcmahon-favorite-nights/
+[SKIP] Score sotto soglia editoriale (38/75): Tony Schiavone Says He'll 'Never Forget' This Recent AEW Dynamite Moment
+[SKIP] Score sotto soglia editoriale (28/75): WWE's Raquel Rodriguez On Post-Finn Balor Judgment Day: 'It's A Women's Club Now'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2160864/wwe-cody-rhodes-dominik-mysterio-uncool/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (34/75): Tony Khan Accused of Purposely Benching Talent, Avoiding Conflict & 'Ghosting' Executives
+[SKIP] Score sotto soglia editoriale (28/75): Tony Khan Allegedly Already Shopping AEW Around With No Deal in Place
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-lfg-may-3-episode-sees-drake-morreaux-pulled-performance-center/
+[SKIP] Score sotto soglia editoriale (0/75): Bill Goldberg Trends After Viral Clip Claims Fans 'Just Found Out He's Jewish'
+[SKIP] Score sotto soglia editoriale (8/75): WWE EVOLVE Succession III Date Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/ex-wwe-lfg-star-bj-ray-name-drops-mjf-claims-hed-eat-him-alive-mic/
+[SKIP] Score sotto soglia editoriale (18/75): Nick LoPiccolo Claims AEW 'Tried to Nuke' His Account After Second Twitter Lockout
+[SKIP] Score sotto soglia editoriale (20/75): Rikishi Announces Leave From KnokX Pro
+[SKIP] event_key confermata su WordPress: event:smackdown-two-hour-format - Ex-WWE Star Carmella Shows Off Bruising After Eye Surgery
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-lfg-preview-may-3-2026-first-tag-match-heats-bubba-ray-dudley-gets-brutally-honest/
+[SKIP] Score sotto soglia editoriale (43/75): Kevin Hart Claims He Called The Cops On The Rock After Traffic Stop
+[SKIP] Score sotto soglia editoriale (16/75): Nick LoPiccolo Fires Back at AEW and WBD Denials With Blunt Response
+[SCORE] 69 medium - Pat McAfee WWE Exit Scrapped Backlash Main Event Plans | WWE/main roster, WWE main roster + storyline/evento, release/addio, PLE/PPV, v48 tier2: 55-74
+[SCORE] 63 medium - Reason Revealed For Roman Reigns Being Pulled From WWE June TV Dates | WWE/main roster, top star: roman reigns, WWE main roster + storyline/evento, v48 tier2: 55-74
+[SCORE] 50 low - Tiffany Stratton Flexes Women's WWE U.S. Title With Bikini Boat Video | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, v48 tier3: 45-54 contestuale
+[SCORE] 43 low - Booker T Was 'Happy As Hell' When Radicalz Left WCW For WWE | WWE/main roster, nomi forti: booker t, business/media rights, v48 tier4: 40-44 riempimento controllato
+[SCORE] 42 low - Bully Ray & Tommy Dreamer Discuss AI-Generated Video Presented On WWE NXT | WWE/main roster, nomi forti: bully ray, tommy dreamer, show settimanale, v48 tier4: 40-44 riempimento controllato
+[SCORE] 40 low - Jack Perry Retains National Title Over AEW/CMLL Star On Collision | AEW, titolo/championship, show settimanale, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 3
+[BOT] Elaborazione: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans
+[BOT] semantic_id=pat-mcafee-wwe-exit-scrapped-backlash-main-event-plans
+[SCORE] iniziale=69 priority=medium
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: cody rhodes, randy orton, WWE main roster + storyline/evento, infortunio, combo top name + evento forte, PLE/PPV, opinione generica
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:cody-rhodes-diagnosis -> event:cody-rhodes-diagnosis-followup-pat-mcafee-exit-scrapped-backlash-main-event
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash
+[TRANSLATE] Errore: Titolo incoerente: L'addio di Pat McAfee alla WWE ha cancellato i piani per il main event di Backlash
+[SKIP] Traduzione fallita: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans (err_type=validation)
+[FAILED] URL sospeso 24h dopo 2 validation fail: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans
+[BOT] Elaborazione: Reason Revealed For Roman Reigns Being Pulled From WWE June TV Dates
+[BOT] semantic_id=reason-revealed-for-roman-reigns-being-pulled-from-wwe-june-tv-dates
+[SCORE] iniziale=63 priority=medium
+[BOT] Embed trovati: 1
+[SCORE] raffinato=96 priority=high | WWE/main roster, top star: roman reigns, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[SKIP] Event key già pubblicata nella run e confermata su WordPress: event:roman-reigns-title - Reason Revealed For Roman Reigns Being Pulled From WWE June TV Dates
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Ex-WWE Star Carmella Shows Off Bruising After Eye Surgery
+[BOT] semantic_id=ex-wwe-star-carmella-shows-off-bruising-after-eye-surgery
+[SCORE] iniziale=62 priority=medium
+[BOT] Embed trovati: 1
+[SCORE] raffinato=69 priority=medium | WWE/main roster, WWE main roster + storyline/evento, infortunio, PLE/PPV
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Ex-WWE Star Carmella Shows Off Bruising After Eye Surgery
+[SKIP] Event key già pubblicata nella run e confermata su WordPress: event:smackdown-two-hour-format - Ex-WWE Star Carmella Shows Off Bruising After Eye Surgery
+[PENDING] Coda salvata: 1 elementi
+[BOT] News candidate totali: 6 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans
+[BOT] semantic_id=pat-mcafee-wwe-exit-scrapped-backlash-main-event-plans
+[SCORE] iniziale=69 priority=medium
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: cody rhodes, randy orton, WWE main roster + storyline/evento, infortunio, combo top name + evento forte, PLE/PPV, opinione generica
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:cody-rhodes-diagnosis -> event:cody-rhodes-diagnosis-followup-pat-mcafee-exit-scrapped-backlash-main-event
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Titolo incoerente: L'uscita di Pat McAfee dalla WWE fa saltare i piani per il main event di Backlash
+[SKIP] Traduzione fallita: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans (err_type=validation)
+[FAILED] URL sospeso 24h dopo 3 validation fail: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans
+[BOT] Elaborazione: Reason Revealed For Roman Reigns Being Pulled From WWE June TV Dates
+[BOT] semantic_id=reason-revealed-for-roman-reigns-being-pulled-from-wwe-june-tv-dates
+[SCORE] iniziale=63 priority=medium
+[BOT] Embed trovati: 1
+[SCORE] raffinato=96 priority=high | WWE/main roster, top star: roman reigns, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[SKIP] Event key già pubblicata nella run e confermata su WordPress: event:roman-reigns-title - Reason Revealed For Roman Reigns Being Pulled From WWE June TV Dates
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Tiffany Stratton Flexes Women's WWE U.S. Title With Bikini Boat Video
+[BOT] semantic_id=tiffany-stratton-flexes-womens-wwe-us-title-with-bikini-boat-video
+[SCORE] iniziale=50 priority=low
+[BOT] Embed trovati: 1
+[SCORE] raffinato=67 priority=medium | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, PLE/PPV
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Tiffany Stratton Flexes Women's WWE U.S. Title With Bikini Boat Video
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/tiffany-stratton-flexes-womens-wwe-u-s-title-with-bikini-boat-video-38.jpg
+[MEDIA] Immagine caricata: 3356
+[WP] Status attach image: 200
+[OK] Pubblicato: Tiffany Stratton celebra il titolo femminile USA con un video in bikini su una barca
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Booker T Was 'Happy As Hell' When Radicalz Left WCW For WWE
+[BOT] semantic_id=booker-t-was-happy-as-hell-when-radicalz-left-wcw-for-wwe
+[SCORE] iniziale=43 priority=low
+[BOT] Embed trovati: 1
+[SCORE] raffinato=74 priority=medium | WWE/main roster, nomi forti: booker t, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, opinione generica
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Booker T Was 'Happy As Hell' When Radicalz Left WCW For WWE
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/booker-t-was-happy-as-hell-when-radicalz-left-wcw-for-wwe/l-intro-1777593041.jpg
+[MEDIA] Immagine caricata: 3359
+[WP] Status attach image: 200
+[OK] Pubblicato: Booker T, felice come una pasqua quando i Radicalz lasciarono la WCW per la WWE
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Bully Ray & Tommy Dreamer Discuss AI-Generated Video Presented On WWE NXT
+[BOT] semantic_id=bully-ray-tommy-dreamer-discuss-ai-generated-video-presented-on-wwe-nxt
+[SCORE] iniziale=42 priority=low
+[SCORE] raffinato=67 priority=medium | WWE/main roster, nomi forti: bully ray, tommy dreamer, WWE main roster + storyline/evento, PLE/PPV
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Bully Ray & Tommy Dreamer Discuss AI-Generated Video Presented On WWE NXT
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/bully-ray-tommy-dreamer-discuss-ai-generated-video-presented-on-wwe-nxt/l-intro-1777826378.jpg
+[MEDIA] Immagine caricata: 3362
+[WP] Status attach image: 200
+[OK] Pubblicato: Bully Ray e Tommy Dreamer discutono del video generato dall'AI mostrato in WWE NXT
+[PENDING] Coda salvata: 1 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 8 candidati provati | mode=normal
+===== RUN END [2026-05-04 09:13:30] VERSION [v55 (c9e8a61)] =====
+
