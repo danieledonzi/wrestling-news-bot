@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v53"
+BOT_VERSION = "v54"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -145,7 +145,7 @@ REQUEST_TIMEOUT_IMAGE = 10
 REQUEST_TIMEOUT_SOCIAL_CHECK = 8
 
 # v39: limiti editoriali dinamici
-MAX_NEW_POSTS_NORMAL = 3
+MAX_NEW_POSTS_NORMAL = 5
 MAX_NEW_POSTS_STORM = 5
 MAX_PENDING_RECOVERY_PER_RUN = 5
 MAX_CANDIDATES_TO_TRY = 12
@@ -172,7 +172,7 @@ MIN_EDITORIAL_SCORE = 40
 TIER2_SCORE = 55
 TIER3_SCORE = 45
 TIER4_SCORE = 40
-MAX_TIER4_PER_RUN = 1
+MAX_TIER4_PER_RUN = 2
 STORM_HIGH_THRESHOLD = 5      # almeno 5 news >= 80
 STORM_TOP_THRESHOLD = 3       # oppure almeno 3 news >= 90
 BREAKING_SCORE_BOOST = 20
@@ -209,6 +209,31 @@ STRONG_NAMES = [
 TOP_STAR_NAMES = [
     "john cena", "cm punk", "roman reigns", "brock lesnar", "cody rhodes",
     "rhea ripley", "becky lynch", "randy orton", "undertaker", "the rock",
+]
+
+# v54: boost editoriale generalizzato per WWE main roster.
+# Non dipende solo da nomi hardcoded: aumenta la rilevanza quando la news
+# riguarda storyline, match, titoli, eventi, card, piani o assenze TV.
+WWE_MAIN_ROSTER_TERMS = [
+    "wwe", "raw", "smackdown",
+]
+
+WWE_STORYLINE_RELEVANCE_TERMS = [
+    "backlash", "summerslam", "survivor series", "royal rumble",
+    "wrestlemania", "money in the bank", "night of champions",
+    "clash", "crown jewel", "elimination chamber", "ple", "ppv",
+    "title", "championship", "champion", "contender", "defense",
+    "match", "main event", "card", "segment", "contract signing",
+    "feud", "storyline", "angle", "program", "plans", "scrapped",
+    "confirmed", "announced", "added", "booked", "pulled", "absence",
+    "return", "returns", "returned", "debut", "debuts", "attack",
+    "attacked", "confrontation", "injury", "injured", "medical",
+    "cleared", "not cleared", "turn", "heel", "babyface",
+]
+
+WWE_LIGHTWEIGHT_SOCIAL_TERMS = [
+    "bikini", "boat", "instagram", "tiktok", "photo", "photos",
+    "dating", "boyfriend", "girlfriend", "divorce", "dog", "pet",
 ]
 
 
@@ -2994,6 +3019,21 @@ def calculate_importance_score(title, text="", url=""):
     ]
     has_major_event = any(k in norm for k in major_event_terms)
 
+    # v54: riconoscimento non nominale della rilevanza WWE main roster.
+    # Una news WWE/Raw/SmackDown che tocca storyline, match, titoli, eventi, card,
+    # piani creativi, ritorni, assenze o segmenti deve partire da una base piu alta.
+    main_roster_hit = any(x in norm for x in WWE_MAIN_ROSTER_TERMS)
+    storyline_hit = any(x in norm for x in WWE_STORYLINE_RELEVANCE_TERMS)
+    lightweight_social_hit = any(x in norm for x in WWE_LIGHTWEIGHT_SOCIAL_TERMS)
+
+    if main_roster_hit and storyline_hit:
+        boost = 18
+        # Evita di spingere troppo contenuti social/gossip anche se citano titolo o WWE.
+        if lightweight_social_hit and not has_major_event:
+            boost = 8
+        score += boost
+        reasons.append("WWE main roster + storyline/evento")
+
     type_rules = [
         (20, ["breaking", "major update", "huge update", "shocking", "emergency"], "breaking/major update"),
         (18, ["death", "dies", "dead", "passed away", "passing"], "morte"),
@@ -3035,6 +3075,13 @@ def calculate_importance_score(title, text="", url=""):
         if any(k in norm for k in keywords):
             score += points
             reasons.append(label)
+
+    # v54: floor di pubblicabilita per WWE main roster con valore editoriale reale.
+    # Serve a non far finire nel limbo news su piani, match, titoli o eventi solo
+    # perche' non contengono uno dei nomi top cablati.
+    if main_roster_hit and storyline_hit and not lightweight_social_hit and score < 55:
+        score = 55
+        reasons.append("floor WWE main roster storyline")
 
     # Se il titolo e' molto vago, piccolo malus
     if len([w for w in normalize_for_check(title).split() if w not in STOPWORDS]) <= 2:
