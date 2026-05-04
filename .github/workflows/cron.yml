@@ -51,6 +51,7 @@ jobs:
           path: logs/master_log.log
           if-no-files-found: warn
 
+
       - name: Save bot state and logs
         if: always()
         run: |
@@ -61,7 +62,11 @@ jobs:
           git status --short
 
           git add -f history.txt
-          git add -f pending_articles.json failed_articles.json logs/master_log.log logs/master_log_state.json 2>/dev/null || true
+
+          [ -f pending_articles.json ] && git add -f pending_articles.json
+          [ -f failed_articles.json ] && git add -f failed_articles.json
+          [ -f logs/master_log.log ] && git add -f logs/master_log.log
+          [ -f logs/master_log_state.json ] && git add -f logs/master_log_state.json
 
           echo "STATUS AFTER ADD:"
           git status --short
