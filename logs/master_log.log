@@ -670,3 +670,81 @@
 [BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 4 candidati provati | mode=normal
 ===== RUN END [2026-05-04 11:36:47] VERSION [v55 (67b3dd3)] =====
 
+
+===== RUN START [2026-05-04 11:44:04] VERSION [v55 (3dda9bd)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (20/75): Giovanni Vinci Experienced 'Avalanche' Of Emotions Missing Imperium's WWE Call-Up
+[SKIP] URL già in history: https://www.wrestlinginc.com/2162318/wwe-royal-rumble-2026-royce-keys-debut-huge-test/
+[SKIP] Score sotto soglia editoriale (24/75): Charlotte Flair Describes Her Onscreen WWE Persona As 'Armor'
+[SKIP] Score sotto soglia editoriale (20/75): Former WWE Star Dakota Kai Details Origin Of Damage CTRL
+[SKIP] Score sotto soglia editoriale (36/75): WWE Release 25-Year Production Veteran In Latest Round Of TKO Layoffs
+[SKIP] Score sotto soglia editoriale (18/75): Tony Khan Compares Celebrated AEW & NJPW Rivalry To The Godfather
+[SKIP] URL già in history: https://www.wrestlinginc.com/2161939/seth-rollins-wwe-star-doesnt-know-speed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163182/colten-gunn-return-aew-reunites-brother/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163179/aew-jack-perry-retains-national-title-cmll-mascara-dorada/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2161844/wwe-matt-cardona-zack-ryder-john-cena-tournament/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2161705/booker-t-happy-hell-radicalz-left-wcw-wwe/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163147/wwe-nxt-bully-ray-tommy-dreamer-zaria-ai-generated-video/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163146/wwe-wrestlemania-42-paige-return-backstage-report/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2161701/wwe-nxt-tatum-paxley-shawn-michaels-conversation-altered-career/
+[SKIP] Score sotto soglia editoriale (27/75): WWE Hall Of Famer Bully Ray Believes Bron Breakker Needs A New Name
+[SKIP] Score sotto soglia editoriale (20/75): JBL Wishes He Wrestled This Rising WWE Star: 'One Of The Best Workers In The World'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2161173/wwe-wrestlemania-34-triple-h-paul-levesque-stephanie-mcmahon-favorite-nights/
+[SKIP] Score sotto soglia editoriale (38/75): Tony Schiavone Says He'll 'Never Forget' This Recent AEW Dynamite Moment
+[SKIP] Score sotto soglia editoriale (28/75): WWE's Raquel Rodriguez On Post-Finn Balor Judgment Day: 'It's A Women's Club Now'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2160864/wwe-cody-rhodes-dominik-mysterio-uncool/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (19/75): Will Ospreay and United Empire Win NEVER Openweight Six-Man Tag Titles at NJPW Wrestling Dontaku
+[SKIP] Score sotto soglia editoriale (34/75): Tony Khan Accused of Purposely Benching Talent, Avoiding Conflict & 'Ghosting' Executives
+[SKIP] Score sotto soglia editoriale (28/75): Tony Khan Allegedly Already Shopping AEW Around With No Deal in Place
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-lfg-may-3-episode-sees-drake-morreaux-pulled-performance-center/
+[SKIP] Score sotto soglia editoriale (0/75): Bill Goldberg Trends After Viral Clip Claims Fans 'Just Found Out He's Jewish'
+[SKIP] Score sotto soglia editoriale (8/75): WWE EVOLVE Succession III Date Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/ex-wwe-lfg-star-bj-ray-name-drops-mjf-claims-hed-eat-him-alive-mic/
+[SKIP] Score sotto soglia editoriale (18/75): Nick LoPiccolo Claims AEW 'Tried to Nuke' His Account After Second Twitter Lockout
+[SKIP] Score sotto soglia editoriale (20/75): Rikishi Announces Leave From KnokX Pro
+[SKIP] event_key confermata su WordPress: event:smackdown-two-hour-format - Ex-WWE Star Carmella Shows Off Bruising After Eye Surgery
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-lfg-preview-may-3-2026-first-tag-match-heats-bubba-ray-dudley-gets-brutally-honest/
+[SKIP] URL sospeso per validation fail recenti: https://www.ringsidenews.com/pat-mcafee-wwe-exit-scrapped-backlash-main-event-plans/
+[SKIP] Score sotto soglia editoriale (43/75): Kevin Hart Claims He Called The Cops On The Rock After Traffic Stop
+[SCORE] 63 medium - Reason Revealed For Roman Reigns Being Pulled From WWE June TV Dates | WWE/main roster, top star: roman reigns, WWE main roster + storyline/evento, v48 tier2: 55-74
+[SCORE] 56 low - WWE RAW Preview for May 4, 2026: Confirmed Matches, Start Time and How to Watch | WWE/main roster, WWE main roster + storyline/evento, match/segmento annunciato, show settimanale, v48 tier2: 55-74
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 1
+[BOT] Elaborazione: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans
+[BOT] semantic_id=pat-mcafee-wwe-exit-scrapped-backlash-main-event-plans
+[SCORE] iniziale=69 priority=medium
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: cody rhodes, randy orton, WWE main roster + storyline/evento, infortunio, combo top name + evento forte, PLE/PPV, opinione generica
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:cody-rhodes-diagnosis -> event:cody-rhodes-diagnosis-followup-pat-mcafee-exit-scrapped-backlash-main-event
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Titolo incoerente: L'uscita di Pat McAfee dalla WWE cancella il main event di Backlash e un piano a lungo termine
+[SKIP] Traduzione fallita: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans (err_type=validation)
+[FAILED] URL sospeso 24h dopo 5 validation fail: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans
+[BOT] News candidate totali: 2 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Reason Revealed For Roman Reigns Being Pulled From WWE June TV Dates
+[BOT] semantic_id=reason-revealed-for-roman-reigns-being-pulled-from-wwe-june-tv-dates
+[SCORE] iniziale=63 priority=medium
+[BOT] Embed trovati: 1
+[SCORE] raffinato=96 priority=high | WWE/main roster, top star: roman reigns, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[SKIP] Event key già pubblicata nella run e confermata su WordPress: event:roman-reigns-title - Reason Revealed For Roman Reigns Being Pulled From WWE June TV Dates
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: WWE RAW Preview for May 4, 2026: Confirmed Matches, Start Time and How to Watch
+[BOT] semantic_id=wwe-raw-preview-for-may-4-2026-confirmed-matches-start-time-and-how-to-watch
+[SCORE] iniziale=56 priority=low
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: roman reigns, nomi forti: oba femi, brie bella, WWE main roster + storyline/evento, morte, combo top name + evento forte, show settimanale
+[FIX] Event key in history ma non confermata su WordPress: event:roman-reigns-diagnosis - provo a pubblicare
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Titolo incoerente: Anteprima WWE Raw del 4 maggio 2026: match confermati e attesi
+[SKIP] Traduzione fallita: WWE RAW Preview for May 4, 2026: Confirmed Matches, Start Time and How to Watch (err_type=validation)
+[FAILED] URL sospeso 24h dopo 2 validation fail: WWE RAW Preview for May 4, 2026: Confirmed Matches, Start Time and How to Watch
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 3 candidati provati | mode=normal
+===== RUN END [2026-05-04 11:44:04] VERSION [v55 (3dda9bd)] =====
+
