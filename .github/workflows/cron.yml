@@ -60,8 +60,8 @@ jobs:
           echo "STATUS BEFORE ADD:"
           git status --short
 
-          git add history.txt pending_articles.json failed_articles.json 2>/dev/null || true
-          git add -f logs/master_log.log logs/master_log_state.json 2>/dev/null || true
+          git add -f history.txt
+          git add -f pending_articles.json failed_articles.json logs/master_log.log logs/master_log_state.json 2>/dev/null || true
 
           echo "STATUS AFTER ADD:"
           git status --short
