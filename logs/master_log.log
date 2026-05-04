@@ -1463,3 +1463,142 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 5 candidati provati | mode=normal
 ===== RUN END [2026-05-04 22:07:53] VERSION [v56 (27303ed)] =====
 
+
+===== RUN START [2026-05-04 22:52:06] VERSION [v57 (5d234ec)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (0/75): President Donald Trump Provides Update On UFC Arena Construction At The White House
+[SKIP] Score sotto soglia editoriale (0/75): UFC Star Calls Out Ariel Helwani For Israel Support After Comments On Khamzat Chimaev
+[SKIP] Score sotto soglia editoriale (32/75): Jeff Jarrett: 'Hats Off' To New AEW World Champion
+[SKIP] Score sotto soglia editoriale (55/75): Booker T On WWE LFG Season 3 Returnees: It's Time To 'Sink Or Swim'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164210/wwe-jade-cargill-wouldve-loved-wrestle-more-champion/
+[SKIP] Score sotto soglia editoriale (0/75): Luke Thomas: UFC Freedom 250 Will Likely Cost US Taxpayers Millions
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164146/johnny-tv-aew-roh-brodie-lee-jr-wwe-wrestlemania-weekend/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164069/wwe-john-cena-backstage-update-schedule-post-retirement/
+[SKIP] Score sotto soglia editoriale (34/75): AEW Star Persephone Sidelined Indefinitely, Forcing Change To ROH Title Match
+[SKIP] Score sotto soglia editoriale (32/75): Andrade Captures IWGP Global Heavyweight Championship At NJPW Wrestling Dontaku 2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163984/wwe-new-day-kofi-kingston-xavier-woods-departure-potential-more-releases/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163566/wwe-wrestlemania-42-cody-rhodes-triple-h-randy-orton-eye-patch-idea-shut-down/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163863/wwe-roman-reigns-changes-schedule-backstage-report-saudi-arabia-night-champions/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163537/wwe-bully-ray-blake-monroe-nikki-cross-perfect-main-roster-opponent/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163844/wwe-backlash-john-cena-appearance-teases-history-making-news/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163485/seth-rollins-reflects-recent-wwe-injury-hiatus/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (0/75): Roxanne Perez's Allegations Against Joey Ryan Resurface After Grooming Denial
+[SKIP] Score sotto soglia editoriale (28/75): WWE's Current Stance on Bringing Back NXT UK
+[SKIP] Score sotto soglia editoriale (36/75): Kofi Kingston Says Goodbye To WWE With Emotional Message After Exit
+[SKIP] Score sotto soglia editoriale (36/75): Xavier Woods Says Goodbye To WWE After 16-Year Run Following Exit
+[SKIP] Score sotto soglia editoriale (44/75): LA Knight Backstage Heat Rumor With Triple H Debunked
+[SKIP] URL già in history: https://www.ringsidenews.com/mjf-destroys-val-venis-brutal-cody-rhodes-tweet-cryptic-jab/
+[SKIP] URL già in history: https://www.ringsidenews.com/val-venis-claims-his-jockstrap-bigger-draw-than-sami-zayn/
+[SKIP] URL già in history: https://www.ringsidenews.com/unexpected-name-claims-involvement-drew-mcintyre-wwe-title-win/
+[SKIP] URL già in history: https://www.ringsidenews.com/tony-khan-accused-funding-bot-attacks-aew-stars-who-join-wwe/
+[SCORE] 100 high - TKO Expected to Approach WWE Talent About Taking Pay Cuts | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV
+[SCORE] 72 medium - TKO Reportedly Asking Numerous WWE Talents To Take Pay Cuts, Possibly As High As 50% | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, release/addio, v48 tier2: 55-74
+[SCORE] 70 medium - Jonathan Coachman Blasts WWE Contract Changes After New Day Exit, Calls It "A Problem" | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, contratto, v48 tier2: 55-74
+[SCORE] 68 medium - Kairi Sane Could Return at WWE Backlash After Release | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v48 tier2: 55-74
+[SCORE] 64 medium - Brooke Hogan Discusses Her Erasure From Hulk Hogan Documentary | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, release/addio, opinione generica, v48 tier2: 55-74
+[SCORE] 55 low - Spoiler: Opening Segment for May 4 WWE RAW Revealed | WWE/main roster, nomi forti lead: seth rollins, WWE main roster + storyline/evento, show settimanale, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 48 low - Kofi Kingston & Xavier Woods Reflect On WWE Exits In Social Media Statements | WWE/main roster, impatto roster/storyline, release/addio, v48 tier3: 45-54 contestuale
+[SCORE] 48 low - Additional WWE Releases Could Be Coming After Recent Cuts | WWE/main roster, impatto roster/storyline, release/addio, v48 tier3: 45-54 contestuale
+[SCORE] 48 low - AEW Star Will Ospreay Captures NJPW Title Alongside United Empire Allies | AEW, impatto roster/storyline, ritorno/debutto, v48 tier3: 45-54 contestuale
+[SCORE] 40 low - JC Mateo's Next Destination Possibly Revealed After WWE Exit | WWE/main roster, impatto roster/storyline, rumor/backstage, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 10 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: TKO Expected to Approach WWE Talent About Taking Pay Cuts
+[BOT] semantic_id=tko-expected-to-approach-wwe-talent-about-taking-pay-cuts
+[SCORE] iniziale=100 priority=high
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV
+[FIX] Event key in history ma non confermata su WordPress: event:roman-reigns-diagnosis - provo a pubblicare
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Titolo incoerente: TKO pronta a chiedere ai wrestler WWE di accettare tagli salariali
+[SKIP] Traduzione fallita: TKO Expected to Approach WWE Talent About Taking Pay Cuts (err_type=validation)
+[FAILED] URL sospeso 24h dopo 2 validation fail: TKO Expected to Approach WWE Talent About Taking Pay Cuts
+[BOT] Elaborazione: TKO Reportedly Asking Numerous WWE Talents To Take Pay Cuts, Possibly As High As 50%
+[BOT] semantic_id=tko-reportedly-asking-numerous-wwe-talents-to-take-pay-cuts-possibly-as-high-as-50
+[SCORE] iniziale=72 priority=medium
+[EMBEDSEQ] Sequenza testo/embed preservata: 1 placeholder
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/tko-wwe-talent-pay-cuts-50-percent/l-intro-1777934532.jpg
+[MEDIA] Immagine caricata: 3431
+[WP] Status attach image: 200
+[OK] Pubblicato: TKO Chiede ai Wrestler WWE di Accettare Tagli di Stipendio, Potrebbero Essere del 50%
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Jonathan Coachman Blasts WWE Contract Changes After New Day Exit, Calls It "A Problem"
+[BOT] semantic_id=jonathan-coachman-blasts-wwe-contract-changes-after-new-day-exit-calls-it-a-problem
+[SCORE] iniziale=70 priority=medium
+[EMBEDSEQ] Sequenza testo/embed preservata: 1 placeholder
+[BOT] Embed trovati: 1
+[SCORE] raffinato=76 priority=medium | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, breaking/major update, show settimanale, opinione generica
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[QUALITY] Problemi rilevati: ['Titolo sospeso o incompleto']
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Output ancora sospetto dopo revisione: ['Titolo sospeso o incompleto']
+[SKIP] Traduzione fallita: Jonathan Coachman Blasts WWE Contract Changes After New Day Exit, Calls It "A Problem" (err_type=validation)
+[BOT] Elaborazione: Kairi Sane Could Return at WWE Backlash After Release
+[BOT] semantic_id=kairi-sane-could-return-at-wwe-backlash-after-release
+[SCORE] iniziale=68 priority=medium
+[BOT] Embed trovati: 1
+[SCORE] raffinato=83 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[QUALITY] Problemi rilevati: ['Testo sospetto o troppo breve']
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Output ancora sospetto dopo revisione: ['Testo sospetto o troppo breve']
+[SKIP] Traduzione fallita: Kairi Sane Could Return at WWE Backlash After Release (err_type=validation)
+[FAILED] URL sospeso 24h dopo 2 validation fail: Kairi Sane Could Return at WWE Backlash After Release
+[BOT] Elaborazione: Brooke Hogan Discusses Her Erasure From Hulk Hogan Documentary
+[BOT] semantic_id=brooke-hogan-discusses-her-erasure-from-hulk-hogan-documentary
+[SCORE] iniziale=64 priority=medium
+[EMBEDSEQ] Sequenza testo/embed preservata: 1 placeholder
+[BOT] Embed trovati: 1
+[SCORE] raffinato=99 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, morte, PLE/PPV, opinione generica
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[EMBEDSEQ] Placeholder mancanti dopo traduzione: ['[EMBED_001]'] - fallback append embed
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/brooke-hogan-discusses-her-erasure-from-hulk-hogan-documentary/l-intro-1777919736.jpg
+[MEDIA] Immagine caricata: 3434
+[WP] Status attach image: 200
+[OK] Pubblicato: Brooke Hogan parla della sua esclusione dal documentario su Hulk Hogan
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Spoiler: Opening Segment for May 4 WWE RAW Revealed
+[BOT] semantic_id=spoiler-opening-segment-for-may-4-wwe-raw-revealed
+[SCORE] iniziale=55 priority=low
+[BOT] Embed trovati: 1
+[SCORE] raffinato=82 priority=high | WWE/main roster, nomi forti lead: seth rollins, impatto roster/storyline, WWE main roster + storyline/evento, morte, show settimanale
+[FIX] Event key in history ma non confermata su WordPress: event:roman-reigns-diagnosis - provo a pubblicare
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Titolo incoerente: Spoiler: Apertura della puntata di Raw del 4 maggio svelata
+[SKIP] Traduzione fallita: Spoiler: Opening Segment for May 4 WWE RAW Revealed (err_type=validation)
+[BOT] Elaborazione: Kofi Kingston & Xavier Woods Reflect On WWE Exits In Social Media Statements
+[BOT] semantic_id=kofi-kingston-xavier-woods-reflect-on-wwe-exits-in-social-media-statements
+[SCORE] iniziale=48 priority=low
+[EMBEDSEQ] Sequenza testo/embed preservata: 2 placeholder
+[BOT] Embed trovati: 2
+[SCORE] raffinato=81 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[EMBEDSEQ] Placeholder mancanti dopo traduzione: ['[EMBED_001]', '[EMBED_002]'] - fallback append embed
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/kofi-kingston-xavier-woods-reflect-on-wwe-exits-in-social-media-statements/l-intro-1777931386.jpg
+[MEDIA] Immagine caricata: 3438
+[WP] Status attach image: 200
+[OK] Pubblicato: Kofi Kingston e Xavier Woods commentano la loro uscita dalla WWE
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 7 candidati provati | mode=normal
+===== RUN END [2026-05-04 22:52:06] VERSION [v57 (5d234ec)] =====
+
