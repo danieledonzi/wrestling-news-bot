@@ -42,7 +42,7 @@ jobs:
           GITHUB_SHA: ${{ github.sha }}
         run: python bot.py
 
-            - name: Debug bot state
+      - name: Debug bot state
         if: always()
         run: |
           echo "PWD:"
