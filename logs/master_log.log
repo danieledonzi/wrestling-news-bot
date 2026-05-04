@@ -1175,3 +1175,172 @@
 [PENDING] Candidati salvati per dopo: 3
 ===== RUN END [2026-05-04 19:20:37] VERSION [v55 (d4622cd)] =====
 
+
+===== RUN START [2026-05-04 21:02:40] VERSION [v55 (3594e08)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (0/75): UFC Star Calls Out Ariel Helwani For Israel Support After Comments On Khamzat Chimaev
+[SKIP] Score sotto soglia editoriale (32/75): Jeff Jarrett: 'Hats Off' To New AEW World Champion
+[SKIP] Score sotto soglia editoriale (43/75): Booker T On WWE LFG Season 3 Returnees: It's Time To 'Sink Or Swim'
+[SKIP] Score sotto soglia editoriale (0/75): Luke Thomas: UFC Freedom 250 Will Likely Cost US Taxpayers Millions
+[SKIP] Score sotto soglia editoriale (28/75): Brooke Hogan Discusses Her Erasure From Hulk Hogan Documentary
+[SKIP] Score sotto soglia editoriale (36/75): AEW Star Will Ospreay Captures NJPW Title Alongside United Empire Allies
+[SKIP] Score sotto soglia editoriale (34/75): AEW Star Persephone Sidelined Indefinitely, Forcing Change To ROH Title Match
+[SKIP] Score sotto soglia editoriale (32/75): Andrade Captures IWGP Global Heavyweight Championship At NJPW Wrestling Dontaku 2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163566/wwe-wrestlemania-42-cody-rhodes-triple-h-randy-orton-eye-patch-idea-shut-down/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163863/wwe-roman-reigns-changes-schedule-backstage-report-saudi-arabia-night-champions/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163537/wwe-bully-ray-blake-monroe-nikki-cross-perfect-main-roster-opponent/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163844/wwe-backlash-john-cena-appearance-teases-history-making-news/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163485/seth-rollins-reflects-recent-wwe-injury-hiatus/
+[SKIP] Score sotto soglia editoriale (34/75): AEW Dynamite Viewership & Ratings Report, 4/29/2026
+[SKIP] Score sotto soglia editoriale (18/75): Tony Khan: Quality Of AEW Right Now Is 'The Best It's Ever Been'
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (24/75): Xavier Woods Says Goodbye To WWE After 16-Year Run Following Exit
+[SKIP] Score sotto soglia editoriale (28/75): JC Mateo's Next Destination Possibly Revealed After WWE Exit
+[SKIP] Score sotto soglia editoriale (34/75): Jonathan Coachman Blasts WWE Contract Changes After New Day Exit, Calls It "A Problem"
+[SKIP] Score sotto soglia editoriale (44/75): LA Knight Backstage Heat Rumor With Triple H Debunked
+[SKIP] Score sotto soglia editoriale (36/75): Zelina Vega Shuts Down Fake AI Video Claiming She Was Humiliated By WWE Release
+[SKIP] URL già in history: https://www.ringsidenews.com/why-rhea-ripley-didnt-sign-talent-agency-revealed/
+[SKIP] Score sotto soglia editoriale (6/75): Charlotte Flair Hopes Ric Flair Stays Off Social Media During Her Matches
+[SKIP] Score sotto soglia editoriale (4/75): Nick LoPiccolo Fires Back After "Coke" Accusations Over Anti-AEW Tweets
+[SKIP] URL già in history: https://www.ringsidenews.com/kevin-owens-announces-wwes-canada-return-personal-update-neck-surgery/
+[SCORE] 100 high - Backstage Update On John Cena's WWE Schedule Post-Retirement | WWE/main roster, top star: john cena, WWE main roster + storyline/evento, rumor/backstage, combo top name + evento forte, PLE/PPV
+[SCORE] 86 high - MJF Destroys Val Venis With Brutal Cody Rhodes Tweet After Cryptic Jab | WWE/main roster, top star: cody rhodes, nome AEW: mjf, WWE main roster + storyline/evento, PLE/PPV
+[SCORE] 71 medium - AEW & ROH Star Comments On Brodie Lee Jr.'s Match Over WWE WrestleMania Weekend | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v48 tier2: 55-74
+[SCORE] 64 medium - Netflix Exec Wants Movies With CM Punk and Liv Morgan After WWE Push | WWE/main roster, top star: cm punk, business/media rights, combo top name + evento forte, opinione generica, v48 tier2: 55-74
+[SCORE] 63 medium - WWE's Jade Cargill 'Would've Loved To Wrestle Way More' As Champion | WWE/main roster, nomi forti: jade cargill, WWE main roster + storyline/evento, titolo/championship, v48 tier2: 55-74
+[SCORE] 60 medium - Unexpected Name Claims Involvement in Drew McIntyre WWE Title Win | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, v48 tier2: 55-74
+[SCORE] 56 low - Kairi Sane Could Return at WWE Backlash After Release | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, v48 tier2: 55-74
+[SCORE] 55 low - Val Venis Claims His Jockstrap Is a Bigger Draw Than Sami Zayn | WWE/main roster, WWE main roster + storyline/evento, show settimanale, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - Tony Khan Accused of Funding Bot Attacks on AEW Stars Who Join WWE | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - Retired WWE Star AJ Styles Talks Getting To Enjoy His First WrestleMania 'As A Fan' | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v48 tier2: 55-74
+[MODE] Modalita normale: 1 news >=90, 2 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 4
+[BOT] Elaborazione: Backstage Update On John Cena's WWE Schedule Post-Retirement
+[BOT] semantic_id=backstage-update-on-john-cenas-wwe-schedule-post-retirement
+[SCORE] iniziale=100 priority=high
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: john cena, WWE main roster + storyline/evento, ritorno/debutto, combo top name + evento forte, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/backstage-update-on-john-cenas-wwe-schedule-post-retirement/l-intro-1777915701.jpg
+[MEDIA] Immagine caricata: 3402
+[WP] Status attach image: 200
+[OK] Pubblicato: Aggiornamenti sul programma di John Cena in WWE post-ritiro
+[PENDING] Coda salvata: 3 elementi
+[BOT] Elaborazione: MJF Destroys Val Venis With Brutal Cody Rhodes Tweet After Cryptic Jab
+[BOT] semantic_id=mjf-destroys-val-venis-with-brutal-cody-rhodes-tweet-after-cryptic-jab
+[SCORE] iniziale=86 priority=high
+[BOT] Embed trovati: 2
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: cody rhodes, WWE main roster + storyline/evento, ritorno/debutto, combo top name + evento forte, PLE/PPV
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:cody-rhodes-title -> event:cody-rhodes-title-followup-mjf-destroys-val-venis-brutal-cody-rhodes-tweet-cryptic-jab
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/mjf-destroys-val-venis-with-brutal-cody-rhodes-tweet-after-cryptic-jab-27.jpg
+[MEDIA] Immagine caricata: 3405
+[WP] Status attach image: 200
+[OK] Pubblicato: MJF risponde a Val Venis con un tweet di Cody Rhodes dopo una frecciatina
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: AEW & ROH Star Comments On Brodie Lee Jr.'s Match Over WWE WrestleMania Weekend
+[BOT] semantic_id=aew-roh-star-comments-on-brodie-lee-jrs-match-over-wwe-wrestlemania-weekend
+[SCORE] iniziale=71 priority=medium
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: cody rhodes, WWE main roster + storyline/evento, morte, combo top name + evento forte, PLE/PPV, opinione generica
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/aew-roh-star-comments-on-brodie-lee-jr-s-match-over-wwe-wrestlemania-weekend/l-intro-1777918713.jpg
+[MEDIA] Immagine caricata: 3408
+[WP] Status attach image: 200
+[OK] Pubblicato: Johnny TV commenta il match di Brodie Lee Jr. durante il weekend di WrestleMania
+[PENDING] Scarto pending sotto soglia dopo decay: 39 - Pat McAfee WWE Exit Scrapped Backlash Main Event Plans
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans
+[BOT] semantic_id=pat-mcafee-wwe-exit-scrapped-backlash-main-event-plans
+[SCORE] iniziale=59 priority=low
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: cody rhodes, randy orton, WWE main roster + storyline/evento, infortunio, combo top name + evento forte, PLE/PPV, opinione generica
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:cody-rhodes-diagnosis -> event:cody-rhodes-diagnosis-followup-pat-mcafee-exit-scrapped-backlash-main-event
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Titolo incoerente: L'uscita di Pat McAfee WWE manda all'aria i piani per il Main Event di Backlash
+[SKIP] Traduzione fallita: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans (err_type=validation)
+[FAILED] URL sospeso 24h dopo 9 validation fail: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans
+[BOT] News candidate totali: 11 | mode=normal | max nuove=3 | pending pubblicati=3
+[BOT] Elaborazione: Backstage Update On John Cena's WWE Schedule Post-Retirement
+[BOT] semantic_id=backstage-update-on-john-cenas-wwe-schedule-post-retirement
+[SCORE] iniziale=100 priority=high
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: john cena, WWE main roster + storyline/evento, ritorno/debutto, combo top name + evento forte, PLE/PPV
+[SKIP] News probabilmente già pubblicata da altra fonte: Backstage Update On John Cena's WWE Schedule Post-Retirement
+[SKIP] story_fingerprint=backstage-john-cena-schedule-post-retirement-may-have-retired-his-ring-wrestling-career-last-december-but-seemingly-been-around-almost-much-was-tour-began
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: MJF Destroys Val Venis With Brutal Cody Rhodes Tweet After Cryptic Jab
+[BOT] semantic_id=mjf-destroys-val-venis-with-brutal-cody-rhodes-tweet-after-cryptic-jab
+[SCORE] iniziale=86 priority=high
+[BOT] Embed trovati: 2
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: cody rhodes, WWE main roster + storyline/evento, ritorno/debutto, combo top name + evento forte, PLE/PPV
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:cody-rhodes-title -> event:cody-rhodes-title-followup-mjf-destroys-val-venis-brutal-cody-rhodes-tweet-cryptic-jab
+[SKIP] Event key già pubblicata nella run e confermata su WordPress: event:cody-rhodes-title-followup-mjf-destroys-val-venis-brutal-cody-rhodes-tweet-cryptic-jab - MJF Destroys Val Venis With Brutal Cody Rhodes Tweet After Cryptic Jab
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: AEW & ROH Star Comments On Brodie Lee Jr.'s Match Over WWE WrestleMania Weekend
+[BOT] semantic_id=aew-roh-star-comments-on-brodie-lee-jrs-match-over-wwe-wrestlemania-weekend
+[SCORE] iniziale=71 priority=medium
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: cody rhodes, WWE main roster + storyline/evento, morte, combo top name + evento forte, PLE/PPV, opinione generica
+[SKIP] Event key già pubblicata nella run e confermata su WordPress: event:brodie-lee-return - AEW & ROH Star Comments On Brodie Lee Jr.'s Match Over WWE WrestleMania Weekend
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Netflix Exec Wants Movies With CM Punk and Liv Morgan After WWE Push
+[BOT] semantic_id=netflix-exec-wants-movies-with-cm-punk-and-liv-morgan-after-wwe-push
+[SCORE] iniziale=64 priority=medium
+[BOT] Embed trovati: 2
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: cm punk, WWE main roster + storyline/evento, release/addio, combo top name + evento forte, PLE/PPV, opinione generica
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/netflix-exec-wants-movies-with-cm-punk-and-liv-morgan-after-wwe-push-57.jpg
+[MEDIA] Immagine caricata: 3412
+[WP] Status attach image: 200
+[OK] Pubblicato: Netflix vuole film con CM Punk e Liv Morgan dopo la spinta WWE
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: WWE's Jade Cargill 'Would've Loved To Wrestle Way More' As Champion
+[BOT] semantic_id=wwes-jade-cargill-wouldve-loved-to-wrestle-way-more-as-champion
+[SCORE] iniziale=63 priority=medium
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: rhea ripley, nomi forti: jade cargill, WWE main roster + storyline/evento, ritorno/debutto, combo top name + evento forte, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[QUALITY] Problemi rilevati: ['Titolo sospeso o incompleto']
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwes-jade-cargill-wouldve-loved-to-wrestle-way-more-as-champion/l-intro-1777921292.jpg
+[MEDIA] Immagine caricata: 3415
+[WP] Status attach image: 200
+[OK] Pubblicato: Jade Cargill: "Avrei voluto combattere molto di più" da campionessa
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Unexpected Name Claims Involvement in Drew McIntyre WWE Title Win
+[BOT] semantic_id=unexpected-name-claims-involvement-in-drew-mcintyre-wwe-title-win
+[SCORE] iniziale=60 priority=medium
+[BOT] Embed trovati: 2
+[SCORE] raffinato=99 priority=high | WWE/main roster, top star: cody rhodes, WWE main roster + storyline/evento, titolo/championship, combo top name + evento forte, PLE/PPV, opinione generica
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:cody-rhodes-diagnosis -> event:cody-rhodes-diagnosis-followup-unexpected-name-involvement-drew-mcintyre
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/01/backstage-reaction-to-drew-mcintyres-undisputed-wwe-title-win-26.jpg
+[MEDIA] Immagine caricata: 3419
+[WP] Status attach image: 200
+[OK] Pubblicato: Nick LoPiccolo rivendica un ruolo nella vittoria del titolo WWE di Drew McIntyre
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 6 articoli (3 pending + 3 nuove) su 10 candidati provati | mode=normal
+===== RUN END [2026-05-04 21:02:40] VERSION [v55 (3594e08)] =====
+
