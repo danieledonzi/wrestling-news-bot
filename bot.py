@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v55"
+BOT_VERSION = "v56"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -258,6 +258,58 @@ BROKEN_ITALIAN_TITLE_ENDINGS = [
     "secondo", "dopo", "prima di", "con", "per", "su", "di",
     "contro", "verso", "durante", "mentre", "sul", "sulla",
 ]
+
+# v56: dizionario editoriale/SEO per preservare stipulazioni e denominazioni wrestling.
+# Le forme ufficiali restano in inglese; le regex gestiscono casi dinamici tipo 6-Man Tag Team Match.
+PROTECTED_WRESTLING_TERMS = [
+    "Last Man Standing", "Last Woman Standing", "First Blood Match", "Submission Match",
+    "I Quit Match", "Iron Man Match", "Ultimate Submission Match", "Two out of Three Falls Match",
+    "Best of Seven Series", "Royal Rumble Match", "Elimination Chamber Match",
+    "Money in the Bank Ladder Match", "Hell in a Cell Match", "WarGames Match",
+    "Casino Battle Royale", "Anarchy in the Arena", "Stadium Stampede", "Blood & Guts Match",
+    "Ladder Match", "TLC Match", "Tables Match", "Chairs Match", "Steel Cage Match",
+    "Falls Count Anywhere Match", "Extreme Rules Match", "Hardcore Match", "Street Fight",
+    "No Holds Barred Match", "Unsanctioned Match", "Triple Threat Match", "Fatal 4-Way Match",
+    "Fatal Four-Way Match", "Fatal 5-Way Match", "Six-Pack Challenge", "Gauntlet Match",
+    "Elimination Match", "Women's Royal Rumble", "Women's WarGames Match",
+    "Women's Money in the Bank Ladder Match", "General Manager", "Special Guest Referee",
+    "Special Enforcer", "Commentary Team", "Announce Team", "Backstage Interview",
+    "Finisher", "Signature Move", "Submission Hold", "Pinfall", "Roll-up", "Kick-out",
+    "Near fall", "Clean win", "Dirty win", "Interference", "Run-in",
+]
+
+PROTECTED_WRESTLING_PATTERNS = [
+    r"\b\d+[-\s]Man Tag Team Match\b",
+    r"\b\d+[-\s]Woman Tag Team Match\b",
+    r"\b\d+[-\s]Team Tag(?: Team)? Match\b",
+    r"\b\d+[-\s]Person Tag Team Match\b",
+]
+
+TRANSLATION_GLOSSARY_REPLACEMENTS = {
+    "ultimo uomo in piedi": "Last Man Standing",
+    "ultima donna in piedi": "Last Woman Standing",
+    "match ultimo uomo in piedi": "Last Man Standing Match",
+    "match ultima donna in piedi": "Last Woman Standing Match",
+    "match scala": "Ladder Match",
+    "match con scala": "Ladder Match",
+    "match in gabbia": "Steel Cage Match",
+    "gabbia d'acciaio": "Steel Cage",
+    "match senza squalifica": "No Disqualification Match",
+    "senza squalifica": "No Disqualification",
+    "conteggio ovunque": "Falls Count Anywhere",
+    "rissa di strada": "Street Fight",
+    "lotta di strada": "Street Fight",
+    "match tavoli": "Tables Match",
+    "match a tavoli": "Tables Match",
+    "match sedie": "Chairs Match",
+    "match a sedie": "Chairs Match",
+    "tre contro tre": "6-Man Tag Team Match",
+    "sottomissione": "submission",
+    "schienamento": "pinfall",
+    "interferenza": "interference",
+}
+
+EMBED_PLACEHOLDER_RE = re.compile(r"\[EMBED_\d{3}\]")
 
 
 # v38: mappa nomi -> promotion per categoria e scoring.
@@ -1650,6 +1702,148 @@ def result_article_integrity_warning(source_text, generated_html):
         return f"Possibile articolo results incompleto: mancano riferimenti a {missing_groups[:2]}"
     return ""
 
+
+def _node_social_embed_urls(node):
+    """v56: estrae embed social da un singolo nodo HTML mantenendo l'ordine locale."""
+    if not node:
+        return []
+    embeds = []
+
+    for amp_tw in node.find_all("amp-twitter"):
+        tweet_id = amp_tw.get("data-tweetid")
+        if tweet_id:
+            href = f"https://twitter.com/i/status/{tweet_id}"
+            if is_valid_embed_url(href):
+                embeds.append(href)
+
+    for amp_ig in node.find_all("amp-instagram"):
+        shortcode = amp_ig.get("data-shortcode")
+        if shortcode:
+            href = f"https://www.instagram.com/p/{shortcode}/"
+            if is_valid_embed_url(href):
+                embeds.append(href)
+
+    for blockquote in node.find_all("blockquote"):
+        classes = " ".join(blockquote.get("class", []))
+        if "twitter-tweet" in classes or "instagram-media" in classes:
+            for a in blockquote.find_all("a", href=True):
+                href = normalize_embed_url(a["href"])
+                if is_valid_embed_url(href):
+                    embeds.append(href)
+
+    for iframe in node.find_all("iframe", src=True):
+        src = iframe["src"]
+        fb_href = extract_facebook_url_from_iframe(src)
+        if fb_href:
+            fb_href = normalize_embed_url(fb_href)
+            if is_valid_embed_url(fb_href):
+                embeds.append(fb_href)
+                continue
+        src = normalize_embed_url(src)
+        if is_valid_embed_url(src):
+            embeds.append(src)
+
+    for a in node.find_all("a", href=True):
+        href = normalize_embed_url(a.get("href", ""))
+        if is_valid_embed_url(href):
+            embeds.append(href)
+
+    return dedupe_preserve_order(embeds)
+
+
+def build_ordered_text_with_embed_placeholders(html, source_url=""):
+    """v56: preserva la sequenza narrativa originale testo/embed.
+
+    Ritorna (testo_con_placeholder, embed_map). Gemini traduce solo il testo e deve
+    lasciare invariati placeholder tipo [EMBED_001]. Dopo la traduzione li sostituiamo
+    con gli embed reali nella stessa posizione.
+    """
+    if not html:
+        return "", {}
+
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        content = parse_content_container(soup, source_url)
+        if not content:
+            return "", {}
+
+        # lavora su una copia leggera per non alterare altri extractor
+        content = BeautifulSoup(str(content), "html.parser")
+        for trash in content(["script", "style", "nav", "footer", "header", "aside", "form", "noscript"]):
+            trash.decompose()
+        for bad_sel in [
+            ".social_holder", ".social_icons", ".m-s-i", ".google-news", ".contest",
+            ".breadcrumbs", ".breadcrumb", "#pagination", ".srp", ".related_link",
+            ".amp-related-posts-title", ".amp-sidebar", ".amp-ad-wrapper", "amp-ad",
+            ".sharethis-inline-share-buttons", ".social-share", ".social-wrap", ".sharedaddy",
+            ".author-box", ".byline", ".sidebar", ".comment-respond",
+            ".disqus-comment-container", ".under-art", ".zergnet-widget"
+        ]:
+            for node in content.select(bad_sel):
+                node.decompose()
+
+        ordered_blocks = []
+        embed_map = {}
+        seen_text = set()
+        seen_embeds = set()
+        embed_idx = 1
+
+        nodes = content.find_all(["p", "blockquote", "h2", "h3", "li", "figure", "iframe", "amp-twitter", "amp-instagram"])
+        for node in nodes:
+            embeds = _node_social_embed_urls(node)
+            if embeds:
+                for url in embeds:
+                    key = canonical_embed_key(url)
+                    if key in seen_embeds:
+                        continue
+                    seen_embeds.add(key)
+                    placeholder = f"[EMBED_{embed_idx:03d}]"
+                    embed_map[placeholder] = normalize_embed_url(url)
+                    ordered_blocks.append(placeholder)
+                    embed_idx += 1
+                # Se il nodo e' un blockquote social, il testo interno non va tradotto come articolo.
+                classes = " ".join(node.get("class", []))
+                if node.name in {"iframe", "amp-twitter", "amp-instagram", "figure"} or "twitter-tweet" in classes or "instagram-media" in classes:
+                    continue
+
+            text = sanitize_text(node.get_text(" ", strip=True))
+            if len(text) > 20 and text not in seen_text and not SOURCE_PROMO_RE.search(text):
+                seen_text.add(text)
+                ordered_blocks.append(text)
+
+        # Se l'estrazione ordinata e' troppo povera, fallback alla logica esistente.
+        if len(" ".join(b for b in ordered_blocks if not EMBED_PLACEHOLDER_RE.fullmatch(b))) < 120:
+            return "", {}
+
+        return "\n\n".join(ordered_blocks)[:60000], embed_map
+    except Exception as e:
+        print(f"[EMBEDSEQ] Estrazione sequenza blocchi fallita: {e}")
+        return "", {}
+
+
+def replace_embed_placeholders_in_html(content_html, embed_map):
+    """v56: rimpiazza i placeholder con URL o fallback HTML mantenendo la posizione."""
+    if not content_html or not embed_map:
+        return content_html, False
+
+    missing = [ph for ph in embed_map if ph not in content_html]
+    if missing:
+        print(f"[EMBEDSEQ] Placeholder mancanti dopo traduzione: {missing[:5]} - fallback append embed")
+        return content_html, False
+
+    out = content_html
+    for placeholder, url in embed_map.items():
+        clean_url = normalize_embed_url(url)
+        if get_embed_provider_slug(clean_url) == "facebook" and facebook_url_is_probably_bad(clean_url):
+            replacement = ""
+        elif social_url_is_embeddable(clean_url):
+            replacement = f"\n\n{clean_url}\n\n"
+        else:
+            replacement = get_social_fallback_html(clean_url)
+        out = out.replace(placeholder, replacement)
+
+    return out, True
+
 def extract_embeds_from_article_html(html):
     soup = BeautifulSoup(html, "html.parser")
     embeds = []
@@ -2383,13 +2577,13 @@ STRUTTURA:
 
 GERGO:
 - I nomi dei tipi di match e delle stipulazioni restano in inglese:
-  tag team match, mixed tag team match, triple threat match, fatal four-way match, cage match, ladder match, street fight, no disqualification match.
+  tag team match, mixed tag team match, 6-Man Tag Team Match, 8-Woman Tag Team Match, triple threat match, fatal four-way match, Last Man Standing, Last Woman Standing, cage match, ladder match, street fight, no disqualification match.
 - "chop" e' femminile: scrivi "le chop", "delle chop".
 - "grudge match" non va tradotto letteralmente: usa "regolamento di conti".
 """ if results_mode else """
 GERGO:
 - I nomi dei tipi di match e delle stipulazioni restano in inglese:
-  tag team match, mixed tag team match, triple threat match, fatal four-way match, cage match, ladder match, street fight, no disqualification match.
+  tag team match, mixed tag team match, 6-Man Tag Team Match, 8-Woman Tag Team Match, triple threat match, fatal four-way match, Last Man Standing, Last Woman Standing, cage match, ladder match, street fight, no disqualification match.
 - "chop" e' femminile: scrivi "le chop", "delle chop".
 - "grudge match" non va tradotto letteralmente: usa "regolamento di conti".
 """
@@ -2440,6 +2634,8 @@ STILE EDITORIALE:
 GERGO E NOMI UFFICIALI:
 - Mantieni in inglese il gergo wrestling: match, title, promo, segment, storyline, push, turn, feud, stable, tag team.
 - Mantieni SEMPRE in inglese i nomi ufficiali di titoli, eventi, stable/fazioni e stipulazioni.
+- Mantieni invariati anche i pattern numerici delle stipulazioni: 6-Man Tag Team Match, 8-Woman Tag Team Match, 10-Man Tag Team Match, 4-Way, 5-Way, Six-Pack Challenge.
+- Se trovi placeholder come [EMBED_001], [EMBED_002], ecc., devi copiarli ESATTAMENTE nella stessa posizione logica del testo. Non tradurli, non rimuoverli e non modificarli.
 - Non tradurre, non parafrasare e non reinterpretare mai i nomi ufficiali.
 - Non sostituire mai un titolo con un altro.
 - Esempio obbligatorio: "World Heavyweight Championship" deve restare "World Heavyweight Championship". Non può diventare "titolo mondiale", "titolo dei pesi massimi" o "titolo intercontinentale".
@@ -2956,7 +3152,9 @@ def extract_main_scoring_text(text, max_paragraphs=3, max_chars=2500):
 
 
 def apply_translation_glossary(title, html_text):
-    """v51: post-processing lessicale per traduzioni wrestling troppo letterali."""
+    """v56: post-processing lessicale per traduzioni wrestling troppo letterali.
+    Mantiene in inglese stipulazioni/denominazioni e corregge alcune rese innaturali.
+    """
     title = title or ""
     html_text = html_text or ""
     replacements = {
@@ -2970,9 +3168,23 @@ def apply_translation_glossary(title, html_text):
         "grudge match": "regolamento di conti",
         "grudge matches": "regolamenti di conti",
     }
+    replacements.update(TRANSLATION_GLOSSARY_REPLACEMENTS)
+
     for wrong, right in replacements.items():
         title = re.sub(re.escape(wrong), right, title, flags=re.I)
         html_text = re.sub(re.escape(wrong), right, html_text, flags=re.I)
+
+    # Pattern dinamici tradotti male: 6-Man/8-Woman Tag Team Match deve restare leggibile in inglese.
+    dynamic_fixes = [
+        (r"\b(\d+)\s+uomini\s+tag team match\b", r"\1-Man Tag Team Match"),
+        (r"\b(\d+)\s+donne\s+tag team match\b", r"\1-Woman Tag Team Match"),
+        (r"\bmatch\s+tag team\s+a\s+(\d+)\s+uomini\b", r"\1-Man Tag Team Match"),
+        (r"\bmatch\s+tag team\s+a\s+(\d+)\s+donne\b", r"\1-Woman Tag Team Match"),
+    ]
+    for pat, repl in dynamic_fixes:
+        title = re.sub(pat, repl, title, flags=re.I)
+        html_text = re.sub(pat, repl, html_text, flags=re.I)
+
     return title, html_text
 
 
@@ -3838,6 +4050,15 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         print(f"[REPORT] Uso testo prefetched per report maturo ({len(full_text)} caratteri)")
     else:
         full_text, scrape_error, page_html, page_img, embed_urls, inline_images = get_clean_text(link)
+    embed_placeholder_map = {}
+    text_for_translation = full_text
+    if page_html and embed_urls:
+        ordered_text, ordered_embed_map = build_ordered_text_with_embed_placeholders(page_html, source_url=link)
+        if ordered_text and ordered_embed_map:
+            text_for_translation = ordered_text
+            embed_placeholder_map = ordered_embed_map
+            print(f"[EMBEDSEQ] Sequenza testo/embed preservata: {len(embed_placeholder_map)} placeholder")
+
     if embed_urls:
         print(f"[BOT] Embed trovati: {len(embed_urls)}")
     if inline_images:
@@ -3851,6 +4072,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         if fallback_text:
             print(f"[BOT] Uso summary fallback per: {title}")
             full_text = fallback_text
+            text_for_translation = fallback_text
         else:
             print(f"[SKIP] Testo insufficiente: {title}")
             if scrape_error and scrape_error.startswith("http_"):
@@ -3931,7 +4153,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         add_pending_article(item, reason="wp_down_before_gemini")
         return "wp_down"
 
-    news_data, err_type = translate_news(title, full_text, source_url=link)
+    news_data, err_type = translate_news(title, text_for_translation or full_text, source_url=link)
     if not news_data:
         print(f"[SKIP] Traduzione fallita: {title} (err_type={err_type})")
         if err_type == "validation":
@@ -3948,6 +4170,11 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         record_validation_failure(link, title)
         return "validation_fail"
 
+    embeds_already_positioned = False
+    if embed_placeholder_map:
+        replaced_html, embeds_already_positioned = replace_embed_placeholders_in_html(news_data.get("testo", ""), embed_placeholder_map)
+        news_data["testo"] = replaced_html
+
     # v39: Breaking controllato dal bot, non da Gemini. Scade automaticamente.
     news_data["titolo"] = maybe_add_breaking_prefix(news_data["titolo"], item)
 
@@ -3957,7 +4184,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         data=news_data,
         sem_id=sem_id,
         url=link,
-        embed_urls=embed_urls,
+        embed_urls=[] if embeds_already_positioned else embed_urls,
         event_key=event_key,
         inline_images=inline_images,
         featured_image_url=img_url
