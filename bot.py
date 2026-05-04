@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v54"
+BOT_VERSION = "v55"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -145,7 +145,7 @@ REQUEST_TIMEOUT_IMAGE = 10
 REQUEST_TIMEOUT_SOCIAL_CHECK = 8
 
 # v39: limiti editoriali dinamici
-MAX_NEW_POSTS_NORMAL = 5
+MAX_NEW_POSTS_NORMAL = 3
 MAX_NEW_POSTS_STORM = 5
 MAX_PENDING_RECOVERY_PER_RUN = 5
 MAX_CANDIDATES_TO_TRY = 12
@@ -234,6 +234,29 @@ WWE_STORYLINE_RELEVANCE_TERMS = [
 WWE_LIGHTWEIGHT_SOCIAL_TERMS = [
     "bikini", "boat", "instagram", "tiktok", "photo", "photos",
     "dating", "boyfriend", "girlfriend", "divorce", "dog", "pet",
+]
+
+# v55: contenuti WWE developmental/academy da trattare come secondari.
+# Possono passare ogni tanto, ma non devono invadere la coda come main roster.
+WWE_DEVELOPMENTAL_SECONDARY_TERMS = [
+    "wwe lfg", " lfg ", "wwe evolve", " evolve ",
+    "performance center", "wwe id", "developmental",
+]
+
+# v55: pattern tipici di articoli trash-talk/clickbait da non spingere.
+LOW_VALUE_TRASH_TALK_TERMS = [
+    "name drops", "eat him alive", "on the mic", "claims he'd",
+    "claims he would", "fires back", "blunt response", "calls out fans",
+]
+
+# v55: finali sospesi/tronchi nei titoli italiani. Se il titolo finisce cosi,
+# non va pubblicato: meglio skip/retry che un titolo incompleto in home.
+BROKEN_ITALIAN_TITLE_ENDINGS = [
+    "che", "che lo", "che la", "che li", "che le", "che gli",
+    "afferma che", "dice che", "sostiene che", "rivela che",
+    "spiega che", "racconta che", "conferma che", "dichiara che",
+    "secondo", "dopo", "prima di", "con", "per", "su", "di",
+    "contro", "verso", "durante", "mentre", "sul", "sulla",
 ]
 
 
@@ -596,12 +619,14 @@ def refine_title_italian(title):
     if len(t.split()) > 2:
         t = t[0].upper() + t[1:]
 
-    MAX_TITLE_LEN = 115
+    MAX_TITLE_LEN = 140
 
     if len(t) > MAX_TITLE_LEN:
         cut = t[:MAX_TITLE_LEN].rsplit(" ", 1)[0].rstrip(" ,:;-")
-        if len(cut) >= 45:
-            t = cut + "..."
+        # v55: niente ellissi nei titoli pubblicati. Se il taglio produce un
+        # titolo sospeso, la validazione lo blocchera invece di pubblicarlo.
+        if len(cut) >= 55:
+            t = cut
 
     return t
 
@@ -913,6 +938,15 @@ def title_soft_validation_failed(title):
         "di",
         "che",
     ]
+    low = t.lower().strip(" .,:;!?-–—…")
+    if any(low.endswith(x) for x in bad_endings):
+        return True
+    if any(low.endswith(x) for x in BROKEN_ITALIAN_TITLE_ENDINGS):
+        return True
+    # Un titolo che termina con puntini e' spesso frutto di taglio automatico.
+    # Per SEO e qualita editoriale, meglio non pubblicarlo.
+    if t.endswith("...") or t.endswith("…"):
+        return True
     return False
 
 
@@ -3025,12 +3059,20 @@ def calculate_importance_score(title, text="", url=""):
     main_roster_hit = any(x in norm for x in WWE_MAIN_ROSTER_TERMS)
     storyline_hit = any(x in norm for x in WWE_STORYLINE_RELEVANCE_TERMS)
     lightweight_social_hit = any(x in norm for x in WWE_LIGHTWEIGHT_SOCIAL_TERMS)
+    developmental_secondary_hit = any(x in norm for x in WWE_DEVELOPMENTAL_SECONDARY_TERMS)
+    trash_talk_hit = any(x in norm for x in LOW_VALUE_TRASH_TALK_TERMS)
 
     if main_roster_hit and storyline_hit:
         boost = 18
         # Evita di spingere troppo contenuti social/gossip anche se citano titolo o WWE.
         if lightweight_social_hit and not has_major_event:
             boost = 8
+        # v55: LFG/Evolve/Performance Center non sono main roster editoriale pieno.
+        # Passano solo se il resto della news e' davvero forte.
+        if developmental_secondary_hit:
+            boost = min(boost, 6)
+        if trash_talk_hit:
+            boost = min(boost, 4)
         score += boost
         reasons.append("WWE main roster + storyline/evento")
 
@@ -3079,9 +3121,16 @@ def calculate_importance_score(title, text="", url=""):
     # v54: floor di pubblicabilita per WWE main roster con valore editoriale reale.
     # Serve a non far finire nel limbo news su piani, match, titoli o eventi solo
     # perche' non contengono uno dei nomi top cablati.
-    if main_roster_hit and storyline_hit and not lightweight_social_hit and score < 55:
+    if main_roster_hit and storyline_hit and not lightweight_social_hit and not developmental_secondary_hit and not trash_talk_hit and score < 55:
         score = 55
         reasons.append("floor WWE main roster storyline")
+
+    if developmental_secondary_hit:
+        score -= 12
+        reasons.append("developmental secondario")
+    if trash_talk_hit:
+        score -= 14
+        reasons.append("trash talk/clickbait")
 
     # Se il titolo e' molto vago, piccolo malus
     if len([w for w in normalize_for_check(title).split() if w not in STOPWORDS]) <= 2:
@@ -3465,6 +3514,16 @@ def editorial_tier(score, title="", text="", url=""):
     excluded, reason = editorial_hard_excluded(title, text, url)
     if excluded:
         return "exclude", reason
+
+    developmental_secondary_hit = any(x in probe for x in WWE_DEVELOPMENTAL_SECONDARY_TERMS)
+    trash_talk_hit = any(x in probe for x in LOW_VALUE_TRASH_TALK_TERMS)
+
+    # v55: LFG/Evolve/Performance Center e trash talk passano solo se molto forti.
+    # Non li escludiamo in assoluto, ma evitiamo che riempiano le run ordinarie.
+    if trash_talk_hit and score < 70:
+        return "skip", "trash talk/clickbait sotto soglia"
+    if developmental_secondary_hit and score < 65:
+        return "skip", "developmental secondario sotto soglia"
 
     if score >= MIN_PUBLISH_SCORE:
         return "tier1", ">=75"
