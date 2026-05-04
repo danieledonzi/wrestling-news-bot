@@ -1602,3 +1602,102 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 7 candidati provati | mode=normal
 ===== RUN END [2026-05-04 22:52:06] VERSION [v57 (5d234ec)] =====
 
+
+===== RUN START [2026-05-04 23:48:03] VERSION [v57 (3726bae)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (32/75): Dave Meltzer Says WWE Has Yet To Reach Its Initial 'Goal' For AAA Acquisition
+[SKIP] Score sotto soglia editoriale (1/75): Biggest Winners And Losers Of The Week - 5/4/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164432/tko-wwe-talent-pay-cuts-50-percent/
+[SKIP] Score sotto soglia editoriale (0/75): President Donald Trump Provides Update On UFC Arena Construction At The White House
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164426/wwe-kofi-kingston-xavier-woods-austin-creed-new-day-reflect-exits-statements/
+[SKIP] Score sotto soglia editoriale (0/75): UFC Star Calls Out Ariel Helwani For Israel Support After Comments On Khamzat Chimaev
+[SKIP] Score sotto soglia editoriale (32/75): Jeff Jarrett: 'Hats Off' To New AEW World Champion
+[SKIP] Score sotto soglia editoriale (55/75): Booker T On WWE LFG Season 3 Returnees: It's Time To 'Sink Or Swim'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164210/wwe-jade-cargill-wouldve-loved-wrestle-more-champion/
+[SKIP] Score sotto soglia editoriale (0/75): Luke Thomas: UFC Freedom 250 Will Likely Cost US Taxpayers Millions
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164178/brooke-hogan-discusses-erasure-hulk-hogan-documentary/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164146/johnny-tv-aew-roh-brodie-lee-jr-wwe-wrestlemania-weekend/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164069/wwe-john-cena-backstage-update-schedule-post-retirement/
+[SKIP] Score sotto soglia editoriale (34/75): AEW Star Persephone Sidelined Indefinitely, Forcing Change To ROH Title Match
+[SKIP] Score sotto soglia editoriale (32/75): Andrade Captures IWGP Global Heavyweight Championship At NJPW Wrestling Dontaku 2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163984/wwe-new-day-kofi-kingston-xavier-woods-departure-potential-more-releases/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163566/wwe-wrestlemania-42-cody-rhodes-triple-h-randy-orton-eye-patch-idea-shut-down/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (14/75): Chelsea Green Undergoes Heart Procedure
+[SKIP] Score sotto soglia editoriale (0/75): Roxanne Perez's Allegations Against Joey Ryan Resurface After Grooming Denial
+[SKIP] Score sotto soglia editoriale (28/75): WWE's Current Stance on Bringing Back NXT UK
+[SKIP] Score sotto soglia editoriale (36/75): Kofi Kingston Says Goodbye To WWE With Emotional Message After Exit
+[SKIP] URL sospeso per validation fail recenti: https://www.ringsidenews.com/tko-expected-approach-wwe-talent-about-taking-pay-cuts/
+[SKIP] Score sotto soglia editoriale (36/75): Xavier Woods Says Goodbye To WWE After 16-Year Run Following Exit
+[SKIP] URL sospeso per validation fail recenti: https://www.ringsidenews.com/kairi-sane-could-return-wwe-backlash-release/
+[SKIP] Score sotto soglia editoriale (44/75): LA Knight Backstage Heat Rumor With Triple H Debunked
+[SKIP] URL già in history: https://www.ringsidenews.com/mjf-destroys-val-venis-brutal-cody-rhodes-tweet-cryptic-jab/
+[SKIP] URL già in history: https://www.ringsidenews.com/val-venis-claims-his-jockstrap-bigger-draw-than-sami-zayn/
+[SCORE] 98 high - WWE Raw Results 5/4 - Oba Femi Open Challenge Begins, Backlash WHC Contract Signing | WWE/main roster, top star lead: roman reigns, nomi forti titolo: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, contratto, combo top name lead + evento forte, show settimanale
+[SCORE] 75 medium - WWE RAW Results, Highlights and Key Moments for May 4, 2026 | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, report/results: bypass soglia editoriale
+[SCORE] 70 medium - Jonathan Coachman Blasts WWE Contract Changes After New Day Exit, Calls It "A Problem" | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, contratto, v48 tier2: 55-74
+[SCORE] 55 low - Spoiler: Opening Segment for May 4 WWE RAW Revealed | WWE/main roster, nomi forti lead: seth rollins, WWE main roster + storyline/evento, show settimanale, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 48 low - Additional WWE Releases Could Be Coming After Recent Cuts | WWE/main roster, impatto roster/storyline, release/addio, v48 tier3: 45-54 contestuale
+[SCORE] 48 low - AEW Star Will Ospreay Captures NJPW Title Alongside United Empire Allies | AEW, impatto roster/storyline, ritorno/debutto, v48 tier3: 45-54 contestuale
+[SCORE] 47 low - Spoiler: Oba Femi's First Open Challenge Opponent Reportedly Revealed Ahead Of WWE Raw | WWE/main roster, nomi forti titolo: oba femi, rumor/backstage, show settimanale, v48 tier3: 45-54 contestuale
+[SCORE] 40 low - JC Mateo's Next Destination Possibly Revealed After WWE Exit | WWE/main roster, impatto roster/storyline, rumor/backstage, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 8 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: WWE Raw Results 5/4 - Oba Femi Open Challenge Begins, Backlash WHC Contract Signing
+[BOT] semantic_id=wwe-raw-results-54-oba-femi-open-challenge-begins-backlash-whc-contract-signing
+[SCORE] iniziale=98 priority=high
+[SCORE] raffinato=98 priority=high | WWE/main roster, nomi forti titolo: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, contratto, show settimanale
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-raw-may-4-oba-femi-open-challenge-begins-backlash-world-heavyweight-championship-contract-signing/l-intro-1777935677.jpg
+[MEDIA] Immagine caricata: 3441
+[WP] Status attach image: 200
+[OK] Pubblicato: Raw 5/4: Inizia la sfida aperta di Oba Femi e firma del contratto per il World Heavyweight Championship
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: WWE RAW Results, Highlights and Key Moments for May 4, 2026
+[BOT] semantic_id=wwe-raw-results-highlights-and-key-moments-for-may-4-2026
+[SCORE] iniziale=75 priority=medium
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star lead: roman reigns, nomi forti lead: roman reigns, oba femi, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, contratto, combo top name lead + evento forte
+[SKIP] Event key già pubblicata nella run e confermata su WordPress: event:roman-reigns-contract - WWE RAW Results, Highlights and Key Moments for May 4, 2026
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Jonathan Coachman Blasts WWE Contract Changes After New Day Exit, Calls It "A Problem"
+[BOT] semantic_id=jonathan-coachman-blasts-wwe-contract-changes-after-new-day-exit-calls-it-a-problem
+[SCORE] iniziale=70 priority=medium
+[EMBEDSEQ] Sequenza testo/embed preservata: 1 placeholder
+[BOT] Embed trovati: 1
+[SCORE] raffinato=76 priority=medium | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, breaking/major update, show settimanale, opinione generica
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[EMBEDSEQ] Placeholder mancanti dopo traduzione: ['[EMBED_001]'] - fallback append embed
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/jonathan-coachman-blasts-wwe-contract-changes-after-new-day-exit-calls-it-a-problem-31.jpg
+[MEDIA] Immagine caricata: 3444
+[WP] Status attach image: 200
+[OK] Pubblicato: Jonathan Coachman critica le modifiche ai contratti WWE dopo l'uscita dei New Day: "È un problema"
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Spoiler: Opening Segment for May 4 WWE RAW Revealed
+[BOT] semantic_id=spoiler-opening-segment-for-may-4-wwe-raw-revealed
+[SCORE] iniziale=55 priority=low
+[BOT] Embed trovati: 1
+[SCORE] raffinato=82 priority=high | WWE/main roster, nomi forti lead: seth rollins, impatto roster/storyline, WWE main roster + storyline/evento, morte, show settimanale
+[FIX] Event key in history ma non confermata su WordPress: event:roman-reigns-diagnosis - provo a pubblicare
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/03/spoiler-closing-segment-for-march-16-wwe-raw-revealed-02.jpg
+[MEDIA] Immagine caricata: 3447
+[WP] Status attach image: 200
+[OK] Pubblicato: Spoiler: Rivelato l'opening segment del WWE RAW del 4 maggio
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 4 candidati provati | mode=normal
+===== RUN END [2026-05-04 23:48:03] VERSION [v57 (3726bae)] =====
+
