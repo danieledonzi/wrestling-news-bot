@@ -1020,3 +1020,108 @@
 [BOT] Pubblicati 5 articoli (0 pending + 5 nuove) su 7 candidati provati | mode=storm
 ===== RUN END [2026-05-04 15:57:10] VERSION [v55 (d3377fe)] =====
 
+
+===== RUN START [2026-05-04 17:28:25] VERSION [v55 (08fb5a4)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (36/75): AEW Star Will Ospreay Captures NJPW Title Alongside United Empire Allies
+[SKIP] Score sotto soglia editoriale (34/75): AEW Star Persephone Sidelined Indefinitely, Forcing Change To ROH Title Match
+[SKIP] Score sotto soglia editoriale (32/75): Andrade Captures IWGP Global Heavyweight Championship At NJPW Wrestling Dontaku 2026
+[FOLLOWUP] Event key gia' vista ma angolo autonomo consentito: event:cody-rhodes-injury - Cody Rhodes Says Triple H Shut Down Eye Patch Idea After WWE WrestleMania 42
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163863/wwe-roman-reigns-changes-schedule-backstage-report-saudi-arabia-night-champions/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163537/wwe-bully-ray-blake-monroe-nikki-cross-perfect-main-roster-opponent/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163485/seth-rollins-reflects-recent-wwe-injury-hiatus/
+[SKIP] Score sotto soglia editoriale (34/75): AEW Dynamite Viewership & Ratings Report, 4/29/2026
+[SKIP] Score sotto soglia editoriale (18/75): Tony Khan: Quality Of AEW Right Now Is 'The Best It's Ever Been'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163098/wwe-dakota-kai-stephanie-mcmahon-ronda-rousey-recalls-training/
+[SKIP] Score sotto soglia editoriale (20/75): Giovanni Vinci Experienced 'Avalanche' Of Emotions Missing Imperium's WWE Call-Up
+[SKIP] URL già in history: https://www.wrestlinginc.com/2162318/wwe-royal-rumble-2026-royce-keys-debut-huge-test/
+[SKIP] Score sotto soglia editoriale (24/75): Charlotte Flair Describes Her Onscreen WWE Persona As 'Armor'
+[SKIP] Score sotto soglia editoriale (20/75): Former WWE Star Dakota Kai Details Origin Of Damage CTRL
+[SKIP] Score sotto soglia editoriale (36/75): WWE Release 25-Year Production Veteran In Latest Round Of TKO Layoffs
+[SKIP] Score sotto soglia editoriale (18/75): Tony Khan Compares Celebrated AEW & NJPW Rivalry To The Godfather
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (6/75): Charlotte Flair Hopes Ric Flair Stays Off Social Media During Her Matches
+[SKIP] Score sotto soglia editoriale (4/75): Nick LoPiccolo Fires Back After "Coke" Accusations Over Anti-AEW Tweets
+[SKIP] URL già in history: https://www.ringsidenews.com/kevin-owens-announces-wwes-canada-return-personal-update-neck-surgery/
+[SKIP] URL già in history: https://www.ringsidenews.com/espn-edits-cm-punks-wrestlemania-42-entrance-replaces-afi-theme-stock-music/
+[SKIP] Score sotto soglia editoriale (15/75): Where Things Stand With Bringing Lucha Underground Back After Surprise Tease
+[SKIP] Score sotto soglia editoriale (31/75): Sports Agent Nick LoPiccolo Explains How He Accidentally Stole John Cena's Escalade
+[SKIP] Score sotto soglia editoriale (0/75): Sports Talent Agent Nick LoPiccolo Turned Down Hook As Client and Explains Why
+[SKIP] Score sotto soglia editoriale (32/75): Tony Khan Accused of Leaking AEW Contract Talks To Dave Meltzer During Talent Negotiations
+[SKIP] Score sotto soglia editoriale (24/75): Nick LoPiccolo Says WWE Doesn't Care About AEW and Never Negotiates Against Them
+[SKIP] Score sotto soglia editoriale (16/75): Kevin Nash Reveals What Was Cut From Hulk Hogan Netflix Documentary
+[SKIP] URL già in history: https://www.ringsidenews.com/john-cena-teases-history-making-news-wwe-backlash/
+[SCORE] 100 high - Cody Rhodes Says Triple H Shut Down Eye Patch Idea After WWE WrestleMania 42 | WWE/main roster, top star: cody rhodes, randy orton, nomi forti: triple h, WWE main roster + storyline/evento, infortunio, combo top name + evento forte, PLE/PPV
+[SCORE] 96 high - John Cena Announces WWE Backlash Appearance, Teases 'History-Making News' | WWE/main roster, top star: john cena, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[SCORE] 78 medium - Why Rhea Ripley Didn't Sign With A Talent Agency Revealed | WWE/main roster, top star: rhea ripley, WWE main roster + storyline/evento, PLE/PPV
+[SCORE] 64 medium - Netflix Exec Wants Movies With CM Punk and Liv Morgan After WWE Push | WWE/main roster, top star: cm punk, business/media rights, combo top name + evento forte, opinione generica, v48 tier2: 55-74
+[SCORE] 55 low - WWE Adds Emmy-Nominated Talent With New Production Hire | WWE/main roster, WWE main roster + storyline/evento, match/segmento annunciato, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - Retired WWE Star AJ Styles Talks Getting To Enjoy His First WrestleMania 'As A Fan' | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - Booker T Says Recent WWE NXT Release Needs To 'Figure It Out' | WWE/main roster, nomi forti: booker t, release/addio, show settimanale, v48 tier2: 55-74
+[SCORE] 54 low - Ridge Holland Calls Out Shawn Michaels' "TikTok Style" NXT Direction After Triple H Era Shift | WWE/main roster, nomi forti: triple h, WWE main roster + storyline/evento, PLE/PPV, v48 tier3: 45-54 contestuale
+[SCORE] 40 low - Backstage Report On New Day WWE Departure, Potential For More Releases | WWE/main roster, breaking/major update, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 2 news >=90, 2 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 1
+[BOT] Elaborazione: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans
+[BOT] semantic_id=pat-mcafee-wwe-exit-scrapped-backlash-main-event-plans
+[SCORE] iniziale=69 priority=medium
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: cody rhodes, randy orton, WWE main roster + storyline/evento, infortunio, combo top name + evento forte, PLE/PPV, opinione generica
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:cody-rhodes-diagnosis -> event:cody-rhodes-diagnosis-followup-pat-mcafee-exit-scrapped-backlash-main-event
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Titolo incoerente: L'uscita di Pat McAfee dalla WWE fa saltare i piani per il main event di Backlash
+[SKIP] Traduzione fallita: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans (err_type=validation)
+[FAILED] URL sospeso 24h dopo 8 validation fail: Pat McAfee WWE Exit Scrapped Backlash Main Event Plans
+[BOT] News candidate totali: 9 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Cody Rhodes Says Triple H Shut Down Eye Patch Idea After WWE WrestleMania 42
+[BOT] semantic_id=cody-rhodes-says-triple-h-shut-down-eye-patch-idea-after-wwe-wrestlemania-42
+[SCORE] iniziale=100 priority=high
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: cody rhodes, randy orton, nomi forti: triple h, WWE main roster + storyline/evento, infortunio, combo top name + evento forte, PLE/PPV
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:cody-rhodes-injury -> event:cody-rhodes-injury-followup-cody-rhodes-says-triple-h-shut-down-eye-patch-idea
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/cody-rhodes-says-triple-h-shut-down-eye-patch-idea-after-wwe-wrestlemania-42/l-intro-1777895277.jpg
+[MEDIA] Immagine caricata: 3392
+[WP] Status attach image: 200
+[OK] Pubblicato: Cody Rhodes: Triple H bocciò l'idea dell'occhio bendato dopo WrestleMania 42
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: John Cena Announces WWE Backlash Appearance, Teases 'History-Making News'
+[BOT] semantic_id=john-cena-announces-wwe-backlash-appearance-teases-history-making-news
+[SCORE] iniziale=96 priority=high
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: john cena, roman reigns, nomi forti: danhausen, WWE main roster + storyline/evento, ritorno/debutto, combo top name + evento forte, PLE/PPV
+[FIX] Event key in history ma non confermata su WordPress: event:roman-reigns-diagnosis - provo a pubblicare
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/john-cena-announces-wwe-backlash-appearance-teases-history-making-news/l-intro-1777908265.jpg
+[MEDIA] Immagine caricata: 3396
+[WP] Status attach image: 200
+[OK] Pubblicato: John Cena annuncia la sua presenza a WWE Backlash e promette "notizie che faranno la storia"
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Why Rhea Ripley Didn't Sign With A Talent Agency Revealed
+[BOT] semantic_id=why-rhea-ripley-didnt-sign-with-a-talent-agency-revealed
+[SCORE] iniziale=78 priority=medium
+[BOT] Embed trovati: 2
+[SCORE] raffinato=78 priority=medium | WWE/main roster, top star: rhea ripley, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, opinione generica
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/why-rhea-ripley-didnt-sign-with-a-talent-agency-revealed-17.jpg
+[MEDIA] Immagine caricata: 3399
+[WP] Status attach image: 200
+[OK] Pubblicato: Perché Rhea Ripley non ha firmato con un'agenzia di talenti: la rivelazione
+[PENDING] Coda salvata: 1 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 4 candidati provati | mode=normal
+===== RUN END [2026-05-04 17:28:25] VERSION [v55 (08fb5a4)] =====
+
