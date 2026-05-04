@@ -1,0 +1,87 @@
+[
+  {
+    "url": "https://www.ringsidenews.com/pat-mcafee-wwe-exit-scrapped-backlash-main-event-plans/",
+    "title": "Pat McAfee WWE Exit Scrapped Backlash Main Event Plans",
+    "semantic_id": "pat-mcafee-wwe-exit-scrapped-backlash-main-event-plans",
+    "title_key": "pat-mcafee-exit-scrapped-backlash-main-event",
+    "score": 69,
+    "priority": "medium",
+    "event_key": "",
+    "reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "release/addio",
+      "PLE/PPV",
+      "v48 tier2: 55-74"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "release/addio",
+      "PLE/PPV",
+      "v48 tier2: 55-74"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1777867689.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1777881550.4268155,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.ringsidenews.com/reason-revealed-roman-reigns-pulled-wwe-june-tv-dates/",
+    "title": "Reason Revealed For Roman Reigns Being Pulled From WWE June TV Dates",
+    "semantic_id": "reason-revealed-for-roman-reigns-being-pulled-from-wwe-june-tv-dates",
+    "title_key": "reason-roman-reigns-being-pulled-june-tv-dates",
+    "score": 63,
+    "priority": "medium",
+    "event_key": "",
+    "reasons": [
+      "WWE/main roster",
+      "top star: roman reigns",
+      "WWE main roster + storyline/evento",
+      "v48 tier2: 55-74"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "top star: roman reigns",
+      "WWE main roster + storyline/evento",
+      "v48 tier2: 55-74"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1777877922.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1777881550.4224913,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.ringsidenews.com/ex-wwe-star-carmella-shows-off-bruising-eye-surgery/",
+    "title": "Ex-WWE Star Carmella Shows Off Bruising After Eye Surgery",
+    "semantic_id": "ex-wwe-star-carmella-shows-off-bruising-after-eye-surgery",
+    "title_key": "ex-star-carmella-shows-off-bruising-eye-surgery",
+    "score": 62,
+    "priority": "medium",
+    "event_key": "event:smackdown-two-hour-format",
+    "reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "infortunio",
+      "show settimanale",
+      "v48 tier2: 55-74"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "infortunio",
+      "show settimanale",
+      "v48 tier2: 55-74"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1777873590.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1777881550.425107,
+    "attempts": 0
+  }
+]
