@@ -42,6 +42,24 @@ jobs:
           GITHUB_SHA: ${{ github.sha }}
         run: python bot.py
 
+            - name: Debug bot state
+        if: always()
+        run: |
+          echo "PWD:"
+          pwd
+
+          echo "FILES:"
+          ls -la
+
+          echo "GIT STATUS:"
+          git status --short
+
+          echo "HISTORY TAIL:"
+          tail -n 20 history.txt || echo "history.txt non trovato"
+
+          echo "LOGS:"
+          ls -la logs || echo "logs non trovata"
+
       - name: Upload master log
         if: always()
         uses: actions/upload-artifact@v4
@@ -56,9 +74,14 @@ jobs:
           git config --global user.name "News Bot"
           git config --global user.email "bot@wrestlingnews.com"
 
-          git pull origin main --rebase --autostash || true
+          echo "STATUS BEFORE ADD:"
+          git status --short
 
-          git add history.txt pending_articles.json failed_articles.json logs/master_log.log logs/master_log_state.json 2>/dev/null || true
+          git add history.txt pending_articles.json failed_articles.json 2>/dev/null || true
+          git add -f logs/master_log.log logs/master_log_state.json 2>/dev/null || true
+
+          echo "STATUS AFTER ADD:"
+          git status --short
 
           if ! git diff --cached --quiet; then
             git commit -m "Update bot state and logs [skip ci]"
