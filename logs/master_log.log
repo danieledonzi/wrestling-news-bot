@@ -1344,3 +1344,122 @@
 [BOT] Pubblicati 6 articoli (3 pending + 3 nuove) su 10 candidati provati | mode=normal
 ===== RUN END [2026-05-04 21:02:40] VERSION [v55 (3594e08)] =====
 
+
+===== RUN START [2026-05-04 22:07:53] VERSION [v56 (27303ed)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (36/75): TKO Reportedly Asking Numerous WWE Talents To Take Pay Cuts, Possibly As High As 50%
+[SKIP] Score sotto soglia editoriale (0/75): President Donald Trump Provides Update On UFC Arena Construction At The White House
+[SKIP] Score sotto soglia editoriale (36/75): Kofi Kingston & Xavier Woods Reflect On WWE Exits In Social Media Statements
+[SKIP] Score sotto soglia editoriale (0/75): UFC Star Calls Out Ariel Helwani For Israel Support After Comments On Khamzat Chimaev
+[SKIP] Score sotto soglia editoriale (32/75): Jeff Jarrett: 'Hats Off' To New AEW World Champion
+[SKIP] Score sotto soglia editoriale (43/75): Booker T On WWE LFG Season 3 Returnees: It's Time To 'Sink Or Swim'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164210/wwe-jade-cargill-wouldve-loved-wrestle-more-champion/
+[SKIP] Score sotto soglia editoriale (0/75): Luke Thomas: UFC Freedom 250 Will Likely Cost US Taxpayers Millions
+[SKIP] Score sotto soglia editoriale (28/75): Brooke Hogan Discusses Her Erasure From Hulk Hogan Documentary
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164146/johnny-tv-aew-roh-brodie-lee-jr-wwe-wrestlemania-weekend/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164069/wwe-john-cena-backstage-update-schedule-post-retirement/
+[SKIP] Score sotto soglia editoriale (36/75): AEW Star Will Ospreay Captures NJPW Title Alongside United Empire Allies
+[SKIP] Score sotto soglia editoriale (34/75): AEW Star Persephone Sidelined Indefinitely, Forcing Change To ROH Title Match
+[SKIP] Score sotto soglia editoriale (32/75): Andrade Captures IWGP Global Heavyweight Championship At NJPW Wrestling Dontaku 2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163566/wwe-wrestlemania-42-cody-rhodes-triple-h-randy-orton-eye-patch-idea-shut-down/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163863/wwe-roman-reigns-changes-schedule-backstage-report-saudi-arabia-night-champions/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163537/wwe-bully-ray-blake-monroe-nikki-cross-perfect-main-roster-opponent/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163844/wwe-backlash-john-cena-appearance-teases-history-making-news/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163485/seth-rollins-reflects-recent-wwe-injury-hiatus/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (28/75): WWE's Current Stance on Bringing Back NXT UK
+[SKIP] Score sotto soglia editoriale (24/75): Kofi Kingston Says Goodbye To WWE With Emotional Message After Exit
+[SKIP] Score sotto soglia editoriale (24/75): Xavier Woods Says Goodbye To WWE After 16-Year Run Following Exit
+[SKIP] Score sotto soglia editoriale (28/75): JC Mateo's Next Destination Possibly Revealed After WWE Exit
+[SKIP] Score sotto soglia editoriale (34/75): Jonathan Coachman Blasts WWE Contract Changes After New Day Exit, Calls It "A Problem"
+[SKIP] Score sotto soglia editoriale (44/75): LA Knight Backstage Heat Rumor With Triple H Debunked
+[SKIP] URL già in history: https://www.ringsidenews.com/mjf-destroys-val-venis-brutal-cody-rhodes-tweet-cryptic-jab/
+[SKIP] URL già in history: https://www.ringsidenews.com/unexpected-name-claims-involvement-drew-mcintyre-wwe-title-win/
+[SKIP] Score sotto soglia editoriale (36/75): Zelina Vega Shuts Down Fake AI Video Claiming She Was Humiliated By WWE Release
+[SKIP] URL già in history: https://www.ringsidenews.com/netflix-exec-wants-movies-cm-punk-liv-morgan-wwe-push/
+[SKIP] URL già in history: https://www.ringsidenews.com/why-rhea-ripley-didnt-sign-talent-agency-revealed/
+[SCORE] 69 medium - TKO Expected to Approach WWE Talent About Taking Pay Cuts | WWE/main roster, WWE main roster + storyline/evento, release/addio, PLE/PPV, v48 tier2: 55-74
+[SCORE] 56 low - Kairi Sane Could Return at WWE Backlash After Release | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, v48 tier2: 55-74
+[SCORE] 55 low - Val Venis Claims His Jockstrap Is a Bigger Draw Than Sami Zayn | WWE/main roster, WWE main roster + storyline/evento, show settimanale, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - Tony Khan Accused of Funding Bot Attacks on AEW Stars Who Join WWE | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 40 low - Backstage Report On New Day WWE Departure, Potential For More Releases | WWE/main roster, breaking/major update, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 5 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: TKO Expected to Approach WWE Talent About Taking Pay Cuts
+[BOT] semantic_id=tko-expected-to-approach-wwe-talent-about-taking-pay-cuts
+[SCORE] iniziale=69 priority=medium
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: roman reigns, WWE main roster + storyline/evento, release/addio, combo top name + evento forte, PLE/PPV
+[FIX] Event key in history ma non confermata su WordPress: event:roman-reigns-diagnosis - provo a pubblicare
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Titolo incoerente: TKO valuta tagli agli stipendi dei wrestler WWE
+[SKIP] Traduzione fallita: TKO Expected to Approach WWE Talent About Taking Pay Cuts (err_type=validation)
+[BOT] Elaborazione: Kairi Sane Could Return at WWE Backlash After Release
+[BOT] semantic_id=kairi-sane-could-return-at-wwe-backlash-after-release
+[SCORE] iniziale=56 priority=low
+[BOT] Embed trovati: 1
+[SCORE] raffinato=71 priority=medium | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Kairi Sane Could Return at WWE Backlash After Release
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[QUALITY] Problemi rilevati: ['Testo sospetto o troppo breve']
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Output ancora sospetto dopo revisione: ['Testo sospetto o troppo breve']
+[SKIP] Traduzione fallita: Kairi Sane Could Return at WWE Backlash After Release (err_type=validation)
+[BOT] Elaborazione: Val Venis Claims His Jockstrap Is a Bigger Draw Than Sami Zayn
+[BOT] semantic_id=val-venis-claims-his-jockstrap-is-a-bigger-draw-than-sami-zayn
+[SCORE] iniziale=55 priority=low
+[EMBEDSEQ] Sequenza testo/embed preservata: 1 placeholder
+[BOT] Embed trovati: 2
+[SCORE] raffinato=64 priority=medium | WWE/main roster, nomi forti: trick williams, WWE main roster + storyline/evento, PLE/PPV
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Val Venis Claims His Jockstrap Is a Bigger Draw Than Sami Zayn
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[QUALITY] Problemi rilevati: ['Titolo sospeso o incompleto']
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Soft mismatch titolo: Val Venis: il mio jockstrap attira più di Sami Zayn
+[EMBEDSEQ] Placeholder mancanti dopo traduzione: ['[EMBED_001]'] - fallback append embed
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/val-venis-claims-his-jockstrap-is-a-bigger-draw-than-sami-zayn-36.jpg
+[MEDIA] Immagine caricata: 3422
+[WP] Status attach image: 200
+[OK] Pubblicato: Val Venis: il mio jockstrap attira più di Sami Zayn
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Tony Khan Accused of Funding Bot Attacks on AEW Stars Who Join WWE
+[BOT] semantic_id=tony-khan-accused-of-funding-bot-attacks-on-aew-stars-who-join-wwe
+[SCORE] iniziale=55 priority=low
+[EMBEDSEQ] Sequenza testo/embed preservata: 1 placeholder
+[BOT] Embed trovati: 2
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star: cm punk, nomi forti: jade cargill, WWE main roster + storyline/evento, ritorno/debutto, combo top name + evento forte, PLE/PPV, opinione generica
+[FIX] Event key in history ma non confermata su WordPress: event:cm-punk-diagnosis - provo a pubblicare
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[EMBEDSEQ] Placeholder mancanti dopo traduzione: ['[EMBED_001]'] - fallback append embed
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/tony-khan-accused-of-funding-bot-attacks-on-aew-stars-who-join-wwe-40.jpg
+[MEDIA] Immagine caricata: 3425
+[WP] Status attach image: 200
+[OK] Pubblicato: Tony Khan accusato di finanziare attacchi online contro talenti AEW passati alla WWE
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Backstage Report On New Day WWE Departure, Potential For More Releases
+[BOT] semantic_id=backstage-report-on-new-day-wwe-departure-potential-for-more-releases
+[SCORE] iniziale=40 priority=low
+[SCORE] raffinato=73 priority=medium | WWE/main roster, WWE main roster + storyline/evento, breaking/major update, PLE/PPV
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Backstage Report On New Day WWE Departure, Potential For More Releases
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/backstage-report-on-new-day-wwe-departure-potential-for-more-releases/l-intro-1777912356.jpg
+[MEDIA] Immagine caricata: 3428
+[WP] Status attach image: 200
+[OK] Pubblicato: Report dal backstage: il futuro dei New Day in WWE e possibili ulteriori rilasci
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 5 candidati provati | mode=normal
+===== RUN END [2026-05-04 22:07:53] VERSION [v56 (27303ed)] =====
+
