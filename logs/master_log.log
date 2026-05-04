@@ -84,3 +84,91 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
 ===== RUN END [2026-05-04 06:35:28] VERSION [v53 (070431e)] =====
 
+
+===== RUN START [2026-05-04 07:14:47] VERSION [v53 (0d0376e)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (20/75): Giovanni Vinci Experienced 'Avalanche' Of Emotions Missing Imperium's WWE Call-Up
+[SKIP] Score sotto soglia editoriale (24/75): Charlotte Flair Describes Her Onscreen WWE Persona As 'Armor'
+[SKIP] Score sotto soglia editoriale (20/75): Former WWE Star Dakota Kai Details Origin Of Damage CTRL
+[SKIP] Score sotto soglia editoriale (36/75): WWE Release 25-Year Production Veteran In Latest Round Of TKO Layoffs
+[SKIP] Score sotto soglia editoriale (18/75): Tony Khan Compares Celebrated AEW & NJPW Rivalry To The Godfather
+[SKIP] Score sotto soglia editoriale (24/75): WWE NXT's Tatum Paxley Recalls Conversation With Shawn Michaels That Altered Career
+[SKIP] Score sotto soglia editoriale (27/75): WWE Hall Of Famer Bully Ray Believes Bron Breakker Needs A New Name
+[SKIP] Score sotto soglia editoriale (20/75): JBL Wishes He Wrestled This Rising WWE Star: 'One Of The Best Workers In The World'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2161173/wwe-wrestlemania-34-triple-h-paul-levesque-stephanie-mcmahon-favorite-nights/
+[SKIP] Score sotto soglia editoriale (38/75): Tony Schiavone Says He'll 'Never Forget' This Recent AEW Dynamite Moment
+[SKIP] Score sotto soglia editoriale (28/75): WWE's Raquel Rodriguez On Post-Finn Balor Judgment Day: 'It's A Women's Club Now'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2160864/wwe-cody-rhodes-dominik-mysterio-uncool/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (34/75): Tony Khan Accused of Purposely Benching Talent, Avoiding Conflict & 'Ghosting' Executives
+[SKIP] Score sotto soglia editoriale (28/75): Tony Khan Allegedly Already Shopping AEW Around With No Deal in Place
+[SKIP] Score sotto soglia editoriale (20/75): WWE LFG May 3 Episode Sees Drake Morreaux Pulled from the Performance Center
+[SKIP] Score sotto soglia editoriale (0/75): Bill Goldberg Trends After Viral Clip Claims Fans 'Just Found Out He's Jewish'
+[SKIP] Score sotto soglia editoriale (20/75): WWE EVOLVE Succession III Date Revealed
+[SKIP] Score sotto soglia editoriale (28/75): Ex-WWE LFG Star BJ Ray Name Drops MJF and Claims He'd "Eat Him Alive" on The Mic
+[SKIP] Score sotto soglia editoriale (18/75): Nick LoPiccolo Claims AEW 'Tried to Nuke' His Account After Second Twitter Lockout
+[SKIP] Score sotto soglia editoriale (20/75): Rikishi Announces Leave From KnokX Pro
+[SKIP] event_key confermata su WordPress: event:smackdown-two-hour-format - Ex-WWE Star Carmella Shows Off Bruising After Eye Surgery
+[SKIP] Score sotto soglia editoriale (38/75): WWE LFG Preview for May 3, 2026: First Tag Match Heats Up As Bubba Ray Dudley Gets Brutally Honest
+[SKIP] Score sotto soglia editoriale (43/75): Kevin Hart Claims He Called The Cops On The Rock After Traffic Stop
+[SKIP] Score sotto soglia editoriale (30/75): Nick LoPiccolo Fires Back at AEW and WBD Denials With Blunt Response
+[SCORE] 70 medium - WWE's Matt Cardona Reflects On Switch Back To Zack Ryder Name For John Cena Tournament | WWE/main roster, top star: john cena, ritorno/debutto, combo top name + evento forte, opinione generica, v48 tier2: 55-74
+[SCORE] 55 low - Backstage Report On Paige's WWE Return At WrestleMania 42 | WWE/main roster, breaking/major update, PLE/PPV, v48 tier2: 55-74
+[SCORE] 53 low - Royce Keys Looks Back On Debut At 2026 WWE Royal Rumble: 'It Was A Huge Test' | WWE/main roster, ritorno/debutto, PLE/PPV, v48 tier3: 45-54 contestuale
+[SCORE] 51 low - Pat McAfee WWE Exit Scrapped Backlash Main Event Plans | WWE/main roster, release/addio, PLE/PPV, v48 tier3: 45-54 contestuale
+[SCORE] 45 low - Reason Revealed For Roman Reigns Being Pulled From WWE June TV Dates | WWE/main roster, top star: roman reigns, v48 tier3: 45-54 contestuale
+[SCORE] 44 low - Colten Gunn Returns To AEW, Reunites With Brother | AEW, ritorno/debutto, show settimanale, v48 tier4: 40-44 riempimento controllato
+[SCORE] 43 low - Booker T Was 'Happy As Hell' When Radicalz Left WCW For WWE | WWE/main roster, nomi forti: booker t, business/media rights, v48 tier4: 40-44 riempimento controllato
+[SCORE] 42 low - Seth Rollins Says WWE Star 'Doesn't Know His Own Speed' | WWE/main roster, nomi forti: seth rollins, intervista/opinione, PLE/PPV, opinione generica, v48 tier4: 40-44 riempimento controllato
+[SCORE] 42 low - Bully Ray & Tommy Dreamer Discuss AI-Generated Video Presented On WWE NXT | WWE/main roster, nomi forti: bully ray, tommy dreamer, show settimanale, v48 tier4: 40-44 riempimento controllato
+[SCORE] 42 low - Tiffany Stratton Flexes Women's WWE U.S. Title With Bikini Boat Video | WWE/main roster, titolo/championship, show settimanale, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 11 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: WWE's Matt Cardona Reflects On Switch Back To Zack Ryder Name For John Cena Tournament
+[BOT] semantic_id=wwes-matt-cardona-reflects-on-switch-back-to-zack-ryder-name-for-john-cena-tournament
+[SCORE] iniziale=70 priority=medium
+[BOT] Embed trovati: 1
+[SCORE] raffinato=85 priority=high | WWE/main roster, top star: john cena, ritorno/debutto, combo top name + evento forte, PLE/PPV, opinione generica
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwes-matt-cardona-reflects-on-switch-back-to-zack-ryder-name-for-john-cena-tournament/l-intro-1777637985.jpg
+[MEDIA] Immagine caricata: 3310
+[WP] Status attach image: 200
+[OK] Pubblicato: Matt Cardona su Zack Ryder e il torneo di John Cena
+[BOT] Elaborazione: Backstage Report On Paige's WWE Return At WrestleMania 42
+[BOT] semantic_id=backstage-report-on-paiges-wwe-return-at-wrestlemania-42
+[SCORE] iniziale=55 priority=low
+[SCORE] raffinato=67 priority=medium | WWE/main roster, nomi forti: bella twins, brie bella, ritorno/debutto, PLE/PPV
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Backstage Report On Paige's WWE Return At WrestleMania 42
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/backstage-report-on-paiges-wwe-return-at-wrestlemania-42/l-intro-1777826209.jpg
+[MEDIA] Immagine caricata: 3314
+[WP] Status attach image: 200
+[OK] Pubblicato: Report dal backstage sul ritorno di Paige in WWE a WrestleMania 42
+[BOT] Elaborazione: Royce Keys Looks Back On Debut At 2026 WWE Royal Rumble: 'It Was A Huge Test'
+[BOT] semantic_id=royce-keys-looks-back-on-debut-at-2026-wwe-royal-rumble-it-was-a-huge-test
+[SCORE] iniziale=53 priority=low
+[SCORE] raffinato=64 priority=medium | WWE/main roster, nomi forti: triple h, ritorno/debutto, PLE/PPV
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Royce Keys Looks Back On Debut At 2026 WWE Royal Rumble: 'It Was A Huge Test'
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/royce-keys-looks-back-on-debut-at-2026-wwe-royal-rumble-it-was-a-huge-test/l-intro-1777665981.jpg
+[MEDIA] Immagine caricata: 3317
+[WP] Status attach image: 200
+[OK] Pubblicato: Royce Keys ripensa al debutto alla WWE Royal Rumble 2026: 'È stato un test enorme'
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
+===== RUN END [2026-05-04 07:14:47] VERSION [v53 (0d0376e)] =====
+
