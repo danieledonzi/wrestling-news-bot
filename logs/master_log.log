@@ -1701,3 +1701,97 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 4 candidati provati | mode=normal
 ===== RUN END [2026-05-04 23:48:03] VERSION [v57 (3726bae)] =====
 
+
+===== RUN START [2026-05-05 02:11:39] VERSION [v57 (50c036e)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (39/75): Oba Femi Delivers Massive Powerbomb To Otis, Wins First Open Challenge On WWE Raw
+[SKIP] Score sotto soglia editoriale (20/75): Wrestlers Who Sadly Died In 2026 So Far
+[SKIP] Score sotto soglia editoriale (12/75): Ronda Rousey Opens Up On 'Complicated Relationship' With UFC's Kayla Harrison
+[SKIP] Score sotto soglia editoriale (32/75): Dave Meltzer Says WWE Has Yet To Reach Its Initial 'Goal' For AAA Acquisition
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164491/wwe-raw-may-4-oba-femi-open-challenge-begins-backlash-world-heavyweight-championship-contract-signing/
+[SKIP] Score sotto soglia editoriale (1/75): Biggest Winners And Losers Of The Week - 5/4/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164432/tko-wwe-talent-pay-cuts-50-percent/
+[SKIP] Score sotto soglia editoriale (0/75): President Donald Trump Provides Update On UFC Arena Construction At The White House
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164426/wwe-kofi-kingston-xavier-woods-austin-creed-new-day-reflect-exits-statements/
+[SKIP] Score sotto soglia editoriale (0/75): UFC Star Calls Out Ariel Helwani For Israel Support After Comments On Khamzat Chimaev
+[SKIP] Score sotto soglia editoriale (32/75): Jeff Jarrett: 'Hats Off' To New AEW World Champion
+[SKIP] Score sotto soglia editoriale (55/75): Booker T On WWE LFG Season 3 Returnees: It's Time To 'Sink Or Swim'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164210/wwe-jade-cargill-wouldve-loved-wrestle-more-champion/
+[SKIP] Score sotto soglia editoriale (0/75): Luke Thomas: UFC Freedom 250 Will Likely Cost US Taxpayers Millions
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164178/brooke-hogan-discusses-erasure-hulk-hogan-documentary/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164146/johnny-tv-aew-roh-brodie-lee-jr-wwe-wrestlemania-weekend/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164069/wwe-john-cena-backstage-update-schedule-post-retirement/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (32/75): El Grande Americano Reveals Name Of New Stablemates During 5/4 WWE RAW
+[SKIP] Score sotto soglia editoriale (14/75): Chelsea Green Undergoes Heart Procedure
+[SKIP] URL già in history: https://www.ringsidenews.com/spoiler-opening-segment-may-4-wwe-raw-revealed/
+[SKIP] Score sotto soglia editoriale (0/75): Roxanne Perez's Allegations Against Joey Ryan Resurface After Grooming Denial
+[SKIP] Score sotto soglia editoriale (28/75): WWE's Current Stance on Bringing Back NXT UK
+[SKIP] Score sotto soglia editoriale (36/75): Kofi Kingston Says Goodbye To WWE With Emotional Message After Exit
+[SKIP] URL sospeso per validation fail recenti: https://www.ringsidenews.com/tko-expected-approach-wwe-talent-about-taking-pay-cuts/
+[SKIP] Score sotto soglia editoriale (36/75): Xavier Woods Says Goodbye To WWE After 16-Year Run Following Exit
+[SCORE] 100 high - Sol Ruca Officially Signs Main Roster Contract, Snatches Becky Lynch's Soul On WWE Raw | WWE/main roster, top star titolo: becky lynch, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV
+[SCORE] 75 medium - WWE RAW Results, Highlights and Key Moments for May 4, 2026 | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, report/results: bypass soglia editoriale
+[SCORE] 61 medium - Roman Reigns Crashes Out Backstage During 5/4 WWE RAW | WWE/main roster, top star titolo: roman reigns, rumor/backstage, show settimanale, v48 tier2: 55-74
+[SCORE] 57 low - Oba Femi Unleashes Brutality In First Open Challenge Match During 5/4 WWE RAW | WWE/main roster, nomi forti titolo: oba femi, WWE main roster + storyline/evento, show settimanale, v48 tier2: 55-74
+[SCORE] 55 low - Joe Hendry's First Match On WWE RAW Roster Ends In Chaos | WWE/main roster, WWE main roster + storyline/evento, show settimanale, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - WWE RAW Spoiler Lineup for May 4, 2026: Full Match Card and Backstage Notes Revealed | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, show settimanale, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 53 low - Becky Lynch Accidentally Punches Adam Pearce During Argument With Sol Ruca On 5/4 WWE RAW | WWE/main roster, top star titolo: becky lynch, show settimanale, v48 tier3: 45-54 contestuale
+[SCORE] 48 low - Additional WWE Releases Could Be Coming After Recent Cuts | WWE/main roster, impatto roster/storyline, release/addio, v48 tier3: 45-54 contestuale
+[SCORE] 48 low - AEW Star Will Ospreay Captures NJPW Title Alongside United Empire Allies | AEW, impatto roster/storyline, ritorno/debutto, v48 tier3: 45-54 contestuale
+[SCORE] 47 low - Spoiler: Oba Femi's First Open Challenge Opponent Reportedly Revealed Ahead Of WWE Raw | WWE/main roster, nomi forti titolo: oba femi, rumor/backstage, show settimanale, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 10 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Sol Ruca Officially Signs Main Roster Contract, Snatches Becky Lynch's Soul On WWE Raw
+[BOT] semantic_id=sol-ruca-officially-signs-main-roster-contract-snatches-becky-lynchs-soul-on-wwe-raw
+[SCORE] iniziale=100 priority=high
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: becky lynch, impatto roster/storyline, WWE main roster + storyline/evento, contratto, combo top name titolo + evento forte, show settimanale
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/edit-wwe-raw-sol-ruca-main-roster-contract-becky-lynch/l-intro-1777946647.jpg
+[MEDIA] Immagine caricata: 3450
+[WP] Status attach image: 200
+[OK] Pubblicato: Sol Ruca approda ufficialmente nel main roster, sfida Becky Lynch a Raw
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: WWE RAW Results, Highlights and Key Moments for May 4, 2026
+[BOT] semantic_id=wwe-raw-results-highlights-and-key-moments-for-may-4-2026
+[SCORE] iniziale=75 priority=medium
+[EMBEDSEQ] Sequenza testo/embed preservata: 16 placeholder
+[BOT] Embed trovati: 17
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star lead: roman reigns, nomi forti lead: roman reigns, oba femi, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, contratto, combo top name lead + evento forte
+[FIX] Event key in history ma non confermata su WordPress: event:roman-reigns-diagnosis - provo a pubblicare
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[EMBEDSEQ] Placeholder mancanti dopo traduzione: ['[EMBED_001]', '[EMBED_002]', '[EMBED_003]', '[EMBED_004]', '[EMBED_005]'] - fallback append embed
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-raw-preview-for-may-4-2026-confirmed-matches-start-time-and-how-to-watch-35.jpg
+[MEDIA] Immagine caricata: 3453
+[WP] Status attach image: 200
+[OK] Pubblicato: WWE RAW: Reigns e Fatu firmano il contratto, attacchi e sorprese nell'ultima puntata prima di Backlash
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Roman Reigns Crashes Out Backstage During 5/4 WWE RAW
+[BOT] semantic_id=roman-reigns-crashes-out-backstage-during-54-wwe-raw
+[SCORE] iniziale=61 priority=medium
+[EMBEDSEQ] Sequenza testo/embed preservata: 1 placeholder
+[BOT] Embed trovati: 2
+[SCORE] raffinato=79 priority=medium | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, rumor/backstage, show settimanale
+[FIX] Event key in history ma non confermata su WordPress: event:roman-reigns-lawsuit - provo a pubblicare
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/roman-reigns-crashes-out-backstage-during-54-wwe-raw-55.png
+[MEDIA] Immagine caricata: 3456
+[WP] Status attach image: 200
+[OK] Pubblicato: Roman Reigns \'out\' nel backstage di WWE RAW del 5/4
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
+===== RUN END [2026-05-05 02:11:39] VERSION [v57 (50c036e)] =====
+
