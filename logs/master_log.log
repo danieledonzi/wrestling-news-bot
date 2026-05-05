@@ -2230,3 +2230,109 @@
 [BOT] Pubblicati 4 articoli (1 pending + 3 nuove) su 5 candidati provati | mode=normal
 ===== RUN END [2026-05-05 11:51:54] VERSION [v59 (0253b52)] =====
 
+
+===== RUN START [2026-05-05 11:56:17] VERSION [v59 (4d7b771)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (22/75): WWE RAW 5/4/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164611/wwe-chelsea-green-heart-procedure/
+[SKIP] event_key confermata su WordPress: event:roman-reigns-contract - Jacob Fatu Takes Out Roman Reigns Again During WWE Backlash Contract Signing On Raw
+[SKIP] Score sotto soglia editoriale (39/75): Oba Femi Delivers Massive Powerbomb To Otis, Wins First Open Challenge On WWE Raw
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164593/edit-wwe-raw-sol-ruca-main-roster-contract-becky-lynch/
+[SKIP] Score sotto soglia editoriale (20/75): Wrestlers Who Sadly Died In 2026 So Far
+[SKIP] Score sotto soglia editoriale (12/75): Ronda Rousey Opens Up On 'Complicated Relationship' With UFC's Kayla Harrison
+[SKIP] Score sotto soglia editoriale (32/75): Dave Meltzer Says WWE Has Yet To Reach Its Initial 'Goal' For AAA Acquisition
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164491/wwe-raw-may-4-oba-femi-open-challenge-begins-backlash-world-heavyweight-championship-contract-signing/
+[SKIP] Score sotto soglia editoriale (1/75): Biggest Winners And Losers Of The Week - 5/4/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164432/tko-wwe-talent-pay-cuts-50-percent/
+[SKIP] Score sotto soglia editoriale (0/75): President Donald Trump Provides Update On UFC Arena Construction At The White House
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164426/wwe-kofi-kingston-xavier-woods-austin-creed-new-day-reflect-exits-statements/
+[SKIP] Score sotto soglia editoriale (0/75): UFC Star Calls Out Ariel Helwani For Israel Support After Comments On Khamzat Chimaev
+[SKIP] Score sotto soglia editoriale (32/75): Jeff Jarrett: 'Hats Off' To New AEW World Champion
+[SKIP] Score sotto soglia editoriale (55/75): Booker T On WWE LFG Season 3 Returnees: It's Time To 'Sink Or Swim'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164210/wwe-jade-cargill-wouldve-loved-wrestle-more-champion/
+[SKIP] Score sotto soglia editoriale (0/75): Luke Thomas: UFC Freedom 250 Will Likely Cost US Taxpayers Millions
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164178/brooke-hogan-discusses-erasure-hulk-hogan-documentary/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/cm-punks-status-wwe-backlash-revealed-amid-tv-absence/
+[SKIP] URL già in history: https://www.ringsidenews.com/rick-boogs-changes-stance-wrestling-return-nearly-3-years-wwe-release/
+[SKIP] URL già in history: https://www.ringsidenews.com/booker-t-believes-kofi-kingston-xavier-woods-wwe-exit-smart-business-move/
+[SKIP] event_key confermata su WordPress: event:roman-reigns-contract - Jacob Fatu Puts Roman Reigns Down Hard During Backlash Contract Signing On 5/4 WWE RAW
+[SKIP] Score sotto soglia editoriale (32/75): El Grande Americano Reveals Name Of New Stablemates During 5/4 WWE RAW
+[SKIP] URL già in history: https://www.ringsidenews.com/oba-femi-unleashes-brutality-first-open-challenge-match-during-54-wwe-raw/
+[SKIP] URL già in history: https://www.ringsidenews.com/joe-hendrys-first-match-wwe-raw-roster-ends-chaos/
+[SKIP] URL già in history: https://www.ringsidenews.com/becky-lynch-accidentally-punches-adam-pearce-during-argument-sol-ruca-54-wwe-raw/
+[SKIP] URL già in history: https://www.ringsidenews.com/roman-reigns-crashes-out-backstage-during-54-wwe-raw/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-raw-spoiler-lineup-may-4-2026-full-match-card-backstage-notes-revealed/
+[SKIP] Score sotto soglia editoriale (14/75): Chelsea Green Undergoes Heart Procedure
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-raw-results-highlights-key-moments-may-4-2026/
+[SCORE] 56 low - WWE NXT Preview for May 5, 2026: Confirmed Matches, Start Time and How to Watch | WWE/main roster, WWE main roster + storyline/evento, match/segmento annunciato, show settimanale, v48 tier2: 55-74
+[SCORE] 48 low - Some WWE Talent Considering Asking for Their Release After Recent Cuts | WWE/main roster, impatto roster/storyline, release/addio, v48 tier3: 45-54 contestuale
+[SCORE] 47 low - Spoiler: Oba Femi's First Open Challenge Opponent Reportedly Revealed Ahead Of WWE Raw | WWE/main roster, nomi forti titolo: oba femi, rumor/backstage, show settimanale, v48 tier3: 45-54 contestuale
+[SCORE] 45 low - The Rock Flexes Multi-Million Dollar Jacob & Co. Billionaire III Watch at Met Gala | WWE/main roster, top star titolo: the rock, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 4 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: WWE NXT Preview for May 5, 2026: Confirmed Matches, Start Time and How to Watch
+[BOT] semantic_id=wwe-nxt-preview-for-may-5-2026-confirmed-matches-start-time-and-how-to-watch
+[SCORE] iniziale=56 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=71 priority=medium | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, developmental secondario
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - WWE NXT Preview for May 5, 2026: Confirmed Matches, Start Time and How to Watch
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=12
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-nxt-preview-for-may-5-2026-confirmed-matches-start-time-and-how-to-watch-59.jpg
+[MEDIA] Immagine caricata: 3490
+[WP] Status attach image: 200
+[OK] Pubblicato: WWE NXT del 5 maggio 2026: match confermati, orario di inizio e come guardarlo
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Some WWE Talent Considering Asking for Their Release After Recent Cuts
+[BOT] semantic_id=some-wwe-talent-considering-asking-for-their-release-after-recent-cuts
+[SCORE] iniziale=48 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=16, embed=1
+[BOT] Embed trovati: 2
+[SCORE] raffinato=81 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=16
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/some-wwe-talent-considering-asking-for-their-release-after-recent-cuts-10.jpg
+[MEDIA] Immagine caricata: 3493
+[WP] Status attach image: 200
+[OK] Pubblicato: Alcuni talent WWE stanno pensando di chiedere il rilascio dopo i recenti tagli
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Spoiler: Oba Femi's First Open Challenge Opponent Reportedly Revealed Ahead Of WWE Raw
+[BOT] semantic_id=spoiler-oba-femis-first-open-challenge-opponent-reportedly-revealed-ahead-of-wwe-raw
+[SCORE] iniziale=47 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, embed=0
+[SCORE] raffinato=93 priority=high | WWE/main roster, top star lead: brock lesnar, nomi forti titolo: oba femi, WWE main roster + storyline/evento, titolo/championship, combo top name lead + evento forte, PLE/PPV
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:brock-lesnar-title - Spoiler: Oba Femi's First Open Challenge Opponent Reportedly Revealed Ahead Of WWE Raw
+[SKIP] News core già pubblicata da altra fonte: Spoiler: Oba Femi's First Open Challenge Opponent Reportedly Revealed Ahead Of WWE Raw
+[SKIP] news_core_key=nxt-raw-smackdown-wwe
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: The Rock Flexes Multi-Million Dollar Jacob & Co. Billionaire III Watch at Met Gala
+[BOT] semantic_id=the-rock-flexes-multi-million-dollar-jacob-co-billionaire-iii-watch-at-met-gala
+[SCORE] iniziale=45 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, embed=1
+[BOT] Embed trovati: 2
+[SCORE] raffinato=53 priority=low | WWE/main roster, top star titolo: the rock, ritorno/debutto, non wrestling puro
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - The Rock Flexes Multi-Million Dollar Jacob & Co. Billionaire III Watch at Met Gala
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash | blocchi testo=7
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/the-rock-flexes-multi-million-dollar-jacob-amp-co-billionaire-iii-watch-at-met-gala-46.jpg
+[MEDIA] Immagine caricata: 3497
+[WP] Status attach image: 200
+[OK] Pubblicato: The Rock sfoggia orologio Jacob & Co. Billionaire III multimilionario al Met Gala
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 4 candidati provati | mode=normal
+===== RUN END [2026-05-05 11:56:17] VERSION [v59 (4d7b771)] =====
+
