@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v57"
+BOT_VERSION = "v58"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -1631,6 +1631,7 @@ def choose_best_report_source(report_item):
             "url": url,
             "title": title,
             "text": full_text,
+            "html": page_html,
             "image": page_img,
             "embeds": embed_urls,
             "inline_images": inline_images,
@@ -1860,6 +1861,250 @@ def replace_embed_placeholders_in_html(content_html, embed_map):
         out = out.replace(placeholder, replacement)
 
     return out, True
+
+
+# v58: struttura editoriale bloccata a blocchi ordinati.
+# Gemini traduce solo i blocchi TEXT; gli embed restano fuori dal modello e vengono reinseriti dal codice.
+def build_ordered_content_blocks(html, source_url=""):
+    if not html:
+        return []
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        content = parse_content_container(soup, source_url)
+        if not content:
+            return []
+        content = BeautifulSoup(str(content), "html.parser")
+
+        for trash in content(["script", "style", "nav", "footer", "header", "aside", "form", "noscript"]):
+            trash.decompose()
+        for bad_sel in [
+            ".social_holder", ".social_icons", ".m-s-i", ".google-news", ".contest",
+            ".breadcrumbs", ".breadcrumb", "#pagination", ".srp", ".related_link",
+            ".amp-related-posts-title", ".amp-sidebar", ".amp-ad-wrapper", "amp-ad",
+            ".sharethis-inline-share-buttons", ".social-share", ".social-wrap", ".sharedaddy",
+            ".author-box", ".byline", ".sidebar", ".comment-respond",
+            ".disqus-comment-container", ".under-art", ".zergnet-widget"
+        ]:
+            for node in content.select(bad_sel):
+                node.decompose()
+
+        blocks = []
+        seen_text = set()
+        seen_embeds = set()
+        text_idx = 1
+        embed_idx = 1
+        nodes = content.find_all(["p", "blockquote", "h2", "h3", "h4", "li", "figure", "iframe", "amp-twitter", "amp-instagram"])
+
+        for node in nodes:
+            embeds = _node_social_embed_urls(node)
+            classes = " ".join(node.get("class", []))
+            is_pure_embed = node.name in {"iframe", "amp-twitter", "amp-instagram", "figure"} or "twitter-tweet" in classes or "instagram-media" in classes
+
+            if embeds:
+                for url in embeds:
+                    key = canonical_embed_key(url)
+                    if key in seen_embeds:
+                        continue
+                    seen_embeds.add(key)
+                    blocks.append({"type": "embed", "id": f"EMBED_{embed_idx:03d}", "url": normalize_embed_url(url)})
+                    embed_idx += 1
+                if is_pure_embed:
+                    continue
+
+            text = sanitize_text(node.get_text(" ", strip=True))
+            if len(text) > 20 and text not in seen_text and not SOURCE_PROMO_RE.search(text):
+                seen_text.add(text)
+                blocks.append({"type": "text", "id": f"TEXT_{text_idx:03d}", "text": text})
+                text_idx += 1
+
+        text_len = sum(len(b.get("text", "")) for b in blocks if b.get("type") == "text")
+        if text_len < 120:
+            return []
+        return blocks
+    except Exception as e:
+        print(f"[BLOCKSEQ] Estrazione blocchi ordinati fallita: {e}")
+        return []
+
+
+def get_italian_month_name(month):
+    months = {
+        1: "gennaio", 2: "febbraio", 3: "marzo", 4: "aprile", 5: "maggio", 6: "giugno",
+        7: "luglio", 8: "agosto", 9: "settembre", 10: "ottobre", 11: "novembre", 12: "dicembre",
+    }
+    return months.get(int(month), "")
+
+
+def italian_date_from_key(date_key):
+    if not date_key:
+        return ""
+    try:
+        y, m, d = [int(x) for x in date_key.split("-")]
+        return f"{d} {get_italian_month_name(m)} {y}"
+    except Exception:
+        return ""
+
+
+def detect_report_display_name(title="", url="", text=""):
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:1200]}")
+    show_map = [
+        ("saturday night main event", "WWE Saturday Night's Main Event"),
+        ("saturday nights main event", "WWE Saturday Night's Main Event"),
+        ("money in the bank", "WWE Money in the Bank"),
+        ("royal rumble", "WWE Royal Rumble"),
+        ("survivor series", "WWE Survivor Series"),
+        ("elimination chamber", "WWE Elimination Chamber"),
+        ("crown jewel", "WWE Crown Jewel"),
+        ("wrestlemania", "WWE WrestleMania"),
+        ("summerslam", "WWE SummerSlam"),
+        ("backlash", "WWE Backlash"),
+        ("clash in italy", "WWE Clash in Italy"),
+        ("clash at the castle", "WWE Clash at the Castle"),
+        ("raw", "WWE RAW"),
+        ("smackdown", "WWE SmackDown"),
+        ("nxt", "WWE NXT"),
+        ("dynamite", "AEW Dynamite"),
+        ("collision", "AEW Collision"),
+        ("rampage", "AEW Rampage"),
+        ("all in", "AEW All In"),
+        ("all out", "AEW All Out"),
+        ("double or nothing", "AEW Double or Nothing"),
+        ("full gear", "AEW Full Gear"),
+        ("revolution", "AEW Revolution"),
+        ("worlds end", "AEW Worlds End"),
+        ("forbidden door", "AEW Forbidden Door"),
+        ("slammiversary", "TNA Slammiversary"),
+        ("bound for glory", "TNA Bound For Glory"),
+        ("impact", "TNA Impact"),
+    ]
+    for key, name in show_map:
+        if key in probe:
+            return name
+    return "Wrestling"
+
+
+def make_deterministic_report_title(source_title="", source_url="", source_text=""):
+    show = detect_report_display_name(source_title, source_url, source_text)
+    date_key = _extract_report_date_key(source_title, source_url, source_text)
+    date_it = italian_date_from_key(date_key)
+    if date_it:
+        return f"{show} del {date_it}: momenti salienti e risultati"
+    return f"{show}: momenti salienti e risultati"
+
+
+def render_embed_block(url):
+    clean_url = normalize_embed_url(url)
+    if not clean_url:
+        return ""
+    if get_embed_provider_slug(clean_url) == "facebook" and facebook_url_is_probably_bad(clean_url):
+        return ""
+    if social_url_is_embeddable(clean_url):
+        return f"\n\n{clean_url}\n\n"
+    return get_social_fallback_html(clean_url)
+
+
+def translate_ordered_content_blocks(source_title, blocks, source_url="", forced_title=None):
+    text_blocks = [b for b in blocks if b.get("type") == "text" and b.get("text")]
+    if not text_blocks:
+        return None, "validation"
+
+    forced_category = detect_source_category(source_title, "\n\n".join(b.get("text", "") for b in text_blocks), source_url)
+    results_mode = is_results_article(source_title, source_url, "\n\n".join(b.get("text", "") for b in text_blocks))
+    protected_facts = build_protected_facts_for_prompt(source_title, "\n\n".join(b.get("text", "") for b in text_blocks))
+    protected_facts_block = "\n".join(f"- {fact}" for fact in protected_facts) if protected_facts else "- Nessun elemento specifico rilevato."
+
+    source_payload = {b["id"]: b["text"] for b in text_blocks[:120]}
+    title_rule = (
+        f'Il titolo è già deciso dal sistema e NON devi riscriverlo: "{forced_title}".'
+        if forced_title else
+        "Traduci il titolo in modo fedele: non riassumere e non reinventare l'angolo della notizia."
+    )
+
+    prompt = f"""
+Sei un giornalista italiano esperto di wrestling.
+Devi tradurre/riscrivere in italiano SOLO i blocchi testuali forniti.
+Gli embed social NON sono presenti qui e verranno reinseriti dal codice: non aggiungere link, tweet o placeholder.
+Mantieni l'ordine e gli ID dei blocchi.
+Restituisci SOLO JSON valido in UNA SOLA RIGA.
+
+REGOLE:
+- {title_rule}
+- Ogni blocco tradotto deve restare aderente al blocco originale corrispondente.
+- Non fondere blocchi diversi.
+- Non cambiare l'ordine.
+- Non inventare dettagli.
+- HTML consentito nei blocchi solo con <p>, <b>, <blockquote>.
+- Se un blocco è un titolo di sezione/match, rendilo come paragrafo con <b>...</b>.
+- Mantieni in inglese gergo e stipulazioni: match, promo, segment, storyline, tag team, Last Man Standing, WarGames, Royal Rumble, Hell in a Cell, 6-Man Tag Team Match, 8-Woman Tag Team Match.
+- Converti le date americane in formato italiano quando compaiono nel testo: May 4, 2026 diventa 4 maggio 2026.
+- Se una parola inglese è tra virgolette e ha valore narrativo, puoi mantenerla tra virgolette.
+- Rimuovi riferimenti promozionali alla fonte, commenti, stay tuned, copertura live, hub dedicati.
+
+ELEMENTI PROTETTI:
+{protected_facts_block}
+
+TITOLO ORIGINALE:
+{source_title}
+
+BLOCCHI TESTUALI JSON:
+{json.dumps(source_payload, ensure_ascii=False)}
+
+JSON richiesto:
+{{"titolo":"stringa","categoria":{forced_category},"blocks":{{"TEXT_001":"html","TEXT_002":"html"}}}}
+"""
+    try:
+        data, used_model = generate_and_parse_json(prompt)
+        title = forced_title or sanitize_text(re.sub(r"<[^<]+?>", "", data.get("titolo", "")).strip())
+        title = refine_title_italian(title)
+        block_map = data.get("blocks") or {}
+        if not isinstance(block_map, dict):
+            raise ValueError("blocks mancante o non valido")
+
+        missing = [b["id"] for b in text_blocks if b["id"] not in block_map]
+        if missing:
+            raise ValueError(f"Blocchi tradotti mancanti: {missing[:8]}")
+
+        html_parts = []
+        source_text_joined = "\n\n".join(b.get("text", "") for b in text_blocks)
+        for b in blocks:
+            if b.get("type") == "embed":
+                rendered = render_embed_block(b.get("url", ""))
+                if rendered:
+                    html_parts.append(rendered)
+            elif b.get("type") == "text":
+                html = block_map.get(b["id"], "")
+                html = fix_mojibake(html)
+                html = refine_body_text(html)
+                _, html = apply_translation_glossary("", html)
+                html = remove_source_promos_from_html(html)
+                if html and not re.search(r"<p\b|<blockquote\b|<b\b", html, flags=re.I):
+                    html = f"<p>{html}</p>"
+                if html:
+                    html_parts.append(html)
+
+        content_html = "\n\n".join(x.strip() for x in html_parts if x and x.strip())
+        title, content_html = apply_translation_glossary(title, content_html)
+        title, content_html = repair_protected_source_facts(source_title, source_text_joined, title, content_html)
+
+        if title_hard_invalid_with_context(source_title, source_text_joined, title):
+            raise ValueError(f"Titolo incoerente: {title}")
+        if body_looks_suspicious(content_html):
+            raise ValueError("Body sospetto o troppo meta")
+        issues = italian_quality_issues(title, content_html)
+        if issues:
+            raise ValueError(f"Output strutturato sospetto: {issues}")
+        protected_issues = validate_protected_source_facts(source_title, source_text_joined, title, content_html)
+        if protected_issues:
+            raise ValueError(f"Fatti/nomi sorgente alterati: {protected_issues}")
+        if results_mode:
+            warn = result_article_integrity_warning(source_text_joined, content_html)
+            if warn:
+                print(f"[BLOCKSEQ] Warning results: {warn}")
+
+        print(f"[BLOCKSEQ] Traduzione strutturata ottenuta con: {used_model} | blocchi testo={len(text_blocks)}")
+        return {"titolo": title, "testo": content_html, "categoria": forced_category}, "ok"
+    except Exception as e:
+        print(f"[BLOCKSEQ] Traduzione strutturata fallita: {e}")
+        return None, ("model" if is_capacity_error(e) else "validation")
 
 def extract_embeds_from_article_html(html):
     soup = BeautifulSoup(html, "html.parser")
@@ -4049,6 +4294,7 @@ def process_report_pending_item(item, history, seen_story_fingerprints, seen_new
         "event_key": report_event_key,
         "force_process_report": True,
         "prefetched_text": best["text"],
+        "prefetched_html": best.get("html", ""),
         "prefetched_image": best.get("image"),
         "prefetched_embeds": best.get("embeds", []),
         "prefetched_inline_images": best.get("inline_images", []),
@@ -4100,21 +4346,23 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     if item.get("prefetched_text"):
         full_text = item.get("prefetched_text")
         scrape_error = None
-        page_html = ""
+        page_html = item.get("prefetched_html", "")
         page_img = item.get("prefetched_image")
         embed_urls = item.get("prefetched_embeds", [])
         inline_images = item.get("prefetched_inline_images", [])
         print(f"[REPORT] Uso testo prefetched per report maturo ({len(full_text)} caratteri)")
     else:
         full_text, scrape_error, page_html, page_img, embed_urls, inline_images = get_clean_text(link)
-    embed_placeholder_map = {}
+    # v58: blocchi ordinati testo/embed. Gli embed non vengono piu affidati a Gemini.
+    ordered_content_blocks = []
+    embed_placeholder_map = {}  # legacy v56, lasciato per compatibilita ma non usato nel nuovo percorso.
     text_for_translation = full_text
-    if page_html and embed_urls:
-        ordered_text, ordered_embed_map = build_ordered_text_with_embed_placeholders(page_html, source_url=link)
-        if ordered_text and ordered_embed_map:
-            text_for_translation = ordered_text
-            embed_placeholder_map = ordered_embed_map
-            print(f"[EMBEDSEQ] Sequenza testo/embed preservata: {len(embed_placeholder_map)} placeholder")
+    if page_html:
+        ordered_content_blocks = build_ordered_content_blocks(page_html, source_url=link)
+        if ordered_content_blocks:
+            text_blocks_count = sum(1 for b in ordered_content_blocks if b.get("type") == "text")
+            embed_blocks_count = sum(1 for b in ordered_content_blocks if b.get("type") == "embed")
+            print(f"[BLOCKSEQ] Blocchi ordinati estratti: text={text_blocks_count}, embed={embed_blocks_count}")
 
     if embed_urls:
         print(f"[BOT] Embed trovati: {len(embed_urls)}")
@@ -4210,7 +4458,30 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         add_pending_article(item, reason="wp_down_before_gemini")
         return "wp_down"
 
-    news_data, err_type = translate_news(title, text_for_translation or full_text, source_url=link)
+    forced_report_title = make_deterministic_report_title(title, link, full_text) if is_results_article(title, link, full_text) else None
+
+    news_data = None
+    err_type = "validation"
+    structured_used = False
+    if ordered_content_blocks:
+        news_data, err_type = translate_ordered_content_blocks(
+            title,
+            ordered_content_blocks,
+            source_url=link,
+            forced_title=forced_report_title,
+        )
+        if news_data:
+            structured_used = True
+
+    # Per i report non pubblichiamo piu con fallback destrutturato: meglio saltare che creare embed ammucchiati o titolo reinventato.
+    if not news_data and forced_report_title:
+        print(f"[SKIP] Report non pubblicato: struttura a blocchi non valida o traduzione strutturata fallita (err_type={err_type})")
+        record_validation_failure(link, title)
+        return "validation_fail"
+
+    if not news_data:
+        news_data, err_type = translate_news(title, text_for_translation or full_text, source_url=link)
+
     if not news_data:
         print(f"[SKIP] Traduzione fallita: {title} (err_type={err_type})")
         if err_type == "validation":
@@ -4227,7 +4498,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         record_validation_failure(link, title)
         return "validation_fail"
 
-    embeds_already_positioned = False
+    embeds_already_positioned = bool(structured_used)
     if embed_placeholder_map:
         replaced_html, embeds_already_positioned = replace_embed_placeholders_in_html(news_data.get("testo", ""), embed_placeholder_map)
         news_data["testo"] = replaced_html
