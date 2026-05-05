@@ -2820,3 +2820,96 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 5 candidati provati | mode=normal
 ===== RUN END [2026-05-05 21:00:23] VERSION [v59 (245fd91)] =====
 
+
+===== RUN START [2026-05-05 22:07:02] VERSION [v59 (544593d)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165520/wwe-talent-pay-cuts-new-day-departure/
+[SKIP] Score sotto soglia editoriale (0/75): Amanda Nunes Addresses Future In UFC After Next Fight
+[SKIP] event_key confermata su WordPress: event:roman-reigns-title - Jacob Fatu On WWE Backlash World Title Match: 'I Prayed & I Cried For Days Like This'
+[SKIP] Score sotto soglia editoriale (12/75): Khamzat Chimaev Declines RAF Match With Olympic Champion In Favor Of UFC Star
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165311/la-knight-original-creative-plans-wwe-wrestlemania/
+[SKIP] Score sotto soglia editoriale (36/75): TNA Impact Viewership & Ratings Report, 4/30/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165164/wwe-pay-cuts-contract-renegotiations-backstage-update/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (22/75): Sting Reveals His Current Role in AEW After Retirement
+[SKIP] Score sotto soglia editoriale (0/75): Alberto Del Rio Could Be Sent Back to Jail After Controversial Comments at Wrestling Show
+[SKIP] Score sotto soglia editoriale (38/75): Ex-WWE Tough Enough Contestant Daniel Rodimer Pushes To Dismiss Murder Charges With New Legal Arguments
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-raw-ranks-6-globally-netflix-april-27-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/real-reason-tko-asking-wwe-talent-take-pay-cuts-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-gave-talent-just-days-accept-pay-cuts-leave-company/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-asked-talent-take-massive-pay-cuts-part-millions-payroll-reductions/
+[SKIP] Score sotto soglia editoriale (32/75): Bobby Lashley Calls WWE Letting The New Day Leave a Major Fumble
+[SKIP] Score sotto soglia editoriale (8/75): Val Venis Targets MJF Height With New Personal Jabs
+[SCORE] 100 high - Becky Lynch Calls Out Sol Ruca After WWE Raw Encounter: 'She Makes Me Want To Puke' | WWE/main roster, top star titolo: becky lynch, impatto roster/storyline, WWE main roster + storyline/evento, contratto, combo top name titolo + evento forte, show settimanale
+[SCORE] 92 high - The Miz Looks Back On Impersonating The Rock Before WWE WrestleMania 27 | WWE/main roster, top star titolo: the rock, WWE main roster + storyline/evento, titolo/championship, PLE/PPV
+[SCORE] 89 high - WWE Raw Viewership & Ratings Report, 4/27/2026 | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, business/media rights, PLE/PPV
+[SCORE] 85 high - Roman Reigns' WWE Schedule Confirmed for New Dates After Removal | WWE/main roster, top star titolo: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, match/segmento annunciato
+[SCORE] 78 medium - Bully Ray Explains What He Wants To See From Cody Rhodes Vs. GUNTHER In WWE | WWE/main roster, top star titolo: cody rhodes, nomi forti titolo: bully ray, WWE main roster + storyline/evento, intervista/opinione
+[SCORE] 76 medium - WWE Edits Sol Ruca RAW Botch From Social Media After Debut Segment | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale
+[SCORE] 67 medium - Joe Hendry Releases Music Video For 'Can We Fire Logan Paul' Song Featured On WWE Raw | WWE/main roster, nomi forti titolo: logan paul, impatto roster/storyline, release/addio, show settimanale, v48 tier2: 55-74
+[SCORE] 66 medium - WWE Contract Strategy Facing Backlash As Talent Confidence Drops | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v48 tier2: 55-74
+[SCORE] 66 medium - El Hijo Del Vikingo Reportedly Suffers Injury During Lucha Libre AAA Episode | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, infortunio, v48 tier2: 55-74
+[SCORE] 62 medium - WWE HOFer Kevin Nash On Hulk Hogan Documentary: 'Made Me Really F***ing Sad' | WWE/main roster, business/contratti WWE-TKO, ritorno/debutto, v48 tier2: 55-74
+[MODE] Modalita normale: 2 news >=90, 4 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 19 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Becky Lynch Calls Out Sol Ruca After WWE Raw Encounter: 'She Makes Me Want To Puke'
+[BOT] semantic_id=becky-lynch-calls-out-sol-ruca-after-wwe-raw-encounter-she-makes-me-want-to-puke
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: becky lynch, impatto roster/storyline, WWE main roster + storyline/evento, contratto, combo top name titolo + evento forte, show settimanale, opinione generica
+[SKIP] News core già pubblicata da altra fonte: Becky Lynch Calls Out Sol Ruca After WWE Raw Encounter: 'She Makes Me Want To Puke'
+[SKIP] news_core_key=contract-nxt-raw-wwe
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: The Miz Looks Back On Impersonating The Rock Before WWE WrestleMania 27
+[BOT] semantic_id=the-miz-looks-back-on-impersonating-the-rock-before-wwe-wrestlemania-27
+[SCORE] iniziale=92 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: the rock, nomi forti lead: john cena, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=8
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/the-miz-looks-back-on-impersonating-the-rock-before-wwe-wrestlemania-27/l-intro-1777833215.jpg
+[MEDIA] Immagine caricata: 3539
+[WP] Status attach image: 200
+[OK] Pubblicato: The Miz ricorda di aver impersonato The Rock prima di WWE WrestleMania 27
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: WWE Raw Viewership & Ratings Report, 4/27/2026
+[BOT] semantic_id=wwe-raw-viewership-ratings-report-4272026
+[SCORE] iniziale=89 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, embed=0
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star lead: roman reigns, nomi forti lead: roman reigns, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, morte, combo top name lead + evento forte
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=5
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-raw-viewership-ratings-report-4272026/l-intro-1778016310.jpg
+[MEDIA] Immagine caricata: 3543
+[WP] Status attach image: 200
+[OK] Pubblicato: Report Viewership e Ascolti WWE Raw, 27/04/2026
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Roman Reigns' WWE Schedule Confirmed for New Dates After Removal
+[BOT] semantic_id=roman-reigns-wwe-schedule-confirmed-for-new-dates-after-removal
+[SCORE] iniziale=85 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=93 priority=high | WWE/main roster, top star titolo: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:roman-reigns-title - Roman Reigns' WWE Schedule Confirmed for New Dates After Removal
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=7
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/02/roman-reigns-schedule-ahead-of-wrestlemania-42-revealed-17.jpg
+[MEDIA] Immagine caricata: 3546
+[WP] Status attach image: 200
+[OK] Pubblicato: Il programma di Roman Reigns alla WWE confermato per nuove date dopo la rimozione
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 4 candidati provati | mode=normal
+===== RUN END [2026-05-05 22:07:02] VERSION [v59 (544593d)] =====
+
