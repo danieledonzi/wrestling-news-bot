@@ -2336,3 +2336,98 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 4 candidati provati | mode=normal
 ===== RUN END [2026-05-05 11:56:17] VERSION [v59 (4d7b771)] =====
 
+
+===== RUN START [2026-05-05 13:47:51] VERSION [v59 (50fae76)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (24/75): Royce Keys Explains Why He Decided To Open Up In WWE SmackDown Video Package
+[SKIP] Score sotto soglia editoriale (36/75): Kendal Grey Explains Why She's In No Rush To Leave WWE NXT
+[SKIP] Score sotto soglia editoriale (22/75): WWE RAW 5/4/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164611/wwe-chelsea-green-heart-procedure/
+[SKIP] event_key confermata su WordPress: event:roman-reigns-contract - Jacob Fatu Takes Out Roman Reigns Again During WWE Backlash Contract Signing On Raw
+[SKIP] Score sotto soglia editoriale (39/75): Oba Femi Delivers Massive Powerbomb To Otis, Wins First Open Challenge On WWE Raw
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164593/edit-wwe-raw-sol-ruca-main-roster-contract-becky-lynch/
+[SKIP] Score sotto soglia editoriale (20/75): Wrestlers Who Sadly Died In 2026 So Far
+[SKIP] Score sotto soglia editoriale (12/75): Ronda Rousey Opens Up On 'Complicated Relationship' With UFC's Kayla Harrison
+[SKIP] Score sotto soglia editoriale (32/75): Dave Meltzer Says WWE Has Yet To Reach Its Initial 'Goal' For AAA Acquisition
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164491/wwe-raw-may-4-oba-femi-open-challenge-begins-backlash-world-heavyweight-championship-contract-signing/
+[SKIP] Score sotto soglia editoriale (1/75): Biggest Winners And Losers Of The Week - 5/4/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164432/tko-wwe-talent-pay-cuts-50-percent/
+[SKIP] Score sotto soglia editoriale (0/75): President Donald Trump Provides Update On UFC Arena Construction At The White House
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164426/wwe-kofi-kingston-xavier-woods-austin-creed-new-day-reflect-exits-statements/
+[SKIP] Score sotto soglia editoriale (0/75): UFC Star Calls Out Ariel Helwani For Israel Support After Comments On Khamzat Chimaev
+[SKIP] Score sotto soglia editoriale (32/75): Jeff Jarrett: 'Hats Off' To New AEW World Champion
+[SKIP] Score sotto soglia editoriale (55/75): Booker T On WWE LFG Season 3 Returnees: It's Time To 'Sink Or Swim'
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (39/75): Eddie Kingston Says He and CM Punk Would Need Cops If They Ever Cross Paths
+[SKIP] URL già in history: https://www.ringsidenews.com/cm-punks-status-wwe-backlash-revealed-amid-tv-absence/
+[SKIP] URL già in history: https://www.ringsidenews.com/rick-boogs-changes-stance-wrestling-return-nearly-3-years-wwe-release/
+[SKIP] URL già in history: https://www.ringsidenews.com/rock-flexes-multi-million-dollar-jacob-co-billionaire-iii-watch-met-gala/
+[SKIP] URL già in history: https://www.ringsidenews.com/booker-t-believes-kofi-kingston-xavier-woods-wwe-exit-smart-business-move/
+[SKIP] URL già in history: https://www.ringsidenews.com/some-wwe-talent-considering-asking-their-release-recent-cuts/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-nxt-preview-may-5-2026-confirmed-matches-start-time-how-watch/
+[SKIP] event_key confermata su WordPress: event:roman-reigns-contract - Jacob Fatu Puts Roman Reigns Down Hard During Backlash Contract Signing On 5/4 WWE RAW
+[SKIP] Score sotto soglia editoriale (32/75): El Grande Americano Reveals Name Of New Stablemates During 5/4 WWE RAW
+[SKIP] URL già in history: https://www.ringsidenews.com/oba-femi-unleashes-brutality-first-open-challenge-match-during-54-wwe-raw/
+[SKIP] URL già in history: https://www.ringsidenews.com/joe-hendrys-first-match-wwe-raw-roster-ends-chaos/
+[SKIP] URL già in history: https://www.ringsidenews.com/becky-lynch-accidentally-punches-adam-pearce-during-argument-sol-ruca-54-wwe-raw/
+[SCORE] 86 high - WWE Still Figuring Out Format for Premium Live Events Amid ESPN Plans | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, business/media rights
+[SCORE] 72 medium - Several WWE Talent Already Taking Pay Cuts as Contract Restructures Hit Roster | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, release/addio, v48 tier2: 55-74
+[SCORE] 66 medium - Injured WWE Star Comments On The New Day Leaving WWE, Apologizes For Turning On Them | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, infortunio, v48 tier2: 55-74
+[SCORE] 58 low - LA Knight's Direction Unclear After WWE Scraps Major Feud | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, rumor/backstage, v48 tier2: 55-74
+[SCORE] 47 low - Spoiler: Oba Femi's First Open Challenge Opponent Reportedly Revealed Ahead Of WWE Raw | WWE/main roster, nomi forti titolo: oba femi, rumor/backstage, show settimanale, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash
+[GEMINI] Modello attivo: gemini-2.5-flash
+[BOT] News candidate totali: 5 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: WWE Still Figuring Out Format for Premium Live Events Amid ESPN Plans
+[BOT] semantic_id=wwe-still-figuring-out-format-for-premium-live-events-amid-espn-plans
+[SCORE] iniziale=86 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, embed=1
+[BOT] Embed trovati: 2
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=11
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-still-figuring-out-format-for-premium-live-events-amid-espn-plans-25.jpg
+[MEDIA] Immagine caricata: 3500
+[WP] Status attach image: 200
+[OK] Pubblicato: La WWE sta ancora definendo il formato dei Premium Live Event tra i piani di ESPN
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Several WWE Talent Already Taking Pay Cuts as Contract Restructures Hit Roster
+[BOT] semantic_id=several-wwe-talent-already-taking-pay-cuts-as-contract-restructures-hit-roster
+[SCORE] iniziale=72 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=14, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[FIX] Titolo strutturato incoerente -> fallback automatico: Several WWE Talent Already Taking Pay tagli as Contract Restructures Hit Roster
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=14
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/several-wwe-talent-already-taking-pay-cuts-as-contract-restructures-hit-roster-49.jpg
+[MEDIA] Immagine caricata: 3504
+[WP] Status attach image: 200
+[OK] Pubblicato: Several WWE Talent Already Taking Pay tagli as Contract Restructures Hit Roster
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Injured WWE Star Comments On The New Day Leaving WWE, Apologizes For Turning On Them
+[BOT] semantic_id=injured-wwe-star-comments-on-the-new-day-leaving-wwe-apologizes-for-turning-on-them
+[SCORE] iniziale=66 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, embed=0
+[SCORE] raffinato=94 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=7
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/injured-wwe-star-comments-on-the-new-day-leaving-wwe-apologizes-for-turning-on-them/l-intro-1777962896.jpg
+[MEDIA] Immagine caricata: 3507
+[WP] Status attach image: 200
+[OK] Pubblicato: La Superstar WWE Infortunata Commenta l'Addio di The New Day alla WWE, si Scusa per Averli Traditi
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
+===== RUN END [2026-05-05 13:47:51] VERSION [v59 (50fae76)] =====
+
