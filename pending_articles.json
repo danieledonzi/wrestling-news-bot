@@ -1,1 +1,66 @@
-[]
+[
+  {
+    "url": "https://www.ringsidenews.com/jacob-fatu-puts-roman-reigns-down-hard-during-backlash-contract-signing-54-wwe-raw/",
+    "title": "Jacob Fatu Puts Roman Reigns Down Hard During Backlash Contract Signing On 5/4 WWE RAW",
+    "semantic_id": "jacob-fatu-puts-roman-reigns-down-hard-during-backlash-contract-signing-on-54-wwe-raw",
+    "title_key": "jacob-fatu-puts-roman-reigns-down-hard-during-backlash-contract-signing-5",
+    "score": 100,
+    "priority": "high",
+    "event_key": "event:roman-reigns-contract",
+    "reasons": [
+      "WWE/main roster",
+      "top star titolo: roman reigns",
+      "impatto roster/storyline",
+      "WWE main roster + storyline/evento",
+      "contratto",
+      "combo top name titolo + evento forte",
+      "show settimanale"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "top star titolo: roman reigns",
+      "impatto roster/storyline",
+      "WWE main roster + storyline/evento",
+      "contratto",
+      "combo top name titolo + evento forte",
+      "show settimanale"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1777969343.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1777976979.008063,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.ringsidenews.com/wwe-raw-spoiler-lineup-may-4-2026-full-match-card-backstage-notes-revealed/",
+    "title": "WWE RAW Spoiler Lineup for May 4, 2026: Full Match Card and Backstage Notes Revealed",
+    "semantic_id": "wwe-raw-spoiler-lineup-for-may-4-2026-full-match-card-and-backstage-notes-revealed",
+    "title_key": "raw-spoiler-lineup-may-4-full-card-backstage-notes",
+    "score": 55,
+    "priority": "low",
+    "event_key": "",
+    "reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "rumor/backstage",
+      "show settimanale",
+      "floor WWE main roster storyline",
+      "v48 tier2: 55-74"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "rumor/backstage",
+      "show settimanale",
+      "floor WWE main roster storyline",
+      "v48 tier2: 55-74"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1777962146.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1777976979.012177,
+    "attempts": 0
+  }
+]

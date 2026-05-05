@@ -2056,3 +2056,54 @@
 [BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 3 candidati provati | mode=normal
 ===== RUN END [2026-05-05 08:00:54] VERSION [v58 (5cb9469)] =====
 
+
+===== RUN START [2026-05-05 10:29:27] VERSION [v58 (e3b80a1)] =====
+[WP] WordPress non raggiungibile: HTTPSConnectionPool(host='www.openwrestlingtv.space', port=443): Read timed out. (read timeout=8)
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (22/75): WWE RAW 5/4/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164611/wwe-chelsea-green-heart-procedure/
+[SKIP] Score sotto soglia editoriale (39/75): Oba Femi Delivers Massive Powerbomb To Otis, Wins First Open Challenge On WWE Raw
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164593/edit-wwe-raw-sol-ruca-main-roster-contract-becky-lynch/
+[SKIP] Score sotto soglia editoriale (20/75): Wrestlers Who Sadly Died In 2026 So Far
+[SKIP] Score sotto soglia editoriale (12/75): Ronda Rousey Opens Up On 'Complicated Relationship' With UFC's Kayla Harrison
+[SKIP] Score sotto soglia editoriale (32/75): Dave Meltzer Says WWE Has Yet To Reach Its Initial 'Goal' For AAA Acquisition
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164491/wwe-raw-may-4-oba-femi-open-challenge-begins-backlash-world-heavyweight-championship-contract-signing/
+[SKIP] Score sotto soglia editoriale (1/75): Biggest Winners And Losers Of The Week - 5/4/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164432/tko-wwe-talent-pay-cuts-50-percent/
+[SKIP] Score sotto soglia editoriale (0/75): President Donald Trump Provides Update On UFC Arena Construction At The White House
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164426/wwe-kofi-kingston-xavier-woods-austin-creed-new-day-reflect-exits-statements/
+[SKIP] Score sotto soglia editoriale (0/75): UFC Star Calls Out Ariel Helwani For Israel Support After Comments On Khamzat Chimaev
+[SKIP] Score sotto soglia editoriale (32/75): Jeff Jarrett: 'Hats Off' To New AEW World Champion
+[SKIP] Score sotto soglia editoriale (55/75): Booker T On WWE LFG Season 3 Returnees: It's Time To 'Sink Or Swim'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164210/wwe-jade-cargill-wouldve-loved-wrestle-more-champion/
+[SKIP] Score sotto soglia editoriale (0/75): Luke Thomas: UFC Freedom 250 Will Likely Cost US Taxpayers Millions
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164178/brooke-hogan-discusses-erasure-hulk-hogan-documentary/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (32/75): El Grande Americano Reveals Name Of New Stablemates During 5/4 WWE RAW
+[SKIP] URL già in history: https://www.ringsidenews.com/oba-femi-unleashes-brutality-first-open-challenge-match-during-54-wwe-raw/
+[SKIP] URL già in history: https://www.ringsidenews.com/joe-hendrys-first-match-wwe-raw-roster-ends-chaos/
+[SKIP] URL già in history: https://www.ringsidenews.com/becky-lynch-accidentally-punches-adam-pearce-during-argument-sol-ruca-54-wwe-raw/
+[SKIP] URL già in history: https://www.ringsidenews.com/roman-reigns-crashes-out-backstage-during-54-wwe-raw/
+[SKIP] Score sotto soglia editoriale (14/75): Chelsea Green Undergoes Heart Procedure
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-raw-results-highlights-key-moments-may-4-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/spoiler-opening-segment-may-4-wwe-raw-revealed/
+[SKIP] Score sotto soglia editoriale (0/75): Roxanne Perez's Allegations Against Joey Ryan Resurface After Grooming Denial
+[SKIP] URL sospeso per validation fail recenti: https://www.ringsidenews.com/additional-wwe-releases-could-coming-recent-cuts/
+[SKIP] Score sotto soglia editoriale (28/75): WWE's Current Stance on Bringing Back NXT UK
+[SKIP] Score sotto soglia editoriale (36/75): Kofi Kingston Says Goodbye To WWE With Emotional Message After Exit
+[SKIP] URL sospeso per validation fail recenti: https://www.ringsidenews.com/tko-expected-approach-wwe-talent-about-taking-pay-cuts/
+[SCORE] 100 high - Jacob Fatu Puts Roman Reigns Down Hard During Backlash Contract Signing On 5/4 WWE RAW | WWE/main roster, top star titolo: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, contratto, combo top name titolo + evento forte, show settimanale
+[SCORE] 100 high - Jacob Fatu Takes Out Roman Reigns Again During WWE Backlash Contract Signing On Raw | WWE/main roster, top star titolo: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, contratto, combo top name titolo + evento forte, show settimanale
+[SCORE] 55 low - WWE RAW Spoiler Lineup for May 4, 2026: Full Match Card and Backstage Notes Revealed | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, show settimanale, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 47 low - Spoiler: Oba Femi's First Open Challenge Opponent Reportedly Revealed Ahead Of WWE Raw | WWE/main roster, nomi forti titolo: oba femi, rumor/backstage, show settimanale, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 2 news >=90, 2 news >=80
+[BOT] WordPress offline: assegno score e salvo solo i candidati che sarebbero stati pubblicati, senza chiamare Gemini.
+[PENDING] Coda salvata: 1 elementi
+[PENDING] Salvata news high (100): Jacob Fatu Puts Roman Reigns Down Hard During Backlash Contract Signing On 5/4 WWE RAW
+[PENDING] Già in coda per event_key/URL: Jacob Fatu Takes Out Roman Reigns Again During WWE Backlash Contract Signing On Raw
+[PENDING] Coda salvata: 2 elementi
+[PENDING] Salvata news low (55): WWE RAW Spoiler Lineup for May 4, 2026: Full Match Card and Backstage Notes Revealed
+[PENDING] Candidati salvati per dopo: 3
+===== RUN END [2026-05-05 10:29:27] VERSION [v58 (e3b80a1)] =====
+
