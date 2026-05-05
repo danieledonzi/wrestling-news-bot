@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v58"
+BOT_VERSION = "v59"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -1991,6 +1991,169 @@ def make_deterministic_report_title(source_title="", source_url="", source_text=
     return f"{show}: momenti salienti e risultati"
 
 
+# v59: fallback deterministico per evitare di perdere news buone per un titolo imperfetto.
+def convert_american_dates_to_italian(text):
+    if not text:
+        return text
+
+    month_map = {
+        "jan": 1, "january": 1,
+        "feb": 2, "february": 2,
+        "mar": 3, "march": 3,
+        "apr": 4, "april": 4,
+        "may": 5,
+        "jun": 6, "june": 6,
+        "jul": 7, "july": 7,
+        "aug": 8, "august": 8,
+        "sep": 9, "sept": 9, "september": 9,
+        "oct": 10, "october": 10,
+        "nov": 11, "november": 11,
+        "dec": 12, "december": 12,
+    }
+    month_alt = "|".join(sorted(month_map.keys(), key=len, reverse=True))
+
+    def repl_month(m):
+        month = month_map.get(m.group(1).lower())
+        day = int(m.group(2))
+        year = m.group(3)
+        if not month:
+            return m.group(0)
+        if year:
+            return f"{day} {get_italian_month_name(month)} {year}"
+        return f"{day} {get_italian_month_name(month)}"
+
+    text = re.sub(
+        rf"\b({month_alt})\s+(\d{{1,2}})(?:st|nd|rd|th)?(?:,\s*(\d{{4}}))?\b",
+        repl_month,
+        text,
+        flags=re.I,
+    )
+
+    # Date numeriche americane nei titoli/feed: 5/4/2026 -> 4 maggio 2026.
+    # Applichiamo la conversione solo a valori plausibili month/day.
+    def repl_numeric(m):
+        month = int(m.group(1))
+        day = int(m.group(2))
+        year = m.group(3)
+        if 1 <= month <= 12 and 1 <= day <= 31:
+            if year:
+                if len(year) == 2:
+                    year = "20" + year
+                return f"{day} {get_italian_month_name(month)} {year}"
+            return f"{day} {get_italian_month_name(month)}"
+        return m.group(0)
+
+    text = re.sub(r"\b(\d{1,2})/(\d{1,2})(?:/(\d{2,4}))?\b", repl_numeric, text)
+    return text
+
+
+def generate_fallback_title(source_title="", source_text="", source_url="", generated_title=""):
+    """Titolo di emergenza, deterministico e non creativo.
+    Serve quando Gemini produce un titolo tronco/incoerente ma la notizia e' valida.
+    """
+    if is_results_article(source_title, source_url, source_text):
+        return make_deterministic_report_title(source_title, source_url, source_text)
+
+    src = sanitize_text(source_title or generated_title or "News wrestling")
+    src = convert_american_dates_to_italian(src)
+
+    phrase_replacements = [
+        (r"^Additional WWE Releases Expected Following Recent Cuts$", "Ulteriori licenziamenti WWE previsti dopo i recenti tagli"),
+        (r"^Additional WWE Releases Could Be Coming After Recent Cuts$", "Ulteriori licenziamenti WWE potrebbero arrivare dopo i recenti tagli"),
+        (r"^TKO Expected to Approach WWE Talent About Taking Pay Cuts$", "TKO pronta a chiedere tagli salariali ai talenti WWE"),
+        (r"^TKO Reportedly Asking Numerous WWE Talents To Take Pay Cuts, Possibly As High As 50%$", "TKO avrebbe chiesto a diversi talenti WWE tagli salariali fino al 50%"),
+        (r"^Backstage Report On New Day WWE Departure, Potential For More Releases$", "Report dal backstage sull'uscita dei New Day dalla WWE e possibili nuovi licenziamenti"),
+        (r"^Reason Revealed For Roman Reigns Being Pulled From WWE June TV Dates$", "Svelato il motivo dell'assenza di Roman Reigns dalle date WWE di giugno"),
+    ]
+    for pat, repl in phrase_replacements:
+        if re.match(pat, src, flags=re.I):
+            return refine_title_italian(repl)
+
+    replacements = [
+        (r"\bAdditional\b", "Ulteriori"),
+        (r"\bWWE Releases\b", "licenziamenti WWE"),
+        (r"\bReleases\b", "licenziamenti"),
+        (r"\bReleased\b", "licenziato"),
+        (r"\bExpected\b", "previsti"),
+        (r"\bCould Be Coming\b", "potrebbero arrivare"),
+        (r"\bFollowing\b", "dopo"),
+        (r"\bRecent Cuts\b", "i recenti tagli"),
+        (r"\bCuts\b", "tagli"),
+        (r"\bPay Cuts\b", "tagli salariali"),
+        (r"\bTaking Pay Cuts\b", "accettare tagli salariali"),
+        (r"\bBackstage Report On\b", "Report dal backstage su"),
+        (r"\bReport On\b", "Report su"),
+        (r"\bPotential For More\b", "possibili nuovi"),
+        (r"\bDeparture\b", "uscita"),
+        (r"\bDepartures\b", "uscite"),
+        (r"\bExit\b", "addio"),
+        (r"\bExits\b", "addii"),
+        (r"\bReturn\b", "ritorno"),
+        (r"\bReturns\b", "ritorna"),
+        (r"\bCould Return\b", "potrebbe tornare"),
+        (r"\bReason Revealed For\b", "Svelato il motivo di"),
+        (r"\bBeing Pulled From\b", "l'assenza da"),
+        (r"\bTitle Match\b", "title match"),
+        (r"\bHighlights\b", "momenti salienti"),
+        (r"\bKey Moments\b", "momenti chiave"),
+        (r"\bResults\b", "risultati"),
+    ]
+
+    out = src
+    for pat, repl in replacements:
+        out = re.sub(pat, repl, out, flags=re.I)
+
+    out = sanitize_text(out)
+    out = out.replace("Wwe", "WWE").replace("Aew", "AEW").replace("Tko", "TKO")
+    out = out.replace("Raw", "RAW").replace("Smackdown", "SmackDown").replace("Nxt", "NXT")
+
+    # Se la traduzione deterministica e' rimasta quasi tutta inglese, meglio un titolo
+    # neutro ma pubblicabile basato sul tema principale.
+    low = normalize_for_check(out)
+    if any(x in low for x in ["additional", "expected", "following", "recent cuts"]):
+        if "wwe" in low and ("release" in low or "cuts" in low):
+            out = "Ulteriori licenziamenti WWE potrebbero arrivare dopo i recenti tagli"
+        elif "tko" in low and ("pay" in low or "salary" in low):
+            out = "TKO pronta a chiedere tagli salariali ai talenti WWE"
+
+    out = refine_title_italian(out)
+    if title_soft_validation_failed(out) or not title_is_good_enough_for_publish(out):
+        # Ultima rete di sicurezza: titolo pulito ma generico, solo se contiene brand/tema.
+        src_low = normalize_for_check(src)
+        if "wwe" in src_low and any(x in src_low for x in ["release", "cuts", "departure", "exit"]):
+            out = "Nuovi sviluppi sui licenziamenti in WWE"
+        elif "tko" in src_low and any(x in src_low for x in ["pay", "salary", "cuts"]):
+            out = "TKO e WWE verso nuovi tagli salariali"
+        else:
+            out = src
+            out = convert_american_dates_to_italian(out)
+            out = refine_title_italian(out)
+
+    return out
+
+
+def ensure_publishable_title(news_data, source_title="", source_text="", source_url="", reason=""):
+    if not news_data:
+        return news_data
+
+    current = sanitize_text(news_data.get("titolo", ""))
+    needs_fallback = (
+        title_soft_validation_failed(current)
+        or title_is_broken(current)
+        or not title_is_good_enough_for_publish(current)
+        or title_hard_invalid_with_context(source_title, source_text, current)
+    )
+
+    if needs_fallback:
+        fallback = generate_fallback_title(source_title, source_text, source_url, current)
+        print(f"[FIX] Titolo non valido ({reason or 'validation'}) -> fallback automatico: {fallback}")
+        news_data["titolo"] = fallback
+    else:
+        news_data["titolo"] = current
+
+    return news_data
+
+
 def render_embed_block(url):
     clean_url = normalize_embed_url(url)
     if not clean_url:
@@ -2086,12 +2249,15 @@ JSON richiesto:
         title, content_html = repair_protected_source_facts(source_title, source_text_joined, title, content_html)
 
         if title_hard_invalid_with_context(source_title, source_text_joined, title):
-            raise ValueError(f"Titolo incoerente: {title}")
+            fallback_title = generate_fallback_title(source_title, source_text_joined, source_url, title)
+            print(f"[FIX] Titolo strutturato incoerente -> fallback automatico: {fallback_title}")
+            title = fallback_title
         if body_looks_suspicious(content_html):
             raise ValueError("Body sospetto o troppo meta")
         issues = italian_quality_issues(title, content_html)
-        if issues:
-            raise ValueError(f"Output strutturato sospetto: {issues}")
+        blocking_issues = [i for i in issues if "Titolo sospeso" not in i]
+        if blocking_issues:
+            raise ValueError(f"Output strutturato sospetto: {blocking_issues}")
         protected_issues = validate_protected_source_facts(source_title, source_text_joined, title, content_html)
         if protected_issues:
             raise ValueError(f"Fatti/nomi sorgente alterati: {protected_issues}")
@@ -2966,8 +3132,9 @@ JSON richiesto:
                 raise ValueError(f"Fatti/nomi sorgente alterati dopo revisione: {protected_issues}")
 
         remaining_issues = italian_quality_issues(titolo, testo)
-        if remaining_issues:
-            raise ValueError(f"Output ancora sospetto dopo revisione: {remaining_issues}")
+        blocking_remaining_issues = [i for i in remaining_issues if "Titolo sospeso" not in i]
+        if blocking_remaining_issues:
+            raise ValueError(f"Output ancora sospetto dopo revisione: {blocking_remaining_issues}")
 
         if title_needs_soft_cleanup(titolo):
             titolo = refine_title_italian(titolo)
@@ -2976,7 +3143,9 @@ JSON richiesto:
             raise ValueError("Titolo o testo mancanti")
 
         if title_hard_invalid_with_context(source_title, text, titolo):
-            raise ValueError(f"Titolo incoerente: {titolo}")
+            fallback_title = generate_fallback_title(source_title, text, source_url, titolo)
+            print(f"[FIX] Titolo incoerente -> fallback automatico: {fallback_title}")
+            titolo = fallback_title
 
         if body_looks_suspicious(testo):
             raise ValueError("Body sospetto o troppo meta")
@@ -3166,15 +3335,36 @@ def wp_has_published_event(event_key, title="", url=""):
     return False
 
 
+def is_major_storyline_update(title="", text="", event_key=""):
+    """v59: non bloccare evoluzioni importanti di storyline solo per macro event_key simile."""
+    probe = normalize_for_check(f"{title} {(text or '')[:1000]} {event_key}")
+    strong_story_terms = [
+        "roman reigns", "jacob fatu", "bloodline", "cody rhodes", "cm punk",
+        "seth rollins", "john cena", "randy orton", "backlash", "raw", "smackdown",
+        "contract signing", "attack", "attacked", "pulled", "absence", "return",
+        "injury", "release", "released", "departure", "pay cut", "pay cuts",
+        "tko", "new day", "kofi kingston", "xavier woods",
+    ]
+    update_terms = [
+        "update", "report", "backstage", "reason", "revealed", "following",
+        "after", "could", "expected", "plans", "schedule", "pulled", "changes",
+    ]
+    return any(t in probe for t in strong_story_terms) and any(t in probe for t in update_terms)
+
+
 def should_skip_event_key(history, event_key, title="", url=""):
     """Ritorna True solo se l'event_key e' in history e WP conferma il post.
-    v48: i follow-up con un angolo autonomo non sono duplicati secchi.
+    v59: se sembra un aggiornamento autonomo importante, non bloccare solo per macro-evento.
     """
     if not history_has_event_key(history, event_key):
         return False
 
     if is_followup_angle(title, "", event_key):
         print(f"[FOLLOWUP] Event key gia' vista ma angolo autonomo consentito: {event_key} - {title}")
+        return False
+
+    if is_major_storyline_update(title, "", event_key):
+        print(f"[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: {event_key} - {title}")
         return False
 
     if wp_has_published_event(event_key, title=title, url=url):
@@ -4432,7 +4622,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         item["event_key"] = event_key
         print(f"[FOLLOWUP] Pubblicabile come angolo autonomo: {original_event_key} -> {event_key}")
 
-    if event_key and event_key in seen_event_keys and wp_has_published_event(event_key, title=title, url=link):
+    if event_key and event_key in seen_event_keys and not is_major_storyline_update(title, scoring_text, event_key) and wp_has_published_event(event_key, title=title, url=link):
         print(f"[SKIP] Event key già pubblicata nella run e confermata su WordPress: {event_key} - {title}")
         remove_pending_url(link)
         return "skipped"
@@ -4488,15 +4678,15 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
             record_validation_failure(link, title)
         return "model_fail" if err_type == "model" else "validation_fail"
 
+    news_data = ensure_publishable_title(news_data, title, text_for_translation or full_text, link, reason=err_type)
+
     if title_soft_validation_failed(news_data["titolo"]):
-        print(f"[SKIP] Titolo non pubblicabile: {news_data['titolo']}")
-        record_validation_failure(link, title)
-        return "validation_fail"
+        print(f"[WARN] Titolo ancora imperfetto dopo fallback, ma non blocco: {news_data['titolo']}")
+        news_data["titolo"] = generate_fallback_title(title, text_for_translation or full_text, link, news_data["titolo"])
 
     if err_type != "soft_mismatch" and not title_is_good_enough_for_publish(news_data["titolo"]):
-        print(f"[SKIP] Titolo non pubblicabile: {news_data['titolo']}")
-        record_validation_failure(link, title)
-        return "validation_fail"
+        print(f"[WARN] Titolo debole dopo fallback, uso titolo sorgente ripulito: {news_data['titolo']}")
+        news_data["titolo"] = generate_fallback_title(title, text_for_translation or full_text, link, news_data["titolo"])
 
     embeds_already_positioned = bool(structured_used)
     if embed_placeholder_map:
