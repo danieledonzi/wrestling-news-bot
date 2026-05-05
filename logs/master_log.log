@@ -2717,3 +2717,106 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 4 candidati provati | mode=normal
 ===== RUN END [2026-05-05 19:10:44] VERSION [v59 (de0d3b2)] =====
 
+
+===== RUN START [2026-05-05 21:00:23] VERSION [v59 (245fd91)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (0/75): Amanda Nunes Addresses Future In UFC After Next Fight
+[SKIP] event_key confermata su WordPress: event:roman-reigns-title - Jacob Fatu On WWE Backlash World Title Match: 'I Prayed & I Cried For Days Like This'
+[SKIP] Score sotto soglia editoriale (12/75): Khamzat Chimaev Declines RAF Match With Olympic Champion In Favor Of UFC Star
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165311/la-knight-original-creative-plans-wwe-wrestlemania/
+[SKIP] Score sotto soglia editoriale (36/75): TNA Impact Viewership & Ratings Report, 4/30/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165164/wwe-pay-cuts-contract-renegotiations-backstage-update/
+[SKIP] Score sotto soglia editoriale (18/75): Tony Khan Comments On Potential AEW Involvement From Kevin Nealon & Danny DeVito
+[SKIP] event_key confermata su WordPress: event:roman-reigns-contract - Roman Reigns Delivers Post-Raw Promo Promising Better Outcome At WWE Backlash
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164719/wwe-nikki-brie-bella-vows-return-injury/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (0/75): Alberto Del Rio Could Be Sent Back to Jail After Controversial Comments at Wrestling Show
+[SKIP] Score sotto soglia editoriale (38/75): Ex-WWE Tough Enough Contestant Daniel Rodimer Pushes To Dismiss Murder Charges With New Legal Arguments
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-gave-talent-just-days-accept-pay-cuts-leave-company/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-asked-talent-take-massive-pay-cuts-part-millions-payroll-reductions/
+[SKIP] Score sotto soglia editoriale (32/75): Bobby Lashley Calls WWE Letting The New Day Leave a Major Fumble
+[SKIP] Score sotto soglia editoriale (8/75): Val Venis Targets MJF Height With New Personal Jabs
+[SKIP] Score sotto soglia editoriale (28/75): Scarlett Bordeaux Kisses Tiffany Stratton During Wild Bikini Boat Party
+[SKIP] Score sotto soglia editoriale (28/75): Lola Vice Drops Cheeky Poolside Bikini Photos Showing Off NXT and AAA Gold
+[SCORE] 100 high - Real Reason TKO Is Asking WWE Talent to Take Pay Cuts Revealed | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV
+[SCORE] 100 high - Becky Lynch Calls Out Sol Ruca After WWE Raw Encounter: 'She Makes Me Want To Puke' | WWE/main roster, top star titolo: becky lynch, impatto roster/storyline, WWE main roster + storyline/evento, contratto, combo top name titolo + evento forte, show settimanale
+[SCORE] 85 high - Roman Reigns' WWE Schedule Confirmed for New Dates After Removal | WWE/main roster, top star titolo: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, match/segmento annunciato
+[SCORE] 80 high - WWE Raw Ranks #6 Globally on Netflix for April 27, 2026 | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, release/addio, show settimanale
+[SCORE] 72 medium - Backstage Details On WWE Asking Talent To Take Pay Cuts, New Day's Departure | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, release/addio, v48 tier2: 55-74
+[SCORE] 67 medium - Joe Hendry Releases Music Video For 'Can We Fire Logan Paul' Song Featured On WWE Raw | WWE/main roster, nomi forti titolo: logan paul, impatto roster/storyline, release/addio, show settimanale, v48 tier2: 55-74
+[SCORE] 66 medium - WWE Contract Strategy Facing Backlash As Talent Confidence Drops | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v48 tier2: 55-74
+[SCORE] 66 medium - El Hijo Del Vikingo Reportedly Suffers Injury During Lucha Libre AAA Episode | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, infortunio, v48 tier2: 55-74
+[SCORE] 62 medium - WWE HOFer Kevin Nash On Hulk Hogan Documentary: 'Made Me Really F***ing Sad' | WWE/main roster, business/contratti WWE-TKO, ritorno/debutto, v48 tier2: 55-74
+[SCORE] 60 medium - Backstage Update On Former NJPW Star EVIL's New Name In WWE NXT | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, v48 tier2: 55-74
+[MODE] Modalita normale: 2 news >=90, 4 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 18 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Real Reason TKO Is Asking WWE Talent to Take Pay Cuts Revealed
+[BOT] semantic_id=real-reason-tko-is-asking-wwe-talent-to-take-pay-cuts-revealed
+[SCORE] iniziale=100 priority=high
+[SCRAPE] Errore su https://www.ringsidenews.com/real-reason-tko-asking-wwe-talent-take-pay-cuts-revealed/: HTTPSConnectionPool(host='www.ringsidenews.com', port=443): Read timed out. (read timeout=12)
+[BOT] Uso summary fallback per: Real Reason TKO Is Asking WWE Talent to Take Pay Cuts Revealed
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Nessuna immagine trovata per: Real Reason TKO Is Asking WWE Talent to Take Pay Cuts Revealed
+[OK] Pubblicato: Rivelato il motivo per cui TKO chiede tagli di stipendio ai talenti WWE
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Becky Lynch Calls Out Sol Ruca After WWE Raw Encounter: 'She Makes Me Want To Puke'
+[BOT] semantic_id=becky-lynch-calls-out-sol-ruca-after-wwe-raw-encounter-she-makes-me-want-to-puke
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: becky lynch, impatto roster/storyline, WWE main roster + storyline/evento, contratto, combo top name titolo + evento forte, show settimanale, opinione generica
+[SKIP] News core già pubblicata da altra fonte: Becky Lynch Calls Out Sol Ruca After WWE Raw Encounter: 'She Makes Me Want To Puke'
+[SKIP] news_core_key=contract-nxt-raw-wwe
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Roman Reigns' WWE Schedule Confirmed for New Dates After Removal
+[BOT] semantic_id=roman-reigns-wwe-schedule-confirmed-for-new-dates-after-removal
+[SCORE] iniziale=85 priority=high
+[SCRAPE] Errore su https://www.ringsidenews.com/roman-reigns-wwe-schedule-confirmed-new-dates-removal/: HTTPSConnectionPool(host='www.ringsidenews.com', port=443): Read timed out. (read timeout=12)
+[BOT] Uso summary fallback per: Roman Reigns' WWE Schedule Confirmed for New Dates After Removal
+[SCORE] raffinato=85 priority=high | WWE/main roster, top star titolo: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, match/segmento annunciato
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[QUALITY] Problemi rilevati: ['Testo sospetto o troppo breve']
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Output ancora sospetto dopo revisione: ['Testo sospetto o troppo breve']
+[SKIP] Traduzione fallita: Roman Reigns' WWE Schedule Confirmed for New Dates After Removal (err_type=validation)
+[BOT] Elaborazione: WWE Raw Ranks #6 Globally on Netflix for April 27, 2026
+[BOT] semantic_id=wwe-raw-ranks-6-globally-on-netflix-for-april-27-2026
+[SCORE] iniziale=80 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=21, embed=0
+[BOT] Embed trovati: 2
+[SCORE] raffinato=95 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, non wrestling puro
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=21
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/02/WWE-RAW-Decrease.jpg
+[MEDIA] Immagine caricata: 3533
+[WP] Status attach image: 200
+[OK] Pubblicato: WWE Raw al #6 globale su Netflix per il 27 aprile 2026
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Backstage Details On WWE Asking Talent To Take Pay Cuts, New Day's Departure
+[BOT] semantic_id=backstage-details-on-wwe-asking-talent-to-take-pay-cuts-new-days-departure
+[SCORE] iniziale=72 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, embed=0
+[SCORE] raffinato=81 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, infortunio, PLE/PPV, developmental secondario
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=7
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/backstage-details-on-wwe-asking-talent-to-take-pay-cuts-new-days-departure/l-intro-1778013342.jpg
+[MEDIA] Immagine caricata: 3536
+[WP] Status attach image: 200
+[OK] Pubblicato: Dettagli dal backstage sulla richiesta della WWE ai wrestler di accettare tagli salariali, la partenza del New Day
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 5 candidati provati | mode=normal
+===== RUN END [2026-05-05 21:00:23] VERSION [v59 (245fd91)] =====
+
