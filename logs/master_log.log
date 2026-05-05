@@ -2107,3 +2107,126 @@
 [PENDING] Candidati salvati per dopo: 3
 ===== RUN END [2026-05-05 10:29:27] VERSION [v58 (e3b80a1)] =====
 
+
+===== RUN START [2026-05-05 11:51:54] VERSION [v59 (0253b52)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (22/75): WWE RAW 5/4/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164611/wwe-chelsea-green-heart-procedure/
+[SKIP] event_key confermata su WordPress: event:roman-reigns-contract - Jacob Fatu Takes Out Roman Reigns Again During WWE Backlash Contract Signing On Raw
+[SKIP] Score sotto soglia editoriale (39/75): Oba Femi Delivers Massive Powerbomb To Otis, Wins First Open Challenge On WWE Raw
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164593/edit-wwe-raw-sol-ruca-main-roster-contract-becky-lynch/
+[SKIP] Score sotto soglia editoriale (20/75): Wrestlers Who Sadly Died In 2026 So Far
+[SKIP] Score sotto soglia editoriale (12/75): Ronda Rousey Opens Up On 'Complicated Relationship' With UFC's Kayla Harrison
+[SKIP] Score sotto soglia editoriale (32/75): Dave Meltzer Says WWE Has Yet To Reach Its Initial 'Goal' For AAA Acquisition
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164491/wwe-raw-may-4-oba-femi-open-challenge-begins-backlash-world-heavyweight-championship-contract-signing/
+[SKIP] Score sotto soglia editoriale (1/75): Biggest Winners And Losers Of The Week - 5/4/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164432/tko-wwe-talent-pay-cuts-50-percent/
+[SKIP] Score sotto soglia editoriale (0/75): President Donald Trump Provides Update On UFC Arena Construction At The White House
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164426/wwe-kofi-kingston-xavier-woods-austin-creed-new-day-reflect-exits-statements/
+[SKIP] Score sotto soglia editoriale (0/75): UFC Star Calls Out Ariel Helwani For Israel Support After Comments On Khamzat Chimaev
+[SKIP] Score sotto soglia editoriale (32/75): Jeff Jarrett: 'Hats Off' To New AEW World Champion
+[SKIP] Score sotto soglia editoriale (55/75): Booker T On WWE LFG Season 3 Returnees: It's Time To 'Sink Or Swim'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164210/wwe-jade-cargill-wouldve-loved-wrestle-more-champion/
+[SKIP] Score sotto soglia editoriale (0/75): Luke Thomas: UFC Freedom 250 Will Likely Cost US Taxpayers Millions
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164178/brooke-hogan-discusses-erasure-hulk-hogan-documentary/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] event_key confermata su WordPress: event:roman-reigns-contract - Jacob Fatu Puts Roman Reigns Down Hard During Backlash Contract Signing On 5/4 WWE RAW
+[SKIP] Score sotto soglia editoriale (32/75): El Grande Americano Reveals Name Of New Stablemates During 5/4 WWE RAW
+[SKIP] URL già in history: https://www.ringsidenews.com/oba-femi-unleashes-brutality-first-open-challenge-match-during-54-wwe-raw/
+[SKIP] URL già in history: https://www.ringsidenews.com/joe-hendrys-first-match-wwe-raw-roster-ends-chaos/
+[SKIP] URL già in history: https://www.ringsidenews.com/becky-lynch-accidentally-punches-adam-pearce-during-argument-sol-ruca-54-wwe-raw/
+[SKIP] URL già in history: https://www.ringsidenews.com/roman-reigns-crashes-out-backstage-during-54-wwe-raw/
+[SKIP] Score sotto soglia editoriale (14/75): Chelsea Green Undergoes Heart Procedure
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-raw-results-highlights-key-moments-may-4-2026/
+[SCORE] 83 high - Rick Boogs Changes Stance on Wrestling Return Nearly 3 Years After WWE Release | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[SCORE] 77 medium - CM Punk's Status for WWE Backlash Revealed Amid TV Absence | WWE/main roster, top star titolo: cm punk, nomi forti lead: danhausen, WWE main roster + storyline/evento, rumor/backstage
+[SCORE] 72 medium - Booker T Believes Kofi Kingston and Xavier Woods' WWE Exit Is a Smart Business Move | WWE/main roster, nomi forti titolo: booker t, impatto roster/storyline, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, opinione generica, v48 tier2: 55-74
+[SCORE] 56 low - WWE NXT Preview for May 5, 2026: Confirmed Matches, Start Time and How to Watch | WWE/main roster, WWE main roster + storyline/evento, match/segmento annunciato, show settimanale, v48 tier2: 55-74
+[SCORE] 55 low - WWE RAW Spoiler Lineup for May 4, 2026: Full Match Card and Backstage Notes Revealed | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, show settimanale, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 48 low - Some WWE Talent Considering Asking for Their Release After Recent Cuts | WWE/main roster, impatto roster/storyline, release/addio, v48 tier3: 45-54 contestuale
+[SCORE] 47 low - Spoiler: Oba Femi's First Open Challenge Opponent Reportedly Revealed Ahead Of WWE Raw | WWE/main roster, nomi forti titolo: oba femi, rumor/backstage, show settimanale, v48 tier3: 45-54 contestuale
+[SCORE] 45 low - The Rock Flexes Multi-Million Dollar Jacob & Co. Billionaire III Watch at Met Gala | WWE/main roster, top star titolo: the rock, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 2
+[BOT] Elaborazione: Jacob Fatu Puts Roman Reigns Down Hard During Backlash Contract Signing On 5/4 WWE RAW
+[BOT] semantic_id=jacob-fatu-puts-roman-reigns-down-hard-during-backlash-contract-signing-on-54-wwe-raw
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, embed=3
+[BOT] Embed trovati: 4
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, morte, combo top name titolo + evento forte, show settimanale
+[SKIP] Event key confermata su WordPress: event:roman-reigns-contract - Jacob Fatu Puts Roman Reigns Down Hard During Backlash Contract Signing On 5/4 WWE RAW
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: WWE RAW Spoiler Lineup for May 4, 2026: Full Match Card and Backstage Notes Revealed
+[BOT] semantic_id=wwe-raw-spoiler-lineup-for-may-4-2026-full-match-card-and-backstage-notes-revealed
+[SCORE] iniziale=55 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=25, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=72 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, contratto, show settimanale
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - WWE RAW Spoiler Lineup for May 4, 2026: Full Match Card and Backstage Notes Revealed
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:roman-reigns-contract - WWE RAW Spoiler Lineup for May 4, 2026: Full Match Card and Backstage Notes Revealed
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=25
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/02/wwe-raw-spoiler-lineup-for-february-9-2026-full-match-card-and-backstage-notes-revealed-07.jpg
+[MEDIA] Immagine caricata: 3477
+[WP] Status attach image: 200
+[OK] Pubblicato: WWE RAW: Anticipazioni del 4 Maggio 2026, Card Completa e Note dal Backstage Rivelate
+[PENDING] Coda salvata: 0 elementi
+[BOT] News candidate totali: 8 | mode=normal | max nuove=3 | pending pubblicati=1
+[BOT] Elaborazione: Rick Boogs Changes Stance on Wrestling Return Nearly 3 Years After WWE Release
+[BOT] semantic_id=rick-boogs-changes-stance-on-wrestling-return-nearly-3-years-after-wwe-release
+[SCORE] iniziale=83 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=83 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash | blocchi testo=13
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/rick-boogs-changes-stance-on-wrestling-return-nearly-3-years-after-wwe-release-52.jpg
+[MEDIA] Immagine caricata: 3480
+[WP] Status attach image: 200
+[OK] Pubblicato: Rick Boogs cambia posizione sul ritorno nel wrestling a quasi 3 anni dal rilascio dalla WWE
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: CM Punk's Status for WWE Backlash Revealed Amid TV Absence
+[BOT] semantic_id=cm-punks-status-for-wwe-backlash-revealed-amid-tv-absence
+[SCORE] iniziale=77 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, embed=1
+[BOT] Embed trovati: 2
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: cm punk, nomi forti lead: danhausen, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=8
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/cm-punks-status-for-wwe-backlash-revealed-amid-tv-absence-33.jpg
+[MEDIA] Immagine caricata: 3483
+[WP] Status attach image: 200
+[OK] Pubblicato: Status di CM Punk per WWE Backlash Rivelato Tra Assenza Televisiva
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Booker T Believes Kofi Kingston and Xavier Woods' WWE Exit Is a Smart Business Move
+[BOT] semantic_id=booker-t-believes-kofi-kingston-and-xavier-woods-wwe-exit-is-a-smart-business-move
+[SCORE] iniziale=72 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, embed=1
+[BOT] Embed trovati: 2
+[SCORE] raffinato=100 priority=high | WWE/main roster, nomi forti titolo: booker t, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, contratto, PLE/PPV, opinione generica
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: Expecting ',' delimiter: line 1 column 3661 (char 3660)
+[GEMINI] Uso modello: gemini-2.5-flash
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash | blocchi testo=15
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/booker-t-believes-kofi-kingston-and-xavier-woods-wwe-exit-is-a-smart-business-move-04.jpg
+[MEDIA] Immagine caricata: 3487
+[WP] Status attach image: 200
+[OK] Pubblicato: Booker T Ritiene che l'Uscita di Kofi Kingston e Xavier Woods dalla WWE Sia una Mossa Commerciale Intelligente
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 4 articoli (1 pending + 3 nuove) su 5 candidati provati | mode=normal
+===== RUN END [2026-05-05 11:51:54] VERSION [v59 (0253b52)] =====
+
