@@ -2617,3 +2617,103 @@
 [BOT] Pubblicati 4 articoli (1 pending + 3 nuove) su 7 candidati provati | mode=normal
 ===== RUN END [2026-05-05 17:18:09] VERSION [v59 (4559c1e)] =====
 
+
+===== RUN START [2026-05-05 19:10:44] VERSION [v59 (de0d3b2)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (12/75): Khamzat Chimaev Declines RAF Match With Olympic Champion In Favor Of UFC Star
+[SKIP] Score sotto soglia editoriale (36/75): TNA Impact Viewership & Ratings Report, 4/30/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165164/wwe-pay-cuts-contract-renegotiations-backstage-update/
+[SKIP] Score sotto soglia editoriale (18/75): Tony Khan Comments On Potential AEW Involvement From Kevin Nealon & Danny DeVito
+[SKIP] event_key confermata su WordPress: event:roman-reigns-contract - Roman Reigns Delivers Post-Raw Promo Promising Better Outcome At WWE Backlash
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164719/wwe-nikki-brie-bella-vows-return-injury/
+[SKIP] Score sotto soglia editoriale (24/75): Royce Keys Explains Why He Decided To Open Up In WWE SmackDown Video Package
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164654/kevin-owens-wwe-new-day-leaving-turning/
+[SKIP] Score sotto soglia editoriale (36/75): Kendal Grey Explains Why She's In No Rush To Leave WWE NXT
+[SKIP] Score sotto soglia editoriale (22/75): WWE RAW 5/4/2026: 3 Things We Hated & 3 Things We Loved
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (32/75): Bobby Lashley Calls WWE Letting The New Day Leave a Major Fumble
+[SKIP] Score sotto soglia editoriale (8/75): Val Venis Targets MJF Height With New Personal Jabs
+[SKIP] Score sotto soglia editoriale (28/75): Scarlett Bordeaux Kisses Tiffany Stratton During Wild Bikini Boat Party
+[SKIP] Score sotto soglia editoriale (28/75): Lola Vice Drops Cheeky Poolside Bikini Photos Showing Off NXT and AAA Gold
+[SKIP] event_key confermata su WordPress: event:roman-reigns-title - Jacob Fatu Calls Roman Reigns "Greatest Of All Time" Ahead Of WWE Backlash Match
+[SKIP] URL già in history: https://www.ringsidenews.com/evils-wwe-name-revealed-internally-nxt-debut/
+[SKIP] Score sotto soglia editoriale (0/75): Chelsea Green Details Scary 228 Heart Rate Before Procedure
+[SKIP] URL già in history: https://www.ringsidenews.com/inside-wwe-nxt-writing-schedule-revealed-new-writer/
+[SCORE] 100 high - Becky Lynch Calls Out Sol Ruca After WWE Raw Encounter: 'She Makes Me Want To Puke' | WWE/main roster, top star titolo: becky lynch, impatto roster/storyline, WWE main roster + storyline/evento, contratto, combo top name titolo + evento forte, show settimanale
+[SCORE] 76 medium - WWE Gave Talent Just Days To Accept Pay Cuts Or Leave Company | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, breaking/major update
+[SCORE] 73 medium - Backstage Report On Original Creative Plans For LA Knight Following WWE WrestleMania | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v48 tier2: 55-74
+[SCORE] 72 medium - WWE Asked Talent to Take Massive Pay Cuts As Part of "Millions" in Payroll Reductions | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, release/addio, v48 tier2: 55-74
+[SCORE] 72 medium - TKO Execs Cash In Millions While WWE Talent Take Pay Cuts | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, release/addio, v48 tier2: 55-74
+[SCORE] 66 medium - WWE Contract Strategy Facing Backlash As Talent Confidence Drops | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v48 tier2: 55-74
+[SCORE] 66 medium - El Hijo Del Vikingo Reportedly Suffers Injury During Lucha Libre AAA Episode | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, infortunio, v48 tier2: 55-74
+[SCORE] 62 medium - WWE HOFer Kevin Nash On Hulk Hogan Documentary: 'Made Me Really F***ing Sad' | WWE/main roster, business/contratti WWE-TKO, ritorno/debutto, v48 tier2: 55-74
+[SCORE] 60 medium - Backstage Update On Former NJPW Star EVIL's New Name In WWE NXT | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, v48 tier2: 55-74
+[SCORE] 55 low - Charlotte Flair Identifies WWE Backlash Match She Believes Will 'Steal The Show' | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, opinione generica, floor WWE main roster storyline, v48 tier2: 55-74
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 17 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Becky Lynch Calls Out Sol Ruca After WWE Raw Encounter: 'She Makes Me Want To Puke'
+[BOT] semantic_id=becky-lynch-calls-out-sol-ruca-after-wwe-raw-encounter-she-makes-me-want-to-puke
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: becky lynch, impatto roster/storyline, WWE main roster + storyline/evento, contratto, combo top name titolo + evento forte, show settimanale, opinione generica
+[SKIP] News core già pubblicata da altra fonte: Becky Lynch Calls Out Sol Ruca After WWE Raw Encounter: 'She Makes Me Want To Puke'
+[SKIP] news_core_key=contract-nxt-raw-wwe
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: WWE Gave Talent Just Days To Accept Pay Cuts Or Leave Company
+[BOT] semantic_id=wwe-gave-talent-just-days-to-accept-pay-cuts-or-leave-company
+[SCORE] iniziale=76 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash
+[GEMINI] Modello gemini-2.5-flash scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[BLOCKSEQ] Traduzione strutturata fallita: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-gave-talent-just-days-to-accept-pay-cuts-or-leave-company-58.jpg
+[MEDIA] Immagine caricata: 3523
+[WP] Status attach image: 200
+[OK] Pubblicato: WWE: Tagli di stipendio, solo pochi giorni per decidere se restare o andare via
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Backstage Report On Original Creative Plans For LA Knight Following WWE WrestleMania
+[BOT] semantic_id=backstage-report-on-original-creative-plans-for-la-knight-following-wwe-wrestlemania
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, embed=0
+[SCORE] raffinato=100 priority=high | WWE/main roster, nomi forti lead: logan paul, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:cody-rhodes-logan-paul-diagnosis -> event:cody-rhodes-logan-paul-diagnosis-followup-backstage-creative-la-knight-following
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=4
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/backstage-report-on-original-creative-plans-for-la-knight-following-wwe-wrestlemania/l-intro-1778004116.jpg
+[MEDIA] Immagine caricata: 3526
+[WP] Status attach image: 200
+[OK] Pubblicato: Rapporto dal Backstage sui Piani Creativi Originali per LA Knight dopo WrestleMania 42
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: WWE Asked Talent to Take Massive Pay Cuts As Part of "Millions" in Payroll Reductions
+[BOT] semantic_id=wwe-asked-talent-to-take-massive-pay-cuts-as-part-of-millions-in-payroll-reductions
+[SCORE] iniziale=72 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=9
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-asked-talent-to-take-massive-pay-cuts-as-part-of-millions-in-payroll-reductions-25.jpg
+[MEDIA] Immagine caricata: 3529
+[WP] Status attach image: 200
+[OK] Pubblicato: La WWE ha chiesto ai wrestler di accettare tagli salariali massicci come parte di "milioni" di riduzioni del personale
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 4 candidati provati | mode=normal
+===== RUN END [2026-05-05 19:10:44] VERSION [v59 (de0d3b2)] =====
+
