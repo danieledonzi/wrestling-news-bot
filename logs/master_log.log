@@ -3487,3 +3487,96 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
 ===== RUN END [2026-05-06 13:52:59] VERSION [v59 (a40f5ea)] =====
 
+
+===== RUN START [2026-05-06 15:59:38] VERSION [v59 (53032d9)] =====
+[WP] Health check OK: 200
+[PENDING] Rimuovo report già pubblicato: report:wwe-nxt-2026-05-05
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (18/75): Ted Turner Dead, Former WCW Owner & Monday Night Wars Vet Dies At 87
+[SKIP] Score sotto soglia editoriale (18/75): Paul Wight Isn't Ready To Retire But Doesn't Want To 'Steal Glory' From AEW Roster
+[SKIP] Score sotto soglia editoriale (28/75): Cuatrero Reportedly Found Guilty Of Attempted Femicide Against WWE's Stephanie Vaquer
+[SKIP] Score sotto soglia editoriale (36/75): WWE SmackDown Ratings & Viewership Report: 5/1/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165802/wwe-smackdown-bully-ray-ricky-saints-concerns-main-roster-debut/
+[SKIP] Score sotto soglia editoriale (22/75): Matt Hardy Comments On TNA Pulling Wrestlers, Says Boss Carlos Silva Is 'Learning'
+[SKIP] Score sotto soglia editoriale (16/75): WWE NXT - 5/5/2026: 3 Things We Hated And 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (12/75): BMF Champion Charles Oliveira Signs New Eight-Fight Deal With UFC
+[SKIP] Score sotto soglia editoriale (20/75): Royce Keys Teases Union With WWE's Bloodline: 'I've Known That Family' For A While
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165718/former-iwgp-heavyweight-champion-evil-new-name-wwe-nxt-debut-set/
+[SKIP] Score sotto soglia editoriale (0/75): Ronda Rousey's Last UFC Opponent Happy To See Her Back In MMA
+[SKIP] Score sotto soglia editoriale (12/75): Amanda Nunes Tells UFC Champion To Get Her 'S*** Together' So They Can Fight
+[SKIP] Score sotto soglia editoriale (24/75): Liv Morgan Details How New Self-Performed WWE Entrance Music Came About
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164633/wwe-nxt-may-5-mixed-tag-team-match-jaida-parker-kali-armstrong-more/
+[SKIP] event_key confermata su WordPress: event:roman-reigns-title - WWE Announces May Dates For Roman Reigns, Including Clash In Italy PLE
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165619/wwe-bully-ray-cody-rhodes-gunther-simplicity-bloody-mess/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (24/75): Will Ospreay Reveals Tony Khan Paid for His Neck Surgery: "More Expensive Than My House"
+[SKIP] Score sotto soglia editoriale (12/75): Former WCW Owner Ted Turner Passes Away at Age 87
+[SKIP] Score sotto soglia editoriale (18/75): Tony Schiavone Defends Jon Moxley and Will Ospreay Segment After Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/cody-rhodes-reveals-hes-preparing-potential-wwe-executive-role/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-made-last-minute-change-evils-name-before-nxt-reveal/
+[SKIP] Score sotto soglia editoriale (31/75): Corey Graves Explains Why Pat McAfee and Jelly Roll Involvement Felt Inorganic at WrestleMania 42
+[SKIP] Score sotto soglia editoriale (0/75): Gear Designer Accuses Jordynne Grace of Hurting His Livelihood With Irresponsible Tweet
+[SKIP] Score sotto soglia editoriale (36/75): WWE Continues Production Shake-Up With New Senior Producer Hire
+[SKIP] Score sotto soglia editoriale (39/75): The Bella Twins React After Fan's Sign Gets Confiscated at WWE RAW
+[SKIP] Score sotto soglia editoriale (28/75): Stephanie Vaquer's Ex-Boyfriend El Cuatrero Found Guilty of Domestic Violence and Attempted Femicide
+[SCORE] 83 high - Jeff Jarrett On WWE Returning To Saudi Arabia Amid War With Iran: 'It Shocks Me' | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[SCORE] 76 medium - Another NJPW Star Expected to Sign With WWE After EVIL's NXT Debut | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale
+[SCORE] 76 medium - Blake Monroe's WWE SmackDown Debut Timeline Revealed After Coming Soon Tease | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale
+[SCORE] 64 medium - David Otunga Breaks Down Whether Netflix Can And Will Sue Bars For Streaming WWE Raw | WWE/main roster, business/contratti WWE-TKO, business/media rights, show settimanale, v48 tier2: 55-74
+[SCORE] 63 medium - Trick Williams On Lil Yachty's WWE Involvement: He Wants To Be 'One Of The Boys' | WWE/main roster, nomi forti titolo: trick williams, WWE main roster + storyline/evento, titolo/championship, v48 tier2: 55-74
+[SCORE] 55 low - WWE's Charlotte Flair On Her Father Ric Flair: 'He's In Timeout A Lot' | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - Braun Strowman Claims WWE Can't Afford Him for Oba Femi Match | WWE/main roster, nomi forti titolo: oba femi, WWE main roster + storyline/evento, intervista/opinione, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 52 low - Will Ospreay Addresses New Day Potentially Joining AEW After WWE Exit | WWE/main roster, impatto roster/storyline, breaking/major update, v48 tier3: 45-54 contestuale
+[SCORE] 47 low - Cody Rhodes Calls Out Obsession With Attendance and Ratings in Wrestling | top star titolo: cody rhodes, nome WWE: cody rhodes, breaking/major update, opinione generica, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 9 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Jeff Jarrett On WWE Returning To Saudi Arabia Amid War With Iran: 'It Shocks Me'
+[BOT] semantic_id=jeff-jarrett-on-wwe-returning-to-saudi-arabia-amid-war-with-iran-it-shocks-me
+[SCORE] iniziale=83 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, embed=0
+[SCORE] raffinato=99 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, opinione generica
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=6
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/jeff-jarrett-on-wwe-returning-to-saudi-arabia-amid-war-with-iran-it-shocks-me/l-intro-1778052931.jpg
+[MEDIA] Immagine caricata: 3603
+[WP] Status attach image: 200
+[OK] Pubblicato: Jeff Jarrett sulla WWE che torna in Arabia Saudita in mezzo alla guerra con l'Iran: "Mi sciocca"
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Another NJPW Star Expected to Sign With WWE After EVIL's NXT Debut
+[BOT] semantic_id=another-njpw-star-expected-to-sign-with-wwe-after-evils-nxt-debut
+[SCORE] iniziale=76 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=76 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, developmental secondario
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=9
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/another-njpw-star-expected-to-sign-with-wwe-after-evils-nxt-debut-10.jpg
+[MEDIA] Immagine caricata: 3606
+[WP] Status attach image: 200
+[OK] Pubblicato: Un'altra stella della NJPW dovrebbe firmare con la WWE dopo il debutto di EVIL in NXT
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Blake Monroe's WWE SmackDown Debut Timeline Revealed After Coming Soon Tease
+[BOT] semantic_id=blake-monroes-wwe-smackdown-debut-timeline-revealed-after-coming-soon-tease
+[SCORE] iniziale=76 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=83 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=9
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/blake-monroes-wwe-smackdown-debut-timeline-revealed-after-coming-soon-tease-55.jpg
+[MEDIA] Immagine caricata: 3609
+[WP] Status attach image: 200
+[OK] Pubblicato: Svelata la Timeline per il Debutto di Blake Monroe in WWE SmackDown dopo la Tease "Coming Soon"
+[PENDING] Coda salvata: 1 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
+===== RUN END [2026-05-06 15:59:38] VERSION [v59 (53032d9)] =====
+
