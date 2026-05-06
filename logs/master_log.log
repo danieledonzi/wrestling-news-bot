@@ -3580,3 +3580,59 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
 ===== RUN END [2026-05-06 15:59:38] VERSION [v59 (53032d9)] =====
 
+
+===== RUN START [2026-05-06 17:18:32] VERSION [v59_bis (1c9d5a6)] =====
+[WP] WordPress non raggiungibile: HTTPSConnectionPool(host='news.news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by NameResolutionError("HTTPSConnection(host='news.news.openwrestlingtv.com', port=443): Failed to resolve 'news.news.openwrestlingtv.com' ([Errno -2] Name or service not known)"))
+[WP] Verifica post esistente fallita: HTTPSConnectionPool(host='news.news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?search=https%3A%2F%2Fwww.wrestlinginc.com%2F2164633%2Fwwe-nxt-may-5-mixed-tag-team-match-jaida-parker-kali-armstrong-more%2F&per_page=10 (Caused by NameResolutionError("HTTPSConnection(host='news.news.openwrestlingtv.com', port=443): Failed to resolve 'news.news.openwrestlingtv.com' ([Errno -2] Name or service not known)"))
+[WP] Verifica event_key fallita (report:wwe-nxt-2026-05-05): HTTPSConnectionPool(host='news.news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?search=WWE+NXT+Results+5%2F5+-+Mixed+Tag+Team+Match%2C+Jaida+Parker+Faces+Kali+Armstrong+%26&per_page=20&status=publish (Caused by NameResolutionError("HTTPSConnection(host='news.news.openwrestlingtv.com', port=443): Failed to resolve 'news.news.openwrestlingtv.com' ([Errno -2] Name or service not known)"))
+[WP] Verifica event_key fallita (report:wwe-nxt-2026-05-05): HTTPSConnectionPool(host='news.news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?search=wwe+nxt+2026&per_page=20&status=publish (Caused by NameResolutionError("HTTPSConnection(host='news.news.openwrestlingtv.com', port=443): Failed to resolve 'news.news.openwrestlingtv.com' ([Errno -2] Name or service not known)"))
+[WP] Verifica event_key fallita (report:wwe-nxt-2026-05-05): HTTPSConnectionPool(host='news.news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?search=results+mixed+tag+team+jaida&per_page=20&status=publish (Caused by NameResolutionError("HTTPSConnection(host='news.news.openwrestlingtv.com', port=443): Failed to resolve 'news.news.openwrestlingtv.com' ([Errno -2] Name or service not known)"))
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (34/75): AEW Collision Ratings & Viewership Report: 5/2/2026
+[SKIP] Score sotto soglia editoriale (18/75): Ted Turner Dead, Former WCW Owner & Monday Night Wars Vet Dies At 87
+[SKIP] Score sotto soglia editoriale (18/75): Paul Wight Isn't Ready To Retire But Doesn't Want To 'Steal Glory' From AEW Roster
+[SKIP] Score sotto soglia editoriale (28/75): Cuatrero Reportedly Found Guilty Of Attempted Femicide Against WWE's Stephanie Vaquer
+[SKIP] Score sotto soglia editoriale (36/75): WWE SmackDown Ratings & Viewership Report: 5/1/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165806/wwe-jeff-jarrett-saudi-arabia-iran-war-it-shocks-me/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165802/wwe-smackdown-bully-ray-ricky-saints-concerns-main-roster-debut/
+[SKIP] Score sotto soglia editoriale (22/75): Matt Hardy Comments On TNA Pulling Wrestlers, Says Boss Carlos Silva Is 'Learning'
+[SKIP] Score sotto soglia editoriale (16/75): WWE NXT - 5/5/2026: 3 Things We Hated And 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (12/75): BMF Champion Charles Oliveira Signs New Eight-Fight Deal With UFC
+[SKIP] Score sotto soglia editoriale (20/75): Royce Keys Teases Union With WWE's Bloodline: 'I've Known That Family' For A While
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165718/former-iwgp-heavyweight-champion-evil-new-name-wwe-nxt-debut-set/
+[SKIP] Score sotto soglia editoriale (0/75): Ronda Rousey's Last UFC Opponent Happy To See Her Back In MMA
+[SKIP] Score sotto soglia editoriale (12/75): Amanda Nunes Tells UFC Champion To Get Her 'S*** Together' So They Can Fight
+[SKIP] Score sotto soglia editoriale (24/75): Liv Morgan Details How New Self-Performed WWE Entrance Music Came About
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164633/wwe-nxt-may-5-mixed-tag-team-match-jaida-parker-kali-armstrong-more/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (18/75): Pro Wrestling World Reacts to Ted Turner's Passing
+[SKIP] URL già in history: https://www.ringsidenews.com/another-njpw-star-expected-sign-wwe-evils-nxt-debut/
+[SKIP] Score sotto soglia editoriale (24/75): Will Ospreay Reveals Tony Khan Paid for His Neck Surgery: "More Expensive Than My House"
+[SKIP] Score sotto soglia editoriale (12/75): Former WCW Owner Ted Turner Passes Away at Age 87
+[SKIP] URL già in history: https://www.ringsidenews.com/blake-monroes-wwe-smackdown-debut-timeline-revealed-coming-soon-tease/
+[SKIP] Score sotto soglia editoriale (18/75): Tony Schiavone Defends Jon Moxley and Will Ospreay Segment After Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/cody-rhodes-reveals-hes-preparing-potential-wwe-executive-role/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-made-last-minute-change-evils-name-before-nxt-reveal/
+[SKIP] Score sotto soglia editoriale (31/75): Corey Graves Explains Why Pat McAfee and Jelly Roll Involvement Felt Inorganic at WrestleMania 42
+[SKIP] Score sotto soglia editoriale (0/75): Gear Designer Accuses Jordynne Grace of Hurting His Livelihood With Irresponsible Tweet
+[SKIP] Score sotto soglia editoriale (36/75): WWE Continues Production Shake-Up With New Senior Producer Hire
+[SKIP] Score sotto soglia editoriale (39/75): The Bella Twins React After Fan's Sign Gets Confiscated at WWE RAW
+[SCORE] 92 high - WWE Announces May Dates For Roman Reigns, Including Clash In Italy PLE | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, titolo/championship, PLE/PPV
+[SCORE] 76 medium - WWE Has Major Plans for Blake Monroe on SmackDown | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale
+[SCORE] 64 medium - David Otunga Breaks Down Whether Netflix Can And Will Sue Bars For Streaming WWE Raw | WWE/main roster, business/contratti WWE-TKO, business/media rights, show settimanale, v48 tier2: 55-74
+[SCORE] 63 medium - Trick Williams On Lil Yachty's WWE Involvement: He Wants To Be 'One Of The Boys' | WWE/main roster, nomi forti titolo: trick williams, WWE main roster + storyline/evento, titolo/championship, v48 tier2: 55-74
+[SCORE] 55 low - WWE's Charlotte Flair On Her Father Ric Flair: 'He's In Timeout A Lot' | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 52 low - Will Ospreay Addresses New Day Potentially Joining AEW After WWE Exit | WWE/main roster, impatto roster/storyline, breaking/major update, v48 tier3: 45-54 contestuale
+[SCORE] 47 low - Cody Rhodes Calls Out Obsession With Attendance and Ratings in Wrestling | top star titolo: cody rhodes, nome WWE: cody rhodes, breaking/major update, opinione generica, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[BOT] WordPress offline: assegno score e salvo solo i candidati che sarebbero stati pubblicati, senza chiamare Gemini.
+[PENDING] Coda salvata: 2 elementi
+[PENDING] Salvata news high (92): WWE Announces May Dates For Roman Reigns, Including Clash In Italy PLE
+[PENDING] Coda salvata: 3 elementi
+[PENDING] Salvata news medium (76): WWE Has Major Plans for Blake Monroe on SmackDown
+[PENDING] Coda salvata: 4 elementi
+[PENDING] Salvata news medium (64): David Otunga Breaks Down Whether Netflix Can And Will Sue Bars For Streaming WWE Raw
+[PENDING] Candidati salvati per dopo: 3
+===== RUN END [2026-05-06 17:18:32] VERSION [v59_bis (1c9d5a6)] =====
+
