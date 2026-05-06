@@ -3766,3 +3766,193 @@
 [BOT] WordPress instabile durante pending: stop per evitare spreco API
 ===== RUN END [2026-05-06 19:00:32] VERSION [v59_ter (860ca27)] =====
 
+
+===== RUN START [2026-05-06 19:06:05] VERSION [v59_ter (0e0d727)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (18/75): Wrestling World Reacts To Passing Of Former WCW Owner Ted Turner
+[SKIP] Score sotto soglia editoriale (34/75): AEW Collision Ratings & Viewership Report: 5/2/2026
+[SKIP] Score sotto soglia editoriale (18/75): Ted Turner Dead, Former WCW Owner & Monday Night Wars Vet Dies At 87
+[SKIP] Score sotto soglia editoriale (18/75): Paul Wight Isn't Ready To Retire But Doesn't Want To 'Steal Glory' From AEW Roster
+[SKIP] Score sotto soglia editoriale (28/75): Cuatrero Reportedly Found Guilty Of Attempted Femicide Against WWE's Stephanie Vaquer
+[SKIP] Score sotto soglia editoriale (36/75): WWE SmackDown Ratings & Viewership Report: 5/1/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165806/wwe-jeff-jarrett-saudi-arabia-iran-war-it-shocks-me/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165802/wwe-smackdown-bully-ray-ricky-saints-concerns-main-roster-debut/
+[SKIP] Score sotto soglia editoriale (22/75): Matt Hardy Comments On TNA Pulling Wrestlers, Says Boss Carlos Silva Is 'Learning'
+[SKIP] Score sotto soglia editoriale (16/75): WWE NXT - 5/5/2026: 3 Things We Hated And 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (12/75): BMF Champion Charles Oliveira Signs New Eight-Fight Deal With UFC
+[SKIP] Score sotto soglia editoriale (20/75): Royce Keys Teases Union With WWE's Bloodline: 'I've Known That Family' For A While
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165718/former-iwgp-heavyweight-champion-evil-new-name-wwe-nxt-debut-set/
+[SKIP] Score sotto soglia editoriale (0/75): Ronda Rousey's Last UFC Opponent Happy To See Her Back In MMA
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (26/75): Eric Bischoff Pays Tribute to Ted Turner Following His Passing
+[SKIP] Score sotto soglia editoriale (33/75): Stephanie Vaquer's Ex-Boyfriend El Cuatrero Could Face More Than 30 Years in Prison After Guilty Verdict
+[SKIP] Score sotto soglia editoriale (18/75): Pro Wrestling World Reacts to Ted Turner's Passing
+[SKIP] URL già in history: https://www.ringsidenews.com/another-njpw-star-expected-sign-wwe-evils-nxt-debut/
+[SKIP] Score sotto soglia editoriale (24/75): Will Ospreay Reveals Tony Khan Paid for His Neck Surgery: "More Expensive Than My House"
+[SKIP] Score sotto soglia editoriale (12/75): Former WCW Owner Ted Turner Passes Away at Age 87
+[SKIP] URL già in history: https://www.ringsidenews.com/blake-monroes-wwe-smackdown-debut-timeline-revealed-coming-soon-tease/
+[SKIP] Score sotto soglia editoriale (18/75): Tony Schiavone Defends Jon Moxley and Will Ospreay Segment After Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/cody-rhodes-reveals-hes-preparing-potential-wwe-executive-role/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-made-last-minute-change-evils-name-before-nxt-reveal/
+[SKIP] Score sotto soglia editoriale (31/75): Corey Graves Explains Why Pat McAfee and Jelly Roll Involvement Felt Inorganic at WrestleMania 42
+[SKIP] Score sotto soglia editoriale (0/75): Gear Designer Accuses Jordynne Grace of Hurting His Livelihood With Irresponsible Tweet
+[SCORE] 76 medium - WWE Has Major Plans for Blake Monroe on SmackDown | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale
+[SCORE] 69 medium - Breaking Down The Belts: Trick Williams' WWE Men's United States Championship | WWE/main roster, nomi forti titolo: trick williams, WWE main roster + storyline/evento, breaking/major update, v48 tier2: 55-74
+[SCORE] 68 medium - Former WWE Star Aleister Black Rumored To Be In Active Talks With AEW Despite Reports | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v48 tier2: 55-74
+[SCORE] 64 medium - David Otunga Breaks Down Whether Netflix Can And Will Sue Bars For Streaming WWE Raw | WWE/main roster, business/contratti WWE-TKO, business/media rights, show settimanale, v48 tier2: 55-74
+[SCORE] 63 medium - Trick Williams On Lil Yachty's WWE Involvement: He Wants To Be 'One Of The Boys' | WWE/main roster, nomi forti titolo: trick williams, WWE main roster + storyline/evento, titolo/championship, v48 tier2: 55-74
+[SCORE] 59 low - WWE's Jacob Fatu Discusses Relationship With & Match Against Roman Reigns | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, intervista/opinione, opinione generica, v48 tier2: 55-74
+[SCORE] 55 low - WWE's Charlotte Flair On Her Father Ric Flair: 'He's In Timeout A Lot' | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 52 low - Will Ospreay Addresses New Day Potentially Joining AEW After WWE Exit | WWE/main roster, impatto roster/storyline, breaking/major update, v48 tier3: 45-54 contestuale
+[SCORE] 47 low - Cody Rhodes Calls Out Obsession With Attendance and Ratings in Wrestling | top star titolo: cody rhodes, nome WWE: cody rhodes, breaking/major update, opinione generica, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 4
+[BOT] Elaborazione: WWE Announces May Dates For Roman Reigns, Including Clash In Italy PLE
+[BOT] semantic_id=wwe-announces-may-dates-for-roman-reigns-including-clash-in-italy-ple
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, combo top name titolo + evento forte, PLE/PPV
+[FIX] Event key in history ma non confermata su WordPress: event:roman-reigns-title - provo a pubblicare
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=8
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-announces-may-dates-for-roman-reigns-including-clash-in-italy-ple/l-intro-1778021277.jpg
+[MEDIA] Immagine caricata: 3683
+[WP] Status attach image: 200
+[OK] Pubblicato: WWE annuncia date di maggio per Roman Reigns, inclusa la sua presenza in Italia per un PLE
+[PENDING] Coda salvata: 3 elementi
+[BOT] Elaborazione: WWE Has Major Plans for Blake Monroe on SmackDown
+[BOT] semantic_id=wwe-has-major-plans-for-blake-monroe-on-smackdown
+[SCORE] iniziale=83 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, embed=1
+[BOT] Embed trovati: 2
+[SCORE] raffinato=83 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=8
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-has-major-plans-for-blake-monroe-on-smackdown-15.jpg
+[MEDIA] Immagine caricata: 3686
+[WP] Status attach image: 200
+[OK] Pubblicato: La WWE ha grandi piani per Blake Monroe a SmackDown
+[PENDING] Coda salvata: 2 elementi
+[REPORT] Event key in history ma non confermata su WordPress: report:wwe-nxt-2026-05-05 - provo recupero
+[REPORT] Valuto fonti per report: report:wwe-nxt-2026-05-05
+[SCRAPE] Articolo results rilevato: testo completo (13113 caratteri)
+[REPORT] Fonte migliore: score_completezza=223 | www.wrestlinginc.com | WWE NXT Results 5/5 - Mixed Tag Team Match, Jaida Parker Faces Kali Armstrong & More
+[BOT] Elaborazione: WWE NXT Results 5/5 - Mixed Tag Team Match, Jaida Parker Faces Kali Armstrong & More
+[BOT] semantic_id=report-wwe-nxt-2026-05-05
+[SCORE] iniziale=75 priority=medium
+[SKIP] Già pubblicato o già in history: WWE NXT Results 5/5 - Mixed Tag Team Match, Jaida Parker Faces Kali Armstrong & More
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: David Otunga Breaks Down Whether Netflix Can And Will Sue Bars For Streaming WWE Raw
+[BOT] semantic_id=david-otunga-breaks-down-whether-netflix-can-and-will-sue-bars-for-streaming-wwe-raw
+[SCORE] iniziale=64 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=83 priority=high | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, opinione generica
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=3
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-raw-david-otunga-netflix-sue-bars/l-intro-1778073596.jpg
+[MEDIA] Immagine caricata: 3689
+[WP] Status attach image: 200
+[OK] Pubblicato: David Otunga analizza se Netflix può e dovrà fare causa ai bar per lo streaming di WWE Raw
+[PENDING] Coda salvata: 0 elementi
+[BOT] News candidate totali: 9 | mode=normal | max nuove=3 | pending pubblicati=3
+[BOT] Elaborazione: WWE Has Major Plans for Blake Monroe on SmackDown
+[BOT] semantic_id=wwe-has-major-plans-for-blake-monroe-on-smackdown
+[SCORE] iniziale=76 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, embed=1
+[BOT] Embed trovati: 2
+[SCORE] raffinato=83 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[SKIP] News probabilmente già pubblicata da altra fonte: WWE Has Major Plans for Blake Monroe on SmackDown
+[SKIP] story_fingerprint=has-major-blake-monroe-smackdown-debut-isn-just-about-showing-anymore-already-lined-her-aired-vignette-glamour-april-edition-quickly-followed-suggesting-expected-blue
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Breaking Down The Belts: Trick Williams' WWE Men's United States Championship
+[BOT] semantic_id=breaking-down-the-belts-trick-williams-wwe-mens-united-states-championship
+[SCORE] iniziale=69 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, embed=0
+[SCORE] raffinato=96 priority=high | WWE/main roster, nomi forti titolo: trick williams, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: Expecting ',' delimiter: line 1 column 4391 (char 4390)
+[GEMINI] Uso modello: gemini-2.5-flash
+[GEMINI] Modello gemini-2.5-flash scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[BLOCKSEQ] Traduzione strutturata fallita: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[QUALITY] Problemi rilevati: ['Testo sospetto o troppo breve']
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Output ancora sospetto dopo revisione: ['Testo sospetto o troppo breve']
+[SKIP] Traduzione fallita: Breaking Down The Belts: Trick Williams' WWE Men's United States Championship (err_type=validation)
+[BOT] Elaborazione: Former WWE Star Aleister Black Rumored To Be In Active Talks With AEW Despite Reports
+[BOT] semantic_id=former-wwe-star-aleister-black-rumored-to-be-in-active-talks-with-aew-despite-reports
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, embed=0
+[SCORE] raffinato=68 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Former WWE Star Aleister Black Rumored To Be In Active Talks With AEW Despite Reports
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata fallita: Body sospetto o troppo meta
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Soft mismatch titolo: Aleister Black in trattative attive con AEW, nonostante voci contrastanti
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/former-wwe-star-aleister-black-rumored-to-be-in-active-talks-with-aew-despite-reports/l-intro-1778092760.jpg
+[MEDIA] Immagine caricata: 3692
+[WP] Status attach image: 200
+[OK] Pubblicato: Aleister Black in trattative attive con AEW, nonostante voci contrastanti
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: David Otunga Breaks Down Whether Netflix Can And Will Sue Bars For Streaming WWE Raw
+[BOT] semantic_id=david-otunga-breaks-down-whether-netflix-can-and-will-sue-bars-for-streaming-wwe-raw
+[SCORE] iniziale=64 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=83 priority=high | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, opinione generica
+[SKIP] News probabilmente già pubblicata da altra fonte: David Otunga Breaks Down Whether Netflix Can And Will Sue Bars For Streaming WWE Raw
+[SKIP] story_fingerprint=david-otunga-breaks-down-whether-netflix-can-will-sue-bars-streaming-raw-real-life-lawyer-star-has-something-about-corporate-law-intellectual-property-earlier
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Trick Williams On Lil Yachty's WWE Involvement: He Wants To Be 'One Of The Boys'
+[BOT] semantic_id=trick-williams-on-lil-yachtys-wwe-involvement-he-wants-to-be-one-of-the-boys
+[SCORE] iniziale=63 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=86 priority=high | WWE/main roster, nomi forti titolo: trick williams, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, opinione generica
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash | blocchi testo=6
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/trick-williams-on-lil-yachtys-wwe-involvement-he-wants-to-be-one-of-the-boys/l-intro-1778066450.jpg
+[MEDIA] Immagine caricata: 3695
+[WP] Status attach image: 200
+[OK] Pubblicato: Trick Williams sul coinvolgimento di Lil Yachty in WWE: Vuole essere 'uno dei ragazzi'
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: WWE's Jacob Fatu Discusses Relationship With & Match Against Roman Reigns
+[BOT] semantic_id=wwes-jacob-fatu-discusses-relationship-with-match-against-roman-reigns
+[SCORE] iniziale=59 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: roman reigns, business/contratti WWE-TKO, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, opinione generica
+[FIX] Event key in history ma non confermata su WordPress: event:roman-reigns-diagnosis - provo a pubblicare
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash | blocchi testo=5
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwes-jacob-fatu-discusses-relationship-with-match-against-roman-reigns/l-intro-1778093925.jpg
+[MEDIA] Immagine caricata: 3698
+[WP] Status attach image: 200
+[OK] Pubblicato: Jacob Fatu della WWE discute il rapporto e il match contro Roman Reigns
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 6 articoli (3 pending + 3 nuove) su 10 candidati provati | mode=normal
+===== RUN END [2026-05-06 19:06:05] VERSION [v59_ter (0e0d727)] =====
+
