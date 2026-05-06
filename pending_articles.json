@@ -1,1 +1,58 @@
-[]
+[
+  {
+    "url": "https://www.ringsidenews.com/mark-shapiro-says-tko-not-concerned-about-decline-ticket-sales-wrestlemania-42/",
+    "title": "Mark Shapiro Says TKO Not Concerned About Decline in Ticket Sales for WrestleMania 42",
+    "semantic_id": "mark-shapiro-says-tko-not-concerned-about-decline-in-ticket-sales-for-wrestlemania-42",
+    "title_key": "mark-shapiro-says-tko-not-concerned-about-decline-ticket-sales",
+    "score": 63,
+    "priority": "medium",
+    "event_key": "",
+    "reasons": [
+      "WWE/main roster",
+      "business/contratti WWE-TKO",
+      "intervista/opinione",
+      "PLE/PPV",
+      "v48 tier2: 55-74"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "business/contratti WWE-TKO",
+      "intervista/opinione",
+      "PLE/PPV",
+      "v48 tier2: 55-74"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778125384.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778107434.095194,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.wrestlinginc.com/2166574/aew-denies-negotiations-wwe-aleister-black-malaki/",
+    "title": "Report: AEW Denies They're Currently In Negotiations With Ex-WWE Star Aleister Black",
+    "semantic_id": "report-aew-denies-theyre-currently-in-negotiations-with-ex-wwe-star-aleister-black",
+    "title_key": "denies-they-re-currently-negotiations-ex-star-aleister-black",
+    "score": 46,
+    "priority": "low",
+    "event_key": "",
+    "reasons": [
+      "WWE/main roster",
+      "impatto roster/storyline",
+      "contratto",
+      "v48 tier3: 45-54 contestuale"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "impatto roster/storyline",
+      "contratto",
+      "v48 tier3: 45-54 contestuale"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778125907.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778107433.6713994,
+    "attempts": 0
+  }
+]
