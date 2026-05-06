@@ -1,5 +1,32 @@
 [
   {
+    "url": "https://www.ringsidenews.com/aew-dynamitecollision-results-highlights-key-moments-may-6-2026/",
+    "title": "AEW Dynamite/Collision Results, Highlights and Key Moments for May 6, 2026",
+    "semantic_id": "aew-dynamitecollision-results-highlights-and-key-moments-for-may-6-2026",
+    "title_key": "dynamite-collision-results-highlights-key-moments-may-6",
+    "score": 75,
+    "priority": "medium",
+    "event_key": "event:darby-allin-title",
+    "reasons": [
+      "AEW",
+      "titolo/championship",
+      "show settimanale",
+      "report/results: bypass soglia editoriale"
+    ],
+    "score_reasons": [
+      "AEW",
+      "titolo/championship",
+      "show settimanale",
+      "report/results: bypass soglia editoriale"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778131860.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778111057.160898,
+    "attempts": 0
+  },
+  {
     "url": "https://www.ringsidenews.com/mark-shapiro-says-tko-not-concerned-about-decline-ticket-sales-wrestlemania-42/",
     "title": "Mark Shapiro Says TKO Not Concerned About Decline in Ticket Sales for WrestleMania 42",
     "semantic_id": "mark-shapiro-says-tko-not-concerned-about-decline-in-ticket-sales-for-wrestlemania-42",
