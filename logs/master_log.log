@@ -3322,3 +3322,73 @@
 [BOT] Pubblicati 4 articoli (1 pending + 3 nuove) su 5 candidati provati | mode=normal
 ===== RUN END [2026-05-06 08:15:09] VERSION [v59 (ef25caa)] =====
 
+
+===== RUN START [2026-05-06 11:01:28] VERSION [v59 (2b0b4de)] =====
+[WP] Health check OK: 200
+[PENDING] Rimuovo report già pubblicato: report:wwe-nxt-2026-05-05
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (16/75): WWE NXT - 5/5/2026: 3 Things We Hated And 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (12/75): BMF Champion Charles Oliveira Signs New Eight-Fight Deal With UFC
+[SKIP] Score sotto soglia editoriale (20/75): Royce Keys Teases Union With WWE's Bloodline: 'I've Known That Family' For A While
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165718/former-iwgp-heavyweight-champion-evil-new-name-wwe-nxt-debut-set/
+[SKIP] Score sotto soglia editoriale (0/75): Ronda Rousey's Last UFC Opponent Happy To See Her Back In MMA
+[SKIP] Score sotto soglia editoriale (12/75): Amanda Nunes Tells UFC Champion To Get Her 'S*** Together' So They Can Fight
+[SKIP] Score sotto soglia editoriale (24/75): Liv Morgan Details How New Self-Performed WWE Entrance Music Came About
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164633/wwe-nxt-may-5-mixed-tag-team-match-jaida-parker-kali-armstrong-more/
+[SKIP] event_key confermata su WordPress: event:roman-reigns-title - WWE Announces May Dates For Roman Reigns, Including Clash In Italy PLE
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165619/wwe-bully-ray-cody-rhodes-gunther-simplicity-bloody-mess/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165614/booker-t-wwe-releases-cuts-inevitable/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165573/wwe-raw-viewership-ratings-report-april-27-2026/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163203/wwe-wrestlemania-27-miz-rock-impersonating/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165532/wwe-raw-joe-hendry-music-video-fire-logan-paul/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165520/wwe-talent-pay-cuts-new-day-departure/
+[SKIP] Score sotto soglia editoriale (0/75): Amanda Nunes Addresses Future In UFC After Next Fight
+[SKIP] event_key confermata su WordPress: event:roman-reigns-title - Jacob Fatu On WWE Backlash World Title Match: 'I Prayed & I Cried For Days Like This'
+[SKIP] Score sotto soglia editoriale (12/75): Khamzat Chimaev Declines RAF Match With Olympic Champion In Favor Of UFC Star
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165370/wwe-nxt-evil-njpw-nox-raijin/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/major-ring-debut-booked-512-wwe-nxt/
+[SKIP] URL già in history: https://www.ringsidenews.com/noam-dar-makes-surprise-return-during-55-wwe-nxt/
+[SKIP] URL già in history: https://www.ringsidenews.com/fit-finlay-returns-television-during-55-wwe-nxt-deliver-serious-message/
+[SKIP] Score sotto soglia editoriale (28/75): WWE SmackDown Viewership Sees No Change on May 1, 2026
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-nxt-results-highlights-key-moments-may-5-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-version-tough-enough-new-twist-pitched/
+[SKIP] Score sotto soglia editoriale (22/75): Sting Reveals His Current Role in AEW After Retirement
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-edits-sol-ruca-raw-botch-social-media-debut-segment/
+[SKIP] Score sotto soglia editoriale (0/75): Alberto Del Rio Could Be Sent Back to Jail After Controversial Comments at Wrestling Show
+[SKIP] Score sotto soglia editoriale (38/75): Ex-WWE Tough Enough Contestant Daniel Rodimer Pushes To Dismiss Murder Charges With New Legal Arguments
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-raw-ranks-6-globally-netflix-april-27-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/roman-reigns-wwe-schedule-confirmed-new-dates-removal/
+[SKIP] URL già in history: https://www.ringsidenews.com/real-reason-tko-asking-wwe-talent-take-pay-cuts-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/brody-king-takes-shot-donald-trumps-wwe-hall-fame-status-amid-political-backlash/
+[SCORE] 55 low - Charlotte Flair Identifies WWE Backlash Match She Believes Will 'Steal The Show' | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, opinione generica, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 50 low - Natalya Makes Return To NXT During 5/5 Episode | NXT, impatto roster/storyline, ritorno/debutto, show settimanale, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 2 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Charlotte Flair Identifies WWE Backlash Match She Believes Will 'Steal The Show'
+[BOT] semantic_id=charlotte-flair-identifies-wwe-backlash-match-she-believes-will-steal-the-show
+[SCORE] iniziale=55 priority=low
+[SCRAPE] HTTP 404 su https://www.wrestlinginc.com/2165401/wwe-backlash-charlotte-flair-iyo-sky-asuka-steal-show/
+[SKIP] Testo insufficiente: Charlotte Flair Identifies WWE Backlash Match She Believes Will 'Steal The Show'
+[BOT] Elaborazione: Natalya Makes Return To NXT During 5/5 Episode
+[BOT] semantic_id=natalya-makes-return-to-nxt-during-55-episode
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, embed=1
+[BOT] Embed trovati: 2
+[SCORE] raffinato=52 priority=low | NXT, impatto roster/storyline, breaking/major update, show settimanale
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Natalya Makes Return To NXT During 5/5 Episode
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=6
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/natalya-makes-return-to-nxt-during-55-episode-41.png
+[MEDIA] Immagine caricata: 3591
+[WP] Status attach image: 200
+[OK] Pubblicato: Natalya fa il suo ritorno a NXT durante l'episodio del 5/5
+[PENDING] Coda salvata: 1 elementi
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 2 candidati provati | mode=normal
+===== RUN END [2026-05-06 11:01:28] VERSION [v59 (2b0b4de)] =====
+
