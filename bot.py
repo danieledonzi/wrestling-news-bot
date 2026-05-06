@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v59_bis"
+BOT_VERSION = "v59_ter"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -95,32 +95,45 @@ GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 
 def normalize_wp_api_url(url):
-    """Normalizza l'endpoint WordPress e forza il nuovo dominio news.
+    """Normalizza l'endpoint WordPress senza duplicare il sottodominio news.
 
-    Accetta sia un dominio base sia l'endpoint completo /wp-json/wp/v2/posts.
-    Se per errore resta un secret con openwrestlingtv.space, lo converte al nuovo dominio.
+    Accetta:
+    - https://news.openwrestlingtv.com/wp-json/wp/v2/posts
+    - https://news.openwrestlingtv.com
+    - news.openwrestlingtv.com
+
+    Converte solo i vecchi domini esatti openwrestlingtv.space e openwrestlingtv.com
+    verso news.openwrestlingtv.com. Non usa replace testuale sul dominio completo,
+    quindi non trasforma news.openwrestlingtv.com in news.news.openwrestlingtv.com.
     """
     url = (url or "").strip()
+    if not url:
+        return ""
 
-    legacy_hosts = [
+    if not re.match(r"^https?://", url, flags=re.I):
+        url = "https://" + url
+
+    parsed = urlparse(url)
+    host = (parsed.netloc or "").lower()
+    path = parsed.path or ""
+
+    legacy_hosts = {
         "www.openwrestlingtv.space",
         "openwrestlingtv.space",
         "www.openwrestlingtv.com",
         "openwrestlingtv.com",
-    ]
+    }
 
-    for host in legacy_hosts:
-        url = url.replace(host, "news.openwrestlingtv.com")
+    if host in legacy_hosts:
+        host = "news.openwrestlingtv.com"
 
-    if not url:
-        return ""
+    if not path or path == "/":
+        path = "/wp-json/wp/v2/posts"
+    elif re.search(r"/wp-json/wp/v2/?$", path):
+        path = path.rstrip("/") + "/posts"
 
-    if "/wp-json/" not in url:
-        url = url.rstrip("/") + "/wp-json/wp/v2/posts"
-    elif re.search(r"/wp-json/wp/v2/?$", url):
-        url = url.rstrip("/") + "/posts"
-
-    return url.rstrip("/")
+    normalized = urlunparse(("https", host, path, "", parsed.query, ""))
+    return normalized.rstrip("/")
 
 
 WP_API_URL = normalize_wp_api_url(os.getenv("WP_URL"))
