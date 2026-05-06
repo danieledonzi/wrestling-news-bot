@@ -3198,3 +3198,127 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 4 candidati provati | mode=normal
 ===== RUN END [2026-05-06 05:52:00] VERSION [v59 (0f0172c)] =====
 
+
+===== RUN START [2026-05-06 08:15:09] VERSION [v59 (ef25caa)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (16/75): WWE NXT - 5/5/2026: 3 Things We Hated And 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (12/75): BMF Champion Charles Oliveira Signs New Eight-Fight Deal With UFC
+[SKIP] Score sotto soglia editoriale (20/75): Royce Keys Teases Union With WWE's Bloodline: 'I've Known That Family' For A While
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165718/former-iwgp-heavyweight-champion-evil-new-name-wwe-nxt-debut-set/
+[SKIP] Score sotto soglia editoriale (0/75): Ronda Rousey's Last UFC Opponent Happy To See Her Back In MMA
+[SKIP] Score sotto soglia editoriale (12/75): Amanda Nunes Tells UFC Champion To Get Her 'S*** Together' So They Can Fight
+[SKIP] Score sotto soglia editoriale (24/75): Liv Morgan Details How New Self-Performed WWE Entrance Music Came About
+[SKIP] event_key confermata su WordPress: event:roman-reigns-title - WWE Announces May Dates For Roman Reigns, Including Clash In Italy PLE
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165619/wwe-bully-ray-cody-rhodes-gunther-simplicity-bloody-mess/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165573/wwe-raw-viewership-ratings-report-april-27-2026/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163203/wwe-wrestlemania-27-miz-rock-impersonating/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165532/wwe-raw-joe-hendry-music-video-fire-logan-paul/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165520/wwe-talent-pay-cuts-new-day-departure/
+[SKIP] Score sotto soglia editoriale (0/75): Amanda Nunes Addresses Future In UFC After Next Fight
+[SKIP] event_key confermata su WordPress: event:roman-reigns-title - Jacob Fatu On WWE Backlash World Title Match: 'I Prayed & I Cried For Days Like This'
+[SKIP] Score sotto soglia editoriale (12/75): Khamzat Chimaev Declines RAF Match With Olympic Champion In Favor Of UFC Star
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165370/wwe-nxt-evil-njpw-nox-raijin/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/major-ring-debut-booked-512-wwe-nxt/
+[SKIP] URL già in history: https://www.ringsidenews.com/noam-dar-makes-surprise-return-during-55-wwe-nxt/
+[SKIP] URL già in history: https://www.ringsidenews.com/fit-finlay-returns-television-during-55-wwe-nxt-deliver-serious-message/
+[SKIP] Score sotto soglia editoriale (28/75): WWE SmackDown Viewership Sees No Change on May 1, 2026
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-nxt-results-highlights-key-moments-may-5-2026/
+[SKIP] Score sotto soglia editoriale (22/75): Sting Reveals His Current Role in AEW After Retirement
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-edits-sol-ruca-raw-botch-social-media-debut-segment/
+[SKIP] Score sotto soglia editoriale (0/75): Alberto Del Rio Could Be Sent Back to Jail After Controversial Comments at Wrestling Show
+[SKIP] Score sotto soglia editoriale (38/75): Ex-WWE Tough Enough Contestant Daniel Rodimer Pushes To Dismiss Murder Charges With New Legal Arguments
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-raw-ranks-6-globally-netflix-april-27-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/roman-reigns-wwe-schedule-confirmed-new-dates-removal/
+[SKIP] URL già in history: https://www.ringsidenews.com/real-reason-tko-asking-wwe-talent-take-pay-cuts-revealed/
+[SCORE] 75 medium - WWE NXT Results 5/5 - Mixed Tag Team Match, Jaida Parker Faces Kali Armstrong & More | WWE/main roster, WWE main roster + storyline/evento, show settimanale, floor WWE main roster storyline, report/results: bypass soglia editoriale
+[SCORE] 59 low - Booker T On WWE Releases: 'Cuts Are Inevitable' | WWE/main roster, nomi forti titolo: booker t, impatto roster/storyline, release/addio, v48 tier2: 55-74
+[SCORE] 55 low - AEW Version of Tough Enough with New Twist Pitched | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - Brody King Takes Shot At Donald Trump's WWE Hall of Fame Status Amid Political Backlash | WWE/main roster, WWE main roster + storyline/evento, contratto, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - Charlotte Flair Identifies WWE Backlash Match She Believes Will 'Steal The Show' | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, opinione generica, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 50 low - Natalya Makes Return To NXT During 5/5 Episode | NXT, impatto roster/storyline, ritorno/debutto, show settimanale, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 1
+[REPORT] Valuto fonti per report: report:wwe-nxt-2026-05-05
+[SCRAPE] Articolo results rilevato: testo completo (13113 caratteri)
+[REPORT] Fonte migliore: score_completezza=223 | www.wrestlinginc.com | WWE NXT Results 5/5 - Mixed Tag Team Match, Jaida Parker Faces Kali Armstrong & More
+[BOT] Elaborazione: WWE NXT Results 5/5 - Mixed Tag Team Match, Jaida Parker Faces Kali Armstrong & More
+[BOT] semantic_id=report-wwe-nxt-2026-05-05
+[SCORE] iniziale=75 priority=medium
+[REPORT] Uso testo prefetched per report maturo (13113 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=56, embed=0
+[SCORE] raffinato=75 priority=medium | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, developmental secondario
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Warning results: Possibile articolo results incompleto: mancano riferimenti a [['winner tony d angelo']]
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=56
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-nxt-may-5-mixed-tag-team-match-jaida-parker-kali-armstrong-more/l-intro-1778033071.jpg
+[MEDIA] Immagine caricata: 3576
+[WP] Status attach image: 200
+[OK] Pubblicato: WWE RAW del 5 maggio 2026: momenti salienti e risultati
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[BOT] News candidate totali: 6 | mode=normal | max nuove=3 | pending pubblicati=1
+[BOT] Elaborazione: WWE NXT Results 5/5 - Mixed Tag Team Match, Jaida Parker Faces Kali Armstrong & More
+[BOT] semantic_id=wwe-nxt-results-55-mixed-tag-team-match-jaida-parker-faces-kali-armstrong-more
+[SCORE] iniziale=75 priority=medium
+[SCRAPE] Articolo results rilevato: testo completo (13113 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=56, embed=0
+[PENDING] Coda salvata: 1 elementi
+[REPORT] Salvato/aggiornato pending report: report:wwe-raw-2026-05-05 | gia' maturo
+[BOT] Elaborazione: Booker T On WWE Releases: 'Cuts Are Inevitable'
+[BOT] semantic_id=booker-t-on-wwe-releases-cuts-are-inevitable
+[SCORE] iniziale=59 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, nomi forti titolo: booker t, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=4
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/booker-t-on-wwe-releases-cuts-are-inevitable/l-intro-1778018146.jpg
+[MEDIA] Immagine caricata: 3579
+[WP] Status attach image: 200
+[OK] Pubblicato: Booker T sui licenziamenti WWE: 'I tagli sono inevitabili'
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: AEW Version of Tough Enough with New Twist Pitched
+[BOT] semantic_id=aew-version-of-tough-enough-with-new-twist-pitched
+[SCORE] iniziale=55 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=55 priority=low | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - AEW Version of Tough Enough with New Twist Pitched
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=8
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/aew-version-of-tough-enough-with-new-twist-pitched-34.jpg
+[MEDIA] Immagine caricata: 3582
+[WP] Status attach image: 200
+[OK] Pubblicato: L'idea di AEW per un 'Tough Enough' con una Nuova Sfumatura Proposta
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Brody King Takes Shot At Donald Trump's WWE Hall of Fame Status Amid Political Backlash
+[BOT] semantic_id=brody-king-takes-shot-at-donald-trumps-wwe-hall-of-fame-status-amid-political-backlash
+[SCORE] iniziale=55 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=67 priority=medium | WWE/main roster, WWE main roster + storyline/evento, contratto, PLE/PPV
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Brody King Takes Shot At Donald Trump's WWE Hall of Fame Status Amid Political Backlash
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[FIX] Titolo strutturato incoerente -> fallback automatico: Brody King Takes Shot At Donald Trump's WWE Hall of Fame Status Amid Political Backlash
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=9
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/brody-king-takes-shot-at-donald-trumps-wwe-hall-of-fame-status-amid-political-backlash-11.jpg
+[MEDIA] Immagine caricata: 3585
+[WP] Status attach image: 200
+[OK] Pubblicato: Brody King Takes Shot At Donald Trump's WWE Hall of Fame Status Amid Political Backlash
+[PENDING] Coda salvata: 1 elementi
+[BOT] Pubblicati 4 articoli (1 pending + 3 nuove) su 5 candidati provati | mode=normal
+===== RUN END [2026-05-06 08:15:09] VERSION [v59 (ef25caa)] =====
+
