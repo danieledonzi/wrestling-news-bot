@@ -3009,3 +3009,93 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
 ===== RUN END [2026-05-05 23:42:42] VERSION [v59 (664a8e1)] =====
 
+
+===== RUN START [2026-05-06 02:12:49] VERSION [v59 (5cc1323)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (12/75): BMF Champion Charles Oliveira Signs New Eight-Fight Deal With UFC
+[SKIP] Score sotto soglia editoriale (20/75): Royce Keys Teases Union With WWE's Bloodline: 'I've Known That Family' For A While
+[SKIP] Score sotto soglia editoriale (0/75): Ronda Rousey's Last UFC Opponent Happy To See Her Back In MMA
+[SKIP] Score sotto soglia editoriale (12/75): Amanda Nunes Tells UFC Champion To Get Her 'S*** Together' So They Can Fight
+[SKIP] Score sotto soglia editoriale (24/75): Liv Morgan Details How New Self-Performed WWE Entrance Music Came About
+[SKIP] event_key confermata su WordPress: event:roman-reigns-title - WWE Announces May Dates For Roman Reigns, Including Clash In Italy PLE
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165619/wwe-bully-ray-cody-rhodes-gunther-simplicity-bloody-mess/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165573/wwe-raw-viewership-ratings-report-april-27-2026/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163203/wwe-wrestlemania-27-miz-rock-impersonating/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165520/wwe-talent-pay-cuts-new-day-departure/
+[SKIP] Score sotto soglia editoriale (0/75): Amanda Nunes Addresses Future In UFC After Next Fight
+[SKIP] event_key confermata su WordPress: event:roman-reigns-title - Jacob Fatu On WWE Backlash World Title Match: 'I Prayed & I Cried For Days Like This'
+[SKIP] Score sotto soglia editoriale (12/75): Khamzat Chimaev Declines RAF Match With Olympic Champion In Favor Of UFC Star
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (28/75): WWE SmackDown Viewership Sees No Change on May 1, 2026
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-nxt-results-highlights-key-moments-may-5-2026/
+[SKIP] Score sotto soglia editoriale (22/75): Sting Reveals His Current Role in AEW After Retirement
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-edits-sol-ruca-raw-botch-social-media-debut-segment/
+[SKIP] Score sotto soglia editoriale (0/75): Alberto Del Rio Could Be Sent Back to Jail After Controversial Comments at Wrestling Show
+[SKIP] Score sotto soglia editoriale (38/75): Ex-WWE Tough Enough Contestant Daniel Rodimer Pushes To Dismiss Murder Charges With New Legal Arguments
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-raw-ranks-6-globally-netflix-april-27-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/roman-reigns-wwe-schedule-confirmed-new-dates-removal/
+[SKIP] URL già in history: https://www.ringsidenews.com/real-reason-tko-asking-wwe-talent-take-pay-cuts-revealed/
+[SCORE] 100 high - Major In-Ring Debut Booked For 5/12 WWE NXT | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale
+[SCORE] 76 medium - Former IWGP Heavyweight Champion EVIL Gets New Name, WWE NXT Debut Set | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale
+[SCORE] 76 medium - Noam Dar Makes Surprise Return During 5/5 WWE NXT | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale
+[SCORE] 76 medium - Fit Finlay Returns To Television During 5/5 WWE NXT To Deliver Serious Message | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale
+[SCORE] 75 medium - WWE NXT Results 5/5 - Mixed Tag Team Match, Jaida Parker Faces Kali Armstrong & More | WWE/main roster, WWE main roster + storyline/evento, show settimanale, floor WWE main roster storyline, report/results: bypass soglia editoriale
+[SCORE] 67 medium - Joe Hendry Releases Music Video For 'Can We Fire Logan Paul' Song Featured On WWE Raw | WWE/main roster, nomi forti titolo: logan paul, impatto roster/storyline, release/addio, show settimanale, v48 tier2: 55-74
+[SCORE] 60 medium - Backstage Update On Former NJPW Star EVIL's New Name In WWE NXT | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, v48 tier2: 55-74
+[SCORE] 59 low - Booker T On WWE Releases: 'Cuts Are Inevitable' | WWE/main roster, nomi forti titolo: booker t, impatto roster/storyline, release/addio, v48 tier2: 55-74
+[SCORE] 55 low - AEW Version of Tough Enough with New Twist Pitched | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - Brody King Takes Shot At Donald Trump's WWE Hall of Fame Status Amid Political Backlash | WWE/main roster, WWE main roster + storyline/evento, contratto, floor WWE main roster storyline, v48 tier2: 55-74
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 13 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Major In-Ring Debut Booked For 5/12 WWE NXT
+[BOT] semantic_id=major-in-ring-debut-booked-for-512-wwe-nxt
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, embed=1
+[BOT] Embed trovati: 2
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, show settimanale, developmental secondario
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=6
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/04/interesting-name-was-present-backstage-for-april-28-wwe-nxt-48.jpg
+[MEDIA] Immagine caricata: 3558
+[WP] Status attach image: 200
+[OK] Pubblicato: Debutto sul ring prenotato per il 5/12 WWE NXT
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Former IWGP Heavyweight Champion EVIL Gets New Name, WWE NXT Debut Set
+[BOT] semantic_id=former-iwgp-heavyweight-champion-evil-gets-new-name-wwe-nxt-debut-set
+[SCORE] iniziale=76 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=76 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=7
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/former-iwgp-heavyweight-champion-evil-gets-new-name-wwe-nxt-debut-set/l-intro-1778028829.jpg
+[MEDIA] Immagine caricata: 3561
+[WP] Status attach image: 200
+[OK] Pubblicato: L'ex campione IWGP Heavyweight EVIL cambia nome, debutto in WWE NXT fissato
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Noam Dar Makes Surprise Return During 5/5 WWE NXT
+[BOT] semantic_id=noam-dar-makes-surprise-return-during-55-wwe-nxt
+[SCORE] iniziale=76 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, embed=1
+[BOT] Embed trovati: 2
+[SCORE] raffinato=76 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=6
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/noam-dar-makes-surprise-return-during-55-wwe-nxt-53.png
+[MEDIA] Immagine caricata: 3564
+[WP] Status attach image: 200
+[OK] Pubblicato: Noam Dar Fa un Ritorno a Sorpresa durante NXT del 5/5
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
+===== RUN END [2026-05-06 02:12:49] VERSION [v59 (5cc1323)] =====
+
