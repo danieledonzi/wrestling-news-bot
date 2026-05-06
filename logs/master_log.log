@@ -3956,3 +3956,95 @@
 [BOT] Pubblicati 6 articoli (3 pending + 3 nuove) su 10 candidati provati | mode=normal
 ===== RUN END [2026-05-06 19:06:05] VERSION [v59_ter (0e0d727)] =====
 
+
+===== RUN START [2026-05-06 19:28:54] VERSION [v59_ter (c1648c5)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166400/wwe-jacob-fatu-roman-reigns-relationship-match/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166378/wwe-aleister-black-aew-active-talks/
+[SKIP] Score sotto soglia editoriale (18/75): Wrestling World Reacts To Passing Of Former WCW Owner Ted Turner
+[SKIP] Score sotto soglia editoriale (34/75): AEW Collision Ratings & Viewership Report: 5/2/2026
+[SKIP] Score sotto soglia editoriale (18/75): Ted Turner Dead, Former WCW Owner & Monday Night Wars Vet Dies At 87
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165900/wwe-trick-williams-lil-yachty-involvement-one-boys/
+[SKIP] Score sotto soglia editoriale (18/75): Paul Wight Isn't Ready To Retire But Doesn't Want To 'Steal Glory' From AEW Roster
+[SKIP] Score sotto soglia editoriale (28/75): Cuatrero Reportedly Found Guilty Of Attempted Femicide Against WWE's Stephanie Vaquer
+[SKIP] Score sotto soglia editoriale (36/75): WWE SmackDown Ratings & Viewership Report: 5/1/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165806/wwe-jeff-jarrett-saudi-arabia-iran-war-it-shocks-me/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165802/wwe-smackdown-bully-ray-ricky-saints-concerns-main-roster-debut/
+[SKIP] Score sotto soglia editoriale (22/75): Matt Hardy Comments On TNA Pulling Wrestlers, Says Boss Carlos Silva Is 'Learning'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163841/wwe-raw-david-otunga-netflix-sue-bars/
+[SKIP] Score sotto soglia editoriale (16/75): WWE NXT - 5/5/2026: 3 Things We Hated And 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (12/75): BMF Champion Charles Oliveira Signs New Eight-Fight Deal With UFC
+[SKIP] Score sotto soglia editoriale (20/75): Royce Keys Teases Union With WWE's Bloodline: 'I've Known That Family' For A While
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165718/former-iwgp-heavyweight-champion-evil-new-name-wwe-nxt-debut-set/
+[SKIP] Score sotto soglia editoriale (0/75): Ronda Rousey's Last UFC Opponent Happy To See Her Back In MMA
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (26/75): Eric Bischoff Pays Tribute to Ted Turner Following His Passing
+[SKIP] Score sotto soglia editoriale (33/75): Stephanie Vaquer's Ex-Boyfriend El Cuatrero Could Face More Than 30 Years in Prison After Guilty Verdict
+[SKIP] Score sotto soglia editoriale (18/75): Pro Wrestling World Reacts to Ted Turner's Passing
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-major-plans-blake-monroe-smackdown/
+[SKIP] URL già in history: https://www.ringsidenews.com/another-njpw-star-expected-sign-wwe-evils-nxt-debut/
+[SKIP] Score sotto soglia editoriale (24/75): Will Ospreay Reveals Tony Khan Paid for His Neck Surgery: "More Expensive Than My House"
+[SKIP] Score sotto soglia editoriale (12/75): Former WCW Owner Ted Turner Passes Away at Age 87
+[SKIP] URL già in history: https://www.ringsidenews.com/blake-monroes-wwe-smackdown-debut-timeline-revealed-coming-soon-tease/
+[SKIP] Score sotto soglia editoriale (18/75): Tony Schiavone Defends Jon Moxley and Will Ospreay Segment After Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/cody-rhodes-reveals-hes-preparing-potential-wwe-executive-role/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-made-last-minute-change-evils-name-before-nxt-reveal/
+[SKIP] Score sotto soglia editoriale (31/75): Corey Graves Explains Why Pat McAfee and Jelly Roll Involvement Felt Inorganic at WrestleMania 42
+[SKIP] Score sotto soglia editoriale (0/75): Gear Designer Accuses Jordynne Grace of Hurting His Livelihood With Irresponsible Tweet
+[SCORE] 83 high - AEW Denies Negotiations With Aleister Black Amid Conflicting Reports | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[SCORE] 69 medium - Breaking Down The Belts: Trick Williams' WWE Men's United States Championship | WWE/main roster, nomi forti titolo: trick williams, WWE main roster + storyline/evento, breaking/major update, v48 tier2: 55-74
+[SCORE] 55 low - WWE's Charlotte Flair On Her Father Ric Flair: 'He's In Timeout A Lot' | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 52 low - Will Ospreay Addresses New Day Potentially Joining AEW After WWE Exit | WWE/main roster, impatto roster/storyline, breaking/major update, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 4 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: AEW Denies Negotiations With Aleister Black Amid Conflicting Reports
+[BOT] semantic_id=aew-denies-negotiations-with-aleister-black-amid-conflicting-reports
+[SCORE] iniziale=83 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, embed=1
+[BOT] Embed trovati: 2
+[SCORE] raffinato=83 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=11
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/aew-denies-negotiations-with-aleister-black-amid-conflicting-reports-12.jpg
+[MEDIA] Immagine caricata: 3707
+[WP] Status attach image: 200
+[OK] Pubblicato: AEW Nega Negoziazioni con Aleister Black tra Report Contrastanti
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Breaking Down The Belts: Trick Williams' WWE Men's United States Championship
+[BOT] semantic_id=breaking-down-the-belts-trick-williams-wwe-mens-united-states-championship
+[SCORE] iniziale=69 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, embed=0
+[SCORE] raffinato=96 priority=high | WWE/main roster, nomi forti titolo: trick williams, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=13
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/breaking-down-the-belts-trick-williams-wwe-mens-united-states-championship/l-intro-1778016085.jpg
+[MEDIA] Immagine caricata: 3710
+[WP] Status attach image: 200
+[OK] Pubblicato: [BREAKING] Analisi dei Titoli: Il Regno di Trick Williams come WWE United States Champion Maschile
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: WWE's Charlotte Flair On Her Father Ric Flair: 'He's In Timeout A Lot'
+[BOT] semantic_id=wwes-charlotte-flair-on-her-father-ric-flair-hes-in-timeout-a-lot
+[SCORE] iniziale=55 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=89 priority=high | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, business/media rights, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=6
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwes-charlotte-flair-on-her-father-ric-flair-hes-in-timeout-a-lot/l-intro-1778055051.jpg
+[MEDIA] Immagine caricata: 3713
+[WP] Status attach image: 200
+[OK] Pubblicato: Charlotte Flair della WWE su suo padre Ric Flair: 'È spesso in punizione'
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
+===== RUN END [2026-05-06 19:28:54] VERSION [v59_ter (c1648c5)] =====
+
