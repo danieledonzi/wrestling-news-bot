@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v59"
+BOT_VERSION = "v59_bis"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -91,8 +91,39 @@ from google import genai
 
 WP_USER = os.getenv("WP_USER")
 WP_PASSWORD = os.getenv("WP_PASSWORD")
-WP_API_URL = os.getenv("WP_URL")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+
+def normalize_wp_api_url(url):
+    """Normalizza l'endpoint WordPress e forza il nuovo dominio news.
+
+    Accetta sia un dominio base sia l'endpoint completo /wp-json/wp/v2/posts.
+    Se per errore resta un secret con openwrestlingtv.space, lo converte al nuovo dominio.
+    """
+    url = (url or "").strip()
+
+    legacy_hosts = [
+        "www.openwrestlingtv.space",
+        "openwrestlingtv.space",
+        "www.openwrestlingtv.com",
+        "openwrestlingtv.com",
+    ]
+
+    for host in legacy_hosts:
+        url = url.replace(host, "news.openwrestlingtv.com")
+
+    if not url:
+        return ""
+
+    if "/wp-json/" not in url:
+        url = url.rstrip("/") + "/wp-json/wp/v2/posts"
+    elif re.search(r"/wp-json/wp/v2/?$", url):
+        url = url.rstrip("/") + "/posts"
+
+    return url.rstrip("/")
+
+
+WP_API_URL = normalize_wp_api_url(os.getenv("WP_URL"))
 
 if not WP_USER or not WP_PASSWORD or not WP_API_URL:
     raise ValueError("Configurazione WordPress incompleta")
