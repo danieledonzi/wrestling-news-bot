@@ -4048,3 +4048,100 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
 ===== RUN END [2026-05-06 19:28:54] VERSION [v59_ter (c1648c5)] =====
 
+
+===== RUN START [2026-05-06 21:01:53] VERSION [v59_ter (dd4065f)] =====
+[WP] Health check OK: 200
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (0/75): Dana White: 'Even My Voice' Is AI In UFC White House Promo
+[SKIP] Score sotto soglia editoriale (0/75): Chael Sonnen Says He Tried To Warn UFC About 'Russian Invasion'
+[SKIP] Score sotto soglia editoriale (36/75): AEW Announces Tonight's Dynamite To Be Dedicated To Late TNT & TBS Founder Ted Turner
+[SKIP] Score sotto soglia editoriale (18/75): AEW's Brody King: President Trump Can 'Go F*** Himself'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166400/wwe-jacob-fatu-roman-reigns-relationship-match/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166378/wwe-aleister-black-aew-active-talks/
+[SKIP] Score sotto soglia editoriale (18/75): Wrestling World Reacts To Passing Of Former WCW Owner Ted Turner
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165748/breaking-down-the-belts-trick-williams-wwe-mens-united-states-championship/
+[SKIP] Score sotto soglia editoriale (34/75): AEW Collision Ratings & Viewership Report: 5/2/2026
+[SKIP] Score sotto soglia editoriale (18/75): Ted Turner Dead, Former WCW Owner & Monday Night Wars Vet Dies At 87
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165900/wwe-trick-williams-lil-yachty-involvement-one-boys/
+[SKIP] Score sotto soglia editoriale (18/75): Paul Wight Isn't Ready To Retire But Doesn't Want To 'Steal Glory' From AEW Roster
+[SKIP] Score sotto soglia editoriale (28/75): Cuatrero Reportedly Found Guilty Of Attempted Femicide Against WWE's Stephanie Vaquer
+[SKIP] Score sotto soglia editoriale (36/75): WWE SmackDown Ratings & Viewership Report: 5/1/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165814/wwe-charlotte-flair-ric-flair-father-timeout/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165806/wwe-jeff-jarrett-saudi-arabia-iran-war-it-shocks-me/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165802/wwe-smackdown-bully-ray-ricky-saints-concerns-main-roster-debut/
+[SKIP] Score sotto soglia editoriale (22/75): Matt Hardy Comments On TNA Pulling Wrestlers, Says Boss Carlos Silva Is 'Learning'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163841/wwe-raw-david-otunga-netflix-sue-bars/
+[SKIP] Score sotto soglia editoriale (16/75): WWE NXT - 5/5/2026: 3 Things We Hated And 3 Things We Loved
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-denies-negotiations-aleister-black-amid-conflicting-reports/
+[SKIP] Score sotto soglia editoriale (26/75): Eric Bischoff Pays Tribute to Ted Turner Following His Passing
+[SKIP] Score sotto soglia editoriale (33/75): Stephanie Vaquer's Ex-Boyfriend El Cuatrero Could Face More Than 30 Years in Prison After Guilty Verdict
+[SKIP] Score sotto soglia editoriale (18/75): Pro Wrestling World Reacts to Ted Turner's Passing
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-major-plans-blake-monroe-smackdown/
+[SKIP] URL già in history: https://www.ringsidenews.com/another-njpw-star-expected-sign-wwe-evils-nxt-debut/
+[SKIP] Score sotto soglia editoriale (24/75): Will Ospreay Reveals Tony Khan Paid for His Neck Surgery: "More Expensive Than My House"
+[SKIP] Score sotto soglia editoriale (12/75): Former WCW Owner Ted Turner Passes Away at Age 87
+[SKIP] URL già in history: https://www.ringsidenews.com/blake-monroes-wwe-smackdown-debut-timeline-revealed-coming-soon-tease/
+[SKIP] Score sotto soglia editoriale (18/75): Tony Schiavone Defends Jon Moxley and Will Ospreay Segment After Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/cody-rhodes-reveals-hes-preparing-potential-wwe-executive-role/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-made-last-minute-change-evils-name-before-nxt-reveal/
+[SCORE] 72 medium - TKO Financials Reveal Massive Q1 2026 Revenue as WWE Continues Major Growth | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, release/addio, v48 tier2: 55-74
+[SCORE] 58 low - Nick Khan Signs New Deal to Remain WWE President Through 2030 | WWE/main roster, business/contratti WWE-TKO, contratto, v48 tier2: 55-74
+[SCORE] 52 low - Will Ospreay Addresses New Day Potentially Joining AEW After WWE Exit | WWE/main roster, impatto roster/storyline, breaking/major update, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 3 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: TKO Financials Reveal Massive Q1 2026 Revenue as WWE Continues Major Growth
+[BOT] semantic_id=tko-financials-reveal-massive-q1-2026-revenue-as-wwe-continues-major-growth
+[SCORE] iniziale=72 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=95 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, non wrestling puro
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[FIX] Titolo strutturato incoerente -> fallback automatico: TKO Financials Reveal Massive Q1 2026 Revenue as WWE Continues Major Growth
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=15
+[WP] Errore creazione post (tentativo 1/2): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/tko-financials-reveal-massive-q1-2026-revenue-as-wwe-continues-major-growth-51.jpg
+[MEDIA] Immagine caricata: 3717
+[WP] Status attach image: 200
+[OK] Pubblicato: TKO Financials Reveal Massive Q1 2026 Revenue as WWE Continues Major Growth
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Nick Khan Signs New Deal to Remain WWE President Through 2030
+[BOT] semantic_id=nick-khan-signs-new-deal-to-remain-wwe-president-through-2030
+[SCORE] iniziale=58 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=72 priority=medium | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, release/addio
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Nick Khan Signs New Deal to Remain WWE President Through 2030
+[FIX] Event key in history ma non confermata su WordPress: event:nick-khan-diagnosis - provo a pubblicare
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=12
+[WP] Errore creazione post (tentativo 1/2): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/nick-khan-signs-new-deal-to-remain-wwe-president-through-2030-05.xml
+[MEDIA] URL non è un'immagine valida: https://www.ringsidenews.com/wp-content/uploads/2026/05/nick-khan-signs-new-deal-to-remain-wwe-president-through-2030-05.xml (text/xml)
+[OK] Pubblicato: Nick Khan Firma un Nuovo Contratto per Rimanere Presidente della WWE fino al 2030
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Will Ospreay Addresses New Day Potentially Joining AEW After WWE Exit
+[BOT] semantic_id=will-ospreay-addresses-new-day-potentially-joining-aew-after-wwe-exit
+[SCORE] iniziale=52 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, PLE/PPV
+[WP] Health check OK: 200
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=9
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/will-ospreay-addresses-new-day-potentially-joining-aew-after-wwe-exit-11.jpg
+[MEDIA] Immagine caricata: 3721
+[WP] Status attach image: 200
+[OK] Pubblicato: Will Ospreay commenta la possibile adesione dei New Day alla AEW dopo l'uscita dalla WWE
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
+===== RUN END [2026-05-06 21:01:53] VERSION [v59_ter (dd4065f)] =====
+
