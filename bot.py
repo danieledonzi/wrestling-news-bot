@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v59_ter"
+BOT_VERSION = "v60"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -156,6 +156,7 @@ REPORT_WEEKLY_DELAY_SECONDS = int(3.5 * 60 * 60)
 REPORT_PLE_DELAY_SECONDS = int(5.5 * 60 * 60)
 REPORT_DEFAULT_DELAY_SECONDS = int(4 * 60 * 60)
 REPORT_MIN_COMPLETENESS_SCORE = 80
+REPORT_CATEGORY_ID = int(os.getenv("WP_EDITORIALI_CATEGORY_ID", "8"))
 
 
 FEEDS = [
@@ -1609,7 +1610,7 @@ def make_report_event_key(title="", url="", text=""):
 
     show = ""
     for key, value in show_map:
-        if key in probe:
+        if _probe_has_phrase(probe, key):
             show = value
             break
 
@@ -1658,8 +1659,17 @@ def report_source_completeness_score(title, text):
     return int(score)
 
 
+def report_source_priority(url):
+    domain = get_domain(url)
+    if "wrestlinginc.com" in domain:
+        return 2
+    if "ringsidenews.com" in domain:
+        return 1
+    return 0
+
+
 def choose_best_report_source(report_item):
-    best = None
+    candidates = []
     for src in report_item.get("sources", []):
         url = src.get("url", "")
         title = src.get("title", report_item.get("title", ""))
@@ -1671,7 +1681,7 @@ def choose_best_report_source(report_item):
             continue
 
         score = report_source_completeness_score(title, full_text)
-        candidate = {
+        candidates.append({
             "url": url,
             "title": title,
             "text": full_text,
@@ -1681,11 +1691,18 @@ def choose_best_report_source(report_item):
             "inline_images": inline_images,
             "score": score,
             "source": src.get("source", get_domain(url)),
-        }
-        if best is None or candidate["score"] > best["score"]:
-            best = candidate
+            "source_priority": report_source_priority(url),
+        })
 
-    return best
+    if not candidates:
+        return None
+
+    # v60: se ci sono piu fonti per lo stesso report, preferisci WrestlingInc quando e' completa;
+    # RingsideNews resta fallback. Se nessuna fonte raggiunge la soglia, scegli comunque la piu completa
+    # e lascia la soglia finale a process_report_pending_item.
+    complete = [c for c in candidates if int(c.get("score", 0)) >= REPORT_MIN_COMPLETENESS_SCORE]
+    pool = complete or candidates
+    return max(pool, key=lambda c: (int(c.get("source_priority", 0)), int(c.get("score", 0))))
 
 
 def extract_wrestlinginc_article_text(content, source_title="", source_url=""):
@@ -1910,10 +1927,16 @@ def replace_embed_placeholders_in_html(content_html, embed_map):
 # v58: struttura editoriale bloccata a blocchi ordinati.
 # Gemini traduce solo i blocchi TEXT; gli embed restano fuori dal modello e vengono reinseriti dal codice.
 def build_ordered_content_blocks(html, source_url=""):
+    """v60: sequenza universale TEXT / IMAGE / EMBED.
+    Gemini riceve solo i TEXT; immagini ed embed restano nel codice e vengono reinseriti
+    nella stessa posizione della fonte.
+    """
     if not html:
         return []
     try:
         soup = BeautifulSoup(html, "html.parser")
+        featured_url = extract_image_from_article_html(html)
+        featured_base = image_url_base(featured_url)
         content = parse_content_container(soup, source_url)
         if not content:
             return []
@@ -1935,14 +1958,16 @@ def build_ordered_content_blocks(html, source_url=""):
         blocks = []
         seen_text = set()
         seen_embeds = set()
+        seen_images = set()
         text_idx = 1
         embed_idx = 1
-        nodes = content.find_all(["p", "blockquote", "h2", "h3", "h4", "li", "figure", "iframe", "amp-twitter", "amp-instagram"])
+        image_idx = 1
+        nodes = content.find_all(["p", "blockquote", "h2", "h3", "h4", "li", "figure", "iframe", "amp-twitter", "amp-instagram", "amp-img", "img"])
 
         for node in nodes:
             embeds = _node_social_embed_urls(node)
             classes = " ".join(node.get("class", []))
-            is_pure_embed = node.name in {"iframe", "amp-twitter", "amp-instagram", "figure"} or "twitter-tweet" in classes or "instagram-media" in classes
+            is_pure_embed = node.name in {"iframe", "amp-twitter", "amp-instagram"} or "twitter-tweet" in classes or "instagram-media" in classes
 
             if embeds:
                 for url in embeds:
@@ -1953,6 +1978,47 @@ def build_ordered_content_blocks(html, source_url=""):
                     blocks.append({"type": "embed", "id": f"EMBED_{embed_idx:03d}", "url": normalize_embed_url(url)})
                     embed_idx += 1
                 if is_pure_embed:
+                    continue
+
+            img_node = None
+            if node.name in {"figure", "p", "li"}:
+                img_node = node.find(["amp-img", "img"], src=True)
+            elif node.name in {"amp-img", "img"} and node.get("src"):
+                img_node = node
+
+            if img_node:
+                src = clean_tracking_params(img_node.get("src", ""))
+                low = (src or "").lower()
+                base = image_url_base(src)
+                if (
+                    src
+                    and not low.startswith("data:image")
+                    and re.search(r"\.(jpg|jpeg|png|webp)(\?.*)?$", src, re.I)
+                    and not any(x in low for x in ["logo", "avatar", "sprite", "placeholder", "default.jpg", "favicon"])
+                    and base
+                    and base not in seen_images
+                    and (not featured_base or base != featured_base)
+                ):
+                    width = img_node.get("width", "") or ""
+                    height = img_node.get("height", "") or ""
+                    try:
+                        width_i = int(width) if str(width).isdigit() else 0
+                    except Exception:
+                        width_i = 0
+                    try:
+                        height_i = int(height) if str(height).isdigit() else 0
+                    except Exception:
+                        height_i = 0
+                    if not (width_i and height_i and (width_i < 180 or height_i < 140)):
+                        seen_images.add(base)
+                        blocks.append({
+                            "type": "image",
+                            "id": f"IMAGE_{image_idx:03d}",
+                            "src": src,
+                            "alt": sanitize_text(img_node.get("alt", "")),
+                        })
+                        image_idx += 1
+                if node.name in {"figure", "amp-img", "img"}:
                     continue
 
             text = sanitize_text(node.get_text(" ", strip=True))
@@ -1988,6 +2054,14 @@ def italian_date_from_key(date_key):
         return ""
 
 
+def _probe_has_phrase(probe, phrase):
+    """Match robusto per nomi show/eventi: evita falsi positivi tipo RAW dentro parole piu lunghe."""
+    phrase_norm = normalize_for_check(phrase)
+    if not phrase_norm:
+        return False
+    return bool(re.search(r"(?<![a-z0-9])" + re.escape(phrase_norm).replace(r"\ ", r"\s+") + r"(?![a-z0-9])", probe, flags=re.I))
+
+
 def detect_report_display_name(title="", url="", text=""):
     probe = normalize_for_check(f"{title} {url} {(text or '')[:1200]}")
     show_map = [
@@ -2003,9 +2077,9 @@ def detect_report_display_name(title="", url="", text=""):
         ("backlash", "WWE Backlash"),
         ("clash in italy", "WWE Clash in Italy"),
         ("clash at the castle", "WWE Clash at the Castle"),
-        ("raw", "WWE RAW"),
         ("smackdown", "WWE SmackDown"),
         ("nxt", "WWE NXT"),
+        ("raw", "WWE RAW"),
         ("dynamite", "AEW Dynamite"),
         ("collision", "AEW Collision"),
         ("rampage", "AEW Rampage"),
@@ -2021,7 +2095,7 @@ def detect_report_display_name(title="", url="", text=""):
         ("impact", "TNA Impact"),
     ]
     for key, name in show_map:
-        if key in probe:
+        if _probe_has_phrase(probe, key):
             return name
     return "Wrestling"
 
@@ -2031,8 +2105,8 @@ def make_deterministic_report_title(source_title="", source_url="", source_text=
     date_key = _extract_report_date_key(source_title, source_url, source_text)
     date_it = italian_date_from_key(date_key)
     if date_it:
-        return f"{show} del {date_it}: momenti salienti e risultati"
-    return f"{show}: momenti salienti e risultati"
+        return f"{show} del {date_it} – risultati e momenti salienti"
+    return f"{show} – risultati e momenti salienti"
 
 
 # v59: fallback deterministico per evitare di perdere news buone per un titolo imperfetto.
@@ -2209,13 +2283,23 @@ def render_embed_block(url):
     return get_social_fallback_html(clean_url)
 
 
+def render_image_block(src, alt=""):
+    clean_src = clean_tracking_params(src or "")
+    if not clean_src:
+        return ""
+    safe_src = clean_src.replace('"', "&quot;")
+    safe_alt = sanitize_text(alt or "").replace('"', "&quot;")
+    return f'<figure class="wp-block-image"><img src="{safe_src}" alt="{safe_alt}" loading="lazy" /></figure>'
+
+
 def translate_ordered_content_blocks(source_title, blocks, source_url="", forced_title=None):
     text_blocks = [b for b in blocks if b.get("type") == "text" and b.get("text")]
     if not text_blocks:
         return None, "validation"
 
-    forced_category = detect_source_category(source_title, "\n\n".join(b.get("text", "") for b in text_blocks), source_url)
-    results_mode = is_results_article(source_title, source_url, "\n\n".join(b.get("text", "") for b in text_blocks))
+    source_text_joined_for_mode = "\n\n".join(b.get("text", "") for b in text_blocks)
+    results_mode = is_results_article(source_title, source_url, source_text_joined_for_mode)
+    forced_category = REPORT_CATEGORY_ID if results_mode else detect_source_category(source_title, source_text_joined_for_mode, source_url)
     protected_facts = build_protected_facts_for_prompt(source_title, "\n\n".join(b.get("text", "") for b in text_blocks))
     protected_facts_block = "\n".join(f"- {fact}" for fact in protected_facts) if protected_facts else "- Nessun elemento specifico rilevato."
 
@@ -2275,6 +2359,10 @@ JSON richiesto:
         for b in blocks:
             if b.get("type") == "embed":
                 rendered = render_embed_block(b.get("url", ""))
+                if rendered:
+                    html_parts.append(rendered)
+            elif b.get("type") == "image":
+                rendered = render_image_block(b.get("src", ""), b.get("alt", ""))
                 if rendered:
                     html_parts.append(rendered)
             elif b.get("type") == "text":
@@ -3022,8 +3110,8 @@ def translate_news(source_title, text, source_url=""):
     if not text or len(text) < 50:
         return None, "validation"
 
-    forced_category = detect_source_category(source_title, text, source_url)
     results_mode = is_results_article(source_title, source_url, text)
+    forced_category = REPORT_CATEGORY_ID if results_mode else detect_source_category(source_title, text, source_url)
 
     protected_facts = build_protected_facts_for_prompt(source_title, text)
     if protected_facts:
@@ -4595,8 +4683,9 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         ordered_content_blocks = build_ordered_content_blocks(page_html, source_url=link)
         if ordered_content_blocks:
             text_blocks_count = sum(1 for b in ordered_content_blocks if b.get("type") == "text")
+            image_blocks_count = sum(1 for b in ordered_content_blocks if b.get("type") == "image")
             embed_blocks_count = sum(1 for b in ordered_content_blocks if b.get("type") == "embed")
-            print(f"[BLOCKSEQ] Blocchi ordinati estratti: text={text_blocks_count}, embed={embed_blocks_count}")
+            print(f"[BLOCKSEQ] Blocchi ordinati estratti: text={text_blocks_count}, image={image_blocks_count}, embed={embed_blocks_count}")
 
     if embed_urls:
         print(f"[BOT] Embed trovati: {len(embed_urls)}")
@@ -4737,6 +4826,10 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         replaced_html, embeds_already_positioned = replace_embed_placeholders_in_html(news_data.get("testo", ""), embed_placeholder_map)
         news_data["testo"] = replaced_html
 
+    if forced_report_title:
+        news_data["categoria"] = REPORT_CATEGORY_ID
+        news_data["titolo"] = forced_report_title
+
     # v39: Breaking controllato dal bot, non da Gemini. Scade automaticamente.
     news_data["titolo"] = maybe_add_breaking_prefix(news_data["titolo"], item)
 
@@ -4748,7 +4841,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         url=link,
         embed_urls=[] if embeds_already_positioned else embed_urls,
         event_key=event_key,
-        inline_images=inline_images,
+        inline_images=[] if structured_used else inline_images,
         featured_image_url=img_url
     )
 
