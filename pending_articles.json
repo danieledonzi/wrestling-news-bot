@@ -4,27 +4,31 @@
     "title": "WWE Announces May Dates For Roman Reigns, Including Clash In Italy PLE",
     "semantic_id": "wwe-announces-may-dates-for-roman-reigns-including-clash-in-italy-ple",
     "title_key": "may-dates-roman-reigns-including-clash-italy-ple",
-    "score": 92,
+    "score": 100,
     "priority": "high",
     "event_key": "event:roman-reigns-title",
     "reasons": [
       "WWE/main roster",
       "top star titolo: roman reigns",
+      "impatto roster/storyline",
       "WWE main roster + storyline/evento",
-      "titolo/championship",
+      "release/addio",
+      "combo top name titolo + evento forte",
       "PLE/PPV"
     ],
     "score_reasons": [
       "WWE/main roster",
       "top star titolo: roman reigns",
+      "impatto roster/storyline",
       "WWE main roster + storyline/evento",
-      "titolo/championship",
+      "release/addio",
+      "combo top name titolo + evento forte",
       "PLE/PPV"
     ],
     "is_breaking": false,
     "breaking_expires_at": 1778042943.0,
     "status": "raw",
-    "reason": "wp_down_initial_normal",
+    "reason": "wp_publish_failed",
     "created_at": 1778087914.921451,
     "attempts": 0
   },
@@ -33,27 +37,27 @@
     "title": "WWE Has Major Plans for Blake Monroe on SmackDown",
     "semantic_id": "wwe-has-major-plans-for-blake-monroe-on-smackdown",
     "title_key": "has-major-blake-monroe-smackdown",
-    "score": 76,
-    "priority": "medium",
+    "score": 83,
+    "priority": "high",
     "event_key": "",
     "reasons": [
       "WWE/main roster",
       "impatto roster/storyline",
       "WWE main roster + storyline/evento",
       "ritorno/debutto",
-      "show settimanale"
+      "PLE/PPV"
     ],
     "score_reasons": [
       "WWE/main roster",
       "impatto roster/storyline",
       "WWE main roster + storyline/evento",
       "ritorno/debutto",
-      "show settimanale"
+      "PLE/PPV"
     ],
     "is_breaking": false,
     "breaking_expires_at": 1778105143.0,
     "status": "raw",
-    "reason": "wp_down_initial_normal",
+    "reason": "wp_publish_failed",
     "created_at": 1778087915.1858702,
     "attempts": 0
   },
