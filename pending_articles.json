@@ -1,1 +1,47 @@
-[]
+[
+  {
+    "kind": "report",
+    "url": "https://www.wrestlinginc.com/2164633/wwe-nxt-may-5-mixed-tag-team-match-jaida-parker-kali-armstrong-more/",
+    "title": "WWE NXT Results 5/5 - Mixed Tag Team Match, Jaida Parker Faces Kali Armstrong & More",
+    "semantic_id": "report-wwe-nxt-2026-05-05",
+    "title_key": "results-5-5-mixed-tag-team-jaida-parker-faces-kali-armstrong-more",
+    "score": 75,
+    "priority": "medium",
+    "event_key": "report:wwe-nxt-2026-05-05",
+    "report_event_key": "report:wwe-nxt-2026-05-05",
+    "reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "show settimanale",
+      "floor WWE main roster storyline",
+      "report/results: bypass soglia editoriale"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "show settimanale",
+      "floor WWE main roster storyline",
+      "report/results: bypass soglia editoriale",
+      "report live: pubblicazione ritardata"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 0,
+    "status": "waiting_report_completion",
+    "reason": "report_live_delay",
+    "created_at": 1778022000.0,
+    "first_seen": 1778022000.0,
+    "last_seen": 1778046736.658347,
+    "not_before": 1778034600.0,
+    "attempts": 0,
+    "sources": [
+      {
+        "url": "https://www.wrestlinginc.com/2164633/wwe-nxt-may-5-mixed-tag-team-match-jaida-parker-kali-armstrong-more/",
+        "title": "WWE NXT Results 5/5 - Mixed Tag Team Match, Jaida Parker Faces Kali Armstrong & More",
+        "source": "www.wrestlinginc.com",
+        "first_seen": 1778022000.0,
+        "last_seen": 1778046736.658347,
+        "last_text_len": 13113
+      }
+    ]
+  }
+]
