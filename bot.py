@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v60"
+BOT_VERSION = "v60_healthcheck_fix_from_v60"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -185,8 +185,15 @@ SOCIAL_DOMAINS = [
 
 REQUEST_TIMEOUT_SCRAPE = 12
 REQUEST_TIMEOUT_WP = 10
-REQUEST_TIMEOUT_WP_HEALTHCHECK = 8
+# v60: health check piu robusto per hosting/sottodomini lenti da GitHub Actions.
+# Timeout separato connect/read: evita falsi offline su /wp-json/ lento, senza consumare Gemini se WP e' davvero giu.
+REQUEST_TIMEOUT_WP_HEALTHCHECK = (6, 20)
+WP_HEALTHCHECK_RETRIES = 3
+WP_HEALTHCHECK_BACKOFF_SECONDS = 2
+WP_HEALTHCHECK_CACHE_SECONDS = 5 * 60
+WP_HEALTHCHECK_CACHE = {"checked_at": 0, "available": None, "reason": ""}
 REQUEST_TIMEOUT_IMAGE = 10
+REQUEST_TIMEOUT_SOCIAL_CHECK = 8
 REQUEST_TIMEOUT_SOCIAL_CHECK = 8
 
 # v39: limiti editoriali dinamici
@@ -1997,7 +2004,6 @@ def build_ordered_content_blocks(html, source_url=""):
                     and not any(x in low for x in ["logo", "avatar", "sprite", "placeholder", "default.jpg", "favicon"])
                     and base
                     and base not in seen_images
-                    and (not featured_base or base != featured_base)
                 ):
                     width = img_node.get("width", "") or ""
                     height = img_node.get("height", "") or ""
@@ -2018,6 +2024,7 @@ def build_ordered_content_blocks(html, source_url=""):
                             "alt": sanitize_text(img_node.get("alt", "")),
                         })
                         image_idx += 1
+                # una figure/img pura non va anche tradotta come testo
                 if node.name in {"figure", "amp-img", "img"}:
                     continue
 
@@ -2884,25 +2891,80 @@ def check_gemini():
         return False
 
 
-def wordpress_is_available():
+def wordpress_is_available(force=False):
     """
-    Health check leggero prima di chiamare Gemini.
-    Se WordPress non risponde, la run esce subito e non consuma API/minuti inutili.
+    Health check preventivo prima di chiamare Gemini.
+
+    v60: non basta un singolo timeout su /wp-json/ per dichiarare WP offline.
+    Dopo il passaggio al sottodominio news.openwrestlingtv.com su Aruba, GitHub Actions
+    puo' avere latenze/handshake piu lenti del browser. Per non sprecare token Gemini
+    manteniamo il blocco preventivo, ma controlliamo prima l'endpoint reale dei post,
+    facciamo retry e distinguiamo auth/permessi da timeout/5xx.
     """
-    try:
-        res = session.get(
-            WP_HEALTHCHECK_URL,
-            auth=(WP_USER, WP_PASSWORD),
-            timeout=REQUEST_TIMEOUT_WP_HEALTHCHECK
-        )
-        if res.status_code < 500:
-            print(f"[WP] Health check OK: {res.status_code}")
-            return True
-        print(f"[WP] Health check fallito: status {res.status_code}")
-        return False
-    except requests.RequestException as e:
-        print(f"[WP] WordPress non raggiungibile: {e}")
-        return False
+    now = time.time()
+    cached_available = WP_HEALTHCHECK_CACHE.get("available")
+    checked_at = float(WP_HEALTHCHECK_CACHE.get("checked_at", 0) or 0)
+    if not force and cached_available is not None and now - checked_at < WP_HEALTHCHECK_CACHE_SECONDS:
+        print(f"[WP] Health check cache: {'OK' if cached_available else 'KO'} ({WP_HEALTHCHECK_CACHE.get('reason', '')})")
+        return bool(cached_available)
+
+    def set_cache(available, reason):
+        WP_HEALTHCHECK_CACHE["checked_at"] = time.time()
+        WP_HEALTHCHECK_CACHE["available"] = bool(available)
+        WP_HEALTHCHECK_CACHE["reason"] = reason
+        return bool(available)
+
+    last_error = ""
+
+    for attempt in range(1, WP_HEALTHCHECK_RETRIES + 1):
+        # 1) Endpoint che useremo davvero per pubblicare/verificare post.
+        try:
+            res = session.get(
+                WP_API_URL,
+                params={"per_page": 1},
+                auth=(WP_USER, WP_PASSWORD),
+                timeout=REQUEST_TIMEOUT_WP_HEALTHCHECK,
+            )
+            status = res.status_code
+
+            if 200 <= status < 500 and status not in (401, 403):
+                print(f"[WP] Health check API OK: status {status} | tentativo {attempt}/{WP_HEALTHCHECK_RETRIES}")
+                return set_cache(True, f"api_status_{status}")
+
+            if status in (401, 403):
+                print(f"[WP] Health check API autenticazione/permessi KO: status {status}")
+                return set_cache(False, f"auth_status_{status}")
+
+            last_error = f"api_status_{status}"
+            print(f"[WP] Health check API fallito: status {status} | tentativo {attempt}/{WP_HEALTHCHECK_RETRIES}")
+
+        except (requests.ConnectTimeout, requests.ReadTimeout, requests.Timeout) as e:
+            last_error = f"api_timeout: {e}"
+            print(f"[WP] Health check API timeout | tentativo {attempt}/{WP_HEALTHCHECK_RETRIES}: {e}")
+        except requests.RequestException as e:
+            last_error = f"api_request_error: {e}"
+            print(f"[WP] Health check API errore | tentativo {attempt}/{WP_HEALTHCHECK_RETRIES}: {e}")
+
+        # 2) Fallback leggero su /wp-json/: serve a distinguere sito/API lenti da DNS/SSL/host irraggiungibile.
+        try:
+            res_root = session.get(
+                WP_HEALTHCHECK_URL,
+                auth=(WP_USER, WP_PASSWORD),
+                timeout=REQUEST_TIMEOUT_WP_HEALTHCHECK,
+            )
+            status_root = res_root.status_code
+            if status_root < 500:
+                print(f"[WP] Root /wp-json/ raggiungibile: status {status_root} | retry API in corso")
+            else:
+                print(f"[WP] Root /wp-json/ errore server: status {status_root}")
+        except requests.RequestException as e:
+            print(f"[WP] Root /wp-json/ non raggiungibile | tentativo {attempt}/{WP_HEALTHCHECK_RETRIES}: {e}")
+
+        if attempt < WP_HEALTHCHECK_RETRIES:
+            time.sleep(WP_HEALTHCHECK_BACKOFF_SECONDS * attempt)
+
+    print(f"[WP] WordPress/API non disponibile dopo {WP_HEALTHCHECK_RETRIES} tentativi: {last_error}")
+    return set_cache(False, last_error or "unknown")
 
 
 
