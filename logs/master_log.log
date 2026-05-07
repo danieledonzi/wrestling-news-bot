@@ -298,3 +298,99 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
 ===== RUN END [2026-05-07 11:04:37] VERSION [v61_editorial_quality_fix (220c15c)] =====
 
+
+===== RUN START [2026-05-07 12:57:37] VERSION [v62_event_cluster_business_freshness (b34faec)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (14/75): AEW Dynamite/Collision - 5/6/2026: 3 Things We Hated And 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (10/75): EA Sports' UFC 6 Reveal Trailer Features WWE Legend Ken Shamrock
+[SKIP] Score sotto soglia editoriale (33/75): Ricochet Makes Bold Stadium Stampede Challenge For AEW Double Or Nothing
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166671/orange-cassidy-earns-aew-world-tag-title-shot-conglomeration/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163956/wwe-dakota-kai-charlie-explans-decision-break/
+[FIX] Event key in history ma non confermata su WordPress: event:business:wwe:executive-contract:nick-khan - provo a pubblicare
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166634/tony-khan-ted-turner-aew-dynamite-tribute/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165763/aew-dynamite-may-6-aew-world-championship-on-line-double-jeopardy-match/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166574/aew-denies-negotiations-wwe-aleister-black-malaki/
+[SKIP] Score sotto soglia editoriale (0/75): Dana White: 'Even My Voice' Is AI In UFC White House Promo
+[SKIP] Score sotto soglia editoriale (0/75): Chael Sonnen Says He Tried To Warn UFC About 'Russian Invasion'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166432/aew-dynamite-dedicated-ted-turner-tnt-tbs/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166400/wwe-jacob-fatu-roman-reigns-relationship-match/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166378/wwe-aleister-black-aew-active-talks/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166309/wrestling-world-reacts-ted-turner/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (0/75): Dark Side of the Ring Season 7 Premiere Date and Topics Revealed
+[SKIP] Score sotto soglia editoriale (12/75): Shawn Michaels Reveals Why Modern WWE Talent Need Years to be Main Roster Ready
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (4/75): Jacob Fatu Says Fans Should Try Taking a Punch Before Criticizing Wrestling
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-dynamitecollision-results-highlights-key-moments-may-6-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/mark-shapiro-says-tko-not-concerned-about-decline-ticket-sales-wrestlemania-42/
+[SKIP] URL già in history: https://www.ringsidenews.com/mark-shapiro-confirms-saudi-arabia-commitment-despite-middle-east-conflict-concerns/
+[SKIP] URL già in history: https://www.ringsidenews.com/tko-financials-reveal-massive-q1-2026-revenue-wwe-continues-major-growth/
+[SKIP] URL già in history: https://www.ringsidenews.com/nick-khan-signs-new-deal-remain-wwe-president-through-2030/
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-denies-negotiations-aleister-black-amid-conflicting-reports/
+[SCORE] 100 high - Jacob Fatu Reveals Why He Brought Back Tongan Death Grip Against Roman Reigns | top star titolo: roman reigns, nome WWE: roman reigns, morte, combo top name titolo + evento forte, v62 evento morte/storico
+[SCORE] 90 high - Jim Ross Explains Why WWE Contracts Aren't Guaranteed Amid TKO Pay Cuts | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, release/addio, v62 categoria business
+[SCORE] 81 high - Real Reason Behind WWE's Massive Post-WrestleMania Roster Cuts Revealed | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV
+[SCORE] 77 medium - Nick Khan Signs New Multi-Million Dollar Deal To Remain WWE President Through 2030 | WWE/main roster, contratto, v62 business/dirigenza, v62 categoria business
+[SCORE] 66 medium - Another WWE Talent Confirms Departure Amid Ongoing Roster Cuts | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v48 tier2: 55-74
+[SCORE] 65 medium - MJF Finally Granted AEW World Title Rematch, With One Major Stipulation | AEW, titolo/championship, PLE/PPV, v62 titolo/championship, v48 tier2: 55-74
+[SCORE] 61 medium - Raja Jackson Avoids Trial After Reaching Plea Deal In Syko Stu Assault Case | release/addio, PLE/PPV, v62 evento legale grave, v48 tier2: 55-74
+[SCORE] 61 medium - AEW's Brody King: President Trump Can 'Go F*** Himself' | AEW, v62 business/dirigenza, v62 categoria business, v48 tier2: 55-74
+[SCORE] 58 low - Darby Allin Overcomes AEW TNT Champion To Retain World Title | AEW, titolo/championship, show settimanale, v62 titolo/championship, v48 tier2: 55-74
+[SCORE] 56 low - WWE Announces Upcoming SmackDown Episode Will Take Place on Tuesday | WWE/main roster, WWE main roster + storyline/evento, match/segmento annunciato, show settimanale, v48 tier2: 55-74
+[MODE] Modalita normale: 2 news >=90, 3 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 12 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Jacob Fatu Reveals Why He Brought Back Tongan Death Grip Against Roman Reigns
+[BOT] semantic_id=jacob-fatu-reveals-why-he-brought-back-tongan-death-grip-against-roman-reigns
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=22, image=0, embed=1
+[BOT] Embed trovati: 2
+[SCORE] raffinato=100 priority=high | top star titolo: roman reigns, nome WWE: roman reigns, morte, combo top name titolo + evento forte, show settimanale, opinione generica, v62 evento morte/storico, v62 reazione/tributo con cap
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=22
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/jacob-fatu-reveals-why-he-brought-back-tongan-death-grip-against-roman-reigns-06.jpg
+[MEDIA] Immagine caricata: 3771
+[WP] Status attach image: 200
+[OK] Pubblicato: Jacob fatu rivela perché ha reintrodotto la tongan morte grip contro Roman Reigns
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Jim Ross Explains Why WWE Contracts Aren't Guaranteed Amid TKO Pay Cuts
+[BOT] semantic_id=jim-ross-explains-why-wwe-contracts-arent-guaranteed-amid-tko-pay-cuts
+[SCORE] iniziale=90 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=14, image=0, embed=1
+[BOT] Embed trovati: 2
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, morte, opinione generica, v62 evento morte/storico, v62 categoria business
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=14
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/jim-ross-explains-why-wwe-contracts-arent-guaranteed-amid-tko-pay-cuts-11.jpg
+[MEDIA] Immagine caricata: 3774
+[WP] Status attach image: 200
+[OK] Pubblicato: Jim ross spiega perché i contratti WWE non sono garantiti in mezzo ai tagli TKO
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Real Reason Behind WWE's Massive Post-WrestleMania Roster Cuts Revealed
+[BOT] semantic_id=real-reason-behind-wwes-massive-post-wrestlemania-roster-cuts-revealed
+[SCORE] iniziale=81 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=0, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, v62 ritorno/debutto, v62 categoria business
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - Real Reason Behind WWE's Massive Post-WrestleMania Roster Cuts Revealed
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[FIX] Titolo strutturato incoerente -> fallback automatico: Real reason behind WWE's massive post-WrestleMania roster tagli revealed
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=13
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/additional-wwe-releases-could-be-coming-after-recent-cuts-57.jpg
+[MEDIA] Immagine caricata: 3777
+[WP] Status attach image: 200
+[OK] Pubblicato: Real reason behind WWE's massive post-WrestleMania roster tagli revealed
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
+===== RUN END [2026-05-07 12:57:37] VERSION [v62_event_cluster_business_freshness (b34faec)] =====
+
