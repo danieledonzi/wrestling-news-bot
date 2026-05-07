@@ -394,3 +394,104 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
 ===== RUN END [2026-05-07 12:57:37] VERSION [v62_event_cluster_business_freshness (b34faec)] =====
 
+
+===== RUN START [2026-05-07 13:20:09] VERSION [v63_italian_editorial_rewrite (4a6819a)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[FIX] Event key in history ma non confermata su WordPress: event:business:roman-reigns - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (14/75): AEW Dynamite/Collision - 5/6/2026: 3 Things We Hated And 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (10/75): EA Sports' UFC 6 Reveal Trailer Features WWE Legend Ken Shamrock
+[SKIP] Score sotto soglia editoriale (33/75): Ricochet Makes Bold Stadium Stampede Challenge For AEW Double Or Nothing
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166671/orange-cassidy-earns-aew-world-tag-title-shot-conglomeration/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163956/wwe-dakota-kai-charlie-explans-decision-break/
+[FIX] Event key in history ma non confermata su WordPress: event:business:wwe:executive-contract:nick-khan - provo a pubblicare
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166634/tony-khan-ted-turner-aew-dynamite-tribute/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165763/aew-dynamite-may-6-aew-world-championship-on-line-double-jeopardy-match/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166574/aew-denies-negotiations-wwe-aleister-black-malaki/
+[SKIP] Score sotto soglia editoriale (0/75): Dana White: 'Even My Voice' Is AI In UFC White House Promo
+[SKIP] Score sotto soglia editoriale (0/75): Chael Sonnen Says He Tried To Warn UFC About 'Russian Invasion'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166432/aew-dynamite-dedicated-ted-turner-tnt-tbs/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166400/wwe-jacob-fatu-roman-reigns-relationship-match/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166378/wwe-aleister-black-aew-active-talks/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (0/75): Dark Side of the Ring Season 7 Premiere Date and Topics Revealed
+[SKIP] Score sotto soglia editoriale (12/75): Shawn Michaels Reveals Why Modern WWE Talent Need Years to be Main Roster Ready
+[SKIP] URL già in history: https://www.ringsidenews.com/jacob-fatu-reveals-why-he-brought-back-tongan-death-grip-against-roman-reigns/
+[SKIP] URL già in history: https://www.ringsidenews.com/jim-ross-explains-why-wwe-contracts-arent-guaranteed-amid-tko-pay-cuts/
+[SKIP] Score sotto soglia editoriale (14/75): Jacob Fatu Says Fans Should Try Taking a Punch Before Criticizing Wrestling
+[SKIP] URL già in history: https://www.ringsidenews.com/real-reason-behind-wwes-massive-post-wrestlemania-roster-cuts-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-dynamitecollision-results-highlights-key-moments-may-6-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/mark-shapiro-says-tko-not-concerned-about-decline-ticket-sales-wrestlemania-42/
+[SKIP] URL già in history: https://www.ringsidenews.com/mark-shapiro-confirms-saudi-arabia-commitment-despite-middle-east-conflict-concerns/
+[SKIP] URL già in history: https://www.ringsidenews.com/tko-financials-reveal-massive-q1-2026-revenue-wwe-continues-major-growth/
+[SKIP] URL già in history: https://www.ringsidenews.com/nick-khan-signs-new-deal-remain-wwe-president-through-2030/
+[SCORE] 100 high - WWE Backlash 2026: Draws & Duds | WWE/main roster, top star titolo: roman reigns, nomi forti titolo: trick williams, business/contratti WWE-TKO, WWE main roster + storyline/evento, business/media rights, combo top name titolo + evento forte, show settimanale, v62 media rights/streaming, v62 categoria business
+[SCORE] 77 medium - Nick Khan Signs New Multi-Million Dollar Deal To Remain WWE President Through 2030 | WWE/main roster, contratto, v62 business/dirigenza, v62 categoria business
+[SCORE] 73 medium - Ireland Wants to Host WWE WrestleMania as Government Push Begins | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v48 tier2: 55-74
+[SCORE] 66 medium - Another WWE Talent Confirms Departure Amid Ongoing Roster Cuts | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v48 tier2: 55-74
+[SCORE] 65 medium - MJF Finally Granted AEW World Title Rematch, With One Major Stipulation | AEW, titolo/championship, PLE/PPV, v62 titolo/championship, v48 tier2: 55-74
+[SCORE] 61 medium - Raja Jackson Avoids Trial After Reaching Plea Deal In Syko Stu Assault Case | release/addio, PLE/PPV, v62 evento legale grave, v48 tier2: 55-74
+[SCORE] 61 medium - AEW's Brody King: President Trump Can 'Go F*** Himself' | AEW, v62 business/dirigenza, v62 categoria business, v48 tier2: 55-74
+[SCORE] 58 low - Darby Allin Overcomes AEW TNT Champion To Retain World Title | AEW, titolo/championship, show settimanale, v62 titolo/championship, v48 tier2: 55-74
+[SCORE] 56 low - WWE Announces Upcoming SmackDown Episode Will Take Place on Tuesday | WWE/main roster, WWE main roster + storyline/evento, match/segmento annunciato, show settimanale, v48 tier2: 55-74
+[SCORE] 55 low - Sheamus Believes One Aspect Of WWE's Attitude Era Is Overrated | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, opinione generica, floor WWE main roster storyline, v48 tier2: 55-74
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 11 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: WWE Backlash 2026: Draws & Duds
+[BOT] semantic_id=wwe-backlash-2026-draws-duds
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=25, image=5, embed=0
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: roman reigns, nomi forti titolo: trick williams, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, combo top name titolo + evento forte, PLE/PPV, v62 media rights/streaming
+[FIX] Event key in history ma non confermata su WordPress: event:business:roman-reigns - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=25
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-backlash-2026-draws-duds/l-intro-1778095289.jpg
+[MEDIA] Immagine caricata: 3780
+[WP] Status attach image: 200
+[OK] Pubblicato: WWE Backlash 2026: I match che attirano e quelli da evitare
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Nick Khan Signs New Multi-Million Dollar Deal To Remain WWE President Through 2030
+[BOT] semantic_id=nick-khan-signs-new-multi-million-dollar-deal-to-remain-wwe-president-through-2030
+[SCORE] iniziale=77 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 business/dirigenza, v62 categoria business
+[FIX] Event key in history ma non confermata su WordPress: event:business:wwe:executive-contract:nick-khan - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=6
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/nick-khan-wwe-president-2030-multi-million-dollar-deal/l-intro-1778122352.jpg
+[MEDIA] Immagine caricata: 3783
+[WP] Status attach image: 200
+[OK] Pubblicato: Nick Khan rinnova con la WWE: accordo multimilionario fino al 2030
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Ireland Wants to Host WWE WrestleMania as Government Push Begins
+[BOT] semantic_id=ireland-wants-to-host-wwe-wrestlemania-as-government-push-begins
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=91 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, opinione generica, v62 titolo/championship, v62 categoria business
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: Expecting ',' delimiter: line 1 column 3503 (char 3502)
+[GEMINI] Uso modello: gemini-2.5-flash
+[GEMINI] Modello gemini-2.5-flash scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[BLOCKSEQ] Traduzione strutturata fallita: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[FIX] Titolo incoerente -> fallback automatico: Ireland wants to host WWE WrestleMania as government push begins
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/ireland-wants-to-host-wwe-wrestlemania-as-government-push-begins-56.jpg
+[MEDIA] Immagine caricata: 3786
+[WP] Status attach image: 200
+[OK] Pubblicato: Ireland wants to host WWE WrestleMania as government push begins
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
+===== RUN END [2026-05-07 13:20:09] VERSION [v63_italian_editorial_rewrite (4a6819a)] =====
+
