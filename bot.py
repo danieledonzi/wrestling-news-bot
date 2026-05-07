@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v65_dedupe_schedule_tuning"
+BOT_VERSION = "v66_scoring_dedupe_safety_fix"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -811,7 +811,8 @@ def v62_detect_entities(probe):
     return list(dict.fromkeys(entities))
 
 def v62_detect_event_type(probe):
-    if v63_has_death_event(probe):
+    cleaned_probe = v66_clean_death_false_positive_probe(probe) if "v66_clean_death_false_positive_probe" in globals() else probe
+    if v63_has_death_event(cleaned_probe):
         return "death"
     if v62_has_any(probe, ["arrest", "arrested", "accused", "guilty", "convicted", "sentenced", "femicide", "attempted femicide", "domestic violence", "lawsuit", "trial", "legal", "investigation", "police", "arresto", "accusato", "accusata", "colpevole", "condannato", "femminicidio", "tentato femminicidio", "violenza domestica", "causa legale", "indagine"]):
         return "legal"
@@ -872,15 +873,10 @@ def v62_event_cluster_key(title="", text="", url=""):
     return ""
 
 def v62_is_business_news(title="", text="", url=""):
-    # v64: evita falsi positivi da sidebar/corpo lungo e da opinioni politiche non business.
+    if "v66_is_business_news" in globals():
+        return v66_is_business_news(title, text, url)
     probe = v64_business_probe(title, text, url)
-    if not probe:
-        return False
-    if any(normalize_for_check(x) in probe for x in BUSINESS_FALSE_POSITIVE_PATTERNS_V64):
-        # Eccezione: se c'e' anche TKO/WWE corporate esplicito resta business.
-        if not any(x in probe for x in ["tko", "revenue", "earnings", "media rights", "tv deal", "netflix", "contract extension", "president", "ceo"]):
-            return False
-    return bool(v62_has_any(probe, BUSINESS_CATEGORY_TERMS_V62) or v62_detect_event_type(probe) == "business")
+    return bool(v62_has_any(probe, BUSINESS_CATEGORY_TERMS_V62))
 
 def v62_is_industry_history_news(title="", text="", url=""):
     probe = v62_probe(title, text, url)
@@ -1286,6 +1282,10 @@ def is_duplicate_story_fingerprint(candidate_fp, known_fps):
 
 
 def make_news_core_key(title, text):
+    if "v66_make_news_core_key" in globals():
+        v66_key = v66_make_news_core_key(title, text)
+        if v66_key:
+            return v66_key
     """
     Chiave tematica per bloccare news uguali con titoli diversi tra fonti diverse.
     Esempio: NXT + CW + PLE + broadcast rights + deal.
@@ -1304,10 +1304,12 @@ def make_news_core_key(title, text):
 
     found = [term for term in core_terms if term in tokens]
 
-    # Evita chiavi troppo generiche, tipo solo "wwe-nxt".
-    if len(found) < 4:
+    # v66 fallback: evita chiavi troppo generiche tipo contract-nxt-tna-wwe-year.
+    generic_only = {"contract", "multi", "year", "wwe", "nxt", "tna", "aew"}
+    if len(found) < 5:
         return ""
-
+    if set(found).issubset(generic_only):
+        return ""
     return "-".join(sorted(set(found)))
 
 
@@ -3986,6 +3988,9 @@ def v65_proper_case_title(title):
         "world championship": "World Championship",
         "pubblici ministeri": "procura",
         "una grossa condizione": "una condizione importante",
+        "Brody king": "Brody King",
+        "brody king": "Brody King",
+        "presidente trump": "presidente Trump",
     }
     for old, new in replacements.items():
         t = re.sub(re.escape(old), new, t, flags=re.I)
@@ -3994,6 +3999,122 @@ def v65_proper_case_title(title):
     # Fix iniziali tipo Mjf/Raja jackson senza provare a title-case tutto.
     return sanitize_text(t)
 
+
+
+
+# v66: scoring/dedupe safety fix.
+V66_NON_WRESTLING_POLITICS_TERMS = [
+    "president trump", "donald trump", "white house", "go f himself",
+    "go f*** himself", "f*** himself", "political backlash", "politics",
+    "political", "election", "maga", "democrat", "republican",
+    "presidente trump", "può andare a farsi", "puo andare a farsi",
+]
+V66_OPINION_COMMENTARY_TERMS = [
+    "identifies problem", "believes", "explains why", "comments on",
+    "reacts to", "addresses", "criticizes", "praises", "thinks", "opinion",
+    "podcast", "interview", "breaks down", "commenta", "ritiene",
+    "spiega perche", "spiega perché", "individua un problema", "critica",
+]
+V66_DEATH_FALSE_POSITIVE_PHRASES = [
+    "tongan death grip", "death grip", "death rider", "death triangle",
+    "death match", "deathmatch", "death before dishonor",
+]
+V66_BUSINESS_FALSE_POSITIVE_CONTEXTS = [
+    "president trump", "dynamite diamond ring", "world title", "championship",
+    "title match", "rematch", "feud", "storyline", "double or nothing",
+    "promo", "segment", "go f himself", "go f*** himself",
+]
+V66_SCHEDULE_EVENTS = [
+    "great american bash", "wrestlemania", "summerslam", "royal rumble",
+    "backlash", "double or nothing", "all in", "forbidden door",
+]
+
+def v66_context_probe(title="", text="", url="", max_chars=1200):
+    lead = extract_main_scoring_text(text or "", max_paragraphs=2, max_chars=max_chars) if text else ""
+    return normalize_for_check(f"{title} {url} {lead}")
+
+def v66_clean_death_false_positive_probe(probe):
+    cleaned = probe or ""
+    for phrase in V66_DEATH_FALSE_POSITIVE_PHRASES:
+        cleaned = re.sub(r"\b" + re.escape(normalize_for_check(phrase)) + r"\b", " ", cleaned, flags=re.I)
+    return normalize_whitespace(cleaned)
+
+def v66_has_true_death_event(title="", text="", url=""):
+    probe = v66_clean_death_false_positive_probe(v66_context_probe(title, text, url, 1400))
+    return v63_has_death_event(probe)
+
+def v66_is_non_wrestling_politics(title="", text="", url=""):
+    probe = v66_context_probe(title, text, url, 1000)
+    if not probe or not v62_has_any(probe, V66_NON_WRESTLING_POLITICS_TERMS):
+        return False
+    strong_business = ["tko", "wwe", "media rights", "netflix", "revenue", "earnings", "saudi", "wrestlemania host"]
+    if any(x in probe for x in strong_business) and any(y in probe for y in ["deal", "rights", "revenue", "earnings", "host", "hosting", "bid"]):
+        return False
+    return True
+
+def v66_is_business_news(title="", text="", url=""):
+    probe = v64_business_probe(title, text, url)
+    if not probe or v66_is_non_wrestling_politics(title, text, url):
+        return False
+    if any(x in probe for x in V66_BUSINESS_FALSE_POSITIVE_CONTEXTS):
+        strong = ["tko", "revenue", "earnings", "media rights", "tv deal", "netflix", "contract extension", "ticket sales"]
+        if not any(s in probe for s in strong):
+            return False
+    return bool(v62_has_any(probe, BUSINESS_CATEGORY_TERMS_V62))
+
+def v66_make_news_core_key(title, text):
+    probe = v66_context_probe(title, text, "", 1600)
+    if not probe:
+        return ""
+    if v65_is_official_schedule_news(title, text, ""):
+        event = ""
+        for e in V66_SCHEDULE_EVENTS:
+            if e in probe:
+                event = e.replace(" ", "-")
+                break
+        locs = []
+        for loc in ["cleveland", "ireland", "dublin", "london", "paris", "toronto", "las vegas", "new york", "philadelphia", "orlando", "atlanta"]:
+            if loc in probe:
+                locs.append(loc.replace(" ", "-"))
+        if event:
+            return "schedule-" + event + (("-" + "-".join(locs[:2])) if locs else "")
+    if v66_is_business_news(title, text, ""):
+        keys = []
+        for k in ["tko", "nick khan", "mark shapiro", "netflix", "media rights", "ticket sales", "revenue", "earnings", "saudi", "wrestlemania"]:
+            if normalize_for_check(k) in probe:
+                keys.append(k.replace(" ", "-"))
+        if len(keys) >= 2:
+            return "business-" + "-".join(keys[:5])
+    if any(x in probe for x in ["release", "released", "roster cuts", "departure", "departures", "licenziamenti", "tagli"]):
+        brand = "wwe" if "wwe" in probe else ("aew" if "aew" in probe else "")
+        entities = sorted(v65_extract_entities(probe))
+        return "-".join([x for x in ["roster-cuts", brand] + entities[:2] if x])
+    return ""
+
+def v66_score_cap(score, title="", text="", url="", reasons=None):
+    reasons = reasons or []
+    probe = v66_context_probe(title, text, url, 1600)
+    if v66_is_non_wrestling_politics(title, text, url):
+        return 0, reasons + ["v66 blocco politica/volgarita non wrestling"]
+    if v62_has_any(probe, V66_OPINION_COMMENTARY_TERMS):
+        if any(x in probe for x in ["feud", "storyline", "roman reigns", "jacob fatu", "mjf", "darby allin", "promo", "podcast", "interview"]):
+            if score > 78:
+                score = 78
+                reasons.append("v66 cap opinion/commentary storyline")
+    if any(x in probe for x in ["rematch", "retains", "title shot", "world championship", "tnt champion"]) and not any(x in probe for x in ["new champion", "title change", "vacated"]):
+        if score > 84:
+            score = 84
+            reasons.append("v66 cap title match non-title-change")
+    if not v66_has_true_death_event(title, text, url):
+        reasons = [r for r in reasons if "morte" not in r and "death" not in r]
+    if not v66_is_business_news(title, text, url):
+        reasons = [r for r in reasons if "business" not in r and "dirigenza" not in r and "corporate" not in r]
+    return score, reasons
+
+def v66_should_skip_candidate_early(title="", text="", url=""):
+    if v66_is_non_wrestling_politics(title, text, url):
+        return "politica/volgarita non wrestling"
+    return ""
 
 
 def wp_has_published_event(event_key, title="", url=""):
@@ -4139,7 +4260,7 @@ def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", 
         content_html += f'\n\n<hr><p><a href="{safe_source_url}" target="_blank" rel="nofollow noopener noreferrer"><b>FONTE</b></a></p>'
 
         payload = {
-            "title": data["titolo"],
+            "title": v65_proper_case_title(data["titolo"]) if "v65_proper_case_title" in globals() else data["titolo"],
             "content": content_html,
             "categories": [int(data.get("categoria", 8))],
             "status": "publish",
