@@ -1435,3 +1435,106 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 9 candidati provati | mode=normal
 ===== RUN END [2026-05-07 22:56:17] VERSION [v66_scoring_dedupe_safety_fix (357bb4c)] =====
 
+
+===== RUN START [2026-05-07 23:51:08] VERSION [v66_scoring_dedupe_safety_fix (4a111b4)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167443/aew-will-ospreay-lingering-effects-neck-surgery-recovery/
+[SKIP] Score sotto soglia editoriale (30/75): WWE's Natalya Pays Tribute To Late Star Owen Hart On What Would Be His 61st Birthday
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167276/wwe-backlash-paul-heyman-roman-reigns-jacob-fatu-completely-upside-down/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167259/tko-president-mark-shapiro-addresses-future-wwe-ufc-saudi-arabia/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167203/wcw-eric-bischoff-ted-turner-comments-death-elon-musk-his-time/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167178/dave-meltzer-wwe-releases-talent-pay-cuts/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166864/david-otunga-defends-lack-dq-wwe-wrestlemania-42-main-event/
+[SKIP] Score sotto soglia editoriale (29/75): Report: Raja Jackson Reaches Plea Deal After Alleged In-Ring Assault
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166821/wwe-rivals-new-episodes-ric-flair-charlotte/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167083/aew-collision-fairway-hell-darby-allin-pac-death-riders-aew-world-championship/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166808/wwe-smackdown-blake-monroe-expected-appear/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167037/vice-dark-side-of-the-ring-season-7-tna-jeff-jarrett-premiere-episode/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166760/nikki-brie-bella-wwe-departure-kairi-sane/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166754/wwe-njpw-hiromu-takahashi-nox-raijin/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166741/wwe-bully-ray-roman-reigns-jacob-fatu-problem-feud/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (18/75): Andrade's Kissing Spot at AEW Grand Slam Australia Came Together at the Last Minute
+[SKIP] Score sotto soglia editoriale (14/75): Chelsea Green Reveals Health Status Following Heart Procedure
+[SKIP] URL già in history: https://www.ringsidenews.com/seth-rollins-reveals-real-reason-he-created-vision-wrestlemania-41/
+[SKIP] Score sotto soglia editoriale (18/75): TNA Moves Slammiversary Start Time to Avoid Direct Clash With AEW x NJPW Forbidden Door 2026
+[SKIP] URL già in history: https://www.ringsidenews.com/nick-khan-testified-doj-probe-vince-mcmahon-included-trafficking-allegations/
+[SKIP] URL già in history: https://www.ringsidenews.com/logan-paul-flips-joe-hendrys-diss-song-we-admire-logan-paul-parody-video/
+[SKIP] Score sotto soglia editoriale (0/75): Bubba the Love Sponge Claims Hulk Hogan Was a Victim in $890K Federal Fraud Case
+[SKIP] URL già in history: https://www.ringsidenews.com/shawn-michaels-reveals-his-wife-negotiated-his-current-wwe-contract/
+[SKIP] URL già in history: https://www.ringsidenews.com/when-wwe-planned-john-cenas-appearance-backlash-tampa/
+[SKIP] URL già in history: https://www.ringsidenews.com/sami-zayn-shuts-down-claims-he-turned-heel-attacking-gingerbread-man/
+[SKIP] Score sotto soglia editoriale (32/75): Lizzy Rain Reveals How Her WWE Entrance Theme Came Together
+[SKIP] URL già in history: https://www.ringsidenews.com/nxt-great-american-bash-2026-date-location-venue-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/ireland-wants-host-wwe-wrestlemania-government-push-begins/
+[SKIP] Score sotto soglia editoriale (0/75): Dark Side of the Ring Season 7 Premiere Date and Topics Revealed
+[SCORE] 99 high - Former WWE Star On Oba Femi: 'Quite Possibly The Strongest Person I've Ever Wrestled' | WWE/main roster, nomi forti titolo: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 ritorno/debutto
+[SCORE] 82 high - John Cena Says Backlash Announcement Will Shock the Foundation of WWE | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV
+[SCORE] 77 medium - John Cena Says Backlash 2026 Announcement Will 'Shock The Very Foundation Of WWE' | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, titolo/championship
+[SCORE] 54 low - Backstage News On AEW Dynamite Changes Due To Ted Turner's Death, Sting's Appearance | AEW, morte, show settimanale, v62 reazioni/tributi, v48 tier3: 45-54 contestuale
+[SCORE] 48 low - South African Discus Star Francois Prinsloo Announces WWE Departure | WWE/main roster, impatto roster/storyline, release/addio, v48 tier3: 45-54 contestuale
+[SCORE] 48 low - Will Ospreay Would 'Love' If Kofi Kingston & Xavier Woods Came To AEW | WWE/main roster, impatto roster/storyline, release/addio, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 1 news >=90, 2 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 6 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Former WWE Star On Oba Femi: 'Quite Possibly The Strongest Person I've Ever Wrestled'
+[BOT] semantic_id=former-wwe-star-on-oba-femi-quite-possibly-the-strongest-person-ive-ever-wrestled
+[SCORE] iniziale=99 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[SKIP] Preview/show announcement scaduta dopo scraping: Former WWE Star On Oba Femi: 'Quite Possibly The Strongest Person I've Ever Wrestled'
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: John Cena Says Backlash Announcement Will Shock the Foundation of WWE
+[BOT] semantic_id=john-cena-says-backlash-announcement-will-shock-the-foundation-of-wwe
+[SCORE] iniziale=82 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=1
+[BOT] Embed trovati: 2
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: john cena, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto
+[SKIP] News core già pubblicata da altra fonte: John Cena Says Backlash Announcement Will Shock the Foundation of WWE
+[SKIP] news_core_key=schedule-backlash
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: John Cena Says Backlash 2026 Announcement Will 'Shock The Very Foundation Of WWE'
+[BOT] semantic_id=john-cena-says-backlash-2026-announcement-will-shock-the-very-foundation-of-wwe
+[SCORE] iniziale=77 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: john cena, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 media rights/streaming, v62 categoria business
+[FIX] Event key in history ma non confermata su WordPress: event:business:media-rights - provo a pubblicare
+[SKIP] News core già pubblicata da altra fonte: John Cena Says Backlash 2026 Announcement Will 'Shock The Very Foundation Of WWE'
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Backstage News On AEW Dynamite Changes Due To Ted Turner's Death, Sting's Appearance
+[BOT] semantic_id=backstage-news-on-aew-dynamite-changes-due-to-ted-turners-death-stings-appearance
+[SCORE] iniziale=54 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[SKIP] Preview/show announcement scaduta dopo scraping: Backstage News On AEW Dynamite Changes Due To Ted Turner's Death, Sting's Appearance
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: South African Discus Star Francois Prinsloo Announces WWE Departure
+[BOT] semantic_id=south-african-discus-star-francois-prinsloo-announces-wwe-departure
+[SCORE] iniziale=48 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=93 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, contenuto leggero, v62 titolo/championship
+[SKIP] News core già pubblicata da altra fonte: South African Discus Star Francois Prinsloo Announces WWE Departure
+[SKIP] news_core_key=roster-cuts-wwe
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Will Ospreay Would 'Love' If Kofi Kingston & Xavier Woods Came To AEW
+[BOT] semantic_id=will-ospreay-would-love-if-kofi-kingston-xavier-woods-came-to-aew
+[SCORE] iniziale=48 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[SCORE] raffinato=99 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, v62 titolo/championship
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata fallita: Body sospetto o troppo meta
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[QUALITY] Problemi rilevati: ['Testo sospetto o troppo breve']
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Output ancora sospetto dopo revisione: ['Testo sospetto o troppo breve']
+[SKIP] Traduzione fallita: Will Ospreay Would 'Love' If Kofi Kingston & Xavier Woods Came To AEW (err_type=validation)
+[FAILED] URL sospeso 24h dopo 2 validation fail: Will Ospreay Would 'Love' If Kofi Kingston & Xavier Woods Came To AEW
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 6 candidati provati | mode=normal
+===== RUN END [2026-05-07 23:51:08] VERSION [v66_scoring_dedupe_safety_fix (4a111b4)] =====
+
