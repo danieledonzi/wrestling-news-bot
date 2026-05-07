@@ -941,3 +941,130 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 4 candidati provati | mode=normal
 ===== RUN END [2026-05-07 16:03:09] VERSION [v66_scoring_dedupe_safety_fix (fd4889f)] =====
 
+
+===== RUN START [2026-05-07 18:19:47] VERSION [v66_scoring_dedupe_safety_fix (6fafdd5)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (29/75): Report: Raja Jackson Reaches Plea Deal After Alleged In-Ring Assault
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166808/wwe-smackdown-blake-monroe-expected-appear/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166760/nikki-brie-bella-wwe-departure-kairi-sane/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166754/wwe-njpw-hiromu-takahashi-nox-raijin/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166741/wwe-bully-ray-roman-reigns-jacob-fatu-problem-feud/
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2166733/mark-shapiro-tko-not-concerned-wwe-wrestlemania-42-ticket-sales/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166418/wwe-backlash-2026-draws-duds-roman-reigns-jacob-fatu-sami-zayn-trick-williams/
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite/Collision - 5/6/2026: 3 Things We Hated And 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (10/75): EA Sports' UFC 6 Reveal Trailer Features WWE Legend Ken Shamrock
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166692/mjf-finally-granted-aew-world-title-rematch-major-stipulation/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166689/darby-allin-overcomes-aew-tnt-champion-retain-world-title/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (18/75): TNA Moves Slammiversary Start Time to Avoid Direct Clash With AEW x NJPW Forbidden Door 2026
+[SKIP] Score sotto soglia editoriale (0/75): Bubba the Love Sponge Claims Hulk Hogan Was a Victim in $890K Federal Fraud Case
+[SKIP] URL già in history: https://www.ringsidenews.com/when-wwe-planned-john-cenas-appearance-backlash-tampa/
+[SKIP] Score sotto soglia editoriale (32/75): Lizzy Rain Reveals How Her WWE Entrance Theme Came Together
+[SKIP] URL già in history: https://www.ringsidenews.com/nxt-great-american-bash-2026-date-location-venue-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/ireland-wants-host-wwe-wrestlemania-government-push-begins/
+[SKIP] Score sotto soglia editoriale (0/75): Dark Side of the Ring Season 7 Premiere Date and Topics Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/raja-jackson-avoids-trial-reaching-plea-deal-syko-stu-assault-case/
+[SKIP] Score sotto soglia editoriale (12/75): Shawn Michaels Reveals Why Modern WWE Talent Need Years to be Main Roster Ready
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-announces-upcoming-smackdown-episode-will-take-place-tuesday/
+[SKIP] URL già in history: https://www.ringsidenews.com/jacob-fatu-reveals-why-he-brought-back-tongan-death-grip-against-roman-reigns/
+[SCORE] 100 high - Dave Meltzer Says WWE Releases Are Finished, Provides More Details On Talent Pay Cuts | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV
+[SCORE] 99 high - Former WWE Star On Oba Femi: 'Quite Possibly The Strongest Person I've Ever Wrestled' | WWE/main roster, nomi forti titolo: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 ritorno/debutto
+[SCORE] 92 high - Logan Paul Flips Joe Hendry's Diss Song Into "We Admire Logan Paul" Parody Video | WWE/main roster, nomi forti titolo: logan paul, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV
+[SCORE] 88 high - A&E Announces Return Of WWE Rivals With New Episodes Featuring Ric & Charlotte Flair | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 ritorno/debutto
+[SCORE] 76 medium - Nick Khan Testified DOJ Probe Into Vince McMahon Included Trafficking Allegations | nome WWE: nick khan, evento legale/controversia, v62 evento legale grave, v62 categoria business
+[SCORE] 71 medium - Eric Bischoff Comments On The Death Of Ted Turner: 'He Was The Elon Musk' Of His Time | morte, v62 evento morte/storico, v62 categoria business, v48 tier2: 55-74
+[SCORE] 71 medium - David Otunga Defends Lack Of DQ In WWE WrestleMania 42 Main Event | WWE/main roster, top star lead: cm punk, roman reigns, nomi forti lead: roman reigns, cm punk, WWE main roster + storyline/evento, PLE/PPV, v48 tier2: 55-74
+[SCORE] 62 medium - Darby Allin To Defend AEW World Title At Fairway To Hell | AEW, morte, show settimanale, v62 titolo/championship, v48 tier2: 55-74
+[SCORE] 55 low - Sami Zayn Shuts Down Claims He Turned Heel After Attacking the Gingerbread Man | WWE/main roster, WWE main roster + storyline/evento, show settimanale, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - Sheamus Believes One Aspect Of WWE's Attitude Era Is Overrated | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, opinione generica, floor WWE main roster storyline, v48 tier2: 55-74
+[MODE] Storm mode attiva: 3 news >=90, 4 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 13 | mode=storm | max nuove=5 | pending pubblicati=0
+[BOT] Elaborazione: Dave Meltzer Says WWE Releases Are Finished, Provides More Details On Talent Pay Cuts
+[BOT] semantic_id=dave-meltzer-says-wwe-releases-are-finished-provides-more-details-on-talent-pay-cuts
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, v62 business/dirigenza, v62 categoria business
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:business:wwe:executive-contract:nick-khan -> event:business:wwe:executive-contract:nick-khan-followup-dave-meltzer-says-releases-are-finished-provides-more-details-talent-p
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[FIX] Titolo strutturato incoerente -> fallback automatico: Dave meltzer afferma licenziamenti WWE are finished, provides more details on talent pay tagli
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=6
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/dave-meltzer-wwe-releases-talent-pay-cuts/l-intro-1778177185.jpg
+[MEDIA] Immagine caricata: 3834
+[WP] Status attach image: 200
+[OK] Pubblicato: Dave meltzer afferma licenziamenti WWE are finished, provides more details on talent pay tagli
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Former WWE Star On Oba Femi: 'Quite Possibly The Strongest Person I've Ever Wrestled'
+[BOT] semantic_id=former-wwe-star-on-oba-femi-quite-possibly-the-strongest-person-ive-ever-wrestled
+[SCORE] iniziale=99 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[SKIP] Preview/show announcement scaduta dopo scraping: Former WWE Star On Oba Femi: 'Quite Possibly The Strongest Person I've Ever Wrestled'
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Logan Paul Flips Joe Hendry's Diss Song Into "We Admire Logan Paul" Parody Video
+[BOT] semantic_id=logan-paul-flips-joe-hendrys-diss-song-into-we-admire-logan-paul-parody-video
+[SCORE] iniziale=92 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=1
+[BOT] Embed trovati: 2
+[SCORE] raffinato=92 priority=high | WWE/main roster, nomi forti titolo: logan paul, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, contenuto leggero, v62 reazioni/tributi
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=9
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/logan-paul-flips-joe-hendrys-diss-song-into-we-admire-logan-paul-parody-video-12.jpg
+[MEDIA] Immagine caricata: 3837
+[WP] Status attach image: 200
+[OK] Pubblicato: Logan Paul ribalta la canzone di Joe Hendry trasformandola in una parodia: "Ammiamo Logan Paul"
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: A&E Announces Return Of WWE Rivals With New Episodes Featuring Ric & Charlotte Flair
+[BOT] semantic_id=ae-announces-return-of-wwe-rivals-with-new-episodes-featuring-ric-charlotte-flair
+[SCORE] iniziale=88 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[SCORE] raffinato=88 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, developmental secondario, v62 ritorno/debutto
+[FIX] Event key in history ma non confermata su WordPress: event:roman-reigns-diagnosis - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=4
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/ae-announces-return-of-wwe-rivals-with-new-episodes-featuring-ric-charlotte-flair/l-intro-1778152862.jpg
+[MEDIA] Immagine caricata: 3840
+[WP] Status attach image: 200
+[OK] Pubblicato: A&E annuncia il ritorno di WWE Rivals con nuovi episodi dedicati a Ric & Charlotte Flair
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Nick Khan Testified DOJ Probe Into Vince McMahon Included Trafficking Allegations
+[BOT] semantic_id=nick-khan-testified-doj-probe-into-vince-mcmahon-included-trafficking-allegations
+[SCORE] iniziale=76 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=0, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=98 priority=high | WWE/main roster, impatto roster/storyline, evento legale/controversia, v62 evento legale grave, v62 categoria business
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=13
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/nick-khan-testified-doj-probe-into-vince-mcmahon-included-trafficking-allegations-33.jpg
+[MEDIA] Immagine caricata: 3843
+[WP] Status attach image: 200
+[OK] Pubblicato: Nick Khan ha testimoniato che l'indagine del DOJ su Vince Mcmahon includeva accuse di traffico di esseri umani
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Eric Bischoff Comments On The Death Of Ted Turner: 'He Was The Elon Musk' Of His Time
+[BOT] semantic_id=eric-bischoff-comments-on-the-death-of-ted-turner-he-was-the-elon-musk-of-his-time
+[SCORE] iniziale=71 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[SCORE] raffinato=100 priority=high | AEW, impatto roster/storyline, morte, PLE/PPV, v62 evento morte/storico, v62 reazione/tributo con cap, v62 categoria business
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=4
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/eric-bischoff-comments-on-the-death-of-ted-turner-he-was-the-elon-musk-of-his-time/l-intro-1778176172.jpg
+[MEDIA] Immagine caricata: 3846
+[WP] Status attach image: 200
+[OK] Pubblicato: Eric Bischoff ricorda Ted Turner: "È stato l'Elon Musk del suo tempo"
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 5 articoli (0 pending + 5 nuove) su 6 candidati provati | mode=storm
+===== RUN END [2026-05-07 18:19:47] VERSION [v66_scoring_dedupe_safety_fix (6fafdd5)] =====
+
