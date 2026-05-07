@@ -110,3 +110,98 @@
 [BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 1 candidati provati | mode=normal
 ===== RUN END [2026-05-07 09:56:14] VERSION [v60_healthcheck_fix_from_v60 (9c28cfa)] =====
 
+
+===== RUN START [2026-05-07 10:35:23] VERSION [v61_editorial_quality_fix (74e87a2)] =====
+[WP] Health check API timeout | tentativo 1/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=6)
+[WP] Root /wp-json/ raggiungibile: status 200 | retry API in corso
+[WP] Health check API OK: status 200 | tentativo 2/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (14/75): AEW Dynamite/Collision - 5/6/2026: 3 Things We Hated And 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (10/75): EA Sports' UFC 6 Reveal Trailer Features WWE Legend Ken Shamrock
+[SKIP] event_key confermata su WordPress: event:darby-allin-title - Darby Allin Overcomes AEW TNT Champion To Retain World Title
+[SKIP] Score sotto soglia editoriale (33/75): Ricochet Makes Bold Stadium Stampede Challenge For AEW Double Or Nothing
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166671/orange-cassidy-earns-aew-world-tag-title-shot-conglomeration/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163956/wwe-dakota-kai-charlie-explans-decision-break/
+[SKIP] Score sotto soglia editoriale (34/75): Nick Khan Signs New Multi-Million Dollar Deal To Remain WWE President Through 2030
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166634/tony-khan-ted-turner-aew-dynamite-tribute/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165763/aew-dynamite-may-6-aew-world-championship-on-line-double-jeopardy-match/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166574/aew-denies-negotiations-wwe-aleister-black-malaki/
+[SKIP] Score sotto soglia editoriale (0/75): Dana White: 'Even My Voice' Is AI In UFC White House Promo
+[SKIP] Score sotto soglia editoriale (0/75): Chael Sonnen Says He Tried To Warn UFC About 'Russian Invasion'
+[SKIP] Score sotto soglia editoriale (18/75): AEW's Brody King: President Trump Can 'Go F*** Himself'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166400/wwe-jacob-fatu-roman-reigns-relationship-match/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166378/wwe-aleister-black-aew-active-talks/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165748/breaking-down-the-belts-trick-williams-wwe-mens-united-states-championship/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-dynamitecollision-results-highlights-key-moments-may-6-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/mark-shapiro-says-tko-not-concerned-about-decline-ticket-sales-wrestlemania-42/
+[SKIP] URL già in history: https://www.ringsidenews.com/mark-shapiro-confirms-saudi-arabia-commitment-despite-middle-east-conflict-concerns/
+[SKIP] URL già in history: https://www.ringsidenews.com/tko-financials-reveal-massive-q1-2026-revenue-wwe-continues-major-growth/
+[SKIP] URL già in history: https://www.ringsidenews.com/nick-khan-signs-new-deal-remain-wwe-president-through-2030/
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-denies-negotiations-aleister-black-amid-conflicting-reports/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-major-plans-blake-monroe-smackdown/
+[SKIP] URL già in history: https://www.ringsidenews.com/another-njpw-star-expected-sign-wwe-evils-nxt-debut/
+[SKIP] URL già in history: https://www.ringsidenews.com/will-ospreay-addresses-new-day-potentially-joining-aew-wwe-exit/
+[SKIP] Score sotto soglia editoriale (27/75): Former WCW Owner Ted Turner Passes Away at Age 87
+[SKIP] URL già in history: https://www.ringsidenews.com/blake-monroes-wwe-smackdown-debut-timeline-revealed-coming-soon-tease/
+[SCORE] 88 high - Stephanie Vaquer's Ex-Boyfriend El Cuatrero Could Face More Than 30 Years in Prison After Guilty Verdict | altre promotion, nome WWE: stephanie vaquer, evento legale/controversia, v61 evento critico/storico-legale, v61 Vaquer/Cuatrero caso legale bypass
+[SCORE] 81 high - Eric Bischoff Pays Tribute to Ted Turner Following His Passing | morte, show settimanale, v61 evento critico/storico-legale, v61 nome storico/top business, v61 Ted Turner death bypass
+[SCORE] 79 medium - Will Ospreay Reveals Tony Khan Paid for His Neck Surgery: "More Expensive Than My House" | nome AEW: tony khan, infortunio, v61 evento critico/storico-legale, v61 nome storico/top business
+[SCORE] 73 medium - Pro Wrestling World Reacts to Ted Turner's Passing | morte, v61 evento critico/storico-legale, v61 nome storico/top business, v61 Ted Turner death bypass, v48 tier2: 55-74
+[SCORE] 73 medium - Wrestling World Reacts To Passing Of Former WCW Owner Ted Turner | morte, v61 evento critico/storico-legale, v61 nome storico/top business, v61 Ted Turner death bypass, v48 tier2: 55-74
+[SCORE] 51 low - AEW Announces Tonight's Dynamite To Be Dedicated To Late TNT & TBS Founder Ted Turner | AEW, match/segmento annunciato, show settimanale, v61 nome storico/top business, v48 tier3: 45-54 contestuale
+[SCORE] 47 low - MJF Finally Granted AEW World Title Rematch, With One Major Stipulation | AEW, titolo/championship, PLE/PPV, v48 tier3: 45-54 contestuale
+[SCORE] 41 low - Kazuchika Okada Retains AEW International Title, Sets Sights On World Title | AEW, show settimanale, v61 nome storico/top business, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 0 news >=90, 2 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 8 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Stephanie Vaquer's Ex-Boyfriend El Cuatrero Could Face More Than 30 Years in Prison After Guilty Verdict
+[BOT] semantic_id=stephanie-vaquers-ex-boyfriend-el-cuatrero-could-face-more-than-30-years-in-prison-after-guilty-verdict
+[SCORE] iniziale=88 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=0, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=88 priority=high | altre promotion, nome WWE: stephanie vaquer, evento legale/controversia, contenuto leggero, v61 evento critico/storico-legale, v61 Vaquer/Cuatrero caso legale bypass
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=13
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/stephanie-vaquers-ex-boyfriend-el-cuatrero-could-face-more-than-30-years-in-prison-after-guilty-verdict-44.jpg
+[MEDIA] Immagine caricata: 3748
+[WP] Status attach image: 200
+[OK] Pubblicato: L'ex fidanzato di Stephanie Vaquer, El Cuatrero, rischia oltre 30 anni di carcere dopo il verdetto di colpevolezza
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Eric Bischoff Pays Tribute to Ted Turner Following His Passing
+[BOT] semantic_id=eric-bischoff-pays-tribute-to-ted-turner-following-his-passing
+[SCORE] iniziale=81 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=14, image=0, embed=1
+[BOT] Embed trovati: 2
+[SCORE] raffinato=90 priority=high | breaking/major update, PLE/PPV, v61 evento critico/storico-legale, v61 nome storico/top business, v61 Ted Turner death bypass
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=14
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/eric-bischoff-pays-tribute-to-ted-turner-following-his-passing-47.jpg
+[MEDIA] Immagine caricata: 3751
+[WP] Status attach image: 200
+[OK] Pubblicato: Eric Bischoff rende omaggio a Ted Turner dopo la sua scomparsa
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Will Ospreay Reveals Tony Khan Paid for His Neck Surgery: "More Expensive Than My House"
+[BOT] semantic_id=will-ospreay-reveals-tony-khan-paid-for-his-neck-surgery-more-expensive-than-my-house
+[SCORE] iniziale=79 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | AEW, impatto roster/storyline, ritorno/debutto, PLE/PPV, v61 evento critico/storico-legale, v61 nome storico/top business
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=12
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/will-ospreay-reveals-tony-khan-paid-for-his-neck-surgery-more-expensive-than-my-house-36.jpg
+[MEDIA] Immagine caricata: 3754
+[WP] Status attach image: 200
+[OK] Pubblicato: Will Ospreay rivela che Tony Khan ha pagato per il suo intervento al collo: "Più costoso della mia casa"
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
+===== RUN END [2026-05-07 10:35:23] VERSION [v61_editorial_quality_fix (74e87a2)] =====
+
