@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v61_editorial_quality_fix"
+BOT_VERSION = "v62_event_cluster_business_freshness"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -730,23 +730,8 @@ def v61_remove_ai_filler_from_html(html):
 
 
 def v61_critical_event_boost(title="", text="", url=""):
-    probe = normalize_for_check(f"{title} {url} {(text or '')[:2500]}")
-    boost = 0
-    reasons = []
-    if any(term in probe for term in CRITICAL_EVENT_TERMS_V61):
-        boost += 40
-        reasons.append("v61 evento critico/storico-legale")
-    if any(name in probe for name in HISTORIC_BUSINESS_NAMES_V61):
-        boost += 15
-        reasons.append("v61 nome storico/top business")
-    # casi specifici emersi dal live: Turner e Vaquer/Cuatrero devono superare la soglia.
-    if "ted turner" in probe and any(x in probe for x in ["death", "dead", "dies", "passed away", "passing", "morte", "scomparsa"]):
-        boost = max(boost, 55)
-        reasons.append("v61 Ted Turner death bypass")
-    if ("vaquer" in probe or "cuatrero" in probe) and any(x in probe for x in ["femicide", "guilty", "convicted", "accused", "tentato femminicidio", "colpevole"]):
-        boost = max(boost, 55)
-        reasons.append("v61 Vaquer/Cuatrero caso legale bypass")
-    return boost, reasons
+    # v62: compatibilita con il nome v61, ma scoring per tipo evento.
+    return v62_event_importance_boost(title, text, url)
 
 
 def v61_strip_body_images_if_featured(html, has_featured=True):
@@ -760,6 +745,168 @@ def v61_strip_body_images_if_featured(html, has_featured=True):
     for img in soup.find_all(["img", "amp-img"]):
         img.decompose()
     return str(soup)
+
+
+# v62: clustering semantico, freshness editoriale e categoria Business.
+BUSINESS_CATEGORY_ID = int(os.getenv("WP_BUSINESS_CATEGORY_ID", "15"))
+WORLD_CATEGORY_ID = int(os.getenv("WP_WORLD_CATEGORY_ID", "8"))
+
+BUSINESS_CATEGORY_TERMS_V62 = [
+    "tko", "endeavor", "ari emanuel", "mark shapiro", "nick khan", "vince mcmahon",
+    "president", "ceo", "executive", "board", "corporate", "company president",
+    "contract extension", "multi million dollar deal", "new deal", "signs new deal",
+    "revenue", "earnings", "financial", "financials", "q1", "q2", "q3", "q4",
+    "ticket sales", "attendance", "media rights", "tv deal", "broadcast rights",
+    "streaming", "netflix", "warner", "wbd", "amazon", "fox", "usa network",
+    "espn", "cw", "peacock", "saudi", "saudi arabia", "riyadh season",
+    "sponsorship", "sponsor", "merger", "acquisition", "stock", "shareholder",
+    "diritti tv", "diritti media", "ricavi", "fatturato", "bilancio",
+    "contratto dirigente", "rinnovo", "dirigente", "presidente", "amministratore delegato",
+]
+REACTION_TERMS_V62 = ["reacts", "reaction", "reactions", "wrestling world reacts", "pro wrestling world reacts", "world reacts", "pays tribute", "pay tribute", "tribute", "tributes", "honors", "honours", "reagisce", "reazioni", "omaggio", "rende omaggio", "tributo"]
+PREVIEW_TERMS_V62 = ["tonight", "later tonight", "will air", "will open", "will begin", "scheduled for", "set for tonight", "starting tonight", "preview", "dedicated to", "to be dedicated", "stasera", "andra in onda", "andrà in onda", "iniziera", "inizierà", "previsto per", "dedicato a", "sarà dedicato", "sara dedicato"]
+HISTORICAL_INDUSTRY_TERMS_V62 = ["wcw", "ecw", "nwa", "territory", "territories", "turner broadcasting", "tbs", "tnt", "founder", "owner", "former owner", "chairman", "legacy", "hall of fame", "ex proprietario", "fondatore", "proprietario", "storia", "storico"]
+EVENT_IMPORTANCE_RULES_V62 = [
+    (35, ["death", "dies", "dead", "passed away", "passing", "morte", "morto", "morta", "scomparsa", "deceduto"], "v62 evento morte/storico"),
+    (30, ["arrest", "arrested", "accused", "guilty", "convicted", "sentenced", "femicide", "attempted femicide", "domestic violence", "lawsuit", "trial", "legal", "investigation", "police", "arresto", "accusato", "accusata", "colpevole", "condannato", "femminicidio", "tentato femminicidio", "violenza domestica", "causa legale", "indagine"], "v62 evento legale grave"),
+    (25, ["executive", "president", "ceo", "contract extension", "new deal", "signs new deal", "remain president", "through 2030", "dirigente", "presidente", "rinnovo", "nuovo contratto"], "v62 business/dirigenza"),
+    (25, ["media rights", "tv deal", "broadcast rights", "streaming", "netflix", "warner", "espn", "cw", "peacock", "diritti tv", "diritti media"], "v62 media rights/streaming"),
+    (22, ["serious injury", "out of action", "neck surgery", "surgery", "hospital", "medical", "infortunio", "operazione", "ospedale"], "v62 infortunio/operazione"),
+    (20, ["return", "returns", "returned", "debut", "debuts", "ritorno", "debutto"], "v62 ritorno/debutto"),
+    (18, ["title change", "wins title", "new champion", "vacated", "championship", "title", "cambio titolo", "nuovo campione"], "v62 titolo/championship"),
+    (18, ["earnings", "revenue", "financial", "ticket sales", "attendance", "sponsorship", "merger", "acquisition", "ricavi", "fatturato", "bilancio", "vendita biglietti", "sponsorizzazione"], "v62 corporate/business"),
+    (10, ["reacts", "reaction", "reactions", "tribute", "tributes", "pays tribute", "reazioni", "omaggio", "tributo"], "v62 reazioni/tributi"),
+]
+EVENT_CLUSTER_ENTITY_ALIASES_V62 = [
+    ("ted-turner", ["ted turner", "turner"]), ("stephanie-vaquer", ["stephanie vaquer", "vaquer"]),
+    ("el-cuatrero", ["el cuatrero", "cuatrero"]), ("nick-khan", ["nick khan"]),
+    ("tony-khan", ["tony khan"]), ("vince-mcmahon", ["vince mcmahon"]),
+    ("roman-reigns", ["roman reigns"]), ("cody-rhodes", ["cody rhodes"]),
+    ("cm-punk", ["cm punk"]), ("will-ospreay", ["will ospreay"]), ("darby-allin", ["darby allin"]),
+]
+SHOW_FRESHNESS_CUTOFFS_V62 = {"raw": (1, 10), "nxt": (2, 10), "dynamite": (3, 10), "smackdown": (5, 10), "collision": (6, 10), "rampage": (6, 10), "impact": (6, 10)}
+
+def v62_probe(title="", text="", url=""):
+    return normalize_for_check(f"{title} {url} {(text or '')[:2500]}")
+
+def v62_has_any(probe, terms):
+    return any(normalize_for_check(term) in probe for term in terms)
+
+def v62_detect_entities(probe):
+    entities = []
+    for key, aliases in EVENT_CLUSTER_ENTITY_ALIASES_V62:
+        if any(normalize_for_check(alias) in probe for alias in aliases):
+            entities.append(key)
+    return list(dict.fromkeys(entities))
+
+def v62_detect_event_type(probe):
+    if v62_has_any(probe, ["death", "dies", "dead", "passed away", "passing", "morte", "morto", "morta", "scomparsa", "deceduto"]):
+        return "death"
+    if v62_has_any(probe, ["arrest", "arrested", "accused", "guilty", "convicted", "sentenced", "femicide", "attempted femicide", "domestic violence", "lawsuit", "trial", "legal", "investigation", "police", "arresto", "accusato", "accusata", "colpevole", "condannato", "femminicidio", "tentato femminicidio", "violenza domestica", "causa legale", "indagine"]):
+        return "legal"
+    if v62_has_any(probe, BUSINESS_CATEGORY_TERMS_V62):
+        return "business"
+    if v62_has_any(probe, ["injury", "injured", "surgery", "medical", "hospital", "out of action", "infortunio", "operazione", "ospedale"]):
+        return "injury"
+    if v62_has_any(probe, ["return", "returns", "returned", "debut", "debuts", "ritorno", "debutto"]):
+        return "return"
+    if v62_has_any(probe, ["championship", "title", "champion", "retains", "wins title", "title shot", "titolo", "campione"]):
+        return "title"
+    if v62_has_any(probe, PREVIEW_TERMS_V62):
+        return "preview"
+    return ""
+
+def v62_event_cluster_key(title="", text="", url=""):
+    probe = v62_probe(title, text, url)
+    if not probe:
+        return ""
+    event_type = v62_detect_event_type(probe)
+    entities = v62_detect_entities(probe)
+    if event_type == "death" and entities:
+        base = f"event:death:{entities[0]}"
+        if v62_has_any(probe, REACTION_TERMS_V62):
+            if v62_has_any(probe, ["wrestling world reacts", "pro wrestling world reacts", "world reacts", "reacts", "reactions", "reazioni"]):
+                return base + ":reactions"
+            other = [e for e in entities if e != entities[0]]
+            if other:
+                return base + ":tribute:" + other[0]
+            return base + ":reactions"
+        return base
+    if event_type == "legal" and entities:
+        return "event:legal:" + ":".join(entities[:3])
+    if event_type == "business":
+        if "nick-khan" in entities and v62_has_any(probe, ["deal", "contract", "extension", "president", "2030", "rinnovo", "contratto"]):
+            return "event:business:wwe:executive-contract:nick-khan"
+        if v62_has_any(probe, ["tko", "earnings", "revenue", "financial", "q1", "q2", "q3", "q4", "ricavi", "bilancio"]):
+            return "event:business:tko-financials"
+        if v62_has_any(probe, ["netflix", "media rights", "tv deal", "broadcast rights", "streaming", "diritti tv"]):
+            return "event:business:media-rights"
+        if entities:
+            return "event:business:" + ":".join(entities[:2])
+    if event_type == "preview":
+        for show in ["raw", "smackdown", "nxt", "dynamite", "collision", "rampage", "impact"]:
+            if show in probe:
+                return f"event:preview:{show}:" + make_title_key(title)[:60]
+    if event_type == "title" and entities:
+        qualifiers = []
+        for q in ["tnt", "world", "international", "tag", "retains", "retain", "title shot", "championship", "dynamite", "collision", "double or nothing"]:
+            if q in probe:
+                qualifiers.append(q.replace(" ", "-"))
+        if qualifiers:
+            return "event:title:" + ":".join(entities[:2] + qualifiers[:4])
+    return ""
+
+def v62_is_business_news(title="", text="", url=""):
+    probe = v62_probe(title, text, url)
+    return bool(probe and (v62_has_any(probe, BUSINESS_CATEGORY_TERMS_V62) or v62_detect_event_type(probe) == "business"))
+
+def v62_is_industry_history_news(title="", text="", url=""):
+    probe = v62_probe(title, text, url)
+    return v62_has_any(probe, HISTORICAL_INDUSTRY_TERMS_V62) and not v62_has_any(probe, ["wwe", "aew", "tna", "nxt", "raw", "smackdown", "dynamite", "collision"])
+
+def v62_event_importance_boost(title="", text="", url=""):
+    probe = v62_probe(title, text, url)
+    boost = 0
+    reasons = []
+    for points, terms, label in EVENT_IMPORTANCE_RULES_V62:
+        if v62_has_any(probe, terms):
+            boost += points
+            reasons.append(label)
+            break
+    if v62_has_any(probe, REACTION_TERMS_V62) and v62_detect_event_type(probe) == "death":
+        boost = min(boost + 10, 45)
+        reasons.append("v62 reazione/tributo con cap")
+    if v62_is_business_news(title, text, url):
+        boost += 18
+        reasons.append("v62 categoria business")
+    return boost, reasons
+
+def v62_apply_score_caps(score, title="", text="", url="", reasons=None):
+    reasons = reasons or []
+    probe = v62_probe(title, text, url)
+    event_type = v62_detect_event_type(probe)
+    if event_type == "injury" and v62_has_any(probe, ["reveals", "discusses", "interview", "podcast", "parla", "rivela"]):
+        if score > 84:
+            score = 84; reasons.append("v62 cap injury/intervista")
+    if event_type == "death" and v62_has_any(probe, ["world reacts", "wrestling world reacts", "pro wrestling world reacts", "reactions", "reacts", "reazioni"]):
+        if score > 82:
+            score = 82; reasons.append("v62 cap reazioni generiche")
+    return score, reasons
+
+def v62_is_expired_preview(title="", text="", url=""):
+    probe = v62_probe(title, text, url)
+    if not v62_has_any(probe, PREVIEW_TERMS_V62):
+        return False
+    try:
+        from zoneinfo import ZoneInfo
+        now = datetime.now(ZoneInfo("Europe/Rome"))
+    except Exception:
+        now = datetime.now()
+    for show, (weekday, hour) in SHOW_FRESHNESS_CUTOFFS_V62.items():
+        if show in probe:
+            if now.weekday() > weekday or (now.weekday() == weekday and now.hour >= hour):
+                return True
+    return False
 
 def italian_quality_issues(title, html_text):
     issues = []
@@ -1335,6 +1482,12 @@ def detect_source_category(title, text="", url=""):
 
     primary = f"{title_l} {url_l}"
     full_probe = normalize_for_check(f"{title_l} {url_l} {text_l}")
+
+    # v62: Business e industry/history prima dei brand generici.
+    if v62_is_business_news(title, text, url):
+        return BUSINESS_CATEGORY_ID
+    if v62_is_industry_history_news(title, text, url):
+        return WORLD_CATEGORY_ID
 
     # 1) Keyword esplicite in titolo/URL: massima affidabilita.
     if "nxt" in primary:
@@ -3769,6 +3922,7 @@ def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", 
         content_html = normalize_x_links_in_text(str(soup_temp))
         content_html = append_embeds_to_html(content_html, embed_urls or [])
         if featured_image_url:
+            # v62: WordPress/tema mostra gia' la featured image. Non reinserire immagini nel body.
             inline_images = []
             content_html = v61_strip_body_images_if_featured(content_html, has_featured=True)
         content_html = append_inline_images_to_html(content_html, inline_images or [], featured_url=featured_image_url)
@@ -3841,6 +3995,11 @@ def make_event_key(title, text="", url=""):
     probe = normalize_for_check(f"{title} {url} {lead_text}")
     if not probe:
         return ""
+
+    # v62: event cluster generale prima delle vecchie chiavi.
+    v62_cluster = v62_event_cluster_key(title, text, url)
+    if v62_cluster:
+        return v62_cluster
 
     # Alias / entita principali
     entities = []
@@ -4199,6 +4358,13 @@ def calculate_importance_score(title, text="", url=""):
     if v61_boost:
         score += v61_boost
         reasons.extend(v61_reasons)
+
+    # v62: freshness. Le preview di show gia' andati in onda non devono passare.
+    if v62_is_expired_preview(title, text, url):
+        score = min(score, 20)
+        reasons.append("v62 preview scaduta")
+
+    score, reasons = v62_apply_score_caps(score, title, text, url, reasons)
 
     return clamp_score(score), reasons[:10]
 
@@ -4744,6 +4910,9 @@ def build_candidates(history, wp_available=True):
                     continue
 
                 summary = get_entry_summary(entry)
+                if v62_is_expired_preview(title, summary, link):
+                    print(f"[SKIP] Preview/show announcement scaduta: {title}")
+                    continue
                 entry_ts = get_entry_timestamp(entry)
                 is_breaking = title_has_breaking_marker(title)
                 breaking_expires_at = entry_ts + BREAKING_ACTIVE_SECONDS
@@ -4962,6 +5131,11 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
                             seen_event_keys,
                             source_fail_counts,
                         )
+        return "skipped"
+
+    if v62_is_expired_preview(title, full_text, link):
+        print(f"[SKIP] Preview/show announcement scaduta dopo scraping: {title}")
+        remove_pending_url(link)
         return "skipped"
 
     scoring_text = extract_main_scoring_text(full_text)
