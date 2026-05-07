@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v64_quality_gate_category_fix"
+BOT_VERSION = "v65_dedupe_schedule_tuning"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -3821,6 +3821,181 @@ def find_existing_post_by_url(url):
 
 
 
+# v65: dedupe semantico pre-publish + schedule/news filtering tuning.
+WP_RECENT_POSTS_CACHE_V65 = {"ts": 0, "items": []}
+
+V65_DEDUPE_STOPWORDS = set(STOPWORDS).union({
+    "ottiene", "sua", "suo", "rivincita", "rematch", "grossa", "grande", "condizione",
+    "accordo", "caso", "dopo", "prima", "news", "sviluppi", "nuovi", "nuovo", "palio",
+    "finally", "granted", "major", "stipulation", "with", "one", "the", "his", "her"
+})
+
+V65_KNOWN_ENTITY_CASE = {
+    "mjf": "MJF", "aew": "AEW", "wwe": "WWE", "nxt": "NXT", "tna": "TNA", "tko": "TKO",
+    "raja jackson": "Raja Jackson", "syko stu": "Syko Stu", "mark shapiro": "Mark Shapiro",
+    "jim ross": "Jim Ross", "jacob fatu": "Jacob Fatu", "roman reigns": "Roman Reigns",
+    "darby allin": "Darby Allin", "kazuchika okada": "Kazuchika Okada", "kevin knight": "Kevin Knight",
+    "double or nothing": "Double or Nothing", "dynamite diamond ring": "Dynamite Diamond Ring",
+    "aew world championship": "AEW World Championship", "world championship": "World Championship",
+    "great american bash": "Great American Bash", "wrestlemania": "WrestleMania",
+}
+
+V65_SCHEDULE_KEEP_TERMS = [
+    "date", "location", "venue", "arena", "city", "host", "hosting", "officially announced",
+    "announced for", "set for", "takes place", "will take place", "confirmed for", "returns to",
+    "data", "sede", "location", "arena", "citta", "città", "ospitare", "ospiterà",
+    "ufficiale", "annunciata", "annunciato", "confermata", "confermato"
+]
+
+V65_PREVIEW_SKIP_TERMS = [
+    "preview", "what to expect", "things to know", "lineup", "card for tonight", "tonight's card",
+    "things we loved", "things we hated", "predictions", "grades", "takeaways",
+    "cosa aspettarsi", "preview", "pronostici", "card di stasera", "lineup"
+]
+
+
+def v65_plain_text_from_wp(post):
+    try:
+        title = post.get("title", {}).get("rendered", "") if isinstance(post.get("title"), dict) else str(post.get("title", ""))
+        content = post.get("content", {}).get("rendered", "") if isinstance(post.get("content"), dict) else str(post.get("content", ""))
+        excerpt = post.get("excerpt", {}).get("rendered", "") if isinstance(post.get("excerpt"), dict) else str(post.get("excerpt", ""))
+        raw = " ".join([title, excerpt, content, post.get("link", ""), str(post.get("slug", ""))])
+        return sanitize_text(BeautifulSoup(raw, "html.parser").get_text(" ", strip=True))
+    except Exception:
+        return ""
+
+
+def v65_recent_posts(per_page=50):
+    now = time.time()
+    if WP_RECENT_POSTS_CACHE_V65["items"] and now - WP_RECENT_POSTS_CACHE_V65["ts"] < 180:
+        return WP_RECENT_POSTS_CACHE_V65["items"]
+    try:
+        res = session.get(
+            WP_API_URL,
+            params={"per_page": per_page, "status": "publish", "orderby": "date", "order": "desc"},
+            auth=(WP_USER, WP_PASSWORD),
+            timeout=REQUEST_TIMEOUT_WP,
+        )
+        if res.status_code == 200:
+            items = res.json()
+            WP_RECENT_POSTS_CACHE_V65["items"] = items
+            WP_RECENT_POSTS_CACHE_V65["ts"] = now
+            return items
+        print(f"[DEDUPE] Recent posts non disponibili: status {res.status_code}")
+    except Exception as e:
+        print(f"[DEDUPE] Errore recupero recent posts: {e}")
+    return []
+
+
+def v65_core_tokens(text):
+    words = normalize_for_check(text).split()
+    out = []
+    for w in words:
+        if len(w) <= 2:
+            continue
+        if w in V65_DEDUPE_STOPWORDS:
+            continue
+        out.append(w)
+    return set(out)
+
+
+def v65_extract_entities(text):
+    probe = normalize_for_check(text)
+    entities = []
+    candidates = sorted(set(WWE_NAMES + AEW_NAMES + NXT_NAMES + TNA_OTHER_NAMES + STRONG_NAMES + TOP_STAR_NAMES + [
+        "mjf", "darby allin", "raja jackson", "syko stu", "mark shapiro", "nick khan", "great american bash"
+    ]), key=len, reverse=True)
+    for name in candidates:
+        key = normalize_for_check(name)
+        if key and key in probe:
+            entities.append(key)
+    return set(entities)
+
+
+def v65_similarity(a, b):
+    ta = v65_core_tokens(a)
+    tb = v65_core_tokens(b)
+    if not ta or not tb:
+        return 0.0
+    return len(ta & tb) / max(1, min(len(ta), len(tb)))
+
+
+def v65_wp_recent_duplicate(title, text, url, event_key=""):
+    """Blocca duplicati gia pubblicati su WP, anche con titolo riscritto.
+    Esegue il controllo dopo scraping e prima di Gemini per non sprecare API.
+    """
+    probe = sanitize_text(f"{title} {url} {(text or '')[:1800]}")
+    probe_norm = normalize_for_check(probe)
+    entities = v65_extract_entities(probe)
+    story_fp = make_story_fingerprint(title, text or "")
+    title_key = make_title_key(title)
+
+    for post in v65_recent_posts():
+        post_text = v65_plain_text_from_wp(post)
+        if not post_text:
+            continue
+        post_norm = normalize_for_check(post_text)
+        post_id = post.get("id")
+        post_title = BeautifulSoup(post.get("title", {}).get("rendered", "") if isinstance(post.get("title"), dict) else str(post.get("title", "")), "html.parser").get_text(" ", strip=True)
+
+        if url and url in json.dumps(post, ensure_ascii=False):
+            return {"id": post_id, "title": post_title, "score": 1.0, "reason": "same source URL"}
+
+        if event_key and event_key in json.dumps(post, ensure_ascii=False):
+            return {"id": post_id, "title": post_title, "score": 1.0, "reason": "same event_key meta"}
+
+        sim_title = v65_similarity(title, post_title)
+        sim_probe = v65_similarity(probe, post_text[:2200])
+        post_entities = v65_extract_entities(post_text)
+        ent_overlap = len(entities & post_entities)
+
+        # Doppioni diretti: stessi protagonisti e titolo/lead molto simile.
+        if ent_overlap >= 1 and (sim_title >= 0.72 or sim_probe >= 0.78):
+            return {"id": post_id, "title": post_title, "score": max(sim_title, sim_probe), "reason": "entity+semantic similarity"}
+
+        # Doppioni senza tante entita ma stesso fingerprint/titolo normalizzato.
+        post_fp = make_story_fingerprint(post_title, post_text[:2200])
+        if story_fp and post_fp and story_fingerprint_similarity(story_fp, post_fp) >= 0.82:
+            return {"id": post_id, "title": post_title, "score": story_fingerprint_similarity(story_fp, post_fp), "reason": "story fingerprint similarity"}
+
+        if title_key and title_key == make_title_key(post_title):
+            return {"id": post_id, "title": post_title, "score": 1.0, "reason": "same normalized title_key"}
+
+    return None
+
+
+def v65_is_official_schedule_news(title="", text="", url=""):
+    probe = v62_probe(title, text, url)
+    if not probe:
+        return False
+    has_event = any(x in probe for x in ["great american bash", "wrestlemania", "summerslam", "royal rumble", "backlash", "double or nothing", "all in", "forbidden door", "nxt"])
+    keep_signal = v62_has_any(probe, V65_SCHEDULE_KEEP_TERMS)
+    hard_preview = v62_has_any(probe, V65_PREVIEW_SKIP_TERMS) and not keep_signal
+    return has_event and keep_signal and not hard_preview
+
+
+def v65_proper_case_title(title):
+    t = sanitize_text(title or "")
+    if not t:
+        return t
+    # Sostituzioni fraseologiche minime e proper case, senza bloccare pubblicazione.
+    replacements = {
+        "la sua rivincita": "la rivincita",
+        "AEW world championship": "AEW World Championship",
+        "aew world championship": "AEW World Championship",
+        "world championship": "World Championship",
+        "pubblici ministeri": "procura",
+        "una grossa condizione": "una condizione importante",
+    }
+    for old, new in replacements.items():
+        t = re.sub(re.escape(old), new, t, flags=re.I)
+    for low, proper in sorted(V65_KNOWN_ENTITY_CASE.items(), key=lambda x: len(x[0]), reverse=True):
+        t = re.sub(r"\b" + re.escape(low) + r"\b", proper, t, flags=re.I)
+    # Fix iniziali tipo Mjf/Raja jackson senza provare a title-case tutto.
+    return sanitize_text(t)
+
+
+
 def wp_has_published_event(event_key, title="", url=""):
     """
     v42: evita falsi positivi da history sporca.
@@ -5427,10 +5602,12 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
                         )
         return "skipped"
 
-    if v62_is_expired_preview(title, full_text, link):
+    if v62_is_expired_preview(title, full_text, link) and not v65_is_official_schedule_news(title, full_text, link):
         print(f"[SKIP] Preview/show announcement scaduta dopo scraping: {title}")
         remove_pending_url(link)
         return "skipped"
+    elif v62_is_expired_preview(title, full_text, link) and v65_is_official_schedule_news(title, full_text, link):
+        print(f"[FRESHNESS] Preview scaduta ma news schedule/location ufficiale: {title}")
 
     scoring_text = extract_main_scoring_text(full_text)
     refined_score, refined_reasons = calculate_importance_score(title, scoring_text, link)
@@ -5451,6 +5628,13 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     news_core_key = make_news_core_key(title, full_text)
     event_key = item.get("event_key") or make_event_key(title, scoring_text, link)
     item["event_key"] = event_key
+
+    v65_dup = v65_wp_recent_duplicate(title, full_text, link, event_key=event_key)
+    if v65_dup:
+        print(f"[DEDUPE BLOCKED] Doppione semantico gia' pubblicato: {title}")
+        print(f"[DEDUPE BLOCKED] Matched post ID={v65_dup.get('id')} | similarity={v65_dup.get('score'):.2f} | reason={v65_dup.get('reason')} | title={v65_dup.get('title')}")
+        remove_pending_url(link)
+        return "skipped"
 
     if event_key and is_followup_angle(title, scoring_text, event_key):
         original_event_key = event_key
@@ -5538,6 +5722,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     news_data["titolo"] = maybe_add_breaking_prefix(news_data["titolo"], item)
     news_data = v63_editorial_finalize(news_data, title, text_for_translation or full_text, link)
     news_data["titolo"] = v63_humanize_title(news_data["titolo"], title, text_for_translation or full_text)
+    news_data["titolo"] = v65_proper_case_title(news_data["titolo"])
     news_data["testo"] = v63_humanize_body_html(news_data.get("testo", ""))
 
     img_url = (extract_image_url(entry) if entry else None) or page_img
