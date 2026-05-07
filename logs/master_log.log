@@ -4456,3 +4456,227 @@
 [PENDING] Candidati salvati per dopo: 3
 ===== RUN END [2026-05-07 05:12:17] VERSION [v60 (9fb2f59)] =====
 
+
+===== RUN START [2026-05-07 05:34:51] VERSION [v60_healthcheck_fix_from_v60 (7ed0015)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (14/75): AEW Dynamite/Collision - 5/6/2026: 3 Things We Hated And 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (10/75): EA Sports' UFC 6 Reveal Trailer Features WWE Legend Ken Shamrock
+[FIX] Event key in history ma non confermata su WordPress: event:darby-allin-title - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (26/75): Kazuchika Okada Retains AEW International Title, Sets Sights On World Title
+[SKIP] Score sotto soglia editoriale (33/75): Ricochet Makes Bold Stadium Stampede Challenge For AEW Double Or Nothing
+[SKIP] Score sotto soglia editoriale (34/75): Nick Khan Signs New Multi-Million Dollar Deal To Remain WWE President Through 2030
+[FIX] Event key in history ma non confermata su WordPress: event:darby-allin-title - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (0/75): Dana White: 'Even My Voice' Is AI In UFC White House Promo
+[SKIP] Score sotto soglia editoriale (0/75): Chael Sonnen Says He Tried To Warn UFC About 'Russian Invasion'
+[SKIP] Score sotto soglia editoriale (36/75): AEW Announces Tonight's Dynamite To Be Dedicated To Late TNT & TBS Founder Ted Turner
+[SKIP] Score sotto soglia editoriale (18/75): AEW's Brody King: President Trump Can 'Go F*** Himself'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166400/wwe-jacob-fatu-roman-reigns-relationship-match/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166378/wwe-aleister-black-aew-active-talks/
+[SKIP] Score sotto soglia editoriale (18/75): Wrestling World Reacts To Passing Of Former WCW Owner Ted Turner
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165748/breaking-down-the-belts-trick-williams-wwe-mens-united-states-championship/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[FIX] Event key in history ma non confermata su WordPress: event:darby-allin-title - provo a pubblicare
+[SKIP] URL già in history: https://www.ringsidenews.com/mark-shapiro-confirms-saudi-arabia-commitment-despite-middle-east-conflict-concerns/
+[SKIP] URL già in history: https://www.ringsidenews.com/tko-financials-reveal-massive-q1-2026-revenue-wwe-continues-major-growth/
+[SKIP] URL già in history: https://www.ringsidenews.com/nick-khan-signs-new-deal-remain-wwe-president-through-2030/
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-denies-negotiations-aleister-black-amid-conflicting-reports/
+[SKIP] Score sotto soglia editoriale (26/75): Eric Bischoff Pays Tribute to Ted Turner Following His Passing
+[SKIP] Score sotto soglia editoriale (33/75): Stephanie Vaquer's Ex-Boyfriend El Cuatrero Could Face More Than 30 Years in Prison After Guilty Verdict
+[SKIP] Score sotto soglia editoriale (18/75): Pro Wrestling World Reacts to Ted Turner's Passing
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-major-plans-blake-monroe-smackdown/
+[SKIP] URL già in history: https://www.ringsidenews.com/another-njpw-star-expected-sign-wwe-evils-nxt-debut/
+[SKIP] URL già in history: https://www.ringsidenews.com/will-ospreay-addresses-new-day-potentially-joining-aew-wwe-exit/
+[SKIP] Score sotto soglia editoriale (24/75): Will Ospreay Reveals Tony Khan Paid for His Neck Surgery: "More Expensive Than My House"
+[SKIP] Score sotto soglia editoriale (12/75): Former WCW Owner Ted Turner Passes Away at Age 87
+[SKIP] URL già in history: https://www.ringsidenews.com/blake-monroes-wwe-smackdown-debut-timeline-revealed-coming-soon-tease/
+[SCORE] 75 medium - AEW Dynamite/Collision Results, Highlights and Key Moments for May 6, 2026 | AEW, titolo/championship, show settimanale, report/results: bypass soglia editoriale
+[SCORE] 75 medium - AEW Dynamite & Collision Results 5/6 - AEW World Title On The Line, Double Jeopardy Match | AEW, titolo/championship, show settimanale, report/results: bypass soglia editoriale
+[SCORE] 66 medium - Former WWE Star Dakota Kai Explains Decision To Take A Break From Wrestling | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v48 tier2: 55-74
+[SCORE] 63 medium - Mark Shapiro Says TKO Not Concerned About Decline in Ticket Sales for WrestleMania 42 | WWE/main roster, business/contratti WWE-TKO, intervista/opinione, PLE/PPV, v48 tier2: 55-74
+[SCORE] 47 low - MJF Finally Granted AEW World Title Rematch, With One Major Stipulation | AEW, titolo/championship, PLE/PPV, v48 tier3: 45-54 contestuale
+[SCORE] 46 low - Report: AEW Denies They're Currently In Negotiations With Ex-WWE Star Aleister Black | WWE/main roster, impatto roster/storyline, contratto, v48 tier3: 45-54 contestuale
+[SCORE] 44 low - Tony Khan Comments On Death Of Ted Turner, Says AEW Dynamite Will Begin With Tribute | AEW, morte, show settimanale, v48 tier4: 40-44 riempimento controllato
+[SCORE] 40 low - Darby Allin Overcomes AEW TNT Champion To Retain World Title | AEW, titolo/championship, show settimanale, v48 tier4: 40-44 riempimento controllato
+[SCORE] 40 low - Orange Cassidy Earns AEW World Tag Title Shot For Conglomeration | AEW, titolo/championship, show settimanale, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 4
+[BOT] Elaborazione: AEW Dynamite/Collision Results, Highlights and Key Moments for May 6, 2026
+[BOT] semantic_id=aew-dynamitecollision-results-highlights-and-key-moments-for-may-6-2026
+[SCORE] iniziale=75 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=90, image=0, embed=32
+[BOT] Embed trovati: 33
+[SCORE] raffinato=75 priority=medium | AEW, impatto roster/storyline, morte, PLE/PPV
+[FIX] Event key in history ma non confermata su WordPress: event:darby-allin-title - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=90
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/aew-dynamite-preview-for-may-6-2026-confirmed-matches-start-time-and-how-to-watch-24.jpg
+[MEDIA] Immagine caricata: 3727
+[WP] Status attach image: 200
+[OK] Pubblicato: Risultati, highlights e momenti chiave di AEW Dynamite/Collision del 6 maggio 2026
+[PENDING] Coda salvata: 3 elementi
+[BOT] Elaborazione: Former WWE Star Dakota Kai Explains Decision To Take A Break From Wrestling
+[BOT] semantic_id=former-wwe-star-dakota-kai-explains-decision-to-take-a-break-from-wrestling
+[SCORE] iniziale=66 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=83 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash | blocchi testo=5
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/former-wwe-star-dakota-kai-explains-decision-to-take-a-break-from-wrestling/l-intro-1777911287.jpg
+[MEDIA] Immagine caricata: 3730
+[WP] Status attach image: 200
+[OK] Pubblicato: Ex Star WWE Dakota Kai Spiega la Decisione di Prendere una Pausa dal Wrestling
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Mark Shapiro Says TKO Not Concerned About Decline in Ticket Sales for WrestleMania 42
+[BOT] semantic_id=mark-shapiro-says-tko-not-concerned-about-decline-in-ticket-sales-for-wrestlemania-42
+[SCORE] iniziale=63 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:cody-rhodes-diagnosis -> event:cody-rhodes-diagnosis-followup-mark-shapiro-says-tko-not-concerned-about-decline-ticket-sales
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=15
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/mark-shapiro-says-tko-not-concerned-about-decline-in-ticket-sales-for-wrestlemania-42-03.jpg
+[MEDIA] Immagine caricata: 3733
+[WP] Status attach image: 200
+[OK] Pubblicato: Mark Shapiro Afferma che TKO Non è Preoccupata dal Calo della Vendita dei Biglietti per WrestleMania 42
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Report: AEW Denies They're Currently In Negotiations With Ex-WWE Star Aleister Black
+[BOT] semantic_id=report-aew-denies-theyre-currently-in-negotiations-with-ex-wwe-star-aleister-black
+[SCORE] iniziale=46 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[SCORE] raffinato=83 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=3
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/aew-denies-negotiations-wwe-aleister-black-malaki/l-intro-1778107314.jpg
+[MEDIA] Immagine caricata: 3736
+[WP] Status attach image: 200
+[OK] Pubblicato: Report: La AEW Nega di Essere Attualmente in Negoziazioni con l'Ex Star della WWE Aleister Black
+[PENDING] Coda salvata: 0 elementi
+[BOT] News candidate totali: 9 | mode=normal | max nuove=3 | pending pubblicati=4
+[BOT] Elaborazione: AEW Dynamite/Collision Results, Highlights and Key Moments for May 6, 2026
+[BOT] semantic_id=aew-dynamitecollision-results-highlights-and-key-moments-for-may-6-2026
+[SCORE] iniziale=75 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=90, image=0, embed=32
+[BOT] Embed trovati: 33
+[SCORE] raffinato=75 priority=medium | AEW, impatto roster/storyline, morte, PLE/PPV
+[SKIP] Event key già pubblicata nella run e confermata su WordPress: event:darby-allin-title - AEW Dynamite/Collision Results, Highlights and Key Moments for May 6, 2026
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: AEW Dynamite & Collision Results 5/6 - AEW World Title On The Line, Double Jeopardy Match
+[BOT] semantic_id=aew-dynamite-collision-results-56-aew-world-title-on-the-line-double-jeopardy-match
+[SCORE] iniziale=75 priority=medium
+[SCRAPE] Articolo results rilevato: testo completo (18730 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=74, image=11, embed=0
+[PENDING] Coda salvata: 1 elementi
+[REPORT] Salvato/aggiornato pending report: report:aew-dynamite-2026-05-06 | gia' maturo
+[REPORT] Valuto fonti per report: report:aew-dynamite-2026-05-06
+[SCRAPE] Articolo results rilevato: testo completo (18730 caratteri)
+[REPORT] Fonte migliore: score_completezza=189 | www.wrestlinginc.com | AEW Dynamite & Collision Results 5/6 - AEW World Title On The Line, Double Jeopardy Match
+[BOT] Elaborazione: AEW Dynamite & Collision Results 5/6 - AEW World Title On The Line, Double Jeopardy Match
+[BOT] semantic_id=report-aew-dynamite-2026-05-06
+[SCORE] iniziale=75 priority=medium
+[REPORT] Uso testo prefetched per report maturo (18730 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=74, image=11, embed=0
+[SCORE] raffinato=75 priority=medium | AEW, impatto roster/storyline, morte, show settimanale, non wrestling puro
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=74
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/aew-dynamite-may-6-aew-world-championship-on-line-double-jeopardy-match/l-intro-1778124097.jpg
+[MEDIA] Immagine caricata: 3739
+[WP] Status attach image: 200
+[OK] Pubblicato: AEW Dynamite del 6 maggio 2026 - risultati e momenti salienti
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Former WWE Star Dakota Kai Explains Decision To Take A Break From Wrestling
+[BOT] semantic_id=former-wwe-star-dakota-kai-explains-decision-to-take-a-break-from-wrestling
+[SCORE] iniziale=66 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=83 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[SKIP] News probabilmente già pubblicata da altra fonte: Former WWE Star Dakota Kai Explains Decision To Take A Break From Wrestling
+[SKIP] story_fingerprint=star-dakota-kai-explains-decision-take-break-wrestling-last-year-second-time-her-career-was-released-sending-out-into-world-independent-however-this-around
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Mark Shapiro Says TKO Not Concerned About Decline in Ticket Sales for WrestleMania 42
+[BOT] semantic_id=mark-shapiro-says-tko-not-concerned-about-decline-in-ticket-sales-for-wrestlemania-42
+[SCORE] iniziale=63 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:cody-rhodes-diagnosis -> event:cody-rhodes-diagnosis-followup-mark-shapiro-says-tko-not-concerned-about-decline-ticket-sales
+[SKIP] News probabilmente già pubblicata da altra fonte: Mark Shapiro Says TKO Not Concerned About Decline in Ticket Sales for WrestleMania 42
+[SKIP] story_fingerprint=mark-shapiro-tko-not-concerned-about-decline-ticket-sales-may-have-led-lot-debate-over-creative-decisions-but-made-clear-wasn-concern-all-heading
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: MJF Finally Granted AEW World Title Rematch, With One Major Stipulation
+[BOT] semantic_id=mjf-finally-granted-aew-world-title-rematch-with-one-major-stipulation
+[SCORE] iniziale=47 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[SCORE] raffinato=67 priority=medium | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, PLE/PPV
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - MJF Finally Granted AEW World Title Rematch, With One Major Stipulation
+[SKIP] Event key già pubblicata nella run e confermata su WordPress: event:darby-allin-title - MJF Finally Granted AEW World Title Rematch, With One Major Stipulation
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Report: AEW Denies They're Currently In Negotiations With Ex-WWE Star Aleister Black
+[BOT] semantic_id=report-aew-denies-theyre-currently-in-negotiations-with-ex-wwe-star-aleister-black
+[SCORE] iniziale=46 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[SCORE] raffinato=83 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[SKIP] News probabilmente già pubblicata da altra fonte: Report: AEW Denies They're Currently In Negotiations With Ex-WWE Star Aleister Black
+[SKIP] story_fingerprint=denies-they-currently-negotiations-star-aleister-black-has-been-twists-turns-malakai-rollercoaster-prior-today-had-suggested-that-recently-released-was-not-expected-sign
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Tony Khan Comments On Death Of Ted Turner, Says AEW Dynamite Will Begin With Tribute
+[BOT] semantic_id=tony-khan-comments-on-death-of-ted-turner-says-aew-dynamite-will-begin-with-tribute
+[SCORE] iniziale=44 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=56 priority=low | AEW, impatto roster/storyline, morte, show settimanale
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Tony Khan Comments On Death Of Ted Turner, Says AEW Dynamite Will Begin With Tribute
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:darby-allin-diagnosis -> event:darby-allin-diagnosis-followup-tony-khan-comments-death-ted-turner-says-dynamite-will-begin-tribute
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=4
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/tony-khan-comments-on-death-of-ted-turner-says-aew-dynamite-will-begin-with-tribute/l-intro-1778110091.jpg
+[MEDIA] Immagine caricata: 3742
+[WP] Status attach image: 200
+[OK] Pubblicato: Tony Khan commenta la morte di Ted Turner e dichiara che AEW Dynamite inizierà con un omaggio
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Darby Allin Overcomes AEW TNT Champion To Retain World Title
+[BOT] semantic_id=darby-allin-overcomes-aew-tnt-champion-to-retain-world-title
+[SCORE] iniziale=40 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[SCORE] raffinato=56 priority=low | AEW, impatto roster/storyline, morte, show settimanale
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Darby Allin Overcomes AEW TNT Champion To Retain World Title
+[SKIP] Event key già pubblicata nella run e confermata su WordPress: event:darby-allin-title - Darby Allin Overcomes AEW TNT Champion To Retain World Title
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Orange Cassidy Earns AEW World Tag Title Shot For Conglomeration
+[BOT] semantic_id=orange-cassidy-earns-aew-world-tag-title-shot-for-conglomeration
+[SCORE] iniziale=40 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[SCORE] raffinato=47 priority=low | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, non wrestling puro
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Orange Cassidy Earns AEW World Tag Title Shot For Conglomeration
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=6
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/orange-cassidy-earns-aew-world-tag-title-shot-for-conglomeration/l-intro-1778115650.jpg
+[MEDIA] Immagine caricata: 3745
+[WP] Status attach image: 200
+[OK] Pubblicato: Orange Cassidy guadagna un'opportunità per i titoli di coppia AEW per il Conglomeration
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 7 articoli (4 pending + 3 nuove) su 13 candidati provati | mode=normal
+===== RUN END [2026-05-07 05:34:51] VERSION [v60_healthcheck_fix_from_v60 (7ed0015)] =====
+
