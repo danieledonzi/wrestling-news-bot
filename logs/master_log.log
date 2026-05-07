@@ -495,3 +495,123 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
 ===== RUN END [2026-05-07 13:20:09] VERSION [v63_italian_editorial_rewrite (4a6819a)] =====
 
+
+===== RUN START [2026-05-07 13:49:55] VERSION [v64_quality_gate_category_fix (7e57959)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166418/wwe-backlash-2026-draws-duds-roman-reigns-jacob-fatu-sami-zayn-trick-williams/
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite/Collision - 5/6/2026: 3 Things We Hated And 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (10/75): EA Sports' UFC 6 Reveal Trailer Features WWE Legend Ken Shamrock
+[SKIP] Score sotto soglia editoriale (33/75): Ricochet Makes Bold Stadium Stampede Challenge For AEW Double Or Nothing
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166671/orange-cassidy-earns-aew-world-tag-title-shot-conglomeration/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163956/wwe-dakota-kai-charlie-explans-decision-break/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166649/nick-khan-wwe-president-2030-multi-million-dollar-deal/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166634/tony-khan-ted-turner-aew-dynamite-tribute/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165763/aew-dynamite-may-6-aew-world-championship-on-line-double-jeopardy-match/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166574/aew-denies-negotiations-wwe-aleister-black-malaki/
+[SKIP] Score sotto soglia editoriale (0/75): Dana White: 'Even My Voice' Is AI In UFC White House Promo
+[SKIP] Score sotto soglia editoriale (0/75): Chael Sonnen Says He Tried To Warn UFC About 'Russian Invasion'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166432/aew-dynamite-dedicated-ted-turner-tnt-tbs/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166400/wwe-jacob-fatu-roman-reigns-relationship-match/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/ireland-wants-host-wwe-wrestlemania-government-push-begins/
+[SKIP] Score sotto soglia editoriale (0/75): Dark Side of the Ring Season 7 Premiere Date and Topics Revealed
+[SKIP] Score sotto soglia editoriale (12/75): Shawn Michaels Reveals Why Modern WWE Talent Need Years to be Main Roster Ready
+[SKIP] URL già in history: https://www.ringsidenews.com/jacob-fatu-reveals-why-he-brought-back-tongan-death-grip-against-roman-reigns/
+[SKIP] URL già in history: https://www.ringsidenews.com/jim-ross-explains-why-wwe-contracts-arent-guaranteed-amid-tko-pay-cuts/
+[SKIP] Score sotto soglia editoriale (14/75): Jacob Fatu Says Fans Should Try Taking a Punch Before Criticizing Wrestling
+[SKIP] URL già in history: https://www.ringsidenews.com/real-reason-behind-wwes-massive-post-wrestlemania-roster-cuts-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-dynamitecollision-results-highlights-key-moments-may-6-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/mark-shapiro-says-tko-not-concerned-about-decline-ticket-sales-wrestlemania-42/
+[SKIP] URL già in history: https://www.ringsidenews.com/mark-shapiro-confirms-saudi-arabia-commitment-despite-middle-east-conflict-concerns/
+[SKIP] URL già in history: https://www.ringsidenews.com/tko-financials-reveal-massive-q1-2026-revenue-wwe-continues-major-growth/
+[SCORE] 100 high - Mark Shapiro: TKO 'Not Concerned' By WWE WrestleMania 42 Ticket Sales | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, PLE/PPV, v62 corporate/business, v62 categoria business
+[SCORE] 66 medium - NXT Great American Bash 2026 Date, Location and Venue Revealed | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, rumor/backstage, show settimanale, v48 tier2: 55-74
+[SCORE] 66 medium - Another WWE Talent Confirms Departure Amid Ongoing Roster Cuts | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v48 tier2: 55-74
+[SCORE] 65 medium - MJF Finally Granted AEW World Title Rematch, With One Major Stipulation | AEW, titolo/championship, PLE/PPV, v62 titolo/championship, v48 tier2: 55-74
+[SCORE] 61 medium - Raja Jackson Avoids Trial After Reaching Plea Deal In Syko Stu Assault Case | release/addio, PLE/PPV, v62 evento legale grave, v48 tier2: 55-74
+[SCORE] 61 medium - AEW's Brody King: President Trump Can 'Go F*** Himself' | AEW, v62 business/dirigenza, v62 categoria business, v48 tier2: 55-74
+[SCORE] 58 low - Darby Allin Overcomes AEW TNT Champion To Retain World Title | AEW, titolo/championship, show settimanale, v62 titolo/championship, v48 tier2: 55-74
+[SCORE] 56 low - WWE Announces Upcoming SmackDown Episode Will Take Place on Tuesday | WWE/main roster, WWE main roster + storyline/evento, match/segmento annunciato, show settimanale, v48 tier2: 55-74
+[SCORE] 55 low - Sheamus Believes One Aspect Of WWE's Attitude Era Is Overrated | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, opinione generica, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 44 low - Kazuchika Okada Retains AEW International Title, Sets Sights On World Title | AEW, show settimanale, v62 titolo/championship, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 10 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Mark Shapiro: TKO 'Not Concerned' By WWE WrestleMania 42 Ticket Sales
+[BOT] semantic_id=mark-shapiro-tko-not-concerned-by-wwe-wrestlemania-42-ticket-sales
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, v62 business/dirigenza, v62 categoria business
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[FIX] Titolo strutturato incoerente -> fallback automatico: Mark shapiro: TKO 'not concerned' by WWE WrestleMania 42 ticket sales
+[BLOCKSEQ] Traduzione strutturata fallita: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=42 generato=['41']"]
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=42 generato=['41']"]
+[SKIP] Traduzione fallita: Mark Shapiro: TKO 'Not Concerned' By WWE WrestleMania 42 Ticket Sales (err_type=validation)
+[BOT] Elaborazione: NXT Great American Bash 2026 Date, Location and Venue Revealed
+[BOT] semantic_id=nxt-great-american-bash-2026-date-location-and-venue-revealed
+[SCORE] iniziale=66 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[BOT] Embed trovati: 1
+[SKIP] Preview/show announcement scaduta dopo scraping: NXT Great American Bash 2026 Date, Location and Venue Revealed
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Another WWE Talent Confirms Departure Amid Ongoing Roster Cuts
+[BOT] semantic_id=another-wwe-talent-confirms-departure-amid-ongoing-roster-cuts
+[SCORE] iniziale=66 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=16, image=0, embed=1
+[BOT] Embed trovati: 2
+[SCORE] raffinato=79 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, infortunio, PLE/PPV, developmental secondario, v62 infortunio/operazione
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash
+[BLOCKSEQ] Traduzione strutturata fallita: Blocchi tradotti mancanti: ['TEXT_016']
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[FIX] Titolo incoerente -> fallback automatico: Nuovi sviluppi sui licenziamenti in WWE
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[FIX] Titolo non valido (ok) -> fallback automatico: Nuovi sviluppi sui licenziamenti in WWE
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/another-wwe-talent-confirms-departure-amid-ongoing-roster-cuts-59.jpg
+[MEDIA] Immagine caricata: 3789
+[WP] Status attach image: 200
+[OK] Pubblicato: Nuovi sviluppi sui licenziamenti in WWE
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: MJF Finally Granted AEW World Title Rematch, With One Major Stipulation
+[BOT] semantic_id=mjf-finally-granted-aew-world-title-rematch-with-one-major-stipulation
+[SCORE] iniziale=65 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[SCORE] raffinato=85 priority=high | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=5
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/mjf-finally-granted-aew-world-title-rematch-with-one-major-stipulation/l-intro-1778120729.jpg
+[MEDIA] Immagine caricata: 3792
+[WP] Status attach image: 200
+[OK] Pubblicato: Mjf ottiene la sua rivincita per l'AEW world championship, ma con una grossa condizione
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Raja Jackson Avoids Trial After Reaching Plea Deal In Syko Stu Assault Case
+[BOT] semantic_id=raja-jackson-avoids-trial-after-reaching-plea-deal-in-syko-stu-assault-case
+[SCORE] iniziale=61 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=0, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=65 priority=medium | breaking/major update, PLE/PPV, v62 evento legale grave
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Raja Jackson Avoids Trial After Reaching Plea Deal In Syko Stu Assault Case
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=13
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/raja-jackson-avoids-trial-after-reaching-plea-deal-in-syko-stu-assault-case-05.jpg
+[MEDIA] Immagine caricata: 3795
+[WP] Status attach image: 200
+[OK] Pubblicato: Raja jackson evita il processo dopo l'accordo con la procura nel caso dell'aggressione a syko stu
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 5 candidati provati | mode=normal
+===== RUN END [2026-05-07 13:49:55] VERSION [v64_quality_gate_category_fix (7e57959)] =====
+
