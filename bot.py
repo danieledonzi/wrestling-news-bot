@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v60_healthcheck_fix_from_v60"
+BOT_VERSION = "v61_editorial_quality_fix"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -304,6 +304,81 @@ LOW_VALUE_TRASH_TALK_TERMS = [
     "funding bot attacks", "bot attacks", "fake ai video",
 ]
 
+# v61: regole editoriali qualità/affidabilità da produzione.
+# Obiettivi: non perdere eventi storici/legali, titoli italiani in sentence case,
+# stile meno artificiale e niente doppia immagine featured + body.
+CRITICAL_EVENT_TERMS_V61 = [
+    "death", "dies", "dead", "passed away", "passing", "tribute", "memorial",
+    "arrest", "arrested", "accused", "guilty", "convicted", "sentenced",
+    "femicide", "attempted femicide", "domestic violence", "lawsuit", "trial",
+    "legal", "investigation", "scandal", "police", "911", "9-1-1",
+    "released", "release", "fired", "cut", "departure",
+    "injury", "injured", "hospital", "surgery", "cancer",
+    "retirement", "retires", "retired",
+    "morte", "morto", "morta", "deceduto", "scomparsa", "omaggio",
+    "arresto", "arrestato", "accusato", "accusata", "colpevole", "condannato",
+    "femminicidio", "tentato femminicidio", "violenza domestica", "causa legale",
+    "indagine", "scandalo", "polizia", "licenziato", "rilascio",
+    "infortunio", "operazione", "ospedale", "tumore", "ritiro",
+]
+
+HISTORIC_BUSINESS_NAMES_V61 = [
+    "ted turner", "vince mcmahon", "tony khan", "triple h", "stephanie mcmahon",
+    "undertaker", "john cena", "the rock", "roman reigns", "cm punk",
+    "kenny omega", "kazuchika okada", "eric bischoff", "paul heyman",
+]
+
+ENGLISH_TITLE_PHRASES_V61 = {
+    "comments on": "commenta",
+    "reacts to": "reagisce a",
+    "pays tribute to": "rende omaggio a",
+    "reveals": "rivela",
+    "addresses": "risponde a",
+    "breaks silence on": "rompe il silenzio su",
+    "opens up about": "parla di",
+    "discusses": "parla di",
+    "breaks down": "analizza",
+    "explains why": "spiega perché",
+    "says": "afferma",
+    "reportedly": "secondo un report",
+    "dead": "morto",
+    "death": "morte",
+    "passing": "scomparsa",
+    "passed away": "è morto",
+    "arrested": "arrestato",
+    "accused": "accusato",
+    "guilty": "colpevole",
+    "attempted femicide": "tentato femminicidio",
+    "former wcw owner": "ex proprietario della WCW",
+    "aew dynamite": "AEW Dynamite",
+    "wwe raw": "WWE Raw",
+    "wwe smackdown": "WWE SmackDown",
+    "wwe nxt": "WWE NXT",
+}
+
+ITALIAN_STYLE_BANNED_PHRASES_V61 = [
+    "al momento non è chiaro",
+    "al momento non e' chiaro",
+    "resta da vedere",
+    "i fan attendono",
+    "solo il tempo dirà",
+    "solo il tempo dira",
+    "sarà interessante vedere",
+    "sara interessante vedere",
+    "la situazione continua a evolversi",
+    "continueremo a seguire",
+    "non resta che attendere",
+]
+
+PROPER_CASE_TOKENS_V61 = {
+    "wwe": "WWE", "aew": "AEW", "nxt": "NXT", "tna": "TNA", "wcw": "WCW",
+    "roh": "ROH", "njpw": "NJPW", "tkO".lower(): "TKO", "ufc": "UFC",
+    "raw": "Raw", "smackdown": "SmackDown", "dynamite": "Dynamite",
+    "collision": "Collision", "rampage": "Rampage", "wrestlemania": "WrestleMania",
+    "summerslam": "SummerSlam", "royal rumble": "Royal Rumble",
+}
+
+
 # v57: segnali editoriali forti, piu importanti del semplice nome citato nel corpo.
 EDITORIAL_BUSINESS_TERMS = [
     "tko", "pay cut", "pay cuts", "salary", "salaries", "wage", "wages",
@@ -594,6 +669,98 @@ def sanitize_text(text):
     text = normalize_unicode_punctuation(text)
     return normalize_whitespace(fix_mojibake(text))
 
+
+def v61_restore_proper_case(text):
+    """Ripristina casing di sigle, show e nomi propri dopo sentence case."""
+    if not text:
+        return text
+    out = text
+    # sigle e show principali
+    for low, proper in PROPER_CASE_TOKENS_V61.items():
+        out = re.sub(r"\b" + re.escape(low) + r"\b", proper, out, flags=re.I)
+    # nomi propri noti: capitalizza ogni parte mantenendo apostrofi/trattini semplici
+    known_names = sorted(set(
+        TOP_STAR_NAMES + STRONG_NAMES + WWE_NAMES + AEW_NAMES + NXT_NAMES + TNA_OTHER_NAMES + HISTORIC_BUSINESS_NAMES_V61 +
+        ["ted turner", "tony khan", "stephanie vaquer", "el cuatrero", "blake monroe", "aleister black", "david otunga"]
+    ), key=len, reverse=True)
+    for name in known_names:
+        proper = " ".join(part[:1].upper() + part[1:] for part in name.split())
+        custom = {
+            "cm punk": "CM Punk", "triple h": "Triple H", "the rock": "The Rock",
+            "ted turner": "Ted Turner", "tony khan": "Tony Khan", "el cuatrero": "El Cuatrero",
+            "r truth": "R-Truth", "r-truth": "R-Truth",
+        }.get(name.lower())
+        if custom:
+            proper = custom
+        out = re.sub(r"\b" + re.escape(name) + r"\b", proper, out, flags=re.I)
+    return out
+
+
+def v61_sentence_case_italian_title(title):
+    """Titoli in stile italiano: solo prima parola maiuscola, sigle/nomi preservati."""
+    t = sanitize_text(title or "")
+    if not t:
+        return t
+    # Rimuove title case inglese senza toccare sigle e nomi propri, che verranno ripristinati.
+    words = t.split()
+    if len(words) >= 3:
+        upperish = sum(1 for w in words if re.match(r"^[A-ZÀ-Ý][a-zà-ÿ']+", w))
+        if upperish >= max(3, len(words) // 2):
+            t = t.lower()
+    # sostituzioni frasi inglesi residue
+    for old, new in sorted(ENGLISH_TITLE_PHRASES_V61.items(), key=lambda x: len(x[0]), reverse=True):
+        t = re.sub(r"\b" + re.escape(old) + r"\b", new, t, flags=re.I)
+    # prima lettera maiuscola, resto gestito da restore proper case
+    if t:
+        t = t[0].upper() + t[1:]
+    t = v61_restore_proper_case(t)
+    t = re.sub(r"\s{2,}", " ", t).strip(" .")
+    return t
+
+
+def v61_remove_ai_filler_from_html(html):
+    if not html:
+        return html
+    soup = BeautifulSoup(html, "html.parser")
+    for tag in soup.find_all(["p", "blockquote", "li"]):
+        txt = sanitize_text(tag.get_text(" ", strip=True)).lower()
+        if any(p in txt for p in ITALIAN_STYLE_BANNED_PHRASES_V61):
+            tag.decompose()
+    return str(soup)
+
+
+def v61_critical_event_boost(title="", text="", url=""):
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:2500]}")
+    boost = 0
+    reasons = []
+    if any(term in probe for term in CRITICAL_EVENT_TERMS_V61):
+        boost += 40
+        reasons.append("v61 evento critico/storico-legale")
+    if any(name in probe for name in HISTORIC_BUSINESS_NAMES_V61):
+        boost += 15
+        reasons.append("v61 nome storico/top business")
+    # casi specifici emersi dal live: Turner e Vaquer/Cuatrero devono superare la soglia.
+    if "ted turner" in probe and any(x in probe for x in ["death", "dead", "dies", "passed away", "passing", "morte", "scomparsa"]):
+        boost = max(boost, 55)
+        reasons.append("v61 Ted Turner death bypass")
+    if ("vaquer" in probe or "cuatrero" in probe) and any(x in probe for x in ["femicide", "guilty", "convicted", "accused", "tentato femminicidio", "colpevole"]):
+        boost = max(boost, 55)
+        reasons.append("v61 Vaquer/Cuatrero caso legale bypass")
+    return boost, reasons
+
+
+def v61_strip_body_images_if_featured(html, has_featured=True):
+    """Evita doppia immagine: se WordPress mostra featured image, il body non deve contenere immagini editoriali duplicate."""
+    if not html or not has_featured:
+        return html
+    soup = BeautifulSoup(html, "html.parser")
+    for fig in soup.find_all("figure"):
+        if fig.find(["img", "amp-img"]):
+            fig.decompose()
+    for img in soup.find_all(["img", "amp-img"]):
+        img.decompose()
+    return str(soup)
+
 def italian_quality_issues(title, html_text):
     issues = []
 
@@ -749,7 +916,7 @@ def refine_title_italian(title):
         if len(cut) >= 55:
             t = cut
 
-    return t
+    return v61_sentence_case_italian_title(t)
 
 def canonical_embed_key(url: str) -> str:
     url = normalize_embed_url(url or "").strip()
@@ -845,6 +1012,7 @@ def refine_body_text(text):
     t = re.sub(r"[ \t]{2,}", " ", t)
     t = re.sub(r"\n{3,}", "\n\n", t)
 
+    t = v61_remove_ai_filler_from_html(t)
     return t.strip()
 
 def remove_source_promos_from_html(html):
@@ -2291,12 +2459,9 @@ def render_embed_block(url):
 
 
 def render_image_block(src, alt=""):
-    clean_src = clean_tracking_params(src or "")
-    if not clean_src:
-        return ""
-    safe_src = clean_src.replace('"', "&quot;")
-    safe_alt = sanitize_text(alt or "").replace('"', "&quot;")
-    return f'<figure class="wp-block-image"><img src="{safe_src}" alt="{safe_alt}" loading="lazy" /></figure>'
+    # v61: le immagini editoriali vengono gestite solo come featured image WordPress.
+    # Inserirle nel corpo causava doppia immagine nel tema Newspaperup.
+    return ""
 
 
 def translate_ordered_content_blocks(source_title, blocks, source_url="", forced_title=None):
@@ -3603,6 +3768,9 @@ def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", 
 
         content_html = normalize_x_links_in_text(str(soup_temp))
         content_html = append_embeds_to_html(content_html, embed_urls or [])
+        if featured_image_url:
+            inline_images = []
+            content_html = v61_strip_body_images_if_featured(content_html, has_featured=True)
         content_html = append_inline_images_to_html(content_html, inline_images or [], featured_url=featured_image_url)
         safe_source_url = url.replace('"', "&quot;")
         content_html += f'\n\n<hr><p><a href="{safe_source_url}" target="_blank" rel="nofollow noopener noreferrer"><b>FONTE</b></a></p>'
@@ -4027,7 +4195,12 @@ def calculate_importance_score(title, text="", url=""):
     if len([w for w in normalize_for_check(title).split() if w not in STOPWORDS]) <= 2:
         score -= 5; reasons.append("titolo vago")
 
-    return clamp_score(score), reasons[:8]
+    v61_boost, v61_reasons = v61_critical_event_boost(title, text, url)
+    if v61_boost:
+        score += v61_boost
+        reasons.extend(v61_reasons)
+
+    return clamp_score(score), reasons[:10]
 
 
 def priority_label(score):
@@ -4894,6 +5067,8 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
 
     # v39: Breaking controllato dal bot, non da Gemini. Scade automaticamente.
     news_data["titolo"] = maybe_add_breaking_prefix(news_data["titolo"], item)
+    news_data["titolo"] = v61_sentence_case_italian_title(news_data["titolo"])
+    news_data["testo"] = v61_remove_ai_filler_from_html(news_data.get("testo", ""))
 
     img_url = (extract_image_url(entry) if entry else None) or page_img
 
