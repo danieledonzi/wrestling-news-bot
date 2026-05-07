@@ -835,3 +835,109 @@
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 4 candidati provati | mode=normal
 ===== RUN END [2026-05-07 15:47:08] VERSION [v66_scoring_dedupe_safety_fix (2006185)] =====
 
+
+===== RUN START [2026-05-07 16:03:09] VERSION [v66_scoring_dedupe_safety_fix (fd4889f)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166754/wwe-njpw-hiromu-takahashi-nox-raijin/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166741/wwe-bully-ray-roman-reigns-jacob-fatu-problem-feud/
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2166733/mark-shapiro-tko-not-concerned-wwe-wrestlemania-42-ticket-sales/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166418/wwe-backlash-2026-draws-duds-roman-reigns-jacob-fatu-sami-zayn-trick-williams/
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite/Collision - 5/6/2026: 3 Things We Hated And 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (10/75): EA Sports' UFC 6 Reveal Trailer Features WWE Legend Ken Shamrock
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166692/mjf-finally-granted-aew-world-title-rematch-major-stipulation/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166689/darby-allin-overcomes-aew-tnt-champion-retain-world-title/
+[SKIP] Score sotto soglia editoriale (33/75): Ricochet Makes Bold Stadium Stampede Challenge For AEW Double Or Nothing
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166671/orange-cassidy-earns-aew-world-tag-title-shot-conglomeration/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2163956/wwe-dakota-kai-charlie-explans-decision-break/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166649/nick-khan-wwe-president-2030-multi-million-dollar-deal/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166634/tony-khan-ted-turner-aew-dynamite-tribute/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165763/aew-dynamite-may-6-aew-world-championship-on-line-double-jeopardy-match/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/when-wwe-planned-john-cenas-appearance-backlash-tampa/
+[SKIP] Score sotto soglia editoriale (32/75): Lizzy Rain Reveals How Her WWE Entrance Theme Came Together
+[SKIP] URL già in history: https://www.ringsidenews.com/nxt-great-american-bash-2026-date-location-venue-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/ireland-wants-host-wwe-wrestlemania-government-push-begins/
+[SKIP] Score sotto soglia editoriale (0/75): Dark Side of the Ring Season 7 Premiere Date and Topics Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/raja-jackson-avoids-trial-reaching-plea-deal-syko-stu-assault-case/
+[SKIP] Score sotto soglia editoriale (12/75): Shawn Michaels Reveals Why Modern WWE Talent Need Years to be Main Roster Ready
+[SKIP] URL già in history: https://www.ringsidenews.com/jacob-fatu-reveals-why-he-brought-back-tongan-death-grip-against-roman-reigns/
+[SKIP] URL già in history: https://www.ringsidenews.com/jim-ross-explains-why-wwe-contracts-arent-guaranteed-amid-tko-pay-cuts/
+[SKIP] Score sotto soglia editoriale (14/75): Jacob Fatu Says Fans Should Try Taking a Punch Before Criticizing Wrestling
+[SKIP] URL già in history: https://www.ringsidenews.com/real-reason-behind-wwes-massive-post-wrestlemania-roster-cuts-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/another-wwe-talent-confirms-departure-amid-ongoing-roster-cuts/
+[SCORE] 99 high - Former WWE Star On Oba Femi: 'Quite Possibly The Strongest Person I've Ever Wrestled' | WWE/main roster, nomi forti titolo: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 ritorno/debutto
+[SCORE] 59 low - Nikki & Brie Bella Comment On WWE Departure Of Kairi Sane | WWE/main roster, nomi forti titolo: brie bella, impatto roster/storyline, release/addio, v48 tier2: 55-74
+[SCORE] 58 low - Backstage Report On When Blake Monroe Is Expected To Appear On WWE SmackDown | WWE/main roster, impatto roster/storyline, ritorno/debutto, show settimanale, v48 tier2: 55-74
+[SCORE] 56 low - WWE Announces Upcoming SmackDown Episode Will Take Place on Tuesday | WWE/main roster, WWE main roster + storyline/evento, match/segmento annunciato, show settimanale, v48 tier2: 55-74
+[SCORE] 55 low - Sami Zayn Shuts Down Claims He Turned Heel After Attacking the Gingerbread Man | WWE/main roster, WWE main roster + storyline/evento, show settimanale, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 55 low - Sheamus Believes One Aspect Of WWE's Attitude Era Is Overrated | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, opinione generica, floor WWE main roster storyline, v48 tier2: 55-74
+[SCORE] 48 low - Dark Side Of The Ring Set For Season 7 Return, Details On Premiere Episode | TNA, ritorno/debutto, v62 ritorno/debutto, v48 tier3: 45-54 contestuale
+[SCORE] 46 low - Shawn Michaels Reveals His Wife Negotiated His Current WWE Contract | WWE/main roster, impatto roster/storyline, contratto, v48 tier3: 45-54 contestuale
+[SCORE] 44 low - Kazuchika Okada Retains AEW International Title, Sets Sights On World Title | AEW, show settimanale, v62 titolo/championship, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash
+[GEMINI] Modello attivo: gemini-2.5-flash
+[BOT] News candidate totali: 9 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Former WWE Star On Oba Femi: 'Quite Possibly The Strongest Person I've Ever Wrestled'
+[BOT] semantic_id=former-wwe-star-on-oba-femi-quite-possibly-the-strongest-person-ive-ever-wrestled
+[SCORE] iniziale=99 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[SKIP] Preview/show announcement scaduta dopo scraping: Former WWE Star On Oba Femi: 'Quite Possibly The Strongest Person I've Ever Wrestled'
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Nikki & Brie Bella Comment On WWE Departure Of Kairi Sane
+[BOT] semantic_id=nikki-brie-bella-comment-on-wwe-departure-of-kairi-sane
+[SCORE] iniziale=59 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[SCORE] raffinato=100 priority=high | WWE/main roster, nomi forti titolo: brie bella, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=6
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/nikki-brie-bella-comment-on-wwe-departure-of-kairi-sane/l-intro-1778142603.jpg
+[MEDIA] Immagine caricata: 3825
+[WP] Status attach image: 200
+[OK] Pubblicato: Nikki e Brie Bella commentano l'uscita di Kairi Sane dalla WWE
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Backstage Report On When Blake Monroe Is Expected To Appear On WWE SmackDown
+[BOT] semantic_id=backstage-report-on-when-blake-monroe-is-expected-to-appear-on-wwe-smackdown
+[SCORE] iniziale=58 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[SCORE] raffinato=80 priority=high | WWE/main roster, nomi forti lead: trick williams, oba femi, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, developmental secondario, v62 ritorno/debutto
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=4
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/backstage-report-on-when-blake-monroe-is-expected-to-appear-on-wwe-smackdown/l-intro-1778150335.jpg
+[MEDIA] Immagine caricata: 3828
+[WP] Status attach image: 200
+[OK] Pubblicato: Retroscena: quando Blake Monroe dovrebbe debuttare in WWE SmackDown
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: WWE Announces Upcoming SmackDown Episode Will Take Place on Tuesday
+[BOT] semantic_id=wwe-announces-upcoming-smackdown-episode-will-take-place-on-tuesday
+[SCORE] iniziale=56 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, image=0, embed=0
+[BOT] Embed trovati: 1
+[SCORE] raffinato=65 priority=medium | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, business/media rights, show settimanale, trash talk/clickbait forte, v62 media rights/streaming
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - WWE Announces Upcoming SmackDown Episode Will Take Place on Tuesday
+[FIX] Event key in history ma non confermata su WordPress: event:business:media-rights - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash
+[FIX] Titolo strutturato incoerente -> fallback automatico: WWE announces upcoming SmackDown episode will take place on tuesday
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash | blocchi testo=8
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-announces-upcoming-smackdown-episode-will-take-place-on-tuesday-08.jpg
+[MEDIA] Immagine caricata: 3831
+[WP] Status attach image: 200
+[OK] Pubblicato: WWE announces upcoming SmackDown episode will take place on tuesday
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 4 candidati provati | mode=normal
+===== RUN END [2026-05-07 16:03:09] VERSION [v66_scoring_dedupe_safety_fix (fd4889f)] =====
+
