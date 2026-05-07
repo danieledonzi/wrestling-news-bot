@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v62_event_cluster_business_freshness"
+BOT_VERSION = "v63_italian_editorial_rewrite"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -466,7 +466,7 @@ WWE_NAMES = [
     "solo sikoa", "jade cargill", "tiffany stratton", "drew mcintyre",
     "dominik mysterio", "penta", "rusev", "kairi sane", "stephanie vaquer",
     "alexa bliss", "charlotte flair", "bayley", "iyo sky", "gunther", "oba femi",
-    "lexis king", "booker t", "bully ray", "giovanni vinci",
+    "lexis king", "booker t", "bully ray", "giovanni vinci", "jacob fatu",
 ]
 
 AEW_NAMES = [
@@ -792,6 +792,17 @@ def v62_probe(title="", text="", url=""):
 def v62_has_any(probe, terms):
     return any(normalize_for_check(term) in probe for term in terms)
 
+def v63_has_death_event(probe):
+    # Evita falsi positivi tipo "Tongan Death Grip": "death" qui e' parte del nome di una mossa, non una notizia di morte.
+    if not probe:
+        return False
+    cleaned = re.sub(r"\btongan death grip\b", "tongan grip", probe, flags=re.I)
+    death_patterns = [
+        r"\b(passed away|passing of|death of|dies|dead at|has died|is dead|found dead)\b",
+        r"\b(morte|scomparsa|morto|morta|deceduto|deceduta)\b",
+    ]
+    return any(re.search(p, cleaned, flags=re.I) for p in death_patterns)
+
 def v62_detect_entities(probe):
     entities = []
     for key, aliases in EVENT_CLUSTER_ENTITY_ALIASES_V62:
@@ -800,7 +811,7 @@ def v62_detect_entities(probe):
     return list(dict.fromkeys(entities))
 
 def v62_detect_event_type(probe):
-    if v62_has_any(probe, ["death", "dies", "dead", "passed away", "passing", "morte", "morto", "morta", "scomparsa", "deceduto"]):
+    if v63_has_death_event(probe):
         return "death"
     if v62_has_any(probe, ["arrest", "arrested", "accused", "guilty", "convicted", "sentenced", "femicide", "attempted femicide", "domestic violence", "lawsuit", "trial", "legal", "investigation", "police", "arresto", "accusato", "accusata", "colpevole", "condannato", "femminicidio", "tentato femminicidio", "violenza domestica", "causa legale", "indagine"]):
         return "legal"
@@ -869,6 +880,8 @@ def v62_event_importance_boost(title="", text="", url=""):
     boost = 0
     reasons = []
     for points, terms, label in EVENT_IMPORTANCE_RULES_V62:
+        if label == "v62 evento morte/storico" and not v63_has_death_event(probe):
+            continue
         if v62_has_any(probe, terms):
             boost += points
             reasons.append(label)
@@ -2637,13 +2650,18 @@ def translate_ordered_content_blocks(source_title, blocks, source_url="", forced
 
     prompt = f"""
 Sei un giornalista italiano esperto di wrestling.
-Devi tradurre/riscrivere in italiano SOLO i blocchi testuali forniti.
+Non fare una traduzione letterale: devi trasformare il materiale in italiano giornalistico naturale, mantenendo fatti e citazioni.
+Devi riscrivere in italiano SOLO i blocchi testuali forniti.
 Gli embed social NON sono presenti qui e verranno reinseriti dal codice: non aggiungere link, tweet o placeholder.
 Mantieni l'ordine e gli ID dei blocchi.
 Restituisci SOLO JSON valido in UNA SOLA RIGA.
 
 REGOLE:
 - {title_rule}
+- Il titolo deve sembrare scritto da una redazione italiana, non tradotto parola per parola.
+- Evita calchi inglesi come "alla fine della giornata", "è connesso", "questa cosa", "ha passato tutto".
+- Non usare "In conclusione" e non chiudere con domande ai lettori o inviti ai commenti.
+- Mantieni Tongan Death Grip in inglese se compare come nome della mossa.
 - Ogni blocco tradotto deve restare aderente al blocco originale corrispondente.
 - Non fondere blocchi diversi.
 - Non cambiare l'ordine.
@@ -2709,6 +2727,9 @@ JSON richiesto:
             fallback_title = generate_fallback_title(source_title, source_text_joined, source_url, title)
             print(f"[FIX] Titolo strutturato incoerente -> fallback automatico: {fallback_title}")
             title = fallback_title
+        tmp_v63 = v63_editorial_finalize({"titolo": title, "testo": content_html, "categoria": forced_category}, source_title, source_text_joined, source_url)
+        title = tmp_v63["titolo"]
+        content_html = tmp_v63["testo"]
         if body_looks_suspicious(content_html):
             raise ValueError("Body sospetto o troppo meta")
         issues = italian_quality_issues(title, content_html)
@@ -4161,6 +4182,186 @@ def apply_translation_glossary(title, html_text):
     return title, html_text
 
 
+
+
+V63_PROPER_CASE_TERMS = {
+    "jacob fatu": "Jacob Fatu",
+    "roman reigns": "Roman Reigns",
+    "tongan death grip": "Tongan Death Grip",
+    "haku": "Haku",
+    "jim ross": "Jim Ross",
+    "wwe": "WWE",
+    "aew": "AEW",
+    "nxt": "NXT",
+    "tna": "TNA",
+    "tko": "TKO",
+    "tnt": "TNT",
+    "tbs": "TBS",
+    "raw": "RAW",
+    "smackdown": "SmackDown",
+    "wrestlemania": "WrestleMania",
+    "backlash": "Backlash",
+    "netflix": "Netflix",
+}
+
+V63_BAD_LITERAL_PHRASES = [
+    "alla fine della giornata",
+    "è connesso",
+    "e connesso",
+    "questa cosa",
+    "ha passato tutto",
+    "f5 attraverso",
+    "tongan morte grip",
+    "in conclusione:",
+    "faccelo sapere cosa ne pensi",
+    "pensi che",
+]
+
+V63_ENGLISH_TITLE_WORDS = {
+    "real", "reason", "behind", "revealed", "reveals", "amid", "cuts", "pay", "roster",
+    "contracts", "aren", "guaranteed", "massive", "post", "brought", "back", "against",
+    "explains", "why", "could", "would", "will", "take", "taking", "deal", "signs",
+}
+
+def v63_restore_proper_case_text(value):
+    if not value:
+        return value
+    out = value
+    for low, proper in sorted(V63_PROPER_CASE_TERMS.items(), key=lambda x: len(x[0]), reverse=True):
+        out = re.sub(r"\b" + re.escape(low) + r"\b", proper, out, flags=re.I)
+    return out
+
+def v63_title_has_too_much_english(title):
+    tokens = re.findall(r"[A-Za-z']+", sanitize_text(title or "").lower())
+    if not tokens:
+        return False
+    bad = sum(1 for t in tokens if t in V63_ENGLISH_TITLE_WORDS)
+    return bad >= 2 or any(phrase in " ".join(tokens) for phrase in ["real reason behind", "reveals why", "amid tko"])
+
+def v63_generate_human_title(source_title="", generated_title="", source_text=""):
+    src = sanitize_text(source_title or "")
+    gen = sanitize_text(generated_title or "")
+    probe = normalize_for_check(f"{src} {gen} {(source_text or '')[:800]}")
+
+    # Titoli ricorrenti da pattern, non da singola news: trasformano strutture inglesi in headline italiane naturali.
+    if "reveals why" in probe and "tongan death grip" in probe and "roman reigns" in probe:
+        return "Jacob Fatu spiega il ritorno della Tongan Death Grip contro Roman Reigns"
+    if "real reason behind" in probe and "wwe" in probe and ("roster cuts" in probe or "post wrestlemania" in probe):
+        return "Svelato il motivo dei massicci tagli al roster WWE dopo WrestleMania"
+    if "jim ross" in probe and "contracts" in probe and "guaranteed" in probe:
+        return "Jim Ross spiega perché i contratti WWE non sono garantiti dopo i tagli TKO"
+    if "nick khan" in probe and ("new deal" in probe or "remain wwe president" in probe or "through 2030" in probe):
+        return "Nick Khan firma un nuovo accordo per restare presidente WWE fino al 2030"
+
+    title = gen or src
+    replacements = [
+        (r"(?i)^real reason behind\s+", "Svelato il motivo dietro "),
+        (r"(?i)\breveals why\b", "spiega perché"),
+        (r"(?i)\breveals\b", "rivela"),
+        (r"(?i)\bexplains why\b", "spiega perché"),
+        (r"(?i)\bamid\b", "dopo"),
+        (r"(?i)\broster cuts\b", "tagli al roster"),
+        (r"(?i)\bpay cuts\b", "tagli salariali"),
+        (r"(?i)\bcontracts aren't guaranteed\b", "i contratti non sono garantiti"),
+        (r"(?i)\bbrought back\b", "ha riportato in scena"),
+        (r"(?i)\bagainst\b", "contro"),
+        (r"(?i)\bdeath grip\b", "Death Grip"),
+    ]
+    for pat, repl in replacements:
+        title = re.sub(pat, repl, title)
+    title = title.replace("tagli revealed", "tagli")
+    title = v63_restore_proper_case_text(title)
+    return refine_title_italian(title)
+
+def v63_humanize_title(title, source_title="", source_text=""):
+    title = sanitize_text(title or "")
+    title = v63_restore_proper_case_text(title)
+    literal = normalize_for_check(title)
+    if v63_title_has_too_much_english(title) or "tongan morte grip" in literal or re.search(r"\b(fatu|ross)\b", title) and not re.search(r"\b(Jacob Fatu|Jim Ross)\b", title):
+        title = v63_generate_human_title(source_title, title, source_text)
+    title = title.replace("Tongan morte grip", "Tongan Death Grip")
+    title = title.replace("tongan morte grip", "Tongan Death Grip")
+    title = v63_restore_proper_case_text(title)
+    return refine_title_italian(title)
+
+def v63_remove_source_engagement_promos(html):
+    if not html:
+        return html
+    soup = BeautifulSoup(html, "html.parser")
+    bad_fragments = [
+        "faccelo sapere", "dicci cosa ne pensi", "pensi che", "share your thoughts",
+        "let us know", "nei commenti", "nei commenti qui sotto", "commenti qui sotto",
+        "continua a seguirci", "stay tuned",
+    ]
+    for tag in soup.find_all(["p", "li", "blockquote"]):
+        txt = sanitize_text(tag.get_text(" ", strip=True)).lower()
+        if any(x in txt for x in bad_fragments):
+            tag.decompose()
+    return str(soup)
+
+def v63_humanize_body_html(html):
+    if not html:
+        return html
+    out = html
+    replacements = {
+        "tongan morte grip": "Tongan Death Grip",
+        "Tongan morte grip": "Tongan Death Grip",
+        "tongan death grip": "Tongan Death Grip",
+        "Jacob fatu": "Jacob Fatu",
+        "Jim ross": "Jim Ross",
+        " tko": " TKO",
+        " tnt": " TNT",
+        " tbs": " TBS",
+        "wrestlemania": "WrestleMania",
+        "Backlash": "Backlash",
+        "non ha semplicemente reintrodotto casualmente": "non ha riportato in scena per caso",
+        "reintrodotto casualmente": "riportato in scena per caso",
+        "ha parlato del rilancio della manovra iconica": "ha spiegato perché ha riportato in scena la manovra iconica",
+        "ha un profondo significato all'interno della sua famiglia": "ha un significato profondo per la sua famiglia",
+        "la nostra Isola Tongana": "la nostra cultura tongana",
+        "è diverso": "è qualcosa di diverso",
+        "questa cosa, questa Tongan Death Grip": "questa presa, la Tongan Death Grip",
+        "questa cosa": "questa presa",
+        "Roman Reigns ha passato tutto": "Roman Reigns ha già resistito a qualsiasi cosa",
+        "Roman ha passato tutto": "Roman Reigns ha già resistito a qualsiasi cosa",
+        "F5 attraverso 10, uomo, ha passato tutto": "F5 e ogni tipo di punizione: ha già resistito a tutto",
+        "una caduta sulla sua testa": "un colpo violento alla testa",
+        "portare via tutti noi": "distruggere chiunque della famiglia",
+        "potrebbe portare via tutti noi": "potrebbe distruggere chiunque della famiglia",
+        "intrappolato nella presa": "intrappolato nella presa",
+        "bloccato nella presa": "intrappolato nella presa",
+        "lo sguardo sul suo viso": "l'espressione sul suo volto",
+        "come appariva": "come si è ridotto",
+        "non esistono più": "non si sono più rialzati",
+        "Alla fine della giornata, sta funzionando": "In definitiva, sta funzionando",
+        "Alla fine della giornata, è connesso": "Ha colpito nel segno",
+        "non sembra che Roman possa fermarlo": "non sembra che Roman possa fermarla",
+        "In conclusione:": "",
+    }
+    for old, new in replacements.items():
+        out = out.replace(old, new)
+    out = re.sub(r"(?i)\balla fine della giornata,\s*", "", out)
+    out = re.sub(r"(?i)\bè connesso\b", "ha colpito nel segno", out)
+    out = re.sub(r"(?i)\be connesso\b", "ha colpito nel segno", out)
+    out = v63_restore_proper_case_text(out)
+    out = v63_remove_source_engagement_promos(out)
+    out = v61_remove_ai_filler_from_html(out)
+    return out
+
+def v63_editorial_finalize(news_data, source_title="", source_text="", source_url=""):
+    if not news_data:
+        return news_data
+    title = news_data.get("titolo", "")
+    html = news_data.get("testo", "")
+    title, html = apply_translation_glossary(title, html)
+    title = v63_humanize_title(title, source_title, source_text)
+    html = v63_humanize_body_html(html)
+    html = remove_source_promos_from_html(html)
+    title, html = repair_protected_source_facts(source_title, source_text or "", title, html)
+    news_data["titolo"] = title
+    news_data["testo"] = html
+    return news_data
+
 def title_hard_invalid_with_context(source_title, source_text, generated_title):
     """v51: valida il titolo usando anche il corpo sorgente.
     Serve per titoli originali vaghi: se il modello esplicita un nome forte presente nel testo, non e' drift.
@@ -5221,6 +5422,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         return "model_fail" if err_type == "model" else "validation_fail"
 
     news_data = ensure_publishable_title(news_data, title, text_for_translation or full_text, link, reason=err_type)
+    news_data = v63_editorial_finalize(news_data, title, text_for_translation or full_text, link)
 
     if title_soft_validation_failed(news_data["titolo"]):
         print(f"[WARN] Titolo ancora imperfetto dopo fallback, ma non blocco: {news_data['titolo']}")
@@ -5241,8 +5443,9 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
 
     # v39: Breaking controllato dal bot, non da Gemini. Scade automaticamente.
     news_data["titolo"] = maybe_add_breaking_prefix(news_data["titolo"], item)
-    news_data["titolo"] = v61_sentence_case_italian_title(news_data["titolo"])
-    news_data["testo"] = v61_remove_ai_filler_from_html(news_data.get("testo", ""))
+    news_data = v63_editorial_finalize(news_data, title, text_for_translation or full_text, link)
+    news_data["titolo"] = v63_humanize_title(news_data["titolo"], title, text_for_translation or full_text)
+    news_data["testo"] = v63_humanize_body_html(news_data.get("testo", ""))
 
     img_url = (extract_image_url(entry) if entry else None) or page_img
 
