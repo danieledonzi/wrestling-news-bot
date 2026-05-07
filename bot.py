@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v63_italian_editorial_rewrite"
+BOT_VERSION = "v64_quality_gate_category_fix"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -848,6 +848,10 @@ def v62_event_cluster_key(title="", text="", url=""):
     if event_type == "business":
         if "nick-khan" in entities and v62_has_any(probe, ["deal", "contract", "extension", "president", "2030", "rinnovo", "contratto"]):
             return "event:business:wwe:executive-contract:nick-khan"
+        # v64: candidatura/host bid di WrestleMania non e' TKO financials.
+        if "wrestlemania" in probe and v62_has_any(probe, ["host", "hosting", "government", "ireland", "bid", "wants", "ospitare", "governo", "candidatura"]):
+            loc = "ireland" if "ireland" in probe else "host-bid"
+            return f"event:business:wwe:wrestlemania-host-bid:{loc}"
         if v62_has_any(probe, ["tko", "earnings", "revenue", "financial", "q1", "q2", "q3", "q4", "ricavi", "bilancio"]):
             return "event:business:tko-financials"
         if v62_has_any(probe, ["netflix", "media rights", "tv deal", "broadcast rights", "streaming", "diritti tv"]):
@@ -868,8 +872,15 @@ def v62_event_cluster_key(title="", text="", url=""):
     return ""
 
 def v62_is_business_news(title="", text="", url=""):
-    probe = v62_probe(title, text, url)
-    return bool(probe and (v62_has_any(probe, BUSINESS_CATEGORY_TERMS_V62) or v62_detect_event_type(probe) == "business"))
+    # v64: evita falsi positivi da sidebar/corpo lungo e da opinioni politiche non business.
+    probe = v64_business_probe(title, text, url)
+    if not probe:
+        return False
+    if any(normalize_for_check(x) in probe for x in BUSINESS_FALSE_POSITIVE_PATTERNS_V64):
+        # Eccezione: se c'e' anche TKO/WWE corporate esplicito resta business.
+        if not any(x in probe for x in ["tko", "revenue", "earnings", "media rights", "tv deal", "netflix", "contract extension", "president", "ceo"]):
+            return False
+    return bool(v62_has_any(probe, BUSINESS_CATEGORY_TERMS_V62) or v62_detect_event_type(probe) == "business")
 
 def v62_is_industry_history_news(title="", text="", url=""):
     probe = v62_probe(title, text, url)
@@ -1336,6 +1347,8 @@ def title_is_broken(title):
     if looks_mojibake(t):
         return True
     if t.endswith(":") or t.endswith(" -") or t.endswith(" —"):
+        return True
+    if v64_title_is_unpublishable_english(t):
         return True
 
     words = t.split()
@@ -4223,6 +4236,76 @@ V63_ENGLISH_TITLE_WORDS = {
     "explains", "why", "could", "would", "will", "take", "taking", "deal", "signs",
 }
 
+# v64: quality gate. Opinioni/listicle e gallery editoriali non sono news automatiche.
+# Possono esistere in futuro come editoriali umani, ma il bot news deve evitarle.
+LOW_VALUE_EDITORIAL_PATTERNS_V64 = [
+    "draws & duds", "draws and duds", "things we loved", "things we hated",
+    "3 things we", "winners and losers", "grades", "takeaways", "biggest draws",
+    "biggest duds", "staff predictions", "predictions", "preview and predictions",
+    "whatculture", "ranking", "ranked", "best and worst", "loved and hated",
+]
+LOW_VALUE_EDITORIAL_META_V64 = [
+    "content type:opinion", "category:exclusives", "intent:authority", "ideation source:editorial",
+    "data-content_type=\"opinion\"", "data-category=\"exclusives\"", "title-gallery",
+]
+BUSINESS_FALSE_POSITIVE_PATTERNS_V64 = [
+    "president trump", "go f", "politics", "political", "government push begins",
+]
+UNPROTECTED_ENGLISH_TITLE_WORDS_V64 = {
+    "wants", "host", "government", "push", "begins", "ireland", "real", "reason",
+    "behind", "revealed", "reveals", "amid", "draws", "duds", "things", "hated",
+    "loved", "contracts", "guaranteed", "massive", "cuts", "roster", "post",
+}
+PROTECTED_ENGLISH_TITLE_TERMS_V64 = {
+    "wwe", "aew", "nxt", "tna", "tko", "raw", "smackdown", "wrestlemania",
+    "backlash", "royal", "rumble", "summerslam", "tongan", "death", "grip",
+    "danhausen", "roman", "reigns", "jacob", "fatu", "nick", "khan", "jim", "ross",
+}
+
+
+def v64_is_low_value_editorial_opinion(title="", text="", url=""):
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:5000]}")
+    raw_probe = f"{title} {url} {(text or '')[:5000]}".lower()
+    if any(p in probe for p in [normalize_for_check(x) for x in LOW_VALUE_EDITORIAL_PATTERNS_V64]):
+        return True
+    if any(x in raw_probe for x in LOW_VALUE_EDITORIAL_META_V64):
+        return True
+    # Gallery/listicle WrestlingInc: se ha piu slide e titolo da opinione, non e' news.
+    if "data-num_slides" in raw_probe and any(x in probe for x in ["draw", "dud", "things", "winners", "losers"]):
+        return True
+    return False
+
+
+def v64_business_probe(title="", text="", url=""):
+    # v64: business/category/event key devono guardare solo titolo + URL + lead, non sidebar/corpo lungo.
+    lead = extract_main_scoring_text(text or "", max_paragraphs=2, max_chars=900) if text else ""
+    return normalize_for_check(f"{title} {url} {lead}")
+
+
+def v64_title_is_unpublishable_english(title):
+    t = sanitize_text(title or "")
+    if not t:
+        return True
+    # Titoli chiaramente inglesi residui: almeno 2 parole inglesi non protette, o frasi headline inglesi.
+    low = normalize_for_check(t)
+    if any(phrase in low for phrase in ["real reason behind", "government push begins", "draws duds", "things we hated", "things we loved"]):
+        return True
+    tokens = re.findall(r"[A-Za-z']+", t.lower())
+    bad = [x for x in tokens if x in UNPROTECTED_ENGLISH_TITLE_WORDS_V64 and x not in PROTECTED_ENGLISH_TITLE_TERMS_V64]
+    # Evita falsi positivi su nomi propri; qui serve un blocco hard solo quando e' proprio una frase inglese.
+    return len(bad) >= 2
+
+
+def v64_deterministic_title(source_title="", generated_title="", source_text=""):
+    probe = normalize_for_check(f"{source_title} {generated_title} {(source_text or '')[:800]}")
+    if "ireland" in probe and "host" in probe and "wrestlemania" in probe:
+        return "L'Irlanda vuole ospitare WrestleMania: parte la spinta del governo"
+    if "wwe backlash" in probe and ("draws duds" in probe or "draws and duds" in probe):
+        return "WWE Backlash: cosa convince e cosa no nella card"
+    if "real reason behind" in probe and "wwe" in probe and ("roster cuts" in probe or "post wrestlemania" in probe):
+        return "Svelato il motivo dei massicci tagli al roster WWE dopo WrestleMania"
+    return ""
+
 def v63_restore_proper_case_text(value):
     if not value:
         return value
@@ -4242,6 +4325,10 @@ def v63_generate_human_title(source_title="", generated_title="", source_text=""
     src = sanitize_text(source_title or "")
     gen = sanitize_text(generated_title or "")
     probe = normalize_for_check(f"{src} {gen} {(source_text or '')[:800]}")
+
+    det_v64 = v64_deterministic_title(src, gen, source_text)
+    if det_v64:
+        return det_v64
 
     # Titoli ricorrenti da pattern, non da singola news: trasformano strutture inglesi in headline italiane naturali.
     if "reveals why" in probe and "tongan death grip" in probe and "roman reigns" in probe:
@@ -4281,6 +4368,9 @@ def v63_humanize_title(title, source_title="", source_text=""):
         title = v63_generate_human_title(source_title, title, source_text)
     title = title.replace("Tongan morte grip", "Tongan Death Grip")
     title = title.replace("tongan morte grip", "Tongan Death Grip")
+    det_v64 = v64_deterministic_title(source_title, title, source_text)
+    if det_v64 and v64_title_is_unpublishable_english(title):
+        title = det_v64
     title = v63_restore_proper_case_text(title)
     return refine_title_italian(title)
 
@@ -4391,6 +4481,9 @@ def calculate_importance_score(title, text="", url=""):
     norm = normalize_for_check(probe)
     title_norm = normalize_for_check(f"{title} {url}")
     lead_norm = normalize_for_check(f"{title} {url} {text[:450]}")
+
+    if v64_is_low_value_editorial_opinion(title, text, url):
+        return 0, ["v64 skip opinion/listicle non-news"]
 
     score = 0
     reasons = []
