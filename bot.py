@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v66_scoring_dedupe_safety_fix"
+BOT_VERSION = "v67_gemini_category_report_editoriali_fix"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -156,7 +156,7 @@ REPORT_WEEKLY_DELAY_SECONDS = int(3.5 * 60 * 60)
 REPORT_PLE_DELAY_SECONDS = int(5.5 * 60 * 60)
 REPORT_DEFAULT_DELAY_SECONDS = int(4 * 60 * 60)
 REPORT_MIN_COMPLETENESS_SCORE = 80
-REPORT_CATEGORY_ID = int(os.getenv("WP_EDITORIALI_CATEGORY_ID", "8"))
+REPORT_CATEGORY_ID = int(os.getenv("WP_EDITORIALI_CATEGORY_ID", "13"))
 
 
 FEEDS = [
@@ -1503,6 +1503,165 @@ def dedupe_preserve_order(items):
 
     return out
 
+
+# v67: categorizzazione editoriale affidata a Gemini, con fallback deterministico.
+# Mappa categorie WordPress attuale OpenWrestlingTV:
+# 4 WWE, 5 AEW, 6 NXT, 7 TNA, 8 World, 13 Editoriali, 15 Business.
+CATEGORY_ID_BY_SLUG_V67 = {
+    "WWE": 4,
+    "AEW": 5,
+    "NXT": 6,
+    "TNA": 7,
+    "WORLD": WORLD_CATEGORY_ID,
+    "BUSINESS": BUSINESS_CATEGORY_ID,
+    "EDITORIALI": REPORT_CATEGORY_ID,
+}
+
+CATEGORY_SLUG_BY_ID_V67 = {v: k for k, v in CATEGORY_ID_BY_SLUG_V67.items()}
+
+
+def normalize_category_slug_v67(value):
+    raw = sanitize_text(str(value or "")).upper()
+    raw = re.sub(r"[^A-Z]", "", raw)
+    aliases = {
+        "WWE": "WWE",
+        "AEW": "AEW",
+        "NXT": "NXT",
+        "TNA": "TNA",
+        "IMPACT": "TNA",
+        "IMPACTWRESTLING": "TNA",
+        "WORLD": "WORLD",
+        "OTHER": "WORLD",
+        "OTHERWRESTLING": "WORLD",
+        "INDIE": "WORLD",
+        "INTERNATIONAL": "WORLD",
+        "BUSINESS": "BUSINESS",
+        "CORPORATE": "BUSINESS",
+        "EDITORIALI": "EDITORIALI",
+        "EDITORIAL": "EDITORIALI",
+        "REPORT": "EDITORIALI",
+        "REPORTS": "EDITORIALI",
+        "RESULTS": "EDITORIALI",
+        "RISULTATI": "EDITORIALI",
+    }
+    return aliases.get(raw, "")
+
+
+def category_id_from_slug_v67(slug, fallback=None):
+    slug = normalize_category_slug_v67(slug)
+    if slug in CATEGORY_ID_BY_SLUG_V67:
+        return CATEGORY_ID_BY_SLUG_V67[slug]
+    return fallback if fallback is not None else WORLD_CATEGORY_ID
+
+
+def classify_category_fallback_v67(title="", text="", url="", is_report=False):
+    """Fallback locale prudente se Gemini non risponde.
+
+    Corregge i bug osservati nelle run:
+    - report/results sempre Editoriali;
+    - TNA/Impact veri in TNA;
+    - Dark Side of the Ring/docuserie e NJPW/AAA/ROH/NOAH generici in World;
+    - destinazione WWE/AEW batte promotion di provenienza.
+    """
+    if is_report or is_results_article(title, url, text):
+        return REPORT_CATEGORY_ID
+
+    probe = normalize_for_check(f"{title} {url} {extract_main_scoring_text(text or '', max_paragraphs=2, max_chars=1200)}")
+
+    if v62_is_business_news(title, text, url):
+        return BUSINESS_CATEGORY_ID
+
+    dark_side_terms = ["dark side of the ring", "vice tv", "vice", "docuseries", "documentary", "season"]
+    if any(term in probe for term in dark_side_terms):
+        return WORLD_CATEGORY_ID
+
+    wwe_destination_terms = [
+        "expected to land in wwe", "expected to sign with wwe", "sign with wwe", "signs with wwe",
+        "signed with wwe", "joining wwe", "join wwe", "wwe bound", "coming to wwe",
+        "wwe debut", "wwe return", "wwe main roster", "raw", "smackdown", "sami zayn",
+    ]
+    if any(normalize_for_check(t) in probe for t in wwe_destination_terms) or re.search(r"wwe", probe):
+        if not re.search(r"nxt", probe) or any(x in probe for x in ["raw", "smackdown", "main roster", "sami zayn"]):
+            return 4
+
+    if re.search(r"nxt", probe):
+        return 6
+    if any(x in probe for x in ["aew", "dynamite", "collision", "rampage", "all elite"]):
+        return 5
+    if any(x in probe for x in ["tna", "impact wrestling", "impact results", "tna impact", "slammiversary", "bound for glory"]):
+        return 7
+    if any(x in probe for x in ["njpw", "new japan", "aaa", "roh", "noah", "mlw", "gcw", "indie", "indy"]):
+        return WORLD_CATEGORY_ID
+
+    return detect_source_category(title, text, url)
+
+
+def classify_category_with_gemini_v67(title="", text="", url="", is_report=False):
+    """Interpreta la categoria con Gemini prima della traduzione.
+
+    La traduzione resta separata: qui il modello restituisce solo categoria + motivazione.
+    Il codice applica poi guardrail rigidi per report e mapping WordPress.
+    """
+    if is_report or is_results_article(title, url, text):
+        print(f"[CATEGORY] Report/results rilevato: forzo Editoriali ({REPORT_CATEGORY_ID})")
+        return REPORT_CATEGORY_ID, "EDITORIALI", "report/results forced"
+
+    lead = extract_main_scoring_text(text or "", max_paragraphs=3, max_chars=1800)
+    fallback_id = classify_category_fallback_v67(title, text, url, is_report=False)
+    fallback_slug = CATEGORY_SLUG_BY_ID_V67.get(fallback_id, "WORLD")
+
+    prompt = f"""
+Sei un caporedattore di un sito italiano di wrestling.
+Devi scegliere UNA SOLA categoria WordPress per questa notizia, senza tradurre l'articolo.
+Restituisci SOLO JSON valido in una riga.
+
+Categorie ammesse:
+- WWE: main roster WWE, Raw, SmackDown, PLE WWE, star WWE main roster, arrivi in WWE.
+- AEW: AEW, Dynamite, Collision, Rampage, PPV AEW.
+- NXT: NXT come focus principale.
+- TNA: TNA/Impact Wrestling come focus principale.
+- World: wrestling fuori WWE/AEW/NXT/TNA, NJPW, AAA, ROH, NOAH, MLW, indie, documentari tipo Dark Side of the Ring, notizie industry non corporate.
+- Business: TKO/WWE/AEW corporate, ricavi, media rights, TV/streaming deal, ticket sales, executive contract, acquisizioni.
+- Editoriali: solo report/results/recap/riepiloghi completi di show/eventi.
+
+Precedenze obbligatorie:
+1. Report/results/recap/riepilogo completo di uno show -> Editoriali.
+2. Se la notizia parla di un wrestler ex-NJPW/AAA/ROH/NOAH atteso, diretto o firmato in WWE -> WWE, non World e non TNA.
+3. Se riguarda Sami Zayn, Raw o SmackDown -> WWE, non NXT.
+4. Dark Side of the Ring, Vice TV o docuserie -> World, non TNA.
+5. TNA solo se il focus editoriale e' TNA/Impact, non se e' solo una promotion citata.
+6. Se sei incerto tra TNA e World, scegli World.
+
+Titolo:
+{title}
+
+URL:
+{url}
+
+Lead/testo iniziale:
+{lead}
+
+JSON richiesto:
+{{"categoria":"WWE|AEW|NXT|TNA|World|Business|Editoriali","confidence":0.0,"reason":"massimo 160 caratteri"}}
+"""
+    try:
+        data, used_model = generate_and_parse_json(prompt)
+        slug = normalize_category_slug_v67(data.get("categoria", ""))
+        confidence = float(data.get("confidence", 0) or 0)
+        reason = sanitize_text(data.get("reason", ""))[:180]
+        if slug not in CATEGORY_ID_BY_SLUG_V67:
+            raise ValueError(f"categoria non valida: {data.get('categoria')}")
+        if confidence < 0.35:
+            print(f"[CATEGORY] Gemini confidence bassa ({confidence:.2f}), uso fallback {fallback_slug}")
+            return fallback_id, fallback_slug, "fallback low confidence"
+        cat_id = CATEGORY_ID_BY_SLUG_V67[slug]
+        print(f"[CATEGORY] Gemini: {slug} ({cat_id}) conf={confidence:.2f} model={used_model} | {reason}")
+        return cat_id, slug, reason or f"gemini {used_model}"
+    except Exception as e:
+        print(f"[CATEGORY] Gemini categoria fallita: {e} | fallback={fallback_slug} ({fallback_id})")
+        return fallback_id, fallback_slug, "fallback after gemini error"
+
+
 def detect_source_category(title, text="", url=""):
     title_l = sanitize_text(title).lower()
     url_l = (url or "").lower()
@@ -2645,14 +2804,14 @@ def render_image_block(src, alt=""):
     return ""
 
 
-def translate_ordered_content_blocks(source_title, blocks, source_url="", forced_title=None):
+def translate_ordered_content_blocks(source_title, blocks, source_url="", forced_title=None, forced_category=None):
     text_blocks = [b for b in blocks if b.get("type") == "text" and b.get("text")]
     if not text_blocks:
         return None, "validation"
 
     source_text_joined_for_mode = "\n\n".join(b.get("text", "") for b in text_blocks)
     results_mode = is_results_article(source_title, source_url, source_text_joined_for_mode)
-    forced_category = REPORT_CATEGORY_ID if results_mode else detect_source_category(source_title, source_text_joined_for_mode, source_url)
+    forced_category = int(forced_category) if forced_category is not None else (REPORT_CATEGORY_ID if results_mode else detect_source_category(source_title, source_text_joined_for_mode, source_url))
     protected_facts = build_protected_facts_for_prompt(source_title, "\n\n".join(b.get("text", "") for b in text_blocks))
     protected_facts_block = "\n".join(f"- {fact}" for fact in protected_facts) if protected_facts else "- Nessun elemento specifico rilevato."
 
@@ -3522,12 +3681,12 @@ def validate_protected_source_facts(source_title, source_text, generated_title, 
     return issues
 
 
-def translate_news(source_title, text, source_url=""):
+def translate_news(source_title, text, source_url="", forced_category=None):
     if not text or len(text) < 50:
         return None, "validation"
 
     results_mode = is_results_article(source_title, source_url, text)
-    forced_category = REPORT_CATEGORY_ID if results_mode else detect_source_category(source_title, text, source_url)
+    forced_category = int(forced_category) if forced_category is not None else (REPORT_CATEGORY_ID if results_mode else detect_source_category(source_title, text, source_url))
 
     protected_facts = build_protected_facts_for_prompt(source_title, text)
     if protected_facts:
@@ -5790,6 +5949,15 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         return "wp_down"
 
     forced_report_title = make_deterministic_report_title(title, link, full_text) if is_results_article(title, link, full_text) else None
+    forced_category_id, forced_category_slug, forced_category_reason = classify_category_with_gemini_v67(
+        title,
+        text_for_translation or full_text,
+        link,
+        is_report=bool(forced_report_title),
+    )
+    item["category_id"] = forced_category_id
+    item["category_slug"] = forced_category_slug
+    item["category_reason"] = forced_category_reason
 
     news_data = None
     err_type = "validation"
@@ -5800,6 +5968,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
             ordered_content_blocks,
             source_url=link,
             forced_title=forced_report_title,
+            forced_category=forced_category_id,
         )
         if news_data:
             structured_used = True
@@ -5811,7 +5980,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         return "validation_fail"
 
     if not news_data:
-        news_data, err_type = translate_news(title, text_for_translation or full_text, source_url=link)
+        news_data, err_type = translate_news(title, text_for_translation or full_text, source_url=link, forced_category=forced_category_id)
 
     if not news_data:
         print(f"[SKIP] Traduzione fallita: {title} (err_type={err_type})")
@@ -5835,6 +6004,9 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         replaced_html, embeds_already_positioned = replace_embed_placeholders_in_html(news_data.get("testo", ""), embed_placeholder_map)
         news_data["testo"] = replaced_html
 
+    # v67: categoria decisa a monte da Gemini/fallback e poi fissata qui.
+    # Per i report prevale sempre Editoriali (ID 13 di default, configurabile via env).
+    news_data["categoria"] = int(forced_category_id)
     if forced_report_title:
         news_data["categoria"] = REPORT_CATEGORY_ID
         news_data["titolo"] = forced_report_title
