@@ -4352,3 +4352,151 @@ NameError: name 'v723_conservative_score_after_ai' is not defined
 [BOT] Pubblicati 2 articoli (0 pending + 2 nuove) su 4 candidati provati | mode=normal
 ===== RUN END [2026-05-08 19:09:12] VERSION [v73_final_ai_editorial_taxonomy_guardrails (03e009c)] =====
 
+
+===== RUN START [2026-05-08 20:53:16] VERSION [v73_final_ai_editorial_taxonomy_guardrails (c05d7c7)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168165/wwe-pay-cuts-details/
+[SKIP] Score sotto soglia editoriale (0/75): Chael Sonnen: UFC Star Didn't Respect Career Enough To 'Stick A Needle In His A**'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167718/wwe-jbl-aleister-black-main-event-talent-recently-released/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167982/on-edit-wwe-nick-khan-us-department-justice-vince-mcmahon-sex-trafficking/
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Paul Heyman Teases Taking On A New Client
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167941/wwe-danhausen-espn-sportscenter-top-plays/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167894/wwe-smackdown-sami-zayn-trick-williams-gingerbread-man-pushback-creative/
+[SKIP] Score sotto soglia editoriale (36/75): TNA Slammiversary 2026 To Start In Afternoon, Won't Go Up Against AEW Forbidden Door
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167614/wwe-big-e-kofi-kingston-xavier-woods-new-day-status-depart/
+[SKIP] Score sotto soglia editoriale (72/75): Backstage Report On Expectations For John Cena's WWE Backlash Announcement
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167604/jacob-fatu-roman-reigns-wwe-backlash-2026-fans/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167602/wwe-brock-lesnar-alumni-moved/
+[SKIP] Score sotto soglia editoriale (0/75): WWE Backlash 2026 Predictions: Wrestling Inc. Picks The Winners
+[SKIP] Score sotto soglia editoriale (18/75): Will Ospreay Lays Out Differences Between Working In NJPW & AEW
+[SKIP] Score sotto soglia editoriale (0/75): TNA Impact 5/7/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167589/tna-impact-lei-ying-lee-arianna-grace-regains-knockouts-title/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (28/75): Harley Cameron Addresses Wardrobe Mishap on May 6 AEW Dynamite
+[SKIP] Score sotto soglia editoriale (11/75): Jacob Fatu Admits Drug Problems Nearly Ruined His Wrestling Career
+[SKIP] Score sotto soglia editoriale (54/75): Major Jesse Ventura Story Was Cut From Hulk Hogan Netflix Documentary
+[SKIP] URL già in history: https://www.ringsidenews.com/possible-spoiler-danhausens-mystery-partner-wwe-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/stephen-smith-claims-hed-bigger-heel-than-paul-heyman-wwe/
+[SKIP] URL già in history: https://www.ringsidenews.com/cm-punk-appears-steve-carell-wwe-2k26-comedy-segment-night-too-many-stars-event/
+[SKIP] URL sospeso per validation fail recenti: https://www.ringsidenews.com/opening-segment-may-8-wwe-smackdown-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-scrapped-major-plans-gunther-before-cody-rhodes-feud/
+[SKIP] URL già in history: https://www.ringsidenews.com/number-wwe-talent-asked-take-pay-cuts-revealed/
+[SKIP] URL sospeso per validation fail recenti: https://www.ringsidenews.com/wwe-wanted-new-day-transition-out-full-time-wrestling-before-departure/
+[SKIP] URL già in history: https://www.ringsidenews.com/original-plans-jc-mateo-revealed-before-wwe-release/
+[SKIP] Score sotto soglia editoriale (5/75): New Details Reveal Dark Side of the Ring Season 7's TNA Story Isn't What Fans Expect
+[SKIP] Score sotto soglia editoriale (43/75): AMC's Reaction to Broken Matt Hardy's TNA Return Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/new-wwe-contract-clauses-under-tko-could-restrict-talent-freedom-long-deals-expire/
+[SKIP] URL già in history: https://www.ringsidenews.com/eric-bischoff-defends-tko-asking-wwe-talent-take-pay-cuts/
+[SCORE] 100 high - WWE Media Rights Contracts From 2019 To 2024 Made Public Via Shareholder Lawsuit | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, evento legale/controversia, show settimanale, v62 evento legale grave, v62 categoria business, v71 freshness=0.719
+[SCORE] 81 high - Backstage Update On Roman Reigns' WWE Schedule In July | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, ritorno/debutto, v71 freshness=0.575
+[SCORE] 57 low - Backstage Speculation On Danhausen's WWE Backlash Mystery Partner | WWE/main roster, nomi forti titolo: danhausen, WWE main roster + storyline/evento, rumor/backstage, v71 freshness=0.604, v48 tier2: 55-74
+[SCORE] 53 low - Backstage Update On Roman Reigns' WWE Status Following Schedule Change | WWE/main roster, top star titolo: roman reigns, rumor/backstage, v71 freshness=0.549, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 1 news >=90, 2 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 4 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: WWE Media Rights Contracts From 2019 To 2024 Made Public Via Shareholder Lawsuit
+[BOT] semantic_id=wwe-media-rights-contracts-from-2019-to-2024-made-public-via-shareholder-lawsuit
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, image=2, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=BUSINESS (15) conf=1.00 model=gemini-2.5-flash-lite | L'articolo tratta di contratti di diritti media, ricavi e aspetti legali/aziendali della WWE, rientrando chiaramente nella categoria Business.
+[EDITORIAL v72.3] translation_notes=I nomi dei titoli="WWE Raw" e "WWE SmackDown" vanno mantenuti in inglese.; "Release/released" va tradotto come "licenziamento/licenziato" o "addio" a seconda del contesto, non "rilascio/rilasciato".; Le quote finanziarie vanno tradotte fedelmente, senza parafrasi.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=BUSINESS (15) | L'articolo tratta di contratti di diritti media, ricavi e aspetti legali/aziendali della WWE, rientrando chiaramente nella categoria Business.
+[PERF v71] analisi editoriale AI v72: 3.53s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE Media Rights Contracts From 2019 To 2024 Made Public Via Shareholder Lawsuit
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, evento legale/controversia, PLE/PPV, non wrestling puro, v62 evento legale grave, v62 categoria business
+[V71] story_signature=wwe_media_rights_contracts|made_public_via_shareholder|legal|wwe|raw|smackdown semantic_status=new_story freshness=0.719
+[PERF v71] WP recent posts dedupe: 2.43s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 2.79s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=8
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwe-media-rights-contracts-from-2019-to-2024-made-public-via-shareholder-lawsuit/intro-1778271181.jpg
+[MEDIA] Immagine interna caricata: 3987
+[PERF v71] upload immagine interna: 1.73s
+[PERF v71] traduzione: 7.98s
+[FIX] Titolo non valido (ok) -> fallback automatico: WWE media rights contracts from 2019 to 2024 made public via shareholder lawsuit
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Contratti diritti media WWE 2019-2024 resi pubblici per causa azionisti
+/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py:5163: MarkupResemblesLocatorWarning: The input passed in on this line looks more like a URL than HTML or XML.
+
+If you meant to use Beautiful Soup to parse the web page found at a certain URL, then something has gone wrong. You should use an Python package like 'requests' to fetch the content behind the URL. Once you have the content as a string, you can feed that string into Beautiful Soup.
+
+However, if you want to parse some data that happens to look like a URL, then nothing has gone wrong: you are using Beautiful Soup correctly, and this warning is spurious and can be filtered. To make this warning go away, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import MarkupResemblesLocatorWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=MarkupResemblesLocatorWarning)
+    
+  q = BeautifulSoup(m.group(1), "html.parser").get_text(" ", strip=True)
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 3.98s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-media-rights-contracts-from-2019-to-2024-made-public-via-shareholder-lawsuit/l-intro-1778271181.jpg
+[MEDIA] Immagine caricata: 3989
+[WP] Status attach image: 200
+[PERF v71] featured image: 3.01s
+[PERF v71] totale articolo pubblicato 'WWE Media Rights Contracts From 2019 To 2024 Made Public Via': 21.59s
+[OK] Pubblicato: Contratti diritti media WWE 2019-2024 resi pubblici per causa azionisti
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Backstage Update On Roman Reigns' WWE Schedule In July
+[BOT] semantic_id=backstage-update-on-roman-reigns-wwe-schedule-in-july
+[SCORE] iniziale=81 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo si concentra su aggiornamenti backstage e speculazioni riguardanti il programma futuro di Roman Reigns e potenziali cambiamenti legati al suo contratto, qualificandosi come RUMOR all'interno della categoria WWE.
+[EDITORIAL v72.3] translation_notes=I nomi dei titoli come "World Heavyweight Champion" e "Universal Champion" dovrebbero rimanere in inglese.; Evitare traduzioni letterali di "part-time star" (es. "star part-time"), preferire "star che appare saltuariamente" o simile.; Il termine "pay cut" dovrebbe essere tradotto come "taglio dello stipendio" o "riduzione dello stipendio".
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo si concentra su aggiornamenti backstage e speculazioni riguardanti il programma futuro di Roman Reigns e potenziali cambiamenti legati al suo contratto, qualificandosi come RUMOR all'interno della categoria WWE.
+[PERF v71] analisi editoriale AI v72: 3.25s
+[SCORE] raffinato=68 priority=medium | WWE/main roster, top star titolo: roman reigns, nomi forti lead: cm punk, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v72.3 cap rumor: niente boost raffinamento, v72.3 cap rumor
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Backstage Update On Roman Reigns' WWE Schedule In July
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:roman-reigns:cm-punk -> event:rumor:backstage-update-roman-reigns-schedule-july
+[V71] story_signature=roman_reigns|backstage_update_on_roman|reigns_wwe_schedule_in|return|wwe|raw|summerslam|wrestlemania semantic_status=new_story freshness=0.691
+[SKIP] News core già pubblicata da altra fonte: Backstage Update On Roman Reigns' WWE Schedule In July
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Backstage Speculation On Danhausen's WWE Backlash Mystery Partner
+[BOT] semantic_id=backstage-speculation-on-danhausens-wwe-backlash-mystery-partner
+[SCORE] iniziale=57 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=2, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=1.00 model=gemini-2.5-flash-lite |  | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=I nomi dei titoli restano in inglese: "Undisputed WWE Championship".; "Released" non va tradotto letteralmente; usare "licenziato" o "addio".; Le quote devono essere riportate fedelmente.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.15s
+[SCORE] raffinato=57 priority=low | WWE/main roster, nomi forti titolo: danhausen, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, non wrestling puro, v62 ritorno/debutto, v72.3 cap rumor: niente boost raffinamento
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Backstage Speculation On Danhausen's WWE Backlash Mystery Partner
+[V71] story_signature=danhausen|backstage_speculation_on_danhausen_s|wwe_backlash_mystery_partner|return|wwe|smackdown|summerslam|wrestlemania semantic_status=new_story freshness=0.72
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=11
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/backstage-speculation-on-danhausens-wwe-backlash-mystery-partner/intro-1778271641.jpg
+[MEDIA] Immagine interna caricata: 3991
+[PERF v71] upload immagine interna: 1.47s
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Fatti/nomi sorgente alterati: ["Numero evento alterato: SummerSlam sorgente=2024 generato=['2025']"]
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Fatti/nomi sorgente alterati: ["Numero evento alterato: SummerSlam sorgente=2024 generato=['2025']"]
+[PERF v71] traduzione: 10.12s
+[SKIP] Traduzione fallita: Backstage Speculation On Danhausen's WWE Backlash Mystery Partner (err_type=validation)
+[BOT] Elaborazione: Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[BOT] semantic_id=backstage-update-on-roman-reigns-wwe-status-following-schedule-change
+[SCORE] iniziale=53 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo discute di aggiornamenti backstage e stato di Roman Reigns, con la rimozione di date dal suo calendario che ha generato speculazioni. Si tratta di rumor e indiscrezioni su piani futuri o status attuali, non di una preview di un e
+[EDITORIAL v72.3] translation_notes=Mantenere in inglese i nomi delle cinture ufficiali come "World Champion".; Evitare di tradurre "released" come "rilasciato"; usare "licenziato" o "addio" a seconda del contesto.; Tradurre fedelmente le citazioni, non parafrasare.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo discute di aggiornamenti backstage e stato di Roman Reigns, con la rimozione di date dal suo calendario che ha generato speculazioni. Si tratta di rumor e indiscrezioni su piani futuri o status attuali, non di una preview di un e
+[PERF v71] analisi editoriale AI v72: 3.21s
+[SCORE] raffinato=53 priority=low | WWE/main roster, top star titolo: roman reigns, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v62 categoria business, v72.3 cap rumor: niente boost raffinamento
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:tko-financials -> event:rumor:backstage-update-roman-reigns-following-schedule-change
+[V71] story_signature=roman_reigns|backstage_update_on_roman|reigns_wwe_status_following|business|wwe|raw|tko|wrestlemania semantic_status=new_story freshness=0.549
+[SKIP] News core già pubblicata da altra fonte: Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 4 candidati provati | mode=normal
+===== RUN END [2026-05-08 20:53:16] VERSION [v73_final_ai_editorial_taxonomy_guardrails (c05d7c7)] =====
+
