@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v71_semantic_guardrails_gemini31"
+BOT_VERSION = "v71_2_perf_featured_image_filter"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -3065,21 +3065,70 @@ def render_embed_block(url):
     return get_social_fallback_html(clean_url)
 
 
-def render_image_block(src, alt=""):
-    # v70: nei report/articoli strutturati le immagini interne fanno parte della struttura editoriale.
-    # Vengono caricate nella Media Library e reinserite nel punto originale del contenuto.
+def v71_perf_log(label, started_at, threshold=0.35):
+    try:
+        elapsed = time.time() - float(started_at)
+        if elapsed >= threshold:
+            print(f"[PERF v71] {label}: {elapsed:.2f}s")
+        return time.time()
+    except Exception:
+        return time.time()
+
+
+def v71_image_identity(url):
+    """Identita stabile per evitare di reinserire nel body la featured image.
+
+    Confronta sia l'URL normalizzato sia il nome file senza suffissi WordPress
+    tipo -1200x675, così intercetta featured e inline generate dalla stessa sorgente.
+    """
+    url = normalize_embed_url(url or "").strip()
+    if not url:
+        return {"", ""}
+    try:
+        parsed = urlparse(url)
+        path = unquote(parsed.path or "").lower()
+        filename = path.rsplit("/", 1)[-1]
+        filename = re.sub(r"-(?:\d{2,5})x(?:\d{2,5})(?=\.[a-z0-9]{3,5}$)", "", filename, flags=re.I)
+        canonical = urlunparse((parsed.scheme.lower(), parsed.netloc.lower(), path, "", "", "")).rstrip("/")
+        return {canonical, filename}
+    except Exception:
+        return {url.lower(), url.lower().rsplit("/", 1)[-1]}
+
+
+def v71_same_image(url_a, url_b):
+    ids_a = {x for x in v71_image_identity(url_a) if x}
+    ids_b = {x for x in v71_image_identity(url_b) if x}
+    return bool(ids_a and ids_b and ids_a.intersection(ids_b))
+
+
+def v71_is_excluded_inline_image(src, excluded_image_urls=None):
+    if not src:
+        return True
+    for excluded in excluded_image_urls or []:
+        if excluded and v71_same_image(src, excluded):
+            return True
+    return False
+
+
+def render_image_block(src, alt="", excluded_image_urls=None):
+    # v70/v71.2: le immagini interne vanno reinserite, ma non la featured image iniziale.
     src = normalize_embed_url(src or "").strip()
     if not src:
         return ""
+    if v71_is_excluded_inline_image(src, excluded_image_urls):
+        print(f"[MEDIA v71] Immagine interna saltata perche coincide con la featured image: {src}")
+        return ""
     alt = sanitize_text(alt or "")
+    media_started = time.time()
     media = v70_upload_image_to_wp_full(src) if "v70_upload_image_to_wp_full" in globals() else None
+    v71_perf_log("upload immagine interna", media_started, threshold=0.5)
     final_src = (media or {}).get("source_url") or src
     final_src = final_src.replace('"', '&quot;')
     alt = alt.replace('"', '&quot;')
     return f'<figure class="wp-block-image owtv-inline-image"><img src="{final_src}" alt="{alt}" loading="lazy" /></figure>'
 
 
-def translate_ordered_content_blocks(source_title, blocks, source_url="", forced_title=None, forced_category=None):
+def translate_ordered_content_blocks(source_title, blocks, source_url="", forced_title=None, forced_category=None, excluded_image_urls=None):
     text_blocks = [b for b in blocks if b.get("type") == "text" and b.get("text")]
     if not text_blocks:
         return None, "validation"
@@ -3159,7 +3208,7 @@ JSON richiesto:
                 if rendered:
                     html_parts.append(rendered)
             elif b.get("type") == "image":
-                rendered = render_image_block(b.get("src", ""), b.get("alt", ""))
+                rendered = render_image_block(b.get("src", ""), b.get("alt", ""), excluded_image_urls=excluded_image_urls)
                 if rendered:
                     html_parts.append(rendered)
             elif b.get("type") == "text":
@@ -4253,7 +4302,16 @@ def append_embeds_to_html(content_html, embed_urls):
     return content_html + embed_block
 
 
+WP_EXISTING_URL_CACHE_V71 = {}
+
 def find_existing_post_by_url(url):
+    url = (url or "").strip()
+    if not url:
+        return None
+    cached = WP_EXISTING_URL_CACHE_V71.get(url)
+    if cached and time.time() - cached.get("ts", 0) < 300:
+        return cached.get("id")
+    started = time.time()
     try:
         res = session.get(
             WP_API_URL,
@@ -4266,9 +4324,14 @@ def find_existing_post_by_url(url):
             for item in items:
                 content = json.dumps(item, ensure_ascii=False)
                 if url in content:
-                    return item.get("id")
+                    post_id = item.get("id")
+                    WP_EXISTING_URL_CACHE_V71[url] = {"ts": time.time(), "id": post_id}
+                    v71_perf_log("WP lookup URL esistente", started, threshold=0.5) if "v71_perf_log" in globals() else None
+                    return post_id
     except Exception as e:
         print(f"[WP] Verifica post esistente fallita: {e}")
+    WP_EXISTING_URL_CACHE_V71[url] = {"ts": time.time(), "id": None}
+    v71_perf_log("WP lookup URL esistente", started, threshold=0.5) if "v71_perf_log" in globals() else None
     return None
 
 
@@ -4321,6 +4384,7 @@ def v65_recent_posts(per_page=50):
     now = time.time()
     if WP_RECENT_POSTS_CACHE_V65["items"] and now - WP_RECENT_POSTS_CACHE_V65["ts"] < 180:
         return WP_RECENT_POSTS_CACHE_V65["items"]
+    started = time.time()
     try:
         res = session.get(
             WP_API_URL,
@@ -4332,6 +4396,7 @@ def v65_recent_posts(per_page=50):
             items = res.json()
             WP_RECENT_POSTS_CACHE_V65["items"] = items
             WP_RECENT_POSTS_CACHE_V65["ts"] = now
+            v71_perf_log("WP recent posts dedupe", started, threshold=0.5) if "v71_perf_log" in globals() else None
             return items
         print(f"[DEDUPE] Recent posts non disponibili: status {res.status_code}")
     except Exception as e:
@@ -4567,9 +4632,11 @@ def v66_should_skip_candidate_early(title="", text="", url=""):
     return ""
 
 
+WP_EVENT_LOOKUP_CACHE_V71 = {}
+
 def wp_has_published_event(event_key, title="", url=""):
     """
-    v42: evita falsi positivi da history sporca.
+    v42/v71.2: evita falsi positivi da history sporca e cachea i lookup WP ripetuti nella stessa run.
     Se un event_key risulta in history, prima di skippare prova a verificare
     che WordPress abbia davvero un post riconducibile a quell'evento.
     In caso di dubbio ritorna False: meglio riprovare a pubblicare che perdere una news.
@@ -4578,7 +4645,14 @@ def wp_has_published_event(event_key, title="", url=""):
     if not event_key:
         return False
 
+    cache_key = event_key
+    cached = WP_EVENT_LOOKUP_CACHE_V71.get(cache_key)
+    if cached and time.time() - cached.get("ts", 0) < 300:
+        return bool(cached.get("value"))
+
+    started = time.time()
     if url and find_existing_post_by_url(url):
+        WP_EVENT_LOOKUP_CACHE_V71[cache_key] = {"ts": time.time(), "value": True}
         return True
 
     raw_key = re.sub(r"^(event|report):", "", event_key)
@@ -4617,13 +4691,19 @@ def wp_has_published_event(event_key, title="", url=""):
                 norm_content = normalize_for_check(content)
 
                 if event_key in content or (url and url in content):
+                    WP_EVENT_LOOKUP_CACHE_V71[cache_key] = {"ts": time.time(), "value": True}
+                    v71_perf_log("WP lookup event_key", started, threshold=0.5) if "v71_perf_log" in globals() else None
                     return True
 
                 if key_tokens and all(tok in norm_content for tok in key_tokens):
+                    WP_EVENT_LOOKUP_CACHE_V71[cache_key] = {"ts": time.time(), "value": True}
+                    v71_perf_log("WP lookup event_key", started, threshold=0.5) if "v71_perf_log" in globals() else None
                     return True
         except Exception as e:
             print(f"[WP] Verifica event_key fallita ({event_key}): {e}")
 
+    WP_EVENT_LOOKUP_CACHE_V71[cache_key] = {"ts": time.time(), "value": False}
+    v71_perf_log("WP lookup event_key", started, threshold=0.5) if "v71_perf_log" in globals() else None
     return False
 
 
@@ -6518,6 +6598,8 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     print(f"[BOT] Elaborazione: {title}")
     print(f"[BOT] semantic_id={sem_id}")
     print(f"[SCORE] iniziale={item.get('score', 0)} priority={priority_label(int(item.get('score', 0)))}")
+    perf_total_v71 = time.time()
+    perf_step_v71 = perf_total_v71
 
     if not link:
         print("[SKIP] URL mancante")
@@ -6539,6 +6621,19 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         print(f"[SKIP] Dominio temporaneamente escluso in questa run: {domain}")
         return "skipped"
 
+    # v71.2 performance: prima di scraping/Gemini, elimina duplicati evidenti usando solo titolo+URL.
+    # Evita di spendere tempo e token su rewrite gia intercettabili senza aprire la pagina.
+    early_news_core_key_v71 = make_news_core_key(title, "")
+    if early_news_core_key_v71 and early_news_core_key_v71 in seen_news_core_keys:
+        print(f"[SKIP v71 PERF] News core gia vista prima dello scraping: {early_news_core_key_v71} - {title}")
+        remove_pending_url(link)
+        return "skipped"
+    early_story_signature_v71 = build_story_signature_v71(title, "", link).get("signature", "")
+    if early_story_signature_v71 and early_story_signature_v71 in seen_story_signatures_v71 and not is_major_storyline_update(title, "", ""):
+        print(f"[SKIP v71 PERF] Story signature gia vista prima dello scraping: {early_story_signature_v71} - {title}")
+        remove_pending_url(link)
+        return "skipped"
+
     if item.get("prefetched_text"):
         full_text = item.get("prefetched_text")
         scrape_error = None
@@ -6549,6 +6644,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         print(f"[REPORT] Uso testo prefetched per report maturo ({len(full_text)} caratteri)")
     else:
         full_text, scrape_error, page_html, page_img, embed_urls, inline_images = get_clean_text(link)
+    perf_step_v71 = v71_perf_log("scraping articolo", perf_step_v71, threshold=0.5)
     # v58: blocchi ordinati testo/embed. Gli embed non vengono piu affidati a Gemini.
     ordered_content_blocks = []
     embed_placeholder_map = {}  # legacy v56, lasciato per compatibilita ma non usato nel nuovo percorso.
@@ -6560,6 +6656,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
             image_blocks_count = sum(1 for b in ordered_content_blocks if b.get("type") == "image")
             embed_blocks_count = sum(1 for b in ordered_content_blocks if b.get("type") == "embed")
             print(f"[BLOCKSEQ] Blocchi ordinati estratti: text={text_blocks_count}, image={image_blocks_count}, embed={embed_blocks_count}")
+    perf_step_v71 = v71_perf_log("estrazione blocchi", perf_step_v71, threshold=0.3)
 
     if embed_urls:
         print(f"[BOT] Embed trovati: {len(embed_urls)}")
@@ -6605,6 +6702,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         return "skipped"
 
     article_type_v68, article_type_reason_v68 = classify_article_type_with_gemini_v68(title, full_text, link)
+    perf_step_v71 = v71_perf_log("classificazione tipo articolo", perf_step_v71, threshold=0.5)
     item["article_type_v68"] = article_type_v68
     item["article_type_reason_v68"] = article_type_reason_v68
 
@@ -6622,6 +6720,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     item["score"] = max(int(item.get("score", 0)), refined_score)
     item["score_reasons"] = refined_reasons
     print(f"[SCORE] raffinato={item['score']} priority={priority_label(item['score'])} | {', '.join(refined_reasons)}")
+    perf_step_v71 = v71_perf_log("scoring raffinato", perf_step_v71, threshold=0.3)
 
     if item["score"] < MIN_PUBLISH_SCORE:
         refined_tier, refined_tier_reason = editorial_tier(item["score"], title, full_text, link)
@@ -6644,6 +6743,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     freshness_v71 = compute_freshness_score_v71(title, scoring_text, link, source_timestamp=item.get("source_timestamp"), semantic_status=semantic_v71.get("status", "new_story"))
     item["freshness_score_v71"] = freshness_v71
     print(f"[V71] story_signature={story_signature_v71} semantic_status={semantic_v71.get('status')} freshness={freshness_v71}")
+    perf_step_v71 = v71_perf_log("dedupe/freshness v71", perf_step_v71, threshold=0.3)
     if semantic_v71.get("duplicate") and not V71_SHADOW_MODE:
         print(f"[SKIP v71] Duplicato semantico/rewrite: {semantic_v71.get('status')} - {title}")
         remove_pending_url(link)
@@ -6695,9 +6795,13 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         link,
         is_report=bool(forced_report_title),
     )
+    perf_step_v71 = v71_perf_log("classificazione categoria", perf_step_v71, threshold=0.5)
     item["category_id"] = forced_category_id
     item["category_slug"] = forced_category_slug
     item["category_reason"] = forced_category_reason
+
+    img_url = (extract_image_url(entry) if entry else None) or page_img
+    excluded_inline_images_v71 = [u for u in [img_url, page_img] if u]
 
     news_data = None
     err_type = "validation"
@@ -6709,6 +6813,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
             source_url=link,
             forced_title=forced_report_title,
             forced_category=forced_category_id,
+            excluded_image_urls=excluded_inline_images_v71,
         )
         if news_data:
             structured_used = True
@@ -6721,6 +6826,8 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
 
     if not news_data:
         news_data, err_type = translate_news(title, text_for_translation or full_text, source_url=link, forced_category=forced_category_id)
+
+    perf_step_v71 = v71_perf_log("traduzione", perf_step_v71, threshold=0.5)
 
     if not news_data:
         print(f"[SKIP] Traduzione fallita: {title} (err_type={err_type})")
@@ -6764,8 +6871,6 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         record_validation_failure(link, title)
         return "validation_fail"
 
-    img_url = (extract_image_url(entry) if entry else None) or page_img
-
     post_id, post_json = create_post_without_image(
         data=news_data,
         sem_id=sem_id,
@@ -6778,6 +6883,8 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         featured_image_url="" if structured_used else img_url
     )
 
+    perf_step_v71 = v71_perf_log("creazione post WordPress", perf_step_v71, threshold=0.5)
+
     if not post_id:
         if post_json and post_json.get("firewall_block") == "imunify360":
             add_pending_article(item, reason="wp_firewall_imunify360")
@@ -6789,14 +6896,17 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
 
     if img_url:
         print(f"[BOT] Immagine trovata: {img_url}")
+        img_started_v71 = time.time()
         img_id = upload_image_to_wp(img_url)
         if img_id:
             attached = attach_featured_media(post_id, img_id)
             if not attached:
                 print(f"[WP] Immagine non associata al post {post_id}, ma il post è già pubblicato")
+        v71_perf_log("featured image", img_started_v71, threshold=0.5)
     else:
         print(f"[BOT] Nessuna immagine trovata per: {title}")
 
+    v71_perf_log(f"totale articolo pubblicato '{title[:60]}'", perf_total_v71, threshold=0.1)
     print(f"[OK] Pubblicato: {news_data['titolo']}")
     save_to_history(link, sem_id, title_key, story_fingerprint, news_core_key, event_key, story_signature_v71)
     seen_story_fingerprints.add(story_fingerprint)
@@ -7140,6 +7250,103 @@ def editorial_tier(score, title="", text="", url=""):
     if v62_has_any(probe, ["huge update", "massive news", "minor update", "another update", "teases", "cryptic", "name drops"]) and score < 75:
         return "exclude", "v71 tier0 micro/clickbait update"
     return _ORIG_V71_editorial_tier(score, title, text, url)
+
+
+
+# =========================
+# v71.1 hotfix: dedupe piu' prudente e signature title-first
+# =========================
+
+def v71_title_entities(title=""):
+    """Estrae entita' dal titolo, evitando che nomi citati incidentalmente nel body contaminino la story signature."""
+    title = title or ""
+    probe = normalize_for_check(title)
+    found = []
+    known_names = sorted(
+        set(WWE_NAMES + AEW_NAMES + NXT_NAMES + TNA_OTHER_NAMES + TOP_STAR_NAMES + STRONG_NAMES + HISTORIC_BUSINESS_NAMES_V61),
+        key=len,
+        reverse=True,
+    )
+    for name in known_names:
+        n = normalize_for_check(name)
+        key = n.replace(" ", "_")
+        if n in probe and key not in found:
+            found.append(key)
+    for m in re.finditer(r"\b[A-Z][A-Za-z'\-]+(?:\s+[A-Z][A-Za-z'\-]+){1,3}\b", title):
+        raw = m.group(0)
+        low = normalize_for_check(raw)
+        if low in {"wwe", "aew", "tna", "nxt", "ufc", "backlash", "wrestlemania"}:
+            continue
+        if any(x in low for x in ["major announcement", "huge update", "confirmed matches", "start time", "how to watch"]):
+            continue
+        key = low.replace(" ", "_")
+        if key and key not in found:
+            found.append(key)
+    return found[:4]
+
+_ORIG_V711_v71_extract_entities = v71_extract_entities
+
+def v71_extract_entities(title="", text=""):
+    title_found = v71_title_entities(title)
+    if title_found:
+        return title_found[:4]
+    return _ORIG_V711_v71_extract_entities(title, text)
+
+
+def v71_is_real_schedule_title(title="", text=""):
+    """Riconosce solo veri articoli schedule/preview/hosting, non qualunque news che cita WrestleMania o Backlash nel body."""
+    title_probe = normalize_for_check(title or "")
+    combined = normalize_for_check(f"{title} {(text or '')[:700]}")
+    hard_schedule_terms = [
+        "preview", "start time", "how to watch", "confirmed matches", "tonight on",
+        "schedule", "announced for", "set for", "venue", "location", "host", "hosting",
+        "will take place", "premium live event schedule", "ple schedule",
+    ]
+    if any(t in title_probe for t in hard_schedule_terms):
+        return True
+    if any(t in combined for t in ["city will host", "host city", "venue for", "location for"]):
+        return True
+    return False
+
+
+def v71_slug_words_from_title(title=""):
+    words = v71_tokens(title or "")
+    bad = set(STOPWORDS) | {"says", "said", "admits", "addresses", "fans", "really", "about", "will", "dont", "don", "think", "lays", "options"}
+    clean = []
+    for w in words:
+        if w in bad or len(w) < 3:
+            continue
+        if w not in clean:
+            clean.append(w)
+    return clean[:5]
+
+_ORIG_V711_v66_make_news_core_key = v66_make_news_core_key
+
+def v66_make_news_core_key(title, text):
+    key = _ORIG_V711_v66_make_news_core_key(title, text)
+    # Hotfix: le macro schedule generate da citazioni nel body erano troppo aggressive
+    # e bloccavano news autonome su Backlash/WrestleMania/Lesnar/Cena/Fatu.
+    if key and key.startswith("schedule-") and not v71_is_real_schedule_title(title, text):
+        return ""
+    # Hotfix: roster-cuts-wwe e simili sono troppo generici. Se possibile aggiunge il soggetto del titolo.
+    if key in {"roster-cuts-wwe", "roster-cuts-aew", "roster-cuts"} or key.startswith("roster-cuts-wwe-"):
+        ents = v71_title_entities(title)
+        if ents:
+            return "-".join([key] + ents[:2])[:180]
+        words = v71_slug_words_from_title(title)
+        if words:
+            return "-".join([key] + words[:3])[:180]
+    return key
+
+_ORIG_V711_editorial_tier = editorial_tier
+
+def editorial_tier(score, title="", text="", url=""):
+    probe = normalize_for_check(f"{title} {(text or '')[:1200]} {url}")
+    # Una preview/speculazione futura non deve passare col bypass major story solo perche' cita return o WrestleMania.
+    if v70_is_hard_preview(title, text, url) or v62_has_any(probe, ["will shock", "major announcement", "what is really about", "lays out options"]):
+        if score < MIN_PUBLISH_SCORE:
+            return "exclude", "v71.1 no bypass for preview/speculative announcement"
+    return _ORIG_V711_editorial_tier(score, title, text, url)
 
 if __name__ == "__main__":
     log_run_start()
