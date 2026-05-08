@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v69_translation_title_guardrails"
+BOT_VERSION = "v70_preview_dedupe_translation_internal_images"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -3041,9 +3041,17 @@ def render_embed_block(url):
 
 
 def render_image_block(src, alt=""):
-    # v61: le immagini editoriali vengono gestite solo come featured image WordPress.
-    # Inserirle nel corpo causava doppia immagine nel tema Newspaperup.
-    return ""
+    # v70: nei report/articoli strutturati le immagini interne fanno parte della struttura editoriale.
+    # Vengono caricate nella Media Library e reinserite nel punto originale del contenuto.
+    src = normalize_embed_url(src or "").strip()
+    if not src:
+        return ""
+    alt = sanitize_text(alt or "")
+    media = v70_upload_image_to_wp_full(src) if "v70_upload_image_to_wp_full" in globals() else None
+    final_src = (media or {}).get("source_url") or src
+    final_src = final_src.replace('"', '&quot;')
+    alt = alt.replace('"', '&quot;')
+    return f'<figure class="wp-block-image owtv-inline-image"><img src="{final_src}" alt="{alt}" loading="lazy" /></figure>'
 
 
 def translate_ordered_content_blocks(source_title, blocks, source_url="", forced_title=None, forced_category=None):
@@ -6454,7 +6462,9 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         embed_urls=[] if embeds_already_positioned else embed_urls,
         event_key=event_key,
         inline_images=[] if structured_used else inline_images,
-        featured_image_url=img_url
+        # v70: nel percorso strutturato le immagini interne sono gia caricate/reinserite nel body.
+        # Non passiamo featured_image_url qui, altrimenti create_post_without_image le rimuove come duplicati.
+        featured_image_url="" if structured_used else img_url
     )
 
     if not post_id:
@@ -6614,6 +6624,164 @@ def run_bot():
         f"({pending_published} pending + {new_published} nuove) "
         f"su {total_processed} candidati provati | mode={mode}"
     )
+
+
+# =========================
+# v70 overrides: preview hard stop, dedupe preview specifico, italianizzazione wrestling, immagini interne
+# =========================
+
+_ORIG_V70_classify_article_type_fallback = classify_article_type_fallback_v68
+_ORIG_V70_v68_score_cap = v68_score_cap
+_ORIG_V70_v66_make_news_core_key = v66_make_news_core_key
+_ORIG_V70_is_followup_angle = is_followup_angle
+
+V70_HARD_PREVIEW_TERMS = [
+    "preview", "start time", "how to watch", "confirmed matches", "card for", "tonight",
+    "will air", "will take place", "set for tonight", "watch live", "live stream",
+    "orario d'inizio", "come guardare", "match confermati", "anteprima", "stasera",
+]
+
+V70_WEEKLY_SHOWS = ["raw", "smackdown", "nxt", "dynamite", "collision", "rampage", "impact"]
+
+def v70_is_hard_preview(title="", text="", url=""):
+    title_url = normalize_for_check(f"{title} {url}")
+    lead = normalize_for_check(extract_main_scoring_text(text or "", max_paragraphs=2, max_chars=800))
+    probe = f"{title_url} {lead}"
+    has_preview_term = any(normalize_for_check(t) in probe for t in V70_HARD_PREVIEW_TERMS)
+    has_show = any(show in probe for show in V70_WEEKLY_SHOWS + ["backlash", "wrestlemania", "slammiversary", "forbidden door"])
+    # Se il titolo dice esplicitamente preview/start time/how to watch, deve prevalere su ogni altro segnale.
+    if any(normalize_for_check(t) in title_url for t in ["preview", "start time", "how to watch", "confirmed matches", "anteprima", "come guardare"]):
+        return True
+    return bool(has_preview_term and has_show)
+
+def v70_preview_key(title="", text="", url=""):
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:600]}")
+    show = "show"
+    for candidate in V70_WEEKLY_SHOWS + ["backlash", "wrestlemania", "slammiversary", "forbidden door"]:
+        if candidate in probe:
+            show = candidate.replace(" ", "-")
+            break
+    date = ""
+    m = re.search(r"\b(20\d{2})[-/](\d{1,2})[-/](\d{1,2})\b", probe)
+    if m:
+        date = f"{m.group(1)}-{int(m.group(2)):02d}-{int(m.group(3)):02d}"
+    else:
+        m = re.search(r"\b(january|february|march|april|may|june|july|august|september|october|november|december)\s+(\d{1,2}),?\s+(20\d{2})\b", f"{title} {text}", flags=re.I)
+        if m:
+            months = {"january":1,"february":2,"march":3,"april":4,"may":5,"june":6,"july":7,"august":8,"september":9,"october":10,"november":11,"december":12}
+            date = f"{m.group(3)}-{months[m.group(1).lower()]:02d}-{int(m.group(2)):02d}"
+    suffix = date or make_title_key(title)[:50]
+    return f"preview:{show}:{suffix}" if suffix else f"preview:{show}"
+
+def classify_article_type_fallback_v68(title="", text="", url=""):
+    if is_results_article(title, url, text):
+        return "RESULTS_REPORT"
+    # v70 hard stop: preview esplicita prima di qualunque floor post-show.
+    if v70_is_hard_preview(title, text, url):
+        return "PREVIEW"
+    return _ORIG_V70_classify_article_type_fallback(title, text, url)
+
+def v68_score_cap(score, title="", text="", url="", reasons=None):
+    reasons = reasons or []
+    score, reasons = _ORIG_V70_v68_score_cap(score, title, text, url, reasons)
+    if v70_is_hard_preview(title, text, url):
+        if score > 56:
+            score = 56
+            reasons.append("v70 cap preview hard")
+    return score, reasons
+
+def v66_make_news_core_key(title, text):
+    if v70_is_hard_preview(title, text, ""):
+        return v70_preview_key(title, text, "")
+    key = _ORIG_V70_v66_make_news_core_key(title, text)
+    # v70: evita macro-key schedule-wrestlemania su preview settimanali non WrestleMania.
+    if key in {"schedule-wrestlemania", "schedule-backlash"} and v70_is_hard_preview(title, text, ""):
+        return v70_preview_key(title, text, "")
+    return key
+
+def is_followup_angle(title="", text="", event_key=""):
+    if (event_key or "").startswith("event:preview:") or v70_is_hard_preview(title, text, ""):
+        return False
+    return _ORIG_V70_is_followup_angle(title, text, event_key)
+
+def v70_editorial_italianization(title, html_text):
+    """Corregge calchi inglesi comuni nel wrestling senza toccare i fatti."""
+    title = title or ""
+    html_text = html_text or ""
+    replacements = [
+        (r"\bla marea (e'|è) cambiata\b", "l'inerzia del match è cambiata"),
+        (r"\bil vento (e'|è) cambiato\b", "l'inerzia del match è cambiata"),
+        (r"\bha collegato una raffica\b", "ha messo a segno una raffica"),
+        (r"\bha connesso una raffica\b", "ha messo a segno una raffica"),
+        (r"\bha collegato con\b", "ha colpito con"),
+        (r"\bha connesso con\b", "ha colpito con"),
+        (r"\bcollegando una\b", "mettendo a segno una"),
+        (r"\bconnettendo una\b", "mettendo a segno una"),
+        (r"\bha preso fuori\b", "ha messo fuori gioco"),
+        (r"\bha portato fuori\b", "ha messo fuori gioco"),
+        (r"\bha livellato\b", "ha steso"),
+        (r"\blivella\b", "stende"),
+        (r"\bha piovuto pugni\b", "ha tempestato di pugni"),
+        (r"\bpiove pugni\b", "tempesta di pugni"),
+        (r"\bha raccolto la vittoria\b", "ha ottenuto la vittoria"),
+        (r"\bha preso la vittoria\b", "ha ottenuto la vittoria"),
+        (r"\bsi (e'|è) alzato in piedi\b", "è rimasto in piedi"),
+        (r"\bconnesso nel backstage\b", "con agganci nel backstage"),
+        (r"\bcollegato nel backstage\b", "con agganci nel backstage"),
+        (r"\bben collegato\b", "ben introdotto"),
+        (r"\bben connesso\b", "ben introdotto"),
+    ]
+    for pat, repl in replacements:
+        title = re.sub(pat, repl, title, flags=re.I)
+        html_text = re.sub(pat, repl, html_text, flags=re.I)
+    # Pattern contestuale: connected/collegato + mosse/offense.
+    html_text = re.sub(r"\b([A-ZÀ-Ý][\wÀ-ÿ'\-]+) ha collegato ([^.<]{0,90}?\b(?:pugni|calci|spear|clothesline|neckbreaker|DDT|suplex|slam|elbow|ginocchio|chop)\b)", r"\1 ha messo a segno \2", html_text, flags=re.I)
+    html_text = re.sub(r"\b([A-ZÀ-Ý][\wÀ-ÿ'\-]+) ha connesso ([^.<]{0,90}?\b(?:pugni|calci|spear|clothesline|neckbreaker|DDT|suplex|slam|elbow|ginocchio|chop)\b)", r"\1 ha messo a segno \2", html_text, flags=re.I)
+    return title, html_text
+
+_ORIG_V70_v69_apply_translation_guardrails = v69_apply_translation_guardrails
+
+def v69_apply_translation_guardrails(title, html_text, source_title="", source_text=""):
+    title, html_text = _ORIG_V70_v69_apply_translation_guardrails(title, html_text, source_title, source_text)
+    title, html_text = v70_editorial_italianization(title, html_text)
+    title, html_text = v69_restore_official_titles(title, html_text, source_title, source_text)
+    title = v69_restore_source_proper_case(title, source_title, source_text)
+    html_text = v69_restore_source_proper_case(html_text, source_title, source_text)
+    return title, html_text
+
+def v70_upload_image_to_wp_full(image_url):
+    if not image_url:
+        return None
+    try:
+        img_res = session.get(image_url, timeout=REQUEST_TIMEOUT_IMAGE)
+        img_res.raise_for_status()
+        content_type = img_res.headers.get("Content-Type", "").split(";")[0].strip().lower()
+        if not content_type.startswith("image/"):
+            print(f"[MEDIA] URL interna non immagine valida: {image_url} ({content_type})")
+            return None
+        ext = mimetypes.guess_extension(content_type) or ".jpg"
+        if ext == ".jpe":
+            ext = ".jpg"
+        if ext not in [".jpg", ".jpeg", ".png", ".webp"]:
+            ext = ".jpg"
+            content_type = "image/jpeg"
+        filename = f"news_inline_{os.urandom(4).hex()}{ext}"
+        headers_wp = {
+            "Content-Type": content_type,
+            "Content-Disposition": f'attachment; filename="{filename}"'
+        }
+        res = wp_media_upload_request(headers_wp, img_res.content, retries=2)
+        if res.status_code == 201:
+            data = res.json()
+            media_id = data.get("id")
+            source_url = data.get("source_url") or data.get("guid", {}).get("rendered")
+            print(f"[MEDIA] Immagine interna caricata: {media_id}")
+            return {"id": media_id, "source_url": source_url}
+        print(f"[MEDIA] Upload immagine interna fallito: {res.status_code} {res.text[:300]}")
+        return None
+    except Exception as e:
+        print(f"[MEDIA] Errore upload immagine interna {image_url}: {e}")
+        return None
 
 
 if __name__ == "__main__":
