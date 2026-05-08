@@ -40,6 +40,7 @@ jobs:
           WP_USER: ${{ secrets.WP_USER }}
           WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
           GITHUB_SHA: ${{ github.sha }}
+          WP_EDITORIALI_CATEGORY_ID: 13
         run: python bot.py
 
       
