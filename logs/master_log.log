@@ -3719,3 +3719,141 @@ However, if you want to parse some data that happens to look like a URL, then no
 [BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 4 candidati provati | mode=normal
 ===== RUN END [2026-05-08 16:12:05] VERSION [v72_1_ai_block_repair_italian_titles (8925023)] =====
 
+
+===== RUN START [2026-05-08 16:42:14] VERSION [v72_2_soft_gemini_cooldown_instagram_embeds (2f6b38f)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Paul Heyman Teases Taking On A New Client
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167894/wwe-smackdown-sami-zayn-trick-williams-gingerbread-man-pushback-creative/
+[SKIP] Score sotto soglia editoriale (36/75): TNA Slammiversary 2026 To Start In Afternoon, Won't Go Up Against AEW Forbidden Door
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167614/wwe-big-e-kofi-kingston-xavier-woods-new-day-status-depart/
+[SKIP] Score sotto soglia editoriale (72/75): Backstage Report On Expectations For John Cena's WWE Backlash Announcement
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167604/jacob-fatu-roman-reigns-wwe-backlash-2026-fans/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167602/wwe-brock-lesnar-alumni-moved/
+[SKIP] Score sotto soglia editoriale (0/75): WWE Backlash 2026 Predictions: Wrestling Inc. Picks The Winners
+[SKIP] Score sotto soglia editoriale (18/75): Will Ospreay Lays Out Differences Between Working In NJPW & AEW
+[SKIP] Score sotto soglia editoriale (0/75): TNA Impact 5/7/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167589/tna-impact-lei-ying-lee-arianna-grace-regains-knockouts-title/
+[SKIP] Score sotto soglia editoriale (36/75): Conor McGregor Eyeing Third UFC Title In A Different Weight Class
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167580/tna-impact-system-bear-bronson-brian-myers-nic-nemeth-kc-navarro-retains-tag-title/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164140/wwe-dakota-kai-charlie-2025-release-more-shock-previous-exit/
+[SKIP] Score sotto soglia editoriale (54/75): Bully Ray Lays Out Options For John Cena's WWE Backlash 2026 Announcement
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167535/tna-thursday-night-impact-may-7-two-titles-up-for-grabs-no-disqualification-match-more/
+[SKIP] Score sotto soglia editoriale (72/75): John Cena Says Backlash 2026 Announcement Will 'Shock The Very Foundation Of WWE'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167443/aew-will-ospreay-lingering-effects-neck-surgery-recovery/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL sospeso per validation fail recenti: https://www.ringsidenews.com/opening-segment-may-8-wwe-smackdown-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-scrapped-major-plans-gunther-before-cody-rhodes-feud/
+[SKIP] URL già in history: https://www.ringsidenews.com/number-wwe-talent-asked-take-pay-cuts-revealed/
+[SKIP] URL sospeso per validation fail recenti: https://www.ringsidenews.com/wwe-wanted-new-day-transition-out-full-time-wrestling-before-departure/
+[SKIP] URL già in history: https://www.ringsidenews.com/original-plans-jc-mateo-revealed-before-wwe-release/
+[SKIP] Score sotto soglia editoriale (5/75): New Details Reveal Dark Side of the Ring Season 7's TNA Story Isn't What Fans Expect
+[SKIP] Score sotto soglia editoriale (43/75): AMC's Reaction to Broken Matt Hardy's TNA Return Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/new-wwe-contract-clauses-under-tko-could-restrict-talent-freedom-long-deals-expire/
+[SKIP] URL già in history: https://www.ringsidenews.com/eric-bischoff-defends-tko-asking-wwe-talent-take-pay-cuts/
+[SKIP] Score sotto soglia editoriale (67/75): What John Cena's Major Announcement at WWE Backlash 2026 Is Really About
+[SKIP] URL già in history: https://www.ringsidenews.com/paul-heyman-admits-he-no-idea-about-brock-lesnars-retirement-wrestlemania-42/
+[SKIP] URL già in history: https://www.ringsidenews.com/eric-bischoff-says-wwe-letting-new-day-leave-makes-sense-financially/
+[SKIP] URL già in history: https://www.ringsidenews.com/backstage-reaction-gingerbread-man-storyline-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-smackdown-preview-may-8-2026-confirmed-matches-start-time-how-watch/
+[SCORE] 100 high - WWE's Danhausen Crashes The Set Of ESPN SportsCenter, Runs Down Top Plays Of The Day | WWE/main roster, nomi forti titolo: danhausen, business/contratti WWE-TKO, WWE main roster + storyline/evento, business/media rights, PLE/PPV, v62 media rights/streaming, v62 categoria business, v71 freshness=0.605
+[SCORE] 82 high - CM Punk Appears With Steve Carell for WWE 2K26 Comedy Segment at Night of Too Many Stars Event | WWE/main roster, top star titolo: cm punk, nomi forti lead: danhausen, WWE main roster + storyline/evento, ritorno/debutto, v71 source reliability soft penalty, v71 freshness=0.576
+[SCORE] 53 low - Backstage Update On Roman Reigns' WWE Status Following Schedule Change | WWE/main roster, top star titolo: roman reigns, rumor/backstage, v71 freshness=0.601, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 1 news >=90, 2 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 3 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: WWE's Danhausen Crashes The Set Of ESPN SportsCenter, Runs Down Top Plays Of The Day
+[BOT] semantic_id=wwes-danhausen-crashes-the-set-of-espn-sportscenter-runs-down-top-plays-of-the-day
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash
+[EDITORIAL v72] type=PREVIEW conf=0.90 | category=WWE (4) conf=1.00 model=gemini-2.5-flash | L'articolo descrive la partecipazione di Danhausen su ESPN, ma la sua funzione principale è di fungere da preview per il prossimo premium live event Backlash, elencando match e annunci programmati. | guardrail hard type
+[EDITORIAL v72] translation_notes=Il nome del titolo 'WWE World Heavyweight Championship' deve restare in inglese.; Il termine 'Premium Live Event' va mantenuto in inglese o tradotto con 'evento in diretta premium'.; Evitare calchi: 'hitting The Miz below the belt' può essere tradotto con 'ha colpito The Miz con un colpo basso'.
+[PERF v71] analisi editoriale AI v72: 24.57s
+[SCORE] raffinato=100 priority=high | WWE/main roster, nomi forti titolo: danhausen, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 media rights/streaming, v68 cap annuncio vago/futuro
+[V71] story_signature=danhausen|wwe_s_danhausen_crashes_the|set_of_espn_sportscenter|business|wwe|netflix|wrestlemania|backlash semantic_status=new_story freshness=0.722
+[PERF v71] WP recent posts dedupe: 2.14s
+[PERF v71] WP lookup event_key: 0.95s
+[FIX] Event key in history ma non confermata su WordPress: event:business:media-rights - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 3.46s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.1] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=4
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v72.1] Titolo finalizzato con AI (gemini-2.5-flash-lite): Danhausen fa irruzione nello studio di ESPN SportsCenter per commentare i migliori momenti sportivi della settimana
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwes-danhausen-crashes-the-set-of-espn-sportscenter-runs-down-top-plays-of-the-day/intro-1778256900.jpg
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v72.1] Titolo finalizzato con AI (gemini-2.5-flash-lite): Danhausen fa irruzione da ESPN SportsCenter per commentare i migliori momenti sportivi
+[PERF v71] traduzione: 27.48s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v72.1] Titolo finalizzato con AI (gemini-2.5-flash-lite): Danhausen ospite a ESPN SportsCenter: "Very Nice, Very Evil" momenti sportivi della settimana
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 3.37s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwes-danhausen-crashes-the-set-of-espn-sportscenter-runs-down-top-plays-of-the-day/l-intro-1778256900.jpg
+[MEDIA] Immagine caricata: 3964
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.56s
+[PERF v71] totale articolo pubblicato 'WWE's Danhausen Crashes The Set Of ESPN SportsCenter, Runs D': 61.72s
+[OK] Pubblicato: Danhausen ospite a ESPN SportsCenter: "Very Nice, Very Evil" momenti sportivi della settimana
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: CM Punk Appears With Steve Carell for WWE 2K26 Comedy Segment at Night of Too Many Stars Event
+[BOT] semantic_id=cm-punk-appears-with-steve-carell-for-wwe-2k26-comedy-segment-at-night-of-too-many-stars-event
+[SCORE] iniziale=82 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=1
+[BOT] Embed trovati: 2
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo riporta un evento già accaduto (l'apparizione di CM Punk) e non è una preview di un evento futuro. L'apparizione è legata alla WWE (WWE 2K26) e a una star WWE (CM Punk).
+[EDITORIAL v72] translation_notes=I nomi dei titoli/cinture devono rimanere in inglese (es. "WWE Championship").; Evitare calchi come "stole attention" -> "ha catturato l'attenzione"; "leaned into the chaos" -> "si è immerso nel caos"; "fueled speculation" -> "ha alimentato le speculazioni".; Le citazioni devono essere tradotte fedelmente, senza parafrasi.
+[PERF v71] analisi editoriale AI v72: 6.57s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - CM Punk Appears With Steve Carell for WWE 2K26 Comedy Segment at Night of Too Many Stars Event
+[SCORE] raffinato=82 priority=high | WWE/main roster, top star titolo: cm punk, nomi forti lead: danhausen, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v66 blocco politica/volgarita non wrestling
+[V71] story_signature=cm_punk|cm_punk_appears_with|steve_carell|return|wwe|raw|backlash semantic_status=new_story freshness=0.693
+[PERF v71] WP lookup URL esistente: 0.60s
+[PERF v71] WP lookup event_key: 1.31s
+[FIX] Event key in history ma non confermata su WordPress: event:cm-punk-return - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.67s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.1] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=9
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v72.1] Titolo finalizzato con AI (gemini-2.5-flash-lite): CM Punk e Steve Carell insieme per un segmento comico su WWE 2K26 al Night of Too Many Stars
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash
+[GEMINI] Modello gemini-2.5-flash scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v72.1] Titolo finalizzato con AI (gemini-2.5-flash-lite): CM Punk e Steve Carell protagonisti di un segmento comico per WWE 2K26 al Night Of Too Many Stars
+[PERF v71] traduzione: 40.14s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v72.1] Titolo finalizzato con AI (gemini-2.5-flash-lite): CM Punk e Steve Carell in un segmento comico per WWE 2K26 al Night of Too Many Stars
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 5.79s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/cm-punk-appears-with-steve-carell-for-wwe-2k26-comedy-segment-at-night-of-too-many-stars-event-18.jpg
+[MEDIA] Immagine caricata: 3967
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.14s
+[PERF v71] totale articolo pubblicato 'CM Punk Appears With Steve Carell for WWE 2K26 Comedy Segmen': 55.74s
+[OK] Pubblicato: CM Punk e Steve Carell in un segmento comico per WWE 2K26 al Night of Too Many Stars
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[BOT] semantic_id=backstage-update-on-roman-reigns-wwe-status-following-schedule-change
+[SCORE] iniziale=53 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72] type=RUMOR conf=0.90 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo riguarda aggiornamenti sul backstage e voci riguardanti lo status di Roman Reigns, classificandosi come RUMOR. Il focus è sulla WWE, giustificando la categoria WWE.
+[EDITORIAL v72] translation_notes=Il termine "schedule change" si riferisce alla modifica o rimozione delle date di apparizione programmate per Roman Reigns, non a un cambio di orario nel senso stretto di un evento; "Debunked" va tradotto come "smentiti" o "sfatati", riferendosi alle voci negative sul suo status.; "TKO" è l'entità corporate che possiede la WWE, ma nel contesto della news si parla più dell'organizzazione interna della WWE e delle sue relazioni con Reigns, quindi "TKO and WWE"
+[PERF v71] analisi editoriale AI v72: 8.67s
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: roman reigns, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v62 categoria business
+[V71] story_signature=roman_reigns|backstage_update_on_roman|reigns_wwe_status_following|business|wwe|raw|tko|wrestlemania semantic_status=new_story freshness=0.601
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[SKIP] News core già pubblicata da altra fonte: Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 2 articoli (0 pending + 2 nuove) su 3 candidati provati | mode=normal
+===== RUN END [2026-05-08 16:42:14] VERSION [v72_2_soft_gemini_cooldown_instagram_embeds (2f6b38f)] =====
+
