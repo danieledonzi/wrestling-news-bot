@@ -4143,3 +4143,68 @@ NameError: name 'v723_conservative_score_after_ai' is not defined
 [BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 2 candidati provati | mode=normal
 ===== RUN END [2026-05-08 17:07:49] VERSION [v72_3_1_single_title_repair_preview_rumor_caps_hotfix (0667c39)] =====
 
+
+===== RUN START [2026-05-08 17:15:27] VERSION [v73_final_ai_editorial_taxonomy_guardrails (3f02ab7)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167718/wwe-jbl-aleister-black-main-event-talent-recently-released/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167982/on-edit-wwe-nick-khan-us-department-justice-vince-mcmahon-sex-trafficking/
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Paul Heyman Teases Taking On A New Client
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167941/wwe-danhausen-espn-sportscenter-top-plays/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167894/wwe-smackdown-sami-zayn-trick-williams-gingerbread-man-pushback-creative/
+[SKIP] Score sotto soglia editoriale (36/75): TNA Slammiversary 2026 To Start In Afternoon, Won't Go Up Against AEW Forbidden Door
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167614/wwe-big-e-kofi-kingston-xavier-woods-new-day-status-depart/
+[SKIP] Score sotto soglia editoriale (72/75): Backstage Report On Expectations For John Cena's WWE Backlash Announcement
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167604/jacob-fatu-roman-reigns-wwe-backlash-2026-fans/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167602/wwe-brock-lesnar-alumni-moved/
+[SKIP] Score sotto soglia editoriale (0/75): WWE Backlash 2026 Predictions: Wrestling Inc. Picks The Winners
+[SKIP] Score sotto soglia editoriale (18/75): Will Ospreay Lays Out Differences Between Working In NJPW & AEW
+[SKIP] Score sotto soglia editoriale (0/75): TNA Impact 5/7/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167589/tna-impact-lei-ying-lee-arianna-grace-regains-knockouts-title/
+[SKIP] Score sotto soglia editoriale (36/75): Conor McGregor Eyeing Third UFC Title In A Different Weight Class
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167580/tna-impact-system-bear-bronson-brian-myers-nic-nemeth-kc-navarro-retains-tag-title/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164140/wwe-dakota-kai-charlie-2025-release-more-shock-previous-exit/
+[SKIP] Score sotto soglia editoriale (54/75): Bully Ray Lays Out Options For John Cena's WWE Backlash 2026 Announcement
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167535/tna-thursday-night-impact-may-7-two-titles-up-for-grabs-no-disqualification-match-more/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/stephen-smith-claims-hed-bigger-heel-than-paul-heyman-wwe/
+[SKIP] URL già in history: https://www.ringsidenews.com/cm-punk-appears-steve-carell-wwe-2k26-comedy-segment-night-too-many-stars-event/
+[SKIP] URL sospeso per validation fail recenti: https://www.ringsidenews.com/opening-segment-may-8-wwe-smackdown-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-scrapped-major-plans-gunther-before-cody-rhodes-feud/
+[SKIP] URL già in history: https://www.ringsidenews.com/number-wwe-talent-asked-take-pay-cuts-revealed/
+[SKIP] URL sospeso per validation fail recenti: https://www.ringsidenews.com/wwe-wanted-new-day-transition-out-full-time-wrestling-before-departure/
+[SKIP] URL già in history: https://www.ringsidenews.com/original-plans-jc-mateo-revealed-before-wwe-release/
+[SKIP] Score sotto soglia editoriale (5/75): New Details Reveal Dark Side of the Ring Season 7's TNA Story Isn't What Fans Expect
+[SKIP] Score sotto soglia editoriale (43/75): AMC's Reaction to Broken Matt Hardy's TNA Return Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/new-wwe-contract-clauses-under-tko-could-restrict-talent-freedom-long-deals-expire/
+[SKIP] URL già in history: https://www.ringsidenews.com/eric-bischoff-defends-tko-asking-wwe-talent-take-pay-cuts/
+[SKIP] Score sotto soglia editoriale (67/75): What John Cena's Major Announcement at WWE Backlash 2026 Is Really About
+[SKIP] URL già in history: https://www.ringsidenews.com/paul-heyman-admits-he-no-idea-about-brock-lesnars-retirement-wrestlemania-42/
+[SKIP] URL già in history: https://www.ringsidenews.com/eric-bischoff-says-wwe-letting-new-day-leave-makes-sense-financially/
+[SKIP] URL già in history: https://www.ringsidenews.com/backstage-reaction-gingerbread-man-storyline-revealed/
+[SCORE] 53 low - Backstage Update On Roman Reigns' WWE Status Following Schedule Change | WWE/main roster, top star titolo: roman reigns, rumor/backstage, v71 freshness=0.594, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 1 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[BOT] semantic_id=backstage-update-on-roman-reigns-wwe-status-following-schedule-change
+[SCORE] iniziale=53 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo fornisce aggiornamenti backstage su uno status che e' stato oggetto di speculazione, ma non riporta un evento futuro. Si concentra sullo stato attuale e sui piani futuri ma non confermati.
+[EDITORIAL v72.3] translation_notes=I nomi ufficiali dei titoli e delle cinture (es. "WWE World Heavyweight Champion") vanno mantenuti in inglese.; "Released" non deve essere tradotto con "rilascio" o "rilasciato", bensì con "licenziato" o "licenziamento" in questo contesto.; Evitare calchi come "connected with a spear" (usare "ha colpito con una spear") o "tide turned" (usare "l'inerzia del match e' cambiata").
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo fornisce aggiornamenti backstage su uno status che e' stato oggetto di speculazione, ma non riporta un evento futuro. Si concentra sullo stato attuale e sui piani futuri ma non confermati.
+[PERF v71] analisi editoriale AI v72: 7.10s
+[SCORE] raffinato=53 priority=low | WWE/main roster, top star titolo: roman reigns, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v62 categoria business, v72.3 cap rumor: niente boost raffinamento
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:tko-financials -> event:rumor:backstage-update-roman-reigns-following-schedule-change
+[V71] story_signature=roman_reigns|backstage_update_on_roman|reigns_wwe_status_following|business|wwe|raw|tko|wrestlemania semantic_status=new_story freshness=0.594
+[PERF v71] WP recent posts dedupe: 2.36s
+[SKIP] News core già pubblicata da altra fonte: Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 1 candidati provati | mode=normal
+===== RUN END [2026-05-08 17:15:27] VERSION [v73_final_ai_editorial_taxonomy_guardrails (3f02ab7)] =====
+
