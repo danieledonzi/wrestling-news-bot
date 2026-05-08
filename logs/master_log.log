@@ -3110,3 +3110,61 @@ However, if you want to parse some data that happens to look like a URL, then no
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 5 candidati provati | mode=storm
 ===== RUN END [2026-05-08 14:29:56] VERSION [v71_2_perf_featured_image_filter (25dc1ad)] =====
 
+
+===== RUN START [2026-05-08 15:16:56] VERSION [v71_2_perf_featured_image_filter (727042c)] =====
+[WP] Health check API timeout | tentativo 1/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f606c5481f0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Root /wp-json/ non raggiungibile | tentativo 1/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f606c548970>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Health check API timeout | tentativo 2/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f606c548c10>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Root /wp-json/ non raggiungibile | tentativo 2/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f606c548f70>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Health check API timeout | tentativo 3/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f606c549210>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Root /wp-json/ non raggiungibile | tentativo 3/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f606c548fd0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] WordPress/API non disponibile dopo 3 tentativi: api_timeout: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f606c549210>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (72/75): Backstage Report On Expectations For John Cena's WWE Backlash Announcement
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167604/jacob-fatu-roman-reigns-wwe-backlash-2026-fans/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167602/wwe-brock-lesnar-alumni-moved/
+[SKIP] Score sotto soglia editoriale (0/75): WWE Backlash 2026 Predictions: Wrestling Inc. Picks The Winners
+[SKIP] Score sotto soglia editoriale (18/75): Will Ospreay Lays Out Differences Between Working In NJPW & AEW
+[SKIP] Score sotto soglia editoriale (0/75): TNA Impact 5/7/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167589/tna-impact-lei-ying-lee-arianna-grace-regains-knockouts-title/
+[SKIP] Score sotto soglia editoriale (36/75): Conor McGregor Eyeing Third UFC Title In A Different Weight Class
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167580/tna-impact-system-bear-bronson-brian-myers-nic-nemeth-kc-navarro-retains-tag-title/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164140/wwe-dakota-kai-charlie-2025-release-more-shock-previous-exit/
+[SKIP] Score sotto soglia editoriale (54/75): Bully Ray Lays Out Options For John Cena's WWE Backlash 2026 Announcement
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167535/tna-thursday-night-impact-may-7-two-titles-up-for-grabs-no-disqualification-match-more/
+[SKIP] Score sotto soglia editoriale (72/75): John Cena Says Backlash 2026 Announcement Will 'Shock The Very Foundation Of WWE'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167443/aew-will-ospreay-lingering-effects-neck-surgery-recovery/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167360/aew-dynamite-changes-ted-turner-death-sting-appearance/
+[SKIP] Score sotto soglia editoriale (30/75): WWE's Natalya Pays Tribute To Late Star Owen Hart On What Would Be His 61st Birthday
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167276/wwe-backlash-paul-heyman-roman-reigns-jacob-fatu-completely-upside-down/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167259/tko-president-mark-shapiro-addresses-future-wwe-ufc-saudi-arabia/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (5/75): New Details Reveal Dark Side of the Ring Season 7's TNA Story Isn't What Fans Expect
+[SKIP] Score sotto soglia editoriale (43/75): AMC's Reaction to Broken Matt Hardy's TNA Return Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/new-wwe-contract-clauses-under-tko-could-restrict-talent-freedom-long-deals-expire/
+[SKIP] URL già in history: https://www.ringsidenews.com/eric-bischoff-defends-tko-asking-wwe-talent-take-pay-cuts/
+[SKIP] Score sotto soglia editoriale (67/75): What John Cena's Major Announcement at WWE Backlash 2026 Is Really About
+[SKIP] URL già in history: https://www.ringsidenews.com/eric-bischoff-says-wwe-letting-new-day-leave-makes-sense-financially/
+[SKIP] URL già in history: https://www.ringsidenews.com/backstage-reaction-gingerbread-man-storyline-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-smackdown-preview-may-8-2026-confirmed-matches-start-time-how-watch/
+[SKIP] Score sotto soglia editoriale (7/75): Andrade's Kissing Spot at AEW Grand Slam Australia Came Together at the Last Minute
+[SKIP] Score sotto soglia editoriale (3/75): Chelsea Green Reveals Health Status Following Heart Procedure
+[SKIP] Score sotto soglia editoriale (61/75): John Cena Says Backlash Announcement Will Shock the Foundation of WWE
+[SCORE] 90 high - Number of WWE Talent Asked to Take Pay Cuts Revealed | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, release/addio, v62 categoria business, v71 freshness=0.693
+[SCORE] 80 high - Paul Heyman Admits He Had No Idea About Brock Lesnar's Retirement at WrestleMania 42 | WWE/main roster, top star titolo: brock lesnar, nome WWE: brock lesnar, combo top name titolo + evento forte, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.53
+[SCORE] 61 medium - Original Plans for JC Mateo Revealed Before WWE Release | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 source reliability soft penalty, v71 freshness=0.572, v48 tier2: 55-74
+[SCORE] 48 low - Backstage Report On Big E's WWE Status After Kofi Kingston & Xavier Woods Depart | WWE/main roster, impatto roster/storyline, release/addio, v71 freshness=0.606, v48 tier3: 45-54 contestuale
+[SCORE] 48 low - South African Discus Star Francois Prinsloo Announces WWE Departure | WWE/main roster, impatto roster/storyline, release/addio, v71 freshness=0.356, v48 tier3: 45-54 contestuale
+[SCORE] 43 low - WWE Wanted The New Day to Transition Out of Full-Time Wrestling Before Departure | WWE/main roster, impatto roster/storyline, release/addio, v71 source reliability soft penalty, v71 freshness=0.575, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 1 news >=90, 2 news >=80
+[BOT] WordPress offline: assegno score e salvo solo i candidati che sarebbero stati pubblicati, senza chiamare Gemini.
+[PENDING] Coda salvata: 1 elementi
+[PENDING] Salvata news high (90): Number of WWE Talent Asked to Take Pay Cuts Revealed
+[PENDING] Coda salvata: 2 elementi
+[PENDING] Salvata news high (80): Paul Heyman Admits He Had No Idea About Brock Lesnar's Retirement at WrestleMania 42
+[PENDING] Coda salvata: 3 elementi
+[PENDING] Salvata news medium (61): Original Plans for JC Mateo Revealed Before WWE Release
+[PENDING] Candidati salvati per dopo: 3
+===== RUN END [2026-05-08 15:16:56] VERSION [v71_2_perf_featured_image_filter (727042c)] =====
+

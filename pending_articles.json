@@ -1,1 +1,105 @@
-[]
+[
+  {
+    "url": "https://www.ringsidenews.com/number-wwe-talent-asked-take-pay-cuts-revealed/",
+    "title": "Number of WWE Talent Asked to Take Pay Cuts Revealed",
+    "semantic_id": "number-of-wwe-talent-asked-to-take-pay-cuts-revealed",
+    "title_key": "number-talent-asked-take-pay-cuts",
+    "score": 90,
+    "priority": "high",
+    "event_key": "event:business:tko-financials",
+    "story_signature_v71": "wwe_talent_asked|take_pay_cuts_revealed|contract|wwe|tko",
+    "summary": "WWE’s TKO-era contract restructuring strategy is becoming much clearer — and according to a new report, several wrestlers who accepted reduced deals may have avoided being cut entirely by agreeing ...",
+    "reasons": [
+      "WWE/main roster",
+      "business/contratti WWE-TKO",
+      "impatto roster/storyline",
+      "release/addio",
+      "v62 categoria business",
+      "v71 freshness=0.693"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "business/contratti WWE-TKO",
+      "impatto roster/storyline",
+      "release/addio",
+      "v62 categoria business",
+      "v71 freshness=0.693"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778274070.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778253465.7296116,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.ringsidenews.com/paul-heyman-admits-he-no-idea-about-brock-lesnars-retirement-wrestlemania-42/",
+    "title": "Paul Heyman Admits He Had No Idea About Brock Lesnar's Retirement at WrestleMania 42",
+    "semantic_id": "paul-heyman-admits-he-had-no-idea-about-brock-lesnars-retirement-at-wrestlemania-42",
+    "title_key": "paul-heyman-admits-he-had-no-idea-about-brock-lesnar-s-retirement",
+    "score": 80,
+    "priority": "high",
+    "event_key": "event:brock-lesnar-lawsuit",
+    "story_signature_v71": "brock_lesnar|paul_heyman|paul_heyman_admits_he|update|wrestlemania",
+    "summary": "Paul Heyman is pushing back hard on the idea that Brock Lesnar’s WrestleMania 42 retirement was some carefully planned secret — because according to Heyman, he genuinely had no clue ...",
+    "reasons": [
+      "WWE/main roster",
+      "top star titolo: brock lesnar",
+      "nome WWE: brock lesnar",
+      "combo top name titolo + evento forte",
+      "PLE/PPV",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.53"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "top star titolo: brock lesnar",
+      "nome WWE: brock lesnar",
+      "combo top name titolo + evento forte",
+      "PLE/PPV",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.53"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778260581.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778253466.0217679,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.ringsidenews.com/original-plans-jc-mateo-revealed-before-wwe-release/",
+    "title": "Original Plans for JC Mateo Revealed Before WWE Release",
+    "semantic_id": "original-plans-for-jc-mateo-revealed-before-wwe-release",
+    "title_key": "jc-mateo-release",
+    "score": 61,
+    "priority": "medium",
+    "event_key": "",
+    "story_signature_v71": "original_plans|jc_mateo_revealed_before|wwe_release|report|wwe",
+    "summary": "Jeff Cobb’s WWE run may already be over, but a new report is revealing that the company originally had far bigger plans for him before everything quietly changed behind the ...",
+    "reasons": [
+      "WWE/main roster",
+      "impatto roster/storyline",
+      "WWE main roster + storyline/evento",
+      "release/addio",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.572",
+      "v48 tier2: 55-74"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "impatto roster/storyline",
+      "WWE main roster + storyline/evento",
+      "release/addio",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.572",
+      "v48 tier2: 55-74"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778272701.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778253465.8333387,
+    "attempts": 0
+  }
+]
