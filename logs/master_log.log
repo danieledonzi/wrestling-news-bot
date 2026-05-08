@@ -2897,3 +2897,216 @@ However, if you want to parse some data that happens to look like a URL, then no
 [BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 9 candidati provati | mode=storm
 ===== RUN END [2026-05-08 14:18:07] VERSION [v71_semantic_guardrails_gemini31 (2e39b81)] =====
 
+
+===== RUN START [2026-05-08 14:29:56] VERSION [v71_2_perf_featured_image_filter (25dc1ad)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167604/jacob-fatu-roman-reigns-wwe-backlash-2026-fans/
+[SKIP] Score sotto soglia editoriale (0/75): WWE Backlash 2026 Predictions: Wrestling Inc. Picks The Winners
+[SKIP] Score sotto soglia editoriale (18/75): Will Ospreay Lays Out Differences Between Working In NJPW & AEW
+[SKIP] Score sotto soglia editoriale (0/75): TNA Impact 5/7/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167589/tna-impact-lei-ying-lee-arianna-grace-regains-knockouts-title/
+[SKIP] Score sotto soglia editoriale (36/75): Conor McGregor Eyeing Third UFC Title In A Different Weight Class
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167580/tna-impact-system-bear-bronson-brian-myers-nic-nemeth-kc-navarro-retains-tag-title/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164140/wwe-dakota-kai-charlie-2025-release-more-shock-previous-exit/
+[SKIP] Score sotto soglia editoriale (54/75): Bully Ray Lays Out Options For John Cena's WWE Backlash 2026 Announcement
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167535/tna-thursday-night-impact-may-7-two-titles-up-for-grabs-no-disqualification-match-more/
+[SKIP] Score sotto soglia editoriale (72/75): John Cena Says Backlash 2026 Announcement Will 'Shock The Very Foundation Of WWE'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167443/aew-will-ospreay-lingering-effects-neck-surgery-recovery/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167360/aew-dynamite-changes-ted-turner-death-sting-appearance/
+[SKIP] Score sotto soglia editoriale (30/75): WWE's Natalya Pays Tribute To Late Star Owen Hart On What Would Be His 61st Birthday
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167276/wwe-backlash-paul-heyman-roman-reigns-jacob-fatu-completely-upside-down/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167259/tko-president-mark-shapiro-addresses-future-wwe-ufc-saudi-arabia/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167203/wcw-eric-bischoff-ted-turner-comments-death-elon-musk-his-time/
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2167195/aew-wwe-will-ospreay-kofi-kingston-xavier-woods-love/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (5/75): New Details Reveal Dark Side of the Ring Season 7's TNA Story Isn't What Fans Expect
+[SKIP] Score sotto soglia editoriale (43/75): AMC's Reaction to Broken Matt Hardy's TNA Return Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/new-wwe-contract-clauses-under-tko-could-restrict-talent-freedom-long-deals-expire/
+[PERF v71] WP lookup URL esistente: 0.50s
+[PERF v71] WP lookup event_key: 1.56s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (67/75): What John Cena's Major Announcement at WWE Backlash 2026 Is Really About
+[PERF v71] WP lookup event_key: 1.30s
+[FIX] Event key in history ma non confermata su WordPress: event:brock-lesnar-lawsuit - provo a pubblicare
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] URL già in history: https://www.ringsidenews.com/backstage-reaction-gingerbread-man-storyline-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-smackdown-preview-may-8-2026-confirmed-matches-start-time-how-watch/
+[SKIP] Score sotto soglia editoriale (13/75): Andrade's Kissing Spot at AEW Grand Slam Australia Came Together at the Last Minute
+[SKIP] Score sotto soglia editoriale (3/75): Chelsea Green Reveals Health Status Following Heart Procedure
+[SKIP] Score sotto soglia editoriale (61/75): John Cena Says Backlash Announcement Will Shock the Foundation of WWE
+[SKIP] URL già in history: https://www.ringsidenews.com/seth-rollins-reveals-real-reason-he-created-vision-wrestlemania-41/
+[SKIP] Score sotto soglia editoriale (7/75): TNA Moves Slammiversary Start Time to Avoid Direct Clash With AEW x NJPW Forbidden Door 2026
+[SKIP] URL già in history: https://www.ringsidenews.com/nick-khan-testified-doj-probe-vince-mcmahon-included-trafficking-allegations/
+[SCORE] 100 high - Eric Bischoff Defends TKO Asking WWE Talent to Take Pay Cuts | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v62 categoria business, v71 freshness=0.543
+[SCORE] 100 high - Eric Bischoff Says WWE Letting The New Day Leave Makes Sense Financially | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, v62 corporate/business, v62 categoria business, v71 freshness=0.538
+[SCORE] 99 high - Brock Lesnar Moved To Alumni Section Of WWE's Website | WWE/main roster, top star titolo: brock lesnar, nomi forti lead: oba femi, WWE main roster + storyline/evento, combo top name titolo + evento forte, PLE/PPV, v71 freshness=0.597
+[SCORE] 80 high - Paul Heyman Admits He Had No Idea About Brock Lesnar's Retirement at WrestleMania 42 | WWE/main roster, top star titolo: brock lesnar, nome WWE: brock lesnar, combo top name titolo + evento forte, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.54
+[SCORE] 48 low - South African Discus Star Francois Prinsloo Announces WWE Departure | WWE/main roster, impatto roster/storyline, release/addio, v71 freshness=0.366, v48 tier3: 45-54 contestuale
+[MODE] Storm mode attiva: 3 news >=90, 4 news >=80
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-3.1-flash
+[GEMINI] Modello gemini-3.1-flash scartato: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3.1-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 5 | mode=storm | max nuove=5 | pending pubblicati=0
+[BOT] Elaborazione: Eric Bischoff Defends TKO Asking WWE Talent to Take Pay Cuts
+[BOT] semantic_id=eric-bischoff-defends-tko-asking-wwe-talent-to-take-pay-cuts
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=36, image=0, embed=1
+[BOT] Embed trovati: 2
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TYPE] Gemini: OPINION conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta le opinioni e l'analisi di Eric Bischoff espresse nel suo podcast riguardo alle politiche di TKO sui contratti WWE.
+[PERF v71] classificazione tipo articolo: 76.55s
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v62 business/dirigenza, v62 categoria business, v66 cap opinion/commentary storyline
+[V71] story_signature=eric_bischoff|eric_bischoff_defends_tko|asking_wwe_talent|contract|wwe|tko|backlash semantic_status=new_story freshness=0.659
+[PERF v71] WP recent posts dedupe: 3.12s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[CATEGORY] Gemini: BUSINESS (15) conf=1.00 model=gemini-3.1-flash-lite | La notizia riguarda le strategie finanziarie e di ristrutturazione contrattuale di TKO/WWE, rientrando perfettamente nella categoria Business.
+[PERF v71] classificazione categoria: 18.15s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=36
+[PERF v71] traduzione: 21.67s
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.23s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/eric-bischoff-defends-tko-asking-wwe-talent-to-take-pay-cuts-29.jpg
+[MEDIA] Immagine caricata: 3929
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.80s
+[PERF v71] totale articolo pubblicato 'Eric Bischoff Defends TKO Asking WWE Talent to Take Pay Cuts': 119.83s
+[OK] Pubblicato: Eric Bischoff difende la scelta di TKO di richiedere tagli agli stipendi dei wrestler WWE
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Eric Bischoff Says WWE Letting The New Day Leave Makes Sense Financially
+[BOT] semantic_id=eric-bischoff-says-wwe-letting-the-new-day-leave-makes-sense-financially
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=34, image=0, embed=1
+[BOT] Embed trovati: 2
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TYPE] Gemini: OPINION conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta le analisi e le considerazioni personali di Eric Bischoff rilasciate durante un podcast su una vicenda già avvenuta.
+[PERF v71] classificazione tipo articolo: 21.78s
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v62 media rights/streaming, v62 categoria business, v66 cap opinion/commentary storyline
+[V71] story_signature=eric_bischoff|eric_bischoff_says_wwe|letting_the_new_day|contract|wwe semantic_status=new_story freshness=0.655
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[CATEGORY] Gemini: WWE (4) conf=0.95 model=gemini-3.1-flash-lite | La notizia riguarda la gestione contrattuale e l'addio di star del main roster WWE (New Day), rientrando nelle dinamiche di roster della federazione.
+[PERF v71] classificazione categoria: 17.46s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=34
+[PERF v71] traduzione: 42.26s
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.18s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/eric-bischoff-says-wwe-letting-the-new-day-leave-makes-sense-financially-15.jpg
+[MEDIA] Immagine caricata: 3932
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.68s
+[PERF v71] totale articolo pubblicato 'Eric Bischoff Says WWE Letting The New Day Leave Makes Sense': 84.80s
+[OK] Pubblicato: Eric Bischoff: "Il licenziamento del New Day da parte della WWE ha senso dal punto di vista economico"
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Brock Lesnar Moved To Alumni Section Of WWE's Website
+[BOT] semantic_id=brock-lesnar-moved-to-alumni-section-of-wwes-website
+[SCORE] iniziale=99 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[TYPE] Fallback semantico: POST_SHOW_NEWS
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Brock Lesnar Moved To Alumni Section Of WWE's Website
+[SCORE] raffinato=99 priority=high | WWE/main roster, top star titolo: brock lesnar, nomi forti lead: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, contratto, combo top name titolo + evento forte, PLE/PPV, non wrestling puro, opinione generica
+[V71] story_signature=brock_lesnar|brock_lesnar_moved_to|alumni_section_of_wwe_s|contract|wwe|netflix|tko|summerslam semantic_status=new_story freshness=0.83
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[CATEGORY] Gemini: WWE (4) conf=1.00 model=gemini-3.1-flash-lite | La notizia riguarda lo status contrattuale e la pagina ufficiale del roster di una star WWE, rientrando pienamente nella categoria WWE.
+[PERF v71] classificazione categoria: 23.22s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[MEDIA] Immagine interna caricata: 3934
+[PERF v71] upload immagine interna: 1.78s
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=4
+[PERF v71] traduzione: 29.82s
+/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py:5098: MarkupResemblesLocatorWarning: The input passed in on this line looks more like a URL than HTML or XML.
+
+If you meant to use Beautiful Soup to parse the web page found at a certain URL, then something has gone wrong. You should use an Python package like 'requests' to fetch the content behind the URL. Once you have the content as a string, you can feed that string into Beautiful Soup.
+
+However, if you want to parse some data that happens to look like a URL, then nothing has gone wrong: you are using Beautiful Soup correctly, and this warning is spurious and can be filtered. To make this warning go away, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import MarkupResemblesLocatorWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=MarkupResemblesLocatorWarning)
+    
+  q = BeautifulSoup(m.group(1), "html.parser").get_text(" ", strip=True)
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/brock-lesnar-moved-to-alumni-section-of-wwes-website/l-intro-1778221181.jpg
+[MEDIA] Immagine caricata: 3936
+[WP] Status attach image: 200
+[PERF v71] featured image: 3.08s
+[PERF v71] totale articolo pubblicato 'Brock Lesnar Moved To Alumni Section Of WWE's Website': 56.75s
+[OK] Pubblicato: Brock Lesnar spostato nella sezione Alumni del sito ufficiale WWE
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Paul Heyman Admits He Had No Idea About Brock Lesnar's Retirement at WrestleMania 42
+[BOT] semantic_id=paul-heyman-admits-he-had-no-idea-about-brock-lesnars-retirement-at-wrestlemania-42
+[SCORE] iniziale=80 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=0
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TYPE] Gemini: POST_SHOW_NEWS conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni post-evento su un fatto accaduto durante WrestleMania 42, quindi rientra nella categoria di news su eventi già conclusi.
+[PERF v71] classificazione tipo articolo: 41.55s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Paul Heyman Admits He Had No Idea About Brock Lesnar's Retirement at WrestleMania 42
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: brock lesnar, nomi forti lead: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, combo top name titolo + evento forte, PLE/PPV, non wrestling puro, opinione generica
+[V71] story_signature=brock_lesnar|paul_heyman|paul_heyman_admits_he|opinion|wwe|wrestlemania semantic_status=new_story freshness=0.538
+[PERF v71] WP recent posts dedupe: 2.52s
+[PERF v71] WP lookup event_key: 1.20s
+[FIX] Event key in history ma non confermata su WordPress: event:brock-lesnar-lawsuit - provo a pubblicare
+[WP] Health check API OK: status 200 | tentativo 1/3
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-3.1-flash
+[GEMINI] Modello gemini-3.1-flash scartato: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3.1-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[CATEGORY] Gemini: WWE (4) conf=1.00 model=gemini-2.5-flash-lite | La notizia parla di Paul Heyman e Brock Lesnar, due figure centrali del main roster WWE, e menziona specificamente WrestleMania e futuri talenti WWE come Bron Breakker, Logan Paul,
+[PERF v71] classificazione categoria: 19.37s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-3.1-flash
+[GEMINI] Modello gemini-3.1-flash scartato: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3.1-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=11
+[PERF v71] traduzione: 30.03s
+[SKIP v71] Quote non preservate a sufficienza: ['quote count ratio below threshold: 0.80'] - Paul Heyman Admits He Had No Idea About Brock Lesnar's Retirement at WrestleMania 42
+[BOT] Elaborazione: South African Discus Star Francois Prinsloo Announces WWE Departure
+[BOT] semantic_id=south-african-discus-star-francois-prinsloo-announces-wwe-departure
+[SCORE] iniziale=48 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TYPE] Gemini: POST_SHOW_NEWS conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta ufficialmente il rilascio di un atleta dalla WWE, evento già avvenuto e confermato dal diretto interessato.
+[PERF v71] classificazione tipo articolo: 15.93s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - South African Discus Star Francois Prinsloo Announces WWE Departure
+[SCORE] raffinato=93 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, contenuto leggero, v62 titolo/championship
+[V71] story_signature=south_african_discus_star|francois_prinsloo_announces_wwe|update|wwe|nxt semantic_status=new_story freshness=0.365
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-3.1-flash
+[GEMINI] Modello gemini-3.1-flash scartato: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3.1-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[CATEGORY] Gemini: WWE (4) conf=1.00 model=gemini-2.5-flash-lite | La notizia riguarda un wrestler che ha lasciato la WWE. Anche se proveniente da un contesto sportivo diverso e menzionata la sua apparizione con l'NXT title, il focus primario è la
+[PERF v71] classificazione categoria: 38.20s
+[GEMINI] Skip modello saturo in questa run: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash
+[GEMINI] Modello gemini-3.1-flash scartato: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3.1-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[BLOCKSEQ] Traduzione strutturata fallita: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Skip modello saturo in questa run: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash
+[GEMINI] Modello gemini-3.1-flash scartato: 404 NOT_FOUND. {'error': {'code': 404, 'message': 'models/gemini-3.1-flash is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.', 'status': 'NOT_FOUND'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[PERF v71] traduzione: 41.16s
+[SKIP v71] Quote non preservate a sufficienza: ['quote count ratio below threshold: 0.75'] - South African Discus Star Francois Prinsloo Announces WWE Departure
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 5 candidati provati | mode=storm
+===== RUN END [2026-05-08 14:29:56] VERSION [v71_2_perf_featured_image_filter (25dc1ad)] =====
+
