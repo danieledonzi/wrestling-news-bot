@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v68_semantic_freshness_reports_opinion_cap"
+BOT_VERSION = "v69_translation_title_guardrails"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -422,6 +422,32 @@ PROTECTED_WRESTLING_TERMS = [
     "Near fall", "Clean win", "Dirty win", "Interference", "Run-in",
 ]
 
+# v69: titoli/cinture ufficiali da non tradurre mai.
+# Lista generale, estendibile, usata sia nel prompt sia nel post-processing deterministico.
+PROTECTED_CHAMPIONSHIP_TERMS_V69 = [
+    # WWE
+    "WWE Championship", "World Heavyweight Championship", "WWE Universal Championship",
+    "Undisputed WWE Championship", "Intercontinental Championship", "United States Championship",
+    "WWE Women's Championship", "Women's World Championship", "WWE Tag Team Championship",
+    "World Tag Team Championship", "WWE Women's Tag Team Championship",
+    "NXT Championship", "NXT Women's Championship", "NXT North American Championship",
+    "NXT Tag Team Championship", "NXT Women's North American Championship",
+    # AEW
+    "AEW World Championship", "AEW Women's World Championship", "AEW TNT Championship",
+    "AEW TBS Championship", "AEW International Championship", "AEW Continental Championship",
+    "AEW World Tag Team Championship", "AEW World Trios Championship",
+    # TNA
+    "TNA World Championship", "TNA Knockouts Title", "TNA Knockouts World Championship",
+    "Knockouts World Championship", "TNA X-Division Championship", "TNA World Tag Team Championship",
+    "TNA Digital Media Championship", "TNA Knockouts World Tag Team Championship",
+    # NJPW/ROH/AAA/World
+    "IWGP World Heavyweight Championship", "IWGP Heavyweight Championship", "IWGP Junior Heavyweight Championship",
+    "IWGP Tag Team Championship", "NEVER Openweight Championship", "ROH World Championship",
+    "ROH Women's World Championship", "ROH World Tag Team Championship", "AAA Mega Championship",
+]
+
+PROTECTED_WRESTLING_TERMS.extend(PROTECTED_CHAMPIONSHIP_TERMS_V69)
+
 PROTECTED_WRESTLING_PATTERNS = [
     r"\b\d+[-\s]Man Tag Team Match\b",
     r"\b\d+[-\s]Woman Tag Team Match\b",
@@ -430,6 +456,29 @@ PROTECTED_WRESTLING_PATTERNS = [
 ]
 
 TRANSLATION_GLOSSARY_REPLACEMENTS = {
+    # v69: i titoli/cinture non si traducono. Queste correzioni sono generali e post-Gemini.
+    "titolo mondiale dei pesi massimi": "World Heavyweight Championship",
+    "campionato mondiale dei pesi massimi": "World Heavyweight Championship",
+    "titolo intercontinentale": "Intercontinental Championship",
+    "campionato intercontinentale": "Intercontinental Championship",
+    "titolo degli stati uniti": "United States Championship",
+    "campionato degli stati uniti": "United States Championship",
+    "titolo mondiale AEW": "AEW World Championship",
+    "campionato mondiale AEW": "AEW World Championship",
+    "titolo internazionale AEW": "AEW International Championship",
+    "campionato internazionale AEW": "AEW International Championship",
+    "titolo TNT AEW": "AEW TNT Championship",
+    "campionato TNT AEW": "AEW TNT Championship",
+    "titolo TBS AEW": "AEW TBS Championship",
+    "campionato TBS AEW": "AEW TBS Championship",
+    "titolo knockouts": "TNA Knockouts Title",
+    "titolo Knockouts": "TNA Knockouts Title",
+    "campionato knockouts": "TNA Knockouts World Championship",
+    "campionato Knockouts": "TNA Knockouts World Championship",
+    "campionessa mondiale knockouts": "Knockouts World Champion",
+    "campionessa Knockouts": "Knockouts Champion",
+    "campione mondiale knockouts": "Knockouts World Champion",
+    "campione Knockouts": "Knockouts Champion",
     "ultimo uomo in piedi": "Last Man Standing",
     "ultima donna in piedi": "Last Woman Standing",
     "match ultimo uomo in piedi": "Last Man Standing Match",
@@ -3043,6 +3092,11 @@ REGOLE:
 ELEMENTI PROTETTI:
 {protected_facts_block}
 
+TITOLI/CINTURE UFFICIALI DA NON TRADURRE MAI:
+{', '.join(PROTECTED_CHAMPIONSHIP_TERMS_V69)}
+
+Regola lessicale obbligatoria: nelle news wrestling "release/released/roster cuts" non si traduce con "rilascio". Usa "licenziamento", "licenziato/licenziata" o "addio" in base al contesto.
+
 TITOLO ORIGINALE:
 {source_title}
 
@@ -3088,6 +3142,7 @@ JSON richiesto:
 
         content_html = "\n\n".join(x.strip() for x in html_parts if x and x.strip())
         title, content_html = apply_translation_glossary(title, content_html)
+        title, content_html = v69_apply_translation_guardrails(title, content_html, source_title, source_text_joined)
         title, content_html = repair_protected_source_facts(source_title, source_text_joined, title, content_html)
 
         if title_hard_invalid_with_context(source_title, source_text_joined, title):
@@ -3949,6 +4004,12 @@ REGOLE DI FEDELTA' AI FATTI (CRITICHE):
 ELEMENTI PROTETTI RILEVATI NEL SORGENTE:
 {protected_facts_block}
 
+TITOLI/CINTURE UFFICIALI DA NON TRADURRE MAI:
+{', '.join(PROTECTED_CHAMPIONSHIP_TERMS_V69)}
+
+REGOLA LESSICALE OBBLIGATORIA:
+- In italiano wrestling/news non usare mai "rilascio" per "release" o "released". Usa "licenziamento", "licenziato/licenziata" o "addio" in base al contesto.
+
 STILE EDITORIALE:
 - Scrivi in italiano naturale, come un giornalista sportivo italiano.
 - Non tradurre parola per parola.
@@ -3970,6 +4031,8 @@ GERGO E NOMI UFFICIALI:
 - "Intercontinental Championship" deve restare "Intercontinental Championship".
 - "United States Championship" deve restare "United States Championship".
 - "AEW World Tag Team Championship" deve restare "AEW World Tag Team Championship".
+- "TNA Knockouts Title" deve restare "TNA Knockouts Title".
+- "TNA Knockouts World Championship" deve restare "TNA Knockouts World Championship".
 - I nomi dei match e delle stipulazioni restano in inglese: mixed tag team match, tag team match, triple threat match, fatal four-way match, ladder match, cage match, steel cage match, street fight, no disqualification match, title match.
 - Eccezione lessicale importante: "grudge match" si traduce come "regolamento di conti". Se sono due, usa "due regolamenti di conti".
 
@@ -4005,6 +4068,7 @@ JSON richiesto:
         testo = fix_mojibake(testo)
         testo = refine_body_text(testo)
         titolo, testo = apply_translation_glossary(titolo, testo)
+        titolo, testo = v69_apply_translation_guardrails(titolo, testo, source_title, text)
         testo = remove_source_promos_from_html(testo)
 
         # v50: prima prova un repair locale deterministico su alias/numero evento.
@@ -4025,6 +4089,7 @@ JSON richiesto:
             titolo = repaired["titolo"]
             testo = repaired["testo"]
             titolo, testo = apply_translation_glossary(titolo, testo)
+            titolo, testo = v69_apply_translation_guardrails(titolo, testo, source_title, text)
 
             titolo, testo = repair_protected_source_facts(source_title, text, titolo, testo)
             protected_issues = validate_protected_source_facts(source_title, text, titolo, testo)
@@ -4806,6 +4871,162 @@ def extract_main_scoring_text(text, max_paragraphs=3, max_chars=2500):
     return main[:max_chars]
 
 
+
+
+def v69_extract_proper_names_from_source(source_title="", source_text=""):
+    """Estrae nomi propri plausibili dal titolo/testo sorgente per ripristinare il casing.
+    Non tenta di tradurre: corregge solo casi tipo 'Lei ying lee' -> 'Lei Ying Lee'.
+    """
+    probe = f"{source_title or ''} {(source_text or '')[:1200]}"
+    names = []
+    patterns = [
+        r"\b(?:[A-Z][a-z]+|[A-Z]{2,})(?:\s+(?:[A-Z][a-z]+|[A-Z]{2,})){1,4}\b",
+        r"\b[A-Z][a-z]+\s+[A-Z][a-z]+(?:-[A-Z][a-z]+)?\b",
+    ]
+    stop = set(NAME_STOPWORDS) | {"News", "Report", "After", "Before", "During", "With", "Title", "Championship", "World", "Impact"}
+    for pat in patterns:
+        for m in re.finditer(pat, probe):
+            name = sanitize_text(m.group(0))
+            if not name or name in stop:
+                continue
+            low = name.lower()
+            if any(x in low for x in ["wrestling inc", "ringside news", "world champion", "knockouts title", "championship"]):
+                continue
+            if len(name.split()) >= 2:
+                names.append(name)
+    # aggiungi show/sigle/eventi principali come proper-case obbligatorio
+    for term in ["Impact", "Raw", "SmackDown", "Dynamite", "Collision", "Rampage", "NXT", "WWE", "AEW", "TNA", "ROH", "NJPW", "AAA", "WrestleMania", "SummerSlam"]:
+        if re.search(r"\b" + re.escape(term) + r"\b", probe, flags=re.I):
+            names.append(term)
+    seen = set()
+    out = []
+    for name in sorted(names, key=len, reverse=True):
+        k = name.lower()
+        if k not in seen:
+            seen.add(k)
+            out.append(name)
+    return out[:60]
+
+
+def v69_restore_source_proper_case(text, source_title="", source_text=""):
+    if not text:
+        return text
+    out = text
+    for name in v69_extract_proper_names_from_source(source_title, source_text):
+        # Non sostituire dentro attributi HTML in modo sofisticato: i titoli/body sono semplici.
+        out = re.sub(r"\b" + re.escape(name.lower()) + r"\b", name, out, flags=re.I)
+    return out
+
+
+def v69_detect_source_official_titles(source_title="", source_text=""):
+    source = f"{source_title or ''} {source_text or ''}"
+    found = []
+    for term in sorted(PROTECTED_CHAMPIONSHIP_TERMS_V69, key=len, reverse=True):
+        if re.search(r"\b" + re.escape(term) + r"\b", source, flags=re.I):
+            found.append(term)
+    # alias editoriali: se la fonte usa Knockouts Title senza TNA, preserva comunque il titolo ufficiale TNA.
+    if re.search(r"\bKnockouts\s+Title\b", source, flags=re.I) and "TNA Knockouts Title" not in found:
+        found.append("TNA Knockouts Title")
+    return list(dict.fromkeys(found))
+
+
+def v69_fix_release_lexicon(text):
+    """In italiano editoriale wrestling 'release' non e' 'rilascio'."""
+    if not text:
+        return text
+    out = text
+    replacements = [
+        (r"\brilascio\s+dalla\s+WWE\b", "licenziamento dalla WWE"),
+        (r"\brilascio\s+da\s+WWE\b", "licenziamento dalla WWE"),
+        (r"\brilascio\s+dalla\s+AEW\b", "licenziamento dalla AEW"),
+        (r"\brilascio\s+dalla\s+TNA\b", "licenziamento dalla TNA"),
+        (r"\brilascio\s+WWE\b", "licenziamento WWE"),
+        (r"\brilasciato\s+dalla\s+WWE\b", "licenziato dalla WWE"),
+        (r"\brilasciata\s+dalla\s+WWE\b", "licenziata dalla WWE"),
+        (r"\brilasciati\s+dalla\s+WWE\b", "licenziati dalla WWE"),
+        (r"\brilasciate\s+dalla\s+WWE\b", "licenziate dalla WWE"),
+        (r"\brilasciato\s+da\s+WWE\b", "licenziato dalla WWE"),
+        (r"\brilasciata\s+da\s+WWE\b", "licenziata dalla WWE"),
+        (r"\brilasciati\s+da\s+WWE\b", "licenziati dalla WWE"),
+        (r"\brilasciate\s+da\s+WWE\b", "licenziate dalla WWE"),
+        (r"\brelease\s+WWE\b", "licenziamento WWE"),
+        (r"\broster\s+cuts\b", "licenziamenti"),
+        (r"\btalent\s+cuts\b", "licenziamenti"),
+    ]
+    for pat, repl in replacements:
+        out = re.sub(pat, repl, out, flags=re.I)
+    # fallback generico ma solo su parole isolate usate come sostantivo nel contesto wrestling.
+    out = re.sub(r"\bil\s+rilascio\b", "il licenziamento", out, flags=re.I)
+    out = re.sub(r"\bun\s+rilascio\b", "un licenziamento", out, flags=re.I)
+    out = re.sub(r"\bdei\s+rilasci\b", "dei licenziamenti", out, flags=re.I)
+    out = re.sub(r"\brilasci\s+WWE\b", "licenziamenti WWE", out, flags=re.I)
+    return out
+
+
+def v69_restore_official_titles(title, html_text, source_title="", source_text=""):
+    """Ripristina titoli ufficiali se Gemini li ha tradotti o parafrasati."""
+    title = title or ""
+    html_text = html_text or ""
+    source_titles = v69_detect_source_official_titles(source_title, source_text)
+
+    def fix_text(out, is_title=False):
+        # Correzioni generali indipendenti dal caso specifico.
+        phrase_map = {
+            r"\btitolo\s+mondiale\s+dei\s+pesi\s+massimi\b": "World Heavyweight Championship",
+            r"\bcampionato\s+mondiale\s+dei\s+pesi\s+massimi\b": "World Heavyweight Championship",
+            r"\btitolo\s+intercontinentale\b": "Intercontinental Championship",
+            r"\bcampionato\s+intercontinentale\b": "Intercontinental Championship",
+            r"\btitolo\s+degli\s+stati\s+uniti\b": "United States Championship",
+            r"\bcampionato\s+degli\s+stati\s+uniti\b": "United States Championship",
+            r"\btitolo\s+Knockouts\b": "TNA Knockouts Title",
+            r"\btitolo\s+knockouts\b": "TNA Knockouts Title",
+            r"\bcampionato\s+Knockouts\b": "TNA Knockouts World Championship",
+            r"\bcampionato\s+knockouts\b": "TNA Knockouts World Championship",
+            r"\bCampionessa\s+Mondiale\s+Knockouts\b": "Knockouts World Champion",
+            r"\bcampionessa\s+mondiale\s+Knockouts\b": "Knockouts World Champion",
+            r"\bcampionessa\s+mondiale\s+knockouts\b": "Knockouts World Champion",
+        }
+        for pat, repl in phrase_map.items():
+            out = re.sub(pat, repl, out, flags=re.I)
+
+        # Se il sorgente contiene un titolo ufficiale specifico, il titolo italiano deve contenerlo.
+        # In caso di parafrasi tipo "torna campionessa Knockouts", sostituisce con "riconquista il <titolo>".
+        for official in source_titles:
+            if official.lower() in out.lower():
+                out = re.sub(r"\b" + re.escape(official) + r"\b", official, out, flags=re.I)
+                continue
+            if official.lower() not in out.lower():
+                if is_title:
+                    if re.search(r"\b(torna|diventa|si laurea|viene incoronata|viene incoronato)\s+(?:la\s+)?(?:nuova\s+)?campion", out, flags=re.I):
+                        out = re.sub(r"\b(torna|diventa|si laurea|viene incoronata|viene incoronato)\s+(?:la\s+)?(?:nuova\s+)?campion(?:essa|e)?(?:\s+mondiale)?(?:\s+Knockouts|\s+knockouts)?", f"riconquista il {official}", out, flags=re.I)
+                    elif any(x in out.lower() for x in ["vince", "batte", "sconfigge", "riconquista", "mantiene"]):
+                        # Non duplica se c'e' gia una forma ufficiale equivalente.
+                        out = re.sub(r"\btitolo\b", official, out, count=1, flags=re.I) if re.search(r"\btitolo\b", out, flags=re.I) else out
+                else:
+                    # Nel corpo sostituisce parafrasi nominali, non forza sempre l'inserimento.
+                    out = re.sub(r"\b(campionessa|campione)\s+mondiale\s+Knockouts\b", "Knockouts World Champion", out, flags=re.I)
+        return out
+
+    title = fix_text(title, is_title=True)
+    html_text = fix_text(html_text, is_title=False)
+    return title, html_text
+
+
+def v69_apply_translation_guardrails(title, html_text, source_title="", source_text=""):
+    title = title or ""
+    html_text = html_text or ""
+    title, html_text = v69_restore_official_titles(title, html_text, source_title, source_text)
+    title = v69_fix_release_lexicon(title)
+    html_text = v69_fix_release_lexicon(html_text)
+    title = v69_restore_source_proper_case(title, source_title, source_text)
+    html_text = v69_restore_source_proper_case(html_text, source_title, source_text)
+    title = v61_sentence_case_italian_title(title)
+    # v61 sentence-case puo' abbassare parole interne dei titoli ufficiali; ripristina subito.
+    title, html_text = v69_restore_official_titles(title, html_text, source_title, source_text)
+    title = v69_restore_source_proper_case(title, source_title, source_text)
+    html_text = v69_restore_source_proper_case(html_text, source_title, source_text)
+    return title, html_text
+
 def apply_translation_glossary(title, html_text):
     """v56: post-processing lessicale per traduzioni wrestling troppo letterali.
     Mantiene in inglese stipulazioni/denominazioni e corregge alcune rese innaturali.
@@ -5092,10 +5313,12 @@ def v63_editorial_finalize(news_data, source_title="", source_text="", source_ur
     title = news_data.get("titolo", "")
     html = news_data.get("testo", "")
     title, html = apply_translation_glossary(title, html)
+    title, html = v69_apply_translation_guardrails(title, html, source_title, source_text)
     title = v63_humanize_title(title, source_title, source_text)
     html = v63_humanize_body_html(html)
     html = remove_source_promos_from_html(html)
     title, html = repair_protected_source_facts(source_title, source_text or "", title, html)
+    title, html = v69_apply_translation_guardrails(title, html, source_title, source_text)
     news_data["titolo"] = title
     news_data["testo"] = html
     return news_data
