@@ -4050,3 +4050,96 @@ NameError: name 'v723_conservative_score_after_ai' is not defined
 [BOT] Pubblicati 2 articoli (0 pending + 2 nuove) su 3 candidati provati | mode=normal
 ===== RUN END [2026-05-08 16:55:11] VERSION [v72_3_1_single_title_repair_preview_rumor_caps_hotfix (15414b1)] =====
 
+
+===== RUN START [2026-05-08 17:07:49] VERSION [v72_3_1_single_title_repair_preview_rumor_caps_hotfix (0667c39)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167982/on-edit-wwe-nick-khan-us-department-justice-vince-mcmahon-sex-trafficking/
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Paul Heyman Teases Taking On A New Client
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167941/wwe-danhausen-espn-sportscenter-top-plays/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167894/wwe-smackdown-sami-zayn-trick-williams-gingerbread-man-pushback-creative/
+[SKIP] Score sotto soglia editoriale (36/75): TNA Slammiversary 2026 To Start In Afternoon, Won't Go Up Against AEW Forbidden Door
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167614/wwe-big-e-kofi-kingston-xavier-woods-new-day-status-depart/
+[SKIP] Score sotto soglia editoriale (72/75): Backstage Report On Expectations For John Cena's WWE Backlash Announcement
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167604/jacob-fatu-roman-reigns-wwe-backlash-2026-fans/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167602/wwe-brock-lesnar-alumni-moved/
+[SKIP] Score sotto soglia editoriale (0/75): WWE Backlash 2026 Predictions: Wrestling Inc. Picks The Winners
+[SKIP] Score sotto soglia editoriale (18/75): Will Ospreay Lays Out Differences Between Working In NJPW & AEW
+[SKIP] Score sotto soglia editoriale (0/75): TNA Impact 5/7/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167589/tna-impact-lei-ying-lee-arianna-grace-regains-knockouts-title/
+[SKIP] Score sotto soglia editoriale (36/75): Conor McGregor Eyeing Third UFC Title In A Different Weight Class
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167580/tna-impact-system-bear-bronson-brian-myers-nic-nemeth-kc-navarro-retains-tag-title/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164140/wwe-dakota-kai-charlie-2025-release-more-shock-previous-exit/
+[SKIP] Score sotto soglia editoriale (54/75): Bully Ray Lays Out Options For John Cena's WWE Backlash 2026 Announcement
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167535/tna-thursday-night-impact-may-7-two-titles-up-for-grabs-no-disqualification-match-more/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/stephen-smith-claims-hed-bigger-heel-than-paul-heyman-wwe/
+[SKIP] URL già in history: https://www.ringsidenews.com/cm-punk-appears-steve-carell-wwe-2k26-comedy-segment-night-too-many-stars-event/
+[SKIP] URL sospeso per validation fail recenti: https://www.ringsidenews.com/opening-segment-may-8-wwe-smackdown-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-scrapped-major-plans-gunther-before-cody-rhodes-feud/
+[SKIP] URL già in history: https://www.ringsidenews.com/number-wwe-talent-asked-take-pay-cuts-revealed/
+[SKIP] URL sospeso per validation fail recenti: https://www.ringsidenews.com/wwe-wanted-new-day-transition-out-full-time-wrestling-before-departure/
+[SKIP] URL già in history: https://www.ringsidenews.com/original-plans-jc-mateo-revealed-before-wwe-release/
+[SKIP] Score sotto soglia editoriale (5/75): New Details Reveal Dark Side of the Ring Season 7's TNA Story Isn't What Fans Expect
+[SKIP] Score sotto soglia editoriale (43/75): AMC's Reaction to Broken Matt Hardy's TNA Return Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/new-wwe-contract-clauses-under-tko-could-restrict-talent-freedom-long-deals-expire/
+[SKIP] URL già in history: https://www.ringsidenews.com/eric-bischoff-defends-tko-asking-wwe-talent-take-pay-cuts/
+[SKIP] Score sotto soglia editoriale (67/75): What John Cena's Major Announcement at WWE Backlash 2026 Is Really About
+[SKIP] URL già in history: https://www.ringsidenews.com/paul-heyman-admits-he-no-idea-about-brock-lesnars-retirement-wrestlemania-42/
+[SKIP] URL già in history: https://www.ringsidenews.com/eric-bischoff-says-wwe-letting-new-day-leave-makes-sense-financially/
+[SKIP] URL già in history: https://www.ringsidenews.com/backstage-reaction-gingerbread-man-storyline-revealed/
+[SCORE] 58 low - WWE HOFer JBL Says This Recently-Released Star Is A 'Main Event' Talent | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, opinione generica, v71 freshness=0.725, v48 tier2: 55-74
+[SCORE] 53 low - Backstage Update On Roman Reigns' WWE Status Following Schedule Change | WWE/main roster, top star titolo: roman reigns, rumor/backstage, v71 freshness=0.596, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 2 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: WWE HOFer JBL Says This Recently-Released Star Is A 'Main Event' Talent
+[BOT] semantic_id=wwe-hofer-jbl-says-this-recently-released-star-is-a-main-event-talent
+[SCORE] iniziale=58 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo riporta un'opinione di JBL su Aleister Black, ex wrestler WWE licenziato, e non presenta un evento futuro.
+[EDITORIAL v72.3] translation_notes="Recently-Released Star" va tradotto con "ex-wrestler licenziato di recente" o simile, non "stella recentemente rilasciata".; "Main Event Talent" va mantenuto in inglese o tradotto con "talento da main event"/"potenziale da main event".; JBL è un "WWE Hall of Famer", specificare se utile.
+[PERF v71] analisi editoriale AI v72: 4.68s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE HOFer JBL Says This Recently-Released Star Is A 'Main Event' Talent
+[SCORE] raffinato=78 priority=medium | WWE/main roster, nomi forti lead: triple h, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, PLE/PPV, opinione generica, v62 ritorno/debutto, v62 categoria business, v66 cap opinion/commentary storyline
+[V71] story_signature=wwe_hofer_jbl_says|this_recently_released_star_is|main_event_talent|death|wwe|raw|aew|tko semantic_status=new_story freshness=0.842
+[PERF v71] WP recent posts dedupe: 2.26s
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:business:tko-financials -> event:business:tko-financials-followup-hofer-jbl-says-this-recently-released-star-is-a-main-event-talent
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 2.63s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=6
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwe-hofer-jbl-says-this-recently-released-star-is-a-main-event-talent/intro-1778243270.jpg
+[PERF v71] traduzione: 7.46s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v72.1] Titolo finalizzato con AI (gemini-2.5-flash-lite): JBL: "Aleister Black ha talento da main event, ma il suo personaggio manca di profondità"
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 7.02s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-hofer-jbl-says-this-recently-released-star-is-a-main-event-talent/l-intro-1778243270.jpg
+[MEDIA] Immagine caricata: 3977
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.53s
+[PERF v71] totale articolo pubblicato 'WWE HOFer JBL Says This Recently-Released Star Is A 'Main Ev': 24.68s
+[OK] Pubblicato: JBL: "Aleister Black ha talento da main event, ma il suo personaggio manca di profondità"
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[BOT] semantic_id=backstage-update-on-roman-reigns-wwe-status-following-schedule-change
+[SCORE] iniziale=53 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo riporta aggiornamenti backstage e rumors sullo status di Roman Reigns, inclusa la rimozione dal calendario di giugno e il suo futuro in WWE. Non è una preview di un evento futuro né un report di risultati.
+[EDITORIAL v72.3] translation_notes=Mantenere in inglese "World Heavyweight Champion" e "The Original Tribal Chief".; "Released" nel contesto di schedule/date rimosse si traduce con "rimosse" o "annullate" anziché "rilasciate".; Evitare "tension" come "tensione" se si parla di rapporti; preferire "divergenze" o "problemi".
+[PERF v71] analisi editoriale AI v72: 12.29s
+[SCORE] raffinato=53 priority=low | WWE/main roster, top star titolo: roman reigns, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v62 categoria business, v72.3 cap rumor: niente boost raffinamento
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:tko-financials -> event:rumor:backstage-update-roman-reigns-following-schedule-change
+[V71] story_signature=roman_reigns|backstage_update_on_roman|reigns_wwe_status_following|business|wwe|raw|tko|wrestlemania semantic_status=new_story freshness=0.596
+[SKIP] News core già pubblicata da altra fonte: Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 2 candidati provati | mode=normal
+===== RUN END [2026-05-08 17:07:49] VERSION [v72_3_1_single_title_repair_preview_rumor_caps_hotfix (0667c39)] =====
+
