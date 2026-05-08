@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v72_3_single_title_repair_preview_rumor_caps"
+BOT_VERSION = "v72_3_1_single_title_repair_preview_rumor_caps_hotfix"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -7942,14 +7942,6 @@ def v722_normalize_instagram_anchor_embeds(html):
 # Non disattiviamo piu' Gemini per tipo/categoria: la decisione primaria avviene in v72_editorial_analysis().
 # Queste funzioni restano disponibili per altri percorsi e fallback.
 
-if __name__ == "__main__":
-    log_run_start()
-    try:
-        run_bot()
-    finally:
-        log_run_end()
-
-
 # =========================
 # v72.3: title repair una sola volta, anti-falso PREVIEW, score conservativo per RUMOR/OPINION
 # =========================
@@ -8291,3 +8283,10 @@ def translate_ordered_content_blocks(source_title, blocks, source_url="", forced
     except Exception as e:
         print(f"[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: {e}")
         return None, "validation"
+
+if __name__ == "__main__":
+    log_run_start()
+    try:
+        run_bot()
+    finally:
+        log_run_end()
