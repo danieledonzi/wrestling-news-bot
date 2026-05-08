@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "kind": "report",
+    "url": "https://www.wrestlinginc.com/2168330/wwe-smackdown-may-8-womens-united-states-championship-on-line-gunther-appears/",
+    "title": "WWE SmackDown Results 5/8 - Women's US Championship On The Line, GUNTHER Appears",
+    "semantic_id": "report-wwe-smackdown-2026-05-08",
+    "title_key": "smackdown-results-5-8-women-s-us-championship-line-gunther-appears",
+    "score": 82,
+    "priority": "high",
+    "event_key": "report:wwe-smackdown-2026-05-08",
+    "report_event_key": "report:wwe-smackdown-2026-05-08",
+    "reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "show settimanale",
+      "v62 titolo/championship",
+      "v71 freshness=0.599"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "show settimanale",
+      "v62 titolo/championship",
+      "v71 freshness=0.599",
+      "report live: pubblicazione ritardata"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 0,
+    "status": "waiting_report_completion",
+    "reason": "report_live_delay",
+    "created_at": 1778281135.0,
+    "first_seen": 1778281135.0,
+    "last_seen": 1778284341.9435356,
+    "not_before": 1778300935.0,
+    "attempts": 0,
+    "sources": [
+      {
+        "url": "https://www.wrestlinginc.com/2168330/wwe-smackdown-may-8-womens-united-states-championship-on-line-gunther-appears/",
+        "title": "WWE SmackDown Results 5/8 - Women's US Championship On The Line, GUNTHER Appears",
+        "source": "www.wrestlinginc.com",
+        "first_seen": 1778281135.0,
+        "last_seen": 1778284341.9435356,
+        "last_text_len": 2551
+      }
+    ],
+    "story_signature_v71": "gunther|wwe_smackdown_results|women_s_us_championship_on|report|wwe|smackdown"
+  }
+]
