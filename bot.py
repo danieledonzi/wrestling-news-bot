@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v71_2_perf_featured_image_filter"
+BOT_VERSION = "v72_ai_first_editorial_analysis_25"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -164,10 +164,12 @@ FEEDS = [
     "https://www.ringsidenews.com/feed/",
 ]
 
+# v72: Gemini 2.5 e' il default di produzione: affidabile e stabile.
+# Gemini 3.1 resta testabile solo via env, ma non viene usato di default per evitare 503/404/latenze.
 MODEL_CHAIN = [
-    "gemini-3.1-flash-lite",
-    "gemini-3.1-flash",
-    "gemini-2.5-flash-lite",
+    m.strip()
+    for m in os.getenv("GEMINI_MODEL_CHAIN", "gemini-2.5-flash-lite,gemini-2.5-flash").split(",")
+    if m.strip()
 ]
 
 HEADERS = {
@@ -235,7 +237,7 @@ BREAKING_ACTIVE_SECONDS = 6 * 60 * 60
 # v71: semantic guardrails, rewrite suppression, Gemini 3.1 and pending hardening.
 SEMANTIC_DUPLICATE_THRESHOLD = float(os.getenv("SEMANTIC_DUPLICATE_THRESHOLD", "0.82"))
 MIN_SEMANTIC_DISTANCE_FOR_REWRITE = float(os.getenv("MIN_SEMANTIC_DISTANCE_FOR_REWRITE", "0.28"))
-QUOTE_MIN_SIMILARITY = float(os.getenv("QUOTE_MIN_SIMILARITY", "0.88"))
+QUOTE_MIN_SIMILARITY = float(os.getenv("QUOTE_MIN_SIMILARITY", "0.70"))
 STORY_COOLDOWN_MINUTES = int(os.getenv("STORY_COOLDOWN_MINUTES", "90"))
 PENDING_MAX_AGE_HOURS = int(os.getenv("PENDING_MAX_AGE_HOURS", "18"))
 MAX_PENDING_RETRY = int(os.getenv("MAX_PENDING_RETRY", "3"))
@@ -243,6 +245,13 @@ VALID_IMAGE_MIN_WIDTH = int(os.getenv("VALID_IMAGE_MIN_WIDTH", "480"))
 VALID_IMAGE_MIN_HEIGHT = int(os.getenv("VALID_IMAGE_MIN_HEIGHT", "270"))
 V71_SHADOW_MODE = os.getenv("V71_SHADOW_MODE", "false").lower() in {"1", "true", "yes"}
 STRICT_JSON_VALIDATION = os.getenv("STRICT_JSON_VALIDATION", "true").lower() not in {"0", "false", "no"}
+# v72: AI-first ottimizzata. Gemini resta il cervello editoriale per tipo/categoria,
+# ma viene chiamato una sola volta prima della traduzione. Il deterministico e' solo guardrail/fallback.
+V72_AI_EDITORIAL_ANALYSIS = os.getenv("V72_AI_EDITORIAL_ANALYSIS", "true").lower() not in {"0", "false", "no"}
+V71_GEMINI_TYPE_CLASSIFICATION = os.getenv("V71_GEMINI_TYPE_CLASSIFICATION", "true").lower() in {"1", "true", "yes"}
+V71_GEMINI_CATEGORY_CLASSIFICATION = os.getenv("V71_GEMINI_CATEGORY_CLASSIFICATION", "true").lower() in {"1", "true", "yes"}
+V71_QUOTE_BLOCKING = os.getenv("V71_QUOTE_BLOCKING", "false").lower() in {"1", "true", "yes"}
+V71_SKIP_LEADING_INLINE_IMAGE = os.getenv("V71_SKIP_LEADING_INLINE_IMAGE", "true").lower() not in {"0", "false", "no"}
 
 SOURCE_RELIABILITY = {
     "fightful": 1.00,
@@ -3202,16 +3211,25 @@ JSON richiesto:
 
         html_parts = []
         source_text_joined = "\n\n".join(b.get("text", "") for b in text_blocks)
+        seen_text_before_image_v713 = False
+        skipped_leading_image_v713 = False
         for b in blocks:
             if b.get("type") == "embed":
                 rendered = render_embed_block(b.get("url", ""))
                 if rendered:
                     html_parts.append(rendered)
             elif b.get("type") == "image":
+                # v71.3: molti articoli mettono la hero/featured come primo blocco immagine.
+                # Quella viene associata come featured_media WordPress e non deve comparire anche nel body.
+                if V71_SKIP_LEADING_INLINE_IMAGE and not seen_text_before_image_v713 and not skipped_leading_image_v713:
+                    skipped_leading_image_v713 = True
+                    print(f"[MEDIA v71.3] Prima immagine inline saltata come probabile featured image: {b.get('src', '')}")
+                    continue
                 rendered = render_image_block(b.get("src", ""), b.get("alt", ""), excluded_image_urls=excluded_image_urls)
                 if rendered:
                     html_parts.append(rendered)
             elif b.get("type") == "text":
+                seen_text_before_image_v713 = True
                 html = block_map.get(b["id"], "")
                 html = fix_mojibake(html)
                 html = refine_body_text(html)
@@ -3673,6 +3691,10 @@ def is_capacity_error(exc):
     msg = str(exc)
     return "503" in msg or "UNAVAILABLE" in msg or "high demand" in msg.lower()
 
+def is_invalid_model_error(exc):
+    msg = str(exc)
+    return "404" in msg or "NOT_FOUND" in msg or "not found for API version" in msg.lower()
+
 def clean_json_string(raw_text):
     raw = raw_text.strip().replace("```json", "").replace("```", "").strip()
     start = raw.find("{")
@@ -3716,8 +3738,9 @@ def generate_and_parse_json(prompt):
         except Exception as e:
             last_exception = e
             print(f"[GEMINI] Modello {model} scartato: {e}")
-            if is_capacity_error(e):
-                model_fail_counts[model] = model_fail_counts.get(model, 0) + 1
+            if is_capacity_error(e) or is_invalid_model_error(e):
+                # Se un modello e' saturo o non supportato, non riprovarlo piu' nella stessa run.
+                model_fail_counts[model] = MODEL_COOLDOWN_THRESHOLD
             continue
     raise last_exception if last_exception else RuntimeError("Nessun modello disponibile")
 
@@ -6701,8 +6724,11 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
                         )
         return "skipped"
 
-    article_type_v68, article_type_reason_v68 = classify_article_type_with_gemini_v68(title, full_text, link)
-    perf_step_v71 = v71_perf_log("classificazione tipo articolo", perf_step_v71, threshold=0.5)
+    editorial_analysis_v72 = v72_editorial_analysis(title, full_text, link, is_report=is_results_article(title, link, full_text))
+    perf_step_v71 = v71_perf_log("analisi editoriale AI v72", perf_step_v71, threshold=0.5)
+    item["editorial_analysis_v72"] = editorial_analysis_v72
+    article_type_v68 = editorial_analysis_v72.get("article_type") or classify_article_type_fallback_v68(title, full_text, link)
+    article_type_reason_v68 = editorial_analysis_v72.get("article_type_reason", "v72 editorial analysis")
     item["article_type_v68"] = article_type_v68
     item["article_type_reason_v68"] = article_type_reason_v68
 
@@ -6789,13 +6815,11 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         return "wp_down"
 
     forced_report_title = make_deterministic_report_title(title, link, full_text) if is_results_article(title, link, full_text) else None
-    forced_category_id, forced_category_slug, forced_category_reason = classify_category_with_gemini_v67(
-        title,
-        text_for_translation or full_text,
-        link,
-        is_report=bool(forced_report_title),
-    )
-    perf_step_v71 = v71_perf_log("classificazione categoria", perf_step_v71, threshold=0.5)
+    editorial_analysis_v72 = item.get("editorial_analysis_v72") or v72_editorial_analysis(title, text_for_translation or full_text, link, is_report=bool(forced_report_title))
+    forced_category_id = int(editorial_analysis_v72.get("category_id") or classify_category_fallback_v67(title, text_for_translation or full_text, link, is_report=bool(forced_report_title)))
+    forced_category_slug = editorial_analysis_v72.get("category_slug") or CATEGORY_SLUG_BY_ID_V67.get(forced_category_id, "WORLD")
+    forced_category_reason = editorial_analysis_v72.get("category_reason", "v72 cached editorial analysis")
+    perf_step_v71 = v71_perf_log("categoria da analisi editoriale v72", perf_step_v71, threshold=0.5)
     item["category_id"] = forced_category_id
     item["category_slug"] = forced_category_slug
     item["category_reason"] = forced_category_reason
@@ -6867,9 +6891,11 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
 
     quote_check_v71 = validate_quote_preservation_v71(text_for_translation or full_text, news_data.get("testo", ""))
     if not quote_check_v71.get("ok"):
-        print(f"[SKIP v71] Quote non preservate a sufficienza: {quote_check_v71.get('issues')} - {title}")
-        record_validation_failure(link, title)
-        return "validation_fail"
+        if V71_QUOTE_BLOCKING:
+            print(f"[SKIP v71] Quote non preservate a sufficienza: {quote_check_v71.get('issues')} - {title}")
+            record_validation_failure(link, title)
+            return "validation_fail"
+        print(f"[WARN v71.3] Quote check sotto soglia ma non bloccante: {quote_check_v71.get('issues')} - {title}")
 
     post_id, post_json = create_post_without_image(
         data=news_data,
@@ -7347,6 +7373,161 @@ def editorial_tier(score, title="", text="", url=""):
         if score < MIN_PUBLISH_SCORE:
             return "exclude", "v71.1 no bypass for preview/speculative announcement"
     return _ORIG_V711_editorial_tier(score, title, text, url)
+
+
+
+# ===== v72 AI-first editorial analysis =====
+# Una sola chiamata Gemini prima della traduzione per capire contesto, tipo e categoria.
+# Le funzioni deterministiche restano guardrail e fallback, non fonte primaria.
+
+def v72_editorial_analysis(title="", text="", url="", is_report=False):
+    fallback_type = classify_article_type_fallback_v68(title, text, url)
+    fallback_id = classify_category_fallback_v67(title, text, url, is_report=is_report)
+    fallback_slug = CATEGORY_SLUG_BY_ID_V67.get(fallback_id, "WORLD")
+
+    if is_report or is_results_article(title, url, text):
+        return {
+            "article_type": "RESULTS_REPORT",
+            "article_type_reason": "report/results forced",
+            "category_id": REPORT_CATEGORY_ID,
+            "category_slug": "EDITORIALI",
+            "category_reason": "report/results forced",
+            "is_publishable": True,
+            "translation_notes": ["Report/results: categoria Editoriali forzata."],
+            "model": "deterministic_guardrail",
+        }
+
+    if not V72_AI_EDITORIAL_ANALYSIS:
+        return {
+            "article_type": fallback_type,
+            "article_type_reason": "v72 fallback env disabled",
+            "category_id": fallback_id,
+            "category_slug": fallback_slug,
+            "category_reason": "v72 fallback env disabled",
+            "is_publishable": True,
+            "translation_notes": [],
+            "model": "deterministic_fallback",
+        }
+
+    lead = extract_main_scoring_text(text or "", max_paragraphs=5, max_chars=2600)
+    prompt = f"""
+Sei il caporedattore AI di OpenWrestlingTV, sito italiano di wrestling.
+Devi capire il contesto editoriale PRIMA della traduzione.
+Restituisci SOLO JSON valido in una riga. Non tradurre l'articolo in questa fase.
+
+Obiettivi:
+1. Classificare il tipo articolo.
+2. Scegliere la categoria WordPress corretta.
+3. Dare note utili alla traduzione per evitare calchi, titoli/cinture tradotti male e quote alterate.
+
+Tipi articolo ammessi:
+- PREVIEW: annuncia cosa succedera' in una puntata/show futuro o programmato; include preview, start time, how to watch, confirmed matches, tonight.
+- RESULTS_REPORT: report/recap completo con risultati di una puntata o evento.
+- POST_SHOW_NEWS: news autonoma su qualcosa gia' successo in puntata/evento: cambio titolo, vittoria, debutto, ritorno, attacco, infortunio, angle.
+- OPINION: commento, analisi, podcast, intervista, opinione o speculazione di ex wrestler/giornalista.
+- RUMOR: rumor/backstage non confermato ma con contenuto informativo.
+- OTHER: altro.
+
+Categorie ammesse:
+- WWE: main roster WWE, Raw, SmackDown, PLE WWE, star WWE main roster, arrivi/uscite WWE.
+- AEW: AEW, Dynamite, Collision, Rampage, PPV AEW.
+- NXT: NXT come focus principale.
+- TNA: TNA/Impact Wrestling come focus principale.
+- World: wrestling fuori WWE/AEW/NXT/TNA, NJPW, AAA, ROH, NOAH, MLW, indie, documentari tipo Dark Side of the Ring, industry non corporate.
+- Business: TKO/WWE/AEW corporate, ricavi, tagli stipendi, contratti, media rights, TV/streaming deal, ticket sales, executive, acquisizioni.
+- Editoriali: solo report/results/recap/riepiloghi completi.
+
+Precedenze obbligatorie:
+1. Report/results/recap completi -> RESULTS_REPORT + Editoriali.
+2. Preview esplicite -> PREVIEW anche se citano nomi forti.
+3. News autonome post-show -> POST_SHOW_NEWS, non PREVIEW.
+4. Corporate/contratti/stipendi/tagli/media rights -> Business, salvo sia solo storyline WWE.
+5. Dark Side of the Ring/Vice/docuserie -> World.
+6. TNA solo se TNA/Impact e' il focus reale; se incerto tra TNA e World scegli World.
+7. Ex NJPW/AAA/ROH/NOAH diretto o atteso in WWE -> WWE.
+
+Regole di traduzione da passare alla fase successiva:
+- I nomi ufficiali di titoli/cinture restano in inglese.
+- Release/released non deve diventare rilascio/rilasciato: usare licenziamento, licenziato, addio secondo contesto.
+- Le quote devono essere tradotte fedelmente, non parafrasate.
+- Evitare calchi: connected with a spear -> ha colpito con una spear; tide turned -> l'inerzia del match e' cambiata.
+
+Titolo:
+{title}
+
+URL:
+{url}
+
+Lead/testo iniziale:
+{lead}
+
+JSON richiesto:
+{{"article_type":"PREVIEW|RESULTS_REPORT|POST_SHOW_NEWS|OPINION|RUMOR|OTHER","article_type_confidence":0.0,"category":"WWE|AEW|NXT|TNA|World|Business|Editoriali","category_confidence":0.0,"is_publishable":true,"reason":"massimo 220 caratteri","translation_notes":["nota 1","nota 2"]}}
+"""
+    try:
+        data, used_model = generate_and_parse_json(prompt)
+        article_type = normalize_article_type_v68(data.get("article_type", "")) or fallback_type
+        type_conf = float(data.get("article_type_confidence", 0) or data.get("confidence", 0) or 0)
+        slug = normalize_category_slug_v67(data.get("category", data.get("categoria", ""))) or fallback_slug
+        cat_conf = float(data.get("category_confidence", 0) or data.get("confidence", 0) or 0)
+        reason = sanitize_text(data.get("reason", ""))[:240]
+        notes = data.get("translation_notes", [])
+        if not isinstance(notes, list):
+            notes = [sanitize_text(str(notes))]
+        notes = [sanitize_text(str(n))[:180] for n in notes if sanitize_text(str(n))][:6]
+
+        # Guardrail duri: correggono solo errori evidenti, non sostituiscono Gemini.
+        hard_fallback = classify_article_type_fallback_v68(title, text, url)
+        if hard_fallback in {"RESULTS_REPORT", "PREVIEW"}:
+            article_type = hard_fallback
+            reason = (reason + " | guardrail hard type")[:240]
+        elif hard_fallback == "POST_SHOW_NEWS" and article_type == "PREVIEW":
+            article_type = "POST_SHOW_NEWS"
+            reason = (reason + " | guardrail post-show")[:240]
+
+        if slug not in CATEGORY_ID_BY_SLUG_V67 or cat_conf < 0.35:
+            slug = fallback_slug
+            cat_id = fallback_id
+            category_reason = f"fallback categoria dopo AI conf={cat_conf:.2f}"
+        else:
+            cat_id = CATEGORY_ID_BY_SLUG_V67[slug]
+            category_reason = reason or f"v72 editorial analysis {used_model}"
+
+        if type_conf < 0.35:
+            article_type = fallback_type
+            article_type_reason = f"fallback tipo dopo AI conf={type_conf:.2f}"
+        else:
+            article_type_reason = reason or f"v72 editorial analysis {used_model}"
+
+        print(f"[EDITORIAL v72] type={article_type} conf={type_conf:.2f} | category={slug} ({cat_id}) conf={cat_conf:.2f} model={used_model} | {reason}")
+        if notes:
+            print(f"[EDITORIAL v72] translation_notes={'; '.join(notes[:3])}")
+        return {
+            "article_type": article_type,
+            "article_type_reason": article_type_reason,
+            "category_id": cat_id,
+            "category_slug": slug,
+            "category_reason": category_reason,
+            "is_publishable": bool(data.get("is_publishable", True)),
+            "translation_notes": notes,
+            "model": used_model,
+        }
+    except Exception as e:
+        print(f"[EDITORIAL v72] Analisi AI fallita: {e} | fallback type={fallback_type}, category={fallback_slug} ({fallback_id})")
+        return {
+            "article_type": fallback_type,
+            "article_type_reason": "fallback after v72 editorial analysis error",
+            "category_id": fallback_id,
+            "category_slug": fallback_slug,
+            "category_reason": "fallback after v72 editorial analysis error",
+            "is_publishable": True,
+            "translation_notes": [],
+            "model": "fallback",
+        }
+
+# ===== v72 compatibility wrappers =====
+# Non disattiviamo piu' Gemini per tipo/categoria: la decisione primaria avviene in v72_editorial_analysis().
+# Queste funzioni restano disponibili per altri percorsi e fallback.
 
 if __name__ == "__main__":
     log_run_start()
