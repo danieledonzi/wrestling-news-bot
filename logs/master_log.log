@@ -4693,3 +4693,98 @@ However, if you want to parse some data that happens to look like a URL, then no
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 6 candidati provati | mode=normal
 ===== RUN END [2026-05-08 21:54:54] VERSION [v73_final_ai_editorial_taxonomy_guardrails (e2892ef)] =====
 
+
+===== RUN START [2026-05-08 22:51:29] VERSION [v73_final_ai_editorial_taxonomy_guardrails (2cdb45c)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168293/wwe-sami-zayn-fully-turned-heel/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168269/wwe-backlash-bully-ray-paul-heyman-jacob-fatu-roman-reigns-pitches-surprise-involvement/
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2168230/wwe-backlash-danhausen-jelly-roll-mystery-partner-backstage-speculation/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168222/wwe-raw-smackdown-media-rights-contracts-2019-2024-public-shareholder-lawsuit/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168165/wwe-pay-cuts-details/
+[SKIP] Score sotto soglia editoriale (0/75): Chael Sonnen: UFC Star Didn't Respect Career Enough To 'Stick A Needle In His A**'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167718/wwe-jbl-aleister-black-main-event-talent-recently-released/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167982/on-edit-wwe-nick-khan-us-department-justice-vince-mcmahon-sex-trafficking/
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Paul Heyman Teases Taking On A New Client
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167941/wwe-danhausen-espn-sportscenter-top-plays/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167894/wwe-smackdown-sami-zayn-trick-williams-gingerbread-man-pushback-creative/
+[SKIP] Score sotto soglia editoriale (36/75): TNA Slammiversary 2026 To Start In Afternoon, Won't Go Up Against AEW Forbidden Door
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167614/wwe-big-e-kofi-kingston-xavier-woods-new-day-status-depart/
+[SKIP] Score sotto soglia editoriale (72/75): Backstage Report On Expectations For John Cena's WWE Backlash Announcement
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167604/jacob-fatu-roman-reigns-wwe-backlash-2026-fans/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167602/wwe-brock-lesnar-alumni-moved/
+[SKIP] Score sotto soglia editoriale (0/75): WWE Backlash 2026 Predictions: Wrestling Inc. Picks The Winners
+[SKIP] Score sotto soglia editoriale (18/75): Will Ospreay Lays Out Differences Between Working In NJPW & AEW
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/chelsea-green-reveals-status-may-8-wwe-smackdown-heart-procedure/
+[SKIP] Score sotto soglia editoriale (28/75): Harley Cameron Addresses Wardrobe Mishap on May 6 AEW Dynamite
+[SKIP] Score sotto soglia editoriale (11/75): Jacob Fatu Admits Drug Problems Nearly Ruined His Wrestling Career
+[SKIP] Score sotto soglia editoriale (54/75): Major Jesse Ventura Story Was Cut From Hulk Hogan Netflix Documentary
+[SKIP] URL già in history: https://www.ringsidenews.com/possible-spoiler-danhausens-mystery-partner-wwe-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/stephen-smith-claims-hed-bigger-heel-than-paul-heyman-wwe/
+[SKIP] URL già in history: https://www.ringsidenews.com/cm-punk-appears-steve-carell-wwe-2k26-comedy-segment-night-too-many-stars-event/
+[SKIP] URL sospeso per validation fail recenti: https://www.ringsidenews.com/opening-segment-may-8-wwe-smackdown-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-scrapped-major-plans-gunther-before-cody-rhodes-feud/
+[SKIP] URL già in history: https://www.ringsidenews.com/number-wwe-talent-asked-take-pay-cuts-revealed/
+[SKIP] URL sospeso per validation fail recenti: https://www.ringsidenews.com/wwe-wanted-new-day-transition-out-full-time-wrestling-before-departure/
+[SKIP] URL già in history: https://www.ringsidenews.com/original-plans-jc-mateo-revealed-before-wwe-release/
+[SKIP] Score sotto soglia editoriale (5/75): New Details Reveal Dark Side of the Ring Season 7's TNA Story Isn't What Fans Expect
+[SKIP] Score sotto soglia editoriale (43/75): AMC's Reaction to Broken Matt Hardy's TNA Return Revealed
+[SCORE] 81 high - Backstage Update On Roman Reigns' WWE Schedule In July | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, ritorno/debutto, v71 freshness=0.55
+[SCORE] 53 low - Backstage Update On Roman Reigns' WWE Status Following Schedule Change | WWE/main roster, top star titolo: roman reigns, rumor/backstage, v71 freshness=0.524, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - WWE SmackDown Spoiler Lineup for May 8, 2026: Full Match Card and Backstage Notes Revealed | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, show settimanale, floor WWE main roster storyline, v71 source reliability soft penalty, v71 freshness=0.566, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 3 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Backstage Update On Roman Reigns' WWE Schedule In July
+[BOT] semantic_id=backstage-update-on-roman-reigns-wwe-schedule-in-july
+[SCORE] iniziale=81 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo riguarda aggiornamenti e indiscrezioni sul futuro imminente (luglio) di una superstar WWE, includendo rumor su stipendi e schedule non ancora confermati ufficialmente, che rientrano perfettamente nella definizione di RUMOR e nell
+[EDITORIAL v72.3] translation_notes=Non tradurre "World Heavyweight Champion" ma lascia "World Heavyweight Champion". "WWE Raw" è un nome proprio e va mantenuto. "Night of Champions" è un nome proprio di evento e va 
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riguarda aggiornamenti e indiscrezioni sul futuro imminente (luglio) di una superstar WWE, includendo rumor su stipendi e schedule non ancora confermati ufficialmente, che rientrano perfettamente nella definizione di RUMOR e nell
+[PERF v71] analisi editoriale AI v72: 1.70s
+[SCORE] raffinato=68 priority=medium | WWE/main roster, top star titolo: roman reigns, nomi forti lead: cm punk, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v72.3 cap rumor: niente boost raffinamento, v72.3 cap rumor
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Backstage Update On Roman Reigns' WWE Schedule In July
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:roman-reigns:cm-punk -> event:rumor:backstage-update-roman-reigns-schedule-july
+[V71] story_signature=roman_reigns|backstage_update_on_roman|reigns_wwe_schedule_in|return|wwe|raw|summerslam|wrestlemania semantic_status=new_story freshness=0.667
+[PERF v71] WP recent posts dedupe: 1.89s
+[SKIP] News core già pubblicata da altra fonte: Backstage Update On Roman Reigns' WWE Schedule In July
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[BOT] semantic_id=backstage-update-on-roman-reigns-wwe-status-following-schedule-change
+[SCORE] iniziale=53 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo fornisce aggiornamenti backstage e speculazioni sullo status di Roman Reigns, citando rumors e fonti interne. Non è una preview di un evento imminente né un report di risultati. La categoria principale è WWE data la presenza dell
+[EDITORIAL v72.3] translation_notes=Mantenere 'Roman Reigns' e 'WWE' in inglese.; La frase 'schedule change' si riferisce a modifiche nel programma di apparizioni, non necessariamente a un cambio di ruolo o status contrattuale. Verificare il contesto per tradurr; 'Debunked' va tradotto come 'smentito' o 'sfatato'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo fornisce aggiornamenti backstage e speculazioni sullo status di Roman Reigns, citando rumors e fonti interne. Non è una preview di un evento imminente né un report di risultati. La categoria principale è WWE data la presenza dell
+[PERF v71] analisi editoriale AI v72: 2.77s
+[SCORE] raffinato=53 priority=low | WWE/main roster, top star titolo: roman reigns, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v62 categoria business, v72.3 cap rumor: niente boost raffinamento
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:tko-financials -> event:rumor:backstage-update-roman-reigns-following-schedule-change
+[V71] story_signature=roman_reigns|backstage_update_on_roman|reigns_wwe_status_following|business|wwe|raw|tko|wrestlemania semantic_status=new_story freshness=0.524
+[SKIP] News core già pubblicata da altra fonte: Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: WWE SmackDown Spoiler Lineup for May 8, 2026: Full Match Card and Backstage Notes Revealed
+[BOT] semantic_id=wwe-smackdown-spoiler-lineup-for-may-8-2026-full-match-card-and-backstage-notes-revealed
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: Extra data: line 1 column 925 (char 924)
+[GEMINI] Uso modello: gemini-2.5-flash
+[EDITORIAL v72.3] type=PREVIEW conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash | L'articolo presenta la card completa e le note dal backstage per un futuro episodio di WWE SmackDown, etichettandosi chiaramente come 'spoiler lineup' e 'preview'. | guardrail true preview
+[EDITORIAL v72.3] translation_notes=Mantieni i nomi ufficiali dei titoli/cinture in inglese (es. Women's United States Championship).; Evitare calchi dall'inglese per 'spoiler lineup' (suggerito: 'card spoiler' o 'spoiler sulla card') e 'backstage notes' (suggerito: 'note dal backstage').; Il titolo dovrà essere riformulato per suonare naturale in italiano, non una traduzione letterale (es. 'Spoiler sulla card di WWE SmackDown dell'8 maggio 2026: match annunciati e n
+[EDITORIAL v73] final type=PREVIEW | category=WWE (4) | L'articolo presenta la card completa e le note dal backstage per un futuro episodio di WWE SmackDown, etichettandosi chiaramente come 'spoiler lineup' e 'preview'. | guardrail true preview
+[PERF v71] analisi editoriale AI v72: 10.40s
+[SCORE] raffinato=56 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - WWE SmackDown Spoiler Lineup for May 8, 2026: Full Match Card and Backstage Notes Revealed
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 3 candidati provati | mode=normal
+===== RUN END [2026-05-08 22:51:29] VERSION [v73_final_ai_editorial_taxonomy_guardrails (2cdb45c)] =====
+
