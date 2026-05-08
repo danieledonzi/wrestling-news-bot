@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v70_preview_dedupe_translation_internal_images"
+BOT_VERSION = "v71_semantic_guardrails_gemini31"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -165,8 +165,9 @@ FEEDS = [
 ]
 
 MODEL_CHAIN = [
+    "gemini-3.1-flash-lite",
+    "gemini-3.1-flash",
     "gemini-2.5-flash-lite",
-    "gemini-2.5-flash",
 ]
 
 HEADERS = {
@@ -230,6 +231,27 @@ STORM_TOP_THRESHOLD = 3       # oppure almeno 3 news >= 90
 BREAKING_SCORE_BOOST = 20
 BREAKING_TITLE_MIN_SCORE = 90
 BREAKING_ACTIVE_SECONDS = 6 * 60 * 60
+
+# v71: semantic guardrails, rewrite suppression, Gemini 3.1 and pending hardening.
+SEMANTIC_DUPLICATE_THRESHOLD = float(os.getenv("SEMANTIC_DUPLICATE_THRESHOLD", "0.82"))
+MIN_SEMANTIC_DISTANCE_FOR_REWRITE = float(os.getenv("MIN_SEMANTIC_DISTANCE_FOR_REWRITE", "0.28"))
+QUOTE_MIN_SIMILARITY = float(os.getenv("QUOTE_MIN_SIMILARITY", "0.88"))
+STORY_COOLDOWN_MINUTES = int(os.getenv("STORY_COOLDOWN_MINUTES", "90"))
+PENDING_MAX_AGE_HOURS = int(os.getenv("PENDING_MAX_AGE_HOURS", "18"))
+MAX_PENDING_RETRY = int(os.getenv("MAX_PENDING_RETRY", "3"))
+VALID_IMAGE_MIN_WIDTH = int(os.getenv("VALID_IMAGE_MIN_WIDTH", "480"))
+VALID_IMAGE_MIN_HEIGHT = int(os.getenv("VALID_IMAGE_MIN_HEIGHT", "270"))
+V71_SHADOW_MODE = os.getenv("V71_SHADOW_MODE", "false").lower() in {"1", "true", "yes"}
+STRICT_JSON_VALIDATION = os.getenv("STRICT_JSON_VALIDATION", "true").lower() not in {"0", "false", "no"}
+
+SOURCE_RELIABILITY = {
+    "fightful": 1.00,
+    "pwinsider": 0.95,
+    "wrestlinginc": 0.80,
+    "wrestling inc": 0.80,
+    "ringsidenews": 0.65,
+    "ringside news": 0.65,
+}
 
 
 
@@ -588,6 +610,7 @@ def load_history():
         "story_fingerprints": set(),
         "news_core_keys": set(),
         "event_keys": set(),
+        "story_signatures_v71": set(),
     }
 
     if not os.path.exists(HISTORY_FILE):
@@ -614,6 +637,8 @@ def load_history():
                     history["news_core_keys"].add(parts[4].strip())
                 if len(parts) >= 6 and parts[5].strip():
                     history["event_keys"].add(parts[5].strip())
+                if len(parts) >= 7 and parts[6].strip():
+                    history["story_signatures_v71"].add(parts[6].strip())
 
                 # v38: retrocompatibilita. Genera event_key anche dai vecchi record
                 # che non avevano il sesto campo, usando URL/slug/title_key/fingerprint.
@@ -628,7 +653,7 @@ def load_history():
     return history
 
 
-def save_to_history(url, semantic_id, title_key="", story_fingerprint="", news_core_key="", event_key=""):
+def save_to_history(url, semantic_id, title_key="", story_fingerprint="", news_core_key="", event_key="", story_signature_v71=""):
     records = []
 
     if os.path.exists(HISTORY_FILE):
@@ -638,7 +663,7 @@ def save_to_history(url, semantic_id, title_key="", story_fingerprint="", news_c
         except Exception as e:
             print(f"[HISTORY] Errore lettura pre-salvataggio: {e}")
 
-    new_record = f"{url}|{semantic_id}|{title_key}|{story_fingerprint}|{news_core_key}|{event_key}".rstrip("|")
+    new_record = f"{url}|{semantic_id}|{title_key}|{story_fingerprint}|{news_core_key}|{event_key}|{story_signature_v71}".rstrip("|")
 
     if new_record not in records:
         records.append(new_record)
@@ -4831,6 +4856,227 @@ def history_has_event_key(history, event_key):
     return bool(event_key and event_key in history.get("event_keys", set()))
 
 
+
+# =========================
+# v71 helpers: semantic signature, rewrite suppression, anti-clickbait, freshness and quote guardrails
+# =========================
+
+def v71_source_reliability(url=""):
+    domain = normalize_for_check(get_domain(url or ""))
+    for key, value in SOURCE_RELIABILITY.items():
+        if normalize_for_check(key) in domain:
+            return float(value)
+    return 0.75
+
+
+def v71_tokens(text):
+    probe = normalize_for_check(text or "")
+    return [w for w in probe.split() if len(w) > 2 and w not in STOPWORDS]
+
+
+def v71_jaccard(a, b):
+    sa, sb = set(v71_tokens(a)), set(v71_tokens(b))
+    if not sa or not sb:
+        return 0.0
+    return len(sa & sb) / max(1, len(sa | sb))
+
+
+def v71_extract_entities(title="", text=""):
+    probe = normalize_for_check(f"{title} {(text or '')[:1800]}")
+    known = []
+    for name in sorted(set(WWE_NAMES + AEW_NAMES + NXT_NAMES + TNA_OTHER_NAMES + TOP_STAR_NAMES + STRONG_NAMES + HISTORIC_BUSINESS_NAMES_V61), key=len, reverse=True):
+        key = normalize_for_check(name).replace(" ", "_")
+        if normalize_for_check(name) in probe and key not in known:
+            known.append(key)
+    if known:
+        return known[:4]
+
+    # fallback leggero: sequenze Title Case dal titolo sorgente, senza affidarsi a Gemini.
+    candidates = []
+    for m in re.finditer(r"\b[A-Z][A-Za-z'\-]+(?:\s+[A-Z][A-Za-z'\-]+){0,2}\b", title or ""):
+        val = normalize_for_check(m.group(0)).replace(" ", "_")
+        if val and val not in {"wwe", "aew", "tna", "nxt"} and val not in candidates:
+            candidates.append(val)
+    return candidates[:3]
+
+
+def v71_detect_action(title="", text=""):
+    probe = normalize_for_check(f"{title} {(text or '')[:1800]}")
+    action_rules = [
+        ("death", ["passed away", "dies", "dead", "death", "morte", "morto", "scomparsa"]),
+        ("legal", ["arrest", "arrested", "lawsuit", "trial", "accused", "legal", "indagine", "arresto", "causa legale"]),
+        ("return", ["return", "returns", "comeback", "back before", "ritorno", "torna", "rientro"]),
+        ("debut", ["debut", "debuts", "debutto", "esordio"]),
+        ("title_change", ["wins title", "new champion", "regains", "captures", "title change", "riconquista", "nuovo campione", "nuova campionessa"]),
+        ("injury", ["injury", "injured", "surgery", "medical", "infortunio", "operazione"]),
+        ("contract", ["contract", "deal", "extension", "signs", "renewal", "contratto", "rinnovo"]),
+        ("business", BUSINESS_CATEGORY_TERMS_V62),
+        ("preview", PREVIEW_TERMS_V62 + ["how to watch", "start time", "confirmed matches"]),
+        ("report", ["results", "recap", "report", "risultati"]),
+        ("opinion", ["believes", "explains why", "thinks", "podcast", "commentary", "opinion"]),
+        ("rumor", ["reportedly", "rumor", "backstage", "expected", "secondo un report"]),
+    ]
+    for action, terms in action_rules:
+        if v62_has_any(probe, terms):
+            return action
+    return "update"
+
+
+def v71_detect_topics(title="", text="", url=""):
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:1800]}")
+    topics = []
+    for topic in ["wwe", "raw", "smackdown", "nxt", "aew", "dynamite", "collision", "tna", "impact", "roh", "njpw", "aaa", "netflix", "tko", "endeavor", "summerslam", "wrestlemania", "backlash", "double or nothing"]:
+        if topic in probe and topic not in topics:
+            topics.append(topic.replace(" ", "_"))
+    return topics[:5]
+
+
+def build_story_signature_v71(title, text, url=""):
+    entities = v71_extract_entities(title, text)
+    topics = v71_detect_topics(title, text, url)
+    action = v71_detect_action(title, text)
+    important = []
+    if entities:
+        important.extend(entities[:3])
+    if action:
+        important.append(action)
+    # promotion/show/event context, excluding overly generic update/report when possible
+    for t in topics:
+        if t not in important:
+            important.append(t)
+    if not important:
+        important = v71_tokens(title)[:6]
+    signature = "|".join(important[:8])[:220]
+    return {"entities": entities, "topics": topics, "action": action, "signature": signature}
+
+
+def semantic_duplicate_check_v71(title, text, url, history=None, seen_story_signatures=None, existing_items=None):
+    sig_data = build_story_signature_v71(title, text, url)
+    signature = sig_data.get("signature", "")
+    if not signature:
+        return {"duplicate": False, "status": "no_signature", **sig_data}
+    seen_story_signatures = seen_story_signatures or set()
+    history_sigs = set((history or {}).get("story_signatures_v71", set()))
+    if signature in seen_story_signatures:
+        return {"duplicate": True, "status": "run_semantic_duplicate", **sig_data}
+    if signature in history_sigs:
+        return {"duplicate": True, "status": "history_semantic_duplicate", **sig_data}
+    # Rewrite suppression su elementi in coda/run: token overlap alto + stessa azione/entita = riscrittura ridondante.
+    for other in existing_items or []:
+        other_sig = other.get("story_signature_v71") or build_story_signature_v71(other.get("title", ""), other.get("summary", ""), other.get("url", "")).get("signature", "")
+        if other_sig and other_sig == signature:
+            sim = v71_jaccard(f"{title} {text}", f"{other.get('title','')} {other.get('summary','')}")
+            distance = 1.0 - sim
+            if distance < MIN_SEMANTIC_DISTANCE_FOR_REWRITE:
+                return {"duplicate": True, "status": "rewrite_duplicate", "similarity": sim, "semantic_distance": distance, **sig_data}
+    return {"duplicate": False, "status": "new_story", **sig_data}
+
+
+def validate_title_quality_v71(title):
+    t = sanitize_text(title or "")
+    low = t.lower()
+    issues = []
+    clickbait_phrases = [
+        "huge update", "massive news", "you won't believe", "you wont believe", "shocking", "major bombshell",
+        "breaks internet", "fans go wild", "what happens next", "big update", "not going to believe",
+    ]
+    if any(p in low for p in clickbait_phrases):
+        issues.append("clickbait phrase")
+    words = [w for w in re.split(r"\s+", t) if w]
+    if words:
+        upper_words = sum(1 for w in words if len(w) > 3 and w.isupper())
+        if upper_words / max(1, len(words)) > 0.35:
+            issues.append("too many uppercase words")
+    if t.count("!") >= 1 or t.count("?") >= 2:
+        issues.append("excessive punctuation")
+    if len(t) > 150:
+        issues.append("too long")
+    if title_soft_validation_failed(t) or title_is_broken(t):
+        issues.append("broken or suspended title")
+    score = max(0, 100 - 18 * len(issues))
+    return {"score": score, "is_clickbait": any(i in {"clickbait phrase", "too many uppercase words", "excessive punctuation"} for i in issues), "issues": issues}
+
+
+def compute_freshness_score_v71(title="", text="", url="", source_timestamp=None, semantic_status="new_story"):
+    now = time.time()
+    ts = float(source_timestamp or now)
+    age_hours = max(0.0, (now - ts) / 3600.0)
+    time_weight = max(0.0, min(1.0, 1.0 - age_hours / 24.0))
+    probe = normalize_for_check(f"{title} {(text or '')[:1800]}")
+    novelty_terms = ["return", "debut", "wins", "new champion", "title change", "arrest", "death", "contract", "acquisition", "netflix", "injury", "released"]
+    novelty_weight = min(1.0, sum(1 for term in novelty_terms if normalize_for_check(term) in probe) / 3.0)
+    source_uniqueness = v71_source_reliability(url)
+    semantic_delta = 0.2 if semantic_status in {"rewrite_duplicate", "history_semantic_duplicate", "run_semantic_duplicate"} else 1.0
+    return round(time_weight * 0.30 + novelty_weight * 0.35 + source_uniqueness * 0.20 + semantic_delta * 0.15, 3)
+
+
+def extract_quotes_v71(text):
+    text = text or ""
+    quotes = []
+    for pat in [r'"([^"\n]{12,500})"', r"“([^”\n]{12,500})”", r"<blockquote[^>]*>(.*?)</blockquote>"]:
+        for m in re.finditer(pat, text, flags=re.I | re.S):
+            q = BeautifulSoup(m.group(1), "html.parser").get_text(" ", strip=True)
+            q = sanitize_text(q)
+            if q and q not in quotes:
+                quotes.append(q)
+    return quotes[:12]
+
+
+def validate_quote_preservation_v71(source_text, translated_html):
+    source_quotes = extract_quotes_v71(source_text)
+    translated_quotes = extract_quotes_v71(translated_html)
+    if not source_quotes:
+        return {"ok": True, "score": 1.0, "issues": []}
+    if not translated_quotes:
+        return {"ok": False, "score": 0.0, "issues": ["source quotes missing in translated article"]}
+    # Cross-language deterministic proxy: enough quote blocks must survive; exact semantic check remains in Gemini prompt.
+    ratio = min(1.0, len(translated_quotes) / max(1, len(source_quotes)))
+    issues = [] if ratio >= QUOTE_MIN_SIMILARITY else [f"quote count ratio below threshold: {ratio:.2f}"]
+    return {"ok": ratio >= QUOTE_MIN_SIMILARITY, "score": ratio, "issues": issues}
+
+
+def cleanup_pending_queue_v71(items, history=None):
+    now = time.time()
+    cleaned = []
+    seen = set()
+    for item in items or []:
+        if not isinstance(item, dict):
+            continue
+        title = item.get("title", item.get("url", ""))
+        attempts = int(item.get("attempts", 0) or 0)
+        if attempts >= MAX_PENDING_RETRY:
+            print(f"[PENDING v71] Scarto pending con troppi retry: {attempts} - {title}")
+            item["status"] = "max_retry_pending"
+            continue
+        age_hours = (now - float(item.get("created_at", now) or now)) / 3600.0
+        if item.get("kind") != "report" and age_hours > PENDING_MAX_AGE_HOURS:
+            print(f"[PENDING v71] Scarto pending scaduto ({age_hours:.1f}h): {title}")
+            item["status"] = "expired_pending"
+            continue
+        sig = item.get("story_signature_v71") or build_story_signature_v71(title, item.get("summary", ""), item.get("url", "")).get("signature", "")
+        key = item.get("report_event_key") if item.get("kind") == "report" else (sig or pending_dedupe_key(item))
+        if key in seen:
+            print(f"[PENDING v71] Scarto duplicato pending: {title}")
+            continue
+        seen.add(key)
+        if sig:
+            item["story_signature_v71"] = sig
+        cleaned.append(item)
+    return cleaned
+
+
+def should_publish_story_v71(item, history=None, seen_story_signatures=None):
+    title = item.get("title", "")
+    text = item.get("summary") or item.get("prefetched_text") or ""
+    url = item.get("url", "")
+    tq = validate_title_quality_v71(title)
+    if tq["is_clickbait"] and tq["score"] < 70:
+        return False, f"title_quality:{','.join(tq['issues'])}"
+    dup = semantic_duplicate_check_v71(title, text, url, history=history, seen_story_signatures=seen_story_signatures)
+    if dup.get("duplicate") and not V71_SHADOW_MODE:
+        return False, dup.get("status", "semantic_duplicate")
+    return True, "ok"
+
 def pending_dedupe_key(item):
     """v43: pending deduplica per event_key quando disponibile, altrimenti per URL.
     I report continuano a usare report_event_key.
@@ -4839,7 +5085,7 @@ def pending_dedupe_key(item):
         return ""
     if item.get("kind") == "report":
         return item.get("report_event_key") or item.get("event_key") or item.get("url", "")
-    return item.get("event_key") or item.get("url", "")
+    return item.get("story_signature_v71") or item.get("event_key") or item.get("url", "")
 
 
 def response_is_imunify_block(res):
@@ -5671,8 +5917,13 @@ def load_pending_articles(history=None):
             continue
 
         created_at = float(item.get("created_at", now))
-        if now - created_at > PENDING_TTL_SECONDS:
+        max_age = PENDING_MAX_AGE_HOURS * 3600 if item.get("kind") != "report" else PENDING_TTL_SECONDS
+        if now - created_at > max_age:
             print(f"[PENDING] Scarto pending scaduto: {item.get('title', url)}")
+            continue
+
+        if item.get("kind") != "report" and int(item.get("attempts", 0) or 0) >= MAX_PENDING_RETRY:
+            print(f"[PENDING] Scarto pending con troppi retry: {item.get('title', url)}")
             continue
 
         # v41: i report live non subiscono decay editoriale: aspettano la maturazione temporale.
@@ -5684,6 +5935,7 @@ def load_pending_articles(history=None):
 
         seen.add(dedupe_key)
         cleaned.append(item)
+    cleaned = cleanup_pending_queue_v71(cleaned, history=history)
     cleaned.sort(key=lambda x: (int(x.get("score", 0)), float(x.get("created_at", 0))), reverse=True)
     return cleaned[:MAX_PENDING_ITEMS]
 
@@ -5714,7 +5966,8 @@ def add_pending_article(item, reason="wp_down"):
     sem_id = item.get("semantic_id") or make_semantic_id_from_title(title)
     title_key = item.get("title_key") or make_title_key(title)
     event_key = item.get("event_key") or make_event_key(title, "", url)
-    new_dedupe_key = event_key or url
+    story_signature_v71 = item.get("story_signature_v71") or build_story_signature_v71(title, item.get("summary", ""), url).get("signature", "")
+    new_dedupe_key = story_signature_v71 or event_key or url
 
     # v43: evita duplicati in pending non solo per URL, ma anche per event_key.
     for existing in pending:
@@ -5728,6 +5981,7 @@ def add_pending_article(item, reason="wp_down"):
                     "score": score,
                     "priority": priority_label(score),
                     "event_key": event_key,
+                    "story_signature_v71": story_signature_v71,
                     "reasons": item.get("score_reasons", []),
                     "score_reasons": item.get("score_reasons", []),
                     "reason": reason,
@@ -5747,6 +6001,8 @@ def add_pending_article(item, reason="wp_down"):
         "score": score,
         "priority": priority_label(score),
         "event_key": event_key,
+        "story_signature_v71": story_signature_v71,
+        "summary": item.get("summary", ""),
         "reasons": item.get("score_reasons", []),
         "score_reasons": item.get("score_reasons", []),
         "is_breaking": bool(item.get("is_breaking", title_has_breaking_marker(title))),
@@ -6086,6 +6342,21 @@ def build_candidates(history, wp_available=True):
                     continue
 
                 summary = get_entry_summary(entry)
+
+                title_quality_v71 = validate_title_quality_v71(title)
+                if title_quality_v71["is_clickbait"] and title_quality_v71["score"] < 70:
+                    print(f"[SKIP v71] Titolo clickbait/di bassa qualita': {title} | {title_quality_v71['issues']}")
+                    continue
+
+                story_data_v71 = build_story_signature_v71(title, summary, link)
+                story_signature_v71 = story_data_v71.get("signature", "")
+                if story_signature_v71 and story_signature_v71 in history.get("story_signatures_v71", set()):
+                    print(f"[SKIP v71] Story signature gia' in history: {story_signature_v71} - {title}")
+                    continue
+                if story_signature_v71 and story_signature_v71 in seen_in_this_run:
+                    print(f"[SKIP v71] Story signature gia' vista nella run: {story_signature_v71} - {title}")
+                    continue
+
                 article_type_hint = classify_article_type_fallback_v68(title, summary, link)
                 if v68_is_expired_preview_only(title, summary, link, article_type=article_type_hint):
                     print(f"[SKIP] Preview/show announcement scaduta: {title}")
@@ -6095,6 +6366,15 @@ def build_candidates(history, wp_available=True):
                 breaking_expires_at = entry_ts + BREAKING_ACTIVE_SECONDS
 
                 score, reasons = calculate_importance_score(title, summary, link)
+                reliability_v71 = v71_source_reliability(link)
+                freshness_v71 = compute_freshness_score_v71(title, summary, link, source_timestamp=get_entry_timestamp(entry), semantic_status="new_story")
+                if reliability_v71 < 0.70 and score < 90:
+                    score = clamp_score(score - 5)
+                    reasons.append("v71 source reliability soft penalty")
+                if freshness_v71 < 0.35 and score < 85:
+                    score = clamp_score(score - 6)
+                    reasons.append("v71 low freshness/novelty")
+                reasons.append(f"v71 freshness={freshness_v71}")
                 if is_breaking and breaking_expires_at < time.time():
                     score = clamp_score(score - BREAKING_SCORE_BOOST)
                     reasons.append("breaking scaduto")
@@ -6130,6 +6410,8 @@ def build_candidates(history, wp_available=True):
 
                 seen_in_this_run.add(sem_id)
                 seen_in_this_run.add(title_key)
+                if story_signature_v71:
+                    seen_in_this_run.add(story_signature_v71)
                 queue.append({
                     "entry": entry,
                     "url": link,
@@ -6142,6 +6424,10 @@ def build_candidates(history, wp_available=True):
                     "editorial_tier": tier,
                     "editorial_tier_reason": tier_reason,
                     "event_key": event_key,
+                    "story_signature_v71": story_signature_v71,
+                    "story_data_v71": story_data_v71,
+                    "summary": summary,
+                    "title_quality_v71": title_quality_v71,
                     "feed_order": idx,
                     "source_feed": feed_url,
                     "article_type_hint": article_type_hint,
@@ -6160,7 +6446,7 @@ def build_candidates(history, wp_available=True):
     return queue
 
 
-def process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, source_fail_counts):
+def process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
     report_event_key = item.get("report_event_key") or item.get("event_key")
     now = time.time()
     not_before = float(item.get("not_before", 0) or 0)
@@ -6219,9 +6505,9 @@ def process_report_pending_item(item, history, seen_story_fingerprints, seen_new
     return status
 
 
-def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, source_fail_counts):
+def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
     if item.get("kind") == "report":
-        return process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, source_fail_counts)
+        return process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
 
     entry = item.get("entry")
     link = item.get("url") or (getattr(entry, "link", None) if entry else None)
@@ -6239,6 +6525,12 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
 
     if link in history["urls"] or sem_id in history["semantic_ids"]:
         print(f"[SKIP] Già pubblicato o già in history: {title}")
+        remove_pending_url(link)
+        return "skipped"
+
+    title_quality_v71 = validate_title_quality_v71(title)
+    if title_quality_v71["is_clickbait"] and title_quality_v71["score"] < 70:
+        print(f"[SKIP v71] Titolo clickbait/di bassa qualita': {title} | {title_quality_v71['issues']}")
         remove_pending_url(link)
         return "skipped"
 
@@ -6307,6 +6599,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
                             seen_story_fingerprints,
                             seen_news_core_keys,
                             seen_event_keys,
+                            seen_story_signatures_v71,
                             source_fail_counts,
                         )
         return "skipped"
@@ -6343,6 +6636,18 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     news_core_key = make_news_core_key(title, full_text)
     event_key = item.get("event_key") or make_event_key(title, scoring_text, link)
     item["event_key"] = event_key
+
+    story_data_v71 = build_story_signature_v71(title, scoring_text, link)
+    story_signature_v71 = story_data_v71.get("signature", "")
+    item["story_signature_v71"] = story_signature_v71
+    semantic_v71 = semantic_duplicate_check_v71(title, scoring_text, link, history=history, seen_story_signatures=seen_story_signatures_v71)
+    freshness_v71 = compute_freshness_score_v71(title, scoring_text, link, source_timestamp=item.get("source_timestamp"), semantic_status=semantic_v71.get("status", "new_story"))
+    item["freshness_score_v71"] = freshness_v71
+    print(f"[V71] story_signature={story_signature_v71} semantic_status={semantic_v71.get('status')} freshness={freshness_v71}")
+    if semantic_v71.get("duplicate") and not V71_SHADOW_MODE:
+        print(f"[SKIP v71] Duplicato semantico/rewrite: {semantic_v71.get('status')} - {title}")
+        remove_pending_url(link)
+        return "skipped"
 
     v65_dup = v65_wp_recent_duplicate(title, full_text, link, event_key=event_key)
     if v65_dup:
@@ -6453,6 +6758,12 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     news_data["titolo"] = v65_proper_case_title(news_data["titolo"])
     news_data["testo"] = v63_humanize_body_html(news_data.get("testo", ""))
 
+    quote_check_v71 = validate_quote_preservation_v71(text_for_translation or full_text, news_data.get("testo", ""))
+    if not quote_check_v71.get("ok"):
+        print(f"[SKIP v71] Quote non preservate a sufficienza: {quote_check_v71.get('issues')} - {title}")
+        record_validation_failure(link, title)
+        return "validation_fail"
+
     img_url = (extract_image_url(entry) if entry else None) or page_img
 
     post_id, post_json = create_post_without_image(
@@ -6487,12 +6798,14 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         print(f"[BOT] Nessuna immagine trovata per: {title}")
 
     print(f"[OK] Pubblicato: {news_data['titolo']}")
-    save_to_history(link, sem_id, title_key, story_fingerprint, news_core_key, event_key)
+    save_to_history(link, sem_id, title_key, story_fingerprint, news_core_key, event_key, story_signature_v71)
     seen_story_fingerprints.add(story_fingerprint)
     if news_core_key:
         seen_news_core_keys.add(news_core_key)
     if event_key:
         seen_event_keys.add(event_key)
+    if story_signature_v71:
+        seen_story_signatures_v71.add(story_signature_v71)
     remove_pending_url(link)
     clear_validation_failure(link)
     time.sleep(1)
@@ -6505,6 +6818,7 @@ def run_bot():
     seen_story_fingerprints = set(history.get("story_fingerprints", set()))
     seen_news_core_keys = set(history.get("news_core_keys", set()))
     seen_event_keys = set(history.get("event_keys", set()))
+    seen_story_signatures_v71 = set(history.get("story_signatures_v71", set()))
 
     wp_available = wordpress_is_available()
     pending = load_pending_articles(history)
@@ -6539,7 +6853,7 @@ def run_bot():
             if time.time() - run_start > MAX_RUN_SECONDS:
                 print("[BOT] Stop anticipato durante pending: superato timeout massimo run")
                 break
-            status = process_candidate_item(pitem, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, source_fail_counts)
+            status = process_candidate_item(pitem, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
             pending_processed += 1
             if status == "published":
                 pending_published += 1
@@ -6591,7 +6905,7 @@ def run_bot():
             continue
 
         new_processed += 1
-        status = process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, source_fail_counts)
+        status = process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
 
         if status == "published":
             new_published += 1
@@ -6783,6 +7097,49 @@ def v70_upload_image_to_wp_full(image_url):
         print(f"[MEDIA] Errore upload immagine interna {image_url}: {e}")
         return None
 
+
+
+
+# =========================
+# v71 overrides finali
+# =========================
+
+_ORIG_V71_build_ordered_content_blocks = build_ordered_content_blocks
+
+def build_ordered_content_blocks(html, source_url=""):
+    """v71: eredita la struttura v70 ma scarta immagini interne chiaramente troppo piccole/tracking quando le dimensioni sono disponibili."""
+    blocks = _ORIG_V71_build_ordered_content_blocks(html, source_url=source_url)
+    filtered = []
+    for block in blocks:
+        if block.get("type") != "image":
+            filtered.append(block)
+            continue
+        width = int(block.get("width") or block.get("w") or 0)
+        height = int(block.get("height") or block.get("h") or 0)
+        src = (block.get("src") or "").lower()
+        if any(x in src for x in ["tracking", "pixel", "sprite", "placeholder", "emoji"]):
+            print(f"[IMAGE v71] Scarto immagine tracking/placeholder: {block.get('src')}")
+            continue
+        if width and height and (width < VALID_IMAGE_MIN_WIDTH or height < VALID_IMAGE_MIN_HEIGHT):
+            print(f"[IMAGE v71] Scarto immagine piccola: {width}x{height} {block.get('src')}")
+            continue
+        filtered.append(block)
+    return filtered
+
+_ORIG_V71_editorial_tier = editorial_tier
+
+def editorial_tier(score, title="", text="", url=""):
+    """v71: aggiunge Tier 0 implicito per micro-update/clickbait e Tier 5 per eventi maggiori."""
+    probe = normalize_for_check(f"{title} {(text or '')[:1800]} {url}")
+    tq = validate_title_quality_v71(title)
+    if tq["is_clickbait"] and score < 90:
+        return "exclude", "v71 clickbait title"
+    if v62_has_any(probe, ["death", "passed away", "dies", "acquisition", "merger", "netflix", "media rights", "tv deal", "return", "new champion", "arrested"]):
+        if score >= 70:
+            return "tier5", "v71 major story bypass"
+    if v62_has_any(probe, ["huge update", "massive news", "minor update", "another update", "teases", "cryptic", "name drops"]) and score < 75:
+        return "exclude", "v71 tier0 micro/clickbait update"
+    return _ORIG_V71_editorial_tier(score, title, text, url)
 
 if __name__ == "__main__":
     log_run_start()
