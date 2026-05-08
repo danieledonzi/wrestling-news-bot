@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v72_1_ai_block_repair_italian_titles"
+BOT_VERSION = "v72_2_soft_gemini_cooldown_instagram_embeds"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -609,6 +609,11 @@ session.headers.update({
 })
 
 model_fail_counts = {model: 0 for model in MODEL_CHAIN}
+# v72.2: cooldown morbido. Un 503 non banna un modello per tutta la run.
+GEMINI_SOFT_COOLDOWN_SECONDS = float(os.getenv("GEMINI_SOFT_COOLDOWN_SECONDS", "4"))
+GEMINI_MAX_ROUNDS_PER_CALL = int(os.getenv("GEMINI_MAX_ROUNDS_PER_CALL", "2"))
+gemini_soft_cooldown_until = {model: 0.0 for model in MODEL_CHAIN}
+gemini_invalid_models = set()
 
 
 def load_history():
@@ -3725,23 +3730,60 @@ def extract_json_object(raw_text):
 
 
 def generate_and_parse_json(prompt):
+    """v72.2: prova Gemini con cooldown morbido.
+
+    - 503/high demand: cooldown di pochi secondi, non ban globale della run.
+    - 404/not found: modello disabilitato per la run.
+    - se tutti sono in cooldown, aspetta poco e fa un ultimo giro.
+    """
     last_exception = None
-    for model in MODEL_CHAIN:
-        if model_fail_counts.get(model, 0) >= MODEL_COOLDOWN_THRESHOLD:
-            print(f"[GEMINI] Skip modello saturo in questa run: {model}")
+    capacity_failures = 0
+
+    for round_idx in range(max(1, GEMINI_MAX_ROUNDS_PER_CALL)):
+        now = time.time()
+        usable_models = []
+        cooldown_waits = []
+
+        for model in MODEL_CHAIN:
+            if model in gemini_invalid_models:
+                continue
+            cooldown_until = float(gemini_soft_cooldown_until.get(model, 0) or 0)
+            if cooldown_until > now and round_idx == 0:
+                cooldown_waits.append(cooldown_until - now)
+                continue
+            usable_models.append(model)
+
+        if not usable_models and cooldown_waits and round_idx == 0:
+            wait_s = max(0.5, min(2.5, min(cooldown_waits)))
+            print(f"[GEMINI] Tutti i modelli in cooldown morbido: attendo {wait_s:.1f}s")
+            time.sleep(wait_s)
             continue
-        try:
-            print(f"[GEMINI] Uso modello: {model}")
-            res = client.models.generate_content(model=model, contents=prompt)
-            data = extract_json_object(res.text)
-            return data, model
-        except Exception as e:
-            last_exception = e
-            print(f"[GEMINI] Modello {model} scartato: {e}")
-            if is_capacity_error(e) or is_invalid_model_error(e):
-                # Se un modello e' saturo o non supportato, non riprovarlo piu' nella stessa run.
-                model_fail_counts[model] = MODEL_COOLDOWN_THRESHOLD
-            continue
+
+        for model in usable_models:
+            try:
+                print(f"[GEMINI] Uso modello: {model}")
+                res = client.models.generate_content(model=model, contents=prompt)
+                data = extract_json_object(res.text)
+                model_fail_counts[model] = 0
+                gemini_soft_cooldown_until[model] = 0.0
+                return data, model
+            except Exception as e:
+                last_exception = e
+                print(f"[GEMINI] Modello {model} scartato: {e}")
+                if is_invalid_model_error(e):
+                    gemini_invalid_models.add(model)
+                    model_fail_counts[model] = MODEL_COOLDOWN_THRESHOLD
+                elif is_capacity_error(e):
+                    capacity_failures += 1
+                    # Cooldown temporaneo, non permanente: il modello puo tornare buono nella stessa run.
+                    gemini_soft_cooldown_until[model] = time.time() + GEMINI_SOFT_COOLDOWN_SECONDS * (round_idx + 1)
+                    model_fail_counts[model] = min(model_fail_counts.get(model, 0) + 1, MODEL_COOLDOWN_THRESHOLD - 1)
+                else:
+                    model_fail_counts[model] = min(model_fail_counts.get(model, 0) + 1, MODEL_COOLDOWN_THRESHOLD - 1)
+                continue
+
+    if capacity_failures and all((m in gemini_invalid_models) or gemini_soft_cooldown_until.get(m, 0) > time.time() - 0.1 for m in MODEL_CHAIN):
+        raise RuntimeError("GEMINI_TEMPORARILY_UNAVAILABLE")
     raise last_exception if last_exception else RuntimeError("Nessun modello disponibile")
 
 
@@ -6727,6 +6769,9 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     editorial_analysis_v72 = v72_editorial_analysis(title, full_text, link, is_report=is_results_article(title, link, full_text))
     perf_step_v71 = v71_perf_log("analisi editoriale AI v72", perf_step_v71, threshold=0.5)
     item["editorial_analysis_v72"] = editorial_analysis_v72
+    if editorial_analysis_v72.get("ai_failed") or editorial_analysis_v72.get("is_publishable") is False:
+        print(f"[BOT] Gemini/analisi AI non disponibile: stop candidato senza fallback rischiosi - {title}")
+        return "model_fail"
     article_type_v68 = editorial_analysis_v72.get("article_type") or classify_article_type_fallback_v68(title, full_text, link)
     article_type_reason_v68 = editorial_analysis_v72.get("article_type_reason", "v72 editorial analysis")
     item["article_type_v68"] = article_type_v68
@@ -6816,6 +6861,9 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
 
     forced_report_title = make_deterministic_report_title(title, link, full_text) if is_results_article(title, link, full_text) else None
     editorial_analysis_v72 = item.get("editorial_analysis_v72") or v72_editorial_analysis(title, text_for_translation or full_text, link, is_report=bool(forced_report_title))
+    if editorial_analysis_v72.get("ai_failed") or editorial_analysis_v72.get("is_publishable") is False:
+        print(f"[BOT] Gemini/analisi AI non disponibile prima della traduzione: stop candidato - {title}")
+        return "model_fail"
     forced_category_id = int(editorial_analysis_v72.get("category_id") or classify_category_fallback_v67(title, text_for_translation or full_text, link, is_report=bool(forced_report_title)))
     forced_category_slug = editorial_analysis_v72.get("category_slug") or CATEGORY_SLUG_BY_ID_V67.get(forced_category_id, "WORLD")
     forced_category_reason = editorial_analysis_v72.get("category_reason", "v72 cached editorial analysis")
@@ -7542,16 +7590,19 @@ JSON richiesto:
             "model": used_model,
         }
     except Exception as e:
-        print(f"[EDITORIAL v72] Analisi AI fallita: {e} | fallback type={fallback_type}, category={fallback_slug} ({fallback_id})")
+        # v72.2: se l'AI non e' disponibile, non usare il fallback come se fosse affidabile
+        # e soprattutto non permettere che il raffinamento gonfi score/categoria.
+        print(f"[EDITORIAL v72] Analisi AI fallita: {e} | fallback conservativo, stop candidato")
         return {
             "article_type": fallback_type,
-            "article_type_reason": "fallback after v72 editorial analysis error",
+            "article_type_reason": "AI unavailable: conservative fallback, do not boost",
             "category_id": fallback_id,
             "category_slug": fallback_slug,
-            "category_reason": "fallback after v72 editorial analysis error",
-            "is_publishable": True,
+            "category_reason": "AI unavailable: conservative fallback, do not boost",
+            "is_publishable": False,
             "translation_notes": [],
-            "model": "fallback",
+            "model": "fallback_model_unavailable",
+            "ai_failed": True,
         }
 
 
@@ -7818,6 +7869,7 @@ def translate_ordered_content_blocks(source_title, blocks, source_url="", forced
     try:
         title = forced_title or v721_ensure_italian_title(title or source_title, source_title, source_text_joined, source_url)
         content_html = v721_assemble_ordered_html_from_blocks(blocks, block_map, source_title, source_text_joined, source_url, forced_category, excluded_image_urls=excluded_image_urls)
+        content_html = v722_normalize_instagram_anchor_embeds(content_html)
         title, content_html = apply_translation_glossary(title, content_html)
         title, content_html = v69_apply_translation_guardrails(title, content_html, source_title, source_text_joined)
         title, content_html = repair_protected_source_facts(source_title, source_text_joined, title, content_html)
@@ -7838,6 +7890,43 @@ def translate_ordered_content_blocks(source_title, blocks, source_url="", forced
     except Exception as e:
         print(f"[BLOCKSEQ v72.1] Validazione/assemblaggio fallito: {e}")
         return None, "validation"
+
+
+# ===== v72.2: Instagram embed normalization and safer model-fail stop =====
+# Se un modello e' davvero indisponibile durante una run AI-first, meglio fermarsi dopo il primo
+# candidato fallito invece di consumare scraping/WP su articoli che non potranno essere tradotti.
+MAX_MODEL_FAIL_STREAK = int(os.getenv("MAX_MODEL_FAIL_STREAK", "1"))
+
+def v722_normalize_instagram_anchor_embeds(html):
+    """Converte paragrafi-link Instagram in URL nudo, cosi WordPress/plugin crea l'embed.
+
+    Esempio:
+    <p><a href="https://www.instagram.com/p/DYAa7WFFBqD/">Guarda il post su Instagram</a></p>
+    -> https://www.instagram.com/p/DYAa7WFFBqD/
+    """
+    if not html or "instagram.com" not in html:
+        return html
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        changed = False
+        for p in soup.find_all("p"):
+            # Considera solo paragrafi che contengono un singolo link e poco altro testo.
+            links = p.find_all("a", href=True)
+            if len(links) != 1:
+                continue
+            a = links[0]
+            href = normalize_embed_url(a.get("href", ""))
+            if not re.match(r"^https?://(www\.)?instagram\.com/(p|reel|tv)/[^/?#]+/?$", href, flags=re.I):
+                continue
+            visible = sanitize_text(p.get_text(" ", strip=True)).lower()
+            if visible and ("instagram" not in visible and visible not in {href.lower(), "guarda il post", "view this post"}):
+                continue
+            p.replace_with(BeautifulSoup(f"\n\n{href}\n\n", "html.parser"))
+            changed = True
+        return str(soup) if changed else html
+    except Exception as e:
+        print(f"[EMBED v72.2] Normalizzazione Instagram fallita: {e}")
+        return html
 
 # ===== v72 compatibility wrappers =====
 # Non disattiviamo piu' Gemini per tipo/categoria: la decisione primaria avviene in v72_editorial_analysis().
