@@ -3567,3 +3567,155 @@ However, if you want to parse some data that happens to look like a URL, then no
 [BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 4 candidati provati | mode=normal
 ===== RUN END [2026-05-08 16:05:26] VERSION [v72_1_ai_block_repair_italian_titles (01c66f4)] =====
 
+
+===== RUN START [2026-05-08 16:12:05] VERSION [v72_1_ai_block_repair_italian_titles (8925023)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (36/75): TNA Slammiversary 2026 To Start In Afternoon, Won't Go Up Against AEW Forbidden Door
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167614/wwe-big-e-kofi-kingston-xavier-woods-new-day-status-depart/
+[SKIP] Score sotto soglia editoriale (72/75): Backstage Report On Expectations For John Cena's WWE Backlash Announcement
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167604/jacob-fatu-roman-reigns-wwe-backlash-2026-fans/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167602/wwe-brock-lesnar-alumni-moved/
+[SKIP] Score sotto soglia editoriale (0/75): WWE Backlash 2026 Predictions: Wrestling Inc. Picks The Winners
+[SKIP] Score sotto soglia editoriale (18/75): Will Ospreay Lays Out Differences Between Working In NJPW & AEW
+[SKIP] Score sotto soglia editoriale (0/75): TNA Impact 5/7/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167589/tna-impact-lei-ying-lee-arianna-grace-regains-knockouts-title/
+[SKIP] Score sotto soglia editoriale (36/75): Conor McGregor Eyeing Third UFC Title In A Different Weight Class
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167580/tna-impact-system-bear-bronson-brian-myers-nic-nemeth-kc-navarro-retains-tag-title/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164140/wwe-dakota-kai-charlie-2025-release-more-shock-previous-exit/
+[SKIP] Score sotto soglia editoriale (54/75): Bully Ray Lays Out Options For John Cena's WWE Backlash 2026 Announcement
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167535/tna-thursday-night-impact-may-7-two-titles-up-for-grabs-no-disqualification-match-more/
+[SKIP] Score sotto soglia editoriale (72/75): John Cena Says Backlash 2026 Announcement Will 'Shock The Very Foundation Of WWE'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167443/aew-will-ospreay-lingering-effects-neck-surgery-recovery/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167360/aew-dynamite-changes-ted-turner-death-sting-appearance/
+[SKIP] Score sotto soglia editoriale (24/75): WWE's Natalya Pays Tribute To Late Star Owen Hart On What Would Be His 61st Birthday
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-scrapped-major-plans-gunther-before-cody-rhodes-feud/
+[SKIP] URL già in history: https://www.ringsidenews.com/number-wwe-talent-asked-take-pay-cuts-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/original-plans-jc-mateo-revealed-before-wwe-release/
+[SKIP] Score sotto soglia editoriale (5/75): New Details Reveal Dark Side of the Ring Season 7's TNA Story Isn't What Fans Expect
+[SKIP] Score sotto soglia editoriale (43/75): AMC's Reaction to Broken Matt Hardy's TNA Return Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/new-wwe-contract-clauses-under-tko-could-restrict-talent-freedom-long-deals-expire/
+[SKIP] URL già in history: https://www.ringsidenews.com/eric-bischoff-defends-tko-asking-wwe-talent-take-pay-cuts/
+[SKIP] Score sotto soglia editoriale (67/75): What John Cena's Major Announcement at WWE Backlash 2026 Is Really About
+[SKIP] URL già in history: https://www.ringsidenews.com/paul-heyman-admits-he-no-idea-about-brock-lesnars-retirement-wrestlemania-42/
+[SKIP] URL già in history: https://www.ringsidenews.com/eric-bischoff-says-wwe-letting-new-day-leave-makes-sense-financially/
+[SKIP] URL già in history: https://www.ringsidenews.com/backstage-reaction-gingerbread-man-storyline-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-smackdown-preview-may-8-2026-confirmed-matches-start-time-how-watch/
+[SKIP] Score sotto soglia editoriale (7/75): Andrade's Kissing Spot at AEW Grand Slam Australia Came Together at the Last Minute
+[SCORE] 65 medium - WWE SmackDown Gingerbread Man Angle Reportedly Received 'Pushback' From Creative | WWE/main roster, nomi forti titolo: trick williams, WWE main roster + storyline/evento, rumor/backstage, show settimanale, v71 freshness=0.605, v48 tier2: 55-74
+[SCORE] 53 low - Backstage Update On Roman Reigns' WWE Status Following Schedule Change | WWE/main roster, top star titolo: roman reigns, rumor/backstage, v71 freshness=0.607, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - Opening Segment for May 8 WWE SmackDown Revealed | WWE/main roster, WWE main roster + storyline/evento, show settimanale, floor WWE main roster storyline, v71 source reliability soft penalty, v71 freshness=0.575, v48 tier3: 45-54 contestuale
+[SCORE] 43 low - WWE Wanted The New Day to Transition Out of Full-Time Wrestling Before Departure | WWE/main roster, impatto roster/storyline, release/addio, v71 source reliability soft penalty, v71 freshness=0.564, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash
+[GEMINI] Modello attivo: gemini-2.5-flash
+[BOT] News candidate totali: 4 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: WWE SmackDown Gingerbread Man Angle Reportedly Received 'Pushback' From Creative
+[BOT] semantic_id=wwe-smackdown-gingerbread-man-angle-reportedly-received-pushback-from-creative
+[SCORE] iniziale=65 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-flash
+[EDITORIAL v72] type=PREVIEW conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash | La notizia principale è un report di Fightful Select su frizioni creative WWE riguardo l'angle del Gingerbread Man tra Sami Zayn e Trick Williams, indicando un rumor backstage. La categoria è WWE dato il focus. | guardrail hard type
+[EDITORIAL v72] translation_notes=Il titolo 'United States Championship' deve rimanere in inglese.; 'Pushback' da 'Creative' va tradotto con 'opposizione' o 'critiche' da parte del team creativo, non un calco.; 'Angle' può essere tradotto come 'segmento' o 'angle' a seconda del contesto.
+[PERF v71] analisi editoriale AI v72: 9.85s
+[SCORE] raffinato=100 priority=high | WWE/main roster, nomi forti titolo: trick williams, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship
+[V71] story_signature=wwe_smackdown_gingerbread_man|angle_reportedly_received|pushback_from_creative|preview|wwe|smackdown|wrestlemania|backlash semantic_status=new_story freshness=0.605
+[PERF v71] WP recent posts dedupe: 2.41s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 2.78s
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-flash
+[GEMINI] Modello gemini-2.5-flash scartato: Expecting ',' delimiter: line 1 column 518 (char 517)
+[BLOCKSEQ v72.1] Primo tentativo strutturato fallito: Expecting ',' delimiter: line 1 column 518 (char 517) | fallback a batch TEXT-only
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-flash
+[BLOCKSEQ v72.1] Batch tradotto con gemini-2.5-flash: 4 blocchi
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-flash
+[TITLE v72.1] Titolo finalizzato con AI (gemini-2.5-flash): WWE SmackDown: la storyline del Gingerbread Man avrebbe suscitato contrarietà dal team creativo
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwe-smackdown-gingerbread-man-angle-reportedly-received-pushback-from-creative/intro-1778255233.jpg
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-flash
+[GEMINI] Modello gemini-2.5-flash scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[TITLE v72.1] Repair titolo AI fallito: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[PERF v71] traduzione: 43.52s
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash-lite
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash
+[TITLE v72.1] Repair titolo AI fallito: Nessun modello disponibile
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.09s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-smackdown-gingerbread-man-angle-reportedly-received-pushback-from-creative/l-intro-1778255233.jpg
+[MEDIA] Immagine caricata: 3961
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.86s
+[PERF v71] totale articolo pubblicato 'WWE SmackDown Gingerbread Man Angle Reportedly Received 'Pus': 60.41s
+[OK] Pubblicato: WWE SmackDown: la storyline del Gingerbread Man avrebbe suscitato contrarietà dal team creativo
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[BOT] semantic_id=backstage-update-on-roman-reigns-wwe-status-following-schedule-change
+[SCORE] iniziale=53 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash-lite
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash
+[EDITORIAL v72] Analisi AI fallita: Nessun modello disponibile | fallback type=RUMOR, category=BUSINESS (15)
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: roman reigns, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v62 categoria business
+[V71] story_signature=roman_reigns|backstage_update_on_roman|reigns_wwe_status_following|business|wwe|raw|tko|wrestlemania semantic_status=new_story freshness=0.607
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[SKIP] News core già pubblicata da altra fonte: Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Opening Segment for May 8 WWE SmackDown Revealed
+[BOT] semantic_id=opening-segment-for-may-8-wwe-smackdown-revealed
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=0
+[BOT] Embed trovati: 1
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash-lite
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash
+[EDITORIAL v72] Analisi AI fallita: Nessun modello disponibile | fallback type=PREVIEW, category=WWE (4)
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star lead: cody rhodes, nomi forti lead: cody rhodes, WWE main roster + storyline/evento, ritorno/debutto, combo top name lead + evento forte, PLE/PPV, v62 titolo/championship
+[V71] story_signature=opening_segment|wwe_smackdown_revealed|preview|wwe|smackdown|backlash semantic_status=new_story freshness=0.575
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash-lite
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash
+[BLOCKSEQ v72.1] Primo tentativo strutturato fallito: Nessun modello disponibile | fallback a batch TEXT-only
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash-lite
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash
+[BLOCKSEQ v72.1] Fallback a blocchi fallito: Nessun modello disponibile
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash-lite
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash
+[TRANSLATE] Errore: Nessun modello disponibile
+[SKIP] Traduzione fallita: Opening Segment for May 8 WWE SmackDown Revealed (err_type=validation)
+[FAILED] URL sospeso 24h dopo 2 validation fail: Opening Segment for May 8 WWE SmackDown Revealed
+[BOT] Elaborazione: WWE Wanted The New Day to Transition Out of Full-Time Wrestling Before Departure
+[BOT] semantic_id=wwe-wanted-the-new-day-to-transition-out-of-full-time-wrestling-before-departure
+[SCORE] iniziale=43 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=17, image=0, embed=0
+[BOT] Embed trovati: 1
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash-lite
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash
+[EDITORIAL v72] Analisi AI fallita: Nessun modello disponibile | fallback type=RUMOR, category=BUSINESS (15)
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v62 categoria business
+[V71] story_signature=wwe_wanted_the_new|transition_out|full_time_wrestling_before_departure|contract|wwe|tko semantic_status=new_story freshness=0.68
+[PERF v71] WP lookup event_key: 1.19s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.57s
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash-lite
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash
+[BLOCKSEQ v72.1] Primo tentativo strutturato fallito: Nessun modello disponibile | fallback a batch TEXT-only
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash-lite
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash
+[BLOCKSEQ v72.1] Fallback a blocchi fallito: Nessun modello disponibile
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash-lite
+[GEMINI] Skip modello saturo in questa run: gemini-2.5-flash
+[TRANSLATE] Errore: Nessun modello disponibile
+[SKIP] Traduzione fallita: WWE Wanted The New Day to Transition Out of Full-Time Wrestling Before Departure (err_type=validation)
+[FAILED] URL sospeso 24h dopo 2 validation fail: WWE Wanted The New Day to Transition Out of Full-Time Wrestling Before Departure
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 4 candidati provati | mode=normal
+===== RUN END [2026-05-08 16:12:05] VERSION [v72_1_ai_block_repair_italian_titles (8925023)] =====
+
