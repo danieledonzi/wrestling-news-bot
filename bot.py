@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v72_ai_first_editorial_analysis_25"
+BOT_VERSION = "v72_1_ai_block_repair_italian_titles"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -6887,6 +6887,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     news_data = v63_editorial_finalize(news_data, title, text_for_translation or full_text, link)
     news_data["titolo"] = v63_humanize_title(news_data["titolo"], title, text_for_translation or full_text)
     news_data["titolo"] = v65_proper_case_title(news_data["titolo"])
+    news_data["titolo"] = v721_ensure_italian_title(news_data["titolo"], title, text_for_translation or full_text, link)
     news_data["testo"] = v63_humanize_body_html(news_data.get("testo", ""))
 
     quote_check_v71 = validate_quote_preservation_v71(text_for_translation or full_text, news_data.get("testo", ""))
@@ -6993,6 +6994,21 @@ def run_bot():
             pending_processed += 1
             if status == "published":
                 pending_published += 1
+                # v72.1: blacklist immediata di run/history in memoria.
+                # Evita che la stessa news pubblicata da pending venga rianalizzata tra le nuove.
+                if pitem.get("url"):
+                    history.setdefault("urls", set()).add(pitem.get("url"))
+                if pitem.get("semantic_id"):
+                    history.setdefault("semantic_ids", set()).add(pitem.get("semantic_id"))
+                if pitem.get("title_key"):
+                    history.setdefault("title_keys", set()).add(pitem.get("title_key"))
+                    seen_news_core_keys.add(make_news_core_key(pitem.get("title", ""), pitem.get("summary", "")))
+                if pitem.get("story_signature_v71"):
+                    seen_story_signatures_v71.add(pitem.get("story_signature_v71"))
+                    history.setdefault("story_signatures_v71", set()).add(pitem.get("story_signature_v71"))
+                if pitem.get("event_key"):
+                    seen_event_keys.add(pitem.get("event_key"))
+                    history.setdefault("event_keys", set()).add(pitem.get("event_key"))
                 wp_fail_streak = 0
             elif status == "wp_firewall":
                 print("[BOT] Firewall Imunify360 rilevato durante pending: stop per evitare spreco API")
@@ -7038,6 +7054,19 @@ def run_bot():
 
         if item.get("editorial_tier") == "tier4" and tier4_published >= MAX_TIER4_PER_RUN:
             print(f"[SKIP] Tier4 gia' usato in questa run: {item.get('title')}")
+            continue
+
+        # v72.1: pending pubblicati nella stessa run aggiornano history in memoria.
+        # Skippa prima di scraping/Gemini se URL/semantic/title/signature sono ormai noti.
+        item_sig_early_v721 = item.get("story_signature_v71") or build_story_signature_v71(item.get("title", ""), item.get("summary", ""), item.get("url", "")).get("signature", "")
+        if (
+            item.get("url") in history.get("urls", set())
+            or item.get("semantic_id") in history.get("semantic_ids", set())
+            or (item.get("title_key") and item.get("title_key") in history.get("title_keys", set()))
+            or (item_sig_early_v721 and item_sig_early_v721 in seen_story_signatures_v71)
+        ):
+            print(f"[SKIP v72.1] Gia pubblicata da pending in questa run: {item.get('title')}")
+            remove_pending_url(item.get("url"))
             continue
 
         new_processed += 1
@@ -7524,6 +7553,291 @@ JSON richiesto:
             "translation_notes": [],
             "model": "fallback",
         }
+
+
+# =========================
+# v72.1: AI-first ottimizzato a blocchi, repair blocchi mancanti, blacklist run pending, titoli italiani
+# =========================
+
+V721_ALWAYS_AI_TITLE_REPAIR = os.getenv("V72_ALWAYS_AI_TITLE_REPAIR", "1") == "1"
+V721_BLOCK_REPAIR_CHUNK_SIZE = int(os.getenv("V72_BLOCK_REPAIR_CHUNK_SIZE", "14"))
+
+_ORIG_V72_translate_ordered_content_blocks = translate_ordered_content_blocks
+
+
+def v721_title_needs_ai_repair(title, source_title=""):
+    t = sanitize_text(title or "")
+    if not t:
+        return True
+    low = normalize_for_check(t)
+    source_low = normalize_for_check(source_title or "")
+    english_markers = [
+        "asked to", "revealed", "before wwe release", "backstage report", "major plans",
+        "says", "admits", "had no idea", "moved to", "after", "before", "wwe departure",
+        "take pay cuts", "scrapped", "defends", "leaving", "status after", "original plans",
+    ]
+    italian_markers = [
+        " il ", " la ", " lo ", " gli ", " le ", " un ", " una ", " degli ", " delle ",
+        "della", "dalla", "alla", "sulla", "per", "prima", "dopo", "contro", "rivela",
+        "ammette", "spiega", "secondo", "licenziamento", "addio", "taglio", "stipendi",
+    ]
+    if title_soft_validation_failed(t) or title_is_broken(t):
+        return True
+    if re.search(r"\bsono stati chiesti\b", low) or re.search(r"\bsono state chieste\b", low):
+        return True
+    if any(m in low for m in english_markers):
+        return True
+    # Se e' quasi identico al titolo sorgente inglese, va riscritto.
+    if source_low and v71_jaccard(low, source_low) > 0.72 and any(m in source_low for m in english_markers):
+        return True
+    # Frasi senza segnali italiani: sospette, salvo titoli molto brevi con soli nomi propri/show.
+    if len(t.split()) >= 5 and not any(m in f" {low} " for m in italian_markers):
+        return True
+    return False
+
+
+def v721_deterministic_title_cleanup(title):
+    t = sanitize_text(title or "")
+    if not t:
+        return t
+    # Fix grammaticale osservato in run: "Quanti wrestler WWE sono stati chiesti..."
+    t = re.sub(
+        r"^Quanti\s+wrestler\s+WWE\s+sono\s+stati\s+chiesti\s+(un|una)\s+taglio\s+degli\s+stipendi\??",
+        "A quanti wrestler WWE è stato chiesto un taglio dello stipendio",
+        t,
+        flags=re.I,
+    )
+    t = re.sub(
+        r"^Quanti\s+wrestler\s+WWE\s+sono\s+stati\s+chiesti\s+di\s+accettare\s+tagli\s+salariali\??",
+        "A quanti wrestler WWE è stato chiesto di accettare tagli salariali",
+        t,
+        flags=re.I,
+    )
+    # Casing per nomi propri estratti e acronimi/show.
+    t = v69_restore_source_proper_case(t, t)
+    t = v61_restore_proper_case(t)
+    t = v65_proper_case_title(t)
+    return sanitize_text(t).strip(" .")
+
+
+def v721_ensure_italian_title(title, source_title="", source_text="", source_url=""):
+    """Ultimo pass editoriale sul titolo. Usa Gemini solo sul titolo, non sull'articolo intero."""
+    t = v721_deterministic_title_cleanup(title)
+    if not V721_ALWAYS_AI_TITLE_REPAIR and not v721_title_needs_ai_repair(t, source_title):
+        return t
+    # In ogni caso, se il titolo e' gia buono e l'env disabilita repair totale, non spendere token.
+    if not v721_title_needs_ai_repair(t, source_title) and not V721_ALWAYS_AI_TITLE_REPAIR:
+        return t
+    context = extract_main_scoring_text(source_text or "", max_paragraphs=3, max_chars=900)
+    prompt = f"""
+Sei un caporedattore italiano di news wrestling.
+Riscrivi SOLO il titolo in italiano naturale, corretto e pubblicabile.
+Non inventare fatti. Non usare inglese salvo nomi propri, show, federazioni e titoli ufficiali.
+Non tradurre nomi di titoli/cinture ufficiali WWE/AEW/TNA/NXT/ROH/NJPW/AAA.
+Nel wrestling italiano "release/released/departure" NON e' "rilascio": usa licenziamento, addio o uscita in base al contesto.
+Correggi grammatica, casing dei nomi propri e calchi inglesi.
+Restituisci SOLO JSON valido in una riga: {{"titolo":"..."}}
+
+Titolo originale inglese:
+{source_title}
+
+Titolo italiano attuale da correggere:
+{t}
+
+Contesto breve:
+{context}
+"""
+    try:
+        data, used_model = generate_and_parse_json(prompt)
+        fixed = sanitize_text(str(data.get("titolo", "")))
+        fixed = v721_deterministic_title_cleanup(fixed)
+        if fixed and not title_is_broken(fixed) and not title_soft_validation_failed(fixed):
+            if fixed != t:
+                print(f"[TITLE v72.1] Titolo finalizzato con AI ({used_model}): {fixed}")
+            return fixed
+    except Exception as e:
+        print(f"[TITLE v72.1] Repair titolo AI fallito: {e}")
+    return t or generate_fallback_title(source_title, source_text, source_url, title)
+
+
+def v721_text_block_translation_prompt(source_title, source_payload, forced_category, protected_facts_block, extra_instruction=""):
+    return f"""
+Sei un giornalista italiano esperto di wrestling.
+Traduci e adatta in italiano naturale SOLO i blocchi testuali JSON forniti.
+Non aggiungere embed, link, immagini o placeholder: il codice li reinserira' nella sequenza originale.
+Mantieni esattamente gli stessi ID dei blocchi. Non fondere blocchi diversi. Non inventare dettagli.
+Restituisci SOLO JSON valido in UNA SOLA RIGA nel formato: {{"blocks":{{"TEXT_001":"<p>...</p>"}}}}
+
+REGOLE:
+- Ogni blocco deve restare aderente al blocco originale corrispondente.
+- HTML consentito solo con <p>, <b>, <blockquote>.
+- Se un blocco e' titolo di sezione/match, rendilo come <p><b>...</b></p>.
+- Rimuovi riferimenti promozionali alla fonte, stay tuned, commenti, hub dedicati.
+- Non chiudere con domande ai lettori.
+- Mantieni in inglese stipulazioni e termini wrestling ufficiali: match, promo, segment, storyline, tag team, Last Man Standing, WarGames, Royal Rumble, Hell in a Cell.
+- Date americane in formato italiano.
+- Quote/citazioni: traduzione fedele, non parafrasi libera.
+- Release/released/roster cuts: non usare rilascio/rilasciato; usa licenziamento, licenziato/licenziata, addio o uscita in base al contesto.
+- Titoli/cinture ufficiali da non tradurre mai: {', '.join(PROTECTED_CHAMPIONSHIP_TERMS_V69)}
+{extra_instruction}
+
+ELEMENTI PROTETTI:
+{protected_facts_block}
+
+TITOLO ORIGINALE:
+{source_title}
+
+CATEGORIA WORDPRESS GIA DECISA:
+{forced_category}
+
+BLOCCHI TESTUALI JSON:
+{json.dumps(source_payload, ensure_ascii=False)}
+"""
+
+
+def v721_translate_text_blocks_chunked(source_title, source_payload, forced_category, protected_facts_block, translation_notes=None):
+    """Fallback corretto: traduce solo TEXT_xxx in batch piccoli, mai l'articolo intero."""
+    if not source_payload:
+        return {}
+    items = list(source_payload.items())
+    translated = {}
+    notes = translation_notes or []
+    extra = ""
+    if notes:
+        extra = "\nNOTE EDITORIALI DALL'ANALISI AI:\n" + "\n".join(f"- {n}" for n in notes[:6])
+    for i in range(0, len(items), V721_BLOCK_REPAIR_CHUNK_SIZE):
+        chunk = dict(items[i:i + V721_BLOCK_REPAIR_CHUNK_SIZE])
+        prompt = v721_text_block_translation_prompt(source_title, chunk, forced_category, protected_facts_block, extra_instruction=extra)
+        data, used_model = generate_and_parse_json(prompt)
+        block_map = data.get("blocks") if isinstance(data, dict) else None
+        if not isinstance(block_map, dict):
+            raise ValueError("fallback blocchi: blocks mancante")
+        for k, v in block_map.items():
+            if k in chunk:
+                translated[k] = str(v)
+        missing = [k for k in chunk if k not in translated]
+        if missing:
+            raise ValueError(f"fallback blocchi: mancano {missing}")
+        print(f"[BLOCKSEQ v72.1] Batch tradotto con {used_model}: {len(chunk)} blocchi")
+    return translated
+
+
+def v721_repair_missing_text_blocks(source_title, full_payload, current_block_map, missing_ids, forced_category, protected_facts_block, translation_notes=None):
+    missing_payload = {mid: full_payload[mid] for mid in missing_ids if mid in full_payload}
+    if not missing_payload:
+        return current_block_map
+    print(f"[BLOCKSEQ v72.1] Repair mirato blocchi mancanti: {list(missing_payload.keys())[:8]}")
+    repaired = v721_translate_text_blocks_chunked(source_title, missing_payload, forced_category, protected_facts_block, translation_notes=translation_notes)
+    merged = dict(current_block_map or {})
+    merged.update(repaired)
+    return merged
+
+
+def v721_assemble_ordered_html_from_blocks(blocks, block_map, source_title, source_text_joined, source_url, forced_category, excluded_image_urls=None):
+    html_parts = []
+    seen_text_before_image = False
+    skipped_leading_image = False
+    for b in blocks:
+        btype = b.get("type")
+        if btype == "embed":
+            rendered = render_embed_block(b.get("url", ""))
+            if rendered:
+                html_parts.append(rendered)
+        elif btype == "image":
+            if V71_SKIP_LEADING_INLINE_IMAGE and not seen_text_before_image and not skipped_leading_image:
+                skipped_leading_image = True
+                print(f"[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: {b.get('src', '')}")
+                continue
+            rendered = render_image_block(b.get("src", ""), b.get("alt", ""), excluded_image_urls=excluded_image_urls)
+            if rendered:
+                html_parts.append(rendered)
+        elif btype == "text":
+            seen_text_before_image = True
+            html = block_map.get(b.get("id"), "")
+            html = fix_mojibake(str(html))
+            html = refine_body_text(html)
+            _, html = apply_translation_glossary("", html)
+            html = remove_source_promos_from_html(html)
+            if html and not re.search(r"<p\b|<blockquote\b|<b\b", html, flags=re.I):
+                html = f"<p>{html}</p>"
+            if html:
+                html_parts.append(html)
+    content_html = "\n\n".join(x.strip() for x in html_parts if x and x.strip())
+    _, content_html = apply_translation_glossary("", content_html)
+    _, content_html = v69_apply_translation_guardrails("", content_html, source_title, source_text_joined)
+    _, content_html = repair_protected_source_facts(source_title, source_text_joined, "", content_html)
+    tmp = v63_editorial_finalize({"titolo": source_title, "testo": content_html, "categoria": forced_category}, source_title, source_text_joined, source_url)
+    return tmp["testo"]
+
+
+def translate_ordered_content_blocks(source_title, blocks, source_url="", forced_title=None, forced_category=None, excluded_image_urls=None):
+    """v72.1: traduzione sempre a blocchi. Se JSON/blocchi falliscono, ripara solo i blocchi mancanti o traduce i TEXT in batch."""
+    text_blocks = [b for b in blocks if b.get("type") == "text" and b.get("text")]
+    if not text_blocks:
+        return None, "validation"
+    source_text_joined = "\n\n".join(b.get("text", "") for b in text_blocks)
+    results_mode = is_results_article(source_title, source_url, source_text_joined)
+    forced_category = int(forced_category) if forced_category is not None else (REPORT_CATEGORY_ID if results_mode else detect_source_category(source_title, source_text_joined, source_url))
+    protected_facts = build_protected_facts_for_prompt(source_title, source_text_joined)
+    protected_facts_block = "\n".join(f"- {fact}" for fact in protected_facts) if protected_facts else "- Nessun elemento specifico rilevato."
+    source_payload = {b["id"]: b["text"] for b in text_blocks[:120]}
+    editorial_notes = []
+
+    # Primo tentativo: unico JSON strutturato completo, solo TEXT_xxx.
+    title_rule = f'Titolo gia deciso dal sistema: "{forced_title}". Non riscriverlo.' if forced_title else "Traduci anche il titolo in italiano naturale."
+    prompt = v721_text_block_translation_prompt(
+        source_title,
+        source_payload,
+        forced_category,
+        protected_facts_block,
+        extra_instruction=f"\n- {title_rule}\nJSON richiesto: {{\"titolo\":\"stringa\",\"categoria\":{forced_category},\"blocks\":{{\"TEXT_001\":\"html\"}}}}"
+    )
+    title = forced_title or ""
+    block_map = {}
+    try:
+        data, used_model = generate_and_parse_json(prompt)
+        title = forced_title or sanitize_text(re.sub(r"<[^<]+?>", "", str(data.get("titolo", ""))).strip())
+        block_map = data.get("blocks") or {}
+        if not isinstance(block_map, dict):
+            raise ValueError("blocks mancante o non valido")
+        missing = [b["id"] for b in text_blocks if b["id"] not in block_map]
+        if missing:
+            block_map = v721_repair_missing_text_blocks(source_title, source_payload, block_map, missing, forced_category, protected_facts_block, editorial_notes)
+            missing = [b["id"] for b in text_blocks if b["id"] not in block_map]
+            if missing:
+                raise ValueError(f"Blocchi ancora mancanti dopo repair: {missing[:8]}")
+        print(f"[BLOCKSEQ v72.1] Traduzione strutturata ottenuta con: {used_model} | blocchi testo={len(text_blocks)}")
+    except Exception as e:
+        print(f"[BLOCKSEQ v72.1] Primo tentativo strutturato fallito: {e} | fallback a batch TEXT-only")
+        try:
+            block_map = v721_translate_text_blocks_chunked(source_title, source_payload, forced_category, protected_facts_block, translation_notes=editorial_notes)
+        except Exception as e2:
+            print(f"[BLOCKSEQ v72.1] Fallback a blocchi fallito: {e2}")
+            return None, ("model" if is_capacity_error(e2) else "validation")
+
+    try:
+        title = forced_title or v721_ensure_italian_title(title or source_title, source_title, source_text_joined, source_url)
+        content_html = v721_assemble_ordered_html_from_blocks(blocks, block_map, source_title, source_text_joined, source_url, forced_category, excluded_image_urls=excluded_image_urls)
+        title, content_html = apply_translation_glossary(title, content_html)
+        title, content_html = v69_apply_translation_guardrails(title, content_html, source_title, source_text_joined)
+        title, content_html = repair_protected_source_facts(source_title, source_text_joined, title, content_html)
+        title = v721_ensure_italian_title(title, source_title, source_text_joined, source_url) if not forced_title else forced_title
+        tmp = v63_editorial_finalize({"titolo": title, "testo": content_html, "categoria": forced_category}, source_title, source_text_joined, source_url)
+        title = tmp["titolo"]
+        content_html = tmp["testo"]
+        if body_looks_suspicious(content_html):
+            raise ValueError("Body sospetto o troppo meta")
+        protected_issues = validate_protected_source_facts(source_title, source_text_joined, title, content_html)
+        if protected_issues:
+            raise ValueError(f"Fatti/nomi sorgente alterati: {protected_issues}")
+        if results_mode:
+            warn = result_article_integrity_warning(source_text_joined, content_html)
+            if warn:
+                print(f"[BLOCKSEQ v72.1] Warning results: {warn}")
+        return {"titolo": title, "testo": content_html, "categoria": forced_category}, "ok"
+    except Exception as e:
+        print(f"[BLOCKSEQ v72.1] Validazione/assemblaggio fallito: {e}")
+        return None, "validation"
 
 # ===== v72 compatibility wrappers =====
 # Non disattiviamo piu' Gemini per tipo/categoria: la decisione primaria avviene in v72_editorial_analysis().
