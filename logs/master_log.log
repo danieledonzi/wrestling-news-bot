@@ -2095,3 +2095,139 @@
 [BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 6 candidati provati | mode=normal
 ===== RUN END [2026-05-08 10:00:56] VERSION [v67_gemini_category_report_editoriali_fix (cc726ba)] =====
 
+
+===== RUN START [2026-05-08 10:44:57] VERSION [v68_semantic_freshness_reports_opinion_cap (e9842f3)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (0/75): TNA Impact 5/7/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (36/75): Conor McGregor Eyeing Third UFC Title In A Different Weight Class
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167580/tna-impact-system-bear-bronson-brian-myers-nic-nemeth-kc-navarro-retains-tag-title/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164140/wwe-dakota-kai-charlie-2025-release-more-shock-previous-exit/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167535/tna-thursday-night-impact-may-7-two-titles-up-for-grabs-no-disqualification-match-more/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167443/aew-will-ospreay-lingering-effects-neck-surgery-recovery/
+[SKIP] Score sotto soglia editoriale (30/75): WWE's Natalya Pays Tribute To Late Star Owen Hart On What Would Be His 61st Birthday
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167276/wwe-backlash-paul-heyman-roman-reigns-jacob-fatu-completely-upside-down/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167259/tko-president-mark-shapiro-addresses-future-wwe-ufc-saudi-arabia/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167203/wcw-eric-bischoff-ted-turner-comments-death-elon-musk-his-time/
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2167195/aew-wwe-will-ospreay-kofi-kingston-xavier-woods-love/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167178/dave-meltzer-wwe-releases-talent-pay-cuts/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166864/david-otunga-defends-lack-dq-wwe-wrestlemania-42-main-event/
+[SKIP] Score sotto soglia editoriale (29/75): Report: Raja Jackson Reaches Plea Deal After Alleged In-Ring Assault
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166821/wwe-rivals-new-episodes-ric-flair-charlotte/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (18/75): Andrade's Kissing Spot at AEW Grand Slam Australia Came Together at the Last Minute
+[SKIP] Score sotto soglia editoriale (14/75): Chelsea Green Reveals Health Status Following Heart Procedure
+[SKIP] URL già in history: https://www.ringsidenews.com/seth-rollins-reveals-real-reason-he-created-vision-wrestlemania-41/
+[SKIP] Score sotto soglia editoriale (18/75): TNA Moves Slammiversary Start Time to Avoid Direct Clash With AEW x NJPW Forbidden Door 2026
+[SKIP] URL già in history: https://www.ringsidenews.com/nick-khan-testified-doj-probe-vince-mcmahon-included-trafficking-allegations/
+[SKIP] URL già in history: https://www.ringsidenews.com/logan-paul-flips-joe-hendrys-diss-song-we-admire-logan-paul-parody-video/
+[SKIP] Score sotto soglia editoriale (0/75): Bubba the Love Sponge Claims Hulk Hogan Was a Victim in $890K Federal Fraud Case
+[SKIP] URL già in history: https://www.ringsidenews.com/shawn-michaels-reveals-his-wife-negotiated-his-current-wwe-contract/
+[SKIP] URL già in history: https://www.ringsidenews.com/when-wwe-planned-john-cenas-appearance-backlash-tampa/
+[SKIP] URL già in history: https://www.ringsidenews.com/sami-zayn-shuts-down-claims-he-turned-heel-attacking-gingerbread-man/
+[SKIP] Score sotto soglia editoriale (32/75): Lizzy Rain Reveals How Her WWE Entrance Theme Came Together
+[SKIP] URL già in history: https://www.ringsidenews.com/nxt-great-american-bash-2026-date-location-venue-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/ireland-wants-host-wwe-wrestlemania-government-push-begins/
+[SKIP] Score sotto soglia editoriale (0/75): Dark Side of the Ring Season 7 Premiere Date and Topics Revealed
+[SCORE] 72 medium - John Cena Says Backlash Announcement Will Shock the Foundation of WWE | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, v68 cap annuncio vago/futuro, v48 tier2: 55-74
+[SCORE] 72 medium - John Cena Says Backlash 2026 Announcement Will 'Shock The Very Foundation Of WWE' | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, titolo/championship, v68 cap annuncio vago/futuro, v48 tier2: 55-74
+[SCORE] 55 low - Lei Ying Lee Regains TNA Knockouts Title After Win Over Arianna Grace On Impact | TNA, titolo/championship, show settimanale, v62 titolo/championship, v68 floor post-show news concreta, v48 tier2: 55-74
+[SCORE] 54 low - Bully Ray Lays Out Options For John Cena's WWE Backlash 2026 Announcement | WWE/main roster, top star titolo: john cena, nomi forti titolo: bully ray, WWE main roster + storyline/evento, v68 cap duro opinion/commentary, v48 tier3: 45-54 contestuale
+[SCORE] 54 low - Backstage News On AEW Dynamite Changes Due To Ted Turner's Death, Sting's Appearance | AEW, show settimanale, v62 reazioni/tributi, v48 tier3: 45-54 contestuale
+[SCORE] 48 low - South African Discus Star Francois Prinsloo Announces WWE Departure | WWE/main roster, impatto roster/storyline, release/addio, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 6 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: John Cena Says Backlash Announcement Will Shock the Foundation of WWE
+[BOT] semantic_id=john-cena-says-backlash-announcement-will-shock-the-foundation-of-wwe
+[SCORE] iniziale=72 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=1
+[BOT] Embed trovati: 2
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TYPE] Gemini: PREVIEW conf=0.90 model=gemini-2.5-flash-lite | L'articolo annuncia un evento futuro (Backlash) e anticipa un annuncio che avverrà durante lo show, senza riportare risultati o eventi già accaduti.
+[SCORE] raffinato=72 priority=medium | WWE/main roster, top star titolo: john cena, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v68 cap annuncio vago/futuro
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - John Cena Says Backlash Announcement Will Shock the Foundation of WWE
+[SKIP] News core già pubblicata da altra fonte: John Cena Says Backlash Announcement Will Shock the Foundation of WWE
+[SKIP] news_core_key=schedule-backlash
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: John Cena Says Backlash 2026 Announcement Will 'Shock The Very Foundation Of WWE'
+[BOT] semantic_id=john-cena-says-backlash-2026-announcement-will-shock-the-very-foundation-of-wwe
+[SCORE] iniziale=72 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TYPE] Gemini: PREVIEW conf=1.00 model=gemini-2.5-flash-lite | Il titolo e il lead indicano un annuncio futuro relativo a un evento (Backlash 2026) e citano un'apparizione pianificata di John Cena per fare delle dichiarazioni. Non si tratta di
+[SCORE] raffinato=72 priority=medium | WWE/main roster, top star titolo: john cena, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 media rights/streaming, v62 categoria business
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - John Cena Says Backlash 2026 Announcement Will 'Shock The Very Foundation Of WWE'
+[FIX] Event key in history ma non confermata su WordPress: event:business:media-rights - provo a pubblicare
+[SKIP] News core già pubblicata da altra fonte: John Cena Says Backlash 2026 Announcement Will 'Shock The Very Foundation Of WWE'
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Lei Ying Lee Regains TNA Knockouts Title After Win Over Arianna Grace On Impact
+[BOT] semantic_id=lei-ying-lee-regains-tna-knockouts-title-after-win-over-arianna-grace-on-impact
+[SCORE] iniziale=55 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[TYPE] Fallback semantico: POST_SHOW_NEWS
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Lei Ying Lee Regains TNA Knockouts Title After Win Over Arianna Grace On Impact
+[SCORE] raffinato=84 priority=high | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v66 cap title match non-title-change
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[CATEGORY] Gemini: TNA (7) conf=1.00 model=gemini-2.5-flash-lite | La notizia riguarda il TNA iMPACT e il titolo Knockouts World Champion detenuto da Lei Ying Lee. Il focus è chiaramente sulla TNA.
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=3
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/lei-ying-lee-regains-tna-knockouts-title-after-win-over-arianna-grace-on-impact/l-intro-1778209731.jpg
+[MEDIA] Immagine caricata: 3904
+[WP] Status attach image: 200
+[OK] Pubblicato: Lei ying lee torna campionessa knockouts dopo aver sconfitto arianna grace a impact
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Bully Ray Lays Out Options For John Cena's WWE Backlash 2026 Announcement
+[BOT] semantic_id=bully-ray-lays-out-options-for-john-cenas-wwe-backlash-2026-announcement
+[SCORE] iniziale=54 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=2, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TYPE] Gemini: OPINION conf=0.90 model=gemini-2.5-flash-lite | Il titolo e il lead indicano un'analisi e speculazione di Bully Ray riguardo a un annuncio futuro di John Cena, rientrando nella categoria OPINION.
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star titolo: john cena, nomi forti titolo: bully ray, WWE main roster + storyline/evento, breaking/major update, PLE/PPV, v62 categoria business, v68 cap duro opinion/commentary
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Bully Ray Lays Out Options For John Cena's WWE Backlash 2026 Announcement
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:business:wwe:wrestlemania-host-bid:host-bid -> event:business:wwe:wrestlemania-host-bid:host-bid-followup-bully-ray-lays-out-options-john-cena-s-backlash-announcement
+[SKIP] News core già pubblicata da altra fonte: Bully Ray Lays Out Options For John Cena's WWE Backlash 2026 Announcement
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Backstage News On AEW Dynamite Changes Due To Ted Turner's Death, Sting's Appearance
+[BOT] semantic_id=backstage-news-on-aew-dynamite-changes-due-to-ted-turners-death-stings-appearance
+[SCORE] iniziale=54 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash
+[TYPE] Gemini: RUMOR conf=0.90 model=gemini-2.5-flash | Articolo svela dettagli e retroscena tramite fonti (Dave Meltzer) su modifiche e decisioni prese per un episodio di Dynamite già andato in onda, chiarendo speculazioni.
+[SCORE] raffinato=100 priority=high | AEW, morte, PLE/PPV, v62 evento morte/storico, v62 reazione/tributo con cap, v62 categoria business
+[FIX] Event key in history ma non confermata su WordPress: event:death:ted-turner:tribute:tony-khan - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[CATEGORY] Gemini: AEW (5) conf=1.00 model=gemini-2.5-flash-lite | La notizia riguarda principalmente AEW Dynamite e modifiche allo show, con un focus su Sting e un tributo a Ted Turner, figura legata alla storia del wrestling e alla fondazione di
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=4
+[WP] Status create: 201
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/backstage-news-on-aew-dynamite-changes-due-to-ted-turners-death-stings-appearance/l-intro-1778183352.jpg
+[MEDIA] Immagine caricata: 3907
+[WP] Status attach image: 200
+[OK] Pubblicato: Aggiornamenti da AEW Dynamite: tributo a Ted Turner e sorpresa sting
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: South African Discus Star Francois Prinsloo Announces WWE Departure
+[BOT] semantic_id=south-african-discus-star-francois-prinsloo-announces-wwe-departure
+[SCORE] iniziale=48 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TYPE] Gemini: POST_SHOW_NEWS conf=1.00 model=gemini-2.5-flash-lite | L'articolo riporta l'annuncio di un ex wrestler riguardo la sua uscita dalla WWE, evento già accaduto.
+[FRESHNESS] Post-show news fresca: non applico blocco preview - South African Discus Star Francois Prinsloo Announces WWE Departure
+[SCORE] raffinato=93 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, contenuto leggero, v62 titolo/championship
+[SKIP] News core già pubblicata da altra fonte: South African Discus Star Francois Prinsloo Announces WWE Departure
+[SKIP] news_core_key=roster-cuts-wwe
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 2 articoli (0 pending + 2 nuove) su 6 candidati provati | mode=normal
+===== RUN END [2026-05-08 10:44:57] VERSION [v68_semantic_freshness_reports_opinion_cap (e9842f3)] =====
+
