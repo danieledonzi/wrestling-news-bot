@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v67_gemini_category_report_editoriali_fix"
+BOT_VERSION = "v68_semantic_freshness_reports_opinion_cap"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -1661,6 +1661,199 @@ JSON richiesto:
         print(f"[CATEGORY] Gemini categoria fallita: {e} | fallback={fallback_slug} ({fallback_id})")
         return fallback_id, fallback_slug, "fallback after gemini error"
 
+
+
+# v68: classificazione semantica del tipo articolo, separata da traduzione e categoria.
+# Serve a distinguere preview scadute, report completi e news post-show fresche.
+ARTICLE_TYPE_VALUES_V68 = {
+    "PREVIEW", "RESULTS_REPORT", "POST_SHOW_NEWS", "OPINION", "RUMOR", "OTHER"
+}
+
+V68_RESULT_ACTION_TERMS = [
+    "wins", "win over", "defeats", "defeated", "beats", "beat", "retains", "retained",
+    "regains", "regained", "captures", "captured", "crowned", "new champion",
+    "title change", "loses title", "vacated", "after win", "after defeating",
+    "mantiene", "vince", "batte", "sconfigge", "riconquista", "nuovo campione", "nuova campionessa",
+]
+
+V68_POST_SHOW_NEWS_TERMS = [
+    "title", "championship", "champion", "knockouts title", "world title", "tag title",
+    "on impact", "on raw", "on smackdown", "on nxt", "on dynamite", "on collision",
+    "during impact", "during raw", "during smackdown", "during nxt", "during dynamite",
+    "nell'ultima puntata", "durante impact", "durante raw", "durante smackdown", "durante nxt",
+]
+
+V68_HARD_OPINION_TERMS = [
+    "lays out options", "floats options", "gives his take", "gives her take", "weighs in",
+    "believes", "thinks", "explains why", "breaks down", "comments on", "reacts to",
+    "predicts", "speculates", "would like to see", "podcast", "interview",
+    "commenta", "spiega perche", "spiega perché", "ritiene", "analizza", "reagisce",
+]
+
+V68_PREVIEW_ONLY_TERMS = [
+    "tonight", "later tonight", "will air", "will open", "will begin", "scheduled for",
+    "set for tonight", "preview", "lineup", "card for tonight", "what to expect",
+    "starting tonight", "to be dedicated", "confirmed matches", "how to watch",
+    "stasera", "andra in onda", "andrà in onda", "iniziera", "inizierà",
+    "preview", "cosa aspettarsi", "card di stasera", "match confermati", "come vedere",
+]
+
+
+def normalize_article_type_v68(value):
+    raw = sanitize_text(str(value or "")).upper()
+    raw = re.sub(r"[^A-Z_]", "_", raw)
+    raw = re.sub(r"_+", "_", raw).strip("_")
+    aliases = {
+        "PREVIEW": "PREVIEW",
+        "FUTURE_PREVIEW": "PREVIEW",
+        "SHOW_PREVIEW": "PREVIEW",
+        "RESULTS": "RESULTS_REPORT",
+        "RESULTS_REPORT": "RESULTS_REPORT",
+        "REPORT": "RESULTS_REPORT",
+        "RECAP": "RESULTS_REPORT",
+        "POST_SHOW": "POST_SHOW_NEWS",
+        "POST_SHOW_NEWS": "POST_SHOW_NEWS",
+        "MATCH_RESULT": "POST_SHOW_NEWS",
+        "TITLE_CHANGE": "POST_SHOW_NEWS",
+        "NEWS": "POST_SHOW_NEWS",
+        "OPINION": "OPINION",
+        "COMMENTARY": "OPINION",
+        "RUMOR": "RUMOR",
+        "RUMOUR": "RUMOR",
+        "OTHER": "OTHER",
+    }
+    return aliases.get(raw, "")
+
+
+def classify_article_type_fallback_v68(title="", text="", url=""):
+    probe = normalize_for_check(f"{title} {url} {extract_main_scoring_text(text or '', max_paragraphs=3, max_chars=1800)}")
+    title_url = normalize_for_check(f"{title} {url}")
+
+    if is_results_article(title, url, text):
+        return "RESULTS_REPORT"
+
+    has_result_action = any(normalize_for_check(t) in probe for t in V68_RESULT_ACTION_TERMS)
+    has_post_show_context = any(normalize_for_check(t) in probe for t in V68_POST_SHOW_NEWS_TERMS)
+    has_title_change = any(x in probe for x in ["new champion", "title change", "wins title", "regains", "retains", "knockouts title", "world title", "tag title", "championship"])
+    if has_result_action and (has_post_show_context or has_title_change):
+        return "POST_SHOW_NEWS"
+
+    # Una preview scaduta deve essere davvero orientata al futuro, non una news su cose gia' avvenute.
+    has_preview = any(normalize_for_check(t) in probe for t in V68_PREVIEW_ONLY_TERMS)
+    if has_preview and not has_result_action:
+        return "PREVIEW"
+
+    if any(normalize_for_check(t) in title_url for t in V68_HARD_OPINION_TERMS):
+        return "OPINION"
+
+    if any(x in probe for x in ["reportedly", "rumor", "rumour", "backstage news", "backstage report", "expected to"]):
+        return "RUMOR"
+
+    return "OTHER"
+
+
+def classify_article_type_with_gemini_v68(title="", text="", url=""):
+    fallback = classify_article_type_fallback_v68(title, text, url)
+
+    # I casi chiari non consumano Gemini: sono guardrail duri.
+    if fallback in {"RESULTS_REPORT", "POST_SHOW_NEWS", "PREVIEW"}:
+        print(f"[TYPE] Fallback semantico: {fallback}")
+        return fallback, "fallback deterministic"
+
+    lead = extract_main_scoring_text(text or "", max_paragraphs=3, max_chars=1600)
+    prompt = f"""
+Sei un caporedattore di un sito italiano di wrestling.
+Devi classificare il TIPO editoriale dell'articolo, senza tradurlo.
+Restituisci SOLO JSON valido in una riga.
+
+Tipi ammessi:
+- PREVIEW: articolo che annuncia cosa succedera' in una puntata/show futuro o gia programmato.
+- RESULTS_REPORT: report/recap completo con risultati di una puntata o evento.
+- POST_SHOW_NEWS: news autonoma su qualcosa gia successo in puntata/evento, per esempio cambio titolo, vittoria, debutto, ritorno, attacco, infortunio.
+- OPINION: commento, analisi, podcast, opinione, speculazione di ex wrestler o giornalista.
+- RUMOR: rumor/backstage non ancora confermato ma con contenuto informativo.
+- OTHER: altro.
+
+Regola critica:
+Una news tipo "Lei Ying Lee regains TNA Knockouts Title after win on Impact" e' POST_SHOW_NEWS, non PREVIEW, anche se cita Impact.
+Una preview tipo "TNA Impact preview/tonight/card" e' PREVIEW e va bloccata se lo show e' gia andato in onda.
+Un report completo tipo "Impact results" e' RESULTS_REPORT.
+
+Titolo:
+{title}
+
+URL:
+{url}
+
+Lead/testo iniziale:
+{lead}
+
+JSON richiesto:
+{{"article_type":"PREVIEW|RESULTS_REPORT|POST_SHOW_NEWS|OPINION|RUMOR|OTHER","confidence":0.0,"reason":"massimo 160 caratteri"}}
+"""
+    try:
+        data, used_model = generate_and_parse_json(prompt)
+        article_type = normalize_article_type_v68(data.get("article_type", ""))
+        confidence = float(data.get("confidence", 0) or 0)
+        reason = sanitize_text(data.get("reason", ""))[:180]
+        if article_type not in ARTICLE_TYPE_VALUES_V68:
+            raise ValueError(f"article_type non valido: {data.get('article_type')}")
+        if confidence < 0.35:
+            print(f"[TYPE] Gemini confidence bassa ({confidence:.2f}), uso fallback {fallback}")
+            return fallback, "fallback low confidence"
+        print(f"[TYPE] Gemini: {article_type} conf={confidence:.2f} model={used_model} | {reason}")
+        return article_type, reason or f"gemini {used_model}"
+    except Exception as e:
+        print(f"[TYPE] Gemini type fallita: {e} | fallback={fallback}")
+        return fallback, "fallback after gemini error"
+
+
+def v68_is_expired_preview_only(title="", text="", url="", article_type=None):
+    article_type = article_type or classify_article_type_fallback_v68(title, text, url)
+    if article_type != "PREVIEW":
+        return False
+    return v62_is_expired_preview(title, text, url)
+
+
+def v68_is_post_show_news(title="", text="", url="", article_type=None):
+    article_type = article_type or classify_article_type_fallback_v68(title, text, url)
+    return article_type == "POST_SHOW_NEWS"
+
+
+def v68_score_cap(score, title="", text="", url="", reasons=None):
+    reasons = reasons or []
+    probe = v66_context_probe(title, text, url, 1800)
+    article_type = classify_article_type_fallback_v68(title, text, url)
+
+    concrete_terms = [
+        "new champion", "title change", "wins title", "regains", "retains", "vacated",
+        "released", "release", "departure", "injury", "injured", "surgery", "arrested",
+        "signed", "signs", "contract extension", "media rights", "tv deal", "revenue", "earnings",
+    ]
+    has_concrete_news = any(x in probe for x in concrete_terms)
+
+    # Opinion/commentary puro: non deve diventare top news solo per presenza di Cena/Roman/Bully Ray.
+    if article_type == "OPINION" or v62_has_any(probe, V68_HARD_OPINION_TERMS):
+        hard_commentary = any(x in probe for x in ["lays out options", "believes", "thinks", "explains why", "breaks down", "podcast", "weighs in"])
+        if hard_commentary and not has_concrete_news and score > 54:
+            score = 54
+            reasons.append("v68 cap duro opinion/commentary")
+        elif not has_concrete_news and score > 68:
+            score = 68
+            reasons.append("v68 cap opinion senza news concreta")
+
+    # Annunci vaghi/quote iperboliche su show futuri: pubblicabili solo se c'e' dettaglio concreto.
+    if any(x in probe for x in ["will shock", "shock the foundation", "announcement will", "huge announcement", "major announcement"]):
+        if not has_concrete_news and score > 72:
+            score = 72
+            reasons.append("v68 cap annuncio vago/futuro")
+
+    # Le news post-show concrete non vanno schiacciate dalla freshness.
+    if article_type == "POST_SHOW_NEWS" and has_concrete_news and score < 55:
+        score = 55
+        reasons.append("v68 floor post-show news concreta")
+
+    return score, reasons
 
 def detect_source_category(title, text="", url=""):
     title_l = sanitize_text(title).lower()
@@ -5108,12 +5301,15 @@ def calculate_importance_score(title, text="", url=""):
         score += v61_boost
         reasons.extend(v61_reasons)
 
-    # v62: freshness. Le preview di show gia' andati in onda non devono passare.
-    if v62_is_expired_preview(title, text, url):
+    # v68: freshness semantica. Blocca solo vere preview scadute, non post-show news.
+    article_type_v68 = classify_article_type_fallback_v68(title, text, url)
+    if v68_is_expired_preview_only(title, text, url, article_type=article_type_v68):
         score = min(score, 20)
-        reasons.append("v62 preview scaduta")
+        reasons.append("v68 preview scaduta")
 
     score, reasons = v62_apply_score_caps(score, title, text, url, reasons)
+    score, reasons = v66_score_cap(score, title, text, url, reasons)
+    score, reasons = v68_score_cap(score, title, text, url, reasons)
 
     return clamp_score(score), reasons[:10]
 
@@ -5659,7 +5855,8 @@ def build_candidates(history, wp_available=True):
                     continue
 
                 summary = get_entry_summary(entry)
-                if v62_is_expired_preview(title, summary, link):
+                article_type_hint = classify_article_type_fallback_v68(title, summary, link)
+                if v68_is_expired_preview_only(title, summary, link, article_type=article_type_hint):
                     print(f"[SKIP] Preview/show announcement scaduta: {title}")
                     continue
                 entry_ts = get_entry_timestamp(entry)
@@ -5716,6 +5913,7 @@ def build_candidates(history, wp_available=True):
                     "event_key": event_key,
                     "feed_order": idx,
                     "source_feed": feed_url,
+                    "article_type_hint": article_type_hint,
                     "created_at": time.time(),
                     "source_timestamp": entry_ts,
                     "is_breaking": is_breaking,
@@ -5882,12 +6080,18 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
                         )
         return "skipped"
 
-    if v62_is_expired_preview(title, full_text, link) and not v65_is_official_schedule_news(title, full_text, link):
+    article_type_v68, article_type_reason_v68 = classify_article_type_with_gemini_v68(title, full_text, link)
+    item["article_type_v68"] = article_type_v68
+    item["article_type_reason_v68"] = article_type_reason_v68
+
+    if v68_is_expired_preview_only(title, full_text, link, article_type=article_type_v68) and not v65_is_official_schedule_news(title, full_text, link):
         print(f"[SKIP] Preview/show announcement scaduta dopo scraping: {title}")
         remove_pending_url(link)
         return "skipped"
-    elif v62_is_expired_preview(title, full_text, link) and v65_is_official_schedule_news(title, full_text, link):
+    elif v68_is_expired_preview_only(title, full_text, link, article_type=article_type_v68) and v65_is_official_schedule_news(title, full_text, link):
         print(f"[FRESHNESS] Preview scaduta ma news schedule/location ufficiale: {title}")
+    elif article_type_v68 == "POST_SHOW_NEWS":
+        print(f"[FRESHNESS] Post-show news fresca: non applico blocco preview - {title}")
 
     scoring_text = extract_main_scoring_text(full_text)
     refined_score, refined_reasons = calculate_importance_score(title, scoring_text, link)
