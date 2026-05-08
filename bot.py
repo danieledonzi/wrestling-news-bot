@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v72_3_1_single_title_repair_preview_rumor_caps_hotfix"
+BOT_VERSION = "v73_final_ai_editorial_taxonomy_guardrails"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -8283,6 +8283,258 @@ def translate_ordered_content_blocks(source_title, blocks, source_url="", forced
     except Exception as e:
         print(f"[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: {e}")
         return None, "validation"
+
+
+
+# =========================
+# v73 final: tassonomia editoriale definitiva, Business stretto, Uncategorized safety, casing e tier cleanup
+# =========================
+UNCATEGORIZED_CATEGORY_ID = int(os.getenv("WP_UNCATEGORIZED_CATEGORY_ID", "1"))
+CATEGORY_ID_BY_SLUG_V67["UNCATEGORIZED"] = UNCATEGORIZED_CATEGORY_ID
+CATEGORY_SLUG_BY_ID_V67 = {v: k for k, v in CATEGORY_ID_BY_SLUG_V67.items()}
+
+_ORIG_V73_normalize_category_slug_v67 = normalize_category_slug_v67
+
+def normalize_category_slug_v67(value):
+    raw = sanitize_text(str(value or "")).upper()
+    raw = re.sub(r"[^A-Z]", "", raw)
+    if raw in {"UNCATEGORIZED", "UNCATEGORISED", "UNCLASSIFIED", "MISC", "MISCELLANEOUS", "GOSSIP", "ALTRO", "OTHER"}:
+        return "UNCATEGORIZED"
+    return _ORIG_V73_normalize_category_slug_v67(value)
+
+
+def v73_probe(title="", text="", url="", max_chars=2200):
+    return normalize_for_check(f"{title} {url} {extract_main_scoring_text(text or '', max_paragraphs=4, max_chars=max_chars)}")
+
+V73_BUSINESS_STRONG_TERMS = [
+    "pay cut", "pay cuts", "salary", "salaries", "wage", "wages", "compensation",
+    "contract clause", "contract clauses", "contract change", "contract changes", "contract negotiation",
+    "talent contract", "new deal", "extension", "multi-year deal", "rights deal",
+    "media rights", "tv deal", "broadcast rights", "streaming deal", "netflix deal", "espn deal",
+    "revenue", "earnings", "profit", "profits", "financial", "financials", "quarterly results",
+    "ticket sales", "attendance revenue", "sponsorship", "sponsor", "partnership", "licensing",
+    "merger", "acquisition", "shareholder", "stock", "valuation", "corporate strategy",
+    "executive compensation", "president contract", "ceo", "cfo", "board", "governance",
+    "tagli salariali", "stipendi", "contratti", "diritti tv", "diritti media", "ricavi",
+    "fatturato", "sponsor", "sponsorizzazione", "partnership", "accordo commerciale",
+]
+
+V73_LEGAL_NOT_BUSINESS_TERMS = [
+    "lawsuit", "trial", "testimony", "doj", "department of justice", "investigation",
+    "investigated", "allegation", "allegations", "accused", "sex trafficking", "trafficking",
+    "abuse", "assault", "scandal", "legal filing", "subpoena", "settlement lawsuit",
+    "causa", "processo", "testimonianza", "dipartimento di giustizia", "indagine",
+    "accuse", "accusato", "traffico sessuale", "scandalo", "abusi",
+]
+
+V73_WORLD_WRESTLING_TERMS = [
+    "njpw", "new japan", "aaa", "lucha libre aaa", "cmll", "roh", "noah", "pro wrestling noah",
+    "mlw", "gcw", "stardom", "revpro", "progress wrestling", "iwgp", "cmlL".lower(),
+    "indie", "independent wrestling", "mexico", "japan", "tokyo dome", "korakuen",
+    "dark side of the ring", "vice", "docuseries", "documentary",
+]
+
+V73_TRASH_TALK_TERMS = [
+    "bigger heel", "claims he'd", "claims he would", "trash talk", "name drops", "lays out options",
+    "fires back", "claps back", "rips", "rips into", "jockstrap", "eat him alive",
+    "fantasy booking", "what if", "teases taking on", "cryptic", "shock the foundation",
+]
+
+
+def v73_is_real_business(title="", text="", url=""):
+    probe = v73_probe(title, text, url)
+    has_strong = any(normalize_for_check(t) in probe for t in V73_BUSINESS_STRONG_TERMS)
+    has_legal = any(normalize_for_check(t) in probe for t in V73_LEGAL_NOT_BUSINESS_TERMS)
+    # TKO da sola non basta. Se e' legale/scandalo, serve un vero tema economico/corporate per Business.
+    if has_legal and not has_strong:
+        return False
+    return has_strong
+
+
+def v73_is_world_wrestling(title="", text="", url=""):
+    probe = v73_probe(title, text, url)
+    return any(normalize_for_check(t) in probe for t in V73_WORLD_WRESTLING_TERMS)
+
+
+def v73_infer_promotion_slug(title="", text="", url=""):
+    probe = v73_probe(title, text, url)
+    if any(t in probe for t in ["wwe", "raw", "smackdown", "wrestlemania", "backlash", "roman reigns", "vince mcmahon", "nick khan", "triple h"]):
+        return "WWE"
+    if any(t in probe for t in ["aew", "dynamite", "collision", "rampage", "tony khan"]):
+        return "AEW"
+    if any(t in probe for t in ["nxt"]):
+        return "NXT"
+    if any(t in probe for t in ["tna", "impact wrestling", "impact"]):
+        return "TNA"
+    if v73_is_world_wrestling(title, text, url):
+        return "WORLD"
+    return "UNCATEGORIZED"
+
+
+def v73_apply_category_guardrails(result, title="", text="", url=""):
+    """Gemini resta il decisore primario. Questo livello impedisce solo categorie palesemente sbagliate.
+    BUSINESS e' solo business reale; WORLD e' wrestling internazionale/non WWE-AEW-TNA; Uncategorized e' buffer.
+    """
+    result = dict(result or {})
+    slug = normalize_category_slug_v67(result.get("category_slug")) or CATEGORY_SLUG_BY_ID_V67.get(int(result.get("category_id") or 0), "") or "UNCATEGORIZED"
+    article_type = (result.get("article_type") or "").upper()
+    cat_id = int(result.get("category_id") or CATEGORY_ID_BY_SLUG_V67.get(slug, UNCATEGORIZED_CATEGORY_ID))
+    reason = sanitize_text(result.get("category_reason", ""))
+
+    # Se Business non e' business reale, riassegna a promotion o Uncategorized.
+    if slug == "BUSINESS" and not v73_is_real_business(title, text, url):
+        new_slug = v73_infer_promotion_slug(title, text, url)
+        print(f"[CATEGORY v73] Business downgrade: {slug} -> {new_slug} | focus non business reale")
+        slug = new_slug
+        reason = (reason + " | v73 business downgrade").strip(" |")[:240]
+
+    # WORLD non e' contenitore per mainstream/gossip/legal generico: solo wrestling internazionale o documentari industry.
+    if slug == "WORLD" and not v73_is_world_wrestling(title, text, url):
+        new_slug = v73_infer_promotion_slug(title, text, url)
+        if new_slug == "WORLD":
+            new_slug = "UNCATEGORIZED"
+        print(f"[CATEGORY v73] World downgrade: WORLD -> {new_slug} | non wrestling internazionale")
+        slug = new_slug
+        reason = (reason + " | v73 world downgrade").strip(" |")[:240]
+
+    # Opinion/trash talk leggero: non sporcare categorie forti se la news non ha fatto concreto.
+    probe = v73_probe(title, text, url, max_chars=1200)
+    if article_type in {"OPINION", "RUMOR"} and any(t in probe for t in V73_TRASH_TALK_TERMS):
+        if not v73_is_real_business(title, text, url):
+            print(f"[CATEGORY v73] Opinion/trash talk -> Uncategorized: {title[:80]}")
+            slug = "UNCATEGORIZED"
+            reason = (reason + " | v73 opinion/trash safety").strip(" |")[:240]
+
+    result["category_slug"] = slug
+    result["category_id"] = CATEGORY_ID_BY_SLUG_V67.get(slug, UNCATEGORIZED_CATEGORY_ID)
+    result["category_reason"] = reason or "v73 category guardrails"
+    return result
+
+
+_ORIG_V73_v72_editorial_analysis = v72_editorial_analysis
+
+def v72_editorial_analysis(title="", text="", url="", is_report=False):
+    result = _ORIG_V73_v72_editorial_analysis(title, text, url, is_report=is_report)
+    if result.get("ai_failed") or result.get("article_type") == "RESULTS_REPORT":
+        return result
+    result = v73_apply_category_guardrails(result, title, text, url)
+    # Label log aggiuntiva per rendere chiaro il post-processing v73.
+    print(f"[EDITORIAL v73] final type={result.get('article_type')} | category={result.get('category_slug')} ({result.get('category_id')}) | {result.get('category_reason','')}")
+    return result
+
+
+_ORIG_V73_v723_conservative_score_after_ai = v723_conservative_score_after_ai
+
+def v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title="", text="", url="", editorial_analysis=None):
+    score, reasons = _ORIG_V73_v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title, text, url, editorial_analysis)
+    editorial_analysis = editorial_analysis or {}
+    article_type = (editorial_analysis.get("article_type") or "").upper()
+    probe = v73_probe(title, text, url, max_chars=1200)
+    if article_type in {"OPINION", "RUMOR"} and any(t in probe for t in V73_TRASH_TALK_TERMS):
+        if score > 44:
+            score = 44
+            reasons.append("v73 cap duro opinion/trash talk")
+    if (editorial_analysis.get("category_slug") or "").upper() == "UNCATEGORIZED" and score > 44:
+        score = 44
+        reasons.append("v73 cap uncategorized")
+    return max(0, min(100, int(score))), reasons
+
+
+_ORIG_V73_editorial_tier = editorial_tier
+
+def editorial_tier(score, title="", text="", url=""):
+    probe = v73_probe(title, text, url, max_chars=1200)
+    if score < MIN_PUBLISH_SCORE and any(t in probe for t in V73_TRASH_TALK_TERMS):
+        return "exclude", "v73 blocco tier basso opinion/trash talk"
+    return _ORIG_V73_editorial_tier(score, title, text, url)
+
+
+_ORIG_V73_make_news_core_key = make_news_core_key
+
+def make_news_core_key(title, text):
+    key = _ORIG_V73_make_news_core_key(title, text)
+    probe_title = normalize_for_check(title or "")
+    probe = v73_probe(title, text, "", max_chars=900)
+    rumor_status = any(t in probe for t in ["backstage update", "backstage report", "status", "schedule change", "reportedly", "rumor", "rumour"])
+    if key in {"schedule-wrestlemania", "schedule-backlash"} and rumor_status and not v71_is_real_schedule_title(title, text):
+        print(f"[DEDUPE v73] Rimossa macro news_core_key non schedule per rumor/status: {key} - {title[:80]}")
+        return ""
+    if key and key.startswith("schedule-") and not v71_is_real_schedule_title(title, text):
+        return ""
+    return key
+
+
+def v73_restore_critical_casing(text):
+    if not text:
+        return text
+    replacements = {
+        r"\bmcmahon\b": "McMahon",
+        r"\bvince mcmahon\b": "Vince McMahon",
+        r"\bshane mcmahon\b": "Shane McMahon",
+        r"\bstephanie mcmahon\b": "Stephanie McMahon",
+        r"\btriple h\b": "Triple H",
+        r"\bpaul heyman\b": "Paul Heyman",
+        r"\bcody rhodes\b": "Cody Rhodes",
+        r"\broman reigns\b": "Roman Reigns",
+        r"\bcm punk\b": "CM Punk",
+        r"\bwrestlemania\b": "WrestleMania",
+        r"\bsmackdown\b": "SmackDown",
+        r"\bsummerslam\b": "SummerSlam",
+    }
+    out = text
+    for pat, repl in replacements.items():
+        out = re.sub(pat, repl, out, flags=re.I)
+    return out
+
+
+_ORIG_V73_v721_deterministic_title_cleanup = v721_deterministic_title_cleanup
+
+def v721_deterministic_title_cleanup(title):
+    t = _ORIG_V73_v721_deterministic_title_cleanup(title)
+    return sanitize_text(v73_restore_critical_casing(t)).strip(" .")
+
+
+_ORIG_V73_v721_ensure_italian_title = v721_ensure_italian_title
+
+def v721_ensure_italian_title(title, source_title="", source_text="", source_url=""):
+    t = v721_deterministic_title_cleanup(title)
+    if not V721_ALWAYS_AI_TITLE_REPAIR and not v721_title_needs_ai_repair(t, source_title):
+        return t
+    context = extract_main_scoring_text(source_text or "", max_paragraphs=3, max_chars=900)
+    prompt = f"""
+Sei un caporedattore italiano di news wrestling.
+Riscrivi SOLO il titolo in italiano naturale, corretto, conciso e pubblicabile.
+Massimo 110 caratteri salvo necessita' assoluta.
+Non inventare fatti. Non aggiungere enfasi, ironia o clickbait.
+Non usare inglese salvo nomi propri, show, federazioni, termini wrestling consolidati e titoli ufficiali.
+Non tradurre nomi di titoli/cinture ufficiali WWE/AEW/TNA/NXT/ROH/NJPW/AAA.
+Nel wrestling italiano "release/released/departure" NON e' "rilascio": usa licenziamento, addio o uscita in base al contesto.
+Correggi grammatica, casing dei nomi propri e calchi inglesi.
+Casing obbligatorio: Vince McMahon, McMahon, Triple H, Paul Heyman, Roman Reigns, Cody Rhodes, CM Punk, WrestleMania, SmackDown.
+Restituisci SOLO JSON valido in una riga: {{"titolo":"..."}}
+
+Titolo originale inglese:
+{source_title}
+
+Titolo italiano attuale da correggere:
+{t}
+
+Contesto breve:
+{context}
+"""
+    try:
+        data, used_model = generate_and_parse_json(prompt)
+        fixed = sanitize_text(str(data.get("titolo", "")))
+        fixed = v721_deterministic_title_cleanup(fixed)
+        if fixed and not title_is_broken(fixed) and not title_soft_validation_failed(fixed):
+            if fixed != t:
+                print(f"[TITLE v73] Titolo finalizzato con AI ({used_model}): {fixed}")
+            return fixed
+    except Exception as e:
+        print(f"[TITLE v73] Repair titolo AI fallito: {e}")
+    return t or v721_deterministic_title_cleanup(generate_fallback_title(source_title, source_text, source_url, title))
+
+# Aggiorna label di log residue nei percorsi di traduzione a blocchi senza alterare la logica.
 
 if __name__ == "__main__":
     log_run_start()
