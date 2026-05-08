@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v72_2_soft_gemini_cooldown_instagram_embeds"
+BOT_VERSION = "v72_3_single_title_repair_preview_rumor_caps"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -6788,7 +6788,16 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
 
     scoring_text = extract_main_scoring_text(full_text)
     refined_score, refined_reasons = calculate_importance_score(title, scoring_text, link)
-    item["score"] = max(int(item.get("score", 0)), refined_score)
+    refined_score, refined_reasons = v723_conservative_score_after_ai(
+        int(item.get("score", 0)),
+        refined_score,
+        refined_reasons,
+        title,
+        scoring_text,
+        link,
+        editorial_analysis_v72,
+    )
+    item["score"] = refined_score
     item["score_reasons"] = refined_reasons
     print(f"[SCORE] raffinato={item['score']} priority={priority_label(item['score'])} | {', '.join(refined_reasons)}")
     perf_step_v71 = v71_perf_log("scoring raffinato", perf_step_v71, threshold=0.3)
@@ -6805,6 +6814,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     story_fingerprint = make_story_fingerprint(title, full_text)
     news_core_key = make_news_core_key(title, full_text)
     event_key = item.get("event_key") or make_event_key(title, scoring_text, link)
+    event_key = v723_repair_event_key_after_ai(event_key, title, scoring_text, link, editorial_analysis_v72)
     item["event_key"] = event_key
 
     story_data_v71 = build_story_signature_v71(title, scoring_text, link)
@@ -7938,3 +7948,346 @@ if __name__ == "__main__":
         run_bot()
     finally:
         log_run_end()
+
+
+# =========================
+# v72.3: title repair una sola volta, anti-falso PREVIEW, score conservativo per RUMOR/OPINION
+# =========================
+
+def v723_is_true_preview(title="", text="", url=""):
+    """Preview vera: l'articolo ha come scopo principale presentare un evento futuro/card/orari/come guardare.
+    Non basta citare Backlash/WrestleMania o un PLE futuro dentro una news gia' avvenuta.
+    """
+    title_url = normalize_for_check(f"{title} {url}")
+    lead = normalize_for_check(extract_main_scoring_text(text or "", max_paragraphs=2, max_chars=900))
+    combined = f"{title_url} {lead}"
+
+    explicit_title_terms = [
+        "preview", "start time", "how to watch", "confirmed matches", "match card",
+        "card for", "lineup", "tonight on", "what to expect", "anteprima",
+        "come guardare", "match confermati", "card di stasera",
+    ]
+    if any(t in title_url for t in explicit_title_terms):
+        return True
+
+    future_framing_terms = [
+        "will air", "airs tonight", "set for tonight", "scheduled for tonight",
+        "tonight's episode", "tonights episode", "later tonight", "will take place",
+        "is set to take place", "is scheduled to", "will open", "will begin",
+        "andra in onda", "andrà in onda", "previsto per stasera", "stasera",
+    ]
+    event_terms = V70_WEEKLY_SHOWS + ["backlash", "wrestlemania", "slammiversary", "forbidden door"]
+    has_future_framing = any(t in combined for t in future_framing_terms)
+    has_event = any(e in combined for e in event_terms)
+
+    already_happened_terms = [
+        "crashes", "crashed", "appears", "appeared", "showed up", "was on", "took part",
+        "segment at", "visited", "joined", "comments on", "reacts to", "reportedly received",
+        "backstage report", "backstage update", "status following", "after", "following",
+        "fa irruzione", "ospite", "apparso", "apparizione", "ha partecipato",
+    ]
+    if any(t in combined for t in already_happened_terms) and not any(t in title_url for t in explicit_title_terms):
+        return False
+
+    return bool(has_future_framing and has_event)
+
+
+_ORIG_V72_EDITORIAL_ANALYSIS_V723 = v72_editorial_analysis
+
+def v72_editorial_analysis(title="", text="", url="", is_report=False):
+    """v72.3: mantiene Gemini come cervello editoriale, ma corregge i falsi PREVIEW.
+    Una news gia' avvenuta che cita Backlash/WrestleMania non diventa PREVIEW.
+    """
+    fallback_type = classify_article_type_fallback_v68(title, text, url)
+    fallback_id = classify_category_fallback_v67(title, text, url, is_report=is_report)
+    fallback_slug = CATEGORY_SLUG_BY_ID_V67.get(fallback_id, "WORLD")
+
+    if is_report or is_results_article(title, url, text):
+        return {
+            "article_type": "RESULTS_REPORT",
+            "article_type_reason": "report/results forced",
+            "category_id": REPORT_CATEGORY_ID,
+            "category_slug": "EDITORIALI",
+            "category_reason": "report/results forced",
+            "is_publishable": True,
+            "translation_notes": ["Report/results: categoria Editoriali forzata."],
+            "model": "deterministic_guardrail",
+        }
+
+    if not V72_AI_EDITORIAL_ANALYSIS:
+        return {
+            "article_type": fallback_type,
+            "article_type_reason": "v72 fallback env disabled",
+            "category_id": fallback_id,
+            "category_slug": fallback_slug,
+            "category_reason": "v72 fallback env disabled",
+            "is_publishable": True,
+            "translation_notes": [],
+            "model": "deterministic_fallback",
+        }
+
+    lead = extract_main_scoring_text(text or "", max_paragraphs=5, max_chars=2600)
+    prompt = f"""
+Sei il caporedattore AI di OpenWrestlingTV, sito italiano di wrestling.
+Devi capire il contesto editoriale PRIMA della traduzione.
+Restituisci SOLO JSON valido in una riga. Non tradurre l'articolo in questa fase.
+
+Obiettivi:
+1. Classificare il tipo articolo.
+2. Scegliere la categoria WordPress corretta.
+3. Dare note utili alla traduzione per evitare calchi, titoli/cinture tradotti male e quote alterate.
+
+Tipi articolo ammessi:
+- PREVIEW: SOLO articoli il cui scopo principale e' presentare un evento futuro o programmato: card, orari, come guardarlo, match annunciati, start time, preview, tonight.
+- RESULTS_REPORT: report/recap completo con risultati di una puntata o evento.
+- POST_SHOW_NEWS: news autonoma su qualcosa gia' successo: apparizione, segmento, cambio titolo, vittoria, debutto, ritorno, attacco, infortunio, angle.
+- OPINION: commento, analisi, podcast, intervista, opinione o speculazione di ex wrestler/giornalista.
+- RUMOR: rumor/backstage non confermato ma con contenuto informativo.
+- OTHER: altro.
+
+Regola critica anti-falso PREVIEW:
+Se l'articolo racconta un'apparizione/intervista/segmento/notizia gia' avvenuta, NON e' PREVIEW anche se nel corpo cita Backlash, WrestleMania, SmackDown, Raw o un PLE futuro.
+Esempio: "Danhausen crashes ESPN SportsCenter" e' POST_SHOW_NEWS/OTHER, non PREVIEW.
+Esempio: "CM Punk appears with Steve Carell" e' POST_SHOW_NEWS/OTHER, non PREVIEW.
+Esempio: "Backstage update on Roman Reigns status" e' RUMOR, non PREVIEW.
+
+Categorie ammesse:
+- WWE: main roster WWE, Raw, SmackDown, PLE WWE, star WWE main roster, arrivi/uscite WWE.
+- AEW: AEW, Dynamite, Collision, Rampage, PPV AEW.
+- NXT: NXT come focus principale.
+- TNA: TNA/Impact Wrestling come focus principale.
+- World: wrestling fuori WWE/AEW/NXT/TNA, NJPW, AAA, ROH, NOAH, MLW, indie, documentari tipo Dark Side of the Ring, industry non corporate.
+- Business: SOLO corporate/business reale: TKO/WWE/AEW corporate, ricavi, tagli stipendi, contratti aziendali, media rights, TV/streaming deal, ticket sales, executive, acquisizioni. Non usare Business solo perche' nel testo compare TKO.
+- Editoriali: solo report/results/recap/riepiloghi completi.
+
+Precedenze obbligatorie:
+1. Report/results/recap completi -> RESULTS_REPORT + Editoriali.
+2. Preview esplicite -> PREVIEW solo se il focus e' davvero presentare l'evento futuro.
+3. News autonome post-show -> POST_SHOW_NEWS, non PREVIEW.
+4. Rumor/backstage su status, piani o schedule di una star -> RUMOR + categoria della promotion, non Business salvo focus corporate reale.
+5. Corporate/contratti/stipendi/tagli/media rights -> Business, salvo sia solo storyline WWE.
+6. Dark Side of the Ring/Vice/docuserie -> World.
+7. TNA solo se TNA/Impact e' il focus reale; se incerto tra TNA e World scegli World.
+
+Regole di traduzione da passare alla fase successiva:
+- I nomi ufficiali di titoli/cinture restano in inglese.
+- Release/released non deve diventare rilascio/rilasciato: usare licenziamento, licenziato, addio secondo contesto.
+- Le quote devono essere tradotte fedelmente, non parafrasate.
+- Evitare calchi: connected with a spear -> ha colpito con una spear; tide turned -> l'inerzia del match e' cambiata.
+- I titoli devono sembrare scritti da una redazione italiana, non tradotti parola per parola.
+
+Titolo:
+{title}
+
+URL:
+{url}
+
+Lead/testo iniziale:
+{lead}
+
+JSON richiesto:
+{{"article_type":"PREVIEW|RESULTS_REPORT|POST_SHOW_NEWS|OPINION|RUMOR|OTHER","article_type_confidence":0.0,"category":"WWE|AEW|NXT|TNA|World|Business|Editoriali","category_confidence":0.0,"is_publishable":true,"reason":"massimo 220 caratteri","translation_notes":["nota 1","nota 2"]}}
+"""
+    try:
+        data, used_model = generate_and_parse_json(prompt)
+        article_type = normalize_article_type_v68(data.get("article_type", "")) or fallback_type
+        type_conf = float(data.get("article_type_confidence", 0) or data.get("confidence", 0) or 0)
+        slug = normalize_category_slug_v67(data.get("category", data.get("categoria", ""))) or fallback_slug
+        cat_conf = float(data.get("category_confidence", 0) or data.get("confidence", 0) or 0)
+        reason = sanitize_text(data.get("reason", ""))[:240]
+        notes = data.get("translation_notes", [])
+        if not isinstance(notes, list):
+            notes = [sanitize_text(str(notes))]
+        notes = [sanitize_text(str(n))[:180] for n in notes if sanitize_text(str(n))][:6]
+
+        hard_fallback = classify_article_type_fallback_v68(title, text, url)
+        if hard_fallback == "RESULTS_REPORT":
+            article_type = hard_fallback
+            reason = (reason + " | guardrail results")[:240]
+        elif article_type == "PREVIEW" and not v723_is_true_preview(title, text, url):
+            # Gemini puo' farsi influenzare da PLE futuri citati nel corpo.
+            # Se non e' una vera preview, correggiamo verso RUMOR/POST_SHOW/OTHER in modo conservativo.
+            low = normalize_for_check(f"{title} {url} {lead}")
+            if any(x in low for x in ["backstage", "reportedly", "rumor", "rumour", "status", "schedule change"]):
+                article_type = "RUMOR"
+            elif any(x in low for x in ["appears", "appeared", "crashes", "crashed", "segment", "took part", "joined", "ospite", "apparizione"]):
+                article_type = "POST_SHOW_NEWS"
+            else:
+                article_type = "OTHER"
+            reason = (reason + " | v72.3 anti-falso preview")[:240]
+        elif hard_fallback == "PREVIEW" and v723_is_true_preview(title, text, url):
+            article_type = "PREVIEW"
+            reason = (reason + " | guardrail true preview")[:240]
+        elif hard_fallback == "POST_SHOW_NEWS" and article_type == "PREVIEW":
+            article_type = "POST_SHOW_NEWS"
+            reason = (reason + " | guardrail post-show")[:240]
+
+        if slug not in CATEGORY_ID_BY_SLUG_V67 or cat_conf < 0.35:
+            slug = fallback_slug
+            cat_id = fallback_id
+            category_reason = f"fallback categoria dopo AI conf={cat_conf:.2f}"
+        else:
+            cat_id = CATEGORY_ID_BY_SLUG_V67[slug]
+            category_reason = reason or f"v72.3 editorial analysis {used_model}"
+
+        # Rumor/opinion di promotion non diventano Business solo per citazioni TKO/corporate marginali.
+        if article_type in {"RUMOR", "OPINION"} and slug == "BUSINESS":
+            low = normalize_for_check(f"{title} {lead}")
+            real_business_terms = ["pay cut", "pay cuts", "salary", "salaries", "media rights", "tv deal", "contract clauses", "revenue", "earnings", "president", "executive", "tko"]
+            if not any(x in low for x in real_business_terms):
+                slug = fallback_slug if fallback_slug != "BUSINESS" else "WWE"
+                cat_id = CATEGORY_ID_BY_SLUG_V67.get(slug, 4)
+                category_reason = (category_reason + " | v72.3 business downgrade")[:240]
+
+        if type_conf < 0.35:
+            article_type = fallback_type
+            article_type_reason = f"fallback tipo dopo AI conf={type_conf:.2f}"
+        else:
+            article_type_reason = reason or f"v72.3 editorial analysis {used_model}"
+
+        print(f"[EDITORIAL v72.3] type={article_type} conf={type_conf:.2f} | category={slug} ({cat_id}) conf={cat_conf:.2f} model={used_model} | {reason}")
+        if notes:
+            print(f"[EDITORIAL v72.3] translation_notes={'; '.join(notes[:3])}")
+        return {
+            "article_type": article_type,
+            "article_type_reason": article_type_reason,
+            "category_id": cat_id,
+            "category_slug": slug,
+            "category_reason": category_reason,
+            "is_publishable": bool(data.get("is_publishable", True)),
+            "translation_notes": notes,
+            "model": used_model,
+        }
+    except Exception as e:
+        print(f"[EDITORIAL v72.3] Analisi AI fallita: {e} | fallback conservativo, stop candidato")
+        return {
+            "article_type": fallback_type,
+            "article_type_reason": "AI unavailable: conservative fallback, do not boost",
+            "category_id": fallback_id,
+            "category_slug": fallback_slug,
+            "category_reason": "AI unavailable: conservative fallback, do not boost",
+            "is_publishable": False,
+            "translation_notes": [],
+            "model": "fallback_model_unavailable",
+            "ai_failed": True,
+        }
+
+
+def v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title="", text="", url="", editorial_analysis=None):
+    """Se Gemini classifica RUMOR/OPINION, il raffinamento non deve gonfiare a 100.
+    Manteniamo lo score iniziale e applichiamo solo cap conservativi, a meno che sia business reale.
+    """
+    editorial_analysis = editorial_analysis or {}
+    article_type = (editorial_analysis.get("article_type") or "").upper()
+    category_slug = (editorial_analysis.get("category_slug") or "").upper()
+    score = int(refined_score)
+    reasons = list(refined_reasons or [])
+    if article_type in {"RUMOR", "OPINION"}:
+        low_title = normalize_for_check(f"{title} {url}")
+        low_probe = normalize_for_check(f"{title} {url} {text[:800]}")
+        real_business = category_slug == "BUSINESS" and any(x in low_title for x in ["pay cut", "pay cuts", "salary", "salaries", "media rights", "tv deal", "contract clauses", "revenue", "earnings", "tko president"])
+        if not real_business:
+            if score > initial_score:
+                score = int(initial_score)
+                reasons.append(f"v72.3 cap {article_type.lower()}: niente boost raffinamento")
+            if article_type == "OPINION" and score > 54:
+                score = 54
+                reasons.append("v72.3 cap opinion")
+            elif article_type == "RUMOR" and score > 68:
+                score = 68
+                reasons.append("v72.3 cap rumor")
+        else:
+            if score > 82:
+                score = 82
+                reasons.append("v72.3 cap rumor/opinion business reale")
+    return max(0, min(100, int(score))), reasons
+
+
+def v723_repair_event_key_after_ai(event_key, title="", text="", url="", editorial_analysis=None):
+    editorial_analysis = editorial_analysis or {}
+    article_type = (editorial_analysis.get("article_type") or "").upper()
+    category_slug = (editorial_analysis.get("category_slug") or "").upper()
+    if article_type in {"RUMOR", "OPINION"} and category_slug != "BUSINESS" and (event_key or "").startswith("event:business:"):
+        repaired = make_event_key(title, "", url)
+        if repaired and not repaired.startswith("event:business:"):
+            print(f"[FIX v72.3] Event key business rimossa per {article_type}/{category_slug}: {event_key} -> {repaired}")
+            return repaired
+        fallback = "event:rumor:" + make_title_key(title)[:70]
+        print(f"[FIX v72.3] Event key business rimossa per {article_type}/{category_slug}: {event_key} -> {fallback}")
+        return fallback
+    return event_key
+
+
+# Override v72.1: traduzione sempre a blocchi, ma title repair AI solo alla fine della pipeline principale.
+def translate_ordered_content_blocks(source_title, blocks, source_url="", forced_title=None, forced_category=None, excluded_image_urls=None):
+    """v72.3: traduce i TEXT_xxx e assembla HTML. Non chiama il title finalizer AI qui.
+    Il titolo viene finalizzato una sola volta in process_article, subito prima della pubblicazione.
+    """
+    text_blocks = [b for b in blocks if b.get("type") == "text" and b.get("text")]
+    if not text_blocks:
+        return None, "validation"
+    source_text_joined = "\n\n".join(b.get("text", "") for b in text_blocks)
+    results_mode = is_results_article(source_title, source_url, source_text_joined)
+    forced_category = int(forced_category) if forced_category is not None else (REPORT_CATEGORY_ID if results_mode else detect_source_category(source_title, source_text_joined, source_url))
+    protected_facts = build_protected_facts_for_prompt(source_title, source_text_joined)
+    protected_facts_block = "\n".join(f"- {fact}" for fact in protected_facts) if protected_facts else "- Nessun elemento specifico rilevato."
+    source_payload = {b["id"]: b["text"] for b in text_blocks[:120]}
+    editorial_notes = []
+
+    title_rule = f'Titolo gia deciso dal sistema: "{forced_title}". Non riscriverlo.' if forced_title else "Proponi un titolo italiano provvisorio naturale e aderente ai fatti."
+    prompt = v721_text_block_translation_prompt(
+        source_title,
+        source_payload,
+        forced_category,
+        protected_facts_block,
+        extra_instruction=f"\n- {title_rule}\nJSON richiesto: {{\"titolo\":\"stringa\",\"categoria\":{forced_category},\"blocks\":{{\"TEXT_001\":\"html\"}}}}"
+    )
+    title = forced_title or ""
+    block_map = {}
+    try:
+        data, used_model = generate_and_parse_json(prompt)
+        title = forced_title or sanitize_text(re.sub(r"<[^<]+?>", "", str(data.get("titolo", ""))).strip())
+        title = v721_deterministic_title_cleanup(refine_title_italian(title))
+        block_map = data.get("blocks") or {}
+        if not isinstance(block_map, dict):
+            raise ValueError("blocks mancante o non valido")
+        missing = [b["id"] for b in text_blocks if b["id"] not in block_map]
+        if missing:
+            block_map = v721_repair_missing_text_blocks(source_title, source_payload, block_map, missing, forced_category, protected_facts_block, editorial_notes)
+            missing = [b["id"] for b in text_blocks if b["id"] not in block_map]
+            if missing:
+                raise ValueError(f"Blocchi ancora mancanti dopo repair: {missing[:8]}")
+        print(f"[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: {used_model} | blocchi testo={len(text_blocks)}")
+    except Exception as e:
+        print(f"[BLOCKSEQ v72.3] Primo tentativo strutturato fallito: {e} | fallback a batch TEXT-only")
+        try:
+            block_map = v721_translate_text_blocks_chunked(source_title, source_payload, forced_category, protected_facts_block, translation_notes=editorial_notes)
+            title = forced_title or v721_deterministic_title_cleanup(refine_title_italian(generate_fallback_title(source_title, source_text_joined, source_url, source_title)))
+        except Exception as e2:
+            print(f"[BLOCKSEQ v72.3] Fallback a blocchi fallito: {e2}")
+            return None, ("model" if is_capacity_error(e2) else "validation")
+
+    try:
+        if not title:
+            title = forced_title or generate_fallback_title(source_title, source_text_joined, source_url, source_title)
+        content_html = v721_assemble_ordered_html_from_blocks(blocks, block_map, source_title, source_text_joined, source_url, forced_category, excluded_image_urls=excluded_image_urls)
+        content_html = v722_normalize_instagram_anchor_embeds(content_html)
+        title, content_html = apply_translation_glossary(title, content_html)
+        title, content_html = v69_apply_translation_guardrails(title, content_html, source_title, source_text_joined)
+        title, content_html = repair_protected_source_facts(source_title, source_text_joined, title, content_html)
+        tmp = v63_editorial_finalize({"titolo": title, "testo": content_html, "categoria": forced_category}, source_title, source_text_joined, source_url)
+        title = v721_deterministic_title_cleanup(tmp["titolo"])
+        content_html = tmp["testo"]
+        if body_looks_suspicious(content_html):
+            raise ValueError("Body sospetto o troppo meta")
+        protected_issues = validate_protected_source_facts(source_title, source_text_joined, title, content_html)
+        if protected_issues:
+            raise ValueError(f"Fatti/nomi sorgente alterati: {protected_issues}")
+        if results_mode:
+            warn = result_article_integrity_warning(source_text_joined, content_html)
+            if warn:
+                print(f"[BLOCKSEQ v72.3] Warning results: {warn}")
+        return {"titolo": title, "testo": content_html, "categoria": forced_category}, "ok"
+    except Exception as e:
+        print(f"[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: {e}")
+        return None, "validation"
