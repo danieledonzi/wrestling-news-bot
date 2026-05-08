@@ -3920,3 +3920,133 @@ Traceback (most recent call last):
   File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 6791, in process_candidate_item
     refined_score, refined_reasons = v723_conservative_score_after_ai(
 NameError: name 'v723_conservative_score_after_ai' is not defined
+
+===== RUN START [2026-05-08 16:55:11] VERSION [v72_3_1_single_title_repair_preview_rumor_caps_hotfix (15414b1)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[PERF v71] WP lookup event_key: 1.00s
+[FIX] Event key in history ma non confermata su WordPress: event:legal:nick-khan:vince-mcmahon - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Paul Heyman Teases Taking On A New Client
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167941/wwe-danhausen-espn-sportscenter-top-plays/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167894/wwe-smackdown-sami-zayn-trick-williams-gingerbread-man-pushback-creative/
+[SKIP] Score sotto soglia editoriale (36/75): TNA Slammiversary 2026 To Start In Afternoon, Won't Go Up Against AEW Forbidden Door
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167614/wwe-big-e-kofi-kingston-xavier-woods-new-day-status-depart/
+[SKIP] Score sotto soglia editoriale (72/75): Backstage Report On Expectations For John Cena's WWE Backlash Announcement
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167604/jacob-fatu-roman-reigns-wwe-backlash-2026-fans/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167602/wwe-brock-lesnar-alumni-moved/
+[SKIP] Score sotto soglia editoriale (0/75): WWE Backlash 2026 Predictions: Wrestling Inc. Picks The Winners
+[SKIP] Score sotto soglia editoriale (18/75): Will Ospreay Lays Out Differences Between Working In NJPW & AEW
+[SKIP] Score sotto soglia editoriale (0/75): TNA Impact 5/7/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167589/tna-impact-lei-ying-lee-arianna-grace-regains-knockouts-title/
+[SKIP] Score sotto soglia editoriale (36/75): Conor McGregor Eyeing Third UFC Title In A Different Weight Class
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167580/tna-impact-system-bear-bronson-brian-myers-nic-nemeth-kc-navarro-retains-tag-title/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164140/wwe-dakota-kai-charlie-2025-release-more-shock-previous-exit/
+[SKIP] Score sotto soglia editoriale (54/75): Bully Ray Lays Out Options For John Cena's WWE Backlash 2026 Announcement
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167535/tna-thursday-night-impact-may-7-two-titles-up-for-grabs-no-disqualification-match-more/
+[SKIP] Score sotto soglia editoriale (72/75): John Cena Says Backlash 2026 Announcement Will 'Shock The Very Foundation Of WWE'
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/cm-punk-appears-steve-carell-wwe-2k26-comedy-segment-night-too-many-stars-event/
+[SKIP] URL sospeso per validation fail recenti: https://www.ringsidenews.com/opening-segment-may-8-wwe-smackdown-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-scrapped-major-plans-gunther-before-cody-rhodes-feud/
+[SKIP] URL già in history: https://www.ringsidenews.com/number-wwe-talent-asked-take-pay-cuts-revealed/
+[SKIP] URL sospeso per validation fail recenti: https://www.ringsidenews.com/wwe-wanted-new-day-transition-out-full-time-wrestling-before-departure/
+[SKIP] URL già in history: https://www.ringsidenews.com/original-plans-jc-mateo-revealed-before-wwe-release/
+[SKIP] Score sotto soglia editoriale (5/75): New Details Reveal Dark Side of the Ring Season 7's TNA Story Isn't What Fans Expect
+[SKIP] Score sotto soglia editoriale (43/75): AMC's Reaction to Broken Matt Hardy's TNA Return Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/new-wwe-contract-clauses-under-tko-could-restrict-talent-freedom-long-deals-expire/
+[SKIP] URL già in history: https://www.ringsidenews.com/eric-bischoff-defends-tko-asking-wwe-talent-take-pay-cuts/
+[SKIP] Score sotto soglia editoriale (67/75): What John Cena's Major Announcement at WWE Backlash 2026 Is Really About
+[SKIP] URL già in history: https://www.ringsidenews.com/paul-heyman-admits-he-no-idea-about-brock-lesnars-retirement-wrestlemania-42/
+[SKIP] URL già in history: https://www.ringsidenews.com/eric-bischoff-says-wwe-letting-new-day-leave-makes-sense-financially/
+[SKIP] URL già in history: https://www.ringsidenews.com/backstage-reaction-gingerbread-man-storyline-revealed/
+[SCORE] 86 high - Nick Khan Testimony States US DOJ Investigated Vince McMahon For Sex Trafficking | WWE/main roster, evento legale/controversia, v62 evento legale grave, v62 categoria business, v71 freshness=0.61
+[SCORE] 53 low - Backstage Update On Roman Reigns' WWE Status Following Schedule Change | WWE/main roster, top star titolo: roman reigns, rumor/backstage, v71 freshness=0.598, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - Stephen A. Smith Claims He'd Be a Bigger Heel Than Paul Heyman in WWE | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v71 source reliability soft penalty, v71 freshness=0.578, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 3 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Nick Khan Testimony States US DOJ Investigated Vince McMahon For Sex Trafficking
+[BOT] semantic_id=nick-khan-testimony-states-us-doj-investigated-vince-mcmahon-for-sex-trafficking
+[SCORE] iniziale=86 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.90 | category=BUSINESS (15) conf=0.95 model=gemini-2.5-flash-lite | L'articolo riguarda un'indagine legale e testimonianze di dirigenti aziendali riguardo questioni legali e finanziarie legate alla corporate WWE/TKO, non un evento di wrestling. La classificazione BUSINESS è la più appropriata.
+[EDITORIAL v72.3] translation_notes=Mantenere "DOJ" come "Dipartimento di Giustizia".; Evitare di tradurre "sex trafficking" con calchi. Usare "traffico sessuale" o "traffico di esseri umani a scopo sessuale" a seconda del contesto e della sfumatura che si vuole dare; I nomi dei titoli di wrestling non sono presenti nell'articolo, quindi non ci sono note specifiche da aggiungere in merito.
+[PERF v71] analisi editoriale AI v72: 8.99s
+[SCORE] raffinato=94 priority=high | WWE/main roster, business/contratti WWE-TKO, evento legale/controversia, non wrestling puro, contenuto leggero, v62 evento legale grave, v62 categoria business
+[V71] story_signature=vince_mcmahon|nick_khan|nick_khan_testimony_states|legal|wwe|tko semantic_status=new_story freshness=0.61
+[PERF v71] WP recent posts dedupe: 2.21s
+[FIX] Event key in history ma non confermata su WordPress: event:legal:nick-khan:vince-mcmahon - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 2.58s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/nick-khan-testimony-states-us-doj-investigated-vince-mcmahon-for-sex-trafficking/intro-1778258998.jpg
+[PERF v71] traduzione: 19.06s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v72.1] Titolo finalizzato con AI (gemini-2.5-flash-lite): La testimonianza di Nick Khan: il Dipartimento di Giustizia USA ha indagato Vince Mcmahon per traffico sessuale
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 4.75s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/nick-khan-testimony-states-us-doj-investigated-vince-mcmahon-for-sex-trafficking/l-intro-1778258998.jpg
+[MEDIA] Immagine caricata: 3970
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.84s
+[PERF v71] totale articolo pubblicato 'Nick Khan Testimony States US DOJ Investigated Vince McMahon': 38.54s
+[OK] Pubblicato: La testimonianza di Nick Khan: il Dipartimento di Giustizia USA ha indagato Vince Mcmahon per traffico sessuale
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[BOT] semantic_id=backstage-update-on-roman-reigns-wwe-status-following-schedule-change
+[SCORE] iniziale=53 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo discute aggiornamenti backstage e indiscrezioni sullo status e la programmazione futura di Roman Reigns, informazioni non ancora confermate ufficialmente. Non è una preview di un evento imminente né un report di risultati. Rientr
+[EDITORIAL v72.3] translation_notes=Il titolo "Backstage Update On Roman Reigns' WWE Status Following Schedule Change" può essere tradotto come "Aggiornamento dal backstage sullo status di Roman Reigns in WWE dopo il; La parola "released" nel contesto di date rimosse non si riferisce a licenziamenti ma alla semplice rimozione dalla programmazione o da un annuncio. Tradurre con "rimosse" o "tolte; Titoli e cinture (es. "World Heavyweight Champion") devono rimanere in inglese.
+[PERF v71] analisi editoriale AI v72: 5.58s
+[SCORE] raffinato=53 priority=low | WWE/main roster, top star titolo: roman reigns, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v62 categoria business, v72.3 cap rumor: niente boost raffinamento
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:tko-financials -> event:rumor:backstage-update-roman-reigns-following-schedule-change
+[V71] story_signature=roman_reigns|backstage_update_on_roman|reigns_wwe_status_following|business|wwe|raw|tko|wrestlemania semantic_status=new_story freshness=0.598
+[SKIP] News core già pubblicata da altra fonte: Backstage Update On Roman Reigns' WWE Status Following Schedule Change
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Stephen A. Smith Claims He'd Be a Bigger Heel Than Paul Heyman in WWE
+[BOT] semantic_id=stephen-a-smith-claims-hed-be-a-bigger-heel-than-paul-heyman-in-wwe
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=1
+[BOT] Embed trovati: 2
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | 
+[EDITORIAL v72.3] translation_notes=Il titolo in inglese "Heel" si riferisce a un personaggio "cattivo" o "antagonista" nel wrestling. In italiano si può usare "personaggio negativo" o "cattivo", ma è consigliabile v; Evitare di tradurre "WWE wants to expand its relationship" come "la WWE vuole espandere la sua relazione", preferire espressioni come "la WWE desidera ampliare il rapporto" o "aume; Le citazioni dirette vanno tradotte fedelmente, mantenendo lo stile colloquiale o enfatico di Stephen A. Smith.
+[PERF v71] analisi editoriale AI v72: 7.29s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Stephen A. Smith Claims He'd Be a Bigger Heel Than Paul Heyman in WWE
+[SCORE] raffinato=54 priority=low | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, opinione generica, trash talk/clickbait forte, v62 media rights/streaming, v62 categoria business, v68 cap duro opinion/commentary
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Stephen A. Smith Claims He'd Be a Bigger Heel Than Paul Heyman in WWE
+[V71] story_signature=paul_heyman|smith_claims_he_d_be|bigger_heel_than_paul|business|wwe|tko semantic_status=new_story freshness=0.578
+[PERF v71] WP lookup URL esistente: 1.36s
+[PERF v71] WP lookup event_key: 2.09s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 2.46s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: Expecting ',' delimiter: line 1 column 2960 (char 2959)
+[GEMINI] Uso modello: gemini-2.5-flash
+[GEMINI] Modello gemini-2.5-flash scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=12
+[PERF v71] traduzione: 19.80s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v72.1] Titolo finalizzato con AI (gemini-2.5-flash-lite): Stephen A. Smith: 'Sarei un heel più grande di Paul Heyman in WWE'
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 2.56s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/04/stephen-a-smith-says-hed-come-for-paul-heyman-if-he-joins-wwe-19.jpg
+[MEDIA] Immagine caricata: 3973
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.05s
+[PERF v71] totale articolo pubblicato 'Stephen A. Smith Claims He'd Be a Bigger Heel Than Paul Heym': 33.64s
+[OK] Pubblicato: Stephen A. Smith: 'Sarei un heel più grande di Paul Heyman in WWE'
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 2 articoli (0 pending + 2 nuove) su 3 candidati provati | mode=normal
+===== RUN END [2026-05-08 16:55:11] VERSION [v72_3_1_single_title_repair_preview_rumor_caps_hotfix (15414b1)] =====
+
