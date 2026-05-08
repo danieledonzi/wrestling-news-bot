@@ -3168,3 +3168,267 @@ However, if you want to parse some data that happens to look like a URL, then no
 [PENDING] Candidati salvati per dopo: 3
 ===== RUN END [2026-05-08 15:16:56] VERSION [v71_2_perf_featured_image_filter (727042c)] =====
 
+
+===== RUN START [2026-05-08 15:31:12] VERSION [v72_ai_first_editorial_analysis_25 (f6744b8)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (72/75): Backstage Report On Expectations For John Cena's WWE Backlash Announcement
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167604/jacob-fatu-roman-reigns-wwe-backlash-2026-fans/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167602/wwe-brock-lesnar-alumni-moved/
+[SKIP] Score sotto soglia editoriale (0/75): WWE Backlash 2026 Predictions: Wrestling Inc. Picks The Winners
+[SKIP] Score sotto soglia editoriale (18/75): Will Ospreay Lays Out Differences Between Working In NJPW & AEW
+[SKIP] Score sotto soglia editoriale (0/75): TNA Impact 5/7/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167589/tna-impact-lei-ying-lee-arianna-grace-regains-knockouts-title/
+[SKIP] Score sotto soglia editoriale (36/75): Conor McGregor Eyeing Third UFC Title In A Different Weight Class
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167580/tna-impact-system-bear-bronson-brian-myers-nic-nemeth-kc-navarro-retains-tag-title/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2164140/wwe-dakota-kai-charlie-2025-release-more-shock-previous-exit/
+[SKIP] Score sotto soglia editoriale (54/75): Bully Ray Lays Out Options For John Cena's WWE Backlash 2026 Announcement
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167535/tna-thursday-night-impact-may-7-two-titles-up-for-grabs-no-disqualification-match-more/
+[SKIP] Score sotto soglia editoriale (72/75): John Cena Says Backlash 2026 Announcement Will 'Shock The Very Foundation Of WWE'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167443/aew-will-ospreay-lingering-effects-neck-surgery-recovery/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167360/aew-dynamite-changes-ted-turner-death-sting-appearance/
+[SKIP] Score sotto soglia editoriale (30/75): WWE's Natalya Pays Tribute To Late Star Owen Hart On What Would Be His 61st Birthday
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167276/wwe-backlash-paul-heyman-roman-reigns-jacob-fatu-completely-upside-down/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167259/tko-president-mark-shapiro-addresses-future-wwe-ufc-saudi-arabia/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - Number of WWE Talent Asked to Take Pay Cuts Revealed
+[SKIP] Score sotto soglia editoriale (5/75): New Details Reveal Dark Side of the Ring Season 7's TNA Story Isn't What Fans Expect
+[SKIP] Score sotto soglia editoriale (43/75): AMC's Reaction to Broken Matt Hardy's TNA Return Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/new-wwe-contract-clauses-under-tko-could-restrict-talent-freedom-long-deals-expire/
+[SKIP] URL già in history: https://www.ringsidenews.com/eric-bischoff-defends-tko-asking-wwe-talent-take-pay-cuts/
+[SKIP] Score sotto soglia editoriale (67/75): What John Cena's Major Announcement at WWE Backlash 2026 Is Really About
+[PERF v71] WP lookup event_key: 1.24s
+[FIX] Event key in history ma non confermata su WordPress: event:brock-lesnar-lawsuit - provo a pubblicare
+[SKIP] URL già in history: https://www.ringsidenews.com/eric-bischoff-says-wwe-letting-new-day-leave-makes-sense-financially/
+[SKIP] URL già in history: https://www.ringsidenews.com/backstage-reaction-gingerbread-man-storyline-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-smackdown-preview-may-8-2026-confirmed-matches-start-time-how-watch/
+[SKIP] Score sotto soglia editoriale (7/75): Andrade's Kissing Spot at AEW Grand Slam Australia Came Together at the Last Minute
+[SKIP] Score sotto soglia editoriale (3/75): Chelsea Green Reveals Health Status Following Heart Procedure
+[SCORE] 91 high - WWE Scrapped Major Plans for GUNTHER Before Cody Rhodes Feud | WWE/main roster, top star titolo: cody rhodes, impatto roster/storyline, WWE main roster + storyline/evento, rumor/backstage, show settimanale, v71 freshness=0.578
+[SCORE] 90 high - Number of WWE Talent Asked to Take Pay Cuts Revealed | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, release/addio, v62 categoria business, v71 freshness=0.69
+[SCORE] 80 high - Paul Heyman Admits He Had No Idea About Brock Lesnar's Retirement at WrestleMania 42 | WWE/main roster, top star titolo: brock lesnar, nome WWE: brock lesnar, combo top name titolo + evento forte, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.527
+[SCORE] 61 medium - Original Plans for JC Mateo Revealed Before WWE Release | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 source reliability soft penalty, v71 freshness=0.569, v48 tier2: 55-74
+[SCORE] 48 low - Backstage Report On Big E's WWE Status After Kofi Kingston & Xavier Woods Depart | WWE/main roster, impatto roster/storyline, release/addio, v71 freshness=0.603, v48 tier3: 45-54 contestuale
+[SCORE] 48 low - South African Discus Star Francois Prinsloo Announces WWE Departure | WWE/main roster, impatto roster/storyline, release/addio, v71 freshness=0.354, v48 tier3: 45-54 contestuale
+[SCORE] 43 low - WWE Wanted The New Day to Transition Out of Full-Time Wrestling Before Departure | WWE/main roster, impatto roster/storyline, release/addio, v71 source reliability soft penalty, v71 freshness=0.572, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 2 news >=90, 3 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 3
+[BOT] Elaborazione: Number of WWE Talent Asked to Take Pay Cuts Revealed
+[BOT] semantic_id=number-of-wwe-talent-asked-to-take-pay-cuts-revealed
+[SCORE] iniziale=90 priority=high
+[PERF v71] scraping articolo: 0.54s
+[BLOCKSEQ] Blocchi ordinati estratti: text=20, image=0, embed=0
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72] type=OTHER conf=1.00 | category=BUSINESS (15) conf=1.00 model=gemini-2.5-flash-lite | L'articolo tratta di ristrutturazione contrattuale, tagli salariali e strategie aziendali della WWE, rientrando chiaramente nella categoria Business. Non si tratta di un report di show, preview o news su match/angle specifici. La fonte è un
+[EDITORIAL v72] translation_notes=Il termine "pay cuts" deve essere tradotto come "tagli salariali" o "riduzione degli stipendi".; Evitare di tradurre "TKO-era" letteralmente, contestualizzare come "nell'era TKO" o "sotto la gestione TKO".; "Released" in questo contesto si riferisce a licenziamento/taglio, non a "rilascio" o "uscita".
+[PERF v71] analisi editoriale AI v72: 5.67s
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 categoria business
+[V71] story_signature=wwe_talent_asked|take_pay_cuts_revealed|contract|wwe|tko semantic_status=new_story freshness=0.697
+[PERF v71] WP recent posts dedupe: 2.71s
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - Number of WWE Talent Asked to Take Pay Cuts Revealed
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 3.10s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: Expecting ',' delimiter: line 1 column 4973 (char 4972)
+[GEMINI] Uso modello: gemini-2.5-flash
+[BLOCKSEQ] Traduzione strutturata fallita: Blocchi tradotti mancanti: ['TEXT_020']
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[PERF v71] traduzione: 36.77s
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.08s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/number-of-wwe-talent-asked-to-take-pay-cuts-revealed-07.jpg
+[MEDIA] Immagine caricata: 3939
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.46s
+[PERF v71] totale articolo pubblicato 'Number of WWE Talent Asked to Take Pay Cuts Revealed': 48.76s
+[OK] Pubblicato: Quanti wrestler WWE sono stati chiesti un taglio degli stipendi? La cifra è emersa
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Paul Heyman Admits He Had No Idea About Brock Lesnar's Retirement at WrestleMania 42
+[BOT] semantic_id=paul-heyman-admits-he-had-no-idea-about-brock-lesnars-retirement-at-wrestlemania-42
+[SCORE] iniziale=80 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=0
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash-lite | L'articolo parla di un evento post-show riguardante Brock Lesnar e Paul Heyman alla WWE. Non è una preview, né un report completo, né un'opinione/rumor. La categoria è chiaramente WWE.
+[EDITORIAL v72] translation_notes=I nomi dei titoli non vanno tradotti (es. "World Heavyweight Championship").; "Release/released" va tradotto in "licenziamento/licenziato" o "addio" a seconda del contesto, non "rilascio/rilasciato".; Le citazioni devono essere tradotte letteralmente senza parafrasi.
+[PERF v71] analisi editoriale AI v72: 8.75s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Paul Heyman Admits He Had No Idea About Brock Lesnar's Retirement at WrestleMania 42
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: brock lesnar, nomi forti lead: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, combo top name titolo + evento forte, PLE/PPV, non wrestling puro, opinione generica
+[V71] story_signature=brock_lesnar|paul_heyman|paul_heyman_admits_he|opinion|wwe|wrestlemania semantic_status=new_story freshness=0.58
+[FIX] Event key in history ma non confermata su WordPress: event:brock-lesnar-lawsuit - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=11
+[PERF v71] traduzione: 8.74s
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 0.99s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/paul-heyman-admits-he-had-no-idea-about-brock-lesnars-retirement-at-wrestlemania-42-13.jpg
+[MEDIA] Immagine caricata: 3942
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.31s
+[PERF v71] totale articolo pubblicato 'Paul Heyman Admits He Had No Idea About Brock Lesnar's Retir': 20.75s
+[OK] Pubblicato: Paul Heyman: nessuna idea sul ritiro di Brock Lesnar a WrestleMania 42
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Original Plans for JC Mateo Revealed Before WWE Release
+[BOT] semantic_id=original-plans-for-jc-mateo-revealed-before-wwe-release
+[SCORE] iniziale=61 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=0, embed=0
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo rivela piani originali e rilasci post-show. È una notizia autonoma su qualcosa che è già accaduto (la fine del suo stint in WWE).
+[EDITORIAL v72] translation_notes=Mantenere "WWE Release" in inglese per chiarezza, oppure tradurre "licenziamento" o "addio" a seconda del contesto preciso. "JC Mateo" è probabilmente il nome di ring usato interna; Nomi di titoli/cinture devono rimanere in inglese se presenti. "Release/released" non tradurre con "rilascio/rilasciato" ma con "licenziamento/licenziato" o "addio/andato via" a se
+[PERF v71] analisi editoriale AI v72: 18.26s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Original Plans for JC Mateo Revealed Before WWE Release
+[SCORE] raffinato=81 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV
+[V71] story_signature=original_plans|jc_mateo_revealed_before|wwe_release|report|wwe semantic_status=new_story freshness=0.58
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=13
+[PERF v71] traduzione: 7.49s
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.18s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/original-plans-for-jc-mateo-revealed-before-wwe-release-10.jpg
+[MEDIA] Immagine caricata: 3946
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.31s
+[PERF v71] totale articolo pubblicato 'Original Plans for JC Mateo Revealed Before WWE Release': 29.13s
+[OK] Pubblicato: I piani originali per JC Mateo rivelati prima del licenziamento dalla WWE
+[PENDING] Coda salvata: 0 elementi
+[BOT] News candidate totali: 7 | mode=normal | max nuove=3 | pending pubblicati=3
+[BOT] Elaborazione: WWE Scrapped Major Plans for GUNTHER Before Cody Rhodes Feud
+[BOT] semantic_id=wwe-scrapped-major-plans-for-gunther-before-cody-rhodes-feud
+[SCORE] iniziale=91 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo parla di piani creativi cambiati per Gunther dopo un evento (SmackDown), che hanno portato a un cambio di direzione nella sua faida. Si tratta di una news post-evento che riguarda la WWE.
+[EDITORIAL v72] translation_notes=Evitare traduzioni letterali per "scrapped major plans" (piani importanti accantonati/cancellati).; Mantenere "Undisputed WWE Championship" in inglese.; La citazione di Dave Meltzer deve essere tradotta fedelmente.
+[PERF v71] analisi editoriale AI v72: 14.31s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE Scrapped Major Plans for GUNTHER Before Cody Rhodes Feud
+[SCORE] raffinato=91 priority=high | WWE/main roster, top star titolo: cody rhodes, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship, v66 cap opinion/commentary storyline, v68 cap opinion senza news concreta
+[V71] story_signature=cody_rhodes|gunther|wwe_scrapped_major_plans|report|wwe|smackdown|backlash semantic_status=new_story freshness=0.577
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=10
+[PERF v71] traduzione: 4.57s
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.66s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-scrapped-major-plans-for-gunther-before-cody-rhodes-feud-25.jpg
+[MEDIA] Immagine caricata: 3949
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.38s
+[PERF v71] totale articolo pubblicato 'WWE Scrapped Major Plans for GUNTHER Before Cody Rhodes Feud': 22.85s
+[OK] Pubblicato: La WWE scarta piani importanti per Gunther prima del feud con Cody Rhodes
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Number of WWE Talent Asked to Take Pay Cuts Revealed
+[BOT] semantic_id=number-of-wwe-talent-asked-to-take-pay-cuts-revealed
+[SCORE] iniziale=90 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=20, image=0, embed=0
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72] type=OTHER conf=1.00 | category=BUSINESS (15) conf=1.00 model=gemini-2.5-flash-lite | L'articolo tratta di ristrutturazione contrattuale, tagli salariali e strategie aziendali della WWE, rientrando chiaramente nella categoria Business.
+[EDITORIAL v72] translation_notes=Titoli/cinture non pertinenti.; Evitare calchi come 'pay cuts' che può essere tradotto con 'tagli salariali' o 'riduzione degli stipendi'.; 'Released' va tradotto come 'licenziato' o 'rilasciato dal contratto' a seconda del contesto, non 'rilascio'.
+[PERF v71] analisi editoriale AI v72: 5.35s
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 categoria business
+[V71] story_signature=wwe_talent_asked|take_pay_cuts_revealed|contract|wwe|tko semantic_status=run_semantic_duplicate freshness=0.57
+[SKIP v71] Duplicato semantico/rewrite: run_semantic_duplicate - Number of WWE Talent Asked to Take Pay Cuts Revealed
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Paul Heyman Admits He Had No Idea About Brock Lesnar's Retirement at WrestleMania 42
+[BOT] semantic_id=paul-heyman-admits-he-had-no-idea-about-brock-lesnars-retirement-at-wrestlemania-42
+[SCORE] iniziale=80 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=0
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo riporta notizie su un evento accaduto a WrestleMania 42 (il ritiro di Brock Lesnar), citando dichiarazioni di Paul Heyman rilasciate dopo l'evento. Pertanto, si tratta di una notizia post-show. La categoria è WWE in quanto l'even
+[EDITORIAL v72] translation_notes=Mantenere "WrestleMania 42" in inglese.; "Retirement" non va tradotto come "ritiro" in senso generico, ma deve essere contestualizzato come "ritiro dalle competizioni" o "ritiro dal wrestling". "Retirement moment" come "m; "Released/released" non si applica qui, ma "fare attenzione a usi simili in futuro.".
+[PERF v71] analisi editoriale AI v72: 15.72s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Paul Heyman Admits He Had No Idea About Brock Lesnar's Retirement at WrestleMania 42
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: brock lesnar, nomi forti lead: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, combo top name titolo + evento forte, PLE/PPV, non wrestling puro, opinione generica
+[V71] story_signature=brock_lesnar|paul_heyman|paul_heyman_admits_he|opinion|wwe|wrestlemania semantic_status=run_semantic_duplicate freshness=0.406
+[SKIP v71] Duplicato semantico/rewrite: run_semantic_duplicate - Paul Heyman Admits He Had No Idea About Brock Lesnar's Retirement at WrestleMania 42
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Original Plans for JC Mateo Revealed Before WWE Release
+[BOT] semantic_id=original-plans-for-jc-mateo-revealed-before-wwe-release
+[SCORE] iniziale=61 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=0, embed=0
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo riguarda piani futuri di un wrestler poi rilasciato dalla WWE, ma il focus è su cosa sarebbe successo e non su un evento in corso. Rilasciato è un termine chiave. L'articolo si concentra su cambi di piani interni e speculazioni f
+[EDITORIAL v72] translation_notes="WWE Release" tradurre con "licenziamento dalla WWE" o "addio dalla WWE".; "Singles push" tradurre con "spinta nel settore singolo" o "carriera da singolo".; "Faction" tradurre con "faida" o "gregari" a seconda del contesto.
+[PERF v71] analisi editoriale AI v72: 6.92s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Original Plans for JC Mateo Revealed Before WWE Release
+[SCORE] raffinato=81 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV
+[V71] story_signature=original_plans|jc_mateo_revealed_before|wwe_release|report|wwe semantic_status=run_semantic_duplicate freshness=0.448
+[SKIP v71] Duplicato semantico/rewrite: run_semantic_duplicate - Original Plans for JC Mateo Revealed Before WWE Release
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Backstage Report On Big E's WWE Status After Kofi Kingston & Xavier Woods Depart
+[BOT] semantic_id=backstage-report-on-big-es-wwe-status-after-kofi-kingston-xavier-woods-depart
+[SCORE] iniziale=48 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo riporta notizie relative allo status di Big E dopo il recente cambio di rotta dei suoi ex compagni di stable e le relative uscite dalla WWE, non è una preview di eventi futuri né un report completo di una puntata. Si concentra su
+[EDITORIAL v72] translation_notes=I nomi di titoli e cinture (es. WWE Champion) vanno mantenuti in inglese.; La parola 'release' riferita a wrestler deve essere tradotta con 'licenziamento' o 'licenziati', non 'rilascio'.; Non tradurre il nome della stable 'The New Day'.
+[PERF v71] analisi editoriale AI v72: 7.56s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Backstage Report On Big E's WWE Status After Kofi Kingston & Xavier Woods Depart
+[SCORE] raffinato=78 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, PLE/PPV, v62 reazioni/tributi, v66 cap opinion/commentary storyline
+[V71] story_signature=backstage_report_on_big|e_s_wwe_status_after|kofi_kingston|death|wwe|smackdown semantic_status=new_story freshness=0.72
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[MEDIA v71.3] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/backstage-report-on-big-es-wwe-status-after-kofi-kingston-xavier-woods-depart/intro-1778227830.jpg
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=4
+[PERF v71] traduzione: 10.54s
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.01s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/backstage-report-on-big-es-wwe-status-after-kofi-kingston-xavier-woods-depart/l-intro-1778227830.jpg
+[MEDIA] Immagine caricata: 3952
+[WP] Status attach image: 200
+[PERF v71] featured image: 3.44s
+[PERF v71] totale articolo pubblicato 'Backstage Report On Big E's WWE Status After Kofi Kingston &': 23.17s
+[OK] Pubblicato: Il punto sul futuro di Big E in WWE dopo l'addio di Kofi Kingston e Xavier Woods
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: South African Discus Star Francois Prinsloo Announces WWE Departure
+[BOT] semantic_id=south-african-discus-star-francois-prinsloo-announces-wwe-departure
+[SCORE] iniziale=48 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo riporta un addio/licenziamento da parte di un atleta WWE, confermato post-evento.
+[EDITORIAL v72] translation_notes="WWE departure" si traduce con "addio alla WWE" o "uscita dalla WWE". "Released" o "departure" non sono sinonimi di "rilascio" in questo contesto.; "Olympian discus thrower" si traduce con "lanciato del disco olimpico". "Freakish injuries" si traduce con "infortuni bizzarri" o "infortuni particolari".; "WWE has been nothing but a blessing for me" si traduce fedelmente, evitando parafrasi. "It reignited my passion and talent for acting and speaking" si traduce con "ha riacceso la 
+[PERF v71] analisi editoriale AI v72: 2.17s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - South African Discus Star Francois Prinsloo Announces WWE Departure
+[SCORE] raffinato=93 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, contenuto leggero, v62 titolo/championship
+[V71] story_signature=south_african_discus_star|francois_prinsloo_announces_wwe|update|wwe|nxt semantic_status=new_story freshness=0.353
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[MEDIA v71.3] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/south-african-discus-star-francois-prinsloo-announces-wwe-departure/intro-1778181431.jpg
+[BLOCKSEQ] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=5
+[PERF v71] traduzione: 15.16s
+/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py:5121: MarkupResemblesLocatorWarning: The input passed in on this line looks more like a URL than HTML or XML.
+
+If you meant to use Beautiful Soup to parse the web page found at a certain URL, then something has gone wrong. You should use an Python package like 'requests' to fetch the content behind the URL. Once you have the content as a string, you can feed that string into Beautiful Soup.
+
+However, if you want to parse some data that happens to look like a URL, then nothing has gone wrong: you are using Beautiful Soup correctly, and this warning is spurious and can be filtered. To make this warning go away, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import MarkupResemblesLocatorWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=MarkupResemblesLocatorWarning)
+    
+  q = BeautifulSoup(m.group(1), "html.parser").get_text(" ", strip=True)
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.27s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/south-african-discus-star-francois-prinsloo-announces-wwe-departure/l-intro-1778181431.jpg
+[MEDIA] Immagine caricata: 3955
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.88s
+[PERF v71] totale articolo pubblicato 'South African Discus Star Francois Prinsloo Announces WWE De': 22.06s
+[OK] Pubblicato: Atletica, l'olimpionico francois prinsloo saluta la WWE
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 6 articoli (3 pending + 3 nuove) su 9 candidati provati | mode=normal
+===== RUN END [2026-05-08 15:31:12] VERSION [v72_ai_first_editorial_analysis_25 (f6744b8)] =====
+
