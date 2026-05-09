@@ -1,5 +1,108 @@
 [
   {
+    "url": "https://www.wrestlinginc.com/2168388/wwe-smackdown-gunther-cody-rhodes-clash-italy-ple-paul-heyman/",
+    "title": "GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE",
+    "semantic_id": "gunther-joins-wwe-smackdown-appears-set-for-title-match-with-cody-rhodes-at-italy-ple",
+    "title_key": "gunther-joins-smackdown-appears-set-cody-rhodes-italy-ple",
+    "score": 100,
+    "priority": "high",
+    "event_key": "event:cody-rhodes-diagnosis",
+    "story_signature_v71": "cody_rhodes|gunther|gunther_joins_wwe_smackdown|update|wwe|smackdown",
+    "summary": "GUNTHER is the newest member of \"WWE SmackDown,\" and also now seems set to challenge Undisputed WWE Champion Cody Rhodes at WWE Clash in Italy.",
+    "reasons": [
+      "WWE/main roster",
+      "top star titolo: cody rhodes",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "PLE/PPV",
+      "v62 titolo/championship",
+      "v71 freshness=0.49"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "top star titolo: cody rhodes",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "PLE/PPV",
+      "v62 titolo/championship",
+      "v71 freshness=0.49"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778312329.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778325348.7889273,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.wrestlinginc.com/2168395/wwe-nxt-viewership-ratings-report-may-5-2026/",
+    "title": "WWE NXT Viewership & Ratings Report, 5/5/2026",
+    "semantic_id": "wwe-nxt-viewership-ratings-report-552026",
+    "title_key": "viewership-ratings-5-5",
+    "score": 96,
+    "priority": "high",
+    "event_key": "",
+    "story_signature_v71": "wwe_nxt_viewership|ratings_report|debut|wwe|nxt",
+    "summary": "\"WWE NXT\" bounced back in viewership and its rating, after a down week, despite many debuts and surprises, with its May 5 episode.",
+    "reasons": [
+      "WWE/main roster",
+      "impatto roster/storyline",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "show settimanale",
+      "v62 ritorno/debutto",
+      "v71 freshness=0.621"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "impatto roster/storyline",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "show settimanale",
+      "v62 ritorno/debutto",
+      "v71 freshness=0.621"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778316505.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778325348.6547148,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.wrestlinginc.com/2168330/wwe-smackdown-may-8-womens-united-states-championship-on-line-gunther-appears/",
+    "title": "WWE SmackDown Results 5/8 - Women's US Championship On The Line, GUNTHER Appears",
+    "semantic_id": "wwe-smackdown-results-58-womens-us-championship-on-the-line-gunther-appears",
+    "title_key": "smackdown-results-5-8-women-s-us-championship-line-gunther-appears",
+    "score": 82,
+    "priority": "high",
+    "event_key": "",
+    "story_signature_v71": "gunther|wwe_smackdown_results|women_s_us_championship_on|report|wwe|smackdown",
+    "summary": "This is Wrestling Inc.'s results for \"WWE SmackDown\" on May 8, 2026, with a Women's United States Championship match between Tiffany Stratton & Kiana James!",
+    "reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "show settimanale",
+      "v62 titolo/championship",
+      "v71 freshness=0.456"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "show settimanale",
+      "v62 titolo/championship",
+      "v71 freshness=0.456"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778302735.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778325349.022869,
+    "attempts": 0
+  },
+  {
     "kind": "report",
     "url": "https://www.wrestlinginc.com/2168330/wwe-smackdown-may-8-womens-united-states-championship-on-line-gunther-appears/",
     "title": "WWE SmackDown Results 5/8 - Women's US Championship On The Line, GUNTHER Appears",
