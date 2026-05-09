@@ -5156,3 +5156,63 @@ Traceback (most recent call last):
   File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 6638, in process_report_pending_item
     status = process_candidate_item(
 TypeError: process_candidate_item() missing 1 required positional argument: 'source_fail_counts'
+
+===== RUN START [2026-05-09 07:48:36] VERSION [v73_final_ai_editorial_taxonomy_guardrails (530b551)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/8/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (13/75): UFC Star Calls Conspiracy On Khamzat Chimaev Making Weight, Claims 328 Fight Is Rigged
+[SKIP] Score sotto soglia editoriale (0/75): Khamzat Chimaev Calls Himself A Terrorist, Kicks Sean Strickland At UFC Presser
+[SKIP] Score sotto soglia editoriale (0/75): President Donald Trump Hosts UFC Fighters To Oval Office Ahead Of Freedom 250
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168381/wwe-smackdown-tiffany-stratton-first-womens-us-title-defense-kiana-james/
+[SKIP] Score sotto soglia editoriale (35/75): Kevin Nash Says This WWE Star Is One Of The Only Things That 'Amuses' Him Anymore
+[SKIP] Score sotto soglia editoriale (0/75): UFC Legend Warns Sean Strickland May Be Serious About Shooting Khamzat Chimaev
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168347/wwe-wrestlemania-42-bully-ray-roman-reigns-oba-femi-lost-title/
+[SKIP] Score sotto soglia editoriale (0/75): Khamzat Chimaev On Shooting Threats Before UFC 328: 'I Would Be Happy To Die'
+[SKIP] Score sotto soglia editoriale (38/75): WWE's Jacob Fatu Explains Why He Won't Change The Name Of The Tongan Death Grip
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168293/wwe-sami-zayn-fully-turned-heel/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168269/wwe-backlash-bully-ray-paul-heyman-jacob-fatu-roman-reigns-pitches-surprise-involvement/
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2168230/wwe-backlash-danhausen-jelly-roll-mystery-partner-backstage-speculation/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168222/wwe-raw-smackdown-media-rights-contracts-2019-2024-public-shareholder-lawsuit/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168165/wwe-pay-cuts-details/
+[SKIP] Score sotto soglia editoriale (0/75): Chael Sonnen: UFC Star Didn't Respect Career Enough To 'Stick A Needle In His A**'
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (23/75): WWE Roasted By Fans For Using AI Slop During 5/8 SmackDown
+[SKIP] URL già in history: https://www.ringsidenews.com/jade-cargill-makes-surprise-return-during-58-wwe-smackdown/
+[SKIP] Score sotto soglia editoriale (27/75): Paul Heyman Reveals Favor He Did For GUNTHER During 5/8 WWE SmackDown
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-pays-tribute-ted-turner-during-58-smackdown/
+[SKIP] Score sotto soglia editoriale (33/75): Shane McMahon's WWE Status After Profile Appears Under Active Roster
+[SKIP] Esclusione editoriale dura (v71.1 no bypass for preview/speculative announcement): WWE SmackDown Results, Highlights and Key Moments for May 8, 2026
+[SKIP] Score sotto soglia editoriale (21/75): AEW Dynamite Viewership Sees Drop on May 6, 2026
+[SKIP] URL già in history: https://www.ringsidenews.com/chelsea-green-reveals-status-may-8-wwe-smackdown-heart-procedure/
+[SKIP] Score sotto soglia editoriale (28/75): Harley Cameron Addresses Wardrobe Mishap on May 6 AEW Dynamite
+[SKIP] Score sotto soglia editoriale (11/75): Jacob Fatu Admits Drug Problems Nearly Ruined His Wrestling Career
+[SKIP] Score sotto soglia editoriale (54/75): Major Jesse Ventura Story Was Cut From Hulk Hogan Netflix Documentary
+[SCORE] 100 high - GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE | WWE/main roster, top star titolo: cody rhodes, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship, v71 freshness=0.533
+[SCORE] 96 high - WWE NXT Viewership & Ratings Report, 5/5/2026 | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v71 freshness=0.664
+[SCORE] 82 high - WWE SmackDown Results 5/8 - Women's US Championship On The Line, GUNTHER Appears | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 titolo/championship, v71 freshness=0.5
+[SCORE] 81 high - Backstage Update On Roman Reigns' WWE Schedule In July | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, ritorno/debutto, v71 freshness=0.438
+[SCORE] 60 medium - WWE Using Bots To Crack Down On Streamer Clips | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, floor WWE main roster storyline, v62 reazioni/tributi, v71 source reliability soft penalty, v71 freshness=0.482, v48 tier2: 55-74
+[SCORE] 59 low - Paige Reveals Bloody Head Wound and Stitches After Chaotic WWE SmackDown Segment | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v71 source reliability soft penalty, v71 freshness=0.525, v48 tier2: 55-74
+[SCORE] 50 low - WWE SmackDown Spoiler Lineup for May 8, 2026: Full Match Card and Backstage Notes Revealed | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, show settimanale, floor WWE main roster storyline, v71 source reliability soft penalty, v71 freshness=0.454, v48 tier3: 45-54 contestuale
+[SCORE] 41 low - Gingerbread Man Funeral Ends With The Dead Rising During 5/8 WWE SmackDown | WWE/main roster, show settimanale, v71 source reliability soft penalty, v71 freshness=0.521, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 2 news >=90, 4 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 1
+[REPORT] Valuto fonti per report: report:wwe-smackdown-2026-05-08
+[SCRAPE] Articolo results rilevato: testo completo (18608 caratteri)
+[REPORT] Fonte migliore: score_completezza=258 | www.wrestlinginc.com | WWE SmackDown Results 5/8 - Women's US Championship On The Line, GUNTHER Appears
+===== RUN END [2026-05-09 07:48:36] VERSION [v73_final_ai_editorial_taxonomy_guardrails (530b551)] =====
+
+Traceback (most recent call last):
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 8542, in <module>
+    run_bot()
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 7051, in run_bot
+    status = process_candidate_item(pitem, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 6655, in process_candidate_item
+    return process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 6638, in process_report_pending_item
+    status = process_candidate_item(
+TypeError: process_candidate_item() missing 1 required positional argument: 'source_fail_counts'
