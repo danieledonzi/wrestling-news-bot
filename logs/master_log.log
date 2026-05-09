@@ -7831,3 +7831,173 @@ However, if you want to parse some data that happens to look like a URL, then no
 [PENDING] Candidati salvati per dopo: 3
 ===== RUN END [2026-05-09 21:38:00] VERSION [v78_1_validation_retry_guard (c540832)] =====
 
+
+===== RUN START [2026-05-09 22:31:31] VERSION [v79_ai_native_translation_spoiler_postedit (6507f5a)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[PERF v71] WP lookup event_key: 0.93s
+[PENDING] Rimuovo report già pubblicato: report:wwe-smackdown-2026-05-08
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167009/wwe-nxt-oba-femi-myles-borne-pizza-toss/
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite & Collision Viewership & Ratings Report, 5/6/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168663/wwe-wrestlemania-42-paul-heyman-brock-lesnar-retiring/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166518/wwe-nt-myles-borne-jelly-roll-finisher/
+[SKIP] Score sotto soglia editoriale (22/75): Will Ospreay Explains What AEW & NJPW Have To Gain From Partnership
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168627/wwe-chelsea-green-health-update-heart-procedure/
+[SKIP] Score sotto soglia editoriale (14/75): Anthony Bowens Reflects On Unexpected Success Of The Acclaimed In AEW
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165704/jerry-lawler-looks-back-infamous-wwe-wrestlemania-match-michael-cole/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168572/tko-wwe-quarterly-earnings-report-growth-falling-ticket-sales-dave-meltzer/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165924/wwe-matt-hardy-undertaker-best-locker-room-leader/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165551/sheamus-advocates-irish-wwe-ple/
+[SKIP] Score sotto soglia editoriale (20/75): Jerry Lawler Got 'Shoved' Into WWE Commentary Role
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165420/wwe-trick-williams-jevon-evans-oba-femi-acknowledges-rivalry/
+[SKIP] Score sotto soglia editoriale (0/75): Matt Hardy Looks Back On V1 Character And His 'Meat And Potatoes' Role In Tag Team
+[SKIP] Score sotto soglia editoriale (56/75): WWE Backlash 2026 Full & Final Card
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (50/75): Gingerbread Man Meme Goes Completely Off The Rails After WWE SmackDown
+[SKIP] Score sotto soglia editoriale (50/75): Big E. Gets Loud "New Day Rocks!" Chants During 2026 WWE Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/kairi-sane-tampa-airport-sighting-rumor-shut-down-before-wwe-backlash/
+[SKIP] Score sotto soglia editoriale (50/75): WWE Backlash Spoiler Lineup for May 9, 2026: Full Match Card and Backstage Notes Revealed
+[SKIP] Score sotto soglia editoriale (31/75): Stephanie Vaquer's Ex-Boyfriend El Cuatrero Says "Not Everything Has Been Exposed" Following Guilty Verdict
+[SKIP] URL già in history: https://www.ringsidenews.com/dustin-rhodes-appears-take-shot-wwe-pay-cut-strategy-amid-tko-contract-changes/
+[SKIP] URL già in history: https://www.ringsidenews.com/swerve-strickland-reacts-new-days-wwe-exit-amid-aew-rumors/
+[SKIP] Score sotto soglia editoriale (7/75): Shawn Michaels Reveals How Long WWE Really Needs To Create Main Roster Talent
+[SKIP] Score sotto soglia editoriale (11/75): Scarlett Explains Why WWE Didn't Want Her "Sexy" Wrestling Character
+[SKIP] Score sotto soglia editoriale (17/75): Swerve Strickland Reveals What He Did During AEW Hiatus
+[SKIP] Score sotto soglia editoriale (19/75): Karrion Kross Says WWE "Creatively Sabotaged" Former NXT Stars
+[SKIP] URL già in history: https://www.ringsidenews.com/karrion-kross-says-wwe-tried-lower-his-value-before-contract-talks/
+[SKIP] Score sotto soglia editoriale (0/75): Devon Dudley Explains Why He Forgave Hulk Hogan Despite Racist Controversy
+[SCORE] 81 high - WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker | WWE/main roster, nomi forti titolo: seth rollins, WWE main roster + storyline/evento, titolo/championship, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.578
+[SCORE] 75 medium - WWE Backlash Results, Highlights and Key Moments for May 9, 2026 | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 source reliability soft penalty, v71 freshness=0.542
+[SCORE] 63 medium - Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive' | WWE/main roster, nomi forti titolo: brie bella, WWE main roster + storyline/evento, titolo/championship, v71 freshness=0.547, v48 tier2: 55-74
+[SCORE] 61 medium - Dave Meltzer Says CMLL Star Was Planned For Big AEW PPV Match Before Injury | AEW, impatto roster/storyline, infortunio, PLE/PPV, v71 freshness=0.712, v48 tier2: 55-74
+[SCORE] 55 low - Matt Hardy Recalls Advice Given To Him By Late WWE Hall Of Famer Eddie Guerrero | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v71 freshness=0.591, v48 tier2: 55-74
+[SCORE] 50 low - WWE Backlash 2026 Match Order Reportedly Revealed | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, floor WWE main roster storyline, titolo vago, v71 freshness=0.602, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - Spoiler: Opening Match Revealed for 2026 WWE Backlash | WWE/main roster, nomi forti lead: seth rollins, WWE main roster + storyline/evento, floor WWE main roster storyline, v71 source reliability soft penalty, v71 freshness=0.543, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 4
+[BOT] Elaborazione: WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker
+[BOT] semantic_id=wwe-backlash-results-59-two-titles-on-the-line-seth-rollins-faces-bron-breakker
+[SCORE] iniziale=81 priority=high
+[SCRAPE] Articolo results rilevato: testo completo (6711 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=21, image=2, embed=1
+[BOT] Embed trovati: 1
+[PENDING] Coda salvata: 5 elementi
+[REPORT] Salvato/aggiornato pending report: report:wwe-backlash-2026-05-09 | pronto tra 330 min
+[SKIP v78.1] Gia processato in questa run: WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker
+[BOT] Elaborazione: WWE Backlash Results, Highlights and Key Moments for May 9, 2026
+[BOT] semantic_id=wwe-backlash-results-highlights-and-key-moments-for-may-9-2026
+[SCORE] iniziale=75 priority=medium
+[SCRAPE] Articolo results rilevato: testo completo (12476 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=49, image=0, embed=5
+[BOT] Embed trovati: 6
+[PENDING] Coda salvata: 5 elementi
+[REPORT] Salvato/aggiornato pending report: report:wwe-backlash-2026-05-09 | pronto tra 330 min
+[BOT] Elaborazione: Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive'
+[BOT] semantic_id=brie-bella-comments-on-latest-wwe-run-says-aews-bryan-danielson-is-so-supportive
+[SCORE] iniziale=63 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo commenta una recente apparizione di Brie Bella e il suo status attuale, non anticipa un evento futuro. Si concentra sulle dichiarazioni post-evento e sulla sua attuale situazione lavorativa e familiare.
+[EDITORIAL v72.3] translation_notes=I nomi dei titoli ufficiali vanno lasciati in inglese (es. Women's Tag Team Championships).; Il termine "released" riferito a wrestler non va tradotto con "rilasciato/a", ma con "licenziato/a" o "ha lasciato" a seconda del contesto.; Le citazioni vanno tradotte fedelmente, senza parafrasi.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo commenta una recente apparizione di Brie Bella e il suo status attuale, non anticipa un evento futuro. Si concentra sulle dichiarazioni post-evento e sulla sua attuale situazione lavorativa e familiare.
+[PERF v71] analisi editoriale AI v72: 1.71s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive'
+[SCORE] raffinato=56 priority=low | WWE/main roster, nomi forti titolo: brie bella, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive'
+[BOT] News candidate totali: 7 | mode=normal | max nuove=3 | pending pubblicati=0
+[SKIP v78.1] Gia processato in questa run: WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker
+[PENDING] Coda salvata: 3 elementi
+[SKIP v78.1] Gia processato in questa run: WWE Backlash Results, Highlights and Key Moments for May 9, 2026
+[PENDING] Coda salvata: 2 elementi
+[SKIP v78.1] Gia processato in questa run: Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive'
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Dave Meltzer Says CMLL Star Was Planned For Big AEW PPV Match Before Injury
+[BOT] semantic_id=dave-meltzer-says-cmll-star-was-planned-for-big-aew-ppv-match-before-injury
+[SCORE] iniziale=61 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=AEW (5) conf=0.80 model=gemini-2.5-flash-lite | L'articolo riporta un rumor su piani futuri per un match che non si è svolto a causa di un infortunio, con citazioni da una fonte attendibile come Dave Meltzer. Il focus è su AEW e piani backstage non confermati.
+[EDITORIAL v72.3] translation_notes=Titolo e cinture restano in inglese (AEW Women's World Champion Thekla).; Usare "licenziamento" o "licenziata" per "release/released" solo se si parla di contratti AEW terminati, non qui.; Meltzer's "Wrestling Observer Radio" va citato fedelmente come fonte, ma per il titolo italiano si può usare "secondo Dave Meltzer in un'edizione di Wrestling Observer Radio".
+[EDITORIAL v73] final type=RUMOR | category=AEW (5) | L'articolo riporta un rumor su piani futuri per un match che non si è svolto a causa di un infortunio, con citazioni da una fonte attendibile come Dave Meltzer. Il focus è su AEW e piani backstage non confermati.
+[PERF v71] analisi editoriale AI v72: 2.37s
+[SCORE] raffinato=61 priority=medium | AEW, impatto roster/storyline, infortunio, PLE/PPV, v72.3 cap rumor: niente boost raffinamento
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Dave Meltzer Says CMLL Star Was Planned For Big AEW PPV Match Before Injury
+[FIX v72.3] Event key business rimossa per RUMOR/AEW: event:business:tony-khan -> event:rumor:dave-meltzer-says-cmll-star-was-planned-big-ppv-injury
+[V71] story_signature=dave_meltzer_says_cmll|star_was_planned_for|big_aew_ppv_match|injury|aew|dynamite|collision|impact semantic_status=new_story freshness=0.829
+[PERF v71] WP recent posts dedupe: 1.20s
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:rumor:dave-meltzer-says-cmll-star-was-planned-big-ppv-injury -> event:rumor:dave-meltzer-says-cmll-star-was-planned-big-ppv-injury-followup-dave-meltzer-says-cmll-star-was-planned-big-ppv-injury
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.57s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=3
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/dave-meltzer-says-cmll-star-was-planned-for-big-aew-ppv-match-before-injury/intro-1778361573.jpg
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Body sospetto o troppo meta
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[QUALITY] Problemi rilevati: ['Testo sospetto o troppo breve']
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Output ancora sospetto dopo revisione: ['Testo sospetto o troppo breve']
+[PERF v71] traduzione: 6.63s
+[SKIP] Traduzione fallita: Dave Meltzer Says CMLL Star Was Planned For Big AEW PPV Match Before Injury (err_type=validation)
+[BOT] Elaborazione: Matt Hardy Recalls Advice Given To Him By Late WWE Hall Of Famer Eddie Guerrero
+[BOT] semantic_id=matt-hardy-recalls-advice-given-to-him-by-late-wwe-hall-of-famer-eddie-guerrero
+[SCORE] iniziale=55 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | Matt Hardy ricorda un consiglio di Eddie Guerrero, evento già accaduto. La categoria è WWE poiché entrambi sono star WWE.
+[EDITORIAL v72.3] translation_notes=Non tradurre "WWE Hall of Famer" in "Hall of Famer della WWE", mantenere l'originale.; "Latino Heat" è un soprannome e va mantenuto.; "Live events" si può tradurre con "show dal vivo" o "eventi dal vivo".
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Matt Hardy ricorda un consiglio di Eddie Guerrero, evento già accaduto. La categoria è WWE poiché entrambi sono star WWE.
+[PERF v71] analisi editoriale AI v72: 3.26s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Matt Hardy Recalls Advice Given To Him By Late WWE Hall Of Famer Eddie Guerrero
+[SCORE] raffinato=55 priority=low | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Matt Hardy Recalls Advice Given To Him By Late WWE Hall Of Famer Eddie Guerrero
+[V71] story_signature=matt_hardy|matt_hardy_recalls_advice|given_to_him_by|update|wwe semantic_status=new_story freshness=0.591
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=6
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/matt-hardy-recalls-advice-given-to-him-by-late-wwe-hall-of-famer-eddie-guerrero/intro-1778166536.jpg
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[POSTEDIT v79] Testo rifinito con: gemini-2.5-flash-lite
+[PERF v71] traduzione: 4.60s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Matt Hardy ricorda i consigli di Eddie Guerrero su come gestire il pubblico
+[WARN v71.3] Quote check sotto soglia ma non bloccante: ['quote count ratio below threshold: 0.33'] - Matt Hardy Recalls Advice Given To Him By Late WWE Hall Of Famer Eddie Guerrero
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.63s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/matt-hardy-recalls-advice-given-to-him-by-late-wwe-hall-of-famer-eddie-guerrero/l-intro-1778166536.jpg
+[MEDIA] Immagine caricata: 4109
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.68s
+[PERF v71] totale articolo pubblicato 'Matt Hardy Recalls Advice Given To Him By Late WWE Hall Of F': 12.85s
+[OK] Pubblicato: [SPOILER] Matt Hardy ricorda i consigli di Eddie Guerrero su come gestire il pubblico
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: WWE Backlash 2026 Match Order Reportedly Revealed
+[BOT] semantic_id=wwe-backlash-2026-match-order-reportedly-revealed
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite |  | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Titolo del PLE "Backlash" da mantenere in inglese.; Nomi dei titoli "United States Championship" e "World Heavyweight Championship" da mantenere in inglese.; "Match Order Reportedly Revealed" suggerisce una fuga di notizie e non una preview certa, ma il contenuto principale riguarda l'ordine dei match di un evento futuro. La tipologia P
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 3.72s
+[SCORE] raffinato=50 priority=low | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, titolo/championship, combo top name lead + evento forte, titolo vago, v62 media rights/streaming, v68 cap annuncio vago/futuro, v70 cap preview hard, v72.3 cap rumor: niente boost raffinamento
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 50/75 - WWE Backlash 2026 Match Order Reportedly Revealed
+[BOT] Elaborazione: Spoiler: Opening Match Revealed for 2026 WWE Backlash
+[BOT] semantic_id=spoiler-opening-match-revealed-for-2026-wwe-backlash
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=0
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.95 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo annuncia un match per un evento futuro (Backlash 2026) e fornisce dettagli sulla card, rientrando perfettamente nella definizione di PREVIEW. La categoria WWE è chiara dato il focus su Seth Rollins, Bron Breakker, Roman Reigns, J
+[EDITORIAL v72.3] translation_notes=I nomi dei titoli ufficiali (WWE World Heavyweight Championship, United States Championship) devono rimanere in inglese.; Le date specifiche relative a eventi futuri (es. 2026) devono essere tradotte fedelmente.; Evitare calchi come "building" o "pushing" il senso di "costruire una rivalità" o "promuovere una rivalità".
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo annuncia un match per un evento futuro (Backlash 2026) e fornisce dettagli sulla card, rientrando perfettamente nella definizione di PREVIEW. La categoria WWE è chiara dato il focus su Seth Rollins, Bron Breakker, Roman Reigns, J
+[PERF v71] analisi editoriale AI v72: 1.90s
+[SCORE] raffinato=56 priority=low | WWE/main roster, nomi forti lead: seth rollins, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Spoiler: Opening Match Revealed for 2026 WWE Backlash
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 7 candidati provati | mode=normal
+===== RUN END [2026-05-09 22:31:31] VERSION [v79_ai_native_translation_spoiler_postedit (6507f5a)] =====
+
