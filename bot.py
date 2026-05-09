@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v74_report_pending_signature_fix"
+BOT_VERSION = "v75_hard_results_report_detection"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -8534,6 +8534,183 @@ Contesto breve:
     except Exception as e:
         print(f"[TITLE v73] Repair titolo AI fallito: {e}")
     return t or v721_deterministic_title_cleanup(generate_fallback_title(source_title, source_text, source_url, title))
+
+
+
+# =========================
+# v75 overrides: hard results report detection + ratings/viewership de-prioritization
+# =========================
+
+_ORIG_V75_is_results_article = is_results_article
+_ORIG_V75_classify_article_type_fallback = classify_article_type_fallback_v68
+_ORIG_V75_v70_is_hard_preview = v70_is_hard_preview
+_ORIG_V75_v68_score_cap = v68_score_cap
+_ORIG_V75_editorial_tier = editorial_tier
+_ORIG_V75_make_report_event_key = make_report_event_key
+
+V75_RESULTS_REPORT_TERMS = [
+    "results", "result", "risultati", "risultato", "highlights", "key moments",
+    "recap", "live results", "full results", "quick results", "show report",
+]
+
+V75_RESULTS_SHOW_TERMS = [
+    "raw", "smackdown", "nxt", "dynamite", "collision", "rampage", "impact",
+    "wrestlemania", "royal rumble", "survivor series", "money in the bank", "backlash",
+    "summerslam", "summer slam", "crown jewel", "elimination chamber",
+    "saturday night main event", "saturday nights main event", "saturday night s main event",
+    "clash in italy", "clash at the castle", "all in", "all out", "double or nothing",
+    "full gear", "revolution", "forbidden door", "worlds end", "slammiversary", "bound for glory",
+]
+
+V75_MONTH_RE = r"(?:january|february|march|april|may|june|july|august|september|october|november|december)"
+
+
+def v75_has_report_date(title_url_probe="", raw_title_url=""):
+    if re.search(r"\b\d{1,2}[/-]\d{1,2}(?:[/-]\d{2,4})?\b", raw_title_url or title_url_probe, flags=re.I):
+        return True
+    if re.search(rf"\b{V75_MONTH_RE}\s+\d{{1,2}}(?:st|nd|rd|th)?(?:,?\s+\d{{4}})?\b", raw_title_url, flags=re.I):
+        return True
+    if re.search(r"\b20\d{2}[-/]\d{1,2}[-/]\d{1,2}\b", raw_title_url, flags=re.I):
+        return True
+    return False
+
+
+def v75_is_ratings_viewership_report(title="", url="", text=""):
+    title_url = normalize_for_check(f"{title} {url}")
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:600]}")
+    if any(x in title_url for x in ["viewership", "ratings report", "rating report", "ratings", "rating"]):
+        return True
+    if "viewership" in probe and any(x in probe for x in ["ratings", "rating", "report"]):
+        return True
+    return False
+
+
+def v75_is_hard_results_report(title="", url="", text=""):
+    """Riconoscimento deterministico dei veri report/results di show.
+
+    Regola v75: titoli con schema [show] + Results/Highlights/Key Moments/Recap
+    + [data] sono sempre RESULTS_REPORT e non possono essere cappati come preview.
+    Ratings/viewership report sono esplicitamente esclusi: sono analytics, non report show.
+    """
+    if v75_is_ratings_viewership_report(title, url, text):
+        return False
+
+    raw_title_url = sanitize_text(f"{title} {url}")
+    title_url = normalize_for_check(raw_title_url)
+    if not title_url:
+        return False
+
+    has_show = any(_probe_has_phrase(title_url, show) for show in V75_RESULTS_SHOW_TERMS)
+    has_report = any(_probe_has_phrase(title_url, term) for term in V75_RESULTS_REPORT_TERMS)
+    has_date = v75_has_report_date(title_url, raw_title_url)
+
+    if has_show and has_report and has_date:
+        return True
+
+    # Fallback stretto: brand + results nel titolo/URL e testo molto lungo da report.
+    # Serve per URL/titoli senza data esplicita ma con scrape completo.
+    if has_report and any(brand in title_url for brand in ["wwe", "aew", "tna", "impact"]) and len(text or "") >= 2500:
+        return True
+
+    return False
+
+
+def is_results_article(source_title="", source_url="", text=""):
+    if v75_is_hard_results_report(source_title, source_url, text):
+        return True
+    if v75_is_ratings_viewership_report(source_title, source_url, text):
+        return False
+    return _ORIG_V75_is_results_article(source_title, source_url, text)
+
+
+def classify_article_type_fallback_v68(title="", text="", url=""):
+    if v75_is_hard_results_report(title, url, text):
+        return "RESULTS_REPORT"
+    if v75_is_ratings_viewership_report(title, url, text):
+        return "OTHER"
+    return _ORIG_V75_classify_article_type_fallback(title, text, url)
+
+
+def v70_is_hard_preview(title="", text="", url=""):
+    if v75_is_hard_results_report(title, url, text):
+        return False
+    return _ORIG_V75_v70_is_hard_preview(title, text, url)
+
+
+def v68_score_cap(score, title="", text="", url="", reasons=None):
+    reasons = reasons or []
+    score, reasons = _ORIG_V75_v68_score_cap(score, title, text, url, reasons)
+
+    if v75_is_hard_results_report(title, url, text):
+        if score < REPORT_MIN_COMPLETENESS_SCORE:
+            score = REPORT_MIN_COMPLETENESS_SCORE
+        reasons.append("v75 hard results report")
+        return score, reasons
+
+    if v75_is_ratings_viewership_report(title, url, text):
+        if score > 54:
+            score = 54
+            reasons.append("v75 cap ratings/viewership report")
+        return score, reasons
+
+    return score, reasons
+
+
+def editorial_tier(score, title="", text="", url=""):
+    if v75_is_hard_results_report(title, url, text):
+        return "tier1", "v75 hard results report"
+    if v75_is_ratings_viewership_report(title, url, text) and int(score or 0) < MIN_PUBLISH_SCORE:
+        return "skip", "v75 ratings/viewership report sotto soglia"
+    return _ORIG_V75_editorial_tier(score, title, text, url)
+
+
+def v75_detect_show_key_from_title(title="", url=""):
+    probe = normalize_for_check(f"{title} {url}")
+    show_map = [
+        ("saturday night main event", "wwe-saturday-night-main-event"),
+        ("saturday nights main event", "wwe-saturday-night-main-event"),
+        ("money in the bank", "wwe-money-in-the-bank"),
+        ("royal rumble", "wwe-royal-rumble"),
+        ("survivor series", "wwe-survivor-series"),
+        ("elimination chamber", "wwe-elimination-chamber"),
+        ("crown jewel", "wwe-crown-jewel"),
+        ("wrestlemania", "wwe-wrestlemania"),
+        ("summerslam", "wwe-summerslam"),
+        ("summer slam", "wwe-summerslam"),
+        ("backlash", "wwe-backlash"),
+        ("clash in italy", "wwe-clash-in-italy"),
+        ("clash at the castle", "wwe-clash-at-the-castle"),
+        ("smackdown", "wwe-smackdown"),
+        ("raw", "wwe-raw"),
+        ("nxt", "wwe-nxt"),
+        ("dynamite", "aew-dynamite"),
+        ("collision", "aew-collision"),
+        ("rampage", "aew-rampage"),
+        ("all in", "aew-all-in"),
+        ("all out", "aew-all-out"),
+        ("double or nothing", "aew-double-or-nothing"),
+        ("full gear", "aew-full-gear"),
+        ("revolution", "aew-revolution"),
+        ("worlds end", "aew-worlds-end"),
+        ("forbidden door", "aew-forbidden-door"),
+        ("slammiversary", "tna-slammiversary"),
+        ("bound for glory", "tna-bound-for-glory"),
+        ("impact", "tna-impact"),
+    ]
+    for key, value in show_map:
+        if _probe_has_phrase(probe, key):
+            return value
+    return ""
+
+
+def make_report_event_key(title="", url="", text=""):
+    if v75_is_hard_results_report(title, url, text):
+        show = v75_detect_show_key_from_title(title, url) or "show"
+        date_key = _extract_report_date_key(title, url, text)
+        if date_key:
+            return f"report:{show}-{date_key}"
+    return _ORIG_V75_make_report_event_key(title, url, text)
+
 
 # Aggiorna label di log residue nei percorsi di traduzione a blocchi senza alterare la logica.
 
