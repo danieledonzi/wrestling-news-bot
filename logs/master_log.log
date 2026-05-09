@@ -5394,3 +5394,248 @@ TypeError: process_candidate_item() missing 1 required positional argument: 'sou
 [PENDING] Candidati salvati per dopo: 3
 ===== RUN END [2026-05-09 11:14:59] VERSION [v74_report_pending_signature_fix (e145846)] =====
 
+
+===== RUN START [2026-05-09 11:21:44] VERSION [v74_report_pending_signature_fix (50df818)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/8/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (13/75): UFC Star Calls Conspiracy On Khamzat Chimaev Making Weight, Claims 328 Fight Is Rigged
+[SKIP] Score sotto soglia editoriale (0/75): Khamzat Chimaev Calls Himself A Terrorist, Kicks Sean Strickland At UFC Presser
+[SKIP] Score sotto soglia editoriale (0/75): President Donald Trump Hosts UFC Fighters To Oval Office Ahead Of Freedom 250
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168381/wwe-smackdown-tiffany-stratton-first-womens-us-title-defense-kiana-james/
+[SKIP] Score sotto soglia editoriale (35/75): Kevin Nash Says This WWE Star Is One Of The Only Things That 'Amuses' Him Anymore
+[SKIP] Score sotto soglia editoriale (0/75): UFC Legend Warns Sean Strickland May Be Serious About Shooting Khamzat Chimaev
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168347/wwe-wrestlemania-42-bully-ray-roman-reigns-oba-femi-lost-title/
+[SKIP] Score sotto soglia editoriale (0/75): Khamzat Chimaev On Shooting Threats Before UFC 328: 'I Would Be Happy To Die'
+[SKIP] Score sotto soglia editoriale (38/75): WWE's Jacob Fatu Explains Why He Won't Change The Name Of The Tongan Death Grip
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168293/wwe-sami-zayn-fully-turned-heel/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168269/wwe-backlash-bully-ray-paul-heyman-jacob-fatu-roman-reigns-pitches-surprise-involvement/
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2168230/wwe-backlash-danhausen-jelly-roll-mystery-partner-backstage-speculation/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168222/wwe-raw-smackdown-media-rights-contracts-2019-2024-public-shareholder-lawsuit/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168165/wwe-pay-cuts-details/
+[SKIP] Score sotto soglia editoriale (0/75): Chael Sonnen: UFC Star Didn't Respect Career Enough To 'Stick A Needle In His A**'
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (31/75): AEW Collision Fairway to Hell Preview for May 9, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (50/75): WWE Backlash 2026 Preview: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (23/75): WWE Roasted By Fans For Using AI Slop During 5/8 SmackDown
+[SKIP] URL già in history: https://www.ringsidenews.com/jade-cargill-makes-surprise-return-during-58-wwe-smackdown/
+[SKIP] Score sotto soglia editoriale (27/75): Paul Heyman Reveals Favor He Did For GUNTHER During 5/8 WWE SmackDown
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-pays-tribute-ted-turner-during-58-smackdown/
+[SKIP] Score sotto soglia editoriale (33/75): Shane McMahon's WWE Status After Profile Appears Under Active Roster
+[SKIP] Esclusione editoriale dura (v71.1 no bypass for preview/speculative announcement): WWE SmackDown Results, Highlights and Key Moments for May 8, 2026
+[SKIP] Score sotto soglia editoriale (21/75): AEW Dynamite Viewership Sees Drop on May 6, 2026
+[SKIP] URL già in history: https://www.ringsidenews.com/chelsea-green-reveals-status-may-8-wwe-smackdown-heart-procedure/
+[SCORE] 100 high - GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE | WWE/main roster, top star titolo: cody rhodes, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship, v71 freshness=0.489
+[SCORE] 96 high - WWE NXT Viewership & Ratings Report, 5/5/2026 | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v71 freshness=0.62
+[SCORE] 82 high - WWE SmackDown Results 5/8 - Women's US Championship On The Line, GUNTHER Appears | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 titolo/championship, v71 freshness=0.455
+[SCORE] 81 high - Backstage Update On Roman Reigns' WWE Schedule In July | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, ritorno/debutto, v71 freshness=0.394
+[SCORE] 69 medium - Fans Demand WWE Fire Nia Jax After Paige's Bloody Injury on SmackDown | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, infortunio, show settimanale, v71 source reliability soft penalty, v71 freshness=0.695, v48 tier2: 55-74
+[SCORE] 60 medium - WWE Using Bots To Crack Down On Streamer Clips | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, floor WWE main roster storyline, v62 reazioni/tributi, v71 source reliability soft penalty, v71 freshness=0.438, v48 tier2: 55-74
+[SCORE] 59 low - Paige Reveals Bloody Head Wound and Stitches After Chaotic WWE SmackDown Segment | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v71 source reliability soft penalty, v71 freshness=0.48, v48 tier2: 55-74
+[SCORE] 50 low - WWE SmackDown Spoiler Lineup for May 8, 2026: Full Match Card and Backstage Notes Revealed | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, show settimanale, floor WWE main roster storyline, v71 source reliability soft penalty, v71 freshness=0.41, v48 tier3: 45-54 contestuale
+[SCORE] 41 low - Gingerbread Man Funeral Ends With The Dead Rising During 5/8 WWE SmackDown | WWE/main roster, show settimanale, v71 source reliability soft penalty, v71 freshness=0.477, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 2 news >=90, 4 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 4
+[BOT] Elaborazione: GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE
+[BOT] semantic_id=gunther-joins-wwe-smackdown-appears-set-for-title-match-with-cody-rhodes-at-italy-ple
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=1.00 model=gemini-2.5-flash-lite | Il titolo e il lead presentano un evento futuro (Clash in Italy PLE) con match annunciato e partecipanti, quindi rientra chiaramente nella definizione di PREVIEW. La categoria è WWE in quanto riguarda main roster WWE. | v72.3 anti-falso pre
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli "Undisputed WWE Champion" e "Ring General" in inglese.; Evitare traduzioni letterali come "owe a favor" (es. "aveva un debito nei confronti di"), preferire formule più fluide come "aveva un favore da ricambiare".; La sigla "PLE" si può mantenere o tradurre con "Premium Live Event" se necessario per chiarezza, ma spesso è compresa nel contesto italiano del wrestling.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Il titolo e il lead presentano un evento futuro (Clash in Italy PLE) con match annunciato e partecipanti, quindi rientra chiaramente nella definizione di PREVIEW. La categoria è WWE in quanto riguarda main roster WWE. | v72.3 anti-falso pre
+[PERF v71] analisi editoriale AI v72: 3.65s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: cody rhodes, nomi forti lead: seth rollins, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 titolo/championship
+[V71] story_signature=cody_rhodes|gunther|gunther_joins_wwe_smackdown|contract|wwe|smackdown|wrestlemania semantic_status=new_story freshness=0.727
+[PERF v71] WP recent posts dedupe: 2.36s
+[SKIP] News core già pubblicata da altra fonte: GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 3 elementi
+[BOT] Elaborazione: WWE NXT Viewership & Ratings Report, 5/5/2026
+[BOT] semantic_id=wwe-nxt-viewership-ratings-report-552026
+[SCORE] iniziale=96 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RESULTS_REPORT conf=1.00 | category=NXT (6) conf=1.00 model=gemini-2.5-flash-lite | Report completo sui dati d'ascolto e rating di un episodio di NXT. La categoria NXT è la più appropriata. Nessuna nota particolare necessaria oltre quelle standard.
+[PERF v71] analisi editoriale AI v72: 0.82s
+[SCORE] raffinato=96 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto
+[V71] story_signature=wwe_nxt_viewership|ratings_report|debut|wwe|nxt semantic_status=new_story freshness=0.727
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=5
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwe-nxt-viewership-ratings-report-552026/intro-1778294687.jpg
+[PERF v71] traduzione: 3.67s
+[FIX] Titolo non valido (ok) -> fallback automatico: WWE NXT Viewership & Ratings Report, 5 maggio 2026
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): NXT: Ascesa di ascolti e rating il 5 maggio 2026
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 3.81s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-nxt-viewership-ratings-report-552026/l-intro-1778294687.jpg
+[MEDIA] Immagine caricata: 4015
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.71s
+[PERF v71] totale articolo pubblicato 'WWE NXT Viewership & Ratings Report, 5/5/2026': 11.55s
+[OK] Pubblicato: NXT: Ascesa di ascolti e rating il 5 maggio 2026
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: WWE SmackDown Results 5/8 - Women's US Championship On The Line, GUNTHER Appears
+[BOT] semantic_id=wwe-smackdown-results-58-womens-us-championship-on-the-line-gunther-appears
+[SCORE] iniziale=82 priority=high
+[SCRAPE] Articolo results rilevato: testo completo (18608 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=70, image=10, embed=0
+[PENDING] Coda salvata: 3 elementi
+[REPORT] Salvato/aggiornato pending report: report:wwe-raw-2026-05-08 | pronto tra 330 min
+[REPORT] Valuto fonti per report: report:wwe-smackdown-2026-05-08
+[SCRAPE] Articolo results rilevato: testo completo (18608 caratteri)
+[REPORT] Fonte migliore: score_completezza=258 | www.wrestlinginc.com | WWE SmackDown Results 5/8 - Women's US Championship On The Line, GUNTHER Appears
+[BOT] Elaborazione: WWE SmackDown Results 5/8 - Women's US Championship On The Line, GUNTHER Appears
+[BOT] semantic_id=report-wwe-smackdown-2026-05-08
+[SCORE] iniziale=82 priority=high
+[REPORT] Uso testo prefetched per report maturo (18608 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=70, image=10, embed=0
+[SCORE] raffinato=56 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - WWE SmackDown Results 5/8 - Women's US Championship On The Line, GUNTHER Appears
+[BOT] News candidate totali: 9 | mode=normal | max nuove=3 | pending pubblicati=1
+[BOT] Elaborazione: GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE
+[BOT] semantic_id=gunther-joins-wwe-smackdown-appears-set-for-title-match-with-cody-rhodes-at-italy-ple
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash-lite | Il focus principale dell'articolo è la presentazione di un evento futuro (Clash in Italy PLE) con match annunciato e sviluppo della storyline. Non racconta eventi già accaduti. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=I nomi ufficiali dei titoli (Undisputed WWE Champion) vanno lasciati in inglese.; "Released" non va tradotto letteralmente ma come "licenziato", "tagliato" o "ha lasciato" a seconda del contesto (in questo caso non si applica).; Le quote (es. "owing GUNTHER a favor") vanno tradotte fedelmente.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Il focus principale dell'articolo è la presentazione di un evento futuro (Clash in Italy PLE) con match annunciato e sviluppo della storyline. Non racconta eventi già accaduti. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 3.20s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: cody rhodes, nomi forti lead: seth rollins, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 titolo/championship
+[V71] story_signature=cody_rhodes|gunther|gunther_joins_wwe_smackdown|contract|wwe|smackdown|wrestlemania semantic_status=new_story freshness=0.605
+[SKIP] News core già pubblicata da altra fonte: GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 2 elementi
+[SKIP v72.1] Gia pubblicata da pending in questa run: WWE NXT Viewership & Ratings Report, 5/5/2026
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: WWE SmackDown Results 5/8 - Women's US Championship On The Line, GUNTHER Appears
+[BOT] semantic_id=wwe-smackdown-results-58-womens-us-championship-on-the-line-gunther-appears
+[SCORE] iniziale=82 priority=high
+[SCRAPE] Articolo results rilevato: testo completo (18608 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=70, image=10, embed=0
+[PENDING] Coda salvata: 3 elementi
+[REPORT] Salvato/aggiornato pending report: report:wwe-raw-2026-05-08 | gia' maturo
+[BOT] Elaborazione: Backstage Update On Roman Reigns' WWE Schedule In July
+[BOT] semantic_id=backstage-update-on-roman-reigns-wwe-schedule-in-july
+[SCORE] iniziale=81 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo riporta aggiornamenti sul futuro di Roman Reigns, basati su indiscrezioni e voci di corridoio, fornendo dettagli non confermati sul suo calendario di apparizioni e su possibili cambiamenti contrattuali. La natura speculativa e le
+[EDITORIAL v72.3] translation_notes=Il titolo "Backstage Update On Roman Reigns' WWE Schedule In July" deve essere reso in italiano come "Aggiornamento dal backstage sullo schedule di Roman Reigns in WWE a Luglio" o ; La frase "part-time star" può essere tradotta con "star part-time" o "lottatore part-time" a seconda del tono editoriale, evitando "stella a tempo parziale" che suona meno naturale; "World Heavyweight Champion" è un titolo ufficiale e va mantenuto in inglese.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta aggiornamenti sul futuro di Roman Reigns, basati su indiscrezioni e voci di corridoio, fornendo dettagli non confermati sul suo calendario di apparizioni e su possibili cambiamenti contrattuali. La natura speculativa e le
+[PERF v71] analisi editoriale AI v72: 4.89s
+[SCORE] raffinato=68 priority=medium | WWE/main roster, top star titolo: roman reigns, nomi forti lead: cm punk, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v72.3 cap rumor: niente boost raffinamento, v72.3 cap rumor
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Backstage Update On Roman Reigns' WWE Schedule In July
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:roman-reigns:cm-punk -> event:rumor:backstage-update-roman-reigns-schedule-july
+[V71] story_signature=roman_reigns|backstage_update_on_roman|reigns_wwe_schedule_in|return|wwe|raw|summerslam|wrestlemania semantic_status=new_story freshness=0.51
+[SKIP] News core già pubblicata da altra fonte: Backstage Update On Roman Reigns' WWE Schedule In July
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Fans Demand WWE Fire Nia Jax After Paige's Bloody Injury on SmackDown
+[BOT] semantic_id=fans-demand-wwe-fire-nia-jax-after-paiges-bloody-injury-on-smackdown
+[SCORE] iniziale=69 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=16, image=0, embed=19
+[BOT] Embed trovati: 19
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash-lite | L'articolo parla di un incidente avvenuto durante SmackDown e delle reazioni dei fan post-evento, non presenta un evento futuro. La categoria è WWE in quanto l'evento è accaduto in uno show WWE.
+[EDITORIAL v72.3] translation_notes=I nomi dei titoli/cinture non vanno tradotti (es. WWE Women's Championship). "Busted open" va tradotto come "si è aperta la testa" o "ha sanguinato". "Firing" si traduce come "lice
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo parla di un incidente avvenuto durante SmackDown e delle reazioni dei fan post-evento, non presenta un evento futuro. La categoria è WWE in quanto l'evento è accaduto in uno show WWE.
+[PERF v71] analisi editoriale AI v72: 2.47s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Fans Demand WWE Fire Nia Jax After Paige's Bloody Injury on SmackDown
+[SCORE] raffinato=91 priority=high | WWE/main roster, nomi forti lead: brie bella, impatto roster/storyline, WWE main roster + storyline/evento, infortunio, PLE/PPV, contenuto leggero, v62 reazioni/tributi
+[V71] story_signature=fans_demand_wwe_fire|nia_jax_after_paige_s|bloody_injury|injury|wwe|smackdown|backlash semantic_status=new_story freshness=0.695
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:cody-rhodes-injury - Fans Demand WWE Fire Nia Jax After Paige's Bloody Injury on SmackDown
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=16
+[PERF v71] traduzione: 7.64s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Nia Jax nel mirino dei fan dopo l'infortunio di Paige a SmackDown
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 7.54s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/fans-demand-wwe-fire-nia-jax-after-paiges-bloody-injury-on-smackdown-32.jpg
+[MEDIA] Immagine caricata: 4018
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.11s
+[PERF v71] totale articolo pubblicato 'Fans Demand WWE Fire Nia Jax After Paige's Bloody Injury on ': 19.65s
+[OK] Pubblicato: Nia Jax nel mirino dei fan dopo l'infortunio di Paige a SmackDown
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: WWE Using Bots To Crack Down On Streamer Clips
+[BOT] semantic_id=wwe-using-bots-to-crack-down-on-streamer-clips
+[SCORE] iniziale=60 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, image=0, embed=0
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.90 | category=BUSINESS (15) conf=0.90 model=gemini-2.5-flash-lite | L'articolo discute delle strategie aziendali della WWE per proteggere il proprio contenuto online tramite strumenti automatizzati, rientrando nella categoria Business. Il tipo di articolo è Business poiché si concentra su una policy azienda
+[EDITORIAL v72.3] translation_notes=Mantenere "WWE" e "Streamer" in inglese.; "Takedown" tradurre con "rimozione" o "blocco".; "Bots" tradurre con "bot" o "programmi automatici".
+[CATEGORY v73] Business downgrade: BUSINESS -> WWE | focus non business reale
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo discute delle strategie aziendali della WWE per proteggere il proprio contenuto online tramite strumenti automatizzati, rientrando nella categoria Business. Il tipo di articolo è Business poiché si concentra su una policy azienda
+[PERF v71] analisi editoriale AI v72: 2.03s
+[SCORE] raffinato=93 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 reazioni/tributi
+[V71] story_signature=wwe_using_bots_to|crack_down_on_streamer|report|wwe semantic_status=new_story freshness=0.438
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=7
+[PERF v71] traduzione: 1.88s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): WWE: automazione per bloccare le clip online
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.74s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-using-bots-to-crack-down-on-streamer-clips-52.jpg
+[MEDIA] Immagine caricata: 4021
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.04s
+[PERF v71] totale articolo pubblicato 'WWE Using Bots To Crack Down On Streamer Clips': 7.42s
+[OK] Pubblicato: WWE: automazione per bloccare le clip online
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Paige Reveals Bloody Head Wound and Stitches After Chaotic WWE SmackDown Segment
+[BOT] semantic_id=paige-reveals-bloody-head-wound-and-stitches-after-chaotic-wwe-smackdown-segment
+[SCORE] iniziale=59 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, image=0, embed=1
+[BOT] Embed trovati: 2
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash-lite | L'articolo descrive un infortunio avvenuto durante un segmento post-show di SmackDown, classificandolo correttamente come POST_SHOW_NEWS. La categoria WWE è appropriata dato il focus sull'evento e la promotion.
+[EDITORIAL v72.3] translation_notes=Mantenere "WWE Women's Tag Team Champion" in inglese.; "Busted open" va tradotto con "ferita" o "lacerata" a seconda del contesto specifico, non con calchi come "sfondata".; "Stitches" va tradotto con "punti di sutura".
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo descrive un infortunio avvenuto durante un segmento post-show di SmackDown, classificandolo correttamente come POST_SHOW_NEWS. La categoria WWE è appropriata dato il focus sull'evento e la promotion.
+[PERF v71] analisi editoriale AI v72: 3.19s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Paige Reveals Bloody Head Wound and Stitches After Chaotic WWE SmackDown Segment
+[SCORE] raffinato=84 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, contenuto leggero, v62 ritorno/debutto, v62 cap injury/intervista
+[V71] story_signature=paige_reveals_bloody_head|stitches_after_chaotic_wwe|smackdown_segment|return|wwe|smackdown semantic_status=new_story freshness=0.713
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=8
+[PERF v71] traduzione: 3.05s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Paige mostra ferita e punti di sutura dopo un segmento caotico a SmackDown
+/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py:5163: MarkupResemblesLocatorWarning: The input passed in on this line looks more like a URL than HTML or XML.
+
+If you meant to use Beautiful Soup to parse the web page found at a certain URL, then something has gone wrong. You should use an Python package like 'requests' to fetch the content behind the URL. Once you have the content as a string, you can feed that string into Beautiful Soup.
+
+However, if you want to parse some data that happens to look like a URL, then nothing has gone wrong: you are using Beautiful Soup correctly, and this warning is spurious and can be filtered. To make this warning go away, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import MarkupResemblesLocatorWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=MarkupResemblesLocatorWarning)
+    
+  q = BeautifulSoup(m.group(1), "html.parser").get_text(" ", strip=True)
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 4.03s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/paige-reveals-bloody-head-wound-and-stitches-after-chaotic-wwe-smackdown-segment-24.jpg
+[MEDIA] Immagine caricata: 4024
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.17s
+[PERF v71] totale articolo pubblicato 'Paige Reveals Bloody Head Wound and Stitches After Chaotic W': 12.21s
+[OK] Pubblicato: Paige mostra ferita e punti di sutura dopo un segmento caotico a SmackDown
+[PENDING] Coda salvata: 2 elementi
+[BOT] Pubblicati 4 articoli (1 pending + 3 nuove) su 10 candidati provati | mode=normal
+===== RUN END [2026-05-09 11:21:44] VERSION [v74_report_pending_signature_fix (50df818)] =====
+
