@@ -6675,3 +6675,275 @@ However, if you want to parse some data that happens to look like a URL, then no
 [PENDING] Candidati salvati per dopo: 3
 ===== RUN END [2026-05-09 16:23:40] VERSION [v77_editorial_intelligence_guardrails (8b78ca5)] =====
 
+
+===== RUN START [2026-05-09 16:45:03] VERSION [v77_editorial_intelligence_guardrails (e8740a4)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[PERF v71] WP lookup event_key: 0.92s
+[PENDING] Rimuovo report già pubblicato: report:wwe-smackdown-2026-05-08
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - TKO Quarterly Earnings Report Shows WWE Growth Despite Falling Ticket Sales
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165551/sheamus-advocates-irish-wwe-ple/
+[SKIP] Score sotto soglia editoriale (20/75): Jerry Lawler Got 'Shoved' Into WWE Commentary Role
+[SKIP] Score sotto soglia editoriale (0/75): Matt Hardy Looks Back On V1 Character And His 'Meat And Potatoes' Role In Tag Team
+[SKIP] Score sotto soglia editoriale (56/75): WWE Backlash 2026 Full & Final Card
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2164991/wwe-wrestlemania-3-cody-rhodes-best-edition-introduce-new-fans/
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/8/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168395/wwe-nxt-viewership-ratings-report-may-5-2026/
+[SKIP] Score sotto soglia editoriale (13/75): UFC Star Calls Conspiracy On Khamzat Chimaev Making Weight, Claims 328 Fight Is Rigged
+[SKIP] Score sotto soglia editoriale (0/75): Khamzat Chimaev Calls Himself A Terrorist, Kicks Sean Strickland At UFC Presser
+[SKIP] Score sotto soglia editoriale (56/75): GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE
+[SKIP] Score sotto soglia editoriale (0/75): President Donald Trump Hosts UFC Fighters To Oval Office Ahead Of Freedom 250
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168381/wwe-smackdown-tiffany-stratton-first-womens-us-title-defense-kiana-james/
+[SKIP] Score sotto soglia editoriale (35/75): Kevin Nash Says This WWE Star Is One Of The Only Things That 'Amuses' Him Anymore
+[SKIP] Score sotto soglia editoriale (0/75): UFC Legend Warns Sean Strickland May Be Serious About Shooting Khamzat Chimaev
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168347/wwe-wrestlemania-42-bully-ray-roman-reigns-oba-femi-lost-title/
+[SKIP] Score sotto soglia editoriale (0/75): Khamzat Chimaev On Shooting Threats Before UFC 328: 'I Would Be Happy To Die'
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (51/75): Roman Reigns Sends Final Warning To Jacob Fatu Hours Before WWE Backlash
+[SKIP] Score sotto soglia editoriale (57/75): Adriana Rizzo Promotes New Swimwear Line In Matching Candy Stripe Bikini With Jazmyn Nyx
+[SKIP] URL già in history: https://www.ringsidenews.com/liv-morgan-loves-that-fans-hate-how-catchy-her-trouble-song/
+[SKIP] URL già in history: https://www.ringsidenews.com/liv-morgan-wants-dancing-with-the-stars-run-after-wwe-wrestlemania-performance/
+[SKIP] URL già in history: https://www.ringsidenews.com/vince-russo-defends-tko-asking-wwe-talent-take-pay-cuts/
+[SKIP] Score sotto soglia editoriale (15/75): Ted DiBiase Takes Shot At Virgil While Revealing WWE's Inside Joke Behind His Name
+[SKIP] Score sotto soglia editoriale (28/75): Paige Collett Wants To Become Wrestling's Female Paul Heyman
+[SKIP] Score sotto soglia editoriale (17/75): Ted DiBiase Reveals Person Behind Creation of Million Dollar Man Character
+[SKIP] Score sotto soglia editoriale (9/75): Harley Cameron Explains Why AEW Won Her Over After Chasing Wrestling Dream In America
+[SKIP] URL già in history: https://www.ringsidenews.com/final-wwe-backlash-betting-odds-released-massive-favorites-heading-event/
+[SKIP] URL già in history: https://www.ringsidenews.com/scott-steiners-son-confirms-wwe-wrestling-plans-nfl-career-ends/
+[SKIP] URL già in history: https://www.ringsidenews.com/cj-perry-steals-show-pink-bikini-video-drop/
+[SCORE] 88 high - TKO Quarterly Earnings Report Shows WWE Growth Despite Falling Ticket Sales | WWE/main roster, business/contratti WWE-TKO, rumor/backstage, v62 corporate/business, v62 categoria business, v71 freshness=0.605
+[SCORE] 78 medium - Matt Hardy Names WWE Hall Of Famer As Best 'Locker Room Leader' He's Worked With | WWE/main roster, top star titolo: undertaker, WWE main roster + storyline/evento, PLE/PPV, v71 freshness=0.601
+[SCORE] 73 medium - John Cena 'Historic' WWE Announcement May Not Be About Club WWE | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.556, v48 tier2: 55-74
+[SCORE] 57 low - Big E's WWE Status Following Kofi Kingston and Xavier Woods Exits | WWE/main roster, impatto roster/storyline, breaking/major update, v62 reazioni/tributi, v71 source reliability soft penalty, v71 freshness=0.568, v48 tier2: 55-74
+[SCORE] 56 low - Paige Collett Wants The Ring Rat To Run Through The Entire JCW Locker Room | ritorno/debutto, v62 media rights/streaming, v62 categoria business, v71 source reliability soft penalty, v71 freshness=0.544, v48 tier2: 55-74
+[SCORE] 55 low - Jerry Lawler Looks Back On Infamous WWE WrestleMania Match With Michael Cole | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v71 freshness=0.607, v48 tier2: 55-74
+[SCORE] 42 low - WWE Star Trick Williams Acknowledges Rivalry With Oba Femi & Je'Von Evans | WWE/main roster, nomi forti titolo: trick williams, oba femi, show settimanale, v71 freshness=0.582, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 5
+[BOT] Elaborazione: Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans
+[BOT] semantic_id=cody-rhodes-chooses-the-best-edition-of-wwe-wrestlemania-to-introduce-to-new-fans
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo riporta l'opinione di Cody Rhodes su quale edizione di WrestleMania sia la migliore per i nuovi fan. Non è una preview di un evento futuro né un report di risultati. La categoria è WWE poiché il focus è su una star WWE e WrestleM
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli in inglese: "Undisputed WWE Champion".; "New Fans" può essere tradotto come "nuovi fan" o "neofiti".; "The Show Of Shows" è uno slogan per WrestleMania, tradurre come "lo show degli show" o mantenere in inglese se il pubblico è familiare con il termine.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta l'opinione di Cody Rhodes su quale edizione di WrestleMania sia la migliore per i nuovi fan. Non è una preview di un evento futuro né un report di risultati. La categoria è WWE poiché il focus è su una star WWE e WrestleM
+[PERF v71] analisi editoriale AI v72: 6.23s
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star titolo: cody rhodes, business/contratti WWE-TKO, WWE main roster + storyline/evento, contratto, combo top name titolo + evento forte, PLE/PPV, opinione generica, v62 media rights/streaming, v62 categoria business
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans
+[FIX v72.3] Event key business rimossa per OPINION/WWE: event:business:cody-rhodes -> event:rumor:cody-rhodes-chooses-best-edition-introduce-fans
+[V71] story_signature=cody_rhodes|cody_rhodes_chooses_the|best_edition_of_wwe|title_change|wwe|wrestlemania semantic_status=new_story freshness=0.61
+[PERF v71] WP recent posts dedupe: 2.19s
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:rumor:cody-rhodes-chooses-best-edition-introduce-fans -> event:rumor:cody-rhodes-chooses-best-edition-introduce-fans-followup-cody-rhodes-chooses-best-edition-introduce-fans
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 2.58s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=3
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/cody-rhodes-chooses-the-best-edition-of-wwe-wrestlemania-to-introduce-to-new-fans/intro-1777992793.jpg
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=3 generato=['19']", "Numero evento alterato: WrestleMania sorgente=17 generato=['19']"]
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=3 generato=['19']", "Numero evento alterato: WrestleMania sorgente=17 generato=['19']"]
+[PERF v71] traduzione: 7.28s
+[SKIP] Traduzione fallita: Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans (err_type=validation)
+[FAILED] URL sospeso 24h dopo 4 validation fail: Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans
+[BOT] Elaborazione: TKO Quarterly Earnings Report Shows WWE Growth Despite Falling Ticket Sales
+[BOT] semantic_id=tko-quarterly-earnings-report-shows-wwe-growth-despite-falling-ticket-sales
+[SCORE] iniziale=88 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=BUSINESS (15) conf=1.00 model=gemini-2.5-flash-lite | L'articolo analizza i risultati finanziari trimestrali di TKO, focalizzandosi su ricavi, vendite di biglietti e strategie aziendali. Il focus non è su un evento futuro, un report di risultati di show, o una notizia post-show, ma sull'andame
+[EDITORIAL v72.3] translation_notes=Le cifre finanziarie devono essere tradotte letteralmente. "Quarterly Earnings Report" si traduce come "Rapporto sugli utili trimestrali". "Falling ticket sales" non implica necess; Evitare calchi come "ridiculously healthy economically" che potrebbe diventare "ridicolmente sano economicamente", meglio "estremamente solido economicamente" o "in ottima salute e; I nomi ufficiali dei titoli (es. Royal Rumble PLE) restano in inglese. La compagnia "TKO" va mantenuta così. "WWE" va mantenuto così. "UFC" va mantenuto così. "Wrestling Observer N
+[EDITORIAL v73] final type=OTHER | category=BUSINESS (15) | L'articolo analizza i risultati finanziari trimestrali di TKO, focalizzandosi su ricavi, vendite di biglietti e strategie aziendali. Il focus non è su un evento futuro, un report di risultati di show, o una notizia post-show, ma sull'andame
+[PERF v71] analisi editoriale AI v72: 3.32s
+[SCORE] raffinato=78 priority=medium | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, infortunio, PLE/PPV, non wrestling puro, opinione generica, v62 business/dirigenza, v62 categoria business, v66 cap opinion/commentary storyline
+[V71] story_signature=tko_quarterly_earnings_report|shows_wwe_growth_despite|falling_ticket_sales|business|wwe|tko semantic_status=new_story freshness=0.61
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - TKO Quarterly Earnings Report Shows WWE Growth Despite Falling Ticket Sales
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/tko-quarterly-earnings-report-shows-wwe-growth-despite-falling-ticket-sales/intro-1778343374.jpg
+[PERF v71] traduzione: 6.53s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Report TKO: utili WWE in crescita nonostante calo vendite biglietti
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.50s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/tko-quarterly-earnings-report-shows-wwe-growth-despite-falling-ticket-sales/l-intro-1778343374.jpg
+[MEDIA] Immagine caricata: 4068
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.91s
+[PERF v71] totale articolo pubblicato 'TKO Quarterly Earnings Report Shows WWE Growth Despite Falli': 14.95s
+[OK] Pubblicato: Report TKO: utili WWE in crescita nonostante calo vendite biglietti
+[PENDING] Coda salvata: 5 elementi
+[BOT] Elaborazione: Matt Hardy Names WWE Hall Of Famer As Best 'Locker Room Leader' He's Worked With
+[BOT] semantic_id=matt-hardy-names-wwe-hall-of-famer-as-best-locker-room-leader-hes-worked-with
+[SCORE] iniziale=78 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | Matt Hardy ha parlato di un veterano WWE, l'intervista è avvenuta dopo che l'evento è accaduto. Non è una preview.
+[EDITORIAL v72.3] translation_notes=Titolo della cintura in inglese: 'WWE Hall Of Famer'.; "Locker Room Leader" può essere tradotto come "leader dello spogliatoio" o "punto di riferimento dello spogliatoio". Valutare contesto.; Evitare calchi come "lay down the law", preferire "imporre disciplina" o "stabilire regole".
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Matt Hardy ha parlato di un veterano WWE, l'intervista è avvenuta dopo che l'evento è accaduto. Non è una preview.
+[PERF v71] analisi editoriale AI v72: 5.43s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Matt Hardy Names WWE Hall Of Famer As Best 'Locker Room Leader' He's Worked With
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: undertaker, WWE main roster + storyline/evento, contratto, combo top name titolo + evento forte, PLE/PPV
+[V71] story_signature=matt_hardy|matt_hardy_names_wwe|hall_of_famer_as|contract|wwe|tna semantic_status=new_story freshness=0.61
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=6
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/matt-hardy-names-wwe-hall-of-famer-as-best-locker-room-leader-hes-worked-with/intro-1778069266.jpg
+[PERF v71] traduzione: 3.32s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Matt Hardy: l'Hall of Famer WWE Undertaker è il miglior leader dello spogliatoio
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.46s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/matt-hardy-names-wwe-hall-of-famer-as-best-locker-room-leader-hes-worked-with/l-intro-1778069266.jpg
+[MEDIA] Immagine caricata: 4071
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.55s
+[PERF v71] totale articolo pubblicato 'Matt Hardy Names WWE Hall Of Famer As Best 'Locker Room Lead': 13.47s
+[OK] Pubblicato: Matt Hardy: l'Hall of Famer WWE Undertaker è il miglior leader dello spogliatoio
+[PENDING] Coda salvata: 4 elementi
+[BOT] Elaborazione: John Cena 'Historic' WWE Announcement May Not Be About Club WWE
+[BOT] semantic_id=john-cena-historic-wwe-announcement-may-not-be-about-club-wwe
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=1
+[BOT] Embed trovati: 2
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo presenta un annuncio imminente di John Cena a un evento futuro (Backlash), pur menzionando speculazioni passate. Il focus è sul futuro e sull'evento stesso. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=I titoli ufficiali delle cinture non vanno tradotti (es. WWE Championship, Universal Championship).; Evitare traduzioni letterali di espressioni come "shock the very foundation of WWE". Si potrebbe optare per "scuotere le fondamenta della WWE" o "rivoluzionare la WWE".; Le citazioni dirette di John Cena devono essere tradotte fedelmente mantenendo lo stile enfatico e promozionale.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo presenta un annuncio imminente di John Cena a un evento futuro (Backlash), pur menzionando speculazioni passate. Il focus è sul futuro e sull'evento stesso. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 22.85s
+[SCORE] raffinato=20 priority=skip | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v68 preview scaduta
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 20/75 - John Cena 'Historic' WWE Announcement May Not Be About Club WWE
+[BOT] Elaborazione: Big E's WWE Status Following Kofi Kingston and Xavier Woods Exits
+[BOT] semantic_id=big-es-wwe-status-following-kofi-kingston-and-xavier-woods-exits
+[SCORE] iniziale=57 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=0.80 model=gemini-2.5-flash-lite | L'articolo riporta un aggiornamento sullo status di Big E, non una notizia già avvenuta né un evento futuro. Le informazioni provengono da fonti interne riguardo alle intenzioni della WWE e ai piani per il suo coinvolgimento futuro, qualifi
+[EDITORIAL v72.3] translation_notes=Mantenere in inglese "WWE Kickoff shows" e "TKO system" se riferiti a nomi propri di eventi/sistemi.; La frase "WWE fully expects him to remain part of the company moving forward" va tradotta con un senso di forte probabilità ma senza certezza assoluta, dato il contesto di "rumor".; Attenzione a tradurre "monthly Kickoff shows" in modo scorrevole, evitando calchi come "show di kickoff mensili". Meglio "show di pre-show mensili" o "appuntamenti pre-show mensili
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta un aggiornamento sullo status di Big E, non una notizia già avvenuta né un evento futuro. Le informazioni provengono da fonti interne riguardo alle intenzioni della WWE e ai piani per il suo coinvolgimento futuro, qualifi
+[PERF v71] analisi editoriale AI v72: 4.28s
+[SCORE] raffinato=57 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, v62 ritorno/debutto, v72.3 cap rumor: niente boost raffinamento
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Big E's WWE Status Following Kofi Kingston and Xavier Woods Exits
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:tko-financials -> event:rumor:big-e-s-following-kofi-kingston-xavier-woods-exits
+[V71] story_signature=big_e_s_wwe_status|following_kofi_kingston|xavier_woods_exits|return|wwe|tko semantic_status=new_story freshness=0.813
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=9
+[PERF v71] traduzione: 3.06s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Big E resta in WWE dopo l'addio di Kofi Kingston e Xavier Woods
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 5.18s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/02/big-e-says-doctor-almost-begged-him-not-to-wrestle-again-after-broken-neck-30.jpg
+[MEDIA] Immagine caricata: 4074
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.24s
+[PERF v71] totale articolo pubblicato 'Big E's WWE Status Following Kofi Kingston and Xavier Woods ': 14.71s
+[OK] Pubblicato: Big E resta in WWE dopo l'addio di Kofi Kingston e Xavier Woods
+[PENDING] Coda salvata: 3 elementi
+[BOT] News candidate totali: 7 | mode=normal | max nuove=3 | pending pubblicati=3
+[SKIP v72.1] Gia pubblicata da pending in questa run: TKO Quarterly Earnings Report Shows WWE Growth Despite Falling Ticket Sales
+[PENDING] Coda salvata: 3 elementi
+[SKIP v72.1] Gia pubblicata da pending in questa run: Matt Hardy Names WWE Hall Of Famer As Best 'Locker Room Leader' He's Worked With
+[PENDING] Coda salvata: 3 elementi
+[BOT] Elaborazione: John Cena 'Historic' WWE Announcement May Not Be About Club WWE
+[BOT] semantic_id=john-cena-historic-wwe-announcement-may-not-be-about-club-wwe
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=1
+[BOT] Embed trovati: 2
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.80 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo presenta un evento futuro (Backlash) e un annuncio imminente. Il focus è sulla speculazione di cosa verrà rivelato, elemento tipico di una preview. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Il termine "historic WWE announcement" va tradotto in modo da mantenere il senso di "annuncio storico", ma evitare che suoni innaturale in italiano. Valutare "annuncio storico per ; Evitare di tradurre "Club WWE" letteralmente se dovesse trattarsi di un'entità specifica legata a questo annuncio. Se il contesto lo suggerisce, mantenere "Club WWE" in inglese com; Le citazioni di John Cena vanno tradotte fedelmente per mantenere l'entusiasmo e l'enfasi.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo presenta un evento futuro (Backlash) e un annuncio imminente. Il focus è sulla speculazione di cosa verrà rivelato, elemento tipico di una preview. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 6.03s
+[SCORE] raffinato=20 priority=skip | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v68 preview scaduta
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 20/75 - John Cena 'Historic' WWE Announcement May Not Be About Club WWE
+[SKIP v72.1] Gia pubblicata da pending in questa run: Big E's WWE Status Following Kofi Kingston and Xavier Woods Exits
+[PENDING] Coda salvata: 3 elementi
+[BOT] Elaborazione: Paige Collett Wants The Ring Rat To Run Through The Entire JCW Locker Room
+[BOT] semantic_id=paige-collett-wants-the-ring-rat-to-run-through-the-entire-jcw-locker-room
+[SCORE] iniziale=56 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=1
+[BOT] Embed trovati: 2
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WORLD (8) conf=0.80 model=gemini-2.5-flash-lite | L'articolo parla di dichiarazioni e piani futuri di un personaggio già presente in JCW, non è una preview di un evento. JCW rientra nella categoria World.
+[EDITORIAL v72.3] translation_notes=Mantenere il nome del personaggio "The Ring Rat" in inglese.; Le dichiarazioni di Paige Collett devono essere tradotte letteralmente, evitando parafrasi o alterazioni del significato.; Prestare attenzione al gergo specifico del wrestling e ad eventuali calchi dall'inglese, traducendo in modo naturale per il pubblico italiano.
+[CATEGORY v73] World downgrade: WORLD -> UNCATEGORIZED | non wrestling internazionale
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=UNCATEGORIZED (1) | L'articolo parla di dichiarazioni e piani futuri di un personaggio già presente in JCW, non è una preview di un evento. JCW rientra nella categoria World. | v73 world downgrade
+[PERF v71] analisi editoriale AI v72: 4.66s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Paige Collett Wants The Ring Rat To Run Through The Entire JCW Locker Room
+[SCORE] raffinato=44 priority=low | ritorno/debutto, v62 media rights/streaming, v73 cap uncategorized
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 44/75 - Paige Collett Wants The Ring Rat To Run Through The Entire JCW Locker Room
+[BOT] Elaborazione: Jerry Lawler Looks Back On Infamous WWE WrestleMania Match With Michael Cole
+[BOT] semantic_id=jerry-lawler-looks-back-on-infamous-wwe-wrestlemania-match-with-michael-cole
+[SCORE] iniziale=55 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo discute un match passato, non uno futuro. La categoria WWE è appropriata dato il focus sulla loro PLE e commentatori. Le note servono a mantenere la fedeltà dei termini tecnici e delle dichiarazioni.
+[EDITORIAL v72.3] translation_notes=Mantenere 'WWE WrestleMania' come nome evento.; 'WWE Champion' e 'WWE Hall of Famer' vanno mantenuti.; 'Main event match' può essere reso come 'match principale'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo discute un match passato, non uno futuro. La categoria WWE è appropriata dato il focus sulla loro PLE e commentatori. Le note servono a mantenere la fedeltà dei termini tecnici e delle dichiarazioni.
+[PERF v71] analisi editoriale AI v72: 2.55s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Jerry Lawler Looks Back On Infamous WWE WrestleMania Match With Michael Cole
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, opinione generica, v68 cap duro opinion/commentary
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Jerry Lawler Looks Back On Infamous WWE WrestleMania Match With Michael Cole
+[V71] story_signature=jerry_lawler_looks_back|on_infamous_wwe_wrestlemania|match_with_michael_cole|opinion|wwe|raw|wrestlemania semantic_status=new_story freshness=0.606
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/jerry-lawler-looks-back-on-infamous-wwe-wrestlemania-match-with-michael-cole/intro-1778026097.jpg
+[PERF v71] traduzione: 4.55s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Jerry Lawler ricorda il suo match a WrestleMania contro Michael Cole
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 27.14s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/jerry-lawler-looks-back-on-infamous-wwe-wrestlemania-match-with-michael-cole/l-intro-1778026097.jpg
+[MEDIA] Immagine caricata: 4077
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.57s
+[PERF v71] totale articolo pubblicato 'Jerry Lawler Looks Back On Infamous WWE WrestleMania Match W': 37.48s
+[OK] Pubblicato: Jerry Lawler ricorda il suo match a WrestleMania contro Michael Cole
+[PENDING] Coda salvata: 3 elementi
+[BOT] Elaborazione: WWE Star Trick Williams Acknowledges Rivalry With Oba Femi & Je'Von Evans
+[BOT] semantic_id=wwe-star-trick-williams-acknowledges-rivalry-with-oba-femi-jevon-evans
+[SCORE] iniziale=42 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash-lite | 
+[EDITORIAL v72.3] translation_notes=I nomi dei titoli devono rimanere in inglese (WWE NXT Championship, WWE Intercontinental Championship, United States title).; Evitare traduzioni letterali di "call up to the main roster" (potrebbe essere "promosso al main roster" o "promosso nei roster principali").; Prestare attenzione a "pushed each other" per rendere il senso di "si spingono a vicenda", "si motivano reciprocamente".
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | v72.3 editorial analysis gemini-2.5-flash-lite
+[PERF v71] analisi editoriale AI v72: 1.48s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE Star Trick Williams Acknowledges Rivalry With Oba Femi & Je'Von Evans
+[SCORE] raffinato=74 priority=medium | WWE/main roster, nomi forti titolo: trick williams, oba femi, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v76 cap boost da score basso senza evento concreto
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - WWE Star Trick Williams Acknowledges Rivalry With Oba Femi & Je'Von Evans
+[V71] story_signature=trick_williams|oba_femi|wwe_star_trick_williams|update|wwe|raw|smackdown|nxt semantic_status=new_story freshness=0.581
+[PERF v71] WP lookup event_key: 1.02s
+[FIX] Event key in history ma non confermata su WordPress: event:brock-lesnar-lawsuit - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.42s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=5
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwe-star-trick-williams-acknowledges-rivalry-with-oba-femi-jevon-evans/intro-1778008102.jpg
+[PERF v71] traduzione: 3.36s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Trick Williams parla della rivalità con Oba Femi e Je'Von Evans
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 4.13s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-star-trick-williams-acknowledges-rivalry-with-oba-femi-jevon-evans/l-intro-1778008102.jpg
+[MEDIA] Immagine caricata: 4080
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.58s
+[PERF v71] totale articolo pubblicato 'WWE Star Trick Williams Acknowledges Rivalry With Oba Femi &': 13.35s
+[OK] Pubblicato: Trick Williams parla della rivalità con Oba Femi e Je'Von Evans
+[PENDING] Coda salvata: 3 elementi
+[BOT] Pubblicati 5 articoli (3 pending + 2 nuove) su 9 candidati provati | mode=normal
+===== RUN END [2026-05-09 16:45:03] VERSION [v77_editorial_intelligence_guardrails (e8740a4)] =====
+

@@ -35,70 +35,6 @@
     "attempts": 0
   },
   {
-    "url": "https://www.wrestlinginc.com/2168572/tko-wwe-quarterly-earnings-report-growth-falling-ticket-sales-dave-meltzer/",
-    "title": "TKO Quarterly Earnings Report Shows WWE Growth Despite Falling Ticket Sales",
-    "semantic_id": "tko-quarterly-earnings-report-shows-wwe-growth-despite-falling-ticket-sales",
-    "title_key": "tko-quarterly-earnings-shows-growth-despite-falling-ticket-sales",
-    "score": 88,
-    "priority": "high",
-    "event_key": "event:business:tko-financials",
-    "story_signature_v71": "tko_quarterly_earnings_report|shows_wwe_growth_despite|falling_ticket_sales|business|wwe|tko",
-    "summary": "Based on this year's first quarter reports from TKO, WWE is doing well for itself, despite the decline in ticket sales.",
-    "reasons": [
-      "WWE/main roster",
-      "business/contratti WWE-TKO",
-      "rumor/backstage",
-      "v62 corporate/business",
-      "v62 categoria business",
-      "v71 freshness=0.609"
-    ],
-    "score_reasons": [
-      "WWE/main roster",
-      "business/contratti WWE-TKO",
-      "rumor/backstage",
-      "v62 corporate/business",
-      "v62 categoria business",
-      "v71 freshness=0.609"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1778365210.0,
-    "status": "raw",
-    "reason": "wp_down_initial_normal",
-    "created_at": 1778343914.261121,
-    "attempts": 0
-  },
-  {
-    "url": "https://www.wrestlinginc.com/2165924/wwe-matt-hardy-undertaker-best-locker-room-leader/",
-    "title": "Matt Hardy Names WWE Hall Of Famer As Best 'Locker Room Leader' He's Worked With",
-    "semantic_id": "matt-hardy-names-wwe-hall-of-famer-as-best-locker-room-leader-hes-worked-with",
-    "title_key": "matt-hardy-names-hall-famer-as-best-locker-room-leader-he-s",
-    "score": 78,
-    "priority": "medium",
-    "event_key": "",
-    "story_signature_v71": "matt_hardy|matt_hardy_names_wwe|hall_of_famer_as|update|wwe|tna",
-    "summary": "Matt Hardy has named the WWE Hall of Famer who is the best locker room leader he has worked with, and explained how he uses his principles as a leader in TNA.",
-    "reasons": [
-      "WWE/main roster",
-      "top star titolo: undertaker",
-      "WWE main roster + storyline/evento",
-      "PLE/PPV",
-      "v71 freshness=0.606"
-    ],
-    "score_reasons": [
-      "WWE/main roster",
-      "top star titolo: undertaker",
-      "WWE main roster + storyline/evento",
-      "PLE/PPV",
-      "v71 freshness=0.606"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1778364000.0,
-    "status": "raw",
-    "reason": "wp_down_initial_normal",
-    "created_at": 1778343535.3000789,
-    "attempts": 0
-  },
-  {
     "kind": "report",
     "url": "https://www.ringsidenews.com/wwe-smackdown-results-highlights-key-moments-may-8-2026/",
     "title": "WWE SmackDown Results, Highlights and Key Moments for May 8, 2026",
@@ -181,41 +117,6 @@
     "status": "raw",
     "reason": "wp_down_initial_normal",
     "created_at": 1778343537.5496745,
-    "attempts": 0
-  },
-  {
-    "url": "https://www.ringsidenews.com/big-es-wwe-status-following-kofi-kingston-xavier-woods-exits/",
-    "title": "Big E's WWE Status Following Kofi Kingston and Xavier Woods Exits",
-    "semantic_id": "big-es-wwe-status-following-kofi-kingston-and-xavier-woods-exits",
-    "title_key": "big-e-s-following-kofi-kingston-xavier-woods-exits",
-    "score": 57,
-    "priority": "low",
-    "event_key": "",
-    "story_signature_v71": "big_e_s_wwe_status|following_kofi_kingston|xavier_woods_exits|update|wwe",
-    "summary": "Big E isn’t going anywhere — even after the shocking departures of Kofi Kingston and Xavier Woods left major questions about the future of The New Day. Following emotional reactions ...",
-    "reasons": [
-      "WWE/main roster",
-      "impatto roster/storyline",
-      "breaking/major update",
-      "v62 reazioni/tributi",
-      "v71 source reliability soft penalty",
-      "v71 freshness=0.573",
-      "v48 tier2: 55-74"
-    ],
-    "score_reasons": [
-      "WWE/main roster",
-      "impatto roster/storyline",
-      "breaking/major update",
-      "v62 reazioni/tributi",
-      "v71 source reliability soft penalty",
-      "v71 freshness=0.573",
-      "v48 tier2: 55-74"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1778363256.0,
-    "status": "raw",
-    "reason": "wp_down_initial_normal",
-    "created_at": 1778343537.402389,
     "attempts": 0
   }
 ]
