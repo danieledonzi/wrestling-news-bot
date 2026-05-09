@@ -7605,3 +7605,170 @@ However, if you want to parse some data that happens to look like a URL, then no
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 5 candidati provati | mode=normal
 ===== RUN END [2026-05-09 19:53:56] VERSION [v78_1_validation_retry_guard (1d67716)] =====
 
+
+===== RUN START [2026-05-09 20:38:19] VERSION [v78_1_validation_retry_guard (156718b)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[PERF v71] WP lookup event_key: 0.97s
+[PENDING] Rimuovo report già pubblicato: report:wwe-smackdown-2026-05-08
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite & Collision Viewership & Ratings Report, 5/6/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168663/wwe-wrestlemania-42-paul-heyman-brock-lesnar-retiring/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166518/wwe-nt-myles-borne-jelly-roll-finisher/
+[SKIP] Score sotto soglia editoriale (22/75): Will Ospreay Explains What AEW & NJPW Have To Gain From Partnership
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168627/wwe-chelsea-green-health-update-heart-procedure/
+[SKIP] Score sotto soglia editoriale (14/75): Anthony Bowens Reflects On Unexpected Success Of The Acclaimed In AEW
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165704/jerry-lawler-looks-back-infamous-wwe-wrestlemania-match-michael-cole/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168572/tko-wwe-quarterly-earnings-report-growth-falling-ticket-sales-dave-meltzer/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165924/wwe-matt-hardy-undertaker-best-locker-room-leader/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165551/sheamus-advocates-irish-wwe-ple/
+[SKIP] Score sotto soglia editoriale (20/75): Jerry Lawler Got 'Shoved' Into WWE Commentary Role
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165420/wwe-trick-williams-jevon-evans-oba-femi-acknowledges-rivalry/
+[SKIP] Score sotto soglia editoriale (0/75): Matt Hardy Looks Back On V1 Character And His 'Meat And Potatoes' Role In Tag Team
+[SKIP] Score sotto soglia editoriale (56/75): WWE Backlash 2026 Full & Final Card
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2164991/wwe-wrestlemania-3-cody-rhodes-best-edition-introduce-new-fans/
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/8/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168395/wwe-nxt-viewership-ratings-report-may-5-2026/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (50/75): WWE Backlash Spoiler Lineup for May 9, 2026: Full Match Card and Backstage Notes Revealed
+[SKIP] Score sotto soglia editoriale (31/75): Stephanie Vaquer's Ex-Boyfriend El Cuatrero Says "Not Everything Has Been Exposed" Following Guilty Verdict
+[SKIP] URL già in history: https://www.ringsidenews.com/dustin-rhodes-appears-take-shot-wwe-pay-cut-strategy-amid-tko-contract-changes/
+[SKIP] URL già in history: https://www.ringsidenews.com/swerve-strickland-reacts-new-days-wwe-exit-amid-aew-rumors/
+[SKIP] Score sotto soglia editoriale (7/75): Shawn Michaels Reveals How Long WWE Really Needs To Create Main Roster Talent
+[SKIP] Score sotto soglia editoriale (11/75): Scarlett Explains Why WWE Didn't Want Her "Sexy" Wrestling Character
+[SKIP] Score sotto soglia editoriale (17/75): Swerve Strickland Reveals What He Did During AEW Hiatus
+[SKIP] Score sotto soglia editoriale (19/75): Karrion Kross Says WWE "Creatively Sabotaged" Former NXT Stars
+[SKIP] URL già in history: https://www.ringsidenews.com/karrion-kross-says-wwe-tried-lower-his-value-before-contract-talks/
+[SKIP] Score sotto soglia editoriale (0/75): Devon Dudley Explains Why He Forgave Hulk Hogan Despite Racist Controversy
+[SKIP] Score sotto soglia editoriale (39/75): Adam Copeland Addresses Possibility of Following Triple H's Path After Retirement
+[SKIP] Score sotto soglia editoriale (51/75): Roman Reigns Sends Final Warning To Jacob Fatu Hours Before WWE Backlash
+[SCORE] 81 high - WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker | WWE/main roster, nomi forti titolo: seth rollins, WWE main roster + storyline/evento, titolo/championship, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.602
+[SCORE] 75 medium - WWE Backlash Results, Highlights and Key Moments for May 9, 2026 | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 source reliability soft penalty, v71 freshness=0.566
+[SCORE] 71 medium - WWE NXT Star Reveals What It's Like To Take Signature Move From Oba Femi | WWE/main roster, nomi forti titolo: oba femi, WWE main roster + storyline/evento, titolo/championship, show settimanale, v71 freshness=0.608, v48 tier2: 55-74
+[SCORE] 63 medium - Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive' | WWE/main roster, nomi forti titolo: brie bella, WWE main roster + storyline/evento, titolo/championship, v71 freshness=0.571, v48 tier2: 55-74
+[SCORE] 56 low - Kairi Sane Tampa Airport Sighting Rumor Shut Down Before WWE Backlash | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.577, v48 tier2: 55-74
+[SCORE] 50 low - Spoiler: Opening Match Revealed for 2026 WWE Backlash | WWE/main roster, nomi forti lead: seth rollins, WWE main roster + storyline/evento, floor WWE main roster storyline, v71 source reliability soft penalty, v71 freshness=0.566, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 6 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker
+[BOT] semantic_id=wwe-backlash-results-59-two-titles-on-the-line-seth-rollins-faces-bron-breakker
+[SCORE] iniziale=81 priority=high
+[SCRAPE] Articolo results rilevato: testo completo (3407 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[PENDING] Coda salvata: 2 elementi
+[REPORT] Salvato/aggiornato pending report: report:wwe-backlash-2026-05-09 | pronto tra 291 min
+[BOT] Elaborazione: WWE Backlash Results, Highlights and Key Moments for May 9, 2026
+[BOT] semantic_id=wwe-backlash-results-highlights-and-key-moments-for-may-9-2026
+[SCORE] iniziale=75 priority=medium
+[SCRAPE] Articolo results rilevato: testo completo (4595 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=19, image=0, embed=0
+[BOT] Embed trovati: 1
+[PENDING] Coda salvata: 2 elementi
+[REPORT] Salvato/aggiornato pending report: report:wwe-backlash-2026-05-09 | pronto tra 262 min
+[BOT] Elaborazione: WWE NXT Star Reveals What It's Like To Take Signature Move From Oba Femi
+[BOT] semantic_id=wwe-nxt-star-reveals-what-its-like-to-take-signature-move-from-oba-femi
+[SCORE] iniziale=71 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=NXT (6) conf=0.90 model=gemini-2.5-flash-lite | L'articolo riporta un'intervista e un commento su un'esperienza avvenuta in passato (un match con Oba Femi), non presenta un evento futuro. La categoria corretta è NXT in quanto il focus è su una star di NXT.
+[EDITORIAL v72.3] translation_notes=Non tradurre il nome della mossa "Pizza Toss".; Mantenere in inglese "NXT North American Champion" e il nome "Oba Femi".; La citazione "knock the breath out of you" può essere resa come "ti toglie il fiato" o "ti lascia senza fiato".
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=NXT (6) | L'articolo riporta un'intervista e un commento su un'esperienza avvenuta in passato (un match con Oba Femi), non presenta un evento futuro. La categoria corretta è NXT in quanto il focus è su una star di NXT.
+[PERF v71] analisi editoriale AI v72: 1.36s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE NXT Star Reveals What It's Like To Take Signature Move From Oba Femi
+[SCORE] raffinato=78 priority=medium | WWE/main roster, nomi forti titolo: oba femi, WWE main roster + storyline/evento, titolo/championship, PLE/PPV
+[V71] story_signature=oba_femi|wwe_nxt_star_reveals|what_it_s_like_to|update|wwe|nxt|impact semantic_status=new_story freshness=0.608
+[PERF v71] WP recent posts dedupe: 1.07s
+[PERF v71] WP lookup event_key: 1.03s
+[FIX] Event key in history ma non confermata su WordPress: event:brock-lesnar-diagnosis - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 2.53s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwe-nxt-star-reveals-what-its-like-to-take-signature-move-from-oba-femi/intro-1778165936.jpg
+[PERF v71] traduzione: 2.47s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): NXT: Myles Borne racconta il dolore dopo il "Pizza Toss" di Oba Femi
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 0.93s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-nxt-star-reveals-what-its-like-to-take-signature-move-from-oba-femi/l-intro-1778165936.jpg
+[MEDIA] Immagine caricata: 4101
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.90s
+[PERF v71] totale articolo pubblicato 'WWE NXT Star Reveals What It's Like To Take Signature Move F': 10.44s
+[OK] Pubblicato: NXT: Myles Borne racconta il dolore dopo il "Pizza Toss" di Oba Femi
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive'
+[BOT] semantic_id=brie-bella-comments-on-latest-wwe-run-says-aews-bryan-danielson-is-so-supportive
+[SCORE] iniziale=63 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo commenta un evento passato (ritorno di Brie Bella alla Royal Rumble, vittoria dei titoli) e parla del suo presente, non è una preview di un evento futuro. La mention di PLE futuri è contestuale, non l'obiettivo primario.
+[EDITORIAL v72.3] translation_notes=I nomi ufficiali dei titoli="Women's Tag Team Championships" vanno lasciati in inglese.; La citazione "tune in" si riferisce alla visibilità futura di Brie Bella, non necessariamente ad un evento specifico programmato e quindi non è una preview.; Evitare calchi come "return to the company" -> "ritorno nella compagnia" o simili; preferire "ritorno in WWE". "Marking her first more full-time return" -> "segnando il suo primo r
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo commenta un evento passato (ritorno di Brie Bella alla Royal Rumble, vittoria dei titoli) e parla del suo presente, non è una preview di un evento futuro. La mention di PLE futuri è contestuale, non l'obiettivo primario.
+[PERF v71] analisi editoriale AI v72: 2.27s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive'
+[SCORE] raffinato=56 priority=low | WWE/main roster, nomi forti titolo: brie bella, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive'
+[BOT] Elaborazione: Kairi Sane Tampa Airport Sighting Rumor Shut Down Before WWE Backlash
+[BOT] semantic_id=kairi-sane-tampa-airport-sighting-rumor-shut-down-before-wwe-backlash
+[SCORE] iniziale=56 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[BOT] Embed trovati: 1
+[BOT] Immagini inline trovate: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo parla di una notizia già avvenuta (la smentita di un rumor su Kairi Sane) e non presenta un evento futuro, anche se cita Backlash. La categoria è WWE in quanto riguarda una ex star della compagnia e le speculazioni sul suo ritorn
+[EDITORIAL v72.3] translation_notes=Il titolo cita "Kairi Sane Tampa Airport Sighting Rumor Shut Down", tradurre come "Smentito rumor avvistamento Kairi Sane all'aeroporto di Tampa".; Evitare "WWE Backlash" tradotto letteralmente. "Backlash" è sufficiente se il contesto è chiaro o "PLE WWE Backlash" se necessario.; La data "2026" nel testo iniziale è probabilmente un errore di battitura/placeholder, dato che l'articolo parla di uno spotting smentito che sarebbe dovuto accadere "prima di WWE B
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo parla di una notizia già avvenuta (la smentita di un rumor su Kairi Sane) e non presenta un evento futuro, anche se cita Backlash. La categoria è WWE in quanto riguarda una ex star della compagnia e le speculazioni sul suo ritorn
+[PERF v71] analisi editoriale AI v72: 2.54s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Kairi Sane Tampa Airport Sighting Rumor Shut Down Before WWE Backlash
+[SCORE] raffinato=100 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, PLE/PPV, v62 ritorno/debutto
+[V71] story_signature=kairi_sane|kairi_sane_tampa_airport|sighting_rumor_shut_down|return|wwe|wrestlemania|backlash semantic_status=new_story freshness=0.694
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=6
+[MEDIA] Immagine interna caricata: 4103
+[PERF v71] upload immagine interna: 1.51s
+[PERF v71] traduzione: 3.32s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Rumor avvistamento Kairi Sane all'aeroporto di Tampa smentito prima di WWE Backlash
+/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py:5182: MarkupResemblesLocatorWarning: The input passed in on this line looks more like a URL than HTML or XML.
+
+If you meant to use Beautiful Soup to parse the web page found at a certain URL, then something has gone wrong. You should use an Python package like 'requests' to fetch the content behind the URL. Once you have the content as a string, you can feed that string into Beautiful Soup.
+
+However, if you want to parse some data that happens to look like a URL, then nothing has gone wrong: you are using Beautiful Soup correctly, and this warning is spurious and can be filtered. To make this warning go away, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import MarkupResemblesLocatorWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=MarkupResemblesLocatorWarning)
+    
+  q = BeautifulSoup(m.group(1), "html.parser").get_text(" ", strip=True)
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 0.93s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/kairi-sane-tampa-airport-sighting-rumor-shut-down-before-wwe-backlash-27.png
+[MEDIA] Immagine caricata: 4105
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.00s
+[PERF v71] totale articolo pubblicato 'Kairi Sane Tampa Airport Sighting Rumor Shut Down Before WWE': 9.60s
+[OK] Pubblicato: Rumor avvistamento Kairi Sane all'aeroporto di Tampa smentito prima di WWE Backlash
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Spoiler: Opening Match Revealed for 2026 WWE Backlash
+[BOT] semantic_id=spoiler-opening-match-revealed-for-2026-wwe-backlash
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=0
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash-lite | Titolo e contenuto indicano un evento futuro. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi ufficiali dei titoli in inglese (WWE World Heavyweight Championship, United States Championship).; 'Kick off' si può tradurre come 'aprire', 'dare il via'.; 'Premium Live Event' si può tradurre come 'Evento Premium Live'.
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | Titolo e contenuto indicano un evento futuro. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.09s
+[SCORE] raffinato=56 priority=low | WWE/main roster, nomi forti lead: seth rollins, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Spoiler: Opening Match Revealed for 2026 WWE Backlash
+[BOT] Pubblicati 2 articoli (0 pending + 2 nuove) su 6 candidati provati | mode=normal
+===== RUN END [2026-05-09 20:38:19] VERSION [v78_1_validation_retry_guard (156718b)] =====
+
