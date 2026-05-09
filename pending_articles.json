@@ -1,5 +1,42 @@
 [
   {
+    "url": "https://www.wrestlinginc.com/2168358/wwe-backlash-2026-two-titles-on-line-seth-rollins-bron-breakker/",
+    "title": "WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker",
+    "semantic_id": "wwe-backlash-results-59-two-titles-on-the-line-seth-rollins-faces-bron-breakker",
+    "title_key": "backlash-results-5-9-two-line-seth-rollins-faces-bron-breakker",
+    "score": 81,
+    "priority": "high",
+    "event_key": "",
+    "story_signature_v71": "seth_rollins|wwe_backlash_results|two_titles_on_the|report|wwe|backlash",
+    "summary": "This is Wrestling Inc.'s live coverage for WWE Backlash 2026, with the World Heavyweight & United States Championships both set to be defended!",
+    "reasons": [
+      "WWE/main roster",
+      "nomi forti titolo: seth rollins",
+      "WWE main roster + storyline/evento",
+      "titolo/championship",
+      "v62 titolo/championship",
+      "v75 hard results report",
+      "v77 hard report protected",
+      "v71 freshness=0.589"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "nomi forti titolo: seth rollins",
+      "WWE main roster + storyline/evento",
+      "titolo/championship",
+      "v62 titolo/championship",
+      "v75 hard results report",
+      "v77 hard report protected",
+      "v71 freshness=0.589"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778378400.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778362733.3454103,
+    "attempts": 0
+  },
+  {
     "kind": "report",
     "url": "https://www.wrestlinginc.com/2168358/wwe-backlash-2026-two-titles-on-line-seth-rollins-bron-breakker/",
     "title": "WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker",
@@ -61,6 +98,45 @@
     "story_signature_v71": "seth_rollins|wwe_backlash_results|two_titles_on_the|report|wwe|backlash"
   },
   {
+    "url": "https://www.ringsidenews.com/wwe-backlash-results-highlights-key-moments-may-9-2026/",
+    "title": "WWE Backlash Results, Highlights and Key Moments for May 9, 2026",
+    "semantic_id": "wwe-backlash-results-highlights-and-key-moments-for-may-9-2026",
+    "title_key": "backlash-results-highlights-key-moments-may-9",
+    "score": 75,
+    "priority": "medium",
+    "event_key": "",
+    "story_signature_v71": "wwe_backlash_results|key_moments|report|wwe|backlash",
+    "summary": "The WWE Backlash Premium Live Event takes place live from the Benchmark International Arena in Tampa, Florida. WWE has put together a stacked lineup featuring championship matches, heated rivalries, and ...",
+    "reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "titolo/championship",
+      "floor WWE main roster storyline",
+      "v62 titolo/championship",
+      "v75 hard results report",
+      "v77 hard report protected",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.553"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "titolo/championship",
+      "floor WWE main roster storyline",
+      "v62 titolo/championship",
+      "v75 hard results report",
+      "v77 hard report protected",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.553"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778376660.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778362734.9013464,
+    "attempts": 0
+  },
+  {
     "kind": "report",
     "url": "https://www.ringsidenews.com/wwe-smackdown-results-highlights-key-moments-may-8-2026/",
     "title": "WWE SmackDown Results, Highlights and Key Moments for May 8, 2026",
@@ -109,5 +185,38 @@
       }
     ],
     "story_signature_v71": "wwe_smackdown_results|key_moments|report|wwe|smackdown"
+  },
+  {
+    "url": "https://www.wrestlinginc.com/2166474/brie-bella-wwe-aew-bryan-danielson-supportive/",
+    "title": "Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive'",
+    "semantic_id": "brie-bella-comments-on-latest-wwe-run-says-aews-bryan-danielson-is-so-supportive",
+    "title_key": "brie-bella-comments-latest-run-says-s-bryan-danielson-is-so-supportive",
+    "score": 63,
+    "priority": "medium",
+    "event_key": "",
+    "story_signature_v71": "brie_bella|brie_bella_comments_on|latest_wwe_run|update|wwe|aew",
+    "summary": "WWE Women's Tag Team Champion Brie Bella said that her husband, AEW's Bryan Danielson has been \"so supportive\" of her recent WWE run.",
+    "reasons": [
+      "WWE/main roster",
+      "nomi forti titolo: brie bella",
+      "WWE main roster + storyline/evento",
+      "titolo/championship",
+      "v71 freshness=0.558",
+      "v48 tier2: 55-74"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "nomi forti titolo: brie bella",
+      "WWE main roster + storyline/evento",
+      "titolo/championship",
+      "v71 freshness=0.558",
+      "v48 tier2: 55-74"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778369400.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778362733.6328106,
+    "attempts": 0
   }
 ]
