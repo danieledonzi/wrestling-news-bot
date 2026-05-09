@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v79_ai_native_translation_spoiler_postedit"
+BOT_VERSION = "v79_1_hybrid_live_spoiler_classifier"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -9129,6 +9129,12 @@ V79_POST_EDIT_MAX_CHARS = int(os.getenv("V79_POST_EDIT_MAX_CHARS", "9000"))
 V79_LIVE_SPOILER_MODE = os.getenv("V79_LIVE_SPOILER_MODE", "1") == "1"
 V79_SPOILER_PREFIX = "[SPOILER]"
 
+# v79.1: hybrid spoiler layer. Deterministic hard gates first, Gemini only as
+# contextual support, deterministic validation last.
+V791_ENABLE_GEMINI_SPOILER_CLASSIFIER = os.getenv("V791_ENABLE_GEMINI_SPOILER_CLASSIFIER", "1") == "1"
+V791_FORCE_LIVE_EVENT = os.getenv("V791_FORCE_LIVE_EVENT", "").strip().lower()
+V791_SPOILER_CONTEXT_MAX_CHARS = int(os.getenv("V791_SPOILER_CONTEXT_MAX_CHARS", "900"))
+
 _ORIG_V79_translate_news = translate_news
 _ORIG_V79_translate_ordered_content_blocks = translate_ordered_content_blocks
 _ORIG_V79_v721_ensure_italian_title = v721_ensure_italian_title
@@ -9150,36 +9156,200 @@ def v79_is_event_context(title="", text="", url=""):
     return any(t in probe for t in event_terms)
 
 
-def v79_is_live_spoiler_candidate(title="", text="", url=""):
-    """Live-event news before the final report must be labelled as spoiler.
+def v791_has_any(probe, terms):
+    return any(t in probe for t in terms)
 
-    This intentionally does not mark hard results reports: reports keep their deterministic
-    title and Editoriali pipeline. It catches match results, returns, title changes,
-    surprise angles and live card spoilers around PLE/weekly shows.
+
+V791_AUTO_NO_SPOILER_TERMS = [
+    # editorial type / article format
+    "opinion", "commentary", "editorial", "column", "roundtable", "podcast",
+    "interview", "exclusive interview", "speaks with", "discusses", "opens up",
+    "reflects on", "recalls", "remembering", "retrospective", "history of",
+    "documentary", "evergreen", "profile", "preview", "how to watch", "start time",
+    "confirmed matches", "full card", "match card", "predictions", "odds",
+    # business / industry / non-live formats
+    "business", "tko", "earnings", "revenue", "media rights", "tv deal",
+    "contract extension", "lawsuit", "legal", "trademark", "sponsorship",
+    # Italian traces after translation/fallback paths
+    "opinione", "commento", "intervista", "retrospettiva", "ricorda", "parla di",
+    "business", "diritti tv", "ricavi", "causa legale",
+]
+
+V791_LIVE_EVENT_TERMS = [
+    "backlash", "wrestlemania", "summerslam", "royal rumble", "survivor series",
+    "money in the bank", "clash", "crown jewel", "elimination chamber", "night of champions",
+    "ple", "premium live event", "raw", "smackdown", "nxt", "dynamite", "collision",
+    "rampage", "impact", "final battle", "double or nothing", "all in", "all out",
+    "forbidden door", "revolution", "full gear", "bound for glory", "slammiversary",
+]
+
+V791_LIVE_SIGNAL_TERMS = [
+    "live", "during", "tonight", "ongoing", "in progress", "results from",
+    "at wwe", "at aew", "at tna", "opens the show", "opened the show",
+    "opening match", "main event", "segment", "backstage segment",
+]
+
+V791_HARD_VALIDATION_TERMS = [
+    "result", "results", "winner", "wins", "won", "defeats", "defeated", "beats", "beat",
+    "retained", "retains", "new champion", "title change", "championship change",
+    "return", "returns", "returned", "surprise", "debut", "appears", "appeared",
+    "attack", "attacks", "attacked", "opened the show", "opens the show",
+    "backstage segment", "fallout", "cash-in", "cash in", "heel turn", "turns heel",
+    "betrayal", "betrays", "interference", "interferes", "segment",
+]
+
+
+def v791_is_live_event_active(title="", text="", url=""):
+    """Hard gate: no active live event means no spoiler label.
+
+    The env override is useful during PLE nights or manual tests:
+    V791_FORCE_LIVE_EVENT=1/true/yes forces active live mode;
+    V791_FORCE_LIVE_EVENT=0/false/no disables it.
+    """
+    if V791_FORCE_LIVE_EVENT in {"1", "true", "yes", "on"}:
+        return True
+    if V791_FORCE_LIVE_EVENT in {"0", "false", "no", "off"}:
+        return False
+
+    probe = v79_probe(title, text, url, 1800)
+    if not v791_has_any(probe, V791_LIVE_EVENT_TERMS):
+        return False
+
+    # Runtime windows in Europe/Rome, matching typical US live broadcast windows.
+    try:
+        from zoneinfo import ZoneInfo
+        now = datetime.now(ZoneInfo("Europe/Rome"))
+    except Exception:
+        now = datetime.now()
+
+    weekday = now.weekday()  # Monday=0
+    hour = now.hour
+
+    weekly_windows = [
+        ("raw", 1, range(1, 6)),        # Tuesday early morning Italy
+        ("nxt", 2, range(1, 5)),
+        ("dynamite", 3, range(1, 5)),
+        ("impact", 5, range(1, 5)),
+        ("smackdown", 5, range(1, 5)),
+        ("collision", 6, range(1, 6)),
+        ("rampage", 6, range(1, 5)),
+    ]
+    for show, day, hours in weekly_windows:
+        if show in probe and weekday == day and hour in hours:
+            return True
+
+    # PLE/PPV windows are intentionally narrow; outside them Gemini is not called.
+    ple_terms = [
+        "backlash", "wrestlemania", "summerslam", "royal rumble", "survivor series",
+        "money in the bank", "clash", "crown jewel", "elimination chamber",
+        "night of champions", "double or nothing", "all in", "all out",
+        "forbidden door", "revolution", "full gear", "bound for glory", "slammiversary",
+        "ple", "premium live event", "ppv",
+    ]
+    if v791_has_any(probe, ple_terms) and weekday in {5, 6, 0} and hour in range(0, 7):
+        return True
+
+    # If a source explicitly frames it as live/ongoing and the article contains a show/event,
+    # treat it as active only when the run is in a plausible US live-news overnight window.
+    if v791_has_any(probe, V791_LIVE_SIGNAL_TERMS) and hour in range(0, 7):
+        return True
+
+    return False
+
+
+def v791_is_auto_no_spoiler(title="", text="", url=""):
+    if v75_is_hard_results_report(title, url, text):
+        return True
+    probe = v79_probe(title, text, url, 1800)
+    # Clear article formats that should never spend Gemini spoiler tokens.
+    if v791_has_any(probe, V791_AUTO_NO_SPOILER_TERMS):
+        # Do not let result wording inside a complete report bypass the auto-no path.
+        if not v791_has_any(probe, ["defeats", "wins", "retains", "new champion", "returns at", "attack during"]):
+            return True
+    return False
+
+
+def v791_has_spoiler_hard_validation(title="", text="", url=""):
+    probe = v79_probe(title, text, url, 2400)
+    return v791_has_any(probe, V791_HARD_VALIDATION_TERMS)
+
+
+def v791_gemini_spoiler_classifier(title="", text="", url="", editorial_type=""):
+    if not V791_ENABLE_GEMINI_SPOILER_CLASSIFIER:
+        return None
+
+    excerpt = sanitize_text((text or "")[:V791_SPOILER_CONTEXT_MAX_CHARS])
+    prompt = f"""
+Questa news contiene spoiler concreti di un evento live WWE/AEW/TNA/AEW in corso?
+
+Rispondi SOLO con una di queste due parole:
+SPOILER
+NOT_SPOILER
+
+Titolo: {sanitize_text(title)}
+URL: {sanitize_text(url)}
+Editorial type: {sanitize_text(editorial_type or 'UNKNOWN')}
+Excerpt / primo paragrafo: {excerpt}
+""".strip()
+
+    for model in MODEL_CHAIN:
+        if model in gemini_invalid_models:
+            continue
+        try:
+            print(f"[SPOILER v79.1] Gemini classifier: {model}")
+            res = client.models.generate_content(model=model, contents=prompt)
+            answer = sanitize_text(getattr(res, "text", "") or "").upper()
+            if "NOT_SPOILER" in answer:
+                return False
+            if re.search(r"\bSPOILER\b", answer):
+                return True
+        except Exception as e:
+            print(f"[SPOILER v79.1] Gemini classifier fallito su {model}: {e}")
+            if is_invalid_model_error(e):
+                gemini_invalid_models.add(model)
+            continue
+    return None
+
+
+def v79_is_live_spoiler_candidate(title="", text="", url=""):
+    """v79.1 hybrid spoiler decision.
+
+    Order:
+    1. hard NO gates: spoiler mode off, results reports, no active live event,
+       retrospective/opinion/business/interview/evergreen/preview-like formats;
+    2. Gemini semantic support classifier;
+    3. hard validation: even Gemini SPOILER needs a concrete spoiler signal.
     """
     if not V79_LIVE_SPOILER_MODE:
         return False
-    if v75_is_hard_results_report(title, url, text):
+    if v791_is_auto_no_spoiler(title, text, url):
+        print("[SPOILER v79.1] NO: hard auto-no editorial type/report")
         return False
-    probe = v79_probe(title, text, url, 2400)
+    if not v791_is_live_event_active(title, text, url):
+        print("[SPOILER v79.1] NO: nessun evento live attivo")
+        return False
     if not v79_is_event_context(title, text, url):
+        print("[SPOILER v79.1] NO: nessun contesto evento")
         return False
 
-    spoiler_terms = [
-        "spoiler", "spoilers", "opening match revealed", "match revealed", "revealed for",
-        "defeats", "defeated", "beats", "beat", "wins", "won", "retains", "retained",
-        "new champion", "title change", "championship change", "cash-in", "cash in",
-        "returns", "returned", "surprise return", "debut", "appears", "appeared",
-        "attacks", "attack", "interferes", "interference", "injury angle", "segment",
-        "match result", "result from", "during", "hours before", "live", "key moment",
-    ]
-    if any(t in probe for t in spoiler_terms):
-        # Pure previews/cards remain previews, not spoilers, unless they reveal live-order/result details.
-        preview_only = any(t in probe for t in ["preview", "confirmed matches", "start time", "how to watch", "full card", "final card"])
-        live_reveal = any(t in probe for t in ["spoiler", "opening match revealed", "result", "defeats", "wins", "retains", "returns", "appears"])
-        return (not preview_only) or live_reveal
-    return False
+    gemini_result = v791_gemini_spoiler_classifier(title, text, url)
+    if gemini_result is False:
+        print("[SPOILER v79.1] NO: Gemini NOT_SPOILER")
+        return False
 
+    if gemini_result is True:
+        if v791_has_spoiler_hard_validation(title, text, url):
+            print("[SPOILER v79.1] YES: Gemini SPOILER + hard validation")
+            return True
+        print("[SPOILER v79.1] NO: Gemini SPOILER senza hard validation")
+        return False
+
+    # Gemini unavailable: conservative deterministic fallback.
+    if v791_has_spoiler_hard_validation(title, text, url):
+        print("[SPOILER v79.1] YES: fallback deterministico validato")
+        return True
+    print("[SPOILER v79.1] NO: fallback senza validazione")
+    return False
 
 def v79_add_spoiler_prefix(title, source_title="", source_text="", source_url=""):
     title = sanitize_text(title or "")
