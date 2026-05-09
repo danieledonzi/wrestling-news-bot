@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v78_1_validation_retry_guard"
+BOT_VERSION = "v79_ai_native_translation_spoiler_postedit"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -9117,6 +9117,219 @@ def v721_ensure_italian_title(title, source_title="", source_text="", source_url
         if deterministic:
             return deterministic
     return _ORIG_V77_v721_ensure_italian_title(title, source_title, source_text, source_url)
+
+
+
+# =========================
+# v79: AI-native translation + editorial post-editing + live spoiler labels
+# =========================
+
+V79_ENABLE_POST_EDITING = os.getenv("V79_ENABLE_POST_EDITING", "1") == "1"
+V79_POST_EDIT_MAX_CHARS = int(os.getenv("V79_POST_EDIT_MAX_CHARS", "9000"))
+V79_LIVE_SPOILER_MODE = os.getenv("V79_LIVE_SPOILER_MODE", "1") == "1"
+V79_SPOILER_PREFIX = "[SPOILER]"
+
+_ORIG_V79_translate_news = translate_news
+_ORIG_V79_translate_ordered_content_blocks = translate_ordered_content_blocks
+_ORIG_V79_v721_ensure_italian_title = v721_ensure_italian_title
+_ORIG_V79_classify_article_type_fallback = classify_article_type_fallback_v68
+
+
+def v79_probe(title="", text="", url="", max_chars=2200):
+    return normalize_for_check(f"{title or ''} {url or ''} {(text or '')[:max_chars]}")
+
+
+def v79_is_event_context(title="", text="", url=""):
+    probe = v79_probe(title, text, url)
+    event_terms = [
+        "backlash", "wrestlemania", "summerslam", "royal rumble", "survivor series",
+        "money in the bank", "clash", "ple", "premium live event", "raw", "smackdown",
+        "nxt", "dynamite", "collision", "rampage", "impact", "final battle", "double or nothing",
+        "all in", "all out", "forbidden door", "revolution", "full gear",
+    ]
+    return any(t in probe for t in event_terms)
+
+
+def v79_is_live_spoiler_candidate(title="", text="", url=""):
+    """Live-event news before the final report must be labelled as spoiler.
+
+    This intentionally does not mark hard results reports: reports keep their deterministic
+    title and Editoriali pipeline. It catches match results, returns, title changes,
+    surprise angles and live card spoilers around PLE/weekly shows.
+    """
+    if not V79_LIVE_SPOILER_MODE:
+        return False
+    if v75_is_hard_results_report(title, url, text):
+        return False
+    probe = v79_probe(title, text, url, 2400)
+    if not v79_is_event_context(title, text, url):
+        return False
+
+    spoiler_terms = [
+        "spoiler", "spoilers", "opening match revealed", "match revealed", "revealed for",
+        "defeats", "defeated", "beats", "beat", "wins", "won", "retains", "retained",
+        "new champion", "title change", "championship change", "cash-in", "cash in",
+        "returns", "returned", "surprise return", "debut", "appears", "appeared",
+        "attacks", "attack", "interferes", "interference", "injury angle", "segment",
+        "match result", "result from", "during", "hours before", "live", "key moment",
+    ]
+    if any(t in probe for t in spoiler_terms):
+        # Pure previews/cards remain previews, not spoilers, unless they reveal live-order/result details.
+        preview_only = any(t in probe for t in ["preview", "confirmed matches", "start time", "how to watch", "full card", "final card"])
+        live_reveal = any(t in probe for t in ["spoiler", "opening match revealed", "result", "defeats", "wins", "retains", "returns", "appears"])
+        return (not preview_only) or live_reveal
+    return False
+
+
+def v79_add_spoiler_prefix(title, source_title="", source_text="", source_url=""):
+    title = sanitize_text(title or "")
+    if not title:
+        return title
+    if title.startswith(V79_SPOILER_PREFIX):
+        return title
+    if v79_is_live_spoiler_candidate(source_title or title, source_text, source_url):
+        return f"{V79_SPOILER_PREFIX} {title}"
+    return title
+
+
+def v79_should_post_edit(news_data, source_title="", source_text="", source_url=""):
+    if not V79_ENABLE_POST_EDITING or not news_data:
+        return False
+    if v75_is_hard_results_report(source_title, source_url, source_text):
+        return False
+    html = news_data.get("testo", "") or ""
+    if len(html) < 350:
+        return False
+    if len(html) > V79_POST_EDIT_MAX_CHARS:
+        print(f"[POSTEDIT v79] Skip: body troppo lungo ({len(html)} chars)")
+        return False
+    return True
+
+
+def v79_editorial_post_edit(news_data, source_title="", source_text="", source_url=""):
+    """Second AI pass: style polish only, with hard fact validation fallback."""
+    if not v79_should_post_edit(news_data, source_title, source_text, source_url):
+        return news_data
+
+    title = sanitize_text(news_data.get("titolo", ""))
+    html = news_data.get("testo", "") or ""
+    category = int(news_data.get("categoria") or detect_source_category(source_title, source_text, source_url))
+    plain_preview = BeautifulSoup(html, "html.parser").get_text(" ", strip=True)[:1400]
+    protected_facts = build_protected_facts_for_prompt(source_title, source_text or plain_preview)
+    protected_facts_block = "\n".join(f"- {fact}" for fact in protected_facts) if protected_facts else "- Nessun elemento specifico rilevato."
+
+    spoiler_rule = ""
+    if v79_is_live_spoiler_candidate(source_title, source_text, source_url):
+        spoiler_rule = f'- Il titolo finale DEVE iniziare con {V79_SPOILER_PREFIX}. Non rimuovere questo prefisso.'
+
+    prompt = f"""
+Sei un editor italiano di una newsroom di wrestling.
+Ricevi una traduzione gia corretta nei fatti, ma ancora troppo letterale. Devi fare SOLO post-editing stilistico.
+Restituisci SOLO JSON valido in UNA SOLA RIGA: {{"titolo":"...","testo":"html","categoria":{category}}}
+
+OBIETTIVO:
+- Rendere titolo e testo naturali, fluidi e giornalistici in italiano.
+- Eliminare calchi inglesi, ripetizioni e frasi macchinose.
+- Mantenere lo stesso significato e gli stessi fatti.
+- Non aggiungere informazioni, non tagliare fatti rilevanti, non cambiare enfasi editoriale.
+
+VINCOLI CRITICI:
+- Non modificare nomi propri, date, numeri, eventi, titoli ufficiali, sigle e stipulazioni.
+- Non tradurre titoli/cinture ufficiali WWE/AEW/TNA/NXT/ROH/NJPW/AAA.
+- Non modificare il contenuto delle citazioni tra <blockquote>: puoi solo correggere fluidita italiana senza cambiare senso.
+- Mantieni HTML semplice: <p>, <b>, <blockquote>, <figure>, <img>, <iframe>, link gia presenti.
+- Non rimuovere immagini, iframe, embed, figure, link fonte o CTA gia presenti.
+- Non aggiungere domande ai lettori, commenti finali o formule promozionali.
+- Se una frase e' gia buona, lasciala invariata.
+{spoiler_rule}
+
+ELEMENTI PROTETTI:
+{protected_facts_block}
+
+TITOLO ORIGINALE INGLESE:
+{source_title}
+
+TITOLO ITALIANO ATTUALE:
+{title}
+
+TESTO ITALIANO DA POST-EDITARE:
+{html}
+"""
+    try:
+        data, used_model = generate_and_parse_json(prompt)
+        new_title = sanitize_text(str(data.get("titolo", title)))
+        new_html = str(data.get("testo", html) or html).strip()
+        new_title = v721_deterministic_title_cleanup(refine_title_italian(new_title))
+        new_html = fix_mojibake(new_html)
+        new_html = refine_body_text(new_html)
+        new_title, new_html = apply_translation_glossary(new_title, new_html)
+        new_title, new_html = v69_apply_translation_guardrails(new_title, new_html, source_title, source_text)
+        new_title, new_html = repair_protected_source_facts(source_title, source_text, new_title, new_html)
+        new_title = v79_add_spoiler_prefix(new_title, source_title, source_text, source_url)
+
+        if body_looks_suspicious(new_html):
+            raise ValueError("body sospetto dopo post-editing")
+        issues = validate_protected_source_facts(source_title, source_text, new_title, new_html)
+        if issues:
+            raise ValueError(f"fatti protetti alterati dopo post-editing: {issues}")
+        quality = italian_quality_issues(new_title, new_html)
+        blocking = [i for i in quality if "Titolo sospeso" not in i]
+        if blocking:
+            raise ValueError(f"qualita sospetta dopo post-editing: {blocking}")
+        if not new_html or len(BeautifulSoup(new_html, "html.parser").get_text(" ", strip=True)) < 50:
+            raise ValueError("testo troppo corto dopo post-editing")
+        print(f"[POSTEDIT v79] Testo rifinito con: {used_model}")
+        return {"titolo": new_title, "testo": new_html, "categoria": category}
+    except Exception as e:
+        print(f"[POSTEDIT v79] Fallito, mantengo traduzione originale: {e}")
+        news_data["titolo"] = v79_add_spoiler_prefix(title, source_title, source_text, source_url)
+        return news_data
+
+
+def translate_news(source_title, text, source_url="", forced_category=None):
+    news_data, err_type = _ORIG_V79_translate_news(source_title, text, source_url=source_url, forced_category=forced_category)
+    if news_data:
+        news_data["titolo"] = v79_add_spoiler_prefix(news_data.get("titolo", ""), source_title, text, source_url)
+        news_data = v79_editorial_post_edit(news_data, source_title, text, source_url)
+    return news_data, err_type
+
+
+def translate_ordered_content_blocks(source_title, blocks, source_url="", forced_title=None, forced_category=None, excluded_image_urls=None):
+    news_data, err_type = _ORIG_V79_translate_ordered_content_blocks(
+        source_title,
+        blocks,
+        source_url=source_url,
+        forced_title=forced_title,
+        forced_category=forced_category,
+        excluded_image_urls=excluded_image_urls,
+    )
+    if news_data:
+        source_text_joined = "\n\n".join(b.get("text", "") for b in blocks if b.get("type") == "text" and b.get("text"))
+        # Report titles remain deterministic and are not post-edited.
+        if forced_title or v75_is_hard_results_report(source_title, source_url, source_text_joined):
+            news_data["titolo"] = forced_title or make_deterministic_report_title(source_title, source_url, source_text_joined) or news_data.get("titolo", "")
+        else:
+            news_data["titolo"] = v79_add_spoiler_prefix(news_data.get("titolo", ""), source_title, source_text_joined, source_url)
+            news_data = v79_editorial_post_edit(news_data, source_title, source_text_joined, source_url)
+    return news_data, err_type
+
+
+def classify_article_type_fallback_v68(title="", text="", url=""):
+    if v75_is_hard_results_report(title, url, text):
+        return "RESULTS_REPORT"
+    if v79_is_live_spoiler_candidate(title, text, url):
+        # No new public enum is introduced in old code paths: treat as post-show news, title carries [SPOILER].
+        return "POST_SHOW_NEWS"
+    return _ORIG_V79_classify_article_type_fallback(title, text, url)
+
+
+def v721_ensure_italian_title(title, source_title="", source_text="", source_url=""):
+    if v75_is_hard_results_report(source_title, source_url, source_text):
+        deterministic = make_deterministic_report_title(source_title, source_url, source_text)
+        if deterministic:
+            return deterministic
+    fixed = _ORIG_V79_v721_ensure_italian_title(title, source_title, source_text, source_url)
+    return v79_add_spoiler_prefix(fixed, source_title, source_text, source_url)
 
 
 # Aggiorna label di log residue nei percorsi di traduzione a blocchi senza alterare la logica.
