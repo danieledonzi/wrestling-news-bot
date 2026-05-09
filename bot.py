@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v79_1_1_spoiler_cache_preshow_validation"
+BOT_VERSION = "v79_1_2_spoiler_score_floor"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -9528,6 +9528,47 @@ def v721_ensure_italian_title(title, source_title="", source_text="", source_url
             return deterministic
     fixed = _ORIG_V79_v721_ensure_italian_title(title, source_title, source_text, source_url)
     return v79_add_spoiler_prefix(fixed, source_title, source_text, source_url)
+
+
+# =========================
+# v79.1.2: spoiler-aware scoring floor
+# =========================
+# La v79.1.1 riconosce correttamente gli spoiler live/pre-show, ma lo scoring
+# storico puo' comunque tenerli sotto MIN_PUBLISH_SCORE perche' li tratta come
+# preview/rumor vaghi. Qui il layer spoiler resta un guardrail editoriale:
+# pubblica solo se il classificatore ibrido ha gia' dato YES, senza aprire la
+# porta a preview generiche o opinion/interviste.
+V7912_SPOILER_SCORE_FLOOR = int(os.getenv("V7912_SPOILER_SCORE_FLOOR", str(MIN_PUBLISH_SCORE)))
+V7912_SPOILER_SCORE_CAP = int(os.getenv("V7912_SPOILER_SCORE_CAP", "82"))
+_ORIG_V7912_calculate_importance_score = calculate_importance_score
+
+
+def v7912_is_score_floor_eligible(title="", text="", url=""):
+    if not V79_LIVE_SPOILER_MODE:
+        return False
+    if v75_is_hard_results_report(title, url, text):
+        return False
+    if v791_is_auto_no_spoiler(title, text, url):
+        return False
+    # Evita Gemini su articoli chiaramente fuori contesto.
+    if not v791_is_live_event_active(title, text, url):
+        return False
+    return v79_is_live_spoiler_candidate(title, text, url)
+
+
+def calculate_importance_score(title, text="", url=""):
+    score, reasons = _ORIG_V7912_calculate_importance_score(title, text, url)
+    try:
+        if int(score or 0) < MIN_PUBLISH_SCORE and v7912_is_score_floor_eligible(title, text, url):
+            old_score = int(score or 0)
+            score = max(old_score, V7912_SPOILER_SCORE_FLOOR)
+            score = min(score, V7912_SPOILER_SCORE_CAP)
+            reasons = list(reasons or [])
+            reasons.append(f"v79.1.2 spoiler live/pre-show floor {old_score}->{score}")
+            print(f"[SCORE v79.1.2] Spoiler validato: floor {old_score}->{score} - {title}")
+    except Exception as e:
+        print(f"[SCORE v79.1.2] Floor spoiler non applicato: {e}")
+    return score, reasons
 
 
 # Aggiorna label di log residue nei percorsi di traduzione a blocchi senza alterare la logica.
