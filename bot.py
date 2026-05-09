@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v75_hard_results_report_detection"
+BOT_VERSION = "v76_report_titles_death_score_guardrails"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -8711,6 +8711,143 @@ def make_report_event_key(title="", url="", text=""):
             return f"report:{show}-{date_key}"
     return _ORIG_V75_make_report_event_key(title, url, text)
 
+
+
+# =========================
+# v76 overrides: deterministic report titles + real-death guardrail + conservative low-score boost cap
+# =========================
+
+_ORIG_V76_v63_has_death_event = v63_has_death_event
+_ORIG_V76_v62_detect_event_type = v62_detect_event_type
+_ORIG_V76_v62_event_importance_boost = v62_event_importance_boost
+_ORIG_V76_v721_ensure_italian_title = v721_ensure_italian_title
+_ORIG_V76_v723_conservative_score_after_ai = v723_conservative_score_after_ai
+
+V76_DEATH_FALSE_POSITIVE_PHRASES = [
+    "gingerbread man", "gingerbread man funeral", "the dead rising",
+    "dead rising", "funeral segment", "funeral ends with", "wrestling funeral",
+    "mock funeral", "comedy funeral", "funeral angle", "funeral skit",
+    "undertaker deadman", "dead man", "deadman", "death grip", "tongan death grip",
+]
+
+V76_TRUE_DEATH_PATTERNS = [
+    r"\bpassed away\b", r"\bpassing of\b", r"\bdeath of\b", r"\bhas died\b",
+    r"\bdied\b", r"\bdies\b", r"\bdead at\s+\d+\b", r"\bfound dead\b",
+    r"\bis dead\b", r"\bwas found dead\b", r"\bkilled\b",
+    r"\bmorte\b", r"\bmorto\b", r"\bmorta\b", r"\bscomparsa\b",
+    r"\bdeceduto\b", r"\bdeceduta\b",
+]
+
+V76_REAL_DEATH_CONTEXT_TERMS = [
+    "passed away", "death of", "has died", "died", "dies", "dead at", "found dead",
+    "obituary", "memorial", "tribute", "condolences", "family announced",
+    "morte", "morto", "morta", "scomparsa", "deceduto", "deceduta", "omaggio", "condoglianze",
+]
+
+
+def v76_is_storyline_death_false_positive(title="", text="", url=""):
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:1600]}")
+    if not probe:
+        return False
+    if any(normalize_for_check(p) in probe for p in V76_DEATH_FALSE_POSITIVE_PHRASES):
+        return True
+    # Parole tipiche di angle/segmenti comedy: non sono notizie di morte reale.
+    if any(x in probe for x in ["segment", "promo", "angle", "storyline", "skit", "comedy", "gingerbread", "backlash"]) and any(y in probe for y in ["dead", "death", "funeral"]):
+        # Se pero' c'e' un vero pattern necrologico esplicito, non bloccare.
+        return not any(re.search(p, probe, flags=re.I) for p in V76_TRUE_DEATH_PATTERNS)
+    return False
+
+
+def v63_has_death_event(probe):
+    if not probe:
+        return False
+    cleaned = normalize_for_check(probe)
+    for phrase in V76_DEATH_FALSE_POSITIVE_PHRASES:
+        cleaned = re.sub(r"\b" + re.escape(normalize_for_check(phrase)) + r"\b", " ", cleaned, flags=re.I)
+    cleaned = normalize_whitespace(cleaned)
+    if not cleaned:
+        return False
+    # v76: niente trigger su parole isolate tipo dead/death/funeral. Serve un pattern di morte reale.
+    return any(re.search(pattern, cleaned, flags=re.I) for pattern in V76_TRUE_DEATH_PATTERNS)
+
+
+def v62_detect_event_type(probe):
+    if v76_is_storyline_death_false_positive(probe, "", ""):
+        cleaned_probe = probe
+        for phrase in V76_DEATH_FALSE_POSITIVE_PHRASES:
+            cleaned_probe = re.sub(r"\b" + re.escape(normalize_for_check(phrase)) + r"\b", " ", cleaned_probe, flags=re.I)
+        # rimuove anche parole residue troppo generiche per evitare event_type death.
+        cleaned_probe = re.sub(r"\b(dead|death|funeral)\b", " ", cleaned_probe, flags=re.I)
+        return _ORIG_V76_v62_detect_event_type(normalize_whitespace(cleaned_probe))
+    return _ORIG_V76_v62_detect_event_type(probe)
+
+
+def v62_event_importance_boost(title="", text="", url=""):
+    if v76_is_storyline_death_false_positive(title, text, url):
+        boost, reasons = _ORIG_V76_v62_event_importance_boost(title, text, url)
+        filtered = [r for r in reasons if "morte" not in r.lower() and "death" not in r.lower()]
+        if len(filtered) != len(reasons):
+            boost = min(boost, 10)
+            filtered.append("v76 no death boost: storyline/comedy funeral")
+        return boost, filtered
+    return _ORIG_V76_v62_event_importance_boost(title, text, url)
+
+
+def v76_is_results_report_context(source_title="", source_text="", source_url=""):
+    try:
+        return bool(v75_is_hard_results_report(source_title, source_url, source_text) or is_results_article(source_title, source_url, source_text))
+    except Exception:
+        return bool(is_results_article(source_title, source_url, source_text))
+
+
+def v721_ensure_italian_title(title, source_title="", source_text="", source_url=""):
+    # v76: i report non passano piu' da Gemini title repair. Titolo sempre deterministico.
+    if v76_is_results_report_context(source_title, source_text, source_url):
+        deterministic = make_deterministic_report_title(source_title, source_url, source_text)
+        if deterministic:
+            return deterministic
+    return _ORIG_V76_v721_ensure_italian_title(title, source_title, source_text, source_url)
+
+
+def v76_has_concrete_major_event(title="", text="", url="", editorial_analysis=None):
+    if v76_is_results_report_context(title, text, url):
+        return True
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:1600]}")
+    if not probe:
+        return False
+    if v76_is_storyline_death_false_positive(title, text, url):
+        return False
+    concrete_terms = [
+        "title change", "new champion", "wins title", "retains", "regains", "vacated",
+        "serious injury", "hospital", "surgery", "out of action", "medical",
+        "released", "release", "licenziamento", "licenziato", "signed", "signs", "contract extension",
+        "media rights", "tv deal", "rights deal", "revenue", "earnings", "lawsuit", "arrested",
+    ]
+    if any(term in probe for term in concrete_terms):
+        return True
+    # Ritorni/debutti sono concreti solo se il titolo/lead li presenta come fatto avvenuto, non rumor/futuro.
+    if any(term in probe for term in ["returns during", "returned during", "debuted", "made surprise return", "makes surprise return"]):
+        return True
+    return False
+
+
+def v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title="", text="", url="", editorial_analysis=None):
+    score, reasons = _ORIG_V76_v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title, text, url, editorial_analysis)
+    initial_score = int(initial_score or 0)
+    score = int(score or 0)
+    reasons = list(reasons or [])
+
+    # v76: se la prima valutazione era bassa, il raffinamento non puo' trasformare contenuti leggeri/comedy/reaction in high priority.
+    # Eccezione solo per eventi concreti verificabili o report completi.
+    if initial_score < 60 and score >= MIN_PUBLISH_SCORE and not v76_has_concrete_major_event(title, text, url, editorial_analysis):
+        score = min(score, 74)
+        reasons.append("v76 cap boost da score basso senza evento concreto")
+
+    if v76_is_storyline_death_false_positive(title, text, url) and score > 54:
+        score = 54
+        reasons.append("v76 cap death/funeral storyline-comedy")
+
+    return max(0, min(100, int(score))), reasons
 
 # Aggiorna label di log residue nei percorsi di traduzione a blocchi senza alterare la logica.
 
