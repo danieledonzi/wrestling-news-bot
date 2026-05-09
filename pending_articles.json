@@ -1,104 +1,51 @@
 [
   {
     "kind": "report",
-    "url": "https://www.wrestlinginc.com/2168755/aew-collision-may-9-results/",
-    "title": "AEW Collision 5/9 Results - World & National Titles On The Line, Tag Champs In Action",
+    "url": "https://www.ringsidenews.com/aew-collision-fairway-hell-results-highlights-key-moments-may-9-2026/",
+    "title": "AEW Collision Fairway To Hell Results, Highlights and Key Moments for May 9, 2026",
     "semantic_id": "report-aew-collision-2026-05-09",
-    "title_key": "collision-5-9-results-world-national-line-tag-champs-action",
-    "score": 80,
-    "priority": "high",
+    "title_key": "collision-fairway-hell-results-highlights-key-moments-may-9",
+    "score": 75,
+    "priority": "medium",
     "event_key": "report:aew-collision-2026-05-09",
     "report_event_key": "report:aew-collision-2026-05-09",
     "reasons": [
       "AEW",
       "show settimanale",
-      "v62 titolo/championship",
       "v75 hard results report",
       "v77 hard report protected",
-      "v71 freshness=0.604"
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.578"
     ],
     "score_reasons": [
       "AEW",
       "show settimanale",
-      "v62 titolo/championship",
       "v75 hard results report",
       "v77 hard report protected",
-      "v71 freshness=0.604",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.578",
       "report live: pubblicazione ritardata"
     ],
     "is_breaking": false,
     "breaking_expires_at": 0,
     "status": "waiting_report_completion",
     "reason": "report_live_delay",
-    "created_at": 1778367496.0,
-    "first_seen": 1778367496.0,
-    "last_seen": 1778369311.708253,
-    "not_before": 1778380096.0,
+    "created_at": 1778369460.0,
+    "first_seen": 1778369460.0,
+    "last_seen": 1778370082.2598898,
+    "not_before": 1778382060.0,
     "attempts": 0,
     "sources": [
       {
-        "url": "https://www.wrestlinginc.com/2168755/aew-collision-may-9-results/",
-        "title": "AEW Collision 5/9 Results - World & National Titles On The Line, Tag Champs In Action",
-        "source": "www.wrestlinginc.com",
-        "first_seen": 1778367496.0,
-        "last_seen": 1778369311.708253,
-        "last_text_len": 674
-      }
-    ],
-    "story_signature_v71": "aew_collision|national_titles_on_the|tag_champs_in_action|report|aew|collision"
-  },
-  {
-    "kind": "report",
-    "url": "https://www.ringsidenews.com/wwe-backlash-results-highlights-key-moments-may-9-2026/",
-    "title": "WWE Backlash Results, Highlights and Key Moments for May 9, 2026",
-    "semantic_id": "report-wwe-backlash-2026-05-09",
-    "title_key": "backlash-results-highlights-key-moments-may-9",
-    "score": 75,
-    "priority": "medium",
-    "event_key": "report:wwe-backlash-2026-05-09",
-    "report_event_key": "report:wwe-backlash-2026-05-09",
-    "reasons": [
-      "WWE/main roster",
-      "WWE main roster + storyline/evento",
-      "titolo/championship",
-      "floor WWE main roster storyline",
-      "v62 titolo/championship",
-      "v75 hard results report",
-      "v77 hard report protected",
-      "v71 source reliability soft penalty",
-      "v71 freshness=0.531"
-    ],
-    "score_reasons": [
-      "WWE/main roster",
-      "WWE main roster + storyline/evento",
-      "titolo/championship",
-      "floor WWE main roster storyline",
-      "v62 titolo/championship",
-      "v75 hard results report",
-      "v77 hard report protected",
-      "v71 source reliability soft penalty",
-      "v71 freshness=0.531",
-      "report live: pubblicazione ritardata"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 0,
-    "status": "waiting_report_completion",
-    "reason": "report_live_delay",
-    "created_at": 1778355060.0,
-    "first_seen": 1778355060.0,
-    "last_seen": 1778369312.1950471,
-    "not_before": 1778374860.0,
-    "attempts": 0,
-    "sources": [
-      {
-        "url": "https://www.ringsidenews.com/wwe-backlash-results-highlights-key-moments-may-9-2026/",
-        "title": "WWE Backlash Results, Highlights and Key Moments for May 9, 2026",
+        "url": "https://www.ringsidenews.com/aew-collision-fairway-hell-results-highlights-key-moments-may-9-2026/",
+        "title": "AEW Collision Fairway To Hell Results, Highlights and Key Moments for May 9, 2026",
         "source": "www.ringsidenews.com",
-        "first_seen": 1778355060.0,
-        "last_seen": 1778369312.1950471,
-        "last_text_len": 19265
+        "first_seen": 1778369460.0,
+        "last_seen": 1778370082.2598898,
+        "last_text_len": 1238
       }
-    ]
+    ],
+    "story_signature_v71": "aew_collision_fairway_to|hell_results|key_moments|report|aew|collision"
   },
   {
     "kind": "report",
