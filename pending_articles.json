@@ -1,1 +1,51 @@
-[]
+[
+  {
+    "kind": "report",
+    "url": "https://www.ringsidenews.com/wwe-smackdown-results-highlights-key-moments-may-8-2026/",
+    "title": "WWE SmackDown Results, Highlights and Key Moments for May 8, 2026",
+    "semantic_id": "report-wwe-smackdown-2026-05-08",
+    "title_key": "smackdown-results-highlights-key-moments-may-8",
+    "score": 75,
+    "priority": "medium",
+    "event_key": "report:wwe-smackdown-2026-05-08",
+    "report_event_key": "report:wwe-smackdown-2026-05-08",
+    "reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "show settimanale",
+      "floor WWE main roster storyline",
+      "v75 hard results report",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.427"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "show settimanale",
+      "floor WWE main roster storyline",
+      "v75 hard results report",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.427",
+      "report live: pubblicazione ritardata"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 0,
+    "status": "waiting_report_completion",
+    "reason": "report_live_delay",
+    "created_at": 1778283060.0,
+    "first_seen": 1778283060.0,
+    "last_seen": 1778327081.3409245,
+    "not_before": 1778302860.0,
+    "attempts": 0,
+    "sources": [
+      {
+        "url": "https://www.ringsidenews.com/wwe-smackdown-results-highlights-key-moments-may-8-2026/",
+        "title": "WWE SmackDown Results, Highlights and Key Moments for May 8, 2026",
+        "source": "www.ringsidenews.com",
+        "first_seen": 1778283060.0,
+        "last_seen": 1778327081.3409245,
+        "last_text_len": 29395
+      }
+    ]
+  }
+]

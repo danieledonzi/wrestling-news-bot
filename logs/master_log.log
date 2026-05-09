@@ -5878,3 +5878,107 @@ However, if you want to parse some data that happens to look like a URL, then no
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 9 candidati provati | mode=normal
 ===== RUN END [2026-05-09 11:34:37] VERSION [v75_hard_results_report_detection (67d5b84)] =====
 
+
+===== RUN START [2026-05-09 11:44:20] VERSION [v75_hard_results_report_detection (10e8a0a)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/8/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168395/wwe-nxt-viewership-ratings-report-may-5-2026/
+[SKIP] Score sotto soglia editoriale (13/75): UFC Star Calls Conspiracy On Khamzat Chimaev Making Weight, Claims 328 Fight Is Rigged
+[SKIP] Score sotto soglia editoriale (0/75): Khamzat Chimaev Calls Himself A Terrorist, Kicks Sean Strickland At UFC Presser
+[SKIP] Score sotto soglia editoriale (0/75): President Donald Trump Hosts UFC Fighters To Oval Office Ahead Of Freedom 250
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168381/wwe-smackdown-tiffany-stratton-first-womens-us-title-defense-kiana-james/
+[SKIP] Score sotto soglia editoriale (35/75): Kevin Nash Says This WWE Star Is One Of The Only Things That 'Amuses' Him Anymore
+[SKIP] Score sotto soglia editoriale (0/75): UFC Legend Warns Sean Strickland May Be Serious About Shooting Khamzat Chimaev
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168347/wwe-wrestlemania-42-bully-ray-roman-reigns-oba-femi-lost-title/
+[SKIP] Score sotto soglia editoriale (0/75): Khamzat Chimaev On Shooting Threats Before UFC 328: 'I Would Be Happy To Die'
+[SKIP] Score sotto soglia editoriale (38/75): WWE's Jacob Fatu Explains Why He Won't Change The Name Of The Tongan Death Grip
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168330/wwe-smackdown-may-8-womens-united-states-championship-on-line-gunther-appears/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168293/wwe-sami-zayn-fully-turned-heel/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168269/wwe-backlash-bully-ray-paul-heyman-jacob-fatu-roman-reigns-pitches-surprise-involvement/
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2168230/wwe-backlash-danhausen-jelly-roll-mystery-partner-backstage-speculation/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168222/wwe-raw-smackdown-media-rights-contracts-2019-2024-public-shareholder-lawsuit/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168165/wwe-pay-cuts-details/
+[SKIP] Score sotto soglia editoriale (0/75): Chael Sonnen: UFC Star Didn't Respect Career Enough To 'Stick A Needle In His A**'
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/d-von-dudley-believes-tko-could-destroy-wrestling-business-new-days-wwe-exit/
+[SKIP] Score sotto soglia editoriale (23/75): Must-Watch Wrestling Shows You Shouldn't Miss This Summer
+[SKIP] Score sotto soglia editoriale (31/75): AEW Collision Fairway to Hell Preview for May 9, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (50/75): WWE Backlash 2026 Preview: Confirmed Matches, Start Time and How to Watch
+[SKIP] URL già in history: https://www.ringsidenews.com/fans-demand-wwe-fire-nia-jax-paiges-bloody-injury-smackdown/
+[SKIP] URL già in history: https://www.ringsidenews.com/paige-reveals-bloody-head-wound-stitches-chaotic-wwe-smackdown-segment/
+[SKIP] Score sotto soglia editoriale (23/75): WWE Roasted By Fans For Using AI Slop During 5/8 SmackDown
+[SKIP] URL già in history: https://www.ringsidenews.com/gingerbread-man-funeral-ends-dead-rising-during-58-wwe-smackdown/
+[SKIP] URL già in history: https://www.ringsidenews.com/jade-cargill-makes-surprise-return-during-58-wwe-smackdown/
+[SKIP] Score sotto soglia editoriale (27/75): Paul Heyman Reveals Favor He Did For GUNTHER During 5/8 WWE SmackDown
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-pays-tribute-ted-turner-during-58-smackdown/
+[SKIP] Score sotto soglia editoriale (33/75): Shane McMahon's WWE Status After Profile Appears Under Active Roster
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-using-bots-crack-down-streamer-clips/
+[SCORE] 100 high - GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE | WWE/main roster, top star titolo: cody rhodes, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship, v71 freshness=0.484
+[SCORE] 81 high - Backstage Update On Roman Reigns' WWE Schedule In July | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, ritorno/debutto, v71 freshness=0.389
+[SCORE] 75 medium - WWE SmackDown Results, Highlights and Key Moments for May 8, 2026 | WWE/main roster, WWE main roster + storyline/evento, show settimanale, floor WWE main roster storyline, v75 hard results report, v71 source reliability soft penalty, v71 freshness=0.427
+[SCORE] 43 low - Zayda Steel Shuts Down Claim She Left WWE for a Boyfriend | WWE/main roster, impatto roster/storyline, release/addio, v71 source reliability soft penalty, v71 freshness=0.576, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 1 news >=90, 2 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 4 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE
+[BOT] semantic_id=gunther-joins-wwe-smackdown-appears-set-for-title-match-with-cody-rhodes-at-italy-ple
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.99 model=gemini-2.5-flash-lite | L'articolo presenta un evento futuro (Clash in Italy) con match annunciati e dettagli sulla card. Le news su GUNTHER che approda a SmackDown e l'attacco a Cody Rhodes sono funzionali a introdurre il match futuro. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli in inglese: "Undisputed WWE Champion".; Non tradurre "Clash in Italy", è il nome di un evento futuro.; "Ring General" è un soprannome, da gestire come tale.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo presenta un evento futuro (Clash in Italy) con match annunciati e dettagli sulla card. Le news su GUNTHER che approda a SmackDown e l'attacco a Cody Rhodes sono funzionali a introdurre il match futuro. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 2.32s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: cody rhodes, nomi forti lead: seth rollins, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 titolo/championship
+[V71] story_signature=cody_rhodes|gunther|gunther_joins_wwe_smackdown|contract|wwe|smackdown|wrestlemania semantic_status=new_story freshness=0.6
+[PERF v71] WP recent posts dedupe: 2.55s
+[SKIP] News core già pubblicata da altra fonte: GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Backstage Update On Roman Reigns' WWE Schedule In July
+[BOT] semantic_id=backstage-update-on-roman-reigns-wwe-schedule-in-july
+[SCORE] iniziale=81 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash-lite | L'articolo riporta aggiornamenti sul futuro e i piani di Roman Reigns, incluse speculazioni non confermate e indicazioni da fonti (Dave Meltzer). Il focus è su speculazioni, non su un evento specifico. La data di WrestleMania 42 è fittizia,
+[EDITORIAL v72.3] translation_notes=Il titolo e il lead contengono un riferimento a WrestleMania 42 che sembra essere un errore (non è avvenuta) o una finzione narrativa dell'articolo sorgente. Mantenere il riferimen; 'World Heavyweight Champion' va tradotto come 'Campione Mondiale dei Pesi Massimi' solo se il titolo è effettivamente tale nel contesto WWE attuale (non lo è più). In questo caso, ; 'OTC' è un acronimo non standard. Se è un riferimento specifico e noto, mantenerlo. Altrimenti, chiedere chiarimenti o cercare un equivalente (ma è improbabile sia un termine uffic
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta aggiornamenti sul futuro e i piani di Roman Reigns, incluse speculazioni non confermate e indicazioni da fonti (Dave Meltzer). Il focus è su speculazioni, non su un evento specifico. La data di WrestleMania 42 è fittizia,
+[PERF v71] analisi editoriale AI v72: 4.19s
+[SCORE] raffinato=68 priority=medium | WWE/main roster, top star titolo: roman reigns, nomi forti lead: cm punk, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v72.3 cap rumor: niente boost raffinamento, v72.3 cap rumor
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Backstage Update On Roman Reigns' WWE Schedule In July
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:roman-reigns:cm-punk -> event:rumor:backstage-update-roman-reigns-schedule-july
+[V71] story_signature=roman_reigns|backstage_update_on_roman|reigns_wwe_schedule_in|return|wwe|raw|summerslam|wrestlemania semantic_status=new_story freshness=0.506
+[SKIP] News core già pubblicata da altra fonte: Backstage Update On Roman Reigns' WWE Schedule In July
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: WWE SmackDown Results, Highlights and Key Moments for May 8, 2026
+[BOT] semantic_id=wwe-smackdown-results-highlights-and-key-moments-for-may-8-2026
+[SCORE] iniziale=75 priority=medium
+[SCRAPE] Articolo results rilevato: testo completo (29395 caratteri)
+[PERF v71] scraping articolo: 0.58s
+[BLOCKSEQ] Blocchi ordinati estratti: text=75, image=0, embed=31
+[BOT] Embed trovati: 32
+[PENDING] Coda salvata: 1 elementi
+[REPORT] Salvato/aggiornato pending report: report:wwe-smackdown-2026-05-08 | gia' maturo
+[PERF v71] WP lookup URL esistente: 0.63s
+[PERF v71] WP lookup event_key: 1.46s
+[PENDING] Rimuovo report già pubblicato: report:wwe-smackdown-2026-05-08
+[BOT] Elaborazione: Zayda Steel Shuts Down Claim She Left WWE for a Boyfriend
+[BOT] semantic_id=zayda-steel-shuts-down-claim-she-left-wwe-for-a-boyfriend
+[SCORE] iniziale=43 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=19, image=0, embed=3
+[BOT] Embed trovati: 3
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.00 | category=WWE (4) conf=0.00 model=gemini-2.5-flash-lite | 
+[EDITORIAL v72.3] translation_notes=I nomi ufficiali di titoli/cinture restano in inglese.; Non usare "release" o "released" tradotto letteralmente, ma "licenziamento", "licenziato", "addio".; Le quote devono essere tradotte fedelmente, non parafrasate.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | fallback categoria dopo AI conf=0.00
+[PERF v71] analisi editoriale AI v72: 7.25s
+[SCORE] raffinato=43 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, developmental secondario, v72.3 cap rumor: niente boost raffinamento
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 43/75 - Zayda Steel Shuts Down Claim She Left WWE for a Boyfriend
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 4 candidati provati | mode=normal
+===== RUN END [2026-05-09 11:44:20] VERSION [v75_hard_results_report_detection (10e8a0a)] =====
+
