@@ -6218,3 +6218,334 @@ However, if you want to parse some data that happens to look like a URL, then no
 [PENDING] Candidati salvati per dopo: 3
 ===== RUN END [2026-05-09 14:44:30] VERSION [v76_report_titles_death_score_guardrails (764a256)] =====
 
+
+===== RUN START [2026-05-09 15:44:28] VERSION [v76_report_titles_death_score_guardrails (e15330f)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[PERF v71] WP lookup event_key: 0.99s
+[PENDING] Rimuovo report già pubblicato: report:wwe-smackdown-2026-05-08
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (20/75): Jerry Lawler Got 'Shoved' Into WWE Commentary Role
+[SKIP] Score sotto soglia editoriale (0/75): Matt Hardy Looks Back On V1 Character And His 'Meat And Potatoes' Role In Tag Team
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/8/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168395/wwe-nxt-viewership-ratings-report-may-5-2026/
+[SKIP] Score sotto soglia editoriale (13/75): UFC Star Calls Conspiracy On Khamzat Chimaev Making Weight, Claims 328 Fight Is Rigged
+[SKIP] Score sotto soglia editoriale (0/75): Khamzat Chimaev Calls Himself A Terrorist, Kicks Sean Strickland At UFC Presser
+[SKIP] Score sotto soglia editoriale (0/75): President Donald Trump Hosts UFC Fighters To Oval Office Ahead Of Freedom 250
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168381/wwe-smackdown-tiffany-stratton-first-womens-us-title-defense-kiana-james/
+[SKIP] Score sotto soglia editoriale (35/75): Kevin Nash Says This WWE Star Is One Of The Only Things That 'Amuses' Him Anymore
+[SKIP] Score sotto soglia editoriale (0/75): UFC Legend Warns Sean Strickland May Be Serious About Shooting Khamzat Chimaev
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168347/wwe-wrestlemania-42-bully-ray-roman-reigns-oba-femi-lost-title/
+[SKIP] Score sotto soglia editoriale (0/75): Khamzat Chimaev On Shooting Threats Before UFC 328: 'I Would Be Happy To Die'
+[SKIP] Score sotto soglia editoriale (38/75): WWE's Jacob Fatu Explains Why He Won't Change The Name Of The Tongan Death Grip
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168330/wwe-smackdown-may-8-womens-united-states-championship-on-line-gunther-appears/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168293/wwe-sami-zayn-fully-turned-heel/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[PERF v71] WP lookup event_key: 1.11s
+[FIX] Event key in history ma non confermata su WordPress: event:liv-morgan-trouble-theme - provo a pubblicare
+[PERF v71] WP lookup event_key: 1.13s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (15/75): Ted DiBiase Takes Shot At Virgil While Revealing WWE's Inside Joke Behind His Name
+[SKIP] Score sotto soglia editoriale (28/75): Paige Collett Wants To Become Wrestling's Female Paul Heyman
+[SKIP] Score sotto soglia editoriale (17/75): Ted DiBiase Reveals Person Behind Creation of Million Dollar Man Character
+[SKIP] Score sotto soglia editoriale (9/75): Harley Cameron Explains Why AEW Won Her Over After Chasing Wrestling Dream In America
+[SKIP] URL già in history: https://www.ringsidenews.com/scott-steiners-son-confirms-wwe-wrestling-plans-nfl-career-ends/
+[SKIP] URL già in history: https://www.ringsidenews.com/cj-perry-steals-show-pink-bikini-video-drop/
+[SKIP] URL già in history: https://www.ringsidenews.com/d-von-dudley-believes-tko-could-destroy-wrestling-business-new-days-wwe-exit/
+[SKIP] Score sotto soglia editoriale (23/75): Must-Watch Wrestling Shows You Shouldn't Miss This Summer
+[SCORE] 100 high - Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans | WWE/main roster, top star titolo: cody rhodes, WWE main roster + storyline/evento, contratto, combo top name titolo + evento forte, PLE/PPV, v71 freshness=0.576
+[SCORE] 100 high - GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE | WWE/main roster, top star titolo: cody rhodes, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship, v71 freshness=0.434
+[SCORE] 90 high - Vince Russo Defends TKO Asking WWE Talent to Take Pay Cuts | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, release/addio, v62 categoria business, v71 freshness=0.686
+[SCORE] 73 medium - John Cena 'Historic' WWE Announcement May Not Be About Club WWE | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.569, v48 tier2: 55-74
+[SCORE] 72 medium - WWE Backlash 2026 Full & Final Card | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v68 cap annuncio vago/futuro, v71 freshness=0.576, v48 tier2: 55-74
+[SCORE] 66 medium - Liv Morgan Loves That Fans 'Hate' How Catchy Her 'Trouble' Song Is | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.573, v48 tier2: 55-74
+[SCORE] 61 medium - Final WWE Backlash Betting Odds Released With Massive Favorites Heading Into Event | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 source reliability soft penalty, v71 freshness=0.663, v48 tier2: 55-74
+[SCORE] 56 low - Paige Collett Wants The Ring Rat To Run Through The Entire JCW Locker Room | ritorno/debutto, v62 media rights/streaming, v62 categoria business, v71 source reliability soft penalty, v71 freshness=0.556, v48 tier2: 55-74
+[SCORE] 55 low - Sheamus Advocates For Irish WWE PLE | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v71 freshness=0.607, v48 tier2: 55-74
+[SCORE] 49 low - Liv Morgan Wants Dancing With The Stars Run After WWE WrestleMania Performance | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, opinione generica, v68 cap duro opinion/commentary, v71 source reliability soft penalty, v71 freshness=0.573, v48 tier3: 45-54 contestuale
+[MODE] Storm mode attiva: 3 news >=90, 3 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 3
+[BOT] Elaborazione: GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE
+[BOT] semantic_id=gunther-joins-wwe-smackdown-appears-set-for-title-match-with-cody-rhodes-at-italy-ple
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo annuncia un evento futuro (PLE in Italia) con match già delineato, il che lo rende una preview. La notizia del trasferimento di Gunther a SmackDown è funzionale alla costruzione dell'evento. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=I nomi delle cinture ufficiali (es. Undisputed WWE Champion) vanno lasciati in inglese.; Il termine "Clash in Italy" è il nome ufficiale dell'evento, mantenerlo in inglese.; 'Ring General' è un soprannome consolidato, da mantenere.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo annuncia un evento futuro (PLE in Italia) con match già delineato, il che lo rende una preview. La notizia del trasferimento di Gunther a SmackDown è funzionale alla costruzione dell'evento. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 2.09s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: cody rhodes, nomi forti lead: seth rollins, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 titolo/championship
+[V71] story_signature=cody_rhodes|gunther|gunther_joins_wwe_smackdown|contract|wwe|smackdown|wrestlemania semantic_status=new_story freshness=0.727
+[PERF v71] WP recent posts dedupe: 2.00s
+[SKIP] News core già pubblicata da altra fonte: GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 3 elementi
+[BOT] Elaborazione: Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans
+[BOT] semantic_id=cody-rhodes-chooses-the-best-edition-of-wwe-wrestlemania-to-introduce-to-new-fans
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo presenta l'opinione di Cody Rhodes riguardo a quale edizione di WrestleMania consigliare ai nuovi fan. Non è una preview di un evento futuro, né un report di risultati, né una notizia post-show. Si posiziona come un'analisi/opini
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei PLE in inglese: WrestleMania 3, WrestleMania 17, WrestleMania 19.; Tradurre "Undisputed WWE Champion" come "Campione WWE Indiscusso".; Evitare calchi come "home run" (meglio "successo" o "colpaccio"), "entry point" (meglio "punto d'ingresso" o "inizio"), "invested in" (meglio "appassionarsi a").
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo presenta l'opinione di Cody Rhodes riguardo a quale edizione di WrestleMania consigliare ai nuovi fan. Non è una preview di un evento futuro, né un report di risultati, né una notizia post-show. Si posiziona come un'analisi/opini
+[PERF v71] analisi editoriale AI v72: 6.97s
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star titolo: cody rhodes, business/contratti WWE-TKO, WWE main roster + storyline/evento, contratto, combo top name titolo + evento forte, PLE/PPV, opinione generica, v62 media rights/streaming, v62 categoria business
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans
+[FIX v72.3] Event key business rimossa per OPINION/WWE: event:business:cody-rhodes -> event:rumor:cody-rhodes-chooses-best-edition-introduce-fans
+[V71] story_signature=cody_rhodes|cody_rhodes_chooses_the|best_edition_of_wwe|title_change|wwe|wrestlemania semantic_status=new_story freshness=0.61
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:rumor:cody-rhodes-chooses-best-edition-introduce-fans -> event:rumor:cody-rhodes-chooses-best-edition-introduce-fans-followup-cody-rhodes-chooses-best-edition-introduce-fans
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=3
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/cody-rhodes-chooses-the-best-edition-of-wwe-wrestlemania-to-introduce-to-new-fans/intro-1777992793.jpg
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=3 generato=['19']", "Numero evento alterato: WrestleMania sorgente=17 generato=['19']"]
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=3 generato=['19']", "Numero evento alterato: WrestleMania sorgente=17 generato=['19']"]
+[PERF v71] traduzione: 7.09s
+[SKIP] Traduzione fallita: Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans (err_type=validation)
+[FAILED] URL sospeso 24h dopo 2 validation fail: Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans
+[BOT] Elaborazione: WWE Backlash 2026 Full & Final Card
+[BOT] semantic_id=wwe-backlash-2026-full-final-card
+[SCORE] iniziale=72 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=PREVIEW conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite |  | guardrail true preview
+[EDITORIAL v72.3] translation_notes=Il titolo e' gia' stato tradotto in "Full & Final Card". La data "2026" e' insolita per un evento futuro e suggerisce un potenziale errore di battitura nell'originale o una data fi; I nomi dei titoli ufficiali (WWE United States Championship, WWE World Heavyweight Championship) devono rimanere in inglese.; "Hot off the heels of" si puo' tradurre con "Subito dopo" o "A stretto giro da".
+[EDITORIAL v73] final type=PREVIEW | category=WWE (4) | | guardrail true preview
+[PERF v71] analisi editoriale AI v72: 5.31s
+[SKIP] Preview/show announcement scaduta dopo scraping: WWE Backlash 2026 Full & Final Card
+[PENDING] Coda salvata: 2 elementi
+[BOT] News candidate totali: 12 | mode=storm | max nuove=5 | pending pubblicati=0
+[BOT] Elaborazione: Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans
+[BOT] semantic_id=cody-rhodes-chooses-the-best-edition-of-wwe-wrestlemania-to-introduce-to-new-fans
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash-lite | L'articolo cita la opinione di Cody Rhodes su quale WrestleMania sia la migliore per i nuovi fan. Non è una preview di un evento futuro ma un commento post-show.
+[EDITORIAL v72.3] translation_notes=Il titolo "Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans" può essere reso come "Cody Rhodes indica la migliore WrestleMania per introdurre i nuo; Evitare calchi come "home run" (successo, colpaccio) e "entry point" (punto di ingresso, ideale per iniziare).; Le cinture "Undisputed WWE Champion" vanno mantenute in inglese.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo cita la opinione di Cody Rhodes su quale WrestleMania sia la migliore per i nuovi fan. Non è una preview di un evento futuro ma un commento post-show.
+[PERF v71] analisi editoriale AI v72: 1.53s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star titolo: cody rhodes, business/contratti WWE-TKO, WWE main roster + storyline/evento, contratto, combo top name titolo + evento forte, PLE/PPV, opinione generica, v62 media rights/streaming, v62 categoria business
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans
+[V71] story_signature=cody_rhodes|cody_rhodes_chooses_the|best_edition_of_wwe|title_change|wwe|wrestlemania semantic_status=new_story freshness=0.576
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:business:cody-rhodes -> event:business:cody-rhodes-followup-cody-rhodes-chooses-best-edition-introduce-fans
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=3
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/cody-rhodes-chooses-the-best-edition-of-wwe-wrestlemania-to-introduce-to-new-fans/intro-1777992793.jpg
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=3 generato=['19']", "Numero evento alterato: WrestleMania sorgente=17 generato=['19']"]
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=3 generato=['19']", "Numero evento alterato: WrestleMania sorgente=17 generato=['19']"]
+[PERF v71] traduzione: 5.81s
+[SKIP] Traduzione fallita: Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans (err_type=validation)
+[FAILED] URL sospeso 24h dopo 3 validation fail: Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans
+[BOT] Elaborazione: GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE
+[BOT] semantic_id=gunther-joins-wwe-smackdown-appears-set-for-title-match-with-cody-rhodes-at-italy-ple
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.98 model=gemini-2.5-flash-lite | L'articolo presenta un evento futuro (Clash in Italy PLE) e i match annunciati. Il focus è sull'evento imminente e sulle implicazioni per GUNTHER e Cody Rhodes. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Non tradurre "Undisputed WWE Champion". Lasciare "Clash in Italy" come nome dell'evento.; Il favore "owed" a GUNTHER è un elemento della storyline, non una questione aziendale.; Evitare calchi come "set up the match" e tradurre con "ha messo su l'incontro" o "ha organizzato l'incontro".
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo presenta un evento futuro (Clash in Italy PLE) e i match annunciati. Il focus è sull'evento imminente e sulle implicazioni per GUNTHER e Cody Rhodes. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.41s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: cody rhodes, nomi forti lead: seth rollins, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 titolo/championship
+[V71] story_signature=cody_rhodes|gunther|gunther_joins_wwe_smackdown|contract|wwe|smackdown|wrestlemania semantic_status=new_story freshness=0.55
+[SKIP] News core già pubblicata da altra fonte: GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE
+[SKIP] news_core_key=schedule-wrestlemania
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Vince Russo Defends TKO Asking WWE Talent to Take Pay Cuts
+[BOT] semantic_id=vince-russo-defends-tko-asking-wwe-talent-to-take-pay-cuts
+[SCORE] iniziale=90 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=22, image=0, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=0.95 | category=BUSINESS (15) conf=0.90 model=gemini-2.5-flash-lite | 
+[EDITORIAL v72.3] translation_notes=Evitare di tradurre "pay cuts" con "tagli di paga" (calco). Usare "riduzioni di stipendio" o "tagli agli stipendi" ove appropriato.; Il termine "contract restructuring strategy" può essere reso come "strategia di ristrutturazione dei contratti" o "piano di revisione dei contratti".; "Merchandise sales" si traduce con "vendite di merchandising".
+[EDITORIAL v73] final type=OPINION | category=BUSINESS (15) | v72.3 editorial analysis gemini-2.5-flash-lite
+[PERF v71] analisi editoriale AI v72: 5.56s
+[SCORE] raffinato=82 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, release/addio, v62 categoria business, v72.3 cap rumor/opinion business reale
+[V71] story_signature=vince_russo_defends_tko|asking_wwe_talent|take_pay_cuts|contract|wwe|tko semantic_status=new_story freshness=0.686
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=22
+[PERF v71] traduzione: 7.44s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Vince Russo: "TKO agisce da azienda nei confronti dei wrestler WWE"
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 2.52s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/vince-russo-defends-tko-asking-wwe-talent-to-take-pay-cuts-52.jpg
+[MEDIA] Immagine caricata: 4053
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.53s
+[PERF v71] totale articolo pubblicato 'Vince Russo Defends TKO Asking WWE Talent to Take Pay Cuts': 17.92s
+[OK] Pubblicato: Vince Russo: "TKO agisce da azienda nei confronti dei wrestler WWE"
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: John Cena 'Historic' WWE Announcement May Not Be About Club WWE
+[BOT] semantic_id=john-cena-historic-wwe-announcement-may-not-be-about-club-wwe
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=1
+[BOT] Embed trovati: 2
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash | L'articolo riporta speculazioni e voci di backstage riguardo un imminente annuncio di John Cena a Backlash, un contenuto standard per un sito di news sul wrestling.
+[EDITORIAL v72.3] translation_notes=Il nome del programma 'Club WWE' non deve essere tradotto.; Le quote di John Cena vanno tradotte fedelmente.; Evitare calchi per frasi come 'kicked off the hype' (ha lanciato l'hype/l'entusiasmo), 'shock the very foundation' (scuotere le fondamenta), 'history-making news' (notizie che fara
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta speculazioni e voci di backstage riguardo un imminente annuncio di John Cena a Backlash, un contenuto standard per un sito di news sul wrestling.
+[PERF v71] analisi editoriale AI v72: 8.29s
+[SCORE] raffinato=20 priority=skip | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v68 preview scaduta
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 20/75 - John Cena 'Historic' WWE Announcement May Not Be About Club WWE
+[BOT] Elaborazione: WWE Backlash 2026 Full & Final Card
+[BOT] semantic_id=wwe-backlash-2026-full-final-card
+[SCORE] iniziale=72 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=PREVIEW conf=0.90 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite |  | guardrail true preview
+[EDITORIAL v72.3] translation_notes=Il titolo "Full & Final Card" va reso in italiano mantenendo il senso di "card completa e definitiva". "WWE United States Championship" e "WWE World Heavyweight Championship" vanno
+[EDITORIAL v73] final type=PREVIEW | category=WWE (4) | | guardrail true preview
+[PERF v71] analisi editoriale AI v72: 9.48s
+[SKIP] Preview/show announcement scaduta dopo scraping: WWE Backlash 2026 Full & Final Card
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Liv Morgan Loves That Fans 'Hate' How Catchy Her 'Trouble' Song Is
+[BOT] semantic_id=liv-morgan-loves-that-fans-hate-how-catchy-her-trouble-song-is
+[SCORE] iniziale=66 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, image=0, embed=1
+[BOT] Embed trovati: 2
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo parla dell'opinione di Liv Morgan sulla sua musica d'ingresso, un evento già accaduto e una notizia autonoma post-show. La categoria è WWE perché riguarda una wrestler della WWE e si menzionano WrestleMania e la WWE.
+[EDITORIAL v72.3] translation_notes=I nomi delle cinture (es. Women's World Champion) vanno lasciati in inglese.; 'Entrance theme' si traduce con 'musica d'ingresso' o 'tema d'ingresso'.; Evitare 'licenziato' per 'released' in questo contesto, si parla di wrestler e non di tagli aziendali.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo parla dell'opinione di Liv Morgan sulla sua musica d'ingresso, un evento già accaduto e una notizia autonoma post-show. La categoria è WWE perché riguarda una wrestler della WWE e si menzionano WrestleMania e la WWE.
+[PERF v71] analisi editoriale AI v72: 6.61s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Liv Morgan Loves That Fans 'Hate' How Catchy Her 'Trouble' Song Is
+[SCORE] raffinato=54 priority=low | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, opinione generica, v62 reazioni/tributi, v68 cap duro opinion/commentary
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Liv Morgan Loves That Fans 'Hate' How Catchy Her 'Trouble' Song Is
+[V71] story_signature=liv_morgan|liv_morgan_loves_that|hate_how_catchy_her|opinion|wwe|wrestlemania semantic_status=new_story freshness=0.573
+[FIX] Event key in history ma non confermata su WordPress: event:liv-morgan-trouble-theme - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=7
+[PERF v71] traduzione: 3.34s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Liv Morgan: "Amo che ai fan non piaccia quanto sia orecchiabile 'Trouble'"
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 2.74s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/liv-morgan-loves-that-fans-hate-how-catchy-her-trouble-song-is-08.jpg
+[MEDIA] Immagine caricata: 4056
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.39s
+[PERF v71] totale articolo pubblicato 'Liv Morgan Loves That Fans 'Hate' How Catchy Her 'Trouble' S': 14.91s
+[OK] Pubblicato: Liv Morgan: "Amo che ai fan non piaccia quanto sia orecchiabile 'Trouble'"
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Final WWE Backlash Betting Odds Released With Massive Favorites Heading Into Event
+[BOT] semantic_id=final-wwe-backlash-betting-odds-released-with-massive-favorites-heading-into-event
+[SCORE] iniziale=61 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo presenta le quote di scommessa finali per un evento imminente (Backlash 2026), fornendo informazioni su matchup, favoriti e sfavoriti, il cui scopo principale è anticipare l'evento. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=I nomi dei titoli (WWE World Heavyweight Championship, United States Championship) vanno mantenuti in inglese.; Evitare traduzioni letterali come "betting odds released" (quote di scommessa rilasciate); usare espressioni come "quote definitive", "quote finali".; Le quote numeriche (es. -5000, +1200) vanno riportate fedelmente.
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo presenta le quote di scommessa finali per un evento imminente (Backlash 2026), fornendo informazioni su matchup, favoriti e sfavoriti, il cui scopo principale è anticipare l'evento. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 3.04s
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star lead: roman reigns, nomi forti lead: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, combo top name lead + evento forte, v62 titolo/championship
+[V71] story_signature=final_wwe_backlash_betting|odds_released_with_massive|favorites_heading_into_event|rumor|wwe|backlash semantic_status=new_story freshness=0.663
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=9
+[PERF v71] traduzione: 8.95s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): WWE Backlash 2026: quote scommesse, favoriti schiaccianti e incontri equilibrati
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.34s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/final-wwe-backlash-betting-odds-released-with-massive-favorites-heading-into-event-23.jpg
+[MEDIA] Immagine caricata: 4059
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.32s
+[PERF v71] totale articolo pubblicato 'Final WWE Backlash Betting Odds Released With Massive Favori': 15.48s
+[OK] Pubblicato: WWE Backlash 2026: quote scommesse, favoriti schiaccianti e incontri equilibrati
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Paige Collett Wants The Ring Rat To Run Through The Entire JCW Locker Room
+[BOT] semantic_id=paige-collett-wants-the-ring-rat-to-run-through-the-entire-jcw-locker-room
+[SCORE] iniziale=56 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=1
+[BOT] Embed trovati: 2
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WORLD (8) conf=1.00 model=gemini-2.5-flash-lite | L'articolo discute di un personaggio e dei suoi piani futuri già stabiliti o discussi dopo un evento (JCW post-show). La categoria 'World' è appropriata per wrestling indipendente come la JCW. Le note sono focalizzate su termini specifici e
+[EDITORIAL v72.3] translation_notes=Mantenere in inglese i nomi dei personaggi/gimmick come "The Ring Rat".; "Locker room" va tradotto contestualmente, ad esempio "tutto il roster" o "tutti i talenti".; Evitare traduzioni letterali per "run through" o "touch like a ring rat would". Usare espressioni come "interagire con" o "lasciare il segno su".
+[CATEGORY v73] World downgrade: WORLD -> UNCATEGORIZED | non wrestling internazionale
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=UNCATEGORIZED (1) | L'articolo discute di un personaggio e dei suoi piani futuri già stabiliti o discussi dopo un evento (JCW post-show). La categoria 'World' è appropriata per wrestling indipendente come la JCW. Le note sono focalizzate su termini specifici e
+[PERF v71] analisi editoriale AI v72: 2.25s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Paige Collett Wants The Ring Rat To Run Through The Entire JCW Locker Room
+[SCORE] raffinato=44 priority=low | ritorno/debutto, v62 media rights/streaming, v73 cap uncategorized
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 44/75 - Paige Collett Wants The Ring Rat To Run Through The Entire JCW Locker Room
+[BOT] Elaborazione: Sheamus Advocates For Irish WWE PLE
+[BOT] semantic_id=sheamus-advocates-for-irish-wwe-ple
+[SCORE] iniziale=55 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | 
+[EDITORIAL v72.3] translation_notes=Il titolo "Sheamus Advocates For Irish WWE PLE" deve essere reso più italiano, ad esempio "Sheamus si esprime a favore di un PLE WWE in Irlanda".; Evitare "advocates for" tradotto letteralmente. Concentrarsi sul significato: "sostiene", "propone", "auspica".; I nomi dei titoli ufficiali (PLE) restano in inglese.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | v72.3 editorial analysis gemini-2.5-flash-lite
+[PERF v71] analisi editoriale AI v72: 3.89s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Sheamus Advocates For Irish WWE PLE
+[SCORE] raffinato=74 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v62 categoria business, v66 cap opinion/commentary storyline, v76 cap boost da score basso senza evento concreto
+[TIER] Pubblicabile sotto soglia come tier5: v71 major story bypass - Sheamus Advocates For Irish WWE PLE
+[V71] story_signature=sheamus_advocates_for_irish|wwe_ple|return|wwe|wrestlemania semantic_status=new_story freshness=0.723
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: Expecting ',' delimiter: line 1 column 22 (char 21)
+[GEMINI] Uso modello: gemini-2.5-flash
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash | blocchi testo=6
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/sheamus-advocates-for-irish-wwe-ple/intro-1778014431.jpg
+[PERF v71] traduzione: 11.99s
+[FIX] Titolo non valido (ok) -> fallback automatico: Sheamus advocates for irish WWE ple
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Sheamus: "Il mio sogno è portare WrestleMania in Irlanda"
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.98s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/sheamus-advocates-for-irish-wwe-ple/l-intro-1778014431.jpg
+[MEDIA] Immagine caricata: 4062
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.74s
+[PERF v71] totale articolo pubblicato 'Sheamus Advocates For Irish WWE PLE': 21.26s
+[OK] Pubblicato: Sheamus: "Il mio sogno è portare WrestleMania in Irlanda"
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Liv Morgan Wants Dancing With The Stars Run After WWE WrestleMania Performance
+[BOT] semantic_id=liv-morgan-wants-dancing-with-the-stars-run-after-wwe-wrestlemania-performance
+[SCORE] iniziale=49 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=14, image=0, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.98 model=gemini-2.5-flash-lite | L'articolo parla di dichiarazioni post-WrestleMania di Liv Morgan su obiettivi futuri non legati direttamente a un match, quindi è una news post-evento. La categoria è WWE perché riguarda una sua dichiarazione.
+[EDITORIAL v72.3] translation_notes=Il titolo "Wants Dancing With The Stars Run" andrebbe reso in modo più discorsivo, es. "Liv Morgan vuole partecipare a Ballando con le Stelle".; Prestare attenzione alla frase "pop star practice" che si riferisce all'allenamento intensivo per la sua entrata a WrestleMania, non a un vero e proprio allenamento da pop star.; Le citazioni di Liv Morgan sono colloquiali, mantenere il tono informale ma evitare traduzioni letterali che suonino innaturali in italiano.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo parla di dichiarazioni post-WrestleMania di Liv Morgan su obiettivi futuri non legati direttamente a un match, quindi è una news post-evento. La categoria è WWE perché riguarda una sua dichiarazione.
+[PERF v71] analisi editoriale AI v72: 1.42s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Liv Morgan Wants Dancing With The Stars Run After WWE WrestleMania Performance
+[SCORE] raffinato=54 priority=low | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, opinione generica, v68 cap duro opinion/commentary
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Liv Morgan Wants Dancing With The Stars Run After WWE WrestleMania Performance
+[V71] story_signature=liv_morgan|liv_morgan_wants_dancing|with_the_stars_run|opinion|wwe|wrestlemania semantic_status=new_story freshness=0.573
+[FIX] Event key in history ma non confermata su WordPress: event:liv-morgan-trouble-theme - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=14
+[PERF v71] traduzione: 4.16s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Liv Morgan: dopo WrestleMania sogno americano con Ballando con le Stelle
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.80s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/liv-morgan-wants-dancing-with-the-stars-run-after-wwe-wrestlemania-performance-54.jpg
+[MEDIA] Immagine caricata: 4065
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.21s
+[PERF v71] totale articolo pubblicato 'Liv Morgan Wants Dancing With The Stars Run After WWE Wrestl': 9.41s
+[OK] Pubblicato: Liv Morgan: dopo WrestleMania sogno americano con Ballando con le Stelle
+[PENDING] Coda salvata: 2 elementi
+[BOT] Pubblicati 5 articoli (0 pending + 5 nuove) su 13 candidati provati | mode=storm
+===== RUN END [2026-05-09 15:44:28] VERSION [v76_report_titles_death_score_guardrails (e15330f)] =====
+
