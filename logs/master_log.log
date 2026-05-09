@@ -7272,3 +7272,162 @@ However, if you want to parse some data that happens to look like a URL, then no
 [BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 3 candidati provati | mode=normal
 ===== RUN END [2026-05-09 17:43:50] VERSION [v78_1_validation_retry_guard (e54591f)] =====
 
+
+===== RUN START [2026-05-09 18:52:06] VERSION [v78_1_validation_retry_guard (9aea985)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[PERF v71] WP lookup event_key: 1.23s
+[PENDING] Rimuovo report già pubblicato: report:wwe-smackdown-2026-05-08
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (22/75): Will Ospreay Explains What AEW & NJPW Have To Gain From Partnership
+[SKIP] Score sotto soglia editoriale (14/75): Anthony Bowens Reflects On Unexpected Success Of The Acclaimed In AEW
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165704/jerry-lawler-looks-back-infamous-wwe-wrestlemania-match-michael-cole/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168572/tko-wwe-quarterly-earnings-report-growth-falling-ticket-sales-dave-meltzer/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165924/wwe-matt-hardy-undertaker-best-locker-room-leader/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165551/sheamus-advocates-irish-wwe-ple/
+[SKIP] Score sotto soglia editoriale (20/75): Jerry Lawler Got 'Shoved' Into WWE Commentary Role
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165420/wwe-trick-williams-jevon-evans-oba-femi-acknowledges-rivalry/
+[SKIP] Score sotto soglia editoriale (0/75): Matt Hardy Looks Back On V1 Character And His 'Meat And Potatoes' Role In Tag Team
+[SKIP] Score sotto soglia editoriale (56/75): WWE Backlash 2026 Full & Final Card
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2164991/wwe-wrestlemania-3-cody-rhodes-best-edition-introduce-new-fans/
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/8/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168395/wwe-nxt-viewership-ratings-report-may-5-2026/
+[SKIP] Score sotto soglia editoriale (13/75): UFC Star Calls Conspiracy On Khamzat Chimaev Making Weight, Claims 328 Fight Is Rigged
+[SKIP] Score sotto soglia editoriale (0/75): Khamzat Chimaev Calls Himself A Terrorist, Kicks Sean Strickland At UFC Presser
+[SKIP] Score sotto soglia editoriale (56/75): GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE
+[SKIP] Score sotto soglia editoriale (0/75): President Donald Trump Hosts UFC Fighters To Oval Office Ahead Of Freedom 250
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168381/wwe-smackdown-tiffany-stratton-first-womens-us-title-defense-kiana-james/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - Dustin Rhodes Appears To Take Shot At WWE Pay Cut Strategy Amid TKO Contract Changes
+[SKIP] Score sotto soglia editoriale (7/75): Shawn Michaels Reveals How Long WWE Really Needs To Create Main Roster Talent
+[SKIP] Score sotto soglia editoriale (11/75): Scarlett Explains Why WWE Didn't Want Her "Sexy" Wrestling Character
+[SKIP] Score sotto soglia editoriale (17/75): Swerve Strickland Reveals What He Did During AEW Hiatus
+[SKIP] Score sotto soglia editoriale (19/75): Karrion Kross Says WWE "Creatively Sabotaged" Former NXT Stars
+[SKIP] Score sotto soglia editoriale (0/75): Devon Dudley Explains Why He Forgave Hulk Hogan Despite Racist Controversy
+[SKIP] Score sotto soglia editoriale (39/75): Adam Copeland Addresses Possibility of Following Triple H's Path After Retirement
+[SKIP] Score sotto soglia editoriale (51/75): Roman Reigns Sends Final Warning To Jacob Fatu Hours Before WWE Backlash
+[SKIP] Score sotto soglia editoriale (57/75): Adriana Rizzo Promotes New Swimwear Line In Matching Candy Stripe Bikini With Jazmyn Nyx
+[SKIP] URL già in history: https://www.ringsidenews.com/big-es-wwe-status-following-kofi-kingston-xavier-woods-exits/
+[SKIP] URL già in history: https://www.ringsidenews.com/liv-morgan-loves-that-fans-hate-how-catchy-her-trouble-song/
+[SKIP] URL già in history: https://www.ringsidenews.com/liv-morgan-wants-dancing-with-the-stars-run-after-wwe-wrestlemania-performance/
+[SKIP] URL già in history: https://www.ringsidenews.com/vince-russo-defends-tko-asking-wwe-talent-take-pay-cuts/
+[SCORE] 83 high - Dustin Rhodes Appears To Take Shot At WWE Pay Cut Strategy Amid TKO Contract Changes | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, trash talk/clickbait forte, v62 ritorno/debutto, v62 categoria business, v71 source reliability soft penalty, v71 freshness=0.811
+[SCORE] 63 medium - Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive' | WWE/main roster, nomi forti titolo: brie bella, WWE main roster + storyline/evento, titolo/championship, v71 freshness=0.593, v48 tier2: 55-74
+[SCORE] 57 low - Swerve Strickland Reacts To The New Day's WWE Exit Amid AEW Rumors | WWE/main roster, impatto roster/storyline, breaking/major update, v62 reazioni/tributi, v71 source reliability soft penalty, v71 freshness=0.577, v48 tier2: 55-74
+[SCORE] 55 low - WWE's Chelsea Green Offers Health Update Following Heart Procedure | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v71 freshness=0.598, v48 tier2: 55-74
+[SCORE] 41 low - Karrion Kross Says WWE Tried To Lower His Value Before Contract Talks | WWE/main roster, impatto roster/storyline, contratto, show settimanale, opinione generica, v71 source reliability soft penalty, v71 freshness=0.685, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 5 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Dustin Rhodes Appears To Take Shot At WWE Pay Cut Strategy Amid TKO Contract Changes
+[BOT] semantic_id=dustin-rhodes-appears-to-take-shot-at-wwe-pay-cut-strategy-amid-tko-contract-changes
+[SCORE] iniziale=83 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.80 model=gemini-2.5-flash-lite | 
+[EDITORIAL v72.3] translation_notes=Il titolo menziona "Pay Cut Strategy" e "TKO Contract Changes", ma l'articolo si concentra sulla dichiarazione di Dustin Rhodes in risposta a un fan, commentando una strategia di r; Evitare traduzioni letterali per "pay cut strategy" (strategia di riduzione stipendi) e "contract changes" (modifiche contrattuali). "Worked to hard for my legacy to be tarnished b; Le citazioni di Dave Meltzer devono essere tradotte fedelmente senza parafrasi.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | v72.3 editorial analysis gemini-2.5-flash-lite
+[PERF v71] analisi editoriale AI v72: 2.01s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Dustin Rhodes Appears To Take Shot At WWE Pay Cut Strategy Amid TKO Contract Changes
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, trash talk/clickbait forte, v62 ritorno/debutto, v62 categoria business
+[V71] story_signature=dustin_rhodes_appears_to|take_shot_at_wwe|pay_cut_strategy_amid|return|wwe|tko semantic_status=new_story freshness=0.811
+[PERF v71] WP recent posts dedupe: 1.45s
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - Dustin Rhodes Appears To Take Shot At WWE Pay Cut Strategy Amid TKO Contract Changes
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.77s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=11
+[PERF v71] traduzione: 3.30s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Dustin Rhodes risponde a un fan sulla WWE: "Mai per il 50% in meno"
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.27s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/dustin-rhodes-appears-to-take-shot-at-wwe-pay-cut-strategy-amid-tko-contract-changes-12.jpg
+[MEDIA] Immagine caricata: 4083
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.72s
+[PERF v71] totale articolo pubblicato 'Dustin Rhodes Appears To Take Shot At WWE Pay Cut Strategy A': 10.53s
+[OK] Pubblicato: Dustin Rhodes risponde a un fan sulla WWE: "Mai per il 50% in meno"
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive'
+[BOT] semantic_id=brie-bella-comments-on-latest-wwe-run-says-aews-bryan-danielson-is-so-supportive
+[SCORE] iniziale=63 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: Extra data: line 1 column 1436 (char 1435)
+[GEMINI] Uso modello: gemini-2.5-flash
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash | Notizia che riporta dichiarazioni post-show di Brie Bella sulla sua attività in WWE e sul supporto del marito Bryan Danielson (AEW).
+[EDITORIAL v72.3] translation_notes=I nomi dei titoli (es. Women's Tag Team Championships, AEW World Champion) devono rimanere in inglese.; Le quote di Brie Bella devono essere tradotte fedelmente.; Evitare calchi: 'more full-time return' (preferire 'un ritorno più regolare'), 'credited her husband' (preferire 'ha ringraziato il marito'), 'packed lineup of shows' (preferire 'u
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Notizia che riporta dichiarazioni post-show di Brie Bella sulla sua attività in WWE e sul supporto del marito Bryan Danielson (AEW).
+[PERF v71] analisi editoriale AI v72: 10.28s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive'
+[SCORE] raffinato=56 priority=low | WWE/main roster, nomi forti titolo: brie bella, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive'
+[BOT] Elaborazione: Swerve Strickland Reacts To The New Day's WWE Exit Amid AEW Rumors
+[BOT] semantic_id=swerve-strickland-reacts-to-the-new-days-wwe-exit-amid-aew-rumors
+[SCORE] iniziale=57 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=19, image=0, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=AEW (5) conf=0.80 model=gemini-2.5-flash-lite | L'articolo parla di dichiarazioni di Swerve Strickland riguardo a un'uscita già avvenuta (New Day da WWE), ma menziona anche indiscrezioni su un potenziale arrivo in AEW. Il focus principale è la reazione post-evento, non la presentazione d
+[EDITORIAL v72.3] translation_notes=Mantenere "WWE Exit" o tradurre con "uscita dalla WWE" / "lascia la WWE" a seconda del contesto. "New Day" è un nome proprio (stable), non tradurre.; Evitare di tradurre "AEW Rumors" in "rumor AEW", ma preferire "indiscrezioni su un possibile arrivo in AEW" o simili per rendere più scorrevole il titolo in italiano.; La citazione "epitome of professionalism" può essere resa con "l'epitome del professionismo" o "l'esempio di professionalità".
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | L'articolo parla di dichiarazioni di Swerve Strickland riguardo a un'uscita già avvenuta (New Day da WWE), ma menziona anche indiscrezioni su un potenziale arrivo in AEW. Il focus principale è la reazione post-evento, non la presentazione d
+[PERF v71] analisi editoriale AI v72: 2.19s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Swerve Strickland Reacts To The New Day's WWE Exit Amid AEW Rumors
+[SCORE] raffinato=62 priority=medium | WWE/main roster, impatto roster/storyline, breaking/major update, v62 reazioni/tributi
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Swerve Strickland Reacts To The New Day's WWE Exit Amid AEW Rumors
+[V71] story_signature=swerve_strickland_reacts_to|the_new_day_s_wwe|exit_amid_aew_rumors|rumor|wwe|aew semantic_status=new_story freshness=0.576
+[PERF v71] WP lookup URL esistente: 0.87s
+[PERF v71] WP lookup event_key: 1.79s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 2.11s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=19
+[PERF v71] traduzione: 4.25s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Swerve Strickland commenta l'uscita di The New Day dalla WWE e i rumor su AEW
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.70s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/swerve-strickland-reacts-to-the-new-days-wwe-exit-amid-aew-rumors-59.jpg
+[MEDIA] Immagine caricata: 4086
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.02s
+[PERF v71] totale articolo pubblicato 'Swerve Strickland Reacts To The New Day's WWE Exit Amid AEW ': 12.82s
+[OK] Pubblicato: Swerve Strickland commenta l'uscita di The New Day dalla WWE e i rumor su AEW
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: WWE's Chelsea Green Offers Health Update Following Heart Procedure
+[BOT] semantic_id=wwes-chelsea-green-offers-health-update-following-heart-procedure
+[SCORE] iniziale=55 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash-lite | L'articolo riporta un aggiornamento sulla salute di Chelsea Green e un suo segmento a SmackDown già avvenuto, non è una preview di un evento futuro. La categoria è WWE perché riguarda una wrestler del main roster WWE e SmackDown.
+[EDITORIAL v72.3] translation_notes=I titoli ufficiali delle cinture devono rimanere in inglese (es. WWE Women's United States Champion).; La traduzione di "released" deve essere contestualizzata (licenziata, addio) e non letterale "rilasciata".; Le citazioni dirette devono essere tradotte fedelmente e attribuite a "Busted Open Radio" e "Wrestling Inc."
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta un aggiornamento sulla salute di Chelsea Green e un suo segmento a SmackDown già avvenuto, non è una preview di un evento futuro. La categoria è WWE perché riguarda una wrestler del main roster WWE e SmackDown.
+[PERF v71] analisi editoriale AI v72: 1.36s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE's Chelsea Green Offers Health Update Following Heart Procedure
+[SCORE] raffinato=84 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 infortunio/operazione, v66 cap title match non-title-change
+[V71] story_signature=wwe_s_chelsea_green_offers|health_update_following_heart|return|wwe|smackdown|aaa semantic_status=new_story freshness=0.714
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=3
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwes-chelsea-green-offers-health-update-following-heart-procedure/intro-1778349063.jpg
+[PERF v71] traduzione: 2.40s
+[FIX] Titolo non valido (ok) -> fallback automatico: WWE's chelsea green offers health update dopo heart procedure
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Chelsea Green aggiorna sulla sua salute dopo un intervento al cuore
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.41s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwes-chelsea-green-offers-health-update-following-heart-procedure/l-intro-1778349063.jpg
+[MEDIA] Immagine caricata: 4089
+[WP] Status attach image: 200
+[PERF v71] featured image: 3.04s
+[PERF v71] totale articolo pubblicato 'WWE's Chelsea Green Offers Health Update Following Heart Pro': 8.72s
+[OK] Pubblicato: Chelsea Green aggiorna sulla sua salute dopo un intervento al cuore
+[PENDING] Coda salvata: 1 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 4 candidati provati | mode=normal
+===== RUN END [2026-05-09 18:52:06] VERSION [v78_1_validation_retry_guard (9aea985)] =====
+
