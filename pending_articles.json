@@ -1,6 +1,67 @@
 [
   {
     "kind": "report",
+    "url": "https://www.wrestlinginc.com/2168358/wwe-backlash-2026-two-titles-on-line-seth-rollins-bron-breakker/",
+    "title": "WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker",
+    "semantic_id": "report-wwe-backlash-2026-05-09",
+    "title_key": "backlash-results-5-9-two-line-seth-rollins-faces-bron-breakker",
+    "score": 81,
+    "priority": "high",
+    "event_key": "report:wwe-backlash-2026-05-09",
+    "report_event_key": "report:wwe-backlash-2026-05-09",
+    "reasons": [
+      "WWE/main roster",
+      "nomi forti titolo: seth rollins",
+      "WWE main roster + storyline/evento",
+      "titolo/championship",
+      "v62 titolo/championship",
+      "v75 hard results report",
+      "v77 hard report protected",
+      "v71 freshness=0.577"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "nomi forti titolo: seth rollins",
+      "WWE main roster + storyline/evento",
+      "titolo/championship",
+      "v62 titolo/championship",
+      "v75 hard results report",
+      "v77 hard report protected",
+      "v71 freshness=0.577",
+      "report live: pubblicazione ritardata",
+      "report live aggregato"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 0,
+    "status": "waiting_report_completion",
+    "reason": "report_live_delay",
+    "created_at": 1778356800.0,
+    "first_seen": 1778356800.0,
+    "last_seen": 1778366222.859574,
+    "not_before": 1778374860.0,
+    "attempts": 0,
+    "sources": [
+      {
+        "url": "https://www.wrestlinginc.com/2168358/wwe-backlash-2026-two-titles-on-line-seth-rollins-bron-breakker/",
+        "title": "WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker",
+        "source": "www.wrestlinginc.com",
+        "first_seen": 1778356800.0,
+        "last_seen": 1778366222.3483548,
+        "last_text_len": 6711
+      },
+      {
+        "url": "https://www.ringsidenews.com/wwe-backlash-results-highlights-key-moments-may-9-2026/",
+        "title": "WWE Backlash Results, Highlights and Key Moments for May 9, 2026",
+        "source": "www.ringsidenews.com",
+        "first_seen": 1778355060.0,
+        "last_seen": 1778366222.859574,
+        "last_text_len": 12476
+      }
+    ],
+    "story_signature_v71": "seth_rollins|wwe_backlash_results|two_titles_on_the|report|wwe|backlash"
+  },
+  {
+    "kind": "report",
     "url": "https://www.ringsidenews.com/wwe-smackdown-results-highlights-key-moments-may-8-2026/",
     "title": "WWE SmackDown Results, Highlights and Key Moments for May 8, 2026",
     "semantic_id": "report-wwe-smackdown-2026-05-08",
