@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v77_editorial_intelligence_guardrails"
+BOT_VERSION = "v78_wp_resilience_lookup_guard"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -188,6 +188,7 @@ SOCIAL_DOMAINS = [
 
 REQUEST_TIMEOUT_SCRAPE = 12
 REQUEST_TIMEOUT_WP = 10
+REQUEST_TIMEOUT_WP_LOOKUP = 4  # v78: lookup REST rapidi; se WP e lento meglio fallback/pending che bloccare la run
 # v60: health check piu robusto per hosting/sottodomini lenti da GitHub Actions.
 # Timeout separato connect/read: evita falsi offline su /wp-json/ lento, senza consumare Gemini se WP e' davvero giu.
 REQUEST_TIMEOUT_WP_HEALTHCHECK = (6, 20)
@@ -4369,9 +4370,25 @@ def append_embeds_to_html(content_html, embed_urls):
 
 WP_EXISTING_URL_CACHE_V71 = {}
 
+def v78_wp_rest_lookups_allowed(context="lookup"):
+    """
+    v78: se il health check ha gia dichiarato WordPress/API offline nella finestra cache,
+    non fare altri lookup REST di dedupe/event_key.
+    Evita sequenze da 30-50s di timeout quando il bot ha gia deciso di lavorare in modalita offline/pending.
+    """
+    cached_available = WP_HEALTHCHECK_CACHE.get("available")
+    checked_at = float(WP_HEALTHCHECK_CACHE.get("checked_at", 0) or 0)
+    if cached_available is False and time.time() - checked_at < WP_HEALTHCHECK_CACHE_SECONDS:
+        reason = WP_HEALTHCHECK_CACHE.get("reason", "wp_offline")
+        print(f"[WP v78] Skip lookup REST ({context}): WordPress/API offline in cache ({reason})")
+        return False
+    return True
+
 def find_existing_post_by_url(url):
     url = (url or "").strip()
     if not url:
+        return None
+    if not v78_wp_rest_lookups_allowed("find_existing_post_by_url"):
         return None
     cached = WP_EXISTING_URL_CACHE_V71.get(url)
     if cached and time.time() - cached.get("ts", 0) < 300:
@@ -4709,6 +4726,8 @@ def wp_has_published_event(event_key, title="", url=""):
     event_key = (event_key or "").strip()
     if not event_key:
         return False
+    if not v78_wp_rest_lookups_allowed("wp_has_published_event"):
+        return False
 
     cache_key = event_key
     cached = WP_EVENT_LOOKUP_CACHE_V71.get(cache_key)
@@ -4746,7 +4765,7 @@ def wp_has_published_event(event_key, title="", url=""):
                 WP_API_URL,
                 params={"search": query, "per_page": 20, "status": "publish"},
                 auth=(WP_USER, WP_PASSWORD),
-                timeout=REQUEST_TIMEOUT_WP
+                timeout=REQUEST_TIMEOUT_WP_LOOKUP
             )
             if res.status_code != 200:
                 continue
