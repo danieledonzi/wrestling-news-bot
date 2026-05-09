@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v79_1_hybrid_live_spoiler_classifier"
+BOT_VERSION = "v79_1_1_spoiler_cache_preshow_validation"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -9134,6 +9134,8 @@ V79_SPOILER_PREFIX = "[SPOILER]"
 V791_ENABLE_GEMINI_SPOILER_CLASSIFIER = os.getenv("V791_ENABLE_GEMINI_SPOILER_CLASSIFIER", "1") == "1"
 V791_FORCE_LIVE_EVENT = os.getenv("V791_FORCE_LIVE_EVENT", "").strip().lower()
 V791_SPOILER_CONTEXT_MAX_CHARS = int(os.getenv("V791_SPOILER_CONTEXT_MAX_CHARS", "900"))
+# v79.1.1: evita chiamate Gemini ripetute sullo stesso articolo nella stessa run.
+V791_SPOILER_DECISION_CACHE = {}
 
 _ORIG_V79_translate_news = translate_news
 _ORIG_V79_translate_ordered_content_blocks = translate_ordered_content_blocks
@@ -9196,6 +9198,14 @@ V791_HARD_VALIDATION_TERMS = [
     "attack", "attacks", "attacked", "opened the show", "opens the show",
     "backstage segment", "fallout", "cash-in", "cash in", "heel turn", "turns heel",
     "betrayal", "betrays", "interference", "interferes", "segment",
+    # v79.1.1: spoiler pre-show leggeri ma concreti.
+    "revealed", "leaked", "lineup", "spoiler lineup", "match order", "opening match",
+    "opener", "main event revealed", "backstage notes", "match card revealed",
+]
+
+V791_PRESHOW_SPOILER_TERMS = [
+    "spoiler", "spoiler lineup", "match order", "opening match", "opener",
+    "lineup revealed", "backstage notes", "revealed for", "reportedly revealed",
 ]
 
 
@@ -9260,11 +9270,20 @@ def v791_is_live_event_active(title="", text="", url=""):
 def v791_is_auto_no_spoiler(title="", text="", url=""):
     if v75_is_hard_results_report(title, url, text):
         return True
+    title_probe = v79_probe(title, "", url, 500)
     probe = v79_probe(title, text, url, 1800)
+    # v79.1.1: un titolo esplicitamente pre-show spoiler non deve essere
+    # neutralizzato solo perche' il body contiene parole come card/full card/preview.
+    if v791_has_any(title_probe, V791_PRESHOW_SPOILER_TERMS):
+        return False
     # Clear article formats that should never spend Gemini spoiler tokens.
     if v791_has_any(probe, V791_AUTO_NO_SPOILER_TERMS):
         # Do not let result wording inside a complete report bypass the auto-no path.
-        if not v791_has_any(probe, ["defeats", "wins", "retains", "new champion", "returns at", "attack during"]):
+        concrete = [
+            "defeats", "wins", "retains", "new champion", "returns at", "attack during",
+            "revealed", "match order", "opening match", "lineup revealed", "spoiler lineup",
+        ]
+        if not v791_has_any(probe, concrete):
             return True
     return False
 
@@ -9311,45 +9330,54 @@ Excerpt / primo paragrafo: {excerpt}
     return None
 
 
+def v791_spoiler_cache_key(title="", text="", url=""):
+    # URL + titolo bastano quasi sempre; piccolo prefix del testo evita collisioni su feed strani.
+    return make_title_key(f"{url} {title} {(text or '')[:240]}")[:220]
+
+
 def v79_is_live_spoiler_candidate(title="", text="", url=""):
-    """v79.1 hybrid spoiler decision.
+    """v79.1.1 hybrid spoiler decision.
 
     Order:
     1. hard NO gates: spoiler mode off, results reports, no active live event,
-       retrospective/opinion/business/interview/evergreen/preview-like formats;
-    2. Gemini semantic support classifier;
+       retrospective/opinion/business/interview/evergreen formats;
+    2. Gemini semantic support classifier, cached per article/run;
     3. hard validation: even Gemini SPOILER needs a concrete spoiler signal.
     """
-    if not V79_LIVE_SPOILER_MODE:
-        return False
-    if v791_is_auto_no_spoiler(title, text, url):
-        print("[SPOILER v79.1] NO: hard auto-no editorial type/report")
-        return False
-    if not v791_is_live_event_active(title, text, url):
-        print("[SPOILER v79.1] NO: nessun evento live attivo")
-        return False
-    if not v79_is_event_context(title, text, url):
-        print("[SPOILER v79.1] NO: nessun contesto evento")
-        return False
+    cache_key = v791_spoiler_cache_key(title, text, url)
+    if cache_key in V791_SPOILER_DECISION_CACHE:
+        decision, reason = V791_SPOILER_DECISION_CACHE[cache_key]
+        print(f"[SPOILER v79.1.1] CACHE: {'YES' if decision else 'NO'} - {reason}")
+        return decision
 
+    def remember(decision, reason):
+        V791_SPOILER_DECISION_CACHE[cache_key] = (bool(decision), reason)
+        print(f"[SPOILER v79.1.1] {'YES' if decision else 'NO'}: {reason}")
+        return bool(decision)
+
+    if not V79_LIVE_SPOILER_MODE:
+        return remember(False, "modalita spoiler disattivata")
+    if v791_is_auto_no_spoiler(title, text, url):
+        return remember(False, "hard auto-no editorial type/report")
+    if not v791_is_live_event_active(title, text, url):
+        return remember(False, "nessun evento live attivo")
+    if not v79_is_event_context(title, text, url):
+        return remember(False, "nessun contesto evento")
+
+    hard_validation = v791_has_spoiler_hard_validation(title, text, url)
     gemini_result = v791_gemini_spoiler_classifier(title, text, url)
     if gemini_result is False:
-        print("[SPOILER v79.1] NO: Gemini NOT_SPOILER")
-        return False
+        return remember(False, "Gemini NOT_SPOILER")
 
     if gemini_result is True:
-        if v791_has_spoiler_hard_validation(title, text, url):
-            print("[SPOILER v79.1] YES: Gemini SPOILER + hard validation")
-            return True
-        print("[SPOILER v79.1] NO: Gemini SPOILER senza hard validation")
-        return False
+        if hard_validation:
+            return remember(True, "Gemini SPOILER + hard validation")
+        return remember(False, "Gemini SPOILER senza hard validation")
 
     # Gemini unavailable: conservative deterministic fallback.
-    if v791_has_spoiler_hard_validation(title, text, url):
-        print("[SPOILER v79.1] YES: fallback deterministico validato")
-        return True
-    print("[SPOILER v79.1] NO: fallback senza validazione")
-    return False
+    if hard_validation:
+        return remember(True, "fallback deterministico validato")
+    return remember(False, "fallback senza validazione")
 
 def v79_add_spoiler_prefix(title, source_title="", source_text="", source_url=""):
     title = sanitize_text(title or "")
