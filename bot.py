@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v78_wp_resilience_lookup_guard"
+BOT_VERSION = "v78_1_validation_retry_guard"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -6077,6 +6077,11 @@ def load_pending_articles(history=None):
 
         if not url or not dedupe_key or dedupe_key in seen:
             continue
+        # v78.1: non recuperare pending sospesi per validation fail recenti.
+        # Evita cicli costosi: pending -> Gemini -> validation fail -> stesso pending.
+        if (not is_report) and is_recent_validation_failed(url):
+            print(f"[PENDING v78.1] Scarto pending sospeso per validation fail recenti: {item.get('title', url)}")
+            continue
         if (not is_report) and url in history_urls:
             continue
 
@@ -6456,6 +6461,8 @@ def record_validation_failure(url, title=""):
     save_failed_articles(data)
     if rec["count"] >= VALIDATION_FAIL_LIMIT:
         print(f"[FAILED] URL sospeso 24h dopo {rec['count']} validation fail: {title}")
+        # v78.1: se la URL e' sospesa, non deve restare in pending e ripartire alla run successiva.
+        remove_pending_url(url)
 
 
 def clear_validation_failure(url):
@@ -7060,6 +7067,9 @@ def run_bot():
     validation_fail_streak = 0
     wp_fail_streak = 0
     source_fail_counts = {}
+    # v78.1: impedisce di processare due volte lo stesso URL/event_key nella stessa run
+    # (es. una volta da pending e subito dopo come candidato feed).
+    processed_this_run = set()
 
     # 1) Recupero pending PRIMA, ma senza consumare lo slot delle nuove news.
     if pending:
@@ -7068,6 +7078,18 @@ def run_bot():
             if time.time() - run_start > MAX_RUN_SECONDS:
                 print("[BOT] Stop anticipato durante pending: superato timeout massimo run")
                 break
+            p_url = pitem.get("url") or ""
+            p_event = pitem.get("event_key") or pitem.get("report_event_key") or ""
+            p_key = p_url or p_event or pitem.get("semantic_id") or pitem.get("title_key") or pitem.get("title", "")
+            if p_url and is_recent_validation_failed(p_url):
+                print(f"[SKIP v78.1] Pending sospeso per validation fail recenti: {pitem.get('title')}")
+                remove_pending_url(p_url)
+                continue
+            if p_key and p_key in processed_this_run:
+                print(f"[SKIP v78.1] Gia processato in questa run: {pitem.get('title')}")
+                continue
+            if p_key:
+                processed_this_run.add(p_key)
             status = process_candidate_item(pitem, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
             pending_processed += 1
             if status == "published":
@@ -7133,6 +7155,20 @@ def run_bot():
         if item.get("editorial_tier") == "tier4" and tier4_published >= MAX_TIER4_PER_RUN:
             print(f"[SKIP] Tier4 gia' usato in questa run: {item.get('title')}")
             continue
+
+        item_url_v781 = item.get("url") or ""
+        item_event_v781 = item.get("event_key") or ""
+        item_key_v781 = item_url_v781 or item_event_v781 or item.get("semantic_id") or item.get("title_key") or item.get("title", "")
+        if item_url_v781 and is_recent_validation_failed(item_url_v781):
+            print(f"[SKIP v78.1] URL sospeso per validation fail recenti: {item.get('title')}")
+            remove_pending_url(item_url_v781)
+            continue
+        if item_key_v781 and item_key_v781 in processed_this_run:
+            print(f"[SKIP v78.1] Gia processato in questa run: {item.get('title')}")
+            remove_pending_url(item_url_v781)
+            continue
+        if item_key_v781:
+            processed_this_run.add(item_key_v781)
 
         # v72.1: pending pubblicati nella stessa run aggiornano history in memoria.
         # Skippa prima di scraping/Gemini se URL/semantic/title/signature sono ormai noti.
