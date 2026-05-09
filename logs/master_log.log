@@ -7062,3 +7062,119 @@ However, if you want to parse some data that happens to look like a URL, then no
 [BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 4 candidati provati | mode=normal
 ===== RUN END [2026-05-09 16:56:56] VERSION [v77_editorial_intelligence_guardrails (bb02391)] =====
 
+
+===== RUN START [2026-05-09 17:12:21] VERSION [v78_wp_resilience_lookup_guard (5a41f1e)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[PERF v71] WP lookup event_key: 1.11s
+[PENDING] Rimuovo report già pubblicato: report:wwe-smackdown-2026-05-08
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] Score sotto soglia editoriale (14/75): Anthony Bowens Reflects On Unexpected Success Of The Acclaimed In AEW
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165704/jerry-lawler-looks-back-infamous-wwe-wrestlemania-match-michael-cole/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168572/tko-wwe-quarterly-earnings-report-growth-falling-ticket-sales-dave-meltzer/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165924/wwe-matt-hardy-undertaker-best-locker-room-leader/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165551/sheamus-advocates-irish-wwe-ple/
+[SKIP] Score sotto soglia editoriale (20/75): Jerry Lawler Got 'Shoved' Into WWE Commentary Role
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165420/wwe-trick-williams-jevon-evans-oba-femi-acknowledges-rivalry/
+[SKIP] Score sotto soglia editoriale (0/75): Matt Hardy Looks Back On V1 Character And His 'Meat And Potatoes' Role In Tag Team
+[SKIP] Score sotto soglia editoriale (56/75): WWE Backlash 2026 Full & Final Card
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2164991/wwe-wrestlemania-3-cody-rhodes-best-edition-introduce-new-fans/
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/8/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168395/wwe-nxt-viewership-ratings-report-may-5-2026/
+[SKIP] Score sotto soglia editoriale (13/75): UFC Star Calls Conspiracy On Khamzat Chimaev Making Weight, Claims 328 Fight Is Rigged
+[SKIP] Score sotto soglia editoriale (0/75): Khamzat Chimaev Calls Himself A Terrorist, Kicks Sean Strickland At UFC Presser
+[SKIP] Score sotto soglia editoriale (56/75): GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE
+[SKIP] Score sotto soglia editoriale (0/75): President Donald Trump Hosts UFC Fighters To Oval Office Ahead Of Freedom 250
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168381/wwe-smackdown-tiffany-stratton-first-womens-us-title-defense-kiana-james/
+[SKIP] Score sotto soglia editoriale (35/75): Kevin Nash Says This WWE Star Is One Of The Only Things That 'Amuses' Him Anymore
+[SKIP] Score sotto soglia editoriale (0/75): UFC Legend Warns Sean Strickland May Be Serious About Shooting Khamzat Chimaev
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168347/wwe-wrestlemania-42-bully-ray-roman-reigns-oba-femi-lost-title/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (39/75): Adam Copeland Addresses Possibility of Following Triple H's Path After Retirement
+[SKIP] Score sotto soglia editoriale (51/75): Roman Reigns Sends Final Warning To Jacob Fatu Hours Before WWE Backlash
+[SKIP] Score sotto soglia editoriale (57/75): Adriana Rizzo Promotes New Swimwear Line In Matching Candy Stripe Bikini With Jazmyn Nyx
+[SKIP] URL già in history: https://www.ringsidenews.com/big-es-wwe-status-following-kofi-kingston-xavier-woods-exits/
+[SKIP] URL già in history: https://www.ringsidenews.com/liv-morgan-loves-that-fans-hate-how-catchy-her-trouble-song/
+[SKIP] URL già in history: https://www.ringsidenews.com/liv-morgan-wants-dancing-with-the-stars-run-after-wwe-wrestlemania-performance/
+[SKIP] URL già in history: https://www.ringsidenews.com/vince-russo-defends-tko-asking-wwe-talent-take-pay-cuts/
+[SKIP] Score sotto soglia editoriale (15/75): Ted DiBiase Takes Shot At Virgil While Revealing WWE's Inside Joke Behind His Name
+[SKIP] Score sotto soglia editoriale (28/75): Paige Collett Wants To Become Wrestling's Female Paul Heyman
+[SKIP] Score sotto soglia editoriale (17/75): Ted DiBiase Reveals Person Behind Creation of Million Dollar Man Character
+[SKIP] Score sotto soglia editoriale (9/75): Harley Cameron Explains Why AEW Won Her Over After Chasing Wrestling Dream In America
+[SKIP] URL già in history: https://www.ringsidenews.com/final-wwe-backlash-betting-odds-released-massive-favorites-heading-event/
+[SKIP] URL già in history: https://www.ringsidenews.com/scott-steiners-son-confirms-wwe-wrestling-plans-nfl-career-ends/
+[SCORE] 73 medium - John Cena 'Historic' WWE Announcement May Not Be About Club WWE | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.551, v48 tier2: 55-74
+[SCORE] 56 low - Paige Collett Wants The Ring Rat To Run Through The Entire JCW Locker Room | ritorno/debutto, v62 media rights/streaming, v62 categoria business, v71 source reliability soft penalty, v71 freshness=0.538, v48 tier2: 55-74
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 2
+[BOT] Elaborazione: Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans
+[BOT] semantic_id=cody-rhodes-chooses-the-best-edition-of-wwe-wrestlemania-to-introduce-to-new-fans
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.80 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo riporta le dichiarazioni di Cody Rhodes su quale edizione di WrestleMania consiglia ai nuovi fan, basandosi su eventi passati. Non è una preview di un evento futuro, né un report di risultati. È una news post-show su un'opinione 
+[EDITORIAL v72.3] translation_notes=I nomi dei titoli e delle cinture (es. Undisputed WWE Champion) vanno lasciati in inglese.; Le citazioni dirette di Cody Rhodes vanno tradotte fedelmente senza alterarne il significato.; Evitare calchi come 'best edition' traducendolo letteralmente. Preferire formulazioni come 'l'edizione migliore'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta le dichiarazioni di Cody Rhodes su quale edizione di WrestleMania consiglia ai nuovi fan, basandosi su eventi passati. Non è una preview di un evento futuro, né un report di risultati. È una news post-show su un'opinione
+[PERF v71] analisi editoriale AI v72: 5.90s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star titolo: cody rhodes, business/contratti WWE-TKO, WWE main roster + storyline/evento, contratto, combo top name titolo + evento forte, PLE/PPV, opinione generica, v62 media rights/streaming, v62 categoria business
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans
+[V71] story_signature=cody_rhodes|cody_rhodes_chooses_the|best_edition_of_wwe|title_change|wwe|wrestlemania semantic_status=new_story freshness=0.61
+[PERF v71] WP recent posts dedupe: 2.09s
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:business:cody-rhodes -> event:business:cody-rhodes-followup-cody-rhodes-chooses-best-edition-introduce-fans
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 2.46s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=3
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/cody-rhodes-chooses-the-best-edition-of-wwe-wrestlemania-to-introduce-to-new-fans/intro-1777992793.jpg
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=3 generato=['19']", "Numero evento alterato: WrestleMania sorgente=17 generato=['19']"]
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=3 generato=['19']", "Numero evento alterato: WrestleMania sorgente=17 generato=['19']"]
+[PERF v71] traduzione: 9.99s
+[SKIP] Traduzione fallita: Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans (err_type=validation)
+[FAILED] URL sospeso 24h dopo 6 validation fail: Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans
+[BOT] Elaborazione: John Cena 'Historic' WWE Announcement May Not Be About Club WWE
+[BOT] semantic_id=john-cena-historic-wwe-announcement-may-not-be-about-club-wwe
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=1
+[BOT] Embed trovati: 2
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo riporta un rumor non confermato sui piani di John Cena per Backlash, con un focus sull'entità di un annuncio futuro, ma non presenta una card completa o orari dell'evento. Rientra quindi nella categoria RUMOR per la WWE.
+[EDITORIAL v72.3] translation_notes=Il titolo "John Cena 'Historic' WWE Announcement May Not Be About Club WWE" deve essere tradotto in modo da riflettere l'incertezza sul contenuto dell'annuncio, evitando di dare pe; La citazione "historic WWE Backlash announcement" può essere tradotta come "annuncio 'storico' al WWE Backlash".; La citazione "change WWE itself" può essere tradotta come "cambierà la WWE stessa" o "potrebbe cambiare la WWE".
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta un rumor non confermato sui piani di John Cena per Backlash, con un focus sull'entità di un annuncio futuro, ma non presenta una card completa o orari dell'evento. Rientra quindi nella categoria RUMOR per la WWE.
+[PERF v71] analisi editoriale AI v72: 10.61s
+[SCORE] raffinato=20 priority=skip | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v68 preview scaduta
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 20/75 - John Cena 'Historic' WWE Announcement May Not Be About Club WWE
+[BOT] News candidate totali: 2 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: John Cena 'Historic' WWE Announcement May Not Be About Club WWE
+[BOT] semantic_id=john-cena-historic-wwe-announcement-may-not-be-about-club-wwe
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=1
+[BOT] Embed trovati: 2
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo presenta un evento futuro (Backlash) e un'annuncio di John Cena ad esso correlato, con speculazioni sul suo contenuto. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantieni "Club WWE" in inglese, poiché sembra essere un nome proprio di un progetto.; Traduci "historic" con "storico" o "storica" a seconda del contesto, ma considera di usare una formulazione più naturale come "un annuncio che farà la storia".; Le citazioni dirette di John Cena devono essere tradotte fedelmente, mantenendo il tono enfatico.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo presenta un evento futuro (Backlash) e un'annuncio di John Cena ad esso correlato, con speculazioni sul suo contenuto. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 3.75s
+[SCORE] raffinato=20 priority=skip | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v68 preview scaduta
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 20/75 - John Cena 'Historic' WWE Announcement May Not Be About Club WWE
+[BOT] Elaborazione: Paige Collett Wants The Ring Rat To Run Through The Entire JCW Locker Room
+[BOT] semantic_id=paige-collett-wants-the-ring-rat-to-run-through-the-entire-jcw-locker-room
+[SCORE] iniziale=56 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=1
+[BOT] Embed trovati: 2
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WORLD (8) conf=0.80 model=gemini-2.5-flash-lite | La notizia riguarda le intenzioni di un personaggio di una promotion indipendente (JCW), non un evento futuro. Il focus è su un'opinione e un piano già discusso con i boss, rientrando in una notizia post-show. JCW è considerata wrestling in
+[EDITORIAL v72.3] translation_notes=I nomi ufficiali dei titoli/cinture restano in inglese (se presenti).; Evitare calchi come 'run through' che potrebbe diventare 'attraversare' o 'travolgere'. Cercare una resa più dinamica legata al contesto di un personaggio 'caotico' e opportunista.; I nomi dei personaggi (The Ring Rat, Paige Collett, Violent J, Vince Russo, Disco Ray, Caleb Conley, Jeeves, Stephen Flo) vanno mantenuti in originale.
+[CATEGORY v73] World downgrade: WORLD -> UNCATEGORIZED | non wrestling internazionale
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=UNCATEGORIZED (1) | La notizia riguarda le intenzioni di un personaggio di una promotion indipendente (JCW), non un evento futuro. Il focus è su un'opinione e un piano già discusso con i boss, rientrando in una notizia post-show. JCW è considerata wrestling in
+[PERF v71] analisi editoriale AI v72: 4.47s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Paige Collett Wants The Ring Rat To Run Through The Entire JCW Locker Room
+[SCORE] raffinato=44 priority=low | ritorno/debutto, v62 media rights/streaming, v73 cap uncategorized
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 44/75 - Paige Collett Wants The Ring Rat To Run Through The Entire JCW Locker Room
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 4 candidati provati | mode=normal
+===== RUN END [2026-05-09 17:12:21] VERSION [v78_wp_resilience_lookup_guard (5a41f1e)] =====
+
