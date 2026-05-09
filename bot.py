@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v73_final_ai_editorial_taxonomy_guardrails"
+BOT_VERSION = "v74_report_pending_signature_fix"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -6641,6 +6641,7 @@ def process_report_pending_item(item, history, seen_story_fingerprints, seen_new
         seen_story_fingerprints,
         seen_news_core_keys,
         seen_event_keys,
+        seen_story_signatures_v71,
         source_fail_counts,
     )
 
