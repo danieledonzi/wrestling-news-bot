@@ -35,6 +35,39 @@
     "attempts": 0
   },
   {
+    "url": "https://www.wrestlinginc.com/2168572/tko-wwe-quarterly-earnings-report-growth-falling-ticket-sales-dave-meltzer/",
+    "title": "TKO Quarterly Earnings Report Shows WWE Growth Despite Falling Ticket Sales",
+    "semantic_id": "tko-quarterly-earnings-report-shows-wwe-growth-despite-falling-ticket-sales",
+    "title_key": "tko-quarterly-earnings-shows-growth-despite-falling-ticket-sales",
+    "score": 88,
+    "priority": "high",
+    "event_key": "event:business:tko-financials",
+    "story_signature_v71": "tko_quarterly_earnings_report|shows_wwe_growth_despite|falling_ticket_sales|business|wwe|tko",
+    "summary": "Based on this year's first quarter reports from TKO, WWE is doing well for itself, despite the decline in ticket sales.",
+    "reasons": [
+      "WWE/main roster",
+      "business/contratti WWE-TKO",
+      "rumor/backstage",
+      "v62 corporate/business",
+      "v62 categoria business",
+      "v71 freshness=0.609"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "business/contratti WWE-TKO",
+      "rumor/backstage",
+      "v62 corporate/business",
+      "v62 categoria business",
+      "v71 freshness=0.609"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778365210.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778343914.261121,
+    "attempts": 0
+  },
+  {
     "url": "https://www.wrestlinginc.com/2165924/wwe-matt-hardy-undertaker-best-locker-room-leader/",
     "title": "Matt Hardy Names WWE Hall Of Famer As Best 'Locker Room Leader' He's Worked With",
     "semantic_id": "matt-hardy-names-wwe-hall-of-famer-as-best-locker-room-leader-hes-worked-with",
