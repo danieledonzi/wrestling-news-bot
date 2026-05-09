@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v76_report_titles_death_score_guardrails"
+BOT_VERSION = "v77_editorial_intelligence_guardrails"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -8848,6 +8848,221 @@ def v723_conservative_score_after_ai(initial_score, refined_score, refined_reaso
         reasons.append("v76 cap death/funeral storyline-comedy")
 
     return max(0, min(100, int(score))), reasons
+
+
+# =========================
+# v77 overrides: preview/type coherence + editorial-value guardrails
+# =========================
+
+_ORIG_V77_classify_article_type_fallback = classify_article_type_fallback_v68
+_ORIG_V77_v70_is_hard_preview = v70_is_hard_preview
+_ORIG_V77_v68_score_cap = v68_score_cap
+_ORIG_V77_editorial_tier = editorial_tier
+_ORIG_V77_v723_conservative_score_after_ai = v723_conservative_score_after_ai
+_ORIG_V77_v62_event_importance_boost = v62_event_importance_boost
+_ORIG_V77_v721_ensure_italian_title = v721_ensure_italian_title
+
+V77_FUTURE_PREVIEW_TERMS = [
+    "preview", "full card", "final card", "match card", "confirmed matches",
+    "start time", "how to watch", "lineup", "spoiler lineup", "announced for",
+    "set for", "appears set for", "scheduled for", "will face", "will defend",
+    "heading into", "before backlash", "before wrestlemania", "at italy ple",
+    "clash in italy", "in july", "in tonight", "tonight", "tomorrow at backlash",
+]
+
+V77_FUTURE_EVENT_TERMS = [
+    "ple", "ppv", "backlash", "wrestlemania", "summerslam", "royal rumble",
+    "survivor series", "clash in italy", "clash at the castle", "money in the bank",
+    "crown jewel", "raw", "smackdown", "nxt", "dynamite", "collision", "impact",
+]
+
+V77_POST_SHOW_CONCRETE_TERMS = [
+    "after", "during", "following", "on 5/", "on may", "results", "highlights",
+    "defeated", "beat", "retained", "won", "lost", "attacked", "returned", "made surprise return",
+    "segment", "injury", "injured", "bloody", "stitches",
+]
+
+V77_AI_PREVIEW_REASON_TERMS = [
+    "evento futuro", "match annunciato", "card", "preview", "presenta un evento futuro",
+    "evento futuro", "non racconta eventi gia accaduti", "non racconta eventi già accaduti",
+    "future event", "announced match", "announced for", "set for", "will face",
+]
+
+V77_LOW_EDITORIAL_VALUE_PATTERNS = [
+    "fans react", "fans demand", "fan reaction", "social media", "instagram", "photo",
+    "photos", "bikini", "girlfriend", "boyfriend", "dating", "claps back", "fires back",
+    "addresses criticism", "shuts down claim", "denies rumor", "responds to", "wardrobe mishap",
+    "ai slop", "streamer clips", "must-watch", "shouldn't miss", "shouldnt miss",
+]
+
+V77_STRONG_EVENT_WORDS_TO_VALIDATE = [
+    "destroy", "destroyed", "explodes", "war", "kills", "killed", "dead", "death", "funeral",
+    "massive", "shocking", "chaotic", "controversy", "meltdown",
+]
+
+
+def v77_probe(title="", text="", url="", limit=1800):
+    return normalize_for_check(f"{title} {url} {(text or '')[:limit]}")
+
+
+def v77_ai_reason_text(editorial_analysis=None):
+    if not isinstance(editorial_analysis, dict):
+        return ""
+    parts = []
+    for key in ["reason", "reasoning", "notes", "translation_notes", "editorial_reason"]:
+        val = editorial_analysis.get(key)
+        if isinstance(val, list):
+            parts.extend(str(x) for x in val)
+        elif val:
+            parts.append(str(val))
+    return normalize_for_check(" ".join(parts))
+
+
+def v77_ai_reason_implies_preview(editorial_analysis=None):
+    reason = v77_ai_reason_text(editorial_analysis)
+    if not reason:
+        return False
+    return any(normalize_for_check(term) in reason for term in V77_AI_PREVIEW_REASON_TERMS)
+
+
+def v77_is_future_preview_like(title="", text="", url=""):
+    if v75_is_hard_results_report(title, url, text):
+        return False
+    probe = v77_probe(title, text, url, 1200)
+    if not probe:
+        return False
+    has_preview = any(normalize_for_check(term) in probe for term in V77_FUTURE_PREVIEW_TERMS)
+    has_event = any(normalize_for_check(term) in probe for term in V77_FUTURE_EVENT_TERMS)
+    if has_preview and has_event:
+        # Non bloccare post-show concreti che descrivono un fatto appena avvenuto.
+        if any(normalize_for_check(term) in probe for term in V77_POST_SHOW_CONCRETE_TERMS) and not any(x in probe for x in ["full card", "final card", "confirmed matches", "how to watch", "start time", "lineup"]):
+            # set-for / future-match rimane preview se il focus e' il match futuro.
+            if any(x in probe for x in ["set for", "appears set for", "will face", "will defend", "announced for"]):
+                return True
+            return False
+        return True
+    return False
+
+
+def v77_is_low_editorial_value(title="", text="", url=""):
+    if v75_is_hard_results_report(title, url, text):
+        return False
+    probe = v77_probe(title, text, url, 1600)
+    return any(normalize_for_check(p) in probe for p in V77_LOW_EDITORIAL_VALUE_PATTERNS)
+
+
+def v77_has_high_value_exception(title="", text="", url="", editorial_analysis=None):
+    if v76_has_concrete_major_event(title, text, url, editorial_analysis):
+        return True
+    probe = v77_probe(title, text, url, 1800)
+    high_terms = [
+        "title change", "new champion", "wins title", "retains", "major return", "surprise return",
+        "debut", "released", "signed", "contract", "lawsuit", "media rights", "serious injury",
+        "surgery", "hospital", "suspended", "fired", "officially announced",
+    ]
+    return any(term in probe for term in high_terms)
+
+
+def classify_article_type_fallback_v68(title="", text="", url=""):
+    if v75_is_hard_results_report(title, url, text):
+        return "RESULTS_REPORT"
+    if v77_is_future_preview_like(title, text, url):
+        return "PREVIEW"
+    return _ORIG_V77_classify_article_type_fallback(title, text, url)
+
+
+def v70_is_hard_preview(title="", text="", url=""):
+    if v75_is_hard_results_report(title, url, text):
+        return False
+    if v77_is_future_preview_like(title, text, url):
+        return True
+    return _ORIG_V77_v70_is_hard_preview(title, text, url)
+
+
+def v62_event_importance_boost(title="", text="", url=""):
+    boost, reasons = _ORIG_V77_v62_event_importance_boost(title, text, url)
+    probe = v77_probe(title, text, url, 1600)
+    if any(x in probe for x in V77_STRONG_EVENT_WORDS_TO_VALIDATE):
+        if not v77_has_high_value_exception(title, text, url):
+            filtered = []
+            for r in reasons:
+                rl = str(r).lower()
+                if any(k in rl for k in ["morte", "storico", "evento forte", "mega", "critical"]):
+                    continue
+                filtered.append(r)
+            if len(filtered) != len(reasons):
+                boost = min(boost, 10)
+                filtered.append("v77 strong-word guardrail")
+            reasons = filtered
+    return boost, reasons
+
+
+def v68_score_cap(score, title="", text="", url="", reasons=None):
+    reasons = list(reasons or [])
+    score, reasons = _ORIG_V77_v68_score_cap(score, title, text, url, reasons)
+
+    if v75_is_hard_results_report(title, url, text):
+        # v77 ribadisce: i report veri non sono preview e restano pubblicabili come report.
+        if score < REPORT_MIN_COMPLETENESS_SCORE:
+            score = REPORT_MIN_COMPLETENESS_SCORE
+        if "v77 hard report protected" not in reasons:
+            reasons.append("v77 hard report protected")
+        return score, reasons
+
+    if v77_is_future_preview_like(title, text, url):
+        if score > 56:
+            score = 56
+            reasons.append("v77 cap preview/future card coherence")
+        return score, reasons
+
+    if v77_is_low_editorial_value(title, text, url) and not v77_has_high_value_exception(title, text, url):
+        if score > 62:
+            score = 62
+            reasons.append("v77 cap low editorial value")
+
+    return score, reasons
+
+
+def editorial_tier(score, title="", text="", url=""):
+    if v75_is_hard_results_report(title, url, text):
+        return "tier1", "v77 hard report"
+    if v77_is_future_preview_like(title, text, url) and int(score or 0) < MIN_PUBLISH_SCORE:
+        return "skip", "v77 preview/future card sotto soglia"
+    if v77_is_low_editorial_value(title, text, url) and not v77_has_high_value_exception(title, text, url) and int(score or 0) < MIN_PUBLISH_SCORE:
+        return "skip", "v77 low editorial value sotto soglia"
+    return _ORIG_V77_editorial_tier(score, title, text, url)
+
+
+def v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title="", text="", url="", editorial_analysis=None):
+    score, reasons = _ORIG_V77_v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title, text, url, editorial_analysis)
+    score = int(score or 0)
+    reasons = list(reasons or [])
+
+    if v75_is_hard_results_report(title, url, text):
+        return max(score, REPORT_MIN_COMPLETENESS_SCORE), reasons + ["v77 report score protected"]
+
+    if v77_ai_reason_implies_preview(editorial_analysis) or v77_is_future_preview_like(title, text, url):
+        if score > 56:
+            score = 56
+            reasons.append("v77 AI reason/type coherence: PREVIEW cap")
+        return score, reasons
+
+    if v77_is_low_editorial_value(title, text, url) and not v77_has_high_value_exception(title, text, url, editorial_analysis):
+        if score > 62:
+            score = 62
+            reasons.append("v77 cap low editorial value after AI")
+
+    return max(0, min(100, int(score))), reasons
+
+
+def v721_ensure_italian_title(title, source_title="", source_text="", source_url=""):
+    # v77: protezione finale aggiuntiva. Se e' un report, nessuna title AI puo' sovrascrivere il formato editoriale.
+    if v75_is_hard_results_report(source_title, source_url, source_text):
+        deterministic = make_deterministic_report_title(source_title, source_url, source_text)
+        if deterministic:
+            return deterministic
+    return _ORIG_V77_v721_ensure_italian_title(title, source_title, source_text, source_url)
+
 
 # Aggiorna label di log residue nei percorsi di traduzione a blocchi senza alterare la logica.
 
