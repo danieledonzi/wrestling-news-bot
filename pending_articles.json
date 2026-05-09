@@ -1,5 +1,75 @@
 [
   {
+    "url": "https://www.wrestlinginc.com/2168388/wwe-smackdown-gunther-cody-rhodes-clash-italy-ple-paul-heyman/",
+    "title": "GUNTHER Joins WWE SmackDown, Appears Set For Title Match With Cody Rhodes At Italy PLE",
+    "semantic_id": "gunther-joins-wwe-smackdown-appears-set-for-title-match-with-cody-rhodes-at-italy-ple",
+    "title_key": "gunther-joins-smackdown-appears-set-cody-rhodes-italy-ple",
+    "score": 100,
+    "priority": "high",
+    "event_key": "event:cody-rhodes-diagnosis",
+    "story_signature_v71": "cody_rhodes|gunther|gunther_joins_wwe_smackdown|update|wwe|smackdown",
+    "summary": "GUNTHER is the newest member of \"WWE SmackDown,\" and also now seems set to challenge Undisputed WWE Champion Cody Rhodes at WWE Clash in Italy.",
+    "reasons": [
+      "WWE/main roster",
+      "top star titolo: cody rhodes",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "PLE/PPV",
+      "v62 titolo/championship",
+      "v71 freshness=0.446"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "top star titolo: cody rhodes",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "PLE/PPV",
+      "v62 titolo/championship",
+      "v71 freshness=0.446"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778312329.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778337962.8378067,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.wrestlinginc.com/2164991/wwe-wrestlemania-3-cody-rhodes-best-edition-introduce-new-fans/",
+    "title": "Cody Rhodes Chooses The Best Edition Of WWE WrestleMania To Introduce To New Fans",
+    "semantic_id": "cody-rhodes-chooses-the-best-edition-of-wwe-wrestlemania-to-introduce-to-new-fans",
+    "title_key": "cody-rhodes-chooses-best-edition-introduce-fans",
+    "score": 100,
+    "priority": "high",
+    "event_key": "",
+    "story_signature_v71": "cody_rhodes|cody_rhodes_chooses_the|best_edition_of_wwe|contract|wwe|wrestlemania",
+    "summary": "Cody Rhodes names the ideal WrestleMania to show somebody who is looking to become a fan of professional wrestling.",
+    "reasons": [
+      "WWE/main roster",
+      "top star titolo: cody rhodes",
+      "WWE main roster + storyline/evento",
+      "contratto",
+      "combo top name titolo + evento forte",
+      "PLE/PPV",
+      "v71 freshness=0.588"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "top star titolo: cody rhodes",
+      "WWE main roster + storyline/evento",
+      "contratto",
+      "combo top name titolo + evento forte",
+      "PLE/PPV",
+      "v71 freshness=0.588"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778353200.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778337962.576207,
+    "attempts": 0
+  },
+  {
     "kind": "report",
     "url": "https://www.ringsidenews.com/wwe-smackdown-results-highlights-key-moments-may-8-2026/",
     "title": "WWE SmackDown Results, Highlights and Key Moments for May 8, 2026",
@@ -48,5 +118,42 @@
       }
     ],
     "story_signature_v71": "wwe_smackdown_results|key_moments|report|wwe|smackdown"
+  },
+  {
+    "url": "https://www.wrestlinginc.com/2168266/wwe-backlash-2026-full-final-card-matches/",
+    "title": "WWE Backlash 2026 Full & Final Card",
+    "semantic_id": "wwe-backlash-2026-full-final-card",
+    "title_key": "backlash-full-final-card",
+    "score": 72,
+    "priority": "medium",
+    "event_key": "",
+    "story_signature_v71": "wwe_backlash|final_card|update|wwe|wrestlemania|backlash",
+    "summary": "Hot off the heels of WrestleMania 42, WWE pivots to Backlash, where championships will be defended, tensions will rise, and an announcement will be made.",
+    "reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "titolo/championship",
+      "PLE/PPV",
+      "v62 titolo/championship",
+      "v68 cap annuncio vago/futuro",
+      "v71 freshness=0.588",
+      "v48 tier2: 55-74"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "titolo/championship",
+      "PLE/PPV",
+      "v62 titolo/championship",
+      "v68 cap annuncio vago/futuro",
+      "v71 freshness=0.588",
+      "v48 tier2: 55-74"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778353200.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778337962.5026774,
+    "attempts": 0
   }
 ]
