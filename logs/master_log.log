@@ -8132,3 +8132,193 @@ However, if you want to parse some data that happens to look like a URL, then no
 [BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 6 candidati provati | mode=normal
 ===== RUN END [2026-05-09 22:36:49] VERSION [v79_ai_native_translation_spoiler_postedit (90823af)] =====
 
+
+===== RUN START [2026-05-09 22:48:39] VERSION [v79_1_hybrid_live_spoiler_classifier (e68fb90)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[PERF v71] WP lookup event_key: 1.25s
+[PENDING] Rimuovo report già pubblicato: report:wwe-smackdown-2026-05-08
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini NOT_SPOILER
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2168722/dave-meltzer-cmll-persephone-aew-ppv-injury/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167022/wwe-matt-hardy-eddie-guerrero-best-advice-bore-crowd/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167009/wwe-nxt-oba-femi-myles-borne-pizza-toss/
+[SPOILER v79.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite & Collision Viewership & Ratings Report, 5/6/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168663/wwe-wrestlemania-42-paul-heyman-brock-lesnar-retiring/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166518/wwe-nt-myles-borne-jelly-roll-finisher/
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (22/75): Will Ospreay Explains What AEW & NJPW Have To Gain From Partnership
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168627/wwe-chelsea-green-health-update-heart-procedure/
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (14/75): Anthony Bowens Reflects On Unexpected Success Of The Acclaimed In AEW
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165704/jerry-lawler-looks-back-infamous-wwe-wrestlemania-match-michael-cole/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168572/tko-wwe-quarterly-earnings-report-growth-falling-ticket-sales-dave-meltzer/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165924/wwe-matt-hardy-undertaker-best-locker-room-leader/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165551/sheamus-advocates-irish-wwe-ple/
+[SPOILER v79.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (20/75): Jerry Lawler Got 'Shoved' Into WWE Commentary Role
+[SKIP] URL già in history: https://www.wrestlinginc.com/2165420/wwe-trick-williams-jevon-evans-oba-femi-acknowledges-rivalry/
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Matt Hardy Looks Back On V1 Character And His 'Meat And Potatoes' Role In Tag Team
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (56/75): WWE Backlash 2026 Full & Final Card
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (50/75): Gingerbread Man Meme Goes Completely Off The Rails After WWE SmackDown
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (50/75): Big E. Gets Loud "New Day Rocks!" Chants During 2026 WWE Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/kairi-sane-tampa-airport-sighting-rumor-shut-down-before-wwe-backlash/
+[SPOILER v79.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (50/75): WWE Backlash Spoiler Lineup for May 9, 2026: Full Match Card and Backstage Notes Revealed
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (31/75): Stephanie Vaquer's Ex-Boyfriend El Cuatrero Says "Not Everything Has Been Exposed" Following Guilty Verdict
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini SPOILER senza hard validation
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini SPOILER senza hard validation
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini SPOILER senza hard validation
+[SKIP] URL già in history: https://www.ringsidenews.com/dustin-rhodes-appears-take-shot-wwe-pay-cut-strategy-amid-tko-contract-changes/
+[SKIP] URL già in history: https://www.ringsidenews.com/swerve-strickland-reacts-new-days-wwe-exit-amid-aew-rumors/
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (7/75): Shawn Michaels Reveals How Long WWE Really Needs To Create Main Roster Talent
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (11/75): Scarlett Explains Why WWE Didn't Want Her "Sexy" Wrestling Character
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (17/75): Swerve Strickland Reveals What He Did During AEW Hiatus
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (19/75): Karrion Kross Says WWE "Creatively Sabotaged" Former NXT Stars
+[SKIP] URL già in history: https://www.ringsidenews.com/karrion-kross-says-wwe-tried-lower-his-value-before-contract-talks/
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: nessun evento live attivo
+[SPOILER v79.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Devon Dudley Explains Why He Forgave Hulk Hogan Despite Racist Controversy
+[SCORE] 81 high - WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker | WWE/main roster, nomi forti titolo: seth rollins, WWE main roster + storyline/evento, titolo/championship, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.575
+[SCORE] 75 medium - WWE Backlash Results, Highlights and Key Moments for May 9, 2026 | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 source reliability soft penalty, v71 freshness=0.539
+[SCORE] 63 medium - Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive' | WWE/main roster, nomi forti titolo: brie bella, WWE main roster + storyline/evento, titolo/championship, v71 freshness=0.544, v48 tier2: 55-74
+[SCORE] 50 low - WWE Backlash 2026 Match Order Reportedly Revealed | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, floor WWE main roster storyline, titolo vago, v71 freshness=0.598, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - Spoiler: Opening Match Revealed for 2026 WWE Backlash | WWE/main roster, nomi forti lead: seth rollins, WWE main roster + storyline/evento, floor WWE main roster storyline, v71 source reliability soft penalty, v71 freshness=0.539, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 1
+[REPORT] Non ancora maturo: report:wwe-backlash-2026-05-09 (132 min rimanenti)
+[BOT] News candidate totali: 5 | mode=normal | max nuove=3 | pending pubblicati=0
+[SKIP v78.1] Gia processato in questa run: WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: WWE Backlash Results, Highlights and Key Moments for May 9, 2026
+[BOT] semantic_id=wwe-backlash-results-highlights-and-key-moments-for-may-9-2026
+[SCORE] iniziale=75 priority=medium
+[SCRAPE] Articolo results rilevato: testo completo (14421 caratteri)
+[PERF v71] scraping articolo: 1.67s
+[BLOCKSEQ] Blocchi ordinati estratti: text=55, image=0, embed=8
+[BOT] Embed trovati: 9
+[PENDING] Coda salvata: 2 elementi
+[REPORT] Salvato/aggiornato pending report: report:wwe-backlash-2026-05-09 | pronto tra 132 min
+[BOT] Elaborazione: Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive'
+[BOT] semantic_id=brie-bella-comments-on-latest-wwe-run-says-aews-bryan-danielson-is-so-supportive
+[SCORE] iniziale=63 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini NOT_SPOILER
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini NOT_SPOILER
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash-lite | L'articolo parla del commento di Brie Bella sul suo recente ritorno in WWE e del supporto di suo marito Bryan Danielson, ma non presenta un evento futuro. Nonostante menzioni eventi futuri come Backlash e Night of Champions, il focus è sul 
+[EDITORIAL v72.3] translation_notes=I nomi delle cinture (Women's Tag Team Championships) vanno lasciati in inglese.; "WWE Hall of Famer" va tradotto come "Hall of Famer della WWE".; "AEW World Champion" va tradotto come "Campione del Mondo AEW".
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo parla del commento di Brie Bella sul suo recente ritorno in WWE e del supporto di suo marito Bryan Danielson, ma non presenta un evento futuro. Nonostante menzioni eventi futuri come Backlash e Night of Champions, il focus è sul
+[PERF v71] analisi editoriale AI v72: 2.99s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive'
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini NOT_SPOILER
+[SCORE] raffinato=56 priority=low | WWE/main roster, nomi forti titolo: brie bella, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v70 cap preview hard
+[PERF v71] scoring raffinato: 2.23s
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive'
+[BOT] Elaborazione: WWE Backlash 2026 Match Order Reportedly Revealed
+[BOT] semantic_id=wwe-backlash-2026-match-order-reportedly-revealed
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini SPOILER senza hard validation
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: Expecting ',' delimiter: line 1 column 1706 (char 1705)
+[GEMINI] Uso modello: gemini-2.5-flash
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini SPOILER senza hard validation
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash | L'articolo rivela l'ordine dei match e altri dettagli per il prossimo PLE WWE Backlash 2026, prima che l'evento vada in onda. Contenuto esplicitamente riferito a un evento futuro. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=I nomi ufficiali delle cinture ('United States Championship', 'World Heavyweight Championship') devono restare in inglese.; 'Reportedly revealed' e 'reported match order' vanno tradotti con 'secondo quanto riportato' o 'secondo indiscrezioni'.; Evitare calchi: 'will emanate from' -> 'si terrà a'; 'pitting X against Y' -> 'che vedrà X contro Y'; 'headline the show' -> 'sarà il main event dello show'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo rivela l'ordine dei match e altri dettagli per il prossimo PLE WWE Backlash 2026, prima che l'evento vada in onda. Contenuto esplicitamente riferito a un evento futuro. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 10.22s
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini SPOILER senza hard validation
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: Gemini SPOILER senza hard validation
+[SCORE] raffinato=50 priority=low | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, titolo/championship, combo top name lead + evento forte, titolo vago, v62 media rights/streaming, v68 cap annuncio vago/futuro, v70 cap preview hard, v72.3 cap rumor: niente boost raffinamento
+[PERF v71] scoring raffinato: 0.89s
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 50/75 - WWE Backlash 2026 Match Order Reportedly Revealed
+[BOT] Elaborazione: Spoiler: Opening Match Revealed for 2026 WWE Backlash
+[BOT] semantic_id=spoiler-opening-match-revealed-for-2026-wwe-backlash
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=0
+[BOT] Embed trovati: 1
+[SPOILER v79.1] NO: hard auto-no editorial type/report
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1] NO: hard auto-no editorial type/report
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash-lite | L'articolo anticipa un evento futuro (WWE Backlash 2026) e presenta la card e i match annunciati. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=I nomi dei titoli (WWE World Heavyweight Championship, United States Championship) vanno mantenuti in inglese.; La citazione "under the current TKO era" va tradotta in modo da non sembrare una calco dall'inglese, suggerendo "nell'attuale gestione TKO" o simile.; Attenzione a tradurre correttamente "kick off" per indicare l'inizio dell'evento.
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo anticipa un evento futuro (WWE Backlash 2026) e presenta la card e i match annunciati. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.39s
+[SPOILER v79.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1] NO: hard auto-no editorial type/report
+[SCORE] raffinato=56 priority=low | WWE/main roster, nomi forti lead: seth rollins, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Spoiler: Opening Match Revealed for 2026 WWE Backlash
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 5 candidati provati | mode=normal
+===== RUN END [2026-05-09 22:48:39] VERSION [v79_1_hybrid_live_spoiler_classifier (e68fb90)] =====
+
