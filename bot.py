@@ -10818,6 +10818,106 @@ BOT_VERSION = "v80_3_review_package_all_attempted"
 BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
 
 
+# =========================
+# v80.4: soft AAA priority upgrade + post-override preview cap cleanup
+# =========================
+# Obiettivo editoriale:
+# - AAA resta categoria World, senza creare una categoria dedicata.
+# - Le news AAA concrete/strategiche salgono sopra soglia quando riguardano
+#   sviluppo reale di storyline, management, titolo maggiore, TripleMania o crossover WWE/Raw.
+# - Card generiche, rumor minori, preview e opinion restano basse.
+
+BOT_VERSION = "v80_4_aaa_world_priority_review_artifacts"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V804_AAA_ENTITY_TERMS = [
+    "aaa", "triplemania", "mega championship", "mega champion", "aaa mega",
+    "dominik mysterio", "dominik", "los americanos", "el grande americano",
+]
+
+V804_AAA_MAJOR_CONTEXT_TERMS = [
+    "announces", "announced", "official", "officially", "new general manager",
+    "general manager", " gm ", "appointed", "named", "revealed", "unveiled",
+    "two-night", "two night", "expanded", "expansion", "partnership", "crossover",
+    "raw", "wwe", "wins", "won", "retains", "defeats", "new champion",
+    "championship", "title", "mega championship", "mega champion", "triplemania",
+]
+
+V804_AAA_LOW_VALUE_TERMS = [
+    "match card", "full card", "lineup", "start time", "how to watch", "preview",
+    "reportedly", "rumor", "rumour", "expected", "could", "might", "believes",
+    "explains why", "opinion", "reacts", "comments on", "podcast",
+]
+
+
+def v804_is_aaa_related(title="", text="", url=""):
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:3000]}")
+    padded = f" {probe} "
+    return any(_probe_has_phrase(padded, term) for term in V804_AAA_ENTITY_TERMS)
+
+
+def v804_is_low_value_aaa_item(title="", text="", url="", editorial_analysis=None):
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:1800]}")
+    padded = f" {probe} "
+    atype = normalize_article_type((editorial_analysis or {}).get("article_type", "")) if editorial_analysis else ""
+    # Le preview/card minori AAA non devono ricevere boost. Eccezione: annunci ufficiali
+    # tipo TripleMania che il layer v79.1.3 puo' correggere a post-show news.
+    if atype in {"OPINION", "RUMOR"}:
+        return True
+    if any(_probe_has_phrase(padded, term) for term in V804_AAA_LOW_VALUE_TERMS):
+        if not any(_probe_has_phrase(padded, term) for term in ["official", "announced", "announces", "two-night", "two night", "general manager", "mega champion", "mega championship", "wwe", "raw"]):
+            return True
+    return False
+
+
+def v804_is_major_aaa_news(title="", text="", url="", editorial_analysis=None):
+    if not v804_is_aaa_related(title, text, url):
+        return False
+    if v804_is_low_value_aaa_item(title, text, url, editorial_analysis):
+        return False
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:3500]}")
+    padded = f" {probe} "
+    has_major_context = any(_probe_has_phrase(padded, term) for term in V804_AAA_MAJOR_CONTEXT_TERMS)
+    # TripleMania e Mega Championship sono segnali AAA di prima fascia anche se il titolo
+    # non contiene la parola AAA esplicita.
+    has_anchor = any(_probe_has_phrase(padded, term) for term in ["triplemania", "mega championship", "mega champion", "general manager", "los americanos", "dominik"])
+    return bool(has_major_context and has_anchor)
+
+
+_ORIG_V804_calculate_importance_score = calculate_importance_score
+def calculate_importance_score(title, text="", url=""):
+    score, reasons = _ORIG_V804_calculate_importance_score(title, text, url)
+    try:
+        if v804_is_major_aaa_news(title, text, url):
+            old = int(score or 0)
+            # Boost morbido: non trasforma AAA in WWE/AEW level, ma porta le news concrete
+            # nel range pubblicabile se non ci sono altri blocchi editoriali.
+            score = max(old, min(100, old + 12), 72)
+            reasons = list(reasons or [])
+            reasons.append(f"v80.4 AAA major World priority {old}->{score}")
+            print(f"[SCORE v80.4] AAA major World priority {old}->{score} - {title}")
+    except Exception as e:
+        print(f"[SCORE v80.4] AAA boost non applicato: {e}")
+    return max(0, min(100, int(score or 0))), (reasons or [])[:12]
+
+
+_ORIG_V804_v723_conservative_score_after_ai = v723_conservative_score_after_ai
+def v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title="", text="", url="", editorial_analysis=None):
+    score, reasons = _ORIG_V804_v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title, text, url, editorial_analysis)
+    try:
+        if v804_is_major_aaa_news(title, text, url, editorial_analysis):
+            old = int(score or 0)
+            reasons = [r for r in (reasons or []) if "v70 cap preview hard" not in str(r).lower()]
+            # Se Gemini/type override ha riconosciuto che non e' una preview pura,
+            # il vecchio cap preview non deve affossare un annuncio AAA concreto.
+            score = max(old, 76)
+            reasons.append(f"v80.4 AAA major World final floor {old}->{score}")
+            print(f"[SCORE v80.4] AAA major World final floor {old}->{score} - {title}")
+    except Exception as e:
+        print(f"[SCORE v80.4] AAA final floor non applicato: {e}")
+    return max(0, min(100, int(score or 0))), (reasons or [])[:12]
+
+
 if __name__ == "__main__":
     log_run_start()
     try:
