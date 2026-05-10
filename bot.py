@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v79_1_4_spoiler_semantics_outcome_obsolete"
+BOT_VERSION = "v80_oembed_safe_localized_translation"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -87,6 +87,12 @@ def log_run_end():
 import requests
 import feedparser
 from bs4 import BeautifulSoup
+import warnings
+try:
+    from bs4 import MarkupResemblesLocatorWarning
+    warnings.filterwarnings("ignore", category=MarkupResemblesLocatorWarning)
+except Exception:
+    pass
 from google import genai
 
 WP_USER = os.getenv("WP_USER")
@@ -7796,6 +7802,15 @@ REGOLE:
 - Quote/citazioni: traduzione fedele, non parafrasi libera.
 - Release/released/roster cuts: non usare rilascio/rilasciato; usa licenziamento, licenziato/licenziata, addio o uscita in base al contesto.
 - Titoli/cinture ufficiali da non tradurre mai: {', '.join(PROTECTED_CHAMPIONSHIP_TERMS_V69)}
+
+LOCALIZZAZIONE EDITORIALE WRESTLING:
+- Prima di tradurre, interpreta kayfabe, storyline, comedy segment, oggetti di scena e idiomi: non fare calchi parola-per-parola.
+- Se una resa letterale suona innaturale in italiano, scegli una parafrasi giornalistica naturale mantenendo lo stesso fatto.
+- Evita formule macchinose tipo "match di ripicca", "giornata di divertimento", "bastone di zucchero candito kendo stick", "giocatore di main event".
+- Preferisci rese naturali come "resa dei conti", "segmento caotico/incursione", "kendo stick a forma di candy cane", "nome da main eventer", quando il contesto lo consente.
+- "Promo" nel gergo wrestling italiano e' maschile: scrivi "un promo", mai "una promo".
+- Mantieni le mosse in inglese quando sono nomi riconoscibili, ma costruisci la frase in italiano naturale: "prova una Spear", "lo colpisce con una Superkick", "chiude con la Curb Stomp".
+- Nei report live usa frasi agili e cronachistiche: non appesantire ogni azione con "esegue" se una resa piu naturale e' possibile.
 {extra_instruction}
 
 ELEMENTI PROTETTI:
@@ -9428,6 +9443,7 @@ Restituisci SOLO JSON valido in UNA SOLA RIGA: {{"titolo":"...","testo":"html","
 OBIETTIVO:
 - Rendere titolo e testo naturali, fluidi e giornalistici in italiano.
 - Eliminare calchi inglesi, ripetizioni e frasi macchinose.
+- Migliorare la localizzazione editoriale wrestling: naturalezza italiana, kayfabe chiaro, gergo corretto.
 - Mantenere lo stesso significato e gli stessi fatti.
 - Non aggiungere informazioni, non tagliare fatti rilevanti, non cambiare enfasi editoriale.
 
@@ -9439,6 +9455,8 @@ VINCOLI CRITICI:
 - Non rimuovere immagini, iframe, embed, figure, link fonte o CTA gia presenti.
 - Non aggiungere domande ai lettori, commenti finali o formule promozionali.
 - Se una frase e' gia buona, lasciala invariata.
+- Correggi calchi come "match di ripicca", "bastone di zucchero candito kendo stick", "giocatore di main event", scegliendo una resa naturale.
+- Usa sempre "un promo" e mai "una promo".
 {spoiler_rule}
 
 ELEMENTI PROTETTI:
@@ -10207,6 +10225,413 @@ def semantic_duplicate_check_v71(title, text, url, history=None, seen_story_sign
         if signature in history_sigs:
             return {"duplicate": True, "status": "history_stable_duplicate_v7915", **sig_data}
     return _ORIG_V7915_semantic_duplicate_check_v71(title, text, url, history=history, seen_story_signatures=seen_story_signatures, existing_items=existing_items)
+
+
+# =========================
+# v79.1.6: report-title and cap guard
+# =========================
+# Obiettivi:
+# - titolo report deterministico e blindato dal report_event_key/titolo fonte, non dal corpo completo;
+# - cap pre-show spoiler obsoleto mai applicato ai RESULTS_REPORT;
+# - tier3 sospesi quando esistono report live/post-show in pending, per evitare filler in notti PLE;
+# - warning BeautifulSoup su URL silenziato a livello import.
+
+BOT_VERSION = "v79_1_6_report_title_cap_guard"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V7916_EVENT_DISPLAY_FROM_KEY = {
+    "wwe-raw": "WWE RAW",
+    "wwe-smackdown": "WWE SmackDown",
+    "wwe-nxt": "WWE NXT",
+    "wwe-backlash": "WWE Backlash 2026",
+    "wwe-wrestlemania": "WWE WrestleMania",
+    "wwe-summerslam": "WWE SummerSlam",
+    "wwe-royal-rumble": "WWE Royal Rumble",
+    "wwe-survivor-series": "WWE Survivor Series",
+    "wwe-money-in-the-bank": "WWE Money in the Bank",
+    "wwe-crown-jewel": "WWE Crown Jewel",
+    "wwe-elimination-chamber": "WWE Elimination Chamber",
+    "aew-dynamite": "AEW Dynamite",
+    "aew-collision": "AEW Collision",
+    "aew-rampage": "AEW Rampage",
+    "aew-double-or-nothing": "AEW Double or Nothing",
+    "aew-all-in": "AEW All In",
+    "aew-all-out": "AEW All Out",
+    "aew-full-gear": "AEW Full Gear",
+    "aew-revolution": "AEW Revolution",
+    "aew-worlds-end": "AEW Worlds End",
+    "aew-forbidden-door": "AEW Forbidden Door",
+    "tna-impact": "TNA Impact",
+    "tna-slammiversary": "TNA Slammiversary",
+    "tna-bound-for-glory": "TNA Bound For Glory",
+}
+
+
+def v7916_extract_date_from_report_key(report_event_key=""):
+    m = re.search(r"(20\d{2}-\d{2}-\d{2})", report_event_key or "")
+    return m.group(1) if m else ""
+
+
+def v7916_display_from_report_event_key(report_event_key=""):
+    key = (report_event_key or "").replace("report:", "")
+    key_no_date = re.sub(r"-20\d{2}-\d{2}-\d{2}.*$", "", key)
+    if key_no_date in V7916_EVENT_DISPLAY_FROM_KEY:
+        return V7916_EVENT_DISPLAY_FROM_KEY[key_no_date]
+    return ""
+
+
+def v7916_report_title_from_event_key(report_event_key=""):
+    show = v7916_display_from_report_event_key(report_event_key)
+    if not show:
+        return ""
+    date_it = italian_date_from_key(v7916_extract_date_from_report_key(report_event_key))
+    # Per PLE con anno nel nome evento, evitiamo il titolo goffo "Backlash 2026 del ...".
+    if any(x in (report_event_key or "") for x in ["wwe-backlash", "wwe-wrestlemania", "wwe-summerslam", "wwe-royal-rumble", "aew-double-or-nothing", "aew-all-in", "aew-all-out"]):
+        return f"{show}: risultati e momenti salienti"
+    if date_it:
+        return f"{show} del {date_it}: risultati e momenti salienti"
+    return f"{show}: risultati e momenti salienti"
+
+
+_ORIG_V7916_detect_report_display_name = detect_report_display_name
+def detect_report_display_name(title="", url="", text=""):
+    # Prima il titolo/URL, poi il corpo. Il corpo dei live report contiene spesso riferimenti
+    # a WrestleMania, Dynamite o altri show che non devono rinominare il report.
+    title_probe = normalize_for_check(f"{title} {url}")
+    priority_map = [
+        ("wwe backlash", "WWE Backlash 2026"), ("backlash", "WWE Backlash 2026"),
+        ("aew collision", "AEW Collision"), ("collision", "AEW Collision"),
+        ("aew dynamite", "AEW Dynamite"), ("dynamite", "AEW Dynamite"),
+        ("wwe smackdown", "WWE SmackDown"), ("smackdown", "WWE SmackDown"),
+        ("wwe raw", "WWE RAW"), (" raw ", "WWE RAW"),
+        ("wwe nxt", "WWE NXT"), (" nxt ", "WWE NXT"),
+        ("wrestlemania", "WWE WrestleMania"),
+        ("double or nothing", "AEW Double or Nothing"),
+        ("all in", "AEW All In"), ("all out", "AEW All Out"),
+        ("full gear", "AEW Full Gear"), ("revolution", "AEW Revolution"),
+    ]
+    padded = f" {title_probe} "
+    for key, name in priority_map:
+        if key.strip() and _probe_has_phrase(padded, key.strip()):
+            return name
+    return _ORIG_V7916_detect_report_display_name(title, url, text)
+
+
+_ORIG_V7916_make_deterministic_report_title = make_deterministic_report_title
+def make_deterministic_report_title(source_title="", source_url="", source_text=""):
+    # Se il chiamante passa un report_event_key, quello e' la fonte piu affidabile.
+    for candidate in [source_title, source_url, source_text[:200] if source_text else ""]:
+        if "report:" in (candidate or ""):
+            m = re.search(r"report:[a-z0-9\-]+(?:-20\d{2}-\d{2}-\d{2})?", candidate)
+            if m:
+                fixed = v7916_report_title_from_event_key(m.group(0))
+                if fixed:
+                    return fixed
+    show = detect_report_display_name(source_title, source_url, "")
+    date_key = _extract_report_date_key(source_title, source_url, source_text)
+    date_it = italian_date_from_key(date_key)
+    if show and show != "Wrestling":
+        if any(x in show for x in ["Backlash 2026", "WrestleMania", "SummerSlam", "Royal Rumble", "Double or Nothing", "All In", "All Out"]):
+            return f"{show}: risultati e momenti salienti"
+        if date_it:
+            return f"{show} del {date_it}: risultati e momenti salienti"
+        return f"{show}: risultati e momenti salienti"
+    return _ORIG_V7916_make_deterministic_report_title(source_title, source_url, source_text)
+
+
+_ORIG_V7916_process_report_pending_item = process_report_pending_item
+def process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    report_event_key = item.get("report_event_key") or item.get("event_key")
+    fixed_title = v7916_report_title_from_event_key(report_event_key)
+    if fixed_title:
+        item = dict(item)
+        item["title"] = fixed_title
+        item["forced_report_title_v7916"] = fixed_title
+        print(f"[REPORT v79.1.6] Titolo report da event_key: {fixed_title}")
+    return _ORIG_V7916_process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+
+
+_ORIG_V7916_calculate_importance_score = calculate_importance_score
+def calculate_importance_score(title, text="", url=""):
+    # RESULTS_REPORT: mai applicare il cap pre-show obsoleto della 79.1.4.
+    if is_results_article(title, url, text) or v75_is_hard_results_report(title, url, text):
+        score, reasons = _ORIG_V7914_calculate_importance_score(title, text, url)
+        reasons = [r for r in (reasons or []) if "pre-show spoiler obsoleto" not in str(r).lower()]
+        return max(0, min(100, int(score or 0))), reasons[:12]
+    return _ORIG_V7916_calculate_importance_score(title, text, url)
+
+
+_ORIG_V7916_v723_conservative_score_after_ai = v723_conservative_score_after_ai
+def v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title="", text="", url="", editorial_analysis=None):
+    atype = normalize_article_type((editorial_analysis or {}).get("article_type", "")) if editorial_analysis else ""
+    if atype == "RESULTS_REPORT" or is_results_article(title, url, text) or v75_is_hard_results_report(title, url, text):
+        score, reasons = _ORIG_V7914_v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title, text, url, editorial_analysis)
+        reasons = [r for r in (reasons or []) if "pre-show" not in str(r).lower() and "obsolete" not in str(r).lower()]
+        return max(0, min(100, int(score or 0))), reasons[:12]
+    return _ORIG_V7916_v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title, text, url, editorial_analysis)
+
+
+def v7916_has_active_report_pending(window_seconds=7200):
+    try:
+        pending = load_pending_articles()
+        now = time.time()
+        for it in pending:
+            if it.get("kind") == "report" or str(it.get("event_key", "")).startswith("report:") or str(it.get("report_event_key", "")).startswith("report:"):
+                nb = float(it.get("not_before", 0) or 0)
+                if nb <= now + window_seconds:
+                    return True
+    except Exception:
+        return False
+    return False
+
+
+_ORIG_V7916_editorial_tier = editorial_tier
+def editorial_tier(score, title="", text="", url=""):
+    tier, reason = _ORIG_V7916_editorial_tier(score, title, text, url)
+    if tier == "tier3" and v7916_has_active_report_pending():
+        return "skip", "tier3 sospeso: report live/post-show pending"
+    return tier, reason
+
+
+
+# =========================
+# v80: social oEmbed safe pipeline + stronger wrestling localization
+# =========================
+# Regola architetturale permanente:
+# - Gli embed social non vengono preservati come blockquote/script/iframe HTML.
+# - Dal codice sorgente si estrae solo l'URL canonico del post.
+# - Nel body finale si inserisce l'URL nudo su riga/paragrafo isolato.
+# - WordPress genera l'oEmbed. Gemini non deve mai manipolare codice embed raw.
+
+V80_SOCIAL_OEMBED_RE = re.compile(
+    r"https?://(?:www\.)?(?:twitter\.com|x\.com|instagram\.com|youtube\.com|youtu\.be|tiktok\.com|reddit\.com)/[^\s<'\")]+",
+    re.I,
+)
+
+
+def v80_canonical_oembed_url(url: str) -> str:
+    """URL canonico per oEmbed WordPress, senza query tracking e senza HTML embed raw."""
+    url = normalize_embed_url(url or "").strip()
+    if not url:
+        return ""
+    try:
+        p = urlparse(url)
+        netloc = (p.netloc or "").lower().replace("www.", "")
+        path = unquote(p.path or "")
+        # Twitter/X: preferisci x.com; rimuovi ref_src, src, query e fragment.
+        if netloc in {"twitter.com", "x.com"}:
+            m = re.search(r"/([^/]+)/status/(\d+)", path, flags=re.I)
+            if m:
+                user, sid = m.group(1), m.group(2)
+                return f"https://x.com/{user}/status/{sid}"
+            m = re.search(r"/i/status/(\d+)", path, flags=re.I)
+            if m:
+                return f"https://x.com/i/status/{m.group(1)}"
+        # Instagram/TikTok/YouTube/Reddit: URL pulito, query rimossa.
+        return urlunparse((p.scheme or "https", p.netloc, p.path.rstrip("/"), "", "", ""))
+    except Exception:
+        return re.sub(r"[?#].*$", "", url).rstrip("/")
+
+
+_ORIG_V80_render_embed_block = render_embed_block
+def render_embed_block(url):
+    clean_url = v80_canonical_oembed_url(url)
+    if not clean_url:
+        return ""
+    if get_embed_provider_slug(clean_url) == "facebook" and facebook_url_is_probably_bad(clean_url):
+        return ""
+    if social_url_is_embeddable(clean_url):
+        # Paragrafo isolato: WordPress lo trasforma automaticamente in embed.
+        return f"\n\n<p>{clean_url}</p>\n\n"
+    return get_social_fallback_html(clean_url)
+
+
+def v80_normalize_oembed_urls_in_html(html: str) -> str:
+    """Pulisce URL social isolati e rimuove eventuali residui di blockquote/script embed."""
+    if not html:
+        return html
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        changed = False
+        # Rimuove script Twitter/Instagram se residui.
+        for script in soup.find_all("script"):
+            src = (script.get("src") or "").lower()
+            if "platform.twitter.com" in src or "instagram.com/embed" in src or "tiktok.com/embed" in src:
+                script.decompose()
+                changed = True
+        # Se un blockquote social è rimasto, sostituiscilo con URL canonico.
+        for bq in soup.find_all("blockquote"):
+            classes = " ".join(bq.get("class", []))
+            if "twitter-tweet" in classes or "instagram-media" in classes:
+                urls = _node_social_embed_urls(bq)
+                if urls:
+                    bq.replace_with(BeautifulSoup(f"<p>{v80_canonical_oembed_url(urls[-1])}</p>", "html.parser"))
+                    changed = True
+        # Normalizza paragrafi composti solo da URL social.
+        for p in soup.find_all("p"):
+            text = p.get_text(" ", strip=True)
+            if not text:
+                continue
+            if V80_SOCIAL_OEMBED_RE.fullmatch(text):
+                canon = v80_canonical_oembed_url(text)
+                if canon and canon != text:
+                    p.string = canon
+                    changed = True
+        out = str(soup) if changed else html
+        return out
+    except Exception as e:
+        print(f"[EMBED v80] Normalizzazione oEmbed fallita: {e}")
+        return html
+
+
+def v80_protect_oembed_urls_for_ai(html: str):
+    """Protegge URL oEmbed prima del post-edit Gemini e li ripristina dopo."""
+    if not html:
+        return html, {}
+    mapping = {}
+    idx = 1
+    def repl(m):
+        nonlocal idx
+        url = v80_canonical_oembed_url(m.group(0))
+        ph = f"[[OWTV_OEMBED_{idx:03d}]]"
+        mapping[ph] = url
+        idx += 1
+        return ph
+    protected = V80_SOCIAL_OEMBED_RE.sub(repl, html)
+    return protected, mapping
+
+
+def v80_restore_oembed_urls_from_ai(html: str, mapping: dict) -> str:
+    if not html or not mapping:
+        return html
+    out = html
+    for ph, url in mapping.items():
+        # Ripristina sempre come URL isolato oEmbed-safe.
+        out = out.replace(ph, url)
+    return v80_normalize_oembed_urls_in_html(out)
+
+
+_ORIG_V80_v79_editorial_post_edit = v79_editorial_post_edit
+def v79_editorial_post_edit(news_data, source_title="", source_text="", source_url=""):
+    """v80: post-edit con protezione degli URL oEmbed e localizzazione piu forte."""
+    if not v79_should_post_edit(news_data, source_title, source_text, source_url):
+        if news_data and news_data.get("testo"):
+            news_data["testo"] = v80_normalize_oembed_urls_in_html(news_data.get("testo", ""))
+        return news_data
+
+    title = sanitize_text(news_data.get("titolo", ""))
+    html = v80_normalize_oembed_urls_in_html(news_data.get("testo", "") or "")
+    protected_html, embed_mapping = v80_protect_oembed_urls_for_ai(html)
+    category = int(news_data.get("categoria") or detect_source_category(source_title, source_text, source_url))
+    plain_preview = BeautifulSoup(html, "html.parser").get_text(" ", strip=True)[:1400]
+    protected_facts = build_protected_facts_for_prompt(source_title, source_text or plain_preview)
+    protected_facts_block = "\n".join(f"- {fact}" for fact in protected_facts) if protected_facts else "- Nessun elemento specifico rilevato."
+
+    spoiler_rule = ""
+    if v79_is_live_spoiler_candidate(source_title, source_text, source_url):
+        spoiler_rule = f'- Il titolo finale DEVE iniziare con {V79_SPOILER_PREFIX}. Non rimuovere questo prefisso.'
+
+    embed_rule = ""
+    if embed_mapping:
+        embed_rule = "- Sono presenti placeholder oEmbed [[OWTV_OEMBED_###]]: non rimuoverli, non tradurli, non modificarli e lasciali nel punto esatto."
+
+    prompt = f"""
+Sei un editor italiano di una newsroom di wrestling.
+Ricevi una traduzione gia corretta nei fatti, ma ancora troppo letterale. Devi fare SOLO post-editing stilistico.
+Restituisci SOLO JSON valido in UNA SOLA RIGA: {{"titolo":"...","testo":"html","categoria":{category}}}
+
+OBIETTIVO:
+- Rendere titolo e testo naturali, fluidi e giornalistici in italiano.
+- Eliminare calchi inglesi, ripetizioni e frasi macchinose.
+- Migliorare la localizzazione editoriale wrestling: kayfabe chiaro, gergo corretto, frasi da sito italiano.
+- Mantenere lo stesso significato e gli stessi fatti.
+- Non aggiungere informazioni, non tagliare fatti rilevanti, non cambiare enfasi editoriale.
+
+VINCOLI CRITICI:
+- Non modificare nomi propri, date, numeri, eventi, titoli ufficiali, sigle e stipulazioni.
+- Non tradurre titoli/cinture ufficiali WWE/AEW/TNA/NXT/ROH/NJPW/AAA.
+- Mantieni HTML semplice: <p>, <b>, <blockquote>, <figure>, <img>, link gia presenti.
+- Non rimuovere immagini, figure, link fonte o CTA gia presenti.
+- Non aggiungere domande ai lettori, commenti finali o formule promozionali.
+- Se una frase e' gia buona, lasciala invariata.
+- Correggi calchi come "match di ripicca", "bastone di zucchero candito kendo stick", "giocatore di main event", scegliendo una resa naturale.
+- Usa sempre "un promo" e mai "una promo".
+- Nei report match-by-match, preferisci cronaca agile: alterna "colpisce", "prova", "connette", "chiude", "schiena" invece di ripetere sempre "esegue".
+{embed_rule}
+{spoiler_rule}
+
+ELEMENTI PROTETTI:
+{protected_facts_block}
+
+TITOLO ORIGINALE INGLESE:
+{source_title}
+
+TITOLO ITALIANO ATTUALE:
+{title}
+
+TESTO ITALIANO DA POST-EDITARE:
+{protected_html}
+"""
+    try:
+        data, used_model = generate_and_parse_json(prompt)
+        new_title = sanitize_text(str(data.get("titolo", title)))
+        new_html = str(data.get("testo", protected_html) or protected_html).strip()
+        new_html = v80_restore_oembed_urls_from_ai(new_html, embed_mapping)
+        new_title = v721_deterministic_title_cleanup(refine_title_italian(new_title))
+        new_html = fix_mojibake(new_html)
+        new_html = refine_body_text(new_html)
+        new_title, new_html = apply_translation_glossary(new_title, new_html)
+        new_title, new_html = v69_apply_translation_guardrails(new_title, new_html, source_title, source_text)
+        new_title, new_html = repair_protected_source_facts(source_title, source_text, new_title, new_html)
+        new_html = v80_normalize_oembed_urls_in_html(new_html)
+        new_title = v79_add_spoiler_prefix(new_title, source_title, source_text, source_url)
+
+        # Gli oEmbed presenti prima del post-edit devono sopravvivere.
+        if embed_mapping:
+            missing = [u for u in embed_mapping.values() if u not in new_html]
+            if missing:
+                raise ValueError(f"oEmbed rimossi dal post-edit: {missing[:3]}")
+        if body_looks_suspicious(new_html):
+            raise ValueError("body sospetto dopo post-editing")
+        issues = validate_protected_source_facts(source_title, source_text, new_title, new_html)
+        if issues:
+            raise ValueError(f"fatti protetti alterati dopo post-editing: {issues}")
+        quality = italian_quality_issues(new_title, new_html)
+        blocking = [i for i in quality if "Titolo sospeso" not in i]
+        if blocking:
+            raise ValueError(f"qualita sospetta dopo post-editing: {blocking}")
+        if not new_html or len(BeautifulSoup(new_html, "html.parser").get_text(" ", strip=True)) < 50:
+            raise ValueError("testo troppo corto dopo post-editing")
+        print(f"[POSTEDIT v80] Testo rifinito con oEmbed protetti: {used_model}")
+        return {"titolo": new_title, "testo": new_html, "categoria": category}
+    except Exception as e:
+        print(f"[POSTEDIT v80] Fallito, mantengo traduzione originale: {e}")
+        news_data["titolo"] = v79_add_spoiler_prefix(title, source_title, source_text, source_url)
+        news_data["testo"] = v80_normalize_oembed_urls_in_html(html)
+        return news_data
+
+
+_ORIG_V80_translate_ordered_content_blocks = translate_ordered_content_blocks
+def translate_ordered_content_blocks(source_title, blocks, source_url="", forced_title=None, forced_category=None, excluded_image_urls=None):
+    news_data, err_type = _ORIG_V80_translate_ordered_content_blocks(
+        source_title,
+        blocks,
+        source_url=source_url,
+        forced_title=forced_title,
+        forced_category=forced_category,
+        excluded_image_urls=excluded_image_urls,
+    )
+    if news_data and news_data.get("testo"):
+        news_data["testo"] = v80_normalize_oembed_urls_in_html(news_data.get("testo", ""))
+    return news_data, err_type
+
+
+_ORIG_V80_translate_news = translate_news
+def translate_news(source_title, text, source_url="", forced_category=None):
+    news_data, err_type = _ORIG_V80_translate_news(source_title, text, source_url=source_url, forced_category=forced_category)
+    if news_data and news_data.get("testo"):
+        news_data["testo"] = v80_normalize_oembed_urls_in_html(news_data.get("testo", ""))
+    return news_data, err_type
 
 
 if __name__ == "__main__":
