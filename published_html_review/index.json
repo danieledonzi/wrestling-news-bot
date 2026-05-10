@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-10 17:44:43",
-  "last_bot_version": "v81_translation_preservation_and_flat_review_archive (9549da9)",
-  "updated_at": "2026-05-10T17:46:18",
-  "total_items": 5,
+  "last_run_id": "2026-05-10 18:53:16",
+  "last_bot_version": "v81_translation_preservation_and_flat_review_archive (802ae1e)",
+  "updated_at": "2026-05-10T18:54:52",
+  "total_items": 6,
   "items": [
     {
       "run_id": "2026-05-10 14:39:11",
@@ -44,6 +44,14 @@
       "original_html_file": "20260510_164844_002_wwe-nxt-myles-borne-si-ispira-a-randy-orton-dopo-aver-compreso-il-suo-personaggi_1aebe33a_original.html",
       "final_html_file": "20260510_164844_002_wwe-nxt-myles-borne-si-ispira-a-randy-orton-dopo-aver-compreso-il-suo-personaggi_1aebe33a_final.html",
       "metadata_file": "20260510_164844_002_wwe-nxt-myles-borne-si-ispira-a-randy-orton-dopo-aver-compreso-il-suo-personaggi_1aebe33a_metadata.json"
+    },
+    {
+      "run_id": "2026-05-10 18:53:16",
+      "title": "NXT: Myles Borne, la sorpresa per il titolo nordamericano",
+      "url": "https://www.wrestlinginc.com/2168023/wwe-nxt-myles-borne-mens-north-american-title/",
+      "original_html_file": "20260510_185452_001_nxt-myles-borne-la-sorpresa-per-il-titolo-nordamericano_0db6319c_original.html",
+      "final_html_file": "20260510_185452_001_nxt-myles-borne-la-sorpresa-per-il-titolo-nordamericano_0db6319c_final.html",
+      "metadata_file": "20260510_185452_001_nxt-myles-borne-la-sorpresa-per-il-titolo-nordamericano_0db6319c_metadata.json"
     }
   ]
 }
