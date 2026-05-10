@@ -52,6 +52,14 @@ jobs:
           path: logs/master_log.log
           if-no-files-found: warn
 
+      - name: Upload review packages
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: review-packages
+          path: review_packages/
+          if-no-files-found: warn
+
 
       - name: Save bot state and logs
         if: always()
