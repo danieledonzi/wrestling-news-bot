@@ -10938,32 +10938,22 @@ def v723_conservative_score_after_ai(initial_score, refined_score, refined_reaso
 
 
 # =========================
-# v80.5: review packages enabled by default
+# v80.5/v80.6 baseline
 # =========================
-# In v80.4 the GitHub workflow uploaded review_packages/, but the bot only
-# created the directory when REVIEW_PACKAGE_ENABLED=1 was explicitly set.
-# During the temporary review period we want packages to be automatic.
-BOT_VERSION = "v80_6_natural_italian_style_prompt"
-BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
-
-
-if __name__ == "__main__":
-    log_run_start()
-    try:
-        run_bot()
-    finally:
-        review_finalize_package()
-        log_run_end()
+# v80.8 keeps the v80.6 natural Italian style baseline and applies the v80.7
+# follow-up dedupe override before the runtime entrypoint.
 
 # =========================
-# v80.7: follow-up dedupe nuance for same wrestler/event stories
+# v80.8: follow-up dedupe startup fix
 # =========================
-# Microfix mirata: stesso wrestler + stesso evento non deve bastare per bloccare
+# Fix mirata: stesso wrestler + stesso evento non deve bastare per bloccare
 # articoli che cambiano l'angolo editoriale. Esempi: backstage reaction,
 # uncertainty about future, semi-retired/retirement/career-status follow-up.
+# Rispetto alla v80.7, l'entrypoint e' spostato dopo gli override, quindi
+# la patch e' effettivamente attiva durante la run.
 # Non tocca scoring, spoiler, traduzione, AAA, report o review packages.
 
-BOT_VERSION = "v80_7_followup_dedupe_context"
+BOT_VERSION = "v80_8_followup_dedupe_startup_fix"
 BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
 
 _ORIG_V807_v7915_stable_story_key = v7915_stable_story_key
@@ -11069,3 +11059,15 @@ def semantic_duplicate_check_v71(title, text, url, history=None, seen_story_sign
         result["dedupe_override_v807"] = True
         result["reason_v807"] = "same wrestler/event allowed because title introduces backstage/future/career-status angle"
     return result
+
+
+# =========================
+# Runtime entrypoint - keep this at the very end so all version overrides are active.
+# =========================
+if __name__ == "__main__":
+    log_run_start()
+    try:
+        run_bot()
+    finally:
+        review_finalize_package()
+        log_run_end()
