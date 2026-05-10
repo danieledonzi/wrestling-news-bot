@@ -1,0 +1,24 @@
+{
+  "run_id": "2026-05-10 16:46:25",
+  "bot_version": "v81_translation_preservation_and_flat_review_archive (c33fc92)",
+  "git_sha": "c33fc923d57500bb889f6676c9dc9f4c7df41ea4",
+  "published_items_count": 2,
+  "items": [
+    {
+      "run_id": "2026-05-10 16:46:25",
+      "title": "Danhausen: \"CM Punk mi ha rubato la finisher dopo il suo ritorno\"",
+      "url": "https://www.ringsidenews.com/danhausen-claims-cm-punk-stole-his-finisher-wrestling-return/",
+      "original_html_file": "20260510_164750_001_danhausen-cm-punk-mi-ha-rubato-la-finisher-dopo-il-suo-ritorno_3cf1ffdb_original.html",
+      "final_html_file": "20260510_164750_001_danhausen-cm-punk-mi-ha-rubato-la-finisher-dopo-il-suo-ritorno_3cf1ffdb_final.html",
+      "metadata_file": "20260510_164750_001_danhausen-cm-punk-mi-ha-rubato-la-finisher-dopo-il-suo-ritorno_3cf1ffdb_metadata.json"
+    },
+    {
+      "run_id": "2026-05-10 16:46:25",
+      "title": "WWE NXT: Myles Borne si ispira a Randy Orton dopo aver compreso il suo personaggio",
+      "url": "https://www.wrestlinginc.com/2167856/wwe-nxt-myles-borne-randy-orton-inspiration/",
+      "original_html_file": "20260510_164844_002_wwe-nxt-myles-borne-si-ispira-a-randy-orton-dopo-aver-compreso-il-suo-personaggi_1aebe33a_original.html",
+      "final_html_file": "20260510_164844_002_wwe-nxt-myles-borne-si-ispira-a-randy-orton-dopo-aver-compreso-il-suo-personaggi_1aebe33a_final.html",
+      "metadata_file": "20260510_164844_002_wwe-nxt-myles-borne-si-ispira-a-randy-orton-dopo-aver-compreso-il-suo-personaggi_1aebe33a_metadata.json"
+    }
+  ]
+}

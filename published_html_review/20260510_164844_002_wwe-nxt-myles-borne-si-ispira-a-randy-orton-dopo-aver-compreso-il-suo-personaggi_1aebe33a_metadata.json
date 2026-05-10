@@ -1,0 +1,39 @@
+{
+  "run_id": "2026-05-10 16:46:25",
+  "bot_version": "v81_translation_preservation_and_flat_review_archive (c33fc92)",
+  "git_sha": "c33fc923d57500bb889f6676c9dc9f4c7df41ea4",
+  "created_at": "2026-05-10T16:48:44",
+  "source_title": "WWE NXT Star Takes Inspiration From Randy Orton Despite Not Initially Being A Fan",
+  "final_title": "WWE NXT: Myles Borne si ispira a Randy Orton dopo aver compreso il suo personaggio",
+  "source_url": "https://www.wrestlinginc.com/2167856/wwe-nxt-myles-borne-randy-orton-inspiration/",
+  "category_id": 6,
+  "category_slug": "NXT",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "wwe-nxt-star-takes-inspiration-from-randy-orton-despite-not-initially-being-a-fan",
+  "story_signature_v71": "stable:randy_orton|john_cena|outcome|wwe|nxt",
+  "refined_score": 68,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star titolo: randy orton",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "combo top name titolo + evento forte",
+    "show settimanale",
+    "v62 infortunio/operazione",
+    "v62 cap injury/intervista",
+    "v66 cap opinion/commentary storyline"
+  ],
+  "blocks_summary": {
+    "text": 9,
+    "image": 2,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=EI68qpsG630"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260510_164844_002_wwe-nxt-myles-borne-si-ispira-a-randy-orton-dopo-aver-compreso-il-suo-personaggi_1aebe33a_original.html",
+  "final_html_file": "20260510_164844_002_wwe-nxt-myles-borne-si-ispira-a-randy-orton-dopo-aver-compreso-il-suo-personaggi_1aebe33a_final.html",
+  "metadata_file": "20260510_164844_002_wwe-nxt-myles-borne-si-ispira-a-randy-orton-dopo-aver-compreso-il-suo-personaggi_1aebe33a_metadata.json"
+}

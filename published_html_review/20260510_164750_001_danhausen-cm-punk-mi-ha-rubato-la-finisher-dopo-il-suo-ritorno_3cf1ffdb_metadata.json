@@ -1,0 +1,38 @@
+{
+  "run_id": "2026-05-10 16:46:25",
+  "bot_version": "v81_translation_preservation_and_flat_review_archive (c33fc92)",
+  "git_sha": "c33fc923d57500bb889f6676c9dc9f4c7df41ea4",
+  "created_at": "2026-05-10T16:47:50",
+  "source_title": "Danhausen Claims CM Punk Stole His Finisher After Wrestling Return",
+  "final_title": "Danhausen: \"CM Punk mi ha rubato la finisher dopo il suo ritorno\"",
+  "source_url": "https://www.ringsidenews.com/danhausen-claims-cm-punk-stole-his-finisher-wrestling-return/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "danhausen-claims-cm-punk-stole-his-finisher-after-wrestling-return",
+  "story_signature_v71": "stable:danhausen|cm_punk|report",
+  "refined_score": 100,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star titolo: cm punk",
+    "nomi forti titolo: danhausen",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "combo top name titolo + evento forte",
+    "v62 evento legale grave"
+  ],
+  "blocks_summary": {
+    "text": 11,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=4DeL4WplQIY",
+    "https://www.youtube.com/watch?v=oX6QiAo0eKU"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260510_164750_001_danhausen-cm-punk-mi-ha-rubato-la-finisher-dopo-il-suo-ritorno_3cf1ffdb_original.html",
+  "final_html_file": "20260510_164750_001_danhausen-cm-punk-mi-ha-rubato-la-finisher-dopo-il-suo-ritorno_3cf1ffdb_final.html",
+  "metadata_file": "20260510_164750_001_danhausen-cm-punk-mi-ha-rubato-la-finisher-dopo-il-suo-ritorno_3cf1ffdb_metadata.json"
+}

@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-10 15:45:50",
-  "last_bot_version": "v81_translation_preservation_and_flat_review_archive (082cb20)",
-  "updated_at": "2026-05-10T15:47:22",
-  "total_items": 3,
+  "last_run_id": "2026-05-10 16:46:25",
+  "last_bot_version": "v81_translation_preservation_and_flat_review_archive (c33fc92)",
+  "updated_at": "2026-05-10T16:48:44",
+  "total_items": 5,
   "items": [
     {
       "run_id": "2026-05-10 14:39:11",
@@ -28,6 +28,22 @@
       "original_html_file": "20260510_154722_002_charlotte-flair-indica-kiana-james-come-futura-protagonista-di-smackdown_525e5ab1_original.html",
       "final_html_file": "20260510_154722_002_charlotte-flair-indica-kiana-james-come-futura-protagonista-di-smackdown_525e5ab1_final.html",
       "metadata_file": "20260510_154722_002_charlotte-flair-indica-kiana-james-come-futura-protagonista-di-smackdown_525e5ab1_metadata.json"
+    },
+    {
+      "run_id": "2026-05-10 16:46:25",
+      "title": "Danhausen: \"CM Punk mi ha rubato la finisher dopo il suo ritorno\"",
+      "url": "https://www.ringsidenews.com/danhausen-claims-cm-punk-stole-his-finisher-wrestling-return/",
+      "original_html_file": "20260510_164750_001_danhausen-cm-punk-mi-ha-rubato-la-finisher-dopo-il-suo-ritorno_3cf1ffdb_original.html",
+      "final_html_file": "20260510_164750_001_danhausen-cm-punk-mi-ha-rubato-la-finisher-dopo-il-suo-ritorno_3cf1ffdb_final.html",
+      "metadata_file": "20260510_164750_001_danhausen-cm-punk-mi-ha-rubato-la-finisher-dopo-il-suo-ritorno_3cf1ffdb_metadata.json"
+    },
+    {
+      "run_id": "2026-05-10 16:46:25",
+      "title": "WWE NXT: Myles Borne si ispira a Randy Orton dopo aver compreso il suo personaggio",
+      "url": "https://www.wrestlinginc.com/2167856/wwe-nxt-myles-borne-randy-orton-inspiration/",
+      "original_html_file": "20260510_164844_002_wwe-nxt-myles-borne-si-ispira-a-randy-orton-dopo-aver-compreso-il-suo-personaggi_1aebe33a_original.html",
+      "final_html_file": "20260510_164844_002_wwe-nxt-myles-borne-si-ispira-a-randy-orton-dopo-aver-compreso-il-suo-personaggi_1aebe33a_final.html",
+      "metadata_file": "20260510_164844_002_wwe-nxt-myles-borne-si-ispira-a-randy-orton-dopo-aver-compreso-il-suo-personaggi_1aebe33a_metadata.json"
     }
   ]
 }
