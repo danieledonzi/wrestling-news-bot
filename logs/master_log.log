@@ -10861,3 +10861,307 @@ However, if you want to parse some data that happens to look like a URL, then no
 [BOT] Pubblicati 6 articoli (3 pending + 3 nuove) su 13 candidati provati | mode=storm
 ===== RUN END [2026-05-10 02:26:45] VERSION [v79_1_5_stable_story_dedupe (f8b71ae)] =====
 
+
+===== RUN START [2026-05-10 05:58:59] VERSION [v79_1_5_stable_story_dedupe (2fa4f75)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[PERF v71] WP lookup event_key: 0.98s
+[PENDING] Rimuovo report già pubblicato: report:wwe-smackdown-2026-05-08
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (0/75): WWE Backlash 2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168820/aew-collision-darby-allin-pac-world-title-defense/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168808/wwe-backlash-2026-jacob-fatu-roman-reigns-controversial-loss/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168799/aew-collision-mark-davis-jack-perry-national-championship/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): Grayson Waller Details Locker Room Gift Bought By Finn Balor When WWE Visited Ireland
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168786/wwe-backlash-2026-john-cena-new-event-championship-unique-rules/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168783/wwe-backlash-2026-iyo-sky-asuka-hug-victory/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (30/75): UFC 328 Results: Strickland Vs. Chimaev
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168770/wwe-backlash-2026-danhausen-mystery-partner-miz-kit-wilson/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168763/wwe-backlash-2026-trick-williams-retains-mens-us-title-wrestlemania-rematch-sami-zayn/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168754/wwe-backlash-bron-breakker-defeats-seth-rollins-opener/
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 50->50 - WWE Backlash 2026 Match Order Reportedly Revealed
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2168722/dave-meltzer-cmll-persephone-aew-ppv-injury/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167022/wwe-matt-hardy-eddie-guerrero-best-advice-bore-crowd/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167009/wwe-nxt-oba-femi-myles-borne-pizza-toss/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite & Collision Viewership & Ratings Report, 5/6/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168663/wwe-wrestlemania-42-paul-heyman-brock-lesnar-retiring/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP v71] Story signature gia' in history: stable:minihausen|danhausen|identity_reveal|wwe|backlash - Jonathan Coachman Calls Danhausen Experiment a Waste of Time and He's Over It
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-announces-huge-womens-title-match-double-nothing-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/jack-perry-joins-stadium-stampede-match-aew-title-loss/
+[SKIP] URL già in history: https://www.ringsidenews.com/roman-reigns-tells-jacob-fatu-this-your-last-night-here-wwe-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/jacob-fatu-assaults-roman-reigns-referee-wwe-officials-backlash-2026-loss/
+[SKIP] URL già in history: https://www.ringsidenews.com/john-cena-annonuces-plans-john-cena-classic-tournament-during-wwe-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/identity-wwes-minihausen-revealed-backlash-appearance/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-fans-hijack-backlash-match-loud-we-want-kairi-chants/
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): Gingerbread Man Meme Goes Completely Off The Rails After WWE SmackDown
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): Big E. Gets Loud "New Day Rocks!" Chants During 2026 WWE Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/kairi-sane-tampa-airport-sighting-rumor-shut-down-before-wwe-backlash/
+[SCORE] 81 high - WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker | WWE/main roster, nomi forti titolo: seth rollins, WWE main roster + storyline/evento, titolo/championship, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.485
+[SCORE] 80 high - AEW Collision 5/9 Results - World & National Titles On The Line, Tag Champs In Action | AEW, show settimanale, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.522
+[SCORE] 75 medium - AEW Collision Fairway To Hell Results, Highlights and Key Moments for May 9, 2026 | AEW, show settimanale, v75 hard results report, v77 hard report protected, v71 source reliability soft penalty, v71 freshness=0.499
+[SCORE] 60 medium - WWE Announces First-Ever Two-Night TripleMania During Backlash | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.499, v48 tier2: 55-74
+[SCORE] 50 low - AEW's Bobby Lashley Hasn't Given Up On World Title Ambitions: 'The Fans See It' | AEW, titolo/championship, v62 titolo/championship, v71 freshness=0.585, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - Big E Raises Questions About Asuka's WWE Future After Emotional Backlash Moment | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v71 source reliability soft penalty, v71 freshness=0.522, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - Danhausen Introduces Minihausen As WWE Backlash Mystery Tag Team Partner | WWE/main roster, nomi forti titolo: danhausen, WWE main roster + storyline/evento, floor WWE main roster storyline, v71 source reliability soft penalty, v71 freshness=0.496, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - WWE Backlash 2026 Match Order Reportedly Revealed | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, floor WWE main roster storyline, titolo vago, v79.1.4 pre-show spoiler obsoleto cap, v71 freshness=0.508, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 2 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 1
+[REPORT] Valuto fonti per report: report:aew-collision-2026-05-09
+[SCRAPE] Articolo results rilevato: testo completo (9452 caratteri)
+[SCRAPE] Articolo results rilevato: testo completo (6759 caratteri)
+[REPORT] Fonte migliore: score_completezza=160 | www.wrestlinginc.com | AEW Collision 5/9 Results - World & National Titles On The Line, Tag Champs In Action
+[BOT] Elaborazione: AEW Collision 5/9 Results - World & National Titles On The Line, Tag Champs In Action
+[BOT] semantic_id=report-aew-collision-2026-05-09
+[SCORE] iniziale=80 priority=high
+[REPORT] Uso testo prefetched per report maturo (6759 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=28, image=5, embed=0
+[SCORE] raffinato=80 priority=high | AEW, impatto roster/storyline, titolo/championship, PLE/PPV, v62 titolo/championship, v75 hard results report, v77 hard report protected, v77 report score protected
+[V71] story_signature=stable:darby_allin|jack_perry|s_world_championship_after_defeating_kevin_knight_on|outcome|aew|dynamite|collision semantic_status=new_story freshness=0.61
+[PERF v71] WP recent posts dedupe: 0.75s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.12s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=28
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/aew-collision-may-9-results/intro-1778375929.jpg
+[MEDIA] Immagine interna caricata: 4162
+[PERF v71] upload immagine interna: 1.54s
+[MEDIA] Immagine interna caricata: 4163
+[PERF v71] upload immagine interna: 1.02s
+[MEDIA] Immagine interna caricata: 4164
+[PERF v71] upload immagine interna: 1.24s
+[MEDIA] Immagine interna caricata: 4165
+[PERF v71] upload immagine interna: 1.11s
+[PERF v71] traduzione: 12.91s
+[FIX] Titolo non valido (ok) -> fallback automatico: AEW Dynamite del 9 maggio 2026 – risultati e momenti salienti
+/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py:5182: MarkupResemblesLocatorWarning: The input passed in on this line looks more like a URL than HTML or XML.
+
+If you meant to use Beautiful Soup to parse the web page found at a certain URL, then something has gone wrong. You should use an Python package like 'requests' to fetch the content behind the URL. Once you have the content as a string, you can feed that string into Beautiful Soup.
+
+However, if you want to parse some data that happens to look like a URL, then nothing has gone wrong: you are using Beautiful Soup correctly, and this warning is spurious and can be filtered. To make this warning go away, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import MarkupResemblesLocatorWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=MarkupResemblesLocatorWarning)
+    
+  q = BeautifulSoup(m.group(1), "html.parser").get_text(" ", strip=True)
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 0.82s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/aew-collision-may-9-results/l-intro-1778375929.jpg
+[MEDIA] Immagine caricata: 4167
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.72s
+[PERF v71] totale articolo pubblicato 'AEW Collision 5/9 Results - World & National Titles On The L': 17.77s
+[OK] Pubblicato: AEW Dynamite del 9 maggio 2026 – risultati e momenti salienti
+[PENDING] Coda salvata: 2 elementi
+[PENDING] Coda salvata: 1 elementi
+[BOT] News candidate totali: 8 | mode=normal | max nuove=3 | pending pubblicati=1
+[BOT] Elaborazione: WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker
+[BOT] semantic_id=wwe-backlash-results-59-two-titles-on-the-line-seth-rollins-faces-bron-breakker
+[SCORE] iniziale=81 priority=high
+[SCRAPE] Articolo results rilevato: testo completo (15496 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=55, image=7, embed=1
+[BOT] Embed trovati: 1
+[PENDING] Coda salvata: 2 elementi
+[REPORT] Salvato/aggiornato pending report: report:wwe-backlash-2026-05-09 | gia' maturo
+[PENDING] Rimuovo report già pubblicato: report:wwe-smackdown-2026-05-08
+[REPORT] Valuto fonti per report: report:wwe-backlash-2026-05-09
+[SCRAPE] Articolo results rilevato: testo completo (15496 caratteri)
+[REPORT] Fonte migliore: score_completezza=257 | www.wrestlinginc.com | WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker
+[BOT] Elaborazione: WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker
+[BOT] semantic_id=report-wwe-backlash-2026-05-09
+[SCORE] iniziale=81 priority=high
+[REPORT] Uso testo prefetched per report maturo (15496 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=55, image=7, embed=1
+[BOT] Embed trovati: 1
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 100->56 - WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker
+[SCORE v79.1.4] Final cap pre-show obsoleto 80->56 - WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker
+[SCORE] raffinato=56 priority=low | WWE/main roster, top star lead: cm punk, roman reigns, nomi forti titolo: seth rollins, impatto roster/storyline, WWE main roster + storyline/evento, infortunio, combo top name lead + evento forte, PLE/PPV, v62 infortunio/operazione, v75 hard results report, v79.1.4 pre-show spoiler obsoleto cap, v76 cap death/funeral storyline-comedy
+[TIER] Pubblicabile sotto soglia come tier1: v77 hard report - WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker
+[V71] story_signature=stable:trick_williams|seth_rollins|putting_the_world_heavyweight_championship|injury|wwe|raw|smackdown|backlash semantic_status=new_story freshness=0.61
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=55
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwe-backlash-2026-two-titles-on-line-seth-rollins-bron-breakker/intro-1778374030.jpg
+[MEDIA] Immagine interna caricata: 4169
+[PERF v71] upload immagine interna: 1.58s
+[MEDIA] Immagine interna caricata: 4170
+[PERF v71] upload immagine interna: 0.98s
+[MEDIA] Immagine interna caricata: 4171
+[PERF v71] upload immagine interna: 0.87s
+[MEDIA] Immagine interna caricata: 4172
+[PERF v71] upload immagine interna: 0.97s
+[MEDIA] Immagine interna caricata: 4173
+[PERF v71] upload immagine interna: 0.97s
+[MEDIA] Immagine interna caricata: 4174
+[PERF v71] upload immagine interna: 0.94s
+[PERF v71] traduzione: 25.10s
+[FIX] Titolo non valido (ok) -> fallback automatico: WWE WrestleMania del 9 maggio 2026 – risultati e momenti salienti
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.23s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-backlash-2026-two-titles-on-line-seth-rollins-bron-breakker/l-intro-1778374030.jpg
+[MEDIA] Immagine caricata: 4176
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.92s
+[PERF v71] totale articolo pubblicato 'WWE Backlash Results 5/9 - Two Titles On The Line, Seth Roll': 29.96s
+[OK] Pubblicato: WWE WrestleMania del 9 maggio 2026 – risultati e momenti salienti
+[PENDING] Coda salvata: 1 elementi
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: AEW Collision 5/9 Results - World & National Titles On The Line, Tag Champs In Action
+[BOT] semantic_id=aew-collision-59-results-world-national-titles-on-the-line-tag-champs-in-action
+[SCORE] iniziale=80 priority=high
+[SCRAPE] Articolo results rilevato: testo completo (6759 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=28, image=5, embed=0
+[PENDING] Coda salvata: 2 elementi
+[REPORT] Salvato/aggiornato pending report: report:aew-collision-2026-05-09 | gia' maturo
+[PENDING] Rimuovo report già pubblicato: report:aew-collision-2026-05-09
+[PENDING] Rimuovo report già pubblicato: report:wwe-smackdown-2026-05-08
+[SKIP v78.1] Gia processato in questa run: AEW Collision Fairway To Hell Results, Highlights and Key Moments for May 9, 2026
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: WWE Announces First-Ever Two-Night TripleMania During Backlash
+[BOT] semantic_id=wwe-announces-first-ever-two-night-triplemania-during-backlash
+[SCORE] iniziale=60 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=0, embed=0
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[EDITORIAL v72.3] type=PREVIEW conf=0.95 | category=WORLD (8) conf=0.85 model=gemini-2.5-flash-lite | L'annuncio di TripleMania (evento AAA) durante Backlash (evento WWE) è una notizia post-evento riguardante una partnership tra federazioni, che ricade nella categoria World. Non è una preview di un evento WWE. | guardrail true preview
+[EDITORIAL v72.3] translation_notes=La federazione AAA (Asistencia Asesoría y Administración) non va tradotta, ma lasciata così.; La dicitura "two-night event" va tradotta con "evento di due serate" o "evento in due giorni".; La citazione "WWE and AAA looking to make the 2026 edition feel even bigger" implica che la notizia è stata rilasciata durante Backlash, ma si riferisce a un futuro evento (TripleM
+[EDITORIAL v73] final type=PREVIEW | category=WORLD (8) | L'annuncio di TripleMania (evento AAA) durante Backlash (evento WWE) è una notizia post-evento riguardante una partnership tra federazioni, che ricade nella categoria World. Non è una preview di un evento WWE. | guardrail true preview
+[EDITORIAL v79.1.3] type override PREVIEW->POST_SHOW_NEWS - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[PERF v71] analisi editoriale AI v72: 1.63s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SCORE] raffinato=56 priority=low | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[BOT] Elaborazione: AEW's Bobby Lashley Hasn't Given Up On World Title Ambitions: 'The Fans See It'
+[BOT] semantic_id=aews-bobby-lashley-hasnt-given-up-on-world-title-ambitions-the-fans-see-it
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=AEW (5) conf=0.95 model=gemini-2.5-flash-lite | L'articolo parla delle ambizioni di Bobby Lashley in AEW, citando risultati passati e desideri futuri, non è una preview di un evento specifico. Il focus è sulle sue dichiarazioni post-comparsa/intervista.
+[EDITORIAL v72.3] translation_notes=I nomi ufficiali dei titoli come "AEW World Tag Team Champion" e "AEW World Championship" vanno mantenuti in inglese.; Evitare calchi come "singles success has eluded" e tradurre con espressioni italiane adatte al contesto (es. "il successo individuale gli è sfuggito").; Le citazioni dirette di Lashley vanno tradotte fedelmente, mantenendo il senso e lo stile originale.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | L'articolo parla delle ambizioni di Bobby Lashley in AEW, citando risultati passati e desideri futuri, non è una preview di un evento specifico. Il focus è sulle sue dichiarazioni post-comparsa/intervista.
+[PERF v71] analisi editoriale AI v72: 2.39s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - AEW's Bobby Lashley Hasn't Given Up On World Title Ambitions: 'The Fans See It'
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=54 priority=low | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, opinione generica, v62 titolo/championship, v68 cap duro opinion/commentary
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - AEW's Bobby Lashley Hasn't Given Up On World Title Ambitions: 'The Fans See It'
+[V71] story_signature=stable:aew_s_bobby_lashley|hasn_t_given_up|ve_won_a_world_title_in_tna_i|outcome|wwe|aew|tna semantic_status=new_story freshness=0.585
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/aews-bobby-lashley-hasnt-given-up-on-world-title-ambitions-the-fans-see-it/intro-1778167439.jpg
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v79] Testo rifinito con: gemini-2.5-flash-lite
+[PERF v71] traduzione: 4.17s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Bobby Lashley non rinuncia alla corsa per l'AEW World Championship: "I fan lo vedono"
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.31s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/aews-bobby-lashley-hasnt-given-up-on-world-title-ambitions-the-fans-see-it/l-intro-1778167439.jpg
+[MEDIA] Immagine caricata: 4179
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.66s
+[PERF v71] totale articolo pubblicato 'AEW's Bobby Lashley Hasn't Given Up On World Title Ambitions': 11.32s
+[OK] Pubblicato: Bobby Lashley non rinuncia alla corsa per l'AEW World Championship: "I fan lo vedono"
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Big E Raises Questions About Asuka's WWE Future After Emotional Backlash Moment
+[BOT] semantic_id=big-e-raises-questions-about-asukas-wwe-future-after-emotional-backlash-moment
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=0, embed=2
+[BOT] Embed trovati: 2
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo riporta un'apparizione e delle dichiarazioni post-evento (Big E che commenta l'emozione di Asuka) e non un evento futuro. La categoria è WWE in quanto si parla di una wrestler WWE e di un PLE WWE. Le note aiutano a evitare traduz
+[EDITORIAL v72.3] translation_notes=Mantenere il nome della cintura "WWE" in inglese.; Non tradurre "released" con "rilasciato", ma considerare "addio", "licenziamento" o simili in base al contesto.; Tradurre le dichiarazioni di Big E fedelmente, senza parafrasare.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta un'apparizione e delle dichiarazioni post-evento (Big E che commenta l'emozione di Asuka) e non un evento futuro. La categoria è WWE in quanto si parla di una wrestler WWE e di un PLE WWE. Le note aiutano a evitare traduz
+[PERF v71] analisi editoriale AI v72: 1.89s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Big E Raises Questions About Asuka's WWE Future After Emotional Backlash Moment
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=56 priority=low | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v62 reazioni/tributi, v77 AI reason/type coherence: PREVIEW cap
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Big E Raises Questions About Asuka's WWE Future After Emotional Backlash Moment
+[V71] story_signature=stable:iyo_sky|asuka|outcome|wwe|backlash semantic_status=run_stable_duplicate_v7915 freshness=0.522
+[SKIP v71] Duplicato semantico/rewrite: run_stable_duplicate_v7915 - Big E Raises Questions About Asuka's WWE Future After Emotional Backlash Moment
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Danhausen Introduces Minihausen As WWE Backlash Mystery Tag Team Partner
+[BOT] semantic_id=danhausen-introduces-minihausen-as-wwe-backlash-mystery-tag-team-partner
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, image=0, embed=2
+[BOT] Embed trovati: 3
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo descrive un evento (la presentazione di Minihausen a Backlash) e un match già avvenuti, con un focus sul segmento e un potenziale angle futuro. Non è una preview di un evento futuro.
+[EDITORIAL v72.3] translation_notes=I nomi ufficiali dei titoli/cinture (es. WWE Championship) restano in inglese.; Il termine "released" va tradotto con "licenziato" o "ha lasciato" a seconda del contesto, evitando "rilasciato".; Le citazioni dirette devono essere tradotte fedelmente.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo descrive un evento (la presentazione di Minihausen a Backlash) e un match già avvenuti, con un focus sul segmento e un potenziale angle futuro. Non è una preview di un evento futuro.
+[PERF v71] analisi editoriale AI v72: 3.15s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Danhausen Introduces Minihausen As WWE Backlash Mystery Tag Team Partner
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=56 priority=low | WWE/main roster, nomi forti titolo: danhausen, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Danhausen Introduces Minihausen As WWE Backlash Mystery Tag Team Partner
+[BOT] Elaborazione: WWE Backlash 2026 Match Order Reportedly Revealed
+[BOT] semantic_id=wwe-backlash-2026-match-order-reportedly-revealed
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite |  | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Il titolo "Match Order Reportedly Revealed" implica una rivelazione di informazioni, ma il corpo dell'articolo parla di un evento futuro. Trattandosi di una card e orari per un eve; Evitare calchi come "emanate from" che potrebbe essere tradotto come "emanerà da" ma suonerebbe meglio con "si terrà a" o "proviene da".; "Fightful Select" è una fonte specifica, citarla fedelmente.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.53s
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - WWE Backlash 2026 Match Order Reportedly Revealed
+[SCORE v79.1.4] Final cap pre-show obsoleto 50->50 - WWE Backlash 2026 Match Order Reportedly Revealed
+[SCORE] raffinato=50 priority=low | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, titolo/championship, combo top name lead + evento forte, titolo vago, v62 media rights/streaming, v68 cap annuncio vago/futuro, v70 cap preview hard, v79.1.4 pre-show spoiler obsoleto cap, v72.3 cap rumor: niente boost raffinamento
+[PERF v71] scoring raffinato: 0.39s
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 50/75 - WWE Backlash 2026 Match Order Reportedly Revealed
+[BOT] Pubblicati 3 articoli (1 pending + 2 nuove) su 8 candidati provati | mode=normal
+===== RUN END [2026-05-10 05:58:59] VERSION [v79_1_5_stable_story_dedupe (2fa4f75)] =====
+
