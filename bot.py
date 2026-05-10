@@ -10954,3 +10954,118 @@ if __name__ == "__main__":
     finally:
         review_finalize_package()
         log_run_end()
+
+# =========================
+# v80.7: follow-up dedupe nuance for same wrestler/event stories
+# =========================
+# Microfix mirata: stesso wrestler + stesso evento non deve bastare per bloccare
+# articoli che cambiano l'angolo editoriale. Esempi: backstage reaction,
+# uncertainty about future, semi-retired/retirement/career-status follow-up.
+# Non tocca scoring, spoiler, traduzione, AAA, report o review packages.
+
+BOT_VERSION = "v80_7_followup_dedupe_context"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+_ORIG_V807_v7915_stable_story_key = v7915_stable_story_key
+_ORIG_V807_build_story_signature_v71 = build_story_signature_v71
+_ORIG_V807_semantic_duplicate_check_v71 = semantic_duplicate_check_v71
+
+V807_FOLLOWUP_ADVANCEMENT_TERMS = [
+    "backstage reaction", "backstage reactions", "reaction backstage", "reactions backstage",
+    "uncertainty about her future", "uncertainty about his future", "uncertainty about their future",
+    "uncertain future", "future uncertain", "future with wwe", "future in wwe", "wwe future",
+    "semi retired", "semi-retired", "part time", "part-time", "retirement", "retired",
+    "career status", "status with wwe", "status in wwe", "future status",
+]
+
+
+def v807_is_followup_advancement_title(title="", text=""):
+    """True se il titolo indica un nuovo angolo editoriale, non un semplice rewrite.
+
+    Regola volutamente stretta: usiamo soprattutto il titolo, per evitare che parole
+    nel corpo facciano passare come follow-up un normale risultato o recap.
+    """
+    title_probe = normalize_for_check(title or "")
+    padded_title = f" {title_probe} "
+    if not title_probe:
+        return False
+
+    has_advancement = any(_probe_has_phrase(padded_title, term) for term in V807_FOLLOWUP_ADVANCEMENT_TERMS)
+    if not has_advancement:
+        return False
+
+    # Deve esserci almeno un'entita/evento wrestling rilevante; altrimenti e' troppo generico.
+    context_terms = [
+        "asuka", "iyo sky", "kairi sane", "wwe", "aew", "nxt", "raw", "smackdown",
+        "backlash", "collision", "dynamite", "darby allin", "kazuchika okada",
+        "mjf", "jack perry", "mark davis", "danhausen", "minihausen",
+    ]
+    return any(_probe_has_phrase(padded_title, term) for term in context_terms)
+
+
+def v807_followup_advancement_key(title="", text="", url=""):
+    if not v807_is_followup_advancement_title(title, text):
+        return ""
+    entities = v7915_primary_entities(title, text)
+    ctx = v7915_detect_context(title, text, url)
+    title_probe = normalize_for_check(title or "")
+    if any(t in title_probe for t in ["backstage reaction", "backstage reactions"]):
+        angle = "backstage_reaction"
+    elif any(t in title_probe for t in ["semi retired", "semi-retired", "retirement", "retired"]):
+        angle = "career_retirement_status"
+    elif "future" in title_probe or "uncertainty" in title_probe or "status" in title_probe:
+        angle = "career_future_status"
+    else:
+        angle = "followup_advancement"
+
+    parts = []
+    if entities:
+        parts.extend(entities[:2])
+    else:
+        parts.append(v7915_slug(title)[:40])
+    parts.append(angle)
+    for c in ctx:
+        if c not in parts:
+            parts.append(c)
+    if len(parts) < 3:
+        parts.append("followup")
+    return "stable_followup_v807:" + "|".join(parts[:8])[:220]
+
+
+def v7915_stable_story_key(title="", text="", url=""):
+    follow_key = v807_followup_advancement_key(title, text, url)
+    if follow_key:
+        return follow_key
+    return _ORIG_V807_v7915_stable_story_key(title, text, url)
+
+
+def build_story_signature_v71(title, text, url=""):
+    # Usa prima la signature originale di v80.6. Se il titolo e' un follow-up
+    # advancement, sostituiamo solo la firma stabile, lasciando il resto intatto.
+    data = _ORIG_V807_build_story_signature_v71(title, text, url)
+    follow_key = v807_followup_advancement_key(title, text, url)
+    if follow_key:
+        data = dict(data or {})
+        data["signature"] = follow_key
+        data["stable_signature_v807"] = True
+        data["followup_advancement_v807"] = True
+        data["followup_reason_v807"] = "same entity/event but new career/backstage/future angle"
+    return data
+
+
+def semantic_duplicate_check_v71(title, text, url, history=None, seen_story_signatures=None, existing_items=None):
+    # Lascia passare i follow-up advancement anche se il vecchio layer li avrebbe
+    # scambiati per rewrite della stessa storia basandosi su wrestler/evento.
+    result = _ORIG_V807_semantic_duplicate_check_v71(
+        title, text, url,
+        history=history,
+        seen_story_signatures=seen_story_signatures,
+        existing_items=existing_items,
+    )
+    if result.get("duplicate") and v807_is_followup_advancement_title(title, text):
+        result = dict(result or {})
+        result["duplicate"] = False
+        result["status"] = "followup_advancement_not_duplicate_v807"
+        result["dedupe_override_v807"] = True
+        result["reason_v807"] = "same wrestler/event allowed because title introduces backstage/future/career-status angle"
+    return result
