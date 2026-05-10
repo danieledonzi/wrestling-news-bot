@@ -9932,6 +9932,283 @@ def v723_conservative_score_after_ai(initial_score, refined_score, refined_reaso
     return max(0, min(100, int(score or 0))), reasons[:12]
 
 
+# =========================
+# v79.1.5: stable semantic dedupe before scraping/Gemini
+# =========================
+# Obiettivo: bloccare rewrite cross-source/cross-title della stessa storia prima di consumare
+# scraping pesante, Gemini e minuti GitHub Actions. La chiave e' deterministica e generale:
+# entita' principali + oggetto narrativo stabile + azione editoriale + contesto promotion/evento.
+
+BOT_VERSION = "v79_1_5_stable_story_dedupe"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+_ORIG_V7915_load_history = load_history
+_ORIG_V7915_build_story_signature_v71 = build_story_signature_v71
+_ORIG_V7915_semantic_duplicate_check_v71 = semantic_duplicate_check_v71
+
+V7915_GENERIC_OBJECT_WORDS = {
+    "new", "wwe", "aew", "tna", "nxt", "event", "championship", "title", "tournament",
+    "classic", "rules", "unique", "first", "ever", "two", "night", "during", "after",
+    "before", "plans", "announces", "announced", "reveals", "revealed", "reportedly",
+    "results", "highlights", "moments", "backlash", "wrestlemania", "raw", "smackdown",
+    "collision", "dynamite", "impact", "fairway", "hell", "match", "card", "lineup",
+}
+
+V7915_ACTION_TERMS = {
+    "announcement": [
+        "announce", "announces", "announced", "announcement", "unveils", "unveiled",
+        "reveals plans", "revealed plans", "plans for", "new event", "new championship",
+        "unique rules", "first ever", "first-ever", "tournament", "classic",
+        "annuncia", "annunciato", "annuncio", "svela", "presenta",
+    ],
+    "outcome": [
+        "defeats", "defeated", "beats", "beat", "wins", "won", "retains", "retained",
+        "earns victory", "earned victory", "gets win", "got win", "new champion",
+        "wins title", "won title", "sconfigge", "batte", "vince", "mantiene", "conserva",
+    ],
+    "identity_reveal": [
+        "identity", "identity of", "revealed as", "mystery partner", "unmasked",
+        "identita", "identità", "partner misterioso",
+    ],
+    "injury": ["injury", "injured", "medical", "surgery", "infortunio", "operazione"],
+    "contract": ["contract", "deal", "extension", "signs", "renewal", "contratto", "rinnovo"],
+    "legal": ["arrest", "arrested", "lawsuit", "trial", "accused", "guilty", "legal", "arresto", "causa"],
+    "preview": ["preview", "start time", "how to watch", "confirmed matches", "match order", "lineup"],
+    "report": ["results", "recap", "report", "risultati"],
+}
+
+V7915_CONTEXT_TERMS = [
+    "wwe", "aew", "tna", "nxt", "aaa", "roh", "njpw", "raw", "smackdown", "dynamite",
+    "collision", "impact", "backlash", "wrestlemania", "summerslam", "royal rumble",
+    "survivor series", "money in the bank", "night of champions", "double or nothing",
+    "all in", "all out", "forbidden door", "triplemania", "tko", "netflix",
+]
+
+V7915_CANONICAL_ALIASES = {
+    "annonuces": "announces",
+    "annnouces": "announces",
+    "announces plans for": "announces",
+    "announced plans for": "announces",
+    "john cena classic tournament": "john cena classic",
+    "the john cena classic": "john cena classic",
+    "two night triplemania": "triplemania",
+    "two-night triplemania": "triplemania",
+    "wwe mens us title": "united states championship",
+    "wwe men s us title": "united states championship",
+    "mens us title": "united states championship",
+    "men s us title": "united states championship",
+}
+
+
+def v7915_norm(text=""):
+    s = normalize_for_check(text or "")
+    s = s.replace("'", " ")
+    s = re.sub(r"[^a-z0-9]+", " ", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    for old, new in V7915_CANONICAL_ALIASES.items():
+        s = s.replace(old, new)
+    return s
+
+
+def v7915_slug(text=""):
+    s = v7915_norm(text)
+    return re.sub(r"[^a-z0-9]+", "_", s).strip("_")[:80]
+
+
+def v7915_has_any(probe, terms):
+    return any(v7915_norm(t) in probe for t in terms)
+
+
+def v7915_primary_entities(title="", text=""):
+    probe = v7915_norm(f"{title} {(text or '')[:1800]}")
+    entities = []
+    known_names = sorted(
+        set(WWE_NAMES + AEW_NAMES + NXT_NAMES + TNA_OTHER_NAMES + TOP_STAR_NAMES + STRONG_NAMES + HISTORIC_BUSINESS_NAMES_V61 + [
+            "iyo sky", "asuka", "john cena", "mark davis", "jack perry", "danhausen", "minihausen",
+            "kairi sane", "cody rhodes", "oba femi", "triplemania", "aaa",
+        ]),
+        key=len,
+        reverse=True,
+    )
+    for name in known_names:
+        n = v7915_norm(name)
+        if n and re.search(r"(?:^|\s)" + re.escape(n) + r"(?:\s|$)", probe):
+            key = v7915_slug(name)
+            if key not in entities:
+                entities.append(key)
+    # Fallback: entita' title-case del titolo, ma solo se non sono parole editoriali generiche.
+    if not entities:
+        for m in re.finditer(r"\b[A-Z][A-Za-z'\-]+(?:\s+[A-Z][A-Za-z'\-]+){0,2}\b", title or ""):
+            val = v7915_slug(m.group(0))
+            if val and val not in V7915_GENERIC_OBJECT_WORDS and val not in entities:
+                entities.append(val)
+    return entities[:4]
+
+
+def v7915_detect_action_bucket(title="", text=""):
+    probe = v7915_norm(f"{title} {(text or '')[:1800]}")
+    # Ordine importante: outcome/identity devono prevalere su announcement/report.
+    for bucket in ["outcome", "identity_reveal", "injury", "legal", "contract", "announcement", "preview", "report"]:
+        if v7915_has_any(probe, V7915_ACTION_TERMS[bucket]):
+            return bucket
+    return "update"
+
+
+def v7915_detect_named_object(title="", text=""):
+    raw = f"{title or ''} {(text or '')[:1200]}"
+    probe = v7915_norm(raw)
+
+    # Oggetti editoriali espliciti e ricorrenti: funzionano su qualsiasi persona/evento, non solo Cena.
+    quoted = []
+    for m in re.finditer(r"['\"]([^'\"]{3,80})['\"]", raw):
+        q = v7915_slug(m.group(1))
+        if q and q not in quoted:
+            quoted.append(q)
+    for q in quoted:
+        # Le citazioni con nome proprio o parole evento/torneo sono oggetti stabili.
+        if any(word in q for word in ["classic", "tournament", "championship", "title", "cup", "series", "invitational"]):
+            return q
+
+    object_patterns = [
+        r"\b([a-z0-9]+(?:\s+[a-z0-9]+){0,3}\s+classic)\b",
+        r"\b([a-z0-9]+(?:\s+[a-z0-9]+){0,3}\s+tournament)\b",
+        r"\b([a-z0-9]+(?:\s+[a-z0-9]+){0,3}\s+championship)\b",
+        r"\b([a-z0-9]+(?:\s+[a-z0-9]+){0,3}\s+title)\b",
+        r"\b([a-z0-9]+(?:\s+[a-z0-9]+){0,3}\s+cup)\b",
+        r"\b([a-z0-9]+(?:\s+[a-z0-9]+){0,3}\s+series)\b",
+    ]
+    for pat in object_patterns:
+        for m in re.finditer(pat, probe):
+            parts = [p for p in m.group(1).split() if p not in V7915_GENERIC_OBJECT_WORDS or p in {"classic", "tournament", "championship", "title", "cup", "series"}]
+            obj = v7915_slug(" ".join(parts))
+            # Evita oggetti troppo generici tipo solo championship/title.
+            if obj and obj not in {"championship", "title", "tournament", "classic", "event"}:
+                return obj
+
+    # Eventi/progetti molto riconoscibili.
+    for special in ["john cena classic", "triplemania", "forbidden door", "money in the bank", "queen of the ring", "king of the ring"]:
+        if v7915_norm(special) in probe:
+            return v7915_slug(special)
+
+    # Fallback per rewrites tipo "new event, championship with unique rules".
+    if v7915_has_any(probe, ["new event", "new championship", "unique rules"]):
+        entities = v7915_primary_entities(title, text)
+        if entities:
+            return entities[0] + "_new_event_championship"
+        return "new_event_championship"
+
+    return ""
+
+
+def v7915_detect_context(title="", text="", url=""):
+    probe = v7915_norm(f"{title} {url} {(text or '')[:1600]}")
+    ctx = []
+    for term in V7915_CONTEXT_TERMS:
+        t = v7915_norm(term)
+        if t in probe:
+            key = v7915_slug(term)
+            if key not in ctx:
+                ctx.append(key)
+    return ctx[:4]
+
+
+def v7915_stable_story_key(title="", text="", url=""):
+    entities = v7915_primary_entities(title, text)
+    action = v7915_detect_action_bucket(title, text)
+    obj = v7915_detect_named_object(title, text)
+    ctx = v7915_detect_context(title, text, url)
+
+    # Il cuore del dedupe deve essere stabile ma non troppo generico.
+    parts = []
+    if entities:
+        parts.extend(entities[:2])
+    if obj:
+        parts.append(obj)
+    if action and action != "update":
+        parts.append(action)
+    # Se c'e' un oggetto stabile e l'azione e' announcement, il contesto non deve
+    # includere show secondari citati nel corpo (Raw/NXT/SmackDown), altrimenti due
+    # rewrite della stessa notizia diventano firme diverse. Manteniamo solo promotion
+    # e macro-evento davvero utile.
+    if obj and action == "announcement":
+        stable_ctx = [c for c in ctx if c in {"wwe", "aew", "tna", "aaa", "roh", "njpw", "backlash", "wrestlemania", "triplemania", "summerslam", "royal_rumble"}]
+        for c in stable_ctx:
+            if c not in parts:
+                parts.append(c)
+    elif obj or (entities and action in {"outcome", "identity_reveal", "announcement", "injury", "contract", "legal"}):
+        for c in ctx:
+            if c not in parts:
+                parts.append(c)
+    # Evita chiavi troppo generiche: devono avere almeno entita+oggetto oppure entita+azione+contesto.
+    if len(parts) < 3:
+        return ""
+    return "stable:" + "|".join(parts[:8])[:220]
+
+
+def v7915_stable_keys_from_record_line(line=""):
+    parts = (line or "").split("|")
+    candidates = []
+    # Campi history: url | semantic_id | title_key | fingerprint | news_core | event_key | story_signature
+    labels = ["url", "semantic", "title", "fingerprint", "core", "event", "signature"]
+    for idx, val in enumerate(parts[:7]):
+        if not val:
+            continue
+        # Converti slug/underscore in testo ricercabile.
+        text = re.sub(r"[-_:/|]+", " ", val)
+        key = v7915_stable_story_key(text, text, parts[0] if parts else "")
+        if key and key not in candidates:
+            candidates.append(key)
+    # Prova anche con tutti i campi insieme: spesso il title_key contiene l'oggetto stabile.
+    joined = " ".join(re.sub(r"[-_:/|]+", " ", p) for p in parts[:7])
+    key = v7915_stable_story_key(joined, joined, parts[0] if parts else "")
+    if key and key not in candidates:
+        candidates.append(key)
+    return candidates
+
+
+def load_history():
+    history = _ORIG_V7915_load_history()
+    stable_keys = set()
+    try:
+        if os.path.exists(HISTORY_FILE):
+            with open(HISTORY_FILE, "r", encoding="utf-8", errors="ignore") as f:
+                for line in f.read().splitlines():
+                    for key in v7915_stable_keys_from_record_line(line.strip()):
+                        stable_keys.add(key)
+    except Exception as e:
+        print(f"[HISTORY v79.1.5] Stable key derivation error: {e}")
+    history["stable_story_keys_v7915"] = stable_keys
+    # Riusa il canale esistente per skip pre-scrape/pre-Gemini.
+    history.setdefault("story_signatures_v71", set()).update(stable_keys)
+    return history
+
+
+def build_story_signature_v71(title, text, url=""):
+    base = _ORIG_V7915_build_story_signature_v71(title, text, url)
+    stable_key = v7915_stable_story_key(title, text, url)
+    if stable_key:
+        # Mantieni entita/topic/action base per logging, ma usa una signature stabile.
+        base = dict(base or {})
+        base["signature"] = stable_key
+        base["stable_signature_v7915"] = True
+        base["stable_object_v7915"] = v7915_detect_named_object(title, text)
+        base["stable_action_v7915"] = v7915_detect_action_bucket(title, text)
+    return base
+
+
+def semantic_duplicate_check_v71(title, text, url, history=None, seen_story_signatures=None, existing_items=None):
+    sig_data = build_story_signature_v71(title, text, url)
+    signature = sig_data.get("signature", "")
+    if signature and str(signature).startswith("stable:"):
+        seen_story_signatures = seen_story_signatures or set()
+        history_sigs = set((history or {}).get("story_signatures_v71", set())) | set((history or {}).get("stable_story_keys_v7915", set()))
+        if signature in seen_story_signatures:
+            return {"duplicate": True, "status": "run_stable_duplicate_v7915", **sig_data}
+        if signature in history_sigs:
+            return {"duplicate": True, "status": "history_stable_duplicate_v7915", **sig_data}
+    return _ORIG_V7915_semantic_duplicate_check_v71(title, text, url, history=history, seen_story_signatures=seen_story_signatures, existing_items=existing_items)
+
+
 if __name__ == "__main__":
     log_run_start()
     try:
