@@ -1,0 +1,38 @@
+{
+  "run_id": "2026-05-10 22:39:57",
+  "bot_version": "v81_translation_preservation_and_flat_review_archive (c0e05b1)",
+  "git_sha": "c0e05b1ff4883cc4ce7d5c82dab0550918f19f31",
+  "created_at": "2026-05-10T22:41:22",
+  "source_title": "Dawn Marie Addresses Potential In-Ring Return After 17 Years",
+  "final_title": "Dawn Marie esclude un ritorno sul ring dopo 17 anni",
+  "source_url": "https://www.ringsidenews.com/dawn-marie-addresses-potential-ring-return-17-years/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "dawn-marie-addresses-potential-in-ring-return-after-17-years",
+  "story_signature_v71": "stable:jaida_parker|lola_vice|outcome|wwe|nxt",
+  "refined_score": 100,
+  "refined_reasons": [
+    "WWE/main roster",
+    "business/contratti WWE-TKO",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "PLE/PPV",
+    "v62 media rights/streaming",
+    "v62 categoria business"
+  ],
+  "blocks_summary": {
+    "text": 9,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://www.youtube.com/watch?v=B_2tzOEjaFc",
+    "https://www.facebook.com/subhojeet.mukherjee.3"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260510_224122_001_dawn-marie-esclude-un-ritorno-sul-ring-dopo-17-anni_efe0d322_original.html",
+  "final_html_file": "20260510_224122_001_dawn-marie-esclude-un-ritorno-sul-ring-dopo-17-anni_efe0d322_final.html",
+  "metadata_file": "20260510_224122_001_dawn-marie-esclude-un-ritorno-sul-ring-dopo-17-anni_efe0d322_metadata.json"
+}

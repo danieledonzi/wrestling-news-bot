@@ -1,0 +1,24 @@
+{
+  "run_id": "2026-05-10 22:39:57",
+  "bot_version": "v81_translation_preservation_and_flat_review_archive (c0e05b1)",
+  "git_sha": "c0e05b1ff4883cc4ce7d5c82dab0550918f19f31",
+  "published_items_count": 2,
+  "items": [
+    {
+      "run_id": "2026-05-10 22:39:57",
+      "title": "Dawn Marie esclude un ritorno sul ring dopo 17 anni",
+      "url": "https://www.ringsidenews.com/dawn-marie-addresses-potential-ring-return-17-years/",
+      "original_html_file": "20260510_224122_001_dawn-marie-esclude-un-ritorno-sul-ring-dopo-17-anni_efe0d322_original.html",
+      "final_html_file": "20260510_224122_001_dawn-marie-esclude-un-ritorno-sul-ring-dopo-17-anni_efe0d322_final.html",
+      "metadata_file": "20260510_224122_001_dawn-marie-esclude-un-ritorno-sul-ring-dopo-17-anni_efe0d322_metadata.json"
+    },
+    {
+      "run_id": "2026-05-10 22:39:57",
+      "title": "Rhea Ripley nuova campionessa WWE Women's: le sfidanti",
+      "url": "https://www.wrestlinginc.com/2168380/breaking-down-the-belts-rhea-ripley-wwe-womens-championship/",
+      "original_html_file": "20260510_224157_002_rhea-ripley-nuova-campionessa-wwe-women-s-le-sfidanti_bc84e584_original.html",
+      "final_html_file": "20260510_224157_002_rhea-ripley-nuova-campionessa-wwe-women-s-le-sfidanti_bc84e584_final.html",
+      "metadata_file": "20260510_224157_002_rhea-ripley-nuova-campionessa-wwe-women-s-le-sfidanti_bc84e584_metadata.json"
+    }
+  ]
+}

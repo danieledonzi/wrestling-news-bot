@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-10 21:41:44",
-  "last_bot_version": "v81_translation_preservation_and_flat_review_archive (73953aa)",
-  "updated_at": "2026-05-10T21:43:28",
-  "total_items": 8,
+  "last_run_id": "2026-05-10 22:39:57",
+  "last_bot_version": "v81_translation_preservation_and_flat_review_archive (c0e05b1)",
+  "updated_at": "2026-05-10T22:42:03",
+  "total_items": 10,
   "items": [
     {
       "run_id": "2026-05-10 14:39:11",
@@ -68,6 +68,22 @@
       "original_html_file": "20260510_214326_001_chelsea-green-la-differenza-tra-proporre-e-lamentarsi-in-wwe_38c28137_original.html",
       "final_html_file": "20260510_214326_001_chelsea-green-la-differenza-tra-proporre-e-lamentarsi-in-wwe_38c28137_final.html",
       "metadata_file": "20260510_214326_001_chelsea-green-la-differenza-tra-proporre-e-lamentarsi-in-wwe_38c28137_metadata.json"
+    },
+    {
+      "run_id": "2026-05-10 22:39:57",
+      "title": "Dawn Marie esclude un ritorno sul ring dopo 17 anni",
+      "url": "https://www.ringsidenews.com/dawn-marie-addresses-potential-ring-return-17-years/",
+      "original_html_file": "20260510_224122_001_dawn-marie-esclude-un-ritorno-sul-ring-dopo-17-anni_efe0d322_original.html",
+      "final_html_file": "20260510_224122_001_dawn-marie-esclude-un-ritorno-sul-ring-dopo-17-anni_efe0d322_final.html",
+      "metadata_file": "20260510_224122_001_dawn-marie-esclude-un-ritorno-sul-ring-dopo-17-anni_efe0d322_metadata.json"
+    },
+    {
+      "run_id": "2026-05-10 22:39:57",
+      "title": "Rhea Ripley nuova campionessa WWE Women's: le sfidanti",
+      "url": "https://www.wrestlinginc.com/2168380/breaking-down-the-belts-rhea-ripley-wwe-womens-championship/",
+      "original_html_file": "20260510_224157_002_rhea-ripley-nuova-campionessa-wwe-women-s-le-sfidanti_bc84e584_original.html",
+      "final_html_file": "20260510_224157_002_rhea-ripley-nuova-campionessa-wwe-women-s-le-sfidanti_bc84e584_final.html",
+      "metadata_file": "20260510_224157_002_rhea-ripley-nuova-campionessa-wwe-women-s-le-sfidanti_bc84e584_metadata.json"
     }
   ]
 }
