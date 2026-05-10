@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-10 22:39:57",
-  "last_bot_version": "v81_translation_preservation_and_flat_review_archive (c0e05b1)",
-  "updated_at": "2026-05-10T22:42:03",
-  "total_items": 10,
+  "last_run_id": "2026-05-10 23:44:25",
+  "last_bot_version": "v81_translation_preservation_and_flat_review_archive (68fc8fb)",
+  "updated_at": "2026-05-10T23:46:09",
+  "total_items": 11,
   "items": [
     {
       "run_id": "2026-05-10 14:39:11",
@@ -84,6 +84,14 @@
       "original_html_file": "20260510_224157_002_rhea-ripley-nuova-campionessa-wwe-women-s-le-sfidanti_bc84e584_original.html",
       "final_html_file": "20260510_224157_002_rhea-ripley-nuova-campionessa-wwe-women-s-le-sfidanti_bc84e584_final.html",
       "metadata_file": "20260510_224157_002_rhea-ripley-nuova-campionessa-wwe-women-s-le-sfidanti_bc84e584_metadata.json"
+    },
+    {
+      "run_id": "2026-05-10 23:44:25",
+      "title": "[SPOILER] WWE Raw 11 maggio: annunciati match e segmenti",
+      "url": "https://www.ringsidenews.com/several-matches-segments-revealed-may-11-wwe-raw/",
+      "original_html_file": "20260510_234555_001_spoiler-wwe-raw-11-maggio-annunciati-match-e-segmenti_3cad948b_original.html",
+      "final_html_file": "20260510_234555_001_spoiler-wwe-raw-11-maggio-annunciati-match-e-segmenti_3cad948b_final.html",
+      "metadata_file": "20260510_234555_001_spoiler-wwe-raw-11-maggio-annunciati-match-e-segmenti_3cad948b_metadata.json"
     }
   ]
 }

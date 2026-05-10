@@ -1,0 +1,40 @@
+{
+  "run_id": "2026-05-10 23:44:25",
+  "bot_version": "v81_translation_preservation_and_flat_review_archive (68fc8fb)",
+  "git_sha": "68fc8fbbc528f9ecdd19f11e0ff7becbf67d5003",
+  "created_at": "2026-05-10T23:45:55",
+  "source_title": "Several Matches & Segments Revealed for May 11 WWE RAW",
+  "final_title": "[SPOILER] WWE Raw 11 maggio: annunciati match e segmenti",
+  "source_url": "https://www.ringsidenews.com/several-matches-segments-revealed-may-11-wwe-raw/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "several-matches-segments-revealed-for-may-11-wwe-raw",
+  "story_signature_v71": "stable:roman_reigns|jacob_fatu|announcement|wwe|raw|backlash",
+  "refined_score": 75,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star lead: roman reigns",
+    "nomi forti lead: roman reigns",
+    "WWE main roster + storyline/evento",
+    "titolo/championship",
+    "show settimanale",
+    "v77 cap low editorial value",
+    "v79.1.2 spoiler live/pre-show floor 62->75",
+    "v77 cap low editorial value after AI",
+    "v79.1.3 final spoiler cap override 62->75"
+  ],
+  "blocks_summary": {
+    "text": 6,
+    "image": 0,
+    "embed": 1
+  },
+  "embed_urls": [
+    "https://www.instagram.com/p/DYK5LGYPj9k/",
+    "https://www.facebook.com/profile.php"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260510_234555_001_spoiler-wwe-raw-11-maggio-annunciati-match-e-segmenti_3cad948b_original.html",
+  "final_html_file": "20260510_234555_001_spoiler-wwe-raw-11-maggio-annunciati-match-e-segmenti_3cad948b_final.html",
+  "metadata_file": "20260510_234555_001_spoiler-wwe-raw-11-maggio-annunciati-match-e-segmenti_3cad948b_metadata.json"
+}

@@ -1,0 +1,16 @@
+{
+  "run_id": "2026-05-10 23:44:25",
+  "bot_version": "v81_translation_preservation_and_flat_review_archive (68fc8fb)",
+  "git_sha": "68fc8fbbc528f9ecdd19f11e0ff7becbf67d5003",
+  "published_items_count": 1,
+  "items": [
+    {
+      "run_id": "2026-05-10 23:44:25",
+      "title": "[SPOILER] WWE Raw 11 maggio: annunciati match e segmenti",
+      "url": "https://www.ringsidenews.com/several-matches-segments-revealed-may-11-wwe-raw/",
+      "original_html_file": "20260510_234555_001_spoiler-wwe-raw-11-maggio-annunciati-match-e-segmenti_3cad948b_original.html",
+      "final_html_file": "20260510_234555_001_spoiler-wwe-raw-11-maggio-annunciati-match-e-segmenti_3cad948b_final.html",
+      "metadata_file": "20260510_234555_001_spoiler-wwe-raw-11-maggio-annunciati-match-e-segmenti_3cad948b_metadata.json"
+    }
+  ]
+}
