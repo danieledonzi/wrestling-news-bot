@@ -33,7 +33,7 @@
     "reason": "report_live_delay",
     "created_at": 1778367496.0,
     "first_seen": 1778367496.0,
-    "last_seen": 1778396945.6482184,
+    "last_seen": 1778397781.2127435,
     "not_before": 1778380096.0,
     "attempts": 0,
     "sources": [
@@ -50,44 +50,11 @@
         "title": "AEW Collision Fairway To Hell Results, Highlights and Key Moments for May 9, 2026",
         "source": "www.ringsidenews.com",
         "first_seen": 1778369460.0,
-        "last_seen": 1778396945.6482184,
+        "last_seen": 1778397781.2127435,
         "last_text_len": 9452
       }
     ],
     "story_signature_v71": "stable:aew_collision|world|report"
-  },
-  {
-    "url": "https://www.ringsidenews.com/aew-collision-fairway-hell-results-highlights-key-moments-may-9-2026/",
-    "title": "AEW Collision Fairway To Hell Results, Highlights and Key Moments for May 9, 2026",
-    "semantic_id": "aew-collision-fairway-to-hell-results-highlights-and-key-moments-for-may-9-2026",
-    "title_key": "collision-fairway-hell-results-highlights-key-moments-may-9",
-    "score": 75,
-    "priority": "medium",
-    "event_key": "event:preview:collision:collision-fairway-hell-results-highlights-key-moments-may-9",
-    "story_signature_v71": "stable:aew_collision_fairway|to_hell_results|report",
-    "summary": "Tonight’s episode of AEW Collision Fairway To Hell, airing May 9, 2026, promises an action-packed night live from the SoFi Center at Palm Beach Gardens in West Palm Beach, Florida. ...",
-    "reasons": [
-      "AEW",
-      "show settimanale",
-      "v75 hard results report",
-      "v77 hard report protected",
-      "v71 source reliability soft penalty",
-      "v71 freshness=0.483"
-    ],
-    "score_reasons": [
-      "AEW",
-      "show settimanale",
-      "v75 hard results report",
-      "v77 hard report protected",
-      "v71 source reliability soft penalty",
-      "v71 freshness=0.483"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1778391060.0,
-    "status": "raw",
-    "reason": "wp_down_initial_normal",
-    "created_at": 1778397389.3993602,
-    "attempts": 0
   },
   {
     "kind": "report",
@@ -138,38 +105,5 @@
       }
     ],
     "story_signature_v71": "wwe_smackdown_results|key_moments|report|wwe|smackdown"
-  },
-  {
-    "url": "https://www.ringsidenews.com/wwe-announces-first-ever-two-night-triplemania-during-backlash/",
-    "title": "WWE Announces First-Ever Two-Night TripleMania During Backlash",
-    "semantic_id": "wwe-announces-first-ever-two-night-triplemania-during-backlash",
-    "title_key": "first-ever-two-triplemania-during-backlash",
-    "score": 60,
-    "priority": "medium",
-    "event_key": "",
-    "story_signature_v71": "stable:triplemania|triplemania|announcement|wwe|backlash",
-    "summary": "WWE made a huge announcement during the WWE Backlash broadcast by officially revealing that TripleMania 34 will be the first-ever two-night TripleMania event. The announcement aired during Backlash and confirmed ...",
-    "reasons": [
-      "WWE/main roster",
-      "WWE main roster + storyline/evento",
-      "PLE/PPV",
-      "v71 source reliability soft penalty",
-      "v71 freshness=0.483",
-      "v48 tier2: 55-74"
-    ],
-    "score_reasons": [
-      "WWE/main roster",
-      "WWE main roster + storyline/evento",
-      "PLE/PPV",
-      "v71 source reliability soft penalty",
-      "v71 freshness=0.483",
-      "v48 tier2: 55-74"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1778390961.0,
-    "status": "raw",
-    "reason": "wp_down_initial_normal",
-    "created_at": 1778397389.5406575,
-    "attempts": 0
   }
 ]
