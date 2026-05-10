@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v79_1_2_spoiler_score_floor"
+BOT_VERSION = "v79_1_3_type_freshness_cap_coherence"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -9572,6 +9572,195 @@ def calculate_importance_score(title, text="", url=""):
 
 
 # Aggiorna label di log residue nei percorsi di traduzione a blocchi senza alterare la logica.
+
+# =========================
+# v79.1.3: AI type / freshness / cap coherence
+# =========================
+# La v79.1.2 ha stabilizzato il layer spoiler. Le run live hanno mostrato che
+# alcuni cap/freshness legacy continuavano pero' a prevalere anche quando l'AI
+# aveva gia' riconosciuto POST_SHOW_NEWS o un annuncio fatto durante un live.
+# Questa patch non aumenta l'aggressivita' editoriale: rende coerenti i layer.
+
+_ORIG_V7913_v72_editorial_analysis = v72_editorial_analysis
+_ORIG_V7913_v68_is_expired_preview_only = v68_is_expired_preview_only
+_ORIG_V7913_calculate_importance_score = calculate_importance_score
+_ORIG_V7913_v723_conservative_score_after_ai = v723_conservative_score_after_ai
+_ORIG_V7913_v723_repair_event_key_after_ai = v723_repair_event_key_after_ai
+
+V7913_POST_SHOW_RECOVERY_FLOOR = int(os.getenv("V7913_POST_SHOW_RECOVERY_FLOOR", "75"))
+V7913_POST_SHOW_RECOVERY_CAP = int(os.getenv("V7913_POST_SHOW_RECOVERY_CAP", "95"))
+
+
+def v7913_probe(title="", text="", url="", max_chars=2200):
+    return normalize_for_check(f"{title} {url} {(text or '')[:max_chars]}")
+
+
+def v7913_reason_probe(editorial_analysis=None):
+    editorial_analysis = editorial_analysis or {}
+    return normalize_for_check(" ".join([
+        str(editorial_analysis.get("article_type_reason", "")),
+        str(editorial_analysis.get("category_reason", "")),
+        str(editorial_analysis.get("translation_notes", "")),
+    ]))
+
+
+def v7913_ai_reason_says_not_preview(editorial_analysis=None):
+    probe = v7913_reason_probe(editorial_analysis)
+    if not probe:
+        return False
+    negative_preview = [
+        "non e una preview", "non e' una preview", "non e una pura preview",
+        "not a preview", "not a pure preview", "non e una anteprima",
+        "non e un anteprima", "non e' un'anteprima", "non e una pura anteprima",
+    ]
+    post_show_signals = [
+        "post show", "post-show", "notizia post show", "notizia post-show",
+        "annuncio fatto durante", "annunciato durante", "fatto durante",
+        "durante backlash", "during backlash", "during wwe backlash",
+        "evento appena concluso", "evento gia avvenuto", "evento gia' avvenuto",
+        "avvenuto durante", "accaduto durante", "segmento avvenuto",
+    ]
+    return any(x in probe for x in negative_preview) or any(x in probe for x in post_show_signals)
+
+
+def v7913_title_text_is_live_announcement(title="", text="", url=""):
+    probe = v7913_probe(title, text, url)
+    announcement_terms = [
+        "announces", "announced", "announcement", "reveals plans", "revealed plans",
+        "unveils", "introduced", "introduces", "plans for", "tournament",
+        "annuncia", "annunciato", "annuncio", "svela", "presenta",
+    ]
+    during_terms = [
+        "during backlash", "at backlash", "during wwe backlash", "at wwe backlash",
+        "durante backlash", "a backlash", "nel corso di backlash",
+        "during raw", "during smackdown", "during dynamite", "during collision", "during impact",
+    ]
+    return any(x in probe for x in announcement_terms) and any(x in probe for x in during_terms)
+
+
+def v7913_is_ai_post_show(editorial_analysis=None, title="", text="", url=""):
+    editorial_analysis = editorial_analysis or {}
+    article_type = (editorial_analysis.get("article_type") or "").upper()
+    if article_type in {"POST_SHOW_NEWS", "RESULTS_REPORT"}:
+        return True
+    if v7913_ai_reason_says_not_preview(editorial_analysis):
+        return True
+    if v7913_title_text_is_live_announcement(title, text, url):
+        return True
+    return False
+
+
+def v7913_is_true_future_preview(title="", text="", url="", editorial_analysis=None):
+    probe = v7913_probe(title, text, url)
+    editorial_analysis = editorial_analysis or {}
+    if v7913_is_ai_post_show(editorial_analysis, title, text, url):
+        return False
+    future_preview_terms = [
+        "preview", "full card", "final card", "match card", "lineup", "spoiler lineup",
+        "match order", "start time", "how to watch", "confirmed matches",
+        "tonight", "will face", "will defend", "set for", "scheduled for",
+        "reportedly revealed", "before the show", "ahead of the show",
+    ]
+    return any(x in probe for x in future_preview_terms)
+
+
+def v72_editorial_analysis(title="", text="", url="", is_report=False):
+    result = _ORIG_V7913_v72_editorial_analysis(title, text, url, is_report=is_report)
+    try:
+        if not result or result.get("ai_failed"):
+            return result
+        original_type = (result.get("article_type") or "").upper()
+        if original_type == "PREVIEW" and v7913_is_ai_post_show(result, title, text, url):
+            result = dict(result)
+            result["article_type"] = "POST_SHOW_NEWS"
+            reason = result.get("article_type_reason") or result.get("category_reason") or ""
+            result["article_type_reason"] = (reason + " | v79.1.3 coherence: announcement/post-show is not preview")[:260]
+            print(f"[EDITORIAL v79.1.3] type override PREVIEW->POST_SHOW_NEWS - {title}")
+        return result
+    except Exception as e:
+        print(f"[EDITORIAL v79.1.3] Coherence override non applicato: {e}")
+        return result
+
+
+def v68_is_expired_preview_only(title="", text="", url="", article_type=None):
+    atype = (article_type or "").upper()
+    if atype in {"POST_SHOW_NEWS", "RESULTS_REPORT"}:
+        return False
+    if v7913_title_text_is_live_announcement(title, text, url):
+        return False
+    if v7912_is_score_floor_eligible(title, text, url):
+        # Uno spoiler live/pre-show validato non deve essere abbattuto dal vecchio filtro preview.
+        return False
+    return _ORIG_V7913_v68_is_expired_preview_only(title, text, url, article_type=article_type)
+
+
+def calculate_importance_score(title, text="", url=""):
+    score, reasons = _ORIG_V7913_calculate_importance_score(title, text, url)
+    score = int(score or 0)
+    reasons = list(reasons or [])
+    try:
+        if v7912_is_score_floor_eligible(title, text, url) and score < V7912_SPOILER_SCORE_FLOOR:
+            old_score = score
+            score = min(max(score, V7912_SPOILER_SCORE_FLOOR), V7912_SPOILER_SCORE_CAP)
+            reasons.append(f"v79.1.3 final spoiler floor {old_score}->{score}")
+            print(f"[SCORE v79.1.3] Floor spoiler finale {old_score}->{score} - {title}")
+    except Exception as e:
+        print(f"[SCORE v79.1.3] Floor finale spoiler non applicato: {e}")
+    return max(0, min(100, int(score))), reasons[:12]
+
+
+def v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title="", text="", url="", editorial_analysis=None):
+    score, reasons = _ORIG_V7913_v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title, text, url, editorial_analysis)
+    score = int(score or 0)
+    initial_score = int(initial_score or 0)
+    reasons = list(reasons or [])
+    editorial_analysis = editorial_analysis or {}
+    atype = (editorial_analysis.get("article_type") or "").upper()
+
+    # Se l'AI ha riconosciuto post-show/results, i vecchi cap preview non devono schiacciare a 20/56.
+    if atype in {"POST_SHOW_NEWS", "RESULTS_REPORT"} or v7913_is_ai_post_show(editorial_analysis, title, text, url):
+        if score < MIN_PUBLISH_SCORE and initial_score >= MIN_PUBLISH_SCORE:
+            old_score = score
+            score = min(max(initial_score, V7913_POST_SHOW_RECOVERY_FLOOR), V7913_POST_SHOW_RECOVERY_CAP)
+            reasons.append(f"v79.1.3 post-show recovery {old_score}->{score}")
+            print(f"[SCORE v79.1.3] Recovery post-show {old_score}->{score} - {title}")
+
+    # Lo spoiler floor deve vincere sui cap finali solo se il layer ibrido ha gia' validato lo spoiler.
+    try:
+        if v7912_is_score_floor_eligible(title, text, url) and score < V7912_SPOILER_SCORE_FLOOR:
+            old_score = score
+            score = min(max(score, V7912_SPOILER_SCORE_FLOOR), V7912_SPOILER_SCORE_CAP)
+            reasons.append(f"v79.1.3 final spoiler cap override {old_score}->{score}")
+            print(f"[SCORE v79.1.3] Override cap spoiler {old_score}->{score} - {title}")
+    except Exception as e:
+        print(f"[SCORE v79.1.3] Override cap spoiler non applicato: {e}")
+
+    # Se e' una vera preview futura, mantieni invece la prudenza dei cap legacy.
+    if v7913_is_true_future_preview(title, text, url, editorial_analysis) and not v7912_is_score_floor_eligible(title, text, url):
+        if score > 56:
+            score = 56
+            reasons.append("v79.1.3 true future preview cap")
+
+    return max(0, min(100, int(score))), reasons[:12]
+
+
+def v723_repair_event_key_after_ai(event_key, title="", text="", url="", editorial_analysis=None):
+    repaired = _ORIG_V7913_v723_repair_event_key_after_ai(event_key, title, text, url, editorial_analysis)
+    probe = v7913_probe(title, text, url, max_chars=1200)
+    title_probe = normalize_for_check(title or "")
+    legal_strong = [
+        "arrest", "arrested", "lawsuit", "trial", "guilty", "convicted", "sentenced",
+        "domestic violence", "femicide", "police", "legal", "verdict",
+        "arresto", "arrestato", "causa", "processo", "colpevole", "condannato", "verdetto",
+    ]
+    if (repaired or "").startswith("event:legal:") and not any(x in title_probe for x in legal_strong):
+        # Il vecchio cluster legal puo' essere contaminato da nomi citati nel corpo/embed.
+        fallback = make_title_key(title)[:90]
+        new_key = f"event:postshow:{fallback}" if v7913_is_ai_post_show(editorial_analysis, title, text, url) else f"event:story:{fallback}"
+        print(f"[FIX v79.1.3] Event key legal falsa rimossa: {repaired} -> {new_key}")
+        return new_key
+    return repaired
+
 
 if __name__ == "__main__":
     log_run_start()
