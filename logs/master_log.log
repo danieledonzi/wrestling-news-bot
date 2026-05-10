@@ -2422,3 +2422,314 @@
 [PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
 ===== RUN END [2026-05-10 20:42:41] VERSION [v81_translation_preservation_and_flat_review_archive (4b10cbc)] =====
 
+
+===== RUN START [2026-05-10 21:41:44] VERSION [v81_translation_preservation_and_flat_review_archive (73953aa)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[PENDING] Rimuovo report già pubblicato: report:aew-collision-2026-05-09
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP v71] Story signature gia' in history: stable:seth_rollins|injury|wwe - WWE's Seth Rollins Discusses Coming Back From Injury
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (32/75): Former AEW World Tag Team Champion Anthony Bowens On The 'Challenge' Of Singles Competition
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (50/75): WWE Backlash 2026: Biggest Winners & Losers
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (35/75): Bully Ray Explains Why He'd Rather See Former WWE Stars The New Day In TNA Over AEW
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (16/75): Chavo Guerrero Looks Back On Legacy Of His Uncle Eddie
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2169121/wwe-us-champ-trick-williams-not-everyone-worthy-title-shot/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168023/wwe-nxt-myles-borne-mens-north-american-title/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (54/75): Eric Bischoff: 'TKO Owes A Serious Debt Of Gratitude To Ted Turner'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): Former WWE Star Maven Is Happy About This Key Change In Pro Wrestling Culture
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Kit Wilson Details Creative Process Behind Current Character
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (16/75): WWE Star The Miz Reflects On Hosting American Gladiators Reboot
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167856/wwe-nxt-myles-borne-randy-orton-inspiration/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167778/sheamus-looks-back-winning-wwe-title/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167564/wwe-smackdown-charlotte-flair-kiana-james-main-event-player/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (10/75): Jeff Jarrett Looks Back On Hulk Hogan's TNA Run & Differing Creative Visions
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:roman-reigns-lawsuit - Several Matches & Segments Revealed for May 11 WWE RAW
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (21/75): Entire AEW Jazwares Division Let Go In Company Layoffs
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (33/75): WWE Superstars Send Tributes To Asuka Upon News of Rumors of Semi-Retirement
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (19/75): Jacob Fatu Explains Chaotic Chain of Events That Led to WWE Signing
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (57/75): John Cena Responds To Mixed Reaction Over WWE John Cena Classic Announcement
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Paul Wight Reveals Doctors Expected Him to Die Before 45 Amid Brutal Acromegaly Battle
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (43/75): Paul Wight Details Scary Fan Encounter That Led to Broken Jaw And Huge Legal Costs
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (13/75): Thekla Reveals Fans Sent Death Threats After STARDOM Exit Angle
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): AJ Styles Calls Out Negative WWE Fans Who Complain About Everything
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (25/75): AJ Styles Open to Long-Term WWE Producer Role After NXT Visit
+[SKIP] URL già in history: https://www.ringsidenews.com/danhausen-claims-cm-punk-stole-his-finisher-wrestling-return/
+[SKIP v71] Story signature gia' in history: stable:danhausen|identity_reveal|wwe|backlash - Danhausen Addresses Wild Rumors About His Mystery Partner for WWE Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/conflicting-reports-emerge-asukas-wwe-status-backlash/
+[SCORE] 100 high - Breaking Down The Belts: Rhea Ripley's WWE Women's Championship | WWE/main roster, top star titolo: rhea ripley, nomi forti lead: jade cargill, WWE main roster + storyline/evento, breaking/major update, PLE/PPV, v62 titolo/championship, v71 freshness=0.539
+[SCORE] 94 high - Minihausen Mask Made By Former WWE 205 Live Star | WWE/main roster, nomi forti lead: danhausen, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 ritorno/debutto, v71 freshness=0.664
+[SCORE] 83 high - Ex-WWE Star Jake Hager Coming Out of Retirement for Surprise Wrestling Return | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 ritorno/debutto, v71 source reliability soft penalty, v71 freshness=0.653
+[SCORE] 73 medium - Former WWE Star Maven Says He's The Only One To Achieve This Niche Accomplishment | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v71 freshness=0.601, v48 tier2: 55-74
+[SCORE] 57 low - Several Matches & Segments Revealed for May 11 WWE RAW | WWE/main roster, top star lead: roman reigns, nomi forti lead: roman reigns, WWE main roster + storyline/evento, show settimanale, v71 source reliability soft penalty, v71 freshness=0.569, v48 tier2: 55-74
+[SCORE] 55 low - WWE's Jacob Fatu Names His Top Five Dream WrestleMania Main Event Opponents | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v71 freshness=0.582, v48 tier2: 55-74
+[SCORE] 55 low - Chelsea Green Explains Subtle Difference Between Pitching And Complaining In WWE | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v71 freshness=0.576, v48 tier2: 55-74
+[SCORE] 40 low - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament | WWE/main roster, top star titolo: john cena, v71 source reliability soft penalty, v71 freshness=0.579, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 2 news >=90, 3 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 8 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Breaking Down The Belts: Rhea Ripley's WWE Women's Championship
+[BOT] semantic_id=breaking-down-the-belts-rhea-ripleys-wwe-womens-championship
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=3, embed=0
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=OPINION conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo analizza lo stato attuale del titolo femminile WWE detenuto da Rhea Ripley e specula sui possibili futuri sfidanti, inserendosi nella categoria Opinion.
+[EDITORIAL v72.3] translation_notes=Non tradurre "WWE Women's Championship" e "WWE Women's Tag Team Championship". "Beat" va tradotto come "ha sconfitto", non "ha battuto". "Kayfabe" va spiegato o omesso se non essen
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo analizza lo stato attuale del titolo femminile WWE detenuto da Rhea Ripley e specula sui possibili futuri sfidanti, inserendosi nella categoria Opinion.
+[PERF v71] analisi editoriale AI v72: 1.73s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star titolo: rhea ripley, nomi forti lead: jade cargill, WWE main roster + storyline/evento, breaking/major update, combo top name titolo + evento forte, PLE/PPV, v62 titolo/championship, v72.3 cap opinion
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Breaking Down The Belts: Rhea Ripley's WWE Women's Championship
+[BOT] Elaborazione: Minihausen Mask Made By Former WWE 205 Live Star
+[BOT] semantic_id=minihausen-mask-made-by-former-wwe-205-live-star
+[SCORE] iniziale=94 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash-lite | 
+[EDITORIAL v72.3] translation_notes=Il termine "Minihausen" sembra essere una gag specifica del personaggio Danhausen, quindi va trattato come un nome proprio e non tradotto.; Evitare di tradurre "WWE 205 Live" con calchi come "205 Live della WWE". Mantenere la dicitura originale.; La parte "triumphantly rid the toxicity of The Miz and Kit Wilson" suggerisce un'azione avvenuta durante l'evento, confermando POST_SHOW_NEWS.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | v72.3 editorial analysis gemini-2.5-flash-lite
+[PERF v71] analisi editoriale AI v72: 1.23s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Minihausen Mask Made By Former WWE 205 Live Star
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE v79.1.3] Recovery post-show 62->94 - Minihausen Mask Made By Former WWE 205 Live Star
+[SCORE] raffinato=94 priority=high | WWE/main roster, top star lead: cm punk, nomi forti lead: cm punk, danhausen, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name lead + evento forte, PLE/PPV, contenuto leggero, developmental secondario, v79.1.3 post-show recovery 62->94
+[V71] story_signature=minihausen_mask_made_by|former_wwe|live_star|return|wwe|aaa|wrestlemania|backlash semantic_status=new_story freshness=0.664
+[PERF v71] WP recent posts dedupe: 1.21s
+[PERF v71] WP lookup event_key: 0.79s
+[SKIP] Event key confermata su WordPress: event:cm-punk-return - Minihausen Mask Made By Former WWE 205 Live Star
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Ex-WWE Star Jake Hager Coming Out of Retirement for Surprise Wrestling Return
+[BOT] semantic_id=ex-wwe-star-jake-hager-coming-out-of-retirement-for-surprise-wrestling-return
+[SCORE] iniziale=83 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[EDITORIAL v72.3] type=OTHER conf=0.90 | category=WORLD (8) conf=0.80 model=gemini-2.5-flash-lite | L'articolo annuncia un evento futuro (WWC 53rd Anniversary) e un match imminente, classificandosi chiaramente come preview. La categoria World è appropriata poiché l'evento si svolge fuori dalle principali federazioni USA (WWE, AEW, NXT, TN
+[EDITORIAL v72.3] translation_notes=Il nome del titolo "WWE" in "Ex-WWE Star" deve rimanere in inglese.; "Coming Out of Retirement" si traduce meglio come "Ritorno dal ritiro" o "Esce dal ritiro", evitando calchi come "uscire dalla pensione".; Il nome della federazione "World Wrestling Council" deve rimanere in inglese.
+[CATEGORY v73] World downgrade: WORLD -> WWE | non wrestling internazionale
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo annuncia un evento futuro (WWC 53rd Anniversary) e un match imminente, classificandosi chiaramente come preview. La categoria World è appropriata poiché l'evento si svolge fuori dalle principali federazioni USA (WWE, AEW, NXT, TN
+[PERF v71] analisi editoriale AI v72: 1.76s
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, opinione generica, v62 ritorno/debutto, v66 cap opinion/commentary storyline, v68 cap duro opinion/commentary
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Ex-WWE Star Jake Hager Coming Out of Retirement for Surprise Wrestling Return
+[BOT] Elaborazione: Former WWE Star Maven Says He's The Only One To Achieve This Niche Accomplishment
+[BOT] semantic_id=former-wwe-star-maven-says-hes-the-only-one-to-achieve-this-niche-accomplishment
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo parla di un'impresa passata di un ex wrestler WWE, quindi è una notizia post-show e non una preview. La categoria è WWE perché si riferisce alla carriera di un ex wrestler WWE e a un titolo WWE.
+[EDITORIAL v72.3] translation_notes=Mantenere 'WWE Hardcore Championship' in inglese.; 'Release/released' non deve diventare 'rilascio/rilasciato'; usare 'licenziamento/licenziato' o 'addio' se necessario.; Tradurre le citazioni fedelmente.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo parla di un'impresa passata di un ex wrestler WWE, quindi è una notizia post-show e non una preview. La categoria è WWE perché si riferisce alla carriera di un ex wrestler WWE e a un titolo WWE.
+[PERF v71] analisi editoriale AI v72: 1.26s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Former WWE Star Maven Says He's The Only One To Achieve This Niche Accomplishment
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, PLE/PPV, v62 titolo/championship, v76 cap death/funeral storyline-comedy
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Former WWE Star Maven Says He's The Only One To Achieve This Niche Accomplishment
+[BOT] Elaborazione: Several Matches & Segments Revealed for May 11 WWE RAW
+[BOT] semantic_id=several-matches-segments-revealed-for-may-11-wwe-raw
+[SCORE] iniziale=57 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=0, embed=1
+[BOT] Embed trovati: 2
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo presenta la card e i segmenti annunciati per un prossimo episodio di WWE Raw, tipico di una preview. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantenere "Roman Reigns" e "Jacob Fatu" come nomi propri. "Acknowledgment Ceremony" va tradotto letteralmente come "Cerimonia di Riconoscimento" o "Cerimonia di Approvazione", evit; Evitare "released" tradotto come "rilasciato"; se appare, considerare "licenziato" o "allontanato" a seconda del contesto (qui non appare).; Non tradurre i nomi dei titoli come "Undisputed WWE Universal Championship" se presenti.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo presenta la card e i segmenti annunciati per un prossimo episodio di WWE Raw, tipico di una preview. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.51s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Several Matches & Segments Revealed for May 11 WWE RAW
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=62 priority=medium | WWE/main roster, top star lead: roman reigns, nomi forti lead: roman reigns, WWE main roster + storyline/evento, titolo/championship, show settimanale, v77 cap low editorial value
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 62/75 - Several Matches & Segments Revealed for May 11 WWE RAW
+[BOT] Elaborazione: WWE's Jacob Fatu Names His Top Five Dream WrestleMania Main Event Opponents
+[BOT] semantic_id=wwes-jacob-fatu-names-his-top-five-dream-wrestlemania-main-event-opponents
+[SCORE] iniziale=55 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo riporta dichiarazioni di Jacob Fatu su ipotetici avversari a WrestleMania, ma non è una preview di un evento specifico o programmato. Le menzioni di WrestleMania 41 e 42 si riferiscono a eventi passati o a speculazioni future, ma
+[EDITORIAL v72.3] translation_notes=Attenzione ai nomi delle cinture che restano in inglese: "WWE United States Championship".; Le citazioni dirette devono essere tradotte fedelmente.; I nomi dei wrestler (Jacob Fatu, LA Knight, Drew McIntyre, Bron Breakker, Macho Man Randy Savage, Jeff Hardy, Umaga, Mr. Perfect, Brock Lesnar) vanno mantenuti in originale.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta dichiarazioni di Jacob Fatu su ipotetici avversari a WrestleMania, ma non è una preview di un evento specifico o programmato. Le menzioni di WrestleMania 41 e 42 si riferiscono a eventi passati o a speculazioni future, ma
+[PERF v71] analisi editoriale AI v72: 1.79s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE's Jacob Fatu Names His Top Five Dream WrestleMania Main Event Opponents
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=74 priority=medium | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, v62 titolo/championship, v76 cap boost da score basso senza evento concreto
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - WWE's Jacob Fatu Names His Top Five Dream WrestleMania Main Event Opponents
+[V71] story_signature=stable:drew_mcintyre|brock_lesnar|the_united_states_championship|wwe|wrestlemania semantic_status=new_story freshness=0.582
+[PERF v71] WP lookup URL esistente: 0.74s
+[PERF v71] WP lookup event_key: 1.51s
+[FIX] Event key in history ma non confermata su WordPress: event:brock-lesnar-diagnosis - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.88s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwes-jacob-fatu-names-his-dream-wrestlemania-main-event-opponents/intro-1778265502.jpg
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=41 generato=['42']"]
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=41 generato=['42']"]
+[PERF v71] traduzione: 3.80s
+[SKIP] Traduzione fallita: WWE's Jacob Fatu Names His Top Five Dream WrestleMania Main Event Opponents (err_type=validation)
+[FAILED] URL sospeso 24h dopo 2 validation fail: WWE's Jacob Fatu Names His Top Five Dream WrestleMania Main Event Opponents
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Chelsea Green Explains Subtle Difference Between Pitching And Complaining In WWE
+[BOT] semantic_id=chelsea-green-explains-subtle-difference-between-pitching-and-complaining-in-wwe
+[SCORE] iniziale=55 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash-lite | L'articolo riporta dichiarazioni di Chelsea Green relative alla sua precedente esperienza in WWE e alla sua attuale gimmick, non si concentra sulla promozione di un evento futuro. Le sue opinioni su come presentare idee e i suoi passati ten
+[EDITORIAL v72.3] translation_notes=I nomi dei titoli vanno lasciati in inglese: "Women's United States Champion".; "Released" e "injured" riferiti a Alba Fyre e Piper Niven si riferiscono a licenziamenti/partenze e infortuni, non a rilascio/rilasciato.; La frase "it kills a couple birds with one stone" va tradotta letteralmente o con un equivalente italiano come "colpire due piccioni con una fava" o simile, senza parafrasare il se
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta dichiarazioni di Chelsea Green relative alla sua precedente esperienza in WWE e alla sua attuale gimmick, non si concentra sulla promozione di un evento futuro. Le sue opinioni su come presentare idee e i suoi passati ten
+[PERF v71] analisi editoriale AI v72: 2.54s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Chelsea Green Explains Subtle Difference Between Pitching And Complaining In WWE
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE v80.4] AAA major World priority 81->93 - Chelsea Green Explains Subtle Difference Between Pitching And Complaining In WWE
+[SCORE v80.4] AAA major World final floor 74->76 - Chelsea Green Explains Subtle Difference Between Pitching And Complaining In WWE
+[SCORE] raffinato=76 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, infortunio, PLE/PPV, v80.4 AAA major World priority 81->93, v76 cap boost da score basso senza evento concreto, v80.4 AAA major World final floor 74->76
+[V71] story_signature=stable:dominik_mysterio|rhea_ripley|injury|wwe semantic_status=new_story freshness=0.693
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/chelsea-green-explains-subtle-difference-between-pitching-and-complaining-in-wwe/intro-1778265268.jpg
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Body sospetto o troppo meta
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-2.5-flash-lite
+[PERF v71] traduzione: 6.66s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Chelsea Green: la differenza tra proporre e lamentarsi in WWE
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.35s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/chelsea-green-explains-subtle-difference-between-pitching-and-complaining-in-wwe/l-intro-1778265268.jpg
+[MEDIA] Immagine caricata: 4231
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.94s
+[PERF v71] totale articolo pubblicato 'Chelsea Green Explains Subtle Difference Between Pitching An': 14.34s
+[OK] Pubblicato: Chelsea Green: la differenza tra proporre e lamentarsi in WWE
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260510_214326_001_chelsea-green-la-differenza-tra-proporre-e-lamentarsi-in-wwe_38c28137_*.html
+[BOT] Elaborazione: Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[BOT] semantic_id=lexis-king-claims-credit-for-wwes-john-cena-classic-tournament
+[SCORE] iniziale=40 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=0, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo parla di un'affermazione di Lexis King riguardo a un torneo già annunciato da John Cena. L'evento principale (annuncio del torneo) è già avvenuto, rendendolo una notizia post-show e non una preview.
+[EDITORIAL v72.3] translation_notes=I nomi ufficiali di titoli/cinture restano in inglese: 'John Cena Classic'.; Evitare calchi: 'claims credit for' si può tradurre con 'si prende il merito di' o 'rivendica la paternità di'. 'Lean into the joke' con 'si è buttato a capofitto nello scherzo'. '; Le citazioni dirette devono essere tradotte fedelmente.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo parla di un'affermazione di Lexis King riguardo a un torneo già annunciato da John Cena. L'evento principale (annuncio del torneo) è già avvenuto, rendendolo una notizia post-show e non una preview.
+[PERF v71] analisi editoriale AI v72: 1.62s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, opinione generica, developmental secondario, v62 reazioni/tributi, v68 cap duro opinion/commentary
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 8 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+===== RUN END [2026-05-10 21:41:44] VERSION [v81_translation_preservation_and_flat_review_archive (73953aa)] =====
+
