@@ -11277,3 +11277,110 @@ Traceback (most recent call last):
   File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 10366, in v723_conservative_score_after_ai
     atype = normalize_article_type((editorial_analysis or {}).get("article_type", "")) if editorial_analysis else ""
 NameError: name 'normalize_article_type' is not defined
+
+===== RUN START [2026-05-10 07:08:14] VERSION [v80_2_oembed_localization_nameerror_hotfix (03814c1)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[PENDING] Rimuovo report già pubblicato: report:aew-collision-2026-05-09
+[PERF v71] WP lookup event_key: 1.16s
+[PENDING] Rimuovo report già pubblicato: report:wwe-smackdown-2026-05-08
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167038/aew-bobby-lashley-world-title-ambitions-fans-see-it/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (0/75): WWE Backlash 2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168820/aew-collision-darby-allin-pac-world-title-defense/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168808/wwe-backlash-2026-jacob-fatu-roman-reigns-controversial-loss/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168799/aew-collision-mark-davis-jack-perry-national-championship/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): Grayson Waller Details Locker Room Gift Bought By Finn Balor When WWE Visited Ireland
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168786/wwe-backlash-2026-john-cena-new-event-championship-unique-rules/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168783/wwe-backlash-2026-iyo-sky-asuka-hug-victory/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (30/75): UFC 328 Results: Strickland Vs. Chimaev
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168770/wwe-backlash-2026-danhausen-mystery-partner-miz-kit-wilson/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168763/wwe-backlash-2026-trick-williams-retains-mens-us-title-wrestlemania-rematch-sami-zayn/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168755/aew-collision-may-9-results/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168754/wwe-backlash-bron-breakker-defeats-seth-rollins-opener/
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 50->50 - WWE Backlash 2026 Match Order Reportedly Revealed
+[SKIP] Score sotto soglia editoriale (50/75): WWE Backlash 2026 Match Order Reportedly Revealed
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2168722/dave-meltzer-cmll-persephone-aew-ppv-injury/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167022/wwe-matt-hardy-eddie-guerrero-best-advice-bore-crowd/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167009/wwe-nxt-oba-femi-myles-borne-pizza-toss/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite & Collision Viewership & Ratings Report, 5/6/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168358/wwe-backlash-2026-two-titles-on-line-seth-rollins-bron-breakker/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168663/wwe-wrestlemania-42-paul-heyman-brock-lesnar-retiring/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP v71] Story signature gia' in history: stable:minihausen|danhausen|identity_reveal|wwe|backlash - Jonathan Coachman Calls Danhausen Experiment a Waste of Time and He's Over It
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): Big E Raises Questions About Asuka's WWE Future After Emotional Backlash Moment
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-announces-huge-womens-title-match-double-nothing-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/jack-perry-joins-stadium-stampede-match-aew-title-loss/
+[SKIP] URL già in history: https://www.ringsidenews.com/roman-reigns-tells-jacob-fatu-this-your-last-night-here-wwe-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/jacob-fatu-assaults-roman-reigns-referee-wwe-officials-backlash-2026-loss/
+[SKIP] URL già in history: https://www.ringsidenews.com/john-cena-annonuces-plans-john-cena-classic-tournament-during-wwe-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/identity-wwes-minihausen-revealed-backlash-appearance/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-fans-hijack-backlash-match-loud-we-want-kairi-chants/
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): Danhausen Introduces Minihausen As WWE Backlash Mystery Tag Team Partner
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): Gingerbread Man Meme Goes Completely Off The Rails After WWE SmackDown
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): Big E. Gets Loud "New Day Rocks!" Chants During 2026 WWE Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/kairi-sane-tampa-airport-sighting-rumor-shut-down-before-wwe-backlash/
+[SCORE] 75 medium - AEW Collision Fairway To Hell Results, Highlights and Key Moments for May 9, 2026 | AEW, show settimanale, v75 hard results report, v77 hard report protected, v71 source reliability soft penalty, v71 freshness=0.485
+[SCORE] 60 medium - WWE Announces First-Ever Two-Night TripleMania During Backlash | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.484, v48 tier2: 55-74
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 2 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: AEW Collision Fairway To Hell Results, Highlights and Key Moments for May 9, 2026
+[BOT] semantic_id=aew-collision-fairway-to-hell-results-highlights-and-key-moments-for-may-9-2026
+[SCORE] iniziale=75 priority=medium
+[SCRAPE] Articolo results rilevato: testo completo (9452 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=34, image=0, embed=11
+[BOT] Embed trovati: 12
+[PENDING] Coda salvata: 2 elementi
+[REPORT] Salvato/aggiornato pending report: report:aew-collision-2026-05-09 | gia' maturo
+[PENDING] Rimuovo report già pubblicato: report:aew-collision-2026-05-09
+[PENDING] Rimuovo report già pubblicato: report:wwe-smackdown-2026-05-08
+[BOT] Elaborazione: WWE Announces First-Ever Two-Night TripleMania During Backlash
+[BOT] semantic_id=wwe-announces-first-ever-two-night-triplemania-during-backlash
+[SCORE] iniziale=60 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=0, embed=0
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: Expecting ',' delimiter: line 1 column 2885 (char 2884)
+[GEMINI] Uso modello: gemini-2.5-flash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[EDITORIAL v72.3] type=PREVIEW conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash | L'articolo riporta la notizia di un annuncio già avvenuto durante Backlash (WWE), non una preview di un evento futuro. La WWE è l'attore principale e la sede dell'annuncio. | guardrail true preview
+[EDITORIAL v72.3] translation_notes=Mantieni 'TripleMania', 'Backlash' e 'Mexico City' in inglese.; Il titolo deve essere riscritto per suonare naturale in italiano, non una traduzione letterale. Es: 'La WWE annuncia la prima TripleMania in due serate durante Backlash'.; 'register for pre-sale access' può essere tradotto come 'registrarsi per l'accesso in pre-vendita' o 'per accedere alla pre-vendita'.
+[EDITORIAL v73] final type=PREVIEW | category=WWE (4) | L'articolo riporta la notizia di un annuncio già avvenuto durante Backlash (WWE), non una preview di un evento futuro. La WWE è l'attore principale e la sede dell'annuncio. | guardrail true preview
+[EDITORIAL v79.1.3] type override PREVIEW->POST_SHOW_NEWS - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[PERF v71] analisi editoriale AI v72: 17.92s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SCORE] raffinato=56 priority=low | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 2 candidati provati | mode=normal
+===== RUN END [2026-05-10 07:08:14] VERSION [v80_2_oembed_localization_nameerror_hotfix (03814c1)] =====
+
