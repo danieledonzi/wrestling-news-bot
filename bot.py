@@ -10634,6 +10634,21 @@ def translate_news(source_title, text, source_url="", forced_category=None):
     return news_data, err_type
 
 
+# =========================
+# v80.2 hotfix: runtime version + compatibility alias
+# =========================
+# Alcune patch precedenti ridefinivano BOT_VERSION piu' in basso nel file e
+# la funzione finale v79.1.6 chiamava normalize_article_type senza alias.
+# Questo reset e questa alias devono restare subito prima del main.
+BOT_VERSION = "v80_2_oembed_localization_nameerror_hotfix"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+if "normalize_article_type" not in globals():
+    def normalize_article_type(value):
+        return normalize_article_type_v68(value)
+
+
+
 if __name__ == "__main__":
     log_run_start()
     try:
