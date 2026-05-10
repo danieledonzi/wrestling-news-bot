@@ -1,0 +1,34 @@
+{
+  "run_id": "2026-05-10 14:26:25",
+  "bot_version": "v80_10_published_html_review_archive (86b09c1)",
+  "git_sha": "86b09c19ce6fac2c1161e450f1873a15be8ddb86",
+  "source_title": "Roman Reigns To Jacob Fatu After WWE Backlash 2026: 'This Is Your Last Night Here'",
+  "final_title": "WWE Backlash 2026: Reigns a Fatu \"Questa è la tua ultima notte qui\"",
+  "source_url": "https://www.wrestlinginc.com/2168960/wwe-backlash-2026-roman-reigns-jacob-fatu-this-is-your-last-night-here/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "roman-reigns-to-jacob-fatu-after-wwe-backlash-2026-this-is-your-last-night-here",
+  "story_signature_v71": "stable:roman_reigns|jacob_fatu|his_world_heavyweight_championship|wwe|raw|backlash",
+  "refined_score": 77,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star titolo: roman reigns",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "combo top name titolo + evento forte",
+    "show settimanale",
+    "v62 titolo/championship",
+    "v76 cap death/funeral storyline-comedy",
+    "v79.1.3 post-show recovery 54->77"
+  ],
+  "blocks_summary": {
+    "text": 5,
+    "image": 1,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "original.html",
+  "final_html_file": "final.html"
+}

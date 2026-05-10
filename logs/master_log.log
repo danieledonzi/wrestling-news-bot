@@ -984,3 +984,132 @@
 [REVIEW v80.3] Pacchetto review creato: /home/runner/work/wrestling-news-bot/wrestling-news-bot/review_packages/run_20260510_141750_1e13c2a.zip
 ===== RUN END [2026-05-10 14:16:08] VERSION [v80_9_inline_embed_and_career_status_guardrail (1e13c2a)] =====
 
+
+===== RUN START [2026-05-10 14:26:25] VERSION [v80_10_published_html_review_archive (86b09c1)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[PENDING] Rimuovo report già pubblicato: report:aew-collision-2026-05-09
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:title:roman-reigns:world - Roman Reigns To Jacob Fatu After WWE Backlash 2026: 'This Is Your Last Night Here'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167426/wwe-wrestlemania-42-tiffany-stratton-paige-reaction-return/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (22/75): AEW's Thunder Rosa Says She'd Lose Big Stipulation Match 'If The Price Is Right'
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (29/75): Will Ospreay Discusses Pressure Of Being A Top Star In AEW
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167038/aew-bobby-lashley-world-title-ambitions-fans-see-it/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (0/75): WWE Backlash 2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168820/aew-collision-darby-allin-pac-world-title-defense/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168808/wwe-backlash-2026-jacob-fatu-roman-reigns-controversial-loss/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168799/aew-collision-mark-davis-jack-perry-national-championship/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): Grayson Waller Details Locker Room Gift Bought By Finn Balor When WWE Visited Ireland
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168786/wwe-backlash-2026-john-cena-new-event-championship-unique-rules/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168783/wwe-backlash-2026-iyo-sky-asuka-hug-victory/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (30/75): UFC 328 Results: Strickland Vs. Chimaev
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168770/wwe-backlash-2026-danhausen-mystery-partner-miz-kit-wilson/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168763/wwe-backlash-2026-trick-williams-retains-mens-us-title-wrestlemania-rematch-sami-zayn/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168755/aew-collision-may-9-results/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168754/wwe-backlash-bron-breakker-defeats-seth-rollins-opener/
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 50->50 - WWE Backlash 2026 Match Order Reportedly Revealed
+[SKIP] Score sotto soglia editoriale (50/75): WWE Backlash 2026 Match Order Reportedly Revealed
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2168722/dave-meltzer-cmll-persephone-aew-ppv-injury/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167022/wwe-matt-hardy-eddie-guerrero-best-advice-bore-crowd/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/conflicting-reports-emerge-asukas-wwe-status-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/kazuchika-okada-pulled-aew-title-match-due-real-life-family-situation/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): IYO SKY Fuels More Speculation About Asuka's WWE Future
+[SKIP v71] Story signature gia' in history: stable:john_cena|announcement|wwe|backlash - Fans Clown John Cena Over Bald Spot During WWE Backlash Appearance
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): Asuka May Be Semi-Retired Following WWE Backlash Moment
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (49/75): JBL Defends WWE Talent Accepting Pay Cuts Amid Fan Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/backstage-reaction-asukas-emotional-wwe-backlash-moment-amid-uncertainty-about-her-future/
+[SKIP v71] Story signature gia' in history: stable:minihausen|danhausen|identity_reveal|wwe|backlash - Jonathan Coachman Calls Danhausen Experiment a Waste of Time and He's Over It
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): Big E Raises Questions About Asuka's WWE Future After Emotional Backlash Moment
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-announces-huge-womens-title-match-double-nothing-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/jack-perry-joins-stadium-stampede-match-aew-title-loss/
+[SKIP] URL già in history: https://www.ringsidenews.com/roman-reigns-tells-jacob-fatu-this-your-last-night-here-wwe-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/jacob-fatu-assaults-roman-reigns-referee-wwe-officials-backlash-2026-loss/
+[SKIP] URL già in history: https://www.ringsidenews.com/john-cena-annonuces-plans-john-cena-classic-tournament-during-wwe-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/identity-wwes-minihausen-revealed-backlash-appearance/
+[SCORE] 77 medium - Roman Reigns To Jacob Fatu After WWE Backlash 2026: 'This Is Your Last Night Here' | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, titolo/championship, v71 freshness=0.609
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 1 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Roman Reigns To Jacob Fatu After WWE Backlash 2026: 'This Is Your Last Night Here'
+[BOT] semantic_id=roman-reigns-to-jacob-fatu-after-wwe-backlash-2026-this-is-your-last-night-here
+[SCORE] iniziale=77 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo riporta eventi successi durante o subito dopo Backlash 2026, nello specifico le parole di Reigns e l'azione di Fatu post-match. Non si tratta di una preview dell'evento, ma di un report di quanto accaduto.
+[EDITORIAL v72.3] translation_notes=- "WWE World Heavyweight Championship" va lasciato in inglese. "This is your last night here" deve essere tradotto letteralmente come citazione.; - "Tongan Death Grip" è un nome specifico di una mossa, da mantenere in inglese. "Samoan Werewolf" è un soprannome, da mantenere in inglese.; - "OTC" è probabilmente un acronimo per una stable o un gruppo di riferimento (The Bloodline o simile); verificare se nel contesto italiano è meglio tradurlo o spiegarlo. "Superman
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta eventi successi durante o subito dopo Backlash 2026, nello specifico le parole di Reigns e l'azione di Fatu post-match. Non si tratta di una preview dell'evento, ma di un report di quanto accaduto.
+[PERF v71] analisi editoriale AI v72: 3.94s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Roman Reigns To Jacob Fatu After WWE Backlash 2026: 'This Is Your Last Night Here'
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE v79.1.3] Recovery post-show 54->77 - Roman Reigns To Jacob Fatu After WWE Backlash 2026: 'This Is Your Last Night Here'
+[SCORE] raffinato=77 priority=medium | WWE/main roster, top star titolo: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, combo top name titolo + evento forte, show settimanale, v62 titolo/championship, v76 cap death/funeral storyline-comedy, v79.1.3 post-show recovery 54->77
+[V71] story_signature=stable:roman_reigns|jacob_fatu|his_world_heavyweight_championship|wwe|raw|backlash semantic_status=new_story freshness=0.842
+[PERF v71] WP recent posts dedupe: 1.33s
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:title:roman-reigns:world - Roman Reigns To Jacob Fatu After WWE Backlash 2026: 'This Is Your Last Night Here'
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.72s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=5
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/roman-reigns-to-jacob-fatu-after-wwe-backlash-2026-this-is-your-last-night-here/intro-1778422816.jpg
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[CAREER v80.9] Repair frase career/status con gemini-2.5-flash-lite
+[CAREER v80.9] Guardrail career/status applicato dopo post-edit
+[PERF v71] traduzione: 8.04s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): WWE Backlash 2026: Reigns a Fatu "Questa è la tua ultima notte qui"
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.31s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/roman-reigns-to-jacob-fatu-after-wwe-backlash-2026-this-is-your-last-night-here/l-intro-1778422816.jpg
+[MEDIA] Immagine caricata: 4203
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.94s
+[PERF v71] totale articolo pubblicato 'Roman Reigns To Jacob Fatu After WWE Backlash 2026: 'This Is': 18.41s
+[OK] Pubblicato: WWE Backlash 2026: Reigns a Fatu "Questa è la tua ultima notte qui"
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v80.10] Salvati HTML pubblicati: published_html_review/run_20260510_142737_86b09c1/001_wwe-backlash-2026-reigns-a-fatu-questa-la-tua-ultima-notte-qui_9182f3ce
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 1 candidati provati | mode=normal
+[PUBLISHED REVIEW v80.10] Summary salvato: published_html_review/run_20260510_142737_86b09c1/summary.json
+===== RUN END [2026-05-10 14:26:25] VERSION [v80_10_published_html_review_archive (86b09c1)] =====
+
