@@ -542,6 +542,18 @@ TRANSLATION_GLOSSARY_REPLACEMENTS = {
 
 EMBED_PLACEHOLDER_RE = re.compile(r"\[EMBED_\d{3}\]")
 
+# v80.6: guardrail stilistico leggero, solo prompt.
+# Non aggiunge nuovi stadi Gemini e non introduce dizionari deterministici.
+NATURAL_ITALIAN_STYLE_RULES_V806 = """
+STILE EDITORIALE NATURALE:
+- Scrivi come una news wrestling italiana reale: diretto, concreto, asciutto.
+- Evita tono epico, marketing, metafore, frasi enfatiche o formule da testo AI.
+- Non gonfiare l'importanza dei fatti: se l'originale e' neutro, resta neutro.
+- Preferisci frasi brevi e informative a formule narrative generiche.
+- Evita espressioni come "ha lasciato di stucco", "pietra miliare", "l'eco dell'annuncio", "superare ogni aspettativa", salvo siano presenti o chiaramente giustificate nell'originale.
+- Non aggiungere chiusure speculative, promozionali o rivolte ai lettori.
+""".strip()
+
 
 # v38: mappa nomi -> promotion per categoria e scoring.
 # Deve restare deterministica e modificabile a mano.
@@ -7767,6 +7779,7 @@ def v721_ensure_italian_title(title, source_title="", source_text="", source_url
     context = extract_main_scoring_text(source_text or "", max_paragraphs=3, max_chars=900)
     prompt = f"""
 Sei un caporedattore italiano di news wrestling.
+{NATURAL_ITALIAN_STYLE_RULES_V806}
 Riscrivi SOLO il titolo in italiano naturale, corretto e pubblicabile.
 Non inventare fatti. Non usare inglese salvo nomi propri, show, federazioni e titoli ufficiali.
 Non tradurre nomi di titoli/cinture ufficiali WWE/AEW/TNA/NXT/ROH/NJPW/AAA.
@@ -7805,6 +7818,8 @@ Mantieni esattamente gli stessi ID dei blocchi. Non fondere blocchi diversi. Non
 Restituisci SOLO JSON valido in UNA SOLA RIGA nel formato: {{"blocks":{{"TEXT_001":"<p>...</p>"}}}}
 
 REGOLE:
+{NATURAL_ITALIAN_STYLE_RULES_V806}
+
 - Ogni blocco deve restare aderente al blocco originale corrispondente.
 - HTML consentito solo con <p>, <b>, <blockquote>.
 - Se un blocco e' titolo di sezione/match, rendilo come <p><b>...</b></p>.
@@ -9454,6 +9469,8 @@ Ricevi una traduzione gia corretta nei fatti, ma ancora troppo letterale. Devi f
 Restituisci SOLO JSON valido in UNA SOLA RIGA: {{"titolo":"...","testo":"html","categoria":{category}}}
 
 OBIETTIVO:
+{NATURAL_ITALIAN_STYLE_RULES_V806}
+
 - Rendere titolo e testo naturali, fluidi e giornalistici in italiano.
 - Eliminare calchi inglesi, ripetizioni e frasi macchinose.
 - Migliorare la localizzazione editoriale wrestling: naturalezza italiana, kayfabe chiaro, gergo corretto.
@@ -10554,6 +10571,8 @@ Ricevi una traduzione gia corretta nei fatti, ma ancora troppo letterale. Devi f
 Restituisci SOLO JSON valido in UNA SOLA RIGA: {{"titolo":"...","testo":"html","categoria":{category}}}
 
 OBIETTIVO:
+{NATURAL_ITALIAN_STYLE_RULES_V806}
+
 - Rendere titolo e testo naturali, fluidi e giornalistici in italiano.
 - Eliminare calchi inglesi, ripetizioni e frasi macchinose.
 - Migliorare la localizzazione editoriale wrestling: kayfabe chiaro, gergo corretto, frasi da sito italiano.
@@ -10924,7 +10943,7 @@ def v723_conservative_score_after_ai(initial_score, refined_score, refined_reaso
 # In v80.4 the GitHub workflow uploaded review_packages/, but the bot only
 # created the directory when REVIEW_PACKAGE_ENABLED=1 was explicitly set.
 # During the temporary review period we want packages to be automatic.
-BOT_VERSION = "v80_5_review_packages_default_on"
+BOT_VERSION = "v80_6_natural_italian_style_prompt"
 BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
 
 
