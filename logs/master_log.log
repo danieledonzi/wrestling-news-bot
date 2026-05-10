@@ -10220,3 +10220,139 @@ However, if you want to parse some data that happens to look like a URL, then no
 [BOT] Pubblicati 2 articoli (0 pending + 2 nuove) su 10 candidati provati | mode=normal
 ===== RUN END [2026-05-10 00:46:28] VERSION [v79_1_4_spoiler_semantics_outcome_obsolete (fcb0381)] =====
 
+
+===== RUN START [2026-05-10 01:05:31] VERSION [v79_1_5_stable_story_dedupe (441f5eb)] =====
+[WP] Health check API timeout | tentativo 1/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7fcc289f6fe0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Root /wp-json/ non raggiungibile | tentativo 1/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7fcc289f7370>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Health check API timeout | tentativo 2/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7fcc289f7610>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Root /wp-json/ non raggiungibile | tentativo 2/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7fcc289f7970>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Health check API timeout | tentativo 3/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7fcc289f7100>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Root /wp-json/ non raggiungibile | tentativo 3/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7fcc289f73a0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] WordPress/API non disponibile dopo 3 tentativi: api_timeout: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7fcc289f7100>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP v78] Skip lookup REST (wp_has_published_event): WordPress/API offline in cache (api_timeout: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7fcc289f7100>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)')))
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168799/aew-collision-mark-davis-jack-perry-national-championship/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): Grayson Waller Details Locker Room Gift Bought By Finn Balor When WWE Visited Ireland
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168786/wwe-backlash-2026-john-cena-new-event-championship-unique-rules/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168783/wwe-backlash-2026-iyo-sky-asuka-hug-victory/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (30/75): UFC 328 Results: Strickland Vs. Chimaev
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168770/wwe-backlash-2026-danhausen-mystery-partner-miz-kit-wilson/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168763/wwe-backlash-2026-trick-williams-retains-mens-us-title-wrestlemania-rematch-sami-zayn/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168754/wwe-backlash-bron-breakker-defeats-seth-rollins-opener/
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 50->50 - WWE Backlash 2026 Match Order Reportedly Revealed
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2168722/dave-meltzer-cmll-persephone-aew-ppv-injury/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167022/wwe-matt-hardy-eddie-guerrero-best-advice-bore-crowd/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167009/wwe-nxt-oba-femi-myles-borne-pizza-toss/
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite & Collision Viewership & Ratings Report, 5/6/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168663/wwe-wrestlemania-42-paul-heyman-brock-lesnar-retiring/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166518/wwe-nt-myles-borne-jelly-roll-finisher/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (22/75): Will Ospreay Explains What AEW & NJPW Have To Gain From Partnership
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168627/wwe-chelsea-green-health-update-heart-procedure/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SKIP] URL già in history: https://www.ringsidenews.com/john-cena-annonuces-plans-john-cena-classic-tournament-during-wwe-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/identity-wwes-minihausen-revealed-backlash-appearance/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-fans-hijack-backlash-match-loud-we-want-kairi-chants/
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (50/75): Gingerbread Man Meme Goes Completely Off The Rails After WWE SmackDown
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (50/75): Big E. Gets Loud "New Day Rocks!" Chants During 2026 WWE Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/kairi-sane-tampa-airport-sighting-rumor-shut-down-before-wwe-backlash/
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash Spoiler Lineup for May 9, 2026: Full Match Card and Backstage Notes Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash Spoiler Lineup for May 9, 2026: Full Match Card and Backstage Notes Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash Spoiler Lineup for May 9, 2026: Full Match Card and Backstage Notes Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 55->55 - WWE Backlash Spoiler Lineup for May 9, 2026: Full Match Card and Backstage Notes Revealed
+[SKIP] Score sotto soglia editoriale (50/75): WWE Backlash Spoiler Lineup for May 9, 2026: Full Match Card and Backstage Notes Revealed
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (31/75): Stephanie Vaquer's Ex-Boyfriend El Cuatrero Says "Not Everything Has Been Exposed" Following Guilty Verdict
+[SKIP] URL già in history: https://www.ringsidenews.com/spoiler-opening-match-revealed-2026-wwe-backlash/
+[SCORE] 96 high - Jacob Fatu Chokes Out Roman Reigns After Controversial Loss At WWE Backlash 2026 | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, combo top name titolo + evento forte, v71 freshness=0.725
+[SCORE] 95 high - Roman Reigns Tells Jacob Fatu "This Is Your Last Night Here" After WWE Backlash | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, titolo/championship, v62 titolo/championship, v71 freshness=0.578
+[SCORE] 95 high - Jacob Fatu Assaults Roman Reigns, Referee and WWE Officials After Backlash 2026 Loss | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, titolo/championship, v62 titolo/championship, v71 freshness=0.577
+[SCORE] 81 high - WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker | WWE/main roster, nomi forti titolo: seth rollins, WWE main roster + storyline/evento, titolo/championship, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.546
+[SCORE] 80 high - AEW Collision 5/9 Results - World & National Titles On The Line, Tag Champs In Action | AEW, show settimanale, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.583
+[SCORE] 75 medium - AEW Collision Fairway To Hell Results, Highlights and Key Moments for May 9, 2026 | AEW, show settimanale, v75 hard results report, v77 hard report protected, v71 source reliability soft penalty, v71 freshness=0.56
+[SCORE] 75 medium - WWE Backlash Results, Highlights and Key Moments for May 9, 2026 | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 source reliability soft penalty, v71 freshness=0.51
+[SCORE] 60 medium - WWE Announces First-Ever Two-Night TripleMania During Backlash | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.56, v48 tier2: 55-74
+[SCORE] 50 low - Danhausen Introduces Minihausen As WWE Backlash Mystery Tag Team Partner | WWE/main roster, nomi forti titolo: danhausen, WWE main roster + storyline/evento, floor WWE main roster storyline, v71 source reliability soft penalty, v71 freshness=0.557, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - WWE Backlash 2026 Match Order Reportedly Revealed | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, floor WWE main roster storyline, titolo vago, v79.1.4 pre-show spoiler obsoleto cap, v71 freshness=0.569, v48 tier3: 45-54 contestuale
+[MODE] Storm mode attiva: 3 news >=90, 5 news >=80
+[BOT] WordPress offline: assegno score e salvo solo i candidati che sarebbero stati pubblicati, senza chiamare Gemini.
+[PENDING] Coda salvata: 3 elementi
+[PENDING] Salvata news high (96): Jacob Fatu Chokes Out Roman Reigns After Controversial Loss At WWE Backlash 2026
+[PENDING] Coda salvata: 4 elementi
+[PENDING] Salvata news high (95): Roman Reigns Tells Jacob Fatu "This Is Your Last Night Here" After WWE Backlash
+[PENDING] Coda salvata: 5 elementi
+[PENDING] Salvata news high (95): Jacob Fatu Assaults Roman Reigns, Referee and WWE Officials After Backlash 2026 Loss
+[PENDING] Coda salvata: 6 elementi
+[PENDING] Salvata news high (81): WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker
+[PENDING] Coda salvata: 7 elementi
+[PENDING] Salvata news high (80): AEW Collision 5/9 Results - World & National Titles On The Line, Tag Champs In Action
+[PENDING] Candidati salvati per dopo: 5
+===== RUN END [2026-05-10 01:05:31] VERSION [v79_1_5_stable_story_dedupe (441f5eb)] =====
+
