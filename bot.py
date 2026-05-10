@@ -11548,6 +11548,311 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     return status
 
 
+
+# =========================
+# v81: stable review archive + tighter semantic guardrails
+# =========================
+# Scope:
+# - Store published review HTML in a single flat GitHub-tracked folder.
+# - Narrow v80.9 career/status guardrail so storyline threats like "last night here" do not trigger it.
+# - Add a conservative post-edit preservation pass to catch omitted source facts.
+# - Add wrestling lexical cleanup for hold/release contexts.
+
+BOT_VERSION = "v81_translation_preservation_and_flat_review_archive"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+# ---- v81 career/status guardrail: narrower trigger set ----
+# v80.9 was intentionally broad, but it could trigger on generic future/storyline language.
+# v81 only activates the semantic career repair when the source contains explicit career/contract/medical terms.
+V81_CAREER_STATUS_SOURCE_TERMS = [
+    "retirement", "retire", "retired", "semi-retired", "semi retired", "retires",
+    "released", "release", "roster cuts", "cut from the roster", "future endeavored",
+    "contract", "free agent", "free agency", "expiring deal", "deal expires",
+    "cleared", "not cleared", "medically cleared", "injury status", "medical status",
+    "career status", "wwe status", "status with wwe", "status in wwe",
+]
+
+V81_CAREER_STATUS_PROTECT_FACT_TERMS = V81_CAREER_STATUS_SOURCE_TERMS[:]
+
+
+def v809_source_has_career_status_concept(source_title="", source_text=""):
+    probe = normalize_for_check(f"{source_title} {(source_text or '')[:5000]}")
+    return any(term in probe for term in V81_CAREER_STATUS_SOURCE_TERMS)
+
+
+def v809_extract_career_status_source_excerpt(source_title="", source_text=""):
+    raw = f"{source_title}\n{source_text or ''}"
+    pieces = []
+    for sent in re.split(r"(?<=[.!?])\s+|\n+", raw):
+        low = normalize_for_check(sent)
+        if any(term in low for term in V81_CAREER_STATUS_PROTECT_FACT_TERMS):
+            clean = sanitize_text(sent)
+            if clean and clean not in pieces:
+                pieces.append(clean)
+        if len(" ".join(pieces)) > 1200:
+            break
+    return "\n".join(pieces[:8])[:1800]
+
+
+# ---- v81 Italian cleanup for wrestling actions ----
+def v81_cleanup_wrestling_action_language(html=""):
+    if not html:
+        return html
+    out = str(html)
+    # "released the hold" is a wrestling/action phrase: in Italian it should be lasciare/mollare la presa,
+    # not svincolare. Keep this deterministic and narrow.
+    out = re.sub(r"\bsvincolat[oa]\s+la\s+presa\b", "lasciato la presa", out, flags=re.I)
+    out = re.sub(r"\bha\s+svincolato\s+la\s+presa\b", "ha lasciato la presa", out, flags=re.I)
+    out = re.sub(r"\bsvincolare\s+la\s+presa\b", "lasciare la presa", out, flags=re.I)
+    out = re.sub(r"\brilasciat[oa]\s+la\s+presa\b", "lasciato la presa", out, flags=re.I)
+    out = re.sub(r"\bha\s+rilasciato\s+la\s+presa\b", "ha lasciato la presa", out, flags=re.I)
+    # Common post-edit artifact: duplicated "Spear" capitalization is acceptable, but "lo ha schiantato con una Spear"
+    # after "al rimbalzo" sounds clunky. Keep conservative.
+    out = re.sub(r"\bal\s+rimbalzo,\s+lo\s+ha\s+schiantato\s+con\s+una\s+Spear\b", "al rimbalzo, lo ha colpito con una Spear", out, flags=re.I)
+    return out
+
+
+def v81_plain_text_from_html(html=""):
+    try:
+        return sanitize_text(BeautifulSoup(html or "", "html.parser").get_text(" ", strip=True))
+    except Exception:
+        return sanitize_text(str(html or ""))
+
+
+def v81_word_count(text=""):
+    return len(re.findall(r"\b\w+\b", normalize_for_check(text or "")))
+
+
+def v81_source_sentences(source_text=""):
+    text = sanitize_text(BeautifulSoup(source_text or "", "html.parser").get_text(" ", strip=True))
+    if not text:
+        text = sanitize_text(source_text or "")
+    pieces = []
+    for sent in re.split(r"(?<=[.!?])\s+|\n+", text):
+        sent = sanitize_text(sent)
+        if len(sent) >= 35:
+            pieces.append(sent)
+    return pieces[:18]
+
+
+def v81_translation_may_have_omissions(source_text="", html=""):
+    if not source_text or not html:
+        return False, ""
+    source_plain = sanitize_text(source_text)
+    final_plain = v81_plain_text_from_html(html)
+    sw = v81_word_count(source_plain)
+    fw = v81_word_count(final_plain)
+    if sw < 120 or fw < 80:
+        return False, "short_text"
+    ratio = fw / max(sw, 1)
+    # Italian can be slightly shorter than English, but below this threshold after post-edit is suspicious.
+    if ratio < float(os.getenv("V81_MIN_TRANSLATION_WORD_RATIO", "0.78")):
+        return True, f"word_ratio={ratio:.2f} ({fw}/{sw})"
+    # Additional high-signal omission heuristic: source contains multiple sequential post-match action cues,
+    # but the final text lacks equivalents for the later action.
+    src_low = normalize_for_check(source_plain)
+    fin_low = normalize_for_check(final_plain)
+    source_action_cluster = any(t in src_low for t in ["reapplied", "applied it again", "locked in", "locked it in"]) and any(t in src_low for t in ["raised", "held up", "belt", "championship"])
+    final_action_missing = not any(t in fin_low for t in ["riapplic", "applicato di nuovo", "messo di nuovo", "alzato", "sollevato", "cintura", "championship"])
+    if source_action_cluster and final_action_missing:
+        return True, "missing_post_match_action_cluster"
+    return False, "ok"
+
+
+def v81_repair_possible_omissions(html="", source_title="", source_text=""):
+    suspicious, reason = v81_translation_may_have_omissions(source_text, html)
+    if not suspicious:
+        return html
+    source_excerpt = "\n".join(v81_source_sentences(source_text))[:4500]
+    current_html = str(html or "")[:6000]
+    if not source_excerpt or not current_html:
+        return html
+    prompt = f"""
+Sei un editor italiano di wrestling. Devi controllare se una traduzione HTML ha omesso fatti presenti nell'originale inglese.
+Restituisci SOLO JSON valido in una riga: {{"html":"..."}}
+
+OBIETTIVO:
+- Mantieni l'HTML semplice (<p>, <blockquote>, <a>, <b>, <hr> se già presenti).
+- Non riassumere.
+- Non aggiungere fatti esterni.
+- Se nella traduzione mancano frasi/fatti dell'originale, reinseriscili nella posizione corretta.
+- Non cambiare nomi, date, eventi, titoli ufficiali o citazioni.
+- Mantieni uno stile italiano naturale giornalistico.
+- Se non manca nulla, restituisci l'HTML invariato.
+
+MOTIVO CONTROLLO:
+{reason}
+
+TITOLO ORIGINALE:
+{source_title}
+
+TESTO ORIGINALE INGLESE:
+{source_excerpt}
+
+HTML ITALIANO ATTUALE:
+{current_html}
+""".strip()
+    try:
+        data, used_model = generate_and_parse_json(prompt)
+        repaired = str(data.get("html", "") or "").strip()
+        if repaired and len(v81_plain_text_from_html(repaired)) >= len(v81_plain_text_from_html(html)):
+            repaired = fix_mojibake(repaired)
+            repaired = v81_cleanup_wrestling_action_language(repaired)
+            still_suspicious, still_reason = v81_translation_may_have_omissions(source_text, repaired)
+            # Accept if fixed, or if it at least materially restores content without going wild.
+            if not still_suspicious or v81_word_count(v81_plain_text_from_html(repaired)) >= v81_word_count(v81_plain_text_from_html(html)) + 20:
+                print(f"[PRESERVE v81] Repair anti-omissione applicato con {used_model}: {reason}")
+                return repaired
+            print(f"[PRESERVE v81] Repair anti-omissione scartato: {still_reason}")
+    except Exception as e:
+        print(f"[PRESERVE v81] Repair anti-omissione fallito: {e}")
+    return html
+
+
+# Wrap post-edit after v80/v80.9 so this is the final textual safety pass before publication.
+_ORIG_V81_v79_editorial_post_edit = v79_editorial_post_edit
+
+def v79_editorial_post_edit(news_data, source_title="", source_text="", source_url=""):
+    news_data = _ORIG_V81_v79_editorial_post_edit(news_data, source_title, source_text, source_url)
+    if news_data and news_data.get("testo"):
+        before = news_data.get("testo", "")
+        after = v81_cleanup_wrestling_action_language(before)
+        after = v81_repair_possible_omissions(after, source_title, source_text)
+        after = v81_cleanup_wrestling_action_language(after)
+        if after != before:
+            news_data["testo"] = after
+            print("[PRESERVE v81] Guardrail finale testo applicato")
+    return news_data
+
+
+# ---- v81 flat published HTML archive ----
+# One folder, all files at the top level, easy to bulk download after several runs.
+PUBLISHED_HTML_REVIEW_FLAT = os.getenv("PUBLISHED_HTML_REVIEW_FLAT", "1").strip().lower() not in {"0", "false", "no", "off"}
+_PUBLISHED_HTML_REVIEW_ITEMS = []
+
+
+def published_html_review_run_dir():
+    # Kept for backward compatibility, but v81 flat mode writes directly into PUBLISHED_HTML_REVIEW_DIR.
+    if not PUBLISHED_HTML_REVIEW_ENABLED:
+        return None
+    PUBLISHED_HTML_REVIEW_DIR.mkdir(parents=True, exist_ok=True)
+    return PUBLISHED_HTML_REVIEW_DIR
+
+
+def _v81_review_base_filename(idx, title, url):
+    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    slug = _published_review_safe_slug(title or url or "article")[:80]
+    digest = hashlib.sha1(f"{RUN_ID}|{url}|{title}|{idx}".encode("utf-8", errors="ignore")).hexdigest()[:8]
+    return f"{stamp}_{idx:03d}_{slug}_{digest}"
+
+
+def save_published_html_review_item(item):
+    """v81 flat archive for published articles only.
+
+    Writes:
+      published_html_review/<timestamp>_<idx>_<slug>_<hash>_original.html
+      published_html_review/<timestamp>_<idx>_<slug>_<hash>_final.html
+      published_html_review/<timestamp>_<idx>_<slug>_<hash>_metadata.json
+      published_html_review/index.json
+    """
+    if not PUBLISHED_HTML_REVIEW_ENABLED or not isinstance(item, dict):
+        return
+    try:
+        original_html = item.get("_review_original_html") or ""
+        final_html = item.get("_review_translated_html") or ""
+        title = sanitize_text(item.get("_review_translated_title") or item.get("title") or "untitled")
+        source_title = sanitize_text(item.get("title") or "")
+        url = item.get("url", "")
+        if not original_html and not final_html:
+            print(f"[PUBLISHED REVIEW v81] Nessun HTML da salvare per: {title}")
+            return
+        base = published_html_review_run_dir()
+        if not base:
+            return
+        idx = len(_PUBLISHED_HTML_REVIEW_ITEMS) + 1
+        name = _v81_review_base_filename(idx, title, url)
+        original_file = f"{name}_original.html" if original_html else ""
+        final_file = f"{name}_final.html" if final_html else ""
+        metadata_file = f"{name}_metadata.json"
+        if original_html:
+            (base / original_file).write_text(_published_review_maybe_truncate(original_html), encoding="utf-8")
+        if final_html:
+            (base / final_file).write_text(_published_review_maybe_truncate(final_html), encoding="utf-8")
+        metadata = {
+            "run_id": RUN_ID,
+            "bot_version": BOT_VERSION_FULL,
+            "git_sha": GIT_SHA,
+            "created_at": datetime.now().isoformat(timespec="seconds"),
+            "source_title": source_title,
+            "final_title": title,
+            "source_url": url,
+            "category_id": item.get("_review_final_category", item.get("category_id", "")),
+            "category_slug": item.get("category_slug", ""),
+            "article_type": item.get("article_type_v68", ""),
+            "semantic_id": item.get("semantic_id", ""),
+            "story_signature_v71": item.get("story_signature_v71", ""),
+            "refined_score": item.get("_review_refined_score", ""),
+            "refined_reasons": item.get("_review_refined_reasons", []),
+            "blocks_summary": item.get("_review_blocks_summary", {}),
+            "embed_urls": item.get("_review_embed_urls", []),
+            "inline_images": item.get("_review_inline_images", []),
+            "original_html_file": original_file,
+            "final_html_file": final_file,
+            "metadata_file": metadata_file,
+        }
+        (base / metadata_file).write_text(json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8")
+        record = {
+            "run_id": RUN_ID,
+            "title": title,
+            "url": url,
+            "original_html_file": original_file,
+            "final_html_file": final_file,
+            "metadata_file": metadata_file,
+        }
+        _PUBLISHED_HTML_REVIEW_ITEMS.append(record)
+        print(f"[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: {base / name}_*.html")
+    except Exception as e:
+        print(f"[PUBLISHED REVIEW v81] Errore salvataggio HTML pubblicato: {e}")
+
+
+def finalize_published_html_review_index():
+    if not PUBLISHED_HTML_REVIEW_ENABLED:
+        return
+    try:
+        base = published_html_review_run_dir()
+        if not base:
+            return
+        index_path = base / "index.json"
+        existing = []
+        if index_path.exists():
+            try:
+                existing_data = json.loads(index_path.read_text(encoding="utf-8"))
+                existing = list(existing_data.get("items", []))
+            except Exception:
+                existing = []
+        combined = existing + _PUBLISHED_HTML_REVIEW_ITEMS
+        index = {
+            "schema": "owtv_published_html_review_flat_v81",
+            "last_run_id": RUN_ID,
+            "last_bot_version": BOT_VERSION_FULL,
+            "updated_at": datetime.now().isoformat(timespec="seconds"),
+            "total_items": len(combined),
+            "items": combined,
+        }
+        index_path.write_text(json.dumps(index, ensure_ascii=False, indent=2), encoding="utf-8")
+        run_summary = {
+            "run_id": RUN_ID,
+            "bot_version": BOT_VERSION_FULL,
+            "git_sha": GIT_SHA,
+            "published_items_count": len(_PUBLISHED_HTML_REVIEW_ITEMS),
+            "items": _PUBLISHED_HTML_REVIEW_ITEMS,
+        }
+        (base / f"run_{RUN_ID}_summary.json").write_text(json.dumps(run_summary, ensure_ascii=False, indent=2), encoding="utf-8")
+        print(f"[PUBLISHED REVIEW v81] Index flat salvato: {index_path}")
+    except Exception as e:
+        print(f"[PUBLISHED REVIEW v81] Errore index HTML pubblicati: {e}")
+
+
 # =========================
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 # =========================
