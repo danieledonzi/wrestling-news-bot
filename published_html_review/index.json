@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-10 19:56:12",
-  "last_bot_version": "v81_translation_preservation_and_flat_review_archive (c019c21)",
-  "updated_at": "2026-05-10T19:57:51",
-  "total_items": 6,
+  "last_run_id": "2026-05-10 20:42:41",
+  "last_bot_version": "v81_translation_preservation_and_flat_review_archive (4b10cbc)",
+  "updated_at": "2026-05-10T20:44:30",
+  "total_items": 7,
   "items": [
     {
       "run_id": "2026-05-10 14:39:11",
@@ -52,6 +52,14 @@
       "original_html_file": "20260510_185452_001_nxt-myles-borne-la-sorpresa-per-il-titolo-nordamericano_0db6319c_original.html",
       "final_html_file": "20260510_185452_001_nxt-myles-borne-la-sorpresa-per-il-titolo-nordamericano_0db6319c_final.html",
       "metadata_file": "20260510_185452_001_nxt-myles-borne-la-sorpresa-per-il-titolo-nordamericano_0db6319c_metadata.json"
+    },
+    {
+      "run_id": "2026-05-10 20:42:41",
+      "title": "Trick Williams (WWE US Champ): \"Non tutti meritano una shot al titolo\"",
+      "url": "https://www.wrestlinginc.com/2169121/wwe-us-champ-trick-williams-not-everyone-worthy-title-shot/",
+      "original_html_file": "20260510_204412_001_trick-williams-wwe-us-champ-non-tutti-meritano-una-shot-al-titolo_2d69b95d_original.html",
+      "final_html_file": "20260510_204412_001_trick-williams-wwe-us-champ-non-tutti-meritano-una-shot-al-titolo_2d69b95d_final.html",
+      "metadata_file": "20260510_204412_001_trick-williams-wwe-us-champ-non-tutti-meritano-una-shot-al-titolo_2d69b95d_metadata.json"
     }
   ]
 }
