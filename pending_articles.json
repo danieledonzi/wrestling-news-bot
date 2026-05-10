@@ -1,178 +1,11 @@
 [
   {
-    "url": "https://www.wrestlinginc.com/2168808/wwe-backlash-2026-jacob-fatu-roman-reigns-controversial-loss/",
-    "title": "Jacob Fatu Chokes Out Roman Reigns After Controversial Loss At WWE Backlash 2026",
-    "semantic_id": "jacob-fatu-chokes-out-roman-reigns-after-controversial-loss-at-wwe-backlash-2026",
-    "title_key": "jacob-fatu-chokes-out-roman-reigns-controversial-loss-backlash",
-    "score": 96,
-    "priority": "high",
-    "event_key": "event:title:roman-reigns:world",
-    "story_signature_v71": "roman_reigns|jacob_fatu|jacob_fatu_chokes_out|death|wwe|backlash",
-    "summary": "Roman Reigns may still be World Heavyweight Champion after WWE Backlash, but it was Jacob Fatu who stood tall after choking him out with the Tongan Death Grip.",
-    "reasons": [
-      "WWE/main roster",
-      "top star titolo: roman reigns",
-      "WWE main roster + storyline/evento",
-      "combo top name titolo + evento forte",
-      "v71 freshness=0.725"
-    ],
-    "score_reasons": [
-      "WWE/main roster",
-      "top star titolo: roman reigns",
-      "WWE main roster + storyline/evento",
-      "combo top name titolo + evento forte",
-      "v71 freshness=0.725"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1778396451.0,
-    "status": "raw",
-    "reason": "wp_down_initial_storm",
-    "created_at": 1778375218.3255076,
-    "attempts": 0
-  },
-  {
-    "url": "https://www.ringsidenews.com/jacob-fatu-assaults-roman-reigns-referee-wwe-officials-backlash-2026-loss/",
-    "title": "Jacob Fatu Assaults Roman Reigns, Referee and WWE Officials After Backlash 2026 Loss",
-    "semantic_id": "jacob-fatu-assaults-roman-reigns-referee-and-wwe-officials-after-backlash-2026-loss",
-    "title_key": "jacob-fatu-assaults-roman-reigns-referee-officials-backlash-loss",
-    "score": 95,
-    "priority": "high",
-    "event_key": "event:title:roman-reigns:world:international:championship",
-    "story_signature_v71": "stable:roman_reigns|jacob_fatu|defending_the_world_heavyweight_championship|wwe|backlash",
-    "summary": "Backlash 2026 went down at the Benchmark International Arena in Tampa, Florida. The main event all came down to Roman Reigns defending the World Heavyweight Championship against Jacob Fatu. The ...",
-    "reasons": [
-      "WWE/main roster",
-      "top star titolo: roman reigns",
-      "WWE main roster + storyline/evento",
-      "titolo/championship",
-      "v62 titolo/championship",
-      "v71 freshness=0.577"
-    ],
-    "score_reasons": [
-      "WWE/main roster",
-      "top star titolo: roman reigns",
-      "WWE main roster + storyline/evento",
-      "titolo/championship",
-      "v62 titolo/championship",
-      "v71 freshness=0.577"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1778395841.0,
-    "status": "raw",
-    "reason": "wp_down_initial_storm",
-    "created_at": 1778375223.187075,
-    "attempts": 0
-  },
-  {
-    "url": "https://www.ringsidenews.com/roman-reigns-tells-jacob-fatu-this-your-last-night-here-wwe-backlash/",
-    "title": "Roman Reigns Tells Jacob Fatu \"This Is Your Last Night Here\" After WWE Backlash",
-    "semantic_id": "roman-reigns-tells-jacob-fatu-this-is-your-last-night-here-after-wwe-backlash",
-    "title_key": "roman-reigns-tells-jacob-fatu-this-is-your-last-here-backlash",
-    "score": 95,
-    "priority": "high",
-    "event_key": "event:title:roman-reigns:world:championship",
-    "story_signature_v71": "stable:roman_reigns|jacob_fatu|in_the_world_heavyweight_championship|wwe|backlash",
-    "summary": "Roman Reigns sent a chilling message to Jacob Fatu after the chaos that closed out WWE Backlash. After barely surviving Fatu in the World Heavyweight Championship main event, Reigns was ...",
-    "reasons": [
-      "WWE/main roster",
-      "top star titolo: roman reigns",
-      "WWE main roster + storyline/evento",
-      "titolo/championship",
-      "v62 titolo/championship",
-      "v71 freshness=0.578"
-    ],
-    "score_reasons": [
-      "WWE/main roster",
-      "top star titolo: roman reigns",
-      "WWE main roster + storyline/evento",
-      "titolo/championship",
-      "v62 titolo/championship",
-      "v71 freshness=0.578"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1778396153.0,
-    "status": "raw",
-    "reason": "wp_down_initial_storm",
-    "created_at": 1778375222.6891546,
-    "attempts": 0
-  },
-  {
-    "url": "https://www.wrestlinginc.com/2168358/wwe-backlash-2026-two-titles-on-line-seth-rollins-bron-breakker/",
-    "title": "WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker",
-    "semantic_id": "wwe-backlash-results-59-two-titles-on-the-line-seth-rollins-faces-bron-breakker",
-    "title_key": "backlash-results-5-9-two-line-seth-rollins-faces-bron-breakker",
-    "score": 81,
-    "priority": "high",
-    "event_key": "",
-    "story_signature_v71": "seth_rollins|wwe_backlash_results|two_titles_on_the|report|wwe|backlash",
-    "summary": "This is Wrestling Inc.'s results for WWE Backlash 2026, with the World Heavyweight & United States Championships both set to be defended!",
-    "reasons": [
-      "WWE/main roster",
-      "nomi forti titolo: seth rollins",
-      "WWE main roster + storyline/evento",
-      "titolo/championship",
-      "v62 titolo/championship",
-      "v75 hard results report",
-      "v77 hard report protected",
-      "v71 freshness=0.546"
-    ],
-    "score_reasons": [
-      "WWE/main roster",
-      "nomi forti titolo: seth rollins",
-      "WWE main roster + storyline/evento",
-      "titolo/championship",
-      "v62 titolo/championship",
-      "v75 hard results report",
-      "v77 hard report protected",
-      "v71 freshness=0.546"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1778378400.0,
-    "status": "raw",
-    "reason": "wp_down_initial_storm",
-    "created_at": 1778375221.4173815,
-    "attempts": 0
-  },
-  {
-    "url": "https://www.wrestlinginc.com/2168755/aew-collision-may-9-results/",
-    "title": "AEW Collision 5/9 Results - World & National Titles On The Line, Tag Champs In Action",
-    "semantic_id": "aew-collision-59-results-world-national-titles-on-the-line-tag-champs-in-action",
-    "title_key": "collision-5-9-results-world-national-line-tag-champs-action",
-    "score": 80,
-    "priority": "high",
-    "event_key": "event:title:darby-allin:world:tag:collision",
-    "story_signature_v71": "stable:darby_allin|jack_perry|report",
-    "summary": "\"AEW Collision: Fairway to Hell\" will have Darby Allin and \"Jungle\" Jack Perry defending their respective titles.",
-    "reasons": [
-      "AEW",
-      "show settimanale",
-      "v62 titolo/championship",
-      "v75 hard results report",
-      "v77 hard report protected",
-      "v71 freshness=0.583"
-    ],
-    "score_reasons": [
-      "AEW",
-      "show settimanale",
-      "v62 titolo/championship",
-      "v75 hard results report",
-      "v77 hard report protected",
-      "v71 freshness=0.583"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1778389096.0,
-    "status": "raw",
-    "reason": "wp_down_initial_storm",
-    "created_at": 1778375218.7285266,
-    "attempts": 0
-  },
-  {
     "kind": "report",
     "url": "https://www.ringsidenews.com/aew-collision-fairway-hell-results-highlights-key-moments-may-9-2026/",
     "title": "AEW Collision Fairway To Hell Results, Highlights and Key Moments for May 9, 2026",
     "semantic_id": "report-aew-collision-2026-05-09",
     "title_key": "collision-fairway-hell-results-highlights-key-moments-may-9",
-    "score": 75,
+    "score": 80,
     "priority": "medium",
     "event_key": "report:aew-collision-2026-05-09",
     "report_event_key": "report:aew-collision-2026-05-09",
@@ -191,7 +24,8 @@
       "v77 hard report protected",
       "v71 source reliability soft penalty",
       "v71 freshness=0.564",
-      "report live: pubblicazione ritardata"
+      "report live: pubblicazione ritardata",
+      "report live aggregato"
     ],
     "is_breaking": false,
     "breaking_expires_at": 0,
@@ -199,7 +33,7 @@
     "reason": "report_live_delay",
     "created_at": 1778369460.0,
     "first_seen": 1778369460.0,
-    "last_seen": 1778374059.4599142,
+    "last_seen": 1778380123.520806,
     "not_before": 1778382060.0,
     "attempts": 0,
     "sources": [
@@ -208,8 +42,16 @@
         "title": "AEW Collision Fairway To Hell Results, Highlights and Key Moments for May 9, 2026",
         "source": "www.ringsidenews.com",
         "first_seen": 1778369460.0,
-        "last_seen": 1778374059.4599142,
-        "last_text_len": 5288
+        "last_seen": 1778380123.520806,
+        "last_text_len": 9452
+      },
+      {
+        "url": "https://www.wrestlinginc.com/2168755/aew-collision-may-9-results/",
+        "title": "AEW Collision 5/9 Results - World & National Titles On The Line, Tag Champs In Action",
+        "source": "www.wrestlinginc.com",
+        "first_seen": 1778380108.1390662,
+        "last_seen": 1778380108.1390662,
+        "last_text_len": 6759
       }
     ],
     "story_signature_v71": "aew_collision_fairway_to|hell_results|key_moments|report|aew|collision"

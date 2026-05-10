@@ -10356,3 +10356,508 @@ However, if you want to parse some data that happens to look like a URL, then no
 [PENDING] Candidati salvati per dopo: 5
 ===== RUN END [2026-05-10 01:05:31] VERSION [v79_1_5_stable_story_dedupe (441f5eb)] =====
 
+
+===== RUN START [2026-05-10 02:26:45] VERSION [v79_1_5_stable_story_dedupe (f8b71ae)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[PERF v71] WP lookup event_key: 0.90s
+[PENDING] Rimuovo report già pubblicato: report:wwe-smackdown-2026-05-08
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (0/75): WWE Backlash 2026: 3 Things We Hated & 3 Things We Loved
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SCORE v79.1.2] Spoiler validato: floor 44->75 - Darby Allin Defeats PAC, Survives Latest AEW World Title Defense On Collision
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:title:roman-reigns:world - Jacob Fatu Chokes Out Roman Reigns After Controversial Loss At WWE Backlash 2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168799/aew-collision-mark-davis-jack-perry-national-championship/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): Grayson Waller Details Locker Room Gift Bought By Finn Balor When WWE Visited Ireland
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168786/wwe-backlash-2026-john-cena-new-event-championship-unique-rules/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168783/wwe-backlash-2026-iyo-sky-asuka-hug-victory/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (30/75): UFC 328 Results: Strickland Vs. Chimaev
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168770/wwe-backlash-2026-danhausen-mystery-partner-miz-kit-wilson/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168763/wwe-backlash-2026-trick-williams-retains-mens-us-title-wrestlemania-rematch-sami-zayn/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168754/wwe-backlash-bron-breakker-defeats-seth-rollins-opener/
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 50->50 - WWE Backlash 2026 Match Order Reportedly Revealed
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2168722/dave-meltzer-cmll-persephone-aew-ppv-injury/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167022/wwe-matt-hardy-eddie-guerrero-best-advice-bore-crowd/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167009/wwe-nxt-oba-femi-myles-borne-pizza-toss/
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite & Collision Viewership & Ratings Report, 5/6/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168663/wwe-wrestlemania-42-paul-heyman-brock-lesnar-retiring/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166518/wwe-nt-myles-borne-jelly-roll-finisher/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP v71] Story signature gia' in history: stable:minihausen|danhausen|identity_reveal|wwe|backlash - Jonathan Coachman Calls Danhausen Experiment a Waste of Time and He's Over It
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:title:roman-reigns:world:championship - Roman Reigns Tells Jacob Fatu "This Is Your Last Night Here" After WWE Backlash
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SKIP] URL già in history: https://www.ringsidenews.com/john-cena-annonuces-plans-john-cena-classic-tournament-during-wwe-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/identity-wwes-minihausen-revealed-backlash-appearance/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-fans-hijack-backlash-match-loud-we-want-kairi-chants/
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (50/75): Gingerbread Man Meme Goes Completely Off The Rails After WWE SmackDown
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (50/75): Big E. Gets Loud "New Day Rocks!" Chants During 2026 WWE Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/kairi-sane-tampa-airport-sighting-rumor-shut-down-before-wwe-backlash/
+[SCORE] 96 high - Jacob Fatu Chokes Out Roman Reigns After Controversial Loss At WWE Backlash 2026 | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, combo top name titolo + evento forte, v71 freshness=0.709
+[SCORE] 95 high - Roman Reigns Tells Jacob Fatu "This Is Your Last Night Here" After WWE Backlash | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, titolo/championship, v62 titolo/championship, v71 freshness=0.561
+[SCORE] 95 high - Jacob Fatu Assaults Roman Reigns, Referee and WWE Officials After Backlash 2026 Loss | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, titolo/championship, v62 titolo/championship, v71 freshness=0.56
+[SCORE] 81 high - WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker | WWE/main roster, nomi forti titolo: seth rollins, WWE main roster + storyline/evento, titolo/championship, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.529
+[SCORE] 80 high - AEW Collision 5/9 Results - World & National Titles On The Line, Tag Champs In Action | AEW, show settimanale, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.566
+[SCORE] 75 medium - Darby Allin Defeats PAC, Survives Latest AEW World Title Defense On Collision | AEW, show settimanale, v62 titolo/championship, v79.1.2 spoiler live/pre-show floor 44->75, v71 freshness=0.602
+[SCORE] 75 medium - AEW Collision Fairway To Hell Results, Highlights and Key Moments for May 9, 2026 | AEW, show settimanale, v75 hard results report, v77 hard report protected, v71 source reliability soft penalty, v71 freshness=0.543
+[SCORE] 60 medium - AEW Announces Huge Women's Title Match For Double Or Nothing 2026 | AEW, titolo/championship, PLE/PPV, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.565, v48 tier2: 55-74
+[SCORE] 60 medium - WWE Announces First-Ever Two-Night TripleMania During Backlash | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.543, v48 tier2: 55-74
+[SCORE] 50 low - Big E Raises Questions About Asuka's WWE Future After Emotional Backlash Moment | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v71 source reliability soft penalty, v71 freshness=0.566, v48 tier3: 45-54 contestuale
+[MODE] Storm mode attiva: 3 news >=90, 5 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 6
+[BOT] Elaborazione: Jacob Fatu Chokes Out Roman Reigns After Controversial Loss At WWE Backlash 2026
+[BOT] semantic_id=jacob-fatu-chokes-out-roman-reigns-after-controversial-loss-at-wwe-backlash-2026
+[SCORE] iniziale=96 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[EDITORIAL v72.3] type=RESULTS_REPORT conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash-lite | L'articolo descrive i risultati di un evento già avvenuto (WWE Backlash 2026), inclusi match, svolgimenti e post-match.
+[EDITORIAL v72.3] translation_notes=Il titolo "Jacob Fatu Chokes Out Roman Reigns After Controversial Loss" va tradotto in modo da riflettere un esito a posteriori. "Chokes Out" non è una semplice sottomissione ma un; I nomi ufficiali dei titoli (World Heavyweight Champion) vanno mantenuti in inglese.; Le mosse speciali (Tongan Death Grip, Superman Punch, Samoan Drop, Mighty Moonsault, Swanton, spear) vanno tradotte o adattate al contesto italiano, evitando calchi diretti ma mant
+[PERF v71] analisi editoriale AI v72: 2.94s
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SCORE v79.1.3] Recovery post-show 54->95 - Jacob Fatu Chokes Out Roman Reigns After Controversial Loss At WWE Backlash 2026
+[SCORE] raffinato=95 priority=high | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, combo top name titolo + evento forte, v66 cap opinion/commentary storyline, v68 cap opinion senza news concreta, v76 cap death/funeral storyline-comedy, v79.1.3 post-show recovery 54->95
+[V71] story_signature=roman_reigns|jacob_fatu|jacob_fatu_chokes_out|death|wwe|backlash semantic_status=new_story freshness=0.727
+[PERF v71] WP recent posts dedupe: 1.13s
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:title:roman-reigns:world - Jacob Fatu Chokes Out Roman Reigns After Controversial Loss At WWE Backlash 2026
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.51s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=5
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwe-backlash-2026-jacob-fatu-roman-reigns-controversial-loss/intro-1778375117.jpg
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[POSTEDIT v79] Testo rifinito con: gemini-2.5-flash-lite
+[PERF v71] traduzione: 5.16s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): WWE Backlash 2026: Fatu domina Reigns, ma la cintura resta al campione
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.34s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-backlash-2026-jacob-fatu-roman-reigns-controversial-loss/l-intro-1778375117.jpg
+[MEDIA] Immagine caricata: 4145
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.96s
+[PERF v71] totale articolo pubblicato 'Jacob Fatu Chokes Out Roman Reigns After Controversial Loss ': 14.33s
+[OK] Pubblicato: WWE Backlash 2026: Fatu domina Reigns, ma la cintura resta al campione
+[PENDING] Coda salvata: 6 elementi
+[BOT] Elaborazione: Jacob Fatu Assaults Roman Reigns, Referee and WWE Officials After Backlash 2026 Loss
+[BOT] semantic_id=jacob-fatu-assaults-roman-reigns-referee-and-wwe-officials-after-backlash-2026-loss
+[SCORE] iniziale=95 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=0, embed=5
+[BOT] Embed trovati: 6
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[EDITORIAL v72.3] type=RESULTS_REPORT conf=0.95 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo descrive i risultati di un evento (Backlash 2026) e include un segmento post-match di attacco, rientrando quindi nella categoria RESULTS_REPORT. Il focus principale è sulla WWE.
+[EDITORIAL v72.3] translation_notes=I nomi dei titoli ufficiali devono rimanere in inglese (es. World Heavyweight Championship).; Il termine 'released' non deve essere tradotto come 'rilasciato' ma adattato al contesto (es. 'licenziato' o 'addio').; Le citazioni e i dialoghi vanno tradotti fedelmente senza parafrasi.
+[PERF v71] analisi editoriale AI v72: 2.03s
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SCORE v79.1.3] Recovery post-show 54->95 - Jacob Fatu Assaults Roman Reigns, Referee and WWE Officials After Backlash 2026 Loss
+[SCORE] raffinato=95 priority=high | WWE/main roster, top star titolo: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, combo top name titolo + evento forte, show settimanale, v62 ritorno/debutto, v76 cap death/funeral storyline-comedy, v79.1.3 post-show recovery 54->95
+[V71] story_signature=stable:roman_reigns|jacob_fatu|defending_the_world_heavyweight_championship|announcement|wwe|backlash semantic_status=new_story freshness=0.813
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=6
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[POSTEDIT v79] Testo rifinito con: gemini-2.5-flash-lite
+[PERF v71] traduzione: 5.38s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Jacob Fatu attacca Roman Reigns e funzionari WWE dopo la sconfitta a Backlash 2026
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.31s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/jacob-fatu-assaults-roman-reigns-referee-and-wwe-officials-after-backlash-2026-loss-09.png
+[MEDIA] Immagine caricata: 4148
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.74s
+[PERF v71] totale articolo pubblicato 'Jacob Fatu Assaults Roman Reigns, Referee and WWE Officials ': 11.40s
+[OK] Pubblicato: Jacob Fatu attacca Roman Reigns e funzionari WWE dopo la sconfitta a Backlash 2026
+[PENDING] Coda salvata: 5 elementi
+[BOT] Elaborazione: Roman Reigns Tells Jacob Fatu "This Is Your Last Night Here" After WWE Backlash
+[BOT] semantic_id=roman-reigns-tells-jacob-fatu-this-is-your-last-night-here-after-wwe-backlash
+[SCORE] iniziale=95 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, image=0, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo riporta un evento accaduto post-show (un'intervista a Roman Reigns dopo WWE Backlash) e non presenta un evento futuro. La categoria è WWE in quanto coinvolge star principali del main roster WWE e un PLE WWE.
+[EDITORIAL v72.3] translation_notes=I nomi delle cinture (World Heavyweight Championship) e le sigle (WWE) vanno mantenuti in inglese.; Evitare traduzioni letterali di "sent a chilling message" (es. "mandò un messaggio agghiacciante"), preferire espressioni come "ha lanciato un messaggio inquietante" o "ha inviato ; La frase "This Is Your Last Night Here" è una citazione diretta e va mantenuta fedelmente, magari aggiungendo una nota su come tradurre "here" nel contesto (es. "in WWE" o "qui").
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta un evento accaduto post-show (un'intervista a Roman Reigns dopo WWE Backlash) e non presenta un evento futuro. La categoria è WWE in quanto coinvolge star principali del main roster WWE e un PLE WWE.
+[PERF v71] analisi editoriale AI v72: 2.20s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Roman Reigns Tells Jacob Fatu "This Is Your Last Night Here" After WWE Backlash
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SCORE v79.1.3] Recovery post-show 54->95 - Roman Reigns Tells Jacob Fatu "This Is Your Last Night Here" After WWE Backlash
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SCORE] raffinato=95 priority=high | WWE/main roster, top star titolo: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, combo top name titolo + evento forte, PLE/PPV, v62 titolo/championship, v76 cap death/funeral storyline-comedy, v79.1.3 post-show recovery 54->95
+[V71] story_signature=stable:roman_reigns|jacob_fatu|in_the_world_heavyweight_championship|outcome|wwe|raw|backlash semantic_status=new_story freshness=0.697
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:title:roman-reigns:world:championship - Roman Reigns Tells Jacob Fatu "This Is Your Last Night Here" After WWE Backlash
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=7
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[POSTEDIT v79] Testo rifinito con: gemini-2.5-flash-lite
+[PERF v71] traduzione: 3.51s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py:5182: MarkupResemblesLocatorWarning: The input passed in on this line looks more like a URL than HTML or XML.
+
+If you meant to use Beautiful Soup to parse the web page found at a certain URL, then something has gone wrong. You should use an Python package like 'requests' to fetch the content behind the URL. Once you have the content as a string, you can feed that string into Beautiful Soup.
+
+However, if you want to parse some data that happens to look like a URL, then nothing has gone wrong: you are using Beautiful Soup correctly, and this warning is spurious and can be filtered. To make this warning go away, run this code before calling the BeautifulSoup constructor:
+
+    from bs4 import MarkupResemblesLocatorWarning
+    import warnings
+
+    warnings.filterwarnings("ignore", category=MarkupResemblesLocatorWarning)
+    
+  q = BeautifulSoup(m.group(1), "html.parser").get_text(" ", strip=True)
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.27s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/roman-reigns-tells-jacob-fatu-this-is-your-last-night-here-after-wwe-backlash-45.jpg
+[MEDIA] Immagine caricata: 4151
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.06s
+[PERF v71] totale articolo pubblicato 'Roman Reigns Tells Jacob Fatu "This Is Your Last Night Here"': 8.94s
+[OK] Pubblicato: Roman Reigns a Jacob Fatu dopo Backlash: "Questa è la tua ultima notte qui"
+[PENDING] Coda salvata: 4 elementi
+[BOT] Elaborazione: WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker
+[BOT] semantic_id=wwe-backlash-results-59-two-titles-on-the-line-seth-rollins-faces-bron-breakker
+[SCORE] iniziale=81 priority=high
+[SCRAPE] Articolo results rilevato: testo completo (15496 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=55, image=7, embed=1
+[BOT] Embed trovati: 1
+[PENDING] Coda salvata: 5 elementi
+[REPORT] Salvato/aggiornato pending report: report:wwe-backlash-2026-05-09 | pronto tra 330 min
+[BOT] Elaborazione: AEW Collision 5/9 Results - World & National Titles On The Line, Tag Champs In Action
+[BOT] semantic_id=aew-collision-59-results-world-national-titles-on-the-line-tag-champs-in-action
+[SCORE] iniziale=80 priority=high
+[SCRAPE] Articolo results rilevato: testo completo (6759 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=28, image=5, embed=0
+[PENDING] Coda salvata: 5 elementi
+[REPORT] Salvato/aggiornato pending report: report:aew-collision-2026-05-09 | pronto tra 210 min
+[BOT] News candidate totali: 13 | mode=storm | max nuove=5 | pending pubblicati=3
+[SKIP v78.1] Gia processato in questa run: Jacob Fatu Chokes Out Roman Reigns After Controversial Loss At WWE Backlash 2026
+[PENDING] Coda salvata: 5 elementi
+[SKIP v78.1] Gia processato in questa run: Roman Reigns Tells Jacob Fatu "This Is Your Last Night Here" After WWE Backlash
+[PENDING] Coda salvata: 5 elementi
+[SKIP v78.1] Gia processato in questa run: Jacob Fatu Assaults Roman Reigns, Referee and WWE Officials After Backlash 2026 Loss
+[PENDING] Coda salvata: 5 elementi
+[SKIP v78.1] Gia processato in questa run: WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker
+[PENDING] Coda salvata: 3 elementi
+[SKIP v78.1] Gia processato in questa run: AEW Collision 5/9 Results - World & National Titles On The Line, Tag Champs In Action
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Darby Allin Defeats PAC, Survives Latest AEW World Title Defense On Collision
+[BOT] semantic_id=darby-allin-defeats-pac-survives-latest-aew-world-title-defense-on-collision
+[SCORE] iniziale=75 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[EDITORIAL v72.3] type=RESULTS_REPORT conf=1.00 | category=AEW (5) conf=1.00 model=gemini-2.5-flash-lite | L'articolo riporta il risultato di un match di wrestling già avvenuto, con dettagli specifici sui segmenti e sulla vittoria. La categoria AEW è chiara dal contesto.
+[EDITORIAL v72.3] translation_notes=I nomi dei titoli (AEW World Championship) vanno mantenuti in inglese.; I nomi delle mosse (Code Red, Jon Woo Kick, Brutalizer, Scorpion Death Drop, Avalanche Falcon Arrow, Shooting Star Press, Scorpion Death Lock, Tombstone Piledriver, Coffin Drop) va; I nomi dei wrestler (Darby Allin, PAC) vanno mantenuti in inglese.
+[PERF v71] analisi editoriale AI v72: 2.17s
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SCORE] raffinato=84 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, PLE/PPV, v62 titolo/championship, v66 cap title match non-title-change
+[V71] story_signature=stable:darby_allin|to_his_world_championship|outcome|aew|raw|collision semantic_status=new_story freshness=0.718
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=5
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/darby-allin-defeats-pac-survives-latest-aew-world-title-defense-on-collision/intro-1778377664.jpg
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[POSTEDIT v79] Testo rifinito con: gemini-2.5-flash-lite
+[PERF v71] traduzione: 6.89s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Darby Allin conserva l'AEW World Championship contro PAC a Collision
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.73s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/darby-allin-defeats-pac-survives-latest-aew-world-title-defense-on-collision/l-intro-1778377664.jpg
+[MEDIA] Immagine caricata: 4154
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.49s
+[PERF v71] totale articolo pubblicato 'Darby Allin Defeats PAC, Survives Latest AEW World Title Def': 13.97s
+[OK] Pubblicato: [SPOILER] Darby Allin conserva l'AEW World Championship contro PAC a Collision
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: AEW Collision Fairway To Hell Results, Highlights and Key Moments for May 9, 2026
+[BOT] semantic_id=aew-collision-fairway-to-hell-results-highlights-and-key-moments-for-may-9-2026
+[SCORE] iniziale=75 priority=medium
+[SCRAPE] Articolo results rilevato: testo completo (9452 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=34, image=0, embed=11
+[BOT] Embed trovati: 12
+[PENDING] Coda salvata: 2 elementi
+[REPORT] Salvato/aggiornato pending report: report:aew-collision-2026-05-09 | pronto tra 32 min
+[BOT] Elaborazione: AEW Announces Huge Women's Title Match For Double Or Nothing 2026
+[BOT] semantic_id=aew-announces-huge-womens-title-match-for-double-or-nothing-2026
+[SCORE] iniziale=60 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=0, embed=0
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=AEW (5) conf=1.00 model=gemini-2.5-flash-lite | L'articolo presenta un evento futuro (AEW Double or Nothing 2026) e un match annunciato specificamente per esso. È una chiara anteprima. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Il titolo ufficiale della cintura "AEW Women's Championship" deve rimanere in inglese.; Evitare traduzioni letterali per "huge women's title match", preferire espressioni come "grande match titolato femminile" o "importante incontro per il titolo femminile".; "Double Or Nothing 2026" è il nome dell'evento e va mantenuto in inglese.
+[EDITORIAL v73] final type=OTHER | category=AEW (5) | L'articolo presenta un evento futuro (AEW Double or Nothing 2026) e un match annunciato specificamente per esso. È una chiara anteprima. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 2.15s
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SCORE] raffinato=56 priority=low | AEW, titolo/championship, PLE/PPV, v62 titolo/championship, v79.1.3 true future preview cap
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - AEW Announces Huge Women's Title Match For Double Or Nothing 2026
+[V71] story_signature=stable:aew_announces_huge|women_s_title_match|s_title_match_for_double_or_nothing_2026_thekla_now_knows_who_she|announcement|aew semantic_status=new_story freshness=0.565
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=6
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[POSTEDIT v79] Testo rifinito con: gemini-2.5-flash-lite
+[PERF v71] traduzione: 3.35s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): AEW Double or Nothing: Thekla in un Fatal 4-Way per il titolo femminile
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.25s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2025/05/spoiler-major-matches-confirmed-for-aew-double-or-nothing-2025-44.jpg
+[MEDIA] Immagine caricata: 4157
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.12s
+[PERF v71] totale articolo pubblicato 'AEW Announces Huge Women's Title Match For Double Or Nothing': 8.85s
+[OK] Pubblicato: AEW Double or Nothing: Thekla in un Fatal 4-Way per il titolo femminile
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: WWE Announces First-Ever Two-Night TripleMania During Backlash
+[BOT] semantic_id=wwe-announces-first-ever-two-night-triplemania-during-backlash
+[SCORE] iniziale=60 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=0, embed=0
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[EDITORIAL v72.3] type=PREVIEW conf=0.90 | category=WORLD (8) conf=0.80 model=gemini-2.5-flash-lite | L'articolo annuncia un evento futuro (TripleMania 34), ma lo fa in concomitanza con un evento passato (WWE Backlash). La notizia principale riguarda l'annuncio di un evento AAA (TripleMania), non un evento WWE. La collaborazione tra WWE e A
+[EDITORIAL v72.3] translation_notes=Il titolo "WWE Announces First-Ever Two-Night TripleMania During Backlash" è un po' fuorviante in quanto l'evento è di AAA, non WWE. Nella traduzione italiana, specificare che l'an; "TripleMania" è il nome di un evento AAA, non va tradotto.; "two-night TripleMania event" va reso come "evento di due notti di TripleMania" o simile, mantenendo il nome dell'evento AAA.
+[EDITORIAL v73] final type=PREVIEW | category=WORLD (8) | L'articolo annuncia un evento futuro (TripleMania 34), ma lo fa in concomitanza con un evento passato (WWE Backlash). La notizia principale riguarda l'annuncio di un evento AAA (TripleMania), non un evento WWE. La collaborazione tra WWE e A
+[EDITORIAL v79.1.3] type override PREVIEW->POST_SHOW_NEWS - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[PERF v71] analisi editoriale AI v72: 1.92s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SCORE] raffinato=56 priority=low | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[BOT] Elaborazione: Big E Raises Questions About Asuka's WWE Future After Emotional Backlash Moment
+[BOT] semantic_id=big-e-raises-questions-about-asukas-wwe-future-after-emotional-backlash-moment
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=0, embed=2
+[BOT] Embed trovati: 2
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo parla di un momento accaduto post-evento (Backlash) e della reazione di Big E, non di un evento futuro. La categoria è WWE perché l'evento e le star citate sono della WWE.
+[EDITORIAL v72.3] translation_notes=I nomi ufficiali di titoli/cinture (es. WWE Women's Championship) vanno mantenuti in inglese.; La frase "raises questions about Asuka's WWE Future" nel titolo potrebbe essere tradotta con "Solleva interrogativi sul futuro di Asuka in WWE" o "Asuka, il futuro in WWE in bilico; Evitare di tradurre "released" come "rilascio/rilasciato" ma usare "licenziamento/licenziato/addio" a seconda del contesto. In questo caso, si parla di un possibile addio, quindi "
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo parla di un momento accaduto post-evento (Backlash) e della reazione di Big E, non di un evento futuro. La categoria è WWE perché l'evento e le star citate sono della WWE.
+[PERF v71] analisi editoriale AI v72: 2.75s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Big E Raises Questions About Asuka's WWE Future After Emotional Backlash Moment
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SCORE] raffinato=65 priority=medium | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v62 reazioni/tributi
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Big E Raises Questions About Asuka's WWE Future After Emotional Backlash Moment
+[V71] story_signature=stable:iyo_sky|asuka|outcome|wwe|backlash semantic_status=run_stable_duplicate_v7915 freshness=0.566
+[SKIP v71] Duplicato semantico/rewrite: run_stable_duplicate_v7915 - Big E Raises Questions About Asuka's WWE Future After Emotional Backlash Moment
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Danhausen Introduces Minihausen As WWE Backlash Mystery Tag Team Partner
+[BOT] semantic_id=danhausen-introduces-minihausen-as-wwe-backlash-mystery-tag-team-partner
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, image=0, embed=2
+[BOT] Embed trovati: 3
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo parla di un segmento e di un match avvenuti durante Backlash, quindi non è una preview. Si concentra su un angolo/personaggio specifico della WWE.
+[EDITORIAL v72.3] translation_notes=Non tradurre "Minihausen" se usato come nome proprio, ma spiegarlo come "una versione mini di Danhausen".; Mantenere "WWE Backlash" invariato.; "Cloning Machine" può essere tradotto come "Macchina Clonatrice" ma meglio mantenere un approccio ironico/wrestling.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo parla di un segmento e di un match avvenuti durante Backlash, quindi non è una preview. Si concentra su un angolo/personaggio specifico della WWE.
+[PERF v71] analisi editoriale AI v72: 1.47s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Danhausen Introduces Minihausen As WWE Backlash Mystery Tag Team Partner
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SCORE] raffinato=56 priority=low | WWE/main roster, nomi forti titolo: danhausen, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Danhausen Introduces Minihausen As WWE Backlash Mystery Tag Team Partner
+[BOT] Elaborazione: WWE Backlash 2026 Match Order Reportedly Revealed
+[BOT] semantic_id=wwe-backlash-2026-match-order-reportedly-revealed
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash-lite | L'articolo presenta una card futura, incluso l'ordine dei match e orari. Rientra perfettamente nella definizione di PREVIEW. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Il titolo "WWE Backlash 2026 Match Order Reportedly Revealed" suggerisce che i dettagli sull'ordine dei match siano riportati e non ancora confermati ufficialmente. La traduzione d; Mantenere in inglese i nomi delle cinture: "United States Championship".; Prestare attenzione a "tide turned" nel corpo del testo, evitando calchi e traducendo il concetto di cambio di inerzia del match.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo presenta una card futura, incluso l'ordine dei match e orari. Rientra perfettamente nella definizione di PREVIEW. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.76s
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - WWE Backlash 2026 Match Order Reportedly Revealed
+[SCORE v79.1.4] Final cap pre-show obsoleto 50->50 - WWE Backlash 2026 Match Order Reportedly Revealed
+[SCORE] raffinato=50 priority=low | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, titolo/championship, combo top name lead + evento forte, titolo vago, v62 media rights/streaming, v68 cap annuncio vago/futuro, v70 cap preview hard, v79.1.4 pre-show spoiler obsoleto cap, v72.3 cap rumor: niente boost raffinamento
+[PERF v71] scoring raffinato: 0.41s
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 50/75 - WWE Backlash 2026 Match Order Reportedly Revealed
+[BOT] Elaborazione: Jack Perry Joins Stadium Stampede Match After AEW Title Loss
+[BOT] semantic_id=jack-perry-joins-stadium-stampede-match-after-aew-title-loss
+[SCORE] iniziale=45 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=0, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=AEW (5) conf=1.00 model=gemini-2.5-flash-lite | L'articolo riporta una notizia post-evento (perdita titolo, annuncio match futuro). La perdita del titolo è avvenuta nell'episodio del 9 maggio di AEW Dynamite (Fairway to Hell è uno pseudonimo per l'episodio). L'annuncio del match Stadium 
+[EDITORIAL v72.3] translation_notes=Mantenere "AEW National Championship" in inglese. "Fairway to Hell" è uno pseudonimo usato nell'articolo per l'episodio di AEW Dynamite del 9 maggio, da non tradurre letteralmente 
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | L'articolo riporta una notizia post-evento (perdita titolo, annuncio match futuro). La perdita del titolo è avvenuta nell'episodio del 9 maggio di AEW Dynamite (Fairway to Hell è uno pseudonimo per l'episodio). L'annuncio del match Stadium
+[PERF v71] analisi editoriale AI v72: 1.55s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Jack Perry Joins Stadium Stampede Match After AEW Title Loss
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=65 priority=medium | AEW, titolo/championship, PLE/PPV, v62 titolo/championship
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Jack Perry Joins Stadium Stampede Match After AEW Title Loss
+[V71] story_signature=stable:the_young_bucks|chris_jericho|lost_the_national_championship|outcome|aew|double_or_nothing semantic_status=new_story freshness=0.564
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=5
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v79] Testo rifinito con: gemini-2.5-flash-lite
+[PERF v71] traduzione: 3.65s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Jack Perry parteciperà allo Stadium Stampede dopo aver perso il titolo AEW
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.51s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/jack-perry-joins-stadium-stampede-match-after-aew-title-loss-21.jpg
+[MEDIA] Immagine caricata: 4160
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.10s
+[PERF v71] totale articolo pubblicato 'Jack Perry Joins Stadium Stampede Match After AEW Title Loss': 8.67s
+[OK] Pubblicato: Jack Perry parteciperà allo Stadium Stampede dopo aver perso il titolo AEW
+[PENDING] Coda salvata: 2 elementi
+[BOT] Pubblicati 6 articoli (3 pending + 3 nuove) su 13 candidati provati | mode=storm
+===== RUN END [2026-05-10 02:26:45] VERSION [v79_1_5_stable_story_dedupe (f8b71ae)] =====
+
