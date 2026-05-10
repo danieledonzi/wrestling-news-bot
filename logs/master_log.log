@@ -666,3 +666,196 @@
 [REVIEW v80.3] Pacchetto review creato: /home/runner/work/wrestling-news-bot/wrestling-news-bot/review_packages/run_20260510_130530_daf7ac8.zip
 ===== RUN END [2026-05-10 13:04:34] VERSION [v80_6_natural_italian_style_prompt (daf7ac8)] =====
 
+
+===== RUN START [2026-05-10 13:43:06] VERSION [v80_6_natural_italian_style_prompt (0f0ee1b)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[PENDING] Rimuovo report già pubblicato: report:aew-collision-2026-05-09
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (22/75): AEW's Thunder Rosa Says She'd Lose Big Stipulation Match 'If The Price Is Right'
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (29/75): Will Ospreay Discusses Pressure Of Being A Top Star In AEW
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167038/aew-bobby-lashley-world-title-ambitions-fans-see-it/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (0/75): WWE Backlash 2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168820/aew-collision-darby-allin-pac-world-title-defense/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168808/wwe-backlash-2026-jacob-fatu-roman-reigns-controversial-loss/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168799/aew-collision-mark-davis-jack-perry-national-championship/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): Grayson Waller Details Locker Room Gift Bought By Finn Balor When WWE Visited Ireland
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168786/wwe-backlash-2026-john-cena-new-event-championship-unique-rules/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168783/wwe-backlash-2026-iyo-sky-asuka-hug-victory/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (30/75): UFC 328 Results: Strickland Vs. Chimaev
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168770/wwe-backlash-2026-danhausen-mystery-partner-miz-kit-wilson/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168763/wwe-backlash-2026-trick-williams-retains-mens-us-title-wrestlemania-rematch-sami-zayn/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168755/aew-collision-may-9-results/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168754/wwe-backlash-bron-breakker-defeats-seth-rollins-opener/
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 50->50 - WWE Backlash 2026 Match Order Reportedly Revealed
+[SKIP] Score sotto soglia editoriale (50/75): WWE Backlash 2026 Match Order Reportedly Revealed
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2168722/dave-meltzer-cmll-persephone-aew-ppv-injury/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167022/wwe-matt-hardy-eddie-guerrero-best-advice-bore-crowd/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167009/wwe-nxt-oba-femi-myles-borne-pizza-toss/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] URL già in history: https://www.ringsidenews.com/kazuchika-okada-pulled-aew-title-match-due-real-life-family-situation/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): IYO SKY Fuels More Speculation About Asuka's WWE Future
+[SKIP v71] Story signature gia' in history: stable:john_cena|announcement|wwe|backlash - Fans Clown John Cena Over Bald Spot During WWE Backlash Appearance
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): Asuka May Be Semi-Retired Following WWE Backlash Moment
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (49/75): JBL Defends WWE Talent Accepting Pay Cuts Amid Fan Backlash
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP v71] Story signature gia' in history: stable:minihausen|danhausen|identity_reveal|wwe|backlash - Jonathan Coachman Calls Danhausen Experiment a Waste of Time and He's Over It
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): Big E Raises Questions About Asuka's WWE Future After Emotional Backlash Moment
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-announces-huge-womens-title-match-double-nothing-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/jack-perry-joins-stadium-stampede-match-aew-title-loss/
+[SKIP] URL già in history: https://www.ringsidenews.com/roman-reigns-tells-jacob-fatu-this-your-last-night-here-wwe-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/jacob-fatu-assaults-roman-reigns-referee-wwe-officials-backlash-2026-loss/
+[SKIP] URL già in history: https://www.ringsidenews.com/john-cena-annonuces-plans-john-cena-classic-tournament-during-wwe-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/identity-wwes-minihausen-revealed-backlash-appearance/
+[SCORE] 100 high - Tiffany Stratton Shares Reaction To Paige's Return At WWE WrestleMania 42 | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v71 freshness=0.724
+[SCORE] 60 medium - Backstage Reaction to Asuka's Emotional WWE Backlash Moment Amid Uncertainty About Her Future | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, floor WWE main roster storyline, v62 reazioni/tributi, v71 source reliability soft penalty, v71 freshness=0.551, v48 tier2: 55-74
+[SCORE] 56 low - Conflicting Reports Emerge On Asuka's WWE Status After Backlash | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.578, v48 tier2: 55-74
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 3 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Tiffany Stratton Shares Reaction To Paige's Return At WWE WrestleMania 42
+[BOT] semantic_id=tiffany-stratton-shares-reaction-to-paiges-return-at-wwe-wrestlemania-42
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=2
+[BOT] Embed trovati: 2
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo parla di un ritorno e delle reazioni ad esso, avvenuti in un evento passato (WrestleMania 42), anche se cita un match futuro. Non è una preview. La categoria è WWE in quanto focus principale.
+[EDITORIAL v72.3] translation_notes=Il titolo originale "Tiffany Stratton Shares Reaction To Paige's Return At WWE WrestleMania 42" va tradotto in modo fluido, tipo "Tiffany Stratton commenta il ritorno di Paige a WW; "WWE Women's Tag Team Championship" e "Women's United States Championship" vanno lasciati in inglese.; "Fatal four-way tag team match" va reso come "match a quattro coppie" o "fatal four-way tag team match" se si preferisce mantenere il termine tecnico, ma non tradotto letteralmente
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo parla di un ritorno e delle reazioni ad esso, avvenuti in un evento passato (WrestleMania 42), anche se cita un match futuro. Non è una preview. La categoria è WWE in quanto focus principale.
+[PERF v71] analisi editoriale AI v72: 2.16s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Tiffany Stratton Shares Reaction To Paige's Return At WWE WrestleMania 42
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE v79.1.3] Recovery post-show 54->95 - Tiffany Stratton Shares Reaction To Paige's Return At WWE WrestleMania 42
+[SCORE] raffinato=95 priority=high | WWE/main roster, nomi forti lead: nikki bella, brie bella, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, opinione generica, v62 ritorno/debutto, v62 reazione/tributo con cap, v66 cap opinion/commentary storyline, v79.1.3 post-show recovery 54->95
+[V71] story_signature=stable:tiffany_stratton|jade_cargill|s_tag_team_championship_while_she_didn|wwe|smackdown|wrestlemania semantic_status=new_story freshness=0.724
+[PERF v71] WP recent posts dedupe: 1.18s
+[PERF v71] WP lookup event_key: 1.02s
+[FIX] Event key in history ma non confermata su WordPress: event:liv-morgan-diagnosis - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 2.57s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=6
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/tiffany-stratton-shares-reaction-to-paiges-return-at-wwe-wrestlemania-42/intro-1778185672.jpg
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-2.5-flash-lite
+[PERF v71] traduzione: 4.19s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Tiffany Stratton felice per il ritorno di Paige a WrestleMania 42
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.80s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/tiffany-stratton-shares-reaction-to-paiges-return-at-wwe-wrestlemania-42/l-intro-1778185672.jpg
+[MEDIA] Immagine caricata: 4193
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.68s
+[PERF v71] totale articolo pubblicato 'Tiffany Stratton Shares Reaction To Paige's Return At WWE Wr': 13.82s
+[OK] Pubblicato: Tiffany Stratton felice per il ritorno di Paige a WrestleMania 42
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Backstage Reaction to Asuka's Emotional WWE Backlash Moment Amid Uncertainty About Her Future
+[BOT] semantic_id=backstage-reaction-to-asukas-emotional-wwe-backlash-moment-amid-uncertainty-about-her-future
+[SCORE] iniziale=60 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo parla di una reazione a un momento emotivo avvenuto durante WWE Backlash e dell'incertezza sul futuro di Asuka, non di un evento futuro. Il focus è sulle speculazioni post-match e sulle reazioni interne alla WWE. Rientra perfetta
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi ufficiali dei titoli in inglese (es. "WWE Backlash").; La frase "release/released" non va tradotta come "rilascio/rilasciato" ma in base al contesto (licenziamento, addio).; Evitare calchi come "connected with a spear" e parafrasare="ha colpito con una spear". "Tide turned"="l'inerzia del match è cambiata".
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo parla di una reazione a un momento emotivo avvenuto durante WWE Backlash e dell'incertezza sul futuro di Asuka, non di un evento futuro. Il focus è sulle speculazioni post-match e sulle reazioni interne alla WWE. Rientra perfetta
+[PERF v71] analisi editoriale AI v72: 1.75s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Backstage Reaction to Asuka's Emotional WWE Backlash Moment Amid Uncertainty About Her Future
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=71 priority=medium | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v62 reazioni/tributi
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Backstage Reaction to Asuka's Emotional WWE Backlash Moment Amid Uncertainty About Her Future
+[V71] story_signature=stable:iyo_sky|asuka|outcome|wwe|backlash semantic_status=run_stable_duplicate_v7915 freshness=0.551
+[SKIP v71] Duplicato semantico/rewrite: run_stable_duplicate_v7915 - Backstage Reaction to Asuka's Emotional WWE Backlash Moment Amid Uncertainty About Her Future
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Conflicting Reports Emerge On Asuka's WWE Status After Backlash
+[BOT] semantic_id=conflicting-reports-emerge-on-asukas-wwe-status-after-backlash
+[SCORE] iniziale=56 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=0, embed=1
+[BOT] Embed trovati: 2
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo riporta speculazioni e informazioni non confermate sullo status futuro di una wrestler WWE, basandosi su report contrastanti. Il focus non è su un evento imminente (PREVIEW) né su risultati già avvenuti (RESULTS_REPORT). Il conte
+[EDITORIAL v72.3] translation_notes=I titoli di campionati non vanno tradotti (es. WWE Women's Championship).; La frase "released" va tradotta con "licenziato/a" o "svincolato/a" a seconda del contesto, evitando "rilasciato".; Evitare calchi come "tide turned" (tradurre con "l'inerzia del match è cambiata" o simile).
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta speculazioni e informazioni non confermate sullo status futuro di una wrestler WWE, basandosi su report contrastanti. Il focus non è su un evento imminente (PREVIEW) né su risultati già avvenuti (RESULTS_REPORT). Il conte
+[PERF v71] analisi editoriale AI v72: 1.59s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=56 priority=low | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v72.3 cap rumor: niente boost raffinamento
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Conflicting Reports Emerge On Asuka's WWE Status After Backlash
+[V71] story_signature=stable:iyo_sky|asuka|report semantic_status=new_story freshness=0.578
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.1] Repair mirato blocchi mancanti: ['TEXT_013']
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.1] Batch tradotto con gemini-2.5-flash-lite: 1 blocchi
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=13
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-2.5-flash-lite
+[PERF v71] traduzione: 5.83s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Asuka: stato in WWE incerto dopo Backlash, emergono voci contrastanti
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.28s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/conflicting-reports-emerge-on-asukas-wwe-status-after-backlash-29.jpg
+[MEDIA] Immagine caricata: 4196
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.25s
+[PERF v71] totale articolo pubblicato 'Conflicting Reports Emerge On Asuka's WWE Status After Backl': 10.99s
+[OK] Pubblicato: Asuka: stato in WWE incerto dopo Backlash, emergono voci contrastanti
+[PENDING] Coda salvata: 1 elementi
+[BOT] Pubblicati 2 articoli (0 pending + 2 nuove) su 3 candidati provati | mode=normal
+[REVIEW v80.3] Pacchetto review creato: /home/runner/work/wrestling-news-bot/wrestling-news-bot/review_packages/run_20260510_134408_0f0ee1b.zip
+===== RUN END [2026-05-10 13:43:06] VERSION [v80_6_natural_italian_style_prompt (0f0ee1b)] =====
+
