@@ -10669,7 +10669,7 @@ import shutil
 import zipfile
 import hashlib
 
-REVIEW_PACKAGE_ENABLED = os.getenv("REVIEW_PACKAGE_ENABLED", "0").strip().lower() in {"1", "true", "yes", "on"}
+REVIEW_PACKAGE_ENABLED = os.getenv("REVIEW_PACKAGE_ENABLED", "1").strip().lower() in {"1", "true", "yes", "on"}
 REVIEW_INCLUDE_SKIPPED = os.getenv("REVIEW_INCLUDE_SKIPPED", "1").strip().lower() not in {"0", "false", "no", "off"}
 REVIEW_BASE_DIR = Path(os.getenv("REVIEW_PACKAGE_DIR", "review_packages"))
 REVIEW_MAX_FIELD_CHARS = int(os.getenv("REVIEW_MAX_FIELD_CHARS", "300000"))
@@ -10916,6 +10916,16 @@ def v723_conservative_score_after_ai(initial_score, refined_score, refined_reaso
     except Exception as e:
         print(f"[SCORE v80.4] AAA final floor non applicato: {e}")
     return max(0, min(100, int(score or 0))), (reasons or [])[:12]
+
+
+# =========================
+# v80.5: review packages enabled by default
+# =========================
+# In v80.4 the GitHub workflow uploaded review_packages/, but the bot only
+# created the directory when REVIEW_PACKAGE_ENABLED=1 was explicitly set.
+# During the temporary review period we want packages to be automatic.
+BOT_VERSION = "v80_5_review_packages_default_on"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
 
 
 if __name__ == "__main__":
