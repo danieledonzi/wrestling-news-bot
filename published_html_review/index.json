@@ -1,0 +1,17 @@
+{
+  "schema": "owtv_published_html_review_flat_v81",
+  "last_run_id": "2026-05-10 14:39:11",
+  "last_bot_version": "v81_translation_preservation_and_flat_review_archive (df5b026)",
+  "updated_at": "2026-05-10T14:40:06",
+  "total_items": 1,
+  "items": [
+    {
+      "run_id": "2026-05-10 14:39:11",
+      "title": "Tony Schiavone (AEW) commenta la docu-serie su Hulk Hogan di Netflix",
+      "url": "https://www.wrestlinginc.com/2167463/aew-tony-schiavone-assesses-netflix-hulk-hogan-doc/",
+      "original_html_file": "20260510_144006_001_tony-schiavone-aew-commenta-la-docu-serie-su-hulk-hogan-di-netflix_5b0cda23_original.html",
+      "final_html_file": "20260510_144006_001_tony-schiavone-aew-commenta-la-docu-serie-su-hulk-hogan-di-netflix_5b0cda23_final.html",
+      "metadata_file": "20260510_144006_001_tony-schiavone-aew-commenta-la-docu-serie-su-hulk-hogan-di-netflix_5b0cda23_metadata.json"
+    }
+  ]
+}
