@@ -406,3 +406,116 @@
 [REVIEW v80.3] Pacchetto review creato: /home/runner/work/wrestling-news-bot/wrestling-news-bot/review_packages/run_20260510_100913_a6c5165.zip
 ===== RUN END [2026-05-10 10:08:24] VERSION [v80_6_natural_italian_style_prompt (a6c5165)] =====
 
+
+===== RUN START [2026-05-10 11:44:35] VERSION [v80_6_natural_italian_style_prompt (129f235)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[PENDING] Rimuovo report già pubblicato: report:aew-collision-2026-05-09
+[PERF v71] WP lookup event_key: 1.10s
+[PENDING] Rimuovo report già pubblicato: report:wwe-smackdown-2026-05-08
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167038/aew-bobby-lashley-world-title-ambitions-fans-see-it/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (0/75): WWE Backlash 2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168820/aew-collision-darby-allin-pac-world-title-defense/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168808/wwe-backlash-2026-jacob-fatu-roman-reigns-controversial-loss/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168799/aew-collision-mark-davis-jack-perry-national-championship/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): Grayson Waller Details Locker Room Gift Bought By Finn Balor When WWE Visited Ireland
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168786/wwe-backlash-2026-john-cena-new-event-championship-unique-rules/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168783/wwe-backlash-2026-iyo-sky-asuka-hug-victory/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (30/75): UFC 328 Results: Strickland Vs. Chimaev
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168770/wwe-backlash-2026-danhausen-mystery-partner-miz-kit-wilson/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168763/wwe-backlash-2026-trick-williams-retains-mens-us-title-wrestlemania-rematch-sami-zayn/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168755/aew-collision-may-9-results/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168754/wwe-backlash-bron-breakker-defeats-seth-rollins-opener/
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 50->50 - WWE Backlash 2026 Match Order Reportedly Revealed
+[PENDING] Scarto pending scaduto: WWE SmackDown Results, Highlights and Key Moments for May 8, 2026
+[SKIP] Score sotto soglia editoriale (50/75): WWE Backlash 2026 Match Order Reportedly Revealed
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2168722/dave-meltzer-cmll-persephone-aew-ppv-injury/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167022/wwe-matt-hardy-eddie-guerrero-best-advice-bore-crowd/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167009/wwe-nxt-oba-femi-myles-borne-pizza-toss/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite & Collision Viewership & Ratings Report, 5/6/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168358/wwe-backlash-2026-two-titles-on-line-seth-rollins-bron-breakker/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168663/wwe-wrestlemania-42-paul-heyman-brock-lesnar-retiring/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[PENDING] Scarto pending scaduto: WWE SmackDown Results, Highlights and Key Moments for May 8, 2026
+[SKIP] Score sotto soglia editoriale (49/75): JBL Defends WWE Talent Accepting Pay Cuts Amid Fan Backlash
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP v71] Story signature gia' in history: stable:minihausen|danhausen|identity_reveal|wwe|backlash - Jonathan Coachman Calls Danhausen Experiment a Waste of Time and He's Over It
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[PENDING] Scarto pending scaduto: WWE SmackDown Results, Highlights and Key Moments for May 8, 2026
+[SKIP] Score sotto soglia editoriale (50/75): Big E Raises Questions About Asuka's WWE Future After Emotional Backlash Moment
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-announces-huge-womens-title-match-double-nothing-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/jack-perry-joins-stadium-stampede-match-aew-title-loss/
+[SKIP] URL già in history: https://www.ringsidenews.com/roman-reigns-tells-jacob-fatu-this-your-last-night-here-wwe-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/jacob-fatu-assaults-roman-reigns-referee-wwe-officials-backlash-2026-loss/
+[SKIP] URL già in history: https://www.ringsidenews.com/john-cena-annonuces-plans-john-cena-classic-tournament-during-wwe-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/identity-wwes-minihausen-revealed-backlash-appearance/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-fans-hijack-backlash-match-loud-we-want-kairi-chants/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-announces-first-ever-two-night-triplemania-during-backlash/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[PENDING] Scarto pending scaduto: WWE SmackDown Results, Highlights and Key Moments for May 8, 2026
+[SKIP] Score sotto soglia editoriale (50/75): Danhausen Introduces Minihausen As WWE Backlash Mystery Tag Team Partner
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): Gingerbread Man Meme Goes Completely Off The Rails After WWE SmackDown
+[SCORE] 75 medium - AEW Collision Fairway To Hell Results, Highlights and Key Moments for May 9, 2026 | AEW, show settimanale, v75 hard results report, v77 hard report protected, v71 source reliability soft penalty, v71 freshness=0.427
+[SCORE] 60 medium - Backstage Reaction to Asuka's Emotional WWE Backlash Moment Amid Uncertainty About Her Future | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, floor WWE main roster storyline, v62 reazioni/tributi, v71 source reliability soft penalty, v71 freshness=0.576, v48 tier2: 55-74
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 2 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: AEW Collision Fairway To Hell Results, Highlights and Key Moments for May 9, 2026
+[BOT] semantic_id=aew-collision-fairway-to-hell-results-highlights-and-key-moments-for-may-9-2026
+[SCORE] iniziale=75 priority=medium
+[SCRAPE] Articolo results rilevato: testo completo (9452 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=34, image=0, embed=11
+[BOT] Embed trovati: 12
+[PENDING] Scarto pending scaduto: WWE SmackDown Results, Highlights and Key Moments for May 8, 2026
+[PENDING] Coda salvata: 1 elementi
+[REPORT] Salvato/aggiornato pending report: report:aew-collision-2026-05-09 | gia' maturo
+[PENDING] Rimuovo report già pubblicato: report:aew-collision-2026-05-09
+[BOT] Elaborazione: Backstage Reaction to Asuka's Emotional WWE Backlash Moment Amid Uncertainty About Her Future
+[BOT] semantic_id=backstage-reaction-to-asukas-emotional-wwe-backlash-moment-amid-uncertainty-about-her-future
+[SCORE] iniziale=60 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo riporta una reazione e speculazioni avvenute dopo un evento (Backlash), non presenta un evento futuro. La categoria è WWE in quanto si focalizza su una star WWE e la promotion.
+[EDITORIAL v72.3] translation_notes=Titoli delle cinture (es. "WWE Women's Championship") devono rimanere in inglese.; 'Released' o 'departure' dovrebbero essere tradotti con 'licenziamento' o 'addio' a seconda del contesto, non 'rilascio'.; Le dichiarazioni di Big E e i contatti backstage devono essere tradotte fedelmente.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta una reazione e speculazioni avvenute dopo un evento (Backlash), non presenta un evento futuro. La categoria è WWE in quanto si focalizza su una star WWE e la promotion.
+[PERF v71] analisi editoriale AI v72: 2.79s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Backstage Reaction to Asuka's Emotional WWE Backlash Moment Amid Uncertainty About Her Future
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=71 priority=medium | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v62 reazioni/tributi
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Backstage Reaction to Asuka's Emotional WWE Backlash Moment Amid Uncertainty About Her Future
+[V71] story_signature=stable:iyo_sky|asuka|outcome|wwe|backlash semantic_status=run_stable_duplicate_v7915 freshness=0.576
+[SKIP v71] Duplicato semantico/rewrite: run_stable_duplicate_v7915 - Backstage Reaction to Asuka's Emotional WWE Backlash Moment Amid Uncertainty About Her Future
+[PENDING] Coda salvata: 1 elementi
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 2 candidati provati | mode=normal
+[REVIEW v80.3] Pacchetto review creato: /home/runner/work/wrestling-news-bot/wrestling-news-bot/review_packages/run_20260510_114525_129f235.zip
+===== RUN END [2026-05-10 11:44:35] VERSION [v80_6_natural_italian_style_prompt (129f235)] =====
+
