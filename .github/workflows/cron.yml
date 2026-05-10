@@ -41,6 +41,8 @@ jobs:
           WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
           GITHUB_SHA: ${{ github.sha }}
           WP_EDITORIALI_CATEGORY_ID: 13
+          PUBLISHED_HTML_REVIEW_ENABLED: "1"
+          PUBLISHED_HTML_REVIEW_DIR: published_html_review
         run: python bot.py
 
       
@@ -50,14 +52,6 @@ jobs:
         with:
           name: master-log
           path: logs/master_log.log
-          if-no-files-found: warn
-
-      - name: Upload review packages
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: review-packages
-          path: review_packages/
           if-no-files-found: warn
 
 
@@ -76,6 +70,7 @@ jobs:
           [ -f failed_articles.json ] && git add -f failed_articles.json
           [ -f logs/master_log.log ] && git add -f logs/master_log.log
           [ -f logs/master_log_state.json ] && git add -f logs/master_log_state.json
+          [ -d published_html_review ] && git add -f published_html_review/
 
           echo "STATUS AFTER ADD:"
           git status --short
