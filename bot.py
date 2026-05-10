@@ -6742,6 +6742,11 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         print(f"[REPORT] Uso testo prefetched per report maturo ({len(full_text)} caratteri)")
     else:
         full_text, scrape_error, page_html, page_img, embed_urls, inline_images = get_clean_text(link)
+    item["_review_original_html"] = page_html or ""
+    item["_review_original_text"] = full_text or ""
+    item["_review_embed_urls"] = list(embed_urls or [])
+    item["_review_inline_images"] = list(inline_images or [])
+    item["_review_scrape_error"] = scrape_error
     perf_step_v71 = v71_perf_log("scraping articolo", perf_step_v71, threshold=0.5)
     # v58: blocchi ordinati testo/embed. Gli embed non vengono piu affidati a Gemini.
     ordered_content_blocks = []
@@ -6754,6 +6759,8 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
             image_blocks_count = sum(1 for b in ordered_content_blocks if b.get("type") == "image")
             embed_blocks_count = sum(1 for b in ordered_content_blocks if b.get("type") == "embed")
             print(f"[BLOCKSEQ] Blocchi ordinati estratti: text={text_blocks_count}, image={image_blocks_count}, embed={embed_blocks_count}")
+            item["_review_blocks_summary"] = {"text": text_blocks_count, "image": image_blocks_count, "embed": embed_blocks_count}
+            item["_review_ordered_blocks"] = ordered_content_blocks
     perf_step_v71 = v71_perf_log("estrazione blocchi", perf_step_v71, threshold=0.3)
 
     if embed_urls:
@@ -6802,6 +6809,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     editorial_analysis_v72 = v72_editorial_analysis(title, full_text, link, is_report=is_results_article(title, link, full_text))
     perf_step_v71 = v71_perf_log("analisi editoriale AI v72", perf_step_v71, threshold=0.5)
     item["editorial_analysis_v72"] = editorial_analysis_v72
+    item["_review_editorial_analysis"] = editorial_analysis_v72
     if editorial_analysis_v72.get("ai_failed") or editorial_analysis_v72.get("is_publishable") is False:
         print(f"[BOT] Gemini/analisi AI non disponibile: stop candidato senza fallback rischiosi - {title}")
         return "model_fail"
@@ -6832,6 +6840,8 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     )
     item["score"] = refined_score
     item["score_reasons"] = refined_reasons
+    item["_review_refined_score"] = refined_score
+    item["_review_refined_reasons"] = refined_reasons
     print(f"[SCORE] raffinato={item['score']} priority={priority_label(item['score'])} | {', '.join(refined_reasons)}")
     perf_step_v71 = v71_perf_log("scoring raffinato", perf_step_v71, threshold=0.3)
 
@@ -6980,6 +6990,9 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     news_data["titolo"] = v65_proper_case_title(news_data["titolo"])
     news_data["titolo"] = v721_ensure_italian_title(news_data["titolo"], title, text_for_translation or full_text, link)
     news_data["testo"] = v63_humanize_body_html(news_data.get("testo", ""))
+    item["_review_translated_title"] = news_data.get("titolo", "")
+    item["_review_translated_html"] = news_data.get("testo", "")
+    item["_review_final_category"] = news_data.get("categoria")
 
     quote_check_v71 = validate_quote_preservation_v71(text_for_translation or full_text, news_data.get("testo", ""))
     if not quote_check_v71.get("ok"):
@@ -10640,7 +10653,7 @@ def translate_news(source_title, text, source_url="", forced_category=None):
 # Alcune patch precedenti ridefinivano BOT_VERSION piu' in basso nel file e
 # la funzione finale v79.1.6 chiamava normalize_article_type senza alias.
 # Questo reset e questa alias devono restare subito prima del main.
-BOT_VERSION = "v80_2_oembed_localization_nameerror_hotfix"
+BOT_VERSION = "v80_3_review_package_all_attempted"
 BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
 
 if "normalize_article_type" not in globals():
@@ -10649,9 +10662,166 @@ if "normalize_article_type" not in globals():
 
 
 
+# =========================
+# v80.3 temporary review package for all attempted candidates
+# =========================
+import shutil
+import zipfile
+import hashlib
+
+REVIEW_PACKAGE_ENABLED = os.getenv("REVIEW_PACKAGE_ENABLED", "0").strip().lower() in {"1", "true", "yes", "on"}
+REVIEW_INCLUDE_SKIPPED = os.getenv("REVIEW_INCLUDE_SKIPPED", "1").strip().lower() not in {"0", "false", "no", "off"}
+REVIEW_BASE_DIR = Path(os.getenv("REVIEW_PACKAGE_DIR", "review_packages"))
+REVIEW_MAX_FIELD_CHARS = int(os.getenv("REVIEW_MAX_FIELD_CHARS", "300000"))
+_REVIEW_RUN_DIR = None
+_REVIEW_LOG_START_POS = None
+_REVIEW_ITEMS = []
+
+
+def _review_safe_slug(text, fallback="item"):
+    text = normalize_for_check(str(text or "")) if "normalize_for_check" in globals() else str(text or "").lower()
+    text = re.sub(r"[^a-z0-9]+", "-", text).strip("-")[:90]
+    return text or fallback
+
+
+def _review_truncate(value):
+    if value is None:
+        return ""
+    value = str(value)
+    if len(value) > REVIEW_MAX_FIELD_CHARS:
+        return value[:REVIEW_MAX_FIELD_CHARS] + "\n\n<!-- REVIEW TRUNCATED -->"
+    return value
+
+
+def review_run_dir():
+    global _REVIEW_RUN_DIR, _REVIEW_LOG_START_POS
+    if not REVIEW_PACKAGE_ENABLED:
+        return None
+    if _REVIEW_RUN_DIR is None:
+        REVIEW_BASE_DIR.mkdir(exist_ok=True)
+        stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        _REVIEW_RUN_DIR = REVIEW_BASE_DIR / f"run_{stamp}_{GIT_SHA_SHORT}"
+        _REVIEW_RUN_DIR.mkdir(parents=True, exist_ok=True)
+        try:
+            _REVIEW_LOG_START_POS = LOG_FILE.stat().st_size if LOG_FILE.exists() else 0
+        except Exception:
+            _REVIEW_LOG_START_POS = 0
+        ( _REVIEW_RUN_DIR / "items" ).mkdir(exist_ok=True)
+    return _REVIEW_RUN_DIR
+
+
+def review_record_candidate(item, status="unknown", error=None):
+    if not REVIEW_PACKAGE_ENABLED:
+        return
+    if status == "skipped" and not REVIEW_INCLUDE_SKIPPED:
+        return
+    try:
+        base = review_run_dir()
+        if not base:
+            return
+        title = sanitize_text(item.get("title") or "untitled") if isinstance(item, dict) else "untitled"
+        url = item.get("url", "") if isinstance(item, dict) else ""
+        key_src = f"{url}|{title}|{len(_REVIEW_ITEMS)}"
+        digest = hashlib.sha1(key_src.encode("utf-8", errors="ignore")).hexdigest()[:8]
+        folder = base / "items" / f"{len(_REVIEW_ITEMS)+1:03d}_{_review_safe_slug(status)}_{_review_safe_slug(title)}_{digest}"
+        folder.mkdir(parents=True, exist_ok=True)
+        metadata = {
+            "status": status,
+            "error": str(error) if error else "",
+            "title": title,
+            "url": url,
+            "score_initial": item.get("initial_score", item.get("score_initial", "")) if isinstance(item, dict) else "",
+            "score_final": item.get("score", "") if isinstance(item, dict) else "",
+            "score_reasons": item.get("score_reasons", []) if isinstance(item, dict) else [],
+            "refined_score": item.get("_review_refined_score", "") if isinstance(item, dict) else "",
+            "refined_reasons": item.get("_review_refined_reasons", []) if isinstance(item, dict) else [],
+            "semantic_id": item.get("semantic_id", "") if isinstance(item, dict) else "",
+            "event_key": item.get("event_key", "") if isinstance(item, dict) else "",
+            "story_signature_v71": item.get("story_signature_v71", "") if isinstance(item, dict) else "",
+            "article_type_v68": item.get("article_type_v68", "") if isinstance(item, dict) else "",
+            "article_type_reason_v68": item.get("article_type_reason_v68", "") if isinstance(item, dict) else "",
+            "category_id": item.get("category_id", "") if isinstance(item, dict) else "",
+            "category_slug": item.get("category_slug", "") if isinstance(item, dict) else "",
+            "blocks_summary": item.get("_review_blocks_summary", {}) if isinstance(item, dict) else {},
+            "embed_urls": item.get("_review_embed_urls", []) if isinstance(item, dict) else [],
+            "inline_images": item.get("_review_inline_images", []) if isinstance(item, dict) else [],
+            "scrape_error": item.get("_review_scrape_error", "") if isinstance(item, dict) else "",
+            "translated_title": item.get("_review_translated_title", "") if isinstance(item, dict) else "",
+            "final_category": item.get("_review_final_category", "") if isinstance(item, dict) else "",
+            "bot_version": BOT_VERSION_FULL,
+            "run_id": RUN_ID,
+        }
+        editorial = item.get("_review_editorial_analysis") or item.get("editorial_analysis_v72") or {} if isinstance(item, dict) else {}
+        metadata["editorial_analysis"] = editorial
+        (folder / "metadata.json").write_text(json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8")
+        if isinstance(item, dict):
+            if item.get("_review_original_html"):
+                (folder / "original.html").write_text(_review_truncate(item.get("_review_original_html")), encoding="utf-8")
+            if item.get("_review_original_text"):
+                (folder / "original_text.txt").write_text(_review_truncate(item.get("_review_original_text")), encoding="utf-8")
+            if item.get("_review_ordered_blocks"):
+                (folder / "ordered_blocks.json").write_text(json.dumps(item.get("_review_ordered_blocks"), ensure_ascii=False, indent=2), encoding="utf-8")
+            if item.get("_review_translated_html"):
+                (folder / "translated.html").write_text(_review_truncate(item.get("_review_translated_html")), encoding="utf-8")
+        _REVIEW_ITEMS.append({"status": status, "title": title, "url": url, "folder": str(folder)})
+    except Exception as e:
+        print(f"[REVIEW v80.3] Errore salvataggio candidato: {e}")
+
+
+_ORIG_PROCESS_CANDIDATE_ITEM_V803 = process_candidate_item
+
+def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    status = "unknown"
+    err = None
+    try:
+        status = _ORIG_PROCESS_CANDIDATE_ITEM_V803(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+        return status
+    except Exception as e:
+        status = "exception"
+        err = e
+        raise
+    finally:
+        review_record_candidate(item, status=status, error=err)
+
+
+def review_finalize_package():
+    if not REVIEW_PACKAGE_ENABLED:
+        return None
+    try:
+        base = review_run_dir()
+        if not base:
+            return None
+        summary = {
+            "run_id": RUN_ID,
+            "bot_version": BOT_VERSION_FULL,
+            "git_sha": GIT_SHA,
+            "items_count": len(_REVIEW_ITEMS),
+            "items": _REVIEW_ITEMS,
+        }
+        (base / "summary.json").write_text(json.dumps(summary, ensure_ascii=False, indent=2), encoding="utf-8")
+        try:
+            start = int(_REVIEW_LOG_START_POS or 0)
+            with open(LOG_FILE, "rb") as f:
+                f.seek(start)
+                data = f.read()
+            (base / "run.log").write_bytes(data)
+        except Exception as e:
+            (base / "run_log_error.txt").write_text(str(e), encoding="utf-8")
+        zip_path = shutil.make_archive(str(base), "zip", root_dir=str(base))
+        print(f"[REVIEW v80.3] Pacchetto review creato: {zip_path}")
+        return zip_path
+    except Exception as e:
+        print(f"[REVIEW v80.3] Errore creazione pacchetto review: {e}")
+        return None
+
+BOT_VERSION = "v80_3_review_package_all_attempted"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+
 if __name__ == "__main__":
     log_run_start()
     try:
         run_bot()
     finally:
+        review_finalize_package()
         log_run_end()
