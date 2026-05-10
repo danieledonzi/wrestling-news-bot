@@ -9918,3 +9918,305 @@ However, if you want to parse some data that happens to look like a URL, then no
 [BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 9 candidati provati | mode=normal
 ===== RUN END [2026-05-10 00:21:29] VERSION [v79_1_3_type_freshness_cap_coherence (e0d0028)] =====
 
+
+===== RUN START [2026-05-10 00:46:28] VERSION [v79_1_4_spoiler_semantics_outcome_obsolete (fcb0381)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[PERF v71] WP lookup event_key: 1.19s
+[PENDING] Rimuovo report già pubblicato: report:wwe-smackdown-2026-05-08
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SCORE v79.1.2] Spoiler validato: floor 58->75 - Mark Davis Defeats Jack Perry, Wins AEW National Championship On Collision
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): Grayson Waller Details Locker Room Gift Bought By Finn Balor When WWE Visited Ireland
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168783/wwe-backlash-2026-iyo-sky-asuka-hug-victory/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (30/75): UFC 328 Results: Strickland Vs. Chimaev
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168770/wwe-backlash-2026-danhausen-mystery-partner-miz-kit-wilson/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168763/wwe-backlash-2026-trick-williams-retains-mens-us-title-wrestlemania-rematch-sami-zayn/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168754/wwe-backlash-bron-breakker-defeats-seth-rollins-opener/
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 50->50 - WWE Backlash 2026 Match Order Reportedly Revealed
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2168722/dave-meltzer-cmll-persephone-aew-ppv-injury/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167022/wwe-matt-hardy-eddie-guerrero-best-advice-bore-crowd/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167009/wwe-nxt-oba-femi-myles-borne-pizza-toss/
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite & Collision Viewership & Ratings Report, 5/6/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168663/wwe-wrestlemania-42-paul-heyman-brock-lesnar-retiring/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2166518/wwe-nt-myles-borne-jelly-roll-finisher/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (22/75): Will Ospreay Explains What AEW & NJPW Have To Gain From Partnership
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168627/wwe-chelsea-green-health-update-heart-procedure/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/john-cena-annonuces-plans-john-cena-classic-tournament-during-wwe-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/identity-wwes-minihausen-revealed-backlash-appearance/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-fans-hijack-backlash-match-loud-we-want-kairi-chants/
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (50/75): Gingerbread Man Meme Goes Completely Off The Rails After WWE SmackDown
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (50/75): Big E. Gets Loud "New Day Rocks!" Chants During 2026 WWE Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/kairi-sane-tampa-airport-sighting-rumor-shut-down-before-wwe-backlash/
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash Spoiler Lineup for May 9, 2026: Full Match Card and Backstage Notes Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash Spoiler Lineup for May 9, 2026: Full Match Card and Backstage Notes Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash Spoiler Lineup for May 9, 2026: Full Match Card and Backstage Notes Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 55->55 - WWE Backlash Spoiler Lineup for May 9, 2026: Full Match Card and Backstage Notes Revealed
+[SKIP] Score sotto soglia editoriale (50/75): WWE Backlash Spoiler Lineup for May 9, 2026: Full Match Card and Backstage Notes Revealed
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (31/75): Stephanie Vaquer's Ex-Boyfriend El Cuatrero Says "Not Everything Has Been Exposed" Following Guilty Verdict
+[SKIP] URL già in history: https://www.ringsidenews.com/spoiler-opening-match-revealed-2026-wwe-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/dustin-rhodes-appears-take-shot-wwe-pay-cut-strategy-amid-tko-contract-changes/
+[SKIP] URL già in history: https://www.ringsidenews.com/swerve-strickland-reacts-new-days-wwe-exit-amid-aew-rumors/
+[SCORE] 100 high - John Cena Announces New WWE Event, Championship With Unique Rules At Backlash 2026 | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v71 freshness=0.605
+[SCORE] 81 high - WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker | WWE/main roster, nomi forti titolo: seth rollins, WWE main roster + storyline/evento, titolo/championship, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.55
+[SCORE] 80 high - AEW Collision 5/9 Results - World & National Titles On The Line, Tag Champs In Action | AEW, show settimanale, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.587
+[SCORE] 75 medium - Mark Davis Defeats Jack Perry, Wins AEW National Championship On Collision | AEW, titolo/championship, show settimanale, v62 titolo/championship, v79.1.2 spoiler live/pre-show floor 58->75, v71 freshness=0.726
+[SCORE] 75 medium - AEW Collision Fairway To Hell Results, Highlights and Key Moments for May 9, 2026 | AEW, show settimanale, v75 hard results report, v77 hard report protected, v71 source reliability soft penalty, v71 freshness=0.564
+[SCORE] 75 medium - WWE Backlash Results, Highlights and Key Moments for May 9, 2026 | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 source reliability soft penalty, v71 freshness=0.514
+[SCORE] 63 medium - Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive' | WWE/main roster, nomi forti titolo: brie bella, WWE main roster + storyline/evento, titolo/championship, v71 freshness=0.519, v48 tier2: 55-74
+[SCORE] 60 medium - WWE Announces First-Ever Two-Night TripleMania During Backlash | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.564, v48 tier2: 55-74
+[SCORE] 50 low - Danhausen Introduces Minihausen As WWE Backlash Mystery Tag Team Partner | WWE/main roster, nomi forti titolo: danhausen, WWE main roster + storyline/evento, floor WWE main roster storyline, v71 source reliability soft penalty, v71 freshness=0.561, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - WWE Backlash 2026 Match Order Reportedly Revealed | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, floor WWE main roster storyline, titolo vago, v79.1.4 pre-show spoiler obsoleto cap, v71 freshness=0.574, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 1 news >=90, 3 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[PENDING] Elementi da recuperare: 2
+[REPORT] Non ancora maturo: report:aew-collision-2026-05-09 (101 min rimanenti)
+[REPORT] Non ancora maturo: report:wwe-backlash-2026-05-09 (14 min rimanenti)
+[BOT] News candidate totali: 10 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: John Cena Announces New WWE Event, Championship With Unique Rules At Backlash 2026
+[BOT] semantic_id=john-cena-announces-new-wwe-event-championship-with-unique-rules-at-backlash-2026
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, image=1, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo annuncia un evento e un titolo, ma il ritorno di Cena e l'annuncio sono già avvenuti durante Backlash, non è una pura preview. Il focus è su un annuncio avvenuto durante un evento passato.
+[EDITORIAL v72.3] translation_notes=I nomi dei titoli ufficiali (es. "WWE Championship", "WWE Raw", "WWE NXT") vanno mantenuti in inglese.; "Retired" riferito a un wrestler (es. "retired Brock Lesnar") va tradotto come "ha ritirato" o "ha sconfitto" nel contesto del match, non come "si è ritirato".; "Main roster show" va tradotto come "show del main roster WWE" o "programma principale WWE".
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo annuncia un evento e un titolo, ma il ritorno di Cena e l'annuncio sono già avvenuti durante Backlash, non è una pura preview. Il focus è su un annuncio avvenuto durante un evento passato.
+[PERF v71] analisi editoriale AI v72: 2.42s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - John Cena Announces New WWE Event, Championship With Unique Rules At Backlash 2026
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: john cena, nomi forti lead: cody rhodes, oba femi, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 media rights/streaming
+[V71] story_signature=john_cena|john_cena_announces_new|wwe_event|return|wwe|raw|nxt|wrestlemania semantic_status=new_story freshness=0.721
+[PERF v71] WP recent posts dedupe: 1.53s
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:business:cody-rhodes -> event:business:cody-rhodes-followup-john-cena-event-championship-unique-rules-backlash
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.90s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=8
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwe-backlash-2026-john-cena-new-event-championship-unique-rules/intro-1778373311.jpg
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[POSTEDIT v79] Testo rifinito con: gemini-2.5-flash-lite
+[PERF v71] traduzione: 9.12s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Backlash 2026: John Cena annuncia il "John Cena Classic" con nuove regole
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 2.49s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-backlash-2026-john-cena-new-event-championship-unique-rules/l-intro-1778373311.jpg
+[MEDIA] Immagine caricata: 4139
+[WP] Status attach image: 200
+[PERF v71] featured image: 3.12s
+[PERF v71] totale articolo pubblicato 'John Cena Announces New WWE Event, Championship With Unique ': 19.38s
+[OK] Pubblicato: Backlash 2026: John Cena annuncia il "John Cena Classic" con nuove regole
+[PENDING] Coda salvata: 3 elementi
+[BOT] Elaborazione: WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker
+[BOT] semantic_id=wwe-backlash-results-59-two-titles-on-the-line-seth-rollins-faces-bron-breakker
+[SCORE] iniziale=81 priority=high
+[SCRAPE] Articolo results rilevato: testo completo (14494 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=52, image=7, embed=1
+[BOT] Embed trovati: 1
+[PENDING] Coda salvata: 3 elementi
+[REPORT] Salvato/aggiornato pending report: report:wwe-backlash-2026-05-09 | pronto tra 42 min
+[SKIP v78.1] Gia processato in questa run: AEW Collision 5/9 Results - World & National Titles On The Line, Tag Champs In Action
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Mark Davis Defeats Jack Perry, Wins AEW National Championship On Collision
+[BOT] semantic_id=mark-davis-defeats-jack-perry-wins-aew-national-championship-on-collision
+[SCORE] iniziale=75 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[EDITORIAL v72.3] type=RESULTS_REPORT conf=0.90 | category=AEW (5) conf=0.95 model=gemini-2.5-flash-lite | L'articolo riporta il risultato di un match svoltosi in un episodio di AEW Collision, con tanto di cambio di titolo. La tipologia più appropriata è RESULTS_REPORT e la categoria AEW.
+[EDITORIAL v72.3] translation_notes=Il titolo della cintura 'AEW National Championship' deve rimanere in inglese.; Il nome del match 'Fairway To Hell' può essere tradotto letteralmente o adattato per dare un senso in italiano.; Evitare di tradurre 'bagged themselves a hole in one' letteralmente, trovare un equivalente italiano per 'ottenere un grande successo'.
+[PERF v71] analisi editoriale AI v72: 3.33s
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SCORE v79.1.2] Spoiler validato: floor 68->75 - Mark Davis Defeats Jack Perry, Wins AEW National Championship On Collision
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SCORE] raffinato=75 priority=medium | AEW, impatto roster/storyline, release/addio, PLE/PPV, v62 titolo/championship, v68 cap opinion senza news concreta, v79.1.2 spoiler live/pre-show floor 68->75
+[V71] story_signature=jack_perry|mark_davis_defeats_jack|wins_aew_national_championship|contract|aew|collision semantic_status=new_story freshness=0.726
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=6
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/mark-davis-defeats-jack-perry-wins-aew-national-championship-on-collision/intro-1778373846.jpg
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[POSTEDIT v79] Testo rifinito con: gemini-2.5-flash-lite
+[PERF v71] traduzione: 8.07s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Mark Davis è il nuovo campione nazionale AEW, ha sconfitto Jack Perry a Collision
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.47s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/mark-davis-defeats-jack-perry-wins-aew-national-championship-on-collision/l-intro-1778373846.jpg
+[MEDIA] Immagine caricata: 4142
+[WP] Status attach image: 200
+[PERF v71] featured image: 3.49s
+[PERF v71] totale articolo pubblicato 'Mark Davis Defeats Jack Perry, Wins AEW National Championshi': 17.05s
+[OK] Pubblicato: [SPOILER] Mark Davis è il nuovo campione nazionale AEW, ha sconfitto Jack Perry a Collision
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: AEW Collision Fairway To Hell Results, Highlights and Key Moments for May 9, 2026
+[BOT] semantic_id=aew-collision-fairway-to-hell-results-highlights-and-key-moments-for-may-9-2026
+[SCORE] iniziale=75 priority=medium
+[SCRAPE] Articolo results rilevato: testo completo (5288 caratteri)
+[PERF v71] scraping articolo: 1.94s
+[BLOCKSEQ] Blocchi ordinati estratti: text=24, image=0, embed=8
+[BOT] Embed trovati: 9
+[PENDING] Coda salvata: 3 elementi
+[REPORT] Salvato/aggiornato pending report: report:aew-collision-2026-05-09 | pronto tra 133 min
+[SKIP v78.1] Gia processato in questa run: WWE Backlash Results, Highlights and Key Moments for May 9, 2026
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive'
+[BOT] semantic_id=brie-bella-comments-on-latest-wwe-run-says-aews-bryan-danielson-is-so-supportive
+[SCORE] iniziale=63 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo parla di un commento di Brie Bella riguardo al suo recente ritorno in WWE e al supporto di Bryan Danielson. Anche se menziona eventi futuri, il focus principale è su dichiarazioni già avvenute e su un'apparizione passata.
+[EDITORIAL v72.3] translation_notes=Non tradurre "WWE Women's Tag Team Championships" ma mantieni il nome originale. "Royal Rumble" e "WrestleMania" sono nomi propri di eventi e vanno mantenuti. "AEW World Champion" 
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo parla di un commento di Brie Bella riguardo al suo recente ritorno in WWE e al supporto di Bryan Danielson. Anche se menziona eventi futuri, il focus principale è su dichiarazioni già avvenute e su un'apparizione passata.
+[PERF v71] analisi editoriale AI v72: 3.28s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive'
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=56 priority=low | WWE/main roster, nomi forti titolo: brie bella, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Brie Bella Comments On Latest WWE Run, Says AEW's Bryan Danielson Is 'So Supportive'
+[BOT] Elaborazione: WWE Announces First-Ever Two-Night TripleMania During Backlash
+[BOT] semantic_id=wwe-announces-first-ever-two-night-triplemania-during-backlash
+[SCORE] iniziale=60 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=0, embed=0
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[EDITORIAL v72.3] type=PREVIEW conf=0.90 | category=WORLD (8) conf=0.80 model=gemini-2.5-flash-lite | L'annuncio di WWE relativo a TripleMania è avvenuto DURANTE Backlash, quindi è una notizia post-evento. TripleMania è storicamente un evento AAA (World), non un evento primario WWE. | guardrail true preview
+[EDITORIAL v72.3] translation_notes=TripleMania è un evento AAA, categoria World.; Mantenere in inglese il nome "TripleMania".; Prestare attenzione a come viene resa la collaborazione tra WWE e AAA.
+[EDITORIAL v73] final type=PREVIEW | category=WORLD (8) | L'annuncio di WWE relativo a TripleMania è avvenuto DURANTE Backlash, quindi è una notizia post-evento. TripleMania è storicamente un evento AAA (World), non un evento primario WWE. | guardrail true preview
+[EDITORIAL v79.1.3] type override PREVIEW->POST_SHOW_NEWS - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[PERF v71] analisi editoriale AI v72: 1.30s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[SCORE] raffinato=56 priority=low | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - WWE Announces First-Ever Two-Night TripleMania During Backlash
+[BOT] Elaborazione: Danhausen Introduces Minihausen As WWE Backlash Mystery Tag Team Partner
+[BOT] semantic_id=danhausen-introduces-minihausen-as-wwe-backlash-mystery-tag-team-partner
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, image=0, embed=2
+[BOT] Embed trovati: 3
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo descrive un segmento avvenuto durante un evento passato (Backlash) e la sua conclusione, non presenta un evento futuro. La categoria WWE è appropriata dato il focus principale.
+[EDITORIAL v72.3] translation_notes=Mantieni "Minihausen" in inglese. "Mystery Tag Team Partner" può essere tradotto come "Partner Misterioso nel Tag Team" o "Partner Misterioso di Coppia". "Very Nice Very Evil Super
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo descrive un segmento avvenuto durante un evento passato (Backlash) e la sua conclusione, non presenta un evento futuro. La categoria WWE è appropriata dato il focus principale.
+[PERF v71] analisi editoriale AI v72: 2.11s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Danhausen Introduces Minihausen As WWE Backlash Mystery Tag Team Partner
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] CACHE: NO - Gemini SPOILER senza hard validation
+[SCORE] raffinato=56 priority=low | WWE/main roster, nomi forti titolo: danhausen, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Danhausen Introduces Minihausen As WWE Backlash Mystery Tag Team Partner
+[BOT] Elaborazione: WWE Backlash 2026 Match Order Reportedly Revealed
+[BOT] semantic_id=wwe-backlash-2026-match-order-reportedly-revealed
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite |  | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Il titolo "Match Order Reportedly Revealed" suggerisce un'anticipazione, quindi PREVIEW. La notizia riguarda l'ordine dei match di un evento futuro.; Mantieni in inglese i nomi dei titoli: "United States Championship" e "World Heavyweight Championship".; Il riferimento a "Fightful Select" come fonte è importante per contestualizzare la natura dell'informazione (rumor/report anticipato).
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.62s
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE Backlash 2026 Match Order Reportedly Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - WWE Backlash 2026 Match Order Reportedly Revealed
+[SCORE v79.1.4] Final cap pre-show obsoleto 50->50 - WWE Backlash 2026 Match Order Reportedly Revealed
+[SCORE] raffinato=50 priority=low | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, titolo/championship, combo top name lead + evento forte, titolo vago, v62 media rights/streaming, v68 cap annuncio vago/futuro, v70 cap preview hard, v79.1.4 pre-show spoiler obsoleto cap, v72.3 cap rumor: niente boost raffinamento
+[PERF v71] scoring raffinato: 0.39s
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 50/75 - WWE Backlash 2026 Match Order Reportedly Revealed
+[BOT] Pubblicati 2 articoli (0 pending + 2 nuove) su 10 candidati provati | mode=normal
+===== RUN END [2026-05-10 00:46:28] VERSION [v79_1_4_spoiler_semantics_outcome_obsolete (fcb0381)] =====
+
