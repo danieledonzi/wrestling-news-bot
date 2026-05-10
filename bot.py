@@ -9,7 +9,7 @@ from pathlib import Path
 import sys
 
 
-BOT_VERSION = "v79_1_3_type_freshness_cap_coherence"
+BOT_VERSION = "v79_1_4_spoiler_semantics_outcome_obsolete"
 
 LOG_DIR = Path("logs")
 LOG_DIR.mkdir(exist_ok=True)
@@ -9760,6 +9760,176 @@ def v723_repair_event_key_after_ai(event_key, title="", text="", url="", editori
         print(f"[FIX v79.1.3] Event key legal falsa rimossa: {repaired} -> {new_key}")
         return new_key
     return repaired
+
+
+
+# =========================
+# v79.1.4: spoiler semantics cleanup
+# =========================
+# Le run v79.1.3 hanno mostrato tre casi distinti:
+# 1) risultati concreti tipo "earns victory" non sempre ricevevano [SPOILER];
+# 2) annunci post-show importanti, es. John Cena Classic, non devono essere spoiler;
+# 3) spoiler pre-show tipo "opening match revealed" diventano obsoleti appena esiste gia'
+#    un risultato/report dello stesso evento. Questo evita [SPOILER] su preview gia' superate.
+
+_ORIG_V7914_v791_has_spoiler_hard_validation = v791_has_spoiler_hard_validation
+_ORIG_V7914_v79_is_live_spoiler_candidate = v79_is_live_spoiler_candidate
+_ORIG_V7914_v7912_is_score_floor_eligible = v7912_is_score_floor_eligible
+_ORIG_V7914_calculate_importance_score = calculate_importance_score
+_ORIG_V7914_v723_conservative_score_after_ai = v723_conservative_score_after_ai
+
+V7914_OUTCOME_SPOILER_TERMS = [
+    "earns victory", "earned victory", "gets win", "got win", "gets the win", "got the win",
+    "picks up win", "picked up win", "scores win", "scored win", "victory over",
+    "defeats", "defeated", "beats", "beat", "pins", "pinned", "submits", "submitted",
+    "retains", "retained", "successfully defended", "new champion", "wins title", "won title",
+    "title change", "championship change", "advances", "eliminates", "eliminated",
+    "sconfigge", "ha sconfitto", "batte", "ha battuto", "vince contro", "vittoria su",
+    "mantiene", "conserva", "difende", "nuovo campione", "nuova campionessa",
+]
+
+V7914_REVEAL_SPOILER_TERMS = [
+    "identity revealed", "identity of", "revealed as", "unmasked as", "mystery partner revealed",
+    "mystery opponent revealed", "return revealed", "surprise appearance", "svelata l'identita",
+    "svelata l'identità", "identita di", "identità di", "partner misterioso",
+]
+
+V7914_ANNOUNCEMENT_NON_SPOILER_TERMS = [
+    "announces plans", "announced plans", "announces tournament", "announced tournament",
+    "announces first-ever", "announced first-ever", "announces partnership", "announced partnership",
+    "announces event", "announced event", "unveils plans", "reveals plans",
+    "annuncia il torneo", "annuncia un torneo", "annuncia piani", "annuncia un evento",
+    "annunciato un evento", "annuncio", "tournament during", "classic tournament",
+]
+
+V7914_PRESHOW_OBSOLETE_TERMS = [
+    "opening match revealed", "match order", "spoiler lineup", "full match card",
+    "backstage notes revealed", "lineup for", "reportedly revealed", "start time", "how to watch",
+]
+
+
+def v7914_probe(title="", text="", url="", max_chars=2400):
+    return normalize_for_check(f"{title or ''} {url or ''} {(text or '')[:max_chars]}")
+
+
+def v7914_has_any(probe, terms):
+    return any(normalize_for_check(t) in probe for t in terms)
+
+
+def v7914_has_outcome_or_reveal_spoiler(title="", text="", url=""):
+    probe = v7914_probe(title, text, url)
+    return v7914_has_any(probe, V7914_OUTCOME_SPOILER_TERMS) or v7914_has_any(probe, V7914_REVEAL_SPOILER_TERMS)
+
+
+def v7914_is_non_spoiler_announcement(title="", text="", url=""):
+    probe = v7914_probe(title, text, url, 1800)
+    if not v7914_has_any(probe, V7914_ANNOUNCEMENT_NON_SPOILER_TERMS):
+        return False
+    # Se l'annuncio rivela anche un outcome concreto o un'identita', resta spoiler.
+    if v7914_has_outcome_or_reveal_spoiler(title, text, url):
+        return False
+    return True
+
+
+def v7914_event_tokens(title="", text="", url=""):
+    probe = v7914_probe(title, text, url, 1600)
+    events = []
+    for ev in [
+        "backlash", "wrestlemania", "summerslam", "royal rumble", "survivor series",
+        "money in the bank", "night of champions", "clash", "crown jewel",
+        "elimination chamber", "raw", "smackdown", "nxt", "dynamite", "collision", "impact",
+        "double or nothing", "all in", "all out", "forbidden door", "revolution", "full gear",
+    ]:
+        if ev in probe:
+            events.append(ev)
+    return events
+
+
+def v7914_history_text(max_chars=700000):
+    try:
+        if os.path.exists(HISTORY_FILE):
+            with open(HISTORY_FILE, "r", encoding="utf-8", errors="ignore") as f:
+                return normalize_for_check(f.read()[-max_chars:])
+    except Exception:
+        pass
+    return ""
+
+
+def v7914_preshow_spoiler_obsolete(title="", text="", url=""):
+    probe = v7914_probe(title, text, url, 1800)
+    if not v7914_has_any(probe, V7914_PRESHOW_OBSOLETE_TERMS):
+        return False
+    events = v7914_event_tokens(title, text, url)
+    if not events:
+        return False
+    hist = v7914_history_text()
+    if not hist:
+        return False
+    result_terms = [
+        "results", "defeats", "defeated", "retains", "retained", "earns victory",
+        "gets win", "victory", "new champion", "title change", "opener", "opening match",
+    ]
+    if not any(ev in hist for ev in events):
+        return False
+    if not any(rt in hist for rt in result_terms):
+        return False
+    return True
+
+
+def v791_has_spoiler_hard_validation(title="", text="", url=""):
+    if _ORIG_V7914_v791_has_spoiler_hard_validation(title, text, url):
+        return True
+    return v7914_has_outcome_or_reveal_spoiler(title, text, url)
+
+
+def v79_is_live_spoiler_candidate(title="", text="", url=""):
+    if v7914_is_non_spoiler_announcement(title, text, url):
+        cache_key = v791_spoiler_cache_key(title, text, url)
+        V791_SPOILER_DECISION_CACHE[cache_key] = (False, "announcement/non-outcome news")
+        print(f"[SPOILER v79.1.4] NO: announcement/non-outcome news - {title}")
+        return False
+    if v7914_preshow_spoiler_obsolete(title, text, url):
+        cache_key = v791_spoiler_cache_key(title, text, url)
+        V791_SPOILER_DECISION_CACHE[cache_key] = (False, "pre-show spoiler obsoleto: risultato evento gia' rilevato")
+        print(f"[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - {title}")
+        return False
+    return _ORIG_V7914_v79_is_live_spoiler_candidate(title, text, url)
+
+
+def v7912_is_score_floor_eligible(title="", text="", url=""):
+    if v7914_is_non_spoiler_announcement(title, text, url):
+        return False
+    if v7914_preshow_spoiler_obsolete(title, text, url):
+        return False
+    return _ORIG_V7914_v7912_is_score_floor_eligible(title, text, url)
+
+
+def calculate_importance_score(title, text="", url=""):
+    score, reasons = _ORIG_V7914_calculate_importance_score(title, text, url)
+    reasons = list(reasons or [])
+    try:
+        if v7914_preshow_spoiler_obsolete(title, text, url):
+            old = int(score or 0)
+            score = min(old, 56)
+            reasons.append("v79.1.4 pre-show spoiler obsoleto cap")
+            print(f"[SCORE v79.1.4] Pre-show spoiler obsoleto cap {old}->{score} - {title}")
+    except Exception as e:
+        print(f"[SCORE v79.1.4] Cap obsoleto non applicato: {e}")
+    return max(0, min(100, int(score or 0))), reasons[:12]
+
+
+def v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title="", text="", url="", editorial_analysis=None):
+    score, reasons = _ORIG_V7914_v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title, text, url, editorial_analysis)
+    reasons = list(reasons or [])
+    try:
+        if v7914_preshow_spoiler_obsolete(title, text, url):
+            old = int(score or 0)
+            score = min(old, 56)
+            reasons.append("v79.1.4 pre-show obsolete final cap")
+            print(f"[SCORE v79.1.4] Final cap pre-show obsoleto {old}->{score} - {title}")
+    except Exception as e:
+        print(f"[SCORE v79.1.4] Final cap obsoleto non applicato: {e}")
+    return max(0, min(100, int(score or 0))), reasons[:12]
 
 
 if __name__ == "__main__":
