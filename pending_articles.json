@@ -1,33 +1,29 @@
 [
   {
     "kind": "report",
-    "url": "https://www.wrestlinginc.com/2168358/wwe-backlash-2026-two-titles-on-line-seth-rollins-bron-breakker/",
-    "title": "WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker",
-    "semantic_id": "report-wwe-backlash-2026-05-09",
-    "title_key": "backlash-results-5-9-two-line-seth-rollins-faces-bron-breakker",
-    "score": 81,
+    "url": "https://www.wrestlinginc.com/2168755/aew-collision-may-9-results/",
+    "title": "AEW Collision 5/9 Results - World & National Titles On The Line, Tag Champs In Action",
+    "semantic_id": "report-aew-collision-2026-05-09",
+    "title_key": "collision-5-9-results-world-national-line-tag-champs-action",
+    "score": 80,
     "priority": "high",
-    "event_key": "report:wwe-backlash-2026-05-09",
-    "report_event_key": "report:wwe-backlash-2026-05-09",
+    "event_key": "report:aew-collision-2026-05-09",
+    "report_event_key": "report:aew-collision-2026-05-09",
     "reasons": [
-      "WWE/main roster",
-      "nomi forti titolo: seth rollins",
-      "WWE main roster + storyline/evento",
-      "titolo/championship",
+      "AEW",
+      "show settimanale",
       "v62 titolo/championship",
       "v75 hard results report",
       "v77 hard report protected",
-      "v71 freshness=0.557"
+      "v71 freshness=0.593"
     ],
     "score_reasons": [
-      "WWE/main roster",
-      "nomi forti titolo: seth rollins",
-      "WWE main roster + storyline/evento",
-      "titolo/championship",
+      "AEW",
+      "show settimanale",
       "v62 titolo/championship",
       "v75 hard results report",
       "v77 hard report protected",
-      "v71 freshness=0.557",
+      "v71 freshness=0.593",
       "report live: pubblicazione ritardata",
       "report live aggregato"
     ],
@@ -35,30 +31,84 @@
     "breaking_expires_at": 0,
     "status": "waiting_report_completion",
     "reason": "report_live_delay",
-    "created_at": 1778356800.0,
-    "first_seen": 1778356800.0,
-    "last_seen": 1778372031.3082645,
-    "not_before": 1778374860.0,
+    "created_at": 1778367496.0,
+    "first_seen": 1778367496.0,
+    "last_seen": 1778372528.0486753,
+    "not_before": 1778380096.0,
     "attempts": 0,
     "sources": [
       {
-        "url": "https://www.wrestlinginc.com/2168358/wwe-backlash-2026-two-titles-on-line-seth-rollins-bron-breakker/",
-        "title": "WWE Backlash Results 5/9 - Two Titles On The Line, Seth Rollins Faces Bron Breakker",
+        "url": "https://www.wrestlinginc.com/2168755/aew-collision-may-9-results/",
+        "title": "AEW Collision 5/9 Results - World & National Titles On The Line, Tag Champs In Action",
         "source": "www.wrestlinginc.com",
-        "first_seen": 1778356800.0,
-        "last_seen": 1778372029.331911,
-        "last_text_len": 13294
+        "first_seen": 1778367496.0,
+        "last_seen": 1778372526.6377249,
+        "last_text_len": 674
       },
+      {
+        "url": "https://www.ringsidenews.com/aew-collision-fairway-hell-results-highlights-key-moments-may-9-2026/",
+        "title": "AEW Collision Fairway To Hell Results, Highlights and Key Moments for May 9, 2026",
+        "source": "www.ringsidenews.com",
+        "first_seen": 1778369460.0,
+        "last_seen": 1778372528.0486753,
+        "last_text_len": 3238
+      }
+    ],
+    "story_signature_v71": "aew_collision|national_titles_on_the|tag_champs_in_action|report|aew|collision"
+  },
+  {
+    "kind": "report",
+    "url": "https://www.ringsidenews.com/wwe-backlash-results-highlights-key-moments-may-9-2026/",
+    "title": "WWE Backlash Results, Highlights and Key Moments for May 9, 2026",
+    "semantic_id": "report-wwe-backlash-2026-05-09",
+    "title_key": "backlash-results-highlights-key-moments-may-9",
+    "score": 75,
+    "priority": "medium",
+    "event_key": "report:wwe-backlash-2026-05-09",
+    "report_event_key": "report:wwe-backlash-2026-05-09",
+    "reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "titolo/championship",
+      "floor WWE main roster storyline",
+      "v62 titolo/championship",
+      "v75 hard results report",
+      "v77 hard report protected",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.519"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "titolo/championship",
+      "floor WWE main roster storyline",
+      "v62 titolo/championship",
+      "v75 hard results report",
+      "v77 hard report protected",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.519",
+      "report live: pubblicazione ritardata"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 0,
+    "status": "waiting_report_completion",
+    "reason": "report_live_delay",
+    "created_at": 1778355060.0,
+    "first_seen": 1778355060.0,
+    "last_seen": 1778372528.6195223,
+    "not_before": 1778374860.0,
+    "attempts": 0,
+    "sources": [
       {
         "url": "https://www.ringsidenews.com/wwe-backlash-results-highlights-key-moments-may-9-2026/",
         "title": "WWE Backlash Results, Highlights and Key Moments for May 9, 2026",
         "source": "www.ringsidenews.com",
         "first_seen": 1778355060.0,
-        "last_seen": 1778372031.3082645,
+        "last_seen": 1778372528.6195223,
         "last_text_len": 25936
       }
     ],
-    "story_signature_v71": "seth_rollins|wwe_backlash_results|two_titles_on_the|report|wwe|backlash"
+    "story_signature_v71": "wwe_backlash_results|key_moments|report|wwe|backlash"
   },
   {
     "kind": "report",
