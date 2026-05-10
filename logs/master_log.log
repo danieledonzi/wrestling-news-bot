@@ -1691,3 +1691,107 @@
 [PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
 ===== RUN END [2026-05-10 16:46:25] VERSION [v81_translation_preservation_and_flat_review_archive (c33fc92)] =====
 
+
+===== RUN START [2026-05-10 17:44:43] VERSION [v81_translation_preservation_and_flat_review_archive (9549da9)] =====
+[WP] Health check API timeout | tentativo 1/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f7652935ed0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Root /wp-json/ non raggiungibile | tentativo 1/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f7652936290>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Health check API timeout | tentativo 2/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f7652936530>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Root /wp-json/ non raggiungibile | tentativo 2/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f7652936890>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Health check API timeout | tentativo 3/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f7652936b30>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Root /wp-json/ non raggiungibile | tentativo 3/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f7652936e90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] WordPress/API non disponibile dopo 3 tentativi: api_timeout: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f7652936b30>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP v78] Skip lookup REST (wp_has_published_event): WordPress/API offline in cache (api_timeout: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f7652936b30>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)')))
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): Former WWE Star Maven Is Happy About This Key Change In Pro Wrestling Culture
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Kit Wilson Details Creative Process Behind Current Character
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (16/75): WWE Star The Miz Reflects On Hosting American Gladiators Reboot
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167856/wwe-nxt-myles-borne-randy-orton-inspiration/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167778/sheamus-looks-back-winning-wwe-title/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167564/wwe-smackdown-charlotte-flair-kiana-james-main-event-player/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (10/75): Jeff Jarrett Looks Back On Hulk Hogan's TNA Run & Differing Creative Visions
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (16/75): Eric Bischoff Discusses WWE HOFer Hulk Hogan's Vulnerability In New Doc
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167463/aew-tony-schiavone-assesses-netflix-hulk-hogan-doc/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168960/wwe-backlash-2026-roman-reigns-jacob-fatu-this-is-your-last-night-here/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167426/wwe-wrestlemania-42-tiffany-stratton-paige-reaction-return/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (22/75): AEW's Thunder Rosa Says She'd Lose Big Stipulation Match 'If The Price Is Right'
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (29/75): Will Ospreay Discusses Pressure Of Being A Top Star In AEW
+[SKIP] URL già in history: https://www.wrestlinginc.com/2167038/aew-bobby-lashley-world-title-ambitions-fans-see-it/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (0/75): WWE Backlash 2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168820/aew-collision-darby-allin-pac-world-title-defense/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168808/wwe-backlash-2026-jacob-fatu-roman-reigns-controversial-loss/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168799/aew-collision-mark-davis-jack-perry-national-championship/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): AJ Styles Calls Out Negative WWE Fans Who Complain About Everything
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (25/75): AJ Styles Open to Long-Term WWE Producer Role After NXT Visit
+[SKIP] URL già in history: https://www.ringsidenews.com/danhausen-claims-cm-punk-stole-his-finisher-wrestling-return/
+[SKIP v71] Story signature gia' in history: stable:danhausen|identity_reveal|wwe|backlash - Danhausen Addresses Wild Rumors About His Mystery Partner for WWE Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/conflicting-reports-emerge-asukas-wwe-status-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/kazuchika-okada-pulled-aew-title-match-due-real-life-family-situation/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): IYO SKY Fuels More Speculation About Asuka's WWE Future
+[SKIP v71] Story signature gia' in history: stable:john_cena|announcement|wwe|backlash - Fans Clown John Cena Over Bald Spot During WWE Backlash Appearance
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): Asuka May Be Semi-Retired Following WWE Backlash Moment
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (49/75): JBL Defends WWE Talent Accepting Pay Cuts Amid Fan Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/backstage-reaction-asukas-emotional-wwe-backlash-moment-amid-uncertainty-about-her-future/
+[SKIP v71] Story signature gia' in history: stable:minihausen|danhausen|identity_reveal|wwe|backlash - Jonathan Coachman Calls Danhausen Experiment a Waste of Time and He's Over It
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): Big E Raises Questions About Asuka's WWE Future After Emotional Backlash Moment
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-announces-huge-womens-title-match-double-nothing-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/jack-perry-joins-stadium-stampede-match-aew-title-loss/
+[SCORE] 100 high - Breaking Down The Belts: Rhea Ripley's WWE Women's Championship | WWE/main roster, top star titolo: rhea ripley, nomi forti lead: jade cargill, WWE main roster + storyline/evento, breaking/major update, PLE/PPV, v62 titolo/championship, v71 freshness=0.588
+[SCORE] 94 high - Minihausen Mask Made By Former WWE 205 Live Star | WWE/main roster, nomi forti lead: danhausen, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 ritorno/debutto, v71 freshness=0.713
+[MODE] Modalita normale: 2 news >=90, 2 news >=80
+[BOT] WordPress offline: assegno score e salvo solo i candidati che sarebbero stati pubblicati, senza chiamare Gemini.
+[PENDING] Coda salvata: 2 elementi
+[PENDING] Salvata news high (100): Breaking Down The Belts: Rhea Ripley's WWE Women's Championship
+[PENDING] Coda salvata: 3 elementi
+[PENDING] Salvata news high (94): Minihausen Mask Made By Former WWE 205 Live Star
+[PENDING] Candidati salvati per dopo: 2
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+===== RUN END [2026-05-10 17:44:43] VERSION [v81_translation_preservation_and_flat_review_archive (9549da9)] =====
+
