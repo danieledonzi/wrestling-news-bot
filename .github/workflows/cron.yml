@@ -43,9 +43,11 @@ jobs:
           WP_EDITORIALI_CATEGORY_ID: 13
           PUBLISHED_HTML_REVIEW_ENABLED: "1"
           PUBLISHED_HTML_REVIEW_DIR: published_html_review
+          REVIEW_BUNDLE_ENABLED: "1"
+          REVIEW_BUNDLE_PATH: review_bundle_latest.zip
+          REVIEW_PACKAGE_ENABLED: "0"
         run: python bot.py
 
-      
       - name: Upload master log
         if: always()
         uses: actions/upload-artifact@v4
@@ -54,8 +56,15 @@ jobs:
           path: logs/master_log.log
           if-no-files-found: warn
 
+      - name: Upload cumulative review bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: review-bundle-latest
+          path: review_bundle_latest.zip
+          if-no-files-found: warn
 
-      - name: Save bot state and logs
+      - name: Save bot state, logs and review bundle
         if: always()
         run: |
           git config --global user.name "News Bot"
@@ -70,13 +79,14 @@ jobs:
           [ -f failed_articles.json ] && git add -f failed_articles.json
           [ -f logs/master_log.log ] && git add -f logs/master_log.log
           [ -f logs/master_log_state.json ] && git add -f logs/master_log_state.json
-          [ -d published_html_review ] && git add -f published_html_review/
+          [ -d published_html_review ] && git add -f published_html_review
+          [ -f review_bundle_latest.zip ] && git add -f review_bundle_latest.zip
 
           echo "STATUS AFTER ADD:"
           git status --short
 
           if ! git diff --cached --quiet; then
-            git commit -m "Update bot state and logs [skip ci]"
+            git commit -m "Update bot state, logs and review bundle [skip ci]"
             git push origin main
           else
             echo "Nessuna modifica da salvare"
