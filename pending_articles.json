@@ -1,1 +1,107 @@
-[]
+[
+  {
+    "url": "https://www.ringsidenews.com/cm-punks-status-may-11-wwe-raw-amid-ongoing-tv-absence/",
+    "title": "CM Punk's Status for May 11 WWE RAW Amid Ongoing TV Absence",
+    "semantic_id": "cm-punks-status-for-may-11-wwe-raw-amid-ongoing-tv-absence",
+    "title_key": "cm-punk-s-may-11-raw-amid-ongoing-tv-absence",
+    "score": 84,
+    "priority": "high",
+    "event_key": "",
+    "story_signature_v71": "stable:cm_punk|outcome|wwe|raw",
+    "summary": "CM Punk’s WWE status for this week’s RAW is now looking much clearer — and fans waiting for a surprise appearance probably shouldn’t get their hopes up. According to PWInsider, ...",
+    "reasons": [
+      "WWE/main roster",
+      "top star titolo: cm punk",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "show settimanale",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.689"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "top star titolo: cm punk",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "show settimanale",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.689"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778536368.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778516963.6430013,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.ringsidenews.com/where-things-stand-brock-lesnar-wwe-alumni-section-move/",
+    "title": "Where Things Stand With Brock Lesnar and WWE After Alumni Section Move",
+    "semantic_id": "where-things-stand-with-brock-lesnar-and-wwe-after-alumni-section-move",
+    "title_key": "where-stand-brock-lesnar-alumni-section-move",
+    "score": 73,
+    "priority": "medium",
+    "event_key": "",
+    "story_signature_v71": "stable:brock_lesnar|outcome|wwe|wrestlemania",
+    "summary": "Brock Lesnar may have left his boots in the ring at WrestleMania 42 — but WWE apparently still isn’t treating him like someone completely gone. According to PWInsider, Lesnar is ...",
+    "reasons": [
+      "WWE/main roster",
+      "top star titolo: brock lesnar",
+      "WWE main roster + storyline/evento",
+      "PLE/PPV",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.686",
+      "v48 tier2: 55-74"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "top star titolo: brock lesnar",
+      "WWE main roster + storyline/evento",
+      "PLE/PPV",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.686",
+      "v48 tier2: 55-74"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778535581.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778516963.8285758,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.wrestlinginc.com/2169669/aew-kazuchika-okada-darby-allin-canceling-world-title-match/",
+    "title": "Backstage Report On AEW Canceling Kazuchika Okada World Title Match Vs. Darby Allin",
+    "semantic_id": "backstage-report-on-aew-canceling-kazuchika-okada-world-title-match-vs-darby-allin",
+    "title_key": "backstage-canceling-kazuchika-okada-world-darby-allin",
+    "score": 70,
+    "priority": "medium",
+    "event_key": "event:title:darby-allin:world:tag:championship:dynamite",
+    "story_signature_v71": "stable:kazuchika_okada|darby_allin|s_world_championship_on_this_week|report|aew|dynamite",
+    "summary": "Kazuchika Okada was scheduled to challenge Darby Allin for the AEW Men's World Championship on this week's \"Dynamite\".",
+    "reasons": [
+      "AEW",
+      "impatto roster/storyline",
+      "titolo/championship",
+      "show settimanale",
+      "v62 titolo/championship",
+      "v71 freshness=0.596",
+      "v48 tier2: 55-74"
+    ],
+    "score_reasons": [
+      "AEW",
+      "impatto roster/storyline",
+      "titolo/championship",
+      "show settimanale",
+      "v62 titolo/championship",
+      "v71 freshness=0.596",
+      "v48 tier2: 55-74"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778534575.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778516961.0348792,
+    "attempts": 0
+  }
+]
