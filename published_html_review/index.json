@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-11 20:29:36",
-  "last_bot_version": "v83_quality_routing_and_smart_preservation (7549c11)",
-  "updated_at": "2026-05-11T20:35:32",
-  "total_items": 29,
+  "last_run_id": "2026-05-11 22:01:05",
+  "last_bot_version": "v83_quality_routing_and_smart_preservation (c534712)",
+  "updated_at": "2026-05-11T22:07:50",
+  "total_items": 32,
   "items": [
     {
       "run_id": "2026-05-10 14:39:11",
@@ -236,6 +236,30 @@
       "original_html_file": "20260511_203532_005_mvp-critica-triple-h-non-ha-aiutato-i-talenti-quanto-the-undertaker_f0f17e4d_original.html",
       "final_html_file": "20260511_203532_005_mvp-critica-triple-h-non-ha-aiutato-i-talenti-quanto-the-undertaker_f0f17e4d_final.html",
       "metadata_file": "20260511_203532_005_mvp-critica-triple-h-non-ha-aiutato-i-talenti-quanto-the-undertaker_f0f17e4d_metadata.json"
+    },
+    {
+      "run_id": "2026-05-11 22:01:05",
+      "title": "Thekla commenta un possibile approdo di Kairi Sane in AEW dopo l'addio alla WWE",
+      "url": "https://www.ringsidenews.com/thekla-addresses-kairi-sane-potentially-joining-aew-wwe-release/",
+      "original_html_file": "20260511_220416_001_thekla-commenta-un-possibile-approdo-di-kairi-sane-in-aew-dopo-l-addio-alla-wwe_1564fa69_original.html",
+      "final_html_file": "20260511_220416_001_thekla-commenta-un-possibile-approdo-di-kairi-sane-in-aew-dopo-l-addio-alla-wwe_1564fa69_final.html",
+      "metadata_file": "20260511_220416_001_thekla-commenta-un-possibile-approdo-di-kairi-sane-in-aew-dopo-l-addio-alla-wwe_1564fa69_metadata.json"
+    },
+    {
+      "run_id": "2026-05-11 22:01:05",
+      "title": "WWE: Brock Lesnar ancora presente nel roster interno come atleta attivo",
+      "url": "https://www.wrestlinginc.com/2170284/brock-lesnar-wwe-active-performer-internally-listed-retirement-alumni/",
+      "original_html_file": "20260511_220615_002_wwe-brock-lesnar-ancora-presente-nel-roster-interno-come-atleta-attivo_b16854c8_original.html",
+      "final_html_file": "20260511_220615_002_wwe-brock-lesnar-ancora-presente-nel-roster-interno-come-atleta-attivo_b16854c8_final.html",
+      "metadata_file": "20260511_220615_002_wwe-brock-lesnar-ancora-presente-nel-roster-interno-come-atleta-attivo_b16854c8_metadata.json"
+    },
+    {
+      "run_id": "2026-05-11 22:01:05",
+      "title": "Thekla spiega perché ha firmato il rinnovo pluriennale con la AEW",
+      "url": "https://www.ringsidenews.com/thekla-explains-why-signing-new-aew-multi-year-deal-no-brainer/",
+      "original_html_file": "20260511_220750_003_thekla-spiega-perch-ha-firmato-il-rinnovo-pluriennale-con-la-aew_1dac55bd_original.html",
+      "final_html_file": "20260511_220750_003_thekla-spiega-perch-ha-firmato-il-rinnovo-pluriennale-con-la-aew_1dac55bd_final.html",
+      "metadata_file": "20260511_220750_003_thekla-spiega-perch-ha-firmato-il-rinnovo-pluriennale-con-la-aew_1dac55bd_metadata.json"
     }
   ]
 }

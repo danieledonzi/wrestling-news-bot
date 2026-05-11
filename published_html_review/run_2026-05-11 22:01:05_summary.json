@@ -1,0 +1,32 @@
+{
+  "run_id": "2026-05-11 22:01:05",
+  "bot_version": "v83_quality_routing_and_smart_preservation (c534712)",
+  "git_sha": "c5347127f57fbc92807d8bb900ba2e9e4a890cc4",
+  "published_items_count": 3,
+  "items": [
+    {
+      "run_id": "2026-05-11 22:01:05",
+      "title": "Thekla commenta un possibile approdo di Kairi Sane in AEW dopo l'addio alla WWE",
+      "url": "https://www.ringsidenews.com/thekla-addresses-kairi-sane-potentially-joining-aew-wwe-release/",
+      "original_html_file": "20260511_220416_001_thekla-commenta-un-possibile-approdo-di-kairi-sane-in-aew-dopo-l-addio-alla-wwe_1564fa69_original.html",
+      "final_html_file": "20260511_220416_001_thekla-commenta-un-possibile-approdo-di-kairi-sane-in-aew-dopo-l-addio-alla-wwe_1564fa69_final.html",
+      "metadata_file": "20260511_220416_001_thekla-commenta-un-possibile-approdo-di-kairi-sane-in-aew-dopo-l-addio-alla-wwe_1564fa69_metadata.json"
+    },
+    {
+      "run_id": "2026-05-11 22:01:05",
+      "title": "WWE: Brock Lesnar ancora presente nel roster interno come atleta attivo",
+      "url": "https://www.wrestlinginc.com/2170284/brock-lesnar-wwe-active-performer-internally-listed-retirement-alumni/",
+      "original_html_file": "20260511_220615_002_wwe-brock-lesnar-ancora-presente-nel-roster-interno-come-atleta-attivo_b16854c8_original.html",
+      "final_html_file": "20260511_220615_002_wwe-brock-lesnar-ancora-presente-nel-roster-interno-come-atleta-attivo_b16854c8_final.html",
+      "metadata_file": "20260511_220615_002_wwe-brock-lesnar-ancora-presente-nel-roster-interno-come-atleta-attivo_b16854c8_metadata.json"
+    },
+    {
+      "run_id": "2026-05-11 22:01:05",
+      "title": "Thekla spiega perché ha firmato il rinnovo pluriennale con la AEW",
+      "url": "https://www.ringsidenews.com/thekla-explains-why-signing-new-aew-multi-year-deal-no-brainer/",
+      "original_html_file": "20260511_220750_003_thekla-spiega-perch-ha-firmato-il-rinnovo-pluriennale-con-la-aew_1dac55bd_original.html",
+      "final_html_file": "20260511_220750_003_thekla-spiega-perch-ha-firmato-il-rinnovo-pluriennale-con-la-aew_1dac55bd_final.html",
+      "metadata_file": "20260511_220750_003_thekla-spiega-perch-ha-firmato-il-rinnovo-pluriennale-con-la-aew_1dac55bd_metadata.json"
+    }
+  ]
+}

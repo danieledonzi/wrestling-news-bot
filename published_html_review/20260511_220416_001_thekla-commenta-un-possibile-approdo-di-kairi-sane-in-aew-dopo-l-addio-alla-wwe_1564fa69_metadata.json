@@ -1,0 +1,39 @@
+{
+  "run_id": "2026-05-11 22:01:05",
+  "bot_version": "v83_quality_routing_and_smart_preservation (c534712)",
+  "git_sha": "c5347127f57fbc92807d8bb900ba2e9e4a890cc4",
+  "created_at": "2026-05-11T22:04:16",
+  "source_title": "Thekla Addresses Kairi Sane Potentially Joining AEW After WWE Release",
+  "final_title": "Thekla commenta un possibile approdo di Kairi Sane in AEW dopo l'addio alla WWE",
+  "source_url": "https://www.ringsidenews.com/thekla-addresses-kairi-sane-potentially-joining-aew-wwe-release/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "thekla-addresses-kairi-sane-potentially-joining-aew-after-wwe-release",
+  "story_signature_v71": "stable:kairi_sane|iyo_sky|announcement|wwe|aew|wrestlemania",
+  "refined_score": 78,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "release/addio",
+    "PLE/PPV",
+    "opinione generica",
+    "v62 ritorno/debutto",
+    "v62 categoria business",
+    "v66 cap opinion/commentary storyline"
+  ],
+  "blocks_summary": {
+    "text": 9,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://www.facebook.com/ringsidenews",
+    "https://www.youtube.com/watch?v=xqFaoJiO6JE"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260511_220416_001_thekla-commenta-un-possibile-approdo-di-kairi-sane-in-aew-dopo-l-addio-alla-wwe_1564fa69_original.html",
+  "final_html_file": "20260511_220416_001_thekla-commenta-un-possibile-approdo-di-kairi-sane-in-aew-dopo-l-addio-alla-wwe_1564fa69_final.html",
+  "metadata_file": "20260511_220416_001_thekla-commenta-un-possibile-approdo-di-kairi-sane-in-aew-dopo-l-addio-alla-wwe_1564fa69_metadata.json"
+}

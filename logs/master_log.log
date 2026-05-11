@@ -6166,3 +6166,396 @@
 [REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (117 file)
 ===== RUN END [2026-05-11 20:29:36] VERSION [v83_quality_routing_and_smart_preservation (7549c11)] =====
 
+
+===== RUN START [2026-05-11 22:01:05] VERSION [v83_quality_routing_and_smart_preservation (c534712)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (56/75): Backstage News On Asuka's Status For Tonight's WWE Raw And Beyond
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): AJ Styles Offers More Detail On Current WWE Scouting Role
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (54/75): TNA Impact Ratings & Viewership Report: 5/7/2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (16/75): Kevin Nash On Bron Breakker: 'When Is WWE Going To Realize That He Is A Steiner?'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (27/75): Booker T Believes New Day Are Heading To AEW, Still 'First-Ballot' WWE HOFers
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): AEW Star Bobby Lashley On WWE Letting The New Day Walk: 'That Was A Fumble'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2169969/wwe-jeff-jarrett-releases-nobody-safe/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (24/75): WWE's Kit Wilson Explains Why It's 'An Honor' To Be Working With The Miz
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2169836/tna-wwe-matt-hardy-working-relationship-heat-back-up/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (15/75): NJPW Star Hiroyoshi Tenzan Announces Impending Retirement
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (37/75): AEW Announces U.K. Date For Dynamite & Collision Ahead Of All In 2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2169669/aew-kazuchika-okada-darby-allin-canceling-world-title-match/
+[SKIP v71] Story signature gia' in history: stable:iyo_sky|asuka|report - Backstage Report On Asuka's WWE Status Following Backlash Send-Off
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SCORE v79.1.2] Spoiler validato: floor 56->75 - Last-Minute Update on Asuka's Status for May 11 WWE RAW After Backlash
+[SPOILER v79.1.1] CACHE: YES - Gemini SPOILER + hard validation
+[SKIP] Score sotto soglia editoriale (70/75): Last-Minute Update on Asuka's Status for May 11 WWE RAW After Backlash
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-files-5-million-lawsuit-against-trillertv-unpaid-revenue/
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:roman-reigns - WWE Confirms New June RAW Dates for Roman Reigns After Schedule Changes
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (49/75): TNA iMPACT Viewership Sees Massive Drop on May 7, 2026
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - Zelina Vega Already Taking Wrestling Bookings After WWE Release
+[SKIP] URL già in history: https://www.ringsidenews.com/mvp-calls-out-triple-h-rarely-elevating-wwe-talent/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (27/75): Zilla Fatu Explains Why He Has No Interest In Signing With AEW
+[SKIP] URL già in history: https://www.ringsidenews.com/elite-vs-new-day-match-closer-happening-than-fans-realized/
+[SKIP] URL già in history: https://www.ringsidenews.com/major-obstacles-revealed-irelands-push-host-wwe-wrestlemania/
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - Interesting Name Was Present Backstage for WWE Backlash 2026
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - Interesting Name Was Present Backstage for WWE Backlash 2026
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - Interesting Name Was Present Backstage for WWE Backlash 2026
+[SCORE v81.1] Cap future card announcement 56->56 - Interesting Name Was Present Backstage for WWE Backlash 2026
+[SKIP] Score sotto soglia editoriale (51/75): Interesting Name Was Present Backstage for WWE Backlash 2026
+[SKIP] URL già in history: https://www.ringsidenews.com/cody-rhodes-reveals-nintendo-sent-him-cease-desist-zelda-inspired-wwe-gear/
+[SKIP] URL già in history: https://www.ringsidenews.com/cm-punks-status-may-11-wwe-raw-amid-ongoing-tv-absence/
+[SKIP] URL già in history: https://www.ringsidenews.com/where-things-stand-brock-lesnar-wwe-alumni-section-move/
+[SCORE] 100 high - WWE Confirms New June RAW Dates for Roman Reigns After Schedule Changes | WWE/main roster, top star titolo: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 categoria business, v71 freshness=0.555
+[SCORE] 100 high - Zelina Vega Already Taking Wrestling Bookings After WWE Release | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v62 categoria business, v71 freshness=0.66
+[SCORE] 81 high - Backstage Update On Potential For Future WWE WrestleMania In Ireland | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, v71 freshness=0.699
+[SCORE] 73 medium - Thekla Addresses Kairi Sane Potentially Joining AEW After WWE Release | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v62 ritorno/debutto, v62 categoria business, v66 cap opinion/commentary storyline, v71 source reliability soft penalty, v71 freshness=0.683, v48 tier2: 55-74
+[SCORE] 68 medium - Brock Lesnar Reportedly Still Internally Listed As Active Performer In WWE | WWE/main roster, top star titolo: brock lesnar, rumor/backstage, combo top name titolo + evento forte, v71 freshness=0.608, v48 tier2: 55-74
+[SCORE] 55 low - Spoiler: ROH Title Changes Hands During Latest Taping | altre promotion, titolo/championship, v62 titolo/championship, v68 floor post-show news concreta, v71 freshness=0.672, v48 tier2: 55-74
+[SCORE] 49 low - Thekla Explains Why Signing New AEW Multi-Year Deal Was a No-Brainer | AEW, impatto roster/storyline, release/addio, v62 titolo/championship, v68 cap duro opinion/commentary, v71 source reliability soft penalty, v71 freshness=0.572, v48 tier3: 45-54 contestuale
+[SCORE] 49 low - Dave Meltzer Says WWE Has Been Considering Aspect Of John Cena Classic For 15 Years | WWE/main roster, top star titolo: john cena, intervista/opinione, v71 freshness=0.542, v48 tier3: 45-54 contestuale
+[SCORE] 48 low - Jim Ross Offers Advice To Aleister Black & Zelina Vega Following WWE Departures | WWE/main roster, impatto roster/storyline, release/addio, v71 freshness=0.563, v48 tier3: 45-54 contestuale
+[SCORE] 48 low - David Otunga Has Tough Love Advice For WWE Releases | WWE/main roster, impatto roster/storyline, release/addio, v71 freshness=0.66, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 2 news >=90, 3 news >=80
+[MODEL v83] Route mode=normal report=False score=0 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 11 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: WWE Confirms New June RAW Dates for Roman Reigns After Schedule Changes
+[BOT] semantic_id=wwe-confirms-new-june-raw-dates-for-roman-reigns-after-schedule-changes
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[BOT] Embed trovati: 2
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[MODEL v83] Route mode=normal report=False score=100 chain=gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-flash
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.80 | category=WWE (4) conf=1.00 model=gemini-2.5-flash | Notizia autonoma relativa a un cambio di programma annunciato ufficialmente dalla WWE per Roman Reigns, nonostante le date si riferiscano a eventi futuri.
+[EDITORIAL v72.3] translation_notes=Il titolo deve essere riformulato per suonare italiano (es. 'WWE: Roman Reigns tornerà a Raw a giugno, annunciate le nuove date').; Nomi di eventi e soprannomi vanno mantenuti in inglese (es. 'Night of Champions', 'The Tribal Chief').; Evitare calchi per 'pulled from advertised appearances' (es. 'escluso/rimosso dalle apparizioni pubblicizzate').
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Notizia autonoma relativa a un cambio di programma annunciato ufficialmente dalla WWE per Roman Reigns, nonostante le date si riferiscano a eventi futuri.
+[PERF v71] analisi editoriale AI v72: 18.44s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE Confirms New June RAW Dates for Roman Reigns After Schedule Changes
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 categoria business
+[V71] story_signature=stable:roman_reigns|announcement|wwe|raw|backlash|night_of_champions semantic_status=new_story freshness=0.555
+[PERF v71] WP recent posts dedupe: 1.01s
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:roman-reigns - WWE Confirms New June RAW Dates for Roman Reigns After Schedule Changes
+[SKIP] News core già pubblicata da altra fonte: WWE Confirms New June RAW Dates for Roman Reigns After Schedule Changes
+[SKIP] news_core_key=schedule-backlash
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Zelina Vega Already Taking Wrestling Bookings After WWE Release
+[BOT] semantic_id=zelina-vega-already-taking-wrestling-bookings-after-wwe-release
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=0
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[GEMINI] Uso modello: gemini-2.5-flash
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.95 model=gemini-2.5-flash | L'articolo riporta una notizia autonoma su un evento già accaduto (licenziamento di Zelina Vega e sue dichiarazioni post-WWE), focalizzandosi su una ex star del main roster WWE.
+[EDITORIAL v72.3] translation_notes='WWE release' e 'released' non devono diventare 'rilascio/rilasciato', ma 'licenziamento', 'licenziata', 'addio alla WWE' a seconda del contesto.; Le quote devono essere tradotte fedelmente, non parafrasate (es. 'When people call me... it would say Stamford... this time it said TKO', 'business is business').; Evitare calchi: 'taking wrestling bookings' -> 'accettando ingaggi di wrestling'; 'rebuilding momentum' -> 'ricostruire il proprio slancio'; 'crossover appeal' -> 'attrattiva trasv
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta una notizia autonoma su un evento già accaduto (licenziamento di Zelina Vega e sue dichiarazioni post-WWE), focalizzandosi su una ex star del main roster WWE.
+[PERF v71] analisi editoriale AI v72: 7.98s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Zelina Vega Already Taking Wrestling Bookings After WWE Release
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SPOILER v79.1.1] CACHE: NO - Gemini NOT_SPOILER
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v62 categoria business
+[V71] story_signature=stable:zelina_vega_already|taking_wrestling_bookings|contract|wwe|wrestlemania|tko semantic_status=new_story freshness=0.66
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - Zelina Vega Already Taking Wrestling Bookings After WWE Release
+[SKIP] News core già pubblicata da altra fonte: Zelina Vega Already Taking Wrestling Bookings After WWE Release
+[SKIP] news_core_key=business-tko-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Backstage Update On Potential For Future WWE WrestleMania In Ireland
+[BOT] semantic_id=backstage-update-on-potential-for-future-wwe-wrestlemania-in-ireland
+[SCORE] iniziale=81 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=normal report=False score=81 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo tratta indiscrezioni di backstage su piani futuri e fattibilità di ospitare WrestleMania in Irlanda, basandosi su report di Fightful Select.
+[EDITORIAL v72.3] translation_notes=Mantenere 'WrestleMania' e 'Premium Live Event'.; Non tradurre 'site fee' come tariffa del sito, ma come tassa/canone per l'assegnazione dell'evento.; Evitare calchi per 'long-term project' e 'global sporting hub'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo tratta indiscrezioni di backstage su piani futuri e fattibilità di ospitare WrestleMania in Irlanda, basandosi su report di Fightful Select.
+[PERF v71] analisi editoriale AI v72: 7.17s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=68 priority=medium | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v62 ritorno/debutto, v72.3 cap rumor
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Backstage Update On Potential For Future WWE WrestleMania In Ireland
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:wwe:wrestlemania-host-bid:ireland -> event:rumor:backstage-update-potential-future-ireland
+[V71] story_signature=backstage_update_on_potential|for_future_wwe_wrestlemania|in_ireland|rumor|wwe|wrestlemania semantic_status=new_story freshness=0.582
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=5
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/backstage-update-on-potential-for-future-wwe-wrestlemania-in-ireland/intro-1778528868.jpg
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=41 generato=['44']", "Numero evento alterato: WrestleMania sorgente=43 generato=['44']"]
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TRANSLATE] Errore: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=41 generato=['44']", "Numero evento alterato: WrestleMania sorgente=43 generato=['44']"]
+[PERF v71] traduzione: 31.08s
+[SKIP] Traduzione fallita: Backstage Update On Potential For Future WWE WrestleMania In Ireland (err_type=validation)
+[FAILED] URL sospeso 24h dopo 2 validation fail: Backstage Update On Potential For Future WWE WrestleMania In Ireland
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Thekla Addresses Kairi Sane Potentially Joining AEW After WWE Release
+[BOT] semantic_id=thekla-addresses-kairi-sane-potentially-joining-aew-after-wwe-release
+[SCORE] iniziale=73 priority=medium
+[PERF v71] scraping articolo: 2.09s
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[BOT] Embed trovati: 2
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=normal report=False score=73 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=AEW (5) conf=0.90 model=gemini-3.1-flash-lite | L'articolo analizza le dichiarazioni di Thekla su una possibile firma di Kairi Sane in AEW in seguito al suo licenziamento, integrando le news recenti di Meltzer sulla sua uscita dalla WWE.
+[EDITORIAL v72.3] translation_notes=Mantenere 'AEW' e 'WWE' come acronimi.; Tradurre 'release' come 'licenziamento'.; Evitare calchi come 'the receipt is still waiting to be paid' (usare espressioni idiomatiche come 'conti in sospeso').
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | L'articolo analizza le dichiarazioni di Thekla su una possibile firma di Kairi Sane in AEW in seguito al suo licenziamento, integrando le news recenti di Meltzer sulla sua uscita dalla WWE.
+[PERF v71] analisi editoriale AI v72: 5.66s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Thekla Addresses Kairi Sane Potentially Joining AEW After WWE Release
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=78 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v62 ritorno/debutto, v62 categoria business, v66 cap opinion/commentary storyline
+[V71] story_signature=stable:kairi_sane|iyo_sky|announcement|wwe|aew|wrestlemania semantic_status=new_story freshness=0.682
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=9
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 23.41s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Thekla commenta un possibile approdo di Kairi Sane in AEW dopo l'addio alla WWE
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 5.89s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/thekla-addresses-kairi-sane-potentially-joining-aew-after-wwe-release-40.jpg
+[MEDIA] Immagine caricata: 4304
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.48s
+[PERF v71] totale articolo pubblicato 'Thekla Addresses Kairi Sane Potentially Joining AEW After WW': 39.20s
+[OK] Pubblicato: Thekla commenta un possibile approdo di Kairi Sane in AEW dopo l'addio alla WWE
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260511_220416_001_thekla-commenta-un-possibile-approdo-di-kairi-sane-in-aew-dopo-l-addio-alla-wwe_1564fa69_*.html
+[BOT] Elaborazione: Brock Lesnar Reportedly Still Internally Listed As Active Performer In WWE
+[BOT] semantic_id=brock-lesnar-reportedly-still-internally-listed-as-active-performer-in-wwe
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=normal report=False score=68 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza lo status contrattuale interno di Brock Lesnar riportando indiscrezioni di PWInsider, configurandosi come un aggiornamento di backstage su una star.
+[EDITORIAL v72.3] translation_notes=Mantenere 'alumni section' o tradurre con 'sezione dedicata alle leggende/ex wrestler' nel sito WWE.; 'Free agent' va lasciato come termine tecnico del wrestling.; Evitare calchi come 'took over the news cycle' (usare 'ha dominato il dibattito').
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo analizza lo status contrattuale interno di Brock Lesnar riportando indiscrezioni di PWInsider, configurandosi come un aggiornamento di backstage su una star.
+[PERF v71] analisi editoriale AI v72: 29.86s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=68 priority=medium | WWE/main roster, top star titolo: brock lesnar, nomi forti lead: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, evento legale/controversia, combo top name titolo + evento forte, PLE/PPV, v62 evento legale grave, v72.3 cap rumor: niente boost raffinamento
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Brock Lesnar Reportedly Still Internally Listed As Active Performer In WWE
+[FIX v79.1.3] Event key legal falsa rimossa: event:legal:vince-mcmahon -> event:story:brock-lesnar-still-internally-listed-as-active-performer
+[V71] story_signature=stable:vince_mcmahon|brock_lesnar|outcome|wwe|raw|smackdown|backlash semantic_status=new_story freshness=0.841
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/brock-lesnar-reportedly-still-internally-listed-as-active-performer-in-wwe/intro-1778536274.jpg
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[CAREER v80.9] Repair frase career/status con gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[CAREER v80.9] Repair frase career/status con gemini-3.1-flash-lite
+[PERF v71] traduzione: 65.30s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WWE: Brock Lesnar ancora presente nel roster interno come atleta attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 18.35s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/brock-lesnar-reportedly-still-internally-listed-as-active-performer-in-wwe/l-intro-1778536274.jpg
+[MEDIA] Immagine caricata: 4307
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.86s
+[PERF v71] totale articolo pubblicato 'Brock Lesnar Reportedly Still Internally Listed As Active Pe': 117.12s
+[OK] Pubblicato: WWE: Brock Lesnar ancora presente nel roster interno come atleta attivo
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260511_220615_002_wwe-brock-lesnar-ancora-presente-nel-roster-interno-come-atleta-attivo_b16854c8_*.html
+[BOT] Elaborazione: Spoiler: ROH Title Changes Hands During Latest Taping
+[BOT] semantic_id=spoiler-roh-title-changes-hands-during-latest-taping
+[SCORE] iniziale=55 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=normal report=False score=55 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WORLD (8) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta un cambio di titolo già avvenuto durante i taping TV, configurandosi come notizia di cronaca post-evento e non come preview. ROH ricade in 'World' in quanto non è WWE/AEW/NXT/TNA.
+[EDITORIAL v72.3] translation_notes=Mantenere 'ROH World Television Championship' in inglese.; Non tradurre 'taping' con termini letterali; usare 'registrazioni TV'.; 'Changes hands' va reso come 'cambio di titolo' o 'il titolo cambia padrone'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WORLD (8) | L'articolo riporta un cambio di titolo già avvenuto durante i taping TV, configurandosi come notizia di cronaca post-evento e non come preview. ROH ricade in 'World' in quanto non è WWE/AEW/NXT/TNA.
+[PERF v71] analisi editoriale AI v72: 5.38s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Spoiler: ROH Title Changes Hands During Latest Taping
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=56 priority=low | AEW, impatto roster/storyline, infortunio, show settimanale, v62 titolo/championship, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Spoiler: ROH Title Changes Hands During Latest Taping
+[BOT] Elaborazione: Thekla Explains Why Signing New AEW Multi-Year Deal Was a No-Brainer
+[BOT] semantic_id=thekla-explains-why-signing-new-aew-multi-year-deal-was-a-no-brainer
+[SCORE] iniziale=49 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=0, embed=0
+[BOT] Embed trovati: 2
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=normal report=False score=49 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta commenti ufficiali di Thekla su un contratto già firmato e retroscena di mercato. Non è una preview.
+[EDITORIAL v72.3] translation_notes=Mantenere titoli come 'AEW Women's World Champion' in inglese.; Non tradurre 'no-brainer' letteralmente, usare 'scelta ovvia' o 'facile'.; 'Locker room' si può tradurre come spogliatoio.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | L'articolo riporta commenti ufficiali di Thekla su un contratto già firmato e retroscena di mercato. Non è una preview.
+[PERF v71] analisi editoriale AI v72: 14.74s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Thekla Explains Why Signing New AEW Multi-Year Deal Was a No-Brainer
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=54 priority=low | AEW, impatto roster/storyline, release/addio, v62 titolo/championship, v68 cap duro opinion/commentary
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Thekla Explains Why Signing New AEW Multi-Year Deal Was a No-Brainer
+[V71] story_signature=stable:tony_khan|contract|aew semantic_status=new_story freshness=0.571
+[PERF v71] WP recent posts dedupe: 1.19s
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:title:tony-khan:world:tag:championship -> event:title:tony-khan:world:tag:championship-followup-thekla-explains-why-signing-multi-year-deal-was-a-no-brainer
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.53s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=13
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione scartato: editorial_word_ratio=0.66 (304/458) threshold=0.70
+[PERF v71] traduzione: 64.76s
+[FIX] Titolo non valido (ok) -> fallback automatico: Thekla spiega perché signing new AEW multi-year deal was a no-brainer
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Thekla spiega perché ha firmato il rinnovo pluriennale con la AEW
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 5.88s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/thekla-explains-why-signing-new-aew-multi-year-deal-was-a-no-brainer-20.jpg
+[MEDIA] Immagine caricata: 4310
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.24s
+[PERF v71] totale articolo pubblicato 'Thekla Explains Why Signing New AEW Multi-Year Deal Was a No': 88.81s
+[OK] Pubblicato: Thekla spiega perché ha firmato il rinnovo pluriennale con la AEW
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260511_220750_003_thekla-spiega-perch-ha-firmato-il-rinnovo-pluriennale-con-la-aew_1dac55bd_*.html
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 7 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (127 file)
+===== RUN END [2026-05-11 22:01:05] VERSION [v83_quality_routing_and_smart_preservation (c534712)] =====
+
