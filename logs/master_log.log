@@ -4938,3 +4938,187 @@
 [REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (80 file)
 ===== RUN END [2026-05-11 14:14:58] VERSION [v82_editorial_realism_microtext_adaptation (dabc256)] =====
 
+
+===== RUN START [2026-05-11 14:44:42] VERSION [v83_quality_routing_and_smart_preservation (dbbe0c4)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168327/former-divas-champion-kaitlyn-whether-return-wwe/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (12/75): Former Middleweight Champion Chris Weidman To Be Inducted Into UFC Hall Of Fame
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Sean Strickland Squashes Beef With Khamzat Chimaev Following UFC 328
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (14/75): AEW's Paul Wight (FKA Big Show) Explains Why He Never Considered Career In MMA
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (12/75): Dana White Details What Conor McGregor's New UFC Deal Might Look Like
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (30/75): Dana White Confirms Khamzat Chimaev's Next Move After UFC 328 Loss
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Dana White Provides Details On 'Free' Tickets To Watch UFC Freedom 250 At White House
+[SKIP v71] Story signature gia' in history: stable:seth_rollins|injury|wwe - WWE's Seth Rollins Discusses Coming Back From Injury
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168295/wwe-maven-only-one-niche-accomplishment-hardcore-championship/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (32/75): Former AEW World Tag Team Champion Anthony Bowens On The 'Challenge' Of Singles Competition
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (35/75): Bully Ray Explains Why He'd Rather See Former WWE Stars The New Day In TNA Over AEW
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE v81.1] Cap light name-driven item 16->16 - Chavo Guerrero Looks Back On Legacy Of His Uncle Eddie
+[SKIP] Score sotto soglia editoriale (16/75): Chavo Guerrero Looks Back On Legacy Of His Uncle Eddie
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2168131/wwe-jacob-fatu-5-dream-wrestlemania-main-event-opponents/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2169121/wwe-us-champ-trick-williams-not-everyone-worthy-title-shot/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168128/wwe-chelsea-green-subtle-difference-pitching-complaining/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168023/wwe-nxt-myles-borne-mens-north-american-title/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2169086/tko-wwe-wcw-eric-bischoff-ted-turner-serious-debt-gratitude/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (14/75): Former WWE Star Maven Is Happy About This Key Change In Pro Wrestling Culture
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/vince-russo-calls-out-wwe-stars-downplaying-attitude-era/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Kevin Hart Names Hulk Hogan on His Mount Rushmore of Racism
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (35/75): The Rock Gets Wild at Kevin Hart Roast With NSFW Jokes About Their Friendship
+[SKIP] URL già in history: https://www.ringsidenews.com/kevin-nash-goes-nuclear-tko-wwe-talent-pay-cuts-executive-bonuses/
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Still Hasn't Finalized Format for John Cena Classic Tournament
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Still Hasn't Finalized Format for John Cena Classic Tournament
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Still Hasn't Finalized Format for John Cena Classic Tournament
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (15/75): Paul Wight Reveals Why He Pretended to be Colorblind for a Year
+[SKIP] URL già in history: https://www.ringsidenews.com/why-no-cut-contracts-wwe-may-not-mean-what-fans-think/
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - WWE RAW Preview for May 11, 2026: Confirmed Matches, Start Time and How to Watch
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - WWE RAW Preview for May 11, 2026: Confirmed Matches, Start Time and How to Watch
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - WWE RAW Preview for May 11, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - WWE RAW Preview for May 11, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v81.1] Cap future card announcement 56->56 - WWE RAW Preview for May 11, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (51/75): WWE RAW Preview for May 11, 2026: Confirmed Matches, Start Time and How to Watch
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (23/75): Footage Shows Unruly Fan Getting Kicked Out Of WWE SmackDown This Week
+[SKIP] URL già in history: https://www.ringsidenews.com/major-backstage-update-asukas-wwe-future-backlash/
+[SKIP] URL già in history: https://www.ringsidenews.com/dawn-marie-addresses-potential-ring-return-17-years/
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[SKIP] URL già in history: https://www.ringsidenews.com/several-matches-segments-revealed-may-11-wwe-raw/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (21/75): Entire AEW Jazwares Division Let Go In Company Layoffs
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (33/75): WWE Superstars Send Tributes To Asuka Upon News of Rumors of Semi-Retirement
+[SCORE] 50 low - WWE Backlash 2026: Biggest Winners & Losers | WWE/main roster, nomi forti lead: danhausen, WWE main roster + storyline/evento, floor WWE main roster storyline, titolo vago, v71 freshness=0.382, v48 tier3: 45-54 contestuale
+[SCORE] 48 low - WWE Still Hasn't Finalized Format for John Cena Classic Tournament | WWE/main roster, top star titolo: john cena, rumor/backstage, v71 source reliability soft penalty, v71 freshness=0.536, v48 tier3: 45-54 contestuale
+[SCORE] 43 low - Booker T Says Someone Needs To 'Step Up' To Become New Face Of WWE NXT | WWE/main roster, nomi forti titolo: booker t, intervista/opinione, show settimanale, v71 freshness=0.608, v48 tier4: 40-44 riempimento controllato
+[SCORE] 40 low - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament | WWE/main roster, top star titolo: john cena, v71 source reliability soft penalty, v71 freshness=0.366, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[MODEL v83] Route mode=normal report=False score=0 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 4 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: WWE Backlash 2026: Biggest Winners & Losers
+[BOT] semantic_id=wwe-backlash-2026-biggest-winners-losers
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=20, image=5, embed=0
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[MODEL v83] Route mode=normal report=False score=50 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza vincitori e vinti di un PLE già concluso tramite un commento soggettivo dell'autore.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (es. John Cena Classic Championship) in inglese.; Tradurre 'Winners and Losers' come 'Vincitori e Vinti'.; Evitare traduzioni letterali per 'inaugural' (usare 'primo vincitore storico') e 'bloviating' (chiacchiere inutili).
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo analizza vincitori e vinti di un PLE già concluso tramite un commento soggettivo dell'autore.
+[PERF v71] analisi editoriale AI v72: 3.47s
+[SCORE] raffinato=0 priority=skip | v64 skip opinion/listicle non-news
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 0/75 - WWE Backlash 2026: Biggest Winners & Losers
+[BOT] Elaborazione: WWE Still Hasn't Finalized Format for John Cena Classic Tournament
+[BOT] semantic_id=wwe-still-hasnt-finalized-format-for-john-cena-classic-tournament
+[SCORE] iniziale=48 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=0
+[BOT] Embed trovati: 2
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Still Hasn't Finalized Format for John Cena Classic Tournament
+[MODEL v83] Route mode=normal report=False score=48 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Still Hasn't Finalized Format for John Cena Classic Tournament
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta informazioni di backstage sul processo creativo in corso per un progetto WWE, basandosi su report di Meltzer e dichiarazioni di Cena.
+[EDITORIAL v72.3] translation_notes=Mantenere 'John Cena Classic' o 'John Cena Invitational' come nomi propri.; Tradurre 'work in progress' come 'lavori in corso' o 'progetto in fase di definizione'.; Evitare di tradurre 'stipulations' o 'tournament' come semplici sinonimi, usare terminologia tecnica del wrestling.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta informazioni di backstage sul processo creativo in corso per un progetto WWE, basandosi su report di Meltzer e dichiarazioni di Cena.
+[PERF v71] analisi editoriale AI v72: 4.00s
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Still Hasn't Finalized Format for John Cena Classic Tournament
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Still Hasn't Finalized Format for John Cena Classic Tournament
+[SCORE] raffinato=48 priority=low | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 reazioni/tributi, v77 cap low editorial value, v72.3 cap rumor: niente boost raffinamento
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 48/75 - WWE Still Hasn't Finalized Format for John Cena Classic Tournament
+[BOT] Elaborazione: Booker T Says Someone Needs To 'Step Up' To Become New Face Of WWE NXT
+[BOT] semantic_id=booker-t-says-someone-needs-to-step-up-to-become-new-face-of-wwe-nxt
+[SCORE] iniziale=43 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=normal report=False score=43 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=OPINION conf=0.95 | category=NXT (6) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta le considerazioni di Booker T espresse nel suo podcast riguardo allo stato del roster di NXT dopo le chiamate nel main roster.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei wrestler in inglese.; 'Step up' va reso come 'farsi avanti' o 'cogliere l'occasione'.; 'Brass ring' va tradotto come 'l'occasione d'oro' o 'il salto di qualità'.
+[EDITORIAL v73] final type=OPINION | category=NXT (6) | L'articolo riporta le considerazioni di Booker T espresse nel suo podcast riguardo allo stato del roster di NXT dopo le chiamate nel main roster.
+[PERF v71] analisi editoriale AI v72: 3.01s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=43 priority=low | WWE/main roster, nomi forti titolo: booker t, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, opinione generica, developmental secondario, v62 ritorno/debutto, v72.3 cap opinion: niente boost raffinamento
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 43/75 - Booker T Says Someone Needs To 'Step Up' To Become New Face Of WWE NXT
+[BOT] Elaborazione: Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[BOT] semantic_id=lexis-king-claims-credit-for-wwes-john-cena-classic-tournament
+[SCORE] iniziale=40 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=1
+[BOT] Embed trovati: 3
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[MODEL v83] Route mode=normal report=False score=40 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=NXT (6) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta commenti di Lexis King e le dichiarazioni di John Cena post-Backlash su un progetto già annunciato; non è una preview.
+[EDITORIAL v72.3] translation_notes=Mantenere 'John Cena Classic' come nome proprio del torneo.; Tradurre 'taking credit' come 'si prende il merito' o 'rivendica la paternità'.; Non tradurre 'Performance Center' o 'PC'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=NXT (6) | L'articolo riporta commenti di Lexis King e le dichiarazioni di John Cena post-Backlash su un progetto già annunciato; non è una preview.
+[PERF v71] analisi editoriale AI v72: 2.29s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, opinione generica, developmental secondario, v62 reazioni/tributi, v68 cap duro opinion/commentary
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 4 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (81 file)
+===== RUN END [2026-05-11 14:44:42] VERSION [v83_quality_routing_and_smart_preservation (dbbe0c4)] =====
+
