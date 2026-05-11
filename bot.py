@@ -11854,6 +11854,176 @@ def finalize_published_html_review_index():
 
 
 # =========================
+# v81.1 - review bundle + editorial microfixes
+# =========================
+BOT_VERSION = "v81_1_review_bundle_and_editorial_microfixes"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+# Keep references to v81 runtime functions before overriding them.
+_ORIG_V811_v79_is_live_spoiler_candidate = v79_is_live_spoiler_candidate
+_ORIG_V811_v7912_is_score_floor_eligible = v7912_is_score_floor_eligible
+_ORIG_V811_calculate_importance_score = calculate_importance_score
+_ORIG_V811_v721_ensure_italian_title = v721_ensure_italian_title
+
+REVIEW_BUNDLE_ENABLED = os.getenv("REVIEW_BUNDLE_ENABLED", "1").lower() not in {"0", "false", "no"}
+REVIEW_BUNDLE_PATH = Path(os.getenv("REVIEW_BUNDLE_PATH", "review_bundle_latest.zip"))
+
+
+def v811_probe(title="", text="", url="", limit=2400):
+    return f"{title or ''}\n{text or ''}\n{url or ''}".lower()[:limit]
+
+
+V811_FUTURE_CARD_ANNOUNCEMENT_TERMS = [
+    "revealed for may", "revealed for tonight", "revealed for monday", "revealed for friday",
+    "matches & segments revealed", "matches and segments revealed", "segments revealed for",
+    "announced for raw", "announced for smackdown", "announced for dynamite", "announced for collision",
+    "set for raw", "set for smackdown", "set for dynamite", "set for collision",
+    "lineup for", "preview", "confirmed matches", "start time", "how to watch",
+]
+
+
+def v811_is_future_card_announcement(title="", text="", url=""):
+    probe = v811_probe(title, text, url)
+    if not any(term in probe for term in V811_FUTURE_CARD_ANNOUNCEMENT_TERMS):
+        return False
+    # Concrete results/reveals remain eligible for spoiler logic.
+    if v7914_has_outcome_or_reveal_spoiler(title, text, url):
+        return False
+    return True
+
+
+def v79_is_live_spoiler_candidate(title="", text="", url=""):
+    if v811_is_future_card_announcement(title, text, url):
+        try:
+            cache_key = v791_spoiler_cache_key(title, text, url)
+            V791_SPOILER_DECISION_CACHE[cache_key] = (False, "future card announcement is not spoiler")
+        except Exception:
+            pass
+        print(f"[SPOILER v81.1] NO: future card/segment announcement non-spoiler - {title}")
+        return False
+    return _ORIG_V811_v79_is_live_spoiler_candidate(title, text, url)
+
+
+def v7912_is_score_floor_eligible(title="", text="", url=""):
+    if v811_is_future_card_announcement(title, text, url):
+        return False
+    return _ORIG_V811_v7912_is_score_floor_eligible(title, text, url)
+
+
+V811_LIGHT_NEWS_TERMS = [
+    "stole my finisher", "stole his finisher", "stole her finisher", "stole the finisher",
+    "difference between proposing and complaining", "proposal vs complaining",
+    "rules out in-ring return", "rules out a return", "not returning to the ring",
+    "reflects on", "looks back on", "recalls", "remembers",
+    "fan backlash", "clown", "bald spot", "locker room gift",
+]
+
+V811_CONCRETE_HIGH_VALUE_TERMS = [
+    "championship", "title change", "wins title", "wins championship", "retains", "defeats",
+    "debut", "return", "returns", "injury", "injured", "released", "contract", "signs",
+    "match announced", "added to", "pulled", "cancelled", "lawsuit", "arrest", "dies", "dead",
+]
+
+
+def v811_is_light_name_driven_item(title="", text="", url=""):
+    probe = v811_probe(title, text, url)
+    if not any(term in probe for term in V811_LIGHT_NEWS_TERMS):
+        return False
+    if any(term in probe for term in V811_CONCRETE_HIGH_VALUE_TERMS):
+        return False
+    return True
+
+
+def calculate_importance_score(title, text="", url=""):
+    score, reasons = _ORIG_V811_calculate_importance_score(title, text, url)
+    try:
+        if v811_is_future_card_announcement(title, text, url):
+            old = score
+            score = min(score, 72)
+            reasons.append(f"v81.1 cap future card announcement {old}->{score}")
+            print(f"[SCORE v81.1] Cap future card announcement {old}->{score} - {title}")
+        elif v811_is_light_name_driven_item(title, text, url):
+            old = score
+            score = min(score, 78)
+            reasons.append(f"v81.1 cap light name-driven item {old}->{score}")
+            print(f"[SCORE v81.1] Cap light name-driven item {old}->{score} - {title}")
+    except Exception as e:
+        print(f"[SCORE v81.1] Cap microfix non applicato: {e}")
+    return score, reasons
+
+
+def v811_cleanup_title_championship_terms(title="", source_title="", source_text=""):
+    fixed = title or ""
+    source_probe = f"{source_title or ''}\n{source_text or ''}".lower()
+    # Avoid truncated official title fragments such as "WWE Women's:".
+    if "wwe women's championship" in source_probe or "wwe women’s championship" in source_probe:
+        fixed = re.sub(r"\bWWE Women['’]s\b(?!\s+(?:Championship|Champion|Title))", "WWE Women's Championship", fixed)
+    if "women's world championship" in source_probe or "women’s world championship" in source_probe:
+        fixed = re.sub(r"\bWomen['’]s World\b(?!\s+(?:Championship|Champion|Title))", "Women's World Championship", fixed)
+    if "nxt north american" in source_probe or "north american championship" in source_probe:
+        fixed = re.sub(r"\btitolo nordamericano\b", "NXT North American Championship", fixed, flags=re.I)
+        fixed = re.sub(r"\btitolo North American\b", "NXT North American Championship", fixed, flags=re.I)
+    fixed = re.sub(r"\s+", " ", fixed).strip()
+    return fixed
+
+
+def v721_ensure_italian_title(title, source_title="", source_text="", source_url=""):
+    fixed = _ORIG_V811_v721_ensure_italian_title(title, source_title, source_text, source_url)
+    cleaned = v811_cleanup_title_championship_terms(fixed, source_title, source_text)
+    if cleaned != fixed:
+        print(f"[TITLE v81.1] Cleanup titolo/cintura: {cleaned}")
+    return cleaned
+
+
+def create_review_bundle_latest():
+    """Create a cumulative ZIP snapshot for easy upload/review.
+
+    Includes the whole published_html_review directory plus logs/master_log.log
+    and logs/master_log_state.json when present. This is cumulative, not run-only.
+    """
+    if not REVIEW_BUNDLE_ENABLED:
+        return
+    try:
+        import zipfile
+        bundle_path = REVIEW_BUNDLE_PATH
+        if not bundle_path.is_absolute():
+            bundle_path = Path(bundle_path)
+        if bundle_path.parent and str(bundle_path.parent) not in {"", "."}:
+            bundle_path.parent.mkdir(parents=True, exist_ok=True)
+
+        review_dir = Path(os.getenv("PUBLISHED_HTML_REVIEW_DIR", "published_html_review"))
+        files_added = 0
+        with zipfile.ZipFile(bundle_path, "w", compression=zipfile.ZIP_DEFLATED) as zf:
+            if review_dir.exists():
+                for path in sorted(review_dir.rglob("*")):
+                    if path.is_file():
+                        zf.write(path, path.as_posix())
+                        files_added += 1
+            for extra in [LOG_FILE, LOG_STATE_FILE]:
+                try:
+                    if Path(extra).exists():
+                        zf.write(Path(extra), Path(extra).as_posix())
+                        files_added += 1
+                except Exception:
+                    pass
+            manifest = {
+                "schema": "owtv_review_bundle_v81_1",
+                "created_at": datetime.now().isoformat(timespec="seconds"),
+                "run_id": RUN_ID,
+                "bot_version": BOT_VERSION_FULL,
+                "git_sha": GIT_SHA,
+                "review_dir": review_dir.as_posix(),
+                "bundle_type": "cumulative_snapshot",
+                "files_added": files_added,
+            }
+            zf.writestr("review_bundle_manifest.json", json.dumps(manifest, ensure_ascii=False, indent=2))
+            files_added += 1
+        print(f"[REVIEW BUNDLE v81.1] Creato bundle cumulativo: {bundle_path} ({files_added} file)")
+    except Exception as e:
+        print(f"[REVIEW BUNDLE v81.1] Errore creazione bundle: {e}")
+
+
+# =========================
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 # =========================
 if __name__ == "__main__":
@@ -11862,5 +12032,6 @@ if __name__ == "__main__":
         run_bot()
     finally:
         finalize_published_html_review_index()
+        create_review_bundle_latest()
         review_finalize_package()
         log_run_end()
