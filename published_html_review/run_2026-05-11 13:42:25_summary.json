@@ -1,0 +1,24 @@
+{
+  "run_id": "2026-05-11 13:42:25",
+  "bot_version": "v81_1_review_bundle_and_editorial_microfixes (5b66d93)",
+  "git_sha": "5b66d9359e4652ba0882098507d8bbab42a2ba06",
+  "published_items_count": 2,
+  "items": [
+    {
+      "run_id": "2026-05-11 13:42:25",
+      "title": "Kevin Nash critica TKO: \"Tagli ai wrestler, bonus agli executive\"",
+      "url": "https://www.ringsidenews.com/kevin-nash-goes-nuclear-tko-wwe-talent-pay-cuts-executive-bonuses/",
+      "original_html_file": "20260511_134500_001_kevin-nash-critica-tko-tagli-ai-wrestler-bonus-agli-executive_73c02f5a_original.html",
+      "final_html_file": "20260511_134500_001_kevin-nash-critica-tko-tagli-ai-wrestler-bonus-agli-executive_73c02f5a_final.html",
+      "metadata_file": "20260511_134500_001_kevin-nash-critica-tko-tagli-ai-wrestler-bonus-agli-executive_73c02f5a_metadata.json"
+    },
+    {
+      "run_id": "2026-05-11 13:42:25",
+      "title": "Kaitlyn: \"Tornerei in WWE se l'opportunità fosse giusta\"",
+      "url": "https://www.wrestlinginc.com/2168327/former-divas-champion-kaitlyn-whether-return-wwe/",
+      "original_html_file": "20260511_134530_002_kaitlyn-tornerei-in-wwe-se-l-opportunit-fosse-giusta_5f5a77ed_original.html",
+      "final_html_file": "20260511_134530_002_kaitlyn-tornerei-in-wwe-se-l-opportunit-fosse-giusta_5f5a77ed_final.html",
+      "metadata_file": "20260511_134530_002_kaitlyn-tornerei-in-wwe-se-l-opportunit-fosse-giusta_5f5a77ed_metadata.json"
+    }
+  ]
+}
