@@ -3780,3 +3780,259 @@
 [PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
 ===== RUN END [2026-05-11 06:33:40] VERSION [v81_translation_preservation_and_flat_review_archive (4157bca)] =====
 
+
+===== RUN START [2026-05-11 10:33:04] VERSION [v81_translation_preservation_and_flat_review_archive (fc4ae4e)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[PENDING] Rimuovo report già pubblicato: report:aew-collision-2026-05-09
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (12/75): Former Middleweight Champion Chris Weidman To Be Inducted Into UFC Hall Of Fame
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Sean Strickland Squashes Beef With Khamzat Chimaev Following UFC 328
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (14/75): AEW's Paul Wight (FKA Big Show) Explains Why He Never Considered Career In MMA
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (12/75): Dana White Details What Conor McGregor's New UFC Deal Might Look Like
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (30/75): Dana White Confirms Khamzat Chimaev's Next Move After UFC 328 Loss
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Dana White Provides Details On 'Free' Tickets To Watch UFC Freedom 250 At White House
+[SKIP v71] Story signature gia' in history: stable:seth_rollins|injury|wwe - WWE's Seth Rollins Discusses Coming Back From Injury
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (32/75): Former AEW World Tag Team Champion Anthony Bowens On The 'Challenge' Of Singles Competition
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (50/75): WWE Backlash 2026: Biggest Winners & Losers
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (35/75): Bully Ray Explains Why He'd Rather See Former WWE Stars The New Day In TNA Over AEW
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (16/75): Chavo Guerrero Looks Back On Legacy Of His Uncle Eddie
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2168131/wwe-jacob-fatu-5-dream-wrestlemania-main-event-opponents/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2169121/wwe-us-champ-trick-williams-not-everyone-worthy-title-shot/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168128/wwe-chelsea-green-subtle-difference-pitching-complaining/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168023/wwe-nxt-myles-borne-mens-north-american-title/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (54/75): Eric Bischoff: 'TKO Owes A Serious Debt Of Gratitude To Ted Turner'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): Former WWE Star Maven Is Happy About This Key Change In Pro Wrestling Culture
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Kit Wilson Details Creative Process Behind Current Character
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (15/75): Paul Wight Reveals Why He Pretended to be Colorblind for a Year
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE RAW Preview for May 11, 2026: Confirmed Matches, Start Time and How to Watch
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE RAW Preview for May 11, 2026: Confirmed Matches, Start Time and How to Watch
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - WWE RAW Preview for May 11, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - WWE RAW Preview for May 11, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (51/75): WWE RAW Preview for May 11, 2026: Confirmed Matches, Start Time and How to Watch
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (23/75): Footage Shows Unruly Fan Getting Kicked Out Of WWE SmackDown This Week
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): Major Backstage Update on Asuka's WWE Future After Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/dawn-marie-addresses-potential-ring-return-17-years/
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[SKIP] URL già in history: https://www.ringsidenews.com/several-matches-segments-revealed-may-11-wwe-raw/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (21/75): Entire AEW Jazwares Division Let Go In Company Layoffs
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (33/75): WWE Superstars Send Tributes To Asuka Upon News of Rumors of Semi-Retirement
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (19/75): Jacob Fatu Explains Chaotic Chain of Events That Led to WWE Signing
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (57/75): John Cena Responds To Mixed Reaction Over WWE John Cena Classic Announcement
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Paul Wight Reveals Doctors Expected Him to Die Before 45 Amid Brutal Acromegaly Battle
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (43/75): Paul Wight Details Scary Fan Encounter That Led to Broken Jaw And Huge Legal Costs
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SCORE] 94 high - Minihausen Mask Made By Former WWE 205 Live Star | WWE/main roster, nomi forti lead: danhausen, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 ritorno/debutto, v71 freshness=0.503
+[SCORE] 83 high - Ex-WWE Star Jake Hager Coming Out of Retirement for Surprise Wrestling Return | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 ritorno/debutto, v71 source reliability soft penalty, v71 freshness=0.492
+[SCORE] 73 medium - Former WWE Star Maven Says He's The Only One To Achieve This Niche Accomplishment | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v71 freshness=0.44, v48 tier2: 55-74
+[SCORE] 43 low - Why No-Cut Contracts in WWE May Not Mean What Fans Think | WWE/main roster, impatto roster/storyline, release/addio, v71 source reliability soft penalty, v71 freshness=0.692, v48 tier4: 40-44 riempimento controllato
+[SCORE] 40 low - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament | WWE/main roster, top star titolo: john cena, v71 source reliability soft penalty, v71 freshness=0.419, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 1 news >=90, 2 news >=80
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 5 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Minihausen Mask Made By Former WWE 205 Live Star
+[BOT] semantic_id=minihausen-mask-made-by-former-wwe-205-live-star
+[SCORE] iniziale=94 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo parla di un segmento avvenuto durante WWE Backlash, quindi non è una preview. Il focus principale è sul wrestler WWE (Lince Dorado/Danhausen) e sul suo abbigliamento.
+[EDITORIAL v72.3] translation_notes=Titolo: "Minihausen Mask Made By Former WWE 205 Live Star" -> da adattare per suonare più italiano e meno letterale, ad esempio "La maschera di Minihausen creata da un ex star di W; "WWE 205 Live" si riferisce alla ex divisione 205 Live della WWE, mantenere il nome originale o specificare meglio se necessario.; Evitare calchi come "rid the toxicity" (hanno scacciato la tossicità) -> usare "hanno sconfitto" o "hanno eliminato".
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo parla di un segmento avvenuto durante WWE Backlash, quindi non è una preview. Il focus principale è sul wrestler WWE (Lince Dorado/Danhausen) e sul suo abbigliamento.
+[PERF v71] analisi editoriale AI v72: 3.78s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Minihausen Mask Made By Former WWE 205 Live Star
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE v79.1.3] Recovery post-show 62->94 - Minihausen Mask Made By Former WWE 205 Live Star
+[SCORE] raffinato=94 priority=high | WWE/main roster, top star lead: cm punk, nomi forti lead: cm punk, danhausen, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name lead + evento forte, PLE/PPV, contenuto leggero, developmental secondario, v79.1.3 post-show recovery 62->94
+[V71] story_signature=minihausen_mask_made_by|former_wwe|live_star|return|wwe|aaa|wrestlemania|backlash semantic_status=new_story freshness=0.503
+[PERF v71] WP recent posts dedupe: 1.01s
+[PERF v71] WP lookup event_key: 0.87s
+[SKIP] Event key confermata su WordPress: event:cm-punk-return - Minihausen Mask Made By Former WWE 205 Live Star
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Ex-WWE Star Jake Hager Coming Out of Retirement for Surprise Wrestling Return
+[BOT] semantic_id=ex-wwe-star-jake-hager-coming-out-of-retirement-for-surprise-wrestling-return
+[SCORE] iniziale=83 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[EDITORIAL v72.3] type=OTHER conf=0.90 | category=WORLD (8) conf=0.80 model=gemini-2.5-flash-lite | L'articolo annuncia un evento futuro (WWC 53rd Anniversary) e la partecipazione di Jake Hager, rientrando perfettamente nella definizione di PREVIEW. La categoria World è la più appropriata dato che non riguarda le promotion principali ma u
+[EDITORIAL v72.3] translation_notes=I nomi dei titoli/cinture restano in inglese.; Evitare traduzioni letterali di espressioni come 'coming out of retirement' (es. 'uscita dal ritiro', 'rientro dall'inattività').; 'Quadrilateros' è un termine spagnolo/portoghese, potrebbe essere tradotto come 'ring' o 'ring squared', ma si può anche mantenere se il contesto lo rende chiaro.
+[CATEGORY v73] World downgrade: WORLD -> WWE | non wrestling internazionale
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo annuncia un evento futuro (WWC 53rd Anniversary) e la partecipazione di Jake Hager, rientrando perfettamente nella definizione di PREVIEW. La categoria World è la più appropriata dato che non riguarda le promotion principali ma u
+[PERF v71] analisi editoriale AI v72: 2.38s
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, opinione generica, v62 ritorno/debutto, v66 cap opinion/commentary storyline, v68 cap duro opinion/commentary
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Ex-WWE Star Jake Hager Coming Out of Retirement for Surprise Wrestling Return
+[BOT] Elaborazione: Former WWE Star Maven Says He's The Only One To Achieve This Niche Accomplishment
+[BOT] semantic_id=former-wwe-star-maven-says-hes-the-only-one-to-achieve-this-niche-accomplishment
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.90 | category=WWE (4) conf=0.95 model=gemini-2.5-flash-lite | L'articolo parla di un'impresa passata di un ex wrestler WWE, Maven, legata alla Hardcore Championship. Non è una preview di un evento futuro, né un report completo. Si concentra su una notizia specifica legata a un'apparizione/un'affermazi
+[EDITORIAL v72.3] translation_notes=Il nome del titolo "WWE Hardcore Championship" va mantenuto in inglese.; La frase "release/released" va tradotta con "licenziamento/licenziato" o "addio" in base al contesto, evitando "rilascio/rilasciato".; Le citazioni dirette devono essere tradotte fedelmente, senza parafrasi.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo parla di un'impresa passata di un ex wrestler WWE, Maven, legata alla Hardcore Championship. Non è una preview di un evento futuro, né un report completo. Si concentra su una notizia specifica legata a un'apparizione/un'affermazi
+[PERF v71] analisi editoriale AI v72: 3.06s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Former WWE Star Maven Says He's The Only One To Achieve This Niche Accomplishment
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, PLE/PPV, v62 titolo/championship, v76 cap death/funeral storyline-comedy
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Former WWE Star Maven Says He's The Only One To Achieve This Niche Accomplishment
+[BOT] Elaborazione: Why No-Cut Contracts in WWE May Not Mean What Fans Think
+[BOT] semantic_id=why-no-cut-contracts-in-wwe-may-not-mean-what-fans-think
+[SCORE] iniziale=43 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=18, image=0, embed=0
+[BOT] Embed trovati: 2
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=OPINION conf=0.90 | category=BUSINESS (15) conf=0.80 model=gemini-2.5-flash-lite | L'articolo analizza il significato dei contratti "no-cut" nella WWE, basandosi su opinioni legali e dichiarazioni di David Otunga e Dave Meltzer, in un contesto di business aziendale. Non è una preview di eventi futuri, né un report di risu
+[EDITORIAL v72.3] translation_notes="No-cut contract" va mantenuto in inglese o spiegato come "contratto senza clausole di licenziamento".; "Release" va tradotto con "licenziamento", "taglio" o "cessazione del contratto" a seconda del contesto.; "Cause" nel contesto contrattuale si traduce con "giusta causa" o "motivo valido".
+[CATEGORY v73] Business downgrade: BUSINESS -> WWE | focus non business reale
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo analizza il significato dei contratti "no-cut" nella WWE, basandosi su opinioni legali e dichiarazioni di David Otunga e Dave Meltzer, in un contesto di business aziendale. Non è una preview di eventi futuri, né un report di risu
+[PERF v71] analisi editoriale AI v72: 2.71s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=43 priority=low | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, PLE/PPV, v62 evento legale grave, v62 categoria business, v72.3 cap opinion: niente boost raffinamento
+[TIER] Pubblicabile sotto soglia come tier4: 40-44 riempimento controllato - Why No-Cut Contracts in WWE May Not Mean What Fans Think
+[FIX v79.1.3] Event key legal falsa rimossa: event:legal:cm-punk -> event:story:why-no-cut-contracts-may-not-mean-what-fans-think
+[V71] story_signature=stable:why_no_cut_contracts|wwe_may_not|legal|wwe|tko semantic_status=new_story freshness=0.809
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:story:why-no-cut-contracts-may-not-mean-what-fans-think -> event:story:why-no-cut-contracts-may-not-mean-what-fans-think-followup-why-no-cut-contracts-may-not-mean-what-fans-think
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=18
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[PRESERVE v81] Repair anti-omissione applicato con gemini-2.5-flash-lite: word_ratio=0.25 (237/961)
+[PRESERVE v81] Guardrail finale testo applicato
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[CAREER v80.9] Repair frase career/status con gemini-2.5-flash-lite
+[PERF v71] traduzione: 20.21s
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): WWE: Otunga, i contratti "no-cut" sono per lo più un'illusione
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WARN v71.3] Quote check sotto soglia ma non bloccante: ['source quotes missing in translated article'] - Why No-Cut Contracts in WWE May Not Mean What Fans Think
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 2.36s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/why-no-cut-contracts-in-wwe-may-not-mean-what-fans-think-40.jpg
+[MEDIA] Immagine caricata: 4248
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.26s
+[PERF v71] totale articolo pubblicato 'Why No-Cut Contracts in WWE May Not Mean What Fans Think': 27.56s
+[OK] Pubblicato: WWE: Otunga, i contratti "no-cut" sono per lo più un'illusione
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260511_103443_001_wwe-otunga-i-contratti-no-cut-sono-per-lo-pi-un-illusione_36db66be_*.html
+[BOT] Elaborazione: Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[BOT] semantic_id=lexis-king-claims-credit-for-wwes-john-cena-classic-tournament
+[SCORE] iniziale=40 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=0, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-2.5-flash-lite | Lexis King claims credit for a WWE project announced at a recent PLE. The article reports on this claim and the project's reception, making it a post-show news item. It falls under WWE as the promotion involved.
+[EDITORIAL v72.3] translation_notes=I nomi dei titoli/cinture ufficiali come "John Cena Classic" devono restare in inglese. "WWE Hall of Famer" va tradotto come "Hall of Famer della WWE" o "leggenda della WWE". "PLE"; Attenzione a non tradurre "claims credit for" come "reclama credito per", ma piuttosto "si attribuisce il merito di", "rivendica la paternità di" o "afferma di essere l'ideatore di
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Lexis King claims credit for a WWE project announced at a recent PLE. The article reports on this claim and the project's reception, making it a post-show news item. It falls under WWE as the promotion involved.
+[PERF v71] analisi editoriale AI v72: 4.51s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[SPOILER v79.1.4] NO: announcement/non-outcome news - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, opinione generica, developmental secondario, v62 reazioni/tributi, v68 cap duro opinion/commentary
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Lexis King Claims Credit for WWE's 'John Cena Classic' Tournament
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 5 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+===== RUN END [2026-05-11 10:33:04] VERSION [v81_translation_preservation_and_flat_review_archive (fc4ae4e)] =====
+

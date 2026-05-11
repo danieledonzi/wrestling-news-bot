@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-11 06:33:40",
-  "last_bot_version": "v81_translation_preservation_and_flat_review_archive (4157bca)",
-  "updated_at": "2026-05-11T06:34:58",
-  "total_items": 11,
+  "last_run_id": "2026-05-11 10:33:04",
+  "last_bot_version": "v81_translation_preservation_and_flat_review_archive (fc4ae4e)",
+  "updated_at": "2026-05-11T10:34:48",
+  "total_items": 12,
   "items": [
     {
       "run_id": "2026-05-10 14:39:11",
@@ -92,6 +92,14 @@
       "original_html_file": "20260510_234555_001_spoiler-wwe-raw-11-maggio-annunciati-match-e-segmenti_3cad948b_original.html",
       "final_html_file": "20260510_234555_001_spoiler-wwe-raw-11-maggio-annunciati-match-e-segmenti_3cad948b_final.html",
       "metadata_file": "20260510_234555_001_spoiler-wwe-raw-11-maggio-annunciati-match-e-segmenti_3cad948b_metadata.json"
+    },
+    {
+      "run_id": "2026-05-11 10:33:04",
+      "title": "WWE: Otunga, i contratti \"no-cut\" sono per lo più un'illusione",
+      "url": "https://www.ringsidenews.com/why-no-cut-contracts-wwe-may-not-mean-what-fans-think/",
+      "original_html_file": "20260511_103443_001_wwe-otunga-i-contratti-no-cut-sono-per-lo-pi-un-illusione_36db66be_original.html",
+      "final_html_file": "20260511_103443_001_wwe-otunga-i-contratti-no-cut-sono-per-lo-pi-un-illusione_36db66be_final.html",
+      "metadata_file": "20260511_103443_001_wwe-otunga-i-contratti-no-cut-sono-per-lo-pi-un-illusione_36db66be_metadata.json"
     }
   ]
 }
