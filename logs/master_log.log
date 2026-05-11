@@ -5719,3 +5719,450 @@
 [REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (101 file)
 ===== RUN END [2026-05-11 18:53:44] VERSION [v83_quality_routing_and_smart_preservation (957fdc3)] =====
 
+
+===== RUN START [2026-05-11 20:29:36] VERSION [v83_quality_routing_and_smart_preservation (7549c11)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): AJ Styles Offers More Detail On Current WWE Scouting Role
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (54/75): TNA Impact Ratings & Viewership Report: 5/7/2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (16/75): Kevin Nash On Bron Breakker: 'When Is WWE Going To Realize That He Is A Steiner?'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (27/75): Booker T Believes New Day Are Heading To AEW, Still 'First-Ballot' WWE HOFers
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): AEW Star Bobby Lashley On WWE Letting The New Day Walk: 'That Was A Fumble'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (24/75): WWE's Kit Wilson Explains Why It's 'An Honor' To Be Working With The Miz
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2169836/tna-wwe-matt-hardy-working-relationship-heat-back-up/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (15/75): NJPW Star Hiroyoshi Tenzan Announces Impending Retirement
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (37/75): AEW Announces U.K. Date For Dynamite & Collision Ahead Of All In 2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2169669/aew-kazuchika-okada-darby-allin-canceling-world-title-match/
+[SKIP v71] Story signature gia' in history: stable:iyo_sky|asuka|report - Backstage Report On Asuka's WWE Status Following Backlash Send-Off
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168327/former-divas-champion-kaitlyn-whether-return-wwe/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (12/75): Former Middleweight Champion Chris Weidman To Be Inducted Into UFC Hall Of Fame
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:roman-reigns - WWE Confirms New June RAW Dates for Roman Reigns After Schedule Changes
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (49/75): TNA iMPACT Viewership Sees Massive Drop on May 7, 2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - Zelina Vega Already Taking Wrestling Bookings After WWE Release
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (27/75): Zilla Fatu Explains Why He Has No Interest In Signing With AEW
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] URL già in history: https://www.ringsidenews.com/major-obstacles-revealed-irelands-push-host-wwe-wrestlemania/
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - Interesting Name Was Present Backstage for WWE Backlash 2026
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - Interesting Name Was Present Backstage for WWE Backlash 2026
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - Interesting Name Was Present Backstage for WWE Backlash 2026
+[SCORE v81.1] Cap future card announcement 56->56 - Interesting Name Was Present Backstage for WWE Backlash 2026
+[SKIP] Score sotto soglia editoriale (51/75): Interesting Name Was Present Backstage for WWE Backlash 2026
+[SKIP] URL già in history: https://www.ringsidenews.com/cody-rhodes-reveals-nintendo-sent-him-cease-desist-zelda-inspired-wwe-gear/
+[SKIP] URL già in history: https://www.ringsidenews.com/cm-punks-status-may-11-wwe-raw-amid-ongoing-tv-absence/
+[SKIP] URL già in history: https://www.ringsidenews.com/where-things-stand-brock-lesnar-wwe-alumni-section-move/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[PERF v71] WP lookup URL esistente: 0.70s
+[PERF v71] WP lookup event_key: 1.53s
+[FIX] Event key in history ma non confermata su WordPress: event:business:vince-mcmahon - provo a pubblicare
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (51/75): Asuka's Status for WWE RAW in Knoxville Revealed After Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/vince-russo-calls-out-wwe-stars-downplaying-attitude-era/
+[SCORE] 100 high - AEW Files $5 Million Lawsuit Against TrillerTV Over Unpaid Revenue | AEW, impatto roster/storyline, evento legale/controversia, show settimanale, v62 evento legale grave, v62 categoria business, v71 freshness=0.695
+[SCORE] 100 high - WWE Confirms New June RAW Dates for Roman Reigns After Schedule Changes | WWE/main roster, top star titolo: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 categoria business, v71 freshness=0.574
+[SCORE] 100 high - Zelina Vega Already Taking Wrestling Bookings After WWE Release | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v62 categoria business, v71 freshness=0.679
+[SCORE] 81 high - Backstage Update On Potential For Future WWE WrestleMania In Ireland | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, v71 freshness=0.718
+[SCORE] 73 medium - Jeff Jarrett On WWE Releases: 'Nobody Is Safe' | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v71 freshness=0.693, v48 tier2: 55-74
+[SCORE] 70 medium - The Elite vs. The New Day Match Was Closer to Happening Than Fans Realized | WWE/main roster, nomi forti lead: triple h, nome AEW: kenny omega, the young bucks, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.539, v48 tier2: 55-74
+[SCORE] 56 low - Ronda Rousey Says WWE Made Her Feel Like Somebody Else's Impression | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, non wrestling puro, v71 source reliability soft penalty, v71 freshness=0.634, v48 tier2: 55-74
+[SCORE] 55 low - Spoiler: ROH Title Changes Hands During Latest Taping | altre promotion, titolo/championship, v62 titolo/championship, v68 floor post-show news concreta, v71 freshness=0.692, v48 tier2: 55-74
+[SCORE] 49 low - MVP Calls Out Triple H For Rarely Elevating WWE Talent | WWE/main roster, top star lead: undertaker, nomi forti titolo: triple h, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, opinione generica, v62 reazioni/tributi, v66 cap opinion/commentary storyline, v68 cap duro opinion/commentary, v71 source reliability soft penalty, v71 freshness=0.558, v48 tier3: 45-54 contestuale
+[SCORE] 49 low - Dave Meltzer Says WWE Has Been Considering Aspect Of John Cena Classic For 15 Years | WWE/main roster, top star titolo: john cena, intervista/opinione, v71 freshness=0.561, v48 tier3: 45-54 contestuale
+[MODE] Storm mode attiva: 3 news >=90, 4 news >=80
+[MODEL v83] Route mode=storm report=False score=0 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 13 | mode=storm | max nuove=5 | pending pubblicati=0
+[BOT] Elaborazione: AEW Files $5 Million Lawsuit Against TrillerTV Over Unpaid Revenue
+[BOT] semantic_id=aew-files-5-million-lawsuit-against-trillertv-over-unpaid-revenue
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=0, embed=0
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[MODEL v83] Route mode=storm report=False score=100 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=BUSINESS (15) conf=1.00 model=gemini-3.1-flash-lite | Articolo di natura legale/finanziaria riguardante un contenzioso tra AEW e TrillerTV. Non ricade nelle categorie di spettacolo/news di wrestling, ma in quella corporate/business.
+[EDITORIAL v72.3] translation_notes=Mantenere la precisione tecnica sui termini legali (lawsuit, insolvent, remittance).; Non tradurre 'TrillerTV' o 'AEW Plus'.; Assicurarsi di riportare le cifre esatte senza arrotondamenti.
+[EDITORIAL v73] final type=OTHER | category=BUSINESS (15) | Articolo di natura legale/finanziaria riguardante un contenzioso tra AEW e TrillerTV. Non ricade nelle categorie di spettacolo/news di wrestling, ma in quella corporate/business.
+[PERF v71] analisi editoriale AI v72: 6.08s
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SCORE] raffinato=100 priority=high | AEW, impatto roster/storyline, evento legale/controversia, show settimanale, v62 evento legale grave, v62 categoria business
+[V71] story_signature=stable:aew_files|million_lawsuit_against|legal|aew|impact semantic_status=new_story freshness=0.695
+[PERF v71] WP recent posts dedupe: 1.10s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.44s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=13
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[CAREER v80.9] Repair frase career/status con gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[CAREER v80.9] Repair frase career/status con gemini-3.1-flash-lite
+[PERF v71] traduzione: 52.00s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): AEW fa causa a TrillerTV: richiesta di 5 milioni di dollari per ricavi non pagati
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 2.10s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/aew-files-5-million-lawsuit-against-trillertv-over-unpaid-revenue-35.jpg
+[MEDIA] Immagine caricata: 4289
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.63s
+[PERF v71] totale articolo pubblicato 'AEW Files $5 Million Lawsuit Against TrillerTV Over Unpaid R': 64.00s
+[OK] Pubblicato: AEW fa causa a TrillerTV: richiesta di 5 milioni di dollari per ricavi non pagati
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260511_203139_001_aew-fa-causa-a-trillertv-richiesta-di-5-milioni-di-dollari-per-ricavi-non-pagati_93cda927_*.html
+[BOT] Elaborazione: WWE Confirms New June RAW Dates for Roman Reigns After Schedule Changes
+[BOT] semantic_id=wwe-confirms-new-june-raw-dates-for-roman-reigns-after-schedule-changes
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[BOT] Embed trovati: 2
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo annuncia il ritorno di Roman Reigns nel calendario WWE a seguito di una decisione aziendale già presa, configurandosi come una news di aggiornamento e non come una preview di un singolo evento.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Roman Reigns' e 'The Tribal Chief' invariati.; Tradurre 'schedule' come calendario/programmazione.; 'Pulled from' va reso come 'rimosso dalla programmazione'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo annuncia il ritorno di Roman Reigns nel calendario WWE a seguito di una decisione aziendale già presa, configurandosi come una news di aggiornamento e non come una preview di un singolo evento.
+[PERF v71] analisi editoriale AI v72: 11.12s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE Confirms New June RAW Dates for Roman Reigns After Schedule Changes
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 categoria business
+[V71] story_signature=stable:roman_reigns|announcement|wwe|raw|backlash|night_of_champions semantic_status=new_story freshness=0.574
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:roman-reigns - WWE Confirms New June RAW Dates for Roman Reigns After Schedule Changes
+[SKIP] News core già pubblicata da altra fonte: WWE Confirms New June RAW Dates for Roman Reigns After Schedule Changes
+[SKIP] news_core_key=schedule-backlash
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Zelina Vega Already Taking Wrestling Bookings After WWE Release
+[BOT] semantic_id=zelina-vega-already-taking-wrestling-bookings-after-wwe-release
+[SCORE] iniziale=100 priority=high
+[PERF v71] scraping articolo: 1.12s
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=0
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta una notizia già avvenuta (il licenziamento di Zelina Vega e l'apertura alle prenotazioni) e le sue dichiarazioni post-fatto.
+[EDITORIAL v72.3] translation_notes=Mantenere 'WWE release' come 'addio alla WWE' o 'licenziamento', mai 'rilascio'.; Tradurre le citazioni di Zelina mantenendo il tono colloquiale ma professionale.; 'TKO' va lasciato come acronimo.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta una notizia già avvenuta (il licenziamento di Zelina Vega e l'apertura alle prenotazioni) e le sue dichiarazioni post-fatto.
+[PERF v71] analisi editoriale AI v72: 5.76s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Zelina Vega Already Taking Wrestling Bookings After WWE Release
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v62 categoria business
+[V71] story_signature=stable:zelina_vega_already|taking_wrestling_bookings|contract|wwe|wrestlemania|tko semantic_status=new_story freshness=0.678
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - Zelina Vega Already Taking Wrestling Bookings After WWE Release
+[SKIP] News core già pubblicata da altra fonte: Zelina Vega Already Taking Wrestling Bookings After WWE Release
+[SKIP] news_core_key=business-tko-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Backstage Update On Potential For Future WWE WrestleMania In Ireland
+[BOT] semantic_id=backstage-update-on-potential-for-future-wwe-wrestlemania-in-ireland
+[SCORE] iniziale=81 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=storm report=False score=81 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=0.98 model=gemini-3.1-flash-lite | L'articolo discute speculazioni e report di backstage su potenziali location future per WrestleMania, basandosi su indiscrezioni di Fightful Select piuttosto che su conferme ufficiali o eventi già avvenuti.
+[EDITORIAL v72.3] translation_notes=Non tradurre i nomi delle arene (es. Croke Park, Nissan Stadium).; 'Premium live event' va lasciato in inglese o reso come 'evento premium'.; Mantenere le citazioni numeriche fedeli (es. $6 million).
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo discute speculazioni e report di backstage su potenziali location future per WrestleMania, basandosi su indiscrezioni di Fightful Select piuttosto che su conferme ufficiali o eventi già avvenuti.
+[PERF v71] analisi editoriale AI v72: 6.69s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=68 priority=medium | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v62 ritorno/debutto, v72.3 cap rumor
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Backstage Update On Potential For Future WWE WrestleMania In Ireland
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:wwe:wrestlemania-host-bid:ireland -> event:rumor:backstage-update-potential-future-ireland
+[V71] story_signature=backstage_update_on_potential|for_future_wwe_wrestlemania|in_ireland|rumor|wwe|wrestlemania semantic_status=new_story freshness=0.601
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=5
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/backstage-update-on-potential-for-future-wwe-wrestlemania-in-ireland/intro-1778528868.jpg
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=41 generato=['44']", "Numero evento alterato: WrestleMania sorgente=43 generato=['44']"]
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TRANSLATE] Errore: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=41 generato=['44']", "Numero evento alterato: WrestleMania sorgente=43 generato=['44']"]
+[PERF v71] traduzione: 14.71s
+[SKIP] Traduzione fallita: Backstage Update On Potential For Future WWE WrestleMania In Ireland (err_type=validation)
+[BOT] Elaborazione: Jeff Jarrett On WWE Releases: 'Nobody Is Safe'
+[BOT] semantic_id=jeff-jarrett-on-wwe-releases-nobody-is-safe
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[MODEL v83] Route mode=storm report=False score=73 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta le opinioni e i commenti di Jeff Jarrett espressi nel suo podcast riguardanti la situazione contrattuale in WWE.
+[EDITORIAL v72.3] translation_notes=Non tradurre i nomi dei titoli (es. WWE Championship).; 'Releases' va tradotto come licenziamenti.; Le quote di Jarrett devono mantenere il tono colloquiale ma professionale.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta le opinioni e i commenti di Jeff Jarrett espressi nel suo podcast riguardanti la situazione contrattuale in WWE.
+[PERF v71] analisi editoriale AI v72: 7.83s
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star lead: roman reigns, nomi forti lead: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, combo top name lead + evento forte, PLE/PPV, non wrestling puro, v72.3 cap opinion: niente boost raffinamento, v72.3 cap opinion
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Jeff Jarrett On WWE Releases: 'Nobody Is Safe'
+[FIX v72.3] Event key business rimossa per OPINION/WWE: event:business:roman-reigns:cody-rhodes -> event:rumor:jeff-jarrett-releases-nobody-is-safe
+[V71] story_signature=stable:charlotte_flair|roman_reigns|contract|wwe|nxt semantic_status=new_story freshness=0.809
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=3
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/jeff-jarrett-on-wwe-releases-nobody-is-safe/intro-1778521536.jpg
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Body sospetto o troppo meta
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 35.23s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Jeff Jarrett sui licenziamenti in WWE: "Nessuno è al sicuro"
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 9.28s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/jeff-jarrett-on-wwe-releases-nobody-is-safe/l-intro-1778521536.jpg
+[MEDIA] Immagine caricata: 4292
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.78s
+[PERF v71] totale articolo pubblicato 'Jeff Jarrett On WWE Releases: 'Nobody Is Safe'': 55.98s
+[OK] Pubblicato: Jeff Jarrett sui licenziamenti in WWE: "Nessuno è al sicuro"
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260511_203318_002_jeff-jarrett-sui-licenziamenti-in-wwe-nessuno-al-sicuro_d1c2e251_*.html
+[BOT] Elaborazione: The Elite vs. The New Day Match Was Closer to Happening Than Fans Realized
+[BOT] semantic_id=the-elite-vs-the-new-day-match-was-closer-to-happening-than-fans-realized
+[SCORE] iniziale=70 priority=medium
+[PERF v71] scraping articolo: 1.15s
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[BOT] Embed trovati: 2
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=storm report=False score=70 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=AEW (5) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta retroscena su una trattativa del 2018 basandosi su dichiarazioni recenti. Non è un evento futuro, ma un aggiornamento informativo su dinamiche passate.
+[EDITORIAL v72.3] translation_notes=Mantenere 'The Elite' e 'The New Day' come nomi propri.; Tradurre 'forbidden door' come 'forbidden door' (termine tecnico ormai in uso).; 'Release' non tradurre come rilascio, ma come addio/fine contratto.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | L'articolo riporta retroscena su una trattativa del 2018 basandosi su dichiarazioni recenti. Non è un evento futuro, ma un aggiornamento informativo su dinamiche passate.
+[PERF v71] analisi editoriale AI v72: 9.67s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - The Elite vs. The New Day Match Was Closer to Happening Than Fans Realized
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=75 priority=medium | WWE/main roster, nomi forti lead: triple h, nome AEW: kenny omega, the young bucks, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV
+[V71] story_signature=the_elite|the_new_day_match|was_closer|rumor|wwe semantic_status=new_story freshness=0.538
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=10
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione applicato con gemini-3.1-flash-lite: editorial_word_ratio=0.70 (324/466) threshold=0.70
+[PRESERVE v81] Guardrail finale testo applicato
+[PERF v71] traduzione: 15.19s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): The Elite contro The New Day: il match fu più vicino alla realizzazione di quanto creduto
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 7.53s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/the-elite-vs-the-new-day-match-was-closer-to-happening-than-fans-realized-36.jpg
+[MEDIA] Immagine caricata: 4295
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.23s
+[PERF v71] totale articolo pubblicato 'The Elite vs. The New Day Match Was Closer to Happening Than': 35.44s
+[OK] Pubblicato: The Elite contro The New Day: il match fu più vicino alla realizzazione di quanto creduto
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260511_203354_003_the-elite-contro-the-new-day-il-match-fu-pi-vicino-alla-realizzazione-di-quanto-_a0580d56_*.html
+[BOT] Elaborazione: Ronda Rousey Says WWE Made Her Feel Like Somebody Else's Impression
+[BOT] semantic_id=ronda-rousey-says-wwe-made-her-feel-like-somebody-elses-impression
+[SCORE] iniziale=56 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=14, image=0, embed=0
+[BOT] Embed trovati: 2
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=storm report=False score=56 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni postume di Ronda Rousey riguardo alla sua esperienza in WWE e alla recente apparizione in AEW, analizzando le sue critiche al management e al sistema creativo della WWE.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'PG' (riferito al rating TV).; 'Run-in' va reso come 'interferenza' o 'intervento'.; Mantenere i nomi dei titoli/cinture in inglese.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta dichiarazioni postume di Ronda Rousey riguardo alla sua esperienza in WWE e alla recente apparizione in AEW, analizzando le sue critiche al management e al sistema creativo della WWE.
+[PERF v71] analisi editoriale AI v72: 1.31s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Ronda Rousey Says WWE Made Her Feel Like Somebody Else's Impression
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=61 priority=medium | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, non wrestling puro
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Ronda Rousey Says WWE Made Her Feel Like Somebody Else's Impression
+[V71] story_signature=stable:vince_mcmahon|toni_storm|outcome|wwe|aew semantic_status=new_story freshness=0.633
+[PERF v71] WP recent posts dedupe: 0.77s
+[FIX] Event key in history ma non confermata su WordPress: event:business:vince-mcmahon - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.13s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=14
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: Expecting ',' delimiter: line 1 column 863 (char 862)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: Expecting ',' delimiter: line 1 column 3138 (char 3137)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione applicato con gemini-3.1-flash-lite: editorial_word_ratio=0.70 (383/548) threshold=0.70
+[PRESERVE v81] Guardrail finale testo applicato
+[PERF v71] traduzione: 32.11s
+[FIX] Titolo non valido (ok) -> fallback automatico: Ronda rousey afferma WWE made her feel like somebody else's impression
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Ronda Rousey: "In WWE mi sentivo come l'imitazione di qualcun altro"
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 7.67s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/ronda-rousey-says-wwe-made-her-feel-like-somebody-elses-impression-54.jpg
+[MEDIA] Immagine caricata: 4298
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.30s
+[PERF v71] totale articolo pubblicato 'Ronda Rousey Says WWE Made Her Feel Like Somebody Else's Imp': 44.24s
+[OK] Pubblicato: Ronda Rousey: "In WWE mi sentivo come l'imitazione di qualcun altro"
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260511_203439_004_ronda-rousey-in-wwe-mi-sentivo-come-l-imitazione-di-qualcun-altro_3f21abb9_*.html
+[BOT] Elaborazione: Spoiler: ROH Title Changes Hands During Latest Taping
+[BOT] semantic_id=spoiler-roh-title-changes-hands-during-latest-taping
+[SCORE] iniziale=55 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=storm report=False score=55 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WORLD (8) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta un cambio titolo già avvenuto durante i taping TV; pur citando un evento futuro, il focus è il risultato del match e il cambio di cintura già accaduto.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'ROH World Television Championship' o 'AEW Collision', mantenere i nomi ufficiali.; 'Changes hands' va reso come 'cambio al vertice' o 'nuovo campione'.; Evitare calchi per 'taker to X', usare 'su X'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WORLD (8) | L'articolo riporta un cambio titolo già avvenuto durante i taping TV; pur citando un evento futuro, il focus è il risultato del match e il cambio di cintura già accaduto.
+[PERF v71] analisi editoriale AI v72: 6.31s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Spoiler: ROH Title Changes Hands During Latest Taping
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=56 priority=low | AEW, impatto roster/storyline, infortunio, show settimanale, v62 titolo/championship, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Spoiler: ROH Title Changes Hands During Latest Taping
+[BOT] Elaborazione: MVP Calls Out Triple H For Rarely Elevating WWE Talent
+[BOT] semantic_id=mvp-calls-out-triple-h-for-rarely-elevating-wwe-talent
+[SCORE] iniziale=49 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=0
+[BOT] Embed trovati: 2
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[MODEL v83] Route mode=storm report=False score=49 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta le opinioni personali di MVP espresse nel suo podcast riguardanti la gestione del roster e il confronto tra Triple H e The Undertaker.
+[EDITORIAL v72.3] translation_notes=Mantenere i termini tecnici: 'rub', 'getting over', 'babyface', 'job', 'finish'.; Tradurre 'Triple Nose' come un soprannome dispregiativo senza perdere il tono polemico.; Evitare calchi per le espressioni idiomatiche come 'getting over' (usare 'lanciare' o 'far emergere').
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta le opinioni personali di MVP espresse nel suo podcast riguardanti la gestione del roster e il confronto tra Triple H e The Undertaker.
+[PERF v71] analisi editoriale AI v72: 6.72s
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SCORE] raffinato=49 priority=low | WWE/main roster, top star lead: undertaker, nomi forti titolo: triple h, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, opinione generica, v62 reazioni/tributi, v66 cap opinion/commentary storyline, v68 cap duro opinion/commentary, v72.3 cap opinion: niente boost raffinamento
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - MVP Calls Out Triple H For Rarely Elevating WWE Talent
+[V71] story_signature=triple_h|mvp_calls_out_triple|for_rarely_elevating_wwe|opinion|wwe semantic_status=new_story freshness=0.557
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=15
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione scartato: editorial_word_ratio=0.62 (387/622) threshold=0.70
+[PERF v71] traduzione: 29.23s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): MVP critica Triple H: "Non ha aiutato i talenti quanto The Undertaker"
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 6.91s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/mvp-calls-out-triple-h-for-rarely-elevating-wwe-talent-46.jpg
+[MEDIA] Immagine caricata: 4301
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.21s
+[PERF v71] totale articolo pubblicato 'MVP Calls Out Triple H For Rarely Elevating WWE Talent': 45.08s
+[OK] Pubblicato: MVP critica Triple H: "Non ha aiutato i talenti quanto The Undertaker"
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260511_203532_005_mvp-critica-triple-h-non-ha-aiutato-i-talenti-quanto-the-undertaker_f0f17e4d_*.html
+[BOT] Pubblicati 5 articoli (0 pending + 5 nuove) su 9 candidati provati | mode=storm
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (117 file)
+===== RUN END [2026-05-11 20:29:36] VERSION [v83_quality_routing_and_smart_preservation (7549c11)] =====
+

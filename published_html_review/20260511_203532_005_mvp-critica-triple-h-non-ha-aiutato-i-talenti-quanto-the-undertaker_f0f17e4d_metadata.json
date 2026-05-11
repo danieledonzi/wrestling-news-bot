@@ -1,0 +1,41 @@
+{
+  "run_id": "2026-05-11 20:29:36",
+  "bot_version": "v83_quality_routing_and_smart_preservation (7549c11)",
+  "git_sha": "7549c11d2c16088663bd31c1c602685448180441",
+  "created_at": "2026-05-11T20:35:32",
+  "source_title": "MVP Calls Out Triple H For Rarely Elevating WWE Talent",
+  "final_title": "MVP critica Triple H: \"Non ha aiutato i talenti quanto The Undertaker\"",
+  "source_url": "https://www.ringsidenews.com/mvp-calls-out-triple-h-rarely-elevating-wwe-talent/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "OPINION",
+  "semantic_id": "mvp-calls-out-triple-h-for-rarely-elevating-wwe-talent",
+  "story_signature_v71": "triple_h|mvp_calls_out_triple|for_rarely_elevating_wwe|opinion|wwe",
+  "refined_score": 49,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star lead: undertaker",
+    "nomi forti titolo: triple h",
+    "WWE main roster + storyline/evento",
+    "rumor/backstage",
+    "PLE/PPV",
+    "opinione generica",
+    "v62 reazioni/tributi",
+    "v66 cap opinion/commentary storyline",
+    "v68 cap duro opinion/commentary",
+    "v72.3 cap opinion: niente boost raffinamento"
+  ],
+  "blocks_summary": {
+    "text": 15,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://www.facebook.com/ringsidenews",
+    "https://www.youtube.com/watch?v=uUNXZtV2eBU"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260511_203532_005_mvp-critica-triple-h-non-ha-aiutato-i-talenti-quanto-the-undertaker_f0f17e4d_original.html",
+  "final_html_file": "20260511_203532_005_mvp-critica-triple-h-non-ha-aiutato-i-talenti-quanto-the-undertaker_f0f17e4d_final.html",
+  "metadata_file": "20260511_203532_005_mvp-critica-triple-h-non-ha-aiutato-i-talenti-quanto-the-undertaker_f0f17e4d_metadata.json"
+}

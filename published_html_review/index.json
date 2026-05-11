@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-11 18:53:44",
-  "last_bot_version": "v83_quality_routing_and_smart_preservation (957fdc3)",
-  "updated_at": "2026-05-11T18:57:53",
-  "total_items": 24,
+  "last_run_id": "2026-05-11 20:29:36",
+  "last_bot_version": "v83_quality_routing_and_smart_preservation (7549c11)",
+  "updated_at": "2026-05-11T20:35:32",
+  "total_items": 29,
   "items": [
     {
       "run_id": "2026-05-10 14:39:11",
@@ -196,6 +196,46 @@
       "original_html_file": "20260511_185753_006_matt-hardy-prevede-una-ripresa-della-collaborazione-tra-tna-e-wwe_ea2998bf_original.html",
       "final_html_file": "20260511_185753_006_matt-hardy-prevede-una-ripresa-della-collaborazione-tra-tna-e-wwe_ea2998bf_final.html",
       "metadata_file": "20260511_185753_006_matt-hardy-prevede-una-ripresa-della-collaborazione-tra-tna-e-wwe_ea2998bf_metadata.json"
+    },
+    {
+      "run_id": "2026-05-11 20:29:36",
+      "title": "AEW fa causa a TrillerTV: richiesta di 5 milioni di dollari per ricavi non pagati",
+      "url": "https://www.ringsidenews.com/aew-files-5-million-lawsuit-against-trillertv-unpaid-revenue/",
+      "original_html_file": "20260511_203139_001_aew-fa-causa-a-trillertv-richiesta-di-5-milioni-di-dollari-per-ricavi-non-pagati_93cda927_original.html",
+      "final_html_file": "20260511_203139_001_aew-fa-causa-a-trillertv-richiesta-di-5-milioni-di-dollari-per-ricavi-non-pagati_93cda927_final.html",
+      "metadata_file": "20260511_203139_001_aew-fa-causa-a-trillertv-richiesta-di-5-milioni-di-dollari-per-ricavi-non-pagati_93cda927_metadata.json"
+    },
+    {
+      "run_id": "2026-05-11 20:29:36",
+      "title": "Jeff Jarrett sui licenziamenti in WWE: \"Nessuno è al sicuro\"",
+      "url": "https://www.wrestlinginc.com/2169969/wwe-jeff-jarrett-releases-nobody-safe/",
+      "original_html_file": "20260511_203318_002_jeff-jarrett-sui-licenziamenti-in-wwe-nessuno-al-sicuro_d1c2e251_original.html",
+      "final_html_file": "20260511_203318_002_jeff-jarrett-sui-licenziamenti-in-wwe-nessuno-al-sicuro_d1c2e251_final.html",
+      "metadata_file": "20260511_203318_002_jeff-jarrett-sui-licenziamenti-in-wwe-nessuno-al-sicuro_d1c2e251_metadata.json"
+    },
+    {
+      "run_id": "2026-05-11 20:29:36",
+      "title": "The Elite contro The New Day: il match fu più vicino alla realizzazione di quanto creduto",
+      "url": "https://www.ringsidenews.com/elite-vs-new-day-match-closer-happening-than-fans-realized/",
+      "original_html_file": "20260511_203354_003_the-elite-contro-the-new-day-il-match-fu-pi-vicino-alla-realizzazione-di-quanto-_a0580d56_original.html",
+      "final_html_file": "20260511_203354_003_the-elite-contro-the-new-day-il-match-fu-pi-vicino-alla-realizzazione-di-quanto-_a0580d56_final.html",
+      "metadata_file": "20260511_203354_003_the-elite-contro-the-new-day-il-match-fu-pi-vicino-alla-realizzazione-di-quanto-_a0580d56_metadata.json"
+    },
+    {
+      "run_id": "2026-05-11 20:29:36",
+      "title": "Ronda Rousey: \"In WWE mi sentivo come l'imitazione di qualcun altro\"",
+      "url": "https://www.ringsidenews.com/ronda-rousey-says-wwe-made-her-feel-somebody-elses-impression/",
+      "original_html_file": "20260511_203439_004_ronda-rousey-in-wwe-mi-sentivo-come-l-imitazione-di-qualcun-altro_3f21abb9_original.html",
+      "final_html_file": "20260511_203439_004_ronda-rousey-in-wwe-mi-sentivo-come-l-imitazione-di-qualcun-altro_3f21abb9_final.html",
+      "metadata_file": "20260511_203439_004_ronda-rousey-in-wwe-mi-sentivo-come-l-imitazione-di-qualcun-altro_3f21abb9_metadata.json"
+    },
+    {
+      "run_id": "2026-05-11 20:29:36",
+      "title": "MVP critica Triple H: \"Non ha aiutato i talenti quanto The Undertaker\"",
+      "url": "https://www.ringsidenews.com/mvp-calls-out-triple-h-rarely-elevating-wwe-talent/",
+      "original_html_file": "20260511_203532_005_mvp-critica-triple-h-non-ha-aiutato-i-talenti-quanto-the-undertaker_f0f17e4d_original.html",
+      "final_html_file": "20260511_203532_005_mvp-critica-triple-h-non-ha-aiutato-i-talenti-quanto-the-undertaker_f0f17e4d_final.html",
+      "metadata_file": "20260511_203532_005_mvp-critica-triple-h-non-ha-aiutato-i-talenti-quanto-the-undertaker_f0f17e4d_metadata.json"
     }
   ]
 }

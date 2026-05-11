@@ -1,0 +1,38 @@
+{
+  "run_id": "2026-05-11 20:29:36",
+  "bot_version": "v83_quality_routing_and_smart_preservation (7549c11)",
+  "git_sha": "7549c11d2c16088663bd31c1c602685448180441",
+  "created_at": "2026-05-11T20:33:18",
+  "source_title": "Jeff Jarrett On WWE Releases: 'Nobody Is Safe'",
+  "final_title": "Jeff Jarrett sui licenziamenti in WWE: \"Nessuno è al sicuro\"",
+  "source_url": "https://www.wrestlinginc.com/2169969/wwe-jeff-jarrett-releases-nobody-safe/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "OPINION",
+  "semantic_id": "jeff-jarrett-on-wwe-releases-nobody-is-safe",
+  "story_signature_v71": "stable:charlotte_flair|roman_reigns|contract|wwe|nxt",
+  "refined_score": 54,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star lead: roman reigns",
+    "nomi forti lead: roman reigns",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "breaking/major update",
+    "combo top name lead + evento forte",
+    "PLE/PPV",
+    "non wrestling puro",
+    "v72.3 cap opinion: niente boost raffinamento",
+    "v72.3 cap opinion"
+  ],
+  "blocks_summary": {
+    "text": 3,
+    "image": 1,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260511_203318_002_jeff-jarrett-sui-licenziamenti-in-wwe-nessuno-al-sicuro_d1c2e251_original.html",
+  "final_html_file": "20260511_203318_002_jeff-jarrett-sui-licenziamenti-in-wwe-nessuno-al-sicuro_d1c2e251_final.html",
+  "metadata_file": "20260511_203318_002_jeff-jarrett-sui-licenziamenti-in-wwe-nessuno-al-sicuro_d1c2e251_metadata.json"
+}

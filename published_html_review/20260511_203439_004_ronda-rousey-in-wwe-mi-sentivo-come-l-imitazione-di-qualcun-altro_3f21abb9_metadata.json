@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-05-11 20:29:36",
+  "bot_version": "v83_quality_routing_and_smart_preservation (7549c11)",
+  "git_sha": "7549c11d2c16088663bd31c1c602685448180441",
+  "created_at": "2026-05-11T20:34:39",
+  "source_title": "Ronda Rousey Says WWE Made Her Feel Like Somebody Else's Impression",
+  "final_title": "Ronda Rousey: \"In WWE mi sentivo come l'imitazione di qualcun altro\"",
+  "source_url": "https://www.ringsidenews.com/ronda-rousey-says-wwe-made-her-feel-somebody-elses-impression/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "ronda-rousey-says-wwe-made-her-feel-like-somebody-elses-impression",
+  "story_signature_v71": "stable:vince_mcmahon|toni_storm|outcome|wwe|aew",
+  "refined_score": 61,
+  "refined_reasons": [
+    "WWE/main roster",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "PLE/PPV",
+    "non wrestling puro"
+  ],
+  "blocks_summary": {
+    "text": 14,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://www.facebook.com/ringsidenews",
+    "https://www.youtube.com/watch?v=8qKi3uonsv4"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260511_203439_004_ronda-rousey-in-wwe-mi-sentivo-come-l-imitazione-di-qualcun-altro_3f21abb9_original.html",
+  "final_html_file": "20260511_203439_004_ronda-rousey-in-wwe-mi-sentivo-come-l-imitazione-di-qualcun-altro_3f21abb9_final.html",
+  "metadata_file": "20260511_203439_004_ronda-rousey-in-wwe-mi-sentivo-come-l-imitazione-di-qualcun-altro_3f21abb9_metadata.json"
+}
