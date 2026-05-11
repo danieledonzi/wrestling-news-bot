@@ -1,0 +1,38 @@
+{
+  "run_id": "2026-05-11 18:53:44",
+  "bot_version": "v83_quality_routing_and_smart_preservation (957fdc3)",
+  "git_sha": "957fdc30e4b644267c9b6e59d0f7d874f8419913",
+  "created_at": "2026-05-11T18:57:42",
+  "source_title": "Cody Rhodes Reveals Nintendo Sent Him a Cease and Desist Over Zelda-Inspired WWE Gear",
+  "final_title": "Cody Rhodes rivela: Nintendo gli inviò una diffida per il suo gear ispirato a Zelda",
+  "source_url": "https://www.ringsidenews.com/cody-rhodes-reveals-nintendo-sent-him-cease-desist-zelda-inspired-wwe-gear/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "cody-rhodes-reveals-nintendo-sent-him-a-cease-and-desist-over-zelda-inspired-wwe-gear",
+  "story_signature_v71": "stable:cody_rhodes|contract|wwe",
+  "refined_score": 74,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star titolo: cody rhodes",
+    "WWE main roster + storyline/evento",
+    "contratto",
+    "combo top name titolo + evento forte",
+    "PLE/PPV",
+    "v62 reazioni/tributi",
+    "v76 cap boost da score basso senza evento concreto"
+  ],
+  "blocks_summary": {
+    "text": 10,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://www.facebook.com/ringsidenews",
+    "https://www.youtube.com/watch?v=yatihu9gej4"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260511_185742_005_cody-rhodes-rivela-nintendo-gli-invi-una-diffida-per-il-suo-gear-ispirato-a-zeld_10ee44b0_original.html",
+  "final_html_file": "20260511_185742_005_cody-rhodes-rivela-nintendo-gli-invi-una-diffida-per-il-suo-gear-ispirato-a-zeld_10ee44b0_final.html",
+  "metadata_file": "20260511_185742_005_cody-rhodes-rivela-nintendo-gli-invi-una-diffida-per-il-suo-gear-ispirato-a-zeld_10ee44b0_metadata.json"
+}

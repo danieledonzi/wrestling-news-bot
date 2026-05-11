@@ -5254,3 +5254,468 @@
 [REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (82 file)
 ===== RUN END [2026-05-11 16:27:47] VERSION [v83_quality_routing_and_smart_preservation (4dc933a)] =====
 
+
+===== RUN START [2026-05-11 18:53:44] VERSION [v83_quality_routing_and_smart_preservation (957fdc3)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (27/75): Booker T Believes New Day Are Heading To AEW, Still 'First-Ballot' WWE HOFers
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): AEW Star Bobby Lashley On WWE Letting The New Day Walk: 'That Was A Fumble'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (24/75): WWE's Kit Wilson Explains Why It's 'An Honor' To Be Working With The Miz
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (15/75): NJPW Star Hiroyoshi Tenzan Announces Impending Retirement
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (37/75): AEW Announces U.K. Date For Dynamite & Collision Ahead Of All In 2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP v71] Story signature gia' in history: stable:iyo_sky|asuka|report - Backstage Report On Asuka's WWE Status Following Backlash Send-Off
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2168327/former-divas-champion-kaitlyn-whether-return-wwe/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (12/75): Former Middleweight Champion Chris Weidman To Be Inducted Into UFC Hall Of Fame
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Sean Strickland Squashes Beef With Khamzat Chimaev Following UFC 328
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (14/75): AEW's Paul Wight (FKA Big Show) Explains Why He Never Considered Career In MMA
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (12/75): Dana White Details What Conor McGregor's New UFC Deal Might Look Like
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (30/75): Dana White Confirms Khamzat Chimaev's Next Move After UFC 328 Loss
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (17/75): Zilla Fatu Explains Why He Has No Interest In Signing With AEW
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (3/75): The Elite vs. The New Day Match Was Closer to Happening Than Fans Realized
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP v71] Story signature gia' in history: stable:vince_mcmahon|outcome|wwe|aew - Ronda Rousey Says WWE Made Her Feel Like Somebody Else's Impression
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] URL già in history: https://www.ringsidenews.com/vince-russo-calls-out-wwe-stars-downplaying-attitude-era/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Kevin Hart Names Hulk Hogan on His Mount Rushmore of Racism
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (35/75): The Rock Gets Wild at Kevin Hart Roast With NSFW Jokes About Their Friendship
+[SKIP] URL già in history: https://www.ringsidenews.com/kevin-nash-goes-nuclear-tko-wwe-talent-pay-cuts-executive-bonuses/
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Still Hasn't Finalized Format for John Cena Classic Tournament
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Still Hasn't Finalized Format for John Cena Classic Tournament
+[SPOILER v79.1.4] NO: announcement/non-outcome news - WWE Still Hasn't Finalized Format for John Cena Classic Tournament
+[SCORE] 84 high - CM Punk's Status for May 11 WWE RAW Amid Ongoing TV Absence | WWE/main roster, top star titolo: cm punk, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v71 source reliability soft penalty, v71 freshness=0.659
+[SCORE] 73 medium - Jeff Jarrett On WWE Releases: 'Nobody Is Safe' | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v71 freshness=0.713, v48 tier2: 55-74
+[SCORE] 73 medium - Where Things Stand With Brock Lesnar and WWE After Alumni Section Move | WWE/main roster, top star titolo: brock lesnar, WWE main roster + storyline/evento, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.656, v48 tier2: 55-74
+[SCORE] 72 medium - Interesting Name Was Present Backstage for WWE Backlash 2026 | WWE/main roster, WWE main roster + storyline/evento, infortunio, floor WWE main roster storyline, v62 infortunio/operazione, v71 source reliability soft penalty, v71 freshness=0.667, v48 tier2: 55-74
+[SCORE] 70 medium - Backstage Report On AEW Canceling Kazuchika Okada World Title Match Vs. Darby Allin | AEW, impatto roster/storyline, titolo/championship, show settimanale, v62 titolo/championship, v71 freshness=0.566, v48 tier2: 55-74
+[SCORE] 56 low - Major Obstacles Revealed In Ireland's Push to Host WWE WrestleMania | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.552, v48 tier2: 55-74
+[SCORE] 55 low - Spoiler: ROH Title Changes Hands During Latest Taping | altre promotion, titolo/championship, v62 titolo/championship, v68 floor post-show news concreta, v71 freshness=0.712, v48 tier2: 55-74
+[SCORE] 54 low - Cody Rhodes Reveals Nintendo Sent Him a Cease and Desist Over Zelda-Inspired WWE Gear | WWE/main roster, top star titolo: cody rhodes, intervista/opinione, v62 reazioni/tributi, v71 source reliability soft penalty, v71 freshness=0.546, v48 tier3: 45-54 contestuale
+[SCORE] 54 low - Matt Hardy Believes TNA-WWE Working Relationship Will Soon 'Heat Back Up' | WWE/main roster, WWE main roster + storyline/evento, match/segmento annunciato, show settimanale, opinione generica, floor WWE main roster storyline, v68 cap duro opinion/commentary, v71 freshness=0.584, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - Asuka's Status for WWE RAW in Knoxville Revealed After Backlash | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, show settimanale, floor WWE main roster storyline, v71 source reliability soft penalty, v71 freshness=0.647, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[MODEL v83] Route mode=normal report=False score=0 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 3
+[BOT] Elaborazione: CM Punk's Status for May 11 WWE RAW Amid Ongoing TV Absence
+[BOT] semantic_id=cm-punks-status-for-may-11-wwe-raw-amid-ongoing-tv-absence
+[SCORE] iniziale=84 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, image=0, embed=0
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=normal report=False score=84 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza lo status di CM Punk in base a report di backstage, smentendo speculazioni su apparizioni future. Non è una preview poiché focalizzato sull'assenza e sui piani attuali della star.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'WWE RAW' o 'Backlash'.; Mantenere i nomi dei wrestler (es. Danhausen, Kit Wilson).; Tradurre 'not scheduled to be on' come 'non è previsto per'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo analizza lo status di CM Punk in base a report di backstage, smentendo speculazioni su apparizioni future. Non è una preview poiché focalizzato sull'assenza e sui piani attuali della star.
+[PERF v71] analisi editoriale AI v72: 5.14s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=56 priority=low | WWE/main roster, top star titolo: cm punk, nomi forti lead: danhausen, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v66 cap opinion/commentary storyline, v72.3 cap rumor, v79.1.3 true future preview cap
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - CM Punk's Status for May 11 WWE RAW Amid Ongoing TV Absence
+[V71] story_signature=stable:danhausen|cm_punk|outcome|wwe|raw|backlash semantic_status=new_story freshness=0.697
+[PERF v71] WP recent posts dedupe: 1.47s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.81s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=7
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 14.20s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): CM Punk non è atteso per la prossima puntata di WWE Raw
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.43s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/cm-punks-status-for-may-11-wwe-raw-amid-ongoing-tv-absence-25.jpg
+[MEDIA] Immagine caricata: 4271
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.56s
+[PERF v71] totale articolo pubblicato 'CM Punk's Status for May 11 WWE RAW Amid Ongoing TV Absence': 25.76s
+[OK] Pubblicato: CM Punk non è atteso per la prossima puntata di WWE Raw
+[PENDING] Coda salvata: 2 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260511_185522_001_cm-punk-non-atteso-per-la-prossima-puntata-di-wwe-raw_6f38b802_*.html
+[BOT] Elaborazione: Where Things Stand With Brock Lesnar and WWE After Alumni Section Move
+[BOT] semantic_id=where-things-stand-with-brock-lesnar-and-wwe-after-alumni-section-move
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, image=0, embed=0
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=normal report=False score=73 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza lo status contrattuale di Brock Lesnar basandosi su report interni, interpretando segnali contrastanti tra storyline e realtà aziendale.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Free Agent' e 'Alumni section' come termini tecnici, 'WrestleMania' invariato.; Evitare calchi come 'tide turned' o 'shut down' (usare 'ha smentito categoricamente').; Tradurre 'active performer' come 'atleta sotto contratto attivo'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo analizza lo status contrattuale di Brock Lesnar basandosi su report interni, interpretando segnali contrastanti tra storyline e realtà aziendale.
+[PERF v71] analisi editoriale AI v72: 7.13s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=68 priority=medium | WWE/main roster, top star titolo: brock lesnar, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v66 cap opinion/commentary storyline, v72.3 cap rumor: niente boost raffinamento, v72.3 cap rumor
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Where Things Stand With Brock Lesnar and WWE After Alumni Section Move
+[V71] story_signature=stable:brock_lesnar|paul_heyman|outcome|wwe|raw|smackdown|wrestlemania semantic_status=new_story freshness=0.813
+[PERF v71] WP lookup URL esistente: 1.06s
+[PERF v71] WP lookup event_key: 2.37s
+[FIX] Event key in history ma non confermata su WordPress: event:brock-lesnar-diagnosis - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 2.74s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=8
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Body sospetto o troppo meta
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione applicato con gemini-3.1-flash-lite: editorial_word_ratio=0.52 (149/285) threshold=0.70
+[PRESERVE v81] Guardrail finale testo applicato
+[PERF v71] traduzione: 29.20s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Brock Lesnar: la situazione contrattuale in WWE dopo lo spostamento nella sezione Alumni
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 9.42s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/where-things-stand-with-brock-lesnar-and-wwe-after-alumni-section-move-37.jpg
+[MEDIA] Immagine caricata: 4274
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.42s
+[PERF v71] totale articolo pubblicato 'Where Things Stand With Brock Lesnar and WWE After Alumni Se': 50.66s
+[OK] Pubblicato: Brock Lesnar: la situazione contrattuale in WWE dopo lo spostamento nella sezione Alumni
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260511_185614_002_brock-lesnar-la-situazione-contrattuale-in-wwe-dopo-lo-spostamento-nella-sezione_3cebaf39_*.html
+[BOT] Elaborazione: Backstage Report On AEW Canceling Kazuchika Okada World Title Match Vs. Darby Allin
+[BOT] semantic_id=backstage-report-on-aew-canceling-kazuchika-okada-world-title-match-vs-darby-allin
+[SCORE] iniziale=70 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=normal report=False score=70 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | Articolo che conferma la natura reale di un'assenza backstage (non storyline) riguardante Kazuchika Okada.
+[EDITORIAL v72.3] translation_notes=Mantenere 'AEW Men's World Championship' e 'International Championship' in inglese.; 'Squash win' va reso con 'vittoria schiacciante' o 'match a senso unico'.; 'Family business' va tradotto come 'questioni familiari' per chiarezza.
+[EDITORIAL v73] final type=RUMOR | category=AEW (5) | Articolo che conferma la natura reale di un'assenza backstage (non storyline) riguardante Kazuchika Okada.
+[PERF v71] analisi editoriale AI v72: 1.12s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=68 priority=medium | AEW, impatto roster/storyline, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v72.3 cap rumor: niente boost raffinamento, v72.3 cap rumor
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Backstage Report On AEW Canceling Kazuchika Okada World Title Match Vs. Darby Allin
+[V71] story_signature=stable:kazuchika_okada|darby_allin|men_s_world_championship|outcome|aew|dynamite|collision|double_or_nothing semantic_status=new_story freshness=0.727
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=3
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/backstage-report-on-aew-canceling-kazuchika-okada-world-title-match-vs-darby-allin/intro-1778512844.jpg
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 4.93s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): AEW: Kazuchika Okada torna in Giappone, annullato il match titolato contro Darby Allin
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WARN v71.3] Quote check sotto soglia ma non bloccante: ['quote count ratio below threshold: 0.50'] - Backstage Report On AEW Canceling Kazuchika Okada World Title Match Vs. Darby Allin
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 3.91s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/backstage-report-on-aew-canceling-kazuchika-okada-world-title-match-vs-darby-allin/l-intro-1778512844.jpg
+[MEDIA] Immagine caricata: 4277
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.73s
+[PERF v71] totale articolo pubblicato 'Backstage Report On AEW Canceling Kazuchika Okada World Titl': 13.60s
+[OK] Pubblicato: AEW: Kazuchika Okada torna in Giappone, annullato il match titolato contro Darby Allin
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260511_185628_003_aew-kazuchika-okada-torna-in-giappone-annullato-il-match-titolato-contro-darby-a_ac409d4b_*.html
+[BOT] News candidate totali: 16 | mode=normal | max nuove=3 | pending pubblicati=3
+[SKIP v78.1] Gia processato in questa run: CM Punk's Status for May 11 WWE RAW Amid Ongoing TV Absence
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Jeff Jarrett On WWE Releases: 'Nobody Is Safe'
+[BOT] semantic_id=jeff-jarrett-on-wwe-releases-nobody-is-safe
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[MODEL v83] Route mode=normal report=False score=73 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza le opinioni di Jeff Jarrett sui licenziamenti in WWE e sulla gestione dei contratti, citando il suo podcast. Non è una news di cronaca pura ma un commento di un ex insider.
+[EDITORIAL v72.3] translation_notes=Mantenere i titoli dei match e delle cinture in inglese.; 'Releases' va tradotto come licenziamenti, non rilasci.; 'Nobody is safe' va reso con 'Nessuno è al sicuro'.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo analizza le opinioni di Jeff Jarrett sui licenziamenti in WWE e sulla gestione dei contratti, citando il suo podcast. Non è una news di cronaca pura ma un commento di un ex insider.
+[PERF v71] analisi editoriale AI v72: 1.30s
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star lead: roman reigns, nomi forti lead: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, combo top name lead + evento forte, PLE/PPV, non wrestling puro, v72.3 cap opinion: niente boost raffinamento, v72.3 cap opinion
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Jeff Jarrett On WWE Releases: 'Nobody Is Safe'
+[FIX v72.3] Event key business rimossa per OPINION/WWE: event:business:roman-reigns:cody-rhodes -> event:rumor:jeff-jarrett-releases-nobody-is-safe
+[V71] story_signature=stable:charlotte_flair|roman_reigns|contract|wwe|nxt semantic_status=new_story freshness=0.829
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=3
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/jeff-jarrett-on-wwe-releases-nobody-is-safe/intro-1778521536.jpg
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Body sospetto o troppo meta
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[QUALITY] Problemi rilevati: ['Testo sospetto o troppo breve']
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TRANSLATE] Errore: Output ancora sospetto dopo revisione: ['Testo sospetto o troppo breve']
+[PERF v71] traduzione: 6.17s
+[SKIP] Traduzione fallita: Jeff Jarrett On WWE Releases: 'Nobody Is Safe' (err_type=validation)
+[SKIP v78.1] Gia processato in questa run: Where Things Stand With Brock Lesnar and WWE After Alumni Section Move
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Interesting Name Was Present Backstage for WWE Backlash 2026
+[BOT] semantic_id=interesting-name-was-present-backstage-for-wwe-backlash-2026
+[SCORE] iniziale=72 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[BOT] Embed trovati: 1
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - Interesting Name Was Present Backstage for WWE Backlash 2026
+[MODEL v83] Route mode=normal report=False score=72 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - Interesting Name Was Present Backstage for WWE Backlash 2026
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta la presenza di Kevin Owens nel backstage di Backlash 2026, un evento già avvenuto. È una news autonoma su un fatto compiuto.
+[EDITORIAL v72.3] translation_notes=Mantenere 'backstage' come termine tecnico invariato.; Tradurre 'sidelined' come 'fuori gioco' o 'ai box'.; Non tradurre titoli di show come 'WWE LFG'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta la presenza di Kevin Owens nel backstage di Backlash 2026, un evento già avvenuto. È una news autonoma su un fatto compiuto.
+[PERF v71] analisi editoriale AI v72: 1.25s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Interesting Name Was Present Backstage for WWE Backlash 2026
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - Interesting Name Was Present Backstage for WWE Backlash 2026
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - Interesting Name Was Present Backstage for WWE Backlash 2026
+[SCORE v81.1] Cap future card announcement 56->56 - Interesting Name Was Present Backstage for WWE Backlash 2026
+[SCORE] raffinato=56 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, developmental secondario, v62 infortunio/operazione, v70 cap preview hard, v81.1 cap future card announcement 56->56
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Interesting Name Was Present Backstage for WWE Backlash 2026
+[SKIP v78.1] Gia processato in questa run: Backstage Report On AEW Canceling Kazuchika Okada World Title Match Vs. Darby Allin
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Major Obstacles Revealed In Ireland's Push to Host WWE WrestleMania
+[BOT] semantic_id=major-obstacles-revealed-in-irelands-push-to-host-wwe-wrestlemania
+[SCORE] iniziale=56 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=0, embed=0
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=normal report=False score=56 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | L'articolo analizza le difficoltà logistico-finanziarie di una possibile candidatura futura, basandosi su report di backstage, rientrando perfettamente nella categoria RUMOR.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'WrestleMania' o nomi di stadi come 'Croke Park'.; 'Backstage update' va reso come 'indiscrezione di backstage'.; 'Long-term project' non è un progetto a lungo termine, ma un piano a lungo termine.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo analizza le difficoltà logistico-finanziarie di una possibile candidatura futura, basandosi su report di backstage, rientrando perfettamente nella categoria RUMOR.
+[PERF v71] analisi editoriale AI v72: 11.95s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=56 priority=low | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v62 corporate/business, v62 categoria business, v72.3 cap rumor: niente boost raffinamento
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Major Obstacles Revealed In Ireland's Push to Host WWE WrestleMania
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:wwe:wrestlemania-host-bid:ireland -> event:rumor:major-obstacles-ireland-s-push-host
+[V71] story_signature=stable:major_obstacles_revealed|in_ireland_s_push|report semantic_status=new_story freshness=0.552
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=13
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 9.53s
+[FIX] Titolo non valido (ok) -> fallback automatico: Major obstacles revealed in ireland's push to host WWE WrestleMania
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WrestleMania in Irlanda: i problemi dietro la candidatura ufficiale
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.67s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/major-obstacles-revealed-in-irelands-push-to-host-wwe-wrestlemania-16.jpg
+[MEDIA] Immagine caricata: 4280
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.23s
+[PERF v71] totale articolo pubblicato 'Major Obstacles Revealed In Ireland's Push to Host WWE Wrest': 25.36s
+[OK] Pubblicato: WrestleMania in Irlanda: i problemi dietro la candidatura ufficiale
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260511_185705_004_wrestlemania-in-irlanda-i-problemi-dietro-la-candidatura-ufficiale_71fee92d_*.html
+[BOT] Elaborazione: Spoiler: ROH Title Changes Hands During Latest Taping
+[BOT] semantic_id=spoiler-roh-title-changes-hands-during-latest-taping
+[SCORE] iniziale=55 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=normal report=False score=55 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WORLD (8) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta un cambio titolo già avvenuto durante i taping TV; pur citando un evento futuro (Supercard of Honor), il focus è la notizia del cambio di detentore già avvenuto.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Ring of Honor Television Championship' in inglese.; Non tradurre 'taping' come 'nastro', usare 'registrazioni'.; 'Changes hands' va reso come 'ha cambiato proprietario' o 'nuovo campione'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WORLD (8) | L'articolo riporta un cambio titolo già avvenuto durante i taping TV; pur citando un evento futuro (Supercard of Honor), il focus è la notizia del cambio di detentore già avvenuto.
+[PERF v71] analisi editoriale AI v72: 3.65s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Spoiler: ROH Title Changes Hands During Latest Taping
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=56 priority=low | AEW, impatto roster/storyline, infortunio, show settimanale, v62 titolo/championship, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Spoiler: ROH Title Changes Hands During Latest Taping
+[BOT] Elaborazione: Cody Rhodes Reveals Nintendo Sent Him a Cease and Desist Over Zelda-Inspired WWE Gear
+[BOT] semantic_id=cody-rhodes-reveals-nintendo-sent-him-a-cease-and-desist-over-zelda-inspired-wwe-gear
+[SCORE] iniziale=54 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[BOT] Embed trovati: 2
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=normal report=False score=54 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | La news riporta un aneddoto del passato raccontato in un'intervista, non riguarda eventi futuri o report di puntate.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Triforce' e 'The Legend of Zelda'.; Tradurre 'cease and desist' come 'diffida legale'.; 'Gear' va reso come 'abbigliamento da ring' o 'attire'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | La news riporta un aneddoto del passato raccontato in un'intervista, non riguarda eventi futuri o report di puntate.
+[PERF v71] analisi editoriale AI v72: 5.02s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Cody Rhodes Reveals Nintendo Sent Him a Cease and Desist Over Zelda-Inspired WWE Gear
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=74 priority=medium | WWE/main roster, top star titolo: cody rhodes, WWE main roster + storyline/evento, contratto, combo top name titolo + evento forte, PLE/PPV, v62 reazioni/tributi, v76 cap boost da score basso senza evento concreto
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Cody Rhodes Reveals Nintendo Sent Him a Cease and Desist Over Zelda-Inspired WWE Gear
+[V71] story_signature=stable:cody_rhodes|contract|wwe semantic_status=new_story freshness=0.546
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:cody-rhodes-diagnosis -> event:cody-rhodes-diagnosis-followup-cody-rhodes-reveals-nintendo-sent-him-a-cease-desist-over-zelda-inspir
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=10
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 23.24s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Cody Rhodes rivela: Nintendo gli inviò una diffida per il suo gear ispirato a Zelda
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.62s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/cody-rhodes-reveals-nintendo-sent-him-a-cease-and-desist-over-zelda-inspired-wwe-gear-14.jpg
+[MEDIA] Immagine caricata: 4283
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.44s
+[PERF v71] totale articolo pubblicato 'Cody Rhodes Reveals Nintendo Sent Him a Cease and Desist Ove': 32.41s
+[OK] Pubblicato: Cody Rhodes rivela: Nintendo gli inviò una diffida per il suo gear ispirato a Zelda
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260511_185742_005_cody-rhodes-rivela-nintendo-gli-invi-una-diffida-per-il-suo-gear-ispirato-a-zeld_10ee44b0_*.html
+[BOT] Elaborazione: Matt Hardy Believes TNA-WWE Working Relationship Will Soon 'Heat Back Up'
+[BOT] semantic_id=matt-hardy-believes-tna-wwe-working-relationship-will-soon-heat-back-up
+[SCORE] iniziale=54 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=OPINION conf=0.95 | category=TNA (7) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta le speculazioni di Matt Hardy sulla futura collaborazione tra TNA e WWE, basate sulla sua analisi post-WrestleMania.
+[EDITORIAL v72.3] translation_notes=Mantenere 'TNA Knockouts Champion' senza tradurre il titolo.; 'Heat back up' da rendere con 'si riscalderà di nuovo' o 'tornerà a intensificarsi'.; Tradurre 'Legacy act' in modo fluido come 'storia vivente' o 'leggende'.
+[EDITORIAL v73] final type=OPINION | category=TNA (7) | L'articolo riporta le speculazioni di Matt Hardy sulla futura collaborazione tra TNA e WWE, basate sulla sua analisi post-WrestleMania.
+[PERF v71] analisi editoriale AI v72: 1.29s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, contratto, PLE/PPV, opinione generica, v62 reazioni/tributi, v66 cap opinion/commentary storyline, v72.3 cap opinion: niente boost raffinamento
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Matt Hardy Believes TNA-WWE Working Relationship Will Soon 'Heat Back Up'
+[V71] story_signature=stable:matt_hardy|contract|wwe|tna|nxt|wrestlemania semantic_status=new_story freshness=0.7
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=3
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/tna-wwe-matt-hardy-working-relationship-heat-back-up/intro-1778522685.jpg
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 3.31s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Matt Hardy prevede una ripresa della collaborazione tra TNA e WWE
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 1.47s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/tna-wwe-matt-hardy-working-relationship-heat-back-up/l-intro-1778522685.jpg
+[MEDIA] Immagine caricata: 4286
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.68s
+[PERF v71] totale articolo pubblicato 'Matt Hardy Believes TNA-WWE Working Relationship Will Soon '': 9.54s
+[OK] Pubblicato: Matt Hardy prevede una ripresa della collaborazione tra TNA e WWE
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260511_185753_006_matt-hardy-prevede-una-ripresa-della-collaborazione-tra-tna-e-wwe_ea2998bf_*.html
+[BOT] Pubblicati 6 articoli (3 pending + 3 nuove) su 9 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (101 file)
+===== RUN END [2026-05-11 18:53:44] VERSION [v83_quality_routing_and_smart_preservation (957fdc3)] =====
+

@@ -1,0 +1,34 @@
+{
+  "run_id": "2026-05-11 18:53:44",
+  "bot_version": "v83_quality_routing_and_smart_preservation (957fdc3)",
+  "git_sha": "957fdc30e4b644267c9b6e59d0f7d874f8419913",
+  "created_at": "2026-05-11T18:56:28",
+  "source_title": "Backstage Report On AEW Canceling Kazuchika Okada World Title Match Vs. Darby Allin",
+  "final_title": "AEW: Kazuchika Okada torna in Giappone, annullato il match titolato contro Darby Allin",
+  "source_url": "https://www.wrestlinginc.com/2169669/aew-kazuchika-okada-darby-allin-canceling-world-title-match/",
+  "category_id": 5,
+  "category_slug": "AEW",
+  "article_type": "RUMOR",
+  "semantic_id": "backstage-report-on-aew-canceling-kazuchika-okada-world-title-match-vs-darby-allin",
+  "story_signature_v71": "stable:kazuchika_okada|darby_allin|men_s_world_championship|outcome|aew|dynamite|collision|double_or_nothing",
+  "refined_score": 68,
+  "refined_reasons": [
+    "AEW",
+    "impatto roster/storyline",
+    "ritorno/debutto",
+    "PLE/PPV",
+    "v62 ritorno/debutto",
+    "v72.3 cap rumor: niente boost raffinamento",
+    "v72.3 cap rumor"
+  ],
+  "blocks_summary": {
+    "text": 3,
+    "image": 1,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260511_185628_003_aew-kazuchika-okada-torna-in-giappone-annullato-il-match-titolato-contro-darby-a_ac409d4b_original.html",
+  "final_html_file": "20260511_185628_003_aew-kazuchika-okada-torna-in-giappone-annullato-il-match-titolato-contro-darby-a_ac409d4b_final.html",
+  "metadata_file": "20260511_185628_003_aew-kazuchika-okada-torna-in-giappone-annullato-il-match-titolato-contro-darby-a_ac409d4b_metadata.json"
+}

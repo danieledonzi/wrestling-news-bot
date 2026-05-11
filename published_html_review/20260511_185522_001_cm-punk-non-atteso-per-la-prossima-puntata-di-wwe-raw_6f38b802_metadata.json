@@ -1,0 +1,39 @@
+{
+  "run_id": "2026-05-11 18:53:44",
+  "bot_version": "v83_quality_routing_and_smart_preservation (957fdc3)",
+  "git_sha": "957fdc30e4b644267c9b6e59d0f7d874f8419913",
+  "created_at": "2026-05-11T18:55:22",
+  "source_title": "CM Punk's Status for May 11 WWE RAW Amid Ongoing TV Absence",
+  "final_title": "CM Punk non è atteso per la prossima puntata di WWE Raw",
+  "source_url": "https://www.ringsidenews.com/cm-punks-status-may-11-wwe-raw-amid-ongoing-tv-absence/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "RUMOR",
+  "semantic_id": "cm-punks-status-for-may-11-wwe-raw-amid-ongoing-tv-absence",
+  "story_signature_v71": "stable:danhausen|cm_punk|outcome|wwe|raw|backlash",
+  "refined_score": 56,
+  "refined_reasons": [
+    "WWE/main roster",
+    "top star titolo: cm punk",
+    "nomi forti lead: danhausen",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "show settimanale",
+    "v66 cap opinion/commentary storyline",
+    "v72.3 cap rumor",
+    "v79.1.3 true future preview cap"
+  ],
+  "blocks_summary": {
+    "text": 7,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://www.facebook.com/ringsidenews"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260511_185522_001_cm-punk-non-atteso-per-la-prossima-puntata-di-wwe-raw_6f38b802_original.html",
+  "final_html_file": "20260511_185522_001_cm-punk-non-atteso-per-la-prossima-puntata-di-wwe-raw_6f38b802_final.html",
+  "metadata_file": "20260511_185522_001_cm-punk-non-atteso-per-la-prossima-puntata-di-wwe-raw_6f38b802_metadata.json"
+}

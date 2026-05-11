@@ -1,0 +1,36 @@
+{
+  "run_id": "2026-05-11 18:53:44",
+  "bot_version": "v83_quality_routing_and_smart_preservation (957fdc3)",
+  "git_sha": "957fdc30e4b644267c9b6e59d0f7d874f8419913",
+  "created_at": "2026-05-11T18:57:05",
+  "source_title": "Major Obstacles Revealed In Ireland's Push to Host WWE WrestleMania",
+  "final_title": "WrestleMania in Irlanda: i problemi dietro la candidatura ufficiale",
+  "source_url": "https://www.ringsidenews.com/major-obstacles-revealed-irelands-push-host-wwe-wrestlemania/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "RUMOR",
+  "semantic_id": "major-obstacles-revealed-in-irelands-push-to-host-wwe-wrestlemania",
+  "story_signature_v71": "stable:major_obstacles_revealed|in_ireland_s_push|report",
+  "refined_score": 56,
+  "refined_reasons": [
+    "WWE/main roster",
+    "WWE main roster + storyline/evento",
+    "rumor/backstage",
+    "PLE/PPV",
+    "v62 corporate/business",
+    "v62 categoria business",
+    "v72.3 cap rumor: niente boost raffinamento"
+  ],
+  "blocks_summary": {
+    "text": 13,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://www.facebook.com/ringsidenews"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260511_185705_004_wrestlemania-in-irlanda-i-problemi-dietro-la-candidatura-ufficiale_71fee92d_original.html",
+  "final_html_file": "20260511_185705_004_wrestlemania-in-irlanda-i-problemi-dietro-la-candidatura-ufficiale_71fee92d_final.html",
+  "metadata_file": "20260511_185705_004_wrestlemania-in-irlanda-i-problemi-dietro-la-candidatura-ufficiale_71fee92d_metadata.json"
+}
