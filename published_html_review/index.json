@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-11 14:08:23",
-  "last_bot_version": "v82_editorial_realism_microtext_adaptation (ea065d8)",
-  "updated_at": "2026-05-11T14:10:00",
-  "total_items": 17,
+  "last_run_id": "2026-05-11 14:14:58",
+  "last_bot_version": "v82_editorial_realism_microtext_adaptation (dabc256)",
+  "updated_at": "2026-05-11T14:16:41",
+  "total_items": 18,
   "items": [
     {
       "run_id": "2026-05-10 14:39:11",
@@ -140,6 +140,14 @@
       "original_html_file": "20260511_134530_002_kaitlyn-tornerei-in-wwe-se-l-opportunit-fosse-giusta_5f5a77ed_original.html",
       "final_html_file": "20260511_134530_002_kaitlyn-tornerei-in-wwe-se-l-opportunit-fosse-giusta_5f5a77ed_final.html",
       "metadata_file": "20260511_134530_002_kaitlyn-tornerei-in-wwe-se-l-opportunit-fosse-giusta_5f5a77ed_metadata.json"
+    },
+    {
+      "run_id": "2026-05-11 14:14:58",
+      "title": "Vince Russo risponde a Sheamus sulle critiche alla Attitude Era",
+      "url": "https://www.ringsidenews.com/vince-russo-calls-out-wwe-stars-downplaying-attitude-era/",
+      "original_html_file": "20260511_141635_001_vince-russo-risponde-a-sheamus-sulle-critiche-alla-attitude-era_630846c8_original.html",
+      "final_html_file": "20260511_141635_001_vince-russo-risponde-a-sheamus-sulle-critiche-alla-attitude-era_630846c8_final.html",
+      "metadata_file": "20260511_141635_001_vince-russo-risponde-a-sheamus-sulle-critiche-alla-attitude-era_630846c8_metadata.json"
     }
   ]
 }
