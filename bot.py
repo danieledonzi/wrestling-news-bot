@@ -174,7 +174,7 @@ FEEDS = [
 # Gemini 3.1 resta testabile solo via env, ma non viene usato di default per evitare 503/404/latenze.
 MODEL_CHAIN = [
     m.strip()
-    for m in os.getenv("GEMINI_MODEL_CHAIN", "gemini-3.1-flash-lite,gemini-3-flash").split(",")
+    for m in os.getenv("GEMINI_MODEL_CHAIN", "gemini-2.5-flash-lite,gemini-2.5-flash").split(",")
     if m.strip()
 ]
 
@@ -12293,6 +12293,270 @@ def v721_ensure_italian_title(title, source_title="", source_text="", source_url
     fixed = _ORIG_V82_v721_ensure_italian_title(title, source_title, source_text, source_url)
     return v82_repair_title_editorial(fixed, source_title, source_text, source_url)
 
+
+
+
+# =========================
+# v83 - model quality routing + smarter preservation ratio
+# =========================
+BOT_VERSION = "v83_quality_routing_and_smart_preservation"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+# v83 removes the invalid gemini-3-flash fallback and routes model quality by run mode/article value.
+# Normal mode:
+#   - default/low articles: 3.1 Flash Lite -> 2.5 Flash Lite
+#   - high score / long / quote-heavy articles: 3.1 Flash -> 2.5 Flash -> lite fallbacks
+# Storm mode:
+#   - report/results articles: 3.1 Flash -> 2.5 Flash
+#   - everything else: 3.1 Flash Lite -> 2.5 Flash Lite
+V83_MODEL_ROUTING_ENABLED = os.getenv("V83_MODEL_ROUTING_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V83_HIGH_SCORE_THRESHOLD = int(os.getenv("V83_HIGH_SCORE_THRESHOLD", "85"))
+V83_LONG_ARTICLE_WORDS = int(os.getenv("V83_LONG_ARTICLE_WORDS", "850"))
+V83_MANY_QUOTES_THRESHOLD = int(os.getenv("V83_MANY_QUOTES_THRESHOLD", "4"))
+V83_DEFAULT_LITE_CHAIN = [m.strip() for m in os.getenv("V83_LITE_MODEL_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite").split(",") if m.strip()]
+V83_STRONG_CHAIN = [m.strip() for m in os.getenv("V83_STRONG_MODEL_CHAIN", "gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite").split(",") if m.strip()]
+V83_STORM_REPORT_CHAIN = [m.strip() for m in os.getenv("V83_STORM_REPORT_MODEL_CHAIN", "gemini-2.5-flash").split(",") if m.strip()]
+V83_STORM_LITE_CHAIN = [m.strip() for m in os.getenv("V83_STORM_LITE_MODEL_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite").split(",") if m.strip()]
+
+# Make the base chain safe if some legacy code iterates MODEL_CHAIN directly.
+MODEL_CHAIN = list(dict.fromkeys(V83_STRONG_CHAIN + V83_DEFAULT_LITE_CHAIN))
+
+_CURRENT_RUN_MODE_V83 = "normal"
+_CURRENT_ARTICLE_CONTEXT_V83 = {}
+_LAST_MODEL_ROUTE_V83 = None
+
+_ORIG_V83_determine_run_mode = determine_run_mode
+
+def determine_run_mode(queue):
+    global _CURRENT_RUN_MODE_V83
+    mode = _ORIG_V83_determine_run_mode(queue)
+    _CURRENT_RUN_MODE_V83 = mode or "normal"
+    return mode
+
+
+def v83_context_word_count(text=""):
+    return len(re.findall(r"\w+", sanitize_text(text or ""), flags=re.UNICODE))
+
+
+def v83_context_quote_count(text=""):
+    return len(re.findall(r"[\"“”']", text or "")) // 2
+
+
+def v83_article_is_report_context(ctx=None):
+    ctx = ctx or _CURRENT_ARTICLE_CONTEXT_V83 or {}
+    if ctx.get("kind") == "report" or ctx.get("force_process_report"):
+        return True
+    title = ctx.get("title") or ""
+    url = ctx.get("url") or ""
+    text = ctx.get("text") or ctx.get("prefetched_text") or ""
+    try:
+        return bool(is_results_article(title, url, text))
+    except Exception:
+        probe = normalize_for_check(f"{title} {url}")
+        return any(x in probe for x in ["results", "risultati", "report", "recap", "collision", "raw", "smackdown", "nxt"])
+
+
+def v83_article_needs_strong_model(ctx=None):
+    ctx = ctx or _CURRENT_ARTICLE_CONTEXT_V83 or {}
+    try:
+        score = int(ctx.get("score") or 0)
+    except Exception:
+        score = 0
+    if score >= V83_HIGH_SCORE_THRESHOLD:
+        return True
+    text = ctx.get("text") or ctx.get("prefetched_text") or ""
+    if v83_context_word_count(text) >= V83_LONG_ARTICLE_WORDS:
+        return True
+    if v83_context_quote_count(text) >= V83_MANY_QUOTES_THRESHOLD:
+        return True
+    editorial_type = str(ctx.get("article_type") or ctx.get("editorial_type") or "").upper()
+    if editorial_type in {"RESULTS_REPORT", "LIVE_REPORT", "PLE_REPORT", "TV_REPORT"}:
+        return True
+    return False
+
+
+def v83_model_chain_for_current_context():
+    if not V83_MODEL_ROUTING_ENABLED:
+        return MODEL_CHAIN
+    ctx = _CURRENT_ARTICLE_CONTEXT_V83 or {}
+    mode = _CURRENT_RUN_MODE_V83 or "normal"
+    if mode == "storm":
+        if v83_article_is_report_context(ctx):
+            return V83_STORM_REPORT_CHAIN
+        return V83_STORM_LITE_CHAIN
+    if v83_article_is_report_context(ctx) or v83_article_needs_strong_model(ctx):
+        return V83_STRONG_CHAIN
+    return V83_DEFAULT_LITE_CHAIN
+
+
+_ORIG_V83_generate_and_parse_json = generate_and_parse_json
+
+def generate_and_parse_json(prompt):
+    global MODEL_CHAIN, _LAST_MODEL_ROUTE_V83
+    if not V83_MODEL_ROUTING_ENABLED:
+        return _ORIG_V83_generate_and_parse_json(prompt)
+    chain = list(dict.fromkeys(v83_model_chain_for_current_context()))
+    if not chain:
+        chain = V83_DEFAULT_LITE_CHAIN or MODEL_CHAIN
+    old_chain = MODEL_CHAIN
+    route_key = (tuple(chain), _CURRENT_RUN_MODE_V83, bool(v83_article_is_report_context()), int((_CURRENT_ARTICLE_CONTEXT_V83 or {}).get("score") or 0))
+    try:
+        MODEL_CHAIN = chain
+        if route_key != _LAST_MODEL_ROUTE_V83:
+            print(f"[MODEL v83] Route mode={_CURRENT_RUN_MODE_V83} report={v83_article_is_report_context()} score={(_CURRENT_ARTICLE_CONTEXT_V83 or {}).get('score', 0)} chain={','.join(chain)}")
+            _LAST_MODEL_ROUTE_V83 = route_key
+        return _ORIG_V83_generate_and_parse_json(prompt)
+    finally:
+        MODEL_CHAIN = old_chain
+
+
+_ORIG_V83_process_candidate_item = process_candidate_item
+
+def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    global _CURRENT_ARTICLE_CONTEXT_V83
+    old_ctx = dict(_CURRENT_ARTICLE_CONTEXT_V83 or {})
+    try:
+        entry = item.get("entry") if isinstance(item, dict) else None
+        _CURRENT_ARTICLE_CONTEXT_V83 = {
+            "kind": item.get("kind") if isinstance(item, dict) else "candidate",
+            "force_process_report": item.get("force_process_report") if isinstance(item, dict) else False,
+            "score": item.get("score", 0) if isinstance(item, dict) else 0,
+            "title": sanitize_text(item.get("title") or (getattr(entry, "title", "") if entry else "")) if isinstance(item, dict) else "",
+            "url": item.get("url") or (getattr(entry, "link", "") if entry else "") if isinstance(item, dict) else "",
+            "prefetched_text": item.get("prefetched_text", "") if isinstance(item, dict) else "",
+        }
+        return _ORIG_V83_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+    finally:
+        _CURRENT_ARTICLE_CONTEXT_V83 = old_ctx
+
+
+_ORIG_V83_process_report_pending_item = process_report_pending_item
+
+def process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    global _CURRENT_ARTICLE_CONTEXT_V83
+    old_ctx = dict(_CURRENT_ARTICLE_CONTEXT_V83 or {})
+    try:
+        _CURRENT_ARTICLE_CONTEXT_V83 = {
+            "kind": "report",
+            "force_process_report": True,
+            "score": item.get("score", 100) if isinstance(item, dict) else 100,
+            "title": sanitize_text(item.get("title", "") if isinstance(item, dict) else ""),
+            "url": item.get("url", "") if isinstance(item, dict) else "",
+            "prefetched_text": item.get("prefetched_text", "") if isinstance(item, dict) else "",
+        }
+        return _ORIG_V83_process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+    finally:
+        _CURRENT_ARTICLE_CONTEXT_V83 = old_ctx
+
+
+# ---- smarter v81/v82 preservation ratio ----
+# v81 compared all source text, including American footer/CTA/transcript boilerplate. v83 compares editorial body.
+V83_MIN_EDITORIAL_WORD_RATIO = float(os.getenv("V83_MIN_EDITORIAL_WORD_RATIO", "0.70"))
+V83_MIN_EDITORIAL_WORD_RATIO_LONG = float(os.getenv("V83_MIN_EDITORIAL_WORD_RATIO_LONG", "0.66"))
+
+V83_BOILERPLATE_PATTERNS = [
+    r"please credit\b.*", r"if you use (?:the )?(?:above )?transcript.*", r"leave your thoughts.*",
+    r"leave a comment.*", r"what do you think.*", r"do you agree.*", r"sound off.*",
+    r"connect with us.*", r"follow us.*", r"add as a preferred source.*", r"send news tip.*",
+    r"read more:.*", r"related posts.*", r"tags?:.*", r"comments loading.*",
+]
+
+
+def v83_strip_source_boilerplate(text=""):
+    plain = BeautifulSoup(text or "", "html.parser").get_text("\n", strip=True)
+    lines = []
+    for raw in re.split(r"\n+", plain):
+        line = sanitize_text(raw)
+        if not line:
+            continue
+        low = normalize_for_check(line)
+        if any(re.search(p, low, flags=re.I) for p in V83_BOILERPLATE_PATTERNS):
+            continue
+        if len(low) < 25 and any(x in low for x in ["iphone app", "android app", "home", "wwe news", "follow us"]):
+            continue
+        lines.append(line)
+    return "\n".join(lines)
+
+
+def v83_strip_final_boilerplate(html=""):
+    soup = BeautifulSoup(html or "", "html.parser")
+    for tag in soup.find_all(["p", "blockquote", "li"]):
+        low = normalize_for_check(tag.get_text(" ", strip=True))
+        if any(re.search(p, low, flags=re.I) for p in V83_BOILERPLATE_PATTERNS):
+            tag.decompose()
+    return soup.get_text(" ", strip=True)
+
+
+def v81_translation_may_have_omissions(source_text="", html=""):
+    if not source_text or not html:
+        return False, ""
+    source_editorial = sanitize_text(v83_strip_source_boilerplate(source_text))
+    final_editorial = sanitize_text(v83_strip_final_boilerplate(html))
+    sw = v81_word_count(source_editorial)
+    fw = v81_word_count(final_editorial)
+    if sw < 120 or fw < 80:
+        return False, "short_text"
+    ratio = fw / max(sw, 1)
+    threshold = V83_MIN_EDITORIAL_WORD_RATIO_LONG if sw >= 650 else V83_MIN_EDITORIAL_WORD_RATIO
+    if ratio < threshold:
+        return True, f"editorial_word_ratio={ratio:.2f} ({fw}/{sw}) threshold={threshold:.2f}"
+    src_low = normalize_for_check(source_editorial)
+    fin_low = normalize_for_check(final_editorial)
+    source_action_cluster = any(t in src_low for t in ["reapplied", "applied it again", "locked in", "locked it in"]) and any(t in src_low for t in ["raised", "held up", "belt", "championship"])
+    final_action_missing = not any(t in fin_low for t in ["riapplic", "applicato di nuovo", "messo di nuovo", "alzato", "sollevato", "cintura", "championship"])
+    if source_action_cluster and final_action_missing:
+        return True, "missing_post_match_action_cluster"
+    return False, "ok"
+
+
+def v81_repair_possible_omissions(html="", source_title="", source_text=""):
+    suspicious, reason = v81_translation_may_have_omissions(source_text, html)
+    if not suspicious:
+        return html
+    source_excerpt = "\n".join(v81_source_sentences(v83_strip_source_boilerplate(source_text)))[:4500]
+    current_html = str(html or "")[:6500]
+    if not source_excerpt or not current_html:
+        return html
+    prompt = f"""
+Sei un editor italiano di wrestling. Devi controllare se una traduzione HTML ha omesso fatti editoriali presenti nell'originale inglese.
+Restituisci SOLO JSON valido in una riga: {{"html":"..."}}
+
+OBIETTIVO:
+- Mantieni l'HTML semplice (<p>, <blockquote>, <a>, <b>, <hr> se gia presenti).
+- Non riassumere.
+- Non aggiungere fatti esterni.
+- Se mancano fatti editoriali dell'originale, reinseriscili nella posizione corretta.
+- Puoi ignorare boilerplate finali di fonte/crediti/call-to-action/commenti.
+- Non cambiare nomi, date, eventi, titoli ufficiali o citazioni.
+- Mantieni uno stile italiano naturale giornalistico.
+- Se non manca nulla di giornalisticamente rilevante, restituisci l'HTML invariato.
+
+MOTIVO CONTROLLO:
+{reason}
+
+TITOLO ORIGINALE:
+{source_title}
+
+TESTO ORIGINALE INGLESE RIPULITO:
+{source_excerpt}
+
+HTML ITALIANO ATTUALE:
+{current_html}
+""".strip()
+    try:
+        data, used_model = generate_and_parse_json(prompt)
+        repaired = str(data.get("html", "") or "").strip()
+        if repaired and len(v81_plain_text_from_html(repaired)) >= len(v81_plain_text_from_html(html)):
+            repaired = fix_mojibake(repaired)
+            repaired = v81_cleanup_wrestling_action_language(repaired)
+            still_suspicious, still_reason = v81_translation_may_have_omissions(source_text, repaired)
+            if not still_suspicious:
+                print(f"[PRESERVE v83] Repair anti-omissione applicato con {used_model}: {reason}")
+                return repaired
+            print(f"[PRESERVE v83] Repair anti-omissione scartato: {still_reason}")
+    except Exception as e:
+        print(f"[PRESERVE v83] Repair anti-omissione fallito: {e}")
+    return html
 
 # =========================
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
