@@ -174,7 +174,7 @@ FEEDS = [
 # Gemini 3.1 resta testabile solo via env, ma non viene usato di default per evitare 503/404/latenze.
 MODEL_CHAIN = [
     m.strip()
-    for m in os.getenv("GEMINI_MODEL_CHAIN", "gemini-2.5-flash-lite,gemini-2.5-flash").split(",")
+    for m in os.getenv("GEMINI_MODEL_CHAIN", "gemini-3.1-flash-lite,gemini-3-flash").split(",")
     if m.strip()
 ]
 
@@ -12021,6 +12021,277 @@ def create_review_bundle_latest():
         print(f"[REVIEW BUNDLE v81.1] Creato bundle cumulativo: {bundle_path} ({files_added} file)")
     except Exception as e:
         print(f"[REVIEW BUNDLE v81.1] Errore creazione bundle: {e}")
+
+
+
+
+# =========================
+# v82 - editorial realism, microtext adaptation and AI-smell repair
+# =========================
+BOT_VERSION = "v82_editorial_realism_microtext_adaptation"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+# Keep v81.1 stable core. v82 only adds a final newsroom-style polish layer:
+# - no changes to scoring/dedupe/spoiler/embed/review logic;
+# - micro-paragraph based review of the already translated HTML;
+# - targeted repair only for paragraphs that look translated/AI-like;
+# - a light headline repair when the final title still contains English residue.
+_ORIG_V82_v79_editorial_post_edit = v79_editorial_post_edit
+_ORIG_V82_v721_ensure_italian_title = v721_ensure_italian_title
+
+V82_EDITORIAL_REALISM_ENABLED = os.getenv("V82_EDITORIAL_REALISM_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+V82_AI_SMELL_REPAIR_ENABLED = os.getenv("V82_AI_SMELL_REPAIR_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+V82_TITLE_REPAIR_ENABLED = os.getenv("V82_TITLE_REPAIR_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+V82_MAX_MICROTEXTS = int(os.getenv("V82_MAX_MICROTEXTS", "28"))
+V82_MAX_TEXT_CHARS = int(os.getenv("V82_MAX_TEXT_CHARS", "12000"))
+V82_MIN_REPAIRED_WORD_RATIO = float(os.getenv("V82_MIN_REPAIRED_WORD_RATIO", "0.90"))
+V82_MAX_REPAIRED_WORD_RATIO = float(os.getenv("V82_MAX_REPAIRED_WORD_RATIO", "1.18"))
+
+
+def v82_plain_words(text):
+    return re.findall(r"\w+", BeautifulSoup(text or "", "html.parser").get_text(" ", strip=True), flags=re.UNICODE)
+
+
+def v82_text_word_count(text):
+    return len(v82_plain_words(text))
+
+
+def v82_collect_urls(html):
+    return set(re.findall(r"https?://[^\s\"'<>]+", html or ""))
+
+
+def v82_has_nested_risky_markup(tag):
+    # Do not let Gemini rewrite paragraphs containing links, embeds, iframes, scripts or images.
+    # We preserve these through the existing v80/v81 oEmbed pipeline.
+    risky = {"a", "img", "iframe", "script", "blockquote", "figure", "video", "amp-twitter", "amp-instagram", "amp-youtube"}
+    return bool(tag.find(list(risky)))
+
+
+def v82_extract_microtexts_from_html(html):
+    soup = BeautifulSoup(html or "", "html.parser")
+    microtexts = []
+    counter = 1
+    for tag in soup.find_all(["p", "li", "h2", "h3"]):
+        if len(microtexts) >= V82_MAX_MICROTEXTS:
+            break
+        raw_text = tag.get_text(" ", strip=True)
+        if not raw_text or len(raw_text) < 35:
+            continue
+        if re.fullmatch(r"https?://\S+", raw_text.strip()):
+            continue
+        if v82_has_nested_risky_markup(tag):
+            continue
+        # Paragraphs with simple emphasis are still safe enough to repair only as plain text.
+        if tag.find(True) and not all(child.name in {"b", "strong", "em", "i"} for child in tag.find_all(True)):
+            continue
+        pid = f"P{counter:03d}"
+        tag["data-v82-id"] = pid
+        microtexts.append({"id": pid, "text": raw_text})
+        counter += 1
+    return soup, microtexts
+
+
+def v82_apply_microtext_repairs(html, repairs):
+    if not repairs:
+        return html
+    soup = BeautifulSoup(html or "", "html.parser")
+    # Re-assign ids deterministically, matching extraction rules.
+    eligible = []
+    for tag in soup.find_all(["p", "li", "h2", "h3"]):
+        raw_text = tag.get_text(" ", strip=True)
+        if not raw_text or len(raw_text) < 35:
+            continue
+        if re.fullmatch(r"https?://\S+", raw_text.strip()):
+            continue
+        if v82_has_nested_risky_markup(tag):
+            continue
+        if tag.find(True) and not all(child.name in {"b", "strong", "em", "i"} for child in tag.find_all(True)):
+            continue
+        eligible.append(tag)
+    by_id = {f"P{i+1:03d}": tag for i, tag in enumerate(eligible[:V82_MAX_MICROTEXTS])}
+    changed = 0
+    for repair in repairs:
+        if not isinstance(repair, dict):
+            continue
+        pid = str(repair.get("id") or "").strip()
+        new_text = str(repair.get("text") or "").strip()
+        if not pid or not new_text or pid not in by_id:
+            continue
+        tag = by_id[pid]
+        old_text = tag.get_text(" ", strip=True)
+        old_wc = max(1, v82_text_word_count(old_text))
+        new_wc = max(1, v82_text_word_count(new_text))
+        ratio = new_wc / old_wc
+        # Prevent accidental summaries or expansions.
+        if ratio < V82_MIN_REPAIRED_WORD_RATIO or ratio > V82_MAX_REPAIRED_WORD_RATIO:
+            print(f"[VOICE v82] Repair scartata per ratio parole {pid}: {old_wc}->{new_wc}")
+            continue
+        # Preserve simple bold/strong heading pattern when present.
+        if len(tag.find_all(True)) == 1 and tag.find(True).name in {"b", "strong"}:
+            tag.find(True).string = new_text
+        else:
+            tag.clear()
+            tag.append(new_text)
+        changed += 1
+    if changed:
+        print(f"[VOICE v82] Micro-repair applicate: {changed}")
+    return str(soup)
+
+
+def v82_microtexts_need_review(microtexts):
+    if not microtexts:
+        return False
+    joined = "\n".join(m.get("text", "") for m in microtexts).lower()
+    # Cheap prefilter: avoid an extra Gemini call when prose is already likely clean.
+    suspicious_markers = [
+        "future di", "ciò significa", "con ciò", "attraverso la lente", "aria rara",
+        "qualunque spada", "la storia detta", "opzione per ciò", "connesso con",
+        "rilasciato la presa", "svincolato la presa", "campionessa principale del main roster",
+        "titolo a suo nome", "palla rolling", "appeso con", "può hangare",
+        "in termini di workrate", "situazione continua", "resta da vedere",
+    ]
+    if any(marker in joined for marker in suspicious_markers):
+        return True
+    # Also review longer opinion-style pieces where idioms are more likely to survive translation.
+    total_words = sum(v82_text_word_count(m.get("text", "")) for m in microtexts)
+    return total_words >= 420
+
+
+def v82_repair_ai_smell_microtexts(html, source_title="", source_text="", source_url=""):
+    if not (V82_EDITORIAL_REALISM_ENABLED and V82_AI_SMELL_REPAIR_ENABLED):
+        return html
+    try:
+        soup, microtexts = v82_extract_microtexts_from_html(html)
+        if not v82_microtexts_need_review(microtexts):
+            return html
+        payload = microtexts[:V82_MAX_MICROTEXTS]
+        prompt = f"""
+Sei un editor italiano esperto di wrestling. Devi controllare micro-paragrafi gia tradotti in italiano e riparare SOLO quelli che hanno odore di traduzione automatica o AI.
+
+OBIETTIVO:
+- Il testo deve sembrare scritto da un redattore italiano che segue il wrestling.
+- Mantieni identici fatti, nomi, date, citazioni, titoli ufficiali, rapporti causa/effetto e tono dell'originale.
+- Non riassumere, non aggiungere informazioni, non cancellare dettagli.
+- Non rendere il testo piu enfatico.
+- Se una frase inglese idiomatica/metaforica e stata resa letteralmente, trasformala in un equivalente italiano naturale.
+- Conserva termini wrestling comuni quando suonano naturali: main roster, brand, storyline, kayfabe, workrate, Money in the Bank, WWE Women's Championship.
+- Correggi solo microtesti davvero innaturali. Se un microtesto e gia buono, non includerlo nelle repairs.
+
+TITOLO ORIGINALE:
+{source_title}
+
+CONTESTO ORIGINALE BREVE:
+{(source_text or '')[:V82_MAX_TEXT_CHARS]}
+
+MICROTESTI ITALIANI:
+{json.dumps(payload, ensure_ascii=False, indent=2)}
+
+Rispondi SOLO JSON valido nel formato:
+{{
+  "repairs": [
+    {{"id": "P001", "reason": "calco/metafora/sintassi", "text": "microtesto riscritto in italiano naturale"}}
+  ]
+}}
+"""
+        data, used_model = generate_and_parse_json(prompt)
+        repairs = data.get("repairs", []) if isinstance(data, dict) else []
+        if not isinstance(repairs, list) or not repairs:
+            print(f"[VOICE v82] AI-smell check OK: nessuna repair ({used_model})")
+            return html
+        repaired = v82_apply_microtext_repairs(html, repairs)
+        # Safety: never drop URLs/embeds and never accept a major length collapse.
+        old_urls = v82_collect_urls(html)
+        new_urls = v82_collect_urls(repaired)
+        missing_urls = old_urls - new_urls
+        if missing_urls:
+            print(f"[VOICE v82] Repair annullata: URL mancanti {list(missing_urls)[:3]}")
+            return html
+        old_wc = max(1, v82_text_word_count(html))
+        new_wc = max(1, v82_text_word_count(repaired))
+        if new_wc / old_wc < 0.92:
+            print(f"[VOICE v82] Repair annullata: testo troppo corto {old_wc}->{new_wc}")
+            return html
+        if repaired != html:
+            print(f"[VOICE v82] AI-smell repair completata con {used_model}")
+        return repaired
+    except Exception as e:
+        print(f"[VOICE v82] AI-smell repair non applicata: {e}")
+        return html
+
+
+def v79_editorial_post_edit(news_data, source_title="", source_text="", source_url=""):
+    news_data = _ORIG_V82_v79_editorial_post_edit(news_data, source_title, source_text, source_url)
+    if news_data and news_data.get("testo"):
+        before = news_data.get("testo", "")
+        after = v82_repair_ai_smell_microtexts(before, source_title, source_text, source_url)
+        if after != before:
+            news_data["testo"] = after
+            print("[VOICE v82] Layer newsroom realism applicato")
+    return news_data
+
+
+V82_TITLE_ENGLISH_RESIDUE = [
+    r"\bfuture\b", r"\bmade by\b", r"\bbreaking down\b", r"\bwill:\b", r"\bshould:\b",
+    r"\bthe only one\b", r"\bniche accomplishment\b", r"\bwomen['’]?s\b(?!\s+(?:championship|champion|title))",
+    r"\bstar says\b", r"\bformer wwe star\b", r"\bassesses\b", r"\bdoc\b",
+]
+
+
+def v82_title_needs_repair(title="", source_title=""):
+    t = (title or "").strip()
+    if not t:
+        return False
+    low = t.lower()
+    if any(re.search(p, low, flags=re.I) for p in V82_TITLE_ENGLISH_RESIDUE):
+        return True
+    # Titles that are too literal/descriptive often contain these awkward Italian shapes.
+    awkward = ["nuova campionessa wwe women's", "stato in wwe", "detenere un particolare primato", "le sfidanti"]
+    return any(a in low for a in awkward)
+
+
+def v82_repair_title_editorial(title="", source_title="", source_text="", source_url=""):
+    if not (V82_TITLE_REPAIR_ENABLED and v82_title_needs_repair(title, source_title)):
+        return title
+    try:
+        prompt = f"""
+Riscrivi questo titolo per un sito italiano di wrestling.
+
+Regole:
+- Deve sembrare una headline italiana naturale, non una traduzione letterale.
+- Mantieni fatto principale, nomi, promotion, titoli ufficiali e tono.
+- Non aggiungere informazioni non presenti.
+- Non fare clickbait e non esagerare.
+- Lascia in inglese i titoli ufficiali: WWE Women's Championship, Women's World Championship, NXT North American Championship, Money in the Bank.
+- Evita residui inglesi come "Future di", "made by", "Breaking down", "Women’s" tronco.
+
+Titolo originale inglese:
+{source_title}
+
+Titolo italiano attuale:
+{title}
+
+Contesto breve:
+{(source_text or '')[:1800]}
+
+Rispondi SOLO JSON valido:
+{{"title": "titolo italiano finale"}}
+"""
+        data, used_model = generate_and_parse_json(prompt)
+        new_title = sanitize_text(str(data.get("title", title) or title)).strip()
+        if not new_title or len(new_title) < 12:
+            return title
+        new_title = v811_cleanup_title_championship_terms(new_title, source_title, source_text)
+        new_title = v721_deterministic_title_cleanup(refine_title_italian(new_title))
+        print(f"[TITLE v82] Headline realism applicato ({used_model}): {new_title}")
+        return new_title
+    except Exception as e:
+        print(f"[TITLE v82] Repair titolo non applicata: {e}")
+        return title
+
+
+def v721_ensure_italian_title(title, source_title="", source_text="", source_url=""):
+    fixed = _ORIG_V82_v721_ensure_italian_title(title, source_title, source_text, source_url)
+    return v82_repair_title_editorial(fixed, source_title, source_text, source_url)
 
 
 # =========================
