@@ -13445,6 +13445,205 @@ def process_report_pending_item(item, history, seen_story_fingerprints, seen_new
         print(f"[RUN v85] Pubblicati in questa run: {V85_TOTAL_PUBLISHED_THIS_RUN}/{V85_MAX_TOTAL_PUBLISHED_PER_RUN}")
     return res
 
+
+# =========================
+# v85.1 - anti-waste tightening and spoiler log de-duplication
+# =========================
+BOT_VERSION = "v85_1_anti_waste_spoiler_log_cleanup"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V851_SPOILER_LOG_DEDUP_ENABLED = os.getenv("V85_1_SPOILER_LOG_DEDUP_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V851_SKIP_OBSOLETE_PRESHOW_BEFORE_GEMINI = os.getenv("V85_1_SKIP_OBSOLETE_PRESHOW_BEFORE_GEMINI", "1").strip().lower() not in {"0", "false", "no", "off"}
+V851_SKIP_OPINION_LOW_BEFORE_TRANSLATION = os.getenv("V85_1_SKIP_OPINION_LOW_BEFORE_TRANSLATION", "1").strip().lower() not in {"0", "false", "no", "off"}
+V851_OPINION_REFINE_SKIP_THRESHOLD = int(os.getenv("V85_1_OPINION_REFINE_SKIP_THRESHOLD", "65"))
+V851_MODEL_MAX_503_PER_ARTICLE = int(os.getenv("V85_1_MODEL_MAX_503_PER_ARTICLE", "2"))
+V851_SEEN_SPOILER_LOG_KEYS = set()
+V851_CURRENT_MODEL_503_COUNT = 0
+V851_CURRENT_PROCESS_TITLE = ""
+
+
+def v851_title_from_item(item):
+    try:
+        return v841_normalize_title_from_item(item)
+    except Exception:
+        return sanitize_text((item or {}).get("title", "") or "")
+
+
+def v851_url_from_item(item):
+    try:
+        return v841_url_from_item(item)
+    except Exception:
+        return (item or {}).get("url") or (item or {}).get("link") or ""
+
+
+def v851_should_skip_obsolete_preshow(title="", text="", url=""):
+    probe = normalize_for_check(f"{title} {text} {url}")
+    try:
+        if "v7914_preshow_spoiler_obsolete" in globals() and v7914_preshow_spoiler_obsolete(title, text, url):
+            return True, "pre-show spoiler obsoleto"
+    except Exception:
+        pass
+    try:
+        if "v811_is_future_card_announcement" in globals() and v811_is_future_card_announcement(title, text, url):
+            # Sono annunci/preview future card: non valgono Gemini se gia' sotto soglia o se e' puro watch/preview.
+            if re.search(r"\bpreview\b|confirmed matches|how to watch|match card|lineup|start time|spoiler lineup|reportedly revealed", probe):
+                return True, "future card/segment announcement non-spoiler"
+    except Exception:
+        pass
+    return False, ""
+
+
+def v851_is_obvious_opinion_title(title=""):
+    t = normalize_for_check(title)
+    return bool(re.search(
+        r"\b(thinks|believes|says|feels|claims|explains|identifies|reacts|addresses|calls out|bothered him|deserves a raise|podcast|opinion|take|criticizes|slams)\b",
+        t,
+    ))
+
+
+def v851_early_news_core_key(title="", summary=""):
+    try:
+        return make_news_core_key(title, summary or "") or make_news_core_key(title, "")
+    except Exception:
+        return ""
+
+
+# Log spoiler: la logica resta identica, ma le letture ripetute della stessa decisione non inquinano il master log.
+_ORIG_V851_v79_is_live_spoiler_candidate = v79_is_live_spoiler_candidate
+
+def v79_is_live_spoiler_candidate(title="", text="", url=""):
+    if not V851_SPOILER_LOG_DEDUP_ENABLED:
+        return _ORIG_V851_v79_is_live_spoiler_candidate(title, text, url)
+    key = v791_spoiler_cache_key(title, text, url) if "v791_spoiler_cache_key" in globals() else hashlib.md5(f"{title}|{url}".encode("utf-8", "ignore")).hexdigest()
+    if key not in V851_SEEN_SPOILER_LOG_KEYS:
+        V851_SEEN_SPOILER_LOG_KEYS.add(key)
+        return _ORIG_V851_v79_is_live_spoiler_candidate(title, text, url)
+    try:
+        import contextlib, io
+        with contextlib.redirect_stdout(io.StringIO()):
+            return _ORIG_V851_v79_is_live_spoiler_candidate(title, text, url)
+    except Exception:
+        return _ORIG_V851_v79_is_live_spoiler_candidate(title, text, url)
+
+
+# Scoring: sopprimi log duplicati dei cap spoiler, mantenendo il punteggio identico.
+_ORIG_V851_calculate_importance_score = calculate_importance_score
+_V851_SCORE_LOG_KEYS = set()
+
+def calculate_importance_score(title, text="", url=""):
+    key = hashlib.md5(f"{title}|{url}".encode("utf-8", "ignore")).hexdigest()
+    if key not in _V851_SCORE_LOG_KEYS:
+        _V851_SCORE_LOG_KEYS.add(key)
+        return _ORIG_V851_calculate_importance_score(title, text, url)
+    try:
+        import contextlib, io
+        with contextlib.redirect_stdout(io.StringIO()):
+            return _ORIG_V851_calculate_importance_score(title, text, url)
+    except Exception:
+        return _ORIG_V851_calculate_importance_score(title, text, url)
+
+
+# Gemini anti-waste: se un articolo sta già generando troppi 503, non continuare retry lunghi sullo stesso pezzo.
+_ORIG_V851_generate_and_parse_json = generate_and_parse_json
+
+def generate_and_parse_json(prompt, allowed_keys=None, purpose="json"):
+    global V851_CURRENT_MODEL_503_COUNT
+    try:
+        return _ORIG_V851_generate_and_parse_json(prompt, allowed_keys=allowed_keys, purpose=purpose)
+    except Exception as e:
+        msg = str(e)
+        if "503" in msg or "UNAVAILABLE" in msg or "high demand" in msg.lower():
+            V851_CURRENT_MODEL_503_COUNT += 1
+            if V851_CURRENT_MODEL_503_COUNT >= V851_MODEL_MAX_503_PER_ARTICLE:
+                raise RuntimeError(f"[v85.1] Troppe risposte Gemini 503 per articolo: {V851_CURRENT_PROCESS_TITLE or 'senza titolo'}") from e
+        raise
+
+
+_ORIG_V851_process_report_pending_item = process_report_pending_item
+
+def process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    # Prima di qualunque scraping, chiudi definitivamente report gia' pubblicati o gia' in history.
+    title = sanitize_text((item or {}).get("title", ""))
+    url = (item or {}).get("url", "")
+    report_event_key = (item or {}).get("report_event_key") or (item or {}).get("event_key")
+    if report_event_key and report_event_key in history.get("event_keys", set()):
+        print(f"[REPORT v85.1] Skip pre-scraping: report gia in history locale: {report_event_key}")
+        remove_pending_report_key(report_event_key)
+        remove_pending_url(url)
+        return "skipped"
+    if url and url in history.get("urls", set()):
+        print(f"[REPORT v85.1] Skip pre-scraping: URL report gia in history: {url}")
+        remove_pending_report_key(report_event_key)
+        remove_pending_url(url)
+        return "skipped"
+    if report_event_key and wp_has_published_event(report_event_key, title=title, url=url):
+        print(f"[REPORT v85.1] Skip pre-scraping: report gia confermato su WP: {report_event_key}")
+        v841_mark_history_minimal(url=url, title=title, event_key=report_event_key, history=history,
+                                  seen_event_keys=seen_event_keys, seen_story_signatures=seen_story_signatures_v71,
+                                  seen_news_core_keys=seen_news_core_keys)
+        remove_pending_report_key(report_event_key)
+        remove_pending_url(url)
+        return "skipped"
+    return _ORIG_V851_process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+
+
+_ORIG_V851_process_candidate_item = process_candidate_item
+
+def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    global V851_CURRENT_MODEL_503_COUNT, V851_CURRENT_PROCESS_TITLE
+    title = v851_title_from_item(item)
+    url = v851_url_from_item(item)
+    summary = (item or {}).get("summary") or (item or {}).get("description") or ""
+    score = int((item or {}).get("score", 0) or 0)
+    V851_CURRENT_MODEL_503_COUNT = 0
+    V851_CURRENT_PROCESS_TITLE = title
+
+    # Hard cap totale prima di tutto.
+    if "V85_TOTAL_PUBLISHED_THIS_RUN" in globals() and V85_TOTAL_PUBLISHED_THIS_RUN >= V85_MAX_TOTAL_PUBLISHED_PER_RUN:
+        print(f"[SKIP v85.1] Limite totale run raggiunto ({V85_TOTAL_PUBLISHED_THIS_RUN}/{V85_MAX_TOTAL_PUBLISHED_PER_RUN}): {title}")
+        return "skipped"
+
+    # Report pending gia' pubblicati: non arrivare allo scraping.
+    if isinstance(item, dict) and item.get("kind") == "report":
+        return process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+
+    # URL / semantic gia' noti: skip immediato.
+    sem_id = (item or {}).get("semantic_id") or make_semantic_id_from_title(title)
+    if url and (url in history.get("urls", set()) or sem_id in history.get("semantic_ids", set())):
+        print(f"[SKIP v85.1] Gia pubblicato/history pre-Gemini: {title}")
+        remove_pending_url(url)
+        return "skipped"
+
+    # News core deterministica pre-Gemini: evita casi tipo business/TKO/Bischoff gia' pubblicati.
+    early_core = v851_early_news_core_key(title, summary)
+    if early_core and early_core in seen_news_core_keys:
+        print(f"[SKIP v85.1] News core gia pubblicata pre-Gemini: {early_core} - {title}")
+        remove_pending_url(url)
+        return "skipped"
+
+    # Preshow/preview obsolete o non-spoiler: skip prima di Gemini.
+    if V851_SKIP_OBSOLETE_PRESHOW_BEFORE_GEMINI:
+        skip_spoiler, skip_reason = v851_should_skip_obsolete_preshow(title, summary, url)
+        if skip_spoiler and score < 75:
+            print(f"[SKIP v85.1] {skip_reason} pre-Gemini: {title}")
+            remove_pending_url(url)
+            return "skipped"
+
+    # In storm, niente opinion/filler sotto soglia: non consumare Gemini per articoli che poi saranno cap a tier3.
+    current_mode = (_CURRENT_RUN_MODE_V83 or "normal") if "_CURRENT_RUN_MODE_V83" in globals() else "normal"
+    if current_mode == "storm" and V851_SKIP_OPINION_LOW_BEFORE_TRANSLATION:
+        if score < V851_OPINION_REFINE_SKIP_THRESHOLD and v851_is_obvious_opinion_title(title):
+            print(f"[SKIP v85.1] Storm anti-filler opinion pre-Gemini: score {score}<{V851_OPINION_REFINE_SKIP_THRESHOLD} - {title}")
+            remove_pending_url(url)
+            return "skipped"
+
+    try:
+        return _ORIG_V851_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+    finally:
+        V851_CURRENT_PROCESS_TITLE = ""
+        V851_CURRENT_MODEL_503_COUNT = 0
+
+
 # =========================
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 # =========================
