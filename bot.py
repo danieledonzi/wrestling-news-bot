@@ -13549,7 +13549,7 @@ _ORIG_V851_generate_and_parse_json = generate_and_parse_json
 def generate_and_parse_json(prompt, allowed_keys=None, purpose="json"):
     global V851_CURRENT_MODEL_503_COUNT
     try:
-        return _ORIG_V851_generate_and_parse_json(prompt, allowed_keys=allowed_keys, purpose=purpose)
+        return _ORIG_V851_generate_and_parse_json(prompt)
     except Exception as e:
         msg = str(e)
         if "503" in msg or "UNAVAILABLE" in msg or "high demand" in msg.lower():
@@ -13648,7 +13648,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
 # =========================
 # v85.2 - offline pending hard gate
 # =========================
-BOT_VERSION = "v85_2_offline_pending_hard_gate"
+BOT_VERSION = "v85_3_gemini_call_and_spoiler_global_gate"
 BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
 
 V852_OFFLINE_PENDING_MIN_SCORE = int(os.getenv("V85_2_OFFLINE_PENDING_MIN_SCORE", "75"))
@@ -13790,6 +13790,52 @@ def load_pending_articles(history=None):
         except Exception as e:
             print(f"[PENDING v85.2] Errore salvataggio cleanup pending: {e}")
     return cleaned
+
+
+# =========================
+# v85.3 - Gemini call compatibility + global spoiler gate
+# =========================
+# Se non siamo in una finestra plausibile di evento live, la logica spoiler
+# viene disattivata una sola volta per tutta la run. Non richiama piu' il
+# classifier articolo per articolo e non stampa righe NO ripetute.
+V853_GLOBAL_SPOILER_GATE_ENABLED = os.getenv("V85_3_GLOBAL_SPOILER_GATE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V853_SPOILER_GATE_LOGGED = False
+
+
+def v853_is_global_live_event_window():
+    force = str(globals().get("V791_FORCE_LIVE_EVENT", "") or "").strip().lower()
+    if force in {"1", "true", "yes", "on"}:
+        return True
+    if force in {"0", "false", "no", "off"}:
+        return False
+    try:
+        from zoneinfo import ZoneInfo
+        now = datetime.now(ZoneInfo("Europe/Rome"))
+    except Exception:
+        now = datetime.now()
+    weekday = now.weekday()
+    hour = now.hour
+    # Finestre live settimanali US viste dall'Italia. Fuori da queste, niente
+    # spoiler live: tutti i check successivi tornano False silenziosamente.
+    weekly_days = {1, 2, 3, 5, 6}  # Tue RAW, Wed NXT, Thu Dynamite, Fri/Sat shows
+    if weekday in weekly_days and hour in range(0, 7):
+        return True
+    # PLE/PPV: notte tra weekend/lunedi mattina. Meglio ampia che rumorosa.
+    if weekday in {5, 6, 0} and hour in range(0, 8):
+        return True
+    return False
+
+
+_ORIG_V853_v79_is_live_spoiler_candidate = v79_is_live_spoiler_candidate
+
+def v79_is_live_spoiler_candidate(title="", text="", url=""):
+    global V853_SPOILER_GATE_LOGGED
+    if V853_GLOBAL_SPOILER_GATE_ENABLED and not v853_is_global_live_event_window():
+        if not V853_SPOILER_GATE_LOGGED:
+            print("[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run")
+            V853_SPOILER_GATE_LOGGED = True
+        return False
+    return _ORIG_V853_v79_is_live_spoiler_candidate(title, text, url)
 
 
 # =========================
