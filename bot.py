@@ -12314,8 +12314,8 @@ V83_HIGH_SCORE_THRESHOLD = int(os.getenv("V83_HIGH_SCORE_THRESHOLD", "85"))
 V83_LONG_ARTICLE_WORDS = int(os.getenv("V83_LONG_ARTICLE_WORDS", "850"))
 V83_MANY_QUOTES_THRESHOLD = int(os.getenv("V83_MANY_QUOTES_THRESHOLD", "4"))
 V83_DEFAULT_LITE_CHAIN = [m.strip() for m in os.getenv("V83_LITE_MODEL_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite").split(",") if m.strip()]
-V83_STRONG_CHAIN = [m.strip() for m in os.getenv("V83_STRONG_MODEL_CHAIN", "gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite").split(",") if m.strip()]
-V83_STORM_REPORT_CHAIN = [m.strip() for m in os.getenv("V83_STORM_REPORT_MODEL_CHAIN", "gemini-2.5-flash").split(",") if m.strip()]
+V83_STRONG_CHAIN = [m.strip() for m in os.getenv("V83_STRONG_MODEL_CHAIN", "gemini-3.1-flash,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite").split(",") if m.strip()]
+V83_STORM_REPORT_CHAIN = [m.strip() for m in os.getenv("V83_STORM_REPORT_MODEL_CHAIN", "gemini-3.1-flash,gemini-2.5-flash").split(",") if m.strip()]
 V83_STORM_LITE_CHAIN = [m.strip() for m in os.getenv("V83_STORM_LITE_MODEL_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite").split(",") if m.strip()]
 
 # Make the base chain safe if some legacy code iterates MODEL_CHAIN directly.
@@ -12557,6 +12557,331 @@ HTML ITALIANO ATTUALE:
     except Exception as e:
         print(f"[PRESERVE v83] Repair anti-omissione fallito: {e}")
     return html
+
+
+
+# =========================
+# v84: publish-safety guardrails + stronger oEmbed/link extraction + image URL fallback
+# =========================
+# Goals:
+# - Never publish an article whose body collapsed to empty/near-empty visible text.
+# - Preserve Twitter/X and YouTube embeds as pure standalone URLs in the article body.
+# - Treat YouTube links found inside hyperlinks as editorial embeds to insert in sequence.
+# - Handle suspicious featured image URLs (for example Ringside .xml image URLs) by checking content-type
+#   and retrying sane image URL candidates before giving up.
+
+BOT_VERSION = "v84_publish_safety_oembed_image_guardrails"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V84_PUBLISH_GUARD_ENABLED = os.getenv("V84_PUBLISH_GUARD_ENABLED", "1") == "1"
+V84_MIN_FINAL_BODY_WORDS = int(os.getenv("V84_MIN_FINAL_BODY_WORDS", "55"))
+V84_MIN_FINAL_BODY_PARAGRAPHS = int(os.getenv("V84_MIN_FINAL_BODY_PARAGRAPHS", "2"))
+V84_REQUIRE_BODY_FOR_PUBLISH = os.getenv("V84_REQUIRE_BODY_FOR_PUBLISH", "1") == "1"
+V84_STRONG_OEMBED_EXTRACTION = os.getenv("V84_STRONG_OEMBED_EXTRACTION", "1") == "1"
+V84_IMAGE_FALLBACK_ENABLED = os.getenv("V84_IMAGE_FALLBACK_ENABLED", "1") == "1"
+
+V84_URL_RE = re.compile(r"https?://[^\s<'\")]+", re.I)
+
+
+def v84_is_youtube_url(url: str) -> bool:
+    u = normalize_embed_url(url or "").lower()
+    return "youtube.com/watch" in u or "youtu.be/" in u
+
+
+def v84_is_x_status_url(url: str) -> bool:
+    u = normalize_embed_url(url or "").lower()
+    return bool(re.match(r"^https?://(?:www\.)?(?:twitter\.com|x\.com)/[^/]+/status/\d+", u, re.I) or re.match(r"^https?://(?:www\.)?twitter\.com/i/status/\d+", u, re.I))
+
+
+def v84_extract_urls_from_raw_node(node):
+    urls = []
+    try:
+        raw = str(node or "")
+        for m in V84_URL_RE.finditer(raw):
+            href = html.unescape(m.group(0)).rstrip(".,;:)]}")
+            href = normalize_embed_url(href)
+            if is_valid_embed_url(href):
+                urls.append(href)
+    except Exception:
+        pass
+    return urls
+
+
+_ORIG_V84_node_social_embed_urls = _node_social_embed_urls
+
+def _node_social_embed_urls(node):
+    """v84: stronger extraction for actual embeds.
+
+    Twitter/X status links and YouTube links are intentionally promoted even when they are
+    ordinary hyperlinks, because WordPress can render them as oEmbed and OWTV wants them
+    preserved as standalone URL blocks. Instagram/TikTok/Facebook remain more conservative
+    to avoid pulling author profiles/share links into the article body.
+    """
+    if not V84_STRONG_OEMBED_EXTRACTION:
+        return _ORIG_V84_node_social_embed_urls(node)
+    if not node:
+        return []
+    embeds = []
+
+    # Keep the strict v80.9 extractor first: AMP/blockquote/iframe/standalone wrappers.
+    try:
+        embeds.extend(_ORIG_V84_node_social_embed_urls(node) or [])
+    except Exception:
+        pass
+
+    # Explicit AMP raw fallbacks.
+    try:
+        for amp_tw in node.find_all("amp-twitter"):
+            tweet_id = amp_tw.get("data-tweetid")
+            if tweet_id:
+                href = f"https://twitter.com/i/status/{tweet_id}"
+                if is_valid_embed_url(href):
+                    embeds.append(href)
+        for iframe in node.find_all("iframe", src=True):
+            src = normalize_embed_url(iframe.get("src", ""))
+            if is_valid_embed_url(src) and (v84_is_youtube_url(src) or v84_is_x_status_url(src)):
+                embeds.append(src)
+    except Exception:
+        pass
+
+    # Important v84 rule: Twitter/X status and YouTube links inside normal <a> tags are embeds.
+    try:
+        for a in node.find_all("a", href=True):
+            href = normalize_embed_url(a.get("href", ""))
+            if not is_valid_embed_url(href):
+                continue
+            provider = get_embed_provider_slug(href)
+            if provider == "youtube" or v84_is_youtube_url(href) or v84_is_x_status_url(href):
+                embeds.append(href)
+            elif provider in {"instagram", "tiktok"} and v809_anchor_is_standalone_embed_context(node, a):
+                embeds.append(href)
+            elif provider == "facebook" and (not facebook_url_is_probably_bad(href)) and v809_anchor_is_standalone_embed_context(node, a):
+                embeds.append(href)
+    except Exception:
+        pass
+
+    # Last chance: raw URL fragments inside embed wrappers/scripts or malformed markup.
+    for href in v84_extract_urls_from_raw_node(node):
+        if v84_is_youtube_url(href) or v84_is_x_status_url(href):
+            embeds.append(href)
+
+    return dedupe_preserve_order([normalize_embed_url(u) for u in embeds if u and is_valid_embed_url(u)])
+
+
+_ORIG_V84_extract_embeds_from_article_html = extract_embeds_from_article_html
+
+def extract_embeds_from_article_html(html):
+    embeds = []
+    try:
+        embeds.extend(_ORIG_V84_extract_embeds_from_article_html(html) or [])
+    except Exception:
+        pass
+    if V84_STRONG_OEMBED_EXTRACTION and html:
+        try:
+            soup = BeautifulSoup(html, "html.parser")
+            content = parse_content_container(soup, "") or soup
+            # Extract from article/body only; avoid global nav/share noise as much as possible.
+            for node in content.find_all(["p", "blockquote", "figure", "iframe", "amp-twitter", "amp-instagram", "li", "div"]):
+                embeds.extend(_node_social_embed_urls(node))
+        except Exception as e:
+            print(f"[EMBED v84] Estrazione embed globale fallita: {e}")
+    out = []
+    for u in dedupe_preserve_order(embeds):
+        clean = normalize_embed_url(u)
+        if not clean:
+            continue
+        if get_embed_provider_slug(clean) == "facebook" and facebook_url_is_probably_bad(clean):
+            continue
+        out.append(clean)
+    return dedupe_preserve_order(out)
+
+
+_ORIG_V84_v80_normalize_oembed_urls_in_html = v80_normalize_oembed_urls_in_html
+
+def v80_normalize_oembed_urls_in_html(html: str) -> str:
+    """v84: normalize standalone oEmbed URLs, including YouTube links that survive as anchors."""
+    html = _ORIG_V84_v80_normalize_oembed_urls_in_html(html)
+    if not html:
+        return html
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        changed = False
+        for a in list(soup.find_all("a", href=True)):
+            href = normalize_embed_url(a.get("href", ""))
+            if not href or not is_valid_embed_url(href):
+                continue
+            provider = get_embed_provider_slug(href)
+            if provider in {"x", "youtube"} or v84_is_x_status_url(href) or v84_is_youtube_url(href):
+                # Replace YouTube/Twitter anchors with pure URL paragraphs so WordPress oEmbed can render.
+                a.replace_with(BeautifulSoup(f"<p>{v80_canonical_oembed_url(href)}</p>", "html.parser"))
+                changed = True
+        return str(soup) if changed else html
+    except Exception as e:
+        print(f"[EMBED v84] Normalizzazione link oEmbed fallita: {e}")
+        return html
+
+
+def v84_article_visible_body_stats(html_text=""):
+    soup = BeautifulSoup(html_text or "", "html.parser")
+    # Drop source/footer material from the validation signal.
+    for tag in soup.find_all(["script", "style", "nav", "footer", "header", "aside", "form", "noscript"]):
+        tag.decompose()
+    meaningful_blocks = []
+    for tag in soup.find_all(["p", "blockquote", "li", "h2", "h3", "h4"]):
+        txt = sanitize_text(tag.get_text(" ", strip=True))
+        if not txt:
+            continue
+        low = normalize_for_check(txt)
+        if low in {"fonte", "source"} or "fonte" == low.strip():
+            continue
+        if low.startswith("fonte ") or low.endswith(" fonte"):
+            continue
+        if re.fullmatch(r"https?://\S+", txt, flags=re.I):
+            # oEmbed-only paragraphs are valid structure, but not narrative body.
+            continue
+        if len(txt) >= 15:
+            meaningful_blocks.append(txt)
+    text = " ".join(meaningful_blocks)
+    words = len(re.findall(r"\w+", text, flags=re.UNICODE))
+    return {"words": words, "paragraphs": len(meaningful_blocks), "text": text}
+
+
+def v84_validate_publish_body(html_text="", title=""):
+    if not V84_PUBLISH_GUARD_ENABLED or not V84_REQUIRE_BODY_FOR_PUBLISH:
+        return True, "disabled"
+    stats = v84_article_visible_body_stats(html_text)
+    if stats["paragraphs"] < V84_MIN_FINAL_BODY_PARAGRAPHS:
+        return False, f"paragraphs={stats['paragraphs']}<{V84_MIN_FINAL_BODY_PARAGRAPHS}"
+    if stats["words"] < V84_MIN_FINAL_BODY_WORDS:
+        return False, f"words={stats['words']}<{V84_MIN_FINAL_BODY_WORDS}"
+    return True, f"words={stats['words']} paragraphs={stats['paragraphs']}"
+
+
+_ORIG_V84_create_post_without_image = create_post_without_image
+
+def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+    try:
+        raw_html = (data or {}).get("testo", "")
+        ok, reason = v84_validate_publish_body(raw_html, title=(data or {}).get("titolo", ""))
+        if not ok:
+            print(f"[VALIDATION v84] Blocco pubblicazione: body finale insufficiente ({reason}) - {(data or {}).get('titolo','')}")
+            return None, {"content_validation_fail": reason}
+    except Exception as e:
+        print(f"[VALIDATION v84] Errore controllo body: {e}")
+    return _ORIG_V84_create_post_without_image(data, sem_id, url, embed_urls=embed_urls, event_key=event_key, inline_images=inline_images, featured_image_url=featured_image_url)
+
+
+def v84_guess_image_content_type(content: bytes, declared: str = "") -> str:
+    declared = (declared or "").split(";")[0].strip().lower()
+    if declared.startswith("image/"):
+        return declared
+    head = content[:16] if content else b""
+    if head.startswith(b"\xff\xd8\xff"):
+        return "image/jpeg"
+    if head.startswith(b"\x89PNG\r\n\x1a\n"):
+        return "image/png"
+    if head.startswith(b"RIFF") and b"WEBP" in head[:16]:
+        return "image/webp"
+    if head.startswith(b"GIF87a") or head.startswith(b"GIF89a"):
+        return "image/gif"
+    return declared
+
+
+def v84_image_candidate_urls(url: str):
+    url = url or ""
+    candidates = [url]
+    if V84_IMAGE_FALLBACK_ENABLED and re.search(r"\.xml(?:\?.*)?$", url, flags=re.I):
+        base = re.sub(r"\.xml(?=\?|$)", "", url, flags=re.I)
+        for ext in [".jpg", ".jpeg", ".png", ".webp"]:
+            candidates.append(base + ext)
+        # Ringside sometimes exposes an XML-looking thumbnail path whose real sibling is jpg.
+        candidates.append(re.sub(r"\.xml(?:\?.*)?$", ".jpg", url, flags=re.I))
+    return dedupe_preserve_order([c for c in candidates if c])
+
+
+def v84_fetch_image_bytes(image_url: str):
+    last_error = None
+    for candidate in v84_image_candidate_urls(image_url):
+        try:
+            img_res = session.get(candidate, timeout=REQUEST_TIMEOUT_IMAGE, allow_redirects=True)
+            img_res.raise_for_status()
+            content = img_res.content or b""
+            content_type = v84_guess_image_content_type(content, img_res.headers.get("Content-Type", ""))
+            if content_type.startswith("image/"):
+                if candidate != image_url:
+                    print(f"[MEDIA v84] Fallback immagine usato: {candidate}")
+                return candidate, content, content_type
+            last_error = f"not_image:{content_type}"
+            print(f"[MEDIA v84] Candidato non immagine: {candidate} ({content_type})")
+        except Exception as e:
+            last_error = str(e)
+            if candidate != image_url:
+                print(f"[MEDIA v84] Fallback immagine fallito: {candidate} | {e}")
+    raise ValueError(last_error or "image_fetch_failed")
+
+
+_ORIG_V84_upload_image_to_wp = upload_image_to_wp
+
+def upload_image_to_wp(image_url):
+    if not image_url:
+        return None
+    try:
+        final_url, content, content_type = v84_fetch_image_bytes(image_url)
+        ext = mimetypes.guess_extension(content_type) or ".jpg"
+        if ext == ".jpe":
+            ext = ".jpg"
+        if ext not in [".jpg", ".jpeg", ".png", ".webp"]:
+            ext = ".jpg"
+            content_type = "image/jpeg"
+        filename = f"news_{os.urandom(4).hex()}{ext}"
+        headers_wp = {
+            "Content-Type": content_type,
+            "Content-Disposition": f'attachment; filename="{filename}"'
+        }
+        res = wp_media_upload_request(headers_wp, content, retries=2)
+        if res.status_code == 201:
+            media_id = res.json().get("id")
+            print(f"[MEDIA] Immagine caricata: {media_id}")
+            return media_id
+        print(f"[MEDIA] Status: {res.status_code}")
+        print(f"[MEDIA] Risposta: {res.text[:500]}")
+        return None
+    except Exception as e:
+        print(f"[MEDIA] Errore upload immagine {image_url}: {e}")
+        return None
+
+
+# v70 internal inline image upload path uses a richer return value; keep behavior but with the v84 fetcher.
+def v70_upload_image_to_wp_full(image_url):
+    if not image_url:
+        return None
+    try:
+        final_url, content, content_type = v84_fetch_image_bytes(image_url)
+        ext = mimetypes.guess_extension(content_type) or ".jpg"
+        if ext == ".jpe":
+            ext = ".jpg"
+        if ext not in [".jpg", ".jpeg", ".png", ".webp"]:
+            ext = ".jpg"
+            content_type = "image/jpeg"
+        filename = f"news_inline_{os.urandom(4).hex()}{ext}"
+        headers_wp = {
+            "Content-Type": content_type,
+            "Content-Disposition": f'attachment; filename="{filename}"'
+        }
+        res = wp_media_upload_request(headers_wp, content, retries=2)
+        if res.status_code == 201:
+            data = res.json()
+            media_id = data.get("id")
+            source_url = data.get("source_url") or final_url
+            print(f"[MEDIA] Immagine interna caricata: {media_id}")
+            return {"id": media_id, "source_url": source_url}
+        print(f"[MEDIA] Status: {res.status_code}")
+        print(f"[MEDIA] Risposta: {res.text[:500]}")
+        return None
+    except Exception as e:
+        print(f"[MEDIA] Errore upload immagine interna {image_url}: {e}")
+        return None
+
 
 # =========================
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
