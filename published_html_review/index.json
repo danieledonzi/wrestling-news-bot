@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-12 18:16:45",
-  "last_bot_version": "v85_3_gemini_call_and_spoiler_global_gate (4e27498)",
-  "updated_at": "2026-05-12T18:19:36",
-  "total_items": 6,
+  "last_run_id": "2026-05-12 18:40:22",
+  "last_bot_version": "v85_4_skipped_history_boot_diagnostics (777c3a4)",
+  "updated_at": "2026-05-12T18:44:43",
+  "total_items": 8,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -52,6 +52,22 @@
       "original_html_file": "20260512_181905_001_morto-a-72-anni-barry-blaustein-regista-del-documentario-beyond-the-mat_787b1dd4_original.html",
       "final_html_file": "20260512_181905_001_morto-a-72-anni-barry-blaustein-regista-del-documentario-beyond-the-mat_787b1dd4_final.html",
       "metadata_file": "20260512_181905_001_morto-a-72-anni-barry-blaustein-regista-del-documentario-beyond-the-mat_787b1dd4_metadata.json"
+    },
+    {
+      "run_id": "2026-05-12 18:40:22",
+      "title": "Filmati post-Raw: possibile infortunio per Roman Reigns dopo l'attacco di Jacob Fatu",
+      "url": "https://www.ringsidenews.com/footage-shows-roman-reigns-possibly-injured-brutal-raw-attack/",
+      "original_html_file": "20260512_184322_001_filmati-post-raw-possibile-infortunio-per-roman-reigns-dopo-l-attacco-di-jacob-f_e92d4326_original.html",
+      "final_html_file": "20260512_184322_001_filmati-post-raw-possibile-infortunio-per-roman-reigns-dopo-l-attacco-di-jacob-f_e92d4326_final.html",
+      "metadata_file": "20260512_184322_001_filmati-post-raw-possibile-infortunio-per-roman-reigns-dopo-l-attacco-di-jacob-f_e92d4326_metadata.json"
+    },
+    {
+      "run_id": "2026-05-12 18:40:22",
+      "title": "Matt Hardy ringrazia il compianto Ted Turner per aver fatto avanzare il wrestling",
+      "url": "https://www.wrestlinginc.com/2171140/wwe-aew-matt-hardy-ted-turner-pushing-pro-wrestling-forward/",
+      "original_html_file": "20260512_184429_002_matt-hardy-ringrazia-il-compianto-ted-turner-per-aver-fatto-avanzare-il-wrestlin_07c9cde3_original.html",
+      "final_html_file": "20260512_184429_002_matt-hardy-ringrazia-il-compianto-ted-turner-per-aver-fatto-avanzare-il-wrestlin_07c9cde3_final.html",
+      "metadata_file": "20260512_184429_002_matt-hardy-ringrazia-il-compianto-ted-turner-per-aver-fatto-avanzare-il-wrestlin_07c9cde3_metadata.json"
     }
   ]
 }
