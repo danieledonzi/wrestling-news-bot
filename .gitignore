@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+.env
+
+logs/
+published_html_review/
+review_packages/
+review_bundle_latest.zip
+
+history.txt
+pending_articles.json
+failed_articles.json
