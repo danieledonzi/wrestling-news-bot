@@ -12883,6 +12883,225 @@ def v70_upload_image_to_wp_full(image_url):
         return None
 
 
+
+
+# =========================
+# v84.1: anti-waste + history consistency
+# =========================
+# Fix immediati dopo run v83/v84:
+# - non rimettere in pending report gia pubblicati;
+# - se WP ha gia un post per URL/source, skip e marca history locale;
+# - se WP create 201 avviene, marca subito history anche se step successivi falliscono;
+# - non salvare in pending body validation fail;
+# - in storm non spendere Gemini su candidati deboli che comunque non pubblicheremmo.
+
+BOT_VERSION = "v84_1_anti_waste_history_consistency"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V841_SKIP_PENDING_IF_HISTORY_ONLY = os.getenv("V84_1_SKIP_PENDING_IF_HISTORY_ONLY", "1") == "1"
+V841_SKIP_IF_WP_URL_EXISTS = os.getenv("V84_1_SKIP_IF_WP_URL_EXISTS", "1") == "1"
+V841_STORM_EARLY_SKIP_ENABLED = os.getenv("V84_1_STORM_EARLY_SKIP_ENABLED", "1") == "1"
+V841_STORM_MIN_PROCESS_SCORE = int(os.getenv("V84_1_STORM_MIN_PROCESS_SCORE", "55"))
+V841_STORM_MIN_PROCESS_SCORE_WWE = int(os.getenv("V84_1_STORM_MIN_PROCESS_SCORE_WWE", "55"))
+V841_LAST_CONTENT_VALIDATION_FAIL_URL = ""
+
+
+def v841_normalize_title_from_item(item):
+    try:
+        entry = item.get("entry") if isinstance(item, dict) else None
+        return sanitize_text(item.get("title") or (getattr(entry, "title", "") if entry else ""))
+    except Exception:
+        return ""
+
+
+def v841_url_from_item(item):
+    try:
+        entry = item.get("entry") if isinstance(item, dict) else None
+        return (item.get("url") or (getattr(entry, "link", "") if entry else "") or "").strip()
+    except Exception:
+        return ""
+
+
+def v841_mark_history_minimal(url="", title="", sem_id="", event_key="", history=None,
+                              seen_event_keys=None, seen_story_signatures=None, seen_news_core_keys=None):
+    """Marca history con dati minimi per evitare retry/duplicati dopo publish o WP lookup."""
+    url = (url or "").strip()
+    title = sanitize_text(title or "")
+    if not url and not sem_id and not event_key:
+        return
+    sem_id = sem_id or make_semantic_id_from_title(title or url)
+    title_key = make_title_key(title or sem_id)
+    story_signature = ""
+    try:
+        story_signature = build_story_signature_v71(title, "", url).get("signature", "")
+    except Exception:
+        story_signature = ""
+    news_core_key = ""
+    try:
+        news_core_key = make_news_core_key(title, "")
+    except Exception:
+        news_core_key = ""
+    try:
+        save_to_history(url, sem_id, title_key, "", news_core_key, event_key or "", story_signature)
+    except Exception as e:
+        print(f"[HISTORY v84.1] Errore salvataggio history minima: {e}")
+    try:
+        if history is not None:
+            if url:
+                history.setdefault("urls", set()).add(url)
+            if sem_id:
+                history.setdefault("semantic_ids", set()).add(sem_id)
+            if title_key:
+                history.setdefault("title_keys", set()).add(title_key)
+            if news_core_key:
+                history.setdefault("news_core_keys", set()).add(news_core_key)
+            if event_key:
+                history.setdefault("event_keys", set()).add(event_key)
+            if story_signature:
+                history.setdefault("story_signatures_v71", set()).add(story_signature)
+        if seen_event_keys is not None and event_key:
+            seen_event_keys.add(event_key)
+        if seen_story_signatures is not None and story_signature:
+            seen_story_signatures.add(story_signature)
+        if seen_news_core_keys is not None and news_core_key:
+            seen_news_core_keys.add(news_core_key)
+    except Exception:
+        pass
+
+
+def v841_is_report_already_published(report_event_key="", url="", title="", history=None):
+    if not report_event_key and not url:
+        return False
+    history = history or load_history()
+    if V841_SKIP_PENDING_IF_HISTORY_ONLY:
+        if report_event_key and history_has_event_key(history, report_event_key):
+            print(f"[REPORT v84.1] Skip: report gia in history locale: {report_event_key}")
+            return True
+        if url and url in history.get("urls", set()):
+            print(f"[REPORT v84.1] Skip: URL report gia in history: {url}")
+            return True
+    if V841_SKIP_IF_WP_URL_EXISTS and url:
+        post_id = find_existing_post_by_url(url)
+        if post_id:
+            print(f"[REPORT v84.1] Skip: report gia presente su WP per URL ({post_id}): {url}")
+            v841_mark_history_minimal(url=url, title=title, event_key=report_event_key, history=history)
+            return True
+    if report_event_key and wp_has_published_event(report_event_key, title=title, url=url):
+        print(f"[REPORT v84.1] Skip: report gia confermato su WP: {report_event_key}")
+        v841_mark_history_minimal(url=url, title=title, event_key=report_event_key, history=history)
+        return True
+    return False
+
+
+_ORIG_V841_add_pending_report_article = add_pending_report_article
+
+def add_pending_report_article(item, full_text="", reason="report_live_delay"):
+    title = sanitize_text((item or {}).get("title") or "Senza titolo")
+    url = (item or {}).get("url") or ""
+    report_event_key = make_report_event_key(title, url, full_text)
+    if v841_is_report_already_published(report_event_key, url=url, title=title, history=load_history()):
+        remove_pending_report_key(report_event_key)
+        return None
+    return _ORIG_V841_add_pending_report_article(item, full_text=full_text, reason=reason)
+
+
+_ORIG_V841_process_report_pending_item = process_report_pending_item
+
+def process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    report_event_key = (item or {}).get("report_event_key") or (item or {}).get("event_key")
+    url = (item or {}).get("url", "")
+    title = sanitize_text((item or {}).get("title", ""))
+    if v841_is_report_already_published(report_event_key, url=url, title=title, history=history):
+        remove_pending_report_key(report_event_key)
+        v841_mark_history_minimal(url=url, title=title, event_key=report_event_key, history=history,
+                                  seen_event_keys=seen_event_keys, seen_story_signatures=seen_story_signatures_v71,
+                                  seen_news_core_keys=seen_news_core_keys)
+        return "skipped"
+    return _ORIG_V841_process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+
+
+_ORIG_V841_create_post_without_image = create_post_without_image
+
+def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+    global V841_LAST_CONTENT_VALIDATION_FAIL_URL
+    V841_LAST_CONTENT_VALIDATION_FAIL_URL = ""
+    try:
+        raw_html = (data or {}).get("testo", "")
+        ok, reason = v84_validate_publish_body(raw_html, title=(data or {}).get("titolo", ""))
+        if not ok:
+            V841_LAST_CONTENT_VALIDATION_FAIL_URL = (url or "").strip()
+    except Exception:
+        pass
+    post_id, post_json = _ORIG_V841_create_post_without_image(
+        data, sem_id, url, embed_urls=embed_urls, event_key=event_key,
+        inline_images=inline_images, featured_image_url=featured_image_url
+    )
+    if post_id:
+        try:
+            # History consistency: once WP has created the post, do not retry this URL in future runs.
+            v841_mark_history_minimal(url=url, title=(data or {}).get("titolo", ""), sem_id=sem_id, event_key=event_key, history=None)
+            print(f"[HISTORY v84.1] Marcato published subito dopo WP create: {url}")
+        except Exception as e:
+            print(f"[HISTORY v84.1] Errore mark post-create: {e}")
+    return post_id, post_json
+
+
+_ORIG_V841_add_pending_article = add_pending_article
+
+def add_pending_article(item, reason="wp_down"):
+    url = v841_url_from_item(item)
+    if reason in {"wp_publish_failed", "validation", "content_validation_fail"} or (url and url == V841_LAST_CONTENT_VALIDATION_FAIL_URL):
+        title = v841_normalize_title_from_item(item)
+        print(f"[PENDING v84.1] Non salvo in pending: validation/body fail per {title}")
+        try:
+            record_validation_failure(url, title)
+        except Exception:
+            pass
+        return
+    return _ORIG_V841_add_pending_article(item, reason=reason)
+
+
+_ORIG_V841_process_candidate_item = process_candidate_item
+
+def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    if isinstance(item, dict) and item.get("kind") == "report":
+        return process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+
+    title = v841_normalize_title_from_item(item)
+    url = v841_url_from_item(item)
+    sem_id = (item or {}).get("semantic_id") or make_semantic_id_from_title(title)
+    score = int((item or {}).get("score", 0) or 0)
+
+    if url and (url in history.get("urls", set()) or sem_id in history.get("semantic_ids", set())):
+        print(f"[SKIP v84.1] Gia pubblicato/history prima del processing: {title}")
+        remove_pending_url(url)
+        return "skipped"
+
+    if V841_SKIP_IF_WP_URL_EXISTS and url:
+        existing_id = find_existing_post_by_url(url)
+        if existing_id:
+            print(f"[SKIP v84.1] URL gia presente su WordPress ({existing_id}), marco history e salto: {title}")
+            event_key = (item or {}).get("event_key") or make_event_key(title, "", url)
+            v841_mark_history_minimal(url=url, title=title, sem_id=sem_id, event_key=event_key, history=history,
+                                      seen_event_keys=seen_event_keys, seen_story_signatures=seen_story_signatures_v71,
+                                      seen_news_core_keys=seen_news_core_keys)
+            remove_pending_url(url)
+            return "skipped"
+
+    if V841_STORM_EARLY_SKIP_ENABLED and (_CURRENT_RUN_MODE_V83 or "normal") == "storm":
+        # In storm mode, non fare analisi Gemini su candidati deboli: sono quasi sempre skip dopo raffinamento.
+        force_report = bool((item or {}).get("force_process_report")) or str((item or {}).get("kind", "")).startswith("report")
+        if not force_report:
+            probe = normalize_for_check(f"{title} {url}")
+            floor = V841_STORM_MIN_PROCESS_SCORE_WWE if re.search(r"\bwwe\b|\braw\b|\bsmackdown\b|\bnxt\b", probe) else V841_STORM_MIN_PROCESS_SCORE
+            if score < floor:
+                print(f"[SKIP v84.1] Storm anti-spreco: score {score}<{floor}, non chiamo Gemini - {title}")
+                remove_pending_url(url)
+                return "skipped"
+
+    return _ORIG_V841_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+
+
 # =========================
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 # =========================
