@@ -1,0 +1,34 @@
+{
+  "run_id": "2026-05-12 09:32:01",
+  "bot_version": "v83_quality_routing_and_smart_preservation (89e512c)",
+  "git_sha": "89e512cdc28579a3c74c8446778b79e85ff5856b",
+  "created_at": "2026-05-12T09:36:03",
+  "source_title": "Asuka Passes The Torch To IYO Sky During 5/11 WWE RAW",
+  "final_title": "WWE Raw: Asuka passa il testimone a Iyo Sky",
+  "source_url": "https://www.ringsidenews.com/asuka-passes-torch-iyo-sky-during-511-wwe-raw/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "asuka-passes-the-torch-to-iyo-sky-during-511-wwe-raw",
+  "story_signature_v71": "stable:iyo_sky|asuka|outcome|wwe|raw|backlash",
+  "refined_score": 100,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "PLE/PPV",
+    "v62 ritorno/debutto"
+  ],
+  "blocks_summary": {
+    "text": 7,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [
+    "https://www.facebook.com/ringsidenews"
+  ],
+  "inline_images": [],
+  "original_html_file": "20260512_093603_002_wwe-raw-asuka-passa-il-testimone-a-iyo-sky_96ffdeb3_original.html",
+  "final_html_file": "",
+  "metadata_file": "20260512_093603_002_wwe-raw-asuka-passa-il-testimone-a-iyo-sky_96ffdeb3_metadata.json"
+}
