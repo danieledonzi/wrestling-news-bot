@@ -7023,7 +7023,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         inline_images=[] if structured_used else inline_images,
         # v70: nel percorso strutturato le immagini interne sono gia caricate/reinserite nel body.
         # Non passiamo featured_image_url qui, altrimenti create_post_without_image le rimuove come duplicati.
-        featured_image_url="" if structured_used else img_url
+        featured_image_url=img_url
     )
 
     perf_step_v71 = v71_perf_log("creazione post WordPress", perf_step_v71, threshold=0.5)
@@ -13101,6 +13101,349 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
 
     return _ORIG_V841_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
 
+
+
+
+# =========================
+# v85 - publish safety, atomic state, hard cap and URL extraction fixes
+# =========================
+BOT_VERSION = "v85_publish_safety_atomic_state_total_cap"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V85_MAX_TOTAL_PUBLISHED_PER_RUN = int(os.getenv("V85_MAX_TOTAL_PUBLISHED_PER_RUN", "5"))
+V85_DRAFT_FIRST_ENABLED = os.getenv("V85_DRAFT_FIRST_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V85_REQUIRE_FEATURED_BEFORE_PUBLISH = os.getenv("V85_REQUIRE_FEATURED_BEFORE_PUBLISH", "1").strip().lower() not in {"0", "false", "no", "off"}
+V85_TOTAL_PUBLISHED_THIS_RUN = 0
+V85_MEDIA_UPLOAD_CACHE = {}
+
+# Keep old knobs aligned with the global hard cap. Pending recovery no longer expands the run past 5.
+MAX_NEW_POSTS_NORMAL = min(MAX_NEW_POSTS_NORMAL, V85_MAX_TOTAL_PUBLISHED_PER_RUN)
+MAX_NEW_POSTS_STORM = min(MAX_NEW_POSTS_STORM, V85_MAX_TOTAL_PUBLISHED_PER_RUN)
+MAX_PENDING_RECOVERY_PER_RUN = min(MAX_PENDING_RECOVERY_PER_RUN, V85_MAX_TOTAL_PUBLISHED_PER_RUN)
+
+
+def v85_atomic_write_text(path, text_value):
+    path = Path(path)
+    tmp = path.with_name(path.name + ".tmp")
+    with open(tmp, "w", encoding="utf-8") as f:
+        f.write(text_value)
+    os.replace(tmp, path)
+
+
+def v85_atomic_write_json(path, obj):
+    path = Path(path)
+    tmp = path.with_name(path.name + ".tmp")
+    with open(tmp, "w", encoding="utf-8") as f:
+        json.dump(obj, f, ensure_ascii=False, indent=2)
+    os.replace(tmp, path)
+
+
+_ORIG_V85_save_to_history = save_to_history
+
+def save_to_history(url, semantic_id, title_key="", story_fingerprint="", news_core_key="", event_key="", story_signature_v71=""):
+    records = []
+    if os.path.exists(HISTORY_FILE):
+        try:
+            with open(HISTORY_FILE, "r", encoding="utf-8") as f:
+                records = [line.strip() for line in f.read().splitlines() if line.strip()]
+        except Exception as e:
+            print(f"[HISTORY v85] Errore lettura pre-salvataggio: {e}")
+    new_record = f"{url}|{semantic_id}|{title_key}|{story_fingerprint}|{news_core_key}|{event_key}|{story_signature_v71}".rstrip("|")
+    if new_record not in records:
+        records.append(new_record)
+    records = records[-2000:]
+    try:
+        v85_atomic_write_text(HISTORY_FILE, "\n".join(records) + "\n")
+    except Exception as e:
+        print(f"[HISTORY v85] Errore scrittura atomica history: {e}")
+        try:
+            _ORIG_V85_save_to_history(url, semantic_id, title_key, story_fingerprint, news_core_key, event_key, story_signature_v71)
+        except Exception as e2:
+            print(f"[HISTORY v85] Fallback fallito: {e2}")
+
+
+_ORIG_V85_save_pending_articles = save_pending_articles
+
+def save_pending_articles(items):
+    try:
+        items = sorted(items, key=lambda x: (int(x.get("score", 0)), float(x.get("created_at", 0))), reverse=True)[:MAX_PENDING_ITEMS]
+        v85_atomic_write_json(PENDING_FILE, items)
+        print(f"[PENDING] Coda salvata: {len(items)} elementi")
+    except Exception as e:
+        print(f"[PENDING v85] Errore scrittura atomica pending: {e}")
+        try:
+            _ORIG_V85_save_pending_articles(items)
+        except Exception as e2:
+            print(f"[PENDING v85] Fallback fallito: {e2}")
+
+
+_ORIG_V85_wordpress_is_available = wordpress_is_available
+
+def wordpress_is_available(force=False):
+    """v85: health gate restrittivo. OK solo se /posts?per_page=1 risponde 200/201.
+    429, 404, 405 e altri 4xx non passano più come WordPress disponibile.
+    """
+    now = time.time()
+    cached_available = WP_HEALTHCHECK_CACHE.get("available")
+    checked_at = float(WP_HEALTHCHECK_CACHE.get("checked_at", 0) or 0)
+    if not force and cached_available is not None and now - checked_at < WP_HEALTHCHECK_CACHE_SECONDS:
+        print(f"[WP] Health check cache: {'OK' if cached_available else 'KO'} ({WP_HEALTHCHECK_CACHE.get('reason', '')})")
+        return bool(cached_available)
+
+    def set_cache(available, reason):
+        WP_HEALTHCHECK_CACHE["checked_at"] = time.time()
+        WP_HEALTHCHECK_CACHE["available"] = bool(available)
+        WP_HEALTHCHECK_CACHE["reason"] = reason
+        return bool(available)
+
+    last_error = ""
+    for attempt in range(1, WP_HEALTHCHECK_RETRIES + 1):
+        try:
+            res = session.get(
+                WP_API_URL,
+                params={"per_page": 1},
+                auth=(WP_USER, WP_PASSWORD),
+                timeout=REQUEST_TIMEOUT_WP_HEALTHCHECK,
+            )
+            status = res.status_code
+            if status in (200, 201):
+                print(f"[WP] Health check API OK: status {status} | tentativo {attempt}/{WP_HEALTHCHECK_RETRIES}")
+                return set_cache(True, f"api_status_{status}")
+            last_error = f"api_status_{status}"
+            if status in (401, 403):
+                print(f"[WP] Health check API autenticazione/permessi KO: status {status}")
+                return set_cache(False, last_error)
+            if status == 429:
+                print(f"[WP] Health check API rate limit: status 429")
+                return set_cache(False, "api_status_429")
+            print(f"[WP] Health check API non valido: status {status} | tentativo {attempt}/{WP_HEALTHCHECK_RETRIES}")
+        except (requests.ConnectTimeout, requests.ReadTimeout, requests.Timeout) as e:
+            last_error = f"api_timeout: {e}"
+            print(f"[WP] Health check API timeout | tentativo {attempt}/{WP_HEALTHCHECK_RETRIES}: {e}")
+        except requests.RequestException as e:
+            last_error = f"api_request_error: {e}"
+            print(f"[WP] Health check API errore | tentativo {attempt}/{WP_HEALTHCHECK_RETRIES}: {e}")
+        if attempt < WP_HEALTHCHECK_RETRIES:
+            time.sleep(WP_HEALTHCHECK_BACKOFF_SECONDS * attempt)
+    print(f"[WP] WordPress/API non disponibile dopo {WP_HEALTHCHECK_RETRIES} tentativi: {last_error}")
+    return set_cache(False, last_error or "unknown")
+
+
+def v85_publish_post(post_id):
+    try:
+        post_url = f"{WP_API_URL}/{post_id}"
+        res = session.post(
+            post_url,
+            json={"status": "publish"},
+            auth=(WP_USER, WP_PASSWORD),
+            timeout=REQUEST_TIMEOUT_WP,
+        )
+        print(f"[WP v85] Status publish draft: {res.status_code}")
+        if res.status_code in (200, 201):
+            return True
+        print(f"[WP v85] Risposta publish draft: {res.text[:500]}")
+        return False
+    except Exception as e:
+        print(f"[WP v85] Errore publish draft {post_id}: {e}")
+        return False
+
+
+_ORIG_V85_upload_image_to_wp = upload_image_to_wp
+
+def upload_image_to_wp(image_url):
+    image_url = (image_url or "").strip()
+    if image_url and image_url in V85_MEDIA_UPLOAD_CACHE:
+        media_id = V85_MEDIA_UPLOAD_CACHE[image_url]
+        print(f"[MEDIA v85] Riutilizzo immagine già caricata: {media_id}")
+        return media_id
+    media_id = _ORIG_V85_upload_image_to_wp(image_url)
+    if image_url and media_id:
+        V85_MEDIA_UPLOAD_CACHE[image_url] = media_id
+    return media_id
+
+
+def v85_safe_source_url(url):
+    url = (url or "").strip()
+    parsed = urlparse(url)
+    if parsed.scheme not in {"http", "https"}:
+        return ""
+    return url.replace('"', "&quot;").replace("<", "%3C").replace(">", "%3E")
+
+
+_ORIG_V85_create_post_without_image = create_post_without_image
+
+def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+    if not V85_DRAFT_FIRST_ENABLED:
+        return _ORIG_V85_create_post_without_image(data, sem_id, url, embed_urls=embed_urls, event_key=event_key, inline_images=inline_images, featured_image_url=featured_image_url)
+    try:
+        testo_html = data["testo"]
+        ok, reason = v84_validate_publish_body(testo_html, title=data.get("titolo", "")) if "v84_validate_publish_body" in globals() else (True, "ok")
+        if not ok:
+            print(f"[WP v85] Blocco pubblicazione: body non valido ({reason})")
+            return None, {"content_validation_fail": reason}
+
+        soup_temp = BeautifulSoup(testo_html, "html.parser")
+        for a in soup_temp.find_all("a"):
+            href = normalize_embed_url(a.get("href", ""))
+            if any(sp in href for sp in SOCIAL_DOMAINS):
+                if get_embed_provider_slug(href) == "facebook" and facebook_url_is_probably_bad(href):
+                    a.decompose()
+                    continue
+                replacement = href if social_url_is_embeddable(href) else get_social_fallback_html(href)
+                a.replace_with("\n\n" + replacement + "\n\n")
+
+        content_html = normalize_x_links_in_text(str(soup_temp))
+        content_html = v85_repair_youtube_urls_in_text(content_html)
+        content_html = append_embeds_to_html(content_html, embed_urls or [])
+        if featured_image_url:
+            inline_images = []
+            content_html = v61_strip_body_images_if_featured(content_html, has_featured=True)
+        content_html = append_inline_images_to_html(content_html, inline_images or [], featured_url=featured_image_url)
+        safe_source_url = v85_safe_source_url(url)
+        if safe_source_url:
+            content_html += f'\n\n<hr><p><a href="{safe_source_url}" target="_blank" rel="nofollow noopener noreferrer"><b>FONTE</b></a></p>'
+
+        media_id = None
+        if featured_image_url:
+            print(f"[BOT v85] Upload featured image prima del publish: {featured_image_url}")
+            media_id = upload_image_to_wp(featured_image_url)
+            if V85_REQUIRE_FEATURED_BEFORE_PUBLISH and not media_id:
+                print("[WP v85] Blocco publish: featured image non caricata")
+                return None, {"image_upload_failed": True}
+
+        payload = {
+            "title": v65_proper_case_title(data["titolo"]) if "v65_proper_case_title" in globals() else data["titolo"],
+            "content": content_html,
+            "categories": [int(data.get("categoria", 8))],
+            "status": "draft" if media_id else "publish",
+            "meta": {"semantic_id": sem_id, "original_url": url, "event_key": event_key},
+        }
+        if media_id:
+            payload["featured_media"] = media_id
+
+        res = wp_create_post_request(payload, retries=1)
+        print(f"[WP] Status create: {res.status_code}")
+        if res.status_code != 201:
+            if response_is_imunify_block(res):
+                print("[WP] Blocco Imunify360 rilevato: interrompo dopo questa news per evitare spreco API")
+                print(f"[WP] Risposta: {res.text[:500]}")
+                return None, {"firewall_block": "imunify360"}
+            print(f"[WP] Risposta: {res.text[:500]}")
+            return None, None
+
+        data_json = res.json()
+        post_id = data_json.get("id")
+        if media_id:
+            if not v85_publish_post(post_id):
+                return None, {"publish_failed_after_draft": True, "id": post_id}
+            data_json["status"] = "publish"
+        return post_id, data_json
+    except requests.Timeout:
+        print("[WP] Timeout in creazione post, controllo se è stato creato comunque...")
+        existing_id = find_existing_post_by_url(url)
+        if existing_id:
+            print(f"[WP] Post già presente dopo timeout: {existing_id}")
+            return existing_id, {"id": existing_id}
+        raise
+    except Exception as e:
+        print(f"[WP v85] Errore creazione draft-first: {e}")
+        return None, None
+
+
+_ORIG_V85_attach_featured_media = attach_featured_media
+
+def attach_featured_media(post_id, media_id):
+    # Idempotente: create_post_without_image in v85 ha già caricato e collegato la featured image prima del publish.
+    if not post_id or not media_id:
+        return False
+    return _ORIG_V85_attach_featured_media(post_id, media_id)
+
+
+def v85_repair_youtube_urls_in_text(text):
+    if not text:
+        return text
+    def repl(m):
+        raw = m.group(0)
+        return normalize_embed_url(raw)
+    return re.sub(r"https?://(?:www\.)?(?:youtube\.com|youtu\.be|youtube-nocookie\.com)/[^\s<'\"]+", repl, text, flags=re.I)
+
+
+_ORIG_V85_clean_tracking_params = clean_tracking_params
+
+def clean_tracking_params(url: str) -> str:
+    if not url:
+        return url
+    raw_url = unquote(str(url).strip())
+    try:
+        parsed = urlparse(raw_url)
+        netloc = parsed.netloc.lower()
+        path = parsed.path
+        query = parse_qs(parsed.query)
+        if "youtube.com" in netloc and "/watch" in path:
+            v = query.get("v", [""])[0]
+            if not v:
+                m = re.search(r"[?&]v=([A-Za-z0-9_-]{6,})", raw_url)
+                v = m.group(1) if m else ""
+            if v:
+                # Conserva start time essenziale se presente, ma non perdere mai v=.
+                t = query.get("t", query.get("start", [""]))[0]
+                suffix = f"&t={t}" if t else ""
+                return f"https://www.youtube.com/watch?v={v}{suffix}"
+            return raw_url
+        if "youtu.be" in netloc:
+            video_id = path.strip("/").split("/")[0]
+            if video_id:
+                return f"https://www.youtube.com/watch?v={video_id}"
+        if "youtube.com/embed/" in raw_url or "youtube-nocookie.com/embed/" in raw_url:
+            video_id = raw_url.split("/embed/")[-1].split("?")[0].strip("/")
+            if video_id:
+                return f"https://www.youtube.com/watch?v={video_id}"
+    except Exception:
+        pass
+    return _ORIG_V85_clean_tracking_params(raw_url)
+
+
+_ORIG_V85_normalize_embed_url = normalize_embed_url
+
+def normalize_embed_url(url: str) -> str:
+    if not url:
+        return url
+    raw_url = unquote(str(url).strip())
+    if "youtube.com/embed/" in raw_url or "youtube-nocookie.com/embed/" in raw_url:
+        video_id = raw_url.split("/embed/")[-1].split("?")[0].strip("/")
+        if video_id:
+            return f"https://www.youtube.com/watch?v={video_id}"
+    return clean_tracking_params(normalize_social_url(raw_url))
+
+
+_ORIG_V85_process_candidate_item = process_candidate_item
+
+def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    global V85_TOTAL_PUBLISHED_THIS_RUN
+    title = v841_normalize_title_from_item(item) if "v841_normalize_title_from_item" in globals() else sanitize_text((item or {}).get("title", ""))
+    if V85_TOTAL_PUBLISHED_THIS_RUN >= V85_MAX_TOTAL_PUBLISHED_PER_RUN:
+        print(f"[SKIP v85] Limite totale run raggiunto ({V85_TOTAL_PUBLISHED_THIS_RUN}/{V85_MAX_TOTAL_PUBLISHED_PER_RUN}): {title}")
+        return "skipped"
+    res = _ORIG_V85_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+    if res == "published":
+        V85_TOTAL_PUBLISHED_THIS_RUN += 1
+        print(f"[RUN v85] Pubblicati in questa run: {V85_TOTAL_PUBLISHED_THIS_RUN}/{V85_MAX_TOTAL_PUBLISHED_PER_RUN}")
+    return res
+
+
+_ORIG_V85_process_report_pending_item = process_report_pending_item
+
+def process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    global V85_TOTAL_PUBLISHED_THIS_RUN
+    title = sanitize_text((item or {}).get("title", ""))
+    if V85_TOTAL_PUBLISHED_THIS_RUN >= V85_MAX_TOTAL_PUBLISHED_PER_RUN:
+        print(f"[SKIP v85] Limite totale run raggiunto ({V85_TOTAL_PUBLISHED_THIS_RUN}/{V85_MAX_TOTAL_PUBLISHED_PER_RUN}): {title}")
+        return "skipped"
+    res = _ORIG_V85_process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+    if res == "published":
+        V85_TOTAL_PUBLISHED_THIS_RUN += 1
+        print(f"[RUN v85] Pubblicati in questa run: {V85_TOTAL_PUBLISHED_THIS_RUN}/{V85_MAX_TOTAL_PUBLISHED_PER_RUN}")
+    return res
 
 # =========================
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
