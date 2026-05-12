@@ -13644,6 +13644,154 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         V851_CURRENT_MODEL_503_COUNT = 0
 
 
+
+# =========================
+# v85.2 - offline pending hard gate
+# =========================
+BOT_VERSION = "v85_2_offline_pending_hard_gate"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V852_OFFLINE_PENDING_MIN_SCORE = int(os.getenv("V85_2_OFFLINE_PENDING_MIN_SCORE", "75"))
+V852_DROP_OLD_OFFLINE_PENDING = os.getenv("V85_2_DROP_OLD_OFFLINE_PENDING", "1").strip().lower() not in {"0", "false", "no", "off"}
+V852_PENDING_HARD_GATE_ENABLED = os.getenv("V85_2_PENDING_HARD_GATE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+
+def v852_pending_title(item):
+    try:
+        return v851_title_from_item(item)
+    except Exception:
+        return sanitize_text((item or {}).get("title", "") or "")
+
+
+def v852_pending_url(item):
+    try:
+        return v851_url_from_item(item)
+    except Exception:
+        return (item or {}).get("url") or (item or {}).get("link") or ""
+
+
+def v852_pending_summary(item):
+    return (item or {}).get("summary") or (item or {}).get("description") or ""
+
+
+def v852_pending_reason_is_wp_down(reason):
+    return str(reason or "").startswith("wp_down")
+
+
+def v852_is_offline_pending_publishable(item, reason="wp_down"):
+    """Hard gate per pending creati quando WP e' offline.
+
+    Offline non deve diventare un parcheggio per tier2/tier3, preview scadute
+    o pre-show spoiler obsoleti: se WordPress torna su, recuperiamo solo pezzi
+    che avremmo davvero voluto pubblicare.
+    """
+    if not V852_PENDING_HARD_GATE_ENABLED:
+        return True, "disabled"
+
+    # I report hanno coda/delay dedicati: non applicare questo gate generico.
+    if isinstance(item, dict) and item.get("kind") == "report":
+        return True, "report"
+
+    title = v852_pending_title(item)
+    url = v852_pending_url(item)
+    summary = v852_pending_summary(item)
+    score = int((item or {}).get("score", 0) or 0)
+
+    if not v852_pending_reason_is_wp_down(reason):
+        # Non bloccare pending generati da altre cause, salvo contenuti palesemente obsoleti.
+        try:
+            obsolete, obsolete_reason = v851_should_skip_obsolete_preshow(title, summary, url)
+            if obsolete:
+                return False, obsolete_reason or "obsolete preshow"
+        except Exception:
+            pass
+        return True, "non-wp-down"
+
+    if score < V852_OFFLINE_PENDING_MIN_SCORE:
+        return False, f"score {score}<{V852_OFFLINE_PENDING_MIN_SCORE}"
+
+    try:
+        tier = (item or {}).get("editorial_tier") or editorial_tier(score, title, summary, url)[0]
+        if tier in {"skip", "exclude"}:
+            return False, f"tier {tier}"
+    except Exception:
+        pass
+
+    try:
+        obsolete, obsolete_reason = v851_should_skip_obsolete_preshow(title, summary, url)
+        if obsolete:
+            return False, obsolete_reason or "obsolete preshow"
+    except Exception:
+        pass
+
+    # Paracadute testuale: se i motivi score dicono gia' che e' obsoleto/scaduto,
+    # non va salvato neanche con score residuo alto.
+    reasons_text = normalize_for_check(" ".join((item or {}).get("score_reasons", []) or (item or {}).get("reasons", []) or []))
+    if any(x in reasons_text for x in ["pre show spoiler obsoleto", "preview scaduta", "obsolete", "scaduta"]):
+        return False, "obsolete/expired reason"
+
+    return True, "ok"
+
+
+_ORIG_V852_add_pending_article = add_pending_article
+
+def add_pending_article(item, reason="wp_down"):
+    ok, why = v852_is_offline_pending_publishable(item, reason=reason)
+    if not ok:
+        print(f"[PENDING v85.2] Non salvo offline pending ({why}): {v852_pending_title(item)}")
+        return
+    return _ORIG_V852_add_pending_article(item, reason=reason)
+
+
+_ORIG_V852_save_selected_candidates_to_pending = save_selected_candidates_to_pending
+
+def save_selected_candidates_to_pending(queue, reason="wp_down", limit=3):
+    """v85.2: quando WP e' offline salva solo candidati realmente pubblicabili.
+
+    Non accodare low/tier3/tier4, preview scadute o pre-show spoiler obsoleti.
+    """
+    if not V852_PENDING_HARD_GATE_ENABLED or not v852_pending_reason_is_wp_down(reason):
+        return _ORIG_V852_save_selected_candidates_to_pending(queue, reason=reason, limit=limit)
+
+    saved = 0
+    for item in queue:
+        if saved >= limit:
+            break
+        ok, why = v852_is_offline_pending_publishable(item, reason=reason)
+        if not ok:
+            print(f"[PENDING v85.2] Skip offline candidate ({why}): {v852_pending_title(item)}")
+            continue
+        add_pending_article(item, reason=reason)
+        saved += 1
+    print(f"[PENDING v85.2] Candidati offline salvati per dopo: {saved}")
+
+
+_ORIG_V852_load_pending_articles = load_pending_articles
+
+def load_pending_articles(history=None):
+    pending = _ORIG_V852_load_pending_articles(history)
+    if not V852_DROP_OLD_OFFLINE_PENDING:
+        return pending
+
+    cleaned = []
+    dropped = 0
+    for item in pending:
+        reason = (item or {}).get("reason", "")
+        ok, why = v852_is_offline_pending_publishable(item, reason=reason)
+        if v852_pending_reason_is_wp_down(reason) and not ok:
+            print(f"[PENDING v85.2] Rimuovo pending offline non recuperabile ({why}): {v852_pending_title(item)}")
+            dropped += 1
+            continue
+        cleaned.append(item)
+
+    if dropped:
+        try:
+            save_pending_articles(cleaned)
+        except Exception as e:
+            print(f"[PENDING v85.2] Errore salvataggio cleanup pending: {e}")
+    return cleaned
+
+
 # =========================
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 # =========================
