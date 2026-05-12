@@ -7617,3 +7617,552 @@
 [REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (154 file)
 ===== RUN END [2026-05-12 11:49:14] VERSION [v83_quality_routing_and_smart_preservation (1ab4e0e)] =====
 
+
+===== RUN START [2026-05-12 15:44:15] VERSION [v84_publish_safety_oembed_image_guardrails (f37a5da)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (18/75): AEW Suing Triller TV Over Late Payments
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[PERF v71] WP lookup event_key: 1.35s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (39/75): Angel Garza Thanks Fans In Cryptic Post Following WWE Raw Squash Against Oba Femi
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SCORE v81.1] Cap light name-driven item 20->20 - Jacob Fatu Recalls Failed WWE Tryout Alongside AEW's Eddie Kingston
+[SKIP] Score sotto soglia editoriale (20/75): Jacob Fatu Recalls Failed WWE Tryout Alongside AEW's Eddie Kingston
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (0/75): WWE RAW 5/11/2026: 3 Things We Hated & 3 Things We Loved
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): UFC's Justin Gaethje Calls Ilia Topuria The '2nd Toughest Test Of Ever'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Dana White Breaks Down $1 Million Bonus System For UFC White House Card
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (57/75): Jacob Fatu Destroys Roman Reigns Yet Again, Takes Out Entire Bloodline On WWE Raw
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Josh Hokit Kicked Out Of UFC Freedom 250 Press Conference
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170427/wwe-raw-dominik-mysterio-aaa-mega-championship-el-grande-americano/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (56/75): Two Championship Matches Announced For Upcoming WWE Saturday Night's Main Event
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 47->47 - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SKIP v71] Story signature gia' in history: stable:roman_reigns|announcement|wwe|raw|backlash - Roman Reigns Announced For Multiple WWE Raw Dates In June Following Backlash Victory
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170357/ronda-rousey-second-wwe-run-s-show/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170335/wwe-raw-may-11-six-man-tag-team-match-acknowledgement-ceremony-more/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Biggest Winners And Losers Of The Week - 5/11/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170284/brock-lesnar-wwe-active-performer-internally-listed-retirement-alumni/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[PERF v71] WP lookup event_key: 1.51s
+[FIX] Event key in history ma non confermata su WordPress: event:business:wwe:executive-contract:nick-khan - provo a pubblicare
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v81.1] Cap future card announcement 56->56 - WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (51/75): WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Preview/show announcement scaduta: Real Reason Behind Asuka Taking Time Away From WWE Revealed
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (51/75): Title Match & More Booked For 5/18 WWE RAW
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (52/75): Jacob Fatu Destroys Roman Reigns Instead Of Acknowledging Him During 5/11 WWE RAW
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-adds-multiple-title-matches-saturday-nights-main-event-during-511-raw/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-addresses-asukas-current-status-during-511-raw/
+[SKIP] URL già in history: https://www.ringsidenews.com/asuka-passes-torch-iyo-sky-during-511-wwe-raw/
+[SCORE] 100 high - Indie Wrestler Accuses WWE of Stealing His Heavy Metal Gimmick for Lizzy Rain | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, morte, PLE/PPV, v62 evento morte/storico, v71 freshness=0.671
+[SCORE] 100 high - People Unhappy With Pat McAfee's WWE Involvement Are More Favorable Toward Stephen A. Smith | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, business/media rights, PLE/PPV, v62 media rights/streaming, v62 categoria business, v71 freshness=0.529
+[SCORE] 96 high - London Mayor's Office Addresses Possibility of Hosting WrestleMania in 2028 | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v71 freshness=0.579
+[SCORE] 84 high - Los Garza Spark Speculation About Their WWE Future With Cryptic Tweets After RAW | WWE/main roster, nomi forti lead: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.643
+[SCORE] 83 high - AEW Abandoned Plans for Major Kenny Omega Feud | AEW, impatto roster/storyline, PLE/PPV, v62 media rights/streaming, v71 source reliability soft penalty, v71 freshness=0.652
+[SCORE] 83 high - What's Really Going on With Swerve Strickland After Deleted Tweet | AEW, impatto roster/storyline, ritorno/debutto, PLE/PPV, v62 media rights/streaming, v71 source reliability soft penalty, v71 freshness=0.643
+[SCORE] 82 high - WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise | WWE/main roster, nomi forti titolo: triple h, impatto roster/storyline, WWE main roster + storyline/evento, contratto, PLE/PPV, opinione generica, v71 freshness=0.699
+[SCORE] 79 medium - Sami Zayn Fought With WWE Creative Over Heel Turn Plans | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, show settimanale, v62 reazioni/tributi, v71 source reliability soft penalty, v71 freshness=0.543
+[SCORE] 66 medium - TKO Announces 'Landmark' Deal To Bring WWE, UFC & More To Arizona | WWE/main roster, business/contratti WWE-TKO, contratto, non wrestling puro, v62 categoria business, v71 freshness=0.604, v48 tier2: 55-74
+[SCORE] 66 medium - Michael Cole Says Asuka's 'Future Is Up In The Air' After Farewell Segment On WWE Raw | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, rumor/backstage, show settimanale, v71 freshness=0.433, v48 tier2: 55-74
+[MODE] Storm mode attiva: 3 news >=90, 7 news >=80
+[MODEL v83] Route mode=storm report=False score=0 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 5
+[BOT] Elaborazione: WWE RAW Results, Highlights and Key Moments for May 11, 2026
+[BOT] semantic_id=wwe-raw-results-highlights-and-key-moments-for-may-11-2026
+[SCORE] iniziale=100 priority=high
+[SCRAPE] Articolo results rilevato: testo completo (30127 caratteri)
+[PERF v71] scraping articolo: 1.69s
+[BLOCKSEQ] Blocchi ordinati estratti: text=73, image=0, embed=0
+[PENDING] Coda salvata: 6 elementi
+[REPORT] Salvato/aggiornato pending report: report:wwe-raw-2026-05-11 | pronto tra 330 min
+[BOT] Elaborazione: People Unhappy With Pat McAfee's WWE Involvement Are More Favorable Toward Stephen A. Smith
+[BOT] semantic_id=people-unhappy-with-pat-mcafees-wwe-involvement-are-more-favorable-toward-stephen-a-smith
+[SCORE] iniziale=100 priority=high
+[PERF v71] scraping articolo: 1.41s
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=0
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=storm report=False score=100 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo discute di indiscrezioni interne riguardanti potenziali piani futuri per Stephen A. Smith in WWE, basandosi su report del Wrestling Observer.
+[EDITORIAL v72.3] translation_notes=Mantenere 'heel' e 'crossover' come termini tecnici del wrestling.; Tradurre 'serious talk' come 'discorsi seri' o 'voci concrete'.; Evitare calchi come 'people were not happy about' traducendo con 'molti tra coloro che non apprezzavano'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo discute di indiscrezioni interne riguardanti potenziali piani futuri per Stephen A. Smith in WWE, basandosi su report del Wrestling Observer.
+[PERF v71] analisi editoriale AI v72: 1.83s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=68 priority=medium | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, business/media rights, PLE/PPV, v62 media rights/streaming, v62 categoria business, v72.3 cap rumor
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - People Unhappy With Pat McAfee's WWE Involvement Are More Favorable Toward Stephen A. Smith
+[V71] story_signature=people_unhappy_with_pat|mcafee_s_wwe_involvement_are|more_favorable_toward_stephen|business|wwe|wrestlemania semantic_status=new_story freshness=0.58
+[PERF v71] WP recent posts dedupe: 1.56s
+[DEDUPE BLOCKED] Doppione semantico gia' pubblicato: People Unhappy With Pat McAfee's WWE Involvement Are More Favorable Toward Stephen A. Smith
+[DEDUPE BLOCKED] Matched post ID=4344 | similarity=1.00 | reason=same source URL | title=WWE: cresce il supporto interno per Stephen A. Smith rispetto a Pat McAfee
+[PENDING] Scarto pending sotto soglia dopo decay: 35 - Spoiler: ROH Title Changes Hands During Latest Taping
+[PENDING] Coda salvata: 4 elementi
+[BOT] Elaborazione: Los Garza Spark Speculation About Their WWE Future With Cryptic Tweets After RAW
+[BOT] semantic_id=los-garza-spark-speculation-about-their-wwe-future-with-cryptic-tweets-after-raw
+[SCORE] iniziale=84 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=2
+[BOT] Embed trovati: 2
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=storm report=False score=84 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza le reazioni post-puntata a un match e i tweet dei wrestler, rientrando nelle news autonome post-evento.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Los Garza' o 'Oba Femi'.; 'Released' va reso con 'licenziato/tagliato' e non 'rilasciato'.; Mantenere i titoli dei match originali (es. 'toss powerbomb').
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo analizza le reazioni post-puntata a un match e i tweet dei wrestler, rientrando nelle news autonome post-evento.
+[PERF v71] analisi editoriale AI v72: 2.03s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Los Garza Spark Speculation About Their WWE Future With Cryptic Tweets After RAW
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=89 priority=high | WWE/main roster, nomi forti lead: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[V71] story_signature=stable_followup_v807:oba_femi|career_future_status|wwe|raw|smackdown semantic_status=new_story freshness=0.697
+[DEDUPE BLOCKED] Doppione semantico gia' pubblicato: Los Garza Spark Speculation About Their WWE Future With Cryptic Tweets After RAW
+[DEDUPE BLOCKED] Matched post ID=4347 | similarity=1.00 | reason=same source URL | title=Tweet criptici di Los Garza dopo Raw: dubbi sul loro futuro in WWE
+[PENDING] Coda salvata: 3 elementi
+[BOT] Elaborazione: Backstage News On Asuka's Status For Tonight's WWE Raw And Beyond
+[BOT] semantic_id=backstage-news-on-asukas-status-for-tonights-wwe-raw-and-beyond
+[SCORE] iniziale=65 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[MODEL v83] Route mode=storm report=False score=65 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza lo status di una wrestler tramite report di backstage (Fightful/PWInsider), non è una preview dell'evento.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Empress of Tomorrow', è un soprannome ufficiale.; Gestire 'time off' come 'periodo di pausa'.; 'Release' va tradotto come 'licenziamento' o 'addio', mai 'rilascio'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo analizza lo status di una wrestler tramite report di backstage (Fightful/PWInsider), non è una preview dell'evento.
+[PERF v71] analisi editoriale AI v72: 1.80s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=20 priority=skip | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v68 preview scaduta
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 20/75 - Backstage News On Asuka's Status For Tonight's WWE Raw And Beyond
+[BOT] Elaborazione: Spoiler: ROH Title Changes Hands During Latest Taping
+[BOT] semantic_id=spoiler-roh-title-changes-hands-during-latest-taping
+[SCORE] iniziale=45 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[MODEL v83] Route mode=storm report=False score=45 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WORLD (8) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta un cambio di titolo già avvenuto durante un taping, non una presentazione di un evento futuro. ROH è considerato 'World' nel contesto di OpenWrestlingTV.
+[EDITORIAL v72.3] translation_notes=Mantenere 'ROH World Television Championship' in inglese.; Non tradurre 'taping' con 'registrazioni' se suona forzato, preferire 'durante le ultime registrazioni TV'.; Tradurre 'changes hands' come 'cambio di titolo' o 'il titolo ha cambiato proprietario'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WORLD (8) | L'articolo riporta un cambio di titolo già avvenuto durante un taping, non una presentazione di un evento futuro. ROH è considerato 'World' nel contesto di OpenWrestlingTV.
+[PERF v71] analisi editoriale AI v72: 1.60s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Spoiler: ROH Title Changes Hands During Latest Taping
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=56 priority=low | AEW, impatto roster/storyline, infortunio, show settimanale, v62 titolo/championship, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Spoiler: ROH Title Changes Hands During Latest Taping
+[BOT] News candidate totali: 13 | mode=storm | max nuove=5 | pending pubblicati=0
+[BOT] Elaborazione: Indie Wrestler Accuses WWE of Stealing His Heavy Metal Gimmick for Lizzy Rain
+[BOT] semantic_id=indie-wrestler-accuses-wwe-of-stealing-his-heavy-metal-gimmick-for-lizzy-rain
+[SCORE] iniziale=100 priority=high
+[PERF v71] scraping articolo: 4.71s
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=storm report=False score=100 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=NXT (6) conf=0.95 model=gemini-3.1-flash-lite | L'articolo riporta un'accusa pubblica emersa online riguardante una gimmick di un'atleta di NXT; trattandosi di una notizia avvenuta, rientra in POST_SHOW_NEWS.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Gimmick', termine tecnico standard nel wrestling italiano.; Tradurre 'The Fed' come 'la WWE' o 'la federazione' per contesto.; 'Broad' va reso con un termine colloquiale non eccessivamente offensivo, es. 'una tizia'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=NXT (6) | L'articolo riporta un'accusa pubblica emersa online riguardante una gimmick di un'atleta di NXT; trattandosi di una notizia avvenuta, rientra in POST_SHOW_NEWS.
+[PERF v71] analisi editoriale AI v72: 1.60s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Indie Wrestler Accuses WWE of Stealing His Heavy Metal Gimmick for Lizzy Rain
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=100 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, morte, PLE/PPV, v62 evento morte/storico
+[V71] story_signature=stable:indie_wrestler_accuses|stealing_his_heavy|legal|wwe|nxt semantic_status=new_story freshness=0.67
+[DEDUPE BLOCKED] Doppione semantico gia' pubblicato: Indie Wrestler Accuses WWE of Stealing His Heavy Metal Gimmick for Lizzy Rain
+[DEDUPE BLOCKED] Matched post ID=4350 | similarity=1.00 | reason=same source URL | title=Wrestler indie accusa la WWE di aver copiato la sua gimmick per Lizzy Rain
+[PENDING] Scarto pending sotto soglia dopo decay: 35 - Backstage News On Asuka's Status For Tonight's WWE Raw And Beyond
+[PENDING] Coda salvata: 2 elementi
+[SKIP v78.1] Gia processato in questa run: People Unhappy With Pat McAfee's WWE Involvement Are More Favorable Toward Stephen A. Smith
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: London Mayor's Office Addresses Possibility of Hosting WrestleMania in 2028
+[BOT] semantic_id=london-mayors-office-addresses-possibility-of-hosting-wrestlemania-in-2028
+[SCORE] iniziale=96 priority=high
+[PERF v71] scraping articolo: 9.04s
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=storm report=False score=96 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo smentisce una voce di corridoio su un evento futuro, riportando una dichiarazione ufficiale dell'ufficio del Sindaco di Londra.
+[EDITORIAL v72.3] translation_notes=Mantenere 'WrestleMania' senza traduzione.; 'Reality check' va reso come 'doccia fredda' o 'scontro con la realtà'.; Tradurre le quote dell'ufficio del Sindaco in modo formale e istituzionale.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo smentisce una voce di corridoio su un evento futuro, riportando una dichiarazione ufficiale dell'ufficio del Sindaco di Londra.
+[PERF v71] analisi editoriale AI v72: 9.03s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - London Mayor's Office Addresses Possibility of Hosting WrestleMania in 2028
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=96 priority=high | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[V71] story_signature=london_mayor_s_office_addresses|hosting_wrestlemania|business|wwe|wrestlemania semantic_status=new_story freshness=0.579
+[FIX] Event key in history ma non confermata su WordPress: event:business:wwe:executive-contract:nick-khan - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=10
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: Expecting ',' delimiter: line 1 column 610 (char 609)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[PRESERVE v83] Repair anti-omissione applicato con gemini-2.5-flash-lite: editorial_word_ratio=0.69 (249/361) threshold=0.70
+[PRESERVE v81] Guardrail finale testo applicato
+[PERF v71] traduzione: 17.70s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WrestleMania a Londra nel 2028: nessuna trattativa in corso
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 49.20s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/london-mayors-office-addresses-possibility-of-hosting-wrestlemania-in-2028-44.jpg
+[MEDIA] Immagine caricata: 4365
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.74s
+[PERF v71] totale articolo pubblicato 'London Mayor's Office Addresses Possibility of Hosting Wrest': 87.42s
+[OK] Pubblicato: WrestleMania a Londra nel 2028: nessuna trattativa in corso
+[PENDING] Coda salvata: 2 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260512_154706_001_wrestlemania-a-londra-nel-2028-nessuna-trattativa-in-corso_97946d4c_*.html
+[SKIP v78.1] Gia processato in questa run: Los Garza Spark Speculation About Their WWE Future With Cryptic Tweets After RAW
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: AEW Abandoned Plans for Major Kenny Omega Feud
+[BOT] semantic_id=aew-abandoned-plans-for-major-kenny-omega-feud
+[SCORE] iniziale=83 priority=high
+[PERF v71] scraping articolo: 6.80s
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=storm report=False score=83 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta indiscrezioni di backstage su piani creativi accantonati, rientrando nella categoria RUMOR basata su fonti interne.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli e delle cinture in inglese.; Non tradurre 'feud' con 'faida' se suona troppo letterale, preferire 'rivalità'.; Tradurre 'dead in the water' non letteralmente (es. 'definitivamente archiviato').
+[EDITORIAL v73] final type=RUMOR | category=AEW (5) | L'articolo riporta indiscrezioni di backstage su piani creativi accantonati, rientrando nella categoria RUMOR basata su fonti interne.
+[PERF v71] analisi editoriale AI v72: 1.99s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=68 priority=medium | AEW, impatto roster/storyline, PLE/PPV, v62 media rights/streaming, v72.3 cap rumor: niente boost raffinamento, v72.3 cap rumor
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - AEW Abandoned Plans for Major Kenny Omega Feud
+[V71] story_signature=stable:kenny_omega|announcement|aew semantic_status=new_story freshness=0.652
+[DEDUPE BLOCKED] Doppione semantico gia' pubblicato: AEW Abandoned Plans for Major Kenny Omega Feud
+[DEDUPE BLOCKED] Matched post ID=4353 | similarity=1.00 | reason=same source URL | title=AEW: accantonati i piani per la rivalità tra Kenny Omega e Swerve Strickland
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: What's Really Going on With Swerve Strickland After Deleted Tweet
+[BOT] semantic_id=whats-really-going-on-with-swerve-strickland-after-deleted-tweet
+[SCORE] iniziale=83 priority=high
+[PERF v71] scraping articolo: 3.72s
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza un tweet cancellato di Swerve Strickland, riportando voci di corridoio e indiscrezioni sul fatto che si tratti di una storyline o di reale frustrazione.
+[EDITORIAL v72.3] translation_notes=Mantenere 'work' e 'storyline' nel gergo tecnico.; Tradurre 'intentional for storyline purposes' come 'fatto apposta per fini di storyline'.; Evitare calchi come 'spiraling' (usare 'ha generato curiosità/preoccupazione').
+[CATEGORY v73] Opinion/trash talk -> Uncategorized: What's Really Going on With Swerve Strickland After Deleted Tweet
+[EDITORIAL v73] final type=RUMOR | category=UNCATEGORIZED (1) | L'articolo analizza un tweet cancellato di Swerve Strickland, riportando voci di corridoio e indiscrezioni sul fatto che si tratti di una storyline o di reale frustrazione. | v73 opinion/trash safety
+[PERF v71] analisi editoriale AI v72: 1.26s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=44 priority=low | AEW, impatto roster/storyline, ritorno/debutto, PLE/PPV, v62 media rights/streaming, v72.3 cap rumor: niente boost raffinamento, v72.3 cap rumor, v73 cap duro opinion/trash talk
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 44/75 - What's Really Going on With Swerve Strickland After Deleted Tweet
+[BOT] Elaborazione: WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise
+[BOT] semantic_id=wwe-hofer-eric-bischoff-thinks-triple-h-deserves-a-raise
+[SCORE] iniziale=82 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=storm report=False score=82 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: Expecting ',' delimiter: line 1 column 464 (char 463)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta l'opinione di Eric Bischoff espressa nel suo podcast riguardo al rinnovo di Triple H e alle dinamiche di potere in TKO.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Chief Content Officer' e 'Hall of Famer'.; 'Raise' va tradotto come 'aumento di stipendio' o 'aumento salariale'.; Evitare calchi per 'tide turned' o 'interfered', utilizzare 'ingerenze' per i vertici TKO.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta l'opinione di Eric Bischoff espressa nel suo podcast riguardo al rinnovo di Triple H e alle dinamiche di potere in TKO.
+[PERF v71] analisi editoriale AI v72: 21.68s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: triple h, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v62 business/dirigenza, v62 categoria business, v72.3 cap opinion
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise
+[FIX v72.3] Event key business rimossa per OPINION/WWE: event:business:tko-financials -> event:rumor:hofer-eric-bischoff-thinks-triple-h-deserves-a-raise
+[V71] story_signature=stable:eric_bischoff|triple_h|contract|wwe|wrestlemania|tko semantic_status=new_story freshness=0.698
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:rumor:hofer-eric-bischoff-thinks-triple-h-deserves-a-raise -> event:rumor:hofer-eric-bischoff-thinks-triple-h-deserves-a-raise-followup-hofer-eric-bischoff-thinks-triple-h-deserves-a-raise
+[SKIP] News core già pubblicata da altra fonte: WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise
+[SKIP] news_core_key=business-tko-wrestlemania
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: Sami Zayn Fought With WWE Creative Over Heel Turn Plans
+[BOT] semantic_id=sami-zayn-fought-with-wwe-creative-over-heel-turn-plans
+[SCORE] iniziale=79 priority=medium
+[PERF v71] scraping articolo: 1.55s
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=storm report=False score=79 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta retroscena di backstage su decisioni creative già prese e discusse, non è una preview di eventi né un semplice rumor su piani futuri, ma un aggiornamento su una narrazione in corso.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'heel' (termine tecnico), mantenere 'WWE creative' come 'team creativo WWE', tradurre 'Self Made Session' come nome proprio del programma, gestire 'Bob Dylan going ele
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta retroscena di backstage su decisioni creative già prese e discusse, non è una preview di eventi né un semplice rumor su piani futuri, ma un aggiornamento su una narrazione in corso.
+[PERF v71] analisi editoriale AI v72: 2.09s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Sami Zayn Fought With WWE Creative Over Heel Turn Plans
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE v79.1.3] Recovery post-show 54->79 - Sami Zayn Fought With WWE Creative Over Heel Turn Plans
+[SCORE] raffinato=79 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, show settimanale, v62 reazioni/tributi, v76 cap death/funeral storyline-comedy, v79.1.3 post-show recovery 54->79
+[V71] story_signature=stable:trick_williams|outcome|wwe|smackdown semantic_status=new_story freshness=0.543
+[DEDUPE BLOCKED] Doppione semantico gia' pubblicato: Sami Zayn Fought With WWE Creative Over Heel Turn Plans
+[DEDUPE BLOCKED] Matched post ID=4356 | similarity=1.00 | reason=same source URL | title=Sami Zayn si è opposto ai piani del team creativo WWE per il suo turn heel
+[PENDING] Coda salvata: 2 elementi
+[BOT] Elaborazione: TKO Announces 'Landmark' Deal To Bring WWE, UFC & More To Arizona
+[BOT] semantic_id=tko-announces-landmark-deal-to-bring-wwe-ufc-more-to-arizona
+[SCORE] iniziale=66 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[MODEL v83] Route mode=storm report=False score=66 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=BUSINESS (15) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta l'annuncio ufficiale di un accordo commerciale tra TKO e le autorità dell'Arizona. Trattandosi di un annuncio aziendale strutturale, ricade in Business/News e non in una preview di evento.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Landmark' come 'pietra miliare' se suona forzato, meglio 'storico accordo'.; Mantenere i nomi di UFC, PBR e Zuffa Boxing.; Attenzione alla distinzione tra show televisivi e PLE/PPV nel testo.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=BUSINESS (15) | L'articolo riporta l'annuncio ufficiale di un accordo commerciale tra TKO e le autorità dell'Arizona. Trattandosi di un annuncio aziendale strutturale, ricade in Business/News e non in una preview di evento.
+[PERF v71] analisi editoriale AI v72: 8.81s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - TKO Announces 'Landmark' Deal To Bring WWE, UFC & More To Arizona
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, show settimanale, non wrestling puro, v62 business/dirigenza, v62 categoria business
+[V71] story_signature=stable:tko_announces|landmark_deal_to|contract|wwe|raw|smackdown|tko semantic_status=new_story freshness=0.603
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/tko-announces-landmark-deal-to-bring-wwe-ufc-more-to-arizona/intro-1778598781.jpg
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-2.5-flash-lite
+[PERF v71] traduzione: 153.81s
+[FIX] Titolo non valido (ok) -> fallback automatico: TKO announces 'landmark' deal to bring WWE, UFC & more to arizona
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): TKO: accordo storico per portare WWE e UFC in Arizona
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 5.24s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/tko-announces-landmark-deal-to-bring-wwe-ufc-more-to-arizona/l-intro-1778598781.jpg
+[MEDIA] Immagine caricata: 4368
+[WP] Status attach image: 200
+[PERF v71] featured image: 2.99s
+[PERF v71] totale articolo pubblicato 'TKO Announces 'Landmark' Deal To Bring WWE, UFC & More To Ar': 171.69s
+[OK] Pubblicato: TKO: accordo storico per portare WWE e UFC in Arizona
+[PENDING] Coda salvata: 2 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260512_155039_002_tko-accordo-storico-per-portare-wwe-e-ufc-in-arizona_18c93d46_*.html
+[BOT] Elaborazione: Michael Cole Says Asuka's 'Future Is Up In The Air' After Farewell Segment On WWE Raw
+[BOT] semantic_id=michael-cole-says-asukas-future-is-up-in-the-air-after-farewell-segment-on-wwe-raw
+[SCORE] iniziale=66 priority=medium
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza un segmento andato in onda e la situazione contrattuale/di status di Asuka dopo un evento passato, non è una preview di un evento futuro.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (es. Women's Championship) in inglese.; 'Future is up in the air' va reso come 'futuro incerto' o 'nebuloso'.; Non tradurre 'farewell segment' come 'segmento di addio' ma descriverlo come 'segmento di commiato'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo analizza un segmento andato in onda e la situazione contrattuale/di status di Asuka dopo un evento passato, non è una preview di un evento futuro.
+[PERF v71] analisi editoriale AI v72: 15.85s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Michael Cole Says Asuka's 'Future Is Up In The Air' After Farewell Segment On WWE Raw
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=100 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale
+[V71] story_signature=stable:kairi_sane|sol_ruca|outcome|wwe|raw|backlash semantic_status=new_story freshness=0.432
+[PERF v71] WP recent posts dedupe: 1.47s
+[WP] Health check API OK: status 200 | tentativo 1/3
+[PERF v71] categoria da analisi editoriale v72: 2.14s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=3
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwe-raw-asuka-future-up-in-the-air-michael-cole-iyo-sky/intro-1778553338.jpg
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Body sospetto o troppo meta
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Traduzione ottenuta con: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 14.80s
+[FIX] Titolo non valido (ok) -> fallback automatico: Michael cole afferma asuka's 'future is up in the air' after farewell segment on WWE Raw
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Michael Cole sul futuro di Asuka dopo il segmento d'addio a WWE Raw
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 6.21s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-raw-asuka-future-up-in-the-air-michael-cole-iyo-sky/l-intro-1778553338.jpg
+[MEDIA] Immagine caricata: 4371
+[WP] Status attach image: 200
+[PERF v71] featured image: 3.31s
+[PERF v71] totale articolo pubblicato 'Michael Cole Says Asuka's 'Future Is Up In The Air' After Fa': 42.71s
+[OK] Pubblicato: Michael Cole sul futuro di Asuka dopo il segmento d'addio a WWE Raw
+[PENDING] Coda salvata: 2 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260512_155123_003_michael-cole-sul-futuro-di-asuka-dopo-il-segmento-d-addio-a-wwe-raw_5b17c4b9_*.html
+[BOT] Elaborazione: Bully Ray Gets Hit With Community Note After Claiming Eddie Guerrero Tribute Incident Was a Work
+[BOT] semantic_id=bully-ray-gets-hit-with-community-note-after-claiming-eddie-guerrero-tribute-incident-was-a-work
+[SCORE] iniziale=59 priority=low
+[PERF v71] scraping articolo: 1.43s
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=2
+[BOT] Embed trovati: 2
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=storm report=False score=59 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WORLD (8) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta un fatto avvenuto sui social riguardo una controversia su un evento passato. Non è né una preview né un report di un evento recente, rientra nel genere news/backstage su personalità del wrestling.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Community Note' (inteso come strumento X), 'Work' (usare 'scriptato' o 'finto'), 'Heat' (mantenere il termine tecnico o usare 'odio/reazione negativa'). 'Mark' va las
+[CATEGORY v73] World downgrade: WORLD -> WWE | non wrestling internazionale
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta un fatto avvenuto sui social riguardo una controversia su un evento passato. Non è né una preview né un report di un evento recente, rientra nel genere news/backstage su personalità del wrestling. | v73 world downgrade
+[PERF v71] analisi editoriale AI v72: 1.40s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Bully Ray Gets Hit With Community Note After Claiming Eddie Guerrero Tribute Incident Was a Work
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=54 priority=low | nomi forti titolo: bully ray, nome WWE: bully ray, v62 media rights/streaming, v76 cap death/funeral storyline-comedy
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Bully Ray Gets Hit With Community Note After Claiming Eddie Guerrero Tribute Incident Was a Work
+[V71] story_signature=bully_ray|bully_ray_gets_hit|with_community_note_after|death|backlash semantic_status=new_story freshness=0.685
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=10
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 7.80s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Bully Ray smentito da una Community Note sul tributo a Eddie Guerrero
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[WP] Status create: 201
+[PERF v71] creazione post WordPress: 2.74s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/bully-ray-gets-hit-with-community-note-after-claiming-eddie-guerrero-tribute-incident-was-a-work-36.jpg
+[MEDIA] Immagine caricata: 4374
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.41s
+[PERF v71] totale articolo pubblicato 'Bully Ray Gets Hit With Community Note After Claiming Eddie ': 15.51s
+[OK] Pubblicato: Bully Ray smentito da una Community Note sul tributo a Eddie Guerrero
+[PENDING] Coda salvata: 2 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260512_155140_004_bully-ray-smentito-da-una-community-note-sul-tributo-a-eddie-guerrero_ba956a2d_*.html
+[BOT] Elaborazione: Ronda Rousey Felt Like 'Someone Else's Impression' Of Herself In WWE
+[BOT] semantic_id=ronda-rousey-felt-like-someone-elses-impression-of-herself-in-wwe
+[SCORE] iniziale=55 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=storm report=False score=55 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | Si tratta di un'intervista retrospettiva su esperienze passate in WWE, non è una preview né un report. La notizia è focalizzata sulle dichiarazioni di Ronda Rousey riguardo al suo trascorso nella compagnia.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'impression' come 'impressione' nel senso di sensazione, ma come 'imitazione' o 'caricatura' nel contesto della citazione.; 'Death throes of Vince McMahon's reign' va reso come 'gli ultimi giorni del regno di Vince McMahon' o simile, evitando calchi letterali.; Mantenere inalterate le virgolette per le citazioni dirette.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Si tratta di un'intervista retrospettiva su esperienze passate in WWE, non è una preview né un report. La notizia è focalizzata sulle dichiarazioni di Ronda Rousey riguardo al suo trascorso nella compagnia.
+[PERF v71] analisi editoriale AI v72: 1.49s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Ronda Rousey Felt Like 'Someone Else's Impression' Of Herself In WWE
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=51 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, PLE/PPV, non wrestling puro, trash talk/clickbait forte, v62 ritorno/debutto
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 51/75 - Ronda Rousey Felt Like 'Someone Else's Impression' Of Herself In WWE
+[BOT] Elaborazione: Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[BOT] semantic_id=spoiler-oba-femis-latest-wwe-raw-open-challenge-opponent-reportedly-revealed
+[SCORE] iniziale=47 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[MODEL v83] Route mode=storm report=False score=47 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo anticipa un match che si terrà nella puntata di Raw di questa sera, fornendo una preview basata su indiscrezioni di roster. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli in inglese.; Non tradurre 'open challenge' letteralmente, usare 'sfida aperta'.; Evitare calchi per 'rolls on' e 'short work of'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo anticipa un match che si terrà nella puntata di Raw di questa sera, fornendo una preview basata su indiscrezioni di roster. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.33s
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 20->20 - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SCORE v79.1.4] Final cap pre-show obsoleto 20->20 - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SCORE] raffinato=20 priority=skip | WWE/main roster, nomi forti titolo: oba femi, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship, v68 preview scaduta, v79.1.4 pre-show spoiler obsoleto cap, v79.1.4 pre-show obsolete final cap
+[PERF v71] scoring raffinato: 0.45s
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 20/75 - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[BOT] Pubblicati 4 articoli (0 pending + 4 nuove) su 16 candidati provati | mode=storm
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (17 file)
+===== RUN END [2026-05-12 15:44:15] VERSION [v84_publish_safety_oembed_image_guardrails (f37a5da)] =====
+
