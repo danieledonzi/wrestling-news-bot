@@ -1,5 +1,3 @@
-import time as _owtv_boot_clock
-print(f"[BOOT v85.4] top file start epoch={_owtv_boot_clock.time():.3f}", flush=True)
 import os
 import re
 import json
@@ -9,7 +7,6 @@ from urllib.parse import urlparse, parse_qs, unquote, urlunparse
 from datetime import datetime
 from pathlib import Path
 import sys
-print(f"[BOOT v85.4] imports completed epoch={time.time():.3f}", flush=True)
 
 
 BOT_VERSION = "v80_oembed_safe_localized_translation"
@@ -13871,7 +13868,7 @@ BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
 
 SKIPPED_HISTORY_FILE = Path(os.getenv("SKIPPED_HISTORY_FILE", "skipped_history.json"))
 V854_SKIPPED_HISTORY_ENABLED = os.getenv("V85_4_SKIPPED_HISTORY_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
-V854_BOOT_DIAGNOSTICS_ENABLED = os.getenv("V85_4_BOOT_DIAGNOSTICS_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V854_BOOT_DIAGNOSTICS_ENABLED = os.getenv("V85_4_BOOT_DIAGNOSTICS_ENABLED", "0").strip().lower() not in {"0", "false", "no", "off"}
 
 V854_TTL_DEFAULT = int(os.getenv("V85_4_SKIP_TTL_DEFAULT_SECONDS", str(72 * 3600)))
 V854_TTL_LOW_SCORE = int(os.getenv("V85_4_SKIP_TTL_LOW_SCORE_SECONDS", str(72 * 3600)))
@@ -14068,11 +14065,196 @@ def run_bot():
     return _ORIG_V854_run_bot()
 
 
+
+
+# =========================
+# v85.5 - performance pass on top of v85.4
+# =========================
+BOT_VERSION = "v85_5_performance_fast_history_pre_gemini_gates"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V855_FAST_HISTORY_ENABLED = os.getenv("V85_5_FAST_HISTORY_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V855_PRE_GEMINI_LOW_VALUE_GATE = os.getenv("V85_5_PRE_GEMINI_LOW_VALUE_GATE", "1").strip().lower() not in {"0", "false", "no", "off"}
+V855_LOW_VALUE_SCORE_CUTOFF = int(os.getenv("V85_5_LOW_VALUE_SCORE_CUTOFF", "60"))
+V855_HISTORY_MAX_RECORDS = int(os.getenv("V85_5_HISTORY_MAX_RECORDS", "3000"))
+
+V855_SAFE_LOW_VALUE_TERMS = [
+    "felt like", "enjoyed freedom", "talks tko interfering", "possible stephen a smith crossover",
+    "deserves a raise", "thinks triple h deserves", "identifies moment", "bothered him",
+    "explains why", "believes", "reacts to", "comments on", "podcast", "interview",
+    "community note", "cryptic", "deleted tweet", "gets wild", "mount rushmore",
+]
+
+V855_CRITICAL_TERMS = [
+    "death", "dead", "dies", "passed away", "injury", "injured", "hospital", "surgery",
+    "lawsuit", "legal", "arrest", "sentenced", "convicted", "title change", "new champion",
+    "wins title", "regains", "retains", "released", "contract", "return", "debut",
+]
+
+
+def v855_context_from_item(item):
+    if not isinstance(item, dict):
+        return "", "", "", 0
+    title = v851_title_from_item(item)
+    url = v851_url_from_item(item)
+    summary = item.get("summary", "") or ""
+    score = int(item.get("score", 0) or 0)
+    return title, url, summary, score
+
+
+def v855_fast_load_history():
+    """Fast history reader.
+
+    v85.4 inherited the legacy behaviour that regenerated event keys for every old
+    row through make_event_key(). On large histories this could burn tens of
+    seconds before the first WordPress health check. v85.5 reads the already
+    stored columns only and avoids expensive recomputation.
+    """
+    history = {
+        "urls": set(),
+        "semantic_ids": set(),
+        "title_keys": set(),
+        "story_fingerprints": set(),
+        "news_core_keys": set(),
+        "event_keys": set(),
+        "story_signatures_v71": set(),
+    }
+    if not V855_FAST_HISTORY_ENABLED or not os.path.exists(HISTORY_FILE):
+        return history
+    try:
+        with open(HISTORY_FILE, "r", encoding="utf-8") as f:
+            lines = [line.strip() for line in f.read().splitlines() if line.strip()]
+        for line in lines[-V855_HISTORY_MAX_RECORDS:]:
+            parts = line.split("|")
+            if len(parts) >= 1 and parts[0].strip():
+                history["urls"].add(parts[0].strip())
+            if len(parts) >= 2 and parts[1].strip():
+                history["semantic_ids"].add(parts[1].strip())
+            if len(parts) >= 3 and parts[2].strip():
+                history["title_keys"].add(parts[2].strip())
+            if len(parts) >= 4 and parts[3].strip():
+                history["story_fingerprints"].add(parts[3].strip())
+            if len(parts) >= 5 and parts[4].strip():
+                history["news_core_keys"].add(parts[4].strip())
+            if len(parts) >= 6 and parts[5].strip():
+                history["event_keys"].add(parts[5].strip())
+            if len(parts) >= 7 and parts[6].strip():
+                history["story_signatures_v71"].add(parts[6].strip())
+    except Exception as e:
+        print(f"[HISTORY v85.5] Errore lettura fast history: {e}")
+    return history
+
+
+_ORIG_V855_load_history = load_history
+
+def load_history():
+    if V855_FAST_HISTORY_ENABLED:
+        return v855_fast_load_history()
+    return _ORIG_V855_load_history()
+
+
+def v855_is_critical_item(title="", summary="", url=""):
+    probe = normalize_for_check(f"{title} {url} {summary}")
+    return any(term in probe for term in V855_CRITICAL_TERMS)
+
+
+def v855_low_value_pre_gemini_reason(item, history=None):
+    if not V855_PRE_GEMINI_LOW_VALUE_GATE:
+        return ""
+    title, url, summary, score = v855_context_from_item(item)
+    if not title:
+        return ""
+    if item.get("kind") == "report" or str(item.get("report_event_key") or item.get("event_key") or "").startswith("report:"):
+        return ""
+    probe = normalize_for_check(f"{title} {url} {summary}")
+
+    # Known expired previews/spoilers do not deserve a model call.
+    if v70_is_hard_preview(title, summary, url) and v62_is_expired_preview(title, summary, url):
+        return "expired_preview_pre_gemini"
+    if "spoiler" in probe and "open challenge" in probe and v62_is_expired_preview(title, summary, url):
+        return "obsolete_preshow_spoiler_pre_gemini"
+
+    # Cross-source/core duplicate from already known history.
+    if history:
+        try:
+            news_core = make_news_core_key(title, summary)
+            if news_core and news_core in history.get("news_core_keys", set()):
+                return f"news_core_history_pre_gemini:{news_core}"
+            event_key = item.get("event_key") or make_event_key(title, summary, url)
+            if event_key and event_key in history.get("event_keys", set()) and not is_followup_angle(title, summary, event_key):
+                return f"event_history_pre_gemini:{event_key}"
+        except Exception:
+            pass
+
+    # Low-value/opinion/filler items under the normal publish threshold: avoid spending Gemini.
+    low_value_hit = any(term in probe for term in V855_SAFE_LOW_VALUE_TERMS)
+    if low_value_hit and score < MIN_PUBLISH_SCORE and not v855_is_critical_item(title, summary, url):
+        return "low_value_opinion_pre_gemini"
+    if score < V855_LOW_VALUE_SCORE_CUTOFF and not v855_is_critical_item(title, summary, url):
+        return f"low_score_pre_gemini:{score}"
+    return ""
+
+
+_ORIG_V855_process_candidate_item = process_candidate_item
+
+def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    title, url, summary, score = v855_context_from_item(item)
+
+    # v85.5: duplicated report pending must disappear before scraping the 30k-char report.
+    report_key = (item or {}).get("report_event_key") or (item or {}).get("event_key") if isinstance(item, dict) else ""
+    if isinstance(item, dict) and (item.get("kind") == "report" or str(report_key).startswith("report:")):
+        if report_key and (report_key in seen_event_keys or history_has_event_key(history, report_key)):
+            print(f"[REPORT v85.5] Skip pre-scraping: report gia in history locale: {report_key}")
+            try:
+                remove_pending_report_key(report_key)
+            except Exception:
+                pass
+            return "skipped"
+
+    reason = v855_low_value_pre_gemini_reason(item, history=history)
+    if reason:
+        print(f"[SKIP v85.5] {reason}: {title}")
+        try:
+            v854_record_skipped_url(url, title, reason, score=score, summary=summary, reasons=(item or {}).get("score_reasons", []))
+        except Exception:
+            pass
+        try:
+            remove_pending_url(url)
+        except Exception:
+            pass
+        return "skipped"
+
+    return _ORIG_V855_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+
+
+_ORIG_V855_save_selected_candidates_to_pending = save_selected_candidates_to_pending
+
+def save_selected_candidates_to_pending(queue, reason="wp_down", limit=3):
+    """v85.5: when WP is offline, do not persist low-value future waste."""
+    saved = 0
+    for item in queue:
+        if saved >= limit:
+            break
+        title, url, summary, score = v855_context_from_item(item)
+        if v855_low_value_pre_gemini_reason(item, history=None):
+            try:
+                v854_record_skipped_url(url, title, f"offline_not_pending:{reason}", score=score, summary=summary, reasons=(item or {}).get("score_reasons", []))
+            except Exception:
+                pass
+            continue
+        tier = item.get("editorial_tier") or editorial_tier(score, title, "", url)[0]
+        if score >= MIN_PUBLISH_SCORE and tier not in {"skip", "exclude"}:
+            add_pending_article(item, reason=reason)
+            saved += 1
+    print(f"[PENDING v85.5] Candidati salvati per dopo: {saved}")
+
+
 # =========================
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 # =========================
 if __name__ == "__main__":
-    print(f"[BOOT v85.4] __main__ reached epoch={time.time():.3f}", flush=True)
+    if V854_BOOT_DIAGNOSTICS_ENABLED:
+        print(f"[BOOT v85.5] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
