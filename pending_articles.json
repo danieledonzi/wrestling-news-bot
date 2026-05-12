@@ -1,5 +1,40 @@
 [
   {
+    "url": "https://www.wrestlinginc.com/2170427/wwe-raw-dominik-mysterio-aaa-mega-championship-el-grande-americano/",
+    "title": "Dominik Mysterio Successfully Defends AAA Mega Championship On WWE Raw",
+    "semantic_id": "dominik-mysterio-successfully-defends-aaa-mega-championship-on-wwe-raw",
+    "title_key": "dominik-mysterio-successfully-defends-aaa-mega-championship-raw",
+    "score": 90,
+    "priority": "high",
+    "event_key": "",
+    "story_signature_v71": "stable:dominik_mysterio|aaa|successfully_defends_aaa_mega_championship|wwe|raw",
+    "summary": "Dominik Mysterio is still AAA Mega Champion after a successful defense of the gold on \"WWE Raw.\"",
+    "reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "titolo/championship",
+      "show settimanale",
+      "v62 titolo/championship",
+      "v80.4 AAA major World priority 78->90",
+      "v71 freshness=0.607"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "titolo/championship",
+      "show settimanale",
+      "v62 titolo/championship",
+      "v80.4 AAA major World priority 78->90",
+      "v71 freshness=0.607"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778573930.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778553052.6732218,
+    "attempts": 0
+  },
+  {
     "url": "https://www.wrestlinginc.com/2170335/wwe-raw-may-11-six-man-tag-team-match-acknowledgement-ceremony-more/",
     "title": "WWE Raw Results 5/11 - Six Man Tag Team Match, Acknowledgement Ceremony & More",
     "semantic_id": "wwe-raw-results-511-six-man-tag-team-match-acknowledgement-ceremony-more",
@@ -34,6 +69,41 @@
     "status": "raw",
     "reason": "wp_down_initial_normal",
     "created_at": 1778543654.1073015,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.wrestlinginc.com/2170279/asuka-wwe-raw-time-off-talent-cuts/",
+    "title": "Backstage News On Asuka's Status For Tonight's WWE Raw And Beyond",
+    "semantic_id": "backstage-news-on-asukas-status-for-tonights-wwe-raw-and-beyond",
+    "title_key": "backstage-news-asuka-s-tonight-s-raw-beyond",
+    "score": 75,
+    "priority": "medium",
+    "event_key": "event:preview:raw:backstage-news-asuka-s-tonight-s-raw-beyond",
+    "story_signature_v71": "stable:asuka|identity_reveal|wwe|raw",
+    "summary": "Backstage updates revealed Asuka's status for \"WWE Raw\" tonight in Knoxville, Tennessee, as well as more about her future with the company.",
+    "reasons": [
+      "WWE/main roster",
+      "impatto roster/storyline",
+      "release/addio",
+      "show settimanale",
+      "v70 cap preview hard",
+      "v79.1.2 spoiler live/pre-show floor 56->75",
+      "v71 freshness=0.55"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "impatto roster/storyline",
+      "release/addio",
+      "show settimanale",
+      "v70 cap preview hard",
+      "v79.1.2 spoiler live/pre-show floor 56->75",
+      "v71 freshness=0.55"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778557371.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778553068.96345,
     "attempts": 0
   },
   {
