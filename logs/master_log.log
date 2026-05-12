@@ -8409,3 +8409,187 @@
 [REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (21 file)
 ===== RUN END [2026-05-12 16:01:12] VERSION [v84_1_anti_waste_history_consistency (4c5fc13)] =====
 
+
+===== RUN START [2026-05-12 17:05:18] VERSION [v85_publish_safety_atomic_state_total_cap (74c45ea)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (28/75): WWE HOFer Hulk Hogan's Former Accountant Reportedly Indicted For Embezzlement
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (38/75): Ronda Rousey Enjoyed Freedom Of Her AEW Appearance
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (26/75): Dana White Confirms Special Belt Will Be Awarded To UFC Freedom 250 Winners
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (18/75): AEW Suing Triller TV Over Late Payments
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170832/tko-wwe-ufc-arizona-landmark-deal/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (39/75): Angel Garza Thanks Fans In Cryptic Post Following WWE Raw Squash Against Oba Femi
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SCORE v81.1] Cap light name-driven item 20->20 - Jacob Fatu Recalls Failed WWE Tryout Alongside AEW's Eddie Kingston
+[SKIP] Score sotto soglia editoriale (20/75): Jacob Fatu Recalls Failed WWE Tryout Alongside AEW's Eddie Kingston
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (0/75): WWE RAW 5/11/2026: 3 Things We Hated & 3 Things We Loved
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): UFC's Justin Gaethje Calls Ilia Topuria The '2nd Toughest Test Of Ever'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Dana White Breaks Down $1 Million Bonus System For UFC White House Card
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (57/75): Jacob Fatu Destroys Roman Reigns Yet Again, Takes Out Entire Bloodline On WWE Raw
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Josh Hokit Kicked Out Of UFC Freedom 250 Press Conference
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170427/wwe-raw-dominik-mysterio-aaa-mega-championship-el-grande-americano/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (56/75): Two Championship Matches Announced For Upcoming WWE Saturday Night's Main Event
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170416/wwe-raw-asuka-future-up-in-the-air-michael-cole-iyo-sky/
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 47->47 - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SKIP v71] Story signature gia' in history: stable:roman_reigns|announcement|wwe|raw|backlash - Roman Reigns Announced For Multiple WWE Raw Dates In June Following Backlash Victory
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP v71] Story signature gia' in history: stable:stephanie_vaquer|aaa|legal - Stephanie Vaquer's Ex-Boyfriend El Cuatrero Sentenced to Nearly 13 Years in Prison
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (15/75): Original Plans For Dark Side of the Ring Season 7's Three-Part TNA Story Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/london-mayors-office-addresses-possibility-hosting-wrestlemania-2028/
+[SKIP] URL già in history: https://www.ringsidenews.com/bully-ray-gets-hit-community-note-claiming-eddie-guerrero-tribute-incident-work/
+[SKIP] URL già in history: https://www.ringsidenews.com/indie-wrestler-accuses-wwe-stealing-his-heavy-metal-gimmick-lizzy-rain/
+[SKIP] URL già in history: https://www.ringsidenews.com/sami-zayn-fought-wwe-creative-heel-turn-plans/
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-abandoned-plans-major-kenny-omega-feud/
+[SKIP] URL già in history: https://www.ringsidenews.com/people-unhappy-pat-mcafees-wwe-involvement-more-favorable-toward-stephen-smith/
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v81.1] Cap future card announcement 56->56 - WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (51/75): WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] URL già in history: https://www.ringsidenews.com/whats-really-going-swerve-strickland-deleted-tweet/
+[SKIP] URL già in history: https://www.ringsidenews.com/los-garza-spark-speculation-about-their-wwe-future-cryptic-tweets-raw/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Preview/show announcement scaduta: Real Reason Behind Asuka Taking Time Away From WWE Revealed
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (51/75): Title Match & More Booked For 5/18 WWE RAW
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (52/75): Jacob Fatu Destroys Roman Reigns Instead Of Acknowledging Him During 5/11 WWE RAW
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-adds-multiple-title-matches-saturday-nights-main-event-during-511-raw/
+[SCORE] 82 high - WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise | WWE/main roster, nomi forti titolo: triple h, impatto roster/storyline, WWE main roster + storyline/evento, contratto, PLE/PPV, opinione generica, v71 freshness=0.682
+[SCORE] 74 medium - Bully Ray Identifies Moment In WWE Backlash Main Event That Bothered Him | WWE/main roster, top star titolo: roman reigns, nomi forti titolo: bully ray, WWE main roster + storyline/evento, v71 freshness=0.601, v48 tier2: 55-74
+[SCORE] 55 low - Ronda Rousey Felt Like 'Someone Else's Impression' Of Herself In WWE | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v71 freshness=0.559, v48 tier2: 55-74
+[SCORE] 47 low - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed | WWE/main roster, nomi forti titolo: oba femi, rumor/backstage, show settimanale, v79.1.4 pre-show spoiler obsoleto cap, v71 freshness=0.399, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[MODEL v83] Route mode=normal report=False score=0 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 1
+[BOT] Elaborazione: WWE RAW Results, Highlights and Key Moments for May 11, 2026
+[BOT] semantic_id=wwe-raw-results-highlights-and-key-moments-for-may-11-2026
+[SCORE] iniziale=100 priority=high
+[SCRAPE] Articolo results rilevato: testo completo (30127 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=73, image=0, embed=0
+[REPORT v84.1] Skip: report gia in history locale: report:wwe-raw-2026-05-11
+[PENDING] Coda salvata: 1 elementi
+[BOT] News candidate totali: 4 | mode=normal | max nuove=3 | pending pubblicati=0
+[PERF v71] WP lookup URL esistente: 0.68s
+[BOT] Elaborazione: WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise
+[BOT] semantic_id=wwe-hofer-eric-bischoff-thinks-triple-h-deserves-a-raise
+[SCORE] iniziale=82 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=normal report=False score=82 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta l'opinione di Eric Bischoff sul rinnovo contrattuale e l'operato di Triple H. Non è una news di cronaca pura ma un commento soggettivo su dinamiche interne.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Chief Content Officer' come carica aziendale.; Tradurre 're-signed' come 'ha rinnovato il contratto'.; 'HOFer' va reso come 'membro della Hall of Fame'.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta l'opinione di Eric Bischoff sul rinnovo contrattuale e l'operato di Triple H. Non è una news di cronaca pura ma un commento soggettivo su dinamiche interne.
+[PERF v71] analisi editoriale AI v72: 8.04s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: triple h, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v62 business/dirigenza, v62 categoria business, v72.3 cap opinion
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise
+[FIX v72.3] Event key business rimossa per OPINION/WWE: event:business:tko-financials -> event:rumor:hofer-eric-bischoff-thinks-triple-h-deserves-a-raise
+[V71] story_signature=stable:eric_bischoff|triple_h|contract|wwe|wrestlemania|tko semantic_status=new_story freshness=0.681
+[PERF v71] WP recent posts dedupe: 1.01s
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:rumor:hofer-eric-bischoff-thinks-triple-h-deserves-a-raise -> event:rumor:hofer-eric-bischoff-thinks-triple-h-deserves-a-raise-followup-hofer-eric-bischoff-thinks-triple-h-deserves-a-raise
+[SKIP] News core già pubblicata da altra fonte: WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise
+[SKIP] news_core_key=business-tko-wrestlemania
+[PENDING] Coda salvata: 1 elementi
+[SKIP v84.1] URL gia presente su WordPress (4381), marco history e salto: Bully Ray Identifies Moment In WWE Backlash Main Event That Bothered Him
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Ronda Rousey Felt Like 'Someone Else's Impression' Of Herself In WWE
+[BOT] semantic_id=ronda-rousey-felt-like-someone-elses-impression-of-herself-in-wwe
+[SCORE] iniziale=55 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BOT] Embed trovati: 1
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[MODEL v83] Route mode=normal report=False score=55 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta le dichiarazioni e le riflessioni personali di Ronda Rousey sul suo periodo in WWE e sul rapporto con Vince McMahon, trattandosi di un'intervista retrospettiva.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (es. RAW Women's Championship, se citati) in inglese.; Non tradurre 'death throes' letteralmente, usare 'fase calante' o 'ultimi atti'.; La citazione di Rousey va tradotta mantenendo il senso di 'imitazione di se stessa'
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta le dichiarazioni e le riflessioni personali di Ronda Rousey sul suo periodo in WWE e sul rapporto con Vince McMahon, trattandosi di un'intervista retrospettiva.
+[PERF v71] analisi editoriale AI v72: 1.32s
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE] raffinato=51 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, PLE/PPV, non wrestling puro, trash talk/clickbait forte, v62 ritorno/debutto
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 51/75 - Ronda Rousey Felt Like 'Someone Else's Impression' Of Herself In WWE
+[BOT] Elaborazione: Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[BOT] semantic_id=spoiler-oba-femis-latest-wwe-raw-open-challenge-opponent-reportedly-revealed
+[SCORE] iniziale=47 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[MODEL v83] Route mode=normal report=False score=47 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=0.98 model=gemini-3.1-flash-lite | L'articolo anticipa un match (Open Challenge) previsto per la puntata di Raw di stasera, fornendo un'anteprima specifica sui partecipanti. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Open Challenge' o nomi di mosse come 'Fall From Grace'.; 'The Ruler' è un soprannome, va mantenuto.; Attenzione: il testo cita 'WrestleMania 42', verificare se è un refuso del testo originale o un elemento di storyline (da mantenere fedelmente se presente).
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo anticipa un match (Open Challenge) previsto per la puntata di Raw di stasera, fornendo un'anteprima specifica sui partecipanti. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 4.99s
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 20->20 - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SCORE v79.1.4] Final cap pre-show obsoleto 20->20 - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SCORE] raffinato=20 priority=skip | WWE/main roster, nomi forti titolo: oba femi, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship, v68 preview scaduta, v79.1.4 pre-show spoiler obsoleto cap, v79.1.4 pre-show obsolete final cap
+[PERF v71] scoring raffinato: 0.38s
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 20/75 - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 5 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (22 file)
+===== RUN END [2026-05-12 17:05:18] VERSION [v85_publish_safety_atomic_state_total_cap (74c45ea)] =====
+
