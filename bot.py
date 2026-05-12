@@ -1,3 +1,5 @@
+import time as _owtv_boot_clock
+print(f"[BOOT v85.4] top file start epoch={_owtv_boot_clock.time():.3f}", flush=True)
 import os
 import re
 import json
@@ -7,6 +9,7 @@ from urllib.parse import urlparse, parse_qs, unquote, urlunparse
 from datetime import datetime
 from pathlib import Path
 import sys
+print(f"[BOOT v85.4] imports completed epoch={time.time():.3f}", flush=True)
 
 
 BOT_VERSION = "v80_oembed_safe_localized_translation"
@@ -6511,6 +6514,15 @@ def build_candidates(history, wp_available=True):
                 title = sanitize_text(getattr(entry, "title", "Senza titolo"))
                 if not link:
                     continue
+                try:
+                    _skip_ok, _skip_reason = v854_should_skip_url(link)
+                    if _skip_ok:
+                        print(f"[SKIP v85.4] skipped_history ancora valida ({_skip_reason}): {title}")
+                        continue
+                except NameError:
+                    pass
+                except Exception as e:
+                    print(f"[SKIP v85.4] Errore lettura skipped_history: {e}")
                 if is_recent_validation_failed(link):
                     print(f"[SKIP] URL sospeso per validation fail recenti: {link}")
                     continue
@@ -6576,10 +6588,22 @@ def build_candidates(history, wp_available=True):
                 # entrano in coda anche sotto soglia, divisi per tier. Restano fuori solo gli esclusi duri.
                 if (score < MIN_PUBLISH_SCORE and not is_report_candidate and tier in {"skip", "exclude"}):
                     print(f"[SKIP] Score sotto soglia editoriale ({score}/{MIN_PUBLISH_SCORE}): {title}")
+                    try:
+                        v854_record_skipped_url(link, title, "score_below_threshold", score=score, summary=summary, reasons=reasons)
+                    except NameError:
+                        pass
+                    except Exception as e:
+                        print(f"[SKIP v85.4] Errore record skip score: {e}")
                     continue
 
                 if tier == "exclude":
                     print(f"[SKIP] Esclusione editoriale dura ({tier_reason}): {title}")
+                    try:
+                        v854_record_skipped_url(link, title, "editorial_exclude", score=score, summary=summary, reasons=reasons, extra={"tier_reason": tier_reason})
+                    except NameError:
+                        pass
+                    except Exception as e:
+                        print(f"[SKIP v85.4] Errore record skip exclude: {e}")
                     continue
 
                 if score < MIN_PUBLISH_SCORE and not is_report_candidate:
@@ -13838,10 +13862,217 @@ def v79_is_live_spoiler_candidate(title="", text="", url=""):
     return _ORIG_V853_v79_is_live_spoiler_candidate(title, text, url)
 
 
+
+# =========================
+# v85.4 - skipped history + boot diagnostics
+# =========================
+BOT_VERSION = "v85_4_skipped_history_boot_diagnostics"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+SKIPPED_HISTORY_FILE = Path(os.getenv("SKIPPED_HISTORY_FILE", "skipped_history.json"))
+V854_SKIPPED_HISTORY_ENABLED = os.getenv("V85_4_SKIPPED_HISTORY_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V854_BOOT_DIAGNOSTICS_ENABLED = os.getenv("V85_4_BOOT_DIAGNOSTICS_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+V854_TTL_DEFAULT = int(os.getenv("V85_4_SKIP_TTL_DEFAULT_SECONDS", str(72 * 3600)))
+V854_TTL_LOW_SCORE = int(os.getenv("V85_4_SKIP_TTL_LOW_SCORE_SECONDS", str(72 * 3600)))
+V854_TTL_EXPIRED_PREVIEW = int(os.getenv("V85_4_SKIP_TTL_EXPIRED_PREVIEW_SECONDS", str(7 * 24 * 3600)))
+V854_TTL_OBSOLETE_PRESHOW = int(os.getenv("V85_4_SKIP_TTL_OBSOLETE_PRESHOW_SECONDS", str(7 * 24 * 3600)))
+V854_TTL_DUPLICATE = int(os.getenv("V85_4_SKIP_TTL_DUPLICATE_SECONDS", str(14 * 24 * 3600)))
+V854_TTL_VALIDATION = int(os.getenv("V85_4_SKIP_TTL_VALIDATION_SECONDS", str(24 * 3600)))
+
+
+def v854_now_ts():
+    return time.time()
+
+
+def v854_canonical_url(url):
+    try:
+        return normalize_url_for_history(url)
+    except Exception:
+        return str(url or "").strip()
+
+
+def v854_skip_ttl_for_reason(reason, score=None):
+    r = normalize_for_check(reason or "")
+    if "preview" in r or "expired" in r or "scaduta" in r:
+        return V854_TTL_EXPIRED_PREVIEW
+    if "preshow" in r or "pre show" in r or "spoiler obsoleto" in r or "obsolete" in r:
+        return V854_TTL_OBSOLETE_PRESHOW
+    if "duplicate" in r or "duplicato" in r or "news_core" in r or "history" in r:
+        return V854_TTL_DUPLICATE
+    if "validation" in r:
+        return V854_TTL_VALIDATION
+    if score is not None and int(score or 0) < MIN_PUBLISH_SCORE:
+        return V854_TTL_LOW_SCORE
+    return V854_TTL_DEFAULT
+
+
+def load_skipped_history():
+    if not V854_SKIPPED_HISTORY_ENABLED:
+        return {}
+    if not SKIPPED_HISTORY_FILE.exists():
+        return {}
+    try:
+        with open(SKIPPED_HISTORY_FILE, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        if isinstance(data, dict):
+            # Backward compatible: allow {"items": {...}}
+            if isinstance(data.get("items"), dict):
+                return data.get("items") or {}
+            return data
+    except Exception as e:
+        print(f"[SKIP v85.4] Errore lettura skipped_history: {e}")
+    return {}
+
+
+def save_skipped_history(data):
+    if not V854_SKIPPED_HISTORY_ENABLED:
+        return
+    try:
+        # Prune scaduti a ogni scrittura.
+        now = v854_now_ts()
+        clean = {}
+        for key, rec in (data or {}).items():
+            try:
+                if float((rec or {}).get("expires_at", 0) or 0) > now:
+                    clean[key] = rec
+            except Exception:
+                continue
+        payload = {
+            "schema": "owtv_skipped_history_v85_4",
+            "updated_at": datetime.now().isoformat(timespec="seconds"),
+            "items": clean,
+        }
+        v85_atomic_write_json(SKIPPED_HISTORY_FILE, payload)
+    except Exception as e:
+        print(f"[SKIP v85.4] Errore scrittura skipped_history: {e}")
+
+
+def v854_should_skip_url(url):
+    if not V854_SKIPPED_HISTORY_ENABLED or not url:
+        return False, "disabled"
+    data = load_skipped_history()
+    key = v854_canonical_url(url)
+    rec = data.get(key) or data.get(url)
+    if not rec:
+        return False, "not_found"
+    try:
+        if float(rec.get("expires_at", 0) or 0) > v854_now_ts():
+            return True, rec.get("reason", "recently skipped")
+    except Exception:
+        pass
+    return False, "expired"
+
+
+def v854_record_skipped_url(url, title="", reason="skipped", score=None, summary="", reasons=None, extra=None, ttl=None):
+    if not V854_SKIPPED_HISTORY_ENABLED or not url:
+        return
+    key = v854_canonical_url(url)
+    now = v854_now_ts()
+    ttl = int(ttl if ttl is not None else v854_skip_ttl_for_reason(reason, score=score))
+    data = load_skipped_history()
+    rec = {
+        "url": url,
+        "title": sanitize_text(title or ""),
+        "reason": str(reason or "skipped"),
+        "score": int(score or 0) if score is not None else None,
+        "summary": sanitize_text((summary or "")[:500]),
+        "score_reasons": list(reasons or [])[:20],
+        "created_at": now,
+        "expires_at": now + ttl,
+        "ttl_seconds": ttl,
+        "bot_version": BOT_VERSION_FULL,
+    }
+    if extra:
+        rec["extra"] = extra
+    data[key] = rec
+    save_skipped_history(data)
+
+
+# Deduplicazione/skip history anche dentro il processing, come rete di sicurezza.
+_ORIG_V854_process_candidate_item = process_candidate_item
+
+def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    title = v851_title_from_item(item) if isinstance(item, dict) else ""
+    url = v851_url_from_item(item) if isinstance(item, dict) else ""
+    score = int((item or {}).get("score", 0) or 0) if isinstance(item, dict) else 0
+    summary = (item or {}).get("summary", "") if isinstance(item, dict) else ""
+
+    ok, why = v854_should_skip_url(url)
+    if ok:
+        print(f"[SKIP v85.4] skipped_history pre-processing ({why}): {title}")
+        try:
+            remove_pending_url(url)
+        except Exception:
+            pass
+        return "skipped"
+
+    # Report gia' pubblicato: evitare scraping completo quando arriva da pending.
+    report_key = (item or {}).get("report_event_key") or (item or {}).get("event_key") if isinstance(item, dict) else ""
+    if isinstance(item, dict) and (item.get("kind") == "report" or str(report_key).startswith("report:")):
+        if report_key and (report_key in seen_event_keys or history_has_event_key(history, report_key)):
+            print(f"[REPORT v85.4] Skip pre-scraping: report gia in history locale: {report_key}")
+            try:
+                remove_pending_report_key(report_key)
+            except Exception:
+                pass
+            return "skipped"
+
+    status = _ORIG_V854_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+
+    if status in {"skipped", "validation_fail"} and url:
+        reason = "validation_fail" if status == "validation_fail" else "processing_skipped"
+        # Non registrare skip temporanei per WP/model fail: potrebbero diventare validi subito.
+        try:
+            if score < MIN_PUBLISH_SCORE or status == "validation_fail":
+                v854_record_skipped_url(url, title, reason, score=score, summary=summary, reasons=(item or {}).get("score_reasons", []))
+        except Exception as e:
+            print(f"[SKIP v85.4] Errore record processing skip: {e}")
+    return status
+
+
+# Registra anche i pending offline scartati dal gate v85.2.
+_ORIG_V854_add_pending_article = add_pending_article
+
+def add_pending_article(item, reason="wp_down"):
+    ok, why = v852_is_offline_pending_publishable(item, reason=reason)
+    if not ok:
+        title = v852_pending_title(item)
+        url = v852_pending_url(item)
+        print(f"[PENDING v85.4] Non salvo e registro skip offline pending ({why}): {title}")
+        try:
+            v854_record_skipped_url(url, title, f"offline_pending_rejected:{why}", score=(item or {}).get("score", 0), summary=v852_pending_summary(item), reasons=(item or {}).get("score_reasons", []) or (item or {}).get("reasons", []))
+        except Exception as e:
+            print(f"[PENDING v85.4] Errore record skip offline pending: {e}")
+        return
+    return _ORIG_V854_add_pending_article(item, reason=reason)
+
+
+# Boot diagnostics: capire se il minuto vuoto e' startup Actions, import o codice top-level.
+_ORIG_V854_wordpress_is_available = wordpress_is_available
+V854_FIRST_WP_HEALTH_LOGGED = False
+
+def wordpress_is_available(*args, **kwargs):
+    global V854_FIRST_WP_HEALTH_LOGGED
+    if V854_BOOT_DIAGNOSTICS_ENABLED and not V854_FIRST_WP_HEALTH_LOGGED:
+        print(f"[BOOT v85.4] prima health check WP epoch={time.time():.3f}", flush=True)
+        V854_FIRST_WP_HEALTH_LOGGED = True
+    return _ORIG_V854_wordpress_is_available(*args, **kwargs)
+
+
+_ORIG_V854_run_bot = run_bot
+
+def run_bot():
+    if V854_BOOT_DIAGNOSTICS_ENABLED:
+        print(f"[BOOT v85.4] entro in run_bot epoch={time.time():.3f}", flush=True)
+    return _ORIG_V854_run_bot()
+
+
 # =========================
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 # =========================
 if __name__ == "__main__":
+    print(f"[BOOT v85.4] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
