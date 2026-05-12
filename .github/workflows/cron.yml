@@ -1,4 +1,4 @@
-name: News Bot Cron
+name: News Cron Bot
 
 on:
   schedule:
@@ -76,6 +76,7 @@ jobs:
           V85_1_SKIP_OPINION_LOW_BEFORE_TRANSLATION: "1"
           V85_1_OPINION_REFINE_SKIP_THRESHOLD: "65"
           V85_1_MODEL_MAX_503_PER_ARTICLE: "2"
+          V85_3_GLOBAL_SPOILER_GATE_ENABLED: "1"
         run: python bot.py
 
       - name: Upload master log
