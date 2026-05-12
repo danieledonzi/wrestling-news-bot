@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-12 18:53:34",
-  "last_bot_version": "v85_5_performance_fast_history_pre_gemini_gates (10a684f)",
-  "updated_at": "2026-05-12T18:53:58",
-  "total_items": 8,
+  "last_run_id": "2026-05-12 19:54:59",
+  "last_bot_version": "v85_5_performance_fast_history_pre_gemini_gates (66bb970)",
+  "updated_at": "2026-05-12T19:56:34",
+  "total_items": 9,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -68,6 +68,14 @@
       "original_html_file": "20260512_184429_002_matt-hardy-ringrazia-il-compianto-ted-turner-per-aver-fatto-avanzare-il-wrestlin_07c9cde3_original.html",
       "final_html_file": "20260512_184429_002_matt-hardy-ringrazia-il-compianto-ted-turner-per-aver-fatto-avanzare-il-wrestlin_07c9cde3_final.html",
       "metadata_file": "20260512_184429_002_matt-hardy-ringrazia-il-compianto-ted-turner-per-aver-fatto-avanzare-il-wrestlin_07c9cde3_metadata.json"
+    },
+    {
+      "run_id": "2026-05-12 19:54:59",
+      "title": "L'ex contabile di Hulk Hogan accusata di frode federale per presunto furto di 890.000 dollari",
+      "url": "https://www.ringsidenews.com/hulk-hogans-former-accountant-hit-federal-fraud-charges-alleged-890k-theft/",
+      "original_html_file": "20260512_195631_001_l-ex-contabile-di-hulk-hogan-accusata-di-frode-federale-per-presunto-furto-di-89_deef9137_original.html",
+      "final_html_file": "20260512_195631_001_l-ex-contabile-di-hulk-hogan-accusata-di-frode-federale-per-presunto-furto-di-89_deef9137_final.html",
+      "metadata_file": "20260512_195631_001_l-ex-contabile-di-hulk-hogan-accusata-di-frode-federale-per-presunto-furto-di-89_deef9137_metadata.json"
     }
   ]
 }
