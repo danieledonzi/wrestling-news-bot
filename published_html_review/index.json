@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-12 15:44:15",
-  "last_bot_version": "v84_publish_safety_oembed_image_guardrails (f37a5da)",
-  "updated_at": "2026-05-12T15:51:43",
-  "total_items": 4,
+  "last_run_id": "2026-05-12 16:01:12",
+  "last_bot_version": "v84_1_anti_waste_history_consistency (4c5fc13)",
+  "updated_at": "2026-05-12T16:05:27",
+  "total_items": 5,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -36,6 +36,14 @@
       "original_html_file": "20260512_155140_004_bully-ray-smentito-da-una-community-note-sul-tributo-a-eddie-guerrero_ba956a2d_original.html",
       "final_html_file": "20260512_155140_004_bully-ray-smentito-da-una-community-note-sul-tributo-a-eddie-guerrero_ba956a2d_final.html",
       "metadata_file": "20260512_155140_004_bully-ray-smentito-da-una-community-note-sul-tributo-a-eddie-guerrero_ba956a2d_metadata.json"
+    },
+    {
+      "run_id": "2026-05-12 16:01:12",
+      "title": "Swerve Strickland: dietro il tweet cancellato, un piano? Nuovi report svelano il mistero",
+      "url": "https://www.ringsidenews.com/whats-really-going-swerve-strickland-deleted-tweet/",
+      "original_html_file": "20260512_160400_001_swerve-strickland-dietro-il-tweet-cancellato-un-piano-nuovi-report-svelano-il-mi_0e0db39b_original.html",
+      "final_html_file": "20260512_160400_001_swerve-strickland-dietro-il-tweet-cancellato-un-piano-nuovi-report-svelano-il-mi_0e0db39b_final.html",
+      "metadata_file": "20260512_160400_001_swerve-strickland-dietro-il-tweet-cancellato-un-piano-nuovi-report-svelano-il-mi_0e0db39b_metadata.json"
     }
   ]
 }
