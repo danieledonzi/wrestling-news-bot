@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-12 18:04:15",
-  "last_bot_version": "v85_2_offline_pending_hard_gate (f839184)",
-  "updated_at": "2026-05-12T18:05:14",
-  "total_items": 5,
+  "last_run_id": "2026-05-12 18:16:45",
+  "last_bot_version": "v85_3_gemini_call_and_spoiler_global_gate (4e27498)",
+  "updated_at": "2026-05-12T18:19:36",
+  "total_items": 6,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -44,6 +44,14 @@
       "original_html_file": "20260512_160400_001_swerve-strickland-dietro-il-tweet-cancellato-un-piano-nuovi-report-svelano-il-mi_0e0db39b_original.html",
       "final_html_file": "20260512_160400_001_swerve-strickland-dietro-il-tweet-cancellato-un-piano-nuovi-report-svelano-il-mi_0e0db39b_final.html",
       "metadata_file": "20260512_160400_001_swerve-strickland-dietro-il-tweet-cancellato-un-piano-nuovi-report-svelano-il-mi_0e0db39b_metadata.json"
+    },
+    {
+      "run_id": "2026-05-12 18:16:45",
+      "title": "È morto a 72 anni Barry Blaustein, regista del documentario Beyond the Mat",
+      "url": "https://www.ringsidenews.com/beyond-mat-director-barry-blaustein-dead-72/",
+      "original_html_file": "20260512_181905_001_morto-a-72-anni-barry-blaustein-regista-del-documentario-beyond-the-mat_787b1dd4_original.html",
+      "final_html_file": "20260512_181905_001_morto-a-72-anni-barry-blaustein-regista-del-documentario-beyond-the-mat_787b1dd4_final.html",
+      "metadata_file": "20260512_181905_001_morto-a-72-anni-barry-blaustein-regista-del-documentario-beyond-the-mat_787b1dd4_metadata.json"
     }
   ]
 }

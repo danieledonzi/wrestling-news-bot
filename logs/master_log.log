@@ -8753,3 +8753,164 @@
 [REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (24 file)
 ===== RUN END [2026-05-12 18:04:15] VERSION [v85_2_offline_pending_hard_gate (f839184)] =====
 
+
+===== RUN START [2026-05-12 18:16:45] VERSION [v85_3_gemini_call_and_spoiler_global_gate (4e27498)] =====
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[PERF v71] WP lookup event_key: 1.25s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (28/75): WWE HOFer Hulk Hogan's Former Accountant Reportedly Indicted For Embezzlement
+[SKIP] Score sotto soglia editoriale (38/75): Ronda Rousey Enjoyed Freedom Of Her AEW Appearance
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170961/wwe-backlash-bully-ray-roman-reigns-jacob-fatu-main-event-moment-bothered/
+[SKIP] Score sotto soglia editoriale (26/75): Dana White Confirms Special Belt Will Be Awarded To UFC Freedom 250 Winners
+[SKIP] Score sotto soglia editoriale (18/75): AEW Suing Triller TV Over Late Payments
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170832/tko-wwe-ufc-arizona-landmark-deal/
+[SKIP] Score sotto soglia editoriale (39/75): Angel Garza Thanks Fans In Cryptic Post Following WWE Raw Squash Against Oba Femi
+[SCORE v81.1] Cap light name-driven item 20->20 - Jacob Fatu Recalls Failed WWE Tryout Alongside AEW's Eddie Kingston
+[SKIP] Score sotto soglia editoriale (20/75): Jacob Fatu Recalls Failed WWE Tryout Alongside AEW's Eddie Kingston
+[SKIP] Score sotto soglia editoriale (0/75): WWE RAW 5/11/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): UFC's Justin Gaethje Calls Ilia Topuria The '2nd Toughest Test Of Ever'
+[SKIP] Score sotto soglia editoriale (0/75): Dana White Breaks Down $1 Million Bonus System For UFC White House Card
+[SKIP] Score sotto soglia editoriale (57/75): Jacob Fatu Destroys Roman Reigns Yet Again, Takes Out Entire Bloodline On WWE Raw
+[SKIP] Score sotto soglia editoriale (0/75): Josh Hokit Kicked Out Of UFC Freedom 250 Press Conference
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170427/wwe-raw-dominik-mysterio-aaa-mega-championship-el-grande-americano/
+[SKIP] Score sotto soglia editoriale (56/75): Two Championship Matches Announced For Upcoming WWE Saturday Night's Main Event
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170416/wwe-raw-asuka-future-up-in-the-air-michael-cole-iyo-sky/
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 47->47 - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (57/75): Trick Williams Receives Huge Honor as South Carolina Declares May 12 as 'Trick Williams Day'
+[SKIP v71] Story signature gia' in history: stable:stephanie_vaquer|aaa|legal - Stephanie Vaquer's Ex-Boyfriend El Cuatrero Sentenced to Nearly 13 Years in Prison
+[SKIP] Score sotto soglia editoriale (15/75): Original Plans For Dark Side of the Ring Season 7's Three-Part TNA Story Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/london-mayors-office-addresses-possibility-hosting-wrestlemania-2028/
+[SKIP] URL già in history: https://www.ringsidenews.com/bully-ray-gets-hit-community-note-claiming-eddie-guerrero-tribute-incident-work/
+[SKIP] URL già in history: https://www.ringsidenews.com/indie-wrestler-accuses-wwe-stealing-his-heavy-metal-gimmick-lizzy-rain/
+[SKIP] URL già in history: https://www.ringsidenews.com/sami-zayn-fought-wwe-creative-heel-turn-plans/
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-abandoned-plans-major-kenny-omega-feud/
+[SKIP] URL già in history: https://www.ringsidenews.com/people-unhappy-pat-mcafees-wwe-involvement-more-favorable-toward-stephen-smith/
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v81.1] Cap future card announcement 56->56 - WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (51/75): WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] URL già in history: https://www.ringsidenews.com/whats-really-going-swerve-strickland-deleted-tweet/
+[SKIP] URL già in history: https://www.ringsidenews.com/los-garza-spark-speculation-about-their-wwe-future-cryptic-tweets-raw/
+[SKIP] Preview/show announcement scaduta: Real Reason Behind Asuka Taking Time Away From WWE Revealed
+[SKIP] Score sotto soglia editoriale (51/75): Title Match & More Booked For 5/18 WWE RAW
+[SCORE] 82 high - WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise | WWE/main roster, nomi forti titolo: triple h, impatto roster/storyline, WWE main roster + storyline/evento, contratto, PLE/PPV, opinione generica, v71 freshness=0.667
+[SCORE] 60 medium - 'Beyond The Mat' Director Barry Blaustein Dead At 72 | WWE/main roster, WWE main roster + storyline/evento, morte, show settimanale, non wrestling puro, floor WWE main roster storyline, v62 categoria business, v77 strong-word guardrail, v71 source reliability soft penalty, v71 freshness=0.579, v48 tier2: 55-74
+[SCORE] 58 low - Dave Meltzer Talks TKO Interfering In WWE Booking, Possible Stephen A. Smith Crossover | WWE/main roster, business/contratti WWE-TKO, intervista/opinione, opinione generica, v62 categoria business, v71 freshness=0.603, v48 tier2: 55-74
+[SCORE] 55 low - Ronda Rousey Felt Like 'Someone Else's Impression' Of Herself In WWE | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v71 freshness=0.544, v48 tier2: 55-74
+[SCORE] 47 low - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed | WWE/main roster, nomi forti titolo: oba femi, rumor/backstage, show settimanale, v79.1.4 pre-show spoiler obsoleto cap, v71 freshness=0.384, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[MODEL v83] Route mode=normal report=False score=0 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 2
+[PERF v71] WP lookup URL esistente: 0.96s
+[BOT] Elaborazione: WWE RAW Results, Highlights and Key Moments for May 11, 2026
+[BOT] semantic_id=wwe-raw-results-highlights-and-key-moments-for-may-11-2026
+[SCORE] iniziale=100 priority=high
+[SCRAPE] Articolo results rilevato: testo completo (30127 caratteri)
+[PERF v71] scraping articolo: 0.85s
+[BLOCKSEQ] Blocchi ordinati estratti: text=73, image=0, embed=0
+[REPORT v84.1] Skip: report gia in history locale: report:wwe-raw-2026-05-11
+[PENDING] Coda salvata: 2 elementi
+[PERF v71] WP lookup URL esistente: 0.98s
+[BOT] Elaborazione: WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise
+[BOT] semantic_id=wwe-hofer-eric-bischoff-thinks-triple-h-deserves-a-raise
+[SCORE] iniziale=82 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[MODEL v83] Route mode=normal report=False score=82 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta l'opinione di Eric Bischoff espressa nel suo podcast riguardo al rinnovo contrattuale di Triple H e le dinamiche creative in TKO.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Chief Content Officer', 'Hall of Famer' o 'HOFer'.; Mantenere le citazioni di Bischoff fedeli al tono colloquiale ma professionale.; Tradurre 'raise' come 'aumento di stipendio' o 'aumento salariale', mai 'aumento'.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta l'opinione di Eric Bischoff espressa nel suo podcast riguardo al rinnovo contrattuale di Triple H e le dinamiche creative in TKO.
+[PERF v71] analisi editoriale AI v72: 8.25s
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: triple h, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v62 business/dirigenza, v62 categoria business, v72.3 cap opinion
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise
+[FIX v72.3] Event key business rimossa per OPINION/WWE: event:business:tko-financials -> event:rumor:hofer-eric-bischoff-thinks-triple-h-deserves-a-raise
+[V71] story_signature=stable:eric_bischoff|triple_h|contract|wwe|wrestlemania|tko semantic_status=new_story freshness=0.727
+[PERF v71] WP recent posts dedupe: 1.58s
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:rumor:hofer-eric-bischoff-thinks-triple-h-deserves-a-raise -> event:rumor:hofer-eric-bischoff-thinks-triple-h-deserves-a-raise-followup-hofer-eric-bischoff-thinks-triple-h-deserves-a-raise
+[SKIP] News core già pubblicata da altra fonte: WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise
+[SKIP] news_core_key=business-tko-wrestlemania
+[PENDING] Coda salvata: 1 elementi
+[BOT] News candidate totali: 5 | mode=normal | max nuove=3 | pending pubblicati=0
+[SKIP v78.1] Gia processato in questa run: WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: 'Beyond The Mat' Director Barry Blaustein Dead At 72
+[BOT] semantic_id=beyond-the-mat-director-barry-blaustein-dead-at-72
+[SCORE] iniziale=60 priority=medium
+[PERF v71] scraping articolo: 0.68s
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, image=0, embed=0
+[MODEL v83] Route mode=normal report=False score=60 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=WORLD (8) conf=1.00 model=gemini-3.1-flash-lite | Articolo di natura biografica/necrologio relativo a una figura dell'industria cinematografica legata al wrestling, non rientrante in news di federazioni attive o report.
+[EDITORIAL v72.3] translation_notes=Mantenere i titoli dei film in originale (Beyond the Mat, Coming to America, The Nutty Professor).; Non tradurre i nomi propri dei wrestler.; Usare un tono rispettoso e formale tipico dei necrologi.
+[EDITORIAL v73] final type=OTHER | category=WORLD (8) | Articolo di natura biografica/necrologio relativo a una figura dell'industria cinematografica legata al wrestling, non rientrante in news di federazioni attive o report.
+[PERF v71] analisi editoriale AI v72: 2.18s
+[SCORE] raffinato=65 priority=medium | WWE/main roster, WWE main roster + storyline/evento, morte, show settimanale, non wrestling puro, floor WWE main roster storyline, v62 categoria business, v77 strong-word guardrail
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - 'Beyond The Mat' Director Barry Blaustein Dead At 72
+[V71] story_signature=stable:beyond_the_mat|director_barry_blaustein|report semantic_status=new_story freshness=0.579
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=8
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-2.5-flash-lite
+[PERF v71] traduzione: 8.20s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): È morto a 72 anni Barry Blaustein, regista del documentario Beyond the Mat
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/beyond-the-mat-director-barry-blaustein-dead-at-72-54.jpg
+[MEDIA] Immagine caricata: 4383
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PERF v71] creazione post WordPress: 3.83s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/beyond-the-mat-director-barry-blaustein-dead-at-72-54.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4383
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato ''Beyond The Mat' Director Barry Blaustein Dead At 72': 15.91s
+[OK] Pubblicato: È morto a 72 anni Barry Blaustein, regista del documentario Beyond the Mat
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260512_181905_001_morto-a-72-anni-barry-blaustein-regista-del-documentario-beyond-the-mat_787b1dd4_*.html
+[RUN v85] Pubblicati in questa run: 1/5
+[BOT] Elaborazione: Dave Meltzer Talks TKO Interfering In WWE Booking, Possible Stephen A. Smith Crossover
+[BOT] semantic_id=dave-meltzer-talks-tko-interfering-in-wwe-booking-possible-stephen-a-smith-crossover
+[SCORE] iniziale=58 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[MODEL v83] Route mode=normal report=False score=58 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=0.98 model=gemini-3.1-flash-lite | L'articolo riporta speculazioni e retroscena di Dave Meltzer riguardo l'influenza di TKO sul booking creativo della WWE e il possibile coinvolgimento di Stephen A. Smith.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli e ruoli in inglese se tecnici, ma tradurre 'booking' come 'gestione creativa' o 'scrittura'.; Non tradurre 'h/t' (heard through/hat tip) come 'cappello', usare 'si ringrazia per la trascrizione'.; Attenzione alle quote: riportare fedelmente il pensiero di Meltzer evitando calchi.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta speculazioni e retroscena di Dave Meltzer riguardo l'influenza di TKO sul booking creativo della WWE e il possibile coinvolgimento di Stephen A. Smith.
+[PERF v71] analisi editoriale AI v72: 9.76s
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star lead: cody rhodes, randy orton, nomi forti lead: cody rhodes, randy orton, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, combo top name lead + evento forte, PLE/PPV, opinione generica
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Dave Meltzer Talks TKO Interfering In WWE Booking, Possible Stephen A. Smith Crossover
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:tko-financials -> event:rumor:dave-meltzer-talks-tko-interfering-booking-possible-stephen-a-smith-cr
+[V71] story_signature=dave_meltzer_talks_tko|interfering_in_wwe_booking|possible_stephen|business|wwe|tko|wrestlemania semantic_status=new_story freshness=0.603
+[SKIP] News core già pubblicata da altra fonte: Dave Meltzer Talks TKO Interfering In WWE Booking, Possible Stephen A. Smith Crossover
+[SKIP] news_core_key=business-tko-wrestlemania
+[PENDING] Coda salvata: 1 elementi
+[PERF v71] WP lookup URL esistente: 0.61s
+[BOT] Elaborazione: Ronda Rousey Felt Like 'Someone Else's Impression' Of Herself In WWE
+[BOT] semantic_id=ronda-rousey-felt-like-someone-elses-impression-of-herself-in-wwe
+[SCORE] iniziale=55 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v83] Route mode=normal report=False score=55 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=0.95 model=gemini-3.1-flash-lite | Articolo basato su un'intervista rilasciata da Ronda Rousey riguardante il suo passato in WWE. Non è una preview né un report, ma una notizia di approfondimento post-evento/carriera.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'death throes' letteralmente, usare 'fase calante' o 'agonia'; 'someone else's impression of myself' va reso come 'una parodia di me stessa fatta da qualcun altro'; i 
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Articolo basato su un'intervista rilasciata da Ronda Rousey riguardante il suo passato in WWE. Non è una preview né un report, ma una notizia di approfondimento post-evento/carriera.
+[PERF v71] analisi editoriale AI v72: 19.03s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Ronda Rousey Felt Like 'Someone Else's Impression' Of Herself In WWE
+[SCORE] raffinato=51 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, PLE/PPV, non wrestling puro, trash talk/clickbait forte, v62 ritorno/debutto
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 51/75 - Ronda Rousey Felt Like 'Someone Else's Impression' Of Herself In WWE
+[SKIP v85.1] pre-show spoiler obsoleto pre-Gemini: Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[PENDING] Coda salvata: 1 elementi
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 6 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (28 file)
+===== RUN END [2026-05-12 18:16:45] VERSION [v85_3_gemini_call_and_spoiler_global_gate (4e27498)] =====
+

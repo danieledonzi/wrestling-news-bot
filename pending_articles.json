@@ -41,42 +41,5 @@
     "reason": "wp_down_initial_normal",
     "created_at": 1778586653.288316,
     "attempts": 0
-  },
-  {
-    "url": "https://www.wrestlinginc.com/2170495/wwe-hofer-eric-bischoff-triple-h-deserves-raise/",
-    "title": "WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise",
-    "semantic_id": "wwe-hofer-eric-bischoff-thinks-triple-h-deserves-a-raise",
-    "title_key": "hofer-eric-bischoff-thinks-triple-h-deserves-a-raise",
-    "score": 82,
-    "priority": "high",
-    "event_key": "",
-    "story_signature_v71": "stable:eric_bischoff|triple_h|contract|wwe",
-    "summary": "WWE Chief Content Officer Paul \"Triple H\" Levesque recently signed a contract with WWE, which Hall of Famer Eric Bischoff says is well deserved.",
-    "reasons": [
-      "WWE/main roster",
-      "nomi forti titolo: triple h",
-      "impatto roster/storyline",
-      "WWE main roster + storyline/evento",
-      "contratto",
-      "PLE/PPV",
-      "opinione generica",
-      "v71 freshness=0.678"
-    ],
-    "score_reasons": [
-      "WWE/main roster",
-      "nomi forti titolo: triple h",
-      "impatto roster/storyline",
-      "WWE main roster + storyline/evento",
-      "contratto",
-      "PLE/PPV",
-      "opinione generica",
-      "v71 freshness=0.678"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1778614200.0,
-    "status": "raw",
-    "reason": "wp_down_initial_normal",
-    "created_at": 1778606535.3321729,
-    "attempts": 0
   }
 ]
