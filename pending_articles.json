@@ -41,5 +41,110 @@
     "reason": "wp_down_initial_normal",
     "created_at": 1778586653.288316,
     "attempts": 0
+  },
+  {
+    "url": "https://www.wrestlinginc.com/2170495/wwe-hofer-eric-bischoff-triple-h-deserves-raise/",
+    "title": "WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise",
+    "semantic_id": "wwe-hofer-eric-bischoff-thinks-triple-h-deserves-a-raise",
+    "title_key": "hofer-eric-bischoff-thinks-triple-h-deserves-a-raise",
+    "score": 82,
+    "priority": "high",
+    "event_key": "",
+    "story_signature_v71": "stable:eric_bischoff|triple_h|contract|wwe",
+    "summary": "WWE Chief Content Officer Paul \"Triple H\" Levesque recently signed a contract with WWE, which Hall of Famer Eric Bischoff says is well deserved.",
+    "reasons": [
+      "WWE/main roster",
+      "nomi forti titolo: triple h",
+      "impatto roster/storyline",
+      "WWE main roster + storyline/evento",
+      "contratto",
+      "PLE/PPV",
+      "opinione generica",
+      "v71 freshness=0.678"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "nomi forti titolo: triple h",
+      "impatto roster/storyline",
+      "WWE main roster + storyline/evento",
+      "contratto",
+      "PLE/PPV",
+      "opinione generica",
+      "v71 freshness=0.678"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778614200.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778606535.3321729,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.wrestlinginc.com/2170485/ronda-rouse-felt-someone-else-impression-herself-wwe/",
+    "title": "Ronda Rousey Felt Like 'Someone Else's Impression' Of Herself In WWE",
+    "semantic_id": "ronda-rousey-felt-like-someone-elses-impression-of-herself-in-wwe",
+    "title_key": "ronda-rousey-felt-like-someone-else-s-impression-herself",
+    "score": 55,
+    "priority": "low",
+    "event_key": "",
+    "story_signature_v71": "ronda_rousey_felt_like|someone_else_s_impression_of|herself_in_wwe|update|wwe",
+    "summary": "Ronda Rousey has discussed why she was not pleased with her run in WWE, particularly how she wasn't able to show her true self.",
+    "reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "PLE/PPV",
+      "floor WWE main roster storyline",
+      "v71 freshness=0.555",
+      "v48 tier2: 55-74"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "PLE/PPV",
+      "floor WWE main roster storyline",
+      "v71 freshness=0.555",
+      "v48 tier2: 55-74"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778612400.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778606535.5221663,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.wrestlinginc.com/2170388/wwe-raw-oba-femi-open-challenge-los-garza/",
+    "title": "Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed",
+    "semantic_id": "spoiler-oba-femis-latest-wwe-raw-open-challenge-opponent-reportedly-revealed",
+    "title_key": "spoiler-oba-femi-s-latest-raw-open-challenge-opponent",
+    "score": 47,
+    "priority": "low",
+    "event_key": "",
+    "story_signature_v71": "oba_femi|oba_femi_s_latest_wwe|raw_open_challenge_opponent|report|wwe|raw",
+    "summary": "Oba Femi's latest \"WWE Raw\" open challenge opponent has reportedly been revealed.",
+    "reasons": [
+      "WWE/main roster",
+      "nomi forti titolo: oba femi",
+      "rumor/backstage",
+      "show settimanale",
+      "v79.1.4 pre-show spoiler obsoleto cap",
+      "v71 freshness=0.396",
+      "v48 tier3: 45-54 contestuale"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "nomi forti titolo: oba femi",
+      "rumor/backstage",
+      "show settimanale",
+      "v79.1.4 pre-show spoiler obsoleto cap",
+      "v71 freshness=0.396",
+      "v48 tier3: 45-54 contestuale"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1778566452.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1778606536.9205465,
+    "attempts": 0
   }
 ]

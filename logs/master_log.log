@@ -8593,3 +8593,84 @@
 [REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (22 file)
 ===== RUN END [2026-05-12 17:05:18] VERSION [v85_publish_safety_atomic_state_total_cap (74c45ea)] =====
 
+
+===== RUN START [2026-05-12 17:20:57] VERSION [v85_1_anti_waste_spoiler_log_cleanup (fde9428)] =====
+[WP] Health check API timeout | tentativo 1/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f59f25ceec0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Health check API timeout | tentativo 2/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f59f25cf190>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Health check API timeout | tentativo 3/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f59f25cf490>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] WordPress/API non disponibile dopo 3 tentativi: api_timeout: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f59f25cf490>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (28/75): WWE HOFer Hulk Hogan's Former Accountant Reportedly Indicted For Embezzlement
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (38/75): Ronda Rousey Enjoyed Freedom Of Her AEW Appearance
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170961/wwe-backlash-bully-ray-roman-reigns-jacob-fatu-main-event-moment-bothered/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (26/75): Dana White Confirms Special Belt Will Be Awarded To UFC Freedom 250 Winners
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (18/75): AEW Suing Triller TV Over Late Payments
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170832/tko-wwe-ufc-arizona-landmark-deal/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (39/75): Angel Garza Thanks Fans In Cryptic Post Following WWE Raw Squash Against Oba Femi
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v81.1] Cap light name-driven item 20->20 - Jacob Fatu Recalls Failed WWE Tryout Alongside AEW's Eddie Kingston
+[SKIP] Score sotto soglia editoriale (20/75): Jacob Fatu Recalls Failed WWE Tryout Alongside AEW's Eddie Kingston
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (0/75): WWE RAW 5/11/2026: 3 Things We Hated & 3 Things We Loved
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): UFC's Justin Gaethje Calls Ilia Topuria The '2nd Toughest Test Of Ever'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Dana White Breaks Down $1 Million Bonus System For UFC White House Card
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (57/75): Jacob Fatu Destroys Roman Reigns Yet Again, Takes Out Entire Bloodline On WWE Raw
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Josh Hokit Kicked Out Of UFC Freedom 250 Press Conference
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170427/wwe-raw-dominik-mysterio-aaa-mega-championship-el-grande-americano/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (56/75): Two Championship Matches Announced For Upcoming WWE Saturday Night's Main Event
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170416/wwe-raw-asuka-future-up-in-the-air-michael-cole-iyo-sky/
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 47->47 - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SKIP v71] Story signature gia' in history: stable:roman_reigns|announcement|wwe|raw|backlash - Roman Reigns Announced For Multiple WWE Raw Dates In June Following Backlash Victory
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP v71] Story signature gia' in history: stable:stephanie_vaquer|aaa|legal - Stephanie Vaquer's Ex-Boyfriend El Cuatrero Sentenced to Nearly 13 Years in Prison
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (15/75): Original Plans For Dark Side of the Ring Season 7's Three-Part TNA Story Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/london-mayors-office-addresses-possibility-hosting-wrestlemania-2028/
+[SKIP] URL già in history: https://www.ringsidenews.com/bully-ray-gets-hit-community-note-claiming-eddie-guerrero-tribute-incident-work/
+[SKIP] URL già in history: https://www.ringsidenews.com/indie-wrestler-accuses-wwe-stealing-his-heavy-metal-gimmick-lizzy-rain/
+[SKIP] URL già in history: https://www.ringsidenews.com/sami-zayn-fought-wwe-creative-heel-turn-plans/
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-abandoned-plans-major-kenny-omega-feud/
+[SKIP] URL già in history: https://www.ringsidenews.com/people-unhappy-pat-mcafees-wwe-involvement-more-favorable-toward-stephen-smith/
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v81.1] Cap future card announcement 56->56 - WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (51/75): WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] URL già in history: https://www.ringsidenews.com/whats-really-going-swerve-strickland-deleted-tweet/
+[SKIP] URL già in history: https://www.ringsidenews.com/los-garza-spark-speculation-about-their-wwe-future-cryptic-tweets-raw/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Preview/show announcement scaduta: Real Reason Behind Asuka Taking Time Away From WWE Revealed
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (51/75): Title Match & More Booked For 5/18 WWE RAW
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (52/75): Jacob Fatu Destroys Roman Reigns Instead Of Acknowledging Him During 5/11 WWE RAW
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-adds-multiple-title-matches-saturday-nights-main-event-during-511-raw/
+[SCORE] 82 high - WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise | WWE/main roster, nomi forti titolo: triple h, impatto roster/storyline, WWE main roster + storyline/evento, contratto, PLE/PPV, opinione generica, v71 freshness=0.678
+[SCORE] 55 low - Ronda Rousey Felt Like 'Someone Else's Impression' Of Herself In WWE | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v71 freshness=0.555, v48 tier2: 55-74
+[SCORE] 47 low - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed | WWE/main roster, nomi forti titolo: oba femi, rumor/backstage, show settimanale, v79.1.4 pre-show spoiler obsoleto cap, v71 freshness=0.396, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[BOT] WordPress offline: assegno score e salvo solo i candidati che sarebbero stati pubblicati, senza chiamare Gemini.
+[PENDING] Coda salvata: 2 elementi
+[PENDING] Salvata news high (82): WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise
+[PENDING] Coda salvata: 3 elementi
+[PENDING] Salvata news low (55): Ronda Rousey Felt Like 'Someone Else's Impression' Of Herself In WWE
+[PENDING] Coda salvata: 4 elementi
+[PENDING] Salvata news low (47): Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[PENDING] Candidati salvati per dopo: 3
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (23 file)
+===== RUN END [2026-05-12 17:20:57] VERSION [v85_1_anti_waste_spoiler_log_cleanup (fde9428)] =====
+
