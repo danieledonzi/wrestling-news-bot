@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-12 21:21:29",
-  "last_bot_version": "v85_5_performance_fast_history_pre_gemini_gates (ff9d5c5)",
-  "updated_at": "2026-05-12T21:22:01",
-  "total_items": 9,
+  "last_run_id": "2026-05-12 23:03:41",
+  "last_bot_version": "v85_5_performance_fast_history_pre_gemini_gates (451976e)",
+  "updated_at": "2026-05-12T23:04:45",
+  "total_items": 10,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -76,6 +76,14 @@
       "original_html_file": "20260512_195631_001_l-ex-contabile-di-hulk-hogan-accusata-di-frode-federale-per-presunto-furto-di-89_deef9137_original.html",
       "final_html_file": "20260512_195631_001_l-ex-contabile-di-hulk-hogan-accusata-di-frode-federale-per-presunto-furto-di-89_deef9137_final.html",
       "metadata_file": "20260512_195631_001_l-ex-contabile-di-hulk-hogan-accusata-di-frode-federale-per-presunto-furto-di-89_deef9137_metadata.json"
+    },
+    {
+      "run_id": "2026-05-12 23:03:41",
+      "title": "El Cuatrero condannato a 12 anni e 8 mesi per il tentato femminicidio di Stephanie Vaquer",
+      "url": "https://www.wrestlinginc.com/2171385/cuatrero-sentenced-12-years-femicide-wwe-stephanie-vaquer/",
+      "original_html_file": "20260512_230445_001_el-cuatrero-condannato-a-12-anni-e-8-mesi-per-il-tentato-femminicidio-di-stephan_55316fd4_original.html",
+      "final_html_file": "20260512_230445_001_el-cuatrero-condannato-a-12-anni-e-8-mesi-per-il-tentato-femminicidio-di-stephan_55316fd4_final.html",
+      "metadata_file": "20260512_230445_001_el-cuatrero-condannato-a-12-anni-e-8-mesi-per-il-tentato-femminicidio-di-stephan_55316fd4_metadata.json"
     }
   ]
 }

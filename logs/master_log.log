@@ -9387,3 +9387,165 @@
 [REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (41 file)
 ===== RUN END [2026-05-12 21:21:29] VERSION [v85_5_performance_fast_history_pre_gemini_gates (ff9d5c5)] =====
 
+[BOOT v85.5] __main__ reached epoch=1778627022.412
+
+===== RUN START [2026-05-12 23:03:41] VERSION [v85_5_performance_fast_history_pre_gemini_gates (451976e)] =====
+[BOOT v85.4] entro in run_bot epoch=1778627022.413
+[BOOT v85.4] prima health check WP epoch=1778627022.415
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (54/75): WWE Raw Viewership & Ratings Report, 5/4/2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Chelsea Green Shares Latest Health Update One Week After Heart Procedure
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (53/75): Beyond The Mat Director Barry Blaustein Dies At 72
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Ronda Rousey Expecting Gina Carano Bout To Be 'Biggest MMA Fight Of All Time'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171140/wwe-aew-matt-hardy-ted-turner-pushing-pro-wrestling-forward/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[PERF v71] WP lookup event_key: 1.08s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (28/75): WWE HOFer Hulk Hogan's Former Accountant Reportedly Indicted For Embezzlement
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (38/75): Ronda Rousey Enjoyed Freedom Of Her AEW Appearance
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170961/wwe-backlash-bully-ray-roman-reigns-jacob-fatu-main-event-moment-bothered/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (26/75): Dana White Confirms Special Belt Will Be Awarded To UFC Freedom 250 Winners
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (18/75): AEW Suing Triller TV Over Late Payments
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170832/tko-wwe-ufc-arizona-landmark-deal/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (39/75): Angel Garza Thanks Fans In Cryptic Post Following WWE Raw Squash Against Oba Femi
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (50/75): Scott Steiner's Son Brock Rechsteiner Signs With NFL Team
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (31/75): Swerve Strickland Calls Out Modern Wrestlers Getting Contracts Before Mastering Their Craft
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (57/75): Chelsea Green Gives Recovery Update After Heart Procedure
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (0/75): Val Venis Shuts Down Claim The Undertaker Called Israel a Bastard State
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (49/75): Randy Orton Wants Fan To Get His WrestleMania Gear After Huge Card Sale
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): WWE Raw Ranks #7 Globally on Netflix for May 4, 2026
+[SKIP] URL già in history: https://www.ringsidenews.com/hulk-hogans-former-accountant-hit-federal-fraud-charges-alleged-890k-theft/
+[SKIP] URL già in history: https://www.ringsidenews.com/footage-shows-roman-reigns-possibly-injured-brutal-raw-attack/
+[SKIP] URL già in history: https://www.ringsidenews.com/beyond-mat-director-barry-blaustein-dead-72/
+[SPOILER v79.1] Gemini classifier: gemini-2.5-flash
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (57/75): Trick Williams Receives Huge Honor as South Carolina Declares May 12 as 'Trick Williams Day'
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (57/75): Stephanie Vaquer's Ex-Boyfriend El Cuatrero Sentenced to Nearly 13 Years in Prison
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (15/75): Original Plans For Dark Side of the Ring Season 7's Three-Part TNA Story Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/london-mayors-office-addresses-possibility-hosting-wrestlemania-2028/
+[SKIP] URL già in history: https://www.ringsidenews.com/bully-ray-gets-hit-community-note-claiming-eddie-guerrero-tribute-incident-work/
+[SKIP] URL già in history: https://www.ringsidenews.com/indie-wrestler-accuses-wwe-stealing-his-heavy-metal-gimmick-lizzy-rain/
+[SCORE] 82 high - WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise | WWE/main roster, nomi forti titolo: triple h, impatto roster/storyline, WWE main roster + storyline/evento, contratto, PLE/PPV, opinione generica, v71 freshness=0.607
+[SCORE] 80 high - WWE NXT Results 5/12 - Zaria & Nikkita Lyons Face Tatum Paxley & Lizzy Rain, More | WWE/main roster, WWE main roster + storyline/evento, show settimanale, floor WWE main roster storyline, v75 hard results report, v77 hard report protected, v71 freshness=0.609
+[SCORE] 58 low - Dave Meltzer Talks TKO Interfering In WWE Booking, Possible Stephen A. Smith Crossover | WWE/main roster, business/contratti WWE-TKO, intervista/opinione, opinione generica, v62 categoria business, v71 freshness=0.543, v48 tier2: 55-74
+[SCORE] 55 low - London Mayor's Office: 'No Specific Discussions' About Hosting WWE WrestleMania 44 | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v71 freshness=0.552, v48 tier2: 55-74
+[SCORE] 55 low - Ronda Rousey Felt Like 'Someone Else's Impression' Of Herself In WWE | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v71 freshness=0.484, v48 tier2: 55-74
+[SCORE] 50 low - Cuatrero Formally Sentenced For Attempted Femicide Against WWE's Stephanie Vaquer | WWE/main roster, v62 evento legale grave, v71 freshness=0.583, v48 tier3: 45-54 contestuale
+[SCORE] 47 low - AEW's Young Bucks Tease 'A Lot Of Dream Matches' That Could Happen In 2026 | AEW, titolo/championship, PLE/PPV, v71 freshness=0.588, v48 tier3: 45-54 contestuale
+[SCORE] 45 low - Bully Ray Says Jacob Fatu Is 'In A Really Bad Spot' Following WWE Raw | WWE/main roster, top star lead: roman reigns, nomi forti titolo: bully ray, intervista/opinione, show settimanale, opinione generica, v71 freshness=0.56, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 2 news >=80
+[MODEL v83] Route mode=normal report=False score=0 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 1
+[PERF v71] WP lookup URL esistente: 0.74s
+[BOT] Elaborazione: WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise
+[BOT] semantic_id=wwe-hofer-eric-bischoff-thinks-triple-h-deserves-a-raise
+[SCORE] iniziale=82 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[MODEL v83] Route mode=normal report=False score=82 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta l'opinione di Eric Bischoff espressa nel suo podcast riguardo al contratto di Triple H e alle dinamiche creative tra TKO e WWE.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Chief Content Officer' e i nomi dei PLE (WrestleMania).; 'Raise' va tradotto come 'aumento di stipendio'.; Evitare calchi come 'forgotten more than yours truly', tradurre con un senso fluido riguardante l'esperienza superiore di Emanuel.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta l'opinione di Eric Bischoff espressa nel suo podcast riguardo al contratto di Triple H e alle dinamiche creative tra TKO e WWE.
+[PERF v71] analisi editoriale AI v72: 3.21s
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: triple h, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v62 business/dirigenza, v62 categoria business, v72.3 cap opinion
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise
+[FIX v72.3] Event key business rimossa per OPINION/WWE: event:business:tko-financials -> event:rumor:hofer-eric-bischoff-thinks-triple-h-deserves-a-raise
+[V71] story_signature=stable:eric_bischoff|triple_h|contract|wwe|wrestlemania|tko semantic_status=new_story freshness=0.727
+[PERF v71] WP recent posts dedupe: 0.79s
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:rumor:hofer-eric-bischoff-thinks-triple-h-deserves-a-raise -> event:rumor:hofer-eric-bischoff-thinks-triple-h-deserves-a-raise-followup-hofer-eric-bischoff-thinks-triple-h-deserves-a-raise
+[SKIP] News core già pubblicata da altra fonte: WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise
+[SKIP] news_core_key=business-tko-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] News candidate totali: 8 | mode=normal | max nuove=3 | pending pubblicati=0
+[SKIP v78.1] Gia processato in questa run: WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: WWE NXT Results 5/12 - Zaria & Nikkita Lyons Face Tatum Paxley & Lizzy Rain, More
+[BOT] semantic_id=wwe-nxt-results-512-zaria-nikkita-lyons-face-tatum-paxley-lizzy-rain-more
+[SCORE] iniziale=80 priority=high
+[SCRAPE] Articolo results rilevato: testo completo (1717 caratteri)
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[PERF v71] WP lookup event_key: 0.68s
+[REPORT v84.1] Skip: report gia confermato su WP: report:wwe-nxt-2026-05-12
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.5] low_value_opinion_pre_gemini: Dave Meltzer Talks TKO Interfering In WWE Booking, Possible Stephen A. Smith Crossover
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.5] news_core_history_pre_gemini:schedule-wrestlemania-london: London Mayor's Office: 'No Specific Discussions' About Hosting WWE WrestleMania 44
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.5] low_value_opinion_pre_gemini: Ronda Rousey Felt Like 'Someone Else's Impression' Of Herself In WWE
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Cuatrero Formally Sentenced For Attempted Femicide Against WWE's Stephanie Vaquer
+[BOT] semantic_id=cuatrero-formally-sentenced-for-attempted-femicide-against-wwes-stephanie-vaquer
+[SCORE] iniziale=50 priority=low
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v83] Route mode=normal report=False score=50 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WORLD (8) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta l'esito di un procedimento giudiziario concluso riguardante una lottatrice attiva in WWE. Non è un evento di wrestling né un report di show.
+[EDITORIAL v72.3] translation_notes=Mantenere i termini tecnici legali precisi (femicide -> tentato femminicidio).; Non tradurre titoli come 'Luchador' o 'Women's World Champion'.; Trattare il testo con il massimo riserbo e serietà editoriale dato il tema della cronaca nera.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WORLD (8) | L'articolo riporta l'esito di un procedimento giudiziario concluso riguardante una lottatrice attiva in WWE. Non è un evento di wrestling né un report di show.
+[PERF v71] analisi editoriale AI v72: 3.84s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Cuatrero Formally Sentenced For Attempted Femicide Against WWE's Stephanie Vaquer
+[SCORE] raffinato=100 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, evento legale/controversia, PLE/PPV, v62 evento legale grave
+[V71] story_signature=stable:stephanie_vaquer|outcome|wwe semantic_status=new_story freshness=0.933
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=5
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/cuatrero-formally-sentenced-for-attempted-femicide-against-wwes-stephanie-vaquer/intro-1778619120.jpg
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-2.5-flash-lite
+[PERF v71] traduzione: 4.61s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): El Cuatrero condannato a 12 anni e 8 mesi per il tentato femminicidio di Stephanie Vaquer
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/cuatrero-formally-sentenced-for-attempted-femicide-against-wwes-stephanie-vaquer/l-intro-1778619120.jpg
+[MEDIA] Immagine caricata: 4396
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PERF v71] creazione post WordPress: 24.20s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/cuatrero-formally-sentenced-for-attempted-femicide-against-wwes-stephanie-vaquer/l-intro-1778619120.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4396
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Cuatrero Formally Sentenced For Attempted Femicide Against W': 33.69s
+[OK] Pubblicato: El Cuatrero condannato a 12 anni e 8 mesi per il tentato femminicidio di Stephanie Vaquer
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260512_230445_001_el-cuatrero-condannato-a-12-anni-e-8-mesi-per-il-tentato-femminicidio-di-stephan_55316fd4_*.html
+[RUN v85] Pubblicati in questa run: 1/5
+[SKIP v85.5] low_score_pre_gemini:47: AEW's Young Bucks Tease 'A Lot Of Dream Matches' That Could Happen In 2026
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.5] low_value_opinion_pre_gemini: Bully Ray Says Jacob Fatu Is 'In A Really Bad Spot' Following WWE Raw
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 8 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (45 file)
+===== RUN END [2026-05-12 23:03:41] VERSION [v85_5_performance_fast_history_pre_gemini_gates (451976e)] =====
+
