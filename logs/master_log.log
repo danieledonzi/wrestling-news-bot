@@ -6767,3 +6767,145 @@
 [REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (129 file)
 ===== RUN END [2026-05-12 02:29:14] VERSION [v83_quality_routing_and_smart_preservation (a21ee0e)] =====
 
+
+===== RUN START [2026-05-12 06:09:11] VERSION [v83_quality_routing_and_smart_preservation (0d36080)] =====
+[WP] Health check API timeout | tentativo 1/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f78f1d775e0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Root /wp-json/ non raggiungibile | tentativo 1/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f78f1d779a0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Health check API timeout | tentativo 2/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f78f1d77bb0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Root /wp-json/ non raggiungibile | tentativo 2/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f78f1d77fa0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Health check API timeout | tentativo 3/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f78f1c841f0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Root /wp-json/ non raggiungibile | tentativo 3/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f78f1d77fd0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] WordPress/API non disponibile dopo 3 tentativi: api_timeout: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f78f1c841f0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (0/75): WWE RAW 5/11/2026: 3 Things We Hated & 3 Things We Loved
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): UFC's Justin Gaethje Calls Ilia Topuria The '2nd Toughest Test Of Ever'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Dana White Breaks Down $1 Million Bonus System For UFC White House Card
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (57/75): Jacob Fatu Destroys Roman Reigns Yet Again, Takes Out Entire Bloodline On WWE Raw
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Josh Hokit Kicked Out Of UFC Freedom 250 Press Conference
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SCORE v80.4] AAA major World priority 78->90 - Dominik Mysterio Successfully Defends AAA Mega Championship On WWE Raw
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (56/75): Two Championship Matches Announced For Upcoming WWE Saturday Night's Main Event
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SPOILER v79.1.4] NO: pre-show spoiler obsoleto - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 47->47 - Spoiler: Oba Femi's Latest WWE Raw Open Challenge Opponent Reportedly Revealed
+[SKIP v71] Story signature gia' in history: stable:roman_reigns|announcement|wwe|raw|backlash - Roman Reigns Announced For Multiple WWE Raw Dates In June Following Backlash Victory
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Biggest Winners And Losers Of The Week - 5/11/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170284/brock-lesnar-wwe-active-performer-internally-listed-retirement-alumni/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (56/75): Backstage News On Asuka's Status For Tonight's WWE Raw And Beyond
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): AJ Styles Offers More Detail On Current WWE Scouting Role
+[SKIP] URL sospeso per validation fail recenti: https://www.wrestlinginc.com/2170149/wwe-wrestlemania-ireland-future-potential-backstage-update/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (54/75): TNA Impact Ratings & Viewership Report: 5/7/2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (16/75): Kevin Nash On Bron Breakker: 'When Is WWE Going To Realize That He Is A Steiner?'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (27/75): Booker T Believes New Day Are Heading To AEW, Still 'First-Ballot' WWE HOFers
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (51/75): Title Match & More Booked For 5/18 WWE RAW
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (52/75): Jacob Fatu Destroys Roman Reigns Instead Of Acknowledging Him During 5/11 WWE RAW
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] CACHE: NO - hard auto-no editorial type/report
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - WWE RAW Spoiler Lineup for May 11, 2026: Full Match Card and Backstage Notes Revealed
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - WWE RAW Spoiler Lineup for May 11, 2026: Full Match Card and Backstage Notes Revealed
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - WWE RAW Spoiler Lineup for May 11, 2026: Full Match Card and Backstage Notes Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - WWE RAW Spoiler Lineup for May 11, 2026: Full Match Card and Backstage Notes Revealed
+[SCORE v81.1] Cap future card announcement 56->56 - WWE RAW Spoiler Lineup for May 11, 2026: Full Match Card and Backstage Notes Revealed
+[SKIP] Score sotto soglia editoriale (51/75): WWE RAW Spoiler Lineup for May 11, 2026: Full Match Card and Backstage Notes Revealed
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (51/75): Last-Minute Update on Asuka's Status for May 11 WWE RAW After Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/thekla-explains-why-signing-new-aew-multi-year-deal-no-brainer/
+[SKIP] URL già in history: https://www.ringsidenews.com/thekla-addresses-kairi-sane-potentially-joining-aew-wwe-release/
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-files-5-million-lawsuit-against-trillertv-unpaid-revenue/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SPOILER v79.1.1] CACHE: NO - nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (49/75): TNA iMPACT Viewership Sees Massive Drop on May 7, 2026
+[SCORE] 100 high - Asuka Passes The Torch To IYO Sky During 5/11 WWE RAW | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, PLE/PPV, v62 ritorno/debutto, v71 freshness=0.634
+[SCORE] 100 high - WWE RAW Results, Highlights and Key Moments for May 11, 2026 | WWE/main roster, top star lead: roman reigns, nomi forti lead: roman reigns, oba femi, business/contratti WWE-TKO, WWE main roster + storyline/evento, business/media rights, combo top name lead + evento forte, PLE/PPV, v62 media rights/streaming, v62 categoria business, v71 freshness=0.613
+[SCORE] 100 high - Kofi Kingston and Xavier Woods Book First Major Appearances After WWE Exit | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, v62 categoria business, v71 freshness=0.719
+[SCORE] 100 high - WWE Confirms New June RAW Dates for Roman Reigns After Schedule Changes | WWE/main roster, top star titolo: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 categoria business, v71 freshness=0.453
+[SCORE] 90 high - Dominik Mysterio Successfully Defends AAA Mega Championship On WWE Raw | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, v62 titolo/championship, v80.4 AAA major World priority 78->90, v71 freshness=0.562
+[SCORE] 80 high - WWE Adds Multiple Title Matches To Saturday Night's Main Event During 5/11 RAW | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.544
+[SCORE] 80 high - WWE Raw Results 5/11 - Six Man Tag Team Match, Acknowledgement Ceremony & More | WWE/main roster, top star lead: roman reigns, nomi forti lead: roman reigns, WWE main roster + storyline/evento, show settimanale, v75 hard results report, v77 hard report protected, v71 freshness=0.52
+[SCORE] 76 medium - Swerve Strickland Deletes Tweet Questioning Why He Isn't on AEW TV | AEW, impatto roster/storyline, ritorno/debutto, show settimanale, v62 media rights/streaming, v71 source reliability soft penalty, v71 freshness=0.598
+[SCORE] 66 medium - Michael Cole Says Asuka's 'Future Is Up In The Air' After Farewell Segment On WWE Raw | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, rumor/backstage, show settimanale, v71 freshness=0.553, v48 tier2: 55-74
+[SCORE] 63 medium - WWE Addresses Asuka's Current Status During 5/11 RAW | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v68 cap opinion senza news concreta, v71 source reliability soft penalty, v71 freshness=0.639, v48 tier2: 55-74
+[MODE] Storm mode attiva: 5 news >=90, 7 news >=80
+[BOT] WordPress offline: assegno score e salvo solo i candidati che sarebbero stati pubblicati, senza chiamare Gemini.
+[PENDING] Coda salvata: 6 elementi
+[PENDING] Salvata news high (100): Asuka Passes The Torch To IYO Sky During 5/11 WWE RAW
+[PENDING] Coda salvata: 7 elementi
+[PENDING] Salvata news high (100): WWE RAW Results, Highlights and Key Moments for May 11, 2026
+[PENDING] Coda salvata: 8 elementi
+[PENDING] Salvata news high (100): Kofi Kingston and Xavier Woods Book First Major Appearances After WWE Exit
+[PENDING] Coda salvata: 9 elementi
+[PENDING] Salvata news high (100): WWE Confirms New June RAW Dates for Roman Reigns After Schedule Changes
+[PENDING] Già in coda per event_key/URL: Dominik Mysterio Successfully Defends AAA Mega Championship On WWE Raw
+[PENDING] Candidati salvati per dopo: 5
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (130 file)
+===== RUN END [2026-05-12 06:09:11] VERSION [v83_quality_routing_and_smart_preservation (0d36080)] =====
+
