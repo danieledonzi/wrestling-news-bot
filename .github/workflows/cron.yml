@@ -32,6 +32,9 @@ jobs:
           pip install --upgrade pip
           pip install feedparser requests beautifulsoup4 google-genai
 
+      - name: Pre bot timestamp
+        run: date -u
+
       - name: Run bot
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
@@ -77,7 +80,14 @@ jobs:
           V85_1_OPINION_REFINE_SKIP_THRESHOLD: "65"
           V85_1_MODEL_MAX_503_PER_ARTICLE: "2"
           V85_3_GLOBAL_SPOILER_GATE_ENABLED: "1"
+          V85_4_SKIPPED_HISTORY_ENABLED: "1"
+          V85_4_BOOT_DIAGNOSTICS_ENABLED: "1"
+          SKIPPED_HISTORY_FILE: skipped_history.json
         run: python bot.py
+
+      - name: Post bot timestamp
+        if: always()
+        run: date -u
 
       - name: Upload master log
         if: always()
