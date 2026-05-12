@@ -9114,3 +9114,92 @@
 [REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (35 file)
 ===== RUN END [2026-05-12 18:40:22] VERSION [v85_4_skipped_history_boot_diagnostics (777c3a4)] =====
 
+[BOOT v85.5] __main__ reached epoch=1778612016.102
+
+===== RUN START [2026-05-12 18:53:34] VERSION [v85_5_performance_fast_history_pre_gemini_gates (10a684f)] =====
+[BOOT v85.4] entro in run_bot epoch=1778612016.102
+[BOOT v85.4] prima health check WP epoch=1778612016.105
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (0/75): Ronda Rousey Expecting Gina Carano Bout To Be 'Biggest MMA Fight Of All Time'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171140/wwe-aew-matt-hardy-ted-turner-pushing-pro-wrestling-forward/
+[PERF v71] WP lookup event_key: 1.21s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (28/75): WWE HOFer Hulk Hogan's Former Accountant Reportedly Indicted For Embezzlement
+[SKIP] Score sotto soglia editoriale (38/75): Ronda Rousey Enjoyed Freedom Of Her AEW Appearance
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170961/wwe-backlash-bully-ray-roman-reigns-jacob-fatu-main-event-moment-bothered/
+[SKIP] Score sotto soglia editoriale (26/75): Dana White Confirms Special Belt Will Be Awarded To UFC Freedom 250 Winners
+[SKIP] Score sotto soglia editoriale (18/75): AEW Suing Triller TV Over Late Payments
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170832/tko-wwe-ufc-arizona-landmark-deal/
+[SKIP] Score sotto soglia editoriale (39/75): Angel Garza Thanks Fans In Cryptic Post Following WWE Raw Squash Against Oba Femi
+[SCORE v81.1] Cap light name-driven item 20->20 - Jacob Fatu Recalls Failed WWE Tryout Alongside AEW's Eddie Kingston
+[SKIP] Score sotto soglia editoriale (20/75): Jacob Fatu Recalls Failed WWE Tryout Alongside AEW's Eddie Kingston
+[SKIP] Score sotto soglia editoriale (0/75): WWE RAW 5/11/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): UFC's Justin Gaethje Calls Ilia Topuria The '2nd Toughest Test Of Ever'
+[SKIP] Score sotto soglia editoriale (0/75): Dana White Breaks Down $1 Million Bonus System For UFC White House Card
+[SKIP] Score sotto soglia editoriale (57/75): Jacob Fatu Destroys Roman Reigns Yet Again, Takes Out Entire Bloodline On WWE Raw
+[SKIP] Score sotto soglia editoriale (0/75): Josh Hokit Kicked Out Of UFC Freedom 250 Press Conference
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170427/wwe-raw-dominik-mysterio-aaa-mega-championship-el-grande-americano/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/footage-shows-roman-reigns-possibly-injured-brutal-raw-attack/
+[SKIP] URL già in history: https://www.ringsidenews.com/beyond-mat-director-barry-blaustein-dead-72/
+[SKIP] Score sotto soglia editoriale (57/75): Trick Williams Receives Huge Honor as South Carolina Declares May 12 as 'Trick Williams Day'
+[SKIP] Score sotto soglia editoriale (57/75): Stephanie Vaquer's Ex-Boyfriend El Cuatrero Sentenced to Nearly 13 Years in Prison
+[SKIP] Score sotto soglia editoriale (15/75): Original Plans For Dark Side of the Ring Season 7's Three-Part TNA Story Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/london-mayors-office-addresses-possibility-hosting-wrestlemania-2028/
+[SKIP] URL già in history: https://www.ringsidenews.com/bully-ray-gets-hit-community-note-claiming-eddie-guerrero-tribute-incident-work/
+[SKIP] URL già in history: https://www.ringsidenews.com/indie-wrestler-accuses-wwe-stealing-his-heavy-metal-gimmick-lizzy-rain/
+[SKIP] URL già in history: https://www.ringsidenews.com/sami-zayn-fought-wwe-creative-heel-turn-plans/
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-abandoned-plans-major-kenny-omega-feud/
+[SKIP] URL già in history: https://www.ringsidenews.com/people-unhappy-pat-mcafees-wwe-involvement-more-favorable-toward-stephen-smith/
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v81.1] Cap future card announcement 56->56 - WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (51/75): WWE NXT Preview for May 12, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] URL già in history: https://www.ringsidenews.com/whats-really-going-swerve-strickland-deleted-tweet/
+[SKIP] URL già in history: https://www.ringsidenews.com/los-garza-spark-speculation-about-their-wwe-future-cryptic-tweets-raw/
+[SKIP] Preview/show announcement scaduta: Real Reason Behind Asuka Taking Time Away From WWE Revealed
+[SCORE] 82 high - WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise | WWE/main roster, nomi forti titolo: triple h, impatto roster/storyline, WWE main roster + storyline/evento, contratto, PLE/PPV, opinione generica, v71 freshness=0.659
+[SCORE] 58 low - Dave Meltzer Talks TKO Interfering In WWE Booking, Possible Stephen A. Smith Crossover | WWE/main roster, business/contratti WWE-TKO, intervista/opinione, opinione generica, v62 categoria business, v71 freshness=0.596, v48 tier2: 55-74
+[SCORE] 55 low - London Mayor's Office: 'No Specific Discussions' About Hosting WWE WrestleMania 44 | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v71 freshness=0.605, v48 tier2: 55-74
+[SCORE] 55 low - Ronda Rousey Felt Like 'Someone Else's Impression' Of Herself In WWE | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v71 freshness=0.536, v48 tier2: 55-74
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[MODEL v83] Route mode=normal report=False score=0 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 1
+[SKIP v85.5] event_history_pre_gemini:event:business:media-rights: WWE RAW Results, Highlights and Key Moments for May 11, 2026
+[PENDING] Coda salvata: 0 elementi
+[BOT] News candidate totali: 4 | mode=normal | max nuove=3 | pending pubblicati=0
+[PERF v71] WP lookup URL esistente: 0.73s
+[BOT] Elaborazione: WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise
+[BOT] semantic_id=wwe-hofer-eric-bischoff-thinks-triple-h-deserves-a-raise
+[SCORE] iniziale=82 priority=high
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[MODEL v83] Route mode=normal report=False score=82 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta l'opinione di Eric Bischoff espressa nel suo podcast riguardante il contratto di Triple H e le dinamiche di gestione TKO.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Chief Content Officer', mantenere il ruolo originale.; 'Raise' va tradotto come 'aumento di stipendio'.; 'Interference' nel contesto di storytelling va reso come 'ingerenza' o 'interferenza creativa'.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta l'opinione di Eric Bischoff espressa nel suo podcast riguardante il contratto di Triple H e le dinamiche di gestione TKO.
+[PERF v71] analisi editoriale AI v72: 8.78s
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: triple h, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v62 business/dirigenza, v62 categoria business, v72.3 cap opinion
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise
+[FIX v72.3] Event key business rimossa per OPINION/WWE: event:business:tko-financials -> event:rumor:hofer-eric-bischoff-thinks-triple-h-deserves-a-raise
+[V71] story_signature=stable:eric_bischoff|triple_h|contract|wwe|wrestlemania|tko semantic_status=new_story freshness=0.659
+[PERF v71] WP recent posts dedupe: 1.10s
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:rumor:hofer-eric-bischoff-thinks-triple-h-deserves-a-raise -> event:rumor:hofer-eric-bischoff-thinks-triple-h-deserves-a-raise-followup-hofer-eric-bischoff-thinks-triple-h-deserves-a-raise
+[SKIP] News core già pubblicata da altra fonte: WWE HOFer Eric Bischoff Thinks Triple H Deserves A Raise
+[SKIP] news_core_key=business-tko-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.5] low_value_opinion_pre_gemini: Dave Meltzer Talks TKO Interfering In WWE Booking, Possible Stephen A. Smith Crossover
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.5] news_core_history_pre_gemini:schedule-wrestlemania-london: London Mayor's Office: 'No Specific Discussions' About Hosting WWE WrestleMania 44
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.5] low_value_opinion_pre_gemini: Ronda Rousey Felt Like 'Someone Else's Impression' Of Herself In WWE
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 5 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (36 file)
+===== RUN END [2026-05-12 18:53:34] VERSION [v85_5_performance_fast_history_pre_gemini_gates (10a684f)] =====
+
