@@ -1,0 +1,2101 @@
+import os
+import re
+import json
+import time
+import mimetypes
+from urllib.parse import urlparse, parse_qs, unquote, urlunparse
+
+import requests
+import feedparser
+from bs4 import BeautifulSoup
+from google import genai
+
+WP_USER = os.getenv("WP_USER")
+WP_PASSWORD = os.getenv("WP_PASSWORD")
+WP_API_URL = os.getenv("WP_URL")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+
+if not WP_USER or not WP_PASSWORD or not WP_API_URL:
+    raise ValueError("Configurazione WordPress incompleta")
+if not GEMINI_API_KEY:
+    raise ValueError("GEMINI_API_KEY mancante")
+
+WP_MEDIA_URL = WP_API_URL.replace("/posts", "/media")
+HISTORY_FILE = "history.txt"
+
+FEEDS = [
+    "https://www.wrestlinginc.com/feed/",
+    "https://www.ringsidenews.com/feed/",
+]
+
+MODEL_CHAIN = [
+    "gemini-2.5-flash-lite",
+    "gemini-2.5-flash",
+]
+
+HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) "
+        "Chrome/120.0.0.0 Safari/537.36"
+    )
+}
+
+SOCIAL_DOMAINS = [
+    "twitter.com", "x.com", "instagram.com",
+    "youtube.com", "youtu.be", "tiktok.com",
+    "facebook.com", "fb.watch", "m.facebook.com"
+]
+
+REQUEST_TIMEOUT_SCRAPE = 12
+REQUEST_TIMEOUT_WP = 20
+REQUEST_TIMEOUT_IMAGE = 10
+REQUEST_TIMEOUT_SOCIAL_CHECK = 8
+
+MAX_POSTS_PER_RUN = 5
+MAX_CANDIDATES_TO_TRY = 12
+MAX_RUN_SECONDS = 15 * 60
+
+MAX_MODEL_FAIL_STREAK = 5
+MAX_VALIDATION_FAIL_STREAK = 12
+MAX_WP_FAIL_STREAK = 3
+
+MODEL_COOLDOWN_THRESHOLD = 4
+MAX_SOURCE_FAILS_PER_DOMAIN = 3
+
+STOPWORDS = {
+    "wwe", "aew", "tna", "nxt", "ufc", "mma", "mlw",
+    "wrestlemania", "night", "title", "titles", "match", "matches",
+    "wins", "win", "revealed", "reportedly", "plans",
+    "sunday", "saturday", "2026", "42", "vs", "at", "for", "the",
+    "and", "of", "to", "in", "on", "with", "after", "before",
+    "from", "new", "former", "status", "original", "internal",
+    "beats", "defeats", "conquers", "retains", "claims", "announces",
+    "things", "week", "biggest", "winners", "losers", "report"
+}
+
+NAME_STOPWORDS = {
+    "WWE", "AEW", "NXT", "TNA", "UFC", "MMA", "MLW",
+    "WrestleMania", "Night", "Title", "Sunday", "Saturday",
+    "Raw", "SmackDown", "Collision", "Dynamite", "Rampage"
+}
+
+STRONG_NAMES = [
+    "roman reigns", "cm punk", "brock lesnar", "rhea ripley",
+    "jade cargill", "trick williams", "cody rhodes", "oba femi",
+    "triple h", "randy orton", "bella twins", "nikki bella", "brie bella",
+    "john cena", "the rock", "undertaker", "becky lynch", "seth rollins",
+    "logan paul", "danhausen", "booker t", "bully ray", "tommy dreamer",
+]
+
+TOP_STAR_NAMES = [
+    "john cena", "cm punk", "roman reigns", "brock lesnar", "cody rhodes",
+    "rhea ripley", "becky lynch", "randy orton", "undertaker", "the rock",
+]
+
+BODY_BAD_PATTERNS = [
+    "il testo originale",
+    "non specifica",
+    "non è chiaro",
+    "the original text",
+    "the source text",
+    "does not specify",
+    "it is not clear",
+    "ringside news",
+    "wrestling inc",
+    "copertura live",
+    "hub dedicato",
+    "share your thoughts",
+    "stay tuned",
+]
+
+SOURCE_PROMO_PATTERNS = [
+    r"ringside\s+news",
+    r"wrestling\s+inc",
+    r"wrestlinginc",
+    r"continuer(à|a)\s+a\s+(fornire|seguire|coprire)",
+    r"copertura\s+live",
+    r"copertura\s+punto\s+per\s+punto",
+    r"hub\s+dedicato",
+    r"resta(te)?\s+sintonizzat",
+    r"condivid(i|ete)\s+(la tua|le vostre)?\s*(opinione|opinioni|pensieri)",
+    r"sezione\s+commenti",
+    r"commenti\s+qui\s+sotto",
+    r"fateci\s+sapere",
+]
+
+SOURCE_PROMO_RE = re.compile("|".join(SOURCE_PROMO_PATTERNS), re.I)
+
+client = genai.Client(api_key=GEMINI_API_KEY)
+
+session = requests.Session()
+session.headers.update(HEADERS)
+session.headers.update({
+    "Accept": "application/json",
+    "Cache-Control": "no-cache"
+})
+
+model_fail_counts = {model: 0 for model in MODEL_CHAIN}
+
+
+def load_history():
+    history = {
+        "urls": set(),
+        "semantic_ids": set(),
+        "title_keys": set(),
+        "story_fingerprints": set(),
+        "news_core_keys": set(),
+    }
+
+    if not os.path.exists(HISTORY_FILE):
+        return history
+
+    try:
+        with open(HISTORY_FILE, "r", encoding="utf-8") as f:
+            for line in f.read().splitlines():
+                line = line.strip()
+                if not line:
+                    continue
+
+                parts = line.split("|")
+
+                if len(parts) >= 1 and parts[0].strip():
+                    history["urls"].add(parts[0].strip())
+                if len(parts) >= 2 and parts[1].strip():
+                    history["semantic_ids"].add(parts[1].strip())
+                if len(parts) >= 3 and parts[2].strip():
+                    history["title_keys"].add(parts[2].strip())
+                if len(parts) >= 4 and parts[3].strip():
+                    history["story_fingerprints"].add(parts[3].strip())
+                if len(parts) >= 5 and parts[4].strip():
+                    history["news_core_keys"].add(parts[4].strip())
+
+    except Exception as e:
+        print(f"[HISTORY] Errore lettura history: {e}")
+
+    return history
+
+
+def save_to_history(url, semantic_id, title_key="", story_fingerprint="", news_core_key=""):
+    records = []
+
+    if os.path.exists(HISTORY_FILE):
+        try:
+            with open(HISTORY_FILE, "r", encoding="utf-8") as f:
+                records = [line.strip() for line in f.read().splitlines() if line.strip()]
+        except Exception as e:
+            print(f"[HISTORY] Errore lettura pre-salvataggio: {e}")
+
+    new_record = f"{url}|{semantic_id}|{title_key}|{story_fingerprint}|{news_core_key}".rstrip("|")
+
+    if new_record not in records:
+        records.append(new_record)
+
+    records = records[-1500:]
+
+    try:
+        with open(HISTORY_FILE, "w", encoding="utf-8") as f:
+            f.write("\n".join(records) + "\n")
+    except Exception as e:
+        print(f"[HISTORY] Errore scrittura history: {e}")
+
+
+def normalize_whitespace(text):
+    return re.sub(r"\s+", " ", text or "").strip()
+
+
+def looks_mojibake(text):
+    if not text:
+        return False
+    suspects = ["Ã", "â€", "â€™", "â€œ", "â€\\x9d", "â€“", "Â", "¢", "",]
+    return any(s in text for s in suspects)
+
+
+def fix_mojibake(text):
+    if not text:
+        return text
+
+    candidates = [text]
+    for _ in range(2):
+        new_candidates = []
+        for c in candidates:
+            try:
+                new_candidates.append(c.encode("latin1", errors="ignore").decode("utf-8", errors="ignore"))
+            except Exception:
+                pass
+            try:
+                new_candidates.append(c.encode("cp1252", errors="ignore").decode("utf-8", errors="ignore"))
+            except Exception:
+                pass
+        candidates.extend(new_candidates)
+
+    def score(s):
+        bad = sum(s.count(ch) for ch in ["Ã", "â", "Â", "¢", "",])
+        good = sum(s.count(ch) for ch in ["è", "é", "à", "ì", "ò", "ù", "’", "“", "”", "–", "—", "È", "É", "À"])
+        return good - bad
+
+    return max(candidates, key=score)
+    
+def normalize_unicode_punctuation(text):
+    if not text:
+        return text
+
+    replacements = {
+        "“": '"',
+        "”": '"',
+        "„": '"',
+        "«": '"',
+        "»": '"',
+        "‘": "'",
+        "’": "'",
+        "‚": "'",
+        "–": "-",
+        "—": "-",
+        "…": "...",
+        "\u00a0": " ",
+    }
+
+    for old, new_value in replacements.items():
+        text = text.replace(old, new_value)
+
+    return text
+
+def sanitize_text(text):
+    if not text:
+        return ""
+    text = normalize_unicode_punctuation(text)
+    return normalize_whitespace(fix_mojibake(text))
+
+def italian_quality_issues(title, html_text):
+    issues = []
+
+    plain = BeautifulSoup(html_text or "", "html.parser").get_text(" ", strip=True)
+    combined = sanitize_text(f"{title} {plain}")
+
+    suspicious_patterns = [
+        r"\b\w+\s+a\b",  # casi tipo "torner a", "arriver a" da accento rotto
+        r"\bpiu\b",
+        r"\bperche\b",
+        r"\be\b",       # attenzione: intercetta anche congiunzione, quindi solo come warning debole
+        r"\bqualita\b",
+        r"\battivita\b",
+        r"\bpossibilita\b",
+        r"\bsara\b",
+        r"\bfara\b",
+        r"\bpotra\b",
+        r"\bdovra\b",
+    ]
+
+    # Pattern specifici più affidabili
+    hard_patterns = [
+        r"\btorner\s+a\b",
+        r"\barriver\s+a\b",
+        r"\bpasser\s+a\b",
+        r"\bsar\s+a\b",
+        r"\bfar\s+a\b",
+        r"\bpotr\s+a\b",
+        r"\bdovr\s+a\b",
+        r"\bperch\s+e\b",
+        r"\bpi\s+u\b",
+    ]
+
+    for pat in hard_patterns:
+        if re.search(pat, combined, flags=re.IGNORECASE):
+            issues.append(f"Possibile accento rotto: {pat}")
+
+    if looks_mojibake(combined):
+        issues.append("Possibile mojibake")
+
+    if title_soft_validation_failed(title):
+        issues.append("Titolo sospeso o incompleto")
+
+    if body_looks_suspicious(html_text):
+        issues.append("Testo sospetto o troppo breve")
+
+    return issues
+
+def repair_italian_output(news_data, source_title):
+    title = news_data.get("titolo", "")
+    text = news_data.get("testo", "")
+    category = news_data.get("categoria", 8)
+
+    prompt = f"""
+Sei un revisore editoriale italiano.
+
+Correggi SOLO errori grammaticali, sintattici, accenti rotti, frasi tronche e formulazioni innaturali.
+NON aggiungere informazioni.
+NON cambiare il significato.
+NON cambiare categoria.
+NON inserire link.
+Mantieni HTML solo con <p>, <b>, <blockquote>.
+Restituisci SOLO JSON valido in una riga.
+
+Titolo originale sorgente:
+{source_title}
+
+Titolo da correggere:
+{title}
+
+Testo da correggere:
+{text}
+
+JSON richiesto:
+{{"titolo":"stringa","testo":"html","categoria":{category}}}
+"""
+
+    repaired, used_model = generate_and_parse_json(prompt)
+
+    repaired["titolo"] = refine_title_italian(
+        sanitize_text(re.sub(r"<[^<]+?>", "", repaired.get("titolo", "")))
+    )
+    repaired["testo"] = remove_source_promos_from_html(
+        refine_body_text(repaired.get("testo", ""))
+    )
+    repaired["categoria"] = category
+
+    return repaired
+
+def refine_title_italian(title):
+    if not title:
+        return title
+
+    t = sanitize_text(title)
+
+    fixes = {
+        "odato": "odiato",
+        "odate": "odiate",
+        "Odato": "Odiato",
+        "Odate": "Odiate",
+        "stella UFC": "fighter UFC",
+        "Stella UFC": "Fighter UFC",
+        "si guadagna un match": "ottiene un match",
+        "Si guadagna un match": "Ottiene un match",
+        "promotion": "promozione",
+        "Promotion": "Promozione",
+        "prevalenza nella cultura pop": "presenza nella cultura pop",
+        "Prevalenza nella cultura pop": "Presenza nella cultura pop",
+        "lancia una sfida rivelatrice": "lancia una sfida",
+        "Lancia una sfida rivelatrice": "Lancia una sfida",
+        "in un'audizione congressuale": "in udienza al Congresso",
+        "In un'audizione congressuale": "In udienza al Congresso",
+        "ha già il suo prossimo sfidante designato": "ha già il prossimo sfidante",
+        "ha già il suo prossimo sfidante": "ha già il prossimo sfidante",
+        "difende con successo il titolo": "mantiene il titolo",
+        "la partnership con Netflix ha portato la WWE nella cultura pop": "Netflix ha spinto la WWE nella cultura pop",
+        "Lancia Una Sfida Rivelatrice": "Lancia una sfida",
+        "Grande Sfida Per I Titoli Mondiali Di Coppia AEW": "Sfida per i titoli di coppia AEW",
+        "malattia quasi le fece saltare": "un malore rischiò di farle saltare",
+        "Malattia quasi le fece saltare": "Un malore rischiò di farle saltare",
+        "quasi le fece saltare": "rischiò di farle saltare",
+        "conserva il titolo": "mantiene il titolo",
+        "Conserva il titolo": "Mantiene il titolo",
+    }
+
+    for old, new_value in fixes.items():
+        t = t.replace(old, new_value)
+
+    t = re.sub(r"\s{2,}", " ", t).strip()
+    t = re.sub(r"\b(potenzialmente|importante|maggiore)\b", "", t, flags=re.IGNORECASE)
+    t = re.sub(r"\s{2,}", " ", t).strip()
+
+    t = re.sub(
+        r"(?i)\b3 cose che ci sono piaciute e 3 che abbiamo odiato\b",
+        "3 cose che ci sono piaciute e 3 no",
+        t,
+    )
+    t = re.sub(
+        r"(?i)3 cose che ci sono piaciute e 3 che non ci sono piaciute",
+        "3 cose che ci sono piaciute e 3 no",
+        t,
+    )
+
+    if len(t.split()) > 2:
+        t = t[0].upper() + t[1:]
+
+    MAX_TITLE_LEN = 115
+
+    if len(t) > MAX_TITLE_LEN:
+        cut = t[:MAX_TITLE_LEN].rsplit(" ", 1)[0].rstrip(" ,:;-")
+        if len(cut) >= 45:
+            t = cut + "..."
+
+    return t
+
+def canonical_embed_key(url: str) -> str:
+    url = normalize_embed_url(url or "").strip()
+
+    try:
+        parsed = urlparse(url)
+        netloc = parsed.netloc.lower().replace("www.", "")
+        path = parsed.path.strip("/")
+
+        if netloc == "instagram.com":
+            m = re.match(r"^(p|reel|tv)/([^/?#]+)/?$", path, re.I)
+            if m:
+                return f"instagram:{m.group(2)}"
+
+        if netloc in {"twitter.com", "x.com"}:
+            m = re.search(r"/status/(\d+)", parsed.path)
+            if m:
+                return f"x:{m.group(1)}"
+
+        if "youtube.com" in netloc:
+            video_id = parse_qs(parsed.query).get("v", [""])[0]
+            if video_id:
+                return f"youtube:{video_id}"
+
+        if "youtu.be" in netloc:
+            video_id = path.split("/")[0]
+            if video_id:
+                return f"youtube:{video_id}"
+
+        if netloc.endswith("tiktok.com"):
+            m = re.search(r"/video/(\d+)", parsed.path)
+            if m:
+                return f"tiktok:{m.group(1)}"
+
+        return url.lower().rstrip("/")
+
+    except Exception:
+        return url.lower().rstrip("/")
+
+def title_needs_soft_cleanup(title):
+    if not title:
+        return True
+    low = title.lower()
+    bad_patterns = [
+        "stella ufc",
+        "rivelatrice",
+        "odato",
+        "odate",
+        "prevalenza",
+    ]
+    if any(p in low for p in bad_patterns):
+        return True
+    if len(title) > 95:
+        return True
+    return False
+
+
+def refine_body_text(text):
+    if not text:
+        return text
+
+    t = fix_mojibake(text)
+
+    fixes = {
+        "si guadagna un match": "ottiene un match",
+        "Si guadagna un match": "Ottiene un match",
+        "stella UFC": "fighter UFC",
+        "Stella UFC": "Fighter UFC",
+        "promotion": "promozione",
+        "Promotion": "Promozione",
+        "prevalenza nella cultura pop": "presenza nella cultura pop",
+        "Prevalenza nella cultura pop": "Presenza nella cultura pop",
+        "la migliore partita": "il miglior match",
+        "partita": "match",
+        "malattia quasi le fece saltare": "un malore rischiò di farle saltare",
+        "quasi le fece saltare": "rischiò di farle saltare",
+        "Ricordo Randy Orton dire": "Ricordo Randy Orton dirmi",
+        "Tu e IYO, avete creato Wrestlemania": "Tu e IYO avete fatto WrestleMania",
+        "creato Wrestlemania": "fatto WrestleMania",
+        "creato WrestleMania": "fatto WrestleMania",
+        "ha detto che": "ha spiegato che",
+        "degli chop": "delle chop",
+        "Degli chop": "Delle chop",
+        "gli chop": "le chop",
+        "Gli chop": "Le chop",
+        "match a squadre miste": "mixed tag team match",
+        "Match a squadre miste": "Mixed tag team match",
+    }
+    for old, new in fixes.items():
+        t = t.replace(old, new)
+
+    # pulizia spazi solo fuori dai tag
+    t = re.sub(r"[ \t]{2,}", " ", t)
+    t = re.sub(r"\n{3,}", "\n\n", t)
+
+    return t.strip()
+
+def remove_source_promos_from_html(html):
+    if not html:
+        return html
+
+    soup = BeautifulSoup(html, "html.parser")
+
+    for tag in soup.find_all(["p", "blockquote", "li"]):
+        txt = sanitize_text(tag.get_text(" ", strip=True))
+        if SOURCE_PROMO_RE.search(txt):
+            tag.decompose()
+
+    return str(soup)
+
+def normalize_for_check(text):
+    text = sanitize_text(text).lower()
+    text = re.sub(r"[^a-z0-9\s]", " ", text)
+    return normalize_whitespace(text)
+
+
+def make_title_key(title):
+    norm = normalize_for_check(title)
+    words = [w for w in norm.split() if w not in STOPWORDS]
+    return "-".join(words[:12])[:180]
+
+
+def make_story_fingerprint(title, text):
+    """
+    Fingerprint semantico leggero per evitare la stessa news da fonti diverse.
+    Usa titolo + prime frasi dell'articolo.
+    """
+    title = sanitize_text(title)
+    text = sanitize_text(text)
+
+    sentences = re.split(r"(?<=[.!?])\s+", text)
+    lead = " ".join(sentences[:6])
+
+    combined = normalize_for_check(f"{title} {lead}")
+
+    extra_stopwords = {
+        "said", "says", "say", "told", "reveals", "revealed",
+        "report", "reports", "reported", "according", "source",
+        "news", "article", "update", "updates", "officially",
+        "during", "while", "another", "latest", "recent",
+        "could", "would", "should", "also", "now",
+    }
+
+    words = []
+    seen = set()
+
+    for w in combined.split():
+        if len(w) <= 2:
+            continue
+        if w in STOPWORDS or w in extra_stopwords:
+            continue
+        if w in seen:
+            continue
+
+        seen.add(w)
+        words.append(w)
+
+    return "-".join(words[:24])[:220]
+
+
+def story_fingerprint_similarity(a, b):
+    if not a or not b:
+        return 0.0
+
+    sa = set(a.split("-"))
+    sb = set(b.split("-"))
+
+    if not sa or not sb:
+        return 0.0
+
+    intersection = len(sa.intersection(sb))
+    smaller = min(len(sa), len(sb))
+
+    return intersection / smaller if smaller else 0.0
+
+
+def is_duplicate_story_fingerprint(candidate_fp, known_fps):
+    if not candidate_fp:
+        return False
+
+    for old_fp in known_fps:
+        if not old_fp:
+            continue
+
+        if candidate_fp == old_fp:
+            return True
+
+        similarity = story_fingerprint_similarity(candidate_fp, old_fp)
+
+        # Soglia prudente: blocca doppioni evidenti ma non news solo vagamente simili.
+        if similarity >= 0.72:
+            return True
+
+    return False
+
+
+def make_news_core_key(title, text):
+    """
+    Chiave tematica per bloccare news uguali con titoli diversi tra fonti diverse.
+    Esempio: NXT + CW + PLE + broadcast rights + deal.
+    """
+    combined = normalize_for_check(f"{title} {text[:1500]}")
+    tokens = set(combined.split())
+
+    core_terms = [
+        "wwe", "aew", "nxt", "tna", "ufc", "mlw",
+        "cw", "netflix", "espn", "peacock", "youtube",
+        "premium", "live", "events", "ple", "ples", "broadcast",
+        "rights", "deal", "network", "exclusive",
+        "raw", "smackdown", "dynamite", "collision", "rampage",
+        "contract", "multi", "year", "streaming", "television",
+    ]
+
+    found = [term for term in core_terms if term in tokens]
+
+    # Evita chiavi troppo generiche, tipo solo "wwe-nxt".
+    if len(found) < 4:
+        return ""
+
+    return "-".join(sorted(set(found)))
+
+
+def get_distinctive_words(text):
+    words = normalize_for_check(text).split()
+    return {w for w in words if len(w) > 2 and w not in STOPWORDS}
+
+
+def make_semantic_id_from_title(title):
+    slug = sanitize_text(title).lower()
+    slug = re.sub(r"[^a-z0-9\s-]", "", slug)
+    slug = re.sub(r"\s+", "-", slug)
+    slug = re.sub(r"-{2,}", "-", slug).strip("-")
+    return slug[:140]
+
+
+def extract_named_entities_from_title(title):
+    candidates = re.findall(r"\b([A-Z][a-z]+(?:\s+[A-Z][a-z]+)+|[A-Z]{2,}(?:\s+[A-Z][a-z]+)*)\b", title)
+    cleaned = []
+    for c in candidates:
+        c = sanitize_text(c)
+        if c in NAME_STOPWORDS or len(c) < 4:
+            continue
+        cleaned.append(c)
+    return list(dict.fromkeys(cleaned))
+
+
+def contains_any(text, terms):
+    t = normalize_for_check(text)
+    return any(normalize_for_check(term) in t for term in terms)
+
+
+def title_is_broken(title):
+    t = sanitize_text(re.sub(r"<[^<]+?>", "", title or ""))
+    if not t:
+        return True
+    if looks_mojibake(t):
+        return True
+    if t.endswith(":") or t.endswith(" -") or t.endswith(" —"):
+        return True
+
+    words = t.split()
+    if len(words) < 2:
+        return True
+    if len(words) <= 2 and len(t) < 16:
+        return True
+
+    last = words[-1]
+    if len(last) <= 1:
+        return True
+
+    if any(x in t for x in ["Ã", "â", "Â",]):
+        return True
+    return False
+
+
+def title_is_good_enough_for_publish(title):
+    t = sanitize_text(title)
+    if title_is_broken(t):
+        return False
+    if len(t) < 12:
+        return False
+    significant = [w for w in normalize_for_check(t).split() if w not in STOPWORDS]
+    return len(significant) >= 1
+
+def title_soft_validation_failed(title):
+    t = sanitize_text(title)
+    if not t:
+        return True
+    if looks_mojibake(t):
+        return True
+    if t.endswith(":") or t.endswith(" -") or t.endswith(" —"):
+        return True
+    if len(t) < 8:
+        return True
+
+    bad_endings = [
+        "è stata",
+        "è stato",
+        "ha detto",
+        "ha spiegato",
+        "secondo",
+        "dopo",
+        "prima di",
+        "con",
+        "per",
+        "su",
+        "di",
+        "che",
+    ]
+    return False
+
+
+def title_hard_invalid(source_title, generated_title):
+    titolo = sanitize_text(generated_title)
+    if title_soft_validation_failed(titolo):
+        return True
+    if title_is_broken(titolo):
+        return True
+    if strong_name_drift(source_title, titolo):
+        return True
+    if not title_has_core_brands(source_title, titolo):
+        return True
+    return False
+
+
+def get_domain(url):
+    try:
+        return urlparse(url).netloc.lower()
+    except Exception:
+        return ""
+
+def canonical_embed_key(url: str) -> str:
+    """
+    Chiave unica per deduplicare embed social equivalenti.
+    Esempio:
+    https://www.instagram.com/p/DXm0Tz2kbdA/
+    https://www.instagram.com/reel/DXm0Tz2kbdA/
+    diventano entrambi:
+    instagram:DXm0Tz2kbdA
+    """
+    url = normalize_embed_url(url or "").strip()
+
+    try:
+        parsed = urlparse(url)
+        netloc = parsed.netloc.lower().replace("www.", "")
+        path = parsed.path.strip("/")
+
+        # Instagram: p/reel/tv con stesso shortcode = stesso contenuto
+        if netloc == "instagram.com":
+            m = re.match(r"^(p|reel|tv)/([^/?#]+)/?$", path, re.I)
+            if m:
+                shortcode = m.group(2)
+                return f"instagram:{shortcode}"
+
+        # Twitter/X
+        if netloc in {"twitter.com", "x.com"}:
+            m = re.search(r"/status/(\d+)", parsed.path)
+            if m:
+                return f"x:{m.group(1)}"
+
+        # YouTube
+        if "youtube.com" in netloc:
+            qs = parse_qs(parsed.query)
+            video_id = qs.get("v", [""])[0]
+            if video_id:
+                return f"youtube:{video_id}"
+
+        if "youtu.be" in netloc:
+            video_id = path.split("/")[0]
+            if video_id:
+                return f"youtube:{video_id}"
+
+        # TikTok
+        if netloc.endswith("tiktok.com"):
+            m = re.search(r"/video/(\d+)", parsed.path)
+            if m:
+                return f"tiktok:{m.group(1)}"
+
+        return url.lower().rstrip("/")
+
+    except Exception:
+        return url.lower().rstrip("/")
+        
+def dedupe_preserve_order(items):
+    seen = set()
+    out = []
+
+    for item in items:
+        item = (item or "").strip()
+        if not item:
+            continue
+
+        key = canonical_embed_key(item)
+        if key in seen:
+            continue
+
+        seen.add(key)
+        out.append(normalize_embed_url(item))
+
+    return out
+
+def detect_source_category(title, text="", url=""):
+    title_l = sanitize_text(title).lower()
+    url_l = (url or "").lower()
+    text_l = sanitize_text(text[:1200]).lower()
+
+    primary = f"{title_l} {url_l}"
+
+    if "nxt" in primary:
+        return 6
+    if any(x in primary for x in ["aew", "dynamite", "collision", "rampage", "all elite"]):
+        return 5
+    if any(x in primary for x in ["tna", "impact wrestling"]):
+        return 7
+    if any(x in primary for x in ["mlw", "aaa", "njpw", "roh", "indie", "indy"]):
+        return 7
+
+    wwe_terms = [
+        "wwe", "wrestlemania", "raw", "smackdown", "royal rumble",
+        "survivor series", "money in the bank", "triple h", "nick khan",
+        "backlash", "hall of fame", "clash in italy"
+    ]
+    if any(term in primary for term in wwe_terms):
+        return 4
+
+    # fallback sul testo, ma solo se il termine è davvero ricorrente
+    scores = {
+        5: sum(text_l.count(x) for x in ["aew", "dynamite", "collision", "all elite"]),
+        7: sum(text_l.count(x) for x in ["tna", "impact wrestling", "mlw", "aaa", "njpw", "roh"]),
+        6: text_l.count("nxt"),
+        4: sum(text_l.count(x) for x in ["wwe", "raw", "smackdown", "wrestlemania"]),
+    }
+
+    best_cat, best_score = max(scores.items(), key=lambda x: x[1])
+    if best_score >= 2:
+        return best_cat
+
+    return 8
+
+
+def normalize_social_url(url: str) -> str:
+    url = (url or "").strip()
+    if not url:
+        return url
+    if re.match(r"^https?://x\.com/", url, re.I):
+        url = re.sub(r"^https?://x\.com/", "https://twitter.com/", url, flags=re.I)
+    return url
+
+
+def extract_facebook_url_from_iframe(src: str) -> str:
+    if not src:
+        return ""
+    try:
+        parsed = urlparse(src)
+        qs = parse_qs(parsed.query)
+        href = qs.get("href", [""])[0]
+        if href:
+            return unquote(href)
+    except Exception:
+        pass
+    return ""
+
+
+def clean_tracking_params(url: str) -> str:
+    if not url:
+        return url
+    try:
+        parsed = urlparse(url)
+        netloc = parsed.netloc.lower()
+        path = parsed.path
+        query = parse_qs(parsed.query)
+
+        if "youtube.com" in netloc and "/watch" in path:
+            v = query.get("v", [""])[0]
+            if v:
+                return f"https://www.youtube.com/watch?v={v}"
+        if "youtu.be" in netloc:
+            video_id = path.strip("/").split("/")[0]
+            if video_id:
+                return f"https://www.youtube.com/watch?v={video_id}"
+        if "instagram.com" in netloc:
+            clean_path = re.sub(r"/+$", "/", path)
+            return f"https://www.instagram.com{clean_path}"
+        if "twitter.com" in netloc or "x.com" in netloc:
+            return f"https://twitter.com{path}"
+        if "facebook.com" in netloc or "fb.watch" in netloc or "m.facebook.com" in netloc:
+            return f"https://{netloc}{path}"
+        if "tiktok.com" in netloc:
+            return f"https://{netloc}{path}"
+        return urlunparse((parsed.scheme, parsed.netloc, parsed.path, "", "", "")) or url
+    except Exception:
+        return url
+
+
+def normalize_embed_url(url: str) -> str:
+    url = normalize_social_url(url)
+    if "youtube.com/embed/" in url:
+        video_id = url.split("/embed/")[-1].split("?")[0].strip("/")
+        if video_id:
+            return f"https://www.youtube.com/watch?v={video_id}"
+    if "youtube-nocookie.com/embed/" in url:
+        video_id = url.split("/embed/")[-1].split("?")[0].strip("/")
+        if video_id:
+            return f"https://www.youtube.com/watch?v={video_id}"
+    return clean_tracking_params(url)
+
+
+def normalize_x_links_in_text(text: str) -> str:
+    return re.sub(r"https?://x\.com/", "https://twitter.com/", text, flags=re.I)
+
+
+def get_embed_provider_slug(url):
+    u = normalize_embed_url(url).lower()
+    if "twitter.com/" in u:
+        return "x"
+    if "instagram.com/" in u:
+        return "instagram"
+    if "youtube.com/" in u or "youtu.be/" in u:
+        return "youtube"
+    if "tiktok.com/" in u:
+        return "tiktok"
+    if "facebook.com/" in u or "fb.watch/" in u or "m.facebook.com/" in u:
+        return "facebook"
+    return ""
+
+
+def get_social_fallback_html(url):
+    provider = get_embed_provider_slug(url)
+    label_map = {
+        "x": "Guarda il post su X",
+        "instagram": "Guarda il post su Instagram",
+        "facebook": "Guarda il post su Facebook",
+        "tiktok": "Guarda il post su TikTok",
+        "youtube": "Guarda il video su YouTube",
+    }
+    label = label_map.get(provider, "Apri il contenuto sul social")
+    safe_url = url.replace('"', "&quot;")
+    return f'<p><a href="{safe_url}" target="_blank" rel="noopener noreferrer">{label}</a></p>'
+
+
+def is_valid_embed_url(url: str) -> bool:
+    url = normalize_embed_url(url)
+    patterns = [
+        r"^https?://(www\.)?twitter\.com/[^/]+/status/\d+",
+        r"^https?://(www\.)?instagram\.com/(p|reel|tv)/[^/?#]+/?$",
+        r"^https?://(www\.)?youtube\.com/watch\?v=[^&]+",
+        r"^https?://youtu\.be/[^/?#]+",
+        r"^https?://(www\.)?tiktok\.com/@[^/]+/video/\d+",
+        r"^https?://(www\.)?(facebook\.com|m\.facebook\.com)/.+",
+        r"^https?://(www\.)?fb\.watch/.+",
+    ]
+    return any(re.match(p, url, re.I) for p in patterns)
+
+
+def facebook_url_is_probably_bad(url: str) -> bool:
+    u = normalize_embed_url(url).lower()
+    if "subhojeet.mukherjee.3" in u:
+        return True
+    keepish = ["/posts/", "/videos/", "/watch/", "/reel/", "/story.php", "/share/", "/photo"]
+    if "facebook.com" in u or "m.facebook.com" in u or "fb.watch" in u:
+        if not any(k in u for k in keepish):
+            return True
+    return False
+
+
+def social_url_is_embeddable(url: str) -> bool:
+    url = normalize_embed_url(url)
+    provider = get_embed_provider_slug(url)
+
+    try:
+        if provider == "youtube":
+            return True
+
+        if provider == "facebook" and facebook_url_is_probably_bad(url):
+            return False
+
+        if provider == "x":
+            endpoint = "https://publish.twitter.com/oembed"
+            res = session.get(endpoint, params={"url": url, "omit_script": "true"}, timeout=REQUEST_TIMEOUT_SOCIAL_CHECK)
+            return res.status_code == 200
+
+        if provider in {"instagram", "facebook", "tiktok"}:
+            res = session.get(url, timeout=REQUEST_TIMEOUT_SOCIAL_CHECK, allow_redirects=True)
+            if res.status_code != 200:
+                return False
+            final_url = res.url.lower()
+            body = res.text.lower()
+            blocked_markers = [
+                "/accounts/login", "login", "sign up", "log in",
+                "content isn't available", "page isn't available",
+                "contenuto non disponibile", "pagina non disponibile",
+            ]
+            if any(marker in final_url or marker in body for marker in blocked_markers):
+                return False
+            return True
+    except Exception as e:
+        print(f"[EMBED] Verifica pubblica fallita su {url}: {e}")
+
+    return False
+
+
+def extract_image_url(entry):
+    try:
+        if hasattr(entry, "media_content") and entry.media_content:
+            url = entry.media_content[0].get("url")
+            if url:
+                return url
+        if hasattr(entry, "media_thumbnail") and entry.media_thumbnail:
+            url = entry.media_thumbnail[0].get("url")
+            if url:
+                return url
+        if hasattr(entry, "enclosures") and entry.enclosures:
+            for enc in entry.enclosures:
+                href = getattr(enc, "href", None) or enc.get("href")
+                enc_type = getattr(enc, "type", None) or enc.get("type", "")
+                if href and "image" in str(enc_type):
+                    return href
+                if href and re.search(r"\.(jpg|jpeg|png|webp)(\?.*)?$", href, re.I):
+                    return href
+        if hasattr(entry, "links") and entry.links:
+            for link in entry.links:
+                href = link.get("href")
+                link_type = link.get("type", "")
+                if href and "image" in str(link_type):
+                    return href
+                if href and re.search(r"\.(jpg|jpeg|png|webp)(\?.*)?$", href, re.I):
+                    return href
+    except Exception as e:
+        print(f"[IMAGE] Errore extract_image_url: {e}")
+    return None
+
+
+def parse_content_container(soup, url):
+    domain = get_domain(url)
+    if "ringsidenews.com" in domain:
+        selectors = ["div.cntn-wrp.artl-cnt", "div.sp-cnt", "article", "main"]
+    elif "wrestlinginc.com" in domain:
+        # Important: on WrestlingInc opinion/gallery pages the first .columns-holder
+        # often contains only the intro, while the rest of the article is split across
+        # multiple sibling .news-article sections inside <article>.
+        selectors = ["article", "div.post-content", "div.entry-content", "main", ".columns-holder"]
+    else:
+        selectors = ["article", "div.post-content", "div.entry-content", "main", "body"]
+    for sel in selectors:
+        node = soup.select_one(sel)
+        if node:
+            return node
+    return soup.body
+
+
+def clean_article_text_from_container(content, max_chars=20000):
+    if not content:
+        return ""
+    for trash in content(["script", "style", "nav", "footer", "header", "aside", "form", "noscript", "iframe"]):
+        trash.decompose()
+    for bad_sel in [
+        ".social_holder", ".social_icons", ".m-s-i", ".google-news", ".contest",
+        ".breadcrumbs", ".breadcrumb", "#pagination", ".srp", ".related_link",
+        ".amp-related-posts-title", ".amp-sidebar", ".amp-ad-wrapper", "amp-ad",
+        ".sharethis-inline-share-buttons", ".social-share", ".social-wrap", ".sharedaddy",
+        ".author-box", ".byline", ".sidebar", ".comment-respond",
+        ".disqus-comment-container", ".under-art", ".zergnet-widget"
+    ]:
+        for node in content.select(bad_sel):
+            node.decompose()
+
+    cleaned_parts = []
+    seen = set()
+    for el in content.find_all(["p", "blockquote", "h2", "h3", "li"]):
+        text = sanitize_text(el.get_text(" ", strip=True))
+        if len(text) > 20 and text not in seen:
+            seen.add(text)
+            cleaned_parts.append(text)
+
+    full = "\n\n".join(cleaned_parts)
+    if max_chars is not None and max_chars > 0:
+        return full[:max_chars]
+    return full
+
+
+def is_results_article(source_title="", source_url="", text=""):
+    probe = normalize_for_check(f"{source_title} {source_url} {text[:500]}")
+    if not probe:
+        return False
+    result_terms = ["results", "risultati", "risultato"]
+    show_terms = ["raw", "smackdown", "nxt", "dynamite", "collision", "rampage", "impact", "wwe", "aew", "tna"]
+    return any(term in probe for term in result_terms) and any(term in probe for term in show_terms)
+
+
+def extract_wrestlinginc_article_text(content, source_title="", source_url=""):
+    sections = content.select(".news-article")
+    if not sections:
+        return clean_article_text_from_container(content)
+
+    parts = []
+    seen = set()
+
+    for section in sections:
+        heading = section.find(["h2", "h3"])
+        if heading:
+            h_text = sanitize_text(heading.get_text(" ", strip=True))
+            if len(h_text) > 3 and h_text not in seen:
+                seen.add(h_text)
+                parts.append(h_text)
+
+        blocks = section.select(".columns-holder") or [section]
+        for block in blocks:
+            chunk = clean_article_text_from_container(block, max_chars=None)
+            if not chunk:
+                continue
+            for piece in [x.strip() for x in chunk.split("\n\n") if x.strip()]:
+                if piece not in seen:
+                    seen.add(piece)
+                    parts.append(piece)
+
+    full_text = "\n\n".join(parts)
+
+    if is_results_article(source_title, source_url, full_text):
+        print(f"[SCRAPE] Articolo results rilevato: testo completo ({len(full_text)} caratteri)")
+        return full_text[:60000]
+
+    return full_text[:20000]
+
+
+def extract_result_match_terms(source_text):
+    terms = []
+    for line in (source_text or "").splitlines():
+        clean = sanitize_text(line).strip()
+        if not clean or len(clean) > 180:
+            continue
+        low = clean.lower()
+        if " vs" in low or "winner" in low or "winners" in low or "we hear from" in low:
+            words = re.findall(r"\b[A-Z][A-Za-z'’.:-]{2,}(?:\s+[A-Z][A-Za-z'’.:-]{2,}){0,2}", clean)
+            names = []
+            for w in words:
+                nw = normalize_for_check(w)
+                if nw and nw not in {"winner", "winners", "north american championship"}:
+                    names.append(nw)
+            if names:
+                terms.append(names[:4])
+    return terms
+
+
+def result_article_integrity_warning(source_text, generated_html):
+    checks = extract_result_match_terms(source_text)
+    if not checks:
+        return ""
+
+    generated = normalize_for_check(BeautifulSoup(generated_html or "", "html.parser").get_text(" ", strip=True))
+    important = []
+    important.append(checks[0])
+    important.append(checks[-1])
+    if len(checks) > 2:
+        important.append(checks[len(checks)//2])
+
+    missing_groups = []
+    for group in important:
+        present = sum(1 for term in group if term in generated)
+        if group and present == 0:
+            missing_groups.append(group)
+
+    if missing_groups:
+        return f"Possibile articolo results incompleto: mancano riferimenti a {missing_groups[:2]}"
+    return ""
+
+def extract_embeds_from_article_html(html):
+    soup = BeautifulSoup(html, "html.parser")
+    embeds = []
+
+    # 1. JSON-LD: alcuni siti, soprattutto AMP, mettono il tweet qui
+    for script in soup.find_all("script", attrs={"type": "application/ld+json"}):
+        try:
+            raw = script.get_text(strip=True)
+            if not raw:
+                continue
+
+            data = json.loads(raw)
+
+            def walk_json(obj):
+                if isinstance(obj, dict):
+                    embed_url = obj.get("embedUrl")
+                    if isinstance(embed_url, str):
+                        href = normalize_embed_url(embed_url)
+                        if is_valid_embed_url(href):
+                            embeds.append(href)
+
+                    for v in obj.values():
+                        walk_json(v)
+
+                elif isinstance(obj, list):
+                    for item in obj:
+                        walk_json(item)
+
+            walk_json(data)
+
+        except Exception:
+            pass
+
+    roots = soup.select("article, .columns-holder, .cntn-wrp.artl-cnt, .sp-cnt, main") or [soup]
+
+    for root in roots:
+        # 2. Twitter AMP
+        for amp_tw in root.find_all("amp-twitter"):
+            tweet_id = amp_tw.get("data-tweetid")
+            if tweet_id:
+                href = f"https://twitter.com/i/status/{tweet_id}"
+                if is_valid_embed_url(href):
+                    embeds.append(href)
+
+        # 3. Instagram AMP, se mai comparisse
+        for amp_ig in root.find_all("amp-instagram"):
+            shortcode = amp_ig.get("data-shortcode")
+            if shortcode:
+                href = f"https://www.instagram.com/p/{shortcode}/"
+                if is_valid_embed_url(href):
+                    embeds.append(href)
+
+        # 4. Blockquote social classici
+        for blockquote in root.find_all("blockquote"):
+            classes = " ".join(blockquote.get("class", []))
+            if "twitter-tweet" in classes or "instagram-media" in classes:
+                for a in blockquote.find_all("a", href=True):
+                    href = normalize_embed_url(a["href"])
+                    if is_valid_embed_url(href):
+                        embeds.append(href)
+
+        # 5. Iframe, incluso Facebook
+        for iframe in root.find_all("iframe", src=True):
+            src = iframe["src"]
+            fb_href = extract_facebook_url_from_iframe(src)
+            if fb_href:
+                fb_href = normalize_embed_url(fb_href)
+                if is_valid_embed_url(fb_href):
+                    embeds.append(fb_href)
+                    continue
+
+            src = normalize_embed_url(src)
+            if is_valid_embed_url(src):
+                embeds.append(src)
+
+        # 6. Link normali
+        for a in root.find_all("a", href=True):
+            href = normalize_embed_url(a.get("href", ""))
+            if is_valid_embed_url(href):
+                embeds.append(href)
+
+    return dedupe_preserve_order(embeds)
+
+def extract_image_from_article_html(html):
+    soup = BeautifulSoup(html, "html.parser")
+    for selector in [("meta", {"property": "og:image"}), ("meta", {"name": "twitter:image"})]:
+        tag = soup.find(selector[0], attrs=selector[1])
+        if tag and tag.get("content"):
+            return tag["content"]
+
+    for script in soup.find_all("script", attrs={"type": "application/ld+json"}):
+        try:
+            raw = script.get_text(strip=True)
+            if not raw:
+                continue
+            data = json.loads(raw)
+
+            def walk(obj):
+                if isinstance(obj, dict):
+                    for key in ["thumbnailUrl", "contentUrl", "url"]:
+                        val = obj.get(key)
+                        if isinstance(val, str) and re.search(r"\.(jpg|jpeg|png|webp)(\?.*)?$", val, re.I):
+                            return val
+                    for v in obj.values():
+                        found = walk(v)
+                        if found:
+                            return found
+                elif isinstance(obj, list):
+                    for item in obj:
+                        found = walk(item)
+                        if found:
+                            return found
+                return None
+
+            found = walk(data)
+            if found:
+                return found
+        except Exception:
+            pass
+
+    hero = soup.select_one(
+        ".ringside-featured-image-holder amp-img[src], "
+        ".sf-img amp-img[src], article amp-img[src], article img[src]"
+    )
+    if hero and hero.get("src"):
+        return hero["src"]
+
+    img = soup.find(["img", "amp-img"], src=True)
+    if img:
+        return img["src"]
+    return None
+
+
+def get_clean_text(url):
+    try:
+        res = session.get(url, timeout=REQUEST_TIMEOUT_SCRAPE)
+        res.raise_for_status()
+        html = res.text
+        embeds = extract_embeds_from_article_html(html)
+        soup = BeautifulSoup(html, "html.parser")
+        content = parse_content_container(soup, url)
+        if not content:
+            return "", "empty", html, None, embeds
+
+        domain = get_domain(url)
+        page_title = sanitize_text(soup.title.get_text(" ", strip=True)) if soup.title else ""
+        if "wrestlinginc.com" in domain and getattr(content, "name", "") == "article":
+            full_text = extract_wrestlinginc_article_text(content, page_title, url)
+        else:
+            max_chars = None if is_results_article(page_title, url, "") else 20000
+            full_text = clean_article_text_from_container(content, max_chars=max_chars)
+            if is_results_article(page_title, url, full_text):
+                print(f"[SCRAPE] Articolo results rilevato: testo completo ({len(full_text)} caratteri)")
+                full_text = full_text[:60000]
+
+        page_img = extract_image_from_article_html(html)
+        return full_text, None, html, page_img, embeds
+    except requests.HTTPError as e:
+        code = getattr(e.response, "status_code", None)
+        print(f"[SCRAPE] HTTP {code} su {url}")
+        return "", f"http_{code}", "", None, []
+    except Exception as e:
+        print(f"[SCRAPE] Errore su {url}: {e}")
+        return "", "generic", "", None, []
+
+
+def get_entry_summary(entry):
+    summary = ""
+    if hasattr(entry, "summary"):
+        summary = entry.summary
+    elif hasattr(entry, "description"):
+        summary = entry.description
+    return BeautifulSoup(summary, "html.parser").get_text(" ", strip=True)
+
+
+def get_summary_fallback(entry):
+    summary = get_entry_summary(entry)
+    return summary if summary and len(summary) >= 120 else ""
+
+
+def body_looks_suspicious(text):
+    t = sanitize_text(BeautifulSoup(text or "", "html.parser").get_text(" ", strip=True)).lower()
+    if len(t) < 120:
+        return True
+    bad_hits = sum(1 for pat in BODY_BAD_PATTERNS if pat in t)
+    if bad_hits >= 1:
+        return True
+    sentence_count = len([s for s in re.split(r"[.!?]+", t) if s.strip()])
+    return sentence_count < 2
+
+
+def special_title_consistent(source_title, generated_title):
+    src = sanitize_text(source_title).lower()
+    gen = sanitize_text(generated_title).lower()
+
+    checks = [
+        ("spoilers", ["spoilers", "spoiler"]),
+        ("results", ["results", "risultati"]),
+        ("report", ["report"]),
+        ("preview", ["preview"]),
+        ("viewership", ["viewership", "ascolti", "auditel"]),
+        ("ratings", ["ratings", "rating"]),
+        ("how to watch", ["come vedere", "how to watch"]),
+        ("confirmed matches", ["match confermati", "confirmed matches"]),
+        ("start time", ["orario", "start time"]),
+        ("winners", ["vincitori", "winner", "winners"]),
+        ("losers", ["sconfitti", "perdenti", "losers"]),
+        ("react", ["reag", "reaction", "react"]),
+        ("reportedly", ["secondo", "avrebbe", "riport", "reportedly"]),
+        ("says", [":", "dice", "afferma", "spiega", "ammette", "sostiene"]),
+        ("why", ["perché", "perche", "motivo", "ragione"]),
+    ]
+
+    for src_term, gen_terms in checks:
+        if src_term in src and not any(term in gen for term in gen_terms):
+            return False
+    return True
+
+
+def strong_name_drift(source_title, generated_title):
+    src = sanitize_text(source_title).lower()
+    gen = sanitize_text(generated_title).lower()
+
+    src_names = [name for name in STRONG_NAMES if name in src]
+    gen_names = [name for name in STRONG_NAMES if name in gen]
+
+    if not src_names and gen_names:
+        return True
+    if src_names and gen_names and not any(name in gen for name in src_names):
+        return True
+    return False
+
+
+def title_has_core_brands(source_title, generated_title):
+    source = sanitize_text(source_title).lower()
+    generated = sanitize_text(generated_title).lower()
+
+    brand_groups = [
+        ["wwe"], ["aew"], ["nxt"], ["tna"], ["ufc"], ["mlw"],
+        ["raw"], ["smackdown"], ["collision"], ["dynamite"],
+        ["wrestlemania"], ["backlash"],
+    ]
+    for group in brand_groups:
+        if any(term in source for term in group):
+            if not any(term in generated for term in group):
+                return False
+    return True
+
+
+def is_translation_coherent(source_title, generated_title):
+    source_title = sanitize_text(source_title)
+    generated_title = sanitize_text(generated_title)
+    gen_norm = normalize_for_check(generated_title)
+    src_norm = normalize_for_check(source_title)
+
+    if title_is_broken(generated_title):
+        return False
+
+    # Hard mismatch only if brand/promotion or strong names drift
+    if strong_name_drift(source_title, generated_title):
+        return False
+    if not title_has_core_brands(source_title, generated_title):
+        return False
+
+    src_words = get_distinctive_words(source_title)
+    gen_words = get_distinctive_words(generated_title)
+    common = src_words.intersection(gen_words)
+
+    # Named entities
+    names = extract_named_entities_from_title(source_title)
+    matched_names = 0
+    for name in names:
+        parts = [p.lower() for p in name.split() if len(p) > 2]
+        if parts and all(p in gen_norm for p in parts):
+            matched_names += 1
+
+    if matched_names >= 1:
+        return True
+    if len(common) >= 1:
+        return True
+
+    # Soft acceptance for editorial paraphrases around same topic
+    soft_terms = [
+        "wrestlemania", "raw", "smackdown", "nxt", "aew", "ufc", "mlw",
+        "paige", "austin", "theory", "brock", "lesnar", "booker", "nick", "khan",
+        "montez", "ford", "damo", "security", "sicurezza", "musical",
+        "attendance", "affluenza", "vendite", "pubblico", "masked", "man",
+        "cody", "rhodes", "cleveland", "ritiro", "retired", "update", "aggiornamento",
+        "positive", "positivo", "protection", "protezione"
+    ]
+    if any(t in src_norm for t in soft_terms) and any(t in gen_norm for t in soft_terms):
+        return True
+
+    # Last fallback: non-trivial title with same brand is acceptable
+    sig = [w for w in gen_norm.split() if w not in STOPWORDS]
+    return len(sig) >= 4
+
+
+def is_capacity_error(exc):
+    msg = str(exc)
+    return "503" in msg or "UNAVAILABLE" in msg or "high demand" in msg.lower()
+
+def clean_json_string(raw_text):
+    raw = raw_text.strip().replace("```json", "").replace("```", "").strip()
+    start = raw.find("{")
+    end = raw.rfind("}") + 1
+    if start == -1 or end <= start:
+        raise ValueError("JSON object non trovato nella risposta")
+    raw = raw[start:end]
+    raw = re.sub(r'\\(?!["\\/bfnrtu])', r"\\\\", raw)
+    raw = re.sub(r"[\x00-\x08\x0B\x0C\x0E-\x1F]", " ", raw)
+    return raw
+
+
+def extract_json_object(raw_text):
+    raw = clean_json_string(raw_text)
+    try:
+        return json.loads(raw)
+    except Exception:
+        title_match = re.search(r'"titolo"\s*:\s*"(.*?)"', raw, re.S)
+        text_match = re.search(r'"testo"\s*:\s*"(.*?)"\s*,\s*"categoria"', raw, re.S)
+        cat_match = re.search(r'"categoria"\s*:\s*(\d+)', raw, re.S)
+        if title_match and text_match:
+            return {
+                "titolo": bytes(title_match.group(1), "utf-8").decode("unicode_escape", errors="ignore"),
+                "testo": bytes(text_match.group(1), "utf-8").decode("unicode_escape", errors="ignore"),
+                "categoria": int(cat_match.group(1)) if cat_match else 8,
+            }
+        raise
+
+
+def generate_and_parse_json(prompt):
+    last_exception = None
+    for model in MODEL_CHAIN:
+        if model_fail_counts.get(model, 0) >= MODEL_COOLDOWN_THRESHOLD:
+            print(f"[GEMINI] Skip modello saturo in questa run: {model}")
+            continue
+        try:
+            print(f"[GEMINI] Uso modello: {model}")
+            res = client.models.generate_content(model=model, contents=prompt)
+            data = extract_json_object(res.text)
+            return data, model
+        except Exception as e:
+            last_exception = e
+            print(f"[GEMINI] Modello {model} scartato: {e}")
+            if is_capacity_error(e):
+                model_fail_counts[model] = model_fail_counts.get(model, 0) + 1
+            continue
+    raise last_exception if last_exception else RuntimeError("Nessun modello disponibile")
+
+
+def check_gemini():
+    try:
+        data, used_model = generate_and_parse_json('Rispondi solo con questo JSON in una riga: {"ok": true}')
+        if data:
+            print(f"[GEMINI] Modello attivo: {used_model}")
+            return True
+        return False
+    except Exception as e:
+        print(f"[GEMINI] Nessun modello disponibile: {e}")
+        return False
+
+
+def translate_news(source_title, text, source_url=""):
+    if not text or len(text) < 50:
+        return None, "validation"
+
+    forced_category = detect_source_category(source_title, text, source_url)
+    results_mode = is_results_article(source_title, source_url, text)
+
+    results_instructions = """
+MODALITA SPECIALE RISULTATI SHOW:
+- Questo e' un articolo di risultati/recap di uno show.
+- Non devi trattarlo come una news breve.
+- Devi coprire l'intero show dall'inizio alla fine.
+- NON saltare nessun match, promo, segmento o sviluppo importante.
+- Mantieni l'ordine cronologico dello show.
+- Se il testo sorgente e' lungo, puoi accorciare i dettagli delle fasi di lotta, ma NON devi mai tagliare l'inizio o la fine dello show.
+- Ogni match deve includere il vincitore se presente nel testo originale.
+- L'ultimo segmento dello show deve essere SEMPRE incluso.
+
+STRUTTURA:
+- Usa paragrafi chiari.
+- Quando utile, usa <b>Nome match/segmento</b> all'inizio del paragrafo.
+- Non creare elenchi puntati.
+
+GERGO:
+- I nomi dei tipi di match e delle stipulazioni restano in inglese:
+  tag team match, mixed tag team match, triple threat match, fatal four-way match, cage match, ladder match, street fight, no disqualification match.
+- "chop" e' femminile: scrivi "le chop", "delle chop".
+""" if results_mode else """
+GERGO:
+- I nomi dei tipi di match e delle stipulazioni restano in inglese:
+  tag team match, mixed tag team match, triple threat match, fatal four-way match, cage match, ladder match, street fight, no disqualification match.
+- "chop" e' femminile: scrivi "le chop", "delle chop".
+"""
+
+    prompt = f"""
+Sei un giornalista italiano esperto di wrestling e sport da combattimento.
+
+Devi riscrivere in italiano questa specifica notizia come se fosse stata scritta direttamente per un sito italiano di news sportive. Non devi fare una traduzione letterale: devi conservare tutti i fatti, ma rendere il testo naturale, fluido e giornalistico.
+
+VINCOLI OBBLIGATORI:
+1. L'articolo deve parlare SOLO della notizia fornita.
+2. Non devi mescolare questa notizia con altre notizie.
+3. Non devi riutilizzare temi, eventi o dettagli di articoli precedenti.
+4. Il titolo deve restare semanticamente aderente al testo sorgente.
+5. Mantieni i nomi propri principali del titolo originale.
+6. Non inventare dettagli non presenti nel testo.
+7. Restituisci SOLO JSON valido in UNA SOLA RIGA.
+8. Nessun markdown.
+9. "titolo": senza HTML.
+10. "testo": HTML consentito solo con <p>, <b>, <blockquote>.
+11. "categoria" deve essere {forced_category}.
+12. Le citazioni importanti vanno in <blockquote>.
+13. Non inserire link social o embed nel testo.
+14. Rimuovi completamente ogni riferimento alla testata originale, alla fonte, al sito sorgente, alla copertura live, agli hub dedicati e agli inviti ai commenti.
+15. Le frasi promozionali della fonte non devono essere tradotte né riformulate: vanno eliminate.
+
+STILE EDITORIALE:
+- Scrivi in italiano naturale, come un giornalista sportivo italiano.
+- Non tradurre parola per parola.
+- Se una frase sembra tradotta dall’inglese, riscrivila in forma più naturale.
+- Usa frasi brevi, chiare e leggibili.
+- Mantieni un tono neutro, giornalistico e non clickbait.
+- Non aggiungere enfasi artificiale.
+- Non ripetere continuamente nomi e cognomi: dopo la prima occorrenza puoi usare "il wrestler", "la star", "il duo", "la coppia", "l'atleta", "l'ex campione", se il riferimento è chiaro.
+- Preferisci verbi semplici e diretti.
+
+GERGO E NOMI UFFICIALI:
+- Mantieni in inglese il gergo wrestling: match, title, promo, segment, storyline, push, turn, feud, stable, tag team.
+- Mantieni SEMPRE in inglese i nomi ufficiali di titoli, eventi, stable/fazioni e stipulazioni.
+- Non tradurre, non parafrasare e non reinterpretare mai i nomi ufficiali.
+- Non sostituire mai un titolo con un altro.
+- Esempio obbligatorio: "World Heavyweight Championship" deve restare "World Heavyweight Championship". Non può diventare "titolo mondiale", "titolo dei pesi massimi" o "titolo intercontinentale".
+- "Intercontinental Championship" deve restare "Intercontinental Championship".
+- "United States Championship" deve restare "United States Championship".
+- "AEW World Tag Team Championship" deve restare "AEW World Tag Team Championship".
+- I nomi dei match e delle stipulazioni restano in inglese: mixed tag team match, tag team match, triple threat match, fatal four-way match, ladder match, cage match, steel cage match, street fight, no disqualification match, title match.
+
+FORME DA EVITARE:
+- "SmackDown di WWE" usa "SmackDown"
+- "durante l'episodio di WWE Raw" usa "nell’ultima puntata di Raw"
+- "si è aperto riguardo" usa "ha parlato di"
+- "ha affrontato una sfida" usa "ha combattuto" o "è salito sul ring"
+- "è stato coinvolto in un match" usa "ha preso parte a un match"
+- "ha fatto il suo ritorno" usa "è tornato"
+- "ha ottenuto una vittoria" usa "ha vinto"
+- evita parole innaturali come "stella", "rivelatrice", "prevalenza", "coinvolto in una dinamica", "all’interno della compagnia", "televisione nazionale", "si sono ritrovati come tag team".
+
+{results_instructions}
+
+TITOLO ORIGINALE:
+{source_title}
+
+TESTO SORGENTE:
+{text}
+
+JSON richiesto:
+{{"titolo":"stringa","testo":"html","categoria":{forced_category}}}
+"""
+
+    try:
+        data, used_model = generate_and_parse_json(prompt)
+
+        titolo = sanitize_text(re.sub(r"<[^<]+?>", "", data.get("titolo", "")).strip())
+        titolo = refine_title_italian(titolo)
+
+        testo = (data.get("testo", "") or "").strip()
+        testo = fix_mojibake(testo)
+        testo = refine_body_text(testo)
+        testo = remove_source_promos_from_html(testo)
+        quality_issues = italian_quality_issues(titolo, testo)
+
+        if quality_issues:
+        print(f"[QUALITY] Problemi rilevati: {quality_issues}")
+        repaired = repair_italian_output(
+        {"titolo": titolo, "testo": testo, "categoria": forced_category},
+        source_title
+        )
+
+        titolo = repaired["titolo"]
+        testo = repaired["testo"]
+
+        remaining_issues = italian_quality_issues(titolo, testo)
+        if remaining_issues:
+            raise ValueError(f"Output ancora sospetto dopo revisione: {remaining_issues}")
+
+        if title_needs_soft_cleanup(titolo):
+            titolo = refine_title_italian(titolo)
+
+        if not titolo or not testo or len(testo) < 50:
+            raise ValueError("Titolo o testo mancanti")
+
+        if title_hard_invalid(source_title, titolo):
+            raise ValueError(f"Titolo incoerente: {titolo}")
+
+        if body_looks_suspicious(testo):
+            raise ValueError("Body sospetto o troppo meta")
+
+        if results_mode:
+            integrity_warning = result_article_integrity_warning(text, testo)
+            if integrity_warning:
+                print(f"[TRANSLATE] Warning results: {integrity_warning}")
+
+        if not is_translation_coherent(source_title, titolo):
+            print(f"[TRANSLATE] Soft mismatch titolo: {titolo}")
+            return {
+                "titolo": titolo,
+                "testo": testo,
+                "categoria": forced_category
+            }, "soft_mismatch"
+
+        print(f"[GEMINI] Traduzione ottenuta con: {used_model}")
+        return {"titolo": titolo, "testo": testo, "categoria": forced_category}, "ok"
+
+    except Exception as e:
+        print(f"[TRANSLATE] Errore: {e}")
+        return None, ("model" if is_capacity_error(e) else "validation")
+
+def wp_media_upload_request(headers_wp, content, retries=2):
+    last_exc = None
+    for attempt in range(retries + 1):
+        try:
+            return session.post(
+                WP_MEDIA_URL,
+                auth=(WP_USER, WP_PASSWORD),
+                headers=headers_wp,
+                data=content,
+                timeout=REQUEST_TIMEOUT_WP
+            )
+        except (requests.Timeout, requests.ConnectionError, requests.RequestException) as e:
+            last_exc = e
+            print(f"[MEDIA] Errore upload (tentativo {attempt + 1}/{retries + 1}): {e}")
+            if attempt < retries:
+                time.sleep(2)
+    raise last_exc
+
+def upload_image_to_wp(image_url):
+    if not image_url:
+        return None
+    try:
+        img_res = session.get(image_url, timeout=REQUEST_TIMEOUT_IMAGE)
+        img_res.raise_for_status()
+
+        content_type = img_res.headers.get("Content-Type", "").split(";")[0].strip().lower()
+        if not content_type.startswith("image/"):
+            print(f"[MEDIA] URL non è un'immagine valida: {image_url} ({content_type})")
+            return None
+
+        ext = mimetypes.guess_extension(content_type) or ".jpg"
+        if ext == ".jpe":
+            ext = ".jpg"
+        if ext not in [".jpg", ".jpeg", ".png", ".webp"]:
+            ext = ".jpg"
+            content_type = "image/jpeg"
+
+        filename = f"news_{os.urandom(4).hex()}{ext}"
+        headers_wp = {
+            "Content-Type": content_type,
+            "Content-Disposition": f'attachment; filename="{filename}"'
+        }
+
+        res = wp_media_upload_request(headers_wp, img_res.content, retries=2)
+
+        if res.status_code == 201:
+            media_id = res.json().get("id")
+            print(f"[MEDIA] Immagine caricata: {media_id}")
+            return media_id
+
+        print(f"[MEDIA] Status: {res.status_code}")
+        print(f"[MEDIA] Risposta: {res.text[:500]}")
+        return None
+    except Exception as e:
+        print(f"[MEDIA] Errore upload immagine {image_url}: {e}")
+        return None
+
+
+def append_embeds_to_html(content_html, embed_urls):
+    if not embed_urls:
+        return content_html
+
+    chunks = []
+    for url in dedupe_preserve_order(embed_urls):
+        clean_url = normalize_embed_url(url)
+        if not clean_url:
+            continue
+        if get_embed_provider_slug(clean_url) == "facebook" and facebook_url_is_probably_bad(clean_url):
+            continue
+        if social_url_is_embeddable(clean_url):
+            chunks.append(clean_url)
+        else:
+            chunks.append(get_social_fallback_html(clean_url))
+
+    if not chunks:
+        return content_html
+
+    embed_block = "\n\n" + "\n\n".join(chunks) + "\n\n"
+    paragraphs = re.findall(r"<p\b[^>]*>.*?</p>", content_html, flags=re.I | re.S)
+    if paragraphs:
+        first = paragraphs[0]
+        return content_html.replace(first, first + embed_block, 1)
+    return content_html + embed_block
+
+
+def find_existing_post_by_url(url):
+    try:
+        res = session.get(
+            WP_API_URL,
+            params={"search": url, "per_page": 10},
+            auth=(WP_USER, WP_PASSWORD),
+            timeout=REQUEST_TIMEOUT_WP
+        )
+        if res.status_code == 200:
+            items = res.json()
+            for item in items:
+                content = json.dumps(item, ensure_ascii=False)
+                if url in content:
+                    return item.get("id")
+    except Exception as e:
+        print(f"[WP] Verifica post esistente fallita: {e}")
+    return None
+
+def wp_create_post_request(payload, retries=2):
+    last_exc = None
+
+    for attempt in range(retries + 1):
+        try:
+            res = session.post(
+                WP_API_URL,
+                json=payload,
+                auth=(WP_USER, WP_PASSWORD),
+                timeout=REQUEST_TIMEOUT_WP
+            )
+            return res
+        except (requests.Timeout, requests.ConnectionError, requests.RequestException) as e:
+            last_exc = e
+            print(f"[WP] Errore creazione post (tentativo {attempt + 1}/{retries + 1}): {e}")
+            if attempt < retries:
+                time.sleep(2)
+
+    raise last_exc
+
+def create_post_without_image(data, sem_id, url, embed_urls=None):
+    try:
+        testo_html = data["testo"]
+        soup_temp = BeautifulSoup(testo_html, "html.parser")
+
+        for a in soup_temp.find_all("a"):
+            href = normalize_embed_url(a.get("href", ""))
+            if any(sp in href for sp in SOCIAL_DOMAINS):
+                if get_embed_provider_slug(href) == "facebook" and facebook_url_is_probably_bad(href):
+                    a.decompose()
+                    continue
+                replacement = href if social_url_is_embeddable(href) else get_social_fallback_html(href)
+                a.replace_with("\n\n" + replacement + "\n\n")
+
+        content_html = normalize_x_links_in_text(str(soup_temp))
+        content_html = append_embeds_to_html(content_html, embed_urls or [])
+        safe_source_url = url.replace('"', "&quot;")
+        content_html += f'\n\n<hr><p><a href="{safe_source_url}" target="_blank" rel="nofollow noopener noreferrer"><b>FONTE</b></a></p>'
+
+        payload = {
+            "title": data["titolo"],
+            "content": content_html,
+            "categories": [int(data.get("categoria", 8))],
+            "status": "publish",
+            "meta": {"semantic_id": sem_id, "original_url": url}
+        }
+        
+        try:
+            res = wp_create_post_request(payload, retries=2)
+            print(f"[WP] Status create: {res.status_code}")
+            if res.status_code == 201:
+                data_json = res.json()
+                return data_json.get("id"), data_json
+
+            print(f"[WP] Risposta: {res.text[:500]}")
+            return None, None
+
+        except requests.Timeout:
+            print("[WP] Timeout in creazione post, controllo se è stato creato comunque...")
+            existing_id = find_existing_post_by_url(url)
+            if existing_id:
+                print(f"[WP] Post già presente dopo timeout: {existing_id}")
+                return existing_id, {"id": existing_id}
+            raise
+    except Exception as e:
+        print(f"[WP] Errore creazione post: {e}")
+        return None, None
+
+
+def attach_featured_media(post_id, media_id):
+    try:
+        payload = {"featured_media": media_id}
+        post_url = f"{WP_API_URL}/{post_id}"
+        res = session.post(
+            post_url,
+            json=payload,
+            auth=(WP_USER, WP_PASSWORD),
+            timeout=REQUEST_TIMEOUT_WP
+        )
+        print(f"[WP] Status attach image: {res.status_code}")
+        if res.status_code in [200, 201]:
+            return True
+        print(f"[WP] Risposta attach: {res.text[:500]}")
+        return False
+    except Exception as e:
+        print(f"[WP] Errore attach immagine al post {post_id}: {e}")
+        return False
+
+
+def build_candidates(history):
+    queue = []
+    seen_in_this_run = set()
+    seen_title_keys = set(history["title_keys"])
+
+    print("[BOT] Avvio scansione feed")
+
+    for feed_url in FEEDS:
+        print(f"[BOT] Scansione feed: {feed_url}")
+        try:
+            parsed = feedparser.parse(feed_url)
+            if getattr(parsed, "bozo", False):
+                print(f"[BOT] Warning feed malformato: {feed_url}")
+
+            for entry in parsed.entries[:25]:
+                link = getattr(entry, "link", None)
+                title = getattr(entry, "title", "Senza titolo")
+                if not link:
+                    continue
+
+                sem_id = make_semantic_id_from_title(title)
+                title_key = make_title_key(title)
+
+                if link in history["urls"]:
+                    print(f"[SKIP] URL già in history: {link}")
+                    continue
+                if sem_id in history["semantic_ids"]:
+                    print(f"[SKIP] semantic_id già in history: {sem_id}")
+                    continue
+                if title_key and title_key in seen_title_keys:
+                    print(f"[SKIP] titolo già visto: {title}")
+                    continue
+                if sem_id in seen_in_this_run or title_key in seen_in_this_run:
+                    continue
+
+                seen_in_this_run.add(sem_id)
+                seen_in_this_run.add(title_key)
+                queue.append({"entry": entry, "semantic_id": sem_id, "title_key": title_key})
+        except Exception as e:
+            print(f"[BOT] Errore feed {feed_url}: {e}")
+
+    return queue
+
+
+def run_bot():
+    run_start = time.time()
+
+    if not check_gemini():
+        print("[BOT] Stop: nessun modello Gemini disponibile")
+        return
+
+    history = load_history()
+    queue = build_candidates(history)
+    seen_story_fingerprints = set(history.get("story_fingerprints", set()))
+    seen_news_core_keys = set(history.get("news_core_keys", set()))
+
+    if not queue:
+        print("[BOT] Nessuna news nuova trovata")
+        return
+
+    print(f"[BOT] News candidate totali: {len(queue)}")
+
+    published_count = 0
+    processed_count = 0
+    model_fail_streak = 0
+    validation_fail_streak = 0
+    wp_fail_streak = 0
+    source_fail_counts = {}
+
+    for item in queue:
+        if time.time() - run_start > MAX_RUN_SECONDS:
+            print("[BOT] Stop anticipato: superato timeout massimo run")
+            break
+        if published_count >= MAX_POSTS_PER_RUN:
+            break
+        if processed_count >= MAX_CANDIDATES_TO_TRY:
+            print("[BOT] Raggiunto limite massimo candidati provati")
+            break
+        if model_fail_streak >= MAX_MODEL_FAIL_STREAK:
+            print("[BOT] Stop anticipato: troppi errori consecutivi di modello")
+            break
+        if validation_fail_streak >= MAX_VALIDATION_FAIL_STREAK:
+            print("[BOT] Stop anticipato: troppi errori consecutivi di validazione")
+            break
+        if wp_fail_streak >= MAX_WP_FAIL_STREAK:
+            print("[BOT] Stop anticipato: troppi errori consecutivi da WordPress")
+            break
+
+        processed_count += 1
+        entry = item["entry"]
+        link = entry.link
+        title = sanitize_text(getattr(entry, "title", "Senza titolo"))
+        sem_id = item["semantic_id"]
+        title_key = item["title_key"]
+
+        print(f"[BOT] Elaborazione: {title}")
+        print(f"[BOT] semantic_id={sem_id}")
+
+        domain = get_domain(link)
+        if source_fail_counts.get(domain, 0) >= MAX_SOURCE_FAILS_PER_DOMAIN:
+            print(f"[SKIP] Dominio temporaneamente escluso in questa run: {domain}")
+            continue
+
+        full_text, scrape_error, page_html, page_img, embed_urls = get_clean_text(link)
+        if embed_urls:
+            print(f"[BOT] Embed trovati: {len(embed_urls)}")
+
+        if not full_text:
+            fallback_text = get_summary_fallback(entry)
+            if fallback_text:
+                print(f"[BOT] Uso summary fallback per: {title}")
+                full_text = fallback_text
+            else:
+                print(f"[SKIP] Testo insufficiente: {title}")
+                if scrape_error and scrape_error.startswith("http_"):
+                    source_fail_counts[domain] = source_fail_counts.get(domain, 0) + 1
+                continue
+
+        story_fingerprint = make_story_fingerprint(title, full_text)
+        news_core_key = make_news_core_key(title, full_text)
+
+        if is_duplicate_story_fingerprint(story_fingerprint, seen_story_fingerprints):
+            print(f"[SKIP] News probabilmente già pubblicata da altra fonte: {title}")
+            print(f"[SKIP] story_fingerprint={story_fingerprint}")
+            continue
+
+        if news_core_key and news_core_key in seen_news_core_keys:
+            print(f"[SKIP] News core già pubblicata da altra fonte: {title}")
+            print(f"[SKIP] news_core_key={news_core_key}")
+            continue
+
+        news_data, err_type = translate_news(title, full_text, source_url=link)
+        if not news_data:
+            if err_type == "model":
+                model_fail_streak += 1
+            else:
+                validation_fail_streak += 1
+            print(f"[SKIP] Traduzione fallita: {title} (model_streak={model_fail_streak}, validation_streak={validation_fail_streak})")
+            continue
+
+        if err_type == "model":
+            model_fail_streak += 1
+        else:
+            model_fail_streak = 0
+
+        if err_type == "ok":
+            validation_fail_streak = 0
+        elif err_type == "soft_mismatch":
+            print(f"[BOT] Titolo parafrasato ma accettato: {news_data['titolo']}")
+        else:
+            validation_fail_streak += 1
+
+        if title_soft_validation_failed(news_data["titolo"]):
+            validation_fail_streak += 1
+            print(f"[SKIP] Titolo non pubblicabile: {news_data['titolo']}")
+            continue
+
+        if err_type != "soft_mismatch" and not title_is_good_enough_for_publish(news_data["titolo"]):
+            validation_fail_streak += 1
+            print(f"[SKIP] Titolo non pubblicabile: {news_data['titolo']}")
+            continue
+
+        model_fail_streak = 0
+
+        post_id, post_json = create_post_without_image(
+            data=news_data,
+            sem_id=sem_id,
+            url=link,
+            embed_urls=embed_urls
+        )
+
+        if not post_id:
+            wp_fail_streak += 1
+            print(f"[FAIL] Creazione post fallita per: {news_data['titolo']} (wp_streak={wp_fail_streak})")
+            continue
+
+        wp_fail_streak = 0
+
+        img_url = extract_image_url(entry) or page_img
+        if img_url:
+            print(f"[BOT] Immagine trovata: {img_url}")
+            img_id = upload_image_to_wp(img_url)
+            if img_id:
+                attached = attach_featured_media(post_id, img_id)
+                if not attached:
+                    print(f"[WP] Immagine non associata al post {post_id}, ma il post è già pubblicato")
+        else:
+            print(f"[BOT] Nessuna immagine trovata per: {title}")
+
+        print(f"[OK] Pubblicato: {news_data['titolo']}")
+        save_to_history(link, sem_id, title_key, story_fingerprint, news_core_key)
+        seen_story_fingerprints.add(story_fingerprint)
+        if news_core_key:
+            seen_news_core_keys.add(news_core_key)
+        published_count += 1
+        time.sleep(1)
+
+    print(f"[BOT] Pubblicati {published_count} articoli su {processed_count} candidati provati")
+
+
+if __name__ == "__main__":
+    run_bot()
