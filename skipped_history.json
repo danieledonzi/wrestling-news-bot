@@ -1,6 +1,6 @@
 {
   "schema": "owtv_skipped_history_v85_4",
-  "updated_at": "2026-05-13T08:55:30",
+  "updated_at": "2026-05-13T09:29:51",
   "items": {
     "https://www.wrestlinginc.com/2171674/mma-ufc-328-rankings-update-sean-strickland/": {
       "url": "https://www.wrestlinginc.com/2171674/mma-ufc-328-rankings-update-sean-strickland/",
@@ -455,6 +455,28 @@
       "expires_at": 1778748930.250767,
       "ttl_seconds": 86400,
       "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.ringsidenews.com/naraku-makes-wwe-ring-debut-during-512-nxt/": {
+      "url": "https://www.ringsidenews.com/naraku-makes-wwe-ring-debut-during-512-nxt/",
+      "title": "Naraku Makes WWE In-Ring Debut During 5/12 NXT",
+      "reason": "score_below_threshold",
+      "score": 51,
+      "summary": "The May 12 episode of NXT was a big episode for fans who follow NJPW as well. Evil was once a top name in that company, but Naraku made his NXT debut tonight. Evil's new name in WWE is Naraku. That word roughly translates from Japanese to \"hell\" or \"abyss,\" so the new moniker is fitting. The dangerous Japanese pro wrestler is already a legend on his own, but he has yet to tackle WWE. Lince Dorado, who used to be a main roster Superstar and is now a regular in AAA, was Naraku's first opponent. Fa",
+      "score_reasons": [
+        "WWE/main roster",
+        "impatto roster/storyline",
+        "WWE main roster + storyline/evento",
+        "ritorno/debutto",
+        "PLE/PPV",
+        "v62 ritorno/debutto",
+        "v70 cap preview hard",
+        "v71 source reliability soft penalty",
+        "v71 freshness=0.585"
+      ],
+      "created_at": 1778664591.2812252,
+      "expires_at": 1778923791.2812252,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_1_scoring_signature_validation_stabilizer (d73a603)"
     }
   }
 }
