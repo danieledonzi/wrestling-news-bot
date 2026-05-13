@@ -7108,7 +7108,11 @@ def run_bot():
         return
 
     if not check_gemini():
-        print("[BOT] Stop: nessun modello Gemini disponibile")
+        print("[BOT] Gemini non disponibile: salvo in pending i candidati pubblicabili e interrompo senza perdere la coda")
+        try:
+            v868_save_candidates_when_gemini_down(queue, mode=mode, limit=new_post_limit)
+        except Exception as e:
+            print(f"[PENDING v86.8] Errore salvataggio candidati per Gemini down: {e}")
         return
 
     pending_published = 0
@@ -16904,7 +16908,11 @@ def run_bot():
         return
 
     if not check_gemini():
-        print("[BOT] Stop: nessun modello Gemini disponibile")
+        print("[BOT] Gemini non disponibile: salvo in pending i candidati pubblicabili e interrompo senza perdere la coda")
+        try:
+            v868_save_candidates_when_gemini_down(queue, mode=mode, limit=new_post_limit)
+        except Exception as e:
+            print(f"[PENDING v86.8] Errore salvataggio candidati per Gemini down: {e}")
         return
 
     pending_published = 0
@@ -17126,6 +17134,156 @@ def run_bot():
         f"({pending_published} pending + {new_published} nuove) "
         f"su {total_processed} candidati provati | mode={mode}"
     )
+
+
+
+# =========================
+# v86.8 - Gemini offline pending preservation + executive interview cap
+# =========================
+BOT_VERSION = "v86_8_gemini_offline_pending_preservation"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V868_GEMINI_DOWN_PENDING_ENABLED = os.getenv("V86_8_GEMINI_DOWN_PENDING_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V868_EXECUTIVE_OPINION_CAP_ENABLED = os.getenv("V86_8_EXECUTIVE_OPINION_CAP_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V868_EXECUTIVE_OPINION_CAP = int(os.getenv("V86_8_EXECUTIVE_OPINION_CAP", "72"))
+
+# Final runtime label cleanup for this patch line.
+try:
+    import builtins as _v868_builtins
+    _ORIG_V868_PRINT = _v868_builtins.print
+    def _v868_clean_label_text(obj):
+        s = str(obj)
+        replacements = {
+            "[BOOT v86.7]": "[BOOT v86.8]",
+            "[RUN v86.7]": "[RUN v86.8]",
+            "[REPORT v86.7]": "[REPORT v86.8]",
+            "[FRESHNESS v86.7]": "[FRESHNESS v86.8]",
+            "[SKIP v86.7]": "[SKIP v86.8]",
+            "[PENDING v86.7]": "[PENDING v86.8]",
+            "[BOT v86.7]": "[BOT v86.8]",
+            "[SCORE v86.7]": "[SCORE v86.8]",
+            "[MEDIA v86.7]": "[MEDIA v86.8]",
+            "[SKIP v86.6]": "[SKIP v86.8/legacy]",
+            "[REPORT v86.6]": "[REPORT v86.8/legacy]",
+            "[FRESHNESS v86.6]": "[FRESHNESS v86.8/legacy]",
+            "[PENDING v85.5]": "[PENDING v86.8/legacy]",
+            "[RUN v85]": "[RUN v86.8/legacy]",
+        }
+        for old, new_value in replacements.items():
+            s = s.replace(old, new_value)
+        return s
+    def _v868_print(*args, **kwargs):
+        args = tuple(_v868_clean_label_text(a) for a in args)
+        return _ORIG_V868_PRINT(*args, **kwargs)
+    _v868_builtins.print = _v868_print
+except Exception:
+    pass
+
+
+def v868_queue_sort_for_pending(queue):
+    """Priorita' pending quando Gemini e' offline: prima veri results report, poi score."""
+    def key(item):
+        try:
+            is_report = 1 if v867_is_true_results_item(item) else 0
+            score = int((item or {}).get("score", 0) or 0)
+            feed_order = int((item or {}).get("feed_order", 0) or 0)
+            # preferisci fonte piu completa/report con score alto; feed_order minore e' meglio.
+            return (is_report, score, -feed_order)
+        except Exception:
+            return (0, 0, 0)
+    return sorted(list(queue or []), key=key, reverse=True)
+
+
+def v868_save_candidates_when_gemini_down(queue, mode="normal", limit=3):
+    """Gemini offline deve comportarsi come WP offline: non perdere candidati pubblicabili.
+
+    In particolare i TRUE_RESULTS_REPORT non devono uscire dalla run senza pending.
+    """
+    if not V868_GEMINI_DOWN_PENDING_ENABLED:
+        print("[PENDING v86.8] Salvataggio Gemini down disabilitato da env")
+        return 0
+    prioritized = v868_queue_sort_for_pending(queue)
+    reason = f"gemini_down_initial_{mode}"
+    before_pending = load_pending_articles(load_history()) if "load_pending_articles" in globals() else []
+    before_keys = set()
+    for p in before_pending or []:
+        before_keys.add((p.get("report_event_key") or p.get("event_key") or p.get("url") or p.get("semantic_id") or p.get("title", "")))
+    save_selected_candidates_to_pending(prioritized, reason=reason, limit=limit)
+    # Assicurati che almeno il miglior true-results report venga preservato, anche se limiti/tier futuri cambiano.
+    forced = 0
+    for item in prioritized:
+        if not v867_is_true_results_item(item):
+            continue
+        rkey = v867_report_key(item)
+        u = v867_item_url(item)
+        dedupe_key = rkey or u or item.get("semantic_id") or item.get("title", "")
+        if dedupe_key in before_keys:
+            break
+        try:
+            add_pending_article(item, reason=reason + "_true_results_forced")
+            forced += 1
+            print(f"[PENDING v86.8] True-results preservato per Gemini down: {rkey or item.get('title')}")
+        except Exception as e:
+            print(f"[PENDING v86.8] Errore preservazione true-results: {e}")
+        break
+    return forced
+
+
+def v868_is_executive_opinion_interview(title="", text="", url="", editorial_analysis=None):
+    """Cap per interviste/opinioni su ruoli executive passati/futuri, non per news corporate concrete."""
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:1800]}")
+    if not probe:
+        return False
+    # Non toccare report/results o eventi concreti corporate.
+    if v865_is_true_results_report(title, url, text):
+        return False
+    concrete_business = [
+        "media rights", "tv deal", "broadcast rights", "netflix", "espn", "cw", "peacock",
+        "revenue", "earnings", "financial", "q1", "q2", "q3", "q4", "merger", "acquisition",
+        "stock", "shareholder", "contract extension", "new deal", "signs new deal",
+        "lawsuit", "settlement", "arrest", "sentenced", "released", "roster cuts", "pay cuts",
+    ]
+    if any(x in probe for x in concrete_business):
+        return False
+    executive_context = any(x in probe for x in [
+        "executive", "wrestling executive", "evp", "president", "chief", "management", "management role",
+        "run a company", "running a company", "front office", "dirigente", "dirigenza",
+    ])
+    interview_context = any(x in probe for x in [
+        "says", "said", "reveals", "revealed", "looks back", "reflects", "admits", "failed",
+        "wants to try again", "would try again", "open to", "interview", "podcast", "comments on",
+        "dice", "racconta", "ammette", "intervista", "podcast",
+    ])
+    return bool(executive_context and interview_context)
+
+
+_ORIG_V868_calculate_importance_score = calculate_importance_score
+
+def calculate_importance_score(title, text="", url=""):
+    score, reasons = _ORIG_V868_calculate_importance_score(title, text, url)
+    if V868_EXECUTIVE_OPINION_CAP_ENABLED and v868_is_executive_opinion_interview(title, text, url):
+        old = int(score or 0)
+        if old > V868_EXECUTIVE_OPINION_CAP:
+            score = V868_EXECUTIVE_OPINION_CAP
+            reasons = list(reasons or [])
+            reasons.append(f"v86.8 cap executive interview/opinion {old}->{score}")
+            print(f"[SCORE v86.8] Cap executive interview/opinion {old}->{score} - {title}")
+    return clamp_score(score), reasons[:12]
+
+
+_ORIG_V868_v723_conservative_score_after_ai = v723_conservative_score_after_ai
+
+def v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title="", text="", url="", editorial_analysis=None):
+    score, reasons = _ORIG_V868_v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title, text, url, editorial_analysis)
+    if V868_EXECUTIVE_OPINION_CAP_ENABLED and v868_is_executive_opinion_interview(title, text, url, editorial_analysis=editorial_analysis):
+        old = int(score or 0)
+        if old > V868_EXECUTIVE_OPINION_CAP:
+            score = V868_EXECUTIVE_OPINION_CAP
+            reasons = list(reasons or [])
+            reasons.append(f"v86.8 cap AI executive interview/opinion {old}->{score}")
+            print(f"[SCORE v86.8] Cap AI executive interview/opinion {old}->{score} - {title}")
+    return clamp_score(score), reasons[:14]
+
 
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 if __name__ == "__main__":
