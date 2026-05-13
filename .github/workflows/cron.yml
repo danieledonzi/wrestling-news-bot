@@ -1,4 +1,4 @@
-name: OpenWrestlingTV Bot v86.6
+name: OpenWrestlingTV Bot v86.7
 
 on:
   workflow_dispatch:
@@ -8,27 +8,32 @@ on:
 jobs:
   run-bot:
     runs-on: ubuntu-latest
-    env:
-      WP_URL: ${{ secrets.WP_URL }}
-      WP_USER: ${{ secrets.WP_USER }}
-      WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      GEMINI_MODEL_CHAIN: gemini-2.5-flash-lite,gemini-2.5-flash
-      V86_6_ITEM_ERROR_ISOLATION_ENABLED: "1"
-      V86_6_MEDIA_GUARD_ENABLED: "1"
-      V86_6_FUTURE_SPEC_CAP_ENABLED: "1"
-      V86_6_FUTURE_SPEC_SCORE_CAP: "72"
-      V86_6_CLEAN_RUNTIME_LABELS_ENABLED: "1"
-      V86_5_TRUE_RESULTS_REPORT_GATE_ENABLED: "1"
-      V86_5_STRIP_TRUE_REPORT_HISTORY_ENABLED: "1"
-      V86_2_REPORT_MORNING_HOLD_ENABLED: "1"
-      V86_2_REPORT_HOLD_HOUR: "6"
-      V86_2_REPORT_HOLD_MINUTE: "30"
-      V86_2_REPORT_HOLD_TIMEZONE: Europe/Rome
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install -r requirements.txt
-      - run: python bot.py
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests feedparser beautifulsoup4 google-genai
+
+      - name: Run bot v86.7
+        env:
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
+          WP_URL: ${{ secrets.WP_URL }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL_CHAIN: gemini-3.1-flash-lite,gemini-2.5-flash-lite
+          V86_7_PENDING_TRUTH_FIX_ENABLED: "1"
+          V86_7_STRICT_TRUE_REPORT_PENDING_ENABLED: "1"
+          V86_6_MEDIA_GUARD_ENABLED: "1"
+          V86_6_FUTURE_SPEC_CAP_ENABLED: "1"
+          V86_2_REPORT_MORNING_HOLD_ENABLED: "1"
+        run: |
+          python bot.py
