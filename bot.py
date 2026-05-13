@@ -17708,10 +17708,276 @@ def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", 
         featured_image_url=featured_image_url,
     )
 
+
+# =========================
+# v87.1 - Ringside lazy embed decoder + outer published review saver
+# =========================
+BOT_VERSION = "v87_1_lazy_embed_review_retry_guard"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V871_RSN_LAZY_EMBED_ENABLED = os.getenv("V871_RSN_LAZY_EMBED_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V871_OUTER_REVIEW_SAVE_ENABLED = os.getenv("V871_OUTER_REVIEW_SAVE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+try:
+    import base64 as _v871_base64
+    import html as _v871_html_mod
+except Exception:
+    _v871_base64 = None
+    _v871_html_mod = None
+
+try:
+    _ORIG_V871_PRINT = _ORIG_V87_PRINT if "_ORIG_V87_PRINT" in globals() else print
+    def _v871_label_cleanup(obj):
+        if not isinstance(obj, str):
+            return obj
+        repl = {
+            "[REPORT v86.6]": "[REPORT v87.1/legacy]",
+            "[REPORT v86.6/legacy]": "[REPORT v87.1/legacy]",
+            "[REPORT v86.8/legacy]": "[REPORT v87.1/legacy]",
+            "[REPORT v87/legacy]": "[REPORT v87.1/legacy]",
+            "[RUN v86.8/legacy]": "[RUN v87.1/legacy]",
+            "[MEDIA v87/legacy]": "[MEDIA v87.1/legacy]",
+            "[LINK v87]": "[LINK v87.1]",
+            "[MODEL v87]": "[MODEL v87.1]",
+        }
+        for old, new in repl.items():
+            obj = obj.replace(old, new)
+        return obj
+    import builtins as _v871_builtins
+    def _v871_print(*args, **kwargs):
+        args = tuple(_v871_label_cleanup(a) for a in args)
+        return _ORIG_V87_PRINT(*args, **kwargs)
+    _v871_builtins.print = _v871_print
+except Exception:
+    pass
+
+
+def v871_decode_possible_base64(value=""):
+    if not value or not _v871_base64:
+        return ""
+    raw = str(value).strip()
+    candidates = [raw]
+    if _v871_html_mod:
+        candidates.append(_v871_html_mod.unescape(raw))
+    for candidate in candidates:
+        try:
+            padded = candidate + ("=" * ((4 - len(candidate) % 4) % 4))
+            decoded = _v871_base64.b64decode(padded, validate=False)
+            text = decoded.decode("utf-8", errors="ignore")
+            if "<" in text and ">" in text:
+                return text
+        except Exception:
+            continue
+    return ""
+
+
+def v871_extract_urls_from_rsn_lazy_html(encoded=""):
+    decoded = v871_decode_possible_base64(encoded)
+    if not decoded:
+        return []
+    urls = []
+    try:
+        soup = BeautifulSoup(decoded, "html.parser")
+        for tag in soup.find_all(["a", "iframe", "amp-twitter", "amp-instagram", "blockquote"]):
+            if tag.name == "a" and tag.get("href"):
+                urls.append(tag.get("href", ""))
+            elif tag.name == "iframe" and tag.get("src"):
+                urls.append(tag.get("src", ""))
+            elif tag.name == "amp-twitter" and tag.get("data-tweetid"):
+                urls.append(f"https://twitter.com/i/status/{tag.get('data-tweetid')}")
+            elif tag.name == "amp-instagram" and tag.get("data-shortcode"):
+                urls.append(f"https://www.instagram.com/p/{tag.get('data-shortcode')}/")
+            elif tag.name == "blockquote":
+                for a in tag.find_all("a", href=True):
+                    urls.append(a.get("href", ""))
+    except Exception:
+        pass
+    clean = []
+    for u in urls:
+        try:
+            c = v86_canonical_embed_url(u) if "v86_canonical_embed_url" in globals() else normalize_embed_url(u)
+            if c and (v86_is_plausible_embed_url(c) if "v86_is_plausible_embed_url" in globals() else social_url_is_embeddable(c)):
+                clean.append(c)
+        except Exception:
+            continue
+    return dedupe_preserve_order(clean)
+
+
+def v871_extract_rsn_lazy_embed_urls(node):
+    if not V871_RSN_LAZY_EMBED_ENABLED or not node:
+        return []
+    urls = []
+    try:
+        candidates = []
+        if getattr(node, "attrs", None):
+            candidates.append(node)
+        if hasattr(node, "find_all"):
+            candidates.extend(node.find_all(attrs={"data-rsn-html": True}))
+            candidates.extend(node.find_all(class_=lambda c: c and "rsn-lazy-embed" in (" ".join(c) if isinstance(c, list) else str(c))))
+        seen_nodes = []
+        for cand in candidates:
+            if cand in seen_nodes:
+                continue
+            seen_nodes.append(cand)
+            classes = " ".join(cand.get("class", [])) if cand.get("class") else ""
+            if "rsn-lazy-embed" not in classes and not cand.get("data-rsn-html"):
+                continue
+            for attr in ["data-rsn-html", "data-html", "data-embed", "data-oembed-html"]:
+                if cand.get(attr):
+                    urls.extend(v871_extract_urls_from_rsn_lazy_html(cand.get(attr, "")))
+            for attr in ["data-rsn-url", "data-url", "data-href", "href"]:
+                if cand.get(attr):
+                    urls.append(cand.get(attr, ""))
+    except Exception as e:
+        print(f"[EMBED v87.1] Errore lettura rsn lazy embed: {e}")
+    clean = []
+    for u in urls:
+        try:
+            c = v86_canonical_embed_url(u) if "v86_canonical_embed_url" in globals() else normalize_embed_url(u)
+            if c and (v86_is_plausible_embed_url(c) if "v86_is_plausible_embed_url" in globals() else social_url_is_embeddable(c)):
+                clean.append(c)
+        except Exception:
+            continue
+    return dedupe_preserve_order(clean)
+
+
+def v871_preprocess_rsn_lazy_embeds_in_html(html=""):
+    """Convert Ringside News lazy social embeds into plain standalone oEmbed URLs.
+
+    Ringside stores the actual twitter blockquote inside data-rsn-html as base64.
+    The v86 ordered block engine cannot see it because it scans p/figure/blockquote,
+    not opaque lazy divs. This preprocessor replaces each lazy embed container with
+    standalone <p>URL</p> blocks so the existing oEmbed pipeline preserves position.
+    """
+    if not V871_RSN_LAZY_EMBED_ENABLED or not html:
+        return html
+    try:
+        soup = BeautifulSoup(html or "", "html.parser")
+        changed = 0
+        selectors = []
+        selectors.extend(soup.find_all(attrs={"data-rsn-html": True}))
+        selectors.extend(soup.find_all(class_=lambda c: c and "rsn-lazy-embed" in (" ".join(c) if isinstance(c, list) else str(c))))
+        seen = []
+        for node in list(selectors):
+            if node in seen:
+                continue
+            seen.append(node)
+            urls = v871_extract_rsn_lazy_embed_urls(node)
+            if not urls:
+                continue
+            repl_soup = BeautifulSoup("".join(f"<p>{u}</p>" for u in urls), "html.parser")
+            node.replace_with(repl_soup)
+            changed += len(urls)
+        if changed:
+            print(f"[EMBED v87.1] Estratti {changed} embed da rsn-lazy data-rsn-html")
+            return str(soup)
+    except Exception as e:
+        print(f"[EMBED v87.1] Preprocess rsn lazy embed fallito: {e}")
+    return html
+
+_ORIG_V871_build_ordered_content_blocks = build_ordered_content_blocks
+
+def build_ordered_content_blocks(html, source_url=""):
+    html2 = v871_preprocess_rsn_lazy_embeds_in_html(html)
+    return _ORIG_V871_build_ordered_content_blocks(html2, source_url=source_url)
+
+_ORIG_V871_extract_embeds_from_article_html = extract_embeds_from_article_html
+
+def extract_embeds_from_article_html(html):
+    html2 = v871_preprocess_rsn_lazy_embeds_in_html(html)
+    embeds = list(_ORIG_V871_extract_embeds_from_article_html(html2) or [])
+    try:
+        soup = BeautifulSoup(html or "", "html.parser")
+        embeds.extend(v871_extract_rsn_lazy_embed_urls(soup))
+    except Exception:
+        pass
+    return dedupe_preserve_order([u for u in embeds if u])
+
+# Store the final payload used for WordPress so the outer review saver can still
+# archive a final HTML even if legacy wrappers no longer carry review fields.
+_V871_LAST_PUBLISH_PAYLOAD_BY_KEY = {}
+_ORIG_V871_create_post_without_image = create_post_without_image
+
+def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+    result = _ORIG_V871_create_post_without_image(
+        data,
+        sem_id,
+        url,
+        embed_urls=embed_urls,
+        event_key=event_key,
+        inline_images=inline_images,
+        featured_image_url=featured_image_url,
+    )
+    try:
+        post_id = result[0] if isinstance(result, tuple) and result else None
+        if post_id and isinstance(data, dict):
+            key = (str(sem_id or ""), str(url or ""))
+            _V871_LAST_PUBLISH_PAYLOAD_BY_KEY[key] = {
+                "title": data.get("titolo", ""),
+                "html": data.get("testo", ""),
+                "category": data.get("categoria", ""),
+                "embed_urls": list(embed_urls or []),
+                "inline_images": list(inline_images or []),
+                "post_id": post_id,
+            }
+    except Exception as e:
+        print(f"[PUBLISHED REVIEW v87.1] Impossibile tracciare payload publish: {e}")
+    return result
+
+# Last, outermost published-review hook. Previous wrappers were buried in the
+# legacy chain and can be bypassed by later process_candidate_item overrides.
+_ORIG_V871_process_candidate_item = process_candidate_item
+
+def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    status = _ORIG_V871_process_candidate_item(
+        item,
+        history,
+        seen_story_fingerprints,
+        seen_news_core_keys,
+        seen_event_keys,
+        seen_story_signatures_v71,
+        source_fail_counts,
+    )
+    if V871_OUTER_REVIEW_SAVE_ENABLED and status == "published" and isinstance(item, dict):
+        if item.get("_published_review_saved_v871"):
+            return status
+        try:
+            key = (str(item.get("semantic_id") or item.get("semantic_id_v71") or ""), str(item.get("url") or ""))
+            payload = _V871_LAST_PUBLISH_PAYLOAD_BY_KEY.get(key)
+            if not payload:
+                # Fallback by URL only, because some wrappers mutate semantic_id for reports.
+                for (sem, u), val in _V871_LAST_PUBLISH_PAYLOAD_BY_KEY.items():
+                    if u and u == str(item.get("url") or ""):
+                        payload = val
+                        break
+            if payload:
+                item.setdefault("_review_translated_title", payload.get("title", ""))
+                item.setdefault("_review_translated_html", payload.get("html", ""))
+                item.setdefault("_review_final_category", payload.get("category", ""))
+                if payload.get("embed_urls") and not item.get("_review_embed_urls"):
+                    item["_review_embed_urls"] = payload.get("embed_urls", [])
+                if payload.get("inline_images") and not item.get("_review_inline_images"):
+                    item["_review_inline_images"] = payload.get("inline_images", [])
+            if not item.get("_review_original_html"):
+                # Best effort: preserve any already-scraped source body/html fields.
+                for k in ["page_html", "html", "source_html", "content_html", "raw_html"]:
+                    if item.get(k):
+                        item["_review_original_html"] = item.get(k)
+                        break
+            if item.get("_review_original_html") or item.get("_review_translated_html"):
+                save_published_html_review_item(item)
+                item["_published_review_saved_v871"] = True
+                print(f"[PUBLISHED REVIEW v87.1] Review outer salvata: {item.get('_review_translated_title') or item.get('title')}")
+            else:
+                print(f"[PUBLISHED REVIEW v87.1] Publish OK ma HTML review assente: {item.get('title')}")
+        except Exception as e:
+            print(f"[PUBLISHED REVIEW v87.1] Errore hook outer review: {e}")
+    return status
+
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 if __name__ == "__main__":
     if V854_BOOT_DIAGNOSTICS_ENABLED:
-        print(f"[BOOT v87] __main__ reached epoch={time.time():.3f}", flush=True)
+        print(f"[BOOT v87.1] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
