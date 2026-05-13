@@ -15137,12 +15137,327 @@ def run_bot():
         print(f"[BOOT v86.1] entro in run_bot epoch={time.time():.3f}", flush=True)
     return _ORIG_V861_run_bot_raw()
 
+
+
+# =========================
+# v86.2 - morning report hold + strict report WP confirmation
+# =========================
+BOT_VERSION = "v86_2_morning_report_hold"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V862_REPORT_MORNING_HOLD_ENABLED = os.getenv("V86_2_REPORT_MORNING_HOLD_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V862_REPORT_HOLD_HOUR = int(os.getenv("V86_2_REPORT_HOLD_HOUR", "6"))
+V862_REPORT_HOLD_MINUTE = int(os.getenv("V86_2_REPORT_HOLD_MINUTE", "30"))
+V862_REPORT_HOLD_TIMEZONE = os.getenv("V86_2_REPORT_HOLD_TIMEZONE", "Europe/Rome")
+V862_STRICT_REPORT_WP_CONFIRM_ENABLED = os.getenv("V86_2_STRICT_REPORT_WP_CONFIRM_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+
+def v862_now_local_dt():
+    try:
+        from zoneinfo import ZoneInfo
+        return datetime.now(ZoneInfo(V862_REPORT_HOLD_TIMEZONE))
+    except Exception:
+        return datetime.now()
+
+
+def v862_today_hold_dt(now=None):
+    now = now or v862_now_local_dt()
+    return now.replace(hour=V862_REPORT_HOLD_HOUR, minute=V862_REPORT_HOLD_MINUTE, second=0, microsecond=0)
+
+
+def v862_hold_until_timestamp_if_needed(now=None):
+    now = now or v862_now_local_dt()
+    hold_dt = v862_today_hold_dt(now)
+    if now < hold_dt:
+        return hold_dt.timestamp(), hold_dt.isoformat(timespec="minutes")
+    return 0.0, ""
+
+
+def v862_report_key_from_item(item):
+    item = item or {}
+    title = sanitize_text(item.get("title") or "")
+    url = item.get("url") or ""
+    summary = item.get("summary") or ""
+    return item.get("report_event_key") or make_report_event_key(title, url, summary)
+
+
+def v862_is_report_candidate_item(item):
+    if not isinstance(item, dict):
+        return False
+    if item.get("kind") == "report" or str(item.get("report_event_key") or item.get("event_key") or "").startswith("report:"):
+        return True
+    title = item.get("title", "")
+    url = item.get("url", "")
+    summary = item.get("summary", "")
+    atype = normalize_article_type_v68(item.get("article_type_hint", "")) if "normalize_article_type_v68" in globals() else item.get("article_type_hint", "")
+    return atype == "RESULTS_REPORT" or is_results_article(title, url, summary)
+
+
+def v862_report_pending_record(item, report_event_key, not_before, reason="report_hold_until_0630", full_text=""):
+    title = sanitize_text((item or {}).get("title") or "Senza titolo")
+    url = (item or {}).get("url") or ""
+    now = time.time()
+    entry = (item or {}).get("entry")
+    source_ts = float((item or {}).get("source_timestamp", 0) or (get_entry_timestamp(entry) if entry else 0) or now)
+    score = int((item or {}).get("score", MIN_PUBLISH_SCORE) or MIN_PUBLISH_SCORE)
+    domain = get_domain(url)
+    source_record = {
+        "url": url,
+        "title": title,
+        "source": domain,
+        "first_seen": source_ts,
+        "last_seen": now,
+        "last_text_len": len(full_text or ""),
+    }
+    return {
+        "kind": "report",
+        "url": url,
+        "title": title,
+        "semantic_id": report_event_key.replace("report:", "report-"),
+        "title_key": make_title_key(title),
+        "score": score,
+        "priority": priority_label(score),
+        "event_key": report_event_key,
+        "report_event_key": report_event_key,
+        "summary": (item or {}).get("summary", ""),
+        "reasons": (item or {}).get("score_reasons", []),
+        "score_reasons": list(dict.fromkeys(((item or {}).get("score_reasons", []) or []) + ["v86.2 report morning hold"])),
+        "is_breaking": False,
+        "breaking_expires_at": 0,
+        "status": "waiting_report_morning_hold" if not_before > now else "report_ready_after_morning_hold",
+        "reason": reason,
+        "created_at": source_ts,
+        "first_seen": source_ts,
+        "last_seen": now,
+        "not_before": float(not_before),
+        "hold_until_label": f"{V862_REPORT_HOLD_HOUR:02d}:{V862_REPORT_HOLD_MINUTE:02d} {V862_REPORT_HOLD_TIMEZONE}",
+        "attempts": int((item or {}).get("attempts", 0) or 0),
+        "sources": [source_record],
+    }
+
+
+def v862_save_report_pending(item, not_before=None, reason="report_hold_until_0630", full_text=""):
+    if not isinstance(item, dict):
+        return None
+    title = sanitize_text(item.get("title") or "Senza titolo")
+    url = item.get("url") or ""
+    if not url:
+        return None
+    report_event_key = v862_report_key_from_item(item)
+    if not report_event_key:
+        return None
+    now = time.time()
+    if not_before is None:
+        hold_ts, _ = v862_hold_until_timestamp_if_needed()
+        not_before = hold_ts if hold_ts else now
+    pending = load_pending_articles(load_history())
+    existing = None
+    for p in pending:
+        if p.get("kind") == "report" and p.get("report_event_key") == report_event_key:
+            existing = p
+            break
+    rec = v862_report_pending_record(item, report_event_key, float(not_before), reason=reason, full_text=full_text)
+    if existing:
+        existing["last_seen"] = now
+        existing["score"] = max(int(existing.get("score", 0) or 0), int(rec.get("score", 0) or 0))
+        # For morning hold the gate must not be earlier than 06:30 if still before 06:30.
+        existing["not_before"] = max(float(existing.get("not_before", 0) or 0), float(not_before)) if float(not_before) > now else min(float(existing.get("not_before", now) or now), float(not_before))
+        existing["status"] = rec["status"]
+        existing["reason"] = reason
+        existing["hold_until_label"] = rec.get("hold_until_label")
+        existing["score_reasons"] = list(dict.fromkeys((existing.get("score_reasons") or []) + rec.get("score_reasons", [])))
+        sources = existing.setdefault("sources", [])
+        for src in sources:
+            if src.get("url") == url:
+                src["last_seen"] = now
+                src["last_text_len"] = max(int(src.get("last_text_len", 0) or 0), len(full_text or ""))
+                break
+        else:
+            sources.append(rec["sources"][0])
+    else:
+        pending.append(rec)
+    save_pending_articles(pending)
+    remaining = max(0, int((float(not_before) - now) / 60))
+    if remaining:
+        print(f"[REPORT v86.2] Hold fino alle {V862_REPORT_HOLD_HOUR:02d}:{V862_REPORT_HOLD_MINUTE:02d}: {report_event_key} | pronto tra {remaining} min - {title}")
+    else:
+        print(f"[REPORT v86.2] Report oltre hold mattutino: {report_event_key} | pronto ora - {title}")
+    return report_event_key, float(not_before)
+
+
+# v86.2: strict report confirmation. Generic token matches such as NXT + date are not enough.
+_ORIG_V862_wp_has_published_event = wp_has_published_event
+
+
+def v862_report_key_parts(report_event_key=""):
+    raw = re.sub(r"^report:", "", report_event_key or "")
+    m = re.search(r"(20\d{2})-(\d{2})-(\d{2})", raw)
+    yyyy = mm = dd = ""
+    if m:
+        yyyy, mm, dd = m.group(1), m.group(2), m.group(3)
+    show = raw[:m.start()].strip("-") if m else raw
+    return show, yyyy, mm, dd
+
+
+def v862_date_markers(yyyy, mm, dd):
+    if not (yyyy and mm and dd):
+        return []
+    months_en = {"01":"january","02":"february","03":"march","04":"april","05":"may","06":"june","07":"july","08":"august","09":"september","10":"october","11":"november","12":"december"}
+    months_it = {"01":"gennaio","02":"febbraio","03":"marzo","04":"aprile","05":"maggio","06":"giugno","07":"luglio","08":"agosto","09":"settembre","10":"ottobre","11":"novembre","12":"dicembre"}
+    d = str(int(dd)); m = str(int(mm))
+    return [
+        f"{yyyy} {mm} {dd}", f"{yyyy}-{mm}-{dd}", f"{m} {d} {yyyy}", f"{d} {m} {yyyy}",
+        f"{m}/{d}/{yyyy}", f"{d}/{m}/{yyyy}", f"{months_en.get(mm,'')} {d} {yyyy}", f"{d} {months_it.get(mm,'')} {yyyy}",
+    ]
+
+
+def v862_report_post_is_strict_match(post, report_event_key="", source_title="", source_url=""):
+    try:
+        title_html = ((post or {}).get("title") or {}).get("rendered", "") if isinstance((post or {}).get("title"), dict) else str((post or {}).get("title", ""))
+        content_html = ((post or {}).get("content") or {}).get("rendered", "") if isinstance((post or {}).get("content"), dict) else str((post or {}).get("content", ""))
+        excerpt_html = ((post or {}).get("excerpt") or {}).get("rendered", "") if isinstance((post or {}).get("excerpt"), dict) else str((post or {}).get("excerpt", ""))
+        title_norm = normalize_for_check(BeautifulSoup(title_html or "", "html.parser").get_text(" ", strip=True))
+        combined = normalize_for_check(BeautifulSoup(f"{title_html} {content_html} {excerpt_html}", "html.parser").get_text(" ", strip=True))
+        raw_json = json.dumps(post, ensure_ascii=False)
+        if report_event_key and report_event_key in raw_json:
+            return True, "exact_event_key"
+        show, yyyy, mm, dd = v862_report_key_parts(report_event_key)
+        show_tokens = [t for t in show.split("-") if t and t not in {"wwe", "aew", "tna"}]
+        if "nxt" in show:
+            show_ok = "nxt" in title_norm or "nxt" in combined
+        elif "raw" in show:
+            show_ok = "raw" in title_norm or "raw" in combined
+        elif "smackdown" in show:
+            show_ok = "smackdown" in title_norm or "smackdown" in combined
+        elif "dynamite" in show:
+            show_ok = "dynamite" in title_norm or "dynamite" in combined
+        elif "collision" in show:
+            show_ok = "collision" in title_norm or "collision" in combined
+        elif "impact" in show or "tna" in show:
+            show_ok = "impact" in title_norm or "tna" in title_norm or "impact" in combined or "tna" in combined
+        else:
+            show_ok = all(t in combined for t in show_tokens[:2]) if show_tokens else False
+        marker_terms = ["results", "risultati", "report", "recap", "highlights", "key moments", "momenti chiave", "resoconto"]
+        marker_ok = any(t in title_norm for t in marker_terms)
+        date_ok = True
+        markers = [normalize_for_check(x) for x in v862_date_markers(yyyy, mm, dd) if x.strip()]
+        if markers:
+            date_ok = any(m in title_norm or m in combined for m in markers)
+        cats = set(int(c) for c in (post.get("categories") or []) if str(c).isdigit()) if isinstance(post, dict) else set()
+        editorial_ok = (REPORT_CATEGORY_ID in cats) or not cats
+        if source_url and source_url in raw_json:
+            # URL alone is not enough: it must be a report-looking post.
+            return (show_ok and marker_ok and date_ok), "source_url_plus_report_title" if (show_ok and marker_ok and date_ok) else "source_url_non_report"
+        ok = bool(show_ok and marker_ok and date_ok and editorial_ok)
+        return ok, "strict_title_category_date" if ok else f"not_report_match show={show_ok} marker={marker_ok} date={date_ok} editorial={editorial_ok}"
+    except Exception as e:
+        return False, f"error:{e}"
+
+
+def v862_wp_has_published_report_strict(report_event_key, title="", url=""):
+    report_event_key = (report_event_key or "").strip()
+    if not report_event_key:
+        return False
+    if not v78_wp_rest_lookups_allowed("v862_report_lookup"):
+        return False
+    cache_key = "strict:" + report_event_key
+    cached = WP_EVENT_LOOKUP_CACHE_V71.get(cache_key)
+    if cached and time.time() - cached.get("ts", 0) < 300:
+        return bool(cached.get("value"))
+    started = time.time()
+    show, yyyy, mm, dd = v862_report_key_parts(report_event_key)
+    query_parts = []
+    if title:
+        query_parts.append(title[:90])
+    show_q = show.replace("-", " ")
+    if show_q:
+        query_parts.append(f"{show_q} results {yyyy} {mm} {dd}".strip())
+        query_parts.append(f"{show_q} risultati {yyyy} {mm} {dd}".strip())
+    query_parts.append(report_event_key)
+    seen=[]
+    for q in query_parts:
+        q = sanitize_text(q)
+        if q and q not in seen:
+            seen.append(q)
+    for query in seen[:4]:
+        try:
+            res = session.get(WP_API_URL, params={"search": query, "per_page": 20, "status": "publish"}, auth=(WP_USER, WP_PASSWORD), timeout=REQUEST_TIMEOUT_WP_LOOKUP)
+            if res.status_code != 200:
+                continue
+            for post in res.json():
+                ok, why = v862_report_post_is_strict_match(post, report_event_key=report_event_key, source_title=title, source_url=url)
+                if ok:
+                    WP_EVENT_LOOKUP_CACHE_V71[cache_key] = {"ts": time.time(), "value": True}
+                    v71_perf_log("WP strict report lookup", started, threshold=0.5) if "v71_perf_log" in globals() else None
+                    print(f"[REPORT v86.2] WordPress conferma report completo: {report_event_key} ({why})")
+                    return True
+                else:
+                    post_title = BeautifulSoup((((post or {}).get("title") or {}).get("rendered", "") if isinstance((post or {}).get("title"), dict) else str((post or {}).get("title", ""))), "html.parser").get_text(" ", strip=True)
+                    if why and not why.startswith("not_report_match"):
+                        print(f"[REPORT v86.2] Match WP non compatibile con report completo: {why} | {post_title}")
+        except Exception as e:
+            print(f"[REPORT v86.2] Verifica report WP fallita ({report_event_key}): {e}")
+    WP_EVENT_LOOKUP_CACHE_V71[cache_key] = {"ts": time.time(), "value": False}
+    v71_perf_log("WP strict report lookup", started, threshold=0.5) if "v71_perf_log" in globals() else None
+    return False
+
+
+def wp_has_published_event(event_key, title="", url=""):
+    if V862_STRICT_REPORT_WP_CONFIRM_ENABLED and str(event_key or "").startswith("report:"):
+        return v862_wp_has_published_report_strict(event_key, title=title, url=url)
+    return _ORIG_V862_wp_has_published_event(event_key, title=title, url=url)
+
+
+# v86.2: replace report delay with the morning hold policy.
+_ORIG_V862_add_pending_report_article = add_pending_report_article
+
+
+def add_pending_report_article(item, full_text="", reason="report_live_delay"):
+    if not V862_REPORT_MORNING_HOLD_ENABLED:
+        return _ORIG_V862_add_pending_report_article(item, full_text=full_text, reason=reason)
+    hold_ts, hold_label = v862_hold_until_timestamp_if_needed()
+    not_before = hold_ts if hold_ts else time.time()
+    return v862_save_report_pending(item, not_before=not_before, reason="report_hold_until_0630", full_text=full_text)
+
+
+# v86.2: before 06:30, do not even process report candidates from feed; keep best in pending.
+_ORIG_V862_build_candidates = build_candidates
+
+
+def build_candidates(history, wp_available=True):
+    queue = _ORIG_V862_build_candidates(history, wp_available=wp_available)
+    if not V862_REPORT_MORNING_HOLD_ENABLED:
+        return queue
+    hold_ts, hold_label = v862_hold_until_timestamp_if_needed()
+    if not hold_ts:
+        return queue
+    filtered = []
+    held = 0
+    for item in queue:
+        if v862_is_report_candidate_item(item):
+            v862_save_report_pending(item, not_before=hold_ts, reason="report_hold_until_0630")
+            held += 1
+            continue
+        filtered.append(item)
+    if held:
+        print(f"[REPORT v86.2] {held} report trattenuti fino alle {V862_REPORT_HOLD_HOUR:02d}:{V862_REPORT_HOLD_MINUTE:02d} {V862_REPORT_HOLD_TIMEZONE}")
+    return filtered
+
+
+# v86.2 diagnostics: final wrapper label.
+_ORIG_V862_run_bot_raw = _ORIG_V861_run_bot_raw if "_ORIG_V861_run_bot_raw" in globals() else run_bot
+
+def run_bot():
+    if V854_BOOT_DIAGNOSTICS_ENABLED:
+        print(f"[BOOT v86.2] entro in run_bot epoch={time.time():.3f}", flush=True)
+    return _ORIG_V862_run_bot_raw()
+
 # =========================
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 # =========================
 if __name__ == "__main__":
     if V854_BOOT_DIAGNOSTICS_ENABLED:
-        print(f"[BOOT v86.1] __main__ reached epoch={time.time():.3f}", flush=True)
+        print(f"[BOOT v86.2] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
