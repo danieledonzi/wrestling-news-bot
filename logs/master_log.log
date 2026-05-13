@@ -389,3 +389,55 @@
 [REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (74 file)
 ===== RUN END [2026-05-13 11:54:58] VERSION [v86_5_true_results_report_gate (4ddce03)] =====
 
+[BOOT v86.5] __main__ reached epoch=1778673989.958
+
+===== RUN START [2026-05-13 12:06:28] VERSION [v86_5_true_results_report_gate (477a125)] =====
+[BOOT v86.5] entro in run_bot epoch=1778673989.958
+[BOOT v86.1] entro in run_bot epoch=1778673989.958
+[REPORT v86.5] History true-results override: rimossi 16 record da urls
+[REPORT v86.5] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.5] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.5] History true-results override: rimossi 8 record da event_keys
+[BOOT v85.4] prima health check WP epoch=1778673990.305
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): Post UFC 328 Rankings Update, Sean Strickland Enters P4P Top 10
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): WWE NXT - 5/12/2026: 3 Things We Hated And 3 Things We Loved
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): UFC's Dana White Says He Will Be Promoting Anthony Joshua Vs. Tyson Fury
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171618/darkstate-wwe-nxt-tag-title-rematch-despite-dissension/
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): AEW's Bobby Lashley Has A Lot Of Ideas For New Hurt Syndicate Members
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): AEW's Thunder Rosa Names Top Five Face Painters In Wrestling History
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): Dana White Pressed On Wife Slapping Incident, Not Stepping Down From UFC
+[SKIP v86.4] skipped_history ancora valida (low_value_opinion_pre_gemini): Thekla Comments On Possibility Of Former WWE Star Kairi Sane Joining AEW
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171539/wwe-nxt-lizzy-rain-first-goal-north-american-championship/
+[BOT] Errore feed https://www.wrestlinginc.com/feed/: maximum recursion depth exceeded while calling a Python object
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (26/75): Swerve Strickland Calls Out Wrestlers Afraid of Becoming Internet Memes
+[SKIP] URL già in history: https://www.ringsidenews.com/possible-date-randy-ortons-return-amid-wwe-tv-hiatus/
+[SKIP] Preview/show announcement scaduta: AEW Dynamite Preview for May 13, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP v86.4] skipped_history ancora valida (validation_fail): Rey Fenix Seemingly Vents Frustration Over Lack of Opportunities in WWE
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): Wyatt Sicks Set for First Wrestling Appearance After WWE Release
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): Multiple Title Matches Booked For May 19 WWE NXT
+[SKIP] URL già in history: https://www.ringsidenews.com/mason-rook-makes-big-declaration-during-contract-signing-512-nxt/
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): WWE SmackDown Viewership Sees Slight Increase on May 8, 2026
+[SKIP] URL già in history: https://www.ringsidenews.com/backstage-update-emerges-angel-garza-bertos-wwe-status-raw-panic/
+[FRESHNESS v86.4] Ignoro skipped_history low-score per post-show outcome: https://www.ringsidenews.com/naraku-makes-wwe-ring-debut-during-512-nxt/
+[FRESHNESS v86.4] Post-show outcome rescue: non tratto come preview scaduta - Naraku Makes WWE In-Ring Debut During 5/12 NXT
+[FRESHNESS v86.1] Post-show outcome rescue: non tratto come preview scaduta - Naraku Makes WWE In-Ring Debut During 5/12 NXT
+[SKIP] Score sotto soglia editoriale (51/75): Naraku Makes WWE In-Ring Debut During 5/12 NXT
+[SKIP] URL già in history: https://www.ringsidenews.com/major-wwe-events-expected-arizona-under-new-tko-deal/
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-talent-already-pushing-kofi-kingston-xavier-woods-wwe-exit/
+[BOT] Errore feed https://www.ringsidenews.com/feed/: maximum recursion depth exceeded while calling a Python object
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[MODEL v83] Route mode=normal report=False score=0 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] Nessuna news nuova trovata
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (75 file)
+===== RUN END [2026-05-13 12:06:28] VERSION [v86_5_true_results_report_gate (477a125)] =====
+

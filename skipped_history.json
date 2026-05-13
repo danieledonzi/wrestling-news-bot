@@ -1,6 +1,6 @@
 {
   "schema": "owtv_skipped_history_v85_4",
-  "updated_at": "2026-05-13T11:55:04",
+  "updated_at": "2026-05-13T12:06:32",
   "items": {
     "https://www.wrestlinginc.com/2171674/mma-ufc-328-rankings-update-sean-strickland/": {
       "url": "https://www.wrestlinginc.com/2171674/mma-ufc-328-rankings-update-sean-strickland/",
@@ -471,12 +471,31 @@
         "v62 ritorno/debutto",
         "v70 cap preview hard",
         "v71 source reliability soft penalty",
-        "v71 freshness=0.555"
+        "v71 freshness=0.552"
       ],
-      "created_at": 1778673304.6084697,
-      "expires_at": 1778932504.6084697,
+      "created_at": 1778673992.1303303,
+      "expires_at": 1778933192.1303303,
       "ttl_seconds": 259200,
-      "bot_version": "v86_5_true_results_report_gate (4ddce03)"
+      "bot_version": "v86_5_true_results_report_gate (477a125)"
+    },
+    "https://www.ringsidenews.com/swerve-strickland-calls-out-wrestlers-afraid-becoming-internet-memes/": {
+      "url": "https://www.ringsidenews.com/swerve-strickland-calls-out-wrestlers-afraid-becoming-internet-memes/",
+      "title": "Swerve Strickland Calls Out Wrestlers Afraid of Becoming Internet Memes",
+      "reason": "score_below_threshold",
+      "score": 26,
+      "summary": "Swerve Strickland thinks too many wrestlers are playing it safe now - and he believes that mindset is hurting creativity across the industry. While speaking on the Cruz Show, Swerve explained that real growth in wrestling comes from taking risks, embarrassing yourself sometimes, and being willing to fail publicly instead of constantly worrying about online reactions. According to Strickland, modern wrestling culture has become overly cautious because people are too focused on protecting themselv",
+      "score_reasons": [
+        "contratto",
+        "PLE/PPV",
+        "opinione generica",
+        "v62 reazioni/tributi",
+        "v71 source reliability soft penalty",
+        "v71 freshness=0.578"
+      ],
+      "created_at": 1778673991.9954264,
+      "expires_at": 1778933191.9954264,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_5_true_results_report_gate (477a125)"
     }
   }
 }
