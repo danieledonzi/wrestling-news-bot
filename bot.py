@@ -17285,10 +17285,254 @@ def v723_conservative_score_after_ai(initial_score, refined_score, refined_reaso
     return clamp_score(score), reasons[:14]
 
 
+
+
+# =========================
+# v86.9 - report source recovery + report priority + commentary cap
+# =========================
+BOT_VERSION = "v86_9_report_source_recovery"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V869_REPORT_SOURCE_RECOVERY_ENABLED = os.getenv("V86_9_REPORT_SOURCE_RECOVERY_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V869_REPORT_PRIORITY_ENABLED = os.getenv("V86_9_REPORT_PRIORITY_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V869_COMMENTARY_CAP_ENABLED = os.getenv("V86_9_COMMENTARY_CAP_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V869_COMMENTARY_CAP = int(os.getenv("V86_9_COMMENTARY_CAP", "68"))
+
+# Runtime label cleanup for this patch line. Logic is not changed by this mapper.
+try:
+    import builtins as _v869_builtins
+    _ORIG_V869_PRINT = _v869_builtins.print
+    def _v869_clean_label_text(obj):
+        s = str(obj)
+        replacements = {
+            "[BOOT v86.8]": "[BOOT v86.9]",
+            "[RUN v86.8]": "[RUN v86.9]",
+            "[REPORT v86.8]": "[REPORT v86.9]",
+            "[FRESHNESS v86.8]": "[FRESHNESS v86.9]",
+            "[SKIP v86.8]": "[SKIP v86.9]",
+            "[PENDING v86.8]": "[PENDING v86.9]",
+            "[BOT v86.8]": "[BOT v86.9]",
+            "[SCORE v86.8]": "[SCORE v86.9]",
+            "[MEDIA v86.8]": "[MEDIA v86.9]",
+            "[REPORT v86.8/legacy]": "[REPORT v86.9/legacy]",
+            "[SKIP v86.8/legacy]": "[SKIP v86.9/legacy]",
+            "[FRESHNESS v86.8/legacy]": "[FRESHNESS v86.9/legacy]",
+            "[RUN v86.8/legacy]": "[RUN v86.9/legacy]",
+        }
+        for old, new_value in replacements.items():
+            s = s.replace(old, new_value)
+        return s
+    def _v869_print(*args, **kwargs):
+        args = tuple(_v869_clean_label_text(a) for a in args)
+        return _ORIG_V869_PRINT(*args, **kwargs)
+    _v869_builtins.print = _v869_print
+except Exception:
+    pass
+
+
+def v869_item_is_true_results(item):
+    try:
+        return bool(v867_is_true_results_item(item))
+    except Exception:
+        try:
+            return bool(v865_is_true_results_report(
+                (item or {}).get("title", ""),
+                (item or {}).get("url", ""),
+                (item or {}).get("summary", ""),
+            ))
+        except Exception:
+            return False
+
+
+def v869_report_key(item):
+    try:
+        return v867_report_key(item)
+    except Exception:
+        return (item or {}).get("report_event_key") or (item or {}).get("event_key") or make_report_event_key(
+            (item or {}).get("title", ""), (item or {}).get("url", ""), (item or {}).get("summary", "")
+        )
+
+
+def v869_report_source_from_current_item(item):
+    """Fallback: if a report candidate is already a concrete URL, use it as a single source.
+
+    Older report code expected an aggregate item with a sources[] list. Feed candidates are
+    often single-source objects, so choose_best_report_source() returned None and the report
+    stayed pending forever. This builds a best-source dict directly from the current item.
+    """
+    if not V869_REPORT_SOURCE_RECOVERY_ENABLED or not isinstance(item, dict):
+        return None
+    title = sanitize_text(item.get("title", ""))
+    url = (item.get("url") or "").strip()
+    if not url or not v869_item_is_true_results(item):
+        return None
+
+    prefetched_text = item.get("prefetched_text") or ""
+    prefetched_html = item.get("prefetched_html") or ""
+    if prefetched_text:
+        score = report_source_completeness_score(title, prefetched_text)
+        print(f"[REPORT v86.9] Fonte corrente prefetched: len={len(prefetched_text)} completeness={score} url={url}")
+        return {
+            "url": url,
+            "title": title,
+            "text": prefetched_text,
+            "html": prefetched_html,
+            "image": item.get("prefetched_image") or item.get("image"),
+            "embeds": item.get("prefetched_embeds", []),
+            "inline_images": item.get("prefetched_inline_images", []),
+            "score": score,
+            "source": get_domain(url),
+            "source_priority": report_source_priority(url),
+        }
+
+    try:
+        full_text, scrape_error, page_html, page_img, embed_urls, inline_images = get_clean_text(url)
+    except Exception as e:
+        print(f"[REPORT v86.9] Fallback fonte corrente fallito: scrape exception {e} | {title}")
+        return None
+
+    if not full_text:
+        print(f"[REPORT v86.9] Fonte corrente scartata: testo vuoto scrape_error={scrape_error} url={url}")
+        return None
+
+    score = report_source_completeness_score(title, full_text)
+    print(f"[REPORT v86.9] Fonte corrente valutata: len={len(full_text)} completeness={score} url={url}")
+
+    # Do not publish clearly live/incomplete shells, but allow a single concrete candidate
+    # to be considered when it reaches the normal completeness threshold.
+    return {
+        "url": url,
+        "title": title,
+        "text": full_text,
+        "html": page_html,
+        "image": page_img,
+        "embeds": embed_urls,
+        "inline_images": inline_images,
+        "score": score,
+        "source": get_domain(url),
+        "source_priority": report_source_priority(url),
+    }
+
+
+_ORIG_V869_choose_best_report_source = choose_best_report_source
+
+def choose_best_report_source(report_item):
+    best = _ORIG_V869_choose_best_report_source(report_item)
+    if best:
+        print(f"[REPORT v86.9] Fonte aggregata valida: completeness={best.get('score')} source={best.get('source')} url={best.get('url')}")
+        return best
+
+    sources = (report_item or {}).get("sources") if isinstance(report_item, dict) else None
+    source_count = len(sources) if isinstance(sources, list) else 0
+    print(f"[REPORT v86.9] Nessuna fonte aggregata valida: sources={source_count}; provo candidato corrente")
+    fallback = v869_report_source_from_current_item(report_item)
+    if fallback:
+        print(f"[REPORT v86.9] Uso candidato corrente come fonte report: completeness={fallback.get('score')} | {fallback.get('url')}")
+    return fallback
+
+
+_ORIG_V869_build_candidates = build_candidates
+
+def build_candidates(history, wp_available=True):
+    queue = _ORIG_V869_build_candidates(history, wp_available=wp_available)
+    if not V869_REPORT_PRIORITY_ENABLED:
+        return queue
+    try:
+        def key(item):
+            is_report = 1 if v869_item_is_true_results(item) else 0
+            score = int((item or {}).get("score", 0) or 0)
+            feed_order = int((item or {}).get("feed_order", 0) or 0)
+            # true-results first, then score. Lower feed_order should win inside ties.
+            return (is_report, score, -feed_order)
+        sorted_queue = sorted(queue or [], key=key, reverse=True)
+        if sorted_queue and sorted_queue != queue:
+            top = sorted_queue[0]
+            if v869_item_is_true_results(top):
+                print(f"[REPORT v86.9] Priorita true-results in coda: {v869_report_key(top)} - {top.get('title')}")
+        return sorted_queue
+    except Exception as e:
+        print(f"[REPORT v86.9] Ordinamento priorita report fallito: {e}")
+        return queue
+
+
+def v869_is_commentary_opinion_masked_as_news(title="", text="", url="", editorial_analysis=None):
+    """Detects opinion/interview pieces that AI may misclassify as POST_SHOW_NEWS.
+
+    A phrase like "Bully Ray reveals why he doesn't think..." is commentary, not a
+    concrete return/debut/title/injury. It should not become score 100.
+    """
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:1800]}")
+    if not probe or v865_is_true_results_report(title, url, text):
+        return False
+    opinion_title_markers = [
+        "reveals why", "explains why", "doesn t think", "doesnt think", "does not think",
+        "thinks", "believes", "comments on", "weighs in", "reacts to", "says why",
+        "has concerns", "doesn t believe", "doesnt believe", "would like", "podcast",
+        "bully ray", "vince russo", "dave meltzer", "lance storm",
+    ]
+    if not any(m in probe for m in opinion_title_markers):
+        return False
+    concrete_markers = [
+        "new champion", "wins title", "title change", "signed", "signs with", "officially signs",
+        "released by", "wwe releases", "fired", "departure confirmed", "injured", "surgery",
+        "arrested", "sentenced", "lawsuit", "media rights", "tv deal", "contract extension",
+        "returns on raw", "returned on raw", "debuts on", "debuted on", "attacked", "attack on",
+    ]
+    if any(m in probe for m in concrete_markers):
+        return False
+    return True
+
+
+_ORIG_V869_calculate_importance_score = calculate_importance_score
+
+def calculate_importance_score(title, text="", url=""):
+    score, reasons = _ORIG_V869_calculate_importance_score(title, text, url)
+    if V869_COMMENTARY_CAP_ENABLED and v869_is_commentary_opinion_masked_as_news(title, text, url):
+        old = int(score or 0)
+        if old > V869_COMMENTARY_CAP:
+            score = V869_COMMENTARY_CAP
+            reasons = list(reasons or [])
+            reasons.append(f"v86.9 cap commentary/opinion {old}->{score}")
+            print(f"[SCORE v86.9] Cap commentary/opinion {old}->{score} - {title}")
+    return clamp_score(score), list(reasons or [])[:14]
+
+
+_ORIG_V869_v723_conservative_score_after_ai = v723_conservative_score_after_ai
+
+def v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title="", text="", url="", editorial_analysis=None):
+    score, reasons = _ORIG_V869_v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title, text, url, editorial_analysis)
+    if V869_COMMENTARY_CAP_ENABLED and v869_is_commentary_opinion_masked_as_news(title, text, url, editorial_analysis=editorial_analysis):
+        old = int(score or 0)
+        if old > V869_COMMENTARY_CAP:
+            score = V869_COMMENTARY_CAP
+            reasons = list(reasons or [])
+            reasons.append(f"v86.9 cap AI commentary/opinion {old}->{score}")
+            print(f"[SCORE v86.9] Cap AI commentary/opinion {old}->{score} - {title}")
+    return clamp_score(score), list(reasons or [])[:16]
+
+
+_ORIG_V869_process_candidate_item = process_candidate_item
+
+def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    # process_report_pending_item creates kind=report_ready after choosing a source. The v86.5/86.6
+    # true-results wrappers must not convert that back into kind=report, or it can re-enter the
+    # report source selector. Temporarily disable true-results detection only for this internal hop.
+    if isinstance(item, dict) and item.get("kind") == "report_ready":
+        global v865_is_true_results_report
+        original_detector = v865_is_true_results_report
+        try:
+            v865_is_true_results_report = lambda title="", url="", summary="": False
+            print(f"[REPORT v86.9] Processo report_ready senza re-entry nel report gate: {item.get('event_key') or item.get('report_event_key')}")
+            return _ORIG_V869_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+        finally:
+            v865_is_true_results_report = original_detector
+    return _ORIG_V869_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+
+
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 if __name__ == "__main__":
     if V854_BOOT_DIAGNOSTICS_ENABLED:
-        print(f"[BOOT v86.7] __main__ reached epoch={time.time():.3f}", flush=True)
+        print(f"[BOOT v86.9] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
