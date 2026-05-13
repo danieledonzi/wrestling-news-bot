@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-13 06:49:36",
-  "last_bot_version": "v85_5_performance_fast_history_pre_gemini_gates (314ea4e)",
-  "updated_at": "2026-05-13T06:50:09",
-  "total_items": 15,
+  "last_run_id": "2026-05-13 08:54:28",
+  "last_bot_version": "v86_structured_pipeline_embed_engine (62caff4)",
+  "updated_at": "2026-05-13T08:55:30",
+  "total_items": 16,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -124,6 +124,14 @@
       "original_html_file": "20260513_033840_005_nxt-i-darkstate-ottengono-il-rematch-per-gli-nxt-tag-team-championship-nonostant_23979f62_original.html",
       "final_html_file": "20260513_033840_005_nxt-i-darkstate-ottengono-il-rematch-per-gli-nxt-tag-team-championship-nonostant_23979f62_final.html",
       "metadata_file": "20260513_033840_005_nxt-i-darkstate-ottengono-il-rematch-per-gli-nxt-tag-team-championship-nonostant_23979f62_metadata.json"
+    },
+    {
+      "run_id": "2026-05-13 08:54:28",
+      "title": "WWE: Angel Garza e Berto non lasceranno la compagnia, smentito il loro addio",
+      "url": "https://www.ringsidenews.com/backstage-update-emerges-angel-garza-bertos-wwe-status-raw-panic/",
+      "original_html_file": "20260513_085528_001_wwe-angel-garza-e-berto-non-lasceranno-la-compagnia-smentito-il-loro-addio_9c235c1d_original.html",
+      "final_html_file": "20260513_085528_001_wwe-angel-garza-e-berto-non-lasceranno-la-compagnia-smentito-il-loro-addio_9c235c1d_final.html",
+      "metadata_file": "20260513_085528_001_wwe-angel-garza-e-berto-non-lasceranno-la-compagnia-smentito-il-loro-addio_9c235c1d_metadata.json"
     }
   ]
 }

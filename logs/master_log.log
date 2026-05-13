@@ -9907,3 +9907,148 @@
 [REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (62 file)
 ===== RUN END [2026-05-13 06:49:36] VERSION [v85_5_performance_fast_history_pre_gemini_gates (314ea4e)] =====
 
+[BOOT v86] __main__ reached epoch=1778662470.759
+
+===== RUN START [2026-05-13 08:54:28] VERSION [v86_structured_pipeline_embed_engine (62caff4)] =====
+[BOOT v86] entro in run_bot epoch=1778662470.759
+[BOOT v85.4] prima health check WP epoch=1778662470.762
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (0/75): Post UFC 328 Rankings Update, Sean Strickland Enters P4P Top 10
+[SKIP] Score sotto soglia editoriale (0/75): WWE NXT - 5/12/2026: 3 Things We Hated And 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (2/75): UFC's Dana White Says He Will Be Promoting Anthony Joshua Vs. Tyson Fury
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171618/darkstate-wwe-nxt-tag-title-rematch-despite-dissension/
+[SKIP] Score sotto soglia editoriale (18/75): AEW's Bobby Lashley Has A Lot Of Ideas For New Hurt Syndicate Members
+[SKIP] Score sotto soglia editoriale (18/75): AEW's Thunder Rosa Names Top Five Face Painters In Wrestling History
+[SKIP] Score sotto soglia editoriale (16/75): Dana White Pressed On Wife Slapping Incident, Not Stepping Down From UFC
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171539/wwe-nxt-lizzy-rain-first-goal-north-american-championship/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170456/wwe-nxt-may-12-zaria-nikkita-lyons-tatum-paxley-lizzy-rain-more/
+[SKIP] Score sotto soglia editoriale (54/75): WWE Raw Viewership & Ratings Report, 5/4/2026
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Chelsea Green Shares Latest Health Update One Week After Heart Procedure
+[SKIP] Score sotto soglia editoriale (53/75): Beyond The Mat Director Barry Blaustein Dies At 72
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171385/cuatrero-sentenced-12-years-femicide-wwe-stephanie-vaquer/
+[SKIP] Score sotto soglia editoriale (0/75): Ronda Rousey Expecting Gina Carano Bout To Be 'Biggest MMA Fight Of All Time'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171140/wwe-aew-matt-hardy-ted-turner-pushing-pro-wrestling-forward/
+[PERF v71] WP lookup event_key: 3.33s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SCORE v80.4] AAA major World priority 100->100 - Rey Fenix Seemingly Vents Frustration Over Lack of Opportunities in WWE
+[SKIP] Score sotto soglia editoriale (51/75): Wyatt Sicks Set for First Wrestling Appearance After WWE Release
+[SKIP] Score sotto soglia editoriale (51/75): Multiple Title Matches Booked For May 19 WWE NXT
+[SKIP] URL già in history: https://www.ringsidenews.com/mason-rook-makes-big-declaration-during-contract-signing-512-nxt/
+[SKIP] Score sotto soglia editoriale (49/75): WWE SmackDown Viewership Sees Slight Increase on May 8, 2026
+[SCORE v80.4] AAA major World priority 100->100 - Backstage Update Emerges On Angel Garza & Berto's WWE Status After RAW Panic
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:media-rights - Backstage Update Emerges On Angel Garza & Berto's WWE Status After RAW Panic
+[SKIP] Preview/show announcement scaduta: Naraku Makes WWE In-Ring Debut During 5/12 NXT
+[SKIP] URL già in history: https://www.ringsidenews.com/major-wwe-events-expected-arizona-under-new-tko-deal/
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-talent-already-pushing-kofi-kingston-xavier-woods-wwe-exit/
+[SKIP] Score sotto soglia editoriale (50/75): Scott Steiner's Son Brock Rechsteiner Signs With NFL Team
+[SKIP] Score sotto soglia editoriale (31/75): Swerve Strickland Calls Out Modern Wrestlers Getting Contracts Before Mastering Their Craft
+[SKIP] Score sotto soglia editoriale (57/75): Chelsea Green Gives Recovery Update After Heart Procedure
+[SKIP] Score sotto soglia editoriale (0/75): Val Venis Shuts Down Claim The Undertaker Called Israel a Bastard State
+[SKIP] Score sotto soglia editoriale (49/75): Randy Orton Wants Fan To Get His WrestleMania Gear After Huge Card Sale
+[SCORE] 100 high - Rey Fenix Seemingly Vents Frustration Over Lack of Opportunities in WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v80.4 AAA major World priority 100->100, v71 freshness=0.81
+[SCORE] 100 high - Backstage Update Emerges On Angel Garza & Berto's WWE Status After RAW Panic | WWE/main roster, nomi forti lead: oba femi, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 media rights/streaming, v62 categoria business, v80.4 AAA major World priority 100->100, v71 freshness=0.477
+[SCORE] 100 high - WWE NXT Results, Highlights and Key Moments for May 12, 2026 | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, titolo/championship, show settimanale, developmental secondario, v62 evento legale grave, v62 categoria business, v75 hard results report, v77 hard report protected, v71 freshness=0.579
+[SCORE] 58 low - Dave Meltzer Talks TKO Interfering In WWE Booking, Possible Stephen A. Smith Crossover | WWE/main roster, business/contratti WWE-TKO, intervista/opinione, opinione generica, v62 categoria business, v71 freshness=0.42, v48 tier2: 55-74
+[SCORE] 55 low - Thekla Comments On Possibility Of Former WWE Star Kairi Sane Joining AEW | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v71 freshness=0.493, v48 tier2: 55-74
+[SCORE] 55 low - London Mayor's Office: 'No Specific Discussions' About Hosting WWE WrestleMania 44 | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v71 freshness=0.429, v48 tier2: 55-74
+[SCORE] 47 low - AEW's Young Bucks Tease 'A Lot Of Dream Matches' That Could Happen In 2026 | AEW, titolo/championship, PLE/PPV, v71 freshness=0.465, v48 tier3: 45-54 contestuale
+[SCORE] 45 low - Bully Ray Says Jacob Fatu Is 'In A Really Bad Spot' Following WWE Raw | WWE/main roster, top star lead: roman reigns, nomi forti titolo: bully ray, intervista/opinione, show settimanale, opinione generica, v71 freshness=0.437, v48 tier3: 45-54 contestuale
+[MODE] Storm mode attiva: 3 news >=90, 3 news >=80
+[MODEL v83] Route mode=storm report=False score=0 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 8 | mode=storm | max nuove=5 | pending pubblicati=0
+[BOT] Elaborazione: Rey Fenix Seemingly Vents Frustration Over Lack of Opportunities in WWE
+[BOT] semantic_id=rey-fenix-seemingly-vents-frustration-over-lack-of-opportunities-in-wwe
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=10, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[MODEL v83] Route mode=storm report=False score=100 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza un fatto già avvenuto: il tweet di frustrazione di Rey Fenix in risposta a un post della WWE. Non è una preview ma una notizia su una dinamica di spogliatoio.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Intercontinental Championship' e 'Saturday Night's Main Event' in inglese.; 'Booking situation' tradurre come 'gestione' o 'utilizzo'.; 'Shooting his shot' tradurre come 'cercare di ottenere un'opportunità' e non letteralmente.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo analizza un fatto già avvenuto: il tweet di frustrazione di Rey Fenix in risposta a un post della WWE. Non è una preview ma una notizia su una dinamica di spogliatoio.
+[PERF v71] analisi editoriale AI v72: 2.18s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Rey Fenix Seemingly Vents Frustration Over Lack of Opportunities in WWE
+[SCORE v80.4] AAA major World final floor 100->100 - Rey Fenix Seemingly Vents Frustration Over Lack of Opportunities in WWE
+[SCORE] raffinato=100 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v80.4 AAA major World priority 100->100, v80.4 AAA major World final floor 100->100
+[V71] story_signature=stable:dominik_mysterio|trick_williams|own_brother_s_latest_championship|outcome|wwe|aew|raw|smackdown semantic_status=new_story freshness=0.81
+[PERF v71] WP recent posts dedupe: 0.66s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.00s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=10
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Body sospetto o troppo meta
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[QUALITY] Problemi rilevati: ['Testo sospetto o troppo breve']
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TRANSLATE] Errore: Output ancora sospetto dopo revisione: ['Testo sospetto o troppo breve']
+[PERF v71] traduzione: 10.10s
+[SKIP] Traduzione fallita: Rey Fenix Seemingly Vents Frustration Over Lack of Opportunities in WWE (err_type=validation)
+[PERF v71] WP lookup URL esistente: 0.79s
+[BOT] Elaborazione: Backstage Update Emerges On Angel Garza & Berto's WWE Status After RAW Panic
+[BOT] semantic_id=backstage-update-emerges-on-angel-garza-bertos-wwe-status-after-raw-panic
+[SCORE] iniziale=100 priority=high
+[PERF v71] scraping articolo: 1.13s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=0.98 model=gemini-3.1-flash-lite | Articolo basato su indiscrezioni di backstage riguardanti lo status contrattuale di atleti in seguito a speculazioni dei fan dopo una puntata di Raw.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei wrestler e dei titoli originali.; Tradurre 'released' come licenziamento/addio, non 'rilasciato'.; Non tradurre termini tecnici come 'handicap match', 'stable' o 'backstage'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | Articolo basato su indiscrezioni di backstage riguardanti lo status contrattuale di atleti in seguito a speculazioni dei fan dopo una puntata di Raw.
+[PERF v71] analisi editoriale AI v72: 8.98s
+[SCORE] raffinato=68 priority=medium | WWE/main roster, nomi forti lead: oba femi, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 media rights/streaming, v62 categoria business, v80.4 AAA major World priority 100->100, v72.3 cap rumor
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Backstage Update Emerges On Angel Garza & Berto's WWE Status After RAW Panic
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:media-rights -> event:rumor:backstage-update-emerges-angel-garza-berto-s-raw-panic
+[V71] story_signature=stable:triplemania|oba_femi|triplemania|contract|wwe|aaa|raw semantic_status=new_story freshness=0.477
+[WP] Health check cache: OK (api_status_200)
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=9
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 13.58s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WWE: Angel Garza e Berto non lasceranno la compagnia, smentito il loro addio
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2024/07/humberto-carrillo-disappointed-over-wwe-snubbing-him-and-angel-garza-from-mexican-live-events-18.jpg
+[MEDIA] Immagine caricata: 4414
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PERF v71] creazione post WordPress: 7.59s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2024/07/humberto-carrillo-disappointed-over-wwe-snubbing-him-and-angel-garza-from-mexican-live-events-18.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4414
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Backstage Update Emerges On Angel Garza & Berto's WWE Status': 32.17s
+[OK] Pubblicato: WWE: Angel Garza e Berto non lasceranno la compagnia, smentito il loro addio
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260513_085528_001_wwe-angel-garza-e-berto-non-lasceranno-la-compagnia-smentito-il-loro-addio_9c235c1d_*.html
+[RUN v85] Pubblicati in questa run: 1/5
+[BOT] Elaborazione: WWE NXT Results, Highlights and Key Moments for May 12, 2026
+[BOT] semantic_id=wwe-nxt-results-highlights-and-key-moments-for-may-12-2026
+[SCORE] iniziale=100 priority=high
+[SCRAPE] Articolo results rilevato: testo completo (17711 caratteri)
+[PERF v71] scraping articolo: 0.95s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=53, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=53, image=0, embed=0
+[REPORT v84.1] Skip: report gia in history locale: report:wwe-nxt-2026-05-12
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.5] low_value_opinion_pre_gemini: Dave Meltzer Talks TKO Interfering In WWE Booking, Possible Stephen A. Smith Crossover
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.5] low_value_opinion_pre_gemini: Thekla Comments On Possibility Of Former WWE Star Kairi Sane Joining AEW
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.5] low_score_pre_gemini:55: London Mayor's Office: 'No Specific Discussions' About Hosting WWE WrestleMania 44
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.5] low_score_pre_gemini:47: AEW's Young Bucks Tease 'A Lot Of Dream Matches' That Could Happen In 2026
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.5] low_value_opinion_pre_gemini: Bully Ray Says Jacob Fatu Is 'In A Really Bad Spot' Following WWE Raw
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 8 candidati provati | mode=storm
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (66 file)
+===== RUN END [2026-05-13 08:54:28] VERSION [v86_structured_pipeline_embed_engine (62caff4)] =====
+

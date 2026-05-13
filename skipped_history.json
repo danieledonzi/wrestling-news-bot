@@ -1,0 +1,460 @@
+{
+  "schema": "owtv_skipped_history_v85_4",
+  "updated_at": "2026-05-13T08:55:30",
+  "items": {
+    "https://www.wrestlinginc.com/2171674/mma-ufc-328-rankings-update-sean-strickland/": {
+      "url": "https://www.wrestlinginc.com/2171674/mma-ufc-328-rankings-update-sean-strickland/",
+      "title": "Post UFC 328 Rankings Update, Sean Strickland Enters P4P Top 10",
+      "reason": "score_below_threshold",
+      "score": 0,
+      "summary": "The UFC rankings have been updated following the events of UFC 328, and Sean Strickland has officially landed in the pound-for-pound top ten.",
+      "score_reasons": [
+        "v64 skip opinion/listicle non-news",
+        "v71 freshness=0.541"
+      ],
+      "created_at": 1778662471.7157726,
+      "expires_at": 1778921671.7157726,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.wrestlinginc.com/2171671/wwe-nxt-may-12-2026-3-things-hated-loved-opinion-review/": {
+      "url": "https://www.wrestlinginc.com/2171671/wwe-nxt-may-12-2026-3-things-hated-loved-opinion-review/",
+      "title": "WWE NXT - 5/12/2026: 3 Things We Hated And 3 Things We Loved",
+      "reason": "score_below_threshold",
+      "score": 0,
+      "summary": "The very best and the very worst of the May 12 edition of WWE NXT.",
+      "score_reasons": [
+        "v64 skip opinion/listicle non-news",
+        "v71 freshness=0.541"
+      ],
+      "created_at": 1778662471.7810483,
+      "expires_at": 1778921671.7810483,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.wrestlinginc.com/2171628/mma-ufc-dana-white-anthony-joshua-tyson-fury/": {
+      "url": "https://www.wrestlinginc.com/2171628/mma-ufc-dana-white-anthony-joshua-tyson-fury/",
+      "title": "UFC's Dana White Says He Will Be Promoting Anthony Joshua Vs. Tyson Fury",
+      "reason": "score_below_threshold",
+      "score": 2,
+      "summary": "Dana White claims that he is promoting the upcoming fight between Anthony Joshua and Tyson Fury, but the boxing world says otherwise.",
+      "score_reasons": [
+        "UFC/MMA",
+        "intervista/opinione",
+        "non wrestling puro",
+        "v71 freshness=0.53"
+      ],
+      "created_at": 1778662471.9696288,
+      "expires_at": 1778921671.9696288,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.wrestlinginc.com/2171610/aew-bobby-lashley-lot-ideas-new-hurt-syndicate-member/": {
+      "url": "https://www.wrestlinginc.com/2171610/aew-bobby-lashley-lot-ideas-new-hurt-syndicate-member/",
+      "title": "AEW's Bobby Lashley Has A Lot Of Ideas For New Hurt Syndicate Members",
+      "reason": "score_below_threshold",
+      "score": 18,
+      "summary": "Bobby Lashley has his eye on several AEW talents as possible members of The Hurt Syndicate.",
+      "score_reasons": [
+        "AEW",
+        "v71 freshness=0.519"
+      ],
+      "created_at": 1778662472.1596391,
+      "expires_at": 1778921672.1596391,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.wrestlinginc.com/2168396/aew-thunder-rosa-top-five-face-painters-sting-jeff-hardy-darby-allin/": {
+      "url": "https://www.wrestlinginc.com/2168396/aew-thunder-rosa-top-five-face-painters-sting-jeff-hardy-darby-allin/",
+      "title": "AEW's Thunder Rosa Names Top Five Face Painters In Wrestling History",
+      "reason": "score_below_threshold",
+      "score": 18,
+      "summary": "Thunder Rosa was a guest on \"Under the Mat with Simon Miller\"",
+      "score_reasons": [
+        "AEW",
+        "v71 freshness=0.511"
+      ],
+      "created_at": 1778662472.3492234,
+      "expires_at": 1778921672.3492234,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.wrestlinginc.com/2171583/mma-ufc-dana-white-wife-slapping-incident-not-stepping-down/": {
+      "url": "https://www.wrestlinginc.com/2171583/mma-ufc-dana-white-wife-slapping-incident-not-stepping-down/",
+      "title": "Dana White Pressed On Wife Slapping Incident, Not Stepping Down From UFC",
+      "reason": "score_below_threshold",
+      "score": 16,
+      "summary": "Dana White was pressed on the incident that saw him filmed slapping his wife in 2022, as well as why he didn't step down from UFC afterwards.",
+      "score_reasons": [
+        "UFC/MMA",
+        "evento legale/controversia",
+        "non wrestling puro",
+        "v71 freshness=0.51"
+      ],
+      "created_at": 1778662472.5419395,
+      "expires_at": 1778921672.5419395,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.wrestlinginc.com/2171492/wwe-raw-viewership-ratings-report-may-4-2026/": {
+      "url": "https://www.wrestlinginc.com/2171492/wwe-raw-viewership-ratings-report-may-4-2026/",
+      "title": "WWE Raw Viewership & Ratings Report, 5/4/2026",
+      "reason": "score_below_threshold",
+      "score": 54,
+      "summary": "Viewership for \"WWE Raw\" continues to decline slightly following WrestleMania 42, despite the hot Roman Reigns vs. Jacob Fatu angle going in to WWE Backlash.",
+      "score_reasons": [
+        "WWE/main roster",
+        "top star lead: roman reigns",
+        "nomi forti lead: roman reigns",
+        "WWE main roster + storyline/evento",
+        "rumor/backstage",
+        "PLE/PPV",
+        "v75 cap ratings/viewership report",
+        "v71 freshness=0.48"
+      ],
+      "created_at": 1778662472.806849,
+      "expires_at": 1778921672.806849,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.wrestlinginc.com/2171480/wwe-chelsea-green-health-heart-procedure/": {
+      "url": "https://www.wrestlinginc.com/2171480/wwe-chelsea-green-health-heart-procedure/",
+      "title": "WWE's Chelsea Green Shares Latest Health Update One Week After Heart Procedure",
+      "reason": "score_below_threshold",
+      "score": 20,
+      "summary": "WWE star Chelsea Green shares a new health update one week removed from her heart procedure to treat SVT.",
+      "score_reasons": [
+        "WWE/main roster",
+        "v71 freshness=0.479"
+      ],
+      "created_at": 1778662472.993209,
+      "expires_at": 1778921672.993209,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.wrestlinginc.com/2171445/beyond-the-mat-barry-blaustein-dies-72/": {
+      "url": "https://www.wrestlinginc.com/2171445/beyond-the-mat-barry-blaustein-dies-72/",
+      "title": "Beyond The Mat Director Barry Blaustein Dies At 72",
+      "reason": "score_below_threshold",
+      "score": 53,
+      "summary": "Barry Blaustein, director of 1999's professional wrestling documentary \"Beyond the Mat,\" died at the age of 72 on Tuesday, according to a report.",
+      "score_reasons": [
+        "morte",
+        "v62 evento morte/storico",
+        "v71 freshness=0.472"
+      ],
+      "created_at": 1778662473.1667848,
+      "expires_at": 1778921673.1667848,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.wrestlinginc.com/2171179/ronda-rousey-expecting-gina-carano-bout-biggest-mma-fight-all-time/": {
+      "url": "https://www.wrestlinginc.com/2171179/ronda-rousey-expecting-gina-carano-bout-biggest-mma-fight-all-time/",
+      "title": "Ronda Rousey Expecting Gina Carano Bout To Be 'Biggest MMA Fight Of All Time'",
+      "reason": "score_below_threshold",
+      "score": 0,
+      "summary": "Ronda Rousey has high expectations for her upcoming fight with Gina Carano, believing it to be the biggest MMA fight in history.",
+      "score_reasons": [
+        "UFC/MMA",
+        "non wrestling puro",
+        "v71 freshness=0.432"
+      ],
+      "created_at": 1778662473.6833043,
+      "expires_at": 1778921673.6833043,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.ringsidenews.com/wyatt-sicks-set-first-wrestling-appearance-wwe-release/": {
+      "url": "https://www.ringsidenews.com/wyatt-sicks-set-first-wrestling-appearance-wwe-release/",
+      "title": "Wyatt Sicks Set for First Wrestling Appearance After WWE Release",
+      "reason": "score_below_threshold",
+      "score": 51,
+      "summary": "The Wyatt Sicks are officially reuniting in public for the first time since WWE released the group following WrestleMania 42. WrestleCon took to Twitter and announced that the entire Wyatt Sicks lineup will appear during WWE SummerSlam weekend in Minneapolis for a three-day convention appearance running from July 31 through August 2. The appearance will feature Bo Dallas under the name Taylor Rotunda, Nikki Cross using the name Nikki Storm, Dexter Lumis returning to Samuel Shaw, Erick Rowan once",
+      "score_reasons": [
+        "WWE/main roster",
+        "impatto roster/storyline",
+        "WWE main roster + storyline/evento",
+        "ritorno/debutto",
+        "PLE/PPV",
+        "developmental secondario",
+        "v62 ritorno/debutto",
+        "v70 cap preview hard",
+        "v71 source reliability soft penalty",
+        "v71 freshness=0.81"
+      ],
+      "created_at": 1778662478.0455027,
+      "expires_at": 1778921678.0455027,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.ringsidenews.com/multiple-title-matches-booked-may-19-wwe-nxt/": {
+      "url": "https://www.ringsidenews.com/multiple-title-matches-booked-may-19-wwe-nxt/",
+      "title": "Multiple Title Matches Booked For May 19 WWE NXT",
+      "reason": "score_below_threshold",
+      "score": 51,
+      "summary": "The May 12 episode of NXT just ended, but the May 19 episode of NXT will be big, and we have a title match ahead of us. Vanity Project has been NXT Tag Team Champions for too long. At this point, they have some real challengers, and DarkState wants their titles back. During NXT this week, DarkState and Vanity Project had a promo battle. Then they booked a tag team title match for next week. After that, they brawled in a big way as the NXT Arena blew up. Tatum Paxley will defend her Women's North",
+      "score_reasons": [
+        "WWE/main roster",
+        "WWE main roster + storyline/evento",
+        "titolo/championship",
+        "PLE/PPV",
+        "v62 titolo/championship",
+        "v70 cap preview hard",
+        "v71 source reliability soft penalty",
+        "v71 freshness=0.491"
+      ],
+      "created_at": 1778662478.1412585,
+      "expires_at": 1778921678.1412585,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.ringsidenews.com/wwe-smackdown-viewership-sees-slight-increase-may-8-2026/": {
+      "url": "https://www.ringsidenews.com/wwe-smackdown-viewership-sees-slight-increase-may-8-2026/",
+      "title": "WWE SmackDown Viewership Sees Slight Increase on May 8, 2026",
+      "reason": "score_below_threshold",
+      "score": 49,
+      "summary": "The latest audience figures are available for the May 8, 2026 episode of WWE SmackDown on USA Network, showing a modest week-to-week increase. According to Wrestlenomics, WWE SmackDown on May 8, 2026 drew 1,279,000 viewers on USA Network, with a 0.29 rating in the key P18-49 demographic. For comparison, the May 1, 2026 episode drew 1,267,000 viewers with a 0.25 rating in the key P18-49 demographic, an increase of ↑ 12,000 viewers and up by ↑ 0.04 in the demo. Compared to the same week in 2025, W",
+      "score_reasons": [
+        "WWE/main roster",
+        "business/media rights",
+        "show settimanale",
+        "v62 media rights/streaming",
+        "v62 categoria business",
+        "v75 cap ratings/viewership report",
+        "v71 source reliability soft penalty",
+        "v71 freshness=0.481"
+      ],
+      "created_at": 1778662478.2216196,
+      "expires_at": 1778921678.2216196,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.ringsidenews.com/scott-steiners-son-brock-rechsteiner-signs-nfl-team/": {
+      "url": "https://www.ringsidenews.com/scott-steiners-son-brock-rechsteiner-signs-nfl-team/",
+      "title": "Scott Steiner's Son Brock Rechsteiner Signs With NFL Team",
+      "reason": "score_below_threshold",
+      "score": 50,
+      "summary": "Scott Steiner's son is officially getting his shot in the NFL. Brock Rechsteiner has signed with the New Orleans Saints after impressing the team during rookie mini-camp. The Saints confirmed the signing this week, officially adding Rechsteiner to the team's 90-man roster. Brock played wide receiver at Jacksonville State, where he spent four seasons building up his football résumé instead of following the family wrestling path right away. During his final college season in 2025, Rechsteiner post",
+      "score_reasons": [
+        "WWE/main roster",
+        "WWE main roster + storyline/evento",
+        "match/segmento annunciato",
+        "floor WWE main roster storyline",
+        "v71 source reliability soft penalty",
+        "v71 freshness=0.455"
+      ],
+      "created_at": 1778662478.7009513,
+      "expires_at": 1778921678.7009513,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.ringsidenews.com/swerve-strickland-calls-out-modern-wrestlers-getting-contracts-before-mastering-their-craft/": {
+      "url": "https://www.ringsidenews.com/swerve-strickland-calls-out-modern-wrestlers-getting-contracts-before-mastering-their-craft/",
+      "title": "Swerve Strickland Calls Out Modern Wrestlers Getting Contracts Before Mastering Their Craft",
+      "reason": "score_below_threshold",
+      "score": 31,
+      "summary": "Swerve Strickland is calling out what he sees as one of wrestling's biggest modern problems - wrestlers going viral and landing contracts before they've truly mastered the craft. While speaking on the Cruz Show, Strickland reflected on how different the wrestling business is today compared to when he was grinding through the independent scene trying to build his name from scratch. According to Swerve, his generation had to constantly hustle just to get noticed, whether it meant sending DVDs to p",
+      "score_reasons": [
+        "AEW",
+        "impatto roster/storyline",
+        "contratto",
+        "opinione generica",
+        "v71 source reliability soft penalty",
+        "v71 freshness=0.566"
+      ],
+      "created_at": 1778662478.9202616,
+      "expires_at": 1778921678.9202616,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.ringsidenews.com/chelsea-green-gives-recovery-update-heart-procedure/": {
+      "url": "https://www.ringsidenews.com/chelsea-green-gives-recovery-update-heart-procedure/",
+      "title": "Chelsea Green Gives Recovery Update After Heart Procedure",
+      "reason": "score_below_threshold",
+      "score": 57,
+      "summary": "Chelsea Green is officially off bed rest following her recent heart procedure - and it sounds like sitting still has been driving her crazy. Earlier this month, Green revealed she underwent a procedure for S.V.T. (Supraventricular tachycardia). Now, one week later, she shared a positive recovery update with fans on social media. \"1 week post op - off bed rest! One thing about me: sitting still is my nightmare. Thank you to everyone who called, texted, dm'd, etc. I felt very, very loved this week",
+      "score_reasons": [
+        "WWE/main roster",
+        "impatto roster/storyline",
+        "WWE main roster + storyline/evento",
+        "ritorno/debutto",
+        "show settimanale",
+        "v62 ritorno/debutto",
+        "v77 cap low editorial value",
+        "v71 source reliability soft penalty",
+        "v71 freshness=0.675"
+      ],
+      "created_at": 1778662479.122455,
+      "expires_at": 1778921679.122455,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.ringsidenews.com/val-venis-shuts-down-claim-undertaker-called-israel-bastard-state/": {
+      "url": "https://www.ringsidenews.com/val-venis-shuts-down-claim-undertaker-called-israel-bastard-state/",
+      "title": "Val Venis Shuts Down Claim The Undertaker Called Israel a Bastard State",
+      "reason": "score_below_threshold",
+      "score": 0,
+      "summary": "The Undertaker got dragged into a political controversy this week after a Twitter account falsely claimed the WWE legend publicly called Israel a \"bastard state founded on blood and lies.\" The post quickly spread on Twitter after the account alleged Undertaker had made the following statement: \"Israel is a bastard state founded on blood and lies. There is no justice or peace for child killers.\" The problem? There appears to be no evidence that Undertaker ever said any of it. Not long after the p",
+      "score_reasons": [
+        "WWE/main roster",
+        "top star titolo: undertaker",
+        "WWE main roster + storyline/evento",
+        "ritorno/debutto",
+        "combo top name titolo + evento forte",
+        "PLE/PPV",
+        "opinione generica",
+        "v62 business/dirigenza",
+        "v66 blocco politica/volgarita non wrestling",
+        "v71 source reliability soft penalty",
+        "v71 freshness=0.437"
+      ],
+      "created_at": 1778662479.3220792,
+      "expires_at": 1778921679.3220792,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.ringsidenews.com/randy-orton-wants-fan-get-his-wrestlemania-gear-huge-card-sale/": {
+      "url": "https://www.ringsidenews.com/randy-orton-wants-fan-get-his-wrestlemania-gear-huge-card-sale/",
+      "title": "Randy Orton Wants Fan To Get His WrestleMania Gear After Huge Card Sale",
+      "reason": "score_below_threshold",
+      "score": 49,
+      "summary": "Randy Orton thinks one lucky fan deserves a lot more than just a trading card after spending serious money on a rare collectible. Topps revealed on social media that a one-of-one Randy Orton trading card recently sold at auction for a massive $42,100. The card included Orton's autograph along with a patch from the gear he wore at WrestleMania 41 in 2025. After seeing the sale price, Orton reacted on Twitter/X and suggested the buyer deserves an even bigger reward. \"Whoever bought this card shoul",
+      "score_reasons": [
+        "WWE/main roster",
+        "top star titolo: randy orton",
+        "impatto roster/storyline",
+        "WWE main roster + storyline/evento",
+        "ritorno/debutto",
+        "combo top name titolo + evento forte",
+        "PLE/PPV",
+        "opinione generica",
+        "v62 ritorno/debutto",
+        "v68 cap duro opinion/commentary",
+        "v71 source reliability soft penalty",
+        "v71 freshness=0.54"
+      ],
+      "created_at": 1778662479.4747882,
+      "expires_at": 1778921679.4747882,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.ringsidenews.com/rey-fenix-seemingly-vents-frustration-lack-opportunities-wwe/": {
+      "url": "https://www.ringsidenews.com/rey-fenix-seemingly-vents-frustration-lack-opportunities-wwe/",
+      "title": "Rey Fenix Seemingly Vents Frustration Over Lack of Opportunities in WWE",
+      "reason": "validation_fail",
+      "score": 100,
+      "summary": "Rey Fenix may have just publicly called out WWE over his current booking situation - and he did it while reacting to his own brother's latest championship defense announcement. While Penta continues thriving on Monday Night RAW as WWE Intercontinental Champion, Fenix's run on SmackDown has looked completely different ever since he arrived in WWE in 2025. Penta has quickly become one of RAW's biggest babyfaces, picking up major wins over stars like Dominik Mysterio, Finn Balor, and Kofi Kingston.",
+      "score_reasons": [
+        "WWE/main roster",
+        "impatto roster/storyline",
+        "WWE main roster + storyline/evento",
+        "ritorno/debutto",
+        "PLE/PPV",
+        "v62 ritorno/debutto",
+        "v80.4 AAA major World priority 100->100",
+        "v80.4 AAA major World final floor 100->100"
+      ],
+      "created_at": 1778662494.7545607,
+      "expires_at": 1778748894.7545607,
+      "ttl_seconds": 86400,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.wrestlinginc.com/2171077/dave-meltzer-tko-wwe-booking-stephen-a-smith/": {
+      "url": "https://www.wrestlinginc.com/2171077/dave-meltzer-tko-wwe-booking-stephen-a-smith/",
+      "title": "Dave Meltzer Talks TKO Interfering In WWE Booking, Possible Stephen A. Smith Crossover",
+      "reason": "low_value_opinion_pre_gemini",
+      "score": 58,
+      "summary": "Dave Meltzer discusses TKO's interference with WWE booking, which Meltzer says isn't that frequent, and the possibility of a WWE/Stephen A. Smith crossover",
+      "score_reasons": [
+        "WWE/main roster",
+        "business/contratti WWE-TKO",
+        "intervista/opinione",
+        "opinione generica",
+        "v62 categoria business",
+        "v71 freshness=0.42",
+        "v48 tier2: 55-74"
+      ],
+      "created_at": 1778662530.2177634,
+      "expires_at": 1778748930.2177634,
+      "ttl_seconds": 86400,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.wrestlinginc.com/2171549/thekla-wwe-kairi-sane-aew/": {
+      "url": "https://www.wrestlinginc.com/2171549/thekla-wwe-kairi-sane-aew/",
+      "title": "Thekla Comments On Possibility Of Former WWE Star Kairi Sane Joining AEW",
+      "reason": "low_value_opinion_pre_gemini",
+      "score": 55,
+      "summary": "Women's World Champion Thekla addresses the possibility of Kairi Sane soon joining her home of All Elite Wrestling.",
+      "score_reasons": [
+        "WWE/main roster",
+        "WWE main roster + storyline/evento",
+        "titolo/championship",
+        "floor WWE main roster storyline",
+        "v71 freshness=0.493",
+        "v48 tier2: 55-74"
+      ],
+      "created_at": 1778662530.227593,
+      "expires_at": 1778748930.227593,
+      "ttl_seconds": 86400,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.wrestlinginc.com/2171147/wwe-wrestlemania-44-london-no-specific-discussions/": {
+      "url": "https://www.wrestlinginc.com/2171147/wwe-wrestlemania-44-london-no-specific-discussions/",
+      "title": "London Mayor's Office: 'No Specific Discussions' About Hosting WWE WrestleMania 44",
+      "reason": "low_score_pre_gemini:55",
+      "score": 55,
+      "summary": "The office of the Mayor of London claims that there haven't been any recent negotiations about WrestleMania 44 coming to the city.",
+      "score_reasons": [
+        "WWE/main roster",
+        "WWE main roster + storyline/evento",
+        "PLE/PPV",
+        "floor WWE main roster storyline",
+        "v71 freshness=0.429",
+        "v48 tier2: 55-74"
+      ],
+      "created_at": 1778662530.2344894,
+      "expires_at": 1778921730.2344894,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.wrestlinginc.com/2171411/aew-young-bucks-tease-dream-matches-2026/": {
+      "url": "https://www.wrestlinginc.com/2171411/aew-young-bucks-tease-dream-matches-2026/",
+      "title": "AEW's Young Bucks Tease 'A Lot Of Dream Matches' That Could Happen In 2026",
+      "reason": "low_score_pre_gemini:47",
+      "score": 47,
+      "summary": "Former AEW Tag Team Champions The Young Bucks suggest that a number of dream matches could become a reality at All In 2026 and beyond.",
+      "score_reasons": [
+        "AEW",
+        "titolo/championship",
+        "PLE/PPV",
+        "v71 freshness=0.465",
+        "v48 tier3: 45-54 contestuale"
+      ],
+      "created_at": 1778662530.2444205,
+      "expires_at": 1778921730.2444205,
+      "ttl_seconds": 259200,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    },
+    "https://www.wrestlinginc.com/2171215/bully-ray-jacob-fatu-really-bad-spot-wwe-raw/": {
+      "url": "https://www.wrestlinginc.com/2171215/bully-ray-jacob-fatu-really-bad-spot-wwe-raw/",
+      "title": "Bully Ray Says Jacob Fatu Is 'In A Really Bad Spot' Following WWE Raw",
+      "reason": "low_value_opinion_pre_gemini",
+      "score": 45,
+      "summary": "Bully Ray believes that Jacob Fatu has found himself \"in a really bad spot\" following WWE Raw, despite him continuing to upstage rival Roman Reigns",
+      "score_reasons": [
+        "WWE/main roster",
+        "top star lead: roman reigns",
+        "nomi forti titolo: bully ray",
+        "intervista/opinione",
+        "show settimanale",
+        "opinione generica",
+        "v71 freshness=0.437",
+        "v48 tier3: 45-54 contestuale"
+      ],
+      "created_at": 1778662530.250767,
+      "expires_at": 1778748930.250767,
+      "ttl_seconds": 86400,
+      "bot_version": "v86_structured_pipeline_embed_engine (62caff4)"
+    }
+  }
+}
