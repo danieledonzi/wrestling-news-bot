@@ -184,3 +184,106 @@
 [REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (69 file)
 ===== RUN END [2026-05-13 09:52:45] VERSION [v86_3_canonical_gate_order (8a719df)] =====
 
+[BOOT v86.4] __main__ reached epoch=1778672096.343
+
+===== RUN START [2026-05-13 11:34:54] VERSION [v86_4_report_first_candidate_gates (40b4965)] =====
+[BOOT v86.4] entro in run_bot epoch=1778672096.343
+[BOOT v86.1] entro in run_bot epoch=1778672096.343
+[BOOT v85.4] prima health check WP epoch=1778672096.346
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): Post UFC 328 Rankings Update, Sean Strickland Enters P4P Top 10
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): WWE NXT - 5/12/2026: 3 Things We Hated And 3 Things We Loved
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): UFC's Dana White Says He Will Be Promoting Anthony Joshua Vs. Tyson Fury
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171618/darkstate-wwe-nxt-tag-title-rematch-despite-dissension/
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): AEW's Bobby Lashley Has A Lot Of Ideas For New Hurt Syndicate Members
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): AEW's Thunder Rosa Names Top Five Face Painters In Wrestling History
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): Dana White Pressed On Wife Slapping Incident, Not Stepping Down From UFC
+[SKIP v86.4] skipped_history ancora valida (low_value_opinion_pre_gemini): Thekla Comments On Possibility Of Former WWE Star Kairi Sane Joining AEW
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171539/wwe-nxt-lizzy-rain-first-goal-north-american-championship/
+[PERF v71] WP strict report lookup: 1.24s
+[REPORT v86.4] Report non confermato da WordPress: rivaluto report:wwe-nxt-2026-05-12 - WWE NXT Results 5/12 - Zaria & Nikkita Lyons Face Tatum Paxley & Lizzy Rain, More
+[REPORT v86.4] URL in history ma report non confermato: continuo report:wwe-nxt-2026-05-12
+[REPORT v86.4] semantic_id in history ma report non confermato: continuo report:wwe-nxt-2026-05-12
+[REPORT v86.4] titolo già visto ma report-like: rivaluto con gate report report:wwe-nxt-2026-05-12
+[REPORT v86.4] story_signature in history ma report-like: rivaluto report:wwe-nxt-2026-05-12
+[FIX] Event key in history ma non confermata su WordPress: report:wwe-nxt-2026-05-12 - provo a pubblicare
+[PERF v71] WP strict report lookup: 1.16s
+[REPORT v86.4] Report non confermato da WordPress: rivaluto report:wwe-raw-2026-05-04 - WWE Raw Viewership & Ratings Report, 5/4/2026
+[REPORT v86.4] Ignoro skipped_history per report-like non confermato: report:wwe-raw-2026-05-04
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): WWE's Chelsea Green Shares Latest Health Update One Week After Heart Procedure
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): Beyond The Mat Director Barry Blaustein Dies At 72
+[SKIP v86.4] skipped_history ancora valida (low_score_pre_gemini:47): AEW's Young Bucks Tease 'A Lot Of Dream Matches' That Could Happen In 2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171385/cuatrero-sentenced-12-years-femicide-wwe-stephanie-vaquer/
+[SKIP v86.4] skipped_history ancora valida (low_value_opinion_pre_gemini): Bully Ray Says Jacob Fatu Is 'In A Really Bad Spot' Following WWE Raw
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): Ronda Rousey Expecting Gina Carano Bout To Be 'Biggest MMA Fight Of All Time'
+[SKIP v86.4] skipped_history ancora valida (low_score_pre_gemini:55): London Mayor's Office: 'No Specific Discussions' About Hosting WWE WrestleMania 44
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171140/wwe-aew-matt-hardy-ted-turner-pushing-pro-wrestling-forward/
+[SKIP v86.4] skipped_history ancora valida (low_value_opinion_pre_gemini): Dave Meltzer Talks TKO Interfering In WWE Booking, Possible Stephen A. Smith Crossover
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Preview/show announcement scaduta: AEW Dynamite Preview for May 13, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP v86.4] skipped_history ancora valida (validation_fail): Rey Fenix Seemingly Vents Frustration Over Lack of Opportunities in WWE
+[PERF v71] WP strict report lookup: 1.18s
+[REPORT v86.4] Report non confermato da WordPress: rivaluto report:wwe-wrestlemania-2026-07-31 - Wyatt Sicks Set for First Wrestling Appearance After WWE Release
+[REPORT v86.4] Ignoro skipped_history per report-like non confermato: report:wwe-wrestlemania-2026-07-31
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): Multiple Title Matches Booked For May 19 WWE NXT
+[SKIP] URL già in history: https://www.ringsidenews.com/mason-rook-makes-big-declaration-during-contract-signing-512-nxt/
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): WWE SmackDown Viewership Sees Slight Increase on May 8, 2026
+[REPORT v86.2] Verifica report WP fallita (report:wwe-raw-backstage-update-emerges-angel-garza-berto-s-raw-panic): HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=4)
+[PERF v71] WP strict report lookup: 5.10s
+[REPORT v86.4] Report non confermato da WordPress: rivaluto report:wwe-raw-backstage-update-emerges-angel-garza-berto-s-raw-panic - Backstage Update Emerges On Angel Garza & Berto's WWE Status After RAW Panic
+[REPORT v86.4] URL in history ma report non confermato: continuo report:wwe-raw-backstage-update-emerges-angel-garza-berto-s-raw-panic
+[REPORT v86.4] semantic_id in history ma report non confermato: continuo report:wwe-raw-backstage-update-emerges-angel-garza-berto-s-raw-panic
+[REPORT v86.4] titolo già visto ma report-like: rivaluto con gate report report:wwe-raw-backstage-update-emerges-angel-garza-berto-s-raw-panic
+[FRESHNESS v86.4] Ignoro skipped_history low-score per post-show outcome: https://www.ringsidenews.com/naraku-makes-wwe-ring-debut-during-512-nxt/
+[FRESHNESS v86.4] Post-show outcome rescue: non tratto come preview scaduta - Naraku Makes WWE In-Ring Debut During 5/12 NXT
+[FRESHNESS v86.1] Post-show outcome rescue: non tratto come preview scaduta - Naraku Makes WWE In-Ring Debut During 5/12 NXT
+[SKIP] Score sotto soglia editoriale (51/75): Naraku Makes WWE In-Ring Debut During 5/12 NXT
+[SKIP] URL già in history: https://www.ringsidenews.com/major-wwe-events-expected-arizona-under-new-tko-deal/
+[PERF v71] WP strict report lookup: 4.22s
+[REPORT v86.4] Report non confermato da WordPress: rivaluto report:talent-already-pushing-kofi-kingston-xavier-woods-exit-talent-already-pushing-kofi-kingston-xavier-woods-exit - AEW Talent Already Pushing For Kofi Kingston & Xavier Woods After WWE Exit
+[REPORT v86.4] URL in history ma report non confermato: continuo report:talent-already-pushing-kofi-kingston-xavier-woods-exit-talent-already-pushing-kofi-kingston-xavier-woods-exit
+[REPORT v86.4] semantic_id in history ma report non confermato: continuo report:talent-already-pushing-kofi-kingston-xavier-woods-exit-talent-already-pushing-kofi-kingston-xavier-woods-exit
+[REPORT v86.4] titolo già visto ma report-like: rivaluto con gate report report:talent-already-pushing-kofi-kingston-xavier-woods-exit-talent-already-pushing-kofi-kingston-xavier-woods-exit
+[REPORT v86.4] Report non confermato da WordPress: rivaluto report:wwe-nxt-2026-05-12 - WWE NXT Results, Highlights and Key Moments for May 12, 2026
+[REPORT v86.4] URL in history ma report non confermato: continuo report:wwe-nxt-2026-05-12
+[REPORT v86.4] semantic_id in history ma report non confermato: continuo report:wwe-nxt-2026-05-12
+[REPORT v86.4] titolo già visto ma report-like: rivaluto con gate report report:wwe-nxt-2026-05-12
+[REPORT v86.4] story_signature in history ma report-like: rivaluto report:wwe-nxt-2026-05-12
+[FIX] Event key in history ma non confermata su WordPress: report:wwe-nxt-2026-05-12 - provo a pubblicare
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): Scott Steiner's Son Brock Rechsteiner Signs With NFL Team
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): Swerve Strickland Calls Out Modern Wrestlers Getting Contracts Before Mastering Their Craft
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): Chelsea Green Gives Recovery Update After Heart Procedure
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): Val Venis Shuts Down Claim The Undertaker Called Israel a Bastard State
+[SCORE] 100 high - Backstage Update Emerges On Angel Garza & Berto's WWE Status After RAW Panic | WWE/main roster, nomi forti lead: oba femi, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 media rights/streaming, v62 categoria business, v71 freshness=0.444
+[SCORE] 100 high - AEW Talent Already Pushing For Kofi Kingston & Xavier Woods After WWE Exit | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 categoria business, v71 freshness=0.435
+[SCORE] 100 high - WWE NXT Results, Highlights and Key Moments for May 12, 2026 | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, titolo/championship, show settimanale, developmental secondario, v62 evento legale grave, v62 categoria business, v75 hard results report, v77 hard report protected, v71 freshness=0.546
+[SCORE] 80 high - WWE NXT Results 5/12 - Zaria & Nikkita Lyons Face Tatum Paxley & Lizzy Rain, More | WWE/main roster, WWE main roster + storyline/evento, show settimanale, floor WWE main roster storyline, v75 hard results report, v77 hard report protected, v71 freshness=0.453
+[SCORE] 75 medium - Wyatt Sicks Set for First Wrestling Appearance After WWE Release | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, developmental secondario, v62 ritorno/debutto, v70 cap preview hard, v71 source reliability soft penalty, v71 freshness=0.777, report/results: bypass soglia editoriale
+[SCORE] 75 medium - WWE Raw Viewership & Ratings Report, 5/4/2026 | WWE/main roster, top star lead: roman reigns, nomi forti lead: roman reigns, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v75 cap ratings/viewership report, v71 freshness=0.447, report/results: bypass soglia editoriale
+[MODE] Storm mode attiva: 3 news >=90, 4 news >=80
+[MODEL v83] Route mode=storm report=False score=0 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 6 | mode=storm | max nuove=5 | pending pubblicati=0
+[SKIP v72.1] Gia pubblicata da pending in questa run: Backstage Update Emerges On Angel Garza & Berto's WWE Status After RAW Panic
+[PENDING] Coda salvata: 0 elementi
+[SKIP v72.1] Gia pubblicata da pending in questa run: AEW Talent Already Pushing For Kofi Kingston & Xavier Woods After WWE Exit
+[PENDING] Coda salvata: 0 elementi
+[SKIP v72.1] Gia pubblicata da pending in questa run: WWE NXT Results, Highlights and Key Moments for May 12, 2026
+[PENDING] Coda salvata: 0 elementi
+[SKIP v72.1] Gia pubblicata da pending in questa run: WWE NXT Results 5/12 - Zaria & Nikkita Lyons Face Tatum Paxley & Lizzy Rain, More
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.4] skipped_history pre-processing (score_below_threshold): Wyatt Sicks Set for First Wrestling Appearance After WWE Release
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.4] skipped_history pre-processing (score_below_threshold): WWE Raw Viewership & Ratings Report, 5/4/2026
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 2 candidati provati | mode=storm
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (70 file)
+===== RUN END [2026-05-13 11:34:54] VERSION [v86_4_report_first_candidate_gates (40b4965)] =====
+

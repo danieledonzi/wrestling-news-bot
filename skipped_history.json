@@ -1,6 +1,6 @@
 {
   "schema": "owtv_skipped_history_v85_4",
-  "updated_at": "2026-05-13T09:29:51",
+  "updated_at": "2026-05-13T11:35:12",
   "items": {
     "https://www.wrestlinginc.com/2171674/mma-ufc-328-rankings-update-sean-strickland/": {
       "url": "https://www.wrestlinginc.com/2171674/mma-ufc-328-rankings-update-sean-strickland/",
@@ -471,12 +471,12 @@
         "v62 ritorno/debutto",
         "v70 cap preview hard",
         "v71 source reliability soft penalty",
-        "v71 freshness=0.585"
+        "v71 freshness=0.559"
       ],
-      "created_at": 1778664591.2812252,
-      "expires_at": 1778923791.2812252,
+      "created_at": 1778672112.8881736,
+      "expires_at": 1778931312.8881736,
       "ttl_seconds": 259200,
-      "bot_version": "v86_1_scoring_signature_validation_stabilizer (d73a603)"
+      "bot_version": "v86_4_report_first_candidate_gates (40b4965)"
     }
   }
 }
