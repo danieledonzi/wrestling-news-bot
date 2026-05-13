@@ -15989,10 +15989,242 @@ def run_bot():
     return _ORIG_V864_run_bot_raw()
 
 
+# =========================
+# v86.5 - true results report gate
+# =========================
+BOT_VERSION = "v86_5_true_results_report_gate"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V865_TRUE_RESULTS_REPORT_GATE_ENABLED = os.getenv("V86_5_TRUE_RESULTS_REPORT_GATE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V865_STRIP_TRUE_REPORT_HISTORY_ENABLED = os.getenv("V86_5_STRIP_TRUE_REPORT_HISTORY_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+V865_TRUE_REPORT_MARKERS = [
+    "results", "risultati", "highlights", "key moments", "momenti chiave", "recap", "resoconto"
+]
+V865_TRUE_REPORT_SHOWS = [
+    "raw", "smackdown", "nxt", "dynamite", "collision", "impact", "tna impact",
+    "wwe raw", "wwe smackdown", "wwe nxt", "aew dynamite", "aew collision"
+]
+V865_NOT_RESULTS_REPORT_TERMS = [
+    "viewership", "ratings", "rating", "audience", "demo", "overnight",
+    "backstage", "update", "status", "reportedly", "rumor", "rumour",
+    "set for", "expected", "first wrestling appearance", "appearance after", "after wwe release",
+    "after release", "release", "released", "pushing for", "already pushing", "wwe exit",
+    "comments", "talks", "believes", "thinks", "says", "reacts", "preview", "start time", "how to watch", "confirmed matches"
+]
+
+
+def v865_probe(*parts):
+    return normalize_for_check(" ".join(str(p or "") for p in parts))
+
+
+def v865_has_date_marker(text=""):
+    p = v865_probe(text)
+    # ISO-ish dates in slugs: 2026-05-12 / 2026 05 12
+    if re.search(r"\b20\d{2}[-_/ ]\d{1,2}[-_/ ]\d{1,2}\b", p):
+        return True
+    # US numeric dates in titles/slugs: 5/12, 05-12-2026, 5 12 2026
+    if re.search(r"\b\d{1,2}[-_/ ]\d{1,2}(?:[-_/ ]20\d{2})?\b", p):
+        return True
+    # Month name dates
+    months = "jan|january|feb|february|mar|march|apr|april|may|jun|june|jul|july|aug|august|sep|sept|september|oct|october|nov|november|dec|december"
+    if re.search(rf"\b(?:{months})\s+\d{{1,2}}(?:,?\s+20\d{{2}})?\b", p):
+        return True
+    return False
+
+
+def v865_contains_true_report_marker(p=""):
+    return any(m in p for m in V865_TRUE_REPORT_MARKERS)
+
+
+def v865_contains_show_anchor(p=""):
+    return any(s in p for s in V865_TRUE_REPORT_SHOWS)
+
+
+def v865_contains_not_report_term(p=""):
+    return any(t in p for t in V865_NOT_RESULTS_REPORT_TERMS)
+
+
+def v865_is_true_results_report(title="", link="", summary=""):
+    """Strict gate for complete show results/recap articles only.
+
+    This intentionally excludes ratings/viewership reports, backstage updates, rumors,
+    single post-show news items and generic articles containing the word 'report'.
+    """
+    if not V865_TRUE_RESULTS_REPORT_GATE_ENABLED:
+        try:
+            return bool(is_results_article(title, link, summary))
+        except Exception:
+            return False
+    title_p = v865_probe(title)
+    url_path = ""
+    try:
+        url_path = urlparse(link or "").path.replace("/", " ").replace("-", " ")
+    except Exception:
+        url_path = link or ""
+    url_p = v865_probe(url_path, link)
+    combined = v865_probe(title, url_path, summary[:300] if summary else "")
+
+    # Strong exclusions first: these are not complete results reports even if they contain "report".
+    if v865_contains_not_report_term(title_p) or v865_contains_not_report_term(url_p):
+        return False
+
+    marker_ok = v865_contains_true_report_marker(title_p) or v865_contains_true_report_marker(url_p)
+    show_ok = v865_contains_show_anchor(title_p) or v865_contains_show_anchor(url_p) or v865_contains_show_anchor(combined)
+    date_ok = v865_has_date_marker(title_p) or v865_has_date_marker(url_p)
+
+    if not (marker_ok and show_ok and date_ok):
+        return False
+
+    # Avoid treating "3 Things We Loved/Hated" style columns as complete reports.
+    if any(x in combined for x in ["things we hated", "things we loved", "winners and losers", "grades"]):
+        return False
+
+    return True
+
+
+def v865_report_event_key(title="", link="", summary=""):
+    if not v865_is_true_results_report(title, link, summary):
+        return ""
+    return v864_report_event_key(title, link, summary)
+
+
+# Override the broad v86.4 report-like detector. From this point onward, the report-first
+# bypass is only for true complete results reports.
+def v864_is_report_like_feed_item(title="", link="", summary=""):
+    return v865_is_true_results_report(title, link, summary)
+
+
+def v864_report_event_key(title="", link="", summary=""):
+    return v865_report_event_key(title, link, summary)
+
+
+_ORIG_V865_v862_is_report_candidate_item = v862_is_report_candidate_item
+
+
+def v862_is_report_candidate_item(item):
+    if not isinstance(item, dict):
+        return False
+    title = item.get("title", "")
+    url = item.get("url", "")
+    summary = item.get("summary", "")
+    # Only true results reports get report candidate treatment. Legacy pending/items with broad
+    # report:* keys no longer bypass normal gates unless their title/url proves they are results reports.
+    if v865_is_true_results_report(title, url, summary):
+        return True
+    return False
+
+
+_ORIG_V865_v862_report_key_from_item = v862_report_key_from_item
+
+
+def v862_report_key_from_item(item):
+    item = item or {}
+    title = sanitize_text(item.get("title") or "")
+    url = item.get("url") or ""
+    summary = item.get("summary") or ""
+    if not v865_is_true_results_report(title, url, summary):
+        return ""
+    return item.get("report_event_key") or make_report_event_key(title, url, summary)
+
+
+def v865_history_value_is_true_report(field="", value=""):
+    s = str(value or "")
+    p = v865_probe(s.replace("-", " ").replace("_", " ").replace("/", " "))
+    if not s:
+        return False
+    if field == "urls":
+        return v865_is_true_results_report("", s, "")
+    if field == "event_keys":
+        # Strict report keys only: report:wwe-nxt-2026-05-12 etc. Do not remove
+        # generated broad keys like report:wwe-raw-backstage-update...
+        return bool(re.search(r"^report:(?:wwe-)?(?:raw|smackdown|nxt|aew-dynamite|aew-collision|dynamite|collision|impact|tna-impact)-20\d{2}-\d{2}-\d{2}$", s))
+    # title/semantic/story keys must look like complete results reports, not merely contain "report".
+    if v865_contains_not_report_term(p):
+        return False
+    return v865_contains_true_report_marker(p) and v865_contains_show_anchor(p) and v865_has_date_marker(p)
+
+
+_ORIG_V865_load_history = load_history
+
+
+def load_history():
+    history = _ORIG_V865_load_history()
+    if not V865_STRIP_TRUE_REPORT_HISTORY_ENABLED or not isinstance(history, dict):
+        return history
+    for field in ["urls", "semantic_ids", "title_keys", "event_keys", "story_fingerprints", "news_core_keys", "story_signatures_v71"]:
+        values = history.get(field)
+        if not isinstance(values, set):
+            continue
+        clean = set()
+        removed = 0
+        for val in values:
+            if v865_history_value_is_true_report(field, val):
+                removed += 1
+                continue
+            clean.add(val)
+        history[field] = clean
+        if removed:
+            print(f"[REPORT v86.5] History true-results override: rimossi {removed} record da {field}")
+    return history
+
+
+# v86.5: if a true results report was admitted to queue, do not let old pre-processing
+# skipped_history or local report-history wrappers block it unless WordPress strictly confirms it.
+_ORIG_V865_process_candidate_item = process_candidate_item
+
+
+def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    if isinstance(item, dict) and v865_is_true_results_report(item.get("title", ""), item.get("url", ""), item.get("summary", "")):
+        report_key = item.get("report_event_key") or v865_report_event_key(item.get("title", ""), item.get("url", ""), item.get("summary", ""))
+        if report_key:
+            item["kind"] = "report"
+            item["report_event_key"] = report_key
+            item["event_key"] = report_key
+            try:
+                if v862_wp_has_published_report_strict(report_key, title=item.get("title", ""), url=item.get("url", "")):
+                    print(f"[REPORT v86.5] Skip pre-scraping: true results report confermato su WordPress: {report_key}")
+                    remove_pending_report_key(report_key)
+                    remove_pending_url(item.get("url", ""))
+                    return "skipped"
+            except Exception as e:
+                print(f"[REPORT v86.5] Verifica WP report fallita, continuo: {report_key} | {e}")
+            # Remove only report-specific blockers from in-memory state for this item.
+            for field, val in [
+                ("urls", item.get("url")),
+                ("semantic_ids", item.get("semantic_id")),
+                ("title_keys", item.get("title_key")),
+                ("event_keys", report_key),
+                ("story_signatures_v71", item.get("story_signature_v71")),
+            ]:
+                try:
+                    if val:
+                        history.get(field, set()).discard(val)
+                except Exception:
+                    pass
+            try:
+                seen_event_keys.discard(report_key)
+                if item.get("story_signature_v71"):
+                    seen_story_signatures_v71.discard(item.get("story_signature_v71"))
+            except Exception:
+                pass
+            print(f"[REPORT v86.5] True results report autorizzato dal gate stretto: {report_key} - {item.get('title')}")
+    return _ORIG_V865_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+
+
+_ORIG_V865_run_bot_raw = _ORIG_V864_run_bot_raw if "_ORIG_V864_run_bot_raw" in globals() else run_bot
+
+
+def run_bot():
+    if V854_BOOT_DIAGNOSTICS_ENABLED:
+        print(f"[BOOT v86.5] entro in run_bot epoch={time.time():.3f}", flush=True)
+    return _ORIG_V865_run_bot_raw()
+
+
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 if __name__ == "__main__":
     if V854_BOOT_DIAGNOSTICS_ENABLED:
-        print(f"[BOOT v86.4] __main__ reached epoch={time.time():.3f}", flush=True)
+        print(f"[BOOT v86.5] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
