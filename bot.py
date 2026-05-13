@@ -14248,13 +14248,543 @@ def save_selected_candidates_to_pending(queue, reason="wp_down", limit=3):
             saved += 1
     print(f"[PENDING v85.5] Candidati salvati per dopo: {saved}")
 
+# =========================
+# v86 - structured pipeline + hard embed engine
+# =========================
+BOT_VERSION = "v86_structured_pipeline_embed_engine"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+# v86 principles:
+# - Hard pre-Gemini skips are allowed only for URL/history, skipped_history,
+#   expired previews, obsolete pre-show spoilers and obviously low-value items.
+# - news_core/event_key matches before AI analysis are SOFT duplicate hints, not hard skips.
+# - the article must be understood before it is declared a duplicate.
+# - embeds are extracted, canonicalized, validated, and reinserted by position.
+# - YouTube is the only provider intentionally promoted from inline hyperlinks.
+
+V86_CONTEXTUAL_DEDUPE_ENABLED = os.getenv("V86_CONTEXTUAL_DEDUPE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V86_HARD_EMBED_ENGINE_ENABLED = os.getenv("V86_HARD_EMBED_ENGINE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V86_YOUTUBE_INLINE_AS_EMBED = os.getenv("V86_YOUTUBE_INLINE_AS_EMBED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V86_DISABLE_PRE_GEMINI_CORE_HISTORY_HARD_SKIP = os.getenv("V86_DISABLE_PRE_GEMINI_CORE_HISTORY_HARD_SKIP", "1").strip().lower() not in {"0", "false", "no", "off"}
+V86_DISABLE_V851_EARLY_CORE_HARD_SKIP = os.getenv("V86_DISABLE_V851_EARLY_CORE_HARD_SKIP", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+# -----------------------------------------------------------------------------
+# v86.1 Pre-Gemini dedupe policy
+# -----------------------------------------------------------------------------
+
+_ORIG_V86_v851_early_news_core_key = v851_early_news_core_key if "v851_early_news_core_key" in globals() else None
+
+def v851_early_news_core_key(title="", summary=""):
+    """v86: disable hard pre-Gemini news_core suppression.
+
+    The old v85.1/v85.5 path could skip contextual follow-ups before Gemini had a
+    chance to repair article type/event_key. Returning an empty key here preserves
+    URL/semantic fast skips but prevents broad business cores from killing valid
+    angles such as Bischoff/Triple H/TKO opinion pieces.
+    """
+    if V86_DISABLE_V851_EARLY_CORE_HARD_SKIP:
+        return ""
+    if _ORIG_V86_v851_early_news_core_key:
+        return _ORIG_V86_v851_early_news_core_key(title, summary)
+    return ""
+
+
+def v86_is_soft_duplicate_reason(reason=""):
+    r = normalize_for_check(reason or "")
+    return "news_core_history_pre_gemini" in r or "event_history_pre_gemini" in r or "soft_duplicate" in r
+
+
+_ORIG_V86_v854_skip_ttl_for_reason = v854_skip_ttl_for_reason
+
+def v854_skip_ttl_for_reason(reason, score=None):
+    """v86: shorter TTL for soft/contextual skips.
+
+    Hard duplicates can still live for 14 days; soft duplicate hints must not
+    suppress an evolving story for two weeks.
+    """
+    r = normalize_for_check(reason or "")
+    if "business_core_generic" in r:
+        return 6 * 3600
+    if "soft_duplicate" in r:
+        return 12 * 3600
+    if "low_value_opinion" in r or "opinion" in r:
+        return 24 * 3600
+    return _ORIG_V86_v854_skip_ttl_for_reason(reason, score=score)
+
+
+_ORIG_V86_v855_low_value_pre_gemini_reason = v855_low_value_pre_gemini_reason
+
+def v855_low_value_pre_gemini_reason(item, history=None):
+    """v86: remove hard news_core/event_key history skips before AI context.
+
+    Keep cheap deterministic skips for expired previews and obvious low-value
+    items, but do not hard-skip on event_key/news_core history until the article
+    type and event key have been repaired by the editorial analysis layer.
+    """
+    if not V855_PRE_GEMINI_LOW_VALUE_GATE:
+        return ""
+    title, url, summary, score = v855_context_from_item(item)
+    if not title:
+        return ""
+    if isinstance(item, dict) and (item.get("kind") == "report" or str(item.get("report_event_key") or item.get("event_key") or "").startswith("report:")):
+        return ""
+
+    probe = normalize_for_check(f"{title} {url} {summary}")
+
+    # Hard deterministic skips remain valid.
+    if v70_is_hard_preview(title, summary, url) and v62_is_expired_preview(title, summary, url):
+        return "expired_preview_pre_gemini"
+    if "spoiler" in probe and "open challenge" in probe and v62_is_expired_preview(title, summary, url):
+        return "obsolete_preshow_spoiler_pre_gemini"
+
+    # v86: history core/event matches are not hard skips here.
+    if history and not V86_DISABLE_PRE_GEMINI_CORE_HISTORY_HARD_SKIP:
+        try:
+            news_core = make_news_core_key(title, summary)
+            if news_core and news_core in history.get("news_core_keys", set()):
+                return f"soft_duplicate_news_core_pre_gemini:{news_core}"
+            event_key = item.get("event_key") or make_event_key(title, summary, url)
+            if event_key and event_key in history.get("event_keys", set()) and not is_followup_angle(title, summary, event_key):
+                return f"soft_duplicate_event_pre_gemini:{event_key}"
+        except Exception:
+            pass
+
+    low_value_hit = any(term in probe for term in V855_SAFE_LOW_VALUE_TERMS)
+    if low_value_hit and score < MIN_PUBLISH_SCORE and not v855_is_critical_item(title, summary, url):
+        return "low_value_opinion_pre_gemini"
+    if score < V855_LOW_VALUE_SCORE_CUTOFF and not v855_is_critical_item(title, summary, url):
+        return f"low_score_pre_gemini:{score}"
+    return ""
+
+
+# -----------------------------------------------------------------------------
+# v86.2 Hard Embed Engine
+# -----------------------------------------------------------------------------
+
+YOUTUBE_HOSTS_V86 = {"youtube.com", "www.youtube.com", "m.youtube.com", "youtu.be", "www.youtu.be"}
+
+
+def v86_url_from_attr(value=""):
+    return normalize_embed_url(str(value or "").strip())
+
+
+def v86_youtube_video_id(url=""):
+    """Return a plausible YouTube video id for watch/youtu.be/live/shorts URLs."""
+    try:
+        parsed = urlparse(str(url or "").strip())
+        host = (parsed.netloc or "").lower()
+        path = (parsed.path or "").strip("/")
+        if host.endswith("youtu.be"):
+            vid = path.split("/")[0]
+            return vid if re.fullmatch(r"[A-Za-z0-9_-]{6,}", vid or "") else ""
+        if "youtube.com" in host:
+            qs = parse_qs(parsed.query or "")
+            vid = (qs.get("v") or [""])[0]
+            if vid and re.fullmatch(r"[A-Za-z0-9_-]{6,}", vid):
+                return vid
+            m = re.match(r"^(?:live|shorts|embed)/([A-Za-z0-9_-]{6,})", path)
+            if m:
+                return m.group(1)
+    except Exception:
+        pass
+    return ""
+
+
+def v86_is_youtube_url(url=""):
+    return bool(v86_youtube_video_id(url))
+
+
+def v86_canonical_youtube_url(url=""):
+    vid = v86_youtube_video_id(url)
+    return f"https://www.youtube.com/watch?v={vid}" if vid else ""
+
+
+def v86_canonical_embed_url(url=""):
+    """Canonicalize only plausible embed URLs. Return empty for invalid noise."""
+    url = v86_url_from_attr(url)
+    if not url:
+        return ""
+    if v86_is_youtube_url(url):
+        return v86_canonical_youtube_url(url)
+    try:
+        clean = normalize_embed_url(url)
+        if not is_valid_embed_url(clean):
+            return ""
+        provider = get_embed_provider_slug(clean)
+        if provider == "facebook" and facebook_url_is_probably_bad(clean):
+            return ""
+        return clean
+    except Exception:
+        return ""
+
+
+def v86_is_plausible_embed_url(url="", allow_youtube=True):
+    clean = v86_canonical_embed_url(url)
+    if not clean:
+        return False
+    if v86_is_youtube_url(clean):
+        return bool(allow_youtube)
+    try:
+        provider = get_embed_provider_slug(clean)
+        if provider == "x":
+            return v84_is_x_status_url(clean) if "v84_is_x_status_url" in globals() else bool(re.search(r"/status/\d+", clean))
+        if provider == "instagram":
+            return bool(re.search(r"instagram\.com/(p|reel|tv)/[^/?#]+", clean, flags=re.I))
+        if provider == "tiktok":
+            return bool(re.search(r"tiktok\.com/@[^/]+/video/\d+", clean, flags=re.I))
+        if provider == "facebook":
+            return not facebook_url_is_probably_bad(clean)
+    except Exception:
+        return False
+    return False
+
+
+def v86_node_text_without_links(node):
+    try:
+        clone = BeautifulSoup(str(node), "html.parser")
+        for a in clone.find_all("a"):
+            a.decompose()
+        return sanitize_text(clone.get_text(" ", strip=True))
+    except Exception:
+        return ""
+
+
+def v86_anchor_is_standalone_embed_context(node, anchor):
+    if not node or not anchor:
+        return False
+    try:
+        if v809_anchor_is_standalone_embed_context(node, anchor):
+            return True
+    except Exception:
+        pass
+    full_text = sanitize_text(node.get_text(" ", strip=True))
+    link_text = sanitize_text(anchor.get_text(" ", strip=True))
+    outside_text = v86_node_text_without_links(node)
+    if not full_text:
+        return False
+    href = v86_canonical_embed_url(anchor.get("href", ""))
+    if not href:
+        return False
+    # Pure URL paragraph or one generic call-to-action link.
+    if full_text == href or link_text == href:
+        return True
+    full_low = normalize_for_check(full_text)
+    outside_low = normalize_for_check(outside_text)
+    generic = ["view this post", "watch this video", "watch on youtube", "view on instagram", "view on tiktok", "guarda il video", "guarda il post", "guarda su youtube"]
+    if len(full_low) <= 90 and any(g in full_low for g in generic) and len(outside_low) <= 24:
+        return True
+    return False
+
+
+def v86_raw_embed_urls_from_node(node):
+    urls = []
+    if not node:
+        return []
+    try:
+        for amp_tw in node.find_all("amp-twitter"):
+            tweet_id = amp_tw.get("data-tweetid")
+            if tweet_id:
+                urls.append(f"https://twitter.com/i/status/{tweet_id}")
+        for amp_ig in node.find_all("amp-instagram"):
+            shortcode = amp_ig.get("data-shortcode")
+            if shortcode:
+                urls.append(f"https://www.instagram.com/p/{shortcode}/")
+        for blockquote in node.find_all("blockquote"):
+            classes = " ".join(blockquote.get("class", []))
+            if any(c in classes for c in ["twitter-tweet", "instagram-media", "tiktok-embed"]):
+                for a in blockquote.find_all("a", href=True):
+                    urls.append(a.get("href", ""))
+        for iframe in node.find_all("iframe", src=True):
+            fb_href = extract_facebook_url_from_iframe(iframe.get("src", ""))
+            urls.append(fb_href or iframe.get("src", ""))
+    except Exception:
+        pass
+    out = []
+    for u in urls:
+        clean = v86_canonical_embed_url(u)
+        if clean and v86_is_plausible_embed_url(clean):
+            out.append(clean)
+    return dedupe_preserve_order(out)
+
+
+def v86_youtube_inline_urls_from_node(node):
+    """Extract plausible YouTube links from inline anchors only.
+
+    YouTube is the only provider deliberately promoted from hyperlink to embed.
+    The anchor text remains as normal text; the video block is inserted immediately
+    after the paragraph/list item where the link originally appeared.
+    """
+    if not V86_YOUTUBE_INLINE_AS_EMBED or not node:
+        return []
+    urls = []
+    try:
+        for a in node.find_all("a", href=True):
+            href = v86_canonical_youtube_url(a.get("href", ""))
+            if href:
+                urls.append(href)
+    except Exception:
+        pass
+    return dedupe_preserve_order(urls)
+
+
+def v86_standalone_embed_urls_from_node(node):
+    if not node:
+        return []
+    urls = []
+    try:
+        for a in node.find_all("a", href=True):
+            href = v86_canonical_embed_url(a.get("href", ""))
+            if not href:
+                continue
+            if v86_is_youtube_url(href):
+                # YouTube is handled separately so it can be placed after the text paragraph.
+                continue
+            if v86_is_plausible_embed_url(href, allow_youtube=False) and v86_anchor_is_standalone_embed_context(node, a):
+                urls.append(href)
+    except Exception:
+        pass
+    return dedupe_preserve_order(urls)
+
+
+_ORIG_V86_node_social_embed_urls = _node_social_embed_urls
+
+def _node_social_embed_urls(node):
+    """v86 hard embed extractor.
+
+    Rules:
+    - raw social embeds are accepted after URL validation;
+    - standalone social/video links are accepted only when the node is really an embed wrapper;
+    - inline Instagram/TikTok/X/Facebook links stay inline text;
+    - inline YouTube links are promoted to video blocks by build_ordered_content_blocks().
+    """
+    if not V86_HARD_EMBED_ENGINE_ENABLED:
+        return _ORIG_V86_node_social_embed_urls(node)
+    embeds = []
+    embeds.extend(v86_raw_embed_urls_from_node(node))
+    embeds.extend(v86_standalone_embed_urls_from_node(node))
+    # Keep YouTube here only for raw/standalone wrappers; inline placement is handled below.
+    try:
+        for a in node.find_all("a", href=True):
+            href = v86_canonical_youtube_url(a.get("href", ""))
+            if href and v86_anchor_is_standalone_embed_context(node, a):
+                embeds.append(href)
+    except Exception:
+        pass
+    return dedupe_preserve_order([u for u in embeds if v86_is_plausible_embed_url(u)])
+
+
+_ORIG_V86_build_ordered_content_blocks = build_ordered_content_blocks
+
+def build_ordered_content_blocks(html, source_url=""):
+    """v86 block extraction with hard embed placement.
+
+    Produces a stable sequence of text/image/embed blocks. Inline YouTube links are
+    extracted and inserted immediately after the paragraph/list item where they
+    appeared. Other inline social links remain textual links, not oEmbed blocks.
+    """
+    if not V86_HARD_EMBED_ENGINE_ENABLED:
+        return _ORIG_V86_build_ordered_content_blocks(html, source_url=source_url)
+    if not html:
+        return []
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        featured_url = extract_image_from_article_html(html)
+        content = parse_content_container(soup, source_url)
+        if not content:
+            return []
+        content = BeautifulSoup(str(content), "html.parser")
+
+        for trash in content(["script", "style", "nav", "footer", "header", "aside", "form", "noscript"]):
+            trash.decompose()
+        for bad_sel in [
+            ".social_holder", ".social_icons", ".m-s-i", ".google-news", ".contest",
+            ".breadcrumbs", ".breadcrumb", "#pagination", ".srp", ".related_link",
+            ".amp-related-posts-title", ".amp-sidebar", ".amp-ad-wrapper", "amp-ad",
+            ".sharethis-inline-share-buttons", ".social-share", ".social-wrap", ".sharedaddy",
+            ".author-box", ".byline", ".sidebar", ".comment-respond",
+            ".disqus-comment-container", ".under-art", ".zergnet-widget"
+        ]:
+            for node in content.select(bad_sel):
+                node.decompose()
+
+        blocks = []
+        seen_text = set()
+        seen_images = set()
+        seen_embeds = set()
+        text_idx = 1
+        image_idx = 1
+        embed_idx = 1
+
+        def add_embed(url, source="embed"):
+            nonlocal embed_idx
+            clean = v86_canonical_embed_url(url)
+            if not clean or not v86_is_plausible_embed_url(clean):
+                print(f"[EMBED v86] Scarto URL non plausibile: {url}")
+                return
+            key = canonical_embed_key(clean)
+            if key in seen_embeds:
+                return
+            seen_embeds.add(key)
+            blocks.append({"type": "embed", "id": f"EMBED_{embed_idx:03d}", "url": clean, "source": source})
+            embed_idx += 1
+
+        nodes = content.find_all(["p", "blockquote", "h2", "h3", "h4", "li", "figure", "iframe", "amp-twitter", "amp-instagram", "amp-img", "img"])
+        for node in nodes:
+            classes = " ".join(node.get("class", []))
+            is_pure_raw_embed = node.name in {"iframe", "amp-twitter", "amp-instagram"} or "twitter-tweet" in classes or "instagram-media" in classes or "tiktok-embed" in classes
+
+            # 1) Raw/standalone non-YouTube embeds before/at their original node.
+            raw_embeds = v86_raw_embed_urls_from_node(node)
+            standalone_embeds = v86_standalone_embed_urls_from_node(node)
+            for url in raw_embeds + standalone_embeds:
+                add_embed(url, source="raw_or_standalone")
+            if is_pure_raw_embed:
+                continue
+
+            # 2) Image blocks, preserving the old featured-image exclusion later.
+            img_node = None
+            if node.name in {"figure", "p", "li"}:
+                img_node = node.find(["amp-img", "img"], src=True)
+            elif node.name in {"amp-img", "img"} and node.get("src"):
+                img_node = node
+            if img_node:
+                src = clean_tracking_params(img_node.get("src", ""))
+                low = (src or "").lower()
+                base = image_url_base(src)
+                if (
+                    src and not low.startswith("data:image")
+                    and re.search(r"\.(jpg|jpeg|png|webp)(\?.*)?$", src, re.I)
+                    and not any(x in low for x in ["logo", "avatar", "sprite", "placeholder", "default.jpg", "favicon"])
+                    and base and base not in seen_images
+                ):
+                    width = img_node.get("width", "") or ""
+                    height = img_node.get("height", "") or ""
+                    try:
+                        width_i = int(width) if str(width).isdigit() else 0
+                    except Exception:
+                        width_i = 0
+                    try:
+                        height_i = int(height) if str(height).isdigit() else 0
+                    except Exception:
+                        height_i = 0
+                    if not (width_i and height_i and (width_i < 180 or height_i < 140)):
+                        seen_images.add(base)
+                        blocks.append({"type": "image", "id": f"IMAGE_{image_idx:03d}", "src": src, "alt": sanitize_text(img_node.get("alt", ""))})
+                        image_idx += 1
+                if node.name in {"figure", "amp-img", "img"}:
+                    continue
+
+            # 3) Text block. Inline social links remain text; inline YouTube is extracted after this paragraph.
+            text = sanitize_text(node.get_text(" ", strip=True))
+            if len(text) > 20 and text not in seen_text and not SOURCE_PROMO_RE.search(text):
+                seen_text.add(text)
+                blocks.append({"type": "text", "id": f"TEXT_{text_idx:03d}", "text": text})
+                text_idx += 1
+
+            # 4) YouTube exception: inline hyperlinks become embeds right after the paragraph.
+            for yt in v86_youtube_inline_urls_from_node(node):
+                add_embed(yt, source="youtube_inline_after_text")
+
+        text_len = sum(len(b.get("text", "")) for b in blocks if b.get("type") == "text")
+        if text_len < 120:
+            return []
+        print(f"[BLOCKSEQ v86] Blocchi ordinati estratti: text={sum(1 for b in blocks if b.get('type')=='text')}, image={sum(1 for b in blocks if b.get('type')=='image')}, embed={sum(1 for b in blocks if b.get('type')=='embed')}")
+        return blocks
+    except Exception as e:
+        print(f"[BLOCKSEQ v86] Estrazione blocchi ordinati fallita: {e}")
+        return _ORIG_V86_build_ordered_content_blocks(html, source_url=source_url)
+
+
+_ORIG_V86_extract_embeds_from_article_html = extract_embeds_from_article_html
+
+def extract_embeds_from_article_html(html):
+    """v86: global embed extraction is conservative.
+
+    This is now a fallback inventory, not the primary placement mechanism. The
+    ordered block engine owns original positions.
+    """
+    if not V86_HARD_EMBED_ENGINE_ENABLED:
+        return _ORIG_V86_extract_embeds_from_article_html(html)
+    embeds = []
+    try:
+        soup = BeautifulSoup(html or "", "html.parser")
+        content = parse_content_container(soup, "") or soup
+        for node in content.find_all(["blockquote", "figure", "iframe", "amp-twitter", "amp-instagram", "p", "li"]):
+            # Raw/standalone embeds plus YouTube exception.
+            embeds.extend(v86_raw_embed_urls_from_node(node))
+            embeds.extend(v86_standalone_embed_urls_from_node(node))
+            embeds.extend(v86_youtube_inline_urls_from_node(node))
+    except Exception as e:
+        print(f"[EMBED v86] Estrazione globale fallita: {e}")
+    return dedupe_preserve_order([v86_canonical_embed_url(u) for u in embeds if v86_is_plausible_embed_url(u)])
+
+
+_ORIG_V86_v80_normalize_oembed_urls_in_html = v80_normalize_oembed_urls_in_html
+
+def v80_normalize_oembed_urls_in_html(html: str) -> str:
+    """v86: normalize only standalone embed URLs and YouTube anchors.
+
+    Do not promote inline X/Instagram/TikTok/Facebook hyperlinks to oEmbed blocks.
+    """
+    if not V86_HARD_EMBED_ENGINE_ENABLED or not html:
+        return _ORIG_V86_v80_normalize_oembed_urls_in_html(html)
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        changed = False
+
+        # Standalone URL paragraphs.
+        for p in list(soup.find_all("p")):
+            txt = sanitize_text(p.get_text(" ", strip=True))
+            clean = v86_canonical_embed_url(txt)
+            if clean and v86_is_plausible_embed_url(clean):
+                p.string = v80_canonical_oembed_url(clean) if "v80_canonical_oembed_url" in globals() else clean
+                changed = True
+
+        # YouTube inline anchors are the only inline links promoted at final cleanup.
+        for a in list(soup.find_all("a", href=True)):
+            href = v86_canonical_youtube_url(a.get("href", ""))
+            if href:
+                new_node = BeautifulSoup(f"<p>{href}</p>", "html.parser")
+                a.replace_with(new_node)
+                changed = True
+
+        return str(soup) if changed else html
+    except Exception as e:
+        print(f"[EMBED v86] Normalizzazione finale fallita: {e}")
+        return html
+
+
+_ORIG_V86_render_embed_block = render_embed_block
+
+def render_embed_block(url):
+    clean = v86_canonical_embed_url(url)
+    if not clean or not v86_is_plausible_embed_url(clean):
+        print(f"[EMBED v86] render scartato: {url}")
+        return ""
+    if v86_is_youtube_url(clean):
+        return f"\n\n{clean}\n\n"
+    return _ORIG_V86_render_embed_block(clean)
+
+
+# -----------------------------------------------------------------------------
+# v86.3 Runtime wrapper with clean diagnostics
+# -----------------------------------------------------------------------------
+
+# Avoid old v85.4 diagnostic labels in run_bot. The original raw function was saved by v85.4.
+_ORIG_V86_run_bot_raw = _ORIG_V854_run_bot if "_ORIG_V854_run_bot" in globals() else run_bot
+
+def run_bot():
+    if V854_BOOT_DIAGNOSTICS_ENABLED:
+        print(f"[BOOT v86] entro in run_bot epoch={time.time():.3f}", flush=True)
+    return _ORIG_V86_run_bot_raw()
+
 
 # =========================
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 # =========================
 if __name__ == "__main__":
     if V854_BOOT_DIAGNOSTICS_ENABLED:
-        print(f"[BOOT v85.5] __main__ reached epoch={time.time():.3f}", flush=True)
+        print(f"[BOOT v86] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
@@ -14263,3 +14793,4 @@ if __name__ == "__main__":
         create_review_bundle_latest()
         review_finalize_package()
         log_run_end()
+
