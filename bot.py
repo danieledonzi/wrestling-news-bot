@@ -16221,10 +16221,546 @@ def run_bot():
     return _ORIG_V865_run_bot_raw()
 
 
+
+# =========================
+# v86.6 - true report recursion fix + media preservation guard
+# =========================
+BOT_VERSION = "v86_6_true_report_recursion_media_guard"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V866_ITEM_ERROR_ISOLATION_ENABLED = os.getenv("V86_6_ITEM_ERROR_ISOLATION_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V866_MEDIA_GUARD_ENABLED = os.getenv("V86_6_MEDIA_GUARD_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V866_FUTURE_SPEC_CAP_ENABLED = os.getenv("V86_6_FUTURE_SPEC_CAP_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V866_FUTURE_SPEC_SCORE_CAP = int(os.getenv("V86_6_FUTURE_SPEC_SCORE_CAP", "72"))
+V866_CLEAN_RUNTIME_LABELS_ENABLED = os.getenv("V86_6_CLEAN_RUNTIME_LABELS_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+# v86.6: clean old runtime labels without altering logic. This keeps diagnostics readable while
+# legacy helpers are still reused under the hood.
+try:
+    import builtins as _v866_builtins
+    _ORIG_V866_PRINT = _v866_builtins.print
+    def _v866_clean_label_text(obj):
+        s = str(obj)
+        if not V866_CLEAN_RUNTIME_LABELS_ENABLED:
+            return s
+        replacements = {
+            "[BOOT v86.1]": "[BOOT v86.6/legacy]",
+            "[BOOT v85.4]": "[BOOT v86.6/wp-health]",
+            "[SKIP v85.4]": "[SKIP v86.6/legacy]",
+            "[SKIP v85.5]": "[SKIP v86.6/legacy]",
+            "[RUN v85]": "[RUN v86.6]",
+            "[REPORT v86.2]": "[REPORT v86.6/legacy]",
+            "[REPORT v86.4]": "[REPORT v86.6]",
+            "[REPORT v86.5]": "[REPORT v86.6]",
+            "[FRESHNESS v86.1]": "[FRESHNESS v86.6/legacy]",
+            "[FRESHNESS v86.4]": "[FRESHNESS v86.6]",
+        }
+        for old, new in replacements.items():
+            s = s.replace(old, new)
+        return s
+    def _v866_print(*args, **kwargs):
+        if V866_CLEAN_RUNTIME_LABELS_ENABLED:
+            args = tuple(_v866_clean_label_text(a) for a in args)
+        return _ORIG_V866_PRINT(*args, **kwargs)
+    _v866_builtins.print = _v866_print
+except Exception:
+    pass
+
+
+def v866_direct_report_event_key(title="", link="", summary=""):
+    """Build a true-results report key without calling v864/v865 wrappers.
+
+    v86.5 accidentally created v865_report_event_key -> v864_report_event_key ->
+    v865_report_event_key recursion. This function is intentionally direct.
+    """
+    if not v865_is_true_results_report(title, link, summary):
+        return ""
+    for args in ((title, link, summary), (title, summary, link)):
+        try:
+            key = make_report_event_key(*args)
+            if key and str(key).startswith("report:"):
+                return key
+        except Exception:
+            pass
+    return ""
+
+
+def v865_report_event_key(title="", link="", summary=""):
+    return v866_direct_report_event_key(title, link, summary)
+
+
+def v864_report_event_key(title="", link="", summary=""):
+    return v866_direct_report_event_key(title, link, summary)
+
+
+def v864_is_report_like_feed_item(title="", link="", summary=""):
+    # v86.6 preserves the v86.5 strict behavior: only true complete results reports bypass generic gates.
+    return v865_is_true_results_report(title, link, summary)
+
+
+def v866_is_future_return_speculation(title="", text="", url="", editorial_analysis=None):
+    p_title = normalize_for_check(title or "")
+    p = normalize_for_check(f"{title or ''} {url or ''} {(text or '')[:1800]}")
+    if is_results_article(title, url, text):
+        return False
+    # Concrete post-show outcomes should not be capped by this rule.
+    if "v863_title_or_url_is_post_show_outcome" in globals():
+        try:
+            if v863_title_or_url_is_post_show_outcome(title, url, text):
+                return False
+        except Exception:
+            pass
+    future_markers = [
+        "possible date", "possible return date", "return date", "advertised for", "officially advertising",
+        "advertised schedule", "may return", "could return", "expected to return", "tv hiatus",
+        "will appear", "scheduled for", "set for", "future episode", "upcoming episode",
+    ]
+    return_context = ["return", "returns", "coming back", "back in action", "back on television", "back on tv"]
+    if any(x in p for x in future_markers) and any(x in p for x in return_context):
+        return True
+    if p_title.startswith("possible date") and "return" in p:
+        return True
+    try:
+        atype = normalize_article_type_v68((editorial_analysis or {}).get("article_type", ""))
+        reason = normalize_for_check((editorial_analysis or {}).get("article_type_reason", "") + " " + (editorial_analysis or {}).get("summary", ""))
+        if atype in {"PREVIEW", "OTHER", "RUMOR"} and any(x in reason for x in ["future", "specul", "anteprima", "evento futuro"]):
+            if "return" in p or "ritorno" in p:
+                return True
+    except Exception:
+        pass
+    return False
+
+
+_ORIG_V866_calculate_importance_score = calculate_importance_score
+
+def calculate_importance_score(title, text="", url=""):
+    score, reasons = _ORIG_V866_calculate_importance_score(title, text, url)
+    if V866_FUTURE_SPEC_CAP_ENABLED and v866_is_future_return_speculation(title, text, url):
+        if int(score or 0) > V866_FUTURE_SPEC_SCORE_CAP:
+            old = int(score or 0)
+            score = V866_FUTURE_SPEC_SCORE_CAP
+            reasons = list(reasons or [])
+            reasons.append(f"v86.6 cap future return/speculation {old}->{score}")
+            print(f"[SCORE v86.6] Cap future return/speculation {old}->{score} - {title}")
+    return score, reasons
+
+
+_ORIG_V866_v723_conservative_score_after_ai = v723_conservative_score_after_ai
+
+def v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title="", text="", url="", editorial_analysis=None):
+    score, reasons = _ORIG_V866_v723_conservative_score_after_ai(initial_score, refined_score, refined_reasons, title, text, url, editorial_analysis)
+    if V866_FUTURE_SPEC_CAP_ENABLED and v866_is_future_return_speculation(title, text, url, editorial_analysis=editorial_analysis):
+        if int(score or 0) > V866_FUTURE_SPEC_SCORE_CAP:
+            old = int(score or 0)
+            score = V866_FUTURE_SPEC_SCORE_CAP
+            reasons = list(reasons or [])
+            reasons.append(f"v86.6 cap AI future return/speculation {old}->{score}")
+            print(f"[SCORE v86.6] Cap AI future return/speculation {old}->{score} - {title}")
+    return score, reasons
+
+
+# v86.6 media preservation -------------------------------------------------
+# The CTA removal is correct; the bug was that later cleanup could strip the media block immediately
+# before the CTA. In particular, v85 draft-first calls v61_strip_body_images_if_featured(), which deleted
+# every figure when a featured image existed. Structured inline images already skip the featured image,
+# so owtv-inline-image figures must survive.
+V866_EXPECTED_MEDIA_BY_URL = {}
+
+
+def v866_media_identity(url=""):
+    try:
+        parsed = urlparse(clean_tracking_params(url or ""))
+        path = unquote(parsed.path or "").lower()
+        filename = path.rsplit("/", 1)[-1]
+        filename = re.sub(r"-(?:\d{2,5})x(?:\d{2,5})(?=\.[a-z0-9]{3,5}$)", "", filename, flags=re.I)
+        return {urlunparse((parsed.scheme.lower(), parsed.netloc.lower(), path, "", "", "")).rstrip("/"), filename}
+    except Exception:
+        s = (url or "").split("?", 1)[0].lower()
+        return {s, s.rsplit("/", 1)[-1]}
+
+
+def v866_html_has_media_url(html="", url=""):
+    if not html or not url:
+        return False
+    html_l = str(html).lower()
+    for ident in v866_media_identity(url):
+        if ident and ident in html_l:
+            return True
+    return False
+
+
+_ORIG_V866_v61_strip_body_images_if_featured = v61_strip_body_images_if_featured
+
+def v61_strip_body_images_if_featured(html, has_featured=True):
+    if not html or not has_featured:
+        return html
+    if not V866_MEDIA_GUARD_ENABLED:
+        return _ORIG_V866_v61_strip_body_images_if_featured(html, has_featured=has_featured)
+    soup = BeautifulSoup(html, "html.parser")
+    removed = 0
+    preserved = 0
+    for fig in list(soup.find_all("figure")):
+        classes = " ".join(fig.get("class", []))
+        if "owtv-inline-image" in classes:
+            preserved += 1
+            continue
+        if fig.find(["img", "amp-img"]):
+            fig.decompose()
+            removed += 1
+    for img in list(soup.find_all(["img", "amp-img"])):
+        parent = img.find_parent("figure")
+        if parent and "owtv-inline-image" in " ".join(parent.get("class", [])):
+            preserved += 1
+            continue
+        # Keep explicitly marked editorial inline images even if a later formatter removed the figure wrapper.
+        if "owtv-inline-image" in " ".join(img.get("class", [])):
+            preserved += 1
+            continue
+        img.decompose()
+        removed += 1
+    if preserved:
+        print(f"[MEDIA v86.6] Preservate {preserved} immagini inline strutturate durante strip featured")
+    return str(soup)
+
+
+_ORIG_V866_translate_ordered_content_blocks = translate_ordered_content_blocks
+
+def translate_ordered_content_blocks(source_title, blocks, source_url="", forced_title=None, forced_category=None, excluded_image_urls=None):
+    if V866_MEDIA_GUARD_ENABLED:
+        expected = {"images": [], "embeds": []}
+        seen_text = False
+        skipped_leading = False
+        for b in blocks or []:
+            if b.get("type") == "text" and b.get("text"):
+                seen_text = True
+            elif b.get("type") == "image":
+                src = normalize_embed_url(b.get("src", ""))
+                if not src:
+                    continue
+                if V71_SKIP_LEADING_INLINE_IMAGE and not seen_text and not skipped_leading:
+                    skipped_leading = True
+                    continue
+                if v71_is_excluded_inline_image(src, excluded_image_urls):
+                    continue
+                expected["images"].append(src)
+            elif b.get("type") == "embed":
+                u = normalize_embed_url(b.get("url", ""))
+                if u:
+                    expected["embeds"].append(u)
+        expected["images"] = dedupe_preserve_order(expected["images"])
+        expected["embeds"] = dedupe_preserve_order(expected["embeds"])
+        if source_url:
+            V866_EXPECTED_MEDIA_BY_URL[source_url] = expected
+    return _ORIG_V866_translate_ordered_content_blocks(source_title, blocks, source_url=source_url, forced_title=forced_title, forced_category=forced_category, excluded_image_urls=excluded_image_urls)
+
+
+_ORIG_V866_create_post_without_image = create_post_without_image
+
+def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+    if V866_MEDIA_GUARD_ENABLED and isinstance(data, dict):
+        expected = V866_EXPECTED_MEDIA_BY_URL.get(url or "", {}) or {}
+        html = data.get("testo", "") or ""
+        missing_images = [u for u in expected.get("images", []) if not v866_html_has_media_url(html, u)]
+        missing_embeds = [u for u in expected.get("embeds", []) if normalize_embed_url(u) not in html]
+        if missing_images:
+            reinserts = []
+            for src in missing_images[:3]:
+                rendered = render_image_block(src, "", excluded_image_urls=[featured_image_url] if featured_image_url else [])
+                if rendered:
+                    reinserts.append(rendered)
+            if reinserts:
+                print(f"[MEDIA v86.6] Reintegrate {len(reinserts)} immagini inline perse prima del publish: {data.get('titolo','')}")
+                data = dict(data)
+                data["testo"] = (html.rstrip() + "\n\n" + "\n\n".join(reinserts)).strip()
+                html = data["testo"]
+            else:
+                print(f"[MEDIA v86.6] Warning: immagini attese mancanti ma non reintegrabili: {missing_images[:3]}")
+        if missing_embeds:
+            # Embeds are expected to be protected too. Reappend them rather than silently losing them.
+            print(f"[MEDIA v86.6] Reintegrati {len(missing_embeds)} embed persi prima del publish")
+            data = dict(data)
+            data["testo"] = (data.get("testo", "").rstrip() + "\n\n" + "\n\n".join(normalize_embed_url(u) for u in missing_embeds)).strip()
+    return _ORIG_V866_create_post_without_image(data, sem_id, url, embed_urls=embed_urls, event_key=event_key, inline_images=inline_images, featured_image_url=featured_image_url)
+
+
+# v86.6 build_candidates: same v86.5 strict true-results behavior, but each feed entry is isolated.
+def build_candidates(history, wp_available=True):
+    if not V864_REPORT_FIRST_GATES_ENABLED:
+        return _ORIG_V863_build_candidates(history, wp_available=wp_available)
+
+    queue = []
+    seen_in_this_run = set()
+    seen_title_keys = set(history.get("title_keys", set())) if isinstance(history, dict) else set()
+
+    print("[BOT] Avvio scansione feed")
+
+    for feed_url in FEEDS:
+        print(f"[BOT] Scansione feed: {feed_url}")
+        try:
+            parsed = feedparser.parse(feed_url)
+            if getattr(parsed, "bozo", False):
+                print(f"[BOT] Warning feed malformato: {feed_url}")
+        except Exception as e:
+            print(f"[BOT] Errore feed {feed_url}: {e}")
+            continue
+
+        for idx, entry in enumerate(getattr(parsed, "entries", [])[:25]):
+            try:
+                link = getattr(entry, "link", None)
+                title = sanitize_text(getattr(entry, "title", "Senza titolo"))
+                if not link:
+                    continue
+                summary = get_entry_summary(entry)
+                is_report_like = v865_is_true_results_report(title, link, summary)
+                report_key = v866_direct_report_event_key(title, link, summary) if is_report_like else ""
+
+                if is_report_like and report_key:
+                    if v864_wp_confirms_report_or_skip(report_key, title, link, wp_available=wp_available):
+                        print(f"[REPORT v86.6] True results report confermato su WordPress: skip {report_key} - {title}")
+                        continue
+                    print(f"[REPORT v86.6] True results report non confermato da WordPress: rivaluto {report_key} - {title}")
+
+                try:
+                    _skip_ok, _skip_reason = v854_should_skip_url(link)
+                    if _skip_ok:
+                        if is_report_like:
+                            print(f"[REPORT v86.6] Ignoro skipped_history per true results non confermato: {report_key or title}")
+                        else:
+                            print(f"[SKIP v86.6] skipped_history ancora valida ({_skip_reason}): {title}")
+                            continue
+                except NameError:
+                    pass
+                except Exception as e:
+                    print(f"[SKIP v86.6] Errore lettura skipped_history: {e}")
+
+                if is_recent_validation_failed(link):
+                    if is_report_like:
+                        print(f"[REPORT v86.6] Ignoro validation-fail sospeso per true results: {report_key or title}")
+                    else:
+                        print(f"[SKIP] URL sospeso per validation fail recenti: {link}")
+                        continue
+
+                sem_id = make_semantic_id_from_title(title)
+                title_key = make_title_key(title)
+
+                if link in history.get("urls", set()):
+                    if is_report_like:
+                        print(f"[REPORT v86.6] URL in history ma true results non confermato: continuo {report_key or title}")
+                    else:
+                        print(f"[SKIP] URL già in history: {link}")
+                        continue
+                if sem_id in history.get("semantic_ids", set()):
+                    if is_report_like:
+                        print(f"[REPORT v86.6] semantic_id in history ma true results non confermato: continuo {report_key or title}")
+                    else:
+                        print(f"[SKIP] semantic_id già in history: {sem_id}")
+                        continue
+                if title_key and title_key in seen_title_keys:
+                    if is_report_like:
+                        print(f"[REPORT v86.6] titolo già visto ma true results: rivaluto con gate report {report_key or title}")
+                    else:
+                        print(f"[SKIP] titolo già visto: {title}")
+                        continue
+                if sem_id in seen_in_this_run or title_key in seen_in_this_run:
+                    if is_report_like:
+                        print(f"[REPORT v86.6] visto nella run ma true results: rivaluto {report_key or title}")
+                    else:
+                        continue
+
+                title_quality_v71 = validate_title_quality_v71(title)
+                if title_quality_v71["is_clickbait"] and title_quality_v71["score"] < 70:
+                    if is_report_like:
+                        print(f"[REPORT v86.6] Ignoro title-quality gate per true results: {title}")
+                    else:
+                        print(f"[SKIP v71] Titolo clickbait/di bassa qualita': {title} | {title_quality_v71['issues']}")
+                        continue
+
+                story_data_v71 = build_story_signature_v71(title, summary, link)
+                story_signature_v71 = story_data_v71.get("signature", "")
+                if story_signature_v71 and story_signature_v71 in history.get("story_signatures_v71", set()):
+                    if is_report_like:
+                        print(f"[REPORT v86.6] story_signature in history ma true results: rivaluto {report_key or title}")
+                    else:
+                        print(f"[SKIP v71] Story signature gia' in history: {story_signature_v71} - {title}")
+                        continue
+                if story_signature_v71 and story_signature_v71 in seen_in_this_run:
+                    if is_report_like:
+                        print(f"[REPORT v86.6] story_signature vista nella run ma true results: rivaluto {report_key or title}")
+                    else:
+                        print(f"[SKIP v71] Story signature gia' vista nella run: {story_signature_v71} - {title}")
+                        continue
+
+                article_type_hint = "RESULTS_REPORT" if is_report_like else classify_article_type_fallback_v68(title, summary, link)
+                freshness_gate = classify_freshness_gate_v863(title, summary, link) if "classify_freshness_gate_v863" in globals() else "NORMAL"
+                if freshness_gate == "HARD_EXPIRED_PREVIEW":
+                    print(f"[SKIP] Preview/show announcement scaduta: {title}")
+                    continue
+                if freshness_gate == "POST_SHOW_OUTCOME":
+                    print(f"[FRESHNESS v86.6] Post-show outcome rescue: non tratto come preview scaduta - {title}")
+                elif v68_is_expired_preview_only(title, summary, link, article_type=article_type_hint):
+                    if is_report_like:
+                        print(f"[REPORT v86.6] Ignoro preview gate legacy per true results: {report_key or title}")
+                    else:
+                        print(f"[SKIP] Preview/show announcement scaduta: {title}")
+                        try:
+                            v854_record_skipped_url(link, title, "expired_preview", summary=summary)
+                        except Exception:
+                            pass
+                        continue
+
+                entry_ts = get_entry_timestamp(entry)
+                is_breaking = title_has_breaking_marker(title)
+                breaking_expires_at = entry_ts + BREAKING_ACTIVE_SECONDS
+
+                score, reasons = calculate_importance_score(title, summary, link)
+                reliability_v71 = v71_source_reliability(link)
+                freshness_v71 = compute_freshness_score_v71(title, summary, link, source_timestamp=get_entry_timestamp(entry), semantic_status="new_story")
+                if reliability_v71 < 0.70 and score < 90:
+                    score = clamp_score(score - 5)
+                    reasons.append("v71 source reliability soft penalty")
+                if freshness_v71 < 0.35 and score < 85:
+                    score = clamp_score(score - 6)
+                    reasons.append("v71 low freshness/novelty")
+                reasons.append(f"v71 freshness={freshness_v71}")
+                if is_breaking and breaking_expires_at < time.time():
+                    score = clamp_score(score - BREAKING_SCORE_BOOST)
+                    reasons.append("breaking scaduto")
+                prio = priority_label(score)
+
+                is_report_candidate = is_report_like
+                tier, tier_reason = editorial_tier(score, title, summary, link)
+
+                if (score < MIN_PUBLISH_SCORE and not is_report_candidate and tier in {"skip", "exclude"}):
+                    print(f"[SKIP] Score sotto soglia editoriale ({score}/{MIN_PUBLISH_SCORE}): {title}")
+                    try:
+                        v854_record_skipped_url(link, title, "score_below_threshold", score=score, summary=summary, reasons=reasons)
+                    except Exception as e:
+                        print(f"[SKIP v86.6] Errore record skip score: {e}")
+                    continue
+
+                if tier == "exclude" and not is_report_candidate:
+                    print(f"[SKIP] Esclusione editoriale dura ({tier_reason}): {title}")
+                    try:
+                        v854_record_skipped_url(link, title, "editorial_exclude", score=score, summary=summary, reasons=reasons, extra={"tier_reason": tier_reason})
+                    except Exception as e:
+                        print(f"[SKIP v86.6] Errore record skip exclude: {e}")
+                    continue
+
+                if score < MIN_PUBLISH_SCORE and not is_report_candidate:
+                    reasons.append(f"v48 {tier}: {tier_reason}")
+
+                event_key = report_key if is_report_candidate and report_key else make_event_key(title, summary, link)
+                if event_key and wp_available and should_skip_event_key(history, event_key, title=title, url=link):
+                    if is_report_candidate:
+                        if v864_wp_confirms_report_or_skip(event_key, title, link, wp_available=wp_available):
+                            print(f"[REPORT v86.6] event_key true report confermata stretta su WordPress: {event_key} - {title}")
+                            continue
+                        print(f"[REPORT v86.6] event_key legacy non basta per bloccare true results: {event_key} - {title}")
+                    else:
+                        print(f"[SKIP] event_key confermata su WordPress: {event_key} - {title}")
+                        continue
+
+                if score < MIN_PUBLISH_SCORE and is_report_candidate:
+                    reasons.append("true-results report: bypass soglia editoriale")
+                    score = MIN_PUBLISH_SCORE
+                    prio = priority_label(score)
+
+                if not is_report_candidate:
+                    seen_in_this_run.add(sem_id)
+                    seen_in_this_run.add(title_key)
+                    if story_signature_v71:
+                        seen_in_this_run.add(story_signature_v71)
+                elif report_key:
+                    seen_in_this_run.add(f"report_gate_seen:{report_key}")
+
+                queue.append({
+                    "entry": entry,
+                    "url": link,
+                    "title": title,
+                    "semantic_id": sem_id,
+                    "title_key": title_key,
+                    "score": score,
+                    "score_reasons": reasons,
+                    "priority": prio,
+                    "editorial_tier": tier,
+                    "editorial_tier_reason": tier_reason,
+                    "event_key": event_key,
+                    "report_event_key": report_key if is_report_candidate else "",
+                    "kind": "report" if is_report_candidate else "article",
+                    "story_signature_v71": story_signature_v71,
+                    "story_data_v71": story_data_v71,
+                    "summary": summary,
+                    "title_quality_v71": title_quality_v71,
+                    "feed_order": idx,
+                    "source_feed": feed_url,
+                    "article_type_hint": "RESULTS_REPORT" if is_report_candidate else article_type_hint,
+                    "created_at": time.time(),
+                    "source_timestamp": entry_ts,
+                    "is_breaking": is_breaking,
+                    "breaking_expires_at": breaking_expires_at,
+                    "attempts": 0,
+                })
+            except Exception as e:
+                if V866_ITEM_ERROR_ISOLATION_ENABLED:
+                    safe_title = ""
+                    safe_link = ""
+                    try:
+                        safe_title = sanitize_text(getattr(entry, "title", "Senza titolo"))
+                        safe_link = getattr(entry, "link", "")
+                    except Exception:
+                        pass
+                    print(f"[BOT v86.6] Errore item feed isolato: {safe_title} | {safe_link} | {type(e).__name__}: {e}")
+                    continue
+                raise
+
+    queue.sort(key=lambda x: (int(x.get("score", 0)), -int(x.get("feed_order", 0))), reverse=True)
+
+    if "V862_REPORT_MORNING_HOLD_ENABLED" in globals() and V862_REPORT_MORNING_HOLD_ENABLED:
+        try:
+            hold_ts, hold_label = v862_hold_until_timestamp_if_needed()
+        except Exception:
+            hold_ts, hold_label = None, ""
+        if hold_ts:
+            filtered = []
+            held = 0
+            for item in queue:
+                if v862_is_report_candidate_item(item):
+                    v862_save_report_pending(item, not_before=hold_ts, reason="report_hold_until_0630")
+                    held += 1
+                else:
+                    filtered.append(item)
+            queue = filtered
+            if held:
+                print(f"[REPORT v86.6] {held} true-results report trattenuti fino alle {V862_REPORT_HOLD_HOUR:02d}:{V862_REPORT_HOLD_MINUTE:02d} {V862_REPORT_HOLD_TIMEZONE}")
+
+    for item in queue[:10]:
+        print(f"[SCORE] {item['score']} {item['priority']} - {item['title']} | {', '.join(item.get('score_reasons', []))}")
+    return queue
+
+
+_ORIG_V866_process_candidate_item = process_candidate_item
+
+def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    # Ensure v86.5's report bypass uses the non-recursive report key and only true results reports.
+    if isinstance(item, dict) and v865_is_true_results_report(item.get("title", ""), item.get("url", ""), item.get("summary", "")):
+        item["kind"] = "report"
+        item["report_event_key"] = item.get("report_event_key") or v866_direct_report_event_key(item.get("title", ""), item.get("url", ""), item.get("summary", ""))
+        item["event_key"] = item.get("report_event_key") or item.get("event_key", "")
+    return _ORIG_V866_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+
+
+_ORIG_V866_run_bot_raw = _ORIG_V865_run_bot_raw if "_ORIG_V865_run_bot_raw" in globals() else run_bot
+
+def run_bot():
+    if V854_BOOT_DIAGNOSTICS_ENABLED:
+        print(f"[BOOT v86.6] entro in run_bot epoch={time.time():.3f}", flush=True)
+    return _ORIG_V866_run_bot_raw()
+
+
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 if __name__ == "__main__":
     if V854_BOOT_DIAGNOSTICS_ENABLED:
-        print(f"[BOOT v86.5] __main__ reached epoch={time.time():.3f}", flush=True)
+        print(f"[BOOT v86.6] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
