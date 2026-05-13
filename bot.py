@@ -17974,10 +17974,522 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
             print(f"[PUBLISHED REVIEW v87.1] Errore hook outer review: {e}")
     return status
 
+
+# =========================
+# v87.2 - task model matrix, global cooldown, report-confirmed history, embed dedupe
+# =========================
+BOT_VERSION = "v87_2_task_model_matrix_embed_dedupe_report_history"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+# --- Model matrix: every operative chain has at least two options. ---
+def _v872_chain_from_env(name, default):
+    return [m.strip() for m in os.getenv(name, default).split(",") if m.strip()]
+
+V872_MODEL_CHAINS = {
+    "healthcheck": _v872_chain_from_env("V872_HEALTHCHECK_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite"),
+    "editorial_analysis": _v872_chain_from_env("V872_EDITORIAL_ANALYSIS_CHAIN", "gemini-3.1-flash-lite,gemini-3-flash,gemini-2.5-flash-lite"),
+    "translate_normal": _v872_chain_from_env("V872_TRANSLATE_NORMAL_CHAIN", "gemini-3.1-flash-lite,gemini-3-flash,gemini-2.5-flash-lite,gemini-2.5-flash"),
+    "translate_medium": _v872_chain_from_env("V872_TRANSLATE_MEDIUM_CHAIN", "gemini-3-flash,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"),
+    "translate_report": _v872_chain_from_env("V872_TRANSLATE_REPORT_CHAIN", "gemini-2.5-pro,gemini-3-flash,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"),
+    "postedit": _v872_chain_from_env("V872_POSTEDIT_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite"),
+    "title": _v872_chain_from_env("V872_TITLE_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite"),
+    "repair": _v872_chain_from_env("V872_REPAIR_CHAIN", "gemini-3-flash,gemini-2.5-flash,gemini-2.5-flash-lite"),
+    "repair_report": _v872_chain_from_env("V872_REPAIR_REPORT_CHAIN", "gemini-2.5-pro,gemini-3-flash,gemini-2.5-flash"),
+}
+
+V872_MODEL_MATRIX_ENABLED = os.getenv("V872_MODEL_MATRIX_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V872_GLOBAL_COOLDOWN_ENABLED = os.getenv("V872_GLOBAL_COOLDOWN_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V872_MODEL_COOLDOWN_SECONDS = float(os.getenv("V872_MODEL_COOLDOWN_SECONDS", "3600"))
+V872_SKIP_EMPTY_SINGLE_CHAIN = os.getenv("V872_ALLOW_SINGLE_MODEL_CHAIN", "0").strip().lower() in {"1", "true", "yes", "on"}
+_V872_MODEL_GLOBAL_COOLDOWN_UNTIL = {}
+_V872_TASK_STACK = []
+_V872_LAST_ROUTE = None
+
+# Rebind legacy chain globals as a safe default for any old caller that still routes through v83.
+V87_DEFAULT_LITE_CHAIN = list(V872_MODEL_CHAINS["healthcheck"])
+V87_STRONG_CHAIN = list(V872_MODEL_CHAINS["translate_medium"])
+V87_STORM_REPORT_CHAIN = list(V872_MODEL_CHAINS["translate_report"])
+V87_STORM_LITE_CHAIN = list(V872_MODEL_CHAINS["translate_normal"])
+V83_DEFAULT_LITE_CHAIN = list(V87_DEFAULT_LITE_CHAIN)
+V83_STRONG_CHAIN = list(V87_STRONG_CHAIN)
+V83_STORM_REPORT_CHAIN = list(V87_STORM_REPORT_CHAIN)
+V83_STORM_LITE_CHAIN = list(V87_STORM_LITE_CHAIN)
+MODEL_CHAIN = list(dict.fromkeys(V872_MODEL_CHAINS["translate_normal"] + V872_MODEL_CHAINS["translate_medium"]))
+
+class v872_model_task:
+    def __init__(self, task):
+        self.task = task or "translate_normal"
+    def __enter__(self):
+        _V872_TASK_STACK.append(self.task)
+        return self
+    def __exit__(self, exc_type, exc, tb):
+        try:
+            _V872_TASK_STACK.pop()
+        except Exception:
+            pass
+        return False
+
+def v872_current_task():
+    if _V872_TASK_STACK:
+        return _V872_TASK_STACK[-1]
+    return "translate_normal"
+
+def v872_chain_for_task(task):
+    chain = list(dict.fromkeys(V872_MODEL_CHAINS.get(task) or V872_MODEL_CHAINS.get("translate_normal") or MODEL_CHAIN))
+    if len(chain) < 2 and not V872_SKIP_EMPTY_SINGLE_CHAIN:
+        # Never leave an operative task with only one model.
+        for fallback in ["gemini-3.1-flash-lite", "gemini-2.5-flash-lite", "gemini-3-flash", "gemini-2.5-flash"]:
+            if fallback not in chain:
+                chain.append(fallback)
+            if len(chain) >= 2:
+                break
+    now = time.time()
+    filtered = []
+    for m in chain:
+        if m in gemini_invalid_models:
+            continue
+        if V872_GLOBAL_COOLDOWN_ENABLED and float(_V872_MODEL_GLOBAL_COOLDOWN_UNTIL.get(m, 0) or 0) > now:
+            continue
+        filtered.append(m)
+    return filtered or chain
+
+_ORIG_V872_generate_and_parse_json = generate_and_parse_json
+
+def generate_and_parse_json(prompt):
+    """v87.2 task-aware model routing.
+
+    This bypasses the old v83 context router for Gemini calls and uses the current
+    task stack instead, so title/postedit/editorial/report can use separate chains.
+    A 503 puts the model in a global run cooldown to avoid repeated failed calls.
+    """
+    if not V872_MODEL_MATRIX_ENABLED:
+        return _ORIG_V872_generate_and_parse_json(prompt)
+    global _V872_LAST_ROUTE
+    task = v872_current_task()
+    chain = v872_chain_for_task(task)
+    route = (task, tuple(chain))
+    if route != _V872_LAST_ROUTE:
+        print(f"[MODEL v87.2] task={task} chain={','.join(chain)}")
+        _V872_LAST_ROUTE = route
+    last_exception = None
+    capacity_failures = 0
+    for model in chain:
+        try:
+            print(f"[GEMINI] Uso modello: {model}")
+            res = client.models.generate_content(model=model, contents=prompt)
+            data = extract_json_object(res.text)
+            model_fail_counts[model] = 0
+            gemini_soft_cooldown_until[model] = 0.0
+            _V872_MODEL_GLOBAL_COOLDOWN_UNTIL[model] = 0.0
+            return data, model
+        except Exception as e:
+            last_exception = e
+            print(f"[GEMINI] Modello {model} scartato: {e}")
+            if is_invalid_model_error(e):
+                gemini_invalid_models.add(model)
+                model_fail_counts[model] = MODEL_COOLDOWN_THRESHOLD
+            elif is_capacity_error(e):
+                capacity_failures += 1
+                model_fail_counts[model] = min(model_fail_counts.get(model, 0) + 1, MODEL_COOLDOWN_THRESHOLD - 1)
+                if V872_GLOBAL_COOLDOWN_ENABLED:
+                    _V872_MODEL_GLOBAL_COOLDOWN_UNTIL[model] = time.time() + V872_MODEL_COOLDOWN_SECONDS
+                    print(f"[MODEL v87.2] Cooldown globale modello per la run: {model}")
+            else:
+                model_fail_counts[model] = min(model_fail_counts.get(model, 0) + 1, MODEL_COOLDOWN_THRESHOLD - 1)
+            continue
+    if capacity_failures:
+        raise RuntimeError("GEMINI_TEMPORARILY_UNAVAILABLE")
+    raise last_exception if last_exception else RuntimeError("Nessun modello disponibile")
+
+_ORIG_V872_check_gemini = check_gemini
+def check_gemini():
+    try:
+        with v872_model_task("healthcheck"):
+            data, used_model = generate_and_parse_json('Rispondi solo con questo JSON in una riga: {"ok": true}')
+        if data:
+            print(f"[GEMINI] Modello attivo: {used_model}")
+            return True
+        return False
+    except Exception as e:
+        print(f"[GEMINI] Nessun modello disponibile: {e}")
+        return False
+
+_ORIG_V872_v72_editorial_analysis = v72_editorial_analysis
+def v72_editorial_analysis(title="", text="", url="", is_report=False):
+    with v872_model_task("editorial_analysis"):
+        return _ORIG_V872_v72_editorial_analysis(title, text, url, is_report=is_report)
+
+_ORIG_V872_translate_ordered_content_blocks = translate_ordered_content_blocks
+def v872_translation_task_from_blocks(source_title="", blocks=None, source_url="", forced_title=None):
+    blocks = blocks or []
+    try:
+        total_text = "\n".join((b.get("text") or b.get("html") or "") for b in blocks if isinstance(b, dict) and b.get("type") == "text")
+    except Exception:
+        total_text = ""
+    text_blocks = sum(1 for b in blocks if isinstance(b, dict) and b.get("type") == "text")
+    source_chars = len(total_text or "")
+    is_report = bool(forced_title)
+    try:
+        is_report = is_report or bool(is_results_article(source_title, source_url, total_text))
+    except Exception:
+        pass
+    if is_report or text_blocks >= 25 or source_chars >= 9000:
+        return "translate_report"
+    if text_blocks >= 12 or source_chars >= 5000:
+        return "translate_medium"
+    return "translate_normal"
+
+def translate_ordered_content_blocks(source_title, blocks, source_url="", forced_title=None, forced_category=None, excluded_image_urls=None):
+    task = v872_translation_task_from_blocks(source_title, blocks, source_url, forced_title)
+    with v872_model_task(task):
+        return _ORIG_V872_translate_ordered_content_blocks(source_title, blocks, source_url=source_url, forced_title=forced_title, forced_category=forced_category, excluded_image_urls=excluded_image_urls)
+
+_ORIG_V872_translate_news = translate_news
+def translate_news(source_title, text, source_url="", forced_category=None):
+    chars = len(text or "")
+    task = "translate_report" if (chars >= 9000 or (is_results_article(source_title, source_url, text) if "is_results_article" in globals() else False)) else ("translate_medium" if chars >= 5000 else "translate_normal")
+    with v872_model_task(task):
+        return _ORIG_V872_translate_news(source_title, text, source_url=source_url, forced_category=forced_category)
+
+_ORIG_V872_v79_editorial_post_edit = v79_editorial_post_edit
+def v79_editorial_post_edit(news_data, source_title="", source_text="", source_url=""):
+    with v872_model_task("postedit"):
+        return _ORIG_V872_v79_editorial_post_edit(news_data, source_title, source_text, source_url)
+
+if "v82_repair_ai_smell_microtexts" in globals():
+    _ORIG_V872_v82_repair_ai_smell_microtexts = v82_repair_ai_smell_microtexts
+    def v82_repair_ai_smell_microtexts(html, source_title="", source_text="", source_url=""):
+        with v872_model_task("repair"):
+            return _ORIG_V872_v82_repair_ai_smell_microtexts(html, source_title, source_text, source_url)
+
+if "v82_repair_title_editorial" in globals():
+    _ORIG_V872_v82_repair_title_editorial = v82_repair_title_editorial
+    def v82_repair_title_editorial(title="", source_title="", source_text="", source_url=""):
+        with v872_model_task("title"):
+            return _ORIG_V872_v82_repair_title_editorial(title, source_title, source_text, source_url)
+
+_ORIG_V872_v721_ensure_italian_title = v721_ensure_italian_title
+def v721_ensure_italian_title(title, source_title="", source_text="", source_url=""):
+    with v872_model_task("title"):
+        return _ORIG_V872_v721_ensure_italian_title(title, source_title, source_text, source_url)
+
+# --- Confirmed published reports: strong local evidence, separate from generic history. ---
+V872_CONFIRMED_REPORTS_ENABLED = os.getenv("V872_CONFIRMED_REPORTS_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V872_CONFIRMED_REPORTS_FILE = Path(os.getenv("V872_CONFIRMED_REPORTS_FILE", "confirmed_published_reports.json"))
+
+def v872_load_confirmed_reports():
+    if not V872_CONFIRMED_REPORTS_ENABLED:
+        return {"confirmed_published_report_keys": [], "published_reports": {}}
+    try:
+        if V872_CONFIRMED_REPORTS_FILE.exists():
+            with open(V872_CONFIRMED_REPORTS_FILE, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if isinstance(data, dict):
+                    data.setdefault("confirmed_published_report_keys", [])
+                    data.setdefault("published_reports", {})
+                    return data
+    except Exception as e:
+        print(f"[REPORT v87.2] Errore lettura confirmed reports: {e}")
+    return {"confirmed_published_report_keys": [], "published_reports": {}}
+
+def v872_save_confirmed_reports(data):
+    if not V872_CONFIRMED_REPORTS_ENABLED:
+        return
+    try:
+        v85_atomic_write_json(V872_CONFIRMED_REPORTS_FILE, data) if "v85_atomic_write_json" in globals() else V872_CONFIRMED_REPORTS_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    except Exception as e:
+        print(f"[REPORT v87.2] Errore scrittura confirmed reports: {e}")
+
+def v872_report_key_from_any(title="", url="", summary="", item=None):
+    if isinstance(item, dict):
+        for k in ["report_event_key", "event_key"]:
+            val = item.get(k)
+            if val and str(val).startswith("report:"):
+                return str(val)
+        title = title or item.get("title", "")
+        url = url or item.get("url", "")
+        summary = summary or item.get("summary", "") or item.get("prefetched_text", "")
+    try:
+        return v862_report_key_from_item({"title": title, "url": url, "summary": summary}) or v865_report_event_key(title, url, summary) or make_report_event_key(title, url, summary)
+    except Exception:
+        return ""
+
+def v872_is_report_confirmed_locally(report_key=""):
+    if not report_key:
+        return False
+    data = v872_load_confirmed_reports()
+    return report_key in set(data.get("confirmed_published_report_keys") or []) or report_key in (data.get("published_reports") or {})
+
+def v872_mark_report_confirmed(report_key="", title="", url="", post_id=None, reason=""):
+    if not (V872_CONFIRMED_REPORTS_ENABLED and report_key):
+        return
+    data = v872_load_confirmed_reports()
+    keys = set(data.get("confirmed_published_report_keys") or [])
+    keys.add(report_key)
+    data["confirmed_published_report_keys"] = sorted(keys)
+    published = data.get("published_reports") or {}
+    rec = dict(published.get(report_key) or {})
+    rec.update({
+        "report_key": report_key,
+        "title": title or rec.get("title", ""),
+        "source_url": url or rec.get("source_url", ""),
+        "wp_post_id": post_id or rec.get("wp_post_id"),
+        "confirmed_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
+        "reason": reason or rec.get("reason", ""),
+    })
+    published[report_key] = rec
+    data["published_reports"] = published
+    v872_save_confirmed_reports(data)
+    print(f"[REPORT v87.2] Report confermato in history forte: {report_key} ({reason or 'publish'})")
+
+_ORIG_V872_v862_wp_has_published_report_strict = v862_wp_has_published_report_strict
+def v862_wp_has_published_report_strict(report_event_key, title="", url=""):
+    if v872_is_report_confirmed_locally(report_event_key):
+        print(f"[REPORT v87.2] Report confermato da history forte: {report_event_key}")
+        return True
+    ok = _ORIG_V872_v862_wp_has_published_report_strict(report_event_key, title=title, url=url)
+    if ok:
+        v872_mark_report_confirmed(report_event_key, title=title, url=url, reason="wp_strict_confirm")
+    return ok
+
+# --- Embed canonicalization/dedupe. X/Twitter output MUST be x.com/user/status/id. ---
+V872_EMBED_DEDUPE_ENABLED = os.getenv("V872_EMBED_DEDUPE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V872_REVIEW_DEDUPE_ENABLED = os.getenv("V872_REVIEW_DEDUPE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+_X_RE = re.compile(r"https?://(?:(?:www|mobile|m)\.)?(?:twitter\.com|x\.com)/([A-Za-z0-9_]+)/status/(\d+)(?:[^\s<'\"]*)?", re.I)
+_X_I_RE = re.compile(r"https?://(?:(?:www|mobile|m)\.)?(?:twitter\.com|x\.com)/i/status/(\d+)(?:[^\s<'\"]*)?", re.I)
+_YT_WATCH_RE = re.compile(r"https?://(?:www\.|m\.)?youtube\.com/watch\?[^\s<'\"]*v=([A-Za-z0-9_-]{6,})[^\s<'\"]*", re.I)
+_YT_SHORT_RE = re.compile(r"https?://youtu\.be/([A-Za-z0-9_-]{6,})(?:[^\s<'\"]*)?", re.I)
+_YT_EMBED_RE = re.compile(r"https?://(?:www\.)?youtube\.com/embed/([A-Za-z0-9_-]{6,})(?:[^\s<'\"]*)?", re.I)
+
+def v872_canonical_embed_url(url=""):
+    u = (url or "").strip()
+    if not u:
+        return ""
+    u = _v871_html_mod.unescape(u) if "_v871_html_mod" in globals() and _v871_html_mod else u.replace("&amp;", "&")
+    m = _X_RE.search(u)
+    if m:
+        return f"https://x.com/{m.group(1)}/status/{m.group(2)}"
+    m = _X_I_RE.search(u)
+    if m:
+        return f"https://x.com/i/status/{m.group(1)}"
+    for rgx in [_YT_WATCH_RE, _YT_SHORT_RE, _YT_EMBED_RE]:
+        m = rgx.search(u)
+        if m:
+            return f"https://www.youtube.com/watch?v={m.group(1)}"
+    try:
+        return v86_canonical_embed_url(u) if "v86_canonical_embed_url" in globals() else normalize_embed_url(u)
+    except Exception:
+        return re.sub(r"[?#].*$", "", u).rstrip("/")
+
+def v872_embed_key(url=""):
+    c = v872_canonical_embed_url(url)
+    if not c:
+        return ""
+    m = _X_RE.search(c)
+    if m:
+        return f"x_status:{m.group(2)}"
+    m = _X_I_RE.search(c)
+    if m:
+        return f"x_status:{m.group(1)}"
+    for rgx in [_YT_WATCH_RE, _YT_SHORT_RE, _YT_EMBED_RE]:
+        m = rgx.search(c)
+        if m:
+            return f"youtube:{m.group(1)}"
+    return c.lower().rstrip("/")
+
+def v872_all_embed_urls_from_text(text=""):
+    urls = []
+    for rgx in [_X_RE, _X_I_RE, _YT_WATCH_RE, _YT_SHORT_RE, _YT_EMBED_RE]:
+        for m in rgx.finditer(text or ""):
+            urls.append(v872_canonical_embed_url(m.group(0)))
+    return [u for u in urls if u]
+
+def v872_is_embed_url_text(text=""):
+    t = (text or "").strip()
+    if not t:
+        return False
+    urls = v872_all_embed_urls_from_text(t)
+    return len(urls) == 1 and normalize_whitespace(t) == normalize_whitespace(urls[0])
+
+def v872_remove_duplicate_embed_urls_from_html(html="", expected_embed_urls=None):
+    if not (V872_EMBED_DEDUPE_ENABLED and html):
+        return html
+    try:
+        soup = BeautifulSoup(html or "", "html.parser")
+        seen = set()
+        changed = 0
+        # First canonicalize/dedupe standalone p URLs, which are the WordPress oEmbed shape.
+        for p in list(soup.find_all("p")):
+            text = p.get_text(" ", strip=True)
+            urls = v872_all_embed_urls_from_text(text)
+            if len(urls) == 1 and normalize_whitespace(text).startswith("http"):
+                canon = urls[0]
+                key = v872_embed_key(canon)
+                if key in seen:
+                    p.decompose(); changed += 1; continue
+                seen.add(key)
+                p.clear(); p.append(canon); changed += 1
+        # Remove or canonicalize inline anchors/raw URLs that duplicate an already represented embed.
+        for a in list(soup.find_all("a", href=True)):
+            href = a.get("href", "")
+            canon = v872_canonical_embed_url(href)
+            key = v872_embed_key(canon)
+            if not key or key == canon.lower().rstrip("/") and not v872_all_embed_urls_from_text(href):
+                continue
+            parent = a.find_parent("p")
+            parent_text = parent.get_text(" ", strip=True) if parent else a.get_text(" ", strip=True)
+            if key in seen:
+                if parent and v872_is_embed_url_text(parent_text):
+                    parent.decompose()
+                else:
+                    a.decompose()
+                changed += 1
+            else:
+                seen.add(key)
+                if parent and v872_is_embed_url_text(parent_text):
+                    parent.clear(); parent.append(canon)
+                else:
+                    # Inline YouTube/X links should become standalone embeds at the original paragraph boundary.
+                    newp = soup.new_tag("p"); newp.string = canon
+                    if parent:
+                        parent.insert_before(newp)
+                    else:
+                        a.insert_before(newp)
+                    a.decompose()
+                changed += 1
+        # Final pass: if a raw URL text node duplicates an embed, remove only the raw URL.
+        for node in list(soup.find_all(string=True)):
+            s = str(node)
+            urls = v872_all_embed_urls_from_text(s)
+            if not urls:
+                continue
+            new_s = s
+            for u in urls:
+                key = v872_embed_key(u)
+                if key in seen:
+                    new_s = new_s.replace(u, "")
+                else:
+                    seen.add(key)
+                    new_s = new_s.replace(u, u)
+            if new_s != s:
+                node.replace_with(new_s)
+                changed += 1
+        if changed:
+            print(f"[EMBED v87.2] Canonicalizzati/deduplicati embed nel body: {changed}")
+        return str(soup)
+    except Exception as e:
+        print(f"[EMBED v87.2] Dedupe embed fallito: {e}")
+        return html
+
+# Override canonical functions used by v87.1 lazy decoder and renderers.
+_ORIG_V872_v80_canonical_oembed_url = v80_canonical_oembed_url if "v80_canonical_oembed_url" in globals() else None
+def v80_canonical_oembed_url(url):
+    return v872_canonical_embed_url(url)
+
+def v86_canonical_embed_url(url):
+    return v872_canonical_embed_url(url)
+
+_ORIG_V872_render_embed_block = render_embed_block
+def render_embed_block(url):
+    clean_url = v872_canonical_embed_url(url)
+    if not clean_url:
+        return ""
+    if get_embed_provider_slug(clean_url) == "facebook" and facebook_url_is_probably_bad(clean_url):
+        return ""
+    if social_url_is_embeddable(clean_url):
+        return f"\n\n<p>{clean_url}</p>\n\n"
+    return get_social_fallback_html(clean_url)
+
+_ORIG_V872_create_post_without_image = create_post_without_image
+def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+    if isinstance(data, dict):
+        data = dict(data)
+        data["testo"] = v872_remove_duplicate_embed_urls_from_html(data.get("testo", ""), expected_embed_urls=embed_urls or [])
+    embed_urls = dedupe_preserve_order([v872_canonical_embed_url(u) for u in (embed_urls or []) if u])
+    return _ORIG_V872_create_post_without_image(data, sem_id, url, embed_urls=embed_urls, event_key=event_key, inline_images=inline_images, featured_image_url=featured_image_url)
+
+# --- Strong review dedupe: v87.1 restored saving, but legacy + outer hook can both save. ---
+_V872_REVIEW_SAVED_KEYS = set()
+_ORIG_V872_save_published_html_review_item = save_published_html_review_item
+
+def v872_review_key(item):
+    if not isinstance(item, dict):
+        return ""
+    for k in ["_review_wp_post_id", "wp_post_id", "post_id"]:
+        if item.get(k):
+            return f"post:{item.get(k)}"
+    title = item.get("_review_translated_title") or item.get("title") or ""
+    url = item.get("url") or item.get("source_url") or ""
+    html = item.get("_review_translated_html") or ""
+    return hashlib.md5(f"{title}|{url}|{html[:500]}".encode("utf-8", errors="ignore")).hexdigest()
+
+def save_published_html_review_item(item):
+    if V872_REVIEW_DEDUPE_ENABLED:
+        key = v872_review_key(item)
+        if key and key in _V872_REVIEW_SAVED_KEYS:
+            print(f"[PUBLISHED REVIEW v87.2] Review duplicata evitata: {item.get('_review_translated_title') or item.get('title') if isinstance(item, dict) else ''}")
+            return
+        if key:
+            _V872_REVIEW_SAVED_KEYS.add(key)
+    return _ORIG_V872_save_published_html_review_item(item)
+
+# --- Outermost candidate hook: confirmed reports + pending retry on model errors. ---
+_ORIG_V872_process_candidate_item = process_candidate_item
+
+def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    report_key = ""
+    if isinstance(item, dict):
+        report_key = v872_report_key_from_any(item=item)
+        if report_key and v872_is_report_confirmed_locally(report_key):
+            print(f"[REPORT v87.2] True-results confermato da history forte: skip offline-safe {report_key} - {item.get('title')}")
+            remove_pending_report_key(report_key)
+            remove_pending_url(item.get("url", ""))
+            return "skipped"
+    status = _ORIG_V872_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+    if isinstance(item, dict):
+        report_key = report_key or v872_report_key_from_any(item=item)
+        if status == "published" and report_key:
+            v872_mark_report_confirmed(report_key, title=item.get("_review_translated_title") or item.get("title", ""), url=item.get("url", ""), reason="publish_success")
+        if status == "model_fail":
+            try:
+                add_pending_article(item, reason="model_temp_failure_retry")
+                print(f"[PENDING v87.2] Salvo candidato per retry: errore modello temporaneo - {item.get('title')}")
+            except Exception as e:
+                print(f"[PENDING v87.2] Errore salvataggio retry modello: {e}")
+    return status
+
+# Final label cleanup for new version.
+try:
+    import builtins as _v872_builtins
+    _ORIG_V872_PRINT = _ORIG_V87_PRINT if "_ORIG_V87_PRINT" in globals() else print
+    def _v872_label_cleanup(obj):
+        if not isinstance(obj, str):
+            return obj
+        repl = {
+            "[MODEL v83]": "[MODEL v87.2/legacy]",
+            "[MODEL v87.1]": "[MODEL v87.2]",
+            "[REPORT v87.1/legacy]": "[REPORT v87.2/legacy]",
+            "[REPORT v86.9]": "[REPORT v87.2/legacy]",
+            "[RUN v87.1/legacy]": "[RUN v87.2/legacy]",
+            "[MEDIA v87.1/legacy]": "[MEDIA v87.2/legacy]",
+            "[PENDING v86.8/legacy]": "[PENDING v87.2/legacy]",
+        }
+        for old, new in repl.items():
+            obj = obj.replace(old, new)
+        return obj
+    def _v872_print(*args, **kwargs):
+        args = tuple(_v872_label_cleanup(a) for a in args)
+        return _ORIG_V87_PRINT(*args, **kwargs)
+    _v872_builtins.print = _v872_print
+except Exception:
+    pass
+
+
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 if __name__ == "__main__":
     if V854_BOOT_DIAGNOSTICS_ENABLED:
-        print(f"[BOOT v87.1] __main__ reached epoch={time.time():.3f}", flush=True)
+        print(f"[BOOT v87.2] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
