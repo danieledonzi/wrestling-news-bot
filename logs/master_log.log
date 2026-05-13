@@ -9833,3 +9833,77 @@
 [REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (61 file)
 ===== RUN END [2026-05-13 03:34:02] VERSION [v85_5_performance_fast_history_pre_gemini_gates (8eab2cd)] =====
 
+[BOOT v85.5] __main__ reached epoch=1778654978.051
+
+===== RUN START [2026-05-13 06:49:36] VERSION [v85_5_performance_fast_history_pre_gemini_gates (314ea4e)] =====
+[BOOT v85.4] entro in run_bot epoch=1778654978.051
+[BOOT v85.4] prima health check WP epoch=1778654978.053
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (0/75): Post UFC 328 Rankings Update, Sean Strickland Enters P4P Top 10
+[SKIP] Score sotto soglia editoriale (0/75): WWE NXT - 5/12/2026: 3 Things We Hated And 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (2/75): UFC's Dana White Says He Will Be Promoting Anthony Joshua Vs. Tyson Fury
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171618/darkstate-wwe-nxt-tag-title-rematch-despite-dissension/
+[SKIP] Score sotto soglia editoriale (18/75): AEW's Bobby Lashley Has A Lot Of Ideas For New Hurt Syndicate Members
+[SKIP] Score sotto soglia editoriale (18/75): AEW's Thunder Rosa Names Top Five Face Painters In Wrestling History
+[SKIP] Score sotto soglia editoriale (16/75): Dana White Pressed On Wife Slapping Incident, Not Stepping Down From UFC
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171539/wwe-nxt-lizzy-rain-first-goal-north-american-championship/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170456/wwe-nxt-may-12-zaria-nikkita-lyons-tatum-paxley-lizzy-rain-more/
+[SKIP] Score sotto soglia editoriale (54/75): WWE Raw Viewership & Ratings Report, 5/4/2026
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Chelsea Green Shares Latest Health Update One Week After Heart Procedure
+[SKIP] Score sotto soglia editoriale (53/75): Beyond The Mat Director Barry Blaustein Dies At 72
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171385/cuatrero-sentenced-12-years-femicide-wwe-stephanie-vaquer/
+[SKIP] Score sotto soglia editoriale (0/75): Ronda Rousey Expecting Gina Carano Bout To Be 'Biggest MMA Fight Of All Time'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171140/wwe-aew-matt-hardy-ted-turner-pushing-pro-wrestling-forward/
+[PERF v71] WP lookup URL esistente: 0.76s
+[PERF v71] WP lookup event_key: 1.75s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (51/75): Multiple Title Matches Booked For May 19 WWE NXT
+[SKIP] URL già in history: https://www.ringsidenews.com/mason-rook-makes-big-declaration-during-contract-signing-512-nxt/
+[SKIP] Score sotto soglia editoriale (49/75): WWE SmackDown Viewership Sees Slight Increase on May 8, 2026
+[SCORE v80.4] AAA major World priority 100->100 - Backstage Update Emerges On Angel Garza & Berto's WWE Status After RAW Panic
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:media-rights - Backstage Update Emerges On Angel Garza & Berto's WWE Status After RAW Panic
+[SKIP] Score sotto soglia editoriale (51/75): Naraku Makes WWE In-Ring Debut During 5/12 NXT
+[SKIP] URL già in history: https://www.ringsidenews.com/major-wwe-events-expected-arizona-under-new-tko-deal/
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-talent-already-pushing-kofi-kingston-xavier-woods-wwe-exit/
+[SKIP] Score sotto soglia editoriale (50/75): Scott Steiner's Son Brock Rechsteiner Signs With NFL Team
+[SKIP] Score sotto soglia editoriale (31/75): Swerve Strickland Calls Out Modern Wrestlers Getting Contracts Before Mastering Their Craft
+[SKIP] Score sotto soglia editoriale (57/75): Chelsea Green Gives Recovery Update After Heart Procedure
+[SKIP] Score sotto soglia editoriale (0/75): Val Venis Shuts Down Claim The Undertaker Called Israel a Bastard State
+[SKIP] Score sotto soglia editoriale (49/75): Randy Orton Wants Fan To Get His WrestleMania Gear After Huge Card Sale
+[SKIP] Score sotto soglia editoriale (0/75): WWE Raw Ranks #7 Globally on Netflix for May 4, 2026
+[SKIP] URL già in history: https://www.ringsidenews.com/hulk-hogans-former-accountant-hit-federal-fraud-charges-alleged-890k-theft/
+[SCORE] 100 high - Backstage Update Emerges On Angel Garza & Berto's WWE Status After RAW Panic | WWE/main roster, nomi forti lead: oba femi, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 media rights/streaming, v62 categoria business, v80.4 AAA major World priority 100->100, v71 freshness=0.503
+[SCORE] 100 high - WWE NXT Results, Highlights and Key Moments for May 12, 2026 | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, titolo/championship, show settimanale, developmental secondario, v62 evento legale grave, v62 categoria business, v75 hard results report, v77 hard report protected, v71 freshness=0.605
+[SCORE] 58 low - Dave Meltzer Talks TKO Interfering In WWE Booking, Possible Stephen A. Smith Crossover | WWE/main roster, business/contratti WWE-TKO, intervista/opinione, opinione generica, v62 categoria business, v71 freshness=0.446, v48 tier2: 55-74
+[SCORE] 55 low - Thekla Comments On Possibility Of Former WWE Star Kairi Sane Joining AEW | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v71 freshness=0.519, v48 tier2: 55-74
+[SCORE] 55 low - London Mayor's Office: 'No Specific Discussions' About Hosting WWE WrestleMania 44 | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v71 freshness=0.455, v48 tier2: 55-74
+[SCORE] 47 low - AEW's Young Bucks Tease 'A Lot Of Dream Matches' That Could Happen In 2026 | AEW, titolo/championship, PLE/PPV, v71 freshness=0.491, v48 tier3: 45-54 contestuale
+[SCORE] 45 low - Bully Ray Says Jacob Fatu Is 'In A Really Bad Spot' Following WWE Raw | WWE/main roster, top star lead: roman reigns, nomi forti titolo: bully ray, intervista/opinione, show settimanale, opinione generica, v71 freshness=0.463, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 2 news >=90, 2 news >=80
+[MODEL v83] Route mode=normal report=False score=0 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 7 | mode=normal | max nuove=3 | pending pubblicati=0
+[SKIP v85.5] event_history_pre_gemini:event:business:media-rights: Backstage Update Emerges On Angel Garza & Berto's WWE Status After RAW Panic
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.5] news_core_history_pre_gemini:cw-live-netflix-nxt-streaming-wwe: WWE NXT Results, Highlights and Key Moments for May 12, 2026
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.5] low_value_opinion_pre_gemini: Dave Meltzer Talks TKO Interfering In WWE Booking, Possible Stephen A. Smith Crossover
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.5] low_value_opinion_pre_gemini: Thekla Comments On Possibility Of Former WWE Star Kairi Sane Joining AEW
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.5] news_core_history_pre_gemini:schedule-wrestlemania-london: London Mayor's Office: 'No Specific Discussions' About Hosting WWE WrestleMania 44
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.5] low_score_pre_gemini:47: AEW's Young Bucks Tease 'A Lot Of Dream Matches' That Could Happen In 2026
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.5] low_value_opinion_pre_gemini: Bully Ray Says Jacob Fatu Is 'In A Really Bad Spot' Following WWE Raw
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 7 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (62 file)
+===== RUN END [2026-05-13 06:49:36] VERSION [v85_5_performance_fast_history_pre_gemini_gates (314ea4e)] =====
+
