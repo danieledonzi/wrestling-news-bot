@@ -15657,12 +15657,342 @@ def run_bot():
     return _ORIG_V863_run_bot_raw()
 
 
+
 # =========================
+# v86.4 - report-first candidate gates
+# =========================
+BOT_VERSION = "v86_4_report_first_candidate_gates"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V864_REPORT_FIRST_GATES_ENABLED = os.getenv("V86_4_REPORT_FIRST_GATES_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V864_POSTSHOW_SKIP_HISTORY_RESCUE_ENABLED = os.getenv("V86_4_POSTSHOW_SKIP_HISTORY_RESCUE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V864_CLEAN_RUNTIME_LABELS_ENABLED = os.getenv("V86_4_CLEAN_RUNTIME_LABELS_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+
+def v864_is_report_like_feed_item(title="", link="", summary=""):
+    try:
+        if is_results_article(title, link, summary):
+            return True
+    except Exception:
+        pass
+    try:
+        if v863_url_looks_results_report(link):
+            return True
+    except Exception:
+        pass
+    p = normalize_for_check(f"{title or ''} {link or ''} {summary or ''}")
+    return any(x in p for x in [" results", "results ", "highlights", "key moments", "recap", "report"]) and any(x in p for x in [" raw", " smackdown", " nxt", " dynamite", " collision", " impact", " wwe", " aew", " tna"])
+
+
+def v864_report_event_key(title="", link="", summary=""):
+    for args in [(title, link, summary), (title, summary, link)]:
+        try:
+            key = make_report_event_key(*args)
+            if key and str(key).startswith("report:"):
+                return key
+        except Exception:
+            pass
+    try:
+        key = make_event_key(title, summary, link)
+        if key and str(key).startswith("report:"):
+            return key
+    except Exception:
+        pass
+    return ""
+
+
+_ORIG_V864_v854_should_skip_url = v854_should_skip_url
+
+
+def v854_should_skip_url(url):
+    ok, why = _ORIG_V864_v854_should_skip_url(url)
+    if not ok or not V864_POSTSHOW_SKIP_HISTORY_RESCUE_ENABLED:
+        return ok, why
+    reason = normalize_for_check(why or "")
+    low_reasons = [
+        "score below threshold", "low score", "processing skipped", "score_below_threshold", "low_score", "processing_skipped"
+    ]
+    try:
+        is_post_show = v863_title_or_url_is_post_show_outcome("", url, "")
+    except Exception:
+        is_post_show = False
+    if any(r in reason for r in low_reasons) and is_post_show:
+        print(f"[FRESHNESS v86.4] Ignoro skipped_history low-score per post-show outcome: {url}")
+        return False, "post_show_outcome_rescue"
+    return ok, why
+
+
+def v864_wp_confirms_report_or_skip(report_key, title, link, wp_available=True):
+    if not report_key or not wp_available:
+        return False
+    try:
+        return bool(v862_wp_has_published_report_strict(report_key, title=title, url=link))
+    except Exception as e:
+        print(f"[REPORT v86.4] Errore verifica WP report {report_key}: {e}")
+        return False
+
+
+# v86.4: canonical build_candidates. For complete reports, no generic old gate
+# (URL, title_key, semantic_id, seen_in_this_run, broad story signature) can skip before
+# strict report confirmation. Normal news keep the old hard gates.
+def build_candidates(history, wp_available=True):
+    if not V864_REPORT_FIRST_GATES_ENABLED:
+        return _ORIG_V863_build_candidates(history, wp_available=wp_available)
+
+    queue = []
+    seen_in_this_run = set()
+    seen_title_keys = set(history.get("title_keys", set())) if isinstance(history, dict) else set()
+
+    print("[BOT] Avvio scansione feed")
+
+    for feed_url in FEEDS:
+        print(f"[BOT] Scansione feed: {feed_url}")
+        try:
+            parsed = feedparser.parse(feed_url)
+            if getattr(parsed, "bozo", False):
+                print(f"[BOT] Warning feed malformato: {feed_url}")
+
+            for idx, entry in enumerate(parsed.entries[:25]):
+                link = getattr(entry, "link", None)
+                title = sanitize_text(getattr(entry, "title", "Senza titolo"))
+                if not link:
+                    continue
+                summary = get_entry_summary(entry)
+                is_report_like = v864_is_report_like_feed_item(title, link, summary)
+                report_key = v864_report_event_key(title, link, summary) if is_report_like else ""
+
+                # Report gate comes first. Only strict WP confirmation can stop a complete report here.
+                if is_report_like and report_key:
+                    if v864_wp_confirms_report_or_skip(report_key, title, link, wp_available=wp_available):
+                        print(f"[REPORT v86.4] Report confermato su WordPress: skip {report_key} - {title}")
+                        continue
+                    print(f"[REPORT v86.4] Report non confermato da WordPress: rivaluto {report_key} - {title}")
+
+                try:
+                    _skip_ok, _skip_reason = v854_should_skip_url(link)
+                    if _skip_ok:
+                        if is_report_like:
+                            print(f"[REPORT v86.4] Ignoro skipped_history per report-like non confermato: {report_key or title}")
+                        else:
+                            print(f"[SKIP v86.4] skipped_history ancora valida ({_skip_reason}): {title}")
+                            continue
+                except NameError:
+                    pass
+                except Exception as e:
+                    print(f"[SKIP v86.4] Errore lettura skipped_history: {e}")
+
+                if is_recent_validation_failed(link):
+                    if is_report_like:
+                        print(f"[REPORT v86.4] Ignoro validation-fail sospeso per report-like: {report_key or title}")
+                    else:
+                        print(f"[SKIP] URL sospeso per validation fail recenti: {link}")
+                        continue
+
+                sem_id = make_semantic_id_from_title(title)
+                title_key = make_title_key(title)
+
+                if link in history.get("urls", set()):
+                    if is_report_like:
+                        print(f"[REPORT v86.4] URL in history ma report non confermato: continuo {report_key or title}")
+                    else:
+                        print(f"[SKIP] URL già in history: {link}")
+                        continue
+                if sem_id in history.get("semantic_ids", set()):
+                    if is_report_like:
+                        print(f"[REPORT v86.4] semantic_id in history ma report non confermato: continuo {report_key or title}")
+                    else:
+                        print(f"[SKIP] semantic_id già in history: {sem_id}")
+                        continue
+                if title_key and title_key in seen_title_keys:
+                    if is_report_like:
+                        print(f"[REPORT v86.4] titolo già visto ma report-like: rivaluto con gate report {report_key or title}")
+                    else:
+                        print(f"[SKIP] titolo già visto: {title}")
+                        continue
+                if sem_id in seen_in_this_run or title_key in seen_in_this_run:
+                    if is_report_like:
+                        print(f"[REPORT v86.4] visto nella run ma report-like: rivaluto {report_key or title}")
+                    else:
+                        continue
+
+                title_quality_v71 = validate_title_quality_v71(title)
+                if title_quality_v71["is_clickbait"] and title_quality_v71["score"] < 70:
+                    if is_report_like:
+                        print(f"[REPORT v86.4] Ignoro title-quality gate per report-like: {title}")
+                    else:
+                        print(f"[SKIP v71] Titolo clickbait/di bassa qualita': {title} | {title_quality_v71['issues']}")
+                        continue
+
+                story_data_v71 = build_story_signature_v71(title, summary, link)
+                story_signature_v71 = story_data_v71.get("signature", "")
+                if story_signature_v71 and story_signature_v71 in history.get("story_signatures_v71", set()):
+                    if is_report_like:
+                        print(f"[REPORT v86.4] story_signature in history ma report-like: rivaluto {report_key or title}")
+                    else:
+                        print(f"[SKIP v71] Story signature gia' in history: {story_signature_v71} - {title}")
+                        continue
+                if story_signature_v71 and story_signature_v71 in seen_in_this_run:
+                    if is_report_like:
+                        print(f"[REPORT v86.4] story_signature vista nella run ma report-like: rivaluto {report_key or title}")
+                    else:
+                        print(f"[SKIP v71] Story signature gia' vista nella run: {story_signature_v71} - {title}")
+                        continue
+
+                article_type_hint = classify_article_type_fallback_v68(title, summary, link)
+                freshness_gate = classify_freshness_gate_v863(title, summary, link) if "classify_freshness_gate_v863" in globals() else "NORMAL"
+                if freshness_gate == "HARD_EXPIRED_PREVIEW":
+                    print(f"[SKIP] Preview/show announcement scaduta: {title}")
+                    continue
+                if freshness_gate == "POST_SHOW_OUTCOME":
+                    print(f"[FRESHNESS v86.4] Post-show outcome rescue: non tratto come preview scaduta - {title}")
+                elif v68_is_expired_preview_only(title, summary, link, article_type=article_type_hint):
+                    if is_report_like:
+                        print(f"[REPORT v86.4] Ignoro preview gate legacy per report-like: {report_key or title}")
+                    else:
+                        print(f"[SKIP] Preview/show announcement scaduta: {title}")
+                        try:
+                            v854_record_skipped_url(link, title, "expired_preview", summary=summary)
+                        except Exception:
+                            pass
+                        continue
+
+                entry_ts = get_entry_timestamp(entry)
+                is_breaking = title_has_breaking_marker(title)
+                breaking_expires_at = entry_ts + BREAKING_ACTIVE_SECONDS
+
+                score, reasons = calculate_importance_score(title, summary, link)
+                reliability_v71 = v71_source_reliability(link)
+                freshness_v71 = compute_freshness_score_v71(title, summary, link, source_timestamp=get_entry_timestamp(entry), semantic_status="new_story")
+                if reliability_v71 < 0.70 and score < 90:
+                    score = clamp_score(score - 5)
+                    reasons.append("v71 source reliability soft penalty")
+                if freshness_v71 < 0.35 and score < 85:
+                    score = clamp_score(score - 6)
+                    reasons.append("v71 low freshness/novelty")
+                reasons.append(f"v71 freshness={freshness_v71}")
+                if is_breaking and breaking_expires_at < time.time():
+                    score = clamp_score(score - BREAKING_SCORE_BOOST)
+                    reasons.append("breaking scaduto")
+                prio = priority_label(score)
+
+                is_report_candidate = is_report_like or is_results_article(title, link, summary)
+                tier, tier_reason = editorial_tier(score, title, summary, link)
+
+                if (score < MIN_PUBLISH_SCORE and not is_report_candidate and tier in {"skip", "exclude"}):
+                    print(f"[SKIP] Score sotto soglia editoriale ({score}/{MIN_PUBLISH_SCORE}): {title}")
+                    try:
+                        v854_record_skipped_url(link, title, "score_below_threshold", score=score, summary=summary, reasons=reasons)
+                    except Exception as e:
+                        print(f"[SKIP v86.4] Errore record skip score: {e}")
+                    continue
+
+                if tier == "exclude" and not is_report_candidate:
+                    print(f"[SKIP] Esclusione editoriale dura ({tier_reason}): {title}")
+                    try:
+                        v854_record_skipped_url(link, title, "editorial_exclude", score=score, summary=summary, reasons=reasons, extra={"tier_reason": tier_reason})
+                    except Exception as e:
+                        print(f"[SKIP v86.4] Errore record skip exclude: {e}")
+                    continue
+
+                if score < MIN_PUBLISH_SCORE and not is_report_candidate:
+                    reasons.append(f"v48 {tier}: {tier_reason}")
+
+                event_key = report_key if is_report_candidate and report_key else make_event_key(title, summary, link)
+                if event_key and wp_available and should_skip_event_key(history, event_key, title=title, url=link):
+                    if is_report_candidate:
+                        if v864_wp_confirms_report_or_skip(event_key, title, link, wp_available=wp_available):
+                            print(f"[REPORT v86.4] event_key report confermata stretta su WordPress: {event_key} - {title}")
+                            continue
+                        print(f"[REPORT v86.4] event_key legacy non basta per bloccare report: {event_key} - {title}")
+                    else:
+                        print(f"[SKIP] event_key confermata su WordPress: {event_key} - {title}")
+                        continue
+
+                if score < MIN_PUBLISH_SCORE and is_report_candidate:
+                    reasons.append("report/results: bypass soglia editoriale")
+                    score = MIN_PUBLISH_SCORE
+                    prio = priority_label(score)
+
+                # For report candidates, do not poison the generic per-run seen gates before the report gate.
+                if not is_report_candidate:
+                    seen_in_this_run.add(sem_id)
+                    seen_in_this_run.add(title_key)
+                    if story_signature_v71:
+                        seen_in_this_run.add(story_signature_v71)
+                else:
+                    # Still remember the exact report event key so duplicate copies in the same feed can be diagnosed.
+                    if report_key:
+                        seen_in_this_run.add(f"report_gate_seen:{report_key}")
+
+                queue.append({
+                    "entry": entry,
+                    "url": link,
+                    "title": title,
+                    "semantic_id": sem_id,
+                    "title_key": title_key,
+                    "score": score,
+                    "score_reasons": reasons,
+                    "priority": prio,
+                    "editorial_tier": tier,
+                    "editorial_tier_reason": tier_reason,
+                    "event_key": event_key,
+                    "report_event_key": report_key if is_report_candidate else "",
+                    "kind": "report" if is_report_candidate else "article",
+                    "story_signature_v71": story_signature_v71,
+                    "story_data_v71": story_data_v71,
+                    "summary": summary,
+                    "title_quality_v71": title_quality_v71,
+                    "feed_order": idx,
+                    "source_feed": feed_url,
+                    "article_type_hint": "RESULTS_REPORT" if is_report_candidate else article_type_hint,
+                    "created_at": time.time(),
+                    "source_timestamp": entry_ts,
+                    "is_breaking": is_breaking,
+                    "breaking_expires_at": breaking_expires_at,
+                    "attempts": 0,
+                })
+        except Exception as e:
+            print(f"[BOT] Errore feed {feed_url}: {e}")
+
+    queue.sort(key=lambda x: (int(x.get("score", 0)), -int(x.get("feed_order", 0))), reverse=True)
+
+    # v86.2 hold remains active: before 06:30 Europe/Rome, keep complete reports in pending.
+    if "V862_REPORT_MORNING_HOLD_ENABLED" in globals() and V862_REPORT_MORNING_HOLD_ENABLED:
+        try:
+            hold_ts, hold_label = v862_hold_until_timestamp_if_needed()
+        except Exception:
+            hold_ts, hold_label = None, ""
+        if hold_ts:
+            filtered = []
+            held = 0
+            for item in queue:
+                if v862_is_report_candidate_item(item):
+                    v862_save_report_pending(item, not_before=hold_ts, reason="report_hold_until_0630")
+                    held += 1
+                else:
+                    filtered.append(item)
+            queue = filtered
+            if held:
+                print(f"[REPORT v86.4] {held} report trattenuti fino alle {V862_REPORT_HOLD_HOUR:02d}:{V862_REPORT_HOLD_MINUTE:02d} {V862_REPORT_HOLD_TIMEZONE}")
+
+    for item in queue[:10]:
+        print(f"[SCORE] {item['score']} {item['priority']} - {item['title']} | {', '.join(item.get('score_reasons', []))}")
+    return queue
+
+
+_ORIG_V864_run_bot_raw = _ORIG_V862_run_bot_raw if "_ORIG_V862_run_bot_raw" in globals() else (_ORIG_V863_run_bot_raw if "_ORIG_V863_run_bot_raw" in globals() else run_bot)
+
+
+def run_bot():
+    if V854_BOOT_DIAGNOSTICS_ENABLED:
+        print(f"[BOOT v86.4] entro in run_bot epoch={time.time():.3f}", flush=True)
+    return _ORIG_V864_run_bot_raw()
+
+
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
-# =========================
 if __name__ == "__main__":
     if V854_BOOT_DIAGNOSTICS_ENABLED:
-        print(f"[BOOT v86.3] __main__ reached epoch={time.time():.3f}", flush=True)
+        print(f"[BOOT v86.4] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
