@@ -1,4 +1,4 @@
-name: News Cron Bot
+name: News Cron Bot v86
 
 on:
   schedule:
@@ -82,6 +82,11 @@ jobs:
           V85_3_GLOBAL_SPOILER_GATE_ENABLED: "1"
           V85_4_SKIPPED_HISTORY_ENABLED: "1"
           V85_4_BOOT_DIAGNOSTICS_ENABLED: "1"
+          V86_CONTEXTUAL_DEDUPE_ENABLED: "1"
+          V86_HARD_EMBED_ENGINE_ENABLED: "1"
+          V86_YOUTUBE_INLINE_AS_EMBED: "1"
+          V86_DISABLE_PRE_GEMINI_CORE_HISTORY_HARD_SKIP: "1"
+          V86_DISABLE_V851_EARLY_CORE_HARD_SKIP: "1"
           SKIPPED_HISTORY_FILE: skipped_history.json
         run: python bot.py
 
@@ -118,6 +123,7 @@ jobs:
 
           [ -f pending_articles.json ] && git add -f pending_articles.json
           [ -f failed_articles.json ] && git add -f failed_articles.json
+          [ -f skipped_history.json ] && git add -f skipped_history.json
           [ -f logs/master_log.log ] && git add -f logs/master_log.log
           [ -f logs/master_log_state.json ] && git add -f logs/master_log_state.json
           [ -d published_html_review ] && git add -f published_html_review
