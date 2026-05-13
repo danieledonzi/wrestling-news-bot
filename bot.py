@@ -15444,20 +15444,225 @@ def build_candidates(history, wp_available=True):
     return filtered
 
 
-# v86.2 diagnostics: final wrapper label.
-_ORIG_V862_run_bot_raw = _ORIG_V861_run_bot_raw if "_ORIG_V861_run_bot_raw" in globals() else run_bot
+
+# =========================
+# v86.3 - canonical gate order + report history override
+# =========================
+BOT_VERSION = "v86_3_canonical_gate_order"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V863_CANONICAL_GATE_ORDER_ENABLED = os.getenv("V86_3_CANONICAL_GATE_ORDER_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V863_REPORT_HISTORY_OVERRIDE_ENABLED = os.getenv("V86_3_REPORT_HISTORY_OVERRIDE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V863_SKIP_HISTORY_POSTSHOW_RESCUE_ENABLED = os.getenv("V86_3_SKIP_HISTORY_POSTSHOW_RESCUE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V863_CLEAN_RUNTIME_LABELS_ENABLED = os.getenv("V86_3_CLEAN_RUNTIME_LABELS_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+V863_REPORT_URL_TERMS = [
+    "results", "result", "highlights", "key-moments", "key_moments", "recap", "report", "risultati", "resoconto",
+]
+V863_REPORT_SHOW_TERMS = [
+    "raw", "smackdown", "nxt", "dynamite", "collision", "rampage", "impact", "tna", "aew", "wwe",
+]
+V863_POST_SHOW_OUTCOME_URL_TERMS = [
+    "debut", "debuts", "debuted", "return", "returns", "returned", "attack", "attacks", "attacked",
+    "wins", "defeats", "retains", "captures", "crowned", "new-champion", "title-change", "in-ring-debut",
+]
+
+
+def v863_probe(*parts):
+    return normalize_for_check(" ".join(str(p or "") for p in parts))
+
+
+def v863_url_looks_results_report(url=""):
+    p = v863_probe(urlparse(url or "").path.replace("/", " ").replace("-", " "), url)
+    return any(t.replace("-", " ") in p for t in V863_REPORT_URL_TERMS) and any(t in p for t in V863_REPORT_SHOW_TERMS)
+
+
+def v863_key_looks_results_report(value=""):
+    p = v863_probe(value)
+    return p.startswith("report ") or p.startswith("report:") or ("results" in p and any(t in p for t in V863_REPORT_SHOW_TERMS))
+
+
+def v863_title_or_url_is_post_show_outcome(title="", url="", summary=""):
+    p = v863_probe(title, urlparse(url or "").path.replace("/", " ").replace("-", " "), summary[:300] if summary else "")
+    try:
+        if "v861_is_post_show_outcome_title" in globals() and v861_is_post_show_outcome_title(title):
+            return True
+    except Exception:
+        pass
+    if any(t in p for t in ["preview", "start time", "how to watch", "confirmed matches", "tonight"]):
+        return False
+    if any(t.replace("-", " ") in p for t in V863_POST_SHOW_OUTCOME_URL_TERMS):
+        if any(show in p for show in ["raw", "smackdown", "nxt", "dynamite", "collision", "impact", "aew", "wwe", "tna"]):
+            return True
+    return False
+
+
+def v863_history_for_build_candidates(history):
+    """Return a history copy where report-like records do not hard-block the report gate.
+
+    Normal URLs remain hard authority. Report/results URLs are allowed to be re-evaluated so
+    WordPress strict report confirmation can decide whether the complete report is truly present.
+    """
+    if not isinstance(history, dict) or not V863_REPORT_HISTORY_OVERRIDE_ENABLED:
+        return history
+    h = {}
+    for k, v in history.items():
+        try:
+            h[k] = set(v) if isinstance(v, set) else v
+        except Exception:
+            h[k] = v
+    for field in ["urls", "semantic_ids", "title_keys", "event_keys", "story_fingerprints", "news_core_keys", "story_signatures_v71"]:
+        values = h.get(field)
+        if not isinstance(values, set):
+            continue
+        clean = set()
+        removed = 0
+        for val in values:
+            s = str(val or "")
+            is_reportish = False
+            if field == "urls":
+                is_reportish = v863_url_looks_results_report(s)
+            elif field == "event_keys":
+                is_reportish = s.startswith("report:") or v863_key_looks_results_report(s)
+            else:
+                is_reportish = v863_key_looks_results_report(s)
+            if is_reportish:
+                removed += 1
+                continue
+            clean.add(val)
+        h[field] = clean
+        if removed:
+            print(f"[REPORT v86.3] History override: rimossi {removed} record report-like da {field} per rivalutazione controllata")
+    return h
+
+
+# v86.3: skipped_history remains useful, but old low-score records must not hide newly rescued post-show outcomes.
+_ORIG_V863_v854_should_skip_url = v854_should_skip_url
+
+
+def v854_should_skip_url(url):
+    ok, why = _ORIG_V863_v854_should_skip_url(url)
+    if not ok or not V863_SKIP_HISTORY_POSTSHOW_RESCUE_ENABLED:
+        return ok, why
+    reason = normalize_for_check(why or "")
+    if ("score_below_threshold" in reason or "low_score" in reason or "processing_skipped" in reason) and v863_title_or_url_is_post_show_outcome("", url, ""):
+        print(f"[FRESHNESS v86.3] Ignoro skipped_history low-score per post-show outcome: {url}")
+        return False, "post_show_outcome_rescue"
+    return ok, why
+
+
+# v86.3: stricter exact event-key confirmation. An exact report key in WP JSON is not enough
+# if the matched post title/content does not look like a complete results/report article.
+_ORIG_V863_v862_report_post_is_strict_match = v862_report_post_is_strict_match
+
+
+def v862_report_post_is_strict_match(post, report_event_key="", source_title="", source_url=""):
+    try:
+        title_html = ((post or {}).get("title") or {}).get("rendered", "") if isinstance((post or {}).get("title"), dict) else str((post or {}).get("title", ""))
+        content_html = ((post or {}).get("content") or {}).get("rendered", "") if isinstance((post or {}).get("content"), dict) else str((post or {}).get("content", ""))
+        excerpt_html = ((post or {}).get("excerpt") or {}).get("rendered", "") if isinstance((post or {}).get("excerpt"), dict) else str((post or {}).get("excerpt", ""))
+        title_text = BeautifulSoup(title_html or "", "html.parser").get_text(" ", strip=True)
+        combined_text = BeautifulSoup(f"{title_html} {content_html} {excerpt_html}", "html.parser").get_text(" ", strip=True)
+        title_norm = normalize_for_check(title_text)
+        combined = normalize_for_check(combined_text)
+        raw_json = json.dumps(post, ensure_ascii=False)
+        show, yyyy, mm, dd = v862_report_key_parts(report_event_key)
+        markers = [normalize_for_check(x) for x in v862_date_markers(yyyy, mm, dd) if x.strip()]
+        if "nxt" in show:
+            show_ok = "nxt" in title_norm or "nxt" in combined
+        elif "raw" in show:
+            show_ok = "raw" in title_norm or "raw" in combined
+        elif "smackdown" in show:
+            show_ok = "smackdown" in title_norm or "smackdown" in combined
+        elif "dynamite" in show:
+            show_ok = "dynamite" in title_norm or "dynamite" in combined
+        elif "collision" in show:
+            show_ok = "collision" in title_norm or "collision" in combined
+        elif "impact" in show or "tna" in show:
+            show_ok = "impact" in title_norm or "tna" in title_norm or "impact" in combined or "tna" in combined
+        else:
+            show_tokens = [t for t in show.split("-") if t and t not in {"wwe", "aew", "tna"}]
+            show_ok = all(t in combined for t in show_tokens[:2]) if show_tokens else False
+        marker_terms = ["results", "risultati", "report", "recap", "highlights", "key moments", "momenti chiave", "resoconto"]
+        marker_ok = any(t in title_norm for t in marker_terms)
+        # A report should advertise itself in the title. If only the content contains report-ish words,
+        # it may be a normal news item mentioning a report.
+        title_report_ok = bool(show_ok and marker_ok)
+        date_ok = True if not markers else any(m in title_norm or m in combined for m in markers)
+        cats = set(int(c) for c in (post.get("categories") or []) if str(c).isdigit()) if isinstance(post, dict) else set()
+        editorial_ok = (REPORT_CATEGORY_ID in cats) or not cats
+        if report_event_key and report_event_key in raw_json:
+            ok = bool(title_report_ok and date_ok and editorial_ok)
+            return ok, "exact_event_key_strict_report_title" if ok else f"exact_event_key_but_not_report_title show={show_ok} marker={marker_ok} date={date_ok} editorial={editorial_ok}"
+        if source_url and source_url in raw_json:
+            ok = bool(title_report_ok and date_ok and editorial_ok)
+            return ok, "source_url_strict_report_title" if ok else f"source_url_but_not_report_title show={show_ok} marker={marker_ok} date={date_ok} editorial={editorial_ok}"
+        ok = bool(title_report_ok and date_ok and editorial_ok)
+        return ok, "strict_report_title_date_category" if ok else f"not_report_match show={show_ok} marker={marker_ok} date={date_ok} editorial={editorial_ok}"
+    except Exception as e:
+        return False, f"error:{e}"
+
+
+# v86.3: central freshness classifier for future patches and diagnostics. Old helpers can feed it,
+# but this canonical return value is the intended authority.
+def classify_freshness_gate_v863(title="", summary="", url=""):
+    if is_results_article(title, url, summary):
+        return "RESULTS_REPORT"
+    if v863_title_or_url_is_post_show_outcome(title, url, summary):
+        return "POST_SHOW_OUTCOME"
+    try:
+        if v70_is_hard_preview(title, summary, url) and v62_is_expired_preview(title, summary, url):
+            return "HARD_EXPIRED_PREVIEW"
+    except Exception:
+        pass
+    p = v863_probe(title, summary, url)
+    if "spoiler" in p and ("lineup" in p or "match order" in p or "opening match" in p):
+        return "OBSOLETE_PRESHOW_SPOILER"
+    return "NORMAL"
+
+
+# v86.3: report history override has to happen before the old URL-history gate.
+_ORIG_V863_build_candidates = build_candidates
+
+
+def build_candidates(history, wp_available=True):
+    if not V863_CANONICAL_GATE_ORDER_ENABLED:
+        return _ORIG_V863_build_candidates(history, wp_available=wp_available)
+    h = v863_history_for_build_candidates(history)
+    queue = _ORIG_V863_build_candidates(h, wp_available=wp_available)
+    # Post-build diagnostics and sanity: report candidates are still allowed only if WP does not strictly confirm them.
+    filtered = []
+    for item in queue:
+        if v862_is_report_candidate_item(item):
+            report_key = v862_report_key_from_item(item)
+            title = item.get("title", "")
+            url = item.get("url", "")
+            if report_key and v862_wp_has_published_report_strict(report_key, title=title, url=url):
+                print(f"[REPORT v86.3] Report candidato confermato su WordPress: skip {report_key} - {title}")
+                continue
+            if report_key:
+                print(f"[REPORT v86.3] Report candidato non confermato su WordPress: processabile {report_key} - {title}")
+        filtered.append(item)
+    return filtered
+
+
+# v86.3: clean top-level runtime labels. Older helper labels may still appear inside legacy functions,
+# but canonical gate logs now use v86.3.
+_ORIG_V863_run_bot_raw = _ORIG_V862_run_bot_raw if "_ORIG_V862_run_bot_raw" in globals() else run_bot
+
 
 def run_bot():
     if V854_BOOT_DIAGNOSTICS_ENABLED:
-        print(f"[BOOT v86.2] entro in run_bot epoch={time.time():.3f}", flush=True)
-    return _ORIG_V862_run_bot_raw()
+        print(f"[BOOT v86.3] entro in run_bot epoch={time.time():.3f}", flush=True)
+    return _ORIG_V863_run_bot_raw()
+
 
 # =========================
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 # =========================
 if __name__ == "__main__":
     if V854_BOOT_DIAGNOSTICS_ENABLED:
-        print(f"[BOOT v86.2] __main__ reached epoch={time.time():.3f}", flush=True)
+        print(f"[BOOT v86.3] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
