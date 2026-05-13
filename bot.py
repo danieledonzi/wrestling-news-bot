@@ -17529,10 +17529,189 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
     return _ORIG_V869_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
 
 
+
+# =========================
+# v87 - model routing stabilizer + tier3 opinion block + final anchor sanitizer
+# =========================
+BOT_VERSION = "v87_model_routing_tier3_anchor_guard"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+# v87 policy: do not use gemini-3.1-flash standard in default production chains.
+# It can be reintroduced later via explicit environment configuration when available/stable.
+V87_DEFAULT_LITE_CHAIN = [m.strip() for m in os.getenv(
+    "V87_DEFAULT_LITE_CHAIN",
+    "gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+).split(",") if m.strip()]
+V87_STRONG_CHAIN = [m.strip() for m in os.getenv(
+    "V87_STRONG_CHAIN",
+    "gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+).split(",") if m.strip()]
+V87_STORM_REPORT_CHAIN = [m.strip() for m in os.getenv(
+    "V87_STORM_REPORT_CHAIN",
+    "gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+).split(",") if m.strip()]
+V87_STORM_LITE_CHAIN = [m.strip() for m in os.getenv(
+    "V87_STORM_LITE_CHAIN",
+    "gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+).split(",") if m.strip()]
+
+# The existing router is named v83, but it reads these globals at runtime.
+# Rebind them to the v87 chains so all legacy callers inherit the stable policy.
+V83_DEFAULT_LITE_CHAIN = list(V87_DEFAULT_LITE_CHAIN)
+V83_STRONG_CHAIN = list(V87_STRONG_CHAIN)
+V83_STORM_REPORT_CHAIN = list(V87_STORM_REPORT_CHAIN)
+V83_STORM_LITE_CHAIN = list(V87_STORM_LITE_CHAIN)
+MODEL_CHAIN = list(dict.fromkeys(V87_STRONG_CHAIN + V87_DEFAULT_LITE_CHAIN))
+
+# Clean route diagnostics without changing old helper names.
+try:
+    import builtins as _v87_builtins
+    _ORIG_V87_PRINT = getattr(_v87_builtins, "print")
+    def _v87_clean_label_text(obj):
+        if not isinstance(obj, str):
+            return obj
+        repl = {
+            "[MODEL v83]": "[MODEL v87]",
+            "[REPORT v86.6]": "[REPORT v87/legacy]",
+            "[REPORT v86.8]": "[REPORT v87/legacy]",
+            "[REPORT v86.8/legacy]": "[REPORT v87/legacy]",
+            "[REPORT v86.9]": "[REPORT v87]",
+            "[SCORE v86.9]": "[SCORE v87]",
+            "[RUN v86.8/legacy]": "[RUN v87/legacy]",
+            "[MEDIA v86.7]": "[MEDIA v87/legacy]",
+            "[MEDIA v86.6]": "[MEDIA v87/legacy]",
+        }
+        for old, new in repl.items():
+            obj = obj.replace(old, new)
+        return obj
+    def _v87_print(*args, **kwargs):
+        args = tuple(_v87_clean_label_text(a) for a in args)
+        return _ORIG_V87_PRINT(*args, **kwargs)
+    _v87_builtins.print = _v87_print
+except Exception:
+    pass
+
+V87_BLOCK_TIER3_OPINION_ENABLED = os.getenv("V87_BLOCK_TIER3_OPINION_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V87_STRIP_INLINE_ANCHORS_ENABLED = os.getenv("V87_STRIP_INLINE_ANCHORS_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+_ORIG_V87_editorial_tier = editorial_tier
+
+def v87_is_low_value_opinion_or_interview(title="", text="", url=""):
+    """True for commentary/interview pieces that must not be rescued as tier3.
+
+    This is deliberately evaluated before publication rescue. It does not affect true
+    results reports and does not block concrete news such as injuries, signings,
+    releases, arrests, title changes, or official returns.
+    """
+    probe = normalize_for_check(f"{title} {url} {(text or '')[:2200]}")
+    if not probe:
+        return False
+    try:
+        if v865_is_true_results_report(title, url, text):
+            return False
+    except Exception:
+        pass
+    low_value_markers = [
+        "interview", "podcast", "reveals why", "explains why", "doesn t think",
+        "doesnt think", "does not think", "believes", "thinks", "comments on",
+        "weighs in", "reacts to", "looks back", "recalls", "has concerns",
+        "would like", "wants to try again", "failed as a wrestling executive",
+        "bully ray", "vince russo", "dave meltzer", "lance storm", "eric bischoff",
+    ]
+    if not any(m in probe for m in low_value_markers):
+        return False
+    concrete_markers = [
+        "new champion", "wins title", "title change", "officially signs", "signed with",
+        "contract extension", "released by", "wwe releases", "fired", "departure confirmed",
+        "injured", "surgery", "arrested", "sentenced", "lawsuit", "media rights",
+        "tv deal", "returns on", "returned on", "debuts on", "debuted on", "attacked",
+        "attack on", "announced", "confirmed by wwe", "confirmed by aew",
+    ]
+    if any(m in probe for m in concrete_markers):
+        return False
+    return True
+
+
+def editorial_tier(score, title="", text="", url=""):
+    tier, reason = _ORIG_V87_editorial_tier(score, title, text, url)
+    try:
+        numeric = int(score or 0)
+    except Exception:
+        numeric = 0
+    if (
+        V87_BLOCK_TIER3_OPINION_ENABLED
+        and numeric < 55
+        and tier == "tier3"
+        and v87_is_low_value_opinion_or_interview(title, text, url)
+    ):
+        print(f"[SKIP v87] Blocco tier3 opinion/interview sotto 55: {numeric}/55 - {title}")
+        return "skip", "tier3 opinion/interview bloccato sotto 55"
+    return tier, reason
+
+
+def v87_anchor_is_allowed(a):
+    href = normalize_embed_url(a.get("href", "")) if a else ""
+    text = (a.get_text(" ", strip=True) if a else "") or ""
+    if not href:
+        return False
+    low_text = normalize_for_check(text)
+    # Internal WordPress/image links around media are not expected in article text;
+    # source links are appended after this sanitizer by create_post_without_image.
+    provider = get_embed_provider_slug(href) if "get_embed_provider_slug" in globals() else ""
+    if provider and provider in {"twitter", "x", "instagram", "facebook", "tiktok", "youtube"}:
+        return True
+    parsed = urlparse(href)
+    host = (parsed.netloc or "").lower()
+    if host in {"youtu.be", "www.youtube.com", "youtube.com", "m.youtube.com"}:
+        return True
+    # Allow only explicit URL text links. This prevents auto-linked wrestler names.
+    if low_text.startswith("http") or host.replace("www.", "") in low_text:
+        return True
+    return False
+
+
+def strip_unwanted_inline_anchors_v87(html=""):
+    if not V87_STRIP_INLINE_ANCHORS_ENABLED or not html:
+        return html
+    try:
+        soup = BeautifulSoup(html or "", "html.parser")
+        stripped = 0
+        for a in list(soup.find_all("a", href=True)):
+            if v87_anchor_is_allowed(a):
+                continue
+            text = a.get_text(" ", strip=True)
+            if text:
+                a.replace_with(text)
+            else:
+                a.decompose()
+            stripped += 1
+        if stripped:
+            print(f"[LINK v87] Rimossi {stripped} collegamenti inline non autorizzati dal body")
+        return str(soup)
+    except Exception as e:
+        print(f"[LINK v87] Sanitizzazione link inline fallita: {e}")
+        return html
+
+_ORIG_V87_create_post_without_image = create_post_without_image
+
+def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+    if V87_STRIP_INLINE_ANCHORS_ENABLED and isinstance(data, dict):
+        data = dict(data)
+        data["testo"] = strip_unwanted_inline_anchors_v87(data.get("testo", ""))
+    return _ORIG_V87_create_post_without_image(
+        data,
+        sem_id,
+        url,
+        embed_urls=embed_urls,
+        event_key=event_key,
+        inline_images=inline_images,
+        featured_image_url=featured_image_url,
+    )
+
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 if __name__ == "__main__":
     if V854_BOOT_DIAGNOSTICS_ENABLED:
-        print(f"[BOOT v86.9] __main__ reached epoch={time.time():.3f}", flush=True)
+        print(f"[BOOT v87] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
