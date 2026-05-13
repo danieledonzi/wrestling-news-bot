@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-13 11:34:54",
-  "last_bot_version": "v86_4_report_first_candidate_gates (40b4965)",
-  "updated_at": "2026-05-13T11:35:21",
-  "total_items": 16,
+  "last_run_id": "2026-05-13 11:54:58",
+  "last_bot_version": "v86_5_true_results_report_gate (4ddce03)",
+  "updated_at": "2026-05-13T11:56:17",
+  "total_items": 17,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -132,6 +132,14 @@
       "original_html_file": "20260513_085528_001_wwe-angel-garza-e-berto-non-lasceranno-la-compagnia-smentito-il-loro-addio_9c235c1d_original.html",
       "final_html_file": "20260513_085528_001_wwe-angel-garza-e-berto-non-lasceranno-la-compagnia-smentito-il-loro-addio_9c235c1d_final.html",
       "metadata_file": "20260513_085528_001_wwe-angel-garza-e-berto-non-lasceranno-la-compagnia-smentito-il-loro-addio_9c235c1d_metadata.json"
+    },
+    {
+      "run_id": "2026-05-13 11:54:58",
+      "title": "WWE: possibile data per il ritorno di Randy Orton in TV",
+      "url": "https://www.ringsidenews.com/possible-date-randy-ortons-return-amid-wwe-tv-hiatus/",
+      "original_html_file": "20260513_115617_001_wwe-possibile-data-per-il-ritorno-di-randy-orton-in-tv_114191b2_original.html",
+      "final_html_file": "20260513_115617_001_wwe-possibile-data-per-il-ritorno-di-randy-orton-in-tv_114191b2_final.html",
+      "metadata_file": "20260513_115617_001_wwe-possibile-data-per-il-ritorno-di-randy-orton-in-tv_114191b2_metadata.json"
     }
   ]
 }

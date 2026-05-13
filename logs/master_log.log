@@ -287,3 +287,105 @@
 [REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (70 file)
 ===== RUN END [2026-05-13 11:34:54] VERSION [v86_4_report_first_candidate_gates (40b4965)] =====
 
+[BOOT v86.5] __main__ reached epoch=1778673299.681
+
+===== RUN START [2026-05-13 11:54:58] VERSION [v86_5_true_results_report_gate (4ddce03)] =====
+[BOOT v86.5] entro in run_bot epoch=1778673299.681
+[BOOT v86.1] entro in run_bot epoch=1778673299.681
+[REPORT v86.5] History true-results override: rimossi 16 record da urls
+[REPORT v86.5] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.5] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.5] History true-results override: rimossi 8 record da event_keys
+[BOOT v85.4] prima health check WP epoch=1778673300.022
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): Post UFC 328 Rankings Update, Sean Strickland Enters P4P Top 10
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): WWE NXT - 5/12/2026: 3 Things We Hated And 3 Things We Loved
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): UFC's Dana White Says He Will Be Promoting Anthony Joshua Vs. Tyson Fury
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171618/darkstate-wwe-nxt-tag-title-rematch-despite-dissension/
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): AEW's Bobby Lashley Has A Lot Of Ideas For New Hurt Syndicate Members
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): AEW's Thunder Rosa Names Top Five Face Painters In Wrestling History
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): Dana White Pressed On Wife Slapping Incident, Not Stepping Down From UFC
+[SKIP v86.4] skipped_history ancora valida (low_value_opinion_pre_gemini): Thekla Comments On Possibility Of Former WWE Star Kairi Sane Joining AEW
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171539/wwe-nxt-lizzy-rain-first-goal-north-american-championship/
+[BOT] Errore feed https://www.wrestlinginc.com/feed/: maximum recursion depth exceeded while calling a Python object
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[FRESHNESS v86.4] Post-show outcome rescue: non tratto come preview scaduta - Possible Date for Randy Orton's Return Amid WWE TV Hiatus
+[PERF v71] WP lookup event_key: 1.37s
+[FIX] Event key in history ma non confermata su WordPress: event:cody-rhodes-return - provo a pubblicare
+[SKIP] Preview/show announcement scaduta: AEW Dynamite Preview for May 13, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP v86.4] skipped_history ancora valida (validation_fail): Rey Fenix Seemingly Vents Frustration Over Lack of Opportunities in WWE
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): Wyatt Sicks Set for First Wrestling Appearance After WWE Release
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): Multiple Title Matches Booked For May 19 WWE NXT
+[SKIP] URL già in history: https://www.ringsidenews.com/mason-rook-makes-big-declaration-during-contract-signing-512-nxt/
+[SKIP v86.4] skipped_history ancora valida (score_below_threshold): WWE SmackDown Viewership Sees Slight Increase on May 8, 2026
+[SKIP] URL già in history: https://www.ringsidenews.com/backstage-update-emerges-angel-garza-bertos-wwe-status-raw-panic/
+[FRESHNESS v86.4] Ignoro skipped_history low-score per post-show outcome: https://www.ringsidenews.com/naraku-makes-wwe-ring-debut-during-512-nxt/
+[FRESHNESS v86.4] Post-show outcome rescue: non tratto come preview scaduta - Naraku Makes WWE In-Ring Debut During 5/12 NXT
+[FRESHNESS v86.1] Post-show outcome rescue: non tratto come preview scaduta - Naraku Makes WWE In-Ring Debut During 5/12 NXT
+[SKIP] Score sotto soglia editoriale (51/75): Naraku Makes WWE In-Ring Debut During 5/12 NXT
+[SKIP] URL già in history: https://www.ringsidenews.com/major-wwe-events-expected-arizona-under-new-tko-deal/
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-talent-already-pushing-kofi-kingston-xavier-woods-wwe-exit/
+[BOT] Errore feed https://www.ringsidenews.com/feed/: maximum recursion depth exceeded while calling a Python object
+[SCORE] 79 medium - Possible Date for Randy Orton's Return Amid WWE TV Hiatus | WWE/main roster, top star titolo: randy orton, nomi forti lead: cody rhodes, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v66 cap title match non-title-change, v71 source reliability soft penalty, v71 freshness=0.696
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[MODEL v83] Route mode=normal report=False score=0 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 1 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Possible Date for Randy Orton's Return Amid WWE TV Hiatus
+[BOT] semantic_id=possible-date-for-randy-ortons-return-amid-wwe-tv-hiatus
+[SCORE] iniziale=79 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=1, embed=0
+[BOT] Immagini inline trovate: 1
+[MODEL v83] Route mode=normal report=False score=79 chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.90 | category=WWE (4) conf=0.90 model=gemini-2.5-flash-lite | L'articolo presenta un evento futuro (SmackDown a Barcellona) e specula sulla presenza di Randy Orton in vista di un PLE futuro, indicando chiaramente un focus di anteprima. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Il titolo "Possible Date for Randy Orton's Return Amid WWE TV Hiatus" suggerisce una data possibile, ma il corpo dell'articolo conferma la sua pubblicizzazione per un evento specif; I nomi dei titoli come "Undisputed WWE Championship" e "World Championship" vanno lasciati in inglese.; I termini come "release/released" non vanno tradotti come "rilascio/rilasciato", ma come "licenziamento/licenziato" o "addio" a seconda del contesto. In questo caso, "absent" o "aw
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo presenta un evento futuro (SmackDown a Barcellona) e specula sulla presenza di Randy Orton in vista di un PLE futuro, indicando chiaramente un focus di anteprima. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 5.16s
+[SCORE] raffinato=84 priority=high | WWE/main roster, top star titolo: randy orton, nomi forti lead: cody rhodes, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v66 cap title match non-title-change
+[V71] story_signature=stable:cody_rhodes|randy_orton|possible_date|return|wwe semantic_status=new_story freshness=0.696
+[PERF v71] WP recent posts dedupe: 1.29s
+[FIX] Event key in history ma non confermata su WordPress: event:cody-rhodes-return - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.63s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=9
+[MEDIA] Immagine interna caricata: 4420
+[PERF v71] upload immagine interna: 3.70s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione applicato con gemini-3.1-flash-lite: editorial_word_ratio=0.62 (191/308) threshold=0.70
+[PRESERVE v81] Guardrail finale testo applicato
+[PERF v71] traduzione: 52.74s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): WWE: possibile data per il ritorno di Randy Orton in TV
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/possible-date-for-randy-ortons-return-amid-wwe-tv-hiatus-07.jpg
+[MEDIA] Immagine caricata: 4421
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PERF v71] creazione post WordPress: 6.84s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/possible-date-for-randy-ortons-return-amid-wwe-tv-hiatus-07.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4421
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Possible Date for Randy Orton's Return Amid WWE TV Hiatus': 67.46s
+[OK] Pubblicato: WWE: possibile data per il ritorno di Randy Orton in TV
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260513_115617_001_wwe-possibile-data-per-il-ritorno-di-randy-orton-in-tv_114191b2_*.html
+[RUN v85] Pubblicati in questa run: 1/5
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 1 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (74 file)
+===== RUN END [2026-05-13 11:54:58] VERSION [v86_5_true_results_report_gate (4ddce03)] =====
+
