@@ -1,4 +1,4 @@
-name: News Cron Bot v86
+name: News Cron Bot v86.1
 
 on:
   schedule:
@@ -85,6 +85,11 @@ jobs:
           V86_CONTEXTUAL_DEDUPE_ENABLED: "1"
           V86_HARD_EMBED_ENGINE_ENABLED: "1"
           V86_YOUTUBE_INLINE_AS_EMBED: "1"
+          V86_1_STRICT_AAA_BOOST_ENABLED: "1"
+          V86_1_CONTEXTUAL_SIGNATURE_ENABLED: "1"
+          V86_1_REPORT_HISTORY_VERIFY_WP: "1"
+          V86_1_POSTSHOW_PREVIEW_RESCUE_ENABLED: "1"
+          V86_1_RELAX_BODY_META_VALIDATION: "1"
           V86_DISABLE_PRE_GEMINI_CORE_HISTORY_HARD_SKIP: "1"
           V86_DISABLE_V851_EARLY_CORE_HARD_SKIP: "1"
           SKIPPED_HISTORY_FILE: skipped_history.json
