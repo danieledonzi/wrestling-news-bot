@@ -14779,12 +14779,370 @@ def run_bot():
     return _ORIG_V86_run_bot_raw()
 
 
+
+# =========================
+# v86.1 - scoring/signature/report validation stabilizer
+# =========================
+BOT_VERSION = "v86_1_scoring_signature_validation_stabilizer"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V861_STRICT_AAA_BOOST_ENABLED = os.getenv("V86_1_STRICT_AAA_BOOST_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V861_CONTEXTUAL_SIGNATURE_ENABLED = os.getenv("V86_1_CONTEXTUAL_SIGNATURE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V861_REPORT_HISTORY_VERIFY_WP = os.getenv("V86_1_REPORT_HISTORY_VERIFY_WP", "1").strip().lower() not in {"0", "false", "no", "off"}
+V861_POSTSHOW_PREVIEW_RESCUE_ENABLED = os.getenv("V86_1_POSTSHOW_PREVIEW_RESCUE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V861_RELAX_BODY_META_VALIDATION = os.getenv("V86_1_RELAX_BODY_META_VALIDATION", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+
+def v861_has_any_phrase(text, phrases):
+    padded = f" {normalize_for_check(text or '')} "
+    for phrase in phrases:
+        try:
+            if _probe_has_phrase(padded, phrase):
+                return True
+        except Exception:
+            if normalize_for_check(phrase) in padded:
+                return True
+    return False
+
+
+# -----------------------------------------------------------------------------
+# v86.1 AAA priority guard: v80.4 boost was too broad.
+# -----------------------------------------------------------------------------
+_ORIG_V861_v804_is_major_aaa_news = v804_is_major_aaa_news if "v804_is_major_aaa_news" in globals() else None
+
+def v861_is_major_aaa_news(title="", text="", url="", editorial_analysis=None):
+    """Restrict AAA major boost to articles with a hard AAA anchor in title/URL.
+
+    A casual body mention of TripleMania, AAA or Dominik must not turn an ordinary
+    WWE status/opinion item into a 100-score storm candidate.
+    """
+    title_url = normalize_for_check(f"{title} {url}")
+    full = normalize_for_check(f"{title} {url} {(text or '')[:1800]}")
+
+    hard_anchor = v861_has_any_phrase(title_url, [
+        "aaa", "triplemania", "aaa mega", "aaa mega championship",
+        "mega championship", "mega champion", "el grande americano",
+        "los americanos",
+    ])
+    if not hard_anchor:
+        return False
+
+    # WWE-only status, generic comments and possibility items are not major AAA news.
+    low_value = v861_has_any_phrase(full, [
+        "comments on", "possibility", "could", "might", "believes", "thinks",
+        "podcast", "status after raw", "wwe status", "lack of opportunities",
+        "vents frustration", "recovery update",
+    ])
+    if low_value:
+        return False
+
+    atype = normalize_article_type((editorial_analysis or {}).get("article_type", "")) if editorial_analysis else ""
+    if atype in {"OPINION", "RUMOR"} and not v861_has_any_phrase(title_url, ["aaa mega", "triplemania"]):
+        return False
+
+    return True
+
+
+def v804_is_major_aaa_news(title="", text="", url="", editorial_analysis=None):
+    if V861_STRICT_AAA_BOOST_ENABLED:
+        return v861_is_major_aaa_news(title, text, url, editorial_analysis)
+    if _ORIG_V861_v804_is_major_aaa_news:
+        return _ORIG_V861_v804_is_major_aaa_news(title, text, url, editorial_analysis)
+    return False
+
+
+# -----------------------------------------------------------------------------
+# v86.1 Post-show outcome rescue: debut/return/attack during a show is not preview.
+# -----------------------------------------------------------------------------
+_ORIG_V861_v68_is_expired_preview_only = v68_is_expired_preview_only
+
+def v861_is_post_show_outcome_title(title="", text="", url=""):
+    probe = normalize_for_check(f"{title} {url} {text}")
+    return v861_has_any_phrase(probe, [
+        "makes wwe in ring debut", "makes in ring debut", "in ring debut during",
+        "debuts during", "debut during", "returns during", "return during",
+        "attacks during", "attack during", "wins during", "defeats during",
+        "retains during", "takes out during", "appears during",
+    ])
+
+
+def v68_is_expired_preview_only(title="", text="", url="", article_type=None):
+    if V861_POSTSHOW_PREVIEW_RESCUE_ENABLED and v861_is_post_show_outcome_title(title, text, url):
+        print(f"[FRESHNESS v86.1] Post-show outcome rescue: non tratto come preview scaduta - {title}")
+        return False
+    return _ORIG_V861_v68_is_expired_preview_only(title, text, url, article_type=article_type)
+
+
+# -----------------------------------------------------------------------------
+# v86.1 Contextual story signatures after title-focused entity extraction.
+# -----------------------------------------------------------------------------
+_ORIG_V861_build_story_signature_v71 = build_story_signature_v71
+
+
+def v861_slug_token(value=""):
+    value = normalize_for_check(value or "")
+    value = re.sub(r"\s+", "_", value).strip("_")
+    return value[:60]
+
+
+def v861_known_entity_candidates(title="", text=""):
+    probe_title = normalize_for_check(title or "")
+    probe_full = normalize_for_check(f"{title} {(text or '')[:700]}")
+    known = []
+    pools = []
+    try:
+        pools.extend(TOP_STAR_NAMES + STRONG_NAMES + WWE_NAMES + AEW_NAMES + NXT_NAMES + TNA_OTHER_NAMES + HISTORIC_BUSINESS_NAMES_V61)
+    except Exception:
+        pass
+    pools.extend([
+        "rey fenix", "angel garza", "berto", "humberto carrillo", "naraku",
+        "dave meltzer", "eric bischoff", "triple h", "stephen a smith", "kairi sane",
+        "thekla", "young bucks", "jacob fatu", "bully ray", "los garza",
+    ])
+    for name in sorted(set(pools), key=len, reverse=True):
+        n = normalize_for_check(name)
+        if n and (n in probe_title or n in probe_full):
+            known.append(v861_slug_token(n))
+    # Title-case multiword names in title are stronger than body-only noise.
+    try:
+        for ent in extract_named_entities_from_title(title):
+            slug = v861_slug_token(ent)
+            if slug and slug not in known and slug not in {"wwe", "aew", "nxt", "tna", "ufc", "mma"}:
+                known.append(slug)
+    except Exception:
+        pass
+    return list(dict.fromkeys([x for x in known if x]))[:4]
+
+
+def v861_action_bucket(title="", text="", article_type=""):
+    p = normalize_for_check(f"{title} {(text or '')[:1200]}")
+    at = normalize_article_type(article_type or "")
+    if at == "RESULTS_REPORT" or v861_has_any_phrase(p, ["results", "highlights", "key moments"]):
+        return "results_report"
+    if v861_has_any_phrase(p, ["released", "release", "departure", "exit", "leaving", "status", "not leaving", "wwe status"]):
+        return "status"
+    if v861_has_any_phrase(p, ["contract", "signed", "deal"]):
+        return "contract"
+    if v861_has_any_phrase(p, ["debut", "in ring debut"]):
+        return "debut"
+    if v861_has_any_phrase(p, ["return", "returns"]):
+        return "return"
+    if v861_has_any_phrase(p, ["injury", "injured", "health", "surgery"]):
+        return "injury"
+    if v861_has_any_phrase(p, ["title", "championship", "champion"]):
+        return "title"
+    if v861_has_any_phrase(p, ["frustration", "opportunities", "vents"]):
+        return "frustration"
+    if at == "RUMOR":
+        return "rumor"
+    if at == "OPINION":
+        return "opinion"
+    return "story"
+
+
+def v861_contextual_story_signature(title="", text="", url="", editorial_analysis=None, event_key=""):
+    if not V861_CONTEXTUAL_SIGNATURE_ENABLED:
+        return ""
+    editorial_analysis = editorial_analysis or {}
+    article_type = editorial_analysis.get("article_type") or editorial_analysis.get("type") or ""
+    category = editorial_analysis.get("category_slug") or editorial_analysis.get("category") or ""
+    primary = v861_known_entity_candidates(title, text)
+    action = v861_action_bucket(title, text, article_type)
+
+    # Reports should key by report event, not by noisy body entities.
+    report_key = make_report_event_key(title, url, text) if ("results" in normalize_for_check(title) or action == "results_report") else ""
+    if report_key:
+        return "stable:" + report_key.replace("report:", "report_")
+
+    if primary:
+        promo = ""
+        p = normalize_for_check(f"{title} {url} {text[:500] if text else ''}")
+        for candidate in ["wwe", "aew", "nxt", "tna", "aaa", "ufc", "roh", "njpw"]:
+            if candidate in p:
+                promo = candidate
+                break
+        if not promo:
+            promo = v861_slug_token(str(category or "wrestling")) or "wrestling"
+        return "stable:" + "|".join(primary[:3] + [action, promo])
+    return ""
+
+
+def build_story_signature_v71(title, text, url=""):
+    sig = v861_contextual_story_signature(title, text, url)
+    if sig:
+        return {"entities": sig.replace("stable:", "").split("|"), "topics": [], "action": "v86_1_contextual", "signature": sig}
+    return _ORIG_V861_build_story_signature_v71(title, text, url)
+
+
+# -----------------------------------------------------------------------------
+# v86.1 Report history verification: local history alone must not suppress reports.
+# -----------------------------------------------------------------------------
+_ORIG_V861_v841_is_report_already_published = v841_is_report_already_published
+
+def v841_is_report_already_published(report_event_key="", url="", title="", history=None):
+    if not V861_REPORT_HISTORY_VERIFY_WP:
+        return _ORIG_V861_v841_is_report_already_published(report_event_key, url=url, title=title, history=history)
+    history = history or load_history()
+    if not report_event_key and not url:
+        return False
+
+    if V841_SKIP_IF_WP_URL_EXISTS and url:
+        post_id = find_existing_post_by_url(url)
+        if post_id:
+            print(f"[REPORT v86.1] Skip: report gia presente su WP per URL ({post_id}): {url}")
+            v841_mark_history_minimal(url=url, title=title, event_key=report_event_key, history=history)
+            return True
+
+    if report_event_key and wp_has_published_event(report_event_key, title=title, url=url):
+        print(f"[REPORT v86.1] Skip: report confermato su WordPress: {report_event_key}")
+        v841_mark_history_minimal(url=url, title=title, event_key=report_event_key, history=history)
+        return True
+
+    if report_event_key and history_has_event_key(history, report_event_key):
+        print(f"[REPORT v86.1] Report key in history ma non confermata su WordPress: {report_event_key} - provo pubblicazione")
+        try:
+            history.get("event_keys", set()).discard(report_event_key)
+        except Exception:
+            pass
+    if url and url in history.get("urls", set()):
+        # For reports, URL history can be stale if the report was only treated as pending/handled.
+        if not find_existing_post_by_url(url):
+            print(f"[REPORT v86.1] URL report in history ma non confermato su WordPress: {url} - provo pubblicazione")
+            try:
+                history.get("urls", set()).discard(url)
+            except Exception:
+                pass
+            return False
+    return False
+
+
+_ORIG_V861_process_report_pending_item = process_report_pending_item
+
+def process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    report_event_key = (item or {}).get("report_event_key") or (item or {}).get("event_key")
+    url = (item or {}).get("url", "")
+    title = sanitize_text((item or {}).get("title", ""))
+    if report_event_key and V861_REPORT_HISTORY_VERIFY_WP:
+        if wp_has_published_event(report_event_key, title=title, url=url):
+            print(f"[REPORT v86.1] Skip pre-scraping: report confermato su WordPress: {report_event_key}")
+            v841_mark_history_minimal(url=url, title=title, event_key=report_event_key, history=history,
+                                      seen_event_keys=seen_event_keys, seen_story_signatures=seen_story_signatures_v71,
+                                      seen_news_core_keys=seen_news_core_keys)
+            remove_pending_report_key(report_event_key)
+            remove_pending_url(url)
+            return "skipped"
+        if history_has_event_key(history, report_event_key):
+            print(f"[REPORT v86.1] Pending report in history locale ma non confermato su WP: {report_event_key} - recupero")
+            try:
+                history.get("event_keys", set()).discard(report_event_key)
+            except Exception:
+                pass
+            try:
+                seen_event_keys.discard(report_event_key)
+            except Exception:
+                pass
+    return _ORIG_V861_process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+
+
+# Override the late v85.5 process wrapper so it does not hard-skip reports from local history.
+_ORIG_V861_process_candidate_item = process_candidate_item
+
+def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    title, url, summary, score = v855_context_from_item(item) if isinstance(item, dict) else ("", "", "", 0)
+    report_key = (item or {}).get("report_event_key") or (item or {}).get("event_key") if isinstance(item, dict) else ""
+    if isinstance(item, dict) and (item.get("kind") == "report" or str(report_key).startswith("report:")):
+        if report_key and wp_has_published_event(report_key, title=title, url=url):
+            print(f"[REPORT v86.1] Skip pre-scraping: report confermato su WordPress: {report_key}")
+            remove_pending_report_key(report_key)
+            remove_pending_url(url)
+            return "skipped"
+        if report_key and history_has_event_key(history, report_key):
+            print(f"[REPORT v86.1] Report in history locale ma non confermato su WP: {report_key} - continuo")
+            try:
+                history.get("event_keys", set()).discard(report_key)
+            except Exception:
+                pass
+            try:
+                seen_event_keys.discard(report_key)
+            except Exception:
+                pass
+    return _ORIG_V861_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+
+
+# -----------------------------------------------------------------------------
+# v86.1 Body/meta validation: clean removable source promos before failing.
+# -----------------------------------------------------------------------------
+_ORIG_V861_body_looks_suspicious = body_looks_suspicious
+
+
+def v861_strip_meta_sentences_from_html(html=""):
+    if not html:
+        return html
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        meta_patterns = [
+            r"\bthe source text\b", r"\bthe original text\b", r"\bdoes not specify\b",
+            r"\bit is not clear\b", r"\bil testo originale\b", r"\bnon specifica\b",
+            r"\bnon e chiaro\b", r"\bnon è chiaro\b", r"\bshare your thoughts\b",
+            r"\bstay tuned\b", r"\bcontinueremo a seguire\b", r"\bfateci sapere\b",
+        ]
+        for tag in soup.find_all(["p", "li", "blockquote"]):
+            txt = sanitize_text(tag.get_text(" ", strip=True)).lower()
+            if any(re.search(p, txt, flags=re.I) for p in meta_patterns):
+                tag.decompose()
+        return str(soup)
+    except Exception:
+        return html
+
+
+def body_looks_suspicious(text):
+    if not V861_RELAX_BODY_META_VALIDATION:
+        return _ORIG_V861_body_looks_suspicious(text)
+    cleaned = remove_source_promos_from_html(text or "")
+    cleaned = v861_strip_meta_sentences_from_html(cleaned)
+    t = sanitize_text(BeautifulSoup(cleaned or "", "html.parser").get_text(" ", strip=True)).lower()
+    # Still block genuinely empty/thin model output, but do not fail only because
+    # source promo/meta lines were removable.
+    if len(t) < 90:
+        return True
+    bad_hits = sum(1 for pat in BODY_BAD_PATTERNS if pat in t)
+    if bad_hits >= 1:
+        return True
+    sentence_count = len([s for s in re.split(r"[.!?]+", t) if s.strip()])
+    return sentence_count < 2
+
+
+_ORIG_V861_italian_quality_issues = italian_quality_issues
+
+def italian_quality_issues(title, html_text):
+    issues = _ORIG_V861_italian_quality_issues(title, html_text)
+    if not V861_RELAX_BODY_META_VALIDATION:
+        return issues
+    cleaned = remove_source_promos_from_html(html_text or "")
+    cleaned = v861_strip_meta_sentences_from_html(cleaned)
+    # If the only remaining issue was body suspicious and the cleaned body passes,
+    # remove that blocking issue.
+    if issues and not body_looks_suspicious(cleaned):
+        issues = [i for i in issues if "Testo sospetto" not in str(i) and "troppo breve" not in str(i)]
+    return issues
+
+
+# -----------------------------------------------------------------------------
+# v86.1 Clean diagnostics for wrapped v85 labels.
+# -----------------------------------------------------------------------------
+_ORIG_V861_run_bot_raw = _ORIG_V854_run_bot if "_ORIG_V854_run_bot" in globals() else run_bot
+
+def run_bot():
+    if V854_BOOT_DIAGNOSTICS_ENABLED:
+        print(f"[BOOT v86.1] entro in run_bot epoch={time.time():.3f}", flush=True)
+    return _ORIG_V861_run_bot_raw()
+
 # =========================
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 # =========================
 if __name__ == "__main__":
     if V854_BOOT_DIAGNOSTICS_ENABLED:
-        print(f"[BOOT v86] __main__ reached epoch={time.time():.3f}", flush=True)
+        print(f"[BOOT v86.1] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
@@ -14793,4 +15151,3 @@ if __name__ == "__main__":
         create_review_bundle_latest()
         review_finalize_package()
         log_run_end()
-
