@@ -18486,10 +18486,493 @@ except Exception:
     pass
 
 
+# =========================
+# v87.3 - hard title gate + positional embed preservation
+# =========================
+BOT_VERSION = "v87_3_title_gate_positional_embed_guard"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+# v87.3: gemini-3-flash is disabled by default because API v1beta returned 404
+# for that exact model name. Re-enable only after confirming the exact ListModels id.
+V873_ENABLE_GEMINI_3_FLASH = os.getenv("V873_ENABLE_GEMINI_3_FLASH", "0").strip().lower() in {"1", "true", "yes", "on"}
+V873_FORBID_UNTRANSLATED_TITLE = os.getenv("V873_FORBID_UNTRANSLATED_TITLE", "1").strip().lower() not in {"0", "false", "no", "off"}
+V873_POSITIONAL_EMBED_GUARD = os.getenv("V873_POSITIONAL_EMBED_GUARD", "1").strip().lower() not in {"0", "false", "no", "off"}
+V873_TITLE_FAILURE_ERROR = "TITLE_MODEL_FAILURE"
+V873_EXPECTED_EMBEDS_BY_URL = {}
+
+# Hard model matrix update. Every important task has fallbacks, and no default chain
+# contains gemini-3-flash unless the env explicitly enables it.
+def _v873_strip_disabled_models(chain):
+    out = []
+    for m in list(chain or []):
+        if m == "gemini-3-flash" and not V873_ENABLE_GEMINI_3_FLASH:
+            continue
+        if m not in out:
+            out.append(m)
+    return out
+
+try:
+    V872_MODEL_CHAINS.update({
+        "healthcheck": _v873_strip_disabled_models(_v872_chain_from_env("V873_HEALTHCHECK_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite")),
+        "editorial_analysis": _v873_strip_disabled_models(_v872_chain_from_env("V873_EDITORIAL_ANALYSIS_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite")),
+        "translate_normal": _v873_strip_disabled_models(_v872_chain_from_env("V873_TRANSLATE_NORMAL_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite")),
+        "translate_medium": _v873_strip_disabled_models(_v872_chain_from_env("V873_TRANSLATE_MEDIUM_CHAIN", "gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite")),
+        "translate_report": _v873_strip_disabled_models(_v872_chain_from_env("V873_TRANSLATE_REPORT_CHAIN", "gemini-2.5-pro,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite")),
+        "postedit": _v873_strip_disabled_models(_v872_chain_from_env("V873_POSTEDIT_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash")),
+        "title": _v873_strip_disabled_models(_v872_chain_from_env("V873_TITLE_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro")),
+        "emergency_title": _v873_strip_disabled_models(_v872_chain_from_env("V873_EMERGENCY_TITLE_CHAIN", "gemini-2.5-flash,gemini-2.5-pro,gemini-3.1-flash-lite,gemini-2.5-flash-lite")),
+        "repair": _v873_strip_disabled_models(_v872_chain_from_env("V873_REPAIR_CHAIN", "gemini-2.5-flash,gemini-2.5-flash-lite,gemini-3.1-flash-lite")),
+        "repair_report": _v873_strip_disabled_models(_v872_chain_from_env("V873_REPAIR_REPORT_CHAIN", "gemini-2.5-pro,gemini-2.5-flash,gemini-3.1-flash-lite")),
+    })
+    for _k, _v in list(V872_MODEL_CHAINS.items()):
+        V872_MODEL_CHAINS[_k] = _v873_strip_disabled_models(_v)
+    if not V873_ENABLE_GEMINI_3_FLASH:
+        gemini_invalid_models.add("gemini-3-flash")
+except Exception as _e:
+    print(f"[MODEL v87.3] Warning aggiornamento matrice modelli fallito: {_e}")
+
+_ORIG_V873_v872_chain_for_task = v872_chain_for_task
+
+def v872_chain_for_task(task):
+    chain = _v873_strip_disabled_models(list(dict.fromkeys(V872_MODEL_CHAINS.get(task) or V872_MODEL_CHAINS.get("translate_normal") or MODEL_CHAIN)))
+    if len(chain) < 2:
+        for fallback in ["gemini-3.1-flash-lite", "gemini-2.5-flash-lite", "gemini-2.5-flash", "gemini-2.5-pro"]:
+            if fallback not in chain and fallback not in gemini_invalid_models:
+                chain.append(fallback)
+            if len(chain) >= 2:
+                break
+    now = time.time()
+    filtered = []
+    for m in chain:
+        if m in gemini_invalid_models:
+            continue
+        if V872_GLOBAL_COOLDOWN_ENABLED and float(_V872_MODEL_GLOBAL_COOLDOWN_UNTIL.get(m, 0) or 0) > now:
+            continue
+        filtered.append(m)
+    if len(filtered) >= 2:
+        return filtered
+    # Critical task: title must try every available model before giving up.
+    if task in {"title", "emergency_title"}:
+        critical = [m for m in chain if m not in gemini_invalid_models]
+        if len(critical) >= 2:
+            print(f"[MODEL v87.3] task={task} usa fallback critico ignorando cooldown parziale")
+            return critical
+    # Non-critical: still avoid an actual one-model chain by adding valid backups.
+    result = list(filtered)
+    for m in chain:
+        if m not in result and m not in gemini_invalid_models:
+            result.append(m)
+        if len(result) >= 2:
+            break
+    return result or chain
+
+# Keep legacy globals aligned with v87.3 matrix.
+try:
+    V87_DEFAULT_LITE_CHAIN = list(V872_MODEL_CHAINS["healthcheck"])
+    V87_STRONG_CHAIN = list(V872_MODEL_CHAINS["translate_medium"])
+    V87_STORM_REPORT_CHAIN = list(V872_MODEL_CHAINS["translate_report"])
+    V87_STORM_LITE_CHAIN = list(V872_MODEL_CHAINS["translate_normal"])
+    V83_DEFAULT_LITE_CHAIN = list(V87_DEFAULT_LITE_CHAIN)
+    V83_STRONG_CHAIN = list(V87_STRONG_CHAIN)
+    V83_STORM_REPORT_CHAIN = list(V87_STORM_REPORT_CHAIN)
+    V83_STORM_LITE_CHAIN = list(V87_STORM_LITE_CHAIN)
+    MODEL_CHAIN = list(dict.fromkeys(V872_MODEL_CHAINS["translate_normal"] + V872_MODEL_CHAINS["translate_medium"] + V872_MODEL_CHAINS["title"]))
+except Exception:
+    pass
+
+# ---------- Title hard gate ----------
+def v873_looks_untranslated_title(title="", source_title=""):
+    t = normalize_whitespace(str(title or "")).strip()
+    if not t:
+        return True
+    low = t.lower()
+    if title_is_broken(t) or title_soft_validation_failed(t):
+        return True
+    # English residue that should never survive in an Italian headline unless it is a proper show/title name.
+    residue = [
+        " wants ", " his own ", " her own ", " prepares for ", " title defense", " reportedly ",
+        " allegedly ", " no longer ", " amid ", " after wwe release", " heading to ", " set to ",
+        " opens up", " says he ", " says she ", " thinks ", " explains why", "wwe's ", "aew's ",
+    ]
+    padded = f" {low} "
+    if any(r in padded for r in residue):
+        return True
+    # If it is essentially the source title with only casing/punctuation changes, it is not translated.
+    try:
+        a = re.sub(r"[^a-z0-9]+", " ", (source_title or "").lower()).strip()
+        b = re.sub(r"[^a-z0-9]+", " ", low).strip()
+        if a and b and (a == b or (len(a) > 25 and len(b) > 25 and difflib.SequenceMatcher(None, a, b).ratio() > 0.82)):
+            return True
+    except Exception:
+        pass
+    return False
+
+def v873_emergency_title_repair(current_title="", source_title="", source_text="", source_url=""):
+    context = extract_main_scoring_text(source_text or "", max_paragraphs=4, max_chars=1300)
+    prompt = f"""
+Sei un caporedattore italiano di news wrestling.
+Devi produrre un titolo italiano pubblicabile. Il titolo NON può restare in inglese.
+Usa solo fatti presenti nel titolo originale e nel contesto. Non inventare dettagli.
+Mantieni in inglese solo nomi propri, federazioni, show e titoli ufficiali come WWE, AEW, NXT, SmackDown, Raw, Intercontinental Championship.
+Traduci naturalmente espressioni come reportedly, allegedly, wants his own chance, title defense, no longer advertised, after release.
+Rispondi SOLO con JSON valido in una riga: {{"titolo":"..."}}
+
+Titolo originale:
+{source_title}
+
+Titolo attuale non accettabile:
+{current_title}
+
+URL fonte:
+{source_url}
+
+Contesto breve:
+{context}
+"""
+    with v872_model_task("emergency_title"):
+        data, used_model = generate_and_parse_json(prompt)
+    fixed = sanitize_text(str(data.get("titolo", "") or "")).strip()
+    fixed = v721_deterministic_title_cleanup(fixed)
+    if fixed and not v873_looks_untranslated_title(fixed, source_title):
+        print(f"[TITLE v87.3] Titolo emergency Gemini ({used_model}): {fixed}")
+        return fixed
+    raise RuntimeError(V873_TITLE_FAILURE_ERROR)
+
+_ORIG_V873_v721_ensure_italian_title = v721_ensure_italian_title
+
+def v721_ensure_italian_title(title, source_title="", source_text="", source_url=""):
+    with v872_model_task("title"):
+        fixed = _ORIG_V873_v721_ensure_italian_title(title, source_title, source_text, source_url)
+    if not V873_FORBID_UNTRANSLATED_TITLE:
+        return fixed
+    if not v873_looks_untranslated_title(fixed, source_title):
+        return fixed
+    print(f"[TITLE v87.3] Titolo non pubblicabile dopo title chain: {fixed}")
+    return v873_emergency_title_repair(fixed, source_title, source_text, source_url)
+
+# Ensure the final WP write cannot publish a fallback/English slug title.
+_ORIG_V873_create_post_without_image_title_guard = create_post_without_image
+
+def v873_assert_title_publishable(data, source_url=""):
+    title = (data or {}).get("titolo", "") if isinstance(data, dict) else ""
+    if V873_FORBID_UNTRANSLATED_TITLE and v873_looks_untranslated_title(title, ""):
+        print(f"[TITLE v87.3] Blocco publish: titolo non tradotto/non valido: {title}")
+        raise RuntimeError(V873_TITLE_FAILURE_ERROR)
+
+# ---------- Report strong-history guard: only true results reports ----------
+def v873_is_strict_true_results_report_key(report_key="", title="", url="", summary=""):
+    rk = str(report_key or "")
+    if not rk.startswith("report:"):
+        return False
+    # Canonical daily show reports look like report:wwe-nxt-2026-05-12.
+    if re.match(r"^report:(?:wwe-|aew-|nxt-|tna-|roh-|njpw-|aaa-)?[a-z0-9-]*\d{4}-\d{2}-\d{2}$", rk):
+        return True
+    try:
+        return bool(v865_is_true_results_report(title or "", url or "", summary or ""))
+    except Exception:
+        return False
+
+_ORIG_V873_v872_report_key_from_any = v872_report_key_from_any
+
+def v872_report_key_from_any(title="", url="", summary="", item=None):
+    rk = _ORIG_V873_v872_report_key_from_any(title=title, url=url, summary=summary, item=item)
+    if isinstance(item, dict):
+        title = title or item.get("title", "") or item.get("_review_translated_title", "")
+        url = url or item.get("url", "")
+        summary = summary or item.get("summary", "") or item.get("prefetched_text", "")
+    return rk if v873_is_strict_true_results_report_key(rk, title, url, summary) else ""
+
+_ORIG_V873_v872_mark_report_confirmed = v872_mark_report_confirmed
+
+def v872_mark_report_confirmed(report_key="", title="", url="", post_id=None, reason=""):
+    if not v873_is_strict_true_results_report_key(report_key, title, url, ""):
+        print(f"[REPORT v87.3] Non salvo in history forte: non è true-results report ({report_key})")
+        return
+    return _ORIG_V873_v872_mark_report_confirmed(report_key, title=title, url=url, post_id=post_id, reason=reason)
+
+# ---------- Positional embed preservation and X/Twitter dedupe ----------
+def v873_count_source_text_before(blocks, idx):
+    count = 0
+    for b in list(blocks or [])[:idx]:
+        if isinstance(b, dict) and b.get("type") == "text" and normalize_whitespace(b.get("text", "")):
+            count += 1
+    return count
+
+def v873_expected_embed_meta_from_blocks(blocks):
+    out = []
+    seen = set()
+    for idx, b in enumerate(blocks or []):
+        if not isinstance(b, dict) or b.get("type") != "embed":
+            continue
+        url = v872_canonical_embed_url(b.get("url", ""))
+        key = v872_embed_key(url)
+        if not url or not key or key in seen:
+            continue
+        seen.add(key)
+        out.append({
+            "url": url,
+            "key": key,
+            "after_text_count": v873_count_source_text_before(blocks, idx),
+            "source_index": idx,
+        })
+    return out
+
+_ORIG_V873_translate_ordered_content_blocks = translate_ordered_content_blocks
+
+def translate_ordered_content_blocks(source_title, blocks, source_url="", forced_title=None, forced_category=None, excluded_image_urls=None):
+    if V873_POSITIONAL_EMBED_GUARD and source_url:
+        V873_EXPECTED_EMBEDS_BY_URL[source_url] = v873_expected_embed_meta_from_blocks(blocks or [])
+    return _ORIG_V873_translate_ordered_content_blocks(source_title, blocks, source_url=source_url, forced_title=forced_title, forced_category=forced_category, excluded_image_urls=excluded_image_urls)
+
+def v873_paragraph_text(p):
+    try:
+        return normalize_whitespace(p.get_text(" ", strip=True))
+    except Exception:
+        return ""
+
+def v873_remove_x_tweet_text_duplicates(soup, expected_keys=None):
+    expected_keys = set(expected_keys or [])
+    has_x = bool(expected_keys) or bool(soup.find(string=re.compile(r"https?://x\.com/[^/]+/status/\d+", re.I))) or bool(soup.find("iframe", attrs={"data-tweet-id": True})) or bool(soup.find(class_=re.compile(r"twitter-tweet")))
+    if not has_x:
+        return 0
+    changed = 0
+    sig_re = re.compile(r"^[\-–—]\s*[^\n]{2,80}\(@?[A-Za-z0-9_]{2,20}\).*\b\d{4}\b", re.I)
+    for p in list(soup.find_all("p")):
+        txt = v873_paragraph_text(p)
+        low = txt.lower()
+        if not txt:
+            continue
+        if "https://t.co/" in low or "http://t.co/" in low:
+            p.decompose(); changed += 1; continue
+        if sig_re.search(txt):
+            p.decompose(); changed += 1; continue
+        # Remove standalone script wrapper paragraphs left by Twitter widgets.
+        if p.find("script") and not txt:
+            p.decompose(); changed += 1; continue
+    return changed
+
+def v873_insert_embed_at_text_position(soup, url, after_text_count):
+    html = render_embed_block(url)
+    if not html:
+        return False
+    new_nodes = BeautifulSoup(html, "html.parser")
+    # Count only meaningful editorial paragraphs, not embeds/source/CTA.
+    count = 0
+    last_text_p = None
+    for p in list(soup.find_all("p")):
+        txt = v873_paragraph_text(p)
+        if not txt:
+            continue
+        if v872_all_embed_urls_from_text(txt) or "FONTE" in txt.upper() or "Vuoi tutte le news" in txt:
+            continue
+        count += 1
+        last_text_p = p
+        if count >= max(1, int(after_text_count or 0)):
+            p.insert_after(new_nodes)
+            return True
+    if last_text_p:
+        last_text_p.insert_after(new_nodes)
+        return True
+    body = soup.find("article") or soup.body or soup
+    body.append(new_nodes)
+    return True
+
+def v873_enforce_positional_embeds(html="", source_url="", expected_embed_urls=None):
+    if not (V873_POSITIONAL_EMBED_GUARD and html):
+        return html
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        meta = list(V873_EXPECTED_EMBEDS_BY_URL.get(source_url or "", []) or [])
+        if not meta and expected_embed_urls:
+            meta = [{"url": v872_canonical_embed_url(u), "key": v872_embed_key(u), "after_text_count": None, "source_index": i} for i, u in enumerate(expected_embed_urls or [])]
+        expected_keys = {m.get("key") for m in meta if m.get("key")}
+        changed = 0
+        # Canonicalize all standalone embed URLs first.
+        html_before = str(soup)
+        soup = BeautifulSoup(v872_remove_duplicate_embed_urls_from_html(str(soup), expected_embed_urls=[m.get("url") for m in meta]), "html.parser")
+        if str(soup) != html_before:
+            changed += 1
+        present_keys = set()
+        for p in soup.find_all("p"):
+            txt = v873_paragraph_text(p)
+            for u in v872_all_embed_urls_from_text(txt):
+                present_keys.add(v872_embed_key(u))
+        for iframe in soup.find_all("iframe"):
+            tid = iframe.get("data-tweet-id")
+            if tid:
+                present_keys.add(f"x_status:{tid}")
+        # Insert missing embeds at their original text-position instead of appending at bottom.
+        for m in meta:
+            key = m.get("key")
+            url = m.get("url")
+            if not key or not url or key in present_keys:
+                continue
+            if v873_insert_embed_at_text_position(soup, url, m.get("after_text_count")):
+                present_keys.add(key)
+                changed += 1
+                print(f"[EMBED v87.3] Reintegrato embed in posizione originale approx after_text={m.get('after_text_count')}: {url}")
+        # If X embed exists, remove textified tweet paragraphs / t.co / signature.
+        changed += v873_remove_x_tweet_text_duplicates(soup, expected_keys={k for k in present_keys if str(k).startswith("x_status:")})
+        # Final dedupe/canonical pass after possible insertion.
+        final_html = v872_remove_duplicate_embed_urls_from_html(str(soup), expected_embed_urls=[m.get("url") for m in meta])
+        if changed:
+            print(f"[EMBED v87.3] Positional embed guard applicato: {changed} modifiche")
+        return final_html
+    except Exception as e:
+        print(f"[EMBED v87.3] Positional guard fallito: {e}")
+        return html
+
+
+# v87.3 replacement for the v87.2 embed dedupe: do not delete the standalone
+# oEmbed paragraph during the final text-node sweep.
+_ORIG_V873_v872_remove_duplicate_embed_urls_from_html = v872_remove_duplicate_embed_urls_from_html
+
+def v872_remove_duplicate_embed_urls_from_html(html="", expected_embed_urls=None):
+    if not (V872_EMBED_DEDUPE_ENABLED and html):
+        return html
+    try:
+        soup = BeautifulSoup(html or "", "html.parser")
+        seen = set()
+        changed = 0
+        expected_keys = {v872_embed_key(u) for u in (expected_embed_urls or []) if v872_embed_key(u)}
+        # Standalone WordPress-oEmbed paragraphs: keep exactly one per canonical key.
+        for p in list(soup.find_all("p")):
+            text = v873_paragraph_text(p)
+            urls = v872_all_embed_urls_from_text(text)
+            if len(urls) == 1 and normalize_whitespace(text).startswith("http"):
+                canon = urls[0]
+                key = v872_embed_key(canon)
+                if key in seen:
+                    p.decompose(); changed += 1; continue
+                seen.add(key)
+                if text != canon:
+                    p.clear(); p.append(canon); changed += 1
+        # Anchors/raw links duplicating an existing embed are removed. New inline
+        # YouTube/X links become standalone embed paragraphs at their original boundary.
+        for a in list(soup.find_all("a", href=True)):
+            href = a.get("href", "")
+            canon = v872_canonical_embed_url(href)
+            key = v872_embed_key(canon)
+            if not key or (key == canon.lower().rstrip("/") and not v872_all_embed_urls_from_text(href)):
+                continue
+            parent = a.find_parent("p")
+            parent_text = v873_paragraph_text(parent) if parent else a.get_text(" ", strip=True)
+            if key in seen or key in expected_keys:
+                if parent and v872_is_embed_url_text(parent_text):
+                    parent.decompose()
+                else:
+                    a.decompose()
+                changed += 1
+            else:
+                seen.add(key)
+                newp = soup.new_tag("p"); newp.string = canon
+                if parent:
+                    parent.insert_before(newp)
+                else:
+                    a.insert_before(newp)
+                a.decompose(); changed += 1
+        # Text-node sweep: skip text nodes that are the entire content of a kept
+        # standalone embed paragraph; otherwise remove duplicated raw URLs.
+        for node in list(soup.find_all(string=True)):
+            s = str(node)
+            urls = v872_all_embed_urls_from_text(s)
+            if not urls:
+                continue
+            parent = node.parent
+            if parent and parent.name == "p" and len(urls) == 1 and normalize_whitespace(parent.get_text(" ", strip=True)) == urls[0]:
+                continue
+            new_s = s
+            for u in urls:
+                key = v872_embed_key(u)
+                if key in seen or key in expected_keys:
+                    new_s = new_s.replace(u, "")
+                else:
+                    seen.add(key)
+            if new_s != s:
+                node.replace_with(new_s); changed += 1
+        if changed:
+            print(f"[EMBED v87.3] Canonicalizzati/deduplicati embed nel body: {changed}")
+        return str(soup)
+    except Exception as e:
+        print(f"[EMBED v87.3] Dedupe embed fallito: {e}")
+        return html
+
+# Override create_post last, combining title hard gate + positional embed guard + report strictness.
+_ORIG_V873_create_post_without_image = create_post_without_image
+
+def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+    if isinstance(data, dict):
+        data = dict(data)
+        data["testo"] = v873_enforce_positional_embeds(data.get("testo", ""), source_url=url, expected_embed_urls=embed_urls or [])
+        v873_assert_title_publishable(data, source_url=url)
+    return _ORIG_V873_create_post_without_image(data, sem_id, url, embed_urls=embed_urls, event_key=event_key, inline_images=inline_images, featured_image_url=featured_image_url)
+
+# Strong review checks: title must be translated; X embed canonical; no t.co residue when X exists.
+_ORIG_V873_save_published_html_review_item = save_published_html_review_item
+
+def save_published_html_review_item(item):
+    try:
+        if isinstance(item, dict):
+            title = item.get("_review_translated_title") or item.get("title") or ""
+            html = item.get("_review_translated_html") or ""
+            if V873_FORBID_UNTRANSLATED_TITLE and v873_looks_untranslated_title(title, item.get("title", "")):
+                print(f"[REVIEW v87.3] Warning titolo review non tradotto: {title}")
+            if html and re.search(r"https?://(?:www\.)?twitter\.com/", html, re.I):
+                print("[REVIEW v87.3] Warning twitter.com residuo nel body review")
+            if html and re.search(r"https?://t\.co/", html, re.I) and re.search(r"x\.com/[^/]+/status/\d+", html, re.I):
+                print("[REVIEW v87.3] Warning t.co residuo con embed X presente")
+    except Exception:
+        pass
+    return _ORIG_V873_save_published_html_review_item(item)
+
+# If a title hard gate raises, preserve the candidate in pending instead of crashing the run.
+_ORIG_V873_process_candidate_item = process_candidate_item
+
+def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    try:
+        return _ORIG_V873_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+    except RuntimeError as e:
+        if V873_TITLE_FAILURE_ERROR in str(e):
+            try:
+                add_pending_article(item, reason="title_model_failure_retry")
+            except Exception:
+                pass
+            print(f"[TITLE v87.3] Stop publish e pending: titolo non generato da Gemini - {item.get('title') if isinstance(item, dict) else ''}")
+            return "model_fail"
+        raise
+
+# Label cleanup for v87.3.
+try:
+    import builtins as _v873_builtins
+    _ORIG_V873_PRINT = _ORIG_V872_PRINT if "_ORIG_V872_PRINT" in globals() else print
+    def _v873_label_cleanup(obj):
+        if not isinstance(obj, str):
+            return obj
+        repl = {
+            "[MODEL v87.2]": "[MODEL v87.3]",
+            "[MODEL v83]": "[MODEL v87.3/legacy]",
+            "[REPORT v87.2]": "[REPORT v87.3]",
+            "[REPORT v86.6]": "[REPORT v87.3/legacy]",
+            "[REPORT v86.8/legacy]": "[REPORT v87.3/legacy]",
+            "[RUN v86.8/legacy]": "[RUN v87.3/legacy]",
+            "[MEDIA v86.7]": "[MEDIA v87.3/legacy]",
+            "[EMBED v87.2]": "[EMBED v87.3]",
+            "[PUBLISHED REVIEW v87.2]": "[PUBLISHED REVIEW v87.3]",
+        }
+        for old, new in repl.items():
+            obj = obj.replace(old, new)
+        return obj
+    def _v873_print(*args, **kwargs):
+        args = tuple(_v873_label_cleanup(a) for a in args)
+        return _ORIG_V873_PRINT(*args, **kwargs)
+    _v873_builtins.print = _v873_print
+except Exception:
+    pass
+
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 if __name__ == "__main__":
     if V854_BOOT_DIAGNOSTICS_ENABLED:
-        print(f"[BOOT v87.2] __main__ reached epoch={time.time():.3f}", flush=True)
+        print(f"[BOOT v87.3] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
