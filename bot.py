@@ -16757,10 +16757,380 @@ def run_bot():
     return _ORIG_V866_run_bot_raw()
 
 
+
+
+# =========================
+# v86.7 - pending publish truth fix
+# =========================
+BOT_VERSION = "v86_7_pending_publish_truth_fix"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V867_PENDING_TRUTH_FIX_ENABLED = os.getenv("V86_7_PENDING_TRUTH_FIX_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V867_STRICT_TRUE_REPORT_PENDING_ENABLED = os.getenv("V86_7_STRICT_TRUE_REPORT_PENDING_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+# Extend runtime label cleanup introduced in v86.6.
+try:
+    import builtins as _v867_builtins
+    _ORIG_V867_PRINT = _v867_builtins.print
+    def _v867_clean_label_text(obj):
+        s = str(obj)
+        replacements = {
+            "[BOOT v86.6]": "[BOOT v86.7]",
+            "[RUN v86.6]": "[RUN v86.7]",
+            "[SKIP v72.1]": "[SKIP v86.7/legacy-v72.1]",
+            "[PENDING v85.5]": "[PENDING v86.7/legacy]",
+            "[BOT v86.6]": "[BOT v86.7]",
+            "[REPORT v86.6]": "[REPORT v86.7]",
+            "[FRESHNESS v86.6]": "[FRESHNESS v86.7]",
+            "[SCORE v86.6]": "[SCORE v86.7]",
+            "[MEDIA v86.6]": "[MEDIA v86.7]",
+        }
+        for old, new in replacements.items():
+            s = s.replace(old, new)
+        return s
+    def _v867_print(*args, **kwargs):
+        args = tuple(_v867_clean_label_text(a) for a in args)
+        return _ORIG_V867_PRINT(*args, **kwargs)
+    _v867_builtins.print = _v867_print
+except Exception:
+    pass
+
+
+def v867_item_title(item):
+    try:
+        return v841_normalize_title_from_item(item)
+    except Exception:
+        return sanitize_text((item or {}).get("title", "") or "")
+
+
+def v867_item_url(item):
+    return (item or {}).get("url") or (item or {}).get("link") or ""
+
+
+def v867_item_summary(item):
+    return (item or {}).get("summary") or (item or {}).get("description") or ""
+
+
+def v867_is_true_results_item(item):
+    if not isinstance(item, dict):
+        return False
+    return bool(v865_is_true_results_report(v867_item_title(item), v867_item_url(item), v867_item_summary(item)))
+
+
+def v867_report_key(item):
+    if not isinstance(item, dict):
+        return ""
+    return (
+        item.get("report_event_key")
+        or item.get("event_key")
+        or v866_direct_report_event_key(v867_item_title(item), v867_item_url(item), v867_item_summary(item))
+    )
+
+
+def v867_candidate_key(item):
+    if not isinstance(item, dict):
+        return ""
+    if v867_is_true_results_item(item):
+        return v867_report_key(item) or v867_item_url(item) or item.get("semantic_id") or item.get("title", "")
+    return v867_item_url(item) or item.get("event_key") or item.get("semantic_id") or item.get("title_key") or item.get("title", "")
+
+
+def v867_wp_confirms_true_results_item(item, wp_available=True):
+    if not wp_available or not v867_is_true_results_item(item):
+        return False
+    report_key = v867_report_key(item)
+    title = v867_item_title(item)
+    url = v867_item_url(item)
+    try:
+        return bool(report_key and v864_wp_confirms_report_or_skip(report_key, title, url, wp_available=wp_available))
+    except Exception as e:
+        print(f"[REPORT v86.7] Verifica WP true-results fallita ({report_key or title}): {e}")
+        return False
+
+
+def v867_legacy_history_match_for_item(item, history, seen_story_signatures_v71):
+    if not isinstance(item, dict):
+        return False, ""
+    url = item.get("url") or ""
+    sem_id = item.get("semantic_id") or ""
+    title_key = item.get("title_key") or ""
+    title = item.get("title") or ""
+    summary = item.get("summary") or ""
+    story_sig = item.get("story_signature_v71") or ""
+    if not story_sig:
+        try:
+            story_sig = build_story_signature_v71(title, summary, url).get("signature", "")
+        except Exception:
+            story_sig = ""
+    if url and url in history.get("urls", set()):
+        return True, "url"
+    if sem_id and sem_id in history.get("semantic_ids", set()):
+        return True, "semantic_id"
+    if title_key and title_key in history.get("title_keys", set()):
+        return True, "title_key"
+    if story_sig and story_sig in seen_story_signatures_v71:
+        return True, "story_signature"
+    return False, ""
+
+
+# v86.7: rewrite the runtime gate instead of relying on v72.1's ambiguous pending/history check.
+# The old v72.1 gate treated "present in pending or history" as "published from pending".
+# The new gate keeps separate concepts:
+# - pending_loaded/seen: an item was loaded from the queue, not necessarily published;
+# - published_this_run: an item was really published in this run;
+# - wp_strict_confirmed: WordPress confirms an existing complete report.
+def run_bot():
+    if V854_BOOT_DIAGNOSTICS_ENABLED:
+        print(f"[BOOT v86.7] entro in run_bot epoch={time.time():.3f}", flush=True)
+
+    run_start = time.time()
+    history = load_history()
+    seen_story_fingerprints = set(history.get("story_fingerprints", set()))
+    seen_news_core_keys = set(history.get("news_core_keys", set()))
+    seen_event_keys = set(history.get("event_keys", set()))
+    seen_story_signatures_v71 = set(history.get("story_signatures_v71", set()))
+
+    wp_available = wordpress_is_available()
+    pending = load_pending_articles(history)
+
+    # Costruiamo sempre la queue feed: serve per normal/storm e per pending offline.
+    queue = build_candidates(history, wp_available=wp_available)
+    mode = determine_run_mode(queue)
+    new_post_limit = new_post_limit_for_mode(mode)
+
+    if not wp_available:
+        print("[BOT] WordPress offline: assegno score e salvo solo i candidati che sarebbero stati pubblicati, senza chiamare Gemini.")
+        save_selected_candidates_to_pending(queue, reason=f"wp_down_initial_{mode}", limit=new_post_limit)
+        return
+
+    if not check_gemini():
+        print("[BOT] Stop: nessun modello Gemini disponibile")
+        return
+
+    pending_published = 0
+    new_published = 0
+    pending_processed = 0
+    new_processed = 0
+    model_fail_streak = 0
+    validation_fail_streak = 0
+    wp_fail_streak = 0
+    source_fail_counts = {}
+
+    pending_loaded_keys = set()
+    published_this_run_keys = set()
+    processed_this_run = set()
+
+    def mark_published_keys(item):
+        key = v867_candidate_key(item)
+        if key:
+            published_this_run_keys.add(key)
+        url = v867_item_url(item)
+        if url:
+            published_this_run_keys.add(url)
+        event = (item or {}).get("event_key") or (item or {}).get("report_event_key") or ""
+        if event:
+            published_this_run_keys.add(event)
+        sem = (item or {}).get("semantic_id") or ""
+        if sem:
+            published_this_run_keys.add(sem)
+        title_key = (item or {}).get("title_key") or ""
+        if title_key:
+            published_this_run_keys.add(title_key)
+
+    # 1) Pending recovery. True-results pending is not allowed to be "consumed" merely because it exists.
+    if pending:
+        print(f"[PENDING] Elementi da recuperare: {len(pending)}")
+        for pitem in pending[:MAX_PENDING_RECOVERY_PER_RUN]:
+            if time.time() - run_start > MAX_RUN_SECONDS:
+                print("[BOT] Stop anticipato durante pending: superato timeout massimo run")
+                break
+
+            p_key = v867_candidate_key(pitem)
+            p_url = v867_item_url(pitem)
+            is_true_report = v867_is_true_results_item(pitem)
+            if p_key:
+                pending_loaded_keys.add(p_key)
+
+            if p_url and is_recent_validation_failed(p_url) and not is_true_report:
+                print(f"[SKIP v78.1] Pending sospeso per validation fail recenti: {pitem.get('title')}")
+                remove_pending_url(p_url)
+                continue
+
+            if is_true_report and V867_STRICT_TRUE_REPORT_PENDING_ENABLED:
+                report_key = v867_report_key(pitem)
+                if v867_wp_confirms_true_results_item(pitem, wp_available=wp_available):
+                    print(f"[REPORT v86.7] Pending true-results già confermato su WordPress: rimuovo {report_key}")
+                    remove_pending_report_key(report_key)
+                    remove_pending_url(p_url)
+                    continue
+                # Do not process it here through legacy pending gates. Let the fresh candidate path process it.
+                # If the feed does not contain it anymore, it stays pending for the next run.
+                print(f"[REPORT v86.7] Pending true-results non pubblicato: resta lavorabile via candidate queue {report_key or pitem.get('title')}")
+                continue
+
+            if p_key and p_key in processed_this_run:
+                print(f"[SKIP v78.1] Gia processato in questa run: {pitem.get('title')}")
+                continue
+
+            if p_key:
+                processed_this_run.add(p_key)
+            status = process_candidate_item(pitem, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+            pending_processed += 1
+            if status == "published":
+                pending_published += 1
+                mark_published_keys(pitem)
+                if pitem.get("url"):
+                    history.setdefault("urls", set()).add(pitem.get("url"))
+                if pitem.get("semantic_id"):
+                    history.setdefault("semantic_ids", set()).add(pitem.get("semantic_id"))
+                if pitem.get("title_key"):
+                    history.setdefault("title_keys", set()).add(pitem.get("title_key"))
+                    seen_news_core_keys.add(make_news_core_key(pitem.get("title", ""), pitem.get("summary", "")))
+                if pitem.get("story_signature_v71"):
+                    seen_story_signatures_v71.add(pitem.get("story_signature_v71"))
+                    history.setdefault("story_signatures_v71", set()).add(pitem.get("story_signature_v71"))
+                if pitem.get("event_key"):
+                    seen_event_keys.add(pitem.get("event_key"))
+                    history.setdefault("event_keys", set()).add(pitem.get("event_key"))
+                wp_fail_streak = 0
+            elif status == "wp_firewall":
+                print("[BOT] Firewall Imunify360 rilevato durante pending: stop per evitare spreco API")
+                return
+            elif status in {"wp_fail", "wp_down"}:
+                wp_fail_streak += 1
+                if wp_fail_streak >= MAX_WP_FAIL_STREAK:
+                    print("[BOT] WordPress instabile durante pending: stop per evitare spreco API")
+                    return
+            elif status == "model_fail":
+                model_fail_streak += 1
+            elif status == "validation_fail":
+                validation_fail_streak += 1
+            elif status == "skipped":
+                # Legacy ambiguous skip must not delete a true pending record; for normal items, old behavior is unchanged.
+                pass
+
+    if not queue and pending_published == 0:
+        print("[BOT] Nessuna news nuova trovata")
+        return
+
+    print(f"[BOT] News candidate totali: {len(queue)} | mode={mode} | max nuove={new_post_limit} | pending pubblicati={pending_published}")
+
+    tier4_published = 0
+    for idx, item in enumerate(queue):
+        if time.time() - run_start > MAX_RUN_SECONDS:
+            print("[BOT] Stop anticipato: superato timeout massimo run")
+            break
+        if new_published >= new_post_limit:
+            break
+        if new_processed >= MAX_CANDIDATES_TO_TRY:
+            print("[BOT] Raggiunto limite massimo candidati nuovi provati")
+            break
+        if model_fail_streak >= MAX_MODEL_FAIL_STREAK:
+            print("[BOT] Stop anticipato: troppi errori consecutivi di modello")
+            break
+        if validation_fail_streak >= MAX_VALIDATION_FAIL_STREAK:
+            print("[BOT] Stop anticipato: troppi errori consecutivi di validazione")
+            break
+        if wp_fail_streak >= MAX_WP_FAIL_STREAK:
+            remaining_slots = max(0, new_post_limit - new_published)
+            print("[BOT] Stop anticipato: WordPress non raggiungibile, salvo candidati pubblicabili rimanenti")
+            save_selected_candidates_to_pending(queue[idx:], reason=f"wp_down_mid_run_{mode}", limit=remaining_slots)
+            break
+
+        if item.get("editorial_tier") == "tier4" and tier4_published >= MAX_TIER4_PER_RUN:
+            print(f"[SKIP] Tier4 gia' usato in questa run: {item.get('title')}")
+            continue
+
+        item_key = v867_candidate_key(item)
+        item_url = v867_item_url(item)
+        is_true_report = v867_is_true_results_item(item)
+        report_key = v867_report_key(item) if is_true_report else ""
+
+        if item_url and is_recent_validation_failed(item_url) and not is_true_report:
+            print(f"[SKIP v78.1] URL sospeso per validation fail recenti: {item.get('title')}")
+            remove_pending_url(item_url)
+            continue
+
+        # Only really published keys block the item. Merely loaded-from-pending is not enough.
+        publish_keys_to_check = {k for k in [item_key, item_url, item.get("event_key"), item.get("report_event_key"), item.get("semantic_id"), item.get("title_key")] if k}
+        if publish_keys_to_check.intersection(published_this_run_keys):
+            print(f"[SKIP v86.7] Già pubblicata davvero in questa run: {item.get('title')}")
+            if not is_true_report:
+                remove_pending_url(item_url)
+            continue
+
+        if item_key and item_key in processed_this_run and not is_true_report:
+            print(f"[SKIP v78.1] Gia processato in questa run: {item.get('title')}")
+            remove_pending_url(item_url)
+            continue
+
+        legacy_match, legacy_reason = v867_legacy_history_match_for_item(item, history, seen_story_signatures_v71)
+        if legacy_match:
+            if is_true_report:
+                if v867_wp_confirms_true_results_item(item, wp_available=wp_available):
+                    print(f"[REPORT v86.7] True-results già confermato su WordPress ({legacy_reason}): skip {report_key}")
+                    remove_pending_report_key(report_key)
+                    remove_pending_url(item_url)
+                    continue
+                print(f"[REPORT v86.7] Ignoro gate legacy {legacy_reason}: true-results non confermato su WordPress {report_key}")
+            else:
+                print(f"[SKIP v86.7] Già in history/semantic dopo pending ({legacy_reason}): {item.get('title')}")
+                remove_pending_url(item_url)
+                continue
+
+        if item_key:
+            processed_this_run.add(item_key)
+
+        new_processed += 1
+        status = process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+
+        if status == "published":
+            new_published += 1
+            mark_published_keys(item)
+            if item.get("editorial_tier") == "tier4":
+                tier4_published += 1
+            wp_fail_streak = 0
+            model_fail_streak = 0
+            validation_fail_streak = 0
+        elif status == "wp_firewall":
+            remaining_slots = max(0, new_post_limit - new_published)
+            print("[BOT] Firewall Imunify360 rilevato: salvo candidati pubblicabili rimanenti e interrompo")
+            save_selected_candidates_to_pending(queue[idx + 1:], reason=f"wp_firewall_mid_run_{mode}", limit=remaining_slots)
+            break
+        elif status in {"wp_fail", "wp_down"}:
+            wp_fail_streak += 1
+            if wp_fail_streak >= MAX_WP_FAIL_STREAK:
+                remaining_slots = max(0, new_post_limit - new_published)
+                print("[BOT] WordPress non raggiungibile, salvo candidati pubblicabili rimanenti e interrompo")
+                save_selected_candidates_to_pending(queue[idx + 1:], reason=f"wp_down_mid_run_{mode}", limit=remaining_slots)
+                break
+        elif status == "model_fail":
+            model_fail_streak += 1
+        elif status == "validation_fail":
+            validation_fail_streak += 1
+        elif status == "skipped" and is_true_report:
+            # Do not silently consume a report. If it was not published and WP did not confirm it, keep it pending.
+            if not v867_wp_confirms_true_results_item(item, wp_available=wp_available):
+                try:
+                    existing_pending = load_pending_articles(history)
+                    if not any((p.get("report_event_key") or p.get("event_key")) == report_key or p.get("url") == item_url for p in existing_pending):
+                        add_pending_article(item, reason="true_results_not_published_keep_pending")
+                    print(f"[PENDING v86.7] Mantengo true-results in coda: non pubblicato né confermato su WordPress {report_key or item.get('title')}")
+                except Exception as e:
+                    print(f"[PENDING v86.7] Errore nel mantenere true-results pending: {e}")
+
+    total_published = pending_published + new_published
+    total_processed = pending_processed + new_processed
+    print(
+        f"[BOT] Pubblicati {total_published} articoli "
+        f"({pending_published} pending + {new_published} nuove) "
+        f"su {total_processed} candidati provati | mode={mode}"
+    )
+
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 if __name__ == "__main__":
     if V854_BOOT_DIAGNOSTICS_ENABLED:
-        print(f"[BOOT v86.6] __main__ reached epoch={time.time():.3f}", flush=True)
+        print(f"[BOOT v86.7] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
