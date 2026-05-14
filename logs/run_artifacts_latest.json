@@ -1,36 +1,36 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-14 20:12:06",
-  "bot_version": "v88_1_report_dedupe_pending_cleanup (788e8dd)",
-  "git_sha": "788e8dd79b1f8762f565c5989740470e5326e9d6",
-  "created_at": "2026-05-14T20:19:13",
+  "run_id": "2026-05-14 21:30:33",
+  "bot_version": "v88_2_editorial_performance_guards (0205aa0)",
+  "git_sha": "0205aa0dc85c658a2c150011d09fc38d2a228f1a",
+  "created_at": "2026-05-14T21:32:01",
   "published_count": 3,
   "published_post_ids": [
-    "4609",
-    "4612",
-    "4615"
+    "4618",
+    "4621",
+    "4624"
   ],
   "published_artifacts": [
     {
-      "post_id": 4609,
-      "title": "Ronda Rousey svela il match contro Becky Lynch approvato dalla WWE ma mai realizzato",
-      "source_url": "https://www.wrestlinginc.com/2173220/wwe-ronda-rousey-becky-lynch-high-profile-pitch-never-delivered/",
-      "html_file": "published/20260514_201504_001_ronda-rousey-svela-il-match-contro-becky-lynch-approvato-dalla-wwe-ma-mai-realizzato_4609_final.html",
-      "metadata_file": "published/20260514_201504_001_ronda-rousey-svela-il-match-contro-becky-lynch-approvato-dalla-wwe-ma-mai-realizzato_4609_metadata.json"
+      "post_id": 4618,
+      "title": "R-Truth: \"Non credo che porterò a termine il mio attuale contratto con la WWE\"",
+      "source_url": "https://www.ringsidenews.com/r-truth-reveals-he-not-expect-finish-his-current-wwe-deal/",
+      "html_file": "published/20260514_213111_001_r-truth-non-credo-che-porterò-a-termine-il-mio-attuale-contratto-con-la-wwe_4618_final.html",
+      "metadata_file": "published/20260514_213111_001_r-truth-non-credo-che-porterò-a-termine-il-mio-attuale-contratto-con-la-wwe_4618_metadata.json"
     },
     {
-      "post_id": 4612,
-      "title": "Tekashi 6ix9ine vorrebbe debuttare in WWE e sfida Randy Orton",
-      "source_url": "https://www.ringsidenews.com/rapper-tekashi-6ix9ine-reveals-he-wants-get-involved-wwe/",
-      "html_file": "published/20260514_201827_002_tekashi-6ix9ine-vorrebbe-debuttare-in-wwe-e-sfida-randy-orton_4612_final.html",
-      "metadata_file": "published/20260514_201827_002_tekashi-6ix9ine-vorrebbe-debuttare-in-wwe-e-sfida-randy-orton_4612_metadata.json"
+      "post_id": 4621,
+      "title": "Ronda Rousey: come Paul Heyman ha cambiato il mio modo di promuovere i match",
+      "source_url": "https://www.ringsidenews.com/ronda-rousey-credits-paul-heyman-wwe-changing-how-she-promotes-mma-fights/",
+      "html_file": "published/20260514_213133_002_ronda-rousey-come-paul-heyman-ha-cambiato-il-mio-modo-di-promuovere-i-match_4621_final.html",
+      "metadata_file": "published/20260514_213133_002_ronda-rousey-come-paul-heyman-ha-cambiato-il-mio-modo-di-promuovere-i-match_4621_metadata.json"
     },
     {
-      "post_id": 4615,
-      "title": "Fatal Influence: reazioni del pubblico WWE potrebbero cambiare piani creativi",
-      "source_url": "https://www.wrestlinginc.com/2173180/wwe-creative-plans-fatal-influence-crowd-reactions/",
-      "html_file": "published/20260514_201911_003_fatal-influence-reazioni-del-pubblico-wwe-potrebbero-cambiare-piani-creativi_4615_final.html",
-      "metadata_file": "published/20260514_201911_003_fatal-influence-reazioni-del-pubblico-wwe-potrebbero-cambiare-piani-creativi_4615_metadata.json"
+      "post_id": 4624,
+      "title": "AEW: svelati i possibili ring name di Kofi Kingston e Xavier Woods",
+      "source_url": "https://www.ringsidenews.com/possible-aew-names-kofi-kingston-xavier-woods-revealed/",
+      "html_file": "published/20260514_213200_003_aew-svelati-i-possibili-ring-name-di-kofi-kingston-e-xavier-woods_4624_final.html",
+      "metadata_file": "published/20260514_213200_003_aew-svelati-i-possibili-ring-name-di-kofi-kingston-e-xavier-woods_4624_metadata.json"
     }
   ],
   "errors": [],
