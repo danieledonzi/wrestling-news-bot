@@ -19537,17 +19537,288 @@ except Exception:
     pass
 
 
-# Runtime entrypoint - keep this at the very end so all version overrides are active.
+
+# =========================
+# v88 - media recovery, artifact persistence contract, workflow-safe filenames
+# =========================
+BOT_VERSION = "v88_media_artifact_persistence_cleanup"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V88_MEDIA_RECOVERY_ENABLED = os.getenv("V88_MEDIA_RECOVERY_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V88_FORCE_POSITIONAL_EMBEDS_ENABLED = os.getenv("V88_FORCE_POSITIONAL_EMBEDS_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V88_RECOVER_INLINE_IMAGES_ENABLED = os.getenv("V88_RECOVER_INLINE_IMAGES_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V88_MAX_RECOVERED_INLINE_IMAGES = int(os.getenv("V88_MAX_RECOVERED_INLINE_IMAGES", "12"))
+V88_WORKFLOW_SAFE_FILENAMES_ENABLED = os.getenv("V88_WORKFLOW_SAFE_FILENAMES_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+_V88_MEDIA_BY_URL = {}
+
+
+def v88_safe_filename_name(name=""):
+    """Filesystem/GitHub-artifact safe filename. Colons are invalid on NTFS."""
+    s = str(name or "")
+    s = s.replace(":", "-").replace("\r", "").replace("\n", "")
+    s = re.sub(r"[\"<>|?*]", "-", s)
+    s = re.sub(r"\s+", " ", s).strip()
+    return s or "artifact"
+
+
+def v88_sanitize_artifact_tree(root):
+    if not V88_WORKFLOW_SAFE_FILENAMES_ENABLED:
+        return 0
+    root = Path(root)
+    if not root.exists():
+        return 0
+    changed = 0
+    for path in sorted(root.rglob("*"), key=lambda p: len(p.parts), reverse=True):
+        try:
+            if not path.exists():
+                continue
+            clean = v88_safe_filename_name(path.name)
+            if clean == path.name:
+                continue
+            target = path.with_name(clean)
+            i = 1
+            while target.exists():
+                target = path.with_name(f"{target.stem}_{i}{target.suffix}")
+                i += 1
+            path.rename(target)
+            changed += 1
+            print(f"[ARTIFACT SANITIZE v88] {path} -> {target}")
+        except Exception as e:
+            print(f"[ARTIFACT SANITIZE v88] Errore rename {path}: {e}")
+    return changed
+
+
+def v88_media_record(url="", html="", embed_urls=None, inline_images=None, featured_url=""):
+    """Build a media record independent from the structured block engine.
+
+    This fixes the recurring v86/v87 issue where Ringside lazy embeds are detected
+    by get_clean_text(), but then dropped because translate_ordered_content_blocks()
+    used a text-only block sequence and process_candidate_item passed embed_urls=[]
+    when structured_used=True.
+    """
+    embed_urls = list(embed_urls or [])
+    inline_images = list(inline_images or [])
+    meta = []
+    seen_keys = set()
+    text_count = 0
+    try:
+        soup = BeautifulSoup(html or "", "html.parser")
+        root = soup.find("article") or soup.find("main") or soup.body or soup
+        nodes = list(root.find_all(["p", "blockquote", "iframe", "div", "figure", "amp-twitter", "amp-instagram", "lite-youtube", "youtube-embed"], recursive=True))
+        for node in nodes:
+            urls = []
+            try:
+                if hasattr(node, "get_text"):
+                    txt = normalize_whitespace(node.get_text(" ", strip=True))
+                else:
+                    txt = ""
+                # Count editorial text only. Embed-only paragraphs do not advance placement.
+                if node.name in {"p", "li"} and txt and not v872_all_embed_urls_from_text(txt) and not v872_is_embed_url_text(txt):
+                    if len(txt) >= 25 and "FONTE" not in txt.upper() and "Vuoi tutte le news" not in txt:
+                        text_count += 1
+                if "v871_extract_rsn_lazy_embed_urls" in globals():
+                    urls.extend(v871_extract_rsn_lazy_embed_urls(node) or [])
+                if "_node_social_embed_urls" in globals():
+                    urls.extend(_node_social_embed_urls(node) or [])
+                if txt:
+                    urls.extend(v872_all_embed_urls_from_text(txt) or [])
+                if getattr(node, "name", "") == "iframe" and node.get("src"):
+                    urls.append(node.get("src"))
+            except Exception:
+                pass
+            for raw in urls:
+                clean = v872_canonical_embed_url(raw)
+                key = v872_embed_key(clean)
+                if not clean or not key or key in seen_keys:
+                    continue
+                if not (v86_is_plausible_embed_url(clean) if "v86_is_plausible_embed_url" in globals() else social_url_is_embeddable(clean)):
+                    continue
+                seen_keys.add(key)
+                embed_urls.append(clean)
+                meta.append({
+                    "url": clean,
+                    "key": key,
+                    "after_text_count": max(1, text_count),
+                    "source_index": len(meta),
+                    "source": "v88_html_media_scan",
+                })
+        try:
+            imgs = extract_inline_images_from_article_html(html or "", featured_url=featured_url or "") or []
+            inline_images.extend(imgs)
+        except Exception:
+            pass
+    except Exception as e:
+        print(f"[MEDIA v88] Scansione media HTML fallita: {e}")
+    embed_urls = dedupe_preserve_order([v872_canonical_embed_url(u) for u in embed_urls if u])
+    inline_images = dedupe_preserve_order([u for u in inline_images if u])
+    meta2 = []
+    seen = set()
+    for m in meta:
+        key = m.get("key") or v872_embed_key(m.get("url", ""))
+        if key and key not in seen:
+            seen.add(key)
+            meta2.append(m)
+    rec = {"embeds": embed_urls, "inline_images": inline_images, "embed_meta": meta2, "html_len": len(html or "")}
+    if url:
+        _V88_MEDIA_BY_URL[url] = rec
+        if meta2 and "V873_EXPECTED_EMBEDS_BY_URL" in globals():
+            V873_EXPECTED_EMBEDS_BY_URL[url] = meta2
+            print(f"[EMBED v88] Mappa posizionale media salvata: embeds={len(meta2)} url={url}")
+    return rec
+
+
+_ORIG_V88_get_clean_text = get_clean_text
+
+def get_clean_text(url):
+    full_text, scrape_error, html, page_img, embed_urls, inline_images = _ORIG_V88_get_clean_text(url)
+    if V88_MEDIA_RECOVERY_ENABLED:
+        rec = v88_media_record(url=url, html=html or "", embed_urls=embed_urls, inline_images=inline_images, featured_url=page_img or "")
+        embed_urls = rec.get("embeds", embed_urls or [])
+        inline_images = rec.get("inline_images", inline_images or [])
+    return full_text, scrape_error, html, page_img, embed_urls, inline_images
+
+
+_ORIG_V88_build_ordered_content_blocks = build_ordered_content_blocks
+
+def build_ordered_content_blocks(html, source_url=""):
+    blocks = _ORIG_V88_build_ordered_content_blocks(html, source_url=source_url)
+    if V88_MEDIA_RECOVERY_ENABLED and source_url:
+        block_embed_count = sum(1 for b in (blocks or []) if isinstance(b, dict) and b.get("type") == "embed")
+        rec = v88_media_record(url=source_url, html=html or "")
+        if rec.get("embed_meta") and block_embed_count == 0:
+            print(f"[EMBED v88] Blocchi embed assenti ma media scan ha trovato {len(rec.get('embed_meta', []))} embed: userò positional guard")
+    return blocks
+
+
+def v88_html_embed_keys(html=""):
+    keys = set()
+    try:
+        soup = BeautifulSoup(html or "", "html.parser")
+        for p in soup.find_all("p"):
+            for u in v872_all_embed_urls_from_text(p.get_text(" ", strip=True)):
+                k = v872_embed_key(u)
+                if k:
+                    keys.add(k)
+        for iframe in soup.find_all("iframe"):
+            tid = iframe.get("data-tweet-id")
+            if tid:
+                keys.add(f"x_status:{tid}")
+            src = iframe.get("src")
+            if src:
+                k = v872_embed_key(src)
+                if k:
+                    keys.add(k)
+    except Exception:
+        pass
+    return keys
+
+
+def v88_html_has_images(html=""):
+    try:
+        soup = BeautifulSoup(html or "", "html.parser")
+        return bool(soup.find("img"))
+    except Exception:
+        return "<img" in (html or "").lower()
+
+
+def v88_recover_media_before_publish(data, url="", embed_urls=None, inline_images=None, featured_image_url=""):
+    if not isinstance(data, dict):
+        return data, embed_urls or [], inline_images or []
+    data = dict(data)
+    html = data.get("testo", "") or ""
+    rec = _V88_MEDIA_BY_URL.get(url or "") or {}
+    recovered_embeds = list(rec.get("embeds", []) or [])
+    recovered_meta = list(rec.get("embed_meta", []) or [])
+    recovered_images = list(rec.get("inline_images", []) or [])
+    final_embeds = dedupe_preserve_order([v872_canonical_embed_url(u) for u in list(embed_urls or []) + recovered_embeds if u])
+    if recovered_meta and "V873_EXPECTED_EMBEDS_BY_URL" in globals():
+        V873_EXPECTED_EMBEDS_BY_URL[url] = recovered_meta
+    if V88_FORCE_POSITIONAL_EMBEDS_ENABLED and (final_embeds or recovered_meta):
+        before_keys = v88_html_embed_keys(html)
+        html2 = v873_enforce_positional_embeds(html, source_url=url, expected_embed_urls=final_embeds)
+        after_keys = v88_html_embed_keys(html2)
+        data["testo"] = html2
+        expected_keys = {v872_embed_key(u) for u in final_embeds if v872_embed_key(u)} | {m.get("key") for m in recovered_meta if m.get("key")}
+        missing_after = [k for k in expected_keys if k and k not in after_keys]
+        if expected_keys:
+            print(f"[EMBED v88] Publish media guard: expected={len(expected_keys)} before={len(before_keys)} after={len(after_keys)} missing={len(missing_after)}")
+        # If positional guard inserted everything, do not pass embed_urls down to legacy appenders,
+        # otherwise they append duplicates at the bottom.
+        if expected_keys and not missing_after:
+            final_embeds = []
+    final_images = list(inline_images or [])
+    if V88_RECOVER_INLINE_IMAGES_ENABLED and not final_images and recovered_images and not v88_html_has_images(data.get("testo", "")):
+        final_images = recovered_images[:V88_MAX_RECOVERED_INLINE_IMAGES]
+        print(f"[MEDIA v88] Recupero immagini inline mancanti: {len(final_images)}")
+    return data, final_embeds, final_images
+
+
+_ORIG_V88_create_post_without_image = create_post_without_image
+
+def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+    data2, embed_urls2, inline_images2 = v88_recover_media_before_publish(
+        data, url=url, embed_urls=embed_urls, inline_images=inline_images, featured_image_url=featured_image_url
+    )
+    return _ORIG_V88_create_post_without_image(
+        data2, sem_id, url,
+        embed_urls=embed_urls2,
+        event_key=event_key,
+        inline_images=inline_images2,
+        featured_image_url=featured_image_url,
+    )
+
+
+# Ensure bot-side summary filenames are safe even before the workflow sanitizer runs.
+_ORIG_V88_finalize_published_html_review_index = finalize_published_html_review_index
+
+def finalize_published_html_review_index():
+    res = _ORIG_V88_finalize_published_html_review_index()
+    try:
+        changed = v88_sanitize_artifact_tree(PUBLISHED_HTML_REVIEW_DIR if "PUBLISHED_HTML_REVIEW_DIR" in globals() else "published_html_review")
+        if changed:
+            print(f"[ARTIFACT SANITIZE v88] File review normalizzati: {changed}")
+    except Exception as e:
+        print(f"[ARTIFACT SANITIZE v88] Errore post-finalize: {e}")
+    return res
+
+
+try:
+    import builtins as _v88_builtins
+    _ORIG_V88_PRINT = _ORIG_V877_PRINT if "_ORIG_V877_PRINT" in globals() else print
+    def _v88_label_cleanup(obj):
+        if not isinstance(obj, str):
+            return obj
+        repl = {
+            "[MODEL v87.7]": "[MODEL v88]",
+            "[REPORT v87.7]": "[REPORT v88]",
+            "[PENDING v87.7]": "[PENDING v88]",
+            "[PUBLISHED v87.7]": "[PUBLISHED v88]",
+            "[MASTER LOG v87.7]": "[MASTER LOG v88]",
+            "[RUN ARTIFACTS v87.7]": "[RUN ARTIFACTS v88]",
+        }
+        for old, new in repl.items():
+            obj = obj.replace(old, new)
+        return obj
+    def _v88_print(*args, **kwargs):
+        args = tuple(_v88_label_cleanup(a) for a in args)
+        return _ORIG_V88_PRINT(*args, **kwargs)
+    _v88_builtins.print = _v88_print
+except Exception:
+    pass
+
+
+# Runtime entrypoint - v88 final entrypoint, overriding v87.7 when this file is used standalone.
 if __name__ == "__main__":
     exit_code = 0
     if V854_BOOT_DIAGNOSTICS_ENABLED:
-        print(f"[BOOT v87.7] __main__ reached epoch={time.time():.3f}", flush=True)
+        print(f"[BOOT v88] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
     except V877FatalGeminiAuthError as e:
         exit_code = 2
-        print(f"[FATAL GEMINI v87.7] Run interrotta: {e}")
+        print(f"[FATAL GEMINI v88] Run interrotta: {e}")
     finally:
         finalize_published_html_review_index()
         create_review_bundle_latest()
