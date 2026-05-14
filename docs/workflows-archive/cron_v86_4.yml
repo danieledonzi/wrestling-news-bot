@@ -1,0 +1,9 @@
+name: News Cron Bot v86.4.3
+
+on:
+  schedule:
+    - cron: '0 * * * *'
+  workflow_dispatch:
+
+# Archived workflow. Kept for historical reference only.
+# Full original content was intentionally not restored here during workflow cleanup.
