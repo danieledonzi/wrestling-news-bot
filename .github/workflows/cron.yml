@@ -1,4 +1,4 @@
-name: OpenWrestlingTV Bot v87_6
+name: OpenWrestlingTV Bot v87_7
 
 on:
   workflow_dispatch:
@@ -38,7 +38,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests feedparser beautifulsoup4 google-genai
 
-      - name: Run bot v87_6
+      - name: Run bot v87_7
         id: run_bot
         env:
           WP_USER: ${{ secrets.WP_USER }}
@@ -46,6 +46,9 @@ jobs:
           WP_URL: ${{ secrets.WP_URL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL_CHAIN: gemini-3.1-flash-lite,gemini-2.5-flash-lite
+          V877_ENABLE_GEMINI_3_FLASH_PREVIEW: "1"
+          V877_FATAL_AUTH_ENABLED: "1"
+          V877_REPORT_CONFIRM_CLEANUP_ENABLED: "1"
           V86_7_PENDING_TRUTH_FIX_ENABLED: "1"
           V86_7_STRICT_TRUE_REPORT_PENDING_ENABLED: "1"
           V86_6_MEDIA_GUARD_ENABLED: "1"
@@ -58,6 +61,30 @@ jobs:
           echo "$status" > .bot_exit_code
           exit 0
 
+      - name: Sanitize artifact filenames
+        if: always()
+        run: |
+          set -e
+          python - <<'PY'
+          from pathlib import Path
+          roots = [Path('published'), Path('published_html_review'), Path('logs')]
+          for root in roots:
+              if not root.exists():
+                  continue
+              for path in sorted(root.rglob('*'), key=lambda p: len(p.parts), reverse=True):
+                  if not path.exists():
+                      continue
+                  clean_name = path.name.replace(':', '-').replace('\\r', '').replace('\\n', '')
+                  if clean_name != path.name:
+                      target = path.with_name(clean_name)
+                      i = 1
+                      while target.exists():
+                          target = path.with_name(f"{target.stem}_{i}{target.suffix}")
+                          i += 1
+                      path.rename(target)
+                      print(f"[ARTIFACT SANITIZE v87.7] {path} -> {target}")
+          PY
+
       - name: Persist bot artifacts to repository
         if: always()
         run: |
@@ -66,13 +93,14 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           mkdir -p published published_html_review logs
           touch logs/.keep published/.keep published_html_review/.keep
-          git add published/ published_html_review/ logs/ pending_queue.json history.json confirmed_published_reports.json review_bundle_latest.zip 2>/dev/null || true
+          git status --short --ignored logs published published_html_review || true
+          git add -f published/ published_html_review/ logs/ pending_queue.json history.json confirmed_published_reports.json review_bundle_latest.zip .bot_exit_code 2>/dev/null || true
           if git diff --cached --quiet; then
-            echo "[ARTIFACT PERSIST v87.6] Nessuna modifica da committare"
+            echo "[ARTIFACT PERSIST v87.7] Nessuna modifica da committare"
           else
             git commit -m "chore(bot): persist published artifacts and logs [skip ci]"
             git push
-            echo "[ARTIFACT PERSIST v87.6] Artifact e log committati nel repository"
+            echo "[ARTIFACT PERSIST v87.7] Artifact e log committati nel repository"
           fi
 
       - name: Upload bot artifacts
@@ -99,6 +127,6 @@ jobs:
             code=$(cat .bot_exit_code)
           fi
           if [ "$code" != "0" ]; then
-            echo "[BOT v87.6] Bot terminato con exit code $code"
+            echo "[BOT v87.7] Bot terminato con exit code $code"
             exit "$code"
           fi
