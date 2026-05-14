@@ -8,6 +8,21 @@ from datetime import datetime
 from pathlib import Path
 import sys
 
+import google.generativeai as genai
+
+# Configura la tua API Key
+genai.configure(api_key="LA_TUA_API_KEY")
+
+print("Elenco modelli disponibili per il tuo account:")
+print("-" * 50)
+
+for m in genai.list_models():
+    # Filtriamo per quelli che supportano la generazione di contenuti (testo/chat)
+    if 'generateContent' in m.supported_generation_methods:
+        print(f"Nome visualizzato: {m.display_name}")
+        print(f"ID Modello (da usare nel codice): {m.name}")
+        print(f"Descrizione: {m.description}")
+        print("-" * 50)
 
 BOT_VERSION = "v80_oembed_safe_localized_translation"
 
