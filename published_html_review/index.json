@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-14 16:58:06",
-  "last_bot_version": "v88_1_report_dedupe_pending_cleanup (6321029)",
-  "updated_at": "2026-05-14T16:58:26",
-  "total_items": 23,
+  "last_run_id": "2026-05-14 18:15:07",
+  "last_bot_version": "v88_1_report_dedupe_pending_cleanup (3b808f1)",
+  "updated_at": "2026-05-14T18:19:43",
+  "total_items": 26,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -188,6 +188,30 @@
       "original_html_file": "20260514_162939_003_karrion-kross-e-scarlett-commentano-gli-ultimi-licenziamenti-in-wwe_db34d3fc_original.html",
       "final_html_file": "20260514_162939_003_karrion-kross-e-scarlett-commentano-gli-ultimi-licenziamenti-in-wwe_db34d3fc_final.html",
       "metadata_file": "20260514_162939_003_karrion-kross-e-scarlett-commentano-gli-ultimi-licenziamenti-in-wwe_db34d3fc_metadata.json"
+    },
+    {
+      "run_id": "2026-05-14 18:15:07",
+      "title": "WWE: la federazione cambia i piani creativi per valorizzare Jacy Jayne",
+      "url": "https://www.ringsidenews.com/wwe-already-changing-creative-plans-due-jacy-jaynes-strong-main-roster-start/",
+      "original_html_file": "20260514_181619_001_wwe-la-federazione-cambia-i-piani-creativi-per-valorizzare-jacy-jayne_6e75e419_original.html",
+      "final_html_file": "20260514_181619_001_wwe-la-federazione-cambia-i-piani-creativi-per-valorizzare-jacy-jayne_6e75e419_final.html",
+      "metadata_file": "20260514_181619_001_wwe-la-federazione-cambia-i-piani-creativi-per-valorizzare-jacy-jayne_6e75e419_metadata.json"
+    },
+    {
+      "run_id": "2026-05-14 18:15:07",
+      "title": "WWE: aggiornamenti sui piani creativi per il ritorno di Stephanie Vaquer",
+      "url": "https://www.wrestlinginc.com/2173032/wwe-creative-status-stephanie-vaquer/",
+      "original_html_file": "20260514_181659_002_wwe-aggiornamenti-sui-piani-creativi-per-il-ritorno-di-stephanie-vaquer_e523b589_original.html",
+      "final_html_file": "20260514_181659_002_wwe-aggiornamenti-sui-piani-creativi-per-il-ritorno-di-stephanie-vaquer_e523b589_final.html",
+      "metadata_file": "20260514_181659_002_wwe-aggiornamenti-sui-piani-creativi-per-il-ritorno-di-stephanie-vaquer_e523b589_metadata.json"
+    },
+    {
+      "run_id": "2026-05-14 18:15:07",
+      "title": "AEW interessata a Mick Foley in vista della scadenza del suo contratto WWE",
+      "url": "https://www.ringsidenews.com/aew-real-interest-mick-foley-wwe-legends-contract-nears-end/",
+      "original_html_file": "20260514_181943_003_aew-interessata-a-mick-foley-in-vista-della-scadenza-del-suo-contratto-wwe_f61e0547_original.html",
+      "final_html_file": "20260514_181943_003_aew-interessata-a-mick-foley-in-vista-della-scadenza-del-suo-contratto-wwe_f61e0547_final.html",
+      "metadata_file": "20260514_181943_003_aew-interessata-a-mick-foley-in-vista-della-scadenza-del-suo-contratto-wwe_f61e0547_metadata.json"
     }
   ]
 }

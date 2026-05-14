@@ -1331,3 +1331,241 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-14 16:58:06] VERSION [v88_1_report_dedupe_pending_cleanup (6321029)] =====
 
+
+===== RUN START [2026-05-14 18:15:07] VERSION [v88_1_report_dedupe_pending_cleanup (3b808f1)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 8 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (46/75): AEW Reportedly Has 'Real' Interest In Collaborating With WWE HOFer
+[SKIP] Score sotto soglia editoriale (18/75): Major TNA Name Reportedly Turned Down Dark Side Of The Ring Interview Opportunities
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Backstage Update On WWE Creative Status Of Former Women's Champion Stephanie Vaquer
+[SKIP] Score sotto soglia editoriale (44/75): AEW Collision Ratings & Viewership Report: 5/9/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172708/karrion-kross-scarlett-wwe-releases/
+[SKIP] Score sotto soglia editoriale (16/75): Jim Ross Identifies WWE Character He Thinks Should Be Used Sparingly
+[SKIP] Score sotto soglia editoriale (18/75): AEW's Adam Copeland Offers Update On His Retirement 'Clock'
+[SKIP] Score sotto soglia editoriale (30/75): Swerve Strickland On Celebrities In Wrestling: 'There's A Time And A Place For It'
+[SCORE v86.9] Cap commentary/opinion 84->68 - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day
+[PERF v71] WP lookup event_key: 1.38s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172624/update-big-bill-aew-contract/
+[SKIP] Score sotto soglia editoriale (24/75): The Miz Explains Why He Loves WWE Unreal
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite - 5/13/2026: 3 Things We Hated And 3 We Loved
+[SKIP] Score sotto soglia editoriale (30/75): AEW Reveals Eclectic Line Up For 2026 Women's Owen Hart Tournament
+[SKIP] Score sotto soglia editoriale (30/75): AEW Reveals Bracket For 2026 Men's Owen Hart Tournament
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172570/aew-tnt-champion-kevin-knight-overcomes-returning-star-open-challenge/
+[SKIP] Score sotto soglia editoriale (16/75): AEW's Shelton Benjamin Discusses Friendship With Eddie Guerrero
+[SKIP] Score sotto soglia editoriale (62/75): Backstage Speculation On Injury Status Of WWE's Dragon Lee Following Cryptic Post
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[PERF v71] WP lookup event_key: 1.01s
+[FIX] Event key in history ma non confermata su WordPress: event:business:wwe:wrestlemania-host-bid:host-bid - provo a pubblicare
+[SCORE v86.9] Cap commentary/opinion 86->68 - Possible AEW Names For Kofi Kingston and Xavier Woods Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-internally-discussing-major-triplemania-34-change-backlash-announcement/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-still-figuring-out-john-cena-classic-plans/
+[SKIP] Score sotto soglia editoriale (24/75): Finn Balor Admits He Needs To Feel Awful After A Cheat Meal
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Finn Bálor Explains Why He Avoids Media and Public Speaking Outside WWE
+[SKIP] Score sotto soglia editoriale (49/75): Finn Bálor Explains Why He Avoids Media and Public Speaking Outside WWE
+[SKIP] URL già in history: https://www.ringsidenews.com/stephanie-vaquers-wwe-return-status-gets-major-update-injury-absence/
+[SKIP] URL già in history: https://www.ringsidenews.com/stephanie-vaquers-ex-boyfriend-el-cuatreros-wrestling-status-revealed-12-year-prison-sentence/
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Jake Paul Claims TKO Banned Him From Attending WWE Events Amid Ongoing Beef
+[SKIP] Score sotto soglia editoriale (49/75): Jake Paul Claims TKO Banned Him From Attending WWE Events Amid Ongoing Beef
+[SKIP] URL già in history: https://www.ringsidenews.com/vince-mcmahons-lawyers-defend-signal-app-use-wwe-shareholders-lawsuit/
+[SKIP] URL già in history: https://www.ringsidenews.com/nikki-cross-books-first-match-since-wwe-release-under-different-name/
+[SKIP] Score sotto soglia editoriale (49/75): GUNTHER Explains Why He Loves WWE Fans Hating Him & Why His Character Feels So Real
+[SCORE] 100 high - WWE Already Changing Creative Plans Due To Jacy Jayne's Strong Main Roster Start | WWE/main roster, top star lead: rhea ripley, nomi forti lead: rhea ripley, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name lead + evento forte, PLE/PPV, v62 ritorno/debutto, v71 freshness=0.684
+[SCORE] 88 high - Backstage Update On WWE Creative Status Of Former Women's Champion Stephanie Vaquer | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 ritorno/debutto, v71 freshness=0.829
+[SCORE] 82 high - Fit For WrestleMania and the FIFA World Cup: Stadiums on Show in 2026 | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 ritorno/debutto, v71 source reliability soft penalty, v71 freshness=0.566
+[SCORE] 79 medium - AEW Has Real Interest in Mick Foley as WWE Legends Contract Nears End | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship, v66 cap title match non-title-change, v71 source reliability soft penalty, v71 freshness=0.686
+[SCORE] 73 medium - WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, match/segmento annunciato, v71 freshness=0.608, v48 tier2: 55-74
+[SCORE] 68 medium - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day | WWE/main roster, impatto roster/storyline, release/addio, v62 corporate/business, v62 categoria business, v86.9 cap commentary/opinion 84->68, v71 freshness=0.667, v48 tier2: 55-74
+[SCORE] 63 medium - Possible AEW Names For Kofi Kingston and Xavier Woods Revealed | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 titolo/championship, v86.9 cap commentary/opinion 86->68, v71 source reliability soft penalty, v71 freshness=0.565, v48 tier2: 55-74
+[SCORE] 58 low - Former AEW Champ Swerve Strickland Reacts To Kofi Kingston's WWE Departure | WWE/main roster, impatto roster/storyline, release/addio, v62 reazioni/tributi, v71 freshness=0.584, v48 tier2: 55-74
+[SCORE] 58 low - Darby Allin Stays World Champion Following AEW Dynamite Main Event | AEW, titolo/championship, show settimanale, v62 titolo/championship, v71 freshness=0.414, v48 tier2: 55-74
+[SCORE] 49 low - John Cena Explains Why He Created the John Cena Classic Tournament | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v68 cap duro opinion/commentary, v71 source reliability soft penalty, v71 freshness=0.555, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 1 news >=90, 3 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 10 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: WWE Already Changing Creative Plans Due To Jacy Jayne's Strong Main Roster Start
+[BOT] semantic_id=wwe-already-changing-creative-plans-due-to-jacy-jaynes-strong-main-roster-start
+[SCORE] iniziale=100 priority=high
+[PERF v71] scraping articolo: 0.59s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=10, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.39s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta indiscrezioni provenienti da fonti di backstage sui piani creativi futuri della WWE per Jacy Jayne, tipico contenuto di natura RUMOR/Backstage.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Fatal Influence' (nome fazione).; Mantenere i nomi dei titoli (es. Women's Championship) in inglese.; Tradurre 'main roster run' come 'esperienza nel main roster'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta indiscrezioni provenienti da fonti di backstage sui piani creativi futuri della WWE per Jacy Jayne, tipico contenuto di natura RUMOR/Backstage.
+[PERF v71] analisi editoriale AI v72: 14.43s
+[SCORE] raffinato=68 priority=medium | WWE/main roster, top star lead: rhea ripley, nomi forti lead: rhea ripley, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name lead + evento forte, PLE/PPV, v62 ritorno/debutto, v72.3 cap rumor
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - WWE Already Changing Creative Plans Due To Jacy Jayne's Strong Main Roster Start
+[V71] story_signature=stable:charlotte_flair|alexa_bliss|rhea_ripley|story|wwe semantic_status=new_story freshness=0.684
+[PERF v71] WP recent posts dedupe: 1.09s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.41s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=10
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 27.15s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WWE: la federazione cambia i piani creativi per valorizzare Jacy Jayne
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-already-changing-creative-plans-due-to-jacy-jaynes-strong-main-roster-start-39.xml
+[MEDIA] Immagine caricata: 4596
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260514_181618_001_wwe-la-federazione-cambia-i-piani-creativi-per-valorizzare-jacy-jayne_4597_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4597
+[PERF v71] creazione post WordPress: 15.47s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-already-changing-creative-plans-due-to-jacy-jaynes-strong-main-roster-start-39.xml
+[MEDIA v85] Riutilizzo immagine già caricata: 4596
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'WWE Already Changing Creative Plans Due To Jacy Jayne's Stro': 60.07s
+[OK] Pubblicato: WWE: la federazione cambia i piani creativi per valorizzare Jacy Jayne
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260514_181619_001_wwe-la-federazione-cambia-i-piani-creativi-per-valorizzare-jacy-jayne_6e75e419_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WWE: la federazione cambia i piani creativi per valorizzare Jacy Jayne
+[PUBLISHED REVIEW v87.1] Review outer salvata: WWE: la federazione cambia i piani creativi per valorizzare Jacy Jayne
+[BOT] Elaborazione: Backstage Update On WWE Creative Status Of Former Women's Champion Stephanie Vaquer
+[BOT] semantic_id=backstage-update-on-wwe-creative-status-of-former-womens-champion-stephanie-vaquer
+[SCORE] iniziale=88 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta indiscrezioni e piani interni della WWE sul rientro di un'atleta infortunata. Non è una preview formale di uno show, ma un aggiornamento di backstage.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (WWE Women's World Championship) in inglese.; Non tradurre 'creative discussions' con calchi, usare 'piani creativi'.; Tradurre 'taking time off' come 'pausa per infortunio' e 'on hand' come 'presente'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta indiscrezioni e piani interni della WWE sul rientro di un'atleta infortunata. Non è una preview formale di uno show, ma un aggiornamento di backstage.
+[PERF v71] analisi editoriale AI v72: 7.74s
+[SCORE v86.9] Cap commentary/opinion 84->68 - Backstage Update On WWE Creative Status Of Former Women's Champion Stephanie Vaquer
+[SCORE] raffinato=68 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v66 cap title match non-title-change, v86.9 cap commentary/opinion 84->68
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Backstage Update On WWE Creative Status Of Former Women's Champion Stephanie Vaquer
+[V71] story_signature=stable:stephanie_vaquer|liv_morgan|backstage_update_on|status|wwe semantic_status=new_story freshness=0.945
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/backstage-update-on-wwe-creative-status-of-former-womens-champion-stephanie-vaquer/intro-1778777941.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 25.05s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WWE: aggiornamenti sui piani creativi per il ritorno di Stephanie Vaquer
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/backstage-update-on-wwe-creative-status-of-former-womens-champion-stephanie-vaquer/l-intro-1778777941.jpg
+[MEDIA] Immagine caricata: 4599
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260514_181657_002_wwe-aggiornamenti-sui-piani-creativi-per-il-ritorno-di-stephanie-vaquer_4600_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4600
+[PERF v71] creazione post WordPress: 4.32s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/backstage-update-on-wwe-creative-status-of-former-womens-champion-stephanie-vaquer/l-intro-1778777941.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4599
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Backstage Update On WWE Creative Status Of Former Women's Ch': 38.45s
+[OK] Pubblicato: WWE: aggiornamenti sui piani creativi per il ritorno di Stephanie Vaquer
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260514_181659_002_wwe-aggiornamenti-sui-piani-creativi-per-il-ritorno-di-stephanie-vaquer_e523b589_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WWE: aggiornamenti sui piani creativi per il ritorno di Stephanie Vaquer
+[PUBLISHED REVIEW v87.1] Review outer salvata: WWE: aggiornamenti sui piani creativi per il ritorno di Stephanie Vaquer
+[BOT] Elaborazione: Fit For WrestleMania and the FIFA World Cup: Stadiums on Show in 2026
+[BOT] semantic_id=fit-for-wrestlemania-and-the-fifa-world-cup-stadiums-on-show-in-2026
+[SCORE] iniziale=82 priority=high
+[PERF v71] scraping articolo: 0.78s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=25, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=25, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.35s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | Si tratta di un articolo di costume/curiosità che mette a confronto stadi di calcio e venue di passate edizioni di WrestleMania. Non è una news, né una preview di un evento WWE imminente.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'WrestleMania' o nomi di pay-per-view.; Mantenere i nomi degli stadi in inglese.; Evitare calchi su 'sporting sides' o 'beautiful game', contestualizzare i riferimenti calcistici e di wrestling per il pubblico italiano.
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | Si tratta di un articolo di costume/curiosità che mette a confronto stadi di calcio e venue di passate edizioni di WrestleMania. Non è una news, né una preview di un evento WWE imminente.
+[PERF v71] analisi editoriale AI v72: 2.29s
+[SCORE] raffinato=87 priority=high | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 ritorno/debutto
+[V71] story_signature=stable:fit_for|fifa_world_cup|story|wrestling semantic_status=new_story freshness=0.566
+[FIX] Event key in history ma non confermata su WordPress: event:business:wwe:wrestlemania-host-bid:host-bid - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_report chain=gemini-2.5-pro,gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-pro
+[GEMINI] Modello gemini-2.5-pro scartato: Extra data: line 1 column 6240 (char 6239)
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.1] Repair mirato blocchi mancanti: ['TEXT_025']
+[GEMINI] Uso modello: gemini-2.5-pro
+[BLOCKSEQ v72.1] Batch tradotto con gemini-2.5-pro: 1 blocchi
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=25
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=29 generato=['31']", "Numero evento alterato: WrestleMania sorgente=35 generato=['31']", "Numero evento alterato: WrestleMania sorgente=32 generato=['31']", "Numero evento alterato: WrestleMania sorgente=38 generato=['31']", "Numero evento alterato: WrestleMania sorgente=39 generato=['31']", "Numero evento alterato: WrestleMania sorgente=28 generato=['31']"]
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[TRANSLATE] Errore: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=29 generato=['31']", "Numero evento alterato: WrestleMania sorgente=35 generato=['31']", "Numero evento alterato: WrestleMania sorgente=32 generato=['31']", "Numero evento alterato: WrestleMania sorgente=38 generato=['31']", "Numero evento alterato: WrestleMania sorgente=39 generato=['31']", "Numero evento alterato: WrestleMania sorgente=28 generato=['31']"]
+[PERF v71] traduzione: 126.06s
+[SKIP] Traduzione fallita: Fit For WrestleMania and the FIFA World Cup: Stadiums on Show in 2026 (err_type=validation)
+[PERF v71] WP lookup URL esistente: 0.94s
+[BOT] Elaborazione: AEW Has Real Interest in Mick Foley as WWE Legends Contract Nears End
+[BOT] semantic_id=aew-has-real-interest-in-mick-foley-as-wwe-legends-contract-nears-end
+[SCORE] iniziale=79 priority=medium
+[PERF v71] scraping articolo: 0.58s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=11, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.44s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta indiscrezioni e speculazioni di mercato su un potenziale futuro ingaggio di Mick Foley, basandosi su report esterni riguardo alla scadenza del suo contratto WWE.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Legends contract' come 'contratto leggende' ma mantenere 'WWE Legends contract' per chiarezza di status.; 'Hardcore Legend' è un soprannome, lasciarlo invariato.; Evitare calchi come 'la notizia più grande finora', usare 'la notizia più rilevante al momento'.
+[EDITORIAL v73] final type=RUMOR | category=AEW (5) | L'articolo riporta indiscrezioni e speculazioni di mercato su un potenziale futuro ingaggio di Mick Foley, basandosi su report esterni riguardo alla scadenza del suo contratto WWE.
+[PERF v71] analisi editoriale AI v72: 4.16s
+[SCORE] raffinato=68 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship, v66 cap title match non-title-change, v72.3 cap rumor: niente boost raffinamento, v72.3 cap rumor
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - AEW Has Real Interest in Mick Foley as WWE Legends Contract Nears End
+[V71] story_signature=stable:aew_has_real_interest|mick_foley|wwe_legends_contract_nears_end|contract|wwe semantic_status=new_story freshness=0.685
+[PERF v71] WP recent posts dedupe: 1.16s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.49s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=11
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 21.62s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): AEW interessata a Mick Foley in vista della scadenza del suo contratto WWE
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/aew-has-real-interest-in-mick-foley-as-wwe-legends-contract-nears-end-08.jpg
+[MEDIA] Immagine caricata: 4602
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260514_181941_003_aew-interessata-a-mick-foley-in-vista-della-scadenza-del-suo-contratto-wwe_4603_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4603
+[PERF v71] creazione post WordPress: 2.84s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/aew-has-real-interest-in-mick-foley-as-wwe-legends-contract-nears-end-08.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4602
+[WP] Status attach image: 200
+[PERF v71] featured image: 0.62s
+[PERF v71] totale articolo pubblicato 'AEW Has Real Interest in Mick Foley as WWE Legends Contract ': 31.96s
+[OK] Pubblicato: AEW interessata a Mick Foley in vista della scadenza del suo contratto WWE
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260514_181943_003_aew-interessata-a-mick-foley-in-vista-della-scadenza-del-suo-contratto-wwe_f61e0547_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: AEW interessata a Mick Foley in vista della scadenza del suo contratto WWE
+[PUBLISHED REVIEW v87.1] Review outer salvata: AEW interessata a Mick Foley in vista della scadenza del suo contratto WWE
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 4 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-14 18:15:07_summary.json -> published_html_review/run_2026-05-14 18-15-07_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (109 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
+===== RUN END [2026-05-14 18:15:07] VERSION [v88_1_report_dedupe_pending_cleanup (3b808f1)] =====
+
