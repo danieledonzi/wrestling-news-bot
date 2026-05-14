@@ -441,3 +441,153 @@
 [REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (75 file)
 ===== RUN END [2026-05-13 12:06:28] VERSION [v86_5_true_results_report_gate (477a125)] =====
 
+
+===== RUN START [2026-05-14 12:42:37] VERSION [v88_media_artifact_persistence_cleanup (6b20ca0)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 8 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (24/75): The Miz Explains Why He Loves WWE Unreal
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite - 5/13/2026: 3 Things We Hated And 3 We Loved
+[SKIP] Score sotto soglia editoriale (30/75): AEW Reveals Eclectic Line Up For 2026 Women's Owen Hart Tournament
+[SKIP] Score sotto soglia editoriale (30/75): AEW Reveals Bracket For 2026 Men's Owen Hart Tournament
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - AEW TNT Champion Kevin Knight Overcomes Returning Star In Open Challenge
+[SKIP] Score sotto soglia editoriale (16/75): AEW's Shelton Benjamin Discusses Friendship With Eddie Guerrero
+[SKIP] Score sotto soglia editoriale (62/75): Backstage Speculation On Injury Status Of WWE's Dragon Lee Following Cryptic Post
+[SKIP] Score sotto soglia editoriale (36/75): Report: More WWE NXT Stars Expected To Be Called Up To The Main Roster This Summer
+[PERF v71] WP strict report lookup: 1.56s
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:aew-dynamite-2026-05-13 - AEW Dynamite Results 5/13 - Ten Man Tag Match, Darby Allin Defends AEW World Title
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Kevin Nash Says New Day Made Right Choice By Leaving WWE, Wrestlers Should Unionize
+[SKIP] Score sotto soglia editoriale (54/75): Kevin Nash Says New Day Made Right Choice By Leaving WWE, Wrestlers Should Unionize
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Bully Ray: John Cena Announcement At WWE Backlash Was Confusing But 'Successful'
+[SKIP] Score sotto soglia editoriale (54/75): Bully Ray: John Cena Announcement At WWE Backlash Was Confusing But 'Successful'
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Liv Morgan Doesn't Intend To Leave For Hollywood: 'I'm A Lifer'
+[SKIP] Score sotto soglia editoriale (2/75): Ronda Rousey Explains UFC's Lack Of Involvement In Carano Fight
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - Major WWE PLEs Reportedly Set To Take Place In Arizona As Part Of New Agreement
+[SKIP] Score sotto soglia editoriale (54/75): WWE SmackDown Ratings & Viewership Report: 5/8/2026
+[SCORE v86.9] Cap commentary/opinion 81->68 - Bully Ray Explains What's Not Working About The Oba Femi Open Challenge On WWE Raw
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SCORE v81.1] Cap future card announcement 83->72 - Joe Hendry Reveals He's Dropping a Full Album With WWE Music
+[PERF v71] WP lookup event_key: 1.07s
+[FIX] Event key in history ma non confermata su WordPress: event:logan-paul-diagnosis - provo a pubblicare
+[SKIP] Preview/show announcement scaduta: TNA iMPACT Preview for May 14, 2026: Confirmed Matches, Start Time and How to Watch
+[FIX] Event key in history ma non confermata su WordPress: event:logan-paul-diagnosis - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (40/75): Swerve Strickland Shuts Down Claims Tony Khan's Pettiness Has Hurt AEW
+[SKIP] Score sotto soglia editoriale (51/75): Former WWE Star Joe Gacy Reveals First Match After Wyatt Sicks Release
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Stephanie Vaquer Quietly Removed From WWE RAW Promotional Material
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Trick Williams Admits WWE Gingerbread Man Storyline Got Way Bigger Than Expected
+[SKIP] Score sotto soglia editoriale (49/75): Trick Williams Admits WWE Gingerbread Man Storyline Got Way Bigger Than Expected
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - MJF Attacks Darby Allin After Finally Signing Hair Match Contract
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Mark Briscoe Returns To AEW After Injury Absence
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - AEW Reveals Women's Owen Hart Tournament Bracket
+[SKIP] Score sotto soglia editoriale (32/75): AEW Reveals Men's Owen Hart Tournament Bracket
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Brian Cage Returns To AEW Dynamite After Brutal Injury Recovery
+[SKIP] event_key confermata su WordPress: event:cm-punk-diagnosis - Jack Perry Says CM Punk Fallout Changed Him Completely In AEW
+[SCORE] 100 high - Joe Hendry Explains How "Can We Fire Logan Paul?" Song Came Together | WWE/main roster, nomi forti titolo: logan paul, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, v62 ritorno/debutto, v71 freshness=0.563
+[SCORE] 100 high - Major WWE PLEs Reportedly Set To Take Place In Arizona As Part Of New Agreement | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v62 categoria business, v71 freshness=0.358
+[SCORE] 80 high - AEW Dynamite Results 5/13 - Ten Man Tag Match, Darby Allin Defends AEW World Title | AEW, show settimanale, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.439
+[SCORE] 79 medium - Stephanie Vaquer Quietly Removed From WWE RAW Promotional Material | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 infortunio/operazione, v66 cap title match non-title-change, v71 source reliability soft penalty, v71 freshness=0.83
+[SCORE] 79 medium - Big Bill's AEW Status Suddenly Unclear Amid Contract Questions | AEW, impatto roster/storyline, ritorno/debutto, PLE/PPV, v66 cap title match non-title-change, v71 source reliability soft penalty, v71 freshness=0.659
+[SCORE] 79 medium - Piper Niven Reveals Neck Surgery After Months Away From WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 infortunio/operazione, v62 cap injury/intervista, v71 source reliability soft penalty, v71 freshness=0.536
+[SCORE] 78 medium - AEW Reveals Women's Owen Hart Tournament Bracket | AEW, impatto roster/storyline, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v71 source reliability soft penalty, v71 freshness=0.56
+[SCORE] 76 medium - AEW TNT Champion Kevin Knight Overcomes Returning Star In Open Challenge | AEW, impatto roster/storyline, ritorno/debutto, show settimanale, v62 ritorno/debutto, v71 freshness=0.581
+[SCORE] 73 medium - Brian Cage Returns To AEW Dynamite After Brutal Injury Recovery | AEW, impatto roster/storyline, ritorno/debutto, show settimanale, v62 infortunio/operazione, v71 source reliability soft penalty, v71 freshness=0.664, v48 tier5: v71 major story bypass
+[SCORE] 73 medium - WWE's Rey Fenix Wants His Own 'Chance' As Penta Prepares For IC Title Defense | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v71 freshness=0.37, v48 tier2: 55-74
+[REPORT v86.9] Priorita true-results in coda: report:aew-dynamite-2026-05-13 - AEW Dynamite Results 5/13 - Ten Man Tag Match, Darby Allin Defends AEW World Title
+[MODE] Modalita normale: 2 news >=90, 3 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 17 | mode=normal | max nuove=3 | pending pubblicati=0
+[REPORT v86.6] True results report autorizzato dal gate stretto: report:aew-dynamite-2026-05-13 - AEW Dynamite Results 5/13 - Ten Man Tag Match, Darby Allin Defends AEW World Title
+[REPORT v79.1.6] Titolo report da event_key: AEW Dynamite del 13 maggio 2026: risultati e momenti salienti
+[REPORT] Valuto fonti per report: report:aew-dynamite-2026-05-13
+[REPORT v86.9] Nessuna fonte aggregata valida: sources=0; provo candidato corrente
+[SCRAPE] Articolo results rilevato: testo completo (14852 caratteri)
+[REPORT v86.9] Fonte corrente valutata: len=14852 completeness=271 url=https://www.wrestlinginc.com/2171646/aew-dynamite-may-13-ten-man-tag-match-darby-allin-defends-aew-world-title/
+[REPORT v86.9] Uso candidato corrente come fonte report: completeness=271 | https://www.wrestlinginc.com/2171646/aew-dynamite-may-13-ten-man-tag-match-darby-allin-defends-aew-world-title/
+[REPORT] Fonte migliore: score_completezza=271 | www.wrestlinginc.com | AEW Dynamite del 13 maggio 2026: risultati e momenti salienti
+[REPORT v86.9] Processo report_ready senza re-entry nel report gate: report:aew-dynamite-2026-05-13
+[BOT] Elaborazione: AEW Dynamite del 13 maggio 2026: risultati e momenti salienti
+[BOT] semantic_id=report-aew-dynamite-2026-05-13
+[SCORE] iniziale=80 priority=high
+[REPORT] Uso testo prefetched per report maturo (14852 caratteri)
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=52, image=8, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=52, image=8, embed=0
+[SCORE] raffinato=80 priority=high | AEW, impatto roster/storyline, ritorno/debutto, PLE/PPV, non wrestling puro, v62 titolo/championship, v75 hard results report, v77 hard report protected, v77 report score protected
+[V71] story_signature=stable:report_aew-dynamite-2026-05-13 semantic_status=new_story freshness=0.555
+[PERF v71] WP recent posts dedupe: 0.90s
+[DEDUPE BLOCKED] Doppione semantico gia' pubblicato: AEW Dynamite del 13 maggio 2026: risultati e momenti salienti
+[DEDUPE BLOCKED] Matched post ID=4515 | similarity=0.83 | reason=entity+semantic similarity | title=AEW Dynamite 13 maggio 2026: Darby Allin difende l’AEW World Championship! Risultati e momenti salienti
+[PENDING] Coda salvata: 0 elementi
+[WP] Health check cache: OK (api_status_200)
+[PENDING] Coda salvata: 1 elementi
+[PENDING] Salvata news high (80): AEW Dynamite Results 5/13 - Ten Man Tag Match, Darby Allin Defends AEW World Title
+[PENDING v86.8] Mantengo true-results in coda: non pubblicato né confermato su WordPress report:aew-dynamite-2026-05-13
+[SKIP v84.1] URL gia presente su WordPress (4530), marco history e salto: Joe Hendry Explains How "Can We Fire Logan Paul?" Song Came Together
+[PENDING] Coda salvata: 1 elementi
+[SKIP v84.1] URL gia presente su WordPress (4465), marco history e salto: Major WWE PLEs Reportedly Set To Take Place In Arizona As Part Of New Agreement
+[PENDING] Coda salvata: 1 elementi
+[SKIP v84.1] URL gia presente su WordPress (4518), marco history e salto: Stephanie Vaquer Quietly Removed From WWE RAW Promotional Material
+[PENDING] Coda salvata: 1 elementi
+[SKIP v84.1] URL gia presente su WordPress (4506), marco history e salto: Big Bill's AEW Status Suddenly Unclear Amid Contract Questions
+[PENDING] Coda salvata: 1 elementi
+[SKIP v84.1] URL gia presente su WordPress (4503), marco history e salto: Piper Niven Reveals Neck Surgery After Months Away From WWE
+[PENDING] Coda salvata: 1 elementi
+[SKIP v84.1] URL gia presente su WordPress (4509), marco history e salto: AEW Reveals Women's Owen Hart Tournament Bracket
+[PENDING] Coda salvata: 1 elementi
+[SKIP v84.1] URL gia presente su WordPress (4512), marco history e salto: AEW TNT Champion Kevin Knight Overcomes Returning Star In Open Challenge
+[PENDING] Coda salvata: 1 elementi
+[SKIP v84.1] URL gia presente su WordPress (4524), marco history e salto: Brian Cage Returns To AEW Dynamite After Brutal Injury Recovery
+[PENDING] Coda salvata: 1 elementi
+[SKIP v84.1] URL gia presente su WordPress (4475), marco history e salto: WWE's Rey Fenix Wants His Own 'Chance' As Penta Prepares For IC Title Defense
+[PENDING] Coda salvata: 1 elementi
+[SKIP v84.1] URL gia presente su WordPress (4527), marco history e salto: MJF Attacks Darby Allin After Finally Signing Hair Match Contract
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Bully Ray Explains What's Not Working About The Oba Femi Open Challenge On WWE Raw
+[BOT] semantic_id=bully-ray-explains-whats-not-working-about-the-oba-femi-open-challenge-on-wwe-raw
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=6, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta le critiche e l'analisi di Bully Ray nel suo podcast Busted Open riguardo il booking di Oba Femi a Raw, non trattandosi di un report di risultati né di una notizia di cronaca pura.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Open Challenge' come termine tecnico.; Tradurre 'strong mother trucker' adattandolo al tono colloquiale ma evitando volgarità eccessive in italiano.; Non tradurre titoli come 'WWE Hall of Famer' o nomi di match/stipulazioni.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta le critiche e l'analisi di Bully Ray nel suo podcast Busted Open riguardo il booking di Oba Femi a Raw, non trattandosi di un report di risultati né di una notizia di cronaca pura.
+[PERF v71] analisi editoriale AI v72: 2.76s
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: oba femi, bully ray, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, v68 cap opinion senza news concreta, v72.3 cap opinion
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Bully Ray Explains What's Not Working About The Oba Femi Open Challenge On WWE Raw
+[BOT] Raggiunto limite massimo candidati nuovi provati
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 12 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-13 03:34:02_summary.json -> published_html_review/run_2026-05-13 03-34-02_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-13 09:29:48_summary.json -> published_html_review/run_2026-05-13 09-29-48_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-12 17:05:18_summary.json -> published_html_review/run_2026-05-12 17-05-18_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-13 08:54:28_summary.json -> published_html_review/run_2026-05-13 08-54-28_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-13 06:49:36_summary.json -> published_html_review/run_2026-05-13 06-49-36_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-13 11:54:58_summary.json -> published_html_review/run_2026-05-13 11-54-58_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-12 21:21:29_summary.json -> published_html_review/run_2026-05-12 21-21-29_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-12 19:54:59_summary.json -> published_html_review/run_2026-05-12 19-54-59_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-12 18:40:22_summary.json -> published_html_review/run_2026-05-12 18-40-22_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-12 18:04:15_summary.json -> published_html_review/run_2026-05-12 18-04-15_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-12 18:16:45_summary.json -> published_html_review/run_2026-05-12 18-16-45_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-13 11:34:54_summary.json -> published_html_review/run_2026-05-13 11-34-54_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-12 17:20:57_summary.json -> published_html_review/run_2026-05-12 17-20-57_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-12 18:53:34_summary.json -> published_html_review/run_2026-05-12 18-53-34_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-13 12:06:28_summary.json -> published_html_review/run_2026-05-13 12-06-28_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-14 12:42:37_summary.json -> published_html_review/run_2026-05-14 12-42-37_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-12 16:01:12_summary.json -> published_html_review/run_2026-05-12 16-01-12_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-13 09:46:40_summary.json -> published_html_review/run_2026-05-13 09-46-40_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-13 09:52:45_summary.json -> published_html_review/run_2026-05-13 09-52-45_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-12 15:44:15_summary.json -> published_html_review/run_2026-05-12 15-44-15_summary.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-12 23:03:41_summary.json -> published_html_review/run_2026-05-12 23-03-41_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 21
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (76 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-14 12:42:37] VERSION [v88_media_artifact_persistence_cleanup (6b20ca0)] =====
+

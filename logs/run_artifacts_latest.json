@@ -1,0 +1,15 @@
+{
+  "schema": "owtv_run_artifacts_v87_6",
+  "run_id": "2026-05-14 12:42:37",
+  "bot_version": "v88_media_artifact_persistence_cleanup (6b20ca0)",
+  "git_sha": "6b20ca07e8833924036429ddf6f35dede8c715b2",
+  "created_at": "2026-05-14T12:42:58",
+  "published_count": 0,
+  "published_post_ids": [],
+  "published_artifacts": [],
+  "errors": [],
+  "master_log": "logs/master_log.log",
+  "master_events": "logs/master_log_events.jsonl",
+  "published_dir": "published",
+  "published_html_review_dir": "published_html_review"
+}
