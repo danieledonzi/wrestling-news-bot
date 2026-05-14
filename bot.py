@@ -11,7 +11,7 @@ import sys
 import google.generativeai as genai
 
 # Configura la tua API Key
-genai.configure(api_key="LA_TUA_API_KEY")
+genai.configure(api_key="AIzaSyBZafSGuW58w9oTUrrqrjTybIDhUEzkigM")
 
 print("Elenco modelli disponibili per il tuo account:")
 print("-" * 50)
