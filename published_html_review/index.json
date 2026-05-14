@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-14 14:24:32",
-  "last_bot_version": "v88_1_report_dedupe_pending_cleanup (48a84fb)",
-  "updated_at": "2026-05-14T14:27:25",
-  "total_items": 20,
+  "last_run_id": "2026-05-14 16:24:56",
+  "last_bot_version": "v88_1_report_dedupe_pending_cleanup (9b40361)",
+  "updated_at": "2026-05-14T16:29:50",
+  "total_items": 23,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -164,6 +164,30 @@
       "original_html_file": "20260514_142710_003_ronda-rousey-la-wwe-mi-ha-preparata-per-il-ritorno-nelle-mma-contro-gina-carano_8897c5f4_original.html",
       "final_html_file": "20260514_142710_003_ronda-rousey-la-wwe-mi-ha-preparata-per-il-ritorno-nelle-mma-contro-gina-carano_8897c5f4_final.html",
       "metadata_file": "20260514_142710_003_ronda-rousey-la-wwe-mi-ha-preparata-per-il-ritorno-nelle-mma-contro-gina-carano_8897c5f4_metadata.json"
+    },
+    {
+      "run_id": "2026-05-14 16:24:56",
+      "title": "WWE: aggiornamenti sul rientro di Stephanie Vaquer dopo l'infortunio",
+      "url": "https://www.ringsidenews.com/stephanie-vaquers-wwe-return-status-gets-major-update-injury-absence/",
+      "original_html_file": "20260514_162652_001_wwe-aggiornamenti-sul-rientro-di-stephanie-vaquer-dopo-l-infortunio_70a2c4dc_original.html",
+      "final_html_file": "20260514_162652_001_wwe-aggiornamenti-sul-rientro-di-stephanie-vaquer-dopo-l-infortunio_70a2c4dc_final.html",
+      "metadata_file": "20260514_162652_001_wwe-aggiornamenti-sul-rientro-di-stephanie-vaquer-dopo-l-infortunio_70a2c4dc_metadata.json"
+    },
+    {
+      "run_id": "2026-05-14 16:24:56",
+      "title": "El Cuatrero torna a lottare nonostante la condanna: i dettagli sulla situazione",
+      "url": "https://www.ringsidenews.com/stephanie-vaquers-ex-boyfriend-el-cuatreros-wrestling-status-revealed-12-year-prison-sentence/",
+      "original_html_file": "20260514_162732_002_el-cuatrero-torna-a-lottare-nonostante-la-condanna-i-dettagli-sulla-situazione_d549d214_original.html",
+      "final_html_file": "20260514_162732_002_el-cuatrero-torna-a-lottare-nonostante-la-condanna-i-dettagli-sulla-situazione_d549d214_final.html",
+      "metadata_file": "20260514_162732_002_el-cuatrero-torna-a-lottare-nonostante-la-condanna-i-dettagli-sulla-situazione_d549d214_metadata.json"
+    },
+    {
+      "run_id": "2026-05-14 16:24:56",
+      "title": "Karrion Kross e Scarlett commentano gli ultimi licenziamenti in WWE",
+      "url": "https://www.wrestlinginc.com/2172708/karrion-kross-scarlett-wwe-releases/",
+      "original_html_file": "20260514_162939_003_karrion-kross-e-scarlett-commentano-gli-ultimi-licenziamenti-in-wwe_db34d3fc_original.html",
+      "final_html_file": "20260514_162939_003_karrion-kross-e-scarlett-commentano-gli-ultimi-licenziamenti-in-wwe_db34d3fc_final.html",
+      "metadata_file": "20260514_162939_003_karrion-kross-e-scarlett-commentano-gli-ultimi-licenziamenti-in-wwe_db34d3fc_metadata.json"
     }
   ]
 }

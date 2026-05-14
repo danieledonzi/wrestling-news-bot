@@ -877,3 +877,264 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
 ===== RUN END [2026-05-14 14:24:32] VERSION [v88_1_report_dedupe_pending_cleanup (48a84fb)] =====
 
+
+===== RUN START [2026-05-14 16:24:56] VERSION [v88_1_report_dedupe_pending_cleanup (9b40361)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 8 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[PERF v71] WP lookup event_key: 1.13s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (16/75): Jim Ross Identifies WWE Character He Thinks Should Be Used Sparingly
+[SKIP] Score sotto soglia editoriale (18/75): AEW's Adam Copeland Offers Update On His Retirement 'Clock'
+[SKIP] Score sotto soglia editoriale (30/75): Swerve Strickland On Celebrities In Wrestling: 'There's A Time And A Place For It'
+[SCORE v86.9] Cap commentary/opinion 84->68 - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (24/75): The Miz Explains Why He Loves WWE Unreal
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite - 5/13/2026: 3 Things We Hated And 3 We Loved
+[SKIP] Score sotto soglia editoriale (30/75): AEW Reveals Eclectic Line Up For 2026 Women's Owen Hart Tournament
+[SKIP] Score sotto soglia editoriale (30/75): AEW Reveals Bracket For 2026 Men's Owen Hart Tournament
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172570/aew-tnt-champion-kevin-knight-overcomes-returning-star-open-challenge/
+[SKIP] Score sotto soglia editoriale (16/75): AEW's Shelton Benjamin Discusses Friendship With Eddie Guerrero
+[SKIP] Score sotto soglia editoriale (62/75): Backstage Speculation On Injury Status Of WWE's Dragon Lee Following Cryptic Post
+[SKIP] Score sotto soglia editoriale (36/75): Report: More WWE NXT Stars Expected To Be Called Up To The Main Roster This Summer
+[REPORT v87.2] Report confermato da history forte: report:aew-dynamite-2026-05-13
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:aew-dynamite-2026-05-13 - AEW Dynamite Results 5/13 - Ten Man Tag Match, Darby Allin Defends AEW World Title
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Kevin Nash Says New Day Made Right Choice By Leaving WWE, Wrestlers Should Unionize
+[SKIP] Score sotto soglia editoriale (54/75): Kevin Nash Says New Day Made Right Choice By Leaving WWE, Wrestlers Should Unionize
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Bully Ray: John Cena Announcement At WWE Backlash Was Confusing But 'Successful'
+[SKIP] Score sotto soglia editoriale (54/75): Bully Ray: John Cena Announcement At WWE Backlash Was Confusing But 'Successful'
+[SKIP] Score sotto soglia editoriale (14/75): WWE's Liv Morgan Doesn't Intend To Leave For Hollywood: 'I'm A Lifer'
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (24/75): Finn Balor Admits He Needs To Feel Awful After A Cheat Meal
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Finn Bálor Explains Why He Avoids Media and Public Speaking Outside WWE
+[SKIP] Score sotto soglia editoriale (49/75): Finn Bálor Explains Why He Avoids Media and Public Speaking Outside WWE
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Stephanie Vaquer's WWE Return Status Gets Major Update After Injury Absence
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:liv-morgan-stephanie-vaquer-diagnosis - Stephanie Vaquer's WWE Return Status Gets Major Update After Injury Absence
+[PERF v71] WP lookup event_key: 2.22s
+[FIX] Event key in history ma non confermata su WordPress: event:legal:stephanie-vaquer:el-cuatrero - provo a pubblicare
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Jake Paul Claims TKO Banned Him From Attending WWE Events Amid Ongoing Beef
+[SKIP] Score sotto soglia editoriale (49/75): Jake Paul Claims TKO Banned Him From Attending WWE Events Amid Ongoing Beef
+[SKIP] URL già in history: https://www.ringsidenews.com/vince-mcmahons-lawyers-defend-signal-app-use-wwe-shareholders-lawsuit/
+[SKIP] URL già in history: https://www.ringsidenews.com/nikki-cross-books-first-match-since-wwe-release-under-different-name/
+[SKIP] Score sotto soglia editoriale (49/75): GUNTHER Explains Why He Loves WWE Fans Hating Him & Why His Character Feels So Real
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - GUNTHER Explains Why WWE's Massive Audience Forced Him To Change His Look
+[SKIP] Score sotto soglia editoriale (49/75): GUNTHER Explains Why WWE's Massive Audience Forced Him To Change His Look
+[SKIP] URL già in history: https://www.ringsidenews.com/ronda-rousey-explains-how-wwe-helped-prepare-her-mma-return-against-gina-carano/
+[SCORE v81.1] Cap future card announcement 83->72 - Joe Hendry Reveals He's Dropping a Full Album With WWE Music
+[PERF v71] WP lookup event_key: 0.98s
+[FIX] Event key in history ma non confermata su WordPress: event:logan-paul-diagnosis - provo a pubblicare
+[SKIP] Preview/show announcement scaduta: TNA iMPACT Preview for May 14, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE] 98 high - Stephanie Vaquer's WWE Return Status Gets Major Update After Injury Absence | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, show settimanale, v62 ritorno/debutto, v71 freshness=0.916
+[SCORE] 98 high - Stephanie Vaquer's Ex-Boyfriend El Cuatrero's Wrestling Status Revealed After 12-Year Prison Sentence | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, evento legale/controversia, v62 evento legale grave, v71 freshness=0.559
+[SCORE] 90 high - Former WWE Stars Karrion Kross And Scarlett Comment On Latest Round Of Releases | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, release/addio, v62 categoria business, v71 freshness=0.599
+[SCORE] 73 medium - Why Ronda Rousey vs. Becky Lynch WrestleMania Match Never Happened | WWE/main roster, top star titolo: becky lynch, impatto roster/storyline, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, v66 cap opinion/commentary storyline, v71 source reliability soft penalty, v71 freshness=0.535, v48 tier2: 55-74
+[SCORE] 68 medium - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day | WWE/main roster, impatto roster/storyline, release/addio, v62 corporate/business, v62 categoria business, v86.9 cap commentary/opinion 84->68, v71 freshness=0.69, v48 tier2: 55-74
+[SCORE] 67 medium - Joe Hendry Reveals He's Dropping a Full Album With WWE Music | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v81.1 cap future card announcement 83->72, v71 source reliability soft penalty, v71 freshness=0.529, v48 tier2: 55-74
+[SCORE] 63 medium - Ronda Rousey Calls Pro Wrestling The "Purest Form Of Fight Choreography" | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, non wrestling puro, v62 ritorno/debutto, v68 cap opinion senza news concreta, v71 source reliability soft penalty, v71 freshness=0.652, v48 tier2: 55-74
+[SCORE] 58 low - Former AEW Champ Swerve Strickland Reacts To Kofi Kingston's WWE Departure | WWE/main roster, impatto roster/storyline, release/addio, v62 reazioni/tributi, v71 freshness=0.607, v48 tier2: 55-74
+[SCORE] 58 low - Darby Allin Stays World Champion Following AEW Dynamite Main Event | AEW, titolo/championship, show settimanale, v62 titolo/championship, v71 freshness=0.437, v48 tier2: 55-74
+[SCORE] 49 low - John Cena Explains Why He Created the John Cena Classic Tournament | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v68 cap duro opinion/commentary, v71 source reliability soft penalty, v71 freshness=0.578, v48 tier3: 45-54 contestuale
+[MODE] Storm mode attiva: 3 news >=90, 3 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 11 | mode=storm | max nuove=5 | pending pubblicati=0
+[BOT] Elaborazione: Stephanie Vaquer's WWE Return Status Gets Major Update After Injury Absence
+[BOT] semantic_id=stephanie-vaquers-wwe-return-status-gets-major-update-after-injury-absence
+[SCORE] iniziale=98 priority=high
+[PERF v71] scraping articolo: 0.56s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=8, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.37s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta aggiornamenti sullo status fisico e i piani creativi di una superstar infortunata, basandosi su indiscrezioni di backstage, rientrando perfettamente nella definizione di RUMOR.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'shoulder injury' come 'infortunio alla spalla' (ok) ma evitare calchi tecnici medici. 'AC joint sprain' va reso come 'distorsione dell'articolazione acromion-claveare
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta aggiornamenti sullo status fisico e i piani creativi di una superstar infortunata, basandosi su indiscrezioni di backstage, rientrando perfettamente nella definizione di RUMOR.
+[PERF v71] analisi editoriale AI v72: 26.28s
+[SCORE] raffinato=68 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, show settimanale, v62 ritorno/debutto, v72.3 cap rumor
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Stephanie Vaquer's WWE Return Status Gets Major Update After Injury Absence
+[V71] story_signature=stable:stephanie_vaquer|wwe_return_status_gets_major_update_after_injury_absence|status|wwe semantic_status=new_story freshness=0.916
+[PERF v71] WP recent posts dedupe: 1.07s
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:liv-morgan-stephanie-vaquer-diagnosis - Stephanie Vaquer's WWE Return Status Gets Major Update After Injury Absence
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.46s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=8
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione applicato con gemini-3.1-flash-lite: editorial_word_ratio=0.57 (154/269) threshold=0.70
+[PRESERVE v81] Guardrail finale testo applicato
+[PERF v71] traduzione: 58.10s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WWE: aggiornamenti sul rientro di Stephanie Vaquer dopo l'infortunio
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/stephanie-vaquers-wwe-return-status-gets-major-update-after-injury-absence-15.jpg
+[MEDIA] Immagine caricata: 4551
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260514_162651_001_wwe-aggiornamenti-sul-rientro-di-stephanie-vaquer-dopo-linfortunio_4552_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4552
+[PERF v71] creazione post WordPress: 14.09s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/stephanie-vaquers-wwe-return-status-gets-major-update-after-injury-absence-15.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4551
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Stephanie Vaquer's WWE Return Status Gets Major Update After': 101.33s
+[OK] Pubblicato: WWE: aggiornamenti sul rientro di Stephanie Vaquer dopo l'infortunio
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260514_162652_001_wwe-aggiornamenti-sul-rientro-di-stephanie-vaquer-dopo-l-infortunio_70a2c4dc_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WWE: aggiornamenti sul rientro di Stephanie Vaquer dopo l'infortunio
+[PUBLISHED REVIEW v87.1] Review outer salvata: WWE: aggiornamenti sul rientro di Stephanie Vaquer dopo l'infortunio
+[BOT] Elaborazione: Stephanie Vaquer's Ex-Boyfriend El Cuatrero's Wrestling Status Revealed After 12-Year Prison Sentence
+[BOT] semantic_id=stephanie-vaquers-ex-boyfriend-el-cuatreros-wrestling-status-revealed-after-12-year-prison-sentence
+[SCORE] iniziale=98 priority=high
+[PERF v71] scraping articolo: 0.62s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=8, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.35s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WORLD (8) conf=1.00 model=gemini-3.1-flash-lite | La notizia riguarda lo status legale e lavorativo di un wrestler al di fuori delle major, analizzando una sentenza e le sue implicazioni professionali correnti.
+[EDITORIAL v72.3] translation_notes=Mantenere 'attempted femicide' come 'tentato femminicidio'.; Tradurre 'cleared to resume' come 'autorizzato a riprendere'.; Evitare calchi su 'judicial supervision' usando 'supervisione giudiziaria'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WORLD (8) | La notizia riguarda lo status legale e lavorativo di un wrestler al di fuori delle major, analizzando una sentenza e le sue implicazioni professionali correnti.
+[PERF v71] analisi editoriale AI v72: 1.20s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Stephanie Vaquer's Ex-Boyfriend El Cuatrero's Wrestling Status Revealed After 12-Year Prison Sentence
+[SCORE] raffinato=98 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, evento legale/controversia, v62 evento legale grave
+[FIX v79.1.3] Event key legal falsa rimossa: event:legal:stephanie-vaquer:el-cuatrero -> event:postshow:stephanie-vaquer-s-ex-boyfriend-el-cuatrero-s-wrestling-12-year-prison
+[V71] story_signature=stable:stephanie_vaquer|boyfriend_el_cuatrero|wrestling_status_revealed_after|status|aaa semantic_status=new_story freshness=0.559
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=8
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 24.92s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): El Cuatrero torna a lottare nonostante la condanna: i dettagli sulla situazione
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/stephanie-vaquers-ex-boyfriend-el-cuatreros-wrestling-status-revealed-after-12-year-prison-sentence-33.jpg
+[MEDIA] Immagine caricata: 4554
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260514_162730_002_el-cuatrero-torna-a-lottare-nonostante-la-condanna-i-dettagli-sulla-situazione_4555_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4555
+[PERF v71] creazione post WordPress: 10.85s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/stephanie-vaquers-ex-boyfriend-el-cuatreros-wrestling-status-revealed-after-12-year-prison-sentence-33.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4554
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Stephanie Vaquer's Ex-Boyfriend El Cuatrero's Wrestling Stat': 38.70s
+[OK] Pubblicato: El Cuatrero torna a lottare nonostante la condanna: i dettagli sulla situazione
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260514_162732_002_el-cuatrero-torna-a-lottare-nonostante-la-condanna-i-dettagli-sulla-situazione_d549d214_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: El Cuatrero torna a lottare nonostante la condanna: i dettagli sulla situazione
+[PUBLISHED REVIEW v87.1] Review outer salvata: El Cuatrero torna a lottare nonostante la condanna: i dettagli sulla situazione
+[BOT] Elaborazione: Former WWE Stars Karrion Kross And Scarlett Comment On Latest Round Of Releases
+[BOT] semantic_id=former-wwe-stars-karrion-kross-and-scarlett-comment-on-latest-round-of-releases
+[SCORE] iniziale=90 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=11, image=2, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=2, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=BUSINESS (15) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta le opinioni e speculazioni di ex wrestler su strategie aziendali e tagli del personale (TKO). Non è una news di cronaca diretta, ma un commento soggettivo su dinamiche interne.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'releases' come 'rilasci', usa 'licenziamenti' o 'tagli al personale'.; Mantenere i nomi dei titoli (es. NXT) invariati.; Tradurre le citazioni mantenendo il tono colloquiale ma professionale.
+[EDITORIAL v73] final type=OPINION | category=BUSINESS (15) | L'articolo riporta le opinioni e speculazioni di ex wrestler su strategie aziendali e tagli del personale (TKO). Non è una news di cronaca diretta, ma un commento soggettivo su dinamiche interne.
+[PERF v71] analisi editoriale AI v72: 19.10s
+[SCORE] raffinato=54 priority=low | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, non wrestling puro, opinione generica, v62 business/dirigenza, v62 categoria business, v72.3 cap opinion: niente boost raffinamento, v72.3 cap opinion
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Former WWE Stars Karrion Kross And Scarlett Comment On Latest Round Of Releases
+[V71] story_signature=stable:wwe_stars_karrion_kross_and_scarlett_comment_on_latest_round|status|wwe semantic_status=new_story freshness=0.831
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[MODEL v88] Cooldown globale modello per la run: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=11
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/former-wwe-stars-karrion-kross-and-scarlett-comment-on-latest-round-of-releases/intro-1778756395.jpg
+[MEDIA] Immagine interna caricata: 4557
+[PERF v71] upload immagine interna: 1.25s
+[MODEL v88] task=postedit chain=gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-2.5-flash-lite
+[PERF v71] traduzione: 100.39s
+[FIX] Titolo non valido (ok) -> fallback automatico: Former WWE stars karrion kross and scarlett comment on latest round of licenziamenti
+[MODEL v88] task=title chain=gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Karrion Kross e Scarlett commentano gli ultimi licenziamenti in WWE
+[MEDIA] Immagine interna caricata: 4558
+[PERF v71] upload immagine interna: 1.05s
+[MEDIA v86.7] Reintegrate 1 immagini inline perse prima del publish: Karrion Kross e Scarlett commentano gli ultimi licenziamenti in WWE
+[MEDIA v86.7] Preservate 4 immagini inline strutturate durante strip featured
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/former-wwe-stars-karrion-kross-and-scarlett-comment-on-latest-round-of-releases/l-intro-1778756395.jpg
+[MEDIA] Immagine caricata: 4559
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260514_162938_003_karrion-kross-e-scarlett-commentano-gli-ultimi-licenziamenti-in-wwe_4560_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4560
+[PERF v71] creazione post WordPress: 6.06s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/former-wwe-stars-karrion-kross-and-scarlett-comment-on-latest-round-of-releases/l-intro-1778756395.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4559
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Former WWE Stars Karrion Kross And Scarlett Comment On Lates': 126.88s
+[OK] Pubblicato: Karrion Kross e Scarlett commentano gli ultimi licenziamenti in WWE
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260514_162939_003_karrion-kross-e-scarlett-commentano-gli-ultimi-licenziamenti-in-wwe_db34d3fc_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Karrion Kross e Scarlett commentano gli ultimi licenziamenti in WWE
+[PUBLISHED REVIEW v87.1] Review outer salvata: Karrion Kross e Scarlett commentano gli ultimi licenziamenti in WWE
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: Why Ronda Rousey vs. Becky Lynch WrestleMania Match Never Happened
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.8] Già pubblicata davvero in questa run: Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.1] future card/segment announcement non-spoiler pre-Gemini: Joe Hendry Reveals He's Dropping a Full Album With WWE Music
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Ronda Rousey Calls Pro Wrestling The "Purest Form Of Fight Choreography"
+[BOT] semantic_id=ronda-rousey-calls-pro-wrestling-the-purest-form-of-fight-choreography
+[SCORE] iniziale=63 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/ronda-rousey-calls-pro-wrestling-purest-form-fight-choreography/
+[PERF v71] scraping articolo: 0.62s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/ronda-rousey-calls-pro-wrestling-purest-form-fight-choreography/
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.38s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=OPINION conf=0.95 | category=WWE (4) conf=0.85 model=gemini-3-flash-preview | Si tratta di un'intervista in cui Ronda Rousey esprime un'opinione personale sulla natura del wrestling e riflette sulla sua carriera tra WWE e MMA.
+[EDITORIAL v72.3] translation_notes=Tradurre 'fight choreography' come 'coreografia di combattimento' o 'lotta coreografata'; Evitare il calco 'petrified' con 'pietrificata', preferire 'terrorizzata' o 'aveva il terrore' di parlare in pubblico; Non tradurre i termini tecnici come crossover star o i nomi delle sigle (WWE, UFC, MMA)
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | Si tratta di un'intervista in cui Ronda Rousey esprime un'opinione personale sulla natura del wrestling e riflette sulla sua carriera tra WWE e MMA.
+[PERF v71] analisi editoriale AI v72: 8.36s
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, non wrestling puro, v62 ritorno/debutto, v68 cap opinion senza news concreta, v72.3 cap opinion: niente boost raffinamento, v72.3 cap opinion
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Ronda Rousey Calls Pro Wrestling The "Purest Form Of Fight Choreography"
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Ronda Rousey Calls Pro Wrestling The "Purest Form Of Fight Choreography"
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: Former AEW Champ Swerve Strickland Reacts To Kofi Kingston's WWE Departure
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:58: Darby Allin Stays World Champion Following AEW Dynamite Main Event
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: John Cena Explains Why He Created the John Cena Classic Tournament
+[PENDING] Coda salvata: 0 elementi
+[SKIP v84.1] Storm anti-spreco: score 44<55, non chiamo Gemini - Update On Big Bill's AEW Contract
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 10 candidati provati | mode=storm
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-14 16:24:56_summary.json -> published_html_review/run_2026-05-14 16-24-56_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (97 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
+===== RUN END [2026-05-14 16:24:56] VERSION [v88_1_report_dedupe_pending_cleanup (9b40361)] =====
+
