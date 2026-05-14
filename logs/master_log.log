@@ -2248,3 +2248,162 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
 ===== RUN END [2026-05-14 21:42:08] VERSION [v88_2_editorial_performance_guards (0c049ad)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+
+===== RUN START [2026-05-14 22:50:12] VERSION [v88_2_editorial_performance_guards (0d6d2e1)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 8 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (0/75): Dana White Encourages UFC Fighters To Unionize
+[SKIP] Score sotto soglia editoriale (14/75): Khamzat Chimaev's Body Failed Him At UFC 328, According To His Brother
+[SKIP] Score sotto soglia editoriale (13/75): MLW Set To Revive TV Show After 3 Years
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173220/wwe-ronda-rousey-becky-lynch-high-profile-pitch-never-delivered/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173180/wwe-creative-plans-fatal-influence-crowd-reactions/
+[SKIP] Score sotto soglia editoriale (46/75): AEW Reportedly Has 'Real' Interest In Collaborating With WWE HOFer
+[SKIP] Score sotto soglia editoriale (18/75): Major TNA Name Reportedly Turned Down Dark Side Of The Ring Interview Opportunities
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173032/wwe-creative-status-stephanie-vaquer/
+[SKIP] Score sotto soglia editoriale (44/75): AEW Collision Ratings & Viewership Report: 5/9/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172708/karrion-kross-scarlett-wwe-releases/
+[SKIP] Score sotto soglia editoriale (16/75): Jim Ross Identifies WWE Character He Thinks Should Be Used Sparingly
+[SKIP] Score sotto soglia editoriale (18/75): AEW's Adam Copeland Offers Update On His Retirement 'Clock'
+[SKIP] Score sotto soglia editoriale (30/75): Swerve Strickland On Celebrities In Wrestling: 'There's A Time And A Place For It'
+[SCORE v86.9] Cap commentary/opinion 84->68 - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day
+[PERF v71] WP lookup event_key: 1.01s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172624/update-big-bill-aew-contract/
+[SKIP] Score sotto soglia editoriale (24/75): The Miz Explains Why He Loves WWE Unreal
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite - 5/13/2026: 3 Things We Hated And 3 We Loved
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[PERF v71] WP lookup event_key: 0.96s
+[FIX] Event key in history ma non confermata su WordPress: event:business:media-rights - provo a pubblicare
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-house-show-tickets-expected-much-cheaper-this-summer/
+[SKIP] URL già in history: https://www.ringsidenews.com/ronda-rousey-credits-paul-heyman-wwe-changing-how-she-promotes-mma-fights/
+[SKIP] Score sotto soglia editoriale (51/75): Sareee's Status for AEW's Owen Hart Foundation Tournament After Injury Announcement
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Teddy Long Addresses WWE SmackDown Return Rumors
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Teddy Long Addresses WWE SmackDown Return Rumors
+[SKIP] Score sotto soglia editoriale (49/75): Teddy Long Addresses WWE SmackDown Return Rumors
+[SKIP] URL già in history: https://www.ringsidenews.com/r-truth-reveals-he-not-expect-finish-his-current-wwe-deal/
+[SKIP] Score sotto soglia editoriale (57/75): Ridge Holland Claims Vince McMahon & Bruce Prichard "Messed" With Him After Big E Injury
+[SKIP] Score sotto soglia editoriale (21/75): Tony Khan Addresses Future of AEW Action Figures After Jazwares Layoffs
+[SKIP] URL già in history: https://www.ringsidenews.com/rapper-tekashi-6ix9ine-reveals-he-wants-get-involved-wwe/
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-real-interest-mick-foley-wwe-legends-contract-nears-end/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-already-changing-creative-plans-due-jacy-jaynes-strong-main-roster-start/
+[SCORE v88.2] v88.2 cap feature storico numerico 87->60 - Fit For WrestleMania and the FIFA World Cup: Stadiums on Show in 2026
+[PERF v71] WP lookup event_key: 1.23s
+[FIX] Event key in history ma non confermata su WordPress: event:business:wwe:wrestlemania-host-bid:host-bid - provo a pubblicare
+[SCORE] 100 high - WWE 2K Developers Hit Hard in Company-Wide Layoffs | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, ritorno/debutto, v62 business/dirigenza, v62 categoria business, v71 freshness=0.807
+[SCORE] 73 medium - WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, match/segmento annunciato, v71 freshness=0.551, v48 tier2: 55-74
+[SCORE] 68 medium - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day | WWE/main roster, impatto roster/storyline, release/addio, v62 corporate/business, v62 categoria business, v86.9 cap commentary/opinion 84->68, v71 freshness=0.61, v48 tier2: 55-74
+[SCORE] 59 low - Tony Khan's ROH Supercard of Honor Media Call Highlights for May 14, 2026 | AEW, impatto roster/storyline, infortunio, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.643, v48 tier2: 55-74
+[SCORE] 58 low - Former AEW Champ Swerve Strickland Reacts To Kofi Kingston's WWE Departure | WWE/main roster, impatto roster/storyline, release/addio, v62 reazioni/tributi, v71 freshness=0.526, v48 tier2: 55-74
+[SCORE] 58 low - Darby Allin Stays World Champion Following AEW Dynamite Main Event | AEW, titolo/championship, show settimanale, v62 titolo/championship, v71 freshness=0.357, v48 tier2: 55-74
+[SCORE] 55 low - FIFA World Cup: Who Are WWE Stars Cheering For? | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.542, v48 tier2: 55-74
+[SCORE] 55 low - Fit For WrestleMania and the FIFA World Cup: Stadiums on Show in 2026 | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 ritorno/debutto, v88.2 cap feature storico numerico 87->60, v71 source reliability soft penalty, v71 freshness=0.509, v48 tier2: 55-74
+[SCORE] 49 low - Jey Uso Claims He's the Best in the Game Right Now | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v62 titolo/championship, v68 cap duro opinion/commentary, v71 source reliability soft penalty, v71 freshness=0.568, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 9 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: WWE 2K Developers Hit Hard in Company-Wide Layoffs
+[BOT] semantic_id=wwe-2k-developers-hit-hard-in-company-wide-layoffs
+[SCORE] iniziale=100 priority=high
+[PERF v71] scraping articolo: 0.58s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=11, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.33s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=BUSINESS (15) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta licenziamenti aziendali reali presso Visual Concepts, legati a dinamiche societarie e non a storyline.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (WWE 2K26) in inglese.; Tradurre 'layoffs' come licenziamenti, evitando il calco 'rilasci'.; Prestare attenzione a non confondere il business dei videogame con le storyline WWE.
+[CATEGORY v73] Business downgrade: BUSINESS -> WWE | focus non business reale
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta licenziamenti aziendali reali presso Visual Concepts, legati a dinamiche societarie e non a storyline. | v73 business downgrade
+[PERF v71] analisi editoriale AI v72: 2.49s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE 2K Developers Hit Hard in Company-Wide Layoffs
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, ritorno/debutto, v62 business/dirigenza, v62 categoria business
+[V71] story_signature=stable:developers_hit_hard|wide_layoffs|story|wwe semantic_status=new_story freshness=0.806
+[PERF v71] WP recent posts dedupe: 1.20s
+[FIX] Event key in history ma non confermata su WordPress: event:business:media-rights - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.59s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=11
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 16.41s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Licenziamenti in Visual Concepts: colpito il team di sviluppo di WWE 2K
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-2k-developers-hit-hard-in-company-wide-layoffs-06.jpg
+[MEDIA] Immagine caricata: 4629
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260514_225137_001_licenziamenti-in-visual-concepts-colpito-il-team-di-sviluppo-di-wwe-2k_4630_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4630
+[PERF v71] creazione post WordPress: 3.61s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-2k-developers-hit-hard-in-company-wide-layoffs-06.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4629
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'WWE 2K Developers Hit Hard in Company-Wide Layoffs': 25.45s
+[OK] Pubblicato: Licenziamenti in Visual Concepts: colpito il team di sviluppo di WWE 2K
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260514_225138_001_licenziamenti-in-visual-concepts-colpito-il-team-di-sviluppo-di-wwe-2k_fe64b4e5_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Licenziamenti in Visual Concepts: colpito il team di sviluppo di WWE 2K
+[PUBLISHED REVIEW v87.1] Review outer salvata: Licenziamenti in Visual Concepts: colpito il team di sviluppo di WWE 2K
+[BOT] Elaborazione: WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down
+[BOT] semantic_id=wwes-john-cena-classic-reportedly-a-work-in-progress-with-few-details-nailed-down
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta indiscrezioni e incertezze (work in progress) sui piani futuri della WWE per un evento, non è una preview ufficiale né un report di un evento avvenuto.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'work in progress', usare 'in fase di elaborazione' o 'ancora in alto mare'.; 'Nailed down' va tradotto come 'definiti' o 'fissati'.; 'Retirement match' va tradotto come 'match di ritiro'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta indiscrezioni e incertezze (work in progress) sui piani futuri della WWE per un evento, non è una preview ufficiale né un report di un evento avvenuto.
+[PERF v71] analisi editoriale AI v72: 1.14s
+[SCORE] raffinato=68 priority=medium | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, combo top name titolo + evento forte, show settimanale, v62 media rights/streaming, v72.3 cap rumor: niente boost raffinamento, v72.3 cap rumor
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:media-rights -> event:rumor:s-john-cena-classic-a-work-progress-few-details-nailed-down
+[V71] story_signature=stable:john_cena|john_cena_classic_reportedly|work_in_progress|title|wwe semantic_status=new_story freshness=0.784
+[SKIP] News core già pubblicata da altra fonte: WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down
+[SKIP] news_core_key=schedule-backlash
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day
+[BOT] semantic_id=eric-bischoff-reveals-why-he-wasnt-surprised-by-wwe-releasing-the-new-day
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=6, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=0.95 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta le opinioni e l'analisi di Eric Bischoff riguardo alle dinamiche di mercato e al licenziamento del New Day, configurandosi come un commento tecnico di un ex addetto ai lavori.
+[EDITORIAL v72.3] translation_notes=Mantenere 'The New Day' come nome proprio.; Tradurre 'releasing' come 'licenziamento' o 'addio', non 'rilascio'.; 'Hangover agreements' va reso come 'contratti residui' o 'vecchi accordi'.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta le opinioni e l'analisi di Eric Bischoff riguardo alle dinamiche di mercato e al licenziamento del New Day, configurandosi come un commento tecnico di un ex addetto ai lavori.
+[PERF v71] analisi editoriale AI v72: 1.98s
+[SCORE] raffinato=54 priority=low | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, v62 business/dirigenza, v62 categoria business, v72.3 cap opinion: niente boost raffinamento, v72.3 cap opinion
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day
+[SKIP v88.2] Feature/OTHER non-news sotto priorita hard: Tony Khan's ROH Supercard of Honor Media Call Highlights for May 14, 2026
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: Former AEW Champ Swerve Strickland Reacts To Kofi Kingston's WWE Departure
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:58: Darby Allin Stays World Champion Following AEW Dynamite Main Event
+[PENDING] Coda salvata: 0 elementi
+[SKIP v88.2] Feature/OTHER non-news sotto priorita hard: FIFA World Cup: Who Are WWE Stars Cheering For?
+[SKIP v88.2] Feature/OTHER non-news sotto priorita hard: Fit For WrestleMania and the FIFA World Cup: Stadiums on Show in 2026
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: Jey Uso Claims He's the Best in the Game Right Now
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 9 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-14 22:50:12_summary.json -> published_html_review/run_2026-05-14 22-50-12_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (137 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
+===== RUN END [2026-05-14 22:50:12] VERSION [v88_2_editorial_performance_guards (0d6d2e1)] =====
+
