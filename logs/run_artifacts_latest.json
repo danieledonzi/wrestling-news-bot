@@ -1,36 +1,36 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-14 18:15:07",
-  "bot_version": "v88_1_report_dedupe_pending_cleanup (3b808f1)",
-  "git_sha": "3b808f19ecde3c35a6d2a0c04e1b3592a5d5b0c3",
-  "created_at": "2026-05-14T18:19:43",
+  "run_id": "2026-05-14 20:12:06",
+  "bot_version": "v88_1_report_dedupe_pending_cleanup (788e8dd)",
+  "git_sha": "788e8dd79b1f8762f565c5989740470e5326e9d6",
+  "created_at": "2026-05-14T20:19:13",
   "published_count": 3,
   "published_post_ids": [
-    "4597",
-    "4600",
-    "4603"
+    "4609",
+    "4612",
+    "4615"
   ],
   "published_artifacts": [
     {
-      "post_id": 4597,
-      "title": "WWE: la federazione cambia i piani creativi per valorizzare Jacy Jayne",
-      "source_url": "https://www.ringsidenews.com/wwe-already-changing-creative-plans-due-jacy-jaynes-strong-main-roster-start/",
-      "html_file": "published/20260514_181618_001_wwe-la-federazione-cambia-i-piani-creativi-per-valorizzare-jacy-jayne_4597_final.html",
-      "metadata_file": "published/20260514_181618_001_wwe-la-federazione-cambia-i-piani-creativi-per-valorizzare-jacy-jayne_4597_metadata.json"
+      "post_id": 4609,
+      "title": "Ronda Rousey svela il match contro Becky Lynch approvato dalla WWE ma mai realizzato",
+      "source_url": "https://www.wrestlinginc.com/2173220/wwe-ronda-rousey-becky-lynch-high-profile-pitch-never-delivered/",
+      "html_file": "published/20260514_201504_001_ronda-rousey-svela-il-match-contro-becky-lynch-approvato-dalla-wwe-ma-mai-realizzato_4609_final.html",
+      "metadata_file": "published/20260514_201504_001_ronda-rousey-svela-il-match-contro-becky-lynch-approvato-dalla-wwe-ma-mai-realizzato_4609_metadata.json"
     },
     {
-      "post_id": 4600,
-      "title": "WWE: aggiornamenti sui piani creativi per il ritorno di Stephanie Vaquer",
-      "source_url": "https://www.wrestlinginc.com/2173032/wwe-creative-status-stephanie-vaquer/",
-      "html_file": "published/20260514_181657_002_wwe-aggiornamenti-sui-piani-creativi-per-il-ritorno-di-stephanie-vaquer_4600_final.html",
-      "metadata_file": "published/20260514_181657_002_wwe-aggiornamenti-sui-piani-creativi-per-il-ritorno-di-stephanie-vaquer_4600_metadata.json"
+      "post_id": 4612,
+      "title": "Tekashi 6ix9ine vorrebbe debuttare in WWE e sfida Randy Orton",
+      "source_url": "https://www.ringsidenews.com/rapper-tekashi-6ix9ine-reveals-he-wants-get-involved-wwe/",
+      "html_file": "published/20260514_201827_002_tekashi-6ix9ine-vorrebbe-debuttare-in-wwe-e-sfida-randy-orton_4612_final.html",
+      "metadata_file": "published/20260514_201827_002_tekashi-6ix9ine-vorrebbe-debuttare-in-wwe-e-sfida-randy-orton_4612_metadata.json"
     },
     {
-      "post_id": 4603,
-      "title": "AEW interessata a Mick Foley in vista della scadenza del suo contratto WWE",
-      "source_url": "https://www.ringsidenews.com/aew-real-interest-mick-foley-wwe-legends-contract-nears-end/",
-      "html_file": "published/20260514_181941_003_aew-interessata-a-mick-foley-in-vista-della-scadenza-del-suo-contratto-wwe_4603_final.html",
-      "metadata_file": "published/20260514_181941_003_aew-interessata-a-mick-foley-in-vista-della-scadenza-del-suo-contratto-wwe_4603_metadata.json"
+      "post_id": 4615,
+      "title": "Fatal Influence: reazioni del pubblico WWE potrebbero cambiare piani creativi",
+      "source_url": "https://www.wrestlinginc.com/2173180/wwe-creative-plans-fatal-influence-crowd-reactions/",
+      "html_file": "published/20260514_201911_003_fatal-influence-reazioni-del-pubblico-wwe-potrebbero-cambiare-piani-creativi_4615_final.html",
+      "metadata_file": "published/20260514_201911_003_fatal-influence-reazioni-del-pubblico-wwe-potrebbero-cambiare-piani-creativi_4615_metadata.json"
     }
   ],
   "errors": [],

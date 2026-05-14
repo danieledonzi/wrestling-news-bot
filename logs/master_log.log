@@ -1569,3 +1569,280 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
 ===== RUN END [2026-05-14 18:15:07] VERSION [v88_1_report_dedupe_pending_cleanup (3b808f1)] =====
 
+
+===== RUN START [2026-05-14 20:12:06] VERSION [v88_1_report_dedupe_pending_cleanup (788e8dd)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 8 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Ronda Rousey Details High-Profile Pitch That WWE Approved But Never Delivered
+[SKIP] Score sotto soglia editoriale (46/75): AEW Reportedly Has 'Real' Interest In Collaborating With WWE HOFer
+[SKIP] Score sotto soglia editoriale (18/75): Major TNA Name Reportedly Turned Down Dark Side Of The Ring Interview Opportunities
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173032/wwe-creative-status-stephanie-vaquer/
+[SKIP] Score sotto soglia editoriale (44/75): AEW Collision Ratings & Viewership Report: 5/9/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172708/karrion-kross-scarlett-wwe-releases/
+[SKIP] Score sotto soglia editoriale (16/75): Jim Ross Identifies WWE Character He Thinks Should Be Used Sparingly
+[SKIP] Score sotto soglia editoriale (18/75): AEW's Adam Copeland Offers Update On His Retirement 'Clock'
+[SKIP] Score sotto soglia editoriale (30/75): Swerve Strickland On Celebrities In Wrestling: 'There's A Time And A Place For It'
+[SCORE v86.9] Cap commentary/opinion 84->68 - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day
+[PERF v71] WP lookup event_key: 1.04s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172624/update-big-bill-aew-contract/
+[SKIP] Score sotto soglia editoriale (24/75): The Miz Explains Why He Loves WWE Unreal
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite - 5/13/2026: 3 Things We Hated And 3 We Loved
+[SKIP] Score sotto soglia editoriale (30/75): AEW Reveals Eclectic Line Up For 2026 Women's Owen Hart Tournament
+[SKIP] Score sotto soglia editoriale (30/75): AEW Reveals Bracket For 2026 Men's Owen Hart Tournament
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172570/aew-tnt-champion-kevin-knight-overcomes-returning-star-open-challenge/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (57/75): Ridge Holland Claims Vince McMahon & Bruce Prichard "Messed" With Him After Big E Injury
+[SKIP] Score sotto soglia editoriale (21/75): Tony Khan Addresses Future of AEW Action Figures After Jazwares Layoffs
+[PERF v71] WP lookup event_key: 1.06s
+[FIX] Event key in history ma non confermata su WordPress: event:logan-paul-2017-controversy - provo a pubblicare
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-real-interest-mick-foley-wwe-legends-contract-nears-end/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-already-changing-creative-plans-due-jacy-jaynes-strong-main-roster-start/
+[PERF v71] WP lookup event_key: 0.99s
+[FIX] Event key in history ma non confermata su WordPress: event:business:wwe:wrestlemania-host-bid:host-bid - provo a pubblicare
+[SCORE v86.9] Cap commentary/opinion 86->68 - Possible AEW Names For Kofi Kingston and Xavier Woods Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-internally-discussing-major-triplemania-34-change-backlash-announcement/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-still-figuring-out-john-cena-classic-plans/
+[SKIP] Score sotto soglia editoriale (24/75): Finn Balor Admits He Needs To Feel Awful After A Cheat Meal
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Finn Bálor Explains Why He Avoids Media and Public Speaking Outside WWE
+[SKIP] Score sotto soglia editoriale (49/75): Finn Bálor Explains Why He Avoids Media and Public Speaking Outside WWE
+[SKIP] URL già in history: https://www.ringsidenews.com/stephanie-vaquers-wwe-return-status-gets-major-update-injury-absence/
+[SCORE] 100 high - Ronda Rousey Details High-Profile Pitch That WWE Approved But Never Delivered | WWE/main roster, top star titolo: becky lynch, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, v62 ritorno/debutto, v71 freshness=0.717
+[SCORE] 82 high - Fit For WrestleMania and the FIFA World Cup: Stadiums on Show in 2026 | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 ritorno/debutto, v71 source reliability soft penalty, v71 freshness=0.542
+[SCORE] 73 medium - WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, match/segmento annunciato, v71 freshness=0.584, v48 tier2: 55-74
+[SCORE] 69 medium - Rapper Tekashi 6ix9ine Reveals He Wants to Get Involved With WWE | WWE/main roster, top star lead: randy orton, nomi forti lead: randy orton, logan paul, WWE main roster + storyline/evento, ritorno/debutto, v71 source reliability soft penalty, v71 freshness=0.558, v48 tier2: 55-74
+[SCORE] 68 medium - Crowd Reactions To Fatal Influence Reportedly Shifting WWE Creative Plans | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, rumor/backstage, v62 reazioni/tributi, v71 freshness=0.594, v48 tier2: 55-74
+[SCORE] 68 medium - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day | WWE/main roster, impatto roster/storyline, release/addio, v62 corporate/business, v62 categoria business, v86.9 cap commentary/opinion 84->68, v71 freshness=0.643, v48 tier2: 55-74
+[SCORE] 63 medium - Possible AEW Names For Kofi Kingston and Xavier Woods Revealed | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 titolo/championship, v86.9 cap commentary/opinion 86->68, v71 source reliability soft penalty, v71 freshness=0.541, v48 tier2: 55-74
+[SCORE] 59 low - Tony Khan's ROH Supercard of Honor Media Call Highlights for May 14, 2026 | AEW, impatto roster/storyline, infortunio, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.676, v48 tier2: 55-74
+[SCORE] 58 low - Former AEW Champ Swerve Strickland Reacts To Kofi Kingston's WWE Departure | WWE/main roster, impatto roster/storyline, release/addio, v62 reazioni/tributi, v71 freshness=0.559, v48 tier2: 55-74
+[SCORE] 58 low - Darby Allin Stays World Champion Following AEW Dynamite Main Event | AEW, titolo/championship, show settimanale, v62 titolo/championship, v71 freshness=0.39, v48 tier2: 55-74
+[MODE] Modalita normale: 1 news >=90, 2 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 12 | mode=normal | max nuove=3 | pending pubblicati=0
+[PERF v71] WP lookup URL esistente: 0.62s
+[BOT] Elaborazione: Ronda Rousey Details High-Profile Pitch That WWE Approved But Never Delivered
+[BOT] semantic_id=ronda-rousey-details-high-profile-pitch-that-wwe-approved-but-never-delivered
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta un'intervista retrospettiva su piani mai realizzati da una ex wrestler, trattandosi di fatti accaduti in passato rientra in POST_SHOW_NEWS.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (es. Raw Women's Championship, se citati) in inglese.; 'High-profile pitch' va reso come 'proposta di alto profilo' o 'idea importante'.; Non tradurre 'WrestleMania' o 'SummerSlam'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta un'intervista retrospettiva su piani mai realizzati da una ex wrestler, trattandosi di fatti accaduti in passato rientra in POST_SHOW_NEWS.
+[PERF v71] analisi editoriale AI v72: 16.25s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Ronda Rousey Details High-Profile Pitch That WWE Approved But Never Delivered
+[SCORE v79.1.3] Recovery post-show 68->95 - Ronda Rousey Details High-Profile Pitch That WWE Approved But Never Delivered
+[SCORE] raffinato=95 priority=high | WWE/main roster, top star titolo: becky lynch, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, non wrestling puro, trash talk/clickbait forte, v62 ritorno/debutto, v79.1.3 post-show recovery 68->95
+[V71] story_signature=stable:charlotte_flair|becky_lynch|ronda_rousey_details_high|story|wwe semantic_status=new_story freshness=0.717
+[PERF v71] WP recent posts dedupe: 1.05s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.40s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/ronda-rousey-details-high-profile-pitch-that-wwe-approved-but-never-delivered/intro-1778786553.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione applicato con gemini-3.1-flash-lite: editorial_word_ratio=0.69 (231/336) threshold=0.70
+[PRESERVE v81] Guardrail finale testo applicato
+[PERF v71] traduzione: 122.21s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Ronda Rousey svela il match contro Becky Lynch approvato dalla WWE ma mai realizzato
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/ronda-rousey-details-high-profile-pitch-that-wwe-approved-but-never-delivered/l-intro-1778786553.jpg
+[MEDIA] Immagine caricata: 4608
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260514_201504_001_ronda-rousey-svela-il-match-contro-becky-lynch-approvato-dalla-wwe-ma-mai-realizzato_4609_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4609
+[PERF v71] creazione post WordPress: 12.13s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/ronda-rousey-details-high-profile-pitch-that-wwe-approved-but-never-delivered/l-intro-1778786553.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4608
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Ronda Rousey Details High-Profile Pitch That WWE Approved Bu': 152.99s
+[OK] Pubblicato: Ronda Rousey svela il match contro Becky Lynch approvato dalla WWE ma mai realizzato
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260514_201505_001_ronda-rousey-svela-il-match-contro-becky-lynch-approvato-dalla-wwe-ma-mai-realiz_4fd37e3e_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Ronda Rousey svela il match contro Becky Lynch approvato dalla WWE ma mai realizzato
+[PUBLISHED REVIEW v87.1] Review outer salvata: Ronda Rousey svela il match contro Becky Lynch approvato dalla WWE ma mai realizzato
+[BOT] Elaborazione: Fit For WrestleMania and the FIFA World Cup: Stadiums on Show in 2026
+[BOT] semantic_id=fit-for-wrestlemania-and-the-fifa-world-cup-stadiums-on-show-in-2026
+[SCORE] iniziale=82 priority=high
+[PERF v71] scraping articolo: 0.81s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=25, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=25, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.41s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[MODEL v88] Cooldown globale modello per la run: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=OTHER conf=0.95 | category=WWE (4) conf=0.95 model=gemini-3-flash-preview | Si tratta di un articolo di approfondimento (feature) che incrocia la storia degli stadi di WrestleMania con i futuri Mondiali FIFA 2026.
+[EDITORIAL v72.3] translation_notes=Mantenere WrestleMania e i nomi degli eventi in inglese.; 'Triple threat' e 'Main event' non vanno tradotti.; 'American Nightmare' è il soprannome di Cody Rhodes e resta in inglese.
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | Si tratta di un articolo di approfondimento (feature) che incrocia la storia degli stadi di WrestleMania con i futuri Mondiali FIFA 2026.
+[PERF v71] analisi editoriale AI v72: 44.02s
+[SCORE] raffinato=87 priority=high | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 ritorno/debutto
+[V71] story_signature=stable:fit_for|fifa_world_cup|story|wrestling semantic_status=new_story freshness=0.541
+[PERF v71] WP recent posts dedupe: 1.40s
+[FIX] Event key in history ma non confermata su WordPress: event:business:wwe:wrestlemania-host-bid:host-bid - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.74s
+[MODEL v88] task=translate_report chain=gemini-2.5-pro,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-pro
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-pro | blocchi testo=25
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=29 generato=['31']", "Numero evento alterato: WrestleMania sorgente=35 generato=['31']", "Numero evento alterato: WrestleMania sorgente=32 generato=['31']", "Numero evento alterato: WrestleMania sorgente=38 generato=['31']", "Numero evento alterato: WrestleMania sorgente=39 generato=['31']", "Numero evento alterato: WrestleMania sorgente=28 generato=['31']"]
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[TRANSLATE] Errore: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=29 generato=['31']", "Numero evento alterato: WrestleMania sorgente=35 generato=['31']", "Numero evento alterato: WrestleMania sorgente=32 generato=['31']", "Numero evento alterato: WrestleMania sorgente=38 generato=['31']", "Numero evento alterato: WrestleMania sorgente=39 generato=['31']", "Numero evento alterato: WrestleMania sorgente=28 generato=['31']"]
+[PERF v71] traduzione: 89.90s
+[SKIP] Traduzione fallita: Fit For WrestleMania and the FIFA World Cup: Stadiums on Show in 2026 (err_type=validation)
+[PERF v71] WP lookup URL esistente: 0.76s
+[BOT] Elaborazione: WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down
+[BOT] semantic_id=wwes-john-cena-classic-reportedly-a-work-in-progress-with-few-details-nailed-down
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3-flash-preview | Si tratta di un report basato su fonti (WrestleVotes) riguardante lo stato di sviluppo e i piani futuri per un nuovo evento WWE, non ancora confermati ufficialmente.
+[EDITORIAL v72.3] translation_notes=Mantenere 'The John Cena Classic' in inglese.; 'Work in progress' può essere reso come 'lavori in corso' o 'progetto in fase di definizione'.; 'Nailed down' va tradotto come 'definito' o 'confermato'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | Si tratta di un report basato su fonti (WrestleVotes) riguardante lo stato di sviluppo e i piani futuri per un nuovo evento WWE, non ancora confermati ufficialmente.
+[PERF v71] analisi editoriale AI v72: 15.70s
+[SCORE] raffinato=68 priority=medium | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, combo top name titolo + evento forte, show settimanale, v62 media rights/streaming, v72.3 cap rumor: niente boost raffinamento, v72.3 cap rumor
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:media-rights -> event:rumor:s-john-cena-classic-a-work-progress-few-details-nailed-down
+[V71] story_signature=stable:john_cena|john_cena_classic_reportedly|work_in_progress|title|wwe semantic_status=new_story freshness=0.816
+[SKIP] News core già pubblicata da altra fonte: WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down
+[SKIP] news_core_key=schedule-backlash
+[PENDING] Coda salvata: 0 elementi
+[PERF v71] WP lookup URL esistente: 0.58s
+[BOT] Elaborazione: Rapper Tekashi 6ix9ine Reveals He Wants to Get Involved With WWE
+[BOT] semantic_id=rapper-tekashi-6ix9ine-reveals-he-wants-to-get-involved-with-wwe
+[SCORE] iniziale=69 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/rapper-tekashi-6ix9ine-reveals-he-wants-get-involved-wwe/
+[PERF v71] scraping articolo: 0.76s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=10, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/rapper-tekashi-6ix9ine-reveals-he-wants-get-involved-wwe/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.40s
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3-flash-preview | L'articolo riporta una notizia d'attualità basata su dichiarazioni reali del rapper Tekashi 6ix9ine espresse durante un podcast/livestream riguardo un possibile debutto in WWE.
+[EDITORIAL v72.3] translation_notes=Il termine 'Punt Kick' deve rimanere invariato o essere indicato come la mossa finale di Orton; non tradurre come 'calcio di rinvio'; Tradurre 'jump into' come 'entrare nel mondo della' o 'debuttare', evitando traduzioni letterali; Le quote devono mantenere il tono colloquiale e provocatorio originale (es. 'bulls**t', 'regular s***')
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta una notizia d'attualità basata su dichiarazioni reali del rapper Tekashi 6ix9ine espresse durante un podcast/livestream riguardo un possibile debutto in WWE.
+[PERF v71] analisi editoriale AI v72: 8.39s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Rapper Tekashi 6ix9ine Reveals He Wants to Get Involved With WWE
+[SCORE] raffinato=89 priority=high | WWE/main roster, top star lead: randy orton, nomi forti lead: randy orton, logan paul, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV
+[V71] story_signature=stable:randy_orton|logan_paul|rapper_tekashi|story|wwe semantic_status=new_story freshness=0.557
+[PERF v71] WP lookup event_key: 1.04s
+[FIX] Event key in history ma non confermata su WordPress: event:logan-paul-2017-controversy - provo a pubblicare
+[WP] Health check API OK: status 200 | tentativo 1/3
+[PERF v71] categoria da analisi editoriale v72: 1.76s
+[MODEL v88] task=translate_normal chain=gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=10
+[MODEL v88] task=postedit chain=gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-2.5-flash-lite
+[PERF v71] traduzione: 30.26s
+[MODEL v88] task=title chain=gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Tekashi 6ix9ine vorrebbe debuttare in WWE e sfida Randy Orton
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/rapper-tekashi-6ix9ine-reveals-he-wants-to-get-involved-with-wwe-56.jpg
+[MEDIA] Immagine caricata: 4611
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260514_201827_002_tekashi-6ix9ine-vorrebbe-debuttare-in-wwe-e-sfida-randy-orton_4612_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4612
+[PERF v71] creazione post WordPress: 5.24s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/rapper-tekashi-6ix9ine-reveals-he-wants-to-get-involved-with-wwe-56.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4611
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Rapper Tekashi 6ix9ine Reveals He Wants to Get Involved With': 47.27s
+[OK] Pubblicato: Tekashi 6ix9ine vorrebbe debuttare in WWE e sfida Randy Orton
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260514_201829_002_tekashi-6ix9ine-vorrebbe-debuttare-in-wwe-e-sfida-randy-orton_c993195e_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Tekashi 6ix9ine vorrebbe debuttare in WWE e sfida Randy Orton
+[PUBLISHED REVIEW v87.1] Review outer salvata: Tekashi 6ix9ine vorrebbe debuttare in WWE e sfida Randy Orton
+[BOT] Elaborazione: Crowd Reactions To Fatal Influence Reportedly Shifting WWE Creative Plans
+[BOT] semantic_id=crowd-reactions-to-fatal-influence-reportedly-shifting-wwe-creative-plans
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[GEMINI] Modello gemini-3-flash-preview scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[MODEL v88] Cooldown globale modello per la run: gemini-3-flash-preview
+[GEMINI] Uso modello: gemini-2.5-flash
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=0.98 model=gemini-2.5-flash | L'articolo riporta rumor affidabili sui cambiamenti nei piani creativi WWE per Fatal Influence e Jacy Jayne, citando fonti note nel settore. Rilevante per il pubblico WWE.
+[EDITORIAL v72.3] translation_notes=I nomi ufficiali di titoli (es. WWE Women's Championship) rimangono in inglese.; Tradurre il termine wrestling "heat" con "reazione negativa/ostile del pubblico" o "essere fischiate/odiate", non letteralmente.; Tradurre il termine wrestling "push" (nel contesto di accelerare il push di una star) con "lancio" o "spinta promozionale".
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta rumor affidabili sui cambiamenti nei piani creativi WWE per Fatal Influence e Jacy Jayne, citando fonti note nel settore. Rilevante per il pubblico WWE.
+[PERF v71] analisi editoriale AI v72: 14.71s
+[SCORE] raffinato=68 priority=medium | WWE/main roster, top star lead: rhea ripley, nomi forti lead: rhea ripley, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name lead + evento forte, PLE/PPV, developmental secondario, v62 ritorno/debutto, v72.3 cap rumor: niente boost raffinamento
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Crowd Reactions To Fatal Influence Reportedly Shifting WWE Creative Plans
+[V71] story_signature=stable:charlotte_flair|rhea_ripley|alexa_bliss|debut|wwe semantic_status=new_story freshness=0.709
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash-lite | blocchi testo=3
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/crowd-reactions-to-fatal-influence-reportedly-shifting-wwe-creative-plans/intro-1778784890.jpg
+[MODEL v88] task=postedit chain=gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[PRESERVE v83] Repair anti-omissione applicato con gemini-2.5-flash-lite: editorial_word_ratio=0.61 (155/253) threshold=0.70
+[PRESERVE v81] Guardrail finale testo applicato
+[MODEL v88] task=repair chain=gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-flash
+[VOICE v82] Micro-repair applicate: 3
+[VOICE v82] AI-smell repair completata con gemini-2.5-flash
+[VOICE v82] Layer newsroom realism applicato
+[PERF v71] traduzione: 20.56s
+[MODEL v88] task=title chain=gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Fatal Influence: reazioni del pubblico WWE potrebbero cambiare piani creativi
+[WARN v71.3] Quote check sotto soglia ma non bloccante: ['quote count ratio below threshold: 0.33'] - Crowd Reactions To Fatal Influence Reportedly Shifting WWE Creative Plans
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/crowd-reactions-to-fatal-influence-reportedly-shifting-wwe-creative-plans/l-intro-1778784890.jpg
+[MEDIA] Immagine caricata: 4614
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260514_201911_003_fatal-influence-reazioni-del-pubblico-wwe-potrebbero-cambiare-piani-creativi_4615_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4615
+[PERF v71] creazione post WordPress: 6.11s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/crowd-reactions-to-fatal-influence-reportedly-shifting-wwe-creative-plans/l-intro-1778784890.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4614
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Crowd Reactions To Fatal Influence Reportedly Shifting WWE C': 42.64s
+[OK] Pubblicato: Fatal Influence: reazioni del pubblico WWE potrebbero cambiare piani creativi
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260514_201913_003_fatal-influence-reazioni-del-pubblico-wwe-potrebbero-cambiare-piani-creativi_094e8a6d_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Fatal Influence: reazioni del pubblico WWE potrebbero cambiare piani creativi
+[PUBLISHED REVIEW v87.1] Review outer salvata: Fatal Influence: reazioni del pubblico WWE potrebbero cambiare piani creativi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 5 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-14 20:12:06_summary.json -> published_html_review/run_2026-05-14 20-12-06_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (119 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
+===== RUN END [2026-05-14 20:12:06] VERSION [v88_1_report_dedupe_pending_cleanup (788e8dd)] =====
+
