@@ -1240,3 +1240,94 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-14 16:56:57] VERSION [v88_1_report_dedupe_pending_cleanup (0d627f3)] =====
 
+
+===== RUN START [2026-05-14 16:58:06] VERSION [v88_1_report_dedupe_pending_cleanup (6321029)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 8 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (44/75): AEW Collision Ratings & Viewership Report: 5/9/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172708/karrion-kross-scarlett-wwe-releases/
+[SKIP] Score sotto soglia editoriale (16/75): Jim Ross Identifies WWE Character He Thinks Should Be Used Sparingly
+[SKIP] Score sotto soglia editoriale (18/75): AEW's Adam Copeland Offers Update On His Retirement 'Clock'
+[SKIP] Score sotto soglia editoriale (30/75): Swerve Strickland On Celebrities In Wrestling: 'There's A Time And A Place For It'
+[SCORE v86.9] Cap commentary/opinion 84->68 - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day
+[PERF v71] WP lookup event_key: 1.05s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172624/update-big-bill-aew-contract/
+[SKIP] Score sotto soglia editoriale (24/75): The Miz Explains Why He Loves WWE Unreal
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite - 5/13/2026: 3 Things We Hated And 3 We Loved
+[SKIP] Score sotto soglia editoriale (30/75): AEW Reveals Eclectic Line Up For 2026 Women's Owen Hart Tournament
+[SKIP] Score sotto soglia editoriale (30/75): AEW Reveals Bracket For 2026 Men's Owen Hart Tournament
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172570/aew-tnt-champion-kevin-knight-overcomes-returning-star-open-challenge/
+[SKIP] Score sotto soglia editoriale (16/75): AEW's Shelton Benjamin Discusses Friendship With Eddie Guerrero
+[SKIP] Score sotto soglia editoriale (62/75): Backstage Speculation On Injury Status Of WWE's Dragon Lee Following Cryptic Post
+[SKIP] Score sotto soglia editoriale (36/75): Report: More WWE NXT Stars Expected To Be Called Up To The Main Roster This Summer
+[REPORT v87.2] Report confermato da history forte: report:aew-dynamite-2026-05-13
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:aew-dynamite-2026-05-13 - AEW Dynamite Results 5/13 - Ten Man Tag Match, Darby Allin Defends AEW World Title
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Kevin Nash Says New Day Made Right Choice By Leaving WWE, Wrestlers Should Unionize
+[SKIP] Score sotto soglia editoriale (54/75): Kevin Nash Says New Day Made Right Choice By Leaving WWE, Wrestlers Should Unionize
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Bully Ray: John Cena Announcement At WWE Backlash Was Confusing But 'Successful'
+[SKIP] Score sotto soglia editoriale (54/75): Bully Ray: John Cena Announcement At WWE Backlash Was Confusing But 'Successful'
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-internally-discussing-major-triplemania-34-change-backlash-announcement/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-still-figuring-out-john-cena-classic-plans/
+[SKIP] Score sotto soglia editoriale (24/75): Finn Balor Admits He Needs To Feel Awful After A Cheat Meal
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Finn Bálor Explains Why He Avoids Media and Public Speaking Outside WWE
+[SKIP] Score sotto soglia editoriale (49/75): Finn Bálor Explains Why He Avoids Media and Public Speaking Outside WWE
+[SKIP] URL già in history: https://www.ringsidenews.com/stephanie-vaquers-wwe-return-status-gets-major-update-injury-absence/
+[SKIP] URL già in history: https://www.ringsidenews.com/stephanie-vaquers-ex-boyfriend-el-cuatreros-wrestling-status-revealed-12-year-prison-sentence/
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Jake Paul Claims TKO Banned Him From Attending WWE Events Amid Ongoing Beef
+[SKIP] Score sotto soglia editoriale (49/75): Jake Paul Claims TKO Banned Him From Attending WWE Events Amid Ongoing Beef
+[SKIP] URL già in history: https://www.ringsidenews.com/vince-mcmahons-lawyers-defend-signal-app-use-wwe-shareholders-lawsuit/
+[SKIP] URL già in history: https://www.ringsidenews.com/nikki-cross-books-first-match-since-wwe-release-under-different-name/
+[SKIP] Score sotto soglia editoriale (49/75): GUNTHER Explains Why He Loves WWE Fans Hating Him & Why His Character Feels So Real
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - GUNTHER Explains Why WWE's Massive Audience Forced Him To Change His Look
+[SKIP] Score sotto soglia editoriale (49/75): GUNTHER Explains Why WWE's Massive Audience Forced Him To Change His Look
+[SKIP] URL già in history: https://www.ringsidenews.com/ronda-rousey-explains-how-wwe-helped-prepare-her-mma-return-against-gina-carano/
+[SKIP] URL già in history: https://www.ringsidenews.com/ronda-rousey-calls-pro-wrestling-purest-form-fight-choreography/
+[SCORE] 73 medium - Why Ronda Rousey vs. Becky Lynch WrestleMania Match Never Happened | WWE/main roster, top star titolo: becky lynch, impatto roster/storyline, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, v66 cap opinion/commentary storyline, v71 source reliability soft penalty, v71 freshness=0.528, v48 tier2: 55-74
+[SCORE] 68 medium - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day | WWE/main roster, impatto roster/storyline, release/addio, v62 corporate/business, v62 categoria business, v86.9 cap commentary/opinion 84->68, v71 freshness=0.683, v48 tier2: 55-74
+[SCORE] 58 low - Former AEW Champ Swerve Strickland Reacts To Kofi Kingston's WWE Departure | WWE/main roster, impatto roster/storyline, release/addio, v62 reazioni/tributi, v71 freshness=0.6, v48 tier2: 55-74
+[SCORE] 58 low - Darby Allin Stays World Champion Following AEW Dynamite Main Event | AEW, titolo/championship, show settimanale, v62 titolo/championship, v71 freshness=0.43, v48 tier2: 55-74
+[SCORE] 49 low - John Cena Explains Why He Created the John Cena Classic Tournament | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v68 cap duro opinion/commentary, v71 source reliability soft penalty, v71 freshness=0.571, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 5 | mode=normal | max nuove=3 | pending pubblicati=0
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: Why Ronda Rousey vs. Becky Lynch WrestleMania Match Never Happened
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day
+[BOT] semantic_id=eric-bischoff-reveals-why-he-wasnt-surprised-by-wwe-releasing-the-new-day
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=6, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta le opinioni e l'analisi di Eric Bischoff in merito a recenti dinamiche di mercato e tagli del personale in WWE, basandosi sul suo podcast personale.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'The New Day' (nome team).; 'Release' va reso come licenziamento o addio.; 'Virtue signal' richiede una resa idiomatica italiana.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta le opinioni e l'analisi di Eric Bischoff in merito a recenti dinamiche di mercato e tagli del personale in WWE, basandosi sul suo podcast personale.
+[PERF v71] analisi editoriale AI v72: 1.38s
+[SCORE] raffinato=54 priority=low | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, v62 business/dirigenza, v62 categoria business, v72.3 cap opinion: niente boost raffinamento, v72.3 cap opinion
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: Former AEW Champ Swerve Strickland Reacts To Kofi Kingston's WWE Departure
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:58: Darby Allin Stays World Champion Following AEW Dynamite Main Event
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: John Cena Explains Why He Created the John Cena Classic Tournament
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 5 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-14 16:58:06_summary.json -> published_html_review/run_2026-05-14 16-58-06_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (99 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-14 16:58:06] VERSION [v88_1_report_dedupe_pending_cleanup (6321029)] =====
+
