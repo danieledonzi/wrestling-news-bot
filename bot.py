@@ -19330,16 +19330,229 @@ def v872_mark_report_confirmed(report_key="", title="", url="", source_url="", p
 V875_AVAILABLE_GEMINI_3_FLASH_MODEL = "gemini-3-flash-preview"
 
 
+
+
+# =========================
+# v87.7 - fatal Gemini auth + report confirmation cleanup + model matrix refresh
+# =========================
+BOT_VERSION = "v87_7_fatal_auth_report_pending_cleanup"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+# Live ListModels confirmed this exact ID. Reintroduce it as the strong non-Pro option.
+V877_GEMINI_3_FLASH_MODEL = os.getenv("V877_GEMINI_3_FLASH_MODEL", "gemini-3-flash-preview").strip()
+V877_ENABLE_GEMINI_3_FLASH_PREVIEW = os.getenv("V877_ENABLE_GEMINI_3_FLASH_PREVIEW", "1").strip().lower() not in {"0", "false", "no", "off"}
+V877_FATAL_AUTH_ENABLED = os.getenv("V877_FATAL_AUTH_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V877_REPORT_CONFIRM_CLEANUP_ENABLED = os.getenv("V877_REPORT_CONFIRM_CLEANUP_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+class V877FatalGeminiAuthError(BaseException):
+    pass
+
+def v877_is_fatal_gemini_auth_error(exc):
+    s = str(exc or "")
+    if not s:
+        return False
+    sl = s.lower()
+    return (
+        "permission_denied" in sl
+        and ("api key" in sl or "apikey" in sl or "key" in sl)
+        and ("leaked" in sl or "reported as leaked" in sl or "use another api key" in sl)
+    ) or ("your api key was reported as leaked" in sl)
+
+# Refresh task matrix with the actual Gemini 3 Flash Preview model name.
+def _v877_chain(default):
+    return [m.strip() for m in default.split(",") if m.strip()]
+
+if V877_ENABLE_GEMINI_3_FLASH_PREVIEW:
+    try:
+        V872_MODEL_CHAINS.update({
+            "healthcheck": _v872_chain_from_env("V877_HEALTHCHECK_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite"),
+            "editorial_analysis": _v872_chain_from_env("V877_EDITORIAL_ANALYSIS_CHAIN", f"gemini-3.1-flash-lite,{V877_GEMINI_3_FLASH_MODEL},gemini-2.5-flash,gemini-2.5-flash-lite"),
+            "translate_normal": _v872_chain_from_env("V877_TRANSLATE_NORMAL_CHAIN", f"gemini-3.1-flash-lite,{V877_GEMINI_3_FLASH_MODEL},gemini-2.5-flash-lite,gemini-2.5-flash"),
+            "translate_medium": _v872_chain_from_env("V877_TRANSLATE_MEDIUM_CHAIN", f"{V877_GEMINI_3_FLASH_MODEL},gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"),
+            "translate_report": _v872_chain_from_env("V877_TRANSLATE_REPORT_CHAIN", f"gemini-2.5-pro,{V877_GEMINI_3_FLASH_MODEL},gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"),
+            "postedit": _v872_chain_from_env("V877_POSTEDIT_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"),
+            "title": _v872_chain_from_env("V877_TITLE_CHAIN", "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"),
+            "emergency_title": _v872_chain_from_env("V877_EMERGENCY_TITLE_CHAIN", f"gemini-2.5-flash,gemini-2.5-pro,{V877_GEMINI_3_FLASH_MODEL},gemini-3.1-flash-lite,gemini-2.5-flash-lite"),
+            "repair": _v872_chain_from_env("V877_REPAIR_CHAIN", f"{V877_GEMINI_3_FLASH_MODEL},gemini-2.5-flash,gemini-2.5-flash-lite"),
+            "repair_report": _v872_chain_from_env("V877_REPAIR_REPORT_CHAIN", f"gemini-2.5-pro,{V877_GEMINI_3_FLASH_MODEL},gemini-2.5-flash"),
+        })
+        # Make sure a prior 404 for the old wrong name does not affect the valid preview id.
+        try:
+            gemini_invalid_models.discard(V877_GEMINI_3_FLASH_MODEL)
+        except Exception:
+            pass
+    except Exception as e:
+        print(f"[MODEL v87.7] Errore aggiornamento matrix Gemini 3 Flash Preview: {e}")
+
+# v87.7 generate wrapper: 403 leaked/revoked API key is fatal, not retry/pending.
+def generate_and_parse_json(prompt):
+    if not V872_MODEL_MATRIX_ENABLED:
+        return _ORIG_V872_generate_and_parse_json(prompt)
+    global _V872_LAST_ROUTE
+    task = v872_current_task()
+    chain = v872_chain_for_task(task)
+    route = (task, tuple(chain))
+    if route != _V872_LAST_ROUTE:
+        print(f"[MODEL v87.7] task={task} chain={','.join(chain)}")
+        _V872_LAST_ROUTE = route
+    last_exception = None
+    capacity_failures = 0
+    for model in chain:
+        try:
+            print(f"[GEMINI] Uso modello: {model}")
+            res = client.models.generate_content(model=model, contents=prompt)
+            data = extract_json_object(res.text)
+            model_fail_counts[model] = 0
+            gemini_soft_cooldown_until[model] = 0.0
+            _V872_MODEL_GLOBAL_COOLDOWN_UNTIL[model] = 0.0
+            return data, model
+        except Exception as e:
+            last_exception = e
+            print(f"[GEMINI] Modello {model} scartato: {e}")
+            if V877_FATAL_AUTH_ENABLED and v877_is_fatal_gemini_auth_error(e):
+                msg = "Gemini API key revocata/segnalata come leaked: aggiorna il secret GEMINI_API_KEY e rilancia la run"
+                print(f"[FATAL GEMINI v87.7] {msg}")
+                try:
+                    v874_append_master_event({"type": "fatal_gemini_auth", "model": model, "error": str(e), "message": msg})
+                except Exception:
+                    pass
+                raise V877FatalGeminiAuthError(msg)
+            if is_invalid_model_error(e):
+                gemini_invalid_models.add(model)
+                model_fail_counts[model] = MODEL_COOLDOWN_THRESHOLD
+            elif is_capacity_error(e):
+                capacity_failures += 1
+                model_fail_counts[model] = min(model_fail_counts.get(model, 0) + 1, MODEL_COOLDOWN_THRESHOLD - 1)
+                if V872_GLOBAL_COOLDOWN_ENABLED:
+                    _V872_MODEL_GLOBAL_COOLDOWN_UNTIL[model] = time.time() + V872_MODEL_COOLDOWN_SECONDS
+                    print(f"[MODEL v87.7] Cooldown globale modello per la run: {model}")
+            else:
+                model_fail_counts[model] = min(model_fail_counts.get(model, 0) + 1, MODEL_COOLDOWN_THRESHOLD - 1)
+            continue
+    if capacity_failures:
+        raise RuntimeError("GEMINI_TEMPORARILY_UNAVAILABLE")
+    raise last_exception if last_exception else RuntimeError("Nessun modello disponibile")
+
+# Stronger true-results confirmation cleanup. If WP proves a report exists, write the local
+# confirmed history and remove stale pending records immediately.
+def v877_try_confirm_report_from_item(item, wp_available=True, reason="wp_confirm"):
+    if not V877_REPORT_CONFIRM_CLEANUP_ENABLED or not isinstance(item, dict):
+        return False
+    try:
+        if not v867_is_true_results_item(item):
+            return False
+    except Exception:
+        return False
+    report_key = v867_report_key(item) or v872_report_key_from_any(item=item)
+    title = v867_item_title(item)
+    url = v867_item_url(item)
+    if not report_key or not wp_available:
+        return False
+    post_id = None
+    confirmed = False
+    try:
+        if url:
+            post_id = find_existing_post_by_url(url)
+            if post_id:
+                confirmed = True
+                print(f"[REPORT v87.7] True-results confermato da WordPress per URL ({post_id}): {report_key}")
+    except Exception as e:
+        print(f"[REPORT v87.7] Verifica URL report fallita ({report_key}): {e}")
+    if not confirmed:
+        try:
+            if wp_has_published_event(report_key, title=title, url=url):
+                confirmed = True
+                print(f"[REPORT v87.7] True-results confermato da WordPress per event_key: {report_key}")
+        except Exception as e:
+            print(f"[REPORT v87.7] Verifica event_key report fallita ({report_key}): {e}")
+    if confirmed:
+        try:
+            v872_mark_report_confirmed(report_key, title=title, url=url, post_id=post_id, reason=reason)
+        except Exception as e:
+            print(f"[REPORT v87.7] Errore scrittura history forte report ({report_key}): {e}")
+        try:
+            remove_pending_report_key(report_key)
+            remove_pending_url(url)
+            print(f"[PENDING v87.7] Rimosso true-results confermato dalla pending: {report_key}")
+        except Exception as e:
+            print(f"[PENDING v87.7] Errore cleanup pending report ({report_key}): {e}")
+        return True
+    return False
+
+_ORIG_V877_v867_wp_confirms_true_results_item = v867_wp_confirms_true_results_item
+def v867_wp_confirms_true_results_item(item, wp_available=True):
+    if v877_try_confirm_report_from_item(item, wp_available=wp_available, reason="wp_confirm_runtime"):
+        return True
+    return _ORIG_V877_v867_wp_confirms_true_results_item(item, wp_available=wp_available)
+
+_ORIG_V877_add_pending_article = add_pending_article
+def add_pending_article(item, reason="wp_down"):
+    try:
+        if isinstance(item, dict) and v867_is_true_results_item(item) and v877_try_confirm_report_from_item(item, wp_available=wordpress_is_available(), reason="prevent_pending_confirmed"):
+            print(f"[PENDING v87.7] Non salvo report già confermato: {item.get('title')}")
+            return None
+    except V877FatalGeminiAuthError:
+        raise
+    except Exception:
+        pass
+    return _ORIG_V877_add_pending_article(item, reason=reason)
+
+_ORIG_V877_process_candidate_item = process_candidate_item
+def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+    try:
+        if isinstance(item, dict) and v877_try_confirm_report_from_item(item, wp_available=True, reason="pre_candidate_wp_confirm"):
+            return "skipped"
+    except V877FatalGeminiAuthError:
+        raise
+    except Exception:
+        pass
+    return _ORIG_V877_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+
+# Label cleanup for v87.7 only, no functional changes.
+try:
+    import builtins as _v877_builtins
+    _ORIG_V877_PRINT = _ORIG_V874_PRINT if "_ORIG_V874_PRINT" in globals() else print
+    def _v877_label_cleanup(obj):
+        if not isinstance(obj, str):
+            return obj
+        repl = {
+            "[MODEL v87.2]": "[MODEL v87.7]",
+            "[MODEL v87.3]": "[MODEL v87.7]",
+            "[REPORT v87.6]": "[REPORT v87.7]",
+            "[REPORT v86.8/legacy]": "[REPORT v87.7/legacy]",
+            "[REPORT v86.6]": "[REPORT v87.7/legacy]",
+            "[PENDING v86.8]": "[PENDING v87.7/legacy]",
+            "[RUN ARTIFACTS v87.6]": "[RUN ARTIFACTS v87.7]",
+            "[MASTER LOG v87.6]": "[MASTER LOG v87.7]",
+            "[PUBLISHED v87.6]": "[PUBLISHED v87.7]",
+        }
+        for old, new in repl.items():
+            obj = obj.replace(old, new)
+        return obj
+    def _v877_print(*args, **kwargs):
+        args = tuple(_v877_label_cleanup(a) for a in args)
+        return _ORIG_V877_PRINT(*args, **kwargs)
+    _v877_builtins.print = _v877_print
+except Exception:
+    pass
+
+
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 if __name__ == "__main__":
+    exit_code = 0
     if V854_BOOT_DIAGNOSTICS_ENABLED:
-        print(f"[BOOT v87.5] __main__ reached epoch={time.time():.3f}", flush=True)
+        print(f"[BOOT v87.7] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
+    except V877FatalGeminiAuthError as e:
+        exit_code = 2
+        print(f"[FATAL GEMINI v87.7] Run interrotta: {e}")
     finally:
         finalize_published_html_review_index()
         create_review_bundle_latest()
         review_finalize_package()
         v874_finalize_run_artifacts()
         log_run_end()
+    if exit_code:
+        raise SystemExit(exit_code)
