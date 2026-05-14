@@ -21,7 +21,26 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests feedparser beautifulsoup4 google-genai
+          # Installiamo google-generativeai che è la libreria corretta per il bot
+          pip install requests feedparser beautifulsoup4 google-generativeai
+
+      - name: Diagnostic - List Gemini Models
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python -c "
+          import google.generativeai as genai
+          import os
+          genai.configure(api_key=os.environ.get('GEMINI_API_KEY'))
+          print('--- LISTA MODELLI DISPONIBILI ---')
+          try:
+              for m in genai.list_models():
+                  if 'generateContent' in m.supported_generation_methods:
+                      print(f'ID: {m.name} | Display: {m.display_name}')
+          except Exception as e:
+              print(f'Errore diagnostica: {e}')
+          print('---------------------------------')
+          "
 
       - name: Run bot v87_4
         env:
@@ -29,7 +48,8 @@ jobs:
           WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
           WP_URL: ${{ secrets.WP_URL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_MODEL_CHAIN: gemini-3.1-flash-lite,gemini-2.5-flash-lite
+          # Ho aggiornato la catena per includere i modelli 3.1 e 2.5 stabili
+          GEMINI_MODEL_CHAIN: gemini-3.1-flash-lite,gemini-2.5-flash
           V86_7_PENDING_TRUTH_FIX_ENABLED: "1"
           V86_7_STRICT_TRUE_REPORT_PENDING_ENABLED: "1"
           V86_6_MEDIA_GUARD_ENABLED: "1"
@@ -38,4 +58,4 @@ jobs:
         run: |
           python bot.py
 
-# v87_4: Gemini offline pending preservation and executive interview cap
+# v87_4: Fixed library dependencies and added model diagnostics
