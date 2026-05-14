@@ -1,22 +1,12 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-14 22:50:12",
-  "bot_version": "v88_2_editorial_performance_guards (0d6d2e1)",
-  "git_sha": "0d6d2e10d213cead0af5e8db3715e31de40593cd",
-  "created_at": "2026-05-14T22:51:43",
-  "published_count": 1,
-  "published_post_ids": [
-    "4630"
-  ],
-  "published_artifacts": [
-    {
-      "post_id": 4630,
-      "title": "Licenziamenti in Visual Concepts: colpito il team di sviluppo di WWE 2K",
-      "source_url": "https://www.ringsidenews.com/wwe-2k-developers-hit-hard-company-wide-layoffs/",
-      "html_file": "published/20260514_225137_001_licenziamenti-in-visual-concepts-colpito-il-team-di-sviluppo-di-wwe-2k_4630_final.html",
-      "metadata_file": "published/20260514_225137_001_licenziamenti-in-visual-concepts-colpito-il-team-di-sviluppo-di-wwe-2k_4630_metadata.json"
-    }
-  ],
+  "run_id": "2026-05-14 23:47:46",
+  "bot_version": "v88_2_editorial_performance_guards (ca605e8)",
+  "git_sha": "ca605e8902b2f660b305c3b6d17713d8ab9c29f9",
+  "created_at": "2026-05-14T23:48:03",
+  "published_count": 0,
+  "published_post_ids": [],
+  "published_artifacts": [],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",
