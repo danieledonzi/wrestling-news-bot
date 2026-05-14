@@ -1,36 +1,20 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-14 21:30:33",
-  "bot_version": "v88_2_editorial_performance_guards (0205aa0)",
-  "git_sha": "0205aa0dc85c658a2c150011d09fc38d2a228f1a",
-  "created_at": "2026-05-14T21:32:01",
-  "published_count": 3,
+  "run_id": "2026-05-14 21:42:08",
+  "bot_version": "v88_2_editorial_performance_guards (0c049ad)",
+  "git_sha": "0c049ad13b65f6a2f5fafdbac3f1bd5dbf33e4d8",
+  "created_at": "2026-05-14T21:46:02",
+  "published_count": 1,
   "published_post_ids": [
-    "4618",
-    "4621",
-    "4624"
+    "4627"
   ],
   "published_artifacts": [
     {
-      "post_id": 4618,
-      "title": "R-Truth: \"Non credo che porterò a termine il mio attuale contratto con la WWE\"",
-      "source_url": "https://www.ringsidenews.com/r-truth-reveals-he-not-expect-finish-his-current-wwe-deal/",
-      "html_file": "published/20260514_213111_001_r-truth-non-credo-che-porterò-a-termine-il-mio-attuale-contratto-con-la-wwe_4618_final.html",
-      "metadata_file": "published/20260514_213111_001_r-truth-non-credo-che-porterò-a-termine-il-mio-attuale-contratto-con-la-wwe_4618_metadata.json"
-    },
-    {
-      "post_id": 4621,
-      "title": "Ronda Rousey: come Paul Heyman ha cambiato il mio modo di promuovere i match",
-      "source_url": "https://www.ringsidenews.com/ronda-rousey-credits-paul-heyman-wwe-changing-how-she-promotes-mma-fights/",
-      "html_file": "published/20260514_213133_002_ronda-rousey-come-paul-heyman-ha-cambiato-il-mio-modo-di-promuovere-i-match_4621_final.html",
-      "metadata_file": "published/20260514_213133_002_ronda-rousey-come-paul-heyman-ha-cambiato-il-mio-modo-di-promuovere-i-match_4621_metadata.json"
-    },
-    {
-      "post_id": 4624,
-      "title": "AEW: svelati i possibili ring name di Kofi Kingston e Xavier Woods",
-      "source_url": "https://www.ringsidenews.com/possible-aew-names-kofi-kingston-xavier-woods-revealed/",
-      "html_file": "published/20260514_213200_003_aew-svelati-i-possibili-ring-name-di-kofi-kingston-e-xavier-woods_4624_final.html",
-      "metadata_file": "published/20260514_213200_003_aew-svelati-i-possibili-ring-name-di-kofi-kingston-e-xavier-woods_4624_metadata.json"
+      "post_id": 4627,
+      "title": "WWE: i biglietti per gli house show estivi saranno più economici",
+      "source_url": "https://www.ringsidenews.com/wwe-house-show-tickets-expected-much-cheaper-this-summer/",
+      "html_file": "published/20260514_214600_001_wwe-i-biglietti-per-gli-house-show-estivi-saranno-più-economici_4627_final.html",
+      "metadata_file": "published/20260514_214600_001_wwe-i-biglietti-per-gli-house-show-estivi-saranno-più-economici_4627_metadata.json"
     }
   ],
   "errors": [],

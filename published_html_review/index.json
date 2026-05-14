@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-14 21:30:33",
-  "last_bot_version": "v88_2_editorial_performance_guards (0205aa0)",
-  "updated_at": "2026-05-14T21:32:01",
-  "total_items": 32,
+  "last_run_id": "2026-05-14 21:42:08",
+  "last_bot_version": "v88_2_editorial_performance_guards (0c049ad)",
+  "updated_at": "2026-05-14T21:46:01",
+  "total_items": 33,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -260,6 +260,14 @@
       "original_html_file": "20260514_213201_003_aew-svelati-i-possibili-ring-name-di-kofi-kingston-e-xavier-woods_2f3f152e_original.html",
       "final_html_file": "20260514_213201_003_aew-svelati-i-possibili-ring-name-di-kofi-kingston-e-xavier-woods_2f3f152e_final.html",
       "metadata_file": "20260514_213201_003_aew-svelati-i-possibili-ring-name-di-kofi-kingston-e-xavier-woods_2f3f152e_metadata.json"
+    },
+    {
+      "run_id": "2026-05-14 21:42:08",
+      "title": "WWE: i biglietti per gli house show estivi saranno più economici",
+      "url": "https://www.ringsidenews.com/wwe-house-show-tickets-expected-much-cheaper-this-summer/",
+      "original_html_file": "20260514_214601_001_wwe-i-biglietti-per-gli-house-show-estivi-saranno-pi-economici_7d4ebf11_original.html",
+      "final_html_file": "20260514_214601_001_wwe-i-biglietti-per-gli-house-show-estivi-saranno-pi-economici_7d4ebf11_final.html",
+      "metadata_file": "20260514_214601_001_wwe-i-biglietti-per-gli-house-show-estivi-saranno-pi-economici_7d4ebf11_metadata.json"
     }
   ]
 }
