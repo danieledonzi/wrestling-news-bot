@@ -22,7 +22,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           # Installiamo google-generativeai che è la libreria corretta per il bot
-          pip install requests feedparser beautifulsoup4 google-generativeai
+          pip install requests feedparser beautifulsoup4 google-genai
 
       - name: Diagnostic - List Gemini Models
         env:
