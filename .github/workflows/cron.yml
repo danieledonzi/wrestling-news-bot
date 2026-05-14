@@ -1,9 +1,22 @@
-name: OpenWrestlingTV Bot v87_5
+name: OpenWrestlingTV Bot v87_6
 
 on:
   workflow_dispatch:
   schedule:
     - cron: "*/30 * * * *"
+
+permissions:
+  contents: write
+
+env:
+  BOT_ARTIFACT_PATHS: |
+    published/
+    published_html_review/
+    logs/
+    pending_queue.json
+    history.json
+    confirmed_published_reports.json
+    review_bundle_latest.zip
 
 jobs:
   run-bot:
@@ -12,6 +25,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -23,7 +38,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests feedparser beautifulsoup4 google-genai
 
-      - name: Run bot v87_5
+      - name: Run bot v87_6
+        id: run_bot
         env:
           WP_USER: ${{ secrets.WP_USER }}
           WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
@@ -36,6 +52,53 @@ jobs:
           V86_6_FUTURE_SPEC_CAP_ENABLED: "1"
           V86_2_REPORT_MORNING_HOLD_ENABLED: "1"
         run: |
+          set +e
           python bot.py
+          status=$?
+          echo "$status" > .bot_exit_code
+          exit 0
 
-# v87_5: Gemini offline pending preservation and executive interview cap
+      - name: Persist bot artifacts to repository
+        if: always()
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p published published_html_review logs
+          touch logs/.keep published/.keep published_html_review/.keep
+          git add published/ published_html_review/ logs/ pending_queue.json history.json confirmed_published_reports.json review_bundle_latest.zip 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "[ARTIFACT PERSIST v87.6] Nessuna modifica da committare"
+          else
+            git commit -m "chore(bot): persist published artifacts and logs [skip ci]"
+            git push
+            echo "[ARTIFACT PERSIST v87.6] Artifact e log committati nel repository"
+          fi
+
+      - name: Upload bot artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: owtv-bot-artifacts-${{ github.run_id }}
+          if-no-files-found: warn
+          path: |
+            published/
+            published_html_review/
+            logs/
+            pending_queue.json
+            history.json
+            confirmed_published_reports.json
+            review_bundle_latest.zip
+            .bot_exit_code
+
+      - name: Fail job if bot failed
+        if: always()
+        run: |
+          code=0
+          if [ -f .bot_exit_code ]; then
+            code=$(cat .bot_exit_code)
+          fi
+          if [ "$code" != "0" ]; then
+            echo "[BOT v87.6] Bot terminato con exit code $code"
+            exit "$code"
+          fi
