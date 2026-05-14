@@ -591,3 +591,289 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-14 12:42:37] VERSION [v88_media_artifact_persistence_cleanup (6b20ca0)] =====
 
+
+===== RUN START [2026-05-14 14:24:32] VERSION [v88_1_report_dedupe_pending_cleanup (48a84fb)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 8 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (30/75): Swerve Strickland On Celebrities In Wrestling: 'There's A Time And A Place For It'
+[SCORE v86.9] Cap commentary/opinion 84->68 - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day
+[PERF v71] WP lookup event_key: 1.01s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (24/75): The Miz Explains Why He Loves WWE Unreal
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite - 5/13/2026: 3 Things We Hated And 3 We Loved
+[SKIP] Score sotto soglia editoriale (30/75): AEW Reveals Eclectic Line Up For 2026 Women's Owen Hart Tournament
+[SKIP] Score sotto soglia editoriale (30/75): AEW Reveals Bracket For 2026 Men's Owen Hart Tournament
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172570/aew-tnt-champion-kevin-knight-overcomes-returning-star-open-challenge/
+[SKIP] Score sotto soglia editoriale (16/75): AEW's Shelton Benjamin Discusses Friendship With Eddie Guerrero
+[SKIP] Score sotto soglia editoriale (62/75): Backstage Speculation On Injury Status Of WWE's Dragon Lee Following Cryptic Post
+[SKIP] Score sotto soglia editoriale (36/75): Report: More WWE NXT Stars Expected To Be Called Up To The Main Roster This Summer
+[PERF v71] WP strict report lookup: 0.70s
+[REPORT v86.6/legacy] WordPress conferma report completo: report:aew-dynamite-2026-05-13 (strict_report_title_date_category)
+[REPORT v87.2] Report confermato in history forte: report:aew-dynamite-2026-05-13 (wp_strict_confirm)
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:aew-dynamite-2026-05-13 - AEW Dynamite Results 5/13 - Ten Man Tag Match, Darby Allin Defends AEW World Title
+[SKIP] Score sotto soglia editoriale (54/75): Kevin Nash Says New Day Made Right Choice By Leaving WWE, Wrestlers Should Unionize
+[SKIP] Score sotto soglia editoriale (54/75): Bully Ray: John Cena Announcement At WWE Backlash Was Confusing But 'Successful'
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Liv Morgan Doesn't Intend To Leave For Hollywood: 'I'm A Lifer'
+[SKIP] Score sotto soglia editoriale (53/75): Randy Orton Advertised For Upcoming International Episode Of WWE SmackDown
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172204/wwe-rey-fenix-penta-ethan-page-own-chance-intercontinental-title-defense/
+[SKIP] Score sotto soglia editoriale (0/75): Ronda Rousey Explains UFC's Lack Of Involvement In Carano Fight
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (49/75): Jake Paul Claims TKO Banned Him From Attending WWE Events Amid Ongoing Beef
+[WP] Verifica event_key fallita (event:legal:nick-khan:vince-mcmahon): HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=4)
+[PERF v71] WP lookup event_key: 5.03s
+[FIX] Event key in history ma non confermata su WordPress: event:legal:nick-khan:vince-mcmahon - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (49/75): GUNTHER Explains Why He Loves WWE Fans Hating Him & Why His Character Feels So Real
+[SKIP] Score sotto soglia editoriale (49/75): GUNTHER Explains Why WWE's Massive Audience Forced Him To Change His Look
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Ronda Rousey Explains How WWE Helped Prepare Her For MMA Return Against Gina Carano
+[SCORE v81.1] Cap future card announcement 83->72 - Joe Hendry Reveals He's Dropping a Full Album With WWE Music
+[WP] Verifica event_key fallita (event:logan-paul-diagnosis): HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=4)
+[PERF v71] WP lookup event_key: 5.01s
+[FIX] Event key in history ma non confermata su WordPress: event:logan-paul-diagnosis - provo a pubblicare
+[SKIP] Preview/show announcement scaduta: TNA iMPACT Preview for May 14, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] URL già in history: https://www.ringsidenews.com/joe-hendry-explains-how-can-we-fire-logan-paul-song-came-together/
+[SKIP] Score sotto soglia editoriale (40/75): Swerve Strickland Shuts Down Claims Tony Khan's Pettiness Has Hurt AEW
+[SKIP] Score sotto soglia editoriale (51/75): Former WWE Star Joe Gacy Reveals First Match After Wyatt Sicks Release
+[SKIP] URL già in history: https://www.ringsidenews.com/stephanie-vaquer-quietly-removed-wwe-raw-promotional-material/
+[SKIP] Score sotto soglia editoriale (49/75): Trick Williams Admits WWE Gingerbread Man Storyline Got Way Bigger Than Expected
+[SCORE] 100 high - Vince McMahon's Lawyers Defend Signal App Use in WWE Shareholders Lawsuit | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, evento legale/controversia, PLE/PPV, non wrestling puro, v62 evento legale grave, v62 categoria business, v71 freshness=0.685
+[SCORE] 100 high - Nikki Cross Books First Match Since WWE Release Under Different Name | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship, v71 freshness=0.683
+[SCORE] 93 high - Ronda Rousey Explains How WWE Helped Prepare Her For MMA Return Against Gina Carano | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, non wrestling puro, v62 ritorno/debutto, v71 freshness=0.678
+[SCORE] 73 medium - Why Ronda Rousey vs. Becky Lynch WrestleMania Match Never Happened | WWE/main roster, top star titolo: becky lynch, impatto roster/storyline, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, v66 cap opinion/commentary storyline, v71 source reliability soft penalty, v71 freshness=0.56, v48 tier2: 55-74
+[SCORE] 68 medium - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day | WWE/main roster, impatto roster/storyline, release/addio, v62 corporate/business, v62 categoria business, v86.9 cap commentary/opinion 84->68, v71 freshness=0.715, v48 tier2: 55-74
+[SCORE] 67 medium - Joe Hendry Reveals He's Dropping a Full Album With WWE Music | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v81.1 cap future card announcement 83->72, v71 source reliability soft penalty, v71 freshness=0.554, v48 tier2: 55-74
+[SCORE] 63 medium - Ronda Rousey Calls Pro Wrestling The "Purest Form Of Fight Choreography" | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, non wrestling puro, v62 ritorno/debutto, v68 cap opinion senza news concreta, v71 source reliability soft penalty, v71 freshness=0.677, v48 tier2: 55-74
+[SCORE] 58 low - Darby Allin Stays World Champion Following AEW Dynamite Main Event | AEW, titolo/championship, show settimanale, v62 titolo/championship, v71 freshness=0.462, v48 tier2: 55-74
+[SCORE] 55 low - Sami Zayn Acknowledges Strange 'Vibe' Surrounding WWE WrestleMania 42 | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v71 freshness=0.363, v48 tier2: 55-74
+[SCORE] 44 low - Update On Big Bill's AEW Contract | AEW, impatto roster/storyline, contratto, v71 freshness=0.709, v48 tier4: 40-44 riempimento controllato
+[MODE] Storm mode attiva: 3 news >=90, 3 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 1
+[PERF v71] WP lookup URL esistente: 0.71s
+[REPORT v87.2] Report confermato da history forte: report:aew-dynamite-2026-05-13
+[REPORT v88] True-results confermato da WordPress per event_key: report:aew-dynamite-2026-05-13
+[REPORT v87.2] Report confermato in history forte: report:aew-dynamite-2026-05-13 (wp_confirm_runtime)
+[PENDING] Coda salvata: 1 elementi
+[PENDING] Coda salvata: 0 elementi
+[PENDING v88] Rimosso true-results confermato dalla pending: report:aew-dynamite-2026-05-13
+[REPORT v86.8] Pending true-results già confermato su WordPress: rimuovo report:aew-dynamite-2026-05-13
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[BOT] News candidate totali: 10 | mode=storm | max nuove=5 | pending pubblicati=0
+[BOT] Elaborazione: Vince McMahon's Lawyers Defend Signal App Use in WWE Shareholders Lawsuit
+[BOT] semantic_id=vince-mcmahons-lawyers-defend-signal-app-use-in-wwe-shareholders-lawsuit
+[SCORE] iniziale=100 priority=high
+[PERF v71] scraping articolo: 0.71s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=13, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.37s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=BUSINESS (15) conf=1.00 model=gemini-3.1-flash-lite | Articolo di natura legale/finanziaria riguardante una causa tra azionisti e Vince McMahon. Rientra nella categoria Business per il focus su TKO, acquisizioni e dinamiche societarie.
+[EDITORIAL v72.3] translation_notes=Mantenere i termini legali tecnici (es. motion, plaintiffs, defendant) con i corretti equivalenti italiani (istanza/mozione, querelanti, convenuti).; Non tradurre nomi di app o piattaforme.; Attenzione alla distinzione tra storyline creativa e documenti legali.
+[EDITORIAL v73] final type=OTHER | category=BUSINESS (15) | Articolo di natura legale/finanziaria riguardante una causa tra azionisti e Vince McMahon. Rientra nella categoria Business per il focus su TKO, acquisizioni e dinamiche societarie.
+[PERF v71] analisi editoriale AI v72: 4.73s
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, evento legale/controversia, PLE/PPV, non wrestling puro, v62 evento legale grave, v62 categoria business
+[V71] story_signature=stable:vince_mcmahon|lawyers_defend_signal_app_use|wwe_shareholders_lawsuit|contract|wwe semantic_status=new_story freshness=0.685
+[PERF v71] WP recent posts dedupe: 1.12s
+[FIX] Event key in history ma non confermata su WordPress: event:legal:nick-khan:vince-mcmahon - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.47s
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=13
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'The service is currently unavailable.', 'status': 'UNAVAILABLE'}}
+[MODEL v88] Cooldown globale modello per la run: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-2.5-flash-lite
+[PERF v71] traduzione: 27.70s
+[FIX] Titolo non valido (ok) -> fallback automatico: Vince Mcmahon's lawyers defend signal app use in WWE shareholders lawsuit
+[MODEL v88] task=title chain=gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Avvocati di Vince McMahon difendono l'uso di Signal nella causa degli azionisti WWE
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/vince-mcmahons-lawyers-defend-signal-app-use-in-wwe-shareholders-lawsuit-48.jpg
+[MEDIA] Immagine caricata: 4541
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260514_142540_001_avvocati-di-vince-mcmahon-difendono-luso-di-signal-nella-causa-degli-azionisti-wwe_4542_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4542
+[PERF v71] creazione post WordPress: 3.31s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/vince-mcmahons-lawyers-defend-signal-app-use-in-wwe-shareholders-lawsuit-48.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4541
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Vince McMahon's Lawyers Defend Signal App Use in WWE Shareho': 38.77s
+[OK] Pubblicato: Avvocati di Vince McMahon difendono l'uso di Signal nella causa degli azionisti WWE
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260514_142541_001_avvocati-di-vince-mcmahon-difendono-l-uso-di-signal-nella-causa-degli-azionisti-_ec9531a7_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Avvocati di Vince McMahon difendono l'uso di Signal nella causa degli azionisti WWE
+[PUBLISHED REVIEW v87.1] Review outer salvata: Avvocati di Vince McMahon difendono l'uso di Signal nella causa degli azionisti WWE
+[BOT] Elaborazione: Nikki Cross Books First Match Since WWE Release Under Different Name
+[BOT] semantic_id=nikki-cross-books-first-match-since-wwe-release-under-different-name
+[SCORE] iniziale=100 priority=high
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/nikki-cross-books-first-match-since-wwe-release-under-different-name/
+[PERF v71] scraping articolo: 0.67s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=11, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/nikki-cross-books-first-match-since-wwe-release-under-different-name/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.36s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WORLD (8) conf=0.90 model=gemini-3-flash-preview | L'articolo riporta la notizia ufficiale del primo match post-WWE di Nikki Cross in PROGRESS Wrestling sotto il nome di Nikki Storm.
+[EDITORIAL v72.3] translation_notes=Tradurre 'release' con licenziamento o addio, mai rilascio.; Mantenere i nomi Nikki Storm e Nikki Cross e il nome dell'evento PROGRESS Chapter 196: Scorchio.; Tradurre 'full-circle moment' come chiusura del cerchio.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WORLD (8) | L'articolo riporta la notizia ufficiale del primo match post-WWE di Nikki Cross in PROGRESS Wrestling sotto il nome di Nikki Storm.
+[PERF v71] analisi editoriale AI v72: 5.47s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Nikki Cross Books First Match Since WWE Release Under Different Name
+[SCORE] raffinato=100 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship
+[V71] story_signature=stable:nikki_cross_books_first_match_since|wwe_release_under_different_name|status|wwe semantic_status=new_story freshness=0.683
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=11
+[MODEL v88] task=postedit chain=gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-2.5-flash-lite
+[PERF v71] traduzione: 31.54s
+[MODEL v88] task=title chain=gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Nikki Cross tornerà sul ring come Nikki Storm dopo il licenziamento dalla WWE
+[WARN v71.3] Quote check sotto soglia ma non bloccante: ['quote count ratio below threshold: 0.50'] - Nikki Cross Books First Match Since WWE Release Under Different Name
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/ThisIs_Progress/status/2054860717363216823
+[EMBED v87.3] Positional embed guard applicato: 1 modifiche
+[EMBED v88] Publish media guard: expected=1 before=0 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/nikki-cross-books-first-match-since-wwe-release-under-different-name-14.jpg
+[MEDIA] Immagine caricata: 4544
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260514_142623_002_nikki-cross-tornerà-sul-ring-come-nikki-storm-dopo-il-licenziamento-dalla-wwe_4545_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4545
+[PERF v71] creazione post WordPress: 3.17s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/nikki-cross-books-first-match-since-wwe-release-under-different-name-14.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4544
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Nikki Cross Books First Match Since WWE Release Under Differ': 42.00s
+[OK] Pubblicato: Nikki Cross tornerà sul ring come Nikki Storm dopo il licenziamento dalla WWE
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260514_142625_002_nikki-cross-torner-sul-ring-come-nikki-storm-dopo-il-licenziamento-dalla-wwe_120ca91a_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Nikki Cross tornerà sul ring come Nikki Storm dopo il licenziamento dalla WWE
+[PUBLISHED REVIEW v87.1] Review outer salvata: Nikki Cross tornerà sul ring come Nikki Storm dopo il licenziamento dalla WWE
+[REPORT v87.6] Non scrivo history forte: non true-results/canonico (report:wwe-nxt-2026-07-26)
+[BOT] Elaborazione: Ronda Rousey Explains How WWE Helped Prepare Her For MMA Return Against Gina Carano
+[BOT] semantic_id=ronda-rousey-explains-how-wwe-helped-prepare-her-for-mma-return-against-gina-carano
+[SCORE] iniziale=93 priority=high
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/ronda-rousey-explains-how-wwe-helped-prepare-her-mma-return-against-gina-carano/
+[PERF v71] scraping articolo: 0.63s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=10, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/ronda-rousey-explains-how-wwe-helped-prepare-her-mma-return-against-gina-carano/
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.34s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=OPINION conf=0.95 | category=WWE (4) conf=0.90 model=gemini-3-flash-preview | L'articolo riporta un'intervista e le riflessioni personali di Ronda Rousey sulla sua carriera, il rapporto tra wrestling e MMA e il lato promozionale del business.
+[EDITORIAL v72.3] translation_notes=Non tradurre nomi di federazioni come WWE o UFC.; 'Fight choreography' deve essere tradotto come 'coreografia dei combattimenti'.; Tradurre 'segue' come 'passaggio' o 'transizione' per evitare calchi.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta un'intervista e le riflessioni personali di Ronda Rousey sulla sua carriera, il rapporto tra wrestling e MMA e il lato promozionale del business.
+[PERF v71] analisi editoriale AI v72: 13.28s
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, non wrestling puro, v62 ritorno/debutto, v72.3 cap opinion
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Ronda Rousey Explains How WWE Helped Prepare Her For MMA Return Against Gina Carano
+[V71] story_signature=stable:ronda_rousey_explains_how|wwe_helped_prepare_her_for|mma_return_against_gina_carano|return|wwe semantic_status=new_story freshness=0.678
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=10
+[MODEL v88] task=postedit chain=gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-2.5-flash-lite
+[PERF v71] traduzione: 23.54s
+[MODEL v88] task=title chain=gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Ronda Rousey: la WWE mi ha preparata per il ritorno nelle MMA contro Gina Carano
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/ronda-rousey-explains-how-wwe-helped-prepare-her-for-mma-return-against-gina-carano-38.jpg
+[MEDIA] Immagine caricata: 4547
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260514_142709_003_ronda-rousey-la-wwe-mi-ha-preparata-per-il-ritorno-nelle-mma-contro-gina-carano_4548_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4548
+[PERF v71] creazione post WordPress: 5.66s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/ronda-rousey-explains-how-wwe-helped-prepare-her-for-mma-return-against-gina-carano-38.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4547
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Ronda Rousey Explains How WWE Helped Prepare Her For MMA Ret': 44.29s
+[OK] Pubblicato: Ronda Rousey: la WWE mi ha preparata per il ritorno nelle MMA contro Gina Carano
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260514_142710_003_ronda-rousey-la-wwe-mi-ha-preparata-per-il-ritorno-nelle-mma-contro-gina-carano_8897c5f4_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Ronda Rousey: la WWE mi ha preparata per il ritorno nelle MMA contro Gina Carano
+[PUBLISHED REVIEW v87.1] Review outer salvata: Ronda Rousey: la WWE mi ha preparata per il ritorno nelle MMA contro Gina Carano
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: Why Ronda Rousey vs. Becky Lynch WrestleMania Match Never Happened
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day
+[BOT] semantic_id=eric-bischoff-reveals-why-he-wasnt-surprised-by-wwe-releasing-the-new-day
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=6, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=0.90 model=gemini-3-flash-preview | Analisi di Eric Bischoff sul licenziamento del New Day e sui cambiamenti del modello di business WWE/TKO. Articolo di opinione basato su un podcast.
+[EDITORIAL v72.3] translation_notes=Non tradurre il nome del team 'The New Day'.; 'Released' non deve essere 'rilasciato': usare 'licenziato' o 'addio'.; 'Virtue signal' può essere reso come 'esibizionismo morale' o 'fare del finto moralismo'.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | Analisi di Eric Bischoff sul licenziamento del New Day e sui cambiamenti del modello di business WWE/TKO. Articolo di opinione basato su un podcast.
+[PERF v71] analisi editoriale AI v72: 6.04s
+[SCORE] raffinato=54 priority=low | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, v62 business/dirigenza, v62 categoria business, v72.3 cap opinion: niente boost raffinamento, v72.3 cap opinion
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day
+[SKIP v85.1] future card/segment announcement non-spoiler pre-Gemini: Joe Hendry Reveals He's Dropping a Full Album With WWE Music
+[PENDING] Coda salvata: 0 elementi
+[PERF v71] WP lookup URL esistente: 0.65s
+[BOT] Elaborazione: Ronda Rousey Calls Pro Wrestling The "Purest Form Of Fight Choreography"
+[BOT] semantic_id=ronda-rousey-calls-pro-wrestling-the-purest-form-of-fight-choreography
+[SCORE] iniziale=63 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/ronda-rousey-calls-pro-wrestling-purest-form-fight-choreography/
+[PERF v71] scraping articolo: 0.61s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/ronda-rousey-calls-pro-wrestling-purest-form-fight-choreography/
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.32s
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=OPINION conf=0.95 | category=WWE (4) conf=0.90 model=gemini-3-flash-preview | L'articolo si concentra su un'intervista a Ronda Rousey e sulle sue riflessioni personali sul pro wrestling, classificandolo come opinione/intervista.
+[EDITORIAL v72.3] translation_notes=Tradurre 'purest form of fight choreography' come 'la forma più pura di coreografia di combattimento'.; Evitare il calco 'chiama' nel titolo, usare 'definisce' o 'considera'.; Mantenere 'crossover star' o usare 'stella mainstream'.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo si concentra su un'intervista a Ronda Rousey e sulle sue riflessioni personali sul pro wrestling, classificandolo come opinione/intervista.
+[PERF v71] analisi editoriale AI v72: 5.98s
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, non wrestling puro, v62 ritorno/debutto, v68 cap opinion senza news concreta, v72.3 cap opinion: niente boost raffinamento, v72.3 cap opinion
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Ronda Rousey Calls Pro Wrestling The "Purest Form Of Fight Choreography"
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Ronda Rousey Calls Pro Wrestling The "Purest Form Of Fight Choreography"
+[SKIP v86.6/legacy] low_score_pre_gemini:58: Darby Allin Stays World Champion Following AEW Dynamite Main Event
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:55: Sami Zayn Acknowledges Strange 'Vibe' Surrounding WWE WrestleMania 42
+[PENDING] Coda salvata: 0 elementi
+[PERF v71] WP lookup URL esistente: 0.53s
+[SKIP v84.1] Storm anti-spreco: score 44<55, non chiamo Gemini - Update On Big Bill's AEW Contract
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 10 candidati provati | mode=storm
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-14 14:24:32_summary.json -> published_html_review/run_2026-05-14 14-24-32_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (87 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
+===== RUN END [2026-05-14 14:24:32] VERSION [v88_1_report_dedupe_pending_cleanup (48a84fb)] =====
+

@@ -1,12 +1,38 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-14 12:42:37",
-  "bot_version": "v88_media_artifact_persistence_cleanup (6b20ca0)",
-  "git_sha": "6b20ca07e8833924036429ddf6f35dede8c715b2",
-  "created_at": "2026-05-14T12:42:58",
-  "published_count": 0,
-  "published_post_ids": [],
-  "published_artifacts": [],
+  "run_id": "2026-05-14 14:24:32",
+  "bot_version": "v88_1_report_dedupe_pending_cleanup (48a84fb)",
+  "git_sha": "48a84fbafc158153919d7f256577c80025afc9de",
+  "created_at": "2026-05-14T14:27:26",
+  "published_count": 3,
+  "published_post_ids": [
+    "4542",
+    "4545",
+    "4548"
+  ],
+  "published_artifacts": [
+    {
+      "post_id": 4542,
+      "title": "Avvocati di Vince McMahon difendono l'uso di Signal nella causa degli azionisti WWE",
+      "source_url": "https://www.ringsidenews.com/vince-mcmahons-lawyers-defend-signal-app-use-wwe-shareholders-lawsuit/",
+      "html_file": "published/20260514_142540_001_avvocati-di-vince-mcmahon-difendono-luso-di-signal-nella-causa-degli-azionisti-wwe_4542_final.html",
+      "metadata_file": "published/20260514_142540_001_avvocati-di-vince-mcmahon-difendono-luso-di-signal-nella-causa-degli-azionisti-wwe_4542_metadata.json"
+    },
+    {
+      "post_id": 4545,
+      "title": "Nikki Cross tornerà sul ring come Nikki Storm dopo il licenziamento dalla WWE",
+      "source_url": "https://www.ringsidenews.com/nikki-cross-books-first-match-since-wwe-release-under-different-name/",
+      "html_file": "published/20260514_142623_002_nikki-cross-tornerà-sul-ring-come-nikki-storm-dopo-il-licenziamento-dalla-wwe_4545_final.html",
+      "metadata_file": "published/20260514_142623_002_nikki-cross-tornerà-sul-ring-come-nikki-storm-dopo-il-licenziamento-dalla-wwe_4545_metadata.json"
+    },
+    {
+      "post_id": 4548,
+      "title": "Ronda Rousey: la WWE mi ha preparata per il ritorno nelle MMA contro Gina Carano",
+      "source_url": "https://www.ringsidenews.com/ronda-rousey-explains-how-wwe-helped-prepare-her-mma-return-against-gina-carano/",
+      "html_file": "published/20260514_142709_003_ronda-rousey-la-wwe-mi-ha-preparata-per-il-ritorno-nelle-mma-contro-gina-carano_4548_final.html",
+      "metadata_file": "published/20260514_142709_003_ronda-rousey-la-wwe-mi-ha-preparata-per-il-ritorno-nelle-mma-contro-gina-carano_4548_metadata.json"
+    }
+  ],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",

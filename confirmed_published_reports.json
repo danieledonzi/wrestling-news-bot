@@ -1,0 +1,15 @@
+{
+  "confirmed_published_report_keys": [
+    "report:aew-dynamite-2026-05-13"
+  ],
+  "published_reports": {
+    "report:aew-dynamite-2026-05-13": {
+      "report_key": "report:aew-dynamite-2026-05-13",
+      "title": "AEW Dynamite Results 5/13 - Ten Man Tag Match, Darby Allin Defends AEW World Title",
+      "source_url": "https://www.wrestlinginc.com/2171646/aew-dynamite-may-13-ten-man-tag-match-darby-allin-defends-aew-world-title/",
+      "wp_post_id": null,
+      "confirmed_at": "2026-05-14T14:25:02Z",
+      "reason": "wp_confirm_runtime"
+    }
+  }
+}
