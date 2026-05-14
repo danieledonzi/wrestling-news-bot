@@ -1,4 +1,4 @@
-name: OpenWrestlingTV Bot v87_3
+name: OpenWrestlingTV Bot v87_4
 
 on:
   workflow_dispatch:
@@ -23,7 +23,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests feedparser beautifulsoup4 google-genai
 
-      - name: Run bot v87_3
+      - name: Run bot v87_4
         env:
           WP_USER: ${{ secrets.WP_USER }}
           WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
@@ -38,4 +38,4 @@ jobs:
         run: |
           python bot.py
 
-# v87_3: Gemini offline pending preservation and executive interview cap
+# v87_4: Gemini offline pending preservation and executive interview cap
