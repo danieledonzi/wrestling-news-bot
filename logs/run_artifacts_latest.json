@@ -1,38 +1,12 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-14 16:24:56",
-  "bot_version": "v88_1_report_dedupe_pending_cleanup (9b40361)",
-  "git_sha": "9b40361d806aaf3cb306d4a3598a4bb620f017bd",
-  "created_at": "2026-05-14T16:29:50",
-  "published_count": 3,
-  "published_post_ids": [
-    "4552",
-    "4555",
-    "4560"
-  ],
-  "published_artifacts": [
-    {
-      "post_id": 4552,
-      "title": "WWE: aggiornamenti sul rientro di Stephanie Vaquer dopo l'infortunio",
-      "source_url": "https://www.ringsidenews.com/stephanie-vaquers-wwe-return-status-gets-major-update-injury-absence/",
-      "html_file": "published/20260514_162651_001_wwe-aggiornamenti-sul-rientro-di-stephanie-vaquer-dopo-linfortunio_4552_final.html",
-      "metadata_file": "published/20260514_162651_001_wwe-aggiornamenti-sul-rientro-di-stephanie-vaquer-dopo-linfortunio_4552_metadata.json"
-    },
-    {
-      "post_id": 4555,
-      "title": "El Cuatrero torna a lottare nonostante la condanna: i dettagli sulla situazione",
-      "source_url": "https://www.ringsidenews.com/stephanie-vaquers-ex-boyfriend-el-cuatreros-wrestling-status-revealed-12-year-prison-sentence/",
-      "html_file": "published/20260514_162730_002_el-cuatrero-torna-a-lottare-nonostante-la-condanna-i-dettagli-sulla-situazione_4555_final.html",
-      "metadata_file": "published/20260514_162730_002_el-cuatrero-torna-a-lottare-nonostante-la-condanna-i-dettagli-sulla-situazione_4555_metadata.json"
-    },
-    {
-      "post_id": 4560,
-      "title": "Karrion Kross e Scarlett commentano gli ultimi licenziamenti in WWE",
-      "source_url": "https://www.wrestlinginc.com/2172708/karrion-kross-scarlett-wwe-releases/",
-      "html_file": "published/20260514_162938_003_karrion-kross-e-scarlett-commentano-gli-ultimi-licenziamenti-in-wwe_4560_final.html",
-      "metadata_file": "published/20260514_162938_003_karrion-kross-e-scarlett-commentano-gli-ultimi-licenziamenti-in-wwe_4560_metadata.json"
-    }
-  ],
+  "run_id": "2026-05-14 16:56:57",
+  "bot_version": "v88_1_report_dedupe_pending_cleanup (0d627f3)",
+  "git_sha": "0d627f3794b979fc41dc69178377463749af0c47",
+  "created_at": "2026-05-14T16:57:13",
+  "published_count": 0,
+  "published_post_ids": [],
+  "published_artifacts": [],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",
