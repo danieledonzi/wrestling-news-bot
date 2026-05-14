@@ -8,14 +8,6 @@ from datetime import datetime
 from pathlib import Path
 import sys
 
-from google import genai
-
-client = genai.Client(api_key=os.environ.get('AIzaSyBZafSGuW58w9oTUrrqrjTybIDhUEzkigM'))
-
-print("--- LISTA MODELLI (NUOVO SDK) ---")
-for model in client.models.list():
-    print(f"ID: {model.name} | Display: {model.display_name}")
-
 
 BOT_VERSION = "v80_oembed_safe_localized_translation"
 
@@ -18981,7 +18973,7 @@ except Exception:
 # =========================
 # v87.4 - mandatory post-publish artifacts + master log restore
 # =========================
-BOT_VERSION = "v87_4_publish_artifact_masterlog_restore"
+BOT_VERSION = "v87_5_report_history_signature_crash_fix"
 BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
 
 V874_ARTIFACT_SAVE_ENABLED = os.getenv("V874_ARTIFACT_SAVE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
@@ -19029,10 +19021,10 @@ def v874_append_master_event(event):
         event.setdefault("bot_version", BOT_VERSION_FULL)
         with open(V874_MASTER_EVENTS_FILE, "a", encoding="utf-8") as f:
             f.write(json.dumps(event, ensure_ascii=False, default=str) + "\n")
-        print(f"[MASTER LOG v87.4] Evento salvato: {event.get('type', 'event')} {event.get('post_id', '')}")
+        print(f"[MASTER LOG v87.5] Evento salvato: {event.get('type', 'event')} {event.get('post_id', '')}")
         return True
     except Exception as e:
-        msg = f"[MASTER LOG v87.4] ERRORE append evento: {e}"
+        msg = f"[MASTER LOG v87.5] ERRORE append evento: {e}"
         _V874_ARTIFACT_ERRORS.append(msg)
         print(msg)
         return False
@@ -19094,7 +19086,7 @@ def v874_save_published_artifacts(data, sem_id="", source_url="", result=None, e
         pass
     key = v874_artifact_key(post_id=post_id, source_url=source_url, title=title, sem_id=sem_id)
     if key in _V874_ARTIFACT_KEYS:
-        print(f"[PUBLISHED v87.4] Artifact gia salvato: {key}")
+        print(f"[PUBLISHED v87.5] Artifact gia salvato: {key}")
         return True
     _V874_ARTIFACT_KEYS.add(key)
     _V874_PUBLISHED_POST_IDS.add(str(post_id))
@@ -19138,7 +19130,7 @@ def v874_save_published_artifacts(data, sem_id="", source_url="", result=None, e
             "metadata_file": str(meta_file),
         }
         _V874_ARTIFACT_RECORDS.append(rec)
-        print(f"[PUBLISHED v87.4] Articolo salvato: {html_file}")
+        print(f"[PUBLISHED v87.5] Articolo salvato: {html_file}")
         v874_append_master_event({
             "type": "publish_artifact_saved",
             "post_id": post_id,
@@ -19151,7 +19143,7 @@ def v874_save_published_artifacts(data, sem_id="", source_url="", result=None, e
         })
         return True
     except Exception as e:
-        msg = f"[PUBLISHED v87.4] ERRORE salvataggio artifact post_id={post_id}: {e}"
+        msg = f"[PUBLISHED v87.5] ERRORE salvataggio artifact post_id={post_id}: {e}"
         _V874_ARTIFACT_ERRORS.append(msg)
         print(msg)
         v874_append_master_event({
@@ -19193,9 +19185,9 @@ def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", 
                 featured_image_url=featured_image_url,
             )
             if not ok:
-                print(f"[RUN ARTIFACTS v87.4] ATTENZIONE: WP publish riuscito ma artifact locale non salvato post_id={post_id}")
+                print(f"[RUN ARTIFACTS v87.5] ATTENZIONE: WP publish riuscito ma artifact locale non salvato post_id={post_id}")
     except Exception as e:
-        msg = f"[RUN ARTIFACTS v87.4] ERRORE hook post-publish: {e}"
+        msg = f"[RUN ARTIFACTS v87.5] ERRORE hook post-publish: {e}"
         _V874_ARTIFACT_ERRORS.append(msg)
         print(msg)
     return result
@@ -19214,10 +19206,10 @@ try:
                 is_true = False
             if not is_true:
                 if not re.search(r"\b(results?|risultati|highlights?|key moments?|momenti salienti)\b", probe, re.I):
-                    print(f"[REPORT v87.4] Non scrivo history forte: non true-results ({report_key})")
+                    print(f"[REPORT v87.5] Non scrivo history forte: non true-results ({report_key})")
                     return False
             if not re.match(r"^report:[a-z0-9_-]+-[0-9]{4}-[0-9]{2}-[0-9]{2}$", str(report_key or "")):
-                print(f"[REPORT v87.4] Non scrivo history forte: report_key non canonica ({report_key})")
+                print(f"[REPORT v87.5] Non scrivo history forte: report_key non canonica ({report_key})")
                 return False
         return _ORIG_V874_v872_mark_report_confirmed(report_key, source_url=source_url, title=title, wp_post_id=wp_post_id, reason=reason)
 except Exception:
@@ -19249,9 +19241,9 @@ def v874_finalize_run_artifacts():
             "summary_file": str(V874_RUN_ARTIFACT_SUMMARY_FILE),
         })
         status = "ok" if not _V874_ARTIFACT_ERRORS else "errors"
-        print(f"[RUN ARTIFACTS v87.4] master_log=ok published={len(_V874_ARTIFACT_RECORDS)} errors={len(_V874_ARTIFACT_ERRORS)} status={status}")
+        print(f"[RUN ARTIFACTS v87.5] master_log=ok published={len(_V874_ARTIFACT_RECORDS)} errors={len(_V874_ARTIFACT_ERRORS)} status={status}")
     except Exception as e:
-        print(f"[RUN ARTIFACTS v87.4] ERRORE summary finale: {e}")
+        print(f"[RUN ARTIFACTS v87.5] ERRORE summary finale: {e}")
     try:
         _LOG_HANDLE.flush()
     except Exception:
@@ -19266,14 +19258,14 @@ try:
         if not isinstance(obj, str):
             return obj
         repl = {
-            "[MODEL v87.3]": "[MODEL v87.4]",
-            "[REPORT v87.3]": "[REPORT v87.4]",
+            "[MODEL v87.3]": "[MODEL v87.5]",
+            "[REPORT v87.3]": "[REPORT v87.5]",
             "[REPORT v87.3/legacy]": "[REPORT v87.4/legacy]",
             "[RUN v87.3/legacy]": "[RUN v87.4/legacy]",
-            "[EMBED v87.3]": "[EMBED v87.4]",
+            "[EMBED v87.3]": "[EMBED v87.5]",
             "[REVIEW v87.3]": "[REVIEW v87.4]",
             "[PUBLISHED REVIEW v87.3]": "[PUBLISHED REVIEW v87.4]",
-            "[BOOT v87.3]": "[BOOT v87.4]",
+            "[BOOT v87.3]": "[BOOT v87.5]",
         }
         for old, new in repl.items():
             obj = obj.replace(old, new)
@@ -19286,10 +19278,62 @@ except Exception:
     pass
 
 
+
+
+# v87.5 - report history signature crash fix
+# Fixes TypeError caused by mixed legacy wrappers calling v872_mark_report_confirmed(..., url=...)
+# while v87.4 exposed source_url/wp_post_id parameters. The public function is now tolerant.
+try:
+    _ORIG_V875_REPORT_MARKER = _ORIG_V874_v872_mark_report_confirmed if "_ORIG_V874_v872_mark_report_confirmed" in globals() else v872_mark_report_confirmed
+except Exception:
+    _ORIG_V875_REPORT_MARKER = None
+
+def v875_is_strict_true_results_report(report_key="", title="", source_url=""):
+    probe = f"{report_key or ''} {title or ''} {source_url or ''}".lower()
+    try:
+        if bool(v865_is_true_results_report_title(title or "")) or bool(v865_is_true_results_report_event_key(report_key or "")):
+            return True
+    except Exception:
+        pass
+    if not re.match(r"^report:[a-z0-9_-]+-[0-9]{4}-[0-9]{2}-[0-9]{2}$", str(report_key or "")):
+        return False
+    return bool(re.search(r"\b(results?|risultati|highlights?|key moments?|momenti salienti)\b", probe, re.I))
+
+def v872_mark_report_confirmed(report_key="", title="", url="", source_url="", post_id=None, wp_post_id=None, reason="", **kwargs):
+    """Backward/forward compatible confirmed-report writer.
+
+    Accepted legacy/new names:
+      - url / source_url
+      - post_id / wp_post_id
+    This prevents a successful WP publish from crashing during post-publish history marking.
+    """
+    source_url_final = source_url or url or kwargs.get("source") or kwargs.get("source_url") or ""
+    post_id_final = wp_post_id if wp_post_id is not None else post_id
+    if post_id_final is None:
+        post_id_final = kwargs.get("post") or kwargs.get("wp_id") or kwargs.get("post_id")
+    if V874_STRICT_REPORT_HISTORY_ENABLED:
+        if not v875_is_strict_true_results_report(report_key, title, source_url_final):
+            print(f"[REPORT v87.5] Non scrivo history forte: non true-results/canonico ({report_key})")
+            return False
+    if _ORIG_V875_REPORT_MARKER:
+        try:
+            return _ORIG_V875_REPORT_MARKER(report_key, title=title, url=source_url_final, post_id=post_id_final, reason=reason)
+        except TypeError:
+            try:
+                return _ORIG_V875_REPORT_MARKER(report_key, source_url=source_url_final, title=title, wp_post_id=post_id_final, reason=reason)
+            except TypeError:
+                return _ORIG_V875_REPORT_MARKER(report_key, title, source_url_final, post_id_final, reason)
+    return False
+
+# Model availability note from live ListModels. Keep routing unchanged in this hotfix,
+# but expose the exact usable Gemini 3 Flash id for the next model-matrix patch.
+V875_AVAILABLE_GEMINI_3_FLASH_MODEL = "gemini-3-flash-preview"
+
+
 # Runtime entrypoint - keep this at the very end so all version overrides are active.
 if __name__ == "__main__":
     if V854_BOOT_DIAGNOSTICS_ENABLED:
-        print(f"[BOOT v87.4] __main__ reached epoch={time.time():.3f}", flush=True)
+        print(f"[BOOT v87.5] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
