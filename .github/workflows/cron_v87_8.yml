@@ -1,0 +1,159 @@
+name: OpenWrestlingTV Bot v87_8
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/30 * * * *"
+
+permissions:
+  contents: write
+
+env:
+  BOT_ARTIFACT_PATHS: |
+    published/
+    published_html_review/
+    logs/
+    pending_articles.json
+    history.txt
+    history.json
+    confirmed_published_reports.json
+    review_bundle_latest.zip
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests feedparser beautifulsoup4 google-genai
+
+      - name: Run bot v87_8
+        id: run_bot
+        env:
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
+          WP_URL: ${{ secrets.WP_URL }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL_CHAIN: gemini-3.1-flash-lite,gemini-2.5-flash-lite
+          V877_ENABLE_GEMINI_3_FLASH_PREVIEW: "1"
+          V877_GEMINI_3_FLASH_MODEL: gemini-3-flash-preview
+          V877_FATAL_AUTH_ENABLED: "1"
+          V877_REPORT_CONFIRM_CLEANUP_ENABLED: "1"
+          V88_MEDIA_RECOVERY_ENABLED: "1"
+          V88_FORCE_POSITIONAL_EMBEDS_ENABLED: "1"
+          V88_RECOVER_INLINE_IMAGES_ENABLED: "1"
+          V88_WORKFLOW_SAFE_FILENAMES_ENABLED: "1"
+          V86_7_PENDING_TRUTH_FIX_ENABLED: "1"
+          V86_7_STRICT_TRUE_REPORT_PENDING_ENABLED: "1"
+          V86_6_MEDIA_GUARD_ENABLED: "1"
+          V86_6_FUTURE_SPEC_CAP_ENABLED: "1"
+          V86_2_REPORT_MORNING_HOLD_ENABLED: "1"
+        run: |
+          set +e
+          python bot.py
+          status=$?
+          echo "$status" > .bot_exit_code
+          exit 0
+
+      - name: Sanitize artifact filenames
+        if: always()
+        run: |
+          set -e
+          python - <<'PY'
+          from pathlib import Path
+          roots = [Path('published'), Path('published_html_review'), Path('logs')]
+          invalid = {':':'-', '"':'-', '<':'-', '>':'-', '|':'-', '*':'-', '?':'-'}
+          for root in roots:
+              if not root.exists():
+                  continue
+              for path in sorted(root.rglob('*'), key=lambda p: len(p.parts), reverse=True):
+                  if not path.exists():
+                      continue
+                  clean = path.name.replace('\r','').replace('\n','')
+                  for old, new in invalid.items():
+                      clean = clean.replace(old, new)
+                  if clean != path.name:
+                      target = path.with_name(clean)
+                      i = 1
+                      while target.exists():
+                          target = path.with_name(f"{target.stem}_{i}{target.suffix}")
+                          i += 1
+                      path.rename(target)
+                      print(f"[ARTIFACT SANITIZE v87.8] {path} -> {target}")
+          PY
+
+      - name: Persist bot artifacts to repository
+        if: always()
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          mkdir -p published published_html_review logs
+          touch logs/.keep published/.keep published_html_review/.keep
+
+          echo "[ARTIFACT PERSIST v87.8] Stato prima dello staging"
+          git status --short --ignored logs published published_html_review pending_articles.json history.txt history.json confirmed_published_reports.json .bot_exit_code || true
+
+          # Stage tracked modifications/deletions first, including sanitized renames.
+          git add -A -- published published_html_review logs || true
+
+          # Force-add ignored artifact files. The previous workflow saw !! entries but did not stage them.
+          find published published_html_review logs -type f -print0 | xargs -0 -r git add -f --
+          for p in pending_articles.json pending_queue.json history.txt history.json confirmed_published_reports.json review_bundle_latest.zip .bot_exit_code; do
+            if [ -e "$p" ]; then
+              git add -f -- "$p"
+            fi
+          done
+
+          echo "[ARTIFACT PERSIST v87.8] Stato dopo lo staging"
+          git status --short || true
+
+          if git diff --cached --quiet; then
+            echo "[ARTIFACT PERSIST v87.8] Nessuna modifica staged da committare"
+          else
+            git commit -m "chore(bot): persist v88 artifacts and logs [skip ci]"
+            git push
+            echo "[ARTIFACT PERSIST v87.8] Artifact, published e master log committati nel repository"
+          fi
+
+      - name: Upload bot artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: owtv-bot-artifacts-${{ github.run_id }}
+          if-no-files-found: warn
+          path: |
+            published/
+            published_html_review/
+            logs/
+            pending_articles.json
+            pending_queue.json
+            history.txt
+            history.json
+            confirmed_published_reports.json
+            review_bundle_latest.zip
+            .bot_exit_code
+
+      - name: Fail job if bot failed
+        if: always()
+        run: |
+          code=0
+          if [ -f .bot_exit_code ]; then
+            code=$(cat .bot_exit_code)
+          fi
+          if [ "$code" != "0" ]; then
+            echo "[BOT v87.8] Bot terminato con exit code $code"
+            exit "$code"
+          fi
