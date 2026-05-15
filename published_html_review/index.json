@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-15 09:27:05",
-  "last_bot_version": "v88_3_quality_floor_report_media_guards (b94f07d)",
-  "updated_at": "2026-05-15T09:27:36",
-  "total_items": 38,
+  "last_run_id": "2026-05-15 11:20:51",
+  "last_bot_version": "v88_3_1_roster_arrival_guard (1f3a583)",
+  "updated_at": "2026-05-15T11:21:46",
+  "total_items": 39,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -308,6 +308,14 @@
       "original_html_file": "20260515_061010_001_tna-impact-del-14-maggio-2026-slater-difende-l-x-division-title-per-la-storia-e-_2089fc85_original.html",
       "final_html_file": "20260515_061010_001_tna-impact-del-14-maggio-2026-slater-difende-l-x-division-title-per-la-storia-e-_2089fc85_final.html",
       "metadata_file": "20260515_061010_001_tna-impact-del-14-maggio-2026-slater-difende-l-x-division-title-per-la-storia-e-_2089fc85_metadata.json"
+    },
+    {
+      "run_id": "2026-05-15 11:20:51",
+      "title": "TNA: Cedric Alexander nuovo X Division Champion, debutta Giovanni Vinci",
+      "url": "https://www.ringsidenews.com/former-wwe-nxt-star-giovanni-vinci-arrives-tna-right-cedric-alexanders-title-win/",
+      "original_html_file": "20260515_112139_001_tna-cedric-alexander-nuovo-x-division-champion-debutta-giovanni-vinci_3ce0714e_original.html",
+      "final_html_file": "20260515_112139_001_tna-cedric-alexander-nuovo-x-division-champion-debutta-giovanni-vinci_3ce0714e_final.html",
+      "metadata_file": "20260515_112139_001_tna-cedric-alexander-nuovo-x-division-champion-debutta-giovanni-vinci_3ce0714e_metadata.json"
     }
   ]
 }
