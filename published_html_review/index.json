@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-15 22:45:40",
-  "last_bot_version": "v88_4_1_canonical_event_dedupe (0c4e8f4)",
-  "updated_at": "2026-05-15T22:49:18",
-  "total_items": 58,
+  "last_run_id": "2026-05-15 23:46:40",
+  "last_bot_version": "v88_4_1_canonical_event_dedupe (5fa346a)",
+  "updated_at": "2026-05-15T23:47:48",
+  "total_items": 59,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -468,6 +468,14 @@
       "original_html_file": "20260515_224918_003_aew-emergono-novit-sullo-status-contrattuale-di-jack-perry_0bf0f75a_original.html",
       "final_html_file": "20260515_224918_003_aew-emergono-novit-sullo-status-contrattuale-di-jack-perry_0bf0f75a_final.html",
       "metadata_file": "20260515_224918_003_aew-emergono-novit-sullo-status-contrattuale-di-jack-perry_0bf0f75a_metadata.json"
+    },
+    {
+      "run_id": "2026-05-15 23:46:40",
+      "title": "WWE, caso Ring Boy: i querelanti potranno mantenere l'anonimato",
+      "url": "https://www.wrestlinginc.com/2174193/wwe-vince-mcmahon-linda-ring-boy-lawsuit-judge-plaintiffs-anonymous/",
+      "original_html_file": "20260515_234744_001_wwe-caso-ring-boy-i-querelanti-potranno-mantenere-l-anonimato_1a3eaf9f_original.html",
+      "final_html_file": "20260515_234744_001_wwe-caso-ring-boy-i-querelanti-potranno-mantenere-l-anonimato_1a3eaf9f_final.html",
+      "metadata_file": "20260515_234744_001_wwe-caso-ring-boy-i-querelanti-potranno-mantenere-l-anonimato_1a3eaf9f_metadata.json"
     }
   ]
 }
