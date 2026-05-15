@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-15 15:52:49",
-  "last_bot_version": "v88_4_quality_microfixes (01c56bc)",
-  "updated_at": "2026-05-15T15:55:52",
-  "total_items": 46,
+  "last_run_id": "2026-05-15 15:57:55",
+  "last_bot_version": "v88_4_quality_microfixes (e414a44)",
+  "updated_at": "2026-05-15T15:58:37",
+  "total_items": 47,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -372,6 +372,14 @@
       "original_html_file": "20260515_155552_005_tna-indi-hartwell-ha-rinnovato-il-contratto_ae085021_original.html",
       "final_html_file": "20260515_155552_005_tna-indi-hartwell-ha-rinnovato-il-contratto_ae085021_final.html",
       "metadata_file": "20260515_155552_005_tna-indi-hartwell-ha-rinnovato-il-contratto_ae085021_metadata.json"
+    },
+    {
+      "run_id": "2026-05-15 15:57:55",
+      "title": "Nikki Bella sulla fine della relazione con John Cena: \"Saremmo stati infelici\"",
+      "url": "https://www.ringsidenews.com/nikki-bella-says-staying-john-cena-would-have-led-lonely-sad-life/",
+      "original_html_file": "20260515_155826_001_nikki-bella-sulla-fine-della-relazione-con-john-cena-saremmo-stati-infelici_cfdc898f_original.html",
+      "final_html_file": "20260515_155826_001_nikki-bella-sulla-fine-della-relazione-con-john-cena-saremmo-stati-infelici_cfdc898f_final.html",
+      "metadata_file": "20260515_155826_001_nikki-bella-sulla-fine-della-relazione-con-john-cena-saremmo-stati-infelici_cfdc898f_metadata.json"
     }
   ]
 }

@@ -3863,3 +3863,213 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=5 errors=0 status=ok
 ===== RUN END [2026-05-15 15:52:49] VERSION [v88_4_quality_microfixes (01c56bc)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+
+===== RUN START [2026-05-15 15:57:55] VERSION [v88_4_quality_microfixes (e414a44)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 9 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - TNA Announces Return Of Ultimate X Stipulation For Slammiversary 2026
+[SKIP] Score sotto soglia editoriale (48/75): TNA Announces Return Of Ultimate X Stipulation For Slammiversary 2026
+[SKIP] Score sotto soglia editoriale (50/75): Two Title Matches Added To ROH Supercard Of Honor 2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173729/wwe-tna-impact-fabian-aichner-giovanni-vinci-appears/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173722/tna-indi-hartwell-santino-marella-announces-contract-extension/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170206/aew-paul-wight-kenny-omega-darby-allin-ring/
+[SKIP] Score sotto soglia editoriale (0/75): TNA Impact 5/14/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (50/75): Cedric Alexander Ends Leon Slater's X-Division Title Run In TNA Impact Main Event
+[SKIP] Score sotto soglia editoriale (50/75): Mike Santana & Steve Maclin Set For TNA World Title Rematch On Upcoming Impact
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Eric Young Wins Battle Royal To Earn Shot At Mike Santana's TNA World Championship
+[SKIP] Score sotto soglia editoriale (50/75): Eric Young Wins Battle Royal To Earn Shot At Mike Santana's TNA World Championship
+[SKIP] Score sotto soglia editoriale (20/75): Shelton Benjamin Identifies Former WWE & AEW Producer Who 'Unlocked' His Potential
+[REPORT v87.2] Report confermato da history forte: report:tna-impact-2026-05-14
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:tna-impact-2026-05-14 - TNA Impact Results 5/14 - X-Division Title On The Line And More
+[SKIP] Score sotto soglia editoriale (0/75): Dana White Encourages UFC Fighters To Unionize
+[SKIP] Score sotto soglia editoriale (14/75): Khamzat Chimaev's Body Failed Him At UFC 328, According To His Brother
+[SKIP] Score sotto soglia editoriale (13/75): MLW Set To Revive TV Show After 3 Years
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173220/wwe-ronda-rousey-becky-lynch-high-profile-pitch-never-delivered/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173180/wwe-creative-plans-fatal-influence-crowd-reactions/
+[SKIP] Score sotto soglia editoriale (46/75): AEW Reportedly Has 'Real' Interest In Collaborating With WWE HOFer
+[SKIP] Score sotto soglia editoriale (12/75): Major TNA Name Reportedly Turned Down Dark Side Of The Ring Interview Opportunities
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Chelsea Green Returning to WWE SmackDown Just Days After Heart Procedure
+[SKIP] Score sotto soglia editoriale (51/75): Chelsea Green Returning to WWE SmackDown Just Days After Heart Procedure
+[SKIP] URL già in history: https://www.ringsidenews.com/blake-monroe-drops-major-hint-about-wwe-smackdown-debut-date/
+[SKIP] Score sotto soglia editoriale (50/75): Ronda Rousey Claims Credit for Women Headlining WWE and Combat Sports Events
+[SKIP] Score sotto soglia editoriale (49/75): Reason WWE Is Bringing Back More House Shows Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/asukas-wwe-future-now-considered-unclear-internally/
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Current Status of AEW Running Madison Square Garden Revealed
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - Current Status of AEW Running Madison Square Garden Revealed
+[SCORE v86.9] Cap commentary/opinion 89->68 - Speculation on WWE Moving Maxxine Dupri Into New Role
+[PERF v71] WP lookup event_key: 1.17s
+[FIX] Event key in history ma non confermata su WordPress: event:logan-paul-diagnosis - provo a pubblicare
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-believes-aew-may-struggle-land-major-tv-deal-current-contract-ends/
+[SCORE v86.9] Cap commentary/opinion 100->68 - What Being Said About CM Punk's Sudden Schedule Change
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:cm-punk-diagnosis - What Being Said About CM Punk's Sudden Schedule Change
+[SCORE v86.9] Cap commentary/opinion 100->68 - Ex-WWE Star Ronda Rousey Claims Her Fight With Gina Carano Is Breaking Women's MMA Pay Records
+[PERF v71] WP lookup event_key: 1.07s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (45/75): ROH Supercard of Honor 2026 Preview: Confirmed Matches, Start Time and How to Watch
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 69->54 - AEW Double or Nothing 2026 Closing In On Sellout After Huge Ticket Sales Jump
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - AEW Double or Nothing 2026 Closing In On Sellout After Huge Ticket Sales Jump
+[SCORE v86.9] Cap commentary/opinion 91->68 - AEW All In 2026 Ticket Numbers Already Raising Concerns
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - AEW All In 2026 Ticket Numbers Already Raising Concerns
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - AEW All In 2026 Ticket Numbers Already Raising Concerns
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SCORE] 97 high - Nikki Bella Says Staying With John Cena Would Have Led to a Lonely and Sad Life | WWE/main roster, top star titolo: john cena, nomi forti titolo: nikki bella, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v71 freshness=0.557
+[SCORE] 67 medium - WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, match/segmento annunciato, v71 low freshness/novelty, v71 freshness=0.337, v48 tier2: 55-74
+[SCORE] 63 medium - Speculation on WWE Moving Maxxine Dupri Into New Role | WWE/main roster, nomi forti lead: logan paul, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v86.9 cap commentary/opinion 89->68, v71 source reliability soft penalty, v71 freshness=0.563, v48 tier2: 55-74
+[SCORE] 63 medium - What Being Said About CM Punk's Sudden Schedule Change | WWE/main roster, top star titolo: cm punk, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v86.9 cap commentary/opinion 100->68, v71 source reliability soft penalty, v71 freshness=0.559, v48 tier2: 55-74
+[SCORE] 63 medium - Ex-WWE Star Ronda Rousey Claims Her Fight With Gina Carano Is Breaking Women's MMA Pay Records | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, show settimanale, non wrestling puro, opinione generica, v62 media rights/streaming, v62 categoria business, v86.9 cap commentary/opinion 100->68, v71 source reliability soft penalty, v71 freshness=0.79, v48 tier2: 55-74
+[SCORE] 56 low - Ronda Rousey Calls Out WWE Over Storylines That Don't Make Sense | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.55, v48 tier2: 55-74
+[SCORE] 40 low - JBL Believes The New Day Will Become Bigger Stars Outside Of WWE | WWE/main roster, impatto roster/storyline, release/addio, opinione generica, v71 freshness=0.589, v48 tier4: 40-44 riempimento controllato
+[SCORE] 40 low - Current Status of AEW Running Madison Square Garden Revealed | AEW, impatto roster/storyline, evento legale/controversia, PLE/PPV, opinione generica, v62 ritorno/debutto, v68 cap duro opinion/commentary, v88.3 hard feature skip cap 54->45, v71 source reliability soft penalty, v71 freshness=0.681, v48 tier4: 40-44 riempimento controllato
+[SCORE] 40 low - AEW Double or Nothing 2026 Closing In On Sellout After Huge Ticket Sales Jump | AEW, PLE/PPV, v62 titolo/championship, v62 categoria business, v88.2 cap OTHER/feature non-news 69->54, v88.3 hard feature skip cap 54->45, v71 source reliability soft penalty, v71 freshness=0.539, v48 tier4: 40-44 riempimento controllato
+[SCORE] 40 low - AEW All In 2026 Ticket Numbers Already Raising Concerns | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v62 corporate/business, v62 categoria business, v86.9 cap commentary/opinion 91->68, v88.2 cap OTHER/feature non-news 68->54, v88.3 hard feature skip cap 54->45, v71 source reliability soft penalty, v71 freshness=0.539, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 10 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Nikki Bella Says Staying With John Cena Would Have Led to a Lonely and Sad Life
+[BOT] semantic_id=nikki-bella-says-staying-with-john-cena-would-have-led-to-a-lonely-and-sad-life
+[SCORE] iniziale=97 priority=high
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/nikki-bella-says-staying-john-cena-would-have-led-lonely-sad-life/
+[PERF v71] scraping articolo: 0.78s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=11, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/nikki-bella-says-staying-john-cena-would-have-led-lonely-sad-life/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.44s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | Si tratta di una news su dichiarazioni rilasciate in un contesto extra-wrestling, relativa a una relazione passata di due figure storiche della WWE. Non è né un report né una preview.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi di eventi (WrestleMania 33) in inglese.; Non tradurre i nomi delle superstar.; Adattare il titolo in ottica clickbait italiana, evitando traduzioni letterali rigide per 'lonely and sad life'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Si tratta di una news su dichiarazioni rilasciate in un contesto extra-wrestling, relativa a una relazione passata di due figure storiche della WWE. Non è né un report né una preview.
+[PERF v71] analisi editoriale AI v72: 1.78s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Nikki Bella Says Staying With John Cena Would Have Led to a Lonely and Sad Life
+[SCORE] raffinato=97 priority=high | WWE/main roster, top star titolo: john cena, nomi forti titolo: nikki bella, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV
+[V71] story_signature=stable:nikki_bella|john_cena|nikki_bella_says_staying_with_john_cena_would_have_led|story|wrestling semantic_status=new_story freshness=0.557
+[PERF v71] WP recent posts dedupe: 1.63s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.95s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=11
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione applicato con gemini-3.1-flash-lite: editorial_word_ratio=0.68 (214/317) threshold=0.70
+[PRESERVE v81] Guardrail finale testo applicato
+[PERF v71] traduzione: 8.58s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/nikkigarcialove/status/2055248531741442097
+[EMBED v87.3] Positional embed guard applicato: 1 modifiche
+[EMBED v88] Publish media guard: expected=1 before=0 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/nikki-bella-says-staying-with-john-cena-would-have-led-to-a-lonely-and-sad-life-38.jpg
+[MEDIA] Immagine caricata: 4682
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_155824_001_nikki-bella-sulla-fine-della-relazione-con-john-cena-saremmo-stati-infelici_4683_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4683
+[PERF v71] creazione post WordPress: 3.78s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/nikki-bella-says-staying-with-john-cena-would-have-led-to-a-lonely-and-sad-life-38.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4682
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Nikki Bella Says Staying With John Cena Would Have Led to a ': 17.90s
+[OK] Pubblicato: Nikki Bella sulla fine della relazione con John Cena: "Saremmo stati infelici"
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_155826_001_nikki-bella-sulla-fine-della-relazione-con-john-cena-saremmo-stati-infelici_cfdc898f_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Nikki Bella sulla fine della relazione con John Cena: "Saremmo stati infelici"
+[PUBLISHED REVIEW v87.1] Review outer salvata: Nikki Bella sulla fine della relazione con John Cena: "Saremmo stati infelici"
+[BOT] Elaborazione: WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down
+[BOT] semantic_id=wwes-john-cena-classic-reportedly-a-work-in-progress-with-few-details-nailed-down
+[SCORE] iniziale=67 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta indiscrezioni e incertezze sullo stato di sviluppo di un nuovo evento, citando fonti di WrestleVotes.
+[EDITORIAL v72.3] translation_notes=Mantenere 'John Cena Classic' come nome proprio dell'evento.; Tradurre 'work in progress' con 'in fase di sviluppo' o 'lavori in corso'.; Evitare calchi per 'nailed down', usare 'ancora da definire' o 'non ancora stabiliti'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta indiscrezioni e incertezze sullo stato di sviluppo di un nuovo evento, citando fonti di WrestleVotes.
+[PERF v71] analisi editoriale AI v72: 1.38s
+[SCORE v88.3] v88.3 hard feature skip cap 100->45 - WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down
+[SCORE] raffinato=45 priority=low | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, combo top name titolo + evento forte, show settimanale, v62 media rights/streaming, v88.3 hard feature skip cap 100->45
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down
+[BOT] Elaborazione: Speculation on WWE Moving Maxxine Dupri Into New Role
+[BOT] semantic_id=speculation-on-wwe-moving-maxxine-dupri-into-new-role
+[SCORE] iniziale=63 priority=medium
+[PERF v71] scraping articolo: 0.65s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=7, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.34s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza speculazioni su un possibile cambio di ruolo per Maxxine Dupri basandosi su un segmento recente, tipico dei rumor/backstage report.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'The Vision' se si riferisce a un nickname o gimmick specifica.; Mantenere i nomi dei titoli/cinture in inglese.; Tradurre 'cosmetic business' contestualizzandolo come enfasi sull'immagine.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo analizza speculazioni su un possibile cambio di ruolo per Maxxine Dupri basandosi su un segmento recente, tipico dei rumor/backstage report.
+[PERF v71] analisi editoriale AI v72: 1.41s
+[SCORE v86.9] Cap commentary/opinion 89->68 - Speculation on WWE Moving Maxxine Dupri Into New Role
+[SCORE v88.3] v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 63->54 - Speculation on WWE Moving Maxxine Dupri Into New Role
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti lead: logan paul, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v86.9 cap commentary/opinion 89->68, v72.3 cap rumor: niente boost raffinamento, v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 63->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Speculation on WWE Moving Maxxine Dupri Into New Role
+[BOT] Elaborazione: What Being Said About CM Punk's Sudden Schedule Change
+[BOT] semantic_id=what-being-said-about-cm-punks-sudden-schedule-change
+[SCORE] iniziale=63 priority=medium
+[PERF v71] scraping articolo: 0.69s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=8, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.34s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | Articolo che riporta aggiornamenti di backstage e speculazioni su una variazione di schedule, tipico contenuto di natura rumoristica.
+[EDITORIAL v72.3] translation_notes=Mantenere 'European Tour' e 'WWE Raw' come nomi propri.; Tradurre 'schedule change' come 'variazione di programma' o 'cambiamento di calendario'.; Non tradurre 'backstage update' letteralmente, preferire 'aggiornamento dal backstage'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | Articolo che riporta aggiornamenti di backstage e speculazioni su una variazione di schedule, tipico contenuto di natura rumoristica.
+[PERF v71] analisi editoriale AI v72: 1.48s
+[SCORE v86.9] Cap commentary/opinion 100->68 - What Being Said About CM Punk's Sudden Schedule Change
+[SCORE v88.3] v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 63->54 - What Being Said About CM Punk's Sudden Schedule Change
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star titolo: cm punk, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v86.9 cap commentary/opinion 100->68, v72.3 cap rumor: niente boost raffinamento, v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 63->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - What Being Said About CM Punk's Sudden Schedule Change
+[BOT] Elaborazione: Ex-WWE Star Ronda Rousey Claims Her Fight With Gina Carano Is Breaking Women's MMA Pay Records
+[BOT] semantic_id=ex-wwe-star-ronda-rousey-claims-her-fight-with-gina-carano-is-breaking-womens-mma-pay-records
+[SCORE] iniziale=63 priority=medium
+[PERF v71] scraping articolo: 0.61s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=11, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.41s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.95 | category=WORLD (8) conf=0.90 model=gemini-3.1-flash-lite | L'articolo presenta un incontro imminente (questo weekend) analizzando le aspettative e le dichiarazioni di Rousey. Pur trattando di MMA, il soggetto è una ex-star WWE di rilievo mondiale. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Non tradurre letteralmente 'pay records', usare 'record di incassi/compensi'.; 'Dream fight' va reso come 'match dei sogni'.; 'Smashing the record' va reso con 'frantumando il record' o 'battendo ogni record'.
+[EDITORIAL v73] final type=OTHER | category=WORLD (8) | L'articolo presenta un incontro imminente (questo weekend) analizzando le aspettative e le dichiarazioni di Rousey. Pur trattando di MMA, il soggetto è una ex-star WWE di rilievo mondiale. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.54s
+[SCORE v86.9] Cap commentary/opinion 100->68 - Ex-WWE Star Ronda Rousey Claims Her Fight With Gina Carano Is Breaking Women's MMA Pay Records
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - Ex-WWE Star Ronda Rousey Claims Her Fight With Gina Carano Is Breaking Women's MMA Pay Records
+[SCORE] raffinato=54 priority=low | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, show settimanale, non wrestling puro, opinione generica, v62 media rights/streaming, v62 categoria business, v86.9 cap commentary/opinion 100->68, v88.2 cap OTHER/feature non-news 68->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Ex-WWE Star Ronda Rousey Claims Her Fight With Gina Carano Is Breaking Women's MMA Pay Records
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: Ronda Rousey Calls Out WWE Over Storylines That Don't Make Sense
+[PENDING] Coda salvata: 1 elementi
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: JBL Believes The New Day Will Become Bigger Stars Outside Of WWE
+[PENDING] Coda salvata: 1 elementi
+[SKIP v88.3] Feature storico/FIFA/venue/media call escluso: Current Status of AEW Running Madison Square Garden Revealed
+[SKIP v88.3] Feature storico/FIFA/venue/media call escluso: AEW Double or Nothing 2026 Closing In On Sellout After Huge Ticket Sales Jump
+[SKIP v88.3] Feature storico/FIFA/venue/media call escluso: AEW All In 2026 Ticket Numbers Already Raising Concerns
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 10 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-15 15:57:55_summary.json -> published_html_review/run_2026-05-15 15-57-55_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (186 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
+===== RUN END [2026-05-15 15:57:55] VERSION [v88_4_quality_microfixes (e414a44)] =====
+
