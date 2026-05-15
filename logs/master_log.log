@@ -2513,3 +2513,230 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-14 23:47:46] VERSION [v88_2_editorial_performance_guards (ca605e8)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+
+===== RUN START [2026-05-15 02:25:35] VERSION [v88_2_editorial_performance_guards (86441d6)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 8 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Eric Young Wins Battle Royal To Earn Shot At Mike Santana's TNA World Championship
+[SKIP] Score sotto soglia editoriale (20/75): Shelton Benjamin Identifies Former WWE & AEW Producer Who 'Unlocked' His Potential
+[PERF v71] WP strict report lookup: 1.31s
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:tna-impact-2026-05-14 - TNA Thursday Night Impact Results 5/14 - X-Division Title On The Line And More
+[SKIP] Score sotto soglia editoriale (0/75): Dana White Encourages UFC Fighters To Unionize
+[SKIP] Score sotto soglia editoriale (14/75): Khamzat Chimaev's Body Failed Him At UFC 328, According To His Brother
+[SKIP] Score sotto soglia editoriale (13/75): MLW Set To Revive TV Show After 3 Years
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173220/wwe-ronda-rousey-becky-lynch-high-profile-pitch-never-delivered/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173180/wwe-creative-plans-fatal-influence-crowd-reactions/
+[SKIP] Score sotto soglia editoriale (46/75): AEW Reportedly Has 'Real' Interest In Collaborating With WWE HOFer
+[SKIP] Score sotto soglia editoriale (18/75): Major TNA Name Reportedly Turned Down Dark Side Of The Ring Interview Opportunities
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173032/wwe-creative-status-stephanie-vaquer/
+[SKIP] Score sotto soglia editoriale (44/75): AEW Collision Ratings & Viewership Report: 5/9/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172708/karrion-kross-scarlett-wwe-releases/
+[SKIP] Score sotto soglia editoriale (16/75): Jim Ross Identifies WWE Character He Thinks Should Be Used Sparingly
+[SKIP] Score sotto soglia editoriale (18/75): AEW's Adam Copeland Offers Update On His Retirement 'Clock'
+[SKIP] Score sotto soglia editoriale (30/75): Swerve Strickland On Celebrities In Wrestling: 'There's A Time And A Place For It'
+[SCORE v86.9] Cap commentary/opinion 84->68 - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day
+[PERF v71] WP lookup event_key: 1.32s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172624/update-big-bill-aew-contract/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (57/75): Mercedes Moné Attends Star Wars: The Mandalorian and Grogu World Premiere In Los Angeles
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - The Miz Says WWE Veterans "Hate" WWE Unreal Because It Exposes How Hard WWE Really Is
+[SKIP] Score sotto soglia editoriale (49/75): The Miz Says WWE Veterans "Hate" WWE Unreal Because It Exposes How Hard WWE Really Is
+[SKIP] Score sotto soglia editoriale (34/75): Chris Jericho Pops Up In Minnesota Vikings 2026 NFL Schedule Reveal Vide
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:tna-impact-2026-05-14 - TNA iMPACT Results, Highlights and Key Moments for May 14, 2026
+[PERF v71] WP lookup event_key: 1.33s
+[FIX] Event key in history ma non confermata su WordPress: event:logan-paul-release - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (49/75): WWE NXT Viewership Sees Massive Drop on May 12, 2026
+[SKIP] Score sotto soglia editoriale (49/75): WWE Backlash 2026 ESPN2 Simulcast Viewership Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-2k-developers-hit-hard-company-wide-layoffs/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-house-show-tickets-expected-much-cheaper-this-summer/
+[SKIP] URL già in history: https://www.ringsidenews.com/ronda-rousey-credits-paul-heyman-wwe-changing-how-she-promotes-mma-fights/
+[SKIP] Score sotto soglia editoriale (51/75): Sareee's Status for AEW's Owen Hart Foundation Tournament After Injury Announcement
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 8 record da event_keys
+[PENDING] Coda salvata: 1 elementi
+[REPORT v86.6/legacy] Hold fino alle 06:30: report:tna-impact-2026-05-14 | pronto tra 124 min - TNA Thursday Night Impact Results 5/14 - X-Division Title On The Line And More
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 8 record da event_keys
+[PENDING] Coda salvata: 1 elementi
+[REPORT v86.6/legacy] Hold fino alle 06:30: report:tna-impact-2026-05-14 | pronto tra 124 min - TNA iMPACT Results, Highlights and Key Moments for May 14, 2026
+[REPORT v86.8/legacy] 2 true-results report trattenuti fino alle 06:30 Europe/Rome
+[SCORE] 100 high - Early Betting Odds Released For May 23 WWE Saturday Night's Main Event | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, show settimanale, v62 titolo/championship, v71 freshness=0.785
+[SCORE] 78 medium - Indi Hartwell Re-Signs With TNA Wrestling | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, evento legale/controversia, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.694
+[SCORE] 77 medium - John Cena Reveals He Was Diagnosed With Rare Eye Condition After Ignoring Symptoms | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.579
+[SCORE] 73 medium - WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, match/segmento annunciato, v71 freshness=0.506, v48 tier2: 55-74
+[SCORE] 68 medium - Eric Bischoff Reveals Why He Wasn't Surprised By WWE Releasing The New Day | WWE/main roster, impatto roster/storyline, release/addio, v62 corporate/business, v62 categoria business, v86.9 cap commentary/opinion 84->68, v71 freshness=0.565, v48 tier2: 55-74
+[SCORE] 58 low - Former AEW Champ Swerve Strickland Reacts To Kofi Kingston's WWE Departure | WWE/main roster, impatto roster/storyline, release/addio, v62 reazioni/tributi, v71 freshness=0.482, v48 tier2: 55-74
+[SCORE] 52 low - Eric Young Becomes New #1 Contender For TNA World Championship | TNA, titolo/championship, PLE/PPV, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.566, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - Eric Young Wins Battle Royal To Earn Shot At Mike Santana's TNA World Championship | TNA, titolo/championship, show settimanale, v62 titolo/championship, v71 freshness=0.717, v48 tier3: 45-54 contestuale
+[SCORE] 49 low - Jey Uso Claims He's the Best in the Game Right Now | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v62 titolo/championship, v68 cap duro opinion/commentary, v71 source reliability soft penalty, v71 freshness=0.524, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 9 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Early Betting Odds Released For May 23 WWE Saturday Night's Main Event
+[BOT] semantic_id=early-betting-odds-released-for-may-23-wwe-saturday-nights-main-event
+[SCORE] iniziale=100 priority=high
+[PERF v71] scraping articolo: 0.71s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=8, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.35s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo presenta le quote delle scommesse per un evento imminente, con l'obiettivo di preparare i fan ai match già annunciati. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (Intercontinental Championship, WWE World Tag Team Championship).; Tradurre 'favorite' e 'underdog' con terminologia tecnica del betting.; Non tradurre i nomi dei wrestler.
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo presenta le quote delle scommesse per un evento imminente, con l'obiettivo di preparare i fan ai match già annunciati. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.13s
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 100->65 - Early Betting Odds Released For May 23 WWE Saturday Night's Main Event
+[SCORE] raffinato=65 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, show settimanale, v62 titolo/championship, v88.2 cap OTHER/feature non-news 100->65
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Early Betting Odds Released For May 23 WWE Saturday Night's Main Event
+[V71] story_signature=stable:logan_paul|ethan_page|penta|status|wwe semantic_status=new_story freshness=0.785
+[PERF v71] WP recent posts dedupe: 0.95s
+[FIX] Event key in history ma non confermata su WordPress: event:logan-paul-release - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.28s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=8
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 3.42s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2025/07/final-betting-odds-for-saturday-nights-main-event-on-july-12-2025-reveal-incredibly-one-sided-wins-40.xml
+[MEDIA] Immagine caricata: 4632
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_022557_001_quote-scommesse-per-il-wwe-saturday-nights-main-event-del-23-maggio_4633_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4633
+[PERF v71] creazione post WordPress: 2.84s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2025/07/final-betting-odds-for-saturday-nights-main-event-on-july-12-2025-reveal-incredibly-one-sided-wins-40.xml
+[MEDIA v85] Riutilizzo immagine già caricata: 4632
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Early Betting Odds Released For May 23 WWE Saturday Night's ': 10.24s
+[OK] Pubblicato: Quote scommesse per il WWE Saturday Night's Main Event del 23 maggio
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_022558_001_quote-scommesse-per-il-wwe-saturday-night-s-main-event-del-23-maggio_f10a6ad0_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Quote scommesse per il WWE Saturday Night's Main Event del 23 maggio
+[PUBLISHED REVIEW v87.1] Review outer salvata: Quote scommesse per il WWE Saturday Night's Main Event del 23 maggio
+[REPORT v87.6] Non scrivo history forte: non true-results/canonico (report:wwe-raw-2026-05-23)
+[BOT] Elaborazione: Indi Hartwell Re-Signs With TNA Wrestling
+[BOT] semantic_id=indi-hartwell-re-signs-with-tna-wrestling
+[SCORE] iniziale=78 priority=medium
+[PERF v71] scraping articolo: 0.56s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=7, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.31s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=TNA (7) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta una notizia di mercato avvenuta durante l'episodio di TNA Impact. Non è un report completo (quindi non Editoriali) né una preview.
+[EDITORIAL v72.3] translation_notes=Mantenere 'TNA iMPACT!' e 'Knockouts division' in inglese.; 'Re-signed' tradurre con 'ha rinnovato il contratto'.; 'Departure angle' tradurre come 'storyline d'addio' o 'scenario di partenza'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=TNA (7) | L'articolo riporta una notizia di mercato avvenuta durante l'episodio di TNA Impact. Non è un report completo (quindi non Editoriali) né una preview.
+[PERF v71] analisi editoriale AI v72: 1.18s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Indi Hartwell Re-Signs With TNA Wrestling
+[SCORE] raffinato=83 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, evento legale/controversia, PLE/PPV
+[V71] story_signature=stable:santino_marella|indi_hartwell_re|signs_with|status|tna semantic_status=new_story freshness=0.694
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=7
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[CAREER v80.9] Repair frase career/status con gemini-3.1-flash-lite
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[CAREER v80.9] Repair frase career/status con gemini-3.1-flash-lite
+[PERF v71] traduzione: 4.49s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Indi Hartwell rinnova il contratto con TNA Wrestling
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/indi-hartwell-re-signs-with-tna-wrestling-38.jpg
+[MEDIA] Immagine caricata: 4635
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_022609_002_indi-hartwell-rinnova-il-contratto-con-tna-wrestling_4636_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4636
+[PERF v71] creazione post WordPress: 3.03s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/indi-hartwell-re-signs-with-tna-wrestling-38.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4635
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Indi Hartwell Re-Signs With TNA Wrestling': 10.46s
+[OK] Pubblicato: Indi Hartwell rinnova il contratto con TNA Wrestling
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_022610_002_indi-hartwell-rinnova-il-contratto-con-tna-wrestling_db6e6131_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Indi Hartwell rinnova il contratto con TNA Wrestling
+[PUBLISHED REVIEW v87.1] Review outer salvata: Indi Hartwell rinnova il contratto con TNA Wrestling
+[REPORT v87.6] Non scrivo history forte: non true-results/canonico (report:wwe-nxt-2026-05-14)
+[BOT] Elaborazione: John Cena Reveals He Was Diagnosed With Rare Eye Condition After Ignoring Symptoms
+[BOT] semantic_id=john-cena-reveals-he-was-diagnosed-with-rare-eye-condition-after-ignoring-symptoms
+[SCORE] iniziale=77 priority=medium
+[PERF v71] scraping articolo: 0.57s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=14, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=14, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.33s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | Si tratta di una news di gossip/salute riguardante un wrestler iconico, non rientra nelle dinamiche di show o storyline.
+[EDITORIAL v72.3] translation_notes=Mantenere un tono informativo ma discorsivo visto l'argomento medico.; Non tradurre 'Demodex blepharitis' (blefarite da Demodex), ma spiegarlo come nel testo.; Attenzione a non confondere l'età citata (49 anni) con i dati anagrafici reali (Cena ne ha 47), riportare la dichiarazione di Cena fedelmente.
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | Si tratta di una news di gossip/salute riguardante un wrestler iconico, non rientra nelle dinamiche di show o storyline.
+[PERF v71] analisi editoriale AI v72: 1.31s
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 82->65 - John Cena Reveals He Was Diagnosed With Rare Eye Condition After Ignoring Symptoms
+[SCORE] raffinato=65 priority=medium | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, v88.2 cap OTHER/feature non-news 82->65
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - John Cena Reveals He Was Diagnosed With Rare Eye Condition After Ignoring Symptoms
+[V71] story_signature=stable:john_cena|john_cena_reveals_he_was_diagnosed_with_rare_eye_condition_a|story|wrestling semantic_status=new_story freshness=0.579
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=14
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione scartato: editorial_word_ratio=0.61 (290/474) threshold=0.70
+[PERF v71] traduzione: 23.70s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): John Cena rivela di aver ignorato i sintomi di una rara patologia oculare
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/john-cena-reveals-he-was-diagnosed-with-rare-eye-condition-after-ignoring-symptoms-55.jpg
+[MEDIA] Immagine caricata: 4638
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_022640_003_john-cena-rivela-di-aver-ignorato-i-sintomi-di-una-rara-patologia-oculare_4639_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4639
+[PERF v71] creazione post WordPress: 3.35s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/john-cena-reveals-he-was-diagnosed-with-rare-eye-condition-after-ignoring-symptoms-55.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4638
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'John Cena Reveals He Was Diagnosed With Rare Eye Condition A': 30.18s
+[OK] Pubblicato: John Cena rivela di aver ignorato i sintomi di una rara patologia oculare
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_022642_003_john-cena-rivela-di-aver-ignorato-i-sintomi-di-una-rara-patologia-oculare_317e7792_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: John Cena rivela di aver ignorato i sintomi di una rara patologia oculare
+[PUBLISHED REVIEW v87.1] Review outer salvata: John Cena rivela di aver ignorato i sintomi di una rara patologia oculare
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-15 02:25:35_summary.json -> published_html_review/run_2026-05-15 02-25-35_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (148 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
+===== RUN END [2026-05-15 02:25:35] VERSION [v88_2_editorial_performance_guards (86441d6)] =====
+

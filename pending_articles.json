@@ -1,1 +1,69 @@
-[]
+[
+  {
+    "kind": "report",
+    "url": "https://www.wrestlinginc.com/2173426/tna-thursday-night-impact-may-14-x-division-title-on-line-more/",
+    "title": "TNA Thursday Night Impact Results 5/14 - X-Division Title On The Line And More",
+    "semantic_id": "report-tna-impact-2026-05-14",
+    "title_key": "thursday-impact-results-5-14-x-division-line-more",
+    "score": 80,
+    "priority": "high",
+    "event_key": "report:tna-impact-2026-05-14",
+    "report_event_key": "report:tna-impact-2026-05-14",
+    "summary": "This is Wrestling Inc.'s coverage for \"TNA Thursday Night Impact\" on May 14, 2026, with a X-Division Championship Match between Leon Slater & Cedric Alexander!",
+    "reasons": [
+      "TNA",
+      "titolo/championship",
+      "show settimanale",
+      "v62 titolo/championship",
+      "v75 hard results report",
+      "v77 hard report protected",
+      "v71 freshness=0.579"
+    ],
+    "score_reasons": [
+      "TNA",
+      "titolo/championship",
+      "show settimanale",
+      "v62 titolo/championship",
+      "v75 hard results report",
+      "v77 hard report protected",
+      "v71 freshness=0.579",
+      "v86.2 report morning hold",
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "v62 media rights/streaming",
+      "v62 categoria business",
+      "v66 cap title match non-title-change",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.556"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 0,
+    "status": "waiting_report_morning_hold",
+    "reason": "report_hold_until_0630",
+    "created_at": 1778803123.0,
+    "first_seen": 1778803123.0,
+    "last_seen": 1778811946.6356027,
+    "not_before": 1778819400.0,
+    "hold_until_label": "06:30 Europe/Rome",
+    "attempts": 0,
+    "sources": [
+      {
+        "url": "https://www.wrestlinginc.com/2173426/tna-thursday-night-impact-may-14-x-division-title-on-line-more/",
+        "title": "TNA Thursday Night Impact Results 5/14 - X-Division Title On The Line And More",
+        "source": "www.wrestlinginc.com",
+        "first_seen": 1778803123.0,
+        "last_seen": 1778811946.6343853,
+        "last_text_len": 0
+      },
+      {
+        "url": "https://www.ringsidenews.com/tna-impact-results-highlights-key-moments-may-14-2026/",
+        "title": "TNA iMPACT Results, Highlights and Key Moments for May 14, 2026",
+        "source": "www.ringsidenews.com",
+        "first_seen": 1778805060.0,
+        "last_seen": 1778811946.9581053,
+        "last_text_len": 0
+      }
+    ],
+    "story_signature_v71": "stable:report_tna-impact-2026-05-14"
+  }
+]
