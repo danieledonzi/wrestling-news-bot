@@ -14,10 +14,13 @@ V884_SOFT_GAMING_SKIP_ENABLED = os.getenv("V88_4_SOFT_GAMING_SKIP_ENABLED", "1")
 V884_HEALTH_PERSONAL_CAP = int(os.getenv("V88_4_HEALTH_PERSONAL_CAP", "54"))
 V884_GAMING_CAP = int(os.getenv("V88_4_GAMING_CAP", "45"))
 
-V884_GAMING_NON_NEWS_TERMS = [
+# The layoffs terms are deliberately NOT enough by themselves. They must be paired with
+# a clear gaming/WWE 2K context, otherwise legitimate wrestling layoffs would be skipped.
+V884_GAMING_CONTEXT_TERMS = [
     "wwe 2k", "visual concepts", "2k developers", "2k developer", "game developers",
-    "gaming", "video game", "videogame", "company-wide layoffs", "layoffs", "licenziamenti",
+    "gaming", "video game", "videogame", "developer team", "development team",
 ]
+V884_LAYOFF_TERMS = ["company-wide layoffs", "layoffs", "licenziamenti", "hit hard", "colpito"]
 V884_GAMING_OPERATIONAL_TERMS = [
     "cover star", "roster reveal", "dlc", "release date", "gameplay trailer", "announced for wwe 2k",
 ]
@@ -32,11 +35,12 @@ def v884_probe(*parts):
 
 def v884_is_gaming_soft_non_news(title="", text="", url="", editorial_analysis=None):
     p = v884_probe(title, url, (text or "")[:2000], (editorial_analysis or {}).get("article_type_reason", ""))
-    if not any(term in p for term in V884_GAMING_NON_NEWS_TERMS):
-        return False
     if any(term in p for term in V884_GAMING_OPERATIONAL_TERMS):
         return False
-    return True
+    has_gaming_context = any(term in p for term in V884_GAMING_CONTEXT_TERMS)
+    has_layoff_context = any(term in p for term in V884_LAYOFF_TERMS)
+    # Skip/cap only when the story is explicitly gaming/2K/Visual Concepts and not a wrestling-roster layoff.
+    return bool(has_gaming_context and has_layoff_context)
 
 
 def v884_is_health_personal_non_operational(title="", text="", url="", editorial_analysis=None):
