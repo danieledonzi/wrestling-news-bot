@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-15 21:51:11",
-  "last_bot_version": "v88_4_1_canonical_event_dedupe (f6059bb)",
-  "updated_at": "2026-05-15T21:53:33",
-  "total_items": 55,
+  "last_run_id": "2026-05-15 22:45:40",
+  "last_bot_version": "v88_4_1_canonical_event_dedupe (0c4e8f4)",
+  "updated_at": "2026-05-15T22:49:18",
+  "total_items": 58,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -444,6 +444,30 @@
       "original_html_file": "20260515_215333_002_ronda-rousey-il-mio-ultimo-match-in-wwe-stato-un-dito-medio-ai-fan_884cab3e_original.html",
       "final_html_file": "20260515_215333_002_ronda-rousey-il-mio-ultimo-match-in-wwe-stato-un-dito-medio-ai-fan_884cab3e_final.html",
       "metadata_file": "20260515_215333_002_ronda-rousey-il-mio-ultimo-match-in-wwe-stato-un-dito-medio-ai-fan_884cab3e_metadata.json"
+    },
+    {
+      "run_id": "2026-05-15 22:45:40",
+      "title": "Svelati i produttori dei segmenti di Roman Reigns, The Usos e Jacob Fatu a WWE Raw",
+      "url": "https://www.ringsidenews.com/masterminds-behind-roman-reigns-usos-jacob-fatu-may-11-wwe-raw-storyline-revealed/",
+      "original_html_file": "20260515_224744_001_svelati-i-produttori-dei-segmenti-di-roman-reigns-the-usos-e-jacob-fatu-a-wwe-ra_6a481c17_original.html",
+      "final_html_file": "20260515_224744_001_svelati-i-produttori-dei-segmenti-di-roman-reigns-the-usos-e-jacob-fatu-a-wwe-ra_6a481c17_final.html",
+      "metadata_file": "20260515_224744_001_svelati-i-produttori-dei-segmenti-di-roman-reigns-the-usos-e-jacob-fatu-a-wwe-ra_6a481c17_metadata.json"
+    },
+    {
+      "run_id": "2026-05-15 22:45:40",
+      "title": "ROH Supercard of Honor: risultati e highlights del 15 maggio 2026",
+      "url": "https://www.ringsidenews.com/roh-supercard-honor-results-highlights-key-moments-may-15-2026/",
+      "original_html_file": "20260515_224848_002_roh-supercard-of-honor-risultati-e-highlights-del-15-maggio-2026_59339413_original.html",
+      "final_html_file": "20260515_224848_002_roh-supercard-of-honor-risultati-e-highlights-del-15-maggio-2026_59339413_final.html",
+      "metadata_file": "20260515_224848_002_roh-supercard-of-honor-risultati-e-highlights-del-15-maggio-2026_59339413_metadata.json"
+    },
+    {
+      "run_id": "2026-05-15 22:45:40",
+      "title": "AEW: emergono novità sullo status contrattuale di Jack Perry",
+      "url": "https://www.ringsidenews.com/backstage-update-emerges-jack-perrys-aew-contract-status-amid-expiry-rumors/",
+      "original_html_file": "20260515_224918_003_aew-emergono-novit-sullo-status-contrattuale-di-jack-perry_0bf0f75a_original.html",
+      "final_html_file": "20260515_224918_003_aew-emergono-novit-sullo-status-contrattuale-di-jack-perry_0bf0f75a_final.html",
+      "metadata_file": "20260515_224918_003_aew-emergono-novit-sullo-status-contrattuale-di-jack-perry_0bf0f75a_metadata.json"
     }
   ]
 }

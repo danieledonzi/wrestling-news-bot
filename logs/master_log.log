@@ -5201,3 +5201,306 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
 ===== RUN END [2026-05-15 21:51:11] VERSION [v88_4_1_canonical_event_dedupe (f6059bb)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+
+===== RUN START [2026-05-15 22:45:40] VERSION [v88_4_1_canonical_event_dedupe (0c4e8f4)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 9 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (56/75): R-Truth Supposedly Not Cleared To Compete, Pulled From Advertised WWE SmackDown Match
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown
+[SKIP] URL già in history: https://www.wrestlinginc.com/2174099/aew-buddy-matthews-injury-update-indie-appearance-cleared-october/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (18/75): Additional Details On Triller Owing AEW Money For Pay-Per-View Royalties
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (38/75): Backstage Report On AEW & Madison Square Garden After Wrestlers Express Interest
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173963/wwe-roman-reigns-added-advertised-dates-additional-details/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (62/75): John Cena On Reaction To WWE Backlash Announcement: 'There's Still A Lot To Be Done'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (36/75): Backstage Details & Speculation Regarding AAA TripleMania 2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[PERF v71] WP lookup URL esistente: 1.55s
+[PERF v71] WP lookup event_key: 2.62s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SPOILER v79.1.1] NO: nessun contesto evento
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - TNA Announces Return Of Ultimate X Stipulation For Slammiversary 2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173729/wwe-tna-impact-fabian-aichner-giovanni-vinci-appears/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173722/tna-indi-hartwell-santino-marella-announces-contract-extension/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170206/aew-paul-wight-kenny-omega-darby-allin-ring/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (57/75): Truth Behind Scott Steiner's Odd Social Media Behavior Revealed
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[PERF v71] WP lookup URL esistente: 0.74s
+[PERF v71] WP lookup event_key: 1.64s
+[FIX] Event key in history ma non confermata su WordPress: event:business:media-rights - provo a pubblicare
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Carmelo Hayes' Status for May 15 WWE SmackDown Revealed Amid TV Absence
+[SCORE v79.1.2] Spoiler validato: floor 56->75 - Carmelo Hayes' Status for May 15 WWE SmackDown Revealed Amid TV Absence
+[SKIP] Score sotto soglia editoriale (70/75): Carmelo Hayes' Status for May 15 WWE SmackDown Revealed Amid TV Absence
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (51/75): WWE Makes Last-Minute Match Change for May 15 SmackDown
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - Additional Matches Revealed for May 15 WWE SmackDown
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - Additional Matches Revealed for May 15 WWE SmackDown
+[SCORE v81.1] Cap future card announcement 56->56 - Additional Matches Revealed for May 15 WWE SmackDown
+[SKIP] Score sotto soglia editoriale (51/75): Additional Matches Revealed for May 15 WWE SmackDown
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SCORE v86.9] Cap commentary/opinion 83->68 - WWE Accidentally Uses JC Mateo Graphic to Promote SmackDown Match Despite His Release
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - WWE Accidentally Uses JC Mateo Graphic to Promote SmackDown Match Despite His Release
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - WWE Accidentally Uses JC Mateo Graphic to Promote SmackDown Match Despite His Release
+[SKIP] Score sotto soglia editoriale (49/75): WWE Accidentally Uses JC Mateo Graphic to Promote SmackDown Match Despite His Release
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE Travel Plans For Blake Monroe's SmackDown Debut Window Revealed
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - WWE Travel Plans For Blake Monroe's SmackDown Debut Window Revealed
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - WWE Travel Plans For Blake Monroe's SmackDown Debut Window Revealed
+[SKIP] Score sotto soglia editoriale (49/75): WWE Travel Plans For Blake Monroe's SmackDown Debut Window Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/joe-hendry-says-wwe-nearly-signed-him-years-before-tna-fame-changed-everything/
+[SKIP] URL già in history: https://www.ringsidenews.com/joe-hendry-names-cm-punk-as-wwe-opponent-he-wants-most/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (0/75): Ted DiBiase Jr. Blasts Weaponized Justice System After Welfare Fraud Trial Acquittal
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (59/75): Timothy Thatcher Offering WWE ID Contract Opportunity In Open Challenge Match
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (57/75): Alicia Atout Says She'll Hate Wrestling Forever If MJF Gets Shaved Bald
+[SCORE] 100 high - Masterminds Behind Roman Reigns, Usos & Jacob Fatu May 11 WWE RAW Storyline Revealed | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship, v71 freshness=0.575
+[SCORE] 96 high - Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v71 freshness=0.711
+[SCORE] 73 medium - Blake Monroe Wants Spot In John Cena Classic | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.527, v48 tier2: 55-74
+[SCORE] 70 medium - ROH Supercard Of Honor Results, Highlights and Key Moments for May 15, 2026 | AEW, titolo/championship, v62 media rights/streaming, v62 categoria business, v71 source reliability soft penalty, v71 freshness=0.577, v48 tier2: 55-74
+[SCORE] 69 medium - Update On Ticket Sales For AEW Double Or Nothing 2026 | AEW, PLE/PPV, v62 corporate/business, v62 categoria business, v71 freshness=0.599, v48 tier2: 55-74
+[SCORE] 68 medium - Jake Paul Says He Can't Get Involved In Logan's WWE Matches Due To TKO 'Beef' | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, intervista/opinione, v62 categoria business, v68 cap opinion senza news concreta, v71 freshness=0.53, v48 tier2: 55-74
+[SCORE] 61 medium - Report: CM Punk Removed From WWE Raw Dates & European Tour Due To 'Schedule Change' | WWE/main roster, top star titolo: cm punk, rumor/backstage, show settimanale, v71 freshness=0.552, v48 tier2: 55-74
+[SCORE] 58 low - Backstage Report On WWE Adding More Live Events To Schedule | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, rumor/backstage, v71 freshness=0.59, v48 tier2: 55-74
+[SCORE] 54 low - Backstage Update Emerges on Jack Perry's AEW Contract Status Amid Expiry Rumors | AEW, impatto roster/storyline, contratto, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.693, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - Two Title Matches Added To ROH Supercard Of Honor 2026 | AEW, titolo/championship, v62 titolo/championship, v71 freshness=0.523, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 2 news >=90, 2 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 14 | mode=normal | max nuove=3 | pending pubblicati=0
+[PERF v71] WP lookup URL esistente: 0.94s
+[BOT] Elaborazione: Masterminds Behind Roman Reigns, Usos & Jacob Fatu May 11 WWE RAW Storyline Revealed
+[BOT] semantic_id=masterminds-behind-roman-reigns-usos-jacob-fatu-may-11-wwe-raw-storyline-revealed
+[SCORE] iniziale=100 priority=high
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/masterminds-behind-roman-reigns-usos-jacob-fatu-may-11-wwe-raw-storyline-revealed/
+[PERF v71] scraping articolo: 0.73s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/masterminds-behind-roman-reigns-usos-jacob-fatu-may-11-wwe-raw-storyline-revealed/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.46s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo svela i producer dietro segmenti già andati in onda. Nonostante citi eventi futuri, il focus principale è il retroscena di quanto già trasmesso.
+[EDITORIAL v72.3] translation_notes=Non tradurre i nomi dei titoli (es. Intercontinental Championship, World Tag Team Titles).; 'Producer' va mantenuto come termine tecnico (non 'produttore').; Evitare calchi per 'masterminds' (usare 'le menti dietro' o simili).
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo svela i producer dietro segmenti già andati in onda. Nonostante citi eventi futuri, il focus principale è il retroscena di quanto già trasmesso.
+[PERF v71] analisi editoriale AI v72: 1.94s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Masterminds Behind Roman Reigns, Usos & Jacob Fatu May 11 WWE RAW Storyline Revealed
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship
+[V71] story_signature=stable:roman_reigns|jacob_fatu|jimmy_uso|title|wwe semantic_status=new_story freshness=0.575
+[PERF v71] WP recent posts dedupe: 0.87s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.22s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=9
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 4.39s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Svelati i produttori dei segmenti di Roman Reigns, The Usos e Jacob Fatu a WWE Raw
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/masterminds-behind-roman-reigns-usos-amp-jacob-fatu-may-11-wwe-raw-storyline-revealed-34.jpg
+[MEDIA] Immagine caricata: 4709
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_224743_001_svelati-i-produttori-dei-segmenti-di-roman-reigns-the-usos-e-jacob-fatu-a-wwe-raw_4710_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4710
+[PERF v71] creazione post WordPress: 4.50s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/masterminds-behind-roman-reigns-usos-amp-jacob-fatu-may-11-wwe-raw-storyline-revealed-34.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4709
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Masterminds Behind Roman Reigns, Usos & Jacob Fatu May 11 WW': 13.80s
+[OK] Pubblicato: Svelati i produttori dei segmenti di Roman Reigns, The Usos e Jacob Fatu a WWE Raw
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_224744_001_svelati-i-produttori-dei-segmenti-di-roman-reigns-the-usos-e-jacob-fatu-a-wwe-ra_6a481c17_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Svelati i produttori dei segmenti di Roman Reigns, The Usos e Jacob Fatu a WWE Raw
+[PUBLISHED REVIEW v87.1] Review outer salvata: Svelati i produttori dei segmenti di Roman Reigns, The Usos e Jacob Fatu a WWE Raw
+[REPORT v87.6] Non scrivo history forte: non true-results/canonico (report:wwe-raw-2026-05-11)
+[DEDUPE v88.4.1] candidate_core=canonical_event_core:blake_monroe|debut_arrival|wwe title=Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown
+[DEDUPE v88.4.1] Canonical event core caricati: 8
+[SKIP v88.4.1] Canonical event core gia pubblicato: canonical_event_core:blake_monroe|debut_arrival|wwe - Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown
+[DEDUPE v88.4.1] candidate_core=canonical_event_core:blake_monroe|future_status|wwe title=Blake Monroe Wants Spot In John Cena Classic
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: Blake Monroe Wants Spot In John Cena Classic
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: ROH Supercard Of Honor Results, Highlights and Key Moments for May 15, 2026
+[BOT] semantic_id=roh-supercard-of-honor-results-highlights-and-key-moments-for-may-15-2026
+[SCORE] iniziale=70 priority=medium
+[PERF v71] scraping articolo: 0.67s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=14, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=14, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.46s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=WORLD (8) conf=1.00 model=gemini-3.1-flash-lite | L'articolo è una presentazione (preview) dell'evento che sta per iniziare, con card, orari e link per la visione. Nonostante il titolo citi 'Results', il contenuto è puramente promozionale e descrittivo. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Non tradurre i nomi dei titoli (es. ROH World Championship).; Mantenere i nomi delle stable e dei lottatori in originale.; Adattare 'Tonight's ... promises' in modo naturale (es. 'La serata di ROH Supercard Of Honor promette...').
+[EDITORIAL v73] final type=OTHER | category=WORLD (8) | L'articolo è una presentazione (preview) dell'evento che sta per iniziare, con card, orari e link per la visione. Nonostante il titolo citi 'Results', il contenuto è puramente promozionale e descrittivo. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.37s
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 56->54 - ROH Supercard Of Honor Results, Highlights and Key Moments for May 15, 2026
+[SCORE] raffinato=54 priority=low | AEW, titolo/championship, v62 media rights/streaming, v62 categoria business, v77 AI reason/type coherence: PREVIEW cap, v88.2 cap OTHER/feature non-news 56->54
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - ROH Supercard Of Honor Results, Highlights and Key Moments for May 15, 2026
+[V71] story_signature=stable:report_roh-supercard-honor-results-highlights-key-moments-may-15-2026-05-15 semantic_status=new_story freshness=0.576
+[FIX] Event key in history ma non confermata su WordPress: event:business:media-rights - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=14
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 38.94s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): ROH Supercard of Honor: risultati e highlights del 15 maggio 2026
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/roh-supercard-of-honor-2026-preview-confirmed-matches-start-time-and-how-to-watch-09.jpg
+[MEDIA] Immagine caricata: 4712
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_224847_002_roh-supercard-of-honor-risultati-e-highlights-del-15-maggio-2026_4713_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4713
+[PERF v71] creazione post WordPress: 19.97s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/roh-supercard-of-honor-2026-preview-confirmed-matches-start-time-and-how-to-watch-09.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4712
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'ROH Supercard Of Honor Results, Highlights and Key Moments f': 62.32s
+[OK] Pubblicato: ROH Supercard of Honor: risultati e highlights del 15 maggio 2026
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_224848_002_roh-supercard-of-honor-risultati-e-highlights-del-15-maggio-2026_59339413_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: ROH Supercard of Honor: risultati e highlights del 15 maggio 2026
+[PUBLISHED REVIEW v87.1] Review outer salvata: ROH Supercard of Honor: risultati e highlights del 15 maggio 2026
+[REPORT v87.2] Report confermato in history forte: report:roh-supercard-honor-results-highlights-key-moments-may-15-2026-05-15 (publish_success)
+[BOT] Elaborazione: Update On Ticket Sales For AEW Double Or Nothing 2026
+[BOT] semantic_id=update-on-ticket-sales-for-aew-double-or-nothing-2026
+[SCORE] iniziale=69 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.95 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo fornisce un aggiornamento sui biglietti venduti in vista di un evento futuro (Double or Nothing 2026), elencando match annunciati e dinamiche di vendita correnti. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (es. AEW Women's World Championship) in inglese.; 'Flying off the shelves' va reso con 'vanno a ruba'.; 'Bell time' va tradotto come 'inizio dell'evento' o 'primo gong'.
+[EDITORIAL v73] final type=OTHER | category=AEW (5) | L'articolo fornisce un aggiornamento sui biglietti venduti in vista di un evento futuro (Double or Nothing 2026), elencando match annunciati e dinamiche di vendita correnti. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 3.78s
+[SCORE v86.9] Cap commentary/opinion 84->68 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SCORE] raffinato=45 priority=low | AEW, impatto roster/storyline, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v62 categoria business, v66 cap title match non-title-change, v86.9 cap commentary/opinion 84->68, v88.2 cap OTHER/feature non-news 68->54, v88.3 hard feature skip cap 54->45
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 45/55 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: Jake Paul Says He Can't Get Involved In Logan's WWE Matches Due To TKO 'Beef'
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Report: CM Punk Removed From WWE Raw Dates & European Tour Due To 'Schedule Change'
+[BOT] semantic_id=report-cm-punk-removed-from-wwe-raw-dates-european-tour-due-to-schedule-change
+[SCORE] iniziale=61 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo discute speculazioni e aggiornamenti di backstage sul calendario di CM Punk, basandosi su report di terze parti (Meltzer). Non è una preview né una news su un fatto già avvenuto.
+[EDITORIAL v72.3] translation_notes=Mantenere 'WWE World Heavyweight Champion' e 'Straight Edge Superstar' in inglese.; 'Schedule change' va reso come 'cambiamento di programma'.; Attenzione a non tradurre 'house show' o 'go-home show' letteralmente.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo discute speculazioni e aggiornamenti di backstage sul calendario di CM Punk, basandosi su report di terze parti (Meltzer). Non è una preview né una news su un fatto già avvenuto.
+[PERF v71] analisi editoriale AI v72: 3.76s
+[SCORE] raffinato=20 priority=skip | WWE/main roster, top star titolo: cm punk, impatto roster/storyline, WWE main roster + storyline/evento, titolo/championship, show settimanale, v68 preview scaduta
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 20/75 - Report: CM Punk Removed From WWE Raw Dates & European Tour Due To 'Schedule Change'
+[SKIP v86.6/legacy] low_score_pre_gemini:58: Backstage Report On WWE Adding More Live Events To Schedule
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Backstage Update Emerges on Jack Perry's AEW Contract Status Amid Expiry Rumors
+[BOT] semantic_id=backstage-update-emerges-on-jack-perrys-aew-contract-status-amid-expiry-rumors
+[SCORE] iniziale=54 priority=low
+[PERF v71] scraping articolo: 0.77s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.41s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza rumor riguardanti la scadenza contrattuale di Jack Perry, smentendoli attraverso fonti interne, configurandosi come un classico aggiornamento di backstage su contratti e status di atleti.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'contract' con 'contratto' se riferito a storyline; qui è reale, quindi ok.; 'Expiry' va reso come 'scadenza'.; 'People in AEW' va tradotto come 'fonti interne' o 'addetti ai lavori', non come 'persone'.
+[EDITORIAL v73] final type=RUMOR | category=AEW (5) | L'articolo analizza rumor riguardanti la scadenza contrattuale di Jack Perry, smentendoli attraverso fonti interne, configurandosi come un classico aggiornamento di backstage su contratti e status di atleti.
+[PERF v71] analisi editoriale AI v72: 6.49s
+[SCORE] raffinato=54 priority=low | AEW, impatto roster/storyline, contratto, PLE/PPV, v72.3 cap rumor: niente boost raffinamento
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Backstage Update Emerges on Jack Perry's AEW Contract Status Amid Expiry Rumors
+[V71] story_signature=stable:jack_perry|anna_jay|backstage_update_emerges|status|aew semantic_status=new_story freshness=0.693
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=9
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 7.35s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): AEW: emergono novità sullo status contrattuale di Jack Perry
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/backstage-update-emerges-on-jack-perrys-aew-contract-status-amid-expiry-rumors-16.jpg
+[MEDIA] Immagine caricata: 4715
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_224917_003_aew-emergono-novità-sullo-status-contrattuale-di-jack-perry_4716_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4716
+[PERF v71] creazione post WordPress: 2.77s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/backstage-update-emerges-on-jack-perrys-aew-contract-status-amid-expiry-rumors-16.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4715
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Backstage Update Emerges on Jack Perry's AEW Contract Status': 18.86s
+[OK] Pubblicato: AEW: emergono novità sullo status contrattuale di Jack Perry
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_224918_003_aew-emergono-novit-sullo-status-contrattuale-di-jack-perry_0bf0f75a_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: AEW: emergono novità sullo status contrattuale di Jack Perry
+[PUBLISHED REVIEW v87.1] Review outer salvata: AEW: emergono novità sullo status contrattuale di Jack Perry
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 9 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-15 22:45:40_summary.json -> published_html_review/run_2026-05-15 22-45-40_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (225 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
+===== RUN END [2026-05-15 22:45:40] VERSION [v88_4_1_canonical_event_dedupe (0c4e8f4)] =====
+
