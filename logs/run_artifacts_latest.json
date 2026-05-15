@@ -1,22 +1,12 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-15 19:04:35",
-  "bot_version": "v88_4_quality_microfixes (0001940)",
-  "git_sha": "000194002395315654998f412cda3aca958d284c",
-  "created_at": "2026-05-15T19:06:22",
-  "published_count": 1,
-  "published_post_ids": [
-    "4692"
-  ],
-  "published_artifacts": [
-    {
-      "post_id": 4692,
-      "title": "Jeff Cobb avvistato nel backstage di NJPW Wrestling Dontaku dopo l'addio alla WWE",
-      "source_url": "https://www.ringsidenews.com/jeff-cobb-spotted-backstage-njpw-event-wwe-release/",
-      "html_file": "published/20260515_190555_001_jeff-cobb-avvistato-nel-backstage-di-njpw-wrestling-dontaku-dopo-laddio-alla-wwe_4692_final.html",
-      "metadata_file": "published/20260515_190555_001_jeff-cobb-avvistato-nel-backstage-di-njpw-wrestling-dontaku-dopo-laddio-alla-wwe_4692_metadata.json"
-    }
-  ],
+  "run_id": "2026-05-15 20:04:43",
+  "bot_version": "v88_4_1_canonical_event_dedupe (2d0d329)",
+  "git_sha": "2d0d3296dd95f69d4450af214fed9043f6d014eb",
+  "created_at": "2026-05-15T20:06:02",
+  "published_count": 0,
+  "published_post_ids": [],
+  "published_artifacts": [],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",
