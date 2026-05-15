@@ -1,6 +1,7 @@
 {
   "confirmed_published_report_keys": [
-    "report:aew-dynamite-2026-05-13"
+    "report:aew-dynamite-2026-05-13",
+    "report:tna-impact-2026-05-14"
   ],
   "published_reports": {
     "report:aew-dynamite-2026-05-13": {
@@ -10,6 +11,14 @@
       "wp_post_id": null,
       "confirmed_at": "2026-05-14T14:25:02Z",
       "reason": "wp_confirm_runtime"
+    },
+    "report:tna-impact-2026-05-14": {
+      "report_key": "report:tna-impact-2026-05-14",
+      "title": "TNA Impact Results 5/14 - X-Division Title On The Line And More",
+      "source_url": "https://www.wrestlinginc.com/2173426/tna-thursday-night-impact-may-14-x-division-title-on-line-more/",
+      "wp_post_id": null,
+      "confirmed_at": "2026-05-15T08:43:30Z",
+      "reason": "wp_strict_confirm"
     }
   }
 }

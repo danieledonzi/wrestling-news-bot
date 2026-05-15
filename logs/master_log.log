@@ -2915,3 +2915,106 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
 ===== RUN END [2026-05-15 06:07:54] VERSION [v88_2_editorial_performance_guards (3177a7d)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+
+===== RUN START [2026-05-15 08:43:25] VERSION [v88_3_quality_floor_report_media_guards (1c76655)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 9 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (0/75): TNA Impact 5/14/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (50/75): Mike Santana & Steve Maclin Set For TNA World Title Rematch On Upcoming Impact
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Eric Young Wins Battle Royal To Earn Shot At Mike Santana's TNA World Championship
+[SKIP] Score sotto soglia editoriale (20/75): Shelton Benjamin Identifies Former WWE & AEW Producer Who 'Unlocked' His Potential
+[PERF v71] WP strict report lookup: 0.89s
+[REPORT v86.6/legacy] WordPress conferma report completo: report:tna-impact-2026-05-14 (source_url_strict_report_title)
+[REPORT v87.2] Report confermato in history forte: report:tna-impact-2026-05-14 (wp_strict_confirm)
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:tna-impact-2026-05-14 - TNA Impact Results 5/14 - X-Division Title On The Line And More
+[SKIP] Score sotto soglia editoriale (0/75): Dana White Encourages UFC Fighters To Unionize
+[SKIP] Score sotto soglia editoriale (14/75): Khamzat Chimaev's Body Failed Him At UFC 328, According To His Brother
+[SKIP] Score sotto soglia editoriale (13/75): MLW Set To Revive TV Show After 3 Years
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173220/wwe-ronda-rousey-becky-lynch-high-profile-pitch-never-delivered/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173180/wwe-creative-plans-fatal-influence-crowd-reactions/
+[SKIP] Score sotto soglia editoriale (46/75): AEW Reportedly Has 'Real' Interest In Collaborating With WWE HOFer
+[SKIP] Score sotto soglia editoriale (18/75): Major TNA Name Reportedly Turned Down Dark Side Of The Ring Interview Opportunities
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173032/wwe-creative-status-stephanie-vaquer/
+[SKIP] Score sotto soglia editoriale (44/75): AEW Collision Ratings & Viewership Report: 5/9/2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172708/karrion-kross-scarlett-wwe-releases/
+[SKIP] Score sotto soglia editoriale (16/75): Jim Ross Identifies WWE Character He Thinks Should Be Used Sparingly
+[SKIP] Score sotto soglia editoriale (18/75): AEW's Adam Copeland Offers Update On His Retirement 'Clock'
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 96->54 - Former WWE NXT Star Giovanni Vinci Arrives In TNA Right After Cedric Alexander's Title Win
+[SKIP] Score sotto soglia editoriale (45/75): First Match Added To TNA Slammiversary 2026
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Two More Title Matches Added To ROH Supercard Of Honor
+[SCORE v81.1] Cap future card announcement 50->50 - Two More Title Matches Added To ROH Supercard Of Honor
+[SKIP] Score sotto soglia editoriale (57/75): AEW Has No Known Plans To Merge Championships Despite Growing Fan Criticism
+[SKIP] URL già in history: https://www.ringsidenews.com/john-cena-reveals-he-diagnosed-rare-eye-condition-ignoring-symptoms/
+[SKIP] URL già in history: https://www.ringsidenews.com/indi-hartwell-re-signs-tna-wrestling/
+[SKIP] Score sotto soglia editoriale (57/75): Mercedes Moné Attends Star Wars: The Mandalorian and Grogu World Premiere In Los Angeles
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - The Miz Says WWE Veterans "Hate" WWE Unreal Because It Exposes How Hard WWE Really Is
+[SKIP] Score sotto soglia editoriale (49/75): The Miz Says WWE Veterans "Hate" WWE Unreal Because It Exposes How Hard WWE Really Is
+[SKIP] Score sotto soglia editoriale (34/75): Chris Jericho Pops Up In Minnesota Vikings 2026 NFL Schedule Reveal Vide
+[REPORT v87.2] Report confermato da history forte: report:tna-impact-2026-05-14
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:tna-impact-2026-05-14 - TNA iMPACT Results, Highlights and Key Moments for May 14, 2026
+[SKIP] URL già in history: https://www.ringsidenews.com/early-betting-odds-released-may-23-wwe-saturday-nights-main-event/
+[SKIP] Score sotto soglia editoriale (49/75): WWE NXT Viewership Sees Massive Drop on May 12, 2026
+[SKIP] Score sotto soglia editoriale (49/75): WWE Backlash 2026 ESPN2 Simulcast Viewership Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-2k-developers-hit-hard-company-wide-layoffs/
+[SCORE] 73 medium - WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, match/segmento annunciato, v71 freshness=0.427, v48 tier2: 55-74
+[SCORE] 58 low - Former AEW Champ Swerve Strickland Reacts To Kofi Kingston's WWE Departure | WWE/main roster, impatto roster/storyline, release/addio, v62 reazioni/tributi, v71 freshness=0.403, v48 tier2: 55-74
+[SCORE] 52 low - Eric Young Becomes New #1 Contender For TNA World Championship | TNA, titolo/championship, PLE/PPV, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.487, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - Cedric Alexander Ends Leon Slater's X-Division Title Run In TNA Impact Main Event | TNA, titolo/championship, show settimanale, v62 titolo/championship, v71 freshness=0.542, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - Eric Young Wins Battle Royal To Earn Shot At Mike Santana's TNA World Championship | TNA, titolo/championship, show settimanale, v62 titolo/championship, v71 freshness=0.638, v48 tier3: 45-54 contestuale
+[SCORE] 49 low - Former WWE NXT Star Giovanni Vinci Arrives In TNA Right After Cedric Alexander's Title Win | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v88.2 cap OTHER/feature non-news 96->54, v71 source reliability soft penalty, v71 freshness=0.744, v48 tier3: 45-54 contestuale
+[SCORE] 45 low - Two More Title Matches Added To ROH Supercard Of Honor | AEW, titolo/championship, v62 titolo/championship, v81.1 cap future card announcement 50->50, v71 source reliability soft penalty, v71 freshness=0.506, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 7 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down
+[BOT] semantic_id=wwes-john-cena-classic-reportedly-a-work-in-progress-with-few-details-nailed-down
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta indiscrezioni e incertezze (work in progress) su un futuro evento, basandosi su report di terze parti piuttosto che su un annuncio ufficiale di date o venue.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'work in progress' come 'lavoro in progresso', usare 'in fase di sviluppo' o 'ancora in alto mare'.; Mantenere 'John Cena Classic' come nome proprio dell'evento.; Gestire le quote di WrestleVotes con estrema precisione tecnica.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta indiscrezioni e incertezze (work in progress) su un futuro evento, basandosi su report di terze parti piuttosto che su un annuncio ufficiale di date o venue.
+[PERF v71] analisi editoriale AI v72: 1.28s
+[SCORE v88.3] v88.3 hard feature skip cap 100->45 - WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down
+[SCORE] raffinato=45 priority=low | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, combo top name titolo + evento forte, show settimanale, v62 media rights/streaming, v88.3 hard feature skip cap 100->45
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:media-rights -> event:rumor:s-john-cena-classic-a-work-progress-few-details-nailed-down
+[V71] story_signature=stable:john_cena|john_cena_classic_reportedly|work_in_progress|title|wwe semantic_status=new_story freshness=0.661
+[PERF v71] WP recent posts dedupe: 0.78s
+[SKIP] News core già pubblicata da altra fonte: WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down
+[SKIP] news_core_key=schedule-backlash
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: Former AEW Champ Swerve Strickland Reacts To Kofi Kingston's WWE Departure
+[PENDING] Coda salvata: 0 elementi
+[REPORT v87.2] True-results confermato da history forte: skip offline-safe report:tna-impact-2026-05-14 - Eric Young Becomes New #1 Contender For TNA World Championship
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:50: Cedric Alexander Ends Leon Slater's X-Division Title Run In TNA Impact Main Event
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:50: Eric Young Wins Battle Royal To Earn Shot At Mike Santana's TNA World Championship
+[PENDING] Coda salvata: 0 elementi
+[SKIP v88.2] Feature/OTHER non-news sotto priorita hard: Former WWE NXT Star Giovanni Vinci Arrives In TNA Right After Cedric Alexander's Title Win
+[SKIP v86.6/legacy] low_score_pre_gemini:45: Two More Title Matches Added To ROH Supercard Of Honor
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 7 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-15 08:43:25_summary.json -> published_html_review/run_2026-05-15 08-43-25_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (153 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-15 08:43:25] VERSION [v88_3_quality_floor_report_media_guards (1c76655)] =====
+
