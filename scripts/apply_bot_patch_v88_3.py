@@ -105,20 +105,24 @@ def v883_show_name_from_key(text="", fallback_title=""):
     s=str(text or "").lower()
     if "smackdown" in s: return "WWE SmackDown"
     if re.search(r"\braw\b", s): return "WWE Raw"
-    if "nxt" in s: return "WWE NXT"
+    if "nxt" in s and not re.search(r"stand\s*&?\s*deliver", s): return "WWE NXT"
     if "dynamite" in s: return "AEW Dynamite"
     if "collision" in s: return "AEW Collision"
     if "tna-impact" in s or "impact" in s: return "TNA Impact"
+    event_patterns = [(r"wrestlemania","WrestleMania"),(r"royal[-\s]?rumble","Royal Rumble"),(r"summer[-\s]?slam","SummerSlam"),(r"survivor[-\s]?series","Survivor Series"),(r"money[-\s]?in[-\s]?the[-\s]?bank","Money in the Bank"),(r"elimination[-\s]?chamber","Elimination Chamber"),(r"backlash","WWE Backlash"),(r"night[-\s]?of[-\s]?champions","WWE Night of Champions"),(r"crown[-\s]?jewel","WWE Crown Jewel"),(r"all[-\s]?in","AEW All In"),(r"all[-\s]?out","AEW All Out"),(r"double[-\s]?or[-\s]?nothing","AEW Double or Nothing"),(r"full[-\s]?gear","AEW Full Gear"),(r"forbidden[-\s]?door","AEW x NJPW Forbidden Door"),(r"bound[-\s]?for[-\s]?glory","TNA Bound For Glory"),(r"slammiversary","TNA Slammiversary"),(r"hard[-\s]?to[-\s]?kill","TNA Hard To Kill")]
+    for pat,val in event_patterns:
+        if re.search(pat, s, re.I): return val
     ft=str(fallback_title or "")
     for pat,val in [(r"TNA\s+(?:Thursday Night\s+)?Impact","TNA Impact"),(r"AEW\s+Dynamite","AEW Dynamite"),(r"AEW\s+Collision","AEW Collision"),(r"WWE\s+SmackDown","WWE SmackDown"),(r"WWE\s+Raw","WWE Raw"),(r"WWE\s+NXT","WWE NXT")]:
         if re.search(pat, ft, re.I): return val
-    return "Report"
+    return ""
 
 def v883_canonical_report_title(sem_id="", event_key="", title="", url="", data=None):
+    current = title or (data or {}).get("titolo","")
     key=" ".join(str(x or "") for x in [sem_id,event_key,url,title,(data or {}).get("titolo","")])
-    date_it=v883_italian_date_from_key(key)
-    if not date_it: return title or (data or {}).get("titolo","")
-    return f"{v883_show_name_from_key(key, fallback_title=title)} del {date_it}: risultati e momenti salienti"
+    date_it=v883_italian_date_from_key(key); show=v883_show_name_from_key(key, fallback_title=current)
+    if not date_it or not show: return current
+    return f"{show} del {date_it}: risultati e momenti salienti"
 
 def v883_remove_orphan_tail_report_images(html=""):
     if not html: return html
