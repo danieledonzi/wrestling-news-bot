@@ -19,7 +19,19 @@ V8831_ROSTER_ENTITY_TERMS = [
     "former wwe", "former nxt", "wwe nxt star", "former aew", "former tna",
     "free agent", "ex-wwe", "ex wwe", "released wwe", "giovanni vinci",
 ]
-V8831_DESTINATION_TERMS = [" tna", " impact", " aew", " roh", " wwe", " nxt"]
+# Destinations must be independent landing promotions, not merely the source phrase in "former WWE/NXT".
+V8831_DESTINATION_PATTERNS = [
+    r"\barrives?\s+(?:in|at)\s+tna\b",
+    r"\barrives?\s+(?:in|at)\s+aew\b",
+    r"\barrives?\s+(?:in|at)\s+roh\b",
+    r"\bdebuts?\s+(?:in|at|for)\s+tna\b",
+    r"\bdebuts?\s+(?:in|at|for)\s+aew\b",
+    r"\bdebuts?\s+(?:in|at|for)\s+roh\b",
+    r"\bsigns?\s+with\s+(?:tna|aew|roh)\b",
+    r"\bjoins?\s+(?:tna|aew|roh)\b",
+    r"\bcomes?\s+to\s+(?:tna|aew|roh)\b",
+    r"\bis\s+all\s+elite\b",
+]
 V8831_WEAK_REACTION_TERMS = ["reacts to", "credits", "reflects", "explains why", "says veterans", "media call", "odds"]
 
 
@@ -30,6 +42,10 @@ def v8831_probe(*parts):
         return " ".join(str(p or "") for p in parts).lower()
 
 
+def v8831_has_independent_destination(p):
+    return any(re.search(pattern, p, re.I) for pattern in V8831_DESTINATION_PATTERNS)
+
+
 def v8831_is_roster_arrival(title="", text="", url="", editorial_analysis=None):
     p = v8831_probe(title, url, (text or "")[:1800], (editorial_analysis or {}).get("article_type_reason", ""))
     if any(term in p for term in V8831_WEAK_REACTION_TERMS):
@@ -37,7 +53,7 @@ def v8831_is_roster_arrival(title="", text="", url="", editorial_analysis=None):
     return (
         any(term in p for term in V8831_ARRIVAL_TERMS)
         and any(term in p for term in V8831_ROSTER_ENTITY_TERMS)
-        and any(term in p for term in V8831_DESTINATION_TERMS)
+        and v8831_has_independent_destination(p)
     )
 
 
