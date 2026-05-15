@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-15 02:25:35",
-  "last_bot_version": "v88_2_editorial_performance_guards (86441d6)",
-  "updated_at": "2026-05-15T02:26:42",
-  "total_items": 37,
+  "last_run_id": "2026-05-15 06:07:54",
+  "last_bot_version": "v88_2_editorial_performance_guards (3177a7d)",
+  "updated_at": "2026-05-15T06:10:12",
+  "total_items": 38,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -300,6 +300,14 @@
       "original_html_file": "20260515_022642_003_john-cena-rivela-di-aver-ignorato-i-sintomi-di-una-rara-patologia-oculare_317e7792_original.html",
       "final_html_file": "20260515_022642_003_john-cena-rivela-di-aver-ignorato-i-sintomi-di-una-rara-patologia-oculare_317e7792_final.html",
       "metadata_file": "20260515_022642_003_john-cena-rivela-di-aver-ignorato-i-sintomi-di-una-rara-patologia-oculare_317e7792_metadata.json"
+    },
+    {
+      "run_id": "2026-05-15 06:07:54",
+      "title": "TNA Impact del 14 maggio 2026: Slater difende l'X-Division Title per la storia e si cerca il prossimo sfidante per Santana",
+      "url": "https://www.wrestlinginc.com/2173426/tna-thursday-night-impact-may-14-x-division-title-on-line-more/",
+      "original_html_file": "20260515_061010_001_tna-impact-del-14-maggio-2026-slater-difende-l-x-division-title-per-la-storia-e-_2089fc85_original.html",
+      "final_html_file": "20260515_061010_001_tna-impact-del-14-maggio-2026-slater-difende-l-x-division-title-per-la-storia-e-_2089fc85_final.html",
+      "metadata_file": "20260515_061010_001_tna-impact-del-14-maggio-2026-slater-difende-l-x-division-title-per-la-storia-e-_2089fc85_metadata.json"
     }
   ]
 }

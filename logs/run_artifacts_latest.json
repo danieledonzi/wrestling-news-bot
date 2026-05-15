@@ -1,36 +1,20 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-15 02:25:35",
-  "bot_version": "v88_2_editorial_performance_guards (86441d6)",
-  "git_sha": "86441d6c4ef88469810c3bb867cc729392d70b06",
-  "created_at": "2026-05-15T02:26:42",
-  "published_count": 3,
+  "run_id": "2026-05-15 06:07:54",
+  "bot_version": "v88_2_editorial_performance_guards (3177a7d)",
+  "git_sha": "3177a7dc586f5f8eefc451e9cc43f95788929fee",
+  "created_at": "2026-05-15T06:10:12",
+  "published_count": 1,
   "published_post_ids": [
-    "4633",
-    "4636",
-    "4639"
+    "4651"
   ],
   "published_artifacts": [
     {
-      "post_id": 4633,
-      "title": "Quote scommesse per il WWE Saturday Night's Main Event del 23 maggio",
-      "source_url": "https://www.ringsidenews.com/early-betting-odds-released-may-23-wwe-saturday-nights-main-event/",
-      "html_file": "published/20260515_022557_001_quote-scommesse-per-il-wwe-saturday-nights-main-event-del-23-maggio_4633_final.html",
-      "metadata_file": "published/20260515_022557_001_quote-scommesse-per-il-wwe-saturday-nights-main-event-del-23-maggio_4633_metadata.json"
-    },
-    {
-      "post_id": 4636,
-      "title": "Indi Hartwell rinnova il contratto con TNA Wrestling",
-      "source_url": "https://www.ringsidenews.com/indi-hartwell-re-signs-tna-wrestling/",
-      "html_file": "published/20260515_022609_002_indi-hartwell-rinnova-il-contratto-con-tna-wrestling_4636_final.html",
-      "metadata_file": "published/20260515_022609_002_indi-hartwell-rinnova-il-contratto-con-tna-wrestling_4636_metadata.json"
-    },
-    {
-      "post_id": 4639,
-      "title": "John Cena rivela di aver ignorato i sintomi di una rara patologia oculare",
-      "source_url": "https://www.ringsidenews.com/john-cena-reveals-he-diagnosed-rare-eye-condition-ignoring-symptoms/",
-      "html_file": "published/20260515_022640_003_john-cena-rivela-di-aver-ignorato-i-sintomi-di-una-rara-patologia-oculare_4639_final.html",
-      "metadata_file": "published/20260515_022640_003_john-cena-rivela-di-aver-ignorato-i-sintomi-di-una-rara-patologia-oculare_4639_metadata.json"
+      "post_id": 4651,
+      "title": "TNA Impact del 14 maggio 2026: Slater difende l'X-Division Title per la storia e si cerca il prossimo sfidante per Santana",
+      "source_url": "https://www.wrestlinginc.com/2173426/tna-thursday-night-impact-may-14-x-division-title-on-line-more/",
+      "html_file": "published/20260515_061008_001_tna-impact-del-14-maggio-2026-slater-difende-lx-division-title-per-la-storia-e-si-cerca-il_4651_final.html",
+      "metadata_file": "published/20260515_061008_001_tna-impact-del-14-maggio-2026-slater-difende-lx-division-title-per-la-storia-e-si-cerca-il_4651_metadata.json"
     }
   ],
   "errors": [],
