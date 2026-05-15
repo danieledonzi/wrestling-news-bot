@@ -1,28 +1,20 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-15 17:26:40",
-  "bot_version": "v88_4_quality_microfixes (d7d141e)",
-  "git_sha": "d7d141e0a6f30eef33b2a9f6e9066aad539ad8d9",
-  "created_at": "2026-05-15T17:27:43",
-  "published_count": 2,
+  "run_id": "2026-05-15 19:04:35",
+  "bot_version": "v88_4_quality_microfixes (0001940)",
+  "git_sha": "000194002395315654998f412cda3aca958d284c",
+  "created_at": "2026-05-15T19:06:22",
+  "published_count": 1,
   "published_post_ids": [
-    "4686",
-    "4689"
+    "4692"
   ],
   "published_artifacts": [
     {
-      "post_id": 4686,
-      "title": "Causa contro Vince McMahon: i ring boys potranno restare anonimi",
-      "source_url": "https://www.ringsidenews.com/judge-rules-wwe-ring-boys-can-stay-anonymous-lawsuit-against-vince-mcmahon/",
-      "html_file": "published/20260515_172718_001_causa-contro-vince-mcmahon-i-ring-boys-potranno-restare-anonimi_4686_final.html",
-      "metadata_file": "published/20260515_172718_001_causa-contro-vince-mcmahon-i-ring-boys-potranno-restare-anonimi_4686_metadata.json"
-    },
-    {
-      "post_id": 4689,
-      "title": "R-Truth fa chiarezza sul suo contratto quadriennale con la WWE",
-      "source_url": "https://www.ringsidenews.com/r-truth-wwe-contract-comments-clarified-confusion-interview-context/",
-      "html_file": "published/20260515_172730_002_r-truth-fa-chiarezza-sul-suo-contratto-quadriennale-con-la-wwe_4689_final.html",
-      "metadata_file": "published/20260515_172730_002_r-truth-fa-chiarezza-sul-suo-contratto-quadriennale-con-la-wwe_4689_metadata.json"
+      "post_id": 4692,
+      "title": "Jeff Cobb avvistato nel backstage di NJPW Wrestling Dontaku dopo l'addio alla WWE",
+      "source_url": "https://www.ringsidenews.com/jeff-cobb-spotted-backstage-njpw-event-wwe-release/",
+      "html_file": "published/20260515_190555_001_jeff-cobb-avvistato-nel-backstage-di-njpw-wrestling-dontaku-dopo-laddio-alla-wwe_4692_final.html",
+      "metadata_file": "published/20260515_190555_001_jeff-cobb-avvistato-nel-backstage-di-njpw-wrestling-dontaku-dopo-laddio-alla-wwe_4692_metadata.json"
     }
   ],
   "errors": [],

@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-15 17:26:40",
-  "last_bot_version": "v88_4_quality_microfixes (d7d141e)",
-  "updated_at": "2026-05-15T17:27:43",
-  "total_items": 49,
+  "last_run_id": "2026-05-15 19:04:35",
+  "last_bot_version": "v88_4_quality_microfixes (0001940)",
+  "updated_at": "2026-05-15T19:06:21",
+  "total_items": 50,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -396,6 +396,14 @@
       "original_html_file": "20260515_172731_002_r-truth-fa-chiarezza-sul-suo-contratto-quadriennale-con-la-wwe_96cebcf8_original.html",
       "final_html_file": "20260515_172731_002_r-truth-fa-chiarezza-sul-suo-contratto-quadriennale-con-la-wwe_96cebcf8_final.html",
       "metadata_file": "20260515_172731_002_r-truth-fa-chiarezza-sul-suo-contratto-quadriennale-con-la-wwe_96cebcf8_metadata.json"
+    },
+    {
+      "run_id": "2026-05-15 19:04:35",
+      "title": "Jeff Cobb avvistato nel backstage di NJPW Wrestling Dontaku dopo l'addio alla WWE",
+      "url": "https://www.ringsidenews.com/jeff-cobb-spotted-backstage-njpw-event-wwe-release/",
+      "original_html_file": "20260515_190556_001_jeff-cobb-avvistato-nel-backstage-di-njpw-wrestling-dontaku-dopo-l-addio-alla-ww_2e37d216_original.html",
+      "final_html_file": "20260515_190556_001_jeff-cobb-avvistato-nel-backstage-di-njpw-wrestling-dontaku-dopo-l-addio-alla-ww_2e37d216_final.html",
+      "metadata_file": "20260515_190556_001_jeff-cobb-avvistato-nel-backstage-di-njpw-wrestling-dontaku-dopo-l-addio-alla-ww_2e37d216_metadata.json"
     }
   ]
 }
