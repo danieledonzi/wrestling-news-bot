@@ -91,7 +91,6 @@ def v8841_find_action(text=""):
 
 def v8841_find_promo(text=""):
     p = v8841_probe(text)
-    # Prefer landing-promotion phrases for moves/debuts/contracts.
     landing_patterns = [
         ("tna", [r"\b(?:in|at|for|with|to)\s+tna\b", r"\btna impact\b", r"\bimpact\b"]),
         ("aew", [r"\b(?:in|at|for|with|to)\s+aew\b", r"\ball elite\b"]),
@@ -119,7 +118,6 @@ def v8841_canonical_event_core(*parts):
     promo = v8841_find_promo(text)
     if not promo:
         return ""
-    # Require stronger contexts for future_status to avoid merging unrelated stories on the same wrestler.
     if action == "future_status" and len(v8841_probe(text)) < 20:
         return ""
     return "canonical_event_core:" + "+".join(sorted(set(persons))) + "|" + action + "|" + promo
@@ -180,7 +178,7 @@ def v8841_is_publish_success(result):
         r = result.strip().lower()
         if r in {"published", "publish", "ok", "success", "created", "posted"}:
             return True
-        if r in {"skipped", "skip", "model_fail", "validation_fail", "wp_fail", "wp_firewall", "translation_fail", "failed", "error"}:
+        if r in {"skipped", "skip", "model_fail", "validation_fail", "wp_fail", "wp_firewall", "translation_fail", "failed", "error", "duplicate"}:
             return False
         return False
     if isinstance(result, (int, float)):
@@ -189,7 +187,7 @@ def v8841_is_publish_success(result):
         status = str(result.get("status") or result.get("result") or "").lower()
         if status in {"published", "ok", "success", "created", "posted"}:
             return True
-        if status in {"skipped", "model_fail", "validation_fail", "wp_fail", "wp_firewall", "failed", "error"}:
+        if status in {"skipped", "model_fail", "validation_fail", "wp_fail", "wp_firewall", "failed", "error", "duplicate"}:
             return False
         if result.get("id") or result.get("post_id"):
             return True
@@ -234,15 +232,14 @@ if V8841_CANONICAL_DEDUPE_ENABLED and "create_post_without_image" in globals():
             if core:
                 prior = v8841_load_published_cores()
                 if core in prior or core in _V8841_RUN_CORES:
-                    # This is a last-resort guard: the pre-publish guard should normally catch it.
-                    print(f"[DEDUPE v88.4.1] Last-check core gia noto prima del publish: {core}")
+                    print(f"[SKIP v88.4.1] Last-check canonical event core gia pubblicato: {core}")
+                    return {"status": "duplicate", "reason": "canonical_event_core", "core": core}
         except Exception as e:
             print(f"[WARN v88.4.1] canonical publish guard warning: {e}")
         res = _ORIG_V8841_create_post_without_image(data, sem_id, url, embed_urls=embed_urls, event_key=event_key, inline_images=inline_images, featured_image_url=featured_image_url)
         try:
             if core and v8841_is_publish_success(res):
                 _V8841_RUN_CORES.add(core)
-                # Refresh is intentionally not forced; the next run will read persisted metadata.
                 print(f"[DEDUPE v88.4.1] Canonical event core pubblicato/registrato: {core}")
         except Exception:
             pass
