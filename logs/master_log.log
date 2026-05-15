@@ -4972,3 +4972,232 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
 ===== RUN END [2026-05-15 20:38:28] VERSION [v88_4_1_canonical_event_dedupe (a77c339)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+
+===== RUN START [2026-05-15 21:51:11] VERSION [v88_4_1_canonical_event_dedupe (f6059bb)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 9 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - AEW's Buddy Matthews Offers Injury Update During Indie Appearance
+[SKIP] Score sotto soglia editoriale (18/75): Additional Details On Triller Owing AEW Money For Pay-Per-View Royalties
+[SKIP] Score sotto soglia editoriale (38/75): Backstage Report On AEW & Madison Square Garden After Wrestlers Express Interest
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173963/wwe-roman-reigns-added-advertised-dates-additional-details/
+[SKIP] Score sotto soglia editoriale (62/75): John Cena On Reaction To WWE Backlash Announcement: 'There's Still A Lot To Be Done'
+[PENDING v85.2] Rimuovo pending offline non recuperabile (score 70<75): TNA Impact Results 5/14 - X-Division Title On The Line And More
+[PENDING] Coda salvata: 0 elementi
+[SKIP] Score sotto soglia editoriale (36/75): Backstage Details & Speculation Regarding AAA TripleMania 2026
+[PERF v71] WP lookup event_key: 1.24s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - TNA Announces Return Of Ultimate X Stipulation For Slammiversary 2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173729/wwe-tna-impact-fabian-aichner-giovanni-vinci-appears/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173722/tna-indi-hartwell-santino-marella-announces-contract-extension/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170206/aew-paul-wight-kenny-omega-darby-allin-ring/
+[SKIP] Score sotto soglia editoriale (0/75): TNA Impact 5/14/2026: 3 Things We Hated & 3 Things We Loved
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Carmelo Hayes' Status for May 15 WWE SmackDown Revealed Amid TV Absence
+[SKIP] Score sotto soglia editoriale (51/75): Carmelo Hayes' Status for May 15 WWE SmackDown Revealed Amid TV Absence
+[SKIP] Score sotto soglia editoriale (51/75): WWE Makes Last-Minute Match Change for May 15 SmackDown
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - Additional Matches Revealed for May 15 WWE SmackDown
+[SCORE v81.1] Cap future card announcement 56->56 - Additional Matches Revealed for May 15 WWE SmackDown
+[SKIP] Score sotto soglia editoriale (51/75): Additional Matches Revealed for May 15 WWE SmackDown
+[SCORE v86.9] Cap commentary/opinion 83->68 - WWE Accidentally Uses JC Mateo Graphic to Promote SmackDown Match Despite His Release
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - WWE Accidentally Uses JC Mateo Graphic to Promote SmackDown Match Despite His Release
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - WWE Accidentally Uses JC Mateo Graphic to Promote SmackDown Match Despite His Release
+[SKIP] Score sotto soglia editoriale (49/75): WWE Accidentally Uses JC Mateo Graphic to Promote SmackDown Match Despite His Release
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE Travel Plans For Blake Monroe's SmackDown Debut Window Revealed
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - WWE Travel Plans For Blake Monroe's SmackDown Debut Window Revealed
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - WWE Travel Plans For Blake Monroe's SmackDown Debut Window Revealed
+[SKIP] Score sotto soglia editoriale (49/75): WWE Travel Plans For Blake Monroe's SmackDown Debut Window Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/joe-hendry-says-wwe-nearly-signed-him-years-before-tna-fame-changed-everything/
+[SKIP] URL già in history: https://www.ringsidenews.com/joe-hendry-names-cm-punk-as-wwe-opponent-he-wants-most/
+[SKIP] Score sotto soglia editoriale (0/75): Ted DiBiase Jr. Blasts Weaponized Justice System After Welfare Fraud Trial Acquittal
+[SKIP] Score sotto soglia editoriale (59/75): Timothy Thatcher Offering WWE ID Contract Opportunity In Open Challenge Match
+[SKIP] Score sotto soglia editoriale (57/75): Alicia Atout Says She'll Hate Wrestling Forever If MJF Gets Shaved Bald
+[SKIP] URL già in history: https://www.ringsidenews.com/jeff-cobb-spotted-backstage-njpw-event-wwe-release/
+[SCORE v86.9] Cap commentary/opinion 100->68 - Vince Russo Doesn't Believe Triple H Deserves a Pay Raise in WWE
+[PERF v71] WP lookup event_key: 1.13s
+[FIX] Event key in history ma non confermata su WordPress: event:business:wwe:executive-contract:nick-khan - provo a pubblicare
+[SKIP] URL già in history: https://www.ringsidenews.com/judge-rules-wwe-ring-boys-can-stay-anonymous-lawsuit-against-vince-mcmahon/
+[SCORE] 96 high - Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v71 freshness=0.722
+[SCORE] 73 medium - Blake Monroe Wants Spot In John Cena Classic | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.539, v48 tier2: 55-74
+[SCORE] 68 medium - Jake Paul Says He Can't Get Involved In Logan's WWE Matches Due To TKO 'Beef' | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, intervista/opinione, v62 categoria business, v68 cap opinion senza news concreta, v71 freshness=0.541, v48 tier2: 55-74
+[SCORE] 63 medium - Vince Russo Doesn't Believe Triple H Deserves a Pay Raise in WWE | WWE/main roster, nomi forti titolo: triple h, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v86.9 cap commentary/opinion 100->68, v71 source reliability soft penalty, v71 freshness=0.761, v48 tier2: 55-74
+[SCORE] 62 medium - AEW's Buddy Matthews Offers Injury Update During Indie Appearance | AEW, impatto roster/storyline, ritorno/debutto, opinione generica, v62 infortunio/operazione, v71 freshness=0.835, v48 tier2: 55-74
+[SCORE] 61 medium - Report: CM Punk Removed From WWE Raw Dates & European Tour Due To 'Schedule Change' | WWE/main roster, top star titolo: cm punk, rumor/backstage, show settimanale, v71 freshness=0.564, v48 tier2: 55-74
+[SCORE] 60 medium - Ronda Rousey Says Final WWE Match Was a Middle Finger to Fans | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, non wrestling puro, floor WWE main roster storyline, v62 reazioni/tributi, v71 source reliability soft penalty, v71 freshness=0.53, v48 tier2: 55-74
+[SCORE] 58 low - Backstage Report On WWE Adding More Live Events To Schedule | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, rumor/backstage, v71 freshness=0.601, v48 tier2: 55-74
+[SCORE] 50 low - Two Title Matches Added To ROH Supercard Of Honor 2026 | AEW, titolo/championship, v62 titolo/championship, v71 freshness=0.534, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - Cedric Alexander Ends Leon Slater's X-Division Title Run In TNA Impact Main Event | TNA, titolo/championship, show settimanale, v62 titolo/championship, v71 freshness=0.378, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 14 | mode=normal | max nuove=3 | pending pubblicati=0
+[DEDUPE v88.4.1] candidate_core=canonical_event_core:blake_monroe|debut_arrival|wwe title=Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown
+[DEDUPE v88.4.1] Canonical event core caricati: 8
+[SKIP v88.4.1] Canonical event core gia pubblicato: canonical_event_core:blake_monroe|debut_arrival|wwe - Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown
+[DEDUPE v88.4.1] candidate_core=canonical_event_core:blake_monroe|future_status|wwe title=Blake Monroe Wants Spot In John Cena Classic
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: Blake Monroe Wants Spot In John Cena Classic
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: Jake Paul Says He Can't Get Involved In Logan's WWE Matches Due To TKO 'Beef'
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Vince Russo Doesn't Believe Triple H Deserves a Pay Raise in WWE
+[BOT] semantic_id=vince-russo-doesnt-believe-triple-h-deserves-a-pay-raise-in-wwe
+[SCORE] iniziale=63 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/vince-russo-doesnt-believe-triple-h-deserves-pay-raise-wwe/
+[PERF v71] scraping articolo: 0.73s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=15, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/vince-russo-doesnt-believe-triple-h-deserves-pay-raise-wwe/
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.42s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta le critiche di Vince Russo sulle politiche salariali e di gestione di Triple H in WWE. Non si tratta di una notizia di corporate o business reale, ma di un'opinione polemica di un ex insider.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Chief Content Officer' o 'Hall of Fame'.; Tradurre 'pay raise' come 'aumento di stipendio'.; Mantenere i nomi dei programmi citati.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta le critiche di Vince Russo sulle politiche salariali e di gestione di Triple H in WWE. Non si tratta di una notizia di corporate o business reale, ma di un'opinione polemica di un ex insider.
+[PERF v71] analisi editoriale AI v72: 19.83s
+[SCORE v86.9] Cap commentary/opinion 100->68 - Vince Russo Doesn't Believe Triple H Deserves a Pay Raise in WWE
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: triple h, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v86.9 cap commentary/opinion 100->68, v72.3 cap opinion: niente boost raffinamento, v72.3 cap opinion
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Vince Russo Doesn't Believe Triple H Deserves a Pay Raise in WWE
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Vince Russo Doesn't Believe Triple H Deserves a Pay Raise in WWE
+[PERF v71] WP lookup URL esistente: 0.72s
+[BOT] Elaborazione: AEW's Buddy Matthews Offers Injury Update During Indie Appearance
+[BOT] semantic_id=aews-buddy-matthews-offers-injury-update-during-indie-appearance
+[SCORE] iniziale=62 priority=medium
+[EMBED v88] Mappa posizionale media salvata: embeds=2 url=https://www.wrestlinginc.com/2174099/aew-buddy-matthews-injury-update-indie-appearance-cleared-october/
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=1, embed=2
+[EMBED v88] Mappa posizionale media salvata: embeds=2 url=https://www.wrestlinginc.com/2174099/aew-buddy-matthews-injury-update-indie-appearance-cleared-october/
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=1, embed=2
+[BOT] Embed trovati: 2
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=AEW (5) conf=0.95 model=gemini-3.1-flash-lite | Articolo su un'apparizione in una federazione indie e aggiornamento medico su un wrestler AEW.
+[EDITORIAL v72.3] translation_notes=Mantenere 'AEW Continental Championship', 'World Series Wrestling', 'The Hounds of Hell' in inglese.; 'Cleared for action' va tradotto come 'idoneo a combattere' o 'medicamente autorizzato'.; 'Stomp' è il nome della mossa, lasciarlo invariato.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | Articolo su un'apparizione in una federazione indie e aggiornamento medico su un wrestler AEW.
+[PERF v71] analisi editoriale AI v72: 2.22s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - AEW's Buddy Matthews Offers Injury Update During Indie Appearance
+[SCORE] raffinato=88 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 ritorno/debutto
+[V71] story_signature=stable:kazuchika_okada|buddy_matthews_offers_injury_update_during_indie_appearance|return|aew semantic_status=new_story freshness=0.835
+[PERF v71] WP recent posts dedupe: 0.84s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.15s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=9
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/aews-buddy-matthews-offers-injury-update-during-indie-appearance/intro-1778879314.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 31.29s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Buddy Matthews torna sul ring in Australia: aggiornamenti sull'infortunio
+[EMBED v88] Publish media guard: expected=2 before=2 after=2 missing=0
+[MEDIA v86.7] Reintegrati 2 embed persi prima del publish
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/aews-buddy-matthews-offers-injury-update-during-indie-appearance/l-intro-1778879314.jpg
+[MEDIA] Immagine caricata: 4703
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_215236_001_buddy-matthews-torna-sul-ring-in-australia-aggiornamenti-sullinfortunio_4704_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4704
+[PERF v71] creazione post WordPress: 12.74s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/aews-buddy-matthews-offers-injury-update-during-indie-appearance/l-intro-1778879314.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4703
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'AEW's Buddy Matthews Offers Injury Update During Indie Appea': 48.42s
+[OK] Pubblicato: Buddy Matthews torna sul ring in Australia: aggiornamenti sull'infortunio
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_215238_001_buddy-matthews-torna-sul-ring-in-australia-aggiornamenti-sull-infortunio_604902cb_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Buddy Matthews torna sul ring in Australia: aggiornamenti sull'infortunio
+[PUBLISHED REVIEW v87.1] Review outer salvata: Buddy Matthews torna sul ring in Australia: aggiornamenti sull'infortunio
+[BOT] Elaborazione: Report: CM Punk Removed From WWE Raw Dates & European Tour Due To 'Schedule Change'
+[BOT] semantic_id=report-cm-punk-removed-from-wwe-raw-dates-european-tour-due-to-schedule-change
+[SCORE] iniziale=61 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo tratta il cambio di programma/presenza di una star in base a indiscrezioni del Wrestling Observer, rientrando nella categoria RUMOR su status e schedule.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (World Heavyweight Champion) in inglese.; Non tradurre 'go home show' letteralmente, usare 'episodio che precede il PLE'.; 'Schedule change' va reso come 'variazione di programma'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo tratta il cambio di programma/presenza di una star in base a indiscrezioni del Wrestling Observer, rientrando nella categoria RUMOR su status e schedule.
+[PERF v71] analisi editoriale AI v72: 4.85s
+[SCORE] raffinato=20 priority=skip | WWE/main roster, top star titolo: cm punk, impatto roster/storyline, WWE main roster + storyline/evento, titolo/championship, show settimanale, v68 preview scaduta
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 20/75 - Report: CM Punk Removed From WWE Raw Dates & European Tour Due To 'Schedule Change'
+[DEDUPE v88.4.1] candidate_core=canonical_event_core:adam_copeland|departure_release|wwe title=Ronda Rousey Says Final WWE Match Was a Middle Finger to Fans
+[BOT] Elaborazione: Ronda Rousey Says Final WWE Match Was a Middle Finger to Fans
+[BOT] semantic_id=ronda-rousey-says-final-wwe-match-was-a-middle-finger-to-fans
+[SCORE] iniziale=60 priority=medium
+[PERF v71] scraping articolo: 0.73s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=12, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.37s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza dichiarazioni retrospettive di Ronda Rousey su un match già avvenuto a SummerSlam 2023. Non presenta eventi futuri né è un report di un evento recente.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'middle finger' letteralmente, usare 'gesto di sfida' o mantenere l'espressione se contestualizzata.; 'Baddest Woman on the Planet' va mantenuto come soprannome iconico.; Tradurre 'shove that fight down their throat' come 'imporre quel match al pubblico' per evitare calchi.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo analizza dichiarazioni retrospettive di Ronda Rousey su un match già avvenuto a SummerSlam 2023. Non presenta eventi futuri né è un report di un evento recente.
+[PERF v71] analisi editoriale AI v72: 3.62s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Ronda Rousey Says Final WWE Match Was a Middle Finger to Fans
+[SCORE] raffinato=65 priority=medium | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, non wrestling puro, floor WWE main roster storyline, v62 reazioni/tributi
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Ronda Rousey Says Final WWE Match Was a Middle Finger to Fans
+[V71] story_signature=stable:ronda_rousey_says_final|wwe_match_was|middle_finger|story|wwe semantic_status=new_story freshness=0.53
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=12
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 21.54s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/ronda-rousey-says-final-wwe-match-was-a-middle-finger-to-fans-53.jpg
+[MEDIA] Immagine caricata: 4706
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_215332_002_ronda-rousey-il-mio-ultimo-match-in-wwe-è-stato-un-dito-medio-ai-fan_4707_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4707
+[PERF v71] creazione post WordPress: 21.40s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/ronda-rousey-says-final-wwe-match-was-a-middle-finger-to-fans-53.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4706
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Ronda Rousey Says Final WWE Match Was a Middle Finger to Fan': 48.54s
+[OK] Pubblicato: Ronda Rousey: "Il mio ultimo match in WWE è stato un dito medio ai fan"
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_215333_002_ronda-rousey-il-mio-ultimo-match-in-wwe-stato-un-dito-medio-ai-fan_884cab3e_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Ronda Rousey: "Il mio ultimo match in WWE è stato un dito medio ai fan"
+[PUBLISHED REVIEW v87.1] Review outer salvata: Ronda Rousey: "Il mio ultimo match in WWE è stato un dito medio ai fan"
+[DEDUPE v88.4.1] Canonical event core registrato in run dopo publish: canonical_event_core:adam_copeland|departure_release|wwe
+[SKIP v86.6/legacy] low_score_pre_gemini:58: Backstage Report On WWE Adding More Live Events To Schedule
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:50: Two Title Matches Added To ROH Supercard Of Honor 2026
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:50: Cedric Alexander Ends Leon Slater's X-Division Title Run In TNA Impact Main Event
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:48: AEW Star Chris Jericho Appears As A Waiter In NFL Team's Schedule Release Video
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:48: Jeff Cobb Reportedly Visited NJPW Following Recent WWE Release
+[PENDING] Coda salvata: 0 elementi
+[BOT] Raggiunto limite massimo candidati nuovi provati
+[BOT] Pubblicati 2 articoli (0 pending + 2 nuove) su 12 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-15 21:51:11_summary.json -> published_html_review/run_2026-05-15 21-51-11_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (215 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
+===== RUN END [2026-05-15 21:51:11] VERSION [v88_4_1_canonical_event_dedupe (f6059bb)] =====
+
