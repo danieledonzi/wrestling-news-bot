@@ -33,36 +33,5 @@
     "reason": "wp_down_initial_normal",
     "created_at": 1778837252.38128,
     "attempts": 0
-  },
-  {
-    "url": "https://www.wrestlinginc.com/2173963/wwe-roman-reigns-added-advertised-dates-additional-details/",
-    "title": "Additional Details On Roman Reigns Being Added Back To Advertised WWE Dates",
-    "semantic_id": "additional-details-on-roman-reigns-being-added-back-to-advertised-wwe-dates",
-    "title_key": "additional-details-roman-reigns-being-added-back-advertised-dates",
-    "score": 77,
-    "priority": "medium",
-    "event_key": "event:title:roman-reigns:world",
-    "story_signature_v71": "stable:roman_reigns|additional_details_on_roman_reigns_being_added_back_to_adver|wwe_dates|title|wwe",
-    "summary": "Now that things have been confirmed on when the World Heavyweight Champion will appear next, new information has been revealed on why there was so much confusion to begin with.",
-    "reasons": [
-      "WWE/main roster",
-      "top star titolo: roman reigns",
-      "WWE main roster + storyline/evento",
-      "titolo/championship",
-      "v71 freshness=0.598"
-    ],
-    "score_reasons": [
-      "WWE/main roster",
-      "top star titolo: roman reigns",
-      "WWE main roster + storyline/evento",
-      "titolo/championship",
-      "v71 freshness=0.598"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1778893603.0,
-    "status": "raw",
-    "reason": "wp_down_mid_run_normal",
-    "created_at": 1778875488.746481,
-    "attempts": 0
   }
 ]

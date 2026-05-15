@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-15 20:04:43",
-  "last_bot_version": "v88_4_1_canonical_event_dedupe (2d0d329)",
-  "updated_at": "2026-05-15T20:06:01",
-  "total_items": 50,
+  "last_run_id": "2026-05-15 20:38:28",
+  "last_bot_version": "v88_4_1_canonical_event_dedupe (a77c339)",
+  "updated_at": "2026-05-15T20:42:21",
+  "total_items": 53,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -404,6 +404,30 @@
       "original_html_file": "20260515_190556_001_jeff-cobb-avvistato-nel-backstage-di-njpw-wrestling-dontaku-dopo-l-addio-alla-ww_2e37d216_original.html",
       "final_html_file": "20260515_190556_001_jeff-cobb-avvistato-nel-backstage-di-njpw-wrestling-dontaku-dopo-l-addio-alla-ww_2e37d216_final.html",
       "metadata_file": "20260515_190556_001_jeff-cobb-avvistato-nel-backstage-di-njpw-wrestling-dontaku-dopo-l-addio-alla-ww_2e37d216_metadata.json"
+    },
+    {
+      "run_id": "2026-05-15 20:38:28",
+      "title": "Nuovi dettagli sul ritorno di Roman Reigns negli show WWE pubblicizzati",
+      "url": "https://www.wrestlinginc.com/2173963/wwe-roman-reigns-added-advertised-dates-additional-details/",
+      "original_html_file": "20260515_203951_001_nuovi-dettagli-sul-ritorno-di-roman-reigns-negli-show-wwe-pubblicizzati_09c8fbd1_original.html",
+      "final_html_file": "20260515_203951_001_nuovi-dettagli-sul-ritorno-di-roman-reigns-negli-show-wwe-pubblicizzati_09c8fbd1_final.html",
+      "metadata_file": "20260515_203951_001_nuovi-dettagli-sul-ritorno-di-roman-reigns-negli-show-wwe-pubblicizzati_09c8fbd1_metadata.json"
+    },
+    {
+      "run_id": "2026-05-15 20:38:28",
+      "title": "Joe Hendry: \"La WWE mi cercò anni prima del successo in TNA\"",
+      "url": "https://www.ringsidenews.com/joe-hendry-says-wwe-nearly-signed-him-years-before-tna-fame-changed-everything/",
+      "original_html_file": "20260515_204101_002_joe-hendry-la-wwe-mi-cerc-anni-prima-del-successo-in-tna_6e139e93_original.html",
+      "final_html_file": "20260515_204101_002_joe-hendry-la-wwe-mi-cerc-anni-prima-del-successo-in-tna_6e139e93_final.html",
+      "metadata_file": "20260515_204101_002_joe-hendry-la-wwe-mi-cerc-anni-prima-del-successo-in-tna_6e139e93_metadata.json"
+    },
+    {
+      "run_id": "2026-05-15 20:38:28",
+      "title": "Joe Hendry punta CM Punk come avversario ideale in WWE",
+      "url": "https://www.ringsidenews.com/joe-hendry-names-cm-punk-as-wwe-opponent-he-wants-most/",
+      "original_html_file": "20260515_204207_003_joe-hendry-punta-cm-punk-come-avversario-ideale-in-wwe_fd493a55_original.html",
+      "final_html_file": "20260515_204207_003_joe-hendry-punta-cm-punk-come-avversario-ideale-in-wwe_fd493a55_final.html",
+      "metadata_file": "20260515_204207_003_joe-hendry-punta-cm-punk-come-avversario-ideale-in-wwe_fd493a55_metadata.json"
     }
   ]
 }

@@ -4679,3 +4679,296 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-15 20:04:43] VERSION [v88_4_1_canonical_event_dedupe (2d0d329)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+
+===== RUN START [2026-05-15 20:38:28] VERSION [v88_4_1_canonical_event_dedupe (a77c339)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 9 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (18/75): Additional Details On Triller Owing AEW Money For Pay-Per-View Royalties
+[SKIP] Score sotto soglia editoriale (38/75): Backstage Report On AEW & Madison Square Garden After Wrestlers Express Interest
+[PERF v71] WP lookup event_key: 1.12s
+[FIX] Event key in history ma non confermata su WordPress: event:title:roman-reigns:world - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (62/75): John Cena On Reaction To WWE Backlash Announcement: 'There's Still A Lot To Be Done'
+[SKIP] Score sotto soglia editoriale (48/75): AEW Star Chris Jericho Appears As A Waiter In NFL Team's Schedule Release Video
+[SKIP] Score sotto soglia editoriale (36/75): Backstage Details & Speculation Regarding AAA TripleMania 2026
+[SKIP] Score sotto soglia editoriale (48/75): Jeff Cobb Reportedly Visited NJPW Following Recent WWE Release
+[PERF v71] WP lookup event_key: 1.01s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - TNA Announces Return Of Ultimate X Stipulation For Slammiversary 2026
+[SKIP] Score sotto soglia editoriale (48/75): TNA Announces Return Of Ultimate X Stipulation For Slammiversary 2026
+[SKIP] Score sotto soglia editoriale (50/75): Two Title Matches Added To ROH Supercard Of Honor 2026
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173729/wwe-tna-impact-fabian-aichner-giovanni-vinci-appears/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173722/tna-indi-hartwell-santino-marella-announces-contract-extension/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170206/aew-paul-wight-kenny-omega-darby-allin-ring/
+[SKIP] Score sotto soglia editoriale (0/75): TNA Impact 5/14/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (50/75): Cedric Alexander Ends Leon Slater's X-Division Title Run In TNA Impact Main Event
+[SKIP] Score sotto soglia editoriale (50/75): Mike Santana & Steve Maclin Set For TNA World Title Rematch On Upcoming Impact
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Eric Young Wins Battle Royal To Earn Shot At Mike Santana's TNA World Championship
+[SKIP] Score sotto soglia editoriale (50/75): Eric Young Wins Battle Royal To Earn Shot At Mike Santana's TNA World Championship
+[SKIP] Score sotto soglia editoriale (20/75): Shelton Benjamin Identifies Former WWE & AEW Producer Who 'Unlocked' His Potential
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - Additional Matches Revealed for May 15 WWE SmackDown
+[SCORE v81.1] Cap future card announcement 56->56 - Additional Matches Revealed for May 15 WWE SmackDown
+[SKIP] Score sotto soglia editoriale (51/75): Additional Matches Revealed for May 15 WWE SmackDown
+[SCORE v86.9] Cap commentary/opinion 83->68 - WWE Accidentally Uses JC Mateo Graphic to Promote SmackDown Match Despite His Release
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - WWE Accidentally Uses JC Mateo Graphic to Promote SmackDown Match Despite His Release
+[SKIP] Score sotto soglia editoriale (49/75): WWE Accidentally Uses JC Mateo Graphic to Promote SmackDown Match Despite His Release
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE Travel Plans For Blake Monroe's SmackDown Debut Window Revealed
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - WWE Travel Plans For Blake Monroe's SmackDown Debut Window Revealed
+[SKIP] Score sotto soglia editoriale (49/75): WWE Travel Plans For Blake Monroe's SmackDown Debut Window Revealed
+[SKIP] Score sotto soglia editoriale (0/75): Ted DiBiase Jr. Blasts Weaponized Justice System After Welfare Fraud Trial Acquittal
+[SKIP] Score sotto soglia editoriale (59/75): Timothy Thatcher Offering WWE ID Contract Opportunity In Open Challenge Match
+[SKIP] Score sotto soglia editoriale (57/75): Alicia Atout Says She'll Hate Wrestling Forever If MJF Gets Shaved Bald
+[SKIP] URL già in history: https://www.ringsidenews.com/jeff-cobb-spotted-backstage-njpw-event-wwe-release/
+[SCORE v86.9] Cap commentary/opinion 100->68 - Vince Russo Doesn't Believe Triple H Deserves a Pay Raise in WWE
+[PERF v71] WP lookup event_key: 1.01s
+[FIX] Event key in history ma non confermata su WordPress: event:business:wwe:executive-contract:nick-khan - provo a pubblicare
+[SKIP] URL già in history: https://www.ringsidenews.com/judge-rules-wwe-ring-boys-can-stay-anonymous-lawsuit-against-vince-mcmahon/
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - Multiple Segments Revealed for May 15 WWE SmackDown
+[SCORE v81.1] Cap future card announcement 56->56 - Multiple Segments Revealed for May 15 WWE SmackDown
+[SKIP] Score sotto soglia editoriale (51/75): Multiple Segments Revealed for May 15 WWE SmackDown
+[SKIP] URL già in history: https://www.ringsidenews.com/r-truth-wwe-contract-comments-clarified-confusion-interview-context/
+[SCORE] 95 high - Joe Hendry Says WWE Nearly Signed Him Years Before TNA Fame Changed Everything | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, opinione generica, v62 ritorno/debutto, v71 freshness=0.678
+[SCORE] 79 medium - Joe Hendry Names CM Punk As WWE Opponent He Wants Most | WWE/main roster, top star titolo: cm punk, nomi forti lead: logan paul, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v66 cap title match non-title-change, v71 source reliability soft penalty, v71 freshness=0.677
+[SCORE] 77 medium - Additional Details On Roman Reigns Being Added Back To Advertised WWE Dates | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, titolo/championship, v71 freshness=0.591
+[SCORE] 73 medium - Blake Monroe Wants Spot In John Cena Classic | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.554, v48 tier2: 55-74
+[SCORE] 68 medium - Jake Paul Says He Can't Get Involved In Logan's WWE Matches Due To TKO 'Beef' | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, intervista/opinione, v62 categoria business, v68 cap opinion senza news concreta, v71 freshness=0.557, v48 tier2: 55-74
+[SCORE] 63 medium - Vince Russo Doesn't Believe Triple H Deserves a Pay Raise in WWE | WWE/main roster, nomi forti titolo: triple h, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v86.9 cap commentary/opinion 100->68, v71 source reliability soft penalty, v71 freshness=0.776, v48 tier2: 55-74
+[SCORE] 61 medium - Report: CM Punk Removed From WWE Raw Dates & European Tour Due To 'Schedule Change' | WWE/main roster, top star titolo: cm punk, rumor/backstage, show settimanale, v71 freshness=0.579, v48 tier2: 55-74
+[SCORE] 60 medium - Ronda Rousey Says Final WWE Match Was a Middle Finger to Fans | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, non wrestling puro, floor WWE main roster storyline, v62 reazioni/tributi, v71 source reliability soft penalty, v71 freshness=0.545, v48 tier2: 55-74
+[SCORE] 40 low - JBL Believes The New Day Will Become Bigger Stars Outside Of WWE | WWE/main roster, impatto roster/storyline, release/addio, opinione generica, v71 freshness=0.531, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 1
+[BOT] Elaborazione: Additional Details On Roman Reigns Being Added Back To Advertised WWE Dates
+[BOT] semantic_id=additional-details-on-roman-reigns-being-added-back-to-advertised-wwe-dates
+[SCORE] iniziale=77 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | Si tratta di un aggiornamento basato su un report (WON) riguardante la programmazione futura e lo status di Roman Reigns, configurandosi come notizia di backstage/rumor sulla gestione delle date.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (World Heavyweight Championship) in inglese.; Tradurre 'pulled from' come 'rimosso da'.; 'Advertised dates' va tradotto come 'date pubblicizzate'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | Si tratta di un aggiornamento basato su un report (WON) riguardante la programmazione futura e lo status di Roman Reigns, configurandosi come notizia di backstage/rumor sulla gestione delle date.
+[PERF v71] analisi editoriale AI v72: 10.00s
+[SCORE v79.1.3] Recovery post-show 68->77 - Additional Details On Roman Reigns Being Added Back To Advertised WWE Dates
+[SCORE] raffinato=77 priority=medium | WWE/main roster, top star titolo: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship, v72.3 cap rumor: niente boost raffinamento, v72.3 cap rumor, v79.1.3 post-show recovery 68->77
+[V71] story_signature=stable:roman_reigns|additional_details_on_roman_reigns_being_added_back_to_adver|wwe_dates|title|wwe semantic_status=new_story freshness=0.61
+[PERF v71] WP recent posts dedupe: 1.08s
+[FIX] Event key in history ma non confermata su WordPress: event:title:roman-reigns:world - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.43s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/additional-details-on-roman-reigns-being-added-back-to-advertised-wwe-dates/intro-1778871730.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 46.02s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Nuovi dettagli sul ritorno di Roman Reigns negli show WWE pubblicizzati
+[WARN v71.3] Quote check sotto soglia ma non bloccante: ['quote count ratio below threshold: 0.67'] - Additional Details On Roman Reigns Being Added Back To Advertised WWE Dates
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/additional-details-on-roman-reigns-being-added-back-to-advertised-wwe-dates/l-intro-1778871730.jpg
+[MEDIA] Immagine caricata: 4694
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_203950_001_nuovi-dettagli-sul-ritorno-di-roman-reigns-negli-show-wwe-pubblicizzati_4695_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4695
+[PERF v71] creazione post WordPress: 6.40s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/additional-details-on-roman-reigns-being-added-back-to-advertised-wwe-dates/l-intro-1778871730.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4694
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Additional Details On Roman Reigns Being Added Back To Adver': 64.77s
+[OK] Pubblicato: Nuovi dettagli sul ritorno di Roman Reigns negli show WWE pubblicizzati
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_203951_001_nuovi-dettagli-sul-ritorno-di-roman-reigns-negli-show-wwe-pubblicizzati_09c8fbd1_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Nuovi dettagli sul ritorno di Roman Reigns negli show WWE pubblicizzati
+[PUBLISHED REVIEW v87.1] Review outer salvata: Nuovi dettagli sul ritorno di Roman Reigns negli show WWE pubblicizzati
+[BOT] News candidate totali: 9 | mode=normal | max nuove=3 | pending pubblicati=1
+[BOT] Elaborazione: Joe Hendry Says WWE Nearly Signed Him Years Before TNA Fame Changed Everything
+[BOT] semantic_id=joe-hendry-says-wwe-nearly-signed-him-years-before-tna-fame-changed-everything
+[SCORE] iniziale=95 priority=high
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/joe-hendry-says-wwe-nearly-signed-him-years-before-tna-fame-changed-everything/
+[PERF v71] scraping articolo: 0.76s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=15, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/joe-hendry-says-wwe-nearly-signed-him-years-before-tna-fame-changed-everything/
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.42s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | Si tratta di un'intervista retrospettiva su dichiarazioni di un wrestler riguardo il suo percorso professionale e i suoi trascorsi, non di una preview o un report di evento.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Rosebud' (personaggi di Adam Rose), lasciare 'United Kingdom Tournament'.; 'Release' va tradotto come licenziamento, non rilascio.; Mantenere i nomi dei titoli (NXT Championship) in inglese.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Si tratta di un'intervista retrospettiva su dichiarazioni di un wrestler riguardo il suo percorso professionale e i suoi trascorsi, non di una preview o un report di evento.
+[PERF v71] analisi editoriale AI v72: 10.35s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Joe Hendry Says WWE Nearly Signed Him Years Before TNA Fame Changed Everything
+[SCORE] raffinato=95 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, opinione generica, v62 ritorno/debutto
+[V71] story_signature=stable:joe_hendry|joe_hendry_says|wwe_nearly_signed_him_years_before|contract|wwe semantic_status=new_story freshness=0.678
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=15
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 44.58s
+[FIX] Titolo non valido (ok) -> fallback automatico: Joe Hendry afferma WWE nearly signed him years before TNA fame changed everything
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Joe Hendry: "La WWE mi cercò anni prima del successo in TNA"
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/joe-hendry-says-wwe-nearly-signed-him-years-before-tna-fame-changed-everything-26.jpg
+[MEDIA] Immagine caricata: 4697
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_204100_002_joe-hendry-la-wwe-mi-cercò-anni-prima-del-successo-in-tna_4698_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4698
+[PERF v71] creazione post WordPress: 11.89s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/joe-hendry-says-wwe-nearly-signed-him-years-before-tna-fame-changed-everything-26.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4697
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Joe Hendry Says WWE Nearly Signed Him Years Before TNA Fame ': 68.83s
+[OK] Pubblicato: Joe Hendry: "La WWE mi cercò anni prima del successo in TNA"
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_204101_002_joe-hendry-la-wwe-mi-cerc-anni-prima-del-successo-in-tna_6e139e93_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Joe Hendry: "La WWE mi cercò anni prima del successo in TNA"
+[PUBLISHED REVIEW v87.1] Review outer salvata: Joe Hendry: "La WWE mi cercò anni prima del successo in TNA"
+[BOT] Elaborazione: Joe Hendry Names CM Punk As WWE Opponent He Wants Most
+[BOT] semantic_id=joe-hendry-names-cm-punk-as-wwe-opponent-he-wants-most
+[SCORE] iniziale=79 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/joe-hendry-names-cm-punk-as-wwe-opponent-he-wants-most/
+[PERF v71] scraping articolo: 0.74s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=10, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/joe-hendry-names-cm-punk-as-wwe-opponent-he-wants-most/
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.40s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni fatte da Joe Hendry durante un'intervista, non si tratta di una preview di un evento o di un report di uno show.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (Intercontinental Championship, TNA World Championship) in inglese.; Non tradurre 'signed' come 'firmato' ma come 'ha firmato con la WWE'.; Evitare calchi per le espressioni idiomatiche come 'pull the trigger'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta dichiarazioni fatte da Joe Hendry durante un'intervista, non si tratta di una preview di un evento o di un report di uno show.
+[PERF v71] analisi editoriale AI v72: 31.65s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Joe Hendry Names CM Punk As WWE Opponent He Wants Most
+[SCORE] raffinato=84 priority=high | WWE/main roster, top star titolo: cm punk, nomi forti lead: logan paul, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v66 cap title match non-title-change
+[V71] story_signature=stable:logan_paul|joe_hendry|cm_punk|title|wwe semantic_status=new_story freshness=0.677
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=10
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 10.24s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Joe Hendry punta CM Punk come avversario ideale in WWE
+[EMBED v87.3] Canonicalizzati/deduplicati embed nel body: 1
+[EMBED v87.3] Positional embed guard applicato: 1 modifiche
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/joe-hendry-names-cm-punk-as-wwe-opponent-he-wants-most-42.jpg
+[MEDIA] Immagine caricata: 4700
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_204206_003_joe-hendry-punta-cm-punk-come-avversario-ideale-in-wwe_4701_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4701
+[PERF v71] creazione post WordPress: 20.83s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/joe-hendry-names-cm-punk-as-wwe-opponent-he-wants-most-42.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4700
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Joe Hendry Names CM Punk As WWE Opponent He Wants Most': 64.71s
+[OK] Pubblicato: Joe Hendry punta CM Punk come avversario ideale in WWE
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_204207_003_joe-hendry-punta-cm-punk-come-avversario-ideale-in-wwe_fd493a55_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Joe Hendry punta CM Punk come avversario ideale in WWE
+[PUBLISHED REVIEW v87.1] Review outer salvata: Joe Hendry punta CM Punk come avversario ideale in WWE
+[SKIP v86.8] Già pubblicata davvero in questa run: Additional Details On Roman Reigns Being Added Back To Advertised WWE Dates
+[PENDING] Coda salvata: 1 elementi
+[DEDUPE v88.4.1] candidate_core=canonical_event_core:blake_monroe|future_status|wwe title=Blake Monroe Wants Spot In John Cena Classic
+[DEDUPE v88.4.1] Canonical event core caricati: 8
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: Blake Monroe Wants Spot In John Cena Classic
+[PENDING] Coda salvata: 1 elementi
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: Jake Paul Says He Can't Get Involved In Logan's WWE Matches Due To TKO 'Beef'
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Vince Russo Doesn't Believe Triple H Deserves a Pay Raise in WWE
+[BOT] semantic_id=vince-russo-doesnt-believe-triple-h-deserves-a-pay-raise-in-wwe
+[SCORE] iniziale=63 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/vince-russo-doesnt-believe-triple-h-deserves-pay-raise-wwe/
+[PERF v71] scraping articolo: 0.76s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=15, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/vince-russo-doesnt-believe-triple-h-deserves-pay-raise-wwe/
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.43s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta le critiche di Vince Russo sulle politiche salariali e creative di Triple H, rientrando pienamente nella categoria opinione/commento.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei ruoli aziendali (Chief Content Officer) in inglese.; Tradurre 'pay raise' come 'aumento di stipendio'.; Evitare di tradurre 'bro' letteralmente, usarlo solo se necessario nel contesto colloquiale.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta le critiche di Vince Russo sulle politiche salariali e creative di Triple H, rientrando pienamente nella categoria opinione/commento.
+[PERF v71] analisi editoriale AI v72: 1.16s
+[SCORE v86.9] Cap commentary/opinion 100->68 - Vince Russo Doesn't Believe Triple H Deserves a Pay Raise in WWE
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: triple h, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v86.9 cap commentary/opinion 100->68, v72.3 cap opinion: niente boost raffinamento, v72.3 cap opinion
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Vince Russo Doesn't Believe Triple H Deserves a Pay Raise in WWE
+[BOT] Elaborazione: Report: CM Punk Removed From WWE Raw Dates & European Tour Due To 'Schedule Change'
+[BOT] semantic_id=report-cm-punk-removed-from-wwe-raw-dates-european-tour-due-to-schedule-change
+[SCORE] iniziale=61 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza le variazioni nel calendario di CM Punk citando fonti di backstage (Meltzer). Pur menzionando date future, il focus non è la presentazione di un evento, ma lo status lavorativo dell'atleta.
+[EDITORIAL v72.3] translation_notes=Non tradurre i titoli (es. World Heavyweight Champion).; 'Schedule change' va reso come variazione di calendario o cambio di programma.; 'Go home show' va reso come episodio precedente a un PLE o puntata decisiva.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo analizza le variazioni nel calendario di CM Punk citando fonti di backstage (Meltzer). Pur menzionando date future, il focus non è la presentazione di un evento, ma lo status lavorativo dell'atleta.
+[PERF v71] analisi editoriale AI v72: 3.77s
+[SCORE] raffinato=20 priority=skip | WWE/main roster, top star titolo: cm punk, impatto roster/storyline, WWE main roster + storyline/evento, titolo/championship, show settimanale, v68 preview scaduta
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 20/75 - Report: CM Punk Removed From WWE Raw Dates & European Tour Due To 'Schedule Change'
+[DEDUPE v88.4.1] candidate_core=canonical_event_core:adam_copeland|departure_release|wwe title=Ronda Rousey Says Final WWE Match Was a Middle Finger to Fans
+[BOT] Elaborazione: Ronda Rousey Says Final WWE Match Was a Middle Finger to Fans
+[BOT] semantic_id=ronda-rousey-says-final-wwe-match-was-a-middle-finger-to-fans
+[SCORE] iniziale=60 priority=medium
+[PERF v71] scraping articolo: 0.73s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=12, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.43s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza dichiarazioni retrospettive di Ronda Rousey su un match passato; non è una preview né un report, ma una news di approfondimento su quanto già avvenuto.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'middle finger' letteralmente se suona troppo volgare, meglio 'un vaffanculo' o 'un gesto di sfida'.; Mantenere 'SummerSlam' e 'Bloodsport'.; 'Baddest Woman on the Planet' è un soprannome, si può lasciare o tradurre in 'la donna più cattiva del pianeta'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo analizza dichiarazioni retrospettive di Ronda Rousey su un match passato; non è una preview né un report, ma una news di approfondimento su quanto già avvenuto.
+[PERF v71] analisi editoriale AI v72: 4.00s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Ronda Rousey Says Final WWE Match Was a Middle Finger to Fans
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 65->54 - Ronda Rousey Says Final WWE Match Was a Middle Finger to Fans
+[SCORE] raffinato=54 priority=low | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, non wrestling puro, floor WWE main roster storyline, v62 reazioni/tributi, v88.2 cap OTHER/feature non-news 65->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Ronda Rousey Says Final WWE Match Was a Middle Finger to Fans
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: JBL Believes The New Day Will Become Bigger Stars Outside Of WWE
+[PENDING] Coda salvata: 1 elementi
+[BOT] Pubblicati 3 articoli (1 pending + 2 nuove) su 9 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-15 20:38:28_summary.json -> published_html_review/run_2026-05-15 20-38-28_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (208 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
+===== RUN END [2026-05-15 20:38:28] VERSION [v88_4_1_canonical_event_dedupe (a77c339)] =====
+

@@ -1,12 +1,38 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-15 20:04:43",
-  "bot_version": "v88_4_1_canonical_event_dedupe (2d0d329)",
-  "git_sha": "2d0d3296dd95f69d4450af214fed9043f6d014eb",
-  "created_at": "2026-05-15T20:06:02",
-  "published_count": 0,
-  "published_post_ids": [],
-  "published_artifacts": [],
+  "run_id": "2026-05-15 20:38:28",
+  "bot_version": "v88_4_1_canonical_event_dedupe (a77c339)",
+  "git_sha": "a77c339d6bb38a25175a12c3345ac73a882ede3f",
+  "created_at": "2026-05-15T20:42:21",
+  "published_count": 3,
+  "published_post_ids": [
+    "4695",
+    "4698",
+    "4701"
+  ],
+  "published_artifacts": [
+    {
+      "post_id": 4695,
+      "title": "Nuovi dettagli sul ritorno di Roman Reigns negli show WWE pubblicizzati",
+      "source_url": "https://www.wrestlinginc.com/2173963/wwe-roman-reigns-added-advertised-dates-additional-details/",
+      "html_file": "published/20260515_203950_001_nuovi-dettagli-sul-ritorno-di-roman-reigns-negli-show-wwe-pubblicizzati_4695_final.html",
+      "metadata_file": "published/20260515_203950_001_nuovi-dettagli-sul-ritorno-di-roman-reigns-negli-show-wwe-pubblicizzati_4695_metadata.json"
+    },
+    {
+      "post_id": 4698,
+      "title": "Joe Hendry: \"La WWE mi cercò anni prima del successo in TNA\"",
+      "source_url": "https://www.ringsidenews.com/joe-hendry-says-wwe-nearly-signed-him-years-before-tna-fame-changed-everything/",
+      "html_file": "published/20260515_204100_002_joe-hendry-la-wwe-mi-cercò-anni-prima-del-successo-in-tna_4698_final.html",
+      "metadata_file": "published/20260515_204100_002_joe-hendry-la-wwe-mi-cercò-anni-prima-del-successo-in-tna_4698_metadata.json"
+    },
+    {
+      "post_id": 4701,
+      "title": "Joe Hendry punta CM Punk come avversario ideale in WWE",
+      "source_url": "https://www.ringsidenews.com/joe-hendry-names-cm-punk-as-wwe-opponent-he-wants-most/",
+      "html_file": "published/20260515_204206_003_joe-hendry-punta-cm-punk-come-avversario-ideale-in-wwe_4701_final.html",
+      "metadata_file": "published/20260515_204206_003_joe-hendry-punta-cm-punk-come-avversario-ideale-in-wwe_4701_metadata.json"
+    }
+  ],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",
