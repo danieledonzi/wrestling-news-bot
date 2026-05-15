@@ -173,6 +173,34 @@ def v8841_candidate_core_from_post(data=None, sem_id="", url="", event_key=""):
     )
 
 
+def v8841_is_publish_success(result):
+    if result is None or result is False:
+        return False
+    if isinstance(result, str):
+        r = result.strip().lower()
+        if r in {"published", "publish", "ok", "success", "created", "posted"}:
+            return True
+        if r in {"skipped", "skip", "model_fail", "validation_fail", "wp_fail", "wp_firewall", "translation_fail", "failed", "error"}:
+            return False
+        return False
+    if isinstance(result, (int, float)):
+        return int(result) > 0
+    if isinstance(result, dict):
+        status = str(result.get("status") or result.get("result") or "").lower()
+        if status in {"published", "ok", "success", "created", "posted"}:
+            return True
+        if status in {"skipped", "model_fail", "validation_fail", "wp_fail", "wp_firewall", "failed", "error"}:
+            return False
+        if result.get("id") or result.get("post_id"):
+            return True
+        code = result.get("status_code") or result.get("code")
+        try:
+            return 200 <= int(code) < 300
+        except Exception:
+            return False
+    return bool(result)
+
+
 if V8841_CANONICAL_DEDUPE_ENABLED and "process_candidate_item" in globals():
     _ORIG_V8841_process_candidate_item = process_candidate_item
     def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
@@ -189,9 +217,9 @@ if V8841_CANONICAL_DEDUPE_ENABLED and "process_candidate_item" in globals():
         result = _ORIG_V8841_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
         try:
             core = v8841_candidate_core_from_item(item)
-            if core and result not in {"skipped", "skip", None, False}:
+            if core and v8841_is_publish_success(result):
                 _V8841_RUN_CORES.add(core)
-                print(f"[DEDUPE v88.4.1] Canonical event core registrato in run: {core}")
+                print(f"[DEDUPE v88.4.1] Canonical event core registrato in run dopo publish: {core}")
         except Exception:
             pass
         return result
@@ -212,7 +240,7 @@ if V8841_CANONICAL_DEDUPE_ENABLED and "create_post_without_image" in globals():
             print(f"[WARN v88.4.1] canonical publish guard warning: {e}")
         res = _ORIG_V8841_create_post_without_image(data, sem_id, url, embed_urls=embed_urls, event_key=event_key, inline_images=inline_images, featured_image_url=featured_image_url)
         try:
-            if core:
+            if core and v8841_is_publish_success(res):
                 _V8841_RUN_CORES.add(core)
                 # Refresh is intentionally not forced; the next run will read persisted metadata.
                 print(f"[DEDUPE v88.4.1] Canonical event core pubblicato/registrato: {core}")
