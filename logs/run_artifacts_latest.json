@@ -1,20 +1,28 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-15 15:57:55",
-  "bot_version": "v88_4_quality_microfixes (e414a44)",
-  "git_sha": "e414a440ded1cd4df583abe2b5fdd476b5bc7da0",
-  "created_at": "2026-05-15T15:58:37",
-  "published_count": 1,
+  "run_id": "2026-05-15 17:26:40",
+  "bot_version": "v88_4_quality_microfixes (d7d141e)",
+  "git_sha": "d7d141e0a6f30eef33b2a9f6e9066aad539ad8d9",
+  "created_at": "2026-05-15T17:27:43",
+  "published_count": 2,
   "published_post_ids": [
-    "4683"
+    "4686",
+    "4689"
   ],
   "published_artifacts": [
     {
-      "post_id": 4683,
-      "title": "Nikki Bella sulla fine della relazione con John Cena: \"Saremmo stati infelici\"",
-      "source_url": "https://www.ringsidenews.com/nikki-bella-says-staying-john-cena-would-have-led-lonely-sad-life/",
-      "html_file": "published/20260515_155824_001_nikki-bella-sulla-fine-della-relazione-con-john-cena-saremmo-stati-infelici_4683_final.html",
-      "metadata_file": "published/20260515_155824_001_nikki-bella-sulla-fine-della-relazione-con-john-cena-saremmo-stati-infelici_4683_metadata.json"
+      "post_id": 4686,
+      "title": "Causa contro Vince McMahon: i ring boys potranno restare anonimi",
+      "source_url": "https://www.ringsidenews.com/judge-rules-wwe-ring-boys-can-stay-anonymous-lawsuit-against-vince-mcmahon/",
+      "html_file": "published/20260515_172718_001_causa-contro-vince-mcmahon-i-ring-boys-potranno-restare-anonimi_4686_final.html",
+      "metadata_file": "published/20260515_172718_001_causa-contro-vince-mcmahon-i-ring-boys-potranno-restare-anonimi_4686_metadata.json"
+    },
+    {
+      "post_id": 4689,
+      "title": "R-Truth fa chiarezza sul suo contratto quadriennale con la WWE",
+      "source_url": "https://www.ringsidenews.com/r-truth-wwe-contract-comments-clarified-confusion-interview-context/",
+      "html_file": "published/20260515_172730_002_r-truth-fa-chiarezza-sul-suo-contratto-quadriennale-con-la-wwe_4689_final.html",
+      "metadata_file": "published/20260515_172730_002_r-truth-fa-chiarezza-sul-suo-contratto-quadriennale-con-la-wwe_4689_metadata.json"
     }
   ],
   "errors": [],
