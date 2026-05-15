@@ -3529,3 +3529,337 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
 ===== RUN END [2026-05-15 13:45:39] VERSION [v88_3_1_roster_arrival_guard (93e5f64)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+
+===== RUN START [2026-05-15 15:52:49] VERSION [v88_4_quality_microfixes (01c56bc)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 9 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (50/75): Two Title Matches Added To ROH Supercard Of Honor 2026
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Former WWE Star Fabian Aichner (AKA Giovanni Vinci) Appears On TNA Impact
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170206/aew-paul-wight-kenny-omega-darby-allin-ring/
+[SKIP] Score sotto soglia editoriale (0/75): TNA Impact 5/14/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (50/75): Cedric Alexander Ends Leon Slater's X-Division Title Run In TNA Impact Main Event
+[SKIP] Score sotto soglia editoriale (50/75): Mike Santana & Steve Maclin Set For TNA World Title Rematch On Upcoming Impact
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Eric Young Wins Battle Royal To Earn Shot At Mike Santana's TNA World Championship
+[SKIP] Score sotto soglia editoriale (50/75): Eric Young Wins Battle Royal To Earn Shot At Mike Santana's TNA World Championship
+[SKIP] Score sotto soglia editoriale (20/75): Shelton Benjamin Identifies Former WWE & AEW Producer Who 'Unlocked' His Potential
+[REPORT v87.2] Report confermato da history forte: report:tna-impact-2026-05-14
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:tna-impact-2026-05-14 - TNA Impact Results 5/14 - X-Division Title On The Line And More
+[SKIP] Score sotto soglia editoriale (0/75): Dana White Encourages UFC Fighters To Unionize
+[SKIP] Score sotto soglia editoriale (14/75): Khamzat Chimaev's Body Failed Him At UFC 328, According To His Brother
+[SKIP] Score sotto soglia editoriale (13/75): MLW Set To Revive TV Show After 3 Years
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173220/wwe-ronda-rousey-becky-lynch-high-profile-pitch-never-delivered/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173180/wwe-creative-plans-fatal-influence-crowd-reactions/
+[SKIP] Score sotto soglia editoriale (46/75): AEW Reportedly Has 'Real' Interest In Collaborating With WWE HOFer
+[SKIP] Score sotto soglia editoriale (12/75): Major TNA Name Reportedly Turned Down Dark Side Of The Ring Interview Opportunities
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173032/wwe-creative-status-stephanie-vaquer/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Chelsea Green Returning to WWE SmackDown Just Days After Heart Procedure
+[SKIP] Score sotto soglia editoriale (51/75): Chelsea Green Returning to WWE SmackDown Just Days After Heart Procedure
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Blake Monroe Drops Major Hint About WWE SmackDown Debut Date
+[SKIP] Score sotto soglia editoriale (50/75): Ronda Rousey Claims Credit for Women Headlining WWE and Combat Sports Events
+[SKIP] Score sotto soglia editoriale (49/75): Reason WWE Is Bringing Back More House Shows Revealed
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Current Status of AEW Running Madison Square Garden Revealed
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - Current Status of AEW Running Madison Square Garden Revealed
+[SCORE v86.9] Cap commentary/opinion 89->68 - Speculation on WWE Moving Maxxine Dupri Into New Role
+[PERF v71] WP lookup event_key: 1.32s
+[FIX] Event key in history ma non confermata su WordPress: event:logan-paul-diagnosis - provo a pubblicare
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - WWE Believes AEW May Struggle To Land Major TV Deal After Current Contract Ends
+[SCORE v86.9] Cap commentary/opinion 100->68 - What Being Said About CM Punk's Sudden Schedule Change
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:cm-punk-diagnosis - What Being Said About CM Punk's Sudden Schedule Change
+[SCORE v86.9] Cap commentary/opinion 100->68 - Ex-WWE Star Ronda Rousey Claims Her Fight With Gina Carano Is Breaking Women's MMA Pay Records
+[PERF v71] WP lookup event_key: 1.28s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (45/75): ROH Supercard of Honor 2026 Preview: Confirmed Matches, Start Time and How to Watch
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 69->54 - AEW Double or Nothing 2026 Closing In On Sellout After Huge Ticket Sales Jump
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - AEW Double or Nothing 2026 Closing In On Sellout After Huge Ticket Sales Jump
+[SCORE v86.9] Cap commentary/opinion 91->68 - AEW All In 2026 Ticket Numbers Already Raising Concerns
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - AEW All In 2026 Ticket Numbers Already Raising Concerns
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - AEW All In 2026 Ticket Numbers Already Raising Concerns
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SCORE] 100 high - Blake Monroe Drops Major Hint About WWE SmackDown Debut Date | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v71 freshness=0.691
+[SCORE] 100 high - Asuka's WWE Future Now Considered "Unclear" Internally | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v71 freshness=0.916
+[SCORE] 100 high - WWE Believes AEW May Struggle To Land Major TV Deal After Current Contract Ends | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, contratto, PLE/PPV, opinione generica, v62 media rights/streaming, v62 categoria business, v71 freshness=0.68
+[SCORE] 97 high - Nikki Bella Says Staying With John Cena Would Have Led to a Lonely and Sad Life | WWE/main roster, top star titolo: john cena, nomi forti titolo: nikki bella, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v71 freshness=0.558
+[SCORE] 96 high - Former WWE Star Fabian Aichner (AKA Giovanni Vinci) Appears On TNA Impact | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v71 freshness=0.723
+[SCORE] 67 medium - Santino Marella Announces Indi Hartwell Has Signed A Contract Extension With TNA | TNA, contratto, v62 business/dirigenza, v62 categoria business, v71 freshness=0.722, v48 tier2: 55-74
+[SCORE] 67 medium - WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, match/segmento annunciato, v71 low freshness/novelty, v71 freshness=0.338, v48 tier2: 55-74
+[SCORE] 63 medium - Speculation on WWE Moving Maxxine Dupri Into New Role | WWE/main roster, nomi forti lead: logan paul, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v86.9 cap commentary/opinion 89->68, v71 source reliability soft penalty, v71 freshness=0.564, v48 tier2: 55-74
+[SCORE] 63 medium - What Being Said About CM Punk's Sudden Schedule Change | WWE/main roster, top star titolo: cm punk, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v86.9 cap commentary/opinion 100->68, v71 source reliability soft penalty, v71 freshness=0.56, v48 tier2: 55-74
+[SCORE] 63 medium - Ex-WWE Star Ronda Rousey Claims Her Fight With Gina Carano Is Breaking Women's MMA Pay Records | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, show settimanale, non wrestling puro, opinione generica, v62 media rights/streaming, v62 categoria business, v86.9 cap commentary/opinion 100->68, v71 source reliability soft penalty, v71 freshness=0.791, v48 tier2: 55-74
+[MODE] Storm mode attiva: 5 news >=90, 5 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 15 | mode=storm | max nuove=5 | pending pubblicati=0
+[BOT] Elaborazione: Blake Monroe Drops Major Hint About WWE SmackDown Debut Date
+[BOT] semantic_id=blake-monroe-drops-major-hint-about-wwe-smackdown-debut-date
+[SCORE] iniziale=100 priority=high
+[PERF v71] scraping articolo: 0.98s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.51s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo tratta indiscrezioni e speculazioni sulla data di debutto di una wrestler, basate su un'intervista, non un evento già avvenuto né una preview ufficiale di card.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'The Glamour' (ring name/nickname).; 'Blue brand' va reso come 'show blu' o 'SmackDown'.; Evitare calchi per 'mid-card title scene': usare 'giro titolato della mid-card' o 'scenari titolati di metà card'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo tratta indiscrezioni e speculazioni sulla data di debutto di una wrestler, basate su un'intervista, non un evento già avvenuto né una preview ufficiale di card.
+[PERF v71] analisi editoriale AI v72: 3.82s
+[SCORE] raffinato=56 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v72.3 cap rumor, v77 AI reason/type coherence: PREVIEW cap
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Blake Monroe Drops Major Hint About WWE SmackDown Debut Date
+[V71] story_signature=stable:blake_monroe_drops_major_hint_about|debut_date|debut|wwe semantic_status=new_story freshness=0.691
+[PERF v71] WP recent posts dedupe: 1.40s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.75s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=9
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 7.68s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Blake Monroe suggerisce il suo possibile debutto a SmackDown a Barcellona
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/blake-monroe-drops-major-hint-about-wwe-smackdown-debut-date-54.jpg
+[MEDIA] Immagine caricata: 4666
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_155322_001_blake-monroe-suggerisce-il-suo-possibile-debutto-a-smackdown-a-barcellona_4667_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4667
+[PERF v71] creazione post WordPress: 3.77s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/blake-monroe-drops-major-hint-about-wwe-smackdown-debut-date-54.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4666
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Blake Monroe Drops Major Hint About WWE SmackDown Debut Date': 19.03s
+[OK] Pubblicato: Blake Monroe suggerisce il suo possibile debutto a SmackDown a Barcellona
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_155323_001_blake-monroe-suggerisce-il-suo-possibile-debutto-a-smackdown-a-barcellona_8c6132e8_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Blake Monroe suggerisce il suo possibile debutto a SmackDown a Barcellona
+[PUBLISHED REVIEW v87.1] Review outer salvata: Blake Monroe suggerisce il suo possibile debutto a SmackDown a Barcellona
+[REPORT v87.6] Non scrivo history forte: non true-results/canonico (report:wwe-smackdown-2026-05-29)
+[BOT] Elaborazione: Asuka's WWE Future Now Considered "Unclear" Internally
+[BOT] semantic_id=asukas-wwe-future-now-considered-unclear-internally
+[SCORE] iniziale=100 priority=high
+[PERF v71] scraping articolo: 0.93s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=13, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.49s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo discute speculazioni e informazioni interne circa lo status di una star (Asuka), citando report di Meltzer e Sapp. Non è un evento futuro né un report di un intero show.
+[EDITORIAL v72.3] translation_notes=Mantenere 'semi-retired' o tradurre con 'semi-ritiro' ma con cautela.; Non tradurre titoli (es. WWE Raw, PLE).; 'Unclear' va reso come incerto/nebuloso.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo discute speculazioni e informazioni interne circa lo status di una star (Asuka), citando report di Meltzer e Sapp. Non è un evento futuro né un report di un intero show.
+[PERF v71] analisi editoriale AI v72: 1.39s
+[SCORE] raffinato=68 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v68 cap opinion senza news concreta
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Asuka's WWE Future Now Considered "Unclear" Internally
+[V71] story_signature=stable:dave_meltzer|iyo_sky|wwe_future_now_considered|contract|wwe semantic_status=new_story freshness=0.683
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=13
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 31.50s
+[FIX] Titolo non valido (ok) -> fallback automatico: Asuka's WWE future now considered "unclear" internally
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Il futuro di Asuka in WWE è considerato incerto
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/asukas-wwe-future-now-considered-unclear-internally-01.jpg
+[MEDIA] Immagine caricata: 4669
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_155402_002_il-futuro-di-asuka-in-wwe-è-considerato-incerto_4670_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4670
+[PERF v71] creazione post WordPress: 3.46s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/asukas-wwe-future-now-considered-unclear-internally-01.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4669
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Asuka's WWE Future Now Considered "Unclear" Internally': 38.75s
+[OK] Pubblicato: Il futuro di Asuka in WWE è considerato incerto
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_155403_002_il-futuro-di-asuka-in-wwe-considerato-incerto_87691938_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Il futuro di Asuka in WWE è considerato incerto
+[PUBLISHED REVIEW v87.1] Review outer salvata: Il futuro di Asuka in WWE è considerato incerto
+[BOT] Elaborazione: WWE Believes AEW May Struggle To Land Major TV Deal After Current Contract Ends
+[BOT] semantic_id=wwe-believes-aew-may-struggle-to-land-major-tv-deal-after-current-contract-ends
+[SCORE] iniziale=100 priority=high
+[PERF v71] scraping articolo: 0.93s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=13, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.50s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=BUSINESS (15) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta indiscrezioni e speculazioni interne alla WWE sui futuri accordi televisivi della AEW, rientrando perfettamente nella categoria rumoristica di business.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'media rights' come diritti mediatici, usare 'diritti televisivi' o 'accordi sui diritti TV'.; Mantenere il tono professionale da report di settore.; 'Released' riferito a talenti non è 'rilasciato' ma 'licenziato/tagliato'.
+[EDITORIAL v73] final type=RUMOR | category=BUSINESS (15) | L'articolo riporta indiscrezioni e speculazioni interne alla WWE sui futuri accordi televisivi della AEW, rientrando perfettamente nella categoria rumoristica di business.
+[PERF v71] analisi editoriale AI v72: 1.27s
+[SCORE] raffinato=82 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, contratto, PLE/PPV, opinione generica, v62 media rights/streaming, v62 categoria business, v72.3 cap rumor/opinion business reale
+[V71] story_signature=stable:dave_meltzer|wwe_believes|aew_may_struggle_to_land_major|contract|wwe semantic_status=new_story freshness=0.68
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:business:tko-financials -> event:business:tko-financials-followup-believes-may-struggle-land-major-tv-deal-current-contract-ends
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.1] Repair mirato blocchi mancanti: ['TEXT_013']
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.1] Batch tradotto con gemini-3-flash-preview: 1 blocchi
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=13
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 67.72s
+[FIX] Titolo non valido (ok) -> fallback automatico: WWE believes AEW may struggle to land major tv deal after current contract ends
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WWE: dubbi sul futuro degli accordi televisivi di AEW dopo il 2027
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/04/aews-future-in-question-as-paramount-secures-24-billion-for-wbd-takeover-58.jpg
+[MEDIA] Immagine caricata: 4672
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_155518_003_wwe-dubbi-sul-futuro-degli-accordi-televisivi-di-aew-dopo-il-2027_4673_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4673
+[PERF v71] creazione post WordPress: 3.37s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/04/aews-future-in-question-as-paramount-secures-24-billion-for-wbd-takeover-58.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4672
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'WWE Believes AEW May Struggle To Land Major TV Deal After Cu': 74.70s
+[OK] Pubblicato: WWE: dubbi sul futuro degli accordi televisivi di AEW dopo il 2027
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_155519_003_wwe-dubbi-sul-futuro-degli-accordi-televisivi-di-aew-dopo-il-2027_bf0faf26_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WWE: dubbi sul futuro degli accordi televisivi di AEW dopo il 2027
+[PUBLISHED REVIEW v87.1] Review outer salvata: WWE: dubbi sul futuro degli accordi televisivi di AEW dopo il 2027
+[BOT] Elaborazione: Nikki Bella Says Staying With John Cena Would Have Led to a Lonely and Sad Life
+[BOT] semantic_id=nikki-bella-says-staying-with-john-cena-would-have-led-to-a-lonely-and-sad-life
+[SCORE] iniziale=97 priority=high
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/nikki-bella-says-staying-john-cena-would-have-led-lonely-sad-life/
+[PERF v71] scraping articolo: 0.93s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=11, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/nikki-bella-says-staying-john-cena-would-have-led-lonely-sad-life/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.48s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | Articolo di gossip/vita privata relativo a due ex wrestler WWE; non è una news di wrestling attivo né un report.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi Nikki Bella e John Cena.; Tradurre 'meet and greet' come 'incontro con i fan'.; Non tradurre titoli (es. WrestleMania 33).
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | Articolo di gossip/vita privata relativo a due ex wrestler WWE; non è una news di wrestling attivo né un report.
+[PERF v71] analisi editoriale AI v72: 1.24s
+[SCORE v88.2] v88.2 cap feature storico numerico 97->45 - Nikki Bella Says Staying With John Cena Would Have Led to a Lonely and Sad Life
+[SCORE] raffinato=45 priority=low | WWE/main roster, top star titolo: john cena, nomi forti titolo: nikki bella, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v88.2 cap feature storico numerico 97->45
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - Nikki Bella Says Staying With John Cena Would Have Led to a Lonely and Sad Life
+[BOT] Elaborazione: Former WWE Star Fabian Aichner (AKA Giovanni Vinci) Appears On TNA Impact
+[BOT] semantic_id=former-wwe-star-fabian-aichner-aka-giovanni-vinci-appears-on-tna-impact
+[SCORE] iniziale=96 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=TNA (7) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta l'apparizione e il debutto di un atleta in uno show già avvenuto. Il focus principale è la TNA, nonostante i riferimenti al passato in WWE.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (X-Division Championship, NXT Tag Team Championship) in inglese.; Non tradurre 'release' come 'rilascio' ma come 'licenziamento' o 'addio'.; Evitare calchi come 'delegated to being'; usare 'relegato nel ruolo di'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=TNA (7) | L'articolo riporta l'apparizione e il debutto di un atleta in uno show già avvenuto. Il focus principale è la TNA, nonostante i riferimenti al passato in WWE.
+[PERF v71] analisi editoriale AI v72: 2.29s
+[FRESHNESS v86.6/legacy] Post-show outcome rescue: non tratto come preview scaduta - Former WWE Star Fabian Aichner (AKA Giovanni Vinci) Appears On TNA Impact
+[FRESHNESS v86.6/legacy] Post-show outcome rescue: non tratto come preview scaduta - Former WWE Star Fabian Aichner (AKA Giovanni Vinci) Appears On TNA Impact
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Former WWE Star Fabian Aichner (AKA Giovanni Vinci) Appears On TNA Impact
+[SCORE] raffinato=78 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v66 cap opinion/commentary storyline
+[V71] story_signature=stable:giovanni_vinci|wwe_star_fabian_aichner|aka_giovanni_vinci|status|wwe semantic_status=new_story freshness=0.955
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/former-wwe-star-fabian-aichner-aka-giovanni-vinci-appears-on-tna-impact/intro-1778859098.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 3.99s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): TNA: Fabian Aichner debutta a Impact e sfida il campione X-Division
+[WARN v71.3] Quote check sotto soglia ma non bloccante: ['source quotes missing in translated article'] - Former WWE Star Fabian Aichner (AKA Giovanni Vinci) Appears On TNA Impact
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/former-wwe-star-fabian-aichner-aka-giovanni-vinci-appears-on-tna-impact/l-intro-1778859098.jpg
+[MEDIA] Immagine caricata: 4675
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_155535_004_tna-fabian-aichner-debutta-a-impact-e-sfida-il-campione-x-division_4676_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4676
+[PERF v71] creazione post WordPress: 5.08s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/former-wwe-star-fabian-aichner-aka-giovanni-vinci-appears-on-tna-impact/l-intro-1778859098.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4675
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Former WWE Star Fabian Aichner (AKA Giovanni Vinci) Appears ': 12.51s
+[OK] Pubblicato: TNA: Fabian Aichner debutta a Impact e sfida il campione X-Division
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_155536_004_tna-fabian-aichner-debutta-a-impact-e-sfida-il-campione-x-division_63fb6652_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 4/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: TNA: Fabian Aichner debutta a Impact e sfida il campione X-Division
+[PUBLISHED REVIEW v87.1] Review outer salvata: TNA: Fabian Aichner debutta a Impact e sfida il campione X-Division
+[BOT] Elaborazione: Santino Marella Announces Indi Hartwell Has Signed A Contract Extension With TNA
+[BOT] semantic_id=santino-marella-announces-indi-hartwell-has-signed-a-contract-extension-with-tna
+[SCORE] iniziale=67 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=TNA (7) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta notizie e segmenti accaduti durante l'ultima puntata di TNA Impact.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Knockouts Champion' e 'X-Division Champion' in inglese.; 'Release' va tradotto come licenziamento/licenziata, non rilascio.; 'Contract extension' si traduce come rinnovo contrattuale.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=TNA (7) | L'articolo riporta notizie e segmenti accaduti durante l'ultima puntata di TNA Impact.
+[PERF v71] analisi editoriale AI v72: 1.74s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Santino Marella Announces Indi Hartwell Has Signed A Contract Extension With TNA
+[SCORE] raffinato=84 priority=high | WWE/main roster, nome AEW: rebel, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 business/dirigenza, v62 categoria business, v66 cap title match non-title-change
+[V71] story_signature=stable:santino_marella|rebel|santino_marella_announces_indi_hartwell_has_signed|status|tna semantic_status=new_story freshness=0.955
+[PERF v71] WP lookup event_key: 0.95s
+[FIX] Event key in history ma non confermata su WordPress: event:tanea-brooks-rebel-als-diagnosis - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.30s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/tna-indi-hartwell-santino-marella-announces-contract-extension/intro-1778859525.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 4.79s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): TNA: Indi Hartwell ha rinnovato il contratto
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/tna-indi-hartwell-santino-marella-announces-contract-extension/l-intro-1778859525.jpg
+[MEDIA] Immagine caricata: 4678
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_155550_005_tna-indi-hartwell-ha-rinnovato-il-contratto_4679_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4679
+[PERF v71] creazione post WordPress: 4.93s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/tna-indi-hartwell-santino-marella-announces-contract-extension/l-intro-1778859525.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4678
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Santino Marella Announces Indi Hartwell Has Signed A Contrac': 13.77s
+[OK] Pubblicato: TNA: Indi Hartwell ha rinnovato il contratto
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_155552_005_tna-indi-hartwell-ha-rinnovato-il-contratto_ae085021_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 5/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: TNA: Indi Hartwell ha rinnovato il contratto
+[PUBLISHED REVIEW v87.1] Review outer salvata: TNA: Indi Hartwell ha rinnovato il contratto
+[BOT] Pubblicati 5 articoli (0 pending + 5 nuove) su 6 candidati provati | mode=storm
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-15 15:52:49_summary.json -> published_html_review/run_2026-05-15 15-52-49_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (182 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=5 errors=0 status=ok
+===== RUN END [2026-05-15 15:52:49] VERSION [v88_4_quality_microfixes (01c56bc)] =====
+

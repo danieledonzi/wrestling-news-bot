@@ -1,28 +1,52 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-15 13:45:39",
-  "bot_version": "v88_3_1_roster_arrival_guard (93e5f64)",
-  "git_sha": "93e5f6443c2e8df4fa163fde2b2509e8d78150ac",
-  "created_at": "2026-05-15T13:47:37",
-  "published_count": 2,
+  "run_id": "2026-05-15 15:52:49",
+  "bot_version": "v88_4_quality_microfixes (01c56bc)",
+  "git_sha": "01c56bc07a6e5f3b234e2af702168a0ea4abfea6",
+  "created_at": "2026-05-15T15:55:52",
+  "published_count": 5,
   "published_post_ids": [
-    "4660",
-    "4663"
+    "4667",
+    "4670",
+    "4673",
+    "4676",
+    "4679"
   ],
   "published_artifacts": [
     {
-      "post_id": 4660,
-      "title": "Paul Wight indica gli avversari che vorrebbe affrontare in AEW",
-      "source_url": "https://www.wrestlinginc.com/2170206/aew-paul-wight-kenny-omega-darby-allin-ring/",
-      "html_file": "published/20260515_134640_001_paul-wight-indica-gli-avversari-che-vorrebbe-affrontare-in-aew_4660_final.html",
-      "metadata_file": "published/20260515_134640_001_paul-wight-indica-gli-avversari-che-vorrebbe-affrontare-in-aew_4660_metadata.json"
+      "post_id": 4667,
+      "title": "Blake Monroe suggerisce il suo possibile debutto a SmackDown a Barcellona",
+      "source_url": "https://www.ringsidenews.com/blake-monroe-drops-major-hint-about-wwe-smackdown-debut-date/",
+      "html_file": "published/20260515_155322_001_blake-monroe-suggerisce-il-suo-possibile-debutto-a-smackdown-a-barcellona_4667_final.html",
+      "metadata_file": "published/20260515_155322_001_blake-monroe-suggerisce-il-suo-possibile-debutto-a-smackdown-a-barcellona_4667_metadata.json"
     },
     {
-      "post_id": 4663,
-      "title": "Buddy Matthews torna a sorpresa e attacca Donovan Dijak a WSW Rise Against",
-      "source_url": "https://www.ringsidenews.com/buddy-matthews-returns-attacks-donovan-dijak-long-injury-layoff/",
-      "html_file": "published/20260515_134735_002_buddy-matthews-torna-a-sorpresa-e-attacca-donovan-dijak-a-wsw-rise-against_4663_final.html",
-      "metadata_file": "published/20260515_134735_002_buddy-matthews-torna-a-sorpresa-e-attacca-donovan-dijak-a-wsw-rise-against_4663_metadata.json"
+      "post_id": 4670,
+      "title": "Il futuro di Asuka in WWE è considerato incerto",
+      "source_url": "https://www.ringsidenews.com/asukas-wwe-future-now-considered-unclear-internally/",
+      "html_file": "published/20260515_155402_002_il-futuro-di-asuka-in-wwe-è-considerato-incerto_4670_final.html",
+      "metadata_file": "published/20260515_155402_002_il-futuro-di-asuka-in-wwe-è-considerato-incerto_4670_metadata.json"
+    },
+    {
+      "post_id": 4673,
+      "title": "WWE: dubbi sul futuro degli accordi televisivi di AEW dopo il 2027",
+      "source_url": "https://www.ringsidenews.com/wwe-believes-aew-may-struggle-land-major-tv-deal-current-contract-ends/",
+      "html_file": "published/20260515_155518_003_wwe-dubbi-sul-futuro-degli-accordi-televisivi-di-aew-dopo-il-2027_4673_final.html",
+      "metadata_file": "published/20260515_155518_003_wwe-dubbi-sul-futuro-degli-accordi-televisivi-di-aew-dopo-il-2027_4673_metadata.json"
+    },
+    {
+      "post_id": 4676,
+      "title": "TNA: Fabian Aichner debutta a Impact e sfida il campione X-Division",
+      "source_url": "https://www.wrestlinginc.com/2173729/wwe-tna-impact-fabian-aichner-giovanni-vinci-appears/",
+      "html_file": "published/20260515_155535_004_tna-fabian-aichner-debutta-a-impact-e-sfida-il-campione-x-division_4676_final.html",
+      "metadata_file": "published/20260515_155535_004_tna-fabian-aichner-debutta-a-impact-e-sfida-il-campione-x-division_4676_metadata.json"
+    },
+    {
+      "post_id": 4679,
+      "title": "TNA: Indi Hartwell ha rinnovato il contratto",
+      "source_url": "https://www.wrestlinginc.com/2173722/tna-indi-hartwell-santino-marella-announces-contract-extension/",
+      "html_file": "published/20260515_155550_005_tna-indi-hartwell-ha-rinnovato-il-contratto_4679_final.html",
+      "metadata_file": "published/20260515_155550_005_tna-indi-hartwell-ha-rinnovato-il-contratto_4679_metadata.json"
     }
   ],
   "errors": [],
