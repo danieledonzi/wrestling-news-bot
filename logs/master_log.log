@@ -3328,3 +3328,204 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-15 11:33:21] VERSION [v88_3_1_roster_arrival_guard (c26afeb)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+
+===== RUN START [2026-05-15 13:45:39] VERSION [v88_3_1_roster_arrival_guard (93e5f64)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 9 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Paul Wight Names AEW Stars He'd Still Like To Get In The Ring With
+[SKIP] Score sotto soglia editoriale (0/75): TNA Impact 5/14/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (50/75): Cedric Alexander Ends Leon Slater's X-Division Title Run In TNA Impact Main Event
+[SKIP] Score sotto soglia editoriale (50/75): Mike Santana & Steve Maclin Set For TNA World Title Rematch On Upcoming Impact
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Eric Young Wins Battle Royal To Earn Shot At Mike Santana's TNA World Championship
+[SKIP] Score sotto soglia editoriale (50/75): Eric Young Wins Battle Royal To Earn Shot At Mike Santana's TNA World Championship
+[SKIP] Score sotto soglia editoriale (20/75): Shelton Benjamin Identifies Former WWE & AEW Producer Who 'Unlocked' His Potential
+[REPORT v87.2] Report confermato da history forte: report:tna-impact-2026-05-14
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:tna-impact-2026-05-14 - TNA Impact Results 5/14 - X-Division Title On The Line And More
+[SKIP] Score sotto soglia editoriale (0/75): Dana White Encourages UFC Fighters To Unionize
+[SKIP] Score sotto soglia editoriale (14/75): Khamzat Chimaev's Body Failed Him At UFC 328, According To His Brother
+[SKIP] Score sotto soglia editoriale (13/75): MLW Set To Revive TV Show After 3 Years
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173220/wwe-ronda-rousey-becky-lynch-high-profile-pitch-never-delivered/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173180/wwe-creative-plans-fatal-influence-crowd-reactions/
+[SKIP] Score sotto soglia editoriale (46/75): AEW Reportedly Has 'Real' Interest In Collaborating With WWE HOFer
+[SKIP] Score sotto soglia editoriale (18/75): Major TNA Name Reportedly Turned Down Dark Side Of The Ring Interview Opportunities
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173032/wwe-creative-status-stephanie-vaquer/
+[SKIP] Score sotto soglia editoriale (38/75): AEW Collision Ratings & Viewership Report: 5/9/2026
+[SKIP] Score sotto soglia editoriale (52/75): Former AEW Champ Swerve Strickland Reacts To Kofi Kingston's WWE Departure
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172708/karrion-kross-scarlett-wwe-releases/
+[SKIP] Score sotto soglia editoriale (10/75): Jim Ross Identifies WWE Character He Thinks Should Be Used Sparingly
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (45/75): ROH Supercard of Honor 2026 Preview: Confirmed Matches, Start Time and How to Watch
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 69->54 - AEW Double or Nothing 2026 Closing In On Sellout After Huge Ticket Sales Jump
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - AEW Double or Nothing 2026 Closing In On Sellout After Huge Ticket Sales Jump
+[SCORE v86.9] Cap commentary/opinion 91->68 - AEW All In 2026 Ticket Numbers Already Raising Concerns
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - AEW All In 2026 Ticket Numbers Already Raising Concerns
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - AEW All In 2026 Ticket Numbers Already Raising Concerns
+[PERF v71] WP lookup event_key: 1.37s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (0/75): John Cena Says WWE Is Too Fast For Him At 49 Years Old
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Chris Masters Claims AEW Ghosted Him After He Tried to Make Contact
+[SKIP] Score sotto soglia editoriale (49/75): Chris Masters Claims AEW Ghosted Him After He Tried to Make Contact
+[SKIP] Score sotto soglia editoriale (57/75): John Cena Addresses Criticism Over WWE's Aging Main Event Scene
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - WWE SmackDown Preview for May 15, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v81.1] Cap future card announcement 56->56 - WWE SmackDown Preview for May 15, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (51/75): WWE SmackDown Preview for May 15, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] URL già in history: https://www.ringsidenews.com/former-wwe-nxt-star-giovanni-vinci-arrives-tna-right-cedric-alexanders-title-win/
+[SKIP] Score sotto soglia editoriale (45/75): First Match Added To TNA Slammiversary 2026
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Two More Title Matches Added To ROH Supercard Of Honor
+[SCORE v81.1] Cap future card announcement 50->50 - Two More Title Matches Added To ROH Supercard Of Honor
+[SKIP] Score sotto soglia editoriale (45/75): Two More Title Matches Added To ROH Supercard Of Honor
+[SKIP] Score sotto soglia editoriale (57/75): AEW Has No Known Plans To Merge Championships Despite Growing Fan Criticism
+[SKIP] URL già in history: https://www.ringsidenews.com/john-cena-reveals-he-diagnosed-rare-eye-condition-ignoring-symptoms/
+[SKIP] URL già in history: https://www.ringsidenews.com/indi-hartwell-re-signs-tna-wrestling/
+[SCORE] 73 medium - WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, match/segmento annunciato, v71 freshness=0.365, v48 tier2: 55-74
+[SCORE] 68 medium - Paul Wight Names AEW Stars He'd Still Like To Get In The Ring With | AEW, impatto roster/storyline, ritorno/debutto, v62 ritorno/debutto, v71 freshness=0.711, v48 tier2: 55-74
+[SCORE] 59 low - Buddy Matthews Returns and Attacks Donovan Dijak After Long Injury Layoff | AEW, impatto roster/storyline, ritorno/debutto, contenuto leggero, v62 infortunio/operazione, v71 source reliability soft penalty, v71 freshness=0.797, v48 tier2: 55-74
+[SCORE] 56 low - Ronda Rousey Calls Out WWE Over Storylines That Don't Make Sense | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.577, v48 tier2: 55-74
+[SCORE] 40 low - AEW Double or Nothing 2026 Closing In On Sellout After Huge Ticket Sales Jump | AEW, PLE/PPV, v62 titolo/championship, v62 categoria business, v88.2 cap OTHER/feature non-news 69->54, v88.3 hard feature skip cap 54->45, v71 source reliability soft penalty, v71 freshness=0.567, v48 tier4: 40-44 riempimento controllato
+[SCORE] 40 low - AEW All In 2026 Ticket Numbers Already Raising Concerns | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v62 corporate/business, v62 categoria business, v86.9 cap commentary/opinion 91->68, v88.2 cap OTHER/feature non-news 68->54, v88.3 hard feature skip cap 54->45, v71 source reliability soft penalty, v71 freshness=0.566, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 6 | mode=normal | max nuove=3 | pending pubblicati=0
+[PERF v71] WP lookup URL esistente: 0.99s
+[BOT] Elaborazione: WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down
+[BOT] semantic_id=wwes-john-cena-classic-reportedly-a-work-in-progress-with-few-details-nailed-down
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo discute lo stato di sviluppo di un nuovo evento basandosi su fonti di backstage (WrestleVotes), trattandosi di un aggiornamento su piani futuri non ancora confermati.
+[EDITORIAL v72.3] translation_notes=Mantenere 'John Cena Classic' come nome proprio dell'evento.; Tradurre 'work in progress' come 'opera in corso di definizione'.; Attenzione a non tradurre 'retirement match' come 'match di pensionamento' (usare 'match di ritiro').
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo discute lo stato di sviluppo di un nuovo evento basandosi su fonti di backstage (WrestleVotes), trattandosi di un aggiornamento su piani futuri non ancora confermati.
+[PERF v71] analisi editoriale AI v72: 4.19s
+[SCORE v88.3] v88.3 hard feature skip cap 100->45 - WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down
+[SCORE] raffinato=45 priority=low | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, combo top name titolo + evento forte, show settimanale, v62 media rights/streaming, v88.3 hard feature skip cap 100->45
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - WWE's John Cena Classic Reportedly 'A Work In Progress' With Few Details Nailed Down
+[WP] Verifica post esistente fallita: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+[BOT] Elaborazione: Paul Wight Names AEW Stars He'd Still Like To Get In The Ring With
+[BOT] semantic_id=paul-wight-names-aew-stars-hed-still-like-to-get-in-the-ring-with
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | Si tratta di un articolo basato su un'intervista rilasciata da Paul Wight in cui esprime desideri personali. Non è un evento futuro né un report di un match, rientra nelle news post-intervista.
+[EDITORIAL v72.3] translation_notes=Mantenere 'AEW World Champion' e i nomi dei wrestler.; Non tradurre i nomi delle cinture (es. titoli di categoria).; Attenzione al termine 'heel run': tradurre come 'run da heel' o 'periodo da cattivo'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | Si tratta di un articolo basato su un'intervista rilasciata da Paul Wight in cui esprime desideri personali. Non è un evento futuro né un report di un match, rientra nelle news post-intervista.
+[PERF v71] analisi editoriale AI v72: 6.26s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Paul Wight Names AEW Stars He'd Still Like To Get In The Ring With
+[SCORE] raffinato=65 priority=medium | AEW, impatto roster/storyline, breaking/major update, PLE/PPV
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Paul Wight Names AEW Stars He'd Still Like To Get In The Ring With
+[V71] story_signature=stable:paul_wight_names|aew_stars_he|still_like_to_get_in_the_ring_with|injury|aew semantic_status=new_story freshness=0.711
+[PERF v71] WP recent posts dedupe: 1.46s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.83s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/paul-wight-names-aew-stars-hed-still-like-to-get-in-the-ring-with/intro-1778531091.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione scartato: editorial_word_ratio=0.68 (205/300) threshold=0.70
+[PERF v71] traduzione: 23.74s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Paul Wight indica gli avversari che vorrebbe affrontare in AEW
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/paul-wight-names-aew-stars-hed-still-like-to-get-in-the-ring-with/l-intro-1778531091.jpg
+[MEDIA] Immagine caricata: 4659
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_134640_001_paul-wight-indica-gli-avversari-che-vorrebbe-affrontare-in-aew_4660_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4660
+[PERF v71] creazione post WordPress: 9.75s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/paul-wight-names-aew-stars-hed-still-like-to-get-in-the-ring-with/l-intro-1778531091.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4659
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Paul Wight Names AEW Stars He'd Still Like To Get In The Rin': 42.49s
+[OK] Pubblicato: Paul Wight indica gli avversari che vorrebbe affrontare in AEW
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_134642_001_paul-wight-indica-gli-avversari-che-vorrebbe-affrontare-in-aew_455bfd33_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Paul Wight indica gli avversari che vorrebbe affrontare in AEW
+[PUBLISHED REVIEW v87.1] Review outer salvata: Paul Wight indica gli avversari che vorrebbe affrontare in AEW
+[BOT] Elaborazione: Buddy Matthews Returns and Attacks Donovan Dijak After Long Injury Layoff
+[BOT] semantic_id=buddy-matthews-returns-and-attacks-donovan-dijak-after-long-injury-layoff
+[SCORE] iniziale=59 priority=low
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/buddy-matthews-returns-attacks-donovan-dijak-long-injury-layoff/
+[PERF v71] scraping articolo: 1.01s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/buddy-matthews-returns-attacks-donovan-dijak-long-injury-layoff/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.51s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WORLD (8) conf=0.95 model=gemini-3.1-flash-lite | L'articolo riporta un'apparizione a sorpresa avvenuta durante uno show della federazione australiana WSW. Essendo un evento indipendente non legato a WWE/AEW/TNA, la categoria corretta è World.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'WSW Rise Against'.; Mantenere i nomi dei wrestler in inglese.; 'Medically cleared' va tradotto come 'idoneo a combattere' o 'ricevere l'ok dai medici'.
+[CATEGORY v73] World downgrade: WORLD -> AEW | non wrestling internazionale
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | L'articolo riporta un'apparizione a sorpresa avvenuta durante uno show della federazione australiana WSW. Essendo un evento indipendente non legato a WWE/AEW/TNA, la categoria corretta è World. | v73 world downgrade
+[PERF v71] analisi editoriale AI v72: 5.89s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Buddy Matthews Returns and Attacks Donovan Dijak After Long Injury Layoff
+[SCORE] raffinato=64 priority=medium | AEW, impatto roster/storyline, ritorno/debutto, contenuto leggero, v62 infortunio/operazione
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Buddy Matthews Returns and Attacks Donovan Dijak After Long Injury Layoff
+[V71] story_signature=stable:buddy_matthews_returns|attacks_donovan_dijak_after_long_injury_layoff|return|wrestling semantic_status=new_story freshness=0.797
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=9
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 18.19s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Buddy Matthews torna a sorpresa e attacca Donovan Dijak a WSW Rise Against
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/WrestlingCovers/status/2055256955254436156
+[EMBED v87.3] Positional embed guard applicato: 1 modifiche
+[EMBED v88] Publish media guard: expected=1 before=0 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/buddy-matthews-returns-and-attacks-donovan-dijak-after-long-injury-layoff-00.jpg
+[MEDIA] Immagine caricata: 4662
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260515_134735_002_buddy-matthews-torna-a-sorpresa-e-attacca-donovan-dijak-a-wsw-rise-against_4663_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4663
+[PERF v71] creazione post WordPress: 27.07s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/buddy-matthews-returns-and-attacks-donovan-dijak-after-long-injury-layoff-00.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4662
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Buddy Matthews Returns and Attacks Donovan Dijak After Long ': 53.61s
+[OK] Pubblicato: Buddy Matthews torna a sorpresa e attacca Donovan Dijak a WSW Rise Against
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260515_134737_002_buddy-matthews-torna-a-sorpresa-e-attacca-donovan-dijak-a-wsw-rise-against_b3313d2a_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Buddy Matthews torna a sorpresa e attacca Donovan Dijak a WSW Rise Against
+[PUBLISHED REVIEW v87.1] Review outer salvata: Buddy Matthews torna a sorpresa e attacca Donovan Dijak a WSW Rise Against
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: Ronda Rousey Calls Out WWE Over Storylines That Don't Make Sense
+[PENDING] Coda salvata: 1 elementi
+[SKIP v88.3] Feature storico/FIFA/venue/media call escluso: AEW Double or Nothing 2026 Closing In On Sellout After Huge Ticket Sales Jump
+[SKIP v88.3] Feature storico/FIFA/venue/media call escluso: AEW All In 2026 Ticket Numbers Already Raising Concerns
+[BOT] Pubblicati 2 articoli (0 pending + 2 nuove) su 6 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-15 13:45:39_summary.json -> published_html_review/run_2026-05-15 13-45-39_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (166 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
+===== RUN END [2026-05-15 13:45:39] VERSION [v88_3_1_roster_arrival_guard (93e5f64)] =====
+

@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-15 11:33:21",
-  "last_bot_version": "v88_3_1_roster_arrival_guard (c26afeb)",
-  "updated_at": "2026-05-15T11:33:40",
-  "total_items": 39,
+  "last_run_id": "2026-05-15 13:45:39",
+  "last_bot_version": "v88_3_1_roster_arrival_guard (93e5f64)",
+  "updated_at": "2026-05-15T13:47:37",
+  "total_items": 41,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -316,6 +316,22 @@
       "original_html_file": "20260515_112139_001_tna-cedric-alexander-nuovo-x-division-champion-debutta-giovanni-vinci_3ce0714e_original.html",
       "final_html_file": "20260515_112139_001_tna-cedric-alexander-nuovo-x-division-champion-debutta-giovanni-vinci_3ce0714e_final.html",
       "metadata_file": "20260515_112139_001_tna-cedric-alexander-nuovo-x-division-champion-debutta-giovanni-vinci_3ce0714e_metadata.json"
+    },
+    {
+      "run_id": "2026-05-15 13:45:39",
+      "title": "Paul Wight indica gli avversari che vorrebbe affrontare in AEW",
+      "url": "https://www.wrestlinginc.com/2170206/aew-paul-wight-kenny-omega-darby-allin-ring/",
+      "original_html_file": "20260515_134642_001_paul-wight-indica-gli-avversari-che-vorrebbe-affrontare-in-aew_455bfd33_original.html",
+      "final_html_file": "20260515_134642_001_paul-wight-indica-gli-avversari-che-vorrebbe-affrontare-in-aew_455bfd33_final.html",
+      "metadata_file": "20260515_134642_001_paul-wight-indica-gli-avversari-che-vorrebbe-affrontare-in-aew_455bfd33_metadata.json"
+    },
+    {
+      "run_id": "2026-05-15 13:45:39",
+      "title": "Buddy Matthews torna a sorpresa e attacca Donovan Dijak a WSW Rise Against",
+      "url": "https://www.ringsidenews.com/buddy-matthews-returns-attacks-donovan-dijak-long-injury-layoff/",
+      "original_html_file": "20260515_134737_002_buddy-matthews-torna-a-sorpresa-e-attacca-donovan-dijak-a-wsw-rise-against_b3313d2a_original.html",
+      "final_html_file": "20260515_134737_002_buddy-matthews-torna-a-sorpresa-e-attacca-donovan-dijak-a-wsw-rise-against_b3313d2a_final.html",
+      "metadata_file": "20260515_134737_002_buddy-matthews-torna-a-sorpresa-e-attacca-donovan-dijak-a-wsw-rise-against_b3313d2a_metadata.json"
     }
   ]
 }

@@ -1,12 +1,30 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-15 11:33:21",
-  "bot_version": "v88_3_1_roster_arrival_guard (c26afeb)",
-  "git_sha": "c26afeb5a8eb3f12cc5c58241f6c696908c8e590",
-  "created_at": "2026-05-15T11:33:40",
-  "published_count": 0,
-  "published_post_ids": [],
-  "published_artifacts": [],
+  "run_id": "2026-05-15 13:45:39",
+  "bot_version": "v88_3_1_roster_arrival_guard (93e5f64)",
+  "git_sha": "93e5f6443c2e8df4fa163fde2b2509e8d78150ac",
+  "created_at": "2026-05-15T13:47:37",
+  "published_count": 2,
+  "published_post_ids": [
+    "4660",
+    "4663"
+  ],
+  "published_artifacts": [
+    {
+      "post_id": 4660,
+      "title": "Paul Wight indica gli avversari che vorrebbe affrontare in AEW",
+      "source_url": "https://www.wrestlinginc.com/2170206/aew-paul-wight-kenny-omega-darby-allin-ring/",
+      "html_file": "published/20260515_134640_001_paul-wight-indica-gli-avversari-che-vorrebbe-affrontare-in-aew_4660_final.html",
+      "metadata_file": "published/20260515_134640_001_paul-wight-indica-gli-avversari-che-vorrebbe-affrontare-in-aew_4660_metadata.json"
+    },
+    {
+      "post_id": 4663,
+      "title": "Buddy Matthews torna a sorpresa e attacca Donovan Dijak a WSW Rise Against",
+      "source_url": "https://www.ringsidenews.com/buddy-matthews-returns-attacks-donovan-dijak-long-injury-layoff/",
+      "html_file": "published/20260515_134735_002_buddy-matthews-torna-a-sorpresa-e-attacca-donovan-dijak-a-wsw-rise-against_4663_final.html",
+      "metadata_file": "published/20260515_134735_002_buddy-matthews-torna-a-sorpresa-e-attacca-donovan-dijak-a-wsw-rise-against_4663_metadata.json"
+    }
+  ],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",
