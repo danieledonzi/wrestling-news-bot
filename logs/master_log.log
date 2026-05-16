@@ -1475,3 +1475,219 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-16 17:49:08] VERSION [v88_4_2_report_softfixes (35b4120)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+
+===== RUN START [2026-05-16 18:52:25] VERSION [v88_4_2_report_softfixes (c8c1314)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 10 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (31/75): How WWE Tests Wrestlers 'To See If They Have An Attitude Problem,' Per Former Star
+[SKIP] Score sotto soglia editoriale (37/75): Athena Wins First-Ever Women's ROH Survival Of The Fittest Match, Extends Title Reign
+[SKIP] Score sotto soglia editoriale (48/75): Eric Bischoff Recalls Paul Heyman's Love For Released WWE Star
+[SCORE v81.1] Cap light name-driven item 73->73 - Matt Hardy Looks Back On KofiMania In Wake Of New Day's WWE Release
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - AEW's Swerve Strickland Attacks Bandido After ROH Supercard Of Honor World Title Match
+[SKIP] Score sotto soglia editoriale (50/75): AEW's Swerve Strickland Attacks Bandido After ROH Supercard Of Honor World Title Match
+[SKIP] Score sotto soglia editoriale (45/75): WWE's Jacob Fatu Clarifies Familial Relationship With Roman Reigns
+[SKIP] Score sotto soglia editoriale (54/75): Former WWE Star AJ Styles Explains Why It's Harder To Improvise A Match In Modern Era
+[SKIP] Score sotto soglia editoriale (14/75): Jeff Jarrett Says AEW Star Combines In-Ring & Character Work Better Than Anyone Else
+[SCORE v81.1] Cap light name-driven item 55->55 - Jacob Fatu Talks WWE WrestleMania Feud, Drew McIntyre's Relationship With Bloodline
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170628/wwe-braun-strowman-wyatt-family-main-roster-debut/
+[SCORE v81.1] Cap light name-driven item 55->55 - Ronda Rousey Reflects On Main Eventing WWE WrestleMania 35
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE SmackDown 5/15/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/15/2026: 3 Things We Hated & 3 Things We Loved
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy
+[SKIP] Score sotto soglia editoriale (56/75): GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy
+[SCORE v81.1] Cap light name-driven item 49->49 - Jacob Fatu Recalls Booker T Helping Him Get Into WWE Despite ROW No-Show Incident
+[SKIP] Score sotto soglia editoriale (49/75): Jacob Fatu Recalls Booker T Helping Him Get Into WWE Despite ROW No-Show Incident
+[SKIP] Score sotto soglia editoriale (24/75): WWE NXT Viewership & Ratings Report: 5/12/2026
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (57/75): Gremlin House Wrestling Promoter Accused of Harassment and Threats Involving Minor Wrestler
+[SKIP] Score sotto soglia editoriale (57/75): Charlotte Flair Reacts to Awkward Wardrobe Malfunction on May 15 WWE SmackDown
+[SKIP] Score sotto soglia editoriale (51/75): MJF Offers Sammy Guevara $500K To Take Out Darby Allin Before AEW Double Or Nothing
+[SKIP] URL già in history: https://www.ringsidenews.com/ted-dibiase-jr-addresses-claim-security-held-him-back-wrestlemania-42/
+[SKIP] Score sotto soglia editoriale (41/75): Matt Hardy Reveals Exact Dollar Amounts From His First WWE Contracts
+[SKIP] Score sotto soglia editoriale (19/75): Scrapped Plans for Major Conor McGregor Program in WWE Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/fans-bury-shawn-spears-bragging-about-his-wwe-paycheck-amid-tko-pay-cut-controversy/
+[SKIP] URL già in history: https://www.ringsidenews.com/bayley-returns-nxt-house-shows-first-time-10-years-admits-todays-talent-different/
+[SKIP] URL già in history: https://www.ringsidenews.com/layla-reveals-one-thing-that-could-bring-her-back-wwe/
+[WP] Verifica post esistente fallita: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+[PERF v71] WP lookup event_key: 1.39s
+[FIX] Event key in history ma non confermata su WordPress: event:business:vince-mcmahon - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (57/75): Former WWE Star Layla Says She Dated Cody Rhodes Because She Knew He'd Become A Star
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - JC Mateo Hints at NJPW Return Following WWE Release
+[SKIP] Score sotto soglia editoriale (0/75): JC Mateo Hints at NJPW Return Following WWE Release
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - AEW Collision Preview for May 16, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (51/75): AEW Collision Preview for May 16, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (49/75): Marty Jannetty Underwent Foot Amputation After Years-Long Sepsis Battle
+[SKIP] URL già in history: https://www.ringsidenews.com/tony-khan-responds-fan-claims-media-trained-tony-becoming-problem/
+[SCORE] 100 high - WWE HOFer Eric Bischoff Lambasts 3 Hour Weekly Shows | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 freshness=0.537
+[SCORE] 95 high - Layla Explains Why She Abruptly Walked Away From WWE After Signing New Deal | WWE/main roster, impatto roster/storyline, breaking/major update, v62 business/dirigenza, v62 categoria business, v71 freshness=0.519
+[SCORE] 84 high - Jade Cargill Challenges Rhea Ripley To WWE Women's Title Rematch At Clash In Italy | WWE/main roster, top star titolo: rhea ripley, nomi forti titolo: jade cargill, WWE main roster + storyline/evento, PLE/PPV, v62 titolo/championship, v66 cap title match non-title-change, v71 freshness=0.412
+[SCORE] 73 medium - Matt Hardy Looks Back On KofiMania In Wake Of New Day's WWE Release | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v81.1 cap light name-driven item 73->73, v71 freshness=0.587, v48 tier2: 55-74
+[SCORE] 73 medium - Nia Jax, Lash Legend Apparently Set For WWE Women's Title Match At Upcoming SNME | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v71 freshness=0.388, v48 tier2: 55-74
+[SCORE] 69 medium - Kit Wilson Details Emotional Struggle After Being Left Out Of 2026 WWE Royal Rumble | WWE/main roster, top star lead: cody rhodes, nomi forti lead: cody rhodes, WWE main roster + storyline/evento, PLE/PPV, v71 freshness=0.58, v48 tier2: 55-74
+[SCORE] 56 low - Six-Woman Tag Team Match Added To Upcoming WWE Saturday Night's Main Event | WWE/main roster, WWE main roster + storyline/evento, match/segmento annunciato, show settimanale, v71 freshness=0.411, v48 tier2: 55-74
+[SCORE] 55 low - Jacob Fatu Talks WWE WrestleMania Feud, Drew McIntyre's Relationship With Bloodline | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, opinione generica, floor WWE main roster storyline, v81.1 cap light name-driven item 55->55, v71 freshness=0.555, v48 tier2: 55-74
+[SCORE] 55 low - Ronda Rousey Reflects On Main Eventing WWE WrestleMania 35 | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, opinione generica, floor WWE main roster storyline, v81.1 cap light name-driven item 55->55, v71 freshness=0.53, v48 tier2: 55-74
+[MODE] Modalita normale: 2 news >=90, 3 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 2
+[PERF v71] WP lookup URL esistente: 0.90s
+[BOT] Elaborazione: WWE HOFer Eric Bischoff Lambasts 3 Hour Weekly Shows
+[BOT] semantic_id=wwe-hofer-eric-bischoff-lambasts-3-hour-weekly-shows
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=6, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=0.95 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta le opinioni critiche di Eric Bischoff espresse nel suo podcast riguardo alla durata dei programmi TV di wrestling, con focus sul cambiamento di formato di SmackDown.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'WWE HOFer' come 'HOFer WWE', usa 'Membro della Hall of Fame WWE'.; Non tradurre titoli come 'SmackDown' o '83 Weeks'.; Attenzione ai calchi: 'dilute the value' va reso come 'diluire il valore' o 'indebolire l'impatto'.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta le opinioni critiche di Eric Bischoff espresse nel suo podcast riguardo alla durata dei programmi TV di wrestling, con focus sul cambiamento di formato di SmackDown.
+[PERF v71] analisi editoriale AI v72: 3.96s
+[SCORE] raffinato=54 priority=low | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 business/dirigenza, v62 categoria business, v72.3 cap opinion
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - WWE HOFer Eric Bischoff Lambasts 3 Hour Weekly Shows
+[BOT] Elaborazione: Layla Explains Why She Abruptly Walked Away From WWE After Signing New Deal
+[BOT] semantic_id=layla-explains-why-she-abruptly-walked-away-from-wwe-after-signing-new-deal
+[SCORE] iniziale=95 priority=high
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/layla-explains-why-she-abruptly-walked-away-wwe-signing-new-deal/
+[PERF v71] scraping articolo: 0.76s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=15, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/layla-explains-why-she-abruptly-walked-away-wwe-signing-new-deal/
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.40s
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo è un approfondimento retrospettivo su un addio avvenuto in passato tramite un'intervista, non rientra nelle news correnti né nei format di reportistica live.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'WWE deal' come 'affare WWE', ma 'contratto WWE'.; Mantenere le citazioni dirette fedeli al tono colloquiale dell'intervista.; Evitare il termine 'rilascio' per 'walked away': Layla ha deciso di lasciare/ritirarsi spontaneamente.
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo è un approfondimento retrospettivo su un addio avvenuto in passato tramite un'intervista, non rientra nelle news correnti né nei format di reportistica live.
+[PERF v71] analisi editoriale AI v72: 1.99s
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, breaking/major update, v62 business/dirigenza, v62 categoria business, v68 cap duro opinion/commentary
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Layla Explains Why She Abruptly Walked Away From WWE After Signing New Deal
+[BOT] News candidate totali: 9 | mode=normal | max nuove=3 | pending pubblicati=0
+[SKIP v78.1] Gia processato in questa run: WWE HOFer Eric Bischoff Lambasts 3 Hour Weekly Shows
+[PENDING] Coda salvata: 2 elementi
+[SKIP v78.1] Gia processato in questa run: Layla Explains Why She Abruptly Walked Away From WWE After Signing New Deal
+[PENDING] Coda salvata: 1 elementi
+[PERF v71] WP lookup URL esistente: 0.67s
+[BOT] Elaborazione: Jade Cargill Challenges Rhea Ripley To WWE Women's Title Rematch At Clash In Italy
+[BOT] semantic_id=jade-cargill-challenges-rhea-ripley-to-wwe-womens-title-rematch-at-clash-in-italy
+[SCORE] iniziale=84 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo focalizza l'attenzione sulla card dell'evento imminente Clash in Italy, riportando una sfida lanciata in chiave storyline per l'evento stesso. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Women's Championship' o 'Clash in Italy' (nome evento).; 'Pump kicked' va reso con 'calciata in faccia'.; 'Back up dancers' va reso come 'ballerine di fila' o 'comparse'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo focalizza l'attenzione sulla card dell'evento imminente Clash in Italy, riportando una sfida lanciata in chiave storyline per l'evento stesso. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 4.71s
+[SCORE] raffinato=20 priority=skip | WWE/main roster, top star titolo: rhea ripley, nomi forti titolo: jade cargill, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v68 preview scaduta
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 20/75 - Jade Cargill Challenges Rhea Ripley To WWE Women's Title Rematch At Clash In Italy
+[PERF v71] WP lookup URL esistente: 0.75s
+[BOT] Elaborazione: Matt Hardy Looks Back On KofiMania In Wake Of New Day's WWE Release
+[BOT] semantic_id=matt-hardy-looks-back-on-kofimania-in-wake-of-new-days-wwe-release
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=7, image=2, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, image=2, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta commenti di Matt Hardy su fatti già avvenuti (addio di New Day e Kofimania), rientrando nelle news autonome post-show.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'KofiMania', è un termine tecnico/culturale del wrestling.; 'Released' qui deve essere reso come 'addio' o 'lasciare la federazione' poiché hanno rifiutato il taglio salariale, non licenziamento forzato.; Mantenere le citazioni di Hardy virgolettate e fedeli.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta commenti di Matt Hardy su fatti già avvenuti (addio di New Day e Kofimania), rientrando nelle news autonome post-show.
+[PERF v71] analisi editoriale AI v72: 6.05s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Matt Hardy Looks Back On KofiMania In Wake Of New Day's WWE Release
+[SCORE] raffinato=95 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, PLE/PPV, opinione generica, v62 titolo/championship
+[V71] story_signature=stable:matt_hardy|matt_hardy_looks_back_on|in_wake_of_new_day|status|wwe semantic_status=new_story freshness=0.703
+[PERF v71] WP recent posts dedupe: 1.06s
+[FIX] Event key in history ma non confermata su WordPress: event:business:vince-mcmahon - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.39s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=7
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/matt-hardy-looks-back-on-kofimania-in-wake-of-new-days-wwe-release/intro-1778613603.jpg
+[MEDIA] Immagine interna caricata: 4770
+[PERF v71] upload immagine interna: 1.94s
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 48.61s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Matt Hardy ricorda la KofiMania dopo l'addio di Kofi Kingston e Xavier Woods alla WWE
+[DEDUPE v88.4.1] Canonical event core caricati: 9
+[MEDIA] Immagine interna caricata: 4771
+[PERF v71] upload immagine interna: 1.37s
+[MEDIA v86.7] Reintegrate 1 immagini inline perse prima del publish: Matt Hardy ricorda la KofiMania dopo l'addio di Kofi Kingston e Xavier Woods alla WWE
+[MEDIA v86.7] Preservate 4 immagini inline strutturate durante strip featured
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/matt-hardy-looks-back-on-kofimania-in-wake-of-new-days-wwe-release/l-intro-1778613603.jpg
+[MEDIA] Immagine caricata: 4772
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260516_185428_001_matt-hardy-ricorda-la-kofimania-dopo-laddio-di-kofi-kingston-e-xavier-woods-alla-wwe_4773_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4773
+[DEDUPE v88.4.1] Canonical event core pubblicato/registrato: canonical_event_core:bryan_danielson|departure_release|wwe
+[PERF v71] creazione post WordPress: 6.87s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/matt-hardy-looks-back-on-kofimania-in-wake-of-new-days-wwe-release/l-intro-1778613603.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4772
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Matt Hardy Looks Back On KofiMania In Wake Of New Day's WWE ': 63.84s
+[OK] Pubblicato: Matt Hardy ricorda la KofiMania dopo l'addio di Kofi Kingston e Xavier Woods alla WWE
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260516_185430_001_matt-hardy-ricorda-la-kofimania-dopo-l-addio-di-kofi-kingston-e-xavier-woods-all_2abf9e50_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Matt Hardy ricorda la KofiMania dopo l'addio di Kofi Kingston e Xavier Woods alla WWE
+[PUBLISHED REVIEW v87.1] Review outer salvata: Matt Hardy ricorda la KofiMania dopo l'addio di Kofi Kingston e Xavier Woods alla WWE
+[BOT] Elaborazione: Nia Jax, Lash Legend Apparently Set For WWE Women's Title Match At Upcoming SNME
+[BOT] semantic_id=nia-jax-lash-legend-apparently-set-for-wwe-womens-title-match-at-upcoming-snme
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo discute di un match non ancora ufficializzato per un evento futuro basandosi su un segmento, rientrando nella categoria rumoristica sui piani futuri.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Saturday Night's Main Event' (SNME) senza tradurre il titolo dell'evento.; Tradurre 'Irresistible Forces' come nome del team.; Attenzione alla timeline: il testo cita eventi futuri (Raw) e passati (WrestleMania 42), mantenere coerenza temporale nei verbi.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo discute di un match non ancora ufficializzato per un evento futuro basandosi su un segmento, rientrando nella categoria rumoristica sui piani futuri.
+[PERF v71] analisi editoriale AI v72: 2.40s
+[SCORE v88.3] v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 56->54 - Nia Jax, Lash Legend Apparently Set For WWE Women's Title Match At Upcoming SNME
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti lead: brie bella, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 media rights/streaming, v70 cap preview hard, v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 56->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Nia Jax, Lash Legend Apparently Set For WWE Women's Title Match At Upcoming SNME
+[BOT] Elaborazione: Kit Wilson Details Emotional Struggle After Being Left Out Of 2026 WWE Royal Rumble
+[BOT] semantic_id=kit-wilson-details-emotional-struggle-after-being-left-out-of-2026-wwe-royal-rumble
+[SCORE] iniziale=69 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni di Kit Wilson su un evento già avvenuto (Royal Rumble 2026) e le sue reazioni post-evento, rientrando perfettamente nella categoria news post-show.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Royal Rumble' e i nomi dei wrestler. Tradurre 'left out' come 'escluso'. Non tradurre 'What Do You Wanna Talk About?' essendo il nome del podcast. 'Proactive' va reso co
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta dichiarazioni di Kit Wilson su un evento già avvenuto (Royal Rumble 2026) e le sue reazioni post-evento, rientrando perfettamente nella categoria news post-show.
+[PERF v71] analisi editoriale AI v72: 2.53s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Kit Wilson Details Emotional Struggle After Being Left Out Of 2026 WWE Royal Rumble
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star lead: cody rhodes, nomi forti lead: cody rhodes, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, combo top name lead + evento forte, PLE/PPV, opinione generica, v68 cap duro opinion/commentary
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Kit Wilson Details Emotional Struggle After Being Left Out Of 2026 WWE Royal Rumble
+[SKIP v86.6/legacy] low_score_pre_gemini:56: Six-Woman Tag Team Match Added To Upcoming WWE Saturday Night's Main Event
+[PENDING] Coda salvata: 1 elementi
+[SKIP v88.3] Non forzo articolo soft sotto 65 dopo una pubblicazione: 55/65 - Jacob Fatu Talks WWE WrestleMania Feud, Drew McIntyre's Relationship With Bloodline
+[SKIP v88.3] Non forzo articolo soft sotto 65 dopo una pubblicazione: 55/65 - Ronda Rousey Reflects On Main Eventing WWE WrestleMania 35
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 9 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-16 18:52:25_summary.json -> published_html_review/run_2026-05-16 18-52-25_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (280 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
+===== RUN END [2026-05-16 18:52:25] VERSION [v88_4_2_report_softfixes (c8c1314)] =====
+

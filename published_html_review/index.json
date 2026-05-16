@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-16 17:49:08",
-  "last_bot_version": "v88_4_2_report_softfixes (35b4120)",
-  "updated_at": "2026-05-16T17:49:40",
-  "total_items": 71,
+  "last_run_id": "2026-05-16 18:52:25",
+  "last_bot_version": "v88_4_2_report_softfixes (c8c1314)",
+  "updated_at": "2026-05-16T18:54:36",
+  "total_items": 72,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -572,6 +572,14 @@
       "original_html_file": "20260516_164920_001_ted-dibiase-jr-risponde-alle-voci-sull-essere-stato-allontanato-dalla-sicurezza-_51937ce2_original.html",
       "final_html_file": "20260516_164920_001_ted-dibiase-jr-risponde-alle-voci-sull-essere-stato-allontanato-dalla-sicurezza-_51937ce2_final.html",
       "metadata_file": "20260516_164920_001_ted-dibiase-jr-risponde-alle-voci-sull-essere-stato-allontanato-dalla-sicurezza-_51937ce2_metadata.json"
+    },
+    {
+      "run_id": "2026-05-16 18:52:25",
+      "title": "Matt Hardy ricorda la KofiMania dopo l'addio di Kofi Kingston e Xavier Woods alla WWE",
+      "url": "https://www.wrestlinginc.com/2171250/matt-hardy-kofimania-wwe-new-day/",
+      "original_html_file": "20260516_185430_001_matt-hardy-ricorda-la-kofimania-dopo-l-addio-di-kofi-kingston-e-xavier-woods-all_2abf9e50_original.html",
+      "final_html_file": "20260516_185430_001_matt-hardy-ricorda-la-kofimania-dopo-l-addio-di-kofi-kingston-e-xavier-woods-all_2abf9e50_final.html",
+      "metadata_file": "20260516_185430_001_matt-hardy-ricorda-la-kofimania-dopo-l-addio-di-kofi-kingston-e-xavier-woods-all_2abf9e50_metadata.json"
     }
   ]
 }

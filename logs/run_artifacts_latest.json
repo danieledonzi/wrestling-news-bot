@@ -1,12 +1,22 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-16 17:49:08",
-  "bot_version": "v88_4_2_report_softfixes (35b4120)",
-  "git_sha": "35b41208e7758c9d4e2a026a740569fd44b39941",
-  "created_at": "2026-05-16T17:49:40",
-  "published_count": 0,
-  "published_post_ids": [],
-  "published_artifacts": [],
+  "run_id": "2026-05-16 18:52:25",
+  "bot_version": "v88_4_2_report_softfixes (c8c1314)",
+  "git_sha": "c8c1314177d47c145dae09330895bc6c38b470b5",
+  "created_at": "2026-05-16T18:54:37",
+  "published_count": 1,
+  "published_post_ids": [
+    "4773"
+  ],
+  "published_artifacts": [
+    {
+      "post_id": 4773,
+      "title": "Matt Hardy ricorda la KofiMania dopo l'addio di Kofi Kingston e Xavier Woods alla WWE",
+      "source_url": "https://www.wrestlinginc.com/2171250/matt-hardy-kofimania-wwe-new-day/",
+      "html_file": "published/20260516_185428_001_matt-hardy-ricorda-la-kofimania-dopo-laddio-di-kofi-kingston-e-xavier-woods-alla-wwe_4773_final.html",
+      "metadata_file": "published/20260516_185428_001_matt-hardy-ricorda-la-kofimania-dopo-laddio-di-kofi-kingston-e-xavier-woods-alla-wwe_4773_metadata.json"
+    }
+  ],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",
