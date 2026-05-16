@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-16 13:02:02",
-  "last_bot_version": "v88_4_1_canonical_event_dedupe (f844f61)",
-  "updated_at": "2026-05-16T13:02:58",
-  "total_items": 66,
+  "last_run_id": "2026-05-16 14:38:06",
+  "last_bot_version": "v88_4_2_report_softfixes (a7072ba)",
+  "updated_at": "2026-05-16T14:43:02",
+  "total_items": 70,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -532,6 +532,38 @@
       "original_html_file": "20260516_114509_001_tony-khan-nega-di-aver-seguito-corsi-di-media-training-merito-dell-esperienza-e-_1b738789_original.html",
       "final_html_file": "20260516_114509_001_tony-khan-nega-di-aver-seguito-corsi-di-media-training-merito-dell-esperienza-e-_1b738789_final.html",
       "metadata_file": "20260516_114509_001_tony-khan-nega-di-aver-seguito-corsi-di-media-training-merito-dell-esperienza-e-_1b738789_metadata.json"
+    },
+    {
+      "run_id": "2026-05-16 14:38:06",
+      "title": "Shawn Spears criticato dai fan per aver ostentato lo stipendio in WWE",
+      "url": "https://www.ringsidenews.com/fans-bury-shawn-spears-bragging-about-his-wwe-paycheck-amid-tko-pay-cut-controversy/",
+      "original_html_file": "20260516_144019_001_shawn-spears-criticato-dai-fan-per-aver-ostentato-lo-stipendio-in-wwe_00e27214_original.html",
+      "final_html_file": "20260516_144019_001_shawn-spears-criticato-dai-fan-per-aver-ostentato-lo-stipendio-in-wwe_00e27214_final.html",
+      "metadata_file": "20260516_144019_001_shawn-spears-criticato-dai-fan-per-aver-ostentato-lo-stipendio-in-wwe_00e27214_metadata.json"
+    },
+    {
+      "run_id": "2026-05-16 14:38:06",
+      "title": "Layla apre a un ritorno in WWE: \"Solo per una reunion delle LayCool\"",
+      "url": "https://www.ringsidenews.com/layla-reveals-one-thing-that-could-bring-her-back-wwe/",
+      "original_html_file": "20260516_144147_002_layla-apre-a-un-ritorno-in-wwe-solo-per-una-reunion-delle-laycool_09a28b4c_original.html",
+      "final_html_file": "20260516_144147_002_layla-apre-a-un-ritorno-in-wwe-solo-per-una-reunion-delle-laycool_09a28b4c_final.html",
+      "metadata_file": "20260516_144147_002_layla-apre-a-un-ritorno-in-wwe-solo-per-una-reunion-delle-laycool_09a28b4c_metadata.json"
+    },
+    {
+      "run_id": "2026-05-16 14:38:06",
+      "title": "Bayley torna a un live event di NXT dopo 10 anni: \"Il talento di oggi è diverso\"",
+      "url": "https://www.ringsidenews.com/bayley-returns-nxt-house-shows-first-time-10-years-admits-todays-talent-different/",
+      "original_html_file": "20260516_144228_003_bayley-torna-a-un-live-event-di-nxt-dopo-10-anni-il-talento-di-oggi-diverso_cc367212_original.html",
+      "final_html_file": "20260516_144228_003_bayley-torna-a-un-live-event-di-nxt-dopo-10-anni-il-talento-di-oggi-diverso_cc367212_final.html",
+      "metadata_file": "20260516_144228_003_bayley-torna-a-un-live-event-di-nxt-dopo-10-anni-il-talento-di-oggi-diverso_cc367212_metadata.json"
+    },
+    {
+      "run_id": "2026-05-16 14:38:06",
+      "title": "Braun Strowman ricorda il suo debutto nel main roster con la Wyatt Family",
+      "url": "https://www.wrestlinginc.com/2170628/wwe-braun-strowman-wyatt-family-main-roster-debut/",
+      "original_html_file": "20260516_144244_004_braun-strowman-ricorda-il-suo-debutto-nel-main-roster-con-la-wyatt-family_9d1e4f72_original.html",
+      "final_html_file": "20260516_144244_004_braun-strowman-ricorda-il-suo-debutto-nel-main-roster-con-la-wyatt-family_9d1e4f72_final.html",
+      "metadata_file": "20260516_144244_004_braun-strowman-ricorda-il-suo-debutto-nel-main-roster-con-la-wyatt-family_9d1e4f72_metadata.json"
     }
   ]
 }

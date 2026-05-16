@@ -575,3 +575,410 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-16 13:02:02] VERSION [v88_4_1_canonical_event_dedupe (f844f61)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+
+===== RUN START [2026-05-16 14:38:06] VERSION [v88_4_2_report_softfixes (a7072ba)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 10 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SCORE v81.1] Cap light name-driven item 55->55 - Jacob Fatu Talks WWE WrestleMania Feud, Drew McIntyre's Relationship With Bloodline
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Braun Strowman Reflects On WWE Main Roster Debut Alongside The Wyatt Family
+[SCORE v81.1] Cap light name-driven item 55->55 - Ronda Rousey Reflects On Main Eventing WWE WrestleMania 35
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE SmackDown 5/15/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/15/2026: 3 Things We Hated & 3 Things We Loved
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy
+[SKIP] Score sotto soglia editoriale (56/75): GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy
+[SCORE v81.1] Cap light name-driven item 49->49 - Jacob Fatu Recalls Booker T Helping Him Get Into WWE Despite ROW No-Show Incident
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Jacob Fatu Recalls Booker T Helping Him Get Into WWE Despite ROW No-Show Incident
+[SKIP] Score sotto soglia editoriale (49/75): Jacob Fatu Recalls Booker T Helping Him Get Into WWE Despite ROW No-Show Incident
+[SKIP] Score sotto soglia editoriale (24/75): WWE NXT Viewership & Ratings Report: 5/12/2026
+[REPORT v87.2] Report confermato da history forte: report:wwe-smackdown-2026-05-15
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-smackdown-2026-05-15 - WWE SmackDown Results 5/15 - Trick Williams & Jade Cargill Appear, Women's Tag Match
+[SKIP] URL già in history: https://www.wrestlinginc.com/2174193/wwe-vince-mcmahon-linda-ring-boy-lawsuit-judge-plaintiffs-anonymous/
+[SKIP] Preview/show announcement scaduta: R-Truth Supposedly Not Cleared To Compete, Pulled From Advertised WWE SmackDown Match
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown
+[SKIP] URL già in history: https://www.wrestlinginc.com/2174099/aew-buddy-matthews-injury-update-indie-appearance-cleared-october/
+[SKIP] Score sotto soglia editoriale (18/75): Additional Details On Triller Owing AEW Money For Pay-Per-View Royalties
+[SKIP] Score sotto soglia editoriale (38/75): Backstage Report On AEW & Madison Square Garden After Wrestlers Express Interest
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[PERF v71] WP lookup event_key: 1.11s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Bayley Returns To NXT House Shows For First Time In 10 Years And Admits Today's Talent Is 'Different'
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Layla Reveals The One Thing That Could Bring Her Back To WWE
+[PERF v71] WP lookup event_key: 1.03s
+[FIX] Event key in history ma non confermata su WordPress: event:business:vince-mcmahon - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (57/75): Former WWE Star Layla Says She Dated Cody Rhodes Because She Knew He'd Become A Star
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - JC Mateo Hints at NJPW Return Following WWE Release
+[SKIP] Score sotto soglia editoriale (0/75): JC Mateo Hints at NJPW Return Following WWE Release
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - AEW Collision Preview for May 16, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (51/75): AEW Collision Preview for May 16, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Marty Jannetty Underwent Foot Amputation After Years-Long Sepsis Battle
+[SKIP] Score sotto soglia editoriale (49/75): Marty Jannetty Underwent Foot Amputation After Years-Long Sepsis Battle
+[SKIP] URL già in history: https://www.ringsidenews.com/tony-khan-responds-fan-claims-media-trained-tony-becoming-problem/
+[SKIP] URL già in history: https://www.ringsidenews.com/tony-khan-calls-out-wwe-background-chatter-about-aews-next-tv-deal/
+[SKIP] URL già in history: https://www.ringsidenews.com/tony-khan-addresses-interest-signing-former-new-day-stars-aew/
+[SKIP] Score sotto soglia editoriale (49/75): AEW Dynamite Viewership Sees Increase on May 13, 2026
+[PERF v71] WP lookup event_key: 1.22s
+[FIX] Event key in history ma non confermata su WordPress: event:cody-rhodes-diagnosis - provo a pubblicare
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 55->54 - WWE Adds New Grudge Match To 5/22 SmackDown
+[SCORE v88.3] v88.3 cap low-value market item 54->45 - WWE Adds New Grudge Match To 5/22 SmackDown
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - WWE Adds Huge Match to May 23 Saturday Night's Main Event
+[SKIP] Score sotto soglia editoriale (51/75): WWE Adds Huge Match to May 23 Saturday Night's Main Event
+[SCORE] 100 high - Fans Bury Shawn Spears for Bragging About His WWE Paycheck Amid TKO Pay Cut Controversy | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, developmental secondario, v62 reazioni/tributi, v62 categoria business, v71 freshness=0.692
+[SCORE] 100 high - WWE HOFer Eric Bischoff Lambasts 3 Hour Weekly Shows | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 freshness=0.59
+[SCORE] 100 high - Layla Reveals The One Thing That Could Bring Her Back To WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v71 freshness=0.689
+[SCORE] 96 high - Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v71 freshness=0.513
+[SCORE] 95 high - Layla Explains Why She Abruptly Walked Away From WWE After Signing New Deal | WWE/main roster, impatto roster/storyline, breaking/major update, v62 business/dirigenza, v62 categoria business, v71 freshness=0.572
+[SCORE] 84 high - Jade Cargill Challenges Rhea Ripley To WWE Women's Title Rematch At Clash In Italy | WWE/main roster, top star titolo: rhea ripley, nomi forti titolo: jade cargill, WWE main roster + storyline/evento, PLE/PPV, v62 titolo/championship, v66 cap title match non-title-change, v71 freshness=0.465
+[SCORE] 81 high - Bayley Returns To NXT House Shows For First Time In 10 Years And Admits Today's Talent Is 'Different' | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, non wrestling puro, v62 ritorno/debutto, v71 source reliability soft penalty, v71 freshness=0.692
+[SCORE] 80 high - Braun Strowman Reflects On WWE Main Roster Debut Alongside The Wyatt Family | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, opinione generica, v62 ritorno/debutto, v71 freshness=0.712
+[SCORE] 73 medium - Nia Jax, Lash Legend Apparently Set For WWE Women's Title Match At Upcoming SNME | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v71 freshness=0.441, v48 tier2: 55-74
+[SCORE] 73 medium - GUNTHER Conquers Royce Keys To Earn Clash In Italy Title Match During 5/15 WWE SmackDown | WWE/main roster, top star lead: cody rhodes, nomi forti lead: cody rhodes, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, combo top name lead + evento forte, PLE/PPV, trash talk/clickbait forte, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.552, v48 tier2: 55-74
+[MODE] Storm mode attiva: 5 news >=90, 8 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 16 | mode=storm | max nuove=5 | pending pubblicati=0
+[BOT] Elaborazione: Fans Bury Shawn Spears for Bragging About His WWE Paycheck Amid TKO Pay Cut Controversy
+[BOT] semantic_id=fans-bury-shawn-spears-for-bragging-about-his-wwe-paycheck-amid-tko-pay-cut-controversy
+[SCORE] iniziale=100 priority=high
+[EMBED v87.1] Estratti 17 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=17 url=https://www.ringsidenews.com/fans-bury-shawn-spears-bragging-about-his-wwe-paycheck-amid-tko-pay-cut-controversy/
+[PERF v71] scraping articolo: 0.76s
+[EMBED v87.1] Estratti 17 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=28, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=17 url=https://www.ringsidenews.com/fans-bury-shawn-spears-bragging-about-his-wwe-paycheck-amid-tko-pay-cut-controversy/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 17 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=28, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.55s
+[BOT] Embed trovati: 17
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=0.95 model=gemini-3.1-flash-lite | L'articolo tratta una polemica sui social media scatenata da un tweet di un wrestler, rientrando nelle news di cronaca post-evento/attività sui social.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'WWE Main Event' in quanto nome dello show.; 'Bury' nel titolo va reso come 'criticare aspramente' o 'attaccare', non 'seppellire'.; Mantenere le quote dei fan fedeli al tono colloquiale e provocatorio originale.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo tratta una polemica sui social media scatenata da un tweet di un wrestler, rientrando nelle news di cronaca post-evento/attività sui social.
+[PERF v71] analisi editoriale AI v72: 1.34s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Fans Bury Shawn Spears for Bragging About His WWE Paycheck Amid TKO Pay Cut Controversy
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, developmental secondario, v62 reazioni/tributi, v62 categoria business
+[V71] story_signature=stable:fans_bury_shawn_spears|bragging_about_his|wwe_paycheck_amid|story|wwe semantic_status=new_story freshness=0.692
+[PERF v71] WP recent posts dedupe: 0.66s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 0.98s
+[MODEL v88] task=translate_report chain=gemini-2.5-pro,gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-pro
+[BLOCKSEQ v72.1] Repair mirato blocchi mancanti: ['TEXT_011', 'TEXT_012', 'TEXT_013', 'TEXT_014', 'TEXT_015', 'TEXT_016', 'TEXT_017', 'TEXT_018']
+[GEMINI] Uso modello: gemini-2.5-pro
+[BLOCKSEQ v72.1] Batch tradotto con gemini-2.5-pro: 14 blocchi
+[GEMINI] Uso modello: gemini-2.5-pro
+[BLOCKSEQ v72.1] Batch tradotto con gemini-2.5-pro: 3 blocchi
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-pro | blocchi testo=28
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione scartato: editorial_word_ratio=0.55 (261/473) threshold=0.70
+[PERF v71] traduzione: 98.72s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Shawn Spears criticato dai fan per aver ostentato lo stipendio in WWE
+[WARN v71.3] Quote check sotto soglia ma non bloccante: ['quote count ratio below threshold: 0.57'] - Fans Bury Shawn Spears for Bragging About His WWE Paycheck Amid TKO Pay Cut Controversy
+[HTML v88.4] Sanitizzate citazioni inline/puntini orfani
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/ShawnSpears/status/2055336623198376196
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/RealPhillyP/status/2055433112188833873
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/CptBozoJabroni/status/2055390865871491576
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/IKnowBall25/status/2055504363154526694
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/CmSpunk18/status/2055367255559381227
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/Elijah14866771/status/2055437240247918749
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/babalu223/status/2055470602392101324
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/ToocoolSkeletor/status/2055420142121591131
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/TakaSpliffinoku/status/2055455305996128389
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/IwcSucks/status/2055388688654233910
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/Drexjr2/status/2055413946379809055
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/JBrooke0602/status/2055435992392200589
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/hoodpopejon/status/2055638474510708913
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/MFPOWWA/status/2055402877560979567
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/FracturedSky/status/2055443211972125179
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/PhilStopford/status/2055407140416663792
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/doctorevil2023/status/2055388285615386846
+[EMBED v87.3] Positional embed guard applicato: 17 modifiche
+[EMBED v88] Publish media guard: expected=17 before=0 after=17 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/fans-bury-shawn-spears-for-bragging-about-his-wwe-paycheck-amid-tko-pay-cut-controversy-05.jpg
+[MEDIA] Immagine caricata: 4755
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260516_144017_001_shawn-spears-criticato-dai-fan-per-aver-ostentato-lo-stipendio-in-wwe_4756_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4756
+[PERF v71] creazione post WordPress: 7.50s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/fans-bury-shawn-spears-for-bragging-about-his-wwe-paycheck-amid-tko-pay-cut-controversy-05.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4755
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Fans Bury Shawn Spears for Bragging About His WWE Paycheck A': 110.35s
+[OK] Pubblicato: Shawn Spears criticato dai fan per aver ostentato lo stipendio in WWE
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260516_144019_001_shawn-spears-criticato-dai-fan-per-aver-ostentato-lo-stipendio-in-wwe_00e27214_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Shawn Spears criticato dai fan per aver ostentato lo stipendio in WWE
+[PUBLISHED REVIEW v87.1] Review outer salvata: Shawn Spears criticato dai fan per aver ostentato lo stipendio in WWE
+[BOT] Elaborazione: WWE HOFer Eric Bischoff Lambasts 3 Hour Weekly Shows
+[BOT] semantic_id=wwe-hofer-eric-bischoff-lambasts-3-hour-weekly-shows
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=6, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta le opinioni e l'analisi critica di Eric Bischoff in merito alla gestione dei format televisivi da 3 ore, non si tratta di una notizia di cronaca o di un evento futuro.
+[EDITORIAL v72.3] translation_notes=Mantenere 'WWE HOFer' o tradurre come 'membro della Hall of Fame WWE'.; Evitare di tradurre '83 Weeks' (titolo podcast).; 'Lambasts' va reso con termini come 'critica aspramente' o 'attacca'.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta le opinioni e l'analisi critica di Eric Bischoff in merito alla gestione dei format televisivi da 3 ore, non si tratta di una notizia di cronaca o di un evento futuro.
+[PERF v71] analisi editoriale AI v72: 23.54s
+[SCORE] raffinato=54 priority=low | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 business/dirigenza, v62 categoria business, v72.3 cap opinion
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - WWE HOFer Eric Bischoff Lambasts 3 Hour Weekly Shows
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - WWE HOFer Eric Bischoff Lambasts 3 Hour Weekly Shows
+[PERF v71] WP lookup URL esistente: 0.87s
+[BOT] Elaborazione: Layla Reveals The One Thing That Could Bring Her Back To WWE
+[BOT] semantic_id=layla-reveals-the-one-thing-that-could-bring-her-back-to-wwe
+[SCORE] iniziale=100 priority=high
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/layla-reveals-one-thing-that-could-bring-her-back-wwe/
+[PERF v71] scraping articolo: 0.69s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=14, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/layla-reveals-one-thing-that-could-bring-her-back-wwe/
+[BLOCKSEQ] Blocchi ordinati estratti: text=14, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.34s
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | Si tratta di un articolo basato su un'intervista rilasciata da Layla riguardo una possibile reunion. Non presenta un evento futuro certo, ma riporta dichiarazioni avvenute su temi di interesse WWE.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'LayCool' o 'Divas Era'.; Mantenere i riferimenti ai titoli originali (Women's Championship).; Tradurre 'out of shape' come 'fuori forma' o 'non in condizione'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Si tratta di un articolo basato su un'intervista rilasciata da Layla riguardo una possibile reunion. Non presenta un evento futuro certo, ma riporta dichiarazioni avvenute su temi di interesse WWE.
+[PERF v71] analisi editoriale AI v72: 1.15s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Layla Reveals The One Thing That Could Bring Her Back To WWE
+[SCORE] raffinato=100 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto
+[V71] story_signature=stable:layla_reveals_the_one_thing_that_could_bring_her_back_to|title|wwe semantic_status=new_story freshness=0.689
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=14
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: Expecting ',' delimiter: line 1 column 565 (char 564)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[PRESERVE v83] Repair anti-omissione applicato con gemini-2.5-flash-lite: editorial_word_ratio=0.55 (249/450) threshold=0.70
+[PRESERVE v81] Guardrail finale testo applicato
+[PERF v71] traduzione: 55.71s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/layla-reveals-the-one-thing-that-could-bring-her-back-to-wwe-34.jpg
+[MEDIA] Immagine caricata: 4758
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260516_144145_002_layla-apre-a-un-ritorno-in-wwe-solo-per-una-reunion-delle-laycool_4759_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4759
+[PERF v71] creazione post WordPress: 2.92s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/layla-reveals-the-one-thing-that-could-bring-her-back-to-wwe-34.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4758
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Layla Reveals The One Thing That Could Bring Her Back To WWE': 61.79s
+[OK] Pubblicato: Layla apre a un ritorno in WWE: "Solo per una reunion delle LayCool"
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260516_144147_002_layla-apre-a-un-ritorno-in-wwe-solo-per-una-reunion-delle-laycool_09a28b4c_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Layla apre a un ritorno in WWE: "Solo per una reunion delle LayCool"
+[PUBLISHED REVIEW v87.1] Review outer salvata: Layla apre a un ritorno in WWE: "Solo per una reunion delle LayCool"
+[DEDUPE v88.4.1] candidate_core=canonical_event_core:blake_monroe|debut_arrival|wwe title=Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown
+[DEDUPE v88.4.1] Canonical event core caricati: 9
+[SKIP v88.4.1] Canonical event core gia pubblicato: canonical_event_core:blake_monroe|debut_arrival|wwe - Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown
+[BOT] Elaborazione: Layla Explains Why She Abruptly Walked Away From WWE After Signing New Deal
+[BOT] semantic_id=layla-explains-why-she-abruptly-walked-away-from-wwe-after-signing-new-deal
+[SCORE] iniziale=95 priority=high
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/layla-explains-why-she-abruptly-walked-away-wwe-signing-new-deal/
+[PERF v71] scraping articolo: 0.63s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=15, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/layla-explains-why-she-abruptly-walked-away-wwe-signing-new-deal/
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.44s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo è un approfondimento retrospettivo su un evento passato (l'addio di Layla alla WWE). Non è una news recente ma una storia biografica.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (es. WWE Divas Championship, se citato) in inglese.; 'Walked away' deve essere reso come 'ha deciso di lasciare' o 'ha dato l'addio', evitando calchi.; Tradurre le quote di Layla con tono colloquiale ma professionale.
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo è un approfondimento retrospettivo su un evento passato (l'addio di Layla alla WWE). Non è una news recente ma una storia biografica.
+[PERF v71] analisi editoriale AI v72: 2.30s
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, breaking/major update, v62 business/dirigenza, v62 categoria business, v68 cap duro opinion/commentary
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Layla Explains Why She Abruptly Walked Away From WWE After Signing New Deal
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Layla Explains Why She Abruptly Walked Away From WWE After Signing New Deal
+[PERF v71] WP lookup URL esistente: 0.71s
+[BOT] Elaborazione: Jade Cargill Challenges Rhea Ripley To WWE Women's Title Rematch At Clash In Italy
+[BOT] semantic_id=jade-cargill-challenges-rhea-ripley-to-wwe-womens-title-rematch-at-clash-in-italy
+[SCORE] iniziale=84 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo promuove un match per il prossimo PLE Clash in Italy, pur contenendo il recap di un segmento di SmackDown. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantenere 'Clash in Italy' come nome evento.; 'Women's Championship' resta invariato.; 'Pump kicked' tradurre con 'colpita con un pump kick'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo promuove un match per il prossimo PLE Clash in Italy, pur contenendo il recap di un segmento di SmackDown. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.15s
+[SCORE] raffinato=20 priority=skip | WWE/main roster, top star titolo: rhea ripley, nomi forti titolo: jade cargill, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v68 preview scaduta
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 20/75 - Jade Cargill Challenges Rhea Ripley To WWE Women's Title Rematch At Clash In Italy
+[BOT] Elaborazione: Bayley Returns To NXT House Shows For First Time In 10 Years And Admits Today's Talent Is 'Different'
+[BOT] semantic_id=bayley-returns-to-nxt-house-shows-for-first-time-in-10-years-and-admits-todays-talent-is-different
+[SCORE] iniziale=81 priority=high
+[EMBED v87.1] Estratti 4 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=3 url=https://www.ringsidenews.com/bayley-returns-nxt-house-shows-first-time-10-years-admits-todays-talent-different/
+[PERF v71] scraping articolo: 0.75s
+[EMBED v87.1] Estratti 4 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=17, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=3 url=https://www.ringsidenews.com/bayley-returns-nxt-house-shows-first-time-10-years-admits-todays-talent-different/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 3 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=17, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.51s
+[BOT] Embed trovati: 3
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=NXT (6) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta l'avvenuta apparizione di Bayley a un live event di NXT e le sue dichiarazioni post-match. Non è una preview poiché l'evento è già avvenuto.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli e delle federazioni (es. WWE Women's Champion, NXT) in inglese.; Non tradurre 'house show' o 'live event' in modo letterale, usare 'evento dal vivo' o 'show'.; 'Different' nelle citazioni va mantenuto con enfasi (es. 'DIVERSE').
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=NXT (6) | L'articolo riporta l'avvenuta apparizione di Bayley a un live event di NXT e le sue dichiarazioni post-match. Non è una preview poiché l'evento è già avvenuto.
+[PERF v71] analisi editoriale AI v72: 1.48s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Bayley Returns To NXT House Shows For First Time In 10 Years And Admits Today's Talent Is 'Different'
+[SCORE] raffinato=86 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, non wrestling puro, v62 ritorno/debutto
+[V71] story_signature=stable:kelani_jordan|bayley|penta|return|wwe semantic_status=new_story freshness=0.691
+[PERF v71] WP recent posts dedupe: 0.78s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.10s
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=17
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 25.46s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Bayley torna a un live event di NXT dopo 10 anni: "Il talento di oggi è diverso"
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/itsBayleyWWE/status/2055332689960394786
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/itsBayleyWWE/status/2055372242112970818
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/itsBayleyWWE/status/2055372963969372333
+[EMBED v87.3] Positional embed guard applicato: 3 modifiche
+[EMBED v88] Publish media guard: expected=3 before=0 after=3 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/03/bayley-reveals-she-initially-hated-her-wwe-entrance-theme-24.jpg
+[MEDIA] Immagine caricata: 4761
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260516_144227_003_bayley-torna-a-un-live-event-di-nxt-dopo-10-anni-il-talento-di-oggi-è-diverso_4762_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4762
+[PERF v71] creazione post WordPress: 3.81s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/03/bayley-reveals-she-initially-hated-her-wwe-entrance-theme-24.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4761
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Bayley Returns To NXT House Shows For First Time In 10 Years': 33.54s
+[OK] Pubblicato: Bayley torna a un live event di NXT dopo 10 anni: "Il talento di oggi è diverso"
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260516_144228_003_bayley-torna-a-un-live-event-di-nxt-dopo-10-anni-il-talento-di-oggi-diverso_cc367212_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Bayley torna a un live event di NXT dopo 10 anni: "Il talento di oggi è diverso"
+[PUBLISHED REVIEW v87.1] Review outer salvata: Bayley torna a un live event di NXT dopo 10 anni: "Il talento di oggi è diverso"
+[BOT] Elaborazione: Braun Strowman Reflects On WWE Main Roster Debut Alongside The Wyatt Family
+[BOT] semantic_id=braun-strowman-reflects-on-wwe-main-roster-debut-alongside-the-wyatt-family
+[SCORE] iniziale=80 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo è un approfondimento retrospettivo su un ex wrestler WWE che ricorda il suo debutto. Non rientra in nessuna delle categorie di attualità o reportistica specifica.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Wyatt Family' invariato.; Tradurre 'pay your dues' con 'farsi le ossa' o 'fare la gavetta'.; 'Rewind Recap Relive' va lasciato come nome proprio del podcast.
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo è un approfondimento retrospettivo su un ex wrestler WWE che ricorda il suo debutto. Non rientra in nessuna delle categorie di attualità o reportistica specifica.
+[PERF v71] analisi editoriale AI v72: 1.30s
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 95->54 - Braun Strowman Reflects On WWE Main Roster Debut Alongside The Wyatt Family
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, PLE/PPV, opinione generica, v62 ritorno/debutto, v88.2 cap OTHER/feature non-news 95->54
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Braun Strowman Reflects On WWE Main Roster Debut Alongside The Wyatt Family
+[V71] story_signature=stable:braun_strowman|braun_strowman_reflects_on|wwe_main_roster_debut_alongside_the_wyatt_family|debut|wwe semantic_status=new_story freshness=0.712
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=6
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/braun-strowman-reflects-on-wwe-main-roster-debut-alongside-the-wyatt-family/intro-1778588475.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 8.51s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Braun Strowman ricorda il suo debutto nel main roster con la Wyatt Family
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/braun-strowman-reflects-on-wwe-main-roster-debut-alongside-the-wyatt-family/l-intro-1778588475.jpg
+[MEDIA] Immagine caricata: 4764
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260516_144243_004_braun-strowman-ricorda-il-suo-debutto-nel-main-roster-con-la-wyatt-family_4765_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4765
+[PERF v71] creazione post WordPress: 4.12s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/braun-strowman-reflects-on-wwe-main-roster-debut-alongside-the-wyatt-family/l-intro-1778588475.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4764
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Braun Strowman Reflects On WWE Main Roster Debut Alongside T': 14.99s
+[OK] Pubblicato: Braun Strowman ricorda il suo debutto nel main roster con la Wyatt Family
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260516_144244_004_braun-strowman-ricorda-il-suo-debutto-nel-main-roster-con-la-wyatt-family_9d1e4f72_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 4/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Braun Strowman ricorda il suo debutto nel main roster con la Wyatt Family
+[PUBLISHED REVIEW v87.1] Review outer salvata: Braun Strowman ricorda il suo debutto nel main roster con la Wyatt Family
+[BOT] Elaborazione: Nia Jax, Lash Legend Apparently Set For WWE Women's Title Match At Upcoming SNME
+[BOT] semantic_id=nia-jax-lash-legend-apparently-set-for-wwe-womens-title-match-at-upcoming-snme
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo discute la possibilità di un match futuro basandosi su un segmento, senza una conferma ufficiale, configurandosi come un aggiornamento sui piani per un evento prossimo.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Saturday Night's Main Event' (SNME) senza tradurre.; Titoli come 'WWE Women's Tag Team Champions' invariati.; Evitare calchi per 'gold' (usare 'titoli' o 'cinture') e 'set for' (usare 'in programma' o 'pianificato').
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo discute la possibilità di un match futuro basandosi su un segmento, senza una conferma ufficiale, configurandosi come un aggiornamento sui piani per un evento prossimo.
+[PERF v71] analisi editoriale AI v72: 1.04s
+[SCORE v88.3] v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 56->54 - Nia Jax, Lash Legend Apparently Set For WWE Women's Title Match At Upcoming SNME
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti lead: brie bella, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 media rights/streaming, v70 cap preview hard, v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 56->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Nia Jax, Lash Legend Apparently Set For WWE Women's Title Match At Upcoming SNME
+[REPORT v87.2] True-results confermato da history forte: skip offline-safe report:wwe-smackdown-2026-05-15 - GUNTHER Conquers Royce Keys To Earn Clash In Italy Title Match During 5/15 WWE SmackDown
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Update On Ticket Sales For AEW Double Or Nothing 2026
+[BOT] semantic_id=update-on-ticket-sales-for-aew-double-or-nothing-2026
+[SCORE] iniziale=69 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.95 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo presenta l'evento imminente fornendo dettagli su card, vendita biglietti e status dello show. Nonostante i dati di vendita, il focus principale è la presentazione dell'evento futuro. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Double or Nothing', 'Stadium Stampede' o nomi di match speciali come 'Title vs. Hair' o 'I Quit match'.; Mantenere 'get-in price' come 'prezzo minimo d'ingresso'.; Adattare il tono giornalistico per i dati di vendita senza calchi.
+[EDITORIAL v73] final type=OTHER | category=AEW (5) | L'articolo presenta l'evento imminente fornendo dettagli su card, vendita biglietti e status dello show. Nonostante i dati di vendita, il focus principale è la presentazione dell'evento futuro. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 15.46s
+[SCORE v86.9] Cap commentary/opinion 84->68 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SCORE] raffinato=45 priority=low | AEW, impatto roster/storyline, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v62 categoria business, v66 cap title match non-title-change, v86.9 cap commentary/opinion 84->68, v88.2 cap OTHER/feature non-news 68->54, v88.3 hard feature skip cap 54->45
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 45/55 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SKIP v86.6/legacy] low_score_pre_gemini:58: Backstage Report On WWE Adding More Live Events To Schedule
+[PENDING] Coda salvata: 0 elementi
+[BOT] Raggiunto limite massimo candidati nuovi provati
+[BOT] Pubblicati 4 articoli (0 pending + 4 nuove) su 12 candidati provati | mode=storm
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-16 14:38:06_summary.json -> published_html_review/run_2026-05-16 14-38-06_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (270 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=4 errors=0 status=ok
+===== RUN END [2026-05-16 14:38:06] VERSION [v88_4_2_report_softfixes (a7072ba)] =====
+
