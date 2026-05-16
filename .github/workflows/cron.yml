@@ -76,6 +76,12 @@ jobs:
             echo "[SOURCE PATCH v88.2] Nessuna modifica a bot.py"
           fi
 
+      - name: Print runner public IP
+        run: |
+          echo "[NET] GitHub Actions public IP:"
+          curl -s https://api.ipify.org || true
+          echo
+
       - name: Run bot v88_2
         id: run_bot
         env:
