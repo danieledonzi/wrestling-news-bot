@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-16 05:39:01",
-  "last_bot_version": "v88_4_1_canonical_event_dedupe (e8fc5b5)",
-  "updated_at": "2026-05-16T05:42:51",
-  "total_items": 61,
+  "last_run_id": "2026-05-16 07:51:42",
+  "last_bot_version": "v88_4_1_canonical_event_dedupe (0c91a2d)",
+  "updated_at": "2026-05-16T07:53:43",
+  "total_items": 62,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -492,6 +492,14 @@
       "original_html_file": "20260516_054219_001_wwe-smackdown-del-15-maggio-2026-jade-cargill-e-trick-williams-sotto-i-riflettor_5392ea68_original.html",
       "final_html_file": "20260516_054219_001_wwe-smackdown-del-15-maggio-2026-jade-cargill-e-trick-williams-sotto-i-riflettor_5392ea68_final.html",
       "metadata_file": "20260516_054219_001_wwe-smackdown-del-15-maggio-2026-jade-cargill-e-trick-williams-sotto-i-riflettor_5392ea68_metadata.json"
+    },
+    {
+      "run_id": "2026-05-16 07:51:42",
+      "title": "Tony Khan risponde alle voci dalla WWE sul futuro televisivo della AEW",
+      "url": "https://www.ringsidenews.com/tony-khan-calls-out-wwe-background-chatter-about-aews-next-tv-deal/",
+      "original_html_file": "20260516_075243_001_tony-khan-risponde-alle-voci-dalla-wwe-sul-futuro-televisivo-della-aew_6acc61eb_original.html",
+      "final_html_file": "20260516_075243_001_tony-khan-risponde-alle-voci-dalla-wwe-sul-futuro-televisivo-della-aew_6acc61eb_final.html",
+      "metadata_file": "20260516_075243_001_tony-khan-risponde-alle-voci-dalla-wwe-sul-futuro-televisivo-della-aew_6acc61eb_metadata.json"
     }
   ]
 }
