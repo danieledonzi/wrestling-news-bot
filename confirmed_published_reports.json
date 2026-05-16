@@ -2,7 +2,8 @@
   "confirmed_published_report_keys": [
     "report:aew-dynamite-2026-05-13",
     "report:roh-supercard-honor-results-highlights-key-moments-may-15-2026-05-15",
-    "report:tna-impact-2026-05-14"
+    "report:tna-impact-2026-05-14",
+    "report:wwe-smackdown-2026-05-15"
   ],
   "published_reports": {
     "report:aew-dynamite-2026-05-13": {
@@ -27,6 +28,14 @@
       "source_url": "https://www.ringsidenews.com/roh-supercard-honor-results-highlights-key-moments-may-15-2026/",
       "wp_post_id": null,
       "confirmed_at": "2026-05-15T22:48:48Z",
+      "reason": "publish_success"
+    },
+    "report:wwe-smackdown-2026-05-15": {
+      "report_key": "report:wwe-smackdown-2026-05-15",
+      "title": "WWE SmackDown del 15 maggio 2026: Jade Cargill e Trick Williams sotto i riflettori; risultati e il match di coppia femminile",
+      "source_url": "https://www.wrestlinginc.com/2174199/wwe-smackdown-may-15-trick-williams-jade-cargill-womens-tag-match/",
+      "wp_post_id": null,
+      "confirmed_at": "2026-05-16T05:42:19Z",
       "reason": "publish_success"
     }
   }

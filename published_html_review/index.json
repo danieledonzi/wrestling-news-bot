@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-16 02:07:49",
-  "last_bot_version": "v88_4_1_canonical_event_dedupe (ea22c9e)",
-  "updated_at": "2026-05-16T02:10:51",
-  "total_items": 60,
+  "last_run_id": "2026-05-16 05:39:01",
+  "last_bot_version": "v88_4_1_canonical_event_dedupe (e8fc5b5)",
+  "updated_at": "2026-05-16T05:42:51",
+  "total_items": 61,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -484,6 +484,14 @@
       "original_html_file": "20260516_021032_001_trick-williams-festeggia-il-ritorno-a-casa-nella-puntata-di-smackdown-del-15-mag_de3be992_original.html",
       "final_html_file": "20260516_021032_001_trick-williams-festeggia-il-ritorno-a-casa-nella-puntata-di-smackdown-del-15-mag_de3be992_final.html",
       "metadata_file": "20260516_021032_001_trick-williams-festeggia-il-ritorno-a-casa-nella-puntata-di-smackdown-del-15-mag_de3be992_metadata.json"
+    },
+    {
+      "run_id": "2026-05-16 05:39:01",
+      "title": "WWE SmackDown del 15 maggio 2026: Jade Cargill e Trick Williams sotto i riflettori; risultati e il match di coppia femminile",
+      "url": "https://www.wrestlinginc.com/2174199/wwe-smackdown-may-15-trick-williams-jade-cargill-womens-tag-match/",
+      "original_html_file": "20260516_054219_001_wwe-smackdown-del-15-maggio-2026-jade-cargill-e-trick-williams-sotto-i-riflettor_5392ea68_original.html",
+      "final_html_file": "20260516_054219_001_wwe-smackdown-del-15-maggio-2026-jade-cargill-e-trick-williams-sotto-i-riflettor_5392ea68_final.html",
+      "metadata_file": "20260516_054219_001_wwe-smackdown-del-15-maggio-2026-jade-cargill-e-trick-williams-sotto-i-riflettor_5392ea68_metadata.json"
     }
   ]
 }
