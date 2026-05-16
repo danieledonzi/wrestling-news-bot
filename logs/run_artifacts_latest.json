@@ -1,22 +1,12 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-16 16:48:33",
-  "bot_version": "v88_4_2_report_softfixes (91e96dc)",
-  "git_sha": "91e96dcfdd2b1bddaa8b3277208a51655179a7f5",
-  "created_at": "2026-05-16T16:49:34",
-  "published_count": 1,
-  "published_post_ids": [
-    "4768"
-  ],
-  "published_artifacts": [
-    {
-      "post_id": 4768,
-      "title": "Ted DiBiase Jr. risponde alle voci sull'essere stato allontanato dalla sicurezza a WrestleMania 41",
-      "source_url": "https://www.ringsidenews.com/ted-dibiase-jr-addresses-claim-security-held-him-back-wrestlemania-42/",
-      "html_file": "published/20260516_164918_001_ted-dibiase-jr-risponde-alle-voci-sullessere-stato-allontanato-dalla-sicurezza-a-wrestlema_4768_final.html",
-      "metadata_file": "published/20260516_164918_001_ted-dibiase-jr-risponde-alle-voci-sullessere-stato-allontanato-dalla-sicurezza-a-wrestlema_4768_metadata.json"
-    }
-  ],
+  "run_id": "2026-05-16 17:49:08",
+  "bot_version": "v88_4_2_report_softfixes (35b4120)",
+  "git_sha": "35b41208e7758c9d4e2a026a740569fd44b39941",
+  "created_at": "2026-05-16T17:49:40",
+  "published_count": 0,
+  "published_post_ids": [],
+  "published_artifacts": [],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",
