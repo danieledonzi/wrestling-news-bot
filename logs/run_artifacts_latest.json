@@ -1,22 +1,12 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-16 20:48:19",
-  "bot_version": "v88_4_2_report_softfixes (781503d)",
-  "git_sha": "781503d80e0e2624e2abb6baa97cdf58bd365682",
-  "created_at": "2026-05-16T20:49:14",
-  "published_count": 1,
-  "published_post_ids": [
-    "4776"
-  ],
-  "published_artifacts": [
-    {
-      "post_id": 4776,
-      "title": "Ridge Holland spiega i cambiamenti a NXT sotto la guida di Shawn Michaels",
-      "source_url": "https://www.wrestlinginc.com/2171776/wwe-nxt-ridge-holland-shawn-michaels/",
-      "html_file": "published/20260516_204912_001_ridge-holland-spiega-i-cambiamenti-a-nxt-sotto-la-guida-di-shawn-michaels_4776_final.html",
-      "metadata_file": "published/20260516_204912_001_ridge-holland-spiega-i-cambiamenti-a-nxt-sotto-la-guida-di-shawn-michaels_4776_metadata.json"
-    }
-  ],
+  "run_id": "2026-05-16 21:40:51",
+  "bot_version": "v88_4_2_report_softfixes (2aaf72d)",
+  "git_sha": "2aaf72df67ed9c868a7e58374da67b8c86d9f248",
+  "created_at": "2026-05-16T21:41:24",
+  "published_count": 0,
+  "published_post_ids": [],
+  "published_artifacts": [],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",
