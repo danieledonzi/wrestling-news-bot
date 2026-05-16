@@ -23,6 +23,8 @@ def main():
     _run_patch("scripts/apply_bot_patch_v88_3_1.py", "SOURCE v88.3.1")
     _run_patch("scripts/apply_bot_patch_v88_4.py", "SOURCE v88.4")
     _run_patch("scripts/apply_bot_patch_v88_4_1.py", "SOURCE v88.4.1")
+    _run_patch("scripts/apply_bot_patch_v88_4_2.py", "SOURCE v88.4.2")
+    _run_patch("scripts/apply_bot_patch_v88_4_2_1.py", "SOURCE v88.4.2.1")
 
 
 if __name__ == "__main__":
