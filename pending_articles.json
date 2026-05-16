@@ -33,40 +33,66 @@
     "attempts": 0
   },
   {
-    "url": "https://www.wrestlinginc.com/2174199/wwe-smackdown-may-15-trick-williams-jade-cargill-womens-tag-match/",
-    "title": "WWE SmackDown Results 5/15 - Trick Williams & Jade Cargill Appear, Women's Tag Match",
-    "semantic_id": "wwe-smackdown-results-515-trick-williams-jade-cargill-appear-womens-tag-match",
-    "title_key": "smackdown-results-5-15-trick-williams-jade-cargill-appear-women-s-tag",
+    "kind": "report",
+    "url": "https://www.wrestlinginc.com/2174642/aew-collision-results-may-16-world-tbs-titles-tag-eliminator/",
+    "title": "AEW Collision Results 5/16 - World Title & TBS Title On The Line, Tag Title Eliminator",
+    "semantic_id": "report-aew-collision-2026-05-16",
+    "title_key": "collision-results-5-16-world-tbs-line-tag-eliminator",
     "score": 80,
     "priority": "high",
-    "event_key": "report:wwe-smackdown-2026-05-15",
-    "story_signature_v71": "stable:report_wwe-smackdown-2026-05-15",
-    "summary": "This is Wrestling Inc.'s results for \"WWE SmackDown\" on May 15, 2026, with appearances from United States Champion Trick Williams & Jade Cargill!",
+    "event_key": "report:aew-collision-2026-05-16",
+    "report_event_key": "report:aew-collision-2026-05-16",
+    "summary": "\"AEW Collision\" will feature many ROH stars after last night's Supercard of Honor",
     "reasons": [
-      "WWE/main roster",
-      "nomi forti titolo: jade cargill, trick williams",
-      "WWE main roster + storyline/evento",
-      "ritorno/debutto",
+      "AEW",
       "show settimanale",
+      "v62 titolo/championship",
       "v75 hard results report",
       "v77 hard report protected",
-      "v71 freshness=0.374"
+      "v71 freshness=0.601"
     ],
     "score_reasons": [
-      "WWE/main roster",
-      "nomi forti titolo: jade cargill, trick williams",
-      "WWE main roster + storyline/evento",
-      "ritorno/debutto",
+      "AEW",
       "show settimanale",
+      "v62 titolo/championship",
       "v75 hard results report",
       "v77 hard report protected",
-      "v71 freshness=0.374"
+      "v71 freshness=0.601",
+      "v86.2 report morning hold",
+      "titolo/championship",
+      "v62 media rights/streaming",
+      "v62 categoria business",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.577"
     ],
     "is_breaking": false,
-    "breaking_expires_at": 1778907548.0,
-    "status": "raw",
-    "reason": "wp_down_initial_normal",
-    "created_at": 1778953777.7278385,
-    "attempts": 0
+    "breaking_expires_at": 0,
+    "status": "waiting_report_morning_hold",
+    "reason": "report_hold_until_0630",
+    "created_at": 1778972453.0,
+    "first_seen": 1778972453.0,
+    "last_seen": 1778975099.8455753,
+    "not_before": 1778992200.0,
+    "hold_until_label": "06:30 Europe/Rome",
+    "attempts": 0,
+    "sources": [
+      {
+        "url": "https://www.wrestlinginc.com/2174642/aew-collision-results-may-16-world-tbs-titles-tag-eliminator/",
+        "title": "AEW Collision Results 5/16 - World Title & TBS Title On The Line, Tag Title Eliminator",
+        "source": "www.wrestlinginc.com",
+        "first_seen": 1778972453.0,
+        "last_seen": 1778975099.8441486,
+        "last_text_len": 0
+      },
+      {
+        "url": "https://www.ringsidenews.com/aew-collision-results-highlights-key-moments-may-16-2026/",
+        "title": "AEW Collision Results, Highlights and Key Moments for May 16, 2026",
+        "source": "www.ringsidenews.com",
+        "first_seen": 1778974260.0,
+        "last_seen": 1778975100.2010243,
+        "last_text_len": 0
+      }
+    ],
+    "story_signature_v71": "stable:report_aew-collision-2026-05-16"
   }
 ]
