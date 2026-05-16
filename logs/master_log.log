@@ -5726,3 +5726,254 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
 ===== RUN END [2026-05-15 23:46:40] VERSION [v88_4_1_canonical_event_dedupe (5fa346a)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+
+===== RUN START [2026-05-16 02:07:49] VERSION [v88_4_1_canonical_event_dedupe (ea22c9e)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 9 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v81.1] Cap light name-driven item 49->49 - Jacob Fatu Recalls Booker T Helping Him Get Into WWE Despite ROW No-Show Incident
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Jacob Fatu Recalls Booker T Helping Him Get Into WWE Despite ROW No-Show Incident
+[SKIP] Score sotto soglia editoriale (49/75): Jacob Fatu Recalls Booker T Helping Him Get Into WWE Despite ROW No-Show Incident
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (24/75): WWE NXT Viewership & Ratings Report: 5/12/2026
+[PERF v71] WP strict report lookup: 1.45s
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:wwe-smackdown-2026-05-15 - WWE SmackDown Results 5/15 - Trick Williams & Jade Cargill Appear, Women's Tag Match
+[SKIP] URL già in history: https://www.wrestlinginc.com/2174193/wwe-vince-mcmahon-linda-ring-boy-lawsuit-judge-plaintiffs-anonymous/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (56/75): R-Truth Supposedly Not Cleared To Compete, Pulled From Advertised WWE SmackDown Match
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown
+[SKIP] URL già in history: https://www.wrestlinginc.com/2174099/aew-buddy-matthews-injury-update-indie-appearance-cleared-october/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (18/75): Additional Details On Triller Owing AEW Money For Pay-Per-View Royalties
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (38/75): Backstage Report On AEW & Madison Square Garden After Wrestlers Express Interest
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173963/wwe-roman-reigns-added-advertised-dates-additional-details/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (62/75): John Cena On Reaction To WWE Backlash Announcement: 'There's Still A Lot To Be Done'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (36/75): Backstage Details & Speculation Regarding AAA TripleMania 2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[PERF v71] WP lookup URL esistente: 1.00s
+[PERF v71] WP lookup event_key: 1.99s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SPOILER v79.1.1] NO: nessun contesto evento
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - TNA Announces Return Of Ultimate X Stipulation For Slammiversary 2026
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 62->54 - Cody Rhodes Reveals Full WWE European Tour Schedule For Summer 2026
+[SKIP] Score sotto soglia editoriale (49/75): Cody Rhodes Reveals Full WWE European Tour Schedule For Summer 2026
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Carmelo Hayes Returns To Television After Months-Long Hiatus During 5/15 WWE SmackDown
+[FRESHNESS v86.6/legacy] Post-show outcome rescue: non tratto come preview scaduta - Carmelo Hayes Returns To Television After Months-Long Hiatus During 5/15 WWE SmackDown
+[SKIP] Score sotto soglia editoriale (51/75): Carmelo Hayes Returns To Television After Months-Long Hiatus During 5/15 WWE SmackDown
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:wwe-smackdown-2026-05-15 - WWE SmackDown Results, Highlights and Key Moments for May 15, 2026
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (51/75): Last-Minute Match Added to May 15 WWE SmackDown
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (57/75): Truth Behind Scott Steiner's Odd Social Media Behavior Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/roh-supercard-honor-results-highlights-key-moments-may-15-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/backstage-update-emerges-jack-perrys-aew-contract-status-amid-expiry-rumors/
+[SKIP] URL già in history: https://www.ringsidenews.com/masterminds-behind-roman-reigns-usos-jacob-fatu-may-11-wwe-raw-storyline-revealed/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Carmelo Hayes' Status for May 15 WWE SmackDown Revealed Amid TV Absence
+[SCORE v79.1.2] Spoiler validato: floor 56->75 - Carmelo Hayes' Status for May 15 WWE SmackDown Revealed Amid TV Absence
+[SKIP] Score sotto soglia editoriale (70/75): Carmelo Hayes' Status for May 15 WWE SmackDown Revealed Amid TV Absence
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (51/75): WWE Makes Last-Minute Match Change for May 15 SmackDown
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - Additional Matches Revealed for May 15 WWE SmackDown
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - Additional Matches Revealed for May 15 WWE SmackDown
+[SCORE v81.1] Cap future card announcement 56->56 - Additional Matches Revealed for May 15 WWE SmackDown
+[SKIP] Score sotto soglia editoriale (51/75): Additional Matches Revealed for May 15 WWE SmackDown
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SCORE v86.9] Cap commentary/opinion 83->68 - WWE Accidentally Uses JC Mateo Graphic to Promote SmackDown Match Despite His Release
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - WWE Accidentally Uses JC Mateo Graphic to Promote SmackDown Match Despite His Release
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - WWE Accidentally Uses JC Mateo Graphic to Promote SmackDown Match Despite His Release
+[SKIP] Score sotto soglia editoriale (49/75): WWE Accidentally Uses JC Mateo Graphic to Promote SmackDown Match Despite His Release
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE Travel Plans For Blake Monroe's SmackDown Debut Window Revealed
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - WWE Travel Plans For Blake Monroe's SmackDown Debut Window Revealed
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - WWE Travel Plans For Blake Monroe's SmackDown Debut Window Revealed
+[SKIP] Score sotto soglia editoriale (49/75): WWE Travel Plans For Blake Monroe's SmackDown Debut Window Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/joe-hendry-says-wwe-nearly-signed-him-years-before-tna-fame-changed-everything/
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 9 record da event_keys
+[PENDING] Coda salvata: 1 elementi
+[REPORT v86.6/legacy] Hold fino alle 06:30: report:wwe-smackdown-2026-05-15 | pronto tra 140 min - WWE SmackDown Results, Highlights and Key Moments for May 15, 2026
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 9 record da event_keys
+[PENDING] Coda salvata: 1 elementi
+[REPORT v86.6/legacy] Hold fino alle 06:30: report:wwe-smackdown-2026-05-15 | pronto tra 140 min - WWE SmackDown Results 5/15 - Trick Williams & Jade Cargill Appear, Women's Tag Match
+[REPORT v86.8/legacy] 2 true-results report trattenuti fino alle 06:30 Europe/Rome
+[SCORE] 100 high - Trick Williams Has Rousing Homecoming Celebration During 5/15 WWE SmackDown | WWE/main roster, nomi forti titolo: trick williams, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship, v71 freshness=0.557
+[SCORE] 96 high - Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v71 freshness=0.669
+[SCORE] 73 medium - Nia Jax, Lash Legend Apparently Set For WWE Women's Title Match At Upcoming SNME | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v71 freshness=0.597, v48 tier2: 55-74
+[SCORE] 69 medium - Update On Ticket Sales For AEW Double Or Nothing 2026 | AEW, PLE/PPV, v62 corporate/business, v62 categoria business, v71 freshness=0.557, v48 tier2: 55-74
+[SCORE] 68 medium - Jake Paul Says He Can't Get Involved In Logan's WWE Matches Due To TKO 'Beef' | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, intervista/opinione, v62 categoria business, v68 cap opinion senza news concreta, v71 freshness=0.488, v48 tier2: 55-74
+[SCORE] 61 medium - Report: CM Punk Removed From WWE Raw Dates & European Tour Due To 'Schedule Change' | WWE/main roster, top star titolo: cm punk, rumor/backstage, show settimanale, v71 freshness=0.51, v48 tier2: 55-74
+[SCORE] 58 low - Backstage Report On WWE Adding More Live Events To Schedule | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, rumor/backstage, v71 freshness=0.548, v48 tier2: 55-74
+[SCORE] 48 low - AEW Star Chris Jericho Appears As A Waiter In NFL Team's Schedule Release Video | AEW, impatto roster/storyline, ritorno/debutto, v71 freshness=0.51, v48 tier3: 45-54 contestuale
+[SCORE] 48 low - Jeff Cobb Reportedly Visited NJPW Following Recent WWE Release | WWE/main roster, impatto roster/storyline, release/addio, v71 freshness=0.499, v48 tier3: 45-54 contestuale
+[SCORE] 48 low - TNA Announces Return Of Ultimate X Stipulation For Slammiversary 2026 | TNA, ritorno/debutto, v62 ritorno/debutto, v71 freshness=0.598, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 2 news >=90, 2 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 1
+[PERF v71] WP lookup URL esistente: 1.27s
+[REPORT v86.8] Pending true-results non pubblicato: resta lavorabile via candidate queue report:wwe-smackdown-2026-05-15
+[BOT] News candidate totali: 10 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Trick Williams Has Rousing Homecoming Celebration During 5/15 WWE SmackDown
+[BOT] semantic_id=trick-williams-has-rousing-homecoming-celebration-during-515-wwe-smackdown
+[SCORE] iniziale=100 priority=high
+[EMBED v87.1] Estratti 3 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=3 url=https://www.ringsidenews.com/trick-williams-rousing-homecoming-celebration-during-515-wwe-smackdown/
+[PERF v71] scraping articolo: 1.03s
+[EMBED v87.1] Estratti 3 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=3 url=https://www.ringsidenews.com/trick-williams-rousing-homecoming-celebration-during-515-wwe-smackdown/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 3 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.55s
+[BOT] Embed trovati: 3
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: JSON object non trovato nella risposta
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3-flash-preview | L'articolo descrive un segmento specifico già avvenuto durante una puntata di SmackDown, focalizzandosi sul promo di Trick Williams e l'interazione con The Miz.
+[EDITORIAL v72.3] translation_notes=Mantenere 'United States Title' in inglese.; Tradurre fedelmente la citazione 'tiny balls' (palle piccole) trattandosi di un tormentone.; 'Ring General' e 'A-Lister' sono epiteti: lasciarli in inglese o usare i termini correnti della community italiana.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo descrive un segmento specifico già avvenuto durante una puntata di SmackDown, focalizzandosi sul promo di Trick Williams e l'interazione con The Miz.
+[PERF v71] analisi editoriale AI v72: 16.85s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Trick Williams Has Rousing Homecoming Celebration During 5/15 WWE SmackDown
+[SCORE] raffinato=100 priority=high | WWE/main roster, nomi forti titolo: trick williams, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship
+[V71] story_signature=stable:trick_williams|trick_williams_has_rousing_homecoming_celebration_during|title|wwe semantic_status=new_story freshness=0.557
+[PERF v71] WP recent posts dedupe: 1.51s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.81s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=9
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 20.47s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Trick Williams festeggia il ritorno a casa nella puntata di SmackDown del 15 maggio
+[EMBED v88] Publish media guard: expected=3 before=3 after=3 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/trick-williams-has-rousing-homecoming-celebration-during-515-wwe-smackdown-58.png
+[MEDIA] Immagine caricata: 4721
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260516_021031_001_trick-williams-festeggia-il-ritorno-a-casa-nella-puntata-di-smackdown-del-15-maggio_4722_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4722
+[PERF v71] creazione post WordPress: 5.43s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/trick-williams-has-rousing-homecoming-celebration-during-515-wwe-smackdown-58.png
+[MEDIA v85] Riutilizzo immagine già caricata: 4721
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Trick Williams Has Rousing Homecoming Celebration During 5/1': 46.63s
+[OK] Pubblicato: Trick Williams festeggia il ritorno a casa nella puntata di SmackDown del 15 maggio
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260516_021032_001_trick-williams-festeggia-il-ritorno-a-casa-nella-puntata-di-smackdown-del-15-mag_de3be992_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Trick Williams festeggia il ritorno a casa nella puntata di SmackDown del 15 maggio
+[PUBLISHED REVIEW v87.1] Review outer salvata: Trick Williams festeggia il ritorno a casa nella puntata di SmackDown del 15 maggio
+[REPORT v87.6] Non scrivo history forte: non true-results/canonico (report:wwe-smackdown-2026-05-15)
+[DEDUPE v88.4.1] candidate_core=canonical_event_core:blake_monroe|debut_arrival|wwe title=Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown
+[DEDUPE v88.4.1] Canonical event core caricati: 8
+[SKIP v88.4.1] Canonical event core gia pubblicato: canonical_event_core:blake_monroe|debut_arrival|wwe - Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown
+[BOT] Elaborazione: Nia Jax, Lash Legend Apparently Set For WWE Women's Title Match At Upcoming SNME
+[BOT] semantic_id=nia-jax-lash-legend-apparently-set-for-wwe-womens-title-match-at-upcoming-snme
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo discute la possibilità di un match futuro basandosi su un segmento, evidenziando incertezze sulla card ufficiale di SNME.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Saturday Night's Main Event' (SNME), mantenere il nome dell'evento.; 'Set for' va reso come 'probabile incontro' o 'al centro di voci' poiché non è ancora ufficiale.; Evitare 'rilasciato' per 'released'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo discute la possibilità di un match futuro basandosi su un segmento, evidenziando incertezze sulla card ufficiale di SNME.
+[PERF v71] analisi editoriale AI v72: 12.61s
+[SCORE v88.3] v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 56->54 - Nia Jax, Lash Legend Apparently Set For WWE Women's Title Match At Upcoming SNME
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti lead: brie bella, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 media rights/streaming, v70 cap preview hard, v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 56->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Nia Jax, Lash Legend Apparently Set For WWE Women's Title Match At Upcoming SNME
+[PERF v71] WP lookup URL esistente: 0.67s
+[BOT] Elaborazione: Update On Ticket Sales For AEW Double Or Nothing 2026
+[BOT] semantic_id=update-on-ticket-sales-for-aew-double-or-nothing-2026
+[SCORE] iniziale=69 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.95 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo fornisce un aggiornamento sui biglietti venduti in vista di un PLE imminente, analizzando la card dell'evento. Nonostante citi dati di vendita, il focus principale è la promozione dello show ormai alle porte. | v72.3 anti-falso p
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (es. AEW Women's World Championship) in inglese.; Non tradurre 'sell out' come 'vendere fuori', usare 'tutto esaurito'.; 'Stadium Stampede' e i nomi dei match (es. 'Title vs. Hair') restano invariati.
+[EDITORIAL v73] final type=OTHER | category=AEW (5) | L'articolo fornisce un aggiornamento sui biglietti venduti in vista di un PLE imminente, analizzando la card dell'evento. Nonostante citi dati di vendita, il focus principale è la promozione dello show ormai alle porte. | v72.3 anti-falso p
+[PERF v71] analisi editoriale AI v72: 1.21s
+[SCORE v86.9] Cap commentary/opinion 84->68 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SCORE] raffinato=45 priority=low | AEW, impatto roster/storyline, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v62 categoria business, v66 cap title match non-title-change, v86.9 cap commentary/opinion 84->68, v88.2 cap OTHER/feature non-news 68->54, v88.3 hard feature skip cap 54->45
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 45/55 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: Jake Paul Says He Can't Get Involved In Logan's WWE Matches Due To TKO 'Beef'
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Report: CM Punk Removed From WWE Raw Dates & European Tour Due To 'Schedule Change'
+[BOT] semantic_id=report-cm-punk-removed-from-wwe-raw-dates-european-tour-due-to-schedule-change
+[SCORE] iniziale=61 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo discute speculazioni e aggiornamenti di backstage sui piani futuri di CM Punk, basandosi su indiscrezioni di Dave Meltzer, non su un fatto ufficiale già avvenuto o un evento futuro presentato come preview.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Schedule Change' come 'cambio di programma' letterale se suona banale, preferire 'variazione nel calendario'.; Mantenere i nomi delle cinture in inglese.; Gestire le date come date del calendario italiano (es. 22 giugno).
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo discute speculazioni e aggiornamenti di backstage sui piani futuri di CM Punk, basandosi su indiscrezioni di Dave Meltzer, non su un fatto ufficiale già avvenuto o un evento futuro presentato come preview.
+[PERF v71] analisi editoriale AI v72: 1.42s
+[SCORE] raffinato=20 priority=skip | WWE/main roster, top star titolo: cm punk, impatto roster/storyline, WWE main roster + storyline/evento, titolo/championship, show settimanale, v68 preview scaduta
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 20/75 - Report: CM Punk Removed From WWE Raw Dates & European Tour Due To 'Schedule Change'
+[SKIP v86.6/legacy] low_score_pre_gemini:58: Backstage Report On WWE Adding More Live Events To Schedule
+[PENDING] Coda salvata: 1 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:48: AEW Star Chris Jericho Appears As A Waiter In NFL Team's Schedule Release Video
+[PENDING] Coda salvata: 1 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:48: Jeff Cobb Reportedly Visited NJPW Following Recent WWE Release
+[PENDING] Coda salvata: 1 elementi
+[SKIP v88.2] Feature/OTHER non-news sotto priorita hard: TNA Announces Return Of Ultimate X Stipulation For Slammiversary 2026
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 10 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-16 02:07:49_summary.json -> published_html_review/run_2026-05-16 02-07-49_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (233 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
+===== RUN END [2026-05-16 02:07:49] VERSION [v88_4_1_canonical_event_dedupe (ea22c9e)] =====
+

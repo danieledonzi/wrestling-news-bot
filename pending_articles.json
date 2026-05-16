@@ -39,7 +39,9 @@
       "nomi forti titolo: jade cargill, trick williams",
       "show settimanale",
       "v77 hard report protected",
-      "v71 freshness=0.6"
+      "v71 freshness=0.6",
+      "v71 freshness=0.897",
+      "v71 freshness=0.571"
     ],
     "is_breaking": false,
     "breaking_expires_at": 0,
@@ -47,7 +49,7 @@
     "reason": "report_hold_until_0630",
     "created_at": 1778887860.0,
     "first_seen": 1778887860.0,
-    "last_seen": 1778888846.7403402,
+    "last_seen": 1778897375.5118604,
     "not_before": 1778905800.0,
     "hold_until_label": "06:30 Europe/Rome",
     "attempts": 0,
@@ -57,7 +59,7 @@
         "title": "WWE SmackDown Results, Highlights and Key Moments for May 15, 2026",
         "source": "www.ringsidenews.com",
         "first_seen": 1778887860.0,
-        "last_seen": 1778888846.7388668,
+        "last_seen": 1778897375.1981032,
         "last_text_len": 0
       },
       {
@@ -65,7 +67,7 @@
         "title": "WWE SmackDown Results 5/15 - Trick Williams & Jade Cargill Appear, Women's Tag Match",
         "source": "www.wrestlinginc.com",
         "first_seen": 1778885948.0,
-        "last_seen": 1778888846.9942849,
+        "last_seen": 1778897375.5118604,
         "last_text_len": 0
       }
     ],

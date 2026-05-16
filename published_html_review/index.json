@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-15 23:46:40",
-  "last_bot_version": "v88_4_1_canonical_event_dedupe (5fa346a)",
-  "updated_at": "2026-05-15T23:47:48",
-  "total_items": 59,
+  "last_run_id": "2026-05-16 02:07:49",
+  "last_bot_version": "v88_4_1_canonical_event_dedupe (ea22c9e)",
+  "updated_at": "2026-05-16T02:10:51",
+  "total_items": 60,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -476,6 +476,14 @@
       "original_html_file": "20260515_234744_001_wwe-caso-ring-boy-i-querelanti-potranno-mantenere-l-anonimato_1a3eaf9f_original.html",
       "final_html_file": "20260515_234744_001_wwe-caso-ring-boy-i-querelanti-potranno-mantenere-l-anonimato_1a3eaf9f_final.html",
       "metadata_file": "20260515_234744_001_wwe-caso-ring-boy-i-querelanti-potranno-mantenere-l-anonimato_1a3eaf9f_metadata.json"
+    },
+    {
+      "run_id": "2026-05-16 02:07:49",
+      "title": "Trick Williams festeggia il ritorno a casa nella puntata di SmackDown del 15 maggio",
+      "url": "https://www.ringsidenews.com/trick-williams-rousing-homecoming-celebration-during-515-wwe-smackdown/",
+      "original_html_file": "20260516_021032_001_trick-williams-festeggia-il-ritorno-a-casa-nella-puntata-di-smackdown-del-15-mag_de3be992_original.html",
+      "final_html_file": "20260516_021032_001_trick-williams-festeggia-il-ritorno-a-casa-nella-puntata-di-smackdown-del-15-mag_de3be992_final.html",
+      "metadata_file": "20260516_021032_001_trick-williams-festeggia-il-ritorno-a-casa-nella-puntata-di-smackdown-del-15-mag_de3be992_metadata.json"
     }
   ]
 }
