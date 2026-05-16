@@ -1,9 +1,9 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-16 21:40:51",
-  "bot_version": "v88_4_2_report_softfixes (2aaf72d)",
-  "git_sha": "2aaf72df67ed9c868a7e58374da67b8c86d9f248",
-  "created_at": "2026-05-16T21:41:24",
+  "run_id": "2026-05-16 22:37:23",
+  "bot_version": "v88_4_2_report_softfixes (f0d42fd)",
+  "git_sha": "f0d42fd885335bc6744a92bc1d51b71e0d9552ec",
+  "created_at": "2026-05-16T22:41:32",
   "published_count": 0,
   "published_post_ids": [],
   "published_artifacts": [],
