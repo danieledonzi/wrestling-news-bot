@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-16 15:50:24",
-  "last_bot_version": "v88_4_2_report_softfixes (768f01b)",
-  "updated_at": "2026-05-16T15:51:34",
-  "total_items": 70,
+  "last_run_id": "2026-05-16 16:48:33",
+  "last_bot_version": "v88_4_2_report_softfixes (91e96dc)",
+  "updated_at": "2026-05-16T16:49:34",
+  "total_items": 71,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -564,6 +564,14 @@
       "original_html_file": "20260516_144244_004_braun-strowman-ricorda-il-suo-debutto-nel-main-roster-con-la-wyatt-family_9d1e4f72_original.html",
       "final_html_file": "20260516_144244_004_braun-strowman-ricorda-il-suo-debutto-nel-main-roster-con-la-wyatt-family_9d1e4f72_final.html",
       "metadata_file": "20260516_144244_004_braun-strowman-ricorda-il-suo-debutto-nel-main-roster-con-la-wyatt-family_9d1e4f72_metadata.json"
+    },
+    {
+      "run_id": "2026-05-16 16:48:33",
+      "title": "Ted DiBiase Jr. risponde alle voci sull'essere stato allontanato dalla sicurezza a WrestleMania 41",
+      "url": "https://www.ringsidenews.com/ted-dibiase-jr-addresses-claim-security-held-him-back-wrestlemania-42/",
+      "original_html_file": "20260516_164920_001_ted-dibiase-jr-risponde-alle-voci-sull-essere-stato-allontanato-dalla-sicurezza-_51937ce2_original.html",
+      "final_html_file": "20260516_164920_001_ted-dibiase-jr-risponde-alle-voci-sull-essere-stato-allontanato-dalla-sicurezza-_51937ce2_final.html",
+      "metadata_file": "20260516_164920_001_ted-dibiase-jr-risponde-alle-voci-sull-essere-stato-allontanato-dalla-sicurezza-_51937ce2_metadata.json"
     }
   ]
 }
