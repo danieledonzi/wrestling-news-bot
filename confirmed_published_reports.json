@@ -3,6 +3,7 @@
     "report:aew-dynamite-2026-05-13",
     "report:roh-supercard-honor-results-highlights-key-moments-may-15-2026-05-15",
     "report:tna-impact-2026-05-14",
+    "report:tna-impact-2026-05-15",
     "report:wwe-smackdown-2026-05-15"
   ],
   "published_reports": {
@@ -37,6 +38,14 @@
       "wp_post_id": null,
       "confirmed_at": "2026-05-16T05:42:19Z",
       "reason": "publish_success"
+    },
+    "report:tna-impact-2026-05-15": {
+      "report_key": "report:tna-impact-2026-05-15",
+      "title": "TNA iMPACT Spoiler Results from Sacramento, California on May 15, 2026",
+      "source_url": "https://www.ringsidenews.com/tna-impact-spoiler-results-sacramento-california-may-15-2026/",
+      "wp_post_id": null,
+      "confirmed_at": "2026-05-16T19:58:32Z",
+      "reason": "wp_strict_confirm"
     }
   }
 }
