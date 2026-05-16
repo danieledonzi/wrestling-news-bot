@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-16 09:23:21",
-  "last_bot_version": "v88_4_1_canonical_event_dedupe (9043d82)",
-  "updated_at": "2026-05-16T09:25:40",
-  "total_items": 64,
+  "last_run_id": "2026-05-16 10:43:37",
+  "last_bot_version": "v88_4_1_canonical_event_dedupe (37be70e)",
+  "updated_at": "2026-05-16T10:44:59",
+  "total_items": 65,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -516,6 +516,14 @@
       "original_html_file": "20260516_092540_002_tony-khan-parla-del-possibile-arrivo-degli-ex-membri-del-the-new-day-in-aew_e5444661_original.html",
       "final_html_file": "20260516_092540_002_tony-khan-parla-del-possibile-arrivo-degli-ex-membri-del-the-new-day-in-aew_e5444661_final.html",
       "metadata_file": "20260516_092540_002_tony-khan-parla-del-possibile-arrivo-degli-ex-membri-del-the-new-day-in-aew_e5444661_metadata.json"
+    },
+    {
+      "run_id": "2026-05-16 10:43:37",
+      "title": "Sidney Akeem (Reginald) vicino all'accordo con AEW e ROH",
+      "url": "https://www.ringsidenews.com/former-wwe-star-says-aewroh-deal-works/",
+      "original_html_file": "20260516_104459_001_sidney-akeem-reginald-vicino-all-accordo-con-aew-e-roh_7f8d12c4_original.html",
+      "final_html_file": "20260516_104459_001_sidney-akeem-reginald-vicino-all-accordo-con-aew-e-roh_7f8d12c4_final.html",
+      "metadata_file": "20260516_104459_001_sidney-akeem-reginald-vicino-all-accordo-con-aew-e-roh_7f8d12c4_metadata.json"
     }
   ]
 }

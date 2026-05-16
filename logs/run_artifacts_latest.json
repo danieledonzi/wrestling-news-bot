@@ -1,28 +1,20 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-16 09:23:21",
-  "bot_version": "v88_4_1_canonical_event_dedupe (9043d82)",
-  "git_sha": "9043d82ee7bffe1f994d2d24618d98f3af7e453f",
-  "created_at": "2026-05-16T09:25:41",
-  "published_count": 2,
+  "run_id": "2026-05-16 10:43:37",
+  "bot_version": "v88_4_1_canonical_event_dedupe (37be70e)",
+  "git_sha": "37be70e51ac7408b53cb613cf799bf8204935799",
+  "created_at": "2026-05-16T10:45:00",
+  "published_count": 1,
   "published_post_ids": [
-    "4743",
-    "4746"
+    "4749"
   ],
   "published_artifacts": [
     {
-      "post_id": 4743,
-      "title": "The Kingdom torna in AEW e ROH: l'obiettivo sono i ROH World Tag Team Championship",
-      "source_url": "https://www.ringsidenews.com/kingdom-returns-aewroh-roh-tag-team-titles-their-sights/",
-      "html_file": "published/20260516_092437_001_the-kingdom-torna-in-aew-e-roh-lobiettivo-sono-i-roh-world-tag-team-championship_4743_final.html",
-      "metadata_file": "published/20260516_092437_001_the-kingdom-torna-in-aew-e-roh-lobiettivo-sono-i-roh-world-tag-team-championship_4743_metadata.json"
-    },
-    {
-      "post_id": 4746,
-      "title": "Tony Khan parla del possibile arrivo degli ex membri del The New Day in AEW",
-      "source_url": "https://www.ringsidenews.com/tony-khan-addresses-interest-signing-former-new-day-stars-aew/",
-      "html_file": "published/20260516_092539_002_tony-khan-parla-del-possibile-arrivo-degli-ex-membri-del-the-new-day-in-aew_4746_final.html",
-      "metadata_file": "published/20260516_092539_002_tony-khan-parla-del-possibile-arrivo-degli-ex-membri-del-the-new-day-in-aew_4746_metadata.json"
+      "post_id": 4749,
+      "title": "Sidney Akeem (Reginald) vicino all'accordo con AEW e ROH",
+      "source_url": "https://www.ringsidenews.com/former-wwe-star-says-aewroh-deal-works/",
+      "html_file": "published/20260516_104458_001_sidney-akeem-reginald-vicino-allaccordo-con-aew-e-roh_4749_final.html",
+      "metadata_file": "published/20260516_104458_001_sidney-akeem-reginald-vicino-allaccordo-con-aew-e-roh_4749_metadata.json"
     }
   ],
   "errors": [],
