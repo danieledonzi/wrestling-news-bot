@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-16 19:58:21",
-  "last_bot_version": "v88_4_2_report_softfixes (efc5999)",
-  "updated_at": "2026-05-16T19:59:48",
-  "total_items": 72,
+  "last_run_id": "2026-05-16 20:48:19",
+  "last_bot_version": "v88_4_2_report_softfixes (781503d)",
+  "updated_at": "2026-05-16T20:49:14",
+  "total_items": 73,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -580,6 +580,14 @@
       "original_html_file": "20260516_185430_001_matt-hardy-ricorda-la-kofimania-dopo-l-addio-di-kofi-kingston-e-xavier-woods-all_2abf9e50_original.html",
       "final_html_file": "20260516_185430_001_matt-hardy-ricorda-la-kofimania-dopo-l-addio-di-kofi-kingston-e-xavier-woods-all_2abf9e50_final.html",
       "metadata_file": "20260516_185430_001_matt-hardy-ricorda-la-kofimania-dopo-l-addio-di-kofi-kingston-e-xavier-woods-all_2abf9e50_metadata.json"
+    },
+    {
+      "run_id": "2026-05-16 20:48:19",
+      "title": "Ridge Holland spiega i cambiamenti a NXT sotto la guida di Shawn Michaels",
+      "url": "https://www.wrestlinginc.com/2171776/wwe-nxt-ridge-holland-shawn-michaels/",
+      "original_html_file": "20260516_204913_001_ridge-holland-spiega-i-cambiamenti-a-nxt-sotto-la-guida-di-shawn-michaels_ed630f99_original.html",
+      "final_html_file": "20260516_204913_001_ridge-holland-spiega-i-cambiamenti-a-nxt-sotto-la-guida-di-shawn-michaels_ed630f99_final.html",
+      "metadata_file": "20260516_204913_001_ridge-holland-spiega-i-cambiamenti-a-nxt-sotto-la-guida-di-shawn-michaels_ed630f99_metadata.json"
     }
   ]
 }
