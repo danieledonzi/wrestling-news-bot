@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-16 10:43:37",
-  "last_bot_version": "v88_4_1_canonical_event_dedupe (37be70e)",
-  "updated_at": "2026-05-16T10:44:59",
-  "total_items": 65,
+  "last_run_id": "2026-05-16 11:43:53",
+  "last_bot_version": "v88_4_1_canonical_event_dedupe (9b70900)",
+  "updated_at": "2026-05-16T11:45:35",
+  "total_items": 66,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -524,6 +524,14 @@
       "original_html_file": "20260516_104459_001_sidney-akeem-reginald-vicino-all-accordo-con-aew-e-roh_7f8d12c4_original.html",
       "final_html_file": "20260516_104459_001_sidney-akeem-reginald-vicino-all-accordo-con-aew-e-roh_7f8d12c4_final.html",
       "metadata_file": "20260516_104459_001_sidney-akeem-reginald-vicino-all-accordo-con-aew-e-roh_7f8d12c4_metadata.json"
+    },
+    {
+      "run_id": "2026-05-16 11:43:53",
+      "title": "Tony Khan nega di aver seguito corsi di media training: \"Merito dell'esperienza e della mia fede\"",
+      "url": "https://www.ringsidenews.com/tony-khan-responds-fan-claims-media-trained-tony-becoming-problem/",
+      "original_html_file": "20260516_114509_001_tony-khan-nega-di-aver-seguito-corsi-di-media-training-merito-dell-esperienza-e-_1b738789_original.html",
+      "final_html_file": "20260516_114509_001_tony-khan-nega-di-aver-seguito-corsi-di-media-training-merito-dell-esperienza-e-_1b738789_final.html",
+      "metadata_file": "20260516_114509_001_tony-khan-nega-di-aver-seguito-corsi-di-media-training-merito-dell-esperienza-e-_1b738789_metadata.json"
     }
   ]
 }

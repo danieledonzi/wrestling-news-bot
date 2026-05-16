@@ -1,20 +1,20 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-16 10:43:37",
-  "bot_version": "v88_4_1_canonical_event_dedupe (37be70e)",
-  "git_sha": "37be70e51ac7408b53cb613cf799bf8204935799",
-  "created_at": "2026-05-16T10:45:00",
+  "run_id": "2026-05-16 11:43:53",
+  "bot_version": "v88_4_1_canonical_event_dedupe (9b70900)",
+  "git_sha": "9b70900992b19cbc56dd7527715a669b2eba3fb4",
+  "created_at": "2026-05-16T11:45:36",
   "published_count": 1,
   "published_post_ids": [
-    "4749"
+    "4752"
   ],
   "published_artifacts": [
     {
-      "post_id": 4749,
-      "title": "Sidney Akeem (Reginald) vicino all'accordo con AEW e ROH",
-      "source_url": "https://www.ringsidenews.com/former-wwe-star-says-aewroh-deal-works/",
-      "html_file": "published/20260516_104458_001_sidney-akeem-reginald-vicino-allaccordo-con-aew-e-roh_4749_final.html",
-      "metadata_file": "published/20260516_104458_001_sidney-akeem-reginald-vicino-allaccordo-con-aew-e-roh_4749_metadata.json"
+      "post_id": 4752,
+      "title": "Tony Khan nega di aver seguito corsi di media training: \"Merito dell'esperienza e della mia fede\"",
+      "source_url": "https://www.ringsidenews.com/tony-khan-responds-fan-claims-media-trained-tony-becoming-problem/",
+      "html_file": "published/20260516_114508_001_tony-khan-nega-di-aver-seguito-corsi-di-media-training-merito-dellesperienza-e-della-mia-f_4752_final.html",
+      "metadata_file": "published/20260516_114508_001_tony-khan-nega-di-aver-seguito-corsi-di-media-training-merito-dellesperienza-e-della-mia-f_4752_metadata.json"
     }
   ],
   "errors": [],

@@ -206,3 +206,217 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
 ===== RUN END [2026-05-16 10:43:37] VERSION [v88_4_1_canonical_event_dedupe (37be70e)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+
+===== RUN START [2026-05-16 11:43:53] VERSION [v88_4_1_canonical_event_dedupe (9b70900)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 10 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE SmackDown 5/15/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/15/2026: 3 Things We Hated & 3 Things We Loved
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy
+[SKIP] Score sotto soglia editoriale (56/75): GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy
+[SCORE v81.1] Cap light name-driven item 49->49 - Jacob Fatu Recalls Booker T Helping Him Get Into WWE Despite ROW No-Show Incident
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Jacob Fatu Recalls Booker T Helping Him Get Into WWE Despite ROW No-Show Incident
+[SKIP] Score sotto soglia editoriale (49/75): Jacob Fatu Recalls Booker T Helping Him Get Into WWE Despite ROW No-Show Incident
+[SKIP] Score sotto soglia editoriale (24/75): WWE NXT Viewership & Ratings Report: 5/12/2026
+[REPORT v87.2] Report confermato da history forte: report:wwe-smackdown-2026-05-15
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-smackdown-2026-05-15 - WWE SmackDown Results 5/15 - Trick Williams & Jade Cargill Appear, Women's Tag Match
+[SKIP] URL già in history: https://www.wrestlinginc.com/2174193/wwe-vince-mcmahon-linda-ring-boy-lawsuit-judge-plaintiffs-anonymous/
+[SKIP] Preview/show announcement scaduta: R-Truth Supposedly Not Cleared To Compete, Pulled From Advertised WWE SmackDown Match
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown
+[SKIP] URL già in history: https://www.wrestlinginc.com/2174099/aew-buddy-matthews-injury-update-indie-appearance-cleared-october/
+[SKIP] Score sotto soglia editoriale (18/75): Additional Details On Triller Owing AEW Money For Pay-Per-View Royalties
+[SKIP] Score sotto soglia editoriale (38/75): Backstage Report On AEW & Madison Square Garden After Wrestlers Express Interest
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173963/wwe-roman-reigns-added-advertised-dates-additional-details/
+[SKIP] Score sotto soglia editoriale (62/75): John Cena On Reaction To WWE Backlash Announcement: 'There's Still A Lot To Be Done'
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - AEW Collision Preview for May 16, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (51/75): AEW Collision Preview for May 16, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Marty Jannetty Underwent Foot Amputation After Years-Long Sepsis Battle
+[SKIP] Score sotto soglia editoriale (49/75): Marty Jannetty Underwent Foot Amputation After Years-Long Sepsis Battle
+[PERF v71] WP lookup URL esistente: 0.55s
+[PERF v71] WP lookup event_key: 1.53s
+[FIX] Event key in history ma non confermata su WordPress: event:business:media-rights - provo a pubblicare
+[SKIP] URL già in history: https://www.ringsidenews.com/tony-khan-calls-out-wwe-background-chatter-about-aews-next-tv-deal/
+[SKIP] URL già in history: https://www.ringsidenews.com/tony-khan-addresses-interest-signing-former-new-day-stars-aew/
+[SKIP] Score sotto soglia editoriale (49/75): AEW Dynamite Viewership Sees Increase on May 13, 2026
+[PERF v71] WP lookup event_key: 1.34s
+[FIX] Event key in history ma non confermata su WordPress: event:cody-rhodes-diagnosis - provo a pubblicare
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 55->54 - WWE Adds New Grudge Match To 5/22 SmackDown
+[SCORE v88.3] v88.3 cap low-value market item 54->45 - WWE Adds New Grudge Match To 5/22 SmackDown
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - WWE Adds Huge Match to May 23 Saturday Night's Main Event
+[SKIP] Score sotto soglia editoriale (51/75): WWE Adds Huge Match to May 23 Saturday Night's Main Event
+[SKIP] URL già in history: https://www.ringsidenews.com/kingdom-returns-aewroh-roh-tag-team-titles-their-sights/
+[SKIP] URL già in history: https://www.ringsidenews.com/former-wwe-star-says-aewroh-deal-works/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - What Fans Didn't See Before WWE SmackDown Involving Blake Monroe
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 62->54 - Cody Rhodes Reveals Full WWE European Tour Schedule For Summer 2026
+[SKIP] Score sotto soglia editoriale (49/75): Cody Rhodes Reveals Full WWE European Tour Schedule For Summer 2026
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Carmelo Hayes Returns To Television After Months-Long Hiatus During 5/15 WWE SmackDown
+[FRESHNESS v86.6/legacy] Post-show outcome rescue: non tratto come preview scaduta - Carmelo Hayes Returns To Television After Months-Long Hiatus During 5/15 WWE SmackDown
+[SKIP] Score sotto soglia editoriale (51/75): Carmelo Hayes Returns To Television After Months-Long Hiatus During 5/15 WWE SmackDown
+[SKIP] URL già in history: https://www.ringsidenews.com/trick-williams-rousing-homecoming-celebration-during-515-wwe-smackdown/
+[SCORE] 100 high - Tony Khan Responds After Fan Claims "Media Trained Tony" Is Becoming a Problem | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, contratto, PLE/PPV, v62 business/dirigenza, v62 categoria business, v71 freshness=0.575
+[SCORE] 96 high - Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v71 freshness=0.549
+[SCORE] 96 high - What Fans Didn't See Before WWE SmackDown Involving Blake Monroe | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v71 freshness=0.577
+[SCORE] 84 high - Jade Cargill Challenges Rhea Ripley To WWE Women's Title Rematch At Clash In Italy | WWE/main roster, top star titolo: rhea ripley, nomi forti titolo: jade cargill, WWE main roster + storyline/evento, PLE/PPV, v62 titolo/championship, v66 cap title match non-title-change, v71 freshness=0.501
+[SCORE] 73 medium - Nia Jax, Lash Legend Apparently Set For WWE Women's Title Match At Upcoming SNME | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v71 freshness=0.477, v48 tier2: 55-74
+[SCORE] 73 medium - GUNTHER Conquers Royce Keys To Earn Clash In Italy Title Match During 5/15 WWE SmackDown | WWE/main roster, top star lead: cody rhodes, nomi forti lead: cody rhodes, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, combo top name lead + evento forte, PLE/PPV, trash talk/clickbait forte, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.588, v48 tier2: 55-74
+[SCORE] 69 medium - Update On Ticket Sales For AEW Double Or Nothing 2026 | AEW, PLE/PPV, v62 corporate/business, v62 categoria business, v71 freshness=0.437, v48 tier2: 55-74
+[SCORE] 61 medium - Report: CM Punk Removed From WWE Raw Dates & European Tour Due To 'Schedule Change' | WWE/main roster, top star titolo: cm punk, rumor/backstage, show settimanale, v71 freshness=0.39, v48 tier2: 55-74
+[SCORE] 58 low - Backstage Report On WWE Adding More Live Events To Schedule | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, rumor/backstage, v71 freshness=0.428, v48 tier2: 55-74
+[SCORE] 56 low - Six-Woman Tag Team Match Added To Upcoming WWE Saturday Night's Main Event | WWE/main roster, WWE main roster + storyline/evento, match/segmento annunciato, show settimanale, v71 freshness=0.5, v48 tier2: 55-74
+[MODE] Storm mode attiva: 3 news >=90, 4 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 12 | mode=storm | max nuove=5 | pending pubblicati=0
+[BOT] Elaborazione: Tony Khan Responds After Fan Claims "Media Trained Tony" Is Becoming a Problem
+[BOT] semantic_id=tony-khan-responds-after-fan-claims-media-trained-tony-is-becoming-a-problem
+[SCORE] iniziale=100 priority=high
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/tony-khan-responds-fan-claims-media-trained-tony-becoming-problem/
+[PERF v71] scraping articolo: 0.74s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=12, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/tony-khan-responds-fan-claims-media-trained-tony-becoming-problem/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.43s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta una dichiarazione recente di Tony Khan in risposta a un fan sui social. È una news autonoma su un evento già avvenuto (le dichiarazioni post-scrum di ROH Supercard of Honor).
+[EDITORIAL v72.3] translation_notes=Mantenere 'media trained Tony' tra virgolette o come espressione idiomatica citata.; Tradurre 'turn the other cheek' come 'porgere l'altra guancia'.; Attenzione ai titoli dei ruoli: Tony Khan è il 'Presidente AEW' o 'AEW President'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | L'articolo riporta una dichiarazione recente di Tony Khan in risposta a un fan sui social. È una news autonoma su un evento già avvenuto (le dichiarazioni post-scrum di ROH Supercard of Honor).
+[PERF v71] analisi editoriale AI v72: 15.31s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Tony Khan Responds After Fan Claims "Media Trained Tony" Is Becoming a Problem
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, contratto, PLE/PPV, v62 business/dirigenza, v62 categoria business
+[V71] story_signature=stable:tony_khan|tony_khan_responds_after_fan_claims|media_trained_tony|contract|wwe semantic_status=new_story freshness=0.575
+[PERF v71] WP recent posts dedupe: 1.15s
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:business:media-rights -> event:business:media-rights-followup-tony-khan-responds-fan-media-trained-tony-is-becoming-a-problem
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.47s
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.1] Repair mirato blocchi mancanti: ['TEXT_011', 'TEXT_012']
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.1] Batch tradotto con gemini-3-flash-preview: 2 blocchi
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=12
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 27.76s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Tony Khan nega di aver seguito corsi di media training: "Merito dell'esperienza e della mia fede"
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/tony-khan-responds-after-fan-claims-media-trained-tony-is-becoming-a-problem-45.jpg
+[MEDIA] Immagine caricata: 4751
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260516_114508_001_tony-khan-nega-di-aver-seguito-corsi-di-media-training-merito-dellesperienza-e-della-mia-f_4752_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4752
+[PERF v71] creazione post WordPress: 15.61s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/tony-khan-responds-after-fan-claims-media-trained-tony-is-becoming-a-problem-45.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4751
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Tony Khan Responds After Fan Claims "Media Trained Tony" Is ': 61.84s
+[OK] Pubblicato: Tony Khan nega di aver seguito corsi di media training: "Merito dell'esperienza e della mia fede"
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260516_114509_001_tony-khan-nega-di-aver-seguito-corsi-di-media-training-merito-dell-esperienza-e-_1b738789_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Tony Khan nega di aver seguito corsi di media training: "Merito dell'esperienza e della mia fede"
+[PUBLISHED REVIEW v87.1] Review outer salvata: Tony Khan nega di aver seguito corsi di media training: "Merito dell'esperienza e della mia fede"
+[DEDUPE v88.4.1] candidate_core=canonical_event_core:blake_monroe|debut_arrival|wwe title=Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown
+[DEDUPE v88.4.1] Canonical event core caricati: 8
+[SKIP v88.4.1] Canonical event core gia pubblicato: canonical_event_core:blake_monroe|debut_arrival|wwe - Backstage News On When Ex-NXT Star Blake Monroe Is Expected To Debut On WWE SmackDown
+[DEDUPE v88.4.1] candidate_core=canonical_event_core:blake_monroe|debut_arrival|wwe title=What Fans Didn't See Before WWE SmackDown Involving Blake Monroe
+[SKIP v88.4.1] Canonical event core gia pubblicato: canonical_event_core:blake_monroe|debut_arrival|wwe - What Fans Didn't See Before WWE SmackDown Involving Blake Monroe
+[BOT] Elaborazione: Jade Cargill Challenges Rhea Ripley To WWE Women's Title Rematch At Clash In Italy
+[BOT] semantic_id=jade-cargill-challenges-rhea-ripley-to-wwe-womens-title-rematch-at-clash-in-italy
+[SCORE] iniziale=84 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo focalizza l'attenzione sulla costruzione della card di 'Clash in Italy' e sulla sfida lanciata per l'evento, inquadrandolo come un aggiornamento verso il PLE. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (Women's Championship) in inglese.; Tradurre 'Clash in Italy' come il nome dell'evento.; Non tradurre 'pump kicked' letteralmente, usare 'colpita con un pump kick'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo focalizza l'attenzione sulla costruzione della card di 'Clash in Italy' e sulla sfida lanciata per l'evento, inquadrandolo come un aggiornamento verso il PLE. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 9.69s
+[SCORE] raffinato=20 priority=skip | WWE/main roster, top star titolo: rhea ripley, nomi forti titolo: jade cargill, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v68 preview scaduta
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 20/75 - Jade Cargill Challenges Rhea Ripley To WWE Women's Title Rematch At Clash In Italy
+[PERF v71] WP lookup URL esistente: 2.44s
+[BOT] Elaborazione: Nia Jax, Lash Legend Apparently Set For WWE Women's Title Match At Upcoming SNME
+[BOT] semantic_id=nia-jax-lash-legend-apparently-set-for-wwe-womens-title-match-at-upcoming-snme
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo discute di un possibile match futuro basato su un segmento, citando incertezze sulla card ufficiale di Saturday Night's Main Event.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Saturday Night's Main Event' e i nomi dei titoli (WWE Women's Title) in inglese.; Non tradurre 'Irresistible Forces' come nome del team.; Attenzione ai tempi verbali: usare il condizionale poiché l'ufficialità non è ancora confermata.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo discute di un possibile match futuro basato su un segmento, citando incertezze sulla card ufficiale di Saturday Night's Main Event.
+[PERF v71] analisi editoriale AI v72: 1.50s
+[SCORE v88.3] v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 56->54 - Nia Jax, Lash Legend Apparently Set For WWE Women's Title Match At Upcoming SNME
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti lead: brie bella, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 media rights/streaming, v70 cap preview hard, v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 56->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Nia Jax, Lash Legend Apparently Set For WWE Women's Title Match At Upcoming SNME
+[REPORT v87.2] True-results confermato da history forte: skip offline-safe report:wwe-smackdown-2026-05-15 - GUNTHER Conquers Royce Keys To Earn Clash In Italy Title Match During 5/15 WWE SmackDown
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Update On Ticket Sales For AEW Double Or Nothing 2026
+[BOT] semantic_id=update-on-ticket-sales-for-aew-double-or-nothing-2026
+[SCORE] iniziale=69 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.95 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo presenta un evento imminente (Double or Nothing) analizzando card, match annunciati e vendita biglietti in vista dello show. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Non tradurre i nomi dei match (es: Title vs. Hair match, I Quit match).; Mantenere i nomi delle stable e dei titoli in inglese.; Tradurre 'sold out' come 'tutto esaurito'.
+[EDITORIAL v73] final type=OTHER | category=AEW (5) | L'articolo presenta un evento imminente (Double or Nothing) analizzando card, match annunciati e vendita biglietti in vista dello show. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.92s
+[SCORE v86.9] Cap commentary/opinion 84->68 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SCORE] raffinato=45 priority=low | AEW, impatto roster/storyline, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v62 categoria business, v66 cap title match non-title-change, v86.9 cap commentary/opinion 84->68, v88.2 cap OTHER/feature non-news 68->54, v88.3 hard feature skip cap 54->45
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 45/55 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - Update On Ticket Sales For AEW Double Or Nothing 2026
+[PERF v71] WP lookup URL esistente: 0.67s
+[BOT] Elaborazione: Report: CM Punk Removed From WWE Raw Dates & European Tour Due To 'Schedule Change'
+[BOT] semantic_id=report-cm-punk-removed-from-wwe-raw-dates-european-tour-due-to-schedule-change
+[SCORE] iniziale=61 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[MODEL v88] Cooldown globale modello per la run: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3-flash-preview | Si tratta di un aggiornamento basato su report (Meltzer) riguardante lo status e lo schedule di CM Punk per il tour europeo WWE, non una preview di un match specifico.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (WWE World Heavyweight Champion) e dei PLE (Night of Champions, Clash in Italy, SummerSlam) in inglese.; Tradurre 'go home show' come 'ultimo show prima di' o 'puntata di chiusura'.; 'Schedule change' va tradotto come 'cambio di programma' o 'variazione di calendario'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | Si tratta di un aggiornamento basato su report (Meltzer) riguardante lo status e lo schedule di CM Punk per il tour europeo WWE, non una preview di un match specifico.
+[PERF v71] analisi editoriale AI v72: 6.22s
+[SCORE] raffinato=20 priority=skip | WWE/main roster, top star titolo: cm punk, impatto roster/storyline, WWE main roster + storyline/evento, titolo/championship, show settimanale, v68 preview scaduta
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 20/75 - Report: CM Punk Removed From WWE Raw Dates & European Tour Due To 'Schedule Change'
+[SKIP v86.6/legacy] low_score_pre_gemini:58: Backstage Report On WWE Adding More Live Events To Schedule
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:56: Six-Woman Tag Team Match Added To Upcoming WWE Saturday Night's Main Event
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:48: AEW Star Chris Jericho Appears As A Waiter In NFL Team's Schedule Release Video
+[PENDING] Coda salvata: 0 elementi
+[SKIP v88.3] Item low-value market escluso: WWE Adds New Grudge Match To 5/22 SmackDown
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 12 candidati provati | mode=storm
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-16 11:43:53_summary.json -> published_html_review/run_2026-05-16 11-43-53_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (256 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
+===== RUN END [2026-05-16 11:43:53] VERSION [v88_4_1_canonical_event_dedupe (9b70900)] =====
+
