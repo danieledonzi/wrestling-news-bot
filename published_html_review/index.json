@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-16 07:51:42",
-  "last_bot_version": "v88_4_1_canonical_event_dedupe (0c91a2d)",
-  "updated_at": "2026-05-16T07:53:43",
-  "total_items": 62,
+  "last_run_id": "2026-05-16 09:23:21",
+  "last_bot_version": "v88_4_1_canonical_event_dedupe (9043d82)",
+  "updated_at": "2026-05-16T09:25:40",
+  "total_items": 64,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -500,6 +500,22 @@
       "original_html_file": "20260516_075243_001_tony-khan-risponde-alle-voci-dalla-wwe-sul-futuro-televisivo-della-aew_6acc61eb_original.html",
       "final_html_file": "20260516_075243_001_tony-khan-risponde-alle-voci-dalla-wwe-sul-futuro-televisivo-della-aew_6acc61eb_final.html",
       "metadata_file": "20260516_075243_001_tony-khan-risponde-alle-voci-dalla-wwe-sul-futuro-televisivo-della-aew_6acc61eb_metadata.json"
+    },
+    {
+      "run_id": "2026-05-16 09:23:21",
+      "title": "The Kingdom torna in AEW e ROH: l'obiettivo sono i ROH World Tag Team Championship",
+      "url": "https://www.ringsidenews.com/kingdom-returns-aewroh-roh-tag-team-titles-their-sights/",
+      "original_html_file": "20260516_092438_001_the-kingdom-torna-in-aew-e-roh-l-obiettivo-sono-i-roh-world-tag-team-championshi_4ab2a681_original.html",
+      "final_html_file": "20260516_092438_001_the-kingdom-torna-in-aew-e-roh-l-obiettivo-sono-i-roh-world-tag-team-championshi_4ab2a681_final.html",
+      "metadata_file": "20260516_092438_001_the-kingdom-torna-in-aew-e-roh-l-obiettivo-sono-i-roh-world-tag-team-championshi_4ab2a681_metadata.json"
+    },
+    {
+      "run_id": "2026-05-16 09:23:21",
+      "title": "Tony Khan parla del possibile arrivo degli ex membri del The New Day in AEW",
+      "url": "https://www.ringsidenews.com/tony-khan-addresses-interest-signing-former-new-day-stars-aew/",
+      "original_html_file": "20260516_092540_002_tony-khan-parla-del-possibile-arrivo-degli-ex-membri-del-the-new-day-in-aew_e5444661_original.html",
+      "final_html_file": "20260516_092540_002_tony-khan-parla-del-possibile-arrivo-degli-ex-membri-del-the-new-day-in-aew_e5444661_final.html",
+      "metadata_file": "20260516_092540_002_tony-khan-parla-del-possibile-arrivo-degli-ex-membri-del-the-new-day-in-aew_e5444661_metadata.json"
     }
   ]
 }
