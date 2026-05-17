@@ -1,22 +1,12 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-17 08:25:30",
-  "bot_version": "v88_4_2_report_softfixes (4352c3a)",
-  "git_sha": "4352c3ab553ffd84dc451ef3a6fe4fc02776ff8e",
-  "created_at": "2026-05-17T08:28:20",
-  "published_count": 1,
-  "published_post_ids": [
-    "4798"
-  ],
-  "published_artifacts": [
-    {
-      "post_id": 4798,
-      "title": "Layla spiega il suo improvviso addio alla WWE dopo aver rinnovato il contratto",
-      "source_url": "https://www.ringsidenews.com/layla-explains-why-she-abruptly-walked-away-wwe-signing-new-deal/",
-      "html_file": "published/20260517_082723_001_layla-spiega-il-suo-improvviso-addio-alla-wwe-dopo-aver-rinnovato-il-contratto_4798_final.html",
-      "metadata_file": "published/20260517_082723_001_layla-spiega-il-suo-improvviso-addio-alla-wwe-dopo-aver-rinnovato-il-contratto_4798_metadata.json"
-    }
-  ],
+  "run_id": "2026-05-17 10:06:14",
+  "bot_version": "v88_4_2_report_softfixes (eaf207a)",
+  "git_sha": "eaf207af22b0e999e3ec241db9d3a0e6a07c966a",
+  "created_at": "2026-05-17T10:07:11",
+  "published_count": 0,
+  "published_post_ids": [],
+  "published_artifacts": [],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",
