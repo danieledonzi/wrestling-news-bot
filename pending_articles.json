@@ -1,1 +1,35 @@
-[]
+[
+  {
+    "url": "https://www.wrestlinginc.com/2175050/wwe-karrion-kross-scarlett-return-aew-debut/",
+    "title": "Former WWE Stars Karrion Kross And Scarlett Talk Possibility Of Return Or AEW Debut",
+    "semantic_id": "former-wwe-stars-karrion-kross-and-scarlett-talk-possibility-of-return-or-aew-debut",
+    "title_key": "stars-karrion-kross-scarlett-talk-possibility-return-or-debut",
+    "score": 88,
+    "priority": "high",
+    "event_key": "",
+    "story_signature_v71": "stable:wwe_stars_karrion_kross_and_scarlett_talk_possibility_of_ret|aew_debut|debut|wwe",
+    "summary": "Karrion Kross and Scarlett weigh in on the potential of them returning to WWE or making their respective debuts in AEW.",
+    "reasons": [
+      "WWE/main roster",
+      "impatto roster/storyline",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "v62 ritorno/debutto",
+      "v71 freshness=0.841"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "impatto roster/storyline",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "v62 ritorno/debutto",
+      "v71 freshness=0.841"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1779073212.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1779052382.0913355,
+    "attempts": 0
+  }
+]
