@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-17 16:47:44",
-  "last_bot_version": "v88_4_2_report_softfixes (1b7aa22)",
-  "updated_at": "2026-05-17T16:49:38",
-  "total_items": 84,
+  "last_run_id": "2026-05-17 17:51:39",
+  "last_bot_version": "v88_4_2_report_softfixes (7dce52b)",
+  "updated_at": "2026-05-17T17:52:47",
+  "total_items": 85,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -676,6 +676,14 @@
       "original_html_file": "20260517_164938_003_eric-bischoff-elogia-il-supporto-di-tony-khan-a-rebel-per-la-diagnosi-di-sla_6c5b71d9_original.html",
       "final_html_file": "20260517_164938_003_eric-bischoff-elogia-il-supporto-di-tony-khan-a-rebel-per-la-diagnosi-di-sla_6c5b71d9_final.html",
       "metadata_file": "20260517_164938_003_eric-bischoff-elogia-il-supporto-di-tony-khan-a-rebel-per-la-diagnosi-di-sla_6c5b71d9_metadata.json"
+    },
+    {
+      "run_id": "2026-05-17 17:51:39",
+      "title": "Svelato il motivo dell'assenza di Randy Orton dopo WrestleMania 42",
+      "url": "https://www.ringsidenews.com/real-reason-behind-randy-ortons-wwe-absence-wrestlemania-42-revealed/",
+      "original_html_file": "20260517_175244_001_svelato-il-motivo-dell-assenza-di-randy-orton-dopo-wrestlemania-42_c9a8d335_original.html",
+      "final_html_file": "20260517_175244_001_svelato-il-motivo-dell-assenza-di-randy-orton-dopo-wrestlemania-42_c9a8d335_final.html",
+      "metadata_file": "20260517_175244_001_svelato-il-motivo-dell-assenza-di-randy-orton-dopo-wrestlemania-42_c9a8d335_metadata.json"
     }
   ]
 }

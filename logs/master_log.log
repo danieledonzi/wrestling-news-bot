@@ -4682,3 +4682,202 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
 ===== RUN END [2026-05-17 16:47:44] VERSION [v88_4_2_report_softfixes (1b7aa22)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+
+===== RUN START [2026-05-17 17:51:39] VERSION [v88_4_2_report_softfixes (7dce52b)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 11 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[SKIP] Score sotto soglia editoriale (54/75): Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[SCORE v81.1] Cap light name-driven item 31->31 - Sandman Reflects On Hard Partying Days In ECW, Overdosing
+[SKIP] Score sotto soglia editoriale (31/75): Sandman Reflects On Hard Partying Days In ECW, Overdosing
+[SKIP] Score sotto soglia editoriale (42/75): WWE's IYO SKY Announces Marriage To Former IWGP Heavyweight Champion
+[SKIP] URL già in history: https://www.wrestlinginc.com/2174915/wwe-corey-graves-carmella-teases-return/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173128/eric-bischoff-respects-aew-tony-khan-rebel/
+[SKIP] Score sotto soglia editoriale (24/75): WWE HOFer Jeff Jarrett Saw DSOTR Episode As 'Opportunity'
+[SKIP] Score sotto soglia editoriale (14/75): Jeff Jarrett Explains Why Tony Khan's AEW Booking Philosophy Is 'Brilliant'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172720/aew-wwe-adam-copeland-hulk-hogan-friendship/
+[SKIP] Score sotto soglia editoriale (20/75): AJ Styles Shares Thoughts On Pursuing WWE Production Role
+[SKIP] Score sotto soglia editoriale (24/75): Jim Ross Says WWE Nearly Held Event At Infamous Island Prison
+[SKIP] Score sotto soglia editoriale (20/75): Rikishi Doesn't Believe WWE Needs AI: We Need To Let 'Real Talent Come Through'
+[REPORT v87.2] Report confermato da history forte: report:aew-collision-2026-05-16
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:aew-collision-2026-05-16 - AEW Collision Results 5/16 - World Title & TBS Title On The Line, Tag Title Eliminator
+[SKIP] Score sotto soglia editoriale (25/75): WWE HOFer Eric Bischoff 'Thrilled' For Danhausen
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171776/wwe-nxt-ridge-holland-shawn-michaels/
+[SKIP] Score sotto soglia editoriale (26/75): AEW Women's World Champion Thekla Explains Why Tony Khan's Company Is A 'Perfect Fit'
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Kevin Nash Identifies Point Of No Return Regarding His Involvement With WWE
+[PERF v71] WP lookup event_key: 1.18s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 46/55 - AJ Styles Addresses Possibility of Joining WWE's Creative Team
+[SKIP] Score sotto soglia editoriale (46/75): AJ Styles Addresses Possibility of Joining WWE's Creative Team
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - AJ Styles Defends NARAKU Starting in WWE NXT Amid Fan Backlash
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - AJ Styles Defends NARAKU Starting in WWE NXT Amid Fan Backlash
+[SKIP] Score sotto soglia editoriale (49/75): AJ Styles Defends NARAKU Starting in WWE NXT Amid Fan Backlash
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Real Reason Behind Randy Orton's WWE Absence After WrestleMania 42 Revealed
+[SCORE v86.9] Cap commentary/opinion 100->68 - Real Reason Behind Randy Orton's WWE Absence After WrestleMania 42 Revealed
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:cody-rhodes-injury - Real Reason Behind Randy Orton's WWE Absence After WrestleMania 42 Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/paige-reveals-plans-bring-back-devastating-signature-move-wwe/
+[SKIP] URL già in history: https://www.ringsidenews.com/iyo-sky-announces-marriage-wwe-nxt-star-naraku/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Baron Corbin Has Been Discussed for Possible WWE Return Amid Danhausen Angle
+[SCORE v86.9] Cap commentary/opinion 100->68 - Baron Corbin Has Been Discussed for Possible WWE Return Amid Danhausen Angle
+[SKIP] Score sotto soglia editoriale (63/75): Baron Corbin Has Been Discussed for Possible WWE Return Amid Danhausen Angle
+[SKIP] Score sotto soglia editoriale (43/75): Gremlin House Wrestling Accuses Former Associate of Spreading False Narratives After Harassment Allegations
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Segment and Match Revealed for May 18 WWE RAW
+[SCORE v81.1] Cap future card announcement 62->62 - Segment and Match Revealed for May 18 WWE RAW
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 62->54 - Segment and Match Revealed for May 18 WWE RAW
+[SKIP] Score sotto soglia editoriale (49/75): Segment and Match Revealed for May 18 WWE RAW
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return
+[SCORE v86.9] Cap commentary/opinion 100->68 - WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return
+[PERF v71] WP lookup URL esistente: 0.50s
+[PERF v71] WP lookup event_key: 1.30s
+[FIX] Event key in history ma non confermata su WordPress: event:business:media-rights - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (0/75): Jim Cornette Mocks Ronda Rousey vs. Gina Carano Fight as a Staged Cash Grab
+[SKIP] URL già in history: https://www.ringsidenews.com/mick-foley-not-lock-aew-wwe-legends-deal-nears-expiration/
+[SKIP] Score sotto soglia editoriale (49/75): Jim Ross Admits He Gets Frustrated Over Decisions He Can't Change in AEW
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Jonathan Coachman Claims He Could Instantly Outperform Nick Aldis as WWE SmackDown GM
+[SKIP] Score sotto soglia editoriale (49/75): Jonathan Coachman Claims He Could Instantly Outperform Nick Aldis as WWE SmackDown GM
+[SCORE v88.3] v88.3 hard feature skip cap 100->45 - Ronda Rousey's Insane Payday for Netflix MMA Event Revealed
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - Ronda Rousey's Insane Payday for Netflix MMA Event Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/ronda-rousey-makes-gina-carano-tap-out-seconds-during-netflix-mma-special-event/
+[SCORE] 100 high - Kevin Nash Identifies Point Of No Return Regarding His Involvement With WWE | WWE/main roster, nomi forti titolo: triple h, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v62 categoria business, v71 freshness=0.447
+[SCORE] 100 high - JBL Recalls Past Conversation About Restructuring WWE Contract | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, infortunio, v62 business/dirigenza, v62 categoria business, v71 freshness=0.441
+[SCORE] 63 medium - Real Reason Behind Randy Orton's WWE Absence After WrestleMania 42 Revealed | WWE/main roster, top star titolo: randy orton, nomi forti lead: cody rhodes, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v86.9 cap commentary/opinion 100->68, v71 source reliability soft penalty, v71 freshness=0.796, v48 tier2: 55-74
+[SCORE] 63 medium - WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, non wrestling puro, v62 media rights/streaming, v62 categoria business, v86.9 cap commentary/opinion 100->68, v71 source reliability soft penalty, v71 freshness=0.756, v48 tier2: 55-74
+[SCORE] 55 low - Former WWE Star Scarlett Says She Pitched Throwback Women's Match Stipulation | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, floor WWE main roster storyline, v71 freshness=0.574, v48 tier2: 55-74
+[SCORE] 51 low - WWE Backlash Match Reportedly Lifted Elements From Recent Independent Show | WWE/main roster, nomi forti titolo: danhausen, WWE main roster + storyline/evento, rumor/backstage, v71 low freshness/novelty, v71 freshness=0.328, v48 tier3: 45-54 contestuale
+[SCORE] 43 low - Bully Ray Explains Why WWE NXT Is His Favorite Pro Wrestling Show | WWE/main roster, nomi forti titolo: bully ray, intervista/opinione, show settimanale, v71 freshness=0.568, v48 tier4: 40-44 riempimento controllato
+[SCORE] 40 low - Ronda Rousey's Insane Payday for Netflix MMA Event Revealed | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, non wrestling puro, v62 business/dirigenza, v62 categoria business, v88.3 hard feature skip cap 100->45, v71 source reliability soft penalty, v71 freshness=0.737, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 2 news >=90, 2 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 8 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Kevin Nash Identifies Point Of No Return Regarding His Involvement With WWE
+[BOT] semantic_id=kevin-nash-identifies-point-of-no-return-regarding-his-involvement-with-wwe
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=0.95 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta le opinioni personali di Kevin Nash espresse nel suo podcast 'Kliq This' riguardanti la gestione TKO e il suo rapporto con Triple H.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli e ruoli aziendali (Chief Content Officer) in inglese.; Tradurre 'release' come licenziamento.; Le citazioni devono essere fedeli e mantenere il tono colloquiale/forte dell'originale.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta le opinioni personali di Kevin Nash espresse nel suo podcast 'Kliq This' riguardanti la gestione TKO e il suo rapporto con Triple H.
+[PERF v71] analisi editoriale AI v72: 1.21s
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: triple h, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v62 categoria business, v72.3 cap opinion
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Kevin Nash Identifies Point Of No Return Regarding His Involvement With WWE
+[FIX v72.3] Event key business rimossa per OPINION/WWE: event:business:tko-financials -> event:rumor:kevin-nash-identifies-point-no-return-regarding-his-involvement
+[V71] story_signature=stable:triple_h|kevin_nash_identifies_point_of_no_return_regarding_his_invol|status|wwe semantic_status=new_story freshness=0.447
+[PERF v71] WP recent posts dedupe: 0.69s
+[SKIP] News core già pubblicata da altra fonte: Kevin Nash Identifies Point Of No Return Regarding His Involvement With WWE
+[SKIP] news_core_key=business-tko-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: JBL Recalls Past Conversation About Restructuring WWE Contract
+[BOT] semantic_id=jbl-recalls-past-conversation-about-restructuring-wwe-contract
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | Articolo che riporta un aneddoto retrospettivo raccontato da JBL in un podcast; non è una preview, né un report di un evento recente, né puramente business/corporate.
+[EDITORIAL v72.3] translation_notes=Non tradurre i nomi dei titoli (es. WWE Championship).; Tradurre 'restructuring contract' con 'ristrutturazione del contratto'.; 'Released' va reso con 'licenziato' o 'tagliato' nel contesto dei licenziamenti WWE.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Articolo che riporta un aneddoto retrospettivo raccontato da JBL in un podcast; non è una preview, né un report di un evento recente, né puramente business/corporate.
+[PERF v71] analisi editoriale AI v72: 1.24s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - JBL Recalls Past Conversation About Restructuring WWE Contract
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, infortunio, PLE/PPV, v62 infortunio/operazione, v62 categoria business
+[V71] story_signature=stable:jbl_recalls_past_conversation_about_restructuring|wwe_contract|status|wwe semantic_status=new_story freshness=0.557
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] News core già pubblicata da altra fonte: JBL Recalls Past Conversation About Restructuring WWE Contract
+[SKIP] news_core_key=business-tko-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Real Reason Behind Randy Orton's WWE Absence After WrestleMania 42 Revealed
+[BOT] semantic_id=real-reason-behind-randy-ortons-wwe-absence-after-wrestlemania-42-revealed
+[SCORE] iniziale=63 priority=medium
+[PERF v71] scraping articolo: 0.77s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.45s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza le cause fisiche di un'assenza basandosi su indiscrezioni di Dave Meltzer, configurandosi come un rumor di natura medica e di backstage.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Undisputed WWE Championship' e 'WrestleMania 42'.; Tradurre 'back injury' come 'infortunio alla schiena'.; Evitare calchi per le espressioni idiomatiche di Meltzer.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo analizza le cause fisiche di un'assenza basandosi su indiscrezioni di Dave Meltzer, configurandosi come un rumor di natura medica e di backstage.
+[PERF v71] analisi editoriale AI v72: 4.00s
+[SCORE v86.9] Cap commentary/opinion 100->68 - Real Reason Behind Randy Orton's WWE Absence After WrestleMania 42 Revealed
+[SCORE] raffinato=63 priority=medium | WWE/main roster, top star titolo: randy orton, nomi forti lead: cody rhodes, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v86.9 cap commentary/opinion 100->68, v72.3 cap rumor: niente boost raffinamento
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Real Reason Behind Randy Orton's WWE Absence After WrestleMania 42 Revealed
+[V71] story_signature=stable:dave_meltzer|randy_orton|cody_rhodes|return|wwe semantic_status=new_story freshness=0.796
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:cody-rhodes-injury - Real Reason Behind Randy Orton's WWE Absence After WrestleMania 42 Revealed
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=9
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 16.58s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/real-reason-behind-randy-ortons-wwe-absence-after-wrestlemania-42-revealed-35.jpg
+[MEDIA] Immagine caricata: 4819
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260517_175243_001_svelato-il-motivo-dellassenza-di-randy-orton-dopo-wrestlemania-42_4820_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4820
+[PERF v71] creazione post WordPress: 12.38s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/real-reason-behind-randy-ortons-wwe-absence-after-wrestlemania-42-revealed-35.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4819
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Real Reason Behind Randy Orton's WWE Absence After WrestleMa': 35.04s
+[OK] Pubblicato: Svelato il motivo dell'assenza di Randy Orton dopo WrestleMania 42
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260517_175244_001_svelato-il-motivo-dell-assenza-di-randy-orton-dopo-wrestlemania-42_c9a8d335_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Svelato il motivo dell'assenza di Randy Orton dopo WrestleMania 42
+[PUBLISHED REVIEW v87.1] Review outer salvata: Svelato il motivo dell'assenza di Randy Orton dopo WrestleMania 42
+[REPORT v87.6] Non scrivo history forte: non true-results/canonico (report:wwe-smackdown-2026-05-29)
+[BOT] Elaborazione: WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return
+[BOT] semantic_id=wwes-aaa-purchase-may-have-blocked-cain-velasquezs-wrestling-return
+[SCORE] iniziale=63 priority=medium
+[PERF v71] scraping articolo: 0.64s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=29, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=29, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.45s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | Si tratta di un rumor basato su affermazioni di Dave Meltzer riguardo i piani di carriera di Cain Velasquez e un presunto acquisto di AAA da parte della WWE.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (UFC Heavyweight Champion) in inglese.; Non tradurre 'purchase' come acquisto aziendale effettivo nel titolo se il testo suggerisce un'ipotesi, usare il condizionale.; Tradurre 'wars' come 'battaglie' o 'scontri duri', non 'guerre'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | Si tratta di un rumor basato su affermazioni di Dave Meltzer riguardo i piani di carriera di Cain Velasquez e un presunto acquisto di AAA da parte della WWE.
+[PERF v71] analisi editoriale AI v72: 1.12s
+[SCORE v86.9] Cap commentary/opinion 100->68 - WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return
+[SCORE v88.3] v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 63->54 - WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return
+[SCORE] raffinato=54 priority=low | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, non wrestling puro, v62 media rights/streaming, v62 categoria business, v86.9 cap commentary/opinion 100->68, v72.3 cap rumor: niente boost raffinamento, v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 63->54
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return
+[SKIP v86.6/legacy] low_score_pre_gemini:55: Former WWE Star Scarlett Says She Pitched Throwback Women's Match Stipulation
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:51: WWE Backlash Match Reportedly Lifted Elements From Recent Independent Show
+[PENDING] Coda salvata: 0 elementi
+[SKIP v88.4.2] Soft news sotto 65 dopo report importante: Bully Ray Explains Why WWE NXT Is His Favorite Pro Wrestling Show
+[SKIP v88.3] Feature storico/FIFA/venue/media call escluso: Ronda Rousey's Insane Payday for Netflix MMA Event Revealed
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 8 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-17 17:51:39_summary.json -> published_html_review/run_2026-05-17 17-51-39_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (333 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
+===== RUN END [2026-05-17 17:51:39] VERSION [v88_4_2_report_softfixes (7dce52b)] =====
+
