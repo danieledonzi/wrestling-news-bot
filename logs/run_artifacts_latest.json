@@ -1,12 +1,30 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-17 21:12:45",
-  "bot_version": "v89_editorial_report_quality (ed9d5b2)",
-  "git_sha": "ed9d5b21ca1abf4a96229a6e55d947ba46d737d2",
-  "created_at": "2026-05-17T21:13:07",
-  "published_count": 0,
-  "published_post_ids": [],
-  "published_artifacts": [],
+  "run_id": "2026-05-17 22:12:25",
+  "bot_version": "v89_editorial_report_quality (096fe6d)",
+  "git_sha": "096fe6d53a525f868fc6d455fc069943debc55a3",
+  "created_at": "2026-05-17T22:16:44",
+  "published_count": 2,
+  "published_post_ids": [
+    "4837",
+    "4840"
+  ],
+  "published_artifacts": [
+    {
+      "post_id": 4837,
+      "title": "Karrion Kross e Scarlett sul futuro: ipotesi ritorno in WWE o possibile approdo in AEW",
+      "source_url": "https://www.wrestlinginc.com/2175050/wwe-karrion-kross-scarlett-return-aew-debut/",
+      "html_file": "published/20260517_221524_001_karrion-kross-e-scarlett-sul-futuro-ipotesi-ritorno-in-wwe-o-possibile-approdo-in-aew_4837_final.html",
+      "metadata_file": "published/20260517_221524_001_karrion-kross-e-scarlett-sul-futuro-ipotesi-ritorno-in-wwe-o-possibile-approdo-in-aew_4837_metadata.json"
+    },
+    {
+      "post_id": 4840,
+      "title": "WWE: il motivo dietro le recenti sconfitte di Sol Ruca a Raw",
+      "source_url": "https://www.wrestlinginc.com/2174988/wwe-raw-sol-ruca-backstage-report-losing-matches/",
+      "html_file": "published/20260517_221642_002_wwe-il-motivo-dietro-le-recenti-sconfitte-di-sol-ruca-a-raw_4840_final.html",
+      "metadata_file": "published/20260517_221642_002_wwe-il-motivo-dietro-le-recenti-sconfitte-di-sol-ruca-a-raw_4840_metadata.json"
+    }
+  ],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",
