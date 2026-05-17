@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-17 14:26:55",
-  "last_bot_version": "v88_4_2_report_softfixes (d719751)",
-  "updated_at": "2026-05-17T14:28:20",
-  "total_items": 80,
+  "last_run_id": "2026-05-17 15:36:19",
+  "last_bot_version": "v88_4_2_report_softfixes (4f2dcbd)",
+  "updated_at": "2026-05-17T15:37:06",
+  "total_items": 81,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -644,6 +644,14 @@
       "original_html_file": "20260517_142804_001_adam-copeland-parla-dell-amicizia-e-dell-influenza-di-hulk-hogan_8946e80a_original.html",
       "final_html_file": "20260517_142804_001_adam-copeland-parla-dell-amicizia-e-dell-influenza-di-hulk-hogan_8946e80a_final.html",
       "metadata_file": "20260517_142804_001_adam-copeland-parla-dell-amicizia-e-dell-influenza-di-hulk-hogan_8946e80a_metadata.json"
+    },
+    {
+      "run_id": "2026-05-17 15:36:19",
+      "title": "Iyo Sky annuncia il matrimonio con la stella di NXT NARAKU",
+      "url": "https://www.ringsidenews.com/iyo-sky-announces-marriage-wwe-nxt-star-naraku/",
+      "original_html_file": "20260517_153702_001_iyo-sky-annuncia-il-matrimonio-con-la-stella-di-nxt-naraku_193591d5_original.html",
+      "final_html_file": "20260517_153702_001_iyo-sky-annuncia-il-matrimonio-con-la-stella-di-nxt-naraku_193591d5_final.html",
+      "metadata_file": "20260517_153702_001_iyo-sky-annuncia-il-matrimonio-con-la-stella-di-nxt-naraku_193591d5_metadata.json"
     }
   ]
 }
