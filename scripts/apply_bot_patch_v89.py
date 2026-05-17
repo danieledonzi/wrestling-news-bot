@@ -149,14 +149,45 @@ if (V89_SOFT_NEWS_TIGHTENING_ENABLED or V89_REPORT_TAIL_IMAGE_CLEANUP_ENABLED) a
 
 if V89_REPORT_TAIL_IMAGE_CLEANUP_ENABLED and "create_post_without_image" in globals():
     _ORIG_V89_create_post_without_image = create_post_without_image
+
     def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
         try:
-            if isinstance(data, dict) and "v8842_is_true_results_report" in globals() and v8842_is_true_results_report(sem_id=sem_id, event_key=event_key, title=data.get("titolo") or data.get("title") or "", url=url, data=data):
+            is_report = (
+                isinstance(data, dict)
+                and "v8842_is_true_results_report" in globals()
+                and v8842_is_true_results_report(
+                    sem_id=sem_id,
+                    event_key=event_key,
+                    title=data.get("titolo") or data.get("title") or "",
+                    url=url,
+                    data=data,
+                )
+            )
+
+            if is_report:
                 data = dict(data)
                 data["testo"] = v89_remove_tail_orphan_report_images_strict(data.get("testo", ""))
+
+                if inline_images:
+                    try:
+                        n = len(inline_images)
+                    except Exception:
+                        n = "unknown"
+                    print(f"[MEDIA v89] Report: inline_images residue non passate al publisher: {n}")
+                    inline_images = []
+
         except Exception as e:
             print(f"[WARN v89] report tail cleanup wrapper warning: {e}")
-        return _ORIG_V89_create_post_without_image(data, sem_id, url, embed_urls=embed_urls, event_key=event_key, inline_images=inline_images, featured_image_url=featured_image_url)
+
+        return _ORIG_V89_create_post_without_image(
+            data,
+            sem_id,
+            url,
+            embed_urls=embed_urls,
+            event_key=event_key,
+            inline_images=inline_images,
+            featured_image_url=featured_image_url,
+        )
 
 try:
     print("[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening")
