@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-17 11:37:07",
-  "last_bot_version": "v88_4_2_report_softfixes (c08160c)",
-  "updated_at": "2026-05-17T11:38:00",
-  "total_items": 78,
+  "last_run_id": "2026-05-17 12:59:45",
+  "last_bot_version": "v88_4_2_report_softfixes (ebd04b8)",
+  "updated_at": "2026-05-17T13:01:53",
+  "total_items": 79,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -628,6 +628,14 @@
       "original_html_file": "20260517_082725_001_layla-spiega-il-suo-improvviso-addio-alla-wwe-dopo-aver-rinnovato-il-contratto_5b556aa7_original.html",
       "final_html_file": "20260517_082725_001_layla-spiega-il-suo-improvviso-addio-alla-wwe-dopo-aver-rinnovato-il-contratto_5b556aa7_final.html",
       "metadata_file": "20260517_082725_001_layla-spiega-il-suo-improvviso-addio-alla-wwe-dopo-aver-rinnovato-il-contratto_5b556aa7_metadata.json"
+    },
+    {
+      "run_id": "2026-05-17 12:59:45",
+      "title": "Mick Foley non è sicuro in AEW: contratto WWE in scadenza",
+      "url": "https://www.ringsidenews.com/mick-foley-not-lock-aew-wwe-legends-deal-nears-expiration/",
+      "original_html_file": "20260517_130152_001_mick-foley-non-sicuro-in-aew-contratto-wwe-in-scadenza_e5fbc8de_original.html",
+      "final_html_file": "20260517_130152_001_mick-foley-non-sicuro-in-aew-contratto-wwe-in-scadenza_e5fbc8de_final.html",
+      "metadata_file": "20260517_130152_001_mick-foley-non-sicuro-in-aew-contratto-wwe-in-scadenza_e5fbc8de_metadata.json"
     }
   ]
 }

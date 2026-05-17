@@ -1,12 +1,22 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-17 11:37:07",
-  "bot_version": "v88_4_2_report_softfixes (c08160c)",
-  "git_sha": "c08160c98a69e1ca85aea805bae10b1dcd9c5192",
-  "created_at": "2026-05-17T11:38:00",
-  "published_count": 0,
-  "published_post_ids": [],
-  "published_artifacts": [],
+  "run_id": "2026-05-17 12:59:45",
+  "bot_version": "v88_4_2_report_softfixes (ebd04b8)",
+  "git_sha": "ebd04b8023ab6928a3a76b08baa3b5124e76f72f",
+  "created_at": "2026-05-17T13:01:53",
+  "published_count": 1,
+  "published_post_ids": [
+    "4802"
+  ],
+  "published_artifacts": [
+    {
+      "post_id": 4802,
+      "title": "Mick Foley non è sicuro in AEW: contratto WWE in scadenza",
+      "source_url": "https://www.ringsidenews.com/mick-foley-not-lock-aew-wwe-legends-deal-nears-expiration/",
+      "html_file": "published/20260517_130151_001_mick-foley-non-è-sicuro-in-aew-contratto-wwe-in-scadenza_4802_final.html",
+      "metadata_file": "published/20260517_130151_001_mick-foley-non-è-sicuro-in-aew-contratto-wwe-in-scadenza_4802_metadata.json"
+    }
+  ],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",
