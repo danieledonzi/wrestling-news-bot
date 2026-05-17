@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-17 17:51:39",
-  "last_bot_version": "v88_4_2_report_softfixes (7dce52b)",
-  "updated_at": "2026-05-17T17:52:47",
-  "total_items": 85,
+  "last_run_id": "2026-05-17 18:55:52",
+  "last_bot_version": "v89_editorial_report_quality (2f99742)",
+  "updated_at": "2026-05-17T18:57:23",
+  "total_items": 86,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -684,6 +684,14 @@
       "original_html_file": "20260517_175244_001_svelato-il-motivo-dell-assenza-di-randy-orton-dopo-wrestlemania-42_c9a8d335_original.html",
       "final_html_file": "20260517_175244_001_svelato-il-motivo-dell-assenza-di-randy-orton-dopo-wrestlemania-42_c9a8d335_final.html",
       "metadata_file": "20260517_175244_001_svelato-il-motivo-dell-assenza-di-randy-orton-dopo-wrestlemania-42_c9a8d335_metadata.json"
+    },
+    {
+      "run_id": "2026-05-17 18:55:52",
+      "title": "Eric Young: \"Il mio ritorno in TNA è stato un segnale contro la WWE dopo il licenziamento\"",
+      "url": "https://www.ringsidenews.com/eric-young-says-tna-return-middle-finger-wwe-final-run/",
+      "original_html_file": "20260517_185717_001_eric-young-il-mio-ritorno-in-tna-stato-un-segnale-contro-la-wwe-dopo-il-licenzia_909d5df1_original.html",
+      "final_html_file": "20260517_185717_001_eric-young-il-mio-ritorno-in-tna-stato-un-segnale-contro-la-wwe-dopo-il-licenzia_909d5df1_final.html",
+      "metadata_file": "20260517_185717_001_eric-young-il-mio-ritorno-in-tna-stato-un-segnale-contro-la-wwe-dopo-il-licenzia_909d5df1_metadata.json"
     }
   ]
 }

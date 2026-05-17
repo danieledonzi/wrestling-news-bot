@@ -1,20 +1,20 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-17 17:51:39",
-  "bot_version": "v88_4_2_report_softfixes (7dce52b)",
-  "git_sha": "7dce52bc91e0e9dee8b16e7eba8d90525933e03d",
-  "created_at": "2026-05-17T17:52:47",
+  "run_id": "2026-05-17 18:55:52",
+  "bot_version": "v89_editorial_report_quality (2f99742)",
+  "git_sha": "2f99742c201185a0bae3dafa09166f4ed6bb3b2e",
+  "created_at": "2026-05-17T18:57:24",
   "published_count": 1,
   "published_post_ids": [
-    "4820"
+    "4823"
   ],
   "published_artifacts": [
     {
-      "post_id": 4820,
-      "title": "Svelato il motivo dell'assenza di Randy Orton dopo WrestleMania 42",
-      "source_url": "https://www.ringsidenews.com/real-reason-behind-randy-ortons-wwe-absence-wrestlemania-42-revealed/",
-      "html_file": "published/20260517_175243_001_svelato-il-motivo-dellassenza-di-randy-orton-dopo-wrestlemania-42_4820_final.html",
-      "metadata_file": "published/20260517_175243_001_svelato-il-motivo-dellassenza-di-randy-orton-dopo-wrestlemania-42_4820_metadata.json"
+      "post_id": 4823,
+      "title": "Eric Young: \"Il mio ritorno in TNA è stato un segnale contro la WWE dopo il licenziamento\"",
+      "source_url": "https://www.ringsidenews.com/eric-young-says-tna-return-middle-finger-wwe-final-run/",
+      "html_file": "published/20260517_185715_001_eric-young-il-mio-ritorno-in-tna-è-stato-un-segnale-contro-la-wwe-dopo-il-licenziamento_4823_final.html",
+      "metadata_file": "published/20260517_185715_001_eric-young-il-mio-ritorno-in-tna-è-stato-un-segnale-contro-la-wwe-dopo-il-licenziamento_4823_metadata.json"
     }
   ],
   "errors": [],
