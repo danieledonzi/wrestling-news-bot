@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-17 05:59:29",
-  "last_bot_version": "v88_4_2_report_softfixes (34a7c7c)",
-  "updated_at": "2026-05-17T06:03:59",
-  "total_items": 77,
+  "last_run_id": "2026-05-17 08:25:30",
+  "last_bot_version": "v88_4_2_report_softfixes (4352c3a)",
+  "updated_at": "2026-05-17T08:28:19",
+  "total_items": 78,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -620,6 +620,14 @@
       "original_html_file": "20260517_060309_003_ronda-rousey-batte-gina-carano-per-sottomissione-nell-evento-netflix_70271573_original.html",
       "final_html_file": "20260517_060309_003_ronda-rousey-batte-gina-carano-per-sottomissione-nell-evento-netflix_70271573_final.html",
       "metadata_file": "20260517_060309_003_ronda-rousey-batte-gina-carano-per-sottomissione-nell-evento-netflix_70271573_metadata.json"
+    },
+    {
+      "run_id": "2026-05-17 08:25:30",
+      "title": "Layla spiega il suo improvviso addio alla WWE dopo aver rinnovato il contratto",
+      "url": "https://www.ringsidenews.com/layla-explains-why-she-abruptly-walked-away-wwe-signing-new-deal/",
+      "original_html_file": "20260517_082725_001_layla-spiega-il-suo-improvviso-addio-alla-wwe-dopo-aver-rinnovato-il-contratto_5b556aa7_original.html",
+      "final_html_file": "20260517_082725_001_layla-spiega-il-suo-improvviso-addio-alla-wwe-dopo-aver-rinnovato-il-contratto_5b556aa7_final.html",
+      "metadata_file": "20260517_082725_001_layla-spiega-il-suo-improvviso-addio-alla-wwe-dopo-aver-rinnovato-il-contratto_5b556aa7_metadata.json"
     }
   ]
 }
