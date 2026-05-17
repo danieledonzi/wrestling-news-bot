@@ -4362,3 +4362,323 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
 ===== RUN END [2026-05-17 15:36:19] VERSION [v88_4_2_report_softfixes (4f2dcbd)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+
+===== RUN START [2026-05-17 16:47:44] VERSION [v88_4_2_report_softfixes (1b7aa22)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 11 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE's Corey Graves Teases Carmella's Return To Professional Wrestling
+[SKIP] Score sotto soglia editoriale (24/75): WWE HOFer Jeff Jarrett Saw DSOTR Episode As 'Opportunity'
+[SKIP] Score sotto soglia editoriale (14/75): Jeff Jarrett Explains Why Tony Khan's AEW Booking Philosophy Is 'Brilliant'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172720/aew-wwe-adam-copeland-hulk-hogan-friendship/
+[SKIP] Score sotto soglia editoriale (20/75): AJ Styles Shares Thoughts On Pursuing WWE Production Role
+[SKIP] Score sotto soglia editoriale (24/75): Jim Ross Says WWE Nearly Held Event At Infamous Island Prison
+[SKIP] Score sotto soglia editoriale (20/75): Rikishi Doesn't Believe WWE Needs AI: We Need To Let 'Real Talent Come Through'
+[REPORT v87.2] Report confermato da history forte: report:aew-collision-2026-05-16
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:aew-collision-2026-05-16 - AEW Collision Results 5/16 - World Title & TBS Title On The Line, Tag Title Eliminator
+[SKIP] Score sotto soglia editoriale (31/75): WWE HOFer Eric Bischoff 'Thrilled' For Danhausen
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171776/wwe-nxt-ridge-holland-shawn-michaels/
+[SKIP] Score sotto soglia editoriale (32/75): AEW Women's World Champion Thekla Explains Why Tony Khan's Company Is A 'Perfect Fit'
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Kevin Nash Identifies Point Of No Return Regarding His Involvement With WWE
+[PERF v71] WP lookup event_key: 1.30s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (25/75): How WWE Tests Wrestlers 'To See If They Have An Attitude Problem,' Per Former Star
+[SKIP] Score sotto soglia editoriale (37/75): Athena Wins First-Ever Women's ROH Survival Of The Fittest Match, Extends Title Reign
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 48/55 - Eric Bischoff Recalls Paul Heyman's Love For Released WWE Star
+[SKIP] Score sotto soglia editoriale (48/75): Eric Bischoff Recalls Paul Heyman's Love For Released WWE Star
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Real Reason Behind Randy Orton's WWE Absence After WrestleMania 42 Revealed
+[SCORE v86.9] Cap commentary/opinion 100->68 - Real Reason Behind Randy Orton's WWE Absence After WrestleMania 42 Revealed
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:cody-rhodes-injury - Real Reason Behind Randy Orton's WWE Absence After WrestleMania 42 Revealed
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Paige Reveals Plans to Bring Back Devastating Signature Move in WWE
+[SKIP] URL già in history: https://www.ringsidenews.com/iyo-sky-announces-marriage-wwe-nxt-star-naraku/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Baron Corbin Has Been Discussed for Possible WWE Return Amid Danhausen Angle
+[SCORE v86.9] Cap commentary/opinion 100->68 - Baron Corbin Has Been Discussed for Possible WWE Return Amid Danhausen Angle
+[SKIP] Score sotto soglia editoriale (63/75): Baron Corbin Has Been Discussed for Possible WWE Return Amid Danhausen Angle
+[SKIP] Score sotto soglia editoriale (43/75): Gremlin House Wrestling Accuses Former Associate of Spreading False Narratives After Harassment Allegations
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Segment and Match Revealed for May 18 WWE RAW
+[SCORE v81.1] Cap future card announcement 62->62 - Segment and Match Revealed for May 18 WWE RAW
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 62->54 - Segment and Match Revealed for May 18 WWE RAW
+[SKIP] Score sotto soglia editoriale (49/75): Segment and Match Revealed for May 18 WWE RAW
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return
+[SCORE v86.9] Cap commentary/opinion 100->68 - WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return
+[PERF v71] WP lookup event_key: 1.32s
+[FIX] Event key in history ma non confermata su WordPress: event:business:media-rights - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (0/75): Jim Cornette Mocks Ronda Rousey vs. Gina Carano Fight as a Staged Cash Grab
+[SKIP] URL già in history: https://www.ringsidenews.com/mick-foley-not-lock-aew-wwe-legends-deal-nears-expiration/
+[SKIP] Score sotto soglia editoriale (49/75): Jim Ross Admits He Gets Frustrated Over Decisions He Can't Change in AEW
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Jonathan Coachman Claims He Could Instantly Outperform Nick Aldis as WWE SmackDown GM
+[SKIP] Score sotto soglia editoriale (49/75): Jonathan Coachman Claims He Could Instantly Outperform Nick Aldis as WWE SmackDown GM
+[SCORE v88.3] v88.3 hard feature skip cap 100->45 - Ronda Rousey's Insane Payday for Netflix MMA Event Revealed
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - Ronda Rousey's Insane Payday for Netflix MMA Event Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/ronda-rousey-makes-gina-carano-tap-out-seconds-during-netflix-mma-special-event/
+[FIX] Event key in history ma non confermata su WordPress: event:business:media-rights - provo a pubblicare
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-quietly-keeps-paul-wight-under-contract-new-deal/
+[SCORE] 100 high - Paige Reveals Plans to Bring Back Devastating Signature Move in WWE | WWE/main roster, nomi forti lead: nikki bella, brie bella, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v71 freshness=0.688
+[SCORE] 100 high - Kevin Nash Identifies Point Of No Return Regarding His Involvement With WWE | WWE/main roster, nomi forti titolo: triple h, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v62 categoria business, v71 freshness=0.46
+[SCORE] 100 high - JBL Recalls Past Conversation About Restructuring WWE Contract | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, infortunio, v62 business/dirigenza, v62 categoria business, v71 freshness=0.454
+[SCORE] 88 high - WWE's Corey Graves Teases Carmella's Return To Professional Wrestling | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 ritorno/debutto, v71 freshness=0.724
+[SCORE] 63 medium - Real Reason Behind Randy Orton's WWE Absence After WrestleMania 42 Revealed | WWE/main roster, top star titolo: randy orton, nomi forti lead: cody rhodes, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v86.9 cap commentary/opinion 100->68, v71 source reliability soft penalty, v71 freshness=0.81, v48 tier2: 55-74
+[SCORE] 63 medium - WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, non wrestling puro, v62 media rights/streaming, v62 categoria business, v86.9 cap commentary/opinion 100->68, v71 source reliability soft penalty, v71 freshness=0.769, v48 tier2: 55-74
+[SCORE] 63 medium - CM Punk Shows Up To Support Ronda Rousey During Netflix MMA Special Event | WWE/main roster, top star titolo: cm punk, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, non wrestling puro, v62 media rights/streaming, v62 categoria business, v71 source reliability soft penalty, v71 freshness=0.654, v48 tier2: 55-74
+[SCORE] 61 medium - Eric Bischoff Talks Recent Development That Makes Him Respect AEW's Tony Khan | AEW, v62 business/dirigenza, v62 categoria business, v71 freshness=0.606, v48 tier2: 55-74
+[SCORE] 55 low - Former WWE Star Scarlett Says She Pitched Throwback Women's Match Stipulation | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, floor WWE main roster storyline, v71 freshness=0.588, v48 tier2: 55-74
+[SCORE] 51 low - WWE Backlash Match Reportedly Lifted Elements From Recent Independent Show | WWE/main roster, nomi forti titolo: danhausen, WWE main roster + storyline/evento, rumor/backstage, v71 low freshness/novelty, v71 freshness=0.341, v48 tier3: 45-54 contestuale
+[MODE] Storm mode attiva: 3 news >=90, 4 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 12 | mode=storm | max nuove=5 | pending pubblicati=0
+[PERF v71] WP lookup URL esistente: 1.01s
+[BOT] Elaborazione: Paige Reveals Plans to Bring Back Devastating Signature Move in WWE
+[BOT] semantic_id=paige-reveals-plans-to-bring-back-devastating-signature-move-in-wwe
+[SCORE] iniziale=100 priority=high
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/paige-reveals-plans-bring-back-devastating-signature-move-wwe/
+[PERF v71] scraping articolo: 0.96s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=8, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/paige-reveals-plans-bring-back-devastating-signature-move-wwe/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.49s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta una dichiarazione specifica di Paige post-evento su una mossa futura. Nonostante citi un match imminente, il focus è il commento della wrestler.
+[EDITORIAL v72.3] translation_notes=Mantenere 'PTO' come nome della mossa.; 'Signature move' = mossa distintiva/finale.; 'Arsenal' = repertorio tecnico.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta una dichiarazione specifica di Paige post-evento su una mossa futura. Nonostante citi un match imminente, il focus è il commento della wrestler.
+[PERF v71] analisi editoriale AI v72: 9.91s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Paige Reveals Plans to Bring Back Devastating Signature Move in WWE
+[SCORE] raffinato=100 priority=high | WWE/main roster, nomi forti lead: nikki bella, brie bella, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto
+[V71] story_signature=stable:nikki_bella|brie_bella|paige_reveals_plans|story|wwe semantic_status=new_story freshness=0.688
+[PERF v71] WP recent posts dedupe: 1.21s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.55s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=8
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione scartato: editorial_word_ratio=0.66 (207/313) threshold=0.70
+[PERF v71] traduzione: 17.92s
+[FIX] Titolo non valido (ok) -> fallback automatico: Paige rivela plans to bring back devastating signature move in WWE
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Paige annuncia il possibile ritorno della sua celebre mossa finale in WWE
+[WARN v71.3] Quote check sotto soglia ma non bloccante: ['source quotes missing in translated article'] - Paige Reveals Plans to Bring Back Devastating Signature Move in WWE
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/Saraya/status/2055781111415152701
+[EMBED v87.3] Positional embed guard applicato: 1 modifiche
+[EMBED v88] Publish media guard: expected=1 before=0 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/paige-reveals-plans-to-bring-back-devastating-signature-move-in-wwe-59.jpg
+[MEDIA] Immagine caricata: 4810
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260517_164840_001_paige-annuncia-il-possibile-ritorno-della-sua-celebre-mossa-finale-in-wwe_4811_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4811
+[PERF v71] creazione post WordPress: 4.62s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/paige-reveals-plans-to-bring-back-devastating-signature-move-in-wwe-59.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4810
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Paige Reveals Plans to Bring Back Devastating Signature Move': 36.00s
+[OK] Pubblicato: Paige annuncia il possibile ritorno della sua celebre mossa finale in WWE
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260517_164841_001_paige-annuncia-il-possibile-ritorno-della-sua-celebre-mossa-finale-in-wwe_e3d4691d_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Paige annuncia il possibile ritorno della sua celebre mossa finale in WWE
+[PUBLISHED REVIEW v87.1] Review outer salvata: Paige annuncia il possibile ritorno della sua celebre mossa finale in WWE
+[BOT] Elaborazione: Kevin Nash Identifies Point Of No Return Regarding His Involvement With WWE
+[BOT] semantic_id=kevin-nash-identifies-point-of-no-return-regarding-his-involvement-with-wwe
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=0.95 | category=WWE (4) conf=0.95 model=gemini-3.1-flash-lite | Si tratta di un commento/opinione espresso da Kevin Nash nel suo podcast Kliq This riguardante il management WWE e il suo rapporto con Triple H.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli e ruoli (Chief Content Officer) in inglese.; Tradurre 'cut bait' come 'chiudere ogni rapporto' o 'voltare le spalle'.; Le citazioni di Nash devono essere tradotte in modo da preservare il tono aggressivo e informale originale senza edulcorarlo eccessivamente.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | Si tratta di un commento/opinione espresso da Kevin Nash nel suo podcast Kliq This riguardante il management WWE e il suo rapporto con Triple H.
+[PERF v71] analisi editoriale AI v72: 6.04s
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: triple h, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v62 categoria business, v72.3 cap opinion
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Kevin Nash Identifies Point Of No Return Regarding His Involvement With WWE
+[FIX v72.3] Event key business rimossa per OPINION/WWE: event:business:tko-financials -> event:rumor:kevin-nash-identifies-point-no-return-regarding-his-involvement
+[V71] story_signature=stable:triple_h|kevin_nash_identifies_point_of_no_return_regarding_his_invol|status|wwe semantic_status=new_story freshness=0.46
+[SKIP] News core già pubblicata da altra fonte: Kevin Nash Identifies Point Of No Return Regarding His Involvement With WWE
+[SKIP] news_core_key=business-tko-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[PERF v71] WP lookup URL esistente: 2.81s
+[BOT] Elaborazione: JBL Recalls Past Conversation About Restructuring WWE Contract
+[BOT] semantic_id=jbl-recalls-past-conversation-about-restructuring-wwe-contract
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta un aneddoto retrospettivo di JBL su una passata rinegoziazione contrattuale, citando anche recenti licenziamenti nel contesto WWE.
+[EDITORIAL v72.3] translation_notes=Non tradurre i nomi dei titoli (WWE Hall of Famer, Head of Talent Relations).; Mantenere le citazioni dirette tra virgolette, evitando parafrasi.; 'Restructure contract' va reso come 'ristrutturare il contratto', non 'taglio stipendio' letterale.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta un aneddoto retrospettivo di JBL su una passata rinegoziazione contrattuale, citando anche recenti licenziamenti nel contesto WWE.
+[PERF v71] analisi editoriale AI v72: 1.27s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - JBL Recalls Past Conversation About Restructuring WWE Contract
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, infortunio, PLE/PPV, v62 infortunio/operazione, v62 categoria business
+[V71] story_signature=stable:jbl_recalls_past_conversation_about_restructuring|wwe_contract|status|wwe semantic_status=new_story freshness=0.571
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] News core già pubblicata da altra fonte: JBL Recalls Past Conversation About Restructuring WWE Contract
+[SKIP] news_core_key=business-tko-wrestlemania
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: WWE's Corey Graves Teases Carmella's Return To Professional Wrestling
+[BOT] semantic_id=wwes-corey-graves-teases-carmellas-return-to-professional-wrestling
+[SCORE] iniziale=88 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni recenti di Corey Graves riguardo al futuro di Carmella dopo il suo addio alla WWE, trattandosi di una notizia basata su un'intervista e non di un evento futuro da presentare.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (SmackDown Women's Champion, 24/7 Champion) in inglese.; 'Departure' va tradotto come addio o conclusione del rapporto, non rilascio (essendo scaduto il contratto).; Tradurre 'killing it' come 'se la cava alla grande' o 'sta facendo un ottimo lavoro'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta dichiarazioni recenti di Corey Graves riguardo al futuro di Carmella dopo il suo addio alla WWE, trattandosi di una notizia basata su un'intervista e non di un evento futuro da presentare.
+[PERF v71] analisi editoriale AI v72: 1.30s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE's Corey Graves Teases Carmella's Return To Professional Wrestling
+[SCORE v79.1.3] Recovery post-show 62->88 - WWE's Corey Graves Teases Carmella's Return To Professional Wrestling
+[SCORE] raffinato=88 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v77 cap low editorial value, v79.1.3 post-show recovery 62->88
+[V71] story_signature=stable:corey_graves_teases_carmella|return_to_professional_wrestling|return|wwe semantic_status=new_story freshness=0.724
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwes-corey-graves-teases-carmellas-return-to-professional-wrestling/intro-1779035460.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 12.37s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Corey Graves ottimista sul possibile ritorno di Carmella sul ring
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/wwes-corey-graves-teases-carmellas-return-to-professional-wrestling/l-intro-1779035460.jpg
+[MEDIA] Immagine caricata: 4813
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260517_164914_002_corey-graves-ottimista-sul-possibile-ritorno-di-carmella-sul-ring_4814_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4814
+[PERF v71] creazione post WordPress: 5.12s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwes-corey-graves-teases-carmellas-return-to-professional-wrestling/l-intro-1779035460.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4813
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'WWE's Corey Graves Teases Carmella's Return To Professional ': 20.15s
+[OK] Pubblicato: Corey Graves ottimista sul possibile ritorno di Carmella sul ring
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260517_164915_002_corey-graves-ottimista-sul-possibile-ritorno-di-carmella-sul-ring_7c97bbdd_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Corey Graves ottimista sul possibile ritorno di Carmella sul ring
+[PUBLISHED REVIEW v87.1] Review outer salvata: Corey Graves ottimista sul possibile ritorno di Carmella sul ring
+[BOT] Elaborazione: Real Reason Behind Randy Orton's WWE Absence After WrestleMania 42 Revealed
+[BOT] semantic_id=real-reason-behind-randy-ortons-wwe-absence-after-wrestlemania-42-revealed
+[SCORE] iniziale=63 priority=medium
+[PERF v71] scraping articolo: 0.81s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.51s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza le ragioni di un'assenza basandosi su un report di Dave Meltzer, configurandosi come un aggiornamento di backstage/rumor su uno status di un atleta.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Undisputed WWE Championship'.; Evitare calchi per 'back injury' (usare 'infortunio alla schiena') e 'significativo' (usare 'serio' o 'grave').; Tradurre 'punt kick' mantenendo il termine tecnico.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo analizza le ragioni di un'assenza basandosi su un report di Dave Meltzer, configurandosi come un aggiornamento di backstage/rumor su uno status di un atleta.
+[PERF v71] analisi editoriale AI v72: 1.40s
+[SCORE v86.9] Cap commentary/opinion 100->68 - Real Reason Behind Randy Orton's WWE Absence After WrestleMania 42 Revealed
+[SCORE v88.3] v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 63->54 - Real Reason Behind Randy Orton's WWE Absence After WrestleMania 42 Revealed
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star titolo: randy orton, nomi forti lead: cody rhodes, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v86.9 cap commentary/opinion 100->68, v72.3 cap rumor: niente boost raffinamento, v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 63->54
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Real Reason Behind Randy Orton's WWE Absence After WrestleMania 42 Revealed
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Real Reason Behind Randy Orton's WWE Absence After WrestleMania 42 Revealed
+[BOT] Elaborazione: WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return
+[BOT] semantic_id=wwes-aaa-purchase-may-have-blocked-cain-velasquezs-wrestling-return
+[SCORE] iniziale=63 priority=medium
+[PERF v71] scraping articolo: 0.89s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=29, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=29, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.40s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | Si tratta di un'indiscrezione riportata da Dave Meltzer riguardo al passato e alle mancate opportunità di carriera di Cain Velasquez legate a manovre societarie.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (UFC Heavyweight Champion) in inglese.; Non tradurre 'WWE's AAA purchase' come acquisizione letterale se inteso come accordo/partnership, verificare bene il contesto societario.; 'Bare knuckle fighting' va tradotto come pugilato a mani nude.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | Si tratta di un'indiscrezione riportata da Dave Meltzer riguardo al passato e alle mancate opportunità di carriera di Cain Velasquez legate a manovre societarie.
+[PERF v71] analisi editoriale AI v72: 1.53s
+[SCORE v86.9] Cap commentary/opinion 100->68 - WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return
+[SCORE v88.3] v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 63->54 - WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return
+[SCORE] raffinato=54 priority=low | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, non wrestling puro, v62 media rights/streaming, v62 categoria business, v86.9 cap commentary/opinion 100->68, v72.3 cap rumor: niente boost raffinamento, v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 63->54
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return
+[SKIP v88.4.2] Soft news sotto 65 dopo report importante: CM Punk Shows Up To Support Ronda Rousey During Netflix MMA Special Event
+[PERF v71] WP lookup URL esistente: 0.86s
+[BOT] Elaborazione: Eric Bischoff Talks Recent Development That Makes Him Respect AEW's Tony Khan
+[BOT] semantic_id=eric-bischoff-talks-recent-development-that-makes-him-respect-aews-tony-khan
+[SCORE] iniziale=61 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta le opinioni e il commento di Eric Bischoff durante il suo podcast riguardo la gestione umana di Tony Khan verso i dipendenti in difficoltà.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Rebel' (nome d'arte), '83 Weeks' (nome podcast) o 'ALS' (SLA in italiano, ma meglio specificare).; Attenzione alla distinzione tra critica al booking e lode al lato umano: mantenere il tono rispettoso.; Quote da tradurre fedelmente.
+[EDITORIAL v73] final type=OPINION | category=AEW (5) | L'articolo riporta le opinioni e il commento di Eric Bischoff durante il suo podcast riguardo la gestione umana di Tony Khan verso i dipendenti in difficoltà.
+[PERF v71] analisi editoriale AI v72: 1.26s
+[SCORE v88.3] v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 63->54 - Eric Bischoff Talks Recent Development That Makes Him Respect AEW's Tony Khan
+[SCORE] raffinato=54 priority=low | AEW, infortunio, PLE/PPV, opinione generica, v62 infortunio/operazione, v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 63->54
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Eric Bischoff Talks Recent Development That Makes Him Respect AEW's Tony Khan
+[FIX v72.3] Event key business rimossa per OPINION/AEW: event:business:tony-khan -> event:rumor:eric-bischoff-talks-recent-development-that-makes-him-respect-s-tony-k
+[V71] story_signature=stable:eric_bischoff|tanea_brooks|tony_khan|story|aew semantic_status=new_story freshness=0.606
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/eric-bischoff-talks-recent-development-that-makes-him-respect-aews-tony-khan/intro-1778782289.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione applicato con gemini-3.1-flash-lite: editorial_word_ratio=0.67 (169/252) threshold=0.70
+[PRESERVE v81] Guardrail finale testo applicato
+[PERF v71] traduzione: 5.22s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Eric Bischoff elogia il supporto di Tony Khan a Rebel per la diagnosi di SLA
+[WARN v71.3] Quote check sotto soglia ma non bloccante: ['quote count ratio below threshold: 0.33'] - Eric Bischoff Talks Recent Development That Makes Him Respect AEW's Tony Khan
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/eric-bischoff-talks-recent-development-that-makes-him-respect-aews-tony-khan/l-intro-1778782289.jpg
+[MEDIA] Immagine caricata: 4816
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260517_164937_003_eric-bischoff-elogia-il-supporto-di-tony-khan-a-rebel-per-la-diagnosi-di-sla_4817_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4817
+[PERF v71] creazione post WordPress: 7.32s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/eric-bischoff-talks-recent-development-that-makes-him-respect-aews-tony-khan/l-intro-1778782289.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4816
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Eric Bischoff Talks Recent Development That Makes Him Respec': 15.10s
+[OK] Pubblicato: Eric Bischoff elogia il supporto di Tony Khan a Rebel per la diagnosi di SLA
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260517_164938_003_eric-bischoff-elogia-il-supporto-di-tony-khan-a-rebel-per-la-diagnosi-di-sla_6c5b71d9_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Eric Bischoff elogia il supporto di Tony Khan a Rebel per la diagnosi di SLA
+[PUBLISHED REVIEW v87.1] Review outer salvata: Eric Bischoff elogia il supporto di Tony Khan a Rebel per la diagnosi di SLA
+[SKIP v86.6/legacy] low_score_pre_gemini:55: Former WWE Star Scarlett Says She Pitched Throwback Women's Match Stipulation
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:51: WWE Backlash Match Reportedly Lifted Elements From Recent Independent Show
+[PENDING] Coda salvata: 0 elementi
+[SKIP v88.4.2] Soft news sotto 65 dopo report importante: Bully Ray Explains Why WWE NXT Is His Favorite Pro Wrestling Show
+[SKIP v88.3] Feature storico/FIFA/venue/media call escluso: Ronda Rousey's Insane Payday for Netflix MMA Event Revealed
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 12 candidati provati | mode=storm
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-17 16:47:44_summary.json -> published_html_review/run_2026-05-17 16-47-44_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (329 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
+===== RUN END [2026-05-17 16:47:44] VERSION [v88_4_2_report_softfixes (1b7aa22)] =====
+
