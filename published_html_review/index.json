@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-17 12:59:45",
-  "last_bot_version": "v88_4_2_report_softfixes (ebd04b8)",
-  "updated_at": "2026-05-17T13:01:53",
-  "total_items": 79,
+  "last_run_id": "2026-05-17 14:26:55",
+  "last_bot_version": "v88_4_2_report_softfixes (d719751)",
+  "updated_at": "2026-05-17T14:28:20",
+  "total_items": 80,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -636,6 +636,14 @@
       "original_html_file": "20260517_130152_001_mick-foley-non-sicuro-in-aew-contratto-wwe-in-scadenza_e5fbc8de_original.html",
       "final_html_file": "20260517_130152_001_mick-foley-non-sicuro-in-aew-contratto-wwe-in-scadenza_e5fbc8de_final.html",
       "metadata_file": "20260517_130152_001_mick-foley-non-sicuro-in-aew-contratto-wwe-in-scadenza_e5fbc8de_metadata.json"
+    },
+    {
+      "run_id": "2026-05-17 14:26:55",
+      "title": "Adam Copeland parla dell'amicizia e dell'influenza di Hulk Hogan",
+      "url": "https://www.wrestlinginc.com/2172720/aew-wwe-adam-copeland-hulk-hogan-friendship/",
+      "original_html_file": "20260517_142804_001_adam-copeland-parla-dell-amicizia-e-dell-influenza-di-hulk-hogan_8946e80a_original.html",
+      "final_html_file": "20260517_142804_001_adam-copeland-parla-dell-amicizia-e-dell-influenza-di-hulk-hogan_8946e80a_final.html",
+      "metadata_file": "20260517_142804_001_adam-copeland-parla-dell-amicizia-e-dell-influenza-di-hulk-hogan_8946e80a_metadata.json"
     }
   ]
 }
