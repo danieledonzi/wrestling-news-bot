@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-17 02:12:17",
-  "last_bot_version": "v88_4_2_report_softfixes (f6f4c5d)",
-  "updated_at": "2026-05-17T02:16:23",
-  "total_items": 74,
+  "last_run_id": "2026-05-17 05:59:29",
+  "last_bot_version": "v88_4_2_report_softfixes (34a7c7c)",
+  "updated_at": "2026-05-17T06:03:59",
+  "total_items": 77,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -596,6 +596,30 @@
       "original_html_file": "20260517_021623_001_aew-paul-wight-rinnova-il-contratto-con-la-federazione_efce9187_original.html",
       "final_html_file": "20260517_021623_001_aew-paul-wight-rinnova-il-contratto-con-la-federazione_efce9187_final.html",
       "metadata_file": "20260517_021623_001_aew-paul-wight-rinnova-il-contratto-con-la-federazione_efce9187_metadata.json"
+    },
+    {
+      "run_id": "2026-05-17 05:59:29",
+      "title": "AEW Collision 16 maggio 2026: Darby Allin difende l'AEW World Title contro Sammy Guevara, Red Velvet sfida Willow Nightingale per il TBS Championship",
+      "url": "https://www.wrestlinginc.com/2174642/aew-collision-results-may-16-world-tbs-titles-tag-eliminator/",
+      "original_html_file": "20260517_060156_001_aew-collision-16-maggio-2026-darby-allin-difende-l-aew-world-title-contro-sammy-_1cb279c9_original.html",
+      "final_html_file": "20260517_060156_001_aew-collision-16-maggio-2026-darby-allin-difende-l-aew-world-title-contro-sammy-_1cb279c9_final.html",
+      "metadata_file": "20260517_060156_001_aew-collision-16-maggio-2026-darby-allin-difende-l-aew-world-title-contro-sammy-_1cb279c9_metadata.json"
+    },
+    {
+      "run_id": "2026-05-17 05:59:29",
+      "title": "AEW Collision del 16 maggio 2026: risultati e momenti salienti",
+      "url": "https://www.wrestlinginc.com/2174642/aew-collision-results-may-16-world-tbs-titles-tag-eliminator/",
+      "original_html_file": "",
+      "final_html_file": "20260517_060156_002_aew-collision-del-16-maggio-2026-risultati-e-momenti-salienti_5191c342_final.html",
+      "metadata_file": "20260517_060156_002_aew-collision-del-16-maggio-2026-risultati-e-momenti-salienti_5191c342_metadata.json"
+    },
+    {
+      "run_id": "2026-05-17 05:59:29",
+      "title": "Ronda Rousey batte Gina Carano per sottomissione nell'evento Netflix",
+      "url": "https://www.ringsidenews.com/ronda-rousey-makes-gina-carano-tap-out-seconds-during-netflix-mma-special-event/",
+      "original_html_file": "20260517_060309_003_ronda-rousey-batte-gina-carano-per-sottomissione-nell-evento-netflix_70271573_original.html",
+      "final_html_file": "20260517_060309_003_ronda-rousey-batte-gina-carano-per-sottomissione-nell-evento-netflix_70271573_final.html",
+      "metadata_file": "20260517_060309_003_ronda-rousey-batte-gina-carano-per-sottomissione-nell-evento-netflix_70271573_metadata.json"
     }
   ]
 }

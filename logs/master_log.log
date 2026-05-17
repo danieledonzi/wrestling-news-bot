@@ -2868,3 +2868,338 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
 ===== RUN END [2026-05-17 02:12:17] VERSION [v88_4_2_report_softfixes (f6f4c5d)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+
+===== RUN START [2026-05-17 05:59:29] VERSION [v88_4_2_report_softfixes (34a7c7c)] =====
+[REPORT v86.6] History true-results override: rimossi 16 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 10 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): Rikishi Doesn't Believe WWE Needs AI: We Need To Let 'Real Talent Come Through'
+[PERF v71] WP strict report lookup: 1.78s
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:aew-collision-2026-05-16 - AEW Collision Results 5/16 - World Title & TBS Title On The Line, Tag Title Eliminator
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (31/75): WWE HOFer Eric Bischoff 'Thrilled' For Danhausen
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171776/wwe-nxt-ridge-holland-shawn-michaels/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (32/75): AEW Women's World Champion Thekla Explains Why Tony Khan's Company Is A 'Perfect Fit'
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Kevin Nash Identifies Point Of No Return Regarding His Involvement With WWE
+[PERF v71] WP lookup event_key: 1.20s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (31/75): How WWE Tests Wrestlers 'To See If They Have An Attitude Problem,' Per Former Star
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (37/75): Athena Wins First-Ever Women's ROH Survival Of The Fittest Match, Extends Title Reign
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (48/75): Eric Bischoff Recalls Paul Heyman's Love For Released WWE Star
+[SKIP] URL già in history: https://www.wrestlinginc.com/2171250/matt-hardy-kofimania-wwe-new-day/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - AEW's Swerve Strickland Attacks Bandido After ROH Supercard Of Honor World Title Match
+[SKIP] Score sotto soglia editoriale (50/75): AEW's Swerve Strickland Attacks Bandido After ROH Supercard Of Honor World Title Match
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (45/75): WWE's Jacob Fatu Clarifies Familial Relationship With Roman Reigns
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (54/75): Former WWE Star AJ Styles Explains Why It's Harder To Improvise A Match In Modern Era
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (14/75): Jeff Jarrett Says AEW Star Combines In-Ring & Character Work Better Than Anyone Else
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v81.1] Cap light name-driven item 55->55 - Jacob Fatu Talks WWE WrestleMania Feud, Drew McIntyre's Relationship With Bloodline
+[SKIP] URL già in history: https://www.wrestlinginc.com/2170628/wwe-braun-strowman-wyatt-family-main-roster-debut/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[PERF v71] WP lookup event_key: 1.16s
+[FIX] Event key in history ma non confermata su WordPress: event:business:media-rights - provo a pubblicare
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[FIX] Event key in history ma non confermata su WordPress: event:business:media-rights - provo a pubblicare
+[SKIP] URL già in history: https://www.ringsidenews.com/aew-quietly-keeps-paul-wight-under-contract-new-deal/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (48/75): Tiffany Nieves Cashes In Opportunity To Win NWA Women's World Championship
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:aew-collision-2026-05-16 - AEW Collision Results, Highlights and Key Moments for May 16, 2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (23/75): Bayley Makes It Clear She Wants To Wrestle For TNA
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (57/75): CJ Perry Hints at Moving to Hawaii in Red Bikini Video Drop
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Scarlett Bordeaux Drops Cryptic Message After Karrion Kross Wins Gold Outside WWE
+[SKIP] Score sotto soglia editoriale (49/75): Scarlett Bordeaux Drops Cryptic Message After Karrion Kross Wins Gold Outside WWE
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (57/75): Stephanie Vaquer's Ex-Boyfriend El Cuatrero Skips Out on Prison After 12-Year Sentence
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (19/75): RVD Explains Why WWE's Style Makes Wrestlers Better
+[REPORT v87.2] Report confermato da history forte: report:tna-impact-2026-05-15
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:tna-impact-2026-05-15 - TNA iMPACT Spoiler Results from Sacramento, California on May 15, 2026
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (57/75): Gremlin House Wrestling Promoter Accused of Harassment and Threats Involving Minor Wrestler
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (57/75): Charlotte Flair Reacts to Awkward Wardrobe Malfunction on May 15 WWE SmackDown
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (51/75): MJF Offers Sammy Guevara $500K To Take Out Darby Allin Before AEW Double Or Nothing
+[SKIP] URL già in history: https://www.ringsidenews.com/ted-dibiase-jr-addresses-claim-security-held-him-back-wrestlemania-42/
+[SCORE] 100 high - Ronda Rousey Makes Gina Carano Tap Out In Seconds During Netflix MMA Special Event | WWE/main roster, top star lead: cm punk, nomi forti lead: cm punk, business/contratti WWE-TKO, WWE main roster + storyline/evento, titolo/championship, combo top name lead + evento forte, PLE/PPV, non wrestling puro, v62 media rights/streaming, v71 freshness=0.674
+[SCORE] 100 high - Kevin Nash Identifies Point Of No Return Regarding His Involvement With WWE | WWE/main roster, nomi forti titolo: triple h, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v62 categoria business, v71 freshness=0.595
+[SCORE] 100 high - JBL Recalls Past Conversation About Restructuring WWE Contract | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, infortunio, v62 business/dirigenza, v62 categoria business, v71 freshness=0.589
+[SCORE] 100 high - WWE HOFer Eric Bischoff Lambasts 3 Hour Weekly Shows | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 freshness=0.398
+[SCORE] 80 high - AEW Collision Results 5/16 - World Title & TBS Title On The Line, Tag Title Eliminator | AEW, show settimanale, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.523
+[SCORE] 75 medium - AEW Collision Results, Highlights and Key Moments for May 16, 2026 | AEW, show settimanale, v62 media rights/streaming, v62 categoria business, v66 cap opinion/commentary storyline, v68 cap opinion senza news concreta, v75 hard results report, v77 hard report protected, v71 source reliability soft penalty, v71 freshness=0.616
+[SCORE] 69 medium - Kit Wilson Details Emotional Struggle After Being Left Out Of 2026 WWE Royal Rumble | WWE/main roster, top star lead: cody rhodes, nomi forti lead: cody rhodes, WWE main roster + storyline/evento, PLE/PPV, v71 freshness=0.441, v48 tier2: 55-74
+[SCORE] 63 medium - CM Punk Shows Up To Support Ronda Rousey During Netflix MMA Special Event | WWE/main roster, top star titolo: cm punk, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, non wrestling puro, v62 media rights/streaming, v62 categoria business, v71 source reliability soft penalty, v71 freshness=0.789, v48 tier2: 55-74
+[SCORE] 57 low - WWE Backlash Match Reportedly Lifted Elements From Recent Independent Show | WWE/main roster, nomi forti titolo: danhausen, WWE main roster + storyline/evento, rumor/backstage, v71 freshness=0.476, v48 tier2: 55-74
+[SCORE] 55 low - Jacob Fatu Talks WWE WrestleMania Feud, Drew McIntyre's Relationship With Bloodline | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, opinione generica, floor WWE main roster storyline, v81.1 cap light name-driven item 55->55, v71 freshness=0.416, v48 tier2: 55-74
+[REPORT v86.9] Priorita true-results in coda: report:aew-collision-2026-05-16 - AEW Collision Results 5/16 - World Title & TBS Title On The Line, Tag Title Eliminator
+[MODE] Storm mode attiva: 4 news >=90, 5 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 2
+[PERF v71] WP lookup URL esistente: 0.96s
+[BOT] Elaborazione: Layla Explains Why She Abruptly Walked Away From WWE After Signing New Deal
+[BOT] semantic_id=layla-explains-why-she-abruptly-walked-away-from-wwe-after-signing-new-deal
+[SCORE] iniziale=95 priority=high
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/layla-explains-why-she-abruptly-walked-away-wwe-signing-new-deal/
+[PERF v71] scraping articolo: 1.62s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=15, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/layla-explains-why-she-abruptly-walked-away-wwe-signing-new-deal/
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.40s
+[BOT] Embed trovati: 1
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo tratta un'intervista retrospettiva su eventi passati e la carriera di un'ex wrestler, configurandosi come un approfondimento biografico/storico non legato all'attualità.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (WWE Women's Championship, ecc.) in inglese.; Non tradurre 'walked away' come 'camminare via', usare 'ha deciso di lasciare/addio'.; Curare il tono colloquiale delle citazioni senza perdere il senso originale.
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo tratta un'intervista retrospettiva su eventi passati e la carriera di un'ex wrestler, configurandosi come un approfondimento biografico/storico non legato all'attualità.
+[PERF v71] analisi editoriale AI v72: 27.57s
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, breaking/major update, v62 business/dirigenza, v62 categoria business, v68 cap duro opinion/commentary
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Layla Explains Why She Abruptly Walked Away From WWE After Signing New Deal
+[PERF v71] WP lookup URL esistente: 0.62s
+[REPORT v86.8] Pending true-results non pubblicato: resta lavorabile via candidate queue report:aew-collision-2026-05-16
+[BOT] News candidate totali: 10 | mode=storm | max nuove=5 | pending pubblicati=0
+[REPORT v86.6] True results report autorizzato dal gate stretto: report:aew-collision-2026-05-16 - AEW Collision Results 5/16 - World Title & TBS Title On The Line, Tag Title Eliminator
+[REPORT v79.1.6] Titolo report da event_key: AEW Collision del 16 maggio 2026: risultati e momenti salienti
+[REPORT] Valuto fonti per report: report:aew-collision-2026-05-16
+[REPORT v86.9] Nessuna fonte aggregata valida: sources=0; provo candidato corrente
+[SCRAPE] Articolo results rilevato: testo completo (15207 caratteri)
+[REPORT v86.9] Fonte corrente valutata: len=15207 completeness=264 url=https://www.wrestlinginc.com/2174642/aew-collision-results-may-16-world-tbs-titles-tag-eliminator/
+[REPORT v86.9] Uso candidato corrente come fonte report: completeness=264 | https://www.wrestlinginc.com/2174642/aew-collision-results-may-16-world-tbs-titles-tag-eliminator/
+[REPORT] Fonte migliore: score_completezza=264 | www.wrestlinginc.com | AEW Collision del 16 maggio 2026: risultati e momenti salienti
+[REPORT v86.9] Processo report_ready senza re-entry nel report gate: report:aew-collision-2026-05-16
+[BOT] Elaborazione: AEW Collision del 16 maggio 2026: risultati e momenti salienti
+[BOT] semantic_id=report-aew-collision-2026-05-16
+[SCORE] iniziale=80 priority=high
+[REPORT] Uso testo prefetched per report maturo (15207 caratteri)
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=46, image=8, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=46, image=8, embed=0
+[SCORE] raffinato=80 priority=high | AEW, titolo/championship, show settimanale, v62 titolo/championship, v75 hard results report, v77 hard report protected, v77 report score protected
+[V71] story_signature=stable:darby_allin|aew_collision|title|aew semantic_status=new_story freshness=0.523
+[PERF v71] WP recent posts dedupe: 0.91s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.21s
+[MODEL v88] task=translate_report chain=gemini-2.5-pro,gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-pro
+[GEMINI] Modello gemini-2.5-pro scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[MODEL v88] Cooldown globale modello per la run: gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=46
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/aew-collision-results-may-16-world-tbs-titles-tag-eliminator/intro-1778985522.jpg
+[MEDIA] Immagine interna caricata: 4781
+[PERF v71] upload immagine interna: 2.69s
+[MEDIA] Immagine interna caricata: 4782
+[PERF v71] upload immagine interna: 1.59s
+[MEDIA] Immagine interna caricata: 4783
+[PERF v71] upload immagine interna: 1.63s
+[MEDIA] Immagine interna caricata: 4784
+[PERF v71] upload immagine interna: 1.42s
+[MEDIA] Immagine interna caricata: 4785
+[PERF v71] upload immagine interna: 1.58s
+[MEDIA] Immagine interna caricata: 4786
+[PERF v71] upload immagine interna: 1.55s
+[MEDIA] Immagine interna caricata: 4787
+[PERF v71] upload immagine interna: 1.35s
+[PERF v71] traduzione: 57.06s
+[TITLE v87.3] Titolo non pubblicabile dopo title chain: AEW Collision del 16 maggio 2026: risultati e momenti salienti
+[MODEL v88] task=emergency_title chain=gemini-2.5-flash,gemini-3-flash-preview,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-flash
+[TITLE v87.3] Titolo emergency Gemini (gemini-2.5-flash): AEW Collision 16 maggio 2026: Darby Allin difende l'AEW World Title contro Sammy Guevara, Red Velvet sfida Willow Nightingale per il TBS Championship
+[TITLE v88.4.2] Hard enforce titolo report: AEW Collision 16 maggio 2026: Darby Allin difende l'AEW World Title contro Sammy Guevara, Red Velvet sfida Willow Nightingale per il TBS Championship -> AEW Collision del 16 maggio 2026: risultati e momenti salienti
+[MEDIA] Immagine interna caricata: 4788
+[PERF v71] upload immagine interna: 1.79s
+[MEDIA] Immagine interna caricata: 4789
+[PERF v71] upload immagine interna: 0.99s
+[MEDIA] Immagine interna caricata: 4790
+[PERF v71] upload immagine interna: 0.86s
+[MEDIA v86.7] Reintegrate 3 immagini inline perse prima del publish: AEW Collision del 16 maggio 2026: risultati e momenti salienti
+[MEDIA v86.7] Preservate 20 immagini inline strutturate durante strip featured
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/aew-collision-results-may-16-world-tbs-titles-tag-eliminator/l-intro-1778985522.jpg
+[MEDIA] Immagine caricata: 4791
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260517_060155_001_aew-collision-del-16-maggio-2026-risultati-e-momenti-salienti_4792_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4792
+[PERF v71] creazione post WordPress: 17.90s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/aew-collision-results-may-16-world-tbs-titles-tag-eliminator/l-intro-1778985522.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4791
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'AEW Collision del 16 maggio 2026: risultati e momenti salien': 76.74s
+[OK] Pubblicato: AEW Collision 16 maggio 2026: Darby Allin difende l'AEW World Title contro Sammy Guevara, Red Velvet sfida Willow Nightingale per il TBS Championship
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260517_060156_001_aew-collision-16-maggio-2026-darby-allin-difende-l-aew-world-title-contro-sammy-_1cb279c9_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: AEW Collision 16 maggio 2026: Darby Allin difende l'AEW World Title contro Sammy Guevara, Red Velvet sfida Willow Nightingale per il TBS Championship
+[PUBLISHED REVIEW v87.1] Review outer salvata: AEW Collision 16 maggio 2026: Darby Allin difende l'AEW World Title contro Sammy Guevara, Red Velvet sfida Willow Nightingale per il TBS Championship
+[REPORT v87.2] Report confermato in history forte: report:aew-collision-2026-05-16 (publish_success)
+[PENDING] Coda salvata: 1 elementi
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260517_060156_002_aew-collision-del-16-maggio-2026-risultati-e-momenti-salienti_5191c342_*.html
+[PUBLISHED REVIEW v87.1] Review outer salvata: AEW Collision del 16 maggio 2026: risultati e momenti salienti
+[REPORT v87.2] Report confermato in history forte: report:aew-collision-2026-05-16 (publish_success)
+[SKIP v86.8] Già pubblicata davvero in questa run: AEW Collision Results, Highlights and Key Moments for May 16, 2026
+[BOT] Elaborazione: Ronda Rousey Makes Gina Carano Tap Out In Seconds During Netflix MMA Special Event
+[BOT] semantic_id=ronda-rousey-makes-gina-carano-tap-out-in-seconds-during-netflix-mma-special-event
+[SCORE] iniziale=100 priority=high
+[EMBED v87.1] Estratti 2 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=2 url=https://www.ringsidenews.com/ronda-rousey-makes-gina-carano-tap-out-seconds-during-netflix-mma-special-event/
+[PERF v71] scraping articolo: 0.86s
+[EMBED v87.1] Estratti 2 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=8, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=2 url=https://www.ringsidenews.com/ronda-rousey-makes-gina-carano-tap-out-seconds-during-netflix-mma-special-event/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 2 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.37s
+[BOT] Embed trovati: 2
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WORLD (8) conf=0.90 model=gemini-3.1-flash-lite | L'articolo descrive un evento di MMA già avvenuto e concluso, riportandone il risultato sportivo. Non è un report di wrestling né una preview.
+[EDITORIAL v72.3] translation_notes=Mantenere i termini tecnici dell'MMA (armbar, cage, tap out).; I nomi dei titoli WWE citati nel background devono restare in inglese (es. Raw Women's Championship).; Non tradurre 'Most Valuable Promotions' come nome proprio dell'evento.
+[CATEGORY v73] World downgrade: WORLD -> WWE | non wrestling internazionale
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo descrive un evento di MMA già avvenuto e concluso, riportandone il risultato sportivo. Non è un report di wrestling né una preview. | v73 world downgrade
+[PERF v71] analisi editoriale AI v72: 31.05s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Ronda Rousey Makes Gina Carano Tap Out In Seconds During Netflix MMA Special Event
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star lead: cm punk, nomi forti lead: cm punk, business/contratti WWE-TKO, WWE main roster + storyline/evento, titolo/championship, combo top name lead + evento forte, PLE/PPV, non wrestling puro, v62 media rights/streaming
+[V71] story_signature=stable:cm_punk|ronda_rousey_makes_gina_carano_tap_out_in_seconds_during_net|mma_special_event|title|wrestling semantic_status=new_story freshness=0.673
+[FIX] Event key in history ma non confermata su WordPress: event:business:media-rights - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=8
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 19.77s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Ronda Rousey batte Gina Carano per sottomissione nell'evento Netflix
+[EMBED v88] Publish media guard: expected=2 before=2 after=2 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/ronda-rousey-makes-gina-carano-tap-out-in-seconds-during-netflix-mma-special-event-01.png
+[MEDIA] Immagine caricata: 4794
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260517_060307_002_ronda-rousey-batte-gina-carano-per-sottomissione-nellevento-netflix_4795_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4795
+[PERF v71] creazione post WordPress: 18.17s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/ronda-rousey-makes-gina-carano-tap-out-in-seconds-during-netflix-mma-special-event-01.png
+[MEDIA v85] Riutilizzo immagine già caricata: 4794
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Ronda Rousey Makes Gina Carano Tap Out In Seconds During Net': 71.13s
+[OK] Pubblicato: Ronda Rousey batte Gina Carano per sottomissione nell'evento Netflix
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260517_060309_003_ronda-rousey-batte-gina-carano-per-sottomissione-nell-evento-netflix_70271573_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Ronda Rousey batte Gina Carano per sottomissione nell'evento Netflix
+[PUBLISHED REVIEW v87.1] Review outer salvata: Ronda Rousey batte Gina Carano per sottomissione nell'evento Netflix
+[BOT] Elaborazione: Kevin Nash Identifies Point Of No Return Regarding His Involvement With WWE
+[BOT] semantic_id=kevin-nash-identifies-point-of-no-return-regarding-his-involvement-with-wwe
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=0.95 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta le opinioni personali di Kevin Nash espresse nel suo podcast 'Kliq This' riguardo alla gestione TKO e al suo rapporto con Triple H.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli e ruoli (Chief Content Officer) in inglese.; Tradurre 'cut bait' come 'chiudere ogni rapporto'.; Attenzione a non tradurre 'pay cuts' come 'tagli di stipendio' letterali se il contesto implica rinegoziazioni, usare 'tagli agli ingaggi'.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta le opinioni personali di Kevin Nash espresse nel suo podcast 'Kliq This' riguardo alla gestione TKO e al suo rapporto con Triple H.
+[PERF v71] analisi editoriale AI v72: 8.60s
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: triple h, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v62 categoria business, v72.3 cap opinion
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Kevin Nash Identifies Point Of No Return Regarding His Involvement With WWE
+[FIX v72.3] Event key business rimossa per OPINION/WWE: event:business:tko-financials -> event:rumor:kevin-nash-identifies-point-no-return-regarding-his-involvement
+[V71] story_signature=stable:triple_h|kevin_nash_identifies_point_of_no_return_regarding_his_invol|status|wwe semantic_status=new_story freshness=0.595
+[SKIP] News core già pubblicata da altra fonte: Kevin Nash Identifies Point Of No Return Regarding His Involvement With WWE
+[SKIP] news_core_key=business-tko-wrestlemania
+[PENDING] Coda salvata: 1 elementi
+[PERF v71] WP lookup URL esistente: 0.66s
+[BOT] Elaborazione: JBL Recalls Past Conversation About Restructuring WWE Contract
+[BOT] semantic_id=jbl-recalls-past-conversation-about-restructuring-wwe-contract
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni di JBL tratte da un podcast riguardo un evento passato; non è una preview, né un report di un intero show, né strettamente business aziendale corrente.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'WrestleMania', 'The New Day', 'Something to Wrestle' o i nomi dei titoli/ruoli specifici.; 'Restructuring' va inteso come rinegoziazione.; 'Released' va reso con 'licenziamento' o 'tagli', mai 'rilascio'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta dichiarazioni di JBL tratte da un podcast riguardo un evento passato; non è una preview, né un report di un intero show, né strettamente business aziendale corrente.
+[PERF v71] analisi editoriale AI v72: 15.36s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - JBL Recalls Past Conversation About Restructuring WWE Contract
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, infortunio, PLE/PPV, v62 infortunio/operazione, v62 categoria business
+[V71] story_signature=stable:jbl_recalls_past_conversation_about_restructuring|wwe_contract|status|wwe semantic_status=new_story freshness=0.705
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] News core già pubblicata da altra fonte: JBL Recalls Past Conversation About Restructuring WWE Contract
+[SKIP] news_core_key=business-tko-wrestlemania
+[PENDING] Coda salvata: 1 elementi
+[PERF v71] WP lookup URL esistente: 0.63s
+[BOT] Elaborazione: WWE HOFer Eric Bischoff Lambasts 3 Hour Weekly Shows
+[BOT] semantic_id=wwe-hofer-eric-bischoff-lambasts-3-hour-weekly-shows
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=6, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta le opinioni critiche di Eric Bischoff espresse nel suo podcast sulla durata degli show televisivi di wrestling.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'HOFer' come 'membro della Hall of Fame', ma mantenere 'WWE HOFer' o usare 'la leggenda WWE'.; Evitare calchi per 'lambasts' (usa 'critica duramente') e 'vicious cycle' (usa 'circolo vizioso').; Mantenere i nomi di titoli e show originali.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta le opinioni critiche di Eric Bischoff espresse nel suo podcast sulla durata degli show televisivi di wrestling.
+[PERF v71] analisi editoriale AI v72: 8.23s
+[SCORE] raffinato=54 priority=low | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 business/dirigenza, v62 categoria business, v72.3 cap opinion
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - WWE HOFer Eric Bischoff Lambasts 3 Hour Weekly Shows
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - WWE HOFer Eric Bischoff Lambasts 3 Hour Weekly Shows
+[PERF v71] WP lookup URL esistente: 1.01s
+[BOT] Elaborazione: Kit Wilson Details Emotional Struggle After Being Left Out Of 2026 WWE Royal Rumble
+[BOT] semantic_id=kit-wilson-details-emotional-struggle-after-being-left-out-of-2026-wwe-royal-rumble
+[SCORE] iniziale=69 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni di Kit Wilson su un evento passato (Royal Rumble 2026) durante un podcast. È una news su un episodio già avvenuto, non una preview.
+[EDITORIAL v72.3] translation_notes=Mantenere Royal Rumble e nomi dei wrestler in inglese.; Non tradurre 'Royal Rumble' come 'rissa reale'.; Gestire il termine 'booked' come 'inserito nella card' o 'prenotato per lo show'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta dichiarazioni di Kit Wilson su un evento passato (Royal Rumble 2026) durante un podcast. È una news su un episodio già avvenuto, non una preview.
+[PERF v71] analisi editoriale AI v72: 12.97s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Kit Wilson Details Emotional Struggle After Being Left Out Of 2026 WWE Royal Rumble
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star lead: cody rhodes, nomi forti lead: cody rhodes, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, combo top name lead + evento forte, PLE/PPV, opinione generica, v68 cap duro opinion/commentary
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Kit Wilson Details Emotional Struggle After Being Left Out Of 2026 WWE Royal Rumble
+[SKIP v86.8] Già pubblicata davvero in questa run: CM Punk Shows Up To Support Ronda Rousey During Netflix MMA Special Event
+[PENDING] Coda salvata: 1 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:57: WWE Backlash Match Reportedly Lifted Elements From Recent Independent Show
+[PENDING] Coda salvata: 1 elementi
+[SKIP v88.4.2] Soft news sotto 65 dopo report importante: Jacob Fatu Talks WWE WrestleMania Feud, Drew McIntyre's Relationship With Bloodline
+[BOT] Pubblicati 2 articoli (0 pending + 2 nuove) su 9 candidati provati | mode=storm
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-17 05:59:29_summary.json -> published_html_review/run_2026-05-17 05-59-29_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (301 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
+===== RUN END [2026-05-17 05:59:29] VERSION [v88_4_2_report_softfixes (34a7c7c)] =====
+
