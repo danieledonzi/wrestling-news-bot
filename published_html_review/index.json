@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-17 22:12:25",
-  "last_bot_version": "v89_editorial_report_quality (096fe6d)",
-  "updated_at": "2026-05-17T22:16:43",
-  "total_items": 91,
+  "last_run_id": "2026-05-17 23:27:03",
+  "last_bot_version": "v89_editorial_report_quality (6a65f4b)",
+  "updated_at": "2026-05-17T23:28:52",
+  "total_items": 92,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -732,6 +732,14 @@
       "original_html_file": "20260517_221643_002_wwe-il-motivo-dietro-le-recenti-sconfitte-di-sol-ruca-a-raw_b5fd5698_original.html",
       "final_html_file": "20260517_221643_002_wwe-il-motivo-dietro-le-recenti-sconfitte-di-sol-ruca-a-raw_b5fd5698_final.html",
       "metadata_file": "20260517_221643_002_wwe-il-motivo-dietro-le-recenti-sconfitte-di-sol-ruca-a-raw_b5fd5698_metadata.json"
+    },
+    {
+      "run_id": "2026-05-17 23:27:03",
+      "title": "Iyo Sky spiega perché ha reso pubblico il matrimonio con NARAKU",
+      "url": "https://www.ringsidenews.com/iyo-sky-explains-why-she-naraku-finally-went-public-marriage/",
+      "original_html_file": "20260517_232852_001_iyo-sky-spiega-perch-ha-reso-pubblico-il-matrimonio-con-naraku_1ae7dbd9_original.html",
+      "final_html_file": "20260517_232852_001_iyo-sky-spiega-perch-ha-reso-pubblico-il-matrimonio-con-naraku_1ae7dbd9_final.html",
+      "metadata_file": "20260517_232852_001_iyo-sky-spiega-perch-ha-reso-pubblico-il-matrimonio-con-naraku_1ae7dbd9_metadata.json"
     }
   ]
 }

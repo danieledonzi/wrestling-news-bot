@@ -1,28 +1,20 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-17 22:12:25",
-  "bot_version": "v89_editorial_report_quality (096fe6d)",
-  "git_sha": "096fe6d53a525f868fc6d455fc069943debc55a3",
-  "created_at": "2026-05-17T22:16:44",
-  "published_count": 2,
+  "run_id": "2026-05-17 23:27:03",
+  "bot_version": "v89_editorial_report_quality (6a65f4b)",
+  "git_sha": "6a65f4bb8a57d63250e6eb163ef9d932e5d59cc2",
+  "created_at": "2026-05-17T23:28:53",
+  "published_count": 1,
   "published_post_ids": [
-    "4837",
-    "4840"
+    "4843"
   ],
   "published_artifacts": [
     {
-      "post_id": 4837,
-      "title": "Karrion Kross e Scarlett sul futuro: ipotesi ritorno in WWE o possibile approdo in AEW",
-      "source_url": "https://www.wrestlinginc.com/2175050/wwe-karrion-kross-scarlett-return-aew-debut/",
-      "html_file": "published/20260517_221524_001_karrion-kross-e-scarlett-sul-futuro-ipotesi-ritorno-in-wwe-o-possibile-approdo-in-aew_4837_final.html",
-      "metadata_file": "published/20260517_221524_001_karrion-kross-e-scarlett-sul-futuro-ipotesi-ritorno-in-wwe-o-possibile-approdo-in-aew_4837_metadata.json"
-    },
-    {
-      "post_id": 4840,
-      "title": "WWE: il motivo dietro le recenti sconfitte di Sol Ruca a Raw",
-      "source_url": "https://www.wrestlinginc.com/2174988/wwe-raw-sol-ruca-backstage-report-losing-matches/",
-      "html_file": "published/20260517_221642_002_wwe-il-motivo-dietro-le-recenti-sconfitte-di-sol-ruca-a-raw_4840_final.html",
-      "metadata_file": "published/20260517_221642_002_wwe-il-motivo-dietro-le-recenti-sconfitte-di-sol-ruca-a-raw_4840_metadata.json"
+      "post_id": 4843,
+      "title": "Iyo Sky spiega perché ha reso pubblico il matrimonio con NARAKU",
+      "source_url": "https://www.ringsidenews.com/iyo-sky-explains-why-she-naraku-finally-went-public-marriage/",
+      "html_file": "published/20260517_232851_001_iyo-sky-spiega-perché-ha-reso-pubblico-il-matrimonio-con-naraku_4843_final.html",
+      "metadata_file": "published/20260517_232851_001_iyo-sky-spiega-perché-ha-reso-pubblico-il-matrimonio-con-naraku_4843_metadata.json"
     }
   ],
   "errors": [],
