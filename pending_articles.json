@@ -63,7 +63,11 @@
       "v62 media rights/streaming",
       "v62 categoria business",
       "v71 source reliability soft penalty",
-      "v71 freshness=0.577"
+      "v71 freshness=0.577",
+      "v71 freshness=0.57",
+      "v66 cap opinion/commentary storyline",
+      "v68 cap opinion senza news concreta",
+      "v71 freshness=0.663"
     ],
     "is_breaking": false,
     "breaking_expires_at": 0,
@@ -71,7 +75,7 @@
     "reason": "report_hold_until_0630",
     "created_at": 1778972453.0,
     "first_seen": 1778972453.0,
-    "last_seen": 1778975099.8455753,
+    "last_seen": 1778984090.405551,
     "not_before": 1778992200.0,
     "hold_until_label": "06:30 Europe/Rome",
     "attempts": 0,
@@ -81,7 +85,7 @@
         "title": "AEW Collision Results 5/16 - World Title & TBS Title On The Line, Tag Title Eliminator",
         "source": "www.wrestlinginc.com",
         "first_seen": 1778972453.0,
-        "last_seen": 1778975099.8441486,
+        "last_seen": 1778984090.0621977,
         "last_text_len": 0
       },
       {
@@ -89,7 +93,7 @@
         "title": "AEW Collision Results, Highlights and Key Moments for May 16, 2026",
         "source": "www.ringsidenews.com",
         "first_seen": 1778974260.0,
-        "last_seen": 1778975100.2010243,
+        "last_seen": 1778984090.405551,
         "last_text_len": 0
       }
     ],
