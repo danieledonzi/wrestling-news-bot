@@ -5072,3 +5072,258 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
 ===== RUN END [2026-05-17 18:55:52] VERSION [v89_editorial_report_quality (2f99742)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+
+===== RUN START [2026-05-17 20:01:57] VERSION [v89_editorial_report_quality (1ab1ca9)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 11 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (16/75): AEW's Adam Copeland Discusses Becoming A Mentor After WWE HOFer Did The Same For Him
+[SCORE v81.1] Cap light name-driven item 55->55 - Ex-WWE Star Ridge Holland Recalls Putting Together Bloodline WarGames Match In 2022
+[SCORE v81.1] Cap light name-driven item 55->55 - Myles Borne Reflects On WWE Application & Tryout Process, Early Days In NXT
+[SKIP] Score sotto soglia editoriale (39/75): Bully Ray Is Worried About Sol Ruca's Finisher Following Loss To IYO SKY On WWE Raw
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[SKIP] Score sotto soglia editoriale (54/75): Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[SCORE v81.1] Cap light name-driven item 31->31 - Sandman Reflects On Hard Partying Days In ECW, Overdosing
+[SKIP] Score sotto soglia editoriale (31/75): Sandman Reflects On Hard Partying Days In ECW, Overdosing
+[SKIP] Score sotto soglia editoriale (42/75): WWE's IYO SKY Announces Marriage To Former IWGP Heavyweight Champion
+[SKIP] URL già in history: https://www.wrestlinginc.com/2174915/wwe-corey-graves-carmella-teases-return/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173128/eric-bischoff-respects-aew-tony-khan-rebel/
+[SKIP] Score sotto soglia editoriale (24/75): WWE HOFer Jeff Jarrett Saw DSOTR Episode As 'Opportunity'
+[SKIP] Score sotto soglia editoriale (14/75): Jeff Jarrett Explains Why Tony Khan's AEW Booking Philosophy Is 'Brilliant'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2172720/aew-wwe-adam-copeland-hulk-hogan-friendship/
+[SKIP] Score sotto soglia editoriale (20/75): AJ Styles Shares Thoughts On Pursuing WWE Production Role
+[SKIP] Score sotto soglia editoriale (24/75): Jim Ross Says WWE Nearly Held Event At Infamous Island Prison
+[SKIP] Score sotto soglia editoriale (20/75): Rikishi Doesn't Believe WWE Needs AI: We Need To Let 'Real Talent Come Through'
+[REPORT v87.2] Report confermato da history forte: report:aew-collision-2026-05-16
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:aew-collision-2026-05-16 - AEW Collision Results 5/16 - World Title & TBS Title On The Line, Tag Title Eliminator
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - NARAKU Reveals Real Reason He Left NJPW for WWE
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - AJ Styles Calls Out False Wikipedia Claim About His Wrestling Career
+[SKIP] Score sotto soglia editoriale (49/75): AJ Styles Calls Out False Wikipedia Claim About His Wrestling Career
+[SKIP] URL già in history: https://www.ringsidenews.com/eric-young-says-tna-return-middle-finger-wwe-final-run/
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 46/55 - AJ Styles Addresses Possibility of Joining WWE's Creative Team
+[SKIP] Score sotto soglia editoriale (46/75): AJ Styles Addresses Possibility of Joining WWE's Creative Team
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - AJ Styles Defends NARAKU Starting in WWE NXT Amid Fan Backlash
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - AJ Styles Defends NARAKU Starting in WWE NXT Amid Fan Backlash
+[SKIP] Score sotto soglia editoriale (49/75): AJ Styles Defends NARAKU Starting in WWE NXT Amid Fan Backlash
+[SKIP] URL già in history: https://www.ringsidenews.com/real-reason-behind-randy-ortons-wwe-absence-wrestlemania-42-revealed/
+[SKIP] URL già in history: https://www.ringsidenews.com/paige-reveals-plans-bring-back-devastating-signature-move-wwe/
+[SKIP] URL già in history: https://www.ringsidenews.com/iyo-sky-announces-marriage-wwe-nxt-star-naraku/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Baron Corbin Has Been Discussed for Possible WWE Return Amid Danhausen Angle
+[SCORE v86.9] Cap commentary/opinion 100->68 - Baron Corbin Has Been Discussed for Possible WWE Return Amid Danhausen Angle
+[SKIP] Score sotto soglia editoriale (63/75): Baron Corbin Has Been Discussed for Possible WWE Return Amid Danhausen Angle
+[SKIP] Score sotto soglia editoriale (43/75): Gremlin House Wrestling Accuses Former Associate of Spreading False Narratives After Harassment Allegations
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Segment and Match Revealed for May 18 WWE RAW
+[SCORE v81.1] Cap future card announcement 62->62 - Segment and Match Revealed for May 18 WWE RAW
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 62->54 - Segment and Match Revealed for May 18 WWE RAW
+[SKIP] Score sotto soglia editoriale (49/75): Segment and Match Revealed for May 18 WWE RAW
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return
+[SCORE v86.9] Cap commentary/opinion 100->68 - WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return
+[PERF v71] WP lookup URL esistente: 0.87s
+[PERF v71] WP lookup event_key: 1.69s
+[FIX] Event key in history ma non confermata su WordPress: event:business:media-rights - provo a pubblicare
+[SCORE] 85 high - John Cena Points To WWE NXT Star Mason Rook When Asked About Future World Champions | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, titolo/championship, show settimanale, v71 freshness=0.603
+[SCORE] 76 medium - Paul Wight Admits WWE Pyro Once Made Him 'Tinkle' On Himself | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.577
+[SCORE] 73 medium - Independent Wrestler MB Funk Passes Away | morte, PLE/PPV, v62 evento morte/storico, v62 reazione/tributo con cap, v71 source reliability soft penalty, v71 freshness=0.696, v48 tier5: v71 major story bypass
+[SCORE] 66 medium - Backstage Report On Sol Ruca Losing Back-To-Back Matches On WWE Raw | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, rumor/backstage, show settimanale, v71 freshness=0.6, v48 tier2: 55-74
+[SCORE] 63 medium - WWE's AAA Purchase May Have Blocked Cain Velasquez's Wrestling Return | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, non wrestling puro, v62 media rights/streaming, v62 categoria business, v86.9 cap commentary/opinion 100->68, v71 source reliability soft penalty, v71 freshness=0.729, v48 tier2: 55-74
+[SCORE] 55 low - Ex-WWE Star Ridge Holland Recalls Putting Together Bloodline WarGames Match In 2022 | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v81.1 cap light name-driven item 55->55, v71 freshness=0.597, v48 tier2: 55-74
+[SCORE] 55 low - Myles Borne Reflects On WWE Application & Tryout Process, Early Days In NXT | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, opinione generica, floor WWE main roster storyline, v81.1 cap light name-driven item 55->55, v71 freshness=0.591, v48 tier2: 55-74
+[SCORE] 55 low - Former WWE Star Scarlett Says She Pitched Throwback Women's Match Stipulation | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, floor WWE main roster storyline, v71 freshness=0.547, v48 tier2: 55-74
+[SCORE] 49 low - NARAKU Reveals Real Reason He Left NJPW for WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, opinione generica, v62 ritorno/debutto, v66 cap opinion/commentary storyline, v68 cap duro opinion/commentary, v71 source reliability soft penalty, v71 freshness=0.693, v48 tier3: 45-54 contestuale
+[SCORE] 49 low - IYO SKY Explains Why She And NARAKU Finally Went Public With Marriage | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, developmental secondario, v62 ritorno/debutto, v66 cap opinion/commentary storyline, v68 cap duro opinion/commentary, v71 source reliability soft penalty, v71 freshness=0.686, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 11 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: John Cena Points To WWE NXT Star Mason Rook When Asked About Future World Champions
+[BOT] semantic_id=john-cena-points-to-wwe-nxt-star-mason-rook-when-asked-about-future-world-champions
+[SCORE] iniziale=85 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=NXT (6) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni avvenute di John Cena su un talento NXT. Non è una preview ma una notizia su un'intervista già rilasciata.
+[EDITORIAL v72.3] translation_notes=Mantenere 'John Cena Classic' come nome evento.; Non tradurre nomi di finisher o gimmick.; Tradurre 'signee' con 'nuovo acquisto' o 'sotto contratto'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=NXT (6) | L'articolo riporta dichiarazioni avvenute di John Cena su un talento NXT. Non è una preview ma una notizia su un'intervista già rilasciata.
+[PERF v71] analisi editoriale AI v72: 1.04s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - John Cena Points To WWE NXT Star Mason Rook When Asked About Future World Champions
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: john cena, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, PLE/PPV, v62 titolo/championship
+[V71] story_signature=stable:john_cena|john_cena_points_to|nxt_star_mason_rook_when_asked_about_future_world_champions|contract|wwe semantic_status=new_story freshness=0.836
+[PERF v71] WP recent posts dedupe: 0.72s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.05s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/john-cena-points-to-wwe-nxt-star-mason-rook-when-asked-about-future-world-champions/intro-1779045856.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 25.75s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): John Cena indica Mason Rook di NXT come futuro World Champion
+[WARN v71.3] Quote check sotto soglia ma non bloccante: ['quote count ratio below threshold: 0.50'] - John Cena Points To WWE NXT Star Mason Rook When Asked About Future World Champions
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/john-cena-points-to-wwe-nxt-star-mason-rook-when-asked-about-future-world-champions/l-intro-1779045856.jpg
+[MEDIA] Immagine caricata: 4825
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260517_200254_001_john-cena-indica-mason-rook-di-nxt-come-futuro-world-champion_4826_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4826
+[PERF v71] creazione post WordPress: 7.71s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/john-cena-points-to-wwe-nxt-star-mason-rook-when-asked-about-future-world-champions/l-intro-1779045856.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4825
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'John Cena Points To WWE NXT Star Mason Rook When Asked About': 36.56s
+[OK] Pubblicato: John Cena indica Mason Rook di NXT come futuro World Champion
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260517_200255_001_john-cena-indica-mason-rook-di-nxt-come-futuro-world-champion_cb15a258_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: John Cena indica Mason Rook di NXT come futuro World Champion
+[PUBLISHED REVIEW v87.1] Review outer salvata: John Cena indica Mason Rook di NXT come futuro World Champion
+[SEO v89] Report non assorbe sviluppo autonomo forte: Paul Wight Admits WWE Pyro Once Made Him 'Tinkle' On Himself
+[BOT] Elaborazione: Paul Wight Admits WWE Pyro Once Made Him 'Tinkle' On Himself
+[BOT] semantic_id=paul-wight-admits-wwe-pyro-once-made-him-tinkle-on-himself
+[SCORE] iniziale=76 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/paul-wight-admits-wwe-pyro-once-made-him-tinkle-himself/
+[PERF v71] scraping articolo: 0.76s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=12, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/paul-wight-admits-wwe-pyro-once-made-him-tinkle-himself/
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.40s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=WORLD (8) conf=0.90 model=gemini-3.1-flash-lite | L'articolo è un aneddoto/curiosità su Paul Wight (attualmente AEW, ma riferito al passato in WWE). Non rientra in categorie di news correnti o report.
+[EDITORIAL v72.3] translation_notes=Mantenere il tono umoristico dell'aneddoto. 'Tinkle' va reso in modo colloquiale ma non volgare. 'Pyro' va mantenuto in inglese, termine tecnico comune. Non tradurre i nomi degli s
+[CATEGORY v73] World downgrade: WORLD -> WWE | non wrestling internazionale
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo è un aneddoto/curiosità su Paul Wight (attualmente AEW, ma riferito al passato in WWE). Non rientra in categorie di news correnti o report. | v73 world downgrade
+[PERF v71] analisi editoriale AI v72: 6.58s
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 81->54 - Paul Wight Admits WWE Pyro Once Made Him 'Tinkle' On Himself
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, v88.2 cap OTHER/feature non-news 81->54
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Paul Wight Admits WWE Pyro Once Made Him 'Tinkle' On Himself
+[V71] story_signature=stable:paul_wight_admits|wwe_pyro_once_made_him|on_himself|story|wwe semantic_status=new_story freshness=0.577
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=12
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: Expecting ',' delimiter: line 1 column 550 (char 549)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello gemini-2.5-flash-lite scartato: Expecting ',' delimiter: line 1 column 377 (char 376)
+[GEMINI] Uso modello: gemini-2.5-flash
+[PRESERVE v83] Repair anti-omissione applicato con gemini-2.5-flash: editorial_word_ratio=0.66 (238/363) threshold=0.70
+[PRESERVE v81] Guardrail finale testo applicato
+[PERF v71] traduzione: 56.32s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Paul Wight: "I pyro della WWE mi hanno fatto quasi farmela addosso"
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://www.youtube.com/watch?v=e_UFq-YgBd8
+[EMBED v87.3] Positional embed guard applicato: 1 modifiche
+[EMBED v88] Publish media guard: expected=1 before=0 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/paul-wight-admits-wwe-pyro-once-made-him-tinkle-on-himself-20.jpg
+[MEDIA] Immagine caricata: 4828
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260517_200418_002_paul-wight-i-pyro-della-wwe-mi-hanno-fatto-quasi-farmela-addosso_4829_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4829
+[PERF v71] creazione post WordPress: 17.43s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/paul-wight-admits-wwe-pyro-once-made-him-tinkle-on-himself-20.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4828
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Paul Wight Admits WWE Pyro Once Made Him 'Tinkle' On Himself': 82.36s
+[OK] Pubblicato: Paul Wight: "I pyro della WWE mi hanno fatto quasi farmela addosso"
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260517_200419_002_paul-wight-i-pyro-della-wwe-mi-hanno-fatto-quasi-farmela-addosso_931b0082_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Paul Wight: "I pyro della WWE mi hanno fatto quasi farmela addosso"
+[PUBLISHED REVIEW v87.1] Review outer salvata: Paul Wight: "I pyro della WWE mi hanno fatto quasi farmela addosso"
+[SEO v89] Report non assorbe sviluppo autonomo forte: Independent Wrestler MB Funk Passes Away
+[BOT] Elaborazione: Independent Wrestler MB Funk Passes Away
+[BOT] semantic_id=independent-wrestler-mb-funk-passes-away
+[SCORE] iniziale=73 priority=medium
+[EMBED v87.1] Estratti 2 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=2 url=https://www.ringsidenews.com/independent-wrestler-mb-funk-passes-away/
+[PERF v71] scraping articolo: 0.85s
+[EMBED v87.1] Estratti 2 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=12, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=2 url=https://www.ringsidenews.com/independent-wrestler-mb-funk-passes-away/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 2 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.43s
+[BOT] Embed trovati: 2
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[MODEL v88] Cooldown globale modello per la run: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WORLD (8) conf=1.00 model=gemini-3-flash-preview | L'articolo riporta la triste notizia della scomparsa di un wrestler indipendente, evento confermato da colleghi e promotion locali.
+[EDITORIAL v72.3] translation_notes=Tradurre 'passes away' con termini rispettosi come 'scomparsa' o 'ci ha lasciati' invece di un secco 'è morto'; Mantenere i nomi dei tag team (Funk N Fresh) e delle promotion (WrestleArts) in originale; Tradurre le citazioni di Phil Stamper in modo fedele, mantenendo il tono commosso
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WORLD (8) | L'articolo riporta la triste notizia della scomparsa di un wrestler indipendente, evento confermato da colleghi e promotion locali.
+[PERF v71] analisi editoriale AI v72: 11.49s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Independent Wrestler MB Funk Passes Away
+[SCORE] raffinato=78 priority=medium | morte, PLE/PPV, v62 evento morte/storico, v62 reazione/tributo con cap
+[V71] story_signature=stable:independent_wrestler|mb_funk_passes_away|story|wrestling semantic_status=new_story freshness=0.695
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=12
+[MODEL v88] task=postedit chain=gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-2.5-flash-lite
+[PERF v71] traduzione: 19.04s
+[MODEL v88] task=title chain=gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): È morto MB Funk, wrestler del circuito indipendente
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/WrestleArtsIndy/status/2056071267535540416
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/TrustInPhil/status/2056087514205524285
+[EMBED v87.3] Positional embed guard applicato: 2 modifiche
+[EMBED v88] Publish media guard: expected=2 before=0 after=2 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/independent-wrestler-mb-funk-passes-away-27.jpg
+[MEDIA] Immagine caricata: 4831
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260517_200455_003_è-morto-mb-funk-wrestler-del-circuito-indipendente_4832_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4832
+[PERF v71] creazione post WordPress: 3.09s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/independent-wrestler-mb-funk-passes-away-27.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4831
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Independent Wrestler MB Funk Passes Away': 35.72s
+[OK] Pubblicato: È morto MB Funk, wrestler del circuito indipendente
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260517_200456_003_morto-mb-funk-wrestler-del-circuito-indipendente_226d9ae3_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: È morto MB Funk, wrestler del circuito indipendente
+[PUBLISHED REVIEW v87.1] Review outer salvata: È morto MB Funk, wrestler del circuito indipendente
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 3 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-17 20:01:57_summary.json -> published_html_review/run_2026-05-17 20-01-57_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (347 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
+===== RUN END [2026-05-17 20:01:57] VERSION [v89_editorial_report_quality (1ab1ca9)] =====
+
