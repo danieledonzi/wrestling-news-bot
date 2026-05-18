@@ -26,6 +26,7 @@ def main():
     _run_patch("scripts/apply_bot_patch_v88_4_2.py", "SOURCE v88.4.2")
     _run_patch("scripts/apply_bot_patch_v88_4_2_1.py", "SOURCE v88.4.2.1")
     _run_patch("scripts/apply_bot_patch_v89.py", "SOURCE v89")
+    _run_patch("scripts/apply_bot_patch_v89_1.py", "SOURCE v89.1")
 
 
 if __name__ == "__main__":
