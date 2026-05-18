@@ -7127,3 +7127,130 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
 ===== RUN END [2026-05-18 16:14:32] VERSION [v89_editorial_report_quality (1358b08)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+
+===== RUN START [2026-05-18 16:43:48] VERSION [v89_editorial_report_quality (1e645da)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 11 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (62/75): Randy Orton On His WWE Absence Amid Injury Reports: 'Just Trying To Enjoy My Summer'
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Backstage Update On When Stephanie Vaquer's WWE Return Is Expected
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:stephanie-vaquer-injury - Backstage Update On When Stephanie Vaquer's WWE Return Is Expected
+[SKIP] URL già in history: https://www.wrestlinginc.com/2175486/wwe-baron-corbin-bishop-dyer-discussed-return/
+[SKIP] Score sotto soglia editoriale (32/75): AEW's Swerve Strickland Says The Archetype Of An Indie Wrestling Star Is 'Dying'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2175050/wwe-karrion-kross-scarlett-return-aew-debut/
+[SCORE v81.1] Cap light name-driven item 16->16 - Karrion Kross Reflects On Failed First WWE Main Roster Call-Up
+[SKIP] Score sotto soglia editoriale (16/75): Karrion Kross Reflects On Failed First WWE Main Roster Call-Up
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - WWE Star Cody Rhodes Explains Why He Received Cease & Desist Letter From Nintendo
+[SKIP] Score sotto soglia editoriale (49/75): WWE Star Cody Rhodes Explains Why He Received Cease & Desist Letter From Nintendo
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - WWE HOFer Jeff Jarrett Doesn't Think TKO Will Copy AEW Event
+[SKIP] Score sotto soglia editoriale (54/75): WWE HOFer Jeff Jarrett Doesn't Think TKO Will Copy AEW Event
+[SKIP] Score sotto soglia editoriale (10/75): AEW's Adam Copeland Discusses Becoming A Mentor After WWE HOFer Did The Same For Him
+[SKIP] URL già in history: https://www.wrestlinginc.com/2174996/wwe-nxt-john-cena-mason-rook-future-world-champions/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2174988/wwe-raw-sol-ruca-backstage-report-losing-matches/
+[SCORE v81.1] Cap light name-driven item 55->55 - Ex-WWE Star Ridge Holland Recalls Putting Together Bloodline WarGames Match In 2022
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Ex-WWE Star Ridge Holland Recalls Putting Together Bloodline WarGames Match In 2022
+[SKIP] Score sotto soglia editoriale (49/75): Ex-WWE Star Ridge Holland Recalls Putting Together Bloodline WarGames Match In 2022
+[SCORE v81.1] Cap light name-driven item 55->55 - Myles Borne Reflects On WWE Application & Tryout Process, Early Days In NXT
+[SKIP] Score sotto soglia editoriale (33/75): Bully Ray Is Worried About Sol Ruca's Finisher Following Loss To IYO SKY On WWE Raw
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[SKIP] Score sotto soglia editoriale (54/75): Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[SCORE v81.1] Cap light name-driven item 31->31 - Sandman Reflects On Hard Partying Days In ECW, Overdosing
+[SKIP] Score sotto soglia editoriale (25/75): Sandman Reflects On Hard Partying Days In ECW, Overdosing
+[SKIP] Score sotto soglia editoriale (36/75): WWE's IYO SKY Announces Marriage To Former IWGP Heavyweight Champion
+[SKIP] URL già in history: https://www.wrestlinginc.com/2174915/wwe-corey-graves-carmella-teases-return/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE's Involvement in UFC Freedom 250 White House Event Revealed
+[SKIP] Score sotto soglia editoriale (0/75): WWE's Involvement in UFC Freedom 250 White House Event Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/zelina-vega-books-movie-role-following-her-wwe-release/
+[SKIP] Score sotto soglia editoriale (51/75): Stephanie Vaquer's Status for May 18 WWE RAW Amid Injury Absence Revealed
+[SKIP] Score sotto soglia editoriale (23/75): Giulia Brings Back Classic STARDOM Look After WWE SmackDown
+[SKIP] Score sotto soglia editoriale (7/75): Road Warrior Animal's Widow Accuses A&E Biography of Disrespecting His Legacy
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - The Bella Twins Reveal They've Pushed Hard for Total Divas and Total Bellas Revival
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - The Bella Twins Reveal They've Pushed Hard for Total Divas and Total Bellas Revival
+[SKIP] Score sotto soglia editoriale (49/75): The Bella Twins Reveal They've Pushed Hard for Total Divas and Total Bellas Revival
+[SKIP] URL già in history: https://www.ringsidenews.com/kevin-nash-calls-out-wwe-one-sided-contract-clauses-that-hurt-wrestlers-market-value/
+[SKIP] URL già in history: https://www.ringsidenews.com/tiffany-stratton-shuts-down-claim-she-plastic-head-toe/
+[SKIP] Score sotto soglia editoriale (33/75): Bayley Hints at TNA Slammiversary Appearance After Indi Hartwell Challenge
+[SKIP] Score sotto soglia editoriale (16/75): The Bella Twins Reveal Their Segments With Danhausen Are Never Fully Scripted
+[SKIP] Score sotto soglia editoriale (3/75): Shayna Baszler Fires Back at Claims Ronda Rousey's MMA Return Fight Was Staged
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - WWE RAW Preview for May 18, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v81.1] Cap future card announcement 56->56 - WWE RAW Preview for May 18, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (51/75): WWE RAW Preview for May 18, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (0/75): Sting's Son Garrett Borden Picks Up Victory At Rhodes Wrestling Academy Event
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Former WWE Star Says His Scrypts Gimmick Failed Because 'Too Many Chefs' Got Involved
+[SKIP] Score sotto soglia editoriale (49/75): Former WWE Star Says His Scrypts Gimmick Failed Because 'Too Many Chefs' Got Involved
+[SCORE] 100 high - Backstage Update On When Stephanie Vaquer's WWE Return Is Expected | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v71 freshness=0.826
+[SCORE] 61 medium - Zoey Stark Reveals New Name and Hypes Free Agency After WWE Release | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 source reliability soft penalty, v71 freshness=0.578, v48 tier2: 55-74
+[SCORE] 55 low - WWE's Tiffany Stratton Clears Up Rumor About Fabian Aichner: 'Not True' | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, floor WWE main roster storyline, v71 freshness=0.59, v48 tier2: 55-74
+[SCORE] 55 low - Sandman Left ECW Over Pay Dispute | business/media rights, v62 media rights/streaming, v62 categoria business, v71 freshness=0.557, v48 tier2: 55-74
+[SCORE] 49 low - Myles Borne Reflects On WWE Application & Tryout Process, Early Days In NXT | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, opinione generica, floor WWE main roster storyline, v81.1 cap light name-driven item 55->55, v71 low freshness/novelty, v71 freshness=0.332, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 5 | mode=normal | max nuove=3 | pending pubblicati=0
+[PERF v71] WP lookup URL esistente: 0.61s
+[BOT] Elaborazione: Backstage Update On When Stephanie Vaquer's WWE Return Is Expected
+[BOT] semantic_id=backstage-update-on-when-stephanie-vaquers-wwe-return-is-expected
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta speculazioni e aggiornamenti di backstage sul ritorno di una lottatrice infortunata, basandosi su report esterni (PWI Insider).
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Clash in Italy' (nome PLE).; 'Back in the mix' va reso come 'tornerà a lottare' o 'farà il suo ritorno'.; 'Taken out' in questo contesto significa 'messa fuori combattimento' o 'attaccata'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta speculazioni e aggiornamenti di backstage sul ritorno di una lottatrice infortunata, basandosi su report esterni (PWI Insider).
+[PERF v71] analisi editoriale AI v72: 3.59s
+[SCORE] raffinato=56 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 infortunio/operazione, v66 cap title match non-title-change, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Backstage Update On When Stephanie Vaquer's WWE Return Is Expected
+[BOT] Elaborazione: Zoey Stark Reveals New Name and Hypes Free Agency After WWE Release
+[BOT] semantic_id=zoey-stark-reveals-new-name-and-hypes-free-agency-after-wwe-release
+[SCORE] iniziale=61 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/zoey-stark-reveals-new-name-hypes-free-agency-wwe-release/
+[PERF v71] scraping articolo: 1.00s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=10, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/zoey-stark-reveals-new-name-hypes-free-agency-wwe-release/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.52s
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo tratta il licenziamento di Zoey Stark e l'annuncio del suo nuovo nome d'arte, fatti avvenuti e non previsioni su eventi futuri.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'The Purist' essendo parte del nuovo ring name.; Mantenere 'free agent' e 'non-compete clause' come termini tecnici del settore.; Tradurre '90 days' come 'clausola di non concorrenza di 90 giorni'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo tratta il licenziamento di Zoey Stark e l'annuncio del suo nuovo nome d'arte, fatti avvenuti e non previsioni su eventi futuri.
+[PERF v71] analisi editoriale AI v72: 1.31s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Zoey Stark Reveals New Name and Hypes Free Agency After WWE Release
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 82->54 - Zoey Stark Reveals New Name and Hypes Free Agency After WWE Release
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, developmental secondario, v62 evento legale grave, v88.2 cap OTHER/feature non-news 82->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Zoey Stark Reveals New Name and Hypes Free Agency After WWE Release
+[SKIP v86.6/legacy] low_score_pre_gemini:55: WWE's Tiffany Stratton Clears Up Rumor About Fabian Aichner: 'Not True'
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:55: Sandman Left ECW Over Pay Dispute
+[PENDING] Coda salvata: 0 elementi
+[SKIP v89] Soft news non operativa sotto 65: Myles Borne Reflects On WWE Application & Tryout Process, Early Days In NXT
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 5 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-18 16:43:48_summary.json -> published_html_review/run_2026-05-18 16-43-48_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (388 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-18 16:43:48] VERSION [v89_editorial_report_quality (1e645da)] =====
+
