@@ -24,11 +24,23 @@ V891_WEAK_CONTEXT_TERMS = [
     "recalls", "remembers", "reflects", "explains why", "says why", "would like", "wants to see", "media call", "podcast clip",
     "credits", "praises", "criticizes", "reacts to", "jokes", "favorite", "dream match",
 ]
+V891_CONFIRMED_SIGNING_TERMS = [
+    "officially signed", "has signed", "have signed", "signed with", "signed by", "signs with", "joins aew", "joins wwe", "joins tna", "joins roh",
+    "contract confirmed", "deal confirmed", "confirmed signing", "announced signing", "is all elite", "appears on", "debuted on", "made his debut", "made her debut",
+]
+V891_RUMOR_ONLY_TERMS = [
+    "possible", "discussed", "being considered", "could return", "rumored", "planning", "plans", "backstage talks", "talks", "may", "might",
+]
 
 
 def v891_text_from_item(item=None):
     item = item or {}
     return v89_probe(v89_item_text(item)) if "v89_probe" in globals() and "v89_item_text" in globals() else " ".join(str(x or "") for x in [item.get("title", ""), item.get("url", ""), item.get("summary", ""), item.get("description", "")]).lower()
+
+
+def v891_is_confirmed_legacy_move(item=None):
+    p = v891_text_from_item(item)
+    return any(t in p for t in V891_CONFIRMED_SIGNING_TERMS) and not any(t in p for t in V891_RUMOR_ONLY_TERMS)
 
 
 def v891_is_legacy_return_rumor(item=None):
@@ -56,17 +68,23 @@ def v891_apply_legacy_return_floor(item=None):
     new_score = old
     if new_score < V89_1_LEGACY_RETURN_FLOOR:
         new_score = V89_1_LEGACY_RETURN_FLOOR
-    if new_score > V89_1_LEGACY_RETURN_CAP:
+    # Only cap rumor-only / unconfirmed items. Official signings, confirmed debuts and appearances keep their hard-news score.
+    if not v891_is_confirmed_legacy_move(item) and new_score > V89_1_LEGACY_RETURN_CAP:
         new_score = V89_1_LEGACY_RETURN_CAP
     if new_score != old:
         item = dict(item)
         item["score"] = new_score
         reasons = list(item.get("score_reasons", []) or [])
-        reasons.append(f"v89.1 legacy return rumor {old}->{new_score}")
+        if v891_is_confirmed_legacy_move(item):
+            reasons.append(f"v89.1 legacy confirmed move floor {old}->{new_score}")
+        else:
+            reasons.append(f"v89.1 legacy return rumor {old}->{new_score}")
         item["score_reasons"] = reasons
-        if new_score >= 68:
+        if new_score >= 80:
+            item["priority"] = "high"
+        elif new_score >= 68:
             item["priority"] = "medium"
-        print(f"[SCORE v89.1] Legacy return rumor protected {old}->{new_score}: {item.get('title','')}")
+        print(f"[SCORE v89.1] Legacy return/move protected {old}->{new_score}: {item.get('title','')}")
     return item
 
 
