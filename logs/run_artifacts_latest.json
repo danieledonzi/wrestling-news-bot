@@ -1,12 +1,22 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-18 16:43:48",
-  "bot_version": "v89_editorial_report_quality (1e645da)",
-  "git_sha": "1e645dae7e0911b0dfcb094f414b6b7c156d8040",
-  "created_at": "2026-05-18T16:44:06",
-  "published_count": 0,
-  "published_post_ids": [],
-  "published_artifacts": [],
+  "run_id": "2026-05-18 18:27:23",
+  "bot_version": "v89_editorial_report_quality (7f4bdac)",
+  "git_sha": "7f4bdac01c1cb63f5cc904d967e11bbf6c9502f4",
+  "created_at": "2026-05-18T18:28:11",
+  "published_count": 1,
+  "published_post_ids": [
+    "4866"
+  ],
+  "published_artifacts": [
+    {
+      "post_id": 4866,
+      "title": "Voci nel backstage WWE su un possibile futuro di AEW con Paramount",
+      "source_url": "https://www.wrestlinginc.com/2175644/wwe-aew-paramount-rumors-circulating-backstage/",
+      "html_file": "published/20260518_182756_001_voci-nel-backstage-wwe-su-un-possibile-futuro-di-aew-con-paramount_4866_final.html",
+      "metadata_file": "published/20260518_182756_001_voci-nel-backstage-wwe-su-un-possibile-futuro-di-aew-con-paramount_4866_metadata.json"
+    }
+  ],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",

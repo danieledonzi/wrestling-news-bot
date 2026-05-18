@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-18 16:43:48",
-  "last_bot_version": "v89_editorial_report_quality (1e645da)",
-  "updated_at": "2026-05-18T16:44:06",
-  "total_items": 98,
+  "last_run_id": "2026-05-18 18:27:23",
+  "last_bot_version": "v89_editorial_report_quality (7f4bdac)",
+  "updated_at": "2026-05-18T18:28:10",
+  "total_items": 99,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -788,6 +788,14 @@
       "original_html_file": "20260518_161544_002_zelina-vega-ottiene-un-ruolo-cinematografico-dopo-l-addio-alla-wwe_bf172dd2_original.html",
       "final_html_file": "20260518_161544_002_zelina-vega-ottiene-un-ruolo-cinematografico-dopo-l-addio-alla-wwe_bf172dd2_final.html",
       "metadata_file": "20260518_161544_002_zelina-vega-ottiene-un-ruolo-cinematografico-dopo-l-addio-alla-wwe_bf172dd2_metadata.json"
+    },
+    {
+      "run_id": "2026-05-18 18:27:23",
+      "title": "Voci nel backstage WWE su un possibile futuro di AEW con Paramount",
+      "url": "https://www.wrestlinginc.com/2175644/wwe-aew-paramount-rumors-circulating-backstage/",
+      "original_html_file": "20260518_182758_001_voci-nel-backstage-wwe-su-un-possibile-futuro-di-aew-con-paramount_cc95d3e8_original.html",
+      "final_html_file": "20260518_182758_001_voci-nel-backstage-wwe-su-un-possibile-futuro-di-aew-con-paramount_cc95d3e8_final.html",
+      "metadata_file": "20260518_182758_001_voci-nel-backstage-wwe-su-un-possibile-futuro-di-aew-con-paramount_cc95d3e8_metadata.json"
     }
   ]
 }

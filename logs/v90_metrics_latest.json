@@ -1,22 +1,22 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-18T16:44:07",
-  "run_start": "2026-05-18 16:43:48",
-  "run_end": "2026-05-18 16:43:48",
-  "bot_version": "v89_editorial_report_quality (1e645da)",
-  "candidate_count": 5,
+  "collected_at": "2026-05-18T18:28:11",
+  "run_start": "2026-05-18 18:27:23",
+  "run_end": "2026-05-18 18:27:23",
+  "bot_version": "v89_editorial_report_quality (7f4bdac)",
+  "candidate_count": 10,
   "mode": "normal",
   "max_new": 3,
-  "published_total": 0,
+  "published_total": 1,
   "published_pending": 0,
-  "published_new": 0,
-  "candidates_tried": 5,
-  "score_lines_count": 9,
-  "skip_count": 41,
+  "published_new": 1,
+  "candidates_tried": 10,
+  "score_lines_count": 18,
+  "skip_count": 38,
   "skip_v89_count": 1,
-  "gemini_calls_observed": 3,
+  "gemini_calls_observed": 9,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 3
+    "gemini-3.1-flash-lite": 9
   },
   "gemini_discarded_models": {},
   "model_tasks": [
@@ -27,38 +27,99 @@
     {
       "task": "editorial_analysis",
       "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
+    },
+    {
+      "task": "editorial_analysis",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
     }
   ],
   "model_task_counts": {
     "healthcheck": 1,
-    "editorial_analysis": 1
+    "editorial_analysis": 2,
+    "translate_normal": 1,
+    "postedit": 1,
+    "title": 1
   },
   "perf": {
-    "WP lookup URL esistente": {
+    "WP lookup event_key": {
       "count": 1,
-      "total_seconds": 0.61,
-      "max_seconds": 0.61
+      "total_seconds": 1.56,
+      "max_seconds": 1.56
     },
     "analisi editoriale AI v72": {
-      "count": 2,
-      "total_seconds": 4.9,
-      "max_seconds": 3.59
+      "count": 4,
+      "total_seconds": 9.09,
+      "max_seconds": 4.47
+    },
+    "WP recent posts dedupe": {
+      "count": 1,
+      "total_seconds": 1.19,
+      "max_seconds": 1.19
+    },
+    "categoria da analisi editoriale v72": {
+      "count": 1,
+      "total_seconds": 1.54,
+      "max_seconds": 1.54
+    },
+    "traduzione": {
+      "count": 1,
+      "total_seconds": 9.15,
+      "max_seconds": 9.15
+    },
+    "creazione post WordPress": {
+      "count": 1,
+      "total_seconds": 5.28,
+      "max_seconds": 5.28
+    },
+    "totale articolo pubblicato 'Backstage Report On AEW-Paramount Rumors Circulating Backsta'": {
+      "count": 1,
+      "total_seconds": 18.88,
+      "max_seconds": 18.88
+    },
+    "WP lookup URL esistente": {
+      "count": 1,
+      "total_seconds": 0.56,
+      "max_seconds": 0.56
     },
     "scraping articolo": {
       "count": 1,
-      "total_seconds": 1.0,
-      "max_seconds": 1.0
+      "total_seconds": 1.19,
+      "max_seconds": 1.19
     },
     "estrazione blocchi": {
       "count": 1,
-      "total_seconds": 0.52,
-      "max_seconds": 0.52
+      "total_seconds": 0.92,
+      "max_seconds": 0.92
     }
   },
-  "article_metrics": [],
+  "article_metrics": [
+    {
+      "path": "published/20260518_182756_001_voci-nel-backstage-wwe-su-un-possibile-futuro-di-aew-con-paramount_4866_final.html",
+      "exists": true,
+      "word_count": 171,
+      "paragraph_count": 3,
+      "blockquote_count": 0,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 0,
+      "title": "Voci nel backstage WWE su un possibile futuro di AEW con Paramount"
+    }
+  ],
   "daily_counts": {
-    "published_today": 6,
-    "published_last_4h": 5,
-    "runs_today": 11
+    "published_today": 7,
+    "published_last_4h": 3,
+    "runs_today": 12
   }
 }
