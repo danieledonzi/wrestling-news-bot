@@ -12,10 +12,13 @@ V891_LEGACY_SOURCE_TERMS = [
     "former wwe", "ex-wwe", "ex wwe", "released wwe", "wwe veteran", "former nxt", "ex-nxt", "free agent",
     "former aew", "ex-aew", "former tna", "ex-tna", "former champion", "hall of famer", "wwe alum",
 ]
-V891_LEGACY_ACTION_TERMS = [
-    "possible wwe return", "possible return", "return discussed", "discussed for", "wwe return", "aew debut", "tna debut",
-    "roh debut", "joins", "signs", "signed", "appears", "backstage talks", "talks", "angle", "storyline plans",
-    "being considered", "could return", "rumored return", "set for return", "planning return",
+V891_LEGACY_CONCRETE_RETURN_TERMS = [
+    "possible wwe return", "possible return", "return discussed", "discussed for", "wwe return", "aew return", "tna return", "roh return",
+    "aew debut", "tna debut", "roh debut", "wwe debut", "nxt debut", "joins", "signs", "signed", "appears",
+    "being considered", "could return", "rumored return", "set for return", "planning return", "return plans", "debut plans",
+]
+V891_LEGACY_CONTEXT_TERMS = [
+    "backstage talks", "talks", "angle", "storyline plans", "storyline", "plans",
 ]
 V891_WEAK_CONTEXT_TERMS = [
     "recalls", "remembers", "reflects", "explains why", "says why", "would like", "wants to see", "media call", "podcast clip",
@@ -31,12 +34,14 @@ def v891_text_from_item(item=None):
 def v891_is_legacy_return_rumor(item=None):
     p = v891_text_from_item(item)
     has_source = any(t in p for t in V891_LEGACY_SOURCE_TERMS)
-    has_action = any(t in p for t in V891_LEGACY_ACTION_TERMS)
+    has_concrete_return = any(t in p for t in V891_LEGACY_CONCRETE_RETURN_TERMS)
+    has_context = any(t in p for t in V891_LEGACY_CONTEXT_TERMS)
     has_company = any(t in p for t in [" wwe", " aew", " tna", " roh", " nxt", "danhausen", "baron corbin", "miro", "aleister black", "malakai black", "dolph ziggler", "nic nemeth"])
-    if not (has_source and has_action and has_company):
+    if not (has_source and has_concrete_return and has_company):
         return False
-    # Do not protect pure nostalgia/commentary unless there is a concrete return/debut/signing wording.
-    if any(t in p for t in V891_WEAK_CONTEXT_TERMS) and not any(t in p for t in ["possible return", "return discussed", "discussed for", "signs", "signed", "debut", "appears", "could return"]):
+    # Context terms like talks/angle/storyline help, but never count by themselves.
+    # This avoids protecting pure items such as "Former WWE star talks AEW run on a podcast".
+    if any(t in p for t in V891_WEAK_CONTEXT_TERMS) and not has_concrete_return:
         return False
     return True
 
