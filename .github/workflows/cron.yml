@@ -1,4 +1,4 @@
-name: OpenWrestlingTV Bot v89.2
+name: OpenWrestlingTV Bot v90.0
 
 on:
   workflow_dispatch:
@@ -74,7 +74,7 @@ jobs:
           curl -s https://api.ipify.org || true
           echo
 
-      - name: Run bot v89_2
+      - name: Run bot v90_0
         id: run_bot
         env:
           WP_USER: ${{ secrets.WP_USER }}
@@ -99,11 +99,19 @@ jobs:
           V86_6_FUTURE_SPEC_CAP_ENABLED: "1"
           V86_2_REPORT_MORNING_HOLD_ENABLED: "1"
           V89_2_SOURCE_CONSOLIDATED: "1"
+          V90_0_OBSERVABILITY_ENABLED: "1"
         run: |
           set +e
           python bot.py
           status=$?
           echo "$status" > .bot_exit_code
+          exit 0
+
+      - name: Collect v90.0 metrics
+        if: always()
+        run: |
+          set +e
+          python scripts/collect_v90_metrics.py
           exit 0
 
       - name: Sanitize artifact filenames
@@ -130,7 +138,7 @@ jobs:
                           target = path.with_name(f"{target.stem}_{i}{target.suffix}")
                           i += 1
                       path.rename(target)
-                      print(f"[ARTIFACT SANITIZE v89.2] {path} -> {target}")
+                      print(f"[ARTIFACT SANITIZE v90.0] {path} -> {target}")
           PY
 
       - name: Persist bot artifacts to repository
@@ -140,7 +148,7 @@ jobs:
           mkdir -p published published_html_review logs
           touch logs/.keep published/.keep published_html_review/.keep
 
-          echo "[ARTIFACT PERSIST v89.2] Stato prima dello staging"
+          echo "[ARTIFACT PERSIST v90.0] Stato prima dello staging"
           git status --short --ignored logs published published_html_review pending_articles.json history.txt history.json confirmed_published_reports.json .bot_exit_code || true
 
           git add -A -- published published_html_review logs || true
@@ -151,15 +159,15 @@ jobs:
             fi
           done
 
-          echo "[ARTIFACT PERSIST v89.2] Stato dopo lo staging"
+          echo "[ARTIFACT PERSIST v90.0] Stato dopo lo staging"
           git status --short || true
 
           if git diff --cached --quiet; then
-            echo "[ARTIFACT PERSIST v89.2] Nessuna modifica staged da committare"
+            echo "[ARTIFACT PERSIST v90.0] Nessuna modifica staged da committare"
           else
-            git commit -m "chore(bot): persist v89.2 artifacts and logs [skip ci]"
+            git commit -m "chore(bot): persist v90.0 artifacts and logs [skip ci]"
             git push
-            echo "[ARTIFACT PERSIST v89.2] Artifact, published e master log committati nel repository"
+            echo "[ARTIFACT PERSIST v90.0] Artifact, metrics, published e master log committati nel repository"
           fi
 
       - name: Upload bot artifacts
@@ -188,6 +196,6 @@ jobs:
             code=$(cat .bot_exit_code)
           fi
           if [ "$code" != "0" ]; then
-            echo "[BOT v89.2] Bot terminato con exit code $code"
+            echo "[BOT v90.0] Bot terminato con exit code $code"
             exit "$code"
           fi
