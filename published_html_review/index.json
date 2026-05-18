@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-18 14:12:19",
-  "last_bot_version": "v89_editorial_report_quality (9d54369)",
-  "updated_at": "2026-05-18T14:13:58",
-  "total_items": 96,
+  "last_run_id": "2026-05-18 16:14:32",
+  "last_bot_version": "v89_editorial_report_quality (1358b08)",
+  "updated_at": "2026-05-18T16:15:44",
+  "total_items": 98,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -772,6 +772,22 @@
       "original_html_file": "20260518_141358_001_kevin-nash-critica-le-clausole-dei-contratti-wwe-penalizzano-il-valore-dei-wrest_8ae82be1_original.html",
       "final_html_file": "20260518_141358_001_kevin-nash-critica-le-clausole-dei-contratti-wwe-penalizzano-il-valore-dei-wrest_8ae82be1_final.html",
       "metadata_file": "20260518_141358_001_kevin-nash-critica-le-clausole-dei-contratti-wwe-penalizzano-il-valore-dei-wrest_8ae82be1_metadata.json"
+    },
+    {
+      "run_id": "2026-05-18 16:14:32",
+      "title": "WWE: si discute internamente di un possibile ritorno di Baron Corbin",
+      "url": "https://www.wrestlinginc.com/2175486/wwe-baron-corbin-bishop-dyer-discussed-return/",
+      "original_html_file": "20260518_161502_001_wwe-si-discute-internamente-di-un-possibile-ritorno-di-baron-corbin_8b0b910c_original.html",
+      "final_html_file": "20260518_161502_001_wwe-si-discute-internamente-di-un-possibile-ritorno-di-baron-corbin_8b0b910c_final.html",
+      "metadata_file": "20260518_161502_001_wwe-si-discute-internamente-di-un-possibile-ritorno-di-baron-corbin_8b0b910c_metadata.json"
+    },
+    {
+      "run_id": "2026-05-18 16:14:32",
+      "title": "Zelina Vega ottiene un ruolo cinematografico dopo l'addio alla WWE",
+      "url": "https://www.ringsidenews.com/zelina-vega-books-movie-role-following-her-wwe-release/",
+      "original_html_file": "20260518_161544_002_zelina-vega-ottiene-un-ruolo-cinematografico-dopo-l-addio-alla-wwe_bf172dd2_original.html",
+      "final_html_file": "20260518_161544_002_zelina-vega-ottiene-un-ruolo-cinematografico-dopo-l-addio-alla-wwe_bf172dd2_final.html",
+      "metadata_file": "20260518_161544_002_zelina-vega-ottiene-un-ruolo-cinematografico-dopo-l-addio-alla-wwe_bf172dd2_metadata.json"
     }
   ]
 }

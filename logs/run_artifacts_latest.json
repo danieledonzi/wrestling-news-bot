@@ -1,20 +1,28 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-18 14:12:19",
-  "bot_version": "v89_editorial_report_quality (9d54369)",
-  "git_sha": "9d54369d13e3635434f100fc1c9333e6b171a2a1",
-  "created_at": "2026-05-18T14:13:59",
-  "published_count": 1,
+  "run_id": "2026-05-18 16:14:32",
+  "bot_version": "v89_editorial_report_quality (1358b08)",
+  "git_sha": "1358b08257b930bd3fdd08de218833dd7586e1da",
+  "created_at": "2026-05-18T16:15:44",
+  "published_count": 2,
   "published_post_ids": [
-    "4855"
+    "4860",
+    "4863"
   ],
   "published_artifacts": [
     {
-      "post_id": 4855,
-      "title": "Kevin Nash critica le clausole dei contratti WWE: \"Penalizzano il valore dei wrestler\"",
-      "source_url": "https://www.ringsidenews.com/kevin-nash-calls-out-wwe-one-sided-contract-clauses-that-hurt-wrestlers-market-value/",
-      "html_file": "published/20260518_141356_001_kevin-nash-critica-le-clausole-dei-contratti-wwe-penalizzano-il-valore-dei-wrestler_4855_final.html",
-      "metadata_file": "published/20260518_141356_001_kevin-nash-critica-le-clausole-dei-contratti-wwe-penalizzano-il-valore-dei-wrestler_4855_metadata.json"
+      "post_id": 4860,
+      "title": "WWE: si discute internamente di un possibile ritorno di Baron Corbin",
+      "source_url": "https://www.wrestlinginc.com/2175486/wwe-baron-corbin-bishop-dyer-discussed-return/",
+      "html_file": "published/20260518_161501_001_wwe-si-discute-internamente-di-un-possibile-ritorno-di-baron-corbin_4860_final.html",
+      "metadata_file": "published/20260518_161501_001_wwe-si-discute-internamente-di-un-possibile-ritorno-di-baron-corbin_4860_metadata.json"
+    },
+    {
+      "post_id": 4863,
+      "title": "Zelina Vega ottiene un ruolo cinematografico dopo l'addio alla WWE",
+      "source_url": "https://www.ringsidenews.com/zelina-vega-books-movie-role-following-her-wwe-release/",
+      "html_file": "published/20260518_161542_002_zelina-vega-ottiene-un-ruolo-cinematografico-dopo-laddio-alla-wwe_4863_final.html",
+      "metadata_file": "published/20260518_161542_002_zelina-vega-ottiene-un-ruolo-cinematografico-dopo-laddio-alla-wwe_4863_metadata.json"
     }
   ],
   "errors": [],
