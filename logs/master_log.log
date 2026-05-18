@@ -6771,3 +6771,153 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
 ===== RUN END [2026-05-18 13:38:39] VERSION [v89_editorial_report_quality (780a13e)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+
+===== RUN START [2026-05-18 14:12:19] VERSION [v89_editorial_report_quality (9d54369)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 11 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (32/75): AEW's Swerve Strickland Says The Archetype Of An Indie Wrestling Star Is 'Dying'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2175050/wwe-karrion-kross-scarlett-return-aew-debut/
+[SCORE v81.1] Cap light name-driven item 16->16 - Karrion Kross Reflects On Failed First WWE Main Roster Call-Up
+[SKIP] Score sotto soglia editoriale (16/75): Karrion Kross Reflects On Failed First WWE Main Roster Call-Up
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - WWE Star Cody Rhodes Explains Why He Received Cease & Desist Letter From Nintendo
+[SKIP] Score sotto soglia editoriale (49/75): WWE Star Cody Rhodes Explains Why He Received Cease & Desist Letter From Nintendo
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - WWE HOFer Jeff Jarrett Doesn't Think TKO Will Copy AEW Event
+[SKIP] Score sotto soglia editoriale (54/75): WWE HOFer Jeff Jarrett Doesn't Think TKO Will Copy AEW Event
+[SKIP] Score sotto soglia editoriale (16/75): AEW's Adam Copeland Discusses Becoming A Mentor After WWE HOFer Did The Same For Him
+[SKIP] URL già in history: https://www.wrestlinginc.com/2174996/wwe-nxt-john-cena-mason-rook-future-world-champions/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2174988/wwe-raw-sol-ruca-backstage-report-losing-matches/
+[SCORE v81.1] Cap light name-driven item 55->55 - Ex-WWE Star Ridge Holland Recalls Putting Together Bloodline WarGames Match In 2022
+[SCORE v81.1] Cap light name-driven item 55->55 - Myles Borne Reflects On WWE Application & Tryout Process, Early Days In NXT
+[SKIP] Score sotto soglia editoriale (39/75): Bully Ray Is Worried About Sol Ruca's Finisher Following Loss To IYO SKY On WWE Raw
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[SKIP] Score sotto soglia editoriale (54/75): Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[SCORE v81.1] Cap light name-driven item 31->31 - Sandman Reflects On Hard Partying Days In ECW, Overdosing
+[SKIP] Score sotto soglia editoriale (25/75): Sandman Reflects On Hard Partying Days In ECW, Overdosing
+[SKIP] Score sotto soglia editoriale (36/75): WWE's IYO SKY Announces Marriage To Former IWGP Heavyweight Champion
+[SKIP] URL già in history: https://www.wrestlinginc.com/2174915/wwe-corey-graves-carmella-teases-return/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173128/eric-bischoff-respects-aew-tony-khan-rebel/
+[SKIP] Score sotto soglia editoriale (18/75): WWE HOFer Jeff Jarrett Saw DSOTR Episode As 'Opportunity'
+[SKIP] Score sotto soglia editoriale (8/75): Jeff Jarrett Explains Why Tony Khan's AEW Booking Philosophy Is 'Brilliant'
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (7/75): Road Warrior Animal's Widow Accuses A&E Biography of Disrespecting His Legacy
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - The Bella Twins Reveal They've Pushed Hard for Total Divas and Total Bellas Revival
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - The Bella Twins Reveal They've Pushed Hard for Total Divas and Total Bellas Revival
+[SKIP] Score sotto soglia editoriale (49/75): The Bella Twins Reveal They've Pushed Hard for Total Divas and Total Bellas Revival
+[PERF v71] WP lookup event_key: 1.11s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] URL già in history: https://www.ringsidenews.com/tiffany-stratton-shuts-down-claim-she-plastic-head-toe/
+[SKIP] Score sotto soglia editoriale (33/75): Bayley Hints at TNA Slammiversary Appearance After Indi Hartwell Challenge
+[SKIP] Score sotto soglia editoriale (16/75): The Bella Twins Reveal Their Segments With Danhausen Are Never Fully Scripted
+[SKIP] Score sotto soglia editoriale (3/75): Shayna Baszler Fires Back at Claims Ronda Rousey's MMA Return Fight Was Staged
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - WWE RAW Preview for May 18, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v81.1] Cap future card announcement 56->56 - WWE RAW Preview for May 18, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (51/75): WWE RAW Preview for May 18, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (0/75): Sting's Son Garrett Borden Picks Up Victory At Rhodes Wrestling Academy Event
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Former WWE Star Says His Scrypts Gimmick Failed Because 'Too Many Chefs' Got Involved
+[SKIP] Score sotto soglia editoriale (49/75): Former WWE Star Says His Scrypts Gimmick Failed Because 'Too Many Chefs' Got Involved
+[SKIP] URL già in history: https://www.ringsidenews.com/tiffany-stratton-shuts-down-wild-rumor-about-former-wwe-stars-release/
+[SKIP] Score sotto soglia editoriale (31/75): Rush Shuts Down Claims CMLL Fallout Could Affect His AEW Grand Slam Mexico Appearance
+[SKIP] Score sotto soglia editoriale (57/75): Randy Orton Shuts Down WWE Injury Panic with Message to Fans
+[SKIP] Score sotto soglia editoriale (16/75): MLW Talent Departs from Company
+[SKIP] URL già in history: https://www.ringsidenews.com/independent-wrestler-mb-funk-passes-away/
+[SCORE] 83 high - Kevin Nash Calls Out WWE Over One-Sided Contract Clauses That Hurt Wrestlers' Market Value | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, contratto, v62 categoria business, v71 source reliability soft penalty, v71 freshness=0.677
+[SCORE] 55 low - Sandman Left ECW Over Pay Dispute | business/media rights, v62 media rights/streaming, v62 categoria business, v71 freshness=0.589, v48 tier2: 55-74
+[SCORE] 55 low - Ex-WWE Star Ridge Holland Recalls Putting Together Bloodline WarGames Match In 2022 | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v81.1 cap light name-driven item 55->55, v71 freshness=0.37, v48 tier2: 55-74
+[SCORE] 55 low - Myles Borne Reflects On WWE Application & Tryout Process, Early Days In NXT | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, opinione generica, floor WWE main roster storyline, v81.1 cap light name-driven item 55->55, v71 freshness=0.364, v48 tier2: 55-74
+[SCORE] 49 low - Former WWE Star Scarlett Says She Pitched Throwback Women's Match Stipulation | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, floor WWE main roster storyline, v71 low freshness/novelty, v71 freshness=0.32, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 5 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Kevin Nash Calls Out WWE Over One-Sided Contract Clauses That Hurt Wrestlers' Market Value
+[BOT] semantic_id=kevin-nash-calls-out-wwe-over-one-sided-contract-clauses-that-hurt-wrestlers-market-value
+[SCORE] iniziale=83 priority=high
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/kevin-nash-calls-out-wwe-one-sided-contract-clauses-that-hurt-wrestlers-market-value/
+[PERF v71] scraping articolo: 0.78s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=17, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/kevin-nash-calls-out-wwe-one-sided-contract-clauses-that-hurt-wrestlers-market-value/
+[BLOCKSEQ] Blocchi ordinati estratti: text=17, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.54s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=0.95 | category=BUSINESS (15) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta le critiche di Kevin Nash su clausole contrattuali e strategie aziendali, ricadendo nel commento di un ex wrestler su dinamiche di business WWE.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Kliq This' (nome podcast).; 'Jobbed' va reso come 'aver perso contro tutti' o 'aver fatto lo jobber'.; 'One-sided' va reso come 'a senso unico' o 'sbilanciato'.
+[EDITORIAL v73] final type=OPINION | category=BUSINESS (15) | L'articolo riporta le critiche di Kevin Nash su clausole contrattuali e strategie aziendali, ricadendo nel commento di un ex wrestler su dinamiche di business WWE.
+[PERF v71] analisi editoriale AI v72: 7.19s
+[SCORE v86.9] Cap commentary/opinion 100->68 - Kevin Nash Calls Out WWE Over One-Sided Contract Clauses That Hurt Wrestlers' Market Value
+[SCORE] raffinato=56 priority=low | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, show settimanale, opinione generica, v62 evento legale grave, v62 categoria business, v86.9 cap commentary/opinion 100->68, v79.1.3 true future preview cap
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Kevin Nash Calls Out WWE Over One-Sided Contract Clauses That Hurt Wrestlers' Market Value
+[V71] story_signature=stable:kevin_nash_calls_out|wwe_over_one|sided_contract_clauses_that_hurt_wrestlers|status|wwe semantic_status=new_story freshness=0.677
+[PERF v71] WP recent posts dedupe: 1.25s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.60s
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.1] Repair mirato blocchi mancanti: ['TEXT_015', 'TEXT_016', 'TEXT_017']
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.1] Batch tradotto con gemini-3-flash-preview: 3 blocchi
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=17
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 73.23s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Kevin Nash critica le clausole dei contratti WWE: "Penalizzano il valore dei wrestler"
+[EMBED v87.3] Canonicalizzati/deduplicati embed nel body: 1
+[EMBED v87.3] Positional embed guard applicato: 1 modifiche
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/kevin-nash-calls-out-wwe-over-one-sided-contract-clauses-that-hurt-wrestlers-market-value-08.jpg
+[MEDIA] Immagine caricata: 4854
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260518_141356_001_kevin-nash-critica-le-clausole-dei-contratti-wwe-penalizzano-il-valore-dei-wrestler_4855_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4855
+[PERF v71] creazione post WordPress: 3.67s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/kevin-nash-calls-out-wwe-over-one-sided-contract-clauses-that-hurt-wrestlers-market-value-08.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4854
+[WP] Status attach image: 200
+[PERF v71] featured image: 0.64s
+[PERF v71] totale articolo pubblicato 'Kevin Nash Calls Out WWE Over One-Sided Contract Clauses Tha': 87.88s
+[OK] Pubblicato: Kevin Nash critica le clausole dei contratti WWE: "Penalizzano il valore dei wrestler"
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260518_141358_001_kevin-nash-critica-le-clausole-dei-contratti-wwe-penalizzano-il-valore-dei-wrest_8ae82be1_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Kevin Nash critica le clausole dei contratti WWE: "Penalizzano il valore dei wrestler"
+[PUBLISHED REVIEW v87.1] Review outer salvata: Kevin Nash critica le clausole dei contratti WWE: "Penalizzano il valore dei wrestler"
+[REPORT v87.6] Non scrivo history forte: non true-results/canonico (report:kevin-nash-calls-out-over-one-sided-contract-clauses-that-hurt-wrestle-2026-05-18)
+[SKIP v86.6/legacy] low_score_pre_gemini:55: Sandman Left ECW Over Pay Dispute
+[PENDING] Coda salvata: 0 elementi
+[SKIP v89] Soft news non operativa sotto 65: Ex-WWE Star Ridge Holland Recalls Putting Together Bloodline WarGames Match In 2022
+[SKIP v89] Soft news non operativa sotto 65: Myles Borne Reflects On WWE Application & Tryout Process, Early Days In NXT
+[SKIP v89] Soft news non operativa sotto 65: Former WWE Star Scarlett Says She Pitched Throwback Women's Match Stipulation
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 5 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-18 14:12:19_summary.json -> published_html_review/run_2026-05-18 14-12-19_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (380 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
+===== RUN END [2026-05-18 14:12:19] VERSION [v89_editorial_report_quality (9d54369)] =====
+

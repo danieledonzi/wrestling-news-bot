@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-18 13:38:39",
-  "last_bot_version": "v89_editorial_report_quality (780a13e)",
-  "updated_at": "2026-05-18T13:39:20",
-  "total_items": 95,
+  "last_run_id": "2026-05-18 14:12:19",
+  "last_bot_version": "v89_editorial_report_quality (9d54369)",
+  "updated_at": "2026-05-18T14:13:58",
+  "total_items": 96,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -764,6 +764,14 @@
       "original_html_file": "20260518_133920_002_tiffany-stratton-risponde-alle-critiche-sulla-chirurgia-estetica_46eb15ae_original.html",
       "final_html_file": "20260518_133920_002_tiffany-stratton-risponde-alle-critiche-sulla-chirurgia-estetica_46eb15ae_final.html",
       "metadata_file": "20260518_133920_002_tiffany-stratton-risponde-alle-critiche-sulla-chirurgia-estetica_46eb15ae_metadata.json"
+    },
+    {
+      "run_id": "2026-05-18 14:12:19",
+      "title": "Kevin Nash critica le clausole dei contratti WWE: \"Penalizzano il valore dei wrestler\"",
+      "url": "https://www.ringsidenews.com/kevin-nash-calls-out-wwe-one-sided-contract-clauses-that-hurt-wrestlers-market-value/",
+      "original_html_file": "20260518_141358_001_kevin-nash-critica-le-clausole-dei-contratti-wwe-penalizzano-il-valore-dei-wrest_8ae82be1_original.html",
+      "final_html_file": "20260518_141358_001_kevin-nash-critica-le-clausole-dei-contratti-wwe-penalizzano-il-valore-dei-wrest_8ae82be1_final.html",
+      "metadata_file": "20260518_141358_001_kevin-nash-critica-le-clausole-dei-contratti-wwe-penalizzano-il-valore-dei-wrest_8ae82be1_metadata.json"
     }
   ]
 }
