@@ -1,28 +1,24 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-18T22:53:35",
-  "run_start": "2026-05-18 22:51:20",
-  "run_end": "2026-05-18 22:51:20",
-  "bot_version": "v89_editorial_report_quality (38d016d)",
-  "candidate_count": 13,
+  "collected_at": "2026-05-18T23:59:27",
+  "run_start": "2026-05-18 23:57:44",
+  "run_end": "2026-05-18 23:57:44",
+  "bot_version": "v89_editorial_report_quality (c9232fd)",
+  "candidate_count": 11,
   "mode": "normal",
   "max_new": 3,
-  "published_total": 1,
+  "published_total": 0,
   "published_pending": 0,
-  "published_new": 1,
-  "candidates_tried": 12,
-  "score_lines_count": 26,
-  "skip_count": 38,
+  "published_new": 0,
+  "candidates_tried": 0,
+  "score_lines_count": 15,
+  "skip_count": 26,
   "skip_v89_count": 0,
-  "gemini_calls_observed": 13,
+  "gemini_calls_observed": 3,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 1,
-    "gemini-2.5-flash-lite": 3,
-    "gemini-3-flash-preview": 9
+    "gemini-3.1-flash-lite": 3
   },
-  "gemini_discarded_models": {
-    "gemini-3.1-flash-lite": 1
-  },
+  "gemini_discarded_models": {},
   "model_tasks": [
     {
       "task": "healthcheck",
@@ -30,100 +26,44 @@
     },
     {
       "task": "editorial_analysis",
-      "chain": "gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "translate_normal",
-      "chain": "gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "postedit",
-      "chain": "gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "title",
-      "chain": "gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
-    },
-    {
-      "task": "editorial_analysis",
-      "chain": "gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
     }
   ],
   "model_task_counts": {
     "healthcheck": 1,
-    "editorial_analysis": 2,
-    "translate_normal": 1,
-    "postedit": 1,
-    "title": 1
+    "editorial_analysis": 1
   },
   "perf": {
+    "WP strict report lookup": {
+      "count": 1,
+      "total_seconds": 1.45,
+      "max_seconds": 1.45
+    },
     "WP lookup event_key": {
-      "count": 2,
-      "total_seconds": 1.94,
-      "max_seconds": 1.11
+      "count": 1,
+      "total_seconds": 1.33,
+      "max_seconds": 1.33
     },
     "WP lookup URL esistente": {
-      "count": 5,
-      "total_seconds": 3.48,
-      "max_seconds": 0.88
+      "count": 3,
+      "total_seconds": 2.88,
+      "max_seconds": 1.07
     },
     "analisi editoriale AI v72": {
-      "count": 8,
-      "total_seconds": 56.49,
-      "max_seconds": 9.86
-    },
-    "WP recent posts dedupe": {
-      "count": 1,
-      "total_seconds": 1.24,
-      "max_seconds": 1.24
-    },
-    "categoria da analisi editoriale v72": {
-      "count": 1,
-      "total_seconds": 2.4,
-      "max_seconds": 2.4
-    },
-    "traduzione": {
-      "count": 1,
-      "total_seconds": 13.33,
-      "max_seconds": 13.33
-    },
-    "creazione post WordPress": {
-      "count": 1,
-      "total_seconds": 4.89,
-      "max_seconds": 4.89
-    },
-    "totale articolo pubblicato 'WWE's Trick Williams Explains What It's Like Working With Li'": {
-      "count": 1,
-      "total_seconds": 27.59,
-      "max_seconds": 27.59
+      "count": 2,
+      "total_seconds": 28.0,
+      "max_seconds": 14.21
     },
     "scraping articolo": {
       "count": 1,
-      "total_seconds": 1.58,
-      "max_seconds": 1.58
-    },
-    "estrazione blocchi": {
-      "count": 1,
-      "total_seconds": 0.75,
-      "max_seconds": 0.75
+      "total_seconds": 1.63,
+      "max_seconds": 1.63
     }
   },
-  "article_metrics": [
-    {
-      "path": "published/20260518_225248_001_trick-williams-lavorare-con-lil-yachty-è-contagioso_4881_final.html",
-      "exists": true,
-      "word_count": 259,
-      "paragraph_count": 3,
-      "blockquote_count": 0,
-      "image_count": 0,
-      "iframe_count": 0,
-      "embed_hint_count": 0,
-      "title": "Trick Williams: \"Lavorare con Lil Yachty è contagioso\""
-    }
-  ],
+  "article_metrics": [],
   "daily_counts": {
     "published_today": 12,
     "published_last_4h": 5,
-    "runs_today": 15
+    "runs_today": 16
   }
 }

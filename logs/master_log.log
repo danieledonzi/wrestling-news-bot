@@ -8300,3 +8300,260 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
 ===== RUN END [2026-05-18 22:51:20] VERSION [v89_editorial_report_quality (38d016d)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+
+===== RUN START [2026-05-18 23:57:44] VERSION [v89_editorial_report_quality (c9232fd)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 11 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Biggest Winners And Losers Of The Week - 5/18/2026
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (54/75): Bully Ray Believes Rocky Could Inspire Cody Rhodes Vs. GUNTHER At WWE Clash In Italy
+[PERF v71] WP strict report lookup: 1.45s
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:wwe-raw-2026-05-18 - WWE Raw Results 5/18 - Women's Tag Team Title On The Line, Oba Femi Open Challenge
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176027/wwe-trick-williams-lil-yachty-explains-working/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (26/75): TNA Impact Ratings & Viewership Report: 5/14/2026
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v86.9] Cap commentary/opinion 71->68 - Bully Ray Assesses Whether Darby Allin's AEW World Championship Run Has Met Its Goals
+[PERF v71] WP lookup event_key: 1.33s
+[FIX] Event key in history ma non confermata su WordPress: event:title:darby-allin:world:championship - provo a pubblicare
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SCORE v80.4] AAA major World priority 40->72 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[SCORE v86.9] Cap commentary/opinion 72->68 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SCORE v86.9] Cap commentary/opinion 85->68 - Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2175813/aew-garrett-borden-sting-dustin-rhodes-debut-indie-event/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (34/75): AEW Dynamite Viewership & Ratings Report, 5/13/2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 71->54 - TNA's Santino Marella: WWE Clash In Italy Appearance Would Be 'Full Circle Moment'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): WWE Stars To Appear At Fan Fest Announced For White House UFC Event Freedom 250
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2175644/wwe-aew-paramount-rumors-circulating-backstage/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (62/75): Randy Orton On His WWE Absence Amid Injury Reports: 'Just Trying To Enjoy My Summer'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Backstage Update On When Stephanie Vaquer's WWE Return Is Expected
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:stephanie-vaquer-injury - Backstage Update On When Stephanie Vaquer's WWE Return Is Expected
+[SKIP] URL già in history: https://www.wrestlinginc.com/2175486/wwe-baron-corbin-bishop-dyer-discussed-return/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:wwe-raw-2026-05-18 - WWE RAW Results, Highlights and Key Moments for May 18, 2026
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - WWE RAW Spoiler Lineup for May 18, 2026: Full Match Card and Backstage Notes Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 55->55 - WWE RAW Spoiler Lineup for May 18, 2026: Full Match Card and Backstage Notes Revealed
+[SCORE v81.1] Cap future card announcement 55->55 - WWE RAW Spoiler Lineup for May 18, 2026: Full Match Card and Backstage Notes Revealed
+[SKIP] Score sotto soglia editoriale (50/75): WWE RAW Spoiler Lineup for May 18, 2026: Full Match Card and Backstage Notes Revealed
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[SCORE v79.1.2] Spoiler validato: floor 56->75 - Spoiler: Opening Segment for May 18 WWE RAW Revealed
+[SKIP] Score sotto soglia editoriale (70/75): Spoiler: Opening Segment for May 18 WWE RAW Revealed
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[SCORE v79.1.2] Spoiler validato: floor 55->75 - Spoiler: Closing Match for May 18 WWE RAW Revealed
+[SKIP] Score sotto soglia editoriale (70/75): Spoiler: Closing Match for May 18 WWE RAW Revealed
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (51/75): TKO's Mark Shapiro Admits Back-To-Back Las Vegas WrestleManias May Have Been A Mistake
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (7/75): Chris Jericho Reveals Surprising Inspiration Behind His Current "Jericho" Character
+[SKIP] URL già in history: https://www.ringsidenews.com/chris-jericho-addresses-wwe-return-rumors-before-aew-comeback/
+[SKIP] URL già in history: https://www.ringsidenews.com/cm-punks-return-timeline-revealed-amid-wwe-tv-absence/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (13/75): TNA iMPACT Viewership Sees Increase on May 14, 2026
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - TKO Executive Explains Why UFC Rejected Ronda Rousey vs. Gina Carano Fight
+[SKIP] Score sotto soglia editoriale (49/75): TKO Executive Explains Why UFC Rejected Ronda Rousey vs. Gina Carano Fight
+[SKIP] URL già in history: https://www.ringsidenews.com/wwes-current-stance-jade-cargill-past-locker-room-heat-revealed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Sting Teams With Anthony Davis to Prank Darby Allin on TBS' Foul Play
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (31/75): AEW Bringing Back Dynamite Beach Break for Summer 2026
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - AEW Set to Honor Dennis Condrey During Collision in Huntsville
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 99->54 - AEW Set to Honor Dennis Condrey During Collision in Huntsville
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 11 record da event_keys
+[PENDING] Coda salvata: 1 elementi
+[REPORT v86.6/legacy] Hold fino alle 06:30: report:wwe-raw-2026-05-18 | pronto tra 271 min - WWE Raw Results 5/18 - Women's Tag Team Title On The Line, Oba Femi Open Challenge
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 11 record da event_keys
+[PENDING] Coda salvata: 1 elementi
+[REPORT v86.6/legacy] Hold fino alle 06:30: report:wwe-raw-2026-05-18 | pronto tra 271 min - WWE RAW Results, Highlights and Key Moments for May 18, 2026
+[REPORT v86.8/legacy] 2 true-results report trattenuti fino alle 06:30 Europe/Rome
+[SCORE] 100 high - Backstage Update On When Stephanie Vaquer's WWE Return Is Expected | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v71 freshness=0.736
+[SCORE] 73 medium - WWE's Ethan Page Explains What The Intercontinental Championship Means To Him | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v71 freshness=0.55, v48 tier2: 55-74
+[SCORE] 68 medium - Backstage Update Emerges On LA Knight's WWE Absence | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.574, v48 tier2: 55-74
+[SCORE] 68 medium - Bully Ray Assesses Whether Darby Allin's AEW World Championship Run Has Met Its Goals | AEW, nomi forti titolo: bully ray, nome WWE: bully ray, titolo/championship, v62 titolo/championship, v86.9 cap commentary/opinion 71->68, v71 freshness=0.578, v48 tier2: 55-74
+[SCORE] 68 medium - Details On Relationship Between Cain Velasquez And AAA Under WWE | WWE/main roster, impatto roster/storyline, rumor/backstage, v80.4 AAA major World priority 40->72, v86.9 cap commentary/opinion 72->68, v71 freshness=0.563, v48 tier2: 55-74
+[SCORE] 68 medium - Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, titolo/championship, show settimanale, v86.9 cap commentary/opinion 85->68, v71 freshness=0.56, v48 tier2: 55-74
+[SCORE] 64 medium - AEW Star MVP On WWE's Triple H: 'How Many People You Remember The Nose Getting Over?' | WWE/main roster, nomi forti titolo: triple h, WWE main roster + storyline/evento, PLE/PPV, v71 freshness=0.525, v48 tier2: 55-74
+[SCORE] 55 low - AEW's Tony Schiavone Credits Ted Turner For Career, Says He Belongs In WWE HOF | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, floor WWE main roster storyline, v71 freshness=0.522, v48 tier2: 55-74
+[SCORE] 55 low - WWE's Tiffany Stratton Clears Up Rumor About Fabian Aichner: 'Not True' | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, floor WWE main roster storyline, v71 freshness=0.499, v48 tier2: 55-74
+[SCORE] 54 low - TNA's Santino Marella: WWE Clash In Italy Appearance Would Be 'Full Circle Moment' | WWE/main roster, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v88.2 cap OTHER/feature non-news 71->54, v71 freshness=0.539, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 11 | mode=normal | max nuove=3 | pending pubblicati=0
+[PERF v71] WP lookup URL esistente: 0.83s
+[BOT] Elaborazione: Backstage Update On When Stephanie Vaquer's WWE Return Is Expected
+[BOT] semantic_id=backstage-update-on-when-stephanie-vaquers-wwe-return-is-expected
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta indiscrezioni sul ritorno dall'infortunio di una wrestler. Nonostante citi eventi futuri, il focus principale sono i piani di rientro di Stephanie Vaquer basati su report di terze parti.
+[EDITORIAL v72.3] translation_notes=Non tradurre i nomi dei titoli (WWE Women's World Championship, NXT Women's North American Championship, etc.).; 'Back in the mix' va tradotto come 'tornare in azione' o 'rientrare nel giro'.; Mantenere le citazioni di PWI Insider Elite precise.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta indiscrezioni sul ritorno dall'infortunio di una wrestler. Nonostante citi eventi futuri, il focus principale sono i piani di rientro di Stephanie Vaquer basati su report di terze parti.
+[PERF v71] analisi editoriale AI v72: 14.21s
+[SCORE] raffinato=56 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 infortunio/operazione, v66 cap title match non-title-change, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Backstage Update On When Stephanie Vaquer's WWE Return Is Expected
+[PERF v71] WP lookup URL esistente: 0.98s
+[BOT] Elaborazione: WWE's Ethan Page Explains What The Intercontinental Championship Means To Him
+[BOT] semantic_id=wwes-ethan-page-explains-what-the-intercontinental-championship-means-to-him
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo presenta un match imminente (Saturday Night's Main Event) e il focus è sulla sfida titolata, nonostante includa un'intervista. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantenere 'Intercontinental Championship' in inglese.; 'Boyhood dream' va reso come 'sogno d'infanzia' o 'sogno di una vita'.; Attenzione a 'Saturday Night's Main Event' (evento).
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo presenta un match imminente (Saturday Night's Main Event) e il focus è sulla sfida titolata, nonostante includa un'intervista. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 13.79s
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - WWE's Ethan Page Explains What The Intercontinental Championship Means To Him
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v66 cap opinion/commentary storyline, v68 cap opinion senza news concreta, v88.2 cap OTHER/feature non-news 68->54
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - WWE's Ethan Page Explains What The Intercontinental Championship Means To Him
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - WWE's Ethan Page Explains What The Intercontinental Championship Means To Him
+[PERF v71] WP lookup URL esistente: 1.07s
+[BOT] Elaborazione: Backstage Update Emerges On LA Knight's WWE Absence
+[BOT] semantic_id=backstage-update-emerges-on-la-knights-wwe-absence
+[SCORE] iniziale=68 priority=medium
+[PERF v71] scraping articolo: 1.63s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=0
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-18 23:57:44_summary.json -> published_html_review/run_2026-05-18 23-57-44_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (411 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-18 23:57:44] VERSION [v89_editorial_report_quality (c9232fd)] =====
+
+Traceback (most recent call last):
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 21586, in <module>
+    run_bot()
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 17093, in run_bot
+    status = process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 21563, in process_candidate_item
+    return _ORIG_V891_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 21412, in process_candidate_item
+    result = _ORIG_V89_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 21178, in process_candidate_item
+    return _ORIG_V8842_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 20932, in process_candidate_item
+    result = _ORIG_V8841_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 20672, in process_candidate_item
+    return _ORIG_V884_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 20498, in process_candidate_item
+    return _ORIG_V8831_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 20363, in process_candidate_item
+    return _ORIG_V883_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 20200, in process_candidate_item
+    return _ORIG_V882_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 19509, in process_candidate_item
+    return _ORIG_V877_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 18933, in process_candidate_item
+    return _ORIG_V873_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 18449, in process_candidate_item
+    status = _ORIG_V872_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 17932, in process_candidate_item
+    status = _ORIG_V871_process_candidate_item(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 17529, in process_candidate_item
+    return _ORIG_V869_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 16753, in process_candidate_item
+    return _ORIG_V866_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 16216, in process_candidate_item
+    return _ORIG_V865_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 15073, in process_candidate_item
+    return _ORIG_V861_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 14231, in process_candidate_item
+    return _ORIG_V855_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 14022, in process_candidate_item
+    status = _ORIG_V854_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 13666, in process_candidate_item
+    return _ORIG_V851_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 13452, in process_candidate_item
+    res = _ORIG_V85_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 13127, in process_candidate_item
+    return _ORIG_V841_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 12453, in process_candidate_item
+    return _ORIG_V83_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 11562, in process_candidate_item
+    status = _ORIG_PROCESS_CANDIDATE_ITEM_V8010(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 10821, in process_candidate_item
+    status = _ORIG_PROCESS_CANDIDATE_ITEM_V803(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 6789, in process_candidate_item
+    ordered_content_blocks = build_ordered_content_blocks(page_html, source_url=link)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 19688, in build_ordered_content_blocks
+    rec = v88_media_record(url=source_url, html=html or "")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 20678, in v88_media_record
+    rec = _ORIG_V884_v88_media_record(url=url, html=html, embed_urls=embed_urls, inline_images=inline_images, featured_url=featured_url)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 19654, in v88_media_record
+    inline_images = dedupe_preserve_order([u for u in inline_images if u])
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 1600, in dedupe_preserve_order
+    item = (item or "").strip()
+           ^^^^^^^^^^^^^^^^^^
+AttributeError: 'dict' object has no attribute 'strip'
