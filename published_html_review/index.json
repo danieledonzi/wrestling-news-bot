@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-17 23:27:03",
-  "last_bot_version": "v89_editorial_report_quality (6a65f4b)",
-  "updated_at": "2026-05-17T23:28:52",
-  "total_items": 92,
+  "last_run_id": "2026-05-18 01:27:04",
+  "last_bot_version": "v89_editorial_report_quality (8fb3f06)",
+  "updated_at": "2026-05-18T01:28:49",
+  "total_items": 93,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -740,6 +740,14 @@
       "original_html_file": "20260517_232852_001_iyo-sky-spiega-perch-ha-reso-pubblico-il-matrimonio-con-naraku_1ae7dbd9_original.html",
       "final_html_file": "20260517_232852_001_iyo-sky-spiega-perch-ha-reso-pubblico-il-matrimonio-con-naraku_1ae7dbd9_final.html",
       "metadata_file": "20260517_232852_001_iyo-sky-spiega-perch-ha-reso-pubblico-il-matrimonio-con-naraku_1ae7dbd9_metadata.json"
+    },
+    {
+      "run_id": "2026-05-18 01:27:04",
+      "title": "Tiffany Stratton smentisce le voci sul licenziamento di Giovanni Vinci",
+      "url": "https://www.ringsidenews.com/tiffany-stratton-shuts-down-wild-rumor-about-former-wwe-stars-release/",
+      "original_html_file": "20260518_012849_001_tiffany-stratton-smentisce-le-voci-sul-licenziamento-di-giovanni-vinci_c7ea708d_original.html",
+      "final_html_file": "20260518_012849_001_tiffany-stratton-smentisce-le-voci-sul-licenziamento-di-giovanni-vinci_c7ea708d_final.html",
+      "metadata_file": "20260518_012849_001_tiffany-stratton-smentisce-le-voci-sul-licenziamento-di-giovanni-vinci_c7ea708d_metadata.json"
     }
   ]
 }

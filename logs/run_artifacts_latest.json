@@ -1,20 +1,20 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-17 23:27:03",
-  "bot_version": "v89_editorial_report_quality (6a65f4b)",
-  "git_sha": "6a65f4bb8a57d63250e6eb163ef9d932e5d59cc2",
-  "created_at": "2026-05-17T23:28:53",
+  "run_id": "2026-05-18 01:27:04",
+  "bot_version": "v89_editorial_report_quality (8fb3f06)",
+  "git_sha": "8fb3f06475b993bebeb3888d442a7e06c6766e33",
+  "created_at": "2026-05-18T01:28:50",
   "published_count": 1,
   "published_post_ids": [
-    "4843"
+    "4846"
   ],
   "published_artifacts": [
     {
-      "post_id": 4843,
-      "title": "Iyo Sky spiega perché ha reso pubblico il matrimonio con NARAKU",
-      "source_url": "https://www.ringsidenews.com/iyo-sky-explains-why-she-naraku-finally-went-public-marriage/",
-      "html_file": "published/20260517_232851_001_iyo-sky-spiega-perché-ha-reso-pubblico-il-matrimonio-con-naraku_4843_final.html",
-      "metadata_file": "published/20260517_232851_001_iyo-sky-spiega-perché-ha-reso-pubblico-il-matrimonio-con-naraku_4843_metadata.json"
+      "post_id": 4846,
+      "title": "Tiffany Stratton smentisce le voci sul licenziamento di Giovanni Vinci",
+      "source_url": "https://www.ringsidenews.com/tiffany-stratton-shuts-down-wild-rumor-about-former-wwe-stars-release/",
+      "html_file": "published/20260518_012847_001_tiffany-stratton-smentisce-le-voci-sul-licenziamento-di-giovanni-vinci_4846_final.html",
+      "metadata_file": "published/20260518_012847_001_tiffany-stratton-smentisce-le-voci-sul-licenziamento-di-giovanni-vinci_4846_metadata.json"
     }
   ],
   "errors": [],
