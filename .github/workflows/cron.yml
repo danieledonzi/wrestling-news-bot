@@ -1,4 +1,4 @@
-name: OpenWrestlingTV Bot v88.2
+name: OpenWrestlingTV Bot v89.2
 
 on:
   workflow_dispatch:
@@ -48,33 +48,25 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Apply v88_1 source patch to bot.py
+      - name: Verify consolidated source
         run: |
           set -e
-          python scripts/apply_bot_patch_v88_1.py
           python -m py_compile bot.py
-          if ! git diff --quiet -- bot.py; then
-            git add bot.py
-            git commit -m "fix(bot): embed v88.1 report dedupe pending cleanup [skip ci]"
-            git push
-            echo "[SOURCE PATCH v88.1] bot.py aggiornato e committato nel repository"
-          else
-            echo "[SOURCE PATCH v88.1] Nessuna modifica a bot.py"
-          fi
-
-      - name: Apply v88_2 editorial performance patch to bot.py
-        run: |
-          set -e
-          python scripts/apply_bot_patch_v88_2.py
-          python -m py_compile bot.py
-          if ! git diff --quiet -- bot.py; then
-            git add bot.py
-            git commit -m "fix(bot): embed v88.2 editorial performance guards [skip ci]"
-            git push
-            echo "[SOURCE PATCH v88.2] bot.py aggiornato e committato nel repository"
-          else
-            echo "[SOURCE PATCH v88.2] Nessuna modifica a bot.py"
-          fi
+          python - <<'PY'
+          from pathlib import Path
+          text = Path('bot.py').read_text(encoding='utf-8')
+          required = [
+              'v88.2: editorial performance guards',
+              'v88.3',
+              'v88.4',
+              'v89',
+              'v89.1: legacy return/debut rumor guard',
+          ]
+          missing = [marker for marker in required if marker not in text]
+          if missing:
+              raise SystemExit('[SOURCE CONSOLIDATION v89.2] missing markers: ' + ', '.join(missing))
+          print('[SOURCE CONSOLIDATION v89.2] bot.py contiene gia la chain consolidata fino a v89.1')
+          PY
 
       - name: Print runner public IP
         run: |
@@ -82,7 +74,7 @@ jobs:
           curl -s https://api.ipify.org || true
           echo
 
-      - name: Run bot v88_2
+      - name: Run bot v89_2
         id: run_bot
         env:
           WP_USER: ${{ secrets.WP_USER }}
@@ -106,6 +98,7 @@ jobs:
           V86_6_MEDIA_GUARD_ENABLED: "1"
           V86_6_FUTURE_SPEC_CAP_ENABLED: "1"
           V86_2_REPORT_MORNING_HOLD_ENABLED: "1"
+          V89_2_SOURCE_CONSOLIDATED: "1"
         run: |
           set +e
           python bot.py
@@ -137,7 +130,7 @@ jobs:
                           target = path.with_name(f"{target.stem}_{i}{target.suffix}")
                           i += 1
                       path.rename(target)
-                      print(f"[ARTIFACT SANITIZE v88.2] {path} -> {target}")
+                      print(f"[ARTIFACT SANITIZE v89.2] {path} -> {target}")
           PY
 
       - name: Persist bot artifacts to repository
@@ -147,7 +140,7 @@ jobs:
           mkdir -p published published_html_review logs
           touch logs/.keep published/.keep published_html_review/.keep
 
-          echo "[ARTIFACT PERSIST v88.2] Stato prima dello staging"
+          echo "[ARTIFACT PERSIST v89.2] Stato prima dello staging"
           git status --short --ignored logs published published_html_review pending_articles.json history.txt history.json confirmed_published_reports.json .bot_exit_code || true
 
           git add -A -- published published_html_review logs || true
@@ -158,15 +151,15 @@ jobs:
             fi
           done
 
-          echo "[ARTIFACT PERSIST v88.2] Stato dopo lo staging"
+          echo "[ARTIFACT PERSIST v89.2] Stato dopo lo staging"
           git status --short || true
 
           if git diff --cached --quiet; then
-            echo "[ARTIFACT PERSIST v88.2] Nessuna modifica staged da committare"
+            echo "[ARTIFACT PERSIST v89.2] Nessuna modifica staged da committare"
           else
-            git commit -m "chore(bot): persist v88.2 artifacts and logs [skip ci]"
+            git commit -m "chore(bot): persist v89.2 artifacts and logs [skip ci]"
             git push
-            echo "[ARTIFACT PERSIST v88.2] Artifact, published e master log committati nel repository"
+            echo "[ARTIFACT PERSIST v89.2] Artifact, published e master log committati nel repository"
           fi
 
       - name: Upload bot artifacts
@@ -195,6 +188,6 @@ jobs:
             code=$(cat .bot_exit_code)
           fi
           if [ "$code" != "0" ]; then
-            echo "[BOT v88.2] Bot terminato con exit code $code"
+            echo "[BOT v89.2] Bot terminato con exit code $code"
             exit "$code"
           fi
