@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-18 10:35:22",
-  "last_bot_version": "v89_editorial_report_quality (df8e23d)",
-  "updated_at": "2026-05-18T10:35:47",
-  "total_items": 93,
+  "last_run_id": "2026-05-18 13:38:39",
+  "last_bot_version": "v89_editorial_report_quality (780a13e)",
+  "updated_at": "2026-05-18T13:39:20",
+  "total_items": 95,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -748,6 +748,22 @@
       "original_html_file": "20260518_012849_001_tiffany-stratton-smentisce-le-voci-sul-licenziamento-di-giovanni-vinci_c7ea708d_original.html",
       "final_html_file": "20260518_012849_001_tiffany-stratton-smentisce-le-voci-sul-licenziamento-di-giovanni-vinci_c7ea708d_final.html",
       "metadata_file": "20260518_012849_001_tiffany-stratton-smentisce-le-voci-sul-licenziamento-di-giovanni-vinci_c7ea708d_metadata.json"
+    },
+    {
+      "run_id": "2026-05-18 13:38:39",
+      "title": "NARAKU spiega i motivi dell'addio alla NJPW per la WWE",
+      "url": "https://www.ringsidenews.com/naraku-reveals-real-reason-he-left-njpw-wwe/",
+      "original_html_file": "20260518_133906_001_naraku-spiega-i-motivi-dell-addio-alla-njpw-per-la-wwe_47639c24_original.html",
+      "final_html_file": "20260518_133906_001_naraku-spiega-i-motivi-dell-addio-alla-njpw-per-la-wwe_47639c24_final.html",
+      "metadata_file": "20260518_133906_001_naraku-spiega-i-motivi-dell-addio-alla-njpw-per-la-wwe_47639c24_metadata.json"
+    },
+    {
+      "run_id": "2026-05-18 13:38:39",
+      "title": "Tiffany Stratton risponde alle critiche sulla chirurgia estetica",
+      "url": "https://www.ringsidenews.com/tiffany-stratton-shuts-down-claim-she-plastic-head-toe/",
+      "original_html_file": "20260518_133920_002_tiffany-stratton-risponde-alle-critiche-sulla-chirurgia-estetica_46eb15ae_original.html",
+      "final_html_file": "20260518_133920_002_tiffany-stratton-risponde-alle-critiche-sulla-chirurgia-estetica_46eb15ae_final.html",
+      "metadata_file": "20260518_133920_002_tiffany-stratton-risponde-alle-critiche-sulla-chirurgia-estetica_46eb15ae_metadata.json"
     }
   ]
 }
