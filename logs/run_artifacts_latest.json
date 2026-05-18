@@ -1,28 +1,28 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-18 20:12:08",
-  "bot_version": "v89_editorial_report_quality (4810afc)",
-  "git_sha": "4810afc7e5d9d54a1c8326670c0014acde5ca40f",
-  "created_at": "2026-05-18T20:13:34",
+  "run_id": "2026-05-18 21:44:14",
+  "bot_version": "v89_editorial_report_quality (f1cdc45)",
+  "git_sha": "f1cdc4559b1d4801560ac3ecd761d0fb69e8ba88",
+  "created_at": "2026-05-18T21:48:05",
   "published_count": 2,
   "published_post_ids": [
-    "4869",
-    "4872"
+    "4875",
+    "4878"
   ],
   "published_artifacts": [
     {
-      "post_id": 4869,
-      "title": "WWE: superate le tensioni nel backstage per Jade Cargill, la dirigenza promuove i suoi progressi",
-      "source_url": "https://www.ringsidenews.com/wwes-current-stance-jade-cargill-past-locker-room-heat-revealed/",
-      "html_file": "published/20260518_201257_001_wwe-superate-le-tensioni-nel-backstage-per-jade-cargill-la-dirigenza-promuove-i-suoi-progr_4869_final.html",
-      "metadata_file": "published/20260518_201257_001_wwe-superate-le-tensioni-nel-backstage-per-jade-cargill-la-dirigenza-promuove-i-suoi-progr_4869_metadata.json"
+      "post_id": 4875,
+      "title": "WWE: svelati i piani per il ritorno in TV di CM Punk",
+      "source_url": "https://www.ringsidenews.com/cm-punks-return-timeline-revealed-amid-wwe-tv-absence/",
+      "html_file": "published/20260518_214528_001_wwe-svelati-i-piani-per-il-ritorno-in-tv-di-cm-punk_4875_final.html",
+      "metadata_file": "published/20260518_214528_001_wwe-svelati-i-piani-per-il-ritorno-in-tv-di-cm-punk_4875_metadata.json"
     },
     {
-      "post_id": 4872,
-      "title": "Garrett Borden, figlio di Sting, debutta nel wrestling durante un evento indipendente",
-      "source_url": "https://www.wrestlinginc.com/2175813/aew-garrett-borden-sting-dustin-rhodes-debut-indie-event/",
-      "html_file": "published/20260518_201313_002_garrett-borden-figlio-di-sting-debutta-nel-wrestling-durante-un-evento-indipendente_4872_final.html",
-      "metadata_file": "published/20260518_201313_002_garrett-borden-figlio-di-sting-debutta-nel-wrestling-durante-un-evento-indipendente_4872_metadata.json"
+      "post_id": 4878,
+      "title": "Chris Jericho chiarisce le voci su un suo possibile ritorno in WWE",
+      "source_url": "https://www.ringsidenews.com/chris-jericho-addresses-wwe-return-rumors-before-aew-comeback/",
+      "html_file": "published/20260518_214718_002_chris-jericho-chiarisce-le-voci-su-un-suo-possibile-ritorno-in-wwe_4878_final.html",
+      "metadata_file": "published/20260518_214718_002_chris-jericho-chiarisce-le-voci-su-un-suo-possibile-ritorno-in-wwe_4878_metadata.json"
     }
   ],
   "errors": [],

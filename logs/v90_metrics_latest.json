@@ -1,45 +1,29 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-18T20:13:34",
-  "run_start": "2026-05-18 20:12:08",
-  "run_end": "2026-05-18 20:12:08",
-  "bot_version": "v89_editorial_report_quality (4810afc)",
-  "candidate_count": 13,
+  "collected_at": "2026-05-18T21:48:05",
+  "run_start": "2026-05-18 21:44:14",
+  "run_end": "2026-05-18 21:44:14",
+  "bot_version": "v89_editorial_report_quality (f1cdc45)",
+  "candidate_count": 15,
   "mode": "normal",
   "max_new": 3,
   "published_total": 2,
   "published_pending": 0,
   "published_new": 2,
   "candidates_tried": 12,
-  "score_lines_count": 24,
-  "skip_count": 37,
+  "score_lines_count": 28,
+  "skip_count": 35,
   "skip_v89_count": 0,
-  "gemini_calls_observed": 15,
+  "gemini_calls_observed": 18,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 14,
-    "gemini-3-flash-preview": 1
+    "gemini-3.1-flash-lite": 16,
+    "gemini-3-flash-preview": 2
   },
   "gemini_discarded_models": {},
   "model_tasks": [
     {
       "task": "healthcheck",
       "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "translate_medium",
-      "chain": "gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "postedit",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "title",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
     },
     {
       "task": "editorial_analysis",
@@ -60,95 +44,116 @@
     {
       "task": "editorial_analysis",
       "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_medium",
+      "chain": "gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
+    },
+    {
+      "task": "editorial_analysis",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
     }
   ],
   "model_task_counts": {
     "healthcheck": 1,
     "editorial_analysis": 3,
-    "translate_medium": 1,
+    "translate_normal": 1,
     "postedit": 2,
     "title": 2,
-    "translate_normal": 1
+    "translate_medium": 1
   },
   "perf": {
-    "WP lookup URL esistente": {
+    "WP lookup event_key": {
       "count": 1,
-      "total_seconds": 0.8,
-      "max_seconds": 0.8
+      "total_seconds": 1.33,
+      "max_seconds": 1.33
     },
-    "analisi editoriale AI v72": {
-      "count": 7,
-      "total_seconds": 21.72,
-      "max_seconds": 12.65
+    "WP lookup URL esistente": {
+      "count": 4,
+      "total_seconds": 3.81,
+      "max_seconds": 1.14
     },
     "scraping articolo": {
-      "count": 2,
-      "total_seconds": 2.07,
-      "max_seconds": 1.12
+      "count": 3,
+      "total_seconds": 3.87,
+      "max_seconds": 1.42
     },
     "estrazione blocchi": {
-      "count": 2,
-      "total_seconds": 1.37,
-      "max_seconds": 0.78
+      "count": 3,
+      "total_seconds": 2.45,
+      "max_seconds": 0.91
+    },
+    "analisi editoriale AI v72": {
+      "count": 9,
+      "total_seconds": 51.09,
+      "max_seconds": 14.99
     },
     "WP recent posts dedupe": {
       "count": 1,
-      "total_seconds": 0.72,
-      "max_seconds": 0.72
+      "total_seconds": 1.44,
+      "max_seconds": 1.44
     },
     "categoria da analisi editoriale v72": {
       "count": 1,
-      "total_seconds": 1.03,
-      "max_seconds": 1.03
+      "total_seconds": 1.8,
+      "max_seconds": 1.8
     },
     "traduzione": {
       "count": 2,
-      "total_seconds": 31.79,
-      "max_seconds": 27.37
+      "total_seconds": 122.27,
+      "max_seconds": 88.03
     },
     "creazione post WordPress": {
       "count": 2,
-      "total_seconds": 7.59,
-      "max_seconds": 4.82
+      "total_seconds": 18.45,
+      "max_seconds": 9.7
     },
-    "totale articolo pubblicato 'WWE's Current Stance on Jade Cargill After Past Locker Room '": {
+    "totale articolo pubblicato 'CM Punk's Return Timeline Revealed Amid WWE TV Absence'": {
       "count": 1,
-      "total_seconds": 34.3,
-      "max_seconds": 34.3
+      "total_seconds": 54.93,
+      "max_seconds": 54.93
     },
-    "totale articolo pubblicato 'Garrett Borden, Son Of Sting, Makes Pro Wrestling Debut At A'": {
+    "totale articolo pubblicato 'Chris Jericho Addresses WWE Return Rumors Before AEW Comebac'": {
       "count": 1,
-      "total_seconds": 11.94,
-      "max_seconds": 11.94
+      "total_seconds": 105.14,
+      "max_seconds": 105.14
     }
   },
   "article_metrics": [
     {
-      "path": "published/20260518_201257_001_wwe-superate-le-tensioni-nel-backstage-per-jade-cargill-la-dirigenza-promuove-i-suoi-progr_4869_final.html",
+      "path": "published/20260518_214528_001_wwe-svelati-i-piani-per-il-ritorno-in-tv-di-cm-punk_4875_final.html",
       "exists": true,
-      "word_count": 327,
-      "paragraph_count": 6,
-      "blockquote_count": 3,
+      "word_count": 355,
+      "paragraph_count": 7,
+      "blockquote_count": 2,
       "image_count": 0,
       "iframe_count": 0,
-      "embed_hint_count": 6,
-      "title": "WWE: superate le tensioni nel backstage per Jade Cargill, la dirigenza promuove i suoi progressi"
+      "embed_hint_count": 4,
+      "title": "WWE: svelati i piani per il ritorno in TV di CM Punk"
     },
     {
-      "path": "published/20260518_201313_002_garrett-borden-figlio-di-sting-debutta-nel-wrestling-durante-un-evento-indipendente_4872_final.html",
+      "path": "published/20260518_214718_002_chris-jericho-chiarisce-le-voci-su-un-suo-possibile-ritorno-in-wwe_4878_final.html",
       "exists": true,
-      "word_count": 242,
-      "paragraph_count": 5,
-      "blockquote_count": 0,
+      "word_count": 347,
+      "paragraph_count": 8,
+      "blockquote_count": 5,
       "image_count": 0,
       "iframe_count": 0,
-      "embed_hint_count": 2,
-      "title": "Garrett Borden, figlio di Sting, debutta nel wrestling durante un evento indipendente"
+      "embed_hint_count": 11,
+      "title": "Chris Jericho chiarisce le voci su un suo possibile ritorno in WWE"
     }
   ],
   "daily_counts": {
-    "published_today": 9,
+    "published_today": 11,
     "published_last_4h": 5,
-    "runs_today": 13
+    "runs_today": 14
   }
 }
