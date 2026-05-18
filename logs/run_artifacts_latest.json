@@ -1,20 +1,28 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-18 18:27:23",
-  "bot_version": "v89_editorial_report_quality (7f4bdac)",
-  "git_sha": "7f4bdac01c1cb63f5cc904d967e11bbf6c9502f4",
-  "created_at": "2026-05-18T18:28:11",
-  "published_count": 1,
+  "run_id": "2026-05-18 20:12:08",
+  "bot_version": "v89_editorial_report_quality (4810afc)",
+  "git_sha": "4810afc7e5d9d54a1c8326670c0014acde5ca40f",
+  "created_at": "2026-05-18T20:13:34",
+  "published_count": 2,
   "published_post_ids": [
-    "4866"
+    "4869",
+    "4872"
   ],
   "published_artifacts": [
     {
-      "post_id": 4866,
-      "title": "Voci nel backstage WWE su un possibile futuro di AEW con Paramount",
-      "source_url": "https://www.wrestlinginc.com/2175644/wwe-aew-paramount-rumors-circulating-backstage/",
-      "html_file": "published/20260518_182756_001_voci-nel-backstage-wwe-su-un-possibile-futuro-di-aew-con-paramount_4866_final.html",
-      "metadata_file": "published/20260518_182756_001_voci-nel-backstage-wwe-su-un-possibile-futuro-di-aew-con-paramount_4866_metadata.json"
+      "post_id": 4869,
+      "title": "WWE: superate le tensioni nel backstage per Jade Cargill, la dirigenza promuove i suoi progressi",
+      "source_url": "https://www.ringsidenews.com/wwes-current-stance-jade-cargill-past-locker-room-heat-revealed/",
+      "html_file": "published/20260518_201257_001_wwe-superate-le-tensioni-nel-backstage-per-jade-cargill-la-dirigenza-promuove-i-suoi-progr_4869_final.html",
+      "metadata_file": "published/20260518_201257_001_wwe-superate-le-tensioni-nel-backstage-per-jade-cargill-la-dirigenza-promuove-i-suoi-progr_4869_metadata.json"
+    },
+    {
+      "post_id": 4872,
+      "title": "Garrett Borden, figlio di Sting, debutta nel wrestling durante un evento indipendente",
+      "source_url": "https://www.wrestlinginc.com/2175813/aew-garrett-borden-sting-dustin-rhodes-debut-indie-event/",
+      "html_file": "published/20260518_201313_002_garrett-borden-figlio-di-sting-debutta-nel-wrestling-durante-un-evento-indipendente_4872_final.html",
+      "metadata_file": "published/20260518_201313_002_garrett-borden-figlio-di-sting-debutta-nel-wrestling-durante-un-evento-indipendente_4872_metadata.json"
     }
   ],
   "errors": [],

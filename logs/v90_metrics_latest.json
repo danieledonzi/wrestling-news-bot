@@ -1,28 +1,45 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-18T18:28:11",
-  "run_start": "2026-05-18 18:27:23",
-  "run_end": "2026-05-18 18:27:23",
-  "bot_version": "v89_editorial_report_quality (7f4bdac)",
-  "candidate_count": 10,
+  "collected_at": "2026-05-18T20:13:34",
+  "run_start": "2026-05-18 20:12:08",
+  "run_end": "2026-05-18 20:12:08",
+  "bot_version": "v89_editorial_report_quality (4810afc)",
+  "candidate_count": 13,
   "mode": "normal",
   "max_new": 3,
-  "published_total": 1,
+  "published_total": 2,
   "published_pending": 0,
-  "published_new": 1,
-  "candidates_tried": 10,
-  "score_lines_count": 18,
-  "skip_count": 38,
-  "skip_v89_count": 1,
-  "gemini_calls_observed": 9,
+  "published_new": 2,
+  "candidates_tried": 12,
+  "score_lines_count": 24,
+  "skip_count": 37,
+  "skip_v89_count": 0,
+  "gemini_calls_observed": 15,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 9
+    "gemini-3.1-flash-lite": 14,
+    "gemini-3-flash-preview": 1
   },
   "gemini_discarded_models": {},
   "model_tasks": [
     {
       "task": "healthcheck",
       "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "editorial_analysis",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_medium",
+      "chain": "gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
     },
     {
       "task": "editorial_analysis",
@@ -47,79 +64,91 @@
   ],
   "model_task_counts": {
     "healthcheck": 1,
-    "editorial_analysis": 2,
-    "translate_normal": 1,
-    "postedit": 1,
-    "title": 1
+    "editorial_analysis": 3,
+    "translate_medium": 1,
+    "postedit": 2,
+    "title": 2,
+    "translate_normal": 1
   },
   "perf": {
-    "WP lookup event_key": {
+    "WP lookup URL esistente": {
       "count": 1,
-      "total_seconds": 1.56,
-      "max_seconds": 1.56
+      "total_seconds": 0.8,
+      "max_seconds": 0.8
     },
     "analisi editoriale AI v72": {
-      "count": 4,
-      "total_seconds": 9.09,
-      "max_seconds": 4.47
+      "count": 7,
+      "total_seconds": 21.72,
+      "max_seconds": 12.65
+    },
+    "scraping articolo": {
+      "count": 2,
+      "total_seconds": 2.07,
+      "max_seconds": 1.12
+    },
+    "estrazione blocchi": {
+      "count": 2,
+      "total_seconds": 1.37,
+      "max_seconds": 0.78
     },
     "WP recent posts dedupe": {
       "count": 1,
-      "total_seconds": 1.19,
-      "max_seconds": 1.19
+      "total_seconds": 0.72,
+      "max_seconds": 0.72
     },
     "categoria da analisi editoriale v72": {
       "count": 1,
-      "total_seconds": 1.54,
-      "max_seconds": 1.54
+      "total_seconds": 1.03,
+      "max_seconds": 1.03
     },
     "traduzione": {
-      "count": 1,
-      "total_seconds": 9.15,
-      "max_seconds": 9.15
+      "count": 2,
+      "total_seconds": 31.79,
+      "max_seconds": 27.37
     },
     "creazione post WordPress": {
-      "count": 1,
-      "total_seconds": 5.28,
-      "max_seconds": 5.28
+      "count": 2,
+      "total_seconds": 7.59,
+      "max_seconds": 4.82
     },
-    "totale articolo pubblicato 'Backstage Report On AEW-Paramount Rumors Circulating Backsta'": {
+    "totale articolo pubblicato 'WWE's Current Stance on Jade Cargill After Past Locker Room '": {
       "count": 1,
-      "total_seconds": 18.88,
-      "max_seconds": 18.88
+      "total_seconds": 34.3,
+      "max_seconds": 34.3
     },
-    "WP lookup URL esistente": {
+    "totale articolo pubblicato 'Garrett Borden, Son Of Sting, Makes Pro Wrestling Debut At A'": {
       "count": 1,
-      "total_seconds": 0.56,
-      "max_seconds": 0.56
-    },
-    "scraping articolo": {
-      "count": 1,
-      "total_seconds": 1.19,
-      "max_seconds": 1.19
-    },
-    "estrazione blocchi": {
-      "count": 1,
-      "total_seconds": 0.92,
-      "max_seconds": 0.92
+      "total_seconds": 11.94,
+      "max_seconds": 11.94
     }
   },
   "article_metrics": [
     {
-      "path": "published/20260518_182756_001_voci-nel-backstage-wwe-su-un-possibile-futuro-di-aew-con-paramount_4866_final.html",
+      "path": "published/20260518_201257_001_wwe-superate-le-tensioni-nel-backstage-per-jade-cargill-la-dirigenza-promuove-i-suoi-progr_4869_final.html",
       "exists": true,
-      "word_count": 171,
-      "paragraph_count": 3,
+      "word_count": 327,
+      "paragraph_count": 6,
+      "blockquote_count": 3,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 6,
+      "title": "WWE: superate le tensioni nel backstage per Jade Cargill, la dirigenza promuove i suoi progressi"
+    },
+    {
+      "path": "published/20260518_201313_002_garrett-borden-figlio-di-sting-debutta-nel-wrestling-durante-un-evento-indipendente_4872_final.html",
+      "exists": true,
+      "word_count": 242,
+      "paragraph_count": 5,
       "blockquote_count": 0,
       "image_count": 0,
       "iframe_count": 0,
-      "embed_hint_count": 0,
-      "title": "Voci nel backstage WWE su un possibile futuro di AEW con Paramount"
+      "embed_hint_count": 2,
+      "title": "Garrett Borden, figlio di Sting, debutta nel wrestling durante un evento indipendente"
     }
   ],
   "daily_counts": {
-    "published_today": 7,
-    "published_last_4h": 3,
-    "runs_today": 12
+    "published_today": 9,
+    "published_last_4h": 5,
+    "runs_today": 13
   }
 }

@@ -7447,3 +7447,266 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
 ===== RUN END [2026-05-18 18:27:23] VERSION [v89_editorial_report_quality (7f4bdac)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+
+===== RUN START [2026-05-18 20:12:08] VERSION [v89_editorial_report_quality (4810afc)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 11 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SCORE v86.9] Cap commentary/opinion 85->68 - Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Garrett Borden, Son Of Sting, Makes Pro Wrestling Debut At AEW Star's Indie Event
+[SKIP] Score sotto soglia editoriale (34/75): AEW Dynamite Viewership & Ratings Report, 5/13/2026
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 71->54 - TNA's Santino Marella: WWE Clash In Italy Appearance Would Be 'Full Circle Moment'
+[SKIP] Score sotto soglia editoriale (0/75): WWE Stars To Appear At Fan Fest Announced For White House UFC Event Freedom 250
+[SKIP] URL già in history: https://www.wrestlinginc.com/2175644/wwe-aew-paramount-rumors-circulating-backstage/
+[SKIP] Score sotto soglia editoriale (62/75): Randy Orton On His WWE Absence Amid Injury Reports: 'Just Trying To Enjoy My Summer'
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Backstage Update On When Stephanie Vaquer's WWE Return Is Expected
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:stephanie-vaquer-injury - Backstage Update On When Stephanie Vaquer's WWE Return Is Expected
+[SKIP] URL già in history: https://www.wrestlinginc.com/2175486/wwe-baron-corbin-bishop-dyer-discussed-return/
+[SKIP] Score sotto soglia editoriale (32/75): AEW's Swerve Strickland Says The Archetype Of An Indie Wrestling Star Is 'Dying'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2175050/wwe-karrion-kross-scarlett-return-aew-debut/
+[SCORE v81.1] Cap light name-driven item 16->16 - Karrion Kross Reflects On Failed First WWE Main Roster Call-Up
+[SKIP] Score sotto soglia editoriale (10/75): Karrion Kross Reflects On Failed First WWE Main Roster Call-Up
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 48/55 - WWE HOFer Jeff Jarrett Doesn't Think TKO Will Copy AEW Event
+[SKIP] Score sotto soglia editoriale (48/75): WWE HOFer Jeff Jarrett Doesn't Think TKO Will Copy AEW Event
+[SKIP] Score sotto soglia editoriale (10/75): AEW's Adam Copeland Discusses Becoming A Mentor After WWE HOFer Did The Same For Him
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (13/75): TNA iMPACT Viewership Sees Increase on May 14, 2026
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - TKO Executive Explains Why UFC Rejected Ronda Rousey vs. Gina Carano Fight
+[SKIP] Score sotto soglia editoriale (49/75): TKO Executive Explains Why UFC Rejected Ronda Rousey vs. Gina Carano Fight
+[SKIP] Score sotto soglia editoriale (0/75): Sting Teams With Anthony Davis to Prank Darby Allin on TBS' Foul Play
+[SKIP] Score sotto soglia editoriale (31/75): AEW Bringing Back Dynamite Beach Break for Summer 2026
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - AEW Set to Honor Dennis Condrey During Collision in Huntsville
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 99->54 - AEW Set to Honor Dennis Condrey During Collision in Huntsville
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE's Involvement in UFC Freedom 250 White House Event Revealed
+[SKIP] Score sotto soglia editoriale (0/75): WWE's Involvement in UFC Freedom 250 White House Event Revealed
+[SKIP] URL già in history: https://www.ringsidenews.com/zelina-vega-books-movie-role-following-her-wwe-release/
+[SKIP] Score sotto soglia editoriale (51/75): Stephanie Vaquer's Status for May 18 WWE RAW Amid Injury Absence Revealed
+[SKIP] Score sotto soglia editoriale (23/75): Giulia Brings Back Classic STARDOM Look After WWE SmackDown
+[SKIP] Score sotto soglia editoriale (7/75): Road Warrior Animal's Widow Accuses A&E Biography of Disrespecting His Legacy
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - The Bella Twins Reveal They've Pushed Hard for Total Divas and Total Bellas Revival
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - The Bella Twins Reveal They've Pushed Hard for Total Divas and Total Bellas Revival
+[SKIP] Score sotto soglia editoriale (49/75): The Bella Twins Reveal They've Pushed Hard for Total Divas and Total Bellas Revival
+[SKIP] URL già in history: https://www.ringsidenews.com/kevin-nash-calls-out-wwe-one-sided-contract-clauses-that-hurt-wrestlers-market-value/
+[SKIP] URL già in history: https://www.ringsidenews.com/tiffany-stratton-shuts-down-claim-she-plastic-head-toe/
+[SCORE] 100 high - Backstage Update On When Stephanie Vaquer's WWE Return Is Expected | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v71 freshness=0.783
+[SCORE] 73 medium - WWE's Ethan Page Explains What The Intercontinental Championship Means To Him | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v71 freshness=0.597, v48 tier2: 55-74
+[SCORE] 73 medium - WWE's Current Stance on Jade Cargill After Past Locker Room Heat Revealed | WWE/main roster, nomi forti titolo: jade cargill, WWE main roster + storyline/evento, contratto, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.572, v48 tier2: 55-74
+[SCORE] 68 medium - Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, titolo/championship, show settimanale, v86.9 cap commentary/opinion 85->68, v71 freshness=0.607, v48 tier2: 55-74
+[SCORE] 68 medium - Garrett Borden, Son Of Sting, Makes Pro Wrestling Debut At AEW Star's Indie Event | AEW, impatto roster/storyline, ritorno/debutto, v62 ritorno/debutto, v71 freshness=0.709, v48 tier2: 55-74
+[SCORE] 64 medium - AEW Star MVP On WWE's Triple H: 'How Many People You Remember The Nose Getting Over?' | WWE/main roster, nomi forti titolo: triple h, WWE main roster + storyline/evento, PLE/PPV, v71 freshness=0.572, v48 tier2: 55-74
+[SCORE] 61 medium - Zoey Stark Reveals New Name and Hypes Free Agency After WWE Release | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 source reliability soft penalty, v71 freshness=0.535, v48 tier2: 55-74
+[SCORE] 55 low - AEW's Tony Schiavone Credits Ted Turner For Career, Says He Belongs In WWE HOF | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, floor WWE main roster storyline, v71 freshness=0.569, v48 tier2: 55-74
+[SCORE] 55 low - WWE's Tiffany Stratton Clears Up Rumor About Fabian Aichner: 'Not True' | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, floor WWE main roster storyline, v71 freshness=0.546, v48 tier2: 55-74
+[SCORE] 55 low - Sandman Left ECW Over Pay Dispute | business/media rights, v62 media rights/streaming, v62 categoria business, v71 freshness=0.514, v48 tier2: 55-74
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 13 | mode=normal | max nuove=3 | pending pubblicati=0
+[PERF v71] WP lookup URL esistente: 0.80s
+[BOT] Elaborazione: Backstage Update On When Stephanie Vaquer's WWE Return Is Expected
+[BOT] semantic_id=backstage-update-on-when-stephanie-vaquers-wwe-return-is-expected
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo fornisce un aggiornamento di backstage su tempi di recupero e data di rientro di una star, classificandosi come news di mercato/rumor tecnico.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Women's World Championship' e nomi delle cinture invariati.; Tradurre 'back in the mix' con 'tornerà in azione' o 'tornerà nel giro'.; Evitare 'rilasciato' per 'released'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo fornisce un aggiornamento di backstage su tempi di recupero e data di rientro di una star, classificandosi come news di mercato/rumor tecnico.
+[PERF v71] analisi editoriale AI v72: 0.98s
+[SCORE] raffinato=56 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 infortunio/operazione, v66 cap title match non-title-change, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Backstage Update On When Stephanie Vaquer's WWE Return Is Expected
+[BOT] Elaborazione: WWE's Ethan Page Explains What The Intercontinental Championship Means To Him
+[BOT] semantic_id=wwes-ethan-page-explains-what-the-intercontinental-championship-means-to-him
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.90 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo promuove un match imminente (Saturday Night's Main Event) e riporta le dichiarazioni di Ethan Page in vista della sfida titolata, configurandosi come materiale di avvicinamento all'evento. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Intercontinental Championship'.; 'Boyhood dream' va reso come 'sogno di una vita' o 'sogno da bambino'.; 'H/t' (hat tip) va reso come 'si ringrazia' o 'via'.
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo promuove un match imminente (Saturday Night's Main Event) e riporta le dichiarazioni di Ethan Page in vista della sfida titolata, configurandosi come materiale di avvicinamento all'evento. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.24s
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - WWE's Ethan Page Explains What The Intercontinental Championship Means To Him
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v66 cap opinion/commentary storyline, v68 cap opinion senza news concreta, v88.2 cap OTHER/feature non-news 68->54
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - WWE's Ethan Page Explains What The Intercontinental Championship Means To Him
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - WWE's Ethan Page Explains What The Intercontinental Championship Means To Him
+[BOT] Elaborazione: WWE's Current Stance on Jade Cargill After Past Locker Room Heat Revealed
+[BOT] semantic_id=wwes-current-stance-on-jade-cargill-after-past-locker-room-heat-revealed
+[SCORE] iniziale=73 priority=medium
+[PERF v71] scraping articolo: 0.95s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=12, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.59s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo tratta indiscrezioni di backstage e aggiornamenti sullo status interno di una wrestler, basandosi su report di fonti terze (WrestleVotes/Fightful).
+[EDITORIAL v72.3] translation_notes=Mantenere 'heat' come termine tecnico o tradurre con 'malumori'/'tensione nel backstage'.; Non tradurre titoli come 'SmackDown' o nomi di atleti.; Gestire le quote di WrestleVotes in modo diretto, evitando forme passive macchinose.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo tratta indiscrezioni di backstage e aggiornamenti sullo status interno di una wrestler, basandosi su report di fonti terze (WrestleVotes/Fightful).
+[PERF v71] analisi editoriale AI v72: 1.06s
+[SCORE] raffinato=68 priority=medium | WWE/main roster, nomi forti titolo: jade cargill, WWE main roster + storyline/evento, contratto, PLE/PPV, v72.3 cap rumor: niente boost raffinamento, v72.3 cap rumor
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - WWE's Current Stance on Jade Cargill After Past Locker Room Heat Revealed
+[V71] story_signature=stable:tiffany_stratton|jade_cargill|current_stance|story|wwe semantic_status=new_story freshness=0.572
+[PERF v71] WP recent posts dedupe: 0.72s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.03s
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=12
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione applicato con gemini-3.1-flash-lite: editorial_word_ratio=0.68 (305/451) threshold=0.70
+[PRESERVE v81] Guardrail finale testo applicato
+[PERF v71] traduzione: 27.37s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwes-current-stance-on-jade-cargill-after-past-locker-room-heat-revealed-19.jpg
+[MEDIA] Immagine caricata: 4868
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260518_201257_001_wwe-superate-le-tensioni-nel-backstage-per-jade-cargill-la-dirigenza-promuove-i-suoi-progr_4869_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4869
+[PERF v71] creazione post WordPress: 2.77s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwes-current-stance-on-jade-cargill-after-past-locker-room-heat-revealed-19.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4868
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'WWE's Current Stance on Jade Cargill After Past Locker Room ': 34.30s
+[OK] Pubblicato: WWE: superate le tensioni nel backstage per Jade Cargill, la dirigenza promuove i suoi progressi
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260518_201259_001_wwe-superate-le-tensioni-nel-backstage-per-jade-cargill-la-dirigenza-promuove-i-_d52dd6d1_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WWE: superate le tensioni nel backstage per Jade Cargill, la dirigenza promuove i suoi progressi
+[PUBLISHED REVIEW v87.1] Review outer salvata: WWE: superate le tensioni nel backstage per Jade Cargill, la dirigenza promuove i suoi progressi
+[BOT] Elaborazione: Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[BOT] semantic_id=lyra-valkyria-names-wwe-nxt-star-she-hopes-to-face-in-john-cena-classic
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni recenti di Lyra Valkyria tratte da un'intervista esterna. Non è una preview dell'evento, ma una news basata su commenti post-annuncio.
+[EDITORIAL v72.3] translation_notes=Mantenere 'John Cena Classic' come nome proprio del torneo.; 'NXT Women's Champion' e 'Women's North American Champion' non vanno tradotti.; Attenzione ai calchi: 'what if floodgates opened' va reso in modo naturale, es. 'si sono aperte le porte alle speculazioni'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta dichiarazioni recenti di Lyra Valkyria tratte da un'intervista esterna. Non è una preview dell'evento, ma una news basata su commenti post-annuncio.
+[PERF v71] analisi editoriale AI v72: 1.96s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[SCORE] raffinato=0 priority=skip | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, titolo/championship, show settimanale, developmental secondario, v66 blocco politica/volgarita non wrestling
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 0/75 - Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[BOT] Elaborazione: Garrett Borden, Son Of Sting, Makes Pro Wrestling Debut At AEW Star's Indie Event
+[BOT] semantic_id=garrett-borden-son-of-sting-makes-pro-wrestling-debut-at-aew-stars-indie-event
+[SCORE] iniziale=68 priority=medium
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.wrestlinginc.com/2175813/aew-garrett-borden-sting-dustin-rhodes-debut-indie-event/
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.wrestlinginc.com/2175813/aew-garrett-borden-sting-dustin-rhodes-debut-indie-event/
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WORLD (8) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta il debutto sul ring di Garrett Borden in una federazione indipendente. Non essendo un evento principale di una major, la categoria World è la più appropriata per il wrestling indipendente.
+[EDITORIAL v72.3] translation_notes=Mantenere i termini tecnici delle mosse come 'Sting Splash', 'Torture Rack' e 'Samoan Drop' in inglese.; Non tradurre 'Rhodes Wrestling Association' o 'Rhodes Wrestling Academy'.; Assicurarsi di distinguere chiaramente tra Steven (il fratello già attivo) e Garrett (il protagonista del debutto).
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WORLD (8) | L'articolo riporta il debutto sul ring di Garrett Borden in una federazione indipendente. Non essendo un evento principale di una major, la categoria World è la più appropriata per il wrestling indipendente.
+[PERF v71] analisi editoriale AI v72: 1.35s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Garrett Borden, Son Of Sting, Makes Pro Wrestling Debut At AEW Star's Indie Event
+[SCORE] raffinato=83 priority=high | AEW, impatto roster/storyline, ritorno/debutto, PLE/PPV, v62 ritorno/debutto
+[V71] story_signature=stable:darby_allin|garrett_borden|son_of_sting|debut|aew semantic_status=new_story freshness=0.708
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=5
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/garrett-borden-son-of-sting-makes-pro-wrestling-debut-at-aew-stars-indie-event/intro-1779129523.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 4.42s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Garrett Borden, figlio di Sting, debutta nel wrestling durante un evento indipendente
+[EMBED v87.3] Positional embed guard applicato: 1 modifiche
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[MEDIA v86.7] Reintegrati 1 embed persi prima del publish
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/garrett-borden-son-of-sting-makes-pro-wrestling-debut-at-aew-stars-indie-event/l-intro-1779129523.jpg
+[MEDIA] Immagine caricata: 4871
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260518_201313_002_garrett-borden-figlio-di-sting-debutta-nel-wrestling-durante-un-evento-indipendente_4872_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4872
+[PERF v71] creazione post WordPress: 4.82s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/garrett-borden-son-of-sting-makes-pro-wrestling-debut-at-aew-stars-indie-event/l-intro-1779129523.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4871
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Garrett Borden, Son Of Sting, Makes Pro Wrestling Debut At A': 11.94s
+[OK] Pubblicato: Garrett Borden, figlio di Sting, debutta nel wrestling durante un evento indipendente
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260518_201315_002_garrett-borden-figlio-di-sting-debutta-nel-wrestling-durante-un-evento-indipende_484b7737_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Garrett Borden, figlio di Sting, debutta nel wrestling durante un evento indipendente
+[PUBLISHED REVIEW v87.1] Review outer salvata: Garrett Borden, figlio di Sting, debutta nel wrestling durante un evento indipendente
+[BOT] Elaborazione: AEW Star MVP On WWE's Triple H: 'How Many People You Remember The Nose Getting Over?'
+[BOT] semantic_id=aew-star-mvp-on-wwes-triple-h-how-many-people-you-remember-the-nose-getting-over
+[SCORE] iniziale=64 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=0.95 | category=AEW (5) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni e opinioni personali espresse da MVP nel suo podcast riguardanti la gestione di Triple H e il confronto con The Undertaker.
+[EDITORIAL v72.3] translation_notes=Mantenere 'The Nose' e 'Triple Nose' come epiteti dispregiativi usati da MVP, eventualmente aggiungendo una breve nota tra parentesi se necessario.; Tradurre 'getting over' come 'mandare over' (termine tecnico in uso nella community italiana).; 'Pro's pro' va reso con un adattamento che esalti la professionalità assoluta ('un vero professionista').
+[EDITORIAL v73] final type=OPINION | category=AEW (5) | L'articolo riporta dichiarazioni e opinioni personali espresse da MVP nel suo podcast riguardanti la gestione di Triple H e il confronto con The Undertaker.
+[PERF v71] analisi editoriale AI v72: 2.48s
+[SCORE v88.3] v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 56->54 - AEW Star MVP On WWE's Triple H: 'How Many People You Remember The Nose Getting Over?'
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: triple h, WWE main roster + storyline/evento, PLE/PPV, opinione generica, v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 56->54
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - AEW Star MVP On WWE's Triple H: 'How Many People You Remember The Nose Getting Over?'
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - AEW Star MVP On WWE's Triple H: 'How Many People You Remember The Nose Getting Over?'
+[BOT] Elaborazione: Zoey Stark Reveals New Name and Hypes Free Agency After WWE Release
+[BOT] semantic_id=zoey-stark-reveals-new-name-and-hypes-free-agency-after-wwe-release
+[SCORE] iniziale=61 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/zoey-stark-reveals-new-name-hypes-free-agency-wwe-release/
+[PERF v71] scraping articolo: 1.12s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=10, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/zoey-stark-reveals-new-name-hypes-free-agency-wwe-release/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.78s
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta il licenziamento, il cambio di ring name e il percorso di riabilitazione di un'ex wrestler WWE; non riguarda un evento futuro.
+[EDITORIAL v72.3] translation_notes=Mantenere 'The Purist' Zoey Serrano come ring name ufficiale.; 'Released' va reso con 'licenziata' o 'addio alla WWE', mai 'rilasciata'.; 'Free agency' si riferisce allo status di lottatrice indipendente dopo la scadenza della clausola di non concorrenza; gestire con cura terminologica.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta il licenziamento, il cambio di ring name e il percorso di riabilitazione di un'ex wrestler WWE; non riguarda un evento futuro.
+[PERF v71] analisi editoriale AI v72: 12.65s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Zoey Stark Reveals New Name and Hypes Free Agency After WWE Release
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 82->54 - Zoey Stark Reveals New Name and Hypes Free Agency After WWE Release
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, developmental secondario, v62 evento legale grave, v88.2 cap OTHER/feature non-news 82->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Zoey Stark Reveals New Name and Hypes Free Agency After WWE Release
+[SKIP v88.3] Non forzo articolo soft sotto 65 dopo una pubblicazione: 55/65 - AEW's Tony Schiavone Credits Ted Turner For Career, Says He Belongs In WWE HOF
+[SKIP v86.6/legacy] low_score_pre_gemini:55: WWE's Tiffany Stratton Clears Up Rumor About Fabian Aichner: 'Not True'
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:55: Sandman Left ECW Over Pay Dispute
+[PENDING] Coda salvata: 0 elementi
+[SKIP v88.2] Feature/OTHER non-news sotto priorita hard: TNA's Santino Marella: WWE Clash In Italy Appearance Would Be 'Full Circle Moment'
+[SKIP v88.2] Feature/OTHER non-news sotto priorita hard: AEW Set to Honor Dennis Condrey During Collision in Huntsville
+[BOT] Raggiunto limite massimo candidati nuovi provati
+[BOT] Pubblicati 2 articoli (0 pending + 2 nuove) su 12 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-18 20:12:08_summary.json -> published_html_review/run_2026-05-18 20-12-08_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (399 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
+===== RUN END [2026-05-18 20:12:08] VERSION [v89_editorial_report_quality (4810afc)] =====
+
