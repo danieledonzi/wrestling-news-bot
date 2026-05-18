@@ -1,25 +1,28 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-18T21:48:05",
-  "run_start": "2026-05-18 21:44:14",
-  "run_end": "2026-05-18 21:44:14",
-  "bot_version": "v89_editorial_report_quality (f1cdc45)",
-  "candidate_count": 15,
+  "collected_at": "2026-05-18T22:53:35",
+  "run_start": "2026-05-18 22:51:20",
+  "run_end": "2026-05-18 22:51:20",
+  "bot_version": "v89_editorial_report_quality (38d016d)",
+  "candidate_count": 13,
   "mode": "normal",
   "max_new": 3,
-  "published_total": 2,
+  "published_total": 1,
   "published_pending": 0,
-  "published_new": 2,
+  "published_new": 1,
   "candidates_tried": 12,
-  "score_lines_count": 28,
-  "skip_count": 35,
+  "score_lines_count": 26,
+  "skip_count": 38,
   "skip_v89_count": 0,
-  "gemini_calls_observed": 18,
+  "gemini_calls_observed": 13,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 16,
-    "gemini-3-flash-preview": 2
+    "gemini-3.1-flash-lite": 1,
+    "gemini-2.5-flash-lite": 3,
+    "gemini-3-flash-preview": 9
   },
-  "gemini_discarded_models": {},
+  "gemini_discarded_models": {
+    "gemini-3.1-flash-lite": 1
+  },
   "model_tasks": [
     {
       "task": "healthcheck",
@@ -27,133 +30,100 @@
     },
     {
       "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+      "chain": "gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
     },
     {
       "task": "translate_normal",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
+      "chain": "gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
     },
     {
       "task": "postedit",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+      "chain": "gemini-2.5-flash-lite,gemini-2.5-flash"
     },
     {
       "task": "title",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
+      "chain": "gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
     },
     {
       "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "translate_medium",
-      "chain": "gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "postedit",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "title",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
-    },
-    {
-      "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+      "chain": "gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
     }
   ],
   "model_task_counts": {
     "healthcheck": 1,
-    "editorial_analysis": 3,
+    "editorial_analysis": 2,
     "translate_normal": 1,
-    "postedit": 2,
-    "title": 2,
-    "translate_medium": 1
+    "postedit": 1,
+    "title": 1
   },
   "perf": {
     "WP lookup event_key": {
-      "count": 1,
-      "total_seconds": 1.33,
-      "max_seconds": 1.33
+      "count": 2,
+      "total_seconds": 1.94,
+      "max_seconds": 1.11
     },
     "WP lookup URL esistente": {
-      "count": 4,
-      "total_seconds": 3.81,
-      "max_seconds": 1.14
-    },
-    "scraping articolo": {
-      "count": 3,
-      "total_seconds": 3.87,
-      "max_seconds": 1.42
-    },
-    "estrazione blocchi": {
-      "count": 3,
-      "total_seconds": 2.45,
-      "max_seconds": 0.91
+      "count": 5,
+      "total_seconds": 3.48,
+      "max_seconds": 0.88
     },
     "analisi editoriale AI v72": {
-      "count": 9,
-      "total_seconds": 51.09,
-      "max_seconds": 14.99
+      "count": 8,
+      "total_seconds": 56.49,
+      "max_seconds": 9.86
     },
     "WP recent posts dedupe": {
       "count": 1,
-      "total_seconds": 1.44,
-      "max_seconds": 1.44
+      "total_seconds": 1.24,
+      "max_seconds": 1.24
     },
     "categoria da analisi editoriale v72": {
       "count": 1,
-      "total_seconds": 1.8,
-      "max_seconds": 1.8
+      "total_seconds": 2.4,
+      "max_seconds": 2.4
     },
     "traduzione": {
-      "count": 2,
-      "total_seconds": 122.27,
-      "max_seconds": 88.03
+      "count": 1,
+      "total_seconds": 13.33,
+      "max_seconds": 13.33
     },
     "creazione post WordPress": {
-      "count": 2,
-      "total_seconds": 18.45,
-      "max_seconds": 9.7
-    },
-    "totale articolo pubblicato 'CM Punk's Return Timeline Revealed Amid WWE TV Absence'": {
       "count": 1,
-      "total_seconds": 54.93,
-      "max_seconds": 54.93
+      "total_seconds": 4.89,
+      "max_seconds": 4.89
     },
-    "totale articolo pubblicato 'Chris Jericho Addresses WWE Return Rumors Before AEW Comebac'": {
+    "totale articolo pubblicato 'WWE's Trick Williams Explains What It's Like Working With Li'": {
       "count": 1,
-      "total_seconds": 105.14,
-      "max_seconds": 105.14
+      "total_seconds": 27.59,
+      "max_seconds": 27.59
+    },
+    "scraping articolo": {
+      "count": 1,
+      "total_seconds": 1.58,
+      "max_seconds": 1.58
+    },
+    "estrazione blocchi": {
+      "count": 1,
+      "total_seconds": 0.75,
+      "max_seconds": 0.75
     }
   },
   "article_metrics": [
     {
-      "path": "published/20260518_214528_001_wwe-svelati-i-piani-per-il-ritorno-in-tv-di-cm-punk_4875_final.html",
+      "path": "published/20260518_225248_001_trick-williams-lavorare-con-lil-yachty-è-contagioso_4881_final.html",
       "exists": true,
-      "word_count": 355,
-      "paragraph_count": 7,
-      "blockquote_count": 2,
+      "word_count": 259,
+      "paragraph_count": 3,
+      "blockquote_count": 0,
       "image_count": 0,
       "iframe_count": 0,
-      "embed_hint_count": 4,
-      "title": "WWE: svelati i piani per il ritorno in TV di CM Punk"
-    },
-    {
-      "path": "published/20260518_214718_002_chris-jericho-chiarisce-le-voci-su-un-suo-possibile-ritorno-in-wwe_4878_final.html",
-      "exists": true,
-      "word_count": 347,
-      "paragraph_count": 8,
-      "blockquote_count": 5,
-      "image_count": 0,
-      "iframe_count": 0,
-      "embed_hint_count": 11,
-      "title": "Chris Jericho chiarisce le voci su un suo possibile ritorno in WWE"
+      "embed_hint_count": 0,
+      "title": "Trick Williams: \"Lavorare con Lil Yachty è contagioso\""
     }
   ],
   "daily_counts": {
-    "published_today": 11,
+    "published_today": 12,
     "published_last_4h": 5,
-    "runs_today": 14
+    "runs_today": 15
   }
 }

@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-18 21:44:14",
-  "last_bot_version": "v89_editorial_report_quality (f1cdc45)",
-  "updated_at": "2026-05-18T21:48:05",
-  "total_items": 103,
+  "last_run_id": "2026-05-18 22:51:20",
+  "last_bot_version": "v89_editorial_report_quality (38d016d)",
+  "updated_at": "2026-05-18T22:53:34",
+  "total_items": 104,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -828,6 +828,14 @@
       "original_html_file": "20260518_214719_002_chris-jericho-chiarisce-le-voci-su-un-suo-possibile-ritorno-in-wwe_e804ddaf_original.html",
       "final_html_file": "20260518_214719_002_chris-jericho-chiarisce-le-voci-su-un-suo-possibile-ritorno-in-wwe_e804ddaf_final.html",
       "metadata_file": "20260518_214719_002_chris-jericho-chiarisce-le-voci-su-un-suo-possibile-ritorno-in-wwe_e804ddaf_metadata.json"
+    },
+    {
+      "run_id": "2026-05-18 22:51:20",
+      "title": "Trick Williams: \"Lavorare con Lil Yachty è contagioso\"",
+      "url": "https://www.wrestlinginc.com/2176027/wwe-trick-williams-lil-yachty-explains-working/",
+      "original_html_file": "20260518_225249_001_trick-williams-lavorare-con-lil-yachty-contagioso_54f73427_original.html",
+      "final_html_file": "20260518_225249_001_trick-williams-lavorare-con-lil-yachty-contagioso_54f73427_final.html",
+      "metadata_file": "20260518_225249_001_trick-williams-lavorare-con-lil-yachty-contagioso_54f73427_metadata.json"
     }
   ]
 }

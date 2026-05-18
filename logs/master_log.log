@@ -8017,3 +8017,286 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
 ===== RUN END [2026-05-18 21:44:14] VERSION [v89_editorial_report_quality (f1cdc45)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+
+===== RUN START [2026-05-18 22:51:20] VERSION [v89_editorial_report_quality (38d016d)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 11 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (26/75): TNA Impact Ratings & Viewership Report: 5/14/2026
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v86.9] Cap commentary/opinion 71->68 - Bully Ray Assesses Whether Darby Allin's AEW World Championship Run Has Met Its Goals
+[PERF v71] WP lookup event_key: 1.11s
+[FIX] Event key in history ma non confermata su WordPress: event:title:darby-allin:world:championship - provo a pubblicare
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SCORE v80.4] AAA major World priority 40->72 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[SCORE v86.9] Cap commentary/opinion 72->68 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SCORE v86.9] Cap commentary/opinion 85->68 - Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2175813/aew-garrett-borden-sting-dustin-rhodes-debut-indie-event/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (34/75): AEW Dynamite Viewership & Ratings Report, 5/13/2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 71->54 - TNA's Santino Marella: WWE Clash In Italy Appearance Would Be 'Full Circle Moment'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): WWE Stars To Appear At Fan Fest Announced For White House UFC Event Freedom 250
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2175644/wwe-aew-paramount-rumors-circulating-backstage/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (62/75): Randy Orton On His WWE Absence Amid Injury Reports: 'Just Trying To Enjoy My Summer'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Backstage Update On When Stephanie Vaquer's WWE Return Is Expected
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:stephanie-vaquer-injury - Backstage Update On When Stephanie Vaquer's WWE Return Is Expected
+[SKIP] URL già in history: https://www.wrestlinginc.com/2175486/wwe-baron-corbin-bishop-dyer-discussed-return/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (32/75): AEW's Swerve Strickland Says The Archetype Of An Indie Wrestling Star Is 'Dying'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2175050/wwe-karrion-kross-scarlett-return-aew-debut/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - WWE RAW Spoiler Lineup for May 18, 2026: Full Match Card and Backstage Notes Revealed
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 55->55 - WWE RAW Spoiler Lineup for May 18, 2026: Full Match Card and Backstage Notes Revealed
+[SCORE v81.1] Cap future card announcement 55->55 - WWE RAW Spoiler Lineup for May 18, 2026: Full Match Card and Backstage Notes Revealed
+[SKIP] Score sotto soglia editoriale (50/75): WWE RAW Spoiler Lineup for May 18, 2026: Full Match Card and Backstage Notes Revealed
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[SCORE v79.1.2] Spoiler validato: floor 56->75 - Spoiler: Opening Segment for May 18 WWE RAW Revealed
+[SKIP] Score sotto soglia editoriale (70/75): Spoiler: Opening Segment for May 18 WWE RAW Revealed
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[SCORE v79.1.2] Spoiler validato: floor 55->75 - Spoiler: Closing Match for May 18 WWE RAW Revealed
+[SKIP] Score sotto soglia editoriale (70/75): Spoiler: Closing Match for May 18 WWE RAW Revealed
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (51/75): TKO's Mark Shapiro Admits Back-To-Back Las Vegas WrestleManias May Have Been A Mistake
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (7/75): Chris Jericho Reveals Surprising Inspiration Behind His Current "Jericho" Character
+[SKIP] URL già in history: https://www.ringsidenews.com/chris-jericho-addresses-wwe-return-rumors-before-aew-comeback/
+[SKIP] URL già in history: https://www.ringsidenews.com/cm-punks-return-timeline-revealed-amid-wwe-tv-absence/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (13/75): TNA iMPACT Viewership Sees Increase on May 14, 2026
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - TKO Executive Explains Why UFC Rejected Ronda Rousey vs. Gina Carano Fight
+[SKIP] Score sotto soglia editoriale (49/75): TKO Executive Explains Why UFC Rejected Ronda Rousey vs. Gina Carano Fight
+[SKIP] URL già in history: https://www.ringsidenews.com/wwes-current-stance-jade-cargill-past-locker-room-heat-revealed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Sting Teams With Anthony Davis to Prank Darby Allin on TBS' Foul Play
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (31/75): AEW Bringing Back Dynamite Beach Break for Summer 2026
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - AEW Set to Honor Dennis Condrey During Collision in Huntsville
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 99->54 - AEW Set to Honor Dennis Condrey During Collision in Huntsville
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE's Involvement in UFC Freedom 250 White House Event Revealed
+[SKIP] Score sotto soglia editoriale (0/75): WWE's Involvement in UFC Freedom 250 White House Event Revealed
+[SCORE] 100 high - Backstage Update On When Stephanie Vaquer's WWE Return Is Expected | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v71 freshness=0.75
+[SCORE] 73 medium - WWE's Ethan Page Explains What The Intercontinental Championship Means To Him | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v71 freshness=0.564, v48 tier2: 55-74
+[SCORE] 71 medium - WWE's Trick Williams Explains What It's Like Working With Lil Yachty | WWE/main roster, nomi forti titolo: trick williams, WWE main roster + storyline/evento, titolo/championship, show settimanale, v71 freshness=0.598, v48 tier2: 55-74
+[SCORE] 68 medium - Bully Ray Assesses Whether Darby Allin's AEW World Championship Run Has Met Its Goals | AEW, nomi forti titolo: bully ray, nome WWE: bully ray, titolo/championship, v62 titolo/championship, v86.9 cap commentary/opinion 71->68, v71 freshness=0.592, v48 tier2: 55-74
+[SCORE] 68 medium - Details On Relationship Between Cain Velasquez And AAA Under WWE | WWE/main roster, impatto roster/storyline, rumor/backstage, v80.4 AAA major World priority 40->72, v86.9 cap commentary/opinion 72->68, v71 freshness=0.577, v48 tier2: 55-74
+[SCORE] 68 medium - Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, titolo/championship, show settimanale, v86.9 cap commentary/opinion 85->68, v71 freshness=0.574, v48 tier2: 55-74
+[SCORE] 64 medium - AEW Star MVP On WWE's Triple H: 'How Many People You Remember The Nose Getting Over?' | WWE/main roster, nomi forti titolo: triple h, WWE main roster + storyline/evento, PLE/PPV, v71 freshness=0.539, v48 tier2: 55-74
+[SCORE] 61 medium - Zoey Stark Reveals New Name and Hypes Free Agency After WWE Release | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 source reliability soft penalty, v71 freshness=0.502, v48 tier2: 55-74
+[SCORE] 55 low - AEW's Tony Schiavone Credits Ted Turner For Career, Says He Belongs In WWE HOF | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, floor WWE main roster storyline, v71 freshness=0.536, v48 tier2: 55-74
+[SCORE] 55 low - WWE's Tiffany Stratton Clears Up Rumor About Fabian Aichner: 'Not True' | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, floor WWE main roster storyline, v71 freshness=0.513, v48 tier2: 55-74
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[MODEL v88] Cooldown globale modello per la run: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[GEMINI] Modello attivo: gemini-2.5-flash-lite
+[BOT] News candidate totali: 13 | mode=normal | max nuove=3 | pending pubblicati=0
+[PERF v71] WP lookup URL esistente: 0.76s
+[BOT] Elaborazione: Backstage Update On When Stephanie Vaquer's WWE Return Is Expected
+[BOT] semantic_id=backstage-update-on-when-stephanie-vaquers-wwe-return-is-expected
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3-flash-preview | L'articolo è un classico report di backstage riguardante i tempi di recupero da un infortunio e il possibile ritorno di una wrestler WWE.
+[EDITORIAL v72.3] translation_notes=Mantenere 'WWE Women's World Championship' in inglese.; 'Write her off TV' non va tradotto letteralmente: usare 'escluderla dalle scene' o 'giustificare la sua assenza'.; 'Back in the mix' può essere reso con 'rientrare nel giro' o 'tornare in azione'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo è un classico report di backstage riguardante i tempi di recupero da un infortunio e il possibile ritorno di una wrestler WWE.
+[PERF v71] analisi editoriale AI v72: 5.00s
+[SCORE] raffinato=56 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 infortunio/operazione, v66 cap title match non-title-change, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - Backstage Update On When Stephanie Vaquer's WWE Return Is Expected
+[PERF v71] WP lookup URL esistente: 0.64s
+[BOT] Elaborazione: WWE's Ethan Page Explains What The Intercontinental Championship Means To Him
+[BOT] semantic_id=wwes-ethan-page-explains-what-the-intercontinental-championship-means-to-him
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=OPINION conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3-flash-preview | L'articolo riporta un'intervista a Ethan Page focalizzata sui suoi obiettivi e sentimenti personali verso il titolo IC; rientra nella categoria interviste/opinioni dei wrestler.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Intercontinental Championship' in inglese; 'Saturday Night's Main Event' è il nome dell'evento e non va tradotto; Tradurre 'boyhood dream' come 'sogno d'infanzia' o 'sogno di quando era bambino'
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta un'intervista a Ethan Page focalizzata sui suoi obiettivi e sentimenti personali verso il titolo IC; rientra nella categoria interviste/opinioni dei wrestler.
+[PERF v71] analisi editoriale AI v72: 7.73s
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v66 cap opinion/commentary storyline, v68 cap opinion senza news concreta, v72.3 cap opinion
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - WWE's Ethan Page Explains What The Intercontinental Championship Means To Him
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - WWE's Ethan Page Explains What The Intercontinental Championship Means To Him
+[PERF v71] WP lookup URL esistente: 0.88s
+[BOT] Elaborazione: WWE's Trick Williams Explains What It's Like Working With Lil Yachty
+[BOT] semantic_id=wwes-trick-williams-explains-what-its-like-working-with-lil-yachty
+[SCORE] iniziale=71 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3-flash-preview | L'articolo riporta dichiarazioni di un wrestler WWE su una storyline attuale e la collaborazione con una celebrità, non è una preview né un rumor.
+[EDITORIAL v72.3] translation_notes=Mantenere United States Champion in inglese.; Tradurre mouthpiece come portavoce o manager, evitando traduzioni letterali errate.; Gingers si riferisce a persone con i capelli rossi; adattare il riferimento a Sami Zayn con naturalezza.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta dichiarazioni di un wrestler WWE su una storyline attuale e la collaborazione con una celebrità, non è una preview né un rumor.
+[PERF v71] analisi editoriale AI v72: 6.05s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE's Trick Williams Explains What It's Like Working With Lil Yachty
+[SCORE v88.2] v88.2 cap celebrity/crossover 78->74 - WWE's Trick Williams Explains What It's Like Working With Lil Yachty
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: trick williams, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, opinione generica, v62 media rights/streaming, v62 categoria business, v88.2 cap celebrity/crossover 78->74, v76 cap death/funeral storyline-comedy
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - WWE's Trick Williams Explains What It's Like Working With Lil Yachty
+[V71] story_signature=stable:trick_williams|trick_williams_explains_what_it|like_working_with_lil_yachty|title|wwe semantic_status=new_story freshness=0.715
+[PERF v71] WP recent posts dedupe: 1.24s
+[PERF v71] WP lookup event_key: 0.83s
+[FIX] Event key in history ma non confermata su WordPress: event:business:wwe:wrestlemania-host-bid:host-bid - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 2.40s
+[MODEL v88] task=translate_normal chain=gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=3
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwes-trick-williams-explains-what-its-like-working-with-lil-yachty/intro-1779141241.jpg
+[MODEL v88] task=postedit chain=gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-2.5-flash-lite
+[PERF v71] traduzione: 13.33s
+[MODEL v88] task=title chain=gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-2.5-flash-lite): Trick Williams: "Lavorare con Lil Yachty è contagioso"
+[WARN v71.3] Quote check sotto soglia ma non bloccante: ['quote count ratio below threshold: 0.67'] - WWE's Trick Williams Explains What It's Like Working With Lil Yachty
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/wwes-trick-williams-explains-what-its-like-working-with-lil-yachty/l-intro-1779141241.jpg
+[MEDIA] Immagine caricata: 4880
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260518_225248_001_trick-williams-lavorare-con-lil-yachty-è-contagioso_4881_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4881
+[PERF v71] creazione post WordPress: 4.89s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwes-trick-williams-explains-what-its-like-working-with-lil-yachty/l-intro-1779141241.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4880
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'WWE's Trick Williams Explains What It's Like Working With Li': 27.59s
+[OK] Pubblicato: Trick Williams: "Lavorare con Lil Yachty è contagioso"
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260518_225249_001_trick-williams-lavorare-con-lil-yachty-contagioso_54f73427_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Trick Williams: "Lavorare con Lil Yachty è contagioso"
+[PUBLISHED REVIEW v87.1] Review outer salvata: Trick Williams: "Lavorare con Lil Yachty è contagioso"
+[BOT] Elaborazione: Bully Ray Assesses Whether Darby Allin's AEW World Championship Run Has Met Its Goals
+[BOT] semantic_id=bully-ray-assesses-whether-darby-allins-aew-world-championship-run-has-met-its-goals
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=2, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=2, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=OPINION conf=0.95 | category=AEW (5) conf=1.00 model=gemini-3-flash-preview | Analisi di Bully Ray sul regno titolato di Darby Allin, con focus su business, qualità dei match e gestione del personaggio.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli e dei PLE in inglese (AEW World Championship, Double or Nothing).; Evitare calchi: 'on a tear' può essere reso con 'ha messo in fila una serie di grandi prestazioni'.; Traduci fedelmente le metafore di Bully Ray: 'all gas, no breaks' come 'tutto gas, niente freni'.
+[EDITORIAL v73] final type=OPINION | category=AEW (5) | Analisi di Bully Ray sul regno titolato di Darby Allin, con focus su business, qualità dei match e gestione del personaggio.
+[PERF v71] analisi editoriale AI v72: 6.71s
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: bully ray, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, non wrestling puro, opinione generica, v66 cap opinion/commentary storyline, v68 cap duro opinion/commentary
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Bully Ray Assesses Whether Darby Allin's AEW World Championship Run Has Met Its Goals
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Bully Ray Assesses Whether Darby Allin's AEW World Championship Run Has Met Its Goals
+[PERF v71] WP lookup URL esistente: 0.58s
+[BOT] Elaborazione: Details On Relationship Between Cain Velasquez And AAA Under WWE
+[BOT] semantic_id=details-on-relationship-between-cain-velasquez-and-aaa-under-wwe
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WORLD (8) conf=0.85 model=gemini-3-flash-preview | Analisi di Dave Meltzer sul futuro di Cain Velasquez e i retroscena sul rapporto tra AAA e WWE.
+[EDITORIAL v72.3] translation_notes='Early release from prison' va tradotto come 'scarcerazione' o 'uscita anticipata dal carcere', mai usare 'rilascio'.; Tradurre le citazioni di Dave Meltzer in modo fedele mantenendo il tono parlato.; 'Lucha libre' resta invariato.
+[EDITORIAL v73] final type=RUMOR | category=WORLD (8) | Analisi di Dave Meltzer sul futuro di Cain Velasquez e i retroscena sul rapporto tra AAA e WWE.
+[PERF v71] analisi editoriale AI v72: 9.03s
+[SCORE v86.9] Cap commentary/opinion 100->68 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[SCORE v88.3] v88.3 cap low-value market item 68->45 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[SCORE] raffinato=45 priority=low | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, non wrestling puro, opinione generica, v62 media rights/streaming, v62 categoria business, v86.9 cap commentary/opinion 100->68, v88.3 cap low-value market item 68->45
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 45/55 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[BOT] Elaborazione: Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[BOT] semantic_id=lyra-valkyria-names-wwe-nxt-star-she-hopes-to-face-in-john-cena-classic
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=OPINION conf=0.90 | category=WWE (4) conf=0.95 model=gemini-3-flash-preview | Si tratta di un articolo basato su un'intervista a Lyra Valkyria riguardante le sue speranze per il futuro torneo John Cena Classic.
+[EDITORIAL v72.3] translation_notes=Mantenere 'John Cena Classic' e 'Performance Center' in inglese.; Tradurre 'inaugural' come inaugurale o prima detentrice.; 'Trade strikes' va reso con scambiarsi colpi o simili, evitando calchi letterali.
+[CATEGORY v73] Opinion/trash talk -> Uncategorized: Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[EDITORIAL v73] final type=OPINION | category=UNCATEGORIZED (1) | Si tratta di un articolo basato su un'intervista a Lyra Valkyria riguardante le sue speranze per il futuro torneo John Cena Classic. | v73 opinion/trash safety
+[PERF v71] analisi editoriale AI v72: 5.02s
+[SCORE] raffinato=0 priority=skip | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, titolo/championship, show settimanale, developmental secondario, v66 blocco politica/volgarita non wrestling
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 0/75 - Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[PERF v71] WP lookup URL esistente: 0.62s
+[BOT] Elaborazione: AEW Star MVP On WWE's Triple H: 'How Many People You Remember The Nose Getting Over?'
+[BOT] semantic_id=aew-star-mvp-on-wwes-triple-h-how-many-people-you-remember-the-nose-getting-over
+[SCORE] iniziale=64 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=AEW (5) conf=0.90 model=gemini-3-flash-preview | L'articolo riporta opinioni e critiche espresse da MVP (star AEW) nei confronti di Triple H durante un podcast; contenuto ad alto engagement per i fan italiani.
+[EDITORIAL v72.3] translation_notes=Mantenere 'The Nose' e 'Triple Nose' come soprannomi, eventualmente spiegando il tono dispregiativo se necessario.; Tradurre 'getting over' / 'put over' con 'mandare over', 'elevare' o 'far emergere' a seconda della frase.; 'Pro's pro' deve essere reso come 'professionista esemplare' o 'vero professionista'.
+[EDITORIAL v73] final type=OPINION | category=AEW (5) | L'articolo riporta opinioni e critiche espresse da MVP (star AEW) nei confronti di Triple H durante un podcast; contenuto ad alto engagement per i fan italiani.
+[PERF v71] analisi editoriale AI v72: 9.86s
+[SCORE v88.3] v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 56->54 - AEW Star MVP On WWE's Triple H: 'How Many People You Remember The Nose Getting Over?'
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: triple h, WWE main roster + storyline/evento, PLE/PPV, opinione generica, v88.3 notte povera: non forzo articolo soft sotto 65 dopo publish 56->54
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - AEW Star MVP On WWE's Triple H: 'How Many People You Remember The Nose Getting Over?'
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - AEW Star MVP On WWE's Triple H: 'How Many People You Remember The Nose Getting Over?'
+[BOT] Elaborazione: Zoey Stark Reveals New Name and Hypes Free Agency After WWE Release
+[BOT] semantic_id=zoey-stark-reveals-new-name-and-hypes-free-agency-after-wwe-release
+[SCORE] iniziale=61 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/zoey-stark-reveals-new-name-hypes-free-agency-wwe-release/
+[PERF v71] scraping articolo: 1.58s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=10, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/zoey-stark-reveals-new-name-hypes-free-agency-wwe-release/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.75s
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.90 model=gemini-3-flash-preview | L'articolo tratta del cambio di nome e degli aggiornamenti post-licenziamento di un'ex atleta WWE, rientrando nelle news sulle uscite dalla federazione.
+[EDITORIAL v72.3] translation_notes=Tradurre 'release' con 'licenziamento' o 'addio', mai 'rilascio'.; Il nuovo ring name 'The Purist' Zoey Serrano non va tradotto.; Mantenere i termini medici originali (ACL, MCL, meniscus) o usare le varianti italiane corrette (crociato anteriore, collaterale mediale, menisco).
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo tratta del cambio di nome e degli aggiornamenti post-licenziamento di un'ex atleta WWE, rientrando nelle news sulle uscite dalla federazione.
+[PERF v71] analisi editoriale AI v72: 7.09s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Zoey Stark Reveals New Name and Hypes Free Agency After WWE Release
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 82->54 - Zoey Stark Reveals New Name and Hypes Free Agency After WWE Release
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, developmental secondario, v62 evento legale grave, v88.2 cap OTHER/feature non-news 82->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Zoey Stark Reveals New Name and Hypes Free Agency After WWE Release
+[SKIP v88.3] Non forzo articolo soft sotto 65 dopo una pubblicazione: 55/65 - AEW's Tony Schiavone Credits Ted Turner For Career, Says He Belongs In WWE HOF
+[SKIP v86.6/legacy] low_score_pre_gemini:55: WWE's Tiffany Stratton Clears Up Rumor About Fabian Aichner: 'Not True'
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:55: Sandman Left ECW Over Pay Dispute
+[PENDING] Coda salvata: 0 elementi
+[SKIP v88.2] Feature/OTHER non-news sotto priorita hard: TNA's Santino Marella: WWE Clash In Italy Appearance Would Be 'Full Circle Moment'
+[BOT] Raggiunto limite massimo candidati nuovi provati
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 12 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-18 22:51:20_summary.json -> published_html_review/run_2026-05-18 22-51-20_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (410 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
+===== RUN END [2026-05-18 22:51:20] VERSION [v89_editorial_report_quality (38d016d)] =====
+
