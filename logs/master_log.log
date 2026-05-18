@@ -6279,3 +6279,95 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-18 09:42:30] VERSION [v89_editorial_report_quality (a8624b2)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+
+===== RUN START [2026-05-18 10:30:25] VERSION [v89_editorial_report_quality (30cf76d)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 11 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (32/75): AEW's Swerve Strickland Says The Archetype Of An Indie Wrestling Star Is 'Dying'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2175050/wwe-karrion-kross-scarlett-return-aew-debut/
+[SCORE v81.1] Cap light name-driven item 16->16 - Karrion Kross Reflects On Failed First WWE Main Roster Call-Up
+[SKIP] Score sotto soglia editoriale (16/75): Karrion Kross Reflects On Failed First WWE Main Roster Call-Up
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - WWE Star Cody Rhodes Explains Why He Received Cease & Desist Letter From Nintendo
+[SKIP] Score sotto soglia editoriale (49/75): WWE Star Cody Rhodes Explains Why He Received Cease & Desist Letter From Nintendo
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - WWE HOFer Jeff Jarrett Doesn't Think TKO Will Copy AEW Event
+[SKIP] Score sotto soglia editoriale (54/75): WWE HOFer Jeff Jarrett Doesn't Think TKO Will Copy AEW Event
+[SKIP] Score sotto soglia editoriale (16/75): AEW's Adam Copeland Discusses Becoming A Mentor After WWE HOFer Did The Same For Him
+[SKIP] URL già in history: https://www.wrestlinginc.com/2174996/wwe-nxt-john-cena-mason-rook-future-world-champions/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2174988/wwe-raw-sol-ruca-backstage-report-losing-matches/
+[SCORE v81.1] Cap light name-driven item 55->55 - Ex-WWE Star Ridge Holland Recalls Putting Together Bloodline WarGames Match In 2022
+[SCORE v81.1] Cap light name-driven item 55->55 - Myles Borne Reflects On WWE Application & Tryout Process, Early Days In NXT
+[SKIP] Score sotto soglia editoriale (39/75): Bully Ray Is Worried About Sol Ruca's Finisher Following Loss To IYO SKY On WWE Raw
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[SKIP] Score sotto soglia editoriale (54/75): Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[SCORE v81.1] Cap light name-driven item 31->31 - Sandman Reflects On Hard Partying Days In ECW, Overdosing
+[SKIP] Score sotto soglia editoriale (31/75): Sandman Reflects On Hard Partying Days In ECW, Overdosing
+[SKIP] Score sotto soglia editoriale (42/75): WWE's IYO SKY Announces Marriage To Former IWGP Heavyweight Champion
+[SKIP] URL già in history: https://www.wrestlinginc.com/2174915/wwe-corey-graves-carmella-teases-return/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2173128/eric-bischoff-respects-aew-tony-khan-rebel/
+[SKIP] Score sotto soglia editoriale (24/75): WWE HOFer Jeff Jarrett Saw DSOTR Episode As 'Opportunity'
+[SKIP] Score sotto soglia editoriale (14/75): Jeff Jarrett Explains Why Tony Khan's AEW Booking Philosophy Is 'Brilliant'
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - WWE RAW Preview for May 18, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v81.1] Cap future card announcement 56->56 - WWE RAW Preview for May 18, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (51/75): WWE RAW Preview for May 18, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (13/75): Sting's Son Garrett Borden Picks Up Victory At Rhodes Wrestling Academy Event
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Former WWE Star Says His Scrypts Gimmick Failed Because 'Too Many Chefs' Got Involved
+[SKIP] Score sotto soglia editoriale (49/75): Former WWE Star Says His Scrypts Gimmick Failed Because 'Too Many Chefs' Got Involved
+[SKIP] URL già in history: https://www.ringsidenews.com/tiffany-stratton-shuts-down-wild-rumor-about-former-wwe-stars-release/
+[SKIP] Score sotto soglia editoriale (57/75): Randy Orton Shuts Down WWE Injury Panic with Message to Fans
+[SKIP] Score sotto soglia editoriale (16/75): MLW Talent Departs from Company
+[SKIP] URL già in history: https://www.ringsidenews.com/independent-wrestler-mb-funk-passes-away/
+[SKIP] URL già in history: https://www.ringsidenews.com/paul-wight-admits-wwe-pyro-once-made-him-tinkle-himself/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - NARAKU Reveals Real Reason He Left NJPW for WWE
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - AJ Styles Calls Out False Wikipedia Claim About His Wrestling Career
+[SKIP] Score sotto soglia editoriale (49/75): AJ Styles Calls Out False Wikipedia Claim About His Wrestling Career
+[SKIP] URL già in history: https://www.ringsidenews.com/iyo-sky-explains-why-she-naraku-finally-went-public-marriage/
+[SKIP] URL già in history: https://www.ringsidenews.com/eric-young-says-tna-return-middle-finger-wwe-final-run/
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 46/55 - AJ Styles Addresses Possibility of Joining WWE's Creative Team
+[SKIP] Score sotto soglia editoriale (46/75): AJ Styles Addresses Possibility of Joining WWE's Creative Team
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - AJ Styles Defends NARAKU Starting in WWE NXT Amid Fan Backlash
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - AJ Styles Defends NARAKU Starting in WWE NXT Amid Fan Backlash
+[SKIP] Score sotto soglia editoriale (49/75): AJ Styles Defends NARAKU Starting in WWE NXT Amid Fan Backlash
+[SCORE] 73 medium - Rush Shuts Down Claims CMLL Fallout Could Affect His AEW Grand Slam Mexico Appearance | AEW, impatto roster/storyline, ritorno/debutto, show settimanale, opinione generica, v62 evento legale grave, v71 source reliability soft penalty, v71 freshness=0.42, v48 tier2: 55-74
+[SCORE] 55 low - Ex-WWE Star Ridge Holland Recalls Putting Together Bloodline WarGames Match In 2022 | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v81.1 cap light name-driven item 55->55, v71 freshness=0.416, v48 tier2: 55-74
+[SCORE] 55 low - Myles Borne Reflects On WWE Application & Tryout Process, Early Days In NXT | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, opinione generica, floor WWE main roster storyline, v81.1 cap light name-driven item 55->55, v71 freshness=0.41, v48 tier2: 55-74
+[SCORE] 55 low - Former WWE Star Scarlett Says She Pitched Throwback Women's Match Stipulation | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, floor WWE main roster storyline, v71 freshness=0.366, v48 tier2: 55-74
+[SCORE] 49 low - NARAKU Reveals Real Reason He Left NJPW for WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, opinione generica, v62 ritorno/debutto, v66 cap opinion/commentary storyline, v68 cap duro opinion/commentary, v71 source reliability soft penalty, v71 freshness=0.512, v48 tier3: 45-54 contestuale
+[SCORE] 43 low - Bully Ray Explains Why WWE NXT Is His Favorite Pro Wrestling Show | WWE/main roster, nomi forti titolo: bully ray, intervista/opinione, show settimanale, v71 freshness=0.36, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 6 | mode=normal | max nuove=3 | pending pubblicati=0
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: Rush Shuts Down Claims CMLL Fallout Could Affect His AEW Grand Slam Mexico Appearance
+[PENDING] Coda salvata: 0 elementi
+[SKIP v89] Soft news non operativa sotto 65: Ex-WWE Star Ridge Holland Recalls Putting Together Bloodline WarGames Match In 2022
+[SKIP v89] Soft news non operativa sotto 65: Myles Borne Reflects On WWE Application & Tryout Process, Early Days In NXT
+[SKIP v89] Soft news non operativa sotto 65: Former WWE Star Scarlett Says She Pitched Throwback Women's Match Stipulation
+[SKIP v88.2] Feature/OTHER non-news sotto priorita hard: NARAKU Reveals Real Reason He Left NJPW for WWE
+[SKIP v89] Soft news non operativa sotto 65: Bully Ray Explains Why WWE NXT Is His Favorite Pro Wrestling Show
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 6 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-18 10:30:25_summary.json -> published_html_review/run_2026-05-18 10-30-25_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (367 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-18 10:30:25] VERSION [v89_editorial_report_quality (30cf76d)] =====
+
