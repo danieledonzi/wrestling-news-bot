@@ -1,24 +1,29 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-19T08:05:17",
-  "run_start": "2026-05-19 08:04:19",
-  "run_end": "2026-05-19 08:04:19",
-  "bot_version": "v89_editorial_report_quality (ad33230)",
-  "candidate_count": 11,
+  "collected_at": "2026-05-19T11:42:28",
+  "run_start": "2026-05-19 11:38:31",
+  "run_end": "2026-05-19 11:38:31",
+  "bot_version": "v89_editorial_report_quality (d84a881)",
+  "candidate_count": 10,
   "mode": "normal",
   "max_new": 3,
-  "published_total": 1,
+  "published_total": 2,
   "published_pending": 0,
-  "published_new": 1,
-  "candidates_tried": 9,
-  "score_lines_count": 20,
-  "skip_count": 33,
+  "published_new": 2,
+  "candidates_tried": 10,
+  "score_lines_count": 22,
+  "skip_count": 32,
   "skip_v89_count": 0,
-  "gemini_calls_observed": 9,
+  "gemini_calls_observed": 15,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 9
+    "gemini-3.1-flash-lite": 12,
+    "gemini-3-flash-preview": 2,
+    "gemini-2.5-flash": 1
   },
-  "gemini_discarded_models": {},
+  "gemini_discarded_models": {
+    "gemini-3-flash-preview": 1,
+    "gemini-2.5-flash": 1
+  },
   "model_tasks": [
     {
       "task": "healthcheck",
@@ -29,8 +34,8 @@
       "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
     },
     {
-      "task": "translate_normal",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
+      "task": "translate_medium",
+      "chain": "gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
     },
     {
       "task": "postedit",
@@ -43,88 +48,115 @@
     {
       "task": "editorial_analysis",
       "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_medium",
+      "chain": "gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-pro"
+    },
+    {
+      "task": "editorial_analysis",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite"
     }
   ],
   "model_task_counts": {
     "healthcheck": 1,
-    "editorial_analysis": 2,
-    "translate_normal": 1,
-    "postedit": 1,
-    "title": 1
+    "editorial_analysis": 3,
+    "translate_medium": 2,
+    "postedit": 2,
+    "title": 2
   },
   "perf": {
-    "WP strict report lookup": {
-      "count": 1,
-      "total_seconds": 1.13,
-      "max_seconds": 1.13
-    },
     "WP lookup event_key": {
       "count": 4,
-      "total_seconds": 4.12,
-      "max_seconds": 1.12
-    },
-    "analisi editoriale AI v72": {
-      "count": 5,
-      "total_seconds": 22.92,
-      "max_seconds": 13.42
+      "total_seconds": 5.27,
+      "max_seconds": 1.41
     },
     "scraping articolo": {
-      "count": 1,
-      "total_seconds": 1.14,
-      "max_seconds": 1.14
+      "count": 2,
+      "total_seconds": 2.13,
+      "max_seconds": 1.13
     },
     "estrazione blocchi": {
-      "count": 1,
-      "total_seconds": 0.68,
-      "max_seconds": 0.68
+      "count": 2,
+      "total_seconds": 1.61,
+      "max_seconds": 0.82
+    },
+    "analisi editoriale AI v72": {
+      "count": 6,
+      "total_seconds": 26.41,
+      "max_seconds": 6.52
     },
     "WP recent posts dedupe": {
       "count": 1,
-      "total_seconds": 1.14,
-      "max_seconds": 1.14
+      "total_seconds": 0.72,
+      "max_seconds": 0.72
     },
     "categoria da analisi editoriale v72": {
       "count": 1,
-      "total_seconds": 1.49,
-      "max_seconds": 1.49
+      "total_seconds": 1.06,
+      "max_seconds": 1.06
     },
     "traduzione": {
-      "count": 1,
-      "total_seconds": 7.3,
-      "max_seconds": 7.3
+      "count": 2,
+      "total_seconds": 169.61,
+      "max_seconds": 100.79
     },
     "creazione post WordPress": {
-      "count": 1,
-      "total_seconds": 3.32,
-      "max_seconds": 3.32
+      "count": 2,
+      "total_seconds": 12.66,
+      "max_seconds": 7.88
     },
-    "totale articolo pubblicato 'Backstage Update Emerges On LA Knight's WWE Absence'": {
+    "totale articolo pubblicato 'Nic Nemeth Reveals Real Reason Behind His WWE Return at MSG'": {
       "count": 1,
-      "total_seconds": 27.93,
-      "max_seconds": 27.93
+      "total_seconds": 113.22,
+      "max_seconds": 113.22
+    },
+    "totale articolo pubblicato 'Enzo Amore Was in Contact With WWE During WrestleMania 42 We'": {
+      "count": 1,
+      "total_seconds": 82.87,
+      "max_seconds": 82.87
     },
     "WP lookup URL esistente": {
       "count": 1,
-      "total_seconds": 0.65,
-      "max_seconds": 0.65
+      "total_seconds": 0.72,
+      "max_seconds": 0.72
     }
   },
   "article_metrics": [
     {
-      "path": "published/20260519_080503_001_aggiornamenti-sullassenza-di-la-knight-dagli-show-wwe_4905_final.html",
+      "path": "published/20260519_114039_001_nic-nemeth-rivela-sono-tornato-in-wwe-al-madison-square-garden-solo-per-john-cena_4912_final.html",
       "exists": true,
-      "word_count": 232,
-      "paragraph_count": 8,
-      "blockquote_count": 0,
+      "word_count": 506,
+      "paragraph_count": 11,
+      "blockquote_count": 7,
       "image_count": 0,
       "iframe_count": 0,
-      "embed_hint_count": 0,
-      "title": "Aggiornamenti sull'assenza di LA Knight dagli show WWE"
+      "embed_hint_count": 15,
+      "title": "Nic Nemeth rivela: \"Sono tornato in WWE al Madison Square Garden solo per John Cena\""
+    },
+    {
+      "path": "published/20260519_114208_002_enzo-amore-in-contatto-con-la-wwe-durante-la-settimana-di-wrestlemania-40_4915_final.html",
+      "exists": true,
+      "word_count": 445,
+      "paragraph_count": 10,
+      "blockquote_count": 4,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 9,
+      "title": "Enzo Amore in contatto con la WWE durante la settimana di WrestleMania 40"
     }
   ],
   "daily_counts": {
-    "published_today": 5,
+    "published_today": 2,
     "published_last_4h": 2,
-    "runs_today": 3
+    "runs_today": 1
   }
 }

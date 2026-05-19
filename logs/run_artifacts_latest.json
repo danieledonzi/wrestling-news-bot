@@ -1,20 +1,28 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-19 08:04:19",
-  "bot_version": "v89_editorial_report_quality (ad33230)",
-  "git_sha": "ad33230715fde9eb540828eb0c0e331052e174e7",
-  "created_at": "2026-05-19T08:05:17",
-  "published_count": 1,
+  "run_id": "2026-05-19 11:38:31",
+  "bot_version": "v89_editorial_report_quality (d84a881)",
+  "git_sha": "d84a8811788cd52b05cd48d9e4565444989e960c",
+  "created_at": "2026-05-19T11:42:28",
+  "published_count": 2,
   "published_post_ids": [
-    "4905"
+    "4912",
+    "4915"
   ],
   "published_artifacts": [
     {
-      "post_id": 4905,
-      "title": "Aggiornamenti sull'assenza di LA Knight dagli show WWE",
-      "source_url": "https://www.ringsidenews.com/backstage-update-emerges-la-knights-wwe-absence/",
-      "html_file": "published/20260519_080503_001_aggiornamenti-sullassenza-di-la-knight-dagli-show-wwe_4905_final.html",
-      "metadata_file": "published/20260519_080503_001_aggiornamenti-sullassenza-di-la-knight-dagli-show-wwe_4905_metadata.json"
+      "post_id": 4912,
+      "title": "Nic Nemeth rivela: \"Sono tornato in WWE al Madison Square Garden solo per John Cena\"",
+      "source_url": "https://www.ringsidenews.com/nic-nemeth-reveals-real-reason-behind-his-wwe-return-msg/",
+      "html_file": "published/20260519_114039_001_nic-nemeth-rivela-sono-tornato-in-wwe-al-madison-square-garden-solo-per-john-cena_4912_final.html",
+      "metadata_file": "published/20260519_114039_001_nic-nemeth-rivela-sono-tornato-in-wwe-al-madison-square-garden-solo-per-john-cena_4912_metadata.json"
+    },
+    {
+      "post_id": 4915,
+      "title": "Enzo Amore in contatto con la WWE durante la settimana di WrestleMania 40",
+      "source_url": "https://www.ringsidenews.com/enzo-amore-contact-wwe-during-wrestlemania-42-week/",
+      "html_file": "published/20260519_114208_002_enzo-amore-in-contatto-con-la-wwe-durante-la-settimana-di-wrestlemania-40_4915_final.html",
+      "metadata_file": "published/20260519_114208_002_enzo-amore-in-contatto-con-la-wwe-durante-la-settimana-di-wrestlemania-40_4915_metadata.json"
     }
   ],
   "errors": [],

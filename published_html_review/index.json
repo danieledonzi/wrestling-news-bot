@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-19 08:04:19",
-  "last_bot_version": "v89_editorial_report_quality (ad33230)",
-  "updated_at": "2026-05-19T08:05:16",
-  "total_items": 109,
+  "last_run_id": "2026-05-19 11:38:31",
+  "last_bot_version": "v89_editorial_report_quality (d84a881)",
+  "updated_at": "2026-05-19T11:42:27",
+  "total_items": 111,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -876,6 +876,22 @@
       "original_html_file": "20260519_080505_001_aggiornamenti-sull-assenza-di-la-knight-dagli-show-wwe_38320657_original.html",
       "final_html_file": "20260519_080505_001_aggiornamenti-sull-assenza-di-la-knight-dagli-show-wwe_38320657_final.html",
       "metadata_file": "20260519_080505_001_aggiornamenti-sull-assenza-di-la-knight-dagli-show-wwe_38320657_metadata.json"
+    },
+    {
+      "run_id": "2026-05-19 11:38:31",
+      "title": "Nic Nemeth rivela: \"Sono tornato in WWE al Madison Square Garden solo per John Cena\"",
+      "url": "https://www.ringsidenews.com/nic-nemeth-reveals-real-reason-behind-his-wwe-return-msg/",
+      "original_html_file": "20260519_114040_001_nic-nemeth-rivela-sono-tornato-in-wwe-al-madison-square-garden-solo-per-john-cen_4b26039f_original.html",
+      "final_html_file": "20260519_114040_001_nic-nemeth-rivela-sono-tornato-in-wwe-al-madison-square-garden-solo-per-john-cen_4b26039f_final.html",
+      "metadata_file": "20260519_114040_001_nic-nemeth-rivela-sono-tornato-in-wwe-al-madison-square-garden-solo-per-john-cen_4b26039f_metadata.json"
+    },
+    {
+      "run_id": "2026-05-19 11:38:31",
+      "title": "Enzo Amore in contatto con la WWE durante la settimana di WrestleMania 40",
+      "url": "https://www.ringsidenews.com/enzo-amore-contact-wwe-during-wrestlemania-42-week/",
+      "original_html_file": "20260519_114210_002_enzo-amore-in-contatto-con-la-wwe-durante-la-settimana-di-wrestlemania-40_eaec253f_original.html",
+      "final_html_file": "20260519_114210_002_enzo-amore-in-contatto-con-la-wwe-durante-la-settimana-di-wrestlemania-40_eaec253f_final.html",
+      "metadata_file": "20260519_114210_002_enzo-amore-in-contatto-con-la-wwe-durante-la-settimana-di-wrestlemania-40_eaec253f_metadata.json"
     }
   ]
 }
