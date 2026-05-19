@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-19 21:16:28",
-  "last_bot_version": "v89_editorial_report_quality (52d4957)",
-  "updated_at": "2026-05-19T21:17:08",
-  "total_items": 117,
+  "last_run_id": "2026-05-19 22:43:46",
+  "last_bot_version": "v89_editorial_report_quality (198105d)",
+  "updated_at": "2026-05-19T22:46:35",
+  "total_items": 120,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -940,6 +940,30 @@
       "original_html_file": "20260519_211657_001_john-cena-chiarisce-il-ritiro-dal-ring-non-significa-l-addio-alla-wwe_043cb0fa_original.html",
       "final_html_file": "20260519_211657_001_john-cena-chiarisce-il-ritiro-dal-ring-non-significa-l-addio-alla-wwe_043cb0fa_final.html",
       "metadata_file": "20260519_211657_001_john-cena-chiarisce-il-ritiro-dal-ring-non-significa-l-addio-alla-wwe_043cb0fa_metadata.json"
+    },
+    {
+      "run_id": "2026-05-19 22:43:46",
+      "title": "WWE: il lancio del John Cena Classic previsto per fine anno",
+      "url": "https://www.ringsidenews.com/whats-said-about-when-john-cena-classic-will-actually-start/",
+      "original_html_file": "20260519_224451_001_wwe-il-lancio-del-john-cena-classic-previsto-per-fine-anno_27e3e240_original.html",
+      "final_html_file": "20260519_224451_001_wwe-il-lancio-del-john-cena-classic-previsto-per-fine-anno_27e3e240_final.html",
+      "metadata_file": "20260519_224451_001_wwe-il-lancio-del-john-cena-classic-previsto-per-fine-anno_27e3e240_metadata.json"
+    },
+    {
+      "run_id": "2026-05-19 22:43:46",
+      "title": "WWE: Nick Khan e Triple H spiegano l'aumento degli House Show",
+      "url": "https://www.ringsidenews.com/nick-khan-triple-h-reveal-why-wwe-expanding-its-house-show-schedule/",
+      "original_html_file": "20260519_224603_002_wwe-nick-khan-e-triple-h-spiegano-l-aumento-degli-house-show_7d0409c0_original.html",
+      "final_html_file": "20260519_224603_002_wwe-nick-khan-e-triple-h-spiegano-l-aumento-degli-house-show_7d0409c0_final.html",
+      "metadata_file": "20260519_224603_002_wwe-nick-khan-e-triple-h-spiegano-l-aumento-degli-house-show_7d0409c0_metadata.json"
+    },
+    {
+      "run_id": "2026-05-19 22:43:46",
+      "title": "Netflix: grandi ascolti per Ronda Rousey vs. Gina Carano nonostante i 17 secondi di match",
+      "url": "https://www.ringsidenews.com/ronda-rousey-vs-gina-carano-pulls-huge-netflix-numbers-despite-17-second-fight/",
+      "original_html_file": "20260519_224635_003_netflix-grandi-ascolti-per-ronda-rousey-vs-gina-carano-nonostante-i-17-secondi-d_1b19d698_original.html",
+      "final_html_file": "20260519_224635_003_netflix-grandi-ascolti-per-ronda-rousey-vs-gina-carano-nonostante-i-17-secondi-d_1b19d698_final.html",
+      "metadata_file": "20260519_224635_003_netflix-grandi-ascolti-per-ronda-rousey-vs-gina-carano-nonostante-i-17-secondi-d_1b19d698_metadata.json"
     }
   ]
 }
