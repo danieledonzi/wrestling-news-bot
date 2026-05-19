@@ -1,29 +1,25 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-19T11:42:28",
-  "run_start": "2026-05-19 11:38:31",
-  "run_end": "2026-05-19 11:38:31",
-  "bot_version": "v89_editorial_report_quality (d84a881)",
-  "candidate_count": 10,
+  "collected_at": "2026-05-19T14:53:30",
+  "run_start": "2026-05-19 14:52:26",
+  "run_end": "2026-05-19 14:52:26",
+  "bot_version": "v89_editorial_report_quality (d58ea0a)",
+  "candidate_count": 8,
   "mode": "normal",
   "max_new": 3,
-  "published_total": 2,
+  "published_total": 1,
   "published_pending": 0,
-  "published_new": 2,
-  "candidates_tried": 10,
-  "score_lines_count": 22,
-  "skip_count": 32,
-  "skip_v89_count": 0,
-  "gemini_calls_observed": 15,
+  "published_new": 1,
+  "candidates_tried": 8,
+  "score_lines_count": 16,
+  "skip_count": 35,
+  "skip_v89_count": 1,
+  "gemini_calls_observed": 8,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 12,
-    "gemini-3-flash-preview": 2,
-    "gemini-2.5-flash": 1
+    "gemini-3.1-flash-lite": 7,
+    "gemini-3-flash-preview": 1
   },
-  "gemini_discarded_models": {
-    "gemini-3-flash-preview": 1,
-    "gemini-2.5-flash": 1
-  },
+  "gemini_discarded_models": {},
   "model_tasks": [
     {
       "task": "healthcheck",
@@ -44,119 +40,83 @@
     {
       "task": "title",
       "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
-    },
-    {
-      "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "translate_medium",
-      "chain": "gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "postedit",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "title",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-pro"
-    },
-    {
-      "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite"
     }
   ],
   "model_task_counts": {
     "healthcheck": 1,
-    "editorial_analysis": 3,
-    "translate_medium": 2,
-    "postedit": 2,
-    "title": 2
+    "editorial_analysis": 1,
+    "translate_medium": 1,
+    "postedit": 1,
+    "title": 1
   },
   "perf": {
     "WP lookup event_key": {
       "count": 4,
-      "total_seconds": 5.27,
-      "max_seconds": 1.41
-    },
-    "scraping articolo": {
-      "count": 2,
-      "total_seconds": 2.13,
-      "max_seconds": 1.13
-    },
-    "estrazione blocchi": {
-      "count": 2,
-      "total_seconds": 1.61,
-      "max_seconds": 0.82
+      "total_seconds": 4.73,
+      "max_seconds": 1.3
     },
     "analisi editoriale AI v72": {
-      "count": 6,
-      "total_seconds": 26.41,
-      "max_seconds": 6.52
+      "count": 4,
+      "total_seconds": 12.42,
+      "max_seconds": 7.28
     },
-    "WP recent posts dedupe": {
+    "WP lookup URL esistente": {
       "count": 1,
-      "total_seconds": 0.72,
-      "max_seconds": 0.72
+      "total_seconds": 0.71,
+      "max_seconds": 0.71
     },
-    "categoria da analisi editoriale v72": {
+    "scraping articolo": {
       "count": 1,
       "total_seconds": 1.06,
       "max_seconds": 1.06
     },
+    "estrazione blocchi": {
+      "count": 1,
+      "total_seconds": 0.8,
+      "max_seconds": 0.8
+    },
+    "WP recent posts dedupe": {
+      "count": 1,
+      "total_seconds": 0.83,
+      "max_seconds": 0.83
+    },
+    "categoria da analisi editoriale v72": {
+      "count": 1,
+      "total_seconds": 1.17,
+      "max_seconds": 1.17
+    },
     "traduzione": {
-      "count": 2,
-      "total_seconds": 169.61,
-      "max_seconds": 100.79
+      "count": 1,
+      "total_seconds": 23.49,
+      "max_seconds": 23.49
     },
     "creazione post WordPress": {
-      "count": 2,
-      "total_seconds": 12.66,
-      "max_seconds": 7.88
-    },
-    "totale articolo pubblicato 'Nic Nemeth Reveals Real Reason Behind His WWE Return at MSG'": {
       "count": 1,
-      "total_seconds": 113.22,
-      "max_seconds": 113.22
+      "total_seconds": 4.18,
+      "max_seconds": 4.18
     },
-    "totale articolo pubblicato 'Enzo Amore Was in Contact With WWE During WrestleMania 42 We'": {
+    "totale articolo pubblicato 'AEW Talent Pushing to Sign Leon Slater as TNA Deal Nears End'": {
       "count": 1,
-      "total_seconds": 82.87,
-      "max_seconds": 82.87
-    },
-    "WP lookup URL esistente": {
-      "count": 1,
-      "total_seconds": 0.72,
-      "max_seconds": 0.72
+      "total_seconds": 32.87,
+      "max_seconds": 32.87
     }
   },
   "article_metrics": [
     {
-      "path": "published/20260519_114039_001_nic-nemeth-rivela-sono-tornato-in-wwe-al-madison-square-garden-solo-per-john-cena_4912_final.html",
+      "path": "published/20260519_145328_001_aew-alcuni-atleti-spingono-per-lingaggio-di-leon-slater-in-scadenza-con-tna_4918_final.html",
       "exists": true,
-      "word_count": 506,
-      "paragraph_count": 11,
-      "blockquote_count": 7,
+      "word_count": 371,
+      "paragraph_count": 8,
+      "blockquote_count": 3,
       "image_count": 0,
       "iframe_count": 0,
-      "embed_hint_count": 15,
-      "title": "Nic Nemeth rivela: \"Sono tornato in WWE al Madison Square Garden solo per John Cena\""
-    },
-    {
-      "path": "published/20260519_114208_002_enzo-amore-in-contatto-con-la-wwe-durante-la-settimana-di-wrestlemania-40_4915_final.html",
-      "exists": true,
-      "word_count": 445,
-      "paragraph_count": 10,
-      "blockquote_count": 4,
-      "image_count": 0,
-      "iframe_count": 0,
-      "embed_hint_count": 9,
-      "title": "Enzo Amore in contatto con la WWE durante la settimana di WrestleMania 40"
+      "embed_hint_count": 7,
+      "title": "AEW, alcuni atleti spingono per l'ingaggio di Leon Slater in scadenza con TNA"
     }
   ],
   "daily_counts": {
-    "published_today": 2,
-    "published_last_4h": 2,
-    "runs_today": 1
+    "published_today": 3,
+    "published_last_4h": 3,
+    "runs_today": 2
   }
 }

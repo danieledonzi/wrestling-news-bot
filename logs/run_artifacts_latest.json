@@ -1,28 +1,20 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-19 11:38:31",
-  "bot_version": "v89_editorial_report_quality (d84a881)",
-  "git_sha": "d84a8811788cd52b05cd48d9e4565444989e960c",
-  "created_at": "2026-05-19T11:42:28",
-  "published_count": 2,
+  "run_id": "2026-05-19 14:52:26",
+  "bot_version": "v89_editorial_report_quality (d58ea0a)",
+  "git_sha": "d58ea0ad4fc8687b83811a0536ef8dbede44b674",
+  "created_at": "2026-05-19T14:53:30",
+  "published_count": 1,
   "published_post_ids": [
-    "4912",
-    "4915"
+    "4918"
   ],
   "published_artifacts": [
     {
-      "post_id": 4912,
-      "title": "Nic Nemeth rivela: \"Sono tornato in WWE al Madison Square Garden solo per John Cena\"",
-      "source_url": "https://www.ringsidenews.com/nic-nemeth-reveals-real-reason-behind-his-wwe-return-msg/",
-      "html_file": "published/20260519_114039_001_nic-nemeth-rivela-sono-tornato-in-wwe-al-madison-square-garden-solo-per-john-cena_4912_final.html",
-      "metadata_file": "published/20260519_114039_001_nic-nemeth-rivela-sono-tornato-in-wwe-al-madison-square-garden-solo-per-john-cena_4912_metadata.json"
-    },
-    {
-      "post_id": 4915,
-      "title": "Enzo Amore in contatto con la WWE durante la settimana di WrestleMania 40",
-      "source_url": "https://www.ringsidenews.com/enzo-amore-contact-wwe-during-wrestlemania-42-week/",
-      "html_file": "published/20260519_114208_002_enzo-amore-in-contatto-con-la-wwe-durante-la-settimana-di-wrestlemania-40_4915_final.html",
-      "metadata_file": "published/20260519_114208_002_enzo-amore-in-contatto-con-la-wwe-durante-la-settimana-di-wrestlemania-40_4915_metadata.json"
+      "post_id": 4918,
+      "title": "AEW, alcuni atleti spingono per l'ingaggio di Leon Slater in scadenza con TNA",
+      "source_url": "https://www.ringsidenews.com/aew-talent-pushing-sign-leon-slater-tna-deal-nears-end/",
+      "html_file": "published/20260519_145328_001_aew-alcuni-atleti-spingono-per-lingaggio-di-leon-slater-in-scadenza-con-tna_4918_final.html",
+      "metadata_file": "published/20260519_145328_001_aew-alcuni-atleti-spingono-per-lingaggio-di-leon-slater-in-scadenza-con-tna_4918_metadata.json"
     }
   ],
   "errors": [],

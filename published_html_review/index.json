@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-19 11:38:31",
-  "last_bot_version": "v89_editorial_report_quality (d84a881)",
-  "updated_at": "2026-05-19T11:42:27",
-  "total_items": 111,
+  "last_run_id": "2026-05-19 14:52:26",
+  "last_bot_version": "v89_editorial_report_quality (d58ea0a)",
+  "updated_at": "2026-05-19T14:53:29",
+  "total_items": 112,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -892,6 +892,14 @@
       "original_html_file": "20260519_114210_002_enzo-amore-in-contatto-con-la-wwe-durante-la-settimana-di-wrestlemania-40_eaec253f_original.html",
       "final_html_file": "20260519_114210_002_enzo-amore-in-contatto-con-la-wwe-durante-la-settimana-di-wrestlemania-40_eaec253f_final.html",
       "metadata_file": "20260519_114210_002_enzo-amore-in-contatto-con-la-wwe-durante-la-settimana-di-wrestlemania-40_eaec253f_metadata.json"
+    },
+    {
+      "run_id": "2026-05-19 14:52:26",
+      "title": "AEW, alcuni atleti spingono per l'ingaggio di Leon Slater in scadenza con TNA",
+      "url": "https://www.ringsidenews.com/aew-talent-pushing-sign-leon-slater-tna-deal-nears-end/",
+      "original_html_file": "20260519_145329_001_aew-alcuni-atleti-spingono-per-l-ingaggio-di-leon-slater-in-scadenza-con-tna_53158245_original.html",
+      "final_html_file": "20260519_145329_001_aew-alcuni-atleti-spingono-per-l-ingaggio-di-leon-slater-in-scadenza-con-tna_53158245_final.html",
+      "metadata_file": "20260519_145329_001_aew-alcuni-atleti-spingono-per-l-ingaggio-di-leon-slater-in-scadenza-con-tna_53158245_metadata.json"
     }
   ]
 }

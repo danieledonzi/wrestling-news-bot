@@ -283,3 +283,197 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
 ===== RUN END [2026-05-19 11:38:31] VERSION [v89_editorial_report_quality (d84a881)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+
+===== RUN START [2026-05-19 14:52:26] VERSION [v89_editorial_report_quality (d58ea0a)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 12 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (10/75): TNA's Leon Slater Can't Believe He Has Support Of 'Wrestling Uncles'
+[PERF v71] WP lookup event_key: 1.21s
+[SKIP] event_key confermata su WordPress: event:darby-allin-title - Tony Khan Calls AEW Star 'Ultimate Fighting Champion'
+[SKIP] Score sotto soglia editoriale (32/75): Swerve Strickland Comments On Possibility Of The New Day Coming To AEW
+[SCORE v81.1] Cap light name-driven item 20->20 - Jacob Fatu Talks Keeping His Name In WWE, Recalls Almost Becoming Caesar Sikoa
+[SKIP] Score sotto soglia editoriale (20/75): Jacob Fatu Talks Keeping His Name In WWE, Recalls Almost Becoming Caesar Sikoa
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE RAW 5/18/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): WWE RAW 5/18/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176150/wwe-raw-brock-lesnar-returns-multiple-f5-oba-femi-retirement/
+[SKIP] Score sotto soglia editoriale (56/75): Paige & Brie Bella Retain WWE Women's Tag Titles On Raw, Will Defend Again At SNME
+[SKIP] Score sotto soglia editoriale (56/75): WWE Raw Adds Fourth Match To Card For Upcoming Saturday Night's Main Event
+[SKIP] Score sotto soglia editoriale (0/75): AEW's Paul Wight Details Taking Care Of His Giant Frame
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176114/wwe-raw-jacob-fatu-roman-reigns-tribal-combat-challenge/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176100/la-knight-wwe-tv-absence-injury-contract-dispute/
+[SKIP] Score sotto soglia editoriale (0/75): Biggest Winners And Losers Of The Week - 5/18/2026
+[SKIP] Score sotto soglia editoriale (54/75): Bully Ray Believes Rocky Could Inspire Cody Rhodes Vs. GUNTHER At WWE Clash In Italy
+[REPORT v87.2] Report confermato da history forte: report:wwe-raw-2026-05-18
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-raw-2026-05-18 - WWE Raw Results 5/18 - Women's Tag Team Title On The Line, Brock Lesnar Returns
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176027/wwe-trick-williams-lil-yachty-explains-working/
+[SKIP] Score sotto soglia editoriale (26/75): TNA Impact Ratings & Viewership Report: 5/14/2026
+[SCORE v86.9] Cap commentary/opinion 71->68 - Bully Ray Assesses Whether Darby Allin's AEW World Championship Run Has Met Its Goals
+[PERF v71] WP lookup event_key: 1.24s
+[FIX] Event key in history ma non confermata su WordPress: event:title:darby-allin:world:championship - provo a pubblicare
+[SCORE v80.4] AAA major World priority 40->72 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[SCORE v86.9] Cap commentary/opinion 72->68 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[SCORE v86.9] Cap commentary/opinion 85->68 - Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (37/75): Chelsea Green Reveals First Look At Her Role In Blue Ridge Season 2
+[SKIP] Score sotto soglia editoriale (0/75): WWE Superstar Lineup Revealed for UFC Freedom 250 Fan Fest
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Missy Hyatt Blasts Brock Lesnar Over WWE Return Amid Janel Grant Lawsuit
+[PERF v71] WP lookup event_key: 0.98s
+[SKIP] event_key confermata su WordPress: event:brock-lesnar-return - Missy Hyatt Blasts Brock Lesnar Over WWE Return Amid Janel Grant Lawsuit
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 50/55 - Blake Monroe Admits She's Heartbroken Over Asuka's WWE Status
+[SKIP] Score sotto soglia editoriale (50/75): Blake Monroe Admits She's Heartbroken Over Asuka's WWE Status
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Paul Heyman Breaks Silence After Brock Lesnar's WWE RAW Return
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:brock-lesnar-return - Paul Heyman Breaks Silence After Brock Lesnar's WWE RAW Return
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 53/55 - Rico Reveals Remarks from Vince McMahon Prior to WWE Release
+[SKIP] Score sotto soglia editoriale (53/75): Rico Reveals Remarks from Vince McMahon Prior to WWE Release
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Brock Lesnar Suffered Another Wardrobe Malfunction During WWE RAW Return Attack
+[SKIP] event_key confermata su WordPress: event:brock-lesnar-return - Brock Lesnar Suffered Another Wardrobe Malfunction During WWE RAW Return Attack
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - WWE NXT Preview for May 19, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v81.1] Cap future card announcement 56->56 - WWE NXT Preview for May 19, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (51/75): WWE NXT Preview for May 19, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] URL già in history: https://www.ringsidenews.com/nic-nemeth-reveals-real-reason-behind-his-wwe-return-msg/
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Nic Nemeth Admits Being Too Selfless May Have Hurt His WWE Career
+[SKIP] Score sotto soglia editoriale (49/75): Nic Nemeth Admits Being Too Selfless May Have Hurt His WWE Career
+[SKIP] URL già in history: https://www.ringsidenews.com/enzo-amore-contact-wwe-during-wrestlemania-42-week/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Brock Lesnar's WWE Return Match Confirmed During 5/18 RAW
+[PERF v71] WP lookup event_key: 1.30s
+[FIX] Event key in history ma non confermata su WordPress: event:brock-lesnar-diagnosis - provo a pubblicare
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Brock Lesnar Returns To Destroy Oba Femi During 5/18 WWE RAW
+[FRESHNESS v86.6/legacy] Post-show outcome rescue: non tratto come preview scaduta - Brock Lesnar Returns To Destroy Oba Femi During 5/18 WWE RAW
+[SKIP] event_key confermata su WordPress: event:brock-lesnar-return - Brock Lesnar Returns To Destroy Oba Femi During 5/18 WWE RAW
+[SCORE] 100 high - Paul Heyman Breaks Silence After Brock Lesnar's WWE RAW Return | WWE/main roster, top star titolo: brock lesnar, nomi forti lead: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v71 freshness=0.663
+[SCORE] 100 high - Brock Lesnar's WWE Return Match Confirmed During 5/18 RAW | WWE/main roster, top star titolo: brock lesnar, nomi forti lead: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, show settimanale, v62 ritorno/debutto, v71 freshness=0.537
+[SCORE] 68 medium - Bully Ray Assesses Whether Darby Allin's AEW World Championship Run Has Met Its Goals | AEW, nomi forti titolo: bully ray, nome WWE: bully ray, titolo/championship, v62 titolo/championship, v86.9 cap commentary/opinion 71->68, v71 freshness=0.392, v48 tier2: 55-74
+[SCORE] 68 medium - Details On Relationship Between Cain Velasquez And AAA Under WWE | WWE/main roster, impatto roster/storyline, rumor/backstage, v80.4 AAA major World priority 40->72, v86.9 cap commentary/opinion 72->68, v71 freshness=0.377, v48 tier2: 55-74
+[SCORE] 68 medium - Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, titolo/championship, show settimanale, v86.9 cap commentary/opinion 85->68, v71 freshness=0.373, v48 tier2: 55-74
+[SCORE] 66 medium - Becky Lynch Accepts Saturday Night's Main Event Match During Heated Segment On 5/18 WWE RAW | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, show settimanale, v71 source reliability soft penalty, v71 freshness=0.406, v48 tier2: 55-74
+[SCORE] 62 medium - AEW Talent Pushing to Sign Leon Slater as TNA Deal Nears End | WWE/main roster, WWE main roster + storyline/evento, contratto, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.55, v48 tier2: 55-74
+[SCORE] 55 low - WWE's Finn Balor Says He Wants To Keep Wrestling But Regrets Absence From Family | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, floor WWE main roster storyline, v71 freshness=0.587, v48 tier2: 55-74
+[MODE] Modalita normale: 2 news >=90, 2 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 8 | mode=normal | max nuove=3 | pending pubblicati=0
+[REPORT v87.2] True-results confermato da history forte: skip offline-safe report:wwe-raw-2026-05-18 - Paul Heyman Breaks Silence After Brock Lesnar's WWE RAW Return
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[REPORT v87.2] True-results confermato da history forte: skip offline-safe report:wwe-raw-2026-05-18 - Brock Lesnar's WWE Return Match Confirmed During 5/18 RAW
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Bully Ray Assesses Whether Darby Allin's AEW World Championship Run Has Met Its Goals
+[BOT] semantic_id=bully-ray-assesses-whether-darby-allins-aew-world-championship-run-has-met-its-goals
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=2, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=2, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta le analisi e le opinioni espresse da Bully Ray durante un podcast (Busted Open Radio) riguardanti il regno di Darby Allin.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (AEW World Championship) in inglese.; Non tradurre 'over' nel gergo del wrestling, usare espressioni come 'popolare tra i fan' o 'connesso emotivamente'.; 'Balls to the wall' va reso con un equivalente italiano colloquiale che indichi intensità totale.
+[EDITORIAL v73] final type=OPINION | category=AEW (5) | L'articolo riporta le analisi e le opinioni espresse da Bully Ray durante un podcast (Busted Open Radio) riguardanti il regno di Darby Allin.
+[PERF v71] analisi editoriale AI v72: 7.28s
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: bully ray, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, non wrestling puro, opinione generica, v66 cap opinion/commentary storyline, v68 cap duro opinion/commentary
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Bully Ray Assesses Whether Darby Allin's AEW World Championship Run Has Met Its Goals
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Bully Ray Assesses Whether Darby Allin's AEW World Championship Run Has Met Its Goals
+[PERF v71] WP lookup URL esistente: 0.71s
+[BOT] Elaborazione: Details On Relationship Between Cain Velasquez And AAA Under WWE
+[BOT] semantic_id=details-on-relationship-between-cain-velasquez-and-aaa-under-wwe
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WORLD (8) conf=0.90 model=gemini-3.1-flash-lite | L'articolo analizza il futuro di Cain Velasquez basandosi su indiscrezioni di Dave Meltzer relative ai rapporti contrattuali tra AAA e WWE. Focus principale sul mondo del wrestling messicano e non sulla corporate WWE.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'lucha libre' come 'lotta libera', mantenere il termine tecnico.; Tradurre 'h/t' come 'si ringrazia' o 'via'.; Mantenere i nomi di ruoli aziendali (Dorian Roldan, Konnan) invariati.
+[EDITORIAL v73] final type=RUMOR | category=WORLD (8) | L'articolo analizza il futuro di Cain Velasquez basandosi su indiscrezioni di Dave Meltzer relative ai rapporti contrattuali tra AAA e WWE. Focus principale sul mondo del wrestling messicano e non sulla corporate WWE.
+[PERF v71] analisi editoriale AI v72: 1.57s
+[SCORE v86.9] Cap commentary/opinion 100->68 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[SCORE v88.3] v88.3 cap low-value market item 68->45 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[SCORE] raffinato=45 priority=low | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, non wrestling puro, opinione generica, v62 media rights/streaming, v62 categoria business, v86.9 cap commentary/opinion 100->68, v88.3 cap low-value market item 68->45
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 45/55 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[BOT] Elaborazione: Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[BOT] semantic_id=lyra-valkyria-names-wwe-nxt-star-she-hopes-to-face-in-john-cena-classic
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=NXT (6) conf=0.90 model=gemini-3.1-flash-lite | Articolo basato su dichiarazioni rilasciate in un'intervista esterna (Soundsphere Magazine), non è una preview ufficiale dell'evento né un report di un match.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'John Cena Classic' o titoli come 'Women's North American Champion'.; 'Release' non va tradotto come 'rilascio'.; Mantenere le citazioni virgolettate fedeli all'originale senza parafrasi.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=NXT (6) | Articolo basato su dichiarazioni rilasciate in un'intervista esterna (Soundsphere Magazine), non è una preview ufficiale dell'evento né un report di un match.
+[PERF v71] analisi editoriale AI v72: 1.99s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[SCORE] raffinato=0 priority=skip | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, titolo/championship, show settimanale, developmental secondario, v66 blocco politica/volgarita non wrestling
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 0/75 - Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[REPORT v87.2] True-results confermato da history forte: skip offline-safe report:wwe-raw-2026-05-18 - Becky Lynch Accepts Saturday Night's Main Event Match During Heated Segment On 5/18 WWE RAW
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: AEW Talent Pushing to Sign Leon Slater as TNA Deal Nears End
+[BOT] semantic_id=aew-talent-pushing-to-sign-leon-slater-as-tna-deal-nears-end
+[SCORE] iniziale=62 priority=medium
+[PERF v71] scraping articolo: 1.06s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=13, image=0, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.80s
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=AEW (5) conf=0.90 model=gemini-3.1-flash-lite | Articolo basato su speculazioni di mercato e report non confermati riguardanti il futuro contrattuale di Leon Slater e l'interesse di AEW e WWE.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'arms race' come 'corsa agli armamenti', usare 'vera e propria sfida di mercato'.; Mantenere 'X-Division title' in inglese.; 'Signed/sign' va tradotto come 'mettere sotto contratto' o 'ingaggiare', non usare 'firmare' come calco.
+[EDITORIAL v73] final type=RUMOR | category=AEW (5) | Articolo basato su speculazioni di mercato e report non confermati riguardanti il futuro contrattuale di Leon Slater e l'interesse di AEW e WWE.
+[PERF v71] analisi editoriale AI v72: 1.58s
+[SCORE] raffinato=62 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, contratto, PLE/PPV, v62 titolo/championship, v72.3 cap rumor: niente boost raffinamento
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - AEW Talent Pushing to Sign Leon Slater as TNA Deal Nears End
+[V71] story_signature=stable:aew_talent_pushing|sign_leon_slater|tna_deal_nears_end|contract|wwe semantic_status=new_story freshness=0.667
+[PERF v71] WP recent posts dedupe: 0.83s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.17s
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=13
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 23.49s
+[FIX] Titolo non valido (ok) -> fallback automatico: AEW talent pushing to sign leon slater as TNA deal nears end
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): AEW, alcuni atleti spingono per l'ingaggio di Leon Slater in scadenza con TNA
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/aew-talent-pushing-to-sign-leon-slater-as-tna-deal-nears-end-42.jpg
+[MEDIA] Immagine caricata: 4917
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260519_145328_001_aew-alcuni-atleti-spingono-per-lingaggio-di-leon-slater-in-scadenza-con-tna_4918_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4918
+[PERF v71] creazione post WordPress: 4.18s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/aew-talent-pushing-to-sign-leon-slater-as-tna-deal-nears-end-42.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4917
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'AEW Talent Pushing to Sign Leon Slater as TNA Deal Nears End': 32.87s
+[OK] Pubblicato: AEW, alcuni atleti spingono per l'ingaggio di Leon Slater in scadenza con TNA
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260519_145329_001_aew-alcuni-atleti-spingono-per-l-ingaggio-di-leon-slater-in-scadenza-con-tna_53158245_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: AEW, alcuni atleti spingono per l'ingaggio di Leon Slater in scadenza con TNA
+[PUBLISHED REVIEW v87.1] Review outer salvata: AEW, alcuni atleti spingono per l'ingaggio di Leon Slater in scadenza con TNA
+[SKIP v89] Soft news non operativa sotto 65: WWE's Finn Balor Says He Wants To Keep Wrestling But Regrets Absence From Family
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 8 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-19 14:52:26_summary.json -> published_html_review/run_2026-05-19 14-52-26_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (440 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
+===== RUN END [2026-05-19 14:52:26] VERSION [v89_editorial_report_quality (d58ea0a)] =====
+
