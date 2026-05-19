@@ -1,20 +1,20 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-19 19:48:27",
-  "bot_version": "v89_editorial_report_quality (35bbf1b)",
-  "git_sha": "35bbf1b068de0235d509922be0317d5afc61672f",
-  "created_at": "2026-05-19T19:49:41",
+  "run_id": "2026-05-19 21:16:28",
+  "bot_version": "v89_editorial_report_quality (52d4957)",
+  "git_sha": "52d495781c633aeac254ecb265e462ebb0d5f7a1",
+  "created_at": "2026-05-19T21:17:09",
   "published_count": 1,
   "published_post_ids": [
-    "4932"
+    "4935"
   ],
   "published_artifacts": [
     {
-      "post_id": 4932,
-      "title": "WWE, il celebre superfan Vladimir ricoverato in ospedale dopo una brutta caduta",
-      "source_url": "https://www.ringsidenews.com/wwe-superfan-vladimir-hospitalized-scary-fall/",
-      "html_file": "published/20260519_194939_001_wwe-il-celebre-superfan-vladimir-ricoverato-in-ospedale-dopo-una-brutta-caduta_4932_final.html",
-      "metadata_file": "published/20260519_194939_001_wwe-il-celebre-superfan-vladimir-ricoverato-in-ospedale-dopo-una-brutta-caduta_4932_metadata.json"
+      "post_id": 4935,
+      "title": "John Cena chiarisce: il ritiro dal ring non significa l'addio alla WWE",
+      "source_url": "https://www.wrestlinginc.com/2177184/john-cena-in-ring-retirement-not-mean-retiring-wwe/",
+      "html_file": "published/20260519_211656_001_john-cena-chiarisce-il-ritiro-dal-ring-non-significa-laddio-alla-wwe_4935_final.html",
+      "metadata_file": "published/20260519_211656_001_john-cena-chiarisce-il-ritiro-dal-ring-non-significa-laddio-alla-wwe_4935_metadata.json"
     }
   ],
   "errors": [],

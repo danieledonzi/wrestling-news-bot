@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-19 19:48:27",
-  "last_bot_version": "v89_editorial_report_quality (35bbf1b)",
-  "updated_at": "2026-05-19T19:49:41",
-  "total_items": 116,
+  "last_run_id": "2026-05-19 21:16:28",
+  "last_bot_version": "v89_editorial_report_quality (52d4957)",
+  "updated_at": "2026-05-19T21:17:08",
+  "total_items": 117,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -932,6 +932,14 @@
       "original_html_file": "20260519_194940_001_wwe-il-celebre-superfan-vladimir-ricoverato-in-ospedale-dopo-una-brutta-caduta_9184311c_original.html",
       "final_html_file": "20260519_194940_001_wwe-il-celebre-superfan-vladimir-ricoverato-in-ospedale-dopo-una-brutta-caduta_9184311c_final.html",
       "metadata_file": "20260519_194940_001_wwe-il-celebre-superfan-vladimir-ricoverato-in-ospedale-dopo-una-brutta-caduta_9184311c_metadata.json"
+    },
+    {
+      "run_id": "2026-05-19 21:16:28",
+      "title": "John Cena chiarisce: il ritiro dal ring non significa l'addio alla WWE",
+      "url": "https://www.wrestlinginc.com/2177184/john-cena-in-ring-retirement-not-mean-retiring-wwe/",
+      "original_html_file": "20260519_211657_001_john-cena-chiarisce-il-ritiro-dal-ring-non-significa-l-addio-alla-wwe_043cb0fa_original.html",
+      "final_html_file": "20260519_211657_001_john-cena-chiarisce-il-ritiro-dal-ring-non-significa-l-addio-alla-wwe_043cb0fa_final.html",
+      "metadata_file": "20260519_211657_001_john-cena-chiarisce-il-ritiro-dal-ring-non-significa-l-addio-alla-wwe_043cb0fa_metadata.json"
     }
   ]
 }
