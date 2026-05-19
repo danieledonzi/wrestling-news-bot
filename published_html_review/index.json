@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-19 17:36:56",
-  "last_bot_version": "v89_editorial_report_quality (f550e58)",
-  "updated_at": "2026-05-19T17:38:51",
-  "total_items": 115,
+  "last_run_id": "2026-05-19 19:48:27",
+  "last_bot_version": "v89_editorial_report_quality (35bbf1b)",
+  "updated_at": "2026-05-19T19:49:41",
+  "total_items": 116,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -924,6 +924,14 @@
       "original_html_file": "20260519_173851_003_wrestlemania-jelly-roll-voleva-un-ruolo-comico-nella-storyline_6afc1adb_original.html",
       "final_html_file": "20260519_173851_003_wrestlemania-jelly-roll-voleva-un-ruolo-comico-nella-storyline_6afc1adb_final.html",
       "metadata_file": "20260519_173851_003_wrestlemania-jelly-roll-voleva-un-ruolo-comico-nella-storyline_6afc1adb_metadata.json"
+    },
+    {
+      "run_id": "2026-05-19 19:48:27",
+      "title": "WWE, il celebre superfan Vladimir ricoverato in ospedale dopo una brutta caduta",
+      "url": "https://www.ringsidenews.com/wwe-superfan-vladimir-hospitalized-scary-fall/",
+      "original_html_file": "20260519_194940_001_wwe-il-celebre-superfan-vladimir-ricoverato-in-ospedale-dopo-una-brutta-caduta_9184311c_original.html",
+      "final_html_file": "20260519_194940_001_wwe-il-celebre-superfan-vladimir-ricoverato-in-ospedale-dopo-una-brutta-caduta_9184311c_final.html",
+      "metadata_file": "20260519_194940_001_wwe-il-celebre-superfan-vladimir-ricoverato-in-ospedale-dopo-una-brutta-caduta_9184311c_metadata.json"
     }
   ]
 }

@@ -1,36 +1,20 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-19 17:36:56",
-  "bot_version": "v89_editorial_report_quality (f550e58)",
-  "git_sha": "f550e5864f549e765c50b804480be8c601d3573b",
-  "created_at": "2026-05-19T17:38:51",
-  "published_count": 3,
+  "run_id": "2026-05-19 19:48:27",
+  "bot_version": "v89_editorial_report_quality (35bbf1b)",
+  "git_sha": "35bbf1b068de0235d509922be0317d5afc61672f",
+  "created_at": "2026-05-19T19:49:41",
+  "published_count": 1,
   "published_post_ids": [
-    "4922",
-    "4925",
-    "4928"
+    "4932"
   ],
   "published_artifacts": [
     {
-      "post_id": 4922,
-      "title": "WrestleMania 42: i dettagli sui piani creativi alternativi della WWE",
-      "source_url": "https://www.wrestlinginc.com/2176571/wwe-wrestlemania-42-cm-punk-bron-breakker-roman-reigns-cody-rhodes-alternate-creative-plans-backstage-report/",
-      "html_file": "published/20260519_173819_001_wrestlemania-42-i-dettagli-sui-piani-creativi-alternativi-della-wwe_4922_final.html",
-      "metadata_file": "published/20260519_173819_001_wrestlemania-42-i-dettagli-sui-piani-creativi-alternativi-della-wwe_4922_metadata.json"
-    },
-    {
-      "post_id": 4925,
-      "title": "Athena punta a superare il record di giorni da campione di Roman Reigns",
-      "source_url": "https://www.wrestlinginc.com/2176831/aew-athena-roh-womens-world-title-wwe-roman-reigns/",
-      "html_file": "published/20260519_173836_002_athena-punta-a-superare-il-record-di-giorni-da-campione-di-roman-reigns_4925_final.html",
-      "metadata_file": "published/20260519_173836_002_athena-punta-a-superare-il-record-di-giorni-da-campione-di-roman-reigns_4925_metadata.json"
-    },
-    {
-      "post_id": 4928,
-      "title": "WrestleMania: Jelly Roll voleva un ruolo comico nella storyline",
-      "source_url": "https://www.wrestlinginc.com/2176685/jelly-roll-more-comedic-wwe-wrestlemania-storyline/",
-      "html_file": "published/20260519_173849_003_wrestlemania-jelly-roll-voleva-un-ruolo-comico-nella-storyline_4928_final.html",
-      "metadata_file": "published/20260519_173849_003_wrestlemania-jelly-roll-voleva-un-ruolo-comico-nella-storyline_4928_metadata.json"
+      "post_id": 4932,
+      "title": "WWE, il celebre superfan Vladimir ricoverato in ospedale dopo una brutta caduta",
+      "source_url": "https://www.ringsidenews.com/wwe-superfan-vladimir-hospitalized-scary-fall/",
+      "html_file": "published/20260519_194939_001_wwe-il-celebre-superfan-vladimir-ricoverato-in-ospedale-dopo-una-brutta-caduta_4932_final.html",
+      "metadata_file": "published/20260519_194939_001_wwe-il-celebre-superfan-vladimir-ricoverato-in-ospedale-dopo-una-brutta-caduta_4932_metadata.json"
     }
   ],
   "errors": [],

@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-05-19 19:48:27",
+  "bot_version": "v89_editorial_report_quality (35bbf1b)",
+  "git_sha": "35bbf1b068de0235d509922be0317d5afc61672f",
+  "created_at": "2026-05-19T19:49:40",
+  "source_title": "WWE Superfan Vladimir Hospitalized After Scary Fall",
+  "final_title": "WWE, il celebre superfan Vladimir ricoverato in ospedale dopo una brutta caduta",
+  "source_url": "https://www.ringsidenews.com/wwe-superfan-vladimir-hospitalized-scary-fall/",
+  "category_id": 4,
+  "category_slug": "WWE",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "wwe-superfan-vladimir-hospitalized-after-scary-fall",
+  "story_signature_v71": "stable:wwe_superfan_vladimir_hospitalized_after_scary_fall|story|wwe",
+  "refined_score": 100,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "infortunio",
+    "PLE/PPV",
+    "v62 media rights/streaming"
+  ],
+  "blocks_summary": {
+    "text": 12,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260519_194940_001_wwe-il-celebre-superfan-vladimir-ricoverato-in-ospedale-dopo-una-brutta-caduta_9184311c_original.html",
+  "final_html_file": "20260519_194940_001_wwe-il-celebre-superfan-vladimir-ricoverato-in-ospedale-dopo-una-brutta-caduta_9184311c_final.html",
+  "metadata_file": "20260519_194940_001_wwe-il-celebre-superfan-vladimir-ricoverato-in-ospedale-dopo-una-brutta-caduta_9184311c_metadata.json"
+}
