@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-19 03:26:01",
-  "last_bot_version": "v89_editorial_report_quality (c404fec)",
-  "updated_at": "2026-05-19T03:31:53",
-  "total_items": 107,
+  "last_run_id": "2026-05-19 07:00:11",
+  "last_bot_version": "v89_editorial_report_quality (7a7864f)",
+  "updated_at": "2026-05-19T07:03:14",
+  "total_items": 108,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -860,6 +860,14 @@
       "original_html_file": "20260519_033131_003_la-knight-assente-dai-programmi-wwe-nessuna-causa-legata-a-infortuni-o-questioni_4e774767_original.html",
       "final_html_file": "20260519_033131_003_la-knight-assente-dai-programmi-wwe-nessuna-causa-legata-a-infortuni-o-questioni_4e774767_final.html",
       "metadata_file": "20260519_033131_003_la-knight-assente-dai-programmi-wwe-nessuna-causa-legata-a-infortuni-o-questioni_4e774767_metadata.json"
+    },
+    {
+      "run_id": "2026-05-19 07:00:11",
+      "title": "WWE Raw 18 maggio 2026: i Women's Tag Team Championship in palio e l'Open Challenge di Oba Femi",
+      "url": "https://www.wrestlinginc.com/2176064/wwe-raw-may-18-womens-tag-team-title-on-line-oba-femi-open-challenge/",
+      "original_html_file": "20260519_070304_001_wwe-raw-18-maggio-2026-i-women-s-tag-team-championship-in-palio-e-l-open-challen_d5b32b6c_original.html",
+      "final_html_file": "20260519_070304_001_wwe-raw-18-maggio-2026-i-women-s-tag-team-championship-in-palio-e-l-open-challen_d5b32b6c_final.html",
+      "metadata_file": "20260519_070304_001_wwe-raw-18-maggio-2026-i-women-s-tag-team-championship-in-palio-e-l-open-challen_d5b32b6c_metadata.json"
     }
   ]
 }
