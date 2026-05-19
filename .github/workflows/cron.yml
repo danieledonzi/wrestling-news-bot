@@ -57,28 +57,30 @@ jobs:
           text = path.read_text(encoding='utf-8')
           marker = '_v901_normalize_media_url'
           needle = '    inline_images = dedupe_preserve_order([u for u in inline_images if u])\n'
-          replacement = '''    def _v901_normalize_media_url(value):
-              if isinstance(value, str):
-                  return value.strip()
-              if isinstance(value, dict):
-                  for key in ("url", "src", "source_url", "image_url", "href"):
-                      candidate = value.get(key)
-                      if isinstance(candidate, str) and candidate.strip():
-                          return candidate.strip()
-                  nested = value.get("image") or value.get("media")
-                  if isinstance(nested, dict):
-                      for key in ("url", "src", "source_url", "image_url", "href"):
-                          candidate = nested.get(key)
-                          if isinstance(candidate, str) and candidate.strip():
-                              return candidate.strip()
-              return ""
-
-          inline_images = dedupe_preserve_order([
-              _v901_normalize_media_url(u)
-              for u in inline_images
-              if _v901_normalize_media_url(u)
-          ])
-'''
+          replacement_lines = [
+              '    def _v901_normalize_media_url(value):',
+              '        if isinstance(value, str):',
+              '            return value.strip()',
+              '        if isinstance(value, dict):',
+              '            for key in ("url", "src", "source_url", "image_url", "href"):',
+              '                candidate = value.get(key)',
+              '                if isinstance(candidate, str) and candidate.strip():',
+              '                    return candidate.strip()',
+              '            nested = value.get("image") or value.get("media")',
+              '            if isinstance(nested, dict):',
+              '                for key in ("url", "src", "source_url", "image_url", "href"):',
+              '                    candidate = nested.get(key)',
+              '                    if isinstance(candidate, str) and candidate.strip():',
+              '                        return candidate.strip()',
+              '        return ""',
+              '',
+              '    inline_images = dedupe_preserve_order([',
+              '        _v901_normalize_media_url(u)',
+              '        for u in inline_images',
+              '        if _v901_normalize_media_url(u)',
+              '    ])',
+          ]
+          replacement = '\n'.join(replacement_lines) + '\n'
           if marker in text:
               print('[HOTFIX v90.0.1] Inline image normalization already present')
           elif needle not in text:
