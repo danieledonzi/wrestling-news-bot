@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-18 23:57:44",
-  "last_bot_version": "v89_editorial_report_quality (c9232fd)",
-  "updated_at": "2026-05-18T23:59:25",
-  "total_items": 104,
+  "last_run_id": "2026-05-19 03:26:01",
+  "last_bot_version": "v89_editorial_report_quality (c404fec)",
+  "updated_at": "2026-05-19T03:31:53",
+  "total_items": 107,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -836,6 +836,30 @@
       "original_html_file": "20260518_225249_001_trick-williams-lavorare-con-lil-yachty-contagioso_54f73427_original.html",
       "final_html_file": "20260518_225249_001_trick-williams-lavorare-con-lil-yachty-contagioso_54f73427_final.html",
       "metadata_file": "20260518_225249_001_trick-williams-lavorare-con-lil-yachty-contagioso_54f73427_metadata.json"
+    },
+    {
+      "run_id": "2026-05-19 03:26:01",
+      "title": "[SPOILER] Brock Lesnar torna a Raw e attacca Oba Femi",
+      "url": "https://www.wrestlinginc.com/2176150/wwe-raw-brock-lesnar-returns-multiple-f5-oba-femi-retirement/",
+      "original_html_file": "20260519_032923_001_spoiler-brock-lesnar-torna-a-raw-e-attacca-oba-femi_31d7bda2_original.html",
+      "final_html_file": "20260519_032923_001_spoiler-brock-lesnar-torna-a-raw-e-attacca-oba-femi_31d7bda2_final.html",
+      "metadata_file": "20260519_032923_001_spoiler-brock-lesnar-torna-a-raw-e-attacca-oba-femi_31d7bda2_metadata.json"
+    },
+    {
+      "run_id": "2026-05-19 03:26:01",
+      "title": "WWE Raw: Jacob Fatu sfida Roman Reigns a un Tribal Combat, il campione accetta",
+      "url": "https://www.wrestlinginc.com/2176114/wwe-raw-jacob-fatu-roman-reigns-tribal-combat-challenge/",
+      "original_html_file": "20260519_033029_002_wwe-raw-jacob-fatu-sfida-roman-reigns-a-un-tribal-combat-il-campione-accetta_10321a59_original.html",
+      "final_html_file": "20260519_033029_002_wwe-raw-jacob-fatu-sfida-roman-reigns-a-un-tribal-combat-il-campione-accetta_10321a59_final.html",
+      "metadata_file": "20260519_033029_002_wwe-raw-jacob-fatu-sfida-roman-reigns-a-un-tribal-combat-il-campione-accetta_10321a59_metadata.json"
+    },
+    {
+      "run_id": "2026-05-19 03:26:01",
+      "title": "LA Knight assente dai programmi WWE: nessuna causa legata a infortuni o questioni contrattuali",
+      "url": "https://www.wrestlinginc.com/2176100/la-knight-wwe-tv-absence-injury-contract-dispute/",
+      "original_html_file": "20260519_033131_003_la-knight-assente-dai-programmi-wwe-nessuna-causa-legata-a-infortuni-o-questioni_4e774767_original.html",
+      "final_html_file": "20260519_033131_003_la-knight-assente-dai-programmi-wwe-nessuna-causa-legata-a-infortuni-o-questioni_4e774767_final.html",
+      "metadata_file": "20260519_033131_003_la-knight-assente-dai-programmi-wwe-nessuna-causa-legata-a-infortuni-o-questioni_4e774767_metadata.json"
     }
   ]
 }

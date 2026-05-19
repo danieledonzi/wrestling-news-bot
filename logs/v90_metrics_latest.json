@@ -1,22 +1,22 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-18T23:59:27",
-  "run_start": "2026-05-18 23:57:44",
-  "run_end": "2026-05-18 23:57:44",
-  "bot_version": "v89_editorial_report_quality (c9232fd)",
-  "candidate_count": 11,
-  "mode": "normal",
-  "max_new": 3,
-  "published_total": 0,
+  "collected_at": "2026-05-19T03:31:54",
+  "run_start": "2026-05-19 03:26:01",
+  "run_end": "2026-05-19 03:26:01",
+  "bot_version": "v89_editorial_report_quality (c404fec)",
+  "candidate_count": 13,
+  "mode": "storm",
+  "max_new": 5,
+  "published_total": 3,
   "published_pending": 0,
   "published_new": 0,
   "candidates_tried": 0,
-  "score_lines_count": 15,
-  "skip_count": 26,
+  "score_lines_count": 21,
+  "skip_count": 23,
   "skip_v89_count": 0,
-  "gemini_calls_observed": 3,
+  "gemini_calls_observed": 15,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 3
+    "gemini-3.1-flash-lite": 15
   },
   "gemini_discarded_models": {},
   "model_tasks": [
@@ -27,43 +27,168 @@
     {
       "task": "editorial_analysis",
       "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
+    },
+    {
+      "task": "editorial_analysis",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
+    },
+    {
+      "task": "editorial_analysis",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
+    },
+    {
+      "task": "editorial_analysis",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
     }
   ],
   "model_task_counts": {
     "healthcheck": 1,
-    "editorial_analysis": 1
+    "editorial_analysis": 4,
+    "translate_normal": 3,
+    "postedit": 3,
+    "title": 3
   },
   "perf": {
-    "WP strict report lookup": {
-      "count": 1,
-      "total_seconds": 1.45,
-      "max_seconds": 1.45
+    "WP lookup URL esistente": {
+      "count": 4,
+      "total_seconds": 2.89,
+      "max_seconds": 0.92
     },
     "WP lookup event_key": {
-      "count": 1,
-      "total_seconds": 1.33,
-      "max_seconds": 1.33
+      "count": 4,
+      "total_seconds": 5.39,
+      "max_seconds": 1.68
     },
-    "WP lookup URL esistente": {
-      "count": 3,
-      "total_seconds": 2.88,
-      "max_seconds": 1.07
+    "WP strict report lookup": {
+      "count": 1,
+      "total_seconds": 1.48,
+      "max_seconds": 1.48
     },
     "analisi editoriale AI v72": {
-      "count": 2,
-      "total_seconds": 28.0,
-      "max_seconds": 14.21
+      "count": 5,
+      "total_seconds": 84.94,
+      "max_seconds": 23.65
+    },
+    "WP recent posts dedupe": {
+      "count": 1,
+      "total_seconds": 1.04,
+      "max_seconds": 1.04
+    },
+    "categoria da analisi editoriale v72": {
+      "count": 1,
+      "total_seconds": 1.38,
+      "max_seconds": 1.38
+    },
+    "traduzione": {
+      "count": 3,
+      "total_seconds": 73.26,
+      "max_seconds": 30.23
+    },
+    "creazione post WordPress": {
+      "count": 3,
+      "total_seconds": 38.91,
+      "max_seconds": 22.43
+    },
+    "totale articolo pubblicato 'Brock Lesnar Returns, Delivers Multiple F5s To Oba Femi On W'": {
+      "count": 1,
+      "total_seconds": 60.01,
+      "max_seconds": 60.01
     },
     "scraping articolo": {
+      "count": 2,
+      "total_seconds": 2.5,
+      "max_seconds": 1.45
+    },
+    "estrazione blocchi": {
       "count": 1,
-      "total_seconds": 1.63,
-      "max_seconds": 1.63
+      "total_seconds": 0.71,
+      "max_seconds": 0.71
+    },
+    "totale articolo pubblicato 'Jacob Fatu Challenges Roman Reigns To Tribal Combat On WWE R'": {
+      "count": 1,
+      "total_seconds": 39.29,
+      "max_seconds": 39.29
+    },
+    "totale articolo pubblicato 'LA Knight's Recent WWE TV Absence Reportedly Not Due To Inju'": {
+      "count": 1,
+      "total_seconds": 61.09,
+      "max_seconds": 61.09
     }
   },
-  "article_metrics": [],
+  "article_metrics": [
+    {
+      "path": "published/20260519_032922_001_spoiler-brock-lesnar-torna-a-raw-e-attacca-oba-femi_4884_final.html",
+      "exists": true,
+      "word_count": 207,
+      "paragraph_count": 4,
+      "blockquote_count": 0,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 0,
+      "title": "[SPOILER] Brock Lesnar torna a Raw e attacca Oba Femi"
+    },
+    {
+      "path": "published/20260519_033027_002_wwe-raw-jacob-fatu-sfida-roman-reigns-a-un-tribal-combat-il-campione-accetta_4887_final.html",
+      "exists": true,
+      "word_count": 212,
+      "paragraph_count": 4,
+      "blockquote_count": 0,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 0,
+      "title": "WWE Raw: Jacob Fatu sfida Roman Reigns a un Tribal Combat, il campione accetta"
+    },
+    {
+      "path": "published/20260519_033130_003_la-knight-assente-dai-programmi-wwe-nessuna-causa-legata-a-infortuni-o-questioni-contrattu_4890_final.html",
+      "exists": true,
+      "word_count": 241,
+      "paragraph_count": 4,
+      "blockquote_count": 0,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 0,
+      "title": "LA Knight assente dai programmi WWE: nessuna causa legata a infortuni o questioni contrattuali"
+    }
+  ],
   "daily_counts": {
-    "published_today": 12,
-    "published_last_4h": 5,
-    "runs_today": 16
+    "published_today": 3,
+    "published_last_4h": 3,
+    "runs_today": 1
   }
 }

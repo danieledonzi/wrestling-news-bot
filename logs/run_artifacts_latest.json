@@ -1,12 +1,38 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-18 23:57:44",
-  "bot_version": "v89_editorial_report_quality (c9232fd)",
-  "git_sha": "c9232fd72dde0760ce2fe621be3f3ab6ba89343a",
-  "created_at": "2026-05-18T23:59:26",
-  "published_count": 0,
-  "published_post_ids": [],
-  "published_artifacts": [],
+  "run_id": "2026-05-19 03:26:01",
+  "bot_version": "v89_editorial_report_quality (c404fec)",
+  "git_sha": "c404fec6255b71a34d209f26eec6e6c3833e27d1",
+  "created_at": "2026-05-19T03:31:53",
+  "published_count": 3,
+  "published_post_ids": [
+    "4884",
+    "4887",
+    "4890"
+  ],
+  "published_artifacts": [
+    {
+      "post_id": 4884,
+      "title": "[SPOILER] Brock Lesnar torna a Raw e attacca Oba Femi",
+      "source_url": "https://www.wrestlinginc.com/2176150/wwe-raw-brock-lesnar-returns-multiple-f5-oba-femi-retirement/",
+      "html_file": "published/20260519_032922_001_spoiler-brock-lesnar-torna-a-raw-e-attacca-oba-femi_4884_final.html",
+      "metadata_file": "published/20260519_032922_001_spoiler-brock-lesnar-torna-a-raw-e-attacca-oba-femi_4884_metadata.json"
+    },
+    {
+      "post_id": 4887,
+      "title": "WWE Raw: Jacob Fatu sfida Roman Reigns a un Tribal Combat, il campione accetta",
+      "source_url": "https://www.wrestlinginc.com/2176114/wwe-raw-jacob-fatu-roman-reigns-tribal-combat-challenge/",
+      "html_file": "published/20260519_033027_002_wwe-raw-jacob-fatu-sfida-roman-reigns-a-un-tribal-combat-il-campione-accetta_4887_final.html",
+      "metadata_file": "published/20260519_033027_002_wwe-raw-jacob-fatu-sfida-roman-reigns-a-un-tribal-combat-il-campione-accetta_4887_metadata.json"
+    },
+    {
+      "post_id": 4890,
+      "title": "LA Knight assente dai programmi WWE: nessuna causa legata a infortuni o questioni contrattuali",
+      "source_url": "https://www.wrestlinginc.com/2176100/la-knight-wwe-tv-absence-injury-contract-dispute/",
+      "html_file": "published/20260519_033130_003_la-knight-assente-dai-programmi-wwe-nessuna-causa-legata-a-infortuni-o-questioni-contrattu_4890_final.html",
+      "metadata_file": "published/20260519_033130_003_la-knight-assente-dai-programmi-wwe-nessuna-causa-legata-a-infortuni-o-questioni-contrattu_4890_metadata.json"
+    }
+  ],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",
