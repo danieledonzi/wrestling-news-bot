@@ -5,6 +5,7 @@
     "report:roh-supercard-honor-results-highlights-key-moments-may-15-2026-05-15",
     "report:tna-impact-2026-05-14",
     "report:tna-impact-2026-05-15",
+    "report:wwe-raw-2026-05-18",
     "report:wwe-smackdown-2026-05-15"
   ],
   "published_reports": {
@@ -55,6 +56,14 @@
       "wp_post_id": null,
       "confirmed_at": "2026-05-17T06:01:56Z",
       "reason": "publish_success"
+    },
+    "report:wwe-raw-2026-05-18": {
+      "report_key": "report:wwe-raw-2026-05-18",
+      "title": "WWE RAW Results, Highlights and Key Moments for May 18, 2026",
+      "source_url": "https://www.ringsidenews.com/wwe-raw-results-highlights-key-moments-may-18-2026/",
+      "wp_post_id": 4902,
+      "confirmed_at": "2026-05-19T08:04:33Z",
+      "reason": "wp_confirm_runtime"
     }
   }
 }

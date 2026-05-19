@@ -1,24 +1,22 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-19T07:03:15",
-  "run_start": "2026-05-19 07:00:11",
-  "run_end": "2026-05-19 07:00:11",
-  "bot_version": "v89_editorial_report_quality (7a7864f)",
-  "candidate_count": 10,
+  "collected_at": "2026-05-19T08:05:17",
+  "run_start": "2026-05-19 08:04:19",
+  "run_end": "2026-05-19 08:04:19",
+  "bot_version": "v89_editorial_report_quality (ad33230)",
+  "candidate_count": 11,
   "mode": "normal",
   "max_new": 3,
   "published_total": 1,
   "published_pending": 0,
-  "published_new": 0,
-  "candidates_tried": 0,
-  "score_lines_count": 17,
-  "skip_count": 30,
+  "published_new": 1,
+  "candidates_tried": 9,
+  "score_lines_count": 20,
+  "skip_count": 33,
   "skip_v89_count": 0,
-  "gemini_calls_observed": 5,
+  "gemini_calls_observed": 9,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 3,
-    "gemini-2.5-pro": 1,
-    "gemini-2.5-flash": 1
+    "gemini-3.1-flash-lite": 9
   },
   "gemini_discarded_models": {},
   "model_tasks": [
@@ -27,12 +25,20 @@
       "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite"
     },
     {
-      "task": "translate_report",
-      "chain": "gemini-2.5-pro,gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+      "task": "editorial_analysis",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
     },
     {
-      "task": "emergency_title",
-      "chain": "gemini-2.5-flash,gemini-2.5-pro,gemini-3-flash-preview,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
     },
     {
       "task": "editorial_analysis",
@@ -41,83 +47,84 @@
   ],
   "model_task_counts": {
     "healthcheck": 1,
-    "translate_report": 1,
-    "emergency_title": 1,
-    "editorial_analysis": 1
+    "editorial_analysis": 2,
+    "translate_normal": 1,
+    "postedit": 1,
+    "title": 1
   },
   "perf": {
     "WP strict report lookup": {
       "count": 1,
-      "total_seconds": 4.12,
-      "max_seconds": 4.12
+      "total_seconds": 1.13,
+      "max_seconds": 1.13
     },
     "WP lookup event_key": {
       "count": 4,
-      "total_seconds": 6.2,
-      "max_seconds": 1.8
+      "total_seconds": 4.12,
+      "max_seconds": 1.12
     },
-    "WP lookup URL esistente": {
-      "count": 2,
-      "total_seconds": 1.55,
-      "max_seconds": 0.79
-    },
-    "WP recent posts dedupe": {
-      "count": 1,
-      "total_seconds": 0.77,
-      "max_seconds": 0.77
-    },
-    "categoria da analisi editoriale v72": {
-      "count": 1,
-      "total_seconds": 1.11,
-      "max_seconds": 1.11
-    },
-    "upload immagine interna": {
-      "count": 9,
-      "total_seconds": 11.87,
-      "max_seconds": 2.31
-    },
-    "traduzione": {
-      "count": 1,
-      "total_seconds": 126.96,
-      "max_seconds": 126.96
-    },
-    "creazione post WordPress": {
-      "count": 1,
-      "total_seconds": 12.23,
-      "max_seconds": 12.23
+    "analisi editoriale AI v72": {
+      "count": 5,
+      "total_seconds": 22.92,
+      "max_seconds": 13.42
     },
     "scraping articolo": {
-      "count": 2,
-      "total_seconds": 2.59,
-      "max_seconds": 1.48
+      "count": 1,
+      "total_seconds": 1.14,
+      "max_seconds": 1.14
     },
     "estrazione blocchi": {
       "count": 1,
-      "total_seconds": 0.71,
-      "max_seconds": 0.71
+      "total_seconds": 0.68,
+      "max_seconds": 0.68
     },
-    "analisi editoriale AI v72": {
-      "count": 2,
-      "total_seconds": 3.43,
-      "max_seconds": 1.89
+    "WP recent posts dedupe": {
+      "count": 1,
+      "total_seconds": 1.14,
+      "max_seconds": 1.14
+    },
+    "categoria da analisi editoriale v72": {
+      "count": 1,
+      "total_seconds": 1.49,
+      "max_seconds": 1.49
+    },
+    "traduzione": {
+      "count": 1,
+      "total_seconds": 7.3,
+      "max_seconds": 7.3
+    },
+    "creazione post WordPress": {
+      "count": 1,
+      "total_seconds": 3.32,
+      "max_seconds": 3.32
+    },
+    "totale articolo pubblicato 'Backstage Update Emerges On LA Knight's WWE Absence'": {
+      "count": 1,
+      "total_seconds": 27.93,
+      "max_seconds": 27.93
+    },
+    "WP lookup URL esistente": {
+      "count": 1,
+      "total_seconds": 0.65,
+      "max_seconds": 0.65
     }
   },
   "article_metrics": [
     {
-      "path": "published/20260519_070303_001_wwe-raw-18-maggio-2026-i-womens-tag-team-championship-in-palio-e-lopen-challenge-di-oba-fe_4902_final.html",
+      "path": "published/20260519_080503_001_aggiornamenti-sullassenza-di-la-knight-dagli-show-wwe_4905_final.html",
       "exists": true,
-      "word_count": 2635,
-      "paragraph_count": 60,
+      "word_count": 232,
+      "paragraph_count": 8,
       "blockquote_count": 0,
-      "image_count": 6,
+      "image_count": 0,
       "iframe_count": 0,
       "embed_hint_count": 0,
-      "title": "WWE Raw 18 maggio 2026: i Women's Tag Team Championship in palio e l'Open Challenge di Oba Femi"
+      "title": "Aggiornamenti sull'assenza di LA Knight dagli show WWE"
     }
   ],
   "daily_counts": {
-    "published_today": 4,
-    "published_last_4h": 4,
-    "runs_today": 2
+    "published_today": 5,
+    "published_last_4h": 2,
+    "runs_today": 3
   }
 }

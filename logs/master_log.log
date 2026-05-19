@@ -9292,3 +9292,229 @@ Traceback (most recent call last):
     item = (item or "").strip()
            ^^^^^^^^^^^^^^^^^^
 AttributeError: 'dict' object has no attribute 'strip'
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+
+===== RUN START [2026-05-19 08:04:19] VERSION [v89_editorial_report_quality (ad33230)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 12 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE RAW 5/18/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): WWE RAW 5/18/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176150/wwe-raw-brock-lesnar-returns-multiple-f5-oba-femi-retirement/
+[SKIP] Score sotto soglia editoriale (56/75): Paige & Brie Bella Retain WWE Women's Tag Titles On Raw, Will Defend Again At SNME
+[SKIP] Score sotto soglia editoriale (56/75): WWE Raw Adds Fourth Match To Card For Upcoming Saturday Night's Main Event
+[SKIP] Score sotto soglia editoriale (0/75): AEW's Paul Wight Details Taking Care Of His Giant Frame
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176114/wwe-raw-jacob-fatu-roman-reigns-tribal-combat-challenge/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176100/la-knight-wwe-tv-absence-injury-contract-dispute/
+[SKIP] Score sotto soglia editoriale (0/75): Biggest Winners And Losers Of The Week - 5/18/2026
+[SKIP] Score sotto soglia editoriale (54/75): Bully Ray Believes Rocky Could Inspire Cody Rhodes Vs. GUNTHER At WWE Clash In Italy
+[PERF v71] WP strict report lookup: 1.13s
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:wwe-raw-2026-05-18 - WWE Raw Results 5/18 - Women's Tag Team Title On The Line, Brock Lesnar Returns
+[REPORT v86.8/legacy] URL in history ma true results non confermato: continuo report:wwe-raw-2026-05-18
+[REPORT v86.8/legacy] story_signature in history ma true results: rivaluto report:wwe-raw-2026-05-18
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176027/wwe-trick-williams-lil-yachty-explains-working/
+[SKIP] Score sotto soglia editoriale (26/75): TNA Impact Ratings & Viewership Report: 5/14/2026
+[SCORE v86.9] Cap commentary/opinion 71->68 - Bully Ray Assesses Whether Darby Allin's AEW World Championship Run Has Met Its Goals
+[PERF v71] WP lookup event_key: 1.11s
+[FIX] Event key in history ma non confermata su WordPress: event:title:darby-allin:world:championship - provo a pubblicare
+[SCORE v80.4] AAA major World priority 40->72 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[SCORE v86.9] Cap commentary/opinion 72->68 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[SCORE v86.9] Cap commentary/opinion 85->68 - Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[SKIP] URL già in history: https://www.wrestlinginc.com/2175813/aew-garrett-borden-sting-dustin-rhodes-debut-indie-event/
+[SKIP] Score sotto soglia editoriale (34/75): AEW Dynamite Viewership & Ratings Report, 5/13/2026
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 71->54 - TNA's Santino Marella: WWE Clash In Italy Appearance Would Be 'Full Circle Moment'
+[SKIP] Score sotto soglia editoriale (0/75): WWE Stars To Appear At Fan Fest Announced For White House UFC Event Freedom 250
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Brock Lesnar's WWE Return Match Confirmed During 5/18 RAW
+[PERF v71] WP lookup event_key: 1.07s
+[FIX] Event key in history ma non confermata su WordPress: event:brock-lesnar-diagnosis - provo a pubblicare
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Brock Lesnar Returns To Destroy Oba Femi During 5/18 WWE RAW
+[FRESHNESS v86.6/legacy] Post-show outcome rescue: non tratto come preview scaduta - Brock Lesnar Returns To Destroy Oba Femi During 5/18 WWE RAW
+[PERF v71] WP lookup event_key: 0.82s
+[SKIP] event_key confermata su WordPress: event:brock-lesnar-return - Brock Lesnar Returns To Destroy Oba Femi During 5/18 WWE RAW
+[PERF v71] WP lookup event_key: 1.12s
+[FIX] Event key in history ma non confermata su WordPress: event:roman-reigns-diagnosis - provo a pubblicare
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:wwe-raw-2026-05-18 - WWE RAW Results, Highlights and Key Moments for May 18, 2026
+[REPORT v86.8/legacy] story_signature in history ma true results: rivaluto report:wwe-raw-2026-05-18
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 55->55 - WWE RAW Spoiler Lineup for May 18, 2026: Full Match Card and Backstage Notes Revealed
+[SCORE v81.1] Cap future card announcement 55->55 - WWE RAW Spoiler Lineup for May 18, 2026: Full Match Card and Backstage Notes Revealed
+[SKIP] Score sotto soglia editoriale (50/75): WWE RAW Spoiler Lineup for May 18, 2026: Full Match Card and Backstage Notes Revealed
+[SKIP] Preview/show announcement scaduta: Spoiler: Opening Segment for May 18 WWE RAW Revealed
+[SKIP] Preview/show announcement scaduta: Spoiler: Closing Match for May 18 WWE RAW Revealed
+[SKIP] Score sotto soglia editoriale (51/75): TKO's Mark Shapiro Admits Back-To-Back Las Vegas WrestleManias May Have Been A Mistake
+[SKIP] Score sotto soglia editoriale (7/75): Chris Jericho Reveals Surprising Inspiration Behind His Current "Jericho" Character
+[SKIP] URL già in history: https://www.ringsidenews.com/chris-jericho-addresses-wwe-return-rumors-before-aew-comeback/
+[SKIP] URL già in history: https://www.ringsidenews.com/cm-punks-return-timeline-revealed-amid-wwe-tv-absence/
+[SKIP] Score sotto soglia editoriale (13/75): TNA iMPACT Viewership Sees Increase on May 14, 2026
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - TKO Executive Explains Why UFC Rejected Ronda Rousey vs. Gina Carano Fight
+[SKIP] Score sotto soglia editoriale (49/75): TKO Executive Explains Why UFC Rejected Ronda Rousey vs. Gina Carano Fight
+[SCORE] 100 high - Brock Lesnar's WWE Return Match Confirmed During 5/18 RAW | WWE/main roster, top star titolo: brock lesnar, nomi forti lead: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, show settimanale, v62 ritorno/debutto, v71 freshness=0.622
+[SCORE] 100 high - WWE Raw Results 5/18 - Women's Tag Team Title On The Line, Brock Lesnar Returns | WWE/main roster, top star titolo: brock lesnar, nomi forti titolo: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, show settimanale, v62 ritorno/debutto, v75 hard results report, v71 freshness=0.613
+[SCORE] 75 medium - WWE RAW Results, Highlights and Key Moments for May 18, 2026 | WWE/main roster, top star lead: roman reigns, nomi forti lead: roman reigns, oba femi, WWE main roster + storyline/evento, titolo/championship, show settimanale, v75 hard results report, v77 hard report protected, v71 source reliability soft penalty, v71 freshness=0.473
+[SCORE] 73 medium - WWE's Ethan Page Explains What The Intercontinental Championship Means To Him | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v71 freshness=0.449, v48 tier2: 55-74
+[SCORE] 68 medium - Backstage Update Emerges On LA Knight's WWE Absence | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.472, v48 tier2: 55-74
+[SCORE] 68 medium - Bully Ray Assesses Whether Darby Allin's AEW World Championship Run Has Met Its Goals | AEW, nomi forti titolo: bully ray, nome WWE: bully ray, titolo/championship, v62 titolo/championship, v86.9 cap commentary/opinion 71->68, v71 freshness=0.477, v48 tier2: 55-74
+[SCORE] 68 medium - Details On Relationship Between Cain Velasquez And AAA Under WWE | WWE/main roster, impatto roster/storyline, rumor/backstage, v80.4 AAA major World priority 40->72, v86.9 cap commentary/opinion 72->68, v71 freshness=0.462, v48 tier2: 55-74
+[SCORE] 68 medium - Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, titolo/championship, show settimanale, v86.9 cap commentary/opinion 85->68, v71 freshness=0.458, v48 tier2: 55-74
+[SCORE] 66 medium - Becky Lynch Accepts Saturday Night's Main Event Match During Heated Segment On 5/18 WWE RAW | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, show settimanale, v71 source reliability soft penalty, v71 freshness=0.491, v48 tier2: 55-74
+[SCORE] 66 medium - Roman Reigns Accepts Challenge For Tribal Combat Match During 5/18 WWE RAW | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, show settimanale, v71 source reliability soft penalty, v71 freshness=0.484, v48 tier2: 55-74
+[REPORT v86.9] Priorita true-results in coda: report:wwe-raw-2026-05-18 - WWE Raw Results 5/18 - Women's Tag Team Title On The Line, Brock Lesnar Returns
+[MODE] Modalita normale: 2 news >=90, 2 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 11 | mode=normal | max nuove=3 | pending pubblicati=0
+[REPORT v88] True-results confermato da WordPress per URL (4902): report:wwe-raw-2026-05-18
+[REPORT v87.2] Report confermato in history forte: report:wwe-raw-2026-05-18 (wp_confirm_runtime)
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[PENDING v88] Rimosso true-results confermato dalla pending: report:wwe-raw-2026-05-18
+[REPORT v86.8] True-results già confermato su WordPress (url): skip report:wwe-raw-2026-05-18
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[REPORT v87.2] Report confermato da history forte: report:wwe-raw-2026-05-18
+[REPORT v88] True-results confermato da WordPress per event_key: report:wwe-raw-2026-05-18
+[REPORT v87.2] Report confermato in history forte: report:wwe-raw-2026-05-18 (wp_confirm_runtime)
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[PENDING v88] Rimosso true-results confermato dalla pending: report:wwe-raw-2026-05-18
+[REPORT v86.8] True-results già confermato su WordPress (story_signature): skip report:wwe-raw-2026-05-18
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[REPORT v87.2] True-results confermato da history forte: skip offline-safe report:wwe-raw-2026-05-18 - Brock Lesnar's WWE Return Match Confirmed During 5/18 RAW
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: WWE's Ethan Page Explains What The Intercontinental Championship Means To Him
+[BOT] semantic_id=wwes-ethan-page-explains-what-the-intercontinental-championship-means-to-him
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo promuove un match imminente (Saturday Night's Main Event) e raccoglie le dichiarazioni del wrestler in vista dell'evento. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantenere 'Intercontinental Championship' in inglese.; 'Boyhood dream' va reso come 'sogno di una vita'.; 'H/t' (hat tip) deve essere citato correttamente come fonte.
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo promuove un match imminente (Saturday Night's Main Event) e raccoglie le dichiarazioni del wrestler in vista dell'evento. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.09s
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - WWE's Ethan Page Explains What The Intercontinental Championship Means To Him
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v66 cap opinion/commentary storyline, v68 cap opinion senza news concreta, v88.2 cap OTHER/feature non-news 68->54
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - WWE's Ethan Page Explains What The Intercontinental Championship Means To Him
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - WWE's Ethan Page Explains What The Intercontinental Championship Means To Him
+[BOT] Elaborazione: Backstage Update Emerges On LA Knight's WWE Absence
+[BOT] semantic_id=backstage-update-emerges-on-la-knights-wwe-absence
+[SCORE] iniziale=68 priority=medium
+[PERF v71] scraping articolo: 1.14s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.68s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza le motivazioni dietro l'assenza TV di una star basandosi su report di backstage, non essendo un evento futuro o un report di puntata.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'non-story' letteralmente, usare 'un falso problema' o 'nulla di rilevante'.; Mantenere i nomi dei titoli/cinture in inglese.; Non usare calchi per 'creative plans', tradurre con 'piani creativi' o 'piani di booking'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo analizza le motivazioni dietro l'assenza TV di una star basandosi su report di backstage, non essendo un evento futuro o un report di puntata.
+[PERF v71] analisi editoriale AI v72: 13.42s
+[SCORE] raffinato=56 priority=low | WWE/main roster, top star lead: cody rhodes, nomi forti lead: cody rhodes, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name lead + evento forte, PLE/PPV, v72.3 cap rumor: niente boost raffinamento, v79.1.3 true future preview cap
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Backstage Update Emerges On LA Knight's WWE Absence
+[V71] story_signature=stable:cody_rhodes|gunther|backstage_update_emerges_on|contract|wwe semantic_status=new_story freshness=0.706
+[PERF v71] WP recent posts dedupe: 1.14s
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:cody-rhodes-diagnosis -> event:cody-rhodes-diagnosis-followup-backstage-update-emerges-la-knight-s-absence
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.49s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=9
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 7.30s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[MEDIA v88] Recupero immagini inline mancanti: 1
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/01/la-knights-current-status-for-wwe-return-in-germany-00.jpg
+[MEDIA] Immagine caricata: 4904
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260519_080503_001_aggiornamenti-sullassenza-di-la-knight-dagli-show-wwe_4905_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4905
+[PERF v71] creazione post WordPress: 3.32s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/01/la-knights-current-status-for-wwe-return-in-germany-00.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4904
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Backstage Update Emerges On LA Knight's WWE Absence': 27.93s
+[OK] Pubblicato: Aggiornamenti sull'assenza di LA Knight dagli show WWE
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260519_080505_001_aggiornamenti-sull-assenza-di-la-knight-dagli-show-wwe_38320657_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Aggiornamenti sull'assenza di LA Knight dagli show WWE
+[PUBLISHED REVIEW v87.1] Review outer salvata: Aggiornamenti sull'assenza di LA Knight dagli show WWE
+[BOT] Elaborazione: Bully Ray Assesses Whether Darby Allin's AEW World Championship Run Has Met Its Goals
+[BOT] semantic_id=bully-ray-assesses-whether-darby-allins-aew-world-championship-run-has-met-its-goals
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=2, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=2, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta le considerazioni e l'analisi di Bully Ray tratte dal podcast Busted Open Radio riguardo il regno titolato di Darby Allin.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (AEW World Championship) in inglese.; Non tradurre 'over' (essere over = essere amato/popolare dal pubblico).; 'Balls to the wall' va reso con un equivalente idiomatico italiano come 'dare il 100%' o 'senza freni'.
+[EDITORIAL v73] final type=OPINION | category=AEW (5) | L'articolo riporta le considerazioni e l'analisi di Bully Ray tratte dal podcast Busted Open Radio riguardo il regno titolato di Darby Allin.
+[PERF v71] analisi editoriale AI v72: 5.71s
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: bully ray, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, non wrestling puro, opinione generica, v66 cap opinion/commentary storyline, v68 cap duro opinion/commentary
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Bully Ray Assesses Whether Darby Allin's AEW World Championship Run Has Met Its Goals
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Bully Ray Assesses Whether Darby Allin's AEW World Championship Run Has Met Its Goals
+[PERF v71] WP lookup URL esistente: 0.65s
+[BOT] Elaborazione: Details On Relationship Between Cain Velasquez And AAA Under WWE
+[BOT] semantic_id=details-on-relationship-between-cain-velasquez-and-aaa-under-wwe
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WORLD (8) conf=0.80 model=gemini-3.1-flash-lite | L'articolo discute speculazioni e report di Dave Meltzer sul futuro di Cain Velasquez e le dinamiche societarie tra AAA e WWE.
+[EDITORIAL v72.3] translation_notes=Mantenere 'lucha libre' e i nomi dei ruoli (Dorian Roldan, Konnan).; 'Release from prison' va tradotto come scarcerazione o rilascio dal carcere, non licenziamento.; Attenzione a non tradurre 'bought' come acquisizione corporativa se si riferisce solo a accordi di partnership/relazioni.
+[EDITORIAL v73] final type=RUMOR | category=WORLD (8) | L'articolo discute speculazioni e report di Dave Meltzer sul futuro di Cain Velasquez e le dinamiche societarie tra AAA e WWE.
+[PERF v71] analisi editoriale AI v72: 1.41s
+[SCORE v86.9] Cap commentary/opinion 100->68 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[SCORE v88.3] v88.3 cap low-value market item 68->45 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[SCORE] raffinato=45 priority=low | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, non wrestling puro, opinione generica, v62 media rights/streaming, v62 categoria business, v86.9 cap commentary/opinion 100->68, v88.3 cap low-value market item 68->45
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 45/55 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - Details On Relationship Between Cain Velasquez And AAA Under WWE
+[BOT] Elaborazione: Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[BOT] semantic_id=lyra-valkyria-names-wwe-nxt-star-she-hopes-to-face-in-john-cena-classic
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni rilasciate in un'intervista esterna. Non è una preview dell'evento ma una news su commenti di Lyra Valkyria.
+[EDITORIAL v72.3] translation_notes=Mantenere 'John Cena Classic' come nome del torneo.; Tradurre 'trade strikes' con 'incrociare i guantoni' o 'sfidarsi sul ring'.; Evitare calchi per 'floodgates opened wide up' (usare 'ha scatenato speculazioni').
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta dichiarazioni rilasciate in un'intervista esterna. Non è una preview dell'evento ma una news su commenti di Lyra Valkyria.
+[PERF v71] analisi editoriale AI v72: 1.29s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[SCORE] raffinato=0 priority=skip | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, titolo/championship, show settimanale, developmental secondario, v66 blocco politica/volgarita non wrestling
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 0/75 - Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[REPORT v87.2] True-results confermato da history forte: skip offline-safe report:wwe-raw-2026-05-18 - Becky Lynch Accepts Saturday Night's Main Event Match During Heated Segment On 5/18 WWE RAW
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[REPORT v87.2] True-results confermato da history forte: skip offline-safe report:wwe-raw-2026-05-18 - Roman Reigns Accepts Challenge For Tribal Combat Match During 5/18 WWE RAW
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[SKIP v88.2] Feature/OTHER non-news sotto priorita hard: TNA's Santino Marella: WWE Clash In Italy Appearance Would Be 'Full Circle Moment'
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 9 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-19 08:04:19_summary.json -> published_html_review/run_2026-05-19 08-04-19_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (429 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
+===== RUN END [2026-05-19 08:04:19] VERSION [v89_editorial_report_quality (ad33230)] =====
+

@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-19 07:00:11",
-  "last_bot_version": "v89_editorial_report_quality (7a7864f)",
-  "updated_at": "2026-05-19T07:03:14",
-  "total_items": 108,
+  "last_run_id": "2026-05-19 08:04:19",
+  "last_bot_version": "v89_editorial_report_quality (ad33230)",
+  "updated_at": "2026-05-19T08:05:16",
+  "total_items": 109,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -868,6 +868,14 @@
       "original_html_file": "20260519_070304_001_wwe-raw-18-maggio-2026-i-women-s-tag-team-championship-in-palio-e-l-open-challen_d5b32b6c_original.html",
       "final_html_file": "20260519_070304_001_wwe-raw-18-maggio-2026-i-women-s-tag-team-championship-in-palio-e-l-open-challen_d5b32b6c_final.html",
       "metadata_file": "20260519_070304_001_wwe-raw-18-maggio-2026-i-women-s-tag-team-championship-in-palio-e-l-open-challen_d5b32b6c_metadata.json"
+    },
+    {
+      "run_id": "2026-05-19 08:04:19",
+      "title": "Aggiornamenti sull'assenza di LA Knight dagli show WWE",
+      "url": "https://www.ringsidenews.com/backstage-update-emerges-la-knights-wwe-absence/",
+      "original_html_file": "20260519_080505_001_aggiornamenti-sull-assenza-di-la-knight-dagli-show-wwe_38320657_original.html",
+      "final_html_file": "20260519_080505_001_aggiornamenti-sull-assenza-di-la-knight-dagli-show-wwe_38320657_final.html",
+      "metadata_file": "20260519_080505_001_aggiornamenti-sull-assenza-di-la-knight-dagli-show-wwe_38320657_metadata.json"
     }
   ]
 }
