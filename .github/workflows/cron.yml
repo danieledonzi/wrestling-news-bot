@@ -48,6 +48,47 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+      - name: Apply v90.0.1 inline image normalization hotfix
+        run: |
+          set -e
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('bot.py')
+          text = path.read_text(encoding='utf-8')
+          marker = '_v901_normalize_media_url'
+          needle = '    inline_images = dedupe_preserve_order([u for u in inline_images if u])\n'
+          replacement = '''    def _v901_normalize_media_url(value):
+              if isinstance(value, str):
+                  return value.strip()
+              if isinstance(value, dict):
+                  for key in ("url", "src", "source_url", "image_url", "href"):
+                      candidate = value.get(key)
+                      if isinstance(candidate, str) and candidate.strip():
+                          return candidate.strip()
+                  nested = value.get("image") or value.get("media")
+                  if isinstance(nested, dict):
+                      for key in ("url", "src", "source_url", "image_url", "href"):
+                          candidate = nested.get(key)
+                          if isinstance(candidate, str) and candidate.strip():
+                              return candidate.strip()
+              return ""
+
+          inline_images = dedupe_preserve_order([
+              _v901_normalize_media_url(u)
+              for u in inline_images
+              if _v901_normalize_media_url(u)
+          ])
+'''
+          if marker in text:
+              print('[HOTFIX v90.0.1] Inline image normalization already present')
+          elif needle not in text:
+              raise SystemExit('[HOTFIX v90.0.1] Target line not found')
+          else:
+              text = text.replace(needle, replacement, 1)
+              path.write_text(text, encoding='utf-8')
+              print('[HOTFIX v90.0.1] Inline image dict normalization applied')
+          PY
+
       - name: Verify consolidated source
         run: |
           set -e
