@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-19 14:52:26",
-  "last_bot_version": "v89_editorial_report_quality (d58ea0a)",
-  "updated_at": "2026-05-19T14:53:29",
-  "total_items": 112,
+  "last_run_id": "2026-05-19 17:36:56",
+  "last_bot_version": "v89_editorial_report_quality (f550e58)",
+  "updated_at": "2026-05-19T17:38:51",
+  "total_items": 115,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -900,6 +900,30 @@
       "original_html_file": "20260519_145329_001_aew-alcuni-atleti-spingono-per-l-ingaggio-di-leon-slater-in-scadenza-con-tna_53158245_original.html",
       "final_html_file": "20260519_145329_001_aew-alcuni-atleti-spingono-per-l-ingaggio-di-leon-slater-in-scadenza-con-tna_53158245_final.html",
       "metadata_file": "20260519_145329_001_aew-alcuni-atleti-spingono-per-l-ingaggio-di-leon-slater-in-scadenza-con-tna_53158245_metadata.json"
+    },
+    {
+      "run_id": "2026-05-19 17:36:56",
+      "title": "WrestleMania 42: i dettagli sui piani creativi alternativi della WWE",
+      "url": "https://www.wrestlinginc.com/2176571/wwe-wrestlemania-42-cm-punk-bron-breakker-roman-reigns-cody-rhodes-alternate-creative-plans-backstage-report/",
+      "original_html_file": "20260519_173820_001_wrestlemania-42-i-dettagli-sui-piani-creativi-alternativi-della-wwe_3435c347_original.html",
+      "final_html_file": "20260519_173820_001_wrestlemania-42-i-dettagli-sui-piani-creativi-alternativi-della-wwe_3435c347_final.html",
+      "metadata_file": "20260519_173820_001_wrestlemania-42-i-dettagli-sui-piani-creativi-alternativi-della-wwe_3435c347_metadata.json"
+    },
+    {
+      "run_id": "2026-05-19 17:36:56",
+      "title": "Athena punta a superare il record di giorni da campione di Roman Reigns",
+      "url": "https://www.wrestlinginc.com/2176831/aew-athena-roh-womens-world-title-wwe-roman-reigns/",
+      "original_html_file": "20260519_173838_002_athena-punta-a-superare-il-record-di-giorni-da-campione-di-roman-reigns_eb8ff126_original.html",
+      "final_html_file": "20260519_173838_002_athena-punta-a-superare-il-record-di-giorni-da-campione-di-roman-reigns_eb8ff126_final.html",
+      "metadata_file": "20260519_173838_002_athena-punta-a-superare-il-record-di-giorni-da-campione-di-roman-reigns_eb8ff126_metadata.json"
+    },
+    {
+      "run_id": "2026-05-19 17:36:56",
+      "title": "WrestleMania: Jelly Roll voleva un ruolo comico nella storyline",
+      "url": "https://www.wrestlinginc.com/2176685/jelly-roll-more-comedic-wwe-wrestlemania-storyline/",
+      "original_html_file": "20260519_173851_003_wrestlemania-jelly-roll-voleva-un-ruolo-comico-nella-storyline_6afc1adb_original.html",
+      "final_html_file": "20260519_173851_003_wrestlemania-jelly-roll-voleva-un-ruolo-comico-nella-storyline_6afc1adb_final.html",
+      "metadata_file": "20260519_173851_003_wrestlemania-jelly-roll-voleva-un-ruolo-comico-nella-storyline_6afc1adb_metadata.json"
     }
   ]
 }

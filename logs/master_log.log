@@ -477,3 +477,255 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
 ===== RUN END [2026-05-19 14:52:26] VERSION [v89_editorial_report_quality (d58ea0a)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+
+===== RUN START [2026-05-19 17:36:56] VERSION [v89_editorial_report_quality (f550e58)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 12 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[PERF v71] WP lookup event_key: 1.38s
+[FIX] Event key in history ma non confermata su WordPress: event:title:roman-reigns:world:championship - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (36/75): Swerve Strickland Criticizes One Aspect Of Darby Allin's AEW World Title Win
+[SKIP] Score sotto soglia editoriale (56/75): Charlotte Flair, The Miz & Others Set For Meet & Greets At UFC Freedom 250
+[SKIP] Score sotto soglia editoriale (24/75): WWE's Stephanie McMahon Reveals How To Tell Whether She's Going To Slap Someone
+[SKIP] Score sotto soglia editoriale (10/75): TNA's Leon Slater Can't Believe He Has Support Of 'Wrestling Uncles'
+[PERF v71] WP lookup event_key: 1.31s
+[SKIP] event_key confermata su WordPress: event:darby-allin-title - Tony Khan Calls AEW Star 'Ultimate Fighting Champion'
+[SKIP] Score sotto soglia editoriale (32/75): Swerve Strickland Comments On Possibility Of The New Day Coming To AEW
+[SCORE v81.1] Cap light name-driven item 20->20 - Jacob Fatu Talks Keeping His Name In WWE, Recalls Almost Becoming Caesar Sikoa
+[SKIP] Score sotto soglia editoriale (20/75): Jacob Fatu Talks Keeping His Name In WWE, Recalls Almost Becoming Caesar Sikoa
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE RAW 5/18/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): WWE RAW 5/18/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176150/wwe-raw-brock-lesnar-returns-multiple-f5-oba-femi-retirement/
+[SKIP] Score sotto soglia editoriale (56/75): Paige & Brie Bella Retain WWE Women's Tag Titles On Raw, Will Defend Again At SNME
+[SKIP] Score sotto soglia editoriale (56/75): WWE Raw Adds Fourth Match To Card For Upcoming Saturday Night's Main Event
+[SKIP] Score sotto soglia editoriale (0/75): AEW's Paul Wight Details Taking Care Of His Giant Frame
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176114/wwe-raw-jacob-fatu-roman-reigns-tribal-combat-challenge/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176100/la-knight-wwe-tv-absence-injury-contract-dispute/
+[SKIP] Score sotto soglia editoriale (0/75): Biggest Winners And Losers Of The Week - 5/18/2026
+[SKIP] Score sotto soglia editoriale (54/75): Bully Ray Believes Rocky Could Inspire Cody Rhodes Vs. GUNTHER At WWE Clash In Italy
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (10/75): Ladder Match Revealed for 2026 TNA Slammiversary
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE Superfan Vladimir Hospitalized After Scary Fall
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Chris Jericho Says He Doesn't Care About Winning Or Losing In AEW
+[SKIP] Score sotto soglia editoriale (17/75): Chris Jericho Says He Doesn't Care About Winning Or Losing In AEW
+[SCORE v81.1] Cap light name-driven item 18->18 - Chris Jericho Defends The Learning Tree Era Amid Fan Backlash
+[SKIP] Score sotto soglia editoriale (13/75): Chris Jericho Defends The Learning Tree Era Amid Fan Backlash
+[SKIP] Score sotto soglia editoriale (32/75): Chris Jericho Explains Why He Dropped 'Chris' From His Name In AEW
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - John Cena Vows To Keep Helping WWE After Retirement
+[SKIP] Score sotto soglia editoriale (49/75): John Cena Vows To Keep Helping WWE After Retirement
+[PERF v71] WP lookup event_key: 1.26s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - John Cena Addresses Concerns That Wins and Losses Won't Matter in John Cena Classic
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - John Cena Says WWE's Modern Style Forced Him Into Retirement
+[SKIP] Score sotto soglia editoriale (49/75): John Cena Says WWE's Modern Style Forced Him Into Retirement
+[SKIP] Score sotto soglia editoriale (38/75): Jordynne Grace Training to Become a Pilot for Animal Rescue Work
+[SKIP] Score sotto soglia editoriale (43/75): Lawsuit Against ICW: No Holds Barred Takes New Turn After Promotion Misses Court Conference
+[SKIP] Score sotto soglia editoriale (37/75): Chelsea Green Reveals First Look At Her Role In Blue Ridge Season 2
+[SKIP] Score sotto soglia editoriale (0/75): WWE Superstar Lineup Revealed for UFC Freedom 250 Fan Fest
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Missy Hyatt Blasts Brock Lesnar Over WWE Return Amid Janel Grant Lawsuit
+[PERF v71] WP lookup event_key: 0.93s
+[SKIP] event_key confermata su WordPress: event:brock-lesnar-return - Missy Hyatt Blasts Brock Lesnar Over WWE Return Amid Janel Grant Lawsuit
+[SCORE] 100 high - Backstage Report Details Alternate Creative Plans For WWE WrestleMania 42 | WWE/main roster, top star titolo: cm punk, roman reigns, cody rhodes, impatto roster/storyline, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, opinione generica, v62 reazioni/tributi, v71 freshness=0.582
+[SCORE] 100 high - TKO Executive Raves About What The Rock Brings To WWE Parent Company Board | WWE/main roster, top star titolo: the rock, business/contratti WWE-TKO, impatto roster/storyline, release/addio, combo top name titolo + evento forte, show settimanale, v62 business/dirigenza, v62 categoria business, v71 freshness=0.561
+[SCORE] 84 high - AEW's Athena Talks Current ROH Women's World Title Run, Beating WWE's Roman Reigns | WWE/main roster, top star titolo: roman reigns, impatto roster/storyline, WWE main roster + storyline/evento, titolo/championship, v62 titolo/championship, v66 cap title match non-title-change, v71 freshness=0.608
+[SCORE] 79 medium - Jelly Roll Reportedly Pushed To Be Part Of 'More Comedic' WWE WrestleMania Storyline | WWE/main roster, top star lead: cody rhodes, randy orton, nomi forti lead: cody rhodes, randy orton, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v71 freshness=0.593
+[SCORE] 68 medium - WWE Superfan Vladimir Hospitalized After Scary Fall | WWE/main roster, infortunio, PLE/PPV, v62 infortunio/operazione, v71 source reliability soft penalty, v71 freshness=0.692, v48 tier2: 55-74
+[SCORE] 55 low - WWE's Finn Balor Says He Wants To Keep Wrestling But Regrets Absence From Family | WWE/main roster, WWE main roster + storyline/evento, intervista/opinione, floor WWE main roster storyline, v71 freshness=0.552, v48 tier2: 55-74
+[SCORE] 49 low - John Cena Reveals He Personally Created WWE Retirement Tour & John Cena Classic | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, match/segmento annunciato, combo top name titolo + evento forte, opinione generica, v66 cap opinion/commentary storyline, v68 cap duro opinion/commentary, v71 source reliability soft penalty, v71 freshness=0.557, v48 tier3: 45-54 contestuale
+[SCORE] 40 low - John Cena Addresses Concerns That Wins and Losses Won't Matter in John Cena Classic | WWE/main roster, top star titolo: john cena, v71 source reliability soft penalty, v71 freshness=0.677, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 2 news >=90, 3 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 8 | mode=normal | max nuove=3 | pending pubblicati=0
+[PERF v71] WP lookup URL esistente: 0.68s
+[BOT] Elaborazione: Backstage Report Details Alternate Creative Plans For WWE WrestleMania 42
+[BOT] semantic_id=backstage-report-details-alternate-creative-plans-for-wwe-wrestlemania-42
+[SCORE] iniziale=100 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza retroscena e piani creativi alternativi per WrestleMania 42, citando rumor e speculazioni di Bryan Alvarez (Wrestling Observer). Non è una preview né un report.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (es. World Heavyweight Championship) in inglese.; Non tradurre 'h/t' come 'colpo di testa', usare 'si ringrazia ... per la trascrizione'.; Tradurre 'mixed bag' come 'un mix di luci e ombre'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo analizza retroscena e piani creativi alternativi per WrestleMania 42, citando rumor e speculazioni di Bryan Alvarez (Wrestling Observer). Non è una preview né un report.
+[PERF v71] analisi editoriale AI v72: 3.64s
+[SCORE v88.2] v88.2 cap feature storico numerico 100->45 - Backstage Report Details Alternate Creative Plans For WWE WrestleMania 42
+[SCORE] raffinato=45 priority=low | WWE/main roster, top star titolo: cm punk, roman reigns, cody rhodes, impatto roster/storyline, WWE main roster + storyline/evento, infortunio, combo top name titolo + evento forte, PLE/PPV, v62 titolo/championship, v62 categoria business, v88.2 cap feature storico numerico 100->45
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Backstage Report Details Alternate Creative Plans For WWE WrestleMania 42
+[FIX v72.3] Event key business rimossa per RUMOR/WWE: event:business:roman-reigns:cody-rhodes -> event:rumor:backstage-details-alternate-creative
+[V71] story_signature=stable:roman_reigns|cm_punk|backstage_report_details_alternate_creative_plans_for|injury|wwe semantic_status=new_story freshness=0.699
+[PERF v71] WP recent posts dedupe: 0.73s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.04s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/backstage-report-details-alternate-creative-plans-for-wwe-wrestlemania-42/intro-1779204077.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 10.96s
+[FIX] Titolo non valido (ok) -> fallback automatico: Backstage report details alternate creative plans for WWE WrestleMania 42
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WrestleMania 42: i dettagli sui piani creativi alternativi della WWE
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/backstage-report-details-alternate-creative-plans-for-wwe-wrestlemania-42/l-intro-1779204077.jpg
+[MEDIA] Immagine caricata: 4921
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260519_173819_001_wrestlemania-42-i-dettagli-sui-piani-creativi-alternativi-della-wwe_4922_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4922
+[PERF v71] creazione post WordPress: 38.56s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/backstage-report-details-alternate-creative-plans-for-wwe-wrestlemania-42/l-intro-1779204077.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4921
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Backstage Report Details Alternate Creative Plans For WWE Wr': 55.23s
+[OK] Pubblicato: WrestleMania 42: i dettagli sui piani creativi alternativi della WWE
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260519_173820_001_wrestlemania-42-i-dettagli-sui-piani-creativi-alternativi-della-wwe_3435c347_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WrestleMania 42: i dettagli sui piani creativi alternativi della WWE
+[PUBLISHED REVIEW v87.1] Review outer salvata: WrestleMania 42: i dettagli sui piani creativi alternativi della WWE
+[BOT] Elaborazione: TKO Executive Raves About What The Rock Brings To WWE Parent Company Board
+[BOT] semantic_id=tko-executive-raves-about-what-the-rock-brings-to-wwe-parent-company-board
+[SCORE] iniziale=100 priority=high
+[PERF v71] scraping articolo: 1.09s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=15, image=0, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.62s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=BUSINESS (15) conf=0.95 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni ufficiali di un executive TKO sul ruolo societario di The Rock; sebbene tratti di wrestling, il focus è prettamente corporate/gestionale.
+[EDITORIAL v72.3] translation_notes=Mantenere 'TKO Board of Directors' o 'consiglio di amministrazione TKO'.; Non tradurre 'The Rock' come 'il roccia'.; Evitare calchi come 'He's everything and more' letterale: usare 'È tutto questo e anche di più'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=BUSINESS (15) | L'articolo riporta dichiarazioni ufficiali di un executive TKO sul ruolo societario di The Rock; sebbene tratti di wrestling, il focus è prettamente corporate/gestionale.
+[PERF v71] analisi editoriale AI v72: 1.49s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - TKO Executive Raves About What The Rock Brings To WWE Parent Company Board
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 100->54 - TKO Executive Raves About What The Rock Brings To WWE Parent Company Board
+[SCORE v79.1.3] Recovery post-show 54->95 - TKO Executive Raves About What The Rock Brings To WWE Parent Company Board
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 95->54 - TKO Executive Raves About What The Rock Brings To WWE Parent Company Board
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star titolo: the rock, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, combo top name titolo + evento forte, PLE/PPV, v62 business/dirigenza, v62 categoria business, v88.2 cap OTHER/feature non-news 100->54, v79.1.3 post-show recovery 54->95, v88.2 cap OTHER/feature non-news 95->54
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - TKO Executive Raves About What The Rock Brings To WWE Parent Company Board
+[V71] story_signature=stable:the_rock|tko_executive_raves_about_what_the_rock_brings_to|wwe_parent_company_board|story|wwe semantic_status=new_story freshness=0.561
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] News core già pubblicata da altra fonte: TKO Executive Raves About What The Rock Brings To WWE Parent Company Board
+[SKIP] news_core_key=business-tko-mark-shapiro
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: AEW's Athena Talks Current ROH Women's World Title Run, Beating WWE's Roman Reigns
+[BOT] semantic_id=aews-athena-talks-current-roh-womens-world-title-run-beating-wwes-roman-reigns
+[SCORE] iniziale=84 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni estratte da un'intervista; non e' una preview nonostante citi Supercard of Honor, ne' un report completo.
+[EDITORIAL v72.3] translation_notes=Mantenere 'ROH Women's World Title' e 'Undisputed WWE Universal Champion' in inglese.; 'Petty' va tradotto come 'petulante' o 'dispettosa' in base al contesto.; 'Gunnging for' non tradurre letteralmente: usare 'puntare a'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | L'articolo riporta dichiarazioni estratte da un'intervista; non e' una preview nonostante citi Supercard of Honor, ne' un report completo.
+[PERF v71] analisi editoriale AI v72: 1.38s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - AEW's Athena Talks Current ROH Women's World Title Run, Beating WWE's Roman Reigns
+[SCORE v79.1.3] Recovery post-show 68->84 - AEW's Athena Talks Current ROH Women's World Title Run, Beating WWE's Roman Reigns
+[SCORE] raffinato=84 priority=high | WWE/main roster, top star titolo: roman reigns, WWE main roster + storyline/evento, breaking/major update, PLE/PPV, non wrestling puro, v62 titolo/championship, v66 cap opinion/commentary storyline, v68 cap opinion senza news concreta, v79.1.3 post-show recovery 68->84
+[V71] story_signature=stable:roman_reigns|athena_talks_current|roh_women|title|wwe semantic_status=new_story freshness=0.608
+[FIX] Event key in history ma non confermata su WordPress: event:title:roman-reigns:world:championship - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/aews-athena-talks-current-roh-womens-world-title-run-beating-wwes-roman-reigns/intro-1779211504.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione scartato: editorial_word_ratio=0.69 (228/332) threshold=0.70
+[PERF v71] traduzione: 6.20s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Athena punta a superare il record di giorni da campione di Roman Reigns
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/aews-athena-talks-current-roh-womens-world-title-run-beating-wwes-roman-reigns/l-intro-1779211504.jpg
+[MEDIA] Immagine caricata: 4924
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260519_173836_002_athena-punta-a-superare-il-record-di-giorni-da-campione-di-roman-reigns_4925_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4925
+[PERF v71] creazione post WordPress: 4.33s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/aews-athena-talks-current-roh-womens-world-title-run-beating-wwes-roman-reigns/l-intro-1779211504.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4924
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'AEW's Athena Talks Current ROH Women's World Title Run, Beat': 13.07s
+[OK] Pubblicato: Athena punta a superare il record di giorni da campione di Roman Reigns
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260519_173838_002_athena-punta-a-superare-il-record-di-giorni-da-campione-di-roman-reigns_eb8ff126_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Athena punta a superare il record di giorni da campione di Roman Reigns
+[PUBLISHED REVIEW v87.1] Review outer salvata: Athena punta a superare il record di giorni da campione di Roman Reigns
+[BOT] Elaborazione: Jelly Roll Reportedly Pushed To Be Part Of 'More Comedic' WWE WrestleMania Storyline
+[BOT] semantic_id=jelly-roll-reportedly-pushed-to-be-part-of-more-comedic-wwe-wrestlemania-storyline
+[SCORE] iniziale=79 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta retroscena su una storyline ormai conclusa (WrestleMania 42), trattando dichiarazioni fatte post-evento. Non è una preview né un rumor su piani futuri, ma un resoconto di backstage.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Undisputed WWE Championship' in inglese.; 'Pushed' va reso come 'spinto' o 'inserito'.; Non tradurre 'The Show Of Shows' (titolo di WrestleMania) se non come richiamo al PLE.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta retroscena su una storyline ormai conclusa (WrestleMania 42), trattando dichiarazioni fatte post-evento. Non è una preview né un rumor su piani futuri, ma un resoconto di backstage.
+[PERF v71] analisi editoriale AI v72: 1.87s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Jelly Roll Reportedly Pushed To Be Part Of 'More Comedic' WWE WrestleMania Storyline
+[SCORE v79.1.3] Recovery post-show 54->79 - Jelly Roll Reportedly Pushed To Be Part Of 'More Comedic' WWE WrestleMania Storyline
+[SCORE v86.9] Cap AI commentary/opinion 79->68 - Jelly Roll Reportedly Pushed To Be Part Of 'More Comedic' WWE WrestleMania Storyline
+[SCORE] raffinato=68 priority=medium | WWE/main roster, top star lead: cody rhodes, randy orton, nomi forti lead: cody rhodes, randy orton, impatto roster/storyline, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, opinione generica, v62 titolo/championship, v66 cap opinion/commentary storyline, v79.1.3 post-show recovery 54->79, v86.9 cap AI commentary/opinion 79->68
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Jelly Roll Reportedly Pushed To Be Part Of 'More Comedic' WWE WrestleMania Storyline
+[V71] story_signature=stable:cody_rhodes|randy_orton|jelly_roll_reportedly_pushed_to_be_part_of|title|wwe semantic_status=new_story freshness=0.592
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/jelly-roll-reportedly-pushed-to-be-part-of-more-comedic-wwe-wrestlemania-storyline/intro-1779207080.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 4.25s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WrestleMania: Jelly Roll voleva un ruolo comico nella storyline
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/jelly-roll-reportedly-pushed-to-be-part-of-more-comedic-wwe-wrestlemania-storyline/l-intro-1779207080.jpg
+[MEDIA] Immagine caricata: 4927
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260519_173849_003_wrestlemania-jelly-roll-voleva-un-ruolo-comico-nella-storyline_4928_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4928
+[PERF v71] creazione post WordPress: 4.49s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/jelly-roll-reportedly-pushed-to-be-part-of-more-comedic-wwe-wrestlemania-storyline/l-intro-1779207080.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4927
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Jelly Roll Reportedly Pushed To Be Part Of 'More Comedic' WW': 11.65s
+[OK] Pubblicato: WrestleMania: Jelly Roll voleva un ruolo comico nella storyline
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260519_173851_003_wrestlemania-jelly-roll-voleva-un-ruolo-comico-nella-storyline_6afc1adb_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WrestleMania: Jelly Roll voleva un ruolo comico nella storyline
+[PUBLISHED REVIEW v87.1] Review outer salvata: WrestleMania: Jelly Roll voleva un ruolo comico nella storyline
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 4 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-19 17:36:56_summary.json -> published_html_review/run_2026-05-19 17-36-56_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (450 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
+===== RUN END [2026-05-19 17:36:56] VERSION [v89_editorial_report_quality (f550e58)] =====
+
