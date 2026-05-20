@@ -1,4 +1,4 @@
-name: OpenWrestlingTV Bot v90.0
+name: OpenWrestlingTV Bot v90.1
 
 on:
   workflow_dispatch:
@@ -91,6 +91,11 @@ jobs:
               print('[HOTFIX v90.0.1] Inline image dict normalization applied')
           PY
 
+      - name: Apply v90.1 quality correctness patch
+        run: |
+          set -e
+          python scripts/apply_bot_patch_v90_1.py
+
       - name: Verify consolidated source
         run: |
           set -e
@@ -104,11 +109,12 @@ jobs:
               'v88.4',
               'v89',
               'v89.1: legacy return/debut rumor guard',
+              'v90.1: quality correctness guards',
           ]
           missing = [marker for marker in required if marker not in text]
           if missing:
-              raise SystemExit('[SOURCE CONSOLIDATION v89.2] missing markers: ' + ', '.join(missing))
-          print('[SOURCE CONSOLIDATION v89.2] bot.py contiene gia la chain consolidata fino a v89.1')
+              raise SystemExit('[SOURCE CONSOLIDATION v90.1] missing markers: ' + ', '.join(missing))
+          print('[SOURCE CONSOLIDATION v90.1] bot.py contiene la chain consolidata fino a v90.1')
           PY
 
       - name: Print runner public IP
@@ -117,7 +123,7 @@ jobs:
           curl -s https://api.ipify.org || true
           echo
 
-      - name: Run bot v90_0
+      - name: Run bot v90_1
         id: run_bot
         env:
           WP_USER: ${{ secrets.WP_USER }}
@@ -143,6 +149,13 @@ jobs:
           V86_2_REPORT_MORNING_HOLD_ENABLED: "1"
           V89_2_SOURCE_CONSOLIDATED: "1"
           V90_0_OBSERVABILITY_ENABLED: "1"
+          V90_1_QUALITY_ENABLED: "1"
+          V90_1_REPORT_TITLE_HARDCODE_ENABLED: "1"
+          V90_1_MEDIA_TAIL_GUARD_ENABLED: "1"
+          V90_1_BOILERPLATE_SANITIZER_ENABLED: "1"
+          V90_1_NUMERIC_TITLE_GUARD_ENABLED: "1"
+          V90_1_TOPIC_DEDUPE_ENABLED: "1"
+          V90_1_STALE_SPOILER_FIX_ENABLED: "1"
         run: |
           set +e
           python bot.py
@@ -181,7 +194,7 @@ jobs:
                           target = path.with_name(f"{target.stem}_{i}{target.suffix}")
                           i += 1
                       path.rename(target)
-                      print(f"[ARTIFACT SANITIZE v90.0] {path} -> {target}")
+                      print(f"[ARTIFACT SANITIZE v90.1] {path} -> {target}")
           PY
 
       - name: Persist bot artifacts to repository
@@ -191,7 +204,7 @@ jobs:
           mkdir -p published published_html_review logs
           touch logs/.keep published/.keep published_html_review/.keep
 
-          echo "[ARTIFACT PERSIST v90.0] Stato prima dello staging"
+          echo "[ARTIFACT PERSIST v90.1] Stato prima dello staging"
           git status --short --ignored logs published published_html_review pending_articles.json history.txt history.json confirmed_published_reports.json .bot_exit_code || true
 
           git add -A -- published published_html_review logs || true
@@ -202,15 +215,15 @@ jobs:
             fi
           done
 
-          echo "[ARTIFACT PERSIST v90.0] Stato dopo lo staging"
+          echo "[ARTIFACT PERSIST v90.1] Stato dopo lo staging"
           git status --short || true
 
           if git diff --cached --quiet; then
-            echo "[ARTIFACT PERSIST v90.0] Nessuna modifica staged da committare"
+            echo "[ARTIFACT PERSIST v90.1] Nessuna modifica staged da committare"
           else
-            git commit -m "chore(bot): persist v90.0 artifacts and logs [skip ci]"
+            git commit -m "chore(bot): persist v90.1 artifacts and logs [skip ci]"
             git push
-            echo "[ARTIFACT PERSIST v90.0] Artifact, metrics, published e master log committati nel repository"
+            echo "[ARTIFACT PERSIST v90.1] Artifact, metrics, published e master log committati nel repository"
           fi
 
       - name: Upload bot artifacts
@@ -239,6 +252,6 @@ jobs:
             code=$(cat .bot_exit_code)
           fi
           if [ "$code" != "0" ]; then
-            echo "[BOT v90.0] Bot terminato con exit code $code"
+            echo "[BOT v90.1] Bot terminato con exit code $code"
             exit "$code"
           fi
