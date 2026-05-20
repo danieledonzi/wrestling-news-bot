@@ -1,24 +1,28 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-20T14:05:25",
-  "run_start": "2026-05-20 14:04:34",
-  "run_end": "2026-05-20 14:04:34",
-  "bot_version": "v90_1_quality_correctness (3d7e029)",
-  "candidate_count": 9,
-  "mode": "normal",
-  "max_new": 3,
-  "published_total": 1,
+  "collected_at": "2026-05-20T17:43:45",
+  "run_start": "2026-05-20 17:39:50",
+  "run_end": "2026-05-20 17:39:50",
+  "bot_version": "v90_1_quality_correctness (132eb51)",
+  "candidate_count": 15,
+  "mode": "storm",
+  "max_new": 5,
+  "published_total": 4,
   "published_pending": 0,
-  "published_new": 1,
-  "candidates_tried": 9,
-  "score_lines_count": 21,
-  "skip_count": 36,
+  "published_new": 4,
+  "candidates_tried": 12,
+  "score_lines_count": 26,
+  "skip_count": 30,
   "skip_v89_count": 0,
-  "gemini_calls_observed": 10,
+  "gemini_calls_observed": 25,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 10
+    "gemini-3.1-flash-lite": 23,
+    "gemini-3-flash-preview": 1,
+    "gemini-2.5-flash": 1
   },
-  "gemini_discarded_models": {},
+  "gemini_discarded_models": {
+    "gemini-3-flash-preview": 1
+  },
   "model_tasks": [
     {
       "task": "healthcheck",
@@ -43,78 +47,188 @@
     {
       "task": "editorial_analysis",
       "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
+    },
+    {
+      "task": "editorial_analysis",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_medium",
+      "chain": "gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
+    },
+    {
+      "task": "editorial_analysis",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
+    },
+    {
+      "task": "editorial_analysis",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "editorial_analysis",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite"
     }
   ],
   "model_task_counts": {
     "healthcheck": 1,
-    "editorial_analysis": 2,
-    "translate_normal": 1,
-    "postedit": 1,
-    "title": 1
+    "editorial_analysis": 6,
+    "translate_normal": 4,
+    "postedit": 4,
+    "title": 4,
+    "translate_medium": 1
   },
   "perf": {
     "WP lookup event_key": {
-      "count": 1,
-      "total_seconds": 1.5,
-      "max_seconds": 1.5
+      "count": 5,
+      "total_seconds": 6.65,
+      "max_seconds": 1.6
     },
     "scraping articolo": {
-      "count": 2,
-      "total_seconds": 2.35,
-      "max_seconds": 1.44
+      "count": 5,
+      "total_seconds": 6.06,
+      "max_seconds": 1.73
     },
     "estrazione blocchi": {
-      "count": 2,
-      "total_seconds": 1.13,
-      "max_seconds": 0.58
+      "count": 5,
+      "total_seconds": 3.88,
+      "max_seconds": 0.91
     },
     "analisi editoriale AI v72": {
-      "count": 6,
-      "total_seconds": 13.6,
-      "max_seconds": 4.08
+      "count": 8,
+      "total_seconds": 29.2,
+      "max_seconds": 17.31
+    },
+    "WP lookup URL esistente": {
+      "count": 3,
+      "total_seconds": 2.57,
+      "max_seconds": 0.95
     },
     "WP recent posts dedupe": {
       "count": 1,
-      "total_seconds": 0.9,
-      "max_seconds": 0.9
+      "total_seconds": 0.82,
+      "max_seconds": 0.82
     },
     "categoria da analisi editoriale v72": {
-      "count": 1,
-      "total_seconds": 1.15,
-      "max_seconds": 1.15
+      "count": 2,
+      "total_seconds": 2.46,
+      "max_seconds": 1.32
     },
     "traduzione": {
-      "count": 1,
-      "total_seconds": 6.44,
-      "max_seconds": 6.44
+      "count": 5,
+      "total_seconds": 139.61,
+      "max_seconds": 88.82
     },
     "creazione post WordPress": {
-      "count": 1,
-      "total_seconds": 4.64,
-      "max_seconds": 4.64
+      "count": 4,
+      "total_seconds": 23.3,
+      "max_seconds": 12.3
     },
-    "totale articolo pubblicato 'WWE Made Big Decision About Overseas Plans During Internal M'": {
+    "totale articolo pubblicato 'Former WWE Star Spotted At Performance Center Ahead of Tuesd'": {
       "count": 1,
-      "total_seconds": 16.16,
-      "max_seconds": 16.16
+      "total_seconds": 15.66,
+      "max_seconds": 15.66
+    },
+    "totale articolo pubblicato 'WWE No Longer Advertising SNME Bout As Title Match'": {
+      "count": 1,
+      "total_seconds": 27.51,
+      "max_seconds": 27.51
+    },
+    "totale articolo pubblicato 'Darby Allin Says Having Kids Won't Stop Him From Taking Dang'": {
+      "count": 1,
+      "total_seconds": 96.39,
+      "max_seconds": 96.39
+    },
+    "totale articolo pubblicato 'WWE Quietly Making Big Changes To Tag Team Division After Ma'": {
+      "count": 1,
+      "total_seconds": 13.93,
+      "max_seconds": 13.93
     }
   },
   "article_metrics": [
     {
-      "path": "published/20260520_140504_001_wwe-confermati-i-piani-per-gli-eventi-in-arabia-saudita-nonostante-le-tensioni-internazion_4984_final.html",
+      "path": "published/20260520_174027_001_enzo-amore-avvistato-al-wwe-performance-center-prima-di-nxt_4987_final.html",
       "exists": true,
-      "word_count": 267,
-      "paragraph_count": 7,
+      "word_count": 297,
+      "paragraph_count": 8,
+      "blockquote_count": 0,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 1,
+      "title": "Enzo Amore avvistato al WWE Performance Center prima di NXT"
+    },
+    {
+      "path": "published/20260520_174056_002_wwe-il-match-tra-becky-lynch-e-sol-ruca-a-saturday-nights-main-event-non-sarà-per-il-titol_4990_final.html",
+      "exists": true,
+      "word_count": 247,
+      "paragraph_count": 5,
+      "blockquote_count": 1,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 3,
+      "title": "WWE: il match tra Becky Lynch e Sol Ruca a Saturday Night's Main Event non sarà per il titolo"
+    },
+    {
+      "path": "published/20260520_174234_003_darby-allin-avere-figli-non-mi-farà-smettere-di-correre-rischi_4993_final.html",
+      "exists": true,
+      "word_count": 283,
+      "paragraph_count": 6,
       "blockquote_count": 0,
       "image_count": 0,
       "iframe_count": 0,
       "embed_hint_count": 0,
-      "title": "WWE: confermati i piani per gli eventi in Arabia Saudita nonostante le tensioni internazionali"
+      "title": "Darby Allin: \"Avere figli non mi farà smettere di correre rischi\""
+    },
+    {
+      "path": "published/20260520_174308_004_wwe-la-federazione-lavora-al-rilancio-della-categoria-tag-team-dopo-i-recenti-addii_4996_final.html",
+      "exists": true,
+      "word_count": 271,
+      "paragraph_count": 7,
+      "blockquote_count": 0,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 1,
+      "title": "WWE: la federazione lavora al rilancio della categoria tag team dopo i recenti addii"
     }
   ],
   "daily_counts": {
-    "published_today": 8,
-    "published_last_4h": 2,
-    "runs_today": 6
+    "published_today": 12,
+    "published_last_4h": 5,
+    "runs_today": 7
   }
 }

@@ -2898,3 +2898,386 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
 ===== RUN END [2026-05-20 14:04:34] VERSION [v90_1_quality_correctness (3d7e029)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+
+===== RUN START [2026-05-20 17:39:50] VERSION [v90_1_quality_correctness (132eb51)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 13 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - TKO's Mark Shapiro: WWE WrestleMania Returning To Las Vegas May Have Been A 'Mistake'
+[SCORE v86.9] Cap executive interview/opinion 100->72 - TKO's Mark Shapiro: WWE WrestleMania Returning To Las Vegas May Have Been A 'Mistake'
+[PERF v71] WP lookup event_key: 1.45s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Bully Ray, Tommy Dreamer Discuss What Brock Lesnar's WWE Raw Return Means For Oba Femi
+[SKIP] Score sotto soglia editoriale (56/75): Bully Ray, Tommy Dreamer Discuss What Brock Lesnar's WWE Raw Return Means For Oba Femi
+[PERF v71] WP lookup event_key: 1.30s
+[FIX] Event key in history ma non confermata su WordPress: event:title:darby-allin:world:championship - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (16/75): WWE HOFer JBL Believes A Pro Wrestling Union Is A 'Possibility'
+[SKIP] Score sotto soglia editoriale (34/75): AEW Collision Ratings & Viewership Report: 5/16/26
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Tommy Dreamer Believes This Longstanding WWE Storyline Has 'Run Its Course'
+[SKIP] Score sotto soglia editoriale (54/75): Tommy Dreamer Believes This Longstanding WWE Storyline Has 'Run Its Course'
+[SKIP] Score sotto soglia editoriale (54/75): WWE SmackDown Ratings & Viewership Report: 5/15/2026
+[SKIP] Score sotto soglia editoriale (24/75): Nattie Says Current WWE Character Was Inspired By Her Book
+[SKIP] Score sotto soglia editoriale (0/75): WWE NXT - 5/19/2026: 3 Things We Hated And 3 We Loved
+[SKIP] Preview/show announcement scaduta: Vanity Project Outlast Darkstate To Retain WWE NXT Tag Team Titles
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/
+[SKIP] Score sotto soglia editoriale (18/75): AEW Heading To Another Unconventional Venue In July For Special Event
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP] Score sotto soglia editoriale (49/75): Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP] Score sotto soglia editoriale (54/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[SKIP] Score sotto soglia editoriale (31/75): WWE Star Danhausen Receives NY Knicks Jersey After Cursing Playoff Opponent
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (33/75): MJF Blasts Wrestlers for Breaking Character Online: "It Makes Me Want to Vomit"
+[SKIP] Score sotto soglia editoriale (25/75): WWE Quietly Locked Down Nikki Blackheart After Bayley Push Behind The Scenes
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE Legends Think Brock Lesnar Losing Again Would Be 'Boring' In Oba Femi Feud
+[PERF v71] WP lookup event_key: 1.60s
+[FIX] Event key in history ma non confermata su WordPress: event:brock-lesnar-diagnosis - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (15/75): Tama Tonga's Twitter Account Hacked by Crypto Scammer
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 61->54 - DarkState Member's WWE Status Gets Interesting Update After NXT Betrayal Angle
+[SKIP] Score sotto soglia editoriale (49/75): Scarlett Bordeaux Shuts Down Claim She Has Issues With WWE's Cleavage Policy
+[PERF v71] WP lookup event_key: 1.32s
+[FIX] Event key in history ma non confermata su WordPress: event:business:vince-mcmahon - provo a pubblicare
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - MJF Backs Off Carlos Silva Attack After Calling Him A 'Dumb Motherf***er'
+[SKIP] Score sotto soglia editoriale (15/75): Vince Russo Blames WWE's Packed Schedule for Making Premium Live Events Feel Meaningless
+[SCORE] 100 high - WWE Legends Think Brock Lesnar Losing Again Would Be 'Boring' In Oba Femi Feud | WWE/main roster, top star titolo: brock lesnar, nomi forti titolo: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v71 freshness=0.677
+[SCORE] 100 high - Former WWE Star Spotted At Performance Center Ahead of Tuesday's NXT | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, titolo/championship, show settimanale, developmental secondario, v62 media rights/streaming, v62 categoria business, v71 freshness=0.538
+[SCORE] 95 high - WWE No Longer Advertising SNME Bout As Title Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v62 titolo/championship, v71 freshness=0.597
+[SCORE] 80 high - Darby Allin Says Having Kids Won't Stop Him From Taking Dangerous Risks | AEW, impatto roster/storyline, business/media rights, v62 media rights/streaming, v62 categoria business, v71 source reliability soft penalty, v71 freshness=0.561
+[SCORE] 77 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 freshness=0.369
+[SCORE] 76 medium - WWE Quietly Making Big Changes To Tag Team Division After Major Exits | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.551
+[SCORE] 72 medium - TKO's Mark Shapiro: WWE WrestleMania Returning To Las Vegas May Have Been A 'Mistake' | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 business/dirigenza, v62 categoria business, v86.8 cap executive interview/opinion 100->72, v71 freshness=0.726, v48 tier5: v71 major story bypass
+[SCORE] 68 medium - Tony Khan Reveals Only Darby Allin Spot That Truly Worried Him | AEW, business/media rights, v62 business/dirigenza, v62 categoria business, v71 source reliability soft penalty, v71 freshness=0.556, v48 tier2: 55-74
+[SCORE] 66 medium - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 freshness=0.38, v48 tier2: 55-74
+[SCORE] 63 medium - MJF Says Bret Hart Is 'Punch Drunk' While Declaring Shawn Michaels Better | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v71 source reliability soft penalty, v71 freshness=0.558, v48 tier2: 55-74
+[MODE] Storm mode attiva: 3 news >=90, 4 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 15 | mode=storm | max nuove=5 | pending pubblicati=0
+[BOT] Elaborazione: WWE Legends Think Brock Lesnar Losing Again Would Be 'Boring' In Oba Femi Feud
+[BOT] semantic_id=wwe-legends-think-brock-lesnar-losing-again-would-be-boring-in-oba-femi-feud
+[SCORE] iniziale=100 priority=high
+[PERF v71] scraping articolo: 1.16s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=15, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.78s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta le opinioni e speculazioni di Tommy Dreamer e Bully Ray rilasciate nel podcast Busted Open riguardo al futuro della storyline tra Lesnar e Femi.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (es. Clash in Italy) invariati.; Tradurre 'Busted Open' come fonte radiofonica/podcast.; Evitare calchi come 'water down' (usare 'svalutare' o 'indebolire') e 'derail' (usare 'frenare' o 'danneggiare').
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta le opinioni e speculazioni di Tommy Dreamer e Bully Ray rilasciate nel podcast Busted Open riguardo al futuro della storyline tra Lesnar e Femi.
+[PERF v71] analisi editoriale AI v72: 3.17s
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star titolo: brock lesnar, nomi forti titolo: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v66 cap title match non-title-change, v72.3 cap opinion
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - WWE Legends Think Brock Lesnar Losing Again Would Be 'Boring' In Oba Femi Feud
+[PERF v71] WP lookup URL esistente: 0.95s
+[BOT] Elaborazione: Former WWE Star Spotted At Performance Center Ahead of Tuesday's NXT
+[BOT] semantic_id=former-wwe-star-spotted-at-performance-center-ahead-of-tuesdays-nxt
+[SCORE] iniziale=100 priority=high
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/former-wwe-star-spotted-performance-center-ahead-tuesdays-nxt/
+[PERF v71] scraping articolo: 1.73s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=10, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/former-wwe-star-spotted-performance-center-ahead-tuesdays-nxt/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.91s
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=NXT (6) conf=0.90 model=gemini-3.1-flash-lite | L'articolo discute un avvistamento backstage e specula su un possibile ritorno, rientrando nella categoria rumoristica basata su eventi recenti non confermati ufficialmente.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Performance Center' o 'Cruiserweight Champion'.; 'Release' va tradotto come licenziamento o addio.; 'Spotted' va reso come 'avvistato'.
+[EDITORIAL v73] final type=RUMOR | category=NXT (6) | L'articolo discute un avvistamento backstage e specula su un possibile ritorno, rientrando nella categoria rumoristica basata su eventi recenti non confermati ufficialmente.
+[PERF v71] analisi editoriale AI v72: 1.05s
+[SCORE] raffinato=68 priority=medium | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, evento legale/controversia, PLE/PPV, developmental secondario, v62 evento legale grave, v62 categoria business, v72.3 cap rumor
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Former WWE Star Spotted At Performance Center Ahead of Tuesday's NXT
+[V71] story_signature=stable:wwe_star_spotted_at_performance_center_ahead|status|wwe semantic_status=new_story freshness=0.888
+[PERF v71] WP recent posts dedupe: 0.82s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.14s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=10
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 6.23s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Enzo Amore avvistato al WWE Performance Center prima di NXT
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/FalseFinishHQ/status/2057081786484535637
+[EMBED v87.3] Positional embed guard applicato: 1 modifiche
+[EMBED v88] Publish media guard: expected=1 before=0 after=1 missing=0
+[MEDIA v88] Recupero immagini inline mancanti: 1
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/02/wwe-legend-confirms-full-time-coaching-role-at-performance-center-42.jpg
+[MEDIA] Immagine caricata: 4986
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260520_174027_001_enzo-amore-avvistato-al-wwe-performance-center-prima-di-nxt_4987_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4987
+[PERF v71] creazione post WordPress: 4.11s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/02/wwe-legend-confirms-full-time-coaching-role-at-performance-center-42.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4986
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Former WWE Star Spotted At Performance Center Ahead of Tuesd': 15.66s
+[OK] Pubblicato: Enzo Amore avvistato al WWE Performance Center prima di NXT
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260520_174029_001_enzo-amore-avvistato-al-wwe-performance-center-prima-di-nxt_452894a4_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Enzo Amore avvistato al WWE Performance Center prima di NXT
+[PUBLISHED REVIEW v87.1] Review outer salvata: Enzo Amore avvistato al WWE Performance Center prima di NXT
+[BOT] Elaborazione: WWE No Longer Advertising SNME Bout As Title Match
+[BOT] semantic_id=wwe-no-longer-advertising-snme-bout-as-title-match
+[SCORE] iniziale=95 priority=high
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.wrestlinginc.com/2177831/wwe-snme-saturday-nights-main-event-becky-lynch-sol-ruca-advertising-title-match/
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=6, image=1, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.wrestlinginc.com/2177831/wwe-snme-saturday-nights-main-event-becky-lynch-sol-ruca-advertising-title-match/
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta un aggiornamento su una variazione di card già annunciata. Non è una preview poiché focalizzato sul cambio di status del match (da titolato a non titolato) avvenuto a ridosso dell'evento.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Saturday Night's Main Event' e 'Intercontinental Women's Championship' in inglese.; Evitare calchi come 'tide turned' o 'reverse course' usando 'l'inerzia è cambiata' o 'ha fatto dietrofront'.; Tradurre 'non-title match' come 'match non titolato'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta un aggiornamento su una variazione di card già annunciata. Non è una preview poiché focalizzato sul cambio di status del match (da titolato a non titolato) avvenuto a ridosso dell'evento.
+[PERF v71] analisi editoriale AI v72: 1.34s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE No Longer Advertising SNME Bout As Title Match
+[SCORE v79.1.3] Recovery post-show 62->95 - WWE No Longer Advertising SNME Bout As Title Match
+[SCORE] raffinato=95 priority=high | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, show settimanale, v62 titolo/championship, v77 cap low editorial value, v79.1.3 post-show recovery 62->95
+[V71] story_signature=stable:becky_lynch|sol_ruca|wwe_no_longer_advertising|title|wwe semantic_status=new_story freshness=0.596
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=6
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwe-no-longer-advertising-snme-bout-as-title-match/intro-1779294804.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 12.37s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WWE: il match tra Becky Lynch e Sol Ruca a Saturday Night's Main Event non sarà per il titolo
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[MEDIA v86.7] Reintegrati 1 embed persi prima del publish
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/wwe-no-longer-advertising-snme-bout-as-title-match/l-intro-1779294804.jpg
+[MEDIA] Immagine caricata: 4989
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260520_174056_002_wwe-il-match-tra-becky-lynch-e-sol-ruca-a-saturday-nights-main-event-non-sarà-per-il-titol_4990_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4990
+[PERF v71] creazione post WordPress: 12.30s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-no-longer-advertising-snme-bout-as-title-match/l-intro-1779294804.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4989
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'WWE No Longer Advertising SNME Bout As Title Match': 27.51s
+[OK] Pubblicato: WWE: il match tra Becky Lynch e Sol Ruca a Saturday Night's Main Event non sarà per il titolo
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260520_174058_002_wwe-il-match-tra-becky-lynch-e-sol-ruca-a-saturday-night-s-main-event-non-sar-pe_75b388c5_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WWE: il match tra Becky Lynch e Sol Ruca a Saturday Night's Main Event non sarà per il titolo
+[PUBLISHED REVIEW v87.1] Review outer salvata: WWE: il match tra Becky Lynch e Sol Ruca a Saturday Night's Main Event non sarà per il titolo
+[BOT] Elaborazione: Darby Allin Says Having Kids Won't Stop Him From Taking Dangerous Risks
+[BOT] semantic_id=darby-allin-says-having-kids-wont-stop-him-from-taking-dangerous-risks
+[SCORE] iniziale=80 priority=high
+[PERF v71] scraping articolo: 1.10s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=13, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.72s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni recenti di Darby Allin rilasciate a ESPN, rientrando perfettamente nel formato di news autonoma post-intervista.
+[EDITORIAL v72.3] translation_notes=Mantenere 'AEW' e 'Darby Allin' invariati.; Tradurre 'dangerous risks' come 'rischi pericolosi' o 'azzardi'.; Evitare calchi per 'dangerous bumps': usare 'impatto pericoloso' o 'bump estremi'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | L'articolo riporta dichiarazioni recenti di Darby Allin rilasciate a ESPN, rientrando perfettamente nel formato di news autonoma post-intervista.
+[PERF v71] analisi editoriale AI v72: 1.54s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Darby Allin Says Having Kids Won't Stop Him From Taking Dangerous Risks
+[SCORE v79.1.3] Recovery post-show 54->80 - Darby Allin Says Having Kids Won't Stop Him From Taking Dangerous Risks
+[SCORE v86.9] Cap AI commentary/opinion 80->68 - Darby Allin Says Having Kids Won't Stop Him From Taking Dangerous Risks
+[SCORE] raffinato=68 priority=medium | AEW, impatto roster/storyline, business/media rights, PLE/PPV, opinione generica, v62 media rights/streaming, v62 categoria business, v66 cap opinion/commentary storyline, v68 cap duro opinion/commentary, v79.1.3 post-show recovery 54->80, v86.9 cap AI commentary/opinion 80->68
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Darby Allin Says Having Kids Won't Stop Him From Taking Dangerous Risks
+[V71] story_signature=stable:darby_allin|darby_allin_says_having_kids_won|stop_him_from_taking_dangerous_risks|story|aew semantic_status=new_story freshness=0.561
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[GEMINI] Modello gemini-3-flash-preview scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[MODEL v88] Cooldown globale modello per la run: gemini-3-flash-preview
+[GEMINI] Uso modello: gemini-2.5-flash
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash | blocchi testo=13
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione applicato con gemini-3.1-flash-lite: editorial_word_ratio=0.65 (238/366) threshold=0.70
+[PRESERVE v81] Guardrail finale testo applicato
+[PERF v71] traduzione: 88.82s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[MEDIA v88] Recupero immagini inline mancanti: 1
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2024/12/darby-allin-confirms-date-for-his-mount-everest-conquest-in-2025-21.jpg
+[MEDIA] Immagine caricata: 4992
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260520_174234_003_darby-allin-avere-figli-non-mi-farà-smettere-di-correre-rischi_4993_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4993
+[PERF v71] creazione post WordPress: 3.35s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2024/12/darby-allin-confirms-date-for-his-mount-everest-conquest-in-2025-21.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4992
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Darby Allin Says Having Kids Won't Stop Him From Taking Dang': 96.39s
+[OK] Pubblicato: Darby Allin: "Avere figli non mi farà smettere di correre rischi"
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260520_174235_003_darby-allin-avere-figli-non-mi-far-smettere-di-correre-rischi_8914445c_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Darby Allin: "Avere figli non mi farà smettere di correre rischi"
+[PUBLISHED REVIEW v87.1] Review outer salvata: Darby Allin: "Avere figli non mi farà smettere di correre rischi"
+[BOT] Elaborazione: WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[BOT] semantic_id=wwe-announces-major-change-to-becky-lynchsol-ruca-snme-match
+[SCORE] iniziale=77 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo aggiorna i dettagli di un match già in programma per un evento futuro (SNME), confermando l'aggiunta della stipulazione titolata. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantenere 'Women's Intercontinental Championship' e 'Saturday Night's Main Event' in inglese.; Non tradurre i termini 'call-up' e 'main roster' letteralmente, usare 'promozione nel roster principale' o contestualizzare.; Assicurarsi che la traduzione del titolo rifletta la natura di annuncio/aggiornamento sulla card dell'evento.
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo aggiorna i dettagli di un match già in programma per un evento futuro (SNME), confermando l'aggiunta della stipulazione titolata. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 17.31s
+[SCORE v88.2] v88.2 cap feature storico numerico 56->45 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[SCORE] raffinato=45 priority=low | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v70 cap preview hard, v88.2 cap feature storico numerico 56->45
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[PERF v71] WP lookup URL esistente: 0.67s
+[BOT] Elaborazione: WWE Quietly Making Big Changes To Tag Team Division After Major Exits
+[BOT] semantic_id=wwe-quietly-making-big-changes-to-tag-team-division-after-major-exits
+[SCORE] iniziale=76 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/wwe-quietly-making-big-changes-tag-team-division-major-exits/
+[PERF v71] scraping articolo: 1.02s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/wwe-quietly-making-big-changes-tag-team-division-major-exits/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.79s
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta indiscrezioni e piani interni riguardo alla ricostruzione della divisione tag team in seguito ai recenti addii.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (World Tag Team Championships) in inglese.; Non tradurre 'released' come 'rilasciato', usare 'licenziato' o 'addio'.; Evitare calchi per i termini tecnici del wrestling.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta indiscrezioni e piani interni riguardo alla ricostruzione della divisione tag team in seguito ai recenti addii.
+[PERF v71] analisi editoriale AI v72: 0.89s
+[SCORE v88.2] v88.2 cap feature storico numerico 100->45 - WWE Quietly Making Big Changes To Tag Team Division After Major Exits
+[SCORE] raffinato=45 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship, v88.2 cap feature storico numerico 100->45
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - WWE Quietly Making Big Changes To Tag Team Division After Major Exits
+[V71] story_signature=stable:wwe_quietly_making_big_changes_to_tag_team_division_after_ma|status|wwe semantic_status=new_story freshness=0.55
+[PERF v71] WP lookup event_key: 0.98s
+[FIX] Event key in history ma non confermata su WordPress: event:logan-paul-diagnosis - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.32s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=9
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 5.82s
+[FIX] Titolo non valido (ok) -> fallback automatico: WWE quietly making big changes to tag team division after major addii
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WWE: la federazione lavora al rilancio della categoria tag team dopo i recenti addii
+[EMBED v87.3] Canonicalizzati/deduplicati embed nel body: 1
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/FalseFinishHQ/status/2057090256336248985
+[EMBED v87.3] Positional embed guard applicato: 2 modifiche
+[EMBED v88] Publish media guard: expected=1 before=0 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-quietly-making-big-changes-to-tag-team-division-after-major-exits-43.jpg
+[MEDIA] Immagine caricata: 4995
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260520_174308_004_wwe-la-federazione-lavora-al-rilancio-della-categoria-tag-team-dopo-i-recenti-addii_4996_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4996
+[PERF v71] creazione post WordPress: 3.54s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-quietly-making-big-changes-to-tag-team-division-after-major-exits-43.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4995
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'WWE Quietly Making Big Changes To Tag Team Division After Ma': 13.93s
+[OK] Pubblicato: WWE: la federazione lavora al rilancio della categoria tag team dopo i recenti addii
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260520_174309_004_wwe-la-federazione-lavora-al-rilancio-della-categoria-tag-team-dopo-i-recenti-ad_2b094284_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 4/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WWE: la federazione lavora al rilancio della categoria tag team dopo i recenti addii
+[PUBLISHED REVIEW v87.1] Review outer salvata: WWE: la federazione lavora al rilancio della categoria tag team dopo i recenti addii
+[BOT] Elaborazione: TKO's Mark Shapiro: WWE WrestleMania Returning To Las Vegas May Have Been A 'Mistake'
+[BOT] semantic_id=tkos-mark-shapiro-wwe-wrestlemania-returning-to-las-vegas-may-have-been-a-mistake
+[SCORE] iniziale=72 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=BUSINESS (15) conf=0.90 model=gemini-3.1-flash-lite | L'articolo analizza le scelte strategiche di TKO riguardo alla sede di WrestleMania, basandosi su dichiarazioni postume di un dirigente.
+[EDITORIAL v72.3] translation_notes=Mantenere 'WrestleMania' e 'TKO' come nomi propri.; Tradurre 'mixed bag' come 'chiaroscuro' o 'bilancio contrastante'.; 'First mover experience' va reso come 'vantaggio della prima volta/effetto novità'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=BUSINESS (15) | L'articolo analizza le scelte strategiche di TKO riguardo alla sede di WrestleMania, basandosi su dichiarazioni postume di un dirigente.
+[PERF v71] analisi editoriale AI v72: 2.64s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - TKO's Mark Shapiro: WWE WrestleMania Returning To Las Vegas May Have Been A 'Mistake'
+[SCORE] raffinato=68 priority=medium | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 business/dirigenza, v62 categoria business, v66 cap opinion/commentary storyline, v68 cap opinion senza news concreta
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - TKO's Mark Shapiro: WWE WrestleMania Returning To Las Vegas May Have Been A 'Mistake'
+[V71] story_signature=stable:nick_khan|mark_shapiro|returning_to_las_vegas_may_have_been|contract|wwe semantic_status=new_story freshness=0.725
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/tkos-mark-shapiro-wwe-wrestlemania-returning-to-las-vegas-may-have-been-a-mistake/intro-1779298494.jpg
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=42 generato=['41']"]
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TRANSLATE] Errore: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=42 generato=['41']"]
+[PERF v71] traduzione: 26.37s
+[SKIP] Traduzione fallita: TKO's Mark Shapiro: WWE WrestleMania Returning To Las Vegas May Have Been A 'Mistake' (err_type=validation)
+[PERF v71] WP lookup URL esistente: 0.95s
+[BOT] Elaborazione: Tony Khan Reveals Only Darby Allin Spot That Truly Worried Him
+[BOT] semantic_id=tony-khan-reveals-only-darby-allin-spot-that-truly-worried-him
+[SCORE] iniziale=68 priority=medium
+[PERF v71] scraping articolo: 1.05s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.68s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta un commento retrospettivo di Tony Khan su un evento passato (il match di ritiro di Sting), non presentando un evento futuro.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'spot' come 'posto', usare 'manovra', 'sequenza' o mantenere 'spot' se inteso come manovra ad alto impatto.; 'TNT Champion' resta in inglese.; Mantenere le quote di Tony Khan virgolettate e fedeli al testo originale.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | L'articolo riporta un commento retrospettivo di Tony Khan su un evento passato (il match di ritiro di Sting), non presentando un evento futuro.
+[PERF v71] analisi editoriale AI v72: 1.26s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Tony Khan Reveals Only Darby Allin Spot That Truly Worried Him
+[SCORE] raffinato=54 priority=low | AEW, titolo/championship, opinione generica, v62 business/dirigenza, v62 categoria business, v68 cap duro opinion/commentary
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Tony Khan Reveals Only Darby Allin Spot That Truly Worried Him
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Tony Khan Reveals Only Darby Allin Spot That Truly Worried Him
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.1] Storm anti-filler opinion pre-Gemini: score 63<65 - MJF Says Bret Hart Is 'Punch Drunk' While Declaring Shawn Michaels Better
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:56: MJF Backs Off Carlos Silva Attack After Calling Him A 'Dumb Motherf***er'
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:52: Natalya Reveals Rejected WrestleMania Match Ideas She Pitched To Vince McMahon
+[PENDING] Coda salvata: 0 elementi
+[BOT] Raggiunto limite massimo candidati nuovi provati
+[BOT] Pubblicati 4 articoli (0 pending + 4 nuove) su 12 candidati provati | mode=storm
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-20 17:39:50_summary.json -> published_html_review/run_2026-05-20 17-39-50_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (511 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=4 errors=0 status=ok
+===== RUN END [2026-05-20 17:39:50] VERSION [v90_1_quality_correctness (132eb51)] =====
+

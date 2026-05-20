@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-20 14:04:34",
-  "last_bot_version": "v90_1_quality_correctness (3d7e029)",
-  "updated_at": "2026-05-20T14:05:24",
-  "total_items": 128,
+  "last_run_id": "2026-05-20 17:39:50",
+  "last_bot_version": "v90_1_quality_correctness (132eb51)",
+  "updated_at": "2026-05-20T17:43:44",
+  "total_items": 132,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1028,6 +1028,38 @@
       "original_html_file": "20260520_140506_001_wwe-confermati-i-piani-per-gli-eventi-in-arabia-saudita-nonostante-le-tensioni-i_3db0491a_original.html",
       "final_html_file": "20260520_140506_001_wwe-confermati-i-piani-per-gli-eventi-in-arabia-saudita-nonostante-le-tensioni-i_3db0491a_final.html",
       "metadata_file": "20260520_140506_001_wwe-confermati-i-piani-per-gli-eventi-in-arabia-saudita-nonostante-le-tensioni-i_3db0491a_metadata.json"
+    },
+    {
+      "run_id": "2026-05-20 17:39:50",
+      "title": "Enzo Amore avvistato al WWE Performance Center prima di NXT",
+      "url": "https://www.ringsidenews.com/former-wwe-star-spotted-performance-center-ahead-tuesdays-nxt/",
+      "original_html_file": "20260520_174029_001_enzo-amore-avvistato-al-wwe-performance-center-prima-di-nxt_452894a4_original.html",
+      "final_html_file": "20260520_174029_001_enzo-amore-avvistato-al-wwe-performance-center-prima-di-nxt_452894a4_final.html",
+      "metadata_file": "20260520_174029_001_enzo-amore-avvistato-al-wwe-performance-center-prima-di-nxt_452894a4_metadata.json"
+    },
+    {
+      "run_id": "2026-05-20 17:39:50",
+      "title": "WWE: il match tra Becky Lynch e Sol Ruca a Saturday Night's Main Event non sarà per il titolo",
+      "url": "https://www.wrestlinginc.com/2177831/wwe-snme-saturday-nights-main-event-becky-lynch-sol-ruca-advertising-title-match/",
+      "original_html_file": "20260520_174058_002_wwe-il-match-tra-becky-lynch-e-sol-ruca-a-saturday-night-s-main-event-non-sar-pe_75b388c5_original.html",
+      "final_html_file": "20260520_174058_002_wwe-il-match-tra-becky-lynch-e-sol-ruca-a-saturday-night-s-main-event-non-sar-pe_75b388c5_final.html",
+      "metadata_file": "20260520_174058_002_wwe-il-match-tra-becky-lynch-e-sol-ruca-a-saturday-night-s-main-event-non-sar-pe_75b388c5_metadata.json"
+    },
+    {
+      "run_id": "2026-05-20 17:39:50",
+      "title": "Darby Allin: \"Avere figli non mi farà smettere di correre rischi\"",
+      "url": "https://www.ringsidenews.com/darby-allin-says-having-kids-wont-stop-him-taking-dangerous-risks/",
+      "original_html_file": "20260520_174235_003_darby-allin-avere-figli-non-mi-far-smettere-di-correre-rischi_8914445c_original.html",
+      "final_html_file": "20260520_174235_003_darby-allin-avere-figli-non-mi-far-smettere-di-correre-rischi_8914445c_final.html",
+      "metadata_file": "20260520_174235_003_darby-allin-avere-figli-non-mi-far-smettere-di-correre-rischi_8914445c_metadata.json"
+    },
+    {
+      "run_id": "2026-05-20 17:39:50",
+      "title": "WWE: la federazione lavora al rilancio della categoria tag team dopo i recenti addii",
+      "url": "https://www.ringsidenews.com/wwe-quietly-making-big-changes-tag-team-division-major-exits/",
+      "original_html_file": "20260520_174309_004_wwe-la-federazione-lavora-al-rilancio-della-categoria-tag-team-dopo-i-recenti-ad_2b094284_original.html",
+      "final_html_file": "20260520_174309_004_wwe-la-federazione-lavora-al-rilancio-della-categoria-tag-team-dopo-i-recenti-ad_2b094284_final.html",
+      "metadata_file": "20260520_174309_004_wwe-la-federazione-lavora-al-rilancio-della-categoria-tag-team-dopo-i-recenti-ad_2b094284_metadata.json"
     }
   ]
 }
