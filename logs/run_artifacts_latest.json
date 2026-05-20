@@ -1,36 +1,20 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-19 22:43:46",
-  "bot_version": "v89_editorial_report_quality (198105d)",
-  "git_sha": "198105d329a2e07482236851484ebec41373dc14",
-  "created_at": "2026-05-19T22:46:36",
-  "published_count": 3,
+  "run_id": "2026-05-20 00:00:36",
+  "bot_version": "v89_editorial_report_quality (69b2396)",
+  "git_sha": "69b23965a776b4fdda121bd26898dc4b3ca6dde6",
+  "created_at": "2026-05-20T00:04:00",
+  "published_count": 1,
   "published_post_ids": [
-    "4938",
-    "4941",
-    "4944"
+    "4947"
   ],
   "published_artifacts": [
     {
-      "post_id": 4938,
-      "title": "WWE: il lancio del John Cena Classic previsto per fine anno",
-      "source_url": "https://www.ringsidenews.com/whats-said-about-when-john-cena-classic-will-actually-start/",
-      "html_file": "published/20260519_224449_001_wwe-il-lancio-del-john-cena-classic-previsto-per-fine-anno_4938_final.html",
-      "metadata_file": "published/20260519_224449_001_wwe-il-lancio-del-john-cena-classic-previsto-per-fine-anno_4938_metadata.json"
-    },
-    {
-      "post_id": 4941,
-      "title": "WWE: Nick Khan e Triple H spiegano l'aumento degli House Show",
-      "source_url": "https://www.ringsidenews.com/nick-khan-triple-h-reveal-why-wwe-expanding-its-house-show-schedule/",
-      "html_file": "published/20260519_224602_002_wwe-nick-khan-e-triple-h-spiegano-laumento-degli-house-show_4941_final.html",
-      "metadata_file": "published/20260519_224602_002_wwe-nick-khan-e-triple-h-spiegano-laumento-degli-house-show_4941_metadata.json"
-    },
-    {
-      "post_id": 4944,
-      "title": "Netflix: grandi ascolti per Ronda Rousey vs. Gina Carano nonostante i 17 secondi di match",
-      "source_url": "https://www.ringsidenews.com/ronda-rousey-vs-gina-carano-pulls-huge-netflix-numbers-despite-17-second-fight/",
-      "html_file": "published/20260519_224634_003_netflix-grandi-ascolti-per-ronda-rousey-vs-gina-carano-nonostante-i-17-secondi-di-match_4944_final.html",
-      "metadata_file": "published/20260519_224634_003_netflix-grandi-ascolti-per-ronda-rousey-vs-gina-carano-nonostante-i-17-secondi-di-match_4944_metadata.json"
+      "post_id": 4947,
+      "title": "Danhausen: da un debutto difficile al grande successo commerciale in WWE",
+      "source_url": "https://www.ringsidenews.com/danhausen-becomes-one-wwes-biggest-success-stories-rocky-debut/",
+      "html_file": "published/20260520_000252_001_danhausen-da-un-debutto-difficile-al-grande-successo-commerciale-in-wwe_4947_final.html",
+      "metadata_file": "published/20260520_000252_001_danhausen-da-un-debutto-difficile-al-grande-successo-commerciale-in-wwe_4947_metadata.json"
     }
   ],
   "errors": [],

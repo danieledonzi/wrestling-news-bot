@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-19 22:43:46",
-  "last_bot_version": "v89_editorial_report_quality (198105d)",
-  "updated_at": "2026-05-19T22:46:35",
-  "total_items": 120,
+  "last_run_id": "2026-05-20 00:00:36",
+  "last_bot_version": "v89_editorial_report_quality (69b2396)",
+  "updated_at": "2026-05-20T00:03:59",
+  "total_items": 121,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -964,6 +964,14 @@
       "original_html_file": "20260519_224635_003_netflix-grandi-ascolti-per-ronda-rousey-vs-gina-carano-nonostante-i-17-secondi-d_1b19d698_original.html",
       "final_html_file": "20260519_224635_003_netflix-grandi-ascolti-per-ronda-rousey-vs-gina-carano-nonostante-i-17-secondi-d_1b19d698_final.html",
       "metadata_file": "20260519_224635_003_netflix-grandi-ascolti-per-ronda-rousey-vs-gina-carano-nonostante-i-17-secondi-d_1b19d698_metadata.json"
+    },
+    {
+      "run_id": "2026-05-20 00:00:36",
+      "title": "Danhausen: da un debutto difficile al grande successo commerciale in WWE",
+      "url": "https://www.ringsidenews.com/danhausen-becomes-one-wwes-biggest-success-stories-rocky-debut/",
+      "original_html_file": "20260520_000253_001_danhausen-da-un-debutto-difficile-al-grande-successo-commerciale-in-wwe_3493743c_original.html",
+      "final_html_file": "20260520_000253_001_danhausen-da-un-debutto-difficile-al-grande-successo-commerciale-in-wwe_3493743c_final.html",
+      "metadata_file": "20260520_000253_001_danhausen-da-un-debutto-difficile-al-grande-successo-commerciale-in-wwe_3493743c_metadata.json"
     }
   ]
 }
