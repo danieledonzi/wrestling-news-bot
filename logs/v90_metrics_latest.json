@@ -1,28 +1,41 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-20T00:04:00",
-  "run_start": "2026-05-20 00:00:36",
-  "run_end": "2026-05-20 00:00:36",
-  "bot_version": "v89_editorial_report_quality (69b2396)",
-  "candidate_count": 11,
-  "mode": "storm",
-  "max_new": 5,
-  "published_total": 1,
+  "collected_at": "2026-05-20T04:47:55",
+  "run_start": "2026-05-20 04:44:59",
+  "run_end": "2026-05-20 04:44:59",
+  "bot_version": "v89_editorial_report_quality (1adea8d)",
+  "candidate_count": 13,
+  "mode": "normal",
+  "max_new": 3,
+  "published_total": 3,
   "published_pending": 0,
-  "published_new": 1,
-  "candidates_tried": 11,
-  "score_lines_count": 22,
-  "skip_count": 34,
+  "published_new": 3,
+  "candidates_tried": 4,
+  "score_lines_count": 18,
+  "skip_count": 25,
   "skip_v89_count": 0,
-  "gemini_calls_observed": 10,
+  "gemini_calls_observed": 14,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 10
+    "gemini-3.1-flash-lite": 11,
+    "gemini-2.5-pro": 1,
+    "gemini-3-flash-preview": 1,
+    "gemini-2.5-flash": 1
   },
-  "gemini_discarded_models": {},
+  "gemini_discarded_models": {
+    "gemini-2.5-pro": 1
+  },
   "model_tasks": [
     {
       "task": "healthcheck",
       "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_report",
+      "chain": "gemini-2.5-pro,gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "emergency_title",
+      "chain": "gemini-2.5-flash,gemini-3-flash-preview,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
     },
     {
       "task": "editorial_analysis",
@@ -38,93 +51,134 @@
     },
     {
       "task": "title",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
     },
     {
       "task": "editorial_analysis",
       "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
     }
   ],
   "model_task_counts": {
     "healthcheck": 1,
+    "translate_report": 1,
+    "emergency_title": 1,
     "editorial_analysis": 2,
-    "translate_normal": 1,
-    "postedit": 1,
-    "title": 1
+    "translate_normal": 2,
+    "postedit": 2,
+    "title": 2
   },
   "perf": {
     "WP strict report lookup": {
       "count": 1,
-      "total_seconds": 1.69,
-      "max_seconds": 1.69
+      "total_seconds": 1.27,
+      "max_seconds": 1.27
     },
     "WP lookup URL esistente": {
-      "count": 7,
-      "total_seconds": 5.73,
-      "max_seconds": 0.9
-    },
-    "WP lookup event_key": {
-      "count": 3,
-      "total_seconds": 5.35,
-      "max_seconds": 1.99
-    },
-    "scraping articolo": {
       "count": 2,
-      "total_seconds": 2.03,
-      "max_seconds": 1.04
-    },
-    "estrazione blocchi": {
-      "count": 2,
-      "total_seconds": 1.17,
-      "max_seconds": 0.62
-    },
-    "analisi editoriale AI v72": {
-      "count": 6,
-      "total_seconds": 65.09,
-      "max_seconds": 16.34
+      "total_seconds": 1.33,
+      "max_seconds": 0.67
     },
     "WP recent posts dedupe": {
       "count": 1,
-      "total_seconds": 2.26,
-      "max_seconds": 2.26
+      "total_seconds": 0.82,
+      "max_seconds": 0.82
     },
     "categoria da analisi editoriale v72": {
       "count": 1,
-      "total_seconds": 2.5,
-      "max_seconds": 2.5
+      "total_seconds": 1.13,
+      "max_seconds": 1.13
+    },
+    "upload immagine interna": {
+      "count": 9,
+      "total_seconds": 8.61,
+      "max_seconds": 1.68
     },
     "traduzione": {
-      "count": 1,
-      "total_seconds": 34.94,
-      "max_seconds": 34.94
+      "count": 3,
+      "total_seconds": 82.95,
+      "max_seconds": 45.02
     },
     "creazione post WordPress": {
-      "count": 1,
-      "total_seconds": 7.6,
-      "max_seconds": 7.6
+      "count": 3,
+      "total_seconds": 34.89,
+      "max_seconds": 15.95
     },
-    "totale articolo pubblicato 'Danhausen Becomes One Of WWE's Biggest Success Stories After'": {
+    "scraping articolo": {
       "count": 1,
-      "total_seconds": 54.06,
-      "max_seconds": 54.06
+      "total_seconds": 1.51,
+      "max_seconds": 1.51
+    },
+    "estrazione blocchi": {
+      "count": 1,
+      "total_seconds": 0.72,
+      "max_seconds": 0.72
+    },
+    "analisi editoriale AI v72": {
+      "count": 3,
+      "total_seconds": 8.79,
+      "max_seconds": 6.04
+    },
+    "totale articolo pubblicato 'Tatum Paxley Retains Women's NA Title, Laid Out By Zaria'": {
+      "count": 1,
+      "total_seconds": 28.04,
+      "max_seconds": 28.04
+    },
+    "totale articolo pubblicato 'Lola Vice Awards WWE NXT Women's Title Shot Amidst Chaos In '": {
+      "count": 1,
+      "total_seconds": 33.49,
+      "max_seconds": 33.49
     }
   },
   "article_metrics": [
     {
-      "path": "published/20260520_000252_001_danhausen-da-un-debutto-difficile-al-grande-successo-commerciale-in-wwe_4947_final.html",
+      "path": "published/20260520_044639_001_wwe-nxt-del-19-maggio-2026-tatum-paxley-difende-il-womens-north-american-championship-cont_4959_final.html",
       "exists": true,
-      "word_count": 248,
-      "paragraph_count": 8,
+      "word_count": 2050,
+      "paragraph_count": 56,
+      "blockquote_count": 0,
+      "image_count": 6,
+      "iframe_count": 0,
+      "embed_hint_count": 0,
+      "title": "WWE NXT del 19 maggio 2026: Tatum Paxley difende il Women's North American Championship contro Lizzy Rain, i Vanity Project mettono in palio i NXT Tag Team Championship contro i DarkState"
+    },
+    {
+      "path": "published/20260520_044718_002_nxt-tatum-paxley-difende-il-nxt-womens-north-american-championship-poi-lattacco-di-zaria_4962_final.html",
+      "exists": true,
+      "word_count": 237,
+      "paragraph_count": 5,
       "blockquote_count": 0,
       "image_count": 0,
       "iframe_count": 0,
       "embed_hint_count": 0,
-      "title": "Danhausen: da un debutto difficile al grande successo commerciale in WWE"
+      "title": "NXT: tatum paxley difende il NXT women's north american championship, poi l'attacco di zaria"
+    },
+    {
+      "path": "published/20260520_044752_003_spoiler-nxt-lola-vice-difenderà-il-nxt-womens-championship-contro-izzi-dame_4965_final.html",
+      "exists": true,
+      "word_count": 211,
+      "paragraph_count": 5,
+      "blockquote_count": 0,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 0,
+      "title": "[SPOILER] NXT: Lola Vice difenderà il NXT Women's Championship contro Izzi Dame"
     }
   ],
   "daily_counts": {
-    "published_today": 1,
-    "published_last_4h": 5,
-    "runs_today": 1
+    "published_today": 4,
+    "published_last_4h": 3,
+    "runs_today": 2
   }
 }

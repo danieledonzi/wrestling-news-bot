@@ -1743,3 +1743,312 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
 ===== RUN END [2026-05-20 00:00:36] VERSION [v89_editorial_report_quality (69b2396)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+
+===== RUN START [2026-05-20 04:44:59] VERSION [v89_editorial_report_quality (1adea8d)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 12 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): WWE NXT - 5/19/2026: 3 Things We Hated And 3 We Loved
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[SCORE v79.1.2] Spoiler validato: floor 56->75 - Vanity Project Outlast Darkstate To Retain WWE NXT Tag Team Titles
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Tatum Paxley Retains Women's NA Title, Laid Out By Zaria
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP] Score sotto soglia editoriale (49/75): Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (54/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[PERF v71] WP strict report lookup: 1.27s
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (46/75): AEW Crossover Star Mistico Reportedly Injured After Appearing On Crutches At CMLL Show
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (11/75): Jim Ross On Kevin Nash Backing Wrestlers' Union: 'He Knows What He's Talking About'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177184/john-cena-in-ring-retirement-not-mean-retiring-wwe/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[SCORE v86.9] Cap commentary/opinion 100->68 - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[FOLLOWUP] Event key gia' vista ma angolo autonomo consentito: event:brock-lesnar-return - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Jordynne Grace Working To Get Pilot's License For Charitable Cause
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (54/75): JBL On WWE Cutting Contracts: 'That's Life'
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (14/75): AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176831/aew-athena-roh-womens-world-title-wwe-roman-reigns/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (36/75): Swerve Strickland Criticizes One Aspect Of Darby Allin's AEW World Title Win
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[SCORE v79.1.2] Spoiler validato: floor 55->75 - DarkState Brutally Ejects Saquon Shugars From Faction During 5/19 WWE NXT
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (51/75): Women's Title Match & More Booked For May 26 WWE NXT
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (41/75): WWE SmackDown Viewership Sees Slight Drop on May 15, 2026
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Double In-Ring Debut Match Goes Down During 5/19 NXT
+[SKIP] Score sotto soglia editoriale (53/75): Double In-Ring Debut Match Goes Down During 5/19 NXT
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE Reveals Why More Main Roster House Shows Are Returning This Summer
+[SCORE v86.9] Cap executive interview/opinion 100->72 - WWE Reveals Why More Main Roster House Shows Are Returning This Summer
+[SCORE v86.9] Cap commentary/opinion 72->68 - WWE Reveals Why More Main Roster House Shows Are Returning This Summer
+[FOLLOWUP] Event key gia' vista ma angolo autonomo consentito: event:business:wwe:executive-contract:nick-khan - WWE Reveals Why More Main Roster House Shows Are Returning This Summer
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (26/75): Danhausen Shows Up At Knicks Playoff Game After Cursing Cavaliers
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (21/75): AEW Collision Viewership Sees Increase on May 16, 2026
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (23/75): Former WWE Stars Spotted Backstage At ROH Tapings
+[SKIP] URL già in history: https://www.ringsidenews.com/danhausen-becomes-one-wwes-biggest-success-stories-rocky-debut/
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:wwe-nxt-2026-05-19 - WWE NXT Results, Highlights and Key Moments for May 19, 2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Dorian Van Dux Announces He's Been Cleared To Return
+[SKIP] Score sotto soglia editoriale (57/75): Dorian Van Dux Announces He's Been Cleared To Return
+[SKIP] URL già in history: https://www.ringsidenews.com/whats-said-about-when-john-cena-classic-will-actually-start/
+[SKIP] URL già in history: https://www.ringsidenews.com/nick-khan-triple-h-reveal-why-wwe-expanding-its-house-show-schedule/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (51/75): Former WWE Star Heidenreich Working at Walmart Leads to Wrestling Comeback Interest
+[SCORE] 100 high - WWE-Bound Indie Star Wrestles Dark Matches Before May 19 NXT | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, business/media rights, show settimanale, developmental secondario, v62 media rights/streaming, v62 categoria business, v71 freshness=0.525
+[SCORE] 80 high - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.538
+[SCORE] 78 medium - Tatum Paxley Retains Women's NA Title, Laid Out By Zaria | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, v62 titolo/championship, v71 freshness=0.569
+[SCORE] 78 medium - Lola Vice Awards WWE NXT Women's Title Shot Amidst Chaos In Division | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, v62 titolo/championship, v71 freshness=0.563
+[SCORE] 77 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 freshness=0.531
+[SCORE] 75 medium - Vanity Project Outlast Darkstate To Retain WWE NXT Tag Team Titles | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, v62 titolo/championship, v70 cap preview hard, v79.1.2 spoiler live/pre-show floor 56->75, v71 freshness=0.582
+[SCORE] 75 medium - WWE NXT Results, Highlights and Key Moments for May 19, 2026 | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, developmental secondario, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 source reliability soft penalty, v71 freshness=0.514
+[SCORE] 74 medium - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, show settimanale, v71 freshness=0.526, v48 tier2: 55-74
+[SCORE] 73 medium - John Cena Explains Intention Behind Eponymous WWE Event | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, match/segmento annunciato, v71 freshness=0.505, v48 tier2: 55-74
+[SCORE] 70 medium - DarkState Brutally Ejects Saquon Shugars From Faction During 5/19 WWE NXT | WWE/main roster, WWE main roster + storyline/evento, show settimanale, floor WWE main roster storyline, v79.1.2 spoiler live/pre-show floor 55->75, v71 source reliability soft penalty, v71 freshness=0.547, v48 tier2: 55-74
+[REPORT v86.9] Priorita true-results in coda: report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[MODE] Modalita normale: 1 news >=90, 2 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 1
+[PERF v71] WP lookup URL esistente: 0.66s
+[REPORT v86.8] Pending true-results non pubblicato: resta lavorabile via candidate queue report:wwe-nxt-2026-05-19
+[BOT] News candidate totali: 13 | mode=normal | max nuove=3 | pending pubblicati=0
+[REPORT v86.6] True results report autorizzato dal gate stretto: report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[REPORT v79.1.6] Titolo report da event_key: WWE NXT del 19 maggio 2026: risultati e momenti salienti
+[REPORT] Valuto fonti per report: report:wwe-nxt-2026-05-19
+[REPORT v86.9] Nessuna fonte aggregata valida: sources=0; provo candidato corrente
+[SCRAPE] Articolo results rilevato: testo completo (14664 caratteri)
+[REPORT v86.9] Fonte corrente valutata: len=14664 completeness=249 url=https://www.wrestlinginc.com/2176174/wwe-nxt-may-19-two-championships-up-for-grabs-keanu-carver-tate-wilder/
+[REPORT v86.9] Uso candidato corrente come fonte report: completeness=249 | https://www.wrestlinginc.com/2176174/wwe-nxt-may-19-two-championships-up-for-grabs-keanu-carver-tate-wilder/
+[REPORT] Fonte migliore: score_completezza=249 | www.wrestlinginc.com | WWE NXT del 19 maggio 2026: risultati e momenti salienti
+[REPORT v86.9] Processo report_ready senza re-entry nel report gate: report:wwe-nxt-2026-05-19
+[BOT] Elaborazione: WWE NXT del 19 maggio 2026: risultati e momenti salienti
+[BOT] semantic_id=report-wwe-nxt-2026-05-19
+[SCORE] iniziale=80 priority=high
+[REPORT] Uso testo prefetched per report maturo (14664 caratteri)
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=56, image=7, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=56, image=7, embed=0
+[SCORE] raffinato=80 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, show settimanale, developmental secondario, v62 titolo/championship, v75 hard results report, v77 hard report protected, v77 report score protected
+[V71] story_signature=stable:report_wwe-nxt-2026-05-19 semantic_status=new_story freshness=0.538
+[PERF v71] WP recent posts dedupe: 0.82s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.13s
+[MODEL v88] task=translate_report chain=gemini-2.5-pro,gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-pro
+[GEMINI] Modello gemini-2.5-pro scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[MODEL v88] Cooldown globale modello per la run: gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=56
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwe-nxt-may-19-two-championships-up-for-grabs-keanu-carver-tate-wilder/intro-1779242790.jpg
+[MEDIA] Immagine interna caricata: 4949
+[PERF v71] upload immagine interna: 1.68s
+[MEDIA] Immagine interna caricata: 4950
+[PERF v71] upload immagine interna: 0.87s
+[MEDIA] Immagine interna caricata: 4951
+[PERF v71] upload immagine interna: 0.82s
+[MEDIA] Immagine interna caricata: 4952
+[PERF v71] upload immagine interna: 0.82s
+[MEDIA] Immagine interna caricata: 4953
+[PERF v71] upload immagine interna: 0.86s
+[MEDIA] Immagine interna caricata: 4954
+[PERF v71] upload immagine interna: 0.84s
+[PERF v71] traduzione: 45.02s
+[TITLE v87.3] Titolo non pubblicabile dopo title chain: WWE NXT del 19 maggio 2026: risultati e momenti salienti
+[MODEL v88] task=emergency_title chain=gemini-2.5-flash,gemini-3-flash-preview,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-flash
+[TITLE v87.3] Titolo emergency Gemini (gemini-2.5-flash): WWE NXT del 19 maggio 2026: Tatum Paxley difende il Women's North American Championship contro Lizzy Rain, i Vanity Project mettono in palio i NXT Tag Team Championship contro i DarkState
+[MEDIA] Immagine interna caricata: 4955
+[PERF v71] upload immagine interna: 1.22s
+[MEDIA] Immagine interna caricata: 4956
+[PERF v71] upload immagine interna: 0.71s
+[MEDIA] Immagine interna caricata: 4957
+[PERF v71] upload immagine interna: 0.79s
+[MEDIA v86.7] Reintegrate 3 immagini inline perse prima del publish: WWE NXT del 19 maggio 2026: Tatum Paxley difende il Women's North American Championship contro Lizzy Rain, i Vanity Project mettono in palio i NXT Tag Team Championship contro i DarkState
+[MEDIA v86.7] Preservate 18 immagini inline strutturate durante strip featured
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/wwe-nxt-may-19-two-championships-up-for-grabs-keanu-carver-tate-wilder/l-intro-1779242790.jpg
+[MEDIA] Immagine caricata: 4958
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260520_044639_001_wwe-nxt-del-19-maggio-2026-tatum-paxley-difende-il-womens-north-american-championship-cont_4959_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4959
+[PERF v71] creazione post WordPress: 15.95s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-nxt-may-19-two-championships-up-for-grabs-keanu-carver-tate-wilder/l-intro-1779242790.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4958
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'WWE NXT del 19 maggio 2026: risultati e momenti salienti': 62.68s
+[OK] Pubblicato: WWE NXT del 19 maggio 2026: Tatum Paxley difende il Women's North American Championship contro Lizzy Rain, i Vanity Project mettono in palio i NXT Tag Team Championship contro i DarkState
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260520_044640_001_wwe-nxt-del-19-maggio-2026-tatum-paxley-difende-il-women-s-north-american-champi_a470f88a_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WWE NXT del 19 maggio 2026: Tatum Paxley difende il Women's North American Championship contro Lizzy Rain, i Vanity Project mettono in palio i NXT Tag Team Championship contro i DarkState
+[PUBLISHED REVIEW v87.1] Review outer salvata: WWE NXT del 19 maggio 2026: Tatum Paxley difende il Women's North American Championship contro Lizzy Rain, i Vanity Project mettono in palio i NXT Tag Team Championship contro i DarkState
+[REPORT v87.6] Non scrivo history forte: non true-results/canonico (report:wwe-nxt-2026-05-19)
+[PENDING] Coda salvata: 0 elementi
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WWE NXT del 19 maggio 2026: Tatum Paxley difende il Women's North American Championship contro Lizzy Rain, i Vanity Project mettono in palio i NXT Tag Team Championship contro i DarkState
+[PUBLISHED REVIEW v87.1] Review outer salvata: WWE NXT del 19 maggio 2026: Tatum Paxley difende il Women's North American Championship contro Lizzy Rain, i Vanity Project mettono in palio i NXT Tag Team Championship contro i DarkState
+[REPORT v87.6] Non scrivo history forte: non true-results/canonico (report:wwe-nxt-2026-05-19)
+[SKIP v86.8] Già pubblicata davvero in questa run: WWE NXT Results, Highlights and Key Moments for May 19, 2026
+[BOT] Elaborazione: WWE-Bound Indie Star Wrestles Dark Matches Before May 19 NXT
+[BOT] semantic_id=wwe-bound-indie-star-wrestles-dark-matches-before-may-19-nxt
+[SCORE] iniziale=100 priority=high
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/wwe-bound-indie-star-wrestles-dark-matches-before-may-19-nxt/
+[PERF v71] scraping articolo: 1.51s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=12, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/wwe-bound-indie-star-wrestles-dark-matches-before-may-19-nxt/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.72s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=NXT (6) conf=0.95 model=gemini-3.1-flash-lite | L'articolo riporta una notizia avvenuta (dark match disputato), non è una preview. Il focus è l'inserimento di un nuovo talento nel sistema NXT.
+[EDITORIAL v72.3] translation_notes=Mantenere 'dark match' e 'tryout' come termini tecnici.; Non tradurre i nomi delle cinture (CCW Women's Championship).; Gestire il cambio nome 'Martinez' chiarendo che è un nome d'arte utilizzato nel match.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=NXT (6) | L'articolo riporta una notizia avvenuta (dark match disputato), non è una preview. Il focus è l'inserimento di un nuovo talento nel sistema NXT.
+[PERF v71] analisi editoriale AI v72: 6.04s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE-Bound Indie Star Wrestles Dark Matches Before May 19 NXT
+[SCORE] raffinato=100 priority=high | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, developmental secondario, v62 media rights/streaming, v62 categoria business
+[V71] story_signature=stable:bound_indie_star_wrestles_dark_matches_before_may|contract|wwe semantic_status=new_story freshness=0.525
+[SKIP] News core già pubblicata da altra fonte: WWE-Bound Indie Star Wrestles Dark Matches Before May 19 NXT
+[SKIP] news_core_key=cw-events-live-nxt-wwe-year
+[PENDING] Coda salvata: 0 elementi
+[PERF v71] WP lookup URL esistente: 0.67s
+[BOT] Elaborazione: Tatum Paxley Retains Women's NA Title, Laid Out By Zaria
+[BOT] semantic_id=tatum-paxley-retains-womens-na-title-laid-out-by-zaria
+[SCORE] iniziale=78 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=NXT (6) conf=1.00 model=gemini-3.1-flash-lite | L'articolo descrive un segmento concluso e un match già avvenuto, non è una preview. Non è un report completo di tutta la puntata, quindi rientra in POST_SHOW_NEWS.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Women's North American Championship' e 'Cemetery Drive'.; Tradurre 'laid out' come 'stese' o 'attaccate'.; 'Slug fest' da rendere come 'scambio di colpi duri' o 'rissa'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=NXT (6) | L'articolo descrive un segmento concluso e un match già avvenuto, non è una preview. Non è un report completo di tutta la puntata, quindi rientra in POST_SHOW_NEWS.
+[PERF v71] analisi editoriale AI v72: 1.63s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Tatum Paxley Retains Women's NA Title, Laid Out By Zaria
+[SCORE] raffinato=82 priority=high | WWE/main roster, WWE main roster + storyline/evento, show settimanale, v62 titolo/championship
+[V71] story_signature=stable:tatum_paxley_retains_women|na_title|laid_out_by_zaria|title|wwe semantic_status=new_story freshness=0.568
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=5
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/tatum-paxley-retains-womens-na-title-laid-out-by-zaria/intro-1779240337.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 11.20s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): NXT: Tatum Paxley mantiene il NXT Women's North American Title, Zaria attacca lei e Lizzy Rain
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v82] Headline realism applicato (gemini-3.1-flash-lite): NXT: tatum paxley difende il NXT women's north american championship, poi l'attacco di zaria
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/tatum-paxley-retains-womens-na-title-laid-out-by-zaria/l-intro-1779240337.jpg
+[MEDIA] Immagine caricata: 4961
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260520_044718_002_nxt-tatum-paxley-difende-il-nxt-womens-north-american-championship-poi-lattacco-di-zaria_4962_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4962
+[PERF v71] creazione post WordPress: 14.22s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/tatum-paxley-retains-womens-na-title-laid-out-by-zaria/l-intro-1779240337.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4961
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Tatum Paxley Retains Women's NA Title, Laid Out By Zaria': 28.04s
+[OK] Pubblicato: NXT: tatum paxley difende il NXT women's north american championship, poi l'attacco di zaria
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260520_044719_002_nxt-tatum-paxley-difende-il-nxt-women-s-north-american-championship-poi-l-attacc_096e8d33_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: NXT: tatum paxley difende il NXT women's north american championship, poi l'attacco di zaria
+[PUBLISHED REVIEW v87.1] Review outer salvata: NXT: tatum paxley difende il NXT women's north american championship, poi l'attacco di zaria
+[BOT] Elaborazione: Lola Vice Awards WWE NXT Women's Title Shot Amidst Chaos In Division
+[BOT] semantic_id=lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-in-division
+[SCORE] iniziale=78 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=NXT (6) conf=1.00 model=gemini-3.1-flash-lite | L'articolo descrive un segmento già avvenuto durante la puntata di NXT, riportandone le dinamiche e le conseguenze narrative.
+[EDITORIAL v72.3] translation_notes=Mantenere 'NXT Women's Championship' e 'NXT Women's North American Champion'.; Tradurre 'pinned' come 'ha schienato'.; 'The Culling' è il nome della stable: non tradurre.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=NXT (6) | L'articolo descrive un segmento già avvenuto durante la puntata di NXT, riportandone le dinamiche e le conseguenze narrative.
+[PERF v71] analisi editoriale AI v72: 1.12s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Lola Vice Awards WWE NXT Women's Title Shot Amidst Chaos In Division
+[SCORE] raffinato=75 priority=medium | WWE/main roster, WWE main roster + storyline/evento, contratto, show settimanale, v62 titolo/championship, v70 cap preview hard, v79.1.2 spoiler live/pre-show floor 56->75
+[V71] story_signature=stable:kelani_jordan|lola_vice|lola_vice_awards|contract|wwe semantic_status=new_story freshness=0.563
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=5
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-in-division/intro-1779238751.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 26.73s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): NXT: Lola Vice difenderà il NXT Women's Championship contro Izzi Dame
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-in-division/l-intro-1779238751.jpg
+[MEDIA] Immagine caricata: 4964
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260520_044752_003_spoiler-nxt-lola-vice-difenderà-il-nxt-womens-championship-contro-izzi-dame_4965_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4965
+[PERF v71] creazione post WordPress: 4.72s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-in-division/l-intro-1779238751.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4964
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Lola Vice Awards WWE NXT Women's Title Shot Amidst Chaos In ': 33.49s
+[OK] Pubblicato: [SPOILER] NXT: Lola Vice difenderà il NXT Women's Championship contro Izzi Dame
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260520_044754_003_spoiler-nxt-lola-vice-difender-il-nxt-women-s-championship-contro-izzi-dame_92e2fa23_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 4/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: [SPOILER] NXT: Lola Vice difenderà il NXT Women's Championship contro Izzi Dame
+[PUBLISHED REVIEW v87.1] Review outer salvata: [SPOILER] NXT: Lola Vice difenderà il NXT Women's Championship contro Izzi Dame
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 4 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-20 04:44:59_summary.json -> published_html_review/run_2026-05-20 04-44-59_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (482 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
+===== RUN END [2026-05-20 04:44:59] VERSION [v89_editorial_report_quality (1adea8d)] =====
+

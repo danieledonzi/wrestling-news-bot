@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-20 00:00:36",
-  "last_bot_version": "v89_editorial_report_quality (69b2396)",
-  "updated_at": "2026-05-20T00:03:59",
-  "total_items": 121,
+  "last_run_id": "2026-05-20 04:44:59",
+  "last_bot_version": "v89_editorial_report_quality (1adea8d)",
+  "updated_at": "2026-05-20T04:47:54",
+  "total_items": 124,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -972,6 +972,30 @@
       "original_html_file": "20260520_000253_001_danhausen-da-un-debutto-difficile-al-grande-successo-commerciale-in-wwe_3493743c_original.html",
       "final_html_file": "20260520_000253_001_danhausen-da-un-debutto-difficile-al-grande-successo-commerciale-in-wwe_3493743c_final.html",
       "metadata_file": "20260520_000253_001_danhausen-da-un-debutto-difficile-al-grande-successo-commerciale-in-wwe_3493743c_metadata.json"
+    },
+    {
+      "run_id": "2026-05-20 04:44:59",
+      "title": "WWE NXT del 19 maggio 2026: Tatum Paxley difende il Women's North American Championship contro Lizzy Rain, i Vanity Project mettono in palio i NXT Tag Team Championship contro i DarkState",
+      "url": "https://www.wrestlinginc.com/2176174/wwe-nxt-may-19-two-championships-up-for-grabs-keanu-carver-tate-wilder/",
+      "original_html_file": "20260520_044640_001_wwe-nxt-del-19-maggio-2026-tatum-paxley-difende-il-women-s-north-american-champi_a470f88a_original.html",
+      "final_html_file": "20260520_044640_001_wwe-nxt-del-19-maggio-2026-tatum-paxley-difende-il-women-s-north-american-champi_a470f88a_final.html",
+      "metadata_file": "20260520_044640_001_wwe-nxt-del-19-maggio-2026-tatum-paxley-difende-il-women-s-north-american-champi_a470f88a_metadata.json"
+    },
+    {
+      "run_id": "2026-05-20 04:44:59",
+      "title": "NXT: tatum paxley difende il NXT women's north american championship, poi l'attacco di zaria",
+      "url": "https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/",
+      "original_html_file": "20260520_044719_002_nxt-tatum-paxley-difende-il-nxt-women-s-north-american-championship-poi-l-attacc_096e8d33_original.html",
+      "final_html_file": "20260520_044719_002_nxt-tatum-paxley-difende-il-nxt-women-s-north-american-championship-poi-l-attacc_096e8d33_final.html",
+      "metadata_file": "20260520_044719_002_nxt-tatum-paxley-difende-il-nxt-women-s-north-american-championship-poi-l-attacc_096e8d33_metadata.json"
+    },
+    {
+      "run_id": "2026-05-20 04:44:59",
+      "title": "[SPOILER] NXT: Lola Vice difenderà il NXT Women's Championship contro Izzi Dame",
+      "url": "https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/",
+      "original_html_file": "20260520_044754_003_spoiler-nxt-lola-vice-difender-il-nxt-women-s-championship-contro-izzi-dame_92e2fa23_original.html",
+      "final_html_file": "20260520_044754_003_spoiler-nxt-lola-vice-difender-il-nxt-women-s-championship-contro-izzi-dame_92e2fa23_final.html",
+      "metadata_file": "20260520_044754_003_spoiler-nxt-lola-vice-difender-il-nxt-women-s-championship-contro-izzi-dame_92e2fa23_metadata.json"
     }
   ]
 }
