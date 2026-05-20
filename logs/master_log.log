@@ -3281,3 +3281,318 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=4 errors=0 status=ok
 ===== RUN END [2026-05-20 17:39:50] VERSION [v90_1_quality_correctness (132eb51)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+
+===== RUN START [2026-05-20 20:09:47] VERSION [v90_1_quality_correctness (382faf5)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 13 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SCORE v86.9] Cap executive interview/opinion 100->72 - Report: Recent WWE Addition Praised By Triple H & Nick Khan During Company Town Hall
+[PERF v71] WP lookup event_key: 1.39s
+[FIX] Event key in history ma non confermata su WordPress: event:business:nick-khan - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (54/75): WWE SmackDown Ratings & Viewership Report: 5/15/2026
+[SKIP] Score sotto soglia editoriale (24/75): Nattie Says Current WWE Character Was Inspired By Her Book
+[SKIP] Score sotto soglia editoriale (0/75): WWE NXT - 5/19/2026: 3 Things We Hated And 3 We Loved
+[SKIP] Preview/show announcement scaduta: Vanity Project Outlast Darkstate To Retain WWE NXT Tag Team Titles
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - TKO's Mark Shapiro: WWE WrestleMania Returning To Las Vegas May Have Been A 'Mistake'
+[SCORE v86.9] Cap executive interview/opinion 100->72 - TKO's Mark Shapiro: WWE WrestleMania Returning To Las Vegas May Have Been A 'Mistake'
+[PERF v71] WP lookup event_key: 1.28s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Bully Ray, Tommy Dreamer Discuss What Brock Lesnar's WWE Raw Return Means For Oba Femi
+[SKIP] Score sotto soglia editoriale (56/75): Bully Ray, Tommy Dreamer Discuss What Brock Lesnar's WWE Raw Return Means For Oba Femi
+[PERF v71] WP lookup event_key: 1.36s
+[FIX] Event key in history ma non confermata su WordPress: event:title:darby-allin:world:championship - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (16/75): WWE HOFer JBL Believes A Pro Wrestling Union Is A 'Possibility'
+[SKIP] Score sotto soglia editoriale (34/75): AEW Collision Ratings & Viewership Report: 5/16/26
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Tommy Dreamer Believes This Longstanding WWE Storyline Has 'Run Its Course'
+[SKIP] Score sotto soglia editoriale (54/75): Tommy Dreamer Believes This Longstanding WWE Storyline Has 'Run Its Course'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177831/wwe-snme-saturday-nights-main-event-becky-lynch-sol-ruca-advertising-title-match/
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP] Score sotto soglia editoriale (49/75): Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP] Score sotto soglia editoriale (54/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[SKIP] Score sotto soglia editoriale (18/75): AEW Heading To Another Unconventional Venue In July For Special Event
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - MJF Reacts to Mick Foley's Upcoming AEW Debut With Cold Response
+[PERF v71] WP lookup event_key: 1.34s
+[FIX] Event key in history ma non confermata su WordPress: event:business:wwe:executive-contract:nick-khan - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (69/75): Piper Niven Fires Back Again After Fan Claims Triple H Will Release Her
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:tanea-brooks-rebel-als-diagnosis - Trey Miguel Reveals Major Update on Broken Patella Injury In Deleted Instagram Post
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - MJF Claims He Sued Young Fan Who Attacked Him During AEW Dynamite
+[SKIP] Score sotto soglia editoriale (33/75): MJF Blasts Wrestlers for Breaking Character Online: "It Makes Me Want to Vomit"
+[SKIP] Score sotto soglia editoriale (25/75): WWE Quietly Locked Down Nikki Blackheart After Bayley Push Behind The Scenes
+[SKIP] URL già in history: https://www.ringsidenews.com/darby-allin-says-having-kids-wont-stop-him-taking-dangerous-risks/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE Legends Think Brock Lesnar Losing Again Would Be 'Boring' In Oba Femi Feud
+[PERF v71] WP lookup event_key: 1.66s
+[FIX] Event key in history ma non confermata su WordPress: event:brock-lesnar-diagnosis - provo a pubblicare
+[SCORE] 100 high - WWE Legends Think Brock Lesnar Losing Again Would Be 'Boring' In Oba Femi Feud | WWE/main roster, top star titolo: brock lesnar, nomi forti titolo: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v71 freshness=0.645
+[SCORE] 73 medium - MJF Seemingly Accuses Nick Khan of Trying to Hurt AEW With TV Deal Narrative | WWE/main roster, business/contratti WWE-TKO, contratto, opinione generica, v62 media rights/streaming, v62 categoria business, v66 cap opinion/commentary storyline, v71 source reliability soft penalty, v71 freshness=0.575, v48 tier5: v71 major story bypass
+[SCORE] 72 medium - Report: Recent WWE Addition Praised By Triple H & Nick Khan During Company Town Hall | WWE/main roster, nomi forti titolo: triple h, danhausen, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, v62 business/dirigenza, v62 categoria business, v86.8 cap executive interview/opinion 100->72, v71 freshness=0.593, v48 tier2: 55-74
+[SCORE] 72 medium - TKO's Mark Shapiro: WWE WrestleMania Returning To Las Vegas May Have Been A 'Mistake' | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 business/dirigenza, v62 categoria business, v86.8 cap executive interview/opinion 100->72, v71 freshness=0.695, v48 tier5: v71 major story bypass
+[SCORE] 71 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 low freshness/novelty, v71 freshness=0.338, v48 tier2: 55-74
+[SCORE] 69 medium - MJF Claims He Sued Young Fan Who Attacked Him During AEW Dynamite | AEW, evento legale/controversia, show settimanale, v62 evento legale grave, v71 source reliability soft penalty, v71 freshness=0.55, v48 tier2: 55-74
+[SCORE] 68 medium - Tony Khan Reveals Only Darby Allin Spot That Truly Worried Him | AEW, business/media rights, v62 business/dirigenza, v62 categoria business, v71 source reliability soft penalty, v71 freshness=0.525, v48 tier2: 55-74
+[SCORE] 63 medium - MJF Reacts to Mick Foley's Upcoming AEW Debut With Cold Response | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v66 cap opinion/commentary storyline, v68 cap opinion senza news concreta, v71 source reliability soft penalty, v71 freshness=0.693, v48 tier2: 55-74
+[SCORE] 63 medium - AJ Styles Reacts To WWE Bringing Back More Live Events | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v62 reazioni/tributi, v68 cap opinion senza news concreta, v71 source reliability soft penalty, v71 freshness=0.551, v48 tier2: 55-74
+[SCORE] 63 medium - MJF Says Bret Hart Is 'Punch Drunk' While Declaring Shawn Michaels Better | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v71 source reliability soft penalty, v71 freshness=0.527, v48 tier2: 55-74
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 16 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: WWE Legends Think Brock Lesnar Losing Again Would Be 'Boring' In Oba Femi Feud
+[BOT] semantic_id=wwe-legends-think-brock-lesnar-losing-again-would-be-boring-in-oba-femi-feud
+[SCORE] iniziale=100 priority=high
+[PERF v71] scraping articolo: 1.79s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=15, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.65s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza le opinioni di Tommy Dreamer e Bully Ray sul booking della rivalità, trattandosi di speculazioni e commenti su una storyline in corso.
+[EDITORIAL v72.3] translation_notes=Mantenere invariati i nomi dei PLE (Clash in Italy, SummerSlam) e dei wrestler.; Tradurre 'water down' come 'indebolire' o 'svilire'.; Non tradurre 'The Beast Incarnate'.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo analizza le opinioni di Tommy Dreamer e Bully Ray sul booking della rivalità, trattandosi di speculazioni e commenti su una storyline in corso.
+[PERF v71] analisi editoriale AI v72: 1.52s
+[SCORE] raffinato=54 priority=low | WWE/main roster, top star titolo: brock lesnar, nomi forti titolo: oba femi, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, combo top name titolo + evento forte, PLE/PPV, v62 ritorno/debutto, v66 cap title match non-title-change, v72.3 cap opinion
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - WWE Legends Think Brock Lesnar Losing Again Would Be 'Boring' In Oba Femi Feud
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: MJF Seemingly Accuses Nick Khan of Trying to Hurt AEW With TV Deal Narrative
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Report: Recent WWE Addition Praised By Triple H & Nick Khan During Company Town Hall
+[BOT] semantic_id=report-recent-wwe-addition-praised-by-triple-h-nick-khan-during-company-town-hall
+[SCORE] iniziale=72 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=0.95 model=gemini-3.1-flash-lite | L'articolo riporta fatti avvenuti in un Town Hall aziendale e le recenti apparizioni mediatiche di Danhausen, non si tratta di una preview di un evento.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Town Hall' in 'Municipio', usare 'riunione aziendale' o lasciare il termine originale.; Mantenere i nomi dei titoli (es. WWE Backlash) e i nickname (Very Nice, Very Evil).; Evitare il calco 'crossover appeal' traducendo con 'capacità di attrarre pubblico generalista'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta fatti avvenuti in un Town Hall aziendale e le recenti apparizioni mediatiche di Danhausen, non si tratta di una preview di un evento.
+[PERF v71] analisi editoriale AI v72: 10.67s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Report: Recent WWE Addition Praised By Triple H & Nick Khan During Company Town Hall
+[SCORE] raffinato=100 priority=high | WWE/main roster, nomi forti titolo: triple h, danhausen, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 media rights/streaming
+[V71] story_signature=stable:nick_khan|danhausen|triple_h|story|wwe semantic_status=new_story freshness=0.826
+[PERF v71] WP recent posts dedupe: 1.59s
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:business:nick-khan -> event:business:nick-khan-followup-recent-addition-praised-by-triple-h-nick-khan-during-company-town-hall
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.90s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=3
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/report-recent-wwe-addition-praised-by-triple-h-nick-khan-during-company-town-hall/intro-1779302620.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 47.00s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WWE: Triple H e Nick Khan elogiano l'impatto di Danhausen in azienda
+[WARN v71.3] Quote check sotto soglia ma non bloccante: ['quote count ratio below threshold: 0.67'] - Report: Recent WWE Addition Praised By Triple H & Nick Khan During Company Town Hall
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/report-recent-wwe-addition-praised-by-triple-h-nick-khan-during-company-town-hall/l-intro-1779302620.jpg
+[MEDIA] Immagine caricata: 4998
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260520_201123_001_wwe-triple-h-e-nick-khan-elogiano-limpatto-di-danhausen-in-azienda_4999_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 4999
+[PERF v71] creazione post WordPress: 11.81s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/report-recent-wwe-addition-praised-by-triple-h-nick-khan-during-company-town-hall/l-intro-1779302620.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 4998
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Report: Recent WWE Addition Praised By Triple H & Nick Khan ': 72.29s
+[OK] Pubblicato: WWE: Triple H e Nick Khan elogiano l'impatto di Danhausen in azienda
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260520_201124_001_wwe-triple-h-e-nick-khan-elogiano-l-impatto-di-danhausen-in-azienda_a41628e7_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WWE: Triple H e Nick Khan elogiano l'impatto di Danhausen in azienda
+[PUBLISHED REVIEW v87.1] Review outer salvata: WWE: Triple H e Nick Khan elogiano l'impatto di Danhausen in azienda
+[BOT] Elaborazione: TKO's Mark Shapiro: WWE WrestleMania Returning To Las Vegas May Have Been A 'Mistake'
+[BOT] semantic_id=tkos-mark-shapiro-wwe-wrestlemania-returning-to-las-vegas-may-have-been-a-mistake
+[SCORE] iniziale=72 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=BUSINESS (15) conf=0.95 model=gemini-3.1-flash-lite | Articolo di analisi su decisioni aziendali post-evento riguardanti la strategia di location di WrestleMania, con focus su TKO e dichiarazioni di Mark Shapiro.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'WrestleMania' o nomi di PPV/Ple.; 'Mistake' va reso come errore strategico.; Mantenere le quote di Shapiro fedeli al testo originale.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=BUSINESS (15) | Articolo di analisi su decisioni aziendali post-evento riguardanti la strategia di location di WrestleMania, con focus su TKO e dichiarazioni di Mark Shapiro.
+[PERF v71] analisi editoriale AI v72: 1.65s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - TKO's Mark Shapiro: WWE WrestleMania Returning To Las Vegas May Have Been A 'Mistake'
+[SCORE] raffinato=68 priority=medium | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 business/dirigenza, v62 categoria business, v66 cap opinion/commentary storyline, v68 cap opinion senza news concreta
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - TKO's Mark Shapiro: WWE WrestleMania Returning To Las Vegas May Have Been A 'Mistake'
+[V71] story_signature=stable:nick_khan|mark_shapiro|returning_to_las_vegas_may_have_been|contract|wwe semantic_status=new_story freshness=0.695
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=4
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/tkos-mark-shapiro-wwe-wrestlemania-returning-to-las-vegas-may-have-been-a-mistake/intro-1779298494.jpg
+[BLOCKSEQ v72.3] Validazione/assemblaggio fallito: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=42 generato=['41']"]
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TRANSLATE] Errore: Fatti/nomi sorgente alterati: ["Numero evento alterato: WrestleMania sorgente=42 generato=['41']"]
+[PERF v71] traduzione: 5.74s
+[SKIP] Traduzione fallita: TKO's Mark Shapiro: WWE WrestleMania Returning To Las Vegas May Have Been A 'Mistake' (err_type=validation)
+[PERF v71] WP lookup URL esistente: 0.97s
+[BOT] Elaborazione: WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[BOT] semantic_id=wwe-announces-major-change-to-becky-lynchsol-ruca-snme-match
+[SCORE] iniziale=71 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo presenta una modifica alla card di un evento futuro (SNME), confermando una stipulazione per un match già annunciato. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantenere 'Women's Intercontinental Championship' in inglese.; Non tradurre 'Saturday Night's Main Event' (SNME).; Evitare calchi per 'red brand' (usare 'il roster di Raw' o 'lo show rosso').
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo presenta una modifica alla card di un evento futuro (SNME), confermando una stipulazione per un match già annunciato. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 21.88s
+[SCORE v88.2] v88.2 cap feature storico numerico 56->45 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[SCORE] raffinato=45 priority=low | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v70 cap preview hard, v88.2 cap feature storico numerico 56->45
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[PERF v71] WP lookup URL esistente: 0.63s
+[BOT] Elaborazione: MJF Claims He Sued Young Fan Who Attacked Him During AEW Dynamite
+[BOT] semantic_id=mjf-claims-he-sued-young-fan-who-attacked-him-during-aew-dynamite
+[SCORE] iniziale=69 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/mjf-claims-he-sued-young-fan-who-attacked-him-during-aew-dynamite/
+[PERF v71] scraping articolo: 1.15s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=12, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/mjf-claims-he-sued-young-fan-who-attacked-him-during-aew-dynamite/
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.69s
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | Articolo che riporta le recenti dichiarazioni di MJF su un fatto accaduto in passato; non è una preview di eventi futuri né un report di un intero show.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (AEW Dynamite, PLE) invariati.; Tradurre 'sued' come 'ha fatto causa' o 'ha intrapreso azioni legali'.; Non tradurre 'chopped' con 'tagliata' ma con 'colpita con una chop'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | Articolo che riporta le recenti dichiarazioni di MJF su un fatto accaduto in passato; non è una preview di eventi futuri né un report di un intero show.
+[PERF v71] analisi editoriale AI v72: 3.26s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - MJF Claims He Sued Young Fan Who Attacked Him During AEW Dynamite
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, evento legale/controversia, show settimanale, opinione generica, v62 evento legale grave, v66 cap opinion/commentary storyline, v68 cap duro opinion/commentary
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - MJF Claims He Sued Young Fan Who Attacked Him During AEW Dynamite
+[FIX v79.1.3] Event key legal falsa rimossa: event:legal:will-ospreay -> event:postshow:mjf-he-sued-young-fan-who-attacked-him-during-dynamite
+[V71] story_signature=stable:mjf|mjf_claims_he_sued_young_fan_who_attacked_him_during|aew_dynamite|story|aew semantic_status=new_story freshness=0.549
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=12
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 25.16s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): MJF dichiara di aver fatto causa alla giovane fan che lo ha colpito a AEW Dynamite
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/mjf-claims-he-sued-young-fan-who-attacked-him-during-aew-dynamite-16.jpg
+[MEDIA] Immagine caricata: 5001
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260520_201231_002_mjf-dichiara-di-aver-fatto-causa-alla-giovane-fan-che-lo-ha-colpito-a-aew-dynamite_5002_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5002
+[PERF v71] creazione post WordPress: 3.71s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/mjf-claims-he-sued-young-fan-who-attacked-him-during-aew-dynamite-16.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5001
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'MJF Claims He Sued Young Fan Who Attacked Him During AEW Dyn': 34.75s
+[OK] Pubblicato: MJF dichiara di aver fatto causa alla giovane fan che lo ha colpito a AEW Dynamite
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260520_201232_002_mjf-dichiara-di-aver-fatto-causa-alla-giovane-fan-che-lo-ha-colpito-a-aew-dynami_00dcd5e5_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: MJF dichiara di aver fatto causa alla giovane fan che lo ha colpito a AEW Dynamite
+[PUBLISHED REVIEW v87.1] Review outer salvata: MJF dichiara di aver fatto causa alla giovane fan che lo ha colpito a AEW Dynamite
+[BOT] Elaborazione: Tony Khan Reveals Only Darby Allin Spot That Truly Worried Him
+[BOT] semantic_id=tony-khan-reveals-only-darby-allin-spot-that-truly-worried-him
+[SCORE] iniziale=68 priority=medium
+[PERF v71] scraping articolo: 1.61s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.63s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni retrospettive di Tony Khan su un segmento avvenuto in passato (Sting retirement match), configurandosi come news di approfondimento su fatti già accaduti.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'TNT Champion' o nomi di match/eventi (es. Sting's final match).; 'Spot' va lasciato come termine tecnico del wrestling o tradotto come 'manovra/sequenza'.; Evitare calchi come 'checked the risk' o 'crossed a line' usando espressioni idiomatiche italiane.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | L'articolo riporta dichiarazioni retrospettive di Tony Khan su un segmento avvenuto in passato (Sting retirement match), configurandosi come news di approfondimento su fatti già accaduti.
+[PERF v71] analisi editoriale AI v72: 1.27s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Tony Khan Reveals Only Darby Allin Spot That Truly Worried Him
+[SCORE] raffinato=54 priority=low | AEW, titolo/championship, opinione generica, v62 business/dirigenza, v62 categoria business, v68 cap duro opinion/commentary
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Tony Khan Reveals Only Darby Allin Spot That Truly Worried Him
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Tony Khan Reveals Only Darby Allin Spot That Truly Worried Him
+[SCORE v89.1] Legacy return/move protected 63->68: MJF Reacts to Mick Foley's Upcoming AEW Debut With Cold Response
+[BOT] Elaborazione: MJF Reacts to Mick Foley's Upcoming AEW Debut With Cold Response
+[BOT] semantic_id=mjf-reacts-to-mick-foleys-upcoming-aew-debut-with-cold-response
+[SCORE] iniziale=68 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/mjf-reacts-mick-foleys-upcoming-aew-debut-cold-response/
+[PERF v71] scraping articolo: 1.14s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=10, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/mjf-reacts-mick-foleys-upcoming-aew-debut-cold-response/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.70s
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo commenta un annuncio già avvenuto riguardo alla partecipazione di Mick Foley a un evento AEW. Non è una preview strutturata ma una news su una reazione a caldo di MJF.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Buy In' (pre-show ufficiale AEW).; Mantenere 'Cactus Jack' come nome del personaggio.; 'Buried him' in gergo wrestling significa criticare duramente, non seppellire.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | L'articolo commenta un annuncio già avvenuto riguardo alla partecipazione di Mick Foley a un evento AEW. Non è una preview strutturata ma una news su una reazione a caldo di MJF.
+[PERF v71] analisi editoriale AI v72: 1.39s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - MJF Reacts to Mick Foley's Upcoming AEW Debut With Cold Response
+[SCORE] raffinato=68 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 media rights/streaming, v66 cap opinion/commentary storyline, v68 cap opinion senza news concreta
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - MJF Reacts to Mick Foley's Upcoming AEW Debut With Cold Response
+[V71] story_signature=stable:tony_khan|mjf|mjf_reacts|debut|wwe semantic_status=new_story freshness=0.809
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:business:tony-khan:darby-allin -> event:business:tony-khan:darby-allin-followup-mjf-reacts-mick-foley-s-upcoming-debut-cold-response
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=10
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 5.84s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): La reazione gelida di MJF al debutto di Mick Foley in AEW
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/The_MJF/status/2057174864180412524
+[EMBED v87.3] Positional embed guard applicato: 1 modifiche
+[EMBED v88] Publish media guard: expected=1 before=0 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/mjf-reacts-to-mick-foleys-upcoming-aew-debut-with-cold-response-56.jpg
+[MEDIA] Immagine caricata: 5004
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260520_201254_003_la-reazione-gelida-di-mjf-al-debutto-di-mick-foley-in-aew_5005_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5005
+[PERF v71] creazione post WordPress: 7.13s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/mjf-reacts-to-mick-foleys-upcoming-aew-debut-with-cold-response-56.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5004
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'MJF Reacts to Mick Foley's Upcoming AEW Debut With Cold Resp': 17.03s
+[OK] Pubblicato: La reazione gelida di MJF al debutto di Mick Foley in AEW
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260520_201255_003_la-reazione-gelida-di-mjf-al-debutto-di-mick-foley-in-aew_40f8c2ce_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: La reazione gelida di MJF al debutto di Mick Foley in AEW
+[PUBLISHED REVIEW v87.1] Review outer salvata: La reazione gelida di MJF al debutto di Mick Foley in AEW
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 8 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-20 20:09:47_summary.json -> published_html_review/run_2026-05-20 20-09-47_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (521 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
+===== RUN END [2026-05-20 20:09:47] VERSION [v90_1_quality_correctness (382faf5)] =====
+

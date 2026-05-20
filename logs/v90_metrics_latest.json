@@ -1,28 +1,25 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-20T17:43:45",
-  "run_start": "2026-05-20 17:39:50",
-  "run_end": "2026-05-20 17:39:50",
-  "bot_version": "v90_1_quality_correctness (132eb51)",
-  "candidate_count": 15,
-  "mode": "storm",
-  "max_new": 5,
-  "published_total": 4,
+  "collected_at": "2026-05-20T20:12:56",
+  "run_start": "2026-05-20 20:09:47",
+  "run_end": "2026-05-20 20:09:47",
+  "bot_version": "v90_1_quality_correctness (382faf5)",
+  "candidate_count": 16,
+  "mode": "normal",
+  "max_new": 3,
+  "published_total": 3,
   "published_pending": 0,
-  "published_new": 4,
-  "candidates_tried": 12,
-  "score_lines_count": 26,
-  "skip_count": 30,
+  "published_new": 3,
+  "candidates_tried": 8,
+  "score_lines_count": 24,
+  "skip_count": 26,
   "skip_v89_count": 0,
-  "gemini_calls_observed": 25,
+  "gemini_calls_observed": 19,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 23,
-    "gemini-3-flash-preview": 1,
-    "gemini-2.5-flash": 1
-  },
-  "gemini_discarded_models": {
+    "gemini-3.1-flash-lite": 18,
     "gemini-3-flash-preview": 1
   },
+  "gemini_discarded_models": {},
   "model_tasks": [
     {
       "task": "healthcheck",
@@ -53,14 +50,6 @@
       "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
     },
     {
-      "task": "postedit",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "title",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
-    },
-    {
       "task": "editorial_analysis",
       "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
     },
@@ -78,11 +67,11 @@
     },
     {
       "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite"
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
     },
     {
       "task": "translate_normal",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
     },
     {
       "task": "postedit",
@@ -91,144 +80,111 @@
     {
       "task": "title",
       "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
-    },
-    {
-      "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "translate_normal",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite"
     }
   ],
   "model_task_counts": {
     "healthcheck": 1,
-    "editorial_analysis": 6,
-    "translate_normal": 4,
-    "postedit": 4,
-    "title": 4,
+    "editorial_analysis": 4,
+    "translate_normal": 3,
+    "postedit": 3,
+    "title": 3,
     "translate_medium": 1
   },
   "perf": {
     "WP lookup event_key": {
       "count": 5,
-      "total_seconds": 6.65,
-      "max_seconds": 1.6
+      "total_seconds": 7.03,
+      "max_seconds": 1.66
     },
     "scraping articolo": {
-      "count": 5,
-      "total_seconds": 6.06,
-      "max_seconds": 1.73
+      "count": 4,
+      "total_seconds": 5.69,
+      "max_seconds": 1.79
     },
     "estrazione blocchi": {
-      "count": 5,
-      "total_seconds": 3.88,
-      "max_seconds": 0.91
+      "count": 4,
+      "total_seconds": 2.67,
+      "max_seconds": 0.7
     },
     "analisi editoriale AI v72": {
-      "count": 8,
-      "total_seconds": 29.2,
-      "max_seconds": 17.31
-    },
-    "WP lookup URL esistente": {
-      "count": 3,
-      "total_seconds": 2.57,
-      "max_seconds": 0.95
+      "count": 7,
+      "total_seconds": 41.64,
+      "max_seconds": 21.88
     },
     "WP recent posts dedupe": {
       "count": 1,
-      "total_seconds": 0.82,
-      "max_seconds": 0.82
+      "total_seconds": 1.59,
+      "max_seconds": 1.59
     },
     "categoria da analisi editoriale v72": {
-      "count": 2,
-      "total_seconds": 2.46,
-      "max_seconds": 1.32
+      "count": 1,
+      "total_seconds": 1.9,
+      "max_seconds": 1.9
     },
     "traduzione": {
-      "count": 5,
-      "total_seconds": 139.61,
-      "max_seconds": 88.82
+      "count": 4,
+      "total_seconds": 83.74,
+      "max_seconds": 47.0
     },
     "creazione post WordPress": {
-      "count": 4,
-      "total_seconds": 23.3,
-      "max_seconds": 12.3
+      "count": 3,
+      "total_seconds": 22.65,
+      "max_seconds": 11.81
     },
-    "totale articolo pubblicato 'Former WWE Star Spotted At Performance Center Ahead of Tuesd'": {
-      "count": 1,
-      "total_seconds": 15.66,
-      "max_seconds": 15.66
+    "WP lookup URL esistente": {
+      "count": 2,
+      "total_seconds": 1.6,
+      "max_seconds": 0.97
     },
-    "totale articolo pubblicato 'WWE No Longer Advertising SNME Bout As Title Match'": {
+    "totale articolo pubblicato 'MJF Claims He Sued Young Fan Who Attacked Him During AEW Dyn'": {
       "count": 1,
-      "total_seconds": 27.51,
-      "max_seconds": 27.51
+      "total_seconds": 34.75,
+      "max_seconds": 34.75
     },
-    "totale articolo pubblicato 'Darby Allin Says Having Kids Won't Stop Him From Taking Dang'": {
+    "totale articolo pubblicato 'MJF Reacts to Mick Foley's Upcoming AEW Debut With Cold Resp'": {
       "count": 1,
-      "total_seconds": 96.39,
-      "max_seconds": 96.39
-    },
-    "totale articolo pubblicato 'WWE Quietly Making Big Changes To Tag Team Division After Ma'": {
-      "count": 1,
-      "total_seconds": 13.93,
-      "max_seconds": 13.93
+      "total_seconds": 17.03,
+      "max_seconds": 17.03
     }
   },
   "article_metrics": [
     {
-      "path": "published/20260520_174027_001_enzo-amore-avvistato-al-wwe-performance-center-prima-di-nxt_4987_final.html",
+      "path": "published/20260520_201123_001_wwe-triple-h-e-nick-khan-elogiano-limpatto-di-danhausen-in-azienda_4999_final.html",
       "exists": true,
-      "word_count": 297,
-      "paragraph_count": 8,
-      "blockquote_count": 0,
-      "image_count": 0,
-      "iframe_count": 0,
-      "embed_hint_count": 1,
-      "title": "Enzo Amore avvistato al WWE Performance Center prima di NXT"
-    },
-    {
-      "path": "published/20260520_174056_002_wwe-il-match-tra-becky-lynch-e-sol-ruca-a-saturday-nights-main-event-non-sarà-per-il-titol_4990_final.html",
-      "exists": true,
-      "word_count": 247,
-      "paragraph_count": 5,
-      "blockquote_count": 1,
-      "image_count": 0,
-      "iframe_count": 0,
-      "embed_hint_count": 3,
-      "title": "WWE: il match tra Becky Lynch e Sol Ruca a Saturday Night's Main Event non sarà per il titolo"
-    },
-    {
-      "path": "published/20260520_174234_003_darby-allin-avere-figli-non-mi-farà-smettere-di-correre-rischi_4993_final.html",
-      "exists": true,
-      "word_count": 283,
-      "paragraph_count": 6,
+      "word_count": 245,
+      "paragraph_count": 3,
       "blockquote_count": 0,
       "image_count": 0,
       "iframe_count": 0,
       "embed_hint_count": 0,
-      "title": "Darby Allin: \"Avere figli non mi farà smettere di correre rischi\""
+      "title": "WWE: Triple H e Nick Khan elogiano l'impatto di Danhausen in azienda"
     },
     {
-      "path": "published/20260520_174308_004_wwe-la-federazione-lavora-al-rilancio-della-categoria-tag-team-dopo-i-recenti-addii_4996_final.html",
+      "path": "published/20260520_201231_002_mjf-dichiara-di-aver-fatto-causa-alla-giovane-fan-che-lo-ha-colpito-a-aew-dynamite_5002_final.html",
       "exists": true,
-      "word_count": 271,
+      "word_count": 275,
       "paragraph_count": 7,
-      "blockquote_count": 0,
+      "blockquote_count": 3,
       "image_count": 0,
       "iframe_count": 0,
-      "embed_hint_count": 1,
-      "title": "WWE: la federazione lavora al rilancio della categoria tag team dopo i recenti addii"
+      "embed_hint_count": 7,
+      "title": "MJF dichiara di aver fatto causa alla giovane fan che lo ha colpito a AEW Dynamite"
+    },
+    {
+      "path": "published/20260520_201254_003_la-reazione-gelida-di-mjf-al-debutto-di-mick-foley-in-aew_5005_final.html",
+      "exists": true,
+      "word_count": 261,
+      "paragraph_count": 6,
+      "blockquote_count": 2,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 5,
+      "title": "La reazione gelida di MJF al debutto di Mick Foley in AEW"
     }
   ],
   "daily_counts": {
-    "published_today": 12,
-    "published_last_4h": 5,
-    "runs_today": 7
+    "published_today": 15,
+    "published_last_4h": 7,
+    "runs_today": 8
   }
 }
