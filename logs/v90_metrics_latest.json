@@ -1,23 +1,22 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-20T11:27:31",
-  "run_start": "2026-05-20 11:26:03",
-  "run_end": "2026-05-20 11:26:03",
-  "bot_version": "v90_1_quality_correctness (6f2803e)",
-  "candidate_count": 8,
+  "collected_at": "2026-05-20T14:05:25",
+  "run_start": "2026-05-20 14:04:34",
+  "run_end": "2026-05-20 14:04:34",
+  "bot_version": "v90_1_quality_correctness (3d7e029)",
+  "candidate_count": 9,
   "mode": "normal",
   "max_new": 3,
   "published_total": 1,
   "published_pending": 0,
   "published_new": 1,
-  "candidates_tried": 8,
-  "score_lines_count": 18,
-  "skip_count": 33,
+  "candidates_tried": 9,
+  "score_lines_count": 21,
+  "skip_count": 36,
   "skip_v89_count": 0,
-  "gemini_calls_observed": 9,
+  "gemini_calls_observed": 10,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 8,
-    "gemini-3-flash-preview": 1
+    "gemini-3.1-flash-lite": 10
   },
   "gemini_discarded_models": {},
   "model_tasks": [
@@ -30,8 +29,8 @@
       "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
     },
     {
-      "task": "translate_medium",
-      "chain": "gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
     },
     {
       "task": "postedit",
@@ -49,73 +48,73 @@
   "model_task_counts": {
     "healthcheck": 1,
     "editorial_analysis": 2,
-    "translate_medium": 1,
+    "translate_normal": 1,
     "postedit": 1,
     "title": 1
   },
   "perf": {
-    "WP lookup URL esistente": {
-      "count": 2,
-      "total_seconds": 1.47,
-      "max_seconds": 0.79
+    "WP lookup event_key": {
+      "count": 1,
+      "total_seconds": 1.5,
+      "max_seconds": 1.5
     },
     "scraping articolo": {
-      "count": 1,
-      "total_seconds": 0.86,
-      "max_seconds": 0.86
+      "count": 2,
+      "total_seconds": 2.35,
+      "max_seconds": 1.44
     },
     "estrazione blocchi": {
-      "count": 1,
-      "total_seconds": 0.72,
-      "max_seconds": 0.72
+      "count": 2,
+      "total_seconds": 1.13,
+      "max_seconds": 0.58
     },
     "analisi editoriale AI v72": {
-      "count": 5,
-      "total_seconds": 11.81,
-      "max_seconds": 4.91
+      "count": 6,
+      "total_seconds": 13.6,
+      "max_seconds": 4.08
     },
     "WP recent posts dedupe": {
       "count": 1,
-      "total_seconds": 0.7,
-      "max_seconds": 0.7
+      "total_seconds": 0.9,
+      "max_seconds": 0.9
     },
     "categoria da analisi editoriale v72": {
       "count": 1,
-      "total_seconds": 1.01,
-      "max_seconds": 1.01
+      "total_seconds": 1.15,
+      "max_seconds": 1.15
     },
     "traduzione": {
       "count": 1,
-      "total_seconds": 53.44,
-      "max_seconds": 53.44
+      "total_seconds": 6.44,
+      "max_seconds": 6.44
     },
     "creazione post WordPress": {
       "count": 1,
-      "total_seconds": 3.38,
-      "max_seconds": 3.38
+      "total_seconds": 4.64,
+      "max_seconds": 4.64
     },
-    "totale articolo pubblicato 'Jimmy Hart Reveals Hulk Hogan Knew Fans Could Turn on Him Du'": {
+    "totale articolo pubblicato 'WWE Made Big Decision About Overseas Plans During Internal M'": {
       "count": 1,
-      "total_seconds": 62.53,
-      "max_seconds": 62.53
+      "total_seconds": 16.16,
+      "max_seconds": 16.16
     }
   },
   "article_metrics": [
     {
-      "path": "published/20260520_112715_001_jimmy-hart-hulk-hogan-sapeva-di-poter-essere-fischiato-al-debutto-di-raw-su-netflix_4981_final.html",
+      "path": "published/20260520_140504_001_wwe-confermati-i-piani-per-gli-eventi-in-arabia-saudita-nonostante-le-tensioni-internazion_4984_final.html",
       "exists": true,
-      "word_count": 570,
-      "paragraph_count": 8,
-      "blockquote_count": 6,
+      "word_count": 267,
+      "paragraph_count": 7,
+      "blockquote_count": 0,
       "image_count": 0,
       "iframe_count": 0,
-      "embed_hint_count": 12,
-      "title": "Jimmy Hart: \"Hulk Hogan sapeva di poter essere fischiato al debutto di Raw su Netflix\""
+      "embed_hint_count": 0,
+      "title": "WWE: confermati i piani per gli eventi in Arabia Saudita nonostante le tensioni internazionali"
     }
   ],
   "daily_counts": {
-    "published_today": 7,
-    "published_last_4h": 3,
-    "runs_today": 5
+    "published_today": 8,
+    "published_last_4h": 2,
+    "runs_today": 6
   }
 }

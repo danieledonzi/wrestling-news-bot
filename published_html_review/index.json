@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-20 11:26:03",
-  "last_bot_version": "v90_1_quality_correctness (6f2803e)",
-  "updated_at": "2026-05-20T11:27:30",
-  "total_items": 127,
+  "last_run_id": "2026-05-20 14:04:34",
+  "last_bot_version": "v90_1_quality_correctness (3d7e029)",
+  "updated_at": "2026-05-20T14:05:24",
+  "total_items": 128,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1020,6 +1020,14 @@
       "original_html_file": "20260520_112717_001_jimmy-hart-hulk-hogan-sapeva-di-poter-essere-fischiato-al-debutto-di-raw-su-netf_8d6ac568_original.html",
       "final_html_file": "20260520_112717_001_jimmy-hart-hulk-hogan-sapeva-di-poter-essere-fischiato-al-debutto-di-raw-su-netf_8d6ac568_final.html",
       "metadata_file": "20260520_112717_001_jimmy-hart-hulk-hogan-sapeva-di-poter-essere-fischiato-al-debutto-di-raw-su-netf_8d6ac568_metadata.json"
+    },
+    {
+      "run_id": "2026-05-20 14:04:34",
+      "title": "WWE: confermati i piani per gli eventi in Arabia Saudita nonostante le tensioni internazionali",
+      "url": "https://www.ringsidenews.com/wwe-made-big-decision-about-overseas-plans-during-internal-meeting/",
+      "original_html_file": "20260520_140506_001_wwe-confermati-i-piani-per-gli-eventi-in-arabia-saudita-nonostante-le-tensioni-i_3db0491a_original.html",
+      "final_html_file": "20260520_140506_001_wwe-confermati-i-piani-per-gli-eventi-in-arabia-saudita-nonostante-le-tensioni-i_3db0491a_final.html",
+      "metadata_file": "20260520_140506_001_wwe-confermati-i-piani-per-gli-eventi-in-arabia-saudita-nonostante-le-tensioni-i_3db0491a_metadata.json"
     }
   ]
 }
