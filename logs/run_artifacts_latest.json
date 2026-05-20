@@ -1,12 +1,22 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-20 11:09:29",
-  "bot_version": "v90_1_quality_correctness (fd4599b)",
-  "git_sha": "fd4599b1d741d302102bfc9b969d1be3a074fdcd",
-  "created_at": "2026-05-20T11:10:03",
-  "published_count": 0,
-  "published_post_ids": [],
-  "published_artifacts": [],
+  "run_id": "2026-05-20 11:26:03",
+  "bot_version": "v90_1_quality_correctness (6f2803e)",
+  "git_sha": "6f2803e96cfe7ab1005a37d6366b4b68f8aeda82",
+  "created_at": "2026-05-20T11:27:31",
+  "published_count": 1,
+  "published_post_ids": [
+    "4981"
+  ],
+  "published_artifacts": [
+    {
+      "post_id": 4981,
+      "title": "Jimmy Hart: \"Hulk Hogan sapeva di poter essere fischiato al debutto di Raw su Netflix\"",
+      "source_url": "https://www.ringsidenews.com/jimmy-hart-reveals-hulk-hogan-knew-fans-could-turn-him-during-wwe-raw-netflix-debut/",
+      "html_file": "published/20260520_112715_001_jimmy-hart-hulk-hogan-sapeva-di-poter-essere-fischiato-al-debutto-di-raw-su-netflix_4981_final.html",
+      "metadata_file": "published/20260520_112715_001_jimmy-hart-hulk-hogan-sapeva-di-poter-essere-fischiato-al-debutto-di-raw-su-netflix_4981_metadata.json"
+    }
+  ],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",

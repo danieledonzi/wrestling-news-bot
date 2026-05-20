@@ -1,22 +1,23 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-20T11:10:04",
-  "run_start": "2026-05-20 11:09:29",
-  "run_end": "2026-05-20 11:09:29",
-  "bot_version": "v90_1_quality_correctness (fd4599b)",
-  "candidate_count": 7,
+  "collected_at": "2026-05-20T11:27:31",
+  "run_start": "2026-05-20 11:26:03",
+  "run_end": "2026-05-20 11:26:03",
+  "bot_version": "v90_1_quality_correctness (6f2803e)",
+  "candidate_count": 8,
   "mode": "normal",
   "max_new": 3,
-  "published_total": 0,
+  "published_total": 1,
   "published_pending": 0,
-  "published_new": 0,
-  "candidates_tried": 7,
-  "score_lines_count": 15,
-  "skip_count": 34,
+  "published_new": 1,
+  "candidates_tried": 8,
+  "score_lines_count": 18,
+  "skip_count": 33,
   "skip_v89_count": 0,
-  "gemini_calls_observed": 5,
+  "gemini_calls_observed": 9,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 5
+    "gemini-3.1-flash-lite": 8,
+    "gemini-3-flash-preview": 1
   },
   "gemini_discarded_models": {},
   "model_tasks": [
@@ -27,28 +28,94 @@
     {
       "task": "editorial_analysis",
       "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_medium",
+      "chain": "gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
+    },
+    {
+      "task": "editorial_analysis",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
     }
   ],
   "model_task_counts": {
     "healthcheck": 1,
-    "editorial_analysis": 1
+    "editorial_analysis": 2,
+    "translate_medium": 1,
+    "postedit": 1,
+    "title": 1
   },
   "perf": {
     "WP lookup URL esistente": {
       "count": 2,
-      "total_seconds": 1.95,
-      "max_seconds": 1.33
+      "total_seconds": 1.47,
+      "max_seconds": 0.79
+    },
+    "scraping articolo": {
+      "count": 1,
+      "total_seconds": 0.86,
+      "max_seconds": 0.86
+    },
+    "estrazione blocchi": {
+      "count": 1,
+      "total_seconds": 0.72,
+      "max_seconds": 0.72
     },
     "analisi editoriale AI v72": {
-      "count": 4,
-      "total_seconds": 18.27,
-      "max_seconds": 8.65
+      "count": 5,
+      "total_seconds": 11.81,
+      "max_seconds": 4.91
+    },
+    "WP recent posts dedupe": {
+      "count": 1,
+      "total_seconds": 0.7,
+      "max_seconds": 0.7
+    },
+    "categoria da analisi editoriale v72": {
+      "count": 1,
+      "total_seconds": 1.01,
+      "max_seconds": 1.01
+    },
+    "traduzione": {
+      "count": 1,
+      "total_seconds": 53.44,
+      "max_seconds": 53.44
+    },
+    "creazione post WordPress": {
+      "count": 1,
+      "total_seconds": 3.38,
+      "max_seconds": 3.38
+    },
+    "totale articolo pubblicato 'Jimmy Hart Reveals Hulk Hogan Knew Fans Could Turn on Him Du'": {
+      "count": 1,
+      "total_seconds": 62.53,
+      "max_seconds": 62.53
     }
   },
-  "article_metrics": [],
+  "article_metrics": [
+    {
+      "path": "published/20260520_112715_001_jimmy-hart-hulk-hogan-sapeva-di-poter-essere-fischiato-al-debutto-di-raw-su-netflix_4981_final.html",
+      "exists": true,
+      "word_count": 570,
+      "paragraph_count": 8,
+      "blockquote_count": 6,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 12,
+      "title": "Jimmy Hart: \"Hulk Hogan sapeva di poter essere fischiato al debutto di Raw su Netflix\""
+    }
+  ],
   "daily_counts": {
-    "published_today": 6,
-    "published_last_4h": 2,
-    "runs_today": 4
+    "published_today": 7,
+    "published_last_4h": 3,
+    "runs_today": 5
   }
 }
