@@ -1,54 +1,29 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-20T22:11:43",
-  "run_start": "2026-05-20 22:10:10",
-  "run_end": "2026-05-20 22:10:10",
-  "bot_version": "v90_1_quality_correctness (279096c)",
-  "candidate_count": 7,
-  "mode": "normal",
-  "max_new": 3,
+  "collected_at": "2026-05-20T23:48:01",
+  "run_start": "2026-05-20 23:47:18",
+  "run_end": "2026-05-20 23:47:18",
+  "bot_version": "v90_1_quality_correctness (4db68f2)",
+  "candidate_count": 0,
+  "mode": null,
+  "max_new": 0,
   "published_total": 0,
   "published_pending": 0,
   "published_new": 0,
-  "candidates_tried": 7,
-  "score_lines_count": 13,
+  "candidates_tried": 0,
+  "score_lines_count": 10,
   "skip_count": 19,
-  "skip_v89_count": 1,
-  "gemini_calls_observed": 4,
-  "gemini_models": {
-    "gemini-3.1-flash-lite": 4
-  },
+  "skip_v89_count": 0,
+  "gemini_calls_observed": 0,
+  "gemini_models": {},
   "gemini_discarded_models": {},
-  "model_tasks": [
-    {
-      "task": "healthcheck",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
-    }
-  ],
-  "model_task_counts": {
-    "healthcheck": 1,
-    "editorial_analysis": 1
-  },
-  "perf": {
-    "WP lookup URL esistente": {
-      "count": 3,
-      "total_seconds": 2.99,
-      "max_seconds": 1.71
-    },
-    "analisi editoriale AI v72": {
-      "count": 3,
-      "total_seconds": 48.24,
-      "max_seconds": 23.95
-    }
-  },
+  "model_tasks": [],
+  "model_task_counts": {},
+  "perf": {},
   "article_metrics": [],
   "daily_counts": {
     "published_today": 15,
     "published_last_4h": 3,
-    "runs_today": 9
+    "runs_today": 10
   }
 }
