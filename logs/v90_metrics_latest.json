@@ -1,28 +1,24 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-20T08:25:36",
-  "run_start": "2026-05-20 08:23:38",
-  "run_end": "2026-05-20 08:23:38",
-  "bot_version": "v89_editorial_report_quality (51c0932)",
-  "candidate_count": 11,
+  "collected_at": "2026-05-20T11:10:04",
+  "run_start": "2026-05-20 11:09:29",
+  "run_end": "2026-05-20 11:09:29",
+  "bot_version": "v90_1_quality_correctness (fd4599b)",
+  "candidate_count": 7,
   "mode": "normal",
   "max_new": 3,
-  "published_total": 2,
+  "published_total": 0,
   "published_pending": 0,
-  "published_new": 2,
-  "candidates_tried": 9,
-  "score_lines_count": 22,
-  "skip_count": 32,
+  "published_new": 0,
+  "candidates_tried": 7,
+  "score_lines_count": 15,
+  "skip_count": 34,
   "skip_v89_count": 0,
-  "gemini_calls_observed": 15,
+  "gemini_calls_observed": 5,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 11,
-    "gemini-3-flash-preview": 2,
-    "gemini-2.5-flash-lite": 2
+    "gemini-3.1-flash-lite": 5
   },
-  "gemini_discarded_models": {
-    "gemini-3.1-flash-lite": 1
-  },
+  "gemini_discarded_models": {},
   "model_tasks": [
     {
       "task": "healthcheck",
@@ -31,132 +27,28 @@
     {
       "task": "editorial_analysis",
       "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "translate_normal",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "postedit",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "title",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
-    },
-    {
-      "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "translate_normal",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "postedit",
-      "chain": "gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "repair",
-      "chain": "gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "title",
-      "chain": "gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
     }
   ],
   "model_task_counts": {
     "healthcheck": 1,
-    "editorial_analysis": 2,
-    "translate_normal": 2,
-    "postedit": 2,
-    "title": 2,
-    "repair": 1
+    "editorial_analysis": 1
   },
   "perf": {
-    "WP strict report lookup": {
-      "count": 1,
-      "total_seconds": 1.32,
-      "max_seconds": 1.32
+    "WP lookup URL esistente": {
+      "count": 2,
+      "total_seconds": 1.95,
+      "max_seconds": 1.33
     },
     "analisi editoriale AI v72": {
-      "count": 6,
-      "total_seconds": 21.63,
-      "max_seconds": 14.61
-    },
-    "scraping articolo": {
-      "count": 1,
-      "total_seconds": 1.01,
-      "max_seconds": 1.01
-    },
-    "estrazione blocchi": {
-      "count": 1,
-      "total_seconds": 0.6,
-      "max_seconds": 0.6
-    },
-    "WP recent posts dedupe": {
-      "count": 1,
-      "total_seconds": 0.85,
-      "max_seconds": 0.85
-    },
-    "categoria da analisi editoriale v72": {
-      "count": 1,
-      "total_seconds": 1.18,
-      "max_seconds": 1.18
-    },
-    "traduzione": {
-      "count": 2,
-      "total_seconds": 53.28,
-      "max_seconds": 48.11
-    },
-    "creazione post WordPress": {
-      "count": 2,
-      "total_seconds": 14.82,
-      "max_seconds": 8.75
-    },
-    "totale articolo pubblicato 'WWE Reveals Why More Main Roster House Shows Are Returning T'": {
-      "count": 1,
-      "total_seconds": 18.45,
-      "max_seconds": 18.45
-    },
-    "upload immagine interna": {
-      "count": 2,
-      "total_seconds": 2.3,
-      "max_seconds": 1.19
-    },
-    "totale articolo pubblicato 'AEW Crossover Star Mistico Reportedly Injured After Appearin'": {
-      "count": 1,
-      "total_seconds": 70.04,
-      "max_seconds": 70.04
+      "count": 4,
+      "total_seconds": 18.27,
+      "max_seconds": 8.65
     }
   },
-  "article_metrics": [
-    {
-      "path": "published/20260520_082422_001_wwe-il-motivo-dietro-laumento-dei-live-event-estivi-per-il-main-roster_4968_final.html",
-      "exists": true,
-      "word_count": 235,
-      "paragraph_count": 5,
-      "blockquote_count": 0,
-      "image_count": 0,
-      "iframe_count": 0,
-      "embed_hint_count": 0,
-      "title": "WWE: il motivo dietro l'aumento dei live event estivi per il main roster"
-    },
-    {
-      "path": "published/20260520_082534_002_mistico-costretto-alle-stampelle-a-puebla-infortunio-per-la-stella-di-aew-e-cmll_4973_final.html",
-      "exists": true,
-      "word_count": 542,
-      "paragraph_count": 8,
-      "blockquote_count": 1,
-      "image_count": 1,
-      "iframe_count": 0,
-      "embed_hint_count": 4,
-      "title": "Mistico costretto alle stampelle a Puebla, infortunio per la stella di AEW e CMLL"
-    }
-  ],
+  "article_metrics": [],
   "daily_counts": {
     "published_today": 6,
-    "published_last_4h": 5,
-    "runs_today": 3
+    "published_last_4h": 2,
+    "runs_today": 4
   }
 }
