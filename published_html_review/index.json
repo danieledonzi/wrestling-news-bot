@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-20 04:44:59",
-  "last_bot_version": "v89_editorial_report_quality (1adea8d)",
-  "updated_at": "2026-05-20T04:47:54",
-  "total_items": 124,
+  "last_run_id": "2026-05-20 08:23:38",
+  "last_bot_version": "v89_editorial_report_quality (51c0932)",
+  "updated_at": "2026-05-20T08:25:35",
+  "total_items": 126,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -996,6 +996,22 @@
       "original_html_file": "20260520_044754_003_spoiler-nxt-lola-vice-difender-il-nxt-women-s-championship-contro-izzi-dame_92e2fa23_original.html",
       "final_html_file": "20260520_044754_003_spoiler-nxt-lola-vice-difender-il-nxt-women-s-championship-contro-izzi-dame_92e2fa23_final.html",
       "metadata_file": "20260520_044754_003_spoiler-nxt-lola-vice-difender-il-nxt-women-s-championship-contro-izzi-dame_92e2fa23_metadata.json"
+    },
+    {
+      "run_id": "2026-05-20 08:23:38",
+      "title": "WWE: il motivo dietro l'aumento dei live event estivi per il main roster",
+      "url": "https://www.ringsidenews.com/wwe-reveals-why-more-main-roster-house-shows-returning-this-summer/",
+      "original_html_file": "20260520_082424_001_wwe-il-motivo-dietro-l-aumento-dei-live-event-estivi-per-il-main-roster_0b19c6a1_original.html",
+      "final_html_file": "20260520_082424_001_wwe-il-motivo-dietro-l-aumento-dei-live-event-estivi-per-il-main-roster_0b19c6a1_final.html",
+      "metadata_file": "20260520_082424_001_wwe-il-motivo-dietro-l-aumento-dei-live-event-estivi-per-il-main-roster_0b19c6a1_metadata.json"
+    },
+    {
+      "run_id": "2026-05-20 08:23:38",
+      "title": "Mistico costretto alle stampelle a Puebla, infortunio per la stella di AEW e CMLL",
+      "url": "https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll/",
+      "original_html_file": "20260520_082535_002_mistico-costretto-alle-stampelle-a-puebla-infortunio-per-la-stella-di-aew-e-cmll_fcf8b789_original.html",
+      "final_html_file": "20260520_082535_002_mistico-costretto-alle-stampelle-a-puebla-infortunio-per-la-stella-di-aew-e-cmll_fcf8b789_final.html",
+      "metadata_file": "20260520_082535_002_mistico-costretto-alle-stampelle-a-puebla-infortunio-per-la-stella-di-aew-e-cmll_fcf8b789_metadata.json"
     }
   ]
 }
