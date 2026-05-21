@@ -1,4 +1,4 @@
-name: OpenWrestlingTV Bot v90.1.2
+name: OpenWrestlingTV Bot v90.1.3
 
 on:
   workflow_dispatch:
@@ -91,13 +91,14 @@ jobs:
               print('[HOTFIX v90.0.1] Inline image dict normalization applied')
           PY
 
-      - name: Apply v90.1.2 quality correctness patches
+      - name: Apply v90.1.3 quality correctness patches
         run: |
           set -e
           python scripts/apply_bot_patch_v90_1.py
           python scripts/apply_bot_patch_v90_1_review_fix.py
           python scripts/apply_bot_patch_v90_1_1.py
           python scripts/apply_bot_patch_v90_1_2.py
+          python scripts/apply_bot_patch_v90_1_3.py
 
       - name: Verify consolidated source
         run: |
@@ -115,11 +116,12 @@ jobs:
               'v90.1: quality correctness guards',
               'v90.1.1: media duplicate and spoiler fixes',
               'v90.1.2: calendar-aware spoiler guard',
+              'v90.1.3: spoiler hotfix',
           ]
           missing = [marker for marker in required if marker not in text]
           if missing:
-              raise SystemExit('[SOURCE CONSOLIDATION v90.1.2] missing markers: ' + ', '.join(missing))
-          print('[SOURCE CONSOLIDATION v90.1.2] bot.py contiene la chain consolidata fino a v90.1.2')
+              raise SystemExit('[SOURCE CONSOLIDATION v90.1.3] missing markers: ' + ', '.join(missing))
+          print('[SOURCE CONSOLIDATION v90.1.3] bot.py contiene la chain consolidata fino a v90.1.3')
           PY
 
       - name: Print runner public IP
@@ -128,7 +130,7 @@ jobs:
           curl -s https://api.ipify.org || true
           echo
 
-      - name: Run bot v90_1_2
+      - name: Run bot v90_1_3
         id: run_bot
         env:
           WP_USER: ${{ secrets.WP_USER }}
@@ -167,6 +169,8 @@ jobs:
           V90_1_1_PRE_REPORT_SPOILER_ENABLED: "1"
           V90_1_2_ENABLED: "1"
           V90_1_2_CALENDAR_SPOILER_ENABLED: "1"
+          V90_1_3_ENABLED: "1"
+          V90_1_3_SPOILER_HOTFIX_ENABLED: "1"
         run: |
           set +e
           python bot.py
@@ -205,7 +209,7 @@ jobs:
                           target = path.with_name(f"{target.stem}_{i}{target.suffix}")
                           i += 1
                       path.rename(target)
-                      print(f"[ARTIFACT SANITIZE v90.1.2] {path} -> {target}")
+                      print(f"[ARTIFACT SANITIZE v90.1.3] {path} -> {target}")
           PY
 
       - name: Persist bot artifacts to repository
@@ -215,7 +219,7 @@ jobs:
           mkdir -p published published_html_review logs
           touch logs/.keep published/.keep published_html_review/.keep
 
-          echo "[ARTIFACT PERSIST v90.1.2] Stato prima dello staging"
+          echo "[ARTIFACT PERSIST v90.1.3] Stato prima dello staging"
           git status --short --ignored logs published published_html_review pending_articles.json history.txt history.json confirmed_published_reports.json .bot_exit_code || true
 
           git add -A -- published published_html_review logs || true
@@ -226,15 +230,15 @@ jobs:
             fi
           done
 
-          echo "[ARTIFACT PERSIST v90.1.2] Stato dopo lo staging"
+          echo "[ARTIFACT PERSIST v90.1.3] Stato dopo lo staging"
           git status --short || true
 
           if git diff --cached --quiet; then
-            echo "[ARTIFACT PERSIST v90.1.2] Nessuna modifica staged da committare"
+            echo "[ARTIFACT PERSIST v90.1.3] Nessuna modifica staged da committare"
           else
-            git commit -m "chore(bot): persist v90.1.2 artifacts and logs [skip ci]"
+            git commit -m "chore(bot): persist v90.1.3 artifacts and logs [skip ci]"
             git push
-            echo "[ARTIFACT PERSIST v90.1.2] Artifact, metrics, published e master log committati nel repository"
+            echo "[ARTIFACT PERSIST v90.1.3] Artifact, metrics, published e master log committati nel repository"
           fi
 
       - name: Upload bot artifacts
@@ -263,6 +267,6 @@ jobs:
             code=$(cat .bot_exit_code)
           fi
           if [ "$code" != "0" ]; then
-            echo "[BOT v90.1.2] Bot terminato con exit code $code"
+            echo "[BOT v90.1.3] Bot terminato con exit code $code"
             exit "$code"
           fi
