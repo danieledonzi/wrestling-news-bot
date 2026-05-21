@@ -4836,3 +4836,183 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
 ===== RUN END [2026-05-21 10:37:43] VERSION [v90_1_quality_correctness (c5136fb)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+
+===== RUN START [2026-05-21 11:07:26] VERSION [v90_1_1_media_spoiler_fix (8125bdb)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 14 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2178287/aew-dynamite-darby-allin-speedball-mike-bailey-world-title/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (20/75): AEW's Paul Wight Is Impressed With Coaching Skills Of WWE HOFer
+[REPORT v87.2] Report confermato da history forte: report:aew-dynamite-2026-05-20
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:aew-dynamite-2026-05-20 - AEW Dynamite & Collision Results 5/20 - Two Titles On The Line, Anything Goes Match
+[SKIP] Score sotto soglia editoriale (0/75): WWE Saturday Night's Main Event 5/23/2026: Draws & Duds
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Bully Ray, Tommy Dreamer Discuss What Brock Lesnar's WWE Raw Return Means For Oba Femi
+[SKIP] Score sotto soglia editoriale (56/75): Bully Ray, Tommy Dreamer Discuss What Brock Lesnar's WWE Raw Return Means For Oba Femi
+[PERF v71] WP lookup event_key: 1.23s
+[FIX] Event key in history ma non confermata su WordPress: event:title:darby-allin:world:championship - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (16/75): WWE HOFer JBL Believes A Pro Wrestling Union Is A 'Possibility'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP] Score sotto soglia editoriale (48/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[SKIP] URL già in history: https://www.wrestlinginc.com/2178277/aew-dynamite-willow-nightingale-injured-withdraws-owen-hart-tournament-vacates-tbs/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll/
+[SKIP] Score sotto soglia editoriale (5/75): Jim Ross On Kevin Nash Backing Wrestlers' Union: 'He Knows What He's Talking About'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177184/john-cena-in-ring-retirement-not-mean-retiring-wwe/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (43/75): Ludwig Kaiser Arrested In Florida On Battery Charge
+[PERF v71] WP lookup event_key: 1.21s
+[FIX] Event key in history ma non confermata su WordPress: event:title:darby-allin:world:tag:championship:dynamite - provo a pubblicare
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Jim Ross Explains Why Mick Foley Is a Huge Get for AEW
+[SKIP] Score sotto soglia editoriale (49/75): Jim Ross Explains Why Mick Foley Is a Huge Get for AEW
+[SKIP] Score sotto soglia editoriale (33/75): Jim Ross Reveals Doctors Are Concerned About Possible Dementia or Alzheimer's
+[SKIP] URL già in history: https://www.ringsidenews.com/baron-corbin-mocks-claims-he-wrapped-outside-commitments-amid-wwe-return-rumors/
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - MJF Says WWE Fans Are Turning To AEW Amid Frustration With WWE Product
+[SKIP] Score sotto soglia editoriale (49/75): MJF Says WWE Fans Are Turning To AEW Amid Frustration With WWE Product
+[SKIP] Score sotto soglia editoriale (27/75): Jack Cartwheel Says He's No Longer Under WWE ID Deal
+[SKIP] Score sotto soglia editoriale (25/75): Liv Morgan Calls Out Mountain Dew Over Baja Blast Shortage
+[SKIP] URL già in history: https://www.ringsidenews.com/tiffany-stratton-reveals-wwe-almost-gave-her-completely-different-ring-name/
+[SKIP] Score sotto soglia editoriale (34/75): WWE Announces New Performance Center Rookie Class Featuring Multiple Rising Talents
+[REPORT v87.2] Report confermato da history forte: report:aew-dynamite-2026-05-20
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:aew-dynamite-2026-05-20 - AEW Dynamite/Collision Results, Highlights and Key Moments for May 20, 2026
+[SCORE] 100 high - Becky Lynch Shuts Down Misinformation About Her Match at Saturday Night's Main Event | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, show settimanale, v62 titolo/championship, v71 freshness=0.439
+[SCORE] 81 high - Ludwig Kaiser Turned Himself In On Florida Battery Warrant Before Posting $1,000 Bond | WWE/main roster, WWE main roster + storyline/evento, evento legale/controversia, v62 evento legale grave, v71 source reliability soft penalty, v71 freshness=0.696
+[SCORE] 71 medium - Willow Nightingale Vacates AEW TBS Title & Pulls Out Of Owen Hart Tournament | AEW, impatto roster/storyline, breaking/major update, show settimanale, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.571, v48 tier2: 55-74
+[SCORE] 71 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 68 medium - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, show settimanale, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 67 medium - Willow Nightingale First Remarks After Vacating AEW TBS Championship | AEW, impatto roster/storyline, infortunio, show settimanale, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.58, v48 tier2: 55-74
+[SCORE] 64 medium - Backstage Reaction to Darby Allin's AEW World Title Run Revealed | AEW, ritorno/debutto, PLE/PPV, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.563, v48 tier2: 55-74
+[SCORE] 60 medium - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 58 low - Kyle O'Reilly Outlasts Jon Moxley, Earns Shot At AEW Continental Title On Dynamite | AEW, titolo/championship, show settimanale, v62 titolo/championship, v71 freshness=0.492, v48 tier2: 55-74
+[SCORE] 50 low - Jim Ross Shares Thoughts On Darby Allin's AEW World Championship Reign | AEW, titolo/championship, v62 titolo/championship, v71 freshness=0.358, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 1 news >=90, 2 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 11 | mode=normal | max nuove=3 | pending pubblicati=0
+[REPORT v87.2] True-results confermato da history forte: skip offline-safe report:wwe-raw-2026-05-18 - Becky Lynch Shuts Down Misinformation About Her Match at Saturday Night's Main Event
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Ludwig Kaiser Turned Himself In On Florida Battery Warrant Before Posting $1,000 Bond
+[BOT] semantic_id=ludwig-kaiser-turned-himself-in-on-florida-battery-warrant-before-posting-1000-bond
+[SCORE] iniziale=81 priority=high
+[PERF v71] scraping articolo: 1.02s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=13, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=13, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.77s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta una notizia di cronaca giudiziaria già avvenuta riguardante un wrestler WWE. Non è un rumor né un opinione, ma un fatto documentato.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'battery' come 'batteria', usare 'aggressione' o 'percosse' nel contesto legale.; Mantenere i termini tecnici legali precisi.; Evitare toni sensazionalistici, mantenere lo stile giornalistico della testata.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta una notizia di cronaca giudiziaria già avvenuta riguardante un wrestler WWE. Non è un rumor né un opinione, ma un fatto documentato.
+[PERF v71] analisi editoriale AI v72: 1.26s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Ludwig Kaiser Turned Himself In On Florida Battery Warrant Before Posting $1,000 Bond
+[SCORE] raffinato=98 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, evento legale/controversia, v62 evento legale grave
+[V71] story_signature=stable:ludwig_kaiser_turned_himself_in_on_florida_battery_warrant_b|status|wwe semantic_status=new_story freshness=0.93
+[PERF v71] WP recent posts dedupe: 0.65s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 0.99s
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=13
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[CAREER v80.9] Repair frase career/status con gemini-3.1-flash-lite
+[CAREER v80.9] Guardrail career/status applicato dopo post-edit
+[PERF v71] traduzione: 28.24s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WWE: Ludwig Kaiser si è costituito in Florida per un mandato d'arresto per lesioni
+[SPOILER v90.1.1] Aggiunto spoiler pre-report: WWE: Ludwig Kaiser si è costituito in Florida per un mandato d'arresto per lesioni -> [SPOILER] WWE: Ludwig Kaiser si è costituito in Florida per un mandato d'arresto per lesioni
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/ludwig-kaiser-turned-himself-in-on-florida-battery-warrant-before-posting-1000-bond-37.jpg
+[MEDIA] Immagine caricata: 5055
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260521_110814_001_spoiler-wwe-ludwig-kaiser-si-è-costituito-in-florida-per-un-mandato-darresto-per-lesioni_5056_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5056
+[PERF v71] creazione post WordPress: 3.26s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/ludwig-kaiser-turned-himself-in-on-florida-battery-warrant-before-posting-1000-bond-37.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5055
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Ludwig Kaiser Turned Himself In On Florida Battery Warrant B': 36.09s
+[OK] Pubblicato: WWE: Ludwig Kaiser si è costituito in Florida per un mandato d'arresto per lesioni
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260521_110815_001_wwe-ludwig-kaiser-si-costituito-in-florida-per-un-mandato-d-arresto-per-lesioni_65c5bf53_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WWE: Ludwig Kaiser si è costituito in Florida per un mandato d'arresto per lesioni
+[PUBLISHED REVIEW v87.1] Review outer salvata: WWE: Ludwig Kaiser si è costituito in Florida per un mandato d'arresto per lesioni
+[REPORT v87.6] Non scrivo history forte: non true-results/canonico (report:ludwig-kaiser-turned-himself-florida-battery-warrant-posting-1-000-bon-2026-05-20)
+[REPORT v87.2] True-results confermato da history forte: skip offline-safe report:aew-dynamite-2026-05-20 - Willow Nightingale Vacates AEW TBS Title & Pulls Out Of Owen Hart Tournament
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[BOT] semantic_id=wwe-announces-major-change-to-becky-lynchsol-ruca-snme-match
+[SCORE] iniziale=71 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.90 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo annuncia una modifica alla stipulazione di un match per un evento futuro (SNME), fornendo dettagli sulla card aggiornata. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantenere 'Women's Intercontinental Championship' in inglese.; Non tradurre 'Saturday Night's Main Event' (SNME).; Evitare calchi per 'fighting champion' (usare 'campionessa combattiva' o mantenere la dicitura come enfasi).
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo annuncia una modifica alla stipulazione di un match per un evento futuro (SNME), fornendo dettagli sulla card aggiornata. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.07s
+[SCORE v88.2] v88.2 cap feature storico numerico 56->45 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[SCORE] raffinato=45 priority=low | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v70 cap preview hard, v88.2 cap feature storico numerico 56->45
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[BOT] Elaborazione: Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[BOT] semantic_id=joe-hendry-says-wwe-will-soon-release-an-album-of-his-original-songs
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=NXT (6) conf=0.95 model=gemini-3.1-flash-lite | L'articolo riporta una dichiarazione inedita di Joe Hendry rilasciata in un podcast, quindi e' una news su un evento avvenuto, non una preview.
+[EDITORIAL v72.3] translation_notes=Mantenere 'WWE Music' e i titoli dei brani in inglese.; 'Release' dell'album va tradotto come 'pubblicazione' o 'uscita'.; 'Release/released' riferito ai wrestler va tradotto come 'licenziamento/licenziato'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=NXT (6) | L'articolo riporta una dichiarazione inedita di Joe Hendry rilasciata in un podcast, quindi e' una news su un evento avvenuto, non una preview.
+[PERF v71] analisi editoriale AI v72: 1.34s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 57->54 - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, trash talk/clickbait forte, v62 titolo/championship, v88.2 cap OTHER/feature non-news 57->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[REPORT v87.2] True-results confermato da history forte: skip offline-safe report:aew-dynamite-2026-05-20 - Willow Nightingale First Remarks After Vacating AEW TBS Championship
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[SEO v89] Report non assorbe sviluppo autonomo forte: Backstage Reaction to Darby Allin's AEW World Title Run Revealed
+[SKIP v88.3] Non forzo articolo soft sotto 65 dopo una pubblicazione: 64/65 - Backstage Reaction to Darby Allin's AEW World Title Run Revealed
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[PENDING] Coda salvata: 0 elementi
+[DEDUPE v88.4.1] candidate_core=canonical_event_core:jon_moxley|future_status|aew title=Kyle O'Reilly Outlasts Jon Moxley, Earns Shot At AEW Continental Title On Dynamite
+[DEDUPE v88.4.1] Canonical event core caricati: 14
+[SKIP v86.6/legacy] low_score_pre_gemini:58: Kyle O'Reilly Outlasts Jon Moxley, Earns Shot At AEW Continental Title On Dynamite
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:50: Jim Ross Shares Thoughts On Darby Allin's AEW World Championship Reign
+[PENDING] Coda salvata: 0 elementi
+[SKIP v89] Soft news non operativa sotto 65: Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 11 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-21 11:07:26_summary.json -> published_html_review/run_2026-05-21 11-07-26_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (562 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
+===== RUN END [2026-05-21 11:07:26] VERSION [v90_1_1_media_spoiler_fix (8125bdb)] =====
+

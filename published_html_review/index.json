@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-21 10:37:43",
-  "last_bot_version": "v90_1_quality_correctness (c5136fb)",
-  "updated_at": "2026-05-21T10:39:21",
-  "total_items": 146,
+  "last_run_id": "2026-05-21 11:07:26",
+  "last_bot_version": "v90_1_1_media_spoiler_fix (8125bdb)",
+  "updated_at": "2026-05-21T11:08:21",
+  "total_items": 147,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1172,6 +1172,14 @@
       "original_html_file": "20260521_103909_001_baron-corbin-ironizza-sulle-voci-di-un-suo-possibile-ritorno-in-wwe_1e0d89bc_original.html",
       "final_html_file": "20260521_103909_001_baron-corbin-ironizza-sulle-voci-di-un-suo-possibile-ritorno-in-wwe_1e0d89bc_final.html",
       "metadata_file": "20260521_103909_001_baron-corbin-ironizza-sulle-voci-di-un-suo-possibile-ritorno-in-wwe_1e0d89bc_metadata.json"
+    },
+    {
+      "run_id": "2026-05-21 11:07:26",
+      "title": "WWE: Ludwig Kaiser si è costituito in Florida per un mandato d'arresto per lesioni",
+      "url": "https://www.ringsidenews.com/ludwig-kaiser-turned-himself-florida-battery-warrant-before-posting-1000-bond/",
+      "original_html_file": "20260521_110815_001_wwe-ludwig-kaiser-si-costituito-in-florida-per-un-mandato-d-arresto-per-lesioni_65c5bf53_original.html",
+      "final_html_file": "20260521_110815_001_wwe-ludwig-kaiser-si-costituito-in-florida-per-un-mandato-d-arresto-per-lesioni_65c5bf53_final.html",
+      "metadata_file": "20260521_110815_001_wwe-ludwig-kaiser-si-costituito-in-florida-per-un-mandato-d-arresto-per-lesioni_65c5bf53_metadata.json"
     }
   ]
 }
