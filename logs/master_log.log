@@ -3863,3 +3863,413 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-20 23:47:18] VERSION [v90_1_quality_correctness (4db68f2)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+
+===== RUN START [2026-05-21 02:54:08] VERSION [v90_1_quality_correctness (48ece88)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 13 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): AEW's Paul Wight Is Impressed With Coaching Skills Of WWE HOFer
+[PERF v71] WP strict report lookup: 2.07s
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:aew-dynamite-2026-05-20 - AEW Dynamite & Collision Results 5/20 - Two Titles On The Line, Anything Goes Match
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (0/75): WWE Saturday Night's Main Event 5/23/2026: Draws & Duds
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Bully Ray, Tommy Dreamer Discuss What Brock Lesnar's WWE Raw Return Means For Oba Femi
+[SKIP] Score sotto soglia editoriale (56/75): Bully Ray, Tommy Dreamer Discuss What Brock Lesnar's WWE Raw Return Means For Oba Femi
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (50/75): Jim Ross Shares Thoughts On Darby Allin's AEW World Championship Reign
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (16/75): WWE HOFer JBL Believes A Pro Wrestling Union Is A 'Possibility'
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (48/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini SPOILER senza hard validation
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (5/75): Jim Ross On Kevin Nash Backing Wrestlers' Union: 'He Knows What He's Talking About'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177184/john-cena-in-ring-retirement-not-mean-retiring-wwe/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (25/75): Liv Morgan Calls Out Mountain Dew Over Baja Blast Shortage
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[SCORE v79.1.2] Spoiler validato: floor 72->75 - Willow Nightingale First Remarks After Vacating AEW TBS Championship
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Tiffany Stratton Reveals WWE Almost Gave Her A Completely Different Ring Name
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (34/75): WWE Announces New Performance Center Rookie Class Featuring Multiple Rising Talents
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:aew-dynamite-2026-05-20 - AEW Dynamite/Collision Results, Highlights and Key Moments for May 20, 2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Baron Corbin Believed To Be Near WWE Return After Wrapping Up Obligations
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (14/75): MJF Accuses Younger Wrestlers of Copying the Social Media Formula He Created
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (24/75): MJF Says Wrestling Will Remember Him As The Face Of The 2020s Era
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (48/75): Wrestling Legend Phil Hickerson Passes Away At Age 79
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (49/75): Booker T Calls Ronda Rousey vs. Gina Carano Fight 'Biggest Heist' He's Ever Seen
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Daria Rae Addresses TNA Contract Status Ahead Of Upcoming Expiration
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 13 record da event_keys
+[PENDING] Coda salvata: 7 elementi
+[REPORT v86.6/legacy] Hold fino alle 06:30: report:aew-dynamite-2026-05-20 | pronto tra 95 min - AEW Dynamite & Collision Results 5/20 - Two Titles On The Line, Anything Goes Match
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 13 record da event_keys
+[PENDING] Coda salvata: 7 elementi
+[REPORT v86.6/legacy] Hold fino alle 06:30: report:aew-dynamite-2026-05-20 | pronto tra 95 min - AEW Dynamite/Collision Results, Highlights and Key Moments for May 20, 2026
+[REPORT v86.8/legacy] 2 true-results report trattenuti fino alle 06:30 Europe/Rome
+[SCORE] 100 high - Tiffany Stratton Reveals WWE Almost Gave Her A Completely Different Ring Name | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v71 freshness=0.675
+[SCORE] 100 high - Becky Lynch Shuts Down Misinformation About Her Match at Saturday Night's Main Event | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, show settimanale, v62 titolo/championship, v71 freshness=0.542
+[SCORE] 100 high - Charlotte Flair Fires Warning About Breaking Ric Flair & John Cena's WWE Title Record | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, breaking/major update, combo top name titolo + evento forte, v62 titolo/championship, v71 freshness=0.516
+[SCORE] 96 high - Daria Rae Addresses TNA Contract Status Ahead Of Upcoming Expiration | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v71 freshness=0.741
+[SCORE] 92 high - Injured Willow Nightingale Withdraws From Owen Hart Tournament, Vacates AEW TBS Title | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, infortunio, show settimanale, v62 titolo/championship, v71 freshness=0.706
+[SCORE] 83 high - Baron Corbin Believed To Be Near WWE Return After Wrapping Up Obligations | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 ritorno/debutto, v71 source reliability soft penalty, v71 freshness=0.653
+[SCORE] 71 medium - Willow Nightingale Vacates AEW TBS Title & Pulls Out Of Owen Hart Tournament | AEW, impatto roster/storyline, breaking/major update, show settimanale, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.674, v48 tier2: 55-74
+[SCORE] 71 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 70 medium - Willow Nightingale First Remarks After Vacating AEW TBS Championship | AEW, impatto roster/storyline, infortunio, show settimanale, v62 titolo/championship, v79.1.2 spoiler live/pre-show floor 72->75, v71 source reliability soft penalty, v71 freshness=0.682, v48 tier2: 55-74
+[SCORE] 68 medium - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, show settimanale, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[MODE] Storm mode attiva: 5 news >=90, 6 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 7
+[SCORE v89.1] Legacy return/move protected 100->78: Mick Foley Breaks Silence After AEW Debut Announcement
+[PERF v71] WP lookup URL esistente: 0.87s
+[BOT] Elaborazione: Mick Foley Breaks Silence After AEW Debut Announcement
+[BOT] semantic_id=mick-foley-breaks-silence-after-aew-debut-announcement
+[SCORE] iniziale=78 priority=medium
+[PERF v71] scraping articolo: 1.23s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=11, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.72s
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo tratta l'annuncio ufficiale e le dichiarazioni di Mick Foley sul suo debutto imminente; non è una preview dell'evento ma una news su un annuncio avvenuto.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Double or Nothing' o 'Buy In' poiché nomi di eventi/segmenti.; Mantenere 'WWE Hall of Famer' e 'Hardcore Legend' come epiteti.; Tradurre 'All Elite' come espressione idiomatica legata al brand AEW.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | L'articolo tratta l'annuncio ufficiale e le dichiarazioni di Mick Foley sul suo debutto imminente; non è una preview dell'evento ma una news su un annuncio avvenuto.
+[PERF v71] analisi editoriale AI v72: 2.27s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Mick Foley Breaks Silence After AEW Debut Announcement
+[SCORE] raffinato=100 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 media rights/streaming
+[V71] story_signature=stable:tony_khan|mick_foley_breaks_silence_after|aew_debut_announcement|contract|wwe semantic_status=new_story freshness=0.813
+[PERF v71] WP recent posts dedupe: 0.92s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.22s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=11
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 4.89s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Mick Foley rompe il silenzio dopo l'annuncio del suo debutto in AEW
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/mick-foley-breaks-silence-after-aew-debut-announcement-51.jpg
+[MEDIA] Immagine caricata: 5007
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260521_025455_001_mick-foley-rompe-il-silenzio-dopo-lannuncio-del-suo-debutto-in-aew_5008_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5008
+[PERF v71] creazione post WordPress: 4.79s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/mick-foley-breaks-silence-after-aew-debut-announcement-51.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5007
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Mick Foley Breaks Silence After AEW Debut Announcement': 15.69s
+[OK] Pubblicato: Mick Foley rompe il silenzio dopo l'annuncio del suo debutto in AEW
+[PENDING] Coda salvata: 6 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260521_025456_001_mick-foley-rompe-il-silenzio-dopo-l-annuncio-del-suo-debutto-in-aew_f165fb7e_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Mick Foley rompe il silenzio dopo l'annuncio del suo debutto in AEW
+[PUBLISHED REVIEW v87.1] Review outer salvata: Mick Foley rompe il silenzio dopo l'annuncio del suo debutto in AEW
+[BOT] Elaborazione: Charlotte Flair Fires Warning About Breaking Ric Flair & John Cena's WWE Title Record
+[BOT] semantic_id=charlotte-flair-fires-warning-about-breaking-ric-flair-john-cenas-wwe-title-record
+[SCORE] iniziale=100 priority=high
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/charlotte-flair-fires-warning-about-breaking-ric-flair-john-cenas-wwe-title-record/
+[PERF v71] scraping articolo: 1.18s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=17, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/charlotte-flair-fires-warning-about-breaking-ric-flair-john-cenas-wwe-title-record/
+[BLOCKSEQ] Blocchi ordinati estratti: text=17, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.62s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni fatte da Charlotte Flair durante un'intervista; non è né un report di un evento né la presentazione di uno show futuro.
+[EDITORIAL v72.3] translation_notes=Mantenere 'WWE Title' o 'World Championship record', non tradurre.; 'Gunning for him' va tradotto come 'puntare al suo record' o 'mettere nel mirino'.; Non tradurre 'Royal Rumble'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta dichiarazioni fatte da Charlotte Flair durante un'intervista; non è né un report di un evento né la presentazione di uno show futuro.
+[PERF v71] analisi editoriale AI v72: 1.39s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Charlotte Flair Fires Warning About Breaking Ric Flair & John Cena's WWE Title Record
+[SCORE] raffinato=100 priority=high | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, breaking/major update, combo top name titolo + evento forte, PLE/PPV, v62 titolo/championship
+[V71] story_signature=stable:charlotte_flair|john_cena|charlotte_flair_fires_warning_about_breaking_ric_flair|title|wwe semantic_status=new_story freshness=0.58
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.1] Repair mirato blocchi mancanti: ['TEXT_016', 'TEXT_017']
+[GEMINI] Uso modello: gemini-3-flash-preview
+[GEMINI] Modello gemini-3-flash-preview scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[MODEL v88] Cooldown globale modello per la run: gemini-3-flash-preview
+[GEMINI] Uso modello: gemini-2.5-flash
+[BLOCKSEQ v72.1] Batch tradotto con gemini-2.5-flash: 2 blocchi
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=17
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione scartato: editorial_word_ratio=0.55 (296/541) threshold=0.70
+[PERF v71] traduzione: 69.99s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Charlotte Flair punta al record di titoli di Ric Flair e John Cena
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/charlotte-flair-fires-warning-about-breaking-ric-flair-amp-john-cenas-wwe-title-record-30.jpg
+[MEDIA] Immagine caricata: 5010
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260521_025614_002_charlotte-flair-punta-al-record-di-titoli-di-ric-flair-e-john-cena_5011_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5011
+[PERF v71] creazione post WordPress: 3.54s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/charlotte-flair-fires-warning-about-breaking-ric-flair-amp-john-cenas-wwe-title-record-30.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5010
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Charlotte Flair Fires Warning About Breaking Ric Flair & Joh': 77.59s
+[OK] Pubblicato: Charlotte Flair punta al record di titoli di Ric Flair e John Cena
+[PENDING] Coda salvata: 5 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260521_025615_002_charlotte-flair-punta-al-record-di-titoli-di-ric-flair-e-john-cena_bb531daa_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Charlotte Flair punta al record di titoli di Ric Flair e John Cena
+[PUBLISHED REVIEW v87.1] Review outer salvata: Charlotte Flair punta al record di titoli di Ric Flair e John Cena
+[BOT] Elaborazione: Daria Rae Addresses TNA Contract Status Ahead Of Upcoming Expiration
+[BOT] semantic_id=daria-rae-addresses-tna-contract-status-ahead-of-upcoming-expiration
+[SCORE] iniziale=96 priority=high
+[PERF v71] scraping articolo: 1.22s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=8, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.66s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=TNA (7) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni recenti di Daria Rae sulla sua situazione contrattuale in TNA; è una notizia su uno status attuale, non una preview di un evento.
+[EDITORIAL v72.3] translation_notes=Mantenere 'TNA World Championship' e 'Director of Authority' in inglese.; 'Virtual signing' va reso come 'sessione di autografi virtuale'.; 'Contract status' si traduce come 'situazione contrattuale'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=TNA (7) | L'articolo riporta dichiarazioni recenti di Daria Rae sulla sua situazione contrattuale in TNA; è una notizia su uno status attuale, non una preview di un evento.
+[PERF v71] analisi editoriale AI v72: 1.37s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Daria Rae Addresses TNA Contract Status Ahead Of Upcoming Expiration
+[SCORE] raffinato=78 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 business/dirigenza, v62 categoria business, v66 cap opinion/commentary storyline
+[V71] story_signature=stable:santino_marella|daria_rae_addresses|tna_contract_status_ahead_of_upcoming_expiration|status|wwe semantic_status=new_story freshness=0.93
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=8
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 8.59s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Daria Rae fa chiarezza sulla scadenza del suo contratto con TNA
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/daria-rae-addresses-tna-contract-status-ahead-of-upcoming-expiration-23.jpg
+[MEDIA] Immagine caricata: 5013
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260521_025631_003_daria-rae-fa-chiarezza-sulla-scadenza-del-suo-contratto-con-tna_5014_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5014
+[PERF v71] creazione post WordPress: 3.28s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/daria-rae-addresses-tna-contract-status-ahead-of-upcoming-expiration-23.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5013
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Daria Rae Addresses TNA Contract Status Ahead Of Upcoming Ex': 15.94s
+[OK] Pubblicato: Daria Rae fa chiarezza sulla scadenza del suo contratto con TNA
+[PENDING] Coda salvata: 4 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260521_025633_003_daria-rae-fa-chiarezza-sulla-scadenza-del-suo-contratto-con-tna_d07ff8f8_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Daria Rae fa chiarezza sulla scadenza del suo contratto con TNA
+[PUBLISHED REVIEW v87.1] Review outer salvata: Daria Rae fa chiarezza sulla scadenza del suo contratto con TNA
+[BOT] Elaborazione: Baron Corbin Believed To Be Near WWE Return After Wrapping Up Obligations
+[BOT] semantic_id=baron-corbin-believed-to-be-near-wwe-return-after-wrapping-up-obligations
+[SCORE] iniziale=83 priority=high
+[PERF v71] scraping articolo: 1.15s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=12, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.61s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta speculazioni e report di backstage riguardo a un possibile ritorno di Baron Corbin in WWE dopo la fine dei suoi impegni esterni.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'The Skyscrapers' o 'Constable/King/Happy Corbin' (nomi dei personaggi).; Mantenere in inglese nomi di PLE e titoli.; Tradurre 'released/departed' come 'ha lasciato la compagnia' o 'addio', mai 'rilasciato'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta speculazioni e report di backstage riguardo a un possibile ritorno di Baron Corbin in WWE dopo la fine dei suoi impegni esterni.
+[PERF v71] analisi editoriale AI v72: 1.40s
+[SCORE] raffinato=68 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v72.3 cap rumor: niente boost raffinamento, v72.3 cap rumor
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 68/75 - Baron Corbin Believed To Be Near WWE Return After Wrapping Up Obligations
+[REPORT v86.8] Pending true-results non pubblicato: resta lavorabile via candidate queue report:aew-dynamite-2026-05-20
+[BOT] News candidate totali: 15 | mode=storm | max nuove=5 | pending pubblicati=3
+[BOT] Elaborazione: Tiffany Stratton Reveals WWE Almost Gave Her A Completely Different Ring Name
+[BOT] semantic_id=tiffany-stratton-reveals-wwe-almost-gave-her-a-completely-different-ring-name
+[SCORE] iniziale=100 priority=high
+[PERF v71] scraping articolo: 1.12s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=10, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.58s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni di un'atleta su un evento passato (scelta del ring name), rientrando nelle news autonome post-show.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'ring name' con 'nome da ring', usare 'nome d'arte' o mantenere 'ring name'.; Mantenere inalterati i nomi propri citati (Veronica Swanson, Darby).; 'Darby Doll' va lasciato in inglese come soprannome.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta dichiarazioni di un'atleta su un evento passato (scelta del ring name), rientrando nelle news autonome post-show.
+[PERF v71] analisi editoriale AI v72: 4.12s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Tiffany Stratton Reveals WWE Almost Gave Her A Completely Different Ring Name
+[SCORE v86.9] Cap commentary/opinion 100->68 - Tiffany Stratton Reveals WWE Almost Gave Her A Completely Different Ring Name
+[SCORE v79.1.3] Recovery post-show 68->95 - Tiffany Stratton Reveals WWE Almost Gave Her A Completely Different Ring Name
+[SCORE v86.9] Cap AI commentary/opinion 95->68 - Tiffany Stratton Reveals WWE Almost Gave Her A Completely Different Ring Name
+[SCORE] raffinato=68 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v86.9 cap commentary/opinion 100->68, v79.1.3 post-show recovery 68->95, v86.9 cap AI commentary/opinion 95->68
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Tiffany Stratton Reveals WWE Almost Gave Her A Completely Different Ring Name
+[V71] story_signature=stable:tiffany_stratton|tiffany_stratton_reveals|wwe_almost_gave_her|story|wwe semantic_status=new_story freshness=0.674
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=10
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione scartato: editorial_word_ratio=0.68 (215/317) threshold=0.70
+[PERF v71] traduzione: 5.54s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WWE: Tiffany Stratton rivela i nomi valutati per lei prima del debutto
+[WARN v71.3] Quote check sotto soglia ma non bloccante: ['quote count ratio below threshold: 0.60'] - Tiffany Stratton Reveals WWE Almost Gave Her A Completely Different Ring Name
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/tiffany-stratton-reveals-wwe-almost-gave-her-a-completely-different-ring-name-56.jpg
+[MEDIA] Immagine caricata: 5016
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260521_025653_004_wwe-tiffany-stratton-rivela-i-nomi-valutati-per-lei-prima-del-debutto_5017_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5017
+[PERF v71] creazione post WordPress: 3.65s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/tiffany-stratton-reveals-wwe-almost-gave-her-a-completely-different-ring-name-56.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5016
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Tiffany Stratton Reveals WWE Almost Gave Her A Completely Di': 15.88s
+[OK] Pubblicato: WWE: Tiffany Stratton rivela i nomi valutati per lei prima del debutto
+[PENDING] Coda salvata: 4 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260521_025654_004_wwe-tiffany-stratton-rivela-i-nomi-valutati-per-lei-prima-del-debutto_c30fcada_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 4/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WWE: Tiffany Stratton rivela i nomi valutati per lei prima del debutto
+[PUBLISHED REVIEW v87.1] Review outer salvata: WWE: Tiffany Stratton rivela i nomi valutati per lei prima del debutto
+[REPORT v87.2] True-results confermato da history forte: skip offline-safe report:wwe-raw-2026-05-18 - Becky Lynch Shuts Down Misinformation About Her Match at Saturday Night's Main Event
+[PENDING] Coda salvata: 4 elementi
+[PENDING] Coda salvata: 4 elementi
+[SKIP v86.8] Già pubblicata davvero in questa run: Charlotte Flair Fires Warning About Breaking Ric Flair & John Cena's WWE Title Record
+[PENDING] Coda salvata: 4 elementi
+[SKIP v86.8] Già pubblicata davvero in questa run: Daria Rae Addresses TNA Contract Status Ahead Of Upcoming Expiration
+[PENDING] Coda salvata: 4 elementi
+[BOT] Elaborazione: Injured Willow Nightingale Withdraws From Owen Hart Tournament, Vacates AEW TBS Title
+[BOT] semantic_id=injured-willow-nightingale-withdraws-from-owen-hart-tournament-vacates-aew-tbs-title
+[SCORE] iniziale=92 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta l'annuncio ufficiale di un infortunio e la conseguente resa del titolo, eventi già avvenuti durante un segmento televisivo, non una preview di un evento futuro.
+[EDITORIAL v72.3] translation_notes=Mantenere TBS Championship e Owen Hart Tournament in inglese.; 'Relinquish the title' va tradotto come 'rende vacante il titolo' o 'rinuncia al titolo'.; 'Wild card opponent' va adattato come 'avversaria a sorpresa' o 'avversaria esterna'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | L'articolo riporta l'annuncio ufficiale di un infortunio e la conseguente resa del titolo, eventi già avvenuti durante un segmento televisivo, non una preview di un evento futuro.
+[PERF v71] analisi editoriale AI v72: 5.32s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Injured Willow Nightingale Withdraws From Owen Hart Tournament, Vacates AEW TBS Title
+[SCORE v79.1.3] Recovery post-show 56->92 - Injured Willow Nightingale Withdraws From Owen Hart Tournament, Vacates AEW TBS Title
+[SCORE] raffinato=92 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, infortunio, PLE/PPV, v62 titolo/championship, v77 AI reason/type coherence: PREVIEW cap, v79.1.3 post-show recovery 56->92
+[V71] story_signature=stable:injured_willow_nightingale_withdraws_from_owen_hart_tourname|tbs_title|status|aew semantic_status=new_story freshness=0.705
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=5
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/injured-willow-nightingale-withdraws-from-owen-hart-tournament-vacates-aew-tbs-title/intro-1779325913.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 4.18s
+[FIX] Titolo non valido (ok) -> fallback automatico: Injured willow nightingale withdraws from owen hart tournament, vacates AEW tbs title
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Infortunata, Willow Nightingale lascia il titolo AEW TBS e si ritira dal torneo Owen Hart
+[WARN v71.3] Quote check sotto soglia ma non bloccante: ['quote count ratio below threshold: 0.50'] - Injured Willow Nightingale Withdraws From Owen Hart Tournament, Vacates AEW TBS Title
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/injured-willow-nightingale-withdraws-from-owen-hart-tournament-vacates-aew-tbs-title/l-intro-1779325913.jpg
+[MEDIA] Immagine caricata: 5019
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260521_025710_005_infortunata-willow-nightingale-lascia-il-titolo-aew-tbs-e-si-ritira-dal-torneo-owen-hart_5020_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5020
+[PERF v71] creazione post WordPress: 5.23s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/injured-willow-nightingale-withdraws-from-owen-hart-tournament-vacates-aew-tbs-title/l-intro-1779325913.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5019
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Injured Willow Nightingale Withdraws From Owen Hart Tourname': 16.13s
+[OK] Pubblicato: Infortunata, Willow Nightingale lascia il titolo AEW TBS e si ritira dal torneo Owen Hart
+[PENDING] Coda salvata: 4 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260521_025712_005_infortunata-willow-nightingale-lascia-il-titolo-aew-tbs-e-si-ritira-dal-torneo-o_99b1e389_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 5/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Infortunata, Willow Nightingale lascia il titolo AEW TBS e si ritira dal torneo Owen Hart
+[PUBLISHED REVIEW v87.1] Review outer salvata: Infortunata, Willow Nightingale lascia il titolo AEW TBS e si ritira dal torneo Owen Hart
+[SKIP v78.1] Gia processato in questa run: Baron Corbin Believed To Be Near WWE Return After Wrapping Up Obligations
+[PENDING] Coda salvata: 3 elementi
+[SKIP v85.1] Limite totale run raggiunto (5/5): Willow Nightingale Vacates AEW TBS Title & Pulls Out Of Owen Hart Tournament
+[SKIP v85.1] Limite totale run raggiunto (5/5): WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[SKIP v85.1] Limite totale run raggiunto (5/5): Willow Nightingale First Remarks After Vacating AEW TBS Championship
+[SKIP v85.1] Limite totale run raggiunto (5/5): Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SKIP v85.1] Limite totale run raggiunto (5/5): Darby Allin Taps Out Speedball Mike Bailey To Retain AEW World Title On Dynamite
+[SKIP v85.1] Limite totale run raggiunto (5/5): Daria Rae Reveals Acting Has Become Her 'Main Gig' After WWE Exit
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[PENDING] Coda salvata: 3 elementi
+[DEDUPE v88.4.1] candidate_core=canonical_event_core:jon_moxley|future_status|aew title=Kyle O'Reilly Outlasts Jon Moxley, Earns Shot At AEW Continental Title On Dynamite
+[DEDUPE v88.4.1] Canonical event core caricati: 14
+[SKIP v86.6/legacy] low_score_pre_gemini:58: Kyle O'Reilly Outlasts Jon Moxley, Earns Shot At AEW Continental Title On Dynamite
+[PENDING] Coda salvata: 3 elementi
+[SKIP v89] Soft news non operativa sotto 65: Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[BOT] Pubblicati 5 articoli (3 pending + 2 nuove) su 16 candidati provati | mode=storm
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-21 02:54:08_summary.json -> published_html_review/run_2026-05-21 02-54-08_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (539 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=5 errors=0 status=ok
+===== RUN END [2026-05-21 02:54:08] VERSION [v90_1_quality_correctness (48ece88)] =====
+

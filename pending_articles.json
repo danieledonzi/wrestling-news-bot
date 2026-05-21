@@ -1,145 +1,5 @@
 [
   {
-    "url": "https://www.ringsidenews.com/mick-foley-breaks-silence-aew-debut-announcement/",
-    "title": "Mick Foley Breaks Silence After AEW Debut Announcement",
-    "semantic_id": "mick-foley-breaks-silence-after-aew-debut-announcement",
-    "title_key": "mick-foley-breaks-silence-debut-announcement",
-    "score": 100,
-    "priority": "high",
-    "event_key": "",
-    "story_signature_v71": "stable:tony_khan|mick_foley_breaks_silence_after|aew_debut_announcement|debut|wwe",
-    "summary": "Mick Foley has now officially addressed his upcoming AEW debut for the first time — and he sounds genuinely excited about entering the company. After Tony Khan announced that Foley would appear during AEW Double or Nothing 2026 weekend programming, the WWE Hall of Famer took to Instagram on and broke his silence about joining ... Read more",
-    "reasons": [
-      "WWE/main roster",
-      "impatto roster/storyline",
-      "WWE main roster + storyline/evento",
-      "ritorno/debutto",
-      "PLE/PPV",
-      "v62 ritorno/debutto",
-      "v71 freshness=0.655"
-    ],
-    "score_reasons": [
-      "WWE/main roster",
-      "impatto roster/storyline",
-      "WWE main roster + storyline/evento",
-      "ritorno/debutto",
-      "PLE/PPV",
-      "v62 ritorno/debutto",
-      "v71 freshness=0.655"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1779330484.0,
-    "status": "raw",
-    "reason": "wp_down_initial_storm",
-    "created_at": 1779320879.3674064,
-    "attempts": 0
-  },
-  {
-    "url": "https://www.ringsidenews.com/charlotte-flair-fires-warning-about-breaking-ric-flair-john-cenas-wwe-title-record/",
-    "title": "Charlotte Flair Fires Warning About Breaking Ric Flair & John Cena's WWE Title Record",
-    "semantic_id": "charlotte-flair-fires-warning-about-breaking-ric-flair-john-cenas-wwe-title-record",
-    "title_key": "charlotte-flair-fires-warning-about-breaking-ric-flair-john-cena-s-record",
-    "score": 100,
-    "priority": "high",
-    "event_key": "",
-    "story_signature_v71": "stable:charlotte_flair|john_cena|charlotte_flair_fires_warning_about_breaking_ric_flair|title|wwe",
-    "summary": "Charlotte Flair is fully aware of the history she’s chasing in WWE, and she’s not backing away from the possibility of eventually surpassing both Ric Flair and John Cena on the all-time championship list. During an appearance on TMZ’s Inside The Ring, Charlotte spoke openly about her pursuit of the record currently associated with her ... Read more",
-    "reasons": [
-      "WWE/main roster",
-      "top star titolo: john cena",
-      "WWE main roster + storyline/evento",
-      "breaking/major update",
-      "combo top name titolo + evento forte",
-      "v62 titolo/championship",
-      "v71 freshness=0.555"
-    ],
-    "score_reasons": [
-      "WWE/main roster",
-      "top star titolo: john cena",
-      "WWE main roster + storyline/evento",
-      "breaking/major update",
-      "combo top name titolo + evento forte",
-      "v62 titolo/championship",
-      "v71 freshness=0.555"
-    ],
-    "is_breaking": true,
-    "breaking_expires_at": 1779335207.0,
-    "status": "raw",
-    "reason": "wp_down_initial_storm",
-    "created_at": 1779320871.4028225,
-    "attempts": 0
-  },
-  {
-    "url": "https://www.ringsidenews.com/daria-rae-addresses-tna-contract-status-ahead-upcoming-expiration/",
-    "title": "Daria Rae Addresses TNA Contract Status Ahead Of Upcoming Expiration",
-    "semantic_id": "daria-rae-addresses-tna-contract-status-ahead-of-upcoming-expiration",
-    "title_key": "daria-rae-addresses-contract-ahead-upcoming-expiration",
-    "score": 96,
-    "priority": "high",
-    "event_key": "",
-    "story_signature_v71": "stable:daria_rae_addresses|tna_contract_status_ahead_of_upcoming_expiration|status|wwe",
-    "summary": "Daria Rae has opened up about her future with TNA Wrestling as her current deal with the company gets closer to expiring. Formerly known to WWE fans as Sonya Deville, Daria Rae debuted in TNA Wrestling during the premiere episode of Thursday Night iMPACT on AMC back in January 2026. She immediately stepped into a ... Read more",
-    "reasons": [
-      "WWE/main roster",
-      "impatto roster/storyline",
-      "WWE main roster + storyline/evento",
-      "ritorno/debutto",
-      "show settimanale",
-      "v62 ritorno/debutto",
-      "v71 freshness=0.78"
-    ],
-    "score_reasons": [
-      "WWE/main roster",
-      "impatto roster/storyline",
-      "WWE main roster + storyline/evento",
-      "ritorno/debutto",
-      "show settimanale",
-      "v62 ritorno/debutto",
-      "v71 freshness=0.78"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1779332960.0,
-    "status": "raw",
-    "reason": "wp_down_initial_storm",
-    "created_at": 1779320873.0110176,
-    "attempts": 0
-  },
-  {
-    "url": "https://www.ringsidenews.com/baron-corbin-believed-near-wwe-return-wrapping-obligations/",
-    "title": "Baron Corbin Believed To Be Near WWE Return After Wrapping Up Obligations",
-    "semantic_id": "baron-corbin-believed-to-be-near-wwe-return-after-wrapping-up-obligations",
-    "title_key": "baron-corbin-believed-be-near-return-wrapping-up-obligations",
-    "score": 83,
-    "priority": "high",
-    "event_key": "",
-    "story_signature_v71": "stable:baron_corbin_believed_to_be_near|wwe_return_after_wrapping_up_obligations|return|wwe",
-    "summary": "Baron Corbin may be much closer to a WWE comeback than fans first realized, and the latest update makes it sound like things are moving fast. Corbin departed WWE in November 2024 and has since been active outside the company, including work with Major League Wrestling. During his MLW run, he teamed with Donovan Dijak ... Read more",
-    "reasons": [
-      "WWE/main roster",
-      "impatto roster/storyline",
-      "WWE main roster + storyline/evento",
-      "ritorno/debutto",
-      "v62 ritorno/debutto",
-      "v71 source reliability soft penalty",
-      "v71 freshness=0.692"
-    ],
-    "score_reasons": [
-      "WWE/main roster",
-      "impatto roster/storyline",
-      "WWE main roster + storyline/evento",
-      "ritorno/debutto",
-      "v62 ritorno/debutto",
-      "v71 source reliability soft penalty",
-      "v71 freshness=0.692"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1779341033.0,
-    "status": "raw",
-    "reason": "wp_down_initial_storm",
-    "created_at": 1779320870.8409016,
-    "attempts": 0
-  },
-  {
     "kind": "report",
     "url": "https://www.wrestlinginc.com/2177398/aew-dynamite-collision-may-20-two-titles-on-line-anything-goes-match/",
     "title": "AEW Dynamite & Collision Results 5/20 - Two Titles On The Line, Anything Goes Match",
@@ -170,7 +30,9 @@
       "v86.2 report morning hold",
       "PLE/PPV",
       "v71 source reliability soft penalty",
-      "v71 freshness=0.576"
+      "v71 freshness=0.576",
+      "v71 freshness=0.561",
+      "v71 freshness=0.538"
     ],
     "is_breaking": false,
     "breaking_expires_at": 0,
@@ -178,7 +40,7 @@
     "reason": "report_hold_until_0630",
     "created_at": 1779318000.0,
     "first_seen": 1779318000.0,
-    "last_seen": 1779320879.7470798,
+    "last_seen": 1779332077.987227,
     "not_before": 1779337800.0,
     "hold_until_label": "06:30 Europe/Rome",
     "attempts": 0,
@@ -188,7 +50,7 @@
         "title": "AEW Dynamite & Collision Results 5/20 - Two Titles On The Line, Anything Goes Match",
         "source": "www.wrestlinginc.com",
         "first_seen": 1779318000.0,
-        "last_seen": 1779320879.74544,
+        "last_seen": 1779332077.5610483,
         "last_text_len": 0
       },
       {
@@ -196,7 +58,7 @@
         "title": "AEW Dynamite/Collision Results, Highlights and Key Moments for May 20, 2026",
         "source": "www.ringsidenews.com",
         "first_seen": 1779319860.0,
-        "last_seen": 1779320880.133989,
+        "last_seen": 1779332077.987227,
         "last_text_len": 0
       }
     ],

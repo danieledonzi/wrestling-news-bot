@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-20 23:47:18",
-  "last_bot_version": "v90_1_quality_correctness (4db68f2)",
-  "updated_at": "2026-05-20T23:48:00",
-  "total_items": 135,
+  "last_run_id": "2026-05-21 02:54:08",
+  "last_bot_version": "v90_1_quality_correctness (48ece88)",
+  "updated_at": "2026-05-21T02:57:13",
+  "total_items": 140,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1084,6 +1084,46 @@
       "original_html_file": "20260520_201255_003_la-reazione-gelida-di-mjf-al-debutto-di-mick-foley-in-aew_40f8c2ce_original.html",
       "final_html_file": "20260520_201255_003_la-reazione-gelida-di-mjf-al-debutto-di-mick-foley-in-aew_40f8c2ce_final.html",
       "metadata_file": "20260520_201255_003_la-reazione-gelida-di-mjf-al-debutto-di-mick-foley-in-aew_40f8c2ce_metadata.json"
+    },
+    {
+      "run_id": "2026-05-21 02:54:08",
+      "title": "Mick Foley rompe il silenzio dopo l'annuncio del suo debutto in AEW",
+      "url": "https://www.ringsidenews.com/mick-foley-breaks-silence-aew-debut-announcement/",
+      "original_html_file": "20260521_025456_001_mick-foley-rompe-il-silenzio-dopo-l-annuncio-del-suo-debutto-in-aew_f165fb7e_original.html",
+      "final_html_file": "20260521_025456_001_mick-foley-rompe-il-silenzio-dopo-l-annuncio-del-suo-debutto-in-aew_f165fb7e_final.html",
+      "metadata_file": "20260521_025456_001_mick-foley-rompe-il-silenzio-dopo-l-annuncio-del-suo-debutto-in-aew_f165fb7e_metadata.json"
+    },
+    {
+      "run_id": "2026-05-21 02:54:08",
+      "title": "Charlotte Flair punta al record di titoli di Ric Flair e John Cena",
+      "url": "https://www.ringsidenews.com/charlotte-flair-fires-warning-about-breaking-ric-flair-john-cenas-wwe-title-record/",
+      "original_html_file": "20260521_025615_002_charlotte-flair-punta-al-record-di-titoli-di-ric-flair-e-john-cena_bb531daa_original.html",
+      "final_html_file": "20260521_025615_002_charlotte-flair-punta-al-record-di-titoli-di-ric-flair-e-john-cena_bb531daa_final.html",
+      "metadata_file": "20260521_025615_002_charlotte-flair-punta-al-record-di-titoli-di-ric-flair-e-john-cena_bb531daa_metadata.json"
+    },
+    {
+      "run_id": "2026-05-21 02:54:08",
+      "title": "Daria Rae fa chiarezza sulla scadenza del suo contratto con TNA",
+      "url": "https://www.ringsidenews.com/daria-rae-addresses-tna-contract-status-ahead-upcoming-expiration/",
+      "original_html_file": "20260521_025633_003_daria-rae-fa-chiarezza-sulla-scadenza-del-suo-contratto-con-tna_d07ff8f8_original.html",
+      "final_html_file": "20260521_025633_003_daria-rae-fa-chiarezza-sulla-scadenza-del-suo-contratto-con-tna_d07ff8f8_final.html",
+      "metadata_file": "20260521_025633_003_daria-rae-fa-chiarezza-sulla-scadenza-del-suo-contratto-con-tna_d07ff8f8_metadata.json"
+    },
+    {
+      "run_id": "2026-05-21 02:54:08",
+      "title": "WWE: Tiffany Stratton rivela i nomi valutati per lei prima del debutto",
+      "url": "https://www.ringsidenews.com/tiffany-stratton-reveals-wwe-almost-gave-her-completely-different-ring-name/",
+      "original_html_file": "20260521_025654_004_wwe-tiffany-stratton-rivela-i-nomi-valutati-per-lei-prima-del-debutto_c30fcada_original.html",
+      "final_html_file": "20260521_025654_004_wwe-tiffany-stratton-rivela-i-nomi-valutati-per-lei-prima-del-debutto_c30fcada_final.html",
+      "metadata_file": "20260521_025654_004_wwe-tiffany-stratton-rivela-i-nomi-valutati-per-lei-prima-del-debutto_c30fcada_metadata.json"
+    },
+    {
+      "run_id": "2026-05-21 02:54:08",
+      "title": "Infortunata, Willow Nightingale lascia il titolo AEW TBS e si ritira dal torneo Owen Hart",
+      "url": "https://www.wrestlinginc.com/2178277/aew-dynamite-willow-nightingale-injured-withdraws-owen-hart-tournament-vacates-tbs/",
+      "original_html_file": "20260521_025712_005_infortunata-willow-nightingale-lascia-il-titolo-aew-tbs-e-si-ritira-dal-torneo-o_99b1e389_original.html",
+      "final_html_file": "20260521_025712_005_infortunata-willow-nightingale-lascia-il-titolo-aew-tbs-e-si-ritira-dal-torneo-o_99b1e389_final.html",
+      "metadata_file": "20260521_025712_005_infortunata-willow-nightingale-lascia-il-titolo-aew-tbs-e-si-ritira-dal-torneo-o_99b1e389_metadata.json"
     }
   ]
 }
