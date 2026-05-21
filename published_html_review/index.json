@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-21 11:07:26",
-  "last_bot_version": "v90_1_1_media_spoiler_fix (8125bdb)",
-  "updated_at": "2026-05-21T11:08:21",
-  "total_items": 147,
+  "last_run_id": "2026-05-21 11:38:59",
+  "last_bot_version": "v90_1_2_spoiler_calendar_fix (c8c4bb2)",
+  "updated_at": "2026-05-21T11:40:40",
+  "total_items": 149,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1180,6 +1180,22 @@
       "original_html_file": "20260521_110815_001_wwe-ludwig-kaiser-si-costituito-in-florida-per-un-mandato-d-arresto-per-lesioni_65c5bf53_original.html",
       "final_html_file": "20260521_110815_001_wwe-ludwig-kaiser-si-costituito-in-florida-per-un-mandato-d-arresto-per-lesioni_65c5bf53_final.html",
       "metadata_file": "20260521_110815_001_wwe-ludwig-kaiser-si-costituito-in-florida-per-un-mandato-d-arresto-per-lesioni_65c5bf53_metadata.json"
+    },
+    {
+      "run_id": "2026-05-21 11:38:59",
+      "title": "Emergono i dettagli sul caso di aggressione che coinvolge Ludwig Kaiser",
+      "url": "https://www.ringsidenews.com/ludwig-kaiser-battery-case-reveal-alleged-elevator-attack-have-some-manners-comment/",
+      "original_html_file": "20260521_113954_001_emergono-i-dettagli-sul-caso-di-aggressione-che-coinvolge-ludwig-kaiser_77ac672a_original.html",
+      "final_html_file": "20260521_113954_001_emergono-i-dettagli-sul-caso-di-aggressione-che-coinvolge-ludwig-kaiser_77ac672a_final.html",
+      "metadata_file": "20260521_113954_001_emergono-i-dettagli-sul-caso-di-aggressione-che-coinvolge-ludwig-kaiser_77ac672a_metadata.json"
+    },
+    {
+      "run_id": "2026-05-21 11:38:59",
+      "title": "Ludwig Kaiser: i dettagli delle restrizioni giudiziarie dopo l'arresto in Florida",
+      "url": "https://www.ringsidenews.com/ludwig-kaisers-court-restrictions-revealed-florida-battery-arrest/",
+      "original_html_file": "20260521_114034_002_ludwig-kaiser-i-dettagli-delle-restrizioni-giudiziarie-dopo-l-arresto-in-florida_4a5c6774_original.html",
+      "final_html_file": "20260521_114034_002_ludwig-kaiser-i-dettagli-delle-restrizioni-giudiziarie-dopo-l-arresto-in-florida_4a5c6774_final.html",
+      "metadata_file": "20260521_114034_002_ludwig-kaiser-i-dettagli-delle-restrizioni-giudiziarie-dopo-l-arresto-in-florida_4a5c6774_metadata.json"
     }
   ]
 }
