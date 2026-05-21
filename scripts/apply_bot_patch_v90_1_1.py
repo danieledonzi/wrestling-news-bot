@@ -126,21 +126,53 @@ def v9011_show_from_priority(source_title="", event_key="", url="", fallback_tex
     return ""
 
 
+def v9011_valid_date(year, month, day):
+    try:
+        if not (2000 <= int(year) <= 2100 and 1 <= int(month) <= 12 and 1 <= int(day) <= 31):
+            return False
+        datetime(int(year), int(month), int(day))
+        return True
+    except Exception:
+        return False
+
+
+def v9011_date_context_allows_short_date(text=""):
+    p = v9011_probe(text)
+    has_show = bool(re.search(r"\b(raw|nxt|smackdown|dynamite|collision|impact|roh)\b", p))
+    has_report_context = any(t in p for t in ["result", "results", "report", "recap", "live", "risultati", "momenti salienti"])
+    return has_show and has_report_context
+
+
 def v9011_date_from_fields(source_title="", event_key="", url="", fallback_text=""):
-    raw = " ".join([str(event_key or ""), str(source_title or ""), str(url or ""), str(fallback_text or "")[:500]])
-    # Prefer ISO/event-key dates.
-    m = re.search(r"(20\d{2})[-_/](\d{1,2})[-_/](\d{1,2})", raw)
+    reliable_raw = " ".join([str(event_key or ""), str(source_title or ""), str(url or "")])
+    full_raw = " ".join([reliable_raw, str(fallback_text or "")[:500]])
+    # Prefer explicit ISO/event-key dates anywhere in reliable fields or short fallback.
+    m = re.search(r"(20\d{2})[-_/](\d{1,2})[-_/](\d{1,2})", full_raw)
     if m:
-        return int(m.group(1)), int(m.group(2)), int(m.group(3))
-    m = re.search(r"\b(\d{1,2})[/-](\d{1,2})(?:[/-](20\d{2}))?\b", raw)
+        year, month, day = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        if v9011_valid_date(year, month, day):
+            return year, month, day
+    # Accept numeric dates only when the year is explicit.
+    m = re.search(r"\b(\d{1,2})[/-](\d{1,2})[/-](20\d{2})\b", full_raw)
     if m:
-        month = int(m.group(1)); day = int(m.group(2)); year = int(m.group(3) or datetime.now().year)
-        return year, month, day
-    p = v9011_probe(raw)
+        month, day, year = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        if v9011_valid_date(year, month, day):
+            return year, month, day
+    # Accept short M/D only from reliable title/url/event fields and only in report context.
+    # Do not parse arbitrary body tokens like match scores (3-2) as dates.
+    if v9011_date_context_allows_short_date(reliable_raw):
+        m = re.search(r"\b(\d{1,2})[/-](\d{1,2})\b", reliable_raw)
+        if m:
+            month, day, year = int(m.group(1)), int(m.group(2)), datetime.now().year
+            if v9011_valid_date(year, month, day):
+                return year, month, day
+    p = v9011_probe(full_raw)
     m = re.search(r"\b(\d{1,2})\s+(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)\s+(20\d{2})\b", p)
     if m:
         mesi = {"gennaio":1,"febbraio":2,"marzo":3,"aprile":4,"maggio":5,"giugno":6,"luglio":7,"agosto":8,"settembre":9,"ottobre":10,"novembre":11,"dicembre":12}
-        return int(m.group(3)), mesi.get(m.group(2), 0), int(m.group(1))
+        year, month, day = int(m.group(3)), mesi.get(m.group(2), 0), int(m.group(1))
+        if v9011_valid_date(year, month, day):
+            return year, month, day
     return 0, 0, 0
 
 
