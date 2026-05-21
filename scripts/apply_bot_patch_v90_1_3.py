@@ -52,7 +52,7 @@ if V90_1_3_ENABLED and V90_1_3_SPOILER_HOTFIX_ENABLED:
         print(f"[WARN v90.1.3] override v9011_should_prefix_spoiler failed: {e}")
 
 
-if V90_1_3_ENABLED and "create_post_without_image" in globals():
+if V90_1_3_ENABLED and V90_1_3_SPOILER_HOTFIX_ENABLED and "create_post_without_image" in globals():
     _ORIG_V9013_create_post_without_image = create_post_without_image
 
     def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
@@ -91,7 +91,10 @@ if V90_1_3_ENABLED and "create_post_without_image" in globals():
         )
 
 try:
-    print("[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]")
+    if V90_1_3_ENABLED and V90_1_3_SPOILER_HOTFIX_ENABLED:
+        print("[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]")
+    else:
+        print("[BOOT v90.1.3] Spoiler hotfix disattivata")
 except Exception:
     pass
 '''
