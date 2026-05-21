@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-21 13:34:20",
-  "last_bot_version": "v90_1_3_spoiler_hotfix (635d97e)",
-  "updated_at": "2026-05-21T13:35:10",
-  "total_items": 152,
+  "last_run_id": "2026-05-21 14:13:20",
+  "last_bot_version": "v90_1_3_spoiler_hotfix (421c65a)",
+  "updated_at": "2026-05-21T14:14:22",
+  "total_items": 155,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1220,6 +1220,30 @@
       "original_html_file": "20260521_133510_003_aggiornamenti-sul-possibile-ritorno-di-baron-corbin-in-wwe_923df530_original.html",
       "final_html_file": "20260521_133510_003_aggiornamenti-sul-possibile-ritorno-di-baron-corbin-in-wwe_923df530_final.html",
       "metadata_file": "20260521_133510_003_aggiornamenti-sul-possibile-ritorno-di-baron-corbin-in-wwe_923df530_metadata.json"
+    },
+    {
+      "run_id": "2026-05-21 14:13:20",
+      "title": "WWE: Drew Mcintyre torna a SmackDown per la puntata del 29 maggio a Barcellona",
+      "url": "https://www.ringsidenews.com/possible-date-drew-mcintyres-return-amid-wwe-tv-hiatus/",
+      "original_html_file": "20260521_141347_001_wwe-drew-mcintyre-torna-a-smackdown-per-la-puntata-del-29-maggio-a-barcellona_464912f4_original.html",
+      "final_html_file": "20260521_141347_001_wwe-drew-mcintyre-torna-a-smackdown-per-la-puntata-del-29-maggio-a-barcellona_464912f4_final.html",
+      "metadata_file": "20260521_141347_001_wwe-drew-mcintyre-torna-a-smackdown-per-la-puntata-del-29-maggio-a-barcellona_464912f4_metadata.json"
+    },
+    {
+      "run_id": "2026-05-21 14:13:20",
+      "title": "Mark Shapiro: TKO monitorerà la situazione in vista del ritorno della WWE in Arabia Saudita",
+      "url": "https://www.wrestlinginc.com/2178341/wwe-tko-saudi-arabia-mark-shapiro-monitor-situation-return/",
+      "original_html_file": "20260521_141404_002_mark-shapiro-tko-monitorer-la-situazione-in-vista-del-ritorno-della-wwe-in-arabi_28a87ae3_original.html",
+      "final_html_file": "20260521_141404_002_mark-shapiro-tko-monitorer-la-situazione-in-vista-del-ritorno-della-wwe-in-arabi_28a87ae3_final.html",
+      "metadata_file": "20260521_141404_002_mark-shapiro-tko-monitorer-la-situazione-in-vista-del-ritorno-della-wwe-in-arabi_28a87ae3_metadata.json"
+    },
+    {
+      "run_id": "2026-05-21 14:13:20",
+      "title": "Ludwig Kaiser: i legali affermano che le restrizioni di viaggio minacciano il suo impiego in WWE",
+      "url": "https://www.ringsidenews.com/ludwig-kaiser-argues-wwe-travel-essential-keep-his-job-amid-battery-case/",
+      "original_html_file": "20260521_141422_003_ludwig-kaiser-i-legali-affermano-che-le-restrizioni-di-viaggio-minacciano-il-suo_2673a3e7_original.html",
+      "final_html_file": "20260521_141422_003_ludwig-kaiser-i-legali-affermano-che-le-restrizioni-di-viaggio-minacciano-il-suo_2673a3e7_final.html",
+      "metadata_file": "20260521_141422_003_ludwig-kaiser-i-legali-affermano-che-le-restrizioni-di-viaggio-minacciano-il-suo_2673a3e7_metadata.json"
     }
   ]
 }

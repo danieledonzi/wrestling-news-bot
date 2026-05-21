@@ -1,22 +1,22 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-21T13:35:11",
-  "run_start": "2026-05-21 13:34:20",
-  "run_end": "2026-05-21 13:34:20",
-  "bot_version": "v90_1_3_spoiler_hotfix (635d97e)",
-  "candidate_count": 13,
+  "collected_at": "2026-05-21T14:14:23",
+  "run_start": "2026-05-21 14:13:20",
+  "run_end": "2026-05-21 14:13:20",
+  "bot_version": "v90_1_3_spoiler_hotfix (421c65a)",
+  "candidate_count": 11,
   "mode": "normal",
   "max_new": 3,
   "published_total": 3,
   "published_pending": 0,
   "published_new": 3,
-  "candidates_tried": 3,
-  "score_lines_count": 16,
-  "skip_count": 21,
+  "candidates_tried": 7,
+  "score_lines_count": 22,
+  "skip_count": 26,
   "skip_v89_count": 0,
-  "gemini_calls_observed": 14,
+  "gemini_calls_observed": 16,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 14
+    "gemini-3.1-flash-lite": 16
   },
   "gemini_discarded_models": {},
   "model_tasks": [
@@ -82,99 +82,99 @@
   },
   "perf": {
     "WP lookup event_key": {
-      "count": 1,
-      "total_seconds": 1.39,
-      "max_seconds": 1.39
+      "count": 2,
+      "total_seconds": 3.18,
+      "max_seconds": 1.75
     },
     "scraping articolo": {
       "count": 2,
-      "total_seconds": 2.34,
-      "max_seconds": 1.21
+      "total_seconds": 2.24,
+      "max_seconds": 1.16
     },
     "estrazione blocchi": {
       "count": 2,
-      "total_seconds": 1.67,
-      "max_seconds": 0.84
+      "total_seconds": 1.43,
+      "max_seconds": 0.72
     },
     "analisi editoriale AI v72": {
-      "count": 3,
-      "total_seconds": 3.56,
-      "max_seconds": 1.22
+      "count": 6,
+      "total_seconds": 7.95,
+      "max_seconds": 1.77
     },
     "WP recent posts dedupe": {
       "count": 1,
-      "total_seconds": 0.82,
-      "max_seconds": 0.82
+      "total_seconds": 0.93,
+      "max_seconds": 0.93
     },
     "categoria da analisi editoriale v72": {
       "count": 1,
-      "total_seconds": 1.15,
-      "max_seconds": 1.15
+      "total_seconds": 1.24,
+      "max_seconds": 1.24
     },
     "traduzione": {
       "count": 3,
-      "total_seconds": 13.62,
-      "max_seconds": 6.23
+      "total_seconds": 14.59,
+      "max_seconds": 5.26
     },
     "creazione post WordPress": {
       "count": 3,
-      "total_seconds": 10.76,
-      "max_seconds": 4.42
+      "total_seconds": 13.49,
+      "max_seconds": 5.59
     },
-    "totale articolo pubblicato 'Ludwig Kaiser Fighting Florida Battery Charge With Not Guilt'": {
+    "totale articolo pubblicato 'Possible Date for Drew McIntyre's Return Amid WWE TV Hiatus'": {
       "count": 1,
-      "total_seconds": 14.32,
-      "max_seconds": 14.32
+      "total_seconds": 14.16,
+      "max_seconds": 14.16
     },
-    "totale articolo pubblicato 'Ludwig Kaiser Flew Back From Mexico After Learning About Flo'": {
+    "totale articolo pubblicato 'Mark Shapiro Says TKO Will 'Monitor The Situation' Ahead Of '": {
       "count": 1,
-      "total_seconds": 10.54,
-      "max_seconds": 10.54
+      "total_seconds": 13.38,
+      "max_seconds": 13.38
     },
-    "totale articolo pubblicato 'Backstage Update On Former Baron Corbin Potentially Returnin'": {
+    "totale articolo pubblicato 'Ludwig Kaiser Argues WWE Travel Is Essential To Keep His Job'": {
       "count": 1,
-      "total_seconds": 11.22,
-      "max_seconds": 11.22
+      "total_seconds": 12.23,
+      "max_seconds": 12.23
     }
   },
   "article_metrics": [
     {
-      "path": "published/20260521_133444_001_ludwig-kaiser-si-dichiara-non-colpevole-per-laccusa-di-aggressione-in-florida_5068_final.html",
+      "path": "published/20260521_141346_001_wwe-drew-mcintyre-torna-a-smackdown-per-la-puntata-del-29-maggio-a-barcellona_5077_final.html",
       "exists": true,
-      "word_count": 217,
-      "paragraph_count": 8,
+      "word_count": 241,
+      "paragraph_count": 7,
       "blockquote_count": 0,
       "image_count": 0,
       "iframe_count": 0,
       "embed_hint_count": 0,
-      "title": "Ludwig Kaiser si dichiara non colpevole per l'accusa di aggressione in Florida"
+      "title": "WWE: Drew Mcintyre torna a SmackDown per la puntata del 29 maggio a Barcellona"
     },
     {
-      "path": "published/20260521_133456_002_ludwig-kaiser-rientrato-dal-messico-dopo-aver-appreso-del-mandato-darresto-in-florida_5071_final.html",
+      "path": "published/20260521_141402_002_mark-shapiro-tko-monitorerà-la-situazione-in-vista-del-ritorno-della-wwe-in-arabia-saudita_5080_final.html",
       "exists": true,
-      "word_count": 182,
+      "word_count": 321,
       "paragraph_count": 4,
+      "blockquote_count": 2,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 4,
+      "title": "Mark Shapiro: TKO monitorerà la situazione in vista del ritorno della WWE in Arabia Saudita"
+    },
+    {
+      "path": "published/20260521_141421_003_ludwig-kaiser-i-legali-affermano-che-le-restrizioni-di-viaggio-minacciano-il-suo-impiego-i_5083_final.html",
+      "exists": true,
+      "word_count": 270,
+      "paragraph_count": 7,
       "blockquote_count": 1,
       "image_count": 0,
       "iframe_count": 0,
       "embed_hint_count": 2,
-      "title": "Ludwig Kaiser rientrato dal Messico dopo aver appreso del mandato d'arresto in Florida"
-    },
-    {
-      "path": "published/20260521_133508_003_aggiornamenti-sul-possibile-ritorno-di-baron-corbin-in-wwe_5074_final.html",
-      "exists": true,
-      "word_count": 220,
-      "paragraph_count": 4,
-      "blockquote_count": 0,
-      "image_count": 0,
-      "iframe_count": 0,
-      "embed_hint_count": 0,
-      "title": "Aggiornamenti sul possibile ritorno di Baron Corbin in WWE"
+      "title": "Ludwig Kaiser: i legali affermano che le restrizioni di viaggio minacciano il suo impiego in WWE"
     }
   ],
   "daily_counts": {
-    "published_today": 16,
-    "published_last_4h": 7,
-    "runs_today": 6
+    "published_today": 19,
+    "published_last_4h": 10,
+    "runs_today": 7
   }
 }

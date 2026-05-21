@@ -1,36 +1,36 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-21 13:34:20",
-  "bot_version": "v90_1_3_spoiler_hotfix (635d97e)",
-  "git_sha": "635d97e1e19715ee9a3ba04a8fbd059dfb774e32",
-  "created_at": "2026-05-21T13:35:11",
+  "run_id": "2026-05-21 14:13:20",
+  "bot_version": "v90_1_3_spoiler_hotfix (421c65a)",
+  "git_sha": "421c65a70151615e8f6d44aadadd26ab4b21f74a",
+  "created_at": "2026-05-21T14:14:23",
   "published_count": 3,
   "published_post_ids": [
-    "5068",
-    "5071",
-    "5074"
+    "5077",
+    "5080",
+    "5083"
   ],
   "published_artifacts": [
     {
-      "post_id": 5068,
-      "title": "Ludwig Kaiser si dichiara non colpevole per l'accusa di aggressione in Florida",
-      "source_url": "https://www.ringsidenews.com/ludwig-kaiser-fighting-florida-battery-charge-not-guilty-plea/",
-      "html_file": "published/20260521_133444_001_ludwig-kaiser-si-dichiara-non-colpevole-per-laccusa-di-aggressione-in-florida_5068_final.html",
-      "metadata_file": "published/20260521_133444_001_ludwig-kaiser-si-dichiara-non-colpevole-per-laccusa-di-aggressione-in-florida_5068_metadata.json"
+      "post_id": 5077,
+      "title": "WWE: Drew Mcintyre torna a SmackDown per la puntata del 29 maggio a Barcellona",
+      "source_url": "https://www.ringsidenews.com/possible-date-drew-mcintyres-return-amid-wwe-tv-hiatus/",
+      "html_file": "published/20260521_141346_001_wwe-drew-mcintyre-torna-a-smackdown-per-la-puntata-del-29-maggio-a-barcellona_5077_final.html",
+      "metadata_file": "published/20260521_141346_001_wwe-drew-mcintyre-torna-a-smackdown-per-la-puntata-del-29-maggio-a-barcellona_5077_metadata.json"
     },
     {
-      "post_id": 5071,
-      "title": "Ludwig Kaiser rientrato dal Messico dopo aver appreso del mandato d'arresto in Florida",
-      "source_url": "https://www.ringsidenews.com/ludwig-kaiser-flew-back-mexico-learning-about-florida-arrest-warrant/",
-      "html_file": "published/20260521_133456_002_ludwig-kaiser-rientrato-dal-messico-dopo-aver-appreso-del-mandato-darresto-in-florida_5071_final.html",
-      "metadata_file": "published/20260521_133456_002_ludwig-kaiser-rientrato-dal-messico-dopo-aver-appreso-del-mandato-darresto-in-florida_5071_metadata.json"
+      "post_id": 5080,
+      "title": "Mark Shapiro: TKO monitorerà la situazione in vista del ritorno della WWE in Arabia Saudita",
+      "source_url": "https://www.wrestlinginc.com/2178341/wwe-tko-saudi-arabia-mark-shapiro-monitor-situation-return/",
+      "html_file": "published/20260521_141402_002_mark-shapiro-tko-monitorerà-la-situazione-in-vista-del-ritorno-della-wwe-in-arabia-saudita_5080_final.html",
+      "metadata_file": "published/20260521_141402_002_mark-shapiro-tko-monitorerà-la-situazione-in-vista-del-ritorno-della-wwe-in-arabia-saudita_5080_metadata.json"
     },
     {
-      "post_id": 5074,
-      "title": "Aggiornamenti sul possibile ritorno di Baron Corbin in WWE",
-      "source_url": "https://www.wrestlinginc.com/2178332/baron-corbin-returning-wwe/",
-      "html_file": "published/20260521_133508_003_aggiornamenti-sul-possibile-ritorno-di-baron-corbin-in-wwe_5074_final.html",
-      "metadata_file": "published/20260521_133508_003_aggiornamenti-sul-possibile-ritorno-di-baron-corbin-in-wwe_5074_metadata.json"
+      "post_id": 5083,
+      "title": "Ludwig Kaiser: i legali affermano che le restrizioni di viaggio minacciano il suo impiego in WWE",
+      "source_url": "https://www.ringsidenews.com/ludwig-kaiser-argues-wwe-travel-essential-keep-his-job-amid-battery-case/",
+      "html_file": "published/20260521_141421_003_ludwig-kaiser-i-legali-affermano-che-le-restrizioni-di-viaggio-minacciano-il-suo-impiego-i_5083_final.html",
+      "metadata_file": "published/20260521_141421_003_ludwig-kaiser-i-legali-affermano-che-le-restrizioni-di-viaggio-minacciano-il-suo-impiego-i_5083_metadata.json"
     }
   ],
   "errors": [],

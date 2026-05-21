@@ -5458,3 +5458,275 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
 ===== RUN END [2026-05-21 13:34:20] VERSION [v90_1_3_spoiler_hotfix (635d97e)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show=dynamite
+[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard
+[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]
+
+===== RUN START [2026-05-21 14:13:20] VERSION [v90_1_3_spoiler_hotfix (421c65a)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 14 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Mark Shapiro Says TKO Will 'Monitor The Situation' Ahead Of WWE's Saudi Arabia Return
+[SCORE v86.9] Cap executive interview/opinion 100->72 - Mark Shapiro Says TKO Will 'Monitor The Situation' Ahead Of WWE's Saudi Arabia Return
+[PERF v71] WP lookup event_key: 1.75s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (16/75): Shawn Michaels Explains How WWE Training Environment Has Changed
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite & Collision 5/20/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (20/75): AEW's Paul Wight Is Impressed With Coaching Skills Of WWE HOFer
+[REPORT v87.2] Report confermato da history forte: report:aew-dynamite-2026-05-20
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:aew-dynamite-2026-05-20 - AEW Dynamite & Collision Results 5/20 - Two Titles On The Line, Anything Goes Match
+[SKIP] Score sotto soglia editoriale (0/75): WWE Saturday Night's Main Event 5/23/2026: Draws & Duds
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Bully Ray, Tommy Dreamer Discuss What Brock Lesnar's WWE Raw Return Means For Oba Femi
+[SKIP] Score sotto soglia editoriale (56/75): Bully Ray, Tommy Dreamer Discuss What Brock Lesnar's WWE Raw Return Means For Oba Femi
+[SKIP] URL già in history: https://www.wrestlinginc.com/2178332/baron-corbin-returning-wwe/
+[SKIP] Score sotto soglia editoriale (0/75): WWE NXT - 5/19/2026: 3 Things We Hated And 3 We Loved
+[SKIP] Preview/show announcement scaduta: Vanity Project Outlast Darkstate To Retain WWE NXT Tag Team Titles
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP] Score sotto soglia editoriale (48/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[SCORE v80.4] AAA major World priority 68->80 - WWE Star Ludwig Kaiser, Aka El Grande Americano, Reportedly Arrested For Battery
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Possible Date for Drew McIntyre's Return Amid WWE TV Hiatus
+[SKIP] Score sotto soglia editoriale (0/75): Ex-WWE LFG Star BJ Ray Fires Back At MJF Over Claim He Created Wrestling's Social Media Formula
+[SKIP] Score sotto soglia editoriale (27/75): Booker T Says Miserable People Criticizing R-Truth Wish They Had His Spot
+[SKIP] Score sotto soglia editoriale (18/75): Tiffany Stratton Challenges Logan Paul to a Moonsault-Off After Podcast Trash Talk
+[SKIP] URL già in history: https://www.ringsidenews.com/ludwig-kaiser-flew-back-mexico-learning-about-florida-arrest-warrant/
+[SKIP] Score sotto soglia editoriale (15/75): Ludwig Kaiser Seeks International Travel Permission in New Court Filing
+[SKIP] URL già in history: https://www.ringsidenews.com/ludwig-kaiser-fighting-florida-battery-charge-not-guilty-plea/
+[SKIP] URL già in history: https://www.ringsidenews.com/ludwig-kaisers-court-restrictions-revealed-florida-battery-arrest/
+[SKIP] URL già in history: https://www.ringsidenews.com/ludwig-kaiser-battery-case-reveal-alleged-elevator-attack-have-some-manners-comment/
+[SKIP] URL già in history: https://www.ringsidenews.com/ludwig-kaiser-turned-himself-florida-battery-warrant-before-posting-1000-bond/
+[SKIP] Score sotto soglia editoriale (43/75): Ludwig Kaiser Arrested In Florida On Battery Charge
+[PERF v71] WP lookup event_key: 1.43s
+[FIX] Event key in history ma non confermata su WordPress: event:title:darby-allin:world:tag:championship:dynamite - provo a pubblicare
+[SCORE] 100 high - Possible Date for Drew McIntyre's Return Amid WWE TV Hiatus | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v71 freshness=0.694
+[SCORE] 80 high - WWE Star Ludwig Kaiser, Aka El Grande Americano, Reportedly Arrested For Battery | WWE/main roster, evento legale/controversia, v62 evento legale grave, v80.4 AAA major World priority 68->80, v71 freshness=0.711
+[SCORE] 72 medium - Mark Shapiro Says TKO Will 'Monitor The Situation' Ahead Of WWE's Saudi Arabia Return | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 business/dirigenza, v62 categoria business, v86.8 cap executive interview/opinion 100->72, v71 freshness=0.724, v48 tier5: v71 major story bypass
+[SCORE] 71 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 68 medium - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, show settimanale, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 64 medium - Backstage Reaction to Darby Allin's AEW World Title Run Revealed | AEW, ritorno/debutto, PLE/PPV, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.524, v48 tier2: 55-74
+[SCORE] 63 medium - Ludwig Kaiser Argues WWE Travel Is Essential To Keep His Job Amid Battery Case | WWE/main roster, evento legale/controversia, v62 evento legale grave, v71 source reliability soft penalty, v71 freshness=0.565, v48 tier2: 55-74
+[SCORE] 63 medium - Ludwig Kaiser's Attorney Says WWE Star Has No Criminal History Anywhere In The World | WWE/main roster, evento legale/controversia, v62 evento legale grave, v71 source reliability soft penalty, v71 freshness=0.563, v48 tier2: 55-74
+[SCORE] 63 medium - Ludwig Kaiser Requests Trial In Florida Battery Case After Hiring Attorney | WWE/main roster, evento legale/controversia, v62 evento legale grave, v71 source reliability soft penalty, v71 freshness=0.555, v48 tier2: 55-74
+[SCORE] 60 medium - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[MODE] Modalita normale: 1 news >=90, 2 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 11 | mode=normal | max nuove=3 | pending pubblicati=0
+[SEO v89] Report non assorbe sviluppo autonomo forte: Possible Date for Drew McIntyre's Return Amid WWE TV Hiatus
+[BOT] Elaborazione: Possible Date for Drew McIntyre's Return Amid WWE TV Hiatus
+[BOT] semantic_id=possible-date-for-drew-mcintyres-return-amid-wwe-tv-hiatus
+[SCORE] iniziale=100 priority=high
+[PERF v71] scraping articolo: 1.08s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=8, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.71s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo fornisce un aggiornamento sul rientro di una star basato su pubblicità ufficiale per uno show futuro, non è una preview di un evento in sé.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'WrestleMania' o nomi di titoli/cinture.; Mantenere 'Highlander reboot' come riferimento cinematografico.; Evitare calchi: 'Walking back into' va reso come 'tornare a calcare il ring' o 'rientrare'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo fornisce un aggiornamento sul rientro di una star basato su pubblicità ufficiale per uno show futuro, non è una preview di un evento in sé.
+[PERF v71] analisi editoriale AI v72: 1.12s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Possible Date for Drew McIntyre's Return Amid WWE TV Hiatus
+[SCORE] raffinato=100 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto
+[V71] story_signature=stable:drew_mcintyre|jacob_fatu|possible_date|return|wwe semantic_status=new_story freshness=0.81
+[PERF v71] WP recent posts dedupe: 0.93s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.24s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=8
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 4.47s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WWE: Drew Mcintyre torna a SmackDown per la puntata del 29 maggio a Barcellona
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/possible-date-for-drew-mcintyres-return-amid-wwe-tv-hiatus-17.jpg
+[MEDIA] Errore upload (tentativo 1/3): ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+[MEDIA] Immagine caricata: 5076
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260521_141346_001_wwe-drew-mcintyre-torna-a-smackdown-per-la-puntata-del-29-maggio-a-barcellona_5077_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5077
+[PERF v71] creazione post WordPress: 5.03s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/possible-date-for-drew-mcintyres-return-amid-wwe-tv-hiatus-17.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5076
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Possible Date for Drew McIntyre's Return Amid WWE TV Hiatus': 14.16s
+[OK] Pubblicato: WWE: Drew Mcintyre torna a SmackDown per la puntata del 29 maggio a Barcellona
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260521_141347_001_wwe-drew-mcintyre-torna-a-smackdown-per-la-puntata-del-29-maggio-a-barcellona_464912f4_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WWE: Drew Mcintyre torna a SmackDown per la puntata del 29 maggio a Barcellona
+[PUBLISHED REVIEW v87.1] Review outer salvata: WWE: Drew Mcintyre torna a SmackDown per la puntata del 29 maggio a Barcellona
+[REPORT v87.6] Non scrivo history forte: non true-results/canonico (report:wwe-smackdown-2026-05-29)
+[BOT] Elaborazione: WWE Star Ludwig Kaiser, Aka El Grande Americano, Reportedly Arrested For Battery
+[BOT] semantic_id=wwe-star-ludwig-kaiser-aka-el-grande-americano-reportedly-arrested-for-battery
+[SCORE] iniziale=80 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=0.95 model=gemini-3.1-flash-lite | Si tratta di una notizia di cronaca riguardante l'arresto di un wrestler, non di una preview o di un report di uno show.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei personaggi come 'El Grande Americano' invariati; Non tradurre 'battery' con batteria ma con 'percosse'; 'Bonded out' va tradotto come 'rilasciato su cauzione'
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Si tratta di una notizia di cronaca riguardante l'arresto di un wrestler, non di una preview o di un report di uno show.
+[PERF v71] analisi editoriale AI v72: 1.13s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE Star Ludwig Kaiser, Aka El Grande Americano, Reportedly Arrested For Battery
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 72->54 - WWE Star Ludwig Kaiser, Aka El Grande Americano, Reportedly Arrested For Battery
+[SCORE v79.1.3] Recovery post-show 54->80 - WWE Star Ludwig Kaiser, Aka El Grande Americano, Reportedly Arrested For Battery
+[SCORE v80.4] AAA major World final floor 80->80 - WWE Star Ludwig Kaiser, Aka El Grande Americano, Reportedly Arrested For Battery
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 80->54 - WWE Star Ludwig Kaiser, Aka El Grande Americano, Reportedly Arrested For Battery
+[SCORE] raffinato=54 priority=low | WWE/main roster, WWE main roster + storyline/evento, evento legale/controversia, show settimanale, v62 evento legale grave, v80.4 AAA major World priority 56->72, v88.2 cap OTHER/feature non-news 72->54, v79.1.3 post-show recovery 54->80, v80.4 AAA major World final floor 80->80, v88.2 cap OTHER/feature non-news 80->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - WWE Star Ludwig Kaiser, Aka El Grande Americano, Reportedly Arrested For Battery
+[BOT] Elaborazione: Mark Shapiro Says TKO Will 'Monitor The Situation' Ahead Of WWE's Saudi Arabia Return
+[BOT] semantic_id=mark-shapiro-says-tko-will-monitor-the-situation-ahead-of-wwes-saudi-arabia-return
+[SCORE] iniziale=72 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=6, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=BUSINESS (15) conf=0.90 model=gemini-3.1-flash-lite | Articolo basato su dichiarazioni ufficiali di un executive TKO riguardo la strategia aziendale. Non è una preview poiché tratta di una posizione politica/economica su eventi futuri.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei PLE (Night of Champions, Royal Rumble) in inglese.; Non tradurre 'monitor the situation' come calco: usare 'monitoreremo la situazione'.; 'Release' non si applica qui, ma prestare attenzione al contesto corporate.
+[CATEGORY v73] Business downgrade: BUSINESS -> WWE | focus non business reale
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Articolo basato su dichiarazioni ufficiali di un executive TKO riguardo la strategia aziendale. Non è una preview poiché tratta di una posizione politica/economica su eventi futuri. | v73 business downgrade
+[PERF v71] analisi editoriale AI v72: 1.30s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Mark Shapiro Says TKO Will 'Monitor The Situation' Ahead Of WWE's Saudi Arabia Return
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Mark Shapiro Says TKO Will 'Monitor The Situation' Ahead Of WWE's Saudi Arabia Return
+[SCORE] raffinato=45 priority=low | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, non wrestling puro, opinione generica, v62 business/dirigenza, v62 categoria business, v88.3 hard feature skip cap 54->45
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Mark Shapiro Says TKO Will 'Monitor The Situation' Ahead Of WWE's Saudi Arabia Return
+[V71] story_signature=stable:mark_shapiro_says|tko_will|monitor_the_situation|return|wwe semantic_status=new_story freshness=0.724
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=6
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/mark-shapiro-says-tko-will-monitor-the-situation-ahead-of-wwes-saudi-arabia-return/intro-1779350606.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 5.26s
+[FIX] Titolo non valido (ok) -> fallback automatico: Mark shapiro afferma TKO will 'monitor the situation' ahead of WWE's saudi arabia ritorno
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Mark Shapiro: TKO monitorerà la situazione in vista del ritorno della WWE in Arabia Saudita
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/mark-shapiro-says-tko-will-monitor-the-situation-ahead-of-wwes-saudi-arabia-return/l-intro-1779350606.jpg
+[MEDIA] Immagine caricata: 5079
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260521_141402_002_mark-shapiro-tko-monitorerà-la-situazione-in-vista-del-ritorno-della-wwe-in-arabia-saudita_5080_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5080
+[PERF v71] creazione post WordPress: 5.59s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/mark-shapiro-says-tko-will-monitor-the-situation-ahead-of-wwes-saudi-arabia-return/l-intro-1779350606.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5079
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Mark Shapiro Says TKO Will 'Monitor The Situation' Ahead Of ': 13.38s
+[OK] Pubblicato: Mark Shapiro: TKO monitorerà la situazione in vista del ritorno della WWE in Arabia Saudita
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260521_141404_002_mark-shapiro-tko-monitorer-la-situazione-in-vista-del-ritorno-della-wwe-in-arabi_28a87ae3_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Mark Shapiro: TKO monitorerà la situazione in vista del ritorno della WWE in Arabia Saudita
+[PUBLISHED REVIEW v87.1] Review outer salvata: Mark Shapiro: TKO monitorerà la situazione in vista del ritorno della WWE in Arabia Saudita
+[BOT] Elaborazione: WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[BOT] semantic_id=wwe-announces-major-change-to-becky-lynchsol-ruca-snme-match
+[SCORE] iniziale=71 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo annuncia un cambiamento in una stipulazione di un match già in programma; pur parlando di un evento futuro, non è una preview completa ma una notizia di aggiornamento su una card.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Saturday Night's Main Event' (SNME).; Mantenere in inglese i nomi dei titoli (es. Women's Intercontinental Championship).; 'Fighting champion' va reso come 'campionessa combattiva' o 'campionessa che difende attivamente il titolo'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo annuncia un cambiamento in una stipulazione di un match già in programma; pur parlando di un evento futuro, non è una preview completa ma una notizia di aggiornamento su una card.
+[PERF v71] analisi editoriale AI v72: 1.34s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[SCORE] raffinato=56 priority=low | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v70 cap preview hard
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[BOT] Elaborazione: Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[BOT] semantic_id=joe-hendry-says-wwe-will-soon-release-an-album-of-his-original-songs
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=NXT (6) conf=0.95 model=gemini-3.1-flash-lite | L'articolo riporta una dichiarazione ufficiale di Joe Hendry rilasciata durante un'intervista; non è una preview di eventi né un report di show.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (WWE NXT Champion) in inglese.; 'Release' dell'album è 'pubblicazione/uscita', non 'rilascio'.; Evitare calchi per i riferimenti musicali e televisivi.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=NXT (6) | L'articolo riporta una dichiarazione ufficiale di Joe Hendry rilasciata durante un'intervista; non è una preview di eventi né un report di show.
+[PERF v71] analisi editoriale AI v72: 1.29s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 57->54 - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, trash talk/clickbait forte, v62 titolo/championship, v88.2 cap OTHER/feature non-news 57->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SEO v89] Report non assorbe sviluppo autonomo forte: Backstage Reaction to Darby Allin's AEW World Title Run Revealed
+[SKIP v88.3] Non forzo articolo soft sotto 65 dopo una pubblicazione: 64/65 - Backstage Reaction to Darby Allin's AEW World Title Run Revealed
+[BOT] Elaborazione: Ludwig Kaiser Argues WWE Travel Is Essential To Keep His Job Amid Battery Case
+[BOT] semantic_id=ludwig-kaiser-argues-wwe-travel-is-essential-to-keep-his-job-amid-battery-case
+[SCORE] iniziale=63 priority=medium
+[PERF v71] scraping articolo: 1.16s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.72s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta aggiornamenti legali su una superstar WWE, rientrando nel genere news di cronaca giudiziaria legata al wrestling, non essendo né una preview di un evento né un report di show.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'battery case' come 'caso di batteria' (falso amico), utilizzare 'accusa di aggressione' o 'procedimento per lesioni'.; Mantenere i nomi dei titoli (es. WWE star) in inglese.; Gestire 'misdemeanor' come 'reato minore'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta aggiornamenti legali su una superstar WWE, rientrando nel genere news di cronaca giudiziaria legata al wrestling, non essendo né una preview di un evento né un report di show.
+[PERF v71] analisi editoriale AI v72: 1.77s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Ludwig Kaiser Argues WWE Travel Is Essential To Keep His Job Amid Battery Case
+[SCORE] raffinato=100 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, evento legale/controversia, PLE/PPV, v62 evento legale grave
+[V71] story_signature=stable:ludwig_kaiser_argues|wwe_travel_is_essential_to_keep_his_job_amid_battery_case|status|wwe semantic_status=new_story freshness=0.799
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=9
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 4.86s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Ludwig Kaiser: i legali affermano che le restrizioni di viaggio minacciano il suo impiego in WWE
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/ludwig-kaiser-argues-wwe-travel-is-essential-to-keep-his-job-amid-battery-case-14.jpg
+[MEDIA] Immagine caricata: 5082
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260521_141421_003_ludwig-kaiser-i-legali-affermano-che-le-restrizioni-di-viaggio-minacciano-il-suo-impiego-i_5083_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5083
+[PERF v71] creazione post WordPress: 2.87s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/ludwig-kaiser-argues-wwe-travel-is-essential-to-keep-his-job-amid-battery-case-14.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5082
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Ludwig Kaiser Argues WWE Travel Is Essential To Keep His Job': 12.23s
+[OK] Pubblicato: Ludwig Kaiser: i legali affermano che le restrizioni di viaggio minacciano il suo impiego in WWE
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260521_141422_003_ludwig-kaiser-i-legali-affermano-che-le-restrizioni-di-viaggio-minacciano-il-suo_2673a3e7_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Ludwig Kaiser: i legali affermano che le restrizioni di viaggio minacciano il suo impiego in WWE
+[PUBLISHED REVIEW v87.1] Review outer salvata: Ludwig Kaiser: i legali affermano che le restrizioni di viaggio minacciano il suo impiego in WWE
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 7 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-21 14:13:20_summary.json -> published_html_review/run_2026-05-21 14-13-20_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (589 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
+===== RUN END [2026-05-21 14:13:20] VERSION [v90_1_3_spoiler_hotfix (421c65a)] =====
+
