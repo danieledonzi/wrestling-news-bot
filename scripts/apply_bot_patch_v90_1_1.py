@@ -32,10 +32,20 @@ def v9011_html_text(html=""):
         return re.sub(r"<[^>]+>", " ", str(html or ""))
 
 
-def v9011_body_has_media(html=""):
+def v9011_body_has_image(html=""):
     if not html:
         return False
-    return bool(re.search(r"<(figure|img|blockquote|iframe|script)\b|https?://(?:x|twitter|instagram|youtube|bsky)\.com/", str(html), flags=re.I))
+    return bool(re.search(r"<(figure|img)\b", str(html), flags=re.I))
+
+
+def v9011_body_has_embed(html=""):
+    if not html:
+        return False
+    return bool(re.search(r"<(blockquote|iframe|script)\b|https?://(?:x|twitter|instagram|youtube|bsky)\.com/", str(html), flags=re.I))
+
+
+def v9011_body_has_media(html=""):
+    return v9011_body_has_image(html) or v9011_body_has_embed(html)
 
 
 def v9011_media_queue_len(value):
@@ -50,24 +60,28 @@ def v9011_drop_duplicate_media_queues(html="", is_report=False, inline_images=No
 
     v90.1 removed some tail blocks, but reports and tweet-heavy articles can still have the
     same images/embeds correctly placed in data['testo'] and also left in inline_images/embed_urls.
-    Those queues are appended by the underlying publisher at the end of the article. If the body
-    already contains media, clear the residual queues instead of letting them produce duplicates.
+    Those queues are appended by the underlying publisher at the end of the article. Clear only
+    the queue whose media type is already present in the body, preserving fallback embed recovery
+    when the body has images but still missed social embeds.
     """
     if not V90_1_1_MEDIA_QUEUE_DEDUPE_ENABLED:
         return inline_images, embed_urls
-    has_media = v9011_body_has_media(html)
     if is_report:
         n_img = v9011_media_queue_len(inline_images)
         n_emb = v9011_media_queue_len(embed_urls)
         if n_img or n_emb:
             print(f"[MEDIA v90.1.1] Report: scarto code media residue per evitare duplicati in fondo images={n_img} embeds={n_emb}")
         return [], []
-    if has_media:
-        n_img = v9011_media_queue_len(inline_images)
-        n_emb = v9011_media_queue_len(embed_urls)
-        if n_img or n_emb:
-            print(f"[MEDIA v90.1.1] Articolo con media nel body: scarto code residue images={n_img} embeds={n_emb}")
-        return [], []
+    has_image = v9011_body_has_image(html)
+    has_embed = v9011_body_has_embed(html)
+    n_img = v9011_media_queue_len(inline_images)
+    n_emb = v9011_media_queue_len(embed_urls)
+    if has_image and n_img:
+        print(f"[MEDIA v90.1.1] Articolo: scarto inline_images residue gia coperte nel body images={n_img}")
+        inline_images = []
+    if has_embed and n_emb:
+        print(f"[MEDIA v90.1.1] Articolo: scarto embed_urls residue gia coperte nel body embeds={n_emb}")
+        embed_urls = []
     return inline_images, embed_urls
 
 
