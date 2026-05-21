@@ -1,22 +1,22 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-21T14:14:23",
-  "run_start": "2026-05-21 14:13:20",
-  "run_end": "2026-05-21 14:13:20",
-  "bot_version": "v90_1_3_spoiler_hotfix (421c65a)",
+  "collected_at": "2026-05-21T16:05:13",
+  "run_start": "2026-05-21 16:04:41",
+  "run_end": "2026-05-21 16:04:41",
+  "bot_version": "v90_2_editorial_pacing_update_gate (b0df1e7)",
   "candidate_count": 11,
   "mode": "normal",
   "max_new": 3,
-  "published_total": 3,
+  "published_total": 1,
   "published_pending": 0,
-  "published_new": 3,
-  "candidates_tried": 7,
-  "score_lines_count": 22,
-  "skip_count": 26,
-  "skip_v89_count": 0,
-  "gemini_calls_observed": 16,
+  "published_new": 1,
+  "candidates_tried": 11,
+  "score_lines_count": 16,
+  "skip_count": 32,
+  "skip_v89_count": 1,
+  "gemini_calls_observed": 7,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 16
+    "gemini-3.1-flash-lite": 7
   },
   "gemini_discarded_models": {},
   "model_tasks": [
@@ -39,142 +39,78 @@
     {
       "task": "title",
       "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
-    },
-    {
-      "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "translate_normal",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "postedit",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "title",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
-    },
-    {
-      "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "translate_normal",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "postedit",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "title",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
     }
   ],
   "model_task_counts": {
     "healthcheck": 1,
-    "editorial_analysis": 3,
-    "translate_normal": 3,
-    "postedit": 3,
-    "title": 3
+    "editorial_analysis": 1,
+    "translate_normal": 1,
+    "postedit": 1,
+    "title": 1
   },
   "perf": {
     "WP lookup event_key": {
-      "count": 2,
-      "total_seconds": 3.18,
-      "max_seconds": 1.75
-    },
-    "scraping articolo": {
-      "count": 2,
-      "total_seconds": 2.24,
-      "max_seconds": 1.16
-    },
-    "estrazione blocchi": {
-      "count": 2,
-      "total_seconds": 1.43,
-      "max_seconds": 0.72
+      "count": 1,
+      "total_seconds": 1.27,
+      "max_seconds": 1.27
     },
     "analisi editoriale AI v72": {
-      "count": 6,
-      "total_seconds": 7.95,
-      "max_seconds": 1.77
+      "count": 3,
+      "total_seconds": 4.32,
+      "max_seconds": 1.83
+    },
+    "scraping articolo": {
+      "count": 1,
+      "total_seconds": 1.14,
+      "max_seconds": 1.14
+    },
+    "estrazione blocchi": {
+      "count": 1,
+      "total_seconds": 0.69,
+      "max_seconds": 0.69
     },
     "WP recent posts dedupe": {
       "count": 1,
-      "total_seconds": 0.93,
-      "max_seconds": 0.93
+      "total_seconds": 0.76,
+      "max_seconds": 0.76
     },
     "categoria da analisi editoriale v72": {
       "count": 1,
-      "total_seconds": 1.24,
-      "max_seconds": 1.24
+      "total_seconds": 1.08,
+      "max_seconds": 1.08
     },
     "traduzione": {
-      "count": 3,
-      "total_seconds": 14.59,
-      "max_seconds": 5.26
+      "count": 1,
+      "total_seconds": 6.02,
+      "max_seconds": 6.02
     },
     "creazione post WordPress": {
-      "count": 3,
-      "total_seconds": 13.49,
-      "max_seconds": 5.59
-    },
-    "totale articolo pubblicato 'Possible Date for Drew McIntyre's Return Amid WWE TV Hiatus'": {
       "count": 1,
-      "total_seconds": 14.16,
-      "max_seconds": 14.16
+      "total_seconds": 4.02,
+      "max_seconds": 4.02
     },
-    "totale articolo pubblicato 'Mark Shapiro Says TKO Will 'Monitor The Situation' Ahead Of '": {
+    "totale articolo pubblicato 'Ludwig Kaiser Requests Trial In Florida Battery Case After H'": {
       "count": 1,
-      "total_seconds": 13.38,
-      "max_seconds": 13.38
-    },
-    "totale articolo pubblicato 'Ludwig Kaiser Argues WWE Travel Is Essential To Keep His Job'": {
-      "count": 1,
-      "total_seconds": 12.23,
-      "max_seconds": 12.23
+      "total_seconds": 15.3,
+      "max_seconds": 15.3
     }
   },
   "article_metrics": [
     {
-      "path": "published/20260521_141346_001_wwe-drew-mcintyre-torna-a-smackdown-per-la-puntata-del-29-maggio-a-barcellona_5077_final.html",
+      "path": "published/20260521_160511_001_ludwig-kaiser-chiede-il-processo-per-laccusa-di-percosse-in-florida_5086_final.html",
       "exists": true,
-      "word_count": 241,
+      "word_count": 278,
       "paragraph_count": 7,
-      "blockquote_count": 0,
-      "image_count": 0,
-      "iframe_count": 0,
-      "embed_hint_count": 0,
-      "title": "WWE: Drew Mcintyre torna a SmackDown per la puntata del 29 maggio a Barcellona"
-    },
-    {
-      "path": "published/20260521_141402_002_mark-shapiro-tko-monitorerà-la-situazione-in-vista-del-ritorno-della-wwe-in-arabia-saudita_5080_final.html",
-      "exists": true,
-      "word_count": 321,
-      "paragraph_count": 4,
       "blockquote_count": 2,
       "image_count": 0,
       "iframe_count": 0,
       "embed_hint_count": 4,
-      "title": "Mark Shapiro: TKO monitorerà la situazione in vista del ritorno della WWE in Arabia Saudita"
-    },
-    {
-      "path": "published/20260521_141421_003_ludwig-kaiser-i-legali-affermano-che-le-restrizioni-di-viaggio-minacciano-il-suo-impiego-i_5083_final.html",
-      "exists": true,
-      "word_count": 270,
-      "paragraph_count": 7,
-      "blockquote_count": 1,
-      "image_count": 0,
-      "iframe_count": 0,
-      "embed_hint_count": 2,
-      "title": "Ludwig Kaiser: i legali affermano che le restrizioni di viaggio minacciano il suo impiego in WWE"
+      "title": "Ludwig Kaiser chiede il processo per l'accusa di percosse in Florida"
     }
   ],
   "daily_counts": {
-    "published_today": 19,
-    "published_last_4h": 10,
-    "runs_today": 7
+    "published_today": 20,
+    "published_last_4h": 7,
+    "runs_today": 8
   }
 }

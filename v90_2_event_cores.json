@@ -1,0 +1,354 @@
+{
+  "business:wwe:house-shows": {
+    "titles": [
+      "20260514_214600_001_wwe-i-biglietti-per-gli-house-show-estivi-saranno-più-economici_4627_final.html",
+      "20260516_144227_003_bayley-torna-a-un-live-event-di-nxt-dopo-10-anni-il-talento-di-oggi-è-diverso_4762_final.html",
+      "20260519_224602_002_wwe-nick-khan-e-triple-h-spiegano-laumento-degli-house-show_4941_final.html",
+      "20260520_082422_001_wwe-il-motivo-dietro-laumento-dei-live-event-estivi-per-il-main-roster_4968_final.html",
+      "20260514_214601_001_wwe-i-biglietti-per-gli-house-show-estivi-saranno-pi-economici_7d4ebf11_final.html",
+      "20260514_214601_001_wwe-i-biglietti-per-gli-house-show-estivi-saranno-pi-economici_7d4ebf11_original.html",
+      "20260516_144228_003_bayley-torna-a-un-live-event-di-nxt-dopo-10-anni-il-talento-di-oggi-diverso_cc367212_final.html",
+      "20260519_224603_002_wwe-nick-khan-e-triple-h-spiegano-l-aumento-degli-house-show_7d0409c0_final.html",
+      "20260519_224603_002_wwe-nick-khan-e-triple-h-spiegano-l-aumento-degli-house-show_7d0409c0_original.html",
+      "20260520_082424_001_wwe-il-motivo-dietro-l-aumento-dei-live-event-estivi-per-il-main-roster_0b19c6a1_final.html"
+    ],
+    "facts": [
+      "wwe_impact",
+      "official_return",
+      "brand_show"
+    ],
+    "count": 10,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "return:baron-corbin:wwe": {
+    "titles": [
+      "20260518_161501_001_wwe-si-discute-internamente-di-un-possibile-ritorno-di-baron-corbin_4860_final.html",
+      "20260521_103907_001_baron-corbin-ironizza-sulle-voci-di-un-suo-possibile-ritorno-in-wwe_5053_final.html",
+      "20260521_133508_003_aggiornamenti-sul-possibile-ritorno-di-baron-corbin-in-wwe_5074_final.html",
+      "20260518_161502_001_wwe-si-discute-internamente-di-un-possibile-ritorno-di-baron-corbin_8b0b910c_final.html",
+      "20260518_161502_001_wwe-si-discute-internamente-di-un-possibile-ritorno-di-baron-corbin_8b0b910c_original.html",
+      "20260521_103909_001_baron-corbin-ironizza-sulle-voci-di-un-suo-possibile-ritorno-in-wwe_1e0d89bc_final.html",
+      "20260521_103909_001_baron-corbin-ironizza-sulle-voci-di-un-suo-possibile-ritorno-in-wwe_1e0d89bc_original.html",
+      "20260521_133510_003_aggiornamenti-sul-possibile-ritorno-di-baron-corbin-in-wwe_923df530_final.html",
+      "20260521_133510_003_aggiornamenti-sul-possibile-ritorno-di-baron-corbin-in-wwe_923df530_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 9,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "business:tko:saudi-return": {
+    "titles": [
+      "20260520_140504_001_wwe-confermati-i-piani-per-gli-eventi-in-arabia-saudita-nonostante-le-tensioni-internazion_4984_final.html",
+      "20260520_140506_001_wwe-confermati-i-piani-per-gli-eventi-in-arabia-saudita-nonostante-le-tensioni-i_3db0491a_final.html",
+      "20260520_140506_001_wwe-confermati-i-piani-per-gli-eventi-in-arabia-saudita-nonostante-le-tensioni-i_3db0491a_original.html"
+    ],
+    "facts": [
+      "wwe_impact",
+      "business_policy"
+    ],
+    "count": 3,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "title:willow-nightingale:status": {
+    "titles": [
+      "20260521_025710_005_infortunata-willow-nightingale-lascia-il-titolo-aew-tbs-e-si-ritira-dal-torneo-owen-hart_5020_final.html",
+      "20260521_025712_005_infortunata-willow-nightingale-lascia-il-titolo-aew-tbs-e-si-ritira-dal-torneo-o_99b1e389_final.html",
+      "20260521_025712_005_infortunata-willow-nightingale-lascia-il-titolo-aew-tbs-e-si-ritira-dal-torneo-o_99b1e389_original.html"
+    ],
+    "facts": [],
+    "count": 3,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "title:darby-allin:status": {
+    "titles": [
+      "20260521_065531_003_aew-dynamite-darby-allin-batte-mike-bailey-e-conserva-laew-world-championship_5042_final.html",
+      "20260517_060156_001_aew-collision-16-maggio-2026-darby-allin-difende-l-aew-world-title-contro-sammy-_1cb279c9_final.html",
+      "20260517_060156_001_aew-collision-16-maggio-2026-darby-allin-difende-l-aew-world-title-contro-sammy-_1cb279c9_original.html",
+      "20260521_065532_004_aew-dynamite-darby-allin-batte-mike-bailey-e-conserva-l-aew-world-championship_967c9eae_final.html",
+      "20260521_065532_004_aew-dynamite-darby-allin-batte-mike-bailey-e-conserva-l-aew-world-championship_967c9eae_original.html"
+    ],
+    "facts": [
+      "brand_show",
+      "date:16 maggio 2026",
+      "date_update"
+    ],
+    "count": 5,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "legal:ludwig-kaiser:case": {
+    "titles": [
+      "20260521_113954_001_emergono-i-dettagli-sul-caso-di-aggressione-che-coinvolge-ludwig-kaiser_77ac672a_final.html",
+      "20260521_113954_001_emergono-i-dettagli-sul-caso-di-aggressione-che-coinvolge-ludwig-kaiser_77ac672a_original.html",
+      "20260521_114034_002_ludwig-kaiser-i-dettagli-delle-restrizioni-giudiziarie-dopo-l-arresto-in-florida_4a5c6774_final.html",
+      "20260521_114034_002_ludwig-kaiser-i-dettagli-delle-restrizioni-giudiziarie-dopo-l-arresto-in-florida_4a5c6774_original.html",
+      "20260521_133445_001_ludwig-kaiser-si-dichiara-non-colpevole-per-l-accusa-di-aggressione-in-florida_514fea33_final.html",
+      "20260521_133445_001_ludwig-kaiser-si-dichiara-non-colpevole-per-l-accusa-di-aggressione-in-florida_514fea33_original.html",
+      "20260521_133457_002_ludwig-kaiser-rientrato-dal-messico-dopo-aver-appreso-del-mandato-d-arresto-in-f_023650d3_final.html",
+      "20260521_133457_002_ludwig-kaiser-rientrato-dal-messico-dopo-aver-appreso-del-mandato-d-arresto-in-f_023650d3_original.html",
+      "20260521_141422_003_ludwig-kaiser-i-legali-affermano-che-le-restrizioni-di-viaggio-minacciano-il-suo_2673a3e7_final.html",
+      "20260521_141422_003_ludwig-kaiser-i-legali-affermano-che-le-restrizioni-di-viaggio-minacciano-il-suo_2673a3e7_original.html",
+      "Ludwig Kaiser Requests Trial In Florida Battery Case After Hiring Attorney"
+    ],
+    "facts": [
+      "arrest",
+      "warrant",
+      "wwe_impact",
+      "restrictions",
+      "not_guilty",
+      "mexico_return",
+      "travel_job",
+      "bond",
+      "elevator_details",
+      "official_return",
+      "trial",
+      "attorney"
+    ],
+    "count": 11,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:05:12"
+  },
+  "return:mark-shapiro:wwe": {
+    "titles": [
+      "20260521_141402_002_mark-shapiro-tko-monitorerà-la-situazione-in-vista-del-ritorno-della-wwe-in-arabia-saudita_5080_final.html",
+      "20260521_141404_002_mark-shapiro-tko-monitorer-la-situazione-in-vista-del-ritorno-della-wwe-in-arabi_28a87ae3_final.html",
+      "20260521_141404_002_mark-shapiro-tko-monitorer-la-situazione-in-vista-del-ritorno-della-wwe-in-arabi_28a87ae3_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "wwe_impact",
+      "business_policy"
+    ],
+    "count": 3,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "return:possible-date:wwe": {
+    "titles": [
+      "20260513_115617_001_wwe-possibile-data-per-il-ritorno-di-randy-orton-in-tv_114191b2_original.html"
+    ],
+    "facts": [
+      "official_date",
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "return:ronda-rousey:wwe": {
+    "titles": [
+      "20260514_142710_003_ronda-rousey-la-wwe-mi-ha-preparata-per-il-ritorno-nelle-mma-contro-gina-carano_8897c5f4_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "return:stephanie-vaquer-s:wwe": {
+    "titles": [
+      "20260514_162652_001_wwe-aggiornamenti-sul-rientro-di-stephanie-vaquer-dopo-l-infortunio_70a2c4dc_original.html"
+    ],
+    "facts": [
+      "official_date",
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "title:former-wwe:status": {
+    "titles": [
+      "20260515_112139_001_tna-cedric-alexander-nuovo-x-division-champion-debutta-giovanni-vinci_3ce0714e_original.html"
+    ],
+    "facts": [
+      "brand_show",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "return:buddy-matthews:general": {
+    "titles": [
+      "20260515_134737_002_buddy-matthews-torna-a-sorpresa-e-attacca-donovan-dijak-a-wsw-rise-against_b3313d2a_original.html"
+    ],
+    "facts": [
+      "official_return"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "return:trick-williams:wwe": {
+    "titles": [
+      "20260516_021032_001_trick-williams-festeggia-il-ritorno-a-casa-nella-puntata-di-smackdown-del-15-mag_de3be992_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "brand_show",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "return:the-kingdom:aew": {
+    "titles": [
+      "20260516_092438_001_the-kingdom-torna-in-aew-e-roh-l-obiettivo-sono-i-roh-world-tag-team-championshi_4ab2a681_original.html"
+    ],
+    "facts": [
+      "official_return"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "return:layla-reveals:wwe": {
+    "titles": [
+      "20260516_144147_002_layla-apre-a-un-ritorno-in-wwe-solo-per-una-reunion-delle-laycool_09a28b4c_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "return:bayley-returns:general": {
+    "titles": [
+      "20260516_144228_003_bayley-torna-a-un-live-event-di-nxt-dopo-10-anni-il-talento-di-oggi-diverso_cc367212_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "brand_show",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "return:paige-reveals:wwe": {
+    "titles": [
+      "20260517_164841_001_paige-annuncia-il-possibile-ritorno-della-sua-celebre-mossa-finale-in-wwe_e3d4691d_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "return:eric-young:wwe": {
+    "titles": [
+      "20260517_185717_001_eric-young-il-mio-ritorno-in-tna-stato-un-segnale-contro-la-wwe-dopo-il-licenzia_909d5df1_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "return:cm-punk-s:wwe": {
+    "titles": [
+      "20260518_214529_001_wwe-svelati-i-piani-per-il-ritorno-in-tv-di-cm-punk_2c43ceb8_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "return:chris-jericho:wwe": {
+    "titles": [
+      "20260518_214719_002_chris-jericho-chiarisce-le-voci-su-un-suo-possibile-ritorno-in-wwe_e804ddaf_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "return:nic-nemeth:wwe": {
+    "titles": [
+      "20260519_114040_001_nic-nemeth-rivela-sono-tornato-in-wwe-al-madison-square-garden-solo-per-john-cen_4b26039f_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "return:wwe-reveals:wwe": {
+    "titles": [
+      "20260520_082424_001_wwe-il-motivo-dietro-l-aumento-dei-live-event-estivi-per-il-main-roster_0b19c6a1_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "title:charlotte-flair:status": {
+    "titles": [
+      "20260521_025615_002_charlotte-flair-punta-al-record-di-titoli-di-ric-flair-e-john-cena_bb531daa_original.html"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "return:nikki-bella:wwe": {
+    "titles": [
+      "20260521_065232_001_nikki-bella-il-rientro-in-wwe-dipende-dalla-caviglia_dc961199_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  },
+  "return:drew-mcintyre:wwe": {
+    "titles": [
+      "20260521_141347_001_wwe-drew-mcintyre-torna-a-smackdown-per-la-puntata-del-29-maggio-a-barcellona_464912f4_original.html"
+    ],
+    "facts": [
+      "official_date",
+      "official_return",
+      "brand_show",
+      "wwe_impact",
+      "date:29 maggio",
+      "date_update"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T16:04:55",
+    "last_seen": "2026-05-21T16:04:55"
+  }
+}
