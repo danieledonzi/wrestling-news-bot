@@ -85,8 +85,6 @@
   },
   "legal:ludwig-kaiser:case": {
     "titles": [
-      "20260521_113954_001_emergono-i-dettagli-sul-caso-di-aggressione-che-coinvolge-ludwig-kaiser_77ac672a_final.html",
-      "20260521_113954_001_emergono-i-dettagli-sul-caso-di-aggressione-che-coinvolge-ludwig-kaiser_77ac672a_original.html",
       "20260521_114034_002_ludwig-kaiser-i-dettagli-delle-restrizioni-giudiziarie-dopo-l-arresto-in-florida_4a5c6774_final.html",
       "20260521_114034_002_ludwig-kaiser-i-dettagli-delle-restrizioni-giudiziarie-dopo-l-arresto-in-florida_4a5c6774_original.html",
       "20260521_133445_001_ludwig-kaiser-si-dichiara-non-colpevole-per-l-accusa-di-aggressione-in-florida_514fea33_final.html",
@@ -95,7 +93,8 @@
       "20260521_133457_002_ludwig-kaiser-rientrato-dal-messico-dopo-aver-appreso-del-mandato-d-arresto-in-f_023650d3_original.html",
       "20260521_141422_003_ludwig-kaiser-i-legali-affermano-che-le-restrizioni-di-viaggio-minacciano-il-suo_2673a3e7_final.html",
       "20260521_141422_003_ludwig-kaiser-i-legali-affermano-che-le-restrizioni-di-viaggio-minacciano-il-suo_2673a3e7_original.html",
-      "Ludwig Kaiser Requests Trial In Florida Battery Case After Hiring Attorney"
+      "20260521_160512_001_ludwig-kaiser-chiede-il-processo-per-l-accusa-di-percosse-in-florida_dbfe604d_final.html",
+      "20260521_160512_001_ludwig-kaiser-chiede-il-processo-per-l-accusa-di-percosse-in-florida_dbfe604d_original.html"
     ],
     "facts": [
       "arrest",
@@ -113,7 +112,7 @@
     ],
     "count": 11,
     "first_seen": "2026-05-21T16:04:55",
-    "last_seen": "2026-05-21T16:05:12"
+    "last_seen": "2026-05-21T17:12:40"
   },
   "return:mark-shapiro:wwe": {
     "titles": [
@@ -350,5 +349,16 @@
     "count": 1,
     "first_seen": "2026-05-21T16:04:55",
     "last_seen": "2026-05-21T16:04:55"
+  },
+  "legal:liv-morgan:case": {
+    "titles": [
+      "Liv Morgan Stalking Case Returning To Court After Multiple Delays"
+    ],
+    "facts": [
+      "official_return"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T17:12:54",
+    "last_seen": "2026-05-21T17:12:54"
   }
 }
