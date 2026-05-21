@@ -1,23 +1,22 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-21T11:40:41",
-  "run_start": "2026-05-21 11:38:59",
-  "run_end": "2026-05-21 11:38:59",
-  "bot_version": "v90_1_2_spoiler_calendar_fix (c8c4bb2)",
-  "candidate_count": 11,
+  "collected_at": "2026-05-21T13:35:11",
+  "run_start": "2026-05-21 13:34:20",
+  "run_end": "2026-05-21 13:34:20",
+  "bot_version": "v90_1_3_spoiler_hotfix (635d97e)",
+  "candidate_count": 13,
   "mode": "normal",
   "max_new": 3,
-  "published_total": 2,
+  "published_total": 3,
   "published_pending": 0,
-  "published_new": 2,
-  "candidates_tried": 11,
-  "score_lines_count": 18,
-  "skip_count": 31,
-  "skip_v89_count": 1,
-  "gemini_calls_observed": 12,
+  "published_new": 3,
+  "candidates_tried": 3,
+  "score_lines_count": 16,
+  "skip_count": 21,
+  "skip_v89_count": 0,
+  "gemini_calls_observed": 14,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 10,
-    "gemini-3-flash-preview": 2
+    "gemini-3.1-flash-lite": 14
   },
   "gemini_discarded_models": {},
   "model_tasks": [
@@ -30,8 +29,8 @@
       "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
     },
     {
-      "task": "translate_medium",
-      "chain": "gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
     },
     {
       "task": "postedit",
@@ -46,8 +45,8 @@
       "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
     },
     {
-      "task": "translate_medium",
-      "chain": "gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
     },
     {
       "task": "postedit",
@@ -60,94 +59,122 @@
     {
       "task": "editorial_analysis",
       "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
     }
   ],
   "model_task_counts": {
     "healthcheck": 1,
     "editorial_analysis": 3,
-    "translate_medium": 2,
-    "postedit": 2,
-    "title": 2
+    "translate_normal": 3,
+    "postedit": 3,
+    "title": 3
   },
   "perf": {
     "WP lookup event_key": {
-      "count": 2,
-      "total_seconds": 2.89,
-      "max_seconds": 1.47
+      "count": 1,
+      "total_seconds": 1.39,
+      "max_seconds": 1.39
     },
     "scraping articolo": {
       "count": 2,
-      "total_seconds": 2.06,
-      "max_seconds": 1.04
+      "total_seconds": 2.34,
+      "max_seconds": 1.21
     },
     "estrazione blocchi": {
       "count": 2,
-      "total_seconds": 1.43,
-      "max_seconds": 0.74
+      "total_seconds": 1.67,
+      "max_seconds": 0.84
     },
     "analisi editoriale AI v72": {
-      "count": 4,
-      "total_seconds": 13.44,
-      "max_seconds": 6.77
+      "count": 3,
+      "total_seconds": 3.56,
+      "max_seconds": 1.22
     },
     "WP recent posts dedupe": {
       "count": 1,
-      "total_seconds": 1.28,
-      "max_seconds": 1.28
+      "total_seconds": 0.82,
+      "max_seconds": 0.82
     },
     "categoria da analisi editoriale v72": {
       "count": 1,
-      "total_seconds": 1.61,
-      "max_seconds": 1.61
+      "total_seconds": 1.15,
+      "max_seconds": 1.15
     },
     "traduzione": {
-      "count": 2,
-      "total_seconds": 56.29,
-      "max_seconds": 29.13
+      "count": 3,
+      "total_seconds": 13.62,
+      "max_seconds": 6.23
     },
     "creazione post WordPress": {
-      "count": 2,
-      "total_seconds": 8.77,
-      "max_seconds": 5.89
+      "count": 3,
+      "total_seconds": 10.76,
+      "max_seconds": 4.42
     },
-    "totale articolo pubblicato 'Ludwig Kaiser Battery Case Reveal Alleged Elevator Attack Af'": {
+    "totale articolo pubblicato 'Ludwig Kaiser Fighting Florida Battery Charge With Not Guilt'": {
       "count": 1,
-      "total_seconds": 43.24,
-      "max_seconds": 43.24
+      "total_seconds": 14.32,
+      "max_seconds": 14.32
     },
-    "totale articolo pubblicato 'Ludwig Kaiser's Court Restrictions Revealed After Florida Ba'": {
+    "totale articolo pubblicato 'Ludwig Kaiser Flew Back From Mexico After Learning About Flo'": {
       "count": 1,
-      "total_seconds": 39.44,
-      "max_seconds": 39.44
+      "total_seconds": 10.54,
+      "max_seconds": 10.54
+    },
+    "totale articolo pubblicato 'Backstage Update On Former Baron Corbin Potentially Returnin'": {
+      "count": 1,
+      "total_seconds": 11.22,
+      "max_seconds": 11.22
     }
   },
   "article_metrics": [
     {
-      "path": "published/20260521_113952_001_spoiler-emergono-i-dettagli-sul-caso-di-aggressione-che-coinvolge-ludwig-kaiser_5060_final.html",
+      "path": "published/20260521_133444_001_ludwig-kaiser-si-dichiara-non-colpevole-per-laccusa-di-aggressione-in-florida_5068_final.html",
       "exists": true,
-      "word_count": 267,
-      "paragraph_count": 7,
+      "word_count": 217,
+      "paragraph_count": 8,
+      "blockquote_count": 0,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 0,
+      "title": "Ludwig Kaiser si dichiara non colpevole per l'accusa di aggressione in Florida"
+    },
+    {
+      "path": "published/20260521_133456_002_ludwig-kaiser-rientrato-dal-messico-dopo-aver-appreso-del-mandato-darresto-in-florida_5071_final.html",
+      "exists": true,
+      "word_count": 182,
+      "paragraph_count": 4,
       "blockquote_count": 1,
       "image_count": 0,
       "iframe_count": 0,
       "embed_hint_count": 2,
-      "title": "Emergono i dettagli sul caso di aggressione che coinvolge Ludwig Kaiser"
+      "title": "Ludwig Kaiser rientrato dal Messico dopo aver appreso del mandato d'arresto in Florida"
     },
     {
-      "path": "published/20260521_114033_002_spoiler-ludwig-kaiser-i-dettagli-delle-restrizioni-giudiziarie-dopo-larresto-in-florida_5064_final.html",
+      "path": "published/20260521_133508_003_aggiornamenti-sul-possibile-ritorno-di-baron-corbin-in-wwe_5074_final.html",
       "exists": true,
-      "word_count": 294,
-      "paragraph_count": 8,
-      "blockquote_count": 3,
+      "word_count": 220,
+      "paragraph_count": 4,
+      "blockquote_count": 0,
       "image_count": 0,
       "iframe_count": 0,
-      "embed_hint_count": 6,
-      "title": "Ludwig Kaiser: i dettagli delle restrizioni giudiziarie dopo l'arresto in Florida"
+      "embed_hint_count": 0,
+      "title": "Aggiornamenti sul possibile ritorno di Baron Corbin in WWE"
     }
   ],
   "daily_counts": {
-    "published_today": 13,
-    "published_last_4h": 4,
-    "runs_today": 5
+    "published_today": 16,
+    "published_last_4h": 7,
+    "runs_today": 6
   }
 }

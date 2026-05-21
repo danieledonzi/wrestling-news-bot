@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-21 11:38:59",
-  "last_bot_version": "v90_1_2_spoiler_calendar_fix (c8c4bb2)",
-  "updated_at": "2026-05-21T11:40:40",
-  "total_items": 149,
+  "last_run_id": "2026-05-21 13:34:20",
+  "last_bot_version": "v90_1_3_spoiler_hotfix (635d97e)",
+  "updated_at": "2026-05-21T13:35:10",
+  "total_items": 152,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1196,6 +1196,30 @@
       "original_html_file": "20260521_114034_002_ludwig-kaiser-i-dettagli-delle-restrizioni-giudiziarie-dopo-l-arresto-in-florida_4a5c6774_original.html",
       "final_html_file": "20260521_114034_002_ludwig-kaiser-i-dettagli-delle-restrizioni-giudiziarie-dopo-l-arresto-in-florida_4a5c6774_final.html",
       "metadata_file": "20260521_114034_002_ludwig-kaiser-i-dettagli-delle-restrizioni-giudiziarie-dopo-l-arresto-in-florida_4a5c6774_metadata.json"
+    },
+    {
+      "run_id": "2026-05-21 13:34:20",
+      "title": "Ludwig Kaiser si dichiara non colpevole per l'accusa di aggressione in Florida",
+      "url": "https://www.ringsidenews.com/ludwig-kaiser-fighting-florida-battery-charge-not-guilty-plea/",
+      "original_html_file": "20260521_133445_001_ludwig-kaiser-si-dichiara-non-colpevole-per-l-accusa-di-aggressione-in-florida_514fea33_original.html",
+      "final_html_file": "20260521_133445_001_ludwig-kaiser-si-dichiara-non-colpevole-per-l-accusa-di-aggressione-in-florida_514fea33_final.html",
+      "metadata_file": "20260521_133445_001_ludwig-kaiser-si-dichiara-non-colpevole-per-l-accusa-di-aggressione-in-florida_514fea33_metadata.json"
+    },
+    {
+      "run_id": "2026-05-21 13:34:20",
+      "title": "Ludwig Kaiser rientrato dal Messico dopo aver appreso del mandato d'arresto in Florida",
+      "url": "https://www.ringsidenews.com/ludwig-kaiser-flew-back-mexico-learning-about-florida-arrest-warrant/",
+      "original_html_file": "20260521_133457_002_ludwig-kaiser-rientrato-dal-messico-dopo-aver-appreso-del-mandato-d-arresto-in-f_023650d3_original.html",
+      "final_html_file": "20260521_133457_002_ludwig-kaiser-rientrato-dal-messico-dopo-aver-appreso-del-mandato-d-arresto-in-f_023650d3_final.html",
+      "metadata_file": "20260521_133457_002_ludwig-kaiser-rientrato-dal-messico-dopo-aver-appreso-del-mandato-d-arresto-in-f_023650d3_metadata.json"
+    },
+    {
+      "run_id": "2026-05-21 13:34:20",
+      "title": "Aggiornamenti sul possibile ritorno di Baron Corbin in WWE",
+      "url": "https://www.wrestlinginc.com/2178332/baron-corbin-returning-wwe/",
+      "original_html_file": "20260521_133510_003_aggiornamenti-sul-possibile-ritorno-di-baron-corbin-in-wwe_923df530_original.html",
+      "final_html_file": "20260521_133510_003_aggiornamenti-sul-possibile-ritorno-di-baron-corbin-in-wwe_923df530_final.html",
+      "metadata_file": "20260521_133510_003_aggiornamenti-sul-possibile-ritorno-di-baron-corbin-in-wwe_923df530_metadata.json"
     }
   ]
 }

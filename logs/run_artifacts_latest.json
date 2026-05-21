@@ -1,28 +1,36 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-21 11:38:59",
-  "bot_version": "v90_1_2_spoiler_calendar_fix (c8c4bb2)",
-  "git_sha": "c8c4bb22bf623da9c83e24b3c6303914681ba4d2",
-  "created_at": "2026-05-21T11:40:41",
-  "published_count": 2,
+  "run_id": "2026-05-21 13:34:20",
+  "bot_version": "v90_1_3_spoiler_hotfix (635d97e)",
+  "git_sha": "635d97e1e19715ee9a3ba04a8fbd059dfb774e32",
+  "created_at": "2026-05-21T13:35:11",
+  "published_count": 3,
   "published_post_ids": [
-    "5060",
-    "5064"
+    "5068",
+    "5071",
+    "5074"
   ],
   "published_artifacts": [
     {
-      "post_id": 5060,
-      "title": "[SPOILER] Emergono i dettagli sul caso di aggressione che coinvolge Ludwig Kaiser",
-      "source_url": "https://www.ringsidenews.com/ludwig-kaiser-battery-case-reveal-alleged-elevator-attack-have-some-manners-comment/",
-      "html_file": "published/20260521_113952_001_spoiler-emergono-i-dettagli-sul-caso-di-aggressione-che-coinvolge-ludwig-kaiser_5060_final.html",
-      "metadata_file": "published/20260521_113952_001_spoiler-emergono-i-dettagli-sul-caso-di-aggressione-che-coinvolge-ludwig-kaiser_5060_metadata.json"
+      "post_id": 5068,
+      "title": "Ludwig Kaiser si dichiara non colpevole per l'accusa di aggressione in Florida",
+      "source_url": "https://www.ringsidenews.com/ludwig-kaiser-fighting-florida-battery-charge-not-guilty-plea/",
+      "html_file": "published/20260521_133444_001_ludwig-kaiser-si-dichiara-non-colpevole-per-laccusa-di-aggressione-in-florida_5068_final.html",
+      "metadata_file": "published/20260521_133444_001_ludwig-kaiser-si-dichiara-non-colpevole-per-laccusa-di-aggressione-in-florida_5068_metadata.json"
     },
     {
-      "post_id": 5064,
-      "title": "[SPOILER] Ludwig Kaiser: i dettagli delle restrizioni giudiziarie dopo l'arresto in Florida",
-      "source_url": "https://www.ringsidenews.com/ludwig-kaisers-court-restrictions-revealed-florida-battery-arrest/",
-      "html_file": "published/20260521_114033_002_spoiler-ludwig-kaiser-i-dettagli-delle-restrizioni-giudiziarie-dopo-larresto-in-florida_5064_final.html",
-      "metadata_file": "published/20260521_114033_002_spoiler-ludwig-kaiser-i-dettagli-delle-restrizioni-giudiziarie-dopo-larresto-in-florida_5064_metadata.json"
+      "post_id": 5071,
+      "title": "Ludwig Kaiser rientrato dal Messico dopo aver appreso del mandato d'arresto in Florida",
+      "source_url": "https://www.ringsidenews.com/ludwig-kaiser-flew-back-mexico-learning-about-florida-arrest-warrant/",
+      "html_file": "published/20260521_133456_002_ludwig-kaiser-rientrato-dal-messico-dopo-aver-appreso-del-mandato-darresto-in-florida_5071_final.html",
+      "metadata_file": "published/20260521_133456_002_ludwig-kaiser-rientrato-dal-messico-dopo-aver-appreso-del-mandato-darresto-in-florida_5071_metadata.json"
+    },
+    {
+      "post_id": 5074,
+      "title": "Aggiornamenti sul possibile ritorno di Baron Corbin in WWE",
+      "source_url": "https://www.wrestlinginc.com/2178332/baron-corbin-returning-wwe/",
+      "html_file": "published/20260521_133508_003_aggiornamenti-sul-possibile-ritorno-di-baron-corbin-in-wwe_5074_final.html",
+      "metadata_file": "published/20260521_133508_003_aggiornamenti-sul-possibile-ritorno-di-baron-corbin-in-wwe_5074_metadata.json"
     }
   ],
   "errors": [],
