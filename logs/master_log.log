@@ -6500,3 +6500,182 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
 ===== RUN END [2026-05-21 21:10:21] VERSION [v90_2_editorial_pacing_update_gate (1c11f8c)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show=impact
+[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard
+[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+
+===== RUN START [2026-05-21 22:48:41] VERSION [v90_2_editorial_pacing_update_gate (47f0313)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 14 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (48/75): Former WWE Star Parker Boudreaux Says He Was Given A Raise Two Weeks Before Release
+[SKIP] Score sotto soglia editoriale (16/75): Shawn Michaels Explains How WWE Training Environment Has Changed
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite & Collision 5/20/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (14/75): AEW's Paul Wight Is Impressed With Coaching Skills Of WWE HOFer
+[SKIP] URL già in history: https://www.wrestlinginc.com/2178927/aew-mjf-blames-vince-mcmahon-making-stipulation-joke/
+[REPORT v87.2] Report confermato da history forte: report:aew-dynamite-2026-05-20
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:aew-dynamite-2026-05-20 - AEW Dynamite & Collision Results 5/20 - Two Titles On The Line, Anything Goes Match
+[SKIP] Score sotto soglia editoriale (0/75): WWE Saturday Night's Main Event 5/23/2026: Draws & Duds
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Bully Ray, Tommy Dreamer Discuss What Brock Lesnar's WWE Raw Return Means For Oba Femi
+[SKIP] Score sotto soglia editoriale (56/75): Bully Ray, Tommy Dreamer Discuss What Brock Lesnar's WWE Raw Return Means For Oba Femi
+[PERF v71] WP lookup event_key: 1.46s
+[FIX] Event key in history ma non confermata su WordPress: event:title:darby-allin:world:championship - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (10/75): WWE HOFer JBL Believes A Pro Wrestling Union Is A 'Possibility'
+[SKIP] Score sotto soglia editoriale (54/75): WWE HOFer Doesn't Think Mick Foley Will Wrestle In AEW
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP] Score sotto soglia editoriale (48/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[SKIP] Score sotto soglia editoriale (56/75): Becky Lynch Comments On WWE Advertising Changes To Her SNME Match
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SCORE v80.4] AAA major World priority 53->72 - Ludwig Kaiser's AAA Appearance Canceled After Florida Battery Arrest
+[SCORE v88.3] v88.3 hard feature skip cap 63->45 - Tony Khan Addresses Ronda Rousey's AEW Future After Revolution Appearance
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Tony Khan Reveals Mick Foley's AEW Role Ahead of Double or Nothing Debut
+[SCORE v88.3] v88.3 hard feature skip cap 83->45 - Tony Khan Reveals Mick Foley's AEW Role Ahead of Double or Nothing Debut
+[SKIP] Score sotto soglia editoriale (0/75): John Cena Claims He Rarely Turns Down WWE Creative Ideas
+[SKIP] Score sotto soglia editoriale (34/75): John Cena Reveals How a Mark Wahlberg Joke Helped Launch His Hollywood Career
+[SCORE v86.9] Cap executive interview/opinion 80->72 - Tony Khan's AEW Double or Nothing Media Call Highlights for May 21, 2026
+[PERF v71] WP lookup event_key: 1.42s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tony-khan - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (49/75): John Cena Explains Why He Refused To Change His Look During WWE Heel Turn
+[SKIP] Score sotto soglia editoriale (38/75): AEW Adds Massive 10-Man Tag Match To Double Or Nothing Buy In
+[SKIP] Score sotto soglia editoriale (7/75): AJ Styles Still Wants Will Ospreay In WWE Despite AEW Run
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE Locker Room Wants Baron Corbin Back
+[SCORE v86.9] Cap commentary/opinion 88->68 - WWE Locker Room Wants Baron Corbin Back
+[SKIP] Score sotto soglia editoriale (49/75): AJ Styles Fires Back at Fans Calling Him a TKO Defender Over WWE Live Events
+[SKIP] URL già in history: https://www.ringsidenews.com/sol-ruca-reveals-how-triple-h-helped-her-backlash-wwe-raw-debut/
+[SCORE] 91 high - Former WWE 24/7 Champion Kyle Busch Passes Away At 41 | WWE/main roster, WWE main roster + storyline/evento, morte, v62 evento morte/storico, v71 freshness=0.576
+[SCORE] 71 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 67 medium - Ludwig Kaiser's AAA Appearance Canceled After Florida Battery Arrest | altre promotion, evento legale/controversia, v62 evento legale grave, v80.4 AAA major World priority 53->72, v71 source reliability soft penalty, v71 freshness=0.68, v48 tier2: 55-74
+[SCORE] 67 medium - Tony Khan's AEW Double or Nothing Media Call Highlights for May 21, 2026 | AEW, PLE/PPV, v75 hard results report, v77 hard report protected, v86.8 cap executive interview/opinion 80->72, v71 source reliability soft penalty, v71 freshness=0.552, v48 tier1: v77 hard report
+[SCORE] 63 medium - John Cena Addresses About Mixed Reaction To His Final WWE Match Ending | WWE/main roster, top star titolo: john cena, business/contratti WWE-TKO, WWE main roster + storyline/evento, business/media rights, combo top name titolo + evento forte, v62 media rights/streaming, v62 categoria business, v66 cap opinion/commentary storyline, v68 cap opinion senza news concreta, v71 source reliability soft penalty, v71 freshness=0.574, v48 tier2: 55-74
+[SCORE] 63 medium - WWE Locker Room Wants Baron Corbin Back | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 ritorno/debutto, v86.9 cap commentary/opinion 88->68, v71 source reliability soft penalty, v71 freshness=0.645, v48 tier2: 55-74
+[SCORE] 60 medium - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 59 low - Danhausen Lands Major Representation Deal After Viral Rise | nomi forti titolo: danhausen, PLE/PPV, v62 ritorno/debutto, v71 source reliability soft penalty, v71 freshness=0.644, v48 tier2: 55-74
+[SCORE] 44 low - Jim Ross Shares Thoughts On Darby Allin's AEW World Championship Reign | AEW, titolo/championship, v62 titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier4: 40-44 riempimento controllato
+[SCORE] 43 low - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag | WWE/main roster, top star titolo: undertaker, intervista/opinione, v81.1 cap light name-driven item 49->49, v71 low freshness/novelty, v71 freshness=0.31, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 1
+[PERF v71] WP lookup URL esistente: 1.73s
+[BOT] Elaborazione: WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[BOT] semantic_id=wwe-nxt-announces-official-signings-of-mason-rook-former-nikki-blackheart-and-more
+[SCORE] iniziale=96 priority=high
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.wrestlinginc.com/2178818/wwe-nxt-mason-rook-dean-malenko-nikki-blackheart/
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=7, image=1, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.wrestlinginc.com/2178818/wwe-nxt-mason-rook-dean-malenko-nikki-blackheart/
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=NXT (6) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta l'annuncio ufficiale di nuove firme al Performance Center, un fatto già avvenuto e confermato, quindi rientra nella categoria news di tipo post-evento.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Performance Center', è termine tecnico standard.; Mantenere i ring name (Mason Rook, Nikki Blackheart, ecc.) invariati.; Gestire le citazioni sulle firme come fatti compiuti.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=NXT (6) | L'articolo riporta l'annuncio ufficiale di nuove firme al Performance Center, un fatto già avvenuto e confermato, quindi rientra nella categoria news di tipo post-evento.
+[PERF v71] analisi editoriale AI v72: 1.32s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 100->54 - WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[SCORE v79.1.3] Recovery post-show 54->95 - WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 95->54 - WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, developmental secondario, v62 media rights/streaming, v88.2 cap OTHER/feature non-news 100->54, v79.1.3 post-show recovery 54->95, v88.2 cap OTHER/feature non-news 95->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[BOT] News candidate totali: 12 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Former WWE 24/7 Champion Kyle Busch Passes Away At 41
+[BOT] semantic_id=former-wwe-247-champion-kyle-busch-passes-away-at-41
+[SCORE] iniziale=91 priority=high
+[PERF v71] scraping articolo: 1.32s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=15, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.69s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=WORLD (8) conf=0.90 model=gemini-3.1-flash-lite | Si tratta di una notizia di cronaca riguardante il decesso di un personaggio pubblico che ha avuto un breve trascorso nel wrestling, non rientrando nelle dinamiche operative del settore.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (WWE 24/7 Championship) in lingua originale.; Il termine 'Passes away' deve essere tradotto come 'si è spento' o 'è venuto a mancare', evitando 'è passato via'.; Verificare la correttezza fattuale della notizia prima della pubblicazione.
+[CATEGORY v73] World downgrade: WORLD -> WWE | non wrestling internazionale
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | Si tratta di una notizia di cronaca riguardante il decesso di un personaggio pubblico che ha avuto un breve trascorso nel wrestling, non rientrando nelle dinamiche operative del settore. | v73 world downgrade
+[PERF v71] analisi editoriale AI v72: 1.16s
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 100->54 - Former WWE 24/7 Champion Kyle Busch Passes Away At 41
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, morte, PLE/PPV, v62 evento morte/storico, v88.2 cap OTHER/feature non-news 100->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Former WWE 24/7 Champion Kyle Busch Passes Away At 41
+[BOT] Elaborazione: WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[BOT] semantic_id=wwe-announces-major-change-to-becky-lynchsol-ruca-snme-match
+[SCORE] iniziale=71 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo descrive un annuncio su una stipulazione aggiunta a un match previsto per il prossimo PLE Saturday Night's Main Event. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantenere 'Women's Intercontinental Championship' in inglese.; Non tradurre 'Saturday Night's Main Event' (SNME).; Evitare calchi per 'red brand' (usare 'il roster di Raw' o 'lo show rosso').
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo descrive un annuncio su una stipulazione aggiunta a un match previsto per il prossimo PLE Saturday Night's Main Event. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.08s
+[SCORE v88.2] v88.2 cap feature storico numerico 56->45 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[SCORE] raffinato=45 priority=low | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v70 cap preview hard, v88.2 cap feature storico numerico 56->45
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[SKIP v90.2] Follow-up duplicato/non sostanziale core=legal:ludwig-kaiser:case score=67 reason=core_cap_reached_no_major_update novel=[] - Ludwig Kaiser's AAA Appearance Canceled After Florida Battery Arrest
+[BOT] Elaborazione: Tony Khan's AEW Double or Nothing Media Call Highlights for May 21, 2026
+[BOT] semantic_id=tony-khans-aew-double-or-nothing-media-call-highlights-for-may-21-2026
+[SCORE] iniziale=67 priority=medium
+[SCRAPE] Articolo results rilevato: testo completo (6528 caratteri)
+[PERF v71] scraping articolo: 1.18s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=21, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=21, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.74s
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 14 record da event_keys
+[REPORT v86.1] Report key in history ma non confermata su WordPress: event:business:tony-khan - provo pubblicazione
+[SKIP v89] Soft news non operativa sotto 65: John Cena Addresses About Mixed Reaction To His Final WWE Match Ending
+[SKIP v90.2] Follow-up in soft_pool core=return:baron-corbin:wwe score=63 reason=covered_core_below_gate novel=['official_date'] - WWE Locker Room Wants Baron Corbin Back
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[PENDING] Coda salvata: 3 elementi
+[SEO v89] Report non assorbe sviluppo autonomo forte: Danhausen Lands Major Representation Deal After Viral Rise
+[BOT] Elaborazione: Danhausen Lands Major Representation Deal After Viral Rise
+[BOT] semantic_id=danhausen-lands-major-representation-deal-after-viral-rise
+[SCORE] iniziale=59 priority=low
+[PERF v71] scraping articolo: 1.30s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=10, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.68s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=0.95 model=gemini-3.1-flash-lite | L'articolo tratta la firma di un contratto di management di Danhausen e le sue recenti apparizioni mainstream; non si tratta di una preview di un evento, ma di una notizia su avvenimenti già conclusi.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Danhausen' come nome proprio.; Tradurre 'representation deal' con 'accordo di rappresentanza'.; 'Viral rise' va reso come 'ascesa virale'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo tratta la firma di un contratto di management di Danhausen e le sue recenti apparizioni mainstream; non si tratta di una preview di un evento, ma di una notizia su avvenimenti già conclusi.
+[PERF v71] analisi editoriale AI v72: 1.65s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Danhausen Lands Major Representation Deal After Viral Rise
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: danhausen, impatto roster/storyline, WWE main roster + storyline/evento, PLE/PPV, non wrestling puro, v62 media rights/streaming, v76 cap boost da score basso senza evento concreto, v76 cap death/funeral storyline-comedy
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Danhausen Lands Major Representation Deal After Viral Rise
+[SKIP v90.2] Follow-up in soft_pool core=title:darby-allin:status score=44 reason=medium_followup_or_weak_update novel=[] - Jim Ross Shares Thoughts On Darby Allin's AEW World Championship Reign
+[SKIP v89] Soft news non operativa sotto 65: Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SEO v89] Report non assorbe sviluppo autonomo forte: Tony Khan Addresses Ronda Rousey's AEW Future After Revolution Appearance
+[SKIP v88.3] Feature storico/FIFA/venue/media call escluso: Tony Khan Addresses Ronda Rousey's AEW Future After Revolution Appearance
+[SEO v89] Report non assorbe sviluppo autonomo forte: Tony Khan Reveals Mick Foley's AEW Role Ahead of Double or Nothing Debut
+[SKIP v88.3] Feature storico/FIFA/venue/media call escluso: Tony Khan Reveals Mick Foley's AEW Role Ahead of Double or Nothing Debut
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 13 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-21 22:48:41_summary.json -> published_html_review/run_2026-05-21 22-48-41_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (609 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-21 22:48:41] VERSION [v90_2_editorial_pacing_update_gate (47f0313)] =====
+

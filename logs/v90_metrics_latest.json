@@ -1,28 +1,24 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-21T21:13:43",
-  "run_start": "2026-05-21 21:10:21",
-  "run_end": "2026-05-21 21:10:21",
-  "bot_version": "v90_2_editorial_pacing_update_gate (1c11f8c)",
-  "candidate_count": 10,
+  "collected_at": "2026-05-21T22:49:19",
+  "run_start": "2026-05-21 22:48:41",
+  "run_end": "2026-05-21 22:48:41",
+  "bot_version": "v90_2_editorial_pacing_update_gate (47f0313)",
+  "candidate_count": 12,
   "mode": "normal",
   "max_new": 3,
-  "published_total": 2,
+  "published_total": 0,
   "published_pending": 0,
-  "published_new": 2,
-  "candidates_tried": 11,
-  "score_lines_count": 21,
-  "skip_count": 31,
-  "skip_v89_count": 1,
-  "gemini_calls_observed": 14,
+  "published_new": 0,
+  "candidates_tried": 13,
+  "score_lines_count": 19,
+  "skip_count": 33,
+  "skip_v89_count": 2,
+  "gemini_calls_observed": 5,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 11,
-    "gemini-3-flash-preview": 1,
-    "gemini-2.5-flash": 2
+    "gemini-3.1-flash-lite": 5
   },
-  "gemini_discarded_models": {
-    "gemini-3-flash-preview": 1
-  },
+  "gemini_discarded_models": {},
   "model_tasks": [
     {
       "task": "healthcheck",
@@ -31,137 +27,43 @@
     {
       "task": "editorial_analysis",
       "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "translate_normal",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "postedit",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "title",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
-    },
-    {
-      "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "translate_medium",
-      "chain": "gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "postedit",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "repair",
-      "chain": "gemini-2.5-flash,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "title",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
-    },
-    {
-      "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite"
     }
   ],
   "model_task_counts": {
     "healthcheck": 1,
-    "editorial_analysis": 3,
-    "translate_normal": 1,
-    "postedit": 2,
-    "title": 2,
-    "translate_medium": 1,
-    "repair": 1
+    "editorial_analysis": 1
   },
   "perf": {
     "WP lookup event_key": {
-      "count": 3,
-      "total_seconds": 4.17,
+      "count": 2,
+      "total_seconds": 2.88,
       "max_seconds": 1.46
     },
     "WP lookup URL esistente": {
       "count": 1,
-      "total_seconds": 0.83,
-      "max_seconds": 0.83
+      "total_seconds": 1.73,
+      "max_seconds": 1.73
     },
     "analisi editoriale AI v72": {
-      "count": 5,
-      "total_seconds": 11.71,
-      "max_seconds": 7.04
-    },
-    "WP recent posts dedupe": {
-      "count": 1,
-      "total_seconds": 1.05,
-      "max_seconds": 1.05
-    },
-    "categoria da analisi editoriale v72": {
-      "count": 1,
-      "total_seconds": 1.44,
-      "max_seconds": 1.44
-    },
-    "traduzione": {
-      "count": 2,
-      "total_seconds": 129.0,
-      "max_seconds": 124.58
-    },
-    "creazione post WordPress": {
-      "count": 2,
-      "total_seconds": 17.53,
-      "max_seconds": 12.29
-    },
-    "totale articolo pubblicato 'AEW's MJF Blames Vince McMahon For Making Stipulation Into A'": {
-      "count": 1,
-      "total_seconds": 18.89,
-      "max_seconds": 18.89
+      "count": 4,
+      "total_seconds": 5.21,
+      "max_seconds": 1.65
     },
     "scraping articolo": {
       "count": 3,
-      "total_seconds": 4.19,
-      "max_seconds": 2.32
+      "total_seconds": 3.8,
+      "max_seconds": 1.32
     },
     "estrazione blocchi": {
       "count": 3,
-      "total_seconds": 2.09,
-      "max_seconds": 0.73
-    },
-    "totale articolo pubblicato 'Sol Ruca Reveals How Triple H Helped Her After Backlash Over'": {
-      "count": 1,
-      "total_seconds": 140.75,
-      "max_seconds": 140.75
+      "total_seconds": 2.11,
+      "max_seconds": 0.74
     }
   },
-  "article_metrics": [
-    {
-      "path": "published/20260521_211109_001_aew-mjf-accusa-vince-mcmahon-di-aver-reso-gli-hair-match-una-barzelletta_5095_final.html",
-      "exists": true,
-      "word_count": 256,
-      "paragraph_count": 3,
-      "blockquote_count": 3,
-      "image_count": 0,
-      "iframe_count": 0,
-      "embed_hint_count": 7,
-      "title": "AEW: MJF accusa Vince McMahon di aver reso gli Hair Match una barzelletta"
-    },
-    {
-      "path": "published/20260521_211335_002_sol-ruca-svela-il-supporto-di-triple-h-dopo-le-critiche-al-suo-debutto-a-raw_5098_final.html",
-      "exists": true,
-      "word_count": 469,
-      "paragraph_count": 16,
-      "blockquote_count": 6,
-      "image_count": 0,
-      "iframe_count": 0,
-      "embed_hint_count": 13,
-      "title": "Sol Ruca svela il supporto di Triple H dopo le critiche al suo debutto a Raw"
-    }
-  ],
+  "article_metrics": [],
   "daily_counts": {
     "published_today": 24,
-    "published_last_4h": 4,
-    "runs_today": 11
+    "published_last_4h": 2,
+    "runs_today": 12
   }
 }
