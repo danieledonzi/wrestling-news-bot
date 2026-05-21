@@ -2,6 +2,7 @@
   "confirmed_published_report_keys": [
     "report:aew-collision-2026-05-16",
     "report:aew-dynamite-2026-05-13",
+    "report:aew-dynamite-2026-05-20",
     "report:roh-supercard-honor-results-highlights-key-moments-may-15-2026-05-15",
     "report:tna-impact-2026-05-14",
     "report:tna-impact-2026-05-15",
@@ -68,11 +69,19 @@
     },
     "report:wwe-nxt-2026-05-19": {
       "report_key": "report:wwe-nxt-2026-05-19",
-      "title": "WWE NXT Results, Highlights and Key Moments for May 19, 2026",
-      "source_url": "https://www.ringsidenews.com/wwe-nxt-results-highlights-key-moments-may-19-2026/",
+      "title": "WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder",
+      "source_url": "https://www.wrestlinginc.com/2176174/wwe-nxt-may-19-two-championships-up-for-grabs-keanu-carver-tate-wilder/",
       "wp_post_id": 4959,
-      "confirmed_at": "2026-05-20T08:23:55Z",
+      "confirmed_at": "2026-05-21T06:52:33Z",
       "reason": "wp_confirm_runtime"
+    },
+    "report:aew-dynamite-2026-05-20": {
+      "report_key": "report:aew-dynamite-2026-05-20",
+      "title": "AEW Dynamite del 20 maggio 2026: risultati e momenti salienti",
+      "source_url": "https://www.wrestlinginc.com/2177398/aew-dynamite-collision-may-20-two-titles-on-line-anything-goes-match/",
+      "wp_post_id": null,
+      "confirmed_at": "2026-05-21T06:54:50Z",
+      "reason": "publish_success"
     }
   }
 }

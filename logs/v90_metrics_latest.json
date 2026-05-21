@@ -1,48 +1,35 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-21T02:57:14",
-  "run_start": "2026-05-21 02:54:08",
-  "run_end": "2026-05-21 02:54:08",
-  "bot_version": "v90_1_quality_correctness (48ece88)",
-  "candidate_count": 15,
-  "mode": "storm",
-  "max_new": 5,
-  "published_total": 5,
-  "published_pending": 3,
-  "published_new": 2,
-  "candidates_tried": 16,
-  "score_lines_count": 22,
-  "skip_count": 30,
-  "skip_v89_count": 1,
-  "gemini_calls_observed": 26,
+  "collected_at": "2026-05-21T06:55:59",
+  "run_start": "2026-05-21 06:51:07",
+  "run_end": "2026-05-21 06:51:07",
+  "bot_version": "v90_1_quality_correctness (2b68fd7)",
+  "candidate_count": 13,
+  "mode": "normal",
+  "max_new": 3,
+  "published_total": 4,
+  "published_pending": 1,
+  "published_new": 3,
+  "candidates_tried": 10,
+  "score_lines_count": 24,
+  "skip_count": 25,
+  "skip_v89_count": 0,
+  "gemini_calls_observed": 21,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 23,
-    "gemini-3-flash-preview": 2,
-    "gemini-2.5-flash": 1
+    "gemini-3.1-flash-lite": 16,
+    "gemini-3-flash-preview": 1,
+    "gemini-2.5-flash": 1,
+    "gemini-2.5-flash-lite": 2,
+    "gemini-2.5-pro": 1
   },
   "gemini_discarded_models": {
-    "gemini-3-flash-preview": 1
+    "gemini-3-flash-preview": 1,
+    "gemini-3.1-flash-lite": 2
   },
   "model_tasks": [
     {
       "task": "healthcheck",
       "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "translate_normal",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "postedit",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "title",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
     },
     {
       "task": "editorial_analysis",
@@ -61,20 +48,8 @@
       "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
     },
     {
-      "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "translate_normal",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "postedit",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "title",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
+      "task": "translate_report",
+      "chain": "gemini-2.5-pro,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite"
     },
     {
       "task": "editorial_analysis",
@@ -111,144 +86,129 @@
   ],
   "model_task_counts": {
     "healthcheck": 1,
-    "editorial_analysis": 5,
-    "translate_normal": 4,
-    "postedit": 5,
-    "title": 5,
-    "translate_medium": 1
+    "editorial_analysis": 3,
+    "translate_medium": 1,
+    "postedit": 3,
+    "title": 3,
+    "translate_report": 1,
+    "translate_normal": 2
   },
   "perf": {
     "WP strict report lookup": {
       "count": 1,
-      "total_seconds": 2.07,
-      "max_seconds": 2.07
+      "total_seconds": 1.55,
+      "max_seconds": 1.55
     },
     "WP lookup URL esistente": {
-      "count": 1,
-      "total_seconds": 0.87,
-      "max_seconds": 0.87
+      "count": 3,
+      "total_seconds": 1.96,
+      "max_seconds": 0.82
     },
     "scraping articolo": {
-      "count": 5,
-      "total_seconds": 5.9,
-      "max_seconds": 1.23
+      "count": 3,
+      "total_seconds": 4.17,
+      "max_seconds": 1.61
     },
     "estrazione blocchi": {
-      "count": 5,
-      "total_seconds": 3.19,
-      "max_seconds": 0.72
+      "count": 3,
+      "total_seconds": 2.2,
+      "max_seconds": 0.75
     },
     "analisi editoriale AI v72": {
       "count": 6,
-      "total_seconds": 15.87,
-      "max_seconds": 5.32
+      "total_seconds": 34.43,
+      "max_seconds": 16.02
     },
     "WP recent posts dedupe": {
-      "count": 1,
-      "total_seconds": 0.92,
-      "max_seconds": 0.92
+      "count": 2,
+      "total_seconds": 1.34,
+      "max_seconds": 0.68
     },
     "categoria da analisi editoriale v72": {
-      "count": 1,
-      "total_seconds": 1.22,
-      "max_seconds": 1.22
+      "count": 2,
+      "total_seconds": 1.97,
+      "max_seconds": 0.99
     },
     "traduzione": {
-      "count": 5,
-      "total_seconds": 93.19,
-      "max_seconds": 69.99
+      "count": 4,
+      "total_seconds": 202.16,
+      "max_seconds": 127.88
     },
     "creazione post WordPress": {
-      "count": 5,
-      "total_seconds": 20.49,
-      "max_seconds": 5.23
+      "count": 4,
+      "total_seconds": 24.53,
+      "max_seconds": 9.79
     },
-    "totale articolo pubblicato 'Mick Foley Breaks Silence After AEW Debut Announcement'": {
+    "totale articolo pubblicato 'Nikki Bella Reveals What's Holding Up Her WWE Return After W'": {
       "count": 1,
-      "total_seconds": 15.69,
-      "max_seconds": 15.69
+      "total_seconds": 74.5,
+      "max_seconds": 74.5
     },
-    "totale articolo pubblicato 'Charlotte Flair Fires Warning About Breaking Ric Flair & Joh'": {
-      "count": 1,
-      "total_seconds": 77.59,
-      "max_seconds": 77.59
+    "upload immagine interna": {
+      "count": 13,
+      "total_seconds": 11.88,
+      "max_seconds": 1.51
     },
-    "totale articolo pubblicato 'Daria Rae Addresses TNA Contract Status Ahead Of Upcoming Ex'": {
+    "totale articolo pubblicato 'Darby Allin Taps Out Speedball Mike Bailey To Retain AEW Wor'": {
       "count": 1,
-      "total_seconds": 15.94,
-      "max_seconds": 15.94
+      "total_seconds": 17.1,
+      "max_seconds": 17.1
     },
-    "totale articolo pubblicato 'Tiffany Stratton Reveals WWE Almost Gave Her A Completely Di'": {
+    "totale articolo pubblicato 'Daria Rae Reveals Acting Has Become Her 'Main Gig' After WWE'": {
       "count": 1,
-      "total_seconds": 15.88,
-      "max_seconds": 15.88
-    },
-    "totale articolo pubblicato 'Injured Willow Nightingale Withdraws From Owen Hart Tourname'": {
-      "count": 1,
-      "total_seconds": 16.13,
-      "max_seconds": 16.13
+      "total_seconds": 24.33,
+      "max_seconds": 24.33
     }
   },
   "article_metrics": [
     {
-      "path": "published/20260521_025455_001_mick-foley-rompe-il-silenzio-dopo-lannuncio-del-suo-debutto-in-aew_5008_final.html",
+      "path": "published/20260521_065231_001_nikki-bella-il-rientro-in-wwe-dipende-dalla-caviglia_5023_final.html",
       "exists": true,
-      "word_count": 260,
-      "paragraph_count": 10,
-      "blockquote_count": 0,
-      "image_count": 0,
-      "iframe_count": 0,
-      "embed_hint_count": 1,
-      "title": "Mick Foley rompe il silenzio dopo l'annuncio del suo debutto in AEW"
-    },
-    {
-      "path": "published/20260521_025614_002_charlotte-flair-punta-al-record-di-titoli-di-ric-flair-e-john-cena_5011_final.html",
-      "exists": true,
-      "word_count": 264,
+      "word_count": 218,
       "paragraph_count": 5,
-      "blockquote_count": 3,
-      "image_count": 0,
-      "iframe_count": 0,
-      "embed_hint_count": 7,
-      "title": "Charlotte Flair punta al record di titoli di Ric Flair e John Cena"
-    },
-    {
-      "path": "published/20260521_025631_003_daria-rae-fa-chiarezza-sulla-scadenza-del-suo-contratto-con-tna_5014_final.html",
-      "exists": true,
-      "word_count": 201,
-      "paragraph_count": 3,
       "blockquote_count": 1,
       "image_count": 0,
       "iframe_count": 0,
       "embed_hint_count": 2,
-      "title": "Daria Rae fa chiarezza sulla scadenza del suo contratto con TNA"
+      "title": "Nikki Bella: il rientro in WWE dipende dalla caviglia"
     },
     {
-      "path": "published/20260521_025653_004_wwe-tiffany-stratton-rivela-i-nomi-valutati-per-lei-prima-del-debutto_5017_final.html",
+      "path": "published/20260521_065448_002_aew-dynamite-del-20-maggio-2026-risultati-e-momenti-salienti_5039_final.html",
       "exists": true,
-      "word_count": 170,
-      "paragraph_count": 5,
+      "word_count": 3810,
+      "paragraph_count": 73,
+      "blockquote_count": 0,
+      "image_count": 10,
+      "iframe_count": 0,
+      "embed_hint_count": 0,
+      "title": "AEW Collision del 20 maggio 2026: risultati e momenti salienti"
+    },
+    {
+      "path": "published/20260521_065531_003_aew-dynamite-darby-allin-batte-mike-bailey-e-conserva-laew-world-championship_5042_final.html",
+      "exists": true,
+      "word_count": 269,
+      "paragraph_count": 4,
       "blockquote_count": 0,
       "image_count": 0,
       "iframe_count": 0,
       "embed_hint_count": 0,
-      "title": "WWE: Tiffany Stratton rivela i nomi valutati per lei prima del debutto"
+      "title": "AEW Dynamite: Darby Allin batte Mike Bailey e conserva l'AEW World Championship"
     },
     {
-      "path": "published/20260521_025710_005_infortunata-willow-nightingale-lascia-il-titolo-aew-tbs-e-si-ritira-dal-torneo-owen-hart_5020_final.html",
+      "path": "published/20260521_065556_004_daria-rae-la-recitazione-è-il-suo-impegno-principale-dopo-laddio-alla-wwe_5045_final.html",
       "exists": true,
-      "word_count": 191,
+      "word_count": 227,
       "paragraph_count": 5,
-      "blockquote_count": 0,
+      "blockquote_count": 2,
       "image_count": 0,
       "iframe_count": 0,
-      "embed_hint_count": 0,
-      "title": "Infortunata, Willow Nightingale lascia il titolo AEW TBS e si ritira dal torneo Owen Hart"
+      "embed_hint_count": 4,
+      "title": "Daria Rae: la recitazione è il suo impegno principale dopo l'addio alla WWE"
     }
   ],
   "daily_counts": {
-    "published_today": 5,
-    "published_last_4h": 5,
-    "runs_today": 1
+    "published_today": 9,
+    "published_last_4h": 9,
+    "runs_today": 2
   }
 }
