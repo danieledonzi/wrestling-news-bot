@@ -1,30 +1,12 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-21 17:11:46",
-  "bot_version": "v90_2_editorial_pacing_update_gate (1cf3bdf)",
-  "git_sha": "1cf3bdfb579113109b977548c7943651d668f29c",
-  "created_at": "2026-05-21T17:12:55",
-  "published_count": 2,
-  "published_post_ids": [
-    "5089",
-    "5092"
-  ],
-  "published_artifacts": [
-    {
-      "post_id": 5089,
-      "title": "WWE interessata a una reunion tra Enzo e Cass",
-      "source_url": "https://www.ringsidenews.com/wwe-interested-reuniting-enzo-cass-amid-backstage-contact/",
-      "html_file": "published/20260521_171225_001_wwe-interessata-a-una-reunion-tra-enzo-e-cass_5089_final.html",
-      "metadata_file": "published/20260521_171225_001_wwe-interessata-a-una-reunion-tra-enzo-e-cass_5089_metadata.json"
-    },
-    {
-      "post_id": 5092,
-      "title": "Caso di stalking contro Liv Morgan: nuova udienza in tribunale dopo diversi rinvii",
-      "source_url": "https://www.ringsidenews.com/liv-morgan-stalking-case-returning-court-multiple-delays/",
-      "html_file": "published/20260521_171253_002_caso-di-stalking-contro-liv-morgan-nuova-udienza-in-tribunale-dopo-diversi-rinvii_5092_final.html",
-      "metadata_file": "published/20260521_171253_002_caso-di-stalking-contro-liv-morgan-nuova-udienza-in-tribunale-dopo-diversi-rinvii_5092_metadata.json"
-    }
-  ],
+  "run_id": "2026-05-21 19:25:08",
+  "bot_version": "v90_2_editorial_pacing_update_gate (f516bda)",
+  "git_sha": "f516bda50e891edd018794682ebfba563864e4a3",
+  "created_at": "2026-05-21T19:25:41",
+  "published_count": 0,
+  "published_post_ids": [],
+  "published_artifacts": [],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",

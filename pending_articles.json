@@ -1,1 +1,113 @@
-[]
+[
+  {
+    "url": "https://www.wrestlinginc.com/2178818/wwe-nxt-mason-rook-dean-malenko-nikki-blackheart/",
+    "title": "WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More",
+    "semantic_id": "wwe-nxt-announces-official-signings-of-mason-rook-former-nikki-blackheart-and-more",
+    "title_key": "official-signings-mason-rook-nikki-blackheart-more",
+    "score": 96,
+    "priority": "high",
+    "event_key": "",
+    "story_signature_v71": "stable:nxt_announces_official_signings_of_mason_rook|former_nikki_blackheart_and_more|story|wwe",
+    "summary": "WWE NXT announces the official signings of indie star Nikki Blackheart, third generation wrestler Lacey Simon, and Mason Rook, who debuted in NXT last month",
+    "reasons": [
+      "WWE/main roster",
+      "impatto roster/storyline",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "show settimanale",
+      "v62 ritorno/debutto",
+      "v71 freshness=0.712"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "impatto roster/storyline",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "show settimanale",
+      "v62 ritorno/debutto",
+      "v71 freshness=0.712"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1779408790.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1779391536.8231502,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.wrestlinginc.com/2177398/aew-dynamite-collision-may-20-two-titles-on-line-anything-goes-match/",
+    "title": "AEW Dynamite & Collision Results 5/20 - Two Titles On The Line, Anything Goes Match",
+    "semantic_id": "aew-dynamite-collision-results-520-two-titles-on-the-line-anything-goes-match",
+    "title_key": "dynamite-collision-results-5-20-two-line-anything-goes",
+    "score": 80,
+    "priority": "high",
+    "event_key": "report:aew-dynamite-2026-05-20",
+    "story_signature_v71": "stable:report_aew-dynamite-2026-05-20",
+    "summary": "This is Wrestling Inc.'s coverage for \"AEW Dynamite\" & \"AEW Collision\" on May 20, 2026, with the AEW World & AEW World Tag Team Championships up for grabs!",
+    "reasons": [
+      "AEW",
+      "titolo/championship",
+      "show settimanale",
+      "v62 titolo/championship",
+      "v75 hard results report",
+      "v77 hard report protected",
+      "v71 freshness=0.355"
+    ],
+    "score_reasons": [
+      "AEW",
+      "titolo/championship",
+      "show settimanale",
+      "v62 titolo/championship",
+      "v75 hard results report",
+      "v77 hard report protected",
+      "v71 freshness=0.355"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1779339600.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1779391536.5708468,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.wrestlinginc.com/2176174/wwe-nxt-may-19-two-championships-up-for-grabs-keanu-carver-tate-wilder/",
+    "title": "WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder",
+    "semantic_id": "wwe-nxt-results-519-two-championships-up-for-grabs-keanu-carver-faces-tate-wilder",
+    "title_key": "results-5-19-two-championships-up-grabs-keanu-carver-faces-tate-wilder",
+    "score": 75,
+    "priority": "medium",
+    "event_key": "report:wwe-nxt-2026-05-19",
+    "story_signature_v71": "stable:report_wwe-nxt-2026-05-19",
+    "summary": "This is Wrestling Inc.'s results for \"WWE NXT\" on May 19, 2026, with the NXT Tag Team & Women's North American Championships set to be defended!",
+    "reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "titolo/championship",
+      "show settimanale",
+      "v62 titolo/championship",
+      "v75 hard results report",
+      "v77 hard report protected",
+      "v71 low freshness/novelty",
+      "v71 freshness=0.31",
+      "true-results report: bypass soglia editoriale"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "WWE main roster + storyline/evento",
+      "titolo/championship",
+      "show settimanale",
+      "v62 titolo/championship",
+      "v75 hard results report",
+      "v77 hard report protected",
+      "v71 low freshness/novelty",
+      "v71 freshness=0.31",
+      "true-results report: bypass soglia editoriale"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1779253200.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1779391537.52594,
+    "attempts": 0
+  }
+]

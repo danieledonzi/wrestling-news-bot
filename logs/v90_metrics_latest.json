@@ -1,153 +1,29 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-21T17:12:56",
-  "run_start": "2026-05-21 17:11:46",
-  "run_end": "2026-05-21 17:11:46",
-  "bot_version": "v90_2_editorial_pacing_update_gate (1cf3bdf)",
-  "candidate_count": 11,
-  "mode": "normal",
-  "max_new": 3,
-  "published_total": 2,
+  "collected_at": "2026-05-21T19:25:41",
+  "run_start": "2026-05-21 19:25:08",
+  "run_end": "2026-05-21 19:25:08",
+  "bot_version": "v90_2_editorial_pacing_update_gate (f516bda)",
+  "candidate_count": 0,
+  "mode": null,
+  "max_new": 0,
+  "published_total": 0,
   "published_pending": 0,
-  "published_new": 2,
-  "candidates_tried": 11,
-  "score_lines_count": 18,
-  "skip_count": 31,
-  "skip_v89_count": 1,
-  "gemini_calls_observed": 11,
-  "gemini_models": {
-    "gemini-3.1-flash-lite": 11
-  },
+  "published_new": 0,
+  "candidates_tried": 0,
+  "score_lines_count": 10,
+  "skip_count": 20,
+  "skip_v89_count": 0,
+  "gemini_calls_observed": 0,
+  "gemini_models": {},
   "gemini_discarded_models": {},
-  "model_tasks": [
-    {
-      "task": "healthcheck",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "translate_normal",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "postedit",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "title",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
-    },
-    {
-      "task": "editorial_analysis",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
-    },
-    {
-      "task": "translate_normal",
-      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "postedit",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
-    },
-    {
-      "task": "title",
-      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
-    }
-  ],
-  "model_task_counts": {
-    "healthcheck": 1,
-    "editorial_analysis": 2,
-    "translate_normal": 2,
-    "postedit": 2,
-    "title": 2
-  },
-  "perf": {
-    "WP lookup event_key": {
-      "count": 1,
-      "total_seconds": 1.6,
-      "max_seconds": 1.6
-    },
-    "scraping articolo": {
-      "count": 2,
-      "total_seconds": 2.72,
-      "max_seconds": 1.38
-    },
-    "estrazione blocchi": {
-      "count": 2,
-      "total_seconds": 1.55,
-      "max_seconds": 0.8
-    },
-    "analisi editoriale AI v72": {
-      "count": 4,
-      "total_seconds": 23.97,
-      "max_seconds": 12.19
-    },
-    "WP recent posts dedupe": {
-      "count": 1,
-      "total_seconds": 1.62,
-      "max_seconds": 1.62
-    },
-    "categoria da analisi editoriale v72": {
-      "count": 1,
-      "total_seconds": 1.96,
-      "max_seconds": 1.96
-    },
-    "traduzione": {
-      "count": 2,
-      "total_seconds": 10.46,
-      "max_seconds": 5.41
-    },
-    "creazione post WordPress": {
-      "count": 2,
-      "total_seconds": 7.08,
-      "max_seconds": 3.77
-    },
-    "totale articolo pubblicato 'WWE Interested In Reuniting Enzo & Cass Amid Backstage Conta'": {
-      "count": 1,
-      "total_seconds": 25.68,
-      "max_seconds": 25.68
-    },
-    "WP lookup URL esistente": {
-      "count": 1,
-      "total_seconds": 0.87,
-      "max_seconds": 0.87
-    },
-    "totale articolo pubblicato 'Liv Morgan Stalking Case Returning To Court After Multiple D'": {
-      "count": 1,
-      "total_seconds": 13.03,
-      "max_seconds": 13.03
-    }
-  },
-  "article_metrics": [
-    {
-      "path": "published/20260521_171225_001_wwe-interessata-a-una-reunion-tra-enzo-e-cass_5089_final.html",
-      "exists": true,
-      "word_count": 303,
-      "paragraph_count": 8,
-      "blockquote_count": 0,
-      "image_count": 0,
-      "iframe_count": 0,
-      "embed_hint_count": 0,
-      "title": "WWE interessata a una reunion tra Enzo e Cass"
-    },
-    {
-      "path": "published/20260521_171253_002_caso-di-stalking-contro-liv-morgan-nuova-udienza-in-tribunale-dopo-diversi-rinvii_5092_final.html",
-      "exists": true,
-      "word_count": 274,
-      "paragraph_count": 8,
-      "blockquote_count": 0,
-      "image_count": 0,
-      "iframe_count": 0,
-      "embed_hint_count": 0,
-      "title": "Caso di stalking contro Liv Morgan: nuova udienza in tribunale dopo diversi rinvii"
-    }
-  ],
+  "model_tasks": [],
+  "model_task_counts": {},
+  "perf": {},
+  "article_metrics": [],
   "daily_counts": {
     "published_today": 22,
-    "published_last_4h": 9,
-    "runs_today": 9
+    "published_last_4h": 3,
+    "runs_today": 10
   }
 }
