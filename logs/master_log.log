@@ -6211,3 +6211,292 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-21 19:25:08] VERSION [v90_2_editorial_pacing_update_gate (f516bda)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show=dynamite
+[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard
+[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+
+===== RUN START [2026-05-21 21:10:21] VERSION [v90_2_editorial_pacing_update_gate (1c11f8c)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 14 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (48/75): Former WWE Star Parker Boudreaux Says He Was Given A Raise Two Weeks Before Release
+[SKIP] Score sotto soglia editoriale (16/75): Shawn Michaels Explains How WWE Training Environment Has Changed
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite & Collision 5/20/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (20/75): AEW's Paul Wight Is Impressed With Coaching Skills Of WWE HOFer
+[PERF v71] WP lookup event_key: 1.28s
+[FIX] Event key in history ma non confermata su WordPress: event:business:vince-mcmahon - provo a pubblicare
+[REPORT v87.2] Report confermato da history forte: report:aew-dynamite-2026-05-20
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:aew-dynamite-2026-05-20 - AEW Dynamite & Collision Results 5/20 - Two Titles On The Line, Anything Goes Match
+[SKIP] Score sotto soglia editoriale (0/75): WWE Saturday Night's Main Event 5/23/2026: Draws & Duds
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Bully Ray, Tommy Dreamer Discuss What Brock Lesnar's WWE Raw Return Means For Oba Femi
+[SKIP] Score sotto soglia editoriale (56/75): Bully Ray, Tommy Dreamer Discuss What Brock Lesnar's WWE Raw Return Means For Oba Femi
+[PERF v71] WP lookup event_key: 1.46s
+[FIX] Event key in history ma non confermata su WordPress: event:title:darby-allin:world:championship - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (10/75): WWE HOFer JBL Believes A Pro Wrestling Union Is A 'Possibility'
+[SKIP] Score sotto soglia editoriale (54/75): WWE HOFer Doesn't Think Mick Foley Will Wrestle In AEW
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP] Score sotto soglia editoriale (48/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[SKIP] Score sotto soglia editoriale (56/75): Becky Lynch Comments On WWE Advertising Changes To Her SNME Match
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Tony Khan Reveals Mick Foley's AEW Role Ahead of Double or Nothing Debut
+[SCORE v88.3] v88.3 hard feature skip cap 83->45 - Tony Khan Reveals Mick Foley's AEW Role Ahead of Double or Nothing Debut
+[SKIP] Score sotto soglia editoriale (0/75): John Cena Claims He Rarely Turns Down WWE Creative Ideas
+[SKIP] Score sotto soglia editoriale (34/75): John Cena Reveals How a Mark Wahlberg Joke Helped Launch His Hollywood Career
+[SCORE v86.9] Cap executive interview/opinion 80->72 - Tony Khan's AEW Double or Nothing Media Call Highlights for May 21, 2026
+[PERF v71] WP lookup event_key: 1.43s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tony-khan - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (49/75): John Cena Explains Why He Refused To Change His Look During WWE Heel Turn
+[SKIP] Score sotto soglia editoriale (38/75): AEW Adds Massive 10-Man Tag Match To Double Or Nothing Buy In
+[SKIP] Score sotto soglia editoriale (7/75): AJ Styles Still Wants Will Ospreay In WWE Despite AEW Run
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE Locker Room Wants Baron Corbin Back
+[SCORE v86.9] Cap commentary/opinion 88->68 - WWE Locker Room Wants Baron Corbin Back
+[SKIP] Score sotto soglia editoriale (49/75): AJ Styles Fires Back at Fans Calling Him a TKO Defender Over WWE Live Events
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Sol Ruca Reveals How Triple H Helped Her After Backlash Over WWE RAW Debut
+[SCORE v86.9] Cap executive interview/opinion 100->72 - Sol Ruca Reveals How Triple H Helped Her After Backlash Over WWE RAW Debut
+[SKIP] Score sotto soglia editoriale (54/75): Internal WWE Reaction to Trick Williams & Lil Yachty Pairing
+[SKIP] Score sotto soglia editoriale (50/75): WWE's Expanded Summer House Show Tour Could Lead To Bigger Touring Schedule
+[SKIP] Score sotto soglia editoriale (39/75): Nikki Bella Admits She Doesn't Have Time for Dating Right Now
+[SKIP] URL già in history: https://www.ringsidenews.com/liv-morgan-stalking-case-returning-court-multiple-delays/
+[SCORE] 73 medium - AEW's MJF Blames Vince McMahon For Making Stipulation Into A Joke | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, floor WWE main roster storyline, v62 titolo/championship, v71 freshness=0.594, v48 tier2: 55-74
+[SCORE] 71 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 67 medium - Tony Khan's AEW Double or Nothing Media Call Highlights for May 21, 2026 | AEW, PLE/PPV, v75 hard results report, v77 hard report protected, v86.8 cap executive interview/opinion 80->72, v71 source reliability soft penalty, v71 freshness=0.573, v48 tier1: v77 hard report
+[SCORE] 67 medium - Sol Ruca Reveals How Triple H Helped Her After Backlash Over WWE RAW Debut | WWE/main roster, top star lead: becky lynch, nomi forti titolo: triple h, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name lead + evento forte, PLE/PPV, v62 ritorno/debutto, v86.8 cap executive interview/opinion 100->72, v71 source reliability soft penalty, v71 freshness=0.656, v48 tier2: 55-74
+[SCORE] 63 medium - WWE Locker Room Wants Baron Corbin Back | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v62 ritorno/debutto, v86.9 cap commentary/opinion 88->68, v71 source reliability soft penalty, v71 freshness=0.665, v48 tier2: 55-74
+[SCORE] 60 medium - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 59 low - Danhausen Lands Major Representation Deal After Viral Rise | nomi forti titolo: danhausen, PLE/PPV, v62 ritorno/debutto, v71 source reliability soft penalty, v71 freshness=0.664, v48 tier2: 55-74
+[SCORE] 44 low - Jim Ross Shares Thoughts On Darby Allin's AEW World Championship Reign | AEW, titolo/championship, v62 titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier4: 40-44 riempimento controllato
+[SCORE] 43 low - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag | WWE/main roster, top star titolo: undertaker, intervista/opinione, v81.1 cap light name-driven item 49->49, v71 low freshness/novelty, v71 freshness=0.31, v48 tier4: 40-44 riempimento controllato
+[SCORE] 40 low - Tony Khan Reveals Mick Foley's AEW Role Ahead of Double or Nothing Debut | AEW, impatto roster/storyline, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v88.3 hard feature skip cap 83->45, v71 source reliability soft penalty, v71 freshness=0.81, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 1
+[PERF v71] WP lookup URL esistente: 0.83s
+[BOT] Elaborazione: WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[BOT] semantic_id=wwe-nxt-announces-official-signings-of-mason-rook-former-nikki-blackheart-and-more
+[SCORE] iniziale=96 priority=high
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.wrestlinginc.com/2178818/wwe-nxt-mason-rook-dean-malenko-nikki-blackheart/
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=7, image=1, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.wrestlinginc.com/2178818/wwe-nxt-mason-rook-dean-malenko-nikki-blackheart/
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=NXT (6) conf=1.00 model=gemini-3.1-flash-lite | Articolo che riporta l'annuncio ufficiale di nuove firme al Performance Center, un fatto già avvenuto e concluso.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Rookie Class', usa 'classe di nuovi arrivati' o 'nuove reclute'.; 'Signings' va inteso come contratti firmati/ingaggi, non 'rilasci'.; Attenzione a non tradurre i nomi dei wrestler.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=NXT (6) | Articolo che riporta l'annuncio ufficiale di nuove firme al Performance Center, un fatto già avvenuto e concluso.
+[PERF v71] analisi editoriale AI v72: 1.15s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 100->54 - WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[SCORE v79.1.3] Recovery post-show 54->95 - WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 95->54 - WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, developmental secondario, v62 media rights/streaming, v88.2 cap OTHER/feature non-news 100->54, v79.1.3 post-show recovery 54->95, v88.2 cap OTHER/feature non-news 95->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[BOT] News candidate totali: 10 | mode=normal | max nuove=3 | pending pubblicati=0
+[SEO v89] Report non assorbe sviluppo autonomo forte: AEW's MJF Blames Vince McMahon For Making Stipulation Into A Joke
+[BOT] Elaborazione: AEW's MJF Blames Vince McMahon For Making Stipulation Into A Joke
+[BOT] semantic_id=aews-mjf-blames-vince-mcmahon-for-making-stipulation-into-a-joke
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=AEW (5) conf=0.95 model=gemini-3.1-flash-lite | Si tratta di una dichiarazione post-intervista di MJF su eventi passati e prospettive future; non è un report completo né una preview ufficiale di un evento.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Hair vs Title match' o termini simili, non tradurre i nomi dei titoli (AEW World Championship).; 'Hair match' va reso come 'match con la stipulazione dei capelli in palio'.; Citazioni dirette da mantenere fedeli allo stile colloquiale.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | Si tratta di una dichiarazione post-intervista di MJF su eventi passati e prospettive future; non è un report completo né una preview ufficiale di un evento.
+[PERF v71] analisi editoriale AI v72: 7.04s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - AEW's MJF Blames Vince McMahon For Making Stipulation Into A Joke
+[SCORE] raffinato=68 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, v62 titolo/championship, v66 cap opinion/commentary storyline, v68 cap opinion senza news concreta
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - AEW's MJF Blames Vince McMahon For Making Stipulation Into A Joke
+[V71] story_signature=stable:vince_mcmahon|darby_allin|mjf|title|aew semantic_status=new_story freshness=0.594
+[PERF v71] WP recent posts dedupe: 1.05s
+[FIX] Event key in history ma non confermata su WordPress: event:business:vince-mcmahon - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.44s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=5
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/aews-mjf-blames-vince-mcmahon-for-making-stipulation-into-a-joke/intro-1779393079.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 4.42s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): AEW: MJF accusa Vince McMahon di aver reso gli Hair Match una barzelletta
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/aews-mjf-blames-vince-mcmahon-for-making-stipulation-into-a-joke/l-intro-1779393079.jpg
+[MEDIA] Immagine caricata: 5094
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260521_211109_001_aew-mjf-accusa-vince-mcmahon-di-aver-reso-gli-hair-match-una-barzelletta_5095_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5095
+[PERF v71] creazione post WordPress: 5.24s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/aews-mjf-blames-vince-mcmahon-for-making-stipulation-into-a-joke/l-intro-1779393079.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5094
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'AEW's MJF Blames Vince McMahon For Making Stipulation Into A': 18.89s
+[OK] Pubblicato: AEW: MJF accusa Vince McMahon di aver reso gli Hair Match una barzelletta
+[PENDING] Coda salvata: 3 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260521_211111_001_aew-mjf-accusa-vince-mcmahon-di-aver-reso-gli-hair-match-una-barzelletta_43d1af2e_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: AEW: MJF accusa Vince McMahon di aver reso gli Hair Match una barzelletta
+[PUBLISHED REVIEW v87.1] Review outer salvata: AEW: MJF accusa Vince McMahon di aver reso gli Hair Match una barzelletta
+[CORE v90.2] Registrato publish core=title:mjf:status count=1 facts=['wwe_impact']
+[BOT] Elaborazione: WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[BOT] semantic_id=wwe-announces-major-change-to-becky-lynchsol-ruca-snme-match
+[SCORE] iniziale=71 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo descrive un cambio di stipulazione (aggiunta del titolo in palio) per un match annunciato di un evento futuro (SNME), servendo quindi da aggiornamento alla card. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantenere 'Women's Intercontinental Championship' in inglese.; Non tradurre 'Saturday Night's Main Event' (SNME).; Evitare calchi come 'red brand' (usare 'RAW' o 'il roster rosso').
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo descrive un cambio di stipulazione (aggiunta del titolo in palio) per un match annunciato di un evento futuro (SNME), servendo quindi da aggiornamento alla card. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 0.97s
+[SCORE v88.2] v88.2 cap feature storico numerico 56->45 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[SCORE] raffinato=45 priority=low | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v70 cap preview hard, v88.2 cap feature storico numerico 56->45
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[BOT] Elaborazione: Tony Khan's AEW Double or Nothing Media Call Highlights for May 21, 2026
+[BOT] semantic_id=tony-khans-aew-double-or-nothing-media-call-highlights-for-may-21-2026
+[SCORE] iniziale=67 priority=medium
+[SCRAPE] Articolo results rilevato: testo completo (5704 caratteri)
+[PERF v71] scraping articolo: 0.92s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=21, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=21, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.68s
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 14 record da event_keys
+[REPORT v86.1] Report key in history ma non confermata su WordPress: event:business:tony-khan - provo pubblicazione
+[SEO v89] Report non assorbe sviluppo autonomo forte: Sol Ruca Reveals How Triple H Helped Her After Backlash Over WWE RAW Debut
+[BOT] Elaborazione: Sol Ruca Reveals How Triple H Helped Her After Backlash Over WWE RAW Debut
+[BOT] semantic_id=sol-ruca-reveals-how-triple-h-helped-her-after-backlash-over-wwe-raw-debut
+[SCORE] iniziale=67 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/sol-ruca-reveals-how-triple-h-helped-her-backlash-wwe-raw-debut/
+[PERF v71] scraping articolo: 0.95s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=17, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/sol-ruca-reveals-how-triple-h-helped-her-backlash-wwe-raw-debut/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=17, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.73s
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo tratta le dichiarazioni post-debutto di Sol Ruca riguardo al supporto ricevuto da Triple H dopo il suo esordio a Raw, non essendo una preview di eventi futuri.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Sol Snatcher' e 'WWE RAW' in inglese.; 'Debut' va tradotto come 'esordio' o 'debutto'.; Evitare calchi per le espressioni idiomatiche di Triple H, riportando le quote in modo naturale ma fedele al senso originale di supporto al wrestler.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo tratta le dichiarazioni post-debutto di Sol Ruca riguardo al supporto ricevuto da Triple H dopo il suo esordio a Raw, non essendo una preview di eventi futuri.
+[PERF v71] analisi editoriale AI v72: 1.39s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Sol Ruca Reveals How Triple H Helped Her After Backlash Over WWE RAW Debut
+[SCORE v86.9] Cap executive interview/opinion 100->72 - Sol Ruca Reveals How Triple H Helped Her After Backlash Over WWE RAW Debut
+[SCORE] raffinato=72 priority=medium | WWE/main roster, top star lead: becky lynch, nomi forti titolo: triple h, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name lead + evento forte, PLE/PPV, v62 ritorno/debutto, v86.8 cap executive interview/opinion 100->72
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - Sol Ruca Reveals How Triple H Helped Her After Backlash Over WWE RAW Debut
+[V71] story_signature=stable:becky_lynch|sol_ruca|triple_h|debut|wwe semantic_status=new_story freshness=0.655
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[GEMINI] Modello gemini-3-flash-preview scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[MODEL v88] Cooldown globale modello per la run: gemini-3-flash-preview
+[GEMINI] Uso modello: gemini-2.5-flash
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-2.5-flash | blocchi testo=17
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[MODEL v88] task=repair chain=gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-2.5-flash
+[VOICE v82] Repair scartata per ratio parole P004: 20->24
+[VOICE v82] Repair scartata per ratio parole P005: 22->31
+[VOICE v82] Repair scartata per ratio parole P006: 16->28
+[VOICE v82] Repair scartata per ratio parole P008: 34->41
+[VOICE v82] Repair scartata per ratio parole P012: 33->28
+[VOICE v82] Repair scartata per ratio parole P013: 26->31
+[VOICE v82] Repair scartata per ratio parole P014: 42->78
+[VOICE v82] Repair scartata per ratio parole P015: 36->48
+[VOICE v82] Micro-repair applicate: 1
+[VOICE v82] AI-smell repair completata con gemini-2.5-flash
+[VOICE v82] Layer newsroom realism applicato
+[PERF v71] traduzione: 124.58s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Sol Ruca svela il supporto di Triple H dopo le critiche al suo debutto a Raw
+[EMBED v87.3] Canonicalizzati/deduplicati embed nel body: 1
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://www.youtube.com/watch?v=FpHfLxwco9M
+[EMBED v87.3] Positional embed guard applicato: 2 modifiche
+[EMBED v88] Publish media guard: expected=1 before=0 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/sol-ruca-reveals-how-triple-h-helped-her-after-backlash-over-wwe-raw-debut-26.jpg
+[MEDIA] Immagine caricata: 5097
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260521_211335_002_sol-ruca-svela-il-supporto-di-triple-h-dopo-le-critiche-al-suo-debutto-a-raw_5098_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5098
+[PERF v71] creazione post WordPress: 12.29s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/sol-ruca-reveals-how-triple-h-helped-her-after-backlash-over-wwe-raw-debut-26.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5097
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Sol Ruca Reveals How Triple H Helped Her After Backlash Over': 140.75s
+[OK] Pubblicato: Sol Ruca svela il supporto di Triple H dopo le critiche al suo debutto a Raw
+[PENDING] Coda salvata: 3 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260521_211337_002_sol-ruca-svela-il-supporto-di-triple-h-dopo-le-critiche-al-suo-debutto-a-raw_cb26c12d_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Sol Ruca svela il supporto di Triple H dopo le critiche al suo debutto a Raw
+[PUBLISHED REVIEW v87.1] Review outer salvata: Sol Ruca svela il supporto di Triple H dopo le critiche al suo debutto a Raw
+[REPORT v87.6] Non scrivo history forte: non true-results/canonico (report:wwe-raw-2026-05-04)
+[SOFTPOOL v90.2] Aggiunta: score=63 core=return:baron-corbin:wwe reason=update_gate:covered_core_below_gate title=WWE Locker Room Wants Baron Corbin Back
+[SKIP v90.2] Follow-up in soft_pool core=return:baron-corbin:wwe score=63 reason=covered_core_below_gate novel=['official_date'] - WWE Locker Room Wants Baron Corbin Back
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[PENDING] Coda salvata: 3 elementi
+[SEO v89] Report non assorbe sviluppo autonomo forte: Danhausen Lands Major Representation Deal After Viral Rise
+[BOT] Elaborazione: Danhausen Lands Major Representation Deal After Viral Rise
+[BOT] semantic_id=danhausen-lands-major-representation-deal-after-viral-rise
+[SCORE] iniziale=59 priority=low
+[PERF v71] scraping articolo: 2.32s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=10, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.68s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta una notizia di mercato avvenuta (firma contratto di rappresentanza di Danhausen) e non si limita a presentare un evento futuro.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Danhausen' come nome proprio.; Non tradurre nomi di programmi TV come 'NBA Today' o 'SportsCenter'.; Tradurre 'representation deal' con 'accordo di rappresentanza'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta una notizia di mercato avvenuta (firma contratto di rappresentanza di Danhausen) e non si limita a presentare un evento futuro.
+[PERF v71] analisi editoriale AI v72: 1.16s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Danhausen Lands Major Representation Deal After Viral Rise
+[SCORE] raffinato=54 priority=low | WWE/main roster, nomi forti titolo: danhausen, impatto roster/storyline, WWE main roster + storyline/evento, PLE/PPV, non wrestling puro, v62 media rights/streaming, v76 cap boost da score basso senza evento concreto, v76 cap death/funeral storyline-comedy
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Danhausen Lands Major Representation Deal After Viral Rise
+[SOFTPOOL v90.2] Aggiunta: score=44 core=title:darby-allin:status reason=update_gate:medium_followup_or_weak_update title=Jim Ross Shares Thoughts On Darby Allin's AEW World Championship Reign
+[SKIP v90.2] Follow-up in soft_pool core=title:darby-allin:status score=44 reason=medium_followup_or_weak_update novel=[] - Jim Ross Shares Thoughts On Darby Allin's AEW World Championship Reign
+[SKIP v89] Soft news non operativa sotto 65: Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SEO v89] Report non assorbe sviluppo autonomo forte: Tony Khan Reveals Mick Foley's AEW Role Ahead of Double or Nothing Debut
+[SKIP v88.3] Feature storico/FIFA/venue/media call escluso: Tony Khan Reveals Mick Foley's AEW Role Ahead of Double or Nothing Debut
+[BOT] Pubblicati 2 articoli (0 pending + 2 nuove) su 11 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-21 21:10:21_summary.json -> published_html_review/run_2026-05-21 21-10-21_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (608 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
+===== RUN END [2026-05-21 21:10:21] VERSION [v90_2_editorial_pacing_update_gate (1c11f8c)] =====
+

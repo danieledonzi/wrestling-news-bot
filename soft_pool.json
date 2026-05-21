@@ -16,5 +16,23 @@
     "core": "business:wwe:house-shows",
     "reason": "update_gate:covered_core_below_gate",
     "ttl_hours": 8
+  },
+  {
+    "created_at": "2026-05-21T21:13:37",
+    "title": "WWE Locker Room Wants Baron Corbin Back",
+    "url": "https://www.ringsidenews.com/wwe-locker-room-wants-baron-corbin-back/",
+    "score": 63,
+    "core": "return:baron-corbin:wwe",
+    "reason": "update_gate:covered_core_below_gate",
+    "ttl_hours": 8
+  },
+  {
+    "created_at": "2026-05-21T21:13:41",
+    "title": "Jim Ross Shares Thoughts On Darby Allin's AEW World Championship Reign",
+    "url": "https://www.wrestlinginc.com/2177503/aew-jim-ross-darby-allin-thoughts-world-championship-reign/",
+    "score": 44,
+    "core": "title:darby-allin:status",
+    "reason": "update_gate:medium_followup_or_weak_update",
+    "ttl_hours": 8
   }
 ]

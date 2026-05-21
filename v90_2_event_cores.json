@@ -112,7 +112,7 @@
     ],
     "count": 11,
     "first_seen": "2026-05-21T16:04:55",
-    "last_seen": "2026-05-21T17:12:40"
+    "last_seen": "2026-05-21T21:10:51"
   },
   "return:mark-shapiro:wwe": {
     "titles": [
@@ -352,13 +352,25 @@
   },
   "legal:liv-morgan:case": {
     "titles": [
-      "Liv Morgan Stalking Case Returning To Court After Multiple Delays"
+      "Liv Morgan Stalking Case Returning To Court After Multiple Delays",
+      "20260521_171254_002_caso-di-stalking-contro-liv-morgan-nuova-udienza-in-tribunale-dopo-diversi-rinvi_f08cb047_original.html"
     ],
     "facts": [
       "official_return"
     ],
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-05-21T17:12:54",
-    "last_seen": "2026-05-21T17:12:54"
+    "last_seen": "2026-05-21T21:10:51"
+  },
+  "title:mjf:status": {
+    "titles": [
+      "AEW's MJF Blames Vince McMahon For Making Stipulation Into A Joke"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-21T21:11:11",
+    "last_seen": "2026-05-21T21:11:11"
   }
 }
