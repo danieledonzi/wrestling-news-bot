@@ -1,9 +1,9 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-22T11:42:45",
-  "run_start": "2026-05-22 11:42:35",
-  "run_end": "2026-05-22 11:42:35",
-  "bot_version": "v90_2_2_report_flow_tuning (98af05e)",
+  "collected_at": "2026-05-22T13:29:36",
+  "run_start": "2026-05-22 13:29:18",
+  "run_end": "2026-05-22 13:29:18",
+  "bot_version": "v90_2_2_report_flow_tuning (9daf126)",
   "candidate_count": 7,
   "mode": "normal",
   "max_new": 3,
@@ -11,34 +11,49 @@
   "published_pending": 0,
   "published_new": 0,
   "candidates_tried": 7,
-  "score_lines_count": 7,
-  "skip_count": 33,
+  "score_lines_count": 9,
+  "skip_count": 32,
   "skip_v89_count": 2,
-  "gemini_calls_observed": 1,
+  "gemini_calls_observed": 2,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 1
+    "gemini-3.1-flash-lite": 2
   },
   "gemini_discarded_models": {},
   "model_tasks": [
     {
       "task": "healthcheck",
       "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "editorial_analysis",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
     }
   ],
   "model_task_counts": {
-    "healthcheck": 1
+    "healthcheck": 1,
+    "editorial_analysis": 1
   },
   "perf": {
     "WP lookup event_key": {
       "count": 1,
-      "total_seconds": 1.23,
-      "max_seconds": 1.23
+      "total_seconds": 1.25,
+      "max_seconds": 1.25
+    },
+    "WP lookup URL esistente": {
+      "count": 1,
+      "total_seconds": 0.62,
+      "max_seconds": 0.62
+    },
+    "analisi editoriale AI v72": {
+      "count": 1,
+      "total_seconds": 1.41,
+      "max_seconds": 1.41
     }
   },
   "article_metrics": [],
   "daily_counts": {
     "published_today": 0,
     "published_last_4h": 0,
-    "runs_today": 1
+    "runs_today": 2
   }
 }
