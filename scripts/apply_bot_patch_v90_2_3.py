@@ -29,7 +29,7 @@ def v9023_canonical_social_url(text):
     m = SOCIAL_EMBED_URL_RE_V9023.search(str(text or ""))
     if not m:
         return ""
-    url = m.group(0).strip().rstrip(".,;)"]}")
+    url = m.group(0).strip().rstrip('.,;)]}')
     url = re.sub(r"\?.*$", "", url)
     return url
 
@@ -74,10 +74,8 @@ def v9023_fix_social_embed_quotes(html_text):
                 i += 1
                 continue
             seen.add(url)
-            # Make the embed URL paragraph clean and unique.
             node.clear()
             node.append(url)
-            # Gather translated tweet text from immediately following paragraphs until normal article prose resumes.
             quote_parts = []
             j = i + 1
             while j < len(nodes) and len(quote_parts) < 3:
@@ -92,8 +90,6 @@ def v9023_fix_social_embed_quotes(html_text):
                 if SOCIAL_EMBED_URL_RE_V9023.search(txt):
                     nxt.decompose(); changed += 1; j += 1; continue
                 clean = v9023_clean_social_text(txt)
-                # Tweet text is usually short, emoji/hashtag-heavy, and adjacent to the social URL.
-                # Stop on article prose attribution/transition.
                 if re.match(r"^(secondo|nel documento|dalla presentazione|pertanto|la presenza|l'arresto|a pochi giorni|al momento)\b", clean, flags=re.I):
                     break
                 if len(clean) > 260:
