@@ -1,24 +1,27 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-21T22:49:19",
-  "run_start": "2026-05-21 22:48:41",
-  "run_end": "2026-05-21 22:48:41",
-  "bot_version": "v90_2_editorial_pacing_update_gate (47f0313)",
+  "collected_at": "2026-05-22T00:00:28",
+  "run_start": "2026-05-21 23:59:21",
+  "run_end": "2026-05-21 23:59:21",
+  "bot_version": "v90_2_editorial_pacing_update_gate (7223ed3)",
   "candidate_count": 12,
   "mode": "normal",
   "max_new": 3,
   "published_total": 0,
   "published_pending": 0,
   "published_new": 0,
-  "candidates_tried": 13,
-  "score_lines_count": 19,
-  "skip_count": 33,
-  "skip_v89_count": 2,
-  "gemini_calls_observed": 5,
+  "candidates_tried": 2,
+  "score_lines_count": 13,
+  "skip_count": 21,
+  "skip_v89_count": 0,
+  "gemini_calls_observed": 4,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 5
+    "gemini-3.1-flash-lite": 3,
+    "gemini-3-flash-preview": 1
   },
-  "gemini_discarded_models": {},
+  "gemini_discarded_models": {
+    "gemini-3.1-flash-lite": 1
+  },
   "model_tasks": [
     {
       "task": "healthcheck",
@@ -34,36 +37,41 @@
     "editorial_analysis": 1
   },
   "perf": {
+    "WP strict report lookup": {
+      "count": 1,
+      "total_seconds": 1.83,
+      "max_seconds": 1.83
+    },
     "WP lookup event_key": {
       "count": 2,
-      "total_seconds": 2.88,
-      "max_seconds": 1.46
+      "total_seconds": 3.17,
+      "max_seconds": 1.69
+    },
+    "analisi editoriale AI v72": {
+      "count": 2,
+      "total_seconds": 27.27,
+      "max_seconds": 14.58
     },
     "WP lookup URL esistente": {
       "count": 1,
-      "total_seconds": 1.73,
-      "max_seconds": 1.73
-    },
-    "analisi editoriale AI v72": {
-      "count": 4,
-      "total_seconds": 5.21,
-      "max_seconds": 1.65
+      "total_seconds": 0.63,
+      "max_seconds": 0.63
     },
     "scraping articolo": {
-      "count": 3,
-      "total_seconds": 3.8,
-      "max_seconds": 1.32
+      "count": 1,
+      "total_seconds": 1.07,
+      "max_seconds": 1.07
     },
     "estrazione blocchi": {
-      "count": 3,
-      "total_seconds": 2.11,
-      "max_seconds": 0.74
+      "count": 1,
+      "total_seconds": 0.61,
+      "max_seconds": 0.61
     }
   },
   "article_metrics": [],
   "daily_counts": {
     "published_today": 24,
     "published_last_4h": 2,
-    "runs_today": 12
+    "runs_today": 13
   }
 }
