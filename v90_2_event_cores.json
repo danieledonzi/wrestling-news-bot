@@ -112,7 +112,7 @@
     ],
     "count": 11,
     "first_seen": "2026-05-21T16:04:55",
-    "last_seen": "2026-05-21T21:10:51"
+    "last_seen": "2026-05-22T04:17:35"
   },
   "return:mark-shapiro:wwe": {
     "titles": [
@@ -372,5 +372,39 @@
     "count": 1,
     "first_seen": "2026-05-21T21:11:11",
     "last_seen": "2026-05-21T21:11:11"
+  },
+  "legal:mjf:case": {
+    "titles": [
+      "20260521_211109_001_aew-mjf-accusa-vince-mcmahon-di-aver-reso-gli-hair-match-una-barzelletta_5095_final.html",
+      "20260521_211111_001_aew-mjf-accusa-vince-mcmahon-di-aver-reso-gli-hair-match-una-barzelletta_43d1af2e_final.html",
+      "20260521_211111_001_aew-mjf-accusa-vince-mcmahon-di-aver-reso-gli-hair-match-una-barzelletta_43d1af2e_original.html"
+    ],
+    "facts": [],
+    "count": 3,
+    "first_seen": "2026-05-22T04:17:35",
+    "last_seen": "2026-05-22T04:17:35"
+  },
+  "title:mustafa-ali:status": {
+    "titles": [
+      "Mustafa Ali Retains In Open Challenge Answered By Starboy Charlie On TNA Impact"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-22T04:17:57",
+    "last_seen": "2026-05-22T04:17:57"
+  },
+  "return:wwe-s-ethan:wwe": {
+    "titles": [
+      "WWE's Ethan Page Comments On AAA Partnership With Chelsea Green, Possible Reunion"
+    ],
+    "facts": [
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-22T04:18:20",
+    "last_seen": "2026-05-22T04:18:20"
   }
 }

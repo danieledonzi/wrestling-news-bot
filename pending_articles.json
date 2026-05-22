@@ -35,37 +35,6 @@
     "attempts": 0
   },
   {
-    "url": "https://www.ringsidenews.com/former-wwe-247-champion-kyle-busch-passes-away-41/",
-    "title": "Former WWE 24/7 Champion Kyle Busch Passes Away At 41",
-    "semantic_id": "former-wwe-247-champion-kyle-busch-passes-away-at-41",
-    "title_key": "24-7-champion-kyle-busch-passes-away-41",
-    "score": 91,
-    "priority": "high",
-    "event_key": "",
-    "story_signature_v71": "stable:champion_kyle_busch_passes_away_at|title|wwe",
-    "summary": "The sports world is mourning the loss of NASCAR star and former WWE 24/7 Champion Kyle Busch, who has passed away at the age of 41 after being hospitalized with a severe illness. Busch was competing in his 22nd NASCAR season and built a Hall of Fame-caliber career as one of the most successful and ... Read more",
-    "reasons": [
-      "WWE/main roster",
-      "WWE main roster + storyline/evento",
-      "morte",
-      "v62 evento morte/storico",
-      "v71 freshness=0.561"
-    ],
-    "score_reasons": [
-      "WWE/main roster",
-      "WWE main roster + storyline/evento",
-      "morte",
-      "v62 evento morte/storico",
-      "v71 freshness=0.561"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1779424095.0,
-    "status": "raw",
-    "reason": "model_temp_failure_retry",
-    "created_at": 1779407991.8109155,
-    "attempts": 0
-  },
-  {
     "kind": "report",
     "url": "https://www.wrestlinginc.com/2179107/tna-thursday-night-impact-may-21-two-championships-on-line-more/",
     "title": "TNA Thursday Night Impact Results 5/21 - Two Championships On The Line & More",
@@ -93,7 +62,8 @@
       "v75 hard results report",
       "v77 hard report protected",
       "v71 freshness=0.609",
-      "v86.2 report morning hold"
+      "v86.2 report morning hold",
+      "v71 freshness=0.556"
     ],
     "is_breaking": false,
     "breaking_expires_at": 0,
@@ -101,7 +71,7 @@
     "reason": "report_hold_until_0630",
     "created_at": 1779407777.0,
     "first_seen": 1779407777.0,
-    "last_seen": 1779407995.8352451,
+    "last_seen": 1779423442.3785105,
     "not_before": 1779424200.0,
     "hold_until_label": "06:30 Europe/Rome",
     "attempts": 0,
@@ -111,7 +81,7 @@
         "title": "TNA Thursday Night Impact Results 5/21 - Two Championships On The Line & More",
         "source": "www.wrestlinginc.com",
         "first_seen": 1779407777.0,
-        "last_seen": 1779407995.8352451,
+        "last_seen": 1779423442.3785105,
         "last_text_len": 0
       }
     ],

@@ -1,27 +1,24 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-22T00:00:28",
-  "run_start": "2026-05-21 23:59:21",
-  "run_end": "2026-05-21 23:59:21",
-  "bot_version": "v90_2_editorial_pacing_update_gate (7223ed3)",
-  "candidate_count": 12,
+  "collected_at": "2026-05-22T04:18:49",
+  "run_start": "2026-05-22 04:17:04",
+  "run_end": "2026-05-22 04:17:04",
+  "bot_version": "v90_2_editorial_pacing_update_gate (792e2fb)",
+  "candidate_count": 11,
   "mode": "normal",
   "max_new": 3,
-  "published_total": 0,
+  "published_total": 3,
   "published_pending": 0,
-  "published_new": 0,
-  "candidates_tried": 2,
-  "score_lines_count": 13,
-  "skip_count": 21,
-  "skip_v89_count": 0,
-  "gemini_calls_observed": 4,
+  "published_new": 3,
+  "candidates_tried": 8,
+  "score_lines_count": 20,
+  "skip_count": 28,
+  "skip_v89_count": 1,
+  "gemini_calls_observed": 15,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 3,
-    "gemini-3-flash-preview": 1
+    "gemini-3.1-flash-lite": 15
   },
-  "gemini_discarded_models": {
-    "gemini-3.1-flash-lite": 1
-  },
+  "gemini_discarded_models": {},
   "model_tasks": [
     {
       "task": "healthcheck",
@@ -30,48 +27,164 @@
     {
       "task": "editorial_analysis",
       "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
+    },
+    {
+      "task": "editorial_analysis",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
+    },
+    {
+      "task": "editorial_analysis",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
     }
   ],
   "model_task_counts": {
     "healthcheck": 1,
-    "editorial_analysis": 1
+    "editorial_analysis": 3,
+    "translate_normal": 3,
+    "postedit": 3,
+    "title": 3
   },
   "perf": {
     "WP strict report lookup": {
       "count": 1,
-      "total_seconds": 1.83,
-      "max_seconds": 1.83
+      "total_seconds": 1.31,
+      "max_seconds": 1.31
     },
     "WP lookup event_key": {
-      "count": 2,
-      "total_seconds": 3.17,
-      "max_seconds": 1.69
-    },
-    "analisi editoriale AI v72": {
-      "count": 2,
-      "total_seconds": 27.27,
-      "max_seconds": 14.58
+      "count": 1,
+      "total_seconds": 1.37,
+      "max_seconds": 1.37
     },
     "WP lookup URL esistente": {
       "count": 1,
-      "total_seconds": 0.63,
-      "max_seconds": 0.63
+      "total_seconds": 0.84,
+      "max_seconds": 0.84
+    },
+    "analisi editoriale AI v72": {
+      "count": 5,
+      "total_seconds": 9.62,
+      "max_seconds": 3.94
     },
     "scraping articolo": {
-      "count": 1,
-      "total_seconds": 1.07,
-      "max_seconds": 1.07
+      "count": 2,
+      "total_seconds": 1.72,
+      "max_seconds": 0.88
     },
     "estrazione blocchi": {
+      "count": 2,
+      "total_seconds": 1.04,
+      "max_seconds": 0.55
+    },
+    "WP recent posts dedupe": {
       "count": 1,
-      "total_seconds": 0.61,
-      "max_seconds": 0.61
+      "total_seconds": 0.72,
+      "max_seconds": 0.72
+    },
+    "categoria da analisi editoriale v72": {
+      "count": 1,
+      "total_seconds": 0.96,
+      "max_seconds": 0.96
+    },
+    "traduzione": {
+      "count": 3,
+      "total_seconds": 35.33,
+      "max_seconds": 20.42
+    },
+    "creazione post WordPress": {
+      "count": 3,
+      "total_seconds": 22.37,
+      "max_seconds": 11.13
+    },
+    "totale articolo pubblicato 'Mustafa Ali Retains In Open Challenge Answered By Starboy Ch'": {
+      "count": 1,
+      "total_seconds": 20.76,
+      "max_seconds": 20.76
+    },
+    "totale articolo pubblicato 'WWE's Ethan Page Comments On AAA Partnership With Chelsea Gr'": {
+      "count": 1,
+      "total_seconds": 21.68,
+      "max_seconds": 21.68
+    },
+    "totale articolo pubblicato 'JCW Lunacy Experiencing Major Audio Issues During Live Broad'": {
+      "count": 1,
+      "total_seconds": 26.94,
+      "max_seconds": 26.94
     }
   },
-  "article_metrics": [],
+  "article_metrics": [
+    {
+      "path": "published/20260522_041755_001_spoiler-tna-impact-mustafa-ali-difende-il-titolo-x-division-contro-starboy-charlie_5101_final.html",
+      "exists": true,
+      "word_count": 163,
+      "paragraph_count": 4,
+      "blockquote_count": 0,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 0,
+      "title": "TNA Impact: Mustafa Ali difende il titolo X-Division contro Starboy Charlie"
+    },
+    {
+      "path": "published/20260522_041819_002_ethan-page-parla-della-collaborazione-tra-wwe-e-aaa-e-di-una-possibile-reunion-con-chelsea_5104_final.html",
+      "exists": true,
+      "word_count": 232,
+      "paragraph_count": 4,
+      "blockquote_count": 1,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 3,
+      "title": "Ethan Page parla della collaborazione tra WWE e AAA e di una possibile reunion con Chelsea Green"
+    },
+    {
+      "path": "published/20260522_041847_003_grave-problema-audio-durante-la-diretta-di-jcw-lunacy_5107_final.html",
+      "exists": true,
+      "word_count": 130,
+      "paragraph_count": 5,
+      "blockquote_count": 0,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 1,
+      "title": "Grave problema audio durante la diretta di JCW Lunacy"
+    }
+  ],
   "daily_counts": {
-    "published_today": 24,
-    "published_last_4h": 2,
-    "runs_today": 13
+    "published_today": 3,
+    "published_last_4h": 3,
+    "runs_today": 1
   }
 }
