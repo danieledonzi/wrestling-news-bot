@@ -16,7 +16,7 @@
       "v62 titolo/championship",
       "v75 hard results report",
       "v77 hard report protected",
-      "v71 freshness=0.51"
+      "v71 freshness=0.473"
     ],
     "score_reasons": [
       "TNA",
@@ -25,13 +25,13 @@
       "v62 titolo/championship",
       "v75 hard results report",
       "v77 hard report protected",
-      "v71 freshness=0.51"
+      "v71 freshness=0.473"
     ],
     "is_breaking": false,
     "breaking_expires_at": 1779429377.0,
     "status": "raw",
     "reason": "true_results_not_published_keep_pending",
-    "created_at": 1779436705.3817096,
+    "created_at": 1779447275.641256,
     "attempts": 0
   }
 ]

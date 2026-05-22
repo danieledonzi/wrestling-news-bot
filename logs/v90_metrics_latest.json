@@ -1,22 +1,22 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-22T07:59:11",
-  "run_start": "2026-05-22 07:58:17",
-  "run_end": "2026-05-22 07:58:17",
-  "bot_version": "v90_2_editorial_pacing_update_gate (d37d48a)",
-  "candidate_count": 8,
+  "collected_at": "2026-05-22T10:54:56",
+  "run_start": "2026-05-22 10:54:29",
+  "run_end": "2026-05-22 10:54:29",
+  "bot_version": "v90_2_editorial_pacing_update_gate (4684f7b)",
+  "candidate_count": 6,
   "mode": "normal",
   "max_new": 3,
   "published_total": 0,
   "published_pending": 0,
   "published_new": 0,
-  "candidates_tried": 9,
-  "score_lines_count": 16,
-  "skip_count": 36,
-  "skip_v89_count": 2,
-  "gemini_calls_observed": 4,
+  "candidates_tried": 6,
+  "score_lines_count": 12,
+  "skip_count": 35,
+  "skip_v89_count": 1,
+  "gemini_calls_observed": 3,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 4
+    "gemini-3.1-flash-lite": 3
   },
   "gemini_discarded_models": {},
   "model_tasks": [
@@ -36,44 +36,44 @@
   "perf": {
     "WP strict report lookup": {
       "count": 1,
-      "total_seconds": 1.7,
-      "max_seconds": 1.7
+      "total_seconds": 1.4,
+      "max_seconds": 1.4
     },
     "WP lookup event_key": {
       "count": 1,
-      "total_seconds": 1.61,
-      "max_seconds": 1.61
-    },
-    "analisi editoriale AI v72": {
-      "count": 3,
-      "total_seconds": 32.49,
-      "max_seconds": 17.53
+      "total_seconds": 1.3,
+      "max_seconds": 1.3
     },
     "WP lookup URL esistente": {
-      "count": 2,
-      "total_seconds": 1.53,
-      "max_seconds": 0.93
+      "count": 1,
+      "total_seconds": 0.71,
+      "max_seconds": 0.71
     },
     "estrazione blocchi": {
       "count": 2,
-      "total_seconds": 0.98,
-      "max_seconds": 0.54
+      "total_seconds": 1.23,
+      "max_seconds": 0.69
     },
     "WP recent posts dedupe": {
       "count": 1,
-      "total_seconds": 0.87,
-      "max_seconds": 0.87
+      "total_seconds": 0.72,
+      "max_seconds": 0.72
     },
     "scraping articolo": {
       "count": 1,
-      "total_seconds": 1.01,
-      "max_seconds": 1.01
+      "total_seconds": 1.16,
+      "max_seconds": 1.16
+    },
+    "analisi editoriale AI v72": {
+      "count": 2,
+      "total_seconds": 2.24,
+      "max_seconds": 1.17
     }
   },
   "article_metrics": [],
   "daily_counts": {
     "published_today": 3,
-    "published_last_4h": 3,
-    "runs_today": 2
+    "published_last_4h": 0,
+    "runs_today": 3
   }
 }
