@@ -7107,3 +7107,178 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
 ===== RUN END [2026-05-22 04:17:04] VERSION [v90_2_editorial_pacing_update_gate (792e2fb)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show=impact
+[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard
+[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+
+===== RUN START [2026-05-22 07:58:17] VERSION [v90_2_editorial_pacing_update_gate (d37d48a)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 14 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2179143/tna-impact-mustafa-ali-starboy-charlie-international-championship-open-challenge-reta/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (18/75): Nattie Says Current WWE Character Was Inspired By Her Book
+[SKIP] Score sotto soglia editoriale (0/75): WWE NXT - 5/19/2026: 3 Things We Hated And 3 We Loved
+[SKIP] Preview/show announcement scaduta: Vanity Project Outlast Darkstate To Retain WWE NXT Tag Team Titles
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP] Score sotto soglia editoriale (48/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[SKIP] Score sotto soglia editoriale (48/75): Former WWE Star Parker Boudreaux Says He Was Given A Raise Two Weeks Before Release
+[SKIP] Score sotto soglia editoriale (16/75): Shawn Michaels Explains How WWE Training Environment Has Changed
+[SKIP] Score sotto soglia editoriale (0/75): AEW Dynamite & Collision 5/20/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (14/75): AEW's Paul Wight Is Impressed With Coaching Skills Of WWE HOFer
+[SKIP] Score sotto soglia editoriale (0/75): TNA Impact 5/21/2026: 3 Things We Hated & 3 Things We Loved
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Mike Santana Hangs Onto TNA World Title After Rematch Against Steve Maclin On Impact
+[SKIP] URL già in history: https://www.wrestlinginc.com/2175844/wwe-aaa-ethan-page-chelsea-green-partnership-reunion/
+[PERF v71] WP strict report lookup: 1.70s
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:tna-impact-2026-05-21 - TNA Thursday Night Impact Results 5/21 - Two Championships On The Line & More
+[REPORT v87.2] Report confermato da history forte: report:aew-dynamite-2026-05-20
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:aew-dynamite-2026-05-20 - AEW Dynamite & Collision Results 5/20 - Two Titles On The Line, Anything Goes Match
+[SKIP] Score sotto soglia editoriale (0/75): WWE Saturday Night's Main Event 5/23/2026: Draws & Duds
+[SKIP] URL già in history: https://www.wrestlinginc.com/2178927/aew-mjf-blames-vince-mcmahon-making-stipulation-joke/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (0/75): AJ Styles Gives Wrestlers Permission To Steal His Moves After Retirement
+[SKIP] Score sotto soglia editoriale (50/75): Asuka Says Her WWE Presence Became 'Taken For Granted' Amid Uncertain Future
+[SKIP] Score sotto soglia editoriale (13/75): Indie Wrestler Joseph Alexander Escapes Car Fire While Traveling To AEW Extra Work
+[SKIP] Score sotto soglia editoriale (11/75): Asuka Fires Back at WWE Exit Rumors After 'Semi-Retired' Rumors
+[SKIP] Score sotto soglia editoriale (13/75): Jeff Hardy Brings Back Willow During TNA Impact Match Finish
+[SKIP] Score sotto soglia editoriale (25/75): Rey Mysterio Announces Mexico-Inspired World Cup Soccer Jersey Collaboration
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Triple H Quietly Removed From WWE Active Talent Roster Nearly Seven Years After Final Match
+[SKIP] Score sotto soglia editoriale (49/75): Triple H Quietly Removed From WWE Active Talent Roster Nearly Seven Years After Final Match
+[SCORE v88.3] v88.3 hard feature skip cap 76->45 - Tony Khan Refuses to Confirm AEW Profitability While Bragging About Record Revenue Year
+[PERF v71] WP lookup event_key: 1.61s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (43/75): Ludwig Kaiser Elevator Fight May Have Started After Alleged ICE Threat Toward Girlfriend
+[SKIP] URL già in history: https://www.ringsidenews.com/jcw-lunacy-experiencing-major-audio-issues-during-live-broadcast/
+[SKIP] Score sotto soglia editoriale (46/75): Another Match Announced For AEW Double Or Nothing Buy In Show
+[SKIP] Score sotto soglia editoriale (49/75): WWE NXT Viewership Sees Slight Increase on May 19, 2026
+[SCORE v80.4] AAA major World priority 53->72 - Ludwig Kaiser's AAA Appearance Canceled After Florida Battery Arrest
+[SCORE] 91 high - Former WWE 24/7 Champion Kyle Busch Passes Away At 41 | WWE/main roster, WWE main roster + storyline/evento, morte, v62 evento morte/storico, v71 freshness=0.461
+[SCORE] 80 high - TNA Thursday Night Impact Results 5/21 - Two Championships On The Line & More | TNA, titolo/championship, show settimanale, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.51
+[SCORE] 67 medium - Ludwig Kaiser's AAA Appearance Canceled After Florida Battery Arrest | altre promotion, evento legale/controversia, v62 evento legale grave, v80.4 AAA major World priority 53->72, v71 source reliability soft penalty, v71 freshness=0.566, v48 tier2: 55-74
+[SCORE] 63 medium - John Cena Addresses About Mixed Reaction To His Final WWE Match Ending | WWE/main roster, top star titolo: john cena, business/contratti WWE-TKO, WWE main roster + storyline/evento, business/media rights, combo top name titolo + evento forte, v62 media rights/streaming, v62 categoria business, v66 cap opinion/commentary storyline, v68 cap opinion senza news concreta, v71 source reliability soft penalty, v71 freshness=0.459, v48 tier2: 55-74
+[SCORE] 60 medium - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 55 low - Mike Santana Hangs Onto TNA World Title After Rematch Against Steve Maclin On Impact | TNA, titolo/championship, show settimanale, v62 titolo/championship, v68 floor post-show news concreta, v71 freshness=0.551, v48 tier2: 55-74
+[SCORE] 43 low - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag | WWE/main roster, top star titolo: undertaker, intervista/opinione, v81.1 cap light name-driven item 49->49, v71 low freshness/novelty, v71 freshness=0.31, v48 tier4: 40-44 riempimento controllato
+[SCORE] 40 low - Tony Khan Refuses to Confirm AEW Profitability While Bragging About Record Revenue Year | AEW, PLE/PPV, v62 business/dirigenza, v62 categoria business, v88.3 hard feature skip cap 76->45, v71 source reliability soft penalty, v71 freshness=0.5, v48 tier4: 40-44 riempimento controllato
+[REPORT v86.9] Priorita true-results in coda: report:tna-impact-2026-05-21 - TNA Thursday Night Impact Results 5/21 - Two Championships On The Line & More
+[MODE] Modalita normale: 1 news >=90, 2 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 2
+[BOT] Elaborazione: WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[BOT] semantic_id=wwe-nxt-announces-official-signings-of-mason-rook-former-nikki-blackheart-and-more
+[SCORE] iniziale=86 priority=high
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.wrestlinginc.com/2178818/wwe-nxt-mason-rook-dean-malenko-nikki-blackheart/
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=7, image=1, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.wrestlinginc.com/2178818/wwe-nxt-mason-rook-dean-malenko-nikki-blackheart/
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=NXT (6) conf=1.00 model=gemini-3.1-flash-lite | Articolo che riporta l'annuncio ufficiale di nuove firme al Performance Center; trattasi di notizia avvenuta, non di anteprima evento.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei lottatori originali (non tradurre i ring name).; 'Rookie class' va tradotto come 'nuova classe di reclute'.; 'Signed' è da rendere come 'sotto contratto' o 'firmato ufficialmente'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=NXT (6) | Articolo che riporta l'annuncio ufficiale di nuove firme al Performance Center; trattasi di notizia avvenuta, non di anteprima evento.
+[PERF v71] analisi editoriale AI v72: 17.53s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 100->54 - WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[SCORE v79.1.3] Recovery post-show 54->86 - WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 86->54 - WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, developmental secondario, v62 media rights/streaming, v88.2 cap OTHER/feature non-news 100->54, v79.1.3 post-show recovery 54->86, v88.2 cap OTHER/feature non-news 86->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[PERF v71] WP lookup URL esistente: 0.93s
+[REPORT v86.8] Pending true-results non pubblicato: resta lavorabile via candidate queue report:tna-impact-2026-05-21
+[BOT] News candidate totali: 8 | mode=normal | max nuove=3 | pending pubblicati=0
+[REPORT v86.6] True results report autorizzato dal gate stretto: report:tna-impact-2026-05-21 - TNA Thursday Night Impact Results 5/21 - Two Championships On The Line & More
+[REPORT v79.1.6] Titolo report da event_key: TNA Impact del 21 maggio 2026: risultati e momenti salienti
+[REPORT] Valuto fonti per report: report:tna-impact-2026-05-21
+[REPORT v86.9] Nessuna fonte aggregata valida: sources=0; provo candidato corrente
+[SCRAPE] Articolo results rilevato: testo completo (13479 caratteri)
+[EMBED v88] Mappa posizionale media salvata: embeds=6 url=https://www.wrestlinginc.com/2179107/tna-thursday-night-impact-may-21-two-championships-on-line-more/
+[MEDIA v88.4] Rimossi embed derivati da credit immagine gallery: 12 url=https://www.wrestlinginc.com/2179107/tna-thursday-night-impact-may-21-two-championships-on-line-more/
+[REPORT v86.9] Fonte corrente valutata: len=13479 completeness=247 url=https://www.wrestlinginc.com/2179107/tna-thursday-night-impact-may-21-two-championships-on-line-more/
+[REPORT v86.9] Uso candidato corrente come fonte report: completeness=247 | https://www.wrestlinginc.com/2179107/tna-thursday-night-impact-may-21-two-championships-on-line-more/
+[REPORT] Fonte migliore: score_completezza=247 | www.wrestlinginc.com | TNA Impact del 21 maggio 2026: risultati e momenti salienti
+[REPORT v86.9] Processo report_ready senza re-entry nel report gate: report:tna-impact-2026-05-21
+[BOT] Elaborazione: TNA Impact del 21 maggio 2026: risultati e momenti salienti
+[BOT] semantic_id=report-tna-impact-2026-05-21
+[SCORE] iniziale=80 priority=high
+[REPORT] Uso testo prefetched per report maturo (13479 caratteri)
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=52, image=7, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=6 url=https://www.wrestlinginc.com/2179107/tna-thursday-night-impact-may-21-two-championships-on-line-more/
+[MEDIA v88.4] Rimossi embed derivati da credit immagine gallery: 12 url=https://www.wrestlinginc.com/2179107/tna-thursday-night-impact-may-21-two-championships-on-line-more/
+[BLOCKSEQ] Blocchi ordinati estratti: text=52, image=7, embed=0
+[PERF v71] estrazione blocchi: 0.44s
+[SCORE] raffinato=80 priority=high | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, infortunio, show settimanale, developmental secondario, v62 media rights/streaming, v66 cap title match non-title-change, v70 cap preview hard, v77 report score protected
+[V71] story_signature=stable:report_tna-impact-2026-05-21 semantic_status=new_story freshness=0.743
+[PERF v71] WP recent posts dedupe: 0.87s
+[SKIP] News probabilmente già pubblicata da altra fonte: TNA Impact del 21 maggio 2026: risultati e momenti salienti
+[SKIP] story_fingerprint=impact-del-maggio-risultati-momenti-salienti-welcome-wrestling-inc-results-thursday-may-coming-you-sacramento-memorial-auditorium-california-steve-maclin-was-unsuccessful-challenging-mike
+[PENDING] Coda salvata: 1 elementi
+[WP] Health check cache: OK (api_status_200)
+[PENDING] Coda salvata: 2 elementi
+[PENDING] Salvata news high (80): TNA Thursday Night Impact Results 5/21 - Two Championships On The Line & More
+[PENDING v86.8] Mantengo true-results in coda: non pubblicato né confermato su WordPress report:tna-impact-2026-05-21
+[PERF v71] WP lookup URL esistente: 0.60s
+[BOT] Elaborazione: Former WWE 24/7 Champion Kyle Busch Passes Away At 41
+[BOT] semantic_id=former-wwe-247-champion-kyle-busch-passes-away-at-41
+[SCORE] iniziale=91 priority=high
+[PERF v71] scraping articolo: 1.01s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=15, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.54s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=WORLD (8) conf=0.90 model=gemini-3.1-flash-lite | Si tratta di una notizia di cronaca legata al mondo dello sport (NASCAR) con un breve cenno a un'apparizione passata in WWE. Non rientra nel wrestling lottato.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (WWE 24/7 Championship) in inglese.; Non tradurre 'Hall of Fame-caliber' come calco, usare 'di livello Hall of Fame'.; Prestare attenzione al tono rispettoso richiesto da un necrologio.
+[CATEGORY v73] World downgrade: WORLD -> WWE | non wrestling internazionale
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | Si tratta di una notizia di cronaca legata al mondo dello sport (NASCAR) con un breve cenno a un'apparizione passata in WWE. Non rientra nel wrestling lottato. | v73 world downgrade
+[PERF v71] analisi editoriale AI v72: 2.74s
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 100->54 - Former WWE 24/7 Champion Kyle Busch Passes Away At 41
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, morte, PLE/PPV, v62 evento morte/storico, v88.2 cap OTHER/feature non-news 100->54
+[PENDING v85.2] Rimuovo pending offline non recuperabile (score 66<75): WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More
+[PENDING] Coda salvata: 1 elementi
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Former WWE 24/7 Champion Kyle Busch Passes Away At 41
+[SKIP v90.2] Follow-up duplicato/non sostanziale core=legal:ludwig-kaiser:case score=67 reason=core_cap_reached_no_major_update novel=[] - Ludwig Kaiser's AAA Appearance Canceled After Florida Battery Arrest
+[SKIP v89] Soft news non operativa sotto 65: John Cena Addresses About Mixed Reaction To His Final WWE Match Ending
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Mike Santana Hangs Onto TNA World Title After Rematch Against Steve Maclin On Impact
+[BOT] semantic_id=mike-santana-hangs-onto-tna-world-title-after-rematch-against-steve-maclin-on-impact
+[SCORE] iniziale=55 priority=low
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=4, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=4, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RESULTS_REPORT conf=1.00 | category=TNA (7) conf=1.00 model=gemini-3.1-flash-lite | L'articolo descrive i fatti salienti e l'esito di un match disputato nell'ultima puntata di Impact, pertanto è un resoconto di eventi già avvenuti.
+[EDITORIAL v72.3] translation_notes=Mantenere TNA World Championship e K.I.A. invariati.; Front Toward Enemy è il soprannome di Santana, non tradurre.; Spin the Block è il nome della finisher, non tradurre.
+[PERF v71] analisi editoriale AI v72: 12.22s
+[SCORE] raffinato=52 priority=low | TNA, infortunio, show settimanale, v62 titolo/championship
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 52/75 - Mike Santana Hangs Onto TNA World Title After Rematch Against Steve Maclin On Impact
+[SKIP v89] Soft news non operativa sotto 65: Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP v88.3] Feature storico/FIFA/venue/media call escluso: Tony Khan Refuses to Confirm AEW Profitability While Bragging About Record Revenue Year
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 9 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-22 07:58:17_summary.json -> published_html_review/run_2026-05-22 07-58-17_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (621 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-22 07:58:17] VERSION [v90_2_editorial_pacing_update_gate (d37d48a)] =====
+

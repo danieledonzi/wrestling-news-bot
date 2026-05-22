@@ -1,38 +1,12 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-22 04:17:04",
-  "bot_version": "v90_2_editorial_pacing_update_gate (792e2fb)",
-  "git_sha": "792e2fbda87a89406034e8cdbe6a7175d63a461f",
-  "created_at": "2026-05-22T04:18:49",
-  "published_count": 3,
-  "published_post_ids": [
-    "5101",
-    "5104",
-    "5107"
-  ],
-  "published_artifacts": [
-    {
-      "post_id": 5101,
-      "title": "[SPOILER] TNA Impact: Mustafa Ali difende il titolo X-Division contro Starboy Charlie",
-      "source_url": "https://www.wrestlinginc.com/2179143/tna-impact-mustafa-ali-starboy-charlie-international-championship-open-challenge-reta/",
-      "html_file": "published/20260522_041755_001_spoiler-tna-impact-mustafa-ali-difende-il-titolo-x-division-contro-starboy-charlie_5101_final.html",
-      "metadata_file": "published/20260522_041755_001_spoiler-tna-impact-mustafa-ali-difende-il-titolo-x-division-contro-starboy-charlie_5101_metadata.json"
-    },
-    {
-      "post_id": 5104,
-      "title": "Ethan Page parla della collaborazione tra WWE e AAA e di una possibile reunion con Chelsea Green",
-      "source_url": "https://www.wrestlinginc.com/2175844/wwe-aaa-ethan-page-chelsea-green-partnership-reunion/",
-      "html_file": "published/20260522_041819_002_ethan-page-parla-della-collaborazione-tra-wwe-e-aaa-e-di-una-possibile-reunion-con-chelsea_5104_final.html",
-      "metadata_file": "published/20260522_041819_002_ethan-page-parla-della-collaborazione-tra-wwe-e-aaa-e-di-una-possibile-reunion-con-chelsea_5104_metadata.json"
-    },
-    {
-      "post_id": 5107,
-      "title": "Grave problema audio durante la diretta di JCW Lunacy",
-      "source_url": "https://www.ringsidenews.com/jcw-lunacy-experiencing-major-audio-issues-during-live-broadcast/",
-      "html_file": "published/20260522_041847_003_grave-problema-audio-durante-la-diretta-di-jcw-lunacy_5107_final.html",
-      "metadata_file": "published/20260522_041847_003_grave-problema-audio-durante-la-diretta-di-jcw-lunacy_5107_metadata.json"
-    }
-  ],
+  "run_id": "2026-05-22 07:58:17",
+  "bot_version": "v90_2_editorial_pacing_update_gate (d37d48a)",
+  "git_sha": "d37d48aa59981f75b8c77abc5132280425675f06",
+  "created_at": "2026-05-22T07:59:10",
+  "published_count": 0,
+  "published_post_ids": [],
+  "published_artifacts": [],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",

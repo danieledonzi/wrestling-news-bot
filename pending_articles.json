@@ -1,50 +1,14 @@
 [
   {
-    "url": "https://www.wrestlinginc.com/2178818/wwe-nxt-mason-rook-dean-malenko-nikki-blackheart/",
-    "title": "WWE NXT Announces Official Signings Of Mason Rook, Former Nikki Blackheart And More",
-    "semantic_id": "wwe-nxt-announces-official-signings-of-mason-rook-former-nikki-blackheart-and-more",
-    "title_key": "official-signings-mason-rook-nikki-blackheart-more",
-    "score": 96,
-    "priority": "high",
-    "event_key": "",
-    "story_signature_v71": "stable:nxt_announces_official_signings_of_mason_rook|former_nikki_blackheart_and_more|story|wwe",
-    "summary": "WWE NXT announces the official signings of indie star Nikki Blackheart, third generation wrestler Lacey Simon, and Mason Rook, who debuted in NXT last month",
-    "reasons": [
-      "WWE/main roster",
-      "impatto roster/storyline",
-      "WWE main roster + storyline/evento",
-      "ritorno/debutto",
-      "show settimanale",
-      "v62 ritorno/debutto",
-      "v71 freshness=0.712"
-    ],
-    "score_reasons": [
-      "WWE/main roster",
-      "impatto roster/storyline",
-      "WWE main roster + storyline/evento",
-      "ritorno/debutto",
-      "show settimanale",
-      "v62 ritorno/debutto",
-      "v71 freshness=0.712"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1779408790.0,
-    "status": "raw",
-    "reason": "wp_down_initial_normal",
-    "created_at": 1779391536.8231502,
-    "attempts": 0
-  },
-  {
-    "kind": "report",
     "url": "https://www.wrestlinginc.com/2179107/tna-thursday-night-impact-may-21-two-championships-on-line-more/",
     "title": "TNA Thursday Night Impact Results 5/21 - Two Championships On The Line & More",
-    "semantic_id": "report-tna-impact-2026-05-21",
+    "semantic_id": "tna-thursday-night-impact-results-521-two-championships-on-the-line-more",
     "title_key": "thursday-impact-results-5-21-two-championships-line-more",
     "score": 80,
     "priority": "high",
     "event_key": "report:tna-impact-2026-05-21",
-    "report_event_key": "report:tna-impact-2026-05-21",
-    "summary": "This is Wrestling Inc.'s live coverage for \"TNA Thursday Night Impact\" on May 21, 2026, with the TNA World & International Championships on the line!",
+    "story_signature_v71": "stable:report_tna-impact-2026-05-21",
+    "summary": "This is Wrestling Inc.'s results for \"TNA Thursday Night Impact\" on May 21, 2026, with the TNA World & International Championships on the line!",
     "reasons": [
       "TNA",
       "titolo/championship",
@@ -52,7 +16,7 @@
       "v62 titolo/championship",
       "v75 hard results report",
       "v77 hard report protected",
-      "v71 freshness=0.609"
+      "v71 freshness=0.51"
     ],
     "score_reasons": [
       "TNA",
@@ -61,30 +25,13 @@
       "v62 titolo/championship",
       "v75 hard results report",
       "v77 hard report protected",
-      "v71 freshness=0.609",
-      "v86.2 report morning hold",
-      "v71 freshness=0.556"
+      "v71 freshness=0.51"
     ],
     "is_breaking": false,
-    "breaking_expires_at": 0,
-    "status": "waiting_report_morning_hold",
-    "reason": "report_hold_until_0630",
-    "created_at": 1779407777.0,
-    "first_seen": 1779407777.0,
-    "last_seen": 1779423442.3785105,
-    "not_before": 1779424200.0,
-    "hold_until_label": "06:30 Europe/Rome",
-    "attempts": 0,
-    "sources": [
-      {
-        "url": "https://www.wrestlinginc.com/2179107/tna-thursday-night-impact-may-21-two-championships-on-line-more/",
-        "title": "TNA Thursday Night Impact Results 5/21 - Two Championships On The Line & More",
-        "source": "www.wrestlinginc.com",
-        "first_seen": 1779407777.0,
-        "last_seen": 1779423442.3785105,
-        "last_text_len": 0
-      }
-    ],
-    "story_signature_v71": "stable:report_tna-impact-2026-05-21"
+    "breaking_expires_at": 1779429377.0,
+    "status": "raw",
+    "reason": "true_results_not_published_keep_pending",
+    "created_at": 1779436705.3817096,
+    "attempts": 0
   }
 ]
