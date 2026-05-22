@@ -62,6 +62,7 @@ jobs:
           python scripts/apply_bot_patch_v90_2_1.py
           python scripts/apply_bot_patch_v90_2_2.py
           python scripts/apply_bot_patch_v90_2_3.py
+          python scripts/apply_bot_patch_v90_2_3_1.py
 
       - name: Verify consolidated source
         run: |
@@ -74,11 +75,12 @@ jobs:
               'v90.2.1: report dedupe protection',
               'v90.2.2: report flow tuning',
               'v90.2.3: social embed quote positioning',
+              'v90.2.3.1: inline image dict normalization',
           ]
           missing = [m for m in required if m not in text]
           if missing:
-              raise SystemExit('[SOURCE CONSOLIDATION v90.2.3] missing markers: ' + ', '.join(missing))
-          print('[SOURCE CONSOLIDATION v90.2.3] bot.py contiene la chain consolidata fino a v90.2.3')
+              raise SystemExit('[SOURCE CONSOLIDATION v90.2.3.1] missing markers: ' + ', '.join(missing))
+          print('[SOURCE CONSOLIDATION v90.2.3.1] bot.py contiene la chain consolidata fino a v90.2.3.1')
           PY
 
       - name: Run bot v90_2_3
