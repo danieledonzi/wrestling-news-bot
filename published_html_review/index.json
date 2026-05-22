@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-22 10:54:29",
-  "last_bot_version": "v90_2_editorial_pacing_update_gate (4684f7b)",
-  "updated_at": "2026-05-22T10:54:55",
-  "total_items": 163,
+  "last_run_id": "2026-05-22 10:59:01",
+  "last_bot_version": "v90_2_1_report_dedupe_protection (9a329d2)",
+  "updated_at": "2026-05-22T11:03:09",
+  "total_items": 166,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1308,6 +1308,30 @@
       "original_html_file": "20260522_041848_003_grave-problema-audio-durante-la-diretta-di-jcw-lunacy_3e896836_original.html",
       "final_html_file": "20260522_041848_003_grave-problema-audio-durante-la-diretta-di-jcw-lunacy_3e896836_final.html",
       "metadata_file": "20260522_041848_003_grave-problema-audio-durante-la-diretta-di-jcw-lunacy_3e896836_metadata.json"
+    },
+    {
+      "run_id": "2026-05-22 10:59:01",
+      "title": "TNA Impact: Tutti i risultati del 21/05, due titoli in palio",
+      "url": "https://www.wrestlinginc.com/2179107/tna-thursday-night-impact-may-21-two-championships-on-line-more/",
+      "original_html_file": "20260522_110248_001_tna-impact-tutti-i-risultati-del-21-05-due-titoli-in-palio_0dc51acb_original.html",
+      "final_html_file": "20260522_110248_001_tna-impact-tutti-i-risultati-del-21-05-due-titoli-in-palio_0dc51acb_final.html",
+      "metadata_file": "20260522_110248_001_tna-impact-tutti-i-risultati-del-21-05-due-titoli-in-palio_0dc51acb_metadata.json"
+    },
+    {
+      "run_id": "2026-05-22 10:59:01",
+      "title": "TNA Impact del 21 maggio 2026: risultati e momenti salienti",
+      "url": "https://www.wrestlinginc.com/2179107/tna-thursday-night-impact-may-21-two-championships-on-line-more/",
+      "original_html_file": "",
+      "final_html_file": "20260522_110248_002_tna-impact-del-21-maggio-2026-risultati-e-momenti-salienti_f831294b_final.html",
+      "metadata_file": "20260522_110248_002_tna-impact-del-21-maggio-2026-risultati-e-momenti-salienti_f831294b_metadata.json"
+    },
+    {
+      "run_id": "2026-05-22 10:59:01",
+      "title": "TNA Impact: Mike Santana batte Steve Maclin e mantiene il TNA World Championship",
+      "url": "https://www.wrestlinginc.com/2179148/tna-impact-mike-santana-steve-maclin-world-title-rematch-hangs-onto/",
+      "original_html_file": "20260522_110309_003_tna-impact-mike-santana-batte-steve-maclin-e-mantiene-il-tna-world-championship_53add6a9_original.html",
+      "final_html_file": "20260522_110309_003_tna-impact-mike-santana-batte-steve-maclin-e-mantiene-il-tna-world-championship_53add6a9_final.html",
+      "metadata_file": "20260522_110309_003_tna-impact-mike-santana-batte-steve-maclin-e-mantiene-il-tna-world-championship_53add6a9_metadata.json"
     }
   ]
 }

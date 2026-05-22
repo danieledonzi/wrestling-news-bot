@@ -6,6 +6,7 @@
     "report:roh-supercard-honor-results-highlights-key-moments-may-15-2026-05-15",
     "report:tna-impact-2026-05-14",
     "report:tna-impact-2026-05-15",
+    "report:tna-impact-2026-05-21",
     "report:wwe-nxt-2026-05-19",
     "report:wwe-raw-2026-05-18",
     "report:wwe-smackdown-2026-05-15"
@@ -81,6 +82,14 @@
       "source_url": "https://www.wrestlinginc.com/2177398/aew-dynamite-collision-may-20-two-titles-on-line-anything-goes-match/",
       "wp_post_id": null,
       "confirmed_at": "2026-05-21T06:54:50Z",
+      "reason": "publish_success"
+    },
+    "report:tna-impact-2026-05-21": {
+      "report_key": "report:tna-impact-2026-05-21",
+      "title": "TNA Impact del 21 maggio 2026: risultati e momenti salienti",
+      "source_url": "https://www.wrestlinginc.com/2179107/tna-thursday-night-impact-may-21-two-championships-on-line-more/",
+      "wp_post_id": null,
+      "confirmed_at": "2026-05-22T11:02:48Z",
       "reason": "publish_success"
     }
   }
