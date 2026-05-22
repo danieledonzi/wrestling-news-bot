@@ -1,4 +1,4 @@
-name: OpenWrestlingTV Bot v90.2
+name: OpenWrestlingTV Bot v90.2.1
 
 on:
   workflow_dispatch:
@@ -93,7 +93,7 @@ jobs:
               print('[HOTFIX v90.0.1] Inline image dict normalization applied')
           PY
 
-      - name: Apply v90.2 patches
+      - name: Apply v90.2.1 patches
         run: |
           set -e
           python scripts/apply_bot_patch_v90_1.py
@@ -102,6 +102,7 @@ jobs:
           python scripts/apply_bot_patch_v90_1_2.py
           python scripts/apply_bot_patch_v90_1_3.py
           python scripts/apply_bot_patch_v90_2.py
+          python scripts/apply_bot_patch_v90_2_1.py
 
       - name: Verify consolidated source
         run: |
@@ -112,29 +113,17 @@ jobs:
           text = Path('bot.py').read_text(encoding='utf-8')
           required = [
               'v88.2: editorial performance guards',
-              'v88.3',
-              'v88.4',
-              'v89',
-              'v89.1: legacy return/debut rumor guard',
-              'v90.1: quality correctness guards',
-              'v90.1.1: media duplicate and spoiler fixes',
-              'v90.1.2: calendar-aware spoiler guard',
               'v90.1.3: spoiler hotfix',
               'v90.2: editorial pacing and update gate',
+              'v90.2.1: report dedupe protection',
           ]
           missing = [marker for marker in required if marker not in text]
           if missing:
-              raise SystemExit('[SOURCE CONSOLIDATION v90.2] missing markers: ' + ', '.join(missing))
-          print('[SOURCE CONSOLIDATION v90.2] bot.py contiene la chain consolidata fino a v90.2')
+              raise SystemExit('[SOURCE CONSOLIDATION v90.2.1] missing markers: ' + ', '.join(missing))
+          print('[SOURCE CONSOLIDATION v90.2.1] bot.py contiene la chain consolidata fino a v90.2.1')
           PY
 
-      - name: Print runner public IP
-        run: |
-          echo "[NET] GitHub Actions public IP:"
-          curl -s https://api.ipify.org || true
-          echo
-
-      - name: Run bot v90_2
+      - name: Run bot v90_2_1
         id: run_bot
         env:
           WP_USER: ${{ secrets.WP_USER }}
@@ -142,144 +131,14 @@ jobs:
           WP_URL: ${{ secrets.WP_URL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL_CHAIN: gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
-          V877_ENABLE_GEMINI_3_FLASH_PREVIEW: "1"
-          V877_GEMINI_3_FLASH_MODEL: gemini-3-flash-preview
-          V877_FATAL_AUTH_ENABLED: "1"
-          V877_REPORT_CONFIRM_CLEANUP_ENABLED: "1"
-          V88_MEDIA_RECOVERY_ENABLED: "1"
-          V88_FORCE_POSITIONAL_EMBEDS_ENABLED: "1"
-          V88_RECOVER_INLINE_IMAGES_ENABLED: "1"
-          V88_WORKFLOW_SAFE_FILENAMES_ENABLED: "1"
-          V88_1_REPORT_DEDUPE_CONFIRM_ENABLED: "1"
-          V88_2_EDITORIAL_PERFORMANCE_GUARDS_ENABLED: "1"
-          V88_2_LONG_FEATURE_TRANSLATION_GUARD_ENABLED: "1"
-          V86_7_PENDING_TRUTH_FIX_ENABLED: "1"
-          V86_7_STRICT_TRUE_REPORT_PENDING_ENABLED: "1"
-          V86_6_MEDIA_GUARD_ENABLED: "1"
-          V86_6_FUTURE_SPEC_CAP_ENABLED: "1"
-          V86_2_REPORT_MORNING_HOLD_ENABLED: "1"
-          V89_2_SOURCE_CONSOLIDATED: "1"
-          V90_0_OBSERVABILITY_ENABLED: "1"
-          V90_1_QUALITY_ENABLED: "1"
-          V90_1_REPORT_TITLE_HARDCODE_ENABLED: "1"
-          V90_1_MEDIA_TAIL_GUARD_ENABLED: "1"
-          V90_1_BOILERPLATE_SANITIZER_ENABLED: "1"
-          V90_1_NUMERIC_TITLE_GUARD_ENABLED: "1"
-          V90_1_TOPIC_DEDUPE_ENABLED: "1"
-          V90_1_STALE_SPOILER_FIX_ENABLED: "1"
-          V90_1_1_ENABLED: "1"
-          V90_1_1_MEDIA_QUEUE_DEDUPE_ENABLED: "1"
-          V90_1_1_REPORT_SHOW_STRICT_TITLE_ENABLED: "1"
-          V90_1_1_PRE_REPORT_SPOILER_ENABLED: "1"
-          V90_1_2_ENABLED: "1"
-          V90_1_2_CALENDAR_SPOILER_ENABLED: "1"
-          V90_1_3_ENABLED: "1"
-          V90_1_3_SPOILER_HOTFIX_ENABLED: "1"
           V90_2_ENABLED: "1"
           V90_2_UPDATE_GATE_ENABLED: "1"
           V90_2_SOFT_POOL_ENABLED: "1"
           V90_2_PACING_ENABLED: "1"
-          V90_2_CORE_GATE_SCORE: "80"
-          V90_2_LAST4H_SOFT_LIMIT: "8"
-          V90_2_SOFT_SCORE_MAX: "74"
+          V90_2_1_ENABLED: "1"
         run: |
           set +e
           python bot.py
           status=$?
           echo "$status" > .bot_exit_code
           exit 0
-
-      - name: Collect v90.0 metrics
-        if: always()
-        run: |
-          set +e
-          python scripts/collect_v90_metrics.py
-          exit 0
-
-      - name: Sanitize artifact filenames
-        if: always()
-        run: |
-          set -e
-          python - <<'PY'
-          from pathlib import Path
-          roots = [Path('published'), Path('published_html_review'), Path('logs')]
-          invalid = {':':'-', '"':'-', '<':'-', '>':'-', '|':'-', '*':'-', '?':'-'}
-          for root in roots:
-              if not root.exists():
-                  continue
-              for path in sorted(root.rglob('*'), key=lambda p: len(p.parts), reverse=True):
-                  if not path.exists():
-                      continue
-                  clean = path.name.replace('\r','').replace('\n','')
-                  for old, new in invalid.items():
-                      clean = clean.replace(old, new)
-                  if clean != path.name:
-                      target = path.with_name(clean)
-                      i = 1
-                      while target.exists():
-                          target = path.with_name(f"{target.stem}_{i}{target.suffix}")
-                          i += 1
-                      path.rename(target)
-                      print(f"[ARTIFACT SANITIZE v90.2] {path} -> {target}")
-          PY
-
-      - name: Persist bot artifacts to repository
-        if: always()
-        run: |
-          set -e
-          mkdir -p published published_html_review logs
-          touch logs/.keep published/.keep published_html_review/.keep
-
-          echo "[ARTIFACT PERSIST v90.2] Stato prima dello staging"
-          git status --short --ignored logs published published_html_review pending_articles.json history.txt history.json confirmed_published_reports.json soft_pool.json v90_2_event_cores.json .bot_exit_code || true
-
-          git add -A -- published published_html_review logs || true
-          find published published_html_review logs -type f -print0 | xargs -0 -r git add -f --
-          for p in pending_articles.json pending_queue.json history.txt history.json confirmed_published_reports.json review_bundle_latest.zip soft_pool.json v90_2_event_cores.json .bot_exit_code; do
-            if [ -e "$p" ]; then
-              git add -f -- "$p"
-            fi
-          done
-
-          echo "[ARTIFACT PERSIST v90.2] Stato dopo lo staging"
-          git status --short || true
-
-          if git diff --cached --quiet; then
-            echo "[ARTIFACT PERSIST v90.2] Nessuna modifica staged da committare"
-          else
-            git commit -m "chore(bot): persist v90.2 artifacts and logs [skip ci]"
-            git push
-            echo "[ARTIFACT PERSIST v90.2] Artifact, metrics, soft pool e core memory committati nel repository"
-          fi
-
-      - name: Upload bot artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: owtv-bot-artifacts-${{ github.run_id }}
-          if-no-files-found: warn
-          path: |
-            published/
-            published_html_review/
-            logs/
-            pending_articles.json
-            pending_queue.json
-            history.txt
-            history.json
-            confirmed_published_reports.json
-            review_bundle_latest.zip
-            soft_pool.json
-            v90_2_event_cores.json
-            .bot_exit_code
-
-      - name: Fail job if bot failed
-        if: always()
-        run: |
-          code=0
-          if [ -f .bot_exit_code ]; then
-            code=$(cat .bot_exit_code)
-          fi
-          if [ "$code" != "0" ]; then
-            echo "[BOT v90.2] Bot terminato con exit code $code"
-            exit "$code"
-          fi
