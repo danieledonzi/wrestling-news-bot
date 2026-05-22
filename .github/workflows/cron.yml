@@ -1,4 +1,4 @@
-name: OpenWrestlingTV Bot v90.2.3
+name: OpenWrestlingTV Bot v90.2.4
 
 on:
   workflow_dispatch:
@@ -63,6 +63,7 @@ jobs:
           python scripts/apply_bot_patch_v90_2_2.py
           python scripts/apply_bot_patch_v90_2_3.py
           python scripts/apply_bot_patch_v90_2_3_1.py
+          python scripts/apply_bot_patch_v90_2_4.py
 
       - name: Verify consolidated source
         run: |
@@ -76,14 +77,15 @@ jobs:
               'v90.2.2: report flow tuning',
               'v90.2.3: social embed quote positioning',
               'v90.2.3.1: inline image dict normalization',
+              'v90.2.4: offline pending hard-skip guard',
           ]
           missing = [m for m in required if m not in text]
           if missing:
-              raise SystemExit('[SOURCE CONSOLIDATION v90.2.3.1] missing markers: ' + ', '.join(missing))
-          print('[SOURCE CONSOLIDATION v90.2.3.1] bot.py contiene la chain consolidata fino a v90.2.3.1')
+              raise SystemExit('[SOURCE CONSOLIDATION v90.2.4] missing markers: ' + ', '.join(missing))
+          print('[SOURCE CONSOLIDATION v90.2.4] bot.py contiene la chain consolidata fino a v90.2.4')
           PY
 
-      - name: Run bot v90_2_3
+      - name: Run bot v90_2_4
         id: run_bot
         env:
           WP_USER: ${{ secrets.WP_USER }}
@@ -98,6 +100,10 @@ jobs:
           V90_2_2_TRANSLATE_REPORT_CHAIN: gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-pro
           V90_2_3_ENABLED: "1"
           V90_2_3_SOCIAL_QUOTE_ENABLED: "1"
+          V90_2_4_ENABLED: "1"
+          V90_2_4_OFFLINE_PENDING_GUARD_ENABLED: "1"
+          V90_2_4_MIN_OFFLINE_PENDING_SCORE: "75"
+          V90_2_4_MIN_OFFLINE_PENDING_FRESHNESS: "0.45"
         run: |
           set +e
           python bot.py
@@ -132,6 +138,6 @@ jobs:
             code=$(cat .bot_exit_code)
           fi
           if [ "$code" != "0" ]; then
-            echo "[BOT v90.2.3] Bot terminato con exit code $code"
+            echo "[BOT v90.2.4] Bot terminato con exit code $code"
             exit "$code"
           fi
