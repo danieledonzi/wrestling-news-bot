@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-22 13:29:18",
-  "last_bot_version": "v90_2_2_report_flow_tuning (9daf126)",
-  "updated_at": "2026-05-22T13:29:34",
-  "total_items": 166,
+  "last_run_id": "2026-05-22 16:02:59",
+  "last_bot_version": "v90_2_2_report_flow_tuning (086d15f)",
+  "updated_at": "2026-05-22T16:04:04",
+  "total_items": 169,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1332,6 +1332,30 @@
       "original_html_file": "20260522_110309_003_tna-impact-mike-santana-batte-steve-maclin-e-mantiene-il-tna-world-championship_53add6a9_original.html",
       "final_html_file": "20260522_110309_003_tna-impact-mike-santana-batte-steve-maclin-e-mantiene-il-tna-world-championship_53add6a9_final.html",
       "metadata_file": "20260522_110309_003_tna-impact-mike-santana-batte-steve-maclin-e-mantiene-il-tna-world-championship_53add6a9_metadata.json"
+    },
+    {
+      "run_id": "2026-05-22 16:02:59",
+      "title": "MJF accusa la WWE di diffondere notizie false sul futuro televisivo della AEW",
+      "url": "https://www.wrestlinginc.com/2179226/aew-wwe-mjf-maxwell-jacob-friedman-of-course-sources-leak-negative-stories/",
+      "original_html_file": "20260522_160324_001_mjf-accusa-la-wwe-di-diffondere-notizie-false-sul-futuro-televisivo-della-aew_3325a71d_original.html",
+      "final_html_file": "20260522_160324_001_mjf-accusa-la-wwe-di-diffondere-notizie-false-sul-futuro-televisivo-della-aew_3325a71d_final.html",
+      "metadata_file": "20260522_160324_001_mjf-accusa-la-wwe-di-diffondere-notizie-false-sul-futuro-televisivo-della-aew_3325a71d_metadata.json"
+    },
+    {
+      "run_id": "2026-05-22 16:02:59",
+      "title": "Aggiornamenti sui viaggi di Ludwig Kaiser dopo l'arresto",
+      "url": "https://www.wrestlinginc.com/2179478/wwe-ludwig-kaiser-status-travel-arrest-battery/",
+      "original_html_file": "20260522_160348_002_aggiornamenti-sui-viaggi-di-ludwig-kaiser-dopo-l-arresto_3ffcce3a_original.html",
+      "final_html_file": "20260522_160348_002_aggiornamenti-sui-viaggi-di-ludwig-kaiser-dopo-l-arresto_3ffcce3a_final.html",
+      "metadata_file": "20260522_160348_002_aggiornamenti-sui-viaggi-di-ludwig-kaiser-dopo-l-arresto_3ffcce3a_metadata.json"
+    },
+    {
+      "run_id": "2026-05-22 16:02:59",
+      "title": "Adam Copeland: \"Non ho bisogno di un retirement tour in stile John Cena\"",
+      "url": "https://www.ringsidenews.com/adam-copeland-says-he-not-need-john-cena-style-retirement-tour-aew/",
+      "original_html_file": "20260522_160404_003_adam-copeland-non-ho-bisogno-di-un-retirement-tour-in-stile-john-cena_a34d336b_original.html",
+      "final_html_file": "20260522_160404_003_adam-copeland-non-ho-bisogno-di-un-retirement-tour-in-stile-john-cena_a34d336b_final.html",
+      "metadata_file": "20260522_160404_003_adam-copeland-non-ho-bisogno-di-un-retirement-tour-in-stile-john-cena_a34d336b_metadata.json"
     }
   ]
 }

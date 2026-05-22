@@ -1,22 +1,22 @@
 {
   "schema_version": "v90.0",
-  "collected_at": "2026-05-22T13:29:36",
-  "run_start": "2026-05-22 13:29:18",
-  "run_end": "2026-05-22 13:29:18",
-  "bot_version": "v90_2_2_report_flow_tuning (9daf126)",
-  "candidate_count": 7,
+  "collected_at": "2026-05-22T16:04:06",
+  "run_start": "2026-05-22 16:02:59",
+  "run_end": "2026-05-22 16:02:59",
+  "bot_version": "v90_2_2_report_flow_tuning (086d15f)",
+  "candidate_count": 14,
   "mode": "normal",
   "max_new": 3,
-  "published_total": 0,
+  "published_total": 3,
   "published_pending": 0,
-  "published_new": 0,
-  "candidates_tried": 7,
-  "score_lines_count": 9,
-  "skip_count": 32,
-  "skip_v89_count": 2,
-  "gemini_calls_observed": 2,
+  "published_new": 3,
+  "candidates_tried": 4,
+  "score_lines_count": 16,
+  "skip_count": 23,
+  "skip_v89_count": 0,
+  "gemini_calls_observed": 13,
   "gemini_models": {
-    "gemini-3.1-flash-lite": 2
+    "gemini-3.1-flash-lite": 13
   },
   "gemini_discarded_models": {},
   "model_tasks": [
@@ -27,33 +27,154 @@
     {
       "task": "editorial_analysis",
       "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
+    },
+    {
+      "task": "editorial_analysis",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
+    },
+    {
+      "task": "editorial_analysis",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite"
+    },
+    {
+      "task": "translate_normal",
+      "chain": "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "postedit",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash"
+    },
+    {
+      "task": "title",
+      "chain": "gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro"
     }
   ],
   "model_task_counts": {
     "healthcheck": 1,
-    "editorial_analysis": 1
+    "editorial_analysis": 3,
+    "translate_normal": 3,
+    "postedit": 3,
+    "title": 3
   },
   "perf": {
-    "WP lookup event_key": {
-      "count": 1,
-      "total_seconds": 1.25,
-      "max_seconds": 1.25
-    },
     "WP lookup URL esistente": {
       "count": 1,
-      "total_seconds": 0.62,
-      "max_seconds": 0.62
+      "total_seconds": 0.81,
+      "max_seconds": 0.81
     },
     "analisi editoriale AI v72": {
+      "count": 3,
+      "total_seconds": 14.12,
+      "max_seconds": 11.3
+    },
+    "WP recent posts dedupe": {
       "count": 1,
-      "total_seconds": 1.41,
-      "max_seconds": 1.41
+      "total_seconds": 0.87,
+      "max_seconds": 0.87
+    },
+    "categoria da analisi editoriale v72": {
+      "count": 1,
+      "total_seconds": 1.2,
+      "max_seconds": 1.2
+    },
+    "traduzione": {
+      "count": 3,
+      "total_seconds": 15.62,
+      "max_seconds": 5.49
+    },
+    "creazione post WordPress": {
+      "count": 3,
+      "total_seconds": 14.89,
+      "max_seconds": 5.25
+    },
+    "totale articolo pubblicato 'MJF Says 'Of Course' WWE Sources Leak Negative Stories About'": {
+      "count": 1,
+      "total_seconds": 13.5,
+      "max_seconds": 13.5
+    },
+    "totale articolo pubblicato 'Update On Ludwig Kaiser's WWE Travel Status Following Arrest'": {
+      "count": 1,
+      "total_seconds": 22.92,
+      "max_seconds": 22.92
+    },
+    "scraping articolo": {
+      "count": 1,
+      "total_seconds": 1.05,
+      "max_seconds": 1.05
+    },
+    "estrazione blocchi": {
+      "count": 1,
+      "total_seconds": 0.72,
+      "max_seconds": 0.72
+    },
+    "totale articolo pubblicato 'Adam Copeland Says He Does Not Need John Cena-Style Retireme'": {
+      "count": 1,
+      "total_seconds": 14.66,
+      "max_seconds": 14.66
     }
   },
-  "article_metrics": [],
+  "article_metrics": [
+    {
+      "path": "published/20260522_160323_001_mjf-accusa-la-wwe-di-diffondere-notizie-false-sul-futuro-televisivo-della-aew_5127_final.html",
+      "exists": true,
+      "word_count": 264,
+      "paragraph_count": 7,
+      "blockquote_count": 0,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 1,
+      "title": "MJF accusa la WWE di diffondere notizie false sul futuro televisivo della AEW"
+    },
+    {
+      "path": "published/20260522_160347_002_aggiornamenti-sui-viaggi-di-ludwig-kaiser-dopo-larresto_5130_final.html",
+      "exists": true,
+      "word_count": 321,
+      "paragraph_count": 9,
+      "blockquote_count": 0,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 2,
+      "title": "Aggiornamenti sui viaggi di Ludwig Kaiser dopo l'arresto"
+    },
+    {
+      "path": "published/20260522_160403_003_adam-copeland-non-ho-bisogno-di-un-retirement-tour-in-stile-john-cena_5133_final.html",
+      "exists": true,
+      "word_count": 356,
+      "paragraph_count": 7,
+      "blockquote_count": 3,
+      "image_count": 0,
+      "iframe_count": 0,
+      "embed_hint_count": 6,
+      "title": "Adam Copeland: \"Non ho bisogno di un retirement tour in stile John Cena\""
+    }
+  ],
   "daily_counts": {
-    "published_today": 0,
-    "published_last_4h": 0,
-    "runs_today": 2
+    "published_today": 3,
+    "published_last_4h": 3,
+    "runs_today": 3
   }
 }

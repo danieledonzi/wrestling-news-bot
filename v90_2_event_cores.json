@@ -94,7 +94,8 @@
       "20260521_141422_003_ludwig-kaiser-i-legali-affermano-che-le-restrizioni-di-viaggio-minacciano-il-suo_2673a3e7_final.html",
       "20260521_141422_003_ludwig-kaiser-i-legali-affermano-che-le-restrizioni-di-viaggio-minacciano-il-suo_2673a3e7_original.html",
       "20260521_160512_001_ludwig-kaiser-chiede-il-processo-per-l-accusa-di-percosse-in-florida_dbfe604d_final.html",
-      "20260521_160512_001_ludwig-kaiser-chiede-il-processo-per-l-accusa-di-percosse-in-florida_dbfe604d_original.html"
+      "20260521_160512_001_ludwig-kaiser-chiede-il-processo-per-l-accusa-di-percosse-in-florida_dbfe604d_original.html",
+      "Update On Ludwig Kaiser's WWE Travel Status Following Arrest"
     ],
     "facts": [
       "arrest",
@@ -108,11 +109,12 @@
       "elevator_details",
       "official_return",
       "trial",
-      "attorney"
+      "attorney",
+      "official_date"
     ],
-    "count": 11,
+    "count": 12,
     "first_seen": "2026-05-21T16:04:55",
-    "last_seen": "2026-05-22T11:02:48"
+    "last_seen": "2026-05-22T16:03:48"
   },
   "return:mark-shapiro:wwe": {
     "titles": [
@@ -377,12 +379,17 @@
     "titles": [
       "20260521_211109_001_aew-mjf-accusa-vince-mcmahon-di-aver-reso-gli-hair-match-una-barzelletta_5095_final.html",
       "20260521_211111_001_aew-mjf-accusa-vince-mcmahon-di-aver-reso-gli-hair-match-una-barzelletta_43d1af2e_final.html",
-      "20260521_211111_001_aew-mjf-accusa-vince-mcmahon-di-aver-reso-gli-hair-match-una-barzelletta_43d1af2e_original.html"
+      "20260521_211111_001_aew-mjf-accusa-vince-mcmahon-di-aver-reso-gli-hair-match-una-barzelletta_43d1af2e_original.html",
+      "20260522_160323_001_mjf-accusa-la-wwe-di-diffondere-notizie-false-sul-futuro-televisivo-della-aew_5127_final.html",
+      "20260522_160324_001_mjf-accusa-la-wwe-di-diffondere-notizie-false-sul-futuro-televisivo-della-aew_3325a71d_final.html",
+      "20260522_160324_001_mjf-accusa-la-wwe-di-diffondere-notizie-false-sul-futuro-televisivo-della-aew_3325a71d_original.html"
     ],
-    "facts": [],
-    "count": 3,
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 6,
     "first_seen": "2026-05-22T04:17:35",
-    "last_seen": "2026-05-22T04:17:35"
+    "last_seen": "2026-05-22T16:03:24"
   },
   "title:mustafa-ali:status": {
     "titles": [
