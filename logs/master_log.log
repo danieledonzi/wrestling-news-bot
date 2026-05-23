@@ -1328,3 +1328,202 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
 ===== RUN END [2026-05-23 13:42:34] VERSION [v90_2_4_2_report_artifacts_recovery (d44aa80)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show=smackdown
+[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard
+[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.1] Report dedupe protection attiva: true-results usa solo report gate stretto
+[MODEL v90.2.2] translate_report chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-pro
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.3] Social embed quote positioning attivo
+[BOOT v90.2.3.1] Inline image dict normalization attiva in v88_media_record
+[BOOT v90.2.4] Offline pending hard-skip guard attiva
+[BOOT v90.2.4.1] Report hard-title guard attiva
+[BOOT v90.2.4.2] Report artifacts/casing recovery attiva
+
+===== RUN START [2026-05-23 14:57:26] VERSION [v90_2_4_2_report_artifacts_recovery (6d145db)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (20/75): Joe Hendry Explains Why WWE NXT Was Among The 'Most Difficult Challenges' He's Faced
+[SCORE v81.1] Cap light name-driven item 20->20 - WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 73->54 - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176092/wwe-hofer-eric-bischoff-reflects-working-late-ted-turner/
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026 Predictions: Wrestling Inc. Picks The Winners
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (32/75): AEW's Harley Cameron Details The Process Of Learning To Wrestle On Live TV
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP] Score sotto soglia editoriale (48/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Ex-NXT Star Blake Monroe Makes Main Roster Debut In WWE SmackDown Backstage Segment
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll/
+[SKIP] Score sotto soglia editoriale (5/75): Jim Ross On Kevin Nash Backing Wrestlers' Union: 'He Knows What He's Talking About'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177184/john-cena-in-ring-retirement-not-mean-retiring-wwe/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (28/75): New York Mayor Zohran Mamdani Receives Invitation to AEW Double or Nothing
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tony-khan - Mance Warner Clears Up Confusion After Indie Promotion Claimed AEW Pulled Him
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - JBL Says Baron Corbin Would Be a Great Asset to WWE Amid Return Rumors
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - JBL Says Baron Corbin Would Be a Great Asset to WWE Amid Return Rumors
+[SKIP] Score sotto soglia editoriale (49/75): JBL Says Baron Corbin Would Be a Great Asset to WWE Amid Return Rumors
+[SKIP] URL già in history: https://www.ringsidenews.com/tony-khan-100-confident-paramount-will-keep-aew-wbd-merger-goes-through/
+[PERF v71] WP lookup event_key: 1.20s
+[FIX] Event key in history ma non confermata su WordPress: event:business:vince-mcmahon - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (0/75): Disco Inferno Calls Mick Foley an Idiot for Cutting Ties With WWE Over Donald Trump Association
+[SCORE v80.4] AAA major World priority 37->72 - AAA Lucha Libre on FOX Preview for May 23, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v81.1] Cap future card announcement 72->72 - AAA Lucha Libre on FOX Preview for May 23, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (67/75): AAA Lucha Libre on FOX Preview for May 23, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] URL già in history: https://www.ringsidenews.com/tyler-breeze-addresses-future-upupdowndown-xavier-woods-wwe-exit/
+[SCORE v81.1] Cap future card announcement 56->56 - WWE Saturday Night's Main Event Preview for May 23, 2026: Confirmed Matces, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (51/75): WWE Saturday Night's Main Event Preview for May 23, 2026: Confirmed Matces, Start Time and How to Watch
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown
+[FRESHNESS v86.6/legacy] Post-show outcome rescue: non tratto come preview scaduta - Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown
+[SKIP] Preview/show announcement scaduta: WWE Reveals First Clash in Italy Matches Airing on ESPN
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 70->54 - ESPN Quietly Restores AEW Section With Major Darby Allin Feature Before Double or Nothing
+[PERF v71] WP lookup event_key: 1.24s
+[FIX] Event key in history ma non confermata su WordPress: event:business:darby-allin - provo a pubblicare
+[SKIP] URL già in history: https://www.ringsidenews.com/alexa-bliss-signs-new-talent-agency-representation-outside-wwe/
+[SCORE] 96 high - Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v71 freshness=0.544
+[SCORE] 96 high - Ex-NXT Star Blake Monroe Makes Main Roster Debut In WWE SmackDown Backstage Segment | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v71 freshness=0.575
+[SCORE] 78 medium - WWE Adds WrestleMania Rematch To Clash In Italy | WWE/main roster, top star lead: rhea ripley, nomi forti lead: rhea ripley, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.397
+[SCORE] 74 medium - Vince McMahon Would Allegedly Forget His Own Instructions and Explode Backstage in WWE | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v62 categoria business, v71 source reliability soft penalty, v71 freshness=0.546, v48 tier2: 55-74
+[SCORE] 71 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 69 medium - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, PLE/PPV, v71 freshness=0.586, v48 tier2: 55-74
+[SCORE] 68 medium - WWE's Current Stance on Ethan Page Ahead of IC Title Match at Saturday Night's Main Event | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.574, v48 tier2: 55-74
+[SCORE] 68 medium - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, show settimanale, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 60 medium - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 54 low - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v62 titolo/championship, v88.2 cap OTHER/feature non-news 73->54, v71 freshness=0.586, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 2 news >=90, 2 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 13 | mode=normal | max nuove=3 | pending pubblicati=0
+[DEDUPE v88.4.1] candidate_core=canonical_event_core:blake_monroe|debut_arrival|wwe title=Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown
+[DEDUPE v88.4.1] Canonical event core caricati: 17
+[SKIP v88.4.1] Canonical event core gia pubblicato: canonical_event_core:blake_monroe|debut_arrival|wwe - Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown
+[DEDUPE v88.4.1] candidate_core=canonical_event_core:blake_monroe|debut_arrival|wwe title=Ex-NXT Star Blake Monroe Makes Main Roster Debut In WWE SmackDown Backstage Segment
+[SKIP v88.4.1] Canonical event core gia pubblicato: canonical_event_core:blake_monroe|debut_arrival|wwe - Ex-NXT Star Blake Monroe Makes Main Roster Debut In WWE SmackDown Backstage Segment
+[REPORT v87.2] True-results confermato da history forte: skip offline-safe report:wwe-smackdown-2026-05-22 - WWE Adds WrestleMania Rematch To Clash In Italy
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Vince McMahon Would Allegedly Forget His Own Instructions and Explode Backstage in WWE
+[BOT] semantic_id=vince-mcmahon-would-allegedly-forget-his-own-instructions-and-explode-backstage-in-wwe
+[SCORE] iniziale=74 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/vince-mcmahon-would-allegedly-forget-his-own-instructions-explode-backstage-wwe/
+[PERF v71] scraping articolo: 0.86s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=15, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/vince-mcmahon-would-allegedly-forget-his-own-instructions-explode-backstage-wwe/
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.71s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.95 | category=WWE (4) conf=0.95 model=gemini-3.1-flash-lite | Articolo basato su dichiarazioni retrospettive di un ex wrestler (MVP) riguardo alla gestione passata di Vince McMahon. Non è una news recente ma un commento/aneddoto su dinamiche di backstage passate.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'producer' con produttore, usare 'agente' o mantenere il termine tecnico se in contesto.; 'Explode' non va tradotto letteralmente, usare 'andare su tutte le furie' o 'esplodere di rabbia'.; Mantenere il tono colloquiale delle citazioni.
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | Articolo basato su dichiarazioni retrospettive di un ex wrestler (MVP) riguardo alla gestione passata di Vince McMahon. Non è una news recente ma un commento/aneddoto su dinamiche di backstage passate.
+[PERF v71] analisi editoriale AI v72: 1.33s
+[SCORE] raffinato=54 priority=low | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, opinione generica, v62 reazioni/tributi, v62 categoria business, v68 cap duro opinion/commentary
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Vince McMahon Would Allegedly Forget His Own Instructions and Explode Backstage in WWE
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Vince McMahon Would Allegedly Forget His Own Instructions and Explode Backstage in WWE
+[PERF v71] WP lookup URL esistente: 0.70s
+[BOT] Elaborazione: WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[BOT] semantic_id=wwe-announces-major-change-to-becky-lynchsol-ruca-snme-match
+[SCORE] iniziale=71 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo presenta un cambiamento nella card di un evento futuro (Saturday Night's Main Event), focalizzandosi sull'ufficializzazione della stipulazione titolata. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantenere 'Women's Intercontinental Championship' e 'Saturday Night's Main Event' in inglese.; Non tradurre i nomi delle superstar.; Attenzione ai termini tecnici come 'main roster', 'call-up', 'stipulation' e 'card', da contestualizzare correttamente in italiano.
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo presenta un cambiamento nella card di un evento futuro (Saturday Night's Main Event), focalizzandosi sull'ufficializzazione della stipulazione titolata. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.27s
+[SCORE v88.2] v88.2 cap feature storico numerico 56->45 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[SCORE] raffinato=45 priority=low | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v70 cap preview hard, v88.2 cap feature storico numerico 56->45
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[BOT] Elaborazione: AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot
+[BOT] semantic_id=aews-paul-wight-was-forced-to-lose-weight-for-wwe-wrestlemania-spot
+[SCORE] iniziale=69 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | L'articolo tratta un aneddoto retrospettivo su WrestleMania 25 raccontato da Paul Wight in un podcast. Non essendo news recente, rientra in OTHER/Approfondimento storico.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (World Heavyweight Championship, US title).; Tradurre 'AA' come 'Attitude Adjustment' o lasciare invariato se noto al pubblico.; Evitare calchi per 'break my balls' (usare 'mi ha stuzzicato/messo alla prova').
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo tratta un aneddoto retrospettivo su WrestleMania 25 raccontato da Paul Wight in un podcast. Non essendo news recente, rientra in OTHER/Approfondimento storico.
+[PERF v71] analisi editoriale AI v72: 1.08s
+[SCORE v88.2] v88.2 cap feature storico numerico 54->45 - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot
+[SCORE] raffinato=45 priority=low | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, opinione generica, v62 titolo/championship, v66 cap opinion/commentary storyline, v68 cap duro opinion/commentary, v88.2 cap feature storico numerico 54->45
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 45/55 - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot
+[BOT] Elaborazione: WWE's Current Stance on Ethan Page Ahead of IC Title Match at Saturday Night's Main Event
+[BOT] semantic_id=wwes-current-stance-on-ethan-page-ahead-of-ic-title-match-at-saturday-nights-main-event
+[SCORE] iniziale=68 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/wwes-current-stance-ethan-page-ahead-ic-title-match-saturday-nights-main-event/
+[PERF v71] scraping articolo: 0.97s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=10, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/wwes-current-stance-ethan-page-ahead-ic-title-match-saturday-nights-main-event/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.66s
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.90 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza lo status di Ethan Page in vista del match titolato al Saturday Night's Main Event, fungendo da approfondimento preparatorio all'evento imminente. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Intercontinental Championship'.; Mantenere i nomi dei wrestler inalterati.; Tradurre 'well received internally' con 'molto apprezzato internamente'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo analizza lo status di Ethan Page in vista del match titolato al Saturday Night's Main Event, fungendo da approfondimento preparatorio all'evento imminente. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 5.26s
+[SCORE] raffinato=20 priority=skip | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, v62 titolo/championship, v68 preview scaduta
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 20/75 - WWE's Current Stance on Ethan Page Ahead of IC Title Match at Saturday Night's Main Event
+[PERF v71] WP lookup URL esistente: 1.23s
+[BOT] Elaborazione: Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[BOT] semantic_id=joe-hendry-says-wwe-will-soon-release-an-album-of-his-original-songs
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=NXT (6) conf=0.95 model=gemini-3.1-flash-lite | L'articolo riporta una dichiarazione ufficiale di Joe Hendry riguardo un suo progetto musicale futuro, non è una preview di un evento.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Insight with Chris Van Vliet' come nome del podcast.; Tradurre 'drop' come 'uscirà' o 'sarà pubblicato'.; 'The Maverick' va lasciato come soprannome di Logan Paul.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=NXT (6) | L'articolo riporta una dichiarazione ufficiale di Joe Hendry riguardo un suo progetto musicale futuro, non è una preview di un evento.
+[PERF v71] analisi editoriale AI v72: 1.24s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 57->54 - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, trash talk/clickbait forte, v62 titolo/championship, v88.2 cap OTHER/feature non-news 57->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[PENDING] Coda salvata: 0 elementi
+[SKIP v88.2] Feature/OTHER non-news sotto priorita hard: WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[SKIP v86.6/legacy] low_score_pre_gemini:50: Mance Warner Clears Up Confusion After Indie Promotion Claimed AEW Pulled Him
+[PENDING] Coda salvata: 0 elementi
+[SKIP v88.2] Feature/OTHER non-news sotto priorita hard: ESPN Quietly Restores AEW Section With Major Darby Allin Feature Before Double or Nothing
+[BOT] Raggiunto limite massimo candidati nuovi provati
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 12 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-23 14:57:26_summary.json -> published_html_review/run_2026-05-23 14-57-26_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (663 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-23 14:57:26] VERSION [v90_2_4_2_report_artifacts_recovery (6d145db)] =====
+
