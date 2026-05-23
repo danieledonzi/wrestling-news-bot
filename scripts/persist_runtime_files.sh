@@ -12,6 +12,7 @@ paths=(
   review_bundle_latest.zip
   soft_pool.json
   v90_2_event_cores.json
+  processed_urls.json
   .bot_exit_code
 )
 
