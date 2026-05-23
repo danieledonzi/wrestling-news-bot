@@ -207,6 +207,19 @@
     "updated_at": "1779557654.9887495",
     "url": "https://www.wrestlinginc.com/2177532/wwe-jbl-john-bradshaw-layfield-talent-infinitely-better-increases-live-event-schedule/"
   },
+  "https://www.wrestlinginc.com/2178499/wwe-kit-wilson-elton-prince-pretty-deadly-different": {
+    "extra": {
+      "event_key": "",
+      "raw_result": "skipped",
+      "semantic_id": "wwes-kit-wilson-teases-different-version-of-pretty-deadly-if-elton-prince-returns"
+    },
+    "reason": "skipped",
+    "score": 54,
+    "status": "rejected",
+    "title": "WWE's Kit Wilson Teases 'Different' Version Of Pretty Deadly If Elton Prince Returns",
+    "updated_at": "1779570894.9198184",
+    "url": "https://www.wrestlinginc.com/2178499/wwe-kit-wilson-elton-prince-pretty-deadly-different/"
+  },
   "https://www.wrestlinginc.com/2180004/wwe-smackdown-nxt-blake-monroe-main-roster-debut": {
     "extra": {
       "event_key": "",

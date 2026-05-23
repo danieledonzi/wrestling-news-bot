@@ -2550,3 +2550,179 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-23 20:13:39] VERSION [v90_2_5_1_processed_skip_recorder (4e2e6d8)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show=smackdown
+[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard
+[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.1] Report dedupe protection attiva: true-results usa solo report gate stretto
+[MODEL v90.2.2] translate_report chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-pro
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.3] Social embed quote positioning attivo
+[BOOT v90.2.3.1] Inline image dict normalization attiva in v88_media_record
+[BOOT v90.2.4] Offline pending hard-skip guard attiva
+[BOOT v90.2.4.1] Report hard-title guard attiva
+[BOOT v90.2.4.2] Report artifacts/casing recovery attiva
+[BOOT v90.2.5] Processed URL hard-skip attivo
+[BOOT v90.2.5.1] Processed URL skip recorder attivo
+
+===== RUN START [2026-05-23 21:14:19] VERSION [v90_2_5_1_processed_skip_recorder (d6df453)] =====
+[PROCESSED v90.2.5] Loaded processed URL records: 17
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE's Kit Wilson Teases 'Different' Version Of Pretty Deadly If Elton Prince Returns
+[SKIP] Score sotto soglia editoriale (20/75): Nigel McGuinness Compares Experiences Doing Commentary For AEW Vs. WWE
+[SCORE v88.3] v88.3 hard feature skip cap 60->45 - JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule
+[SKIP] Score sotto soglia editoriale (45/75): JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177021/wwe-wrestlemania-41-joe-hendry-randy-orton-kurt-angle-early-career-milestone/
+[SKIP] Score sotto soglia editoriale (27/75): Trick Williams Discusses Difficulties Of Moving From Football To WWE
+[SKIP] Score sotto soglia editoriale (20/75): AEW & ROH Star Bandido Names Biggest Wrestling Inspirations, Including WWE HOFer
+[SKIP] Score sotto soglia editoriale (20/75): Joe Hendry Explains Why WWE NXT Was Among The 'Most Difficult Challenges' He's Faced
+[SCORE v81.1] Cap light name-driven item 20->20 - WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 73->54 - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[SKIP] Score sotto soglia editoriale (54/75): WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176092/wwe-hofer-eric-bischoff-reflects-working-late-ted-turner/
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026 Predictions: Wrestling Inc. Picks The Winners
+[SCORE v81.1] Cap light name-driven item 50->50 - AEW Star Bandido Recalls 'Amazing' World Title Feud That Inspired New Confidence
+[SKIP] Score sotto soglia editoriale (50/75): AEW Star Bandido Recalls 'Amazing' World Title Feud That Inspired New Confidence
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (32/75): AEW's Harley Cameron Details The Process Of Learning To Wrestle On Live TV
+[REPORT v87.2] Report confermato da history forte: report:wwe-smackdown-2026-05-22
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-smackdown-2026-05-22 - WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026: Draws & Duds
+[SKIP] Score sotto soglia editoriale (0/75): WWE Saturday Night's Main Event 5/23/2026 Predictions: Wrestling Inc. Picks The Winners
+[SKIP] Score sotto soglia editoriale (24/75): Former WWE Star Aleister Black Explains How Yokozuna Inspired Him To Become A Wrestler
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (36/75): Tony Khan Hints at New AEW Pay-Per-View After Redemption Report
+[SKIP] Score sotto soglia editoriale (0/75): Jey Uso Fires Back at Backlash Over "Best World Entertainment Wrestler" Claim
+[SKIP] Score sotto soglia editoriale (46/75): Skye Blue Roasts MJF Over Potentially Going Bald at AEW Double or Nothing
+[SCORE v86.9] Cap commentary/opinion 71->68 - Mark Jindrak Says WWE Stars Complaining About WrestleMania Weekend Fan Incidents Should Be Grateful
+[SKIP] Score sotto soglia editoriale (5/75): Ash By Elegance Celebrates Memorial Day With Champagne Bikini Video
+[SKIP] Score sotto soglia editoriale (0/75): Donald Trump Accidentally Calls Hulk Hogan 'The Huckster' in Truth Social Post
+[SKIP] Score sotto soglia editoriale (51/75): Roman Reigns Contract Signing & Oba Femi Appearance Set for May 25 WWE RAW
+[SKIP] Preview/show announcement scaduta: WWE Saturday Night's Main Event Seeing Strong Ticket Momentum Before Tonight's Show
+[SCORE v88.3] v88.3 cap low-value market item 84->45 - Final Betting Odds Released for WWE Saturday Night's Main Event
+[SKIP] URL già in history: https://www.ringsidenews.com/cm-punks-wwe-return-status-gets-major-update-amid-tv-absence/
+[SKIP] Score sotto soglia editoriale (57/75): Mika Rotunda Pens Emotional Tribute to Bray Wyatt on His Birthday
+[SKIP] Score sotto soglia editoriale (0/75): Jordynne Grace Passes FAA Airman Knowledge Test During Pilot Training Journey
+[SKIP] Score sotto soglia editoriale (27/75): Thekla Explains Why She'll Never Be a Babyface in AEW
+[SCORE v80.4] AAA major World priority 53->72 - El Grande Americano Appears at AAA Serenata Event After Ludwig Kaiser Arrest Controversy
+[SCORE] 88 high - WWE's Kit Wilson Teases 'Different' Version Of Pretty Deadly If Elton Prince Returns | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, v62 ritorno/debutto, v71 freshness=0.724
+[SCORE] 72 medium - MJF Says Kofi Kingston & Xavier Woods Would Be 'Incredible Additions' To AEW | WWE/main roster, impatto roster/storyline, release/addio, v71 freshness=0.601, v48 tier2: 55-74
+[SCORE] 72 medium - Darby Allin Takes Brutal Shot at MJF's Hair Before AEW Double or Nothing | AEW, impatto roster/storyline, titolo/championship, PLE/PPV, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.544, v48 tier2: 55-74
+[SCORE] 69 medium - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, PLE/PPV, v71 freshness=0.507, v48 tier2: 55-74
+[SCORE] 67 medium - El Grande Americano Appears at AAA Serenata Event After Ludwig Kaiser Arrest Controversy | altre promotion, evento legale/controversia, v62 evento legale grave, v80.4 AAA major World priority 53->72, v71 source reliability soft penalty, v71 freshness=0.618, v48 tier2: 55-74
+[SCORE] 63 medium - Mark Jindrak Says WWE Stars Complaining About WrestleMania Weekend Fan Incidents Should Be Grateful | WWE/main roster, WWE main roster + storyline/evento, evento legale/controversia, PLE/PPV, v86.9 cap commentary/opinion 71->68, v71 source reliability soft penalty, v71 freshness=0.551, v48 tier2: 55-74
+[SCORE] 40 low - Final Betting Odds Released for WWE Saturday Night's Main Event | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v62 titolo/championship, v88.3 cap low-value market item 84->45, v71 source reliability soft penalty, v71 freshness=0.657, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 1
+[PERF v71] WP lookup URL esistente: 0.89s
+[REPORT v88] True-results confermato da WordPress per URL (5165): report:wwe-smackdown-2026-05-22
+[REPORT v87.2] Report confermato in history forte: report:wwe-smackdown-2026-05-22 (wp_confirm_runtime)
+[PENDING] Coda salvata: 1 elementi
+[PENDING] Coda salvata: 0 elementi
+[PENDING v88] Rimosso true-results confermato dalla pending: report:wwe-smackdown-2026-05-22
+[REPORT v86.8] Pending true-results già confermato su WordPress: rimuovo report:wwe-smackdown-2026-05-22
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[BOT] News candidate totali: 7 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: WWE's Kit Wilson Teases 'Different' Version Of Pretty Deadly If Elton Prince Returns
+[BOT] semantic_id=wwes-kit-wilson-teases-different-version-of-pretty-deadly-if-elton-prince-returns
+[SCORE] iniziale=88 priority=high
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni di Kit Wilson su un potenziale ritorno di Elton Prince e aggiornamenti sul suo infortunio, inquadrandosi come news autonoma su talenti WWE.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Pretty Deadly' (nome team).; Tradurre 'neck fusion surgery' come 'intervento di fusione spinale'.; 'Teases' va reso come 'anticipa' o 'lascia intendere'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta dichiarazioni di Kit Wilson su un potenziale ritorno di Elton Prince e aggiornamenti sul suo infortunio, inquadrandosi come news autonoma su talenti WWE.
+[PERF v71] analisi editoriale AI v72: 1.22s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE's Kit Wilson Teases 'Different' Version Of Pretty Deadly If Elton Prince Returns
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 78->54 - WWE's Kit Wilson Teases 'Different' Version Of Pretty Deadly If Elton Prince Returns
+[SCORE v79.1.3] Recovery post-show 54->88 - WWE's Kit Wilson Teases 'Different' Version Of Pretty Deadly If Elton Prince Returns
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 88->54 - WWE's Kit Wilson Teases 'Different' Version Of Pretty Deadly If Elton Prince Returns
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, PLE/PPV, developmental secondario, v62 infortunio/operazione, v66 cap opinion/commentary storyline, v88.2 cap OTHER/feature non-news 78->54, v79.1.3 post-show recovery 54->88, v88.2 cap OTHER/feature non-news 88->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - WWE's Kit Wilson Teases 'Different' Version Of Pretty Deadly If Elton Prince Returns
+[BOT] Elaborazione: MJF Says Kofi Kingston & Xavier Woods Would Be 'Incredible Additions' To AEW
+[BOT] semantic_id=mjf-says-kofi-kingston-xavier-woods-would-be-incredible-additions-to-aew
+[SCORE] iniziale=72 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=AEW (5) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni di MJF su un possibile futuro di Kofi Kingston e Xavier Woods in AEW. È una news su dichiarazioni rilasciate, non una preview di un evento o un rumor di backstage.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'New Day', 'AEW', 'TKO' o nomi di titoli/stipulazioni (es. non-compete clause = clausola di non concorrenza).; Mantenere il tono assertivo di MJF.; Attenzione: la news cita un ipotetico futuro, ma il contenuto è l'intervista.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | L'articolo riporta dichiarazioni di MJF su un possibile futuro di Kofi Kingston e Xavier Woods in AEW. È una news su dichiarazioni rilasciate, non una preview di un evento o un rumor di backstage.
+[PERF v71] analisi editoriale AI v72: 1.32s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - MJF Says Kofi Kingston & Xavier Woods Would Be 'Incredible Additions' To AEW
+[SCORE] raffinato=68 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, evento legale/controversia, PLE/PPV, v62 evento legale grave, v68 cap opinion senza news concreta
+[TIER] Pubblicabile sotto soglia come tier2: 55-74 - MJF Says Kofi Kingston & Xavier Woods Would Be 'Incredible Additions' To AEW
+[V71] story_signature=stable:mjf|mjf_says_kofi_kingston|xavier_woods_would_be|status|wwe semantic_status=new_story freshness=0.834
+[PERF v71] WP recent posts dedupe: 0.84s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.19s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=6
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/mjf-says-kofi-kingston-xavier-woods-would-be-incredible-additions-to-aew/intro-1779366457.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 13.55s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): MJF: "Kofi Kingston e Xavier Woods sarebbero ottimi innesti per la AEW"
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/mjf-says-kofi-kingston-xavier-woods-would-be-incredible-additions-to-aew/l-intro-1779366457.jpg
+[MEDIA] Immagine caricata: 5191
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260523_211519_001_mjf-kofi-kingston-e-xavier-woods-sarebbero-ottimi-innesti-per-la-aew_5192_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5192
+[PROCESSED v90.2.5] Publish result non conclusivo: non marco URL published
+[PERF v71] creazione post WordPress: 7.95s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/mjf-says-kofi-kingston-xavier-woods-would-be-incredible-additions-to-aew/l-intro-1779366457.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5191
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'MJF Says Kofi Kingston & Xavier Woods Would Be 'Incredible A': 24.85s
+[OK] Pubblicato: MJF: "Kofi Kingston e Xavier Woods sarebbero ottimi innesti per la AEW"
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260523_211521_001_mjf-kofi-kingston-e-xavier-woods-sarebbero-ottimi-innesti-per-la-aew_84851820_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: MJF: "Kofi Kingston e Xavier Woods sarebbero ottimi innesti per la AEW"
+[PUBLISHED REVIEW v87.1] Review outer salvata: MJF: "Kofi Kingston e Xavier Woods sarebbero ottimi innesti per la AEW"
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Darby Allin Takes Brutal Shot at MJF's Hair Before AEW Double or Nothing
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - El Grande Americano Appears at AAA Serenata Event After Ludwig Kaiser Arrest Controversy
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Mark Jindrak Says WWE Stars Complaining About WrestleMania Weekend Fan Incidents Should Be Grateful
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Final Betting Odds Released for WWE Saturday Night's Main Event
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 7 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-23 21:14:19_summary.json -> published_html_review/run_2026-05-23 21-14-19_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (680 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
+===== RUN END [2026-05-23 21:14:19] VERSION [v90_2_5_1_processed_skip_recorder (d6df453)] =====
+
