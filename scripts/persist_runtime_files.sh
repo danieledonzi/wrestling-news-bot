@@ -18,7 +18,7 @@ paths=(
 staged_any=0
 for path in "${paths[@]}"; do
   if [ -e "$path" ]; then
-    git add "$path"
+    git add -f "$path"
     staged_any=1
   else
     echo "[RUNTIME] Path assente, skip: $path"
