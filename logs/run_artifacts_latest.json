@@ -1,22 +1,12 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-23 21:14:19",
-  "bot_version": "v90_2_5_1_processed_skip_recorder (d6df453)",
-  "git_sha": "d6df453d11406f6de08bebf501de79eb762f1afe",
-  "created_at": "2026-05-23T21:15:22",
-  "published_count": 1,
-  "published_post_ids": [
-    "5192"
-  ],
-  "published_artifacts": [
-    {
-      "post_id": 5192,
-      "title": "MJF: \"Kofi Kingston e Xavier Woods sarebbero ottimi innesti per la AEW\"",
-      "source_url": "https://www.wrestlinginc.com/2178404/aew-mjf-new-day-kofi-kingston-xavier-woods-austin-creed-incredible-additions/",
-      "html_file": "published/20260523_211519_001_mjf-kofi-kingston-e-xavier-woods-sarebbero-ottimi-innesti-per-la-aew_5192_final.html",
-      "metadata_file": "published/20260523_211519_001_mjf-kofi-kingston-e-xavier-woods-sarebbero-ottimi-innesti-per-la-aew_5192_metadata.json"
-    }
-  ],
+  "run_id": "2026-05-23 22:13:58",
+  "bot_version": "v90_2_5_1_processed_skip_recorder (b6ba08a)",
+  "git_sha": "b6ba08a90c23ca6ce9d032a35f74fcf3260da02e",
+  "created_at": "2026-05-23T22:15:54",
+  "published_count": 0,
+  "published_post_ids": [],
+  "published_artifacts": [],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",

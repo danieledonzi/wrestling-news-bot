@@ -1,1 +1,89 @@
-[]
+[
+  {
+    "kind": "report",
+    "url": "https://www.wrestlinginc.com/2179938/wwe-smackdown-may-22-womens-us-title-open-challenge-rhea-ripley-appears/",
+    "title": "WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears",
+    "semantic_id": "report-wwe-smackdown-2026-05-22",
+    "title_key": "smackdown-results-5-22-women-s-us-open-challenge-rhea-ripley-appears",
+    "score": 100,
+    "priority": "high",
+    "event_key": "report:wwe-smackdown-2026-05-22",
+    "report_event_key": "report:wwe-smackdown-2026-05-22",
+    "summary": "This is Wrestling Inc.'s results for \"WWE SmackDown\" on May 22, 2026, with an appearance from reigning WWE Women's Champion Rhea Ripley!",
+    "reasons": [
+      "WWE/main roster",
+      "top star titolo: rhea ripley",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "PLE/PPV",
+      "v62 titolo/championship",
+      "v75 hard results report",
+      "v77 hard report protected",
+      "v71 freshness=0.318"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "top star titolo: rhea ripley",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "PLE/PPV",
+      "v62 titolo/championship",
+      "v75 hard results report",
+      "v77 hard report protected",
+      "v71 freshness=0.318",
+      "v86.2 report morning hold"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 0,
+    "status": "waiting_report_morning_hold",
+    "reason": "report_hold_until_0630",
+    "created_at": 1779490512.0,
+    "first_seen": 1779490512.0,
+    "last_seen": 1779574553.1421306,
+    "not_before": 1779597000.0,
+    "hold_until_label": "06:30 Europe/Rome",
+    "attempts": 0,
+    "sources": [
+      {
+        "url": "https://www.wrestlinginc.com/2179938/wwe-smackdown-may-22-womens-us-title-open-challenge-rhea-ripley-appears/",
+        "title": "WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears",
+        "source": "www.wrestlinginc.com",
+        "first_seen": 1779490512.0,
+        "last_seen": 1779574553.1421306,
+        "last_text_len": 0
+      }
+    ],
+    "story_signature_v71": "stable:report_wwe-smackdown-2026-05-22"
+  },
+  {
+    "url": "https://www.wrestlinginc.com/2178499/wwe-kit-wilson-elton-prince-pretty-deadly-different/",
+    "title": "WWE's Kit Wilson Teases 'Different' Version Of Pretty Deadly If Elton Prince Returns",
+    "semantic_id": "wwes-kit-wilson-teases-different-version-of-pretty-deadly-if-elton-prince-returns",
+    "title_key": "s-kit-wilson-teases-different-version-pretty-deadly-if-elton-prince-returns",
+    "score": 88,
+    "priority": "high",
+    "event_key": "",
+    "story_signature_v71": "stable:kit_wilson_teases|version_of_pretty_deadly_if_elton_prince_returns|return|wwe",
+    "summary": "According to WWE's Kit Wilson, if his Pretty Deadly partner Elton Prince is able to return to the ring, fans will see a different version of the tag team.",
+    "reasons": [
+      "WWE/main roster",
+      "impatto roster/storyline",
+      "WWE main roster + storyline/evento",
+      "v62 ritorno/debutto",
+      "v71 freshness=0.711"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "impatto roster/storyline",
+      "WWE main roster + storyline/evento",
+      "v62 ritorno/debutto",
+      "v71 freshness=0.711"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1779591600.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1779574465.0937638,
+    "attempts": 0
+  }
+]

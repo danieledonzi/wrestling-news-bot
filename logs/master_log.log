@@ -2726,3 +2726,166 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
 ===== RUN END [2026-05-23 21:14:19] VERSION [v90_2_5_1_processed_skip_recorder (d6df453)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show=collision
+[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard
+[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.1] Report dedupe protection attiva: true-results usa solo report gate stretto
+[MODEL v90.2.2] translate_report chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-pro
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.3] Social embed quote positioning attivo
+[BOOT v90.2.3.1] Inline image dict normalization attiva in v88_media_record
+[BOOT v90.2.4] Offline pending hard-skip guard attiva
+[BOOT v90.2.4.1] Report hard-title guard attiva
+[BOOT v90.2.4.2] Report artifacts/casing recovery attiva
+[BOOT v90.2.5] Processed URL hard-skip attivo
+[BOOT v90.2.5.1] Processed URL skip recorder attivo
+
+===== RUN START [2026-05-23 22:13:58] VERSION [v90_2_5_1_processed_skip_recorder (b6ba08a)] =====
+[PROCESSED v90.2.5] Loaded processed URL records: 18
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API timeout | tentativo 1/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f370b766e90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Health check API timeout | tentativo 2/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f370b767d90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Health check API timeout | tentativo 3/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f370b778b90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] WordPress/API non disponibile dopo 3 tentativi: api_timeout: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f370b778b90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE's Kit Wilson Teases 'Different' Version Of Pretty Deadly If Elton Prince Returns
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (20/75): Nigel McGuinness Compares Experiences Doing Commentary For AEW Vs. WWE
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v88.3] v88.3 hard feature skip cap 60->45 - JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177021/wwe-wrestlemania-41-joe-hendry-randy-orton-kurt-angle-early-career-milestone/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (27/75): Trick Williams Discusses Difficulties Of Moving From Football To WWE
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): AEW & ROH Star Bandido Names Biggest Wrestling Inspirations, Including WWE HOFer
+[SKIP] URL già in history: https://www.wrestlinginc.com/2178404/aew-mjf-new-day-kofi-kingston-xavier-woods-austin-creed-incredible-additions/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): Joe Hendry Explains Why WWE NXT Was Among The 'Most Difficult Challenges' He's Faced
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v81.1] Cap light name-driven item 20->20 - WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 73->54 - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176092/wwe-hofer-eric-bischoff-reflects-working-late-ted-turner/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026 Predictions: Wrestling Inc. Picks The Winners
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v81.1] Cap light name-driven item 50->50 - AEW Star Bandido Recalls 'Amazing' World Title Feud That Inspired New Confidence
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 50/55 - AEW Star Bandido Recalls 'Amazing' World Title Feud That Inspired New Confidence
+[SKIP] Score sotto soglia editoriale (50/75): AEW Star Bandido Recalls 'Amazing' World Title Feud That Inspired New Confidence
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (26/75): AEW's Harley Cameron Details The Process Of Learning To Wrestle On Live TV
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:wwe-smackdown-2026-05-22 - WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026: Draws & Duds
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (0/75): WWE Saturday Night's Main Event 5/23/2026 Predictions: Wrestling Inc. Picks The Winners
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (24/75): Former WWE Star Aleister Black Explains How Yokozuna Inspired Him To Become A Wrestler
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - WWE Saturday Night's Main Event Spoiler Lineup for May 23, 2026: Full Match Card and Backstage Notes Revealed
+[SCORE v81.1] Cap future card announcement 55->55 - WWE Saturday Night's Main Event Spoiler Lineup for May 23, 2026: Full Match Card and Backstage Notes Revealed
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[SCORE v79.1.2] Spoiler validato: floor 56->75 - Spoiler: Closing Match for May 23 WWE Saturday Night's Main Event Revealed
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 75->54 - Spoiler: Closing Match for May 23 WWE Saturday Night's Main Event Revealed
+[SKIP] Score sotto soglia editoriale (49/75): Spoiler: Closing Match for May 23 WWE Saturday Night's Main Event Revealed
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[SKIP] Preview/show announcement scaduta: Spoiler: Opening Mach for May 23 WWE Saturday Night's Main Event Revealed
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - GUNTHER Says Italian Crowd Could Turn Him Babyface Against Cody Rhodes
+[SKIP] Score sotto soglia editoriale (49/75): GUNTHER Says Italian Crowd Could Turn Him Babyface Against Cody Rhodes
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (36/75): Tony Khan Hints at New AEW Pay-Per-View After Redemption Report
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (0/75): Jey Uso Fires Back at Backlash Over "Best World Entertainment Wrestler" Claim
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SCORE v86.9] Cap commentary/opinion 71->68 - Mark Jindrak Says WWE Stars Complaining About WrestleMania Weekend Fan Incidents Should Be Grateful
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (5/75): Ash By Elegance Celebrates Memorial Day With Champagne Bikini Video
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (0/75): Donald Trump Accidentally Calls Hulk Hogan 'The Huckster' in Truth Social Post
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (51/75): Roman Reigns Contract Signing & Oba Femi Appearance Set for May 25 WWE RAW
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Preview/show announcement scaduta: WWE Saturday Night's Main Event Seeing Strong Ticket Momentum Before Tonight's Show
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[PENDING] Coda salvata: 1 elementi
+[REPORT v86.6/legacy] Hold fino alle 06:30: report:wwe-smackdown-2026-05-22 | pronto tra 374 min - WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears
+[REPORT v86.8/legacy] 1 true-results report trattenuti fino alle 06:30 Europe/Rome
+[SCORE] 88 high - WWE's Kit Wilson Teases 'Different' Version Of Pretty Deadly If Elton Prince Returns | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, v62 ritorno/debutto, v71 freshness=0.711
+[SCORE] 72 medium - Darby Allin Takes Brutal Shot at MJF's Hair Before AEW Double or Nothing | AEW, impatto roster/storyline, titolo/championship, PLE/PPV, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.531, v48 tier2: 55-74
+[SCORE] 69 medium - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, PLE/PPV, v71 freshness=0.494, v48 tier2: 55-74
+[SCORE] 63 medium - Kit Wilson Says Future Pretty Deadly Reunion Would Be "More Mature" | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, v71 source reliability soft penalty, v71 freshness=0.687, v48 tier2: 55-74
+[SCORE] 63 medium - Mark Jindrak Says WWE Stars Complaining About WrestleMania Weekend Fan Incidents Should Be Grateful | WWE/main roster, WWE main roster + storyline/evento, evento legale/controversia, PLE/PPV, v86.9 cap commentary/opinion 71->68, v71 source reliability soft penalty, v71 freshness=0.538, v48 tier2: 55-74
+[SCORE] 54 low - WWE Drops Danhausen x New York Knicks Merch After Team's Playoff Surge | WWE/main roster, nomi forti titolo: danhausen, impatto roster/storyline, release/addio, v71 source reliability soft penalty, v71 freshness=0.696, v48 tier3: 45-54 contestuale
+[SCORE] 54 low - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v62 titolo/championship, v88.2 cap OTHER/feature non-news 73->54, v71 freshness=0.494, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - WWE Saturday Night's Main Event Spoiler Lineup for May 23, 2026: Full Match Card and Backstage Notes Revealed | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, floor WWE main roster storyline, v81.1 cap future card announcement 55->55, v71 source reliability soft penalty, v71 freshness=0.575, v48 tier3: 45-54 contestuale
+[SCORE] 46 low - Skye Blue Roasts MJF Over Potentially Going Bald at AEW Double or Nothing | AEW, PLE/PPV, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.551, v48 tier3: 45-54 contestuale
+[SCORE] 45 low - JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule | WWE/main roster, intervista/opinione, v62 corporate/business, v62 categoria business, v88.3 hard feature skip cap 60->45, v71 freshness=0.538, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[BOT] WordPress offline: assegno score e salvo solo i candidati che sarebbero stati pubblicati, senza chiamare Gemini.
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[PENDING v90.2.4] Hard skip offline pending: score basso 72 - Darby Allin Takes Brutal Shot at MJF's Hair Before AEW Double or Nothing
+[PENDING v90.2.4] Hard skip offline pending: score basso 69 - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot
+[PENDING v90.2.4] Hard skip offline pending: score basso 63 - Kit Wilson Says Future Pretty Deadly Reunion Would Be "More Mature"
+[PENDING v90.2.4] Hard skip offline pending: score basso 63 - Mark Jindrak Says WWE Stars Complaining About WrestleMania Weekend Fan Incidents Should Be Grateful
+[PENDING v90.2.4] Hard skip offline pending: score basso 54 - WWE Drops Danhausen x New York Knicks Merch After Team's Playoff Surge
+[PENDING v90.2.4] Hard skip offline pending: score basso 54 - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[PENDING v90.2.4] Hard skip offline pending: score basso 50 - WWE Saturday Night's Main Event Spoiler Lineup for May 23, 2026: Full Match Card and Backstage Notes Revealed
+[PENDING v90.2.4] Hard skip offline pending: score basso 46 - Skye Blue Roasts MJF Over Potentially Going Bald at AEW Double or Nothing
+[PENDING v90.2.4] Hard skip offline pending: score basso 45 - JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule
+[PENDING v90.2.4] Offline pending guard: keep=1 drop=9 reason=wp_down_initial_normal
+[PENDING] Coda salvata: 2 elementi
+[PENDING] Salvata news high (88): WWE's Kit Wilson Teases 'Different' Version Of Pretty Deadly If Elton Prince Returns
+[PENDING v86.8/legacy] Candidati salvati per dopo: 1
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-23 22:13:58_summary.json -> published_html_review/run_2026-05-23 22-13-58_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (681 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-23 22:13:58] VERSION [v90_2_5_1_processed_skip_recorder (b6ba08a)] =====
+
