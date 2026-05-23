@@ -59,9 +59,10 @@ def v90251_record_title_skip(title, status="rejected", reason="skip_log"):
         if not url:
             return
         score = item.get("score")
+        canonical_title = item.get("title") or item.get("titolo") or title
         if "v9025_record_processed_url" in globals():
-            v9025_record_processed_url(url, title=title, status=status, reason=reason, score=score, extra={"event_key": item.get("event_key"), "semantic_id": item.get("semantic_id"), "source": "v90.2.5.1_log_recorder"})
-            print(f"[PROCESSED v90.2.5.1] Recorded final skip status={status} reason={reason} - {title}")
+            v9025_record_processed_url(url, title=canonical_title, status=status, reason=reason, score=score, extra={"event_key": item.get("event_key"), "semantic_id": item.get("semantic_id"), "source": "v90.2.5.1_log_recorder"})
+            print(f"[PROCESSED v90.2.5.1] Recorded final skip status={status} reason={reason} - {canonical_title}")
     except Exception as e:
         print(f"[PROCESSED v90.2.5.1] Warning record skip: {e}")
 
@@ -73,10 +74,31 @@ def v90251_title_after_marker(text, marker):
     return s.split(marker, 1)[1].strip()
 
 
-def v90251_title_after_dash(text):
+def v90251_find_known_title_in_text(text):
     s = str(text or "")
+    mapping = globals().get("v90251_title_url_map")
+    if not isinstance(mapping, dict) or not mapping:
+        mapping = v90251_build_title_url_map()
+        globals()["v90251_title_url_map"] = mapping
+    best = ""
+    for item in mapping.values():
+        if not isinstance(item, dict):
+            continue
+        title = str(item.get("title") or item.get("titolo") or "").strip()
+        if title and title in s and len(title) > len(best):
+            best = title
+    return best
+
+
+def v90251_title_from_skip_message(text):
+    s = str(text or "")
+    known = v90251_find_known_title_in_text(s)
+    if known:
+        return known
     if " - " in s:
-        return s.rsplit(" - ", 1)[1].strip()
+        tail = s.rsplit(" - ", 1)[1].strip()
+        if v90251_find_item_by_title(tail):
+            return tail
     return ""
 
 try:
@@ -90,19 +112,22 @@ try:
                 if isinstance(item, dict):
                     globals()["v90251_current_item"] = item
             elif "[SKIP] Score sotto soglia editoriale dopo raffinamento:" in msg:
-                title = v90251_title_after_dash(msg)
+                title = v90251_title_from_skip_message(msg)
                 v90251_record_title_skip(title, status="skipped_below_threshold", reason="refined_score_below_threshold")
             elif "[SKIP v87] Blocco tier3 opinion/interview sotto" in msg:
-                title = v90251_title_after_dash(msg)
+                title = v90251_title_from_skip_message(msg)
                 v90251_record_title_skip(title, status="skipped_soft_trash", reason="tier3_opinion_interview_below_threshold")
             elif "[SKIP v88.4.1] Canonical event core gia pubblicato:" in msg:
-                title = v90251_title_after_dash(msg)
+                title = v90251_title_from_skip_message(msg)
                 v90251_record_title_skip(title, status="skipped_duplicate", reason="canonical_core_already_published")
+            elif "[SKIP] Preview/show announcement scaduta dopo scraping:" in msg:
+                title = v90251_title_after_marker(msg, "[SKIP] Preview/show announcement scaduta dopo scraping:")
+                v90251_record_title_skip(title, status="skipped_stale", reason="expired_preview_after_scraping")
             elif "[SKIP] Preview/show announcement scaduta:" in msg:
                 title = v90251_title_after_marker(msg, "[SKIP] Preview/show announcement scaduta:")
                 v90251_record_title_skip(title, status="skipped_stale", reason="expired_preview")
             elif "[SKIP v90.2] Follow-up duplicato/non sostanziale" in msg:
-                title = v90251_title_after_dash(msg)
+                title = v90251_title_from_skip_message(msg)
                 v90251_record_title_skip(title, status="skipped_duplicate", reason="v90_2_non_substantial_followup")
         except Exception:
             pass
