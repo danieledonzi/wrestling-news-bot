@@ -1,1 +1,41 @@
-[]
+[
+  {
+    "url": "https://www.wrestlinginc.com/2179938/wwe-smackdown-may-22-womens-us-title-open-challenge-rhea-ripley-appears/",
+    "title": "WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears",
+    "semantic_id": "wwe-smackdown-results-522-womens-us-title-open-challenge-rhea-ripley-appears",
+    "title_key": "smackdown-results-5-22-women-s-us-open-challenge-rhea-ripley-appears",
+    "score": 100,
+    "priority": "high",
+    "event_key": "report:wwe-smackdown-2026-05-22",
+    "story_signature_v71": "stable:report_wwe-smackdown-2026-05-22",
+    "summary": "This is Wrestling Inc.'s results for \"WWE SmackDown\" on May 22, 2026, with an appearance from reigning WWE Women's Champion Rhea Ripley!",
+    "reasons": [
+      "WWE/main roster",
+      "top star titolo: rhea ripley",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "PLE/PPV",
+      "v62 titolo/championship",
+      "v75 hard results report",
+      "v77 hard report protected",
+      "v71 freshness=0.344"
+    ],
+    "score_reasons": [
+      "WWE/main roster",
+      "top star titolo: rhea ripley",
+      "WWE main roster + storyline/evento",
+      "ritorno/debutto",
+      "PLE/PPV",
+      "v62 titolo/championship",
+      "v75 hard results report",
+      "v77 hard report protected",
+      "v71 freshness=0.344"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1779512112.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1779567248.4161444,
+    "attempts": 0
+  }
+]
