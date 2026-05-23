@@ -992,3 +992,339 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-23 11:58:00] VERSION [v90_2_4_2_report_artifacts_recovery (d71a7c7)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show=smackdown
+[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard
+[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.1] Report dedupe protection attiva: true-results usa solo report gate stretto
+[MODEL v90.2.2] translate_report chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-pro
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.3] Social embed quote positioning attivo
+[BOOT v90.2.3.1] Inline image dict normalization attiva in v88_media_record
+[BOOT v90.2.4] Offline pending hard-skip guard attiva
+[BOOT v90.2.4.1] Report hard-title guard attiva
+[BOOT v90.2.4.2] Report artifacts/casing recovery attiva
+
+===== RUN START [2026-05-23 13:42:34] VERSION [v90_2_4_2_report_artifacts_recovery (d44aa80)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SCORE v81.1] Cap light name-driven item 20->20 - WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 73->54 - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[SCORE v81.1] Cap light name-driven item 100->78 - WWE HOFer Eric Bischoff Reflects On Working For The Late Ted Turner
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026 Predictions: Wrestling Inc. Picks The Winners
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (32/75): AEW's Harley Cameron Details The Process Of Learning To Wrestle On Live TV
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP] Score sotto soglia editoriale (48/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Ex-NXT Star Blake Monroe Makes Main Roster Debut In WWE SmackDown Backstage Segment
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll/
+[SKIP] Score sotto soglia editoriale (5/75): Jim Ross On Kevin Nash Backing Wrestlers' Union: 'He Knows What He's Talking About'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177184/john-cena-in-ring-retirement-not-mean-retiring-wwe/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - JBL Says Baron Corbin Would Be a Great Asset to WWE Amid Return Rumors
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - JBL Says Baron Corbin Would Be a Great Asset to WWE Amid Return Rumors
+[SKIP] Score sotto soglia editoriale (49/75): JBL Says Baron Corbin Would Be a Great Asset to WWE Amid Return Rumors
+[PERF v71] WP lookup event_key: 1.50s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tony-khan - provo a pubblicare
+[PERF v71] WP lookup event_key: 1.38s
+[FIX] Event key in history ma non confermata su WordPress: event:business:vince-mcmahon - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (0/75): Disco Inferno Calls Mick Foley an Idiot for Cutting Ties With WWE Over Donald Trump Association
+[SCORE v80.4] AAA major World priority 37->72 - AAA Lucha Libre on FOX Preview for May 23, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v81.1] Cap future card announcement 72->72 - AAA Lucha Libre on FOX Preview for May 23, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (67/75): AAA Lucha Libre on FOX Preview for May 23, 2026: Confirmed Matches, Start Time and How to Watch
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - Tyler Breeze Addresses Future of UpUpDownDown After Xavier Woods' WWE Exit
+[SCORE v81.1] Cap future card announcement 56->56 - WWE Saturday Night's Main Event Preview for May 23, 2026: Confirmed Matces, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (51/75): WWE Saturday Night's Main Event Preview for May 23, 2026: Confirmed Matces, Start Time and How to Watch
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown
+[FRESHNESS v86.6/legacy] Post-show outcome rescue: non tratto come preview scaduta - Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown
+[SKIP] Preview/show announcement scaduta: WWE Reveals First Clash in Italy Matches Airing on ESPN
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 70->54 - ESPN Quietly Restores AEW Section With Major Darby Allin Feature Before Double or Nothing
+[PERF v71] WP lookup event_key: 1.45s
+[FIX] Event key in history ma non confermata su WordPress: event:business:darby-allin - provo a pubblicare
+[SKIP] URL già in history: https://www.ringsidenews.com/alexa-bliss-signs-new-talent-agency-representation-outside-wwe/
+[SKIP] URL già in history: https://www.ringsidenews.com/tony-khan-publicly-calls-out-indie-promotion-mance-warner-claim/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Baron Corbin Expected for WWE Return Despite Public Denial
+[REPORT v87.2] Report confermato da history forte: report:wwe-smackdown-2026-05-22
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-smackdown-2026-05-22 - WWE SmackDown Results, Highlights and Key Moments for May 22, 2026
+[SCORE] 100 high - Tyler Breeze Addresses Future of UpUpDownDown After Xavier Woods' WWE Exit | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, contratto, v62 categoria business, v71 freshness=0.559
+[SCORE] 100 high - Baron Corbin Expected for WWE Return Despite Public Denial | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v71 freshness=0.521
+[SCORE] 96 high - Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v71 freshness=0.56
+[SCORE] 96 high - Ex-NXT Star Blake Monroe Makes Main Roster Debut In WWE SmackDown Backstage Segment | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v71 freshness=0.591
+[SCORE] 78 medium - WWE HOFer Eric Bischoff Reflects On Working For The Late Ted Turner | WWE/main roster, business/contratti WWE-TKO, WWE main roster + storyline/evento, business/media rights, opinione generica, v62 media rights/streaming, v62 categoria business, v81.1 cap light name-driven item 100->78, v71 freshness=0.595
+[SCORE] 78 medium - WWE Adds WrestleMania Rematch To Clash In Italy | WWE/main roster, top star lead: rhea ripley, nomi forti lead: rhea ripley, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.412
+[SCORE] 74 medium - Vince McMahon Would Allegedly Forget His Own Instructions and Explode Backstage in WWE | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v62 categoria business, v71 source reliability soft penalty, v71 freshness=0.562, v48 tier2: 55-74
+[SCORE] 71 medium - Tony Khan Is 100% Confident Paramount Will Keep AEW After WBD Merger Goes Through | AEW, ritorno/debutto, PLE/PPV, v62 media rights/streaming, v71 source reliability soft penalty, v71 freshness=0.685, v48 tier5: v71 major story bypass
+[SCORE] 71 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 69 medium - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, PLE/PPV, v71 freshness=0.601, v48 tier2: 55-74
+[MODE] Storm mode attiva: 4 news >=90, 4 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 16 | mode=storm | max nuove=5 | pending pubblicati=0
+[BOT] Elaborazione: Tyler Breeze Addresses Future of UpUpDownDown After Xavier Woods' WWE Exit
+[BOT] semantic_id=tyler-breeze-addresses-future-of-upupdowndown-after-xavier-woods-wwe-exit
+[SCORE] iniziale=100 priority=high
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/tyler-breeze-addresses-future-upupdowndown-xavier-woods-wwe-exit/
+[PERF v71] scraping articolo: 1.20s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=12, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/tyler-breeze-addresses-future-upupdowndown-xavier-woods-wwe-exit/
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.82s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni di Tyler Breeze su eventi già accaduti (l'addio di Woods alla WWE). Non è una preview né un rumor, ma una notizia di aggiornamento post-fatto.
+[EDITORIAL v72.3] translation_notes=Mantenere 'UpUpDownDown' intatto.; 'Release' va tradotto come 'addio' o 'licenziamento', mai 'rilascio'.; Non tradurre nomi di cinture o stable (es. The New Day).
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta dichiarazioni di Tyler Breeze su eventi già accaduti (l'addio di Woods alla WWE). Non è una preview né un rumor, ma una notizia di aggiornamento post-fatto.
+[PERF v71] analisi editoriale AI v72: 1.11s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Tyler Breeze Addresses Future of UpUpDownDown After Xavier Woods' WWE Exit
+[SCORE] raffinato=78 priority=medium | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v62 categoria business, v66 cap opinion/commentary storyline
+[V71] story_signature=stable:tyler_breeze_addresses_future|after_xavier_woods|wwe_exit|status|wwe semantic_status=new_story freshness=0.675
+[PERF v71] WP recent posts dedupe: 0.93s
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - Tyler Breeze Addresses Future of UpUpDownDown After Xavier Woods' WWE Exit
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.28s
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=12
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 22.70s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/tyler-breeze-addresses-future-of-upupdowndown-after-xavier-woods-wwe-exit-25.jpg
+[MEDIA] Immagine caricata: 5173
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260523_134319_001_tyler-breeze-parla-del-futuro-di-upupdowndown-dopo-laddio-di-xavier-woods-alla-wwe_5174_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5174
+[PERF v71] creazione post WordPress: 4.04s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/tyler-breeze-addresses-future-of-upupdowndown-after-xavier-woods-wwe-exit-25.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5173
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Tyler Breeze Addresses Future of UpUpDownDown After Xavier W': 31.69s
+[OK] Pubblicato: Tyler Breeze parla del futuro di UpUpDownDown dopo l'addio di Xavier Woods alla WWE
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260523_134320_001_tyler-breeze-parla-del-futuro-di-upupdowndown-dopo-l-addio-di-xavier-woods-alla-_d3f4efc3_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Tyler Breeze parla del futuro di UpUpDownDown dopo l'addio di Xavier Woods alla WWE
+[PUBLISHED REVIEW v87.1] Review outer salvata: Tyler Breeze parla del futuro di UpUpDownDown dopo l'addio di Xavier Woods alla WWE
+[SKIP v90.2] Follow-up duplicato/non sostanziale core=return:baron-corbin:wwe score=100 reason=core_cap_reached_no_major_update novel=[] - Baron Corbin Expected for WWE Return Despite Public Denial
+[DEDUPE v88.4.1] candidate_core=canonical_event_core:blake_monroe|debut_arrival|wwe title=Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown
+[DEDUPE v88.4.1] Canonical event core caricati: 17
+[SKIP v88.4.1] Canonical event core gia pubblicato: canonical_event_core:blake_monroe|debut_arrival|wwe - Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown
+[DEDUPE v88.4.1] candidate_core=canonical_event_core:blake_monroe|debut_arrival|wwe title=Ex-NXT Star Blake Monroe Makes Main Roster Debut In WWE SmackDown Backstage Segment
+[SKIP v88.4.1] Canonical event core gia pubblicato: canonical_event_core:blake_monroe|debut_arrival|wwe - Ex-NXT Star Blake Monroe Makes Main Roster Debut In WWE SmackDown Backstage Segment
+[BOT] Elaborazione: WWE HOFer Eric Bischoff Reflects On Working For The Late Ted Turner
+[BOT] semantic_id=wwe-hofer-eric-bischoff-reflects-on-working-for-the-late-ted-turner
+[SCORE] iniziale=78 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WORLD (8) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta le dichiarazioni di Eric Bischoff in merito alla scomparsa di Ted Turner; trattandosi di un tributo/intervista retrospettiva non rientra nelle altre categorie specifiche.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'WWE HOFer', usare 'membro della WWE Hall of Fame'.; Tradurre 'Monday Night Wars' mantenendo il termine originale se riconosciuto.; Mantenere i riferimenti a 'The Ariel Helwani Show' citando la fonte correttamente.
+[CATEGORY v73] World downgrade: WORLD -> WWE | non wrestling internazionale
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta le dichiarazioni di Eric Bischoff in merito alla scomparsa di Ted Turner; trattandosi di un tributo/intervista retrospettiva non rientra nelle altre categorie specifiche. | v73 world downgrade
+[PERF v71] analisi editoriale AI v72: 1.65s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE HOFer Eric Bischoff Reflects On Working For The Late Ted Turner
+[SCORE] raffinato=78 priority=medium | WWE/main roster, business/contratti WWE-TKO, impatto roster/storyline, WWE main roster + storyline/evento, morte, PLE/PPV, non wrestling puro, opinione generica, v62 categoria business, v77 strong-word guardrail, v81.1 cap light name-driven item 99->78
+[V71] story_signature=stable:eric_bischoff|ted_turner|eric_bischoff_reflects_on_working_for_the_late_ted_turner|contract|wwe semantic_status=new_story freshness=0.595
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=3
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwe-hofer-eric-bischoff-reflects-on-working-for-the-late-ted-turner/intro-1779147326.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 13.95s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[WARN v71.3] Quote check sotto soglia ma non bloccante: ['quote count ratio below threshold: 0.40'] - WWE HOFer Eric Bischoff Reflects On Working For The Late Ted Turner
+[PERF v71] WP strict report lookup: 2.22s
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/wwe-hofer-eric-bischoff-reflects-on-working-for-the-late-ted-turner/l-intro-1779147326.jpg
+[MEDIA] Immagine caricata: 5176
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260523_134346_002_eric-bischoff-ricorda-il-suo-lavoro-con-ted-turner_5177_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5177
+[PERF v71] creazione post WordPress: 7.45s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-hofer-eric-bischoff-reflects-on-working-for-the-late-ted-turner/l-intro-1779147326.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5176
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'WWE HOFer Eric Bischoff Reflects On Working For The Late Ted': 24.33s
+[OK] Pubblicato: Eric Bischoff ricorda il suo lavoro con Ted Turner
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260523_134347_002_eric-bischoff-ricorda-il-suo-lavoro-con-ted-turner_f008cd03_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Eric Bischoff ricorda il suo lavoro con Ted Turner
+[PUBLISHED REVIEW v87.1] Review outer salvata: Eric Bischoff ricorda il suo lavoro con Ted Turner
+[REPORT v87.2] True-results confermato da history forte: skip offline-safe report:wwe-smackdown-2026-05-22 - WWE Adds WrestleMania Rematch To Clash In Italy
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Vince McMahon Would Allegedly Forget His Own Instructions and Explode Backstage in WWE
+[BOT] semantic_id=vince-mcmahon-would-allegedly-forget-his-own-instructions-and-explode-backstage-in-wwe
+[SCORE] iniziale=74 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/vince-mcmahon-would-allegedly-forget-his-own-instructions-explode-backstage-wwe/
+[PERF v71] scraping articolo: 1.23s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=15, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/vince-mcmahon-would-allegedly-forget-his-own-instructions-explode-backstage-wwe/
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=1
+[PERF v71] estrazione blocchi: 1.02s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: JSON object non trovato nella risposta
+[GEMINI] Uso modello: gemini-3-flash-preview
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3-flash-preview | L'articolo riporta un'intervista di MVP con aneddoti sul comportamento di Vince McMahon nel backstage WWE, rientrando nella categoria interviste/opinioni di ex wrestler.
+[EDITORIAL v72.3] translation_notes=Mantenere i termini tecnici come 'backstage' e 'producer' invariati.; Tradurre 'cuss them out' con 'insultarli' o 'sgridarli pesantemente', evitando traduzioni troppo letterali.; 'End all be all' va reso come 'l'ultima parola spettava solo a lui' o 'autorità assoluta'.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta un'intervista di MVP con aneddoti sul comportamento di Vince McMahon nel backstage WWE, rientrando nella categoria interviste/opinioni di ex wrestler.
+[PERF v71] analisi editoriale AI v72: 5.79s
+[SCORE] raffinato=54 priority=low | WWE/main roster, WWE main roster + storyline/evento, PLE/PPV, opinione generica, v62 reazioni/tributi, v62 categoria business, v68 cap duro opinion/commentary
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Vince McMahon Would Allegedly Forget His Own Instructions and Explode Backstage in WWE
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Vince McMahon Would Allegedly Forget His Own Instructions and Explode Backstage in WWE
+[BOT] Elaborazione: Tony Khan Is 100% Confident Paramount Will Keep AEW After WBD Merger Goes Through
+[BOT] semantic_id=tony-khan-is-100-confident-paramount-will-keep-aew-after-wbd-merger-goes-through
+[SCORE] iniziale=71 priority=medium
+[PERF v71] scraping articolo: 1.20s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=11, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.67s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=BUSINESS (15) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni ufficiali di Tony Khan su un tema corporate (fusione WBD/Paramount) rilasciate in un'intervista, non trattandosi di una preview di un evento.
+[EDITORIAL v72.3] translation_notes=Mantenere i titoli dei programmi (Dynamite, Collision) e delle piattaforme (HBO Max, Paramount+) in inglese.; Tradurre '100% confident' con 'sicuro al 100%'.; Evitare calchi per 'pushed back on claims' (usare 'ha smentito le voci' o 'ha risposto alle speculazioni').
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=BUSINESS (15) | L'articolo riporta dichiarazioni ufficiali di Tony Khan su un tema corporate (fusione WBD/Paramount) rilasciate in un'intervista, non trattandosi di una preview di un evento.
+[PERF v71] analisi editoriale AI v72: 1.28s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Tony Khan Is 100% Confident Paramount Will Keep AEW After WBD Merger Goes Through
+[SCORE] raffinato=78 priority=medium | AEW, ritorno/debutto, PLE/PPV, non wrestling puro, opinione generica, v62 media rights/streaming, v66 cap opinion/commentary storyline
+[V71] story_signature=stable:tony_khan|tony_khan_is|confident_paramount_will_keep|story|aew semantic_status=new_story freshness=0.684
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:business:tony-khan -> event:business:tony-khan-followup-tony-khan-is-100-confident-paramount-will-keep-wbd-merger-goes-through
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=11
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 6.09s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): AEW: Tony Khan fiducioso sulla permanenza in TV dopo la fusione Warner-Paramount
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/tony-khan-is-100-confident-paramount-will-keep-aew-after-wbd-merger-goes-through-34.jpg
+[MEDIA] Immagine caricata: 5179
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260523_134413_003_aew-tony-khan-fiducioso-sulla-permanenza-in-tv-dopo-la-fusione-warner-paramount_5180_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5180
+[PERF v71] creazione post WordPress: 7.44s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/tony-khan-is-100-confident-paramount-will-keep-aew-after-wbd-merger-goes-through-34.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5179
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Tony Khan Is 100% Confident Paramount Will Keep AEW After WB': 17.61s
+[OK] Pubblicato: AEW: Tony Khan fiducioso sulla permanenza in TV dopo la fusione Warner-Paramount
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260523_134414_003_aew-tony-khan-fiducioso-sulla-permanenza-in-tv-dopo-la-fusione-warner-paramount_eefe5959_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: AEW: Tony Khan fiducioso sulla permanenza in TV dopo la fusione Warner-Paramount
+[PUBLISHED REVIEW v87.1] Review outer salvata: AEW: Tony Khan fiducioso sulla permanenza in TV dopo la fusione Warner-Paramount
+[BOT] Elaborazione: WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[BOT] semantic_id=wwe-announces-major-change-to-becky-lynchsol-ruca-snme-match
+[SCORE] iniziale=71 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo presenta un match annunciato per un evento imminente (Saturday Night's Main Event), aggiornando la stipulazione da non titolato a titolato. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (Women's Intercontinental Championship, ecc.) in inglese.; Non tradurre 'Saturday Night's Main Event' (SNME).; Evitare calchi come 'red brand' (usare 'Raw' o 'il roster rosso').
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo presenta un match annunciato per un evento imminente (Saturday Night's Main Event), aggiornando la stipulazione da non titolato a titolato. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.23s
+[SCORE v88.2] v88.2 cap feature storico numerico 56->45 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[SCORE] raffinato=45 priority=low | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v70 cap preview hard, v88.2 cap feature storico numerico 56->45
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[BOT] Elaborazione: AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot
+[BOT] semantic_id=aews-paul-wight-was-forced-to-lose-weight-for-wwe-wrestlemania-spot
+[SCORE] iniziale=69 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | L'articolo è un aneddoto retrospettivo su un evento passato (WrestleMania 25), non una news attuale o una preview. Si classifica come Other o approfondimento storico/intervista.
+[EDITORIAL v72.3] translation_notes=Mantenere i titoli dei match e le manovre (AA, World Heavyweight Championship) in inglese.; 'Break my balls' va tradotto idiomaticamente senza essere troppo volgare (es: 'mi ha messo alla prova' o 'mi ha pungolato').; Non tradurre 'payday' come 'giorno di paga', usare 'compenso' o 'guadagno'.
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo è un aneddoto retrospettivo su un evento passato (WrestleMania 25), non una news attuale o una preview. Si classifica come Other o approfondimento storico/intervista.
+[PERF v71] analisi editoriale AI v72: 8.81s
+[SCORE v88.2] v88.2 cap feature storico numerico 54->45 - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot
+[SCORE] raffinato=45 priority=low | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, opinione generica, v62 titolo/championship, v66 cap opinion/commentary storyline, v68 cap duro opinion/commentary, v88.2 cap feature storico numerico 54->45
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 45/55 - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot
+[PERF v71] WP lookup URL esistente: 0.72s
+[BOT] Elaborazione: Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[BOT] semantic_id=joe-hendry-says-wwe-will-soon-release-an-album-of-his-original-songs
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=NXT (6) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta una dichiarazione di Joe Hendry su un progetto musicale futuro rivelato in un'intervista; è una news autonoma post-intervista.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Insight with Chris Van Vliet' come nome del podcast.; Tradurre 'drop' come 'pubblicato' o 'uscirà'.; Non tradurre titoli di canzoni come 'Can We Fire Logan Paul?'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=NXT (6) | L'articolo riporta una dichiarazione di Joe Hendry su un progetto musicale futuro rivelato in un'intervista; è una news autonoma post-intervista.
+[PERF v71] analisi editoriale AI v72: 1.21s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 57->54 - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, trash talk/clickbait forte, v62 titolo/championship, v88.2 cap OTHER/feature non-news 57->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[BOT] Elaborazione: John Cena Explains Intention Behind Eponymous WWE Event
+[BOT] semantic_id=john-cena-explains-intention-behind-eponymous-wwe-event
+[SCORE] iniziale=67 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=11, image=2, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=2, embed=1
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni recenti di John Cena su un evento futuro (John Cena Classic), trattandosi di news autonoma post-intervista e non di un annuncio o preview ufficiale dell'evento stesso.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'John Cena Classic' come 'Classico di John Cena'.; 'Eponymous' nel titolo si riferisce all'evento che porta il suo nome: rendere con 'l'evento che porta il suo nome'.; Mantenere i nomi dei wrestler e dei programmi (NXT, Saturday Night's Main Event).
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta dichiarazioni recenti di John Cena su un evento futuro (John Cena Classic), trattandosi di news autonoma post-intervista e non di un annuncio o preview ufficiale dell'evento stesso.
+[PERF v71] analisi editoriale AI v72: 1.29s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - John Cena Explains Intention Behind Eponymous WWE Event
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 62->54 - John Cena Explains Intention Behind Eponymous WWE Event
+[SCORE v88.3] v88.3 cap low-value market item 54->45 - John Cena Explains Intention Behind Eponymous WWE Event
+[SCORE] raffinato=45 priority=low | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, match/segmento annunciato, combo top name titolo + evento forte, PLE/PPV, v66 cap opinion/commentary storyline, v68 cap opinion senza news concreta, v77 cap low editorial value, v88.2 cap OTHER/feature non-news 62->54, v88.3 cap low-value market item 54->45
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - John Cena Explains Intention Behind Eponymous WWE Event
+[BOT] Raggiunto limite massimo candidati nuovi provati
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 12 candidati provati | mode=storm
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-23 13:42:34_summary.json -> published_html_review/run_2026-05-23 13-42-34_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (662 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
+===== RUN END [2026-05-23 13:42:34] VERSION [v90_2_4_2_report_artifacts_recovery (d44aa80)] =====
+
