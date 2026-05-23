@@ -12,6 +12,19 @@
     "updated_at": "1779552021.023142",
     "url": "https://www.ringsidenews.com/blake-monroe-makes-wwe-main-roster-debut-during-522-smackdown/"
   },
+  "https://www.ringsidenews.com/darby-allin-takes-brutal-shot-mjfs-hair-before-aew-double-nothing": {
+    "extra": {
+      "event_key": "event:title:darby-allin:world:double-or-nothing",
+      "raw_result": "skipped",
+      "semantic_id": "darby-allin-takes-brutal-shot-at-mjfs-hair-before-aew-double-or-nothing"
+    },
+    "reason": "skipped",
+    "score": 72,
+    "status": "rejected",
+    "title": "Darby Allin Takes Brutal Shot at MJF's Hair Before AEW Double or Nothing",
+    "updated_at": "1779563044.4471133",
+    "url": "https://www.ringsidenews.com/darby-allin-takes-brutal-shot-mjfs-hair-before-aew-double-nothing/"
+  },
   "https://www.ringsidenews.com/el-grande-americano-appears-aaa-serenata-event-ludwig-kaiser-arrest-controversy": {
     "extra": {
       "event_key": "",
@@ -38,6 +51,19 @@
     "updated_at": "1779552251.4286497",
     "url": "https://www.ringsidenews.com/espn-quietly-restores-aew-section-major-darby-allin-feature-before-double-nothing/"
   },
+  "https://www.ringsidenews.com/final-betting-odds-released-wwe-saturday-nights-main-event": {
+    "extra": {
+      "event_key": "",
+      "raw_result": "skipped",
+      "semantic_id": "final-betting-odds-released-for-wwe-saturday-nights-main-event"
+    },
+    "reason": "skipped",
+    "score": 40,
+    "status": "rejected",
+    "title": "Final Betting Odds Released for WWE Saturday Night's Main Event",
+    "updated_at": "1779563057.8406441",
+    "url": "https://www.ringsidenews.com/final-betting-odds-released-wwe-saturday-nights-main-event/"
+  },
   "https://www.ringsidenews.com/mance-warner-clears-confusion-indie-promotion-claimed-aew-pulled-him": {
     "extra": {
       "event_key": "event:business:tony-khan",
@@ -50,6 +76,19 @@
     "title": "Mance Warner Clears Up Confusion After Indie Promotion Claimed AEW Pulled Him",
     "updated_at": "1779552251.4040346",
     "url": "https://www.ringsidenews.com/mance-warner-clears-confusion-indie-promotion-claimed-aew-pulled-him/"
+  },
+  "https://www.ringsidenews.com/mark-jindrak-says-wwe-stars-complaining-about-wrestlemania-weekend-fan-incidents-should-grateful": {
+    "extra": {
+      "event_key": "",
+      "raw_result": "skipped",
+      "semantic_id": "mark-jindrak-says-wwe-stars-complaining-about-wrestlemania-weekend-fan-incidents-should-be-grateful"
+    },
+    "reason": "skipped",
+    "score": 54,
+    "status": "rejected",
+    "title": "Mark Jindrak Says WWE Stars Complaining About WrestleMania Weekend Fan Incidents Should Be Grateful",
+    "updated_at": "1779563057.816217",
+    "url": "https://www.ringsidenews.com/mark-jindrak-says-wwe-stars-complaining-about-wrestlemania-weekend-fan-incidents-should-grateful/"
   },
   "https://www.ringsidenews.com/vince-mcmahon-would-allegedly-forget-his-own-instructions-explode-backstage-wwe": {
     "extra": {

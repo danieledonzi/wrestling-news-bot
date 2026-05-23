@@ -2310,3 +2310,130 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
 ===== RUN END [2026-05-23 17:33:16] VERSION [v90_2_5_1_processed_skip_recorder (5082c24)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show=smackdown
+[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard
+[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.1] Report dedupe protection attiva: true-results usa solo report gate stretto
+[MODEL v90.2.2] translate_report chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-pro
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.3] Social embed quote positioning attivo
+[BOOT v90.2.3.1] Inline image dict normalization attiva in v88_media_record
+[BOOT v90.2.4] Offline pending hard-skip guard attiva
+[BOOT v90.2.4.1] Report hard-title guard attiva
+[BOOT v90.2.4.2] Report artifacts/casing recovery attiva
+[BOOT v90.2.5] Processed URL hard-skip attivo
+[BOOT v90.2.5.1] Processed URL skip recorder attivo
+
+===== RUN START [2026-05-23 19:03:52] VERSION [v90_2_5_1_processed_skip_recorder (4922759)] =====
+[PROCESSED v90.2.5] Loaded processed URL records: 14
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (20/75): Joe Hendry Names WWE Hall Of Famer As His Biggest Wrestling Inspiration
+[SKIP] Score sotto soglia editoriale (20/75): Nigel McGuinness Compares Experiences Doing Commentary For AEW Vs. WWE
+[SCORE v88.3] v88.3 hard feature skip cap 60->45 - JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177021/wwe-wrestlemania-41-joe-hendry-randy-orton-kurt-angle-early-career-milestone/
+[SKIP] Score sotto soglia editoriale (27/75): Trick Williams Discusses Difficulties Of Moving From Football To WWE
+[SKIP] Score sotto soglia editoriale (20/75): AEW & ROH Star Bandido Names Biggest Wrestling Inspirations, Including WWE HOFer
+[SKIP] Score sotto soglia editoriale (20/75): Joe Hendry Explains Why WWE NXT Was Among The 'Most Difficult Challenges' He's Faced
+[SKIP] Score sotto soglia editoriale (38/75): Eddie Guerrero's Daughter Hopes To Pay Tribute In Debut Match
+[SCORE v81.1] Cap light name-driven item 20->20 - WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 73->54 - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176092/wwe-hofer-eric-bischoff-reflects-working-late-ted-turner/
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026 Predictions: Wrestling Inc. Picks The Winners
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Bully Ray Has 'Zero Interest' In One Potential AEW All In Main Event
+[SKIP] Score sotto soglia editoriale (54/75): Bully Ray Has 'Zero Interest' In One Potential AEW All In Main Event
+[SKIP] Score sotto soglia editoriale (32/75): AEW's Harley Cameron Details The Process Of Learning To Wrestle On Live TV
+[REPORT v87.2] Report confermato da history forte: report:wwe-smackdown-2026-05-22
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-smackdown-2026-05-22 - WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026: Draws & Duds
+[SKIP] Score sotto soglia editoriale (0/75): WWE Saturday Night's Main Event 5/23/2026 Predictions: Wrestling Inc. Picks The Winners
+[SKIP] Score sotto soglia editoriale (27/75): Eric Bischoff Compares Late Ted Turner To Vince McMahon: 'Very Similar People'
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SCORE v86.9] Cap commentary/opinion 71->68 - Mark Jindrak Says WWE Stars Complaining About WrestleMania Weekend Fan Incidents Should Be Grateful
+[SKIP] Score sotto soglia editoriale (5/75): Ash By Elegance Celebrates Memorial Day With Champagne Bikini Video
+[SKIP] Score sotto soglia editoriale (0/75): Donald Trump Accidentally Calls Hulk Hogan 'The Huckster' in Truth Social Post
+[SKIP] Score sotto soglia editoriale (51/75): Roman Reigns Contract Signing & Oba Femi Appearance Set for May 25 WWE RAW
+[SKIP] Preview/show announcement scaduta: WWE Saturday Night's Main Event Seeing Strong Ticket Momentum Before Tonight's Show
+[SCORE v88.3] v88.3 cap low-value market item 84->45 - Final Betting Odds Released for WWE Saturday Night's Main Event
+[SKIP] URL già in history: https://www.ringsidenews.com/cm-punks-wwe-return-status-gets-major-update-amid-tv-absence/
+[SKIP] Score sotto soglia editoriale (57/75): Mika Rotunda Pens Emotional Tribute to Bray Wyatt on His Birthday
+[SKIP] Score sotto soglia editoriale (0/75): Jordynne Grace Passes FAA Airman Knowledge Test During Pilot Training Journey
+[SKIP] Score sotto soglia editoriale (27/75): Thekla Explains Why She'll Never Be a Babyface in AEW
+[SCORE v80.4] AAA major World priority 53->72 - El Grande Americano Appears at AAA Serenata Event After Ludwig Kaiser Arrest Controversy
+[SKIP] Score sotto soglia editoriale (28/75): New York Mayor Zohran Mamdani Receives Invitation to AEW Double or Nothing
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tony-khan - Mance Warner Clears Up Confusion After Indie Promotion Claimed AEW Pulled Him
+[SCORE] 72 medium - Darby Allin Takes Brutal Shot at MJF's Hair Before AEW Double or Nothing | AEW, impatto roster/storyline, titolo/championship, PLE/PPV, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.571, v48 tier2: 55-74
+[SCORE] 69 medium - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, PLE/PPV, v71 freshness=0.534, v48 tier2: 55-74
+[SCORE] 68 medium - WWE's Current Stance on Ethan Page Ahead of IC Title Match at Saturday Night's Main Event | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.523, v48 tier2: 55-74
+[SCORE] 67 medium - El Grande Americano Appears at AAA Serenata Event After Ludwig Kaiser Arrest Controversy | altre promotion, evento legale/controversia, v62 evento legale grave, v80.4 AAA major World priority 53->72, v71 source reliability soft penalty, v71 freshness=0.645, v48 tier2: 55-74
+[SCORE] 63 medium - Mark Jindrak Says WWE Stars Complaining About WrestleMania Weekend Fan Incidents Should Be Grateful | WWE/main roster, WWE main roster + storyline/evento, evento legale/controversia, PLE/PPV, v86.9 cap commentary/opinion 71->68, v71 source reliability soft penalty, v71 freshness=0.578, v48 tier2: 55-74
+[SCORE] 54 low - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v62 titolo/championship, v88.2 cap OTHER/feature non-news 73->54, v71 freshness=0.534, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - Mance Warner Clears Up Confusion After Indie Promotion Claimed AEW Pulled Him | AEW, impatto roster/storyline, v62 media rights/streaming, v71 source reliability soft penalty, v71 freshness=0.517, v48 tier3: 45-54 contestuale
+[SCORE] 45 low - JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule | WWE/main roster, intervista/opinione, v62 corporate/business, v62 categoria business, v88.3 hard feature skip cap 60->45, v71 freshness=0.578, v48 tier3: 45-54 contestuale
+[SCORE] 40 low - Final Betting Odds Released for WWE Saturday Night's Main Event | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v62 titolo/championship, v88.3 cap low-value market item 84->45, v71 source reliability soft penalty, v71 freshness=0.684, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 9 | mode=normal | max nuove=3 | pending pubblicati=0
+[SOFTPOOL v90.2] Aggiunta: score=72 core=title:darby-allin:status reason=update_gate:medium_followup_or_weak_update title=Darby Allin Takes Brutal Shot at MJF's Hair Before AEW Double or Nothing
+[SKIP v90.2] Follow-up in soft_pool core=title:darby-allin:status score=72 reason=medium_followup_or_weak_update novel=[] - Darby Allin Takes Brutal Shot at MJF's Hair Before AEW Double or Nothing
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - WWE's Current Stance on Ethan Page Ahead of IC Title Match at Saturday Night's Main Event
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - El Grande Americano Appears at AAA Serenata Event After Ludwig Kaiser Arrest Controversy
+[PERF v71] WP lookup URL esistente: 0.80s
+[BOT] Elaborazione: Mark Jindrak Says WWE Stars Complaining About WrestleMania Weekend Fan Incidents Should Be Grateful
+[BOT] semantic_id=mark-jindrak-says-wwe-stars-complaining-about-wrestlemania-weekend-fan-incidents-should-be-grateful
+[SCORE] iniziale=63 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/mark-jindrak-says-wwe-stars-complaining-about-wrestlemania-weekend-fan-incidents-should-grateful/
+[PERF v71] scraping articolo: 2.22s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=20, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/mark-jindrak-says-wwe-stars-complaining-about-wrestlemania-weekend-fan-incidents-should-grateful/
+[BLOCKSEQ] Blocchi ordinati estratti: text=20, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.80s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta l'opinione di un ex wrestler su fatti accaduti, non si tratta di news autonoma o report.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (WrestleMania) in inglese.; Tradurre 'getting over' con espressioni tecniche come 'essere over' o 'entrare in sintonia col pubblico'.; Non tradurre 'hanging your head on' letteralmente, ma con 'andarne fieri/orgogliosi'.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta l'opinione di un ex wrestler su fatti accaduti, non si tratta di news autonoma o report.
+[PERF v71] analisi editoriale AI v72: 9.33s
+[SCORE] raffinato=54 priority=low | WWE/main roster, WWE main roster + storyline/evento, breaking/major update, PLE/PPV, v62 reazioni/tributi, v77 cap low editorial value, v72.3 cap opinion
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Mark Jindrak Says WWE Stars Complaining About WrestleMania Weekend Fan Incidents Should Be Grateful
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Mance Warner Clears Up Confusion After Indie Promotion Claimed AEW Pulled Him
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule
+[SKIP v88.3] Item low-value market escluso: Final Betting Odds Released for WWE Saturday Night's Main Event
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 9 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-23 19:03:52_summary.json -> published_html_review/run_2026-05-23 19-03-52_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (675 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-23 19:03:52] VERSION [v90_2_5_1_processed_skip_recorder (4922759)] =====
+

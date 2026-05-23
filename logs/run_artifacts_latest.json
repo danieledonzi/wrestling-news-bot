@@ -1,22 +1,12 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-23 17:33:16",
-  "bot_version": "v90_2_5_1_processed_skip_recorder (5082c24)",
-  "git_sha": "5082c241e9f29e1e7c50862b76e2e388b39d5488",
-  "created_at": "2026-05-23T17:34:16",
-  "published_count": 1,
-  "published_post_ids": [
-    "5189"
-  ],
-  "published_artifacts": [
-    {
-      "post_id": 5189,
-      "title": "[SPOILER] WWE: la situazione sul ritorno in TV di CM Punk",
-      "source_url": "https://www.ringsidenews.com/cm-punks-wwe-return-status-gets-major-update-amid-tv-absence/",
-      "html_file": "published/20260523_173413_001_spoiler-wwe-la-situazione-sul-ritorno-in-tv-di-cm-punk_5189_final.html",
-      "metadata_file": "published/20260523_173413_001_spoiler-wwe-la-situazione-sul-ritorno-in-tv-di-cm-punk_5189_metadata.json"
-    }
-  ],
+  "run_id": "2026-05-23 19:03:52",
+  "bot_version": "v90_2_5_1_processed_skip_recorder (4922759)",
+  "git_sha": "49227599d37711a89b8e863219a0e752ab197bf0",
+  "created_at": "2026-05-23T19:04:18",
+  "published_count": 0,
+  "published_post_ids": [],
+  "published_artifacts": [],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",
