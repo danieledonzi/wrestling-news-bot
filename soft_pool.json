@@ -52,5 +52,14 @@
     "core": "title:darby-allin:status",
     "reason": "update_gate:medium_followup_or_weak_update",
     "ttl_hours": 8
+  },
+  {
+    "created_at": "2026-05-23T23:32:37",
+    "title": "Skye Blue Roasts MJF Over Potentially Going Bald at AEW Double or Nothing",
+    "url": "https://www.ringsidenews.com/skye-blue-roasts-mjf-potentially-going-bald-aew-double-nothing/",
+    "score": 46,
+    "core": "title:darby-allin:status",
+    "reason": "update_gate:medium_followup_or_weak_update",
+    "ttl_hours": 8
   }
 ]

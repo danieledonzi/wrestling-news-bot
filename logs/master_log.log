@@ -2889,3 +2889,298 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-23 22:13:58] VERSION [v90_2_5_1_processed_skip_recorder (b6ba08a)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show=collision
+[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard
+[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.1] Report dedupe protection attiva: true-results usa solo report gate stretto
+[MODEL v90.2.2] translate_report chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-pro
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.3] Social embed quote positioning attivo
+[BOOT v90.2.3.1] Inline image dict normalization attiva in v88_media_record
+[BOOT v90.2.4] Offline pending hard-skip guard attiva
+[BOOT v90.2.4.1] Report hard-title guard attiva
+[BOOT v90.2.4.2] Report artifacts/casing recovery attiva
+[BOOT v90.2.5] Processed URL hard-skip attivo
+[BOOT v90.2.5.1] Processed URL skip recorder attivo
+
+===== RUN START [2026-05-23 23:28:40] VERSION [v90_2_5_1_processed_skip_recorder (5b27d65)] =====
+[PROCESSED v90.2.5] Loaded processed URL records: 18
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (20/75): Nigel McGuinness Compares Experiences Doing Commentary For AEW Vs. WWE
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v88.3] v88.3 hard feature skip cap 60->45 - JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tko-financials - JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177021/wwe-wrestlemania-41-joe-hendry-randy-orton-kurt-angle-early-career-milestone/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE's Kit Wilson Teases 'Different' Version Of Pretty Deadly If Elton Prince Returns
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (27/75): Trick Williams Discusses Difficulties Of Moving From Football To WWE
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): AEW & ROH Star Bandido Names Biggest Wrestling Inspirations, Including WWE HOFer
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (20/75): Joe Hendry Explains Why WWE NXT Was Among The 'Most Difficult Challenges' He's Faced
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v81.1] Cap light name-driven item 20->20 - WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] URL già in history: https://www.wrestlinginc.com/2178404/aew-mjf-new-day-kofi-kingston-xavier-woods-austin-creed-incredible-additions/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 73->54 - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176092/wwe-hofer-eric-bischoff-reflects-working-late-ted-turner/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026 Predictions: Wrestling Inc. Picks The Winners
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (26/75): AEW's Harley Cameron Details The Process Of Learning To Wrestle On Live TV
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v81.1] Cap light name-driven item 50->50 - AEW Star Bandido Recalls 'Amazing' World Title Feud That Inspired New Confidence
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 50/55 - AEW Star Bandido Recalls 'Amazing' World Title Feud That Inspired New Confidence
+[SKIP] Score sotto soglia editoriale (50/75): AEW Star Bandido Recalls 'Amazing' World Title Feud That Inspired New Confidence
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - FTR Says Edge & Christian Had Weak Competition Compared to Them
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Anthony Bowens Claims AEW Would Sell Out Madison Square Garden
+[SKIP] Score sotto soglia editoriale (9/75): Anthony Bowens Claims AEW Would Sell Out Madison Square Garden
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Former Undertaker Podcast Co-Host Addresses Michelle McCool Backlash
+[SKIP] Score sotto soglia editoriale (49/75): Former Undertaker Podcast Co-Host Addresses Michelle McCool Backlash
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v81.1] NO: future card/segment announcement non-spoiler - WWE Saturday Night's Main Event Spoiler Lineup for May 23, 2026: Full Match Card and Backstage Notes Revealed
+[SCORE v81.1] Cap future card announcement 55->55 - WWE Saturday Night's Main Event Spoiler Lineup for May 23, 2026: Full Match Card and Backstage Notes Revealed
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[SCORE v79.1.2] Spoiler validato: floor 56->75 - Spoiler: Closing Match for May 23 WWE Saturday Night's Main Event Revealed
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 75->54 - Spoiler: Closing Match for May 23 WWE Saturday Night's Main Event Revealed
+[SKIP] Score sotto soglia editoriale (49/75): Spoiler: Closing Match for May 23 WWE Saturday Night's Main Event Revealed
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[SKIP] Preview/show announcement scaduta: Spoiler: Opening Mach for May 23 WWE Saturday Night's Main Event Revealed
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - GUNTHER Says Italian Crowd Could Turn Him Babyface Against Cody Rhodes
+[SKIP] Score sotto soglia editoriale (49/75): GUNTHER Says Italian Crowd Could Turn Him Babyface Against Cody Rhodes
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (36/75): Tony Khan Hints at New AEW Pay-Per-View After Redemption Report
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (0/75): Jey Uso Fires Back at Backlash Over "Best World Entertainment Wrestler" Claim
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SCORE v86.9] Cap commentary/opinion 71->68 - Mark Jindrak Says WWE Stars Complaining About WrestleMania Weekend Fan Incidents Should Be Grateful
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (5/75): Ash By Elegance Celebrates Memorial Day With Champagne Bikini Video
+[SCORE] 97 high - Triple H & Becky Lynch Hammer Out Last-Minute Details Backstage Before Saturday Night's Main Event | WWE/main roster, top star titolo: becky lynch, nomi forti titolo: triple h, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v71 freshness=0.57
+[SCORE] 88 high - WWE's Kit Wilson Teases 'Different' Version Of Pretty Deadly If Elton Prince Returns | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, v62 ritorno/debutto, v71 freshness=0.696
+[SCORE] 80 high - WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.604
+[SCORE] 69 medium - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, PLE/PPV, v71 freshness=0.479, v48 tier2: 55-74
+[SCORE] 63 medium - Kit Wilson Says Future Pretty Deadly Reunion Would Be "More Mature" | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, v71 source reliability soft penalty, v71 freshness=0.672, v48 tier2: 55-74
+[SCORE] 63 medium - Mark Jindrak Says WWE Stars Complaining About WrestleMania Weekend Fan Incidents Should Be Grateful | WWE/main roster, WWE main roster + storyline/evento, evento legale/controversia, PLE/PPV, v86.9 cap commentary/opinion 71->68, v71 source reliability soft penalty, v71 freshness=0.523, v48 tier2: 55-74
+[SCORE] 54 low - WWE Drops Danhausen x New York Knicks Merch After Team's Playoff Surge | WWE/main roster, nomi forti titolo: danhausen, impatto roster/storyline, release/addio, v71 source reliability soft penalty, v71 freshness=0.68, v48 tier3: 45-54 contestuale
+[SCORE] 54 low - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v62 titolo/championship, v88.2 cap OTHER/feature non-news 73->54, v71 freshness=0.479, v48 tier3: 45-54 contestuale
+[SCORE] 50 low - WWE Saturday Night's Main Event Spoiler Lineup for May 23, 2026: Full Match Card and Backstage Notes Revealed | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, floor WWE main roster storyline, v81.1 cap future card announcement 55->55, v71 source reliability soft penalty, v71 freshness=0.56, v48 tier3: 45-54 contestuale
+[SCORE] 46 low - Skye Blue Roasts MJF Over Potentially Going Bald at AEW Double or Nothing | AEW, PLE/PPV, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.535, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 1 news >=90, 3 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 2
+[PERF v71] WP lookup URL esistente: 0.82s
+[REPORT v88] True-results confermato da WordPress per URL (5165): report:wwe-smackdown-2026-05-22
+[REPORT v87.2] Report confermato in history forte: report:wwe-smackdown-2026-05-22 (wp_confirm_runtime)
+[PENDING] Coda salvata: 1 elementi
+[PENDING] Coda salvata: 1 elementi
+[PENDING v88] Rimosso true-results confermato dalla pending: report:wwe-smackdown-2026-05-22
+[REPORT v86.8] Pending true-results già confermato su WordPress: rimuovo report:wwe-smackdown-2026-05-22
+[PENDING] Coda salvata: 1 elementi
+[PENDING] Coda salvata: 1 elementi
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - WWE's Kit Wilson Teases 'Different' Version Of Pretty Deadly If Elton Prince Returns
+[BOT] News candidate totali: 13 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: Triple H & Becky Lynch Hammer Out Last-Minute Details Backstage Before Saturday Night's Main Event
+[BOT] semantic_id=triple-h-becky-lynch-hammer-out-last-minute-details-backstage-before-saturday-nights-main-event
+[SCORE] iniziale=97 priority=high
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/triple-h-becky-lynch-hammer-out-last-minute-details-backstage-before-saturday-nights-main-event/
+[PERF v71] scraping articolo: 1.22s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=7, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/triple-h-becky-lynch-hammer-out-last-minute-details-backstage-before-saturday-nights-main-event/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.85s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo prepara il pubblico al Saturday Night's Main Event citando match annunciati e dettagli pre-show, rientrando pienamente nella definizione di PREVIEW. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Gorilla Position': mantenere il termine tecnico.; Tradurre 'WWE Women's IC Champion' come 'Campionessa Intercontinentale WWE'.; 'Hammer out details' va reso come 'definire gli ultimi dettagli', non letteralmente.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo prepara il pubblico al Saturday Night's Main Event citando match annunciati e dettagli pre-show, rientrando pienamente nella definizione di PREVIEW. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 17.19s
+[SCORE] raffinato=0 priority=skip | WWE/main roster, top star titolo: becky lynch, nomi forti titolo: triple h, impatto roster/storyline, WWE main roster + storyline/evento, breaking/major update, PLE/PPV, v62 titolo/championship, v66 blocco politica/volgarita non wrestling, v81.1 cap future card announcement 0->0
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 0/75 - Triple H & Becky Lynch Hammer Out Last-Minute Details Backstage Before Saturday Night's Main Event
+[SKIP v78.1] Gia processato in questa run: WWE's Kit Wilson Teases 'Different' Version Of Pretty Deadly If Elton Prince Returns
+[PENDING] Coda salvata: 0 elementi
+[PERF v71] WP lookup URL esistente: 0.77s
+[BOT] Elaborazione: WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More
+[BOT] semantic_id=wwe-saturday-nights-main-event-results-523-three-championships-on-the-line-more
+[SCORE] iniziale=80 priority=high
+[SCRAPE] Articolo results rilevato: testo completo (3314 caratteri)
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[PERF v71] WP strict report lookup: 1.75s
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot
+[BOT] Elaborazione: Kit Wilson Says Future Pretty Deadly Reunion Would Be "More Mature"
+[BOT] semantic_id=kit-wilson-says-future-pretty-deadly-reunion-would-be-more-mature
+[SCORE] iniziale=63 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/kit-wilson-says-future-pretty-deadly-reunion-would-more-mature/
+[PERF v71] scraping articolo: 1.14s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=11, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/kit-wilson-says-future-pretty-deadly-reunion-would-more-mature/
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.66s
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | Articolo basato su un'intervista rilasciata da un wrestler su una potenziale reunion futura; non è una preview di eventi né un rumor su piani concreti, ma una dichiarazione su uno stato attuale.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Pretty Deadly' (nome team).; Tradurre 'neck fusion surgery' come 'intervento di fusione cervicale'.; 'Flashy act' va reso come 'personaggi appariscenti/eccentrici', non calco letterale.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Articolo basato su un'intervista rilasciata da un wrestler su una potenziale reunion futura; non è una preview di eventi né un rumor su piani concreti, ma una dichiarazione su uno stato attuale.
+[PERF v71] analisi editoriale AI v72: 1.19s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Kit Wilson Says Future Pretty Deadly Reunion Would Be "More Mature"
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, PLE/PPV, v62 infortunio/operazione, v62 cap injury/intervista, v66 cap opinion/commentary storyline, v76 cap death/funeral storyline-comedy
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Kit Wilson Says Future Pretty Deadly Reunion Would Be "More Mature"
+[V71] story_signature=stable:kit_wilson_says_future_pretty_deadly_reunion_would_be|more_mature|injury|wwe semantic_status=new_story freshness=0.788
+[PERF v71] WP recent posts dedupe: 0.88s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.20s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=11
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 22.54s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Kit Wilson su una futura reunion dei Pretty Deadly: "Sarebbe una versione più matura"
+[PERF v71] WP strict report lookup: 1.66s
+[EMBED v87.3] Canonicalizzati/deduplicati embed nel body: 1
+[EMBED v87.3] Positional embed guard applicato: 1 modifiche
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/kit-wilson-says-future-pretty-deadly-reunion-would-be-more-mature-28.jpg
+[MEDIA] Immagine caricata: 5194
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260523_233144_001_kit-wilson-su-una-futura-reunion-dei-pretty-deadly-sarebbe-una-versione-più-matura_5195_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5195
+[PROCESSED v90.2.5] Publish result non conclusivo: non marco URL published
+[PERF v71] creazione post WordPress: 10.57s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/kit-wilson-says-future-pretty-deadly-reunion-would-be-more-mature-28.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5194
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Kit Wilson Says Future Pretty Deadly Reunion Would Be "More ': 37.87s
+[OK] Pubblicato: Kit Wilson su una futura reunion dei Pretty Deadly: "Sarebbe una versione più matura"
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260523_233145_001_kit-wilson-su-una-futura-reunion-dei-pretty-deadly-sarebbe-una-versione-pi-matur_01dbff39_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Kit Wilson su una futura reunion dei Pretty Deadly: "Sarebbe una versione più matura"
+[PUBLISHED REVIEW v87.1] Review outer salvata: Kit Wilson su una futura reunion dei Pretty Deadly: "Sarebbe una versione più matura"
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Mark Jindrak Says WWE Stars Complaining About WrestleMania Weekend Fan Incidents Should Be Grateful
+[BOT] Elaborazione: WWE Drops Danhausen x New York Knicks Merch After Team's Playoff Surge
+[BOT] semantic_id=wwe-drops-danhausen-x-new-york-knicks-merch-after-teams-playoff-surge
+[SCORE] iniziale=54 priority=low
+[PERF v71] scraping articolo: 0.90s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=11, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.60s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta il lancio di una linea di merchandise già avvenuto. Non è una preview ma una notizia di costume legata al wrestling.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Danhausen' e 'Knicks' invariati.; Tradurre 'merch' come 'merchandise'.; Evitare calchi su 'uncursed/curse': usare 'maledizione'/'togliere la maledizione'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta il lancio di una linea di merchandise già avvenuto. Non è una preview ma una notizia di costume legata al wrestling.
+[PERF v71] analisi editoriale AI v72: 1.82s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE Drops Danhausen x New York Knicks Merch After Team's Playoff Surge
+[SCORE] raffinato=92 priority=high | WWE/main roster, nomi forti titolo: danhausen, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV
+[V71] story_signature=stable:danhausen|wwe_drops_danhausen|new_york_knicks_merch_after_team|status|wwe semantic_status=new_story freshness=0.68
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=11
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 37.58s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/danhausen-shows-up-at-knicks-playoff-game-after-cursing-cavaliers-35.jpg
+[MEDIA] Immagine caricata: 5197
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260523_233236_002_wwe-lanciato-il-merchandising-di-danhausen-in-collaborazione-con-i-new-york-knicks_5198_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5198
+[PROCESSED v90.2.5] Publish result non conclusivo: non marco URL published
+[PERF v71] creazione post WordPress: 8.96s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/danhausen-shows-up-at-knicks-playoff-game-after-cursing-cavaliers-35.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5197
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'WWE Drops Danhausen x New York Knicks Merch After Team's Pla': 50.75s
+[OK] Pubblicato: WWE: lanciato il merchandising di Danhausen in collaborazione con i New York Knicks
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260523_233237_002_wwe-lanciato-il-merchandising-di-danhausen-in-collaborazione-con-i-new-york-knic_9e07db22_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WWE: lanciato il merchandising di Danhausen in collaborazione con i New York Knicks
+[PUBLISHED REVIEW v87.1] Review outer salvata: WWE: lanciato il merchandising di Danhausen in collaborazione con i New York Knicks
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[SKIP v86.6/legacy] low_score_pre_gemini:50: WWE Saturday Night's Main Event Spoiler Lineup for May 23, 2026: Full Match Card and Backstage Notes Revealed
+[PENDING] Coda salvata: 0 elementi
+[SOFTPOOL v90.2] Aggiunta: score=46 core=title:darby-allin:status reason=update_gate:medium_followup_or_weak_update title=Skye Blue Roasts MJF Over Potentially Going Bald at AEW Double or Nothing
+[SKIP v90.2] Follow-up in soft_pool core=title:darby-allin:status score=46 reason=medium_followup_or_weak_update novel=[] - Skye Blue Roasts MJF Over Potentially Going Bald at AEW Double or Nothing
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP v86.6/legacy] low_score_pre_gemini:42: FTR Says Edge & Christian Had Weak Competition Compared to Them
+[PENDING] Coda salvata: 0 elementi
+[BOT] Pubblicati 2 articoli (0 pending + 2 nuove) su 13 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-23 23:28:40_summary.json -> published_html_review/run_2026-05-23 23-28-40_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (688 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
+===== RUN END [2026-05-23 23:28:40] VERSION [v90_2_5_1_processed_skip_recorder (5b27d65)] =====
+

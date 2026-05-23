@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-23 22:13:58",
-  "last_bot_version": "v90_2_5_1_processed_skip_recorder (b6ba08a)",
-  "updated_at": "2026-05-23T22:15:53",
-  "total_items": 177,
+  "last_run_id": "2026-05-23 23:28:40",
+  "last_bot_version": "v90_2_5_1_processed_skip_recorder (5b27d65)",
+  "updated_at": "2026-05-23T23:32:37",
+  "total_items": 179,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1420,6 +1420,22 @@
       "original_html_file": "20260523_211521_001_mjf-kofi-kingston-e-xavier-woods-sarebbero-ottimi-innesti-per-la-aew_84851820_original.html",
       "final_html_file": "20260523_211521_001_mjf-kofi-kingston-e-xavier-woods-sarebbero-ottimi-innesti-per-la-aew_84851820_final.html",
       "metadata_file": "20260523_211521_001_mjf-kofi-kingston-e-xavier-woods-sarebbero-ottimi-innesti-per-la-aew_84851820_metadata.json"
+    },
+    {
+      "run_id": "2026-05-23 23:28:40",
+      "title": "Kit Wilson su una futura reunion dei Pretty Deadly: \"Sarebbe una versione più matura\"",
+      "url": "https://www.ringsidenews.com/kit-wilson-says-future-pretty-deadly-reunion-would-more-mature/",
+      "original_html_file": "20260523_233145_001_kit-wilson-su-una-futura-reunion-dei-pretty-deadly-sarebbe-una-versione-pi-matur_01dbff39_original.html",
+      "final_html_file": "20260523_233145_001_kit-wilson-su-una-futura-reunion-dei-pretty-deadly-sarebbe-una-versione-pi-matur_01dbff39_final.html",
+      "metadata_file": "20260523_233145_001_kit-wilson-su-una-futura-reunion-dei-pretty-deadly-sarebbe-una-versione-pi-matur_01dbff39_metadata.json"
+    },
+    {
+      "run_id": "2026-05-23 23:28:40",
+      "title": "WWE: lanciato il merchandising di Danhausen in collaborazione con i New York Knicks",
+      "url": "https://www.ringsidenews.com/wwe-drops-danhausen-x-new-york-knicks-merch-teams-playoff-surge/",
+      "original_html_file": "20260523_233237_002_wwe-lanciato-il-merchandising-di-danhausen-in-collaborazione-con-i-new-york-knic_9e07db22_original.html",
+      "final_html_file": "20260523_233237_002_wwe-lanciato-il-merchandising-di-danhausen-in-collaborazione-con-i-new-york-knic_9e07db22_final.html",
+      "metadata_file": "20260523_233237_002_wwe-lanciato-il-merchandising-di-danhausen-in-collaborazione-con-i-new-york-knic_9e07db22_metadata.json"
     }
   ]
 }
