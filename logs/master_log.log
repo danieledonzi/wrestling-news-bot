@@ -1862,3 +1862,170 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-23 16:00:09] VERSION [v90_2_5_processed_url_hardskip (63eff89)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show=smackdown
+[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard
+[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.1] Report dedupe protection attiva: true-results usa solo report gate stretto
+[MODEL v90.2.2] translate_report chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-pro
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.3] Social embed quote positioning attivo
+[BOOT v90.2.3.1] Inline image dict normalization attiva in v88_media_record
+[BOOT v90.2.4] Offline pending hard-skip guard attiva
+[BOOT v90.2.4.1] Report hard-title guard attiva
+[BOOT v90.2.4.2] Report artifacts/casing recovery attiva
+[BOOT v90.2.5] Processed URL hard-skip attivo
+
+===== RUN START [2026-05-23 16:03:05] VERSION [v90_2_5_processed_url_hardskip (aba378d)] =====
+[PROCESSED v90.2.5] Loaded processed URL records: 9
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SCORE v81.1] Cap light name-driven item 74->74 - Joe Hendry Compares WWE WrestleMania Match With Randy Orton To Early Career Milestone
+[SKIP] Score sotto soglia editoriale (27/75): Trick Williams Discusses Difficulties Of Moving From Football To WWE
+[SKIP] Score sotto soglia editoriale (20/75): AEW & ROH Star Bandido Names Biggest Wrestling Inspirations, Including WWE HOFer
+[SKIP] Score sotto soglia editoriale (20/75): Joe Hendry Explains Why WWE NXT Was Among The 'Most Difficult Challenges' He's Faced
+[SCORE v81.1] Cap light name-driven item 20->20 - WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 73->54 - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176092/wwe-hofer-eric-bischoff-reflects-working-late-ted-turner/
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026 Predictions: Wrestling Inc. Picks The Winners
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (32/75): AEW's Harley Cameron Details The Process Of Learning To Wrestle On Live TV
+[REPORT v87.2] Report confermato da history forte: report:wwe-smackdown-2026-05-22
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-smackdown-2026-05-22 - WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026: Draws & Duds
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Ex-NXT Star Blake Monroe Makes Main Roster Debut In WWE SmackDown Backstage Segment
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP] Score sotto soglia editoriale (48/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (27/75): Thekla Explains Why She'll Never Be a Babyface in AEW
+[SCORE v80.4] AAA major World priority 53->72 - El Grande Americano Appears at AAA Serenata Event After Ludwig Kaiser Arrest Controversy
+[SKIP] Score sotto soglia editoriale (28/75): New York Mayor Zohran Mamdani Receives Invitation to AEW Double or Nothing
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:business:tony-khan - Mance Warner Clears Up Confusion After Indie Promotion Claimed AEW Pulled Him
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - JBL Says Baron Corbin Would Be a Great Asset to WWE Amid Return Rumors
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - JBL Says Baron Corbin Would Be a Great Asset to WWE Amid Return Rumors
+[SKIP] Score sotto soglia editoriale (49/75): JBL Says Baron Corbin Would Be a Great Asset to WWE Amid Return Rumors
+[SKIP] URL già in history: https://www.ringsidenews.com/tony-khan-100-confident-paramount-will-keep-aew-wbd-merger-goes-through/
+[PERF v71] WP lookup URL esistente: 0.86s
+[PERF v71] WP lookup event_key: 1.82s
+[FIX] Event key in history ma non confermata su WordPress: event:business:vince-mcmahon - provo a pubblicare
+[SKIP] Score sotto soglia editoriale (0/75): Disco Inferno Calls Mick Foley an Idiot for Cutting Ties With WWE Over Donald Trump Association
+[SCORE v80.4] AAA major World priority 37->72 - AAA Lucha Libre on FOX Preview for May 23, 2026: Confirmed Matches, Start Time and How to Watch
+[SCORE v81.1] Cap future card announcement 72->72 - AAA Lucha Libre on FOX Preview for May 23, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (67/75): AAA Lucha Libre on FOX Preview for May 23, 2026: Confirmed Matches, Start Time and How to Watch
+[SKIP] URL già in history: https://www.ringsidenews.com/tyler-breeze-addresses-future-upupdowndown-xavier-woods-wwe-exit/
+[SCORE v81.1] Cap future card announcement 56->56 - WWE Saturday Night's Main Event Preview for May 23, 2026: Confirmed Matces, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (51/75): WWE Saturday Night's Main Event Preview for May 23, 2026: Confirmed Matces, Start Time and How to Watch
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown
+[FRESHNESS v86.6/legacy] Post-show outcome rescue: non tratto come preview scaduta - Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown
+[SKIP] Preview/show announcement scaduta: WWE Reveals First Clash in Italy Matches Airing on ESPN
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 70->54 - ESPN Quietly Restores AEW Section With Major Darby Allin Feature Before Double or Nothing
+[PERF v71] WP lookup event_key: 1.26s
+[FIX] Event key in history ma non confermata su WordPress: event:business:darby-allin - provo a pubblicare
+[SCORE] 96 high - Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v71 freshness=0.531
+[SCORE] 96 high - Ex-NXT Star Blake Monroe Makes Main Roster Debut In WWE SmackDown Backstage Segment | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v71 freshness=0.562
+[SCORE] 74 medium - Joe Hendry Compares WWE WrestleMania Match With Randy Orton To Early Career Milestone | WWE/main roster, top star titolo: randy orton, WWE main roster + storyline/evento, intervista/opinione, PLE/PPV, opinione generica, v81.1 cap light name-driven item 74->74, v71 freshness=0.609, v48 tier2: 55-74
+[SCORE] 74 medium - Vince McMahon Would Allegedly Forget His Own Instructions and Explode Backstage in WWE | WWE/main roster, WWE main roster + storyline/evento, rumor/backstage, PLE/PPV, v62 categoria business, v71 source reliability soft penalty, v71 freshness=0.533, v48 tier2: 55-74
+[SCORE] 71 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 69 medium - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, PLE/PPV, v71 freshness=0.572, v48 tier2: 55-74
+[SCORE] 68 medium - WWE's Current Stance on Ethan Page Ahead of IC Title Match at Saturday Night's Main Event | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.56, v48 tier2: 55-74
+[SCORE] 67 medium - El Grande Americano Appears at AAA Serenata Event After Ludwig Kaiser Arrest Controversy | altre promotion, evento legale/controversia, v62 evento legale grave, v80.4 AAA major World priority 53->72, v71 source reliability soft penalty, v71 freshness=0.683, v48 tier2: 55-74
+[SCORE] 60 medium - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 54 low - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v62 titolo/championship, v88.2 cap OTHER/feature non-news 73->54, v71 freshness=0.572, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 2 news >=90, 2 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 13 | mode=normal | max nuove=3 | pending pubblicati=0
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Ex-NXT Star Blake Monroe Makes Main Roster Debut In WWE SmackDown Backstage Segment
+[BOT] Elaborazione: Joe Hendry Compares WWE WrestleMania Match With Randy Orton To Early Career Milestone
+[BOT] semantic_id=joe-hendry-compares-wwe-wrestlemania-match-with-randy-orton-to-early-career-milestone
+[SCORE] iniziale=74 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=3, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=3, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | L'articolo analizza un'apparizione passata (WrestleMania 41) e una dichiarazione in un podcast; non è una preview.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (TNA World Champion, WWE NXT title) in inglese.; 'Signed to the company' si riferisce alla firma di un contratto.; Tradurre 'h/t' come 'si ringrazia ... per la trascrizione'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo analizza un'apparizione passata (WrestleMania 41) e una dichiarazione in un podcast; non è una preview.
+[PERF v71] analisi editoriale AI v72: 1.35s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Joe Hendry Compares WWE WrestleMania Match With Randy Orton To Early Career Milestone
+[SCORE] raffinato=78 priority=medium | WWE/main roster, top star titolo: randy orton, WWE main roster + storyline/evento, combo top name titolo + evento forte, PLE/PPV, v62 titolo/championship, v66 cap opinion/commentary storyline
+[V71] story_signature=stable:randy_orton|joe_hendry|joe_hendry_compares|contract|wwe semantic_status=new_story freshness=0.609
+[PERF v71] WP recent posts dedupe: 0.72s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.02s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=3
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/joe-hendry-compares-wwe-wrestlemania-match-with-randy-orton-to-early-career-milestone/intro-1779217885.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 5.91s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Joe Hendry: il match contro Randy Orton a WrestleMania 41 è il momento più alto della mia carriera
+[WARN v71.3] Quote check sotto soglia ma non bloccante: ['quote count ratio below threshold: 0.25'] - Joe Hendry Compares WWE WrestleMania Match With Randy Orton To Early Career Milestone
+[PERF v71] WP strict report lookup: 1.57s
+[TITLE v90.1] Numeric fidelity title fix: WrestleMania 41->WrestleMania M
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/joe-hendry-compares-wwe-wrestlemania-match-with-randy-orton-to-early-career-milestone/l-intro-1779217885.jpg
+[MEDIA] Immagine caricata: 5184
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260523_160409_001_joe-hendry-il-match-contro-randy-orton-a-wrestlemania-m-è-il-momento-più-alto-della-mia-ca_5185_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5185
+[PROCESSED v90.2.5] Publish result non conclusivo: non marco URL published
+[PERF v71] creazione post WordPress: 10.24s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/joe-hendry-compares-wwe-wrestlemania-match-with-randy-orton-to-early-career-milestone/l-intro-1779217885.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5184
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Joe Hendry Compares WWE WrestleMania Match With Randy Orton ': 19.48s
+[OK] Pubblicato: Joe Hendry: il match contro Randy Orton a WrestleMania 41 è il momento più alto della mia carriera
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260523_160411_001_joe-hendry-il-match-contro-randy-orton-a-wrestlemania-41-il-momento-pi-alto-dell_930cb3a6_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Joe Hendry: il match contro Randy Orton a WrestleMania 41 è il momento più alto della mia carriera
+[PUBLISHED REVIEW v87.1] Review outer salvata: Joe Hendry: il match contro Randy Orton a WrestleMania 41 è il momento più alto della mia carriera
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Vince McMahon Would Allegedly Forget His Own Instructions and Explode Backstage in WWE
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - WWE's Current Stance on Ethan Page Ahead of IC Title Match at Saturday Night's Main Event
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - El Grande Americano Appears at AAA Serenata Event After Ludwig Kaiser Arrest Controversy
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[SKIP v88.2] Feature/OTHER non-news sotto priorita hard: WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[SKIP v86.6/legacy] low_score_pre_gemini:50: Mance Warner Clears Up Confusion After Indie Promotion Claimed AEW Pulled Him
+[PENDING] Coda salvata: 0 elementi
+[SKIP v88.2] Feature/OTHER non-news sotto priorita hard: ESPN Quietly Restores AEW Section With Major Darby Allin Feature Before Double or Nothing
+[BOT] Raggiunto limite massimo candidati nuovi provati
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 12 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-23 16:03:05_summary.json -> published_html_review/run_2026-05-23 16-03-05_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (669 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
+===== RUN END [2026-05-23 16:03:05] VERSION [v90_2_5_processed_url_hardskip (aba378d)] =====
+

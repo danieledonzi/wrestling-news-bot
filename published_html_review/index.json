@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-23 16:00:09",
-  "last_bot_version": "v90_2_5_processed_url_hardskip (63eff89)",
-  "updated_at": "2026-05-23T16:01:03",
-  "total_items": 174,
+  "last_run_id": "2026-05-23 16:03:05",
+  "last_bot_version": "v90_2_5_processed_url_hardskip (aba378d)",
+  "updated_at": "2026-05-23T16:04:11",
+  "total_items": 175,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1396,6 +1396,14 @@
       "original_html_file": "20260523_134414_003_aew-tony-khan-fiducioso-sulla-permanenza-in-tv-dopo-la-fusione-warner-paramount_eefe5959_original.html",
       "final_html_file": "20260523_134414_003_aew-tony-khan-fiducioso-sulla-permanenza-in-tv-dopo-la-fusione-warner-paramount_eefe5959_final.html",
       "metadata_file": "20260523_134414_003_aew-tony-khan-fiducioso-sulla-permanenza-in-tv-dopo-la-fusione-warner-paramount_eefe5959_metadata.json"
+    },
+    {
+      "run_id": "2026-05-23 16:03:05",
+      "title": "Joe Hendry: il match contro Randy Orton a WrestleMania 41 è il momento più alto della mia carriera",
+      "url": "https://www.wrestlinginc.com/2177021/wwe-wrestlemania-41-joe-hendry-randy-orton-kurt-angle-early-career-milestone/",
+      "original_html_file": "20260523_160411_001_joe-hendry-il-match-contro-randy-orton-a-wrestlemania-41-il-momento-pi-alto-dell_930cb3a6_original.html",
+      "final_html_file": "20260523_160411_001_joe-hendry-il-match-contro-randy-orton-a-wrestlemania-41-il-momento-pi-alto-dell_930cb3a6_final.html",
+      "metadata_file": "20260523_160411_001_joe-hendry-il-match-contro-randy-orton-a-wrestlemania-41-il-momento-pi-alto-dell_930cb3a6_metadata.json"
     }
   ]
 }
