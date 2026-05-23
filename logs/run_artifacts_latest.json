@@ -1,38 +1,12 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-22 16:02:59",
-  "bot_version": "v90_2_2_report_flow_tuning (086d15f)",
-  "git_sha": "086d15f4507b53f668eb4c95b11a19f1ddab4e1c",
-  "created_at": "2026-05-22T16:04:05",
-  "published_count": 3,
-  "published_post_ids": [
-    "5127",
-    "5130",
-    "5133"
-  ],
-  "published_artifacts": [
-    {
-      "post_id": 5127,
-      "title": "MJF accusa la WWE di diffondere notizie false sul futuro televisivo della AEW",
-      "source_url": "https://www.wrestlinginc.com/2179226/aew-wwe-mjf-maxwell-jacob-friedman-of-course-sources-leak-negative-stories/",
-      "html_file": "published/20260522_160323_001_mjf-accusa-la-wwe-di-diffondere-notizie-false-sul-futuro-televisivo-della-aew_5127_final.html",
-      "metadata_file": "published/20260522_160323_001_mjf-accusa-la-wwe-di-diffondere-notizie-false-sul-futuro-televisivo-della-aew_5127_metadata.json"
-    },
-    {
-      "post_id": 5130,
-      "title": "Aggiornamenti sui viaggi di Ludwig Kaiser dopo l'arresto",
-      "source_url": "https://www.wrestlinginc.com/2179478/wwe-ludwig-kaiser-status-travel-arrest-battery/",
-      "html_file": "published/20260522_160347_002_aggiornamenti-sui-viaggi-di-ludwig-kaiser-dopo-larresto_5130_final.html",
-      "metadata_file": "published/20260522_160347_002_aggiornamenti-sui-viaggi-di-ludwig-kaiser-dopo-larresto_5130_metadata.json"
-    },
-    {
-      "post_id": 5133,
-      "title": "Adam Copeland: \"Non ho bisogno di un retirement tour in stile John Cena\"",
-      "source_url": "https://www.ringsidenews.com/adam-copeland-says-he-not-need-john-cena-style-retirement-tour-aew/",
-      "html_file": "published/20260522_160403_003_adam-copeland-non-ho-bisogno-di-un-retirement-tour-in-stile-john-cena_5133_final.html",
-      "metadata_file": "published/20260522_160403_003_adam-copeland-non-ho-bisogno-di-un-retirement-tour-in-stile-john-cena_5133_metadata.json"
-    }
-  ],
+  "run_id": "2026-05-23 10:20:03",
+  "bot_version": "v90_2_4_2_report_artifacts_recovery (53fb2fa)",
+  "git_sha": "53fb2fa8d59bf2f0c9ddd69fd892e2ff9bc6e2d4",
+  "created_at": "2026-05-23T10:20:38",
+  "published_count": 0,
+  "published_post_ids": [],
+  "published_artifacts": [],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",

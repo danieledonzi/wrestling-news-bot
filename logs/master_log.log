@@ -438,3 +438,171 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
 ===== RUN END [2026-05-22 16:02:59] VERSION [v90_2_2_report_flow_tuning (086d15f)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show=smackdown
+[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard
+[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.1] Report dedupe protection attiva: true-results usa solo report gate stretto
+[MODEL v90.2.2] translate_report chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-pro
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.3] Social embed quote positioning attivo
+[BOOT v90.2.3.1] Inline image dict normalization attiva in v88_media_record
+[BOOT v90.2.4] Offline pending hard-skip guard attiva
+[BOOT v90.2.4.1] Report hard-title guard attiva
+[BOOT v90.2.4.2] Report artifacts/casing recovery attiva
+
+===== RUN START [2026-05-23 10:20:03] VERSION [v90_2_4_2_report_artifacts_recovery (53fb2fa)] =====
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Tiffany Stratton Wins First Women's US Title Open Challenge On WWE SmackDown
+[SKIP] Score sotto soglia editoriale (32/75): AEW's Harley Cameron Details The Process Of Learning To Wrestle On Live TV
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP] Score sotto soglia editoriale (48/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - MJF Remains Confident AEW Will Work With Paramount After WBD Acquisition
+[SKIP] Score sotto soglia editoriale (54/75): MJF Remains Confident AEW Will Work With Paramount After WBD Acquisition
+[PERF v71] WP strict report lookup: 1.54s
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:wwe-smackdown-2026-05-22 - WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026: Draws & Duds
+[SKIP] Score sotto soglia editoriale (0/75): WWE Saturday Night's Main Event 5/23/2026 Predictions: Wrestling Inc. Picks The Winners
+[SKIP] Score sotto soglia editoriale (27/75): Eric Bischoff Compares Late Ted Turner To Vince McMahon: 'Very Similar People'
+[SKIP] Score sotto soglia editoriale (0/75): TNA Impact 5/21/2026: 3 Things We Hated & 3 Things We Loved
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Dave Meltzer On Likelihood Of Mick Foley Wrestling In AEW
+[SCORE v86.9] Cap commentary/opinion 83->68 - Dave Meltzer On Likelihood Of Mick Foley Wrestling In AEW
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll/
+[SKIP] Score sotto soglia editoriale (5/75): Jim Ross On Kevin Nash Backing Wrestlers' Union: 'He Knows What He's Talking About'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177184/john-cena-in-ring-retirement-not-mean-retiring-wwe/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown
+[FRESHNESS v86.6/legacy] Post-show outcome rescue: non tratto come preview scaduta - Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown
+[SKIP] Preview/show announcement scaduta: WWE Reveals First Clash in Italy Matches Airing on ESPN
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 70->54 - ESPN Quietly Restores AEW Section With Major Darby Allin Feature Before Double or Nothing
+[PERF v71] WP lookup event_key: 1.39s
+[FIX] Event key in history ma non confermata su WordPress: event:business:darby-allin - provo a pubblicare
+[PERF v71] WP lookup event_key: 1.39s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tony-khan - provo a pubblicare
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Baron Corbin Expected for WWE Return Despite Public Denial
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:wwe-smackdown-2026-05-22 - WWE SmackDown Results, Highlights and Key Moments for May 22, 2026
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 55->55 - WWE SmackDown Spoiler Lineup for May 22, 2026: Full Match Card and Backstage Notes Revealed
+[SCORE v81.1] Cap future card announcement 55->55 - WWE SmackDown Spoiler Lineup for May 22, 2026: Full Match Card and Backstage Notes Revealed
+[SKIP] Score sotto soglia editoriale (50/75): WWE SmackDown Spoiler Lineup for May 22, 2026: Full Match Card and Backstage Notes Revealed
+[SKIP] Preview/show announcement scaduta: Spoiler: Closing Segment for May 22 WWE SmackDown Revealed
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 50/55 - Bianca Belair Reveals Why Pregnancy Announcement Almost Didn't Happen at WrestleMania 42
+[SKIP] Score sotto soglia editoriale (50/75): Bianca Belair Reveals Why Pregnancy Announcement Almost Didn't Happen at WrestleMania 42
+[SKIP] Preview/show announcement scaduta: Prominent Name Backstage for WWE SmackDown Ahead of Possible Main Roster Debut
+[SKIP] Score sotto soglia editoriale (35/75): Darby Allin Reveals He's Getting Married Soon
+[SCORE v88.3] v88.3 cap low-value market item 71->45 - Roman Reigns Opens as Heavy Favorite Over Jacob Fatu for WWE Clash in Italy Match
+[SCORE] 100 high - Baron Corbin Expected for WWE Return Despite Public Denial | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v71 freshness=0.563
+[SCORE] 100 high - WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears | WWE/main roster, top star titolo: rhea ripley, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.467
+[SCORE] 96 high - Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, show settimanale, v62 ritorno/debutto, v71 freshness=0.602
+[SCORE] 78 medium - Tiffany Stratton Wins First Women's US Title Open Challenge On WWE SmackDown | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, v62 titolo/championship, v71 freshness=0.612
+[SCORE] 78 medium - WWE Adds WrestleMania Rematch To Clash In Italy | WWE/main roster, top star lead: rhea ripley, nomi forti lead: rhea ripley, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.455
+[SCORE] 75 medium - WWE SmackDown Results, Highlights and Key Moments for May 22, 2026 | WWE/main roster, WWE main roster + storyline/evento, show settimanale, floor WWE main roster storyline, v62 categoria business, v75 hard results report, v77 hard report protected, v71 source reliability soft penalty, v71 freshness=0.445
+[SCORE] 71 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 68 medium - Dave Meltzer On Likelihood Of Mick Foley Wrestling In AEW | AEW, impatto roster/storyline, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v86.9 cap commentary/opinion 83->68, v71 freshness=0.58, v48 tier2: 55-74
+[SCORE] 68 medium - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, show settimanale, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 63 medium - Joe Gacy Confirms First Post-WWE Wrestling Appearance After Wyatt Sicks Release | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, v71 source reliability soft penalty, v71 freshness=0.433, v48 tier2: 55-74
+[REPORT v86.9] Priorita true-results in coda: report:wwe-smackdown-2026-05-22 - WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears
+[MODE] Storm mode attiva: 3 news >=90, 3 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 16 | mode=storm | max nuove=5 | pending pubblicati=0
+[PERF v71] WP lookup URL esistente: 1.00s
+[REPORT v88] True-results confermato da WordPress per URL (5165): report:wwe-smackdown-2026-05-22
+[REPORT v87.2] Report confermato in history forte: report:wwe-smackdown-2026-05-22 (pre_candidate_wp_confirm)
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[PENDING v88] Rimosso true-results confermato dalla pending: report:wwe-smackdown-2026-05-22
+[REPORT v88] True-results confermato da WordPress per URL (5165): report:wwe-smackdown-2026-05-22
+[REPORT v87.2] Report confermato in history forte: report:wwe-smackdown-2026-05-22 (wp_confirm_runtime)
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[PENDING v88] Rimosso true-results confermato dalla pending: report:wwe-smackdown-2026-05-22
+[REPORT v87.2] Report confermato da history forte: report:wwe-smackdown-2026-05-22
+[REPORT v88] True-results confermato da WordPress per event_key: report:wwe-smackdown-2026-05-22
+[REPORT v87.2] Report confermato in history forte: report:wwe-smackdown-2026-05-22 (pre_candidate_wp_confirm)
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[PENDING v88] Rimosso true-results confermato dalla pending: report:wwe-smackdown-2026-05-22
+[REPORT v87.2] Report confermato da history forte: report:wwe-smackdown-2026-05-22
+[REPORT v88] True-results confermato da WordPress per event_key: report:wwe-smackdown-2026-05-22
+[REPORT v87.2] Report confermato in history forte: report:wwe-smackdown-2026-05-22 (wp_confirm_runtime)
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[PENDING v88] Rimosso true-results confermato dalla pending: report:wwe-smackdown-2026-05-22
+[SKIP v90.2] Follow-up duplicato/non sostanziale core=return:baron-corbin:wwe score=100 reason=core_cap_reached_no_major_update novel=[] - Baron Corbin Expected for WWE Return Despite Public Denial
+[DEDUPE v88.4.1] candidate_core=canonical_event_core:blake_monroe|debut_arrival|wwe title=Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown
+[DEDUPE v88.4.1] Canonical event core caricati: 17
+[SKIP v88.4.1] Canonical event core gia pubblicato: canonical_event_core:blake_monroe|debut_arrival|wwe - Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown
+[SKIP v84.1] URL gia presente su WordPress (5162), marco history e salto: Tiffany Stratton Wins First Women's US Title Open Challenge On WWE SmackDown
+[PENDING] Coda salvata: 0 elementi
+[REPORT v87.2] True-results confermato da history forte: skip offline-safe report:wwe-smackdown-2026-05-22 - WWE Adds WrestleMania Rematch To Clash In Italy
+[PENDING] Coda salvata: 0 elementi
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[BOT] semantic_id=wwe-announces-major-change-to-becky-lynchsol-ruca-snme-match
+[SCORE] iniziale=71 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo presenta un aggiornamento su un match già annunciato per il prossimo evento Saturday Night's Main Event, focalizzandosi sulla stipulazione del titolo in palio. | v72.3 anti-falso preview
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli in inglese: Women's Intercontinental Championship, Women's North American Championship, ecc.; Non tradurre 'Saturday Night's Main Event' (SNME).; Evitare calchi per 'fighting champion' (usare 'campionessa combattiva') e 'red brand' (usare 'Raw').
+[EDITORIAL v73] final type=OTHER | category=WWE (4) | L'articolo presenta un aggiornamento su un match già annunciato per il prossimo evento Saturday Night's Main Event, focalizzandosi sulla stipulazione del titolo in palio. | v72.3 anti-falso preview
+[PERF v71] analisi editoriale AI v72: 1.27s
+[SCORE v88.2] v88.2 cap feature storico numerico 56->45 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[SCORE] raffinato=45 priority=low | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v70 cap preview hard, v88.2 cap feature storico numerico 56->45
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 45/75 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[SKIP v84.1] URL gia presente su WordPress (5159), marco history e salto: Dave Meltzer On Likelihood Of Mick Foley Wrestling In AEW
+[PENDING] Coda salvata: 0 elementi
+[BOT] Elaborazione: Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[BOT] semantic_id=joe-hendry-says-wwe-will-soon-release-an-album-of-his-original-songs
+[SCORE] iniziale=68 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=NXT (6) conf=0.95 model=gemini-3.1-flash-lite | Articolo che riporta una dichiarazione recente di Joe Hendry riguardo a un progetto musicale futuro. Non è una preview di eventi, ma una news autonoma su un talento del roster.
+[EDITORIAL v72.3] translation_notes=Mantenere 'WWE Music' e i titoli delle canzoni in inglese.; 'Release' dell'album va tradotto come 'uscita' o 'pubblicazione', non come licenziamento.; Tradurre 'Insight with Chris Van Vliet' come nome del podcast/intervista.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=NXT (6) | Articolo che riporta una dichiarazione recente di Joe Hendry riguardo a un progetto musicale futuro. Non è una preview di eventi, ma una news autonoma su un talento del roster.
+[PERF v71] analisi editoriale AI v72: 1.18s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 57->54 - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, PLE/PPV, trash talk/clickbait forte, v62 titolo/championship, v88.2 cap OTHER/feature non-news 57->54
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SKIP v84.1] URL gia presente su WordPress (5156), marco history e salto: Joe Gacy Confirms First Post-WWE Wrestling Appearance After Wyatt Sicks Release
+[PENDING] Coda salvata: 0 elementi
+[SKIP v85.1] Storm anti-filler opinion pre-Gemini: score 60<65 - Tony Khan Publicly Calls Out Indie Promotion Over Mance Warner Claim
+[PENDING] Coda salvata: 0 elementi
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[PENDING] Coda salvata: 0 elementi
+[BOT] Raggiunto limite massimo candidati nuovi provati
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 12 candidati provati | mode=storm
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-23 10:20:03_summary.json -> published_html_review/run_2026-05-23 10-20-03_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (644 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-23 10:20:03] VERSION [v90_2_4_2_report_artifacts_recovery (53fb2fa)] =====
+

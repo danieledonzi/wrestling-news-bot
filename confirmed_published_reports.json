@@ -9,7 +9,8 @@
     "report:tna-impact-2026-05-21",
     "report:wwe-nxt-2026-05-19",
     "report:wwe-raw-2026-05-18",
-    "report:wwe-smackdown-2026-05-15"
+    "report:wwe-smackdown-2026-05-15",
+    "report:wwe-smackdown-2026-05-22"
   ],
   "published_reports": {
     "report:aew-dynamite-2026-05-13": {
@@ -91,6 +92,14 @@
       "wp_post_id": null,
       "confirmed_at": "2026-05-22T11:02:48Z",
       "reason": "publish_success"
+    },
+    "report:wwe-smackdown-2026-05-22": {
+      "report_key": "report:wwe-smackdown-2026-05-22",
+      "title": "WWE SmackDown Results, Highlights and Key Moments for May 22, 2026",
+      "source_url": "https://www.ringsidenews.com/wwe-smackdown-results-highlights-key-moments-may-22-2026/",
+      "wp_post_id": 5165,
+      "confirmed_at": "2026-05-23T10:20:31Z",
+      "reason": "wp_confirm_runtime"
     }
   }
 }
