@@ -64,6 +64,8 @@ jobs:
           python scripts/apply_bot_patch_v90_2_3.py
           python scripts/apply_bot_patch_v90_2_3_1.py
           python scripts/apply_bot_patch_v90_2_4.py
+          python scripts/apply_bot_patch_v90_2_4_1.py
+          python scripts/apply_bot_patch_v90_2_4_2.py
 
       - name: Verify consolidated source
         run: |
@@ -110,6 +112,10 @@ jobs:
           status=$?
           echo "$status" > .bot_exit_code
           exit 0
+
+      - name: Persist runtime files
+        if: always()
+        run: bash scripts/persist_runtime_files.sh
 
       - name: Upload bot artifacts
         if: always()
