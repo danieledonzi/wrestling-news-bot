@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-23 10:20:03",
-  "last_bot_version": "v90_2_4_2_report_artifacts_recovery (53fb2fa)",
-  "updated_at": "2026-05-23T10:20:37",
-  "total_items": 169,
+  "last_run_id": "2026-05-23 10:51:03",
+  "last_bot_version": "v90_2_4_2_report_artifacts_recovery (1368401)",
+  "updated_at": "2026-05-23T10:52:45",
+  "total_items": 171,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1356,6 +1356,22 @@
       "original_html_file": "20260522_160404_003_adam-copeland-non-ho-bisogno-di-un-retirement-tour-in-stile-john-cena_a34d336b_original.html",
       "final_html_file": "20260522_160404_003_adam-copeland-non-ho-bisogno-di-un-retirement-tour-in-stile-john-cena_a34d336b_final.html",
       "metadata_file": "20260522_160404_003_adam-copeland-non-ho-bisogno-di-un-retirement-tour-in-stile-john-cena_a34d336b_metadata.json"
+    },
+    {
+      "run_id": "2026-05-23 10:51:03",
+      "title": "Tony Khan smentisce la AAW Wrestling sul caso Mance Warner",
+      "url": "https://www.ringsidenews.com/tony-khan-publicly-calls-out-indie-promotion-mance-warner-claim/",
+      "original_html_file": "20260523_105213_001_tony-khan-smentisce-la-aaw-wrestling-sul-caso-mance-warner_c8e854f9_original.html",
+      "final_html_file": "20260523_105213_001_tony-khan-smentisce-la-aaw-wrestling-sul-caso-mance-warner_c8e854f9_final.html",
+      "metadata_file": "20260523_105213_001_tony-khan-smentisce-la-aaw-wrestling-sul-caso-mance-warner_c8e854f9_metadata.json"
+    },
+    {
+      "run_id": "2026-05-23 10:51:03",
+      "title": "Alexa Bliss firma con una nuova agenzia per la sua carriera extra-WWE",
+      "url": "https://www.ringsidenews.com/alexa-bliss-signs-new-talent-agency-representation-outside-wwe/",
+      "original_html_file": "20260523_105245_002_alexa-bliss-firma-con-una-nuova-agenzia-per-la-sua-carriera-extra-wwe_c4e8793b_original.html",
+      "final_html_file": "20260523_105245_002_alexa-bliss-firma-con-una-nuova-agenzia-per-la-sua-carriera-extra-wwe_c4e8793b_final.html",
+      "metadata_file": "20260523_105245_002_alexa-bliss-firma-con-una-nuova-agenzia-per-la-sua-carriera-extra-wwe_c4e8793b_metadata.json"
     }
   ]
 }
