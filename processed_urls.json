@@ -77,6 +77,19 @@
     "updated_at": "1779552048.9929159",
     "url": "https://www.ringsidenews.com/wwes-current-stance-ethan-page-ahead-ic-title-match-saturday-nights-main-event/"
   },
+  "https://www.wrestlinginc.com/2174866/wwe-jimmy-wang-yang-undertaker-confederate-flag": {
+    "extra": {
+      "event_key": "",
+      "raw_result": "skipped",
+      "semantic_id": "former-wwe-star-says-undertaker-yelled-at-him-to-stop-wearing-confederate-flag"
+    },
+    "reason": "skipped",
+    "score": 43,
+    "status": "rejected",
+    "title": "Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag",
+    "updated_at": "1779553200.1885142",
+    "url": "https://www.wrestlinginc.com/2174866/wwe-jimmy-wang-yang-undertaker-confederate-flag/"
+  },
   "https://www.wrestlinginc.com/2176287/aew-paul-wight-forced-lose-weight-wwe-wrestlemania-spot": {
     "extra": {
       "event_key": "",
