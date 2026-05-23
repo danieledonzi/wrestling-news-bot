@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-23 16:19:50",
-  "last_bot_version": "v90_2_5_1_processed_skip_recorder (d4f7ccd)",
-  "updated_at": "2026-05-23T16:20:00",
-  "total_items": 175,
+  "last_run_id": "2026-05-23 17:33:16",
+  "last_bot_version": "v90_2_5_1_processed_skip_recorder (5082c24)",
+  "updated_at": "2026-05-23T17:34:14",
+  "total_items": 176,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1404,6 +1404,14 @@
       "original_html_file": "20260523_160411_001_joe-hendry-il-match-contro-randy-orton-a-wrestlemania-41-il-momento-pi-alto-dell_930cb3a6_original.html",
       "final_html_file": "20260523_160411_001_joe-hendry-il-match-contro-randy-orton-a-wrestlemania-41-il-momento-pi-alto-dell_930cb3a6_final.html",
       "metadata_file": "20260523_160411_001_joe-hendry-il-match-contro-randy-orton-a-wrestlemania-41-il-momento-pi-alto-dell_930cb3a6_metadata.json"
+    },
+    {
+      "run_id": "2026-05-23 17:33:16",
+      "title": "WWE: la situazione sul ritorno in TV di CM Punk",
+      "url": "https://www.ringsidenews.com/cm-punks-wwe-return-status-gets-major-update-amid-tv-absence/",
+      "original_html_file": "20260523_173414_001_wwe-la-situazione-sul-ritorno-in-tv-di-cm-punk_788da661_original.html",
+      "final_html_file": "20260523_173414_001_wwe-la-situazione-sul-ritorno-in-tv-di-cm-punk_788da661_final.html",
+      "metadata_file": "20260523_173414_001_wwe-la-situazione-sul-ritorno-in-tv-di-cm-punk_788da661_metadata.json"
     }
   ]
 }

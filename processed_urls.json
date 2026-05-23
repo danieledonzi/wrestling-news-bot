@@ -155,6 +155,19 @@
     "updated_at": "1779552063.2934556",
     "url": "https://www.wrestlinginc.com/2177312/aew-swerve-strickland-aleister-black-zelina-vega-wwe/"
   },
+  "https://www.wrestlinginc.com/2177532/wwe-jbl-john-bradshaw-layfield-talent-infinitely-better-increases-live-event-schedule": {
+    "extra": {
+      "event_key": "event:business:tko-financials",
+      "raw_result": "skipped",
+      "semantic_id": "jbl-says-talent-will-get-infinitely-better-as-wwe-increases-live-event-schedule"
+    },
+    "reason": "skipped",
+    "score": 45,
+    "status": "rejected",
+    "title": "JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule",
+    "updated_at": "1779557654.9887495",
+    "url": "https://www.wrestlinginc.com/2177532/wwe-jbl-john-bradshaw-layfield-talent-infinitely-better-increases-live-event-schedule/"
+  },
   "https://www.wrestlinginc.com/2180004/wwe-smackdown-nxt-blake-monroe-main-roster-debut": {
     "extra": {
       "event_key": "",
