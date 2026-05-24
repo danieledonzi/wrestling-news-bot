@@ -6731,3 +6731,269 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-24 22:30:38] VERSION [v90_2_5_4_1_event_registry_report_key (62810ce)] =====
 
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1
+
+===== RUN START [2026-05-24 23:38:44] VERSION [v90_2_6_2_clean_consolidated_source (bd2415e)] =====
+[PROCESSED v90.2.5.2] Migrati record non-final competitivi: 11
+[PROCESSED v90.2.5] Loaded processed URL records: 47
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[SCORE v79.1.2] Spoiler validato: floor 51->75 - Divine Dominion Hold Off Zayda Steel & Viva Van In AEW Double Or Nothing Eliminator
+[EVENTREG v90.2.5.4.1] report key da registry: report:aew-double-or-nothing-2026-05-24
+[EVENTREG v90.2.5.4] Event report score floor 80->82 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (48/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (32/75): Darby Allin Says He's The Easiest Person To Collaborate With In AEW For One Reason
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (32/75): AEW's Luchasaurus Says Lung Ailment Gave Him A Different Perspective
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (5/75): Jim Ross On Kevin Nash Backing Wrestlers' Union: 'He Knows What He's Talking About'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177184/john-cena-in-ring-retirement-not-mean-retiring-wwe/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (26/75): AJ Styles On His New Training & Scouting Role In WWE: 'I Still Have Passion'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[SCORE v86.9] Cap commentary/opinion 100->68 - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[FOLLOWUP] Event key gia' vista ma angolo autonomo consentito: event:brock-lesnar-return - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (14/75): WWE's Jordynne Grace Working To Get Pilot's License For Charitable Cause
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Mick Foley Makes AEW Debut At Double Or Nothing 2026
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 83->54 - Mick Foley Makes AEW Debut At Double Or Nothing 2026
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Mick Foley Makes AEW Debut At Double Or Nothing 2026
+[EVENTREG v90.2.5.4.1] report key da registry: report:aew-double-or-nothing-2026-05-24
+[SKIP v71] Story signature gia' vista nella run: stable:report_aew-double-or-nothing-2026-05-24 - AEW Double or Nothing Results, Highlights and Key Moments for May 24, 2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Mick Foley Says He's Having a Blast in AEW Ahead of Double or Nothing Debut
+[PERF v71] WP lookup URL esistente: 0.69s
+[PERF v71] WP lookup event_key: 1.32s
+[SKIP] event_key confermata su WordPress: event:darby-allin-return - Mick Foley Says He's Having a Blast in AEW Ahead of Double or Nothing Debut
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (17/75): Luchasaurus Says Doctors Could Only "Pray" After Pneumonia Spread Through Both Lungs
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Tony Khan Won't Commit to AEW All In Returning to Wembley Stadium in 2027
+[SCORE v88.2] v88.2 cap feature storico numerico 56->45 - Tony Khan Won't Commit to AEW All In Returning to Wembley Stadium in 2027
+[SKIP] Score sotto soglia editoriale (40/75): Tony Khan Won't Commit to AEW All In Returning to Wembley Stadium in 2027
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Renee Paquette Says Mick Foley Will Be "So Valuable" to AEW Talent After Double or Nothing Debut
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Renee Paquette Says Mick Foley Will Be "So Valuable" to AEW Talent After Double or Nothing Debut
+[SKIP] Score sotto soglia editoriale (49/75): Renee Paquette Says Mick Foley Will Be "So Valuable" to AEW Talent After Double or Nothing Debut
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (31/75): Renee Paquette Addresses Possibly Joining Jon Moxley's Death Riders in AEW
+[SKIP] URL già in history: https://www.ringsidenews.com/nikki-blackhearts-wwe-nxt-status-wrestling-dark-match/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - D-Von Dudley Says WWE Holding Night of Champions in Saudi Arabia Isn't Worth the Risk
+[SKIP] Score sotto soglia editoriale (49/75): D-Von Dudley Says WWE Holding Night of Champions in Saudi Arabia Isn't Worth the Risk
+[SKIP] URL già in history: https://www.ringsidenews.com/two-wwe-stars-may-have-injured-saturday-nights-main-event/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (19/75): MVP Reveals Insane Amount He Paid In Weed Fines During WWE Run
+[SCORE] 82 high - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match | AEW, titolo/championship, PLE/PPV, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.589
+[SCORE] 75 medium - Divine Dominion Hold Off Zayda Steel & Viva Van In AEW Double Or Nothing Eliminator | AEW, PLE/PPV, v62 titolo/championship, v79.1.2 spoiler live/pre-show floor 51->75, v71 freshness=0.607
+[SCORE] 71 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 68 medium - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, show settimanale, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 68 medium - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement' | WWE/main roster, top star titolo: brock lesnar, nomi forti titolo: bully ray, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, v62 ritorno/debutto, v86.9 cap commentary/opinion 100->68, v71 freshness=0.427, v48 tier2: 55-74
+[SCORE] 67 medium - John Cena Explains Intention Behind Eponymous WWE Event | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, match/segmento annunciato, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 60 medium - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 59 low - Trick Williams Links Up With Soulja Boy at Collect-A-Con | WWE/main roster, nomi forti titolo: trick williams, WWE main roster + storyline/evento, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.55, v48 tier2: 55-74
+[SCORE] 55 low - WWE SNME - 5/23/2026: Biggest Winners & Losers | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v71 freshness=0.568, v48 tier2: 55-74
+[SCORE] 48 low - New Day Current Status for AEW Double or Nothing | WWE/main roster, ritorno/debutto, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.559, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 3
+[SKIP v90.2] Follow-up duplicato/non sostanziale core=return:brock-lesnar:wwe score=100 reason=no_new_substantial_fact_high_value novel=['brand_show'] - WWE HOFer Confused By Brock Lesnar Return
+[SOFTPOOL v90.2] Aggiunta: score=82 core=title:darby-allin:status reason=update_gate:medium_followup_or_weak_update title=AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[SKIP v90.2] Follow-up in soft_pool core=title:darby-allin:status score=82 reason=medium_followup_or_weak_update novel=[] - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[BOT] Elaborazione: Mick Foley Says He's Having a Blast in AEW Ahead of Double or Nothing Debut
+[BOT] semantic_id=mick-foley-says-hes-having-a-blast-in-aew-ahead-of-double-or-nothing-debut
+[SCORE] iniziale=78 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/mick-foley-says-hes-having-blast-aew-ahead-double-nothing-debut/
+[PERF v71] scraping articolo: 1.57s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/mick-foley-says-hes-having-blast-aew-ahead-double-nothing-debut/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.88s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta l'arrivo di Foley e le dichiarazioni di Tony Khan nel media call. Non è una preview poiché la notizia dell'apparizione è già avvenuta e il focus è sulla sua nuova collaborazione.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Buy In' e 'Double or Nothing' invariati.; 'Hardcore Legend' va tradotto come 'Leggenda dell'Hardcore'.; 'Having a blast' va reso con 'divertendosi un mondo' o 'godendosi l'esperienza'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | L'articolo riporta l'arrivo di Foley e le dichiarazioni di Tony Khan nel media call. Non è una preview poiché la notizia dell'apparizione è già avvenuta e il focus è sulla sua nuova collaborazione.
+[PERF v71] analisi editoriale AI v72: 1.49s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Mick Foley Says He's Having a Blast in AEW Ahead of Double or Nothing Debut
+[SCORE v88.3] v88.3 hard feature skip cap 83->45 - Mick Foley Says He's Having a Blast in AEW Ahead of Double or Nothing Debut
+[SCORE v79.1.3] Recovery post-show 45->78 - Mick Foley Says He's Having a Blast in AEW Ahead of Double or Nothing Debut
+[SCORE v88.3] v88.3 hard feature skip cap 78->45 - Mick Foley Says He's Having a Blast in AEW Ahead of Double or Nothing Debut
+[SCORE] raffinato=45 priority=low | AEW, impatto roster/storyline, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v88.3 hard feature skip cap 83->45, v79.1.3 post-show recovery 45->78, v88.3 hard feature skip cap 78->45
+[PERF v71] scoring raffinato: 0.34s
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Mick Foley Says He's Having a Blast in AEW Ahead of Double or Nothing Debut
+[V71] story_signature=stable:kazuchika_okada|orange_cassidy|darby_allin|debut|aew semantic_status=new_story freshness=0.813
+[PERF v71] WP recent posts dedupe: 1.20s
+[SKIP] Event key confermata su WordPress: event:darby-allin-return - Mick Foley Says He's Having a Blast in AEW Ahead of Double or Nothing Debut
+[PENDING] Coda salvata: 2 elementi
+[BOT] News candidate totali: 14 | mode=normal | max nuove=3 | pending pubblicati=0
+[SKIP v78.1] Gia processato in questa run: AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[PENDING] Coda salvata: 1 elementi
+[BOT] Elaborazione: Divine Dominion Hold Off Zayda Steel & Viva Van In AEW Double Or Nothing Eliminator
+[BOT] semantic_id=divine-dominion-hold-off-zayda-steel-viva-van-in-aew-double-or-nothing-eliminator
+[SCORE] iniziale=75 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RESULTS_REPORT conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo descrive i risultati completi di un match specifico avvenuto durante il Buy In di Double or Nothing, inclusi gli eventi post-match.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'AEW Women's Tag Team Championship' né 'Buy In'.; 'Title Eliminator' si riferisce alla stipulazione del match, mantenere il termine tecnico o spiegare brevemente.; 'Wiped out' non va tradotto letteralmente come 'cancellato', ma come 'ha steso' o 'ha abbattuto'.
+[PERF v71] analisi editoriale AI v72: 3.64s
+[SCORE] raffinato=75 priority=medium | AEW, titolo/championship, PLE/PPV, v62 titolo/championship
+[V71] story_signature=stable:divine_dominion_hold_off_zayda_steel|viva_van_in|aew_double_or_nothing_eliminator|title|aew semantic_status=new_story freshness=0.607
+[PERF v71] WP lookup event_key: 1.11s
+[FIX] Event key in history ma non confermata su WordPress: event:anna-jay-diagnosis - provo a pubblicare
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.43s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=5
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/divine-dominion-hold-off-zayda-steel-viva-van-in-aew-double-or-nothing-eliminator/intro-1779664884.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 4.74s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): AEW Double or Nothing: Divine Dominion battono Zayda Steel e Viva Van nel Buy In
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/divine-dominion-hold-off-zayda-steel-viva-van-in-aew-double-or-nothing-eliminator/l-intro-1779664884.jpg
+[MEDIA] Immagine caricata: 5245
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260524_234037_001_aew-double-or-nothing-divine-dominion-battono-zayda-steel-e-viva-van-nel-buy-in_5246_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5246
+[PROCESSED v90.2.5] Publish result non conclusivo: non marco URL published
+[PERF v71] creazione post WordPress: 7.90s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/divine-dominion-hold-off-zayda-steel-viva-van-in-aew-double-or-nothing-eliminator/l-intro-1779664884.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5245
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Divine Dominion Hold Off Zayda Steel & Viva Van In AEW Doubl': 18.63s
+[OK] Pubblicato: [SPOILER] AEW Double or Nothing: Divine Dominion battono Zayda Steel e Viva Van nel Buy In
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260524_234038_001_spoiler-aew-double-or-nothing-divine-dominion-battono-zayda-steel-e-viva-van-nel_ac4b80a6_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: [SPOILER] AEW Double or Nothing: Divine Dominion battono Zayda Steel e Viva Van nel Buy In
+[PUBLISHED REVIEW v87.1] Review outer salvata: [SPOILER] AEW Double or Nothing: Divine Dominion battono Zayda Steel e Viva Van nel Buy In
+[CORE v90.2] Registrato publish core=title:divine-dominion:status count=1 facts=[]
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SKIP v90.2] Follow-up in soft_pool core=return:brock-lesnar:wwe score=68 reason=covered_core_below_gate novel=[] - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - John Cena Explains Intention Behind Eponymous WWE Event
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[PENDING] Coda salvata: 1 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:59: Trick Williams Links Up With Soulja Boy at Collect-A-Con
+[PENDING] Coda salvata: 1 elementi
+[SKIP v88.3] Non forzo articolo soft sotto 65 dopo una pubblicazione: 55/65 - WWE SNME - 5/23/2026: Biggest Winners & Losers
+[SKIP v86.6/legacy] low_score_pre_gemini:48: New Day Current Status for AEW Double or Nothing
+[PENDING] Coda salvata: 1 elementi
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Thekla Reveals She Speaks Five Languages Including Japanese and Georgian
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SCORE v89.1] Legacy return/move protected 41->68: The Godfather Signs New WWE Legends Deal
+[BOT] Elaborazione: The Godfather Signs New WWE Legends Deal
+[BOT] semantic_id=the-godfather-signs-new-wwe-legends-deal
+[SCORE] iniziale=68 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/godfather-signs-new-wwe-legends-deal/
+[PERF v71] scraping articolo: 0.96s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=11, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/godfather-signs-new-wwe-legends-deal/
+[BLOCKSEQ] Blocchi ordinati estratti: text=11, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.61s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta una notizia già avvenuta (la firma del contratto Legends da parte di The Godfather), non è una preview né un contenuto corporate su larga scala.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Legends contract' in inglese o tradurre come 'contratto da Leggenda'.; Non tradurre 'WWE Champion' (titolo).; Gestire la citazione diretta fedelmente.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta una notizia già avvenuta (la firma del contratto Legends da parte di The Godfather), non è una preview né un contenuto corporate su larga scala.
+[PERF v71] analisi editoriale AI v72: 11.80s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - The Godfather Signs New WWE Legends Deal
+[SCORE] raffinato=79 priority=medium | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, contratto, PLE/PPV
+[V71] story_signature=stable:the_godfather_signs_new|wwe_legends_deal|contract|wwe semantic_status=new_story freshness=0.68
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=11
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 16.53s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WWE: The Godfather firma un nuovo contratto quinquennale da Legend
+[EMBED v87.3] Canonicalizzati/deduplicati embed nel body: 1
+[EMBED v87.3] Positional embed guard applicato: 1 modifiche
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/the-godfather-signs-new-wwe-legends-deal-38.jpg
+[MEDIA] Immagine caricata: 5248
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260524_234113_002_wwe-the-godfather-firma-un-nuovo-contratto-quinquennale-da-legend_5249_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5249
+[PROCESSED v90.2.5] Publish result non conclusivo: non marco URL published
+[PERF v71] creazione post WordPress: 3.38s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/the-godfather-signs-new-wwe-legends-deal-38.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5248
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'The Godfather Signs New WWE Legends Deal': 34.24s
+[OK] Pubblicato: WWE: The Godfather firma un nuovo contratto quinquennale da Legend
+[PENDING] Coda salvata: 1 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260524_234115_002_wwe-the-godfather-firma-un-nuovo-contratto-quinquennale-da-legend_8d5f1ab6_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WWE: The Godfather firma un nuovo contratto quinquennale da Legend
+[PUBLISHED REVIEW v87.1] Review outer salvata: WWE: The Godfather firma un nuovo contratto quinquennale da Legend
+[BOT] Raggiunto limite massimo candidati nuovi provati
+[BOT] Pubblicati 2 articoli (0 pending + 2 nuove) su 15 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-24 23:38:44_summary.json -> published_html_review/run_2026-05-24 23-38-44_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (760 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
+===== RUN END [2026-05-24 23:38:44] VERSION [v90_2_6_2_clean_consolidated_source (bd2415e)] =====
+
