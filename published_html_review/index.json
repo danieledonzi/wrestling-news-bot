@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-24 11:49:51",
-  "last_bot_version": "v90_2_5_3_1_snme_publish_tighten (29b6380)",
-  "updated_at": "2026-05-24T11:50:06",
-  "total_items": 188,
+  "last_run_id": "2026-05-24 13:17:10",
+  "last_bot_version": "v90_2_5_3_1_snme_publish_tighten (ad54636)",
+  "updated_at": "2026-05-24T13:19:30",
+  "total_items": 191,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1508,6 +1508,30 @@
       "original_html_file": "20260524_102251_001_polemiche-tra-i-fan-per-il-finale-di-becky-lynch-vs-sol-ruca-a-saturday-night-s-_0ebba26d_original.html",
       "final_html_file": "20260524_102251_001_polemiche-tra-i-fan-per-il-finale-di-becky-lynch-vs-sol-ruca-a-saturday-night-s-_0ebba26d_final.html",
       "metadata_file": "20260524_102251_001_polemiche-tra-i-fan-per-il-finale-di-becky-lynch-vs-sol-ruca-a-saturday-night-s-_0ebba26d_metadata.json"
+    },
+    {
+      "run_id": "2026-05-24 13:17:10",
+      "title": "Gunther: \"Dopo Cody Rhodes, Brock Lesnar potrà sfidarmi\"",
+      "url": "https://www.ringsidenews.com/gunther-says-brock-lesnar-can-challenge-him-cody-rhodes-match/",
+      "original_html_file": "20260524_131818_001_gunther-dopo-cody-rhodes-brock-lesnar-potr-sfidarmi_e1d192c4_original.html",
+      "final_html_file": "20260524_131818_001_gunther-dopo-cody-rhodes-brock-lesnar-potr-sfidarmi_e1d192c4_final.html",
+      "metadata_file": "20260524_131818_001_gunther-dopo-cody-rhodes-brock-lesnar-potr-sfidarmi_e1d192c4_metadata.json"
+    },
+    {
+      "run_id": "2026-05-24 13:17:10",
+      "title": "MJF non sorpreso dal successo di Danhausen in WWE: \"Tira le persone a sé\"",
+      "url": "https://www.wrestlinginc.com/2178523/aew-wwe-mjf-maxwell-jacob-friedman-danhausen-isnt-surprised/",
+      "original_html_file": "20260524_131858_002_mjf-non-sorpreso-dal-successo-di-danhausen-in-wwe-tira-le-persone-a-s_ab7331b5_original.html",
+      "final_html_file": "20260524_131858_002_mjf-non-sorpreso-dal-successo-di-danhausen-in-wwe-tira-le-persone-a-s_ab7331b5_final.html",
+      "metadata_file": "20260524_131858_002_mjf-non-sorpreso-dal-successo-di-danhausen-in-wwe-tira-le-persone-a-s_ab7331b5_metadata.json"
+    },
+    {
+      "run_id": "2026-05-24 13:17:10",
+      "title": "Luchasaurus: 'La festa per la vittoria dei Knicks mi ha causato l'infortunio in AEW'",
+      "url": "https://www.wrestlinginc.com/2178624/luchasaurus-blames-aew-injury-ny-knicks-victory-celebration/",
+      "original_html_file": "20260524_131930_003_luchasaurus-la-festa-per-la-vittoria-dei-knicks-mi-ha-causato-l-infortunio-in-ae_305d22ea_original.html",
+      "final_html_file": "20260524_131930_003_luchasaurus-la-festa-per-la-vittoria-dei-knicks-mi-ha-causato-l-infortunio-in-ae_305d22ea_final.html",
+      "metadata_file": "20260524_131930_003_luchasaurus-la-festa-per-la-vittoria-dei-knicks-mi-ha-causato-l-infortunio-in-ae_305d22ea_metadata.json"
     }
   ]
 }

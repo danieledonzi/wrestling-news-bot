@@ -1,12 +1,38 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-24 11:49:51",
-  "bot_version": "v90_2_5_3_1_snme_publish_tighten (29b6380)",
-  "git_sha": "29b6380764a96fdc3c0135d1aea90189fae71c62",
-  "created_at": "2026-05-24T11:50:07",
-  "published_count": 0,
-  "published_post_ids": [],
-  "published_artifacts": [],
+  "run_id": "2026-05-24 13:17:10",
+  "bot_version": "v90_2_5_3_1_snme_publish_tighten (ad54636)",
+  "git_sha": "ad5463602032821d02ead040027996d603984877",
+  "created_at": "2026-05-24T13:19:31",
+  "published_count": 3,
+  "published_post_ids": [
+    "5228",
+    "5231",
+    "5234"
+  ],
+  "published_artifacts": [
+    {
+      "post_id": 5228,
+      "title": "Gunther: \"Dopo Cody Rhodes, Brock Lesnar potrà sfidarmi\"",
+      "source_url": "https://www.ringsidenews.com/gunther-says-brock-lesnar-can-challenge-him-cody-rhodes-match/",
+      "html_file": "published/20260524_131817_001_gunther-dopo-cody-rhodes-brock-lesnar-potrà-sfidarmi_5228_final.html",
+      "metadata_file": "published/20260524_131817_001_gunther-dopo-cody-rhodes-brock-lesnar-potrà-sfidarmi_5228_metadata.json"
+    },
+    {
+      "post_id": 5231,
+      "title": "MJF non sorpreso dal successo di Danhausen in WWE: \"Tira le persone a sé\"",
+      "source_url": "https://www.wrestlinginc.com/2178523/aew-wwe-mjf-maxwell-jacob-friedman-danhausen-isnt-surprised/",
+      "html_file": "published/20260524_131856_002_mjf-non-sorpreso-dal-successo-di-danhausen-in-wwe-tira-le-persone-a-sé_5231_final.html",
+      "metadata_file": "published/20260524_131856_002_mjf-non-sorpreso-dal-successo-di-danhausen-in-wwe-tira-le-persone-a-sé_5231_metadata.json"
+    },
+    {
+      "post_id": 5234,
+      "title": "Luchasaurus: 'La festa per la vittoria dei Knicks mi ha causato l'infortunio in AEW'",
+      "source_url": "https://www.wrestlinginc.com/2178624/luchasaurus-blames-aew-injury-ny-knicks-victory-celebration/",
+      "html_file": "published/20260524_131928_003_luchasaurus-la-festa-per-la-vittoria-dei-knicks-mi-ha-causato-linfortunio-in-aew_5234_final.html",
+      "metadata_file": "published/20260524_131928_003_luchasaurus-la-festa-per-la-vittoria-dei-knicks-mi-ha-causato-linfortunio-in-aew_5234_metadata.json"
+    }
+  ],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",

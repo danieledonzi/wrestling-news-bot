@@ -113,7 +113,7 @@
     ],
     "count": 12,
     "first_seen": "2026-05-21T16:04:55",
-    "last_seen": "2026-05-24T09:53:14"
+    "last_seen": "2026-05-24T13:17:28"
   },
   "return:mark-shapiro:wwe": {
     "titles": [
@@ -494,5 +494,17 @@
     "count": 1,
     "first_seen": "2026-05-24T09:55:17",
     "last_seen": "2026-05-24T09:55:17"
+  },
+  "return:brock-lesnar:wwe": {
+    "titles": [
+      "GUNTHER Says Brock Lesnar Can Challenge Him After Cody Rhodes Match"
+    ],
+    "facts": [
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-24T13:18:18",
+    "last_seen": "2026-05-24T13:18:18"
   }
 }
