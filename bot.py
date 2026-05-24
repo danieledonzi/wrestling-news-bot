@@ -20217,7 +20217,7 @@ if V882_LONG_FEATURE_TRANSLATION_GUARD_ENABLED and "process_candidate_item" in g
 
 
 try:
-    print("[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority")
+    pass  # muted by v90.2.6.2: print("[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority")
 except Exception:
     pass
 
@@ -20514,7 +20514,7 @@ if V8831_ROSTER_ARRIVAL_GUARD_ENABLED and "process_candidate_item" in globals():
         return _ORIG_V8831_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
 
 try:
-    print("[BOOT v88.3.1] Roster arrival guard attiva")
+    pass  # muted by v90.2.6.2: print("[BOOT v88.3.1] Roster arrival guard attiva")
 except Exception:
     pass
 
@@ -20728,7 +20728,7 @@ if V884_BLOCKQUOTE_SANITIZER_ENABLED and "create_post_without_image" in globals(
         return _ORIG_V884_create_post_without_image(data, sem_id, url, embed_urls=embed_urls, event_key=event_key, inline_images=inline_images, featured_image_url=featured_image_url)
 
 try:
-    print("[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps")
+    pass  # muted by v90.2.6.2: print("[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps")
 except Exception:
     pass
 
@@ -20979,7 +20979,7 @@ if V8841_CANONICAL_DEDUPE_ENABLED and "create_post_without_image" in globals():
         return res
 
 try:
-    print("[BOOT v88.4.1] Canonical event-core dedupe attivo")
+    pass  # muted by v90.2.6.2: print("[BOOT v88.4.1] Canonical event-core dedupe attivo")
 except Exception:
     pass
 
@@ -21213,7 +21213,7 @@ if V8842_REPORT_HARD_TITLE_ENABLED and "create_post_without_image" in globals():
         return _ORIG_V8842_create_post_without_image(data, sem_id, url, embed_urls=embed_urls, event_key=event_key, inline_images=inline_images, featured_image_url=featured_image_url)
 
 try:
-    print("[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi")
+    pass  # muted by v90.2.6.2: print("[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi")
 except Exception:
     pass
 
@@ -21284,7 +21284,7 @@ if V8842_CURRENT_DAY_REPORT_GUARD_ENABLED:
         return False
 
 try:
-    print("[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente")
+    pass  # muted by v90.2.6.2: print("[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente")
 except Exception:
     pass
 
@@ -21479,7 +21479,7 @@ if V89_REPORT_TAIL_IMAGE_CLEANUP_ENABLED and "create_post_without_image" in glob
         )
 
 try:
-    print("[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening")
+    pass  # muted by v90.2.6.2: print("[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening")
 except Exception:
     pass
 
@@ -21588,7 +21588,7 @@ if V89_1_LEGACY_RETURN_RUMOR_ENABLED and "v8842_soft_after_report_candidate" in 
         return _ORIG_V891_v8842_soft_after_report_candidate(item)
 
 try:
-    print("[BOOT v89.1] Legacy return/debut rumor guard attiva")
+    pass  # muted by v90.2.6.2: print("[BOOT v89.1] Legacy return/debut rumor guard attiva")
 except Exception:
     pass
 
@@ -22025,7 +22025,7 @@ if V90_1_QUALITY_ENABLED and "create_post_without_image" in globals():
         )
 
 try:
-    print("[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler")
+    pass  # muted by v90.2.6.2: print("[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler")
 except Exception:
     pass
 
@@ -22317,7 +22317,7 @@ if V90_1_1_ENABLED and "create_post_without_image" in globals():
         )
 
 try:
-    print("[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi")
+    pass  # muted by v90.2.6.2: print("[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi")
 except Exception:
     pass
 
@@ -22508,7 +22508,7 @@ if V90_1_2_ENABLED and "create_post_without_image" in globals():
         )
 
 try:
-    print(f"[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show={v9012_expected_report_show_today() or 'none'}")
+    pass  # muted by v90.2.6.2: print(f"[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show={v9012_expected_report_show_today() or 'none'}")
 except Exception:
     pass
 
@@ -22554,7 +22554,7 @@ def v9013_should_prefix_spoiler(title="", source_title="", event_key="", url="",
 if V90_1_3_ENABLED and V90_1_3_SPOILER_HOTFIX_ENABLED:
     try:
         v9011_should_prefix_spoiler = v9013_should_prefix_spoiler
-        print("[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard")
+        pass  # muted by v90.2.6.2: print("[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard")
     except Exception as e:
         print(f"[WARN v90.1.3] override v9011_should_prefix_spoiler failed: {e}")
 
@@ -22582,7 +22582,7 @@ if V90_1_3_ENABLED and V90_1_3_SPOILER_HOTFIX_ENABLED and "create_post_without_i
                     if not keep:
                         cleaned = re.sub(r"^\s*\[\s*spoiler\s*\]\s*[:\-–—]?\s*", "", str(final_title), flags=re.I).strip()
                         if cleaned:
-                            print(f"[SPOILER v90.1.3] Rimosso spoiler falso/fuori calendario: {final_title} -> {cleaned}")
+                            pass  # muted by v90.2.6.2: print(f"[SPOILER v90.1.3] Rimosso spoiler falso/fuori calendario: {final_title} -> {cleaned}")
                             data["titolo"] = cleaned
                             data["title"] = cleaned
         except Exception as e:
@@ -22599,9 +22599,9 @@ if V90_1_3_ENABLED and V90_1_3_SPOILER_HOTFIX_ENABLED and "create_post_without_i
 
 try:
     if V90_1_3_ENABLED and V90_1_3_SPOILER_HOTFIX_ENABLED:
-        print("[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]")
+        pass  # muted by v90.2.6.2: print("[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]")
     else:
-        print("[BOOT v90.1.3] Spoiler hotfix disattivata")
+        pass  # muted by v90.2.6.2: print("[BOOT v90.1.3] Spoiler hotfix disattivata")
 except Exception:
     pass
 
@@ -23107,7 +23107,7 @@ def v9021_should_bypass_generic_dedupe(scope):
     return True
 
 try:
-    print("[BOOT v90.2.1] Report dedupe protection attiva: true-results usa solo report gate stretto")
+    pass  # muted by v90.2.6.2: print("[BOOT v90.2.1] Report dedupe protection attiva: true-results usa solo report gate stretto")
 except Exception:
     pass
 
@@ -23188,7 +23188,7 @@ if V90_2_2_ENABLED:
     try:
         if "V872_MODEL_CHAINS" in globals() and V90_2_2_REPORT_CHAIN:
             V872_MODEL_CHAINS["translate_report"] = list(V90_2_2_REPORT_CHAIN)
-            print(f"[MODEL v90.2.2] translate_report chain={','.join(V90_2_2_REPORT_CHAIN)}")
+            pass  # muted by v90.2.6.2: print(f"[MODEL v90.2.2] translate_report chain={','.join(V90_2_2_REPORT_CHAIN)}")
     except Exception as e: print(f"[MODEL v90.2.2] chain warning: {e}")
 
 try:
@@ -23365,14 +23365,14 @@ except Exception:
     pass
 
 try:
-    print("[BOOT v90.2.3] Social embed quote positioning attivo")
+    pass  # muted by v90.2.6.2: print("[BOOT v90.2.3] Social embed quote positioning attivo")
 except Exception:
     pass
 
 
 # v90.2.3.1: inline image dict normalization
 try:
-    print("[BOOT v90.2.3.1] Inline image dict normalization attiva in v88_media_record")
+    pass  # muted by v90.2.6.2: print("[BOOT v90.2.3.1] Inline image dict normalization attiva in v88_media_record")
 except Exception:
     pass
 
@@ -23552,7 +23552,7 @@ except Exception:
     pass
 
 try:
-    print("[BOOT v90.2.4] Offline pending hard-skip guard attiva")
+    pass  # muted by v90.2.6.2: print("[BOOT v90.2.4] Offline pending hard-skip guard attiva")
 except Exception:
     pass
 
@@ -23600,7 +23600,7 @@ try:
 except Exception:
     pass
 
-print("[BOOT v90.2.4.1] Report hard-title guard attiva")
+pass  # muted by v90.2.6.2: print("[BOOT v90.2.4.1] Report hard-title guard attiva")
 
 
 # v90.2.4.2 report casing guard
@@ -23661,7 +23661,7 @@ try:
 except Exception:
     pass
 
-print("[BOOT v90.2.4.2] Report artifacts/casing recovery attiva")
+pass  # muted by v90.2.6.2: print("[BOOT v90.2.4.2] Report artifacts/casing recovery attiva")
 
 
 # v90.2.5 processed URL hard-skip
@@ -23912,7 +23912,7 @@ try:
 except Exception:
     pass
 
-print("[BOOT v90.2.5] Processed URL hard-skip attivo")
+pass  # muted by v90.2.6.2: print("[BOOT v90.2.5] Processed URL hard-skip attivo")
 
 
 # v90.2.5.1 processed skip recorder
@@ -24047,7 +24047,7 @@ try:
 except Exception:
     pass
 
-print("[BOOT v90.2.5.1] Processed URL skip recorder attivo")
+pass  # muted by v90.2.6.2: print("[BOOT v90.2.5.1] Processed URL skip recorder attivo")
 
 
 # v90.2.5.2 processed competitive guard
@@ -24205,7 +24205,7 @@ try:
 except Exception:
     pass
 
-print("[BOOT v90.2.5.2] Processed competitive guard attiva: high-score e SNME non finali")
+pass  # muted by v90.2.6.2: print("[BOOT v90.2.5.2] Processed competitive guard attiva: high-score e SNME non finali")
 
 
 # v90.2.5.3 SNME event and publish processed guards
@@ -24354,7 +24354,7 @@ try:
 except Exception:
     pass
 
-print("[BOOT v90.2.5.3] SNME event report guard e processed publish success attivi")
+pass  # muted by v90.2.6.2: print("[BOOT v90.2.5.3] SNME event report guard e processed publish success attivi")
 
 
 # v90.2.5.3.1 tighten SNME and publish guards
@@ -24426,7 +24426,7 @@ if V90_2_5_3_1_ENABLED:
     except Exception:
         pass
 
-print("[BOOT v90.2.5.3.1] SNME floor ristretto e processed publish corrente attivi")
+pass  # muted by v90.2.6.2: print("[BOOT v90.2.5.3.1] SNME floor ristretto e processed publish corrente attivi")
 
 
 # v90.2.5.4 event registry
@@ -24685,7 +24685,7 @@ try:
 except Exception:
     pass
 
-print("[BOOT v90.2.5.4] Event registry attiva: PLE/PPV/special event report keys e spoiler gate")
+pass  # muted by v90.2.6.2: print("[BOOT v90.2.5.4] Event registry attiva: PLE/PPV/special event report keys e spoiler gate")
 
 
 # v90.2.5.4.1 event registry report key
@@ -24717,16 +24717,22 @@ try:
 except Exception:
     pass
 
-print("[BOOT v90.2.5.4.1] Event registry collegata a make_report_event_key")
+pass  # muted by v90.2.6.2: print("[BOOT v90.2.5.4.1] Event registry collegata a make_report_event_key")
 
 
 # v90.2.6.1 true source consolidation
 
 
+# v90.2.6.2 clean consolidated boot/version
+BOT_VERSION = "v90_2_6_2_clean_consolidated_source"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+print("[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1", flush=True)
+
+
 if __name__ == "__main__":
     exit_code = 0
     if V854_BOOT_DIAGNOSTICS_ENABLED:
-        print(f"[BOOT v88] __main__ reached epoch={time.time():.3f}", flush=True)
+        pass  # muted by v90.2.6.2: print(f"[BOOT v88] __main__ reached epoch={time.time():.3f}", flush=True)
     log_run_start()
     try:
         run_bot()
