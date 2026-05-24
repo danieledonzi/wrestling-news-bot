@@ -6,11 +6,27 @@ from pathlib import Path
 MARK = "# v90.2.6.2 clean consolidated boot/version"
 VERSION = "v90_2_6_2_clean_consolidated_source"
 
+# Keep this list narrow. Do not use a broad "[BOOT v90.2" token because it
+# would also match the final v90.2.6.2 boot line and make this script rewrite
+# bot.py on every run.
 BOOT_PATTERNS = (
     "[BOOT v88",
     "[BOOT v89",
     "[BOOT v90.1",
-    "[BOOT v90.2",
+    "[BOOT v90.2.1]",
+    "[BOOT v90.2.2]",
+    "[BOOT v90.2.3]",
+    "[BOOT v90.2.3.1]",
+    "[BOOT v90.2.4]",
+    "[BOOT v90.2.4.1]",
+    "[BOOT v90.2.4.2]",
+    "[BOOT v90.2.5]",
+    "[BOOT v90.2.5.1]",
+    "[BOOT v90.2.5.2]",
+    "[BOOT v90.2.5.3]",
+    "[BOOT v90.2.5.3.1]",
+    "[BOOT v90.2.5.4]",
+    "[BOOT v90.2.5.4.1]",
     "[MODEL v90.2.2]",
     "[SPOILER v90.1.3]",
 )
@@ -30,7 +46,9 @@ def mute_historic_boot_prints(text: str) -> str:
     muted = 0
     for line in lines:
         stripped = line.lstrip()
-        if stripped.startswith("print(") and any(token in line for token in BOOT_PATTERNS):
+        if stripped.startswith("# muted by v90.2.6.2:"):
+            out.append(line)
+        elif stripped.startswith("print(") and any(token in line for token in BOOT_PATTERNS):
             indent = line[: len(line) - len(stripped)]
             out.append(indent + "# muted by v90.2.6.2: " + stripped)
             muted += 1
