@@ -196,7 +196,7 @@
     "score": 60,
     "status": "competitive_deferred",
     "title": "MJF Claims Darby Allin \"Looks Like A School Shooter\" Ahead Of AEW Double or Nothing",
-    "updated_at": "1779656779.9001858",
+    "updated_at": "1779658083.189341",
     "url": "https://www.ringsidenews.com/mjf-claims-darby-allin-looks-school-shooter-ahead-aew-double-nothing/"
   },
   "https://www.ringsidenews.com/opening-segment-match-revealed-may-25-wwe-raw": {
@@ -277,6 +277,19 @@
     "title": "Thekla Reveals She Speaks Five Languages Including Japanese and Georgian",
     "updated_at": "1779656780.0895627",
     "url": "https://www.ringsidenews.com/thekla-reveals-she-speaks-five-languages-including-japanese-georgian/"
+  },
+  "https://www.ringsidenews.com/trick-williams-links-soulja-boy-collect-con": {
+    "extra": {
+      "event_key": "",
+      "raw_result": "skipped",
+      "semantic_id": "trick-williams-links-up-with-soulja-boy-at-collect-a-con"
+    },
+    "reason": "above_low_score_final_cap_not_final",
+    "score": 59,
+    "status": "competitive_deferred",
+    "title": "Trick Williams Links Up With Soulja Boy at Collect-A-Con",
+    "updated_at": "1779658083.2928956",
+    "url": "https://www.ringsidenews.com/trick-williams-links-soulja-boy-collect-con/"
   },
   "https://www.ringsidenews.com/triple-h-becky-lynch-hammer-out-last-minute-details-backstage-before-saturday-nights-main-event": {
     "extra": {
@@ -445,7 +458,7 @@
     "score": 60,
     "status": "competitive_deferred",
     "title": "AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE",
-    "updated_at": "1779656779.8805826",
+    "updated_at": "1779658083.1717591",
     "url": "https://www.wrestlinginc.com/2177312/aew-swerve-strickland-aleister-black-zelina-vega-wwe/"
   },
   "https://www.wrestlinginc.com/2177532/wwe-jbl-john-bradshaw-layfield-talent-infinitely-better-increases-live-event-schedule": {
@@ -551,7 +564,7 @@
     "score": 76,
     "status": "competitive_deferred",
     "title": "WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More",
-    "updated_at": "1779656779.7243304",
+    "updated_at": "1779658083.0296967",
     "url": "https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/"
   },
   "https://www.wrestlinginc.com/2180133/sol-ruca-granted-womens-ic-title-match-following-controversial-becky-lynch-dq": {
@@ -604,7 +617,7 @@
     "score": 55,
     "status": "competitive_deferred",
     "title": "WWE SNME - 5/23/2026: Biggest Winners & Losers",
-    "updated_at": "1779656779.976035",
+    "updated_at": "1779658083.3646812",
     "url": "https://www.wrestlinginc.com/2180267/wwe-snme-may-23-2026-biggest-winners-losers-opinion-review/"
   }
 }
