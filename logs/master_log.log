@@ -6997,3 +6997,136 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
 ===== RUN END [2026-05-24 23:38:44] VERSION [v90_2_6_2_clean_consolidated_source (bd2415e)] =====
 
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1
+
+===== RUN START [2026-05-24 23:56:50] VERSION [v90_2_6_2_clean_consolidated_source (b99a3cb)] =====
+[PROCESSED v90.2.5.2] Migrati record non-final competitivi: 12
+[PROCESSED v90.2.5] Loaded processed URL records: 51
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2180285/aew-double-or-nothing-2026-divine-dominion-megan-bayne-lena-kross-viva-van-zayda-steel-title-eliminator/
+[EVENTREG v90.2.5.4.1] report key da registry: report:aew-double-or-nothing-2026-05-24
+[EVENTREG v90.2.5.4] Event report score floor 80->82 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (48/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (32/75): Darby Allin Says He's The Easiest Person To Collaborate With In AEW For One Reason
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (32/75): AEW's Luchasaurus Says Lung Ailment Gave Him A Different Perspective
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (5/75): Jim Ross On Kevin Nash Backing Wrestlers' Union: 'He Knows What He's Talking About'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177184/john-cena-in-ring-retirement-not-mean-retiring-wwe/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (26/75): AJ Styles On His New Training & Scouting Role In WWE: 'I Still Have Passion'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[SCORE v86.9] Cap commentary/opinion 100->68 - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[FOLLOWUP] Event key gia' vista ma angolo autonomo consentito: event:brock-lesnar-return - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (14/75): WWE's Jordynne Grace Working To Get Pilot's License For Charitable Cause
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (48/75): AEW Talent Wear "Rebel Heart" Wristbands at Double or Nothing for Rebel
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] YES: Gemini SPOILER + hard validation
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Mick Foley Makes AEW Debut At Double Or Nothing 2026
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 83->54 - Mick Foley Makes AEW Debut At Double Or Nothing 2026
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Mick Foley Makes AEW Debut At Double Or Nothing 2026
+[EVENTREG v90.2.5.4.1] report key da registry: report:aew-double-or-nothing-2026-05-24
+[SKIP v71] Story signature gia' vista nella run: stable:report_aew-double-or-nothing-2026-05-24 - AEW Double or Nothing Results, Highlights and Key Moments for May 24, 2026
+[SKIP] URL già in history: https://www.ringsidenews.com/godfather-signs-new-wwe-legends-deal/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Mick Foley Says He's Having a Blast in AEW Ahead of Double or Nothing Debut
+[PERF v71] WP lookup URL esistente: 1.00s
+[PERF v71] WP lookup event_key: 1.84s
+[SKIP] event_key confermata su WordPress: event:darby-allin-return - Mick Foley Says He's Having a Blast in AEW Ahead of Double or Nothing Debut
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (17/75): Luchasaurus Says Doctors Could Only "Pray" After Pneumonia Spread Through Both Lungs
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Tony Khan Won't Commit to AEW All In Returning to Wembley Stadium in 2027
+[SCORE v88.2] v88.2 cap feature storico numerico 56->45 - Tony Khan Won't Commit to AEW All In Returning to Wembley Stadium in 2027
+[SKIP] Score sotto soglia editoriale (40/75): Tony Khan Won't Commit to AEW All In Returning to Wembley Stadium in 2027
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Renee Paquette Says Mick Foley Will Be "So Valuable" to AEW Talent After Double or Nothing Debut
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Renee Paquette Says Mick Foley Will Be "So Valuable" to AEW Talent After Double or Nothing Debut
+[SKIP] Score sotto soglia editoriale (49/75): Renee Paquette Says Mick Foley Will Be "So Valuable" to AEW Talent After Double or Nothing Debut
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (31/75): Renee Paquette Addresses Possibly Joining Jon Moxley's Death Riders in AEW
+[SKIP] URL già in history: https://www.ringsidenews.com/nikki-blackhearts-wwe-nxt-status-wrestling-dark-match/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - D-Von Dudley Says WWE Holding Night of Champions in Saudi Arabia Isn't Worth the Risk
+[SKIP] Score sotto soglia editoriale (49/75): D-Von Dudley Says WWE Holding Night of Champions in Saudi Arabia Isn't Worth the Risk
+[SKIP] URL già in history: https://www.ringsidenews.com/two-wwe-stars-may-have-injured-saturday-nights-main-event/
+[SCORE] 82 high - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match | AEW, titolo/championship, PLE/PPV, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.586
+[SCORE] 71 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 68 medium - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, show settimanale, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 68 medium - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement' | WWE/main roster, top star titolo: brock lesnar, nomi forti titolo: bully ray, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, v62 ritorno/debutto, v86.9 cap commentary/opinion 100->68, v71 freshness=0.427, v48 tier2: 55-74
+[SCORE] 67 medium - John Cena Explains Intention Behind Eponymous WWE Event | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, match/segmento annunciato, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 60 medium - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 59 low - Trick Williams Links Up With Soulja Boy at Collect-A-Con | WWE/main roster, nomi forti titolo: trick williams, WWE main roster + storyline/evento, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.546, v48 tier2: 55-74
+[SCORE] 55 low - WWE SNME - 5/23/2026: Biggest Winners & Losers | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v71 freshness=0.564, v48 tier2: 55-74
+[SCORE] 48 low - New Day Current Status for AEW Double or Nothing | WWE/main roster, ritorno/debutto, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.555, v48 tier3: 45-54 contestuale
+[SCORE] 46 low - Thekla Reveals She Speaks Five Languages Including Japanese and Georgian | AEW, ritorno/debutto, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.533, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 1
+[SKIP v90.2] Follow-up duplicato/non sostanziale core=return:brock-lesnar:wwe score=100 reason=no_new_substantial_fact_high_value novel=['brand_show'] - WWE HOFer Confused By Brock Lesnar Return
+[BOT] News candidate totali: 12 | mode=normal | max nuove=3 | pending pubblicati=0
+[SKIP v90.2] Follow-up in soft_pool core=title:darby-allin:status score=82 reason=medium_followup_or_weak_update novel=[] - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SKIP v90.2] Follow-up in soft_pool core=return:brock-lesnar:wwe score=68 reason=covered_core_below_gate novel=[] - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - John Cena Explains Intention Behind Eponymous WWE Event
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[PENDING] Coda salvata: 1 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:59: Trick Williams Links Up With Soulja Boy at Collect-A-Con
+[PENDING] Coda salvata: 1 elementi
+[SKIP v86.6/legacy] low_score_pre_gemini:55: WWE SNME - 5/23/2026: Biggest Winners & Losers
+[PENDING] Coda salvata: 1 elementi
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - New Day Current Status for AEW Double or Nothing
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Thekla Reveals She Speaks Five Languages Including Japanese and Georgian
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP v88.3] Feature storico/FIFA/venue/media call escluso: Mick Foley Makes AEW Debut At Double Or Nothing 2026
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 13 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-24 23:56:50_summary.json -> published_html_review/run_2026-05-24 23-56-50_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (761 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-24 23:56:50] VERSION [v90_2_6_2_clean_consolidated_source (b99a3cb)] =====
+

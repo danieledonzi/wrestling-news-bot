@@ -186,6 +186,19 @@
     "updated_at": "1779563057.816217",
     "url": "https://www.ringsidenews.com/mark-jindrak-says-wwe-stars-complaining-about-wrestlemania-weekend-fan-incidents-should-grateful/"
   },
+  "https://www.ringsidenews.com/mick-foley-makes-aew-debut-double-nothing-2026": {
+    "extra": {
+      "event_key": "",
+      "raw_result": "skipped",
+      "semantic_id": "mick-foley-makes-aew-debut-at-double-or-nothing-2026"
+    },
+    "reason": "skipped",
+    "score": 40,
+    "status": "rejected",
+    "title": "Mick Foley Makes AEW Debut At Double Or Nothing 2026",
+    "updated_at": "1779667104.5864253",
+    "url": "https://www.ringsidenews.com/mick-foley-makes-aew-debut-double-nothing-2026/"
+  },
   "https://www.ringsidenews.com/mick-foley-says-hes-having-blast-aew-ahead-double-nothing-debut": {
     "extra": {
       "event_key": "event:darby-allin-return",
@@ -314,7 +327,7 @@
     "score": 59,
     "status": "competitive_deferred",
     "title": "Trick Williams Links Up With Soulja Boy at Collect-A-Con",
-    "updated_at": "1779666039.3220122",
+    "updated_at": "1779667104.4523075",
     "url": "https://www.ringsidenews.com/trick-williams-links-soulja-boy-collect-con/"
   },
   "https://www.ringsidenews.com/triple-h-becky-lynch-hammer-out-last-minute-details-backstage-before-saturday-nights-main-event": {
@@ -419,7 +432,7 @@
     "score": 68,
     "status": "competitive_deferred",
     "title": "Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'",
-    "updated_at": "1779666039.0737898",
+    "updated_at": "1779667104.2563856",
     "url": "https://www.wrestlinginc.com/2176982/bully-ray-brock-lesnar-wwe-return-retirement/"
   },
   "https://www.wrestlinginc.com/2177126/john-cena-explains-intention-behind-eponymous-wwe-event": {
@@ -484,7 +497,7 @@
     "score": 60,
     "status": "competitive_deferred",
     "title": "AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE",
-    "updated_at": "1779666039.2038434",
+    "updated_at": "1779667104.3599598",
     "url": "https://www.wrestlinginc.com/2177312/aew-swerve-strickland-aleister-black-zelina-vega-wwe/"
   },
   "https://www.wrestlinginc.com/2177532/wwe-jbl-john-bradshaw-layfield-talent-infinitely-better-increases-live-event-schedule": {
@@ -604,7 +617,7 @@
     "score": 82,
     "status": "competitive_deferred",
     "title": "AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match",
-    "updated_at": "1779666012.8120363",
+    "updated_at": "1779667104.2186854",
     "url": "https://www.wrestlinginc.com/2180008/aew-double-or-nothing-2026-five-titles-on-line-stadium-stampede-match/"
   },
   "https://www.wrestlinginc.com/2180133/sol-ruca-granted-womens-ic-title-match-following-controversial-becky-lynch-dq": {
@@ -657,7 +670,7 @@
     "score": 100,
     "status": "competitive_deferred",
     "title": "WWE HOFer Confused By Brock Lesnar Return",
-    "updated_at": "1779666012.79398",
+    "updated_at": "1779667104.2047749",
     "url": "https://www.wrestlinginc.com/2180261/wwe-hofer-confused-brock-lesnar-return/"
   },
   "https://www.wrestlinginc.com/2180267/wwe-snme-may-23-2026-biggest-winners-losers-opinion-review": {
@@ -670,7 +683,7 @@
     "score": 55,
     "status": "competitive_deferred",
     "title": "WWE SNME - 5/23/2026: Biggest Winners & Losers",
-    "updated_at": "1779666039.3577144",
+    "updated_at": "1779667104.518023",
     "url": "https://www.wrestlinginc.com/2180267/wwe-snme-may-23-2026-biggest-winners-losers-opinion-review/"
   }
 }
