@@ -196,7 +196,7 @@
     "score": 60,
     "status": "competitive_deferred",
     "title": "MJF Claims Darby Allin \"Looks Like A School Shooter\" Ahead Of AEW Double or Nothing",
-    "updated_at": "1779647795.2011223",
+    "updated_at": "1779649368.9168513",
     "url": "https://www.ringsidenews.com/mjf-claims-darby-allin-looks-school-shooter-ahead-aew-double-nothing/"
   },
   "https://www.ringsidenews.com/opening-segment-match-revealed-may-25-wwe-raw": {
@@ -228,10 +228,11 @@
   "https://www.ringsidenews.com/possible-spoiler-revealed-wwe-clash-italy-title-match": {
     "extra": {
       "event_key": "",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "possible-spoiler-revealed-for-wwe-clash-in-italy-title-match"
     },
-    "reason": "high_score_or_discussion_worthy_not_final",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 79,
     "status": "competitive_deferred",
     "title": "Possible Spoiler Revealed for WWE Clash in Italy Title Match",
@@ -405,7 +406,7 @@
     "score": 60,
     "status": "competitive_deferred",
     "title": "AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE",
-    "updated_at": "1779647795.2452602",
+    "updated_at": "1779649368.9762332",
     "url": "https://www.wrestlinginc.com/2177312/aew-swerve-strickland-aleister-black-zelina-vega-wwe/"
   },
   "https://www.wrestlinginc.com/2177532/wwe-jbl-john-bradshaw-layfield-talent-infinitely-better-increases-live-event-schedule": {
@@ -476,10 +477,11 @@
   "https://www.wrestlinginc.com/2179645/wwe-nic-nemeth-dolph-ziggler-sting-involvement-debut": {
     "extra": {
       "event_key": "",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "nic-nemeth-fka-dolph-ziggler-recalls-involvement-in-stings-wwe-debut"
     },
-    "reason": "high_score_or_discussion_worthy_not_final",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 95,
     "status": "competitive_deferred",
     "title": "Nic Nemeth (FKA Dolph Ziggler) Recalls Involvement In Sting's WWE Debut",
@@ -510,7 +512,7 @@
     "score": 82,
     "status": "competitive_deferred",
     "title": "WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More",
-    "updated_at": "1779647779.570232",
+    "updated_at": "1779649368.829567",
     "url": "https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/"
   },
   "https://www.wrestlinginc.com/2180133/sol-ruca-granted-womens-ic-title-match-following-controversial-becky-lynch-dq": {
@@ -546,11 +548,11 @@
       "raw_result": "skipped",
       "semantic_id": "wwe-hofer-eric-bischoff-on-mick-foley-in-aew-please-dont-get-in-the-ring"
     },
-    "reason": "above_low_score_final_cap_not_final",
-    "score": 68,
-    "status": "competitive_deferred",
+    "reason": "skipped",
+    "score": 54,
+    "status": "rejected",
     "title": "WWE HOFer Eric Bischoff On Mick Foley In AEW: 'Please Don't Get In The Ring'",
-    "updated_at": "1779647775.660336",
+    "updated_at": "1779649366.2897584",
     "url": "https://www.wrestlinginc.com/2180240/wwe-hofer-eric-bischoff-mick-foley-aew-dont-get-ring/"
   }
 }
