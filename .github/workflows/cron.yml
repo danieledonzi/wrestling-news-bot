@@ -58,7 +58,8 @@ jobs:
           if ! git diff --quiet -- bot.py; then
             git add bot.py
             git commit -m "chore(bot): persist v90.2.6.1 consolidated bot source"
-            git push
+            git pull --rebase || echo "[v90.2.6.1] Warning: pull --rebase non riuscito, provo push diretto"
+            git push || echo "[v90.2.6.1] Warning: push consolidamento fallito, continuo la run bot"
           else
             echo "[v90.2.6.1] bot.py gia consolidato nel repository"
           fi
