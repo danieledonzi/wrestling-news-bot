@@ -6566,3 +6566,168 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-24 21:38:00] VERSION [v90_2_5_4_1_event_registry_report_key (a925931)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show=none
+[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard
+[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.1] Report dedupe protection attiva: true-results usa solo report gate stretto
+[MODEL v90.2.2] translate_report chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-pro
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.3] Social embed quote positioning attivo
+[BOOT v90.2.3.1] Inline image dict normalization attiva in v88_media_record
+[BOOT v90.2.4] Offline pending hard-skip guard attiva
+[BOOT v90.2.4.1] Report hard-title guard attiva
+[BOOT v90.2.4.2] Report artifacts/casing recovery attiva
+[BOOT v90.2.5] Processed URL hard-skip attivo
+[BOOT v90.2.5.1] Processed URL skip recorder attivo
+[BOOT v90.2.5.2] Processed competitive guard attiva: high-score e SNME non finali
+[BOOT v90.2.5.3] SNME event report guard e processed publish success attivi
+[BOOT v90.2.5.3.1] SNME floor ristretto e processed publish corrente attivi
+[BOOT v90.2.5.4] Event registry attiva: PLE/PPV/special event report keys e spoiler gate
+[BOOT v90.2.5.4.1] Event registry collegata a make_report_event_key
+
+===== RUN START [2026-05-24 22:30:38] VERSION [v90_2_5_4_1_event_registry_report_key (62810ce)] =====
+[PROCESSED v90.2.5.2] Migrati record non-final competitivi: 11
+[PROCESSED v90.2.5] Loaded processed URL records: 47
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API timeout | tentativo 1/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f26815a2510>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Health check API timeout | tentativo 2/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f26815a3410>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Health check API timeout | tentativo 3/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f26815a3d10>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] WordPress/API non disponibile dopo 3 tentativi: api_timeout: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f26815a3d10>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (32/75): Darby Allin Says He's The Easiest Person To Collaborate With In AEW For One Reason
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (26/75): AJ Styles On His New Training & Scouting Role In WWE: 'I Still Have Passion'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SKIP] Score sotto soglia editoriale (48/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[REPORT v86.8/legacy] URL in history ma true results non confermato: continuo report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] story_signature in history ma true results: rivaluto report:wwe-nxt-2026-05-19
+[EVENTREG v90.2.5.4.1] report key da registry: report:aew-double-or-nothing-2026-05-24
+[EVENTREG v90.2.5.4] Event report score floor 80->82 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (32/75): AEW's Luchasaurus Says Lung Ailment Gave Him A Different Perspective
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (5/75): Jim Ross On Kevin Nash Backing Wrestlers' Union: 'He Knows What He's Talking About'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177184/john-cena-in-ring-retirement-not-mean-retiring-wwe/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE HOFer Confused By Brock Lesnar Return
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP] Score sotto soglia editoriale (0/75): WWE SNME - 5/23/2026: 3 Things We Hated And 3 We Loved
+[EVENTREG v90.2.5.4.1] report key da registry: report:wwe-snme-2026-05-23
+[SNME v90.2.5.3] Pre-AI event score floor 80->82 - This is Wrestling Inc.'s results for "Saturday Night's Main Event", with the Intercontinental, World Tag Team & Women's Tag Team Championships on the line!
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (32/75): AEW's Athena Reveals Origins Of Devastating O-Face Finisher
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Mick Foley Says He's Having a Blast in AEW Ahead of Double or Nothing Debut
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (17/75): Luchasaurus Says Doctors Could Only "Pray" After Pneumonia Spread Through Both Lungs
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Tony Khan Won't Commit to AEW All In Returning to Wembley Stadium in 2027
+[SCORE v88.2] v88.2 cap feature storico numerico 56->45 - Tony Khan Won't Commit to AEW All In Returning to Wembley Stadium in 2027
+[SKIP] Score sotto soglia editoriale (40/75): Tony Khan Won't Commit to AEW All In Returning to Wembley Stadium in 2027
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Renee Paquette Says Mick Foley Will Be "So Valuable" to AEW Talent After Double or Nothing Debut
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - Renee Paquette Says Mick Foley Will Be "So Valuable" to AEW Talent After Double or Nothing Debut
+[SKIP] Score sotto soglia editoriale (49/75): Renee Paquette Says Mick Foley Will Be "So Valuable" to AEW Talent After Double or Nothing Debut
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (31/75): Renee Paquette Addresses Possibly Joining Jon Moxley's Death Riders in AEW
+[SKIP] URL già in history: https://www.ringsidenews.com/nikki-blackhearts-wwe-nxt-status-wrestling-dark-match/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - D-Von Dudley Says WWE Holding Night of Champions in Saudi Arabia Isn't Worth the Risk
+[SKIP] Score sotto soglia editoriale (49/75): D-Von Dudley Says WWE Holding Night of Champions in Saudi Arabia Isn't Worth the Risk
+[SKIP] URL già in history: https://www.ringsidenews.com/two-wwe-stars-may-have-injured-saturday-nights-main-event/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (19/75): MVP Reveals Insane Amount He Paid In Weed Fines During WWE Run
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - MVP Calls Out Toxic AEW vs. WWE Tribalism Among Wrestling Fans
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - MVP Calls Out Toxic AEW vs. WWE Tribalism Among Wrestling Fans
+[SKIP] Score sotto soglia editoriale (49/75): MVP Calls Out Toxic AEW vs. WWE Tribalism Among Wrestling Fans
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SKIP] Score sotto soglia editoriale (15/75): Sgt. Slaughter Movie Casting Call Looking for "Sadistic Military Figure"
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[PENDING] Coda salvata: 1 elementi
+[REPORT v86.6/legacy] Hold fino alle 06:30: report:wwe-nxt-2026-05-19 | pronto tra 358 min - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[REPORT v86.8/legacy] 1 true-results report trattenuti fino alle 06:30 Europe/Rome
+[SCORE] 100 high - WWE HOFer Confused By Brock Lesnar Return | WWE/main roster, top star titolo: brock lesnar, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, show settimanale, v62 ritorno/debutto, v71 freshness=0.69
+[SCORE] 82 high - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match | AEW, titolo/championship, PLE/PPV, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.603
+[SCORE] 78 medium - Mick Foley Says He's Having a Blast in AEW Ahead of Double or Nothing Debut | AEW, impatto roster/storyline, ritorno/debutto, PLE/PPV, v62 ritorno/debutto, v71 source reliability soft penalty, v71 freshness=0.69
+[SCORE] 76 medium - WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 low freshness/novelty, v71 freshness=0.316
+[SCORE] 71 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 68 medium - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, show settimanale, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 60 medium - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 59 low - Trick Williams Links Up With Soulja Boy at Collect-A-Con | WWE/main roster, nomi forti titolo: trick williams, WWE main roster + storyline/evento, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.564, v48 tier2: 55-74
+[SCORE] 55 low - WWE SNME - 5/23/2026: Biggest Winners & Losers | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v71 freshness=0.582, v48 tier2: 55-74
+[SCORE] 48 low - New Day Current Status for AEW Double or Nothing | WWE/main roster, ritorno/debutto, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.573, v48 tier3: 45-54 contestuale
+[MODE] Modalita normale: 1 news >=90, 2 news >=80
+[BOT] WordPress offline: assegno score e salvo solo i candidati che sarebbero stati pubblicati, senza chiamare Gemini.
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[PENDING v90.2.4] Hard skip offline pending: score basso 71 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[PENDING v90.2.4] Hard skip offline pending: score basso 68 - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[PENDING v90.2.4] Hard skip offline pending: score basso 60 - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[PENDING v90.2.4] Hard skip offline pending: score basso 59 - Trick Williams Links Up With Soulja Boy at Collect-A-Con
+[PENDING v90.2.4] Hard skip offline pending: score basso 55 - WWE SNME - 5/23/2026: Biggest Winners & Losers
+[PENDING v90.2.4] Hard skip offline pending: score basso 48 - New Day Current Status for AEW Double or Nothing
+[PENDING v90.2.4] Hard skip offline pending: score basso 46 - Thekla Reveals She Speaks Five Languages Including Japanese and Georgian
+[PENDING v90.2.4] Hard skip offline pending: score basso 43 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[PENDING v90.2.4] Hard skip offline pending: score basso 41 - The Godfather Signs New WWE Legends Deal
+[PENDING v90.2.4] Offline pending guard: keep=4 drop=9 reason=wp_down_initial_normal
+[PENDING] Scarto pending scaduto: WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[PENDING] Coda salvata: 1 elementi
+[PENDING] Salvata news high (100): WWE HOFer Confused By Brock Lesnar Return
+[PENDING] Coda salvata: 2 elementi
+[PENDING] Salvata news high (82): AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[PENDING] Coda salvata: 3 elementi
+[PENDING] Salvata news medium (78): Mick Foley Says He's Having a Blast in AEW Ahead of Double or Nothing Debut
+[PENDING v86.8/legacy] Candidati salvati per dopo: 3
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-24 22:30:38_summary.json -> published_html_review/run_2026-05-24 22-30-38_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (753 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-24 22:30:38] VERSION [v90_2_5_4_1_event_registry_report_key (62810ce)] =====
+
