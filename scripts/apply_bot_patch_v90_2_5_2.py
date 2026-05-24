@@ -10,6 +10,15 @@ V90_2_5_2_ENABLED = os.getenv("V90_2_5_2_ENABLED", "1").lower() not in {"0", "fa
 V90_2_5_2_HIGH_SCORE_PROTECT = int(os.getenv("V90_2_5_2_HIGH_SCORE_PROTECT", "85"))
 V90_2_5_2_LOW_SCORE_FINAL_MAX = int(os.getenv("V90_2_5_2_LOW_SCORE_FINAL_MAX", "54"))
 V90_2_5_2_NON_FINAL_STATUSES = {"competitive_deferred", "pending_competition", "high_score_not_published", "potentially_publishable"}
+V90_2_5_2_ALWAYS_FINAL_STATUSES = {
+    "published",
+    "skipped_soft_trash",
+    "skipped_stale",
+    "skipped_editorial_exclude",
+    "skipped_duplicate",
+    "skipped_existing_wp",
+    "skipped_existing_history",
+}
 
 
 def v90252_safe_int(value, default=0):
@@ -56,10 +65,12 @@ def v90252_status_blocks(status):
     s = str(status or "").strip().lower()
     if s in V90_2_5_2_NON_FINAL_STATUSES:
         return False
+    if s in V90_2_5_2_ALWAYS_FINAL_STATUSES:
+        return True
     try:
         return v9025_is_final_status(s)
     except Exception:
-        return s in {"published", "skipped_soft_trash", "skipped_stale", "skipped_duplicate", "skipped_existing_wp", "skipped_existing_history"}
+        return False
 
 try:
     _ORIG_V90252_should_hard_skip_url = v9025_should_hard_skip_url
@@ -71,9 +82,13 @@ try:
         title = rec.get("title") or ""
         score = rec.get("score")
         reason = rec.get("reason") or ""
+        if not V90_2_5_2_ENABLED:
+            return _ORIG_V90252_should_hard_skip_url(url)
         if status in V90_2_5_2_NON_FINAL_STATUSES:
             return False, rec
-        if v90252_should_be_competitive(title, score=score, status=status, reason=reason) and status not in {"published", "skipped_duplicate", "skipped_existing_wp", "skipped_existing_history"}:
+        if status in V90_2_5_2_ALWAYS_FINAL_STATUSES:
+            return True, rec
+        if v90252_should_be_competitive(title, score=score, status=status, reason=reason):
             print(f"[PROCESSED v90.2.5.2] Non blocco URL competitivo status={status} score={score} - {title}")
             return False, rec
         if status == "skipped_below_threshold" and v90252_safe_int(score, 0) > V90_2_5_2_LOW_SCORE_FINAL_MAX:
@@ -92,12 +107,13 @@ try:
         if V90_2_5_2_ENABLED:
             title_s = v90252_title_text(title)
             status_s = str(status or "").strip().lower()
-            if v90252_should_be_competitive(title_s, score=score, status=status_s, reason=reason) and status_s not in {"published", "skipped_duplicate", "skipped_existing_wp", "skipped_existing_history"}:
-                status = "competitive_deferred"
-                reason = "high_score_or_discussion_worthy_not_final"
-            elif status_s in {"rejected", "skipped_below_threshold"} and v90252_safe_int(score, 0) > V90_2_5_2_LOW_SCORE_FINAL_MAX:
-                status = "competitive_deferred"
-                reason = "above_low_score_final_cap_not_final"
+            if status_s not in V90_2_5_2_ALWAYS_FINAL_STATUSES:
+                if v90252_should_be_competitive(title_s, score=score, status=status_s, reason=reason):
+                    status = "competitive_deferred"
+                    reason = "high_score_or_discussion_worthy_not_final"
+                elif status_s in {"rejected", "skipped_below_threshold"} and v90252_safe_int(score, 0) > V90_2_5_2_LOW_SCORE_FINAL_MAX:
+                    status = "competitive_deferred"
+                    reason = "above_low_score_final_cap_not_final"
         return _ORIG_V90252_record_processed_url(url, title=title, status=status, reason=reason, score=score, extra=extra)
 except Exception:
     pass
@@ -116,7 +132,7 @@ try:
             title = rec.get("title") or ""
             score = rec.get("score")
             status = str(rec.get("status") or "").strip().lower()
-            if status in {"published", "skipped_duplicate", "skipped_existing_wp", "skipped_existing_history", "skipped_stale", "skipped_soft_trash"}:
+            if status in V90_2_5_2_ALWAYS_FINAL_STATUSES:
                 continue
             if v90252_should_be_competitive(title, score=score, status=status, reason=rec.get("reason")) or (status in {"rejected", "skipped_below_threshold"} and v90252_safe_int(score, 0) > V90_2_5_2_LOW_SCORE_FINAL_MAX):
                 rec["status"] = "competitive_deferred"
