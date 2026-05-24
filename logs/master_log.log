@@ -3807,3 +3807,121 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
 ===== RUN END [2026-05-24 05:58:47] VERSION [v90_2_5_1_processed_skip_recorder (285c623)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show=collision
+[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard
+[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.1] Report dedupe protection attiva: true-results usa solo report gate stretto
+[MODEL v90.2.2] translate_report chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-pro
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.3] Social embed quote positioning attivo
+[BOOT v90.2.3.1] Inline image dict normalization attiva in v88_media_record
+[BOOT v90.2.4] Offline pending hard-skip guard attiva
+[BOOT v90.2.4.1] Report hard-title guard attiva
+[BOOT v90.2.4.2] Report artifacts/casing recovery attiva
+[BOOT v90.2.5] Processed URL hard-skip attivo
+[BOOT v90.2.5.1] Processed URL skip recorder attivo
+
+===== RUN START [2026-05-24 08:36:46] VERSION [v90_2_5_1_processed_skip_recorder (15cac61)] =====
+[PROCESSED v90.2.5] Loaded processed URL records: 29
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API timeout | tentativo 1/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f58746a3b90>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Health check API timeout | tentativo 2/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f58746b4a10>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Health check API timeout | tentativo 3/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f58746b57d0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] WordPress/API non disponibile dopo 3 tentativi: api_timeout: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f58746b57d0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2180144/vision-retain-wwe-world-tag-team-titles-underhanded-fashion-street-profits/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (27/75): Trick Williams Discusses Difficulties Of Moving From Football To WWE
+[SKIP] Score sotto soglia editoriale (20/75): AEW & ROH Star Bandido Names Biggest Wrestling Inspirations, Including WWE HOFer
+[SKIP] Score sotto soglia editoriale (20/75): Joe Hendry Explains Why WWE NXT Was Among The 'Most Difficult Challenges' He's Faced
+[SCORE v81.1] Cap light name-driven item 20->20 - WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 73->54 - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[SKIP] URL già in history: https://www.wrestlinginc.com/2180139/paige-brie-bella-hang-on-womens-tag-titles-following-wwe-snme/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176092/wwe-hofer-eric-bischoff-reflects-working-late-ted-turner/
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026 Predictions: Wrestling Inc. Picks The Winners
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (26/75): AEW's Harley Cameron Details The Process Of Learning To Wrestle On Live TV
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:wwe-smackdown-2026-05-22 - WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026: Draws & Duds
+[SKIP] Score sotto soglia editoriale (0/75): WWE Saturday Night's Main Event 5/23/2026 Predictions: Wrestling Inc. Picks The Winners
+[SKIP] URL già in history: https://www.wrestlinginc.com/2180137/penta-soundly-defends-ic-title-wwe-snme/
+[SKIP] Score sotto soglia editoriale (48/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[REPORT v86.8/legacy] URL in history ma true results non confermato: continuo report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] story_signature in history ma true results: rivaluto report:wwe-nxt-2026-05-19
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (45/75): Becky Lynch Doubles Down With Wild Jessika Carr Accusation After Saturday Night's Main Event
+[SCORE v80.4] AAA major World priority 33->72 - AAA Noche de Los Grandes Lineup for Expanded Two-Week Event
+[SCORE v81.1] Cap future card announcement 72->72 - AAA Noche de Los Grandes Lineup for Expanded Two-Week Event
+[SCORE v80.4] AAA major World priority 86->98 - Ludwig Kaiser Appears In AAA After Recent Arrest
+[SKIP] URL già in history: https://www.ringsidenews.com/savio-vega-replaces-rey-mysterio-aaa-fox-commentary-team/
+[SCORE v80.4] AAA major World priority 55->72 - Rey Mysterio Announced As New General Manager For AAA
+[SKIP] Esclusione editoriale dura (v71 clickbait title): Paige & Brie Bella Pull Off Shocking Win To Retain WWE Women's Tag Team Titles At Saturday Night's Main Event
+[SCORE v80.4] AAA major World priority 43->72 - AAA on FOX Results, Highlights and Key Moments for May 23, 2026
+[SKIP] URL già in history: https://www.ringsidenews.com/becky-lynch-melts-down-sol-ruca-match-ends-chaos-saturday-nights-main-event/
+[SKIP] URL già in history: https://www.ringsidenews.com/charlotte-flair-wrestles-through-wardrobe-malfunction-during-wwe-saturday-nights-main-event/
+[SCORE] 100 high - WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears | WWE/main roster, top star titolo: rhea ripley, WWE main roster + storyline/evento, ritorno/debutto, PLE/PPV, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.31
+[SCORE] 98 high - Ludwig Kaiser Appears In AAA After Recent Arrest | WWE/main roster, WWE main roster + storyline/evento, evento legale/controversia, v62 evento legale grave, v80.4 AAA major World priority 86->98, v71 freshness=0.629
+[SCORE] 79 medium - Big Match Added to WWE Clash in Italy | WWE/main roster, top star lead: brock lesnar, nomi forti lead: brock lesnar, oba femi, impatto roster/storyline, WWE main roster + storyline/evento, contratto, combo top name lead + evento forte, v66 cap title match non-title-change, v71 source reliability soft penalty, v71 freshness=0.614
+[SCORE] 75 medium - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, show settimanale, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 low freshness/novelty, v71 freshness=0.31, true-results report: bypass soglia editoriale
+[SCORE] 73 medium - Fans Furious Over Becky Lynch vs. Sol Ruca's Controversial Finish at Saturday Night's Main Event | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.57, v48 tier2: 55-74
+[SCORE] 71 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 69 medium - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, PLE/PPV, v71 freshness=0.365, v48 tier2: 55-74
+[SCORE] 68 medium - Logan Paul & Austin Theory Cheat To Retain World Tag Team Titles At WWE Saturday Night's Main Event | WWE/main roster, nomi forti titolo: logan paul, WWE main roster + storyline/evento, floor WWE main roster storyline, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.5, v48 tier2: 55-74
+[SCORE] 68 medium - Penta Pulls Off Impressive Win To Retain IC Title At WWE Saturday Night's Main Event | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.488, v48 tier2: 55-74
+[SCORE] 68 medium - WWE Adds Clash In Italy Title Match During Saturday Night's Main Event | WWE/main roster, top star lead: becky lynch, nomi forti lead: becky lynch, WWE main roster + storyline/evento, floor WWE main roster storyline, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.484, v48 tier2: 55-74
+[REPORT v86.9] Priorita true-results in coda: report:wwe-smackdown-2026-05-22 - WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears
+[MODE] Modalita normale: 2 news >=90, 2 news >=80
+[BOT] WordPress offline: assegno score e salvo solo i candidati che sarebbero stati pubblicati, senza chiamare Gemini.
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[PENDING v90.2.4] Hard skip offline pending: URL gia processato - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[PENDING v90.2.4] Hard skip offline pending: score basso 73 - Fans Furious Over Becky Lynch vs. Sol Ruca's Controversial Finish at Saturday Night's Main Event
+[PENDING v90.2.4] Hard skip offline pending: score basso 71 - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[PENDING v90.2.4] Hard skip offline pending: score basso 69 - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot
+[PENDING v90.2.4] Hard skip offline pending: score basso 68 - Logan Paul & Austin Theory Cheat To Retain World Tag Team Titles At WWE Saturday Night's Main Event
+[PENDING v90.2.4] Hard skip offline pending: score basso 68 - Penta Pulls Off Impressive Win To Retain IC Title At WWE Saturday Night's Main Event
+[PENDING v90.2.4] Hard skip offline pending: score basso 68 - WWE Adds Clash In Italy Title Match During Saturday Night's Main Event
+[PENDING v90.2.4] Hard skip offline pending: score basso 67 - AAA Noche de Los Grandes Lineup for Expanded Two-Week Event
+[PENDING v90.2.4] Hard skip offline pending: score basso 67 - Rey Mysterio Announced As New General Manager For AAA
+[PENDING v90.2.4] Hard skip offline pending: score basso 67 - AAA on FOX Results, Highlights and Key Moments for May 23, 2026
+[PENDING v90.2.4] Hard skip offline pending: score basso 60 - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[PENDING v90.2.4] Hard skip offline pending: score basso 54 - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[PENDING v90.2.4] Hard skip offline pending: score basso 41 - Skye Blue Says Doctor Told Her Ankle Looked Like It Came From a Car Crash
+[PENDING v90.2.4] Offline pending guard: keep=3 drop=13 reason=wp_down_initial_normal
+[WP] Health check cache: KO (api_timeout: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f58746b57d0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)')))
+[PENDING] Coda salvata: 1 elementi
+[PENDING] Salvata news high (100): WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears
+[PENDING] Coda salvata: 2 elementi
+[PENDING] Salvata news high (98): Ludwig Kaiser Appears In AAA After Recent Arrest
+[PENDING] Coda salvata: 3 elementi
+[PENDING] Salvata news medium (79): Big Match Added to WWE Clash in Italy
+[PENDING v86.8/legacy] Candidati salvati per dopo: 3
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-24 08:36:46_summary.json -> published_html_review/run_2026-05-24 08-36-46_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (709 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-24 08:36:46] VERSION [v90_2_5_1_processed_skip_recorder (15cac61)] =====
+
