@@ -1,4 +1,4 @@
-name: OpenWrestlingTV Bot v90.2.5.4.1
+name: OpenWrestlingTV Bot v90.2.6
 
 on:
   workflow_dispatch:
@@ -51,29 +51,10 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Apply patches
+      - name: Apply consolidated runtime chain
         run: |
           set -e
-          python scripts/apply_bot_patch_v90_1.py
-          python scripts/apply_bot_patch_v90_1_review_fix.py
-          python scripts/apply_bot_patch_v90_1_1.py
-          python scripts/apply_bot_patch_v90_1_2.py
-          python scripts/apply_bot_patch_v90_1_3.py
-          python scripts/apply_bot_patch_v90_2.py
-          python scripts/apply_bot_patch_v90_2_1.py
-          python scripts/apply_bot_patch_v90_2_2.py
-          python scripts/apply_bot_patch_v90_2_3.py
-          python scripts/apply_bot_patch_v90_2_3_1.py
-          python scripts/apply_bot_patch_v90_2_4.py
-          python scripts/apply_bot_patch_v90_2_4_1.py
-          python scripts/apply_bot_patch_v90_2_4_2.py
-          python scripts/apply_bot_patch_v90_2_5.py
-          python scripts/apply_bot_patch_v90_2_5_1.py
-          python scripts/apply_bot_patch_v90_2_5_2.py
-          python scripts/apply_bot_patch_v90_2_5_3.py
-          python scripts/apply_bot_patch_v90_2_5_3_1.py
-          python scripts/apply_bot_patch_v90_2_5_4.py
-          python scripts/apply_bot_patch_v90_2_5_4_1.py
+          python scripts/apply_runtime_chain_v90_2_6.py
 
       - name: Verify consolidated source
         run: |
@@ -101,11 +82,11 @@ jobs:
           ]
           missing = [m for m in required if m not in text]
           if missing:
-              raise SystemExit('[SOURCE CONSOLIDATION v90.2.5.4.1] missing markers: ' + ', '.join(missing))
-          print('[SOURCE CONSOLIDATION v90.2.5.4.1] bot.py contiene la chain consolidata fino a v90.2.5.4.1')
+              raise SystemExit('[SOURCE CONSOLIDATION v90.2.6] missing markers: ' + ', '.join(missing))
+          print('[SOURCE CONSOLIDATION v90.2.6] bot.py contiene la chain consolidata fino a v90.2.5.4.1')
           PY
 
-      - name: Run bot v90_2_5_4_1
+      - name: Run bot v90_2_6
         id: run_bot
         env:
           WP_USER: ${{ secrets.WP_USER }}
@@ -177,6 +158,6 @@ jobs:
             code=$(cat .bot_exit_code)
           fi
           if [ "$code" != "0" ]; then
-            echo "[BOT v90.2.5.4.1] Bot terminato con exit code $code"
+            echo "[BOT v90.2.6] Bot terminato con exit code $code"
             exit "$code"
           fi
