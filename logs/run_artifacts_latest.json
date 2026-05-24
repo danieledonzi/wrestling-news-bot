@@ -1,20 +1,20 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-24 17:11:00",
-  "bot_version": "v90_2_5_3_1_snme_publish_tighten (8154144)",
-  "git_sha": "8154144d9ae94a1daca0a2d73999ed51be4a85da",
-  "created_at": "2026-05-24T17:11:53",
+  "run_id": "2026-05-24 18:35:52",
+  "bot_version": "v90_2_5_3_1_snme_publish_tighten (f0889c4)",
+  "git_sha": "f0889c4333756cfa3db384c625bd0402ceef681a",
+  "created_at": "2026-05-24T18:36:36",
   "published_count": 1,
   "published_post_ids": [
-    "5237"
+    "5240"
   ],
   "published_artifacts": [
     {
-      "post_id": 5237,
-      "title": "Rey Mysterio nominato General Manager della AAA",
-      "source_url": "https://www.wrestlinginc.com/2180229/rey-mysterio-named-general-manager-aaa/",
-      "html_file": "published/20260524_171150_001_rey-mysterio-nominato-general-manager-della-aaa_5237_final.html",
-      "metadata_file": "published/20260524_171150_001_rey-mysterio-nominato-general-manager-della-aaa_5237_metadata.json"
+      "post_id": 5240,
+      "title": "Possibili infortuni per Logan Paul e Sol Ruca durante il Saturday Night's Main Event",
+      "source_url": "https://www.ringsidenews.com/two-wwe-stars-may-have-injured-saturday-nights-main-event/",
+      "html_file": "published/20260524_183633_001_possibili-infortuni-per-logan-paul-e-sol-ruca-durante-il-saturday-nights-main-event_5240_final.html",
+      "metadata_file": "published/20260524_183633_001_possibili-infortuni-per-logan-paul-e-sol-ruca-durante-il-saturday-nights-main-event_5240_metadata.json"
     }
   ],
   "errors": [],
