@@ -4494,3 +4494,114 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-24 10:28:38] VERSION [v90_2_5_3_snme_publish_processed (61fdf54)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show=collision
+[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard
+[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.1] Report dedupe protection attiva: true-results usa solo report gate stretto
+[MODEL v90.2.2] translate_report chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-pro
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.3] Social embed quote positioning attivo
+[BOOT v90.2.3.1] Inline image dict normalization attiva in v88_media_record
+[BOOT v90.2.4] Offline pending hard-skip guard attiva
+[BOOT v90.2.4.1] Report hard-title guard attiva
+[BOOT v90.2.4.2] Report artifacts/casing recovery attiva
+[BOOT v90.2.5] Processed URL hard-skip attivo
+[BOOT v90.2.5.1] Processed URL skip recorder attivo
+[BOOT v90.2.5.2] Processed competitive guard attiva: high-score e SNME non finali
+[BOOT v90.2.5.3] SNME event report guard e processed publish success attivi
+[BOOT v90.2.5.3.1] SNME floor ristretto e processed publish corrente attivi
+
+===== RUN START [2026-05-24 10:42:38] VERSION [v90_2_5_3_1_snme_publish_tighten (28eb754)] =====
+[PROCESSED v90.2.5.2] Migrati record non-final competitivi: 9
+[PROCESSED v90.2.5] Loaded processed URL records: 32
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2180144/vision-retain-wwe-world-tag-team-titles-underhanded-fashion-street-profits/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (27/75): Trick Williams Discusses Difficulties Of Moving From Football To WWE
+[SKIP] Score sotto soglia editoriale (20/75): AEW & ROH Star Bandido Names Biggest Wrestling Inspirations, Including WWE HOFer
+[SKIP] Score sotto soglia editoriale (20/75): Joe Hendry Explains Why WWE NXT Was Among The 'Most Difficult Challenges' He's Faced
+[SCORE v81.1] Cap light name-driven item 20->20 - WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SKIP] Score sotto soglia editoriale (14/75): WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 73->54 - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[SKIP] URL già in history: https://www.wrestlinginc.com/2180139/paige-brie-bella-hang-on-womens-tag-titles-following-wwe-snme/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176092/wwe-hofer-eric-bischoff-reflects-working-late-ted-turner/
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026 Predictions: Wrestling Inc. Picks The Winners
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (26/75): AEW's Harley Cameron Details The Process Of Learning To Wrestle On Live TV
+[REPORT v87.2] Report confermato da history forte: report:wwe-smackdown-2026-05-22
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-smackdown-2026-05-22 - WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026: Draws & Duds
+[SKIP] Score sotto soglia editoriale (0/75): WWE Saturday Night's Main Event 5/23/2026 Predictions: Wrestling Inc. Picks The Winners
+[SKIP] URL già in history: https://www.wrestlinginc.com/2180137/penta-soundly-defends-ic-title-wwe-snme/
+[SKIP] Score sotto soglia editoriale (48/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/fans-furious-becky-lynch-vs-sol-rucas-controversial-finish-saturday-nights-main-event/
+[SKIP] Score sotto soglia editoriale (45/75): Becky Lynch Doubles Down With Wild Jessika Carr Accusation After Saturday Night's Main Event
+[SCORE v80.4] AAA major World priority 33->72 - AAA Noche de Los Grandes Lineup for Expanded Two-Week Event
+[SCORE v81.1] Cap future card announcement 72->72 - AAA Noche de Los Grandes Lineup for Expanded Two-Week Event
+[SCORE v80.4] AAA major World priority 86->98 - Ludwig Kaiser Appears In AAA After Recent Arrest
+[SKIP] URL già in history: https://www.ringsidenews.com/savio-vega-replaces-rey-mysterio-aaa-fox-commentary-team/
+[SKIP] URL già in history: https://www.ringsidenews.com/rey-mysterio-announced-new-general-manager-aaa/
+[PERF v71] WP lookup event_key: 1.10s
+[SKIP] event_key confermata su WordPress: event:logan-paul-title - Logan Paul & Austin Theory Cheat To Retain World Tag Team Titles At WWE Saturday Night's Main Event
+[SKIP] Esclusione editoriale dura (v71 clickbait title): Paige & Brie Bella Pull Off Shocking Win To Retain WWE Women's Tag Team Titles At Saturday Night's Main Event
+[SKIP] URL già in history: https://www.ringsidenews.com/aaa-fox-results-highlights-key-moments-may-23-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/becky-lynch-melts-down-sol-ruca-match-ends-chaos-saturday-nights-main-event/
+[SKIP] URL già in history: https://www.ringsidenews.com/charlotte-flair-wrestles-through-wardrobe-malfunction-during-wwe-saturday-nights-main-event/
+[SCORE] 98 high - Ludwig Kaiser Appears In AAA After Recent Arrest | WWE/main roster, WWE main roster + storyline/evento, evento legale/controversia, v62 evento legale grave, v80.4 AAA major World priority 86->98, v71 freshness=0.603
+[SCORE] 79 medium - Big Match Added to WWE Clash in Italy | WWE/main roster, top star lead: brock lesnar, nomi forti lead: brock lesnar, oba femi, impatto roster/storyline, WWE main roster + storyline/evento, contratto, combo top name lead + evento forte, v66 cap title match non-title-change, v71 source reliability soft penalty, v71 freshness=0.588
+[SCORE] 71 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 68 medium - Penta Pulls Off Impressive Win To Retain IC Title At WWE Saturday Night's Main Event | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.462, v48 tier2: 55-74
+[SCORE] 68 medium - WWE Adds Clash In Italy Title Match During Saturday Night's Main Event | WWE/main roster, top star lead: becky lynch, nomi forti lead: becky lynch, WWE main roster + storyline/evento, floor WWE main roster storyline, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.458, v48 tier2: 55-74
+[SCORE] 67 medium - AAA Noche de Los Grandes Lineup for Expanded Two-Week Event | altre promotion, match/segmento annunciato, v62 categoria business, v80.4 AAA major World priority 33->72, v81.1 cap future card announcement 72->72, v71 source reliability soft penalty, v71 freshness=0.491, v48 tier2: 55-74
+[SCORE] 63 medium - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, PLE/PPV, v71 low freshness/novelty, v71 freshness=0.339, v48 tier2: 55-74
+[SCORE] 60 medium - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 48 low - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v62 titolo/championship, v88.2 cap OTHER/feature non-news 73->54, v71 low freshness/novelty, v71 freshness=0.339, v48 tier3: 45-54 contestuale
+[SCORE] 41 low - Skye Blue Says Doctor Told Her Ankle Looked Like It Came From a Car Crash | AEW, impatto roster/storyline, infortunio, v71 source reliability soft penalty, v71 freshness=0.574, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 10 | mode=normal | max nuove=3 | pending pubblicati=0
+[SKIP v90.2] Follow-up duplicato/non sostanziale core=legal:ludwig-kaiser:case score=98 reason=core_cap_reached_no_major_update novel=[] - Ludwig Kaiser Appears In AAA After Recent Arrest
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Big Match Added to WWE Clash in Italy
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Penta Pulls Off Impressive Win To Retain IC Title At WWE Saturday Night's Main Event
+[SKIP v90.2] Follow-up in soft_pool core=title:becky-lynch:status score=68 reason=medium_followup_or_weak_update novel=[] - WWE Adds Clash In Italy Title Match During Saturday Night's Main Event
+[SKIP v85.1] future card/segment announcement non-spoiler pre-Gemini: AAA Noche de Los Grandes Lineup for Expanded Two-Week Event
+[PENDING] Coda salvata: 0 elementi
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[PENDING] Coda salvata: 0 elementi
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Skye Blue Says Doctor Told Her Ankle Looked Like It Came From a Car Crash
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 10 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-24 10:42:38_summary.json -> published_html_review/run_2026-05-24 10-42-38_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (722 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-24 10:42:38] VERSION [v90_2_5_3_1_snme_publish_tighten (28eb754)] =====
+
