@@ -1,4 +1,17 @@
 {
+  "https://www.ringsidenews.com/big-match-added-wwe-clash-italy": {
+    "extra": {
+      "event_key": "event:brock-lesnar-contract",
+      "raw_result": "skipped",
+      "semantic_id": "big-match-added-to-wwe-clash-in-italy"
+    },
+    "reason": "skipped",
+    "score": 54,
+    "status": "rejected",
+    "title": "Big Match Added to WWE Clash in Italy",
+    "updated_at": "1779602383.0324235",
+    "url": "https://www.ringsidenews.com/big-match-added-wwe-clash-italy/"
+  },
   "https://www.ringsidenews.com/blake-monroe-makes-wwe-main-roster-debut-during-522-smackdown": {
     "extra": {
       "event_key": "",
@@ -89,6 +102,19 @@
     "title": "FTR Wants Match Against New Day in AEW After WWE Exit",
     "updated_at": "1779586420.5981474",
     "url": "https://www.ringsidenews.com/ftr-wants-match-against-new-day-aew-wwe-exit/"
+  },
+  "https://www.ringsidenews.com/ludwig-kaiser-appears-aaa-recent-arrest": {
+    "extra": {
+      "event_key": "",
+      "raw_result": "skipped",
+      "semantic_id": "ludwig-kaiser-appears-in-aaa-after-recent-arrest"
+    },
+    "reason": "skipped",
+    "score": 98,
+    "status": "rejected",
+    "title": "Ludwig Kaiser Appears In AAA After Recent Arrest",
+    "updated_at": "1779602346.0809677",
+    "url": "https://www.ringsidenews.com/ludwig-kaiser-appears-aaa-recent-arrest/"
   },
   "https://www.ringsidenews.com/mance-warner-clears-confusion-indie-promotion-claimed-aew-pulled-him": {
     "extra": {

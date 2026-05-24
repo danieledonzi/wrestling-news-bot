@@ -1,36 +1,36 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-24 01:30:23",
-  "bot_version": "v90_2_5_1_processed_skip_recorder (0d5f889)",
-  "git_sha": "0d5f889eb869ac0d7ed7beb0270a3f55adcdb32f",
-  "created_at": "2026-05-24T01:33:41",
+  "run_id": "2026-05-24 05:58:47",
+  "bot_version": "v90_2_5_1_processed_skip_recorder (285c623)",
+  "git_sha": "285c6234c924c5f5aada33e35f4d8ef078c760eb",
+  "created_at": "2026-05-24T06:00:44",
   "published_count": 3,
   "published_post_ids": [
-    "5201",
-    "5204",
-    "5207"
+    "5210",
+    "5213",
+    "5216"
   ],
   "published_artifacts": [
     {
-      "post_id": 5201,
-      "title": "Becky Lynch furiosa dopo il finale contro Sol Ruca a Saturday Night's Main Event",
-      "source_url": "https://www.ringsidenews.com/becky-lynch-melts-down-sol-ruca-match-ends-chaos-saturday-nights-main-event/",
-      "html_file": "published/20260524_013155_001_becky-lynch-furiosa-dopo-il-finale-contro-sol-ruca-a-saturday-nights-main-event_5201_final.html",
-      "metadata_file": "published/20260524_013155_001_becky-lynch-furiosa-dopo-il-finale-contro-sol-ruca-a-saturday-nights-main-event_5201_metadata.json"
+      "post_id": 5210,
+      "title": "Paige e Brie Bella difendono con successo i WWE women's tag team championship a saturday night's main event",
+      "source_url": "https://www.wrestlinginc.com/2180139/paige-brie-bella-hang-on-womens-tag-titles-following-wwe-snme/",
+      "html_file": "published/20260524_055936_001_paige-e-brie-bella-difendono-con-successo-i-wwe-womens-tag-team-championship-a-saturday-ni_5210_final.html",
+      "metadata_file": "published/20260524_055936_001_paige-e-brie-bella-difendono-con-successo-i-wwe-womens-tag-team-championship-a-saturday-ni_5210_metadata.json"
     },
     {
-      "post_id": 5204,
-      "title": "Penta difende l'Intercontinental Championship a Saturday Night's Main Event",
-      "source_url": "https://www.wrestlinginc.com/2180137/penta-soundly-defends-ic-title-wwe-snme/",
-      "html_file": "published/20260524_013245_002_penta-difende-lintercontinental-championship-a-saturday-nights-main-event_5204_final.html",
-      "metadata_file": "published/20260524_013245_002_penta-difende-lintercontinental-championship-a-saturday-nights-main-event_5204_metadata.json"
+      "post_id": 5213,
+      "title": "WWE World Tag Team Titles: The Vision difendono i titoli in modo irregolare",
+      "source_url": "https://www.wrestlinginc.com/2180144/vision-retain-wwe-world-tag-team-titles-underhanded-fashion-street-profits/",
+      "html_file": "published/20260524_060012_002_wwe-world-tag-team-titles-the-vision-difendono-i-titoli-in-modo-irregolare_5213_final.html",
+      "metadata_file": "published/20260524_060012_002_wwe-world-tag-team-titles-the-vision-difendono-i-titoli-in-modo-irregolare_5213_metadata.json"
     },
     {
-      "post_id": 5207,
-      "title": "Problemi con l'abbigliamento per Charlotte Flair durante WWE Saturday Night's Main Event",
-      "source_url": "https://www.ringsidenews.com/charlotte-flair-wrestles-through-wardrobe-malfunction-during-wwe-saturday-nights-main-event/",
-      "html_file": "published/20260524_013335_003_problemi-con-labbigliamento-per-charlotte-flair-durante-wwe-saturday-nights-main-event_5207_final.html",
-      "metadata_file": "published/20260524_013335_003_problemi-con-labbigliamento-per-charlotte-flair-durante-wwe-saturday-nights-main-event_5207_metadata.json"
+      "post_id": 5216,
+      "title": "Savio Vega sostituisce Rey Mysterio al commento di AAA on FOX",
+      "source_url": "https://www.ringsidenews.com/savio-vega-replaces-rey-mysterio-aaa-fox-commentary-team/",
+      "html_file": "published/20260524_060042_003_savio-vega-sostituisce-rey-mysterio-al-commento-di-aaa-on-fox_5216_final.html",
+      "metadata_file": "published/20260524_060042_003_savio-vega-sostituisce-rey-mysterio-al-commento-di-aaa-on-fox_5216_metadata.json"
     }
   ],
   "errors": [],

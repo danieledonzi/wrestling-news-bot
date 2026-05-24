@@ -113,7 +113,7 @@
     ],
     "count": 12,
     "first_seen": "2026-05-21T16:04:55",
-    "last_seen": "2026-05-24T01:31:22"
+    "last_seen": "2026-05-24T05:59:06"
   },
   "return:mark-shapiro:wwe": {
     "titles": [
@@ -459,5 +459,27 @@
     "count": 1,
     "first_seen": "2026-05-24T01:32:47",
     "last_seen": "2026-05-24T01:32:47"
+  },
+  "title:brie-bella:status": {
+    "titles": [
+      "Paige & Brie Bella Hang On To Women's Tag Titles Following WWE SNME"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-24T05:59:38",
+    "last_seen": "2026-05-24T05:59:38"
+  },
+  "title:the-vision:status": {
+    "titles": [
+      "The Vision Retain WWE World Tag Team Titles In Underhanded Fashion"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-24T06:00:13",
+    "last_seen": "2026-05-24T06:00:13"
   }
 }
