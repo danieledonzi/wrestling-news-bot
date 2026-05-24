@@ -4192,3 +4192,194 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
 ===== RUN END [2026-05-24 09:52:53] VERSION [v90_2_5_2_processed_competitive_guard (670761f)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show=collision
+[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard
+[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.1] Report dedupe protection attiva: true-results usa solo report gate stretto
+[MODEL v90.2.2] translate_report chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-pro
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.3] Social embed quote positioning attivo
+[BOOT v90.2.3.1] Inline image dict normalization attiva in v88_media_record
+[BOOT v90.2.4] Offline pending hard-skip guard attiva
+[BOOT v90.2.4.1] Report hard-title guard attiva
+[BOOT v90.2.4.2] Report artifacts/casing recovery attiva
+[BOOT v90.2.5] Processed URL hard-skip attivo
+[BOOT v90.2.5.1] Processed URL skip recorder attivo
+[BOOT v90.2.5.2] Processed competitive guard attiva: high-score e SNME non finali
+[BOOT v90.2.5.3] SNME event report guard e processed publish success attivi
+
+===== RUN START [2026-05-24 10:20:15] VERSION [v90_2_5_3_snme_publish_processed (82858f9)] =====
+[PROCESSED v90.2.5.2] Migrati record non-final competitivi: 9
+[PROCESSED v90.2.5] Loaded processed URL records: 32
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2180144/vision-retain-wwe-world-tag-team-titles-underhanded-fashion-street-profits/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (27/75): Trick Williams Discusses Difficulties Of Moving From Football To WWE
+[SKIP] Score sotto soglia editoriale (20/75): AEW & ROH Star Bandido Names Biggest Wrestling Inspirations, Including WWE HOFer
+[SKIP] Score sotto soglia editoriale (20/75): Joe Hendry Explains Why WWE NXT Was Among The 'Most Difficult Challenges' He's Faced
+[SCORE v81.1] Cap light name-driven item 20->20 - WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SKIP] Score sotto soglia editoriale (20/75): WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 73->54 - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[SNME v90.2.5.3] Pre-AI event score floor 54->82 - WWE Saturday Night's Main Event is tonight at 8 p.m. EST, and the five-match card will feature four title defenses.
+[SKIP] URL già in history: https://www.wrestlinginc.com/2180139/paige-brie-bella-hang-on-womens-tag-titles-following-wwe-snme/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176092/wwe-hofer-eric-bischoff-reflects-working-late-ted-turner/
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026 Predictions: Wrestling Inc. Picks The Winners
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (26/75): AEW's Harley Cameron Details The Process Of Learning To Wrestle On Live TV
+[REPORT v87.2] Report confermato da history forte: report:wwe-smackdown-2026-05-22
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-smackdown-2026-05-22 - WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026: Draws & Duds
+[SKIP] Score sotto soglia editoriale (0/75): WWE Saturday Night's Main Event 5/23/2026 Predictions: Wrestling Inc. Picks The Winners
+[SKIP] URL già in history: https://www.wrestlinginc.com/2180137/penta-soundly-defends-ic-title-wwe-snme/
+[SKIP] Score sotto soglia editoriale (48/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (45/75): Becky Lynch Doubles Down With Wild Jessika Carr Accusation After Saturday Night's Main Event
+[SCORE v80.4] AAA major World priority 33->72 - AAA Noche de Los Grandes Lineup for Expanded Two-Week Event
+[SCORE v81.1] Cap future card announcement 72->72 - AAA Noche de Los Grandes Lineup for Expanded Two-Week Event
+[SCORE v80.4] AAA major World priority 86->98 - Ludwig Kaiser Appears In AAA After Recent Arrest
+[SKIP] URL già in history: https://www.ringsidenews.com/savio-vega-replaces-rey-mysterio-aaa-fox-commentary-team/
+[SKIP] URL già in history: https://www.ringsidenews.com/rey-mysterio-announced-new-general-manager-aaa/
+[PERF v71] WP lookup event_key: 1.14s
+[SKIP] event_key confermata su WordPress: event:logan-paul-title - Logan Paul & Austin Theory Cheat To Retain World Tag Team Titles At WWE Saturday Night's Main Event
+[SKIP] Esclusione editoriale dura (v71 clickbait title): Paige & Brie Bella Pull Off Shocking Win To Retain WWE Women's Tag Team Titles At Saturday Night's Main Event
+[SKIP] URL già in history: https://www.ringsidenews.com/aaa-fox-results-highlights-key-moments-may-23-2026/
+[SKIP] URL già in history: https://www.ringsidenews.com/becky-lynch-melts-down-sol-ruca-match-ends-chaos-saturday-nights-main-event/
+[SKIP] URL già in history: https://www.ringsidenews.com/charlotte-flair-wrestles-through-wardrobe-malfunction-during-wwe-saturday-nights-main-event/
+[SCORE] 98 high - Ludwig Kaiser Appears In AAA After Recent Arrest | WWE/main roster, WWE main roster + storyline/evento, evento legale/controversia, v62 evento legale grave, v80.4 AAA major World priority 86->98, v71 freshness=0.607
+[SCORE] 79 medium - Big Match Added to WWE Clash in Italy | WWE/main roster, top star lead: brock lesnar, nomi forti lead: brock lesnar, oba femi, impatto roster/storyline, WWE main roster + storyline/evento, contratto, combo top name lead + evento forte, v66 cap title match non-title-change, v71 source reliability soft penalty, v71 freshness=0.593
+[SCORE] 76 medium - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v62 titolo/championship, v88.2 cap OTHER/feature non-news 73->54, v71 low freshness/novelty, v71 freshness=0.343
+[SCORE] 73 medium - Fans Furious Over Becky Lynch vs. Sol Ruca's Controversial Finish at Saturday Night's Main Event | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, PLE/PPV, v71 source reliability soft penalty, v71 freshness=0.549, v48 tier2: 55-74
+[SCORE] 71 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 68 medium - Penta Pulls Off Impressive Win To Retain IC Title At WWE Saturday Night's Main Event | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.467, v48 tier2: 55-74
+[SCORE] 68 medium - WWE Adds Clash In Italy Title Match During Saturday Night's Main Event | WWE/main roster, top star lead: becky lynch, nomi forti lead: becky lynch, WWE main roster + storyline/evento, floor WWE main roster storyline, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.463, v48 tier2: 55-74
+[SCORE] 67 medium - AAA Noche de Los Grandes Lineup for Expanded Two-Week Event | altre promotion, match/segmento annunciato, v62 categoria business, v80.4 AAA major World priority 33->72, v81.1 cap future card announcement 72->72, v71 source reliability soft penalty, v71 freshness=0.495, v48 tier2: 55-74
+[SCORE] 63 medium - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, PLE/PPV, v71 low freshness/novelty, v71 freshness=0.343, v48 tier2: 55-74
+[SCORE] 60 medium - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[MODE] Modalita normale: 1 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 11 | mode=normal | max nuove=3 | pending pubblicati=0
+[SKIP v90.2] Follow-up duplicato/non sostanziale core=legal:ludwig-kaiser:case score=98 reason=core_cap_reached_no_major_update novel=[] - Ludwig Kaiser Appears In AAA After Recent Arrest
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Big Match Added to WWE Clash in Italy
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[PERF v71] WP lookup URL esistente: 0.62s
+[BOT] Elaborazione: Fans Furious Over Becky Lynch vs. Sol Ruca's Controversial Finish at Saturday Night's Main Event
+[BOT] semantic_id=fans-furious-over-becky-lynch-vs-sol-rucas-controversial-finish-at-saturday-nights-main-event
+[SCORE] iniziale=73 priority=medium
+[EMBED v87.1] Estratti 18 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=18 url=https://www.ringsidenews.com/fans-furious-becky-lynch-vs-sol-rucas-controversial-finish-saturday-nights-main-event/
+[PERF v71] scraping articolo: 1.49s
+[EMBED v87.1] Estratti 18 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=29, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=18 url=https://www.ringsidenews.com/fans-furious-becky-lynch-vs-sol-rucas-controversial-finish-saturday-nights-main-event/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 18 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=29, image=0, embed=0
+[PERF v71] estrazione blocchi: 1.04s
+[BOT] Embed trovati: 18
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo analizza le reazioni dei fan a un evento già accaduto (il match Lynch vs Ruca). Non è una preview poiché descrive un segmento concluso, né un report completo dell'intero evento.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Sol Snatcher' come nome della mossa.; Tradurre 'non-title match' come 'match non titolato'.; Gestire le citazioni dei fan mantenendo il tono colloquiale e polemico.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo analizza le reazioni dei fan a un evento già accaduto (il match Lynch vs Ruca). Non è una preview poiché descrive un segmento concluso, né un report completo dell'intero evento.
+[PERF v71] analisi editoriale AI v72: 16.72s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Fans Furious Over Becky Lynch vs. Sol Ruca's Controversial Finish at Saturday Night's Main Event
+[SNME v90.2.5.3] Pre-AI event score floor 62->82 - The backlash surrounding Becky Lynch vs. Sol Ruca at Saturday Night's Main Event is now spreading beyond the storyline itself, as multiple fans are openly blasting WWE over the controversial finish and short match length. Several fans took to Twitter and criticized WWE over the Saturday Night's Main Event ending, where referee Jessika Carr took an accidental Sol Snatcher after Lynch used her as a shield . The match was then stopped, giving Ruca the win by disqualification. One fan ripped WWE for ending the match the way it did . "this is how tone deaf this company has become, how could you end the match like that?" Another fan questioned the creative behind the match and called the whole thing a waste: "Who booked & produced this trash match? Just a waste of time all around." A third fan took issue with the fact that the bout was non-title in the first place. "Honestly does it even matter because it was a non title match which is so stupid thanks @TripleH" Another viewer complained that the match felt rushed and barely got enough time before the messy ending: "did they even wrestle for 5 minutes??? this was rushed for no reason and the ending was terrible !" One more fan didn't hold back at all , calling the match a waste of television time. "What a waste of tv time. This match absolutly sucked. You guys should be ashamed of yourselves." The backlash comes after Becky Lynch went on her own social media rant, accusing Carr of being "power mad" and claiming she was only trying to protect the crowd from Sol Ruca . "I don't like POWER MAD Jessika Carr and her CROOKED ways but I stepped in like a HERO to PROTECT those that CANNOT protect themselves! The crowd were chanting 'ONE MORE TIME' at me to MAKE SURE SADISTIC SOL wouldn't get back up!" The finish now sets up Ruca for a Women's Intercontinental Championship match against Lynch at Clash in Italy on May 31, 2026, from Turin. Still, based on the reaction online, WWE's path to getting there clearly did not land well with everyone. Do you think WWE's controversial finish helped build Becky Lynch vs. Sol Ruca, or was it a bad way to end the match? Share your thoughts and feedback in the comments. Felix Upton has over 15 years of experience in media and wrestling journalism. His work at Ringside News blends speed, accuracy, and industry insight.
+[SNME v90.2.5.3] Event report floor 62->82 - The backlash surrounding Becky Lynch vs. Sol Ruca at Saturday Night's Main Event is now spreading beyond the storyline itself, as multiple fans are openly blasting WWE over the controversial finish and short match length. Several fans took to Twitter and criticized WWE over the Saturday Night's Main Event ending, where referee Jessika Carr took an accidental Sol Snatcher after Lynch used her as a shield . The match was then stopped, giving Ruca the win by disqualification. One fan ripped WWE for ending the match the way it did . "this is how tone deaf this company has become, how could you end the match like that?" Another fan questioned the creative behind the match and called the whole thing a waste: "Who booked & produced this trash match? Just a waste of time all around." A third fan took issue with the fact that the bout was non-title in the first place. "Honestly does it even matter because it was a non title match which is so stupid thanks @TripleH" Another viewer complained that the match felt rushed and barely got enough time before the messy ending: "did they even wrestle for 5 minutes??? this was rushed for no reason and the ending was terrible !" One more fan didn't hold back at all , calling the match a waste of television time. "What a waste of tv time. This match absolutly sucked. You guys should be ashamed of yourselves." The backlash comes after Becky Lynch went on her own social media rant, accusing Carr of being "power mad" and claiming she was only trying to protect the crowd from Sol Ruca . "I don't like POWER MAD Jessika Carr and her CROOKED ways but I stepped in like a HERO to PROTECT those that CANNOT protect themselves! The crowd were chanting 'ONE MORE TIME' at me to MAKE SURE SADISTIC SOL wouldn't get back up!" The finish now sets up Ruca for a Women's Intercontinental Championship match against Lynch at Clash in Italy on May 31, 2026, from Turin. Still, based on the reaction online, WWE's path to getting there clearly did not land well with everyone. Do you think WWE's controversial finish helped build Becky Lynch vs. Sol Ruca, or was it a bad way to end the match? Share your thoughts and feedback in the comments. Felix Upton has over 15 years of experience in media and wrestling journalism. His work at Ringside News blends speed, accuracy, and industry insight.
+[SCORE] raffinato=82 priority=high | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, PLE/PPV, v62 titolo/championship, v77 cap low editorial value, v77 cap low editorial value after AI
+[V71] story_signature=stable:becky_lynch|sol_ruca|fans_furious_over_becky_lynch|title|wwe semantic_status=new_story freshness=0.548
+[PERF v71] WP recent posts dedupe: 1.11s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.41s
+[MODEL v88] task=translate_report chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.1] Repair mirato blocchi mancanti: ['TEXT_011', 'TEXT_012', 'TEXT_013', 'TEXT_014', 'TEXT_015', 'TEXT_016', 'TEXT_017', 'TEXT_018']
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.1] Batch tradotto con gemini-3-flash-preview: 14 blocchi
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.1] Batch tradotto con gemini-3-flash-preview: 5 blocchi
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=29
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 97.89s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Polemiche tra i fan per il finale di Becky Lynch vs. Sol Ruca a Saturday Night's Main Event
+[EMBED v90.2.3] Social embed/quote normalizzati: 19
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/cannolijones/status/2058348509594591708
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/RampageIronkiz/status/2058348176810095072
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/swtduh/status/2058348191565680672
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/xXHuhGRectionXx/status/2058360080437772383
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/BryanOnTheMic/status/2058348902126948614
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/TomMilburnn/status/2058348197471203698
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/LewSkunt69/status/2058366245532037197
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/N0Milly/status/2058349067613437981
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/RoseSt3fanii/status/2058348227598934466
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/Tommyrorz90/status/2058348260935553333
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/ManLikeDanso/status/2058354037259387371
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/XAcidburnXx/status/2058350753593405950
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/EZE_Machine/status/2058348954689929223
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/MyWs_Homicide/status/2058350124468978075
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/originalMsdian/status/2058348721088377305
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/FHPDjapan/status/2058348301825536321
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/iamnathaneagle/status/2058348386730881160
+[EMBED v87.3] Positional embed guard applicato: 17 modifiche
+[EMBED v88] Publish media guard: expected=18 before=1 after=18 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/fans-furious-over-becky-lynch-vs-sol-rucas-controversial-finish-at-saturday-nights-main-event-42.jpg
+[MEDIA] Immagine caricata: 5224
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260524_102250_001_polemiche-tra-i-fan-per-il-finale-di-becky-lynch-vs-sol-ruca-a-saturday-nights-main-event_5225_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5225
+[PROCESSED v90.2.5] Publish result non conclusivo: non marco URL published
+[PERF v71] creazione post WordPress: 6.92s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/fans-furious-over-becky-lynch-vs-sol-rucas-controversial-finish-at-saturday-nights-main-event-42.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5224
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Fans Furious Over Becky Lynch vs. Sol Ruca's Controversial F': 125.99s
+[OK] Pubblicato: Polemiche tra i fan per il finale di Becky Lynch vs. Sol Ruca a Saturday Night's Main Event
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260524_102251_001_polemiche-tra-i-fan-per-il-finale-di-becky-lynch-vs-sol-ruca-a-saturday-night-s-_0ebba26d_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Polemiche tra i fan per il finale di Becky Lynch vs. Sol Ruca a Saturday Night's Main Event
+[PUBLISHED REVIEW v87.1] Review outer salvata: Polemiche tra i fan per il finale di Becky Lynch vs. Sol Ruca a Saturday Night's Main Event
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Penta Pulls Off Impressive Win To Retain IC Title At WWE Saturday Night's Main Event
+[SKIP v90.2] Follow-up in soft_pool core=title:becky-lynch:status score=68 reason=medium_followup_or_weak_update novel=[] - WWE Adds Clash In Italy Title Match During Saturday Night's Main Event
+[SKIP v85.1] future card/segment announcement non-spoiler pre-Gemini: AAA Noche de Los Grandes Lineup for Expanded Two-Week Event
+[PENDING] Coda salvata: 0 elementi
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[PENDING] Coda salvata: 0 elementi
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Skye Blue Says Doctor Told Her Ankle Looked Like It Came From a Car Crash
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 11 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-24 10:20:15_summary.json -> published_html_review/run_2026-05-24 10-20-15_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (720 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
+===== RUN END [2026-05-24 10:20:15] VERSION [v90_2_5_3_snme_publish_processed (82858f9)] =====
+

@@ -1,28 +1,20 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-24 09:52:53",
-  "bot_version": "v90_2_5_2_processed_competitive_guard (670761f)",
-  "git_sha": "670761fed4670e8208e9467910043047f0281409",
-  "created_at": "2026-05-24T09:55:18",
-  "published_count": 2,
+  "run_id": "2026-05-24 10:20:15",
+  "bot_version": "v90_2_5_3_snme_publish_processed (82858f9)",
+  "git_sha": "82858f9fedfb1cfc5db69916543c95257fa6d2c4",
+  "created_at": "2026-05-24T10:22:53",
+  "published_count": 1,
   "published_post_ids": [
-    "5219",
-    "5222"
+    "5225"
   ],
   "published_artifacts": [
     {
-      "post_id": 5219,
-      "title": "Rey Mysterio è il nuovo General Manager di AAA",
-      "source_url": "https://www.ringsidenews.com/rey-mysterio-announced-new-general-manager-aaa/",
-      "html_file": "published/20260524_095352_001_rey-mysterio-è-il-nuovo-general-manager-di-aaa_5219_final.html",
-      "metadata_file": "published/20260524_095352_001_rey-mysterio-è-il-nuovo-general-manager-di-aaa_5219_metadata.json"
-    },
-    {
-      "post_id": 5222,
-      "title": "AAA on FOX: i risultati e gli highlight del 23 maggio 2026",
-      "source_url": "https://www.ringsidenews.com/aaa-fox-results-highlights-key-moments-may-23-2026/",
-      "html_file": "published/20260524_095516_002_aaa-on-fox-i-risultati-e-gli-highlight-del-23-maggio-2026_5222_final.html",
-      "metadata_file": "published/20260524_095516_002_aaa-on-fox-i-risultati-e-gli-highlight-del-23-maggio-2026_5222_metadata.json"
+      "post_id": 5225,
+      "title": "Polemiche tra i fan per il finale di Becky Lynch vs. Sol Ruca a Saturday Night's Main Event",
+      "source_url": "https://www.ringsidenews.com/fans-furious-becky-lynch-vs-sol-rucas-controversial-finish-saturday-nights-main-event/",
+      "html_file": "published/20260524_102250_001_polemiche-tra-i-fan-per-il-finale-di-becky-lynch-vs-sol-ruca-a-saturday-nights-main-event_5225_final.html",
+      "metadata_file": "published/20260524_102250_001_polemiche-tra-i-fan-per-il-finale-di-becky-lynch-vs-sol-ruca-a-saturday-nights-main-event_5225_metadata.json"
     }
   ],
   "errors": [],

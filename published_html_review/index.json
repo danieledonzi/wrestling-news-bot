@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-24 09:52:53",
-  "last_bot_version": "v90_2_5_2_processed_competitive_guard (670761f)",
-  "updated_at": "2026-05-24T09:55:17",
-  "total_items": 187,
+  "last_run_id": "2026-05-24 10:20:15",
+  "last_bot_version": "v90_2_5_3_snme_publish_processed (82858f9)",
+  "updated_at": "2026-05-24T10:22:52",
+  "total_items": 188,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1500,6 +1500,14 @@
       "original_html_file": "20260524_095517_002_aaa-on-fox-i-risultati-e-gli-highlight-del-23-maggio-2026_fa586884_original.html",
       "final_html_file": "20260524_095517_002_aaa-on-fox-i-risultati-e-gli-highlight-del-23-maggio-2026_fa586884_final.html",
       "metadata_file": "20260524_095517_002_aaa-on-fox-i-risultati-e-gli-highlight-del-23-maggio-2026_fa586884_metadata.json"
+    },
+    {
+      "run_id": "2026-05-24 10:20:15",
+      "title": "Polemiche tra i fan per il finale di Becky Lynch vs. Sol Ruca a Saturday Night's Main Event",
+      "url": "https://www.ringsidenews.com/fans-furious-becky-lynch-vs-sol-rucas-controversial-finish-saturday-nights-main-event/",
+      "original_html_file": "20260524_102251_001_polemiche-tra-i-fan-per-il-finale-di-becky-lynch-vs-sol-ruca-a-saturday-night-s-_0ebba26d_original.html",
+      "final_html_file": "20260524_102251_001_polemiche-tra-i-fan-per-il-finale-di-becky-lynch-vs-sol-ruca-a-saturday-night-s-_0ebba26d_final.html",
+      "metadata_file": "20260524_102251_001_polemiche-tra-i-fan-per-il-finale-di-becky-lynch-vs-sol-ruca-a-saturday-night-s-_0ebba26d_metadata.json"
     }
   ]
 }
