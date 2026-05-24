@@ -1,0 +1,89 @@
+{
+  "version": "v90.2.5.4",
+  "description": "Registry of PPV/PLE/special event aliases used to generate report keys and protect event reports.",
+  "promotions": {
+    "wwe": {
+      "events": {
+        "wrestlemania": {"canonical": "WWE WrestleMania", "kind": "ple", "report_key_prefix": "report:wwe-wrestlemania", "aliases": ["wrestlemania", "wwe wrestlemania"]},
+        "royal-rumble": {"canonical": "WWE Royal Rumble", "kind": "ple", "report_key_prefix": "report:wwe-royal-rumble", "aliases": ["royal rumble", "wwe royal rumble"]},
+        "elimination-chamber": {"canonical": "WWE Elimination Chamber", "kind": "ple", "report_key_prefix": "report:wwe-elimination-chamber", "aliases": ["elimination chamber", "wwe elimination chamber"]},
+        "stand-and-deliver": {"canonical": "NXT Stand & Deliver", "kind": "ple", "report_key_prefix": "report:wwe-nxt-stand-and-deliver", "aliases": ["nxt stand & deliver", "nxt stand and deliver", "stand & deliver", "stand and deliver"]},
+        "backlash": {"canonical": "WWE Backlash", "kind": "ple", "report_key_prefix": "report:wwe-backlash", "aliases": ["backlash", "wrestlemania backlash", "wwe backlash"]},
+        "king-and-queen-of-the-ring": {"canonical": "WWE King and Queen of the Ring", "kind": "ple", "report_key_prefix": "report:wwe-king-and-queen-of-the-ring", "aliases": ["king and queen of the ring", "king & queen of the ring", "wwe king and queen of the ring"]},
+        "money-in-the-bank": {"canonical": "WWE Money in the Bank", "kind": "ple", "report_key_prefix": "report:wwe-money-in-the-bank", "aliases": ["money in the bank", "mitb", "wwe money in the bank"]},
+        "night-of-champions": {"canonical": "WWE Night of Champions", "kind": "ple", "report_key_prefix": "report:wwe-night-of-champions", "aliases": ["night of champions", "wwe night of champions"]},
+        "summerslam": {"canonical": "WWE SummerSlam", "kind": "ple", "report_key_prefix": "report:wwe-summerslam", "aliases": ["summerslam", "summer slam", "wwe summerslam"]},
+        "bash-in-berlin": {"canonical": "WWE Bash in Berlin", "kind": "ple", "report_key_prefix": "report:wwe-bash-in-berlin", "aliases": ["bash in berlin", "wwe bash in berlin"]},
+        "bad-blood": {"canonical": "WWE Bad Blood", "kind": "ple", "report_key_prefix": "report:wwe-bad-blood", "aliases": ["bad blood", "wwe bad blood"]},
+        "crown-jewel": {"canonical": "WWE Crown Jewel", "kind": "ple", "report_key_prefix": "report:wwe-crown-jewel", "aliases": ["crown jewel", "wwe crown jewel"]},
+        "survivor-series": {"canonical": "WWE Survivor Series", "kind": "ple", "report_key_prefix": "report:wwe-survivor-series", "aliases": ["survivor series", "survivor series war games", "survivor series: war games", "wwe survivor series"]},
+        "deadline": {"canonical": "NXT Deadline", "kind": "ple", "report_key_prefix": "report:wwe-nxt-deadline", "aliases": ["nxt deadline", "deadline"]},
+        "vengeance-day": {"canonical": "NXT Vengeance Day", "kind": "ple", "report_key_prefix": "report:wwe-nxt-vengeance-day", "aliases": ["nxt vengeance day", "vengeance day"]},
+        "battleground": {"canonical": "NXT Battleground", "kind": "ple", "report_key_prefix": "report:wwe-nxt-battleground", "aliases": ["nxt battleground", "battleground"]},
+        "heatwave": {"canonical": "NXT Heatwave", "kind": "ple", "report_key_prefix": "report:wwe-nxt-heatwave", "aliases": ["nxt heatwave", "heatwave"]},
+        "no-mercy": {"canonical": "NXT No Mercy", "kind": "ple", "report_key_prefix": "report:wwe-nxt-no-mercy", "aliases": ["nxt no mercy", "no mercy"]},
+        "halloween-havoc": {"canonical": "NXT Halloween Havoc", "kind": "ple", "report_key_prefix": "report:wwe-nxt-halloween-havoc", "aliases": ["nxt halloween havoc", "halloween havoc"]},
+        "new-years-evil": {"canonical": "NXT New Year's Evil", "kind": "special_event", "report_key_prefix": "report:wwe-nxt-new-years-evil", "aliases": ["nxt new year's evil", "nxt new years evil", "new year's evil", "new years evil"]},
+        "snme": {"canonical": "WWE Saturday Night's Main Event", "kind": "special_event", "report_key_prefix": "report:wwe-snme", "aliases": ["saturday night's main event", "saturday nights main event", "snme", "wwe saturday night's main event", "wwe saturday nights main event"]},
+        "wrestlepalooza": {"canonical": "WWE Wrestlepalooza", "kind": "ple", "report_key_prefix": "report:wwe-wrestlepalooza", "aliases": ["wrestlepalooza", "wwe wrestlepalooza"]},
+        "clash": {"canonical": "WWE Clash", "kind": "ple", "report_key_prefix": "report:wwe-clash", "aliases": ["clash at the castle", "clash in italy", "clash in paris", "wwe clash"]},
+        "worlds-collide": {"canonical": "WWE Worlds Collide", "kind": "special_event", "report_key_prefix": "report:wwe-worlds-collide", "aliases": ["worlds collide", "wwe worlds collide", "wwe aaa worlds collide"]}
+      }
+    },
+    "aew": {
+      "events": {
+        "revolution": {"canonical": "AEW Revolution", "kind": "ppv", "report_key_prefix": "report:aew-revolution", "aliases": ["revolution", "aew revolution"]},
+        "dynasty": {"canonical": "AEW Dynasty", "kind": "ppv", "report_key_prefix": "report:aew-dynasty", "aliases": ["dynasty", "aew dynasty"]},
+        "double-or-nothing": {"canonical": "AEW Double or Nothing", "kind": "ppv", "report_key_prefix": "report:aew-double-or-nothing", "aliases": ["double or nothing", "aew double or nothing", "don"]},
+        "forbidden-door": {"canonical": "AEW x NJPW Forbidden Door", "kind": "ppv", "report_key_prefix": "report:aew-forbidden-door", "aliases": ["forbidden door", "aew forbidden door", "aew x njpw forbidden door"]},
+        "all-in": {"canonical": "AEW All In", "kind": "ppv", "report_key_prefix": "report:aew-all-in", "aliases": ["all in", "aew all in"]},
+        "all-out": {"canonical": "AEW All Out", "kind": "ppv", "report_key_prefix": "report:aew-all-out", "aliases": ["all out", "aew all out"]},
+        "wrestledream": {"canonical": "AEW WrestleDream", "kind": "ppv", "report_key_prefix": "report:aew-wrestledream", "aliases": ["wrestledream", "aew wrestledream"]},
+        "full-gear": {"canonical": "AEW Full Gear", "kind": "ppv", "report_key_prefix": "report:aew-full-gear", "aliases": ["full gear", "aew full gear"]},
+        "worlds-end": {"canonical": "AEW Worlds End", "kind": "ppv", "report_key_prefix": "report:aew-worlds-end", "aliases": ["worlds end", "world's end", "aew worlds end", "aew world's end"]},
+        "grand-slam": {"canonical": "AEW Grand Slam", "kind": "special_event", "report_key_prefix": "report:aew-grand-slam", "aliases": ["grand slam", "aew grand slam"]},
+        "fyter-fest": {"canonical": "AEW Fyter Fest", "kind": "special_event", "report_key_prefix": "report:aew-fyter-fest", "aliases": ["fyter fest"]},
+        "beach-break": {"canonical": "AEW Beach Break", "kind": "special_event", "report_key_prefix": "report:aew-beach-break", "aliases": ["beach break"]},
+        "winter-is-coming": {"canonical": "AEW Winter Is Coming", "kind": "special_event", "report_key_prefix": "report:aew-winter-is-coming", "aliases": ["winter is coming"]},
+        "blood-and-guts": {"canonical": "AEW Blood & Guts", "kind": "special_event", "report_key_prefix": "report:aew-blood-and-guts", "aliases": ["blood and guts", "blood & guts"]},
+        "fight-for-the-fallen": {"canonical": "AEW Fight for the Fallen", "kind": "special_event", "report_key_prefix": "report:aew-fight-for-the-fallen", "aliases": ["fight for the fallen"]}
+      }
+    },
+    "tna": {
+      "events": {
+        "hard-to-kill": {"canonical": "TNA Hard To Kill", "kind": "ppv", "report_key_prefix": "report:tna-hard-to-kill", "aliases": ["hard to kill", "tna hard to kill"]},
+        "genesis": {"canonical": "TNA Genesis", "kind": "ppv", "report_key_prefix": "report:tna-genesis", "aliases": ["genesis", "tna genesis"]},
+        "sacrifice": {"canonical": "TNA Sacrifice", "kind": "special_event", "report_key_prefix": "report:tna-sacrifice", "aliases": ["sacrifice", "tna sacrifice"]},
+        "rebellion": {"canonical": "TNA Rebellion", "kind": "ppv", "report_key_prefix": "report:tna-rebellion", "aliases": ["rebellion", "tna rebellion"]},
+        "under-siege": {"canonical": "TNA Under Siege", "kind": "special_event", "report_key_prefix": "report:tna-under-siege", "aliases": ["under siege", "tna under siege"]},
+        "against-all-odds": {"canonical": "TNA Against All Odds", "kind": "special_event", "report_key_prefix": "report:tna-against-all-odds", "aliases": ["against all odds", "tna against all odds"]},
+        "slammiversary": {"canonical": "TNA Slammiversary", "kind": "ppv", "report_key_prefix": "report:tna-slammiversary", "aliases": ["slammiversary", "tna slammiversary"]},
+        "emergence": {"canonical": "TNA Emergence", "kind": "special_event", "report_key_prefix": "report:tna-emergence", "aliases": ["emergence", "tna emergence"]},
+        "victory-road": {"canonical": "TNA Victory Road", "kind": "special_event", "report_key_prefix": "report:tna-victory-road", "aliases": ["victory road", "tna victory road"]},
+        "bound-for-glory": {"canonical": "TNA Bound For Glory", "kind": "ppv", "report_key_prefix": "report:tna-bound-for-glory", "aliases": ["bound for glory", "bfg", "tna bound for glory"]},
+        "turning-point": {"canonical": "TNA Turning Point", "kind": "special_event", "report_key_prefix": "report:tna-turning-point", "aliases": ["turning point", "tna turning point"]},
+        "final-resolution": {"canonical": "TNA Final Resolution", "kind": "special_event", "report_key_prefix": "report:tna-final-resolution", "aliases": ["final resolution", "tna final resolution"]}
+      }
+    },
+    "aaa": {
+      "events": {
+        "rey-de-reyes": {"canonical": "AAA Rey de Reyes", "kind": "special_event", "report_key_prefix": "report:aaa-rey-de-reyes", "aliases": ["rey de reyes"]},
+        "triplemania": {"canonical": "AAA Triplemania", "kind": "special_event", "report_key_prefix": "report:aaa-triplemania", "aliases": ["triplemania", "triplemanía", "triplemania xxxii", "triplemanía xxxii", "triplemania xxxiii", "triplemanía xxxiii", "triplemania 34", "triplemanía 34"]},
+        "heroes-inmortales": {"canonical": "AAA Heroes Inmortales", "kind": "special_event", "report_key_prefix": "report:aaa-heroes-inmortales", "aliases": ["heroes inmortales", "héroes inmortales"]},
+        "guerra-de-titanes": {"canonical": "AAA Guerra de Titanes", "kind": "special_event", "report_key_prefix": "report:aaa-guerra-de-titanes", "aliases": ["guerra de titanes"]},
+        "noche-de-los-grandes": {"canonical": "AAA Noche de Los Grandes", "kind": "special_event", "report_key_prefix": "report:aaa-noche-de-los-grandes", "aliases": ["noche de los grandes"]},
+        "worlds-collide": {"canonical": "AAA Worlds Collide", "kind": "special_event", "report_key_prefix": "report:aaa-worlds-collide", "aliases": ["aaa worlds collide", "wwe aaa worlds collide", "worlds collide las vegas"]},
+        "alianzas": {"canonical": "AAA Alianzas", "kind": "special_event", "report_key_prefix": "report:aaa-alianzas", "aliases": ["aaa alianzas", "alianzas"]}
+      }
+    },
+    "roh": {
+      "events": {
+        "supercard-of-honor": {"canonical": "ROH Supercard of Honor", "kind": "ppv", "report_key_prefix": "report:roh-supercard-of-honor", "aliases": ["supercard of honor", "roh supercard of honor"]},
+        "death-before-dishonor": {"canonical": "ROH Death Before Dishonor", "kind": "ppv", "report_key_prefix": "report:roh-death-before-dishonor", "aliases": ["death before dishonor", "roh death before dishonor"]},
+        "final-battle": {"canonical": "ROH Final Battle", "kind": "ppv", "report_key_prefix": "report:roh-final-battle", "aliases": ["final battle", "roh final battle"]},
+        "global-wars": {"canonical": "ROH Global Wars", "kind": "special_event", "report_key_prefix": "report:roh-global-wars", "aliases": ["global wars", "roh global wars"]},
+        "honorclub-tv": {"canonical": "ROH HonorClub", "kind": "weekly_special", "report_key_prefix": "report:roh-honorclub", "aliases": ["roh honorclub", "roh honor club", "honorclub tv"]}
+      }
+    }
+  }
+}
