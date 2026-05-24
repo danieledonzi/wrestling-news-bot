@@ -2,10 +2,11 @@
   "https://www.ringsidenews.com/aaa-noche-de-los-grandes-lineup-expanded-two-week-event": {
     "extra": {
       "event_key": "",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "aaa-noche-de-los-grandes-lineup-for-expanded-two-week-event"
     },
-    "reason": "high_score_or_discussion_worthy_not_final",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 67,
     "status": "competitive_deferred",
     "title": "AAA Noche de Los Grandes Lineup for Expanded Two-Week Event",
@@ -148,10 +149,11 @@
   "https://www.ringsidenews.com/ludwig-kaiser-appears-aaa-recent-arrest": {
     "extra": {
       "event_key": "",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "ludwig-kaiser-appears-in-aaa-after-recent-arrest"
     },
-    "reason": "high_score_or_discussion_worthy_not_final",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 98,
     "status": "competitive_deferred",
     "title": "Ludwig Kaiser Appears In AAA After Recent Arrest",
@@ -183,6 +185,19 @@
     "title": "Mark Jindrak Says WWE Stars Complaining About WrestleMania Weekend Fan Incidents Should Be Grateful",
     "updated_at": "1779563057.816217",
     "url": "https://www.ringsidenews.com/mark-jindrak-says-wwe-stars-complaining-about-wrestlemania-weekend-fan-incidents-should-grateful/"
+  },
+  "https://www.ringsidenews.com/mjf-claims-darby-allin-looks-school-shooter-ahead-aew-double-nothing": {
+    "extra": {
+      "event_key": "event:title:darby-allin:world:double-or-nothing",
+      "raw_result": "skipped",
+      "semantic_id": "mjf-claims-darby-allin-looks-like-a-school-shooter-ahead-of-aew-double-or-nothing"
+    },
+    "reason": "above_low_score_final_cap_not_final",
+    "score": 60,
+    "status": "competitive_deferred",
+    "title": "MJF Claims Darby Allin \"Looks Like A School Shooter\" Ahead Of AEW Double or Nothing",
+    "updated_at": "1779642711.7613227",
+    "url": "https://www.ringsidenews.com/mjf-claims-darby-allin-looks-school-shooter-ahead-aew-double-nothing/"
   },
   "https://www.ringsidenews.com/opening-segment-match-revealed-may-25-wwe-raw": {
     "extra": {
@@ -220,7 +235,7 @@
     "score": 79,
     "status": "competitive_deferred",
     "title": "Possible Spoiler Revealed for WWE Clash in Italy Title Match",
-    "updated_at": "1779638359.2897184",
+    "updated_at": "1779642681.8628633",
     "url": "https://www.ringsidenews.com/possible-spoiler-revealed-wwe-clash-italy-title-match/"
   },
   "https://www.ringsidenews.com/skye-blue-roasts-mjf-potentially-going-bald-aew-double-nothing": {
@@ -390,7 +405,7 @@
     "score": 60,
     "status": "competitive_deferred",
     "title": "AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE",
-    "updated_at": "1779623406.40115",
+    "updated_at": "1779642711.8011842",
     "url": "https://www.wrestlinginc.com/2177312/aew-swerve-strickland-aleister-black-zelina-vega-wwe/"
   },
   "https://www.wrestlinginc.com/2177532/wwe-jbl-john-bradshaw-layfield-talent-infinitely-better-increases-live-event-schedule": {
@@ -432,6 +447,19 @@
     "updated_at": "1779638361.5518188",
     "url": "https://www.wrestlinginc.com/2179128/aew-athena-wwe-kairi-sane-alicia-fox/"
   },
+  "https://www.wrestlinginc.com/2179385/tony-khan-comments-aew-profitable": {
+    "extra": {
+      "event_key": "event:business:tko-financials",
+      "raw_result": "skipped",
+      "semantic_id": "tony-khan-wont-comment-on-whether-or-not-aew-is-profitable"
+    },
+    "reason": "skipped",
+    "score": 45,
+    "status": "rejected",
+    "title": "Tony Khan Won't Comment On Whether Or Not AEW Is Profitable",
+    "updated_at": "1779642711.8232098",
+    "url": "https://www.wrestlinginc.com/2179385/tony-khan-comments-aew-profitable/"
+  },
   "https://www.wrestlinginc.com/2179525/aew-double-or-nothing-2026-full-final-card-matches": {
     "extra": {
       "event_key": "",
@@ -469,7 +497,7 @@
     "score": 82,
     "status": "competitive_deferred",
     "title": "WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More",
-    "updated_at": "1779638359.1802983",
+    "updated_at": "1779642681.7522788",
     "url": "https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/"
   },
   "https://www.wrestlinginc.com/2180133/sol-ruca-granted-womens-ic-title-match-following-controversial-becky-lynch-dq": {

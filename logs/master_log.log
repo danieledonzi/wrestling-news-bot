@@ -5285,3 +5285,190 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-24 15:58:57] VERSION [v90_2_5_3_1_snme_publish_tighten (479e773)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show=collision
+[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard
+[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.1] Report dedupe protection attiva: true-results usa solo report gate stretto
+[MODEL v90.2.2] translate_report chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-pro
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.3] Social embed quote positioning attivo
+[BOOT v90.2.3.1] Inline image dict normalization attiva in v88_media_record
+[BOOT v90.2.4] Offline pending hard-skip guard attiva
+[BOOT v90.2.4.1] Report hard-title guard attiva
+[BOOT v90.2.4.2] Report artifacts/casing recovery attiva
+[BOOT v90.2.5] Processed URL hard-skip attivo
+[BOOT v90.2.5.1] Processed URL skip recorder attivo
+[BOOT v90.2.5.2] Processed competitive guard attiva: high-score e SNME non finali
+[BOOT v90.2.5.3] SNME event report guard e processed publish success attivi
+[BOOT v90.2.5.3.1] SNME floor ristretto e processed publish corrente attivi
+
+===== RUN START [2026-05-24 17:11:00] VERSION [v90_2_5_3_1_snme_publish_tighten (8154144)] =====
+[PROCESSED v90.2.5.2] Migrati record non-final competitivi: 10
+[PROCESSED v90.2.5] Loaded processed URL records: 38
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (16/75): TNA's Nic Nemeth Explains Why He Was 'Lucky' During His Early Years As A Wrestler
+[SKIP] Score sotto soglia editoriale (0/75): WWE SNME - 5/23/2026: 3 Things We Hated And 3 We Loved
+[SNME v90.2.5.3] Pre-AI event score floor 80->82 - This is Wrestling Inc.'s results for "Saturday Night's Main Event", with the Intercontinental, World Tag Team & Women's Tag Team Championships on the line!
+[SKIP] Score sotto soglia editoriale (14/75): Nigel McGuinness Compares Experiences Doing Commentary For AEW Vs. WWE
+[SKIP] Score sotto soglia editoriale (31/75): WWE Star Danhausen Announces Merchandise Crossover With NY Knicks
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 73->54 - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176092/wwe-hofer-eric-bischoff-reflects-working-late-ted-turner/
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026 Predictions: Wrestling Inc. Picks The Winners
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (26/75): AEW's Harley Cameron Details The Process Of Learning To Wrestle On Live TV
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Tony Khan Won't Comment On Whether Or Not AEW Is Profitable
+[PERF v71] WP lookup event_key: 1.22s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tko-financials - provo a pubblicare
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP] Score sotto soglia editoriale (48/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[SCORE v80.4] AAA major World priority 20->72 - Rey Mysterio Named General Manager Of AAA
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - MVP Calls Out Toxic AEW vs. WWE Tribalism Among Wrestling Fans
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - MVP Calls Out Toxic AEW vs. WWE Tribalism Among Wrestling Fans
+[SKIP] Score sotto soglia editoriale (49/75): MVP Calls Out Toxic AEW vs. WWE Tribalism Among Wrestling Fans
+[SKIP] Score sotto soglia editoriale (15/75): Sgt. Slaughter Movie Casting Call Looking for "Sadistic Military Figure"
+[SKIP] Score sotto soglia editoriale (35/75): Thekla Admits She Picked The Worst Spot For "Dumb B*itches" Promo Near Children
+[SCORE v81.1] Cap future card announcement 46->46 - Opening Segment & Match Revealed for May 25 WWE RAW
+[SKIP] Score sotto soglia editoriale (35/75): Xavier Woods Warns Kenny Omega It's "On Sight" Amid AEW Rumors
+[SKIP] Score sotto soglia editoriale (13/75): Anthony Bowens Addresses Possibility of Doing His Own Andrade-Style Ringside Routine
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 46/55 - AEW Double or Nothing Advance Buys Explode Ahead Of Darby Allin vs MJF Title vs Hair Match
+[SKIP] Score sotto soglia editoriale (46/75): AEW Double or Nothing Advance Buys Explode Ahead Of Darby Allin vs MJF Title vs Hair Match
+[SKIP] URL già in history: https://www.ringsidenews.com/gunther-says-brock-lesnar-can-challenge-him-cody-rhodes-match/
+[SCORE v88.3] v88.3 cap low-value market item 79->45 - Final Betting Odds Released for AEW Double or Nothing 2026
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - AEW Double or Nothing 2026 Preview: Confirmed Matches, Start Time and How to Watch
+[SCORE v81.1] Cap future card announcement 56->56 - AEW Double or Nothing 2026 Preview: Confirmed Matches, Start Time and How to Watch
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 56->54 - AEW Double or Nothing 2026 Preview: Confirmed Matches, Start Time and How to Watch
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - AEW Double or Nothing 2026 Preview: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (40/75): AEW Double or Nothing 2026 Preview: Confirmed Matches, Start Time and How to Watch
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - D'Lo Brown Calls Out TKO Over WWE Talent Pay Cuts Despite Record Business
+[SKIP] Score sotto soglia editoriale (49/75): D'Lo Brown Calls Out TKO Over WWE Talent Pay Cuts Despite Record Business
+[SKIP] URL già in history: https://www.ringsidenews.com/fans-furious-becky-lynch-vs-sol-rucas-controversial-finish-saturday-nights-main-event/
+[SKIP] Score sotto soglia editoriale (45/75): Becky Lynch Doubles Down With Wild Jessika Carr Accusation After Saturday Night's Main Event
+[SCORE] 82 high - WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.383
+[SCORE] 79 medium - Possible Spoiler Revealed for WWE Clash in Italy Title Match | WWE/main roster, top star lead: rhea ripley, nomi forti lead: rhea ripley, jade cargill, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v66 cap title match non-title-change, v71 source reliability soft penalty, v71 freshness=0.542
+[SCORE] 72 medium - Rey Mysterio Named General Manager Of AAA | WWE/main roster, v80.4 AAA major World priority 20->72, v71 freshness=0.6, v48 tier2: 55-74
+[SCORE] 71 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 63 medium - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, PLE/PPV, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 60 medium - MJF Claims Darby Allin "Looks Like A School Shooter" Ahead Of AEW Double or Nothing | AEW, titolo/championship, PLE/PPV, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.57, v48 tier2: 55-74
+[SCORE] 60 medium - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 48 low - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v62 titolo/championship, v88.2 cap OTHER/feature non-news 73->54, v71 low freshness/novelty, v71 freshness=0.31, v48 tier3: 45-54 contestuale
+[SCORE] 45 low - Tony Khan Won't Comment On Whether Or Not AEW Is Profitable | AEW, v62 corporate/business, v62 categoria business, v88.3 hard feature skip cap 54->45, v71 freshness=0.601, v48 tier3: 45-54 contestuale
+[SCORE] 43 low - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag | WWE/main roster, top star titolo: undertaker, intervista/opinione, v81.1 cap light name-driven item 49->49, v71 low freshness/novelty, v71 freshness=0.31, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 0 news >=90, 1 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 12 | mode=normal | max nuove=3 | pending pubblicati=0
+[BOT] Elaborazione: WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More
+[BOT] semantic_id=wwe-saturday-nights-main-event-results-523-three-championships-on-the-line-more
+[SCORE] iniziale=82 priority=high
+[SCRAPE] Articolo results rilevato: testo completo (14895 caratteri)
+[EMBED v88] Mappa posizionale media salvata: embeds=5 url=https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/
+[MEDIA v88.4] Rimossi embed derivati da credit immagine gallery: 10 url=https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=58, image=6, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=5 url=https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/
+[MEDIA v88.4] Rimossi embed derivati da credit immagine gallery: 10 url=https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/
+[BLOCKSEQ] Blocchi ordinati estratti: text=58, image=6, embed=0
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[PERF v71] WP strict report lookup: 1.30s
+[SKIP v90.1] Topic/status duplicate guard business:wwe:house-shows-expansion: Possible Spoiler Revealed for WWE Clash in Italy Title Match
+[BOT] Elaborazione: Rey Mysterio Named General Manager Of AAA
+[BOT] semantic_id=rey-mysterio-named-general-manager-of-aaa
+[SCORE] iniziale=72 priority=medium
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.wrestlinginc.com/2180229/rey-mysterio-named-general-manager-aaa/
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=6, image=1, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.wrestlinginc.com/2180229/rey-mysterio-named-general-manager-aaa/
+[BLOCKSEQ] Blocchi ordinati estratti: text=6, image=1, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WORLD (8) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta una notizia già avvenuta (la nomina di Rey Mysterio a GM di AAA), citando i fatti accaduti durante l'episodio di AAA on FOX. Il riferimento alla card futura è solo contestuale.
+[EDITORIAL v72.3] translation_notes=Mantenere 'General Manager' e 'Lucha de Apuestas'.; 'Full-circle moment' va reso come 'chiusura di un cerchio' o 'ritorno alle origini'.; Evitare calchi per 'vociferous reception' (uso: 'accoglienza calorosa' o 'boato').
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WORLD (8) | L'articolo riporta una notizia già avvenuta (la nomina di Rey Mysterio a GM di AAA), citando i fatti accaduti durante l'episodio di AAA on FOX. Il riferimento alla card futura è solo contestuale.
+[PERF v71] analisi editoriale AI v72: 6.30s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Rey Mysterio Named General Manager Of AAA
+[SCORE v80.4] AAA major World final floor 80->80 - Rey Mysterio Named General Manager Of AAA
+[SCORE] raffinato=80 priority=high | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v66 cap opinion/commentary storyline, v68 cap opinion senza news concreta, v80.4 AAA major World priority 68->80, v80.4 AAA major World final floor 80->80
+[V71] story_signature=stable:rey_mysterio_named_general_manager_of|story|wwe semantic_status=new_story freshness=0.6
+[PERF v71] WP recent posts dedupe: 1.10s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.42s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=6
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/rey-mysterio-named-general-manager-of-aaa/intro-1779639495.jpg
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 12.58s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Rey Mysterio nominato General Manager della AAA
+[EMBED v90.2.3] Social embed/quote normalizzati: 3
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[MEDIA v86.7] Reintegrati 1 embed persi prima del publish
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/rey-mysterio-named-general-manager-of-aaa/l-intro-1779639495.jpg
+[MEDIA] Immagine caricata: 5236
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260524_171150_001_rey-mysterio-nominato-general-manager-della-aaa_5237_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5237
+[PROCESSED v90.2.5] Publish result non conclusivo: non marco URL published
+[PERF v71] creazione post WordPress: 7.21s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/rey-mysterio-named-general-manager-of-aaa/l-intro-1779639495.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5236
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Rey Mysterio Named General Manager Of AAA': 28.52s
+[OK] Pubblicato: Rey Mysterio nominato General Manager della AAA
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260524_171151_001_rey-mysterio-nominato-general-manager-della-aaa_6f14d362_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Rey Mysterio nominato General Manager della AAA
+[PUBLISHED REVIEW v87.1] Review outer salvata: Rey Mysterio nominato General Manager della AAA
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot
+[SOFTPOOL v90.2] Aggiunta: score=60 core=title:darby-allin:status reason=update_gate:medium_followup_or_weak_update title=MJF Claims Darby Allin "Looks Like A School Shooter" Ahead Of AEW Double or Nothing
+[SKIP v90.2] Follow-up in soft_pool core=title:darby-allin:status score=60 reason=medium_followup_or_weak_update novel=['wwe_impact'] - MJF Claims Darby Allin "Looks Like A School Shooter" Ahead Of AEW Double or Nothing
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[PENDING] Coda salvata: 0 elementi
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[SKIP v88.3] Feature storico/FIFA/venue/media call escluso: Tony Khan Won't Comment On Whether Or Not AEW Is Profitable
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Opening Segment & Match Revealed for May 25 WWE RAW
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Final Betting Odds Released for AEW Double or Nothing 2026
+[BOT] Pubblicati 1 articoli (0 pending + 1 nuove) su 12 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-24 17:11:00_summary.json -> published_html_review/run_2026-05-24 17-11-00_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (739 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=1 errors=0 status=ok
+===== RUN END [2026-05-24 17:11:00] VERSION [v90_2_5_3_1_snme_publish_tighten (8154144)] =====
+

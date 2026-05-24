@@ -1,12 +1,22 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-24 15:58:57",
-  "bot_version": "v90_2_5_3_1_snme_publish_tighten (479e773)",
-  "git_sha": "479e773a042bc64c77abdfb57f3445c9172bcd7d",
-  "created_at": "2026-05-24T15:59:22",
-  "published_count": 0,
-  "published_post_ids": [],
-  "published_artifacts": [],
+  "run_id": "2026-05-24 17:11:00",
+  "bot_version": "v90_2_5_3_1_snme_publish_tighten (8154144)",
+  "git_sha": "8154144d9ae94a1daca0a2d73999ed51be4a85da",
+  "created_at": "2026-05-24T17:11:53",
+  "published_count": 1,
+  "published_post_ids": [
+    "5237"
+  ],
+  "published_artifacts": [
+    {
+      "post_id": 5237,
+      "title": "Rey Mysterio nominato General Manager della AAA",
+      "source_url": "https://www.wrestlinginc.com/2180229/rey-mysterio-named-general-manager-aaa/",
+      "html_file": "published/20260524_171150_001_rey-mysterio-nominato-general-manager-della-aaa_5237_final.html",
+      "metadata_file": "published/20260524_171150_001_rey-mysterio-nominato-general-manager-della-aaa_5237_metadata.json"
+    }
+  ],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",

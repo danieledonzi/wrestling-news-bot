@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-24 15:58:57",
-  "last_bot_version": "v90_2_5_3_1_snme_publish_tighten (479e773)",
-  "updated_at": "2026-05-24T15:59:21",
-  "total_items": 191,
+  "last_run_id": "2026-05-24 17:11:00",
+  "last_bot_version": "v90_2_5_3_1_snme_publish_tighten (8154144)",
+  "updated_at": "2026-05-24T17:11:51",
+  "total_items": 192,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1532,6 +1532,14 @@
       "original_html_file": "20260524_131930_003_luchasaurus-la-festa-per-la-vittoria-dei-knicks-mi-ha-causato-l-infortunio-in-ae_305d22ea_original.html",
       "final_html_file": "20260524_131930_003_luchasaurus-la-festa-per-la-vittoria-dei-knicks-mi-ha-causato-l-infortunio-in-ae_305d22ea_final.html",
       "metadata_file": "20260524_131930_003_luchasaurus-la-festa-per-la-vittoria-dei-knicks-mi-ha-causato-l-infortunio-in-ae_305d22ea_metadata.json"
+    },
+    {
+      "run_id": "2026-05-24 17:11:00",
+      "title": "Rey Mysterio nominato General Manager della AAA",
+      "url": "https://www.wrestlinginc.com/2180229/rey-mysterio-named-general-manager-aaa/",
+      "original_html_file": "20260524_171151_001_rey-mysterio-nominato-general-manager-della-aaa_6f14d362_original.html",
+      "final_html_file": "20260524_171151_001_rey-mysterio-nominato-general-manager-della-aaa_6f14d362_final.html",
+      "metadata_file": "20260524_171151_001_rey-mysterio-nominato-general-manager-della-aaa_6f14d362_metadata.json"
     }
   ]
 }
