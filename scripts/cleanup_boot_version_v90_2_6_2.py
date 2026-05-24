@@ -46,15 +46,35 @@ def mute_historic_boot_prints(text: str) -> str:
     muted = 0
     for line in lines:
         stripped = line.lstrip()
-        if stripped.startswith("# muted by v90.2.6.2:"):
+        indent = line[: len(line) - len(stripped)]
+        if stripped.startswith("# muted by v90.2.6.2:") or stripped.startswith("pass  # muted by v90.2.6.2:"):
             out.append(line)
         elif stripped.startswith("print(") and any(token in line for token in BOOT_PATTERNS):
-            indent = line[: len(line) - len(stripped)]
-            out.append(indent + "# muted by v90.2.6.2: " + stripped)
+            # Use pass, not a pure comment. Some historic boot prints are the only
+            # statement inside try/except blocks; replacing them with a comment would
+            # leave an empty block and break py_compile with IndentationError.
+            out.append(indent + "pass  # muted by v90.2.6.2: " + stripped)
             muted += 1
         else:
             out.append(line)
     print(f"[v90.2.6.2] boot print storici silenziati: {muted}")
+    return "\n".join(out) + ("\n" if text.endswith("\n") else "")
+
+
+def repair_comment_only_muted_lines(text: str) -> str:
+    """Repair bot.py if a previous cleanup run already wrote comment-only muted lines."""
+    repaired = 0
+    out: list[str] = []
+    for line in text.splitlines():
+        stripped = line.lstrip()
+        indent = line[: len(line) - len(stripped)]
+        if stripped.startswith("# muted by v90.2.6.2: print("):
+            out.append(indent + "pass  # muted by v90.2.6.2: " + stripped.removeprefix("# muted by v90.2.6.2: "))
+            repaired += 1
+        else:
+            out.append(line)
+    if repaired:
+        print(f"[v90.2.6.2.1] muted comment-only lines riparate: {repaired}")
     return "\n".join(out) + ("\n" if text.endswith("\n") else "")
 
 
@@ -82,6 +102,7 @@ def main() -> int:
     p = Path("bot.py")
     text = p.read_text(encoding="utf-8")
     original = text
+    text = repair_comment_only_muted_lines(text)
     text = mute_historic_boot_prints(text)
     text = insert_final_block(text)
     if text == original:
