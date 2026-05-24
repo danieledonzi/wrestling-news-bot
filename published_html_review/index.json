@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-24 08:36:46",
-  "last_bot_version": "v90_2_5_1_processed_skip_recorder (15cac61)",
-  "updated_at": "2026-05-24T08:37:19",
-  "total_items": 185,
+  "last_run_id": "2026-05-24 09:52:53",
+  "last_bot_version": "v90_2_5_2_processed_competitive_guard (670761f)",
+  "updated_at": "2026-05-24T09:55:17",
+  "total_items": 187,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1484,6 +1484,22 @@
       "original_html_file": "20260524_060043_003_savio-vega-sostituisce-rey-mysterio-al-commento-di-aaa-on-fox_f75adeb8_original.html",
       "final_html_file": "20260524_060043_003_savio-vega-sostituisce-rey-mysterio-al-commento-di-aaa-on-fox_f75adeb8_final.html",
       "metadata_file": "20260524_060043_003_savio-vega-sostituisce-rey-mysterio-al-commento-di-aaa-on-fox_f75adeb8_metadata.json"
+    },
+    {
+      "run_id": "2026-05-24 09:52:53",
+      "title": "Rey Mysterio è il nuovo General Manager di AAA",
+      "url": "https://www.ringsidenews.com/rey-mysterio-announced-new-general-manager-aaa/",
+      "original_html_file": "20260524_095353_001_rey-mysterio-il-nuovo-general-manager-di-aaa_26601c51_original.html",
+      "final_html_file": "20260524_095353_001_rey-mysterio-il-nuovo-general-manager-di-aaa_26601c51_final.html",
+      "metadata_file": "20260524_095353_001_rey-mysterio-il-nuovo-general-manager-di-aaa_26601c51_metadata.json"
+    },
+    {
+      "run_id": "2026-05-24 09:52:53",
+      "title": "AAA on FOX: i risultati e gli highlight del 23 maggio 2026",
+      "url": "https://www.ringsidenews.com/aaa-fox-results-highlights-key-moments-may-23-2026/",
+      "original_html_file": "20260524_095517_002_aaa-on-fox-i-risultati-e-gli-highlight-del-23-maggio-2026_fa586884_original.html",
+      "final_html_file": "20260524_095517_002_aaa-on-fox-i-risultati-e-gli-highlight-del-23-maggio-2026_fa586884_final.html",
+      "metadata_file": "20260524_095517_002_aaa-on-fox-i-risultati-e-gli-highlight-del-23-maggio-2026_fa586884_metadata.json"
     }
   ]
 }

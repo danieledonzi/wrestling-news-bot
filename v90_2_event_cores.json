@@ -113,7 +113,7 @@
     ],
     "count": 12,
     "first_seen": "2026-05-21T16:04:55",
-    "last_seen": "2026-05-24T05:59:06"
+    "last_seen": "2026-05-24T09:53:14"
   },
   "return:mark-shapiro:wwe": {
     "titles": [
@@ -481,5 +481,18 @@
     "count": 1,
     "first_seen": "2026-05-24T06:00:13",
     "last_seen": "2026-05-24T06:00:13"
+  },
+  "return:fox-results:general": {
+    "titles": [
+      "AAA on FOX Results, Highlights and Key Moments for May 23, 2026"
+    ],
+    "facts": [
+      "mexico_return",
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-24T09:55:17",
+    "last_seen": "2026-05-24T09:55:17"
   }
 }

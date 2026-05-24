@@ -1,5 +1,6 @@
 {
   "confirmed_published_report_keys": [
+    "report:aaa-fox-results-highlights-key-moments-may-23-2026-05-23",
     "report:aew-collision-2026-05-16",
     "report:aew-dynamite-2026-05-13",
     "report:aew-dynamite-2026-05-20",
@@ -98,8 +99,16 @@
       "title": "WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears",
       "source_url": "https://www.wrestlinginc.com/2179938/wwe-smackdown-may-22-womens-us-title-open-challenge-rhea-ripley-appears/",
       "wp_post_id": 5165,
-      "confirmed_at": "2026-05-23T23:30:42Z",
+      "confirmed_at": "2026-05-24T09:53:13Z",
       "reason": "wp_confirm_runtime"
+    },
+    "report:aaa-fox-results-highlights-key-moments-may-23-2026-05-23": {
+      "report_key": "report:aaa-fox-results-highlights-key-moments-may-23-2026-05-23",
+      "title": "AAA on FOX: i risultati e gli highlight del 23 maggio 2026",
+      "source_url": "https://www.ringsidenews.com/aaa-fox-results-highlights-key-moments-may-23-2026/",
+      "wp_post_id": null,
+      "confirmed_at": "2026-05-24T09:55:17Z",
+      "reason": "publish_success"
     }
   }
 }

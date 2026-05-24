@@ -1,4 +1,17 @@
 {
+  "https://www.ringsidenews.com/aaa-noche-de-los-grandes-lineup-expanded-two-week-event": {
+    "extra": {
+      "event_key": "",
+      "raw_result": "skipped",
+      "semantic_id": "aaa-noche-de-los-grandes-lineup-for-expanded-two-week-event"
+    },
+    "reason": "high_score_or_discussion_worthy_not_final",
+    "score": 67,
+    "status": "competitive_deferred",
+    "title": "AAA Noche de Los Grandes Lineup for Expanded Two-Week Event",
+    "updated_at": "1779616398.4074707",
+    "url": "https://www.ringsidenews.com/aaa-noche-de-los-grandes-lineup-expanded-two-week-event/"
+  },
   "https://www.ringsidenews.com/big-match-added-wwe-clash-italy": {
     "extra": {
       "event_key": "event:brock-lesnar-contract",
@@ -15,12 +28,13 @@
   "https://www.ringsidenews.com/blake-monroe-makes-wwe-main-roster-debut-during-522-smackdown": {
     "extra": {
       "event_key": "",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "blake-monroe-makes-wwe-main-roster-debut-during-522-smackdown"
     },
-    "reason": "skipped",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 96,
-    "status": "rejected",
+    "status": "competitive_deferred",
     "title": "Blake Monroe Makes WWE Main Roster Debut During 5/22 SmackDown",
     "updated_at": "1779552021.023142",
     "url": "https://www.ringsidenews.com/blake-monroe-makes-wwe-main-roster-debut-during-522-smackdown/"
@@ -28,12 +42,13 @@
   "https://www.ringsidenews.com/darby-allin-takes-brutal-shot-mjfs-hair-before-aew-double-nothing": {
     "extra": {
       "event_key": "event:title:darby-allin:world:double-or-nothing",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "darby-allin-takes-brutal-shot-at-mjfs-hair-before-aew-double-or-nothing"
     },
-    "reason": "skipped",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 72,
-    "status": "rejected",
+    "status": "competitive_deferred",
     "title": "Darby Allin Takes Brutal Shot at MJF's Hair Before AEW Double or Nothing",
     "updated_at": "1779563044.4471133",
     "url": "https://www.ringsidenews.com/darby-allin-takes-brutal-shot-mjfs-hair-before-aew-double-nothing/"
@@ -41,12 +56,13 @@
   "https://www.ringsidenews.com/el-grande-americano-appears-aaa-serenata-event-ludwig-kaiser-arrest-controversy": {
     "extra": {
       "event_key": "",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "el-grande-americano-appears-at-aaa-serenata-event-after-ludwig-kaiser-arrest-controversy"
     },
-    "reason": "skipped",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 67,
-    "status": "rejected",
+    "status": "competitive_deferred",
     "title": "El Grande Americano Appears at AAA Serenata Event After Ludwig Kaiser Arrest Controversy",
     "updated_at": "1779552063.2524507",
     "url": "https://www.ringsidenews.com/el-grande-americano-appears-aaa-serenata-event-ludwig-kaiser-arrest-controversy/"
@@ -63,6 +79,19 @@
     "title": "ESPN Quietly Restores AEW Section With Major Darby Allin Feature Before Double or Nothing",
     "updated_at": "1779552251.4286497",
     "url": "https://www.ringsidenews.com/espn-quietly-restores-aew-section-major-darby-allin-feature-before-double-nothing/"
+  },
+  "https://www.ringsidenews.com/fans-furious-becky-lynch-vs-sol-rucas-controversial-finish-saturday-nights-main-event": {
+    "extra": {
+      "event_key": "",
+      "raw_result": "skipped",
+      "semantic_id": "fans-furious-over-becky-lynch-vs-sol-rucas-controversial-finish-at-saturday-nights-main-event"
+    },
+    "reason": "above_low_score_final_cap_not_final",
+    "score": 62,
+    "status": "competitive_deferred",
+    "title": "Fans Furious Over Becky Lynch vs. Sol Ruca's Controversial Finish at Saturday Night's Main Event",
+    "updated_at": "1779616398.364734",
+    "url": "https://www.ringsidenews.com/fans-furious-becky-lynch-vs-sol-rucas-controversial-finish-saturday-nights-main-event/"
   },
   "https://www.ringsidenews.com/final-betting-odds-released-wwe-saturday-nights-main-event": {
     "extra": {
@@ -109,11 +138,11 @@
       "raw_result": "skipped",
       "semantic_id": "ludwig-kaiser-appears-in-aaa-after-recent-arrest"
     },
-    "reason": "skipped",
+    "reason": "high_score_or_discussion_worthy_not_final",
     "score": 98,
-    "status": "rejected",
+    "status": "competitive_deferred",
     "title": "Ludwig Kaiser Appears In AAA After Recent Arrest",
-    "updated_at": "1779602346.0809677",
+    "updated_at": "1779616394.0898812",
     "url": "https://www.ringsidenews.com/ludwig-kaiser-appears-aaa-recent-arrest/"
   },
   "https://www.ringsidenews.com/mance-warner-clears-confusion-indie-promotion-claimed-aew-pulled-him": {
@@ -168,6 +197,19 @@
     "updated_at": "1779579157.5848918",
     "url": "https://www.ringsidenews.com/skye-blue-roasts-mjf-potentially-going-bald-aew-double-nothing/"
   },
+  "https://www.ringsidenews.com/skye-blue-says-doctor-told-her-ankle-looked-it-came-car-crash": {
+    "extra": {
+      "event_key": "",
+      "raw_result": "skipped",
+      "semantic_id": "skye-blue-says-doctor-told-her-ankle-looked-like-it-came-from-a-car-crash"
+    },
+    "reason": "skipped",
+    "score": 41,
+    "status": "rejected",
+    "title": "Skye Blue Says Doctor Told Her Ankle Looked Like It Came From a Car Crash",
+    "updated_at": "1779616517.5785983",
+    "url": "https://www.ringsidenews.com/skye-blue-says-doctor-told-her-ankle-looked-it-came-car-crash/"
+  },
   "https://www.ringsidenews.com/triple-h-becky-lynch-hammer-out-last-minute-details-backstage-before-saturday-nights-main-event": {
     "extra": {
       "event_key": "",
@@ -200,11 +242,11 @@
       "raw_result": "skipped",
       "semantic_id": "wwe-adds-clash-in-italy-title-match-during-saturday-nights-main-event"
     },
-    "reason": "skipped",
+    "reason": "high_score_or_discussion_worthy_not_final",
     "score": 68,
-    "status": "rejected",
+    "status": "competitive_deferred",
     "title": "WWE Adds Clash In Italy Title Match During Saturday Night's Main Event",
-    "updated_at": "1779586376.533053",
+    "updated_at": "1779616398.3687162",
     "url": "https://www.ringsidenews.com/wwe-adds-clash-italy-title-match-during-saturday-nights-main-event/"
   },
   "https://www.ringsidenews.com/wwe-saturday-nights-main-event-spoiler-lineup-may-23-2026-full-match-card-backstage-notes-revealed": {
@@ -304,11 +346,11 @@
       "raw_result": "skipped",
       "semantic_id": "aews-swerve-strickland-comments-on-aleister-black-and-zelina-vega-departing-wwe"
     },
-    "reason": "skipped",
+    "reason": "above_low_score_final_cap_not_final",
     "score": 60,
-    "status": "rejected",
+    "status": "competitive_deferred",
     "title": "AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE",
-    "updated_at": "1779552063.2934556",
+    "updated_at": "1779616517.569966",
     "url": "https://www.wrestlinginc.com/2177312/aew-swerve-strickland-aleister-black-zelina-vega-wwe/"
   },
   "https://www.wrestlinginc.com/2177532/wwe-jbl-john-bradshaw-layfield-talent-infinitely-better-increases-live-event-schedule": {
@@ -340,12 +382,13 @@
   "https://www.wrestlinginc.com/2180004/wwe-smackdown-nxt-blake-monroe-main-roster-debut": {
     "extra": {
       "event_key": "",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "ex-nxt-star-blake-monroe-makes-main-roster-debut-in-wwe-smackdown-backstage-segment"
     },
-    "reason": "skipped",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 96,
-    "status": "rejected",
+    "status": "competitive_deferred",
     "title": "Ex-NXT Star Blake Monroe Makes Main Roster Debut In WWE SmackDown Backstage Segment",
     "updated_at": "1779552021.0424924",
     "url": "https://www.wrestlinginc.com/2180004/wwe-smackdown-nxt-blake-monroe-main-roster-debut/"
@@ -353,12 +396,13 @@
   "https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more": {
     "extra": {
       "event_key": "",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "wwe-saturday-nights-main-event-results-523-three-championships-on-the-line-more"
     },
-    "reason": "skipped",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 80,
-    "status": "rejected",
+    "status": "competitive_deferred",
     "title": "WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More",
     "updated_at": "1779579066.1105447",
     "url": "https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/"
@@ -366,12 +410,13 @@
   "https://www.wrestlinginc.com/2180133/sol-ruca-granted-womens-ic-title-match-following-controversial-becky-lynch-dq": {
     "extra": {
       "event_key": "",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "sol-ruca-granted-womens-ic-title-match-following-controversial-wwe-snme-dq"
     },
-    "reason": "skipped",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 95,
-    "status": "rejected",
+    "status": "competitive_deferred",
     "title": "Sol Ruca Granted Women's IC Title Match Following Controversial WWE SNME DQ",
     "updated_at": "1779586316.7811391",
     "url": "https://www.wrestlinginc.com/2180133/sol-ruca-granted-womens-ic-title-match-following-controversial-becky-lynch-dq/"
