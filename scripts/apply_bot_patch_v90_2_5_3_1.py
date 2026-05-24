@@ -34,41 +34,43 @@ def v902531_is_full_event_recap(title):
     full_event_terms = ["results", "recap", "full results", "highlights and key moments", "key moments"]
     return any(x in t for x in full_event_terms)
 
-try:
-    def v90253_is_snme_results_or_recap(title):
-        return v902531_is_full_event_recap(title)
-except Exception:
-    pass
+if V90_2_5_3_1_ENABLED:
+    try:
+        def v90253_is_snme_results_or_recap(title):
+            return v902531_is_full_event_recap(title)
+    except Exception:
+        pass
 
-try:
-    _ORIG_V902531_PRINT = print
-    def print(*args, **kwargs):
-        try:
-            msg = " ".join(str(a) for a in args)
-            if msg.startswith("[BOT] Elaborazione:"):
-                title = msg.split("[BOT] Elaborazione:", 1)[1].strip()
-                item = None
-                if "v90251_find_item_by_title" in globals():
-                    item = v90251_find_item_by_title(title)
-                globals()["v902531_current_url"] = ""
-                globals()["v902531_current_title"] = title
-                if isinstance(item, dict):
-                    globals()["v902531_current_url"] = item.get("url") or item.get("link") or ""
-                    globals()["v902531_current_title"] = item.get("title") or item.get("titolo") or title
-            elif msg.startswith("[OK] Pubblicato:"):
-                published_title = msg.split("[OK] Pubblicato:", 1)[1].strip()
-                url = globals().get("v902531_current_url") or ""
-                source_title = globals().get("v902531_current_title") or published_title
-                if url and "v9025_record_processed_url" in globals():
-                    v9025_record_processed_url(url, title=source_title, status="published", reason="ok_published_log_v90_2_5_3_1", score=None, extra={"published_title": published_title, "source": "v90.2.5.3.1_ok_log"})
-                    print(f"[PROCESSED v90.2.5.3.1] Mark published current URL - {source_title}")
-                globals()["v902531_current_url"] = ""
-                globals()["v902531_current_title"] = ""
-        except Exception:
-            pass
-        return _ORIG_V902531_PRINT(*args, **kwargs)
-except Exception:
-    pass
+if V90_2_5_3_1_ENABLED:
+    try:
+        _ORIG_V902531_PRINT = print
+        def print(*args, **kwargs):
+            try:
+                msg = " ".join(str(a) for a in args)
+                if msg.startswith("[BOT] Elaborazione:"):
+                    title = msg.split("[BOT] Elaborazione:", 1)[1].strip()
+                    item = None
+                    if "v90251_find_item_by_title" in globals():
+                        item = v90251_find_item_by_title(title)
+                    globals()["v902531_current_url"] = ""
+                    globals()["v902531_current_title"] = title
+                    if isinstance(item, dict):
+                        globals()["v902531_current_url"] = item.get("url") or item.get("link") or ""
+                        globals()["v902531_current_title"] = item.get("title") or item.get("titolo") or title
+                elif msg.startswith("[OK] Pubblicato:"):
+                    published_title = msg.split("[OK] Pubblicato:", 1)[1].strip()
+                    url = globals().get("v902531_current_url") or ""
+                    source_title = globals().get("v902531_current_title") or published_title
+                    if url and "v9025_record_processed_url" in globals():
+                        v9025_record_processed_url(url, title=source_title, status="published", reason="ok_published_log_v90_2_5_3_1", score=None, extra={"published_title": published_title, "source": "v90.2.5.3.1_ok_log"})
+                        print(f"[PROCESSED v90.2.5.3.1] Mark published current URL - {source_title}")
+                    globals()["v902531_current_url"] = ""
+                    globals()["v902531_current_title"] = ""
+            except Exception:
+                pass
+            return _ORIG_V902531_PRINT(*args, **kwargs)
+    except Exception:
+        pass
 
 print("[BOOT v90.2.5.3.1] SNME floor ristretto e processed publish corrente attivi")
 '''
