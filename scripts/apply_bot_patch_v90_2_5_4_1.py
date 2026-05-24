@@ -16,7 +16,7 @@ def v902541_registry_report_key(title="", url="", text=""):
         raw = " ".join([str(title or ""), str(url or ""), str(text or "")])
         if "v90254_match_event" in globals() and "v90254_is_event_results_text" in globals() and "v90254_report_key_from_text" in globals():
             if v90254_match_event(raw) and v90254_is_event_results_text(raw):
-                return v90254_report_key_from_text(title, "", url) or ""
+                return v90254_report_key_from_text(raw, "", url) or ""
     except Exception:
         pass
     return ""
