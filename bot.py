@@ -6929,7 +6929,7 @@ def process_candidate_item(item, history, seen_story_fingerprints, seen_news_cor
         remove_pending_url(link)
         return "skipped"
 
-    if is_duplicate_story_fingerprint(story_fingerprint, seen_story_fingerprints):
+    if is_duplicate_story_fingerprint(story_fingerprint, seen_story_fingerprints) and not v9021_should_bypass_generic_dedupe(locals()):
         print(f"[SKIP] News probabilmente già pubblicata da altra fonte: {title}")
         print(f"[SKIP] story_fingerprint={story_fingerprint}")
         remove_pending_url(link)
@@ -19651,7 +19651,23 @@ def v88_media_record(url="", html="", embed_urls=None, inline_images=None, featu
     except Exception as e:
         print(f"[MEDIA v88] Scansione media HTML fallita: {e}")
     embed_urls = dedupe_preserve_order([v872_canonical_embed_url(u) for u in embed_urls if u])
-    inline_images = dedupe_preserve_order([u for u in inline_images if u])
+    # v90.2.3.1: inline image dict normalization
+    def _v90231_inline_image_url(value):
+        if isinstance(value, str):
+            return value.strip()
+        if isinstance(value, dict):
+            for key in ("url", "src", "source_url", "image_url", "href"):
+                candidate = value.get(key)
+                if isinstance(candidate, str) and candidate.strip():
+                    return candidate.strip()
+            nested = value.get("image") or value.get("media")
+            if isinstance(nested, dict):
+                for key in ("url", "src", "source_url", "image_url", "href"):
+                    candidate = nested.get(key)
+                    if isinstance(candidate, str) and candidate.strip():
+                        return candidate.strip()
+        return ""
+    inline_images = dedupe_preserve_order([_v90231_inline_image_url(u) for u in inline_images if _v90231_inline_image_url(u)])
     meta2 = []
     seen = set()
     for m in meta:
@@ -21575,6 +21591,3136 @@ try:
     print("[BOOT v89.1] Legacy return/debut rumor guard attiva")
 except Exception:
     pass
+
+
+# =========================
+# v90.1: quality correctness guards
+# =========================
+BOT_VERSION = "v90_1_quality_correctness"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V90_1_QUALITY_ENABLED = os.getenv("V90_1_QUALITY_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V90_1_REPORT_TITLE_HARDCODE_ENABLED = os.getenv("V90_1_REPORT_TITLE_HARDCODE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V90_1_MEDIA_TAIL_GUARD_ENABLED = os.getenv("V90_1_MEDIA_TAIL_GUARD_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V90_1_BOILERPLATE_SANITIZER_ENABLED = os.getenv("V90_1_BOILERPLATE_SANITIZER_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V90_1_NUMERIC_TITLE_GUARD_ENABLED = os.getenv("V90_1_NUMERIC_TITLE_GUARD_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V90_1_TOPIC_DEDUPE_ENABLED = os.getenv("V90_1_TOPIC_DEDUPE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V90_1_STALE_SPOILER_FIX_ENABLED = os.getenv("V90_1_STALE_SPOILER_FIX_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+_V901_SOURCE_TITLE_BY_URL = {}
+_V901_EVENT_KEY_BY_URL = {}
+_V901_TOPIC_CORES_THIS_RUN = set()
+_V901_TOPIC_CORES_PUBLISHED = None
+
+
+def v901_probe(text=""):
+    try:
+        return re.sub(r"\s+", " ", str(text or "").strip().lower())
+    except Exception:
+        return ""
+
+
+def v901_item_text(item=None):
+    item = item or {}
+    parts = []
+    for k in ("title", "url", "summary", "description"):
+        try:
+            parts.append(str(item.get(k, "") or ""))
+        except Exception:
+            pass
+    return " ".join(parts)
+
+
+def v901_extract_show_date_key(text="", event_key=""):
+    raw = " ".join([str(event_key or ""), str(text or "")])
+    p = v901_probe(raw)
+    show = ""
+    if "smackdown" in p:
+        show = "smackdown"
+    elif re.search(r"\braw\b", p):
+        show = "raw"
+    elif re.search(r"\bnxt\b", p):
+        show = "nxt"
+    elif "dynamite" in p:
+        show = "dynamite"
+    elif "collision" in p:
+        show = "collision"
+    elif "impact" in p or "tna-impact" in p or "tna impact" in p:
+        show = "impact"
+    elif "supercard" in p or re.search(r"\broh\b", p):
+        show = "roh"
+    m = re.search(r"(20\d{2})[-_/](\d{1,2})[-_/](\d{1,2})", raw)
+    if m:
+        return show, int(m.group(1)), int(m.group(2)), int(m.group(3))
+    m = re.search(r"\b(\d{1,2})[/-](\d{1,2})(?:[/-](20\d{2}))?\b", raw)
+    if m:
+        month = int(m.group(1)); day = int(m.group(2)); year = int(m.group(3) or datetime.now().year)
+        return show, year, month, day
+    m = re.search(r"\b(\d{1,2})\s+(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)\s+(20\d{2})\b", p)
+    if m:
+        mesi = {"gennaio":1,"febbraio":2,"marzo":3,"aprile":4,"maggio":5,"giugno":6,"luglio":7,"agosto":8,"settembre":9,"ottobre":10,"novembre":11,"dicembre":12}
+        return show, int(m.group(3)), mesi.get(m.group(2), 0), int(m.group(1))
+    return show, 0, 0, 0
+
+
+def v901_italian_date(day, month, year):
+    mesi = ["", "gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"]
+    if not (day and month and year and 1 <= month <= 12):
+        return ""
+    return f"{day} {mesi[month]} {year}"
+
+
+def v901_canonical_report_title(source_title="", event_key="", url=""):
+    show, year, month, day = v901_extract_show_date_key(" ".join([source_title or "", url or ""]), event_key=event_key or "")
+    if not show or not year or not month or not day:
+        return ""
+    date_it = v901_italian_date(day, month, year)
+    names = {
+        "raw": "WWE Raw",
+        "smackdown": "WWE SmackDown",
+        "nxt": "WWE NXT",
+        "dynamite": "AEW Dynamite",
+        "collision": "AEW Collision",
+        "impact": "TNA Impact",
+        "roh": "ROH",
+    }
+    label = names.get(show, show.upper())
+    return f"{label} del {date_it} - risultati e momenti salienti"
+
+
+def v901_report_key_from_text(source_title="", event_key="", url=""):
+    show, year, month, day = v901_extract_show_date_key(" ".join([source_title or "", url or ""]), event_key=event_key or "")
+    if show and year and month and day:
+        return f"report:{'wwe-' if show in {'raw','smackdown','nxt'} else ''}{show}-{year:04d}-{month:02d}-{day:02d}"
+    if event_key and str(event_key).startswith("report:"):
+        return str(event_key)
+    return ""
+
+
+def v901_is_report_confirmed_for_item(source_title="", event_key="", url=""):
+    rk = v901_report_key_from_text(source_title=source_title, event_key=event_key, url=url)
+    if not rk:
+        return False
+    try:
+        if "v881_is_report_confirmed" in globals() and v881_is_report_confirmed(rk):
+            return True
+    except Exception:
+        pass
+    try:
+        if "v872_is_strong_report_confirmed" in globals() and v872_is_strong_report_confirmed(rk):
+            return True
+    except Exception:
+        pass
+    try:
+        if "v87_is_confirmed_report_event_key" in globals() and v87_is_confirmed_report_event_key(rk):
+            return True
+    except Exception:
+        pass
+    return False
+
+
+def v901_remove_stale_spoiler_prefix(title="", source_title="", event_key="", url=""):
+    if not title:
+        return title
+    if not re.match(r"^\s*\[\s*spoiler\s*\]\s*", title, flags=re.I):
+        return title
+    if v901_is_report_confirmed_for_item(source_title=source_title, event_key=event_key, url=url):
+        cleaned = re.sub(r"^\s*\[\s*spoiler\s*\]\s*[:\-–—]?\s*", "", title, flags=re.I).strip()
+        if cleaned:
+            print(f"[SPOILER v90.1] Rimosso spoiler post-report: {title} -> {cleaned}")
+            return cleaned
+    return title
+
+
+def v901_boilerplate_patterns():
+    return [
+        r"\bSubhojeet\s+Mukherjee\b.*?(segue il wrestling|follows wrestling|has been following wrestling|backstage)",
+        r"\b[A-Z][A-Za-z'’.-]+\s+[A-Z][A-Za-z'’.-]+\s+(segue il wrestling da|has been following wrestling for|has been a wrestling fan for|has been covering|has covered wrestling)",
+        r"\bsi occupa di notizie e aggiornamenti dal backstage\b",
+        r"\bhas been following wrestling for over\b",
+        r"\bhas been covering professional wrestling\b",
+    ]
+
+
+def v901_strip_source_boilerplate(html=""):
+    if not html:
+        return html
+    out = html
+    try:
+        soup = BeautifulSoup(out, "html.parser")
+        changed = 0
+        patterns = [re.compile(p, re.I | re.S) for p in v901_boilerplate_patterns()]
+        for node in list(soup.find_all(["p", "div", "span"])):
+            txt = node.get_text(" ", strip=True)
+            if txt and any(p.search(txt) for p in patterns):
+                node.decompose()
+                changed += 1
+        out2 = str(soup)
+        if changed:
+            print(f"[SANITIZE v90.1] Rimossi blocchi boilerplate/autore: {changed}")
+        out = out2
+    except Exception:
+        for pat in v901_boilerplate_patterns():
+            out = re.sub(r"<p[^>]*>[^<]*(?:" + pat + r")[\s\S]*?</p>", "", out, flags=re.I)
+    return out
+
+
+def v901_is_media_only_html(fragment=""):
+    if not fragment:
+        return False
+    try:
+        soup = BeautifulSoup(fragment, "html.parser")
+        txt = normalize_whitespace(soup.get_text(" ", strip=True)) if "normalize_whitespace" in globals() else re.sub(r"\s+", " ", soup.get_text(" ", strip=True)).strip()
+        has_media = bool(soup.find(["img", "figure", "blockquote", "iframe", "script"])) or bool(re.search(r"https?://(?:x|twitter|instagram|youtube|bsky)\.com/\S+", txt, re.I))
+        if not has_media:
+            return False
+        txt_no_urls = re.sub(r"https?://\S+", "", txt).strip()
+        # Tweets often leave short text; if there is no real article prose, treat as media-only.
+        return len(txt_no_urls) < 35
+    except Exception:
+        return bool(re.search(r"<(figure|img|blockquote|iframe|script)\b", fragment, re.I))
+
+
+def v901_remove_tail_media_blocks(html="", is_report=False):
+    if not html:
+        return html
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        removed = 0
+        body = soup.body or soup
+        while True:
+            children = [c for c in getattr(body, "contents", []) if str(c).strip()]
+            if not children:
+                break
+            last = children[-1]
+            frag = str(last)
+            if not v901_is_media_only_html(frag):
+                break
+            # For non-reports remove only obvious orphan image/embed tails; for reports be stricter.
+            if not is_report and removed == 0 and not re.search(r"<(figure|img)\b", frag, re.I):
+                break
+            try:
+                last.extract()
+            except Exception:
+                break
+            removed += 1
+            if not is_report and removed >= 3:
+                break
+        if removed:
+            kind = "report" if is_report else "article"
+            print(f"[MEDIA v90.1] Rimossi media orfani in coda {kind}: {removed}")
+        return str(soup)
+    except Exception:
+        return html
+
+
+def v901_apply_numeric_title_guard(final_title="", source_title=""):
+    if not final_title or not source_title:
+        return final_title
+    title = str(final_title)
+    source = str(source_title)
+    replacements = []
+    # Named numbered properties where the number is part of the factual identity.
+    patterns = [
+        r"(WrestleMania)\s+(\d{1,3}|[IVXLCDM]+)",
+        r"(WWE\s*2K)\s*(\d{2,4})",
+        r"(AEW\s*Dynamite)\s*(\d{1,4})",
+        r"(NXT)\s*(\d{1,4})",
+    ]
+    for pat in patterns:
+        sm = re.search(pat, source, flags=re.I)
+        if not sm:
+            continue
+        label = sm.group(1)
+        source_num = sm.group(2)
+        fm = re.search(pat, title, flags=re.I)
+        if fm and fm.group(2) != source_num:
+            old = fm.group(0)
+            new = re.sub(re.escape(fm.group(2)) + r"\s*$", source_num, old)
+            title = title[:fm.start()] + new + title[fm.end():]
+            replacements.append(f"{old}->{new}")
+        elif not fm and re.search(re.escape(label), title, flags=re.I):
+            # If the label is present but the number was dropped, add it after the label.
+            title2 = re.sub(r"(?i)" + re.escape(label), lambda m: m.group(0) + " " + source_num, title, count=1)
+            if title2 != title:
+                replacements.append(f"{label}-> {label} {source_num}")
+                title = title2
+    if replacements:
+        print(f"[TITLE v90.1] Numeric fidelity title fix: {', '.join(replacements)}")
+    return title
+
+
+def v901_topic_core_from_text(text=""):
+    p = v901_probe(text)
+    if not p:
+        return ""
+    if "la knight" in p and any(t in p for t in ["absence", "assente", "assenza", "status", "infortun", "contract dispute", "contrattu"]):
+        return "status:la-knight:wwe-absence"
+    if any(t in p for t in ["house show", "house shows", "live event", "live events"]) and any(t in p for t in ["return", "returning", "more", "increase", "expanding", "aumento", "ritorno", "espansione"]):
+        return "business:wwe:house-shows-expansion"
+    return ""
+
+
+def v901_load_published_topic_cores():
+    global _V901_TOPIC_CORES_PUBLISHED
+    if _V901_TOPIC_CORES_PUBLISHED is not None:
+        return _V901_TOPIC_CORES_PUBLISHED
+    cores = set()
+    try:
+        roots = []
+        for name in ["published", "published_html_review"]:
+            p = Path(name)
+            if p.exists():
+                roots.append(p)
+        files = []
+        for root in roots:
+            files.extend(sorted(root.glob("*.html"))[-250:])
+        for path in files:
+            text = path.name.replace("-", " ").replace("_", " ")
+            try:
+                raw = path.read_text(encoding="utf-8", errors="ignore")[:5000]
+                m = re.search(r"<title[^>]*>(.*?)</title>", raw, flags=re.I | re.S)
+                if m:
+                    text += " " + re.sub(r"<[^>]+>", " ", m.group(1))
+                h = re.search(r"<h1[^>]*>(.*?)</h1>", raw, flags=re.I | re.S)
+                if h:
+                    text += " " + re.sub(r"<[^>]+>", " ", h.group(1))
+            except Exception:
+                pass
+            core = v901_topic_core_from_text(text)
+            if core:
+                cores.add(core)
+    except Exception as e:
+        print(f"[DEDUPE v90.1] Lettura topic cores pubblicati fallita: {e}")
+    _V901_TOPIC_CORES_PUBLISHED = cores
+    return cores
+
+
+def v901_should_skip_topic_duplicate(item=None):
+    if not V90_1_TOPIC_DEDUPE_ENABLED or not isinstance(item, dict):
+        return False, ""
+    title = str(item.get("title", "") or "")
+    text = v901_item_text(item)
+    core = v901_topic_core_from_text(text)
+    if not core:
+        return False, ""
+    if core in _V901_TOPIC_CORES_THIS_RUN:
+        return True, core
+    # If score is very high, allow hard-news updates; this guard targets medium/soft rephrasings.
+    try:
+        score = int(item.get("score", 0) or 0)
+    except Exception:
+        score = 0
+    if score >= 85:
+        return False, ""
+    if core in v901_load_published_topic_cores():
+        return True, core
+    return False, ""
+
+
+def v901_note_topic_published_from_item(item=None):
+    if not isinstance(item, dict):
+        return
+    core = v901_topic_core_from_text(v901_item_text(item))
+    if core:
+        _V901_TOPIC_CORES_THIS_RUN.add(core)
+        try:
+            v901_load_published_topic_cores().add(core)
+        except Exception:
+            pass
+
+
+if V90_1_QUALITY_ENABLED and "process_candidate_item" in globals():
+    _ORIG_V901_process_candidate_item = process_candidate_item
+
+    def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+        try:
+            if isinstance(item, dict):
+                url = str(item.get("url", "") or "")
+                title = str(item.get("title", "") or "")
+                if url:
+                    _V901_SOURCE_TITLE_BY_URL[url] = title
+                skip_dup, core = v901_should_skip_topic_duplicate(item)
+                if skip_dup:
+                    print(f"[SKIP v90.1] Topic/status duplicate guard {core}: {title}")
+                    return "skipped"
+        except Exception as e:
+            print(f"[WARN v90.1] topic pre-check warning: {e}")
+        result = _ORIG_V901_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+        try:
+            if "v8841_is_publish_success" in globals() and v8841_is_publish_success(result):
+                v901_note_topic_published_from_item(item)
+        except Exception:
+            pass
+        return result
+
+
+if V90_1_QUALITY_ENABLED and "create_post_without_image" in globals():
+    _ORIG_V901_create_post_without_image = create_post_without_image
+
+    def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+        try:
+            source_title = _V901_SOURCE_TITLE_BY_URL.get(url or "", "")
+            if not source_title:
+                source_title = str((data or {}).get("source_title") or (data or {}).get("original_title") or "") if isinstance(data, dict) else ""
+            is_report = (
+                isinstance(data, dict)
+                and "v8842_is_true_results_report" in globals()
+                and v8842_is_true_results_report(
+                    sem_id=sem_id,
+                    event_key=event_key,
+                    title=data.get("titolo") or data.get("title") or source_title or "",
+                    url=url,
+                    data=data,
+                )
+            )
+            if isinstance(data, dict):
+                data = dict(data)
+                final_title = data.get("titolo") or data.get("title") or ""
+                if is_report and V90_1_REPORT_TITLE_HARDCODE_ENABLED:
+                    canonical = v901_canonical_report_title(source_title or final_title, event_key=event_key, url=url)
+                    if canonical:
+                        if final_title != canonical:
+                            print(f"[TITLE v90.1] Report title hardcode: {final_title} -> {canonical}")
+                        data["titolo"] = canonical
+                        data["title"] = canonical
+                elif V90_1_NUMERIC_TITLE_GUARD_ENABLED:
+                    fixed = v901_apply_numeric_title_guard(final_title, source_title)
+                    fixed = v901_remove_stale_spoiler_prefix(fixed, source_title=source_title or fixed, event_key=event_key, url=url) if V90_1_STALE_SPOILER_FIX_ENABLED else fixed
+                    if fixed != final_title:
+                        data["titolo"] = fixed
+                        data["title"] = fixed
+                html = data.get("testo", "") or ""
+                if V90_1_BOILERPLATE_SANITIZER_ENABLED:
+                    html = v901_strip_source_boilerplate(html)
+                if V90_1_MEDIA_TAIL_GUARD_ENABLED:
+                    html = v901_remove_tail_media_blocks(html, is_report=bool(is_report))
+                    if is_report and inline_images:
+                        try:
+                            n = len(inline_images)
+                        except Exception:
+                            n = "unknown"
+                        print(f"[MEDIA v90.1] Report: inline_images residue non passate al publisher: {n}")
+                        inline_images = []
+                    elif not is_report and inline_images:
+                        # If the body already contains images or embeds, avoid legacy bottom appenders.
+                        try:
+                            body_has_media = bool(re.search(r"<(figure|img|blockquote|iframe)\b|https?://(?:x|twitter|instagram|youtube|bsky)\.com/", html, flags=re.I))
+                            if body_has_media:
+                                print(f"[MEDIA v90.1] Articolo: inline_images residue non passate al publisher per evitare coda: {len(inline_images)}")
+                                inline_images = []
+                        except Exception:
+                            pass
+                data["testo"] = html
+        except Exception as e:
+            print(f"[WARN v90.1] create_post quality wrapper warning: {e}")
+        return _ORIG_V901_create_post_without_image(
+            data,
+            sem_id,
+            url,
+            embed_urls=embed_urls,
+            event_key=event_key,
+            inline_images=inline_images,
+            featured_image_url=featured_image_url,
+        )
+
+try:
+    print("[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler")
+except Exception:
+    pass
+
+
+# =========================
+# v90.1.1: media duplicate and spoiler fixes
+# =========================
+BOT_VERSION = "v90_1_1_media_spoiler_fix"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V90_1_1_ENABLED = os.getenv("V90_1_1_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V90_1_1_MEDIA_QUEUE_DEDUPE_ENABLED = os.getenv("V90_1_1_MEDIA_QUEUE_DEDUPE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V90_1_1_REPORT_SHOW_STRICT_TITLE_ENABLED = os.getenv("V90_1_1_REPORT_SHOW_STRICT_TITLE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V90_1_1_PRE_REPORT_SPOILER_ENABLED = os.getenv("V90_1_1_PRE_REPORT_SPOILER_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+
+def v9011_probe(text=""):
+    try:
+        return re.sub(r"\s+", " ", str(text or "").strip().lower())
+    except Exception:
+        return ""
+
+
+def v9011_html_text(html=""):
+    try:
+        return BeautifulSoup(html or "", "html.parser").get_text(" ", strip=True)
+    except Exception:
+        return re.sub(r"<[^>]+>", " ", str(html or ""))
+
+
+def v9011_body_has_image(html=""):
+    if not html:
+        return False
+    return bool(re.search(r"<(figure|img)\b", str(html), flags=re.I))
+
+
+def v9011_body_has_embed(html=""):
+    if not html:
+        return False
+    return bool(re.search(r"<(blockquote|iframe|script)\b|https?://(?:x|twitter|instagram|youtube|bsky)\.com/", str(html), flags=re.I))
+
+
+def v9011_body_has_media(html=""):
+    return v9011_body_has_image(html) or v9011_body_has_embed(html)
+
+
+def v9011_media_queue_len(value):
+    try:
+        return len(value or [])
+    except Exception:
+        return 0
+
+
+def v9011_drop_duplicate_media_queues(html="", is_report=False, inline_images=None, embed_urls=None):
+    """Prevent legacy publisher appenders from duplicating media already present in body.
+
+    v90.1 removed some tail blocks, but reports and tweet-heavy articles can still have the
+    same images/embeds correctly placed in data['testo'] and also left in inline_images/embed_urls.
+    Those queues are appended by the underlying publisher at the end of the article. Clear only
+    the queue whose media type is already present in the body, preserving fallback embed recovery
+    when the body has images but still missed social embeds.
+    """
+    if not V90_1_1_MEDIA_QUEUE_DEDUPE_ENABLED:
+        return inline_images, embed_urls
+    if is_report:
+        n_img = v9011_media_queue_len(inline_images)
+        n_emb = v9011_media_queue_len(embed_urls)
+        if n_img or n_emb:
+            print(f"[MEDIA v90.1.1] Report: scarto code media residue per evitare duplicati in fondo images={n_img} embeds={n_emb}")
+        return [], []
+    has_image = v9011_body_has_image(html)
+    has_embed = v9011_body_has_embed(html)
+    n_img = v9011_media_queue_len(inline_images)
+    n_emb = v9011_media_queue_len(embed_urls)
+    if has_image and n_img:
+        print(f"[MEDIA v90.1.1] Articolo: scarto inline_images residue gia coperte nel body images={n_img}")
+        inline_images = []
+    if has_embed and n_emb:
+        print(f"[MEDIA v90.1.1] Articolo: scarto embed_urls residue gia coperte nel body embeds={n_emb}")
+        embed_urls = []
+    return inline_images, embed_urls
+
+
+def v9011_show_from_priority(source_title="", event_key="", url="", fallback_text=""):
+    """Detect report show from reliable fields only.
+
+    Body text may mention Collision inside a Dynamite report, or vice versa. For report titles,
+    prefer event_key/source title/url and use body only as a last resort.
+    """
+    candidates = [str(event_key or ""), str(source_title or ""), str(url or "")]
+    for raw in candidates:
+        p = v9011_probe(raw)
+        if "dynamite" in p:
+            return "dynamite"
+        if "collision" in p:
+            return "collision"
+        if "smackdown" in p:
+            return "smackdown"
+        if re.search(r"\braw\b", p):
+            return "raw"
+        if re.search(r"\bnxt\b", p):
+            return "nxt"
+        if "impact" in p or "tna-impact" in p or "tna impact" in p:
+            return "impact"
+        if "supercard" in p or re.search(r"\broh\b", p):
+            return "roh"
+    p = v9011_probe(fallback_text)
+    # Last-resort body detection. Dynamite wins over Collision when both are mentioned because
+    # reports often cite Collision history while covering Dynamite.
+    if "dynamite" in p:
+        return "dynamite"
+    if "collision" in p:
+        return "collision"
+    if "smackdown" in p:
+        return "smackdown"
+    if re.search(r"\braw\b", p):
+        return "raw"
+    if re.search(r"\bnxt\b", p):
+        return "nxt"
+    if "impact" in p or "tna impact" in p:
+        return "impact"
+    return ""
+
+
+def v9011_valid_date(year, month, day):
+    try:
+        if not (2000 <= int(year) <= 2100 and 1 <= int(month) <= 12 and 1 <= int(day) <= 31):
+            return False
+        datetime(int(year), int(month), int(day))
+        return True
+    except Exception:
+        return False
+
+
+def v9011_date_context_allows_short_date(text=""):
+    p = v9011_probe(text)
+    has_show = bool(re.search(r"\b(raw|nxt|smackdown|dynamite|collision|impact|roh)\b", p))
+    has_report_context = any(t in p for t in ["result", "results", "report", "recap", "live", "risultati", "momenti salienti"])
+    return has_show and has_report_context
+
+
+def v9011_date_from_fields(source_title="", event_key="", url="", fallback_text=""):
+    reliable_raw = " ".join([str(event_key or ""), str(source_title or ""), str(url or "")])
+    full_raw = " ".join([reliable_raw, str(fallback_text or "")[:500]])
+    # Prefer explicit ISO/event-key dates anywhere in reliable fields or short fallback.
+    m = re.search(r"(20\d{2})[-_/](\d{1,2})[-_/](\d{1,2})", full_raw)
+    if m:
+        year, month, day = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        if v9011_valid_date(year, month, day):
+            return year, month, day
+    # Accept numeric dates only when the year is explicit.
+    m = re.search(r"\b(\d{1,2})[/-](\d{1,2})[/-](20\d{2})\b", full_raw)
+    if m:
+        month, day, year = int(m.group(1)), int(m.group(2)), int(m.group(3))
+        if v9011_valid_date(year, month, day):
+            return year, month, day
+    # Accept short M/D only from reliable title/url/event fields and only in report context.
+    # Do not parse arbitrary body tokens like match scores (3-2) as dates.
+    if v9011_date_context_allows_short_date(reliable_raw):
+        m = re.search(r"\b(\d{1,2})[/-](\d{1,2})\b", reliable_raw)
+        if m:
+            month, day, year = int(m.group(1)), int(m.group(2)), datetime.now().year
+            if v9011_valid_date(year, month, day):
+                return year, month, day
+    p = v9011_probe(full_raw)
+    m = re.search(r"\b(\d{1,2})\s+(gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)\s+(20\d{2})\b", p)
+    if m:
+        mesi = {"gennaio":1,"febbraio":2,"marzo":3,"aprile":4,"maggio":5,"giugno":6,"luglio":7,"agosto":8,"settembre":9,"ottobre":10,"novembre":11,"dicembre":12}
+        year, month, day = int(m.group(3)), mesi.get(m.group(2), 0), int(m.group(1))
+        if v9011_valid_date(year, month, day):
+            return year, month, day
+    return 0, 0, 0
+
+
+def v9011_canonical_report_title(source_title="", event_key="", url="", fallback_text=""):
+    show = v9011_show_from_priority(source_title=source_title, event_key=event_key, url=url, fallback_text=fallback_text)
+    year, month, day = v9011_date_from_fields(source_title=source_title, event_key=event_key, url=url, fallback_text=fallback_text)
+    if not show or not year or not month or not day:
+        return ""
+    if "v901_italian_date" in globals():
+        date_it = v901_italian_date(day, month, year)
+    else:
+        mesi = ["", "gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"]
+        date_it = f"{day} {mesi[month]} {year}" if 1 <= month <= 12 else f"{day}/{month}/{year}"
+    names = {
+        "raw": "WWE Raw",
+        "smackdown": "WWE SmackDown",
+        "nxt": "WWE NXT",
+        "dynamite": "AEW Dynamite",
+        "collision": "AEW Collision",
+        "impact": "TNA Impact",
+        "roh": "ROH",
+    }
+    return f"{names.get(show, show.upper())} del {date_it} - risultati e momenti salienti"
+
+
+def v9011_is_report_confirmed(show="", year=0, month=0, day=0):
+    if not (show and year and month and day):
+        return False
+    key = f"report:{'wwe-' if show in {'raw','smackdown','nxt'} else ''}{show}-{year:04d}-{month:02d}-{day:02d}"
+    for fn in ("v881_is_report_confirmed", "v872_is_strong_report_confirmed", "v87_is_confirmed_report_event_key"):
+        try:
+            if fn in globals() and globals()[fn](key):
+                return True
+        except Exception:
+            pass
+    return False
+
+
+def v9011_should_prefix_spoiler(title="", source_title="", event_key="", url="", html=""):
+    if not V90_1_1_PRE_REPORT_SPOILER_ENABLED:
+        return False
+    if not title or re.match(r"^\s*\[\s*spoiler\s*\]", str(title), flags=re.I):
+        return False
+    text = " ".join([source_title or "", title or "", v9011_html_text(html or "")[:2500], url or ""])
+    p = v9011_probe(text)
+    # Only concrete post-show outcomes should get spoiler protection before the report.
+    outcome_terms = [
+        "retains", "retained", "defeats", "defeated", "beats", "beat", "wins", "won", "attacks", "attacked",
+        "returns", "returned", "debut", "debuts", "vacates", "vacated", "injured", "injury", "title shot",
+        "conserva", "batte", "sconfigge", "attacca", "torna", "ritorna", "debutta", "lascia il titolo", "titolo vacante",
+        "infortun", "si ritira dal torneo", "ottiene una title shot", "difenderà", "difendera",
+    ]
+    if not any(t in p for t in outcome_terms):
+        return False
+    show = v9011_show_from_priority(source_title=source_title, event_key=event_key, url=url, fallback_text=text)
+    year, month, day = v9011_date_from_fields(source_title=source_title, event_key=event_key, url=url, fallback_text=text)
+    # If the exact show report is already confirmed, no spoiler prefix is needed.
+    if show and year and month and day and v9011_is_report_confirmed(show, year, month, day):
+        return False
+    # If the article clearly says the outcome happened on/at a weekly show and no report is confirmed, protect it.
+    show_markers = ["raw", "nxt", "smackdown", "dynamite", "collision", "impact", "aew", "wwe"]
+    if any(m in p for m in show_markers):
+        return True
+    return False
+
+
+if V90_1_1_ENABLED and "create_post_without_image" in globals():
+    _ORIG_V9011_create_post_without_image = create_post_without_image
+
+    def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+        try:
+            source_title = ""
+            try:
+                source_title = _V901_SOURCE_TITLE_BY_URL.get(url or "", "")
+            except Exception:
+                source_title = ""
+            if not source_title and isinstance(data, dict):
+                source_title = str(data.get("source_title") or data.get("original_title") or "")
+            if isinstance(data, dict):
+                data = dict(data)
+                html = data.get("testo", "") or ""
+                final_title = data.get("titolo") or data.get("title") or ""
+                is_report = False
+                try:
+                    is_report = "v8842_is_true_results_report" in globals() and v8842_is_true_results_report(
+                        sem_id=sem_id,
+                        event_key=event_key,
+                        title=final_title or source_title or "",
+                        url=url,
+                        data=data,
+                    )
+                except Exception:
+                    is_report = False
+                if is_report and V90_1_1_REPORT_SHOW_STRICT_TITLE_ENABLED:
+                    canonical = v9011_canonical_report_title(source_title=source_title or final_title, event_key=event_key, url=url, fallback_text=html)
+                    if canonical:
+                        if final_title != canonical:
+                            print(f"[TITLE v90.1.1] Report title strict fix: {final_title} -> {canonical}")
+                        data["titolo"] = canonical
+                        data["title"] = canonical
+                        final_title = canonical
+                elif v9011_should_prefix_spoiler(title=final_title, source_title=source_title, event_key=event_key, url=url, html=html):
+                    spoiler_title = "[SPOILER] " + re.sub(r"^\s*\[\s*spoiler\s*\]\s*", "", str(final_title), flags=re.I).strip()
+                    print(f"[SPOILER v90.1.1] Aggiunto spoiler pre-report: {final_title} -> {spoiler_title}")
+                    data["titolo"] = spoiler_title
+                    data["title"] = spoiler_title
+                inline_images, embed_urls = v9011_drop_duplicate_media_queues(html=html, is_report=bool(is_report), inline_images=inline_images, embed_urls=embed_urls)
+        except Exception as e:
+            print(f"[WARN v90.1.1] create_post wrapper warning: {e}")
+        return _ORIG_V9011_create_post_without_image(
+            data,
+            sem_id,
+            url,
+            embed_urls=embed_urls,
+            event_key=event_key,
+            inline_images=inline_images,
+            featured_image_url=featured_image_url,
+        )
+
+try:
+    print("[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi")
+except Exception:
+    pass
+
+
+# =========================
+# v90.1.2: calendar-aware spoiler guard
+# =========================
+BOT_VERSION = "v90_1_2_spoiler_calendar_fix"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V90_1_2_ENABLED = os.getenv("V90_1_2_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V90_1_2_CALENDAR_SPOILER_ENABLED = os.getenv("V90_1_2_CALENDAR_SPOILER_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+
+def v9012_probe(text=""):
+    try:
+        return re.sub(r"\s+", " ", str(text or "").strip().lower())
+    except Exception:
+        return ""
+
+
+def v9012_now_italy():
+    try:
+        from zoneinfo import ZoneInfo
+        return datetime.now(ZoneInfo("Europe/Rome"))
+    except Exception:
+        return datetime.now()
+
+
+def v9012_expected_report_show_today(now=None):
+    """Return the only weekly-show report expected today, in Italy time.
+
+    The spoiler label is not a generic WWE/AEW flag. It only protects results/angles
+    from the specific weekly show whose report is expected on that Italian calendar day.
+    """
+    now = now or v9012_now_italy()
+    # Monday=0 ... Sunday=6. These are Italian post-show publication days.
+    mapping = {
+        1: "raw",        # Tuesday morning/day: RAW report
+        2: "nxt",        # Wednesday: NXT report
+        3: "dynamite",   # Thursday: AEW Dynamite report
+        4: "impact",     # Friday: TNA Impact report
+        5: "smackdown",  # Saturday: SmackDown report
+        6: "collision",  # Sunday: AEW Collision report
+    }
+    return mapping.get(int(now.weekday()), "")
+
+
+def v9012_show_aliases(show=""):
+    return {
+        "raw": ["raw", "wwe raw", "monday night raw"],
+        "nxt": ["nxt", "wwe nxt"],
+        "dynamite": ["dynamite", "aew dynamite"],
+        "impact": ["impact", "tna impact", "tna-impact"],
+        "smackdown": ["smackdown", "smack down", "wwe smackdown", "friday night smackdown"],
+        "collision": ["collision", "aew collision"],
+    }.get(show, [show] if show else [])
+
+
+def v9012_text_mentions_expected_show(text="", expected_show=""):
+    p = v9012_probe(text)
+    if not expected_show:
+        return False
+    return any(alias and alias in p for alias in v9012_show_aliases(expected_show))
+
+
+def v9012_has_relevant_show_outcome(text=""):
+    p = v9012_probe(text)
+    outcome_terms = [
+        # English outcomes/angles
+        "retains", "retained", "defeats", "defeated", "beats", "beat", "wins", "won", "attacks", "attacked",
+        "returns", "returned", "debut", "debuts", "debuted", "vacates", "vacated", "injured", "injury",
+        "title shot", "earns shot", "new champion", "championship", "title change", "laid out", "turns on",
+        "pulls out", "withdraws", "withdrawn", "challenge", "challenged", "accepted",
+        # Italian outcomes/angles
+        "conserva", "batte", "sconfigge", "vince", "attacca", "stende", "torna", "ritorna", "debutta",
+        "lascia il titolo", "titolo vacante", "nuovo campione", "nuova campionessa", "cambio titolo",
+        "infortun", "si ritira dal torneo", "ottiene una title shot", "sfida", "accetta", "turn heel", "tradisce",
+    ]
+    return any(t in p for t in outcome_terms)
+
+
+def v9012_is_non_show_news(text=""):
+    p = v9012_probe(text)
+    # Legal/crime/business/health/podcast/social items are not spoilers just because WWE/AEW appears.
+    blockers = [
+        "arrest", "arrested", "warrant", "battery", "bond", "police", "court", "lawsuit", "legal", "charge",
+        "si e costituito", "si è costituito", "mandato d'arresto", "arresto", "cauzione", "aggressione", "lesioni",
+        "percosse", "tribunale", "polizia", "accusa", "denuncia",
+        "viewership", "ratings", "ascolti", "rating", "podcast", "interview", "jim ross", "bully ray", "tommy dreamer",
+        "doctor", "doctors", "dementia", "alzheimer", "album", "songs", "music", "rookie class", "performance center",
+    ]
+    return any(t in p for t in blockers)
+
+
+def v9012_report_confirmed_for_expected_show(expected_show=""):
+    if not expected_show:
+        return False
+    now = v9012_now_italy()
+    year, month, day = now.year, now.month, now.day
+    # Reports are keyed by the US show date in many cases. Around Italian morning/day,
+    # the expected show usually happened the previous calendar day in the US.
+    candidate_dates = [(year, month, day)]
+    try:
+        prev = now - timedelta(days=1)
+        candidate_dates.append((prev.year, prev.month, prev.day))
+    except Exception:
+        pass
+    for y, m, d in candidate_dates:
+        try:
+            if "v9011_is_report_confirmed" in globals() and v9011_is_report_confirmed(expected_show, y, m, d):
+                return True
+        except Exception:
+            pass
+        key = f"report:{'wwe-' if expected_show in {'raw','smackdown','nxt'} else ''}{expected_show}-{y:04d}-{m:02d}-{d:02d}"
+        for fn in ("v881_is_report_confirmed", "v872_is_strong_report_confirmed", "v87_is_confirmed_report_event_key"):
+            try:
+                if fn in globals() and globals()[fn](key):
+                    return True
+            except Exception:
+                pass
+    return False
+
+
+def v9012_should_prefix_spoiler(title="", source_title="", event_key="", url="", html=""):
+    if not (V90_1_2_ENABLED and V90_1_2_CALENDAR_SPOILER_ENABLED):
+        return False
+    if not title or re.match(r"^\s*\[\s*spoiler\s*\]", str(title), flags=re.I):
+        return False
+    expected_show = v9012_expected_report_show_today()
+    if not expected_show:
+        return False
+    text = " ".join([str(source_title or ""), str(title or ""), str(url or ""), str(html or "")[:3000]])
+    if v9012_is_non_show_news(text):
+        return False
+    # Strict rule: spoiler only for the show whose report is expected today.
+    if not v9012_text_mentions_expected_show(text, expected_show):
+        return False
+    if not v9012_has_relevant_show_outcome(text):
+        return False
+    if v9012_report_confirmed_for_expected_show(expected_show):
+        return False
+    return True
+
+
+if V90_1_2_ENABLED and "create_post_without_image" in globals():
+    _ORIG_V9012_create_post_without_image = create_post_without_image
+
+    def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+        try:
+            source_title = ""
+            try:
+                source_title = _V901_SOURCE_TITLE_BY_URL.get(url or "", "")
+            except Exception:
+                source_title = ""
+            if not source_title and isinstance(data, dict):
+                source_title = str(data.get("source_title") or data.get("original_title") or "")
+            if isinstance(data, dict):
+                data = dict(data)
+                html = data.get("testo", "") or ""
+                final_title = data.get("titolo") or data.get("title") or ""
+                if final_title and re.match(r"^\s*\[\s*spoiler\s*\]", str(final_title), flags=re.I):
+                    full_text = " ".join([source_title or "", final_title or "", url or "", html[:3000]])
+                    expected_show = v9012_expected_report_show_today()
+                    # Remove stale/false spoiler labels produced by earlier wrappers unless strict rule agrees.
+                    if not v9012_should_prefix_spoiler(final_title, source_title=source_title, event_key=event_key, url=url, html=html):
+                        cleaned = re.sub(r"^\s*\[\s*spoiler\s*\]\s*[:\-–—]?\s*", "", str(final_title), flags=re.I).strip()
+                        if cleaned:
+                            print(f"[SPOILER v90.1.2] Rimosso spoiler non coerente con calendario ({expected_show or 'none'}): {final_title} -> {cleaned}")
+                            data["titolo"] = cleaned
+                            data["title"] = cleaned
+                    # else keep existing prefix
+                elif v9012_should_prefix_spoiler(final_title, source_title=source_title, event_key=event_key, url=url, html=html):
+                    spoiler_title = "[SPOILER] " + str(final_title).strip()
+                    print(f"[SPOILER v90.1.2] Aggiunto spoiler calendario: {final_title} -> {spoiler_title}")
+                    data["titolo"] = spoiler_title
+                    data["title"] = spoiler_title
+        except Exception as e:
+            print(f"[WARN v90.1.2] create_post wrapper warning: {e}")
+        return _ORIG_V9012_create_post_without_image(
+            data,
+            sem_id,
+            url,
+            embed_urls=embed_urls,
+            event_key=event_key,
+            inline_images=inline_images,
+            featured_image_url=featured_image_url,
+        )
+
+try:
+    print(f"[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show={v9012_expected_report_show_today() or 'none'}")
+except Exception:
+    pass
+
+
+# =========================
+# v90.1.3: spoiler hotfix
+# =========================
+BOT_VERSION = "v90_1_3_spoiler_hotfix"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V90_1_3_ENABLED = os.getenv("V90_1_3_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V90_1_3_SPOILER_HOTFIX_ENABLED = os.getenv("V90_1_3_SPOILER_HOTFIX_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+
+def v9013_probe(text=""):
+    try:
+        return re.sub(r"\s+", " ", str(text or "").strip().lower())
+    except Exception:
+        return ""
+
+
+def v9013_should_prefix_spoiler(title="", source_title="", event_key="", url="", html=""):
+    """Single source of truth for spoiler prefixes after v90.1.3.
+
+    v90.1.1 had an overly broad spoiler guard. It fired on non-show WWE items
+    such as legal/arrest news because those articles contained action words and WWE.
+    From this patch onward spoiler labels are allowed only through the stricter
+    calendar-aware v90.1.2 rule.
+    """
+    if not (V90_1_3_ENABLED and V90_1_3_SPOILER_HOTFIX_ENABLED):
+        return False
+    try:
+        if "v9012_should_prefix_spoiler" in globals():
+            return bool(v9012_should_prefix_spoiler(title=title, source_title=source_title, event_key=event_key, url=url, html=html))
+    except Exception as e:
+        print(f"[WARN v90.1.3] calendar spoiler check failed: {e}")
+    return False
+
+
+# Override the broad v90.1.1 function directly, because create_post wrappers are nested.
+# A later wrapper alone cannot reliably clean the title if the older wrapper adds [SPOILER]
+# after the cleanup has already run.
+if V90_1_3_ENABLED and V90_1_3_SPOILER_HOTFIX_ENABLED:
+    try:
+        v9011_should_prefix_spoiler = v9013_should_prefix_spoiler
+        print("[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard")
+    except Exception as e:
+        print(f"[WARN v90.1.3] override v9011_should_prefix_spoiler failed: {e}")
+
+
+if V90_1_3_ENABLED and V90_1_3_SPOILER_HOTFIX_ENABLED and "create_post_without_image" in globals():
+    _ORIG_V9013_create_post_without_image = create_post_without_image
+
+    def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+        # Final defensive cleanup: even if an older wrapper produced a false spoiler,
+        # remove it unless the strict calendar-aware rule says to keep it.
+        try:
+            source_title = ""
+            try:
+                source_title = _V901_SOURCE_TITLE_BY_URL.get(url or "", "")
+            except Exception:
+                source_title = ""
+            if not source_title and isinstance(data, dict):
+                source_title = str(data.get("source_title") or data.get("original_title") or "")
+            if isinstance(data, dict):
+                data = dict(data)
+                html = data.get("testo", "") or ""
+                final_title = data.get("titolo") or data.get("title") or ""
+                if final_title and re.match(r"^\s*\[\s*spoiler\s*\]", str(final_title), flags=re.I):
+                    keep = v9013_should_prefix_spoiler(final_title, source_title=source_title, event_key=event_key, url=url, html=html)
+                    if not keep:
+                        cleaned = re.sub(r"^\s*\[\s*spoiler\s*\]\s*[:\-–—]?\s*", "", str(final_title), flags=re.I).strip()
+                        if cleaned:
+                            print(f"[SPOILER v90.1.3] Rimosso spoiler falso/fuori calendario: {final_title} -> {cleaned}")
+                            data["titolo"] = cleaned
+                            data["title"] = cleaned
+        except Exception as e:
+            print(f"[WARN v90.1.3] final spoiler cleanup warning: {e}")
+        return _ORIG_V9013_create_post_without_image(
+            data,
+            sem_id,
+            url,
+            embed_urls=embed_urls,
+            event_key=event_key,
+            inline_images=inline_images,
+            featured_image_url=featured_image_url,
+        )
+
+try:
+    if V90_1_3_ENABLED and V90_1_3_SPOILER_HOTFIX_ENABLED:
+        print("[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]")
+    else:
+        print("[BOOT v90.1.3] Spoiler hotfix disattivata")
+except Exception:
+    pass
+
+
+# =========================
+# v90.2: editorial pacing and update gate
+# =========================
+BOT_VERSION = "v90_2_editorial_pacing_update_gate"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V90_2_ENABLED = os.getenv("V90_2_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V90_2_UPDATE_GATE_ENABLED = os.getenv("V90_2_UPDATE_GATE_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V90_2_SOFT_POOL_ENABLED = os.getenv("V90_2_SOFT_POOL_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V90_2_PACING_ENABLED = os.getenv("V90_2_PACING_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+V90_2_CORE_GATE_SCORE = int(os.getenv("V90_2_CORE_GATE_SCORE", "80") or "80")
+V90_2_CORE_MAX_HIGH = int(os.getenv("V90_2_CORE_MAX_HIGH", "3") or "3")
+V90_2_CORE_MAX_MEDIUM = int(os.getenv("V90_2_CORE_MAX_MEDIUM", "1") or "1")
+V90_2_LAST4H_SOFT_LIMIT = int(os.getenv("V90_2_LAST4H_SOFT_LIMIT", "8") or "8")
+V90_2_SOFT_SCORE_MAX = int(os.getenv("V90_2_SOFT_SCORE_MAX", "74") or "74")
+
+_V902_CORE_MEMORY = None
+_V902_SOFT_POOL = None
+_V902_SKIP_SENTINEL = "skipped"
+
+
+def v902_probe(text=""):
+    try:
+        return re.sub(r"\s+", " ", str(text or "").strip().lower())
+    except Exception:
+        return ""
+
+
+def v902_slug(text=""):
+    p = re.sub(r"[^a-z0-9]+", "-", v902_probe(text)).strip("-")
+    return p[:80]
+
+
+def v902_now_iso():
+    try:
+        return datetime.now().isoformat(timespec="seconds")
+    except Exception:
+        return ""
+
+
+def v902_item_text(item=None):
+    item = item or {}
+    return " ".join(str(item.get(k, "") or "") for k in ("title", "url", "summary", "description"))
+
+
+def v902_item_score(item=None):
+    try:
+        return int((item or {}).get("score", 0) or 0)
+    except Exception:
+        return 0
+
+
+def v902_read_json(path, default):
+    try:
+        p = Path(path)
+        if not p.exists():
+            return default
+        data = json.loads(p.read_text(encoding="utf-8"))
+        return data if data is not None else default
+    except Exception:
+        return default
+
+
+def v902_write_json(path, data):
+    try:
+        Path(path).write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    except Exception as e:
+        print(f"[WARN v90.2] Impossibile scrivere {path}: {e}")
+
+
+def v902_load_core_memory():
+    global _V902_CORE_MEMORY
+    if _V902_CORE_MEMORY is None:
+        data = v902_read_json("v90_2_event_cores.json", {})
+        _V902_CORE_MEMORY = data if isinstance(data, dict) else {}
+        v902_backfill_core_memory_from_published(_V902_CORE_MEMORY)
+    return _V902_CORE_MEMORY
+
+
+def v902_save_core_memory():
+    if _V902_CORE_MEMORY is not None:
+        v902_write_json("v90_2_event_cores.json", _V902_CORE_MEMORY)
+
+
+def v902_load_soft_pool():
+    global _V902_SOFT_POOL
+    if _V902_SOFT_POOL is None:
+        data = v902_read_json("soft_pool.json", [])
+        _V902_SOFT_POOL = (data if isinstance(data, list) else [])[-250:]
+    return _V902_SOFT_POOL
+
+
+def v902_save_soft_pool():
+    if _V902_SOFT_POOL is not None:
+        v902_write_json("soft_pool.json", _V902_SOFT_POOL[-250:])
+
+
+def v902_find_names(text=""):
+    raw = str(text or "")
+    low = raw.lower()
+    known = [
+        "Ludwig Kaiser", "Baron Corbin", "Drew McIntyre", "Mark Shapiro", "Willow Nightingale",
+        "Darby Allin", "Becky Lynch", "Sol Ruca", "Joe Hendry", "Brock Lesnar", "Oba Femi",
+        "LA Knight", "Mistico", "MJF", "Jon Moxley", "Kyle O'Reilly", "Rhea Ripley", "Jade Cargill",
+    ]
+    out = [name for name in known if name.lower() in low]
+    if out:
+        return out[:3]
+    stoplist = {
+        "wwe raw", "aew dynamite", "aew collision", "wwe nxt", "wwe smackdown", "tna impact",
+        "saudi arabia", "united states", "florida battery", "saturday night", "night of champions",
+        "royal rumble", "performance center", "world title", "world championship", "main event",
+    }
+    for m in re.finditer(r"\b([A-Z][a-zA-Z'’.-]+\s+[A-Z][a-zA-Z'’.-]+)\b", raw):
+        cand = m.group(1).strip()
+        if cand.lower() not in stoplist:
+            return [cand]
+    return []
+
+
+def v902_event_core_from_text(text=""):
+    raw = str(text or "")
+    p = v902_probe(raw)
+    if ("results" in p or "risultati" in p) and any(s in p for s in ["raw", "nxt", "smackdown", "dynamite", "collision", "impact"]):
+        return ""
+    names = v902_find_names(raw)
+    primary = v902_slug(names[0]) if names else "unknown"
+    legal_terms = ["arrest", "arrested", "warrant", "battery", "bond", "court", "legal", "attorney", "trial", "not guilty", "criminal history", "travel permission", "restrictions", "cauzione", "arresto", "mandato", "accusa", "aggressione", "percosse", "restrizioni", "legali", "processo"]
+    return_terms = ["return", "returning", "rientro", "ritorno", "tv hiatus", "back to wwe", "potentially returning", "possible date", "advertised"]
+    if any(t in p for t in legal_terms) and primary != "unknown":
+        return f"legal:{primary}:case"
+    if any(t in p for t in return_terms) and primary != "unknown":
+        company = "wwe" if "wwe" in p else "aew" if "aew" in p else "general"
+        return f"return:{primary}:{company}"
+    if any(t in p for t in ["vacates", "vacated", "title", "championship", "title shot", "titolo", "campionat"]):
+        if primary != "unknown":
+            return f"title:{primary}:status"
+    if "saudi" in p and any(t in p for t in ["tko", "wwe", "shapiro", "arabia"]):
+        return "business:tko:saudi-return"
+    if "house show" in p or "live event" in p:
+        return "business:wwe:house-shows"
+    return ""
+
+
+def v902_fact_tokens(text="", core=""):
+    p = v902_probe(text)
+    groups = {
+        "arrest": ["arrest", "arrested", "arresto"],
+        "warrant": ["warrant", "mandato"],
+        "bond": ["bond", "cauzione"],
+        "elevator_details": ["elevator", "ascensore", "have some manners"],
+        "not_guilty": ["not guilty", "non colpevole", "plea"],
+        "mexico_return": ["mexico", "messico", "flew back", "rientrato"],
+        "travel_job": ["travel", "viaggio", "job", "impiego", "keep his job", "lavoro", "essential"],
+        "restrictions": ["restrictions", "restrizioni", "separate residences"],
+        "trial": ["trial", "processo", "court filing"],
+        "attorney": ["attorney", "legale", "avvocato"],
+        "no_criminal_history": ["no criminal history", "precedenti"],
+        "official_date": ["date", "data", "advertised", "pubblicizzato", "barcellona"],
+        "official_return": ["return", "ritorno", "rientro", "back", "torna"],
+        "contract_offer": ["contract", "contratto", "offer", "offerta", "signed", "firma"],
+        "brand_show": ["raw", "smackdown", "nxt", "dynamite", "collision"],
+        "wwe_impact": ["wwe", "on screen", "tv", "show", "roster"],
+        "business_policy": ["tko", "shapiro", "saudi", "arabia", "monitor", "politic"],
+    }
+    facts = []
+    for key, terms in groups.items():
+        if any(t in p for t in terms):
+            facts.append(key)
+    for m in re.finditer(r"\b(?:20\d{2}[-/]\d{1,2}[-/]\d{1,2}|\d{1,2}[-/]\d{1,2}[-/]20\d{2}|\d{1,2}\s+(?:gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre)\s+20\d{2}|\d{1,2}\s+(?:gennaio|febbraio|marzo|aprile|maggio|giugno|luglio|agosto|settembre|ottobre|novembre|dicembre))\b", p):
+        facts.append("date:" + m.group(0)[:24])
+        facts.append("date_update")
+    return list(dict.fromkeys(facts))[:14]
+
+
+def v902_core_value(core="", score=0):
+    if core.startswith("legal:"):
+        return max(score, 85)
+    if core.startswith("return:"):
+        return max(score, 75)
+    if core.startswith("title:"):
+        return max(score, 80)
+    if core.startswith("business:"):
+        return max(score, 65)
+    return score
+
+
+def v902_is_major_update_fact(fact=""):
+    if fact.startswith("date:"):
+        return True
+    return fact in {"not_guilty", "mexico_return", "travel_job", "trial", "contract_offer", "date_update", "official_date"}
+
+
+def v902_true_update_decision(item=None, core=""):
+    item = item or {}
+    text = v902_item_text(item)
+    score = v902_item_score(item)
+    memory = v902_load_core_memory()
+    ent = memory.get(core, {}) if core else {}
+    prev_facts = set(ent.get("facts", []) or [])
+    new_facts = v902_fact_tokens(text, core)
+    novel = [f for f in new_facts if f not in prev_facts]
+    count = int(ent.get("count", 0) or len(ent.get("titles", []) or []))
+    core_val = v902_core_value(core, score)
+    substantial = [f for f in novel if f not in {"wwe_impact", "brand_show", "official_return"}]
+    if not ent:
+        return {"action": "publish", "reason": "new_core", "novel": new_facts, "count": count}
+    if count >= V90_2_CORE_MAX_HIGH and core_val >= 85:
+        if substantial and any(v902_is_major_update_fact(f) for f in substantial):
+            return {"action": "publish", "reason": "high_value_substantial_update_after_cap", "novel": substantial, "count": count}
+        return {"action": "skip", "reason": "core_cap_reached_no_major_update", "novel": novel, "count": count}
+    if core_val >= 85:
+        if substantial:
+            return {"action": "publish", "reason": "true_update_high_value", "novel": substantial, "count": count}
+        return {"action": "skip", "reason": "no_new_substantial_fact_high_value", "novel": novel, "count": count}
+    if core_val >= V90_2_CORE_GATE_SCORE:
+        if substantial and count < V90_2_CORE_MAX_MEDIUM + 1:
+            return {"action": "publish", "reason": "medium_true_update", "novel": substantial, "count": count}
+        return {"action": "soft_pool", "reason": "medium_followup_or_weak_update", "novel": novel, "count": count}
+    return {"action": "soft_pool", "reason": "covered_core_below_gate", "novel": novel, "count": count}
+
+
+def v902_backfill_core_memory_from_published(memory):
+    try:
+        files = []
+        for root in [Path("published"), Path("published_html_review")]:
+            if root.exists():
+                files.extend(sorted(root.glob("*.html"))[-300:])
+        for path in files:
+            text = path.name.replace("-", " ").replace("_", " ")
+            try:
+                raw = path.read_text(encoding="utf-8", errors="ignore")[:4000]
+                h = re.search(r"<h1[^>]*>(.*?)</h1>", raw, re.I | re.S) or re.search(r"<title[^>]*>(.*?)</title>", raw, re.I | re.S)
+                if h:
+                    text += " " + re.sub(r"<[^>]+>", " ", h.group(1))
+            except Exception:
+                pass
+            core = v902_event_core_from_text(text)
+            if not core:
+                continue
+            ent = memory.setdefault(core, {"titles": [], "facts": [], "count": 0, "first_seen": v902_now_iso(), "last_seen": v902_now_iso()})
+            if path.name not in ent.get("titles", []):
+                ent.setdefault("titles", []).append(path.name[:180])
+                ent["titles"] = ent.get("titles", [])[-10:]
+                ent["count"] = max(int(ent.get("count", 0) or 0), len(ent.get("titles", [])))
+                ent["last_seen"] = v902_now_iso()
+                for f in v902_fact_tokens(text, core):
+                    if f not in ent.setdefault("facts", []):
+                        ent["facts"].append(f)
+                ent["facts"] = ent.get("facts", [])[-30:]
+    except Exception as e:
+        print(f"[WARN v90.2] backfill core memory fallito: {e}")
+
+
+def v902_daily_context():
+    latest = v902_read_json("logs/v90_metrics_latest.json", {})
+    daily = latest.get("daily") if isinstance(latest, dict) else {}
+    daily = daily if isinstance(daily, dict) else {}
+    def to_int(k):
+        try:
+            return int(daily.get(k, 0) or 0)
+        except Exception:
+            return 0
+    return {"published_today": to_int("published_today"), "published_last_4h": to_int("published_last_4h"), "runs_today": to_int("runs_today")}
+
+
+def v902_expected_day_target():
+    try:
+        from zoneinfo import ZoneInfo
+        now = datetime.now(ZoneInfo("Europe/Rome"))
+    except Exception:
+        now = datetime.now()
+    weekday = now.weekday()
+    if weekday in {1, 2, 3, 5}:
+        return {"min": 18, "max": 24, "kind": "show_day"}
+    if weekday == 6:
+        return {"min": 12, "max": 18, "kind": "weekend_show"}
+    if weekday == 4:
+        return {"min": 16, "max": 22, "kind": "standard_show"}
+    return {"min": 12, "max": 16, "kind": "light_day"}
+
+
+def v902_add_soft_pool(item=None, core="", reason="", score=0):
+    if not (V90_2_ENABLED and V90_2_SOFT_POOL_ENABLED):
+        return
+    item = item or {}
+    pool = v902_load_soft_pool()
+    url = str(item.get("url", "") or "")
+    title = str(item.get("title", "") or "")
+    if any((url and x.get("url") == url) or (title and x.get("title") == title) for x in pool[-100:]):
+        return
+    pool.append({"created_at": v902_now_iso(), "title": title, "url": url, "score": int(score or v902_item_score(item)), "core": core, "reason": reason, "ttl_hours": 8 if int(score or 0) < 75 else 12})
+    v902_save_soft_pool()
+    print(f"[SOFTPOOL v90.2] Aggiunta: score={score} core={core or '-'} reason={reason} title={title[:90]}")
+
+
+def v902_note_core_published(item=None, core=""):
+    if not core:
+        return
+    memory = v902_load_core_memory()
+    ent = memory.setdefault(core, {"titles": [], "facts": [], "count": 0, "first_seen": v902_now_iso(), "last_seen": v902_now_iso()})
+    label = str((item or {}).get("title", "") or (item or {}).get("url", "") or core)
+    if label and label not in ent.get("titles", []):
+        ent.setdefault("titles", []).append(label[:180])
+        ent["titles"] = ent.get("titles", [])[-12:]
+    for f in v902_fact_tokens(v902_item_text(item), core):
+        if f not in ent.setdefault("facts", []):
+            ent["facts"].append(f)
+    ent["facts"] = ent.get("facts", [])[-40:]
+    ent["count"] = int(ent.get("count", 0) or 0) + 1
+    ent["last_seen"] = v902_now_iso()
+    v902_save_core_memory()
+    print(f"[CORE v90.2] Registrato publish core={core} count={ent['count']} facts={v902_fact_tokens(v902_item_text(item), core)}")
+
+
+def v902_should_skip_or_pool(item=None):
+    if not V90_2_ENABLED:
+        return False, ""
+    item = item or {}
+    score = v902_item_score(item)
+    title = str(item.get("title", "") or "")
+    core = v902_event_core_from_text(v902_item_text(item))
+    ctx = v902_daily_context()
+    target = v902_expected_day_target()
+    if V90_2_PACING_ENABLED and ctx.get("published_last_4h", 0) >= V90_2_LAST4H_SOFT_LIMIT and score <= V90_2_SOFT_SCORE_MAX:
+        v902_add_soft_pool(item, core=core, reason=f"dense_window_last4h_{ctx.get('published_last_4h')}", score=score)
+        print(f"[SKIP v90.2] Dense window soft hold: last4h={ctx.get('published_last_4h')} score={score}/{V90_2_SOFT_SCORE_MAX} - {title}")
+        return True, core
+    if V90_2_UPDATE_GATE_ENABLED and core:
+        memory = v902_load_core_memory()
+        if core in memory:
+            decision = v902_true_update_decision(item, core)
+            action = decision.get("action")
+            reason = decision.get("reason", "")
+            novel = decision.get("novel", [])
+            if action == "publish":
+                print(f"[UPDATEGATE v90.2] True update OK core={core} score={score} reason={reason} novel={novel}")
+                return False, core
+            if action == "soft_pool":
+                v902_add_soft_pool(item, core=core, reason=f"update_gate:{reason}", score=score)
+                print(f"[SKIP v90.2] Follow-up in soft_pool core={core} score={score} reason={reason} novel={novel} - {title}")
+                return True, core
+            print(f"[SKIP v90.2] Follow-up duplicato/non sostanziale core={core} score={score} reason={reason} novel={novel} - {title}")
+            return True, core
+    if V90_2_PACING_ENABLED and V90_2_SOFT_POOL_ENABLED and 45 <= score < 75 and ctx.get("published_today", 0) >= target.get("min", 18):
+        v902_add_soft_pool(item, core=core, reason=f"daily_target_met_{ctx.get('published_today')}_{target.get('kind')}", score=score)
+        print(f"[SKIP v90.2] Daily target met, soft item pooled: today={ctx.get('published_today')} target_min={target.get('min')} score={score} - {title}")
+        return True, core
+    return False, core
+
+
+if V90_2_ENABLED and "process_candidate_item" in globals():
+    _ORIG_V902_process_candidate_item = process_candidate_item
+
+    def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+        core = ""
+        try:
+            skip, core = v902_should_skip_or_pool(item)
+            if skip:
+                return _V902_SKIP_SENTINEL
+        except Exception as e:
+            print(f"[WARN v90.2] pre-process gate warning: {e}")
+        result = _ORIG_V902_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+        try:
+            success = bool(v8841_is_publish_success(result)) if "v8841_is_publish_success" in globals() else str(result).lower() in {"published", "ok", "success"}
+            if success:
+                if not core:
+                    core = v902_event_core_from_text(v902_item_text(item))
+                if core:
+                    v902_note_core_published(item, core)
+        except Exception as e:
+            print(f"[WARN v90.2] note core published warning: {e}")
+        return result
+
+try:
+    print("[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing")
+except Exception:
+    pass
+
+
+# =========================
+# v90.2.1: report dedupe protection
+# =========================
+BOT_VERSION = "v90_2_1_report_dedupe_protection"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+
+V90_2_1_ENABLED = os.getenv("V90_2_1_ENABLED", "1").strip().lower() not in {"0", "false", "no", "off"}
+
+
+def v9021_scope_get(scope, *names, default=""):
+    for name in names:
+        try:
+            value = scope.get(name)
+        except Exception:
+            value = None
+        if value not in (None, ""):
+            return value
+    return default
+
+
+def v9021_item_from_scope(scope):
+    item = v9021_scope_get(scope, "item", default={})
+    return item if isinstance(item, dict) else {}
+
+
+def v9021_report_key_from_scope(scope):
+    item = v9021_item_from_scope(scope)
+    for value in [
+        item.get("report_event_key"),
+        item.get("event_key"),
+        v9021_scope_get(scope, "report_event_key"),
+        v9021_scope_get(scope, "event_key"),
+    ]:
+        value = str(value or "").strip()
+        if value.startswith("report:"):
+            return value
+    title = str(item.get("title") or v9021_scope_get(scope, "title", "source_title") or "")
+    url = str(item.get("url") or v9021_scope_get(scope, "url", "source_url") or "")
+    text = str(item.get("prefetched_text") or v9021_scope_get(scope, "text", "source_text", "article_text") or "")
+    try:
+        key = make_report_event_key(title, url, text)
+        if key and str(key).startswith("report:"):
+            return key
+    except Exception:
+        pass
+    return ""
+
+
+def v9021_title_url_text_from_scope(scope):
+    item = v9021_item_from_scope(scope)
+    title = str(item.get("title") or v9021_scope_get(scope, "title", "source_title") or "")
+    url = str(item.get("url") or v9021_scope_get(scope, "url", "source_url") or "")
+    text = str(
+        item.get("prefetched_text")
+        or item.get("text")
+        or v9021_scope_get(scope, "text", "source_text", "article_text", "source_text_joined")
+        or ""
+    )
+    return title, url, text
+
+
+def v9021_is_report_context(scope):
+    item = v9021_item_from_scope(scope)
+    title, url, text = v9021_title_url_text_from_scope(scope)
+    report_key = v9021_report_key_from_scope(scope)
+    if report_key.startswith("report:"):
+        return True
+    if item.get("kind") == "report" or item.get("force_process_report"):
+        return True
+    try:
+        editorial_analysis = scope.get("editorial_analysis") or scope.get("analysis") or {}
+        if isinstance(editorial_analysis, dict):
+            atype = normalize_article_type(editorial_analysis.get("article_type", ""))
+            if atype == "RESULTS_REPORT":
+                return True
+    except Exception:
+        pass
+    try:
+        if is_results_article(title, url, text):
+            return True
+    except Exception:
+        pass
+    try:
+        if v75_is_hard_results_report(title, url, text):
+            return True
+    except Exception:
+        pass
+    probe = normalize_for_check(f"{title} {url}") if "normalize_for_check" in globals() else f"{title} {url}".lower()
+    return "risultati e momenti salienti" in probe or " results " in f" {probe} "
+
+
+def v9021_report_confirmed(scope, report_key):
+    if not report_key:
+        return False
+    title, url, _ = v9021_title_url_text_from_scope(scope)
+    try:
+        return bool(wp_has_published_event(report_key, title=title, url=url))
+    except Exception as e:
+        print(f"[REPORT v90.2.1] WP report confirmation lookup failed, no bypass: {report_key} | {e}")
+        return True
+
+
+def v9021_should_bypass_generic_dedupe(scope):
+    """Protect mature true-results reports from generic story/fingerprint dedupe.
+
+    Report publication authority must be the strict report key + WordPress confirmation.
+    Generic story fingerprints can collide with post-show news or partial report material,
+    as seen with TNA Impact 2026-05-21.
+    """
+    if not V90_2_1_ENABLED:
+        return False
+    if not v9021_is_report_context(scope):
+        return False
+    report_key = v9021_report_key_from_scope(scope)
+    if report_key and v9021_report_confirmed(scope, report_key):
+        return False
+    title, url, _ = v9021_title_url_text_from_scope(scope)
+    print(f"[REPORT v90.2.1] Bypass dedupe generico per true-results non confermato: {report_key or '-'} - {title[:90]}")
+    return True
+
+try:
+    print("[BOOT v90.2.1] Report dedupe protection attiva: true-results usa solo report gate stretto")
+except Exception:
+    pass
+
+
+# v90.2.2: report flow tuning
+BOT_VERSION = "v90_2_2_report_flow_tuning"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+V90_2_2_ENABLED = os.getenv("V90_2_2_ENABLED", "1").lower() not in {"0","false","no","off"}
+V90_2_2_REPORT_NO_INLINE_IMAGES = os.getenv("V90_2_2_REPORT_NO_INLINE_IMAGES", "1").lower() not in {"0","false","no","off"}
+V90_2_2_POST_REPORT_UNSPOILER_ENABLED = os.getenv("V90_2_2_POST_REPORT_UNSPOILER_ENABLED", "1").lower() not in {"0","false","no","off"}
+V90_2_2_REPORT_CHAIN = [m.strip() for m in os.getenv("V90_2_2_TRANSLATE_REPORT_CHAIN", "gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-pro").split(",") if m.strip()]
+_V9022_REPORT_SHOWS = set()
+
+def v9022_norm(*parts):
+    try: return normalize_for_check(" ".join(str(p or "") for p in parts))
+    except Exception: return " ".join(str(p or "") for p in parts).lower()
+
+def v9022_show(*parts):
+    p = v9022_norm(*parts)
+    if "smackdown" in p: return "smackdown"
+    if re.search(r"\braw\b", p): return "raw"
+    if "nxt" in p: return "nxt"
+    if "dynamite" in p: return "dynamite"
+    if "collision" in p: return "collision"
+    if "tna impact" in p or "tna-impact" in p or re.search(r"\bimpact\b", p): return "impact"
+    return ""
+
+def v9022_key(show, d):
+    if show == "impact": return f"report:tna-impact-{d.year:04d}-{d.month:02d}-{d.day:02d}"
+    if show in {"dynamite","collision"}: return f"report:aew-{show}-{d.year:04d}-{d.month:02d}-{d.day:02d}"
+    if show in {"raw","smackdown","nxt"}: return f"report:wwe-{show}-{d.year:04d}-{d.month:02d}-{d.day:02d}"
+    return ""
+
+def v9022_report_confirmed(show):
+    if not show: return False
+    if show in _V9022_REPORT_SHOWS: return True
+    try:
+        if "v9012_report_confirmed_for_expected_show" in globals() and v9012_report_confirmed_for_expected_show(show): return True
+    except Exception: pass
+    try: now = v9012_now_italy() if "v9012_now_italy" in globals() else datetime.now()
+    except Exception: now = datetime.now()
+    days = [now]
+    try: days.append(now - timedelta(days=1))
+    except Exception: pass
+    for d in days:
+        k = v9022_key(show, d)
+        if not k: continue
+        for fn in ("v872_is_strong_report_confirmed","v87_is_confirmed_report_event_key","v881_is_report_confirmed"):
+            try:
+                if fn in globals() and globals()[fn](k): return True
+            except Exception: pass
+        try:
+            if "wp_has_published_event" in globals() and wp_has_published_event(k, title="", url=""): return True
+        except Exception: pass
+    return False
+
+def v9022_is_report(sem_id="", event_key="", title="", url="", data=None, text=""):
+    data = data or {}
+    p = v9022_norm(sem_id,event_key,title,url,data.get("titolo",""),data.get("title",""))
+    if str(event_key or "").startswith("report:") or str(sem_id or "").startswith("report-"): return True
+    if "risultati e momenti salienti" in p: return True
+    try: return bool(is_results_article(title or data.get("titolo",""), url or "", text or data.get("testo","")[:1500]))
+    except Exception: return False
+
+def v9022_strip_imgs(html):
+    if not html: return html
+    try:
+        soup = BeautifulSoup(html, "html.parser"); n = 0
+        for tag in list(soup.find_all(["figure","img"])):
+            if tag.name == "img" or tag.find("img") or tag.find("amp-img"):
+                tag.decompose(); n += 1
+        if n: print(f"[MEDIA v90.2.2] Rimosse immagini inline dal report: {n}")
+        return str(soup)
+    except Exception as e:
+        print(f"[MEDIA v90.2.2] strip immagini non applicato: {e}"); return html
+
+if V90_2_2_ENABLED:
+    try:
+        if "V872_MODEL_CHAINS" in globals() and V90_2_2_REPORT_CHAIN:
+            V872_MODEL_CHAINS["translate_report"] = list(V90_2_2_REPORT_CHAIN)
+            print(f"[MODEL v90.2.2] translate_report chain={','.join(V90_2_2_REPORT_CHAIN)}")
+    except Exception as e: print(f"[MODEL v90.2.2] chain warning: {e}")
+
+try:
+    _ORIG_V9022_spoiler = v9012_should_prefix_spoiler
+    def v9012_should_prefix_spoiler(title="", source_title="", event_key="", url="", html=""):
+        if V90_2_2_ENABLED and V90_2_2_POST_REPORT_UNSPOILER_ENABLED:
+            s = v9022_show(source_title, title, event_key, url, html[:3000] if html else "")
+            if s and v9022_report_confirmed(s): return False
+        return _ORIG_V9022_spoiler(title, source_title=source_title, event_key=event_key, url=url, html=html)
+except Exception: pass
+
+try:
+    _ORIG_V9022_translate_blocks = translate_ordered_content_blocks
+    def translate_ordered_content_blocks(source_title, blocks, source_url="", forced_title=None, forced_category=None, excluded_image_urls=None):
+        if V90_2_2_ENABLED and V90_2_2_REPORT_NO_INLINE_IMAGES:
+            try:
+                if v9022_is_report(title=source_title, url=source_url, text=" ".join(str((b or {}).get("text","")) for b in (blocks or []) if isinstance(b,dict))):
+                    n = sum(1 for b in (blocks or []) if isinstance(b,dict) and b.get("type") == "image")
+                    if n:
+                        blocks = [b for b in (blocks or []) if not (isinstance(b,dict) and b.get("type") == "image")]
+                        print(f"[MEDIA v90.2.2] Report image blocks rimossi prima della traduzione: {n}")
+            except Exception as e: print(f"[MEDIA v90.2.2] block filter warning: {e}")
+        return _ORIG_V9022_translate_blocks(source_title, blocks, source_url=source_url, forced_title=forced_title, forced_category=forced_category, excluded_image_urls=excluded_image_urls)
+except Exception: pass
+
+try:
+    _ORIG_V9022_create_post = create_post_without_image
+    def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+        try:
+            title = (data or {}).get("titolo") or (data or {}).get("title") or "" if isinstance(data,dict) else ""
+            rep = v9022_is_report(sem_id=sem_id,event_key=event_key,title=title,url=url,data=data if isinstance(data,dict) else {})
+            if V90_2_2_ENABLED and rep and V90_2_2_REPORT_NO_INLINE_IMAGES:
+                if isinstance(data,dict): data = dict(data); data["testo"] = v9022_strip_imgs(data.get("testo",""))
+                if inline_images: print(f"[MEDIA v90.2.2] Inline images report azzerate prima del publish: {len(inline_images)}")
+                inline_images = []
+            elif V90_2_2_ENABLED and isinstance(data,dict):
+                final = data.get("titolo") or data.get("title") or ""; show = v9022_show(final, url, data.get("testo","")[:3000])
+                if show and v9022_report_confirmed(show) and re.match(r"^\s*\[\s*spoiler\s*\]", str(final), flags=re.I):
+                    clean = re.sub(r"^\s*\[\s*spoiler\s*\]\s*[:\-–—]?\s*", "", str(final), flags=re.I).strip()
+                    if clean: data = dict(data); data["titolo"] = clean; data["title"] = clean; print(f"[SPOILER v90.2.2] Rimosso spoiler post-report: {final} -> {clean}")
+        except Exception as e: print(f"[WARN v90.2.2] pre-publish warning: {e}")
+        res = _ORIG_V9022_create_post(data, sem_id, url, embed_urls=embed_urls, event_key=event_key, inline_images=inline_images, featured_image_url=featured_image_url)
+        try:
+            if V90_2_2_ENABLED and (bool(res[0]) if isinstance(res,tuple) and res else bool(res)):
+                title = (data or {}).get("titolo") or (data or {}).get("title") or "" if isinstance(data,dict) else ""
+                if v9022_is_report(sem_id=sem_id,event_key=event_key,title=title,url=url,data=data if isinstance(data,dict) else {}):
+                    s = v9022_show(event_key, sem_id, title, url)
+                    if s: _V9022_REPORT_SHOWS.add(s); print(f"[SPOILER v90.2.2] Report confermato in run, spoiler off per show={s}")
+        except Exception as e: print(f"[WARN v90.2.2] post-publish warning: {e}")
+        return res
+except Exception: pass
+
+try: print("[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler")
+except Exception: pass
+
+
+# v90.2.3: social embed quote positioning
+BOT_VERSION = "v90_2_3_social_embed_quote_position"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+V90_2_3_ENABLED = os.getenv("V90_2_3_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+V90_2_3_SOCIAL_QUOTE_ENABLED = os.getenv("V90_2_3_SOCIAL_QUOTE_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+SOCIAL_EMBED_URL_RE_V9023 = re.compile(r"https?://(?:www\.)?(?:x\.com|twitter\.com)/[^\s<>\"']+/status/\d+[^\s<>\"']*", re.I)
+SOCIAL_PIC_RE_V9023 = re.compile(r"\bpic\.twitter\.com/[A-Za-z0-9_]+\b", re.I)
+
+
+def v9023_clean_social_text(text):
+    text = SOCIAL_EMBED_URL_RE_V9023.sub("", str(text or ""))
+    text = SOCIAL_PIC_RE_V9023.sub("", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+
+def v9023_is_social_url_only(text):
+    raw = str(text or "").strip()
+    cleaned = v9023_clean_social_text(raw).strip(" .\u00a0")
+    return bool(SOCIAL_EMBED_URL_RE_V9023.search(raw)) and not cleaned
+
+
+def v9023_canonical_social_url(text):
+    m = SOCIAL_EMBED_URL_RE_V9023.search(str(text or ""))
+    if not m:
+        return ""
+    url = m.group(0).strip().rstrip('.,;)]}')
+    url = re.sub(r"\?.*$", "", url)
+    return url
+
+
+def v9023_quote_html(text):
+    try:
+        escaped = html.escape(v9023_clean_social_text(text), quote=False)
+    except Exception:
+        escaped = v9023_clean_social_text(text)
+    if not escaped:
+        return ""
+    return (
+        '<blockquote class="owtv-social-quote" style="border-left:4px solid #4b5cff;'
+        'background:#eef3fb;margin:24px 0;padding:18px 22px;font-style:italic;">'
+        f'{escaped}'
+        '</blockquote>'
+    )
+
+
+def v9023_fix_social_embed_quotes(html_text):
+    if not V90_2_3_ENABLED or not V90_2_3_SOCIAL_QUOTE_ENABLED or not html_text:
+        return html_text
+    try:
+        soup = BeautifulSoup(html_text, "html.parser")
+        nodes = [n for n in soup.find_all(["p", "blockquote"]) if n and n.parent]
+        seen = set()
+        changed = 0
+        i = 0
+        while i < len(nodes):
+            node = nodes[i]
+            if not node.parent:
+                i += 1
+                continue
+            node_text = node.get_text(" ", strip=True)
+            url = v9023_canonical_social_url(node_text)
+            if not url:
+                i += 1
+                continue
+            if url in seen:
+                node.decompose()
+                changed += 1
+                i += 1
+                continue
+            seen.add(url)
+            node.clear()
+            node.append(url)
+            quote_parts = []
+            j = i + 1
+            while j < len(nodes) and len(quote_parts) < 3:
+                nxt = nodes[j]
+                if not nxt.parent:
+                    j += 1
+                    continue
+                txt = nxt.get_text(" ", strip=True)
+                if not txt:
+                    j += 1
+                    continue
+                if SOCIAL_EMBED_URL_RE_V9023.search(txt):
+                    nxt.decompose(); changed += 1; j += 1; continue
+                clean = v9023_clean_social_text(txt)
+                if re.match(r"^(secondo|nel documento|dalla presentazione|pertanto|la presenza|l'arresto|a pochi giorni|al momento)\b", clean, flags=re.I):
+                    break
+                if len(clean) > 260:
+                    break
+                quote_parts.append(clean)
+                nxt.decompose(); changed += 1; j += 1
+            quote_text = "\n\n".join([p for p in quote_parts if p])
+            if quote_text:
+                quote_soup = BeautifulSoup(v9023_quote_html(quote_text), "html.parser")
+                node.insert_after(quote_soup)
+                changed += 1
+            i = j
+        if changed:
+            print(f"[EMBED v90.2.3] Social embed/quote normalizzati: {changed}")
+            return str(soup)
+    except Exception as e:
+        print(f"[EMBED v90.2.3] social quote guard warning: {e}")
+    return html_text
+
+try:
+    _ORIG_V9023_create_post = create_post_without_image
+    def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+        if V90_2_3_ENABLED and isinstance(data, dict):
+            try:
+                data = dict(data)
+                data["testo"] = v9023_fix_social_embed_quotes(data.get("testo", ""))
+            except Exception as e:
+                print(f"[EMBED v90.2.3] pre-publish social guard warning: {e}")
+        return _ORIG_V9023_create_post(data, sem_id, url, embed_urls=embed_urls, event_key=event_key, inline_images=inline_images, featured_image_url=featured_image_url)
+except Exception:
+    pass
+
+try:
+    print("[BOOT v90.2.3] Social embed quote positioning attivo")
+except Exception:
+    pass
+
+
+# v90.2.3.1: inline image dict normalization
+try:
+    print("[BOOT v90.2.3.1] Inline image dict normalization attiva in v88_media_record")
+except Exception:
+    pass
+
+
+# v90.2.4: offline pending hard-skip guard
+BOT_VERSION = "v90_2_4_offline_pending_hardskip"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+V90_2_4_ENABLED = os.getenv("V90_2_4_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+V90_2_4_OFFLINE_PENDING_GUARD_ENABLED = os.getenv("V90_2_4_OFFLINE_PENDING_GUARD_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+V90_2_4_MIN_OFFLINE_PENDING_SCORE = int(os.getenv("V90_2_4_MIN_OFFLINE_PENDING_SCORE", "75"))
+V90_2_4_MIN_OFFLINE_PENDING_FRESHNESS = float(os.getenv("V90_2_4_MIN_OFFLINE_PENDING_FRESHNESS", "0.45"))
+
+
+def v9024_norm_text(*parts):
+    try:
+        return normalize_for_check(" ".join(str(p or "") for p in parts))
+    except Exception:
+        return " ".join(str(p or "") for p in parts).lower()
+
+
+def v9024_item_url(item):
+    try:
+        return v867_item_url(item)
+    except Exception:
+        return (item or {}).get("url") or (item or {}).get("link") or ""
+
+
+def v9024_is_true_report(item):
+    try:
+        return bool(v867_is_true_results_item(item))
+    except Exception:
+        title = (item or {}).get("title", "")
+        url = v9024_item_url(item)
+        return bool((item or {}).get("report_event_key") or str((item or {}).get("event_key", "")).startswith("report:") or is_results_article(title, url, ""))
+
+
+def v9024_report_key(item):
+    try:
+        return v867_report_key(item)
+    except Exception:
+        return (item or {}).get("report_event_key") or (item or {}).get("event_key") or ""
+
+
+def v9024_history_sets():
+    try:
+        h = load_history()
+    except Exception:
+        h = {}
+    return h if isinstance(h, dict) else {}
+
+
+def v9024_history_contains(history, bucket, value):
+    if not value:
+        return False
+    try:
+        values = history.get(bucket, set()) or set()
+        return value in values
+    except Exception:
+        return False
+
+
+def v9024_url_hard_seen(item, history):
+    url = v9024_item_url(item)
+    if not url:
+        return False
+    return v9024_history_contains(history, "urls", url)
+
+
+def v9024_signature_seen(item, history):
+    sig = (item or {}).get("story_signature_v71") or ""
+    if sig and v9024_history_contains(history, "story_signatures_v71", sig):
+        return True
+    sem = (item or {}).get("semantic_id") or ""
+    if sem and v9024_history_contains(history, "semantic_ids", sem):
+        return True
+    title_key = (item or {}).get("title_key") or ""
+    if title_key and v9024_history_contains(history, "title_keys", title_key):
+        return True
+    return False
+
+
+def v9024_report_confirmed(item, history):
+    if not v9024_is_true_report(item):
+        return False
+    key = v9024_report_key(item)
+    if key and v9024_history_contains(history, "event_keys", key):
+        return True
+    try:
+        # In offline mode do not query WP; trust strong local memory only.
+        for fn in ("v872_is_strong_report_confirmed", "v87_is_confirmed_report_event_key", "v881_is_report_confirmed"):
+            if key and fn in globals() and globals()[fn](key):
+                return True
+    except Exception:
+        pass
+    return False
+
+
+def v9024_core_already_covered(item, history):
+    event_key = (item or {}).get("event_key") or ""
+    report_key = (item or {}).get("report_event_key") or ""
+    if event_key and not str(event_key).startswith("report:") and v9024_history_contains(history, "event_keys", event_key):
+        return True
+    if report_key and v9024_history_contains(history, "event_keys", report_key):
+        return True
+    try:
+        title = (item or {}).get("title", "")
+        summary = (item or {}).get("summary", "")
+        core = make_news_core_key(title, summary)
+        if core and v9024_history_contains(history, "news_core_keys", core):
+            return True
+    except Exception:
+        pass
+    return False
+
+
+def v9024_has_major_update_signal(item):
+    text = v9024_norm_text((item or {}).get("title", ""), (item or {}).get("summary", ""))
+    major_terms = [
+        "confirmed", "official", "announced", "cleared", "arrested", "released", "injured", "signed",
+        "title change", "championship", "new champion", "return", "debut", "fired", "lawsuit", "settlement",
+        "conferm", "ufficial", "annunc", "infortun", "arrest", "licenzi", "ritorno", "debutto",
+    ]
+    return any(t in text for t in major_terms)
+
+
+def v9024_fresh_enough(item):
+    if v9024_is_true_report(item):
+        return True
+    try:
+        freshness = float((item or {}).get("freshness", 0) or 0)
+        if freshness >= V90_2_4_MIN_OFFLINE_PENDING_FRESHNESS:
+            return True
+    except Exception:
+        pass
+    return v9024_has_major_update_signal(item)
+
+
+def v9024_should_keep_for_offline_pending(item, history):
+    score = int((item or {}).get("score", 0) or 0)
+    title = (item or {}).get("title", "")
+    if score < V90_2_4_MIN_OFFLINE_PENDING_SCORE and not v9024_is_true_report(item):
+        print(f"[PENDING v90.2.4] Hard skip offline pending: score basso {score} - {title}")
+        return False
+    if v9024_url_hard_seen(item, history):
+        print(f"[PENDING v90.2.4] Hard skip offline pending: URL gia processato - {title}")
+        return False
+    if v9024_report_confirmed(item, history):
+        print(f"[PENDING v90.2.4] Hard skip offline pending: report gia confermato {v9024_report_key(item)} - {title}")
+        return False
+    if v9024_signature_seen(item, history):
+        print(f"[PENDING v90.2.4] Hard skip offline pending: signature/semantic gia processata - {title}")
+        return False
+    if v9024_core_already_covered(item, history) and not v9024_has_major_update_signal(item):
+        print(f"[PENDING v90.2.4] Hard skip offline pending: core gia coperto senza major update - {title}")
+        return False
+    if not v9024_fresh_enough(item):
+        print(f"[PENDING v90.2.4] Hard skip offline pending: freshness insufficiente - {title}")
+        return False
+    return True
+
+try:
+    _ORIG_V9024_save_selected_candidates_to_pending = save_selected_candidates_to_pending
+    def save_selected_candidates_to_pending(queue, reason="", limit=3):
+        if V90_2_4_ENABLED and V90_2_4_OFFLINE_PENDING_GUARD_ENABLED and str(reason or "").startswith(("wp_down", "wp_firewall")):
+            history = v9024_history_sets()
+            filtered = []
+            dropped = 0
+            for item in list(queue or []):
+                if v9024_should_keep_for_offline_pending(item, history):
+                    filtered.append(item)
+                else:
+                    dropped += 1
+            print(f"[PENDING v90.2.4] Offline pending guard: keep={len(filtered)} drop={dropped} reason={reason}")
+            return _ORIG_V9024_save_selected_candidates_to_pending(filtered, reason=reason, limit=limit)
+        return _ORIG_V9024_save_selected_candidates_to_pending(queue, reason=reason, limit=limit)
+except Exception:
+    pass
+
+try:
+    print("[BOOT v90.2.4] Offline pending hard-skip guard attiva")
+except Exception:
+    pass
+
+
+# v90.2.4.1 report hard title
+BOT_VERSION = "v90_2_4_1_report_hard_title"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+V90_2_4_1_ENABLED = os.getenv("V90_2_4_1_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+
+
+def v90241_hard_report_title(event_key):
+    key = str(event_key or "")
+    if not key.startswith("report:"):
+        return ""
+    body = key.split(":", 1)[1]
+    parts = body.rsplit("-", 3)
+    if len(parts) != 4:
+        return ""
+    show_key, year, month, day = parts
+    if not (year.isdigit() and month.isdigit() and day.isdigit()):
+        return ""
+    show_map = {
+        "raw": "WWE RAW", "wwe-raw": "WWE RAW",
+        "smackdown": "WWE SmackDown", "wwe-smackdown": "WWE SmackDown",
+        "nxt": "WWE NXT", "wwe-nxt": "WWE NXT",
+        "dynamite": "AEW Dynamite", "aew-dynamite": "AEW Dynamite",
+        "collision": "AEW Collision", "aew-collision": "AEW Collision",
+        "impact": "TNA Impact", "tna-impact": "TNA Impact", "tna": "TNA Impact",
+    }
+    month_map = {"01":"gennaio","02":"febbraio","03":"marzo","04":"aprile","05":"maggio","06":"giugno","07":"luglio","08":"agosto","09":"settembre","10":"ottobre","11":"novembre","12":"dicembre"}
+    show = show_map.get(show_key.lower(), show_key.replace("-", " ").title())
+    return f"{show} del {int(day)} {month_map.get(month, month)} {year}: risultati e momenti salienti"
+
+try:
+    _v90241_orig_create_post_without_image = create_post_without_image
+    def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+        if V90_2_4_1_ENABLED and isinstance(data, dict):
+            hard_title = v90241_hard_report_title(event_key)
+            if hard_title:
+                data = dict(data)
+                data["titolo"] = hard_title
+                data["title"] = hard_title
+                print("[TITLE v90.2.4.1] Report hard-title forzato: " + hard_title)
+        return _v90241_orig_create_post_without_image(data, sem_id, url, embed_urls=embed_urls, event_key=event_key, inline_images=inline_images, featured_image_url=featured_image_url)
+except Exception:
+    pass
+
+print("[BOOT v90.2.4.1] Report hard-title guard attiva")
+
+
+# v90.2.4.2 report casing guard
+BOT_VERSION = "v90_2_4_2_report_artifacts_recovery"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+V90_2_4_2_ENABLED = os.getenv("V90_2_4_2_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+
+
+def v90242_fix_wrestling_name_casing(text):
+    if not text:
+        return text
+    fixes = {
+        "rhea ripley": "Rhea Ripley",
+        "tiffany stratton": "Tiffany Stratton",
+        "cody rhodes": "Cody Rhodes",
+        "gunther": "Gunther",
+        "lash legend": "Lash Legend",
+        "nia jax": "Nia Jax",
+        "jade cargill": "Jade Cargill",
+        "naomi": "Naomi",
+        "alexa bliss": "Alexa Bliss",
+        "charlotte flair": "Charlotte Flair",
+        "becky lynch": "Becky Lynch",
+        "sol ruca": "Sol Ruca",
+        "bianca belair": "Bianca Belair",
+        "baron corbin": "Baron Corbin",
+        "blake monroe": "Blake Monroe",
+        "roman reigns": "Roman Reigns",
+        "jacob fatu": "Jacob Fatu",
+        "cm punk": "CM Punk",
+        "john cena": "John Cena",
+        "seth rollins": "Seth Rollins",
+        "wwe": "WWE",
+        "aew": "AEW",
+        "tna": "TNA",
+        "nxt": "NXT",
+    }
+    out = str(text)
+    for src, dst in fixes.items():
+        out = re.sub(r"(?<![A-Za-z])" + re.escape(src) + r"(?![A-Za-z])", dst, out, flags=re.I)
+    return out
+
+try:
+    _v90242_orig_create_post_without_image = create_post_without_image
+    def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+        if V90_2_4_2_ENABLED and isinstance(data, dict) and str(event_key or "").startswith("report:"):
+            data = dict(data)
+            if "testo" in data:
+                data["testo"] = v90242_fix_wrestling_name_casing(data.get("testo", ""))
+            if "content" in data:
+                data["content"] = v90242_fix_wrestling_name_casing(data.get("content", ""))
+            if "titolo" in data:
+                data["titolo"] = v90242_fix_wrestling_name_casing(data.get("titolo", ""))
+            if "title" in data:
+                data["title"] = v90242_fix_wrestling_name_casing(data.get("title", ""))
+            print("[TEXT v90.2.4.2] Report name casing guard applicata")
+        return _v90242_orig_create_post_without_image(data, sem_id, url, embed_urls=embed_urls, event_key=event_key, inline_images=inline_images, featured_image_url=featured_image_url)
+except Exception:
+    pass
+
+print("[BOOT v90.2.4.2] Report artifacts/casing recovery attiva")
+
+
+# v90.2.5 processed URL hard-skip
+BOT_VERSION = "v90_2_5_processed_url_hardskip"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+V90_2_5_ENABLED = os.getenv("V90_2_5_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+V90_2_5_PROCESSED_FILE = os.getenv("V90_2_5_PROCESSED_FILE", "processed_urls.json")
+V90_2_5_MAX_RECORDS = int(os.getenv("V90_2_5_MAX_RECORDS", "5000"))
+V90_2_5_FINAL_STATUSES = {
+    "published",
+    "rejected",
+    "skipped_below_threshold",
+    "skipped_duplicate",
+    "skipped_stale",
+    "skipped_soft_trash",
+    "skipped_editorial_exclude",
+    "skipped_existing_wp",
+    "skipped_existing_history",
+}
+V90_2_5_TEMP_STATUSES = {"pending", "wp_down", "wp_firewall", "publish_error", "temporary_error"}
+V90_2_5_SUCCESS_STRINGS = {"published", "publish_ok", "ok", "success"}
+V90_2_5_TEMP_STRINGS = {"wp_fail", "wp_firewall", "wp_down", "publish_error", "temporary_error", "retry", "pending"}
+
+
+def v9025_now_iso():
+    try:
+        return datetime.datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
+    except Exception:
+        return str(time.time())
+
+
+def v9025_load_processed():
+    try:
+        p = Path(V90_2_5_PROCESSED_FILE)
+        if not p.exists():
+            return {}
+        data = json.loads(p.read_text(encoding="utf-8"))
+        if isinstance(data, dict):
+            return data
+    except Exception as e:
+        print(f"[PROCESSED v90.2.5] Errore lettura processed urls: {e}")
+    return {}
+
+
+def v9025_save_processed(data):
+    if not isinstance(data, dict):
+        data = {}
+    try:
+        if len(data) > V90_2_5_MAX_RECORDS:
+            items = sorted(data.items(), key=lambda kv: str((kv[1] or {}).get("updated_at", "")), reverse=True)
+            data = dict(items[:V90_2_5_MAX_RECORDS])
+        Path(V90_2_5_PROCESSED_FILE).write_text(json.dumps(data, ensure_ascii=False, indent=2, sort_keys=True), encoding="utf-8")
+    except Exception as e:
+        print(f"[PROCESSED v90.2.5] Errore salvataggio processed urls: {e}")
+
+
+def v9025_url_from_any(obj):
+    if isinstance(obj, dict):
+        return str(obj.get("url") or obj.get("link") or "").strip()
+    try:
+        return str(getattr(obj, "link", "") or "").strip()
+    except Exception:
+        return ""
+
+
+def v9025_title_from_any(obj):
+    if isinstance(obj, dict):
+        return str(obj.get("title") or obj.get("titolo") or "").strip()
+    try:
+        return str(getattr(obj, "title", "") or "").strip()
+    except Exception:
+        return ""
+
+
+def v9025_normalized_url(url):
+    url = str(url or "").strip()
+    if not url:
+        return ""
+    try:
+        return normalize_url_for_compare(url)
+    except Exception:
+        return url.split("#", 1)[0].rstrip("/")
+
+
+def v9025_is_final_status(status):
+    return str(status or "").strip().lower() in V90_2_5_FINAL_STATUSES
+
+
+def v9025_record_processed_url(url, title="", status="rejected", reason="", score=None, extra=None):
+    if not V90_2_5_ENABLED:
+        return
+    key = v9025_normalized_url(url)
+    if not key:
+        return
+    status = str(status or "").strip().lower()
+    if status in V90_2_5_TEMP_STATUSES:
+        return
+    data = v9025_load_processed()
+    old = data.get(key) if isinstance(data, dict) else None
+    if isinstance(old, dict) and old.get("status") == "published":
+        return
+    old_title = old.get("title", "") if isinstance(old, dict) else ""
+    rec = {
+        "url": url,
+        "title": title or old_title,
+        "status": status or "rejected",
+        "reason": reason,
+        "score": score,
+        "updated_at": v9025_now_iso(),
+    }
+    if isinstance(extra, dict):
+        rec["extra"] = extra
+    data[key] = rec
+    v9025_save_processed(data)
+
+
+def v9025_processed_record(url):
+    key = v9025_normalized_url(url)
+    if not key:
+        return None
+    data = v9025_load_processed()
+    rec = data.get(key) if isinstance(data, dict) else None
+    return rec if isinstance(rec, dict) else None
+
+
+def v9025_should_hard_skip_url(url):
+    rec = v9025_processed_record(url)
+    if not rec:
+        return False, None
+    if v9025_is_final_status(rec.get("status")):
+        return True, rec
+    return False, rec
+
+
+def v9025_publish_succeeded(result):
+    if result is True:
+        return True
+    if isinstance(result, str):
+        return result.strip().lower() in V90_2_5_SUCCESS_STRINGS
+    if isinstance(result, (int, float)):
+        return int(result) > 0
+    if isinstance(result, dict):
+        if result.get("error") or result.get("failed"):
+            return False
+        status = str(result.get("status") or result.get("result") or "").strip().lower()
+        if status in V90_2_5_SUCCESS_STRINGS:
+            return True
+        post_id = result.get("post_id") or result.get("id") or result.get("wp_post_id")
+        try:
+            return bool(post_id and int(post_id) > 0)
+        except Exception:
+            return bool(post_id)
+    return False
+
+
+def v9025_reject_status_from_result(result, item):
+    if result is None:
+        return "rejected", "process_candidate_none"
+    if result is False:
+        return "rejected", "process_candidate_false"
+    if isinstance(result, str):
+        raw = result.strip().lower()
+        if raw in V90_2_5_SUCCESS_STRINGS or raw in V90_2_5_TEMP_STRINGS:
+            return "", raw
+        mapping = {
+            "skipped": "rejected",
+            "skip": "rejected",
+            "below_threshold": "skipped_below_threshold",
+            "score_below_threshold": "skipped_below_threshold",
+            "validation_fail": "rejected",
+            "duplicate": "skipped_duplicate",
+            "stale": "skipped_stale",
+            "soft_trash": "skipped_soft_trash",
+            "editorial_exclude": "skipped_editorial_exclude",
+            "existing_wp": "skipped_existing_wp",
+            "existing_history": "skipped_existing_history",
+        }
+        return mapping.get(raw, "rejected"), raw
+    if isinstance(result, dict):
+        raw = str(result.get("status") or result.get("result") or result.get("reason") or "").strip().lower()
+        if raw in V90_2_5_SUCCESS_STRINGS or raw in V90_2_5_TEMP_STRINGS:
+            return "", raw
+        if result.get("duplicate"):
+            return "skipped_duplicate", "duplicate"
+        if result.get("validation_fail"):
+            return "rejected", "validation_fail"
+        if raw:
+            return v9025_reject_status_from_result(raw, item)
+    try:
+        score = int((item or {}).get("score", 0) or 0)
+        if score and score < int(globals().get("MIN_PUBLISH_SCORE", 75)):
+            return "skipped_below_threshold", "score_below_threshold_or_refined"
+    except Exception:
+        pass
+    return "", "non_final_result"
+
+try:
+    _ORIG_V9025_create_post_without_image = create_post_without_image
+    def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+        result = _ORIG_V9025_create_post_without_image(data, sem_id, url, embed_urls=embed_urls, event_key=event_key, inline_images=inline_images, featured_image_url=featured_image_url)
+        try:
+            if v9025_publish_succeeded(result):
+                title = ""
+                if isinstance(data, dict):
+                    title = data.get("titolo") or data.get("title") or ""
+                v9025_record_processed_url(url, title=title, status="published", reason="wordpress_publish_ok", extra={"event_key": event_key, "semantic_id": sem_id})
+            else:
+                print("[PROCESSED v90.2.5] Publish result non conclusivo: non marco URL published")
+        except Exception as e:
+            print(f"[PROCESSED v90.2.5] Warning record published URL: {e}")
+        return result
+except Exception:
+    pass
+
+try:
+    _ORIG_V9025_process_candidate_item = process_candidate_item
+    def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+        if V90_2_5_ENABLED and isinstance(item, dict):
+            url = v9025_url_from_any(item)
+            skip, rec = v9025_should_hard_skip_url(url)
+            if skip:
+                print(f"[PROCESSED v90.2.5] Hard skip URL gia lavorato status={rec.get('status')} reason={rec.get('reason')} - {item.get('title', '')}")
+                return "skipped_processed_url"
+        result = _ORIG_V9025_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+        try:
+            if V90_2_5_ENABLED and isinstance(item, dict):
+                status, reason = v9025_reject_status_from_result(result, item)
+                if status and v9025_is_final_status(status):
+                    url = v9025_url_from_any(item)
+                    title = v9025_title_from_any(item)
+                    score = item.get("score")
+                    v9025_record_processed_url(url, title=title, status=status, reason=reason, score=score, extra={"event_key": item.get("event_key"), "semantic_id": item.get("semantic_id"), "raw_result": str(result)[:120]})
+        except Exception as e:
+            print(f"[PROCESSED v90.2.5] Warning record rejected URL: {e}")
+        return result
+except Exception:
+    pass
+
+try:
+    _ORIG_V9025_run_bot = run_bot
+    def run_bot():
+        try:
+            globals()["processed_urls_v9025"] = v9025_load_processed()
+            print(f"[PROCESSED v90.2.5] Loaded processed URL records: {len(globals().get('processed_urls_v9025') or {})}")
+        except Exception:
+            pass
+        return _ORIG_V9025_run_bot()
+except Exception:
+    pass
+
+print("[BOOT v90.2.5] Processed URL hard-skip attivo")
+
+
+# v90.2.5.1 processed skip recorder
+BOT_VERSION = "v90_2_5_1_processed_skip_recorder"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+V90_2_5_1_ENABLED = os.getenv("V90_2_5_1_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+
+
+def v90251_norm_title_key(title):
+    try:
+        return normalize_for_check(title)
+    except Exception:
+        return str(title or "").strip().lower()
+
+
+def v90251_build_title_url_map():
+    mapping = {}
+    for var_name in ("queue", "pending_items", "pending", "candidates"):
+        try:
+            items = globals().get(var_name) or []
+            if isinstance(items, list):
+                for it in items:
+                    if not isinstance(it, dict):
+                        continue
+                    title = it.get("title") or it.get("titolo") or ""
+                    url = it.get("url") or it.get("link") or ""
+                    if title and url:
+                        mapping[v90251_norm_title_key(title)] = it
+        except Exception:
+            pass
+    return mapping
+
+
+def v90251_find_item_by_title(title):
+    key = v90251_norm_title_key(title)
+    current = globals().get("v90251_current_item")
+    if isinstance(current, dict):
+        cur_title = current.get("title") or current.get("titolo") or ""
+        if v90251_norm_title_key(cur_title) == key:
+            return current
+    mapping = globals().get("v90251_title_url_map")
+    if not isinstance(mapping, dict) or not mapping:
+        mapping = v90251_build_title_url_map()
+        globals()["v90251_title_url_map"] = mapping
+    return mapping.get(key)
+
+
+def v90251_record_title_skip(title, status="rejected", reason="skip_log"):
+    if not V90_2_5_1_ENABLED:
+        return
+    try:
+        item = v90251_find_item_by_title(title)
+        if not isinstance(item, dict):
+            return
+        url = item.get("url") or item.get("link") or ""
+        if not url:
+            return
+        score = item.get("score")
+        canonical_title = item.get("title") or item.get("titolo") or title
+        if "v9025_record_processed_url" in globals():
+            v9025_record_processed_url(url, title=canonical_title, status=status, reason=reason, score=score, extra={"event_key": item.get("event_key"), "semantic_id": item.get("semantic_id"), "source": "v90.2.5.1_log_recorder"})
+            print(f"[PROCESSED v90.2.5.1] Recorded final skip status={status} reason={reason} - {canonical_title}")
+    except Exception as e:
+        print(f"[PROCESSED v90.2.5.1] Warning record skip: {e}")
+
+
+def v90251_title_after_marker(text, marker):
+    s = str(text or "")
+    if marker not in s:
+        return ""
+    return s.split(marker, 1)[1].strip()
+
+
+def v90251_find_known_title_in_text(text):
+    s = str(text or "")
+    mapping = globals().get("v90251_title_url_map")
+    if not isinstance(mapping, dict) or not mapping:
+        mapping = v90251_build_title_url_map()
+        globals()["v90251_title_url_map"] = mapping
+    best = ""
+    for item in mapping.values():
+        if not isinstance(item, dict):
+            continue
+        title = str(item.get("title") or item.get("titolo") or "").strip()
+        if title and title in s and len(title) > len(best):
+            best = title
+    return best
+
+
+def v90251_title_from_skip_message(text):
+    s = str(text or "")
+    known = v90251_find_known_title_in_text(s)
+    if known:
+        return known
+    if " - " in s:
+        tail = s.rsplit(" - ", 1)[1].strip()
+        if v90251_find_item_by_title(tail):
+            return tail
+    return ""
+
+try:
+    _ORIG_V90251_PRINT = print
+    def print(*args, **kwargs):
+        try:
+            msg = " ".join(str(a) for a in args)
+            if msg.startswith("[BOT] Elaborazione:"):
+                title = v90251_title_after_marker(msg, "[BOT] Elaborazione:")
+                item = v90251_find_item_by_title(title)
+                if isinstance(item, dict):
+                    globals()["v90251_current_item"] = item
+            elif "[SKIP] Score sotto soglia editoriale dopo raffinamento:" in msg:
+                title = v90251_title_from_skip_message(msg)
+                v90251_record_title_skip(title, status="skipped_below_threshold", reason="refined_score_below_threshold")
+            elif "[SKIP v87] Blocco tier3 opinion/interview sotto" in msg:
+                title = v90251_title_from_skip_message(msg)
+                v90251_record_title_skip(title, status="skipped_soft_trash", reason="tier3_opinion_interview_below_threshold")
+            elif "[SKIP v88.4.1] Canonical event core gia pubblicato:" in msg:
+                title = v90251_title_from_skip_message(msg)
+                v90251_record_title_skip(title, status="skipped_duplicate", reason="canonical_core_already_published")
+            elif "[SKIP] Preview/show announcement scaduta dopo scraping:" in msg:
+                title = v90251_title_after_marker(msg, "[SKIP] Preview/show announcement scaduta dopo scraping:")
+                v90251_record_title_skip(title, status="skipped_stale", reason="expired_preview_after_scraping")
+            elif "[SKIP] Preview/show announcement scaduta:" in msg:
+                title = v90251_title_after_marker(msg, "[SKIP] Preview/show announcement scaduta:")
+                v90251_record_title_skip(title, status="skipped_stale", reason="expired_preview")
+            elif "[SKIP v90.2] Follow-up duplicato/non sostanziale" in msg:
+                title = v90251_title_from_skip_message(msg)
+                v90251_record_title_skip(title, status="skipped_duplicate", reason="v90_2_non_substantial_followup")
+        except Exception:
+            pass
+        return _ORIG_V90251_PRINT(*args, **kwargs)
+except Exception:
+    pass
+
+print("[BOOT v90.2.5.1] Processed URL skip recorder attivo")
+
+
+# v90.2.5.2 processed competitive guard
+BOT_VERSION = "v90_2_5_2_processed_competitive_guard"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+V90_2_5_2_ENABLED = os.getenv("V90_2_5_2_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+V90_2_5_2_HIGH_SCORE_PROTECT = int(os.getenv("V90_2_5_2_HIGH_SCORE_PROTECT", "85"))
+V90_2_5_2_LOW_SCORE_FINAL_MAX = int(os.getenv("V90_2_5_2_LOW_SCORE_FINAL_MAX", "54"))
+V90_2_5_2_NON_FINAL_STATUSES = {"competitive_deferred", "pending_competition", "high_score_not_published", "potentially_publishable"}
+V90_2_5_2_ALWAYS_FINAL_STATUSES = {
+    "published",
+    "skipped_soft_trash",
+    "skipped_stale",
+    "skipped_editorial_exclude",
+    "skipped_duplicate",
+    "skipped_existing_wp",
+    "skipped_existing_history",
+}
+
+
+def v90252_safe_int(value, default=0):
+    try:
+        return int(float(value))
+    except Exception:
+        return default
+
+
+def v90252_title_text(title):
+    return str(title or "").strip()
+
+
+def v90252_is_snme_results(title):
+    t = v90252_title_text(title).lower()
+    return ("saturday night's main event" in t or "snme" in t) and ("result" in t or "results" in t)
+
+
+def v90252_is_discussion_worthy(title):
+    t = v90252_title_text(title).lower()
+    terms = [
+        "main roster debut", "debut", "arrival", "title match", "championship match",
+        "granted", "controversial", "dq", "arrest", "controversy", "aaa", "ludwig kaiser",
+        "blake monroe", "sol ruca", "joe hendry", "mjf", "tony khan", "triple h", "tko",
+        "tv deal", "wbd", "paramount", "wwe music", "push", "backlash",
+    ]
+    return any(term in t for term in terms)
+
+
+def v90252_should_be_competitive(title, score=None, status="", reason=""):
+    if not V90_2_5_2_ENABLED:
+        return False
+    score_i = v90252_safe_int(score, 0)
+    if v90252_is_snme_results(title):
+        return True
+    if score_i >= V90_2_5_2_HIGH_SCORE_PROTECT:
+        return True
+    if score_i >= 65 and v90252_is_discussion_worthy(title):
+        return True
+    return False
+
+
+def v90252_status_blocks(status):
+    s = str(status or "").strip().lower()
+    if s in V90_2_5_2_NON_FINAL_STATUSES:
+        return False
+    if s in V90_2_5_2_ALWAYS_FINAL_STATUSES:
+        return True
+    try:
+        return v9025_is_final_status(s)
+    except Exception:
+        return False
+
+try:
+    _ORIG_V90252_should_hard_skip_url = v9025_should_hard_skip_url
+    def v9025_should_hard_skip_url(url):
+        rec = v9025_processed_record(url)
+        if not rec:
+            return False, None
+        status = str(rec.get("status") or "").strip().lower()
+        title = rec.get("title") or ""
+        score = rec.get("score")
+        reason = rec.get("reason") or ""
+        if not V90_2_5_2_ENABLED:
+            return _ORIG_V90252_should_hard_skip_url(url)
+        if status in V90_2_5_2_NON_FINAL_STATUSES:
+            return False, rec
+        if status in V90_2_5_2_ALWAYS_FINAL_STATUSES:
+            return True, rec
+        if v90252_should_be_competitive(title, score=score, status=status, reason=reason):
+            print(f"[PROCESSED v90.2.5.2] Non blocco URL competitivo status={status} score={score} - {title}")
+            return False, rec
+        if status == "skipped_below_threshold" and v90252_safe_int(score, 0) > V90_2_5_2_LOW_SCORE_FINAL_MAX:
+            return False, rec
+        if status == "rejected" and v90252_safe_int(score, 0) > V90_2_5_2_LOW_SCORE_FINAL_MAX:
+            return False, rec
+        if v90252_status_blocks(status):
+            return True, rec
+        return False, rec
+except Exception:
+    pass
+
+try:
+    _ORIG_V90252_record_processed_url = v9025_record_processed_url
+    def v9025_record_processed_url(url, title="", status="rejected", reason="", score=None, extra=None):
+        if V90_2_5_2_ENABLED:
+            title_s = v90252_title_text(title)
+            status_s = str(status or "").strip().lower()
+            if status_s not in V90_2_5_2_ALWAYS_FINAL_STATUSES:
+                if v90252_should_be_competitive(title_s, score=score, status=status_s, reason=reason):
+                    status = "competitive_deferred"
+                    reason = "high_score_or_discussion_worthy_not_final"
+                elif status_s in {"rejected", "skipped_below_threshold"} and v90252_safe_int(score, 0) > V90_2_5_2_LOW_SCORE_FINAL_MAX:
+                    status = "competitive_deferred"
+                    reason = "above_low_score_final_cap_not_final"
+        return _ORIG_V90252_record_processed_url(url, title=title, status=status, reason=reason, score=score, extra=extra)
+except Exception:
+    pass
+
+try:
+    def v90252_rewrite_processed_file():
+        if not V90_2_5_2_ENABLED:
+            return
+        data = v9025_load_processed() if "v9025_load_processed" in globals() else {}
+        if not isinstance(data, dict) or not data:
+            return
+        changed = 0
+        for key, rec in list(data.items()):
+            if not isinstance(rec, dict):
+                continue
+            title = rec.get("title") or ""
+            score = rec.get("score")
+            status = str(rec.get("status") or "").strip().lower()
+            if status in V90_2_5_2_ALWAYS_FINAL_STATUSES:
+                continue
+            if v90252_should_be_competitive(title, score=score, status=status, reason=rec.get("reason")) or (status in {"rejected", "skipped_below_threshold"} and v90252_safe_int(score, 0) > V90_2_5_2_LOW_SCORE_FINAL_MAX):
+                rec["status"] = "competitive_deferred"
+                rec["reason"] = "v90_2_5_2_migrated_not_final"
+                rec.setdefault("extra", {})
+                if isinstance(rec["extra"], dict):
+                    rec["extra"]["migrated_by"] = "v90.2.5.2"
+                changed += 1
+        if changed:
+            v9025_save_processed(data)
+            print(f"[PROCESSED v90.2.5.2] Migrati record non-final competitivi: {changed}")
+except Exception:
+    pass
+
+try:
+    _ORIG_V90252_run_bot = run_bot
+    def run_bot():
+        try:
+            v90252_rewrite_processed_file()
+        except Exception as e:
+            print(f"[PROCESSED v90.2.5.2] Warning migrazione processed: {e}")
+        return _ORIG_V90252_run_bot()
+except Exception:
+    pass
+
+print("[BOOT v90.2.5.2] Processed competitive guard attiva: high-score e SNME non finali")
+
+
+# v90.2.5.3 SNME event and publish processed guards
+BOT_VERSION = "v90_2_5_3_snme_publish_processed"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+V90_2_5_3_ENABLED = os.getenv("V90_2_5_3_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+V90_2_5_3_SNME_FLOOR = int(os.getenv("V90_2_5_3_SNME_FLOOR", "82"))
+
+
+def v90253_title_text(title):
+    return str(title or "").strip()
+
+
+def v90253_norm_title(title):
+    try:
+        return normalize_for_check(title)
+    except Exception:
+        return v90253_title_text(title).lower()
+
+
+def v90253_is_snme(title):
+    t = v90253_title_text(title).lower()
+    return "saturday night's main event" in t or "saturday nights main event" in t or "snme" in t
+
+
+def v90253_is_snme_results_or_recap(title):
+    t = v90253_title_text(title).lower()
+    if not v90253_is_snme(t):
+        return False
+    result_terms = [
+        "result", "results", "recap", "highlights", "key moments", "moments",
+        "retains", "retain", "wins", "defeats", "defends", "title", "championship",
+        "controversial finish", "dq", "open challenge", "appears", "returns",
+    ]
+    preview_terms = ["preview", "predictions", "full & final card", "full final card", "lineup", "start time", "how to watch", "betting odds"]
+    if any(term in t for term in preview_terms) and not any(term in t for term in ["results", "recap", "highlights", "retains", "wins", "defeats"]):
+        return False
+    return any(term in t for term in result_terms)
+
+
+def v90253_extract_title_from_args(args, kwargs):
+    title = ""
+    for obj in args or []:
+        if isinstance(obj, dict):
+            title = obj.get("title") or obj.get("titolo") or title
+        elif isinstance(obj, str) and (v90253_is_snme(obj) or len(obj) > len(title)):
+            title = obj
+    return title or str((kwargs or {}).get("title") or "")
+
+
+def v90253_apply_floor_to_score_result(result, title, label):
+    if not V90_2_5_3_ENABLED or not v90253_is_snme_results_or_recap(title):
+        return result
+    try:
+        if isinstance(result, tuple) and result:
+            lst = list(result)
+            old = int(lst[0])
+            if old < V90_2_5_3_SNME_FLOOR:
+                lst[0] = V90_2_5_3_SNME_FLOOR
+                print(f"[SNME v90.2.5.3] {label} floor {old}->{lst[0]} - {title}")
+            return tuple(lst)
+        if isinstance(result, int):
+            old = int(result)
+            if old < V90_2_5_3_SNME_FLOOR:
+                print(f"[SNME v90.2.5.3] {label} floor {old}->{V90_2_5_3_SNME_FLOOR} - {title}")
+                return V90_2_5_3_SNME_FLOOR
+    except Exception:
+        return result
+    return result
+
+
+def v90253_mark_url_published(url, title="", reason="publish_log_ok", extra=None):
+    if not V90_2_5_3_ENABLED or not url:
+        return
+    try:
+        if "v9025_record_processed_url" in globals():
+            v9025_record_processed_url(url, title=title, status="published", reason=reason, score=None, extra=extra or {"source": "v90.2.5.3_publish_log"})
+            print(f"[PROCESSED v90.2.5.3] Mark published URL da publish log - {title or url}")
+    except Exception as e:
+        print(f"[PROCESSED v90.2.5.3] Warning mark published: {e}")
+
+try:
+    _ORIG_V90253_calculate_importance_score = calculate_importance_score
+    def calculate_importance_score(*args, **kwargs):
+        result = _ORIG_V90253_calculate_importance_score(*args, **kwargs)
+        title = v90253_extract_title_from_args(args, kwargs)
+        return v90253_apply_floor_to_score_result(result, title, "Pre-AI event score")
+except Exception:
+    pass
+
+try:
+    _ORIG_V90253_v723_conservative_score_after_ai = v723_conservative_score_after_ai
+    def v723_conservative_score_after_ai(*args, **kwargs):
+        result = _ORIG_V90253_v723_conservative_score_after_ai(*args, **kwargs)
+        title = v90253_extract_title_from_args(args, kwargs)
+        return v90253_apply_floor_to_score_result(result, title, "Event report")
+except Exception:
+    pass
+
+try:
+    _ORIG_V90253_record_processed_url = v9025_record_processed_url
+    def v9025_record_processed_url(url, title="", status="rejected", reason="", score=None, extra=None):
+        if V90_2_5_3_ENABLED and v90253_is_snme_results_or_recap(title):
+            s = str(status or "").strip().lower()
+            if s in {"rejected", "skipped_below_threshold", "skipped_stale", "skipped_soft_trash"}:
+                status = "competitive_deferred"
+                reason = "snme_event_report_not_final"
+        return _ORIG_V90253_record_processed_url(url, title=title, status=status, reason=reason, score=score, extra=extra)
+except Exception:
+    pass
+
+try:
+    _ORIG_V90253_PRINT = print
+    def print(*args, **kwargs):
+        try:
+            msg = " ".join(str(a) for a in args)
+            if msg.startswith("[BOT] Elaborazione:"):
+                title = msg.split("[BOT] Elaborazione:", 1)[1].strip()
+                item = None
+                if "v90251_find_item_by_title" in globals():
+                    item = v90251_find_item_by_title(title)
+                if isinstance(item, dict):
+                    globals()["v90253_current_processing_item"] = item
+                    globals()["v90253_current_processing_title"] = item.get("title") or item.get("titolo") or title
+                else:
+                    globals()["v90253_current_processing_item"] = None
+                    globals()["v90253_current_processing_title"] = title
+            elif msg.startswith("[OK] Pubblicato:"):
+                published_title = msg.split("[OK] Pubblicato:", 1)[1].strip()
+                current = globals().get("v90253_current_processing_item")
+                source_title = globals().get("v90253_current_processing_title") or ""
+                if isinstance(current, dict):
+                    original_title = current.get("title") or current.get("titolo") or ""
+                    published_norm = v90253_norm_title(published_title)
+                    source_norm = v90253_norm_title(source_title)
+                    original_norm = v90253_norm_title(original_title)
+                    match_ok = bool(published_norm and (published_norm == source_norm or published_norm == original_norm or source_norm in published_norm or original_norm in published_norm or published_norm in source_norm or published_norm in original_norm))
+                    if match_ok:
+                        url = current.get("url") or current.get("link") or ""
+                        v90253_mark_url_published(url, title=original_title or source_title or published_title, reason="ok_published_log", extra={"published_title": published_title, "source": "v90.2.5.3_ok_log"})
+                    else:
+                        print(f"[PROCESSED v90.2.5.3] Skip mark published: titolo non combacia current='{original_title}' published='{published_title}'")
+        except Exception:
+            pass
+        return _ORIG_V90253_PRINT(*args, **kwargs)
+except Exception:
+    pass
+
+print("[BOOT v90.2.5.3] SNME event report guard e processed publish success attivi")
+
+
+# v90.2.5.3.1 tighten SNME and publish guards
+BOT_VERSION = "v90_2_5_3_1_snme_publish_tighten"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+V90_2_5_3_1_ENABLED = os.getenv("V90_2_5_3_1_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+
+
+def v902531_title_text(title):
+    return str(title or "").strip()
+
+
+def v902531_is_snme(title):
+    t = v902531_title_text(title).lower()
+    return "saturday night's main event" in t or "saturday nights main event" in t or "snme" in t
+
+
+def v902531_is_full_event_recap(title):
+    t = v902531_title_text(title).lower()
+    if not v902531_is_snme(t):
+        return False
+    hard_no = [
+        "full & final card", "full final card", "predictions", "preview", "lineup",
+        "start time", "how to watch", "betting odds", "fans furious", "fan reaction",
+        "fans react", "backlash", "controversial finish", "major change", "added to",
+        "title match during", "pulls off", "retains", "retain", "cheat to retain",
+        "open challenge", "wardrobe malfunction",
+    ]
+    if any(x in t for x in hard_no):
+        return False
+    full_event_terms = ["results", "recap", "full results", "highlights and key moments", "key moments"]
+    return any(x in t for x in full_event_terms)
+
+if V90_2_5_3_1_ENABLED:
+    try:
+        def v90253_is_snme_results_or_recap(title):
+            return v902531_is_full_event_recap(title)
+    except Exception:
+        pass
+
+if V90_2_5_3_1_ENABLED:
+    try:
+        _ORIG_V902531_PRINT = print
+        def print(*args, **kwargs):
+            try:
+                msg = " ".join(str(a) for a in args)
+                if msg.startswith("[BOT] Elaborazione:"):
+                    title = msg.split("[BOT] Elaborazione:", 1)[1].strip()
+                    item = None
+                    if "v90251_find_item_by_title" in globals():
+                        item = v90251_find_item_by_title(title)
+                    globals()["v902531_current_url"] = ""
+                    globals()["v902531_current_title"] = title
+                    if isinstance(item, dict):
+                        globals()["v902531_current_url"] = item.get("url") or item.get("link") or ""
+                        globals()["v902531_current_title"] = item.get("title") or item.get("titolo") or title
+                elif msg.startswith("[OK] Pubblicato:"):
+                    published_title = msg.split("[OK] Pubblicato:", 1)[1].strip()
+                    url = globals().get("v902531_current_url") or ""
+                    source_title = globals().get("v902531_current_title") or published_title
+                    if url and "v9025_record_processed_url" in globals():
+                        v9025_record_processed_url(url, title=source_title, status="published", reason="ok_published_log_v90_2_5_3_1", score=None, extra={"published_title": published_title, "source": "v90.2.5.3.1_ok_log"})
+                        print(f"[PROCESSED v90.2.5.3.1] Mark published current URL - {source_title}")
+                    globals()["v902531_current_url"] = ""
+                    globals()["v902531_current_title"] = ""
+            except Exception:
+                pass
+            return _ORIG_V902531_PRINT(*args, **kwargs)
+    except Exception:
+        pass
+
+print("[BOOT v90.2.5.3.1] SNME floor ristretto e processed publish corrente attivi")
+
+
+# v90.2.5.4 event registry
+BOT_VERSION = "v90_2_5_4_event_registry"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+V90_2_5_4_ENABLED = os.getenv("V90_2_5_4_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+V90_2_5_4_REGISTRY_PATH = os.getenv("V90_2_5_4_REGISTRY_PATH", "config/event_registry.json")
+V90_2_5_4_REPORT_FLOOR = int(os.getenv("V90_2_5_4_REPORT_FLOOR", "82"))
+V90_2_5_4_HARD_NEWS_FLOOR = int(os.getenv("V90_2_5_4_HARD_NEWS_FLOOR", "85"))
+
+
+def v90254_norm(text):
+    try:
+        return normalize_for_check(text)
+    except Exception:
+        return re.sub(r"\s+", " ", str(text or "").strip().lower())
+
+
+def v90254_slug(text):
+    s = v90254_norm(text)
+    s = re.sub(r"[^a-z0-9]+", "-", s).strip("-")
+    return s or "event"
+
+
+def v90254_load_registry():
+    try:
+        p = Path(V90_2_5_4_REGISTRY_PATH)
+        if p.exists():
+            return json.loads(p.read_text(encoding="utf-8"))
+    except Exception as e:
+        print(f"[EVENTREG v90.2.5.4] Warning registry load: {e}")
+    return {"promotions": {}}
+
+
+def v90254_registry():
+    reg = globals().get("_V90254_EVENT_REGISTRY")
+    if not isinstance(reg, dict):
+        reg = v90254_load_registry()
+        globals()["_V90254_EVENT_REGISTRY"] = reg
+    return reg
+
+
+def v90254_alias_matches(hay, alias):
+    h = v90254_norm(hay)
+    a = v90254_norm(alias)
+    if not h or not a:
+        return False
+    # Avoid substring false positives such as alias "don" matching "London".
+    # For every alias, require non-alphanumeric boundaries around the normalized phrase.
+    pattern = r"(?<![a-z0-9])" + re.escape(a) + r"(?![a-z0-9])"
+    return re.search(pattern, h) is not None
+
+
+def v90254_match_event(text):
+    if not V90_2_5_4_ENABLED:
+        return None
+    hay = v90254_norm(text)
+    if not hay:
+        return None
+    best = None
+    for promo, pdata in (v90254_registry().get("promotions") or {}).items():
+        for eid, edata in (pdata.get("events") or {}).items():
+            aliases = edata.get("aliases") or []
+            for alias in aliases:
+                a = v90254_norm(alias)
+                if a and v90254_alias_matches(hay, a):
+                    score = len(a)
+                    if best is None or score > best.get("score", 0):
+                        best = {
+                            "promotion": promo,
+                            "event_id": eid,
+                            "canonical": edata.get("canonical") or eid,
+                            "kind": edata.get("kind") or "special_event",
+                            "report_key_prefix": edata.get("report_key_prefix") or f"report:{promo}-{eid}",
+                            "alias": alias,
+                            "score": score,
+                        }
+    return best
+
+
+def v90254_is_event_results_text(text):
+    t = v90254_norm(text)
+    if not t:
+        return False
+    yes = ["results", "result", "recap", "highlights", "key moments", "risultati", "momenti salienti"]
+    no = ["prediction", "predictions", "preview", "full final card", "full and final card", "full & final card", "lineup", "start time", "how to watch", "betting odds", "quote scommesse"]
+    if any(x in t for x in no) and not any(x in t for x in ["results", "recap", "highlights", "risultati"]):
+        return False
+    return any(x in t for x in yes)
+
+
+def v90254_is_single_event_news(text):
+    t = v90254_norm(text)
+    if not t or not v90254_match_event(t):
+        return False
+    if v90254_is_event_results_text(t):
+        return False
+    single_terms = ["retains", "retain", "defeats", "wins", "cheat", "controversial finish", "meltdown", "fans furious", "backlash", "added", "match added", "title match", "open challenge", "appears", "returns", "pulls off"]
+    return any(x in t for x in single_terms)
+
+
+def v90254_extract_date_key(text):
+    raw = str(text or "")
+    m = re.search(r"\b(20\d{2})[-_/](\d{1,2})[-_/](\d{1,2})\b", raw)
+    if m:
+        return int(m.group(1)), int(m.group(2)), int(m.group(3))
+    m = re.search(r"\b(\d{1,2})[/-](\d{1,2})(?:[/-](20\d{2}))?\b", raw)
+    if m:
+        return int(m.group(3) or datetime.now().year), int(m.group(1)), int(m.group(2))
+    return datetime.now().year, datetime.now().month, datetime.now().day
+
+
+def v90254_report_key_from_text(source_title="", event_key="", url=""):
+    raw = " ".join([str(source_title or ""), str(event_key or ""), str(url or "")])
+    ev = v90254_match_event(raw)
+    if not ev:
+        return ""
+    year, month, day = v90254_extract_date_key(raw)
+    return f"{ev['report_key_prefix']}-{year:04d}-{month:02d}-{day:02d}"
+
+
+def v90254_event_report_title(source_title="", event_key="", url=""):
+    raw = " ".join([str(source_title or ""), str(event_key or ""), str(url or "")])
+    ev = v90254_match_event(raw)
+    if not ev:
+        return ""
+    year, month, day = v90254_extract_date_key(raw)
+    try:
+        date_it = v901_italian_date(day, month, year) if "v901_italian_date" in globals() else f"{day:02d}/{month:02d}/{year:04d}"
+    except Exception:
+        date_it = f"{day:02d}/{month:02d}/{year:04d}"
+    return f"{ev['canonical']} del {date_it} - risultati e momenti salienti"
+
+
+def v90254_event_report_confirmed(source_title="", event_key="", url=""):
+    rk = v90254_report_key_from_text(source_title, event_key, url)
+    if not rk:
+        return False
+    for fn in ("v881_is_report_confirmed", "v872_is_strong_report_confirmed", "v87_is_confirmed_report_event_key"):
+        try:
+            f = globals().get(fn)
+            if callable(f) and f(rk):
+                return True
+        except Exception:
+            pass
+    return False
+
+try:
+    _ORIG_V90254_v901_extract_show_date_key = v901_extract_show_date_key
+    def v901_extract_show_date_key(text="", event_key=""):
+        raw = " ".join([str(text or ""), str(event_key or "")])
+        ev = v90254_match_event(raw)
+        if ev:
+            y, m, d = v90254_extract_date_key(raw)
+            return f"event-{ev['promotion']}-{ev['event_id']}", y, m, d
+        return _ORIG_V90254_v901_extract_show_date_key(text, event_key)
+except Exception:
+    pass
+
+try:
+    _ORIG_V90254_v901_canonical_report_title = v901_canonical_report_title
+    def v901_canonical_report_title(source_title="", event_key="", url=""):
+        title = v90254_event_report_title(source_title, event_key, url)
+        if title:
+            return title
+        return _ORIG_V90254_v901_canonical_report_title(source_title, event_key, url)
+except Exception:
+    pass
+
+try:
+    _ORIG_V90254_v901_report_key_from_text = v901_report_key_from_text
+    def v901_report_key_from_text(source_title="", event_key="", url=""):
+        rk = v90254_report_key_from_text(source_title, event_key, url)
+        if rk:
+            return rk
+        return _ORIG_V90254_v901_report_key_from_text(source_title, event_key, url)
+except Exception:
+    pass
+
+try:
+    _ORIG_V90254_calculate_importance_score = calculate_importance_score
+    def calculate_importance_score(*args, **kwargs):
+        result = _ORIG_V90254_calculate_importance_score(*args, **kwargs)
+        title = ""
+        try:
+            if args:
+                first = args[0]
+                if isinstance(first, dict):
+                    title = first.get("title") or first.get("titolo") or ""
+                elif isinstance(first, str):
+                    title = first
+            title = title or str(kwargs.get("title") or "")
+            if v90254_match_event(title) and v90254_is_event_results_text(title):
+                if isinstance(result, tuple) and result:
+                    lst = list(result); old = int(lst[0])
+                    if old < V90_2_5_4_REPORT_FLOOR:
+                        lst[0] = V90_2_5_4_REPORT_FLOOR
+                        print(f"[EVENTREG v90.2.5.4] Event report score floor {old}->{lst[0]} - {title}")
+                    return tuple(lst)
+                if isinstance(result, int) and result < V90_2_5_4_REPORT_FLOOR:
+                    print(f"[EVENTREG v90.2.5.4] Event report score floor {result}->{V90_2_5_4_REPORT_FLOOR} - {title}")
+                    return V90_2_5_4_REPORT_FLOOR
+        except Exception:
+            pass
+        return result
+except Exception:
+    pass
+
+try:
+    _ORIG_V90254_v723_conservative_score_after_ai = v723_conservative_score_after_ai
+    def v723_conservative_score_after_ai(*args, **kwargs):
+        result = _ORIG_V90254_v723_conservative_score_after_ai(*args, **kwargs)
+        try:
+            title = ""
+            for obj in args or []:
+                if isinstance(obj, dict):
+                    title = obj.get("title") or obj.get("titolo") or title
+                elif isinstance(obj, str) and v90254_match_event(obj):
+                    title = obj
+            title = title or str(kwargs.get("title") or "")
+            if v90254_match_event(title) and v90254_is_event_results_text(title):
+                if isinstance(result, tuple) and result:
+                    lst = list(result); old = int(lst[0])
+                    if old < V90_2_5_4_REPORT_FLOOR:
+                        lst[0] = V90_2_5_4_REPORT_FLOOR
+                        print(f"[EVENTREG v90.2.5.4] Event report AI floor {old}->{lst[0]} - {title}")
+                    return tuple(lst)
+                if isinstance(result, int) and result < V90_2_5_4_REPORT_FLOOR:
+                    print(f"[EVENTREG v90.2.5.4] Event report AI floor {result}->{V90_2_5_4_REPORT_FLOOR} - {title}")
+                    return V90_2_5_4_REPORT_FLOOR
+        except Exception:
+            pass
+        return result
+except Exception:
+    pass
+
+try:
+    _ORIG_V90254_process_candidate_item = process_candidate_item
+    def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+        try:
+            if V90_2_5_4_ENABLED and isinstance(item, dict):
+                title = item.get("title") or ""
+                url = item.get("url") or item.get("link") or ""
+                if v90254_is_single_event_news(title) and not v90254_event_report_confirmed(title, item.get("event_key"), url):
+                    score = int(item.get("score") or 0)
+                    hard = score >= V90_2_5_4_HARD_NEWS_FLOOR
+                    if not hard:
+                        print(f"[EVENTREG v90.2.5.4] Single event news bloccata finche il report evento non e pubblicato score={score} - {title}")
+                        return "skipped_event_report_pending"
+                    if "[SPOILER]" not in title.upper():
+                        item["title"] = "[SPOILER] " + title
+                        print(f"[EVENTREG v90.2.5.4] Single event hard news consentita ma marcata spoiler - {title}")
+        except Exception as e:
+            print(f"[EVENTREG v90.2.5.4] Warning event report gate: {e}")
+        return _ORIG_V90254_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+except Exception:
+    pass
+
+print("[BOOT v90.2.5.4] Event registry attiva: PLE/PPV/special event report keys e spoiler gate")
+
+
+# v90.2.5.4.1 event registry report key
+BOT_VERSION = "v90_2_5_4_1_event_registry_report_key"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+V90_2_5_4_1_ENABLED = os.getenv("V90_2_5_4_1_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+
+
+def v902541_registry_report_key(title="", url="", text=""):
+    if not V90_2_5_4_1_ENABLED:
+        return ""
+    try:
+        raw = " ".join([str(title or ""), str(url or ""), str(text or "")])
+        if "v90254_match_event" in globals() and "v90254_is_event_results_text" in globals() and "v90254_report_key_from_text" in globals():
+            if v90254_match_event(raw) and v90254_is_event_results_text(raw):
+                return v90254_report_key_from_text(raw, "", url) or ""
+    except Exception:
+        pass
+    return ""
+
+try:
+    _ORIG_V902541_make_report_event_key = make_report_event_key
+    def make_report_event_key(title="", url="", text=""):
+        rk = v902541_registry_report_key(title, url, text)
+        if rk:
+            print(f"[EVENTREG v90.2.5.4.1] report key da registry: {rk}")
+            return rk
+        return _ORIG_V902541_make_report_event_key(title, url, text)
+except Exception:
+    pass
+
+print("[BOOT v90.2.5.4.1] Event registry collegata a make_report_event_key")
+
+
+# v90.2.6.1 true source consolidation
 
 
 if __name__ == "__main__":
