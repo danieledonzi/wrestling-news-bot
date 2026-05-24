@@ -1,4 +1,4 @@
-name: OpenWrestlingTV Bot v90.2.5.2
+name: OpenWrestlingTV Bot v90.2.5.3
 
 on:
   workflow_dispatch:
@@ -70,6 +70,7 @@ jobs:
           python scripts/apply_bot_patch_v90_2_5.py
           python scripts/apply_bot_patch_v90_2_5_1.py
           python scripts/apply_bot_patch_v90_2_5_2.py
+          python scripts/apply_bot_patch_v90_2_5_3.py
 
       - name: Verify consolidated source
         run: |
@@ -89,14 +90,15 @@ jobs:
               'v90.2.5 processed URL hard-skip',
               'v90.2.5.1 processed skip recorder',
               'v90.2.5.2 processed competitive guard',
+              'v90.2.5.3 SNME event and publish processed guards',
           ]
           missing = [m for m in required if m not in text]
           if missing:
-              raise SystemExit('[SOURCE CONSOLIDATION v90.2.5.2] missing markers: ' + ', '.join(missing))
-          print('[SOURCE CONSOLIDATION v90.2.5.2] bot.py contiene la chain consolidata fino a v90.2.5.2')
+              raise SystemExit('[SOURCE CONSOLIDATION v90.2.5.3] missing markers: ' + ', '.join(missing))
+          print('[SOURCE CONSOLIDATION v90.2.5.3] bot.py contiene la chain consolidata fino a v90.2.5.3')
           PY
 
-      - name: Run bot v90_2_5_2
+      - name: Run bot v90_2_5_3
         id: run_bot
         env:
           WP_USER: ${{ secrets.WP_USER }}
@@ -121,6 +123,8 @@ jobs:
           V90_2_5_2_ENABLED: "1"
           V90_2_5_2_HIGH_SCORE_PROTECT: "85"
           V90_2_5_2_LOW_SCORE_FINAL_MAX: "54"
+          V90_2_5_3_ENABLED: "1"
+          V90_2_5_3_SNME_FLOOR: "82"
         run: |
           set +e
           python bot.py
@@ -160,6 +164,6 @@ jobs:
             code=$(cat .bot_exit_code)
           fi
           if [ "$code" != "0" ]; then
-            echo "[BOT v90.2.5.2] Bot terminato con exit code $code"
+            echo "[BOT v90.2.5.3] Bot terminato con exit code $code"
             exit "$code"
           fi
