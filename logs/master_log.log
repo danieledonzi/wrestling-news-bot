@@ -5135,3 +5135,153 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-24 14:47:56] VERSION [v90_2_5_3_1_snme_publish_tighten (d8ed619)] =====
 
+[BOOT v88.2] Editorial performance guards attivi: OTHER/feature cap, celebrity cap, true-results only report priority
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v88.3.1] Roster arrival guard attiva
+[BOOT v88.4] Quality microfixes attive: quote sanitizer, report credit media guard, gaming/health caps
+[BOOT v88.4.1] Canonical event-core dedupe attivo
+[BOOT v88.4.2] Report hard-title, ROH whitelist, safe canonical core e soft guard attivi
+[BOOT v88.4.2.1] Post-report soft guard limitato a run/giorno corrente
+[BOOT v89] Editorial quality attiva: report tail cleanup, follow-up SEO override, soft-news tightening
+[BOOT v89.1] Legacy return/debut rumor guard attiva
+[BOOT v90.1] Quality correctness guard attiva: report title, media tail, boilerplate, numeric titles, topic dedupe, stale spoiler
+[BOOT v90.1.1] Media duplicate queues, strict report title and pre-report spoiler guard attivi
+[BOOT v90.1.2] Calendar-aware spoiler guard attiva: expected_show=collision
+[SPOILER v90.1.3] v90.1.1 spoiler guard sovrascritta con calendar-aware guard
+[BOOT v90.1.3] Spoiler hotfix attiva: solo calendar-aware guard puo' aggiungere [SPOILER]
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.1] Report dedupe protection attiva: true-results usa solo report gate stretto
+[MODEL v90.2.2] translate_report chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-pro
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.3] Social embed quote positioning attivo
+[BOOT v90.2.3.1] Inline image dict normalization attiva in v88_media_record
+[BOOT v90.2.4] Offline pending hard-skip guard attiva
+[BOOT v90.2.4.1] Report hard-title guard attiva
+[BOOT v90.2.4.2] Report artifacts/casing recovery attiva
+[BOOT v90.2.5] Processed URL hard-skip attivo
+[BOOT v90.2.5.1] Processed URL skip recorder attivo
+[BOOT v90.2.5.2] Processed competitive guard attiva: high-score e SNME non finali
+[BOOT v90.2.5.3] SNME event report guard e processed publish success attivi
+[BOOT v90.2.5.3.1] SNME floor ristretto e processed publish corrente attivi
+
+===== RUN START [2026-05-24 15:58:57] VERSION [v90_2_5_3_1_snme_publish_tighten (479e773)] =====
+[PROCESSED v90.2.5.2] Migrati record non-final competitivi: 10
+[PROCESSED v90.2.5] Loaded processed URL records: 36
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (18/75): AEW's Jim Ross Has Heard 'Good Things' About Garrett Borden's Wrestling Training
+[SKIP] Score sotto soglia editoriale (14/75): AEW & ROH Star Bandido Names Biggest Wrestling Inspirations, Including WWE HOFer
+[SKIP] Score sotto soglia editoriale (14/75): Joe Hendry Explains Why WWE NXT Was Among The 'Most Difficult Challenges' He's Faced
+[SCORE v81.1] Cap light name-driven item 20->20 - WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SKIP] Score sotto soglia editoriale (14/75): WWE's Finn Balor Recalls NJPW Origins Of Demonic Body Paint
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 73->54 - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176092/wwe-hofer-eric-bischoff-reflects-working-late-ted-turner/
+[SKIP] Score sotto soglia editoriale (0/75): WWE SNME - 5/23/2026: 3 Things We Hated And 3 We Loved
+[SKIP] Score sotto soglia editoriale (20/75): Eddie Guerrero's Daughter Reflects On Healing Her Relationship With Wrestling
+[SNME v90.2.5.3] Pre-AI event score floor 80->82 - This is Wrestling Inc.'s results for "Saturday Night's Main Event", with the Intercontinental, World Tag Team & Women's Tag Team Championships on the line!
+[SKIP] Score sotto soglia editoriale (14/75): Nigel McGuinness Compares Experiences Doing Commentary For AEW Vs. WWE
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026 Predictions: Wrestling Inc. Picks The Winners
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (0/75): WWE SmackDown 5/22/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (26/75): AEW's Harley Cameron Details The Process Of Learning To Wrestle On Live TV
+[REPORT v87.2] Report confermato da history forte: report:wwe-smackdown-2026-05-22
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-smackdown-2026-05-22 - WWE SmackDown Results 5/22 - Women's US Title Open Challenge, Rhea Ripley Appears
+[SKIP] Score sotto soglia editoriale (0/75): AEW Double Or Nothing 2026: Draws & Duds
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Nic Nemeth Says He Turned Down WWE Several Times Before John Cena Tournament Return
+[SKIP] Score sotto soglia editoriale (62/75): Nic Nemeth Says He Turned Down WWE Several Times Before John Cena Tournament Return
+[SCORE v88.3] v88.3 hard feature skip cap 60->45 - JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule
+[SKIP] Score sotto soglia editoriale (39/75): JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] Score sotto soglia editoriale (35/75): Thekla Admits She Picked The Worst Spot For "Dumb B*itches" Promo Near Children
+[SCORE v81.1] Cap future card announcement 46->46 - Opening Segment & Match Revealed for May 25 WWE RAW
+[SKIP] Score sotto soglia editoriale (35/75): Xavier Woods Warns Kenny Omega It's "On Sight" Amid AEW Rumors
+[SKIP] Score sotto soglia editoriale (13/75): Anthony Bowens Addresses Possibility of Doing His Own Andrade-Style Ringside Routine
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 46/55 - AEW Double or Nothing Advance Buys Explode Ahead Of Darby Allin vs MJF Title vs Hair Match
+[SKIP] Score sotto soglia editoriale (46/75): AEW Double or Nothing Advance Buys Explode Ahead Of Darby Allin vs MJF Title vs Hair Match
+[SKIP] URL già in history: https://www.ringsidenews.com/gunther-says-brock-lesnar-can-challenge-him-cody-rhodes-match/
+[SCORE v88.3] v88.3 cap low-value market item 79->45 - Final Betting Odds Released for AEW Double or Nothing 2026
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 56->56 - AEW Double or Nothing 2026 Preview: Confirmed Matches, Start Time and How to Watch
+[SCORE v81.1] Cap future card announcement 56->56 - AEW Double or Nothing 2026 Preview: Confirmed Matches, Start Time and How to Watch
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 56->54 - AEW Double or Nothing 2026 Preview: Confirmed Matches, Start Time and How to Watch
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - AEW Double or Nothing 2026 Preview: Confirmed Matches, Start Time and How to Watch
+[SKIP] Score sotto soglia editoriale (40/75): AEW Double or Nothing 2026 Preview: Confirmed Matches, Start Time and How to Watch
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 49/55 - D'Lo Brown Calls Out TKO Over WWE Talent Pay Cuts Despite Record Business
+[SKIP] Score sotto soglia editoriale (49/75): D'Lo Brown Calls Out TKO Over WWE Talent Pay Cuts Despite Record Business
+[SKIP] URL già in history: https://www.ringsidenews.com/fans-furious-becky-lynch-vs-sol-rucas-controversial-finish-saturday-nights-main-event/
+[SKIP] Score sotto soglia editoriale (45/75): Becky Lynch Doubles Down With Wild Jessika Carr Accusation After Saturday Night's Main Event
+[SCORE v80.4] AAA major World priority 33->72 - AAA Noche de Los Grandes Lineup for Expanded Two-Week Event
+[SCORE v81.1] Cap future card announcement 72->72 - AAA Noche de Los Grandes Lineup for Expanded Two-Week Event
+[SCORE v80.4] AAA major World priority 86->98 - Ludwig Kaiser Appears In AAA After Recent Arrest
+[SKIP] URL già in history: https://www.ringsidenews.com/savio-vega-replaces-rey-mysterio-aaa-fox-commentary-team/
+[SCORE] 98 high - Ludwig Kaiser Appears In AAA After Recent Arrest | WWE/main roster, WWE main roster + storyline/evento, evento legale/controversia, v62 evento legale grave, v80.4 AAA major World priority 86->98, v71 freshness=0.537
+[SCORE] 82 high - WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 titolo/championship, v75 hard results report, v77 hard report protected, v71 freshness=0.398
+[SCORE] 79 medium - Possible Spoiler Revealed for WWE Clash in Italy Title Match | WWE/main roster, top star lead: rhea ripley, nomi forti lead: rhea ripley, jade cargill, WWE main roster + storyline/evento, titolo/championship, PLE/PPV, v62 titolo/championship, v66 cap title match non-title-change, v71 source reliability soft penalty, v71 freshness=0.557
+[SCORE] 73 medium - AEW's Athena Reveals Former WWE Stars Who Are The Strongest, Hit Her Hardest | WWE/main roster, WWE main roster + storyline/evento, titolo/championship, floor WWE main roster storyline, v62 categoria business, v71 freshness=0.598, v48 tier2: 55-74
+[SCORE] 67 medium - AAA Noche de Los Grandes Lineup for Expanded Two-Week Event | altre promotion, match/segmento annunciato, v62 categoria business, v80.4 AAA major World priority 33->72, v81.1 cap future card announcement 72->72, v71 source reliability soft penalty, v71 freshness=0.425, v48 tier2: 55-74
+[SCORE] 63 medium - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot | WWE/main roster, top star lead: john cena, nomi forti lead: john cena, WWE main roster + storyline/evento, PLE/PPV, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 48 low - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card | WWE/main roster, WWE main roster + storyline/evento, floor WWE main roster storyline, v62 titolo/championship, v88.2 cap OTHER/feature non-news 73->54, v71 low freshness/novelty, v71 freshness=0.31, v48 tier3: 45-54 contestuale
+[SCORE] 47 low - Backstage Update On Wardlow's AEW DoN 2026 Weekend | AEW, titolo/championship, PLE/PPV, v71 freshness=0.591, v48 tier3: 45-54 contestuale
+[SCORE] 41 low - Opening Segment & Match Revealed for May 25 WWE RAW | WWE/main roster, WWE main roster + storyline/evento, match/segmento annunciato, show settimanale, v81.1 cap future card announcement 46->46, v71 source reliability soft penalty, v71 freshness=0.572, v48 tier4: 40-44 riempimento controllato
+[SCORE] 40 low - Final Betting Odds Released for AEW Double or Nothing 2026 | AEW, impatto roster/storyline, release/addio, PLE/PPV, v62 titolo/championship, v88.3 cap low-value market item 79->45, v71 source reliability soft penalty, v71 freshness=0.652, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 1 news >=90, 2 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 10 | mode=normal | max nuove=3 | pending pubblicati=0
+[SKIP v90.2] Follow-up duplicato/non sostanziale core=legal:ludwig-kaiser:case score=98 reason=core_cap_reached_no_major_update novel=[] - Ludwig Kaiser Appears In AAA After Recent Arrest
+[PERF v71] WP lookup URL esistente: 0.82s
+[BOT] Elaborazione: WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More
+[BOT] semantic_id=wwe-saturday-nights-main-event-results-523-three-championships-on-the-line-more
+[SCORE] iniziale=82 priority=high
+[SCRAPE] Articolo results rilevato: testo completo (14895 caratteri)
+[EMBED v88] Mappa posizionale media salvata: embeds=5 url=https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/
+[MEDIA v88.4] Rimossi embed derivati da credit immagine gallery: 10 url=https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=58, image=6, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=5 url=https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/
+[MEDIA v88.4] Rimossi embed derivati da credit immagine gallery: 10 url=https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/
+[BLOCKSEQ] Blocchi ordinati estratti: text=58, image=6, embed=0
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[PERF v71] WP strict report lookup: 1.41s
+[SKIP v90.1] Topic/status duplicate guard business:wwe:house-shows-expansion: Possible Spoiler Revealed for WWE Clash in Italy Title Match
+[BOT] Elaborazione: AEW's Athena Reveals Former WWE Stars Who Are The Strongest, Hit Her Hardest
+[BOT] semantic_id=aews-athena-reveals-former-wwe-stars-who-are-the-strongest-hit-her-hardest
+[SCORE] iniziale=73 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=12, image=2, embed=1
+[BLOCKSEQ] Blocchi ordinati estratti: text=12, image=2, embed=1
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OTHER conf=1.00 | category=AEW (5) conf=0.90 model=gemini-3.1-flash-lite | L'articolo è un riepilogo di un'intervista rilasciata da Athena, quindi non rientra nelle categorie di report o anteprime, ma è un approfondimento su dichiarazioni esterne.
+[EDITORIAL v72.3] translation_notes=Mantenere i nomi dei titoli (ROH Women's World Championship, WWE NXT Women's Championship) in inglese.; Non tradurre 'The EST' come soprannome.; Tradurre 'hard-hitting' come 'colpi duri' o 'impatto violento'.
+[EDITORIAL v73] final type=OTHER | category=AEW (5) | L'articolo è un riepilogo di un'intervista rilasciata da Athena, quindi non rientra nelle categorie di report o anteprime, ma è un approfondimento su dichiarazioni esterne.
+[PERF v71] analisi editoriale AI v72: 1.35s
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - AEW's Athena Reveals Former WWE Stars Who Are The Strongest, Hit Her Hardest
+[SCORE] raffinato=54 priority=low | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, contratto, PLE/PPV, v62 titolo/championship, v62 categoria business, v66 cap opinion/commentary storyline, v68 cap opinion senza news concreta, v88.2 cap OTHER/feature non-news 68->54
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - AEW's Athena Reveals Former WWE Stars Who Are The Strongest, Hit Her Hardest
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - AEW's Athena Reveals Former WWE Stars Who Are The Strongest, Hit Her Hardest
+[SKIP v85.1] future card/segment announcement non-spoiler pre-Gemini: AAA Noche de Los Grandes Lineup for Expanded Two-Week Event
+[PENDING] Coda salvata: 0 elementi
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - WWE Saturday Night's Main Event 5/23/2026 Full & Final Card
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Backstage Update On Wardlow's AEW DoN 2026 Weekend
+[SKIP v86.6/legacy] low_score_pre_gemini:41: Opening Segment & Match Revealed for May 25 WWE RAW
+[PENDING] Coda salvata: 0 elementi
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Final Betting Odds Released for AEW Double or Nothing 2026
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 10 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-24 15:58:57_summary.json -> published_html_review/run_2026-05-24 15-58-57_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (735 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-24 15:58:57] VERSION [v90_2_5_3_1_snme_publish_tighten (479e773)] =====
+
