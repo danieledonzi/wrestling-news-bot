@@ -43,6 +43,17 @@ def v90254_registry():
     return reg
 
 
+def v90254_alias_matches(hay, alias):
+    h = v90254_norm(hay)
+    a = v90254_norm(alias)
+    if not h or not a:
+        return False
+    # Avoid substring false positives such as alias "don" matching "London".
+    # For every alias, require non-alphanumeric boundaries around the normalized phrase.
+    pattern = r"(?<![a-z0-9])" + re.escape(a) + r"(?![a-z0-9])"
+    return re.search(pattern, h) is not None
+
+
 def v90254_match_event(text):
     if not V90_2_5_4_ENABLED:
         return None
@@ -55,7 +66,7 @@ def v90254_match_event(text):
             aliases = edata.get("aliases") or []
             for alias in aliases:
                 a = v90254_norm(alias)
-                if a and a in hay:
+                if a and v90254_alias_matches(hay, a):
                     score = len(a)
                     if best is None or score > best.get("score", 0):
                         best = {
