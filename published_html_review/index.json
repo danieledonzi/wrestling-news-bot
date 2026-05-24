@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-23 23:28:40",
-  "last_bot_version": "v90_2_5_1_processed_skip_recorder (5b27d65)",
-  "updated_at": "2026-05-23T23:32:37",
-  "total_items": 179,
+  "last_run_id": "2026-05-24 01:30:23",
+  "last_bot_version": "v90_2_5_1_processed_skip_recorder (0d5f889)",
+  "updated_at": "2026-05-24T01:33:40",
+  "total_items": 182,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1436,6 +1436,30 @@
       "original_html_file": "20260523_233237_002_wwe-lanciato-il-merchandising-di-danhausen-in-collaborazione-con-i-new-york-knic_9e07db22_original.html",
       "final_html_file": "20260523_233237_002_wwe-lanciato-il-merchandising-di-danhausen-in-collaborazione-con-i-new-york-knic_9e07db22_final.html",
       "metadata_file": "20260523_233237_002_wwe-lanciato-il-merchandising-di-danhausen-in-collaborazione-con-i-new-york-knic_9e07db22_metadata.json"
+    },
+    {
+      "run_id": "2026-05-24 01:30:23",
+      "title": "Becky Lynch furiosa dopo il finale contro Sol Ruca a Saturday Night's Main Event",
+      "url": "https://www.ringsidenews.com/becky-lynch-melts-down-sol-ruca-match-ends-chaos-saturday-nights-main-event/",
+      "original_html_file": "20260524_013156_001_becky-lynch-furiosa-dopo-il-finale-contro-sol-ruca-a-saturday-night-s-main-event_1a45622f_original.html",
+      "final_html_file": "20260524_013156_001_becky-lynch-furiosa-dopo-il-finale-contro-sol-ruca-a-saturday-night-s-main-event_1a45622f_final.html",
+      "metadata_file": "20260524_013156_001_becky-lynch-furiosa-dopo-il-finale-contro-sol-ruca-a-saturday-night-s-main-event_1a45622f_metadata.json"
+    },
+    {
+      "run_id": "2026-05-24 01:30:23",
+      "title": "Penta difende l'Intercontinental Championship a Saturday Night's Main Event",
+      "url": "https://www.wrestlinginc.com/2180137/penta-soundly-defends-ic-title-wwe-snme/",
+      "original_html_file": "20260524_013247_002_penta-difende-l-intercontinental-championship-a-saturday-night-s-main-event_dac4b3ce_original.html",
+      "final_html_file": "20260524_013247_002_penta-difende-l-intercontinental-championship-a-saturday-night-s-main-event_dac4b3ce_final.html",
+      "metadata_file": "20260524_013247_002_penta-difende-l-intercontinental-championship-a-saturday-night-s-main-event_dac4b3ce_metadata.json"
+    },
+    {
+      "run_id": "2026-05-24 01:30:23",
+      "title": "Problemi con l'abbigliamento per Charlotte Flair durante WWE Saturday Night's Main Event",
+      "url": "https://www.ringsidenews.com/charlotte-flair-wrestles-through-wardrobe-malfunction-during-wwe-saturday-nights-main-event/",
+      "original_html_file": "20260524_013336_003_problemi-con-l-abbigliamento-per-charlotte-flair-durante-wwe-saturday-night-s-ma_d782e379_original.html",
+      "final_html_file": "20260524_013336_003_problemi-con-l-abbigliamento-per-charlotte-flair-durante-wwe-saturday-night-s-ma_d782e379_final.html",
+      "metadata_file": "20260524_013336_003_problemi-con-l-abbigliamento-per-charlotte-flair-durante-wwe-saturday-night-s-ma_d782e379_metadata.json"
     }
   ]
 }

@@ -77,6 +77,19 @@
     "updated_at": "1779579157.628204",
     "url": "https://www.ringsidenews.com/ftr-says-edge-christian-weak-competition-compared-them/"
   },
+  "https://www.ringsidenews.com/ftr-wants-match-against-new-day-aew-wwe-exit": {
+    "extra": {
+      "event_key": "",
+      "raw_result": "skipped",
+      "semantic_id": "ftr-wants-match-against-new-day-in-aew-after-wwe-exit"
+    },
+    "reason": "skipped",
+    "score": 44,
+    "status": "rejected",
+    "title": "FTR Wants Match Against New Day in AEW After WWE Exit",
+    "updated_at": "1779586420.5981474",
+    "url": "https://www.ringsidenews.com/ftr-wants-match-against-new-day-aew-wwe-exit/"
+  },
   "https://www.ringsidenews.com/mance-warner-clears-confusion-indie-promotion-claimed-aew-pulled-him": {
     "extra": {
       "event_key": "event:business:tony-khan",
@@ -102,6 +115,19 @@
     "title": "Mark Jindrak Says WWE Stars Complaining About WrestleMania Weekend Fan Incidents Should Be Grateful",
     "updated_at": "1779563057.816217",
     "url": "https://www.ringsidenews.com/mark-jindrak-says-wwe-stars-complaining-about-wrestlemania-weekend-fan-incidents-should-grateful/"
+  },
+  "https://www.ringsidenews.com/penta-pulls-off-impressive-win-retain-ic-title-wwe-saturday-nights-main-event": {
+    "extra": {
+      "event_key": "",
+      "raw_result": "skipped",
+      "semantic_id": "penta-pulls-off-impressive-win-to-retain-ic-title-at-wwe-saturday-nights-main-event"
+    },
+    "reason": "skipped",
+    "score": 20,
+    "status": "rejected",
+    "title": "Penta Pulls Off Impressive Win To Retain IC Title At WWE Saturday Night's Main Event",
+    "updated_at": "1779586376.5307162",
+    "url": "https://www.ringsidenews.com/penta-pulls-off-impressive-win-retain-ic-title-wwe-saturday-nights-main-event/"
   },
   "https://www.ringsidenews.com/skye-blue-roasts-mjf-potentially-going-bald-aew-double-nothing": {
     "extra": {
@@ -141,6 +167,19 @@
     "title": "Vince McMahon Would Allegedly Forget His Own Instructions and Explode Backstage in WWE",
     "updated_at": "1779552024.6113484",
     "url": "https://www.ringsidenews.com/vince-mcmahon-would-allegedly-forget-his-own-instructions-explode-backstage-wwe/"
+  },
+  "https://www.ringsidenews.com/wwe-adds-clash-italy-title-match-during-saturday-nights-main-event": {
+    "extra": {
+      "event_key": "",
+      "raw_result": "skipped",
+      "semantic_id": "wwe-adds-clash-in-italy-title-match-during-saturday-nights-main-event"
+    },
+    "reason": "skipped",
+    "score": 68,
+    "status": "rejected",
+    "title": "WWE Adds Clash In Italy Title Match During Saturday Night's Main Event",
+    "updated_at": "1779586376.533053",
+    "url": "https://www.ringsidenews.com/wwe-adds-clash-italy-title-match-during-saturday-nights-main-event/"
   },
   "https://www.ringsidenews.com/wwe-saturday-nights-main-event-spoiler-lineup-may-23-2026-full-match-card-backstage-notes-revealed": {
     "extra": {
@@ -297,5 +336,18 @@
     "title": "WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More",
     "updated_at": "1779579066.1105447",
     "url": "https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/"
+  },
+  "https://www.wrestlinginc.com/2180133/sol-ruca-granted-womens-ic-title-match-following-controversial-becky-lynch-dq": {
+    "extra": {
+      "event_key": "",
+      "raw_result": "skipped",
+      "semantic_id": "sol-ruca-granted-womens-ic-title-match-following-controversial-wwe-snme-dq"
+    },
+    "reason": "skipped",
+    "score": 95,
+    "status": "rejected",
+    "title": "Sol Ruca Granted Women's IC Title Match Following Controversial WWE SNME DQ",
+    "updated_at": "1779586316.7811391",
+    "url": "https://www.wrestlinginc.com/2180133/sol-ruca-granted-womens-ic-title-match-following-controversial-becky-lynch-dq/"
   }
 }

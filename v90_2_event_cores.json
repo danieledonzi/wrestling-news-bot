@@ -113,7 +113,7 @@
     ],
     "count": 12,
     "first_seen": "2026-05-21T16:04:55",
-    "last_seen": "2026-05-23T17:33:35"
+    "last_seen": "2026-05-24T01:31:22"
   },
   "return:mark-shapiro:wwe": {
     "titles": [
@@ -423,5 +423,41 @@
     "count": 1,
     "first_seen": "2026-05-22T11:03:09",
     "last_seen": "2026-05-22T11:03:09"
+  },
+  "return:cm-punk:wwe": {
+    "titles": [
+      "20260523_173414_001_wwe-la-situazione-sul-ritorno-in-tv-di-cm-punk_788da661_original.html"
+    ],
+    "facts": [
+      "official_date",
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-24T01:31:22",
+    "last_seen": "2026-05-24T01:31:22"
+  },
+  "title:becky-lynch:status": {
+    "titles": [
+      "Becky Lynch Melts Down After Sol Ruca Match Ends in Chaos at Saturday Night's Main Event"
+    ],
+    "facts": [
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-24T01:31:56",
+    "last_seen": "2026-05-24T01:31:56"
+  },
+  "title:penta-soundly:status": {
+    "titles": [
+      "Penta Soundly Defends IC Title At WWE SNME"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-24T01:32:47",
+    "last_seen": "2026-05-24T01:32:47"
   }
 }
