@@ -97,5 +97,14 @@
     "core": "title:darby-allin:status",
     "reason": "update_gate:medium_followup_or_weak_update",
     "ttl_hours": 8
+  },
+  {
+    "created_at": "2026-05-24T19:55:11",
+    "title": "Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'",
+    "url": "https://www.wrestlinginc.com/2176982/bully-ray-brock-lesnar-wwe-return-retirement/",
+    "score": 68,
+    "core": "return:brock-lesnar:wwe",
+    "reason": "update_gate:covered_core_below_gate",
+    "ttl_hours": 8
   }
 ]

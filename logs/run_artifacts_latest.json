@@ -1,12 +1,22 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-24 19:02:32",
-  "bot_version": "v90_2_5_4_event_registry (8a669d4)",
-  "git_sha": "8a669d43573373bbfc86a8e4e2071e1576ad2462",
-  "created_at": "2026-05-24T19:02:50",
-  "published_count": 0,
-  "published_post_ids": [],
-  "published_artifacts": [],
+  "run_id": "2026-05-24 19:54:33",
+  "bot_version": "v90_2_5_4_1_event_registry_report_key (308beaa)",
+  "git_sha": "308beaa4b684e0326dc96025d1671bbac16bdca5",
+  "created_at": "2026-05-24T19:55:20",
+  "published_count": 1,
+  "published_post_ids": [
+    "5243"
+  ],
+  "published_artifacts": [
+    {
+      "post_id": 5243,
+      "title": "WWE: i piani per il debutto di Nikki Blackheart a NXT",
+      "source_url": "https://www.ringsidenews.com/nikki-blackhearts-wwe-nxt-status-wrestling-dark-match/",
+      "html_file": "published/20260524_195506_001_wwe-i-piani-per-il-debutto-di-nikki-blackheart-a-nxt_5243_final.html",
+      "metadata_file": "published/20260524_195506_001_wwe-i-piani-per-il-debutto-di-nikki-blackheart-a-nxt_5243_metadata.json"
+    }
+  ],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",

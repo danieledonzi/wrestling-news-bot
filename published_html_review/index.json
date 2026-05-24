@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-24 19:02:32",
-  "last_bot_version": "v90_2_5_4_event_registry (8a669d4)",
-  "updated_at": "2026-05-24T19:02:49",
-  "total_items": 193,
+  "last_run_id": "2026-05-24 19:54:33",
+  "last_bot_version": "v90_2_5_4_1_event_registry_report_key (308beaa)",
+  "updated_at": "2026-05-24T19:55:18",
+  "total_items": 194,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1548,6 +1548,14 @@
       "original_html_file": "20260524_183635_001_possibili-infortuni-per-logan-paul-e-sol-ruca-durante-il-saturday-night-s-main-e_74aa5ee8_original.html",
       "final_html_file": "20260524_183635_001_possibili-infortuni-per-logan-paul-e-sol-ruca-durante-il-saturday-night-s-main-e_74aa5ee8_final.html",
       "metadata_file": "20260524_183635_001_possibili-infortuni-per-logan-paul-e-sol-ruca-durante-il-saturday-night-s-main-e_74aa5ee8_metadata.json"
+    },
+    {
+      "run_id": "2026-05-24 19:54:33",
+      "title": "WWE: i piani per il debutto di Nikki Blackheart a NXT",
+      "url": "https://www.ringsidenews.com/nikki-blackhearts-wwe-nxt-status-wrestling-dark-match/",
+      "original_html_file": "20260524_195508_001_wwe-i-piani-per-il-debutto-di-nikki-blackheart-a-nxt_39824cf5_original.html",
+      "final_html_file": "20260524_195508_001_wwe-i-piani-per-il-debutto-di-nikki-blackheart-a-nxt_39824cf5_final.html",
+      "metadata_file": "20260524_195508_001_wwe-i-piani-per-il-debutto-di-nikki-blackheart-a-nxt_39824cf5_metadata.json"
     }
   ]
 }

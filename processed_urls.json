@@ -196,7 +196,7 @@
     "score": 60,
     "status": "competitive_deferred",
     "title": "MJF Claims Darby Allin \"Looks Like A School Shooter\" Ahead Of AEW Double or Nothing",
-    "updated_at": "1779649368.9168513",
+    "updated_at": "1779652518.9264743",
     "url": "https://www.ringsidenews.com/mjf-claims-darby-allin-looks-school-shooter-ahead-aew-double-nothing/"
   },
   "https://www.ringsidenews.com/opening-segment-match-revealed-may-25-wwe-raw": {
@@ -357,6 +357,32 @@
     "updated_at": "1779552040.914465",
     "url": "https://www.wrestlinginc.com/2176287/aew-paul-wight-forced-lose-weight-wwe-wrestlemania-spot/"
   },
+  "https://www.wrestlinginc.com/2176982/bully-ray-brock-lesnar-wwe-return-retirement": {
+    "extra": {
+      "event_key": "event:brock-lesnar-return",
+      "raw_result": "skipped",
+      "semantic_id": "bully-ray-questions-why-brock-lesnar-returned-to-wwe-so-quickly-after-retirement"
+    },
+    "reason": "above_low_score_final_cap_not_final",
+    "score": 68,
+    "status": "competitive_deferred",
+    "title": "Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'",
+    "updated_at": "1779652511.4659235",
+    "url": "https://www.wrestlinginc.com/2176982/bully-ray-brock-lesnar-wwe-return-retirement/"
+  },
+  "https://www.wrestlinginc.com/2177126/john-cena-explains-intention-behind-eponymous-wwe-event": {
+    "extra": {
+      "event_key": "",
+      "raw_result": "skipped",
+      "semantic_id": "john-cena-explains-intention-behind-eponymous-wwe-event"
+    },
+    "reason": "skipped",
+    "score": 45,
+    "status": "rejected",
+    "title": "John Cena Explains Intention Behind Eponymous WWE Event",
+    "updated_at": "1779652518.8132284",
+    "url": "https://www.wrestlinginc.com/2177126/john-cena-explains-intention-behind-eponymous-wwe-event/"
+  },
   "https://www.wrestlinginc.com/2177229/wwe-saturday-nights-main-event-may-23-2026-full-final-card-matches": {
     "extra": {
       "event_key": "",
@@ -406,7 +432,7 @@
     "score": 60,
     "status": "competitive_deferred",
     "title": "AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE",
-    "updated_at": "1779649368.9762332",
+    "updated_at": "1779652518.9089227",
     "url": "https://www.wrestlinginc.com/2177312/aew-swerve-strickland-aleister-black-zelina-vega-wwe/"
   },
   "https://www.wrestlinginc.com/2177532/wwe-jbl-john-bradshaw-layfield-talent-infinitely-better-increases-live-event-schedule": {
@@ -509,10 +535,10 @@
       "semantic_id": "wwe-saturday-nights-main-event-results-523-three-championships-on-the-line-more"
     },
     "reason": "high_score_or_discussion_worthy_not_final",
-    "score": 82,
+    "score": 76,
     "status": "competitive_deferred",
     "title": "WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More",
-    "updated_at": "1779649368.829567",
+    "updated_at": "1779652511.4166718",
     "url": "https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/"
   },
   "https://www.wrestlinginc.com/2180133/sol-ruca-granted-womens-ic-title-match-following-controversial-becky-lynch-dq": {
