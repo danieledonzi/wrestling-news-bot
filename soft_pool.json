@@ -79,5 +79,14 @@
     "core": "title:mjf:status",
     "reason": "update_gate:medium_followup_or_weak_update",
     "ttl_hours": 8
+  },
+  {
+    "created_at": "2026-05-24T14:48:19",
+    "title": "Final Betting Odds Released for AEW Double or Nothing 2026",
+    "url": "https://www.ringsidenews.com/final-betting-odds-released-aew-double-nothing-2026/",
+    "score": 40,
+    "core": "title:darby-allin:status",
+    "reason": "update_gate:medium_followup_or_weak_update",
+    "ttl_hours": 8
   }
 ]
