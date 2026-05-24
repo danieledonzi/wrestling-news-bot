@@ -1,4 +1,4 @@
-name: OpenWrestlingTV Bot v90.2.6
+name: OpenWrestlingTV Bot v90.2.6.1
 
 on:
   workflow_dispatch:
@@ -51,10 +51,18 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Apply consolidated runtime chain
+      - name: Consolidate bot source
         run: |
           set -e
-          python scripts/apply_runtime_chain_v90_2_6.py
+          python scripts/consolidate_source_v90_2_6_1.py
+          if ! git diff --quiet -- bot.py; then
+            git add bot.py
+            git commit -m "chore(bot): persist v90.2.6.1 consolidated bot source"
+            git pull --rebase || echo "[v90.2.6.1] Warning: pull --rebase non riuscito, provo push diretto"
+            git push || echo "[v90.2.6.1] Warning: push consolidamento fallito, continuo la run bot"
+          else
+            echo "[v90.2.6.1] bot.py gia consolidato nel repository"
+          fi
 
       - name: Verify consolidated source
         run: |
@@ -79,14 +87,15 @@ jobs:
               'v90.2.5.3.1 tighten SNME and publish guards',
               'v90.2.5.4 event registry',
               'v90.2.5.4.1 event registry report key',
+              'v90.2.6.1 true source consolidation',
           ]
           missing = [m for m in required if m not in text]
           if missing:
-              raise SystemExit('[SOURCE CONSOLIDATION v90.2.6] missing markers: ' + ', '.join(missing))
-          print('[SOURCE CONSOLIDATION v90.2.6] bot.py contiene la chain consolidata fino a v90.2.5.4.1')
+              raise SystemExit('[SOURCE CONSOLIDATION v90.2.6.1] missing markers: ' + ', '.join(missing))
+          print('[SOURCE CONSOLIDATION v90.2.6.1] bot.py contiene source consolidato fino a v90.2.5.4.1')
           PY
 
-      - name: Run bot v90_2_6
+      - name: Run bot v90_2_6_1
         id: run_bot
         env:
           WP_USER: ${{ secrets.WP_USER }}
@@ -158,6 +167,6 @@ jobs:
             code=$(cat .bot_exit_code)
           fi
           if [ "$code" != "0" ]; then
-            echo "[BOT v90.2.6] Bot terminato con exit code $code"
+            echo "[BOT v90.2.6.1] Bot terminato con exit code $code"
             exit "$code"
           fi
