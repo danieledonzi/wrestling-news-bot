@@ -1,4 +1,4 @@
-name: OpenWrestlingTV Bot v90.2.6.1
+name: OpenWrestlingTV Bot v90.2.6.2
 
 on:
   workflow_dispatch:
@@ -51,17 +51,19 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Consolidate bot source
+      - name: Consolidate and clean bot source
         run: |
           set -e
           python scripts/consolidate_source_v90_2_6_1.py
+          python scripts/cleanup_boot_version_v90_2_6_2.py
+          python -m py_compile bot.py
           if ! git diff --quiet -- bot.py; then
             git add bot.py
-            git commit -m "chore(bot): persist v90.2.6.1 consolidated bot source"
-            git pull --rebase || echo "[v90.2.6.1] Warning: pull --rebase non riuscito, provo push diretto"
-            git push || echo "[v90.2.6.1] Warning: push consolidamento fallito, continuo la run bot"
+            git commit -m "chore(bot): persist v90.2.6.2 clean consolidated source"
+            git pull --rebase || echo "[v90.2.6.2] Warning: pull --rebase non riuscito, provo push diretto"
+            git push || echo "[v90.2.6.2] Warning: push consolidamento fallito, continuo la run bot"
           else
-            echo "[v90.2.6.1] bot.py gia consolidato nel repository"
+            echo "[v90.2.6.2] bot.py gia pulito nel repository"
           fi
 
       - name: Verify consolidated source
@@ -88,14 +90,17 @@ jobs:
               'v90.2.5.4 event registry',
               'v90.2.5.4.1 event registry report key',
               'v90.2.6.1 true source consolidation',
+              'v90.2.6.2 clean consolidated boot/version',
           ]
           missing = [m for m in required if m not in text]
           if missing:
-              raise SystemExit('[SOURCE CONSOLIDATION v90.2.6.1] missing markers: ' + ', '.join(missing))
-          print('[SOURCE CONSOLIDATION v90.2.6.1] bot.py contiene source consolidato fino a v90.2.5.4.1')
+              raise SystemExit('[SOURCE CONSOLIDATION v90.2.6.2] missing markers: ' + ', '.join(missing))
+          if 'v90_2_6_2_clean_consolidated_source' not in text:
+              raise SystemExit('[SOURCE CONSOLIDATION v90.2.6.2] version marker mancante')
+          print('[SOURCE CONSOLIDATION v90.2.6.2] bot.py contiene source consolidato e boot pulito')
           PY
 
-      - name: Run bot v90_2_6_1
+      - name: Run bot v90_2_6_2
         id: run_bot
         env:
           WP_USER: ${{ secrets.WP_USER }}
@@ -167,6 +172,6 @@ jobs:
             code=$(cat .bot_exit_code)
           fi
           if [ "$code" != "0" ]; then
-            echo "[BOT v90.2.6.1] Bot terminato con exit code $code"
+            echo "[BOT v90.2.6.2] Bot terminato con exit code $code"
             exit "$code"
           fi
