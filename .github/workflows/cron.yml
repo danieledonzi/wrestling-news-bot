@@ -1,4 +1,4 @@
-name: OpenWrestlingTV Bot v90.2.5.3.1
+name: OpenWrestlingTV Bot v90.2.5.4
 
 on:
   workflow_dispatch:
@@ -72,10 +72,12 @@ jobs:
           python scripts/apply_bot_patch_v90_2_5_2.py
           python scripts/apply_bot_patch_v90_2_5_3.py
           python scripts/apply_bot_patch_v90_2_5_3_1.py
+          python scripts/apply_bot_patch_v90_2_5_4.py
 
       - name: Verify consolidated source
         run: |
           set -e
+          python -m json.tool config/event_registry.json >/dev/null
           python -m py_compile bot.py
           python - <<'PY'
           from pathlib import Path
@@ -93,14 +95,15 @@ jobs:
               'v90.2.5.2 processed competitive guard',
               'v90.2.5.3 SNME event and publish processed guards',
               'v90.2.5.3.1 tighten SNME and publish guards',
+              'v90.2.5.4 event registry',
           ]
           missing = [m for m in required if m not in text]
           if missing:
-              raise SystemExit('[SOURCE CONSOLIDATION v90.2.5.3.1] missing markers: ' + ', '.join(missing))
-          print('[SOURCE CONSOLIDATION v90.2.5.3.1] bot.py contiene la chain consolidata fino a v90.2.5.3.1')
+              raise SystemExit('[SOURCE CONSOLIDATION v90.2.5.4] missing markers: ' + ', '.join(missing))
+          print('[SOURCE CONSOLIDATION v90.2.5.4] bot.py contiene la chain consolidata fino a v90.2.5.4')
           PY
 
-      - name: Run bot v90_2_5_3_1
+      - name: Run bot v90_2_5_4
         id: run_bot
         env:
           WP_USER: ${{ secrets.WP_USER }}
@@ -128,6 +131,10 @@ jobs:
           V90_2_5_3_ENABLED: "1"
           V90_2_5_3_SNME_FLOOR: "82"
           V90_2_5_3_1_ENABLED: "1"
+          V90_2_5_4_ENABLED: "1"
+          V90_2_5_4_REGISTRY_PATH: config/event_registry.json
+          V90_2_5_4_REPORT_FLOOR: "82"
+          V90_2_5_4_HARD_NEWS_FLOOR: "85"
         run: |
           set +e
           python bot.py
@@ -167,6 +174,6 @@ jobs:
             code=$(cat .bot_exit_code)
           fi
           if [ "$code" != "0" ]; then
-            echo "[BOT v90.2.5.3.1] Bot terminato con exit code $code"
+            echo "[BOT v90.2.5.4] Bot terminato con exit code $code"
             exit "$code"
           fi
