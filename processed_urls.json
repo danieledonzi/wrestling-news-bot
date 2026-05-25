@@ -467,11 +467,11 @@
       "raw_result": "skipped",
       "semantic_id": "bully-ray-questions-why-brock-lesnar-returned-to-wwe-so-quickly-after-retirement"
     },
-    "reason": "above_low_score_final_cap_not_final",
-    "score": 68,
-    "status": "competitive_deferred",
+    "reason": "skipped",
+    "score": 54,
+    "status": "rejected",
     "title": "Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'",
-    "updated_at": "1779715680.179677",
+    "updated_at": "1779725648.824042",
     "url": "https://www.wrestlinginc.com/2176982/bully-ray-brock-lesnar-wwe-return-retirement/"
   },
   "https://www.wrestlinginc.com/2177126/john-cena-explains-intention-behind-eponymous-wwe-event": {
@@ -635,10 +635,11 @@
   "https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more": {
     "extra": {
       "event_key": "report:wwe-snme-2026-05-23",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "wwe-saturday-nights-main-event-results-523-three-championships-on-the-line-more"
     },
-    "reason": "high_score_or_discussion_worthy_not_final",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 76,
     "status": "competitive_deferred",
     "title": "WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More",
@@ -749,5 +750,18 @@
     "title": "WWE HOFer On Danhausen: 'He's Everywhere'",
     "updated_at": "1779715524.0932062",
     "url": "https://www.wrestlinginc.com/2180368/wwe-hofer-danhausen-everywhere/"
+  },
+  "https://www.wrestlinginc.com/2180541/aew-will-ospreay-friction-united-empire-death-riders": {
+    "extra": {
+      "event_key": "event:aew-double-or-nothing-2026-05-25",
+      "raw_result": "skipped",
+      "semantic_id": "aews-will-ospreay-discusses-friction-between-united-empire-and-death-riders"
+    },
+    "reason": "above_low_score_final_cap_not_final",
+    "score": 68,
+    "status": "competitive_deferred",
+    "title": "AEW's Will Ospreay Discusses Friction Between United Empire And Death Riders",
+    "updated_at": "1779725635.8797948",
+    "url": "https://www.wrestlinginc.com/2180541/aew-will-ospreay-friction-united-empire-death-riders/"
   }
 }
