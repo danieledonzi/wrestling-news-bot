@@ -25421,12 +25421,6 @@ except Exception as e:
 print("[BOOT v90.2.8] Feed-level processed URL hard skip attivo")
 
 
-# v90.2.6.2 clean consolidated boot/version
-BOT_VERSION = "v90_2_6_2_clean_consolidated_source"
-BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
-print("[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1", flush=True)
-
-
 # v91 authoritative editorial pipeline refactor
 BOT_VERSION = "v91_editorial_pipeline_refactor"
 BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
@@ -25961,6 +25955,12 @@ except Exception as e:
     print(f"[V91.1] Warning v723 override failed: {e}")
 
 print("[BOOT v91.1] Score return contract guard attivo")
+
+
+# v90.2.6.2 clean consolidated boot/version
+BOT_VERSION = "v90_2_6_2_clean_consolidated_source"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+print("[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1", flush=True)
 
 
 if __name__ == "__main__":
