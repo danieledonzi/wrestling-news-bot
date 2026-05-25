@@ -663,10 +663,11 @@
   "https://www.wrestlinginc.com/2180261/wwe-hofer-confused-brock-lesnar-return": {
     "extra": {
       "event_key": "event:brock-lesnar-return",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "wwe-hofer-confused-by-brock-lesnar-return"
     },
-    "reason": "high_score_or_discussion_worthy_not_final",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 100,
     "status": "competitive_deferred",
     "title": "WWE HOFer Confused By Brock Lesnar Return",
