@@ -115,5 +115,23 @@
     "core": "title:darby-allin:status",
     "reason": "update_gate:medium_followup_or_weak_update",
     "ttl_hours": 12
+  },
+  {
+    "created_at": "2026-05-25T06:15:46",
+    "title": "MJF Explodes Online After Winning AEW World Title and Saving His Hair",
+    "url": "https://www.ringsidenews.com/mjf-explodes-online-winning-aew-world-title-saving-his-hair/",
+    "score": 60,
+    "core": "title:darby-allin:status",
+    "reason": "update_gate:medium_followup_or_weak_update",
+    "ttl_hours": 8
+  },
+  {
+    "created_at": "2026-05-25T06:15:46",
+    "title": "Fans Left Stranded After AEW Double or Nothing Runs Late in Queens",
+    "url": "https://www.ringsidenews.com/fans-left-stranded-aew-double-nothing-runs-late-queens/",
+    "score": 40,
+    "core": "title:mjf:status",
+    "reason": "update_gate:medium_followup_or_weak_update",
+    "ttl_hours": 8
   }
 ]

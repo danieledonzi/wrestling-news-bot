@@ -7307,3 +7307,154 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-25 03:50:53] VERSION [v90_2_6_2_clean_consolidated_source (08134c7)] =====
 
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1
+
+===== RUN START [2026-05-25 06:15:24] VERSION [v90_2_6_2_clean_consolidated_source (b56c5dc)] =====
+[PROCESSED v90.2.5.2] Migrati record non-final competitivi: 12
+[PROCESSED v90.2.5] Loaded processed URL records: 52
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[SKIP] Score sotto soglia editoriale (38/75): Tony Khan On Former WWE Star Ronda Rousey: 'She's Always Welcome In AEW'
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll/
+[SKIP] Score sotto soglia editoriale (5/75): Jim Ross On Kevin Nash Backing Wrestlers' Union: 'He Knows What He's Talking About'
+[SKIP] Score sotto soglia editoriale (33/75): AEW's Chris Jericho, Hurt Syndicate & The Elite Come Out On Top In Stadium Stampede
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177184/john-cena-in-ring-retirement-not-mean-retiring-wwe/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[SCORE v86.9] Cap commentary/opinion 100->68 - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[FOLLOWUP] Event key gia' vista ma angolo autonomo consentito: event:brock-lesnar-return - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[SKIP] Score sotto soglia editoriale (14/75): WWE's Jordynne Grace Working To Get Pilot's License For Charitable Cause
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - JBL On WWE Cutting Contracts: 'That's Life'
+[SKIP] Score sotto soglia editoriale (54/75): JBL On WWE Cutting Contracts: 'That's Life'
+[SKIP] Score sotto soglia editoriale (8/75): AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Thekla Retains AEW Women's World Title In Double Or Nothing Four-Way
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176831/aew-athena-roh-womens-world-title-wwe-roman-reigns/
+[SKIP] Score sotto soglia editoriale (30/75): Swerve Strickland Criticizes One Aspect Of Darby Allin's AEW World Title Win
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176685/jelly-roll-more-comedic-wwe-wrestlemania-storyline/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176571/wwe-wrestlemania-42-cm-punk-bron-breakker-roman-reigns-cody-rhodes-alternate-creative-plans-backstage-report/
+[SKIP] Score sotto soglia editoriale (50/75): Charlotte Flair, The Miz & Others Set For Meet & Greets At UFC Freedom 250
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[FOLLOWUP] Event key gia' vista ma angolo autonomo consentito: event:business:tony-khan - Tony Khan Says Paramount-WBD Deal Will Make TBS And TNT Stronger For AEW
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 65->54 - Fans Left Stranded After AEW Double or Nothing Runs Late in Queens
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Fans Left Stranded After AEW Double or Nothing Runs Late in Queens
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 71->54 - Kevin Knight Pulls Off Shocking Heel Turn At AEW Double Or Nothing
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Kevin Knight Pulls Off Shocking Heel Turn At AEW Double Or Nothing
+[SKIP] Score sotto soglia editoriale (40/75): Kevin Knight Pulls Off Shocking Heel Turn At AEW Double Or Nothing
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - MJF Wins AEW World Title For Third Time At Double Or Nothing
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 65->54 - MJF Wins AEW World Title For Third Time At Double Or Nothing
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - MJF Wins AEW World Title For Third Time At Double Or Nothing
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 65->54 - Thekla Defies The Odds To Retain AEW Women's Title At Double or Nothing
+[SCORE v88.3] v88.3 cap low-value market item 54->45 - Thekla Defies The Odds To Retain AEW Women's Title At Double or Nothing
+[SKIP] Score sotto soglia editoriale (28/75): Swerve Strickland Overcomes Bandido In Owen Hart Cup Tournament Match During AEW Double Or Nothing
+[SKIP] Score sotto soglia editoriale (28/75): Will Ospreay Beats Samoa Joe In Brutal Owen Hart Cup Tournament Match At AEW Double Or Nothing
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Jon Moxley Retains AEW Continental Championship In Brutal Contest At AEW Double or Nothing
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 84->54 - Jon Moxley Retains AEW Continental Championship In Brutal Contest At AEW Double or Nothing
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Jon Moxley Retains AEW Continental Championship In Brutal Contest At AEW Double or Nothing
+[SKIP] Score sotto soglia editoriale (28/75): Athena Advances In Women's Owen Hart Cup Quarterfinal At AEW Double or Nothing
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Kyle Fletcher Returns To Ruin Konosuke Takeshita's International Title Win At Double or Nothing
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 83->54 - Kyle Fletcher Returns To Ruin Konosuke Takeshita's International Title Win At Double or Nothing
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Kyle Fletcher Returns To Ruin Konosuke Takeshita's International Title Win At Double or Nothing
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Beth Copeland Makes AEW Return At Double Or Nothing 2026
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 83->54 - Beth Copeland Makes AEW Return At Double Or Nothing 2026
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Beth Copeland Makes AEW Return At Double Or Nothing 2026
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 65->54 - Adam Copeland & Christian Cage Tear The Ring Apart To Win AEW Tag Team Titles At Double or Nothing
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Adam Copeland & Christian Cage Tear The Ring Apart To Win AEW Tag Team Titles At Double or Nothing
+[SCORE v88.3] v88.3 hard feature skip cap 51->45 - Adam Copeland Suffers Unfortunate Wardrobe Malfunction at AEW Double or Nothing
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 83->54 - MJF Welcomes Mick Foley To AEW With Brutal Low Blow At Double Or Nothing
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - MJF Welcomes Mick Foley To AEW With Brutal Low Blow At Double Or Nothing
+[SCORE] 71 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | WWE/main roster, top star titolo: becky lynch, WWE main roster + storyline/evento, titolo/championship, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 68 medium - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, show settimanale, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 68 medium - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement' | WWE/main roster, top star titolo: brock lesnar, nomi forti titolo: bully ray, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, v62 ritorno/debutto, v86.9 cap commentary/opinion 100->68, v71 freshness=0.427, v48 tier2: 55-74
+[SCORE] 67 medium - Tony Khan Says Paramount-WBD Deal Will Make TBS And TNT Stronger For AEW | AEW, contratto, PLE/PPV, v62 media rights/streaming, v71 source reliability soft penalty, v71 freshness=0.574, v48 tier2: 55-74
+[SCORE] 67 medium - John Cena Explains Intention Behind Eponymous WWE Event | WWE/main roster, top star titolo: john cena, WWE main roster + storyline/evento, match/segmento annunciato, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 65 medium - Thekla Retains AEW Women's World Title In Double Or Nothing Four-Way | AEW, titolo/championship, PLE/PPV, v62 titolo/championship, v71 freshness=0.572, v48 tier2: 55-74
+[SCORE] 60 medium - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 60 medium - MJF Explodes Online After Winning AEW World Title and Saving His Hair | AEW, titolo/championship, PLE/PPV, v62 titolo/championship, v71 source reliability soft penalty, v71 freshness=0.56, v48 tier2: 55-74
+[SCORE] 40 low - Fans Left Stranded After AEW Double or Nothing Runs Late in Queens | AEW, titolo/championship, PLE/PPV, v62 titolo/championship, v88.2 cap OTHER/feature non-news 65->54, v88.3 hard feature skip cap 54->45, v71 source reliability soft penalty, v71 freshness=0.565, v48 tier4: 40-44 riempimento controllato
+[SCORE] 40 low - MJF Wins AEW World Title For Third Time At Double Or Nothing | AEW, titolo/championship, PLE/PPV, v62 titolo/championship, v88.2 cap OTHER/feature non-news 65->54, v88.3 hard feature skip cap 54->45, v71 source reliability soft penalty, v71 freshness=0.671, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 4
+[SKIP v90.2] Follow-up duplicato/non sostanziale core=return:brock-lesnar:wwe score=100 reason=no_new_substantial_fact_high_value novel=['brand_show'] - WWE HOFer Confused By Brock Lesnar Return
+[SKIP v90.2] Follow-up in soft_pool core=title:darby-allin:status score=82 reason=medium_followup_or_weak_update novel=[] - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Mick Foley Says He's Having a Blast in AEW Ahead of Double or Nothing Debut
+[EVENTREG v90.2.5.4.1] report key da registry: report:wwe-snme-2026-05-23
+[PERF v71] WP lookup URL esistente: 0.71s
+[BOT] Elaborazione: WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More
+[BOT] semantic_id=wwe-saturday-nights-main-event-results-523-three-championships-on-the-line-more
+[SCORE] iniziale=76 priority=medium
+[EVENTREG v90.2.5.4.1] report key da registry: report:wwe-snme-2026-05-23
+[SCRAPE] Articolo results rilevato: testo completo (14895 caratteri)
+[EMBED v88] Mappa posizionale media salvata: embeds=5 url=https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/
+[MEDIA v88.4] Rimossi embed derivati da credit immagine gallery: 10 url=https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=58, image=6, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=5 url=https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/
+[MEDIA v88.4] Rimossi embed derivati da credit immagine gallery: 10 url=https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/
+[BLOCKSEQ] Blocchi ordinati estratti: text=58, image=6, embed=0
+[EVENTREG v90.2.5.4.1] report key da registry: report:wwe-snme-2026-05-23
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[PERF v71] WP strict report lookup: 1.23s
+[BOT] News candidate totali: 17 | mode=normal | max nuove=3 | pending pubblicati=0
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SKIP v90.2] Follow-up in soft_pool core=return:brock-lesnar:wwe score=68 reason=covered_core_below_gate novel=[] - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[BOT] Elaborazione: Tony Khan Says Paramount-WBD Deal Will Make TBS And TNT Stronger For AEW
+[BOT] semantic_id=tony-khan-says-paramount-wbd-deal-will-make-tbs-and-tnt-stronger-for-aew
+[SCORE] iniziale=67 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/tony-khan-says-paramount-wbd-deal-will-make-tbs-tnt-stronger-aew/
+[PERF v71] scraping articolo: 5.05s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=18, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/tony-khan-says-paramount-wbd-deal-will-make-tbs-tnt-stronger-aew/
+[BLOCKSEQ] Blocchi ordinati estratti: text=18, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.74s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=BUSINESS (15) conf=0.95 model=gemini-3.1-flash-lite | Articolo basato su dichiarazioni di Tony Khan durante la conferenza post-Double or Nothing riguardanti accordi societari e future proprietà dei network TV.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'shares' con 'azioni' se suona troppo tecnico, mantenere il focus sul valore del titolo.; Mantenere i nomi dei network (TBS, TNT, HBO Max) invariati.; Evitare calchi burocratici per 'under the same roof', preferire 'sotto lo stesso tetto'.
+[CATEGORY v73] Business downgrade: BUSINESS -> AEW | focus non business reale
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | Articolo basato su dichiarazioni di Tony Khan durante la conferenza post-Double or Nothing riguardanti accordi societari e future proprietà dei network TV. | v73 business downgrade
+[PERF v71] analisi editoriale AI v72: 2.30s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Tony Khan Says Paramount-WBD Deal Will Make TBS And TNT Stronger For AEW
+[SCORE] raffinato=54 priority=low | AEW, contratto, PLE/PPV, opinione generica, v62 media rights/streaming, v68 cap duro opinion/commentary
+[PERF v71] scoring raffinato: 0.36s
+[SKIP v87] Blocco tier3 opinion/interview sotto 55: 54/55 - Tony Khan Says Paramount-WBD Deal Will Make TBS And TNT Stronger For AEW
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 54/75 - Tony Khan Says Paramount-WBD Deal Will Make TBS And TNT Stronger For AEW
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - John Cena Explains Intention Behind Eponymous WWE Event
+[EVENTREG v90.2.5.4] Single event news bloccata finche il report evento non e pubblicato score=65 - Thekla Retains AEW Women's World Title In Double Or Nothing Four-Way
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[PENDING] Coda salvata: 4 elementi
+[SOFTPOOL v90.2] Aggiunta: score=60 core=title:darby-allin:status reason=update_gate:medium_followup_or_weak_update title=MJF Explodes Online After Winning AEW World Title and Saving His Hair
+[SKIP v90.2] Follow-up in soft_pool core=title:darby-allin:status score=60 reason=medium_followup_or_weak_update novel=[] - MJF Explodes Online After Winning AEW World Title and Saving His Hair
+[SOFTPOOL v90.2] Aggiunta: score=40 core=title:mjf:status reason=update_gate:medium_followup_or_weak_update title=Fans Left Stranded After AEW Double or Nothing Runs Late in Queens
+[SKIP v90.2] Follow-up in soft_pool core=title:mjf:status score=40 reason=medium_followup_or_weak_update novel=['official_return'] - Fans Left Stranded After AEW Double or Nothing Runs Late in Queens
+[EVENTREG v90.2.5.4] Single event news bloccata finche il report evento non e pubblicato score=40 - MJF Wins AEW World Title For Third Time At Double Or Nothing
+[EVENTREG v90.2.5.4] Single event news bloccata finche il report evento non e pubblicato score=40 - Thekla Defies The Odds To Retain AEW Women's Title At Double or Nothing
+[EVENTREG v90.2.5.4] Single event news bloccata finche il report evento non e pubblicato score=40 - Jon Moxley Retains AEW Continental Championship In Brutal Contest At AEW Double or Nothing
+[BOT] Raggiunto limite massimo candidati nuovi provati
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 16 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-25 06:15:24_summary.json -> published_html_review/run_2026-05-25 06-15-24_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (763 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-25 06:15:24] VERSION [v90_2_6_2_clean_consolidated_source (b56c5dc)] =====
+
