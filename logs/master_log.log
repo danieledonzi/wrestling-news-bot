@@ -7657,3 +7657,98 @@
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-25 08:52:11] VERSION [v90_2_7_core_assignment_refactor (02ee06e)] =====
 
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.7] Central story core assignment attivo
+[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1
+[BOOT v90.2.7.1] Core authority hotfix attiva
+
+===== RUN START [2026-05-25 10:46:55] VERSION [v90_2_7_1_core_authority_hotfix (fcc16c6)] =====
+[PROCESSED v90.2.5.2] Migrati record non-final competitivi: 12
+[PROCESSED v90.2.5] Loaded processed URL records: 55
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[BOT v86.7] Errore item feed isolato: Tony Khan On Former WWE Star Ronda Rousey: 'She's Always Welcome In AEW' | https://www.wrestlinginc.com/2179706/tony-khan-wwe-ronda-rousey-aew-always-welcome/ | AttributeError: 'str' object has no attribute 'get'
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[BOT v86.7] Errore item feed isolato: WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | https://www.wrestlinginc.com/2177270/wwe-announces-major-change-becky-lynch-sol-ruca-snme/ | AttributeError: 'str' object has no attribute 'get'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll/
+[SKIP] Score sotto soglia editoriale (5/75): Jim Ross On Kevin Nash Backing Wrestlers' Union: 'He Knows What He's Talking About'
+[BOT v86.7] Errore item feed isolato: AEW's Chris Jericho, Hurt Syndicate & The Elite Come Out On Top In Stadium Stampede | https://www.wrestlinginc.com/2180341/aew-double-or-nothing-2026-chris-jericho-hurt-syndicate-elite-stadium-stampede/ | AttributeError: 'str' object has no attribute 'get'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177184/john-cena-in-ring-retirement-not-mean-retiring-wwe/
+[BOT v86.7] Errore item feed isolato: John Cena Explains Intention Behind Eponymous WWE Event | https://www.wrestlinginc.com/2177126/john-cena-explains-intention-behind-eponymous-wwe-event/ | AttributeError: 'str' object has no attribute 'get'
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[SCORE v86.9] Cap commentary/opinion 100->68 - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[FOLLOWUP] Event key gia' vista ma angolo autonomo consentito: event:brock-lesnar-return - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[SKIP] Score sotto soglia editoriale (14/75): WWE's Jordynne Grace Working To Get Pilot's License For Charitable Cause
+[BOT v86.7] Errore item feed isolato: JBL On WWE Cutting Contracts: 'That's Life' | https://www.wrestlinginc.com/2176917/wwe-jbl-john-bradshaw-layfield-cutting-contracts-thats-life/ | AttributeError: 'str' object has no attribute 'get'
+[SKIP] Score sotto soglia editoriale (8/75): AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena
+[BOT v86.7] Errore item feed isolato: Thekla Retains AEW Women's World Title In Double Or Nothing Four-Way | https://www.wrestlinginc.com/2180336/aew-double-or-nothing-2026-thekla-kris-statlander-hikaru-shida-jamie-hayter-retains-four-way/ | AttributeError: 'str' object has no attribute 'get'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176831/aew-athena-roh-womens-world-title-wwe-roman-reigns/
+[SKIP] Score sotto soglia editoriale (30/75): Swerve Strickland Criticizes One Aspect Of Darby Allin's AEW World Title Win
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176685/jelly-roll-more-comedic-wwe-wrestlemania-storyline/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176571/wwe-wrestlemania-42-cm-punk-bron-breakker-roman-reigns-cody-rhodes-alternate-creative-plans-backstage-report/
+[SKIP] Score sotto soglia editoriale (50/75): Charlotte Flair, The Miz & Others Set For Meet & Greets At UFC Freedom 250
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[BOT v86.7] Errore item feed isolato: Stadium Stampede Match at AEW Double or Nothing Faced Major Restrictions From New York Commission | https://www.ringsidenews.com/stadium-stampede-match-aew-double-nothing-faced-major-restrictions-new-york-commission/ | AttributeError: 'str' object has no attribute 'get'
+[BOT v86.7] Errore item feed isolato: Kevin Knight Drops Cryptic Tweet After Betraying Darby Allin at AEW Double or Nothing | https://www.ringsidenews.com/kevin-knight-drops-cryptic-tweet-betraying-darby-allin-aew-double-nothing/ | AttributeError: 'str' object has no attribute 'get'
+[BOT v86.7] Errore item feed isolato: Tony Khan Says Paramount-WBD Deal Will Make TBS And TNT Stronger For AEW | https://www.ringsidenews.com/tony-khan-says-paramount-wbd-deal-will-make-tbs-tnt-stronger-aew/ | AttributeError: 'str' object has no attribute 'get'
+[BOT v86.7] Errore item feed isolato: Fans Left Stranded After AEW Double or Nothing Runs Late in Queens | https://www.ringsidenews.com/fans-left-stranded-aew-double-nothing-runs-late-queens/ | AttributeError: 'str' object has no attribute 'get'
+[BOT v86.7] Errore item feed isolato: MJF Explodes Online After Winning AEW World Title and Saving His Hair | https://www.ringsidenews.com/mjf-explodes-online-winning-aew-world-title-saving-his-hair/ | AttributeError: 'str' object has no attribute 'get'
+[BOT v86.7] Errore item feed isolato: Kevin Knight Pulls Off Shocking Heel Turn At AEW Double Or Nothing | https://www.ringsidenews.com/kevin-knight-pulls-off-shocking-heel-turn-aew-double-nothing/ | AttributeError: 'str' object has no attribute 'get'
+[BOT v86.7] Errore item feed isolato: MJF Wins AEW World Title For Third Time At Double Or Nothing | https://www.ringsidenews.com/mjf-wins-aew-world-title-third-time-double-nothing/ | AttributeError: 'str' object has no attribute 'get'
+[BOT v86.7] Errore item feed isolato: Thekla Defies The Odds To Retain AEW Women's Title At Double or Nothing | https://www.ringsidenews.com/thekla-defies-odds-retain-aew-womens-title-double-nothing/ | AttributeError: 'str' object has no attribute 'get'
+[BOT v86.7] Errore item feed isolato: Swerve Strickland Overcomes Bandido In Owen Hart Cup Tournament Match During AEW Double Or Nothing | https://www.ringsidenews.com/swerve-strickland-overcomes-bandido-owen-hart-cup-tournament-match-during-aew-double-nothing/ | AttributeError: 'str' object has no attribute 'get'
+[BOT v86.7] Errore item feed isolato: Will Ospreay Beats Samoa Joe In Brutal Owen Hart Cup Tournament Match At AEW Double Or Nothing | https://www.ringsidenews.com/will-ospreay-beats-samoa-joe-brutal-owen-hart-cup-tournament-match-aew-double-nothing/ | AttributeError: 'str' object has no attribute 'get'
+[BOT v86.7] Errore item feed isolato: Jon Moxley Retains AEW Continental Championship In Brutal Contest At AEW Double or Nothing | https://www.ringsidenews.com/jon-moxley-retains-aew-continental-championship-brutal-contest-aew-double-nothing/ | AttributeError: 'str' object has no attribute 'get'
+[BOT v86.7] Errore item feed isolato: Athena Advances In Women's Owen Hart Cup Quarterfinal At AEW Double or Nothing | https://www.ringsidenews.com/athena-advances-womens-owen-hart-cup-quarterfinal-aew-double-nothing/ | AttributeError: 'str' object has no attribute 'get'
+[BOT v86.7] Errore item feed isolato: Kyle Fletcher Returns To Ruin Konosuke Takeshita's International Title Win At Double or Nothing | https://www.ringsidenews.com/kyle-fletcher-returns-ruin-konosuke-takeshitas-international-title-win-double-nothing/ | AttributeError: 'str' object has no attribute 'get'
+[BOT v86.7] Errore item feed isolato: Beth Copeland Makes AEW Return At Double Or Nothing 2026 | https://www.ringsidenews.com/beth-copeland-makes-aew-return-double-nothing-2026/ | AttributeError: 'str' object has no attribute 'get'
+[BOT v86.7] Errore item feed isolato: Adam Copeland & Christian Cage Tear The Ring Apart To Win AEW Tag Team Titles At Double or Nothing | https://www.ringsidenews.com/adam-copeland-christian-cage-tear-ring-apart-win-aew-tag-team-titles-double-nothing/ | AttributeError: 'str' object has no attribute 'get'
+[SCORE] 68 medium - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, show settimanale, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 68 medium - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement' | WWE/main roster, top star titolo: brock lesnar, nomi forti titolo: bully ray, impatto roster/storyline, WWE main roster + storyline/evento, ritorno/debutto, combo top name titolo + evento forte, v62 ritorno/debutto, v86.9 cap commentary/opinion 100->68, v71 freshness=0.427, v48 tier2: 55-74
+[SCORE] 60 medium - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE | WWE/main roster, impatto roster/storyline, WWE main roster + storyline/evento, release/addio, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 4
+[SKIP v90.2] Follow-up duplicato/non sostanziale core=return:brock-lesnar:wwe score=90 reason=no_new_substantial_fact_high_value novel=['brand_show'] - WWE HOFer Confused By Brock Lesnar Return
+[CORE v90.2.7.1] authority core=report:aew-double-or-nothing-2026-05-24 type=event_report title=AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[CORE v90.2.7] event_report core=report:aew-double-or-nothing-2026-05-24 title=AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[PERF v71] WP strict report lookup: 2.43s
+[PERF v71] WP lookup URL esistente: 2.55s
+[REPORT v79.1.6] Titolo report da event_key: AEW Double or Nothing: risultati e momenti salienti
+[REPORT] Valuto fonti per report: report:aew-double-or-nothing-2026-05-24
+[REPORT v86.9] Nessuna fonte aggregata valida: sources=0; provo candidato corrente
+[REPORT] Nessuna fonte valida per report: report:aew-double-or-nothing-2026-05-24
+[CORE v90.2.7.1] authority core=event:aew-double-or-nothing-2026-05-25:orange-cassidy-debut type=event_news title=Mick Foley Says He's Having a Blast in AEW Ahead of Double or Nothing Debut
+[CORE v90.2.7] event_news core=event:aew-double-or-nothing-2026-05-25:orange-cassidy-debut title=Mick Foley Says He's Having a Blast in AEW Ahead of Double or Nothing Debut
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Mick Foley Says He's Having a Blast in AEW Ahead of Double or Nothing Debut
+[CORE v90.2.7.1] authority core=report:wwe-snme-2026-05-23 type=event_report title=WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More
+[CORE v90.2.7] event_report core=report:wwe-snme-2026-05-23 title=WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More
+[PERF v71] WP strict report lookup: 1.41s
+[REPORT] Valuto fonti per report: report:wwe-snme-2026-05-23
+[REPORT v86.9] Nessuna fonte aggregata valida: sources=0; provo candidato corrente
+[REPORT] Nessuna fonte valida per report: report:wwe-snme-2026-05-23
+[BOT] News candidate totali: 3 | mode=normal | max nuove=3 | pending pubblicati=0
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SKIP v90.2] Follow-up in soft_pool core=return:brock-lesnar:wwe score=68 reason=covered_core_below_gate novel=[] - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[SKIP v86.6/legacy] low_value_opinion_pre_gemini: AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[PENDING] Coda salvata: 4 elementi
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 7 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-25 10:46:55_summary.json -> published_html_review/run_2026-05-25 10-46-55_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (766 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-25 10:46:55] VERSION [v90_2_7_1_core_authority_hotfix (fcc16c6)] =====
+

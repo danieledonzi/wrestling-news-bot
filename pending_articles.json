@@ -4,7 +4,7 @@
     "title": "WWE HOFer Confused By Brock Lesnar Return",
     "semantic_id": "wwe-hofer-confused-by-brock-lesnar-return",
     "title_key": "hofer-confused-by-brock-lesnar-return",
-    "score": 100,
+    "score": 90,
     "priority": "high",
     "event_key": "event:brock-lesnar-return",
     "story_signature_v71": "stable:brock_lesnar|confused_by_brock_lesnar_return|return|wwe",
@@ -29,7 +29,8 @@
       "combo top name titolo + evento forte",
       "show settimanale",
       "v62 ritorno/debutto",
-      "v71 freshness=0.69"
+      "v71 freshness=0.69",
+      "pending decay -10"
     ],
     "is_breaking": false,
     "breaking_expires_at": 1779672801.0,
