@@ -132,7 +132,11 @@ def main():
             raise SystemExit("[SOURCE PATCH v91.1] entrypoint marker not found")
         p.write_text(text.replace(needle, CODE + needle, 1), encoding="utf-8")
         print("[SOURCE PATCH v91.1] patch applicata a bot.py")
-    for patch_name in ("scripts/apply_bot_patch_v91_2.py", "scripts/apply_bot_patch_v91_3.py"):
+    for patch_name in (
+        "scripts/apply_bot_patch_v91_2.py",
+        "scripts/apply_bot_patch_v91_3.py",
+        "scripts/apply_bot_patch_v91_4.py",
+    ):
         patch = Path(patch_name)
         if patch.exists():
             print(f"[SOURCE PATCH v91.1] apply {patch_name}", flush=True)
