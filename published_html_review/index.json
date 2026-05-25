@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-25 12:03:19",
-  "last_bot_version": "v90_2_6_2_clean_consolidated_source (dc63f6d)",
-  "updated_at": "2026-05-25T12:04:53",
-  "total_items": 197,
+  "last_run_id": "2026-05-25 13:24:36",
+  "last_bot_version": "v90_2_8_feed_level_processed_skip (53effda)",
+  "updated_at": "2026-05-25T13:28:00",
+  "total_items": 198,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1580,6 +1580,14 @@
       "original_html_file": "20260525_120453_001_mjf-festeggia-la-vittoria-dell-aew-world-championship-e-deride-i-fan-dopo-il-tit_c6f0bac9_original.html",
       "final_html_file": "20260525_120453_001_mjf-festeggia-la-vittoria-dell-aew-world-championship-e-deride-i-fan-dopo-il-tit_c6f0bac9_final.html",
       "metadata_file": "20260525_120453_001_mjf-festeggia-la-vittoria-dell-aew-world-championship-e-deride-i-fan-dopo-il-tit_c6f0bac9_metadata.json"
+    },
+    {
+      "run_id": "2026-05-25 13:24:36",
+      "title": "Paul Wight: \"Chiesi a Floyd Mayweather di rompermi il naso, poi lui lasciò l'arena\"",
+      "url": "https://www.ringsidenews.com/paul-wight-claims-floyd-mayweather-left-wwe-arena-breaking-his-nose/",
+      "original_html_file": "20260525_132759_001_paul-wight-chiesi-a-floyd-mayweather-di-rompermi-il-naso-poi-lui-lasci-l-arena_1948f8d3_original.html",
+      "final_html_file": "20260525_132759_001_paul-wight-chiesi-a-floyd-mayweather-di-rompermi-il-naso-poi-lui-lasci-l-arena_1948f8d3_final.html",
+      "metadata_file": "20260525_132759_001_paul-wight-chiesi-a-floyd-mayweather-di-rompermi-il-naso-poi-lui-lasci-l-arena_1948f8d3_metadata.json"
     }
   ]
 }

@@ -113,7 +113,7 @@
     ],
     "count": 12,
     "first_seen": "2026-05-21T16:04:55",
-    "last_seen": "2026-05-25T12:03:39"
+    "last_seen": "2026-05-25T13:25:16"
   },
   "return:mark-shapiro:wwe": {
     "titles": [
@@ -367,14 +367,17 @@
   },
   "title:mjf:status": {
     "titles": [
-      "AEW's MJF Blames Vince McMahon For Making Stipulation Into A Joke"
+      "AEW's MJF Blames Vince McMahon For Making Stipulation Into A Joke",
+      "20260525_120452_001_mjf-festeggia-la-vittoria-dellaew-world-championship-e-deride-i-fan-dopo-il-title-vs-hair_5252_final.html",
+      "20260525_120453_001_mjf-festeggia-la-vittoria-dell-aew-world-championship-e-deride-i-fan-dopo-il-tit_c6f0bac9_final.html",
+      "20260525_120453_001_mjf-festeggia-la-vittoria-dell-aew-world-championship-e-deride-i-fan-dopo-il-tit_c6f0bac9_original.html"
     ],
     "facts": [
       "wwe_impact"
     ],
-    "count": 1,
+    "count": 4,
     "first_seen": "2026-05-21T21:11:11",
-    "last_seen": "2026-05-21T21:11:11"
+    "last_seen": "2026-05-25T13:25:17"
   },
   "legal:mjf:case": {
     "titles": [
@@ -853,5 +856,29 @@
     "count": 1,
     "first_seen": "2026-05-25T12:04:53",
     "last_seen": "2026-05-25T12:04:53"
+  },
+  "event:wwe-backlash-2026-05-25:sol-ruca-debut": {
+    "titles": [
+      "20260521_211337_002_sol-ruca-svela-il-supporto-di-triple-h-dopo-le-critiche-al-suo-debutto-a-raw_cb26c12d_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "brand_show",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-25T13:25:15",
+    "last_seen": "2026-05-25T13:25:15"
+  },
+  "event:wwe-wrestlemania-2026-05-25:paul-wight-floyd-mayweather-left-story": {
+    "titles": [
+      "Paul Wight Claims Floyd Mayweather Left WWE Arena After Breaking His Nose"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-25T13:27:59",
+    "last_seen": "2026-05-25T13:27:59"
   }
 }
