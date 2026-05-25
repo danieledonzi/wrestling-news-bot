@@ -471,7 +471,7 @@
     "score": 68,
     "status": "competitive_deferred",
     "title": "Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'",
-    "updated_at": "1779706054.433613",
+    "updated_at": "1779710625.4533982",
     "url": "https://www.wrestlinginc.com/2176982/bully-ray-brock-lesnar-wwe-return-retirement/"
   },
   "https://www.wrestlinginc.com/2177126/john-cena-explains-intention-behind-eponymous-wwe-event": {
@@ -536,7 +536,7 @@
     "score": 60,
     "status": "competitive_deferred",
     "title": "AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE",
-    "updated_at": "1779706054.649723",
+    "updated_at": "1779710625.847174",
     "url": "https://www.wrestlinginc.com/2177312/aew-swerve-strickland-aleister-black-zelina-vega-wwe/"
   },
   "https://www.wrestlinginc.com/2177532/wwe-jbl-john-bradshaw-layfield-talent-infinitely-better-increases-live-event-schedule": {
@@ -635,15 +635,14 @@
   "https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more": {
     "extra": {
       "event_key": "report:wwe-snme-2026-05-23",
-      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "wwe-saturday-nights-main-event-results-523-three-championships-on-the-line-more"
     },
-    "reason": "v90_2_5_2_migrated_not_final",
+    "reason": "high_score_or_discussion_worthy_not_final",
     "score": 76,
     "status": "competitive_deferred",
     "title": "WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More",
-    "updated_at": "1779706054.215007",
+    "updated_at": "1779710625.1948678",
     "url": "https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more/"
   },
   "https://www.wrestlinginc.com/2180008/aew-double-or-nothing-2026-five-titles-on-line-stadium-stampede-match": {
@@ -656,7 +655,7 @@
     "score": 82,
     "status": "competitive_deferred",
     "title": "AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match",
-    "updated_at": "1779706052.261239",
+    "updated_at": "1779710623.124935",
     "url": "https://www.wrestlinginc.com/2180008/aew-double-or-nothing-2026-five-titles-on-line-stadium-stampede-match/"
   },
   "https://www.wrestlinginc.com/2180133/sol-ruca-granted-womens-ic-title-match-following-controversial-becky-lynch-dq": {
@@ -702,15 +701,14 @@
   "https://www.wrestlinginc.com/2180261/wwe-hofer-confused-brock-lesnar-return": {
     "extra": {
       "event_key": "event:brock-lesnar-return",
-      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "wwe-hofer-confused-by-brock-lesnar-return"
     },
-    "reason": "v90_2_5_2_migrated_not_final",
-    "score": 90,
+    "reason": "above_low_score_final_cap_not_final",
+    "score": 80,
     "status": "competitive_deferred",
     "title": "WWE HOFer Confused By Brock Lesnar Return",
-    "updated_at": "1779706047.1677873",
+    "updated_at": "1779710623.2604554",
     "url": "https://www.wrestlinginc.com/2180261/wwe-hofer-confused-brock-lesnar-return/"
   },
   "https://www.wrestlinginc.com/2180267/wwe-snme-may-23-2026-biggest-winners-losers-opinion-review": {

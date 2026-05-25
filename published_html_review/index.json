@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-25 11:51:59",
-  "last_bot_version": "v90_2_7_2_queue_type_report_source_fix (fc4d639)",
-  "updated_at": "2026-05-25T11:52:32",
-  "total_items": 196,
+  "last_run_id": "2026-05-25 12:03:19",
+  "last_bot_version": "v90_2_6_2_clean_consolidated_source (dc63f6d)",
+  "updated_at": "2026-05-25T12:04:53",
+  "total_items": 197,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1572,6 +1572,14 @@
       "original_html_file": "20260524_234115_002_wwe-the-godfather-firma-un-nuovo-contratto-quinquennale-da-legend_8d5f1ab6_original.html",
       "final_html_file": "20260524_234115_002_wwe-the-godfather-firma-un-nuovo-contratto-quinquennale-da-legend_8d5f1ab6_final.html",
       "metadata_file": "20260524_234115_002_wwe-the-godfather-firma-un-nuovo-contratto-quinquennale-da-legend_8d5f1ab6_metadata.json"
+    },
+    {
+      "run_id": "2026-05-25 12:03:19",
+      "title": "MJF festeggia la vittoria dell'AEW World Championship e deride i fan dopo il Title vs. Hair Match",
+      "url": "https://www.ringsidenews.com/mjf-explodes-online-winning-aew-world-title-saving-his-hair/",
+      "original_html_file": "20260525_120453_001_mjf-festeggia-la-vittoria-dell-aew-world-championship-e-deride-i-fan-dopo-il-tit_c6f0bac9_original.html",
+      "final_html_file": "20260525_120453_001_mjf-festeggia-la-vittoria-dell-aew-world-championship-e-deride-i-fan-dopo-il-tit_c6f0bac9_final.html",
+      "metadata_file": "20260525_120453_001_mjf-festeggia-la-vittoria-dell-aew-world-championship-e-deride-i-fan-dopo-il-tit_c6f0bac9_metadata.json"
     }
   ]
 }

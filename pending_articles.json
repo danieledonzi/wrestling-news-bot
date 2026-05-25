@@ -1,45 +1,5 @@
 [
   {
-    "url": "https://www.wrestlinginc.com/2180261/wwe-hofer-confused-brock-lesnar-return/",
-    "title": "WWE HOFer Confused By Brock Lesnar Return",
-    "semantic_id": "wwe-hofer-confused-by-brock-lesnar-return",
-    "title_key": "hofer-confused-by-brock-lesnar-return",
-    "score": 90,
-    "priority": "high",
-    "event_key": "event:brock-lesnar-return",
-    "story_signature_v71": "stable:brock_lesnar|confused_by_brock_lesnar_return|return|wwe",
-    "summary": "Brock Lesnar's return on \"WWE Raw\" left the wrestling world surprised, and for one Hall of Famer, it left him confused as well.",
-    "reasons": [
-      "WWE/main roster",
-      "top star titolo: brock lesnar",
-      "impatto roster/storyline",
-      "WWE main roster + storyline/evento",
-      "ritorno/debutto",
-      "combo top name titolo + evento forte",
-      "show settimanale",
-      "v62 ritorno/debutto",
-      "v71 freshness=0.69"
-    ],
-    "score_reasons": [
-      "WWE/main roster",
-      "top star titolo: brock lesnar",
-      "impatto roster/storyline",
-      "WWE main roster + storyline/evento",
-      "ritorno/debutto",
-      "combo top name titolo + evento forte",
-      "show settimanale",
-      "v62 ritorno/debutto",
-      "v71 freshness=0.69",
-      "pending decay -10"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1779672801.0,
-    "status": "raw",
-    "reason": "wp_down_initial_normal",
-    "created_at": 1779661878.6742146,
-    "attempts": 0
-  },
-  {
     "url": "https://www.wrestlinginc.com/2180008/aew-double-or-nothing-2026-five-titles-on-line-stadium-stampede-match/",
     "title": "AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match",
     "semantic_id": "aew-double-or-nothing-results-524-five-titles-on-the-line-stadium-stampede-match",
