@@ -1,4 +1,6 @@
 from pathlib import Path
+import subprocess
+import sys
 
 MARK = "# v91.1 score return contract guard"
 CODE = r'''
@@ -122,14 +124,18 @@ def main():
     text = p.read_text(encoding="utf-8")
     if MARK in text:
         print("[SOURCE PATCH v91.1] bot.py gia aggiornato")
-        return 0
-    if "# v91 authoritative editorial pipeline refactor" not in text:
-        raise SystemExit("[SOURCE PATCH v91.1] base v91 mancante")
-    needle = '\n\nif __name__ == "__main__":\n'
-    if needle not in text:
-        raise SystemExit("[SOURCE PATCH v91.1] entrypoint marker not found")
-    p.write_text(text.replace(needle, CODE + needle, 1), encoding="utf-8")
-    print("[SOURCE PATCH v91.1] patch applicata a bot.py")
+    else:
+        if "# v91 authoritative editorial pipeline refactor" not in text:
+            raise SystemExit("[SOURCE PATCH v91.1] base v91 mancante")
+        needle = '\n\nif __name__ == "__main__":\n'
+        if needle not in text:
+            raise SystemExit("[SOURCE PATCH v91.1] entrypoint marker not found")
+        p.write_text(text.replace(needle, CODE + needle, 1), encoding="utf-8")
+        print("[SOURCE PATCH v91.1] patch applicata a bot.py")
+    patch = Path("scripts/apply_bot_patch_v91_2.py")
+    if patch.exists():
+        print("[SOURCE PATCH v91.1] apply scripts/apply_bot_patch_v91_2.py", flush=True)
+        subprocess.run([sys.executable, str(patch)], check=True)
     return 0
 
 if __name__ == "__main__":
