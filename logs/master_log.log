@@ -2928,3 +2928,222 @@ ValueError: too many values to unpack (expected 2)
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-25 21:28:13] VERSION [v91_5_html_integrity_block_safe_repair (dedcecc)] =====
 
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.7] Central story core assignment attivo
+[BOOT v90.2.7.1] Core authority hotfix attiva
+[BOOT v90.2.7.2] Queue type contract + report source guard attivi
+[BOOT v90.2.8] Feed-level processed URL hard skip attivo
+[BOOT v91] Authoritative editorial pipeline refactor attivo
+[BOOT v91.1] Score return contract guard attivo
+[BOOT v91.2] Publish contract + authoritative lane guard attivo
+[BOOT v91.3] v723 parser corrected
+[BOOT v91.4] Publish processed + soft pool repair attivi
+[BOOT v91.4.1] Strict publish return tuple contract attivo
+[BOOT v91.5] HTML integrity guard + block-safe repair policy attivi
+[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1
+
+===== RUN START [2026-05-25 22:04:42] VERSION [v90_2_6_2_clean_consolidated_source (fe36ddd)] =====
+[PROCESSED v91.4] Published artifact reconcile: scanned=185 fixed=0
+[SOFTPOOL v91.4] cleanup keep=3 expired=0 migrated=0
+[PROCESSED v90.2.5.2] Migrati record non-final competitivi: 16
+[PROCESSED v90.2.5] Loaded processed URL records: 250
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[SCORE v81.1] Cap light name-driven item 14->14 - AEW's Will Ospreay Reflects On What Wembley Stadium Means To Him
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - AEW's Will Ospreay Reflects On What Wembley Stadium Means To Him
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=s-will-ospreay-reflects-what-wembley-stadium-means-him-star - AEW's Will Ospreay Reflects On What Wembley Stadium Means To Him
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[V91.5 HARD SKIP] listicle/opinion automatico escluso: AEW Double Or Nothing 2026: Biggest Winners And Losers
+[V91.1 CHEAP] hard skip score=20 reasons=['discussion_value_signal', 'event_registry_match', 'v91_5_hard_skip_listicle_opinion'] - AEW Double Or Nothing 2026: Biggest Winners And Losers
+[SKIP] Score sotto soglia editoriale (20/75): AEW Double Or Nothing 2026: Biggest Winners And Losers
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[V91.5 HARD SKIP] listicle/opinion automatico escluso: AEW Double Or Nothing 2026: 3 Things We Hated & 3 Things We Loved
+[V91.1 CHEAP] hard skip score=20 reasons=['discussion_value_signal', 'event_registry_match', 'v91_5_hard_skip_listicle_opinion'] - AEW Double Or Nothing 2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (20/75): AEW Double Or Nothing 2026: 3 Things We Hated & 3 Things We Loved
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Mick Foley Shares Social Media Reaction Following AEW Double Or Nothing Debut
+[V91 AI] cache hit - Mick Foley Shares Social Media Reaction Following AEW Double Or Nothing Debut
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:aew-double-or-nothing-2026-05-25:mick-foley-shares-social-media-debut - Mick Foley Shares Social Media Reaction Following AEW Double Or Nothing Debut
+[PERF v71] WP lookup event_key: 1.24s
+[SKIP] event_key confermata su WordPress: event:aew-double-or-nothing-2026-05-25 - Mick Foley Shares Social Media Reaction Following AEW Double Or Nothing Debut
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[SCORE v86.9] Cap commentary/opinion 100->68 - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91 AI] cache hit - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=bully-ray-questions-why-brock-lesnar-returned-so-quickly-retirement - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[FOLLOWUP] Event key gia' vista ma angolo autonomo consentito: event:brock-lesnar-return - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[V91.1 CHEAP] hard skip score=20 reasons=['deterministic_soft_trash'] - WWE's Jordynne Grace Working To Get Pilot's License For Charitable Cause
+[SKIP] Score sotto soglia editoriale (14/75): WWE's Jordynne Grace Working To Get Pilot's License For Charitable Cause
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[V91 AI] cache hit - JBL On WWE Cutting Contracts: 'That's Life'
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:wwe-wrestlemania-2026-05-25:jbl-cutting-contracts-that-s-story - JBL On WWE Cutting Contracts: 'That's Life'
+[PERF v71] WP lookup event_key: 1.18s
+[SKIP] event_key confermata su WordPress: event:wwe-wrestlemania-2026-05-25 - JBL On WWE Cutting Contracts: 'That's Life'
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[V91 AI] cache hit - AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=s-swerve-strickland-says-young-bucks-changed-their-minds-anarchy - AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena
+[SKIP] Score sotto soglia editoriale (39/75): AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176831/aew-athena-roh-womens-world-title-wwe-roman-reigns/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[V91 AI] cache hit - AEW's Tony Khan Praises David Ellison Ahead Of WBD/Paramount Deal
+[V91.1 SCORE] 74 lane=strategic_pool class=strategic_discussion core=business:tony-khan:paramount-wbd-warner - AEW's Tony Khan Praises David Ellison Ahead Of WBD/Paramount Deal
+[PERF v71] WP lookup event_key: 1.14s
+[FIX] Event key in history ma non confermata su WordPress: event:business:tony-khan - provo a pubblicare
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176730/swerve-strickland-criticizes-darby-allin-aew-world-title/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176685/jelly-roll-more-comedic-wwe-wrestlemania-storyline/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176571/wwe-wrestlemania-42-cm-punk-bron-breakker-roman-reigns-cody-rhodes-alternate-creative-plans-backstage-report/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[V91 AI] cache hit - Charlotte Flair, The Miz & Others Set For Meet & Greets At UFC Freedom 250
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=charlotte-flair-miz-others-set-meet-greets-freedom-250-during - Charlotte Flair, The Miz & Others Set For Meet & Greets At UFC Freedom 250
+[SKIP] Score sotto soglia editoriale (39/75): Charlotte Flair, The Miz & Others Set For Meet & Greets At UFC Freedom 250
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[V91 AI] cache hit - WWE's Stephanie McMahon Reveals How To Tell Whether She's Going To Slap Someone
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=s-stephanie-mcmahon-reveals-how-tell-whether-she-s-going - WWE's Stephanie McMahon Reveals How To Tell Whether She's Going To Slap Someone
+[SKIP] Score sotto soglia editoriale (39/75): WWE's Stephanie McMahon Reveals How To Tell Whether She's Going To Slap Someone
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[SCORE v88.3] v88.3 hard feature skip cap 51->45 - Jack Perry's AEW Stadium Stampede Spot Led To Concern From Locals
+[V91 AI] cache hit - Jack Perry's AEW Stadium Stampede Spot Led To Concern From Locals
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:aew-double-or-nothing-2026-05-25:jack-perry-story - Jack Perry's AEW Stadium Stampede Spot Led To Concern From Locals
+[SKIP] event_key confermata su WordPress: event:aew-double-or-nothing-2026-05-25 - Jack Perry's AEW Stadium Stampede Spot Led To Concern From Locals
+[EVENTREG v90.2.5.4] Event report score floor 80->82 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[V91 AI] cache hit - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[V91.1 SCORE] 84 lane=publish_now class=strategic_discussion core=report:aew-double-or-nothing-2026-05-24 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[SKIP] URL già in history: https://www.wrestlinginc.com/2180267/wwe-snme-may-23-2026-biggest-winners-losers-opinion-review/
+[SPOILER v79.1.1] NO: hard auto-no editorial type/report
+[V91.5 HARD SKIP] listicle/opinion automatico escluso: WWE SNME - 5/23/2026: 3 Things We Hated And 3 We Loved
+[V91.1 CHEAP] hard skip score=20 reasons=['discussion_value_signal', 'event_registry_match', 'v91_5_hard_skip_listicle_opinion'] - WWE SNME - 5/23/2026: 3 Things We Hated And 3 We Loved
+[SKIP] Score sotto soglia editoriale (14/75): WWE SNME - 5/23/2026: 3 Things We Hated And 3 We Loved
+[SKIP v71] Story signature gia' in history: report:wwe-snme-2026-05-23 - WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[V91 AI] cache hit - Live Fan Footage Confirms Jack Perry's AEW Double or Nothing Bus Crash Wasn't Pre-Taped
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:aew-double-or-nothing-2026-05-25:jack-perry-story - Live Fan Footage Confirms Jack Perry's AEW Double or Nothing Bus Crash Wasn't Pre-Taped
+[SKIP] event_key confermata su WordPress: event:aew-double-or-nothing-2026-05-25 - Live Fan Footage Confirms Jack Perry's AEW Double or Nothing Bus Crash Wasn't Pre-Taped
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[V91 AI] cache hit - Netflix Executive Explains Why WWE Chose Italy for Clash in Italy Premium Live Event
+[V91.1 SCORE] 74 lane=strategic_pool class=strategic_discussion core=event:wwe-clash-2026-05-25:netflix-executive-explains-why-chose-story - Netflix Executive Explains Why WWE Chose Italy for Clash in Italy Premium Live Event
+[SKIP] Score sotto soglia editoriale (69/75): Netflix Executive Explains Why WWE Chose Italy for Clash in Italy Premium Live Event
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[V91 AI] cache hit - FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:aew-double-or-nothing-2026-05-25:ftr-approaching-contract-option-year-story - FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest
+[SKIP] event_key confermata su WordPress: event:aew-double-or-nothing-2026-05-25 - FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest
+[SKIP] URL già in history: https://www.ringsidenews.com/britt-bakers-aew-return-status-gets-discouraging-update-amid-tv-absence/
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[V91 AI] cache hit - Kyle Fletcher Breaks Silence After Betraying Konosuke Takeshita at AEW Double or Nothing
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:aew-double-or-nothing-2026-05-25:kyle-fletcher-breaks-silence-betraying-story - Kyle Fletcher Breaks Silence After Betraying Konosuke Takeshita at AEW Double or Nothing
+[SKIP] event_key confermata su WordPress: event:aew-double-or-nothing-2026-05-25 - Kyle Fletcher Breaks Silence After Betraying Konosuke Takeshita at AEW Double or Nothing
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Mick Foley's AEW Plans Revealed After Double or Nothing Debut
+[FRESHNESS v86.6/legacy] Post-show outcome rescue: non tratto come preview scaduta - Mick Foley's AEW Plans Revealed After Double or Nothing Debut
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 100->54 - Mick Foley's AEW Plans Revealed After Double or Nothing Debut
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Mick Foley's AEW Plans Revealed After Double or Nothing Debut
+[V91 AI] cache hit - Mick Foley's AEW Plans Revealed After Double or Nothing Debut
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:aew-double-or-nothing-2026-05-25:tony-khan-debut - Mick Foley's AEW Plans Revealed After Double or Nothing Debut
+[SKIP] event_key confermata su WordPress: event:aew-double-or-nothing-2026-05-25 - Mick Foley's AEW Plans Revealed After Double or Nothing Debut
+[SPOILER v79.1] Gemini classifier: gemini-3.1-flash-lite
+[SPOILER v79.1.1] NO: Gemini NOT_SPOILER
+[V91 AI] cache hit - MVP Unloads on Five-Star Match System Over Kurt Angle Snub: "Ridiculous"
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:wwe-wrestlemania-2026-05-25:mvp-unloads-five-star-system-story - MVP Unloads on Five-Star Match System Over Kurt Angle Snub: "Ridiculous"
+[SKIP] event_key confermata su WordPress: event:wwe-wrestlemania-2026-05-25 - MVP Unloads on Five-Star Match System Over Kurt Angle Snub: "Ridiculous"
+[SKIP v71] Story signature gia' in history: event:aew-double-or-nothing-2026-05-25:darby-allin-world - Mike Bailey Drops Multiple F-Bombs After Kevin Knight's Heel Turn at AEW Double or Nothing
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[V91 AI] cache hit - Tiffany Stratton Reveals WWE Tryout Was Halted After She Dropped Out of College to Chase Wrestling Career
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=tiffany-stratton-reveals-tryout-was-halted-she-dropped-out-college - Tiffany Stratton Reveals WWE Tryout Was Halted After She Dropped Out of College to Chase Wrestling Career
+[SKIP] URL già in history: https://www.ringsidenews.com/tiffany-stratton-reveals-why-she-ditched-original-wwe-finisher-fearing-serious-injury/
+[SKIP] URL già in history: https://www.ringsidenews.com/wwes-current-stance-ludwig-kaiser-recent-arrest-revealed/
+[SPOILER v79.1.1] NO: nessun evento live attivo
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91 AI] cache hit - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=mvp-reveals-he-thought-was-ribbing-him-bodysuit-pay-per - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[SKIP] URL già in history: https://www.ringsidenews.com/mvp-calls-triple-h-coward-liar-while-revealing-why-he-left-wwe/
+[SKIP] URL già in history: https://www.ringsidenews.com/bronson-reed-shows-off-massive-physique-during-wwe-absence/
+[SKIP] URL già in history: https://www.ringsidenews.com/vince-russo-says-triple-h-should-have-fired-instead-getting-raise/
+[SCORE] 78 medium - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match | event_report, major_title_outcome, v71 low freshness/novelty, v71 freshness=0.31
+[SCORE] 76 medium - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement' | concrete_outcome, v71 freshness=0.427
+[SCORE] 74 medium - AEW's Tony Khan Praises David Ellison Ahead Of WBD/Paramount Deal | discussion_value, v71 freshness=0.59, v48 tier2: 55-74
+[SCORE] 71 medium - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut | concrete_outcome, v71 source reliability soft penalty, v71 freshness=0.638, v48 tier2: 55-74
+[SCORE] 45 low - AEW's Will Ospreay Reflects On What Wembley Stadium Means To Him | discussion_value_signal, v71 freshness=0.606, v48 tier3: 45-54 contestuale
+[SCORE] 40 low - Tiffany Stratton Reveals WWE Tryout Was Halted After She Dropped Out of College to Chase Wrestling Career | discussion_value_signal, v71 source reliability soft penalty, v71 freshness=0.527, v48 tier4: 40-44 riempimento controllato
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 6 | mode=normal | max nuove=3 | pending pubblicati=0
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=RESULTS_REPORT value=strategic_discussion - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[V91 DECISION] allow legacy publish path score=84 lane=publish_now core=report:aew-double-or-nothing-2026-05-24 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[CORE v90.2.7.1] authority core=report:aew-double-or-nothing-2026-05-24 type=event_report title=AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[CORE v90.2.7] event_report core=report:aew-double-or-nothing-2026-05-24 title=AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[PERF v71] WP strict report lookup: 2.18s
+[REPORT v79.1.6] Titolo report da event_key: AEW Double or Nothing: risultati e momenti salienti
+[REPORT] Valuto fonti per report: report:aew-double-or-nothing-2026-05-24
+[REPORT v86.9] Nessuna fonte aggregata valida: sources=0; provo candidato corrente
+[REPORT] Nessuna fonte valida per report: report:aew-double-or-nothing-2026-05-24
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OPINION value=strategic_discussion - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91 DECISION] allow legacy publish path score=76 lane=publish_candidate core=bully-ray-questions-why-brock-lesnar-returned-so-quickly-retirement - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - AEW's Tony Khan Praises David Ellison Ahead Of WBD/Paramount Deal
+[V91 DECISION] allow legacy publish path score=74 lane=strategic_pool core=business:tony-khan:paramount-wbd-warner - AEW's Tony Khan Praises David Ellison Ahead Of WBD/Paramount Deal
+[CORE v90.2.7.1] authority core=business:tony-khan:paramount-wbd-warner type=business title=AEW's Tony Khan Praises David Ellison Ahead Of WBD/Paramount Deal
+[CORE v90.2.7] business core=business:tony-khan:paramount-wbd-warner title=AEW's Tony Khan Praises David Ellison Ahead Of WBD/Paramount Deal
+[CORE v90.2.7] business core=business:tony-khan:paramount-wbd-warner title=AEW's Tony Khan Praises David Ellison Ahead Of WBD/Paramount Deal
+[SKIP v90.2] Follow-up in soft_pool core=business:tony-khan:paramount-wbd-warner score=74 reason=v91_2_authoritative_lane novel=['v91_2'] - AEW's Tony Khan Praises David Ellison Ahead Of WBD/Paramount Deal
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91 DECISION] allow legacy publish path score=76 lane=publish_candidate core=mvp-reveals-he-thought-was-ribbing-him-bodysuit-pay-per - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[BOT] Elaborazione: MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[BOT] semantic_id=mvp-reveals-he-thought-wwe-was-ribbing-him-with-original-bodysuit-before-pay-per-view-debut
+[SCORE] iniziale=71 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/mvp-reveals-he-thought-wwe-ribbing-him-original-bodysuit-before-pay-per-view-debut/
+[PERF v71] scraping articolo: 1.20s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=18, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/mvp-reveals-he-thought-wwe-ribbing-him-original-bodysuit-before-pay-per-view-debut/
+[BLOCKSEQ] Blocchi ordinati estratti: text=18, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.71s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo racconta un aneddoto retrospettivo sulla carriera di MVP in WWE, non riguarda eventi futuri o report di match.
+[EDITORIAL v72.3] translation_notes=Mantenere 'bodysuit' o tradurre come 'tuta' a seconda del contesto, non usare 'costume da pattinaggio' letterale se non necessario.; 'Rib' va reso come 'scherzo' o 'presa in giro'.; 'Main roster' resta invariato.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo racconta un aneddoto retrospettivo sulla carriera di MVP in WWE, non riguarda eventi futuri o report di match.
+[PERF v71] analisi editoriale AI v72: 12.88s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91 AI] cache hit - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:wwe-wrestlemania-2026-05-25:mvp-reveals-he-thought-was-debut - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91 AI] cache hit - 71
+[V91 AI] cache hit - 76
+[V91 AI] cache hit - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[SCORE] raffinato=76 priority=medium | event_related, concrete_outcome
+[PERF v71] scoring raffinato: 0.60s
+[V71] story_signature=event:wwe-wrestlemania-2026-05-25:mvp-reveals-he-thought-was-debut semantic_status=new_story freshness=0.638
+[PERF v71] dedupe/freshness v71: 0.62s
+[PERF v71] WP recent posts dedupe: 1.15s
+[SKIP] Event key già pubblicata nella run e confermata su WordPress: event:wwe-wrestlemania-2026-05-25 - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[PENDING] Coda salvata: 0 elementi
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - AEW's Will Ospreay Reflects On What Wembley Stadium Means To Him
+[V91 DECISION] skip_final score=45 reasons=['discussion_value_signal'] - AEW's Will Ospreay Reflects On What Wembley Stadium Means To Him
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - Tiffany Stratton Reveals WWE Tryout Was Halted After She Dropped Out of College to Chase Wrestling Career
+[V91 DECISION] skip_final score=45 reasons=['discussion_value_signal'] - Tiffany Stratton Reveals WWE Tryout Was Halted After She Dropped Out of College to Chase Wrestling Career
+[BOT] Pubblicati 0 articoli (0 pending + 0 nuove) su 6 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-25 22:04:42_summary.json -> published_html_review/run_2026-05-25 22-04-42_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (807 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-25 22:04:42] VERSION [v90_2_6_2_clean_consolidated_source (fe36ddd)] =====
+
