@@ -7,6 +7,8 @@ from pathlib import Path
 PATCHES = [
     "scripts/apply_bot_patch_v90_2_7_2.py",
     "scripts/apply_bot_patch_v90_2_8.py",
+    "scripts/apply_bot_patch_v91.py",
+    "scripts/apply_bot_patch_v91_1.py",
 ]
 
 
@@ -14,8 +16,8 @@ def main() -> int:
     for patch in PATCHES:
         p = Path(patch)
         if not p.exists():
-            raise SystemExit(f"[SOURCE PATCH v90.2.8] patch mancante: {patch}")
-        print(f"[SOURCE PATCH v90.2.8] apply {patch}", flush=True)
+            raise SystemExit(f"[SOURCE PATCH v91] patch mancante: {patch}")
+        print(f"[SOURCE PATCH v91] apply {patch}", flush=True)
         subprocess.run([sys.executable, patch], check=True)
     return 0
 
