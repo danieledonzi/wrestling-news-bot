@@ -21,16 +21,22 @@ def v90272_assign_from_text(title="", url="", text=""):
 
 
 def v90272_story_signature_result(original_result, core):
-    """Always return a dict-compatible story signature payload."""
+    """Preserve the legacy return type of build_story_signature_v71.
+
+    The active bot expects build_story_signature_v71 to return a dict and later calls
+    .get('signature'). Returning a plain string breaks feed item processing with
+    AttributeError: 'str' object has no attribute 'get'.
+    """
     if isinstance(original_result, dict):
         out = dict(original_result)
-    else:
-        out = {}
-    out["signature"] = core
-    out["core"] = core
-    out["news_core_key"] = core
-    out["assigned_by"] = "v90.2.7.2"
-    return out
+        out["signature"] = core
+        out["core"] = core
+        out["news_core_key"] = core
+        out["assigned_by"] = "v90.2.7.2"
+        return out
+    if isinstance(original_result, str):
+        return core
+    return {"signature": core, "core": core, "news_core_key": core, "assigned_by": "v90.2.7.2"}
 
 
 def v90272_args_to_title_text_url(args, kwargs):
@@ -53,7 +59,7 @@ try:
         assigned = v90272_assign_from_text(title, url, text)
         if assigned.get("core"):
             return v90272_story_signature_result(original, assigned["core"])
-        return original if isinstance(original, dict) else v90272_story_signature_result(original, str(original or ""))
+        return original
 except Exception:
     pass
 
@@ -65,7 +71,7 @@ try:
         assigned = v90272_assign_from_text(title, url, text)
         if assigned.get("core"):
             return v90272_story_signature_result(original, assigned["core"])
-        return original if isinstance(original, dict) else v90272_story_signature_result(original, str(original or ""))
+        return original
 except Exception:
     pass
 
@@ -84,33 +90,24 @@ def v90272_processed_record_is_final(rec):
     return False
 
 
-def v90272_load_processed_store():
-    try:
-        if "v9025_load_processed" in globals():
-            return v9025_load_processed()
-        if "v9025_load_processed_records" in globals():
-            return v9025_load_processed_records()
-        if "v9025_load_processed_urls" in globals():
-            return v9025_load_processed_urls()
-    except Exception as e:
-        print(f"[PROCESSED v90.2.7.2] Warning load processed store: {e}")
-    return None
-
-
 def v90272_processed_url_final(url):
     if not V90_2_7_2_ENABLED or not url:
         return False, None
     try:
-        data = v90272_load_processed_store()
+        if "v9025_load_processed_records" in globals():
+            data = v9025_load_processed_records()
+        elif "v9025_load_processed_urls" in globals():
+            data = v9025_load_processed_urls()
+        else:
+            return False, None
         records = data.get("records", data) if isinstance(data, dict) else data
         rec = None
         if isinstance(records, dict):
-            norm = normalize_url_for_history(url) if "normalize_url_for_history" in globals() else url
-            rec = records.get(url) or records.get(norm)
+            rec = records.get(url) or records.get(normalize_url_for_history(url) if "normalize_url_for_history" in globals() else url)
         if v90272_processed_record_is_final(rec):
             return True, rec
     except Exception as e:
-        print(f"[PROCESSED v90.2.7.2] Warning processed check: {e}")
+        print(f"[PROCESSED v90.2.7.2] Warning feed-level processed check: {e}")
     return False, None
 
 try:
