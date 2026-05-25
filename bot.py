@@ -25153,12 +25153,6 @@ except Exception:
 print("[BOOT v90.2.7.1] Core authority hotfix attiva")
 
 
-# v90.2.6.2 clean consolidated boot/version
-BOT_VERSION = "v90_2_6_2_clean_consolidated_source"
-BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
-print("[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1", flush=True)
-
-
 # v90.2.7.2 queue type and report source fix
 BOT_VERSION = "v90_2_7_2_queue_type_report_source_fix"
 BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
@@ -25307,6 +25301,12 @@ except Exception:
     pass
 
 print("[BOOT v90.2.7.2] Queue type contract + report source guard attivi")
+
+
+# v90.2.6.2 clean consolidated boot/version
+BOT_VERSION = "v90_2_6_2_clean_consolidated_source"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+print("[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1", flush=True)
 
 
 if __name__ == "__main__":
