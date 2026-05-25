@@ -94,7 +94,8 @@
       "20260521_160512_001_ludwig-kaiser-chiede-il-processo-per-l-accusa-di-percosse-in-florida_dbfe604d_final.html",
       "20260521_160512_001_ludwig-kaiser-chiede-il-processo-per-l-accusa-di-percosse-in-florida_dbfe604d_original.html",
       "20260522_160348_002_aggiornamenti-sui-viaggi-di-ludwig-kaiser-dopo-l-arresto_3ffcce3a_final.html",
-      "20260522_160348_002_aggiornamenti-sui-viaggi-di-ludwig-kaiser-dopo-l-arresto_3ffcce3a_original.html"
+      "20260522_160348_002_aggiornamenti-sui-viaggi-di-ludwig-kaiser-dopo-l-arresto_3ffcce3a_original.html",
+      "WWE's Current Stance on Ludwig Kaiser After Recent Arrest Revealed"
     ],
     "facts": [
       "arrest",
@@ -111,9 +112,9 @@
       "attorney",
       "official_date"
     ],
-    "count": 12,
+    "count": 13,
     "first_seen": "2026-05-21T16:04:55",
-    "last_seen": "2026-05-25T13:25:16"
+    "last_seen": "2026-05-25T17:44:45"
   },
   "return:mark-shapiro:wwe": {
     "titles": [
@@ -880,5 +881,41 @@
     "count": 1,
     "first_seen": "2026-05-25T13:27:59",
     "last_seen": "2026-05-25T13:27:59"
+  },
+  "report:wwe-snme-2026-05-25": {
+    "titles": [
+      "20260525_174107_001_wwe-saturday-nights-main-event-del-25-maggio-2026-risultati-e-momenti-salienti_5258_final.html"
+    ],
+    "facts": [
+      "wwe_impact",
+      "date:25 maggio 2026",
+      "date_update"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-25T17:44:21",
+    "last_seen": "2026-05-25T17:44:21"
+  },
+  "event:aew-double-or-nothing-2026-05-25:adam-copeland-story": {
+    "titles": [
+      "Beth Copeland Reacts After Surprise Return at AEW Double or Nothing"
+    ],
+    "facts": [
+      "official_return"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-25T17:45:50",
+    "last_seen": "2026-05-25T17:45:50"
+  },
+  "event:aew-all-out-2026-05-25:matt-hardy-story": {
+    "titles": [
+      "Matt Hardy Shuts Down Accusations He Leaked AEW Brawl Out Information to Dirt Sheets"
+    ],
+    "facts": [
+      "official_return",
+      "brand_show"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-25T17:46:25",
+    "last_seen": "2026-05-25T17:46:25"
   }
 }

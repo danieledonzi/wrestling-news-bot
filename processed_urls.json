@@ -261,7 +261,7 @@
     "score": 76,
     "status": "competitive_deferred",
     "title": "MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut",
-    "updated_at": "1779730916.2262318",
+    "updated_at": "1779731090.724493",
     "url": "https://www.ringsidenews.com/mvp-reveals-he-thought-wwe-ribbing-him-original-bodysuit-before-pay-per-view-debut/"
   },
   "https://www.ringsidenews.com/new-day-current-status-aew-double-nothing": {
@@ -789,5 +789,18 @@
     "title": "AEW's Will Ospreay Discusses Friction Between United Empire And Death Riders",
     "updated_at": "1779725635.8797948",
     "url": "https://www.wrestlinginc.com/2180541/aew-will-ospreay-friction-united-empire-death-riders/"
+  },
+  "https://www.wrestlinginc.com/2180606/tony-khan-aew-fight-fallen-rebel-als-diagnosis": {
+    "extra": {
+      "event_key": "event:tanea-brooks-rebel-als-diagnosis",
+      "raw_result": "skipped",
+      "semantic_id": "tony-khan-wants-to-bring-back-aew-charity-event-following-rebels-als-diagnosis"
+    },
+    "reason": "high_score_or_discussion_worthy_not_final",
+    "score": 72,
+    "status": "competitive_deferred",
+    "title": "Tony Khan Wants To Bring Back AEW Charity Event, Following Rebel's ALS Diagnosis",
+    "updated_at": "1779731152.8585722",
+    "url": "https://www.wrestlinginc.com/2180606/tony-khan-aew-fight-fallen-rebel-als-diagnosis/"
   }
 }
