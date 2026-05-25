@@ -1,9 +1,9 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-25 20:55:08",
-  "bot_version": "v91_4_publish_processed_softpool_repair (a307075)",
-  "git_sha": "a307075fc5fed93a2cddf3b775e1db6ade5f4e5c",
-  "created_at": "2026-05-25T20:56:16",
+  "run_id": "2026-05-25 21:28:13",
+  "bot_version": "v91_5_html_integrity_block_safe_repair (dedcecc)",
+  "git_sha": "dedcecceef730d52397f7efc517318e763821338",
+  "created_at": "2026-05-25T21:29:07",
   "published_count": 0,
   "published_post_ids": [],
   "published_artifacts": [],
