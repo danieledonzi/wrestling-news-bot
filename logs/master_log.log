@@ -1122,3 +1122,481 @@ Traceback (most recent call last):
     post_id, post_json = create_post_without_image(
     ^^^^^^^^^^^^^^^^^^
 ValueError: too many values to unpack (expected 2)
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.7] Central story core assignment attivo
+[BOOT v90.2.7.1] Core authority hotfix attiva
+[BOOT v90.2.7.2] Queue type contract + report source guard attivi
+[BOOT v90.2.8] Feed-level processed URL hard skip attivo
+[BOOT v91] Authoritative editorial pipeline refactor attivo
+[BOOT v91.1] Score return contract guard attivo
+[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1
+
+===== RUN START [2026-05-25 17:40:08] VERSION [v90_2_6_2_clean_consolidated_source (a3a72ea)] =====
+[PROCESSED v90.2.5.2] Migrati record non-final competitivi: 11
+[PROCESSED v90.2.5] Loaded processed URL records: 58
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OPINION value=strategic_discussion - MJF Says WWE Is Trying To Make AEW Look Bad
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=mjf-says-is-trying-make-look-bad-current-three-time - MJF Says WWE Is Trying To Make AEW Look Bad
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/
+[SCORE v81.1] Cap light name-driven item 49->49 - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[V91 AI] cache hit - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=star-says-undertaker-yelled-him-stop-wearing-confederate-flag-this - Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[SKIP] Score sotto soglia editoriale (39/75): Former WWE Star Says Undertaker Yelled At Him To Stop Wearing Confederate Flag
+[V91.1 CHEAP] hard skip score=20 reasons=['deterministic_soft_trash'] - WWE Raw Viewership & Ratings Report, 5/11/2026
+[SKIP] Score sotto soglia editoriale (14/75): WWE Raw Viewership & Ratings Report, 5/11/2026
+[V91 AI] cache hit - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=s-swerve-strickland-comments-aleister-black-zelina-vega-departing-star - AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[SKIP] Score sotto soglia editoriale (39/75): AEW's Swerve Strickland Comments On Aleister Black And Zelina Vega Departing WWE
+[V91 AI] cache hit - Tony Khan Wants To Bring Back AEW Charity Event, Following Rebel's ALS Diagnosis
+[V91.1 SCORE] 70 lane=strategic_pool class=strategic_discussion core=tony-khan-wants-bring-back-charity-event-following-rebel-s - Tony Khan Wants To Bring Back AEW Charity Event, Following Rebel's ALS Diagnosis
+[PERF v71] WP lookup event_key: 1.39s
+[FIX] Event key in history ma non confermata su WordPress: event:tanea-brooks-rebel-als-diagnosis - provo a pubblicare
+[REPORT v87.2] Report confermato da history forte: report:wwe-nxt-2026-05-19
+[REPORT v86.8/legacy] True results report confermato su WordPress: skip report:wwe-nxt-2026-05-19 - WWE NXT Results 5/19 - Two Championships Up For Grabs, Keanu Carver Faces Tate Wilder
+[V91 AI] cache hit - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:wwe-snme-2026-05-25:becky-lynch-story - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll/
+[V91 AI] cache hit - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=joe-hendry-says-will-soon-release-an-album-his-songs - Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[SKIP] Score sotto soglia editoriale (39/75): Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs
+[V91 AI] cache hit - Jim Ross On Kevin Nash Backing Wrestlers' Union: 'He Knows What He's Talking About'
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=jim-ross-kevin-nash-backing-wrestlers-union-he-knows-what - Jim Ross On Kevin Nash Backing Wrestlers' Union: 'He Knows What He's Talking About'
+[SKIP] Score sotto soglia editoriale (39/75): Jim Ross On Kevin Nash Backing Wrestlers' Union: 'He Knows What He's Talking About'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177184/john-cena-in-ring-retirement-not-mean-retiring-wwe/
+[V91 AI] cache hit - AEW's Tony Khan Discusses 'Interesting' Opportunity With WrestleMania In Saudi Arabia
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:wwe-wrestlemania-2026-05-25:tony-khan-story - AEW's Tony Khan Discusses 'Interesting' Opportunity With WrestleMania In Saudi Arabia
+[SKIP] Score sotto soglia editoriale (72/75): AEW's Tony Khan Discusses 'Interesting' Opportunity With WrestleMania In Saudi Arabia
+[V91 AI] cache hit - John Cena Explains Intention Behind Eponymous WWE Event
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:wwe-backlash-2026-05-25:john-cena-story - John Cena Explains Intention Behind Eponymous WWE Event
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[SCORE v86.9] Cap commentary/opinion 100->68 - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91 AI] cache hit - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=bully-ray-questions-why-brock-lesnar-returned-so-quickly-retirement - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[FOLLOWUP] Event key gia' vista ma angolo autonomo consentito: event:brock-lesnar-return - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91.1 CHEAP] hard skip score=20 reasons=['deterministic_soft_trash'] - WWE's Jordynne Grace Working To Get Pilot's License For Charitable Cause
+[SKIP] Score sotto soglia editoriale (14/75): WWE's Jordynne Grace Working To Get Pilot's License For Charitable Cause
+[V91 AI] cache hit - JBL On WWE Cutting Contracts: 'That's Life'
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:wwe-wrestlemania-2026-05-25:mjf-story - JBL On WWE Cutting Contracts: 'That's Life'
+[PERF v71] WP lookup event_key: 2.59s
+[SKIP] event_key confermata su WordPress: event:wwe-wrestlemania-2026-05-25 - JBL On WWE Cutting Contracts: 'That's Life'
+[V91 AI] cache hit - AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=s-swerve-strickland-says-young-bucks-changed-their-minds-anarchy - AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena
+[SKIP] Score sotto soglia editoriale (39/75): AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176831/aew-athena-roh-womens-world-title-wwe-roman-reigns/
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[V91 AI] cache hit - WWE's Current Stance on Ludwig Kaiser After Recent Arrest Revealed
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=s-current-stance-ludwig-kaiser-recent-arrest-is-apparently-not - WWE's Current Stance on Ludwig Kaiser After Recent Arrest Revealed
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91 AI] cache hit - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=mvp-reveals-he-thought-was-ribbing-him-bodysuit-pay-per - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91 AI] cache hit - MVP Calls Triple H a "Coward and a Liar" While Revealing Why He Left WWE
+[V91.1 SCORE] 70 lane=strategic_pool class=strategic_discussion core=mvp-calls-triple-h-a-coward-a-liar-while-revealing - MVP Calls Triple H a "Coward and a Liar" While Revealing Why He Left WWE
+[V91 AI] cache hit - Bronson Reed Shows Off Massive Physique During WWE Absence
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=bronson-reed-shows-off-massive-physique-during-absence-bronson-reed - Bronson Reed Shows Off Massive Physique During WWE Absence
+[V91 AI] cache hit - Vince Russo Says Triple H Should Have Been Fired Instead of Getting a Raise
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=vince-russo-says-triple-h-should-have-been-fired-instead - Vince Russo Says Triple H Should Have Been Fired Instead of Getting a Raise
+[V91 AI] cache hit - Title Match Added to May 25 WWE RAW
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:wwe-clash-2026-05-25:penta-story - Title Match Added to May 25 WWE RAW
+[SKIP] Score sotto soglia editoriale (67/75): Title Match Added to May 25 WWE RAW
+[V91 AI] cache hit - QT Marshall's Condition After Scary Fall at AEW Double or Nothing
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:aew-double-or-nothing-2026-05-25:tony-khan-story - QT Marshall's Condition After Scary Fall at AEW Double or Nothing
+[PERF v71] WP lookup event_key: 1.55s
+[SKIP] event_key confermata su WordPress: event:aew-double-or-nothing-2026-05-25 - QT Marshall's Condition After Scary Fall at AEW Double or Nothing
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[V91 AI] cache hit - Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:aew-double-or-nothing-2026-05-25:adam-copeland-story - Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:aew-double-or-nothing-2026-05-25 - Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[SKIP v71] Story signature gia' vista nella run: event:wwe-snme-2026-05-25:becky-lynch-story - Becky Lynch Blasts Sol Ruca for Assaulting WWE Referee Ahead of RAW
+[V91 AI] cache hit - Pat McAfee Welcomes Second Child with Wife Samantha After Emergency C-Section
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=pat-mcafee-welcomes-second-child-wife-samantha-emergency-c-section - Pat McAfee Welcomes Second Child with Wife Samantha After Emergency C-Section
+[SKIP] Score sotto soglia editoriale (40/75): Pat McAfee Welcomes Second Child with Wife Samantha After Emergency C-Section
+[SKIP v71] Story signature gia' in history: event:aew-double-or-nothing-2026-05-25:darby-allin-world - MJF's Wife Alicia Atout Reacts After He Gets Keeps His Hair and Wins AEW World Title at Double or Nothing
+[V91 AI] cache hit - Matt Hardy Shuts Down Accusations He Leaked AEW Brawl Out Information to Dirt Sheets
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:aew-all-out-2026-05-25:matt-hardy-story - Matt Hardy Shuts Down Accusations He Leaked AEW Brawl Out Information to Dirt Sheets
+[SKIP] URL già in history: https://www.ringsidenews.com/paul-wight-claims-floyd-mayweather-left-wwe-arena-breaking-his-nose/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - CM Punk Spotted Looking Absolutely Jacked Ahead of WWE Return
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 100->54 - CM Punk Spotted Looking Absolutely Jacked Ahead of WWE Return
+[V91.1 CHEAP] hard skip score=20 reasons=['deterministic_soft_trash'] - CM Punk Spotted Looking Absolutely Jacked Ahead of WWE Return
+[SKIP] Score sotto soglia editoriale (15/75): CM Punk Spotted Looking Absolutely Jacked Ahead of WWE Return
+[V91.1 CHEAP] hard skip score=20 reasons=['deterministic_soft_trash'] - Kevin Nash Blames Wrestling Media for Twisting His Comments Into Negative Clickbait
+[SKIP] Score sotto soglia editoriale (15/75): Kevin Nash Blames Wrestling Media for Twisting His Comments Into Negative Clickbait
+[SCORE] 77 medium - WWE's Current Stance on Ludwig Kaiser After Recent Arrest Revealed | hard_news, v71 source reliability soft penalty, v71 freshness=0.696
+[SCORE] 77 medium - Bronson Reed Shows Off Massive Physique During WWE Absence | hard_news, v71 source reliability soft penalty, v71 freshness=0.685
+[SCORE] 77 medium - Vince Russo Says Triple H Should Have Been Fired Instead of Getting a Raise | discussion_value, hard_news, v71 source reliability soft penalty, v71 freshness=0.679
+[SCORE] 76 medium - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement' | concrete_outcome, v71 freshness=0.427
+[SCORE] 71 medium - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut | concrete_outcome, v71 source reliability soft penalty, v71 freshness=0.693, v48 tier2: 55-74
+[SCORE] 71 medium - Beth Copeland Reacts After Surprise Return at AEW Double or Nothing | event_related, concrete_outcome, v71 source reliability soft penalty, v71 freshness=0.669, v48 tier5: v71 major story bypass
+[SCORE] 70 medium - Tony Khan Wants To Bring Back AEW Charity Event, Following Rebel's ALS Diagnosis | discussion_value, v71 freshness=0.597, v48 tier2: 55-74
+[SCORE] 67 medium - Matt Hardy Shuts Down Accusations He Leaked AEW Brawl Out Information to Dirt Sheets | event_related, v71 source reliability soft penalty, v71 freshness=0.534, v48 tier2: 55-74
+[SCORE] 66 medium - WWE Announces Major Change To Becky Lynch/Sol Ruca SNME Match | event_related, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 66 medium - John Cena Explains Intention Behind Eponymous WWE Event | event_related, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 12 | mode=normal | max nuove=3 | pending pubblicati=0
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - WWE's Current Stance on Ludwig Kaiser After Recent Arrest Revealed
+[V91 DECISION] allow legacy publish path score=82 lane=publish_now core=s-current-stance-ludwig-kaiser-recent-arrest-is-apparently-not - WWE's Current Stance on Ludwig Kaiser After Recent Arrest Revealed
+[UPDATEGATE v90.2] True update OK core=legal:ludwig-kaiser:case score=77 reason=v91_authoritative_lane novel=['v91']
+[PERF v71] WP lookup URL esistente: 0.72s
+[BOT] Elaborazione: WWE's Current Stance on Ludwig Kaiser After Recent Arrest Revealed
+[BOT] semantic_id=wwes-current-stance-on-ludwig-kaiser-after-recent-arrest-revealed
+[SCORE] iniziale=77 priority=medium
+[PERF v71] scraping articolo: 1.07s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=10, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.71s
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | L'articolo riporta indiscrezioni e aggiornamenti sullo status lavorativo di Ludwig Kaiser in merito alla sua situazione legale e al suo coinvolgimento in storyline, non trattandosi di un report di un evento concluso.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'misdemeanor battery' letteralmente: usare 'accusa di percosse'.; Mantenere i nomi delle cinture/titoli in inglese.; 'Not planning to punish' va reso come 'nessun provvedimento disciplinare previsto'.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo riporta indiscrezioni e aggiornamenti sullo status lavorativo di Ludwig Kaiser in merito alla sua situazione legale e al suo coinvolgimento in storyline, non trattandosi di un report di un evento concluso.
+[PERF v71] analisi editoriale AI v72: 16.31s
+[V91 AI] cache hit - WWE's Current Stance on Ludwig Kaiser After Recent Arrest Revealed
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=business:business:paramount - WWE's Current Stance on Ludwig Kaiser After Recent Arrest Revealed
+[V91 AI] cache hit - 77
+[SCORE] raffinato=56 priority=low | concrete_outcome, discussion_value, hard_news, v72.3 cap rumor: niente boost raffinamento, v72.3 cap rumor, v77 AI reason/type coherence: PREVIEW cap
+[PERF v71] scoring raffinato: 0.37s
+[SKIP] Score sotto soglia editoriale dopo raffinamento: 56/75 - WWE's Current Stance on Ludwig Kaiser After Recent Arrest Revealed
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - Bronson Reed Shows Off Massive Physique During WWE Absence
+[V91 DECISION] allow legacy publish path score=82 lane=publish_now core=bronson-reed-shows-off-massive-physique-during-absence-bronson-reed - Bronson Reed Shows Off Massive Physique During WWE Absence
+[PERF v71] WP lookup URL esistente: 0.71s
+[BOT] Elaborazione: Bronson Reed Shows Off Massive Physique During WWE Absence
+[BOT] semantic_id=bronson-reed-shows-off-massive-physique-during-wwe-absence
+[SCORE] iniziale=77 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/bronson-reed-shows-off-massive-physique-during-wwe-absence/
+[PERF v71] scraping articolo: 0.96s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/bronson-reed-shows-off-massive-physique-during-wwe-absence/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.68s
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta un aggiornamento sulla condizione fisica di Bronson Reed durante il periodo di infortunio, non è una preview di un evento né un report completo.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'World Tag Team Championship' né 'The Vision'.; 'Sidelined' va tradotto come 'fuori dalle scene' o 'fermo ai box', non 'accantonato'.; 'Break the internet' può essere lasciato in inglese essendo una citazione diretta.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta un aggiornamento sulla condizione fisica di Bronson Reed durante il periodo di infortunio, non è una preview di un evento né un report completo.
+[PERF v71] analisi editoriale AI v72: 1.08s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Bronson Reed Shows Off Massive Physique During WWE Absence
+[V91 AI] cache hit - Bronson Reed Shows Off Massive Physique During WWE Absence
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=report:wwe-snme-2026-05-25 - Bronson Reed Shows Off Massive Physique During WWE Absence
+[SCORE v79.1.3] Recovery post-show 62->77 - Bronson Reed Shows Off Massive Physique During WWE Absence
+[EVENTREG v90.2.5.4] Event report AI floor 77->82 - Bronson Reed is clearly not wasting time while away from WWE television. The RAW star took to X with a new photo showing off a noticeably bigger and more shredded physique while continuing his recovery from injury. Reed kept the message short and confident with a simple caption. "Break the internet." The post immediately got fans talking as Reed appeared to be in incredible shape despite still being sidelined from WWE programming. Reed has been absent from RAW since suffering a torn distal biceps in his right arm during a February episode of the show. WWE has not confirmed when he will be cleared to return to action. Before the injury, Reed had been working as part of The Vision faction alongside Logan Paul and Austin Theory. The group remains active on RAW, with Logan Paul and Theory currently holding the World Tag Team Championship after retaining their titles against The Street Profits at Saturday Night's Main Event. Bron Breakker has mostly handled singles duties for The Vision during Reed's absence, including stepping up during the group's recent appearances on RAW and SNME. Now, based on his latest photo, Bronson Reed looks more than ready to make an impact once he finally returns to WWE television. What do you think about Bronson Reed's new look during his WWE absence? Let us know your thoughts and feedback in the comments below. Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.
+[V91 AI] cache hit - 77
+[SCORE] raffinato=82 priority=high | event_report, concrete_outcome, hard_news, v77 cap low editorial value after AI, v79.1.3 post-show recovery 62->77
+[PERF v71] scoring raffinato: 0.39s
+[V71] story_signature=report:wwe-snme-2026-05-25 semantic_status=new_story freshness=0.802
+[PERF v71] dedupe/freshness v71: 0.36s
+[PERF v71] WP recent posts dedupe: 0.80s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.11s
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=9
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 4.15s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TEXT v90.2.4.2] Report name casing guard applicata
+[TITLE v90.2.4.1] Report hard-title forzato: Wwe Snme del 25 maggio 2026: risultati e momenti salienti
+[PERF v71] WP strict report lookup: 1.65s
+[TITLE v90.1.1] Report title strict fix: Wwe Snme del 25 maggio 2026: risultati e momenti salienti -> WWE Raw del 25 maggio 2026 - risultati e momenti salienti
+[TITLE v90.1] Report title hardcode: WWE Raw del 25 maggio 2026 - risultati e momenti salienti -> WWE Saturday Night's Main Event del 25 maggio 2026 - risultati e momenti salienti
+[MEDIA v90.1] Rimossi media orfani in coda report: 1
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/BRONSONISHERE/status/2058924856536633606
+[EMBED v87.3] Positional embed guard applicato: 1 modifiche
+[EMBED v88] Publish media guard: expected=1 before=0 after=1 missing=0
+[MEDIA v88] Recupero immagini inline mancanti: 1
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2024/12/bronson-reeds-in-ring-return-timeline-after-ankle-injury-revealed-09.jpg
+[MEDIA] Immagine caricata: 5257
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260525_174107_001_wwe-saturday-nights-main-event-del-25-maggio-2026-risultati-e-momenti-salienti_5258_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5258
+[PROCESSED v90.2.5] Publish result non conclusivo: non marco URL published
+[PERF v71] creazione post WordPress: 5.30s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2024/12/bronson-reeds-in-ring-return-timeline-after-ankle-injury-revealed-09.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5257
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Bronson Reed Shows Off Massive Physique During WWE Absence': 14.38s
+[OK] Pubblicato: Bronson Reed mostra la sua forma fisica durante l'assenza dalla WWE
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260525_174109_001_bronson-reed-mostra-la-sua-forma-fisica-durante-l-assenza-dalla-wwe_a2bfcdb9_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Bronson Reed mostra la sua forma fisica durante l'assenza dalla WWE
+[PUBLISHED REVIEW v87.1] Review outer salvata: Bronson Reed mostra la sua forma fisica durante l'assenza dalla WWE
+[REPORT v87.6] Non scrivo history forte: non true-results/canonico (report:wwe-snme-2026-05-25)
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OPINION value=strategic_discussion - Vince Russo Says Triple H Should Have Been Fired Instead of Getting a Raise
+[V91 DECISION] allow legacy publish path score=82 lane=publish_now core=vince-russo-says-triple-h-should-have-been-fired-instead - Vince Russo Says Triple H Should Have Been Fired Instead of Getting a Raise
+[BOT] Elaborazione: Vince Russo Says Triple H Should Have Been Fired Instead of Getting a Raise
+[BOT] semantic_id=vince-russo-says-triple-h-should-have-been-fired-instead-of-getting-a-raise
+[SCORE] iniziale=77 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/vince-russo-says-triple-h-should-have-fired-instead-getting-raise/
+[PERF v71] scraping articolo: 1.12s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=15, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/vince-russo-says-triple-h-should-have-fired-instead-getting-raise/
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.64s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta le dichiarazioni critiche di Vince Russo su Triple H, configurandosi come un'opinione esterna rispetto alla linea editoriale della promotion.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'bro' letteralmente, usarlo solo se necessario per il tono o ometterlo.; 'Pay raise' = aumento di stipendio.; 'Swung and missed' = espressione idiomatica, tradurre con 'hai mancato il bersaglio' o 'hai fallito'.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo riporta le dichiarazioni critiche di Vince Russo su Triple H, configurandosi come un'opinione esterna rispetto alla linea editoriale della promotion.
+[PERF v71] analisi editoriale AI v72: 6.75s
+[V91 AI] cache hit - Vince Russo Says Triple H Should Have Been Fired Instead of Getting a Raise
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=event:wwe-wrestlemania-2026-05-25:nick-khan-story - Vince Russo Says Triple H Should Have Been Fired Instead of Getting a Raise
+[V91 AI] cache hit - 77
+[SCORE] raffinato=54 priority=low | event_related, discussion_value, hard_news, v72.3 cap opinion: niente boost raffinamento, v72.3 cap opinion
+[PERF v71] scoring raffinato: 0.49s
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Vince Russo Says Triple H Should Have Been Fired Instead of Getting a Raise
+[V71] story_signature=event:wwe-wrestlemania-2026-05-25:nick-khan-story semantic_status=new_story freshness=0.912
+[PERF v71] dedupe/freshness v71: 0.55s
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:wwe-wrestlemania-2026-05-25 -> event:wwe-wrestlemania-2026-05-25-followup-vince-russo-says-triple-h-should-have-been-fired-instead-getting-a
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=15
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PERF v71] traduzione: 26.86s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Vince Russo contro Triple H: "Doveva essere licenziato, non ricevere un aumento"
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/vince-russo-says-triple-h-should-have-been-fired-instead-of-getting-a-raise-09.jpg
+[MEDIA] Immagine caricata: 5260
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260525_174149_002_vince-russo-contro-triple-h-doveva-essere-licenziato-non-ricevere-un-aumento_5261_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5261
+[PROCESSED v90.2.5] Publish result non conclusivo: non marco URL published
+[PERF v71] creazione post WordPress: 3.15s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/vince-russo-says-triple-h-should-have-been-fired-instead-of-getting-a-raise-09.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5260
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Vince Russo Says Triple H Should Have Been Fired Instead of ': 40.20s
+[OK] Pubblicato: Vince Russo contro Triple H: "Doveva essere licenziato, non ricevere un aumento"
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260525_174151_002_vince-russo-contro-triple-h-doveva-essere-licenziato-non-ricevere-un-aumento_87365140_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Vince Russo contro Triple H: "Doveva essere licenziato, non ricevere un aumento"
+[PUBLISHED REVIEW v87.1] Review outer salvata: Vince Russo contro Triple H: "Doveva essere licenziato, non ricevere un aumento"
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OPINION value=strategic_discussion - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91 DECISION] allow legacy publish path score=76 lane=publish_candidate core=bully-ray-questions-why-brock-lesnar-returned-so-quickly-retirement - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91 DECISION] allow legacy publish path score=76 lane=publish_candidate core=mvp-reveals-he-thought-was-ribbing-him-bodysuit-pay-per - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[BOT] Elaborazione: MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[BOT] semantic_id=mvp-reveals-he-thought-wwe-was-ribbing-him-with-original-bodysuit-before-pay-per-view-debut
+[SCORE] iniziale=71 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/mvp-reveals-he-thought-wwe-ribbing-him-original-bodysuit-before-pay-per-view-debut/
+[PERF v71] scraping articolo: 1.03s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=18, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/mvp-reveals-he-thought-wwe-ribbing-him-original-bodysuit-before-pay-per-view-debut/
+[BLOCKSEQ] Blocchi ordinati estratti: text=18, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.62s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riguarda un aneddoto di carriera relativo a un evento passato, non una preview di un evento futuro o un report di puntata.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'bodysuit' come tutina, usa body o tenuta da ring.; 'Ribbing/rib' va reso come scherzo o 'pesce d'aprile' (nel senso di burla).; Mantenere i nomi dei titoli e i termini tecnici (spear, gimmick, ecc.).
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riguarda un aneddoto di carriera relativo a un evento passato, non una preview di un evento futuro o un report di puntata.
+[PERF v71] analisi editoriale AI v72: 1.26s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91 AI] cache hit - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:wwe-wrestlemania-2026-05-25:mjf-debut - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91 AI] cache hit - 71
+[SCORE] raffinato=76 priority=medium | event_related, concrete_outcome
+[PERF v71] scoring raffinato: 0.48s
+[V71] story_signature=event:wwe-wrestlemania-2026-05-25:mvp-reveals-he-thought-was-debut semantic_status=new_story freshness=0.693
+[PERF v71] dedupe/freshness v71: 0.57s
+[SKIP] Event key già pubblicata nella run e confermata su WordPress: event:wwe-wrestlemania-2026-05-25 - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[PENDING] Coda salvata: 0 elementi
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[V91 DECISION] allow legacy publish path score=76 lane=publish_candidate core=event:aew-double-or-nothing-2026-05-25:adam-copeland-story - Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[CORE v90.2.7.1] authority core=event:aew-double-or-nothing-2026-05-25:adam-copeland-story type=event_news title=Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[CORE v90.2.7] event_news core=event:aew-double-or-nothing-2026-05-25:adam-copeland-story title=Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[SEO v89] Report non assorbe sviluppo autonomo forte: Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[BOT] Elaborazione: Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[BOT] semantic_id=beth-copeland-reacts-after-surprise-return-at-aew-double-or-nothing
+[SCORE] iniziale=71 priority=medium
+[PERF v71] scraping articolo: 0.99s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=8, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.60s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo commenta un'apparizione avvenuta durante l'evento Double or Nothing, non presentando l'evento stesso.
+[EDITORIAL v72.3] translation_notes=Mantenere 'AEW World Tag Team Title' e 'I Quit match' in inglese; 'Spike' va inteso come nome dell'arma, non tradurre; Evitare calchi per 'turn the tide' (usare 'ha cambiato l'inerzia del match')
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=AEW (5) | L'articolo commenta un'apparizione avvenuta durante l'evento Double or Nothing, non presentando l'evento stesso.
+[PERF v71] analisi editoriale AI v72: 1.60s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 83->54 - Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[V91 AI] cache hit - Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:aew-double-or-nothing-2026-05-25:adam-copeland-return - Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 76->54 - Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[V91 AI] cache hit - 71
+[SCORE] raffinato=45 priority=low | event_related, concrete_outcome, v88.2 cap OTHER/feature non-news 76->54, v88.3 hard feature skip cap 54->45
+[PERF v71] scoring raffinato: 0.40s
+[TIER] Pubblicabile sotto soglia come tier3: 45-54 contestuale - Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[V71] story_signature=event:aew-double-or-nothing-2026-05-25:adam-copeland-return semantic_status=new_story freshness=0.669
+[PERF v71] dedupe/freshness v71: 0.38s
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:aew-double-or-nothing-2026-05-25 - Beth Copeland Reacts After Surprise Return at AEW Double or Nothing
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=8
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione applicato con gemini-3.1-flash-lite: editorial_word_ratio=0.68 (204/302) threshold=0.70
+[PRESERVE v81] Guardrail finale testo applicato
+[PERF v71] traduzione: 6.88s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Beth Copeland commenta il suo ritorno a sorpresa a AEW Double or Nothing
+[DEDUPE v88.4.1] Canonical event core caricati: 17
+[SKIP v88.4.1] Last-check canonical event core gia pubblicato: canonical_event_core:adam_copeland|debut_arrival|aew
+[PROCESSED v90.2.5] Publish result non conclusivo: non marco URL published
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-25 17:40:08_summary.json -> published_html_review/run_2026-05-25 17-40-08_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (784 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
+===== RUN END [2026-05-25 17:40:08] VERSION [v90_2_6_2_clean_consolidated_source (a3a72ea)] =====
+
+Traceback (most recent call last):
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 25972, in <module>
+    run_bot()
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 24204, in run_bot
+    return _ORIG_V90252_run_bot()
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 23911, in run_bot
+    return _ORIG_V9025_run_bot()
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 17093, in run_bot
+    status = process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 25829, in process_candidate_item
+    return _ORIG_V91_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 25276, in process_candidate_item
+    return _ORIG_V90272_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 25149, in process_candidate_item
+    return _ORIG_V90271_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 25019, in process_candidate_item
+    return _ORIG_V9027_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 24684, in process_candidate_item
+    return _ORIG_V90254_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 23888, in process_candidate_item
+    result = _ORIG_V9025_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 22971, in process_candidate_item
+    result = _ORIG_V902_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 21949, in process_candidate_item
+    result = _ORIG_V901_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 21579, in process_candidate_item
+    return _ORIG_V891_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 21428, in process_candidate_item
+    result = _ORIG_V89_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 21194, in process_candidate_item
+    return _ORIG_V8842_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 20948, in process_candidate_item
+    result = _ORIG_V8841_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 20688, in process_candidate_item
+    return _ORIG_V884_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 20514, in process_candidate_item
+    return _ORIG_V8831_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 20379, in process_candidate_item
+    return _ORIG_V883_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 20216, in process_candidate_item
+    return _ORIG_V882_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 19509, in process_candidate_item
+    return _ORIG_V877_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 18933, in process_candidate_item
+    return _ORIG_V873_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 18449, in process_candidate_item
+    status = _ORIG_V872_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 17932, in process_candidate_item
+    status = _ORIG_V871_process_candidate_item(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 17529, in process_candidate_item
+    return _ORIG_V869_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 16753, in process_candidate_item
+    return _ORIG_V866_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 16216, in process_candidate_item
+    return _ORIG_V865_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 15073, in process_candidate_item
+    return _ORIG_V861_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 14231, in process_candidate_item
+    return _ORIG_V855_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 14022, in process_candidate_item
+    status = _ORIG_V854_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 13666, in process_candidate_item
+    return _ORIG_V851_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 13452, in process_candidate_item
+    res = _ORIG_V85_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 13127, in process_candidate_item
+    return _ORIG_V841_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 12453, in process_candidate_item
+    return _ORIG_V83_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 11562, in process_candidate_item
+    status = _ORIG_PROCESS_CANDIDATE_ITEM_V8010(
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 10821, in process_candidate_item
+    status = _ORIG_PROCESS_CANDIDATE_ITEM_V803(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/wrestling-news-bot/wrestling-news-bot/bot.py", line 7038, in process_candidate_item
+    post_id, post_json = create_post_without_image(
+    ^^^^^^^^^^^^^^^^^^
+ValueError: too many values to unpack (expected 2)

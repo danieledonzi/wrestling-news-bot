@@ -251,6 +251,19 @@
     "updated_at": "1779689746.6167474",
     "url": "https://www.ringsidenews.com/mjf-explodes-online-winning-aew-world-title-saving-his-hair/"
   },
+  "https://www.ringsidenews.com/mvp-reveals-he-thought-wwe-ribbing-him-original-bodysuit-before-pay-per-view-debut": {
+    "extra": {
+      "event_key": "event:wwe-wrestlemania-2026-05-25",
+      "raw_result": "skipped",
+      "semantic_id": "mvp-reveals-he-thought-wwe-was-ribbing-him-with-original-bodysuit-before-pay-per-view-debut"
+    },
+    "reason": "high_score_or_discussion_worthy_not_final",
+    "score": 76,
+    "status": "competitive_deferred",
+    "title": "MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut",
+    "updated_at": "1779730916.2262318",
+    "url": "https://www.ringsidenews.com/mvp-reveals-he-thought-wwe-ribbing-him-original-bodysuit-before-pay-per-view-debut/"
+  },
   "https://www.ringsidenews.com/new-day-current-status-aew-double-nothing": {
     "extra": {
       "event_key": "",
@@ -434,6 +447,19 @@
     "title": "WWE's Current Stance on Ethan Page Ahead of IC Title Match at Saturday Night's Main Event",
     "updated_at": "1779552048.9929159",
     "url": "https://www.ringsidenews.com/wwes-current-stance-ethan-page-ahead-ic-title-match-saturday-nights-main-event/"
+  },
+  "https://www.ringsidenews.com/wwes-current-stance-ludwig-kaiser-recent-arrest-revealed": {
+    "extra": {
+      "event_key": "",
+      "raw_result": "skipped",
+      "semantic_id": "wwes-current-stance-on-ludwig-kaiser-after-recent-arrest-revealed"
+    },
+    "reason": "above_low_score_final_cap_not_final",
+    "score": 56,
+    "status": "competitive_deferred",
+    "title": "WWE's Current Stance on Ludwig Kaiser After Recent Arrest Revealed",
+    "updated_at": "1779730853.0163853",
+    "url": "https://www.ringsidenews.com/wwes-current-stance-ludwig-kaiser-recent-arrest-revealed/"
   },
   "https://www.wrestlinginc.com/2174866/wwe-jimmy-wang-yang-undertaker-confederate-flag": {
     "extra": {

@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-25 16:13:30",
-  "last_bot_version": "v91_editorial_pipeline_refactor (5d33236)",
-  "updated_at": "2026-05-25T16:14:24",
-  "total_items": 198,
+  "last_run_id": "2026-05-25 17:40:08",
+  "last_bot_version": "v90_2_6_2_clean_consolidated_source (a3a72ea)",
+  "updated_at": "2026-05-25T17:42:11",
+  "total_items": 200,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1588,6 +1588,22 @@
       "original_html_file": "20260525_132759_001_paul-wight-chiesi-a-floyd-mayweather-di-rompermi-il-naso-poi-lui-lasci-l-arena_1948f8d3_original.html",
       "final_html_file": "20260525_132759_001_paul-wight-chiesi-a-floyd-mayweather-di-rompermi-il-naso-poi-lui-lasci-l-arena_1948f8d3_final.html",
       "metadata_file": "20260525_132759_001_paul-wight-chiesi-a-floyd-mayweather-di-rompermi-il-naso-poi-lui-lasci-l-arena_1948f8d3_metadata.json"
+    },
+    {
+      "run_id": "2026-05-25 17:40:08",
+      "title": "Bronson Reed mostra la sua forma fisica durante l'assenza dalla WWE",
+      "url": "https://www.ringsidenews.com/bronson-reed-shows-off-massive-physique-during-wwe-absence/",
+      "original_html_file": "20260525_174109_001_bronson-reed-mostra-la-sua-forma-fisica-durante-l-assenza-dalla-wwe_a2bfcdb9_original.html",
+      "final_html_file": "20260525_174109_001_bronson-reed-mostra-la-sua-forma-fisica-durante-l-assenza-dalla-wwe_a2bfcdb9_final.html",
+      "metadata_file": "20260525_174109_001_bronson-reed-mostra-la-sua-forma-fisica-durante-l-assenza-dalla-wwe_a2bfcdb9_metadata.json"
+    },
+    {
+      "run_id": "2026-05-25 17:40:08",
+      "title": "Vince Russo contro Triple H: \"Doveva essere licenziato, non ricevere un aumento\"",
+      "url": "https://www.ringsidenews.com/vince-russo-says-triple-h-should-have-fired-instead-getting-raise/",
+      "original_html_file": "20260525_174151_002_vince-russo-contro-triple-h-doveva-essere-licenziato-non-ricevere-un-aumento_87365140_original.html",
+      "final_html_file": "20260525_174151_002_vince-russo-contro-triple-h-doveva-essere-licenziato-non-ricevere-un-aumento_87365140_final.html",
+      "metadata_file": "20260525_174151_002_vince-russo-contro-triple-h-doveva-essere-licenziato-non-ricevere-un-aumento_87365140_metadata.json"
     }
   ]
 }

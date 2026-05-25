@@ -1,12 +1,30 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-25 16:13:30",
-  "bot_version": "v91_editorial_pipeline_refactor (5d33236)",
-  "git_sha": "5d332366d0abd1e7d1ba80168bc529ee0c5bb2ee",
-  "created_at": "2026-05-25T16:14:25",
-  "published_count": 0,
-  "published_post_ids": [],
-  "published_artifacts": [],
+  "run_id": "2026-05-25 17:40:08",
+  "bot_version": "v90_2_6_2_clean_consolidated_source (a3a72ea)",
+  "git_sha": "a3a72ea2589ad805a92f9235459153268d8b36f8",
+  "created_at": "2026-05-25T17:42:12",
+  "published_count": 2,
+  "published_post_ids": [
+    "5258",
+    "5261"
+  ],
+  "published_artifacts": [
+    {
+      "post_id": 5258,
+      "title": "WWE Saturday Night's Main Event del 25 maggio 2026 - risultati e momenti salienti",
+      "source_url": "https://www.ringsidenews.com/bronson-reed-shows-off-massive-physique-during-wwe-absence/",
+      "html_file": "published/20260525_174107_001_wwe-saturday-nights-main-event-del-25-maggio-2026-risultati-e-momenti-salienti_5258_final.html",
+      "metadata_file": "published/20260525_174107_001_wwe-saturday-nights-main-event-del-25-maggio-2026-risultati-e-momenti-salienti_5258_metadata.json"
+    },
+    {
+      "post_id": 5261,
+      "title": "Vince Russo contro Triple H: \"Doveva essere licenziato, non ricevere un aumento\"",
+      "source_url": "https://www.ringsidenews.com/vince-russo-says-triple-h-should-have-fired-instead-getting-raise/",
+      "html_file": "published/20260525_174149_002_vince-russo-contro-triple-h-doveva-essere-licenziato-non-ricevere-un-aumento_5261_final.html",
+      "metadata_file": "published/20260525_174149_002_vince-russo-contro-triple-h-doveva-essere-licenziato-non-ricevere-un-aumento_5261_metadata.json"
+    }
+  ],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",
