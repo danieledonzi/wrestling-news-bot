@@ -1,137 +1,149 @@
 from pathlib import Path
 
-REQUIRED_BASE = "# v90.2.7 central story core assignment"
-MARK = "# v90.2.7.1 core authority hotfix"
+MARK = "# v90.2.7.2 queue type and report source fix"
 CODE = r'''
 
-# v90.2.7.1 core authority hotfix
-BOT_VERSION = "v90_2_7_1_core_authority_hotfix"
+# v90.2.7.2 queue type and report source fix
+BOT_VERSION = "v90_2_7_2_queue_type_report_source_fix"
 BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
-V90_2_7_1_ENABLED = os.getenv("V90_2_7_1_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+V90_2_7_2_ENABLED = os.getenv("V90_2_7_2_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
 
 
-def v90271_text_from_any(item=None):
-    if isinstance(item, dict):
-        return " ".join(str(item.get(k, "") or "") for k in ("title", "titolo", "url", "link", "summary", "description", "text", "prefetched_text"))
-    return str(item or "")
-
-
-def v90271_assign_from_any(item=None, title="", url="", text=""):
-    if not V90_2_7_1_ENABLED or "assign_story_core_v9027" not in globals():
+def v90272_assign_from_text(title="", url="", text=""):
+    if not V90_2_7_2_ENABLED or "assign_story_core_v9027" not in globals():
         return {}
     try:
-        if isinstance(item, dict):
-            title = title or item.get("title") or item.get("titolo") or ""
-            url = url or item.get("url") or item.get("link") or ""
-            text = text or v90271_text_from_any(item)
-        assigned = assign_story_core_v9027(item if isinstance(item, dict) else {}, title or text, url, text, None)
+        assigned = assign_story_core_v9027({}, title or text or "", url or "", text or title or "", None)
         return assigned if isinstance(assigned, dict) else {}
     except Exception as e:
-        print(f"[CORE v90.2.7.1] Warning assign core: {e}")
+        print(f"[CORE v90.2.7.2] Warning assign_from_text: {e}")
         return {}
 
 
-def v90271_apply_authority_to_item(item=None, assigned=None):
-    if not isinstance(item, dict) or not isinstance(assigned, dict) or not assigned.get("core"):
-        return item
-    core = assigned["core"]
-    item["story_core_v9027"] = core
-    item["news_core_key"] = core
-    item["story_signature_v71"] = core
-    item["story_fingerprint"] = core
-    item["core_type_v9027"] = assigned.get("core_type")
-    item["core_assigned_by"] = "v90.2.7.1"
-    item["core_assignment_v9027"] = assigned
-    if assigned.get("event_key"):
-        item["event_key"] = assigned["event_key"]
-    if assigned.get("report_key"):
-        item["report_event_key"] = assigned["report_key"]
-        item["kind"] = "report"
-        item["article_type"] = "RESULTS_REPORT"
-        item["editorial_type"] = "RESULTS_REPORT"
-    return item
+def v90272_story_signature_result(original_result, core):
+    """Preserve the legacy return type of build_story_signature_v71."""
+    if isinstance(original_result, dict):
+        out = dict(original_result)
+        out["signature"] = core
+        out["core"] = core
+        out["news_core_key"] = core
+        out["assigned_by"] = "v90.2.7.2"
+        return out
+    if isinstance(original_result, str):
+        return core
+    return {"signature": core, "core": core, "news_core_key": core, "assigned_by": "v90.2.7.2"}
+
+
+def v90272_args_to_title_text_url(args, kwargs):
+    title = kwargs.get("title") or ""
+    text = kwargs.get("text") or kwargs.get("summary") or kwargs.get("body") or ""
+    url = kwargs.get("url") or ""
+    if args:
+        title = title or str(args[0] or "")
+    if len(args) >= 2:
+        text = text or str(args[1] or "")
+    if len(args) >= 3:
+        url = url or str(args[2] or "")
+    return title, text, url
 
 try:
-    _ORIG_V90271_v902_item_text = v902_item_text
-    def v902_item_text(item=None):
-        if isinstance(item, dict):
-            return _ORIG_V90271_v902_item_text(item)
-        return str(item or "")
-except Exception:
-    pass
-
-try:
-    _ORIG_V90271_v902_item_score = v902_item_score
-    def v902_item_score(item=None):
-        if isinstance(item, dict):
-            return _ORIG_V90271_v902_item_score(item)
-        return 0
-except Exception:
-    pass
-
-try:
-    _ORIG_V90271_v902_event_core_from_text = v902_event_core_from_text
-    def v902_event_core_from_text(text=""):
-        assigned = v90271_assign_from_any(None, str(text or ""), "", str(text or ""))
+    _ORIG_V90272_build_story_signature_v71 = build_story_signature_v71
+    def build_story_signature_v71(*args, **kwargs):
+        original = _ORIG_V90272_build_story_signature_v71(*args, **kwargs)
+        title, text, url = v90272_args_to_title_text_url(args, kwargs)
+        assigned = v90272_assign_from_text(title, url, text)
         if assigned.get("core"):
-            return assigned["core"]
-        return _ORIG_V90271_v902_event_core_from_text(text)
+            return v90272_story_signature_result(original, assigned["core"])
+        return original
 except Exception:
     pass
 
 try:
-    _ORIG_V90271_v902_true_update_decision = v902_true_update_decision
-    def v902_true_update_decision(item=None, core=""):
+    _ORIG_V90272_make_story_signature_v71 = make_story_signature_v71
+    def make_story_signature_v71(*args, **kwargs):
+        original = _ORIG_V90272_make_story_signature_v71(*args, **kwargs)
+        title, text, url = v90272_args_to_title_text_url(args, kwargs)
+        assigned = v90272_assign_from_text(title, url, text)
+        if assigned.get("core"):
+            return v90272_story_signature_result(original, assigned["core"])
+        return original
+except Exception:
+    pass
+
+
+def v90272_processed_record_is_final(rec):
+    if not isinstance(rec, dict):
+        return False
+    status = str(rec.get("status") or "")
+    if status in {"published", "skipped_duplicate", "skipped_existing_wp", "skipped_existing_history", "skipped_editorial_exclude", "skipped_soft_trash", "skipped_stale", "low_score_final"}:
+        return True
+    if status in {"skipped_below_threshold", "rejected"}:
         try:
-            assigned = v90271_assign_from_any(item)
-            if assigned.get("core"):
-                core = assigned["core"]
-                v90271_apply_authority_to_item(item, assigned)
-                if assigned.get("core_type") == "event_report":
-                    memory = v902_load_core_memory() if "v902_load_core_memory" in globals() else {}
-                    if not isinstance(memory, dict) or core not in memory:
-                        return {"action": "publish", "reason": "event_report_core_authority", "novel": ["event_report"], "count": 0}
-        except Exception as e:
-            print(f"[CORE v90.2.7.1] Warning true_update override: {e}")
-        return _ORIG_V90271_v902_true_update_decision(item, core)
-except Exception:
-    pass
+            return int(rec.get("score") or 0) <= int(os.getenv("V90_2_5_2_LOW_SCORE_FINAL_MAX", "54"))
+        except Exception:
+            return True
+    return False
+
+
+def v90272_processed_url_final(url):
+    if not V90_2_7_2_ENABLED or not url:
+        return False, None
+    try:
+        if "v9025_load_processed_records" in globals():
+            data = v9025_load_processed_records()
+        elif "v9025_load_processed_urls" in globals():
+            data = v9025_load_processed_urls()
+        else:
+            return False, None
+        records = data.get("records", data) if isinstance(data, dict) else data
+        rec = None
+        if isinstance(records, dict):
+            norm = normalize_url_for_history(url) if "normalize_url_for_history" in globals() else url
+            rec = records.get(url) or records.get(norm)
+        if v90272_processed_record_is_final(rec):
+            return True, rec
+    except Exception as e:
+        print(f"[PROCESSED v90.2.7.2] Warning processed check: {e}")
+    return False, None
 
 try:
-    _ORIG_V90271_v902_add_soft_pool = v902_add_soft_pool
-    def v902_add_soft_pool(*args, **kwargs):
-        item = None
-        for obj in args:
-            if isinstance(obj, dict):
-                item = obj
-                break
-        item = item or kwargs.get("item")
-        assigned = v90271_assign_from_any(item)
-        if assigned.get("core"):
-            kwargs["core"] = assigned["core"]
-            v90271_apply_authority_to_item(item, assigned)
-            if assigned.get("core_type") == "event_report":
-                print(f"[CORE v90.2.7.1] Soft_pool hard bypass per event_report core={assigned.get('core')} title={(item or {}).get('title') if isinstance(item, dict) else ''}")
-                return False
-        return _ORIG_V90271_v902_add_soft_pool(*args, **kwargs)
-except Exception:
-    pass
-
-try:
-    _ORIG_V90271_process_candidate_item = process_candidate_item
+    _ORIG_V90272_process_candidate_item = process_candidate_item
     def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
-        try:
-            assigned = v90271_assign_from_any(item)
-            if assigned.get("core"):
-                v90271_apply_authority_to_item(item, assigned)
-                print(f"[CORE v90.2.7.1] authority core={assigned.get('core')} type={assigned.get('core_type')} title={item.get('title') if isinstance(item, dict) else ''}")
-        except Exception as e:
-            print(f"[CORE v90.2.7.1] Warning process authority: {e}")
-        return _ORIG_V90271_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+        if isinstance(item, dict):
+            url = item.get("url") or item.get("link") or ""
+            title = item.get("title") or item.get("titolo") or ""
+            final, rec = v90272_processed_url_final(url)
+            if final:
+                print(f"[PROCESSED v90.2.7.2] Feed/process hard skip URL finale status={rec.get('status')} reason={rec.get('reason')} - {title}")
+                return "skipped"
+        return _ORIG_V90272_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
 except Exception:
     pass
 
-print("[BOOT v90.2.7.1] Core authority hotfix attiva")
+
+def v90272_report_item_has_source(item):
+    if not isinstance(item, dict):
+        return False
+    if item.get("url") or item.get("link"):
+        return True
+    sources = item.get("sources")
+    if isinstance(sources, list) and any(isinstance(s, dict) and (s.get("url") or s.get("link")) for s in sources):
+        return True
+    return False
+
+try:
+    _ORIG_V90272_process_report_pending_item = process_report_pending_item
+    def process_report_pending_item(report_item, *args, **kwargs):
+        if isinstance(report_item, dict):
+            key = report_item.get("report_event_key") or report_item.get("event_key") or report_item.get("key") or ""
+            if (report_item.get("core_type_v9027") == "event_report" or str(key).startswith("report:")) and not v90272_report_item_has_source(report_item):
+                print(f"[REPORT v90.2.7.2] Report senza fonte concreta: skip pending invalido {key}")
+                return False
+        return _ORIG_V90272_process_report_pending_item(report_item, *args, **kwargs)
+except Exception:
+    pass
+
+print("[BOOT v90.2.7.2] Queue type contract + report source guard attivi")
 '''
 
 
@@ -139,15 +151,15 @@ def main():
     p = Path("bot.py")
     text = p.read_text(encoding="utf-8")
     if MARK in text:
-        print("[SOURCE PATCH v90.2.7.1] bot.py gia aggiornato")
+        print("[SOURCE PATCH v90.2.7.2] bot.py gia aggiornato")
         return 0
-    if REQUIRED_BASE not in text:
-        raise SystemExit("[SOURCE PATCH v90.2.7.1] base v90.2.7 non trovata in bot.py")
+    if "# v90.2.7 central story core assignment" not in text:
+        raise SystemExit("[SOURCE PATCH v90.2.7.2] base v90.2.7 mancante")
     needle = '\n\nif __name__ == "__main__":\n'
     if needle not in text:
-        raise SystemExit("[SOURCE PATCH v90.2.7.1] entrypoint marker not found")
+        raise SystemExit("[SOURCE PATCH v90.2.7.2] entrypoint marker not found")
     p.write_text(text.replace(needle, CODE + needle, 1), encoding="utf-8")
-    print("[SOURCE PATCH v90.2.7.1] patch applicata a bot.py")
+    print("[SOURCE PATCH v90.2.7.2] patch applicata a bot.py")
     return 0
 
 if __name__ == "__main__":
