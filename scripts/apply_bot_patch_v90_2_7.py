@@ -21,17 +21,16 @@ def v90272_assign_from_text(title="", url="", text=""):
 
 
 def v90272_story_signature_result(original_result, core):
-    """Preserve the legacy return type of build_story_signature_v71."""
+    """Always return a dict-compatible story signature payload."""
     if isinstance(original_result, dict):
         out = dict(original_result)
-        out["signature"] = core
-        out["core"] = core
-        out["news_core_key"] = core
-        out["assigned_by"] = "v90.2.7.2"
-        return out
-    if isinstance(original_result, str):
-        return core
-    return {"signature": core, "core": core, "news_core_key": core, "assigned_by": "v90.2.7.2"}
+    else:
+        out = {}
+    out["signature"] = core
+    out["core"] = core
+    out["news_core_key"] = core
+    out["assigned_by"] = "v90.2.7.2"
+    return out
 
 
 def v90272_args_to_title_text_url(args, kwargs):
@@ -54,7 +53,7 @@ try:
         assigned = v90272_assign_from_text(title, url, text)
         if assigned.get("core"):
             return v90272_story_signature_result(original, assigned["core"])
-        return original
+        return original if isinstance(original, dict) else v90272_story_signature_result(original, str(original or ""))
 except Exception:
     pass
 
@@ -66,7 +65,7 @@ try:
         assigned = v90272_assign_from_text(title, url, text)
         if assigned.get("core"):
             return v90272_story_signature_result(original, assigned["core"])
-        return original
+        return original if isinstance(original, dict) else v90272_story_signature_result(original, str(original or ""))
 except Exception:
     pass
 
@@ -85,16 +84,24 @@ def v90272_processed_record_is_final(rec):
     return False
 
 
+def v90272_load_processed_store():
+    try:
+        if "v9025_load_processed" in globals():
+            return v9025_load_processed()
+        if "v9025_load_processed_records" in globals():
+            return v9025_load_processed_records()
+        if "v9025_load_processed_urls" in globals():
+            return v9025_load_processed_urls()
+    except Exception as e:
+        print(f"[PROCESSED v90.2.7.2] Warning load processed store: {e}")
+    return None
+
+
 def v90272_processed_url_final(url):
     if not V90_2_7_2_ENABLED or not url:
         return False, None
     try:
-        if "v9025_load_processed_records" in globals():
-            data = v9025_load_processed_records()
-        elif "v9025_load_processed_urls" in globals():
-            data = v9025_load_processed_urls()
-        else:
-            return False, None
+        data = v90272_load_processed_store()
         records = data.get("records", data) if isinstance(data, dict) else data
         rec = None
         if isinstance(records, dict):
