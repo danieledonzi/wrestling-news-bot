@@ -1,4 +1,4 @@
-name: OpenWrestlingTV Bot v91.4
+name: OpenWrestlingTV Bot v91.5
 
 on:
   workflow_dispatch:
@@ -15,6 +15,7 @@ env:
   BOT_ARTIFACT_PATHS: |
     published/
     published_html_review/
+    manual_review/
     logs/
     pending_articles.json
     history.txt
@@ -61,11 +62,11 @@ jobs:
           python -m py_compile bot.py
           if ! git diff --quiet -- bot.py; then
             git add bot.py
-            git commit -m "chore(bot): persist v91.4 runtime source"
-            git pull --rebase || echo "[v91.4] Warning: pull --rebase non riuscito, provo push diretto"
-            git push || echo "[v91.4] Warning: push consolidamento fallito, continuo la run bot"
+            git commit -m "chore(bot): persist v91.5 runtime source"
+            git pull --rebase || echo "[v91.5] Warning: pull --rebase non riuscito, provo push diretto"
+            git push || echo "[v91.5] Warning: push consolidamento fallito, continuo la run bot"
           else
-            echo "[v91.4] bot.py gia aggiornato nel repository"
+            echo "[v91.5] bot.py gia aggiornato nel repository"
           fi
 
       - name: Verify consolidated source
@@ -99,16 +100,18 @@ jobs:
               'v91.2 publish contract and authoritative lane guard',
               'v91.3 corrected v723 parser',
               'v91.4 publish processed and soft pool repair',
+              'v91.4.1 strict publish return tuple contract',
+              'v91.5 html integrity and block-safe repair guard',
           ]
           missing = [m for m in required if m not in text]
           if missing:
-              raise SystemExit('[SOURCE CONSOLIDATION v91.4] missing markers: ' + ', '.join(missing))
-          if 'v91_4_publish_processed_softpool_repair' not in text:
-              raise SystemExit('[SOURCE CONSOLIDATION v91.4] version marker mancante')
-          print('[SOURCE CONSOLIDATION v91.4] bot.py contiene publish processed + soft pool repair')
+              raise SystemExit('[SOURCE CONSOLIDATION v91.5] missing markers: ' + ', '.join(missing))
+          if 'v91_5_html_integrity_block_safe_repair' not in text:
+              raise SystemExit('[SOURCE CONSOLIDATION v91.5] version marker mancante')
+          print('[SOURCE CONSOLIDATION v91.5] bot.py contiene HTML integrity guard + block-safe repair policy')
           PY
 
-      - name: Run bot v91_4
+      - name: Run bot v91_5
         id: run_bot
         env:
           WP_USER: ${{ secrets.WP_USER }}
@@ -147,9 +150,15 @@ jobs:
           V91_2_ENABLED: "1"
           V91_3_ENABLED: "1"
           V91_4_ENABLED: "1"
+          V91_4_1_ENABLED: "1"
+          V91_5_ENABLED: "1"
           V91_ANALYSIS_CACHE_FILE: article_analysis_cache_v91.json
           V91_4_RECONCILE_PUBLISHED_ENABLED: "1"
           V91_4_SOFT_POOL_CLEANUP_ENABLED: "1"
+          V91_5_BLOCK_FREE_REPAIR: "1"
+          V91_5_HTML_GUARD_ENABLED: "1"
+          V91_5_LISTICLE_HARD_SKIP_ENABLED: "1"
+          V91_5_MANUAL_REVIEW_DIR: manual_review
         run: |
           set +e
           python bot.py
@@ -170,6 +179,7 @@ jobs:
           path: |
             published/
             published_html_review/
+            manual_review/
             logs/
             pending_articles.json
             history.txt
@@ -190,6 +200,6 @@ jobs:
             code=$(cat .bot_exit_code)
           fi
           if [ "$code" != "0" ]; then
-            echo "[BOT v91.4] Bot terminato con exit code $code"
+            echo "[BOT v91.5] Bot terminato con exit code $code"
             exit "$code"
           fi
