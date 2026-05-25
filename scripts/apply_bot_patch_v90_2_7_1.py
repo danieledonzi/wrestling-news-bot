@@ -1,5 +1,7 @@
 from pathlib import Path
 
+REQUIRED_BASE_MARK = "# v90.2.7 central story core assignment"
+REQUIRED_BASE_FUNC = "assign_story_core_v9027"
 MARK = "# v90.2.7.1 core authority hotfix"
 CODE = r'''
 
@@ -30,7 +32,7 @@ def v90271_safe_assign_core(title="", url="", text="", editorial_analysis=None):
 
 def v90271_text_from_any(item=None):
     if isinstance(item, dict):
-        return " ".join(str(item.get(k, "") or "") for k in ("title", "url", "link", "summary", "description", "text", "prefetched_text"))
+        return " ".join(str(item.get(k, "") or "") for k in ("title", "titolo", "url", "link", "summary", "description", "text", "prefetched_text"))
     return str(item or "")
 
 try:
@@ -108,7 +110,7 @@ try:
         item = item or kwargs.get("item")
         try:
             raw = v90271_text_from_any(item)
-            title = item.get("title") if isinstance(item, dict) else raw
+            title = item.get("title") or item.get("titolo") if isinstance(item, dict) else raw
             url = (item.get("url") or item.get("link")) if isinstance(item, dict) else ""
             assigned = v90271_safe_assign_core(title, url, raw, None)
             if assigned.get("core"):
@@ -148,7 +150,7 @@ try:
                         item["kind"] = "report"
                         item["article_type"] = "RESULTS_REPORT"
                         item["editorial_type"] = "RESULTS_REPORT"
-                    print(f"[CORE v90.2.7.1] authority core={assigned.get('core')} type={assigned.get('core_type')} title={item.get('title')}")
+                    print(f"[CORE v90.2.7.1] authority core={assigned.get('core')} type={assigned.get('core_type')} title={item.get('title') or item.get('titolo')}")
         except Exception as e:
             print(f"[CORE v90.2.7.1] Warning process authority: {e}")
         return _ORIG_V90271_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
@@ -165,6 +167,8 @@ def main():
     if MARK in text:
         print("[SOURCE PATCH v90.2.7.1] bot.py gia aggiornato")
         return 0
+    if REQUIRED_BASE_MARK not in text or REQUIRED_BASE_FUNC not in text:
+        raise SystemExit("[SOURCE PATCH v90.2.7.1] base v90.2.7/assign_story_core_v9027 non trovata in bot.py")
     needle = '\n\nif __name__ == "__main__":\n'
     if needle not in text:
         raise SystemExit("[SOURCE PATCH v90.2.7.1] entrypoint marker not found")
