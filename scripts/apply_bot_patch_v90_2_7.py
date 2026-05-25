@@ -189,51 +189,96 @@ def v9027_apply_story_core(item, editorial_analysis=None, text_override=""):
     print(f"[CORE v90.2.7] {assigned.get('core_type')} core={core} title={title}")
     return item
 
+
+def v9027_args_to_title_text_url(args, kwargs):
+    title = kwargs.get("title") or ""
+    text = kwargs.get("text") or kwargs.get("summary") or kwargs.get("body") or ""
+    url = kwargs.get("url") or ""
+    if args:
+        title = title or str(args[0] or "")
+    if len(args) >= 2:
+        text = text or str(args[1] or "")
+    if len(args) >= 3:
+        url = url or str(args[2] or "")
+    return title, text, url
+
 try:
     _ORIG_V9027_make_news_core_key = make_news_core_key
-    def make_news_core_key(title, url="", summary=""):
-        assigned = assign_story_core_v9027({}, title, url, summary, None)
+    def make_news_core_key(*args, **kwargs):
+        title, text, url = v9027_args_to_title_text_url(args, kwargs)
+        assigned = assign_story_core_v9027({}, title, url, text, None)
         if assigned.get("core"):
             return assigned["core"]
-        return _ORIG_V9027_make_news_core_key(title, url, summary)
+        return _ORIG_V9027_make_news_core_key(*args, **kwargs)
+except Exception:
+    pass
+
+try:
+    _ORIG_V9027_build_story_signature_v71 = build_story_signature_v71
+    def build_story_signature_v71(*args, **kwargs):
+        title, text, url = v9027_args_to_title_text_url(args, kwargs)
+        assigned = assign_story_core_v9027({}, title, url, text, None)
+        if assigned.get("core"):
+            return assigned["core"]
+        return _ORIG_V9027_build_story_signature_v71(*args, **kwargs)
 except Exception:
     pass
 
 try:
     _ORIG_V9027_make_story_signature_v71 = make_story_signature_v71
-    def make_story_signature_v71(title, url="", summary=""):
-        assigned = assign_story_core_v9027({}, title, url, summary, None)
+    def make_story_signature_v71(*args, **kwargs):
+        title, text, url = v9027_args_to_title_text_url(args, kwargs)
+        assigned = assign_story_core_v9027({}, title, url, text, None)
         if assigned.get("core"):
             return assigned["core"]
-        return _ORIG_V9027_make_story_signature_v71(title, url, summary)
+        return _ORIG_V9027_make_story_signature_v71(*args, **kwargs)
 except Exception:
     pass
 
 try:
     _ORIG_V9027_make_event_key = make_event_key
-    def make_event_key(title, url="", summary=""):
-        assigned = assign_story_core_v9027({}, title, url, summary, None)
+    def make_event_key(*args, **kwargs):
+        title, text, url = v9027_args_to_title_text_url(args, kwargs)
+        assigned = assign_story_core_v9027({}, title, url, text, None)
         if assigned.get("event_key"):
             return assigned["event_key"]
-        return _ORIG_V9027_make_event_key(title, url, summary)
+        return _ORIG_V9027_make_event_key(*args, **kwargs)
 except Exception:
     pass
 
 try:
-    _ORIG_V9027_softpool_add = v902_add_soft_pool_item
-    def v902_add_soft_pool_item(item, reason="", score=None, core=None, novel=None):
+    _ORIG_V9027_softpool_add = v902_add_soft_pool
+    def v902_add_soft_pool(*args, **kwargs):
+        item = args[0] if args and isinstance(args[0], dict) else kwargs.get("item")
         try:
             if isinstance(item, dict):
                 v9027_apply_story_core(item)
                 if item.get("core_assigned_by") == "v90.2.7":
-                    core = item.get("story_core_v9027") or core
-                    # Event reports must not be downgraded into soft pool as weak follow-ups.
+                    kwargs["core"] = item.get("story_core_v9027") or kwargs.get("core")
                     if item.get("core_type_v9027") == "event_report":
-                        print(f"[CORE v90.2.7] Soft_pool bypass per event_report core={core} title={item.get('title')}")
+                        print(f"[CORE v90.2.7] Soft_pool bypass per event_report core={item.get('story_core_v9027')} title={item.get('title')}")
                         return False
         except Exception as e:
             print(f"[CORE v90.2.7] Warning softpool core guard: {e}")
-        return _ORIG_V9027_softpool_add(item, reason=reason, score=score, core=core, novel=novel)
+        return _ORIG_V9027_softpool_add(*args, **kwargs)
+except Exception:
+    pass
+
+try:
+    _ORIG_V9027_softpool_add_item = v902_add_soft_pool_item
+    def v902_add_soft_pool_item(*args, **kwargs):
+        item = args[0] if args and isinstance(args[0], dict) else kwargs.get("item")
+        try:
+            if isinstance(item, dict):
+                v9027_apply_story_core(item)
+                if item.get("core_assigned_by") == "v90.2.7":
+                    kwargs["core"] = item.get("story_core_v9027") or kwargs.get("core")
+                    if item.get("core_type_v9027") == "event_report":
+                        print(f"[CORE v90.2.7] Soft_pool bypass per event_report core={item.get('story_core_v9027')} title={item.get('title')}")
+                        return False
+        except Exception as e:
+            print(f"[CORE v90.2.7] Warning softpool item core guard: {e}")
+        return _ORIG_V9027_softpool_add_item(*args, **kwargs)
 except Exception:
     pass
 
