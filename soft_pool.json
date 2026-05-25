@@ -1,155 +1,29 @@
 [
   {
-    "created_at": "2026-05-21T16:05:12",
-    "title": "MJF Blames Vince McMahon For Fans Seeing Hair Match Stipulations As Comedy",
-    "url": "https://www.ringsidenews.com/mjf-blames-vince-mcmahon-fans-seeing-hair-match-stipulations-comedy/",
-    "score": 42,
-    "core": "title:darby-allin:status",
-    "reason": "update_gate:medium_followup_or_weak_update",
-    "ttl_hours": 8
-  },
-  {
-    "created_at": "2026-05-21T17:12:54",
-    "title": "WWE's Expanded Summer House Show Tour Could Lead To Bigger Touring Schedule",
-    "url": "https://www.ringsidenews.com/wwes-expanded-summer-house-show-tour-could-lead-bigger-touring-schedule/",
-    "score": 50,
-    "core": "business:wwe:house-shows",
-    "reason": "update_gate:covered_core_below_gate",
-    "ttl_hours": 8
-  },
-  {
-    "created_at": "2026-05-21T21:13:37",
-    "title": "WWE Locker Room Wants Baron Corbin Back",
-    "url": "https://www.ringsidenews.com/wwe-locker-room-wants-baron-corbin-back/",
-    "score": 63,
-    "core": "return:baron-corbin:wwe",
-    "reason": "update_gate:covered_core_below_gate",
-    "ttl_hours": 8
-  },
-  {
-    "created_at": "2026-05-21T21:13:41",
-    "title": "Jim Ross Shares Thoughts On Darby Allin's AEW World Championship Reign",
-    "url": "https://www.wrestlinginc.com/2177503/aew-jim-ross-darby-allin-thoughts-world-championship-reign/",
-    "score": 44,
-    "core": "title:darby-allin:status",
-    "reason": "update_gate:medium_followup_or_weak_update",
-    "ttl_hours": 8
-  },
-  {
-    "created_at": "2026-05-23T17:34:14",
-    "title": "JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule",
-    "url": "https://www.wrestlinginc.com/2177532/wwe-jbl-john-bradshaw-layfield-talent-infinitely-better-increases-live-event-schedule/",
-    "score": 45,
-    "core": "business:wwe:house-shows",
-    "reason": "update_gate:covered_core_below_gate",
-    "ttl_hours": 8
-  },
-  {
-    "created_at": "2026-05-23T19:04:04",
-    "title": "Darby Allin Takes Brutal Shot at MJF's Hair Before AEW Double or Nothing",
-    "url": "https://www.ringsidenews.com/darby-allin-takes-brutal-shot-mjfs-hair-before-aew-double-nothing/",
-    "score": 72,
-    "core": "title:darby-allin:status",
-    "reason": "update_gate:medium_followup_or_weak_update",
-    "ttl_hours": 8
-  },
-  {
-    "created_at": "2026-05-23T23:32:37",
-    "title": "Skye Blue Roasts MJF Over Potentially Going Bald at AEW Double or Nothing",
-    "url": "https://www.ringsidenews.com/skye-blue-roasts-mjf-potentially-going-bald-aew-double-nothing/",
-    "score": 46,
-    "core": "title:darby-allin:status",
-    "reason": "update_gate:medium_followup_or_weak_update",
-    "ttl_hours": 8
-  },
-  {
-    "created_at": "2026-05-24T01:32:56",
-    "title": "WWE Adds Clash In Italy Title Match During Saturday Night's Main Event",
-    "url": "https://www.ringsidenews.com/wwe-adds-clash-italy-title-match-during-saturday-nights-main-event/",
-    "score": 68,
-    "core": "title:becky-lynch:status",
-    "reason": "update_gate:medium_followup_or_weak_update",
-    "ttl_hours": 8
-  },
-  {
-    "created_at": "2026-05-24T13:18:21",
-    "title": "AEW Double Or Nothing 2026 Full & Final Card",
-    "url": "https://www.wrestlinginc.com/2179525/aew-double-or-nothing-2026-full-final-card-matches/",
-    "score": 65,
-    "core": "title:mjf:status",
-    "reason": "update_gate:medium_followup_or_weak_update",
-    "ttl_hours": 8
-  },
-  {
-    "created_at": "2026-05-24T14:48:19",
-    "title": "Final Betting Odds Released for AEW Double or Nothing 2026",
-    "url": "https://www.ringsidenews.com/final-betting-odds-released-aew-double-nothing-2026/",
-    "score": 40,
-    "core": "title:darby-allin:status",
-    "reason": "update_gate:medium_followup_or_weak_update",
-    "ttl_hours": 8
-  },
-  {
-    "created_at": "2026-05-24T17:11:51",
-    "title": "MJF Claims Darby Allin \"Looks Like A School Shooter\" Ahead Of AEW Double or Nothing",
-    "url": "https://www.ringsidenews.com/mjf-claims-darby-allin-looks-school-shooter-ahead-aew-double-nothing/",
-    "score": 60,
-    "core": "title:darby-allin:status",
-    "reason": "update_gate:medium_followup_or_weak_update",
-    "ttl_hours": 8
-  },
-  {
-    "created_at": "2026-05-24T19:55:11",
-    "title": "Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'",
-    "url": "https://www.wrestlinginc.com/2176982/bully-ray-brock-lesnar-wwe-return-retirement/",
-    "score": 68,
     "core": "return:brock-lesnar:wwe",
-    "reason": "update_gate:covered_core_below_gate",
-    "ttl_hours": 8
-  },
-  {
-    "created_at": "2026-05-24T23:40:12",
-    "title": "AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match",
-    "url": "https://www.wrestlinginc.com/2180008/aew-double-or-nothing-2026-five-titles-on-line-stadium-stampede-match/",
-    "score": 82,
-    "core": "title:darby-allin:status",
-    "reason": "update_gate:medium_followup_or_weak_update",
-    "ttl_hours": 12
-  },
-  {
-    "created_at": "2026-05-25T06:15:46",
-    "title": "MJF Explodes Online After Winning AEW World Title and Saving His Hair",
-    "url": "https://www.ringsidenews.com/mjf-explodes-online-winning-aew-world-title-saving-his-hair/",
-    "score": 60,
-    "core": "title:darby-allin:status",
-    "reason": "update_gate:medium_followup_or_weak_update",
-    "ttl_hours": 8
-  },
-  {
-    "created_at": "2026-05-25T06:15:46",
-    "title": "Fans Left Stranded After AEW Double or Nothing Runs Late in Queens",
-    "url": "https://www.ringsidenews.com/fans-left-stranded-aew-double-nothing-runs-late-queens/",
-    "score": 40,
-    "core": "title:mjf:status",
-    "reason": "update_gate:medium_followup_or_weak_update",
-    "ttl_hours": 8
-  },
-  {
     "created_at": "2026-05-25T12:03:43",
-    "title": "WWE HOFer Confused By Brock Lesnar Return",
-    "url": "https://www.wrestlinginc.com/2180261/wwe-hofer-confused-brock-lesnar-return/",
-    "score": 80,
-    "core": "return:brock-lesnar:wwe",
     "reason": "update_gate:medium_followup_or_weak_update",
-    "ttl_hours": 12
+    "score": 80,
+    "title": "WWE HOFer Confused By Brock Lesnar Return",
+    "ttl_hours": 12,
+    "url": "https://www.wrestlinginc.com/2180261/wwe-hofer-confused-brock-lesnar-return/"
   },
   {
-    "created_at": "2026-05-25T19:25:00",
-    "title": "Becky Lynch Blasts Sol Ruca for Assaulting WWE Referee Ahead of RAW",
-    "url": "https://www.ringsidenews.com/becky-lynch-blasts-sol-ruca-assaulting-wwe-referee-ahead-raw/",
-    "score": 67,
     "core": "event:wwe-snme-2026-05-25:becky-lynch-story",
+    "created_at": "2026-05-25T19:25:00",
     "reason": "update_gate:v91_2_authoritative_lane",
-    "ttl_hours": 8
+    "score": 67,
+    "title": "Becky Lynch Blasts Sol Ruca for Assaulting WWE Referee Ahead of RAW",
+    "ttl_hours": 8,
+    "url": "https://www.ringsidenews.com/becky-lynch-blasts-sol-ruca-assaulting-wwe-referee-ahead-raw/"
+  },
+  {
+    "created_at": "2026-05-25T20:55:37",
+    "title": "AEW's Tony Khan Praises David Ellison Ahead Of WBD/Paramount Deal",
+    "url": "https://www.wrestlinginc.com/2180735/aew-tony-khan-praises-david-ellison-wbd-paramount/",
+    "score": 76,
+    "core": "business:tony-khan:paramount-wbd-warner",
+    "reason": "update_gate:v91_2_authoritative_lane",
+    "ttl_hours": 12
   }
 ]

@@ -1,4 +1,18 @@
 {
+  "https://www.ringsidenews.com/aaa-fox-results-highlights-key-moments-may-23-2026": {
+    "extra": {
+      "event_key": "event:business:media-rights",
+      "metadata_file": "published/20260524_095516_002_aaa-on-fox-i-risultati-e-gli-highlight-del-23-maggio-2026_5222_metadata.json",
+      "semantic_id": "aaa-on-fox-results-highlights-and-key-moments-for-may-23-2026",
+      "wp_post_id": 5222
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "AAA on FOX: i risultati e gli highlight del 23 maggio 2026",
+    "updated_at": "1779742510.5867162",
+    "url": "https://www.ringsidenews.com/aaa-fox-results-highlights-key-moments-may-23-2026/"
+  },
   "https://www.ringsidenews.com/aaa-noche-de-los-grandes-lineup-expanded-two-week-event": {
     "extra": {
       "event_key": "",
@@ -13,18 +27,173 @@
     "updated_at": "1779638361.591657",
     "url": "https://www.ringsidenews.com/aaa-noche-de-los-grandes-lineup-expanded-two-week-event/"
   },
+  "https://www.ringsidenews.com/adam-copeland-says-he-not-need-john-cena-style-retirement-tour-aew": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260522_160403_003_adam-copeland-non-ho-bisogno-di-un-retirement-tour-in-stile-john-cena_5133_metadata.json",
+      "semantic_id": "adam-copeland-says-he-does-not-need-john-cena-style-retirement-tour-in-aew",
+      "wp_post_id": 5133
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Adam Copeland: \"Non ho bisogno di un retirement tour in stile John Cena\"",
+    "updated_at": "1779742510.5125299",
+    "url": "https://www.ringsidenews.com/adam-copeland-says-he-not-need-john-cena-style-retirement-tour-aew/"
+  },
+  "https://www.ringsidenews.com/aew-quietly-keeps-paul-wight-under-contract-new-deal": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260517_021622_001_aew-paul-wight-rinnova-il-contratto-con-la-federazione_4779_metadata.json",
+      "semantic_id": "aew-quietly-keeps-paul-wight-under-contract-with-new-deal",
+      "wp_post_id": 4779
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "AEW: Paul Wight rinnova il contratto con la federazione",
+    "updated_at": "1779742510.2237942",
+    "url": "https://www.ringsidenews.com/aew-quietly-keeps-paul-wight-under-contract-new-deal/"
+  },
+  "https://www.ringsidenews.com/aew-real-interest-mick-foley-wwe-legends-contract-nears-end": {
+    "extra": {
+      "event_key": "event:title:tony-khan:darby-allin:world:tag:championship:double-or-nothing",
+      "metadata_file": "published/20260514_181941_003_aew-interessata-a-mick-foley-in-vista-della-scadenza-del-suo-contratto-wwe_4603_metadata.json",
+      "semantic_id": "aew-has-real-interest-in-mick-foley-as-wwe-legends-contract-nears-end",
+      "wp_post_id": 4603
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "AEW interessata a Mick Foley in vista della scadenza del suo contratto WWE",
+    "updated_at": "1779742510.1365275",
+    "url": "https://www.ringsidenews.com/aew-real-interest-mick-foley-wwe-legends-contract-nears-end/"
+  },
+  "https://www.ringsidenews.com/aew-talent-pushing-sign-leon-slater-tna-deal-nears-end": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260519_145328_001_aew-alcuni-atleti-spingono-per-lingaggio-di-leon-slater-in-scadenza-con-tna_4918_metadata.json",
+      "semantic_id": "aew-talent-pushing-to-sign-leon-slater-as-tna-deal-nears-end",
+      "wp_post_id": 4918
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "AEW, alcuni atleti spingono per l'ingaggio di Leon Slater in scadenza con TNA",
+    "updated_at": "1779742510.320158",
+    "url": "https://www.ringsidenews.com/aew-talent-pushing-sign-leon-slater-tna-deal-nears-end/"
+  },
+  "https://www.ringsidenews.com/alexa-bliss-signs-new-talent-agency-representation-outside-wwe": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260523_105244_002_alexa-bliss-firma-con-una-nuova-agenzia-per-la-sua-carriera-extra-wwe_5171_metadata.json",
+      "semantic_id": "alexa-bliss-signs-with-new-talent-agency-for-representation-outside-wwe",
+      "wp_post_id": 5171
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Alexa Bliss firma con una nuova agenzia per la sua carriera extra-WWE",
+    "updated_at": "1779742510.5204518",
+    "url": "https://www.ringsidenews.com/alexa-bliss-signs-new-talent-agency-representation-outside-wwe/"
+  },
+  "https://www.ringsidenews.com/asukas-wwe-future-now-considered-unclear-internally": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260515_155402_002_il-futuro-di-asuka-in-wwe-è-considerato-incerto_4670_metadata.json",
+      "semantic_id": "asukas-wwe-future-now-considered-unclear-internally",
+      "wp_post_id": 4670
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Il futuro di Asuka in WWE è considerato incerto",
+    "updated_at": "1779742510.1625202",
+    "url": "https://www.ringsidenews.com/asukas-wwe-future-now-considered-unclear-internally/"
+  },
+  "https://www.ringsidenews.com/backstage-update-emerges-jack-perrys-aew-contract-status-amid-expiry-rumors": {
+    "extra": {
+      "event_key": "event:anna-jay-diagnosis",
+      "metadata_file": "published/20260515_224917_003_aew-emergono-novità-sullo-status-contrattuale-di-jack-perry_4716_metadata.json",
+      "semantic_id": "backstage-update-emerges-on-jack-perrys-aew-contract-status-amid-expiry-rumors",
+      "wp_post_id": 4716
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "AEW: emergono novità sullo status contrattuale di Jack Perry",
+    "updated_at": "1779742510.1902447",
+    "url": "https://www.ringsidenews.com/backstage-update-emerges-jack-perrys-aew-contract-status-amid-expiry-rumors/"
+  },
+  "https://www.ringsidenews.com/backstage-update-emerges-la-knights-wwe-absence": {
+    "extra": {
+      "event_key": "event:cody-rhodes-diagnosis-followup-backstage-update-emerges-la-knight-s-absence",
+      "metadata_file": "published/20260519_080503_001_aggiornamenti-sullassenza-di-la-knight-dagli-show-wwe_4905_metadata.json",
+      "semantic_id": "backstage-update-emerges-on-la-knights-wwe-absence",
+      "wp_post_id": 4905
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Aggiornamenti sull'assenza di LA Knight dagli show WWE",
+    "updated_at": "1779742510.3113005",
+    "url": "https://www.ringsidenews.com/backstage-update-emerges-la-knights-wwe-absence/"
+  },
+  "https://www.ringsidenews.com/baron-corbin-mocks-claims-he-wrapped-outside-commitments-amid-wwe-return-rumors": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260521_103907_001_baron-corbin-ironizza-sulle-voci-di-un-suo-possibile-ritorno-in-wwe_5053_metadata.json",
+      "semantic_id": "baron-corbin-mocks-claims-he-wrapped-up-outside-commitments-amid-wwe-return-rumors",
+      "wp_post_id": 5053
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Baron Corbin ironizza sulle voci di un suo possibile ritorno in WWE",
+    "updated_at": "1779742510.4293034",
+    "url": "https://www.ringsidenews.com/baron-corbin-mocks-claims-he-wrapped-outside-commitments-amid-wwe-return-rumors/"
+  },
+  "https://www.ringsidenews.com/bayley-returns-nxt-house-shows-first-time-10-years-admits-todays-talent-different": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260516_144227_003_bayley-torna-a-un-live-event-di-nxt-dopo-10-anni-il-talento-di-oggi-è-diverso_4762_metadata.json",
+      "semantic_id": "bayley-returns-to-nxt-house-shows-for-first-time-in-10-years-and-admits-todays-talent-is-different",
+      "wp_post_id": 4762
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Bayley torna a un live event di NXT dopo 10 anni: \"Il talento di oggi è diverso\"",
+    "updated_at": "1779742510.2128289",
+    "url": "https://www.ringsidenews.com/bayley-returns-nxt-house-shows-first-time-10-years-admits-todays-talent-different/"
+  },
   "https://www.ringsidenews.com/becky-lynch-blasts-sol-ruca-assaulting-wwe-referee-ahead-raw": {
     "extra": {
       "event_key": "event:wwe-snme-2026-05-25",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "becky-lynch-blasts-sol-ruca-for-assaulting-wwe-referee-ahead-of-raw"
     },
-    "reason": "high_score_or_discussion_worthy_not_final",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 67,
     "status": "competitive_deferred",
     "title": "Becky Lynch Blasts Sol Ruca for Assaulting WWE Referee Ahead of RAW",
     "updated_at": "1779737100.5465117",
     "url": "https://www.ringsidenews.com/becky-lynch-blasts-sol-ruca-assaulting-wwe-referee-ahead-raw/"
+  },
+  "https://www.ringsidenews.com/becky-lynch-melts-down-sol-ruca-match-ends-chaos-saturday-nights-main-event": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260524_013155_001_becky-lynch-furiosa-dopo-il-finale-contro-sol-ruca-a-saturday-nights-main-event_5201_metadata.json",
+      "semantic_id": "becky-lynch-melts-down-after-sol-ruca-match-ends-in-chaos-at-saturday-nights-main-event",
+      "wp_post_id": 5201
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Becky Lynch furiosa dopo il finale contro Sol Ruca a Saturday Night's Main Event",
+    "updated_at": "1779742510.5572288",
+    "url": "https://www.ringsidenews.com/becky-lynch-melts-down-sol-ruca-match-ends-chaos-saturday-nights-main-event/"
   },
   "https://www.ringsidenews.com/big-match-added-wwe-clash-italy": {
     "extra": {
@@ -38,6 +207,20 @@
     "title": "Big Match Added to WWE Clash in Italy",
     "updated_at": "1779602383.0324235",
     "url": "https://www.ringsidenews.com/big-match-added-wwe-clash-italy/"
+  },
+  "https://www.ringsidenews.com/blake-monroe-drops-major-hint-about-wwe-smackdown-debut-date": {
+    "extra": {
+      "event_key": "event:cody-rhodes-diagnosis",
+      "metadata_file": "published/20260515_155322_001_blake-monroe-suggerisce-il-suo-possibile-debutto-a-smackdown-a-barcellona_4667_metadata.json",
+      "semantic_id": "blake-monroe-drops-major-hint-about-wwe-smackdown-debut-date",
+      "wp_post_id": 4667
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Blake Monroe suggerisce il suo possibile debutto a SmackDown a Barcellona",
+    "updated_at": "1779742510.1608567",
+    "url": "https://www.ringsidenews.com/blake-monroe-drops-major-hint-about-wwe-smackdown-debut-date/"
   },
   "https://www.ringsidenews.com/blake-monroe-makes-wwe-main-roster-debut-during-522-smackdown": {
     "extra": {
@@ -53,6 +236,145 @@
     "updated_at": "1779552021.023142",
     "url": "https://www.ringsidenews.com/blake-monroe-makes-wwe-main-roster-debut-during-522-smackdown/"
   },
+  "https://www.ringsidenews.com/britt-bakers-aew-return-status-gets-discouraging-update-amid-tv-absence": {
+    "extra": {
+      "event_key": "",
+      "raw_result": "skipped",
+      "semantic_id": "britt-bakers-aew-return-status-gets-discouraging-update-amid-tv-absence"
+    },
+    "reason": "above_low_score_final_cap_not_final",
+    "score": 71,
+    "status": "competitive_deferred",
+    "title": "Britt Baker's AEW Return Status Gets Discouraging Update Amid TV Absence",
+    "updated_at": "1779742554.8714242",
+    "url": "https://www.ringsidenews.com/britt-bakers-aew-return-status-gets-discouraging-update-amid-tv-absence/"
+  },
+  "https://www.ringsidenews.com/bronson-reed-shows-off-massive-physique-during-wwe-absence": {
+    "extra": {
+      "event_key": "report:wwe-snme-2026-05-25",
+      "metadata_file": "published/20260525_174107_001_wwe-saturday-nights-main-event-del-25-maggio-2026-risultati-e-momenti-salienti_5258_metadata.json",
+      "semantic_id": "bronson-reed-shows-off-massive-physique-during-wwe-absence",
+      "wp_post_id": 5258
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE Saturday Night's Main Event del 25 maggio 2026 - risultati e momenti salienti",
+    "updated_at": "1779742510.6391394",
+    "url": "https://www.ringsidenews.com/bronson-reed-shows-off-massive-physique-during-wwe-absence/"
+  },
+  "https://www.ringsidenews.com/buddy-matthews-returns-attacks-donovan-dijak-long-injury-layoff": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260515_134735_002_buddy-matthews-torna-a-sorpresa-e-attacca-donovan-dijak-a-wsw-rise-against_4663_metadata.json",
+      "semantic_id": "buddy-matthews-returns-and-attacks-donovan-dijak-after-long-injury-layoff",
+      "wp_post_id": 4663
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Buddy Matthews torna a sorpresa e attacca Donovan Dijak a WSW Rise Against",
+    "updated_at": "1779742510.1591885",
+    "url": "https://www.ringsidenews.com/buddy-matthews-returns-attacks-donovan-dijak-long-injury-layoff/"
+  },
+  "https://www.ringsidenews.com/charlotte-flair-fires-warning-about-breaking-ric-flair-john-cenas-wwe-title-record": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260521_025614_002_charlotte-flair-punta-al-record-di-titoli-di-ric-flair-e-john-cena_5011_metadata.json",
+      "semantic_id": "charlotte-flair-fires-warning-about-breaking-ric-flair-john-cenas-wwe-title-record",
+      "wp_post_id": 5011
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Charlotte Flair punta al record di titoli di Ric Flair e John Cena",
+    "updated_at": "1779742510.4013455",
+    "url": "https://www.ringsidenews.com/charlotte-flair-fires-warning-about-breaking-ric-flair-john-cenas-wwe-title-record/"
+  },
+  "https://www.ringsidenews.com/charlotte-flair-wrestles-through-wardrobe-malfunction-during-wwe-saturday-nights-main-event": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260524_013335_003_problemi-con-labbigliamento-per-charlotte-flair-durante-wwe-saturday-nights-main-event_5207_metadata.json",
+      "semantic_id": "charlotte-flair-wrestles-through-wardrobe-malfunction-during-wwe-saturday-nights-main-event",
+      "wp_post_id": 5207
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Problemi con l'abbigliamento per Charlotte Flair durante WWE Saturday Night's Main Event",
+    "updated_at": "1779742510.5656397",
+    "url": "https://www.ringsidenews.com/charlotte-flair-wrestles-through-wardrobe-malfunction-during-wwe-saturday-nights-main-event/"
+  },
+  "https://www.ringsidenews.com/chris-jericho-addresses-wwe-return-rumors-before-aew-comeback": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260518_214718_002_chris-jericho-chiarisce-le-voci-su-un-suo-possibile-ritorno-in-wwe_4878_metadata.json",
+      "semantic_id": "chris-jericho-addresses-wwe-return-rumors-before-aew-comeback",
+      "wp_post_id": 4878
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Chris Jericho chiarisce le voci su un suo possibile ritorno in WWE",
+    "updated_at": "1779742510.2941692",
+    "url": "https://www.ringsidenews.com/chris-jericho-addresses-wwe-return-rumors-before-aew-comeback/"
+  },
+  "https://www.ringsidenews.com/cm-punks-return-timeline-revealed-amid-wwe-tv-absence": {
+    "extra": {
+      "event_key": "event:cm-punk-return",
+      "metadata_file": "published/20260518_214528_001_wwe-svelati-i-piani-per-il-ritorno-in-tv-di-cm-punk_4875_metadata.json",
+      "semantic_id": "cm-punks-return-timeline-revealed-amid-wwe-tv-absence",
+      "wp_post_id": 4875
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: svelati i piani per il ritorno in TV di CM Punk",
+    "updated_at": "1779742510.2913084",
+    "url": "https://www.ringsidenews.com/cm-punks-return-timeline-revealed-amid-wwe-tv-absence/"
+  },
+  "https://www.ringsidenews.com/cm-punks-wwe-return-status-gets-major-update-amid-tv-absence": {
+    "extra": {
+      "event_key": "event:cm-punk-diagnosis",
+      "metadata_file": "published/20260523_173413_001_spoiler-wwe-la-situazione-sul-ritorno-in-tv-di-cm-punk_5189_metadata.json",
+      "semantic_id": "cm-punks-wwe-return-status-gets-major-update-amid-tv-absence",
+      "wp_post_id": 5189
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "[SPOILER] WWE: la situazione sul ritorno in TV di CM Punk",
+    "updated_at": "1779742510.5406802",
+    "url": "https://www.ringsidenews.com/cm-punks-wwe-return-status-gets-major-update-amid-tv-absence/"
+  },
+  "https://www.ringsidenews.com/danhausen-becomes-one-wwes-biggest-success-stories-rocky-debut": {
+    "extra": {
+      "event_key": "event:business:wwe:executive-contract:nick-khan-followup-danhausen-becomes-one-s-success-stories-rocky-debut",
+      "metadata_file": "published/20260520_000252_001_danhausen-da-un-debutto-difficile-al-grande-successo-commerciale-in-wwe_4947_metadata.json",
+      "semantic_id": "danhausen-becomes-one-of-wwes-biggest-success-stories-after-rocky-debut",
+      "wp_post_id": 4947
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Danhausen: da un debutto difficile al grande successo commerciale in WWE",
+    "updated_at": "1779742510.3475735",
+    "url": "https://www.ringsidenews.com/danhausen-becomes-one-wwes-biggest-success-stories-rocky-debut/"
+  },
+  "https://www.ringsidenews.com/darby-allin-says-having-kids-wont-stop-him-taking-dangerous-risks": {
+    "extra": {
+      "event_key": "event:business:darby-allin",
+      "metadata_file": "published/20260520_174234_003_darby-allin-avere-figli-non-mi-farà-smettere-di-correre-rischi_4993_metadata.json",
+      "semantic_id": "darby-allin-says-having-kids-wont-stop-him-from-taking-dangerous-risks",
+      "wp_post_id": 4993
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Darby Allin: \"Avere figli non mi farà smettere di correre rischi\"",
+    "updated_at": "1779742510.380414",
+    "url": "https://www.ringsidenews.com/darby-allin-says-having-kids-wont-stop-him-taking-dangerous-risks/"
+  },
   "https://www.ringsidenews.com/darby-allin-takes-brutal-shot-mjfs-hair-before-aew-double-nothing": {
     "extra": {
       "event_key": "event:title:darby-allin:world:double-or-nothing",
@@ -66,6 +388,48 @@
     "title": "Darby Allin Takes Brutal Shot at MJF's Hair Before AEW Double or Nothing",
     "updated_at": "1779563044.4471133",
     "url": "https://www.ringsidenews.com/darby-allin-takes-brutal-shot-mjfs-hair-before-aew-double-nothing/"
+  },
+  "https://www.ringsidenews.com/daria-rae-addresses-tna-contract-status-ahead-upcoming-expiration": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260521_025631_003_daria-rae-fa-chiarezza-sulla-scadenza-del-suo-contratto-con-tna_5014_metadata.json",
+      "semantic_id": "daria-rae-addresses-tna-contract-status-ahead-of-upcoming-expiration",
+      "wp_post_id": 5014
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Daria Rae fa chiarezza sulla scadenza del suo contratto con TNA",
+    "updated_at": "1779742510.404797",
+    "url": "https://www.ringsidenews.com/daria-rae-addresses-tna-contract-status-ahead-upcoming-expiration/"
+  },
+  "https://www.ringsidenews.com/daria-rae-reveals-acting-become-her-main-gig-wwe-exit": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260521_065556_004_daria-rae-la-recitazione-è-il-suo-impegno-principale-dopo-laddio-alla-wwe_5045_metadata.json",
+      "semantic_id": "daria-rae-reveals-acting-has-become-her-main-gig-after-wwe-exit",
+      "wp_post_id": 5045
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Daria Rae: la recitazione è il suo impegno principale dopo l'addio alla WWE",
+    "updated_at": "1779742510.4257782",
+    "url": "https://www.ringsidenews.com/daria-rae-reveals-acting-become-her-main-gig-wwe-exit/"
+  },
+  "https://www.ringsidenews.com/early-betting-odds-released-may-23-wwe-saturday-nights-main-event": {
+    "extra": {
+      "event_key": "event:logan-paul-release",
+      "metadata_file": "published/20260515_022557_001_quote-scommesse-per-il-wwe-saturday-nights-main-event-del-23-maggio_4633_metadata.json",
+      "semantic_id": "early-betting-odds-released-for-may-23-wwe-saturday-nights-main-event",
+      "wp_post_id": 4633
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Quote scommesse per il WWE Saturday Night's Main Event del 23 maggio",
+    "updated_at": "1779742510.1496685",
+    "url": "https://www.ringsidenews.com/early-betting-odds-released-may-23-wwe-saturday-nights-main-event/"
   },
   "https://www.ringsidenews.com/el-grande-americano-appears-aaa-serenata-event-ludwig-kaiser-arrest-controversy": {
     "extra": {
@@ -81,6 +445,34 @@
     "updated_at": "1779552063.2524507",
     "url": "https://www.ringsidenews.com/el-grande-americano-appears-aaa-serenata-event-ludwig-kaiser-arrest-controversy/"
   },
+  "https://www.ringsidenews.com/enzo-amore-contact-wwe-during-wrestlemania-42-week": {
+    "extra": {
+      "event_key": "event:rumor:enzo-amore-was-contact-during",
+      "metadata_file": "published/20260519_114208_002_enzo-amore-in-contatto-con-la-wwe-durante-la-settimana-di-wrestlemania-40_4915_metadata.json",
+      "semantic_id": "enzo-amore-was-in-contact-with-wwe-during-wrestlemania-42-week",
+      "wp_post_id": 4915
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Enzo Amore in contatto con la WWE durante la settimana di WrestleMania 40",
+    "updated_at": "1779742510.317215",
+    "url": "https://www.ringsidenews.com/enzo-amore-contact-wwe-during-wrestlemania-42-week/"
+  },
+  "https://www.ringsidenews.com/eric-young-says-tna-return-middle-finger-wwe-final-run": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260517_185715_001_eric-young-il-mio-ritorno-in-tna-è-stato-un-segnale-contro-la-wwe-dopo-il-licenziamento_4823_metadata.json",
+      "semantic_id": "eric-young-says-tna-return-was-a-middle-finger-to-wwe-after-final-run",
+      "wp_post_id": 4823
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Eric Young: \"Il mio ritorno in TNA è stato un segnale contro la WWE dopo il licenziamento\"",
+    "updated_at": "1779742510.249715",
+    "url": "https://www.ringsidenews.com/eric-young-says-tna-return-middle-finger-wwe-final-run/"
+  },
   "https://www.ringsidenews.com/espn-quietly-restores-aew-section-major-darby-allin-feature-before-double-nothing": {
     "extra": {
       "event_key": "event:business:darby-allin",
@@ -94,17 +486,32 @@
     "updated_at": "1779552251.4286497",
     "url": "https://www.ringsidenews.com/espn-quietly-restores-aew-section-major-darby-allin-feature-before-double-nothing/"
   },
+  "https://www.ringsidenews.com/fans-bury-shawn-spears-bragging-about-his-wwe-paycheck-amid-tko-pay-cut-controversy": {
+    "extra": {
+      "event_key": "event:business:tko-financials",
+      "metadata_file": "published/20260516_144017_001_shawn-spears-criticato-dai-fan-per-aver-ostentato-lo-stipendio-in-wwe_4756_metadata.json",
+      "semantic_id": "fans-bury-shawn-spears-for-bragging-about-his-wwe-paycheck-amid-tko-pay-cut-controversy",
+      "wp_post_id": 4756
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Shawn Spears criticato dai fan per aver ostentato lo stipendio in WWE",
+    "updated_at": "1779742510.2085843",
+    "url": "https://www.ringsidenews.com/fans-bury-shawn-spears-bragging-about-his-wwe-paycheck-amid-tko-pay-cut-controversy/"
+  },
   "https://www.ringsidenews.com/fans-furious-becky-lynch-vs-sol-rucas-controversial-finish-saturday-nights-main-event": {
     "extra": {
       "event_key": "",
-      "raw_result": "skipped",
-      "semantic_id": "fans-furious-over-becky-lynch-vs-sol-rucas-controversial-finish-at-saturday-nights-main-event"
+      "metadata_file": "published/20260524_102250_001_polemiche-tra-i-fan-per-il-finale-di-becky-lynch-vs-sol-ruca-a-saturday-nights-main-event_5225_metadata.json",
+      "semantic_id": "fans-furious-over-becky-lynch-vs-sol-rucas-controversial-finish-at-saturday-nights-main-event",
+      "wp_post_id": 5225
     },
-    "reason": "above_low_score_final_cap_not_final",
-    "score": 62,
-    "status": "competitive_deferred",
-    "title": "Fans Furious Over Becky Lynch vs. Sol Ruca's Controversial Finish at Saturday Night's Main Event",
-    "updated_at": "1779616398.364734",
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Polemiche tra i fan per il finale di Becky Lynch vs. Sol Ruca a Saturday Night's Main Event",
+    "updated_at": "1779742510.5910358",
     "url": "https://www.ringsidenews.com/fans-furious-becky-lynch-vs-sol-rucas-controversial-finish-saturday-nights-main-event/"
   },
   "https://www.ringsidenews.com/fans-left-stranded-aew-double-nothing-runs-late-queens": {
@@ -146,6 +553,48 @@
     "updated_at": "1779563057.8406441",
     "url": "https://www.ringsidenews.com/final-betting-odds-released-wwe-saturday-nights-main-event/"
   },
+  "https://www.ringsidenews.com/former-wwe-nxt-star-giovanni-vinci-arrives-tna-right-cedric-alexanders-title-win": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260515_112138_001_tna-cedric-alexander-nuovo-x-division-champion-debutta-giovanni-vinci_4656_metadata.json",
+      "semantic_id": "former-wwe-nxt-star-giovanni-vinci-arrives-in-tna-right-after-cedric-alexanders-title-win",
+      "wp_post_id": 4656
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "TNA: Cedric Alexander nuovo X Division Champion, debutta Giovanni Vinci",
+    "updated_at": "1779742510.1559315",
+    "url": "https://www.ringsidenews.com/former-wwe-nxt-star-giovanni-vinci-arrives-tna-right-cedric-alexanders-title-win/"
+  },
+  "https://www.ringsidenews.com/former-wwe-star-says-aewroh-deal-works": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260516_104458_001_sidney-akeem-reginald-vicino-allaccordo-con-aew-e-roh_4749_metadata.json",
+      "semantic_id": "former-wwe-star-says-aewroh-deal-is-in-the-works",
+      "wp_post_id": 4749
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Sidney Akeem (Reginald) vicino all'accordo con AEW e ROH",
+    "updated_at": "1779742510.2044413",
+    "url": "https://www.ringsidenews.com/former-wwe-star-says-aewroh-deal-works/"
+  },
+  "https://www.ringsidenews.com/former-wwe-star-spotted-performance-center-ahead-tuesdays-nxt": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260520_174027_001_enzo-amore-avvistato-al-wwe-performance-center-prima-di-nxt_4987_metadata.json",
+      "semantic_id": "former-wwe-star-spotted-at-performance-center-ahead-of-tuesdays-nxt",
+      "wp_post_id": 4987
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Enzo Amore avvistato al WWE Performance Center prima di NXT",
+    "updated_at": "1779742510.3732417",
+    "url": "https://www.ringsidenews.com/former-wwe-star-spotted-performance-center-ahead-tuesdays-nxt/"
+  },
   "https://www.ringsidenews.com/ftr-says-edge-christian-weak-competition-compared-them": {
     "extra": {
       "event_key": "",
@@ -172,6 +621,272 @@
     "updated_at": "1779586420.5981474",
     "url": "https://www.ringsidenews.com/ftr-wants-match-against-new-day-aew-wwe-exit/"
   },
+  "https://www.ringsidenews.com/godfather-signs-new-wwe-legends-deal": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260524_234113_002_wwe-the-godfather-firma-un-nuovo-contratto-quinquennale-da-legend_5249_metadata.json",
+      "semantic_id": "the-godfather-signs-new-wwe-legends-deal",
+      "wp_post_id": 5249
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: The Godfather firma un nuovo contratto quinquennale da Legend",
+    "updated_at": "1779742510.625826",
+    "url": "https://www.ringsidenews.com/godfather-signs-new-wwe-legends-deal/"
+  },
+  "https://www.ringsidenews.com/gunther-says-brock-lesnar-can-challenge-him-cody-rhodes-match": {
+    "extra": {
+      "event_key": "event:brock-lesnar-cody-rhodes-return-followup-gunther-says-brock-lesnar-can-challenge-him-cody-rhodes",
+      "metadata_file": "published/20260524_131817_001_gunther-dopo-cody-rhodes-brock-lesnar-potrà-sfidarmi_5228_metadata.json",
+      "semantic_id": "gunther-says-brock-lesnar-can-challenge-him-after-cody-rhodes-match",
+      "wp_post_id": 5228
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Gunther: \"Dopo Cody Rhodes, Brock Lesnar potrà sfidarmi\"",
+    "updated_at": "1779742510.5953503",
+    "url": "https://www.ringsidenews.com/gunther-says-brock-lesnar-can-challenge-him-cody-rhodes-match/"
+  },
+  "https://www.ringsidenews.com/independent-wrestler-mb-funk-passes-away": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260517_200455_003_è-morto-mb-funk-wrestler-del-circuito-indipendente_4832_metadata.json",
+      "semantic_id": "independent-wrestler-mb-funk-passes-away",
+      "wp_post_id": 4832
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "È morto MB Funk, wrestler del circuito indipendente",
+    "updated_at": "1779742510.2570672",
+    "url": "https://www.ringsidenews.com/independent-wrestler-mb-funk-passes-away/"
+  },
+  "https://www.ringsidenews.com/indi-hartwell-re-signs-tna-wrestling": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260515_022609_002_indi-hartwell-rinnova-il-contratto-con-tna-wrestling_4636_metadata.json",
+      "semantic_id": "indi-hartwell-re-signs-with-tna-wrestling",
+      "wp_post_id": 4636
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Indi Hartwell rinnova il contratto con TNA Wrestling",
+    "updated_at": "1779742510.1511962",
+    "url": "https://www.ringsidenews.com/indi-hartwell-re-signs-tna-wrestling/"
+  },
+  "https://www.ringsidenews.com/iyo-sky-announces-marriage-wwe-nxt-star-naraku": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260517_153701_001_iyo-sky-annuncia-il-matrimonio-con-la-stella-di-nxt-naraku_4808_metadata.json",
+      "semantic_id": "iyo-sky-announces-marriage-to-wwe-nxt-star-naraku",
+      "wp_post_id": 4808
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Iyo Sky annuncia il matrimonio con la stella di NXT NARAKU",
+    "updated_at": "1779742510.237649",
+    "url": "https://www.ringsidenews.com/iyo-sky-announces-marriage-wwe-nxt-star-naraku/"
+  },
+  "https://www.ringsidenews.com/iyo-sky-explains-why-she-naraku-finally-went-public-marriage": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260517_232851_001_iyo-sky-spiega-perché-ha-reso-pubblico-il-matrimonio-con-naraku_4843_metadata.json",
+      "semantic_id": "iyo-sky-explains-why-she-and-naraku-finally-went-public-with-marriage",
+      "wp_post_id": 4843
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Iyo Sky spiega perché ha reso pubblico il matrimonio con NARAKU",
+    "updated_at": "1779742510.2646706",
+    "url": "https://www.ringsidenews.com/iyo-sky-explains-why-she-naraku-finally-went-public-marriage/"
+  },
+  "https://www.ringsidenews.com/jcw-lunacy-experiencing-major-audio-issues-during-live-broadcast": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260522_041847_003_grave-problema-audio-durante-la-diretta-di-jcw-lunacy_5107_metadata.json",
+      "semantic_id": "jcw-lunacy-experiencing-major-audio-issues-during-live-broadcast",
+      "wp_post_id": 5107
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Grave problema audio durante la diretta di JCW Lunacy",
+    "updated_at": "1779742510.4927394",
+    "url": "https://www.ringsidenews.com/jcw-lunacy-experiencing-major-audio-issues-during-live-broadcast/"
+  },
+  "https://www.ringsidenews.com/jeff-cobb-spotted-backstage-njpw-event-wwe-release": {
+    "extra": {
+      "event_key": "event:rumor:jeff-cobb-spotted-backstage-njpw-event-release",
+      "metadata_file": "published/20260515_190555_001_jeff-cobb-avvistato-nel-backstage-di-njpw-wrestling-dontaku-dopo-laddio-alla-wwe_4692_metadata.json",
+      "semantic_id": "jeff-cobb-spotted-backstage-at-njpw-event-after-wwe-release",
+      "wp_post_id": 4692
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Jeff Cobb avvistato nel backstage di NJPW Wrestling Dontaku dopo l'addio alla WWE",
+    "updated_at": "1779742510.1751359",
+    "url": "https://www.ringsidenews.com/jeff-cobb-spotted-backstage-njpw-event-wwe-release/"
+  },
+  "https://www.ringsidenews.com/jimmy-hart-reveals-hulk-hogan-knew-fans-could-turn-him-during-wwe-raw-netflix-debut": {
+    "extra": {
+      "event_key": "event:business:media-rights-followup-jimmy-hart-reveals-hulk-hogan-knew-fans-could-turn-him-during-raw",
+      "metadata_file": "published/20260520_112715_001_jimmy-hart-hulk-hogan-sapeva-di-poter-essere-fischiato-al-debutto-di-raw-su-netflix_4981_metadata.json",
+      "semantic_id": "jimmy-hart-reveals-hulk-hogan-knew-fans-could-turn-on-him-during-wwe-raw-netflix-debut",
+      "wp_post_id": 4981
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Jimmy Hart: \"Hulk Hogan sapeva di poter essere fischiato al debutto di Raw su Netflix\"",
+    "updated_at": "1779742510.36668",
+    "url": "https://www.ringsidenews.com/jimmy-hart-reveals-hulk-hogan-knew-fans-could-turn-him-during-wwe-raw-netflix-debut/"
+  },
+  "https://www.ringsidenews.com/joe-hendry-names-cm-punk-as-wwe-opponent-he-wants-most": {
+    "extra": {
+      "event_key": "event:cm-punk-logan-paul-roman-reigns-diagnosis",
+      "metadata_file": "published/20260515_204206_003_joe-hendry-punta-cm-punk-come-avversario-ideale-in-wwe_4701_metadata.json",
+      "semantic_id": "joe-hendry-names-cm-punk-as-wwe-opponent-he-wants-most",
+      "wp_post_id": 4701
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Joe Hendry punta CM Punk come avversario ideale in WWE",
+    "updated_at": "1779742510.180774",
+    "url": "https://www.ringsidenews.com/joe-hendry-names-cm-punk-as-wwe-opponent-he-wants-most/"
+  },
+  "https://www.ringsidenews.com/joe-hendry-says-wwe-nearly-signed-him-years-before-tna-fame-changed-everything": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260515_204100_002_joe-hendry-la-wwe-mi-cercò-anni-prima-del-successo-in-tna_4698_metadata.json",
+      "semantic_id": "joe-hendry-says-wwe-nearly-signed-him-years-before-tna-fame-changed-everything",
+      "wp_post_id": 4698
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Joe Hendry: \"La WWE mi cercò anni prima del successo in TNA\"",
+    "updated_at": "1779742510.178915",
+    "url": "https://www.ringsidenews.com/joe-hendry-says-wwe-nearly-signed-him-years-before-tna-fame-changed-everything/"
+  },
+  "https://www.ringsidenews.com/john-cena-reveals-he-diagnosed-rare-eye-condition-ignoring-symptoms": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260515_022640_003_john-cena-rivela-di-aver-ignorato-i-sintomi-di-una-rara-patologia-oculare_4639_metadata.json",
+      "semantic_id": "john-cena-reveals-he-was-diagnosed-with-rare-eye-condition-after-ignoring-symptoms",
+      "wp_post_id": 4639
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "John Cena rivela di aver ignorato i sintomi di una rara patologia oculare",
+    "updated_at": "1779742510.1527638",
+    "url": "https://www.ringsidenews.com/john-cena-reveals-he-diagnosed-rare-eye-condition-ignoring-symptoms/"
+  },
+  "https://www.ringsidenews.com/judge-rules-wwe-ring-boys-can-stay-anonymous-lawsuit-against-vince-mcmahon": {
+    "extra": {
+      "event_key": "event:legal:vince-mcmahon",
+      "metadata_file": "published/20260515_172718_001_causa-contro-vince-mcmahon-i-ring-boys-potranno-restare-anonimi_4686_metadata.json",
+      "semantic_id": "judge-rules-wwe-ring-boys-can-stay-anonymous-in-lawsuit-against-vince-mcmahon",
+      "wp_post_id": 4686
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Causa contro Vince McMahon: i ring boys potranno restare anonimi",
+    "updated_at": "1779742510.1712892",
+    "url": "https://www.ringsidenews.com/judge-rules-wwe-ring-boys-can-stay-anonymous-lawsuit-against-vince-mcmahon/"
+  },
+  "https://www.ringsidenews.com/kevin-nash-calls-out-wwe-one-sided-contract-clauses-that-hurt-wrestlers-market-value": {
+    "extra": {
+      "event_key": "event:business:tko-financials",
+      "metadata_file": "published/20260518_141356_001_kevin-nash-critica-le-clausole-dei-contratti-wwe-penalizzano-il-valore-dei-wrestler_4855_metadata.json",
+      "semantic_id": "kevin-nash-calls-out-wwe-over-one-sided-contract-clauses-that-hurt-wrestlers-market-value",
+      "wp_post_id": 4855
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Kevin Nash critica le clausole dei contratti WWE: \"Penalizzano il valore dei wrestler\"",
+    "updated_at": "1779742510.275136",
+    "url": "https://www.ringsidenews.com/kevin-nash-calls-out-wwe-one-sided-contract-clauses-that-hurt-wrestlers-market-value/"
+  },
+  "https://www.ringsidenews.com/kingdom-returns-aewroh-roh-tag-team-titles-their-sights": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260516_092437_001_the-kingdom-torna-in-aew-e-roh-lobiettivo-sono-i-roh-world-tag-team-championship_4743_metadata.json",
+      "semantic_id": "the-kingdom-returns-to-aewroh-with-roh-tag-team-titles-in-their-sights",
+      "wp_post_id": 4743
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "The Kingdom torna in AEW e ROH: l'obiettivo sono i ROH World Tag Team Championship",
+    "updated_at": "1779742510.2002568",
+    "url": "https://www.ringsidenews.com/kingdom-returns-aewroh-roh-tag-team-titles-their-sights/"
+  },
+  "https://www.ringsidenews.com/kit-wilson-says-future-pretty-deadly-reunion-would-more-mature": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260523_233144_001_kit-wilson-su-una-futura-reunion-dei-pretty-deadly-sarebbe-una-versione-più-matura_5195_metadata.json",
+      "semantic_id": "kit-wilson-says-future-pretty-deadly-reunion-would-be-more-mature",
+      "wp_post_id": 5195
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Kit Wilson su una futura reunion dei Pretty Deadly: \"Sarebbe una versione più matura\"",
+    "updated_at": "1779742510.548873",
+    "url": "https://www.ringsidenews.com/kit-wilson-says-future-pretty-deadly-reunion-would-more-mature/"
+  },
+  "https://www.ringsidenews.com/layla-explains-why-she-abruptly-walked-away-wwe-signing-new-deal": {
+    "extra": {
+      "event_key": "event:business:vince-mcmahon",
+      "metadata_file": "published/20260517_082723_001_layla-spiega-il-suo-improvviso-addio-alla-wwe-dopo-aver-rinnovato-il-contratto_4798_metadata.json",
+      "semantic_id": "layla-explains-why-she-abruptly-walked-away-from-wwe-after-signing-new-deal",
+      "wp_post_id": 4798
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Layla spiega il suo improvviso addio alla WWE dopo aver rinnovato il contratto",
+    "updated_at": "1779742510.2306132",
+    "url": "https://www.ringsidenews.com/layla-explains-why-she-abruptly-walked-away-wwe-signing-new-deal/"
+  },
+  "https://www.ringsidenews.com/layla-reveals-one-thing-that-could-bring-her-back-wwe": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260516_144145_002_layla-apre-a-un-ritorno-in-wwe-solo-per-una-reunion-delle-laycool_4759_metadata.json",
+      "semantic_id": "layla-reveals-the-one-thing-that-could-bring-her-back-to-wwe",
+      "wp_post_id": 4759
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Layla apre a un ritorno in WWE: \"Solo per una reunion delle LayCool\"",
+    "updated_at": "1779742510.210702",
+    "url": "https://www.ringsidenews.com/layla-reveals-one-thing-that-could-bring-her-back-wwe/"
+  },
+  "https://www.ringsidenews.com/liv-morgan-stalking-case-returning-court-multiple-delays": {
+    "extra": {
+      "event_key": "event:liv-morgan-return",
+      "metadata_file": "published/20260521_171253_002_caso-di-stalking-contro-liv-morgan-nuova-udienza-in-tribunale-dopo-diversi-rinvii_5092_metadata.json",
+      "semantic_id": "liv-morgan-stalking-case-returning-to-court-after-multiple-delays",
+      "wp_post_id": 5092
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Caso di stalking contro Liv Morgan: nuova udienza in tribunale dopo diversi rinvii",
+    "updated_at": "1779742510.4735637",
+    "url": "https://www.ringsidenews.com/liv-morgan-stalking-case-returning-court-multiple-delays/"
+  },
   "https://www.ringsidenews.com/ludwig-kaiser-appears-aaa-recent-arrest": {
     "extra": {
       "event_key": "",
@@ -185,6 +900,104 @@
     "title": "Ludwig Kaiser Appears In AAA After Recent Arrest",
     "updated_at": "1779638356.087846",
     "url": "https://www.ringsidenews.com/ludwig-kaiser-appears-aaa-recent-arrest/"
+  },
+  "https://www.ringsidenews.com/ludwig-kaiser-argues-wwe-travel-essential-keep-his-job-amid-battery-case": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260521_141421_003_ludwig-kaiser-i-legali-affermano-che-le-restrizioni-di-viaggio-minacciano-il-suo-impiego-i_5083_metadata.json",
+      "semantic_id": "ludwig-kaiser-argues-wwe-travel-is-essential-to-keep-his-job-amid-battery-case",
+      "wp_post_id": 5083
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Ludwig Kaiser: i legali affermano che le restrizioni di viaggio minacciano il suo impiego in WWE",
+    "updated_at": "1779742510.4622982",
+    "url": "https://www.ringsidenews.com/ludwig-kaiser-argues-wwe-travel-essential-keep-his-job-amid-battery-case/"
+  },
+  "https://www.ringsidenews.com/ludwig-kaiser-battery-case-reveal-alleged-elevator-attack-have-some-manners-comment": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260521_113952_001_spoiler-emergono-i-dettagli-sul-caso-di-aggressione-che-coinvolge-ludwig-kaiser_5060_metadata.json",
+      "semantic_id": "ludwig-kaiser-battery-case-reveal-alleged-elevator-attack-after-have-some-manners-comment",
+      "wp_post_id": 5060
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "[SPOILER] Emergono i dettagli sul caso di aggressione che coinvolge Ludwig Kaiser",
+    "updated_at": "1779742510.4365838",
+    "url": "https://www.ringsidenews.com/ludwig-kaiser-battery-case-reveal-alleged-elevator-attack-have-some-manners-comment/"
+  },
+  "https://www.ringsidenews.com/ludwig-kaiser-fighting-florida-battery-charge-not-guilty-plea": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260521_133444_001_ludwig-kaiser-si-dichiara-non-colpevole-per-laccusa-di-aggressione-in-florida_5068_metadata.json",
+      "semantic_id": "ludwig-kaiser-fighting-florida-battery-charge-with-not-guilty-plea",
+      "wp_post_id": 5068
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Ludwig Kaiser si dichiara non colpevole per l'accusa di aggressione in Florida",
+    "updated_at": "1779742510.443816",
+    "url": "https://www.ringsidenews.com/ludwig-kaiser-fighting-florida-battery-charge-not-guilty-plea/"
+  },
+  "https://www.ringsidenews.com/ludwig-kaiser-flew-back-mexico-learning-about-florida-arrest-warrant": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260521_133456_002_ludwig-kaiser-rientrato-dal-messico-dopo-aver-appreso-del-mandato-darresto-in-florida_5071_metadata.json",
+      "semantic_id": "ludwig-kaiser-flew-back-from-mexico-after-learning-about-florida-arrest-warrant",
+      "wp_post_id": 5071
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Ludwig Kaiser rientrato dal Messico dopo aver appreso del mandato d'arresto in Florida",
+    "updated_at": "1779742510.4474382",
+    "url": "https://www.ringsidenews.com/ludwig-kaiser-flew-back-mexico-learning-about-florida-arrest-warrant/"
+  },
+  "https://www.ringsidenews.com/ludwig-kaiser-requests-trial-florida-battery-case-hiring-attorney": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260521_160511_001_ludwig-kaiser-chiede-il-processo-per-laccusa-di-percosse-in-florida_5086_metadata.json",
+      "semantic_id": "ludwig-kaiser-requests-trial-in-florida-battery-case-after-hiring-attorney",
+      "wp_post_id": 5086
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Ludwig Kaiser chiede il processo per l'accusa di percosse in Florida",
+    "updated_at": "1779742510.4660316",
+    "url": "https://www.ringsidenews.com/ludwig-kaiser-requests-trial-florida-battery-case-hiring-attorney/"
+  },
+  "https://www.ringsidenews.com/ludwig-kaiser-turned-himself-florida-battery-warrant-before-posting-1000-bond": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260521_110814_001_spoiler-wwe-ludwig-kaiser-si-è-costituito-in-florida-per-un-mandato-darresto-per-lesioni_5056_metadata.json",
+      "semantic_id": "ludwig-kaiser-turned-himself-in-on-florida-battery-warrant-before-posting-1000-bond",
+      "wp_post_id": 5056
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "[SPOILER] WWE: Ludwig Kaiser si è costituito in Florida per un mandato d'arresto per lesioni",
+    "updated_at": "1779742510.4329507",
+    "url": "https://www.ringsidenews.com/ludwig-kaiser-turned-himself-florida-battery-warrant-before-posting-1000-bond/"
+  },
+  "https://www.ringsidenews.com/ludwig-kaisers-court-restrictions-revealed-florida-battery-arrest": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260521_114033_002_spoiler-ludwig-kaiser-i-dettagli-delle-restrizioni-giudiziarie-dopo-larresto-in-florida_5064_metadata.json",
+      "semantic_id": "ludwig-kaisers-court-restrictions-revealed-after-florida-battery-arrest",
+      "wp_post_id": 5064
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "[SPOILER] Ludwig Kaiser: i dettagli delle restrizioni giudiziarie dopo l'arresto in Florida",
+    "updated_at": "1779742510.440198",
+    "url": "https://www.ringsidenews.com/ludwig-kaisers-court-restrictions-revealed-florida-battery-arrest/"
   },
   "https://www.ringsidenews.com/mance-warner-clears-confusion-indie-promotion-claimed-aew-pulled-him": {
     "extra": {
@@ -212,6 +1025,48 @@
     "updated_at": "1779563057.816217",
     "url": "https://www.ringsidenews.com/mark-jindrak-says-wwe-stars-complaining-about-wrestlemania-weekend-fan-incidents-should-grateful/"
   },
+  "https://www.ringsidenews.com/masterminds-behind-roman-reigns-usos-jacob-fatu-may-11-wwe-raw-storyline-revealed": {
+    "extra": {
+      "event_key": "event:title:roman-reigns:world:tag:championship",
+      "metadata_file": "published/20260515_224743_001_svelati-i-produttori-dei-segmenti-di-roman-reigns-the-usos-e-jacob-fatu-a-wwe-raw_4710_metadata.json",
+      "semantic_id": "masterminds-behind-roman-reigns-usos-jacob-fatu-may-11-wwe-raw-storyline-revealed",
+      "wp_post_id": 4710
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Svelati i produttori dei segmenti di Roman Reigns, The Usos e Jacob Fatu a WWE Raw",
+    "updated_at": "1779742510.186405",
+    "url": "https://www.ringsidenews.com/masterminds-behind-roman-reigns-usos-jacob-fatu-may-11-wwe-raw-storyline-revealed/"
+  },
+  "https://www.ringsidenews.com/matt-hardy-shuts-down-accusations-he-leaked-aew-brawl-out-information-dirt-sheets": {
+    "extra": {
+      "event_key": "event:aew-all-out-2026-05-25",
+      "metadata_file": "published/20260525_174624_002_matt-hardy-smentisce-le-accuse-di-aver-rivelato-informazioni-sul-brawl-out-della-aew_5268_metadata.json",
+      "semantic_id": "matt-hardy-shuts-down-accusations-he-leaked-aew-brawl-out-information-to-dirt-sheets",
+      "wp_post_id": 5268
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Matt Hardy smentisce le accuse di aver rivelato informazioni sul Brawl Out della AEW",
+    "updated_at": "1779742510.6525524",
+    "url": "https://www.ringsidenews.com/matt-hardy-shuts-down-accusations-he-leaked-aew-brawl-out-information-dirt-sheets/"
+  },
+  "https://www.ringsidenews.com/mick-foley-breaks-silence-aew-debut-announcement": {
+    "extra": {
+      "event_key": "event:business:tony-khan",
+      "metadata_file": "published/20260521_025455_001_mick-foley-rompe-il-silenzio-dopo-lannuncio-del-suo-debutto-in-aew_5008_metadata.json",
+      "semantic_id": "mick-foley-breaks-silence-after-aew-debut-announcement",
+      "wp_post_id": 5008
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Mick Foley rompe il silenzio dopo l'annuncio del suo debutto in AEW",
+    "updated_at": "1779742510.397944",
+    "url": "https://www.ringsidenews.com/mick-foley-breaks-silence-aew-debut-announcement/"
+  },
   "https://www.ringsidenews.com/mick-foley-makes-aew-debut-double-nothing-2026": {
     "extra": {
       "event_key": "",
@@ -224,6 +1079,20 @@
     "title": "Mick Foley Makes AEW Debut At Double Or Nothing 2026",
     "updated_at": "1779667104.5864253",
     "url": "https://www.ringsidenews.com/mick-foley-makes-aew-debut-double-nothing-2026/"
+  },
+  "https://www.ringsidenews.com/mick-foley-not-lock-aew-wwe-legends-deal-nears-expiration": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260517_130151_001_mick-foley-non-è-sicuro-in-aew-contratto-wwe-in-scadenza_4802_metadata.json",
+      "semantic_id": "mick-foley-not-a-lock-for-aew-as-wwe-legends-deal-nears-expiration",
+      "wp_post_id": 4802
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Mick Foley non è sicuro in AEW: contratto WWE in scadenza",
+    "updated_at": "1779742510.2329502",
+    "url": "https://www.ringsidenews.com/mick-foley-not-lock-aew-wwe-legends-deal-nears-expiration/"
   },
   "https://www.ringsidenews.com/mick-foley-says-hes-having-blast-aew-ahead-double-nothing-debut": {
     "extra": {
@@ -251,18 +1120,61 @@
     "updated_at": "1779658703.689549",
     "url": "https://www.ringsidenews.com/mjf-claims-darby-allin-looks-school-shooter-ahead-aew-double-nothing/"
   },
+  "https://www.ringsidenews.com/mjf-claims-he-sued-young-fan-who-attacked-him-during-aew-dynamite": {
+    "extra": {
+      "event_key": "event:postshow:mjf-he-sued-young-fan-who-attacked-him-during-dynamite",
+      "metadata_file": "published/20260520_201231_002_mjf-dichiara-di-aver-fatto-causa-alla-giovane-fan-che-lo-ha-colpito-a-aew-dynamite_5002_metadata.json",
+      "semantic_id": "mjf-claims-he-sued-young-fan-who-attacked-him-during-aew-dynamite",
+      "wp_post_id": 5002
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "MJF dichiara di aver fatto causa alla giovane fan che lo ha colpito a AEW Dynamite",
+    "updated_at": "1779742510.3911846",
+    "url": "https://www.ringsidenews.com/mjf-claims-he-sued-young-fan-who-attacked-him-during-aew-dynamite/"
+  },
   "https://www.ringsidenews.com/mjf-explodes-online-winning-aew-world-title-saving-his-hair": {
     "extra": {
-      "event_key": "event:title:darby-allin:world:double-or-nothing",
-      "raw_result": "skipped",
-      "semantic_id": "mjf-explodes-online-after-winning-aew-world-title-and-saving-his-hair"
+      "event_key": "event:aew-double-or-nothing-2026-05-25",
+      "metadata_file": "published/20260525_120452_001_mjf-festeggia-la-vittoria-dellaew-world-championship-e-deride-i-fan-dopo-il-title-vs-hair_5252_metadata.json",
+      "semantic_id": "mjf-explodes-online-after-winning-aew-world-title-and-saving-his-hair",
+      "wp_post_id": 5252
     },
-    "reason": "above_low_score_final_cap_not_final",
-    "score": 60,
-    "status": "competitive_deferred",
-    "title": "MJF Explodes Online After Winning AEW World Title and Saving His Hair",
-    "updated_at": "1779689746.6167474",
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "MJF festeggia la vittoria dell'AEW World Championship e deride i fan dopo il Title vs. Hair Match",
+    "updated_at": "1779742510.630224",
     "url": "https://www.ringsidenews.com/mjf-explodes-online-winning-aew-world-title-saving-his-hair/"
+  },
+  "https://www.ringsidenews.com/mjf-reacts-mick-foleys-upcoming-aew-debut-cold-response": {
+    "extra": {
+      "event_key": "event:business:tony-khan:darby-allin-followup-mjf-reacts-mick-foley-s-upcoming-debut-cold-response",
+      "metadata_file": "published/20260520_201254_003_la-reazione-gelida-di-mjf-al-debutto-di-mick-foley-in-aew_5005_metadata.json",
+      "semantic_id": "mjf-reacts-to-mick-foleys-upcoming-aew-debut-with-cold-response",
+      "wp_post_id": 5005
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "La reazione gelida di MJF al debutto di Mick Foley in AEW",
+    "updated_at": "1779742510.3945565",
+    "url": "https://www.ringsidenews.com/mjf-reacts-mick-foleys-upcoming-aew-debut-cold-response/"
+  },
+  "https://www.ringsidenews.com/mvp-calls-triple-h-coward-liar-while-revealing-why-he-left-wwe": {
+    "extra": {
+      "event_key": "event:aew-double-or-nothing-2026-05-25-followup-mvp-calls-triple-h-a-coward-a-liar-while-revealing-why-he",
+      "metadata_file": "published/20260525_192719_003_mvp-contro-triple-h-è-un-codardo-e-un-bugiardo-i-motivi-delladdio-alla-wwe_5287_metadata.json",
+      "semantic_id": "mvp-calls-triple-h-a-coward-and-a-liar-while-revealing-why-he-left-wwe",
+      "wp_post_id": 5287
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "MVP contro Triple H: \"È un codardo e un bugiardo\", i motivi dell'addio alla WWE",
+    "updated_at": "1779742510.6661592",
+    "url": "https://www.ringsidenews.com/mvp-calls-triple-h-coward-liar-while-revealing-why-he-left-wwe/"
   },
   "https://www.ringsidenews.com/mvp-reveals-he-thought-wwe-ribbing-him-original-bodysuit-before-pay-per-view-debut": {
     "extra": {
@@ -274,8 +1186,22 @@
     "score": 76,
     "status": "competitive_deferred",
     "title": "MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut",
-    "updated_at": "1779737100.290609",
+    "updated_at": "1779742574.5610714",
     "url": "https://www.ringsidenews.com/mvp-reveals-he-thought-wwe-ribbing-him-original-bodysuit-before-pay-per-view-debut/"
+  },
+  "https://www.ringsidenews.com/naraku-reveals-real-reason-he-left-njpw-wwe": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260518_133904_001_naraku-spiega-i-motivi-delladdio-alla-njpw-per-la-wwe_4849_metadata.json",
+      "semantic_id": "naraku-reveals-real-reason-he-left-njpw-for-wwe",
+      "wp_post_id": 4849
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "NARAKU spiega i motivi dell'addio alla NJPW per la WWE",
+    "updated_at": "1779742510.269887",
+    "url": "https://www.ringsidenews.com/naraku-reveals-real-reason-he-left-njpw-wwe/"
   },
   "https://www.ringsidenews.com/new-day-current-status-aew-double-nothing": {
     "extra": {
@@ -290,6 +1216,90 @@
     "updated_at": "1779666039.476505",
     "url": "https://www.ringsidenews.com/new-day-current-status-aew-double-nothing/"
   },
+  "https://www.ringsidenews.com/nic-nemeth-reveals-real-reason-behind-his-wwe-return-msg": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260519_114039_001_nic-nemeth-rivela-sono-tornato-in-wwe-al-madison-square-garden-solo-per-john-cena_4912_metadata.json",
+      "semantic_id": "nic-nemeth-reveals-real-reason-behind-his-wwe-return-at-msg",
+      "wp_post_id": 4912
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Nic Nemeth rivela: \"Sono tornato in WWE al Madison Square Garden solo per John Cena\"",
+    "updated_at": "1779742510.3142054",
+    "url": "https://www.ringsidenews.com/nic-nemeth-reveals-real-reason-behind-his-wwe-return-msg/"
+  },
+  "https://www.ringsidenews.com/nick-khan-triple-h-reveal-why-wwe-expanding-its-house-show-schedule": {
+    "extra": {
+      "event_key": "event:business:nick-khan-followup-nick-khan-triple-h-reveal-why-is-expanding-its-house-show-schedule",
+      "metadata_file": "published/20260519_224602_002_wwe-nick-khan-e-triple-h-spiegano-laumento-degli-house-show_4941_metadata.json",
+      "semantic_id": "nick-khan-and-triple-h-reveal-why-wwe-is-expanding-its-house-show-schedule",
+      "wp_post_id": 4941
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: Nick Khan e Triple H spiegano l'aumento degli House Show",
+    "updated_at": "1779742510.341346",
+    "url": "https://www.ringsidenews.com/nick-khan-triple-h-reveal-why-wwe-expanding-its-house-show-schedule/"
+  },
+  "https://www.ringsidenews.com/nikki-bella-reveals-whats-holding-her-wwe-return-wrestlemania-42-absence": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260521_065231_001_nikki-bella-il-rientro-in-wwe-dipende-dalla-caviglia_5023_metadata.json",
+      "semantic_id": "nikki-bella-reveals-whats-holding-up-her-wwe-return-after-wrestlemania-42-absence",
+      "wp_post_id": 5023
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Nikki Bella: il rientro in WWE dipende dalla caviglia",
+    "updated_at": "1779742510.4151762",
+    "url": "https://www.ringsidenews.com/nikki-bella-reveals-whats-holding-her-wwe-return-wrestlemania-42-absence/"
+  },
+  "https://www.ringsidenews.com/nikki-bella-says-staying-john-cena-would-have-led-lonely-sad-life": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260515_155824_001_nikki-bella-sulla-fine-della-relazione-con-john-cena-saremmo-stati-infelici_4683_metadata.json",
+      "semantic_id": "nikki-bella-says-staying-with-john-cena-would-have-led-to-a-lonely-and-sad-life",
+      "wp_post_id": 4683
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Nikki Bella sulla fine della relazione con John Cena: \"Saremmo stati infelici\"",
+    "updated_at": "1779742510.1694858",
+    "url": "https://www.ringsidenews.com/nikki-bella-says-staying-john-cena-would-have-led-lonely-sad-life/"
+  },
+  "https://www.ringsidenews.com/nikki-blackhearts-wwe-nxt-status-wrestling-dark-match": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260524_195506_001_wwe-i-piani-per-il-debutto-di-nikki-blackheart-a-nxt_5243_metadata.json",
+      "semantic_id": "nikki-blackhearts-wwe-nxt-status-after-wrestling-dark-match",
+      "wp_post_id": 5243
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: i piani per il debutto di Nikki Blackheart a NXT",
+    "updated_at": "1779742510.6170347",
+    "url": "https://www.ringsidenews.com/nikki-blackhearts-wwe-nxt-status-wrestling-dark-match/"
+  },
+  "https://www.ringsidenews.com/nikki-cross-books-first-match-since-wwe-release-under-different-name": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260514_142623_002_nikki-cross-tornerà-sul-ring-come-nikki-storm-dopo-il-licenziamento-dalla-wwe_4545_metadata.json",
+      "semantic_id": "nikki-cross-books-first-match-since-wwe-release-under-different-name",
+      "wp_post_id": 4545
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Nikki Cross tornerà sul ring come Nikki Storm dopo il licenziamento dalla WWE",
+    "updated_at": "1779742510.1272407",
+    "url": "https://www.ringsidenews.com/nikki-cross-books-first-match-since-wwe-release-under-different-name/"
+  },
   "https://www.ringsidenews.com/opening-segment-match-revealed-may-25-wwe-raw": {
     "extra": {
       "event_key": "",
@@ -302,6 +1312,48 @@
     "title": "Opening Segment & Match Revealed for May 25 WWE RAW",
     "updated_at": "1779638361.6246662",
     "url": "https://www.ringsidenews.com/opening-segment-match-revealed-may-25-wwe-raw/"
+  },
+  "https://www.ringsidenews.com/paige-reveals-plans-bring-back-devastating-signature-move-wwe": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260517_164840_001_paige-annuncia-il-possibile-ritorno-della-sua-celebre-mossa-finale-in-wwe_4811_metadata.json",
+      "semantic_id": "paige-reveals-plans-to-bring-back-devastating-signature-move-in-wwe",
+      "wp_post_id": 4811
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Paige annuncia il possibile ritorno della sua celebre mossa finale in WWE",
+    "updated_at": "1779742510.2400591",
+    "url": "https://www.ringsidenews.com/paige-reveals-plans-bring-back-devastating-signature-move-wwe/"
+  },
+  "https://www.ringsidenews.com/paul-wight-admits-wwe-pyro-once-made-him-tinkle-himself": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260517_200418_002_paul-wight-i-pyro-della-wwe-mi-hanno-fatto-quasi-farmela-addosso_4829_metadata.json",
+      "semantic_id": "paul-wight-admits-wwe-pyro-once-made-him-tinkle-on-himself",
+      "wp_post_id": 4829
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Paul Wight: \"I pyro della WWE mi hanno fatto quasi farmela addosso\"",
+    "updated_at": "1779742510.254589",
+    "url": "https://www.ringsidenews.com/paul-wight-admits-wwe-pyro-once-made-him-tinkle-himself/"
+  },
+  "https://www.ringsidenews.com/paul-wight-claims-floyd-mayweather-left-wwe-arena-breaking-his-nose": {
+    "extra": {
+      "event_key": "event:wwe-wrestlemania-2026-05-25",
+      "metadata_file": "published/20260525_132758_001_paul-wight-chiesi-a-floyd-mayweather-di-rompermi-il-naso-poi-lui-lasciò-larena_5255_metadata.json",
+      "semantic_id": "paul-wight-claims-floyd-mayweather-left-wwe-arena-after-breaking-his-nose",
+      "wp_post_id": 5255
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Paul Wight: \"Chiesi a Floyd Mayweather di rompermi il naso, poi lui lasciò l'arena\"",
+    "updated_at": "1779742510.6346548",
+    "url": "https://www.ringsidenews.com/paul-wight-claims-floyd-mayweather-left-wwe-arena-breaking-his-nose/"
   },
   "https://www.ringsidenews.com/penta-pulls-off-impressive-win-retain-ic-title-wwe-saturday-nights-main-event": {
     "extra": {
@@ -316,6 +1368,34 @@
     "updated_at": "1779586376.5307162",
     "url": "https://www.ringsidenews.com/penta-pulls-off-impressive-win-retain-ic-title-wwe-saturday-nights-main-event/"
   },
+  "https://www.ringsidenews.com/possible-aew-names-kofi-kingston-xavier-woods-revealed": {
+    "extra": {
+      "event_key": "event:title:tony-khan:tag:championship",
+      "metadata_file": "published/20260514_213200_003_aew-svelati-i-possibili-ring-name-di-kofi-kingston-e-xavier-woods_4624_metadata.json",
+      "semantic_id": "possible-aew-names-for-kofi-kingston-and-xavier-woods-revealed",
+      "wp_post_id": 4624
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "AEW: svelati i possibili ring name di Kofi Kingston e Xavier Woods",
+    "updated_at": "1779742510.1451545",
+    "url": "https://www.ringsidenews.com/possible-aew-names-kofi-kingston-xavier-woods-revealed/"
+  },
+  "https://www.ringsidenews.com/possible-date-drew-mcintyres-return-amid-wwe-tv-hiatus": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260521_141346_001_wwe-drew-mcintyre-torna-a-smackdown-per-la-puntata-del-29-maggio-a-barcellona_5077_metadata.json",
+      "semantic_id": "possible-date-for-drew-mcintyres-return-amid-wwe-tv-hiatus",
+      "wp_post_id": 5077
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: Drew Mcintyre torna a SmackDown per la puntata del 29 maggio a Barcellona",
+    "updated_at": "1779742510.4548278",
+    "url": "https://www.ringsidenews.com/possible-date-drew-mcintyres-return-amid-wwe-tv-hiatus/"
+  },
   "https://www.ringsidenews.com/possible-spoiler-revealed-wwe-clash-italy-title-match": {
     "extra": {
       "event_key": "",
@@ -329,6 +1409,174 @@
     "title": "Possible Spoiler Revealed for WWE Clash in Italy Title Match",
     "updated_at": "1779647779.6559052",
     "url": "https://www.ringsidenews.com/possible-spoiler-revealed-wwe-clash-italy-title-match/"
+  },
+  "https://www.ringsidenews.com/r-truth-reveals-he-not-expect-finish-his-current-wwe-deal": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260514_213111_001_r-truth-non-credo-che-porterò-a-termine-il-mio-attuale-contratto-con-la-wwe_4618_metadata.json",
+      "semantic_id": "r-truth-reveals-he-does-not-expect-to-finish-his-current-wwe-deal",
+      "wp_post_id": 4618
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "R-Truth: \"Non credo che porterò a termine il mio attuale contratto con la WWE\"",
+    "updated_at": "1779742510.1422381",
+    "url": "https://www.ringsidenews.com/r-truth-reveals-he-not-expect-finish-his-current-wwe-deal/"
+  },
+  "https://www.ringsidenews.com/r-truth-wwe-contract-comments-clarified-confusion-interview-context": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260515_172730_002_r-truth-fa-chiarezza-sul-suo-contratto-quadriennale-con-la-wwe_4689_metadata.json",
+      "semantic_id": "r-truth-wwe-contract-comments-clarified-after-confusion-over-interview-context",
+      "wp_post_id": 4689
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "R-Truth fa chiarezza sul suo contratto quadriennale con la WWE",
+    "updated_at": "1779742510.173091",
+    "url": "https://www.ringsidenews.com/r-truth-wwe-contract-comments-clarified-confusion-interview-context/"
+  },
+  "https://www.ringsidenews.com/rapper-tekashi-6ix9ine-reveals-he-wants-get-involved-wwe": {
+    "extra": {
+      "event_key": "event:logan-paul-2017-controversy",
+      "metadata_file": "published/20260514_201827_002_tekashi-6ix9ine-vorrebbe-debuttare-in-wwe-e-sfida-randy-orton_4612_metadata.json",
+      "semantic_id": "rapper-tekashi-6ix9ine-reveals-he-wants-to-get-involved-with-wwe",
+      "wp_post_id": 4612
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Tekashi 6ix9ine vorrebbe debuttare in WWE e sfida Randy Orton",
+    "updated_at": "1779742510.1393356",
+    "url": "https://www.ringsidenews.com/rapper-tekashi-6ix9ine-reveals-he-wants-get-involved-wwe/"
+  },
+  "https://www.ringsidenews.com/real-reason-behind-randy-ortons-wwe-absence-wrestlemania-42-revealed": {
+    "extra": {
+      "event_key": "event:cody-rhodes-injury",
+      "metadata_file": "published/20260517_175243_001_svelato-il-motivo-dellassenza-di-randy-orton-dopo-wrestlemania-42_4820_metadata.json",
+      "semantic_id": "real-reason-behind-randy-ortons-wwe-absence-after-wrestlemania-42-revealed",
+      "wp_post_id": 4820
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Svelato il motivo dell'assenza di Randy Orton dopo WrestleMania 42",
+    "updated_at": "1779742510.2472758",
+    "url": "https://www.ringsidenews.com/real-reason-behind-randy-ortons-wwe-absence-wrestlemania-42-revealed/"
+  },
+  "https://www.ringsidenews.com/rey-mysterio-announced-new-general-manager-aaa": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260524_095352_001_rey-mysterio-è-il-nuovo-general-manager-di-aaa_5219_metadata.json",
+      "semantic_id": "rey-mysterio-announced-as-new-general-manager-for-aaa",
+      "wp_post_id": 5219
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Rey Mysterio è il nuovo General Manager di AAA",
+    "updated_at": "1779742510.5824718",
+    "url": "https://www.ringsidenews.com/rey-mysterio-announced-new-general-manager-aaa/"
+  },
+  "https://www.ringsidenews.com/roh-supercard-honor-results-highlights-key-moments-may-15-2026": {
+    "extra": {
+      "event_key": "event:business:media-rights",
+      "metadata_file": "published/20260515_224847_002_roh-supercard-of-honor-risultati-e-highlights-del-15-maggio-2026_4713_metadata.json",
+      "semantic_id": "roh-supercard-of-honor-results-highlights-and-key-moments-for-may-15-2026",
+      "wp_post_id": 4713
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "ROH Supercard of Honor: risultati e highlights del 15 maggio 2026",
+    "updated_at": "1779742510.1883178",
+    "url": "https://www.ringsidenews.com/roh-supercard-honor-results-highlights-key-moments-may-15-2026/"
+  },
+  "https://www.ringsidenews.com/ronda-rousey-credits-paul-heyman-wwe-changing-how-she-promotes-mma-fights": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260514_213133_002_ronda-rousey-come-paul-heyman-ha-cambiato-il-mio-modo-di-promuovere-i-match_4621_metadata.json",
+      "semantic_id": "ronda-rousey-credits-paul-heyman-wwe-for-changing-how-she-promotes-mma-fights",
+      "wp_post_id": 4621
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Ronda Rousey: come Paul Heyman ha cambiato il mio modo di promuovere i match",
+    "updated_at": "1779742510.143707",
+    "url": "https://www.ringsidenews.com/ronda-rousey-credits-paul-heyman-wwe-changing-how-she-promotes-mma-fights/"
+  },
+  "https://www.ringsidenews.com/ronda-rousey-explains-how-wwe-helped-prepare-her-mma-return-against-gina-carano": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260514_142709_003_ronda-rousey-la-wwe-mi-ha-preparata-per-il-ritorno-nelle-mma-contro-gina-carano_4548_metadata.json",
+      "semantic_id": "ronda-rousey-explains-how-wwe-helped-prepare-her-for-mma-return-against-gina-carano",
+      "wp_post_id": 4548
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Ronda Rousey: la WWE mi ha preparata per il ritorno nelle MMA contro Gina Carano",
+    "updated_at": "1779742510.128522",
+    "url": "https://www.ringsidenews.com/ronda-rousey-explains-how-wwe-helped-prepare-her-mma-return-against-gina-carano/"
+  },
+  "https://www.ringsidenews.com/ronda-rousey-makes-gina-carano-tap-out-seconds-during-netflix-mma-special-event": {
+    "extra": {
+      "event_key": "event:business:media-rights",
+      "metadata_file": "published/20260517_060307_002_ronda-rousey-batte-gina-carano-per-sottomissione-nellevento-netflix_4795_metadata.json",
+      "semantic_id": "ronda-rousey-makes-gina-carano-tap-out-in-seconds-during-netflix-mma-special-event",
+      "wp_post_id": 4795
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Ronda Rousey batte Gina Carano per sottomissione nell'evento Netflix",
+    "updated_at": "1779742510.2283325",
+    "url": "https://www.ringsidenews.com/ronda-rousey-makes-gina-carano-tap-out-seconds-during-netflix-mma-special-event/"
+  },
+  "https://www.ringsidenews.com/ronda-rousey-says-final-wwe-match-middle-finger-fans": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260515_215332_002_ronda-rousey-il-mio-ultimo-match-in-wwe-è-stato-un-dito-medio-ai-fan_4707_metadata.json",
+      "semantic_id": "ronda-rousey-says-final-wwe-match-was-a-middle-finger-to-fans",
+      "wp_post_id": 4707
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Ronda Rousey: \"Il mio ultimo match in WWE è stato un dito medio ai fan\"",
+    "updated_at": "1779742510.1845071",
+    "url": "https://www.ringsidenews.com/ronda-rousey-says-final-wwe-match-middle-finger-fans/"
+  },
+  "https://www.ringsidenews.com/ronda-rousey-vs-gina-carano-pulls-huge-netflix-numbers-despite-17-second-fight": {
+    "extra": {
+      "event_key": "event:business:media-rights",
+      "metadata_file": "published/20260519_224634_003_netflix-grandi-ascolti-per-ronda-rousey-vs-gina-carano-nonostante-i-17-secondi-di-match_4944_metadata.json",
+      "semantic_id": "ronda-rousey-vs-gina-carano-pulls-huge-netflix-numbers-despite-17-second-fight",
+      "wp_post_id": 4944
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Netflix: grandi ascolti per Ronda Rousey vs. Gina Carano nonostante i 17 secondi di match",
+    "updated_at": "1779742510.3444874",
+    "url": "https://www.ringsidenews.com/ronda-rousey-vs-gina-carano-pulls-huge-netflix-numbers-despite-17-second-fight/"
+  },
+  "https://www.ringsidenews.com/savio-vega-replaces-rey-mysterio-aaa-fox-commentary-team": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260524_060042_003_savio-vega-sostituisce-rey-mysterio-al-commento-di-aaa-on-fox_5216_metadata.json",
+      "semantic_id": "savio-vega-replaces-rey-mysterio-on-aaa-on-fox-commentary-team",
+      "wp_post_id": 5216
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Savio Vega sostituisce Rey Mysterio al commento di AAA on FOX",
+    "updated_at": "1779742510.5782342",
+    "url": "https://www.ringsidenews.com/savio-vega-replaces-rey-mysterio-aaa-fox-commentary-team/"
   },
   "https://www.ringsidenews.com/skye-blue-roasts-mjf-potentially-going-bald-aew-double-nothing": {
     "extra": {
@@ -356,6 +1604,62 @@
     "updated_at": "1779616517.5785983",
     "url": "https://www.ringsidenews.com/skye-blue-says-doctor-told-her-ankle-looked-it-came-car-crash/"
   },
+  "https://www.ringsidenews.com/sol-ruca-reveals-how-triple-h-helped-her-backlash-wwe-raw-debut": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260521_211335_002_sol-ruca-svela-il-supporto-di-triple-h-dopo-le-critiche-al-suo-debutto-a-raw_5098_metadata.json",
+      "semantic_id": "sol-ruca-reveals-how-triple-h-helped-her-after-backlash-over-wwe-raw-debut",
+      "wp_post_id": 5098
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Sol Ruca svela il supporto di Triple H dopo le critiche al suo debutto a Raw",
+    "updated_at": "1779742510.4811802",
+    "url": "https://www.ringsidenews.com/sol-ruca-reveals-how-triple-h-helped-her-backlash-wwe-raw-debut/"
+  },
+  "https://www.ringsidenews.com/stephanie-vaquers-ex-boyfriend-el-cuatreros-wrestling-status-revealed-12-year-prison-sentence": {
+    "extra": {
+      "event_key": "event:postshow:stephanie-vaquer-s-ex-boyfriend-el-cuatrero-s-wrestling-12-year-prison",
+      "metadata_file": "published/20260514_162730_002_el-cuatrero-torna-a-lottare-nonostante-la-condanna-i-dettagli-sulla-situazione_4555_metadata.json",
+      "semantic_id": "stephanie-vaquers-ex-boyfriend-el-cuatreros-wrestling-status-revealed-after-12-year-prison-sentence",
+      "wp_post_id": 4555
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "El Cuatrero torna a lottare nonostante la condanna: i dettagli sulla situazione",
+    "updated_at": "1779742510.1311328",
+    "url": "https://www.ringsidenews.com/stephanie-vaquers-ex-boyfriend-el-cuatreros-wrestling-status-revealed-12-year-prison-sentence/"
+  },
+  "https://www.ringsidenews.com/stephanie-vaquers-wwe-return-status-gets-major-update-injury-absence": {
+    "extra": {
+      "event_key": "event:liv-morgan-stephanie-vaquer-diagnosis",
+      "metadata_file": "published/20260514_162651_001_wwe-aggiornamenti-sul-rientro-di-stephanie-vaquer-dopo-linfortunio_4552_metadata.json",
+      "semantic_id": "stephanie-vaquers-wwe-return-status-gets-major-update-after-injury-absence",
+      "wp_post_id": 4552
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: aggiornamenti sul rientro di Stephanie Vaquer dopo l'infortunio",
+    "updated_at": "1779742510.1298237",
+    "url": "https://www.ringsidenews.com/stephanie-vaquers-wwe-return-status-gets-major-update-injury-absence/"
+  },
+  "https://www.ringsidenews.com/ted-dibiase-jr-addresses-claim-security-held-him-back-wrestlemania-42": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260516_164918_001_ted-dibiase-jr-risponde-alle-voci-sullessere-stato-allontanato-dalla-sicurezza-a-wrestlema_4768_metadata.json",
+      "semantic_id": "ted-dibiase-jr-addresses-claim-security-held-him-back-at-wrestlemania-42",
+      "wp_post_id": 4768
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Ted DiBiase Jr. risponde alle voci sull'essere stato allontanato dalla sicurezza a WrestleMania 41",
+    "updated_at": "1779742510.2171535",
+    "url": "https://www.ringsidenews.com/ted-dibiase-jr-addresses-claim-security-held-him-back-wrestlemania-42/"
+  },
   "https://www.ringsidenews.com/thekla-reveals-she-speaks-five-languages-including-japanese-georgian": {
     "extra": {
       "event_key": "",
@@ -368,6 +1672,145 @@
     "title": "Thekla Reveals She Speaks Five Languages Including Japanese and Georgian",
     "updated_at": "1779656780.0895627",
     "url": "https://www.ringsidenews.com/thekla-reveals-she-speaks-five-languages-including-japanese-georgian/"
+  },
+  "https://www.ringsidenews.com/tiffany-stratton-reveals-why-she-ditched-original-wwe-finisher-fearing-serious-injury": {
+    "extra": {
+      "event_key": "event:aew-double-or-nothing-2026-05-25",
+      "metadata_file": "published/20260525_192448_001_tiffany-stratton-spiega-perché-ha-abbandonato-la-sua-finisher-originale-per-il-rischio-inf_5274_metadata.json",
+      "semantic_id": "tiffany-stratton-reveals-why-she-ditched-original-wwe-finisher-after-fearing-serious-injury",
+      "wp_post_id": 5274
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Tiffany Stratton spiega perché ha abbandonato la sua finisher originale per il rischio infortuni",
+    "updated_at": "1779742510.657142",
+    "url": "https://www.ringsidenews.com/tiffany-stratton-reveals-why-she-ditched-original-wwe-finisher-fearing-serious-injury/"
+  },
+  "https://www.ringsidenews.com/tiffany-stratton-reveals-wwe-almost-gave-her-completely-different-ring-name": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260521_025653_004_wwe-tiffany-stratton-rivela-i-nomi-valutati-per-lei-prima-del-debutto_5017_metadata.json",
+      "semantic_id": "tiffany-stratton-reveals-wwe-almost-gave-her-a-completely-different-ring-name",
+      "wp_post_id": 5017
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: Tiffany Stratton rivela i nomi valutati per lei prima del debutto",
+    "updated_at": "1779742510.408236",
+    "url": "https://www.ringsidenews.com/tiffany-stratton-reveals-wwe-almost-gave-her-completely-different-ring-name/"
+  },
+  "https://www.ringsidenews.com/tiffany-stratton-reveals-wwe-tryout-halted-she-dropped-out-college-chase-wrestling-career": {
+    "extra": {
+      "core": "tiffany-stratton-reveals-tryout-was-halted-she-dropped-out-college",
+      "lane": "skip_final",
+      "score": 45
+    },
+    "reason": "v91_score_story",
+    "score": null,
+    "status": "skip_final",
+    "title": "Tiffany Stratton Reveals WWE Tryout Was Halted After She Dropped Out of College to Chase Wrestling Career",
+    "updated_at": "1779742554.981543",
+    "url": "https://www.ringsidenews.com/tiffany-stratton-reveals-wwe-tryout-halted-she-dropped-out-college-chase-wrestling-career/"
+  },
+  "https://www.ringsidenews.com/tiffany-stratton-shuts-down-claim-she-plastic-head-toe": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260518_133919_002_tiffany-stratton-risponde-alle-critiche-sulla-chirurgia-estetica_4852_metadata.json",
+      "semantic_id": "tiffany-stratton-shuts-down-claim-she-is-plastic-from-head-to-toe",
+      "wp_post_id": 4852
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Tiffany Stratton risponde alle critiche sulla chirurgia estetica",
+    "updated_at": "1779742510.272518",
+    "url": "https://www.ringsidenews.com/tiffany-stratton-shuts-down-claim-she-plastic-head-toe/"
+  },
+  "https://www.ringsidenews.com/tiffany-stratton-shuts-down-wild-rumor-about-former-wwe-stars-release": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260518_012847_001_tiffany-stratton-smentisce-le-voci-sul-licenziamento-di-giovanni-vinci_4846_metadata.json",
+      "semantic_id": "tiffany-stratton-shuts-down-wild-rumor-about-former-wwe-stars-release",
+      "wp_post_id": 4846
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Tiffany Stratton smentisce le voci sul licenziamento di Giovanni Vinci",
+    "updated_at": "1779742510.26726",
+    "url": "https://www.ringsidenews.com/tiffany-stratton-shuts-down-wild-rumor-about-former-wwe-stars-release/"
+  },
+  "https://www.ringsidenews.com/tony-khan-100-confident-paramount-will-keep-aew-wbd-merger-goes-through": {
+    "extra": {
+      "event_key": "event:business:tony-khan-followup-tony-khan-is-100-confident-paramount-will-keep-wbd-merger-goes-through",
+      "metadata_file": "published/20260523_134413_003_aew-tony-khan-fiducioso-sulla-permanenza-in-tv-dopo-la-fusione-warner-paramount_5180_metadata.json",
+      "semantic_id": "tony-khan-is-100-confident-paramount-will-keep-aew-after-wbd-merger-goes-through",
+      "wp_post_id": 5180
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "AEW: Tony Khan fiducioso sulla permanenza in TV dopo la fusione Warner-Paramount",
+    "updated_at": "1779742510.5325203",
+    "url": "https://www.ringsidenews.com/tony-khan-100-confident-paramount-will-keep-aew-wbd-merger-goes-through/"
+  },
+  "https://www.ringsidenews.com/tony-khan-addresses-interest-signing-former-new-day-stars-aew": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260516_092539_002_tony-khan-parla-del-possibile-arrivo-degli-ex-membri-del-the-new-day-in-aew_4746_metadata.json",
+      "semantic_id": "tony-khan-addresses-interest-in-signing-former-new-day-stars-to-aew",
+      "wp_post_id": 4746
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Tony Khan parla del possibile arrivo degli ex membri del The New Day in AEW",
+    "updated_at": "1779742510.202308",
+    "url": "https://www.ringsidenews.com/tony-khan-addresses-interest-signing-former-new-day-stars-aew/"
+  },
+  "https://www.ringsidenews.com/tony-khan-calls-out-wwe-background-chatter-about-aews-next-tv-deal": {
+    "extra": {
+      "event_key": "event:business:tko-financials-followup-tony-khan-calls-out-background-chatter-about-s-next-tv-deal",
+      "metadata_file": "published/20260516_075242_001_tony-khan-risponde-alle-voci-dalla-wwe-sul-futuro-televisivo-della-aew_4740_metadata.json",
+      "semantic_id": "tony-khan-calls-out-wwe-background-chatter-about-aews-next-tv-deal",
+      "wp_post_id": 4740
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Tony Khan risponde alle voci dalla WWE sul futuro televisivo della AEW",
+    "updated_at": "1779742510.1982334",
+    "url": "https://www.ringsidenews.com/tony-khan-calls-out-wwe-background-chatter-about-aews-next-tv-deal/"
+  },
+  "https://www.ringsidenews.com/tony-khan-publicly-calls-out-indie-promotion-mance-warner-claim": {
+    "extra": {
+      "event_key": "event:business:tony-khan",
+      "metadata_file": "published/20260523_105212_001_tony-khan-smentisce-la-aaw-wrestling-sul-caso-mance-warner_5168_metadata.json",
+      "semantic_id": "tony-khan-publicly-calls-out-indie-promotion-over-mance-warner-claim",
+      "wp_post_id": 5168
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Tony Khan smentisce la AAW Wrestling sul caso Mance Warner",
+    "updated_at": "1779742510.5164948",
+    "url": "https://www.ringsidenews.com/tony-khan-publicly-calls-out-indie-promotion-mance-warner-claim/"
+  },
+  "https://www.ringsidenews.com/tony-khan-responds-fan-claims-media-trained-tony-becoming-problem": {
+    "extra": {
+      "event_key": "event:business:media-rights-followup-tony-khan-responds-fan-media-trained-tony-is-becoming-a-problem",
+      "metadata_file": "published/20260516_114508_001_tony-khan-nega-di-aver-seguito-corsi-di-media-training-merito-dellesperienza-e-della-mia-f_4752_metadata.json",
+      "semantic_id": "tony-khan-responds-after-fan-claims-media-trained-tony-is-becoming-a-problem",
+      "wp_post_id": 4752
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Tony Khan nega di aver seguito corsi di media training: \"Merito dell'esperienza e della mia fede\"",
+    "updated_at": "1779742510.2065098",
+    "url": "https://www.ringsidenews.com/tony-khan-responds-fan-claims-media-trained-tony-becoming-problem/"
   },
   "https://www.ringsidenews.com/tony-khan-says-paramount-wbd-deal-will-make-tbs-tnt-stronger-aew": {
     "extra": {
@@ -395,6 +1838,20 @@
     "updated_at": "1779667104.4523075",
     "url": "https://www.ringsidenews.com/trick-williams-links-soulja-boy-collect-con/"
   },
+  "https://www.ringsidenews.com/trick-williams-rousing-homecoming-celebration-during-515-wwe-smackdown": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260516_021031_001_trick-williams-festeggia-il-ritorno-a-casa-nella-puntata-di-smackdown-del-15-maggio_4722_metadata.json",
+      "semantic_id": "trick-williams-has-rousing-homecoming-celebration-during-515-wwe-smackdown",
+      "wp_post_id": 4722
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Trick Williams festeggia il ritorno a casa nella puntata di SmackDown del 15 maggio",
+    "updated_at": "1779742510.1941795",
+    "url": "https://www.ringsidenews.com/trick-williams-rousing-homecoming-celebration-during-515-wwe-smackdown/"
+  },
   "https://www.ringsidenews.com/triple-h-becky-lynch-hammer-out-last-minute-details-backstage-before-saturday-nights-main-event": {
     "extra": {
       "event_key": "",
@@ -408,6 +1865,34 @@
     "updated_at": "1779579062.6754346",
     "url": "https://www.ringsidenews.com/triple-h-becky-lynch-hammer-out-last-minute-details-backstage-before-saturday-nights-main-event/"
   },
+  "https://www.ringsidenews.com/two-wwe-stars-may-have-injured-saturday-nights-main-event": {
+    "extra": {
+      "event_key": "event:logan-paul-injury",
+      "metadata_file": "published/20260524_183633_001_possibili-infortuni-per-logan-paul-e-sol-ruca-durante-il-saturday-nights-main-event_5240_metadata.json",
+      "semantic_id": "two-wwe-stars-may-have-been-injured-at-saturday-nights-main-event",
+      "wp_post_id": 5240
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Possibili infortuni per Logan Paul e Sol Ruca durante il Saturday Night's Main Event",
+    "updated_at": "1779742510.6126118",
+    "url": "https://www.ringsidenews.com/two-wwe-stars-may-have-injured-saturday-nights-main-event/"
+  },
+  "https://www.ringsidenews.com/tyler-breeze-addresses-future-upupdowndown-xavier-woods-wwe-exit": {
+    "extra": {
+      "event_key": "event:business:tko-financials",
+      "metadata_file": "published/20260523_134319_001_tyler-breeze-parla-del-futuro-di-upupdowndown-dopo-laddio-di-xavier-woods-alla-wwe_5174_metadata.json",
+      "semantic_id": "tyler-breeze-addresses-future-of-upupdowndown-after-xavier-woods-wwe-exit",
+      "wp_post_id": 5174
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Tyler Breeze parla del futuro di UpUpDownDown dopo l'addio di Xavier Woods alla WWE",
+    "updated_at": "1779742510.5244758",
+    "url": "https://www.ringsidenews.com/tyler-breeze-addresses-future-upupdowndown-xavier-woods-wwe-exit/"
+  },
   "https://www.ringsidenews.com/vince-mcmahon-would-allegedly-forget-his-own-instructions-explode-backstage-wwe": {
     "extra": {
       "event_key": "event:business:vince-mcmahon",
@@ -420,6 +1905,62 @@
     "title": "Vince McMahon Would Allegedly Forget His Own Instructions and Explode Backstage in WWE",
     "updated_at": "1779552024.6113484",
     "url": "https://www.ringsidenews.com/vince-mcmahon-would-allegedly-forget-his-own-instructions-explode-backstage-wwe/"
+  },
+  "https://www.ringsidenews.com/vince-mcmahons-lawyers-defend-signal-app-use-wwe-shareholders-lawsuit": {
+    "extra": {
+      "event_key": "event:legal:nick-khan:vince-mcmahon",
+      "metadata_file": "published/20260514_142540_001_avvocati-di-vince-mcmahon-difendono-luso-di-signal-nella-causa-degli-azionisti-wwe_4542_metadata.json",
+      "semantic_id": "vince-mcmahons-lawyers-defend-signal-app-use-in-wwe-shareholders-lawsuit",
+      "wp_post_id": 4542
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Avvocati di Vince McMahon difendono l'uso di Signal nella causa degli azionisti WWE",
+    "updated_at": "1779742510.1259003",
+    "url": "https://www.ringsidenews.com/vince-mcmahons-lawyers-defend-signal-app-use-wwe-shareholders-lawsuit/"
+  },
+  "https://www.ringsidenews.com/vince-russo-says-triple-h-should-have-fired-instead-getting-raise": {
+    "extra": {
+      "event_key": "event:wwe-wrestlemania-2026-05-25-followup-vince-russo-says-triple-h-should-have-been-fired-instead-getting-a",
+      "metadata_file": "published/20260525_174149_002_vince-russo-contro-triple-h-doveva-essere-licenziato-non-ricevere-un-aumento_5261_metadata.json",
+      "semantic_id": "vince-russo-says-triple-h-should-have-been-fired-instead-of-getting-a-raise",
+      "wp_post_id": 5261
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Vince Russo contro Triple H: \"Doveva essere licenziato, non ricevere un aumento\"",
+    "updated_at": "1779742510.6435902",
+    "url": "https://www.ringsidenews.com/vince-russo-says-triple-h-should-have-fired-instead-getting-raise/"
+  },
+  "https://www.ringsidenews.com/whats-said-about-when-john-cena-classic-will-actually-start": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260519_224449_001_wwe-il-lancio-del-john-cena-classic-previsto-per-fine-anno_4938_metadata.json",
+      "semantic_id": "whats-being-said-about-when-john-cena-classic-will-actually-start",
+      "wp_post_id": 4938
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: il lancio del John Cena Classic previsto per fine anno",
+    "updated_at": "1779742510.3382533",
+    "url": "https://www.ringsidenews.com/whats-said-about-when-john-cena-classic-will-actually-start/"
+  },
+  "https://www.ringsidenews.com/wwe-2k-developers-hit-hard-company-wide-layoffs": {
+    "extra": {
+      "event_key": "event:business:media-rights",
+      "metadata_file": "published/20260514_225137_001_licenziamenti-in-visual-concepts-colpito-il-team-di-sviluppo-di-wwe-2k_4630_metadata.json",
+      "semantic_id": "wwe-2k-developers-hit-hard-in-company-wide-layoffs",
+      "wp_post_id": 4630
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Licenziamenti in Visual Concepts: colpito il team di sviluppo di WWE 2K",
+    "updated_at": "1779742510.1481361",
+    "url": "https://www.ringsidenews.com/wwe-2k-developers-hit-hard-company-wide-layoffs/"
   },
   "https://www.ringsidenews.com/wwe-adds-clash-italy-title-match-during-saturday-nights-main-event": {
     "extra": {
@@ -435,6 +1976,118 @@
     "updated_at": "1779623406.3089836",
     "url": "https://www.ringsidenews.com/wwe-adds-clash-italy-title-match-during-saturday-nights-main-event/"
   },
+  "https://www.ringsidenews.com/wwe-already-changing-creative-plans-due-jacy-jaynes-strong-main-roster-start": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260514_181618_001_wwe-la-federazione-cambia-i-piani-creativi-per-valorizzare-jacy-jayne_4597_metadata.json",
+      "semantic_id": "wwe-already-changing-creative-plans-due-to-jacy-jaynes-strong-main-roster-start",
+      "wp_post_id": 4597
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: la federazione cambia i piani creativi per valorizzare Jacy Jayne",
+    "updated_at": "1779742510.1337879",
+    "url": "https://www.ringsidenews.com/wwe-already-changing-creative-plans-due-jacy-jaynes-strong-main-roster-start/"
+  },
+  "https://www.ringsidenews.com/wwe-believes-aew-may-struggle-land-major-tv-deal-current-contract-ends": {
+    "extra": {
+      "event_key": "event:business:tko-financials-followup-believes-may-struggle-land-major-tv-deal-current-contract-ends",
+      "metadata_file": "published/20260515_155518_003_wwe-dubbi-sul-futuro-degli-accordi-televisivi-di-aew-dopo-il-2027_4673_metadata.json",
+      "semantic_id": "wwe-believes-aew-may-struggle-to-land-major-tv-deal-after-current-contract-ends",
+      "wp_post_id": 4673
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: dubbi sul futuro degli accordi televisivi di AEW dopo il 2027",
+    "updated_at": "1779742510.1642232",
+    "url": "https://www.ringsidenews.com/wwe-believes-aew-may-struggle-land-major-tv-deal-current-contract-ends/"
+  },
+  "https://www.ringsidenews.com/wwe-drops-danhausen-x-new-york-knicks-merch-teams-playoff-surge": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260523_233236_002_wwe-lanciato-il-merchandising-di-danhausen-in-collaborazione-con-i-new-york-knicks_5198_metadata.json",
+      "semantic_id": "wwe-drops-danhausen-x-new-york-knicks-merch-after-teams-playoff-surge",
+      "wp_post_id": 5198
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: lanciato il merchandising di Danhausen in collaborazione con i New York Knicks",
+    "updated_at": "1779742510.553088",
+    "url": "https://www.ringsidenews.com/wwe-drops-danhausen-x-new-york-knicks-merch-teams-playoff-surge/"
+  },
+  "https://www.ringsidenews.com/wwe-house-show-tickets-expected-much-cheaper-this-summer": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260514_214600_001_wwe-i-biglietti-per-gli-house-show-estivi-saranno-più-economici_4627_metadata.json",
+      "semantic_id": "wwe-house-show-tickets-expected-to-be-much-cheaper-this-summer",
+      "wp_post_id": 4627
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: i biglietti per gli house show estivi saranno più economici",
+    "updated_at": "1779742510.1466515",
+    "url": "https://www.ringsidenews.com/wwe-house-show-tickets-expected-much-cheaper-this-summer/"
+  },
+  "https://www.ringsidenews.com/wwe-interested-reuniting-enzo-cass-amid-backstage-contact": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260521_171225_001_wwe-interessata-a-una-reunion-tra-enzo-e-cass_5089_metadata.json",
+      "semantic_id": "wwe-interested-in-reuniting-enzo-cass-amid-backstage-contact",
+      "wp_post_id": 5089
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE interessata a una reunion tra Enzo e Cass",
+    "updated_at": "1779742510.4698138",
+    "url": "https://www.ringsidenews.com/wwe-interested-reuniting-enzo-cass-amid-backstage-contact/"
+  },
+  "https://www.ringsidenews.com/wwe-made-big-decision-about-overseas-plans-during-internal-meeting": {
+    "extra": {
+      "event_key": "event:business:nick-khan",
+      "metadata_file": "published/20260520_140504_001_wwe-confermati-i-piani-per-gli-eventi-in-arabia-saudita-nonostante-le-tensioni-internazion_4984_metadata.json",
+      "semantic_id": "wwe-made-big-decision-about-overseas-plans-during-internal-meeting",
+      "wp_post_id": 4984
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: confermati i piani per gli eventi in Arabia Saudita nonostante le tensioni internazionali",
+    "updated_at": "1779742510.3699965",
+    "url": "https://www.ringsidenews.com/wwe-made-big-decision-about-overseas-plans-during-internal-meeting/"
+  },
+  "https://www.ringsidenews.com/wwe-quietly-making-big-changes-tag-team-division-major-exits": {
+    "extra": {
+      "event_key": "event:logan-paul-diagnosis",
+      "metadata_file": "published/20260520_174308_004_wwe-la-federazione-lavora-al-rilancio-della-categoria-tag-team-dopo-i-recenti-addii_4996_metadata.json",
+      "semantic_id": "wwe-quietly-making-big-changes-to-tag-team-division-after-major-exits",
+      "wp_post_id": 4996
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: la federazione lavora al rilancio della categoria tag team dopo i recenti addii",
+    "updated_at": "1779742510.3844204",
+    "url": "https://www.ringsidenews.com/wwe-quietly-making-big-changes-tag-team-division-major-exits/"
+  },
+  "https://www.ringsidenews.com/wwe-reveals-why-more-main-roster-house-shows-returning-this-summer": {
+    "extra": {
+      "event_key": "event:business:wwe:executive-contract:nick-khan-followup-reveals-why-more-main-roster-house-shows-are-returning-this-summer",
+      "metadata_file": "published/20260520_082422_001_wwe-il-motivo-dietro-laumento-dei-live-event-estivi-per-il-main-roster_4968_metadata.json",
+      "semantic_id": "wwe-reveals-why-more-main-roster-house-shows-are-returning-this-summer",
+      "wp_post_id": 4968
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: il motivo dietro l'aumento dei live event estivi per il main roster",
+    "updated_at": "1779742510.3602083",
+    "url": "https://www.ringsidenews.com/wwe-reveals-why-more-main-roster-house-shows-returning-this-summer/"
+  },
   "https://www.ringsidenews.com/wwe-saturday-nights-main-event-spoiler-lineup-may-23-2026-full-match-card-backstage-notes-revealed": {
     "extra": {
       "event_key": "",
@@ -447,6 +2100,20 @@
     "title": "WWE Saturday Night's Main Event Spoiler Lineup for May 23, 2026: Full Match Card and Backstage Notes Revealed",
     "updated_at": "1779579157.5821881",
     "url": "https://www.ringsidenews.com/wwe-saturday-nights-main-event-spoiler-lineup-may-23-2026-full-match-card-backstage-notes-revealed/"
+  },
+  "https://www.ringsidenews.com/wwe-superfan-vladimir-hospitalized-scary-fall": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260519_194939_001_wwe-il-celebre-superfan-vladimir-ricoverato-in-ospedale-dopo-una-brutta-caduta_4932_metadata.json",
+      "semantic_id": "wwe-superfan-vladimir-hospitalized-after-scary-fall",
+      "wp_post_id": 4932
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE, il celebre superfan Vladimir ricoverato in ospedale dopo una brutta caduta",
+    "updated_at": "1779742510.3321674",
+    "url": "https://www.ringsidenews.com/wwe-superfan-vladimir-hospitalized-scary-fall/"
   },
   "https://www.ringsidenews.com/wwes-current-stance-ethan-page-ahead-ic-title-match-saturday-nights-main-event": {
     "extra": {
@@ -461,18 +2128,299 @@
     "updated_at": "1779552048.9929159",
     "url": "https://www.ringsidenews.com/wwes-current-stance-ethan-page-ahead-ic-title-match-saturday-nights-main-event/"
   },
+  "https://www.ringsidenews.com/wwes-current-stance-jade-cargill-past-locker-room-heat-revealed": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260518_201257_001_wwe-superate-le-tensioni-nel-backstage-per-jade-cargill-la-dirigenza-promuove-i-suoi-progr_4869_metadata.json",
+      "semantic_id": "wwes-current-stance-on-jade-cargill-after-past-locker-room-heat-revealed",
+      "wp_post_id": 4869
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: superate le tensioni nel backstage per Jade Cargill, la dirigenza promuove i suoi progressi",
+    "updated_at": "1779742510.2858567",
+    "url": "https://www.ringsidenews.com/wwes-current-stance-jade-cargill-past-locker-room-heat-revealed/"
+  },
   "https://www.ringsidenews.com/wwes-current-stance-ludwig-kaiser-recent-arrest-revealed": {
     "extra": {
       "event_key": "",
-      "raw_result": "skipped",
-      "semantic_id": "wwes-current-stance-on-ludwig-kaiser-after-recent-arrest-revealed"
+      "metadata_file": "published/20260525_174443_001_wwe-nessuna-sanzione-per-ludwig-kaiser-dopo-larresto_5264_metadata.json",
+      "semantic_id": "wwes-current-stance-on-ludwig-kaiser-after-recent-arrest-revealed",
+      "wp_post_id": 5264
     },
-    "reason": "above_low_score_final_cap_not_final",
-    "score": 56,
-    "status": "competitive_deferred",
-    "title": "WWE's Current Stance on Ludwig Kaiser After Recent Arrest Revealed",
-    "updated_at": "1779730853.0163853",
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: nessuna sanzione per Ludwig Kaiser dopo l'arresto",
+    "updated_at": "1779742510.6480787",
     "url": "https://www.ringsidenews.com/wwes-current-stance-ludwig-kaiser-recent-arrest-revealed/"
+  },
+  "https://www.ringsidenews.com/zelina-vega-books-movie-role-following-her-wwe-release": {
+    "extra": {
+      "event_key": "event:business:tko-financials",
+      "metadata_file": "published/20260518_161542_002_zelina-vega-ottiene-un-ruolo-cinematografico-dopo-laddio-alla-wwe_4863_metadata.json",
+      "semantic_id": "zelina-vega-books-movie-role-following-her-wwe-release",
+      "wp_post_id": 4863
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Zelina Vega ottiene un ruolo cinematografico dopo l'addio alla WWE",
+    "updated_at": "1779742510.2804236",
+    "url": "https://www.ringsidenews.com/zelina-vega-books-movie-role-following-her-wwe-release/"
+  },
+  "https://www.wrestlinginc.com/2170206/aew-paul-wight-kenny-omega-darby-allin-ring": {
+    "extra": {
+      "event_key": "event:darby-allin-return",
+      "metadata_file": "published/20260515_134640_001_paul-wight-indica-gli-avversari-che-vorrebbe-affrontare-in-aew_4660_metadata.json",
+      "semantic_id": "paul-wight-names-aew-stars-hed-still-like-to-get-in-the-ring-with",
+      "wp_post_id": 4660
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Paul Wight indica gli avversari che vorrebbe affrontare in AEW",
+    "updated_at": "1779742510.1575472",
+    "url": "https://www.wrestlinginc.com/2170206/aew-paul-wight-kenny-omega-darby-allin-ring/"
+  },
+  "https://www.wrestlinginc.com/2170628/wwe-braun-strowman-wyatt-family-main-roster-debut": {
+    "extra": {
+      "event_key": "event:braun-strowman-return",
+      "metadata_file": "published/20260516_144243_004_braun-strowman-ricorda-il-suo-debutto-nel-main-roster-con-la-wyatt-family_4765_metadata.json",
+      "semantic_id": "braun-strowman-reflects-on-wwe-main-roster-debut-alongside-the-wyatt-family",
+      "wp_post_id": 4765
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Braun Strowman ricorda il suo debutto nel main roster con la Wyatt Family",
+    "updated_at": "1779742510.214984",
+    "url": "https://www.wrestlinginc.com/2170628/wwe-braun-strowman-wyatt-family-main-roster-debut/"
+  },
+  "https://www.wrestlinginc.com/2171250/matt-hardy-kofimania-wwe-new-day": {
+    "extra": {
+      "event_key": "event:business:vince-mcmahon",
+      "metadata_file": "published/20260516_185428_001_matt-hardy-ricorda-la-kofimania-dopo-laddio-di-kofi-kingston-e-xavier-woods-alla-wwe_4773_metadata.json",
+      "semantic_id": "matt-hardy-looks-back-on-kofimania-in-wake-of-new-days-wwe-release",
+      "wp_post_id": 4773
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Matt Hardy ricorda la KofiMania dopo l'addio di Kofi Kingston e Xavier Woods alla WWE",
+    "updated_at": "1779742510.2193332",
+    "url": "https://www.wrestlinginc.com/2171250/matt-hardy-kofimania-wwe-new-day/"
+  },
+  "https://www.wrestlinginc.com/2171776/wwe-nxt-ridge-holland-shawn-michaels": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260516_204912_001_ridge-holland-spiega-i-cambiamenti-a-nxt-sotto-la-guida-di-shawn-michaels_4776_metadata.json",
+      "semantic_id": "former-wwe-nxt-star-reveals-how-things-changed-when-shawn-michaels-took-over",
+      "wp_post_id": 4776
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Ridge Holland spiega i cambiamenti a NXT sotto la guida di Shawn Michaels",
+    "updated_at": "1779742510.2215226",
+    "url": "https://www.wrestlinginc.com/2171776/wwe-nxt-ridge-holland-shawn-michaels/"
+  },
+  "https://www.wrestlinginc.com/2172708/karrion-kross-scarlett-wwe-releases": {
+    "extra": {
+      "event_key": "event:business:tko-financials",
+      "metadata_file": "published/20260514_162938_003_karrion-kross-e-scarlett-commentano-gli-ultimi-licenziamenti-in-wwe_4560_metadata.json",
+      "semantic_id": "former-wwe-stars-karrion-kross-and-scarlett-comment-on-latest-round-of-releases",
+      "wp_post_id": 4560
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Karrion Kross e Scarlett commentano gli ultimi licenziamenti in WWE",
+    "updated_at": "1779742510.1324553",
+    "url": "https://www.wrestlinginc.com/2172708/karrion-kross-scarlett-wwe-releases/"
+  },
+  "https://www.wrestlinginc.com/2172720/aew-wwe-adam-copeland-hulk-hogan-friendship": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260517_142802_001_adam-copeland-parla-dellamicizia-e-dellinfluenza-di-hulk-hogan_4805_metadata.json",
+      "semantic_id": "aew-star-adam-copeland-discusses-friendship-with-late-wwe-hofer-hulk-hogan",
+      "wp_post_id": 4805
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Adam Copeland parla dell'amicizia e dell'influenza di Hulk Hogan",
+    "updated_at": "1779742510.2352817",
+    "url": "https://www.wrestlinginc.com/2172720/aew-wwe-adam-copeland-hulk-hogan-friendship/"
+  },
+  "https://www.wrestlinginc.com/2173032/wwe-creative-status-stephanie-vaquer": {
+    "extra": {
+      "event_key": "event:stephanie-vaquer-injury",
+      "metadata_file": "published/20260514_181657_002_wwe-aggiornamenti-sui-piani-creativi-per-il-ritorno-di-stephanie-vaquer_4600_metadata.json",
+      "semantic_id": "backstage-update-on-wwe-creative-status-of-former-womens-champion-stephanie-vaquer",
+      "wp_post_id": 4600
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: aggiornamenti sui piani creativi per il ritorno di Stephanie Vaquer",
+    "updated_at": "1779742510.1351528",
+    "url": "https://www.wrestlinginc.com/2173032/wwe-creative-status-stephanie-vaquer/"
+  },
+  "https://www.wrestlinginc.com/2173128/eric-bischoff-respects-aew-tony-khan-rebel": {
+    "extra": {
+      "event_key": "event:rumor:eric-bischoff-talks-recent-development-that-makes-him-respect-s-tony-k",
+      "metadata_file": "published/20260517_164937_003_eric-bischoff-elogia-il-supporto-di-tony-khan-a-rebel-per-la-diagnosi-di-sla_4817_metadata.json",
+      "semantic_id": "eric-bischoff-talks-recent-development-that-makes-him-respect-aews-tony-khan",
+      "wp_post_id": 4817
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Eric Bischoff elogia il supporto di Tony Khan a Rebel per la diagnosi di SLA",
+    "updated_at": "1779742510.244896",
+    "url": "https://www.wrestlinginc.com/2173128/eric-bischoff-respects-aew-tony-khan-rebel/"
+  },
+  "https://www.wrestlinginc.com/2173180/wwe-creative-plans-fatal-influence-crowd-reactions": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260514_201911_003_fatal-influence-reazioni-del-pubblico-wwe-potrebbero-cambiare-piani-creativi_4615_metadata.json",
+      "semantic_id": "crowd-reactions-to-fatal-influence-reportedly-shifting-wwe-creative-plans",
+      "wp_post_id": 4615
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Fatal Influence: reazioni del pubblico WWE potrebbero cambiare piani creativi",
+    "updated_at": "1779742510.140834",
+    "url": "https://www.wrestlinginc.com/2173180/wwe-creative-plans-fatal-influence-crowd-reactions/"
+  },
+  "https://www.wrestlinginc.com/2173220/wwe-ronda-rousey-becky-lynch-high-profile-pitch-never-delivered": {
+    "extra": {
+      "event_key": "event:liv-morgan-return",
+      "metadata_file": "published/20260514_201504_001_ronda-rousey-svela-il-match-contro-becky-lynch-approvato-dalla-wwe-ma-mai-realizzato_4609_metadata.json",
+      "semantic_id": "ronda-rousey-details-high-profile-pitch-that-wwe-approved-but-never-delivered",
+      "wp_post_id": 4609
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Ronda Rousey svela il match contro Becky Lynch approvato dalla WWE ma mai realizzato",
+    "updated_at": "1779742510.1379144",
+    "url": "https://www.wrestlinginc.com/2173220/wwe-ronda-rousey-becky-lynch-high-profile-pitch-never-delivered/"
+  },
+  "https://www.wrestlinginc.com/2173426/tna-thursday-night-impact-may-14-x-division-title-on-line-more": {
+    "extra": {
+      "event_key": "report:tna-impact-2026-05-14",
+      "metadata_file": "published/20260515_061008_001_tna-impact-del-14-maggio-2026-slater-difende-lx-division-title-per-la-storia-e-si-cerca-il_4651_metadata.json",
+      "semantic_id": "report-tna-impact-2026-05-14",
+      "wp_post_id": 4651
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "TNA Impact del 14 maggio 2026: Slater difende l'X-Division Title per la storia e si cerca il prossimo sfidante per Santana",
+    "updated_at": "1779742510.1543298",
+    "url": "https://www.wrestlinginc.com/2173426/tna-thursday-night-impact-may-14-x-division-title-on-line-more/"
+  },
+  "https://www.wrestlinginc.com/2173722/tna-indi-hartwell-santino-marella-announces-contract-extension": {
+    "extra": {
+      "event_key": "event:tanea-brooks-rebel-als-diagnosis",
+      "metadata_file": "published/20260515_155550_005_tna-indi-hartwell-ha-rinnovato-il-contratto_4679_metadata.json",
+      "semantic_id": "santino-marella-announces-indi-hartwell-has-signed-a-contract-extension-with-tna",
+      "wp_post_id": 4679
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "TNA: Indi Hartwell ha rinnovato il contratto",
+    "updated_at": "1779742510.1676695",
+    "url": "https://www.wrestlinginc.com/2173722/tna-indi-hartwell-santino-marella-announces-contract-extension/"
+  },
+  "https://www.wrestlinginc.com/2173729/wwe-tna-impact-fabian-aichner-giovanni-vinci-appears": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260515_155535_004_tna-fabian-aichner-debutta-a-impact-e-sfida-il-campione-x-division_4676_metadata.json",
+      "semantic_id": "former-wwe-star-fabian-aichner-aka-giovanni-vinci-appears-on-tna-impact",
+      "wp_post_id": 4676
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "TNA: Fabian Aichner debutta a Impact e sfida il campione X-Division",
+    "updated_at": "1779742510.1659367",
+    "url": "https://www.wrestlinginc.com/2173729/wwe-tna-impact-fabian-aichner-giovanni-vinci-appears/"
+  },
+  "https://www.wrestlinginc.com/2173963/wwe-roman-reigns-added-advertised-dates-additional-details": {
+    "extra": {
+      "event_key": "event:title:roman-reigns:world",
+      "metadata_file": "published/20260515_203950_001_nuovi-dettagli-sul-ritorno-di-roman-reigns-negli-show-wwe-pubblicizzati_4695_metadata.json",
+      "semantic_id": "additional-details-on-roman-reigns-being-added-back-to-advertised-wwe-dates",
+      "wp_post_id": 4695
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Nuovi dettagli sul ritorno di Roman Reigns negli show WWE pubblicizzati",
+    "updated_at": "1779742510.1770558",
+    "url": "https://www.wrestlinginc.com/2173963/wwe-roman-reigns-added-advertised-dates-additional-details/"
+  },
+  "https://www.wrestlinginc.com/2174099/aew-buddy-matthews-injury-update-indie-appearance-cleared-october": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260515_215236_001_buddy-matthews-torna-sul-ring-in-australia-aggiornamenti-sullinfortunio_4704_metadata.json",
+      "semantic_id": "aews-buddy-matthews-offers-injury-update-during-indie-appearance",
+      "wp_post_id": 4704
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Buddy Matthews torna sul ring in Australia: aggiornamenti sull'infortunio",
+    "updated_at": "1779742510.1826212",
+    "url": "https://www.wrestlinginc.com/2174099/aew-buddy-matthews-injury-update-indie-appearance-cleared-october/"
+  },
+  "https://www.wrestlinginc.com/2174193/wwe-vince-mcmahon-linda-ring-boy-lawsuit-judge-plaintiffs-anonymous": {
+    "extra": {
+      "event_key": "event:legal:vince-mcmahon",
+      "metadata_file": "published/20260515_234742_001_wwe-caso-ring-boy-i-querelanti-potranno-mantenere-lanonimato_4719_metadata.json",
+      "semantic_id": "judge-allows-plaintiffs-to-remain-anonymous-in-wwe-ring-boy-lawsuit",
+      "wp_post_id": 4719
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE, caso Ring Boy: i querelanti potranno mantenere l'anonimato",
+    "updated_at": "1779742510.192202",
+    "url": "https://www.wrestlinginc.com/2174193/wwe-vince-mcmahon-linda-ring-boy-lawsuit-judge-plaintiffs-anonymous/"
+  },
+  "https://www.wrestlinginc.com/2174199/wwe-smackdown-may-15-trick-williams-jade-cargill-womens-tag-match": {
+    "extra": {
+      "event_key": "report:wwe-smackdown-2026-05-15",
+      "metadata_file": "published/20260516_054217_001_wwe-smackdown-del-15-maggio-2026-jade-cargill-e-trick-williams-sotto-i-riflettori-risultat_4737_metadata.json",
+      "semantic_id": "report-wwe-smackdown-2026-05-15",
+      "wp_post_id": 4737
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE SmackDown del 15 maggio 2026: Jade Cargill e Trick Williams sotto i riflettori; risultati e il match di coppia femminile",
+    "updated_at": "1779742510.1962178",
+    "url": "https://www.wrestlinginc.com/2174199/wwe-smackdown-may-15-trick-williams-jade-cargill-womens-tag-match/"
+  },
+  "https://www.wrestlinginc.com/2174642/aew-collision-results-may-16-world-tbs-titles-tag-eliminator": {
+    "extra": {
+      "event_key": "report:aew-collision-2026-05-16",
+      "metadata_file": "published/20260517_060155_001_aew-collision-del-16-maggio-2026-risultati-e-momenti-salienti_4792_metadata.json",
+      "semantic_id": "report-aew-collision-2026-05-16",
+      "wp_post_id": 4792
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "AEW Collision del 16 maggio 2026: risultati e momenti salienti",
+    "updated_at": "1779742510.2260659",
+    "url": "https://www.wrestlinginc.com/2174642/aew-collision-results-may-16-world-tbs-titles-tag-eliminator/"
   },
   "https://www.wrestlinginc.com/2174866/wwe-jimmy-wang-yang-undertaker-confederate-flag": {
     "extra": {
@@ -487,6 +2435,216 @@
     "updated_at": "1779553200.1885142",
     "url": "https://www.wrestlinginc.com/2174866/wwe-jimmy-wang-yang-undertaker-confederate-flag/"
   },
+  "https://www.wrestlinginc.com/2174915/wwe-corey-graves-carmella-teases-return": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260517_164914_002_corey-graves-ottimista-sul-possibile-ritorno-di-carmella-sul-ring_4814_metadata.json",
+      "semantic_id": "wwes-corey-graves-teases-carmellas-return-to-professional-wrestling",
+      "wp_post_id": 4814
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Corey Graves ottimista sul possibile ritorno di Carmella sul ring",
+    "updated_at": "1779742510.242505",
+    "url": "https://www.wrestlinginc.com/2174915/wwe-corey-graves-carmella-teases-return/"
+  },
+  "https://www.wrestlinginc.com/2174988/wwe-raw-sol-ruca-backstage-report-losing-matches": {
+    "extra": {
+      "event_key": "event:liv-morgan-return-followup-backstage-sol-ruca-losing-back-back-raw",
+      "metadata_file": "published/20260517_221642_002_wwe-il-motivo-dietro-le-recenti-sconfitte-di-sol-ruca-a-raw_4840_metadata.json",
+      "semantic_id": "backstage-report-on-sol-ruca-losing-back-to-back-matches-on-wwe-raw",
+      "wp_post_id": 4840
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: il motivo dietro le recenti sconfitte di Sol Ruca a Raw",
+    "updated_at": "1779742510.2620535",
+    "url": "https://www.wrestlinginc.com/2174988/wwe-raw-sol-ruca-backstage-report-losing-matches/"
+  },
+  "https://www.wrestlinginc.com/2174996/wwe-nxt-john-cena-mason-rook-future-world-champions": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260517_200254_001_john-cena-indica-mason-rook-di-nxt-come-futuro-world-champion_4826_metadata.json",
+      "semantic_id": "john-cena-points-to-wwe-nxt-star-mason-rook-when-asked-about-future-world-champions",
+      "wp_post_id": 4826
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "John Cena indica Mason Rook di NXT come futuro World Champion",
+    "updated_at": "1779742510.2521536",
+    "url": "https://www.wrestlinginc.com/2174996/wwe-nxt-john-cena-mason-rook-future-world-champions/"
+  },
+  "https://www.wrestlinginc.com/2175050/wwe-karrion-kross-scarlett-return-aew-debut": {
+    "extra": {
+      "event_key": "event:rumor:stars-karrion-kross-scarlett-talk-possibility-return-or-debut",
+      "metadata_file": "published/20260517_221524_001_karrion-kross-e-scarlett-sul-futuro-ipotesi-ritorno-in-wwe-o-possibile-approdo-in-aew_4837_metadata.json",
+      "semantic_id": "former-wwe-stars-karrion-kross-and-scarlett-talk-possibility-of-return-or-aew-debut",
+      "wp_post_id": 4837
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Karrion Kross e Scarlett sul futuro: ipotesi ritorno in WWE o possibile approdo in AEW",
+    "updated_at": "1779742510.2595475",
+    "url": "https://www.wrestlinginc.com/2175050/wwe-karrion-kross-scarlett-return-aew-debut/"
+  },
+  "https://www.wrestlinginc.com/2175486/wwe-baron-corbin-bishop-dyer-discussed-return": {
+    "extra": {
+      "event_key": "event:rumor:baron-corbin-aka-bishop-dyer-being-discussed-return",
+      "metadata_file": "published/20260518_161501_001_wwe-si-discute-internamente-di-un-possibile-ritorno-di-baron-corbin_4860_metadata.json",
+      "semantic_id": "report-baron-corbin-aka-bishop-dyer-being-discussed-for-wwe-return",
+      "wp_post_id": 4860
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: si discute internamente di un possibile ritorno di Baron Corbin",
+    "updated_at": "1779742510.2777548",
+    "url": "https://www.wrestlinginc.com/2175486/wwe-baron-corbin-bishop-dyer-discussed-return/"
+  },
+  "https://www.wrestlinginc.com/2175644/wwe-aew-paramount-rumors-circulating-backstage": {
+    "extra": {
+      "event_key": "event:business:media-rights",
+      "metadata_file": "published/20260518_182756_001_voci-nel-backstage-wwe-su-un-possibile-futuro-di-aew-con-paramount_4866_metadata.json",
+      "semantic_id": "backstage-report-on-aew-paramount-rumors-circulating-backstage-in-wwe",
+      "wp_post_id": 4866
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Voci nel backstage WWE su un possibile futuro di AEW con Paramount",
+    "updated_at": "1779742510.2831583",
+    "url": "https://www.wrestlinginc.com/2175644/wwe-aew-paramount-rumors-circulating-backstage/"
+  },
+  "https://www.wrestlinginc.com/2175813/aew-garrett-borden-sting-dustin-rhodes-debut-indie-event": {
+    "extra": {
+      "event_key": "event:darby-allin-diagnosis",
+      "metadata_file": "published/20260518_201313_002_garrett-borden-figlio-di-sting-debutta-nel-wrestling-durante-un-evento-indipendente_4872_metadata.json",
+      "semantic_id": "garrett-borden-son-of-sting-makes-pro-wrestling-debut-at-aew-stars-indie-event",
+      "wp_post_id": 4872
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Garrett Borden, figlio di Sting, debutta nel wrestling durante un evento indipendente",
+    "updated_at": "1779742510.288519",
+    "url": "https://www.wrestlinginc.com/2175813/aew-garrett-borden-sting-dustin-rhodes-debut-indie-event/"
+  },
+  "https://www.wrestlinginc.com/2175844/wwe-aaa-ethan-page-chelsea-green-partnership-reunion": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260522_041819_002_ethan-page-parla-della-collaborazione-tra-wwe-e-aaa-e-di-una-possibile-reunion-con-chelsea_5104_metadata.json",
+      "semantic_id": "wwes-ethan-page-comments-on-aaa-partnership-with-chelsea-green-possible-reunion",
+      "wp_post_id": 5104
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Ethan Page parla della collaborazione tra WWE e AAA e di una possibile reunion con Chelsea Green",
+    "updated_at": "1779742510.4888713",
+    "url": "https://www.wrestlinginc.com/2175844/wwe-aaa-ethan-page-chelsea-green-partnership-reunion/"
+  },
+  "https://www.wrestlinginc.com/2176027/wwe-trick-williams-lil-yachty-explains-working": {
+    "extra": {
+      "event_key": "event:business:wwe:wrestlemania-host-bid:host-bid",
+      "metadata_file": "published/20260518_225248_001_trick-williams-lavorare-con-lil-yachty-è-contagioso_4881_metadata.json",
+      "semantic_id": "wwes-trick-williams-explains-what-its-like-working-with-lil-yachty",
+      "wp_post_id": 4881
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Trick Williams: \"Lavorare con Lil Yachty è contagioso\"",
+    "updated_at": "1779742510.2970102",
+    "url": "https://www.wrestlinginc.com/2176027/wwe-trick-williams-lil-yachty-explains-working/"
+  },
+  "https://www.wrestlinginc.com/2176064/wwe-raw-may-18-womens-tag-team-title-on-line-oba-femi-open-challenge": {
+    "extra": {
+      "event_key": "report:wwe-raw-2026-05-18",
+      "metadata_file": "published/20260519_070303_001_wwe-raw-18-maggio-2026-i-womens-tag-team-championship-in-palio-e-lopen-challenge-di-oba-fe_4902_metadata.json",
+      "semantic_id": "report-wwe-raw-2026-05-18",
+      "wp_post_id": 4902
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE Raw 18 maggio 2026: i Women's Tag Team Championship in palio e l'Open Challenge di Oba Femi",
+    "updated_at": "1779742510.3084245",
+    "url": "https://www.wrestlinginc.com/2176064/wwe-raw-may-18-womens-tag-team-title-on-line-oba-femi-open-challenge/"
+  },
+  "https://www.wrestlinginc.com/2176092/wwe-hofer-eric-bischoff-reflects-working-late-ted-turner": {
+    "extra": {
+      "event_key": "event:business:ted-turner",
+      "metadata_file": "published/20260523_134346_002_eric-bischoff-ricorda-il-suo-lavoro-con-ted-turner_5177_metadata.json",
+      "semantic_id": "wwe-hofer-eric-bischoff-reflects-on-working-for-the-late-ted-turner",
+      "wp_post_id": 5177
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Eric Bischoff ricorda il suo lavoro con Ted Turner",
+    "updated_at": "1779742510.5284715",
+    "url": "https://www.wrestlinginc.com/2176092/wwe-hofer-eric-bischoff-reflects-working-late-ted-turner/"
+  },
+  "https://www.wrestlinginc.com/2176100/la-knight-wwe-tv-absence-injury-contract-dispute": {
+    "extra": {
+      "event_key": "event:cody-rhodes-logan-paul-diagnosis-followup-la-knight-s-recent-tv-absence-not-due-injury-or-contract-dispute",
+      "metadata_file": "published/20260519_033130_003_la-knight-assente-dai-programmi-wwe-nessuna-causa-legata-a-infortuni-o-questioni-contrattu_4890_metadata.json",
+      "semantic_id": "la-knights-recent-wwe-tv-absence-reportedly-not-due-to-injury-or-contract-dispute",
+      "wp_post_id": 4890
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "LA Knight assente dai programmi WWE: nessuna causa legata a infortuni o questioni contrattuali",
+    "updated_at": "1779742510.30553",
+    "url": "https://www.wrestlinginc.com/2176100/la-knight-wwe-tv-absence-injury-contract-dispute/"
+  },
+  "https://www.wrestlinginc.com/2176114/wwe-raw-jacob-fatu-roman-reigns-tribal-combat-challenge": {
+    "extra": {
+      "event_key": "event:title:roman-reigns:world",
+      "metadata_file": "published/20260519_033027_002_wwe-raw-jacob-fatu-sfida-roman-reigns-a-un-tribal-combat-il-campione-accetta_4887_metadata.json",
+      "semantic_id": "jacob-fatu-challenges-roman-reigns-to-tribal-combat-on-wwe-raw-reigns-accepts",
+      "wp_post_id": 4887
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE Raw: Jacob Fatu sfida Roman Reigns a un Tribal Combat, il campione accetta",
+    "updated_at": "1779742510.3026693",
+    "url": "https://www.wrestlinginc.com/2176114/wwe-raw-jacob-fatu-roman-reigns-tribal-combat-challenge/"
+  },
+  "https://www.wrestlinginc.com/2176150/wwe-raw-brock-lesnar-returns-multiple-f5-oba-femi-retirement": {
+    "extra": {
+      "event_key": "event:brock-lesnar-return",
+      "metadata_file": "published/20260519_032922_001_spoiler-brock-lesnar-torna-a-raw-e-attacca-oba-femi_4884_metadata.json",
+      "semantic_id": "brock-lesnar-returns-delivers-multiple-f5s-to-oba-femi-on-wwe-raw",
+      "wp_post_id": 4884
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "[SPOILER] Brock Lesnar torna a Raw e attacca Oba Femi",
+    "updated_at": "1779742510.2998257",
+    "url": "https://www.wrestlinginc.com/2176150/wwe-raw-brock-lesnar-returns-multiple-f5-oba-femi-retirement/"
+  },
+  "https://www.wrestlinginc.com/2176174/wwe-nxt-may-19-two-championships-up-for-grabs-keanu-carver-tate-wilder": {
+    "extra": {
+      "event_key": "report:wwe-nxt-2026-05-19",
+      "metadata_file": "published/20260520_044639_001_wwe-nxt-del-19-maggio-2026-tatum-paxley-difende-il-womens-north-american-championship-cont_4959_metadata.json",
+      "semantic_id": "report-wwe-nxt-2026-05-19",
+      "wp_post_id": 4959
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE NXT del 19 maggio 2026: Tatum Paxley difende il Women's North American Championship contro Lizzy Rain, i Vanity Project mettono in palio i NXT Tag Team Championship contro i DarkState",
+    "updated_at": "1779742510.35069",
+    "url": "https://www.wrestlinginc.com/2176174/wwe-nxt-may-19-two-championships-up-for-grabs-keanu-carver-tate-wilder/"
+  },
   "https://www.wrestlinginc.com/2176287/aew-paul-wight-forced-lose-weight-wwe-wrestlemania-spot": {
     "extra": {
       "event_key": "",
@@ -499,6 +2657,74 @@
     "title": "AEW's Paul Wight Was Forced To Lose Weight For WWE WrestleMania Spot",
     "updated_at": "1779552040.914465",
     "url": "https://www.wrestlinginc.com/2176287/aew-paul-wight-forced-lose-weight-wwe-wrestlemania-spot/"
+  },
+  "https://www.wrestlinginc.com/2176571/wwe-wrestlemania-42-cm-punk-bron-breakker-roman-reigns-cody-rhodes-alternate-creative-plans-backstage-report": {
+    "extra": {
+      "event_key": "event:rumor:backstage-details-alternate-creative",
+      "metadata_file": "published/20260519_173819_001_wrestlemania-42-i-dettagli-sui-piani-creativi-alternativi-della-wwe_4922_metadata.json",
+      "semantic_id": "backstage-report-details-alternate-creative-plans-for-wwe-wrestlemania-42",
+      "wp_post_id": 4922
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WrestleMania 42: i dettagli sui piani creativi alternativi della WWE",
+    "updated_at": "1779742510.323127",
+    "url": "https://www.wrestlinginc.com/2176571/wwe-wrestlemania-42-cm-punk-bron-breakker-roman-reigns-cody-rhodes-alternate-creative-plans-backstage-report/"
+  },
+  "https://www.wrestlinginc.com/2176685/jelly-roll-more-comedic-wwe-wrestlemania-storyline": {
+    "extra": {
+      "event_key": "event:title:cody-rhodes:championship",
+      "metadata_file": "published/20260519_173849_003_wrestlemania-jelly-roll-voleva-un-ruolo-comico-nella-storyline_4928_metadata.json",
+      "semantic_id": "jelly-roll-reportedly-pushed-to-be-part-of-more-comedic-wwe-wrestlemania-storyline",
+      "wp_post_id": 4928
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WrestleMania: Jelly Roll voleva un ruolo comico nella storyline",
+    "updated_at": "1779742510.329172",
+    "url": "https://www.wrestlinginc.com/2176685/jelly-roll-more-comedic-wwe-wrestlemania-storyline/"
+  },
+  "https://www.wrestlinginc.com/2176730/swerve-strickland-criticizes-darby-allin-aew-world-title": {
+    "extra": {
+      "event_key": "event:title:darby-allin:world",
+      "raw_result": "skipped",
+      "semantic_id": "swerve-strickland-criticizes-one-aspect-of-darby-allins-aew-world-title-win"
+    },
+    "reason": "above_low_score_final_cap_not_final",
+    "score": 78,
+    "status": "competitive_deferred",
+    "title": "Swerve Strickland Criticizes One Aspect Of Darby Allin's AEW World Title Win",
+    "updated_at": "1779742534.2642658",
+    "url": "https://www.wrestlinginc.com/2176730/swerve-strickland-criticizes-darby-allin-aew-world-title/"
+  },
+  "https://www.wrestlinginc.com/2176831/aew-athena-roh-womens-world-title-wwe-roman-reigns": {
+    "extra": {
+      "event_key": "event:title:roman-reigns:world:championship",
+      "metadata_file": "published/20260519_173836_002_athena-punta-a-superare-il-record-di-giorni-da-campione-di-roman-reigns_4925_metadata.json",
+      "semantic_id": "aews-athena-talks-current-roh-womens-world-title-run-beating-wwes-roman-reigns",
+      "wp_post_id": 4925
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Athena punta a superare il record di giorni da campione di Roman Reigns",
+    "updated_at": "1779742510.3261874",
+    "url": "https://www.wrestlinginc.com/2176831/aew-athena-roh-womens-world-title-wwe-roman-reigns/"
+  },
+  "https://www.wrestlinginc.com/2176897/aew-swerve-strickland-young-bucks-anarchy-arena-changed-minds": {
+    "extra": {
+      "core": "s-swerve-strickland-says-young-bucks-changed-their-minds-anarchy",
+      "lane": "skip_final",
+      "score": 45
+    },
+    "reason": "v91_score_story",
+    "score": null,
+    "status": "skip_final",
+    "title": "AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena",
+    "updated_at": "1779742574.972735",
+    "url": "https://www.wrestlinginc.com/2176897/aew-swerve-strickland-young-bucks-anarchy-arena-changed-minds/"
   },
   "https://www.wrestlinginc.com/2176982/bully-ray-brock-lesnar-wwe-return-retirement": {
     "extra": {
@@ -513,6 +2739,20 @@
     "updated_at": "1779725648.824042",
     "url": "https://www.wrestlinginc.com/2176982/bully-ray-brock-lesnar-wwe-return-retirement/"
   },
+  "https://www.wrestlinginc.com/2177021/wwe-wrestlemania-41-joe-hendry-randy-orton-kurt-angle-early-career-milestone": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260523_160409_001_joe-hendry-il-match-contro-randy-orton-a-wrestlemania-m-è-il-momento-più-alto-della-mia-ca_5185_metadata.json",
+      "semantic_id": "joe-hendry-compares-wwe-wrestlemania-match-with-randy-orton-to-early-career-milestone",
+      "wp_post_id": 5185
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Joe Hendry: il match contro Randy Orton a WrestleMania M è il momento più alto della mia carriera",
+    "updated_at": "1779742510.5366063",
+    "url": "https://www.wrestlinginc.com/2177021/wwe-wrestlemania-41-joe-hendry-randy-orton-kurt-angle-early-career-milestone/"
+  },
   "https://www.wrestlinginc.com/2177126/john-cena-explains-intention-behind-eponymous-wwe-event": {
     "extra": {
       "event_key": "",
@@ -525,6 +2765,33 @@
     "title": "John Cena Explains Intention Behind Eponymous WWE Event",
     "updated_at": "1779652518.8132284",
     "url": "https://www.wrestlinginc.com/2177126/john-cena-explains-intention-behind-eponymous-wwe-event/"
+  },
+  "https://www.wrestlinginc.com/2177183/jim-ross-kevin-nash-wrestlers-union-knows-talking-about": {
+    "extra": {
+      "core": "jim-ross-kevin-nash-backing-wrestlers-union-he-knows-what",
+      "lane": "skip_final",
+      "score": 45
+    },
+    "reason": "v91_score_story",
+    "score": null,
+    "status": "skip_final",
+    "title": "Jim Ross On Kevin Nash Backing Wrestlers' Union: 'He Knows What He's Talking About'",
+    "updated_at": "1779742574.737814",
+    "url": "https://www.wrestlinginc.com/2177183/jim-ross-kevin-nash-wrestlers-union-knows-talking-about/"
+  },
+  "https://www.wrestlinginc.com/2177184/john-cena-in-ring-retirement-not-mean-retiring-wwe": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260519_211656_001_john-cena-chiarisce-il-ritiro-dal-ring-non-significa-laddio-alla-wwe_4935_metadata.json",
+      "semantic_id": "john-cena-says-in-ring-retirement-does-not-mean-retiring-from-wwe",
+      "wp_post_id": 4935
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "John Cena chiarisce: il ritiro dal ring non significa l'addio alla WWE",
+    "updated_at": "1779742510.3351967",
+    "url": "https://www.wrestlinginc.com/2177184/john-cena-in-ring-retirement-not-mean-retiring-wwe/"
   },
   "https://www.wrestlinginc.com/2177229/wwe-saturday-nights-main-event-may-23-2026-full-final-card-matches": {
     "extra": {
@@ -541,16 +2808,30 @@
   },
   "https://www.wrestlinginc.com/2177252/wwe-joe-hendry-album-original-songs-summer-2026": {
     "extra": {
-      "event_key": "",
-      "raw_result": "skipped",
-      "semantic_id": "joe-hendry-says-wwe-will-soon-release-an-album-of-his-original-songs"
+      "core": "joe-hendry-says-will-soon-release-an-album-his-songs",
+      "lane": "skip_final",
+      "score": 45
     },
-    "reason": "skipped",
-    "score": 54,
-    "status": "rejected",
+    "reason": "v91_score_story",
+    "score": null,
+    "status": "skip_final",
     "title": "Joe Hendry Says WWE Will Soon Release An Album Of His Original Songs",
-    "updated_at": "1779552063.2508087",
+    "updated_at": "1779742574.646823",
     "url": "https://www.wrestlinginc.com/2177252/wwe-joe-hendry-album-original-songs-summer-2026/"
+  },
+  "https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll": {
+    "extra": {
+      "event_key": "event:business:tko-financials",
+      "metadata_file": "published/20260520_082534_002_mistico-costretto-alle-stampelle-a-puebla-infortunio-per-la-stella-di-aew-e-cmll_4973_metadata.json",
+      "semantic_id": "aew-crossover-star-mistico-reportedly-injured-after-appearing-on-crutches-at-cmll-show",
+      "wp_post_id": 4973
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Mistico costretto alle stampelle a Puebla, infortunio per la stella di AEW e CMLL",
+    "updated_at": "1779742510.3634126",
+    "url": "https://www.wrestlinginc.com/2177255/aew-mistico-injured-crutches-cmll/"
   },
   "https://www.wrestlinginc.com/2177270/wwe-announces-major-change-becky-lynch-sol-ruca-snme": {
     "extra": {
@@ -578,6 +2859,48 @@
     "updated_at": "1779715680.4994905",
     "url": "https://www.wrestlinginc.com/2177312/aew-swerve-strickland-aleister-black-zelina-vega-wwe/"
   },
+  "https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260520_044752_003_spoiler-nxt-lola-vice-difenderà-il-nxt-womens-championship-contro-izzi-dame_4965_metadata.json",
+      "semantic_id": "lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-in-division",
+      "wp_post_id": 4965
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "[SPOILER] NXT: Lola Vice difenderà il NXT Women's Championship contro Izzi Dame",
+    "updated_at": "1779742510.3570263",
+    "url": "https://www.wrestlinginc.com/2177366/lola-vice-awards-wwe-nxt-womens-title-shot-amidst-chaos-division/"
+  },
+  "https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260520_044718_002_nxt-tatum-paxley-difende-il-nxt-womens-north-american-championship-poi-lattacco-di-zaria_4962_metadata.json",
+      "semantic_id": "tatum-paxley-retains-womens-na-title-laid-out-by-zaria",
+      "wp_post_id": 4962
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "NXT: tatum paxley difende il NXT women's north american championship, poi l'attacco di zaria",
+    "updated_at": "1779742510.353834",
+    "url": "https://www.wrestlinginc.com/2177374/tatum-paxley-retains-womens-na-title-laid-out-zaria/"
+  },
+  "https://www.wrestlinginc.com/2177398/aew-dynamite-collision-may-20-two-titles-on-line-anything-goes-match": {
+    "extra": {
+      "event_key": "report:aew-dynamite-2026-05-20",
+      "metadata_file": "published/20260521_065448_002_aew-dynamite-del-20-maggio-2026-risultati-e-momenti-salienti_5039_metadata.json",
+      "semantic_id": "report-aew-dynamite-2026-05-20",
+      "wp_post_id": 5039
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "AEW Dynamite del 20 maggio 2026: risultati e momenti salienti",
+    "updated_at": "1779742510.418668",
+    "url": "https://www.wrestlinginc.com/2177398/aew-dynamite-collision-may-20-two-titles-on-line-anything-goes-match/"
+  },
   "https://www.wrestlinginc.com/2177532/wwe-jbl-john-bradshaw-layfield-talent-infinitely-better-increases-live-event-schedule": {
     "extra": {
       "event_key": "event:business:tko-financials",
@@ -590,6 +2913,104 @@
     "title": "JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule",
     "updated_at": "1779557654.9887495",
     "url": "https://www.wrestlinginc.com/2177532/wwe-jbl-john-bradshaw-layfield-talent-infinitely-better-increases-live-event-schedule/"
+  },
+  "https://www.wrestlinginc.com/2177831/wwe-snme-saturday-nights-main-event-becky-lynch-sol-ruca-advertising-title-match": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260520_174056_002_wwe-il-match-tra-becky-lynch-e-sol-ruca-a-saturday-nights-main-event-non-sarà-per-il-titol_4990_metadata.json",
+      "semantic_id": "wwe-no-longer-advertising-snme-bout-as-title-match",
+      "wp_post_id": 4990
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: il match tra Becky Lynch e Sol Ruca a Saturday Night's Main Event non sarà per il titolo",
+    "updated_at": "1779742510.3765368",
+    "url": "https://www.wrestlinginc.com/2177831/wwe-snme-saturday-nights-main-event-becky-lynch-sol-ruca-advertising-title-match/"
+  },
+  "https://www.wrestlinginc.com/2178006/wwe-triple-h-paul-levesque-nick-khan-danhausen-praised-company-town-hall": {
+    "extra": {
+      "event_key": "event:business:nick-khan-followup-recent-addition-praised-by-triple-h-nick-khan-during-company-town-hall",
+      "metadata_file": "published/20260520_201123_001_wwe-triple-h-e-nick-khan-elogiano-limpatto-di-danhausen-in-azienda_4999_metadata.json",
+      "semantic_id": "report-recent-wwe-addition-praised-by-triple-h-nick-khan-during-company-town-hall",
+      "wp_post_id": 4999
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE: Triple H e Nick Khan elogiano l'impatto di Danhausen in azienda",
+    "updated_at": "1779742510.3878343",
+    "url": "https://www.wrestlinginc.com/2178006/wwe-triple-h-paul-levesque-nick-khan-danhausen-praised-company-town-hall/"
+  },
+  "https://www.wrestlinginc.com/2178277/aew-dynamite-willow-nightingale-injured-withdraws-owen-hart-tournament-vacates-tbs": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260521_025710_005_infortunata-willow-nightingale-lascia-il-titolo-aew-tbs-e-si-ritira-dal-torneo-owen-hart_5020_metadata.json",
+      "semantic_id": "injured-willow-nightingale-withdraws-from-owen-hart-tournament-vacates-aew-tbs-title",
+      "wp_post_id": 5020
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Infortunata, Willow Nightingale lascia il titolo AEW TBS e si ritira dal torneo Owen Hart",
+    "updated_at": "1779742510.411677",
+    "url": "https://www.wrestlinginc.com/2178277/aew-dynamite-willow-nightingale-injured-withdraws-owen-hart-tournament-vacates-tbs/"
+  },
+  "https://www.wrestlinginc.com/2178287/aew-dynamite-darby-allin-speedball-mike-bailey-world-title": {
+    "extra": {
+      "event_key": "event:title:darby-allin:world:retain:dynamite:double-or-nothing",
+      "metadata_file": "published/20260521_065531_003_aew-dynamite-darby-allin-batte-mike-bailey-e-conserva-laew-world-championship_5042_metadata.json",
+      "semantic_id": "darby-allin-taps-out-speedball-mike-bailey-to-retain-aew-world-title-on-dynamite",
+      "wp_post_id": 5042
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "AEW Dynamite: Darby Allin batte Mike Bailey e conserva l'AEW World Championship",
+    "updated_at": "1779742510.4221609",
+    "url": "https://www.wrestlinginc.com/2178287/aew-dynamite-darby-allin-speedball-mike-bailey-world-title/"
+  },
+  "https://www.wrestlinginc.com/2178332/baron-corbin-returning-wwe": {
+    "extra": {
+      "event_key": "event:rumor:backstage-update-baron-corbin-potentially-returning",
+      "metadata_file": "published/20260521_133508_003_aggiornamenti-sul-possibile-ritorno-di-baron-corbin-in-wwe_5074_metadata.json",
+      "semantic_id": "backstage-update-on-former-baron-corbin-potentially-returning-to-wwe",
+      "wp_post_id": 5074
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Aggiornamenti sul possibile ritorno di Baron Corbin in WWE",
+    "updated_at": "1779742510.45113",
+    "url": "https://www.wrestlinginc.com/2178332/baron-corbin-returning-wwe/"
+  },
+  "https://www.wrestlinginc.com/2178341/wwe-tko-saudi-arabia-mark-shapiro-monitor-situation-return": {
+    "extra": {
+      "event_key": "event:business:tko-financials",
+      "metadata_file": "published/20260521_141402_002_mark-shapiro-tko-monitorerà-la-situazione-in-vista-del-ritorno-della-wwe-in-arabia-saudita_5080_metadata.json",
+      "semantic_id": "mark-shapiro-says-tko-will-monitor-the-situation-ahead-of-wwes-saudi-arabia-return",
+      "wp_post_id": 5080
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Mark Shapiro: TKO monitorerà la situazione in vista del ritorno della WWE in Arabia Saudita",
+    "updated_at": "1779742510.4585028",
+    "url": "https://www.wrestlinginc.com/2178341/wwe-tko-saudi-arabia-mark-shapiro-monitor-situation-return/"
+  },
+  "https://www.wrestlinginc.com/2178404/aew-mjf-new-day-kofi-kingston-xavier-woods-austin-creed-incredible-additions": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260523_211519_001_mjf-kofi-kingston-e-xavier-woods-sarebbero-ottimi-innesti-per-la-aew_5192_metadata.json",
+      "semantic_id": "mjf-says-kofi-kingston-xavier-woods-would-be-incredible-additions-to-aew",
+      "wp_post_id": 5192
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "MJF: \"Kofi Kingston e Xavier Woods sarebbero ottimi innesti per la AEW\"",
+    "updated_at": "1779742510.544759",
+    "url": "https://www.wrestlinginc.com/2178404/aew-mjf-new-day-kofi-kingston-xavier-woods-austin-creed-incredible-additions/"
   },
   "https://www.wrestlinginc.com/2178499/wwe-kit-wilson-elton-prince-pretty-deadly-different": {
     "extra": {
@@ -604,6 +3025,62 @@
     "updated_at": "1779570894.9198184",
     "url": "https://www.wrestlinginc.com/2178499/wwe-kit-wilson-elton-prince-pretty-deadly-different/"
   },
+  "https://www.wrestlinginc.com/2178523/aew-wwe-mjf-maxwell-jacob-friedman-danhausen-isnt-surprised": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260524_131856_002_mjf-non-sorpreso-dal-successo-di-danhausen-in-wwe-tira-le-persone-a-sé_5231_metadata.json",
+      "semantic_id": "aews-mjf-isnt-surprised-by-danhausens-wwe-success-he-pulls-people-in",
+      "wp_post_id": 5231
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "MJF non sorpreso dal successo di Danhausen in WWE: \"Tira le persone a sé\"",
+    "updated_at": "1779742510.5996025",
+    "url": "https://www.wrestlinginc.com/2178523/aew-wwe-mjf-maxwell-jacob-friedman-danhausen-isnt-surprised/"
+  },
+  "https://www.wrestlinginc.com/2178624/luchasaurus-blames-aew-injury-ny-knicks-victory-celebration": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260524_131928_003_luchasaurus-la-festa-per-la-vittoria-dei-knicks-mi-ha-causato-linfortunio-in-aew_5234_metadata.json",
+      "semantic_id": "luchasaurus-blames-aew-injury-on-ny-knicks-victory-celebration",
+      "wp_post_id": 5234
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Luchasaurus: 'La festa per la vittoria dei Knicks mi ha causato l'infortunio in AEW'",
+    "updated_at": "1779742510.6038916",
+    "url": "https://www.wrestlinginc.com/2178624/luchasaurus-blames-aew-injury-ny-knicks-victory-celebration/"
+  },
+  "https://www.wrestlinginc.com/2178927/aew-mjf-blames-vince-mcmahon-making-stipulation-joke": {
+    "extra": {
+      "event_key": "event:business:vince-mcmahon",
+      "metadata_file": "published/20260521_211109_001_aew-mjf-accusa-vince-mcmahon-di-aver-reso-gli-hair-match-una-barzelletta_5095_metadata.json",
+      "semantic_id": "aews-mjf-blames-vince-mcmahon-for-making-stipulation-into-a-joke",
+      "wp_post_id": 5095
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "AEW: MJF accusa Vince McMahon di aver reso gli Hair Match una barzelletta",
+    "updated_at": "1779742510.477383",
+    "url": "https://www.wrestlinginc.com/2178927/aew-mjf-blames-vince-mcmahon-making-stipulation-joke/"
+  },
+  "https://www.wrestlinginc.com/2179107/tna-thursday-night-impact-may-21-two-championships-on-line-more": {
+    "extra": {
+      "event_key": "report:tna-impact-2026-05-21",
+      "metadata_file": "published/20260522_110247_001_tna-impact-del-21-maggio-2026-risultati-e-momenti-salienti_5119_metadata.json",
+      "semantic_id": "report-tna-impact-2026-05-21",
+      "wp_post_id": 5119
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "TNA Impact del 21 maggio 2026: risultati e momenti salienti",
+    "updated_at": "1779742510.4966383",
+    "url": "https://www.wrestlinginc.com/2179107/tna-thursday-night-impact-may-21-two-championships-on-line-more/"
+  },
   "https://www.wrestlinginc.com/2179128/aew-athena-wwe-kairi-sane-alicia-fox": {
     "extra": {
       "event_key": "",
@@ -617,6 +3094,48 @@
     "updated_at": "1779638361.5518188",
     "url": "https://www.wrestlinginc.com/2179128/aew-athena-wwe-kairi-sane-alicia-fox/"
   },
+  "https://www.wrestlinginc.com/2179143/tna-impact-mustafa-ali-starboy-charlie-international-championship-open-challenge-reta": {
+    "extra": {
+      "event_key": "event:tanea-brooks-rebel-return",
+      "metadata_file": "published/20260522_041755_001_spoiler-tna-impact-mustafa-ali-difende-il-titolo-x-division-contro-starboy-charlie_5101_metadata.json",
+      "semantic_id": "mustafa-ali-retains-in-open-challenge-answered-by-starboy-charlie-on-tna-impact",
+      "wp_post_id": 5101
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "[SPOILER] TNA Impact: Mustafa Ali difende il titolo X-Division contro Starboy Charlie",
+    "updated_at": "1779742510.4850316",
+    "url": "https://www.wrestlinginc.com/2179143/tna-impact-mustafa-ali-starboy-charlie-international-championship-open-challenge-reta/"
+  },
+  "https://www.wrestlinginc.com/2179148/tna-impact-mike-santana-steve-maclin-world-title-rematch-hangs-onto": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260522_110308_002_spoiler-tna-impact-mike-santana-batte-steve-maclin-e-mantiene-il-tna-world-championship_5122_metadata.json",
+      "semantic_id": "mike-santana-hangs-onto-tna-world-title-after-rematch-against-steve-maclin-on-impact",
+      "wp_post_id": 5122
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "[SPOILER] TNA Impact: Mike Santana batte Steve Maclin e mantiene il TNA World Championship",
+    "updated_at": "1779742510.500513",
+    "url": "https://www.wrestlinginc.com/2179148/tna-impact-mike-santana-steve-maclin-world-title-rematch-hangs-onto/"
+  },
+  "https://www.wrestlinginc.com/2179226/aew-wwe-mjf-maxwell-jacob-friedman-of-course-sources-leak-negative-stories": {
+    "extra": {
+      "event_key": "event:postshow:mjf-says-course-sources-leak-negative-stories-about-followup-mjf-says-course-sources-leak-negative-stories-about",
+      "metadata_file": "published/20260522_160323_001_mjf-accusa-la-wwe-di-diffondere-notizie-false-sul-futuro-televisivo-della-aew_5127_metadata.json",
+      "semantic_id": "mjf-says-of-course-wwe-sources-leak-negative-stories-about-aew",
+      "wp_post_id": 5127
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "MJF accusa la WWE di diffondere notizie false sul futuro televisivo della AEW",
+    "updated_at": "1779742510.5044205",
+    "url": "https://www.wrestlinginc.com/2179226/aew-wwe-mjf-maxwell-jacob-friedman-of-course-sources-leak-negative-stories/"
+  },
   "https://www.wrestlinginc.com/2179385/tony-khan-comments-aew-profitable": {
     "extra": {
       "event_key": "event:business:tko-financials",
@@ -629,6 +3148,20 @@
     "title": "Tony Khan Won't Comment On Whether Or Not AEW Is Profitable",
     "updated_at": "1779642711.8232098",
     "url": "https://www.wrestlinginc.com/2179385/tony-khan-comments-aew-profitable/"
+  },
+  "https://www.wrestlinginc.com/2179478/wwe-ludwig-kaiser-status-travel-arrest-battery": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260522_160347_002_aggiornamenti-sui-viaggi-di-ludwig-kaiser-dopo-larresto_5130_metadata.json",
+      "semantic_id": "update-on-ludwig-kaisers-wwe-travel-status-following-arrest",
+      "wp_post_id": 5130
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Aggiornamenti sui viaggi di Ludwig Kaiser dopo l'arresto",
+    "updated_at": "1779742510.5085797",
+    "url": "https://www.wrestlinginc.com/2179478/wwe-ludwig-kaiser-status-travel-arrest-battery/"
   },
   "https://www.wrestlinginc.com/2179525/aew-double-or-nothing-2026-full-final-card-matches": {
     "extra": {
@@ -674,10 +3207,11 @@
   "https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more": {
     "extra": {
       "event_key": "report:wwe-snme-2026-05-23",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "wwe-saturday-nights-main-event-results-523-three-championships-on-the-line-more"
     },
-    "reason": "high_score_or_discussion_worthy_not_final",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 76,
     "status": "competitive_deferred",
     "title": "WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More",
@@ -694,7 +3228,7 @@
     "score": 78,
     "status": "competitive_deferred",
     "title": "AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match",
-    "updated_at": "1779737044.4242713",
+    "updated_at": "1779742536.687086",
     "url": "https://www.wrestlinginc.com/2180008/aew-double-or-nothing-2026-five-titles-on-line-stadium-stampede-match/"
   },
   "https://www.wrestlinginc.com/2180061/jack-perry-reflects-piece-scapegoat-bus": {
@@ -724,6 +3258,48 @@
     "updated_at": "1779586316.7811391",
     "url": "https://www.wrestlinginc.com/2180133/sol-ruca-granted-womens-ic-title-match-following-controversial-becky-lynch-dq/"
   },
+  "https://www.wrestlinginc.com/2180137/penta-soundly-defends-ic-title-wwe-snme": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260524_013245_002_penta-difende-lintercontinental-championship-a-saturday-nights-main-event_5204_metadata.json",
+      "semantic_id": "penta-soundly-defends-ic-title-at-wwe-snme",
+      "wp_post_id": 5204
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Penta difende l'Intercontinental Championship a Saturday Night's Main Event",
+    "updated_at": "1779742510.561447",
+    "url": "https://www.wrestlinginc.com/2180137/penta-soundly-defends-ic-title-wwe-snme/"
+  },
+  "https://www.wrestlinginc.com/2180139/paige-brie-bella-hang-on-womens-tag-titles-following-wwe-snme": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260524_055936_001_paige-e-brie-bella-difendono-con-successo-i-wwe-womens-tag-team-championship-a-saturday-ni_5210_metadata.json",
+      "semantic_id": "paige-brie-bella-hang-on-to-womens-tag-titles-following-wwe-snme",
+      "wp_post_id": 5210
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Paige e Brie Bella difendono con successo i WWE women's tag team championship a saturday night's main event",
+    "updated_at": "1779742510.5698407",
+    "url": "https://www.wrestlinginc.com/2180139/paige-brie-bella-hang-on-womens-tag-titles-following-wwe-snme/"
+  },
+  "https://www.wrestlinginc.com/2180144/vision-retain-wwe-world-tag-team-titles-underhanded-fashion-street-profits": {
+    "extra": {
+      "event_key": "event:logan-paul-title",
+      "metadata_file": "published/20260524_060012_002_wwe-world-tag-team-titles-the-vision-difendono-i-titoli-in-modo-irregolare_5213_metadata.json",
+      "semantic_id": "the-vision-retain-wwe-world-tag-team-titles-in-underhanded-fashion",
+      "wp_post_id": 5213
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE World Tag Team Titles: The Vision difendono i titoli in modo irregolare",
+    "updated_at": "1779742510.5740345",
+    "url": "https://www.wrestlinginc.com/2180144/vision-retain-wwe-world-tag-team-titles-underhanded-fashion-street-profits/"
+  },
   "https://www.wrestlinginc.com/2180198/backstage-update-wardlow-aew-don-2026-weekend": {
     "extra": {
       "event_key": "",
@@ -736,6 +3312,20 @@
     "title": "Backstage Update On Wardlow's AEW DoN 2026 Weekend",
     "updated_at": "1779634099.312779",
     "url": "https://www.wrestlinginc.com/2180198/backstage-update-wardlow-aew-don-2026-weekend/"
+  },
+  "https://www.wrestlinginc.com/2180229/rey-mysterio-named-general-manager-aaa": {
+    "extra": {
+      "event_key": "",
+      "metadata_file": "published/20260524_171150_001_rey-mysterio-nominato-general-manager-della-aaa_5237_metadata.json",
+      "semantic_id": "rey-mysterio-named-general-manager-of-aaa",
+      "wp_post_id": 5237
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "Rey Mysterio nominato General Manager della AAA",
+    "updated_at": "1779742510.608232",
+    "url": "https://www.wrestlinginc.com/2180229/rey-mysterio-named-general-manager-aaa/"
   },
   "https://www.wrestlinginc.com/2180240/wwe-hofer-eric-bischoff-mick-foley-aew-dont-get-ring": {
     "extra": {
@@ -765,16 +3355,31 @@
   },
   "https://www.wrestlinginc.com/2180267/wwe-snme-may-23-2026-biggest-winners-losers-opinion-review": {
     "extra": {
-      "event_key": "",
-      "raw_result": "skipped",
-      "semantic_id": "wwe-snme-5232026-biggest-winners-losers"
+      "event_key": "event:wwe-snme-2026-05-23",
+      "metadata_file": "published/20260525_192614_002_wwe-saturday-nights-main-event-del-23-05-2026-i-vincitori-e-gli-sconfitti_5284_metadata.json",
+      "semantic_id": "wwe-snme-5232026-biggest-winners-losers",
+      "wp_post_id": 5284
     },
-    "reason": "above_low_score_final_cap_not_final",
-    "score": 55,
-    "status": "competitive_deferred",
-    "title": "WWE SNME - 5/23/2026: Biggest Winners & Losers",
-    "updated_at": "1779667104.518023",
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "WWE Saturday Night's Main Event del 23/05/2026: i vincitori e gli sconfitti",
+    "updated_at": "1779742510.6616564",
     "url": "https://www.wrestlinginc.com/2180267/wwe-snme-may-23-2026-biggest-winners-losers-opinion-review/"
+  },
+  "https://www.wrestlinginc.com/2180285/aew-double-or-nothing-2026-divine-dominion-megan-bayne-lena-kross-viva-van-zayda-steel-title-eliminator": {
+    "extra": {
+      "event_key": "event:anna-jay-diagnosis",
+      "metadata_file": "published/20260524_234037_001_aew-double-or-nothing-divine-dominion-battono-zayda-steel-e-viva-van-nel-buy-in_5246_metadata.json",
+      "semantic_id": "divine-dominion-hold-off-zayda-steel-viva-van-in-aew-double-or-nothing-eliminator",
+      "wp_post_id": 5246
+    },
+    "reason": "v91_4_published_artifact_reconcile",
+    "score": null,
+    "status": "published",
+    "title": "AEW Double or Nothing: Divine Dominion battono Zayda Steel e Viva Van nel Buy In",
+    "updated_at": "1779742510.6214285",
+    "url": "https://www.wrestlinginc.com/2180285/aew-double-or-nothing-2026-divine-dominion-megan-bayne-lena-kross-viva-van-zayda-steel-title-eliminator/"
   },
   "https://www.wrestlinginc.com/2180368/wwe-hofer-danhausen-everywhere": {
     "extra": {
@@ -826,7 +3431,20 @@
     "score": 82,
     "status": "competitive_deferred",
     "title": "Dave Meltzer Muses On Possible AEW Tag Title Match At Wembley",
-    "updated_at": "1779737095.0038486",
+    "updated_at": "1779742554.1114926",
     "url": "https://www.wrestlinginc.com/2180702/dave-meltzer-muses-possible-aew-tag-title-match-wembley/"
+  },
+  "https://www.wrestlinginc.com/2180735/aew-tony-khan-praises-david-ellison-wbd-paramount": {
+    "extra": {
+      "event_key": "event:business:tony-khan",
+      "raw_result": "skipped",
+      "semantic_id": "aews-tony-khan-praises-david-ellison-ahead-of-wbdparamount-deal"
+    },
+    "reason": "high_score_or_discussion_worthy_not_final",
+    "score": 76,
+    "status": "competitive_deferred",
+    "title": "AEW's Tony Khan Praises David Ellison Ahead Of WBD/Paramount Deal",
+    "updated_at": "1779742537.0444908",
+    "url": "https://www.wrestlinginc.com/2180735/aew-tony-khan-praises-david-ellison-wbd-paramount/"
   }
 }
