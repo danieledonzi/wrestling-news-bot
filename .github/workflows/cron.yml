@@ -1,4 +1,4 @@
-name: OpenWrestlingTV Bot v90.2.6.2
+name: OpenWrestlingTV Bot v90.2.7
 
 on:
   workflow_dispatch:
@@ -56,14 +56,15 @@ jobs:
           set -e
           python scripts/consolidate_source_v90_2_6_1.py
           python scripts/cleanup_boot_version_v90_2_6_2.py
+          python scripts/apply_bot_patch_v90_2_7.py
           python -m py_compile bot.py
           if ! git diff --quiet -- bot.py; then
             git add bot.py
-            git commit -m "chore(bot): persist v90.2.6.2 clean consolidated source"
-            git pull --rebase || echo "[v90.2.6.2] Warning: pull --rebase non riuscito, provo push diretto"
-            git push || echo "[v90.2.6.2] Warning: push consolidamento fallito, continuo la run bot"
+            git commit -m "chore(bot): persist v90.2.7 core assignment source"
+            git pull --rebase || echo "[v90.2.7] Warning: pull --rebase non riuscito, provo push diretto"
+            git push || echo "[v90.2.7] Warning: push consolidamento fallito, continuo la run bot"
           else
-            echo "[v90.2.6.2] bot.py gia pulito nel repository"
+            echo "[v90.2.7] bot.py gia aggiornato nel repository"
           fi
 
       - name: Verify consolidated source
@@ -91,16 +92,17 @@ jobs:
               'v90.2.5.4.1 event registry report key',
               'v90.2.6.1 true source consolidation',
               'v90.2.6.2 clean consolidated boot/version',
+              'v90.2.7 central story core assignment',
           ]
           missing = [m for m in required if m not in text]
           if missing:
-              raise SystemExit('[SOURCE CONSOLIDATION v90.2.6.2] missing markers: ' + ', '.join(missing))
-          if 'v90_2_6_2_clean_consolidated_source' not in text:
-              raise SystemExit('[SOURCE CONSOLIDATION v90.2.6.2] version marker mancante')
-          print('[SOURCE CONSOLIDATION v90.2.6.2] bot.py contiene source consolidato e boot pulito')
+              raise SystemExit('[SOURCE CONSOLIDATION v90.2.7] missing markers: ' + ', '.join(missing))
+          if 'v90_2_7_core_assignment_refactor' not in text:
+              raise SystemExit('[SOURCE CONSOLIDATION v90.2.7] version marker mancante')
+          print('[SOURCE CONSOLIDATION v90.2.7] bot.py contiene core assignment centrale')
           PY
 
-      - name: Run bot v90_2_6_2
+      - name: Run bot v90_2_7
         id: run_bot
         env:
           WP_USER: ${{ secrets.WP_USER }}
@@ -133,6 +135,7 @@ jobs:
           V90_2_5_4_REPORT_FLOOR: "82"
           V90_2_5_4_HARD_NEWS_FLOOR: "85"
           V90_2_5_4_1_ENABLED: "1"
+          V90_2_7_ENABLED: "1"
         run: |
           set +e
           python bot.py
@@ -172,6 +175,6 @@ jobs:
             code=$(cat .bot_exit_code)
           fi
           if [ "$code" != "0" ]; then
-            echo "[BOT v90.2.6.2] Bot terminato con exit code $code"
+            echo "[BOT v90.2.7] Bot terminato con exit code $code"
             exit "$code"
           fi
