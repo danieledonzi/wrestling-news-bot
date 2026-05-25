@@ -25957,12 +25957,6 @@ except Exception as e:
 print("[BOOT v91.1] Score return contract guard attivo")
 
 
-# v90.2.6.2 clean consolidated boot/version
-BOT_VERSION = "v90_2_6_2_clean_consolidated_source"
-BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
-print("[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1", flush=True)
-
-
 # v91.2 publish contract and authoritative lane guard
 V91_2_ENABLED = os.getenv("V91_2_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
 
@@ -26115,6 +26109,12 @@ except Exception as e:
     print(f"[V91.3] Warning: {e}")
 
 print("[BOOT v91.3] v723 parser corrected")
+
+
+# v90.2.6.2 clean consolidated boot/version
+BOT_VERSION = "v90_2_6_2_clean_consolidated_source"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+print("[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1", flush=True)
 
 
 if __name__ == "__main__":
