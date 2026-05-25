@@ -635,10 +635,11 @@
   "https://www.wrestlinginc.com/2180007/wwe-saturday-nights-main-event-may-23-three-championships-on-line-more": {
     "extra": {
       "event_key": "",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "wwe-saturday-nights-main-event-results-523-three-championships-on-the-line-more"
     },
-    "reason": "high_score_or_discussion_worthy_not_final",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 76,
     "status": "competitive_deferred",
     "title": "WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More",
@@ -701,10 +702,11 @@
   "https://www.wrestlinginc.com/2180261/wwe-hofer-confused-brock-lesnar-return": {
     "extra": {
       "event_key": "event:brock-lesnar-return",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "wwe-hofer-confused-by-brock-lesnar-return"
     },
-    "reason": "high_score_or_discussion_worthy_not_final",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 100,
     "status": "competitive_deferred",
     "title": "WWE HOFer Confused By Brock Lesnar Return",
