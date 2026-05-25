@@ -142,5 +142,14 @@
     "core": "return:brock-lesnar:wwe",
     "reason": "update_gate:medium_followup_or_weak_update",
     "ttl_hours": 12
+  },
+  {
+    "created_at": "2026-05-25T19:25:00",
+    "title": "Becky Lynch Blasts Sol Ruca for Assaulting WWE Referee Ahead of RAW",
+    "url": "https://www.ringsidenews.com/becky-lynch-blasts-sol-ruca-assaulting-wwe-referee-ahead-raw/",
+    "score": 67,
+    "core": "event:wwe-snme-2026-05-25:becky-lynch-story",
+    "reason": "update_gate:v91_2_authoritative_lane",
+    "ttl_hours": 8
   }
 ]

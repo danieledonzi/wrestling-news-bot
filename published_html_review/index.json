@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-25 17:44:04",
-  "last_bot_version": "v90_2_6_2_clean_consolidated_source (16efb60)",
-  "updated_at": "2026-05-25T17:46:25",
-  "total_items": 203,
+  "last_run_id": "2026-05-25 19:23:37",
+  "last_bot_version": "v90_2_6_2_clean_consolidated_source (ec630c4)",
+  "updated_at": "2026-05-25T19:27:20",
+  "total_items": 206,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1628,6 +1628,30 @@
       "original_html_file": "20260525_174625_003_matt-hardy-smentisce-le-accuse-di-aver-rivelato-informazioni-sul-brawl-out-della_634c1223_original.html",
       "final_html_file": "20260525_174625_003_matt-hardy-smentisce-le-accuse-di-aver-rivelato-informazioni-sul-brawl-out-della_634c1223_final.html",
       "metadata_file": "20260525_174625_003_matt-hardy-smentisce-le-accuse-di-aver-rivelato-informazioni-sul-brawl-out-della_634c1223_metadata.json"
+    },
+    {
+      "run_id": "2026-05-25 19:23:37",
+      "title": "Tiffany Stratton spiega perché ha abbandonato la sua finisher originale per il rischio infortuni",
+      "url": "https://www.ringsidenews.com/tiffany-stratton-reveals-why-she-ditched-original-wwe-finisher-fearing-serious-injury/",
+      "original_html_file": "20260525_192449_001_tiffany-stratton-spiega-perch-ha-abbandonato-la-sua-finisher-originale-per-il-ri_31d9fc7d_original.html",
+      "final_html_file": "20260525_192449_001_tiffany-stratton-spiega-perch-ha-abbandonato-la-sua-finisher-originale-per-il-ri_31d9fc7d_final.html",
+      "metadata_file": "20260525_192449_001_tiffany-stratton-spiega-perch-ha-abbandonato-la-sua-finisher-originale-per-il-ri_31d9fc7d_metadata.json"
+    },
+    {
+      "run_id": "2026-05-25 19:23:37",
+      "title": "WWE Saturday Night's Main Event del 23/05/2026: i vincitori e gli sconfitti",
+      "url": "https://www.wrestlinginc.com/2180267/wwe-snme-may-23-2026-biggest-winners-losers-opinion-review/",
+      "original_html_file": "20260525_192615_002_wwe-saturday-night-s-main-event-del-23-05-2026-i-vincitori-e-gli-sconfitti_e4c8ac47_original.html",
+      "final_html_file": "20260525_192615_002_wwe-saturday-night-s-main-event-del-23-05-2026-i-vincitori-e-gli-sconfitti_e4c8ac47_final.html",
+      "metadata_file": "20260525_192615_002_wwe-saturday-night-s-main-event-del-23-05-2026-i-vincitori-e-gli-sconfitti_e4c8ac47_metadata.json"
+    },
+    {
+      "run_id": "2026-05-25 19:23:37",
+      "title": "MVP contro Triple H: \"È un codardo e un bugiardo\", i motivi dell'addio alla WWE",
+      "url": "https://www.ringsidenews.com/mvp-calls-triple-h-coward-liar-while-revealing-why-he-left-wwe/",
+      "original_html_file": "20260525_192720_003_mvp-contro-triple-h-un-codardo-e-un-bugiardo-i-motivi-dell-addio-alla-wwe_174581bc_original.html",
+      "final_html_file": "20260525_192720_003_mvp-contro-triple-h-un-codardo-e-un-bugiardo-i-motivi-dell-addio-alla-wwe_174581bc_final.html",
+      "metadata_file": "20260525_192720_003_mvp-contro-triple-h-un-codardo-e-un-bugiardo-i-motivi-dell-addio-alla-wwe_174581bc_metadata.json"
     }
   ]
 }

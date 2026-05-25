@@ -1987,3 +1987,464 @@ ValueError: too many values to unpack (expected 2)
 [RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
 ===== RUN END [2026-05-25 17:44:04] VERSION [v90_2_6_2_clean_consolidated_source (16efb60)] =====
 
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.7] Central story core assignment attivo
+[BOOT v90.2.7.1] Core authority hotfix attiva
+[BOOT v90.2.7.2] Queue type contract + report source guard attivi
+[BOOT v90.2.8] Feed-level processed URL hard skip attivo
+[BOOT v91] Authoritative editorial pipeline refactor attivo
+[BOOT v91.1] Score return contract guard attivo
+[BOOT v91.2] Publish contract + authoritative lane guard attivo
+[BOOT v91.3] v723 parser corrected
+[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1
+
+===== RUN START [2026-05-25 19:23:37] VERSION [v90_2_6_2_clean_consolidated_source (ec630c4)] =====
+[PROCESSED v90.2.5.2] Migrati record non-final competitivi: 13
+[PROCESSED v90.2.5] Loaded processed URL records: 61
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - Dave Meltzer Muses On Possible AEW Tag Title Match At Wembley
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:aew-all-in-2026-05-25:adam-copeland-story - Dave Meltzer Muses On Possible AEW Tag Title Match At Wembley
+[V91 AI] cache hit - AEW Double Or Nothing 2026: Biggest Winners And Losers
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:aew-double-or-nothing-2026-05-25:edition-other-dave-meltzer-muses-story - AEW Double Or Nothing 2026: Biggest Winners And Losers
+[PERF v71] WP lookup event_key: 1.28s
+[SKIP] event_key confermata su WordPress: event:aew-double-or-nothing-2026-05-25 - AEW Double Or Nothing 2026: Biggest Winners And Losers
+[V91 AI] cache hit - AEW Double Or Nothing 2026: 3 Things We Hated & 3 Things We Loved
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:aew-double-or-nothing-2026-05-25:darby-allin-story - AEW Double Or Nothing 2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (72/75): AEW Double Or Nothing 2026: 3 Things We Hated & 3 Things We Loved
+[EVENTREG v90.2.5.4] Event report score floor 80->82 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[V91 AI] cache hit - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[V91.1 SCORE] 84 lane=publish_now class=strategic_discussion core=report:aew-double-or-nothing-2026-05-24 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[V91 AI] cache hit - WWE SNME - 5/23/2026: Biggest Winners & Losers
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:wwe-snme-2026-05-23:5-23-who-came-out-story - WWE SNME - 5/23/2026: Biggest Winners & Losers
+[V91 AI] cache hit - WWE SNME - 5/23/2026: 3 Things We Hated And 3 We Loved
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:wwe-snme-2026-05-23:5-23-3-we-hated-story - WWE SNME - 5/23/2026: 3 Things We Hated And 3 We Loved
+[SKIP] Score sotto soglia editoriale (66/75): WWE SNME - 5/23/2026: 3 Things We Hated And 3 We Loved
+[SNME v90.2.5.3] Pre-AI event score floor 80->82 - This is Wrestling Inc.'s results for "Saturday Night's Main Event", with the Intercontinental, World Tag Team & Women's Tag Team Championships on the line!
+[V91 AI] cache hit - WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=report:wwe-snme-2026-05-23 - WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More
+[V91 AI] cache hit - WWE's Pat McAfee Announces Birth Of His Son
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=s-pat-mcafee-birth-his-son-star-pat-mcafee-reveals - WWE's Pat McAfee Announces Birth Of His Son
+[V91 AI] cache hit - Nigel McGuinness Compares Experiences Doing Commentary For AEW Vs. WWE
+[V91.1 SCORE] 70 lane=strategic_pool class=strategic_discussion core=nigel-mcguinness-compares-experiences-doing-commentary-nigel-mcguinness-has-discussed - Nigel McGuinness Compares Experiences Doing Commentary For AEW Vs. WWE
+[SCORE v88.3] v88.3 hard feature skip cap 60->45 - JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule
+[V91 AI] cache hit - JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=jbl-says-talent-will-get-infinitely-better-as-increases-live - JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule
+[SKIP] Score sotto soglia editoriale (39/75): JBL Says 'Talent Will Get Infinitely Better' As WWE Increases Live Event Schedule
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177021/wwe-wrestlemania-41-joe-hendry-randy-orton-kurt-angle-early-career-milestone/
+[V91 AI] cache hit - Trick Williams Discusses Difficulties Of Moving From Football To WWE
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=trick-williams-discusses-difficulties-moving-football-becoming-a-pro-wrestler - Trick Williams Discusses Difficulties Of Moving From Football To WWE
+[SKIP] Score sotto soglia editoriale (39/75): Trick Williams Discusses Difficulties Of Moving From Football To WWE
+[V91 AI] cache hit - AEW & ROH Star Bandido Names Biggest Wrestling Inspirations, Including WWE HOFer
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=roh-star-bandido-names-wrestling-inspirations-including-hofer-bandido-named - AEW & ROH Star Bandido Names Biggest Wrestling Inspirations, Including WWE HOFer
+[SKIP] Score sotto soglia editoriale (39/75): AEW & ROH Star Bandido Names Biggest Wrestling Inspirations, Including WWE HOFer
+[V91 AI] cache hit - AEW World Champion MJF Says He Grabs Fans 'By The B***s'
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=world-champion-mjf-says-he-grabs-fans-by-b-s - AEW World Champion MJF Says He Grabs Fans 'By The B***s'
+[SKIP] URL già in history: https://www.wrestlinginc.com/2177184/john-cena-in-ring-retirement-not-mean-retiring-wwe/
+[V91 AI] cache hit - John Cena Explains Intention Behind Eponymous WWE Event
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:wwe-backlash-2026-05-25:john-cena-story - John Cena Explains Intention Behind Eponymous WWE Event
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[SCORE v86.9] Cap commentary/opinion 100->68 - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91 AI] cache hit - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=bully-ray-questions-why-brock-lesnar-returned-so-quickly-retirement - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[FOLLOWUP] Event key gia' vista ma angolo autonomo consentito: event:brock-lesnar-return - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91.1 CHEAP] hard skip score=20 reasons=['deterministic_soft_trash'] - WWE's Jordynne Grace Working To Get Pilot's License For Charitable Cause
+[SKIP] Score sotto soglia editoriale (14/75): WWE's Jordynne Grace Working To Get Pilot's License For Charitable Cause
+[V91 AI] cache hit - JBL On WWE Cutting Contracts: 'That's Life'
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:wwe-wrestlemania-2026-05-25:jbl-cutting-contracts-that-s-story - JBL On WWE Cutting Contracts: 'That's Life'
+[PERF v71] WP lookup event_key: 1.21s
+[SKIP] event_key confermata su WordPress: event:wwe-wrestlemania-2026-05-25 - JBL On WWE Cutting Contracts: 'That's Life'
+[V91 AI] cache hit - AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=s-swerve-strickland-says-young-bucks-changed-their-minds-anarchy - AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena
+[SKIP] Score sotto soglia editoriale (39/75): AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[V91 AI] cache hit - Kyle Fletcher Breaks Silence After Betraying Konosuke Takeshita at AEW Double or Nothing
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:aew-double-or-nothing-2026-05-25:kyle-fletcher-breaks-silence-betraying-story - Kyle Fletcher Breaks Silence After Betraying Konosuke Takeshita at AEW Double or Nothing
+[SKIP] event_key confermata su WordPress: event:aew-double-or-nothing-2026-05-25 - Kyle Fletcher Breaks Silence After Betraying Konosuke Takeshita at AEW Double or Nothing
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Mick Foley's AEW Plans Revealed After Double or Nothing Debut
+[FRESHNESS v86.6/legacy] Post-show outcome rescue: non tratto come preview scaduta - Mick Foley's AEW Plans Revealed After Double or Nothing Debut
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 100->54 - Mick Foley's AEW Plans Revealed After Double or Nothing Debut
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Mick Foley's AEW Plans Revealed After Double or Nothing Debut
+[V91 AI] cache hit - Mick Foley's AEW Plans Revealed After Double or Nothing Debut
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:aew-double-or-nothing-2026-05-25:tony-khan-debut - Mick Foley's AEW Plans Revealed After Double or Nothing Debut
+[SKIP] event_key confermata su WordPress: event:aew-double-or-nothing-2026-05-25 - Mick Foley's AEW Plans Revealed After Double or Nothing Debut
+[V91 AI] cache hit - MVP Unloads on Five-Star Match System Over Kurt Angle Snub: "Ridiculous"
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:wwe-wrestlemania-2026-05-25:mvp-unloads-five-star-system-story - MVP Unloads on Five-Star Match System Over Kurt Angle Snub: "Ridiculous"
+[SKIP] event_key confermata su WordPress: event:wwe-wrestlemania-2026-05-25 - MVP Unloads on Five-Star Match System Over Kurt Angle Snub: "Ridiculous"
+[SKIP v71] Story signature gia' in history: event:aew-double-or-nothing-2026-05-25:darby-allin-world - Mike Bailey Drops Multiple F-Bombs After Kevin Knight's Heel Turn at AEW Double or Nothing
+[V91 AI] cache hit - Tiffany Stratton Reveals WWE Tryout Was Halted After She Dropped Out of College to Chase Wrestling Career
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=tiffany-stratton-reveals-tryout-was-halted-she-dropped-out-college - Tiffany Stratton Reveals WWE Tryout Was Halted After She Dropped Out of College to Chase Wrestling Career
+[SCORE v86.9] Cap commentary/opinion 84->68 - Tiffany Stratton Reveals Why She Ditched Original WWE Finisher After Fearing Serious Injury
+[V91 AI] cache hit - Tiffany Stratton Reveals Why She Ditched Original WWE Finisher After Fearing Serious Injury
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=tiffany-stratton-reveals-why-she-ditched-finisher-fearing-serious-injury - Tiffany Stratton Reveals Why She Ditched Original WWE Finisher After Fearing Serious Injury
+[SKIP] URL già in history: https://www.ringsidenews.com/wwes-current-stance-ludwig-kaiser-recent-arrest-revealed/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91 AI] cache hit - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=mvp-reveals-he-thought-was-ribbing-him-bodysuit-pay-per - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91 AI] cache hit - MVP Calls Triple H a "Coward and a Liar" While Revealing Why He Left WWE
+[V91.1 SCORE] 70 lane=strategic_pool class=strategic_discussion core=mvp-calls-triple-h-a-coward-a-liar-while-revealing - MVP Calls Triple H a "Coward and a Liar" While Revealing Why He Left WWE
+[SKIP] URL già in history: https://www.ringsidenews.com/bronson-reed-shows-off-massive-physique-during-wwe-absence/
+[SKIP] URL già in history: https://www.ringsidenews.com/vince-russo-says-triple-h-should-have-fired-instead-getting-raise/
+[V91 AI] cache hit - Title Match Added to May 25 WWE RAW
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:wwe-clash-2026-05-25:penta-story - Title Match Added to May 25 WWE RAW
+[SKIP] Score sotto soglia editoriale (67/75): Title Match Added to May 25 WWE RAW
+[V91 AI] cache hit - QT Marshall's Condition After Scary Fall at AEW Double or Nothing
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:aew-double-or-nothing-2026-05-25:tony-khan-story - QT Marshall's Condition After Scary Fall at AEW Double or Nothing
+[SKIP] event_key confermata su WordPress: event:aew-double-or-nothing-2026-05-25 - QT Marshall's Condition After Scary Fall at AEW Double or Nothing
+[SKIP] URL già in history: https://www.ringsidenews.com/beth-copeland-reacts-surprise-return-aew-double-nothing/
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Becky Lynch Blasts Sol Ruca for Assaulting WWE Referee Ahead of RAW
+[V91 AI] cache hit - Becky Lynch Blasts Sol Ruca for Assaulting WWE Referee Ahead of RAW
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:wwe-snme-2026-05-25:becky-lynch-story - Becky Lynch Blasts Sol Ruca for Assaulting WWE Referee Ahead of RAW
+[SCORE] 78 medium - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match | event_report, major_title_outcome, v71 low freshness/novelty, v71 freshness=0.343
+[SCORE] 77 medium - Tiffany Stratton Reveals Why She Ditched Original WWE Finisher After Fearing Serious Injury | hard_news, v71 source reliability soft penalty, v71 freshness=0.676
+[SCORE] 76 medium - WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More | event_report, v71 low freshness/novelty, v71 freshness=0.31
+[SCORE] 76 medium - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement' | concrete_outcome, v71 freshness=0.427
+[SCORE] 72 medium - Dave Meltzer Muses On Possible AEW Tag Title Match At Wembley | event_related, v71 freshness=0.608, v48 tier2: 55-74
+[SCORE] 71 medium - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut | concrete_outcome, v71 source reliability soft penalty, v71 freshness=0.671, v48 tier2: 55-74
+[SCORE] 67 medium - Becky Lynch Blasts Sol Ruca for Assaulting WWE Referee Ahead of RAW | event_related, v71 source reliability soft penalty, v71 freshness=0.528, v48 tier2: 55-74
+[SCORE] 66 medium - WWE SNME - 5/23/2026: Biggest Winners & Losers | event_related, v71 low freshness/novelty, v71 freshness=0.321, v48 tier2: 55-74
+[SCORE] 66 medium - John Cena Explains Intention Behind Eponymous WWE Event | event_related, v71 low freshness/novelty, v71 freshness=0.31, v48 tier2: 55-74
+[SCORE] 65 medium - MVP Calls Triple H a "Coward and a Liar" While Revealing Why He Left WWE | discussion_value, v71 source reliability soft penalty, v71 freshness=0.552, v48 tier2: 55-74
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[MODEL v88] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[BOT] News candidate totali: 14 | mode=normal | max nuove=3 | pending pubblicati=0
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=RESULTS_REPORT value=strategic_discussion - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[V91 DECISION] allow legacy publish path score=84 lane=publish_now core=report:aew-double-or-nothing-2026-05-24 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[CORE v90.2.7.1] authority core=report:aew-double-or-nothing-2026-05-24 type=event_report title=AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[CORE v90.2.7] event_report core=report:aew-double-or-nothing-2026-05-24 title=AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[PERF v71] WP strict report lookup: 2.55s
+[REPORT v79.1.6] Titolo report da event_key: AEW Double or Nothing: risultati e momenti salienti
+[REPORT] Valuto fonti per report: report:aew-double-or-nothing-2026-05-24
+[REPORT v86.9] Nessuna fonte aggregata valida: sources=0; provo candidato corrente
+[REPORT] Nessuna fonte valida per report: report:aew-double-or-nothing-2026-05-24
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - Tiffany Stratton Reveals Why She Ditched Original WWE Finisher After Fearing Serious Injury
+[V91 DECISION] allow legacy publish path score=82 lane=publish_now core=tiffany-stratton-reveals-why-she-ditched-finisher-fearing-serious-injury - Tiffany Stratton Reveals Why She Ditched Original WWE Finisher After Fearing Serious Injury
+[BOT] Elaborazione: Tiffany Stratton Reveals Why She Ditched Original WWE Finisher After Fearing Serious Injury
+[BOT] semantic_id=tiffany-stratton-reveals-why-she-ditched-original-wwe-finisher-after-fearing-serious-injury
+[SCORE] iniziale=77 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/tiffany-stratton-reveals-why-she-ditched-original-wwe-finisher-fearing-serious-injury/
+[PERF v71] scraping articolo: 1.70s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=17, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/tiffany-stratton-reveals-why-she-ditched-original-wwe-finisher-fearing-serious-injury/
+[BLOCKSEQ] Blocchi ordinati estratti: text=17, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.65s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta dichiarazioni di Tiffany Stratton durante un'intervista; è una news basata su eventi passati e retroscena personali, non una preview né un report di show.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Prettiest Moonsault Ever' (nome della mossa) in inglese se citato, non tradurre i nomi delle mosse (Vader Bomb, Tiffy Twist).; Tradurre 'Tiffy Twist' come nome proprio.; Gestire 'pizazz' con un termine come 'tocco di classe' o 'stile'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta dichiarazioni di Tiffany Stratton durante un'intervista; è una news basata su eventi passati e retroscena personali, non una preview né un report di show.
+[PERF v71] analisi editoriale AI v72: 1.65s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Tiffany Stratton Reveals Why She Ditched Original WWE Finisher After Fearing Serious Injury
+[SCORE v86.9] Cap commentary/opinion 97->68 - Tiffany Stratton Reveals Why She Ditched Original WWE Finisher After Fearing Serious Injury
+[V91 AI] cache hit - Tiffany Stratton Reveals Why She Ditched Original WWE Finisher After Fearing Serious Injury
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=event:aew-double-or-nothing-2026-05-25:tiffany-stratton-injury - Tiffany Stratton Reveals Why She Ditched Original WWE Finisher After Fearing Serious Injury
+[SCORE v86.9] Cap AI commentary/opinion 82->68 - Tiffany Stratton Reveals Why She Ditched Original WWE Finisher After Fearing Serious Injury
+[V91 AI] cache hit - 77
+[V91 AI] cache hit - 82
+[V91 AI] cache hit - Tiffany Stratton Reveals Why She Ditched Original WWE Finisher After Fearing Serious Injury
+[V91.3] refined score 68->82 - Tiffany Stratton Reveals Why She Ditched Original WWE Finisher After Fearing Serious Injury
+[SCORE] raffinato=82 priority=high | event_related, hard_news
+[PERF v71] scoring raffinato: 0.58s
+[V71] story_signature=event:aew-double-or-nothing-2026-05-25:tiffany-stratton-injury semantic_status=new_story freshness=0.676
+[PERF v71] dedupe/freshness v71: 0.58s
+[PERF v71] WP recent posts dedupe: 1.19s
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:aew-double-or-nothing-2026-05-25 - Tiffany Stratton Reveals Why She Ditched Original WWE Finisher After Fearing Serious Injury
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.52s
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=17
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[PRESERVE v83] Repair anti-omissione scartato: editorial_word_ratio=0.59 (370/627) threshold=0.70
+[PERF v71] traduzione: 22.87s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Tiffany Stratton spiega perché ha abbandonato la sua finisher originale per il rischio infortuni
+[EMBED v87.3] Canonicalizzati/deduplicati embed nel body: 1
+[EMBED v87.3] Positional embed guard applicato: 1 modifiche
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/tiffany-stratton-reveals-why-she-ditched-original-wwe-finisher-after-fearing-serious-injury-18.jpg
+[MEDIA] Immagine caricata: 5273
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260525_192448_001_tiffany-stratton-spiega-perché-ha-abbandonato-la-sua-finisher-originale-per-il-rischio-inf_5274_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5274
+[PROCESSED v90.2.5] Publish result non conclusivo: non marco URL published
+[PERF v71] creazione post WordPress: 13.39s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/tiffany-stratton-reveals-why-she-ditched-original-wwe-finisher-after-fearing-serious-injury-18.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5273
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Tiffany Stratton Reveals Why She Ditched Original WWE Finish': 43.26s
+[OK] Pubblicato: Tiffany Stratton spiega perché ha abbandonato la sua finisher originale per il rischio infortuni
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260525_192449_001_tiffany-stratton-spiega-perch-ha-abbandonato-la-sua-finisher-originale-per-il-ri_31d9fc7d_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Tiffany Stratton spiega perché ha abbandonato la sua finisher originale per il rischio infortuni
+[PUBLISHED REVIEW v87.1] Review outer salvata: Tiffany Stratton spiega perché ha abbandonato la sua finisher originale per il rischio infortuni
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=RESULTS_REPORT value=strategic_discussion - WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More
+[V91 DECISION] allow legacy publish path score=82 lane=publish_now core=report:wwe-snme-2026-05-23 - WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More
+[CORE v90.2.7.1] authority core=report:wwe-snme-2026-05-23 type=event_report title=WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More
+[CORE v90.2.7] event_report core=report:wwe-snme-2026-05-23 title=WWE Saturday Night's Main Event Results 5/23 - Three Championships On The Line & More
+[PERF v71] WP strict report lookup: 1.23s
+[REPORT] Valuto fonti per report: report:wwe-snme-2026-05-23
+[REPORT v86.9] Nessuna fonte aggregata valida: sources=0; provo candidato corrente
+[REPORT] Nessuna fonte valida per report: report:wwe-snme-2026-05-23
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OPINION value=strategic_discussion - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91 DECISION] allow legacy publish path score=76 lane=publish_candidate core=bully-ray-questions-why-brock-lesnar-returned-so-quickly-retirement - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - Dave Meltzer Muses On Possible AEW Tag Title Match At Wembley
+[V91 DECISION] allow legacy publish path score=72 lane=strategic_pool core=event:aew-all-in-2026-05-25:adam-copeland-story - Dave Meltzer Muses On Possible AEW Tag Title Match At Wembley
+[CORE v90.2.7.1] authority core=event:aew-all-in-2026-05-25:adam-copeland-story type=event_news title=Dave Meltzer Muses On Possible AEW Tag Title Match At Wembley
+[CORE v90.2.7] event_news core=event:aew-all-in-2026-05-25:adam-copeland-story title=Dave Meltzer Muses On Possible AEW Tag Title Match At Wembley
+[BOT] Elaborazione: Dave Meltzer Muses On Possible AEW Tag Title Match At Wembley
+[BOT] semantic_id=dave-meltzer-muses-on-possible-aew-tag-title-match-at-wembley
+[SCORE] iniziale=72 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=5, image=1, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=5, image=1, embed=0
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta speculazioni e rumor di Dave Meltzer sui piani futuri per All In, non essendo un annuncio ufficiale o una preview con card confermata.
+[EDITORIAL v72.3] translation_notes=Mantenere 'AEW World Tag Team Titles' e 'I Quit match' in inglese.; 'Muses' va reso come 'riflette' o 'ipotizza'.; Tradurre fedelmente la citazione di Meltzer senza parafrasare le ipotesi sul match a tre.
+[EDITORIAL v73] final type=RUMOR | category=AEW (5) | L'articolo riporta speculazioni e rumor di Dave Meltzer sui piani futuri per All In, non essendo un annuncio ufficiale o una preview con card confermata.
+[PERF v71] analisi editoriale AI v72: 1.55s
+[SCORE v86.9] Cap commentary/opinion 85->68 - Dave Meltzer Muses On Possible AEW Tag Title Match At Wembley
+[SCORE v88.2] v88.2 cap feature storico numerico 68->45 - Dave Meltzer Muses On Possible AEW Tag Title Match At Wembley
+[V91 AI] cache hit - Dave Meltzer Muses On Possible AEW Tag Title Match At Wembley
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=report:aew-double-or-nothing-2026-05-25 - Dave Meltzer Muses On Possible AEW Tag Title Match At Wembley
+[SCORE v88.2] v88.2 cap feature storico numerico 68->45 - Dave Meltzer Muses On Possible AEW Tag Title Match At Wembley
+[EVENTREG v90.2.5.4] Event report AI floor 45->82 - Last night at Double Or Nothing, Adam Copeland and Christian Cage defeated FTR for the AEW World Tag Team Titles in an I Quit match, and with the company's biggest show of the year, All In, being just three months away at Wembley Stadium, Dave Meltzer has an idea of who they might defend the championships against at the event. Speaking on the "Wrestling Observer Radio," Meltzer claimed that he could see Copeland and Cage defending their new titles in a three-way match at All In. "It was a great match and it opens up a lot of possibilities. I mean, obviously them and the Young Bucks are going to have something and obviously FTR and them maybe they'll do a three-way at Wembley. I think people talk about a three-way at Wembley since the start the year." Since Copeland and Cage reunited, there continues to be rumors that they will replicate their iconic WrestleMania 17 TLC match with the Young Bucks and FTR, though the "Rated R Superstar" recently stated that he's hesitant about the idea because of his health. Meltzer also claimed that AEW made the right call by giving the tag titles to Copeland and Cage on Sunday night, as he felt they deserved to win the gold together at least once during their return as a team. In addition, the legendary duo avoided retirement yesterday, as another loss to Cash Wheeler and Dax Harwood would've resulted in both men being forced to hang up their boots. If you use any of the quotes in this article, please credit "Wrestling Observer Radio" with a h/t to Wrestling Inc. for the transcription.
+[V91 AI] cache hit - 72
+[V91 AI] cache hit - 82
+[V91 AI] cache hit - Dave Meltzer Muses On Possible AEW Tag Title Match At Wembley
+[SCORE] raffinato=82 priority=high | event_report, concrete_outcome, v72.3 cap rumor: niente boost raffinamento, v72.3 cap rumor, v88.2 cap feature storico numerico 68->45
+[PERF v71] scoring raffinato: 0.46s
+[V71] story_signature=report:aew-double-or-nothing-2026-05-25 semantic_status=new_story freshness=0.725
+[PERF v71] dedupe/freshness v71: 0.34s
+[SKIP] News core già pubblicata da altra fonte: Dave Meltzer Muses On Possible AEW Tag Title Match At Wembley
+[SKIP] news_core_key=report:aew-double-or-nothing-2026-05-25
+[PENDING] Coda salvata: 0 elementi
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91 DECISION] allow legacy publish path score=76 lane=publish_candidate core=mvp-reveals-he-thought-was-ribbing-him-bodysuit-pay-per - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[BOT] Elaborazione: MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[BOT] semantic_id=mvp-reveals-he-thought-wwe-was-ribbing-him-with-original-bodysuit-before-pay-per-view-debut
+[SCORE] iniziale=71 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/mvp-reveals-he-thought-wwe-ribbing-him-original-bodysuit-before-pay-per-view-debut/
+[PERF v71] scraping articolo: 1.01s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=18, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/mvp-reveals-he-thought-wwe-ribbing-him-original-bodysuit-before-pay-per-view-debut/
+[BLOCKSEQ] Blocchi ordinati estratti: text=18, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.73s
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | Si tratta di un aneddoto retrospettivo su un evento passato (debutto di MVP), quindi rientra tra le news di background sui wrestler e non in una preview o report.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'bodysuit' letteralmente come 'tuta', usare 'costume' o 'outfit'.; 'Ribbing/rib' significa fare uno scherzo (prank), non tradurre come 'costola'.; Mantenere i riferimenti ai nomi dei gear come 'Tron-like' o 'Dri-FIT' come citazioni.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Si tratta di un aneddoto retrospettivo su un evento passato (debutto di MVP), quindi rientra tra le news di background sui wrestler e non in una preview o report.
+[PERF v71] analisi editoriale AI v72: 1.45s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91 AI] cache hit - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:wwe-wrestlemania-2026-05-25:mvp-reveals-he-thought-was-debut - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[V91 AI] cache hit - 71
+[V91 AI] cache hit - 76
+[V91 AI] cache hit - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[SCORE] raffinato=76 priority=medium | event_related, concrete_outcome
+[PERF v71] scoring raffinato: 0.60s
+[V71] story_signature=event:wwe-wrestlemania-2026-05-25:mvp-reveals-he-thought-was-debut semantic_status=new_story freshness=0.671
+[PERF v71] dedupe/freshness v71: 0.60s
+[SKIP] Event key già pubblicata nella run e confermata su WordPress: event:wwe-wrestlemania-2026-05-25 - MVP Reveals He Thought WWE Was Ribbing Him With Original Bodysuit Before Pay-Per-View Debut
+[PENDING] Coda salvata: 0 elementi
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - Becky Lynch Blasts Sol Ruca for Assaulting WWE Referee Ahead of RAW
+[V91 DECISION] allow legacy publish path score=72 lane=strategic_pool core=event:wwe-snme-2026-05-25:becky-lynch-story - Becky Lynch Blasts Sol Ruca for Assaulting WWE Referee Ahead of RAW
+[CORE v90.2.7.1] authority core=event:wwe-snme-2026-05-25:becky-lynch-story type=event_news title=Becky Lynch Blasts Sol Ruca for Assaulting WWE Referee Ahead of RAW
+[CORE v90.2.7] event_news core=event:wwe-snme-2026-05-25:becky-lynch-story title=Becky Lynch Blasts Sol Ruca for Assaulting WWE Referee Ahead of RAW
+[CORE v90.2.7] event_news core=event:wwe-snme-2026-05-25:becky-lynch-story title=Becky Lynch Blasts Sol Ruca for Assaulting WWE Referee Ahead of RAW
+[SOFTPOOL v90.2] Aggiunta: score=67 core=event:wwe-snme-2026-05-25:becky-lynch-story reason=update_gate:v91_2_authoritative_lane title=Becky Lynch Blasts Sol Ruca for Assaulting WWE Referee Ahead of RAW
+[SKIP v90.2] Follow-up in soft_pool core=event:wwe-snme-2026-05-25:becky-lynch-story score=67 reason=v91_2_authoritative_lane novel=['v91_2'] - Becky Lynch Blasts Sol Ruca for Assaulting WWE Referee Ahead of RAW
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - WWE SNME - 5/23/2026: Biggest Winners & Losers
+[V91 DECISION] allow legacy publish path score=72 lane=strategic_pool core=event:wwe-snme-2026-05-23:5-23-https-www-wrestlinginc-story - WWE SNME - 5/23/2026: Biggest Winners & Losers
+[CORE v90.2.7.1] authority core=event:wwe-snme-2026-05-23:5-23-https-www-wrestlinginc-story type=event_news title=WWE SNME - 5/23/2026: Biggest Winners & Losers
+[CORE v90.2.7] event_news core=event:wwe-snme-2026-05-23:5-23-https-www-wrestlinginc-story title=WWE SNME - 5/23/2026: Biggest Winners & Losers
+[PERF v71] WP lookup URL esistente: 0.61s
+[BOT] Elaborazione: WWE SNME - 5/23/2026: Biggest Winners & Losers
+[BOT] semantic_id=wwe-snme-5232026-biggest-winners-losers
+[SCORE] iniziale=66 priority=medium
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=17, image=5, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=17, image=5, embed=0
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=OPINION conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo non è un report ma un editoriale di analisi post-show (Winners & Losers) basato su un evento già avvenuto.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Saturday Night's Main Event' (nome proprio).; Mantenere i nomi dei titoli (tag champs) in inglese.; Evitare calchi come 'dogass show' o 'catch as many strays' rendendo il senso critico senza utilizzare gergo americano intraducibile.
+[EDITORIAL v73] final type=OPINION | category=WWE (4) | L'articolo non è un report ma un editoriale di analisi post-show (Winners & Losers) basato su un evento già avvenuto.
+[PERF v71] analisi editoriale AI v72: 9.42s
+[V91 AI] cache hit - WWE SNME - 5/23/2026: Biggest Winners & Losers
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=report:wwe-snme-2026-05-23 - WWE SNME - 5/23/2026: Biggest Winners & Losers
+[V91 AI] cache hit - 66
+[V91 AI] cache hit - 82
+[V91 AI] cache hit - WWE SNME - 5/23/2026: Biggest Winners & Losers
+[V91.3] refined score 54->82 - WWE SNME - 5/23/2026: Biggest Winners & Losers
+[SCORE] raffinato=82 priority=high | event_report
+[PERF v71] scoring raffinato: 0.44s
+[V71] story_signature=report:wwe-snme-2026-05-23 semantic_status=new_story freshness=0.321
+[PERF v71] dedupe/freshness v71: 0.53s
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=17
+[MEDIA v72.1] Prima immagine inline saltata come probabile featured image: https://www.wrestlinginc.com/img/gallery/wwe-snme-5232026-biggest-winners-losers/intro-1779653569.jpg
+[MEDIA] Immagine interna caricata: 5276
+[PERF v71] upload immagine interna: 1.14s
+[MEDIA] Immagine interna caricata: 5277
+[PERF v71] upload immagine interna: 0.86s
+[MEDIA] Immagine interna caricata: 5278
+[PERF v71] upload immagine interna: 0.79s
+[MEDIA] Immagine interna caricata: 5279
+[PERF v71] upload immagine interna: 0.70s
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: Unterminated string starting at: line 1 column 71 (char 70)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-2.5-flash-lite
+[MODEL v88] task=repair chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[VOICE v82] Repair scartata per ratio parole P002: 43->52
+[VOICE v82] Repair scartata per ratio parole P005: 76->93
+[VOICE v82] Repair scartata per ratio parole P006: 42->57
+[VOICE v82] Repair scartata per ratio parole P010: 53->66
+[VOICE v82] Repair scartata per ratio parole P016: 23->28
+[VOICE v82] Micro-repair applicate: 5
+[VOICE v82] AI-smell repair completata con gemini-3-flash-preview
+[VOICE v82] Layer newsroom realism applicato
+[PERF v71] traduzione: 54.94s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WWE Saturday Night's Main Event del 23/05/2026: i vincitori e gli sconfitti
+[MEDIA] Immagine interna caricata: 5280
+[PERF v71] upload immagine interna: 1.12s
+[MEDIA] Immagine interna caricata: 5281
+[PERF v71] upload immagine interna: 0.85s
+[MEDIA] Immagine interna caricata: 5282
+[PERF v71] upload immagine interna: 0.78s
+[MEDIA v86.7] Reintegrate 3 immagini inline perse prima del publish: WWE Saturday Night's Main Event del 23/05/2026: i vincitori e gli sconfitti
+[MEDIA v86.7] Preservate 14 immagini inline strutturate durante strip featured
+[BOT v85] Upload featured image prima del publish: https://www.wrestlinginc.com/img/gallery/wwe-snme-5232026-biggest-winners-losers/l-intro-1779653569.jpg
+[MEDIA] Immagine caricata: 5283
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260525_192614_002_wwe-saturday-nights-main-event-del-23-05-2026-i-vincitori-e-gli-sconfitti_5284_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5284
+[PROCESSED v90.2.5] Publish result non conclusivo: non marco URL published
+[PERF v71] creazione post WordPress: 6.66s
+[BOT] Immagine trovata: https://www.wrestlinginc.com/img/gallery/wwe-snme-5232026-biggest-winners-losers/l-intro-1779653569.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5283
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'WWE SNME - 5/23/2026: Biggest Winners & Losers': 72.95s
+[OK] Pubblicato: WWE Saturday Night's Main Event del 23/05/2026: i vincitori e gli sconfitti
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260525_192615_002_wwe-saturday-night-s-main-event-del-23-05-2026-i-vincitori-e-gli-sconfitti_e4c8ac47_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WWE Saturday Night's Main Event del 23/05/2026: i vincitori e gli sconfitti
+[PUBLISHED REVIEW v87.1] Review outer salvata: WWE Saturday Night's Main Event del 23/05/2026: i vincitori e gli sconfitti
+[REPORT v87.6] Non scrivo history forte: non true-results/canonico (report:snme-5-23-2026-05-23)
+[CORE v90.2] Registrato publish core=event:wwe-snme-2026-05-23:5-23-https-www-wrestlinginc-story count=1 facts=['wwe_impact', 'date:5/23/2026', 'date_update']
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - John Cena Explains Intention Behind Eponymous WWE Event
+[V91 DECISION] allow legacy publish path score=72 lane=strategic_pool core=event:wwe-backlash-2026-05-25:john-cena-story - John Cena Explains Intention Behind Eponymous WWE Event
+[CORE v90.2.7.1] authority core=event:wwe-backlash-2026-05-25:john-cena-story type=event_context title=John Cena Explains Intention Behind Eponymous WWE Event
+[CORE v90.2.7] event_context core=event:wwe-backlash-2026-05-25:john-cena-story title=John Cena Explains Intention Behind Eponymous WWE Event
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - John Cena Explains Intention Behind Eponymous WWE Event
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - MVP Calls Triple H a "Coward and a Liar" While Revealing Why He Left WWE
+[V91 DECISION] allow legacy publish path score=70 lane=strategic_pool core=mvp-calls-triple-h-a-coward-a-liar-while-revealing - MVP Calls Triple H a "Coward and a Liar" While Revealing Why He Left WWE
+[BOT] Elaborazione: MVP Calls Triple H a "Coward and a Liar" While Revealing Why He Left WWE
+[BOT] semantic_id=mvp-calls-triple-h-a-coward-and-a-liar-while-revealing-why-he-left-wwe
+[SCORE] iniziale=65 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/mvp-calls-triple-h-coward-liar-while-revealing-why-he-left-wwe/
+[PERF v71] scraping articolo: 1.09s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=20, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/mvp-calls-triple-h-coward-liar-while-revealing-why-he-left-wwe/
+[BLOCKSEQ] Blocchi ordinati estratti: text=20, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.67s
+[BOT] Embed trovati: 1
+[MODEL v88] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=0.90 model=gemini-3.1-flash-lite | Si tratta di una news su dichiarazioni rilasciate in un podcast riguardo al passato in WWE, non di una preview o di un report di evento.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Hurt Syndicate' come nome proprio del team.; Tradurre 'coward and a liar' letteralmente con 'codardo e bugiardo'.; 'Release' va tradotto con 'licenziamento' o 'addio', mai 'rilascio'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Si tratta di una news su dichiarazioni rilasciate in un podcast riguardo al passato in WWE, non di una preview o di un report di evento.
+[PERF v71] analisi editoriale AI v72: 2.75s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - MVP Calls Triple H a "Coward and a Liar" While Revealing Why He Left WWE
+[V91 AI] cache hit - MVP Calls Triple H a "Coward and a Liar" While Revealing Why He Left WWE
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=event:aew-double-or-nothing-2026-05-25:triple-h-story - MVP Calls Triple H a "Coward and a Liar" While Revealing Why He Left WWE
+[V91 AI] cache hit - 65
+[V91 AI] cache hit - 82
+[V91 AI] cache hit - MVP Calls Triple H a "Coward and a Liar" While Revealing Why He Left WWE
+[SCORE] raffinato=82 priority=high | event_related, discussion_value, hard_news
+[PERF v71] scoring raffinato: 0.60s
+[V71] story_signature=event:aew-double-or-nothing-2026-05-25:triple-h-story semantic_status=new_story freshness=0.551
+[PERF v71] dedupe/freshness v71: 0.62s
+[FOLLOWUP] Pubblicabile come angolo autonomo: event:aew-double-or-nothing-2026-05-25 -> event:aew-double-or-nothing-2026-05-25-followup-mvp-calls-triple-h-a-coward-a-liar-while-revealing-why-he
+[WP] Health check cache: OK (api_status_200)
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3-flash-preview | blocchi testo=20
+[MODEL v88] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello gemini-3.1-flash-lite scartato: Expecting ',' delimiter: line 1 column 640 (char 639)
+[GEMINI] Uso modello: gemini-2.5-flash-lite
+[PRESERVE v83] Repair anti-omissione applicato con gemini-2.5-flash-lite: editorial_word_ratio=0.58 (431/742) threshold=0.66
+[PRESERVE v81] Guardrail finale testo applicato
+[MODEL v88] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[CAREER v80.9] Repair frase career/status con gemini-3-flash-preview
+[PERF v71] traduzione: 54.04s
+[MODEL v88] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): MVP contro Triple H: "È un codardo e un bugiardo", i motivi dell'addio alla WWE
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://www.youtube.com/watch?v=ejoPXcJ_lJs
+[EMBED v87.3] Positional embed guard applicato: 1 modifiche
+[EMBED v88] Publish media guard: expected=1 before=0 after=1 missing=0
+[MEDIA v88] Recupero immagini inline mancanti: 1
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2025/09/mvp-doubles-down-on-saying-he-has-zero-respect-for-triple-h-51.jpg
+[MEDIA] Immagine caricata: 5286
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260525_192719_003_mvp-contro-triple-h-è-un-codardo-e-un-bugiardo-i-motivi-delladdio-alla-wwe_5287_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5287
+[PROCESSED v90.2.5] Publish result non conclusivo: non marco URL published
+[PERF v71] creazione post WordPress: 2.85s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2025/09/mvp-doubles-down-on-saying-he-has-zero-respect-for-triple-h-51.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5286
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'MVP Calls Triple H a "Coward and a Liar" While Revealing Why': 63.25s
+[OK] Pubblicato: MVP contro Triple H: "È un codardo e un bugiardo", i motivi dell'addio alla WWE
+[PENDING] Coda salvata: 0 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260525_192720_003_mvp-contro-triple-h-un-codardo-e-un-bugiardo-i-motivi-dell-addio-alla-wwe_174581bc_*.html
+[RUN v86.8/legacy] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: MVP contro Triple H: "È un codardo e un bugiardo", i motivi dell'addio alla WWE
+[PUBLISHED REVIEW v87.1] Review outer salvata: MVP contro Triple H: "È un codardo e un bugiardo", i motivi dell'addio alla WWE
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 10 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-25 19:23:37_summary.json -> published_html_review/run_2026-05-25 19-23-37_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (804 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
+===== RUN END [2026-05-25 19:23:37] VERSION [v90_2_6_2_clean_consolidated_source (ec630c4)] =====
+
