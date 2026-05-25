@@ -25303,12 +25303,6 @@ except Exception:
 print("[BOOT v90.2.7.2] Queue type contract + report source guard attivi")
 
 
-# v90.2.6.2 clean consolidated boot/version
-BOT_VERSION = "v90_2_6_2_clean_consolidated_source"
-BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
-print("[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1", flush=True)
-
-
 # v90.2.8 feed-level processed URL hard skip
 BOT_VERSION = "v90_2_8_feed_level_processed_skip"
 BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
@@ -25425,6 +25419,12 @@ except Exception as e:
     print(f"[FEED SKIP v90.2.8] Warning hook feedparser.parse non installato: {e}")
 
 print("[BOOT v90.2.8] Feed-level processed URL hard skip attivo")
+
+
+# v90.2.6.2 clean consolidated boot/version
+BOT_VERSION = "v90_2_6_2_clean_consolidated_source"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+print("[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1", flush=True)
 
 
 if __name__ == "__main__":
