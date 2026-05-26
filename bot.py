@@ -27357,12 +27357,6 @@ except Exception as e:
 print("[BOOT v91.6.2] Resolved report gate suppression attivo")
 
 
-# v90.2.6.2 clean consolidated boot/version
-BOT_VERSION = "v90_2_6_2_clean_consolidated_source"
-BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
-print("[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1", flush=True)
-
-
 # v91.6.3 force standard pipeline for resolved report
 BOT_VERSION = "v91_6_3_resolved_report_standard_pipeline"
 BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
@@ -27489,6 +27483,12 @@ except Exception as e:
     print(f"[REPORT v91.6.3] Warning call_oldest wrapper failed: {e}")
 
 print("[BOOT v91.6.3] Force standard pipeline for resolved report attivo")
+
+
+# v90.2.6.2 clean consolidated boot/version
+BOT_VERSION = "v90_2_6_2_clean_consolidated_source"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+print("[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1", flush=True)
 
 
 if __name__ == "__main__":
