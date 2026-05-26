@@ -76,6 +76,15 @@ jobs:
           print('[V92 VERIFY] bot_v92.py ok')
           PY
 
+      - name: Reset v92 report status for testing
+        env:
+          V92_FORCE_REPORT_REPUBLISH: "1"
+          V92_FORCE_REPORT_ID: "wwe_raw"
+          V92_FORCE_REPORT_OFFSET_DAYS: "1"
+        run: |
+          set -e
+          python scripts/reset_v92_report_status_for_test.py
+
       - name: Run bot v92
         id: run_bot
         env:
