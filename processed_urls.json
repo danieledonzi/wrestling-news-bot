@@ -3497,10 +3497,11 @@
   "https://www.wrestlinginc.com/2180008/aew-double-or-nothing-2026-five-titles-on-line-stadium-stampede-match": {
     "extra": {
       "event_key": "resolved-report-source:aew-double-or-nothing-2026-05-24",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "aew-double-or-nothing-results-524-five-titles-on-the-line-stadium-stampede-match"
     },
-    "reason": "high_score_or_discussion_worthy_not_final",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 86,
     "status": "competitive_deferred",
     "title": "AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match",
@@ -3766,10 +3767,11 @@
   "https://www.wrestlinginc.com/2180772/wwe-raw-may-25-intercontinental-title-up-for-grabs-oba-femi-appears-more": {
     "extra": {
       "event_key": "report:wwe-raw-2026-05-25",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "wwe-raw-results-525-intercontinental-title-up-for-grabs-oba-femi-appears-more"
     },
-    "reason": "high_score_or_discussion_worthy_not_final",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 86,
     "status": "competitive_deferred",
     "title": "WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More",
@@ -3830,10 +3832,11 @@
   "https://www.wrestlinginc.com/2181216/aew-redemption-2026-details-date-location-venue": {
     "extra": {
       "event_key": "",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "aew-reveals-details-behind-brand-new-ppv-aew-redemption-debuting-july-2026"
     },
-    "reason": "high_score_or_discussion_worthy_not_final",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 82,
     "status": "competitive_deferred",
     "title": "AEW Reveals Details Behind Brand New PPV, AEW Redemption, Debuting July 2026",
