@@ -1,0 +1,144 @@
+from __future__ import annotations
+
+import json
+import os
+import re
+from datetime import datetime
+from pathlib import Path
+from typing import Dict, List
+from urllib.parse import urlparse
+
+import requests
+from bs4 import BeautifulSoup
+
+from modules.report_workshop_v92 import run_report_workshop
+
+ROOT = Path(__file__).resolve().parent
+PUBLISHED_DIR = ROOT / "published"
+REVIEW_DIR = ROOT / "published_html_review"
+LOG_DIR = ROOT / "logs"
+STATE_DIR = ROOT / "state"
+MASTER_LOG = LOG_DIR / "master_log.log"
+BOT_EXIT_CODE = ROOT / ".bot_exit_code"
+
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120 Safari/537.36"
+}
+
+
+def ensure_dirs() -> None:
+    for path in [PUBLISHED_DIR, REVIEW_DIR, LOG_DIR, STATE_DIR]:
+        path.mkdir(parents=True, exist_ok=True)
+
+
+def log(message: str) -> None:
+    ensure_dirs()
+    print(message, flush=True)
+    with MASTER_LOG.open("a", encoding="utf-8") as fh:
+        fh.write(message.rstrip() + "\n")
+
+
+def slugify(text: str) -> str:
+    text = (text or "").lower()
+    text = re.sub(r"[^a-z0-9]+", "-", text).strip("-")
+    return text[:120] or "manual"
+
+
+def domain_source(url: str) -> str:
+    host = urlparse(url).netloc.lower()
+    if "ringsidenews.com" in host:
+        return "ringsidenews"
+    if "wrestlinginc.com" in host:
+        return "wrestlinginc"
+    if "fightful.com" in host:
+        return "fightful"
+    return host.replace("www.", "") or "manual"
+
+
+def fetch_source_title(url: str) -> str:
+    try:
+        res = requests.get(url, headers=HEADERS, timeout=12)
+        res.raise_for_status()
+        soup = BeautifulSoup(res.text, "html.parser")
+        for selector in ["meta[property='og:title']", "meta[name='twitter:title']"]:
+            tag = soup.select_one(selector)
+            if tag and tag.get("content"):
+                return tag["content"].strip()
+        if soup.title and soup.title.string:
+            return soup.title.string.strip()
+        h1 = soup.find("h1")
+        if h1:
+            return h1.get_text(" ", strip=True)
+    except Exception as exc:
+        log(f"[MANUAL v92] Warning: impossibile leggere titolo sorgente: {exc}")
+    return url
+
+
+def parse_categories(raw: str, default: List[str]) -> List[str]:
+    if not raw.strip():
+        return default
+    out = [x.strip() for x in raw.split(",") if x.strip()]
+    return out or default
+
+
+def build_manual_report_job(url: str) -> Dict[str, object]:
+    title = os.getenv("V92_MANUAL_TITLE", "").strip()
+    source_title = fetch_source_title(url)
+    source = domain_source(url)
+    if not title:
+        title = source_title
+    categories = parse_categories(os.getenv("V92_MANUAL_CATEGORIES", ""), ["Editoriali"])
+    now = datetime.utcnow().isoformat()
+    return {
+        "kind": "report",
+        "report_key": f"manual_report_{slugify(title)}_{datetime.utcnow().strftime('%Y%m%d%H%M%S')}",
+        "report_id": "manual_report",
+        "source": source,
+        "source_url": url,
+        "source_title": source_title,
+        "title": title,
+        "date": datetime.utcnow().date().isoformat(),
+        "categories": categories,
+        "title_policy": "manual" if os.getenv("V92_MANUAL_TITLE", "").strip() else "source_title",
+        "translation_mode": "report",
+        "created_at": now,
+        "status": "manual_ready_to_publish",
+    }
+
+
+def run_manual_report(url: str) -> int:
+    job = build_manual_report_job(url)
+    log(f"[MANUAL v92] Avvio manual report url={url}")
+    log(f"[MANUAL v92] source={job['source']} source_title={job['source_title']}")
+    log(f"[MANUAL v92] title={job['title']}")
+    log(f"[MANUAL v92] categories={', '.join(job['categories'])}")
+    post_id, post_json = run_report_workshop(job, PUBLISHED_DIR, REVIEW_DIR)
+    state_file = STATE_DIR / "manual_runs.json"
+    try:
+        data = json.loads(state_file.read_text(encoding="utf-8")) if state_file.exists() else []
+    except Exception:
+        data = []
+    data.append({"job": job, "wp_post_id": post_id, "link": post_json.get("link"), "created_at": datetime.utcnow().isoformat()})
+    state_file.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    log(f"[MANUAL v92] Pubblicato post_id={post_id} link={post_json.get('link')}")
+    return 0
+
+
+def main() -> int:
+    ensure_dirs()
+    url = os.getenv("V92_MANUAL_URL", "").strip()
+    kind = os.getenv("V92_MANUAL_KIND", "").strip().lower()
+    if not url:
+        log("[MANUAL v92] Nessun V92_MANUAL_URL: skip")
+        return 0
+    if kind not in {"report", "news"}:
+        raise SystemExit("V92_MANUAL_KIND deve essere 'report' oppure 'news'")
+    if kind == "news":
+        raise SystemExit("[MANUAL v92] manual news non ancora attivo: prima completiamo news_pipeline v92")
+    return run_manual_report(url)
+
+
+if __name__ == "__main__":
+    code = main()
+    BOT_EXIT_CODE.write_text(str(code), encoding="utf-8")
+    raise SystemExit(code)
