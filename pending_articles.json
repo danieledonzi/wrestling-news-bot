@@ -1,5 +1,34 @@
 [
   {
+    "url": "https://www.ringsidenews.com/former-wrestling-star-golden-boy-jerry-grey-dead-62-long-battle-stage-4-cancer/",
+    "title": "Former Wrestling Star 'Golden Boy' Jerry Grey Dead at 62 After Long Battle With Stage 4 Cancer",
+    "semantic_id": "former-wrestling-star-golden-boy-jerry-grey-dead-at-62-after-long-battle-with-stage-4-cancer",
+    "title_key": "wrestling-star-golden-boy-jerry-grey-dead-62-long-battle-stage-4",
+    "score": 77,
+    "priority": "medium",
+    "event_key": "",
+    "story_signature_v71": "stable:former_wrestling_star|golden_boy|jerry_grey_dead|story|wrestling",
+    "summary": "The wrestling world is mourning the loss of former pro wrestler Jerry Grey, better known to fans as “Golden Boy” Jerry Grey, who has died at the age of 62. The news was announced by the Cauliflower Alley Club, which shared an emotional tribute honoring Grey and his decades-long connection to the wrestling business. The ... Read more",
+    "reasons": [
+      "concrete_outcome",
+      "hard_news",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.546"
+    ],
+    "score_reasons": [
+      "concrete_outcome",
+      "hard_news",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.546"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1779775415.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1779763677.532332,
+    "attempts": 0
+  },
+  {
     "kind": "report",
     "url": "https://www.ringsidenews.com/wwe-raw-results-highlights-key-moments-may-25-2026/",
     "title": "WWE RAW Results, Highlights and Key Moments for May 25, 2026",
@@ -54,6 +83,31 @@
       }
     ],
     "story_signature_v71": "report:wwe-clash-2026-05-25"
+  },
+  {
+    "url": "https://www.wrestlinginc.com/2180807/wwe-raw-dragon-lee-rey-mysterio-rusev-returns-aid/",
+    "title": "Dragon Lee Returns On WWE Raw, Coming To The Aid Of Rey Mysterio Against Rusev",
+    "semantic_id": "dragon-lee-returns-on-wwe-raw-coming-to-the-aid-of-rey-mysterio-against-rusev",
+    "title_key": "dragon-lee-returns-raw-coming-aid-rey-mysterio-against-rusev",
+    "score": 76,
+    "priority": "medium",
+    "event_key": "",
+    "story_signature_v71": "stable:ethan_page|rusev|dragon_lee_returns_on|return|wwe",
+    "summary": "Dragon Lee returned during \"WWE Raw\" coming to the aid of Rey Mysterio against Rusev and Ethan Page.",
+    "reasons": [
+      "concrete_outcome",
+      "v71 freshness=0.723"
+    ],
+    "score_reasons": [
+      "concrete_outcome",
+      "v71 freshness=0.723"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1779784276.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1779763649.5214136,
+    "attempts": 0
   },
   {
     "url": "https://www.wrestlinginc.com/2176982/bully-ray-brock-lesnar-wwe-return-retirement/",
