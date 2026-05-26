@@ -102,13 +102,14 @@ jobs:
               'v91.4 publish processed and soft pool repair',
               'v91.4.1 strict publish return tuple contract',
               'v91.5 html integrity and block-safe repair guard',
+              'v91.5.1 final strict publish return guard',
           ]
           missing = [m for m in required if m not in text]
           if missing:
               raise SystemExit('[SOURCE CONSOLIDATION v91.5] missing markers: ' + ', '.join(missing))
           if 'v91_5_html_integrity_block_safe_repair' not in text:
               raise SystemExit('[SOURCE CONSOLIDATION v91.5] version marker mancante')
-          print('[SOURCE CONSOLIDATION v91.5] bot.py contiene HTML integrity guard + block-safe repair policy')
+          print('[SOURCE CONSOLIDATION v91.5] bot.py contiene HTML integrity guard + final publish return guard')
           PY
 
       - name: Run bot v91_5
@@ -152,6 +153,7 @@ jobs:
           V91_4_ENABLED: "1"
           V91_4_1_ENABLED: "1"
           V91_5_ENABLED: "1"
+          V91_5_1_ENABLED: "1"
           V91_ANALYSIS_CACHE_FILE: article_analysis_cache_v91.json
           V91_4_RECONCILE_PUBLISHED_ENABLED: "1"
           V91_4_SOFT_POOL_CLEANUP_ENABLED: "1"
