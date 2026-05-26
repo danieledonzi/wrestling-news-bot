@@ -26676,6 +26676,65 @@ BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
 print("[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1", flush=True)
 
 
+# v91.5.2 final safe print recursion guard
+V91_5_2_ENABLED = os.getenv("V91_5_2_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+
+try:
+    _PREV_V9152_PRINT = print
+except Exception:
+    _PREV_V9152_PRINT = None
+
+_V9152_PRINT_BUSY = False
+
+
+def v9152_safe_print(*args, **kwargs):
+    """Outermost print guard.
+
+    Several historical versions wrap print/stdout for master-log capture. After many stacked
+    patches, that chain can recurse through stream.flush(). This final guard avoids the
+    wrapper chain and writes deterministically to real stdout plus logs/master_log.log.
+    """
+    global _V9152_PRINT_BUSY
+    if not V91_5_2_ENABLED:
+        if _PREV_V9152_PRINT:
+            return _PREV_V9152_PRINT(*args, **kwargs)
+        return None
+    sep = kwargs.get("sep", " ")
+    end = kwargs.get("end", "\n")
+    try:
+        msg = sep.join(str(a) for a in args) + end
+    except Exception:
+        msg = " ".join(repr(a) for a in args) + end
+    if _V9152_PRINT_BUSY:
+        try:
+            sys.__stdout__.write(msg)
+            sys.__stdout__.flush()
+        except Exception:
+            pass
+        return None
+    _V9152_PRINT_BUSY = True
+    try:
+        try:
+            sys.__stdout__.write(msg)
+            sys.__stdout__.flush()
+        except Exception:
+            pass
+        try:
+            Path("logs").mkdir(parents=True, exist_ok=True)
+            with Path("logs/master_log.log").open("a", encoding="utf-8") as fh:
+                fh.write(msg)
+        except Exception:
+            pass
+    finally:
+        _V9152_PRINT_BUSY = False
+    return None
+
+
+if V91_5_2_ENABLED:
+    print = v9152_safe_print
+    print("[BOOT v91.5.2] Final safe print recursion guard attivo")
+
+
 if __name__ == "__main__":
     exit_code = 0
     if V854_BOOT_DIAGNOSTICS_ENABLED:
