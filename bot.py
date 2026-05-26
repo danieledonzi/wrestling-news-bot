@@ -26670,12 +26670,6 @@ except Exception as e:
 print("[BOOT v91.5.1] Final strict publish return guard attivo")
 
 
-# v90.2.6.2 clean consolidated boot/version
-BOT_VERSION = "v90_2_6_2_clean_consolidated_source"
-BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
-print("[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1", flush=True)
-
-
 # v91.5.2 final safe print recursion guard
 V91_5_2_ENABLED = os.getenv("V91_5_2_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
 
@@ -26733,6 +26727,408 @@ def v9152_safe_print(*args, **kwargs):
 if V91_5_2_ENABLED:
     print = v9152_safe_print
     print("[BOOT v91.5.2] Final safe print recursion guard attivo")
+
+
+# v90.2.6.2 clean consolidated boot/version
+BOT_VERSION = "v90_2_6_2_clean_consolidated_source"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+print("[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1", flush=True)
+
+
+# v91.5.3 report pending unwrap recursion guard
+V91_5_3_ENABLED = os.getenv("V91_5_3_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+_V9153_REPORT_PENDING_ACTIVE = set()
+
+
+def v9153_report_key(item):
+    if not isinstance(item, dict):
+        return ""
+    return str(
+        item.get("report_event_key")
+        or item.get("event_key")
+        or item.get("story_signature_v71")
+        or item.get("url")
+        or item.get("title")
+        or ""
+    )
+
+
+def v9153_is_report_pending_item(item):
+    if not isinstance(item, dict):
+        return False
+    if item.get("__v9153_unwrapped_report_pending"):
+        return False
+    status = str(item.get("status") or "")
+    key = v9153_report_key(item)
+    if item.get("kind") == "report":
+        return True
+    if item.get("report_event_key"):
+        return True
+    if status.startswith("waiting_report") or status == "waiting_report_morning_hold":
+        return True
+    if key.startswith("report:") and item.get("sources"):
+        return True
+    return False
+
+
+def v9153_mature_report_pending(item):
+    try:
+        not_before = float(item.get("not_before") or 0)
+        return not_before <= 0 or time.time() >= not_before
+    except Exception:
+        return True
+
+
+def v9153_source_url_title(item):
+    url = str(item.get("url") or item.get("link") or "").strip()
+    title = str(item.get("title") or item.get("titolo") or "").strip()
+    sources = item.get("sources")
+    if isinstance(sources, list):
+        # Prefer WrestlingInc for structured reports when available, otherwise first concrete source.
+        concrete = [s for s in sources if isinstance(s, dict) and (s.get("url") or s.get("link"))]
+        preferred = None
+        for s in concrete:
+            su = str(s.get("url") or s.get("link") or "")
+            if "wrestlinginc.com" in su:
+                preferred = s
+                break
+        if preferred is None and concrete:
+            preferred = concrete[0]
+        if preferred:
+            url = str(preferred.get("url") or preferred.get("link") or url).strip()
+            title = str(preferred.get("title") or title).strip()
+    return url, title
+
+
+def v9153_unwrap_report_pending(item):
+    candidate = dict(item)
+    url, title = v9153_source_url_title(candidate)
+    if url:
+        candidate["url"] = url
+        candidate["link"] = url
+    if title:
+        candidate["title"] = title
+    report_key = str(candidate.get("report_event_key") or candidate.get("event_key") or candidate.get("story_signature_v71") or "")
+    # Remove fields that make legacy routers send the item back into process_report_pending_item.
+    for key in (
+        "kind",
+        "report_event_key",
+        "not_before",
+        "hold_until_label",
+        "first_seen",
+        "last_seen",
+        "sources",
+    ):
+        candidate.pop(key, None)
+    candidate["status"] = "raw"
+    candidate["reason"] = "v91_5_3_unwrapped_report_pending"
+    candidate["__v9153_unwrapped_report_pending"] = True
+    candidate["__v9153_original_report_key"] = report_key
+    # Keep report identity for dedupe, but avoid fields likely used as pending routers.
+    if report_key.startswith("report:"):
+        candidate["event_key"] = report_key
+        candidate["story_signature_v71"] = report_key
+        candidate["semantic_id"] = candidate.get("semantic_id") or report_key.replace(":", "-")
+    return candidate
+
+
+try:
+    _PREV_V9153_process_report_pending_item = process_report_pending_item
+    def process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+        if not V91_5_3_ENABLED or not v9153_is_report_pending_item(item):
+            return _PREV_V9153_process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+        key = v9153_report_key(item)
+        if key in _V9153_REPORT_PENDING_ACTIVE:
+            print(f"[REPORT v91.5.3] Ricorsione report pending evitata: {key}")
+            return "skipped"
+        if not v9153_mature_report_pending(item):
+            return _PREV_V9153_process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+        candidate = v9153_unwrap_report_pending(item)
+        print(f"[REPORT v91.5.3] Report pending maturo spacchettato in candidate normale: {key} -> {candidate.get('url')}")
+        _V9153_REPORT_PENDING_ACTIVE.add(key)
+        try:
+            return process_candidate_item(candidate, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+        finally:
+            _V9153_REPORT_PENDING_ACTIVE.discard(key)
+except Exception as e:
+    print(f"[REPORT v91.5.3] Warning process_report_pending_item guard failed: {e}")
+
+try:
+    _PREV_V9153_process_candidate_item = process_candidate_item
+    def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+        if V91_5_3_ENABLED and isinstance(item, dict) and item.get("__v9153_unwrapped_report_pending"):
+            # Defensive cleanup in case older wrappers still inspect pending-specific fields.
+            for key in ("kind", "report_event_key", "not_before", "hold_until_label", "sources"):
+                item.pop(key, None)
+            item["status"] = "raw"
+        return _PREV_V9153_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+except Exception as e:
+    print(f"[REPORT v91.5.3] Warning process_candidate_item guard failed: {e}")
+
+print("[BOOT v91.5.3] Report pending unwrap recursion guard attivo")
+
+
+# v91.5.4 report candidate circuit breaker
+V91_5_4_ENABLED = os.getenv("V91_5_4_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+_V9154_REPORT_ACTIVE = set()
+_V9154_REPORT_ATTEMPTED = set()
+
+
+def v9154_report_core(item):
+    if not isinstance(item, dict):
+        return ""
+    for key in ("report_event_key", "event_key", "story_signature_v71", "news_core_key", "core"):
+        val = str(item.get(key) or "").strip()
+        if val.startswith("report:"):
+            return val
+    title = str(item.get("title") or item.get("titolo") or "").lower()
+    url = str(item.get("url") or item.get("link") or "").lower()
+    raw = f"{title} {url}"
+    if "raw" in raw and "result" in raw:
+        return str(item.get("event_key") or item.get("url") or item.get("title") or "report:unknown")
+    return ""
+
+
+def v9154_mark_report_manual_review(item, reason, error=""):
+    title = ""
+    url = ""
+    core = ""
+    try:
+        if isinstance(item, dict):
+            title = item.get("title") or item.get("titolo") or ""
+            url = item.get("url") or item.get("link") or ""
+            core = v9154_report_core(item)
+        print(f"[REPORT v91.5.4] Report isolato: reason={reason} core={core} title={title}")
+        if "v9025_record_processed_url" in globals() and url:
+            v9025_record_processed_url(
+                url,
+                title=title,
+                status="needs_manual_review",
+                reason=reason,
+                extra={"core": core, "error": str(error)[:500]},
+            )
+    except Exception as e:
+        try:
+            print(f"[REPORT v91.5.4] Warning mark manual review failed: {e}")
+        except Exception:
+            pass
+
+try:
+    _PREV_V9154_process_candidate_item = process_candidate_item
+    def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+        if not V91_5_4_ENABLED:
+            return _PREV_V9154_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+        core = v9154_report_core(item)
+        if not core:
+            return _PREV_V9154_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+
+        if core in _V9154_REPORT_ACTIVE:
+            print(f"[REPORT v91.5.4] Ricorsione candidate report evitata: {core}")
+            v9154_mark_report_manual_review(item, "v91_5_4_report_candidate_recursion")
+            return "skipped"
+        if core in _V9154_REPORT_ATTEMPTED:
+            print(f"[REPORT v91.5.4] Secondo tentativo stesso report nella run evitato: {core}")
+            return "skipped"
+
+        _V9154_REPORT_ACTIVE.add(core)
+        _V9154_REPORT_ATTEMPTED.add(core)
+        try:
+            return _PREV_V9154_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+        except RecursionError as e:
+            v9154_mark_report_manual_review(item, "v91_5_4_report_recursion_error", e)
+            return "skipped"
+        except Exception as e:
+            # Only isolate report candidates. Normal news still uses original failure behavior.
+            if "maximum recursion" in str(e).lower() or "recursion" in e.__class__.__name__.lower():
+                v9154_mark_report_manual_review(item, "v91_5_4_report_exception_isolated", e)
+                return "skipped"
+            raise
+        finally:
+            _V9154_REPORT_ACTIVE.discard(core)
+except Exception as e:
+    print(f"[REPORT v91.5.4] Warning process_candidate_item circuit breaker failed: {e}")
+
+print("[BOOT v91.5.4] Report candidate circuit breaker attivo")
+
+
+# v91.6 report source state transition fix
+BOT_VERSION = "v91_6_report_source_state_fix"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+V91_6_ENABLED = os.getenv("V91_6_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+
+_V916_RESOLVED_REPORT_URLS = {}
+
+
+def v916_slug(text):
+    try:
+        s = re.sub(r"[^a-z0-9]+", "-", str(text or "").lower()).strip("-")
+        return s[:120] or "report"
+    except Exception:
+        return "report"
+
+
+def v916_date_from_raw(title="", url=""):
+    raw = f"{title} {url}".lower()
+    # URL/title forms seen in feeds: may-25-2026, 5/25, 5-25.
+    m = re.search(r"\b(january|february|march|april|may|june|july|august|september|october|november|december)[-/ ]+(\d{1,2})[-/ ,]+(20\d{2})\b", raw)
+    if m:
+        months = {
+            "january": "01", "february": "02", "march": "03", "april": "04", "may": "05", "june": "06",
+            "july": "07", "august": "08", "september": "09", "october": "10", "november": "11", "december": "12",
+        }
+        return f"{m.group(3)}-{months.get(m.group(1), '01')}-{int(m.group(2)):02d}"
+    m = re.search(r"\b(\d{1,2})[/-](\d{1,2})(?:[/-](20\d{2}))?\b", raw)
+    if m:
+        year = m.group(3) or "2026"
+        return f"{year}-{int(m.group(1)):02d}-{int(m.group(2)):02d}"
+    return datetime.utcnow().strftime("%Y-%m-%d")
+
+
+def v916_canonical_report_core(title="", url="", fallback=""):
+    raw = f"{title} {url} {fallback}".lower()
+    date = v916_date_from_raw(title, url)
+    if "raw" in raw:
+        return f"report:wwe-raw-{date}"
+    if "smackdown" in raw:
+        return f"report:wwe-smackdown-{date}"
+    if "nxt" in raw:
+        return f"report:wwe-nxt-{date}"
+    if "dynamite" in raw:
+        return f"report:aew-dynamite-{date}"
+    if "collision" in raw:
+        return f"report:aew-collision-{date}"
+    if fallback.startswith("report:"):
+        return fallback
+    return f"report:{v916_slug(title or url)}-{date}"
+
+
+def v916_publish_core_from_report(report_core):
+    core = str(report_core or "").strip()
+    if core.startswith("report:"):
+        return "resolved-report-source:" + core[len("report:"):]
+    return "resolved-report-source:" + v916_slug(core)
+
+
+def v916_item_report_core(item):
+    if not isinstance(item, dict):
+        return ""
+    title = item.get("title") or item.get("titolo") or ""
+    url = item.get("url") or item.get("link") or ""
+    for k in ("report_event_key", "event_key", "story_signature_v71", "news_core_key", "core"):
+        v = str(item.get(k) or "").strip()
+        if v.startswith("report:"):
+            return v916_canonical_report_core(title, url, v)
+    raw = f"{title} {url}".lower()
+    if "result" in raw and any(x in raw for x in ("raw", "smackdown", "nxt", "dynamite", "collision")):
+        return v916_canonical_report_core(title, url, "")
+    return ""
+
+
+def v916_is_resolved_report_source(item):
+    return isinstance(item, dict) and bool(item.get("__v916_report_source_resolved"))
+
+
+def v916_best_source(item):
+    url = str(item.get("url") or item.get("link") or "").strip()
+    title = str(item.get("title") or item.get("titolo") or "").strip()
+    sources = item.get("sources")
+    if isinstance(sources, list):
+        concrete = [s for s in sources if isinstance(s, dict) and (s.get("url") or s.get("link"))]
+        preferred = None
+        for s in concrete:
+            su = str(s.get("url") or s.get("link") or "")
+            if "wrestlinginc.com" in su:
+                preferred = s
+                break
+        if preferred is None and concrete:
+            preferred = concrete[0]
+        if preferred:
+            url = str(preferred.get("url") or preferred.get("link") or url).strip()
+            title = str(preferred.get("title") or title).strip()
+    return url, title
+
+
+def v916_resolve_report_source_item(item):
+    candidate = dict(item)
+    original_core = v916_item_report_core(candidate)
+    if not original_core:
+        return candidate
+    url, title = v916_best_source(candidate)
+    if url:
+        candidate["url"] = url
+        candidate["link"] = url
+    if title:
+        candidate["title"] = title
+    canonical = v916_canonical_report_core(title or candidate.get("title", ""), url or candidate.get("url", ""), original_core)
+    publish_core = v916_publish_core_from_report(canonical)
+
+    for k in ("kind", "report_event_key", "core_type_v9027", "sources", "not_before", "hold_until_label", "first_seen", "last_seen"):
+        candidate.pop(k, None)
+    candidate["event_key"] = publish_core
+    candidate["story_signature_v71"] = publish_core
+    candidate["news_core_key"] = publish_core
+    candidate["semantic_id"] = candidate.get("semantic_id") or publish_core.replace(":", "-")
+    candidate["status"] = "raw"
+    candidate["reason"] = "v91_6_report_source_resolved"
+    candidate["__v916_report_source_resolved"] = True
+    candidate["__v916_original_report_core"] = canonical
+    candidate["__v916_publish_core"] = publish_core
+    if url:
+        _V916_RESOLVED_REPORT_URLS[url] = publish_core
+    return candidate
+
+
+def v916_core_override_for_url(url):
+    return _V916_RESOLVED_REPORT_URLS.get(str(url or "").strip())
+
+try:
+    _PREV_V916_assign_story_core_v9027 = assign_story_core_v9027
+    def assign_story_core_v9027(item, title="", url="", text="", analysis=None):
+        if V91_6_ENABLED:
+            override = v916_core_override_for_url(url)
+            if override:
+                print(f"[REPORT v91.6] Core override fonte report risolta: {override} - {title}")
+                return {"core": override, "core_type": "resolved_report_source", "assigned_by": "v91.6", "is_report_source_resolved": True}
+        return _PREV_V916_assign_story_core_v9027(item, title, url, text, analysis)
+except Exception as e:
+    print(f"[REPORT v91.6] Warning assign_story_core_v9027 override failed: {e}")
+
+try:
+    _PREV_V916_assign_story_core_v91 = assign_story_core_v91
+    def assign_story_core_v91(item, title="", url="", text="", analysis=None):
+        if V91_6_ENABLED:
+            override = v916_core_override_for_url(url)
+            if override:
+                return {"core": override, "core_type": "resolved_report_source", "assigned_by": "v91.6", "is_report_source_resolved": True}
+        return _PREV_V916_assign_story_core_v91(item, title, url, text, analysis)
+except Exception:
+    pass
+
+try:
+    _PREV_V916_process_report_pending_item = process_report_pending_item
+    def process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+        if V91_6_ENABLED and isinstance(item, dict) and v916_item_report_core(item):
+            resolved = v916_resolve_report_source_item(item)
+            print(f"[REPORT v91.6] Pending report: fonte risolta, salto gate report e passo a candidate normale: {resolved.get('__v916_original_report_core')} -> {resolved.get('url')}")
+            return process_candidate_item(resolved, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+        return _PREV_V916_process_report_pending_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+except Exception as e:
+    print(f"[REPORT v91.6] Warning process_report_pending_item override failed: {e}")
+
+try:
+    _PREV_V916_process_candidate_item = process_candidate_item
+    def process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts):
+        if V91_6_ENABLED and isinstance(item, dict) and not v916_is_resolved_report_source(item):
+            report_core = v916_item_report_core(item)
+            if report_core:
+                resolved = v916_resolve_report_source_item(item)
+                print(f"[REPORT v91.6] Candidate report: fonte risolta, bypass gate ricorsivo: {report_core} -> {resolved.get('event_key')}")
+                return _PREV_V916_process_candidate_item(resolved, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+        return _PREV_V916_process_candidate_item(item, history, seen_story_fingerprints, seen_news_core_keys, seen_event_keys, seen_story_signatures_v71, source_fail_counts)
+except Exception as e:
+    print(f"[REPORT v91.6] Warning process_candidate_item override failed: {e}")
+
+print("[BOOT v91.6] Report source state transition fix attivo")
 
 
 if __name__ == "__main__":
