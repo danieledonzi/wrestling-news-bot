@@ -113,7 +113,7 @@
     ],
     "count": 13,
     "first_seen": "2026-05-21T16:04:55",
-    "last_seen": "2026-05-26T07:53:02"
+    "last_seen": "2026-05-26T13:52:55"
   },
   "return:mark-shapiro:wwe": {
     "titles": [
@@ -1344,15 +1344,16 @@
   },
   "event:wwe-clash-2026-05-25:roman-reigns-story": {
     "titles": [
-      "Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW"
+      "Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW",
+      "20260526_075345_002_roman-reigns-chiarisce-le-conseguenze-del-tribal-combat-a-clash-in-italy_9ab4aa1f_original.html"
     ],
     "facts": [
       "brand_show",
       "wwe_impact"
     ],
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-05-26T07:53:45",
-    "last_seen": "2026-05-26T07:53:45"
+    "last_seen": "2026-05-26T13:52:56"
   },
   "event:aew-double-or-nothing-2026-05-26:ftr-approaching-contract-option-year-story": {
     "titles": [
@@ -1365,5 +1366,65 @@
     "count": 1,
     "first_seen": "2026-05-26T07:54:18",
     "last_seen": "2026-05-26T07:54:18"
+  },
+  "event:wwe-king-and-queen-of-the-ring-2026-05-26:20260526-075325-001-annunciato-il-story": {
+    "titles": [
+      "20260526_075325_001_wwe-annunciato-il-ritorno-dei-tornei-king-queen-of-the-ring-a-raw_5317_final.html"
+    ],
+    "facts": [
+      "official_return",
+      "brand_show",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T13:52:50",
+    "last_seen": "2026-05-26T13:52:50"
+  },
+  "event:wwe-clash-2026-05-26:roman-reigns-story": {
+    "titles": [
+      "20260526_075342_002_roman-reigns-chiarisce-le-conseguenze-del-tribal-combat-a-clash-in-italy_5320_final.html",
+      "20260526_075345_002_roman-reigns-chiarisce-le-conseguenze-del-tribal-combat-a-clash-in-italy_9ab4aa1f_final.html"
+    ],
+    "facts": [],
+    "count": 2,
+    "first_seen": "2026-05-26T13:52:50",
+    "last_seen": "2026-05-26T13:52:56"
+  },
+  "event:wwe-king-and-queen-of-the-ring-2026-05-26:20260526-075326-001-annunciato-il-story": {
+    "titles": [
+      "20260526_075326_001_wwe-annunciato-il-ritorno-dei-tornei-king-queen-of-the-ring-a-raw_a8760622_final.html"
+    ],
+    "facts": [
+      "official_return",
+      "brand_show",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T13:52:56",
+    "last_seen": "2026-05-26T13:52:56"
+  },
+  "event:wwe-king-and-queen-of-the-ring-2026-05-25:20260526-075326-001-annunciato-il-story": {
+    "titles": [
+      "20260526_075326_001_wwe-annunciato-il-ritorno-dei-tornei-king-queen-of-the-ring-a-raw_a8760622_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "brand_show",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T13:52:56",
+    "last_seen": "2026-05-26T13:52:56"
+  },
+  "event:wwe-wrestlemania-2026-05-26:cm-punk-story": {
+    "titles": [
+      "WWE Called Out Over Lack of Creative Plans for CM Punk After WrestleMania 42"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T13:53:50",
+    "last_seen": "2026-05-26T13:53:50"
   }
 }

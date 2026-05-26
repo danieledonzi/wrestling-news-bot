@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-26 08:08:50",
-  "last_bot_version": "v91_6_3_resolved_report_standard_pipeline (e5520d9)",
-  "updated_at": "2026-05-26T08:09:24",
-  "total_items": 215,
+  "last_run_id": "2026-05-26 13:51:52",
+  "last_bot_version": "v90_2_6_2_clean_consolidated_source (867610f)",
+  "updated_at": "2026-05-26T13:54:47",
+  "total_items": 218,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1724,6 +1724,30 @@
       "original_html_file": "20260526_075418_003_ftr-vicini-all-anno-di-opzione-contrattuale-in-aew-interesse-dalla-wwe_3e2933a9_original.html",
       "final_html_file": "20260526_075418_003_ftr-vicini-all-anno-di-opzione-contrattuale-in-aew-interesse-dalla-wwe_3e2933a9_final.html",
       "metadata_file": "20260526_075418_003_ftr-vicini-all-anno-di-opzione-contrattuale-in-aew-interesse-dalla-wwe_3e2933a9_metadata.json"
+    },
+    {
+      "run_id": "2026-05-26 13:51:52",
+      "title": "John Cena sul suo heel turn nel 2025: \"Ho cercato di renderlo il più realistico possibile\"",
+      "url": "https://www.wrestlinginc.com/2180142/wwe-john-cena-heel-turn-realistic/",
+      "original_html_file": "20260526_135246_001_john-cena-sul-suo-heel-turn-nel-2025-ho-cercato-di-renderlo-il-pi-realistico-pos_22a2979c_original.html",
+      "final_html_file": "20260526_135246_001_john-cena-sul-suo-heel-turn-nel-2025-ho-cercato-di-renderlo-il-pi-realistico-pos_22a2979c_final.html",
+      "metadata_file": "20260526_135246_001_john-cena-sul-suo-heel-turn-nel-2025-ho-cercato-di-renderlo-il-pi-realistico-pos_22a2979c_metadata.json"
+    },
+    {
+      "run_id": "2026-05-26 13:51:52",
+      "title": "WWE criticata per la mancanza di piani creativi per CM Punk dopo WrestleMania",
+      "url": "https://www.ringsidenews.com/wwe-called-out-lack-creative-plans-cm-punk-wrestlemania-42/",
+      "original_html_file": "20260526_135350_002_wwe-criticata-per-la-mancanza-di-piani-creativi-per-cm-punk-dopo-wrestlemania_4c9a053d_original.html",
+      "final_html_file": "20260526_135350_002_wwe-criticata-per-la-mancanza-di-piani-creativi-per-cm-punk-dopo-wrestlemania_4c9a053d_final.html",
+      "metadata_file": "20260526_135350_002_wwe-criticata-per-la-mancanza-di-piani-creativi-per-cm-punk-dopo-wrestlemania_4c9a053d_metadata.json"
+    },
+    {
+      "run_id": "2026-05-26 13:51:52",
+      "title": "Vince Russo difende Triple H dopo le accuse di MVP",
+      "url": "https://www.ringsidenews.com/vince-russo-defends-triple-h-mvp-calls-him-coward-liar/",
+      "original_html_file": "20260526_135447_003_vince-russo-difende-triple-h-dopo-le-accuse-di-mvp_2a268289_original.html",
+      "final_html_file": "20260526_135447_003_vince-russo-difende-triple-h-dopo-le-accuse-di-mvp_2a268289_final.html",
+      "metadata_file": "20260526_135447_003_vince-russo-difende-triple-h-dopo-le-accuse-di-mvp_2a268289_metadata.json"
     }
   ]
 }

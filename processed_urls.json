@@ -2021,6 +2021,18 @@
     "updated_at": "1779742510.1259003",
     "url": "https://www.ringsidenews.com/vince-mcmahons-lawyers-defend-signal-app-use-wwe-shareholders-lawsuit/"
   },
+  "https://www.ringsidenews.com/vince-russo-defends-triple-h-mvp-calls-him-coward-liar": {
+    "extra": {
+      "event_key": "",
+      "semantic_id": "vince-russo-defends-triple-h-after-mvp-calls-him-a-coward-and-a-liar"
+    },
+    "reason": "wordpress_publish_ok",
+    "score": null,
+    "status": "published",
+    "title": "Vince Russo difende Triple H dopo le accuse di MVP",
+    "updated_at": "1779803686.1068702",
+    "url": "https://www.ringsidenews.com/vince-russo-defends-triple-h-mvp-calls-him-coward-liar/"
+  },
   "https://www.ringsidenews.com/vince-russo-says-triple-h-should-have-fired-instead-getting-raise": {
     "extra": {
       "event_key": "event:wwe-wrestlemania-2026-05-25-followup-vince-russo-says-triple-h-should-have-been-fired-instead-getting-a",
@@ -2116,6 +2128,18 @@
     "title": "WWE: dubbi sul futuro degli accordi televisivi di AEW dopo il 2027",
     "updated_at": "1779742510.1642232",
     "url": "https://www.ringsidenews.com/wwe-believes-aew-may-struggle-land-major-tv-deal-current-contract-ends/"
+  },
+  "https://www.ringsidenews.com/wwe-called-out-lack-creative-plans-cm-punk-wrestlemania-42": {
+    "extra": {
+      "event_key": "event:wwe-wrestlemania-2026-05-26",
+      "semantic_id": "wwe-called-out-over-lack-of-creative-plans-for-cm-punk-after-wrestlemania-42"
+    },
+    "reason": "wordpress_publish_ok",
+    "score": null,
+    "status": "published",
+    "title": "[SPOILER] WWE criticata per la mancanza di piani creativi per CM Punk dopo WrestleMania",
+    "updated_at": "1779803628.7491033",
+    "url": "https://www.ringsidenews.com/wwe-called-out-lack-creative-plans-cm-punk-wrestlemania-42/"
   },
   "https://www.ringsidenews.com/wwe-confirms-logan-paul-will-out-action-months-injury-during-525-raw": {
     "extra": {
@@ -3449,6 +3473,18 @@
     "updated_at": "1779742510.5698407",
     "url": "https://www.wrestlinginc.com/2180139/paige-brie-bella-hang-on-womens-tag-titles-following-wwe-snme/"
   },
+  "https://www.wrestlinginc.com/2180142/wwe-john-cena-heel-turn-realistic": {
+    "extra": {
+      "event_key": "event:wwe-elimination-chamber-2026-23-24",
+      "semantic_id": "john-cena-says-he-attempted-to-make-wwe-heel-turn-as-realistic-as-he-could"
+    },
+    "reason": "wordpress_publish_ok",
+    "score": null,
+    "status": "published",
+    "title": "John Cena sul suo heel turn nel 2025: \"Ho cercato di renderlo il più realistico possibile\"",
+    "updated_at": "1779803565.2130396",
+    "url": "https://www.wrestlinginc.com/2180142/wwe-john-cena-heel-turn-realistic/"
+  },
   "https://www.wrestlinginc.com/2180144/vision-retain-wwe-world-tag-team-titles-underhanded-fashion-street-profits": {
     "extra": {
       "event_key": "event:logan-paul-title",
@@ -3625,6 +3661,19 @@
     "updated_at": "1779746747.700926",
     "url": "https://www.wrestlinginc.com/2180757/aew-will-ospreay-reflects-wembley-stadium-means/"
   },
+  "https://www.wrestlinginc.com/2180772/wwe-raw-may-25-intercontinental-title-up-for-grabs-oba-femi-appears-more": {
+    "extra": {
+      "core": "resolved-report-source:wwe-raw-2026-05-25",
+      "lane": "skip_final",
+      "score": 45
+    },
+    "reason": "v91_score_story",
+    "score": null,
+    "status": "skip_final",
+    "title": "WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More",
+    "updated_at": "1779803543.7807767",
+    "url": "https://www.wrestlinginc.com/2180772/wwe-raw-may-25-intercontinental-title-up-for-grabs-oba-femi-appears-more/"
+  },
   "https://www.wrestlinginc.com/2180802/wwe-raw-la-knight-king-queen-ring-2026-return": {
     "extra": {
       "event_key": "event:wwe-king-and-queen-of-the-ring-2026-05-26",
@@ -3648,5 +3697,31 @@
     "title": "WWE Raw: Dragon Lee torna e salva Rey Mysterio dall'attacco di Rusev",
     "updated_at": "1779778799.7416046",
     "url": "https://www.wrestlinginc.com/2180807/wwe-raw-dragon-lee-rey-mysterio-rusev-returns-aid/"
+  },
+  "https://www.wrestlinginc.com/2180854/tony-khan-aew-not-talked-msg-management-2019": {
+    "extra": {
+      "event_key": "event:business:tony-khan",
+      "raw_result": "skipped",
+      "semantic_id": "aews-tony-khan-has-not-talked-to-msg-management-since-2019"
+    },
+    "reason": "high_score_or_discussion_worthy_not_final",
+    "score": 70,
+    "status": "competitive_deferred",
+    "title": "AEW's Tony Khan Has Not Talked To MSG Management Since 2019",
+    "updated_at": "1779803566.7889216",
+    "url": "https://www.wrestlinginc.com/2180854/tony-khan-aew-not-talked-msg-management-2019/"
+  },
+  "https://www.wrestlinginc.com/2180862/wwe-mark-henry-rhea-ripley-charlotte-flair-mega-powers-alliance": {
+    "extra": {
+      "event_key": "event:wwe-clash-2026-05-26",
+      "raw_result": "skipped",
+      "semantic_id": "mark-henry-pitches-mega-powers-type-alliance-for-wwes-rhea-ripley-charlotte-flair"
+    },
+    "reason": "above_low_score_final_cap_not_final",
+    "score": 72,
+    "status": "competitive_deferred",
+    "title": "Mark Henry Pitches Mega Powers-Type Alliance For WWE's Rhea Ripley & Charlotte Flair",
+    "updated_at": "1779803548.9151258",
+    "url": "https://www.wrestlinginc.com/2180862/wwe-mark-henry-rhea-ripley-charlotte-flair-mega-powers-alliance/"
   }
 }
