@@ -93,6 +93,7 @@ else:
     print("[V92 PATCH] report workshop applicato")
 
 for patch_name in [
+    "scripts/apply_v92_force_ringside_report_test.py",
     "scripts/apply_v92_report_quality_patch.py",
     "scripts/apply_v92_report_runtime_tweaks.py",
     "scripts/apply_v92_report_legacy_translation_prompt.py",
