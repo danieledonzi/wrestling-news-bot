@@ -113,7 +113,7 @@
     ],
     "count": 13,
     "first_seen": "2026-05-21T16:04:55",
-    "last_seen": "2026-05-26T06:59:32"
+    "last_seen": "2026-05-26T07:36:00"
   },
   "return:mark-shapiro:wwe": {
     "titles": [
@@ -832,14 +832,16 @@
   },
   "event:wwe-snme-2026-05-25:logan-paul-injury": {
     "titles": [
-      "20260524_183635_001_possibili-infortuni-per-logan-paul-e-sol-ruca-durante-il-saturday-night-s-main-e_74aa5ee8_original.html"
+      "20260524_183635_001_possibili-infortuni-per-logan-paul-e-sol-ruca-durante-il-saturday-night-s-main-e_74aa5ee8_original.html",
+      "WWE Confirms Logan Paul Will Be Out Of Action For Months With Injury During 5/25 RAW"
     ],
     "facts": [
-      "wwe_impact"
+      "wwe_impact",
+      "brand_show"
     ],
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-05-25T12:03:40",
-    "last_seen": "2026-05-25T12:03:40"
+    "last_seen": "2026-05-26T07:36:47"
   },
   "event:aew-double-or-nothing-2026-05-25:20260524-234038-001-spoiler-divine-story": {
     "titles": [
@@ -1239,5 +1241,29 @@
     "count": 1,
     "first_seen": "2026-05-26T07:00:01",
     "last_seen": "2026-05-26T07:00:01"
+  },
+  "event:wwe-king-and-queen-of-the-ring-2026-05-26:la-knight-return-king-queen-story": {
+    "titles": [
+      "LA Knight Announces Return Of King & Queen Of The Ring On WWE Raw"
+    ],
+    "facts": [
+      "official_return",
+      "brand_show",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T07:37:10",
+    "last_seen": "2026-05-26T07:37:10"
+  },
+  "event:wwe-clash-2026-05-26:jade-cargill-story": {
+    "titles": [
+      "WWE Loading ESPN Broadcast of Clash in Italy With High-Profile Matches"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T07:37:51",
+    "last_seen": "2026-05-26T07:37:51"
   }
 }

@@ -373,6 +373,19 @@
     "updated_at": "1779742510.3475735",
     "url": "https://www.ringsidenews.com/danhausen-becomes-one-wwes-biggest-success-stories-rocky-debut/"
   },
+  "https://www.ringsidenews.com/danhausens-knicks-curse-somehow-worked-again-during-nba-playoff-run": {
+    "extra": {
+      "core": "danhausen-s-knicks-curse-somehow-worked-again-during-nba-playoff",
+      "lane": "skip_final",
+      "score": 45
+    },
+    "reason": "v91_score_story",
+    "score": null,
+    "status": "skip_final",
+    "title": "Danhausen's Knicks Curse Somehow Worked Again During NBA Playoff Run",
+    "updated_at": "1779781031.0707402",
+    "url": "https://www.ringsidenews.com/danhausens-knicks-curse-somehow-worked-again-during-nba-playoff-run/"
+  },
   "https://www.ringsidenews.com/darby-allin-says-having-kids-wont-stop-him-taking-dangerous-risks": {
     "extra": {
       "event_key": "event:business:darby-allin",
@@ -2029,6 +2042,18 @@
     "updated_at": "1779742510.1642232",
     "url": "https://www.ringsidenews.com/wwe-believes-aew-may-struggle-land-major-tv-deal-current-contract-ends/"
   },
+  "https://www.ringsidenews.com/wwe-confirms-logan-paul-will-out-action-months-injury-during-525-raw": {
+    "extra": {
+      "event_key": "event:wwe-snme-2026-05-25",
+      "semantic_id": "wwe-confirms-logan-paul-will-be-out-of-action-for-months-with-injury-during-525-raw"
+    },
+    "reason": "wordpress_publish_ok",
+    "score": null,
+    "status": "published",
+    "title": "WWE: Logan Paul infortunato, out diversi mesi",
+    "updated_at": "1779781005.6701689",
+    "url": "https://www.ringsidenews.com/wwe-confirms-logan-paul-will-out-action-months-injury-during-525-raw/"
+  },
   "https://www.ringsidenews.com/wwe-drops-danhausen-x-new-york-knicks-merch-teams-playoff-surge": {
     "extra": {
       "event_key": "",
@@ -2071,6 +2096,18 @@
     "updated_at": "1779742510.4698138",
     "url": "https://www.ringsidenews.com/wwe-interested-reuniting-enzo-cass-amid-backstage-contact/"
   },
+  "https://www.ringsidenews.com/wwe-loading-espn-broadcast-clash-italy-high-profile-matches": {
+    "extra": {
+      "event_key": "event:wwe-clash-2026-05-26",
+      "semantic_id": "wwe-loading-espn-broadcast-of-clash-in-italy-with-high-profile-matches"
+    },
+    "reason": "wordpress_publish_ok",
+    "score": null,
+    "status": "published",
+    "title": "WWE Clash in Italy: due match titolati in onda su ESPN",
+    "updated_at": "1779781070.2337534",
+    "url": "https://www.ringsidenews.com/wwe-loading-espn-broadcast-clash-italy-high-profile-matches/"
+  },
   "https://www.ringsidenews.com/wwe-made-big-decision-about-overseas-plans-during-internal-meeting": {
     "extra": {
       "event_key": "event:business:nick-khan",
@@ -2098,6 +2135,19 @@
     "title": "WWE: la federazione lavora al rilancio della categoria tag team dopo i recenti addii",
     "updated_at": "1779742510.3844204",
     "url": "https://www.ringsidenews.com/wwe-quietly-making-big-changes-tag-team-division-major-exits/"
+  },
+  "https://www.ringsidenews.com/wwe-raw-results-highlights-key-moments-may-25-2026": {
+    "extra": {
+      "event_key": "report:wwe-clash-2026-05-26",
+      "raw_result": "skipped",
+      "semantic_id": "wwe-raw-results-highlights-and-key-moments-for-may-25-2026"
+    },
+    "reason": "above_low_score_final_cap_not_final",
+    "score": 77,
+    "status": "competitive_deferred",
+    "title": "WWE RAW Results, Highlights and Key Moments for May 25, 2026",
+    "updated_at": "1779780963.5354195",
+    "url": "https://www.ringsidenews.com/wwe-raw-results-highlights-key-moments-may-25-2026/"
   },
   "https://www.ringsidenews.com/wwe-reveals-why-more-main-roster-house-shows-returning-this-summer": {
     "extra": {
@@ -3269,6 +3319,19 @@
     "updated_at": "1779715526.83745",
     "url": "https://www.wrestlinginc.com/2180061/jack-perry-reflects-piece-scapegoat-bus/"
   },
+  "https://www.wrestlinginc.com/2180100/wwe-jimmy-wang-yang-vince-mcmahon-forgot-firing": {
+    "extra": {
+      "core": "star-recalls-being-re-hired-vince-mcmahon-forgot-about-firing",
+      "lane": "skip_final",
+      "score": 45
+    },
+    "reason": "v91_score_story",
+    "score": null,
+    "status": "skip_final",
+    "title": "Former WWE Star Recalls Being Re-Hired After Vince McMahon Forgot About Firing Him",
+    "updated_at": "1779781030.964561",
+    "url": "https://www.wrestlinginc.com/2180100/wwe-jimmy-wang-yang-vince-mcmahon-forgot-firing/"
+  },
   "https://www.wrestlinginc.com/2180133/sol-ruca-granted-womens-ic-title-match-following-controversial-becky-lynch-dq": {
     "extra": {
       "event_key": "",
@@ -3486,6 +3549,18 @@
     "title": "AEW's Will Ospreay Reflects On What Wembley Stadium Means To Him",
     "updated_at": "1779746747.700926",
     "url": "https://www.wrestlinginc.com/2180757/aew-will-ospreay-reflects-wembley-stadium-means/"
+  },
+  "https://www.wrestlinginc.com/2180802/wwe-raw-la-knight-king-queen-ring-2026-return": {
+    "extra": {
+      "event_key": "event:wwe-king-and-queen-of-the-ring-2026-05-26",
+      "semantic_id": "la-knight-announces-return-of-king-queen-of-the-ring-on-wwe-raw"
+    },
+    "reason": "wordpress_publish_ok",
+    "score": null,
+    "status": "published",
+    "title": "WWE Raw: LA Knight annuncia il ritorno di King & Queen Of The Ring",
+    "updated_at": "1779781029.4775257",
+    "url": "https://www.wrestlinginc.com/2180802/wwe-raw-la-knight-king-queen-ring-2026-return/"
   },
   "https://www.wrestlinginc.com/2180807/wwe-raw-dragon-lee-rey-mysterio-rusev-returns-aid": {
     "extra": {

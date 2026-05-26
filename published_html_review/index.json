@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-26 07:11:54",
-  "last_bot_version": "v90_2_6_2_clean_consolidated_source (d181c31)",
-  "updated_at": "2026-05-26T07:12:56",
-  "total_items": 209,
+  "last_run_id": "2026-05-26 07:35:33",
+  "last_bot_version": "v91_6_report_source_state_fix (6e5356d)",
+  "updated_at": "2026-05-26T07:37:51",
+  "total_items": 212,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1676,6 +1676,30 @@
       "original_html_file": "20260526_070001_001_wwe-raw-dragon-lee-torna-e-salva-rey-mysterio-dall-attacco-di-rusev_0d2f0ad4_original.html",
       "final_html_file": "20260526_070001_001_wwe-raw-dragon-lee-torna-e-salva-rey-mysterio-dall-attacco-di-rusev_0d2f0ad4_final.html",
       "metadata_file": "20260526_070001_001_wwe-raw-dragon-lee-torna-e-salva-rey-mysterio-dall-attacco-di-rusev_0d2f0ad4_metadata.json"
+    },
+    {
+      "run_id": "2026-05-26 07:35:33",
+      "title": "WWE: Logan Paul infortunato, out diversi mesi",
+      "url": "https://www.ringsidenews.com/wwe-confirms-logan-paul-will-out-action-months-injury-during-525-raw/",
+      "original_html_file": "20260526_073647_001_wwe-logan-paul-infortunato-out-diversi-mesi_e5c60ef0_original.html",
+      "final_html_file": "20260526_073647_001_wwe-logan-paul-infortunato-out-diversi-mesi_e5c60ef0_final.html",
+      "metadata_file": "20260526_073647_001_wwe-logan-paul-infortunato-out-diversi-mesi_e5c60ef0_metadata.json"
+    },
+    {
+      "run_id": "2026-05-26 07:35:33",
+      "title": "WWE Raw: LA Knight annuncia il ritorno di King & Queen Of The Ring",
+      "url": "https://www.wrestlinginc.com/2180802/wwe-raw-la-knight-king-queen-ring-2026-return/",
+      "original_html_file": "20260526_073710_002_wwe-raw-la-knight-annuncia-il-ritorno-di-king-queen-of-the-ring_f178e3dd_original.html",
+      "final_html_file": "20260526_073710_002_wwe-raw-la-knight-annuncia-il-ritorno-di-king-queen-of-the-ring_f178e3dd_final.html",
+      "metadata_file": "20260526_073710_002_wwe-raw-la-knight-annuncia-il-ritorno-di-king-queen-of-the-ring_f178e3dd_metadata.json"
+    },
+    {
+      "run_id": "2026-05-26 07:35:33",
+      "title": "WWE Clash in Italy: due match titolati in onda su ESPN",
+      "url": "https://www.ringsidenews.com/wwe-loading-espn-broadcast-clash-italy-high-profile-matches/",
+      "original_html_file": "20260526_073751_003_wwe-clash-in-italy-due-match-titolati-in-onda-su-espn_b4399ad1_original.html",
+      "final_html_file": "20260526_073751_003_wwe-clash-in-italy-due-match-titolati-in-onda-su-espn_b4399ad1_final.html",
+      "metadata_file": "20260526_073751_003_wwe-clash-in-italy-due-match-titolati-in-onda-su-espn_b4399ad1_metadata.json"
     }
   ]
 }

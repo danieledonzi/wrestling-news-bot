@@ -108,32 +108,5 @@
     "reason": "wp_down_initial_normal",
     "created_at": 1779777803.828816,
     "attempts": 0
-  },
-  {
-    "url": "https://www.wrestlinginc.com/2176982/bully-ray-brock-lesnar-wwe-return-retirement/",
-    "title": "Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'",
-    "semantic_id": "bully-ray-questions-why-brock-lesnar-returned-to-wwe-so-quickly-after-retirement",
-    "title_key": "bully-ray-questions-why-brock-lesnar-returned-so-quickly-retirement",
-    "score": 76,
-    "priority": "medium",
-    "event_key": "event:brock-lesnar-return",
-    "story_signature_v71": "stable:brock_lesnar|bully_ray|oba_femi|story|wwe",
-    "summary": "Bully Ray has some questions regarding why Brock Lesnar returned to WWE last night to attack Oba Femi, despite seemingly \"retiring\" a month ago",
-    "reasons": [
-      "concrete_outcome",
-      "discussion_value",
-      "v71 freshness=0.427"
-    ],
-    "score_reasons": [
-      "concrete_outcome",
-      "discussion_value",
-      "v71 freshness=0.427"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1779238760.0,
-    "status": "raw",
-    "reason": "wp_down_initial_normal",
-    "created_at": 1779752297.7499323,
-    "attempts": 0
   }
 ]
