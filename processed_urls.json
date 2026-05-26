@@ -263,6 +263,18 @@
     "updated_at": "1779742510.6391394",
     "url": "https://www.ringsidenews.com/bronson-reed-shows-off-massive-physique-during-wwe-absence/"
   },
+  "https://www.ringsidenews.com/buddy-matthews-locked-major-wsw-return-tour-across-australia-new-zealand": {
+    "extra": {
+      "event_key": "event:aew-grand-slam-2026-05-26",
+      "semantic_id": "buddy-matthews-locked-in-for-major-wsw-return-tour-across-australia-new-zealand"
+    },
+    "reason": "wordpress_publish_ok",
+    "score": null,
+    "status": "published",
+    "title": "Buddy Matthews confermato per il tour di World Series Wrestling in Australia e Nuova Zelanda",
+    "updated_at": "1779778300.6865246",
+    "url": "https://www.ringsidenews.com/buddy-matthews-locked-major-wsw-return-tour-across-australia-new-zealand/"
+  },
   "https://www.ringsidenews.com/buddy-matthews-returns-attacks-donovan-dijak-long-injury-layoff": {
     "extra": {
       "event_key": "",
@@ -552,6 +564,18 @@
     "title": "Final Betting Odds Released for WWE Saturday Night's Main Event",
     "updated_at": "1779563057.8406441",
     "url": "https://www.ringsidenews.com/final-betting-odds-released-wwe-saturday-nights-main-event/"
+  },
+  "https://www.ringsidenews.com/former-wrestling-star-golden-boy-jerry-grey-dead-62-long-battle-stage-4-cancer": {
+    "extra": {
+      "event_key": "",
+      "semantic_id": "former-wrestling-star-golden-boy-jerry-grey-dead-at-62-after-long-battle-with-stage-4-cancer"
+    },
+    "reason": "wordpress_publish_ok",
+    "score": null,
+    "status": "published",
+    "title": "È morto a 62 anni l'ex wrestler Jerry \"Golden Boy\" Grey",
+    "updated_at": "1779778322.2456422",
+    "url": "https://www.ringsidenews.com/former-wrestling-star-golden-boy-jerry-grey-dead-62-long-battle-stage-4-cancer/"
   },
   "https://www.ringsidenews.com/former-wwe-nxt-star-giovanni-vinci-arrives-tna-right-cedric-alexanders-title-win": {
     "extra": {

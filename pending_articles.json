@@ -29,64 +29,6 @@
     "attempts": 0
   },
   {
-    "url": "https://www.ringsidenews.com/buddy-matthews-locked-major-wsw-return-tour-across-australia-new-zealand/",
-    "title": "Buddy Matthews Locked In For Major WSW Return Tour Across Australia & New Zealand",
-    "semantic_id": "buddy-matthews-locked-in-for-major-wsw-return-tour-across-australia-new-zealand",
-    "title_key": "buddy-matthews-locked-major-wsw-return-tour-across-australia-zealand",
-    "score": 77,
-    "priority": "medium",
-    "event_key": "",
-    "story_signature_v71": "stable:buddy_matthews_locked_in_for_major|wsw_return_tour_across_australia|new_zealand|return|wrestling",
-    "summary": "Buddy Matthews is officially set for multiple upcoming World Series Wrestling events later this year as his comeback continues gaining momentum following a lengthy injury absence. World Series Wrestling confirmed that Matthews will appear during its October and November tour dates across Australia and New Zealand after shocking fans with his surprise return at the ... Read more",
-    "reasons": [
-      "concrete_outcome",
-      "hard_news",
-      "v71 source reliability soft penalty",
-      "v71 freshness=0.794"
-    ],
-    "score_reasons": [
-      "concrete_outcome",
-      "hard_news",
-      "v71 source reliability soft penalty",
-      "v71 freshness=0.794"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1779793767.0,
-    "status": "raw",
-    "reason": "wp_down_initial_normal",
-    "created_at": 1779777804.6257138,
-    "attempts": 0
-  },
-  {
-    "url": "https://www.ringsidenews.com/former-wrestling-star-golden-boy-jerry-grey-dead-62-long-battle-stage-4-cancer/",
-    "title": "Former Wrestling Star 'Golden Boy' Jerry Grey Dead at 62 After Long Battle With Stage 4 Cancer",
-    "semantic_id": "former-wrestling-star-golden-boy-jerry-grey-dead-at-62-after-long-battle-with-stage-4-cancer",
-    "title_key": "wrestling-star-golden-boy-jerry-grey-dead-62-long-battle-stage-4",
-    "score": 77,
-    "priority": "medium",
-    "event_key": "",
-    "story_signature_v71": "stable:former_wrestling_star|golden_boy|jerry_grey_dead|story|wrestling",
-    "summary": "The wrestling world is mourning the loss of former pro wrestler Jerry Grey, better known to fans as “Golden Boy” Jerry Grey, who has died at the age of 62. The news was announced by the Cauliflower Alley Club, which shared an emotional tribute honoring Grey and his decades-long connection to the wrestling business. The ... Read more",
-    "reasons": [
-      "concrete_outcome",
-      "hard_news",
-      "v71 source reliability soft penalty",
-      "v71 freshness=0.546"
-    ],
-    "score_reasons": [
-      "concrete_outcome",
-      "hard_news",
-      "v71 source reliability soft penalty",
-      "v71 freshness=0.546"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1779775415.0,
-    "status": "raw",
-    "reason": "wp_down_initial_normal",
-    "created_at": 1779763677.532332,
-    "attempts": 0
-  },
-  {
     "kind": "report",
     "url": "https://www.ringsidenews.com/wwe-raw-results-highlights-key-moments-may-25-2026/",
     "title": "WWE RAW Results, Highlights and Key Moments for May 25, 2026",

@@ -113,7 +113,7 @@
     ],
     "count": 13,
     "first_seen": "2026-05-21T16:04:55",
-    "last_seen": "2026-05-25T19:24:01"
+    "last_seen": "2026-05-26T06:50:55"
   },
   "return:mark-shapiro:wwe": {
     "titles": [
@@ -182,14 +182,16 @@
   },
   "return:buddy-matthews:general": {
     "titles": [
-      "20260515_134737_002_buddy-matthews-torna-a-sorpresa-e-attacca-donovan-dijak-a-wsw-rise-against_b3313d2a_original.html"
+      "20260515_134737_002_buddy-matthews-torna-a-sorpresa-e-attacca-donovan-dijak-a-wsw-rise-against_b3313d2a_original.html",
+      "Buddy Matthews Locked In For Major WSW Return Tour Across Australia & New Zealand"
     ],
     "facts": [
-      "official_return"
+      "official_return",
+      "official_date"
     ],
-    "count": 1,
+    "count": 2,
     "first_seen": "2026-05-21T16:04:55",
-    "last_seen": "2026-05-21T16:04:55"
+    "last_seen": "2026-05-26T06:51:42"
   },
   "return:trick-williams:wwe": {
     "titles": [
@@ -952,5 +954,276 @@
     "count": 1,
     "first_seen": "2026-05-25T19:26:15",
     "last_seen": "2026-05-25T19:26:15"
+  },
+  "event:wwe-snme-2026-05-26:20260515-022557-001-quote-scommesse-story": {
+    "titles": [
+      "20260515_022557_001_quote-scommesse-per-il-wwe-saturday-nights-main-event-del-23-maggio_4633_final.html"
+    ],
+    "facts": [
+      "wwe_impact",
+      "date:23 maggio",
+      "date_update"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T06:50:47",
+    "last_seen": "2026-05-26T06:50:47"
+  },
+  "report:roh-supercard-of-honor-2026-05-26": {
+    "titles": [
+      "20260515_224847_002_roh-supercard-of-honor-risultati-e-highlights-del-15-maggio-2026_4713_final.html",
+      "20260515_224848_002_roh-supercard-of-honor-risultati-e-highlights-del-15-maggio-2026_59339413_final.html",
+      "20260515_224848_002_roh-supercard-of-honor-risultati-e-highlights-del-15-maggio-2026_59339413_original.html"
+    ],
+    "facts": [
+      "date:15 maggio 2026",
+      "date_update"
+    ],
+    "count": 3,
+    "first_seen": "2026-05-26T06:50:47",
+    "last_seen": "2026-05-26T06:50:50"
+  },
+  "event:wwe-wrestlemania-2026-05-26:randy-orton-story": {
+    "titles": [
+      "20260517_175243_001_svelato-il-motivo-dellassenza-di-randy-orton-dopo-wrestlemania-42_4820_final.html",
+      "20260523_160409_001_joe-hendry-il-match-contro-randy-orton-a-wrestlemania-m-è-il-momento-più-alto-della-mia-ca_5185_final.html",
+      "20260517_175244_001_svelato-il-motivo-dell-assenza-di-randy-orton-dopo-wrestlemania-42_c9a8d335_final.html",
+      "20260517_175244_001_svelato-il-motivo-dell-assenza-di-randy-orton-dopo-wrestlemania-42_c9a8d335_original.html",
+      "20260523_160411_001_joe-hendry-il-match-contro-randy-orton-a-wrestlemania-41-il-momento-pi-alto-dell_930cb3a6_final.html",
+      "20260523_160411_001_joe-hendry-il-match-contro-randy-orton-a-wrestlemania-41-il-momento-pi-alto-dell_930cb3a6_original.html"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 6,
+    "first_seen": "2026-05-26T06:50:48",
+    "last_seen": "2026-05-26T06:50:54"
+  },
+  "event:wwe-wrestlemania-2026-05-26:20260519-114208-002-enzo-amore-story": {
+    "titles": [
+      "20260519_114208_002_enzo-amore-in-contatto-con-la-wwe-durante-la-settimana-di-wrestlemania-40_4915_final.html"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T06:50:48",
+    "last_seen": "2026-05-26T06:50:48"
+  },
+  "event:wwe-wrestlemania-2026-05-26:20260519-173819-001-i-dettagli-story": {
+    "titles": [
+      "20260519_173819_001_wrestlemania-42-i-dettagli-sui-piani-creativi-alternativi-della-wwe_4922_final.html"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T06:50:48",
+    "last_seen": "2026-05-26T06:50:48"
+  },
+  "event:wwe-wrestlemania-2026-05-26:20260519-173849-003-jelly-roll-story": {
+    "titles": [
+      "20260519_173849_003_wrestlemania-jelly-roll-voleva-un-ruolo-comico-nella-storyline_4928_final.html"
+    ],
+    "facts": [],
+    "count": 1,
+    "first_seen": "2026-05-26T06:50:48",
+    "last_seen": "2026-05-26T06:50:48"
+  },
+  "event:wwe-snme-2026-05-26:becky-lynch-story": {
+    "titles": [
+      "20260520_174056_002_wwe-il-match-tra-becky-lynch-e-sol-ruca-a-saturday-nights-main-event-non-sarà-per-il-titol_4990_final.html",
+      "20260524_013155_001_becky-lynch-furiosa-dopo-il-finale-contro-sol-ruca-a-saturday-nights-main-event_5201_final.html",
+      "20260524_102250_001_polemiche-tra-i-fan-per-il-finale-di-becky-lynch-vs-sol-ruca-a-saturday-nights-main-event_5225_final.html",
+      "20260520_174058_002_wwe-il-match-tra-becky-lynch-e-sol-ruca-a-saturday-night-s-main-event-non-sar-pe_75b388c5_final.html",
+      "20260520_174058_002_wwe-il-match-tra-becky-lynch-e-sol-ruca-a-saturday-night-s-main-event-non-sar-pe_75b388c5_original.html",
+      "20260524_013156_001_becky-lynch-furiosa-dopo-il-finale-contro-sol-ruca-a-saturday-night-s-main-event_1a45622f_final.html",
+      "20260524_013156_001_becky-lynch-furiosa-dopo-il-finale-contro-sol-ruca-a-saturday-night-s-main-event_1a45622f_original.html",
+      "20260524_102251_001_polemiche-tra-i-fan-per-il-finale-di-becky-lynch-vs-sol-ruca-a-saturday-night-s-_0ebba26d_original.html"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 8,
+    "first_seen": "2026-05-26T06:50:48",
+    "last_seen": "2026-05-26T06:50:55"
+  },
+  "event:wwe-snme-2026-05-26:penta-story": {
+    "titles": [
+      "20260524_013245_002_penta-difende-lintercontinental-championship-a-saturday-nights-main-event_5204_final.html",
+      "20260524_013247_002_penta-difende-l-intercontinental-championship-a-saturday-night-s-main-event_dac4b3ce_final.html",
+      "20260524_013247_002_penta-difende-l-intercontinental-championship-a-saturday-night-s-main-event_dac4b3ce_original.html"
+    ],
+    "facts": [],
+    "count": 3,
+    "first_seen": "2026-05-26T06:50:49",
+    "last_seen": "2026-05-26T06:50:54"
+  },
+  "event:wwe-snme-2026-05-26:charlotte-flair-story": {
+    "titles": [
+      "20260524_013335_003_problemi-con-labbigliamento-per-charlotte-flair-durante-wwe-saturday-nights-main-event_5207_final.html"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T06:50:49",
+    "last_seen": "2026-05-26T06:50:49"
+  },
+  "event:wwe-snme-2026-05-26:logan-paul-story": {
+    "titles": [
+      "20260524_183633_001_possibili-infortuni-per-logan-paul-e-sol-ruca-durante-il-saturday-nights-main-event_5240_final.html"
+    ],
+    "facts": [],
+    "count": 1,
+    "first_seen": "2026-05-26T06:50:50",
+    "last_seen": "2026-05-26T06:50:50"
+  },
+  "event:aew-double-or-nothing-2026-05-26:20260524-234037-001-divine-dominion-story": {
+    "titles": [
+      "20260524_234037_001_aew-double-or-nothing-divine-dominion-battono-zayda-steel-e-viva-van-nel-buy-in_5246_final.html"
+    ],
+    "facts": [],
+    "count": 1,
+    "first_seen": "2026-05-26T06:50:50",
+    "last_seen": "2026-05-26T06:50:50"
+  },
+  "report:wwe-snme-2026-05-26": {
+    "titles": [
+      "20260525_174107_001_wwe-saturday-nights-main-event-del-25-maggio-2026-risultati-e-momenti-salienti_5258_final.html"
+    ],
+    "facts": [
+      "wwe_impact",
+      "date:25 maggio 2026",
+      "date_update"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T06:50:50",
+    "last_seen": "2026-05-26T06:50:50"
+  },
+  "event:wwe-snme-2026-05-26:20260525-192614-002-del-23-story": {
+    "titles": [
+      "20260525_192614_002_wwe-saturday-nights-main-event-del-23-05-2026-i-vincitori-e-gli-sconfitti_5284_final.html"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T06:50:50",
+    "last_seen": "2026-05-26T06:50:50"
+  },
+  "event:wwe-wrestlemania-2026-05-26:20260516-164920-001-ted-dibiase-story": {
+    "titles": [
+      "20260516_164920_001_ted-dibiase-jr-risponde-alle-voci-sull-essere-stato-allontanato-dalla-sicurezza-_51937ce2_original.html"
+    ],
+    "facts": [
+      "official_return"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T06:50:50",
+    "last_seen": "2026-05-26T06:50:50"
+  },
+  "event:wwe-wrestlemania-2026-05-26:20260519-114210-002-enzo-amore-story": {
+    "titles": [
+      "20260519_114210_002_enzo-amore-in-contatto-con-la-wwe-durante-la-settimana-di-wrestlemania-40_eaec253f_final.html",
+      "20260519_114210_002_enzo-amore-in-contatto-con-la-wwe-durante-la-settimana-di-wrestlemania-40_eaec253f_original.html"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 2,
+    "first_seen": "2026-05-26T06:50:52",
+    "last_seen": "2026-05-26T06:50:52"
+  },
+  "event:wwe-wrestlemania-2026-05-26:20260519-173820-001-i-dettagli-story": {
+    "titles": [
+      "20260519_173820_001_wrestlemania-42-i-dettagli-sui-piani-creativi-alternativi-della-wwe_3435c347_final.html",
+      "20260519_173820_001_wrestlemania-42-i-dettagli-sui-piani-creativi-alternativi-della-wwe_3435c347_original.html"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 2,
+    "first_seen": "2026-05-26T06:50:52",
+    "last_seen": "2026-05-26T06:50:52"
+  },
+  "event:wwe-wrestlemania-2026-05-26:20260519-173851-003-jelly-roll-story": {
+    "titles": [
+      "20260519_173851_003_wrestlemania-jelly-roll-voleva-un-ruolo-comico-nella-storyline_6afc1adb_final.html",
+      "20260519_173851_003_wrestlemania-jelly-roll-voleva-un-ruolo-comico-nella-storyline_6afc1adb_original.html"
+    ],
+    "facts": [],
+    "count": 2,
+    "first_seen": "2026-05-26T06:50:52",
+    "last_seen": "2026-05-26T06:50:52"
+  },
+  "event:wwe-wrestlemania-2026-05-26:nikki-bella-story": {
+    "titles": [
+      "20260521_065232_001_nikki-bella-il-rientro-in-wwe-dipende-dalla-caviglia_dc961199_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T06:50:53",
+    "last_seen": "2026-05-26T06:50:53"
+  },
+  "event:wwe-backlash-2026-05-26:triple-h-debut": {
+    "titles": [
+      "20260521_211337_002_sol-ruca-svela-il-supporto-di-triple-h-dopo-le-critiche-al-suo-debutto-a-raw_cb26c12d_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "brand_show",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T06:50:54",
+    "last_seen": "2026-05-26T06:50:54"
+  },
+  "event:wwe-snme-2026-05-26:logan-paul-injury": {
+    "titles": [
+      "20260524_183635_001_possibili-infortuni-per-logan-paul-e-sol-ruca-durante-il-saturday-night-s-main-e_74aa5ee8_original.html"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T06:50:55",
+    "last_seen": "2026-05-26T06:50:55"
+  },
+  "event:aew-double-or-nothing-2026-05-26:20260524-234038-001-spoiler-divine-story": {
+    "titles": [
+      "20260524_234038_001_spoiler-aew-double-or-nothing-divine-dominion-battono-zayda-steel-e-viva-van-nel_ac4b80a6_final.html",
+      "20260524_234038_001_spoiler-aew-double-or-nothing-divine-dominion-battono-zayda-steel-e-viva-van-nel_ac4b80a6_original.html"
+    ],
+    "facts": [],
+    "count": 2,
+    "first_seen": "2026-05-26T06:50:55",
+    "last_seen": "2026-05-26T06:50:55"
+  },
+  "event:aew-double-or-nothing-2026-05-26:20260525-174550-002-beth-copeland-story": {
+    "titles": [
+      "20260525_174550_002_beth-copeland-commenta-il-suo-ritorno-a-aew-double-or-nothing_13d38c6f_final.html",
+      "20260525_174550_002_beth-copeland-commenta-il-suo-ritorno-a-aew-double-or-nothing_13d38c6f_original.html"
+    ],
+    "facts": [
+      "official_return"
+    ],
+    "count": 2,
+    "first_seen": "2026-05-26T06:50:55",
+    "last_seen": "2026-05-26T06:50:55"
+  },
+  "event:wwe-snme-2026-05-26:20260525-192615-002-s-main-story": {
+    "titles": [
+      "20260525_192615_002_wwe-saturday-night-s-main-event-del-23-05-2026-i-vincitori-e-gli-sconfitti_e4c8ac47_final.html",
+      "20260525_192615_002_wwe-saturday-night-s-main-event-del-23-05-2026-i-vincitori-e-gli-sconfitti_e4c8ac47_original.html"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 2,
+    "first_seen": "2026-05-26T06:50:55",
+    "last_seen": "2026-05-26T06:50:55"
   }
 }

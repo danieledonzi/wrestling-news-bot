@@ -1,12 +1,30 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-26 06:42:53",
-  "bot_version": "v90_2_6_2_clean_consolidated_source (74a7c51)",
-  "git_sha": "74a7c51d4fdfc713f9f9234bbc68fbdfbc1cf2c8",
-  "created_at": "2026-05-26T06:43:30",
-  "published_count": 0,
-  "published_post_ids": [],
-  "published_artifacts": [],
+  "run_id": "2026-05-26 06:50:17",
+  "bot_version": "v90_2_6_2_clean_consolidated_source (b10a446)",
+  "git_sha": "b10a44674ad27395015ec0a00198a697f02cb200",
+  "created_at": "2026-05-26T06:52:24",
+  "published_count": 2,
+  "published_post_ids": [
+    "5299",
+    "5302"
+  ],
+  "published_artifacts": [
+    {
+      "post_id": 5299,
+      "title": "Buddy Matthews confermato per il tour di World Series Wrestling in Australia e Nuova Zelanda",
+      "source_url": "https://www.ringsidenews.com/buddy-matthews-locked-major-wsw-return-tour-across-australia-new-zealand/",
+      "html_file": "published/20260526_065140_001_buddy-matthews-confermato-per-il-tour-di-world-series-wrestling-in-australia-e-nuova-zelan_5299_final.html",
+      "metadata_file": "published/20260526_065140_001_buddy-matthews-confermato-per-il-tour-di-world-series-wrestling-in-australia-e-nuova-zelan_5299_metadata.json"
+    },
+    {
+      "post_id": 5302,
+      "title": "È morto a 62 anni l'ex wrestler Jerry \"Golden Boy\" Grey",
+      "source_url": "https://www.ringsidenews.com/former-wrestling-star-golden-boy-jerry-grey-dead-62-long-battle-stage-4-cancer/",
+      "html_file": "published/20260526_065202_002_è-morto-a-62-anni-lex-wrestler-jerry-golden-boy-grey_5302_final.html",
+      "metadata_file": "published/20260526_065202_002_è-morto-a-62-anni-lex-wrestler-jerry-golden-boy-grey_5302_metadata.json"
+    }
+  ],
   "errors": [],
   "master_log": "logs/master_log.log",
   "master_events": "logs/master_log_events.jsonl",
