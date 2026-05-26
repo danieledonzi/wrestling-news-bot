@@ -1,4 +1,4 @@
-name: OpenWrestlingTV Bot v91.5
+name: OpenWrestlingTV Bot v92
 
 on:
   workflow_dispatch:
@@ -7,30 +7,21 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
-  issues: write
   actions: read
 
 env:
   BOT_ARTIFACT_PATHS: |
+    logs/
+    state/
     published/
     published_html_review/
-    manual_review/
-    logs/
-    pending_articles.json
-    history.txt
-    history.json
-    confirmed_published_reports.json
     review_bundle_latest.zip
-    soft_pool.json
-    v90_2_event_cores.json
-    processed_urls.json
-    article_analysis_cache_v91.json
+    .bot_exit_code
 
 jobs:
   run-bot:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 15
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -53,67 +44,31 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-      - name: Consolidate and clean bot source
+      - name: Verify v92 source
         run: |
           set -e
-          python scripts/consolidate_source_v90_2_6_1.py
-          python scripts/cleanup_boot_version_v90_2_6_2.py
-          python scripts/apply_bot_patch_v90_2_7.py
-          python -m py_compile bot.py
-          if ! git diff --quiet -- bot.py; then
-            git add bot.py
-            git commit -m "chore(bot): persist v91.5 runtime source"
-            git pull --rebase || echo "[v91.5] Warning: pull --rebase non riuscito, provo push diretto"
-            git push || echo "[v91.5] Warning: push consolidamento fallito, continuo la run bot"
-          else
-            echo "[v91.5] bot.py gia aggiornato nel repository"
-          fi
-
-      - name: Verify consolidated source
-        run: |
-          set -e
-          python -m json.tool config/event_registry.json >/dev/null
-          python -m py_compile bot.py
+          python -m json.tool config/reports_v92.json >/dev/null
+          python -m json.tool config/feeds_v92.json >/dev/null
+          python -m json.tool config/categories_v92.json >/dev/null
+          python -m py_compile bot_v92.py
           python - <<'PY'
           from pathlib import Path
-          text = Path('bot.py').read_text(encoding='utf-8')
+          text = Path('bot_v92.py').read_text(encoding='utf-8')
           required = [
-              'v90.2.1: report dedupe protection',
-              'v90.2.2: report flow tuning',
-              'v90.2.3: social embed quote positioning',
-              'v90.2.3.1: inline image dict normalization',
-              'v90.2.4: offline pending hard-skip guard',
-              'v90.2.4.1 report hard title',
-              'v90.2.4.2 report casing guard',
-              'v90.2.5 processed URL hard-skip',
-              'v90.2.5.1 processed skip recorder',
-              'v90.2.5.2 processed competitive guard',
-              'v90.2.5.3 SNME event and publish processed guards',
-              'v90.2.5.3.1 tighten SNME and publish guards',
-              'v90.2.5.4 event registry',
-              'v90.2.5.4.1 event registry report key',
-              'v90.2.6.1 true source consolidation',
-              'v90.2.6.2 clean consolidated boot/version',
-              'v90.2.7 central story core assignment',
-              'v91 authoritative editorial pipeline refactor',
-              'v91.1 score return contract guard',
-              'v91.2 publish contract and authoritative lane guard',
-              'v91.3 corrected v723 parser',
-              'v91.4 publish processed and soft pool repair',
-              'v91.4.1 strict publish return tuple contract',
-              'v91.5 html integrity and block-safe repair guard',
-              'v91.5.1 final strict publish return guard',
-              'v91.5.2 final safe print recursion guard',
+              'v92_0_clean_split_pipeline_bootstrap',
+              'run_report_pipeline',
+              'run_news_pipeline',
+              'build_report_title',
+              'MAX_REPORTS_PER_RUN',
+              'MAX_NEWS_PER_RUN',
           ]
           missing = [m for m in required if m not in text]
           if missing:
-              raise SystemExit('[SOURCE CONSOLIDATION v91.5] missing markers: ' + ', '.join(missing))
-          if 'v91_5_html_integrity_block_safe_repair' not in text:
-              raise SystemExit('[SOURCE CONSOLIDATION v91.5] version marker mancante')
-          print('[SOURCE CONSOLIDATION v91.5] bot.py contiene HTML integrity + publish return + safe print guard')
+              raise SystemExit('[V92 VERIFY] missing markers: ' + ', '.join(missing))
+          print('[V92 VERIFY] bot_v92.py ok')
           PY
 
-      - name: Run bot v91_5
+      - name: Run bot v92
         id: run_bot
         env:
           WP_USER: ${{ secrets.WP_USER }}
@@ -121,79 +76,40 @@ jobs:
           WP_URL: ${{ secrets.WP_URL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL_CHAIN: gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
-          V90_2_1_ENABLED: "1"
-          V90_2_2_ENABLED: "1"
-          V90_2_2_REPORT_NO_INLINE_IMAGES: "1"
-          V90_2_2_POST_REPORT_UNSPOILER_ENABLED: "1"
-          V90_2_2_TRANSLATE_REPORT_CHAIN: gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-pro
-          V90_2_3_ENABLED: "1"
-          V90_2_3_SOCIAL_QUOTE_ENABLED: "1"
-          V90_2_4_ENABLED: "1"
-          V90_2_4_OFFLINE_PENDING_GUARD_ENABLED: "1"
-          V90_2_4_MIN_OFFLINE_PENDING_SCORE: "75"
-          V90_2_4_MIN_OFFLINE_PENDING_FRESHNESS: "0.45"
-          V90_2_5_ENABLED: "1"
-          V90_2_5_PROCESSED_FILE: processed_urls.json
-          V90_2_5_1_ENABLED: "1"
-          V90_2_5_2_ENABLED: "1"
-          V90_2_5_2_HIGH_SCORE_PROTECT: "85"
-          V90_2_5_2_LOW_SCORE_FINAL_MAX: "54"
-          V90_2_5_3_ENABLED: "1"
-          V90_2_5_3_SNME_FLOOR: "82"
-          V90_2_5_3_1_ENABLED: "1"
-          V90_2_5_4_ENABLED: "1"
-          V90_2_5_4_REGISTRY_PATH: config/event_registry.json
-          V90_2_5_4_REPORT_FLOOR: "82"
-          V90_2_5_4_HARD_NEWS_FLOOR: "85"
-          V90_2_5_4_1_ENABLED: "1"
-          V90_2_7_ENABLED: "1"
-          V91_ENABLED: "1"
-          V91_1_ENABLED: "1"
-          V91_2_ENABLED: "1"
-          V91_3_ENABLED: "1"
-          V91_4_ENABLED: "1"
-          V91_4_1_ENABLED: "1"
-          V91_5_ENABLED: "1"
-          V91_5_1_ENABLED: "1"
-          V91_5_2_ENABLED: "1"
-          V91_ANALYSIS_CACHE_FILE: article_analysis_cache_v91.json
-          V91_4_RECONCILE_PUBLISHED_ENABLED: "1"
-          V91_4_SOFT_POOL_CLEANUP_ENABLED: "1"
-          V91_5_BLOCK_FREE_REPAIR: "1"
-          V91_5_HTML_GUARD_ENABLED: "1"
-          V91_5_LISTICLE_HARD_SKIP_ENABLED: "1"
-          V91_5_MANUAL_REVIEW_DIR: manual_review
+          V92_MAX_REPORTS_PER_RUN: "1"
+          V92_MAX_NEWS_PER_RUN: "3"
         run: |
           set +e
-          python bot.py
+          python bot_v92.py
           status=$?
           echo "$status" > .bot_exit_code
           exit 0
 
-      - name: Persist runtime files
+      - name: Persist v92 runtime files
         if: always()
-        run: bash scripts/persist_runtime_files.sh
+        run: |
+          set -e
+          git add logs/ state/ .bot_exit_code || true
+          if ! git diff --cached --quiet; then
+            git commit -m "chore(v92): persist runtime state"
+            git pull --rebase || echo "[v92] Warning: pull --rebase non riuscito, provo push diretto"
+            git push || echo "[v92] Warning: push persistenza fallito"
+          else
+            echo "[v92] Nessun runtime file da persistere"
+          fi
 
       - name: Upload bot artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: owtv-bot-artifacts-${{ github.run_id }}
+          name: owtv-v92-artifacts-${{ github.run_id }}
           if-no-files-found: warn
           path: |
+            logs/
+            state/
             published/
             published_html_review/
-            manual_review/
-            logs/
-            pending_articles.json
-            history.txt
-            history.json
-            confirmed_published_reports.json
             review_bundle_latest.zip
-            soft_pool.json
-            v90_2_event_cores.json
-            processed_urls.json
-            article_analysis_cache_v91.json
             .bot_exit_code
 
       - name: Fail job if bot failed
@@ -204,6 +120,6 @@ jobs:
             code=$(cat .bot_exit_code)
           fi
           if [ "$code" != "0" ]; then
-            echo "[BOT v91.5] Bot terminato con exit code $code"
+            echo "[BOT v92] Bot terminato con exit code $code"
             exit "$code"
           fi
