@@ -1,5 +1,63 @@
 [
   {
+    "url": "https://www.ringsidenews.com/wwe-raw-results-highlights-key-moments-may-25-2026/",
+    "title": "WWE RAW Results, Highlights and Key Moments for May 25, 2026",
+    "semantic_id": "wwe-raw-results-highlights-and-key-moments-for-may-25-2026",
+    "title_key": "raw-results-highlights-key-moments-may-25",
+    "score": 77,
+    "priority": "medium",
+    "event_key": "report:wwe-clash-2026-05-26",
+    "story_signature_v71": "report:wwe-clash-2026-05-26",
+    "summary": "Tonight’s WWE RAW airing May 25, 2026, promises an action-packed night live from the Schottenstein Center in Columbus, Ohio. The post-WWE Saturday Night Main Event and WWE Clash In Italy go-home show sees WWE World Heavyweight Champion “The OTC” Roman Reigns and “The Samoan Werewolf” Jacob Fatu sign their Clash In Italy contract for Tribal ... Read more",
+    "reasons": [
+      "event_report",
+      "concrete_outcome",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.607"
+    ],
+    "score_reasons": [
+      "event_report",
+      "concrete_outcome",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.607"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1779773460.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1779777806.8120072,
+    "attempts": 0
+  },
+  {
+    "url": "https://www.ringsidenews.com/buddy-matthews-locked-major-wsw-return-tour-across-australia-new-zealand/",
+    "title": "Buddy Matthews Locked In For Major WSW Return Tour Across Australia & New Zealand",
+    "semantic_id": "buddy-matthews-locked-in-for-major-wsw-return-tour-across-australia-new-zealand",
+    "title_key": "buddy-matthews-locked-major-wsw-return-tour-across-australia-zealand",
+    "score": 77,
+    "priority": "medium",
+    "event_key": "",
+    "story_signature_v71": "stable:buddy_matthews_locked_in_for_major|wsw_return_tour_across_australia|new_zealand|return|wrestling",
+    "summary": "Buddy Matthews is officially set for multiple upcoming World Series Wrestling events later this year as his comeback continues gaining momentum following a lengthy injury absence. World Series Wrestling confirmed that Matthews will appear during its October and November tour dates across Australia and New Zealand after shocking fans with his surprise return at the ... Read more",
+    "reasons": [
+      "concrete_outcome",
+      "hard_news",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.794"
+    ],
+    "score_reasons": [
+      "concrete_outcome",
+      "hard_news",
+      "v71 source reliability soft penalty",
+      "v71 freshness=0.794"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1779793767.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1779777804.6257138,
+    "attempts": 0
+  },
+  {
     "url": "https://www.ringsidenews.com/former-wrestling-star-golden-boy-jerry-grey-dead-62-long-battle-stage-4-cancer/",
     "title": "Former Wrestling Star 'Golden Boy' Jerry Grey Dead at 62 After Long Battle With Stage 4 Cancer",
     "semantic_id": "former-wrestling-star-golden-boy-jerry-grey-dead-at-62-after-long-battle-with-stage-4-cancer",
@@ -83,6 +141,31 @@
       }
     ],
     "story_signature_v71": "report:wwe-clash-2026-05-25"
+  },
+  {
+    "url": "https://www.wrestlinginc.com/2180772/wwe-raw-may-25-intercontinental-title-up-for-grabs-oba-femi-appears-more/",
+    "title": "WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More",
+    "semantic_id": "wwe-raw-results-525-intercontinental-title-up-for-grabs-oba-femi-appears-more",
+    "title_key": "raw-results-5-25-intercontinental-up-grabs-oba-femi-appears-more",
+    "score": 76,
+    "priority": "medium",
+    "event_key": "report:wwe-raw-2026-05-25",
+    "story_signature_v71": "stable:report_wwe-raw-2026-05-25",
+    "summary": "This is Wrestling Inc.'s results for \"WWE Raw\" on May 25, 2026, with Penta defending his Intercontinental Championship against Je'Von Evans!",
+    "reasons": [
+      "concrete_outcome",
+      "v71 freshness=0.513"
+    ],
+    "score_reasons": [
+      "concrete_outcome",
+      "v71 freshness=0.513"
+    ],
+    "is_breaking": false,
+    "breaking_expires_at": 1779771454.0,
+    "status": "raw",
+    "reason": "wp_down_initial_normal",
+    "created_at": 1779777803.828816,
+    "attempts": 0
   },
   {
     "url": "https://www.wrestlinginc.com/2180807/wwe-raw-dragon-lee-rey-mysterio-rusev-returns-aid/",

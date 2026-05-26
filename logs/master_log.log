@@ -3561,3 +3561,170 @@ ValueError: too many values to unpack (expected 2)
 [RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
 ===== RUN END [2026-05-26 02:47:01] VERSION [v90_2_6_2_clean_consolidated_source (a8f6aab)] =====
 
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.7] Central story core assignment attivo
+[BOOT v90.2.7.1] Core authority hotfix attiva
+[BOOT v90.2.7.2] Queue type contract + report source guard attivi
+[BOOT v90.2.8] Feed-level processed URL hard skip attivo
+[BOOT v91] Authoritative editorial pipeline refactor attivo
+[BOOT v91.1] Score return contract guard attivo
+[BOOT v91.2] Publish contract + authoritative lane guard attivo
+[BOOT v91.3] v723 parser corrected
+[BOOT v91.4] Publish processed + soft pool repair attivi
+[BOOT v91.4.1] Strict publish return tuple contract attivo
+[BOOT v91.5] HTML integrity guard + block-safe repair policy attivi
+[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1
+
+===== RUN START [2026-05-26 06:42:53] VERSION [v90_2_6_2_clean_consolidated_source (74a7c51)] =====
+[PROCESSED v91.4] Published artifact reconcile: scanned=185 fixed=0
+[SOFTPOOL v91.4] cleanup keep=1 expired=1 migrated=0
+[PROCESSED v90.2.5.2] Migrati record non-final competitivi: 16
+[PROCESSED v90.2.5] Loaded processed URL records: 251
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API timeout | tentativo 1/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7ff003472ad0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Health check API timeout | tentativo 2/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7ff0034739d0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] Health check API timeout | tentativo 3/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7ff0034347d0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP] WordPress/API non disponibile dopo 3 tentativi: api_timeout: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7ff0034347d0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - LA Knight Announces Return Of King & Queen Of The Ring On WWE Raw
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - LA Knight Announces Return Of King & Queen Of The Ring On WWE Raw
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:wwe-king-and-queen-of-the-ring-2026-05-26:la-knight-return-king-queen-story - LA Knight Announces Return Of King & Queen Of The Ring On WWE Raw
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[SCORE v86.9] Cap commentary/opinion 100->68 - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91 AI] cache hit - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=bully-ray-questions-why-brock-lesnar-returned-so-quickly-retirement - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91.1 CHEAP] hard skip score=20 reasons=['deterministic_soft_trash'] - WWE's Jordynne Grace Working To Get Pilot's License For Charitable Cause
+[SKIP] Score sotto soglia editoriale (14/75): WWE's Jordynne Grace Working To Get Pilot's License For Charitable Cause
+[V91 AI] cache hit - JBL On WWE Cutting Contracts: 'That's Life'
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:wwe-wrestlemania-2026-05-26:jbl-cutting-contracts-that-s-story - JBL On WWE Cutting Contracts: 'That's Life'
+[V91 AI] cache hit - AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=s-swerve-strickland-says-young-bucks-changed-their-minds-anarchy - AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176831/aew-athena-roh-womens-world-title-wwe-roman-reigns/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176730/swerve-strickland-criticizes-darby-allin-aew-world-title/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176685/jelly-roll-more-comedic-wwe-wrestlemania-storyline/
+[V91 AI] cache hit - Penta And Rey Mysterio Agree To Future Intercontinental Championship Match On WWE Raw
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:wwe-wrestlemania-2026-05-26:penta-story - Penta And Rey Mysterio Agree To Future Intercontinental Championship Match On WWE Raw
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176571/wwe-wrestlemania-42-cm-punk-bron-breakker-roman-reigns-cody-rhodes-alternate-creative-plans-backstage-report/
+[V91 AI] cache hit - Charlotte Flair, The Miz & Others Set For Meet & Greets At UFC Freedom 250
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=charlotte-flair-miz-others-set-meet-greets-freedom-250-during - Charlotte Flair, The Miz & Others Set For Meet & Greets At UFC Freedom 250
+[SKIP] Score sotto soglia editoriale (70/75): Charlotte Flair, The Miz & Others Set For Meet & Greets At UFC Freedom 250
+[V91 AI] cache hit - WWE's Stephanie McMahon Reveals How To Tell Whether She's Going To Slap Someone
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=s-stephanie-mcmahon-reveals-how-tell-whether-she-s-going - WWE's Stephanie McMahon Reveals How To Tell Whether She's Going To Slap Someone
+[V91 AI] cache hit - TNA's Leon Slater Can't Believe He Has Support Of 'Wrestling Uncles'
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=s-leon-slater-can-t-believe-he-has-support-wrestling - TNA's Leon Slater Can't Believe He Has Support Of 'Wrestling Uncles'
+[V91 AI] cache hit - Tony Khan Calls AEW Star 'Ultimate Fighting Champion'
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=tony-khan-calls-star-ultimate-fighting-champion-tony-khan-has - Tony Khan Calls AEW Star 'Ultimate Fighting Champion'
+[V91 AI] cache hit - Swerve Strickland Comments On Possibility Of The New Day Coming To AEW
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=swerve-strickland-comments-possibility-day-coming-swerve-strickland-has-discussed - Swerve Strickland Comments On Possibility Of The New Day Coming To AEW
+[V91 AI] cache hit - WWE's Finn Balor Says He Wants To Keep Wrestling But Regrets Absence From Family
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=s-finn-balor-says-he-wants-keep-wrestling-but-regrets - WWE's Finn Balor Says He Wants To Keep Wrestling But Regrets Absence From Family
+[SCORE v81.1] Cap light name-driven item 63->63 - Former WWE Star Recalls Being Re-Hired After Vince McMahon Forgot About Firing Him
+[V91 AI] cache hit - Former WWE Star Recalls Being Re-Hired After Vince McMahon Forgot About Firing Him
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=star-recalls-being-re-hired-vince-mcmahon-forgot-about-firing - Former WWE Star Recalls Being Re-Hired After Vince McMahon Forgot About Firing Him
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:wwe-raw-2026-05-25 - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[V91 AI] cache hit - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=raw-results-5-25-intercontinental-up-grabs-oba-femi-appears - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[V91.5 HARD SKIP] listicle/opinion automatico escluso: AEW Double Or Nothing 2026: Biggest Winners And Losers
+[V91.1 CHEAP] hard skip score=20 reasons=['discussion_value_signal', 'event_registry_match', 'v91_5_hard_skip_listicle_opinion'] - AEW Double Or Nothing 2026: Biggest Winners And Losers
+[SKIP] Score sotto soglia editoriale (20/75): AEW Double Or Nothing 2026: Biggest Winners And Losers
+[V91.5 HARD SKIP] listicle/opinion automatico escluso: AEW Double Or Nothing 2026: 3 Things We Hated & 3 Things We Loved
+[V91.1 CHEAP] hard skip score=20 reasons=['discussion_value_signal', 'event_registry_match', 'v91_5_hard_skip_listicle_opinion'] - AEW Double Or Nothing 2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (14/75): AEW Double Or Nothing 2026: 3 Things We Hated & 3 Things We Loved
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[V91 AI] cache hit - Buddy Matthews Locked In For Major WSW Return Tour Across Australia & New Zealand
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=buddy-matthews-locked-major-wsw-return-tour-across-australia-zealand - Buddy Matthews Locked In For Major WSW Return Tour Across Australia & New Zealand
+[V91 AI] cache hit - Danhausen's Knicks Curse Somehow Worked Again During NBA Playoff Run
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=danhausen-s-knicks-curse-somehow-worked-again-during-nba-playoff - Danhausen's Knicks Curse Somehow Worked Again During NBA Playoff Run
+[V91 AI] cache hit - WWE Loading ESPN Broadcast of Clash in Italy With High-Profile Matches
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:wwe-clash-2026-05-26:jade-cargill-story - WWE Loading ESPN Broadcast of Clash in Italy With High-Profile Matches
+[V91 AI] cache hit - Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:wwe-clash-2026-05-25:roman-reigns-story - Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW
+[FRESHNESS v86.8/legacy] Post-show outcome rescue: non tratto come preview scaduta - WWE Announces Return Of King & Queen Of The Ring Tournaments During 5/25 RAW
+[V91 AI] cache hit - WWE Announces Return Of King & Queen Of The Ring Tournaments During 5/25 RAW
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:wwe-king-and-queen-of-the-ring-2026-05-25:return-king-queen-ring-tournaments-story - WWE Announces Return Of King & Queen Of The Ring Tournaments During 5/25 RAW
+[V91 AI] cache hit - WWE Confirms Logan Paul Will Be Out Of Action For Months With Injury During 5/25 RAW
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=event:wwe-snme-2026-05-25:logan-paul-injury - WWE Confirms Logan Paul Will Be Out Of Action For Months With Injury During 5/25 RAW
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 55->55 - WWE RAW Spoiler Lineup for May 25, 2026: Full Match Card and Backstage Notes Revealed
+[SCORE v81.1] Cap future card announcement 55->55 - WWE RAW Spoiler Lineup for May 25, 2026: Full Match Card and Backstage Notes Revealed
+[V91 AI] cache hit - WWE RAW Spoiler Lineup for May 25, 2026: Full Match Card and Backstage Notes Revealed
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=raw-spoiler-lineup-may-25-full-card-backstage-notes-raw - WWE RAW Spoiler Lineup for May 25, 2026: Full Match Card and Backstage Notes Revealed
+[SKIP] Score sotto soglia editoriale (71/75): WWE RAW Spoiler Lineup for May 25, 2026: Full Match Card and Backstage Notes Revealed
+[V91 AI] cache hit - Brock Lesnar Calls Himself Retired During 5/25 WWE RAW
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:wwe-wrestlemania-2026-05-25:brock-lesnar-return - Brock Lesnar Calls Himself Retired During 5/25 WWE RAW
+[SKIP] Score sotto soglia editoriale (71/75): Brock Lesnar Calls Himself Retired During 5/25 WWE RAW
+[V91 AI] cache hit - Former Wrestling Star 'Golden Boy' Jerry Grey Dead at 62 After Long Battle With Stage 4 Cancer
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=wrestling-star-golden-boy-jerry-grey-dead-62-long-battle - Former Wrestling Star 'Golden Boy' Jerry Grey Dead at 62 After Long Battle With Stage 4 Cancer
+[EVENTREG v90.2.5.4.1] report key da registry: report:wwe-clash-2026-05-26
+[REPORT v86.8/legacy] True results report non confermato da WordPress: rivaluto report:wwe-clash-2026-05-26 - WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[V91 AI] cache hit - WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=report:wwe-clash-2026-05-26 - WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[V91 AI] cache hit - Enzo Amore Pulling Back From Indie Bookings Amid WWE Reunion Talk
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=enzo-amore-pulling-back-indie-bookings-amid-reunion-talk-speculation - Enzo Amore Pulling Back From Indie Bookings Amid WWE Reunion Talk
+[V91 AI] cache hit - Sirena Linton Burns Old Ring Gear in Free Agent Vignette After WWE Release
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=sirena-linton-burns-old-ring-gear-free-agent-vignette-release - Sirena Linton Burns Old Ring Gear in Free Agent Vignette After WWE Release
+[V91 AI] cache hit - Live Fan Footage Confirms Jack Perry's AEW Double or Nothing Bus Crash Wasn't Pre-Taped
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:aew-double-or-nothing-2026-05-26:jack-perry-story - Live Fan Footage Confirms Jack Perry's AEW Double or Nothing Bus Crash Wasn't Pre-Taped
+[V91 AI] cache hit - Netflix Executive Explains Why WWE Chose Italy for Clash in Italy Premium Live Event
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:wwe-clash-2026-05-26:netflix-executive-explains-why-chose-story - Netflix Executive Explains Why WWE Chose Italy for Clash in Italy Premium Live Event
+[SKIP] Score sotto soglia editoriale (71/75): Netflix Executive Explains Why WWE Chose Italy for Clash in Italy Premium Live Event
+[V91 AI] cache hit - FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:aew-double-or-nothing-2026-05-26:ftr-approaching-contract-option-year-story - FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest
+[SCORE] 77 medium - Buddy Matthews Locked In For Major WSW Return Tour Across Australia & New Zealand | concrete_outcome, hard_news, v71 source reliability soft penalty, v71 freshness=0.794
+[SCORE] 77 medium - WWE Confirms Logan Paul Will Be Out Of Action For Months With Injury During 5/25 RAW | event_related, concrete_outcome, hard_news, v71 source reliability soft penalty, v71 freshness=0.621
+[SCORE] 77 medium - Former Wrestling Star 'Golden Boy' Jerry Grey Dead at 62 After Long Battle With Stage 4 Cancer | concrete_outcome, hard_news, v71 source reliability soft penalty, v71 freshness=0.497
+[SCORE] 77 medium - WWE RAW Results, Highlights and Key Moments for May 25, 2026 | event_report, concrete_outcome, v71 source reliability soft penalty, v71 freshness=0.607
+[SCORE] 76 medium - LA Knight Announces Return Of King & Queen Of The Ring On WWE Raw | event_related, concrete_outcome, v71 freshness=0.662
+[SCORE] 76 medium - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement' | concrete_outcome, v71 freshness=0.427
+[SCORE] 76 medium - JBL On WWE Cutting Contracts: 'That's Life' | event_related, concrete_outcome, v71 freshness=0.427
+[SCORE] 76 medium - Penta And Rey Mysterio Agree To Future Intercontinental Championship Match On WWE Raw | event_related, concrete_outcome, v71 freshness=0.542
+[SCORE] 76 medium - Former WWE Star Recalls Being Re-Hired After Vince McMahon Forgot About Firing Him | concrete_outcome, v71 freshness=0.538
+[SCORE] 76 medium - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More | concrete_outcome, v71 freshness=0.513
+[REPORT v86.9] Priorita true-results in coda: report:wwe-clash-2026-05-26 - WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[BOT] WordPress offline: assegno score e salvo solo i candidati che sarebbero stati pubblicati, senza chiamare Gemini.
+[REPORT v86.6] History true-results override: rimossi 17 record da urls
+[REPORT v86.6] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.6] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.6] History true-results override: rimossi 15 record da event_keys
+[PENDING v90.2.4] Hard skip offline pending: freshness insufficiente - WWE Confirms Logan Paul Will Be Out Of Action For Months With Injury During 5/25 RAW
+[PENDING v90.2.4] Hard skip offline pending: freshness insufficiente - JBL On WWE Cutting Contracts: 'That's Life'
+[PENDING v90.2.4] Hard skip offline pending: core gia coperto senza major update - Former WWE Star Recalls Being Re-Hired After Vince McMahon Forgot About Firing Him
+[PENDING v90.2.4] Hard skip offline pending: score basso 71 - Danhausen's Knicks Curse Somehow Worked Again During NBA Playoff Run
+[PENDING v90.2.4] Hard skip offline pending: score basso 71 - WWE Loading ESPN Broadcast of Clash in Italy With High-Profile Matches
+[PENDING v90.2.4] Hard skip offline pending: score basso 71 - Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW
+[PENDING v90.2.4] Hard skip offline pending: score basso 71 - WWE Announces Return Of King & Queen Of The Ring Tournaments During 5/25 RAW
+[PENDING v90.2.4] Hard skip offline pending: score basso 71 - Enzo Amore Pulling Back From Indie Bookings Amid WWE Reunion Talk
+[PENDING v90.2.4] Hard skip offline pending: score basso 71 - Sirena Linton Burns Old Ring Gear in Free Agent Vignette After WWE Release
+[PENDING v90.2.4] Hard skip offline pending: score basso 71 - Live Fan Footage Confirms Jack Perry's AEW Double or Nothing Bus Crash Wasn't Pre-Taped
+[PENDING v90.2.4] Hard skip offline pending: score basso 71 - FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest
+[PENDING v90.2.4] Hard skip offline pending: score basso 70 - AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena
+[PENDING v90.2.4] Hard skip offline pending: score basso 70 - WWE's Stephanie McMahon Reveals How To Tell Whether She's Going To Slap Someone
+[PENDING v90.2.4] Hard skip offline pending: score basso 70 - TNA's Leon Slater Can't Believe He Has Support Of 'Wrestling Uncles'
+[PENDING v90.2.4] Hard skip offline pending: score basso 70 - Tony Khan Calls AEW Star 'Ultimate Fighting Champion'
+[PENDING v90.2.4] Hard skip offline pending: score basso 70 - Swerve Strickland Comments On Possibility Of The New Day Coming To AEW
+[PENDING v90.2.4] Hard skip offline pending: score basso 70 - WWE's Finn Balor Says He Wants To Keep Wrestling But Regrets Absence From Family
+[PENDING v90.2.4] Offline pending guard: keep=7 drop=17 reason=wp_down_initial_normal
+[WP] Health check cache: KO (api_timeout: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7ff0034347d0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)')))
+[PENDING] Coda salvata: 5 elementi
+[PENDING] Salvata news medium (77): WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[WP] Health check cache: KO (api_timeout: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7ff0034347d0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)')))
+[PENDING] Coda salvata: 6 elementi
+[PENDING] Salvata news medium (76): WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[PENDING] Coda salvata: 7 elementi
+[PENDING] Salvata news medium (77): Buddy Matthews Locked In For Major WSW Return Tour Across Australia & New Zealand
+[PENDING v86.8/legacy] Candidati salvati per dopo: 3
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-26 06:42:53_summary.json -> published_html_review/run_2026-05-26 06-42-53_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (810 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=0 errors=0 status=ok
+===== RUN END [2026-05-26 06:42:53] VERSION [v90_2_6_2_clean_consolidated_source (74a7c51)] =====
+
