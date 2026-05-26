@@ -100,6 +100,7 @@ for patch_name in [
     "scripts/apply_v92_report_legacy_translation_prompt.py",
     "scripts/apply_v92_report_source_intro_filter.py",
     "scripts/apply_v92_report_chunked_translation.py",
+    "scripts/apply_v92_wp_resilience_patch.py",
 ]:
     patch = Path(patch_name)
     if patch.exists():
