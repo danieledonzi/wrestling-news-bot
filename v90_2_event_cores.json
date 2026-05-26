@@ -113,7 +113,7 @@
     ],
     "count": 13,
     "first_seen": "2026-05-21T16:04:55",
-    "last_seen": "2026-05-26T13:52:55"
+    "last_seen": "2026-05-26T17:13:41"
   },
   "return:mark-shapiro:wwe": {
     "titles": [
@@ -1418,13 +1418,29 @@
   },
   "event:wwe-wrestlemania-2026-05-26:cm-punk-story": {
     "titles": [
-      "WWE Called Out Over Lack of Creative Plans for CM Punk After WrestleMania 42"
+      "WWE Called Out Over Lack of Creative Plans for CM Punk After WrestleMania 42",
+      "20260526_135348_002_spoiler-wwe-criticata-per-la-mancanza-di-piani-creativi-per-cm-punk-dopo-wrestlemania-42_5331_final.html",
+      "20260526_135350_002_wwe-criticata-per-la-mancanza-di-piani-creativi-per-cm-punk-dopo-wrestlemania_4c9a053d_final.html",
+      "20260526_135350_002_wwe-criticata-per-la-mancanza-di-piani-creativi-per-cm-punk-dopo-wrestlemania_4c9a053d_original.html"
     ],
     "facts": [
       "wwe_impact"
     ],
-    "count": 1,
+    "count": 4,
     "first_seen": "2026-05-26T13:53:50",
-    "last_seen": "2026-05-26T13:53:50"
+    "last_seen": "2026-05-26T17:13:42"
+  },
+  "return:positive-update:wwe": {
+    "titles": [
+      "Positive Update on Nikki Bella's Recovery After Suffering Ankle Injury"
+    ],
+    "facts": [
+      "official_date",
+      "official_return",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T17:18:03",
+    "last_seen": "2026-05-26T17:18:03"
   }
 }

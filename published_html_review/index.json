@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-26 13:51:52",
-  "last_bot_version": "v90_2_6_2_clean_consolidated_source (867610f)",
-  "updated_at": "2026-05-26T13:54:47",
-  "total_items": 218,
+  "last_run_id": "2026-05-26 17:12:54",
+  "last_bot_version": "v91_6_4_force_true_results_report_lane (509d5d2)",
+  "updated_at": "2026-05-26T17:18:03",
+  "total_items": 220,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1748,6 +1748,22 @@
       "original_html_file": "20260526_135447_003_vince-russo-difende-triple-h-dopo-le-accuse-di-mvp_2a268289_original.html",
       "final_html_file": "20260526_135447_003_vince-russo-difende-triple-h-dopo-le-accuse-di-mvp_2a268289_final.html",
       "metadata_file": "20260526_135447_003_vince-russo-difende-triple-h-dopo-le-accuse-di-mvp_2a268289_metadata.json"
+    },
+    {
+      "run_id": "2026-05-26 17:12:54",
+      "title": "Svelato il motivo dell'assenza di Ricky Sosa dagli show TNA",
+      "url": "https://www.ringsidenews.com/real-reason-behind-ricky-sosas-tna-tv-absence-revealed/",
+      "original_html_file": "20260526_171409_001_svelato-il-motivo-dell-assenza-di-ricky-sosa-dagli-show-tna_49a3075d_original.html",
+      "final_html_file": "20260526_171409_001_svelato-il-motivo-dell-assenza-di-ricky-sosa-dagli-show-tna_49a3075d_final.html",
+      "metadata_file": "20260526_171409_001_svelato-il-motivo-dell-assenza-di-ricky-sosa-dagli-show-tna_49a3075d_metadata.json"
+    },
+    {
+      "run_id": "2026-05-26 17:12:54",
+      "title": "Nikki Bella aggiorna i fan sul recupero dall'infortunio alla caviglia",
+      "url": "https://www.ringsidenews.com/positive-update-nikki-bellas-recovery-suffering-ankle-injury/",
+      "original_html_file": "20260526_171803_002_nikki-bella-aggiorna-i-fan-sul-recupero-dall-infortunio-alla-caviglia_b03d3adc_original.html",
+      "final_html_file": "20260526_171803_002_nikki-bella-aggiorna-i-fan-sul-recupero-dall-infortunio-alla-caviglia_b03d3adc_final.html",
+      "metadata_file": "20260526_171803_002_nikki-bella-aggiorna-i-fan-sul-recupero-dall-infortunio-alla-caviglia_b03d3adc_metadata.json"
     }
   ]
 }

@@ -1,36 +1,28 @@
 {
   "schema": "owtv_run_artifacts_v87_6",
-  "run_id": "2026-05-26 13:51:52",
-  "bot_version": "v90_2_6_2_clean_consolidated_source (867610f)",
-  "git_sha": "867610fdaf135afe1c9213f3bc08970d7c2315ae",
-  "created_at": "2026-05-26T13:54:48",
-  "published_count": 3,
+  "run_id": "2026-05-26 17:12:54",
+  "bot_version": "v91_6_4_force_true_results_report_lane (509d5d2)",
+  "git_sha": "509d5d23d6fcde7e07c4f361f889fc8f1477fe95",
+  "created_at": "2026-05-26T17:18:04",
+  "published_count": 2,
   "published_post_ids": [
-    "5328",
-    "5331",
-    "5334"
+    "5337",
+    "5340"
   ],
   "published_artifacts": [
     {
-      "post_id": 5328,
-      "title": "John Cena sul suo heel turn nel 2025: \"Ho cercato di renderlo il più realistico possibile\"",
-      "source_url": "https://www.wrestlinginc.com/2180142/wwe-john-cena-heel-turn-realistic/",
-      "html_file": "published/20260526_135245_001_john-cena-sul-suo-heel-turn-nel-2025-ho-cercato-di-renderlo-il-più-realistico-possibile_5328_final.html",
-      "metadata_file": "published/20260526_135245_001_john-cena-sul-suo-heel-turn-nel-2025-ho-cercato-di-renderlo-il-più-realistico-possibile_5328_metadata.json"
+      "post_id": 5337,
+      "title": "TNA Sacrifice del 26 maggio 2026 - risultati e momenti salienti",
+      "source_url": "https://www.ringsidenews.com/real-reason-behind-ricky-sosas-tna-tv-absence-revealed/",
+      "html_file": "published/20260526_171408_001_tna-sacrifice-del-26-maggio-2026-risultati-e-momenti-salienti_5337_final.html",
+      "metadata_file": "published/20260526_171408_001_tna-sacrifice-del-26-maggio-2026-risultati-e-momenti-salienti_5337_metadata.json"
     },
     {
-      "post_id": 5331,
-      "title": "[SPOILER] WWE criticata per la mancanza di piani creativi per CM Punk dopo WrestleMania 42",
-      "source_url": "https://www.ringsidenews.com/wwe-called-out-lack-creative-plans-cm-punk-wrestlemania-42/",
-      "html_file": "published/20260526_135348_002_spoiler-wwe-criticata-per-la-mancanza-di-piani-creativi-per-cm-punk-dopo-wrestlemania-42_5331_final.html",
-      "metadata_file": "published/20260526_135348_002_spoiler-wwe-criticata-per-la-mancanza-di-piani-creativi-per-cm-punk-dopo-wrestlemania-42_5331_metadata.json"
-    },
-    {
-      "post_id": 5334,
-      "title": "Vince Russo difende Triple H dopo le accuse di MVP",
-      "source_url": "https://www.ringsidenews.com/vince-russo-defends-triple-h-mvp-calls-him-coward-liar/",
-      "html_file": "published/20260526_135446_003_vince-russo-difende-triple-h-dopo-le-accuse-di-mvp_5334_final.html",
-      "metadata_file": "published/20260526_135446_003_vince-russo-difende-triple-h-dopo-le-accuse-di-mvp_5334_metadata.json"
+      "post_id": 5340,
+      "title": "Nikki Bella aggiorna i fan sul recupero dall'infortunio alla caviglia",
+      "source_url": "https://www.ringsidenews.com/positive-update-nikki-bellas-recovery-suffering-ankle-injury/",
+      "html_file": "published/20260526_171801_002_nikki-bella-aggiorna-i-fan-sul-recupero-dallinfortunio-alla-caviglia_5340_final.html",
+      "metadata_file": "published/20260526_171801_002_nikki-bella-aggiorna-i-fan-sul-recupero-dallinfortunio-alla-caviglia_5340_metadata.json"
     }
   ],
   "errors": [],

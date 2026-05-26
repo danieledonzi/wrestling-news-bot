@@ -69,6 +69,19 @@
     "updated_at": "1779742510.1365275",
     "url": "https://www.ringsidenews.com/aew-real-interest-mick-foley-wwe-legends-contract-nears-end/"
   },
+  "https://www.ringsidenews.com/aew-redemeption-date-location-venue-revealed": {
+    "extra": {
+      "core": "redemeption-date-location-venue-redemption-is-no-longer-just-an",
+      "lane": "skip_final",
+      "score": 45
+    },
+    "reason": "v91_score_story",
+    "score": null,
+    "status": "skip_final",
+    "title": "AEW Redemeption Date, Location and Venue Revealed",
+    "updated_at": "1779815663.266599",
+    "url": "https://www.ringsidenews.com/aew-redemeption-date-location-venue-revealed/"
+  },
   "https://www.ringsidenews.com/aew-talent-pushing-sign-leon-slater-tna-deal-nears-end": {
     "extra": {
       "event_key": "",
@@ -289,6 +302,19 @@
     "updated_at": "1779742510.1591885",
     "url": "https://www.ringsidenews.com/buddy-matthews-returns-attacks-donovan-dijak-long-injury-layoff/"
   },
+  "https://www.ringsidenews.com/carlito-wishes-wwe-would-have-given-him-proper-tv-exit-before-departure": {
+    "extra": {
+      "core": "carlito-wishes-would-have-given-him-a-proper-tv-exit",
+      "lane": "skip_final",
+      "score": 45
+    },
+    "reason": "v91_score_story",
+    "score": null,
+    "status": "skip_final",
+    "title": "Carlito Wishes WWE Would Have Given Him A Proper TV Exit Before Departure",
+    "updated_at": "1779815663.1563272",
+    "url": "https://www.ringsidenews.com/carlito-wishes-wwe-would-have-given-him-proper-tv-exit-before-departure/"
+  },
   "https://www.ringsidenews.com/charlotte-flair-fires-warning-about-breaking-ric-flair-john-cenas-wwe-title-record": {
     "extra": {
       "event_key": "",
@@ -441,6 +467,19 @@
     "title": "Daria Rae: la recitazione è il suo impegno principale dopo l'addio alla WWE",
     "updated_at": "1779742510.4257782",
     "url": "https://www.ringsidenews.com/daria-rae-reveals-acting-become-her-main-gig-wwe-exit/"
+  },
+  "https://www.ringsidenews.com/disco-inferno-calls-out-penta-jevon-evans-no-selling-moves-wwe-raw": {
+    "extra": {
+      "core": "disco-inferno-calls-out-penta-je-von-evans-no-selling",
+      "lane": "skip_final",
+      "score": 45
+    },
+    "reason": "v91_score_story",
+    "score": null,
+    "status": "skip_final",
+    "title": "Disco Inferno Calls Out Penta and Je'Von Evans for No-Selling Moves on WWE RAW",
+    "updated_at": "1779815656.71871",
+    "url": "https://www.ringsidenews.com/disco-inferno-calls-out-penta-jevon-evans-no-selling-moves-wwe-raw/"
   },
   "https://www.ringsidenews.com/early-betting-odds-released-may-23-wwe-saturday-nights-main-event": {
     "extra": {
@@ -1182,6 +1221,19 @@
     "updated_at": "1779666018.852641",
     "url": "https://www.ringsidenews.com/mick-foley-says-hes-having-blast-aew-ahead-double-nothing-debut/"
   },
+  "https://www.ringsidenews.com/mick-foleys-likely-role-aew-redemption-montreal-revealed": {
+    "extra": {
+      "event_key": "event:aew-double-or-nothing-2026-05-26",
+      "raw_result": "skipped",
+      "semantic_id": "mick-foleys-likely-role-at-aew-redemption-in-montreal-revealed"
+    },
+    "reason": "above_low_score_final_cap_not_final",
+    "score": 84,
+    "status": "competitive_deferred",
+    "title": "Mick Foley's Likely Role at AEW Redemption in Montreal Revealed",
+    "updated_at": "1779815656.6054182",
+    "url": "https://www.ringsidenews.com/mick-foleys-likely-role-aew-redemption-montreal-revealed/"
+  },
   "https://www.ringsidenews.com/mjf-claims-darby-allin-looks-school-shooter-ahead-aew-double-nothing": {
     "extra": {
       "event_key": "event:title:darby-allin:world:double-or-nothing",
@@ -1444,6 +1496,18 @@
     "updated_at": "1779586376.5307162",
     "url": "https://www.ringsidenews.com/penta-pulls-off-impressive-win-retain-ic-title-wwe-saturday-nights-main-event/"
   },
+  "https://www.ringsidenews.com/positive-update-nikki-bellas-recovery-suffering-ankle-injury": {
+    "extra": {
+      "event_key": "event:aew-double-or-nothing-2026-05-26",
+      "semantic_id": "positive-update-on-nikki-bellas-recovery-after-suffering-ankle-injury"
+    },
+    "reason": "wordpress_publish_ok",
+    "score": null,
+    "status": "published",
+    "title": "Nikki Bella aggiorna i fan sul recupero dall'infortunio alla caviglia",
+    "updated_at": "1779815882.0025096",
+    "url": "https://www.ringsidenews.com/positive-update-nikki-bellas-recovery-suffering-ankle-injury/"
+  },
   "https://www.ringsidenews.com/possible-aew-names-kofi-kingston-xavier-woods-revealed": {
     "extra": {
       "event_key": "event:title:tony-khan:tag:championship",
@@ -1541,6 +1605,18 @@
     "title": "Svelato il motivo dell'assenza di Randy Orton dopo WrestleMania 42",
     "updated_at": "1779742510.2472758",
     "url": "https://www.ringsidenews.com/real-reason-behind-randy-ortons-wwe-absence-wrestlemania-42-revealed/"
+  },
+  "https://www.ringsidenews.com/real-reason-behind-ricky-sosas-tna-tv-absence-revealed": {
+    "extra": {
+      "event_key": "report:tna-sacrifice-2026-05-26",
+      "semantic_id": "real-reason-behind-ricky-sosas-tna-tv-absence-revealed"
+    },
+    "reason": "wordpress_publish_ok",
+    "score": null,
+    "status": "published",
+    "title": "Svelato il motivo dell'assenza di Ricky Sosa dagli show TNA",
+    "updated_at": "1779815648.1100428",
+    "url": "https://www.ringsidenews.com/real-reason-behind-ricky-sosas-tna-tv-absence-revealed/"
   },
   "https://www.ringsidenews.com/rey-mysterio-announced-new-general-manager-aaa": {
     "extra": {
@@ -2220,6 +2296,32 @@
     "title": "WWE: confermati i piani per gli eventi in Arabia Saudita nonostante le tensioni internazionali",
     "updated_at": "1779742510.3699965",
     "url": "https://www.ringsidenews.com/wwe-made-big-decision-about-overseas-plans-during-internal-meeting/"
+  },
+  "https://www.ringsidenews.com/wwe-nearly-revived-nwo-unexpected-lineup-during-thunderdome-era": {
+    "extra": {
+      "core": "nearly-revived-nwo-unexpected-lineup-during-thunderdome-era-apparently-came",
+      "lane": "skip_final",
+      "score": 45
+    },
+    "reason": "v91_score_story",
+    "score": null,
+    "status": "skip_final",
+    "title": "WWE Nearly Revived The nWo With Unexpected Lineup During ThunderDome Era",
+    "updated_at": "1779815649.6348639",
+    "url": "https://www.ringsidenews.com/wwe-nearly-revived-nwo-unexpected-lineup-during-thunderdome-era/"
+  },
+  "https://www.ringsidenews.com/wwe-performance-center-belief-growing-that-enzo-amore-headed-back-wwe": {
+    "extra": {
+      "event_key": "event:wwe-wrestlemania-2026-05-26",
+      "raw_result": "skipped",
+      "semantic_id": "wwe-performance-center-belief-growing-that-enzo-amore-is-headed-back-to-wwe"
+    },
+    "reason": "above_low_score_final_cap_not_final",
+    "score": 82,
+    "status": "competitive_deferred",
+    "title": "WWE Performance Center Belief Growing That Enzo Amore Is Headed Back To WWE",
+    "updated_at": "1779815663.042364",
+    "url": "https://www.ringsidenews.com/wwe-performance-center-belief-growing-that-enzo-amore-headed-back-wwe/"
   },
   "https://www.ringsidenews.com/wwe-quietly-making-big-changes-tag-team-division-major-exits": {
     "extra": {
@@ -3394,15 +3496,15 @@
   },
   "https://www.wrestlinginc.com/2180008/aew-double-or-nothing-2026-five-titles-on-line-stadium-stampede-match": {
     "extra": {
-      "event_key": "report:aew-double-or-nothing-2026-05-24",
+      "event_key": "resolved-report-source:aew-double-or-nothing-2026-05-24",
       "raw_result": "skipped",
       "semantic_id": "aew-double-or-nothing-results-524-five-titles-on-the-line-stadium-stampede-match"
     },
-    "reason": "above_low_score_final_cap_not_final",
-    "score": 78,
+    "reason": "high_score_or_discussion_worthy_not_final",
+    "score": 86,
     "status": "competitive_deferred",
     "title": "AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match",
-    "updated_at": "1779746729.133034",
+    "updated_at": "1779815626.0481477",
     "url": "https://www.wrestlinginc.com/2180008/aew-double-or-nothing-2026-five-titles-on-line-stadium-stampede-match/"
   },
   "https://www.wrestlinginc.com/2180061/jack-perry-reflects-piece-scapegoat-bus": {
@@ -3663,15 +3765,15 @@
   },
   "https://www.wrestlinginc.com/2180772/wwe-raw-may-25-intercontinental-title-up-for-grabs-oba-femi-appears-more": {
     "extra": {
-      "core": "resolved-report-source:wwe-raw-2026-05-25",
-      "lane": "skip_final",
-      "score": 45
+      "event_key": "report:wwe-raw-2026-05-25",
+      "raw_result": "skipped",
+      "semantic_id": "wwe-raw-results-525-intercontinental-title-up-for-grabs-oba-femi-appears-more"
     },
-    "reason": "v91_score_story",
-    "score": null,
-    "status": "skip_final",
+    "reason": "high_score_or_discussion_worthy_not_final",
+    "score": 86,
+    "status": "competitive_deferred",
     "title": "WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More",
-    "updated_at": "1779803543.7807767",
+    "updated_at": "1779815612.2479155",
     "url": "https://www.wrestlinginc.com/2180772/wwe-raw-may-25-intercontinental-title-up-for-grabs-oba-femi-appears-more/"
   },
   "https://www.wrestlinginc.com/2180802/wwe-raw-la-knight-king-queen-ring-2026-return": {
@@ -3701,10 +3803,11 @@
   "https://www.wrestlinginc.com/2180854/tony-khan-aew-not-talked-msg-management-2019": {
     "extra": {
       "event_key": "event:business:tony-khan",
+      "migrated_by": "v90.2.5.2",
       "raw_result": "skipped",
       "semantic_id": "aews-tony-khan-has-not-talked-to-msg-management-since-2019"
     },
-    "reason": "high_score_or_discussion_worthy_not_final",
+    "reason": "v90_2_5_2_migrated_not_final",
     "score": 70,
     "status": "competitive_deferred",
     "title": "AEW's Tony Khan Has Not Talked To MSG Management Since 2019",
@@ -3723,5 +3826,31 @@
     "title": "Mark Henry Pitches Mega Powers-Type Alliance For WWE's Rhea Ripley & Charlotte Flair",
     "updated_at": "1779803548.9151258",
     "url": "https://www.wrestlinginc.com/2180862/wwe-mark-henry-rhea-ripley-charlotte-flair-mega-powers-alliance/"
+  },
+  "https://www.wrestlinginc.com/2181216/aew-redemption-2026-details-date-location-venue": {
+    "extra": {
+      "event_key": "",
+      "raw_result": "skipped",
+      "semantic_id": "aew-reveals-details-behind-brand-new-ppv-aew-redemption-debuting-july-2026"
+    },
+    "reason": "high_score_or_discussion_worthy_not_final",
+    "score": 82,
+    "status": "competitive_deferred",
+    "title": "AEW Reveals Details Behind Brand New PPV, AEW Redemption, Debuting July 2026",
+    "updated_at": "1779815626.3474112",
+    "url": "https://www.wrestlinginc.com/2181216/aew-redemption-2026-details-date-location-venue/"
+  },
+  "https://www.wrestlinginc.com/2181220/aew-speedball-mike-bailey-darby-allin-isnt-smart": {
+    "extra": {
+      "core": "s-speedball-mike-bailey-darby-allin-isn-t-that-smart",
+      "lane": "skip_final",
+      "score": 45
+    },
+    "reason": "v91_score_story",
+    "score": null,
+    "status": "skip_final",
+    "title": "AEW's Speedball Mike Bailey: Darby Allin 'Isn't That Smart'",
+    "updated_at": "1779815626.1437938",
+    "url": "https://www.wrestlinginc.com/2181220/aew-speedball-mike-bailey-darby-allin-isnt-smart/"
   }
 }

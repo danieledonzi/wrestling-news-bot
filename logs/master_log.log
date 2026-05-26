@@ -19287,3 +19287,453 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
 ===== RUN END [2026-05-26 13:51:52] VERSION [v90_2_6_2_clean_consolidated_source (867610f)] =====
 
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.7] Central story core assignment attivo
+[BOOT v90.2.7.1] Core authority hotfix attiva
+[BOOT v90.2.7.2] Queue type contract + report source guard attivi
+[BOOT v90.2.8] Feed-level processed URL hard skip attivo
+[BOOT v91] Authoritative editorial pipeline refactor attivo
+[BOOT v91.1] Score return contract guard attivo
+[BOOT v91.2] Publish contract + authoritative lane guard attivo
+[BOOT v91.3] v723 parser corrected
+[BOOT v91.4] Publish processed + soft pool repair attivi
+[BOOT v91.4.1] Strict publish return tuple contract attivo
+[BOOT v91.5] HTML integrity guard + block-safe repair policy attivi
+[BOOT v91.5.1] Final strict publish return guard attivo
+[BOOT v91.5.2] Final safe print recursion guard attivo
+[BOOT v91.5.3] Report pending unwrap recursion guard attivo
+[BOOT v91.5.4] Report candidate circuit breaker attivo
+[BOOT v91.6] Report source state transition fix attivo
+[BOOT v91.6.1] Resolved report publish bypass + spoiler consistency attivi
+[REPORT v91.6.2] Wrapped report gate function: v865_report_event_key
+[REPORT v91.6.2] Wrapped report gate function: v865_is_true_results_report
+[REPORT v91.6.2] Wrapped report gate function: v9011_is_report_confirmed
+[REPORT v91.6.2] Wrapped report gate function: v881_is_report_confirmed
+[BOOT v91.6.2] Resolved report gate suppression attivo
+[BOOT v91.6.3] Force standard pipeline for resolved report attivo
+[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1
+[BOOT v91.6.4] Force true-results report publish lane attivo
+
+===== RUN START [2026-05-26 17:12:54] VERSION [v91_6_4_force_true_results_report_lane (509d5d2)] =====
+[PROCESSED v91.4] Published artifact reconcile: scanned=197 fixed=0
+[SOFTPOOL v91.4] cleanup keep=0 expired=0 migrated=0
+[PROCESSED v90.2.5.2] Migrati record non-final competitivi: 17
+[PROCESSED v90.2.5] Loaded processed URL records: 272
+[REPORT v86.5] History true-results override: rimossi 17 record da urls
+[REPORT v86.5] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.5] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.5] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - WWE HOFer Brie Bella Details How Team With Paige Came About
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=event:wwe-wrestlemania-2026-05-26:nikki-bella-injury - WWE HOFer Brie Bella Details How Team With Paige Came About
+[PERF v71] WP lookup URL esistente: 1.78s
+[PERF v71] WP lookup event_key: 2.92s
+[SKIP] event_key confermata su WordPress: event:wwe-wrestlemania-2026-05-26 - WWE HOFer Brie Bella Details How Team With Paige Came About
+[V91 AI] cache hit - Charlotte Flair, The Miz & Others Set For Meet & Greets At UFC Freedom 250
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=charlotte-flair-miz-others-set-meet-greets-freedom-250-during - Charlotte Flair, The Miz & Others Set For Meet & Greets At UFC Freedom 250
+[V91 AI] cache hit - WWE's Stephanie McMahon Reveals How To Tell Whether She's Going To Slap Someone
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=s-stephanie-mcmahon-reveals-how-tell-whether-she-s-going - WWE's Stephanie McMahon Reveals How To Tell Whether She's Going To Slap Someone
+[V91 AI] cache hit - TNA's Leon Slater Can't Believe He Has Support Of 'Wrestling Uncles'
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=s-leon-slater-can-t-believe-he-has-support-wrestling - TNA's Leon Slater Can't Believe He Has Support Of 'Wrestling Uncles'
+[V91 AI] cache hit - Tony Khan Calls AEW Star 'Ultimate Fighting Champion'
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=tony-khan-calls-star-ultimate-fighting-champion-tony-khan-has - Tony Khan Calls AEW Star 'Ultimate Fighting Champion'
+[PERF v71] WP lookup event_key: 1.60s
+[SKIP] event_key confermata su WordPress: event:darby-allin-title - Tony Khan Calls AEW Star 'Ultimate Fighting Champion'
+[V91 AI] cache hit - Swerve Strickland Comments On Possibility Of The New Day Coming To AEW
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=swerve-strickland-comments-possibility-day-coming-swerve-strickland-has-discussed - Swerve Strickland Comments On Possibility Of The New Day Coming To AEW
+[V91 AI] cache hit - WWE's Finn Balor Says He Wants To Keep Wrestling But Regrets Absence From Family
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=s-finn-balor-says-he-wants-keep-wrestling-but-regrets - WWE's Finn Balor Says He Wants To Keep Wrestling But Regrets Absence From Family
+[V91 AI] cache hit - AEW's Speedball Mike Bailey: Darby Allin 'Isn't That Smart'
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=s-speedball-mike-bailey-darby-allin-isn-t-that-smart - AEW's Speedball Mike Bailey: Darby Allin 'Isn't That Smart'
+[PERF v71] WP lookup event_key: 2.05s
+[FIX] Event key in history ma non confermata su WordPress: event:title:darby-allin:world - provo a pubblicare
+[SCORE v81.1] Cap light name-driven item 20->20 - Jacob Fatu Talks Keeping His Name In WWE, Recalls Almost Becoming Caesar Sikoa
+[V91 AI] cache hit - Jacob Fatu Talks Keeping His Name In WWE, Recalls Almost Becoming Caesar Sikoa
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=jacob-fatu-talks-keeping-his-name-recalls-almost-becoming-caesar - Jacob Fatu Talks Keeping His Name In WWE, Recalls Almost Becoming Caesar Sikoa
+[FRESHNESS v86.6] Post-show outcome rescue: non tratto come preview scaduta - WWE RAW 5/18/2026: 3 Things We Hated & 3 Things We Loved
+[V91.5 HARD SKIP] listicle/opinion automatico escluso: WWE RAW 5/18/2026: 3 Things We Hated & 3 Things We Loved
+[V91.1 CHEAP] hard skip score=20 reasons=['concrete_outcome_signal', 'discussion_value_signal', 'v91_5_hard_skip_listicle_opinion'] - WWE RAW 5/18/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (20/75): WWE RAW 5/18/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176150/wwe-raw-brock-lesnar-returns-multiple-f5-oba-femi-retirement/
+[V91 AI] cache hit - Paige & Brie Bella Retain WWE Women's Tag Titles On Raw, Will Defend Again At SNME
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=event:wwe-snme-2026-05-26:brie-bella-retain - Paige & Brie Bella Retain WWE Women's Tag Titles On Raw, Will Defend Again At SNME
+[V91 AI] cache hit - WWE Raw Adds Fourth Match To Card For Upcoming Saturday Night's Main Event
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=event:wwe-snme-2026-05-26:brie-bella-story - WWE Raw Adds Fourth Match To Card For Upcoming Saturday Night's Main Event
+[V91 AI] cache hit - AEW's Paul Wight Details Taking Care Of His Giant Frame
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=s-paul-wight-details-taking-care-his-giant-frame-s - AEW's Paul Wight Details Taking Care Of His Giant Frame
+[FRESHNESS v86.6] Post-show outcome rescue: non tratto come preview scaduta - AEW Reveals Details Behind Brand New PPV, AEW Redemption, Debuting July 2026
+[SCORE v88.3] v88.3 hard feature skip cap 83->45 - AEW Reveals Details Behind Brand New PPV, AEW Redemption, Debuting July 2026
+[V91 AI] cache hit - AEW Reveals Details Behind Brand New PPV, AEW Redemption, Debuting July 2026
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=reveals-details-behind-brand-ppv-redemption-debuting-july-a-brand - AEW Reveals Details Behind Brand New PPV, AEW Redemption, Debuting July 2026
+[V91.5 HARD SKIP] listicle/opinion automatico escluso: WWE Raw 5/25/2026: 3 Things We Hated & 3 Things We Loved
+[V91.1 CHEAP] hard skip score=20 reasons=['discussion_value_signal', 'event_registry_match', 'v91_5_hard_skip_listicle_opinion'] - WWE Raw 5/25/2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (20/75): WWE Raw 5/25/2026: 3 Things We Hated & 3 Things We Loved
+[PERF v71] WP strict report lookup: 1.68s
+[REPORT v86.6] True results report non confermato da WordPress: rivaluto report:wwe-raw-2026-05-25 - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[REPORT v91.6.4] Importance forced 86: WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[V91.5 HARD SKIP] listicle/opinion automatico escluso: AEW Double Or Nothing 2026: Biggest Winners And Losers
+[V91.1 CHEAP] hard skip score=20 reasons=['discussion_value_signal', 'event_registry_match', 'v91_5_hard_skip_listicle_opinion'] - AEW Double Or Nothing 2026: Biggest Winners And Losers
+[SKIP] Score sotto soglia editoriale (14/75): AEW Double Or Nothing 2026: Biggest Winners And Losers
+[V91.5 HARD SKIP] listicle/opinion automatico escluso: AEW Double Or Nothing 2026: 3 Things We Hated & 3 Things We Loved
+[V91.1 CHEAP] hard skip score=20 reasons=['discussion_value_signal', 'event_registry_match', 'v91_5_hard_skip_listicle_opinion'] - AEW Double Or Nothing 2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (14/75): AEW Double Or Nothing 2026: 3 Things We Hated & 3 Things We Loved
+[EVENTREG v90.2.5.4] Event report score floor 80->82 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[V91 AI] cache hit - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[REPORT v91.6.4] Score forced publish_now 86 core=report:aew-double-or-nothing-2026-05-24 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[V91.1 SCORE] 86 lane=publish_now class=strategic_discussion core=report:aew-double-or-nothing-2026-05-24 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[V91 AI] cache hit - WWE Nearly Revived The nWo With Unexpected Lineup During ThunderDome Era
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=nearly-revived-nwo-unexpected-lineup-during-thunderdome-era-apparently-came - WWE Nearly Revived The nWo With Unexpected Lineup During ThunderDome Era
+[V91 AI] cache hit - Mick Foley's Likely Role at AEW Redemption in Montreal Revealed
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=mick-foley-s-likely-role-redemption-montreal-mick-foley-may - Mick Foley's Likely Role at AEW Redemption in Montreal Revealed
+[FRESHNESS v86.6] Post-show outcome rescue: non tratto come preview scaduta - Real Reason Behind Ricky Sosa's TNA TV Absence Revealed
+[V91 AI] cache hit - Real Reason Behind Ricky Sosa's TNA TV Absence Revealed
+[V91.1 SCORE] 84 lane=publish_now class=strategic_discussion core=real-reason-behind-ricky-sosa-s-tv-absence-ricky-sosa - Real Reason Behind Ricky Sosa's TNA TV Absence Revealed
+[V91 AI] cache hit - Roman Reigns Drops The OTC Act in Off-Air WWE RAW Moment With Fans
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=roman-reigns-drops-otc-act-off-air-raw-moment-fans - Roman Reigns Drops The OTC Act in Off-Air WWE RAW Moment With Fans
+[PERF v71] WP lookup event_key: 1.67s
+[SKIP] event_key confermata su WordPress: event:roman-reigns-contract - Roman Reigns Drops The OTC Act in Off-Air WWE RAW Moment With Fans
+[FRESHNESS v86.6] Post-show outcome rescue: non tratto come preview scaduta - Mick Foley's Status for AEW Dynamite in Philadelphia After Double or Nothing Appearance
+[V91 AI] cache hit - Mick Foley's Status for AEW Dynamite in Philadelphia After Double or Nothing Appearance
+[V91.1 SCORE] 84 lane=publish_now class=strategic_discussion core=event:aew-double-or-nothing-2026-05-26:brie-bella-world - Mick Foley's Status for AEW Dynamite in Philadelphia After Double or Nothing Appearance
+[PERF v71] WP lookup event_key: 1.54s
+[SKIP] event_key confermata su WordPress: event:aew-double-or-nothing-2026-05-26 - Mick Foley's Status for AEW Dynamite in Philadelphia After Double or Nothing Appearance
+[V91 AI] cache hit - Disco Inferno Calls Out Penta and Je'Von Evans for No-Selling Moves on WWE RAW
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=disco-inferno-calls-out-penta-je-von-evans-no-selling - Disco Inferno Calls Out Penta and Je'Von Evans for No-Selling Moves on WWE RAW
+[FRESHNESS v86.6] Post-show outcome rescue: non tratto come preview scaduta - WWE Performance Center Belief Growing That Enzo Amore Is Headed Back To WWE
+[V91 AI] cache hit - WWE Performance Center Belief Growing That Enzo Amore Is Headed Back To WWE
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=performance-center-belief-growing-that-enzo-amore-is-headed-back - WWE Performance Center Belief Growing That Enzo Amore Is Headed Back To WWE
+[V91 AI] cache hit - Carlito Wishes WWE Would Have Given Him A Proper TV Exit Before Departure
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=carlito-wishes-would-have-given-him-a-proper-tv-exit - Carlito Wishes WWE Would Have Given Him A Proper TV Exit Before Departure
+[V91 AI] cache hit - AEW Redemeption Date, Location and Venue Revealed
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=redemeption-date-location-venue-redemption-is-no-longer-just-an - AEW Redemeption Date, Location and Venue Revealed
+[FRESHNESS v86.6] Post-show outcome rescue: non tratto come preview scaduta - Positive Update on Nikki Bella's Recovery After Suffering Ankle Injury
+[V91 AI] cache hit - Positive Update on Nikki Bella's Recovery After Suffering Ankle Injury
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=positive-update-nikki-bella-s-recovery-suffering-ankle-injury-nikki - Positive Update on Nikki Bella's Recovery After Suffering Ankle Injury
+[V91 AI] cache hit - Tiffany Stratton Reveals She Suffered Scary Wardrobe Mishap Minutes Before WWE Match
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=tiffany-stratton-reveals-she-suffered-scary-wardrobe-mishap-minutes-tiffany - Tiffany Stratton Reveals She Suffered Scary Wardrobe Mishap Minutes Before WWE Match
+[V91 AI] cache hit - Disabled Fan Claims AEW Robbed Him at Double or Nothing Over ADA Seating Issue
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=event:aew-double-or-nothing-2026-05-26:brie-bella-story - Disabled Fan Claims AEW Robbed Him at Double or Nothing Over ADA Seating Issue
+[SKIP] event_key confermata su WordPress: event:aew-double-or-nothing-2026-05-26 - Disabled Fan Claims AEW Robbed Him at Double or Nothing Over ADA Seating Issue
+[SKIP] URL già in history: https://www.ringsidenews.com/vince-russo-defends-triple-h-mvp-calls-him-coward-liar/
+[V91 AI] cache hit - Carlito Admits He Shot Himself in the Foot With WWE Contract Decision
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=carlito-admits-he-shot-himself-foot-contract-decision-carlito-is - Carlito Admits He Shot Himself in the Foot With WWE Contract Decision
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-called-out-lack-creative-plans-cm-punk-wrestlemania-42/
+[SCORE] 86 high - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More | v91_6_4_true_results_report_forced_publish, v71 freshness=0.382
+[SCORE] 86 high - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match | event_report, hard_news, major_title_outcome, true_results_report, v91_6_4_true_results_report_forced_publish, v71 freshness=0.31
+[SCORE] 82 high - AEW's Speedball Mike Bailey: Darby Allin 'Isn't That Smart' | hard_news, v71 freshness=0.591
+[SCORE] 82 high - AEW Reveals Details Behind Brand New PPV, AEW Redemption, Debuting July 2026 | concrete_outcome, hard_news, v71 freshness=0.707
+[SCORE] 79 medium - Real Reason Behind Ricky Sosa's TNA TV Absence Revealed | major_title_outcome, hard_news, v71 source reliability soft penalty, v71 freshness=0.682
+[SCORE] 77 medium - WWE Nearly Revived The nWo With Unexpected Lineup During ThunderDome Era | hard_news, v71 source reliability soft penalty, v71 freshness=0.58
+[SCORE] 77 medium - Mick Foley's Likely Role at AEW Redemption in Montreal Revealed | discussion_value, hard_news, v71 source reliability soft penalty, v71 freshness=0.568
+[SCORE] 77 medium - Disco Inferno Calls Out Penta and Je'Von Evans for No-Selling Moves on WWE RAW | hard_news, v71 source reliability soft penalty, v71 freshness=0.558
+[SCORE] 77 medium - WWE Performance Center Belief Growing That Enzo Amore Is Headed Back To WWE | concrete_outcome, hard_news, v71 source reliability soft penalty, v71 freshness=0.666
+[SCORE] 77 medium - Carlito Wishes WWE Would Have Given Him A Proper TV Exit Before Departure | hard_news, v71 source reliability soft penalty, v71 freshness=0.663
+[MODE] Modalita normale: 0 news >=90, 4 news >=80
+[MODEL v87.7] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 4
+[PERF v71] WP lookup URL esistente: 0.90s
+[PERF v71] WP strict report lookup: 1.62s
+[REPORT v86.7] Pending true-results non pubblicato: resta lavorabile via candidate queue report:wwe-clash-2026-05-26
+[REPORT v86.7] Pending true-results non pubblicato: resta lavorabile via candidate queue report:wwe-raw-2026-05-25
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OPINION value=strategic_discussion - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91 DECISION] allow legacy publish path score=76 lane=publish_candidate core=bully-ray-questions-why-brock-lesnar-returned-so-quickly-retirement - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[REPORT v86.7] Pending true-results non pubblicato: resta lavorabile via candidate queue report:wwe-raw-2026-05-25
+[BOT] News candidate totali: 23 | mode=normal | max nuove=3 | pending pubblicati=0
+[REPORT v91.6.4] Candidate report forced before processing: WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[REPORT v91.6] Candidate report: fonte risolta, bypass gate ricorsivo: report:wwe-raw-2026-05-25 -> resolved-report-source:wwe-raw-2026-05-25
+[REPORT v91.6] Core override fonte report risolta: resolved-report-source:wwe-raw-2026-05-25 - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[REPORT v91.6.4] Analysis forced RESULTS_REPORT publish_now: WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[REPORT v91.6.4] Score forced publish_now 86 core=resolved-report-source:wwe-raw-2026-05-25 - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[V91 DECISION] allow legacy publish path score=86 lane=publish_now core=resolved-report-source:wwe-raw-2026-05-25 - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[REPORT v91.6] Core override fonte report risolta: resolved-report-source:wwe-raw-2026-05-25 - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[CORE v90.2.7.1] authority core=resolved-report-source:wwe-raw-2026-05-25 type=resolved_report_source title=WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[REPORT v91.6] Core override fonte report risolta: resolved-report-source:wwe-raw-2026-05-25 - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[CORE v90.2.7] resolved_report_source core=resolved-report-source:wwe-raw-2026-05-25 title=WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[PERF v71] WP lookup event_key: 1.09s
+[REPORT v86.5] True results report autorizzato dal gate stretto: report:wwe-raw-2026-05-25 - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[REPORT v91.6] Pending report: fonte risolta, salto gate report e passo a candidate normale: report:wwe-raw-2026-05-25 -> https://www.wrestlinginc.com/2180772/wwe-raw-may-25-intercontinental-title-up-for-grabs-oba-femi-appears-more/
+[REPORT v91.6.4] Candidate report forced before processing: WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[REPORT v91.6.1] Fonte report risolta: bypass gate legacy e pubblico come articolo: resolved-report-source:wwe-raw-2026-05-25
+[REPORT v91.6.3] Pipeline standard for resolved report attiva: https://www.wrestlinginc.com/2180772/wwe-raw-may-25-intercontinental-title-up-for-grabs-oba-femi-appears-more
+[REPORT v91.6.2] Suppress report gate durante direct publish: WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[REPORT v91.6.1] Direct publish resolved report via _ORIG_V902_process_candidate_item: WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[REPORT v91.6.3] Suppresso helper report v865_is_true_results_report per fonte risolta
+[REPORT v91.6.3] Suppresso helper report v865_is_true_results_report per fonte risolta
+[REPORT v91.6.3] Suppresso report key helper v865_report_event_key per fonte risolta
+[REPORT v91.6.3] Suppresso helper report v865_is_true_results_report per fonte risolta
+[REPORT v91.6.3] Suppresso helper report v865_is_true_results_report per fonte risolta
+[BOT] Elaborazione: WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[BOT] semantic_id=wwe-raw-results-525-intercontinental-title-up-for-grabs-oba-femi-appears-more
+[SCORE] iniziale=86 priority=high
+[REPORT v91.6] Core override fonte report risolta: resolved-report-source:wwe-raw-2026-05-25 - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[REPORT v91.6] Core override fonte report risolta: resolved-report-source:wwe-raw-2026-05-25 - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[SCRAPE] Articolo results rilevato: testo completo (18799 caratteri)
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=69, image=9, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=69, image=9, embed=0
+[REPORT v86.5] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.5] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.5] History true-results override: rimossi 15 record da event_keys
+[REPORT v91.6.3] Suppresso helper report v865_is_true_results_report per fonte risolta
+[PENDING v86.7] Mantengo true-results in coda: non pubblicato né confermato su WordPress report:wwe-raw-2026-05-25
+[REPORT v91.6.4] Candidate report forced before processing: AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[REPORT v91.6] Candidate report: fonte risolta, bypass gate ricorsivo: report:aew-double-or-nothing-2026-05-24 -> resolved-report-source:aew-double-or-nothing-2026-05-24
+[REPORT v91.6] Core override fonte report risolta: resolved-report-source:aew-double-or-nothing-2026-05-24 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=RESULTS_REPORT value=strategic_discussion - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[REPORT v91.6.4] Score forced publish_now 86 core=resolved-report-source:aew-double-or-nothing-2026-05-24 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[V91 DECISION] allow legacy publish path score=86 lane=publish_now core=resolved-report-source:aew-double-or-nothing-2026-05-24 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[REPORT v91.6] Core override fonte report risolta: resolved-report-source:aew-double-or-nothing-2026-05-24 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[CORE v90.2.7.1] authority core=resolved-report-source:aew-double-or-nothing-2026-05-24 type=resolved_report_source title=AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[REPORT v91.6] Core override fonte report risolta: resolved-report-source:aew-double-or-nothing-2026-05-24 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[CORE v90.2.7] resolved_report_source core=resolved-report-source:aew-double-or-nothing-2026-05-24 title=AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[EVENTREG v90.2.5.4.1] report key da registry: report:aew-double-or-nothing-2026-05-24
+[PERF v71] WP lookup URL esistente: 0.89s
+[BOT] Elaborazione: AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[BOT] semantic_id=aew-double-or-nothing-results-524-five-titles-on-the-line-stadium-stampede-match
+[SCORE] iniziale=86 priority=high
+[REPORT v91.6] Core override fonte report risolta: resolved-report-source:aew-double-or-nothing-2026-05-24 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[REPORT v91.6] Core override fonte report risolta: resolved-report-source:aew-double-or-nothing-2026-05-24 - AEW Double Or Nothing Results 5/24 - Five Titles On The Line, Stadium Stampede Match
+[SCRAPE] Articolo results rilevato: testo completo (39846 caratteri)
+[EMBED v88] Mappa posizionale media salvata: embeds=13 url=https://www.wrestlinginc.com/2180008/aew-double-or-nothing-2026-five-titles-on-line-stadium-stampede-match/
+[MEDIA v88.4] Rimossi embed derivati da credit immagine gallery: 26 url=https://www.wrestlinginc.com/2180008/aew-double-or-nothing-2026-five-titles-on-line-stadium-stampede-match/
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=136, image=14, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=13 url=https://www.wrestlinginc.com/2180008/aew-double-or-nothing-2026-five-titles-on-line-stadium-stampede-match/
+[MEDIA v88.4] Rimossi embed derivati da credit immagine gallery: 26 url=https://www.wrestlinginc.com/2180008/aew-double-or-nothing-2026-five-titles-on-line-stadium-stampede-match/
+[BLOCKSEQ] Blocchi ordinati estratti: text=136, image=14, embed=0
+[PERF v71] estrazione blocchi: 0.32s
+[REPORT v86.5] History true-results override: rimossi 17 record da urls
+[REPORT v86.5] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.5] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.5] History true-results override: rimossi 15 record da event_keys
+[PERF v71] WP lookup event_key: 1.42s
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OPINION value=strategic_discussion - AEW's Speedball Mike Bailey: Darby Allin 'Isn't That Smart'
+[V91 DECISION] skip_final score=45 reasons=['opinion_needs_value_check', 'concrete_outcome_signal', 'discussion_value_signal'] - AEW's Speedball Mike Bailey: Darby Allin 'Isn't That Smart'
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - AEW Reveals Details Behind Brand New PPV, AEW Redemption, Debuting July 2026
+[V91 DECISION] allow legacy publish path score=76 lane=publish_candidate core=reveals-details-behind-brand-ppv-redemption-debuting-july-a-brand - AEW Reveals Details Behind Brand New PPV, AEW Redemption, Debuting July 2026
+[SKIP v88.3] Feature storico/FIFA/venue/media call escluso: AEW Reveals Details Behind Brand New PPV, AEW Redemption, Debuting July 2026
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=hard_news_candidate - Real Reason Behind Ricky Sosa's TNA TV Absence Revealed
+[V91 DECISION] allow legacy publish path score=84 lane=publish_now core=real-reason-behind-ricky-sosa-s-tv-absence-ricky-sosa - Real Reason Behind Ricky Sosa's TNA TV Absence Revealed
+[BOT] Elaborazione: Real Reason Behind Ricky Sosa's TNA TV Absence Revealed
+[BOT] semantic_id=real-reason-behind-ricky-sosas-tna-tv-absence-revealed
+[SCORE] iniziale=79 priority=medium
+[PERF v71] scraping articolo: 2.63s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=7, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=7, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.72s
+[MODEL v87.7] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=TNA (7) conf=1.00 model=gemini-3.1-flash-lite | L'articolo spiega retroscena su un'assenza già avvenuta. Pur contenendo update su status, non è un rumor ma un fatto riportato da fonte attendibile.
+[EDITORIAL v72.3] translation_notes=Mantenere 'TNA' e i nomi dei titoli/show in inglese.; 'Release' non va tradotto come 'rilascio'.; Evitare calchi come 'la marea è cambiata' per 'tide turned'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=TNA (7) | L'articolo spiega retroscena su un'assenza già avvenuta. Pur contenendo update su status, non è un rumor ma un fatto riportato da fonte attendibile.
+[PERF v71] analisi editoriale AI v72: 2.92s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Real Reason Behind Ricky Sosa's TNA TV Absence Revealed
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - Real Reason Behind Ricky Sosa's TNA TV Absence Revealed
+[V91 AI] cache hit - Real Reason Behind Ricky Sosa's TNA TV Absence Revealed
+[REPORT v91.6.4] Score forced publish_now 86 core=report:tna-sacrifice-2026-05-26 - Real Reason Behind Ricky Sosa's TNA TV Absence Revealed
+[V91.1 SCORE] 86 lane=publish_now class=strategic_discussion core=report:tna-sacrifice-2026-05-26 - Real Reason Behind Ricky Sosa's TNA TV Absence Revealed
+[SCORE v86.8] Cap AI executive interview/opinion 86->72 - Real Reason Behind Ricky Sosa's TNA TV Absence Revealed
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 72->54 - Real Reason Behind Ricky Sosa's TNA TV Absence Revealed
+[EVENTREG v90.2.5.4] Event report AI floor 54->82 - Ricky Sosa has been missing from TNA television for well over a month, and now there is finally an explanation for his absence. During a PWInsider Q&A , Mike Johnson was asked why Sosa has not appeared in TNA since the March tapings. Johnson said Sosa was given time away from the company to handle a personal matter back home in the UK, making it clear the absence is not injury-related. "We are told he was given time off to help out with a personal situation back home in the UK. No injury or anything like that." Sosa was last seen on TNA television during the April 9 edition of iMPACT! , when Eric Young took him out with a huge piledriver. That angle came after Sosa had been feuding with Young following his official signing with the company. Sosa was also featured during TNA Sacrifice in a major in-ring segment with Tommy Dreamer, TNA President Carlos Silva, and Chris Bey. The segment positioned Sosa as one of the promotion's new rising talents, with Sosa signing his contract in front of the live crowd . After the signing, TNA quickly made his merchandise available through its official store, showing that the company had plans to present him as a fresh face on the roster. His sudden absence led to a lot of questions, especially after the Eric Young angle seemed to write him off television. Now, this update makes it clear that Sosa's time away is tied to a personal situation, not an injury setback. For now, there is no confirmed return date for Ricky Sosa, but the explanation should clear up some of the confusion surrounding his absence from TNA programming. Do you want to see Ricky Sosa return to finish his feud with Eric Young? Please share your thoughts and feedback in the comments. Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.
+[V91 AI] cache hit - 79
+[V91 AI] cache hit - 86
+[V91 AI] cache hit - Real Reason Behind Ricky Sosa's TNA TV Absence Revealed
+[REPORT v91.6.4] Score forced publish_now 86 core=report:tna-sacrifice-2026-05-26 - Real Reason Behind Ricky Sosa's TNA TV Absence Revealed
+[V91.3] refined score 82->86 - Real Reason Behind Ricky Sosa's TNA TV Absence Revealed
+[SCORE] raffinato=86 priority=high | event_report, hard_news, major_title_outcome, true_results_report, v91_6_4_true_results_report_forced_publish
+[PERF v71] scoring raffinato: 0.60s
+[V71] story_signature=report:tna-sacrifice-2026-05-26 semantic_status=new_story freshness=0.916
+[PERF v71] dedupe/freshness v71: 0.45s
+[PERF v71] WP recent posts dedupe: 1.42s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.76s
+[MODEL v87.7] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=7
+[MODEL v87.7] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PRESERVE v91.5] Repair v81 libero bypassato: nessun merge sul finale HTML
+[PERF v71] traduzione: 6.43s
+[MODEL v87.7] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Svelato il motivo dell'assenza di Ricky Sosa dagli show TNA
+[PERF v71] WP strict report lookup: 1.63s
+[TEXT v90.2.4.2] Report name casing guard applicata
+[TITLE v90.2.4.1] Report hard-title forzato: Tna Sacrifice del 26 maggio 2026: risultati e momenti salienti
+[TITLE v90.1.1] Report title strict fix: Tna Sacrifice del 26 maggio 2026: risultati e momenti salienti -> TNA Impact del 26 maggio 2026 - risultati e momenti salienti
+[TITLE v90.1] Report title hardcode: TNA Impact del 26 maggio 2026 - risultati e momenti salienti -> TNA Sacrifice del 26 maggio 2026 - risultati e momenti salienti
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/real-reason-behind-ricky-sosas-tna-tv-absence-revealed-20.jpg
+[MEDIA] Immagine caricata: 5336
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260526_171408_001_tna-sacrifice-del-26-maggio-2026-risultati-e-momenti-salienti_5337_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5337
+[PROCESSED v91.4] URL marcato published dopo publish confermato: https://www.ringsidenews.com/real-reason-behind-ricky-sosas-tna-tv-absence-revealed/
+[PERF v71] creazione post WordPress: 5.63s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/real-reason-behind-ricky-sosas-tna-tv-absence-revealed-20.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5336
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Real Reason Behind Ricky Sosa's TNA TV Absence Revealed': 21.48s
+[OK] Pubblicato: Svelato il motivo dell'assenza di Ricky Sosa dagli show TNA
+[PENDING] Coda salvata: 4 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260526_171409_001_svelato-il-motivo-dell-assenza-di-ricky-sosa-dagli-show-tna_49a3075d_*.html
+[RUN v85] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Svelato il motivo dell'assenza di Ricky Sosa dagli show TNA
+[PUBLISHED REVIEW v87.1] Review outer salvata: Svelato il motivo dell'assenza di Ricky Sosa dagli show TNA
+[REPORT v87.6] Non scrivo history forte: non true-results/canonico (report:tna-sacrifice-2026-05-26)
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OPINION value=strategic_discussion - WWE Nearly Revived The nWo With Unexpected Lineup During ThunderDome Era
+[V91 DECISION] skip_final score=45 reasons=['opinion_needs_value_check', 'discussion_value_signal'] - WWE Nearly Revived The nWo With Unexpected Lineup During ThunderDome Era
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - Mick Foley's Likely Role at AEW Redemption in Montreal Revealed
+[V91 DECISION] allow legacy publish path score=70 lane=strategic_pool core=mick-foley-s-likely-role-redemption-montreal-mick-foley-may - Mick Foley's Likely Role at AEW Redemption in Montreal Revealed
+[BOT] Elaborazione: Mick Foley's Likely Role at AEW Redemption in Montreal Revealed
+[BOT] semantic_id=mick-foleys-likely-role-at-aew-redemption-in-montreal-revealed
+[SCORE] iniziale=77 priority=medium
+[PERF v71] scraping articolo: 1.43s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=15, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=15, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.73s
+[MODEL v87.7] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=0.95 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo discute speculazioni e piani futuri sulla presenza di Mick Foley in un evento AEW basandosi su dichiarazioni di Tony Khan e fonti di settore.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Mrs. Foley's Baby Boy' come soprannome iconico senza tradurlo letteralmente.; Non tradurre 'Buy-In' e 'pay-per-view'.; Gestire 'host' come 'presentatore' o 'conduttore'.
+[EDITORIAL v73] final type=RUMOR | category=AEW (5) | L'articolo discute speculazioni e piani futuri sulla presenza di Mick Foley in un evento AEW basandosi su dichiarazioni di Tony Khan e fonti di settore.
+[PERF v71] analisi editoriale AI v72: 2.45s
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 84->54 - Mick Foley's Likely Role at AEW Redemption in Montreal Revealed
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Mick Foley's Likely Role at AEW Redemption in Montreal Revealed
+[V91 AI] cache hit - Mick Foley's Likely Role at AEW Redemption in Montreal Revealed
+[V91.1 SCORE] 84 lane=publish_now class=strategic_discussion core=event:aew-double-or-nothing-2026-05-26:darby-allin-world - Mick Foley's Likely Role at AEW Redemption in Montreal Revealed
+[SCORE v88.2] v88.2 cap OTHER/feature non-news 68->54 - Mick Foley's Likely Role at AEW Redemption in Montreal Revealed
+[SCORE v88.3] v88.3 hard feature skip cap 54->45 - Mick Foley's Likely Role at AEW Redemption in Montreal Revealed
+[V91 AI] cache hit - 77
+[V91.1 BYPASS] legacy cap bypass 45->82 lane=publish_now - 77
+[V91 AI] cache hit - 84
+[V91 AI] cache hit - Mick Foley's Likely Role at AEW Redemption in Montreal Revealed
+[V91.3] refined score 82->84 - Mick Foley's Likely Role at AEW Redemption in Montreal Revealed
+[SCORE] raffinato=84 priority=high | event_related, major_title_outcome, discussion_value, hard_news
+[PERF v71] scoring raffinato: 0.67s
+[V71] story_signature=event:aew-double-or-nothing-2026-05-26:darby-allin-world semantic_status=new_story freshness=0.685
+[PERF v71] dedupe/freshness v71: 0.58s
+[SKIP] Event key già pubblicata nella run e confermata su WordPress: event:aew-double-or-nothing-2026-05-26 - Mick Foley's Likely Role at AEW Redemption in Montreal Revealed
+[PENDING] Coda salvata: 4 elementi
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - Disco Inferno Calls Out Penta and Je'Von Evans for No-Selling Moves on WWE RAW
+[V91 DECISION] skip_final score=45 reasons=['concrete_outcome_signal', 'discussion_value_signal'] - Disco Inferno Calls Out Penta and Je'Von Evans for No-Selling Moves on WWE RAW
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - WWE Performance Center Belief Growing That Enzo Amore Is Headed Back To WWE
+[V91 DECISION] allow legacy publish path score=76 lane=publish_candidate core=performance-center-belief-growing-that-enzo-amore-is-headed-back - WWE Performance Center Belief Growing That Enzo Amore Is Headed Back To WWE
+[PERF v71] WP lookup URL esistente: 0.90s
+[BOT] Elaborazione: WWE Performance Center Belief Growing That Enzo Amore Is Headed Back To WWE
+[BOT] semantic_id=wwe-performance-center-belief-growing-that-enzo-amore-is-headed-back-to-wwe
+[SCORE] iniziale=77 priority=medium
+[PERF v71] scraping articolo: 1.43s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=8, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.76s
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo discute speculazioni e voci di corridoio su un possibile ritorno di Enzo Amore in WWE basate su feedback del Performance Center e indiscrezioni non ancora ufficiali.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'Performance Center' o 'WrestleMania'.; Mantenere i ring name 'Enzo Amore', 'Big Cass' e 'Big Bill'.; 'Releasing' o 'Released' va tradotto come licenziato/tagliato, non rilascio.
+[EDITORIAL v73] final type=RUMOR | category=WWE (4) | L'articolo discute speculazioni e voci di corridoio su un possibile ritorno di Enzo Amore in WWE basate su feedback del Performance Center e indiscrezioni non ancora ufficiali.
+[PERF v71] analisi editoriale AI v72: 1.37s
+[V91 AI] cache hit - WWE Performance Center Belief Growing That Enzo Amore Is Headed Back To WWE
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=event:wwe-wrestlemania-2026-05-26:brie-bella-story - WWE Performance Center Belief Growing That Enzo Amore Is Headed Back To WWE
+[V91 AI] cache hit - 77
+[V91.1 BYPASS] legacy cap bypass 68->82 lane=publish_now - 77
+[V91 AI] cache hit - 82
+[V91 AI] cache hit - WWE Performance Center Belief Growing That Enzo Amore Is Headed Back To WWE
+[SCORE] raffinato=82 priority=high | hard_news
+[PERF v71] scoring raffinato: 0.64s
+[V71] story_signature=event:wwe-wrestlemania-2026-05-26:performance-center-belief-growing-that-story semantic_status=new_story freshness=0.782
+[PERF v71] dedupe/freshness v71: 0.54s
+[SKIP] Event key confermata su WordPress: event:wwe-wrestlemania-2026-05-26 - WWE Performance Center Belief Growing That Enzo Amore Is Headed Back To WWE
+[PENDING] Coda salvata: 4 elementi
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - Carlito Wishes WWE Would Have Given Him A Proper TV Exit Before Departure
+[V91 DECISION] skip_final score=45 reasons=['discussion_value_signal'] - Carlito Wishes WWE Would Have Given Him A Proper TV Exit Before Departure
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - AEW Redemeption Date, Location and Venue Revealed
+[V91 DECISION] skip_final score=45 reasons=['discussion_value_signal'] - AEW Redemeption Date, Location and Venue Revealed
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - Positive Update on Nikki Bella's Recovery After Suffering Ankle Injury
+[V91 DECISION] allow legacy publish path score=82 lane=publish_now core=positive-update-nikki-bella-s-recovery-suffering-ankle-injury-nikki - Positive Update on Nikki Bella's Recovery After Suffering Ankle Injury
+[PERF v71] WP lookup URL esistente: 0.68s
+[BOT] Elaborazione: Positive Update on Nikki Bella's Recovery After Suffering Ankle Injury
+[BOT] semantic_id=positive-update-on-nikki-bellas-recovery-after-suffering-ankle-injury
+[SCORE] iniziale=77 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/positive-update-nikki-bellas-recovery-suffering-ankle-injury/
+[PERF v71] scraping articolo: 1.44s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=19, image=0, embed=1
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/positive-update-nikki-bellas-recovery-suffering-ankle-injury/
+[BLOCKSEQ] Blocchi ordinati estratti: text=19, image=0, embed=1
+[PERF v71] estrazione blocchi: 0.77s
+[BOT] Embed trovati: 1
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=1.00 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | Articolo di aggiornamento sullo status fisico di una star WWE, non si tratta di un evento futuro ma di un report clinico/di recupero.
+[EDITORIAL v72.3] translation_notes=Non tradurre 'ankle injury' con termini medici troppo tecnici, usa 'infortunio alla caviglia'.; Mantenere i nomi dei titoli (Women's Tag Team Title) in inglese.; Tradurre 'squat' con 'squat' (termine tecnico in uso).
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | Articolo di aggiornamento sullo status fisico di una star WWE, non si tratta di un evento futuro ma di un report clinico/di recupero.
+[PERF v71] analisi editoriale AI v72: 1.86s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Positive Update on Nikki Bella's Recovery After Suffering Ankle Injury
+[V91 AI] cache hit - Positive Update on Nikki Bella's Recovery After Suffering Ankle Injury
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=event:aew-double-or-nothing-2026-05-26:nikki-bella-injury - Positive Update on Nikki Bella's Recovery After Suffering Ankle Injury
+[V91 AI] cache hit - 77
+[V91 AI] cache hit - 82
+[V91 AI] cache hit - Positive Update on Nikki Bella's Recovery After Suffering Ankle Injury
+[SCORE] raffinato=82 priority=high | event_related, concrete_outcome, hard_news
+[PERF v71] scoring raffinato: 0.66s
+[V71] story_signature=event:aew-double-or-nothing-2026-05-26:nikki-bella-injury semantic_status=new_story freshness=0.775
+[PERF v71] dedupe/freshness v71: 0.63s
+[FIX] Event key gia' vista ma aggiornamento storyline/business consentito: event:aew-double-or-nothing-2026-05-26 - Positive Update on Nikki Bella's Recovery After Suffering Ankle Injury
+[WP] Health check cache: OK (api_status_200)
+[MODEL v87.7] task=translate_medium chain=gemini-3-flash-preview,gemini-2.5-flash,gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3-flash-preview
+[GEMINI] Modello gemini-3-flash-preview scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[MODEL v87.7] Cooldown globale modello per la run: gemini-3-flash-preview
+[GEMINI] Uso modello: gemini-2.5-flash
+[GEMINI] Modello gemini-2.5-flash scartato: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+[MODEL v87.7] Cooldown globale modello per la run: gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=19
+[MODEL v87.7] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PRESERVE v91.5] Repair v81 libero bypassato: nessun merge sul finale HTML
+[PERF v71] traduzione: 208.08s
+[MODEL v87.7] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EMBED v87.3] Canonicalizzati/deduplicati embed nel body: 1
+[EMBED v87.3] Positional embed guard applicato: 1 modifiche
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/positive-update-on-nikki-bellas-recovery-after-suffering-ankle-injury-21.jpg
+[MEDIA] Immagine caricata: 5339
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260526_171801_002_nikki-bella-aggiorna-i-fan-sul-recupero-dallinfortunio-alla-caviglia_5340_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5340
+[PROCESSED v91.4] URL marcato published dopo publish confermato: https://www.ringsidenews.com/positive-update-nikki-bellas-recovery-suffering-ankle-injury/
+[PERF v71] creazione post WordPress: 4.00s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/positive-update-on-nikki-bellas-recovery-after-suffering-ankle-injury-21.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5339
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'Positive Update on Nikki Bella's Recovery After Suffering An': 218.17s
+[OK] Pubblicato: Nikki Bella aggiorna i fan sul recupero dall'infortunio alla caviglia
+[PENDING] Coda salvata: 4 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260526_171803_002_nikki-bella-aggiorna-i-fan-sul-recupero-dall-infortunio-alla-caviglia_b03d3adc_*.html
+[RUN v85] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Nikki Bella aggiorna i fan sul recupero dall'infortunio alla caviglia
+[PUBLISHED REVIEW v87.1] Review outer salvata: Nikki Bella aggiorna i fan sul recupero dall'infortunio alla caviglia
+[CORE v90.2] Registrato publish core=return:positive-update:wwe count=1 facts=['official_date', 'official_return', 'wwe_impact']
+[BOT] Raggiunto limite massimo candidati nuovi provati
+[BOT] Pubblicati 2 articoli (0 pending + 2 nuove) su 13 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-26 17:12:54_summary.json -> published_html_review/run_2026-05-26 17-12-54_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (862 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=2 errors=0 status=ok
+===== RUN END [2026-05-26 17:12:54] VERSION [v91_6_4_force_true_results_report_lane (509d5d2)] =====
+
