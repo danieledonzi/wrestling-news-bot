@@ -96,6 +96,7 @@ for patch_name in [
     "scripts/apply_v92_report_quality_patch.py",
     "scripts/apply_v92_report_runtime_tweaks.py",
     "scripts/apply_v92_report_legacy_translation_prompt.py",
+    "scripts/apply_v92_report_source_intro_filter.py",
 ]:
     patch = Path(patch_name)
     if patch.exists():
