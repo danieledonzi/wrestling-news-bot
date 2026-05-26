@@ -1,0 +1,79 @@
+{
+  "reports": [
+    {
+      "id": "wwe_raw",
+      "enabled": true,
+      "company": "WWE",
+      "category": "WWE",
+      "editorial_category": "Editoriali",
+      "show_name": "WWE Raw",
+      "show_date_offset_days": 1,
+      "publish_after": "06:30",
+      "preferred_source": "ringsidenews",
+      "fallback_source": "wrestlinginc",
+      "wait_for_preferred_until": "08:30",
+      "title_template": "WWE Raw del {date_it} - risultati e momenti salienti",
+      "match_keywords": ["wwe raw", "raw results", "wwe raw results"]
+    },
+    {
+      "id": "wwe_smackdown",
+      "enabled": true,
+      "company": "WWE",
+      "category": "WWE",
+      "editorial_category": "Editoriali",
+      "show_name": "WWE SmackDown",
+      "show_date_offset_days": 1,
+      "publish_after": "06:30",
+      "preferred_source": "ringsidenews",
+      "fallback_source": "wrestlinginc",
+      "wait_for_preferred_until": "08:30",
+      "title_template": "WWE SmackDown del {date_it} - risultati e momenti salienti",
+      "match_keywords": ["wwe smackdown", "smackdown results", "wwe smackdown results"]
+    },
+    {
+      "id": "wwe_nxt",
+      "enabled": true,
+      "company": "WWE",
+      "category": "NXT",
+      "editorial_category": "Editoriali",
+      "show_name": "WWE NXT",
+      "show_date_offset_days": 1,
+      "publish_after": "06:30",
+      "preferred_source": "ringsidenews",
+      "fallback_source": "wrestlinginc",
+      "wait_for_preferred_until": "08:30",
+      "title_template": "WWE NXT del {date_it} - risultati e momenti salienti",
+      "match_keywords": ["wwe nxt", "nxt results", "wwe nxt results"]
+    },
+    {
+      "id": "aew_dynamite",
+      "enabled": true,
+      "company": "AEW",
+      "category": "AEW",
+      "editorial_category": "Editoriali",
+      "show_name": "AEW Dynamite",
+      "show_date_offset_days": 1,
+      "publish_after": "06:30",
+      "preferred_source": "ringsidenews",
+      "fallback_source": "wrestlinginc",
+      "wait_for_preferred_until": "08:30",
+      "title_template": "AEW Dynamite del {date_it} - risultati e momenti salienti",
+      "match_keywords": ["aew dynamite", "dynamite results", "aew dynamite results"]
+    },
+    {
+      "id": "aew_collision",
+      "enabled": true,
+      "company": "AEW",
+      "category": "AEW",
+      "editorial_category": "Editoriali",
+      "show_name": "AEW Collision",
+      "show_date_offset_days": 1,
+      "publish_after": "06:30",
+      "preferred_source": "ringsidenews",
+      "fallback_source": "wrestlinginc",
+      "wait_for_preferred_until": "08:30",
+      "title_template": "AEW Collision del {date_it} - risultati e momenti salienti",
+      "match_keywords": ["aew collision", "collision results", "aew collision results"]
+    }
+  ]
+}
