@@ -113,7 +113,7 @@
     ],
     "count": 13,
     "first_seen": "2026-05-21T16:04:55",
-    "last_seen": "2026-05-26T07:36:00"
+    "last_seen": "2026-05-26T07:53:02"
   },
   "return:mark-shapiro:wwe": {
     "titles": [
@@ -1265,5 +1265,105 @@
     "count": 1,
     "first_seen": "2026-05-26T07:37:51",
     "last_seen": "2026-05-26T07:37:51"
+  },
+  "event:wwe-king-and-queen-of-the-ring-2026-05-26:20260526-073709-002-spoiler-raw-story": {
+    "titles": [
+      "20260526_073709_002_spoiler-wwe-raw-la-knight-annuncia-il-ritorno-di-king-queen-of-the-ring_5311_final.html"
+    ],
+    "facts": [
+      "official_return",
+      "brand_show",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T07:52:57",
+    "last_seen": "2026-05-26T07:52:57"
+  },
+  "event:wwe-clash-2026-05-26:20260526-073750-003-clash-italy-story": {
+    "titles": [
+      "20260526_073750_003_wwe-clash-in-italy-due-match-titolati-in-onda-su-espn_5314_final.html"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T07:52:57",
+    "last_seen": "2026-05-26T07:52:57"
+  },
+  "event:wwe-backlash-2026-05-26:sol-ruca-debut": {
+    "titles": [
+      "20260521_211337_002_sol-ruca-svela-il-supporto-di-triple-h-dopo-le-critiche-al-suo-debutto-a-raw_cb26c12d_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "brand_show",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T07:53:01",
+    "last_seen": "2026-05-26T07:53:01"
+  },
+  "event:wwe-king-and-queen-of-the-ring-2026-05-26:20260526-073710-002-raw-la-story": {
+    "titles": [
+      "20260526_073710_002_wwe-raw-la-knight-annuncia-il-ritorno-di-king-queen-of-the-ring_f178e3dd_final.html",
+      "20260526_073710_002_wwe-raw-la-knight-annuncia-il-ritorno-di-king-queen-of-the-ring_f178e3dd_original.html"
+    ],
+    "facts": [
+      "official_return",
+      "brand_show",
+      "wwe_impact"
+    ],
+    "count": 2,
+    "first_seen": "2026-05-26T07:53:02",
+    "last_seen": "2026-05-26T07:53:02"
+  },
+  "event:wwe-clash-2026-05-26:20260526-073751-003-clash-italy-story": {
+    "titles": [
+      "20260526_073751_003_wwe-clash-in-italy-due-match-titolati-in-onda-su-espn_b4399ad1_final.html",
+      "20260526_073751_003_wwe-clash-in-italy-due-match-titolati-in-onda-su-espn_b4399ad1_original.html"
+    ],
+    "facts": [
+      "wwe_impact"
+    ],
+    "count": 2,
+    "first_seen": "2026-05-26T07:53:02",
+    "last_seen": "2026-05-26T07:53:02"
+  },
+  "event:wwe-king-and-queen-of-the-ring-2026-05-25:return-king-queen-ring-tournaments-story": {
+    "titles": [
+      "WWE Announces Return Of King & Queen Of The Ring Tournaments During 5/25 RAW"
+    ],
+    "facts": [
+      "official_return",
+      "brand_show",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T07:53:26",
+    "last_seen": "2026-05-26T07:53:26"
+  },
+  "event:wwe-clash-2026-05-25:roman-reigns-story": {
+    "titles": [
+      "Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW"
+    ],
+    "facts": [
+      "brand_show",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T07:53:45",
+    "last_seen": "2026-05-26T07:53:45"
+  },
+  "event:aew-double-or-nothing-2026-05-26:ftr-approaching-contract-option-year-story": {
+    "titles": [
+      "FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest"
+    ],
+    "facts": [
+      "contract_offer",
+      "wwe_impact"
+    ],
+    "count": 1,
+    "first_seen": "2026-05-26T07:54:18",
+    "last_seen": "2026-05-26T07:54:18"
   }
 }

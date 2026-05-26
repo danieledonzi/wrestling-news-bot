@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-26 07:35:33",
-  "last_bot_version": "v91_6_report_source_state_fix (6e5356d)",
-  "updated_at": "2026-05-26T07:37:51",
-  "total_items": 212,
+  "last_run_id": "2026-05-26 07:52:23",
+  "last_bot_version": "v91_6_1_resolved_report_publish_bypass (8a88fb5)",
+  "updated_at": "2026-05-26T07:54:18",
+  "total_items": 215,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1700,6 +1700,30 @@
       "original_html_file": "20260526_073751_003_wwe-clash-in-italy-due-match-titolati-in-onda-su-espn_b4399ad1_original.html",
       "final_html_file": "20260526_073751_003_wwe-clash-in-italy-due-match-titolati-in-onda-su-espn_b4399ad1_final.html",
       "metadata_file": "20260526_073751_003_wwe-clash-in-italy-due-match-titolati-in-onda-su-espn_b4399ad1_metadata.json"
+    },
+    {
+      "run_id": "2026-05-26 07:52:23",
+      "title": "WWE: annunciato il ritorno dei tornei King & Queen of the Ring a Raw",
+      "url": "https://www.ringsidenews.com/wwe-announces-return-king-queen-ring-tournaments-during-525-raw/",
+      "original_html_file": "20260526_075326_001_wwe-annunciato-il-ritorno-dei-tornei-king-queen-of-the-ring-a-raw_a8760622_original.html",
+      "final_html_file": "20260526_075326_001_wwe-annunciato-il-ritorno-dei-tornei-king-queen-of-the-ring-a-raw_a8760622_final.html",
+      "metadata_file": "20260526_075326_001_wwe-annunciato-il-ritorno-dei-tornei-king-queen-of-the-ring-a-raw_a8760622_metadata.json"
+    },
+    {
+      "run_id": "2026-05-26 07:52:23",
+      "title": "Roman Reigns chiarisce le conseguenze del Tribal Combat a Clash in Italy",
+      "url": "https://www.ringsidenews.com/roman-reigns-reveals-new-consequences-attached-clash-italy-tribal-combat-match-during-525-raw/",
+      "original_html_file": "20260526_075345_002_roman-reigns-chiarisce-le-conseguenze-del-tribal-combat-a-clash-in-italy_9ab4aa1f_original.html",
+      "final_html_file": "20260526_075345_002_roman-reigns-chiarisce-le-conseguenze-del-tribal-combat-a-clash-in-italy_9ab4aa1f_final.html",
+      "metadata_file": "20260526_075345_002_roman-reigns-chiarisce-le-conseguenze-del-tribal-combat-a-clash-in-italy_9ab4aa1f_metadata.json"
+    },
+    {
+      "run_id": "2026-05-26 07:52:23",
+      "title": "FTR vicini all'anno di opzione contrattuale in AEW: interesse dalla WWE",
+      "url": "https://www.ringsidenews.com/ftr-approaching-aew-contract-option-year-amid-preliminary-wwe-interest/",
+      "original_html_file": "20260526_075418_003_ftr-vicini-all-anno-di-opzione-contrattuale-in-aew-interesse-dalla-wwe_3e2933a9_original.html",
+      "final_html_file": "20260526_075418_003_ftr-vicini-all-anno-di-opzione-contrattuale-in-aew-interesse-dalla-wwe_3e2933a9_final.html",
+      "metadata_file": "20260526_075418_003_ftr-vicini-all-anno-di-opzione-contrattuale-in-aew-interesse-dalla-wwe_3e2933a9_metadata.json"
     }
   ]
 }

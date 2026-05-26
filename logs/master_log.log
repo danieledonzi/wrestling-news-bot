@@ -18139,3 +18139,394 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
 ===== RUN END [2026-05-26 07:35:33] VERSION [v91_6_report_source_state_fix (6e5356d)] =====
 
+[BOOT v88.3] Quality floor e report media/title guards attivi
+[BOOT v90.2] Editorial pacing + update gate attivi: true-update gate, soft_pool, dense-window pacing
+[BOOT v90.2.2] Report flow tuning attivo: chain report, no inline images, post-report unspoiler
+[BOOT v90.2.7] Central story core assignment attivo
+[BOOT v90.2.7.1] Core authority hotfix attiva
+[BOOT v90.2.7.2] Queue type contract + report source guard attivi
+[BOOT v90.2.8] Feed-level processed URL hard skip attivo
+[BOOT v91] Authoritative editorial pipeline refactor attivo
+[BOOT v91.1] Score return contract guard attivo
+[BOOT v91.2] Publish contract + authoritative lane guard attivo
+[BOOT v91.3] v723 parser corrected
+[BOOT v91.4] Publish processed + soft pool repair attivi
+[BOOT v91.4.1] Strict publish return tuple contract attivo
+[BOOT v91.5] HTML integrity guard + block-safe repair policy attivi
+[BOOT v91.5.1] Final strict publish return guard attivo
+[BOOT v91.5.2] Final safe print recursion guard attivo
+[BOOT v91.5.3] Report pending unwrap recursion guard attivo
+[BOOT v91.5.4] Report candidate circuit breaker attivo
+[BOOT v91.6] Report source state transition fix attivo
+[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1
+[BOOT v91.6.1] Resolved report publish bypass + spoiler consistency attivi
+
+===== RUN START [2026-05-26 07:52:23] VERSION [v91_6_1_resolved_report_publish_bypass (8a88fb5)] =====
+[PROCESSED v91.4] Published artifact reconcile: scanned=191 fixed=0
+[SOFTPOOL v91.4] cleanup keep=1 expired=0 migrated=0
+[PROCESSED v90.2.5.2] Migrati record non-final competitivi: 16
+[PROCESSED v90.2.5] Loaded processed URL records: 260
+[REPORT v86.5] History true-results override: rimossi 17 record da urls
+[REPORT v86.5] History true-results override: rimossi 9 record da semantic_ids
+[REPORT v86.5] History true-results override: rimossi 21 record da title_keys
+[REPORT v86.5] History true-results override: rimossi 15 record da event_keys
+[WP] Health check API OK: status 200 | tentativo 1/3
+[BOT] Avvio scansione feed
+[BOT] Scansione feed: https://www.wrestlinginc.com/feed/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2180802/wwe-raw-la-knight-king-queen-ring-2026-return/
+[SPOILER v85.3] Nessun evento live attivo: spoiler check disattivati per questa run
+[FRESHNESS v86.6] Post-show outcome rescue: non tratto come preview scaduta - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[SCORE v86.9] Cap commentary/opinion 100->68 - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OPINION value=strategic_discussion - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=bully-ray-questions-why-brock-lesnar-returned-so-quickly-retirement - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[FOLLOWUP] Event key gia' vista ma angolo autonomo consentito: event:brock-lesnar-return - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91.1 CHEAP] hard skip score=20 reasons=['deterministic_soft_trash'] - WWE's Jordynne Grace Working To Get Pilot's License For Charitable Cause
+[SKIP] Score sotto soglia editoriale (14/75): WWE's Jordynne Grace Working To Get Pilot's License For Charitable Cause
+[V91 AI] cache hit - JBL On WWE Cutting Contracts: 'That's Life'
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:wwe-wrestlemania-2026-05-26:brock-lesnar-story - JBL On WWE Cutting Contracts: 'That's Life'
+[PERF v71] WP lookup event_key: 1.81s
+[SKIP] event_key confermata su WordPress: event:wwe-wrestlemania-2026-05-26 - JBL On WWE Cutting Contracts: 'That's Life'
+[V91 AI] cache hit - AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=s-swerve-strickland-says-young-bucks-changed-their-minds-anarchy - AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena
+[SKIP] Score sotto soglia editoriale (39/75): AEW's Swerve Strickland Says Young Bucks Changed Their Minds On Anarchy In The Arena
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176831/aew-athena-roh-womens-world-title-wwe-roman-reigns/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176730/swerve-strickland-criticizes-darby-allin-aew-world-title/
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176685/jelly-roll-more-comedic-wwe-wrestlemania-storyline/
+[V91 AI] cache hit - Penta And Rey Mysterio Agree To Future Intercontinental Championship Match On WWE Raw
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:wwe-wrestlemania-2026-05-26:brock-lesnar-story - Penta And Rey Mysterio Agree To Future Intercontinental Championship Match On WWE Raw
+[SKIP] event_key confermata su WordPress: event:wwe-wrestlemania-2026-05-26 - Penta And Rey Mysterio Agree To Future Intercontinental Championship Match On WWE Raw
+[SKIP] URL già in history: https://www.wrestlinginc.com/2176571/wwe-wrestlemania-42-cm-punk-bron-breakker-roman-reigns-cody-rhodes-alternate-creative-plans-backstage-report/
+[V91 AI] cache hit - Charlotte Flair, The Miz & Others Set For Meet & Greets At UFC Freedom 250
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=charlotte-flair-miz-others-set-meet-greets-freedom-250-during - Charlotte Flair, The Miz & Others Set For Meet & Greets At UFC Freedom 250
+[SKIP] Score sotto soglia editoriale (39/75): Charlotte Flair, The Miz & Others Set For Meet & Greets At UFC Freedom 250
+[V91 AI] cache hit - WWE's Stephanie McMahon Reveals How To Tell Whether She's Going To Slap Someone
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=s-stephanie-mcmahon-reveals-how-tell-whether-she-s-going - WWE's Stephanie McMahon Reveals How To Tell Whether She's Going To Slap Someone
+[SKIP] Score sotto soglia editoriale (39/75): WWE's Stephanie McMahon Reveals How To Tell Whether She's Going To Slap Someone
+[V91 AI] cache hit - TNA's Leon Slater Can't Believe He Has Support Of 'Wrestling Uncles'
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=s-leon-slater-can-t-believe-he-has-support-wrestling - TNA's Leon Slater Can't Believe He Has Support Of 'Wrestling Uncles'
+[SKIP] Score sotto soglia editoriale (39/75): TNA's Leon Slater Can't Believe He Has Support Of 'Wrestling Uncles'
+[V91 AI] cache hit - Tony Khan Calls AEW Star 'Ultimate Fighting Champion'
+[V91.1 SCORE] 70 lane=strategic_pool class=strategic_discussion core=tony-khan-calls-star-ultimate-fighting-champion-tony-khan-has - Tony Khan Calls AEW Star 'Ultimate Fighting Champion'
+[PERF v71] WP lookup event_key: 1.54s
+[SKIP] event_key confermata su WordPress: event:darby-allin-title - Tony Khan Calls AEW Star 'Ultimate Fighting Champion'
+[V91 AI] cache hit - Swerve Strickland Comments On Possibility Of The New Day Coming To AEW
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=swerve-strickland-comments-possibility-day-coming-swerve-strickland-has-discussed - Swerve Strickland Comments On Possibility Of The New Day Coming To AEW
+[SKIP] Score sotto soglia editoriale (39/75): Swerve Strickland Comments On Possibility Of The New Day Coming To AEW
+[V91 AI] cache hit - WWE's Finn Balor Says He Wants To Keep Wrestling But Regrets Absence From Family
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=s-finn-balor-says-he-wants-keep-wrestling-but-regrets - WWE's Finn Balor Says He Wants To Keep Wrestling But Regrets Absence From Family
+[SKIP] Score sotto soglia editoriale (39/75): WWE's Finn Balor Says He Wants To Keep Wrestling But Regrets Absence From Family
+[SCORE v81.1] Cap light name-driven item 63->63 - Former WWE Star Recalls Being Re-Hired After Vince McMahon Forgot About Firing Him
+[V91 AI] cache hit - Former WWE Star Recalls Being Re-Hired After Vince McMahon Forgot About Firing Him
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=star-recalls-being-re-hired-vince-mcmahon-forgot-about-firing - Former WWE Star Recalls Being Re-Hired After Vince McMahon Forgot About Firing Him
+[SKIP] Score sotto soglia editoriale (45/75): Former WWE Star Recalls Being Re-Hired After Vince McMahon Forgot About Firing Him
+[PERF v71] WP strict report lookup: 1.65s
+[REPORT v86.6] True results report non confermato da WordPress: rivaluto report:wwe-raw-2026-05-25 - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[V91 AI] cache hit - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=raw-results-5-25-intercontinental-up-grabs-oba-femi-appears - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[V91.5 HARD SKIP] listicle/opinion automatico escluso: AEW Double Or Nothing 2026: Biggest Winners And Losers
+[V91.1 CHEAP] hard skip score=20 reasons=['discussion_value_signal', 'event_registry_match', 'v91_5_hard_skip_listicle_opinion'] - AEW Double Or Nothing 2026: Biggest Winners And Losers
+[SKIP] Score sotto soglia editoriale (20/75): AEW Double Or Nothing 2026: Biggest Winners And Losers
+[V91.5 HARD SKIP] listicle/opinion automatico escluso: AEW Double Or Nothing 2026: 3 Things We Hated & 3 Things We Loved
+[V91.1 CHEAP] hard skip score=20 reasons=['discussion_value_signal', 'event_registry_match', 'v91_5_hard_skip_listicle_opinion'] - AEW Double Or Nothing 2026: 3 Things We Hated & 3 Things We Loved
+[SKIP] Score sotto soglia editoriale (14/75): AEW Double Or Nothing 2026: 3 Things We Hated & 3 Things We Loved
+[BOT] Scansione feed: https://www.ringsidenews.com/feed/
+[SKIP] URL già in history: https://www.ringsidenews.com/buddy-matthews-locked-major-wsw-return-tour-across-australia-new-zealand/
+[V91 AI] cache hit - Danhausen's Knicks Curse Somehow Worked Again During NBA Playoff Run
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=danhausen-s-knicks-curse-somehow-worked-again-during-nba-playoff - Danhausen's Knicks Curse Somehow Worked Again During NBA Playoff Run
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-loading-espn-broadcast-clash-italy-high-profile-matches/
+[V91 AI] cache hit - Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:wwe-clash-2026-05-25:roman-reigns-story - Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW
+[FRESHNESS v86.6] Post-show outcome rescue: non tratto come preview scaduta - WWE Announces Return Of King & Queen Of The Ring Tournaments During 5/25 RAW
+[V91 AI] cache hit - WWE Announces Return Of King & Queen Of The Ring Tournaments During 5/25 RAW
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:wwe-king-and-queen-of-the-ring-2026-05-25:brock-lesnar-story - WWE Announces Return Of King & Queen Of The Ring Tournaments During 5/25 RAW
+[SKIP] URL già in history: https://www.ringsidenews.com/wwe-confirms-logan-paul-will-out-action-months-injury-during-525-raw/
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 55->55 - WWE RAW Spoiler Lineup for May 25, 2026: Full Match Card and Backstage Notes Revealed
+[SCORE v81.1] Cap future card announcement 55->55 - WWE RAW Spoiler Lineup for May 25, 2026: Full Match Card and Backstage Notes Revealed
+[V91 AI] cache hit - WWE RAW Spoiler Lineup for May 25, 2026: Full Match Card and Backstage Notes Revealed
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=raw-spoiler-lineup-may-25-full-card-backstage-notes-raw - WWE RAW Spoiler Lineup for May 25, 2026: Full Match Card and Backstage Notes Revealed
+[SKIP] Score sotto soglia editoriale (40/75): WWE RAW Spoiler Lineup for May 25, 2026: Full Match Card and Backstage Notes Revealed
+[V91 AI] cache hit - Brock Lesnar Calls Himself Retired During 5/25 WWE RAW
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:wwe-wrestlemania-2026-05-25:brock-lesnar-return - Brock Lesnar Calls Himself Retired During 5/25 WWE RAW
+[SKIP] Score sotto soglia editoriale (71/75): Brock Lesnar Calls Himself Retired During 5/25 WWE RAW
+[SKIP] URL già in history: https://www.ringsidenews.com/former-wrestling-star-golden-boy-jerry-grey-dead-62-long-battle-stage-4-cancer/
+[EVENTREG v90.2.5.4.1] report key da registry: report:wwe-clash-2026-05-26
+[PERF v71] WP strict report lookup: 1.78s
+[REPORT v86.6] True results report non confermato da WordPress: rivaluto report:wwe-clash-2026-05-26 - WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[V91 AI] cache hit - WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[V91.1 SCORE] 82 lane=publish_now class=strategic_discussion core=report:wwe-clash-2026-05-26 - WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[V91 AI] cache hit - Enzo Amore Pulling Back From Indie Bookings Amid WWE Reunion Talk
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=enzo-amore-pulling-back-indie-bookings-amid-reunion-talk-speculation - Enzo Amore Pulling Back From Indie Bookings Amid WWE Reunion Talk
+[V91 AI] cache hit - Sirena Linton Burns Old Ring Gear in Free Agent Vignette After WWE Release
+[V91.1 SCORE] 45 lane=skip_final class=strategic_discussion core=sirena-linton-burns-old-ring-gear-free-agent-vignette-release - Sirena Linton Burns Old Ring Gear in Free Agent Vignette After WWE Release
+[V91 AI] cache hit - Live Fan Footage Confirms Jack Perry's AEW Double or Nothing Bus Crash Wasn't Pre-Taped
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:aew-double-or-nothing-2026-05-26:brock-lesnar-story - Live Fan Footage Confirms Jack Perry's AEW Double or Nothing Bus Crash Wasn't Pre-Taped
+[V91 AI] cache hit - Netflix Executive Explains Why WWE Chose Italy for Clash in Italy Premium Live Event
+[V91.1 SCORE] 74 lane=strategic_pool class=strategic_discussion core=event:wwe-clash-2026-05-26:brock-lesnar-story - Netflix Executive Explains Why WWE Chose Italy for Clash in Italy Premium Live Event
+[SKIP] Score sotto soglia editoriale (69/75): Netflix Executive Explains Why WWE Chose Italy for Clash in Italy Premium Live Event
+[V91 AI] cache hit - FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest
+[V91.1 SCORE] 72 lane=strategic_pool class=strategic_discussion core=event:aew-double-or-nothing-2026-05-26:brock-lesnar-story - FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest
+[SCORE] 77 medium - WWE RAW Results, Highlights and Key Moments for May 25, 2026 | event_report, v71 source reliability soft penalty, v71 freshness=0.592
+[SCORE] 76 medium - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement' | concrete_outcome, v71 freshness=0.427
+[SCORE] 75 medium - WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More | opinion_needs_value_check, concrete_outcome_signal, discussion_value_signal, v71 freshness=0.499, true-results report: bypass soglia editoriale
+[SCORE] 71 medium - WWE Announces Return Of King & Queen Of The Ring Tournaments During 5/25 RAW | event_related, concrete_outcome, v71 source reliability soft penalty, v71 freshness=0.616, v48 tier5: v71 major story bypass
+[SCORE] 67 medium - Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW | event_related, v71 source reliability soft penalty, v71 freshness=0.513, v48 tier2: 55-74
+[SCORE] 67 medium - Live Fan Footage Confirms Jack Perry's AEW Double or Nothing Bus Crash Wasn't Pre-Taped | event_related, v71 source reliability soft penalty, v71 freshness=0.454, v48 tier2: 55-74
+[SCORE] 67 medium - FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest | event_related, v71 source reliability soft penalty, v71 freshness=0.557, v48 tier2: 55-74
+[SCORE] 40 low - Danhausen's Knicks Curse Somehow Worked Again During NBA Playoff Run | opinion_needs_value_check, concrete_outcome_signal, discussion_value_signal, v71 source reliability soft penalty, v71 freshness=0.533, v48 tier4: 40-44 riempimento controllato
+[SCORE] 40 low - Enzo Amore Pulling Back From Indie Bookings Amid WWE Reunion Talk | opinion_needs_value_check, concrete_outcome_signal, discussion_value_signal, v71 source reliability soft penalty, v71 freshness=0.471, v48 tier4: 40-44 riempimento controllato
+[SCORE] 40 low - Sirena Linton Burns Old Ring Gear in Free Agent Vignette After WWE Release | opinion_needs_value_check, concrete_outcome_signal, discussion_value_signal, v71 source reliability soft penalty, v71 freshness=0.47, v48 tier4: 40-44 riempimento controllato
+[REPORT v86.9] Priorita true-results in coda: report:wwe-clash-2026-05-26 - WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[MODE] Modalita normale: 0 news >=90, 0 news >=80
+[MODEL v87.7] task=healthcheck chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[GEMINI] Modello attivo: gemini-3.1-flash-lite
+[PENDING] Elementi da recuperare: 3
+[PERF v71] WP lookup URL esistente: 1.02s
+[REPORT v86.7] Pending true-results non pubblicato: resta lavorabile via candidate queue report:wwe-clash-2026-05-26
+[REPORT v86.7] Pending true-results non pubblicato: resta lavorabile via candidate queue report:wwe-raw-2026-05-25
+[REPORT v86.7] Pending true-results non pubblicato: resta lavorabile via candidate queue report:wwe-raw-2026-05-25
+[BOT] News candidate totali: 10 | mode=normal | max nuove=3 | pending pubblicati=0
+[REPORT v91.6] Candidate report: fonte risolta, bypass gate ricorsivo: report:wwe-raw-2026-05-25 -> resolved-report-source:wwe-raw-2026-05-25
+[REPORT v91.6] Core override fonte report risolta: resolved-report-source:wwe-raw-2026-05-25 - WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=RESULTS_REPORT value=strategic_discussion - WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[V91 DECISION] allow legacy publish path score=82 lane=publish_now core=resolved-report-source:wwe-raw-2026-05-25 - WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[REPORT v91.6] Core override fonte report risolta: resolved-report-source:wwe-raw-2026-05-25 - WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[CORE v90.2.7.1] authority core=resolved-report-source:wwe-raw-2026-05-25 type=resolved_report_source title=WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[REPORT v91.6] Core override fonte report risolta: resolved-report-source:wwe-raw-2026-05-25 - WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[CORE v90.2.7] resolved_report_source core=resolved-report-source:wwe-raw-2026-05-25 title=WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[PERF v71] WP lookup event_key: 1.85s
+[EVENTREG v90.2.5.4.1] report key da registry: report:wwe-clash-2026-05-26
+[EVENTREG v90.2.5.4.1] report key da registry: report:wwe-clash-2026-05-26
+[REPORT v86.5] True results report autorizzato dal gate stretto: report:wwe-clash-2026-05-26 - WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[REPORT v91.6] Pending report: fonte risolta, salto gate report e passo a candidate normale: report:wwe-raw-2026-05-25 -> https://www.ringsidenews.com/wwe-raw-results-highlights-key-moments-may-25-2026/
+[REPORT v91.6.1] Fonte report risolta: bypass gate legacy e pubblico come articolo: resolved-report-source:wwe-raw-2026-05-25
+[REPORT v91.6.1] Direct publish resolved report via _ORIG_V902_process_candidate_item: WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[EVENTREG v90.2.5.4.1] report key da registry: report:wwe-clash-2026-05-26
+[EVENTREG v90.2.5.4.1] report key da registry: report:wwe-clash-2026-05-26
+[REPORT v86.5] True results report autorizzato dal gate stretto: report:wwe-clash-2026-05-26 - WWE RAW Results, Highlights and Key Moments for May 25, 2026
+[REPORT v91.6] Pending report: fonte risolta, salto gate report e passo a candidate normale: report:wwe-raw-2026-05-25 -> https://www.ringsidenews.com/wwe-raw-results-highlights-key-moments-may-25-2026/
+[REPORT v91.6.1] Evito rientro direct publish resolved report: resolved-report-source:wwe-raw-2026-05-25
+[PENDING v86.7] Mantengo true-results in coda: non pubblicato né confermato su WordPress report:wwe-clash-2026-05-26
+[REPORT v91.6] Candidate report: fonte risolta, bypass gate ricorsivo: report:wwe-raw-2026-05-25 -> resolved-report-source:wwe-raw-2026-05-25
+[REPORT v91.5.4] Secondo tentativo stesso report nella run evitato: resolved-report-source:wwe-raw-2026-05-25
+[PENDING v86.7] Mantengo true-results in coda: non pubblicato né confermato su WordPress report:wwe-raw-2026-05-25
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OPINION value=strategic_discussion - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91 DECISION] allow legacy publish path score=76 lane=publish_candidate core=bully-ray-questions-why-brock-lesnar-returned-so-quickly-retirement - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[PROCESSED v90.2.5] Hard skip URL gia lavorato status=rejected reason=skipped - Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - WWE Announces Return Of King & Queen Of The Ring Tournaments During 5/25 RAW
+[V91 DECISION] allow legacy publish path score=76 lane=publish_candidate core=event:wwe-king-and-queen-of-the-ring-2026-05-25:return-king-queen-ring-tournaments-story - WWE Announces Return Of King & Queen Of The Ring Tournaments During 5/25 RAW
+[CORE v90.2.7.1] authority core=event:wwe-king-and-queen-of-the-ring-2026-05-25:return-king-queen-ring-tournaments-story type=event_news title=WWE Announces Return Of King & Queen Of The Ring Tournaments During 5/25 RAW
+[CORE v90.2.7] event_news core=event:wwe-king-and-queen-of-the-ring-2026-05-25:return-king-queen-ring-tournaments-story title=WWE Announces Return Of King & Queen Of The Ring Tournaments During 5/25 RAW
+[BOT] Elaborazione: WWE Announces Return Of King & Queen Of The Ring Tournaments During 5/25 RAW
+[BOT] semantic_id=wwe-announces-return-of-king-queen-of-the-ring-tournaments-during-525-raw
+[SCORE] iniziale=71 priority=medium
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/wwe-announces-return-king-queen-ring-tournaments-during-525-raw/
+[PERF v71] scraping articolo: 1.21s
+[EMBED v87.1] Estratti 1 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=8, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=1 url=https://www.ringsidenews.com/wwe-announces-return-king-queen-ring-tournaments-during-525-raw/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 1 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=8, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.66s
+[BOT] Embed trovati: 1
+[MODEL v87.7] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo riporta una notizia avvenuta durante Raw (annuncio del torneo), non è una guida preparatoria all'evento.
+[EDITORIAL v72.3] translation_notes=Mantenere 'King & Queen of the Ring' in inglese poiché nomi ufficiali del torneo.; Tradurre 'big pop' come 'grande accoglienza' o 'boato del pubblico'.; Evitare calchi come 'la compagnia ha molto sul suo piatto' per 'the company has a lot on its plate'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo riporta una notizia avvenuta durante Raw (annuncio del torneo), non è una guida preparatoria all'evento.
+[PERF v71] analisi editoriale AI v72: 5.60s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - WWE Announces Return Of King & Queen Of The Ring Tournaments During 5/25 RAW
+[V91 AI] cache hit - WWE Announces Return Of King & Queen Of The Ring Tournaments During 5/25 RAW
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:wwe-king-and-queen-of-the-ring-2026-05-25:jade-cargill-story - WWE Announces Return Of King & Queen Of The Ring Tournaments During 5/25 RAW
+[V91 AI] cache hit - 71
+[V91 AI] cache hit - 76
+[V91 AI] cache hit - WWE Announces Return Of King & Queen Of The Ring Tournaments During 5/25 RAW
+[SCORE] raffinato=76 priority=medium | event_related, concrete_outcome, discussion_value
+[PERF v71] scoring raffinato: 0.42s
+[V71] story_signature=event:wwe-king-and-queen-of-the-ring-2026-05-25:jade-cargill-story semantic_status=new_story freshness=0.616
+[PERF v71] dedupe/freshness v71: 0.35s
+[PERF v71] WP recent posts dedupe: 1.18s
+[WP] Health check cache: OK (api_status_200)
+[PERF v71] categoria da analisi editoriale v72: 1.48s
+[MODEL v87.7] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=8
+[MODEL v87.7] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PRESERVE v91.5] Repair v81 libero bypassato: nessun merge sul finale HTML
+[PERF v71] traduzione: 4.58s
+[MODEL v87.7] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): WWE: annunciato il ritorno dei tornei King & Queen of the Ring a Raw
+[PERF v71] WP strict report lookup: 2.00s
+[EMBED v88] Publish media guard: expected=1 before=1 after=1 missing=0
+[MEDIA v88] Recupero immagini inline mancanti: 1
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2025/04/wwe-king-amp-queen-of-the-ring-tournament-status-for-2025-revealed-49.jpg
+[MEDIA] Immagine caricata: 5316
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260526_075325_001_wwe-annunciato-il-ritorno-dei-tornei-king-queen-of-the-ring-a-raw_5317_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5317
+[PROCESSED v91.4] URL marcato published dopo publish confermato: https://www.ringsidenews.com/wwe-announces-return-king-queen-ring-tournaments-during-525-raw/
+[PERF v71] creazione post WordPress: 5.26s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2025/04/wwe-king-amp-queen-of-the-ring-tournament-status-for-2025-revealed-49.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5316
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'WWE Announces Return Of King & Queen Of The Ring Tournaments': 19.92s
+[OK] Pubblicato: WWE: annunciato il ritorno dei tornei King & Queen of the Ring a Raw
+[PENDING] Coda salvata: 3 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260526_075326_001_wwe-annunciato-il-ritorno-dei-tornei-king-queen-of-the-ring-a-raw_a8760622_*.html
+[RUN v85] Pubblicati in questa run: 1/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: WWE: annunciato il ritorno dei tornei King & Queen of the Ring a Raw
+[PUBLISHED REVIEW v87.1] Review outer salvata: WWE: annunciato il ritorno dei tornei King & Queen of the Ring a Raw
+[REPORT v87.6] Non scrivo history forte: non true-results/canonico (report:wwe-raw-2026-05-25)
+[CORE v90.2] Registrato publish core=event:wwe-king-and-queen-of-the-ring-2026-05-25:return-king-queen-ring-tournaments-story count=1 facts=['official_return', 'brand_show', 'wwe_impact']
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW
+[V91 DECISION] allow legacy publish path score=72 lane=strategic_pool core=event:wwe-clash-2026-05-25:roman-reigns-story - Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW
+[CORE v90.2.7.1] authority core=event:wwe-clash-2026-05-25:roman-reigns-story type=event_news title=Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW
+[CORE v90.2.7] event_news core=event:wwe-clash-2026-05-25:roman-reigns-story title=Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW
+[BOT] Elaborazione: Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW
+[BOT] semantic_id=roman-reigns-reveals-new-consequences-attached-to-clash-in-italy-tribal-combat-match-during-525-raw
+[SCORE] iniziale=67 priority=medium
+[EMBED v87.1] Estratti 3 embed da rsn-lazy data-rsn-html
+[EMBED v88] Mappa posizionale media salvata: embeds=3 url=https://www.ringsidenews.com/roman-reigns-reveals-new-consequences-attached-clash-italy-tribal-combat-match-during-525-raw/
+[PERF v71] scraping articolo: 1.35s
+[EMBED v87.1] Estratti 3 embed da rsn-lazy data-rsn-html
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=9, image=0, embed=0
+[EMBED v88] Mappa posizionale media salvata: embeds=3 url=https://www.ringsidenews.com/roman-reigns-reveals-new-consequences-attached-clash-italy-tribal-combat-match-during-525-raw/
+[EMBED v88] Blocchi embed assenti ma media scan ha trovato 3 embed: userò positional guard
+[BLOCKSEQ] Blocchi ordinati estratti: text=9, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.75s
+[BOT] Embed trovati: 3
+[MODEL v87.7] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=POST_SHOW_NEWS conf=0.95 | category=WWE (4) conf=1.00 model=gemini-3.1-flash-lite | L'articolo descrive un segmento specifico avvenuto nell'ultima puntata di RAW. Nonostante citi un evento futuro, il contenuto è il resoconto di un confronto verbale già accaduto.
+[EDITORIAL v72.3] translation_notes=Mantenere 'Tribal Combat' e 'World Heavyweight Championship'.; 'Domesticates' va tradotto rendendo l'idea di addomesticare/soggiogare.; Evitare 'rilasciato' per 'released'.
+[EDITORIAL v73] final type=POST_SHOW_NEWS | category=WWE (4) | L'articolo descrive un segmento specifico avvenuto nell'ultima puntata di RAW. Nonostante citi un evento futuro, il contenuto è il resoconto di un confronto verbale già accaduto.
+[PERF v71] analisi editoriale AI v72: 1.36s
+[FRESHNESS] Post-show news fresca: non applico blocco preview - Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW
+[SCORE v79.1.4] Pre-show spoiler obsoleto cap 100->56 - Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW
+[V91.1 CHEAP] hard skip score=35 reasons=['hard_preview_or_listing'] - Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW
+[SCORE v79.1.4] Final cap pre-show obsoleto 35->35 - Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW
+[V91 AI] cache hit - 67
+[V91.1 BYPASS] legacy cap bypass 35->45 lane=skip_final - 67
+[V91 AI] cache hit - 35
+[V91 AI] cache hit - Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW
+[V91.3] refined score 45->76 - Roman Reigns Reveals New Consequences Attached To Clash In Italy Tribal Combat Match During 5/25 RAW
+[SCORE] raffinato=76 priority=medium | event_related, concrete_outcome
+[PERF v71] scoring raffinato: 0.52s
+[V71] story_signature=event:wwe-clash-2026-05-25:roman-reigns-change semantic_status=new_story freshness=0.63
+[PERF v71] dedupe/freshness v71: 0.39s
+[WP] Health check cache: OK (api_status_200)
+[MODEL v87.7] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=9
+[MODEL v87.7] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PRESERVE v91.5] Repair v81 libero bypassato: nessun merge sul finale HTML
+[PERF v71] traduzione: 5.01s
+[MODEL v87.7] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): Roman Reigns chiarisce le conseguenze del Tribal Combat a Clash in Italy
+[EMBED v90.2.3] Social embed/quote normalizzati: 2
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/WWE/status/2059097193584247271
+[EMBED v87.3] Reintegrato embed in posizione originale approx after_text=1: https://x.com/WWE/status/2059098603323293999
+[EMBED v87.3] Positional embed guard applicato: 2 modifiche
+[EMBED v88] Publish media guard: expected=3 before=1 after=3 missing=0
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/roman-reigns-reveals-new-consequences-attached-to-clash-in-italy-tribal-combat-match-during-525-raw-27.png
+[MEDIA] Immagine caricata: 5319
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260526_075342_002_roman-reigns-chiarisce-le-conseguenze-del-tribal-combat-a-clash-in-italy_5320_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5320
+[PROCESSED v91.4] URL marcato published dopo publish confermato: https://www.ringsidenews.com/roman-reigns-reveals-new-consequences-attached-clash-italy-tribal-combat-match-during-525-raw/
+[PERF v71] creazione post WordPress: 5.54s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/roman-reigns-reveals-new-consequences-attached-to-clash-in-italy-tribal-combat-match-during-525-raw-27.png
+[MEDIA v85] Riutilizzo immagine già caricata: 5319
+[WP] Status attach image: 200
+[PERF v71] featured image: 1.66s
+[PERF v71] totale articolo pubblicato 'Roman Reigns Reveals New Consequences Attached To Clash In I': 16.89s
+[OK] Pubblicato: Roman Reigns chiarisce le conseguenze del Tribal Combat a Clash in Italy
+[PENDING] Coda salvata: 3 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260526_075345_002_roman-reigns-chiarisce-le-conseguenze-del-tribal-combat-a-clash-in-italy_9ab4aa1f_*.html
+[RUN v85] Pubblicati in questa run: 2/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: Roman Reigns chiarisce le conseguenze del Tribal Combat a Clash in Italy
+[PUBLISHED REVIEW v87.1] Review outer salvata: Roman Reigns chiarisce le conseguenze del Tribal Combat a Clash in Italy
+[REPORT v87.6] Non scrivo history forte: non true-results/canonico (report:wwe-raw-2026-05-25)
+[CORE v90.2] Registrato publish core=event:wwe-clash-2026-05-25:roman-reigns-story count=1 facts=['brand_show', 'wwe_impact']
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - Live Fan Footage Confirms Jack Perry's AEW Double or Nothing Bus Crash Wasn't Pre-Taped
+[V91 DECISION] allow legacy publish path score=72 lane=strategic_pool core=event:aew-double-or-nothing-2026-05-26:jack-perry-story - Live Fan Footage Confirms Jack Perry's AEW Double or Nothing Bus Crash Wasn't Pre-Taped
+[CORE v90.2.7.1] authority core=event:aew-double-or-nothing-2026-05-26:jack-perry-story type=event_context title=Live Fan Footage Confirms Jack Perry's AEW Double or Nothing Bus Crash Wasn't Pre-Taped
+[CORE v90.2.7] event_context core=event:aew-double-or-nothing-2026-05-26:jack-perry-story title=Live Fan Footage Confirms Jack Perry's AEW Double or Nothing Bus Crash Wasn't Pre-Taped
+[SKIP v88.3] Feature storico/FIFA/venue/media call escluso: Live Fan Footage Confirms Jack Perry's AEW Double or Nothing Bus Crash Wasn't Pre-Taped
+[V91 AI] deterministic editorial analysis lane=eligible_ai type=OTHER value=strategic_discussion - FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest
+[V91 DECISION] allow legacy publish path score=72 lane=strategic_pool core=event:aew-double-or-nothing-2026-05-26:ftr-approaching-contract-option-year-story - FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest
+[CORE v90.2.7.1] authority core=event:aew-double-or-nothing-2026-05-26:ftr-approaching-contract-option-year-story type=event_news title=FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest
+[CORE v90.2.7] event_news core=event:aew-double-or-nothing-2026-05-26:ftr-approaching-contract-option-year-story title=FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest
+[BOT] Elaborazione: FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest
+[BOT] semantic_id=ftr-approaching-aew-contract-option-year-amid-preliminary-wwe-interest
+[SCORE] iniziale=67 priority=medium
+[PERF v71] scraping articolo: 1.20s
+[BLOCKSEQ v86] Blocchi ordinati estratti: text=10, image=0, embed=0
+[BLOCKSEQ] Blocchi ordinati estratti: text=10, image=0, embed=0
+[PERF v71] estrazione blocchi: 0.62s
+[MODEL v87.7] task=editorial_analysis chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash,gemini-2.5-flash-lite
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[EDITORIAL v72.3] type=RUMOR conf=1.00 | category=AEW (5) conf=1.00 model=gemini-3.1-flash-lite | L'articolo tratta indiscrezioni di mercato e scenari contrattuali futuri relativi agli FTR, basandosi su report di terze parti.
+[EDITORIAL v72.3] translation_notes=Mantenere 'AEW World Tag Team Titles' e 'I Quit match' in inglese.; Non tradurre 'option year' letteralmente, usare 'anno di opzione contrattuale'.; Tradurre le citazioni mantenendo il tono giornalistico formale.
+[EDITORIAL v73] final type=RUMOR | category=AEW (5) | L'articolo tratta indiscrezioni di mercato e scenari contrattuali futuri relativi agli FTR, basandosi su report di terze parti.
+[PERF v71] analisi editoriale AI v72: 1.14s
+[V91 AI] cache hit - FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest
+[V91.1 SCORE] 76 lane=publish_candidate class=strategic_discussion core=event:aew-double-or-nothing-2026-05-26:adam-copeland-story - FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest
+[V91 AI] cache hit - 67
+[V91 AI] cache hit - 76
+[V91 AI] cache hit - FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest
+[V91.3] refined score 67->76 - FTR Approaching AEW Contract Option Year Amid Preliminary WWE Interest
+[SCORE] raffinato=76 priority=medium | event_related, concrete_outcome
+[PERF v71] scoring raffinato: 0.58s
+[V71] story_signature=event:aew-double-or-nothing-2026-05-26:adam-copeland-story semantic_status=new_story freshness=0.557
+[PERF v71] dedupe/freshness v71: 0.45s
+[WP] Health check cache: OK (api_status_200)
+[MODEL v87.7] task=translate_normal chain=gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[BLOCKSEQ v72.3] Traduzione strutturata ottenuta con: gemini-3.1-flash-lite | blocchi testo=10
+[MODEL v87.7] task=postedit chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[POSTEDIT v80] Testo rifinito con oEmbed protetti: gemini-3.1-flash-lite
+[PRESERVE v91.5] Repair v81 libero bypassato: nessun merge sul finale HTML
+[PERF v71] traduzione: 22.34s
+[FIX] Titolo non valido (ok) -> fallback automatico: Ftr approaching AEW contract option year amid preliminary WWE interest
+[MODEL v87.7] task=title chain=gemini-3.1-flash-lite,gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.5-pro
+[GEMINI] Uso modello: gemini-3.1-flash-lite
+[TITLE v73] Titolo finalizzato con AI (gemini-3.1-flash-lite): FTR vicini all'anno di opzione contrattuale in AEW: interesse dalla WWE
+[BOT v85] Upload featured image prima del publish: https://www.ringsidenews.com/wp-content/uploads/2026/05/ftr-approaching-aew-contract-option-year-amid-preliminary-wwe-interest-54.jpg
+[MEDIA] Immagine caricata: 5322
+[WP] Status create: 201
+[WP v85] Status publish draft: 200
+[PUBLISHED v87.6] Articolo salvato: published/20260526_075416_003_ftr-vicini-allanno-di-opzione-contrattuale-in-aew-interesse-dalla-wwe_5323_final.html
+[MASTER LOG v87.6] Evento salvato: publish_artifact_saved 5323
+[PROCESSED v91.4] URL marcato published dopo publish confermato: https://www.ringsidenews.com/ftr-approaching-aew-contract-option-year-amid-preliminary-wwe-interest/
+[PERF v71] creazione post WordPress: 3.81s
+[BOT] Immagine trovata: https://www.ringsidenews.com/wp-content/uploads/2026/05/ftr-approaching-aew-contract-option-year-amid-preliminary-wwe-interest-54.jpg
+[MEDIA v85] Riutilizzo immagine già caricata: 5322
+[WP] Status attach image: 200
+[PERF v71] totale articolo pubblicato 'FTR Approaching AEW Contract Option Year Amid Preliminary WW': 30.76s
+[OK] Pubblicato: FTR vicini all'anno di opzione contrattuale in AEW: interesse dalla WWE
+[PENDING] Coda salvata: 3 elementi
+[PUBLISHED REVIEW v81] Salvati HTML pubblicati flat: published_html_review/20260526_075418_003_ftr-vicini-all-anno-di-opzione-contrattuale-in-aew-interesse-dalla-wwe_3e2933a9_*.html
+[RUN v85] Pubblicati in questa run: 3/5
+[PUBLISHED REVIEW v87.2] Review duplicata evitata: FTR vicini all'anno di opzione contrattuale in AEW: interesse dalla WWE
+[PUBLISHED REVIEW v87.1] Review outer salvata: FTR vicini all'anno di opzione contrattuale in AEW: interesse dalla WWE
+[CORE v90.2] Registrato publish core=event:aew-double-or-nothing-2026-05-26:ftr-approaching-contract-option-year-story count=1 facts=['contract_offer', 'wwe_impact']
+[BOT] Pubblicati 3 articoli (0 pending + 3 nuove) su 7 candidati provati | mode=normal
+[PUBLISHED REVIEW v81] Index flat salvato: published_html_review/index.json
+[ARTIFACT SANITIZE v88] published_html_review/run_2026-05-26 07:52:23_summary.json -> published_html_review/run_2026-05-26 07-52-23_summary.json
+[ARTIFACT SANITIZE v88] File review normalizzati: 1
+[REVIEW BUNDLE v81.1] Creato bundle cumulativo: review_bundle_latest.zip (843 file)
+[MASTER LOG v87.6] Evento salvato: run_artifacts_summary 
+[RUN ARTIFACTS v87.6] master_log=ok published=3 errors=0 status=ok
+===== RUN END [2026-05-26 07:52:23] VERSION [v91_6_1_resolved_report_publish_bypass (8a88fb5)] =====
+

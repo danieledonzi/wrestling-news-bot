@@ -632,6 +632,18 @@
     "updated_at": "1779742510.3732417",
     "url": "https://www.ringsidenews.com/former-wwe-star-spotted-performance-center-ahead-tuesdays-nxt/"
   },
+  "https://www.ringsidenews.com/ftr-approaching-aew-contract-option-year-amid-preliminary-wwe-interest": {
+    "extra": {
+      "event_key": "event:aew-double-or-nothing-2026-05-26",
+      "semantic_id": "ftr-approaching-aew-contract-option-year-amid-preliminary-wwe-interest"
+    },
+    "reason": "wordpress_publish_ok",
+    "score": null,
+    "status": "published",
+    "title": "FTR vicini all'anno di opzione contrattuale in AEW: interesse dalla WWE",
+    "updated_at": "1779782056.6445765",
+    "url": "https://www.ringsidenews.com/ftr-approaching-aew-contract-option-year-amid-preliminary-wwe-interest/"
+  },
   "https://www.ringsidenews.com/ftr-says-edge-christian-weak-competition-compared-them": {
     "extra": {
       "event_key": "",
@@ -923,6 +935,19 @@
     "title": "Caso di stalking contro Liv Morgan: nuova udienza in tribunale dopo diversi rinvii",
     "updated_at": "1779742510.4735637",
     "url": "https://www.ringsidenews.com/liv-morgan-stalking-case-returning-court-multiple-delays/"
+  },
+  "https://www.ringsidenews.com/live-fan-footage-confirms-jack-perrys-aew-double-nothing-bus-crash-wasnt-pre-taped": {
+    "extra": {
+      "event_key": "event:aew-double-or-nothing-2026-05-26",
+      "raw_result": "skipped",
+      "semantic_id": "live-fan-footage-confirms-jack-perrys-aew-double-or-nothing-bus-crash-wasnt-pre-taped"
+    },
+    "reason": "above_low_score_final_cap_not_final",
+    "score": 67,
+    "status": "competitive_deferred",
+    "title": "Live Fan Footage Confirms Jack Perry's AEW Double or Nothing Bus Crash Wasn't Pre-Taped",
+    "updated_at": "1779782025.5960467",
+    "url": "https://www.ringsidenews.com/live-fan-footage-confirms-jack-perrys-aew-double-nothing-bus-crash-wasnt-pre-taped/"
   },
   "https://www.ringsidenews.com/ludwig-kaiser-appears-aaa-recent-arrest": {
     "extra": {
@@ -1532,6 +1557,18 @@
     "updated_at": "1779742510.1883178",
     "url": "https://www.ringsidenews.com/roh-supercard-honor-results-highlights-key-moments-may-15-2026/"
   },
+  "https://www.ringsidenews.com/roman-reigns-reveals-new-consequences-attached-clash-italy-tribal-combat-match-during-525-raw": {
+    "extra": {
+      "event_key": "event:wwe-clash-2026-05-25",
+      "semantic_id": "roman-reigns-reveals-new-consequences-attached-to-clash-in-italy-tribal-combat-match-during-525-raw"
+    },
+    "reason": "wordpress_publish_ok",
+    "score": null,
+    "status": "published",
+    "title": "Roman Reigns chiarisce le conseguenze del Tribal Combat a Clash in Italy",
+    "updated_at": "1779782022.6551216",
+    "url": "https://www.ringsidenews.com/roman-reigns-reveals-new-consequences-attached-clash-italy-tribal-combat-match-during-525-raw/"
+  },
   "https://www.ringsidenews.com/ronda-rousey-credits-paul-heyman-wwe-changing-how-she-promotes-mma-fights": {
     "extra": {
       "event_key": "",
@@ -2028,6 +2065,18 @@
     "updated_at": "1779742510.1337879",
     "url": "https://www.ringsidenews.com/wwe-already-changing-creative-plans-due-jacy-jaynes-strong-main-roster-start/"
   },
+  "https://www.ringsidenews.com/wwe-announces-return-king-queen-ring-tournaments-during-525-raw": {
+    "extra": {
+      "event_key": "event:wwe-king-and-queen-of-the-ring-2026-05-25",
+      "semantic_id": "wwe-announces-return-of-king-queen-of-the-ring-tournaments-during-525-raw"
+    },
+    "reason": "wordpress_publish_ok",
+    "score": null,
+    "status": "published",
+    "title": "WWE: annunciato il ritorno dei tornei King & Queen of the Ring a Raw",
+    "updated_at": "1779782005.4403777",
+    "url": "https://www.ringsidenews.com/wwe-announces-return-king-queen-ring-tournaments-during-525-raw/"
+  },
   "https://www.ringsidenews.com/wwe-believes-aew-may-struggle-land-major-tv-deal-current-contract-ends": {
     "extra": {
       "event_key": "event:business:tko-financials-followup-believes-may-struggle-land-major-tv-deal-current-contract-ends",
@@ -2146,7 +2195,7 @@
     "score": 77,
     "status": "competitive_deferred",
     "title": "WWE RAW Results, Highlights and Key Moments for May 25, 2026",
-    "updated_at": "1779780963.5354195",
+    "updated_at": "1779781985.0552213",
     "url": "https://www.ringsidenews.com/wwe-raw-results-highlights-key-moments-may-25-2026/"
   },
   "https://www.ringsidenews.com/wwe-reveals-why-more-main-roster-house-shows-returning-this-summer": {
