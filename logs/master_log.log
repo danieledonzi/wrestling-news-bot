@@ -20049,3 +20049,17 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [NEWS v92] Pipeline news non ancora attiva. max_news_per_run=3
 [RUN v92] totale pubblicazioni=1 (report=1, news=0)
 ===== RUN END [2026-05-26T22:56:53] VERSION [v92_0_2_report_workshop_publish] =====
+===== RUN START [2026-05-26T23:22:21] VERSION [v92_0_2_report_workshop_publish] =====
+[WP v92] Health check API OK: status 200 endpoint=https://news.openwrestlingtv.com/wp-json/ | tentativo 1/3
+[RUN v92] wp_ok=True wp_status=status_200
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+[REPORT v92] Scarto candidato data non coerente: WWE Raw Results 5/18 - Women's Tag Team Title On The Line, Brock Lesnar Returns | expected=2026-05-25
+[REPORT v92] Pronto: wwe_raw_2026_05_25 source=wrestlinginc url=https://www.wrestlinginc.com/2180772/wwe-raw-may-25-intercontinental-title-up-for-grabs-oba-femi-appears-more/
+[REPORT v92] Fonte title: WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More
+[REPORT v92] Titolo deterministico: WWE Raw del 25 maggio 2026 - risultati e momenti salienti
+[REPORT v92] Categorie: Editoriali, WWE
+[REPORT v92] Avvio workshop pubblicazione: wwe_raw_2026_05_25
+[NEWS v92] Pipeline news non ancora attiva. max_news_per_run=3
+[RUN v92] totale pubblicazioni=1 (report=1, news=0)
+===== RUN END [2026-05-26T23:22:21] VERSION [v92_0_2_report_workshop_publish] =====
