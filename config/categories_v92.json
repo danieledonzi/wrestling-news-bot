@@ -1,0 +1,17 @@
+{
+  "categories": {
+    "Editoriali": "Editoriali",
+    "WWE": "WWE",
+    "NXT": "NXT",
+    "AEW": "AEW",
+    "TNA": "TNA",
+    "World": "World"
+  },
+  "report_category_rules": {
+    "WWE": ["Editoriali", "WWE"],
+    "NXT": ["Editoriali", "NXT"],
+    "AEW": ["Editoriali", "AEW"],
+    "TNA": ["Editoriali", "TNA"],
+    "World": ["Editoriali", "World"]
+  }
+}
