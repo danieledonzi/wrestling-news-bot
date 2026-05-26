@@ -2,6 +2,23 @@ name: OpenWrestlingTV Bot v92
 
 on:
   workflow_dispatch:
+    inputs:
+      manual_url:
+        description: "URL da lavorare manualmente. Se vuoto, parte la pipeline schedulata."
+        required: false
+        default: ""
+      manual_kind:
+        description: "Tipo contenuto manuale: report o news"
+        required: false
+        default: "report"
+      manual_title:
+        description: "Titolo manuale opzionale. Per report lasciare vuoto se si vuole usare il titolo fonte."
+        required: false
+        default: ""
+      manual_categories:
+        description: "Categorie separate da virgola, es. Editoriali,WWE"
+        required: false
+        default: "Editoriali"
   schedule:
     - cron: "*/30 * * * *"
 
@@ -56,9 +73,12 @@ jobs:
           python -m json.tool config/feeds_v92.json >/dev/null
           python -m json.tool config/categories_v92.json >/dev/null
           python -m py_compile bot_v92.py
+          python -m py_compile manual_v92.py
+          python -m py_compile modules/report_workshop_v92.py
           python - <<'PY'
           from pathlib import Path
           text = Path('bot_v92.py').read_text(encoding='utf-8')
+          manual = Path('manual_v92.py').read_text(encoding='utf-8')
           required = [
               'v92_0_2_report_workshop_publish',
               'run_report_pipeline',
@@ -70,13 +90,15 @@ jobs:
               'MAX_REPORTS_PER_RUN',
               'MAX_NEWS_PER_RUN',
           ]
-          missing = [m for m in required if m not in text]
+          manual_required = ['V92_MANUAL_URL', 'V92_MANUAL_KIND', 'run_manual_report']
+          missing = [m for m in required if m not in text] + [m for m in manual_required if m not in manual]
           if missing:
               raise SystemExit('[V92 VERIFY] missing markers: ' + ', '.join(missing))
-          print('[V92 VERIFY] bot_v92.py ok')
+          print('[V92 VERIFY] v92 sources ok')
           PY
 
       - name: Reset v92 report status for testing
+        if: ${{ github.event.inputs.manual_url == '' }}
         env:
           V92_FORCE_REPORT_REPUBLISH: "1"
           V92_FORCE_REPORT_ID: "wwe_raw"
@@ -85,7 +107,29 @@ jobs:
           set -e
           python scripts/reset_v92_report_status_for_test.py
 
+      - name: Run manual v92
+        if: ${{ github.event.inputs.manual_url != '' }}
+        id: run_manual
+        env:
+          WP_USER: ${{ secrets.WP_USER }}
+          WP_PASSWORD: ${{ secrets.WP_PASSWORD }}
+          WP_URL: ${{ secrets.WP_URL }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL_CHAIN: gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+          GEMINI_REPORT_MODEL_CHAIN: gemini-3-flash-preview,gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite
+          V92_MANUAL_URL: ${{ github.event.inputs.manual_url }}
+          V92_MANUAL_KIND: ${{ github.event.inputs.manual_kind }}
+          V92_MANUAL_TITLE: ${{ github.event.inputs.manual_title }}
+          V92_MANUAL_CATEGORIES: ${{ github.event.inputs.manual_categories }}
+        run: |
+          set +e
+          python manual_v92.py
+          status=$?
+          echo "$status" > .bot_exit_code
+          exit 0
+
       - name: Run bot v92
+        if: ${{ github.event.inputs.manual_url == '' }}
         id: run_bot
         env:
           WP_USER: ${{ secrets.WP_USER }}
@@ -93,6 +137,7 @@ jobs:
           WP_URL: ${{ secrets.WP_URL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL_CHAIN: gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash
+          GEMINI_REPORT_MODEL_CHAIN: gemini-3-flash-preview,gemini-3.1-flash-lite,gemini-2.5-flash,gemini-2.5-flash-lite
           V92_MAX_REPORTS_PER_RUN: "1"
           V92_MAX_NEWS_PER_RUN: "3"
         run: |
