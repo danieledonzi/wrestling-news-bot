@@ -3,18 +3,18 @@ from __future__ import annotations
 import json
 import os
 import re
-import sys
-import time
-from dataclasses import dataclass
 from datetime import datetime, timedelta
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+from zoneinfo import ZoneInfo
 
 import feedparser
 import requests
 
-BOT_VERSION = "v92_0_clean_split_pipeline_bootstrap"
+BOT_VERSION = "v92_0_1_report_scheduler_and_matcher"
 TZ_LABEL = "Europe/Rome"
+ROME_TZ = ZoneInfo("Europe/Rome")
 ROOT = Path(__file__).resolve().parent
 STATE_DIR = ROOT / "state"
 LOG_DIR = ROOT / "logs"
@@ -39,9 +39,7 @@ def utcnow() -> datetime:
 
 
 def now_local_naive() -> datetime:
-    # GitHub Actions runs UTC. Europe/Rome DST is +2 on May; for this bootstrap we use +2.
-    # Later this should use zoneinfo Europe/Rome.
-    return utcnow() + timedelta(hours=2)
+    return datetime.now(ROME_TZ).replace(tzinfo=None)
 
 
 def ensure_dirs() -> None:
@@ -74,21 +72,38 @@ def save_json(path: Path, data: Any) -> None:
     tmp.replace(path)
 
 
+def wp_root_from_env() -> str:
+    raw = os.getenv("WP_URL", "").strip().rstrip("/")
+    if not raw:
+        return ""
+    marker = "/wp-json"
+    if marker in raw:
+        return raw.split(marker, 1)[0].rstrip("/")
+    return raw
+
+
 def wp_health_check() -> Tuple[bool, str]:
-    wp_url = os.getenv("WP_URL", "").rstrip("/")
-    if not wp_url:
+    root = wp_root_from_env()
+    if not root:
         return False, "missing_wp_url"
-    endpoint = f"{wp_url}/wp-json/wp/v2/posts?per_page=1"
+    endpoints = [
+        f"{root}/wp-json/",
+        f"{root}/wp-json/wp/v2/posts?per_page=1",
+    ]
+    last_status = "wp_unavailable"
     for attempt in range(1, 4):
-        try:
-            r = requests.get(endpoint, timeout=6)
-            if r.status_code in (200, 401, 403):
-                log(f"[WP v92] Health check API OK: status {r.status_code} | tentativo {attempt}/3")
-                return True, f"status_{r.status_code}"
-            log(f"[WP v92] Health check risposta inattesa: status {r.status_code} | tentativo {attempt}/3")
-        except Exception as exc:
-            log(f"[WP v92] Health check timeout/errore | tentativo {attempt}/3: {exc}")
-    return False, "wp_unavailable"
+        for endpoint in endpoints:
+            try:
+                r = requests.get(endpoint, timeout=6)
+                if r.status_code in (200, 401, 403):
+                    log(f"[WP v92] Health check API OK: status {r.status_code} endpoint={endpoint} | tentativo {attempt}/3")
+                    return True, f"status_{r.status_code}"
+                last_status = f"status_{r.status_code}"
+                log(f"[WP v92] Health check risposta inattesa: status {r.status_code} endpoint={endpoint} | tentativo {attempt}/3")
+            except Exception as exc:
+                last_status = "wp_error"
+                log(f"[WP v92] Health check timeout/errore endpoint={endpoint} | tentativo {attempt}/3: {exc}")
+    return False, last_status
 
 
 def normalize_text(text: str) -> str:
@@ -110,13 +125,15 @@ def parse_hhmm(value: str) -> Tuple[int, int]:
 def report_due_today(report: Dict[str, Any], now: datetime) -> bool:
     if not report.get("enabled", True):
         return False
+    expected_day = str(report.get("expected_day_after") or "").strip().lower()
+    if expected_day and now.strftime("%A").lower() != expected_day:
+        return False
     publish_after = report.get("publish_after", "06:30")
     h, m = parse_hhmm(publish_after)
     return now.time() >= now.replace(hour=h, minute=m, second=0, microsecond=0).time()
 
 
 def report_date_key(report: Dict[str, Any], now: datetime) -> Tuple[str, str]:
-    # For weekly shows we use previous day as show date after midnight/morning.
     show_date = now.date() - timedelta(days=int(report.get("show_date_offset_days", 1)))
     date_iso = show_date.isoformat()
     key = f"{report['id']}_{date_iso.replace('-', '_')}"
@@ -178,18 +195,63 @@ def report_keywords(report: Dict[str, Any]) -> List[str]:
     return [normalize_text(x) for x in report.get("match_keywords", []) if x]
 
 
-def is_report_candidate(entry: Dict[str, Any], report: Dict[str, Any]) -> bool:
+def date_tokens(date_iso: str) -> List[str]:
+    y, m, d = [int(x) for x in date_iso.split("-")]
+    month_names = [
+        "january", "february", "march", "april", "may", "june",
+        "july", "august", "september", "october", "november", "december",
+    ]
+    month = month_names[m - 1]
+    return [
+        f"{m}/{d}", f"{m:02d}/{d:02d}", f"{m}-{d}", f"{m:02d}-{d:02d}",
+        f"{month} {d}", f"{month}-{d}", f"{month} {d} {y}", f"{month}-{d}-{y}",
+        f"{y}-{m:02d}-{d:02d}",
+    ]
+
+
+def entry_mentions_report_date(entry: Dict[str, Any], date_iso: str) -> bool:
+    raw = f"{entry.get('title', '')} {entry.get('url', '')}".lower()
+    normalized = normalize_text(raw)
+    for token in date_tokens(date_iso):
+        if token.lower() in raw or normalize_text(token) in normalized:
+            return True
+    return False
+
+
+def entry_published_near_report(entry: Dict[str, Any], date_iso: str) -> bool:
+    published = entry.get("published") or ""
+    if not published:
+        return False
+    try:
+        dt = parsedate_to_datetime(published)
+        if dt.tzinfo is not None:
+            dt = dt.astimezone(ROME_TZ).replace(tzinfo=None)
+        expected = datetime.fromisoformat(date_iso)
+        return expected.date() <= dt.date() <= (expected + timedelta(days=2)).date()
+    except Exception:
+        return False
+
+
+def is_report_candidate(entry: Dict[str, Any], report: Dict[str, Any], date_iso: str) -> bool:
     title = normalize_text(entry.get("title", ""))
     url = normalize_text(entry.get("url", ""))
     blob = f"{title} {url}"
     if "results" not in blob and "risultati" not in blob:
         return False
     kws = report_keywords(report)
-    return any(kw and kw in blob for kw in kws)
+    if not any(kw and kw in blob for kw in kws):
+        return False
+    if not entry_mentions_report_date(entry, date_iso):
+        log(f"[REPORT v92] Scarto candidato data non coerente: {entry.get('title')} | expected={date_iso}")
+        return False
+    if not entry_published_near_report(entry, date_iso):
+        log(f"[REPORT v92] Scarto candidato pubblicazione non coerente: {entry.get('title')} | published={entry.get('published')} expected={date_iso}")
+        return False
+    return True
 
 
-def choose_report_source(report: Dict[str, Any], entries: List[Dict[str, Any]], now: datetime) -> Tuple[Optional[Dict[str, Any]], str]:
-    candidates = [e for e in entries if is_report_candidate(e, report)]
+def choose_report_source(report: Dict[str, Any], entries: List[Dict[str, Any]], now: datetime, date_iso: str) -> Tuple[Optional[Dict[str, Any]], str]:
+    candidates = [e for e in entries if is_report_candidate(e, report, date_iso)]
     if not candidates:
         return None, "no_candidate"
 
@@ -211,13 +273,16 @@ def choose_report_source(report: Dict[str, Any], entries: List[Dict[str, Any]], 
 
 
 def categories_for_report(report: Dict[str, Any], categories_cfg: Dict[str, Any]) -> List[str]:
+    rules = categories_cfg.get("report_category_rules", {}) if isinstance(categories_cfg, dict) else {}
+    category = report.get("category")
+    if category in rules:
+        return list(dict.fromkeys(rules[category]))
     names = []
     editorial = report.get("editorial_category", "Editoriali")
-    company = report.get("category")
     if editorial:
         names.append(editorial)
-    if company and company not in names:
-        names.append(company)
+    if category and category not in names:
+        names.append(category)
     return names
 
 
@@ -235,6 +300,7 @@ def run_report_pipeline(wp_ok: bool, now: datetime) -> int:
         if published >= MAX_REPORTS_PER_RUN:
             break
         if not report_due_today(report, now):
+            log(f"[REPORT v92] Non dovuto oggi: {report.get('id')} expected_day_after={report.get('expected_day_after')}")
             continue
         report_key, date_iso = report_date_key(report, now)
         current = status.get(report_key, {})
@@ -242,7 +308,7 @@ def run_report_pipeline(wp_ok: bool, now: datetime) -> int:
             log(f"[REPORT v92] Gia pubblicato: {report_key}")
             continue
 
-        chosen, reason = choose_report_source(report, entries, now)
+        chosen, reason = choose_report_source(report, entries, now, date_iso)
         title = build_report_title(report, date_iso)
         categories = categories_for_report(report, categories_cfg)
 
@@ -272,17 +338,17 @@ def run_report_pipeline(wp_ok: bool, now: datetime) -> int:
             "status": "ready_to_publish" if wp_ok else "ready_when_wp_returns",
         }
         log(f"[REPORT v92] Pronto: {report_key} source={job['source']} url={job['source_url']}")
+        log(f"[REPORT v92] Fonte title: {job['source_title']}")
         log(f"[REPORT v92] Titolo deterministico: {title}")
         log(f"[REPORT v92] Categorie: {', '.join(categories)}")
 
-        # v92 bootstrap: do not publish until article_workshop is ported.
-        # Keep the job deterministic and visible in pending_reports.json.
         pending = [p for p in pending if p.get("report_key") != report_key]
         pending.append(job)
         status[report_key] = {
             "status": job["status"],
             "source": job["source"],
             "source_url": job["source_url"],
+            "source_title": job["source_title"],
             "title": title,
             "categories": categories,
             "updated_at": utcnow().isoformat(),
@@ -294,7 +360,6 @@ def run_report_pipeline(wp_ok: bool, now: datetime) -> int:
 
 
 def run_news_pipeline(wp_ok: bool, now: datetime) -> int:
-    # v92 bootstrap: intentionally disabled until report pipeline and article_workshop are stable.
     save_json(PENDING_NEWS_FILE, [])
     log(f"[NEWS v92] Pipeline news non ancora attiva. max_news_per_run={MAX_NEWS_PER_RUN}")
     return 0
