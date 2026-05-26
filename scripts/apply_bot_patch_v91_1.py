@@ -140,6 +140,7 @@ def main():
         "scripts/apply_bot_patch_v91_5.py",
         "scripts/apply_bot_patch_v91_5_1.py",
         "scripts/apply_bot_patch_v91_5_2.py",
+        "scripts/apply_bot_patch_v91_5_3.py",
     ):
         patch = Path(patch_name)
         if patch.exists():
