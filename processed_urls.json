@@ -3486,5 +3486,17 @@
     "title": "AEW's Will Ospreay Reflects On What Wembley Stadium Means To Him",
     "updated_at": "1779746747.700926",
     "url": "https://www.wrestlinginc.com/2180757/aew-will-ospreay-reflects-wembley-stadium-means/"
+  },
+  "https://www.wrestlinginc.com/2180807/wwe-raw-dragon-lee-rey-mysterio-rusev-returns-aid": {
+    "extra": {
+      "event_key": "event:wwe-wrestlemania-2026-05-26",
+      "semantic_id": "dragon-lee-returns-on-wwe-raw-coming-to-the-aid-of-rey-mysterio-against-rusev"
+    },
+    "reason": "wordpress_publish_ok",
+    "score": null,
+    "status": "published",
+    "title": "WWE Raw: Dragon Lee torna e salva Rey Mysterio dall'attacco di Rusev",
+    "updated_at": "1779778799.7416046",
+    "url": "https://www.wrestlinginc.com/2180807/wwe-raw-dragon-lee-rey-mysterio-rusev-returns-aid/"
   }
 }

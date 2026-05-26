@@ -110,31 +110,6 @@
     "attempts": 0
   },
   {
-    "url": "https://www.wrestlinginc.com/2180807/wwe-raw-dragon-lee-rey-mysterio-rusev-returns-aid/",
-    "title": "Dragon Lee Returns On WWE Raw, Coming To The Aid Of Rey Mysterio Against Rusev",
-    "semantic_id": "dragon-lee-returns-on-wwe-raw-coming-to-the-aid-of-rey-mysterio-against-rusev",
-    "title_key": "dragon-lee-returns-raw-coming-aid-rey-mysterio-against-rusev",
-    "score": 76,
-    "priority": "medium",
-    "event_key": "",
-    "story_signature_v71": "stable:ethan_page|rusev|dragon_lee_returns_on|return|wwe",
-    "summary": "Dragon Lee returned during \"WWE Raw\" coming to the aid of Rey Mysterio against Rusev and Ethan Page.",
-    "reasons": [
-      "concrete_outcome",
-      "v71 freshness=0.723"
-    ],
-    "score_reasons": [
-      "concrete_outcome",
-      "v71 freshness=0.723"
-    ],
-    "is_breaking": false,
-    "breaking_expires_at": 1779784276.0,
-    "status": "raw",
-    "reason": "wp_down_initial_normal",
-    "created_at": 1779763649.5214136,
-    "attempts": 0
-  },
-  {
     "url": "https://www.wrestlinginc.com/2176982/bully-ray-brock-lesnar-wwe-return-retirement/",
     "title": "Bully Ray Questions Why Brock Lesnar Returned To WWE So Quickly After 'Retirement'",
     "semantic_id": "bully-ray-questions-why-brock-lesnar-returned-to-wwe-so-quickly-after-retirement",

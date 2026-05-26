@@ -1,9 +1,9 @@
 {
   "schema": "owtv_published_html_review_flat_v81",
-  "last_run_id": "2026-05-26 06:50:17",
-  "last_bot_version": "v90_2_6_2_clean_consolidated_source (b10a446)",
-  "updated_at": "2026-05-26T06:52:23",
-  "total_items": 208,
+  "last_run_id": "2026-05-26 06:59:06",
+  "last_bot_version": "v90_2_6_2_clean_consolidated_source (2cb0516)",
+  "updated_at": "2026-05-26T07:00:22",
+  "total_items": 209,
   "items": [
     {
       "run_id": "2026-05-12 15:44:15",
@@ -1668,6 +1668,14 @@
       "original_html_file": "20260526_065203_002_morto-a-62-anni-l-ex-wrestler-jerry-golden-boy-grey_e1ebb014_original.html",
       "final_html_file": "20260526_065203_002_morto-a-62-anni-l-ex-wrestler-jerry-golden-boy-grey_e1ebb014_final.html",
       "metadata_file": "20260526_065203_002_morto-a-62-anni-l-ex-wrestler-jerry-golden-boy-grey_e1ebb014_metadata.json"
+    },
+    {
+      "run_id": "2026-05-26 06:59:06",
+      "title": "WWE Raw: Dragon Lee torna e salva Rey Mysterio dall'attacco di Rusev",
+      "url": "https://www.wrestlinginc.com/2180807/wwe-raw-dragon-lee-rey-mysterio-rusev-returns-aid/",
+      "original_html_file": "20260526_070001_001_wwe-raw-dragon-lee-torna-e-salva-rey-mysterio-dall-attacco-di-rusev_0d2f0ad4_original.html",
+      "final_html_file": "20260526_070001_001_wwe-raw-dragon-lee-torna-e-salva-rey-mysterio-dall-attacco-di-rusev_0d2f0ad4_final.html",
+      "metadata_file": "20260526_070001_001_wwe-raw-dragon-lee-torna-e-salva-rey-mysterio-dall-attacco-di-rusev_0d2f0ad4_metadata.json"
     }
   ]
 }
