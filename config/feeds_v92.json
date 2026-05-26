@@ -1,0 +1,14 @@
+{
+  "feeds": [
+    {
+      "id": "wrestlinginc",
+      "name": "WrestlingInc",
+      "url": "https://www.wrestlinginc.com/feed/"
+    },
+    {
+      "id": "ringsidenews",
+      "name": "Ringside News",
+      "url": "https://www.ringsidenews.com/feed/"
+    }
+  ]
+}
