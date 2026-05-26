@@ -26616,12 +26616,6 @@ except Exception as e:
 print("[BOOT v91.5] HTML integrity guard + block-safe repair policy attivi")
 
 
-# v90.2.6.2 clean consolidated boot/version
-BOT_VERSION = "v90_2_6_2_clean_consolidated_source"
-BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
-print("[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1", flush=True)
-
-
 # v91.5.1 final strict publish return guard
 V91_5_1_ENABLED = os.getenv("V91_5_1_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
 
@@ -26674,6 +26668,12 @@ except Exception as e:
     print(f"[V91.5.1] Warning final publish return guard failed: {e}")
 
 print("[BOOT v91.5.1] Final strict publish return guard attivo")
+
+
+# v90.2.6.2 clean consolidated boot/version
+BOT_VERSION = "v90_2_6_2_clean_consolidated_source"
+BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
+print("[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1", flush=True)
 
 
 if __name__ == "__main__":
