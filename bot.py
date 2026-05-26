@@ -26622,6 +26622,60 @@ BOT_VERSION_FULL = f"{BOT_VERSION} ({GIT_SHA_SHORT})"
 print("[BOOT v90.2.6.2] Source consolidato attivo: chain fino a v90.2.5.4.1", flush=True)
 
 
+# v91.5.1 final strict publish return guard
+V91_5_1_ENABLED = os.getenv("V91_5_1_ENABLED", "1").lower() not in {"0", "false", "no", "off"}
+
+
+def v9151_tuple2(result):
+    """Final outermost normalization for legacy callers: post_id, post_json = create_post_without_image(...)."""
+    try:
+        if isinstance(result, tuple):
+            if len(result) >= 2:
+                return result[0], result[1]
+            if len(result) == 1:
+                return result[0], {}
+            return None, {}
+        if isinstance(result, list):
+            if len(result) >= 2:
+                return result[0], result[1]
+            if len(result) == 1:
+                return result[0], {}
+            return None, {}
+        if result is False or result is None:
+            return None, {}
+        if isinstance(result, dict):
+            post_id = result.get("post_id") or result.get("id") or result.get("wp_post_id")
+            return post_id, result
+        if isinstance(result, (int, float)):
+            return int(result), {}
+        return result, {}
+    except Exception:
+        return None, {"normalization_error": True}
+
+try:
+    _PREV_V9151_create_post_without_image = create_post_without_image
+    def create_post_without_image(data, sem_id, url, embed_urls=None, event_key="", inline_images=None, featured_image_url=""):
+        result = _PREV_V9151_create_post_without_image(
+            data,
+            sem_id,
+            url,
+            embed_urls=embed_urls,
+            event_key=event_key,
+            inline_images=inline_images,
+            featured_image_url=featured_image_url,
+        )
+        if not V91_5_1_ENABLED:
+            return result
+        normalized = v9151_tuple2(result)
+        if isinstance(result, (tuple, list)) and len(result) != 2:
+            print(f"[V91.5.1 PUBLISH] Final normalize create_post_without_image len={len(result)} -> 2")
+        return normalized
+except Exception as e:
+    print(f"[V91.5.1] Warning final publish return guard failed: {e}")
+
+print("[BOOT v91.5.1] Final strict publish return guard attivo")
+
+
 if __name__ == "__main__":
     exit_code = 0
     if V854_BOOT_DIAGNOSTICS_ENABLED:
