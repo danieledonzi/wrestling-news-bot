@@ -55,10 +55,12 @@ jobs:
           from pathlib import Path
           text = Path('bot_v92.py').read_text(encoding='utf-8')
           required = [
-              'v92_0_clean_split_pipeline_bootstrap',
+              'v92_0_1_report_scheduler_and_matcher',
               'run_report_pipeline',
               'run_news_pipeline',
               'build_report_title',
+              'expected_day_after',
+              'entry_mentions_report_date',
               'MAX_REPORTS_PER_RUN',
               'MAX_NEWS_PER_RUN',
           ]
@@ -89,7 +91,7 @@ jobs:
         if: always()
         run: |
           set -e
-          git add logs/ state/ .bot_exit_code || true
+          git add -f logs/ state/ .bot_exit_code || true
           if ! git diff --cached --quiet; then
             git commit -m "chore(v92): persist runtime state"
             git pull --rebase || echo "[v92] Warning: pull --rebase non riuscito, provo push diretto"
