@@ -13,6 +13,7 @@ PATCHES = [
     "scripts/apply_bot_patch_v91_6_1.py",
     "scripts/apply_bot_patch_v91_6_2.py",
     "scripts/apply_bot_patch_v91_6_3.py",
+    "scripts/apply_bot_patch_v91_6_4.py",
 ]
 
 
