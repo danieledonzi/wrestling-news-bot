@@ -92,8 +92,12 @@ else:
     p.write_text(text, encoding="utf-8")
     print("[V92 PATCH] report workshop applicato")
 
-quality_patch = Path("scripts/apply_v92_report_quality_patch.py")
-if quality_patch.exists():
-    subprocess.run([sys.executable, str(quality_patch)], check=True)
-else:
-    print("[V92 PATCH] quality patch non presente")
+for patch_name in [
+    "scripts/apply_v92_report_quality_patch.py",
+    "scripts/apply_v92_report_runtime_tweaks.py",
+]:
+    patch = Path(patch_name)
+    if patch.exists():
+        subprocess.run([sys.executable, str(patch)], check=True)
+    else:
+        print(f"[V92 PATCH] patch non presente: {patch_name}")
