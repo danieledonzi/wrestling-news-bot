@@ -1,4 +1,12 @@
 {
+  "https://www.ringsidenews.com/aew-dynamitecollision-results-highlights-key-moments-may-27-2026/": {
+    "created_at": "2026-05-27T23:44:12.691898",
+    "reason": "report_like",
+    "score": 0,
+    "source": "ringsidenews",
+    "stage": "deterministic",
+    "title": "AEW Dynamite/Collision Results, Highlights and Key Moments for May 27, 2026"
+  },
   "https://www.ringsidenews.com/jade-cargill-explains-why-she-refuses-sign-autographs/": {
     "created_at": "2026-05-27T20:10:16.829127",
     "reason": "phase_b_soft_news",
@@ -71,6 +79,14 @@
     "stage": "phase_b",
     "title": "TNA's Santino Marella: WWE Clash In Italy Appearance Would Be 'Full Circle Moment'"
   },
+  "https://www.wrestlinginc.com/2175784/aew-dynamite-viewership-ratings-report-may-13-2026/": {
+    "created_at": "2026-05-27T23:44:10.593069",
+    "reason": "phase_b_report_like",
+    "score": 0,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "AEW Dynamite Viewership & Ratings Report, 5/13/2026"
+  },
   "https://www.wrestlinginc.com/2175856/wwe-ethan-page-intercontinental-championship-means/": {
     "created_at": "2026-05-27T22:16:40.146194",
     "reason": "phase_b_soft_news",
@@ -111,6 +127,14 @@
     "stage": "deterministic",
     "title": "WWE Raw Results 5/18 - Women's Tag Team Title On The Line, Brock Lesnar Returns"
   },
+  "https://www.wrestlinginc.com/2180814/wwe-raw-may-25-2026-hated-loved-opinion-review/": {
+    "created_at": "2026-05-27T23:43:57.693754",
+    "reason": "report_like",
+    "score": 0,
+    "source": "wrestlinginc",
+    "stage": "deterministic",
+    "title": "WWE Raw 5/25/2026: 3 Things We Hated & 3 Things We Loved"
+  },
   "https://www.wrestlinginc.com/2180819/wwe-nxt-may-26-nxt-womens-championship-on-line-otm-the-culling/": {
     "created_at": "2026-05-27T20:09:55.882677",
     "reason": "report_like",
@@ -118,6 +142,14 @@
     "source": "wrestlinginc",
     "stage": "deterministic",
     "title": "WWE NXT Results 5/26 - NXT Women's Title On The Line, Kelani Jordan Faces Wren Sinclair"
+  },
+  "https://www.wrestlinginc.com/2181792/aew-dynamite-collision-may-27-lights-out-philadelphia-street-fight-mjf-appears/": {
+    "created_at": "2026-05-27T23:43:57.693251",
+    "reason": "report_like",
+    "score": 0,
+    "source": "wrestlinginc",
+    "stage": "deterministic",
+    "title": "AEW Dynamite & Collision Results 5/27 - Lights Out Philadelphia Street Fight, MJF Appears"
   },
   "https://www.wrestlinginc.com/2181803/wwe-nxt-may-26-2026-3-things-hated-loved-opinion-review/": {
     "created_at": "2026-05-27T20:09:55.882534",

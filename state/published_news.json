@@ -41,6 +41,21 @@
     "story_core": "reazione-locker-room-ritorno-lesnar",
     "wp_post_id": 5472
   },
+  "https://www.ringsidenews.com/cody-rhodes-claims-danhausen-beating-us-all-wwe-merchandise-sales/": {
+    "article_type": "soft_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/cody-rhodes-incorona-danhausen-e-lui-il-re-delle-vendite-di-merchandise-in-wwe/",
+    "priority": "hard",
+    "published_at": "2026-05-27T23:44:46.723623",
+    "score": 76,
+    "source": "ringsidenews",
+    "source_title": "Cody Rhodes Claims Danhausen Is ‘Beating Us All’ In WWE Merchandise Sales",
+    "status": "published",
+    "story_core": "cody-rhodes-endorsement-merchandise",
+    "wp_post_id": 5478
+  },
   "https://www.ringsidenews.com/cody-rhodes-reveals-randy-orton-wrestlemania-put-him-concussion-protocol/": {
     "categories": [
       "WWE"
@@ -65,6 +80,21 @@
     "status": "published",
     "wp_post_id": 5456
   },
+  "https://www.ringsidenews.com/last-minute-matches-added-may-27-aew-dynamite/": {
+    "article_type": "hard_news",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/aew-dynamite-will-ospreay-nel-main-event-e-nuovi-match-dellultimo-minuto/",
+    "priority": "hard",
+    "published_at": "2026-05-27T23:44:36.249768",
+    "score": 94,
+    "source": "ringsidenews",
+    "source_title": "Last-Minute Matches Added to May 27 AEW Dynamite",
+    "status": "published",
+    "story_core": "aew-dynamite-match-additions",
+    "wp_post_id": 5474
+  },
   "https://www.ringsidenews.com/qt-marshall-expected-avoid-missing-time-scary-aew-double-nothing-fall/": {
     "article_type": "hard_news",
     "categories": [
@@ -79,6 +109,21 @@
     "status": "published",
     "story_core": "qt-marshall-infortunio-rientro",
     "wp_post_id": 5470
+  },
+  "https://www.ringsidenews.com/seth-rollins-reveals-mastermind-behind-summerslam-cash-crutch-drop/": {
+    "article_type": "soft_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/summerslam-il-retroscena-sul-ritorno-di-seth-rollins-lidea-delle-stampelle-e-di-bobby-roode/",
+    "priority": "hard",
+    "published_at": "2026-05-27T23:44:42.099391",
+    "score": 84,
+    "source": "ringsidenews",
+    "source_title": "Seth Rollins Reveals Mastermind Behind SummerSlam Cash-In Crutch Drop",
+    "status": "published",
+    "story_core": "dietro-le-quinte-cash-in-summerslam",
+    "wp_post_id": 5476
   },
   "https://www.ringsidenews.com/wwe-clash-italy-betting-odds-drop-ahead-major-championship-matches/": {
     "article_type": "soft_news",
