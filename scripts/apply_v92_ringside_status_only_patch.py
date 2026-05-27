@@ -20,7 +20,8 @@ def extract_tweet_status_urls_from_fragment(fragment: str) -> List[str]:
     candidates = decode_possible_base64_html(str(fragment)) if 'decode_possible_base64_html' in globals() else [str(fragment)]
     for candidate in candidates:
         raw = html_lib.unescape(str(candidate))
-        for m in re.finditer(r'https?://(?:www\\.)?(?:twitter\\.com|x\\.com)/[^\\s\"\'<>]+', raw, flags=re.I):
+        tweet_url_pattern = r"https?://(?:www\\.)?(?:twitter\\.com|x\\.com)/[^\\s\\\"'<>]+"
+        for m in re.finditer(tweet_url_pattern, raw, flags=re.I):
             u = normalize_social_url(m.group(0)).rstrip('),.;]')
             if re.search(r'/(?:status|statuses)/\\d+', u, re.I):
                 out.append(u)
