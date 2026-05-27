@@ -19,6 +19,10 @@ on:
         description: "Categorie separate da virgola, es. Editoriali,WWE"
         required: false
         default: "Editoriali"
+      manual_html_path:
+        description: "Percorso repo opzionale di un HTML grezzo salvato dal browser, es. manual_inputs/ringside_raw.html"
+        required: false
+        default: ""
   schedule:
     - cron: "*/30 * * * *"
 
@@ -90,7 +94,7 @@ jobs:
               'MAX_REPORTS_PER_RUN',
               'MAX_NEWS_PER_RUN',
           ]
-          manual_required = ['V92_MANUAL_URL', 'V92_MANUAL_KIND', 'run_manual_report']
+          manual_required = ['V92_MANUAL_URL', 'V92_MANUAL_KIND', 'run_manual_report', 'V92_MANUAL_HTML_PATH']
           missing = [m for m in required if m not in text] + [m for m in manual_required if m not in manual]
           if missing:
               raise SystemExit('[V92 VERIFY] missing markers: ' + ', '.join(missing))
@@ -121,6 +125,7 @@ jobs:
           V92_MANUAL_KIND: ${{ github.event.inputs.manual_kind }}
           V92_MANUAL_TITLE: ${{ github.event.inputs.manual_title }}
           V92_MANUAL_CATEGORIES: ${{ github.event.inputs.manual_categories }}
+          V92_MANUAL_HTML_PATH: ${{ github.event.inputs.manual_html_path }}
         run: |
           set +e
           python manual_v92.py
