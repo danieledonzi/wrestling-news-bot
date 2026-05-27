@@ -81,6 +81,20 @@ def parse_categories(raw: str, default: List[str]) -> List[str]:
     return out or default
 
 
+def read_manual_html() -> str:
+    raw_path = os.getenv("V92_MANUAL_HTML_PATH", "").strip()
+    if not raw_path:
+        return ""
+    path = Path(raw_path)
+    if not path.is_absolute():
+        path = ROOT / raw_path
+    if not path.exists():
+        raise SystemExit(f"[MANUAL v92] V92_MANUAL_HTML_PATH non trovato: {path}")
+    html = path.read_text(encoding="utf-8", errors="ignore")
+    log(f"[MANUAL v92] HTML grezzo caricato: {path} chars={len(html)}")
+    return html
+
+
 def build_manual_report_job(url: str) -> Dict[str, object]:
     title = os.getenv("V92_MANUAL_TITLE", "").strip()
     source_title = fetch_source_title(url)
@@ -89,7 +103,7 @@ def build_manual_report_job(url: str) -> Dict[str, object]:
         title = source_title
     categories = parse_categories(os.getenv("V92_MANUAL_CATEGORIES", ""), ["Editoriali"])
     now = datetime.utcnow().isoformat()
-    return {
+    job: Dict[str, object] = {
         "kind": "report",
         "report_key": f"manual_report_{slugify(title)}_{datetime.utcnow().strftime('%Y%m%d%H%M%S')}",
         "report_id": "manual_report",
@@ -104,6 +118,11 @@ def build_manual_report_job(url: str) -> Dict[str, object]:
         "created_at": now,
         "status": "manual_ready_to_publish",
     }
+    source_html = read_manual_html()
+    if source_html:
+        job["source_html"] = source_html
+        job["source_html_mode"] = "manual_raw_html"
+    return job
 
 
 def run_manual_report(url: str) -> int:
@@ -112,13 +131,15 @@ def run_manual_report(url: str) -> int:
     log(f"[MANUAL v92] source={job['source']} source_title={job['source_title']}")
     log(f"[MANUAL v92] title={job['title']}")
     log(f"[MANUAL v92] categories={', '.join(job['categories'])}")
+    if job.get("source_html_mode"):
+        log(f"[MANUAL v92] source_html_mode={job['source_html_mode']}")
     post_id, post_json = run_report_workshop(job, PUBLISHED_DIR, REVIEW_DIR)
     state_file = STATE_DIR / "manual_runs.json"
     try:
         data = json.loads(state_file.read_text(encoding="utf-8")) if state_file.exists() else []
     except Exception:
         data = []
-    data.append({"job": job, "wp_post_id": post_id, "link": post_json.get("link"), "created_at": datetime.utcnow().isoformat()})
+    data.append({"job": {k: v for k, v in job.items() if k != "source_html"}, "wp_post_id": post_id, "link": post_json.get("link"), "created_at": datetime.utcnow().isoformat()})
     state_file.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
     log(f"[MANUAL v92] Pubblicato post_id={post_id} link={post_json.get('link')}")
     return 0
