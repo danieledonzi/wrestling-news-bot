@@ -26,6 +26,21 @@
     "status": "published",
     "wp_post_id": 5460
   },
+  "https://www.ringsidenews.com/cody-rhodes-admits-brock-lesnars-wwe-return-concerns-entire-locker-room/": {
+    "article_type": "soft_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/cody-rhodes-il-ritorno-di-brock-lesnar-preoccupa-lo-spogliatoio-wwe/",
+    "priority": "hard",
+    "published_at": "2026-05-27T22:17:20.138915",
+    "score": 90,
+    "source": "ringsidenews",
+    "source_title": "Cody Rhodes Admits Brock Lesnar’s WWE Return ‘Concerns’ Entire Locker Room",
+    "status": "published",
+    "story_core": "reazione-locker-room-ritorno-lesnar",
+    "wp_post_id": 5472
+  },
   "https://www.ringsidenews.com/cody-rhodes-reveals-randy-orton-wrestlemania-put-him-concussion-protocol/": {
     "categories": [
       "WWE"
@@ -50,6 +65,21 @@
     "status": "published",
     "wp_post_id": 5456
   },
+  "https://www.ringsidenews.com/qt-marshall-expected-avoid-missing-time-scary-aew-double-nothing-fall/": {
+    "article_type": "hard_news",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/aew-sospiro-di-sollievo-per-qt-marshall-dopo-la-brutta-caduta-a-double-or-nothing/",
+    "priority": "hard",
+    "published_at": "2026-05-27T22:17:15.307310",
+    "score": 92,
+    "source": "ringsidenews",
+    "source_title": "QT Marshall Expected To Avoid Missing Time After Scary AEW Double Or Nothing Fall",
+    "status": "published",
+    "story_core": "qt-marshall-infortunio-rientro",
+    "wp_post_id": 5470
+  },
   "https://www.ringsidenews.com/wwe-clash-italy-betting-odds-drop-ahead-major-championship-matches/": {
     "article_type": "soft_news",
     "categories": [
@@ -64,6 +94,21 @@
     "status": "published",
     "story_core": "betting-odds-clash-in-italy",
     "wp_post_id": 5464
+  },
+  "https://www.wrestlinginc.com/2175490/wwe-clash-italy-stephanie-vaquer-backstage-return/": {
+    "article_type": "hard_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-aggiornamenti-sul-rientro-di-stephanie-vaquer-dopo-linfortunio-2/",
+    "priority": "hard",
+    "published_at": "2026-05-27T22:17:10.715018",
+    "score": 100,
+    "source": "wrestlinginc",
+    "source_title": "Backstage Update On When Stephanie Vaquer's WWE Return Is Expected",
+    "status": "published",
+    "story_core": "rientro-stephanie-vaquer-infortunio",
+    "wp_post_id": 5468
   },
   "https://www.wrestlinginc.com/2175644/wwe-aew-paramount-rumors-circulating-backstage/": {
     "article_type": "strategic_discussion",

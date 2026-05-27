@@ -20404,3 +20404,48 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [NEWS v92] Pubblicate news=3/3 | hard_candidates=9 soft_candidates=11 soft_pool_saved=12
 [RUN v92] totale pubblicazioni=3 (report=0, news=3)
 ===== RUN END [2026-05-27T22:09:45] VERSION [v92_0_2_report_workshop_publish] =====
+===== RUN START [2026-05-28T00:16:30] VERSION [v92_0_2_report_workshop_publish] =====
+[WP v92] Health check API OK: status 200 endpoint=https://news.openwrestlingtv.com/wp-json/ | tentativo 1/3
+[RUN v92] wp_ok=True wp_status=status_200
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+[REPORT v92] Non dovuto oggi: wwe_raw expected_day_after=Tuesday
+[REPORT v92] Non dovuto oggi: wwe_smackdown expected_day_after=Saturday
+[REPORT v92] Non dovuto oggi: wwe_nxt expected_day_after=Wednesday
+[REPORT v92] Non dovuto oggi: aew_dynamite expected_day_after=Thursday
+[REPORT v92] Non dovuto oggi: aew_collision expected_day_after=Sunday
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+[NEWS v92] Hard skip Fase B (42/100 soft_news): Territorial Star 'Golden Boy' Jerry Grey Dies At 62 After Battle With Cancer | Notizia di cronaca legata alla scomparsa di un wrestler dell'era dei territori; doveroso dare spazio per il rispetto della storia della disciplina, pur essendo una figura di nicchia per il pubblico generalista odierno.
+[NEWS v92] Hard skip Fase B (45/100 soft_news): WWE's Trick Williams Explains What It's Like Working With Lil Yachty | Dichiarazione di colore che riguarda l'intersezione tra wrestling e cultura pop. Interessante per il target fan di Trick Williams, ma non incide sugli sviluppi dello show.
+[NEWS v92] Soft pool Fase B (62/100 strategic_discussion): Details On Relationship Between Cain Velasquez And AAA Under WWE
+[NEWS v92] Soft pool Fase B (56/100 soft_news): Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[NEWS v92] Hard skip Fase B (37/100 soft_news): Bully Ray Reveals Moment In WWE Raw Promo Where Oba Femi 'Lost' Him | Si tratta di un'opinione di un veterano su una performance specifica. Ha valore di approfondimento sul prodotto attuale, ma non modifica gli assetti di storyline.
+[NEWS v92] Hard skip Fase B (49/100 soft_news): WWE's Ethan Page Explains What The Intercontinental Championship Means To Him | Si tratta di una dichiarazione pre-match standard che arricchisce la narrativa dello scontro titolato, senza rappresentare un cambiamento concreto negli assetti dello show.
+[NEWS v92] Soft pool Fase B (62/100 soft_news): Garrett Borden, Son Of Sting, Makes Pro Wrestling Debut At AEW Star's Indie Event
+[NEWS v92] Soft pool Fase B (60/100 strategic_discussion): AEW Dynamite Viewership & Ratings Report, 5/13/2026
+[NEWS v92] Low-soft Fase A (28/100): WWE Stars To Appear At Fan Fest Announced For White House UFC Event Freedom 250 | non mando a Gemini
+[NEWS v92] Hard news Fase B (76/100 soft_news): Backstage Update On AEW's QT Marshall After Double Or Nothing Injury Scare
+[NEWS v92] Soft pool Fase B (73/100 soft_news): Randy Orton On His WWE Absence Amid Injury Reports: 'Just Trying To Enjoy My Summer'
+[NEWS v92] Hard news Fase B (100/100 hard_news): Backstage Update On When Stephanie Vaquer's WWE Return Is Expected
+[NEWS v92] Hard news Fase B (87/100 hard_news): Report: Baron Corbin (AKA Bishop Dyer) Being Discussed For WWE Return
+[NEWS v92] Hard news Fase B (82/100 hard_news): Ludwig Kaiser’s Battery Case Gets Potential Trial Timeline
+[NEWS v92] Hard skip Fase B (15/100 soft_news): Torrie Wilson Admits Not Knowing First Meeting With Husband Justin Was a Date | Si tratta di un aneddoto di vita privata non legato all'attualità del wrestling. Contenuto gossip/lifestyle troppo leggero per la linea editoriale di OpenWrestlingTV.
+[NEWS v92] Hard skip Fase B (26/100 soft_news): Torrie Wilson Addresses Prior Eating Disorder Struggles Before Wrestling Career | Intervista di stampo umano e biografico. Non è una notizia urgente o di business, ma il profilo della Hall of Famer garantisce comunque un certo interesse per la categoria 'Legends'.
+[NEWS v92] Hard skip Fase B (15/100 soft_news): Torrie Wilson Reveals Why She Became a Mother at 50 | Si tratta di un contenuto di lifestyle strettamente personale riguardante una Hall of Famer non più attiva nel business. Non ha rilevanza per la programmazione o le dinamiche del wrestling attuale.
+[NEWS v92] Soft pool Fase B (72/100 soft_news): Seth Rollins Says WWE Fans Still Confront Him Over The Shield Betrayal 12 Years Later
+[NEWS v92] Soft pool Fase B (72/100 soft_news): Seth Rollins Says Roman Reigns Backlash Inspired His WrestleMania 31 Cash-In Pitch
+[NEWS v92] Hard news Fase B (84/100 soft_news): Seth Rollins Reveals Mastermind Behind SummerSlam Cash-In Crutch Drop
+[NEWS v92] Soft pool Fase B (62/100 soft_news): Seth Rollins Explains Why He Prefers Being a Heel Over a Babyface
+[NEWS v92] Hard skip Fase B (45/100 soft_news): Val Venis Says MJF Should Take Over Triple H’s Role After Retirement | Si tratta esclusivamente di un'opinione personale di un ex lottatore non legato alla dirigenza; non rappresenta un fatto concreto o una notizia di business rilevante.
+[NEWS v92] Soft pool Fase B (64/100 soft_news): Cody Rhodes Claims Danhausen Is ‘Beating Us All’ In WWE Merchandise Sales
+[NEWS v92] Hard news Fase B (92/100 hard_news): QT Marshall Expected To Avoid Missing Time After Scary AEW Double Or Nothing Fall
+[NEWS v92] Hard news Fase B (88/100 hard_news): Logan Paul Reveals Recovery Timeline After Successful Triceps Surgery
+[NEWS v92] Soft pool Fase B (54/100 soft_news): Cody Rhodes Reveals Why He Doesn’t Mind Signing Autographs for Resellers
+[NEWS v92] Hard news Fase B (90/100 soft_news): Cody Rhodes Admits Brock Lesnar’s WWE Return ‘Concerns’ Entire Locker Room
+[NEWS v92] Pubblico hard score=100/100 type=hard_news source=wrestlinginc title=Backstage Update On When Stephanie Vaquer's WWE Return Is Expected
+[NEWS v92] Pubblico hard score=92/100 type=hard_news source=ringsidenews title=QT Marshall Expected To Avoid Missing Time After Scary AEW Double Or Nothing Fall
+[NEWS v92] Pubblico hard score=90/100 type=soft_news source=ringsidenews title=Cody Rhodes Admits Brock Lesnar’s WWE Return ‘Concerns’ Entire Locker Room
+[NEWS v92] Pubblicate news=3/3 | hard_candidates=8 soft_candidates=22 soft_pool_saved=16
+[RUN v92] totale pubblicazioni=3 (report=0, news=3)
+===== RUN END [2026-05-28T00:16:30] VERSION [v92_0_2_report_workshop_publish] =====
