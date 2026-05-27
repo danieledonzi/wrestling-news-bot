@@ -1,4 +1,19 @@
 {
+  "https://www.ringsidenews.com/brooke-hogan-raises-suspicions-private-doctor-autopsy-changes-hulk-hogans-death/": {
+    "article_type": "hard_news",
+    "categories": [
+      "World"
+    ],
+    "link": "https://news.openwrestlingtv.com/world/brooke-hogan-solleva-dubbi-sulla-morte-del-padre-le-anomalie-sullautopsia/",
+    "priority": "hard",
+    "published_at": "2026-05-27T20:10:37.226095",
+    "score": 93,
+    "source": "ringsidenews",
+    "source_title": "Brooke Hogan Raises Suspicions Over Private Doctor and Autopsy Changes After Hulk Hogan’s Death",
+    "status": "published",
+    "story_core": "sospetti-morte-hulk-hogan",
+    "wp_post_id": 5466
+  },
   "https://www.ringsidenews.com/cody-rhodes-addresses-whether-rock-still-wants-his-soul/": {
     "categories": [
       "WWE"
@@ -34,5 +49,35 @@
     "source_title": "How CM Punk Helps Jackie Redmond Prepare WWE Backstage Reports",
     "status": "published",
     "wp_post_id": 5456
+  },
+  "https://www.ringsidenews.com/wwe-clash-italy-betting-odds-drop-ahead-major-championship-matches/": {
+    "article_type": "soft_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-clash-in-italy-le-quote-dei-bookmaker-sui-match-titolati/",
+    "priority": "hard",
+    "published_at": "2026-05-27T20:10:32.104306",
+    "score": 95,
+    "source": "ringsidenews",
+    "source_title": "WWE Clash In Italy Betting Odds Drop Ahead Of Major Championship Matches",
+    "status": "published",
+    "story_core": "betting-odds-clash-in-italy",
+    "wp_post_id": 5464
+  },
+  "https://www.wrestlinginc.com/2175644/wwe-aew-paramount-rumors-circulating-backstage/": {
+    "article_type": "strategic_discussion",
+    "categories": [
+      "World"
+    ],
+    "link": "https://news.openwrestlingtv.com/world/voci-nel-backstage-wwe-sul-futuro-televisivo-della-aew-il-punto-della-situazione/",
+    "priority": "hard",
+    "published_at": "2026-05-27T20:10:27.073671",
+    "score": 100,
+    "source": "wrestlinginc",
+    "source_title": "Backstage Report On AEW-Paramount Rumors Circulating Backstage In WWE",
+    "status": "published",
+    "story_core": "speculazioni-diritti-tv-aew-paramount",
+    "wp_post_id": 5462
   }
 }
