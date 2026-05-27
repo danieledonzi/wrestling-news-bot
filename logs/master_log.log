@@ -20317,3 +20317,21 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [NEWS v92] Pubblicate news=3/3
 [RUN v92] totale pubblicazioni=3 (report=0, news=3)
 ===== RUN END [2026-05-27T17:37:44] VERSION [v92_0_2_report_workshop_publish] =====
+===== RUN START [2026-05-27T19:40:46] VERSION [v92_0_2_report_workshop_publish] =====
+[WP v92] Health check timeout/errore endpoint=https://news.openwrestlingtv.com/wp-json/ | tentativo 1/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f582957c9d0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP v92] Health check timeout/errore endpoint=https://news.openwrestlingtv.com/wp-json/wp/v2/posts?per_page=1 | tentativo 1/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f582957f210>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP v92] Health check timeout/errore endpoint=https://news.openwrestlingtv.com/wp-json/ | tentativo 2/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f5829591090>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP v92] Health check timeout/errore endpoint=https://news.openwrestlingtv.com/wp-json/wp/v2/posts?per_page=1 | tentativo 2/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f582957c190>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP v92] Health check timeout/errore endpoint=https://news.openwrestlingtv.com/wp-json/ | tentativo 3/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f58295714d0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP v92] Health check timeout/errore endpoint=https://news.openwrestlingtv.com/wp-json/wp/v2/posts?per_page=1 | tentativo 3/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f5829592e10>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[RUN v92] wp_ok=False wp_status=wp_error
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+[REPORT v92] Non dovuto oggi: wwe_raw expected_day_after=Tuesday
+[REPORT v92] Non dovuto oggi: wwe_smackdown expected_day_after=Saturday
+[REPORT v92] Gia pubblicato: wwe_nxt_2026_05_26
+[REPORT v92] Non dovuto oggi: aew_dynamite expected_day_after=Thursday
+[REPORT v92] Non dovuto oggi: aew_collision expected_day_after=Sunday
+[NEWS v92] WordPress non disponibile: skip news
+[RUN v92] totale pubblicazioni=0 (report=0, news=0)
+===== RUN END [2026-05-27T19:40:46] VERSION [v92_0_2_report_workshop_publish] =====
