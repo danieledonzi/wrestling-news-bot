@@ -104,6 +104,7 @@ for patch_name in [
     "scripts/apply_v92_ringside_cleanup_patch.py",
     "scripts/apply_v92_ringside_status_only_patch.py",
     "scripts/apply_v92_ringside_status_id_rewrite.py",
+    "scripts/apply_v92_auto_raw_ringside_embed_patch.py",
     "scripts/apply_v92_report_chunked_translation.py",
     "scripts/apply_v92_wp_resilience_patch.py",
 ]:
