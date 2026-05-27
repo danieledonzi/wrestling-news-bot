@@ -84,7 +84,7 @@ if start != -1 and end != -1:
 '''
     text = text[:start] + broad_extractor + text[end:]
 
-helper = '''
+helper = r'''
 
 def is_bad_ringside_render_line(line: str) -> bool:
     raw = (line or '').strip()
