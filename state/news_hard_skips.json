@@ -15,6 +15,30 @@
     "stage": "phase_b",
     "title": "Brian Myers Says WWE’s COVID Releases Still Leave A ‘Sore Spot’"
   },
+  "https://www.ringsidenews.com/candice-michelle-admits-she-doesnt-watch-wrestling-despite-working-backstage-tna/": {
+    "created_at": "2026-05-28T15:34:56.426520",
+    "reason": "phase_b_soft_news",
+    "score": 48,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Candice Michelle Admits She Doesn’t Watch Wrestling Despite Working Backstage In TNA"
+  },
+  "https://www.ringsidenews.com/candice-michelle-admits-she-once-sent-creepy-fan-straight-victoria/": {
+    "created_at": "2026-05-28T15:34:59.537125",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Candice Michelle Admits She Once Sent a Creepy Fan Straight to Victoria"
+  },
+  "https://www.ringsidenews.com/candice-michelle-says-ego-biggest-thing-hurting-wrestlers-wwe-releases/": {
+    "created_at": "2026-05-28T15:34:52.411472",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Candice Michelle Says Ego Is The Biggest Thing Hurting Wrestlers After WWE Releases"
+  },
   "https://www.ringsidenews.com/david-finlay-clark-connors-destroy-adam-copeland-christian-cage-may-27-aew-dynamite/": {
     "created_at": "2026-05-28T06:52:36.897793",
     "reason": "phase_b_event_outcome",
@@ -118,6 +142,14 @@
     "source": "ringsidenews",
     "stage": "phase_b",
     "title": "Torrie Wilson Reveals Why She Became a Mother at 50"
+  },
+  "https://www.ringsidenews.com/undertaker-explains-why-wwe-wrestlers-court-necessary-backstage/": {
+    "created_at": "2026-05-28T15:34:57.679310",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "The Undertaker Explains Why WWE Wrestlers Court Was Necessary Backstage"
   },
   "https://www.ringsidenews.com/val-venis-says-mjf-should-take-triple-hs-role-retirement/": {
     "created_at": "2026-05-27T22:16:55.945420",

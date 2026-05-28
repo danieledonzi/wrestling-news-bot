@@ -14,6 +14,21 @@
     "story_core": "sospetti-morte-hulk-hogan",
     "wp_post_id": 5466
   },
+  "https://www.ringsidenews.com/candice-michelle-says-wrestlers-need-stop-letting-botches-mentally-break-them/": {
+    "article_type": "soft_news",
+    "categories": [
+      "Business"
+    ],
+    "link": "https://news.openwrestlingtv.com/business/candice-michelle-i-wrestler-non-devono-farsi-spezzare-da-un-errore/",
+    "priority": "soft",
+    "published_at": "2026-05-28T15:35:42.229408",
+    "score": 72,
+    "source": "ringsidenews",
+    "source_title": "Candice Michelle Says Wrestlers Need To Stop Letting Botches Mentally Break Them",
+    "status": "published",
+    "story_core": "candice-michelle-consigli-botch",
+    "wp_post_id": 5546
+  },
   "https://www.ringsidenews.com/cody-rhodes-addresses-whether-rock-still-wants-his-soul/": {
     "categories": [
       "WWE"
@@ -424,6 +439,36 @@
     "status": "published",
     "story_core": "speculazioni-diritti-tv-aew-paramount",
     "wp_post_id": 5462
+  },
+  "https://www.wrestlinginc.com/2175736/wwe-ufc-freedom-250-white-house-fan-fest-announced/": {
+    "article_type": "soft_news",
+    "categories": [
+      "Business"
+    ],
+    "link": "https://news.openwrestlingtv.com/business/star-della-wwe-presenti-al-fan-fest-di-washington-per-levento-ufc-freedom-250/",
+    "priority": "soft",
+    "published_at": "2026-05-28T15:35:53.114293",
+    "score": 70,
+    "source": "wrestlinginc",
+    "source_title": "WWE Stars To Appear At Fan Fest Announced For White House UFC Event Freedom 250",
+    "status": "published",
+    "story_core": "wwe-stars-at-ufc-freedom-250-fan-fest",
+    "wp_post_id": 5550
+  },
+  "https://www.wrestlinginc.com/2175930/wwe-aaa-cain-velasquez-relationship-backstage-report/": {
+    "article_type": "strategic_discussion",
+    "categories": [
+      "Business"
+    ],
+    "link": "https://news.openwrestlingtv.com/business/cain-velasquez-e-il-wrestling-il-ruolo-della-wwe-nel-suo-futuro-in-aaa/",
+    "priority": "soft",
+    "published_at": "2026-05-28T15:35:47.844183",
+    "score": 70,
+    "source": "wrestlinginc",
+    "source_title": "Details On Relationship Between Cain Velasquez And AAA Under WWE",
+    "status": "published",
+    "story_core": "wwe-aaa-cain-velasquez-status",
+    "wp_post_id": 5548
   },
   "https://www.wrestlinginc.com/2182369/njpw-bushiroad-dave-meltzer-selling-backstage-report/": {
     "article_type": "strategic_discussion",

@@ -22,13 +22,12 @@
       "Editoriali",
       "AEW"
     ],
-    "error": "name 'normalize_media_identity' is not defined",
-    "source": "wrestlinginc",
-    "source_title": "AEW Dynamite & Collision Results 5/27 - Lights Out Philadelphia Street Fight, MJF Appears",
-    "source_url": "https://www.wrestlinginc.com/2181792/aew-dynamite-collision-may-27-lights-out-philadelphia-street-fight-mjf-appears/",
-    "status": "failed_technical",
+    "link": "https://news.openwrestlingtv.com/aew/aew-dynamitecollision-del-27-maggio-2026-risultati-e-momenti-salienti/",
+    "source": "manual_runs",
+    "status": "published",
     "title": "AEW Dynamite del 27 maggio 2026 - risultati e momenti salienti",
-    "updated_at": "2026-05-28T14:51:00.125257"
+    "updated_at": "2026-05-28T15:34:39.043958",
+    "wp_post_id": 5516
   },
   "wwe_nxt_2026_05_25": {
     "categories": [
