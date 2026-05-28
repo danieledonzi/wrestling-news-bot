@@ -5,7 +5,7 @@ import os
 import re
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List
+from typing import Dict, List, Tuple
 from urllib.parse import urlparse
 
 import requests
@@ -36,6 +36,39 @@ def log(message: str) -> None:
     print(message, flush=True)
     with MASTER_LOG.open("a", encoding="utf-8") as fh:
         fh.write(message.rstrip() + "\n")
+
+
+def wp_root_from_env() -> str:
+    raw = os.getenv("WP_URL", "").strip().rstrip("/")
+    if not raw:
+        return ""
+    if "/wp-json" in raw:
+        raw = raw.split("/wp-json", 1)[0].rstrip("/")
+    return raw
+
+
+def manual_wp_health_check() -> Tuple[bool, str]:
+    root = wp_root_from_env()
+    if not root:
+        return False, "missing_wp_url"
+    endpoints = [
+        f"{root}/wp-json/",
+        f"{root}/wp-json/wp/v2/posts?per_page=1",
+    ]
+    last_status = "wp_unavailable"
+    for attempt in range(1, 4):
+        for endpoint in endpoints:
+            try:
+                res = requests.get(endpoint, headers=HEADERS, timeout=6, auth=(os.getenv("WP_USER", ""), os.getenv("WP_PASSWORD", "")))
+                if res.status_code in {200, 401, 403}:
+                    log(f"[MANUAL v92] WP health check OK: status {res.status_code} endpoint={endpoint} | tentativo {attempt}/3")
+                    return True, f"status_{res.status_code}"
+                last_status = f"status_{res.status_code}"
+                log(f"[MANUAL v92] WP health check risposta inattesa: status {res.status_code} endpoint={endpoint} | tentativo {attempt}/3")
+            except Exception as exc:
+                last_status = "wp_error"
+                log(f"[MANUAL v92] WP health check timeout/errore endpoint={endpoint} | tentativo {attempt}/3: {exc}")
+    return False, last_status
 
 
 def slugify(text: str) -> str:
@@ -126,6 +159,12 @@ def build_manual_report_job(url: str) -> Dict[str, object]:
 
 
 def run_manual_report(url: str) -> int:
+    wp_ok, wp_status = manual_wp_health_check()
+    log(f"[MANUAL v92] wp_ok={wp_ok} wp_status={wp_status}")
+    if not wp_ok:
+        log("[MANUAL v92] WordPress non disponibile: interrompo prima di scrape/traduzione")
+        return 0
+
     job = build_manual_report_job(url)
     log(f"[MANUAL v92] Avvio manual report url={url}")
     log(f"[MANUAL v92] source={job['source']} source_title={job['source_title']}")
