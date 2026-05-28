@@ -104,6 +104,7 @@ for patch_name in [
     "scripts/apply_v92_wp_resilience_patch.py",
     "scripts/apply_v92_news_pipeline.py",
     "scripts/apply_v92_news_scoring_v2.py",
+    "scripts/apply_v92_stability_patch.py",
 ]:
     patch = Path(patch_name)
     if patch.exists():
