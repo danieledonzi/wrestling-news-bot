@@ -20671,3 +20671,21 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [MANUAL v92] title=AEW Dynamite&Collision del 27 maggio 2026 - risultati e momenti salienti
 [MANUAL v92] categories=Editoriali, AEW
 [MANUAL v92] Pubblicato post_id=5516 link=https://news.openwrestlingtv.com/aew/aew-dynamitecollision-del-27-maggio-2026-risultati-e-momenti-salienti/
+===== RUN START [2026-05-28T11:40:19] VERSION [v92_0_2_report_workshop_publish] =====
+[WP v92] Health check timeout/errore endpoint=https://news.openwrestlingtv.com/wp-json/ | tentativo 1/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f503c55e410>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP v92] Health check timeout/errore endpoint=https://news.openwrestlingtv.com/wp-json/wp/v2/posts?per_page=1 | tentativo 1/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f503c570cd0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP v92] Health check timeout/errore endpoint=https://news.openwrestlingtv.com/wp-json/ | tentativo 2/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f503c572b10>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP v92] Health check timeout/errore endpoint=https://news.openwrestlingtv.com/wp-json/wp/v2/posts?per_page=1 | tentativo 2/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f503c54e0d0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP v92] Health check timeout/errore endpoint=https://news.openwrestlingtv.com/wp-json/ | tentativo 3/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f503c570110>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[WP v92] Health check timeout/errore endpoint=https://news.openwrestlingtv.com/wp-json/wp/v2/posts?per_page=1 | tentativo 3/3: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f503c580910>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=6)'))
+[RUN v92] wp_ok=False wp_status=wp_error
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+[REPORT v92] Non dovuto oggi: wwe_raw expected_day_after=Tuesday
+[REPORT v92] Non dovuto oggi: wwe_smackdown expected_day_after=Saturday
+[REPORT v92] Non dovuto oggi: wwe_nxt expected_day_after=Wednesday
+[REPORT v92] Non pronto: aew_dynamite_2026_05_27 reason=no_candidate title=AEW Dynamite del 27 maggio 2026 - risultati e momenti salienti
+[REPORT v92] Non dovuto oggi: aew_collision expected_day_after=Sunday
+[NEWS v92] WordPress non disponibile: skip news
+[RUN v92] totale pubblicazioni=0 (report=0, news=0)
+===== RUN END [2026-05-28T11:40:19] VERSION [v92_0_2_report_workshop_publish] =====
