@@ -20902,3 +20902,31 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [NEWS v92] Pubblicate news=3/3 | hard_candidates=0 soft_candidates=36 soft_pool_saved=25
 [RUN v92] totale pubblicazioni=3 (report=0, news=3)
 ===== RUN END [2026-05-28T17:50:03] VERSION [v92_0_2_report_workshop_publish] =====
+===== RUN START [2026-05-28T18:28:32] VERSION [v92_0_2_report_workshop_publish] =====
+[WP v92] BOT WP DIAG DNS news.openwrestlingtv.com: 89.40.173.112
+[WP v92] BOT WP DIAG health attempt 1/2 timeout=10s
+[WP v92] BOT WP DIAG probe status=200 elapsed=1.08s endpoint=https://news.openwrestlingtv.com/
+[WP v92] BOT WP DIAG probe status=200 elapsed=1.15s endpoint=https://news.openwrestlingtv.com/wp-json/
+[WP v92] Health check API OK: status_200 label=rest_root | tentativo 1/2
+[RUN v92] wp_ok=True wp_status=status_200
+[REPORT v92] Non dovuto oggi: wwe_raw expected_day_after=Tuesday
+[REPORT v92] Non dovuto oggi: wwe_smackdown expected_day_after=Saturday
+[REPORT v92] Non dovuto oggi: wwe_nxt expected_day_after=Wednesday
+[REPORT v92] Gia pubblicato: aew_dynamite_2026_05_27
+[REPORT v92] Non dovuto oggi: aew_collision expected_day_after=Sunday
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+[NEWS v92] Soft pool Fase B (51/100 standard_useful): TNA Impact Viewership & Ratings Report, 5/21/2026
+[NEWS v92] Low-soft Fase A (24/100): Biggest Winners And Losers Of The Week — 5/26/2026 | non mando a Gemini
+[NEWS v92] Hard skip Fase B (44/100 soft_news): AEW's Will Ospreay Reflects On 10-Year Anniversary Of Ricochet Match That Went Viral | Si tratta di un contenuto celebrativo/nostalgico basato su un'intervista. Utile per il traffico social e l'engagement dei fan, ma privo di risvolti competitivi o strategici attuali.
+[NEWS v92] Soft pool Fase B (52/100 soft_news): Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[NEWS v92] Soft pool Fase B (68/100 soft_news): Garrett Borden, Son Of Sting, Makes Pro Wrestling Debut At AEW Star's Indie Event
+[NEWS v92] Soft pool Fase B (52/100 standard_useful): Real Reason Behind Samoa Joe’s AEW Absence Revealed
+[NEWS v92] Soft pool Fase B (52/100 soft_news): Eric Bischoff Blows Up Over Claims nWo Was Inspired By Japanese Wrestling Storyline
+[NEWS v92] Soft pool Fase B (61/100 soft_news): The Rock Predicted His Own Crowd Reactions During WWE Training Sessions
+[NEWS v92] Soft pool Fase B (53/100 soft_news): Curt Hawkins Reveals He Fought WWE To KEEP His Losing Streak Going
+[NEWS v92] Pubblico soft score=70/100 type=strategic_discussion source=ringsidenews title=Suspicious Bot Engagement Raises Questions Around AEW on TV Facebook Post
+[NEWS v92] Pubblico soft score=70/100 type=strategic_discussion source=ringsidenews title=Speculation on the Possible Main Event for AEW All In 2026
+[NEWS v92] Pubblicate news=2/3 | hard_candidates=0 soft_candidates=32 soft_pool_saved=24
+[RUN v92] totale pubblicazioni=2 (report=0, news=2)
+===== RUN END [2026-05-28T18:28:32] VERSION [v92_0_2_report_workshop_publish] =====

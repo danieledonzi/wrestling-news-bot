@@ -350,6 +350,36 @@
     "story_core": "retrospettiva-cash-in-wm31",
     "wp_post_id": 5519
   },
+  "https://www.ringsidenews.com/speculation-possible-main-event-aew-all-2026/": {
+    "article_type": "strategic_discussion",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/aew-all-in-kenny-omega-vs-will-ospreay-nel-mirino-per-il-main-event-a-wembley/",
+    "priority": "soft",
+    "published_at": "2026-05-28T16:29:02.485691",
+    "score": 70,
+    "source": "ringsidenews",
+    "source_title": "Speculation on the Possible Main Event for AEW All In 2026",
+    "status": "published",
+    "story_core": "long-term-booking-all-in-2026",
+    "wp_post_id": 5564
+  },
+  "https://www.ringsidenews.com/suspicious-bot-engagement-raises-questions-around-aew-tv-facebook-post/": {
+    "article_type": "strategic_discussion",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/aew-sotto-accusa-attivita-sospetta-di-bot-sui-social-media/",
+    "priority": "soft",
+    "published_at": "2026-05-28T16:28:58.024142",
+    "score": 70,
+    "source": "ringsidenews",
+    "source_title": "Suspicious Bot Engagement Raises Questions Around AEW on TV Facebook Post",
+    "status": "published",
+    "story_core": "aew-facebook-bot-engagement-controversy",
+    "wp_post_id": 5563
+  },
   "https://www.ringsidenews.com/tommaso-ciampa-attacks-chris-jericho-finally-beating-ricochet-aew-dynamite/": {
     "article_type": "event_outcome",
     "categories": [
