@@ -167,6 +167,14 @@
     "stage": "phase_b",
     "title": "Val Venis Says MJF Should Take Over Triple H’s Role After Retirement"
   },
+  "https://www.ringsidenews.com/vince-russo-blasts-wwe-main-event-segments-having-no-real-payoff/": {
+    "created_at": "2026-05-28T18:08:54.395503",
+    "reason": "phase_b_opinion",
+    "score": 49,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Vince Russo Blasts WWE Main-Event Segments For Having No Real Payoff"
+  },
   "https://www.ringsidenews.com/what-you-didnt-see-before-may-27-aew-dynamite-went-live-philadelphia/": {
     "created_at": "2026-05-28T02:46:42.778314",
     "reason": "phase_b_report_like",
@@ -255,6 +263,14 @@
     "stage": "phase_b",
     "title": "WWE's Charlotte Flair Comments On Friendship-Turned-Rivalry With Becky Lynch"
   },
+  "https://www.wrestlinginc.com/2180772/wwe-raw-may-25-intercontinental-title-up-for-grabs-oba-femi-appears-more/": {
+    "created_at": "2026-05-28T18:08:31.639323",
+    "reason": "report_like",
+    "score": 0,
+    "source": "wrestlinginc",
+    "stage": "deterministic",
+    "title": "WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More"
+  },
   "https://www.wrestlinginc.com/2180814/wwe-raw-may-25-2026-hated-loved-opinion-review/": {
     "created_at": "2026-05-27T23:43:57.693754",
     "reason": "report_like",
@@ -342,5 +358,13 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "AEW's Will Ospreay Reflects On 10-Year Anniversary Of Ricochet Match That Went Viral"
+  },
+  "https://www.wrestlinginc.com/2182978/tna-impact-viewership-ratings-report-may-21-2026/": {
+    "created_at": "2026-05-28T18:08:34.818826",
+    "reason": "phase_b_report_like",
+    "score": 0,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "TNA Impact Viewership & Ratings Report, 5/21/2026"
   }
 }

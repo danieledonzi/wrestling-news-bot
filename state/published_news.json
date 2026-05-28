@@ -1,4 +1,49 @@
 {
+  "https://www.ringsidenews.com/aaa-verano-de-escandalo-ple-plans-remain-uncertain-triplemania-expansion/": {
+    "article_type": "strategic_discussion",
+    "categories": [
+      "Business"
+    ],
+    "link": "https://news.openwrestlingtv.com/business/aaa-verano-de-escandalo-incertezza-sul-ple-dopo-lespansione-di-triplemania/",
+    "priority": "soft",
+    "published_at": "2026-05-28T18:09:12.159228",
+    "score": 74,
+    "source": "ringsidenews",
+    "source_title": "AAA Verano de Escándalo PLE Plans Remain Uncertain After TripleMania Expansion",
+    "status": "published",
+    "story_core": "aaa-tko-partnership-scheduling-uncertainty",
+    "wp_post_id": 5572
+  },
+  "https://www.ringsidenews.com/aew-debut-set-owen-hart-tournament-may-30-collision/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/aew-collision-hazuki-pronta-al-debutto-in-vista-del-torneo-owen-hart/",
+    "priority": "hard",
+    "published_at": "2026-05-28T18:09:03.817636",
+    "score": 94,
+    "source": "ringsidenews",
+    "source_title": "AEW Debut Set for Owen Hart Tournament on May 30 Collision",
+    "status": "published",
+    "story_core": "aew-debut-hazuki-collision",
+    "wp_post_id": 5568
+  },
+  "https://www.ringsidenews.com/brock-lesnars-wwe-status-clash-italy/": {
+    "article_type": "hard_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/brock-lesnar-e-il-futuro-in-wwe-dopo-clash-in-italy/",
+    "priority": "hard",
+    "published_at": "2026-05-28T18:09:08.206155",
+    "score": 78,
+    "source": "ringsidenews",
+    "source_title": "Brock Lesnar’s WWE Status After Clash In Italy",
+    "status": "published",
+    "story_core": "stato-contrattuale-lesnar-post-clash-italy",
+    "wp_post_id": 5570
+  },
   "https://www.ringsidenews.com/brooke-hogan-raises-suspicions-private-doctor-autopsy-changes-hulk-hogans-death/": {
     "article_type": "hard_news",
     "categories": [
