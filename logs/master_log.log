@@ -20616,3 +20616,31 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [NEWS v92] WordPress non disponibile: skip news
 [RUN v92] totale pubblicazioni=0 (report=0, news=0)
 ===== RUN END [2026-05-28T09:39:07] VERSION [v92_0_2_report_workshop_publish] =====
+===== RUN START [2026-05-28T09:40:32] VERSION [v92_0_2_report_workshop_publish] =====
+[WP v92] Health check API OK: status 200 endpoint=https://news.openwrestlingtv.com/wp-json/ | tentativo 1/3
+[RUN v92] wp_ok=True wp_status=status_200
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+[REPORT v92] Non dovuto oggi: wwe_raw expected_day_after=Tuesday
+[REPORT v92] Non dovuto oggi: wwe_smackdown expected_day_after=Saturday
+[REPORT v92] Non dovuto oggi: wwe_nxt expected_day_after=Wednesday
+[REPORT v92] Non pronto: aew_dynamite_2026_05_27 reason=no_candidate title=AEW Dynamite del 27 maggio 2026 - risultati e momenti salienti
+[REPORT v92] Non dovuto oggi: aew_collision expected_day_after=Sunday
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+[NEWS v92] Soft pool Fase B (66/100 event_outcome): Brody King Beats Claudio Castagnoli, Advances In Owen Hart Tournament On AEW Dynamite
+[NEWS v92] Soft pool Fase B (62/100 strategic_discussion): Details On Relationship Between Cain Velasquez And AAA Under WWE
+[NEWS v92] Soft pool Fase B (56/100 soft_news): Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[NEWS v92] Soft pool Fase B (62/100 soft_news): Garrett Borden, Son Of Sting, Makes Pro Wrestling Debut At AEW Star's Indie Event
+[NEWS v92] Low-soft Fase A (28/100): WWE Stars To Appear At Fan Fest Announced For White House UFC Event Freedom 250 | non mando a Gemini
+[NEWS v92] Soft pool Fase B (55/100 soft_news): WWE's Tiffany Stratton Clears Up Rumor About Fabian Aichner: 'Not True'
+[NEWS v92] Soft pool Fase B (62/100 strategic_discussion): AEW Content Getting Pulled From NJPW World in Japan
+[NEWS v92] Soft pool Fase B (72/100 event_outcome): Two AEW Stars Advance to Owen Hart Tournament Semifinals
+[NEWS v92] Soft pool Fase B (72/100 event_outcome): WWE EVOLVE Succession III Date Officially Revealed
+[NEWS v92] Hard news Fase B (80/100 event_outcome): Kevin Knight Destroys Mike Bailey On AEW Dynamite After Crowd Turns On Him
+[NEWS v92] Pubblico hard score=80/100 type=event_outcome source=ringsidenews title=Kevin Knight Destroys Mike Bailey On AEW Dynamite After Crowd Turns On Him
+[NEWS v92] Pubblico soft score=72/100 type=event_outcome source=ringsidenews title=Two AEW Stars Advance to Owen Hart Tournament Semifinals
+[NEWS v92] Pubblico soft score=72/100 type=event_outcome source=ringsidenews title=WWE EVOLVE Succession III Date Officially Revealed
+[NEWS v92] Pubblicate news=3/3 | hard_candidates=1 soft_candidates=34 soft_pool_saved=23
+[RUN v92] totale pubblicazioni=3 (report=0, news=3)
+===== RUN END [2026-05-28T09:40:32] VERSION [v92_0_2_report_workshop_publish] =====

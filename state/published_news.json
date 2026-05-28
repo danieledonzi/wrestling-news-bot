@@ -95,6 +95,21 @@
     "story_core": "rientro-jake-doyle-infortunio",
     "wp_post_id": 5480
   },
+  "https://www.ringsidenews.com/kevin-knight-destroys-mike-bailey-aew-dynamite-crowd-turns-him/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/kevin-knight-attacca-brutalmente-mike-bailey-a-dynamite/",
+    "priority": "hard",
+    "published_at": "2026-05-28T07:41:43.627940",
+    "score": 80,
+    "source": "ringsidenews",
+    "source_title": "Kevin Knight Destroys Mike Bailey On AEW Dynamite After Crowd Turns On Him",
+    "status": "published",
+    "story_core": "kevin-knight-attacco-mike-bailey",
+    "wp_post_id": 5498
+  },
   "https://www.ringsidenews.com/kyle-fletcher-announces-hes-cleared-may-27-aew-collision/": {
     "article_type": "hard_news",
     "categories": [
@@ -200,6 +215,21 @@
     "story_core": "ciampa-attacco-a-jericho-aew",
     "wp_post_id": 5482
   },
+  "https://www.ringsidenews.com/two-aew-stars-advance-owen-hart-tournament-semifinals/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/owen-hart-tournament-definiti-i-semifinalisti-del-tabellone-maschile/",
+    "priority": "soft",
+    "published_at": "2026-05-28T07:41:50.545108",
+    "score": 72,
+    "source": "ringsidenews",
+    "source_title": "Two AEW Stars Advance to Owen Hart Tournament Semifinals",
+    "status": "published",
+    "story_core": "risultati-semifinali-owen-hart-tournament",
+    "wp_post_id": 5500
+  },
   "https://www.ringsidenews.com/wwe-clash-italy-betting-odds-drop-ahead-major-championship-matches/": {
     "article_type": "soft_news",
     "categories": [
@@ -214,6 +244,21 @@
     "status": "published",
     "story_core": "betting-odds-clash-in-italy",
     "wp_post_id": 5464
+  },
+  "https://www.ringsidenews.com/wwe-evolve-succession-iii-date-officially-revealed/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-evolve-annuncia-la-data-di-succession-iii-i-titoli-in-palio/",
+    "priority": "soft",
+    "published_at": "2026-05-28T07:41:54.153601",
+    "score": 72,
+    "source": "ringsidenews",
+    "source_title": "WWE EVOLVE Succession III Date Officially Revealed",
+    "status": "published",
+    "story_core": "annuncio-data-evolve-succession-iii",
+    "wp_post_id": 5502
   },
   "https://www.ringsidenews.com/wwe-smackdown-viewership-sees-slight-increase-may-22-2026/": {
     "article_type": "standard_useful",
