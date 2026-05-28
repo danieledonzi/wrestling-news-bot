@@ -1,591 +1,573 @@
-# OpenWrestlingTV – Project History
-
-## Executive Summary
-
-OpenWrestlingTV is an AI-driven automated wrestling news publishing system designed to ingest, analyze, translate, score and publish wrestling news articles with minimal human intervention.
-
-The project evolved from a simple RSS translation bot into a multi-layered editorial engine with:
-- semantic deduplication;
-- editorial scoring;
-- spoiler prevention;
-- report/live event management;
-- anti-clickbait systems;
-- runtime resiliency;
-- AI-assisted translation;
-- WordPress publishing automation;
-- review pipelines;
-- historical guardrails.
+# OpenWrestlingTV - Project History
 
-The core philosophy of the project is:
+## Purpose of this document
 
-> Preserve important wrestling news with high editorial quality while minimizing repetitive, low-value or misleading content.
-
-The repository contains:
-- current production bot;
-- historical bot versions;
-- changelogs;
-- implementation notes;
-- editorial rules;
-- scoring systems;
-- guardrails;
-- operational runtime documentation.
-
----
-
-# Project Goals
+This file is the historical handoff for the OpenWrestlingTV automated news bot.
 
-The system was designed to:
+It exists so that a future chat, developer session, or Codex session can understand not only what the bot does, but why it does it this way. The most important lesson of the project is that many rules were not arbitrary: they were introduced after real publishing failures, wasted token/GitHub time, bad report matching, poor category assignment, AI translation drift, WordPress instability, or editorial over-publication.
 
-1. Automatically collect wrestling news from trusted sources.
-2. Translate content into natural Italian.
-3. Preserve factual integrity and direct quotes.
-4. Avoid duplicate or near-duplicate stories.
-5. Prioritize high-value editorial content.
-6. Reduce clickbait and low-information articles.
-7. Maintain SEO-friendly article structure.
-8. Operate autonomously through GitHub Actions.
-9. Remain resilient during runtime failures or WordPress outages.
-10. Preserve historical knowledge across versions.
+When changing the bot, preserve the decisions documented here unless there is an explicit new editorial decision to replace them.
 
----
+## Executive summary
 
-# Repository Philosophy
+OpenWrestlingTV is an AI-assisted automated wrestling news publishing system.
 
-The repository is intentionally structured to preserve:
-- historical reasoning;
-- editorial evolution;
-- regression prevention;
-- AI context continuity.
+The bot reads selected wrestling news feeds, identifies publishable items, distinguishes show reports from normal news, performs editorial scoring, translates/adapts content into natural Italian, attaches categories and media, and publishes to WordPress.
 
-This allows future AI systems (Codex, ChatGPT, future agents) to:
-- understand why fixes were introduced;
-- avoid reintroducing historical bugs;
-- preserve editorial identity;
-- reason across versions.
+The current v92 direction is a clean split-pipeline architecture:
 
----
+```text
+Report pipeline
+News pipeline
+Manual pipeline
+WordPress/runtime resilience
+```
 
-# Evolution Timeline
+The project moved away from a heavily patched v80-v91 style bot and toward a v92 rebuild where each content class has its own workflow and its own rules.
 
-# Early Versions
+The current core philosophy is:
 
-Initial versions of the bot focused primarily on:
-- RSS ingestion;
-- simple translation;
-- basic WordPress posting.
+```text
+A report is not a news item.
+A hard news is not a soft news.
+A soft item is not automatically worth publishing.
+The bot must understand the editorial nature of an item before spending translation tokens.
+The bot must not waste Gemini or GitHub time when WordPress is unavailable.
+The bot must preserve human editorial decisions in code and docs.
+```
 
-The early architecture had limited:
-- deduplication;
-- scoring;
-- editorial filtering;
-- runtime recovery.
+## Origins and evolution
 
-The project initially prioritized:
-- automation;
-- publication speed;
-- source aggregation.
+### Early project goal
 
-Main limitations:
-- duplicate stories;
-- poor translation consistency;
-- repetitive content;
-- weak editorial prioritization;
-- excessive low-value articles.
+The first goal was simple: build a low-cost automatic site for OpenWrestlingTV news, fed by selected US wrestling sources, translated into Italian and published to WordPress.
 
----
+The first sources were:
 
-# v67 – Editorial Structure Phase
+- WrestlingInc;
+- Ringside News;
+- Fightful, considered for future/manual usage.
 
-Version 67 introduced major structural organization.
+The editorial goal was never to produce a low-quality scraper. The intended output was a readable Italian news site supporting the community and OpenWrestlingTV, not an ads-first project.
 
-Main additions:
-- first structured scoring systems;
-- editorial rule separation;
-- clearer publication thresholds;
-- improved categorization logic.
-
-The project started separating:
-- implementation logic;
-- editorial policies;
-- scoring behavior.
+### Translation philosophy
 
-This was the beginning of the modern OpenWrestlingTV architecture.
+The translation chain became one of the most successful parts of the project.
 
----
+The guiding prompt was based on this idea:
 
-# v68 – Translation and Editorial Quality Improvements
+```text
+Sei un giornalista italiano esperto di wrestling.
+Non fare una traduzione letterale: devi trasformare il materiale in italiano giornalistico naturale, mantenendo fatti e citazioni.
+```
 
-v68 focused heavily on:
-- translation quality;
-- preservation of quotes;
-- SEO-oriented article length;
-- article completeness.
+Important decisions:
 
-Key concepts introduced:
-- full-content preservation;
-- avoidance of summarization;
-- natural Italian narrative flow;
-- contextual translation.
+- do not summarize when a full news translation is expected;
+- preserve all factual content;
+- translate quotes faithfully;
+- avoid AI-sounding filler;
+- keep wrestling terminology natural;
+- avoid invented context;
+- add source attribution automatically, not inside Gemini prose.
 
-The project philosophy shifted from:
-> “translate quickly”
+Later v92 added a hard glossary rule:
 
-to:
+```text
+match is never translated as partita, incontro, gara, or gioco.
+```
 
-> “preserve editorial meaning and context.”
+This was added after an article about Candice Michelle translated a quote as `prossima partita`, which is wrong in a wrestling context.
 
----
+### Report pipeline history
 
-# v69 – Runtime Stability and Categorization
+Reports became the hardest part of the system.
 
-v69 expanded:
-- runtime stability;
-- category classification;
-- article prioritization;
-- publication thresholds.
-
-The system became more resilient against:
-- malformed feeds;
-- weak articles;
-- missing content;
-- unreliable source formatting.
-
-Improved categorization logic reduced:
-- category pollution;
-- incorrect tagging;
-- low-value cross-posting.
+The project initially treated report-like items as feed/news candidates. That caused multiple problems:
 
----
+- reports competed with normal news scoring;
+- reports could be skipped as duplicates or low-score items;
+- show results could be published too late or not at all;
+- report titles varied by source and were hard to control;
+- Ringside News embeds caused parsing issues;
+- WrestlingInc reports were more stable structurally but often lacked social embeds.
 
-# v70 – Scoring System Expansion
+The v92 decision was:
 
-v70 introduced:
-- expanded scoring models;
-- editorial weighting;
-- better prioritization logic.
-
-The bot began distinguishing:
-- high-impact wrestling news;
-- low-value gossip;
-- social-only content;
-- real editorial relevance.
+```text
+Reports have a dedicated pipeline.
+Reports do not pass through news scoring.
+Reports do not compete with the max news per run.
+Reports use deterministic titles and categories.
+```
 
-This version significantly improved:
-- homepage quality;
-- relevance consistency;
-- publication selectivity.
+A report can publish in addition to the normal news limit. For example, if `MAX_NEWS_PER_RUN = 3`, a run can publish three news plus one report.
 
----
+### Report source strategy
 
-# v71 – Semantic Guardrail Era
+Current default:
 
-v71 represented one of the most important architectural transitions.
+- WrestlingInc is preferred for report reliability.
+- Ringside News is fallback or manual, especially when embeds are useful but extraction is unstable.
 
-Main additions:
-- semantic duplicate detection;
-- quote protection;
-- story cooldown systems;
-- anti-regression safeguards;
-- semantic similarity thresholds;
-- follow-up suppression logic.
+Why:
 
-Critical concepts introduced:
-- semantic duplicate thresholds;
-- rewrite suppression;
-- AI contextual understanding;
-- preservation of unique editorial angles.
+- WrestlingInc extraction was more stable.
+- Ringside News often stores social embeds in lazy/base64/custom structures and can produce social bar noise.
+- Multiple attempts to reconstruct Ringside embeds were not reliable enough to make it the default automatic report source.
 
-This version dramatically reduced:
-- repeated stories;
-- AI-generated redundancy;
-- overlapping follow-up articles.
+### Report titles
 
-v71 also introduced:
-- stronger pending queue handling;
-- stricter JSON validation;
-- semantic guardrails against regression.
+Report titles must be deterministic.
 
----
+Examples:
 
-# v79 / v79.1 – Runtime and Publishing Refinement
+```text
+WWE Raw del 25 maggio 2026 - risultati e momenti salienti
+WWE NXT del 26 maggio 2026 - risultati e momenti salienti
+AEW Dynamite del 27 maggio 2026 - risultati e momenti salienti
+```
 
-v79 focused on:
-- publication reliability;
-- operational stability;
-- WordPress interaction improvements.
+Manual combined reports need normalization:
 
-The bot became more resilient against:
-- temporary publishing failures;
-- malformed HTML;
-- inconsistent embeds;
-- partial translations.
+```text
+AEW Dynamite & Collision del 27 maggio 2026 - risultati e momenti salienti
+```
 
-The runtime pipeline was refined to:
-- preserve article quality;
-- improve publish consistency;
-- reduce silent failures.
+but if the automatic pipeline is publishing the Dynamite report, the title should usually remain:
 
----
+```text
+AEW Dynamite del [data] - risultati e momenti salienti
+```
 
-# v80 – Major Editorial Intelligence Expansion
+### Combined AEW Dynamite & Collision reports
 
-v80 was a transformative phase.
+WrestlingInc sometimes publishes combined reports titled like:
 
-Major systems introduced or refined:
-- anti-clickbait weighting;
-- spoiler prevention;
-- report prioritization;
-- runtime artifact management;
-- natural language improvements;
-- AI-first editorial reasoning.
+```text
+AEW Dynamite & Collision Results 5/27...
+AEW Dynamite/Collision Results...
+```
 
-Key editorial goals:
-- preserve meaningful news;
-- suppress repetitive filler;
-- protect live event integrity;
-- prioritize impactful stories.
+A v92 fix explicitly allows these titles to match `aew_dynamite` when the date is coherent.
 
-The bot became significantly better at:
-- understanding editorial importance;
-- filtering low-value content;
-- maintaining consistent Italian style.
+Reason: the news pipeline correctly recognized those URLs as report-like, but the report matcher initially failed to claim them. That caused the report to be missed automatically.
 
----
+### Report duplicate guard
 
-# v80.3 – Non Regression Guardrails
+A key v92 bug was that the automatic report pipeline tried to reprocess a report that had already been published manually.
 
-This phase formalized:
-- anti-regression documentation;
-- behavioral invariants;
-- editorial safety constraints.
+Cause:
 
-The project began explicitly documenting:
-- what must never break;
-- what historical problems were solved;
-- what logic must remain stable.
+```text
+report_status.json did not know about manual_runs.json or WordPress-published manual reports.
+```
 
-This became essential for:
-- AI-assisted development;
-- Codex usage;
-- multi-version maintenance.
+Fix:
 
----
+Before scanning feeds or translating, the report pipeline now checks:
 
-# v80.5 – Runtime Artifact Separation
+- `state/report_status.json`;
+- `state/manual_runs.json`;
+- WordPress search, if WP is available.
 
-v80.5 improved:
-- runtime artifact handling;
-- review package management;
-- logging separation;
-- operational cleanup.
+Expected log:
 
-Important realization:
-runtime-generated files should not pollute the repository.
+```text
+[REPORT v92] Gia pubblicato altrove: ... via=manual_runs ...
+```
 
-This phase emphasized:
-- cleaner repository structure;
-- artifact isolation;
-- operational hygiene.
+This prevents wasting Gemini and GitHub time on a report that already exists.
 
----
+## News pipeline history
 
-# v80.6 – Natural Italian Style Improvements
+### Why scoring exists
 
-v80.6 heavily improved:
-- Italian narrative flow;
-- removal of robotic phrasing;
-- preservation of journalistic tone.
+The bot must not publish everything in the feeds.
 
-The system reduced:
-- artificial transitions;
-- repetitive AI language;
-- generic filler conclusions.
+There are always many low-value items:
 
-The goal became:
-> “articles should read like real editorial content.”
+- generic podcast quotes;
+- nostalgia items;
+- listicles;
+- social reactions;
+- minor personal anecdotes;
+- weak speculation;
+- show event outcomes after a report has already covered the show.
 
----
+The goal is not to fill exactly three slots every run. The goal is to publish the best available news.
 
-# v80.7 – Follow-Up and Duplicate Refinement
+### Old scoring idea
 
-v80.7 refined:
-- follow-up suppression;
-- near-duplicate prevention;
-- multi-article overlap handling.
+Earlier versions used a two-stage idea:
 
-This was critical for:
-- breaking news cycles;
-- injury updates;
-- backstage report cascades;
-- repeated social reactions.
+```text
+cheap/local score -> Gemini/editorial refinement -> final decision
+```
 
-The system became significantly more selective.
+This was correct in principle but became too patched over time.
 
----
+v92 restored the principle in a cleaner way.
 
-# v81 – Advanced Editorial Stability
+### Current v92 scoring architecture
 
-v81 consolidated:
-- scoring;
-- semantic logic;
-- spoiler systems;
-- report handling;
-- translation consistency;
-- runtime resilience.
+The current news pipeline uses:
 
-The project reached a mature architecture combining:
-- AI reasoning;
-- deterministic guardrails;
-- editorial policy enforcement.
+```text
+Feed collection
+Hard skip deterministic
+Phase A - local pre-score
+Phase B - light editorial Gemini analysis
+Phase C - hard/soft selection
+Workshop translation/publication
+```
 
-Key priorities became:
-- preserving article uniqueness;
-- preventing low-value repetition;
-- protecting publication quality;
-- maintaining operational reliability.
+Phase A saves tokens.
+Phase B understands the story.
+Phase C selects what to publish.
 
----
+### Hard skip vs soft pool
 
-# Editorial Philosophy
+Three states must remain separate:
 
-OpenWrestlingTV prioritizes:
+```text
+Never evaluate again / hard skip
+Keep as candidate / soft pool
+Publish now / hard or high-soft
+```
 
-## 1. High-Value Wrestling News
+Not publishing an item is not the same as hard-skipping it forever.
 
-Priority is given to:
-- major WWE/AEW developments;
-- roster changes;
-- injuries;
-- backstage reports;
-- contracts;
-- legal issues;
-- major storylines;
-- business developments.
+### Current thresholds
 
----
+The latest v92 direction:
 
-## 2. Report and Live Event Protection
+- hard items should publish only if they are truly strong;
+- soft items should not automatically fill empty slots;
+- soft publish threshold is currently raised to avoid mediocre output;
+- hard publish threshold exists separately.
 
-Reports are treated differently from normal articles.
+Current patch introduced environment-driven thresholds:
 
-Goals:
-- preserve event integrity;
-- avoid spoilers too early;
-- prevent incomplete reports;
-- avoid duplicate live coverage.
+```text
+V92_MIN_HARD_PUBLISH_SCORE = 75
+V92_MIN_SOFT_PUBLISH_SCORE = 70
+```
 
----
+This means the bot may publish fewer than three news in a run.
 
-## 3. Anti-Clickbait Enforcement
+Decision behind this:
 
-The system actively suppresses:
-- empty reactions;
-- fake controversy;
-- repetitive social posts;
-- meaningless quote aggregation;
-- low-value engagement bait.
+```text
+Better 20 strong news overall than 30 low-value news.
+If there are 40 hard news, publish them across runs.
+If there are only weak soft items, publish fewer.
+```
 
----
+### No pacing cap
 
-## 4. Natural Italian Writing
+No artificial pacing cap was added.
 
-The project strongly avoids:
-- robotic phrasing;
-- generic AI transitions;
-- repetitive filler endings;
-- unnatural literal translations.
+Rejected idea:
 
----
+```text
+If many news were published recently, reduce output.
+```
 
-## 5. Preservation of Quotes
+Reason: the bot runs about 12-15 times per day, not continuously. After WrestleMania, a PLE, or major breaking news, there can be many genuinely important items. The system should not suppress hard news. It should select better, not throttle blindly.
 
-Direct quotes should remain:
-- accurate;
-- contextually faithful;
-- minimally altered.
+Future direction may include:
 
----
+```text
+storm mode
+slow day mode
+```
 
-# Major Historical Problems Solved
+but only as dynamic scoring thresholds, not a hard cap on output.
 
-# Duplicate Story Flooding
+## Editorial category history
 
-Problem:
-multiple sources repeating identical stories caused homepage spam.
+### Main categories
 
-Solution:
-- semantic dedupe;
-- cooldown logic;
-- follow-up suppression;
-- story similarity thresholds.
+Current site categories include:
 
----
+- WWE;
+- NXT;
+- AEW;
+- TNA;
+- World;
+- Business, if present in WordPress.
 
-# Spoiler Exposure
+NXT is treated as a separate category, not merely WWE.
 
-Problem:
-reports and results exposed spoilers too aggressively.
+### Business category correction
 
-Solution:
-- report prioritization;
-- delayed publishing;
-- spoiler-aware handling.
+A major v92 correction involved Business.
 
----
+The intended rule:
 
-# Artificial Italian Language
+```text
+Business is for business/corporate matters only.
+```
 
-Problem:
-translations sounded robotic and repetitive.
+Business includes:
 
-Solution:
-- natural language guardrails;
-- banned phrase systems;
-- contextual translation logic.
+- ownership;
+- acquisitions;
+- parent company issues;
+- media rights;
+- TV/streaming deals;
+- corporate partnerships;
+- revenue/financials;
+- ticketing business;
+- executive/corporate matters.
 
----
+Business does not include:
 
-# Runtime Artifact Pollution
+- arrests;
+- personal legal trouble;
+- panic attacks;
+- medical stories;
+- wrestler anecdotes;
+- in-ring storyline items;
+- ordinary signings unless the business angle is the point.
 
-Problem:
-logs and review artifacts polluted the repository.
+Examples:
 
-Solution:
-- gitignore;
-- runtime separation;
-- artifact isolation.
+```text
+NJPW ownership / Netflix Japan / AEW leaves NJPW World -> Business
+GUNTHER / Ludwig Kaiser arrest -> WWE
+Rhea Ripley panic attack -> WWE
+JDC personal story -> TNA, if current editorial context is TNA
+```
 
----
+A bug briefly made too many items Business. The fix made Business strict and prevented Gemini Business output from being trusted unless corporate/business signals exist.
 
-# Broken WordPress Publishing
+### WordPress category resolution
 
-Problem:
-temporary WordPress outages caused failures.
+Another v92 bug was category resolution.
 
-Solution:
-- retry systems;
-- health checks;
-- fallback handling;
-- pending queues.
+The old WordPress resolver searched categories and, if no exact match was found, used the first fuzzy result. That could map an intended category to the wrong one.
 
----
+Fix:
 
-# Corrupted Social Embeds
+- exact name match;
+- exact slug match;
+- no fuzzy first-result fallback;
+- create missing category when necessary;
+- log requested category names and resolved IDs.
 
-Problem:
-social embeds sometimes broke article rendering.
+Expected logs:
 
-Solution:
-- safer embed handling;
-- oEmbed protections;
-- fallback parsing.
+```text
+[NEWS v92] Categorie richieste: ['AEW']
+[NEWS v92] Categoria risolta exact-name: AEW -> 5
+[NEWS v92] Categorie risolte ids: [5]
+```
 
----
+## News translation history
 
-# Repository Rules
+The news workshop translates the article after scoring selection.
 
-# NEVER Modify Automatically
+Important rules:
 
-AI systems should avoid automatically modifying:
-- `.github/workflows`
-- runtime files
-- production secrets
-- operational artifacts
+- natural Italian journalism;
+- not literal translation;
+- no invented details;
+- preserve quotes;
+- source attribution added by the system;
+- title must be natural and not clickbait;
+- avoid AI style;
+- wrestling glossary enforced.
 
-without explicit instruction.
+A v92 issue occurred with Candice Michelle:
 
----
+```text
+prossima partita
+```
 
-# Runtime Files Should Not Be Versioned
+This caused the hard rule:
 
-The following are runtime-only:
-- logs/
-- published_html_review/
-- review bundles
-- pending JSON state
-- failed article state
+```text
+match remains match.
+```
 
-These should remain excluded from long-term repository history.
+The current cleanup also rewrites overly literal phrasing like:
 
----
+```text
+non devono farsi spezzare da un errore
+```
 
-# Historical Files Matter
+into more natural phrasing.
 
-Old versions are intentionally preserved because they contain:
-- reasoning history;
-- solved regressions;
-- abandoned strategies;
-- editorial evolution.
+## Event outcome after report
 
-Future AI systems should consult history before large refactors.
+Important editorial decision:
 
----
+```text
+A show event outcome is useful only before or during report coverage.
+After the full report is published, ordinary show-angle/event outcome news should not be published.
+```
 
-# What Must Never Break
+Example:
 
-## Critical Invariants
+```text
+David Finlay & Clark Connors attack Adam Copeland and Christian Cage on AEW Dynamite
+```
 
-Future versions must preserve:
+This may be relevant during immediate show coverage. But once the Dynamite report is published, it should be skipped. The report already covers it.
 
-- semantic dedupe systems;
-- spoiler prevention;
-- report protection logic;
-- quote preservation;
-- natural Italian writing quality;
-- anti-clickbait filtering;
-- editorial prioritization;
-- runtime resiliency;
-- WordPress recovery systems;
-- pending queue integrity;
-- historical guardrails.
+v92 now adds a guard:
 
----
+```text
+event_outcome_after_report
+```
 
-# Recommended Future Workflow
+## WordPress/runtime history
 
-## ChatGPT
+### Why health checks matter
 
-Use for:
-- reasoning;
-- architecture;
-- editorial strategy;
-- documentation generation.
+Manual mode initially performed scrape and translation before checking WordPress. If WordPress timed out at the end, GitHub time and Gemini tokens were wasted.
 
----
+Fix:
 
-## Codex
+Manual mode checks WP first:
 
-Use for:
-- code modifications;
-- refactors;
-- comparisons;
-- regression analysis;
-- implementation work.
+- DNS;
+- home endpoint;
+- REST root;
+- posts endpoint.
 
----
+If WP is not reachable, manual mode stops before scrape/translation.
 
-## GitHub
+The automatic bot now also logs WP diagnostics.
 
-Acts as:
-- source of truth;
-- historical archive;
-- operational repository.
+### Intermittent WordPress reachability
 
----
+The site can be up from a browser but time out from GitHub Actions.
 
-# Final Philosophy
+Therefore the bot logs:
 
-OpenWrestlingTV is not just a translation bot.
+```text
+DNS
+home /
+/wp-json/
+/wp-json/wp/v2/posts?per_page=1
+elapsed times
+```
 
-It is an evolving editorial engine designed to:
-- preserve meaningful wrestling journalism;
-- reduce noise;
-- maintain quality;
-- operate autonomously;
-- retain institutional memory across versions.
+This helps distinguish:
 
-Every future modification should respect:
-- editorial integrity;
-- historical context;
-- non-regression principles;
-- operational stability.
+- DNS failure;
+- REST API failure;
+- hosting slowness;
+- runner-to-host reachability issues.
+
+### Media upload resilience
+
+Report media upload can be expensive. Report articles may have many images. If media uploads fail repeatedly, the bot must not lose the article after translation.
+
+Decision:
+
+```text
+Better publish a translated article without an image than waste token/time and publish nothing.
+```
+
+Report media upload now has degraded mode.
+
+For news featured images, a later issue showed `featured=True` but no `/media` POST in log for one article. A diagnostics patch was added to log:
+
+- featured candidate URL;
+- image fetch status;
+- content type;
+- upload status;
+- media ID;
+- warning when publishing without featured media despite a featured candidate.
+
+## Manual mode history
+
+Manual mode exists for cases where the automatic feed pipeline misses something or the editor wants to force a URL.
+
+Current manual report behavior:
+
+- requires WP health check before scrape/translation;
+- fetches source title;
+- builds job;
+- can use manually supplied title/categories;
+- publishes through report workshop;
+- stores result in `state/manual_runs.json`.
+
+Future manual news mode is planned but not fully active.
+
+## Current known open issues / watchlist
+
+### 1. News featured media diagnostics
+
+A recent run showed one news item with `featured=True` but no media upload log. The diagnostics patch has been added. Next run should be monitored for:
+
+```text
+[NEWS v92] Publish featured candidate: ...
+[NEWS v92] Featured image fetch status=...
+[NEWS v92] Featured image WP upload status=...
+[NEWS v92] Featured image caricata: media_id=...
+```
+
+### 2. Soft pool still needs tuning
+
+The soft pool can still contain many items. This is acceptable if they are not published, but watch for:
+
+- personal anecdotes scoring too high;
+- nostalgia items lingering;
+- viewership reports being considered too often;
+- speculation being published as strategic discussion.
+
+### 3. PLE/PPV card handling
+
+Decision already made:
+
+```text
+Complete/updated PLE or PPV cards for WWE/AEW are valuable SEO/editorial items.
+```
+
+They should not be treated like generic previews.
+
+Still monitor whether scoring over-boosts weak betting odds or minor card updates.
+
+### 4. Report source strategy
+
+Current stable default is WrestlingInc. Ringside News remains problematic for embeds. Do not make Ringside the default automatic report source again without a proven deterministic embed extraction solution.
+
+## Current v92 patches of note
+
+The v92 system is currently assembled by a patch chain, with important late-stage patches including:
+
+- `apply_v92_news_scoring_v2.py`;
+- `apply_v92_stability_patch.py`;
+- `apply_v92_business_ple_card_patch.py`;
+- `apply_v92_postrun_guardrails_patch.py`;
+- `apply_v92_category_resolution_patch.py`;
+- `apply_v92_news_quality_guardrails_patch.py`;
+- `apply_v92_news_media_diagnostics_patch.py`.
+
+The patch-chain approach is useful during live development, but future cleanup should eventually consolidate stable logic into canonical modules.
+
+## Handoff principle
+
+When resuming in a new chat, do not restart the architecture discussion from zero.
+
+The current accepted decisions are:
+
+```text
+Reports are separate from news.
+Reports use deterministic titles.
+WrestlingInc is default report source.
+Manual reports must block later automatic duplication.
+News scoring uses local pre-score + Gemini editorial analysis + hard/soft selection.
+No forced three-news fill.
+No rigid pacing cap.
+Business is strictly corporate.
+Match is never translated.
+Show event outcomes are skipped after the report is published.
+WordPress must be checked before expensive work.
+Failed media should not destroy the article.
+```
