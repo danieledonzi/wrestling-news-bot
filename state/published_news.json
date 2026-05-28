@@ -140,6 +140,21 @@
     "story_core": "aew-dynamite-match-additions",
     "wp_post_id": 5474
   },
+  "https://www.ringsidenews.com/ludwig-kaisers-battery-case-gets-potential-trial-timeline/": {
+    "article_type": "hard_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/ludwig-kaiser-fissata-la-data-per-ludienza-preliminare-sul-caso-di-aggressione/",
+    "priority": "soft",
+    "published_at": "2026-05-28T10:53:38.258929",
+    "score": 72,
+    "source": "ringsidenews",
+    "source_title": "Ludwig Kaiser’s Battery Case Gets Potential Trial Timeline",
+    "status": "published",
+    "story_core": "ludwig-kaiser-legal-timeline",
+    "wp_post_id": 5523
+  },
   "https://www.ringsidenews.com/mjfs-first-aew-world-title-defense-revealed/": {
     "article_type": "hard_news",
     "categories": [
@@ -199,6 +214,21 @@
     "status": "published",
     "story_core": "dietro-le-quinte-cash-in-summerslam",
     "wp_post_id": 5476
+  },
+  "https://www.ringsidenews.com/seth-rollins-says-roman-reigns-backlash-inspired-his-wrestlemania-31-cash-pitch/": {
+    "article_type": "soft_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/wrestlemania-31-come-le-ostilita-verso-roman-reigns-ispirarono-lincasso-di-seth-rollins/",
+    "priority": "soft",
+    "published_at": "2026-05-28T10:53:26.503104",
+    "score": 72,
+    "source": "ringsidenews",
+    "source_title": "Seth Rollins Says Roman Reigns Backlash Inspired His WrestleMania 31 Cash-In Pitch",
+    "status": "published",
+    "story_core": "retrospettiva-cash-in-wm31",
+    "wp_post_id": 5519
   },
   "https://www.ringsidenews.com/tommaso-ciampa-attacks-chris-jericho-finally-beating-ricochet-aew-dynamite/": {
     "article_type": "event_outcome",
@@ -334,6 +364,21 @@
     "status": "published",
     "story_core": "speculazioni-diritti-tv-aew-paramount",
     "wp_post_id": 5462
+  },
+  "https://www.wrestlinginc.com/2182369/njpw-bushiroad-dave-meltzer-selling-backstage-report/": {
+    "article_type": "strategic_discussion",
+    "categories": [
+      "World"
+    ],
+    "link": "https://news.openwrestlingtv.com/world/njpw-venduta-da-bushiroad-a-tv-asahi-e-cyberagent-i-retroscena/",
+    "priority": "soft",
+    "published_at": "2026-05-28T10:53:32.836619",
+    "score": 72,
+    "source": "wrestlinginc",
+    "source_title": "Backstage Report On Bushiroad Selling NJPW",
+    "status": "published",
+    "story_core": "vendita-quote-njpw",
+    "wp_post_id": 5521
   },
   "https://www.wrestlinginc.com/2182641/aew-dynamite-jake-doyle-returns-orange-cassidy/": {
     "article_type": "event_outcome",
