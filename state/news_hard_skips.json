@@ -23,6 +23,14 @@
     "stage": "phase_b",
     "title": "Jeff Jarrett Says WWE ID Talent Are Short-Changing Themselves by Giving Up Indie Names"
   },
+  "https://www.ringsidenews.com/john-cena-spotted-wwe-performance-center-working-nxt-talent/": {
+    "created_at": "2026-05-28T02:46:37.576881",
+    "reason": "phase_b_soft_news",
+    "score": 39,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "John Cena Spotted At WWE Performance Center Working With NXT Talent"
+  },
   "https://www.ringsidenews.com/torrie-wilson-addresses-prior-eating-disorder-struggles-before-wrestling-career/": {
     "created_at": "2026-05-27T22:16:49.816116",
     "reason": "phase_b_soft_news",
@@ -54,6 +62,14 @@
     "source": "ringsidenews",
     "stage": "phase_b",
     "title": "Val Venis Says MJF Should Take Over Triple H’s Role After Retirement"
+  },
+  "https://www.ringsidenews.com/what-you-didnt-see-before-may-27-aew-dynamite-went-live-philadelphia/": {
+    "created_at": "2026-05-28T02:46:42.778314",
+    "reason": "phase_b_report_like",
+    "score": 0,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "What You Didn’t See Before May 27 AEW Dynamite Went Live In Philadelphia"
   },
   "https://www.wrestlinginc.com/2175652/aew-wwe-tony-schiavone-ted-turner-credits-career-belongs-hall-fame/": {
     "created_at": "2026-05-27T20:10:05.063610",

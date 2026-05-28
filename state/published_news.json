@@ -80,6 +80,36 @@
     "status": "published",
     "wp_post_id": 5456
   },
+  "https://www.ringsidenews.com/injured-aew-star-returns-aew-months-injury/": {
+    "article_type": "hard_news",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/aew-jake-doyle-torna-in-televisione-dopo-linfortunio/",
+    "priority": "hard",
+    "published_at": "2026-05-28T02:47:37.621793",
+    "score": 100,
+    "source": "ringsidenews",
+    "source_title": "Injured AEW Star Returns To AEW Months After Injury",
+    "status": "published",
+    "story_core": "rientro-jake-doyle-infortunio",
+    "wp_post_id": 5480
+  },
+  "https://www.ringsidenews.com/kyle-fletcher-announces-hes-cleared-may-27-aew-collision/": {
+    "article_type": "hard_news",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/aew-kyle-fletcher-torna-sul-ring-e-sfida-konosuke-takeshita/",
+    "priority": "hard",
+    "published_at": "2026-05-28T02:47:48.230472",
+    "score": 88,
+    "source": "ringsidenews",
+    "source_title": "Kyle Fletcher Announces He’s Cleared On May 27 AEW Collision",
+    "status": "published",
+    "story_core": "ritorno-in-ring-kyle-fletcher",
+    "wp_post_id": 5484
+  },
   "https://www.ringsidenews.com/last-minute-matches-added-may-27-aew-dynamite/": {
     "article_type": "hard_news",
     "categories": [
@@ -124,6 +154,21 @@
     "status": "published",
     "story_core": "dietro-le-quinte-cash-in-summerslam",
     "wp_post_id": 5476
+  },
+  "https://www.ringsidenews.com/tommaso-ciampa-attacks-chris-jericho-finally-beating-ricochet-aew-dynamite/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/aew-dynamite-tommaso-ciampa-attacca-chris-jericho-dopo-il-match-con-ricochet/",
+    "priority": "hard",
+    "published_at": "2026-05-28T02:47:43.503786",
+    "score": 96,
+    "source": "ringsidenews",
+    "source_title": "Tommaso Ciampa Attacks Chris Jericho After Finally Beating Ricochet On AEW Dynamite",
+    "status": "published",
+    "story_core": "ciampa-attacco-a-jericho-aew",
+    "wp_post_id": 5482
   },
   "https://www.ringsidenews.com/wwe-clash-italy-betting-odds-drop-ahead-major-championship-matches/": {
     "article_type": "soft_news",
