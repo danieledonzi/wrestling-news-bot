@@ -3,6 +3,8 @@ from __future__ import annotations
 import json
 import os
 import re
+import socket
+import time
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Tuple
@@ -47,27 +49,62 @@ def wp_root_from_env() -> str:
     return raw
 
 
+def log_dns_diagnostics(root: str) -> None:
+    try:
+        host = urlparse(root).netloc
+        infos = socket.getaddrinfo(host, 443, type=socket.SOCK_STREAM)
+        ips = []
+        for info in infos:
+            ip = info[4][0]
+            if ip not in ips:
+                ips.append(ip)
+        log(f"[MANUAL v92] DNS {host}: {', '.join(ips) if ips else 'nessun IP'}")
+    except Exception as exc:
+        log(f"[MANUAL v92] DNS diagnostic fallita: {exc}")
+
+
+def probe_endpoint(endpoint: str, timeout: int, use_auth: bool = False) -> Tuple[bool, str]:
+    start = time.monotonic()
+    try:
+        kwargs = {"headers": HEADERS, "timeout": timeout}
+        if use_auth:
+            kwargs["auth"] = (os.getenv("WP_USER", ""), os.getenv("WP_PASSWORD", ""))
+        res = requests.get(endpoint, **kwargs)
+        elapsed = time.monotonic() - start
+        log(f"[MANUAL v92] WP probe status={res.status_code} elapsed={elapsed:.2f}s endpoint={endpoint}")
+        if res.status_code in {200, 401, 403}:
+            return True, f"status_{res.status_code}"
+        return False, f"status_{res.status_code}"
+    except Exception as exc:
+        elapsed = time.monotonic() - start
+        log(f"[MANUAL v92] WP probe timeout/errore elapsed={elapsed:.2f}s endpoint={endpoint}: {exc}")
+        return False, "wp_error"
+
+
 def manual_wp_health_check() -> Tuple[bool, str]:
     root = wp_root_from_env()
     if not root:
         return False, "missing_wp_url"
+
+    timeout = int(os.getenv("V92_WP_HEALTH_TIMEOUT", "10"))
+    retries = int(os.getenv("V92_WP_HEALTH_RETRIES", "2"))
+    log_dns_diagnostics(root)
+
     endpoints = [
-        f"{root}/wp-json/",
-        f"{root}/wp-json/wp/v2/posts?per_page=1",
+        (f"{root}/", False, "home"),
+        (f"{root}/wp-json/", False, "rest_root"),
+        (f"{root}/wp-json/wp/v2/posts?per_page=1", True, "posts_auth"),
     ]
+
     last_status = "wp_unavailable"
-    for attempt in range(1, 4):
-        for endpoint in endpoints:
-            try:
-                res = requests.get(endpoint, headers=HEADERS, timeout=6, auth=(os.getenv("WP_USER", ""), os.getenv("WP_PASSWORD", "")))
-                if res.status_code in {200, 401, 403}:
-                    log(f"[MANUAL v92] WP health check OK: status {res.status_code} endpoint={endpoint} | tentativo {attempt}/3")
-                    return True, f"status_{res.status_code}"
-                last_status = f"status_{res.status_code}"
-                log(f"[MANUAL v92] WP health check risposta inattesa: status {res.status_code} endpoint={endpoint} | tentativo {attempt}/3")
-            except Exception as exc:
-                last_status = "wp_error"
-                log(f"[MANUAL v92] WP health check timeout/errore endpoint={endpoint} | tentativo {attempt}/3: {exc}")
+    for attempt in range(1, retries + 1):
+        log(f"[MANUAL v92] WP health check attempt {attempt}/{retries} timeout={timeout}s")
+        for endpoint, use_auth, label in endpoints:
+            ok, status = probe_endpoint(endpoint, timeout=timeout, use_auth=use_auth)
+            last_status = status
+            if ok and label in {"rest_root", "posts_auth"}:
+                log(f"[MANUAL v92] WP health check OK label={label} status={status} | tentativo {attempt}/{retries}")
+                return True, status
     return False, last_status
 
 
