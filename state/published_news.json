@@ -83,6 +83,21 @@
     "status": "published",
     "wp_post_id": 5458
   },
+  "https://www.ringsidenews.com/david-finlay-clark-connors-destroy-adam-copeland-christian-cage-may-27-aew-dynamite/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/aew-dynamite-david-finlay-e-clark-connors-attaccano-i-campioni-copeland-e-cage/",
+    "priority": "soft",
+    "published_at": "2026-05-28T15:50:31.717380",
+    "score": 70,
+    "source": "ringsidenews",
+    "source_title": "David Finlay & Clark Connors Destroy Adam Copeland And Christian Cage On May 27 AEW Dynamite",
+    "status": "published",
+    "story_core": "njpw-bullet-club-war-dogs-attack-aew-tag-champions",
+    "wp_post_id": 5559
+  },
   "https://www.ringsidenews.com/fabian-aichner-reveals-why-he-signed-tna-wwe-exit/": {
     "article_type": "hard_news",
     "categories": [
@@ -139,6 +154,36 @@
     "status": "published",
     "story_core": "rientro-jake-doyle-infortunio",
     "wp_post_id": 5480
+  },
+  "https://www.ringsidenews.com/jdc-says-he-almost-died-hotel-room-days-long-bender-during-wwe-career/": {
+    "article_type": "soft_news",
+    "categories": [
+      "TNA"
+    ],
+    "link": "https://news.openwrestlingtv.com/tna/jdc-e-il-drammatico-retroscena-ho-rischiato-di-morire-in-hotel-durante-la-mia-carriera-in-wwe/",
+    "priority": "soft",
+    "published_at": "2026-05-28T15:50:37.748672",
+    "score": 70,
+    "source": "ringsidenews",
+    "source_title": "JDC Says He Almost Died in Hotel Room After Days-Long Bender During WWE Career",
+    "status": "published",
+    "story_core": "jdc-confessione-abuso-sostanze-wwe",
+    "wp_post_id": 5561
+  },
+  "https://www.ringsidenews.com/jim-ross-admits-his-aew-future-uncertain-contract-nears-end/": {
+    "article_type": "hard_news",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/aew-il-futuro-di-jim-ross-resta-in-bilico-il-contratto-scade-ad-agosto/",
+    "priority": "soft",
+    "published_at": "2026-05-28T15:50:27.707803",
+    "score": 70,
+    "source": "ringsidenews",
+    "source_title": "Jim Ross Admits His AEW Future Is Uncertain as Contract Nears End",
+    "status": "published",
+    "story_core": "scadenza-contratto-jim-ross",
+    "wp_post_id": 5557
   },
   "https://www.ringsidenews.com/kevin-knight-destroys-mike-bailey-aew-dynamite-crowd-turns-him/": {
     "article_type": "event_outcome",
