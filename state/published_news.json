@@ -200,6 +200,21 @@
     "story_core": "mjf-first-title-defense-announcement",
     "wp_post_id": 5490
   },
+  "https://www.ringsidenews.com/netflix-expected-land-wwe-japan-aew-leaves-njpw-world/": {
+    "article_type": "strategic_discussion",
+    "categories": [
+      "Business"
+    ],
+    "link": "https://news.openwrestlingtv.com/business/giappone-la-wwe-pronta-al-passaggio-su-netflix-mentre-la-aew-lascia-njpw-world/",
+    "priority": "hard",
+    "published_at": "2026-05-28T14:51:24.327351",
+    "score": 84,
+    "source": "ringsidenews",
+    "source_title": "Netflix Expected To Land WWE In Japan As AEW Leaves NJPW World",
+    "status": "published",
+    "story_core": "shift-broadcasting-diritti-tv-giappone",
+    "wp_post_id": 5535
+  },
   "https://www.ringsidenews.com/qt-marshall-expected-avoid-missing-time-scary-aew-double-nothing-fall/": {
     "article_type": "hard_news",
     "categories": [
@@ -214,6 +229,21 @@
     "status": "published",
     "story_core": "qt-marshall-infortunio-rientro",
     "wp_post_id": 5470
+  },
+  "https://www.ringsidenews.com/rhea-ripley-reveals-she-collapsed-backstage-suffered-panic-attack-during-wwe-australia-tour/": {
+    "article_type": "soft_news",
+    "categories": [
+      "Business"
+    ],
+    "link": "https://news.openwrestlingtv.com/business/rhea-ripley-svela-il-crollo-fisico-avuto-durante-il-tour-australiano-della-wwe/",
+    "priority": "soft",
+    "published_at": "2026-05-28T14:51:36.873333",
+    "score": 70,
+    "source": "ringsidenews",
+    "source_title": "Rhea Ripley Reveals She Collapsed Backstage and Suffered Panic Attack During WWE Australia Tour",
+    "status": "published",
+    "story_core": "rhea-ripley-panic-attack-australia-tour",
+    "wp_post_id": 5539
   },
   "https://www.ringsidenews.com/samoa-joe-announces-hes-taking-absence-aew/": {
     "article_type": "hard_news",
@@ -439,5 +469,20 @@
     "status": "published",
     "story_core": "logan-paul-infortunio-tricipite-chirurgia",
     "wp_post_id": 5532
+  },
+  "https://www.wrestlinginc.com/2182859/wwe-gunther-ludwig-kaiser-bailed-arrest/": {
+    "article_type": "soft_news",
+    "categories": [
+      "Business"
+    ],
+    "link": "https://news.openwrestlingtv.com/business/wwe-ludwig-kaiser-arrestato-per-aggressione-gunther-ha-pagato-la-cauzione/",
+    "priority": "soft",
+    "published_at": "2026-05-28T14:51:30.994343",
+    "score": 72,
+    "source": "wrestlinginc",
+    "source_title": "WWE Star GUNTHER Bailed Out Ludwig Kaiser Following Arrest",
+    "status": "published",
+    "story_core": "ludwig-kaiser-arrest-gunther-bail",
+    "wp_post_id": 5537
   }
 }
