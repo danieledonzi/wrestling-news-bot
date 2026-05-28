@@ -125,6 +125,21 @@
     "story_core": "aew-dynamite-match-additions",
     "wp_post_id": 5474
   },
+  "https://www.ringsidenews.com/mjfs-first-aew-world-title-defense-revealed/": {
+    "article_type": "hard_news",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/aew-annunciata-la-prima-difesa-titolata-di-mjf-contro-rush-per-il-prossimo-dynamite/",
+    "priority": "hard",
+    "published_at": "2026-05-28T06:34:50.573818",
+    "score": 86,
+    "source": "ringsidenews",
+    "source_title": "MJF’s First AEW World Title Defense Revealed",
+    "status": "published",
+    "story_core": "mjf-first-title-defense-announcement",
+    "wp_post_id": 5490
+  },
   "https://www.ringsidenews.com/qt-marshall-expected-avoid-missing-time-scary-aew-double-nothing-fall/": {
     "article_type": "hard_news",
     "categories": [
@@ -185,6 +200,21 @@
     "story_core": "betting-odds-clash-in-italy",
     "wp_post_id": 5464
   },
+  "https://www.wrestlinginc.com/2175486/wwe-baron-corbin-bishop-dyer-discussed-return/": {
+    "article_type": "hard_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-si-valuta-un-possibile-ritorno-di-baron-corbin/",
+    "priority": "hard",
+    "published_at": "2026-05-28T06:34:36.239747",
+    "score": 87,
+    "source": "wrestlinginc",
+    "source_title": "Report: Baron Corbin (AKA Bishop Dyer) Being Discussed For WWE Return",
+    "status": "published",
+    "story_core": "wwe-internal-talks-baron-corbin-return",
+    "wp_post_id": 5488
+  },
   "https://www.wrestlinginc.com/2175490/wwe-clash-italy-stephanie-vaquer-backstage-return/": {
     "article_type": "hard_news",
     "categories": [
@@ -214,5 +244,20 @@
     "status": "published",
     "story_core": "speculazioni-diritti-tv-aew-paramount",
     "wp_post_id": 5462
+  },
+  "https://www.wrestlinginc.com/2182641/aew-dynamite-jake-doyle-returns-orange-cassidy/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/aew-dynamite-il-ritorno-di-jake-doyle-e-lattacco-a-orange-cassidy/",
+    "priority": "hard",
+    "published_at": "2026-05-28T06:34:30.076113",
+    "score": 88,
+    "source": "wrestlinginc",
+    "source_title": "Jake Doyle Returns, Takes Out Orange Cassidy On AEW Dynamite",
+    "status": "published",
+    "story_core": "jake-doyle-return-attack",
+    "wp_post_id": 5486
   }
 }
