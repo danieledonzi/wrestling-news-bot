@@ -155,6 +155,21 @@
     "story_core": "qt-marshall-infortunio-rientro",
     "wp_post_id": 5470
   },
+  "https://www.ringsidenews.com/samoa-joe-announces-hes-taking-absence-aew/": {
+    "article_type": "hard_news",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/samoa-joe-annuncia-una-pausa-temporanea-dalla-aew/",
+    "priority": "hard",
+    "published_at": "2026-05-28T06:52:52.033585",
+    "score": 83,
+    "source": "ringsidenews",
+    "source_title": "Samoa Joe Announces He’s Taking an Absence from AEW",
+    "status": "published",
+    "story_core": "samoa-joe-pausa-aew",
+    "wp_post_id": 5492
+  },
   "https://www.ringsidenews.com/seth-rollins-reveals-mastermind-behind-summerslam-cash-crutch-drop/": {
     "article_type": "soft_news",
     "categories": [
@@ -200,6 +215,21 @@
     "story_core": "betting-odds-clash-in-italy",
     "wp_post_id": 5464
   },
+  "https://www.ringsidenews.com/wwe-smackdown-viewership-sees-slight-increase-may-22-2026/": {
+    "article_type": "standard_useful",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-smackdown-in-leggero-rialzo-gli-ascolti-della-puntata-del-22-maggio/",
+    "priority": "soft",
+    "published_at": "2026-05-28T06:53:01.524292",
+    "score": 73,
+    "source": "ringsidenews",
+    "source_title": "WWE SmackDown Viewership Sees Slight Increase on May 22, 2026",
+    "status": "published",
+    "story_core": "smackdown-ratings-update",
+    "wp_post_id": 5496
+  },
   "https://www.wrestlinginc.com/2175486/wwe-baron-corbin-bishop-dyer-discussed-return/": {
     "article_type": "hard_news",
     "categories": [
@@ -229,6 +259,21 @@
     "status": "published",
     "story_core": "rientro-stephanie-vaquer-infortunio",
     "wp_post_id": 5468
+  },
+  "https://www.wrestlinginc.com/2175604/wwe-randy-orton-absence-injury-enjoy-summer/": {
+    "article_type": "soft_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-randy-orton-smentisce-le-voci-su-un-infortunio-mi-sto-solo-godendo-lestate/",
+    "priority": "hard",
+    "published_at": "2026-05-28T06:52:57.932651",
+    "score": 83,
+    "source": "wrestlinginc",
+    "source_title": "Randy Orton On His WWE Absence Amid Injury Reports: 'Just Trying To Enjoy My Summer'",
+    "status": "published",
+    "story_core": "randy-orton-stato-fisico-assenza",
+    "wp_post_id": 5494
   },
   "https://www.wrestlinginc.com/2175644/wwe-aew-paramount-rumors-circulating-backstage/": {
     "article_type": "strategic_discussion",
