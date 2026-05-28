@@ -7,6 +7,14 @@
     "stage": "deterministic",
     "title": "AEW Dynamite/Collision Results, Highlights and Key Moments for May 27, 2026"
   },
+  "https://www.ringsidenews.com/brian-myers-says-wwes-covid-releases-still-leave-sore-spot/": {
+    "created_at": "2026-05-28T14:38:56.183637",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Brian Myers Says WWE’s COVID Releases Still Leave A ‘Sore Spot’"
+  },
   "https://www.ringsidenews.com/david-finlay-clark-connors-destroy-adam-copeland-christian-cage-may-27-aew-dynamite/": {
     "created_at": "2026-05-28T06:52:36.897793",
     "reason": "phase_b_event_outcome",
@@ -14,6 +22,38 @@
     "source": "ringsidenews",
     "stage": "phase_b",
     "title": "David Finlay & Clark Connors Destroy Adam Copeland And Christian Cage On May 27 AEW Dynamite"
+  },
+  "https://www.ringsidenews.com/eric-bischoff-says-wwe-hit-creative-flatline-wants-cody-rhodes-heel-turn/": {
+    "created_at": "2026-05-28T14:38:52.859497",
+    "reason": "phase_b_opinion",
+    "score": 34,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Eric Bischoff Says WWE Has Hit Creative “Flatline” And Wants Cody Rhodes Heel Turn"
+  },
+  "https://www.ringsidenews.com/former-wwe-star-curtis-axel-allegedly-cursed-mcdonalds-employees-before-dui-arrest/": {
+    "created_at": "2026-05-28T14:39:03.139556",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Former WWE Star Curtis Axel Allegedly Cursed At McDonald’s Employees Before DUI Arrest"
+  },
+  "https://www.ringsidenews.com/former-wwe-star-curtis-axel-faces-364-days-jail-dui-arrest/": {
+    "created_at": "2026-05-28T14:39:00.744335",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Former WWE Star Curtis Axel Faces Up To 364 Days In Jail After DUI Arrest"
+  },
+  "https://www.ringsidenews.com/gunther-explains-why-he-brought-back-his-old-wwe-entrance-theme/": {
+    "created_at": "2026-05-28T14:39:09.304074",
+    "reason": "phase_b_soft_news",
+    "score": 27,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "GUNTHER Explains Why He Brought Back His Old WWE Entrance Theme"
   },
   "https://www.ringsidenews.com/jade-cargill-explains-why-she-refuses-sign-autographs/": {
     "created_at": "2026-05-27T20:10:16.829127",
@@ -238,5 +278,21 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "Territorial Star 'Golden Boy' Jerry Grey Dies At 62 After Battle With Cancer"
+  },
+  "https://www.wrestlinginc.com/2182660/aew-dynamite-collision-may-27-2026-hated-loved-opinion-review/": {
+    "created_at": "2026-05-28T14:38:45.253104",
+    "reason": "report_like",
+    "score": 0,
+    "source": "wrestlinginc",
+    "stage": "deterministic",
+    "title": "AEW Dynamite & Collision 5/27/2026: 3 Things We Hated & 3 Things We Loved"
+  },
+  "https://www.wrestlinginc.com/2182727/wwe-chris-dunn-nwo-new-world-order-thunderdome-sheamus-cesaro-nakamura/": {
+    "created_at": "2026-05-28T14:38:45.252966",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Former WWE Writer Says New NWO 'Was Really Close To Happening' During ThunderDome Era"
   }
 }

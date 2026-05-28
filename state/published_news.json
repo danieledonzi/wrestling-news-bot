@@ -68,6 +68,36 @@
     "status": "published",
     "wp_post_id": 5458
   },
+  "https://www.ringsidenews.com/fabian-aichner-reveals-why-he-signed-tna-wwe-exit/": {
+    "article_type": "hard_news",
+    "categories": [
+      "Business"
+    ],
+    "link": "https://news.openwrestlingtv.com/business/fabian-aichner-spiega-la-scelta-della-tna-e-il-posto-giusto-per-essere-autentico/",
+    "priority": "hard",
+    "published_at": "2026-05-28T14:39:29.049993",
+    "score": 92,
+    "source": "ringsidenews",
+    "source_title": "Fabian Aichner Reveals Why He Signed With TNA After WWE Exit",
+    "status": "published",
+    "story_core": "fabian-aichner-firma-tna",
+    "wp_post_id": 5530
+  },
+  "https://www.ringsidenews.com/former-wwe-star-curtis-axel-arrested-multiple-charges-including-dui/": {
+    "article_type": "hard_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/arresto-per-lex-stella-wwe-curtis-axel-le-accuse-includono-guida-in-stato-di-ebbrezza/",
+    "priority": "hard",
+    "published_at": "2026-05-28T14:39:16.079552",
+    "score": 93,
+    "source": "ringsidenews",
+    "source_title": "Former WWE Star Curtis Axel Arrested On Multiple Charges Including DUI",
+    "status": "published",
+    "story_core": "arresto-curtis-axel-dui",
+    "wp_post_id": 5528
+  },
   "https://www.ringsidenews.com/how-cm-punk-helps-jackie-redmond-prepare-wwe-backstage-reports/": {
     "categories": [
       "WWE"
@@ -394,5 +424,20 @@
     "status": "published",
     "story_core": "jake-doyle-return-attack",
     "wp_post_id": 5486
+  },
+  "https://www.wrestlinginc.com/2182681/wwe-logan-paul-surgery-torn-tricep-recovery-timeline/": {
+    "article_type": "hard_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-logan-paul-operato-al-tricipite-punta-a-un-rientro-anticipato/",
+    "priority": "hard",
+    "published_at": "2026-05-28T14:39:35.024302",
+    "score": 91,
+    "source": "wrestlinginc",
+    "source_title": "WWE's Logan Paul Undergoes Surgery For Torn Tricep, Vows To Beat Recovery Timeline",
+    "status": "published",
+    "story_core": "logan-paul-infortunio-tricipite-chirurgia",
+    "wp_post_id": 5532
   }
 }
