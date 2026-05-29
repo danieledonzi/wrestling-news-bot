@@ -7,6 +7,12 @@ from pathlib import Path
 # in the translated article. This patch preserves social/video embeds as explicit
 # placeholders during translation and renders them as WordPress embed blocks after
 # Gemini returns HTML.
+#
+# Important v2 correction:
+# - do not append lost placeholders at the bottom, because that can create
+#   duplicate/out-of-position embeds;
+# - expand shortlinks/media links such as pic.twitter.com and t.co to canonical
+#   x.com/twitter status URLs before rendering the WordPress embed.
 # -----------------------------------------------------------------------------
 
 p = Path("modules/news_workshop_v92.py")
@@ -16,15 +22,12 @@ if "V92_NEWS_EMBED_HANDLING_PATCH = True" in text:
     print("[V92 NEWS EMBED] patch gia applicata")
     raise SystemExit(0)
 
-# Add marker flag near media cache. This anchor exists in the base module and also
-# survives previous runtime patches because they append flags after it.
 text = text.replace(
     "_media_cache: Dict[str, Tuple[Optional[int], Optional[str]]] = {}\n",
     "_media_cache: Dict[str, Tuple[Optional[int], Optional[str]]] = {}\nV92_NEWS_EMBED_HANDLING_PATCH = True\n",
     1,
 )
 
-# Insert helper functions before should_skip_text.
 helper_anchor = "\n\ndef should_skip_text(text: str) -> bool:\n"
 helpers = r'''
 
@@ -32,22 +35,27 @@ def normalize_embed_url(raw_url: str) -> Optional[str]:
     url = html_lib.unescape((raw_url or "").strip())
     if not url:
         return None
-    # Strip common tracking and HTML noise.
+    url = re.sub(r"[\s\"'<>]+$", "", url)
     url = url.split("?", 1)[0]
-    url = url.rstrip("/.,)"]")
+    url = url.rstrip("/.,)]}")
     if url.startswith("//"):
         url = "https:" + url
     if not url.startswith(("http://", "https://")):
         return None
-    # Twitter has moved to X, but WordPress oEmbed usually handles both.
     return url
+
+
+def is_short_social_url(url: str) -> bool:
+    low = (url or "").lower()
+    return "pic.twitter.com/" in low or "t.co/" in low
 
 
 def is_embed_url(url: str) -> bool:
     low = (url or "").lower()
     domains = [
-        "twitter.com/", "x.com/", "instagram.com/", "youtube.com/", "youtu.be/",
-        "tiktok.com/", "facebook.com/", "threads.net/", "bsky.app/",
+        "twitter.com/", "x.com/", "pic.twitter.com/", "t.co/",
+        "instagram.com/", "youtube.com/", "youtu.be/", "tiktok.com/",
+        "facebook.com/", "threads.net/", "bsky.app/",
     ]
     if not any(d in low for d in domains):
         return False
@@ -56,36 +64,59 @@ def is_embed_url(url: str) -> bool:
     return True
 
 
+def canonicalize_embed_url(raw_url: str) -> Optional[str]:
+    url = normalize_embed_url(raw_url)
+    if not url or not is_embed_url(url):
+        return None
+    low = url.lower()
+    if is_short_social_url(url):
+        try:
+            # pic.twitter.com/t.co often resolve to the real tweet/status. Use GET,
+            # not only HEAD, because some social shortlinks do not resolve on HEAD.
+            res = session.get(url, timeout=8, allow_redirects=True)
+            final_url = normalize_embed_url(res.url)
+            if final_url and is_embed_url(final_url):
+                print(f"[NEWS v92] Embed shortlink risolto: {url} -> {final_url}", flush=True)
+                url = final_url
+                low = url.lower()
+        except Exception as exc:
+            print(f"[NEWS v92] WARNING: impossibile risolvere shortlink embed {url}: {exc}", flush=True)
+    # WordPress oEmbed needs the canonical post/video URL, not media shortlinks.
+    if "pic.twitter.com/" in low or "t.co/" in low:
+        print(f"[NEWS v92] WARNING: embed shortlink non canonico scartato: {url}", flush=True)
+        return None
+    if ("twitter.com/" in low or "x.com/" in low) and "/status/" not in low:
+        print(f"[NEWS v92] WARNING: URL X/Twitter senza status scartato: {url}", flush=True)
+        return None
+    return url
+
+
 def extract_embed_url(node, base_url: str) -> Optional[str]:
-    # iframe embeds.
     iframe = node if getattr(node, "name", "") == "iframe" else node.find("iframe")
     if iframe and iframe.get("src"):
-        candidate = normalize_embed_url(urljoin(base_url, iframe.get("src")))
-        if candidate and is_embed_url(candidate):
+        candidate = canonicalize_embed_url(urljoin(base_url, iframe.get("src")))
+        if candidate:
             return candidate
 
-    # Native social blockquotes often keep the original URL in cite.
     cite = node.get("cite") if hasattr(node, "get") else None
     if cite:
-        candidate = normalize_embed_url(urljoin(base_url, cite))
-        if candidate and is_embed_url(candidate):
+        candidate = canonicalize_embed_url(urljoin(base_url, cite))
+        if candidate:
             return candidate
 
-    # Some lazy embeds store the URL in data attributes.
     if hasattr(node, "attrs"):
         for key, value in list(node.attrs.items()):
             if not isinstance(value, str):
                 continue
             if "url" in key.lower() or "href" in key.lower() or "src" in key.lower() or "embed" in key.lower():
-                candidate = normalize_embed_url(urljoin(base_url, value))
-                if candidate and is_embed_url(candidate):
+                candidate = canonicalize_embed_url(urljoin(base_url, value))
+                if candidate:
                     return candidate
 
-    # Fallback: look at links inside the node. Prefer status/post URLs.
     links: List[str] = []
     for a in node.find_all("a", href=True) if hasattr(node, "find_all") else []:
-        candidate = normalize_embed_url(urljoin(base_url, a.get("href")))
-        if candidate and is_embed_url(candidate):
+        candidate = canonicalize_embed_url(urljoin(base_url, a.get("href")))
+        if candidate:
             links.append(candidate)
     for candidate in links:
         low = candidate.lower()
@@ -99,11 +130,8 @@ def is_social_embed_node(node, base_url: str) -> bool:
         return False
     classes = " ".join(node.get("class", []) if hasattr(node, "get") else []).lower()
     if any(marker in classes for marker in ["twitter-tweet", "instagram-media", "tiktok-embed", "wp-block-embed", "embed"]):
-        if extract_embed_url(node, base_url):
-            return True
+        return bool(extract_embed_url(node, base_url))
     if node.name in {"iframe", "figure", "blockquote", "div"} and extract_embed_url(node, base_url):
-        # Avoid treating normal editorial blockquotes with a source link as embeds
-        # unless they point to known social/video providers.
         return True
     return False
 
@@ -128,8 +156,11 @@ def provider_slug_for_embed(url: str) -> str:
 
 
 def render_wp_embed(url: str) -> str:
-    safe_url = html_lib.escape(url or "")
-    provider = provider_slug_for_embed(url)
+    canonical = canonicalize_embed_url(url)
+    if not canonical:
+        return ""
+    safe_url = html_lib.escape(canonical)
+    provider = provider_slug_for_embed(canonical)
     return (
         f'<!-- wp:embed {{"url":"{safe_url}","type":"rich","providerNameSlug":"{provider}"}} -->\n'
         f'<figure class="wp-block-embed is-type-rich is-provider-{provider} wp-block-embed-{provider}">'
@@ -140,27 +171,26 @@ def render_wp_embed(url: str) -> str:
 
 def inject_news_embeds(body_html: str, embeds: List[Dict[str, str]]) -> str:
     out = body_html or ""
-    missing: List[str] = []
     for embed in embeds:
         placeholder = embed.get("placeholder", "")
         url = embed.get("url", "")
-        html = render_wp_embed(url)
+        embed_html = render_wp_embed(url)
+        if not embed_html:
+            print(f"[NEWS v92] WARNING: embed non renderizzato, URL non valido per oEmbed: {url}", flush=True)
+            continue
         if placeholder and placeholder in out:
-            # Replace either raw placeholder or paragraph-wrapped placeholder.
-            out = re.sub(rf"<p>\s*{re.escape(placeholder)}\s*</p>", html, out)
-            out = out.replace(placeholder, html)
+            out = re.sub(rf"<p>\s*{re.escape(placeholder)}\s*</p>", embed_html, out)
+            out = out.replace(placeholder, embed_html)
         else:
-            missing.append(url)
-    if missing:
-        print(f"[NEWS v92] WARNING: placeholder embed persi da Gemini, appendo in fondo: {missing}", flush=True)
-        out = out + "\n" + "\n".join(render_wp_embed(url) for url in missing)
+            # Do not append automatically: if Gemini lost the placeholder, appending
+            # the embed at the end can create duplicates or wrong placement.
+            print(f"[NEWS v92] WARNING: placeholder embed perso da Gemini, non appendo per evitare doppioni: {placeholder} -> {url}", flush=True)
     return out
 '''
 if helper_anchor not in text:
     raise SystemExit("[V92 NEWS EMBED] anchor should_skip_text non trovato")
 text = text.replace(helper_anchor, helpers + helper_anchor, 1)
 
-# Replace extraction with embed-aware extraction returning text, featured, embeds.
 start = text.find("def extract_article_text_and_media(url: str) -> Tuple[str, Optional[str]]:")
 end = text.find("\n\ndef gemini_client", start)
 if start == -1 or end == -1:
@@ -177,8 +207,6 @@ new_extract = r'''def extract_article_text_and_media(url: str) -> Tuple[str, Opt
     parts: List[str] = []
     embeds: List[Dict[str, str]] = []
 
-    # Work on a stable ordered set. If an embed is nested inside a paragraph/div,
-    # the parent text can otherwise swallow it. We detect embed ancestors first.
     for el in container.find_all(["h2", "h3", "p", "li", "blockquote", "figure", "iframe", "div"]):
         if any(parent in container.find_all(["blockquote", "figure", "div"]) and parent is not el and is_social_embed_node(parent, url) for parent in el.parents):
             continue
@@ -194,8 +222,6 @@ new_extract = r'''def extract_article_text_and_media(url: str) -> Tuple[str, Opt
             continue
 
         if el.name in {"figure", "iframe", "div"}:
-            # Non-social figures/divs are usually layout/media wrappers; avoid
-            # turning their full text into article prose.
             continue
 
         txt = clean_text(el.get_text(" ", strip=True))
@@ -219,8 +245,6 @@ new_extract = r'''def extract_article_text_and_media(url: str) -> Tuple[str, Opt
 '''
 text = text[:start] + new_extract + text[end:]
 
-# Strengthen translation prompt. Depending on patch order, this text may or may
-# not already include other added rules, so insert after the no-source rule.
 prompt_anchor = '- Non citare la fonte nel corpo: la fonte viene aggiunta automaticamente dal sistema.\n'
 embed_rules = (
     '- Se nel testo trovi placeholder come [[OWTV_EMBED_1]], [[OWTV_EMBED_2]], mantienili identici, da soli, senza tradurli e senza trasformarli in citazioni.\n'
@@ -229,7 +253,6 @@ embed_rules = (
 if embed_rules not in text:
     text = text.replace(prompt_anchor, prompt_anchor + embed_rules, 1)
 
-# Ensure body post-processing injects embeds and adapt run_news_workshop.
 old_run = '''def run_news_workshop(job: Dict[str, Any], published_dir: Path, review_dir: Path) -> Tuple[int, Dict[str, Any]]:
     print(f"[NEWS v92] Avvio workshop news: {job.get('news_key')} url={job.get('source_url')}", flush=True)
     source_text, image_url = extract_article_text_and_media(str(job["source_url"]))
@@ -262,7 +285,6 @@ new_run = '''def run_news_workshop(job: Dict[str, Any], published_dir: Path, rev
 if old_run in text:
     text = text.replace(old_run, new_run, 1)
 else:
-    # More tolerant patch if previous runtime patches have changed publish logs.
     text = text.replace(
         'source_text, image_url = extract_article_text_and_media(str(job["source_url"]))',
         'source_text, image_url, embeds = extract_article_text_and_media(str(job["source_url"]))',
