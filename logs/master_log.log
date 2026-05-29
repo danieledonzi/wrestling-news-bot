@@ -21292,3 +21292,14 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [NEWS v92] WordPress non disponibile: skip news
 [RUN v92] totale pubblicazioni=0 (report=0, news=0)
 ===== RUN END [2026-05-30T00:49:05] VERSION [v92_0_2_report_workshop_publish] =====
+[MANUAL v92] DNS news.openwrestlingtv.com: 89.40.173.112
+[MANUAL v92] WP health check attempt 1/2 timeout=10s
+[MANUAL v92] WP probe status=200 elapsed=1.95s endpoint=https://news.openwrestlingtv.com/
+[MANUAL v92] WP probe status=200 elapsed=1.58s endpoint=https://news.openwrestlingtv.com/wp-json/
+[MANUAL v92] WP health check OK label=rest_root status=status_200 | tentativo 1/2
+[MANUAL v92] wp_ok=True wp_status=status_200
+[MANUAL v92] Warning: impossibile leggere titolo sorgente: No connection adapters were found for 'WWE SmackDown Results 5/29 - Cody Rhodes & GUNTHER Meet, Jade Cargill Appears  Read More: https://www.wrestlinginc.com/2184147/wwe-smackdown-may-29-cody-rhodes-gunther-jade-cargill/'
+[MANUAL v92] Avvio manual report url=WWE SmackDown Results 5/29 - Cody Rhodes & GUNTHER Meet, Jade Cargill Appears  Read More: https://www.wrestlinginc.com/2184147/wwe-smackdown-may-29-cody-rhodes-gunther-jade-cargill/
+[MANUAL v92] source=manual source_title=WWE SmackDown Results 5/29 - Cody Rhodes & GUNTHER Meet, Jade Cargill Appears  Read More: https://www.wrestlinginc.com/2184147/wwe-smackdown-may-29-cody-rhodes-gunther-jade-cargill/
+[MANUAL v92] title=WWE SmackDown del 29 maggio 2026 - risultati e momenti salienti
+[MANUAL v92] categories=Editoriali, WWE
