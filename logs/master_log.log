@@ -21101,3 +21101,14 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [NEWS v92] Pubblicate news=2/3 | hard_candidates=0 soft_candidates=42 soft_pool_saved=35
 [RUN v92] totale pubblicazioni=2 (report=0, news=2)
 ===== RUN END [2026-05-29T09:28:18] VERSION [v92_0_2_report_workshop_publish] =====
+[MANUAL v92] DNS news.openwrestlingtv.com: 89.40.173.112
+[MANUAL v92] WP health check attempt 1/2 timeout=10s
+[MANUAL v92] WP probe status=200 elapsed=1.02s endpoint=https://news.openwrestlingtv.com/
+[MANUAL v92] WP probe status=200 elapsed=0.90s endpoint=https://news.openwrestlingtv.com/wp-json/
+[MANUAL v92] WP health check OK label=rest_root status=status_200 | tentativo 1/2
+[MANUAL v92] wp_ok=True wp_status=status_200
+[MANUAL v92] Avvio manual report url=https://www.wrestlinginc.com/2183399/tna-thursday-night-impact-may-28-mens-womens-champions-challenges-more/
+[MANUAL v92] source=wrestlinginc source_title=TNA Thursday Night Impact Results 5/28 - Men's & Women's Champions Challenges, More - Wrestling Inc.
+[MANUAL v92] title=TNA Impact del 28 Maggio 2026 - risultati e momenti salienti
+[MANUAL v92] categories=Editoriali, TNA
+[MANUAL v92] Pubblicato post_id=5599 link=https://news.openwrestlingtv.com/tna/tna-impact-del-28-maggio-2026-risultati-e-momenti-salienti/

@@ -181,5 +181,28 @@
     "wp_post_id": 5516,
     "link": "https://news.openwrestlingtv.com/aew/aew-dynamitecollision-del-27-maggio-2026-risultati-e-momenti-salienti/",
     "created_at": "2026-05-28T08:14:21.451316"
+  },
+  {
+    "job": {
+      "kind": "report",
+      "report_key": "manual_report_tna-impact-del-28-maggio-2026-risultati-e-momenti-salienti_20260529074757",
+      "report_id": "manual_report",
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2183399/tna-thursday-night-impact-may-28-mens-womens-champions-challenges-more/",
+      "source_title": "TNA Thursday Night Impact Results 5/28 - Men's & Women's Champions Challenges, More - Wrestling Inc.",
+      "title": "TNA Impact del 28 Maggio 2026 - risultati e momenti salienti",
+      "date": "2026-05-29",
+      "categories": [
+        "Editoriali",
+        "TNA"
+      ],
+      "title_policy": "manual",
+      "translation_mode": "report",
+      "created_at": "2026-05-29T07:47:57.574437",
+      "status": "manual_ready_to_publish"
+    },
+    "wp_post_id": 5599,
+    "link": "https://news.openwrestlingtv.com/tna/tna-impact-del-28-maggio-2026-risultati-e-momenti-salienti/",
+    "created_at": "2026-05-29T07:49:27.605050"
   }
 ]
