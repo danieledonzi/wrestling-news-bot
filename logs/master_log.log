@@ -21227,3 +21227,48 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [NEWS v92] Pubblicate news=0/3 | hard_candidates=0 soft_candidates=9 soft_pool_saved=7
 [RUN v92] totale pubblicazioni=0 (report=0, news=0)
 ===== RUN END [2026-05-29T21:06:55] VERSION [v92_0_2_report_workshop_publish] =====
+===== RUN START [2026-05-29T23:21:22] VERSION [v92_0_2_report_workshop_publish] =====
+[WP v92] BOT WP DIAG DNS news.openwrestlingtv.com: 89.40.173.112
+[WP v92] BOT WP DIAG health attempt 1/2 timeout=10s
+[WP v92] BOT WP DIAG probe status=200 elapsed=2.40s endpoint=https://news.openwrestlingtv.com/
+[WP v92] BOT WP DIAG probe status=200 elapsed=1.06s endpoint=https://news.openwrestlingtv.com/wp-json/
+[WP v92] Health check API OK: status_200 label=rest_root | tentativo 1/2
+[RUN v92] wp_ok=True wp_status=status_200
+[REPORT v92] Non dovuto oggi: wwe_raw expected_day_after=Tuesday
+[REPORT v92] Non dovuto oggi: wwe_smackdown expected_day_after=Saturday
+[REPORT v92] Non dovuto oggi: wwe_nxt expected_day_after=Wednesday
+[REPORT v92] Non dovuto oggi: aew_dynamite expected_day_after=Thursday
+[REPORT v92] Non dovuto oggi: aew_collision expected_day_after=Sunday
+[REPORT v92] Gia pubblicato: tna_impact_2026_05_28
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+[NEWS v92] Hard skip Fase B (0/100 report_like): Spoiler Report For WWE SmackDown: 5/29/2026 | Si tratta di un report di risultati completi (spoiler). Secondo le linee editoriali, i report integrali vanno classificati come report_like per non essere trattati come news di sviluppo.
+[NEWS v92] Soft pool Fase B (67/100 soft_news): Further Details On Joseph Hennig (FKA Curtis Axel) Being Arrested For Drunk Driving
+[NEWS v92] Soft pool Fase B (61/100 soft_news): WWE's Tiffany Stratton Clears Up Rumor About Fabian Aichner: 'Not True'
+[NEWS v92] Soft pool Fase B (56/100 soft_news): Former WWE Stars Karrion Kross And Scarlett Talk Possibility Of Return Or AEW Debut
+[NEWS v92] Hard skip Fase B (34/100 opinion): Bully Ray Speculates On How Brock Lesnar Vs. Oba Femi Feud Could End At WWE SummerSam | Si tratta di pura speculazione basata su un'opinione di un terzo (Bully Ray) riguardo a scenari futuri ipotetici (SummerSlam 2026), priva di fondamento fattuale o notizia concreta.
+[NEWS v92] Hard news Fase B (100/100 hard_news): Jacob Fatu Reportedly Injured At WWE Live Event Ahead Of Clash In Italy
+[NEWS v92] Soft pool Fase B (50/100 soft_news): WWE Star Cody Rhodes Explains Why He Received Cease & Desist Letter From Nintendo
+[NEWS v92] Soft pool Fase B (74/100 strategic_discussion): WWE HOFer Jeff Jarrett Doesn't Think TKO Will Copy AEW Event
+[NEWS v92] Hard skip Fase B (44/100 soft_news): AEW's Adam Copeland Discusses Becoming A Mentor After WWE HOFer Did The Same For Him | Si tratta di un contenuto di approfondimento basato su una dichiarazione. Non c'è un fatto urgente, ma il tema della mentorship e il collegamento con Bret Hart hanno valore per il lettore appassionato.
+[NEWS v92] Soft pool Fase B (60/100 soft_news): John Cena Points To WWE NXT Star Mason Rook When Asked About Future World Champions
+[NEWS v92] Soft pool Fase B (60/100 standard_useful): Backstage Report On Sol Ruca Losing Back-To-Back Matches On WWE Raw
+[NEWS v92] Soft pool Fase B (68/100 soft_news): Alexa Bliss Fires Back at Fan Questioning Her Injury Selling on WWE SmackDown
+[NEWS v92] Hard news Fase B (99/100 hard_news): Jacob Fatu Legitimately Hurt Ahead of WWE Clash In Italy
+[NEWS v92] Hard skip Fase B (45/100 soft_news): Ric Flair Threatens Legal Action Over Unauthorized Use of “Flair” Trademark | Notizia riguardante la tutela del brand di Ric Flair. Sebbene sia una questione legale, manca di un nome specifico contro cui agire o di una causa formale depositata, rendendola più una dichiarazione pubblica che una hard news di business.
+[NEWS v92] Hard news Fase B (98/100 hard_news): Sol Ruca’s Status for WWE Clash In Italy Gets Major Update After Injury Scare
+[NEWS v92] Hard news Fase B (100/100 strategic_discussion): Vince McMahon’s WWE Merger Lawsuit Takes Major Turn After Court Sides Over Hidden Filings
+[NEWS v92] Hard news Fase B (95/100 event_outcome): Cody Rhodes vs. Gunther Set To Open WWE Clash In Italy
+[NEWS v92] Soft pool Fase B (72/100 standard_useful): Stephanie Vaquer’s Status for WWE Clash in Italy Revealed Amid Injury Absence
+[NEWS v92] Hard skip deterministic report-like: SmackDown Spoiler Results for May 29, 2026
+[NEWS v92] Hard skip deterministic report-like: WWE SmackDown Preview for May 29, 2026: Confirmed Matches, Start Time and How to Watch
+[NEWS v92] Hard skip Fase B (45/100 soft_news): Booker T Defends Sol Ruca After Backlash Over Botches on WWE TV | Si tratta di una dichiarazione interessante ma non decisiva per lo sviluppo dei programmi, tipica di un contenuto da podcast/rubrica di commento.
+[NEWS v92] Hard news Fase B (90/100 hard_news): Jacob Fatu Sparks Injury Concern Ahead of WWE Clash in Italy
+[NEWS v92] Hard skip Fase B (40/100 soft_news): Rhea Ripley Tells Jade Cargill She’s Going To Beat Her “Two Nil” At WWE Clash In Italy | Si tratta di una dichiarazione promozionale rilasciata durante un live event. Utile per il racconto della storyline, ma non costituisce uno sviluppo concreto o un annuncio ufficiale.
+[NEWS v92] Soft pool Fase B (59/100 soft_news): Danhausen Gives John Cena’s Five Knuckle Shuffle a Cursed Twist at WWE Live Event
+[NEWS v92] Pubblico hard score=100/100 type=hard_news source=wrestlinginc title=Jacob Fatu Reportedly Injured At WWE Live Event Ahead Of Clash In Italy
+[NEWS v92] Pubblico hard score=100/100 type=strategic_discussion source=ringsidenews title=Vince McMahon’s WWE Merger Lawsuit Takes Major Turn After Court Sides Over Hidden Filings
+[NEWS v92] Pubblico hard score=99/100 type=hard_news source=ringsidenews title=Jacob Fatu Legitimately Hurt Ahead of WWE Clash In Italy
+[NEWS v92] Pubblicate news=3/3 | hard_candidates=6 soft_candidates=17 soft_pool_saved=14
+[RUN v92] totale pubblicazioni=3 (report=0, news=3)
+===== RUN END [2026-05-29T23:21:22] VERSION [v92_0_2_report_workshop_publish] =====

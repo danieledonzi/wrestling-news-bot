@@ -215,6 +215,21 @@
     "story_core": "rientro-jake-doyle-infortunio",
     "wp_post_id": 5480
   },
+  "https://www.ringsidenews.com/jacob-fatu-legitimately-hurt-ahead-wwe-clash-italy/": {
+    "article_type": "hard_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/jacob-fatu-infortunato-incertezza-per-wwe-clash-in-the-castle-in-italia/",
+    "priority": "hard",
+    "published_at": "2026-05-29T21:24:20.710321",
+    "score": 99,
+    "source": "ringsidenews",
+    "source_title": "Jacob Fatu Legitimately Hurt Ahead of WWE Clash In Italy",
+    "status": "published",
+    "story_core": "jacob-fatu-infortunio-liverpool",
+    "wp_post_id": 5614
+  },
   "https://www.ringsidenews.com/jdc-says-he-almost-died-hotel-room-days-long-bender-during-wwe-career/": {
     "article_type": "soft_news",
     "categories": [
@@ -500,6 +515,21 @@
     "story_core": "risultati-semifinali-owen-hart-tournament",
     "wp_post_id": 5500
   },
+  "https://www.ringsidenews.com/vince-mcmahons-wwe-merger-lawsuit-takes-major-turn-court-sides-hidden-filings/": {
+    "article_type": "strategic_discussion",
+    "categories": [
+      "Business"
+    ],
+    "link": "https://news.openwrestlingtv.com/business/causa-sulla-fusione-wwe-la-giustizia-si-pronuncia-sui-documenti-riservati/",
+    "priority": "hard",
+    "published_at": "2026-05-29T21:24:08.589442",
+    "score": 100,
+    "source": "ringsidenews",
+    "source_title": "Vince McMahon’s WWE Merger Lawsuit Takes Major Turn After Court Sides Over Hidden Filings",
+    "status": "published",
+    "story_core": "mcmahon-merger-lawsuit-unsealed-filings",
+    "wp_post_id": 5612
+  },
   "https://www.ringsidenews.com/wwe-clash-italy-betting-odds-drop-ahead-major-championship-matches/": {
     "article_type": "soft_news",
     "categories": [
@@ -784,5 +814,20 @@
     "status": "published",
     "story_core": "samoa-joe-absence-update",
     "wp_post_id": 5608
+  },
+  "https://www.wrestlinginc.com/2184040/jacob-fatu-injured-wwe-live-event-clash-in-italy/": {
+    "article_type": "hard_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/jacob-fatu-a-rischio-per-clash-in-italy-le-condizioni-dopo-il-live-event/",
+    "priority": "hard",
+    "published_at": "2026-05-29T21:24:03.952555",
+    "score": 100,
+    "source": "wrestlinginc",
+    "source_title": "Jacob Fatu Reportedly Injured At WWE Live Event Ahead Of Clash In Italy",
+    "status": "published",
+    "story_core": "jacob-fatu-infortunio-live-event",
+    "wp_post_id": 5610
   }
 }

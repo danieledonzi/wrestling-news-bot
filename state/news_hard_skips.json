@@ -7,6 +7,14 @@
     "stage": "deterministic",
     "title": "AEW Dynamite/Collision Results, Highlights and Key Moments for May 27, 2026"
   },
+  "https://www.ringsidenews.com/booker-t-defends-sol-ruca-backlash-botches-wwe-tv/": {
+    "created_at": "2026-05-29T21:23:42.813017",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Booker T Defends Sol Ruca After Backlash Over Botches on WWE TV"
+  },
   "https://www.ringsidenews.com/brian-myers-says-wwes-covid-releases-still-leave-sore-spot/": {
     "created_at": "2026-05-28T14:38:56.183637",
     "reason": "phase_b_soft_news",
@@ -167,6 +175,22 @@
     "stage": "phase_b",
     "title": "R-Truth Explains Why He Can’t Fully Be a Heel in WWE"
   },
+  "https://www.ringsidenews.com/rhea-ripley-tells-jade-cargill-shes-going-beat-her-two-nil-wwe-clash-italy/": {
+    "created_at": "2026-05-29T21:23:49.580418",
+    "reason": "phase_b_soft_news",
+    "score": 40,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Rhea Ripley Tells Jade Cargill She’s Going To Beat Her “Two Nil” At WWE Clash In Italy"
+  },
+  "https://www.ringsidenews.com/ric-flair-threatens-legal-action-unauthorized-use-flair-trademark/": {
+    "created_at": "2026-05-29T21:23:01.817335",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Ric Flair Threatens Legal Action Over Unauthorized Use of “Flair” Trademark"
+  },
   "https://www.ringsidenews.com/ring-rat-maces-big-al-wild-womens-locker-room-attack-jcw-lunacy/": {
     "created_at": "2026-05-29T00:08:57.634496",
     "reason": "phase_b_low_value",
@@ -190,6 +214,14 @@
     "source": "ringsidenews",
     "stage": "phase_b",
     "title": "Ronda Rousey Explains Why She Finished Gina Carano in 17 Seconds"
+  },
+  "https://www.ringsidenews.com/smackdown-spoiler-results-may-29-2026/": {
+    "created_at": "2026-05-29T21:23:40.154870",
+    "reason": "report_like",
+    "score": 0,
+    "source": "ringsidenews",
+    "stage": "deterministic",
+    "title": "SmackDown Spoiler Results for May 29, 2026"
   },
   "https://www.ringsidenews.com/torrie-wilson-addresses-prior-eating-disorder-struggles-before-wrestling-career/": {
     "created_at": "2026-05-27T22:16:49.816116",
@@ -247,6 +279,14 @@
     "stage": "phase_b",
     "title": "What You Didn’t See Before May 27 AEW Dynamite Went Live In Philadelphia"
   },
+  "https://www.ringsidenews.com/wwe-smackdown-preview-may-29-2026-confirmed-matches-start-time-how-watch/": {
+    "created_at": "2026-05-29T21:23:40.155046",
+    "reason": "report_like",
+    "score": 0,
+    "source": "ringsidenews",
+    "stage": "deterministic",
+    "title": "WWE SmackDown Preview for May 29, 2026: Confirmed Matches, Start Time and How to Watch"
+  },
   "https://www.wrestlinginc.com/2172763/aew-swerve-strickland-archetype-indie-wrestling-star-dying/": {
     "created_at": "2026-05-29T16:02:08.313383",
     "reason": "phase_b_soft_news",
@@ -254,6 +294,14 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "AEW's Swerve Strickland Says The Archetype Of An Indie Wrestling Star Is 'Dying'"
+  },
+  "https://www.wrestlinginc.com/2173441/aew-wwe-adam-copeland-edge-bret-hart-mentor/": {
+    "created_at": "2026-05-29T21:22:38.232449",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "AEW's Adam Copeland Discusses Becoming A Mentor After WWE HOFer Did The Same For Him"
   },
   "https://www.wrestlinginc.com/2174105/karrion-kross-failed-wwe-main-roster-call-up/": {
     "created_at": "2026-05-29T16:02:35.152969",
@@ -510,5 +558,21 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "Ronda Rousey Downplays Likelihood Of AEW Run: 'It Just Happened To Be In Town"
+  },
+  "https://www.wrestlinginc.com/2184056/bully-ray-brock-lesnar-oba-fei-wwe-summerslam/": {
+    "created_at": "2026-05-29T21:22:26.903640",
+    "reason": "phase_b_opinion",
+    "score": 34,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Bully Ray Speculates On How Brock Lesnar Vs. Oba Femi Feud Could End At WWE SummerSam"
+  },
+  "https://www.wrestlinginc.com/2184070/wwe-smackdown-spoiler-report-may-29-2026/": {
+    "created_at": "2026-05-29T21:21:28.398016",
+    "reason": "phase_b_report_like",
+    "score": 0,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Spoiler Report For WWE SmackDown: 5/29/2026"
   }
 }
