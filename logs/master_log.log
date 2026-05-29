@@ -21204,3 +21204,26 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [NEWS v92] Pubblicate news=0/3 | hard_candidates=0 soft_candidates=10 soft_pool_saved=6
 [RUN v92] totale pubblicazioni=0 (report=0, news=0)
 ===== RUN END [2026-05-29T18:14:01] VERSION [v92_0_2_report_workshop_publish] =====
+===== RUN START [2026-05-29T21:06:55] VERSION [v92_0_2_report_workshop_publish] =====
+[WP v92] BOT WP DIAG DNS news.openwrestlingtv.com: 89.40.173.112
+[WP v92] BOT WP DIAG health attempt 1/2 timeout=10s
+[WP v92] BOT WP DIAG probe status=200 elapsed=2.74s endpoint=https://news.openwrestlingtv.com/
+[WP v92] BOT WP DIAG probe status=200 elapsed=1.10s endpoint=https://news.openwrestlingtv.com/wp-json/
+[WP v92] Health check API OK: status_200 label=rest_root | tentativo 1/2
+[RUN v92] wp_ok=True wp_status=status_200
+[REPORT v92] Non dovuto oggi: wwe_raw expected_day_after=Tuesday
+[REPORT v92] Non dovuto oggi: wwe_smackdown expected_day_after=Saturday
+[REPORT v92] Non dovuto oggi: wwe_nxt expected_day_after=Wednesday
+[REPORT v92] Non dovuto oggi: aew_dynamite expected_day_after=Thursday
+[REPORT v92] Non dovuto oggi: aew_collision expected_day_after=Sunday
+[REPORT v92] Gia pubblicato: tna_impact_2026_05_28
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+[NEWS v92] Hard skip Fase B (44/100 soft_news): Ronda Rousey Downplays Likelihood Of AEW Run: 'It Just Happened To Be In Town | Dichiarazione interessante che chiude speculazioni su un possibile approdo in AEW. Non ha valore strategico ma ha interesse per il pubblico.
+[NEWS v92] Soft pool Fase B (61/100 soft_news): Former WWE Star Layla Names Only Condition Under Which She'd Return, Dream Opponents
+[NEWS v92] Hard skip Fase A (2/100): TNA Impact 5/28/2026: 3 Things We Hated & 3 Things We Loved | +16:champion,+10:title,+6:tna,-30:things we hated,-30:things we loved
+[NEWS v92] Soft pool Fase B (53/100 soft_news): WWE's Tiffany Stratton Clears Up Rumor About Fabian Aichner: 'Not True'
+[NEWS v92] Soft pool Fase B (56/100 soft_news): Former WWE Stars Karrion Kross And Scarlett Talk Possibility Of Return Or AEW Debut
+[NEWS v92] Pubblicate news=0/3 | hard_candidates=0 soft_candidates=9 soft_pool_saved=7
+[RUN v92] totale pubblicazioni=0 (report=0, news=0)
+===== RUN END [2026-05-29T21:06:55] VERSION [v92_0_2_report_workshop_publish] =====

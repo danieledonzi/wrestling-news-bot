@@ -471,6 +471,14 @@
     "stage": "phase_b",
     "title": "TNA Thursday Night Impact Results 5/28 - Men's & Women's Champions Challenges, More"
   },
+  "https://www.wrestlinginc.com/2183427/tna-impact-may-28-2026-hated-loved-opinion-review/": {
+    "created_at": "2026-05-29T19:07:02.058800",
+    "reason": "+16:champion,+10:title,+6:tna,-30:things we hated,-30:things we loved",
+    "score": 2,
+    "source": "wrestlinginc",
+    "stage": "phase_a",
+    "title": "TNA Impact 5/28/2026: 3 Things We Hated & 3 Things We Loved"
+  },
   "https://www.wrestlinginc.com/2183492/aew-wwe-adam-copeland-new-day-motor-city-machine-guns-possibly-arriving/": {
     "created_at": "2026-05-29T16:02:37.551569",
     "reason": "phase_b_soft_news",
@@ -494,5 +502,13 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "WWE HOFer Nikki Bella Wants Danhausen's Help For Sisters Tag Title Success"
+  },
+  "https://www.wrestlinginc.com/2183754/aew-ronda-rousey-downplays-likelihood-happened-town/": {
+    "created_at": "2026-05-29T19:07:00.947816",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Ronda Rousey Downplays Likelihood Of AEW Run: 'It Just Happened To Be In Town"
   }
 }
