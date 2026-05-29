@@ -112,6 +112,7 @@ for patch_name in [
     "scripts/apply_v92_news_media_diagnostics_patch.py",
     "scripts/apply_v92_news_embed_handling_patch.py",
     "scripts/apply_v92_business_boundary_patch.py",
+    "scripts/apply_v92_news_dedupe_placeholder_patch.py",
 ]:
     patch = Path(patch_name)
     if patch.exists():
