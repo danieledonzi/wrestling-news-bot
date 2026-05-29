@@ -40,6 +40,21 @@ def log(message: str) -> None:
         fh.write(message.rstrip() + "\n")
 
 
+def extract_url_from_manual_input(raw: str) -> str:
+    """Accept either a clean URL or a pasted title + Read More + URL string."""
+    value = (raw or "").strip()
+    if not value:
+        return ""
+    match = re.search(r"https?://[^\s<>\"']+", value)
+    if not match:
+        return value
+    url = match.group(0).strip()
+    url = url.rstrip(".,;:)]}\u201d\u2019")
+    if url != value:
+        log(f"[MANUAL v92] URL estratto da input manuale: {url}")
+    return url
+
+
 def wp_root_from_env() -> str:
     raw = os.getenv("WP_URL", "").strip().rstrip("/")
     if not raw:
@@ -196,6 +211,11 @@ def build_manual_report_job(url: str) -> Dict[str, object]:
 
 
 def run_manual_report(url: str) -> int:
+    url = extract_url_from_manual_input(url)
+    if not urlparse(url).scheme.startswith("http"):
+        log(f"[MANUAL v92] URL manuale non valido dopo estrazione: {url}")
+        return 1
+
     wp_ok, wp_status = manual_wp_health_check()
     log(f"[MANUAL v92] wp_ok={wp_ok} wp_status={wp_status}")
     if not wp_ok:
@@ -223,7 +243,8 @@ def run_manual_report(url: str) -> int:
 
 def main() -> int:
     ensure_dirs()
-    url = os.getenv("V92_MANUAL_URL", "").strip()
+    raw_url = os.getenv("V92_MANUAL_URL", "").strip()
+    url = extract_url_from_manual_input(raw_url)
     kind = os.getenv("V92_MANUAL_KIND", "").strip().lower()
     if not url:
         log("[MANUAL v92] Nessun V92_MANUAL_URL: skip")
