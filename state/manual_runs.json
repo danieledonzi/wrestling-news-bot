@@ -204,5 +204,28 @@
     "wp_post_id": 5599,
     "link": "https://news.openwrestlingtv.com/tna/tna-impact-del-28-maggio-2026-risultati-e-momenti-salienti/",
     "created_at": "2026-05-29T07:49:27.605050"
+  },
+  {
+    "job": {
+      "kind": "report",
+      "report_key": "manual_report_wwe-smackdown-del-29-maggio-2026-risultati-e-momenti-salienti_20260529234958",
+      "report_id": "manual_report",
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2184147/wwe-smackdown-may-29-cody-rhodes-gunther-jade-cargill/",
+      "source_title": "WWE SmackDown Results 5/29 - Cody Rhodes & GUNTHER Meet, Jade Cargill Appears - Wrestling Inc.",
+      "title": "WWE SmackDown del 29 maggio 2026 - risultati e momenti salienti",
+      "date": "2026-05-29",
+      "categories": [
+        "Editoriali",
+        "WWE"
+      ],
+      "title_policy": "manual",
+      "translation_mode": "report",
+      "created_at": "2026-05-29T23:49:58.735012",
+      "status": "manual_ready_to_publish"
+    },
+    "wp_post_id": 5618,
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-smackdown-del-29-maggio-2026-risultati-e-momenti-salienti/",
+    "created_at": "2026-05-29T23:50:15.868689"
   }
 ]
