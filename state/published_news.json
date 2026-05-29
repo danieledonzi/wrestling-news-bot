@@ -230,6 +230,21 @@
     "story_core": "scadenza-contratto-jim-ross",
     "wp_post_id": 5557
   },
+  "https://www.ringsidenews.com/jim-ross-says-vince-mcmahon-noose-around-his-neck-amid-wwe-merger-lawsuit/": {
+    "article_type": "strategic_discussion",
+    "categories": [
+      "Business"
+    ],
+    "link": "https://news.openwrestlingtv.com/business/jim-ross-sui-guai-legali-di-vince-mcmahon-ha-un-cappio-al-collo/",
+    "priority": "hard",
+    "published_at": "2026-05-29T00:09:40.867774",
+    "score": 100,
+    "source": "ringsidenews",
+    "source_title": "Jim Ross Says Vince McMahon Has “A Noose Around His Neck” Amid WWE Merger Lawsuit",
+    "status": "published",
+    "story_core": "vince-mcmahon-legal-troubles-tko-merger-lawsuit",
+    "wp_post_id": 5575
+  },
   "https://www.ringsidenews.com/kevin-knight-destroys-mike-bailey-aew-dynamite-crowd-turns-him/": {
     "article_type": "event_outcome",
     "categories": [
@@ -274,6 +289,21 @@
     "status": "published",
     "story_core": "aew-dynamite-match-additions",
     "wp_post_id": 5474
+  },
+  "https://www.ringsidenews.com/logan-paul-reveals-how-he-suffered-triceps-injury-wwe-saturday-nights-main-event/": {
+    "article_type": "standard_useful",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/logan-paul-spiega-la-dinamica-dellinfortunio-al-tricipite-rimediato-nel-ring/",
+    "priority": "soft",
+    "published_at": "2026-05-29T00:09:55.274999",
+    "score": 72,
+    "source": "ringsidenews",
+    "source_title": "Logan Paul Reveals How He Suffered Triceps Injury at WWE Saturday Night’s Main Event",
+    "status": "published",
+    "story_core": "infortunio-tricipite-logan-paul",
+    "wp_post_id": 5579
   },
   "https://www.ringsidenews.com/ludwig-kaisers-battery-case-gets-potential-trial-timeline/": {
     "article_type": "hard_news",
@@ -649,5 +679,20 @@
     "status": "published",
     "story_core": "ludwig-kaiser-arrest-gunther-bail",
     "wp_post_id": 5537
+  },
+  "https://www.wrestlinginc.com/2183165/fabian-aichner-wwe-giovanni-vinci-tna-organic-fit/": {
+    "article_type": "hard_news",
+    "categories": [
+      "TNA"
+    ],
+    "link": "https://news.openwrestlingtv.com/tna/fabian-aichner-firma-con-tna-accordo-a-breve-termine-fino-allestate/",
+    "priority": "hard",
+    "published_at": "2026-05-29T00:09:47.202872",
+    "score": 87,
+    "source": "wrestlinginc",
+    "source_title": "Fabian Aichner (FKA WWE's Giovanni Vinci) Signs With TNA, Calls It 'An Organic Fit'",
+    "status": "published",
+    "story_core": "firma-aichner-tna",
+    "wp_post_id": 5577
   }
 }
