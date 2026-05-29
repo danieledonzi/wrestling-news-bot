@@ -74,6 +74,21 @@
     "story_core": "candice-michelle-consigli-botch",
     "wp_post_id": 5546
   },
+  "https://www.ringsidenews.com/cody-rhodes-addresses-sami-zayn-walking-out-him-during-wwe-smackdown/": {
+    "article_type": "soft_news",
+    "categories": [
+      "Business"
+    ],
+    "link": "https://news.openwrestlingtv.com/business/cody-rhodes-commenta-labbandono-di-sami-zayn-a-smackdown/",
+    "priority": "soft",
+    "published_at": "2026-05-29T04:52:39.408348",
+    "score": 72,
+    "source": "ringsidenews",
+    "source_title": "Cody Rhodes Addresses Sami Zayn Walking Out on Him During WWE SmackDown",
+    "status": "published",
+    "story_core": "cody-rhodes-commenta-comportamento-sami-zayn",
+    "wp_post_id": 5583
+  },
   "https://www.ringsidenews.com/cody-rhodes-addresses-whether-rock-still-wants-his-soul/": {
     "categories": [
       "WWE"
@@ -694,5 +709,35 @@
     "status": "published",
     "story_core": "firma-aichner-tna",
     "wp_post_id": 5577
+  },
+  "https://www.wrestlinginc.com/2183417/cmll-aew-mistico-injury-update-may-2026/": {
+    "article_type": "standard_useful",
+    "categories": [
+      "World"
+    ],
+    "link": "https://news.openwrestlingtv.com/world/mistico-fa-il-punto-sulle-proprie-condizioni-dopo-linfortunio-al-ginocchio/",
+    "priority": "soft",
+    "published_at": "2026-05-29T04:52:54.895675",
+    "score": 72,
+    "source": "wrestlinginc",
+    "source_title": "CMLL & AEW Star Mistico Offers Injury Update",
+    "status": "published",
+    "story_core": "mistico-injury-update",
+    "wp_post_id": 5585
+  },
+  "https://www.wrestlinginc.com/2183421/hazuki-debut-aew-collision-conflict-stardom/": {
+    "article_type": "hard_news",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/hazuki-debutta-a-aew-collision-i-dubbi-sul-calendario-tra-stardom-e-owen-hart-tournament/",
+    "priority": "hard",
+    "published_at": "2026-05-29T04:52:35.226975",
+    "score": 88,
+    "source": "wrestlinginc",
+    "source_title": "Hazuki Debut Announced For AEW Collision Despite Potential Conflict With STARDOM Dates",
+    "status": "published",
+    "story_core": "hazuki-aew-debut-scheduling-conflict",
+    "wp_post_id": 5581
   }
 }
