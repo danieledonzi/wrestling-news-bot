@@ -4,15 +4,17 @@ from pathlib import Path
 # v92 news embed handling patch.
 # Problem: news extraction treated all blockquotes as editorial quotes. On pages
 # with embedded tweets/Instagram/YouTube, this can turn an embed into a long quote
-# in the translated article. This patch preserves social/video embeds as explicit
-# placeholders during translation and renders them as WordPress embed blocks after
-# Gemini returns HTML.
+# in the translated article. This patch preserves real social/video embeds as
+# explicit placeholders during translation and renders them as WordPress embed
+# blocks after Gemini returns HTML.
 #
-# Important v2 correction:
+# Important corrections:
 # - do not append lost placeholders at the bottom, because that can create
 #   duplicate/out-of-position embeds;
 # - expand shortlinks/media links such as pic.twitter.com and t.co to canonical
-#   x.com/twitter status URLs before rendering the WordPress embed.
+#   x.com/twitter status URLs before rendering the WordPress embed;
+# - remove social/follow/share bars before scanning embeds;
+# - do not treat YouTube channel/profile links as embeds.
 # -----------------------------------------------------------------------------
 
 p = Path("modules/news_workshop_v92.py")
@@ -30,6 +32,16 @@ text = text.replace(
 
 helper_anchor = "\n\ndef should_skip_text(text: str) -> bool:\n"
 helpers = r'''
+
+_EMBED_WARNING_CACHE: set[str] = set()
+
+
+def warn_embed_once(message: str) -> None:
+    if message in _EMBED_WARNING_CACHE:
+        return
+    _EMBED_WARNING_CACHE.add(message)
+    print(message, flush=True)
+
 
 def normalize_embed_url(raw_url: str) -> Optional[str]:
     url = html_lib.unescape((raw_url or "").strip())
@@ -64,6 +76,27 @@ def is_embed_url(url: str) -> bool:
     return True
 
 
+def is_canonical_embed_url(url: str) -> bool:
+    low = (url or "").lower()
+    if "twitter.com/" in low or "x.com/" in low:
+        return "/status/" in low
+    if "youtube.com/" in low:
+        return any(x in low for x in ["/watch", "/embed/", "/shorts/"])
+    if "youtu.be/" in low:
+        return True
+    if "instagram.com/" in low:
+        return any(x in low for x in ["/p/", "/reel/", "/tv/"])
+    if "tiktok.com/" in low:
+        return "/video/" in low or "vm.tiktok.com/" in low
+    if "facebook.com/" in low:
+        return any(x in low for x in ["/posts/", "/videos/", "/watch/"])
+    if "threads.net/" in low:
+        return "/post/" in low
+    if "bsky.app/" in low:
+        return "/post/" in low
+    return False
+
+
 def canonicalize_embed_url(raw_url: str) -> Optional[str]:
     url = normalize_embed_url(raw_url)
     if not url or not is_embed_url(url):
@@ -71,8 +104,6 @@ def canonicalize_embed_url(raw_url: str) -> Optional[str]:
     low = url.lower()
     if is_short_social_url(url):
         try:
-            # pic.twitter.com/t.co often resolve to the real tweet/status. Use GET,
-            # not only HEAD, because some social shortlinks do not resolve on HEAD.
             res = session.get(url, timeout=8, allow_redirects=True)
             final_url = normalize_embed_url(res.url)
             if final_url and is_embed_url(final_url):
@@ -80,15 +111,44 @@ def canonicalize_embed_url(raw_url: str) -> Optional[str]:
                 url = final_url
                 low = url.lower()
         except Exception as exc:
-            print(f"[NEWS v92] WARNING: impossibile risolvere shortlink embed {url}: {exc}", flush=True)
-    # WordPress oEmbed needs the canonical post/video URL, not media shortlinks.
+            warn_embed_once(f"[NEWS v92] WARNING: impossibile risolvere shortlink embed {url}: {exc}")
     if "pic.twitter.com/" in low or "t.co/" in low:
-        print(f"[NEWS v92] WARNING: embed shortlink non canonico scartato: {url}", flush=True)
+        warn_embed_once(f"[NEWS v92] WARNING: embed shortlink non canonico scartato: {url}")
         return None
-    if ("twitter.com/" in low or "x.com/" in low) and "/status/" not in low:
-        print(f"[NEWS v92] WARNING: URL X/Twitter senza status scartato: {url}", flush=True)
+    if not is_canonical_embed_url(url):
+        warn_embed_once(f"[NEWS v92] WARNING: URL embed non canonico scartato: {url}")
         return None
     return url
+
+
+def is_social_noise_node(node) -> bool:
+    if not getattr(node, "name", None):
+        return False
+    classes = " ".join(node.get("class", []) if hasattr(node, "get") else []).lower()
+    node_id = str(node.get("id", "") if hasattr(node, "get") else "").lower()
+    aria = str(node.get("aria-label", "") if hasattr(node, "get") else "").lower()
+    data_attrs = " ".join(str(v).lower() for k, v in getattr(node, "attrs", {}).items() if isinstance(v, str) and k.startswith("data"))
+    blob = f"{classes} {node_id} {aria} {data_attrs}"
+    noise_terms = [
+        "share", "sharing", "social", "follow", "follow-us", "follow us", "connect", "newsletter",
+        "author", "bio", "profile", "sidebar", "widget", "related", "recommended", "comments",
+        "ringside-social", "rsn-social", "social-links", "social-share", "post-share", "share-buttons",
+    ]
+    if any(term in blob for term in noise_terms):
+        return True
+    text = clean_text(node.get_text(" ", strip=True)) if hasattr(node, "get_text") else ""
+    low_text = text.lower()
+    if any(phrase in low_text for phrase in ["follow us", "connect with us", "tweets by", "subscribe", "share this"]):
+        return True
+    return False
+
+
+def remove_social_noise(container) -> None:
+    for node in list(container.select(".rsn-social, .ringside-social, .social, .social-links, .social-share, .post-share, .share, .share-buttons, .follow, .follow-us, .author-box, .author-bio, .sidebar, .widget")):
+        node.decompose()
+    for node in list(container.find_all(["div", "section", "aside", "ul", "nav", "footer"])):
+        if is_social_noise_node(node):
+            node.decompose()
 
 
 def extract_embed_url(node, base_url: str) -> Optional[str]:
@@ -128,10 +188,12 @@ def extract_embed_url(node, base_url: str) -> Optional[str]:
 def is_social_embed_node(node, base_url: str) -> bool:
     if not getattr(node, "name", None):
         return False
+    if is_social_noise_node(node):
+        return False
     classes = " ".join(node.get("class", []) if hasattr(node, "get") else []).lower()
     if any(marker in classes for marker in ["twitter-tweet", "instagram-media", "tiktok-embed", "wp-block-embed", "embed"]):
         return bool(extract_embed_url(node, base_url))
-    if node.name in {"iframe", "figure", "blockquote", "div"} and extract_embed_url(node, base_url):
+    if node.name in {"iframe", "figure", "blockquote"} and extract_embed_url(node, base_url):
         return True
     return False
 
@@ -182,8 +244,6 @@ def inject_news_embeds(body_html: str, embeds: List[Dict[str, str]]) -> str:
             out = re.sub(rf"<p>\s*{re.escape(placeholder)}\s*</p>", embed_html, out)
             out = out.replace(placeholder, embed_html)
         else:
-            # Do not append automatically: if Gemini lost the placeholder, appending
-            # the embed at the end can create duplicates or wrong placement.
             print(f"[NEWS v92] WARNING: placeholder embed perso da Gemini, non appendo per evitare doppioni: {placeholder} -> {url}", flush=True)
     return out
 '''
@@ -203,6 +263,7 @@ new_extract = r'''def extract_article_text_and_media(url: str) -> Tuple[str, Opt
     for node in soup.select("script, style, noscript, nav, footer, aside, form"):
         node.decompose()
     container = parse_content_container(soup, url)
+    remove_social_noise(container)
     featured = extract_meta_image(soup, url)
     parts: List[str] = []
     embeds: List[Dict[str, str]] = []
