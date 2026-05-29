@@ -79,6 +79,22 @@
       "wait_for_preferred_until": "08:30",
       "title_template": "AEW Collision del {date_it} - risultati e momenti salienti",
       "match_keywords": ["aew collision", "collision results", "aew collision results"]
+    },
+    {
+      "id": "tna_impact",
+      "enabled": true,
+      "company": "TNA",
+      "category": "TNA",
+      "editorial_category": "Editoriali",
+      "show_name": "TNA Impact",
+      "expected_day_after": "Friday",
+      "show_date_offset_days": 1,
+      "publish_after": "06:30",
+      "preferred_source": "wrestlinginc",
+      "fallback_source": "ringsidenews",
+      "wait_for_preferred_until": "08:30",
+      "title_template": "TNA Impact del {date_it} - risultati e momenti salienti",
+      "match_keywords": ["tna impact", "impact results", "tna impact results", "impact wrestling results"]
     }
   ]
 }
