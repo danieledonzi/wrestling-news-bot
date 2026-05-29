@@ -769,5 +769,20 @@
     "status": "published",
     "story_core": "hazuki-aew-debut-scheduling-conflict",
     "wp_post_id": 5581
+  },
+  "https://www.wrestlinginc.com/2183646/aew-samoa-joe-twisted-metal-planned-absence-backstage-update/": {
+    "article_type": "standard_useful",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/samoa-joe-lontano-dal-ring-aew-i-dettagli-sullassenza-dellatleta/",
+    "priority": "soft",
+    "published_at": "2026-05-29T16:02:43.545364",
+    "score": 72,
+    "source": "wrestlinginc",
+    "source_title": "Backstage Update On Samoa Joe's Planned AEW Absence",
+    "status": "published",
+    "story_core": "samoa-joe-absence-update",
+    "wp_post_id": 5608
   }
 }
