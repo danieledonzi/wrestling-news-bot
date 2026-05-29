@@ -21076,3 +21076,28 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [NEWS v92] Pubblicate news=3/3 | hard_candidates=1 soft_candidates=45 soft_pool_saved=37
 [RUN v92] totale pubblicazioni=3 (report=0, news=3)
 ===== RUN END [2026-05-29T06:51:59] VERSION [v92_0_2_report_workshop_publish] =====
+===== RUN START [2026-05-29T09:28:18] VERSION [v92_0_2_report_workshop_publish] =====
+[WP v92] BOT WP DIAG DNS news.openwrestlingtv.com: 89.40.173.112
+[WP v92] BOT WP DIAG health attempt 1/2 timeout=10s
+[WP v92] BOT WP DIAG probe status=200 elapsed=0.83s endpoint=https://news.openwrestlingtv.com/
+[WP v92] BOT WP DIAG probe status=200 elapsed=0.75s endpoint=https://news.openwrestlingtv.com/wp-json/
+[WP v92] Health check API OK: status_200 label=rest_root | tentativo 1/2
+[RUN v92] wp_ok=True wp_status=status_200
+[REPORT v92] Non dovuto oggi: wwe_raw expected_day_after=Tuesday
+[REPORT v92] Non dovuto oggi: wwe_smackdown expected_day_after=Saturday
+[REPORT v92] Non dovuto oggi: wwe_nxt expected_day_after=Wednesday
+[REPORT v92] Non dovuto oggi: aew_dynamite expected_day_after=Thursday
+[REPORT v92] Non dovuto oggi: aew_collision expected_day_after=Sunday
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+[NEWS v92] Soft pool Fase B (71/100 event_outcome): KC Navarro Wins Title Shot Against Mustafa Ali Through TNA Impact Champions Challenge
+[NEWS v92] Soft pool Fase B (52/100 soft_news): Lyra Valkyria Names WWE NXT Star She Hopes To Face In John Cena Classic
+[NEWS v92] Soft pool Fase B (68/100 soft_news): Garrett Borden, Son Of Sting, Makes Pro Wrestling Debut At AEW Star's Indie Event
+[NEWS v92] Soft pool Fase B (54/100 soft_news): Rhea Ripley Tells Jade Cargill She’s Going To Beat Her “Two Nil” At WWE Clash In Italy
+[NEWS v92] Soft pool Fase B (59/100 soft_news): Danhausen Gives John Cena’s Five Knuckle Shuffle a Cursed Twist at WWE Live Event
+[NEWS v92] Hard skip Fase B (45/100 soft_news): Nikki Bella Says Bryan Danielson Will Coach Her WWE Comeback Run | Si tratta di una dichiarazione di intenti su un possibile futuro ritorno, tipico contenuto da podcast. Interessante per l'audience ma privo di ufficialità contrattuale o date certe.
+[NEWS v92] Pubblico soft score=72/100 type=soft_news source=ringsidenews title=WWE Creative Favorites Ahead Of Clash In Italy Revealed
+[NEWS v92] Pubblico soft score=71/100 type=event_outcome source=wrestlinginc title=KC Navarro Wins Title Shot Against Mustafa Ali Through TNA Impact Champions Challenge
+[NEWS v92] Pubblicate news=2/3 | hard_candidates=0 soft_candidates=42 soft_pool_saved=35
+[RUN v92] totale pubblicazioni=2 (report=0, news=2)
+===== RUN END [2026-05-29T09:28:18] VERSION [v92_0_2_report_workshop_publish] =====

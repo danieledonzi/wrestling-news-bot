@@ -515,6 +515,21 @@
     "story_core": "betting-odds-clash-in-italy",
     "wp_post_id": 5464
   },
+  "https://www.ringsidenews.com/wwe-creative-favorites-ahead-clash-italy-revealed/": {
+    "article_type": "soft_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-clash-in-italy-i-piani-creativi-per-i-volti-di-punta-della-federazione/",
+    "priority": "soft",
+    "published_at": "2026-05-29T07:28:58.820660",
+    "score": 72,
+    "source": "ringsidenews",
+    "source_title": "WWE Creative Favorites Ahead Of Clash In Italy Revealed",
+    "status": "published",
+    "story_core": "wwe-creative-favorites-update",
+    "wp_post_id": 5590
+  },
   "https://www.ringsidenews.com/wwe-evolve-succession-iii-date-officially-revealed/": {
     "article_type": "event_outcome",
     "categories": [
@@ -724,6 +739,21 @@
     "status": "published",
     "story_core": "mistico-injury-update",
     "wp_post_id": 5585
+  },
+  "https://www.wrestlinginc.com/2183418/tna-impact-champions-challenge-kc-navarro-mustafa-ali-international-championship-wins-title-shot/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "TNA"
+    ],
+    "link": "https://news.openwrestlingtv.com/tna/tna-impact-kc-navarro-ottiene-una-chance-per-il-titolo-di-mustafa-ali/",
+    "priority": "soft",
+    "published_at": "2026-05-29T07:29:03.840023",
+    "score": 71,
+    "source": "wrestlinginc",
+    "source_title": "KC Navarro Wins Title Shot Against Mustafa Ali Through TNA Impact Champions Challenge",
+    "status": "published",
+    "story_core": "tna-impact-title-contender-determined",
+    "wp_post_id": 5592
   },
   "https://www.wrestlinginc.com/2183421/hazuki-debut-aew-collision-conflict-stardom/": {
     "article_type": "hard_news",
