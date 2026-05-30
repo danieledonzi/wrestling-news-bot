@@ -303,6 +303,14 @@
     "stage": "phase_b",
     "title": "R-Truth Explains Why He Can’t Fully Be a Heel in WWE"
   },
+  "https://www.ringsidenews.com/r-truth-reveals-road-dogg-talk-that-stopped-him-walking-away-wrestling/": {
+    "created_at": "2026-05-30T20:53:01.296515",
+    "reason": "phase_b_soft_news",
+    "score": 35,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "R-Truth Reveals Road Dogg Talk That Stopped Him From Walking Away From Wrestling"
+  },
   "https://www.ringsidenews.com/rhea-ripley-tells-jade-cargill-shes-going-beat-her-two-nil-wwe-clash-italy/": {
     "created_at": "2026-05-29T21:23:49.580418",
     "reason": "phase_b_soft_news",
@@ -767,6 +775,14 @@
     "stage": "phase_b",
     "title": "AEW's Tony Schiavone Reacts To News That Both Of Sting's Sons Have Become Wrestlers"
   },
+  "https://www.wrestlinginc.com/2182968/wwe-gunther-brock-lesnar-of-course-retire/": {
+    "created_at": "2026-05-30T20:52:04.023139",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "WWE's GUNTHER Says 'Of Course' He'd Like To Retire Brock Lesnar"
+  },
   "https://www.wrestlinginc.com/2182978/tna-impact-viewership-ratings-report-may-21-2026/": {
     "created_at": "2026-05-28T18:08:34.818826",
     "reason": "phase_b_report_like",
@@ -902,5 +918,13 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "WWE's Cody Rhodes Calls Danhausen The King Of Merchandise Game: 'He's Beating Us All'"
+  },
+  "https://www.wrestlinginc.com/2184291/wwe-gunther-oba-femi-rising-success/": {
+    "created_at": "2026-05-30T20:52:38.415756",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "GUNTHER Comments On Oba Femi's Rising Success In WWE"
   }
 }
