@@ -15,6 +15,22 @@
     "stage": "deterministic",
     "title": "AEW Dynamite/Collision Results, Highlights and Key Moments for May 27, 2026"
   },
+  "https://www.ringsidenews.com/aj-styles-defends-ludwig-kaiser-recent-arrest/": {
+    "created_at": "2026-05-30T19:49:44.250595",
+    "reason": "phase_b_soft_news",
+    "score": 26,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "AJ Styles Defends Ludwig Kaiser After Recent Arrest"
+  },
+  "https://www.ringsidenews.com/aj-styles-fires-back-fans-calling-him-company-guy-defending-triple-h-creative-team/": {
+    "created_at": "2026-05-30T19:49:40.499891",
+    "reason": "phase_b_soft_news",
+    "score": 35,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "AJ Styles Fires Back at Fans Calling Him a Company Guy For Defending Triple H and Creative Team"
+  },
   "https://www.ringsidenews.com/booker-t-defends-sol-ruca-backlash-botches-wwe-tv/": {
     "created_at": "2026-05-29T21:23:42.813017",
     "reason": "phase_b_soft_news",
@@ -303,6 +319,14 @@
     "stage": "phase_b",
     "title": "Ric Flair Deletes Social Media Shots At Son David Flair After Family Feud Goes Public"
   },
+  "https://www.ringsidenews.com/ric-flair-reveals-emergency-room-visit-public-fallout-son-david-flair/": {
+    "created_at": "2026-05-30T19:49:37.821378",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Ric Flair Reveals Emergency Room Visit After Public Fallout With Son David Flair"
+  },
   "https://www.ringsidenews.com/ric-flair-reveals-hes-threatening-sue-his-son-david-flair-trademark/": {
     "created_at": "2026-05-30T09:00:49.448133",
     "reason": "phase_b_soft_news",
@@ -359,6 +383,14 @@
     "stage": "phase_b",
     "title": "Ryback Shows Support For Curtis Axel After DUI Arrest"
   },
+  "https://www.ringsidenews.com/santino-marellas-current-status-wwe-clash-italy-revealed/": {
+    "created_at": "2026-05-30T19:49:35.668453",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Santino Marella’s Current Status for WWE Clash In Italy Revealed"
+  },
   "https://www.ringsidenews.com/smackdown-spoiler-results-may-29-2026/": {
     "created_at": "2026-05-29T21:23:40.154870",
     "reason": "report_like",
@@ -366,6 +398,14 @@
     "source": "ringsidenews",
     "stage": "deterministic",
     "title": "SmackDown Spoiler Results for May 29, 2026"
+  },
+  "https://www.ringsidenews.com/tiffany-stratton-turns-heads-spain-photo-drop-ahead-wwe-weekend-italy/": {
+    "created_at": "2026-05-30T19:49:36.779804",
+    "reason": "phase_b_low_value",
+    "score": 8,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Tiffany Stratton Turns Heads With Spain Photo Drop Ahead Of WWE Weekend In Italy"
   },
   "https://www.ringsidenews.com/torrie-wilson-addresses-prior-eating-disorder-struggles-before-wrestling-career/": {
     "created_at": "2026-05-27T22:16:49.816116",
@@ -422,6 +462,14 @@
     "source": "ringsidenews",
     "stage": "phase_b",
     "title": "What You Didn’t See Before May 27 AEW Dynamite Went Live In Philadelphia"
+  },
+  "https://www.ringsidenews.com/william-regal-explains-why-charlie-dempsey-doesnt-use-regal-name-wwe/": {
+    "created_at": "2026-05-30T19:49:34.584641",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "William Regal Explains Why Charlie Dempsey Doesn’t Use The Regal Name In WWE"
   },
   "https://www.ringsidenews.com/wwe-smackdown-preview-may-29-2026-confirmed-matches-start-time-how-watch/": {
     "created_at": "2026-05-29T21:23:40.155046",
@@ -494,6 +542,14 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "Sandman Left ECW Over Pay Dispute"
+  },
+  "https://www.wrestlinginc.com/2174920/wwe-iyo-sky-announces-marriage-former-iwgp-heavyweight-champion-evil-naraku/": {
+    "created_at": "2026-05-30T19:49:15.270216",
+    "reason": "phase_b_soft_news",
+    "score": 41,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "WWE's IYO SKY Announces Marriage To Former IWGP Heavyweight Champion"
   },
   "https://www.wrestlinginc.com/2174945/wwe-raw-bully-ray-sol-ruca-finisher-snatcher-iyo-sky/": {
     "created_at": "2026-05-30T16:59:19.756508",
@@ -703,6 +759,14 @@
     "stage": "phase_b",
     "title": "AEW's Will Ospreay Reflects On 10-Year Anniversary Of Ricochet Match That Went Viral"
   },
+  "https://www.wrestlinginc.com/2182897/aew-tony-schiavone-sting-songs-wrestlers/": {
+    "created_at": "2026-05-30T19:48:27.746876",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "AEW's Tony Schiavone Reacts To News That Both Of Sting's Sons Have Become Wrestlers"
+  },
   "https://www.wrestlinginc.com/2182978/tna-impact-viewership-ratings-report-may-21-2026/": {
     "created_at": "2026-05-28T18:08:34.818826",
     "reason": "phase_b_report_like",
@@ -830,5 +894,13 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "Bully Ray Says It's Possible That WWE Star Sol Ruca's Sol Snatcher Will 'Disappear'"
+  },
+  "https://www.wrestlinginc.com/2184283/wwe-cody-rhodes-danhausen-king-of-merchandise-game-beating-us-all/": {
+    "created_at": "2026-05-30T19:49:10.018679",
+    "reason": "semantic_duplicate_published",
+    "score": 52,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "WWE's Cody Rhodes Calls Danhausen The King Of Merchandise Game: 'He's Beating Us All'"
   }
 }
