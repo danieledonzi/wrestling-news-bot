@@ -55,6 +55,14 @@
     "stage": "phase_b",
     "title": "Candice Michelle Says Ego Is The Biggest Thing Hurting Wrestlers After WWE Releases"
   },
+  "https://www.ringsidenews.com/cedric-alexander-says-tna-wrestlings-most-underrated-roster/": {
+    "created_at": "2026-05-30T16:59:28.415682",
+    "reason": "phase_b_soft_news",
+    "score": 28,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Cedric Alexander Says TNA Has Wrestling’s Most Underrated Roster"
+  },
   "https://www.ringsidenews.com/david-finlay-clark-connors-destroy-adam-copeland-christian-cage-may-27-aew-dynamite/": {
     "created_at": "2026-05-28T06:52:36.897793",
     "reason": "phase_b_event_outcome",
@@ -62,6 +70,22 @@
     "source": "ringsidenews",
     "stage": "phase_b",
     "title": "David Finlay & Clark Connors Destroy Adam Copeland And Christian Cage On May 27 AEW Dynamite"
+  },
+  "https://www.ringsidenews.com/elayna-black-addresses-possibly-competing-tna-knockouts-title-ultimate-x-match/": {
+    "created_at": "2026-05-30T16:59:25.453069",
+    "reason": "phase_b_soft_news",
+    "score": 30,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Elayna Black Addresses Possibly Competing for TNA Knockouts Title in Ultimate X Match"
+  },
+  "https://www.ringsidenews.com/elayna-black-reveals-why-tna-exactly-what-she-needed-wwe-exit/": {
+    "created_at": "2026-05-30T16:59:26.693387",
+    "reason": "phase_b_soft_news",
+    "score": 29,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Elayna Black Reveals Why TNA Was Exactly What She Needed After WWE Exit"
   },
   "https://www.ringsidenews.com/enzo-amore-declared-big-money-during-pro-wrestling-comeback-push/": {
     "created_at": "2026-05-30T09:00:54.080111",
@@ -423,6 +447,30 @@
     "stage": "phase_b",
     "title": "AEW's Swerve Strickland Says The Archetype Of An Indie Wrestling Star Is 'Dying'"
   },
+  "https://www.wrestlinginc.com/2173295/sandman-reflects-hard-partying-ecw-overdosing/": {
+    "created_at": "2026-05-30T16:59:21.890955",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Sandman Reflects On Hard Partying Days In ECW, Overdosing"
+  },
+  "https://www.wrestlinginc.com/2173397/myles-borne-wwe-application-tryout-nxt/": {
+    "created_at": "2026-05-30T16:59:17.513080",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Myles Borne Reflects On WWE Application & Tryout Process, Early Days In NXT"
+  },
+  "https://www.wrestlinginc.com/2173422/wwe-ridge-holland-bloodline-war-games-2022/": {
+    "created_at": "2026-05-30T16:59:16.020345",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Ex-WWE Star Ridge Holland Recalls Putting Together Bloodline WarGames Match In 2022"
+  },
   "https://www.wrestlinginc.com/2173441/aew-wwe-adam-copeland-edge-bret-hart-mentor/": {
     "created_at": "2026-05-29T21:22:38.232449",
     "reason": "phase_b_soft_news",
@@ -446,6 +494,14 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "Sandman Left ECW Over Pay Dispute"
+  },
+  "https://www.wrestlinginc.com/2174945/wwe-raw-bully-ray-sol-ruca-finisher-snatcher-iyo-sky/": {
+    "created_at": "2026-05-30T16:59:19.756508",
+    "reason": "phase_b_opinion",
+    "score": 34,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Bully Ray Is Worried About Sol Ruca's Finisher Following Loss To IYO SKY On WWE Raw"
   },
   "https://www.wrestlinginc.com/2175652/aew-wwe-tony-schiavone-ted-turner-credits-career-belongs-hall-fame/": {
     "created_at": "2026-05-27T20:10:05.063610",
@@ -598,6 +654,14 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "Tiffany Stratton Hopes To Be Showcased At Upcoming WWE PLE In Her Hometown"
+  },
+  "https://www.wrestlinginc.com/2182450/wwe-booker-t-vince-mcmahon-ignored-direction-commentary/": {
+    "created_at": "2026-05-30T16:58:59.509115",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "WWE's Booker T Recalls Moment When He Ignored Vince McMahon's Direction On Commentary"
   },
   "https://www.wrestlinginc.com/2182503/bully-ray-wwe-raw-oba-femi-lost/": {
     "created_at": "2026-05-27T22:16:39.104249",
@@ -758,5 +822,13 @@
     "source": "wrestlinginc",
     "stage": "deterministic",
     "title": "WWE SmackDown 5/29/2026: 3 Things We Hated & 3 Things We Loved"
+  },
+  "https://www.wrestlinginc.com/2184273/wwe-sol-ruca-bully-ray-sol-snatcher-disappear/": {
+    "created_at": "2026-05-30T16:58:56.901410",
+    "reason": "phase_b_soft_news",
+    "score": 35,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Bully Ray Says It's Possible That WWE Star Sol Ruca's Sol Snatcher Will 'Disappear'"
   }
 }

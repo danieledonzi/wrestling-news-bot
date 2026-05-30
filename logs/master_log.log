@@ -21606,3 +21606,50 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [NEWS v92] WordPress non disponibile: skip news
 [RUN v92] totale pubblicazioni=0 (report=0, news=0)
 ===== RUN END [2026-05-30T17:46:05] VERSION [v92_0_2_report_workshop_publish] =====
+===== RUN START [2026-05-30T18:58:40] VERSION [v92_0_2_report_workshop_publish] =====
+[WP v92] BOT WP DIAG DNS news.openwrestlingtv.com: 89.40.173.112
+[WP v92] BOT WP DIAG health attempt 1/2 timeout=10s
+[WP v92] BOT WP DIAG probe timeout/errore elapsed=10.32s endpoint=https://news.openwrestlingtv.com/: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=10)
+[WP v92] BOT WP DIAG probe status=200 elapsed=3.52s endpoint=https://news.openwrestlingtv.com/wp-json/
+[WP v92] Health check API OK: status_200 label=rest_root | tentativo 1/2
+[RUN v92] wp_ok=True wp_status=status_200
+[REPORT v92] Non dovuto oggi: wwe_raw expected_day_after=Tuesday
+[REPORT v92] Gia pubblicato: wwe_smackdown_2026_05_29
+[REPORT v92] Non dovuto oggi: wwe_nxt expected_day_after=Wednesday
+[REPORT v92] Non dovuto oggi: aew_dynamite expected_day_after=Thursday
+[REPORT v92] Non dovuto oggi: aew_collision expected_day_after=Sunday
+[REPORT v92] Non dovuto oggi: tna_impact expected_day_after=Friday
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+[NEWS v92] Hard skip Fase B (35/100 soft_news): Bully Ray Says It's Possible That WWE Star Sol Ruca's Sol Snatcher Will 'Disappear' | Si tratta di una speculazione soggettiva da parte di un opinionista esterno riguardo a una mossa specifica, senza alcuna notizia ufficiale di cambiamenti o direttive da parte di WWE.
+[NEWS v92] Soft pool Fase B (53/100 soft_news): WWE's Tiffany Stratton Clears Up Rumor About Fabian Aichner: 'Not True'
+[NEWS v92] Hard skip Fase B (44/100 soft_news): WWE's Booker T Recalls Moment When He Ignored Vince McMahon's Direction On Commentary | Si tratta di un aneddoto retrospettivo di natura curiosa. Non ha impatto sull'attuale prodotto o business, ma è un contenuto di intrattenimento adatto al pubblico generalista.
+[NEWS v92] Soft pool Fase B (56/100 soft_news): Former WWE Stars Karrion Kross And Scarlett Talk Possibility Of Return Or AEW Debut
+[NEWS v92] Soft pool Fase B (50/100 soft_news): WWE Star Cody Rhodes Explains Why He Received Cease & Desist Letter From Nintendo
+[NEWS v92] Soft pool Fase B (52/100 soft_news): John Cena Points To WWE NXT Star Mason Rook When Asked About Future World Champions
+[NEWS v92] Soft pool Fase B (51/100 soft_news): AEW's Adam Copeland Discusses His WWE Judgment Day Run: 'Too Much, Too Soon'
+[NEWS v92] Soft pool Fase B (53/100 soft_news): Backstage Report On Sol Ruca Losing Back-To-Back Matches On WWE Raw
+[NEWS v92] Hard skip Fase B (44/100 soft_news): Ex-WWE Star Ridge Holland Recalls Putting Together Bloodline WarGames Match In 2022 | Si tratta di un aneddoto di carattere informativo/backstage che non ha impatti urgenti sulla programmazione attuale, ma offre un insight tecnico interessante per gli appassionati.
+[NEWS v92] Hard skip Fase B (45/100 soft_news): Myles Borne Reflects On WWE Application & Tryout Process, Early Days In NXT | Intervista di approfondimento/riflessione sul percorso in federazione, tipico contenuto di contorno per arricchire il profilo di un talento emergente.
+[NEWS v92] Hard skip Fase B (34/100 opinion): Bully Ray Is Worried About Sol Ruca's Finisher Following Loss To IYO SKY On WWE Raw | Si tratta dell'opinione di un ex wrestler su una manovra specifica di un atleta. Non essendoci cambiamenti ufficiali nel move-set o dichiarazioni della WWE, il contenuto ha scarso valore informativo.
+[NEWS v92] Soft pool Fase B (50/100 soft_news): Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[NEWS v92] Hard skip Fase B (44/100 soft_news): Sandman Reflects On Hard Partying Days In ECW, Overdosing | Intervista retrospettiva su aneddoti passati. Non ha urgenza, ma possiede un certo valore nostalgico per la fan-base di vecchia data.
+[NEWS v92] Soft pool Fase B (63/100 soft_news): Fans Blast WWE For Using Giulia to Promote Clash In Italy While Leaving Her Off The Card
+[NEWS v92] Hard skip Fase B (30/100 soft_news): Elayna Black Addresses Possibly Competing for TNA Knockouts Title in Ultimate X Match | Si tratta di una dichiarazione di intenti rilasciata durante un podcast, non di uno sviluppo concreto di booking o di un annuncio ufficiale di match.
+[NEWS v92] Hard skip Fase B (29/100 soft_news): Elayna Black Reveals Why TNA Was Exactly What She Needed After WWE Exit | Si tratta di una dichiarazione di carattere personale/motivazionale rilasciata in un podcast. Non presenta sviluppi di mercato o creativi urgenti, ma è un contenuto di approfondimento utile per il profilo della wrestler.
+[NEWS v92] Hard skip Fase B (28/100 soft_news): Cedric Alexander Says TNA Has Wrestling’s Most Underrated Roster | Si tratta di una dichiarazione di apprezzamento rilasciata in un podcast. Non sposta gli equilibri della federazione ma è un contenuto di colore interessante per i fan TNA.
+[NEWS v92] Soft pool Fase B (72/100 soft_news): Cody Rhodes Makes Bold Claim About Gunther Ahead Of WWE Championship Match
+[NEWS v92] Soft pool Fase B (68/100 soft_news): Cody Rhodes Admits He’s ‘Addicted To The Top Spot’ In WWE
+[NEWS v92] Soft pool Fase B (68/100 soft_news): Cody Rhodes Explains Why He Returned So Quickly After WrestleMania 42 Injury
+[NEWS v92] Low-soft Fase A (22/100): AAA Noche de Los Grandes 2026 Preview: Confirmed Matches, Start Time and How to Watch | non mando a Gemini
+[NEWS v92] Skip duplicato semantico cross-source: Cody Rhodes Explains Why He Returned So Quickly After WrestleMania 42 Injury ~= Cody Rhodes Admits He’s ‘Addicted To The Top Spot’ In WWE
+[NEWS v92] Skip duplicato semantico cross-source: Cody Rhodes Explains Why He Returned So Quickly After WrestleMania 42 Injury ~= Cody Rhodes Admits He’s ‘Addicted To The Top Spot’ In WWE
+[NEWS v92] Skip duplicato semantico cross-source: Former WWE Stars Karrion Kross And Scarlett Talk Possibility Of Return Or AEW Debut ~= Former WWE Stars Karrion Kross And Scarlett Talk Possibility Of Return Or AEW Debut
+[NEWS v92] Skip duplicato semantico cross-source: Backstage Report On Sol Ruca Losing Back-To-Back Matches On WWE Raw ~= Backstage Report On Sol Ruca Losing Back-To-Back Matches On WWE Raw
+[NEWS v92] Skip duplicato semantico cross-source: WWE's Tiffany Stratton Clears Up Rumor About Fabian Aichner: 'Not True' ~= WWE's Tiffany Stratton Clears Up Rumor About Fabian Aichner: 'Not True'
+[NEWS v92] Skip duplicato semantico cross-source: John Cena Points To WWE NXT Star Mason Rook When Asked About Future World Champions ~= John Cena Points To WWE NXT Star Mason Rook When Asked About Future World Champions
+[NEWS v92] Skip duplicato semantico cross-source: WWE Star Cody Rhodes Explains Why He Received Cease & Desist Letter From Nintendo ~= WWE Star Cody Rhodes Explains Why He Received Cease & Desist Letter From Nintendo
+[NEWS v92] Pubblico soft score=72/100 type=soft_news source=ringsidenews title=Cody Rhodes Makes Bold Claim About Gunther Ahead Of WWE Championship Match
+[NEWS v92] Pubblicate news=1/3 | hard_candidates=0 soft_candidates=26 soft_pool_saved=19
+[RUN v92] totale pubblicazioni=1 (report=0, news=1)
+===== RUN END [2026-05-30T18:58:40] VERSION [v92_0_2_report_workshop_publish] =====
