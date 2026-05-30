@@ -425,6 +425,21 @@
     "story_core": "qt-marshall-infortunio-rientro",
     "wp_post_id": 5470
   },
+  "https://www.ringsidenews.com/rhea-ripley-reveals-how-she-created-riptide-finisher/": {
+    "article_type": "soft_news",
+    "categories": [
+      "Business"
+    ],
+    "link": "https://news.openwrestlingtv.com/business/rhea-ripley-svela-lorigine-della-sua-riptide-ecco-come-e-nata-la-mossa/",
+    "priority": "soft",
+    "published_at": "2026-05-30T09:57:57.357695",
+    "score": 70,
+    "source": "ringsidenews",
+    "source_title": "Rhea Ripley Reveals How She Created The Riptide Finisher",
+    "status": "published",
+    "story_core": "origine-finisher-riptide",
+    "wp_post_id": 5649
+  },
   "https://www.ringsidenews.com/rhea-ripley-reveals-she-collapsed-backstage-suffered-panic-attack-during-wwe-australia-tour/": {
     "article_type": "soft_news",
     "categories": [
@@ -919,5 +934,20 @@
     "status": "published",
     "story_core": "trick-williams-king-of-the-ring-entry",
     "wp_post_id": 5643
+  },
+  "https://www.wrestlinginc.com/2184195/aew-double-or-nothing-2026-backstage-report-state-commission-toned-down-blading-stadium-stampede/": {
+    "article_type": "strategic_discussion",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/aew-double-or-nothing-perche-il-sangue-e-stato-limitato-nel-pay-per-view/",
+    "priority": "soft",
+    "published_at": "2026-05-30T09:57:53.440043",
+    "score": 70,
+    "source": "wrestlinginc",
+    "source_title": "Backstage Report On AEW Double Or Nothing Being Toned Down Due To State Commission",
+    "status": "published",
+    "story_core": "aew-double-or-nothing-limitations-commission",
+    "wp_post_id": 5647
   }
 }
