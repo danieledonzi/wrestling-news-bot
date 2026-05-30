@@ -86,5 +86,17 @@
     "status": "no_candidate",
     "title": "WWE SmackDown del 25 maggio 2026 - risultati e momenti salienti",
     "updated_at": "2026-05-26T19:18:42.756803"
+  },
+  "wwe_smackdown_2026_05_29": {
+    "categories": [
+      "Editoriali",
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-smackdown-del-29-maggio-2026-risultati-e-momenti-salienti/",
+    "source": "manual_runs",
+    "status": "published",
+    "title": "WWE SmackDown del 29 maggio 2026 - risultati e momenti salienti",
+    "updated_at": "2026-05-30T04:34:14.187932",
+    "wp_post_id": 5618
   }
 }
