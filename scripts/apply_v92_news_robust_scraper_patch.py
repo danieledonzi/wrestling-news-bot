@@ -4,14 +4,10 @@ from pathlib import Path
 # v92 robust news scraper patch.
 # Problem observed: Ringside news workshop sometimes extracted chars=0 while still
 # seeing featured=True. Gemini then translated mostly from title/context, causing
-# factual drift (e.g. Clash in Italy -> Clash at the Castle). The report pipeline
-# can work fine because it uses its own scraper; this fixes the NEWS workshop.
-#
-# Goals:
-# - choose the best content container by actual text length, not first selector;
-# - use JSON-LD articleBody/description fallback when DOM extraction is weak;
-# - keep embed placeholders support if the embed patch is active;
-# - fail before Gemini if extraction is too short.
+# factual drift. The uploaded Ringside HTML confirmed that the real body exists
+# in .entry-content.rsn-single-content, so this patch makes that selector a
+# first-class/preferred container and saves the raw HTML whenever extraction is
+# weak, so the GitHub Actions response can be compared with browser-saved HTML.
 # -----------------------------------------------------------------------------
 
 p = Path("modules/news_workshop_v92.py")
@@ -23,7 +19,7 @@ if "V92_NEWS_ROBUST_SCRAPER_PATCH = True" in text:
 
 text = text.replace(
     "_media_cache: Dict[str, Tuple[Optional[int], Optional[str]]] = {}\n",
-    "_media_cache: Dict[str, Tuple[Optional[int], Optional[str]]] = {}\nV92_NEWS_ROBUST_SCRAPER_PATCH = True\n",
+    "_media_cache: Dict[str, Tuple[Optional[int], Optional[str]]] = {}\nV92_NEWS_ROBUST_SCRAPER_PATCH = True\nV92_NEWS_SCRAPE_DEBUG_DIR = ROOT / \"debug\" / \"news_scrape\"\n",
     1,
 )
 
@@ -32,7 +28,6 @@ pos = text.find(anchor)
 if pos == -1:
     raise SystemExit("[V92 NEWS SCRAPER] extract_article_text_and_media non trovato")
 
-# Insert helper functions immediately before extract_article_text_and_media.
 helpers = r'''
 
 def node_text_len(node) -> int:
@@ -52,11 +47,34 @@ def node_text_len(node) -> int:
 
 
 def find_best_news_container(soup: BeautifulSoup, url: str):
+    # Ringside single articles put the real body here. Prefer it over generic
+    # article/main containers, which can include wrappers, social bars or empty
+    # layout nodes.
+    preferred_selectors = [
+        ".entry-content.rsn-single-content",
+        ".rsn-single-content",
+        "article .entry-content",
+        ".entry-content",
+    ]
+    diagnostics: List[Tuple[int, str]] = []
+    for sel in preferred_selectors:
+        nodes = soup.select(sel)
+        best = None
+        best_score = 0
+        for node in nodes:
+            score = node_text_len(node)
+            diagnostics.append((score, sel))
+            if score > best_score:
+                best_score = score
+                best = node
+        if best is not None and best_score >= 250:
+            print(f"[NEWS v92] Scraper container preferito: selector={sel} chars={best_score} url={url}", flush=True)
+            return best
+
     selectors = [
         "article",
         "main article",
         ".article-content",
-        ".entry-content",
         ".post-content",
         ".article-body",
         ".single-post-content",
@@ -68,14 +86,17 @@ def find_best_news_container(soup: BeautifulSoup, url: str):
     for sel in selectors:
         for node in soup.select(sel):
             score = node_text_len(node)
+            diagnostics.append((score, sel))
             if score:
                 candidates.append((score, sel, node))
     if candidates:
         candidates.sort(key=lambda x: x[0], reverse=True)
         score, sel, node = candidates[0]
-        print(f"[NEWS v92] Scraper container scelto: selector={sel} chars={score} url={url}", flush=True)
+        diag = "; ".join(f"{s}:{c}" for c, s in sorted(diagnostics, reverse=True)[:8])
+        print(f"[NEWS v92] Scraper container scelto: selector={sel} chars={score} url={url} | candidates={diag}", flush=True)
         return node
-    print(f"[NEWS v92] WARNING: nessun container testuale forte trovato, uso body url={url}", flush=True)
+    diag = "; ".join(f"{s}:{c}" for c, s in sorted(diagnostics, reverse=True)[:8])
+    print(f"[NEWS v92] WARNING: nessun container testuale forte trovato, uso body url={url} | candidates={diag}", flush=True)
     return soup.body or soup
 
 
@@ -124,6 +145,39 @@ def extract_meta_description_text(soup: BeautifulSoup) -> str:
     return "\n\n".join(dict.fromkeys(chunks))
 
 
+def save_weak_scrape_debug_html(url: str, html: str, article_text: str, soup: BeautifulSoup) -> None:
+    try:
+        V92_NEWS_SCRAPE_DEBUG_DIR.mkdir(parents=True, exist_ok=True)
+        slug = slugify(urlparse(url).path.strip("/") or "news")[:100]
+        html_path = V92_NEWS_SCRAPE_DEBUG_DIR / f"{slug}.html"
+        meta_path = V92_NEWS_SCRAPE_DEBUG_DIR / f"{slug}.debug.txt"
+        html_path.write_text(html or "", encoding="utf-8", errors="ignore")
+        selector_lines = []
+        for sel in [
+            ".entry-content.rsn-single-content", ".rsn-single-content", "article .entry-content",
+            ".entry-content", "article", "main article", "main", "body",
+        ]:
+            nodes = soup.select(sel)
+            scores = [node_text_len(n) for n in nodes[:5]]
+            selector_lines.append(f"{sel}: count={len(nodes)} scores={scores}")
+        h1 = soup.find("h1")
+        title = soup.title.string.strip() if soup.title and soup.title.string else ""
+        meta_path.write_text(
+            "\n".join([
+                f"url={url}",
+                f"html_chars={len(html or '')}",
+                f"article_chars={len(article_text or '')}",
+                f"title={title}",
+                f"h1={clean_text(h1.get_text(' ', strip=True)) if h1 else ''}",
+                *selector_lines,
+            ]),
+            encoding="utf-8",
+        )
+        print(f"[NEWS v92] Debug scrape salvato: {html_path} | {meta_path}", flush=True)
+    except Exception as exc:
+        print(f"[NEWS v92] WARNING: impossibile salvare debug scrape: {exc}", flush=True)
+
+
 def safe_remove_social_noise(container) -> None:
     fn = globals().get("remove_social_noise")
     if callable(fn):
@@ -161,7 +215,6 @@ def make_embed_placeholder_safe(index: int) -> str:
 '''
 text = text[:pos] + helpers + text[pos:]
 
-# Recompute function bounds after helper insertion.
 start = text.find("def extract_article_text_and_media(url: str)")
 end = text.find("\n\ndef gemini_client", start)
 if start == -1 or end == -1:
@@ -170,7 +223,9 @@ if start == -1 or end == -1:
 new_func = r'''def extract_article_text_and_media(url: str) -> Tuple[str, Optional[str], List[Dict[str, str]]]:
     res = session.get(url, timeout=REQUEST_TIMEOUT)
     res.raise_for_status()
-    soup = BeautifulSoup(res.text, "html.parser")
+    raw_html = res.text
+    print(f"[NEWS v92] Scrape fetch status={res.status_code} content_type={res.headers.get('content-type', '')} html_chars={len(raw_html or '')} url={url}", flush=True)
+    soup = BeautifulSoup(raw_html, "html.parser")
     for node in soup.select("script:not([type*='ld+json']), style, noscript, nav, footer, aside, form"):
         node.decompose()
     container = find_best_news_container(soup, url)
@@ -207,20 +262,16 @@ new_func = r'''def extract_article_text_and_media(url: str) -> Tuple[str, Option
 
     article_text = "\n\n".join(dict.fromkeys([p for p in parts if p.strip()]))
 
-    # Fallback 1: JSON-LD articleBody/description, often safer than title-only.
     if len(article_text) < 400:
         jsonld_text = extract_jsonld_article_text(soup)
         if len(jsonld_text) > len(article_text):
             article_text = jsonld_text
 
-    # Fallback 2: meta description, but only as context; if still short, the
-    # quality guardrail should abort before Gemini.
     if len(article_text) < 250:
         meta_text = extract_meta_description_text(soup)
         if len(meta_text) > len(article_text):
             article_text = meta_text
 
-    # Fallback 3: body/container text, but avoid using a full navigation page.
     if len(article_text) < 250:
         fallback = clean_text(container.get_text(" ", strip=True))
         if len(fallback) > len(article_text):
@@ -230,11 +281,11 @@ new_func = r'''def extract_article_text_and_media(url: str) -> Tuple[str, Option
         print(f"[NEWS v92] Embed totali estratti: {len(embeds)}", flush=True)
     if len(article_text) < 650:
         print(f"[NEWS v92] WARNING: estrazione news debole chars={len(article_text)} url={url}", flush=True)
+        save_weak_scrape_debug_html(url, raw_html, article_text, soup)
     return article_text[:18000], featured, embeds
 '''
 text = text[:start] + new_func + text[end:]
 
-# If run_news_workshop still expects two return values, make it compatible.
 text = text.replace(
     'source_text, image_url = extract_article_text_and_media(str(job["source_url"]))',
     'source_text, image_url, embeds = extract_article_text_and_media(str(job["source_url"]))',
