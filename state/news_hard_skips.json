@@ -135,6 +135,14 @@
     "stage": "phase_b",
     "title": "Indi Hartwell Reveals The Real Reason She Re-Signed With TNA Wrestling"
   },
+  "https://www.ringsidenews.com/jade-cargill-calls-out-x-her-official-fan-account-gets-suspended/": {
+    "created_at": "2026-05-30T14:27:40.317621",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Jade Cargill Calls Out X After Her Official Fan Account Gets Suspended"
+  },
   "https://www.ringsidenews.com/jade-cargill-explains-why-she-refuses-sign-autographs/": {
     "created_at": "2026-05-27T20:10:16.829127",
     "reason": "phase_b_soft_news",
@@ -150,6 +158,14 @@
     "source": "ringsidenews",
     "stage": "phase_b",
     "title": "Jeff Jarrett Says WWE ID Talent Are Short-Changing Themselves by Giving Up Indie Names"
+  },
+  "https://www.ringsidenews.com/jim-ross-believes-aew-dropped-ball-danhausen/": {
+    "created_at": "2026-05-30T14:28:01.844466",
+    "reason": "phase_b_soft_news",
+    "score": 46,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Jim Ross Believes AEW Dropped The Ball On Danhausen"
   },
   "https://www.ringsidenews.com/jim-ross-reveals-scary-fall-travel-nightmare-before-aew-double-nothing/": {
     "created_at": "2026-05-28T10:53:17.585573",
@@ -255,6 +271,14 @@
     "stage": "phase_b",
     "title": "Rhea Ripley Tells Jade Cargill She’s Going To Beat Her “Two Nil” At WWE Clash In Italy"
   },
+  "https://www.ringsidenews.com/ric-flair-deletes-social-media-shots-son-david-flair-family-feud-goes-public/": {
+    "created_at": "2026-05-30T14:27:50.898312",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Ric Flair Deletes Social Media Shots At Son David Flair After Family Feud Goes Public"
+  },
   "https://www.ringsidenews.com/ric-flair-reveals-hes-threatening-sue-his-son-david-flair-trademark/": {
     "created_at": "2026-05-30T09:00:49.448133",
     "reason": "phase_b_soft_news",
@@ -270,6 +294,14 @@
     "source": "ringsidenews",
     "stage": "phase_b",
     "title": "Ric Flair Threatens Legal Action Over Unauthorized Use of “Flair” Trademark"
+  },
+  "https://www.ringsidenews.com/ric-flair-walks-back-legal-threat-against-son-david-flair-trademark-dispute/": {
+    "created_at": "2026-05-30T14:28:10.265215",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Ric Flair Walks Back Legal Threat Against Son David Flair Over Trademark Dispute"
   },
   "https://www.ringsidenews.com/ring-rat-maces-big-al-wild-womens-locker-room-attack-jcw-lunacy/": {
     "created_at": "2026-05-29T00:08:57.634496",
@@ -519,6 +551,22 @@
     "stage": "deterministic",
     "title": "WWE NXT Results 5/26 - NXT Women's Title On The Line, Kelani Jordan Faces Wren Sinclair"
   },
+  "https://www.wrestlinginc.com/2181497/rico-looks-back-managing-infamous-wwe-tag-team/": {
+    "created_at": "2026-05-30T14:27:34.866136",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Rico Looks Back On Managing Infamous WWE Tag Team"
+  },
+  "https://www.wrestlinginc.com/2181685/fka-scrypts-superhero-inside-everyone-after-wwe-release/": {
+    "created_at": "2026-05-30T14:26:54.959112",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "FKA Scrypts Wants To Show The 'Superhero Inside Of Everyone' After WWE Release"
+  },
   "https://www.wrestlinginc.com/2181792/aew-dynamite-collision-may-27-lights-out-philadelphia-street-fight-mjf-appears/": {
     "created_at": "2026-05-27T23:43:57.693251",
     "reason": "report_like",
@@ -694,5 +742,21 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "Backstage Report On Internal AEW Reaction To Darby Allin's World Title Reign"
+  },
+  "https://www.wrestlinginc.com/2184190/wwe-clash-in-italy-2026-predictions-winners/": {
+    "created_at": "2026-05-30T14:26:56.803297",
+    "reason": "phase_b_opinion",
+    "score": 49,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "WWE Clash In Italy 2026 Predictions: Wrestling Inc. Picks The Winners"
+  },
+  "https://www.wrestlinginc.com/2184204/wwe-smackdown-may-29-2026-hated-loved-opinion-review/": {
+    "created_at": "2026-05-30T14:26:56.803454",
+    "reason": "report_like",
+    "score": 0,
+    "source": "wrestlinginc",
+    "stage": "deterministic",
+    "title": "WWE SmackDown 5/29/2026: 3 Things We Hated & 3 Things We Loved"
   }
 }
