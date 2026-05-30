@@ -21405,3 +21405,43 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [NEWS v92] WordPress non disponibile: skip news
 [RUN v92] totale pubblicazioni=0 (report=0, news=0)
 ===== RUN END [2026-05-30T09:38:04] VERSION [v92_0_2_report_workshop_publish] =====
+===== RUN START [2026-05-30T11:00:13] VERSION [v92_0_2_report_workshop_publish] =====
+[WP v92] BOT WP DIAG DNS news.openwrestlingtv.com: 89.40.173.112
+[WP v92] BOT WP DIAG health attempt 1/2 timeout=10s
+[WP v92] BOT WP DIAG probe status=200 elapsed=2.93s endpoint=https://news.openwrestlingtv.com/
+[WP v92] BOT WP DIAG probe status=200 elapsed=0.82s endpoint=https://news.openwrestlingtv.com/wp-json/
+[WP v92] Health check API OK: status_200 label=rest_root | tentativo 1/2
+[RUN v92] wp_ok=True wp_status=status_200
+[REPORT v92] Non dovuto oggi: wwe_raw expected_day_after=Tuesday
+[REPORT v92] Gia pubblicato: wwe_smackdown_2026_05_29
+[REPORT v92] Non dovuto oggi: wwe_nxt expected_day_after=Wednesday
+[REPORT v92] Non dovuto oggi: aew_dynamite expected_day_after=Thursday
+[REPORT v92] Non dovuto oggi: aew_collision expected_day_after=Sunday
+[REPORT v92] Non dovuto oggi: tna_impact expected_day_after=Friday
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+[NEWS v92] Soft pool Fase B (70/100 strategic_discussion): Backstage Report On AEW Double Or Nothing Being Toned Down Due To State Commission
+[NEWS v92] Hard news Fase B (76/100 event_outcome): US Champion Trick Williams Declares For WWE King Of The Ring Tournament On Smackdown
+[NEWS v92] Soft pool Fase B (53/100 soft_news): WWE's Tiffany Stratton Clears Up Rumor About Fabian Aichner: 'Not True'
+[NEWS v92] Soft pool Fase B (64/100 soft_news): Former WWE Stars Karrion Kross And Scarlett Talk Possibility Of Return Or AEW Debut
+[NEWS v92] Hard news Fase B (100/100 event_outcome): GUNTHER Vs. Cody Rhodes For Undisputed WWE Title To Open Clash In Italy On ESPN
+[NEWS v92] Soft pool Fase B (58/100 soft_news): WWE Star Cody Rhodes Explains Why He Received Cease & Desist Letter From Nintendo
+[NEWS v92] Soft pool Fase B (74/100 strategic_discussion): WWE HOFer Jeff Jarrett Doesn't Think TKO Will Copy AEW Event
+[NEWS v92] Soft pool Fase B (60/100 soft_news): John Cena Points To WWE NXT Star Mason Rook When Asked About Future World Champions
+[NEWS v92] Soft pool Fase B (70/100 soft_news): Rhea Ripley Reveals How She Created The Riptide Finisher
+[NEWS v92] Hard skip Fase B (45/100 soft_news): Ric Flair Reveals He’s Threatening to Sue His Son David Over “Flair” Trademark | Notizia di gossip/colore che coinvolge una leggenda e dinamiche familiari. Non impatta il business del wrestling attuale, ma ha un forte valore di clickbait/curiosità.
+[NEWS v92] Hard skip Fase B (29/100 soft_news): Indi Hartwell Reveals The Real Reason She Re-Signed With TNA Wrestling | Intervista in cui la wrestler chiarisce le proprie ambizioni titolate. Notizia di contorno, utile per il database TNA ma non urgente.
+[NEWS v92] Soft pool Fase B (52/100 soft_news): Cody Rhodes Doesn’t Think WWE Retirements Should Be Permanent
+[NEWS v92] Hard skip Fase B (44/100 soft_news): Misha Montana Reveals Heartbreaking Reason That May Have Contributed To Recent Miscarriage | Si tratta di una vicenda privata e dolorosa riguardante la vita personale di un wrestler e della sua partner. Nonostante il coinvolgimento di Matt Riddle, la notizia non ha rilevanza sportiva o di business per il circuito del wrestling.
+[NEWS v92] Hard skip Fase B (45/100 soft_news): Enzo Amore Declared ‘Big Money’ During Pro Wrestling Comeback Push | Si tratta di un contenuto promozionale sulle attività indipendenti di Enzo Amore senza alcuno sviluppo concreto o notizia ufficiale riguardo a un ritorno in major. Rumor speculativo.
+[NEWS v92] Soft pool Fase B (65/100 soft_news): Ex WWE Superstar Dakota Kai Understands Why Fans Think She’s Injury-Prone
+[NEWS v92] Hard skip event_outcome post-report (94/100): More Entrants Confirmed For 2026 King & Queen of the Ring Tournaments During 5/29 SmackDown
+[NEWS v92] Soft pool Fase B (53/100 soft_news): Charlotte Flair Says Fans Will Appreciate Her Villain Era More Next Time
+[NEWS v92] Soft pool Fase B (60/100 standard_useful): WWE NXT Viewership Sees Slight Increase on May 26, 2026
+[NEWS v92] Hard skip Fase B (44/100 soft_news): Zelina Vega Details Terrifying Rental Car Accident After Movie Shoot | Notizia di costume/backstage. Non impatta la programmazione o la carriera, ma ha valore di engagement per il personaggio coinvolto.
+[NEWS v92] Pubblico hard score=100/100 type=event_outcome source=wrestlinginc title=GUNTHER Vs. Cody Rhodes For Undisputed WWE Title To Open Clash In Italy On ESPN
+[NEWS v92] Pubblico hard score=76/100 type=event_outcome source=wrestlinginc title=US Champion Trick Williams Declares For WWE King Of The Ring Tournament On Smackdown
+[NEWS v92] Pubblico soft score=74/100 type=strategic_discussion source=wrestlinginc title=WWE HOFer Jeff Jarrett Doesn't Think TKO Will Copy AEW Event
+[NEWS v92] Pubblicate news=3/3 | hard_candidates=2 soft_candidates=13 soft_pool_saved=12
+[RUN v92] totale pubblicazioni=3 (report=0, news=3)
+===== RUN END [2026-05-30T11:00:13] VERSION [v92_0_2_report_workshop_publish] =====

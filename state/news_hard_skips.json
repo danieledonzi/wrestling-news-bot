@@ -55,6 +55,14 @@
     "stage": "phase_b",
     "title": "David Finlay & Clark Connors Destroy Adam Copeland And Christian Cage On May 27 AEW Dynamite"
   },
+  "https://www.ringsidenews.com/enzo-amore-declared-big-money-during-pro-wrestling-comeback-push/": {
+    "created_at": "2026-05-30T09:00:54.080111",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Enzo Amore Declared ‘Big Money’ During Pro Wrestling Comeback Push"
+  },
   "https://www.ringsidenews.com/eric-bischoff-says-wwe-hit-creative-flatline-wants-cody-rhodes-heel-turn/": {
     "created_at": "2026-05-28T14:38:52.859497",
     "reason": "phase_b_opinion",
@@ -111,6 +119,14 @@
     "stage": "phase_b",
     "title": "The Hardys Credited With Saving TNA Wrestling After Major Return Run"
   },
+  "https://www.ringsidenews.com/indi-hartwell-reveals-real-reason-she-re-signed-tna-wrestling/": {
+    "created_at": "2026-05-30T09:00:50.687901",
+    "reason": "phase_b_soft_news",
+    "score": 29,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Indi Hartwell Reveals The Real Reason She Re-Signed With TNA Wrestling"
+  },
   "https://www.ringsidenews.com/jade-cargill-explains-why-she-refuses-sign-autographs/": {
     "created_at": "2026-05-27T20:10:16.829127",
     "reason": "phase_b_soft_news",
@@ -159,6 +175,14 @@
     "stage": "phase_b",
     "title": "Michelle McCool Shuts Down Fake Undertaker Marriage Quote Circulating Online"
   },
+  "https://www.ringsidenews.com/misha-montana-reveals-heartbreaking-reason-that-may-have-contributed-recent-miscarriage/": {
+    "created_at": "2026-05-30T09:00:52.972822",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Misha Montana Reveals Heartbreaking Reason That May Have Contributed To Recent Miscarriage"
+  },
   "https://www.ringsidenews.com/mjf-puts-fan-blast-discovering-wild-anti-mjf-obsession-online/": {
     "created_at": "2026-05-28T06:34:15.876566",
     "reason": "phase_b_soft_news",
@@ -174,6 +198,14 @@
     "source": "ringsidenews",
     "stage": "phase_b",
     "title": "MLB Suspends Pitcher After D-Generation X Style Crotch Chop Celebration"
+  },
+  "https://www.ringsidenews.com/more-entrants-confirmed-2026-king-queen-ring-tournaments-during-529-smackdown/": {
+    "created_at": "2026-05-30T09:01:17.969088",
+    "reason": "event_outcome_after_report",
+    "score": 94,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "More Entrants Confirmed For 2026 King & Queen of the Ring Tournaments During 5/29 SmackDown"
   },
   "https://www.ringsidenews.com/natalyas-memoir-could-heading-hollywood-interest-builds-hart-family-movie/": {
     "created_at": "2026-05-29T04:52:28.255009",
@@ -206,6 +238,14 @@
     "source": "ringsidenews",
     "stage": "phase_b",
     "title": "Rhea Ripley Tells Jade Cargill She’s Going To Beat Her “Two Nil” At WWE Clash In Italy"
+  },
+  "https://www.ringsidenews.com/ric-flair-reveals-hes-threatening-sue-his-son-david-flair-trademark/": {
+    "created_at": "2026-05-30T09:00:49.448133",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Ric Flair Reveals He’s Threatening to Sue His Son David Over “Flair” Trademark"
   },
   "https://www.ringsidenews.com/ric-flair-threatens-legal-action-unauthorized-use-flair-trademark/": {
     "created_at": "2026-05-29T21:23:01.817335",
@@ -318,6 +358,14 @@
     "source": "ringsidenews",
     "stage": "deterministic",
     "title": "WWE SmackDown Preview for May 29, 2026: Confirmed Matches, Start Time and How to Watch"
+  },
+  "https://www.ringsidenews.com/zelina-vega-details-terrifying-rental-car-accident-movie-shoot/": {
+    "created_at": "2026-05-30T09:01:21.424408",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Zelina Vega Details Terrifying Rental Car Accident After Movie Shoot"
   },
   "https://www.wrestlinginc.com/2172763/aew-swerve-strickland-archetype-indie-wrestling-star-dying/": {
     "created_at": "2026-05-29T16:02:08.313383",
