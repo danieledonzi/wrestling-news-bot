@@ -114,6 +114,7 @@ for patch_name in [
     "scripts/apply_v92_business_boundary_patch.py",
     "scripts/apply_v92_news_dedupe_placeholder_patch.py",
     "scripts/apply_v92_news_factual_guardrails_patch.py",
+    "scripts/apply_v92_news_robust_scraper_patch.py",
 ]:
     patch = Path(patch_name)
     if patch.exists():
