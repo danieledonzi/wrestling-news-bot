@@ -327,6 +327,14 @@
     "stage": "phase_b",
     "title": "Kit Wilson Apologizes After Missing WWE SmackDown"
   },
+  "https://www.ringsidenews.com/liv-morgan-explains-why-she-entered-queen-ring-tournament-despite-champion/": {
+    "created_at": "2026-05-31T21:58:22.556748",
+    "reason": "phase_b_soft_news",
+    "score": 48,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Liv Morgan Explains Why She Entered Queen of the Ring Tournament Despite Being Champion"
+  },
   "https://www.ringsidenews.com/liv-morgan-fans-bring-custom-italian-princess-sign-wwe-clash-italy/": {
     "created_at": "2026-05-31T19:10:50.411779",
     "reason": "phase_b_soft_news",
@@ -662,6 +670,14 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "Former WWE NXT Star Reveals How Things Changed When Shawn Michaels Took Over"
+  },
+  "https://www.wrestlinginc.com/2171978/wwe-hofer-eric-bischoff-thrilled-danhausen/": {
+    "created_at": "2026-05-31T21:58:04.933410",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "WWE HOFer Eric Bischoff 'Thrilled' For Danhausen"
   },
   "https://www.wrestlinginc.com/2172020/wwe-rikishi-ai-artificial-intelligence-real-talent/": {
     "created_at": "2026-05-31T20:37:21.409901",

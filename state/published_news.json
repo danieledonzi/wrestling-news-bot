@@ -680,6 +680,21 @@
     "story_core": "roman-reigns-post-match-challenge",
     "wp_post_id": 5727
   },
+  "https://www.ringsidenews.com/roman-reigns-dogwalks-jacob-fatu-tribal-combat-match-wwe-clash-italy/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/roman-reigns-domina-jacob-fatu-nel-tribal-combat-match-a-wwe-clash-in-italy/",
+    "priority": "hard",
+    "published_at": "2026-05-31T22:00:45.967282",
+    "score": 85,
+    "source": "ringsidenews",
+    "source_title": "Roman Reigns Dogwalks Jacob Fatu In Tribal Combat Match At WWE Clash in Italy",
+    "status": "published",
+    "story_core": "risultato-main-event-clash-in-italy",
+    "wp_post_id": 5735
+  },
   "https://www.ringsidenews.com/samoa-joe-announces-hes-taking-absence-aew/": {
     "article_type": "hard_news",
     "categories": [
@@ -964,6 +979,21 @@
     "status": "published",
     "story_core": "dibattito-backstage-push-sol-ruca",
     "wp_post_id": 5695
+  },
+  "https://www.ringsidenews.com/wwe-reveals-bracket-2026-king-ring-tournament/": {
+    "article_type": "hard_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/la-wwe-svela-il-tabellone-per-il-torneo-king-of-the-ring-2026/",
+    "priority": "soft",
+    "published_at": "2026-05-31T22:01:13.324838",
+    "score": 70,
+    "source": "ringsidenews",
+    "source_title": "WWE Reveals Bracket For 2026 King of the Ring Tournament",
+    "status": "published",
+    "story_core": "tabellone-king-of-the-ring-2026",
+    "wp_post_id": 5737
   },
   "https://www.ringsidenews.com/wwe-smackdown-viewership-sees-slight-increase-may-22-2026/": {
     "article_type": "standard_useful",
