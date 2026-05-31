@@ -74,6 +74,21 @@
     "story_core": "aggiornamento-bracket-torneo-femminile",
     "wp_post_id": 5662
   },
+  "https://www.ringsidenews.com/alternative-injury-plans-revealed-jacob-fatu-wwe-clash-italy/": {
+    "article_type": "hard_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-i-piani-di-riserva-per-jacob-fatu-in-vista-di-clash-in-italy/",
+    "priority": "hard",
+    "published_at": "2026-05-31T17:37:43.835248",
+    "score": 100,
+    "source": "ringsidenews",
+    "source_title": "Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy",
+    "status": "published",
+    "story_core": "jacob-fatu-injury-status-clash-in-italy",
+    "wp_post_id": 5691
+  },
   "https://www.ringsidenews.com/brock-lesnars-wwe-status-clash-italy/": {
     "article_type": "hard_news",
     "categories": [
@@ -262,6 +277,21 @@
     "status": "published",
     "story_core": "fabian-aichner-firma-tna",
     "wp_post_id": 5530
+  },
+  "https://www.ringsidenews.com/final-wwe-clash-italy-betting-odds-reveal-heavy-favorites-before-todays-show/": {
+    "article_type": "standard_useful",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/clash-in-italy-le-quote-finali-dei-bookmaker-alla-vigilia-dellevento/",
+    "priority": "soft",
+    "published_at": "2026-05-31T17:37:49.480777",
+    "score": 78,
+    "source": "ringsidenews",
+    "source_title": "Final WWE Clash In Italy Betting Odds Reveal Heavy Favorites Before Today’s Show",
+    "status": "published",
+    "story_core": "betting-odds-clash-in-italy",
+    "wp_post_id": 5693
   },
   "https://www.ringsidenews.com/former-wwe-star-curtis-axel-arrested-multiple-charges-including-dui/": {
     "article_type": "hard_news",
@@ -829,6 +859,21 @@
     "status": "published",
     "story_core": "annuncio-data-evolve-succession-iii",
     "wp_post_id": 5502
+  },
+  "https://www.ringsidenews.com/wwe-internal-talk-sol-ruca-getting-title-match-without-main-roster-pinfall-win/": {
+    "article_type": "standard_useful",
+    "categories": [
+      "NXT"
+    ],
+    "link": "https://news.openwrestlingtv.com/nxt/wwe-discussioni-interne-sul-push-di-sol-ruca-verso-clash-in-italy/",
+    "priority": "soft",
+    "published_at": "2026-05-31T17:37:54.849562",
+    "score": 74,
+    "source": "ringsidenews",
+    "source_title": "WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win",
+    "status": "published",
+    "story_core": "dibattito-backstage-push-sol-ruca",
+    "wp_post_id": 5695
   },
   "https://www.ringsidenews.com/wwe-smackdown-viewership-sees-slight-increase-may-22-2026/": {
     "article_type": "standard_useful",
