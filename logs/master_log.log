@@ -22215,3 +22215,51 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [MANUAL v92] title=WWE Clash In Italy 2026: Risultati e momenti salienti
 [MANUAL v92] categories=Editoriali, WWE
 [MANUAL v92] Pubblicato post_id=5724 link=https://news.openwrestlingtv.com/wwe/wwe-clash-in-italy-2026-risultati-e-momenti-salienti/
+===== RUN START [2026-05-31T23:33:26] VERSION [v92_0_2_report_workshop_publish] =====
+[WP v92] BOT WP DIAG DNS news.openwrestlingtv.com: 89.40.173.112
+[WP v92] BOT WP DIAG health attempt 1/2 timeout=10s
+[WP v92] BOT WP DIAG probe status=200 elapsed=1.09s endpoint=https://news.openwrestlingtv.com/
+[WP v92] BOT WP DIAG probe status=200 elapsed=1.34s endpoint=https://news.openwrestlingtv.com/wp-json/
+[WP v92] Health check API OK: status_200 label=rest_root | tentativo 1/2
+[RUN v92] wp_ok=True wp_status=status_200
+[REPORT v92] Non dovuto oggi: wwe_raw expected_day_after=Tuesday
+[REPORT v92] Non dovuto oggi: wwe_smackdown expected_day_after=Saturday
+[REPORT v92] Non dovuto oggi: wwe_nxt expected_day_after=Wednesday
+[REPORT v92] Non dovuto oggi: aew_dynamite expected_day_after=Thursday
+[REPORT v92] Gia pubblicato: aew_collision_2026_05_30
+[REPORT v92] Non dovuto oggi: tna_impact expected_day_after=Friday
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+[NEWS v92] Hard news Fase B (78/100 event_outcome): Roman Reigns Wins Tribal Combat, Retains World Heavyweight Title At WWE Clash In Italy
+[NEWS v92] Soft pool Fase B (50/100 soft_news): Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[NEWS v92] Soft pool Fase B (61/100 soft_news): WWE's Corey Graves Teases Carmella's Return To Professional Wrestling
+[NEWS v92] Soft pool Fase B (68/100 soft_news): WWE's Stephanie McMahon: There Was A Plan For Cody Rhodes To Finish The Story Faster
+[NEWS v92] Hard skip duplicato semantico gia pubblicato: Sol Ruca Snatches Becky Lynch's Soul And Her Women's IC Title At WWE Clash In Italy ~= Sol Ruca Wins Women’s IC Title At WWE Clash In Italy
+[NEWS v92] Soft pool Fase B (52/100 soft_news): WWE HOFer Eric Bischoff 'Thrilled' For Danhausen
+[NEWS v92] Soft pool Fase B (56/100 soft_news): Liv Morgan Explains Why She Entered Queen of the Ring Tournament Despite Being Champion
+[NEWS v92] Soft pool Fase B (68/100 event_outcome): WWE Announces 2026 Queen of the Ring Tournament Bracket
+[NEWS v92] Soft pool Fase B (68/100 event_outcome): WWE Reveals Bracket For 2026 King of the Ring Tournament
+[NEWS v92] Soft pool Fase B (52/100 soft_news): Cody Rhodes Responds To Roman Reigns’ Antagonizing Comments After WWE Clash in Italy
+[NEWS v92] Soft pool Fase B (55/100 soft_news): Cody Rhodes Open To Another Match With GUNTHER After Controversial Clash In Italy Finish
+[NEWS v92] Hard news Fase B (86/100 event_outcome): Roman Reigns Calls Out LA Knight and Royce Keys After WWE Clash in Italy
+[NEWS v92] Hard news Fase B (77/100 event_outcome): Roman Reigns Dogwalks Jacob Fatu In Tribal Combat Match At WWE Clash in Italy
+[NEWS v92] Hard skip Fase B (45/100 soft_news): Ryback Tells Fans to Stop Complaining About Brock Lesnar’s Win at WWE Clash In Italy | Si tratta del parere personale di un ex wrestler su una controversia del web; non aggiunge valore informativo o narrativo alla testata.
+[NEWS v92] Soft pool Fase B (69/100 event_outcome): Becky Lynch Breaks Unwanted WWE Record After Losing Title At Clash In Italy
+[NEWS v92] Soft pool Fase B (60/100 soft_news): Kevin Owens Admits He Misses Wrestling During WWE Clash In Italy
+[NEWS v92] Soft pool Fase B (63/100 soft_news): Santino Marella Spotted At WWE Clash In Italy
+[NEWS v92] Hard skip Fase B (39/100 event_outcome): Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy | Risultato di un match di cartello in un evento internazionale. Pur essendo un contenuto di recap, la rilevanza dei nomi coinvolti giustifica la pubblicazione come event_outcome.
+[NEWS v92] Skip duplicato semantico cross-source: Roman Reigns Dogwalks Jacob Fatu In Tribal Combat Match At WWE Clash in Italy ~= Roman Reigns Calls Out LA Knight and Royce Keys After WWE Clash in Italy
+[NEWS v92] Skip duplicato semantico cross-source: Becky Lynch Breaks Unwanted WWE Record After Losing Title At Clash In Italy ~= Becky Lynch Breaks Unwanted WWE Record After Losing Title At Clash In Italy
+[NEWS v92] Skip duplicato semantico cross-source: Santino Marella Spotted At WWE Clash In Italy ~= Santino Marella Spotted At WWE Clash In Italy
+[NEWS v92] Skip duplicato semantico cross-source: WWE's Corey Graves Teases Carmella's Return To Professional Wrestling ~= WWE's Corey Graves Teases Carmella's Return To Professional Wrestling
+[NEWS v92] Skip duplicato semantico cross-source: Cody Rhodes Open To Another Match With GUNTHER After Controversial Clash In Italy Finish ~= GUNTHER Furious Backstage After Controversial Loss to Cody Rhodes at WWE Clash in Italy
+[NEWS v92] Skip duplicato semantico cross-source: Becky Lynch Says Sol Ruca Will Be Embarrassed At WWE Clash In Italy ~= Becky Lynch Breaks Unwanted WWE Record After Losing Title At Clash In Italy
+[NEWS v92] Skip duplicato semantico cross-source: WWE HOFer Eric Bischoff 'Thrilled' For Danhausen ~= WWE HOFer Eric Bischoff 'Thrilled' For Danhausen
+[NEWS v92] Skip duplicato semantico cross-source: Cody Rhodes Responds To Roman Reigns’ Antagonizing Comments After WWE Clash in Italy ~= GUNTHER Furious Backstage After Controversial Loss to Cody Rhodes at WWE Clash in Italy
+[NEWS v92] Skip duplicato semantico cross-source: Kevin Owens Admits He Misses Wrestling During WWE Clash In Italy ~= Kevin Owens Admits He Misses Wrestling During WWE Clash In Italy
+[NEWS v92] Skip duplicato semantico cross-source: Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024 ~= Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[NEWS v92] Pubblico hard score=86/100 type=event_outcome source=ringsidenews title=Roman Reigns Calls Out LA Knight and Royce Keys After WWE Clash in Italy
+[NEWS v92] Pubblico hard score=78/100 type=event_outcome source=wrestlinginc title=Roman Reigns Wins Tribal Combat, Retains World Heavyweight Title At WWE Clash In Italy
+[NEWS v92] Pubblicate news=2/3 | hard_candidates=3 soft_candidates=41 soft_pool_saved=35
+[RUN v92] totale pubblicazioni=2 (report=0, news=2)
+===== RUN END [2026-05-31T23:33:26] VERSION [v92_0_2_report_workshop_publish] =====

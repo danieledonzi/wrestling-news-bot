@@ -665,6 +665,21 @@
     "story_core": "rhea-ripley-panic-attack-australia-tour",
     "wp_post_id": 5539
   },
+  "https://www.ringsidenews.com/roman-reigns-calls-out-la-knight-royce-keys-wwe-clash-italy/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/roman-reigns-sfida-la-knight-e-royce-keys-dopo-wwe-clash-in-italy/",
+    "priority": "hard",
+    "published_at": "2026-05-31T21:38:36.709090",
+    "score": 86,
+    "source": "ringsidenews",
+    "source_title": "Roman Reigns Calls Out LA Knight and Royce Keys After WWE Clash in Italy",
+    "status": "published",
+    "story_core": "roman-reigns-post-match-challenge",
+    "wp_post_id": 5727
+  },
   "https://www.ringsidenews.com/samoa-joe-announces-hes-taking-absence-aew/": {
     "article_type": "hard_news",
     "categories": [
@@ -1264,5 +1279,20 @@
     "status": "published",
     "story_core": "aew-double-or-nothing-limitations-commission",
     "wp_post_id": 5647
+  },
+  "https://www.wrestlinginc.com/2184466/wwe-clash-in-italy-roman-reigns-tribal-combat-jacob-fatu-world-heavyweight-title/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/roman-reigns-vince-il-tribal-combat-e-mantiene-il-world-heavyweight-title-a-clash-in-italy/",
+    "priority": "hard",
+    "published_at": "2026-05-31T21:38:43.607994",
+    "score": 78,
+    "source": "wrestlinginc",
+    "source_title": "Roman Reigns Wins Tribal Combat, Retains World Heavyweight Title At WWE Clash In Italy",
+    "status": "published",
+    "story_core": "risultato-clash-in-italy-main-event",
+    "wp_post_id": 5730
   }
 }

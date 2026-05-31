@@ -87,6 +87,14 @@
     "stage": "phase_b",
     "title": "Brian Myers Says WWE’s COVID Releases Still Leave A ‘Sore Spot’"
   },
+  "https://www.ringsidenews.com/brock-lesnar-beats-oba-femi-seven-f5-finishers-wwe-clash-italy/": {
+    "created_at": "2026-05-31T21:38:19.165921",
+    "reason": "phase_b_event_outcome",
+    "score": 39,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy"
+  },
   "https://www.ringsidenews.com/candice-michelle-admits-she-doesnt-watch-wrestling-despite-working-backstage-tna/": {
     "created_at": "2026-05-28T15:34:56.426520",
     "reason": "phase_b_soft_news",
@@ -486,6 +494,14 @@
     "source": "ringsidenews",
     "stage": "phase_b",
     "title": "Ryback Shows Support For Curtis Axel After DUI Arrest"
+  },
+  "https://www.ringsidenews.com/ryback-tells-fans-stop-complaining-about-brock-lesnars-win-wwe-clash-italy/": {
+    "created_at": "2026-05-31T21:36:59.906288",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Ryback Tells Fans to Stop Complaining About Brock Lesnar’s Win at WWE Clash In Italy"
   },
   "https://www.ringsidenews.com/santino-marellas-current-status-wwe-clash-italy-revealed/": {
     "created_at": "2026-05-30T19:49:35.668453",
@@ -1230,5 +1246,13 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "Cody Rhodes Scores Controversial WWE Title Win Over GUNTHER At Clash In Italy"
+  },
+  "https://www.wrestlinginc.com/2184462/wwe-clash-in-italy-sol-ruca-becky-lynch-snatches-soul-womens-intercontinental-title/": {
+    "created_at": "2026-05-31T21:34:49.602054",
+    "reason": "semantic_duplicate_published",
+    "score": 69,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Sol Ruca Snatches Becky Lynch's Soul And Her Women's IC Title At WWE Clash In Italy"
   }
 }
