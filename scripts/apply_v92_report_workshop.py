@@ -119,6 +119,7 @@ for patch_name in [
     "scripts/apply_v92_news_category_event_fix.py",
     "scripts/apply_v92_news_final_category_quote_patch.py",
     "scripts/apply_v92_news_block_workshop_patch.py",
+    "scripts/apply_v92_news_block_noise_embed_patch.py",
 ]:
     patch = Path(patch_name)
     if patch.exists():
