@@ -203,6 +203,21 @@
     "story_core": "njpw-bullet-club-war-dogs-attack-aew-tag-champions",
     "wp_post_id": 5559
   },
+  "https://www.ringsidenews.com/el-hijo-del-vikingo-wins-aaa-latin-american-championship-noche-de-los-grandes/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "World"
+    ],
+    "link": "https://news.openwrestlingtv.com/world/aaa-noche-de-los-grandes-el-hijo-del-vikingo-conquista-il-latin-american-championship/",
+    "priority": "soft",
+    "published_at": "2026-05-31T09:28:27.772869",
+    "score": 70,
+    "source": "ringsidenews",
+    "source_title": "El Hijo del Vikingo Wins AAA Latin American Championship At Noche de los Grandes",
+    "status": "published",
+    "story_core": "vikingo-vince-aaa-latin-american-title",
+    "wp_post_id": 5683
+  },
   "https://www.ringsidenews.com/elayna-black-says-joining-tna-during-amc-launch-perfect-timing/": {
     "article_type": "soft_news",
     "categories": [
@@ -469,6 +484,21 @@
     "status": "published",
     "story_core": "shift-broadcasting-diritti-tv-giappone",
     "wp_post_id": 5535
+  },
+  "https://www.ringsidenews.com/pagano-walks-out-psycho-clown-war-raiders-win-aaa-tag-team-titles-noche-de-los-grandes/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "World"
+    ],
+    "link": "https://news.openwrestlingtv.com/world/aaa-noche-de-los-grandes-war-raiders-campioni-rottura-tra-pagano-e-psycho-clown/",
+    "priority": "hard",
+    "published_at": "2026-05-31T09:28:23.112299",
+    "score": 86,
+    "source": "ringsidenews",
+    "source_title": "Pagano Walks Out On Psycho Clown After War Raiders Win AAA Tag Team Titles At Noche de los Grandes",
+    "status": "published",
+    "story_core": "aaa-tag-team-title-change-breakup",
+    "wp_post_id": 5681
   },
   "https://www.ringsidenews.com/positive-update-jacob-fatus-wwe-clash-italy-status-injury/": {
     "article_type": "hard_news",
