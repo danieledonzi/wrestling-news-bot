@@ -29,6 +29,21 @@
     "story_core": "aew-debut-hazuki-collision",
     "wp_post_id": 5568
   },
+  "https://www.ringsidenews.com/aew-reveals-updated-womens-owen-hart-tournament-bracket-collision/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/aew-aggiornato-il-tabellone-del-womens-owen-hart-tournament-a-collision/",
+    "priority": "hard",
+    "published_at": "2026-05-31T01:34:56.150834",
+    "score": 76,
+    "source": "ringsidenews",
+    "source_title": "AEW Reveals Updated Women’s Owen Hart Tournament Bracket On Collision",
+    "status": "published",
+    "story_core": "aggiornamento-bracket-torneo-femminile",
+    "wp_post_id": 5662
+  },
   "https://www.ringsidenews.com/brock-lesnars-wwe-status-clash-italy/": {
     "article_type": "hard_news",
     "categories": [

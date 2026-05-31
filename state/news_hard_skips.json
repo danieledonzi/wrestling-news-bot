@@ -1,4 +1,12 @@
 {
+  "https://www.ringsidenews.com/aaa-noche-de-los-grandes-results-highlights-key-moments-may-30-2026/": {
+    "created_at": "2026-05-31T01:34:26.272770",
+    "reason": "phase_b_report_like",
+    "score": 39,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "AAA Noche de Los Grandes Results, Highlights and Key Moments for May 30, 2026"
+  },
   "https://www.ringsidenews.com/aew-collision-preview-may-30-2026-confirmed-matches-start-time-how-watch/": {
     "created_at": "2026-05-30T09:56:52.458980",
     "reason": "report_like",
@@ -7,6 +15,14 @@
     "stage": "deterministic",
     "title": "AEW Collision Preview for May 30, 2026: Confirmed Matches, Start Time and How to Watch"
   },
+  "https://www.ringsidenews.com/aew-collision-results-highlights-key-moments-may-30-2026/": {
+    "created_at": "2026-05-31T01:34:44.947276",
+    "reason": "report_like",
+    "score": 0,
+    "source": "ringsidenews",
+    "stage": "deterministic",
+    "title": "AEW Collision Results, Highlights and Key Moments for May 30, 2026"
+  },
   "https://www.ringsidenews.com/aew-dynamitecollision-results-highlights-key-moments-may-27-2026/": {
     "created_at": "2026-05-27T23:44:12.691898",
     "reason": "report_like",
@@ -14,6 +30,14 @@
     "source": "ringsidenews",
     "stage": "deterministic",
     "title": "AEW Dynamite/Collision Results, Highlights and Key Moments for May 27, 2026"
+  },
+  "https://www.ringsidenews.com/aew-gaming-podcast-put-hold/": {
+    "created_at": "2026-05-31T01:34:28.756311",
+    "reason": "phase_b_soft_news",
+    "score": 27,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "AEW Gaming Podcast Has Been Put On Hold"
   },
   "https://www.ringsidenews.com/aj-styles-defends-ludwig-kaiser-recent-arrest/": {
     "created_at": "2026-05-30T19:49:44.250595",
@@ -30,6 +54,14 @@
     "source": "ringsidenews",
     "stage": "phase_b",
     "title": "AJ Styles Fires Back at Fans Calling Him a Company Guy For Defending Triple H and Creative Team"
+  },
+  "https://www.ringsidenews.com/bad-ass-construction-worker-says-facebook-trying-delete-his-page/": {
+    "created_at": "2026-05-31T01:34:44.947131",
+    "reason": "phase_b_low_value",
+    "score": 19,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Bad Ass Construction Worker Says Facebook Is Trying To Delete His Page"
   },
   "https://www.ringsidenews.com/booker-t-defends-sol-ruca-backlash-botches-wwe-tv/": {
     "created_at": "2026-05-29T21:23:42.813017",
@@ -454,6 +486,14 @@
     "source": "ringsidenews",
     "stage": "phase_b",
     "title": "Tiffany Stratton Turns Heads With Spain Photo Drop Ahead Of WWE Weekend In Italy"
+  },
+  "https://www.ringsidenews.com/tommaso-ciampa-roasts-chris-jericho-hilarious-1004-reasons-list-aew-collision/": {
+    "created_at": "2026-05-31T01:34:29.995347",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Tommaso Ciampa Roasts Chris Jericho With Hilarious ‘1004 Reasons’ List On AEW Collision"
   },
   "https://www.ringsidenews.com/torrie-wilson-addresses-prior-eating-disorder-struggles-before-wrestling-career/": {
     "created_at": "2026-05-27T22:16:49.816116",
@@ -974,5 +1014,21 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "GUNTHER Comments On Oba Femi's Rising Success In WWE"
+  },
+  "https://www.wrestlinginc.com/2184309/aew-collision-may-30-2026-results/": {
+    "created_at": "2026-05-31T01:34:10.087154",
+    "reason": "report_like",
+    "score": 0,
+    "source": "wrestlinginc",
+    "stage": "deterministic",
+    "title": "AEW Collision Results 5/30 - Two Titles On The Line, STARDOM's Hazuki Makes AEW Debut"
+  },
+  "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results/": {
+    "created_at": "2026-05-31T01:34:10.087001",
+    "reason": "phase_b_report_like",
+    "score": 0,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "AAA Noche De Los Grandes Results - Mask Vs. Mask, Three Titles On The Line"
   }
 }
