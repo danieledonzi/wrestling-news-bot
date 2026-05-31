@@ -227,5 +227,28 @@
     "wp_post_id": 5618,
     "link": "https://news.openwrestlingtv.com/wwe/wwe-smackdown-del-29-maggio-2026-risultati-e-momenti-salienti/",
     "created_at": "2026-05-29T23:50:15.868689"
+  },
+  {
+    "job": {
+      "kind": "report",
+      "report_key": "manual_report_wwe-clash-in-italy-2026-risultati-e-momenti-salienti_20260531212615",
+      "report_id": "manual_report",
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2184202/wwe-clash-in-italy-2026-four-titles-on-line-oba-femi-brock-lesnar/",
+      "source_title": "WWE Clash In Italy Results 5/31 - Four Titles On The Line, Oba Femi Faces Brock Lesnar - Wrestling Inc.",
+      "title": "WWE Clash In Italy 2026: Risultati e momenti salienti",
+      "date": "2026-05-31",
+      "categories": [
+        "Editoriali",
+        "WWE"
+      ],
+      "title_policy": "manual",
+      "translation_mode": "report",
+      "created_at": "2026-05-31T21:26:15.027681",
+      "status": "manual_ready_to_publish"
+    },
+    "wp_post_id": 5724,
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-clash-in-italy-2026-risultati-e-momenti-salienti/",
+    "created_at": "2026-05-31T21:27:23.169835"
   }
 ]
