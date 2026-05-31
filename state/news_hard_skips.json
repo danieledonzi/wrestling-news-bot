@@ -183,6 +183,14 @@
     "stage": "phase_b",
     "title": "Ex-WWE Star Admits Frustration Over Final Year After Feeling Underutilized"
   },
+  "https://www.ringsidenews.com/fans-outraged-brock-lesnar-beats-oba-femi-wwe-clash-italy/": {
+    "created_at": "2026-05-31T20:37:36.604211",
+    "reason": "phase_b_low_value",
+    "score": 28,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Fans Outraged After Brock Lesnar Beats Oba Femi at WWE Clash in Italy"
+  },
   "https://www.ringsidenews.com/former-wwe-star-curtis-axel-allegedly-cursed-mcdonalds-employees-before-dui-arrest/": {
     "created_at": "2026-05-28T14:39:03.139556",
     "reason": "phase_b_soft_news",
@@ -623,6 +631,30 @@
     "stage": "phase_b",
     "title": "Zelina Vega Details Terrifying Rental Car Accident After Movie Shoot"
   },
+  "https://www.wrestlinginc.com/2171461/aew-thekla-tony-khan-perfect-fit/": {
+    "created_at": "2026-05-31T20:37:27.431425",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "AEW Women's World Champion Thekla Explains Why Tony Khan's Company Is A 'Perfect Fit'"
+  },
+  "https://www.wrestlinginc.com/2171776/wwe-nxt-ridge-holland-shawn-michaels/": {
+    "created_at": "2026-05-31T20:37:25.365176",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Former WWE NXT Star Reveals How Things Changed When Shawn Michaels Took Over"
+  },
+  "https://www.wrestlinginc.com/2172020/wwe-rikishi-ai-artificial-intelligence-real-talent/": {
+    "created_at": "2026-05-31T20:37:21.409901",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Rikishi Doesn't Believe WWE Needs AI: We Need To Let 'Real Talent Come Through'"
+  },
   "https://www.wrestlinginc.com/2172130/wwe-jim-ross-alcatraz-event-infamous-island-prison/": {
     "created_at": "2026-05-31T19:10:45.408748",
     "reason": "phase_b_soft_news",
@@ -734,6 +766,14 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "Sandman Left ECW Over Pay Dispute"
+  },
+  "https://www.wrestlinginc.com/2174642/aew-collision-results-may-16-world-tbs-titles-tag-eliminator/": {
+    "created_at": "2026-05-31T20:37:21.410065",
+    "reason": "report_like",
+    "score": 0,
+    "source": "wrestlinginc",
+    "stage": "deterministic",
+    "title": "AEW Collision Results 5/16 - World Title & TBS Title On The Line, Tag Title Eliminator"
   },
   "https://www.wrestlinginc.com/2174876/wwe-hofer-jeff-jarrett-dsotr-episode-opportunity/": {
     "created_at": "2026-05-31T17:37:11.563987",
@@ -1062,6 +1102,22 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "Ronda Rousey Downplays Likelihood Of AEW Run: 'It Just Happened To Be In Town"
+  },
+  "https://www.wrestlinginc.com/2183796/aj-styles-leon-slater-tna-wwe-only-matter-of-time/": {
+    "created_at": "2026-05-31T20:37:19.081306",
+    "reason": "phase_b_soft_news",
+    "score": 27,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "AJ Styles Says It's 'Only A Matter Of Time' Before This TNA Star Ends Up In WWE"
+  },
+  "https://www.wrestlinginc.com/2183810/wwe-gunther-outcast-explains/": {
+    "created_at": "2026-05-31T20:37:16.920470",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "GUNTHER Explains Why He Sometimes Feels Like An 'Outcast' In WWE"
   },
   "https://www.wrestlinginc.com/2184056/bully-ray-brock-lesnar-oba-fei-wwe-summerslam/": {
     "created_at": "2026-05-29T21:22:26.903640",

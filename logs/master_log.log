@@ -22159,3 +22159,48 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [NEWS v92] Pubblicate news=3/3 | hard_candidates=4 soft_candidates=29 soft_pool_saved=24
 [RUN v92] totale pubblicazioni=3 (report=0, news=3)
 ===== RUN END [2026-05-31T21:10:28] VERSION [v92_0_2_report_workshop_publish] =====
+===== RUN START [2026-05-31T22:36:51] VERSION [v92_0_2_report_workshop_publish] =====
+[WP v92] BOT WP DIAG DNS news.openwrestlingtv.com: 89.40.173.112
+[WP v92] BOT WP DIAG health attempt 1/2 timeout=10s
+[WP v92] BOT WP DIAG probe status=200 elapsed=1.36s endpoint=https://news.openwrestlingtv.com/
+[WP v92] BOT WP DIAG probe status=200 elapsed=0.66s endpoint=https://news.openwrestlingtv.com/wp-json/
+[WP v92] Health check API OK: status_200 label=rest_root | tentativo 1/2
+[RUN v92] wp_ok=True wp_status=status_200
+[REPORT v92] Non dovuto oggi: wwe_raw expected_day_after=Tuesday
+[REPORT v92] Non dovuto oggi: wwe_smackdown expected_day_after=Saturday
+[REPORT v92] Non dovuto oggi: wwe_nxt expected_day_after=Wednesday
+[REPORT v92] Non dovuto oggi: aew_dynamite expected_day_after=Thursday
+[REPORT v92] Gia pubblicato: aew_collision_2026_05_30
+[REPORT v92] Non dovuto oggi: tna_impact expected_day_after=Friday
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+[NEWS v92] Soft pool Fase B (69/100 event_outcome): Sol Ruca Snatches Becky Lynch's Soul And Her Women's IC Title At WWE Clash In Italy
+[NEWS v92] Soft pool Fase B (50/100 soft_news): Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[NEWS v92] Soft pool Fase B (53/100 soft_news): WWE's Corey Graves Teases Carmella's Return To Professional Wrestling
+[NEWS v92] Hard skip Fase B (45/100 soft_news): GUNTHER Explains Why He Sometimes Feels Like An 'Outcast' In WWE | Si tratta di dichiarazioni tratte da un'intervista. Sebbene GUNTHER sia un main eventer, il contenuto è di tipo riflessivo/psicologico e non costituisce uno sviluppo narrativo o un fatto concreto.
+[NEWS v92] Hard skip Fase B (27/100 soft_news): AJ Styles Says It's 'Only A Matter Of Time' Before This TNA Star Ends Up In WWE | Si tratta di un'opinione espressa in un podcast da AJ Styles su un prospetto TNA. Notizia di interesse per i fan, ma non comporta sviluppi contrattuali o aziendali immediati.
+[NEWS v92] Hard skip Fase B (44/100 soft_news): Rikishi Doesn't Believe WWE Needs AI: We Need To Let 'Real Talent Come Through' | Dichiarazione d'opinione di una leggenda su un tema tecnologico attuale. Contenuto leggero ma di richiamo per la fanbase.
+[NEWS v92] Hard skip deterministic report-like: AEW Collision Results 5/16 - World Title & TBS Title On The Line, Tag Title Eliminator
+[NEWS v92] Soft pool Fase B (52/100 soft_news): WWE HOFer Eric Bischoff 'Thrilled' For Danhausen
+[NEWS v92] Hard skip Fase B (45/100 soft_news): Former WWE NXT Star Reveals How Things Changed When Shawn Michaels Took Over | Intervista di colore che approfondisce il clima di lavoro sotto diverse gestioni, interessante per il target di appassionati di backstage dinamics, ma non urgente.
+[NEWS v92] Hard skip Fase B (45/100 soft_news): AEW Women's World Champion Thekla Explains Why Tony Khan's Company Is A 'Perfect Fit' | Dichiarazione personale di una campionessa sulla sua permanenza in federazione. Interessante per i fan del brand, ma non sposta gli equilibri della programmazione.
+[NEWS v92] Soft pool Fase B (69/100 event_outcome): Becky Lynch Breaks Unwanted WWE Record After Losing Title At Clash In Italy
+[NEWS v92] Soft pool Fase B (52/100 soft_news): Kevin Owens Admits He Misses Wrestling During WWE Clash In Italy
+[NEWS v92] Soft pool Fase B (63/100 soft_news): Santino Marella Spotted At WWE Clash In Italy
+[NEWS v92] Soft pool Fase B (71/100 event_outcome): Sol Ruca Wins Women’s IC Title At WWE Clash In Italy
+[NEWS v92] Hard skip Fase B (28/100 low_value): Fans Outraged After Brock Lesnar Beats Oba Femi at WWE Clash in Italy | Il contenuto si basa esclusivamente su reazioni soggettive dei social media riguardo a un evento (clickbait da Ringside News). Non aggiunge valore informativo concreto allo sviluppo della storyline.
+[NEWS v92] Soft pool Fase B (69/100 event_outcome): Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy
+[NEWS v92] Soft pool Fase B (60/100 soft_news): GUNTHER Furious Backstage After Controversial Loss to Cody Rhodes at WWE Clash in Italy
+[NEWS v92] Low-soft Fase A (28/100): First Look at WWE Clash in Italy Stage Setup Inside Inalpi Arena | non mando a Gemini
+[NEWS v92] Soft pool Fase B (53/100 standard_useful): Becky Lynch Says Sol Ruca Will Be Embarrassed At WWE Clash In Italy
+[NEWS v92] Skip duplicato semantico cross-source: Becky Lynch Breaks Unwanted WWE Record After Losing Title At Clash In Italy ~= Sol Ruca Wins Women’s IC Title At WWE Clash In Italy
+[NEWS v92] Skip duplicato semantico cross-source: GUNTHER Furious Backstage After Controversial Loss to Cody Rhodes at WWE Clash in Italy ~= GUNTHER Furious Backstage After Controversial Loss to Cody Rhodes at WWE Clash in Italy
+[NEWS v92] Skip duplicato semantico cross-source: WWE's Corey Graves Teases Carmella's Return To Professional Wrestling ~= WWE's Corey Graves Teases Carmella's Return To Professional Wrestling
+[NEWS v92] Skip duplicato semantico cross-source: Becky Lynch Says Sol Ruca Will Be Embarrassed At WWE Clash In Italy ~= Sol Ruca Wins Women’s IC Title At WWE Clash In Italy
+[NEWS v92] Skip duplicato semantico cross-source: Becky Lynch Says Sol Ruca Will Be Embarrassed At WWE Clash In Italy ~= Sol Ruca Wins Women’s IC Title At WWE Clash In Italy
+[NEWS v92] Skip duplicato semantico cross-source: Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024 ~= Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[NEWS v92] Pubblico soft score=71/100 type=event_outcome source=ringsidenews title=Sol Ruca Wins Women’s IC Title At WWE Clash In Italy
+[NEWS v92] Pubblico soft score=70/100 type=soft_news source=ringsidenews title=Cody Rhodes Reveals How He Developed The Cross Rhodes Finisher
+[NEWS v92] Pubblicate news=2/3 | hard_candidates=0 soft_candidates=35 soft_pool_saved=29
+[RUN v92] totale pubblicazioni=2 (report=0, news=2)
+===== RUN END [2026-05-31T22:36:51] VERSION [v92_0_2_report_workshop_publish] =====

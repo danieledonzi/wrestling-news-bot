@@ -221,6 +221,21 @@
     "story_core": "cody-rhodes-dichiarazioni-su-gunther",
     "wp_post_id": 5655
   },
+  "https://www.ringsidenews.com/cody-rhodes-reveals-how-he-developed-cross-rhodes-finisher/": {
+    "article_type": "soft_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/cody-rhodes-svela-le-origini-della-sua-cross-rhodes-il-ruolo-chiave-di-jamie-noble/",
+    "priority": "soft",
+    "published_at": "2026-05-31T20:37:52.541147",
+    "score": 70,
+    "source": "ringsidenews",
+    "source_title": "Cody Rhodes Reveals How He Developed The Cross Rhodes Finisher",
+    "status": "published",
+    "story_core": "origine-cross-rhodes",
+    "wp_post_id": 5705
+  },
   "https://www.ringsidenews.com/cody-rhodes-reveals-randy-orton-wrestlemania-put-him-concussion-protocol/": {
     "categories": [
       "WWE"
@@ -694,6 +709,21 @@
     "status": "published",
     "story_core": "retrospettiva-cash-in-wm31",
     "wp_post_id": 5519
+  },
+  "https://www.ringsidenews.com/sol-ruca-wins-womens-ic-title-wwe-clash-italy/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/sol-ruca-conquista-il-womens-intercontinental-championship-a-clash-in-italy/",
+    "priority": "soft",
+    "published_at": "2026-05-31T20:37:47.952185",
+    "score": 71,
+    "source": "ringsidenews",
+    "source_title": "Sol Ruca Wins Women’s IC Title At WWE Clash In Italy",
+    "status": "published",
+    "story_core": "cambio-titolo-womens-ic-clash-in-italy",
+    "wp_post_id": 5703
   },
   "https://www.ringsidenews.com/sol-rucas-status-wwe-clash-italy-gets-major-update-injury-scare/": {
     "article_type": "hard_news",
