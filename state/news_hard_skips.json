@@ -487,6 +487,14 @@
     "stage": "deterministic",
     "title": "SmackDown Spoiler Results for May 29, 2026"
   },
+  "https://www.ringsidenews.com/sol-ruca-addresses-brutal-nxt-fall-that-left-her-staples/": {
+    "created_at": "2026-05-31T16:03:54.815585",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Sol Ruca Addresses Brutal NXT Fall That Left Her with Staples"
+  },
   "https://www.ringsidenews.com/tiffany-stratton-turns-heads-spain-photo-drop-ahead-wwe-weekend-italy/": {
     "created_at": "2026-05-30T19:49:36.779804",
     "reason": "phase_b_low_value",
@@ -575,6 +583,14 @@
     "stage": "phase_b",
     "title": "William Regal Explains Why Charlie Dempsey Doesn’t Use The Regal Name In WWE"
   },
+  "https://www.ringsidenews.com/wwe-clash-italy-results-highlights-key-moments-may-31-2026/": {
+    "created_at": "2026-05-31T16:03:55.919573",
+    "reason": "phase_b_report_like",
+    "score": 0,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "WWE Clash In Italy Results, Highlights and Key Moments for May 31, 2026"
+  },
   "https://www.ringsidenews.com/wwe-smackdown-preview-may-29-2026-confirmed-matches-start-time-how-watch/": {
     "created_at": "2026-05-29T21:23:40.155046",
     "reason": "report_like",
@@ -598,6 +614,14 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "AEW's Swerve Strickland Says The Archetype Of An Indie Wrestling Star Is 'Dying'"
+  },
+  "https://www.wrestlinginc.com/2173128/eric-bischoff-respects-aew-tony-khan-rebel/": {
+    "created_at": "2026-05-31T16:03:53.553696",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Eric Bischoff Talks Recent Development That Makes Him Respect AEW's Tony Khan"
   },
   "https://www.wrestlinginc.com/2173295/sandman-reflects-hard-partying-ecw-overdosing/": {
     "created_at": "2026-05-30T16:59:21.890955",
@@ -935,6 +959,14 @@
     "stage": "phase_b",
     "title": "Adam Copeland Comments On Former WWE Stars New Day & MCMG Possibly Arriving In AEW"
   },
+  "https://www.wrestlinginc.com/2183523/wwe-booker-t-roxanne-perez-progress-prodigy/": {
+    "created_at": "2026-05-31T16:03:51.169439",
+    "reason": "phase_b_soft_news",
+    "score": 43,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "WWE's Booker T Discusses Progress Of Former Student Roxanne Perez: 'Truly A Prodigy'"
+  },
   "https://www.wrestlinginc.com/2183663/wwe-aaa-ludwig-kaiser-andrea-bazarte-el-grande-americano-mural-mexico/": {
     "created_at": "2026-05-29T16:01:53.874431",
     "reason": "phase_b_soft_news",
@@ -1006,6 +1038,14 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "WWE Clash In Italy 2026 Predictions: Wrestling Inc. Picks The Winners"
+  },
+  "https://www.wrestlinginc.com/2184202/wwe-clash-in-italy-2026-four-titles-on-line-oba-femi-brock-lesnar/": {
+    "created_at": "2026-05-31T16:03:43.505282",
+    "reason": "phase_b_report_like",
+    "score": 0,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "WWE Clash In Italy Results 5/31 - Four Titles On The Line, Oba Femi Faces Brock Lesnar"
   },
   "https://www.wrestlinginc.com/2184204/wwe-smackdown-may-29-2026-hated-loved-opinion-review/": {
     "created_at": "2026-05-30T14:26:56.803454",

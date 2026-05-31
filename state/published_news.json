@@ -1,4 +1,19 @@
 {
+  "https://www.ringsidenews.com/aaa-star-suffered-injury-during-noche-de-los-grandes-taping/": {
+    "article_type": "hard_news",
+    "categories": [
+      "World"
+    ],
+    "link": "https://news.openwrestlingtv.com/world/infortunio-al-collo-per-octagon-jr-durante-le-registrazioni-di-aaa-noche-de-los-grandes/",
+    "priority": "hard",
+    "published_at": "2026-05-31T16:04:22.026819",
+    "score": 89,
+    "source": "ringsidenews",
+    "source_title": "AAA Star Suffered Injury During Noche de Los Grandes Taping",
+    "status": "published",
+    "story_core": "infortunio-serio-ottagon-jr-aaa",
+    "wp_post_id": 5687
+  },
   "https://www.ringsidenews.com/aaa-verano-de-escandalo-ple-plans-remain-uncertain-triplemania-expansion/": {
     "article_type": "strategic_discussion",
     "categories": [
@@ -739,6 +754,36 @@
     "status": "published",
     "story_core": "annuncio-tapings-mexico-city",
     "wp_post_id": 5679
+  },
+  "https://www.ringsidenews.com/wwe-changed-original-clash-italy-plans-wrestlemania-42/": {
+    "article_type": "standard_useful",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-cambiati-i-piani-creativi-per-clash-in-italy-dopo-wrestlemania-42/",
+    "priority": "soft",
+    "published_at": "2026-05-31T16:04:27.141927",
+    "score": 78,
+    "source": "ringsidenews",
+    "source_title": "WWE Changed Original Clash In Italy Plans After WrestleMania 42",
+    "status": "published",
+    "story_core": "wwe-creative-changes-clash-in-italy-card",
+    "wp_post_id": 5689
+  },
+  "https://www.ringsidenews.com/wwe-clash-italy-2026-preview-confirmed-matches-start-time-how-watch/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-clash-in-italy-2026-la-card-completa-gli-orari-e-dove-seguire-levento/",
+    "priority": "hard",
+    "published_at": "2026-05-31T16:04:17.782439",
+    "score": 99,
+    "source": "ringsidenews",
+    "source_title": "WWE Clash in Italy 2026 Preview: Confirmed Matches, Start Time and How to Watch",
+    "status": "published",
+    "story_core": "wwe-clash-in-italy-2026-card-preview",
+    "wp_post_id": 5685
   },
   "https://www.ringsidenews.com/wwe-clash-italy-betting-odds-drop-ahead-major-championship-matches/": {
     "article_type": "soft_news",
