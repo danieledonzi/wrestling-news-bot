@@ -176,6 +176,21 @@
     "story_core": "reazione-locker-room-ritorno-lesnar",
     "wp_post_id": 5472
   },
+  "https://www.ringsidenews.com/cody-rhodes-beats-gunther-controversial-fashion-wwe-clash-italy/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/cody-rhodes-batte-gunther-in-un-finale-controverso-a-clash-in-italy/",
+    "priority": "hard",
+    "published_at": "2026-05-31T19:11:04.128012",
+    "score": 94,
+    "source": "ringsidenews",
+    "source_title": "Cody Rhodes Beats GUNTHER In Controversial Fashion At WWE Clash in Italy",
+    "status": "published",
+    "story_core": "risultato-match-titolato-wwe-clash-in-italy",
+    "wp_post_id": 5697
+  },
   "https://www.ringsidenews.com/cody-rhodes-claims-danhausen-beating-us-all-wwe-merchandise-sales/": {
     "article_type": "soft_news",
     "categories": [
@@ -590,6 +605,21 @@
     "story_core": "rey-fenix-vince-titolo-cruiserweight-aaa",
     "wp_post_id": 5677
   },
+  "https://www.ringsidenews.com/rhea-ripley-overcomes-jade-cargill-retain-wwe-womens-championship-clash-italy/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/rhea-ripley-batte-jade-cargill-e-mantiene-il-titolo-a-clash-in-italy/",
+    "priority": "hard",
+    "published_at": "2026-05-31T19:11:14.503062",
+    "score": 77,
+    "source": "ringsidenews",
+    "source_title": "Rhea Ripley Overcomes Jade Cargill To Retain WWE Women’s Championship at Clash in Italy",
+    "status": "published",
+    "story_core": "rhea-ripley-difende-titolo-clash-in-italy",
+    "wp_post_id": 5701
+  },
   "https://www.ringsidenews.com/rhea-ripley-reveals-how-she-created-riptide-finisher/": {
     "article_type": "soft_news",
     "categories": [
@@ -829,6 +859,21 @@
     "status": "published",
     "story_core": "betting-odds-clash-in-italy",
     "wp_post_id": 5464
+  },
+  "https://www.ringsidenews.com/wwe-clash-italy-spoiler-lineup-may-31-2026-full-match-card-backstage-notes-revealed/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-clash-in-italy-la-card-completa-e-le-anticipazioni-in-vista-dellevento/",
+    "priority": "hard",
+    "published_at": "2026-05-31T19:11:08.882959",
+    "score": 87,
+    "source": "ringsidenews",
+    "source_title": "WWE Clash in Italy Spoiler Lineup for May 31, 2026: Full Match Card and Backstage Notes Revealed",
+    "status": "published",
+    "story_core": "wwe-clash-italy-match-card-spoiler",
+    "wp_post_id": 5699
   },
   "https://www.ringsidenews.com/wwe-creative-favorites-ahead-clash-italy-revealed/": {
     "article_type": "soft_news",

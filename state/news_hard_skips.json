@@ -311,6 +311,14 @@
     "stage": "phase_b",
     "title": "Kit Wilson Apologizes After Missing WWE SmackDown"
   },
+  "https://www.ringsidenews.com/liv-morgan-fans-bring-custom-italian-princess-sign-wwe-clash-italy/": {
+    "created_at": "2026-05-31T19:10:50.411779",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Liv Morgan Fans Bring Custom “Italian Princess” Sign to WWE Clash In Italy"
+  },
   "https://www.ringsidenews.com/michelle-mccool-shuts-down-fake-undertaker-marriage-quote-circulating-online/": {
     "created_at": "2026-05-29T00:09:06.645044",
     "reason": "phase_b_soft_news",
@@ -511,6 +519,14 @@
     "stage": "phase_b",
     "title": "Tommaso Ciampa Roasts Chris Jericho With Hilarious ‘1004 Reasons’ List On AEW Collision"
   },
+  "https://www.ringsidenews.com/tony-atlas-wins-first-singles-championship-nearly-30-years-72-years-old/": {
+    "created_at": "2026-05-31T19:10:48.985322",
+    "reason": "phase_b_soft_news",
+    "score": 48,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Tony Atlas Wins First Singles Championship In Nearly 30 Years At 72 Years Old"
+  },
   "https://www.ringsidenews.com/torrie-wilson-addresses-prior-eating-disorder-struggles-before-wrestling-career/": {
     "created_at": "2026-05-27T22:16:49.816116",
     "reason": "phase_b_soft_news",
@@ -607,6 +623,30 @@
     "stage": "phase_b",
     "title": "Zelina Vega Details Terrifying Rental Car Accident After Movie Shoot"
   },
+  "https://www.wrestlinginc.com/2172130/wwe-jim-ross-alcatraz-event-infamous-island-prison/": {
+    "created_at": "2026-05-31T19:10:45.408748",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Jim Ross Says WWE Nearly Held Event At Infamous Island Prison"
+  },
+  "https://www.wrestlinginc.com/2172321/wwe-aj-styles-thoughts-pursuing-production-role/": {
+    "created_at": "2026-05-31T19:10:43.835068",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "AJ Styles Shares Thoughts On Pursuing WWE Production Role"
+  },
+  "https://www.wrestlinginc.com/2172720/aew-wwe-adam-copeland-hulk-hogan-friendship/": {
+    "created_at": "2026-05-31T19:10:42.239005",
+    "reason": "phase_b_soft_news",
+    "score": 44,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "AEW Star Adam Copeland Discusses Friendship With Late WWE HOFer Hulk Hogan"
+  },
   "https://www.wrestlinginc.com/2172763/aew-swerve-strickland-archetype-indie-wrestling-star-dying/": {
     "created_at": "2026-05-29T16:02:08.313383",
     "reason": "phase_b_soft_news",
@@ -614,6 +654,14 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "AEW's Swerve Strickland Says The Archetype Of An Indie Wrestling Star Is 'Dying'"
+  },
+  "https://www.wrestlinginc.com/2172849/wwe-nxt-bully-ray-favorite-pro-wrestling-show/": {
+    "created_at": "2026-05-31T19:10:40.575677",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Bully Ray Explains Why WWE NXT Is His Favorite Pro Wrestling Show"
   },
   "https://www.wrestlinginc.com/2172870/wwe-scarlett-pitched-bra-and-panties-match/": {
     "created_at": "2026-05-31T17:37:14.140764",
@@ -1118,5 +1166,13 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "AAA Noche De Los Grandes Results - Mask Vs. Mask, Three Titles On The Line"
+  },
+  "https://www.wrestlinginc.com/2184439/wwe-clash-in-italy-cody-rhodes-gunther-controversial-title-win/": {
+    "created_at": "2026-05-31T19:10:39.084710",
+    "reason": "phase_b_event_outcome",
+    "score": 48,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Cody Rhodes Scores Controversial WWE Title Win Over GUNTHER At Clash In Italy"
   }
 }
