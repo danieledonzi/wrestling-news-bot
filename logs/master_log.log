@@ -21878,3 +21878,46 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [NEWS v92] Pubblicate news=1/3 | hard_candidates=1 soft_candidates=34 soft_pool_saved=26
 [RUN v92] totale pubblicazioni=1 (report=0, news=1)
 ===== RUN END [2026-05-31T03:34:02] VERSION [v92_0_2_report_workshop_publish] =====
+===== RUN START [2026-05-31T08:14:32] VERSION [v92_0_2_report_workshop_publish] =====
+[WP v92] BOT WP DIAG DNS news.openwrestlingtv.com: 89.40.173.112
+[WP v92] BOT WP DIAG health attempt 1/2 timeout=10s
+[WP v92] BOT WP DIAG probe status=200 elapsed=0.85s endpoint=https://news.openwrestlingtv.com/
+[WP v92] BOT WP DIAG probe status=200 elapsed=0.75s endpoint=https://news.openwrestlingtv.com/wp-json/
+[WP v92] Health check API OK: status_200 label=rest_root | tentativo 1/2
+[RUN v92] wp_ok=True wp_status=status_200
+[REPORT v92] Non dovuto oggi: wwe_raw expected_day_after=Tuesday
+[REPORT v92] Non dovuto oggi: wwe_smackdown expected_day_after=Saturday
+[REPORT v92] Non dovuto oggi: wwe_nxt expected_day_after=Wednesday
+[REPORT v92] Non dovuto oggi: aew_dynamite expected_day_after=Thursday
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+[REPORT v92] Pronto: aew_collision_2026_05_30 source=wrestlinginc url=https://www.wrestlinginc.com/2184309/aew-collision-may-30-2026-results/
+[REPORT v92] Fonte title: AEW Collision Results 5/30 - Two Titles On The Line, STARDOM's Hazuki Makes AEW Debut
+[REPORT v92] Titolo deterministico: AEW Collision del 30 maggio 2026 - risultati e momenti salienti
+[REPORT v92] Categorie: Editoriali, AEW
+[REPORT v92] Avvio workshop pubblicazione: aew_collision_2026_05_30
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+[NEWS v92] Hard skip Fase B (35/100 soft_news): AEW's Shelton Benjamin Offers Thoughts On Two Possible Hurt Syndicate Additions | Si tratta di speculazioni e opinioni di un wrestler su possibili ingressi futuri in una stable, non di uno sviluppo contrattuale o creativo confermato.
+[NEWS v92] Soft pool Fase B (52/100 soft_news): John Cena Points To WWE NXT Star Mason Rook When Asked About Future World Champions
+[NEWS v92] Soft pool Fase B (60/100 standard_useful): Backstage Report On Sol Ruca Losing Back-To-Back Matches On WWE Raw
+[NEWS v92] Soft pool Fase B (50/100 soft_news): Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[NEWS v92] Hard skip Fase B (48/100 soft_news): Velveteen Dream Says He’s Back and Wants to Represent Ukraine Now | Il soggetto è una figura controversa legata al passato WWE; la notizia riguarda un ritorno nel circuito indipendente. Ha valore di curiosità ma nessuna rilevanza strategica o di mercato per le major.
+[NEWS v92] Soft pool Fase B (67/100 event_outcome): Chad Gable Unmasked After Bloody Mask vs. Mask Loss At AAA Noche de Los Grandes
+[NEWS v92] Soft pool Fase B (70/100 hard_news): WWE Announces Raw and SmackDown September Tapings in Mexico City
+[NEWS v92] Soft pool Fase B (69/100 hard_news): AAA Bringing Triplemanía 34 To Las Vegas For First Night Of Two-Night Event
+[NEWS v92] Soft pool Fase B (70/100 event_outcome): Pagano Walks Out On Psycho Clown After War Raiders Win AAA Tag Team Titles At Noche de los Grandes
+[NEWS v92] Soft pool Fase B (70/100 event_outcome): El Hijo del Vikingo Wins AAA Latin American Championship At Noche de los Grandes
+[NEWS v92] Hard news Fase B (86/100 event_outcome): Rey Fenix Captures AAA World Cruiserweight Championship at Noche de Los Grandes
+[NEWS v92] Soft pool Fase B (70/100 standard_useful): Two Match Revealed for June 6 AEW Collision
+[NEWS v92] Hard news Fase B (94/100 hard_news): AEW Reveals Plan To Crown New TBS Champion Following Willow Nightingale Injury
+[NEWS v92] Hard skip Fase B (39/100 report_like): AAA Noche de Los Grandes Results, Stream, Highlights and Key Moments for May 30, 2026 | Si tratta di un report completo di un evento, pertanto classificato come report_like secondo le direttive che escludono tali contenuti dal flusso news standard di OpenWrestlingTV.
+[NEWS v92] Skip duplicato semantico cross-source: Backstage Report On Sol Ruca Losing Back-To-Back Matches On WWE Raw ~= Backstage Report On Sol Ruca Losing Back-To-Back Matches On WWE Raw
+[NEWS v92] Skip duplicato semantico cross-source: John Cena Points To WWE NXT Star Mason Rook When Asked About Future World Champions ~= John Cena Points To WWE NXT Star Mason Rook When Asked About Future World Champions
+[NEWS v92] Skip duplicato semantico cross-source: Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024 ~= Jacob Fatu Speaks On The Rock, Recalls His Surprise Appearance At WWE Bad Blood 2024
+[NEWS v92] Pubblico hard score=94/100 type=hard_news source=ringsidenews title=AEW Reveals Plan To Crown New TBS Champion Following Willow Nightingale Injury
+[NEWS v92] Pubblico hard score=86/100 type=event_outcome source=ringsidenews title=Rey Fenix Captures AAA World Cruiserweight Championship at Noche de Los Grandes
+[NEWS v92] Pubblico soft score=70/100 type=hard_news source=ringsidenews title=WWE Announces Raw and SmackDown September Tapings in Mexico City
+[NEWS v92] Pubblicate news=3/3 | hard_candidates=2 soft_candidates=35 soft_pool_saved=31
+[RUN v92] totale pubblicazioni=4 (report=1, news=3)
+===== RUN END [2026-05-31T08:14:32] VERSION [v92_0_2_report_workshop_publish] =====

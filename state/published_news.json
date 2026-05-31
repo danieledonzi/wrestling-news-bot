@@ -29,6 +29,21 @@
     "story_core": "aew-debut-hazuki-collision",
     "wp_post_id": 5568
   },
+  "https://www.ringsidenews.com/aew-reveals-plan-crown-new-tbs-champion-following-willow-nightingale-injury/": {
+    "article_type": "hard_news",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/aew-svelato-il-piano-per-assegnare-il-titolo-tbs-dopo-linfortunio-di-willow-nightingale/",
+    "priority": "hard",
+    "published_at": "2026-05-31T06:16:17.299142",
+    "score": 94,
+    "source": "ringsidenews",
+    "source_title": "AEW Reveals Plan To Crown New TBS Champion Following Willow Nightingale Injury",
+    "status": "published",
+    "story_core": "torneo-vacante-tbs-championship",
+    "wp_post_id": 5675
+  },
   "https://www.ringsidenews.com/aew-reveals-updated-womens-owen-hart-tournament-bracket-collision/": {
     "article_type": "event_outcome",
     "categories": [
@@ -485,6 +500,21 @@
     "story_core": "qt-marshall-infortunio-rientro",
     "wp_post_id": 5470
   },
+  "https://www.ringsidenews.com/rey-fenix-captures-aaa-world-cruiserweight-championship-noche-de-los-grandes/": {
+    "article_type": "event_outcome",
+    "categories": [
+      "AEW"
+    ],
+    "link": "https://news.openwrestlingtv.com/aew/rey-fenix-conquista-laaa-world-cruiserweight-championship-a-noche-de-los-grandes/",
+    "priority": "hard",
+    "published_at": "2026-05-31T06:16:21.431173",
+    "score": 86,
+    "source": "ringsidenews",
+    "source_title": "Rey Fenix Captures AAA World Cruiserweight Championship at Noche de Los Grandes",
+    "status": "published",
+    "story_core": "rey-fenix-vince-titolo-cruiserweight-aaa",
+    "wp_post_id": 5677
+  },
   "https://www.ringsidenews.com/rhea-ripley-reveals-how-she-created-riptide-finisher/": {
     "article_type": "soft_news",
     "categories": [
@@ -664,6 +694,21 @@
     "status": "published",
     "story_core": "mcmahon-merger-lawsuit-unsealed-filings",
     "wp_post_id": 5612
+  },
+  "https://www.ringsidenews.com/wwe-announces-raw-smackdown-september-tapings-mexico-city/": {
+    "article_type": "hard_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-raw-e-smackdown-in-scena-a-citta-del-messico-nel-settembre-2026/",
+    "priority": "soft",
+    "published_at": "2026-05-31T06:16:25.357688",
+    "score": 70,
+    "source": "ringsidenews",
+    "source_title": "WWE Announces Raw and SmackDown September Tapings in Mexico City",
+    "status": "published",
+    "story_core": "annuncio-tapings-mexico-city",
+    "wp_post_id": 5679
   },
   "https://www.ringsidenews.com/wwe-clash-italy-betting-odds-drop-ahead-major-championship-matches/": {
     "article_type": "soft_news",
