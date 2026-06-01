@@ -28,9 +28,9 @@ insert_before = '\n\ndef run_news_pipeline(wp_ok: bool, now: datetime) -> int:\n
 if insert_before not in text:
     raise SystemExit("[V93 MENZO GATE] run_news_pipeline marker non trovato")
 
-soft_pool_fallback = ""
+fallbacks = ""
 if "def hydrate_soft_pool(" not in text:
-    soft_pool_fallback = r'''
+    fallbacks += r'''
 
 def hydrate_soft_pool(soft_pool: Any, now: datetime) -> List[Dict[str, Any]]:
     if isinstance(soft_pool, list):
@@ -40,6 +40,16 @@ def hydrate_soft_pool(soft_pool: Any, now: datetime) -> List[Dict[str, Any]]:
         if isinstance(items, list):
             return [item for item in items if isinstance(item, dict)]
     return []
+'''
+
+if "def is_report_like_news(" not in text:
+    fallbacks += r'''
+
+def is_report_like_news(entry: Dict[str, Any]) -> bool:
+    blob = normalize_text(f"{entry.get('title', '')} {entry.get('url', '')}")
+    report_terms = ["results", "risultati", "recap", "live coverage", "coverage", "report"]
+    show_terms = ["raw", "smackdown", "nxt", "dynamite", "collision", "impact", "aew", "wwe", "tna", "roh"]
+    return any(term in blob for term in report_terms) and any(term in blob for term in show_terms)
 '''
 
 helpers = r'''
@@ -77,7 +87,7 @@ def v93_filter_soft_pool_items(items: List[Dict[str, Any]], allowed: set[str]) -
         return items
     return [item for item in items if v93_menzo_allows(item, allowed)]
 '''
-text = text.replace(insert_before, soft_pool_fallback + helpers + insert_before, 1)
+text = text.replace(insert_before, fallbacks + helpers + insert_before, 1)
 
 old = '''    entries = feed_entries(feeds_cfg.get("feeds", []))
     hard_items: List[Dict[str, Any]] = []
