@@ -53,7 +53,7 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-01T14:47:02.015070+00:00",
+  "generated_at": "2026-06-01T15:06:26.106150+00:00",
   "handoff": {
     "already_worked": 3,
     "hard_skipped": 2,
@@ -91,37 +91,13 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184793/aew-future-prospects-wbd-paramount-skydance",
-      "published": "Mon, 01 Jun 2026 14:33:29 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2184666/cody-rhodes-controversial-finish-wwe-title-gunther-clash-in-italy-rematch",
+      "published": "Mon, 01 Jun 2026 15:00:00 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "Despite some worries from those within the company initially, there is a sense of optimism surrounding AEW's future after the WBD/Paramount merger.",
-      "title": "Backstage News On AEW's Future Prospects After WBD Purchase By Paramount Skydance",
-      "url": "https://www.wrestlinginc.com/2184793/aew-future-prospects-wbd-paramount-skydance/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results",
-      "published": "Sun, 31 May 2026 01:00:00 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "This is Wrestling Inc.'s live coverage of AAA Nocha de Los Grandes, headlined by El Grande Americano versus the Original Grande Americano in Mask vs. Mask.",
-      "title": "AAA Noche De Los Grandes Results - Mask Vs. Mask, Three Titles On The Line",
-      "url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184664/wwe-aaa-triplemania-2026-night-one-las-vegas",
-      "published": "Mon, 01 Jun 2026 14:30:00 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "AAA's biggest pay-per-view of the year, TripleMania, will be held over two nights, following the trend set by WWE, with Night 1 taking place in Las Vegas.",
-      "title": "WWE Announces Night One Of AAA TripleMania 2026 Will Take Place In Las Vegas",
-      "url": "https://www.wrestlinginc.com/2184664/wwe-aaa-triplemania-2026-night-one-las-vegas/"
+      "summary": "Undisputed WWE Champion Cody Rhodes has offered GUNTHER a rematch following the controversial finish to their match at WWE Clash in Italy.",
+      "title": "Cody Rhodes Addresses Controversial Finish In WWE Title Defense At Clash In Italy",
+      "url": "https://www.wrestlinginc.com/2184666/cody-rhodes-controversial-finish-wwe-title-gunther-clash-in-italy-rematch/"
     },
     {
       "assigned_to": "Menzo",
@@ -199,13 +175,37 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184643/roman-reigns-la-knight-royce-keys-wwe-clash-in-italy",
-      "published": "Mon, 01 Jun 2026 14:00:00 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2184793/aew-future-prospects-wbd-paramount-skydance",
+      "published": "Mon, 01 Jun 2026 14:33:29 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "After retaining his world title at WWE Clash in Italy, Roman Reigns has now turned his attention to Royce Keys and LA Knight and sent a warning their way.",
-      "title": "Roman Reigns Addresses Comments From LA Knight, Royce Keys After WWE Clash In Italy",
-      "url": "https://www.wrestlinginc.com/2184643/roman-reigns-la-knight-royce-keys-wwe-clash-in-italy/"
+      "summary": "Despite some worries from those within the company initially, there is a sense of optimism surrounding AEW's future after the WBD/Paramount merger.",
+      "title": "Backstage News On AEW's Future Prospects After WBD Purchase By Paramount Skydance",
+      "url": "https://www.wrestlinginc.com/2184793/aew-future-prospects-wbd-paramount-skydance/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results",
+      "published": "Sun, 31 May 2026 01:00:00 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "This is Wrestling Inc.'s live coverage of AAA Nocha de Los Grandes, headlined by El Grande Americano versus the Original Grande Americano in Mask vs. Mask.",
+      "title": "AAA Noche De Los Grandes Results - Mask Vs. Mask, Three Titles On The Line",
+      "url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2184664/wwe-aaa-triplemania-2026-night-one-las-vegas",
+      "published": "Mon, 01 Jun 2026 14:30:00 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "AAA's biggest pay-per-view of the year, TripleMania, will be held over two nights, following the trend set by WWE, with Night 1 taking place in Las Vegas.",
+      "title": "WWE Announces Night One Of AAA TripleMania 2026 Will Take Place In Las Vegas",
+      "url": "https://www.wrestlinginc.com/2184664/wwe-aaa-triplemania-2026-night-one-las-vegas/"
     },
     {
       "assigned_to": "Menzo",
@@ -271,13 +271,13 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184636/wwe-raw-smackdown-mexico-september-15-years",
-      "published": "Mon, 01 Jun 2026 13:30:00 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2171387/wwe-jbl-john-bradshaw-layfield-john-laurinaitis-conversation-restructuring-contract",
+      "published": "Sat, 16 May 2026 19:00:00 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "WWE will return to Mexico for Raw and SmackDown for the first time in 15 years, with both shows set to take place in Mexico City.",
-      "title": "WWE Raw & SmackDown Returning To Mexico For The First Time In 15 Years In September",
-      "url": "https://www.wrestlinginc.com/2184636/wwe-raw-smackdown-mexico-september-15-years/"
+      "summary": "WWE Hall of Famer John \"Bradshaw\" Layfield once received a phone call minutes before surgery, with a former executive asking him to take a pay cut.",
+      "title": "JBL Recalls Past Conversation About Restructuring WWE Contract",
+      "url": "https://www.wrestlinginc.com/2171387/wwe-jbl-john-bradshaw-layfield-john-laurinaitis-conversation-restructuring-contract/"
     },
     {
       "assigned_to": "Menzo",
