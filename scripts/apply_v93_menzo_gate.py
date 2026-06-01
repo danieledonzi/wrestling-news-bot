@@ -11,14 +11,17 @@ if "V93_MENZO_GATE_ACTIVE = True" in text:
 needle = 'NEWS_SOFT_POOL_FILE = STATE_DIR / "news_soft_pool.json"\n'
 if needle not in text:
     raise SystemExit("[V93 MENZO GATE] NEWS_SOFT_POOL_FILE marker non trovato")
-text = text.replace(
-    needle,
-    needle
-    + 'NEWSROOM_STATE_DIR = STATE_DIR / "newsroom"\n'
-    + 'V93_MENZO_ALLOWED_NEWS_FILE = NEWSROOM_STATE_DIR / "v92_allowed_news_urls.json"\n'
-    + 'V93_MENZO_GATE_ACTIVE = True\n',
-    1,
-)
+constants = 'V93_MENZO_ALLOWED_NEWS_FILE = NEWSROOM_STATE_DIR / "v92_allowed_news_urls.json"\nV93_MENZO_GATE_ACTIVE = True\n'
+if 'NEWSROOM_STATE_DIR = STATE_DIR / "newsroom"' in text:
+    text = text.replace(needle, needle + constants, 1)
+else:
+    text = text.replace(
+        needle,
+        needle
+        + 'NEWSROOM_STATE_DIR = STATE_DIR / "newsroom"\n'
+        + constants,
+        1,
+    )
 
 # Add helpers before run_news_pipeline.
 insert_before = '\n\ndef run_news_pipeline(wp_ok: bool, now: datetime) -> int:\n'
