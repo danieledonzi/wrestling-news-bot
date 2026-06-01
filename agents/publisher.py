@@ -9,7 +9,6 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
-from urllib.parse import urlparse
 
 import requests
 
@@ -25,7 +24,7 @@ PUBLISHER_STATUS_FILE = NEWSROOM_STATE_DIR / "publisher_status_latest.json"
 PUBLISHER_HISTORY_FILE = NEWSROOM_STATE_DIR / "publisher_history.json"
 ARTIFACT_PUBLISHER_FILE = ARTIFACT_DIR / "publisher_result.json"
 
-PUBLISHER_VERSION = "v93_6_publisher_wordpress"
+PUBLISHER_VERSION = "v93_10_publisher_plain_oembed_urls"
 REQUEST_TIMEOUT = int(os.getenv("V93_PUBLISHER_TIMEOUT", "25"))
 MAX_POSTS_PER_RUN = int(os.getenv("V93_PUBLISHER_MAX_POSTS_PER_RUN", "3"))
 POST_STATUS = os.getenv("V93_PUBLISHER_POST_STATUS", "publish").strip() or "publish"
@@ -38,6 +37,7 @@ _media_cache: dict[str, tuple[int | None, str | None]] = {}
 
 IMAGE_PLACEHOLDER_RE = re.compile(r"<!--IMAGE:([^>]+)-->")
 EMBED_PLACEHOLDER_RE = re.compile(r"<!--EMBED:([^>]+)-->")
+PLAIN_EMBED_URL_RE = re.compile(r"(?m)^\s*(https?://(?:www\.)?(?:x\.com|twitter\.com|instagram\.com|youtube\.com|youtu\.be|tiktok\.com|threads\.net|facebook\.com|bsky\.app)/\S+)\s*$", re.I)
 
 CATEGORY_ALIASES = {
     "WWE": ["WWE"],
@@ -45,6 +45,7 @@ CATEGORY_ALIASES = {
     "AEW": ["AEW"],
     "TNA": ["TNA", "World"],
     "ROH": ["ROH", "AEW"],
+    "Business": ["Business", "World"],
     "World": ["World"],
     "Editoriali": ["Editoriali"],
 }
@@ -122,7 +123,7 @@ def wp_request(method: str, url: str, *, retries: int = 2, sleep_seconds: int = 
     last_exc: Exception | None = None
     for attempt in range(1, retries + 1):
         try:
-            print(f"[PUBLISHER v93.6] WP {method.upper()} attempt {attempt}/{retries}: {url}", flush=True)
+            print(f"[PUBLISHER v93.10] WP {method.upper()} attempt {attempt}/{retries}: {url}", flush=True)
             res = session.request(method, url, timeout=REQUEST_TIMEOUT, **kwargs)
             if res.status_code in {408, 429, 500, 502, 503, 504} and attempt < retries:
                 time.sleep(sleep_seconds)
@@ -155,8 +156,10 @@ def extract_image_placeholders(body_html: str) -> list[str]:
 
 def clean_body_for_wordpress(body_html: str) -> str:
     body_html = IMAGE_PLACEHOLDER_RE.sub("", body_html or "")
-    body_html = EMBED_PLACEHOLDER_RE.sub(lambda m: f'<p><a href="{html.escape(m.group(1).strip())}" target="_blank" rel="nofollow noopener">Contenuto incorporato</a></p>', body_html)
+    body_html = EMBED_PLACEHOLDER_RE.sub(lambda m: "\n" + html.escape(m.group(1).strip()) + "\n", body_html)
+    body_html = PLAIN_EMBED_URL_RE.sub(lambda m: "\n" + html.escape(m.group(1).strip()) + "\n", body_html)
     body_html = re.sub(r"<p>\s*</p>", "", body_html)
+    body_html = re.sub(r"\n{3,}", "\n\n", body_html)
     return body_html.strip()
 
 
@@ -233,9 +236,9 @@ def upload_media(image_url: str) -> tuple[int | None, str | None]:
             src = data.get("source_url") or image_url
             _media_cache[image_url] = (media_id, src)
             return media_id, src
-        print(f"[PUBLISHER v93.6] Upload media non riuscito: status={res.status_code} body={res.text[:300]}", flush=True)
+        print(f"[PUBLISHER v93.10] Upload media non riuscito: status={res.status_code} body={res.text[:300]}", flush=True)
     except Exception as exc:
-        print(f"[PUBLISHER v93.6] Upload media fallito: {image_url} | {exc}", flush=True)
+        print(f"[PUBLISHER v93.10] Upload media fallito: {image_url} | {exc}", flush=True)
     _media_cache[image_url] = (None, image_url)
     return None, image_url
 
@@ -260,11 +263,7 @@ def publish_article(article: dict[str, Any], history: dict[str, Any], wp_ok: boo
         "status": POST_STATUS,
         "categories": categories,
         "excerpt": str(article.get("excerpt_it") or "")[:500],
-        "meta": {
-            "original_url": url,
-            "owtv_source": source,
-            "owtv_pipeline": PUBLISHER_VERSION,
-        },
+        "meta": {"original_url": url, "owtv_source": source, "owtv_pipeline": PUBLISHER_VERSION},
     }
 
     media_id: int | None = None
@@ -278,48 +277,18 @@ def publish_article(article: dict[str, Any], history: dict[str, Any], wp_ok: boo
     (REVIEW_DIR / f"v93_publisher_{review_slug}.html").write_text(content, encoding="utf-8")
 
     if DRY_RUN or not wp_ok:
-        return {
-            "source_url": url,
-            "title_it": title,
-            "status": "dry_run" if DRY_RUN else "wp_not_ready",
-            "wp_ready": wp_ok,
-            "payload_preview": {k: v for k, v in payload.items() if k != "content"},
-            "content_chars": len(content),
-            "image_url": image_url,
-            "media_id": media_id,
-        }
+        return {"source_url": url, "title_it": title, "status": "dry_run" if DRY_RUN else "wp_not_ready", "wp_ready": wp_ok, "payload_preview": {k: v for k, v in payload.items() if k != "content"}, "content_chars": len(content), "image_url": image_url, "media_id": media_id}
 
     res = wp_request("post", wp_posts_url(), json=payload, auth=wp_auth())
     if res.status_code not in {200, 201}:
-        return {
-            "source_url": url,
-            "title_it": title,
-            "status": "publish_error",
-            "error": f"WP post failed {res.status_code}: {res.text[:600]}",
-        }
+        return {"source_url": url, "title_it": title, "status": "publish_error", "error": f"WP post failed {res.status_code}: {res.text[:600]}"}
     data = res.json()
     post_id = int(data.get("id"))
     post_link = data.get("link") or ""
-    history[key] = {
-        "source_url": url,
-        "title_it": title,
-        "wp_post_id": post_id,
-        "wp_link": post_link,
-        "published_at": utc_now(),
-        "status": POST_STATUS,
-        "source": source,
-    }
+    history[key] = {"source_url": url, "title_it": title, "wp_post_id": post_id, "wp_link": post_link, "published_at": utc_now(), "status": POST_STATUS, "source": source}
     PUBLISHED_DIR.mkdir(parents=True, exist_ok=True)
     (PUBLISHED_DIR / f"v93_news_{review_slug}.html").write_text(content, encoding="utf-8")
-    return {
-        "source_url": url,
-        "title_it": title,
-        "status": "published",
-        "wp_post_id": post_id,
-        "wp_link": post_link,
-        "featured_media": media_id,
-        "categories": categories,
-    }
+    return {"source_url": url, "title_it": title, "status": "published", "wp_post_id": post_id, "wp_link": post_link, "featured_media": media_id, "categories": categories}
 
 
 def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -333,7 +302,7 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
     if not isinstance(history, dict):
         history = {}
 
-    print(f"[PUBLISHER v93.6] Avvio pubblicazione | approved={len(articles)} wp_ok={wp_ok} dry_run={DRY_RUN}", flush=True)
+    print(f"[PUBLISHER v93.10] Avvio pubblicazione | approved={len(articles)} wp_ok={wp_ok} dry_run={DRY_RUN}", flush=True)
     results = [publish_article(article, history, wp_ok) for article in articles if isinstance(article, dict)]
     if not DRY_RUN and wp_ok:
         write_json(PUBLISHER_HISTORY_FILE, history)
@@ -342,17 +311,9 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
         "agent": "Publisher",
         "version": PUBLISHER_VERSION,
         "generated_at": utc_now(),
-        "mode": "wordpress_publisher",
-        "input": {
-            "alfred_version": alfred.get("version") if isinstance(alfred, dict) else None,
-            "approved_articles": len(articles),
-        },
-        "wp": {
-            "ready": wp_ok,
-            "reason": wp_reason,
-            "post_status": POST_STATUS,
-            "dry_run": DRY_RUN,
-        },
+        "mode": "wordpress_publisher_plain_oembed_urls",
+        "input": {"alfred_version": alfred.get("version") if isinstance(alfred, dict) else None, "approved_articles": len(articles)},
+        "wp": {"ready": wp_ok, "reason": wp_reason, "post_status": POST_STATUS, "dry_run": DRY_RUN},
         "results": results,
         "handoff": {
             "published": sum(1 for r in results if r.get("status") == "published"),
@@ -361,21 +322,11 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
             "wp_not_ready": sum(1 for r in results if r.get("status") == "wp_not_ready"),
             "errors": sum(1 for r in results if r.get("status") == "publish_error"),
         },
-        "policy": {
-            "source_attribution": True,
-            "strip_inline_image_placeholders": True,
-            "featured_image_source": "meta.featured_image_or_first_placeholder",
-            "idempotency": "state/newsroom/publisher_history.json by source_url",
-        },
+        "policy": {"source_attribution": True, "strip_inline_image_placeholders": True, "preserve_plain_embed_urls_for_wordpress_oembed": True, "featured_image_source": "meta.featured_image_or_first_placeholder", "idempotency": "state/newsroom/publisher_history.json by source_url"},
     }
     write_json(ARTIFACT_PUBLISHER_FILE, result)
     write_json(PUBLISHER_STATUS_FILE, result)
-    print(
-        "[PUBLISHER v93.6] Pubblicazione completata | "
-        f"published={result['handoff']['published']} already={result['handoff']['already_published']} "
-        f"dry={result['handoff']['dry_run']} wp_not_ready={result['handoff']['wp_not_ready']} errors={result['handoff']['errors']}",
-        flush=True,
-    )
+    print("[PUBLISHER v93.10] Pubblicazione completata | published={published} already={already} dry={dry} wp_not_ready={wp_not_ready} errors={errors}".format(published=result["handoff"]["published"], already=result["handoff"]["already_published"], dry=result["handoff"]["dry_run"], wp_not_ready=result["handoff"]["wp_not_ready"], errors=result["handoff"]["errors"]), flush=True)
     return result
 
 
