@@ -1,15 +1,15 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-01T19:03:27.137065+00:00",
+  "generated_at": "2026-06-01T20:54:23.469086+00:00",
   "handoff": {
-    "already_published": 1,
+    "already_published": 2,
     "dry_run": 0,
     "errors": 0,
-    "published": 2,
+    "published": 1,
     "wp_not_ready": 0
   },
   "input": {
-    "alfred_version": "v93_5_1_conservative_quality_editor",
+    "alfred_version": "v93_8_alfred_structured_content_checks",
     "approved_articles": 3
   },
   "mode": "wordpress_publisher",
@@ -22,13 +22,20 @@
   "results": [
     {
       "categories": [
-        5
+        7,
+        8
       ],
-      "featured_media": 5785,
-      "source_url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/",
+      "featured_media": 5791,
+      "source_url": "https://www.ringsidenews.com/tna-impact-viewership-sees-slight-increase-may-28-2026/",
       "status": "published",
-      "title_it": "AEW Dynamite: i dati di ascolto dell'episodio del 27 maggio 2026",
-      "wp_link": "https://news.openwrestlingtv.com/aew/aew-dynamite-i-dati-di-ascolto-dellepisodio-del-27-maggio-2026/",
+      "title_it": "TNA iMPACT: i dati sugli ascolti del 28 maggio 2026",
+      "wp_link": "https://news.openwrestlingtv.com/tna/tna-impact-i-dati-sugli-ascolti-del-28-maggio-2026/",
+      "wp_post_id": 5792
+    },
+    {
+      "source_url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/",
+      "status": "already_published",
+      "title_it": "AEW Dynamite: in crescita gli ascolti del 27 maggio 2026",
       "wp_post_id": 5786
     },
     {
@@ -36,17 +43,6 @@
       "status": "already_published",
       "title_it": "Aggiornamenti sul contratto di Mike Santana in TNA tra l'interesse della WWE",
       "wp_post_id": 5784
-    },
-    {
-      "categories": [
-        4
-      ],
-      "featured_media": 5787,
-      "source_url": "https://www.ringsidenews.com/jonathan-coachman-blasts-wwe-creative-booking-liv-morgan-queen-ring-tournament/",
-      "status": "published",
-      "title_it": "WWE, Jonathan Coachman critica il booking di Liv Morgan nel Queen of the Ring",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-jonathan-coachman-critica-il-booking-di-liv-morgan-nel-queen-of-the-ring/",
-      "wp_post_id": 5788
     }
   ],
   "version": "v93_6_publisher_wordpress",

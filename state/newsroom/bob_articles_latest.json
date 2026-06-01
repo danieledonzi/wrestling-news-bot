@@ -3,20 +3,396 @@
   "articles": [
     {
       "bob_notes": [
-        "Traduzione eseguita nel rispetto della linea editoriale v92.",
-        "Il testo originale includeva la biografia dell'autore (Steve Carrier), che è stata esclusa come da istruzioni.",
-        "I titoli dei paragrafi [4-9] e [11-12] sono stati mantenuti come intestazioni per rispecchiare la struttura originale del testo, pur essendo placeholder privi di contenuto numerico nella fonte."
+        "Traduzione fedele dei dati numerici e delle tabelle.",
+        "Mantenuta la terminologia tecnica del settore.",
+        "Il testo rispetta rigorosamente la struttura originale, incluse le intestazioni e le tabelle HTML richieste."
       ],
-      "body_html": "<p>Sono stati resi noti i nuovi dati relativi agli ascolti dell'episodio di AEW Dynamite trasmesso su TBS il 27 maggio 2026, che evidenziano una costante tendenza alla crescita.</p><p>Secondo quanto riportato da Programming Insider, l'episodio di AEW Dynamite del 27 maggio 2026 ha fatto registrare 704.000 spettatori su TBS, con un rating di 0.12 nella fascia demografica chiave 18-49 anni (P18-49). Per fare un confronto, l'episodio del 20 maggio 2026 aveva totalizzato 613.000 spettatori con un rating di 0 nella stessa fascia demografica; si tratta quindi di un incremento di 91.000 spettatori e di un aumento di 0.12 punti nel rating demo.</p><p>Rispetto alla stessa settimana del 2025, quando l'episodio del 28 maggio totalizzò 636.000 spettatori con un rating demo di 0.16, il dato di 704.000 spettatori e 0.12 di rating del 27 maggio 2026 segna una variazione su base annua del +10,7% per quanto riguarda l'audience complessiva e del -25,0% nel rating demo.</p><h3>AEW Dynamite: Confronto settimanale degli ascolti</h3><h3>Prestazioni di AEW Dynamite anno corrente (2026)</h3><h3>Prestazioni di AEW Dynamite mese corrente (maggio 2026)</h3><h3>Media mobile a 4 settimane di AEW Dynamite</h3><h3>Riepilogo prestazioni ultimi 12 mesi</h3><h3>Range di ascolti (ultimi 12 mesi)</h3><p>Media a 4 settimane: 602.875 spettatori</p><h3>Maggiori variazioni settimanali negli ascolti (ultimi 12 mesi)</h3><h3>Confronto anno su anno di AEW Dynamite (2025 vs 2026)</h3><p>Ascolto più alto del 2026: 765.000 (25 marzo 2026). Ascolto più basso del 2026: 498.000 (21 gennaio 2026).</p><p>Queste cifre riflettono esclusivamente l'ascolto televisivo lineare su TBS e non includono la visione in streaming o tramite piattaforme digitali. Ringside News continuerà a monitorare l'andamento di AEW Dynamite mentre la federazione prosegue il percorso di avvicinamento al suo prossimo grande evento dal vivo.</p>",
+      "body_html": "<p>Sono stati resi noti i nuovi dati relativi agli ascolti dell'episodio di TNA iMPACT del 28 maggio 2026 su AMC, che mostrano un leggero incremento rispetto alla settimana precedente.</p><p>Secondo quanto riportato da <em>Programming Insider</em>, la puntata di TNA iMPACT del 28 maggio 2026 ha totalizzato 195.000 telespettatori su AMC, con un rating di 0.02 nella fascia demografica chiave 18-49 anni (P18-49). Per fare un confronto, l'episodio del 21 maggio 2026 aveva registrato 178.000 spettatori con un rating dello 0.03 nella stessa fascia, segnando quindi un aumento di 17.000 unità nel numero complessivo di spettatori e un calo di 0.01 nel rating demografico.</p><h3>TNA iMPACT Week-to-Week Viewership Comparison</h3><table class=\"owtv-data-table\"><tr><th>Metric</th><th>May 21, 2026</th><th>May 28, 2026</th><th>Change</th><th>% Change</th></tr><tr><td>Total Viewers</td><td>178,000</td><td>195,000</td><td>↑ +17,000</td><td>↑ +9.6%</td></tr><tr><td>P18–49 Demo</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -33.3%</td></tr></table><h3>TNA iMPACT Year-to-Date Performance (2026)</h3><table class=\"owtv-data-table\"><tr><th>Metric</th><th>2026 Average</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>205,760</td><td>195,000</td><td>↓ -10,760</td><td>↓ -5.2%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.04</td><td>0.02</td><td>↓ -0.02</td><td>↓ -47.4%</td></tr></table><h3>TNA iMPACT Month-to-Date Performance (May 2026)</h3><table class=\"owtv-data-table\"><tr><th>Metric</th><th>Month Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table><h3>TNA iMPACT 4-Week Rolling Average</h3><table class=\"owtv-data-table\"><tr><th>Metric</th><th>4 Week Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table><h3>Last 12 Months Performance Summary</h3><table class=\"owtv-data-table\"><tr><td>Average Viewership</td><td>205,760</td></tr><tr><td>Highest Viewership</td><td>259,000 (March 12, 2026)</td></tr><tr><td>Lowest Viewership</td><td>21,200 (April 16, 2026)</td></tr><tr><td>Average 18–49 Demo</td><td>0.04</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>20</td></tr></table><h3>Viewership Range (Last 12 Months)</h3><table class=\"owtv-data-table\"><tr><td>Highest</td><td>March 12, 2026</td><td>259,000</td></tr><tr><td>Lowest</td><td>April 16, 2026</td><td>21,200</td></tr><tr><td>Difference</td><td>—</td><td>237,800</td></tr></table><table class=\"owtv-data-table\"><tr><th>Week</th><th>Viewers</th><th>18–49 Demo</th></tr><tr><td>May 28, 2026</td><td>195,000</td><td>0.02</td></tr><tr><td>May 21, 2026</td><td>178,000</td><td>0.03</td></tr><tr><td>May 14, 2026</td><td>196,000</td><td>0.03</td></tr><tr><td>May 7, 2026</td><td>164,000</td><td>0.02</td></tr></table><p>Media mobile a 4 settimane: 183.250 telespettatori.</p><h3>Largest Weekly Viewership Changes (Last 12 Months)</h3><table class=\"owtv-data-table\"><tr><td>Largest Increase</td><td>April 24, 2026</td><td>+153,800</td></tr><tr><td>Largest Drop</td><td>April 16, 2026</td><td>-235,800</td></tr></table><p>Ascolti più alti del 2026: 259.000 (12 marzo 2026); Ascolti più bassi del 2026: 21.200 (16 aprile 2026).</p><p>Questi dati riflettono esclusivamente l'audience televisiva lineare su AMC e non includono la visione in streaming o tramite piattaforme digitali. Ringside News continuerà a monitorare TNA iMPACT mentre la compagnia prosegue il percorso di costruzione verso il suo prossimo grande evento dal vivo.</p>",
+      "category_hint": "TNA",
+      "clean_element_count": 21,
+      "created_at": "2026-06-01T20:54:04.066267+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "element_counts": {
+        "embed": 0,
+        "heading": 7,
+        "image": 0,
+        "quote": 0,
+        "table": 8,
+        "text": 6
+      },
+      "elements": [
+        {
+          "text": "New ratings data has been released for the May 28, 2026 episode of TNA iMPACT on AMC, with the numbers ticking up slightly from the prior week.",
+          "type": "text"
+        },
+        {
+          "text": "According to Programming Insider , TNA iMPACT on May 28, 2026 drew 195,000 viewers on AMC, with a 0.02 rating in the key P18–49 demographic. For comparison, the May 21, 2026 episode drew 178,000 viewers with a 0.03 rating in the key P18–49 demographic, an increase of ↑ 17,000 viewers and down by ↓ 0.01 in the demo.",
+          "type": "text"
+        },
+        {
+          "level": 3,
+          "text": "TNA iMPACT Week-to-Week Viewership Comparison",
+          "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>May 21, 2026</th><th>May 28, 2026</th><th>Change</th><th>% Change</th></tr><tr><td>Total Viewers</td><td>178,000</td><td>195,000</td><td>↑ +17,000</td><td>↑ +9.6%</td></tr><tr><td>P18–49 Demo</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -33.3%</td></tr></table>",
+          "markdown": "Metric | May 21, 2026 | May 28, 2026 | Change | % Change\n--- | --- | --- | --- | ---\nTotal Viewers | 178,000 | 195,000 | ↑ +17,000 | ↑ +9.6%\nP18–49 Demo | 0.03 | 0.02 | ↓ -0.01 | ↓ -33.3%",
+          "type": "table"
+        },
+        {
+          "level": 3,
+          "text": "TNA iMPACT Year-to-Date Performance (2026)",
+          "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>2026 Average</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>205,760</td><td>195,000</td><td>↓ -10,760</td><td>↓ -5.2%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.04</td><td>0.02</td><td>↓ -0.02</td><td>↓ -47.4%</td></tr></table>",
+          "markdown": "Metric | 2026 Average | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 205,760 | 195,000 | ↓ -10,760 | ↓ -5.2%\nP18–49 Demo Avg | 0.04 | 0.02 | ↓ -0.02 | ↓ -47.4%",
+          "type": "table"
+        },
+        {
+          "level": 3,
+          "text": "TNA iMPACT Month-to-Date Performance (May 2026)",
+          "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>Month Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table>",
+          "markdown": "Metric | Month Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 183,250 | 195,000 | ↑ 11,750 | ↑ 6.4%\nP18–49 Demo Avg | 0.03 | 0.02 | ↓ -0.01 | ↓ -20%",
+          "type": "table"
+        },
+        {
+          "level": 3,
+          "text": "TNA iMPACT 4-Week Rolling Average",
+          "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>4 Week Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table>",
+          "markdown": "Metric | 4 Week Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 183,250 | 195,000 | ↑ 11,750 | ↑ 6.4%\nP18–49 Demo Avg | 0.03 | 0.02 | ↓ -0.01 | ↓ -20%",
+          "type": "table"
+        },
+        {
+          "level": 3,
+          "text": "Last 12 Months Performance Summary",
+          "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Average Viewership</th><th>205,760</th></tr><tr><td>Highest Viewership</td><td>259,000 (March 12, 2026)</td></tr><tr><td>Lowest Viewership</td><td>21,200 (April 16, 2026)</td></tr><tr><td>Average 18–49 Demo</td><td>0.04</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>20</td></tr></table>",
+          "markdown": "Average Viewership | 205,760\n--- | ---\nHighest Viewership | 259,000 (March 12, 2026)\nLowest Viewership | 21,200 (April 16, 2026)\nAverage 18–49 Demo | 0.04\nWeeks Above 1,000,000 Viewers | 0\nWeeks Below 1,000,000 Viewers | 20",
+          "type": "table"
+        },
+        {
+          "level": 3,
+          "text": "Viewership Range (Last 12 Months)",
+          "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Highest</th><th>March 12, 2026</th><th>259,000</th></tr><tr><td>Lowest</td><td>April 16, 2026</td><td>21,200</td></tr><tr><td>Difference</td><td>—</td><td>237,800</td></tr></table>",
+          "markdown": "Highest | March 12, 2026 | 259,000\n--- | --- | ---\nLowest | April 16, 2026 | 21,200\nDifference | — | 237,800",
+          "type": "table"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Week</th><th>Viewers</th><th>18–49 Demo</th></tr><tr><td>May 28, 2026</td><td>195,000</td><td>0.02</td></tr><tr><td>May 21, 2026</td><td>178,000</td><td>0.03</td></tr><tr><td>May 14, 2026</td><td>196,000</td><td>0.03</td></tr><tr><td>May 7, 2026</td><td>164,000</td><td>0.02</td></tr></table>",
+          "markdown": "Week | Viewers | 18–49 Demo\n--- | --- | ---\nMay 28, 2026 | 195,000 | 0.02\nMay 21, 2026 | 178,000 | 0.03\nMay 14, 2026 | 196,000 | 0.03\nMay 7, 2026 | 164,000 | 0.02",
+          "type": "table"
+        },
+        {
+          "text": "4-Week Average: 183,250 viewers",
+          "type": "text"
+        },
+        {
+          "level": 3,
+          "text": "Largest Weekly Viewership Changes (Last 12 Months)",
+          "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Largest Increase</th><th>April 24, 2026</th><th>+153,800</th></tr><tr><td>Largest Drop</td><td>April 16, 2026</td><td>-235,800</td></tr></table>",
+          "markdown": "Largest Increase | April 24, 2026 | +153,800\n--- | --- | ---\nLargest Drop | April 16, 2026 | -235,800",
+          "type": "table"
+        },
+        {
+          "text": "Highest Viewership of 2026: 259,000 ( March 12, 2026 ) Lowest Viewership of 2026: 21,200 ( April 16, 2026 )",
+          "type": "text"
+        },
+        {
+          "text": "These figures reflect only linear TV viewership on AMC and do not include streaming or digital viewership. Ringside News will continue to monitor TNA iMPACT as the company builds toward its next major live event.",
+          "type": "text"
+        },
+        {
+          "text": "Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.",
+          "type": "text"
+        }
+      ],
+      "excerpt_it": "Leggero incremento negli ascolti per l'episodio di TNA iMPACT del 28 maggio 2026 su AMC. Analizziamo i dati nel dettaglio.",
+      "extraction_diagnostics": {
+        "candidate_node_count": 60,
+        "clean_element_count": 21,
+        "dom_noise_reduction_enabled": false,
+        "quote_count": 0,
+        "raw_element_count": 23,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 2,
+        "root_name": "article",
+        "root_text_chars": 3144,
+        "stage": "complete",
+        "table_count": 8
+      },
+      "fetched_html_chars": 485525,
+      "menzo_score": 84,
+      "meta": {
+        "description": "New ratings data has been released for the May 28, 2026 episode of TNA iMPACT on AMC, with the numbers ticking up slightly from the prior week. According",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/02/TNA-iMPACT-Massive-Increase.jpg",
+        "source_title": "TNA iMPACT Viewership Sees Slight Increase on May 28, 2026"
+      },
+      "raw_element_count": 23,
+      "raw_elements_preview": [
+        {
+          "alt": "TNA iMPACT Viewership Sees Slight Increase on May 28, 2026",
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2026/02/TNA-iMPACT-Massive-Increase.jpg?x51578"
+        },
+        {
+          "text": "New ratings data has been released for the May 28, 2026 episode of TNA iMPACT on AMC, with the numbers ticking up slightly from the prior week.",
+          "type": "text"
+        },
+        {
+          "text": "According to Programming Insider , TNA iMPACT on May 28, 2026 drew 195,000 viewers on AMC, with a 0.02 rating in the key P18–49 demographic. For comparison, the May 21, 2026 episode drew 178,000 viewers with a 0.03 rating in the key P18–49 demographic, an increase of ↑ 17,000 viewers and down by ↓ 0.01 in the demo.",
+          "type": "text"
+        },
+        {
+          "level": 3,
+          "text": "TNA iMPACT Week-to-Week Viewership Comparison",
+          "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>May 21, 2026</th><th>May 28, 2026</th><th>Change</th><th>% Change</th></tr><tr><td>Total Viewers</td><td>178,000</td><td>195,000</td><td>↑ +17,000</td><td>↑ +9.6%</td></tr><tr><td>P18–49 Demo</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -33.3%</td></tr></table>",
+          "markdown": "Metric | May 21, 2026 | May 28, 2026 | Change | % Change\n--- | --- | --- | --- | ---\nTotal Viewers | 178,000 | 195,000 | ↑ +17,000 | ↑ +9.6%\nP18–49 Demo | 0.03 | 0.02 | ↓ -0.01 | ↓ -33.3%",
+          "type": "table"
+        },
+        {
+          "level": 3,
+          "text": "TNA iMPACT Year-to-Date Performance (2026)",
+          "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>2026 Average</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>205,760</td><td>195,000</td><td>↓ -10,760</td><td>↓ -5.2%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.04</td><td>0.02</td><td>↓ -0.02</td><td>↓ -47.4%</td></tr></table>",
+          "markdown": "Metric | 2026 Average | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 205,760 | 195,000 | ↓ -10,760 | ↓ -5.2%\nP18–49 Demo Avg | 0.04 | 0.02 | ↓ -0.02 | ↓ -47.4%",
+          "type": "table"
+        },
+        {
+          "level": 3,
+          "text": "TNA iMPACT Month-to-Date Performance (May 2026)",
+          "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>Month Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table>",
+          "markdown": "Metric | Month Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 183,250 | 195,000 | ↑ 11,750 | ↑ 6.4%\nP18–49 Demo Avg | 0.03 | 0.02 | ↓ -0.01 | ↓ -20%",
+          "type": "table"
+        },
+        {
+          "level": 3,
+          "text": "TNA iMPACT 4-Week Rolling Average",
+          "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>4 Week Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table>",
+          "markdown": "Metric | 4 Week Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 183,250 | 195,000 | ↑ 11,750 | ↑ 6.4%\nP18–49 Demo Avg | 0.03 | 0.02 | ↓ -0.01 | ↓ -20%",
+          "type": "table"
+        },
+        {
+          "level": 3,
+          "text": "Last 12 Months Performance Summary",
+          "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Average Viewership</th><th>205,760</th></tr><tr><td>Highest Viewership</td><td>259,000 (March 12, 2026)</td></tr><tr><td>Lowest Viewership</td><td>21,200 (April 16, 2026)</td></tr><tr><td>Average 18–49 Demo</td><td>0.04</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>20</td></tr></table>",
+          "markdown": "Average Viewership | 205,760\n--- | ---\nHighest Viewership | 259,000 (March 12, 2026)\nLowest Viewership | 21,200 (April 16, 2026)\nAverage 18–49 Demo | 0.04\nWeeks Above 1,000,000 Viewers | 0\nWeeks Below 1,000,000 Viewers | 20",
+          "type": "table"
+        },
+        {
+          "level": 3,
+          "text": "Viewership Range (Last 12 Months)",
+          "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Highest</th><th>March 12, 2026</th><th>259,000</th></tr><tr><td>Lowest</td><td>April 16, 2026</td><td>21,200</td></tr><tr><td>Difference</td><td>—</td><td>237,800</td></tr></table>",
+          "markdown": "Highest | March 12, 2026 | 259,000\n--- | --- | ---\nLowest | April 16, 2026 | 21,200\nDifference | — | 237,800",
+          "type": "table"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Week</th><th>Viewers</th><th>18–49 Demo</th></tr><tr><td>May 28, 2026</td><td>195,000</td><td>0.02</td></tr><tr><td>May 21, 2026</td><td>178,000</td><td>0.03</td></tr><tr><td>May 14, 2026</td><td>196,000</td><td>0.03</td></tr><tr><td>May 7, 2026</td><td>164,000</td><td>0.02</td></tr></table>",
+          "markdown": "Week | Viewers | 18–49 Demo\n--- | --- | ---\nMay 28, 2026 | 195,000 | 0.02\nMay 21, 2026 | 178,000 | 0.03\nMay 14, 2026 | 196,000 | 0.03\nMay 7, 2026 | 164,000 | 0.02",
+          "type": "table"
+        },
+        {
+          "text": "4-Week Average: 183,250 viewers",
+          "type": "text"
+        },
+        {
+          "level": 3,
+          "text": "Largest Weekly Viewership Changes (Last 12 Months)",
+          "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Largest Increase</th><th>April 24, 2026</th><th>+153,800</th></tr><tr><td>Largest Drop</td><td>April 16, 2026</td><td>-235,800</td></tr></table>",
+          "markdown": "Largest Increase | April 24, 2026 | +153,800\n--- | --- | ---\nLargest Drop | April 16, 2026 | -235,800",
+          "type": "table"
+        },
+        {
+          "text": "Highest Viewership of 2026: 259,000 ( March 12, 2026 ) Lowest Viewership of 2026: 21,200 ( April 16, 2026 )",
+          "type": "text"
+        },
+        {
+          "text": "These figures reflect only linear TV viewership on AMC and do not include streaming or digital viewership. Ringside News will continue to monitor TNA iMPACT as the company builds toward its next major live event.",
+          "type": "text"
+        },
+        {
+          "text": "Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.",
+          "type": "text"
+        },
+        {
+          "text": "Spotlight WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW",
+          "type": "text"
+        }
+      ],
+      "removed_before_gemini": 15,
+      "removed_elements_debug": [
+        {
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "node_index": 48,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Spotlight"
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196368 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-iyo-sky tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "node_index": 49,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 50,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 51,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196255 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-brock-lesnar tag-oba-femi tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "node_index": 52,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 53,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 54,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196202 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
+          "node_index": 55,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 56,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Makes Major Changes to King of the Ring Tournament Lineup"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 57,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196207 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news tag-jacob-fatu tag-roman-reigns tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "node_index": 58,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 59,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 60,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "index": 1,
+          "item": {
+            "alt": "TNA iMPACT Viewership Sees Slight Increase on May 28, 2026",
+            "type": "image",
+            "url": "https://www.ringsidenews.com/wp-content/uploads/2026/02/TNA-iMPACT-Massive-Increase.jpg?x51578"
+          },
+          "reason": "duplicate_featured_image"
+        },
+        {
+          "index": 23,
+          "item": {
+            "text": "Spotlight WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW",
+            "type": "text"
+          },
+          "reason": "footer_start"
+        }
+      ],
+      "source": "ringsidenews",
+      "source_title": "TNA iMPACT Viewership Sees Slight Increase on May 28, 2026",
+      "source_url": "https://www.ringsidenews.com/tna-impact-viewership-sees-slight-increase-may-28-2026/",
+      "status": "ready_for_alfred",
+      "title_it": "TNA iMPACT: i dati sugli ascolti del 28 maggio 2026",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Gli elementi [quote] vanno pubblicati come <blockquote>...</blockquote>, non come semplici <p> con virgolette.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Gli elementi [table] sono tabelle: conservali nel corpo come <table class=\"owtv-data-table\"> con righe e celle HTML semplici. Non sostituirli con soli titoli o riassunti.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/tna-impact-viewership-sees-slight-increase-may-28-2026/\nTitolo feed: TNA iMPACT Viewership Sees Slight Increase on May 28, 2026\nTitolo pagina: TNA iMPACT Viewership Sees Slight Increase on May 28, 2026\nDescrizione: New ratings data has been released for the May 28, 2026 episode of TNA iMPACT on AMC, with the numbers ticking up slightly from the prior week. According\nCategoria suggerita: TNA\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|text] New ratings data has been released for the May 28, 2026 episode of TNA iMPACT on AMC, with the numbers ticking up slightly from the prior week.\n[2|text] According to Programming Insider , TNA iMPACT on May 28, 2026 drew 195,000 viewers on AMC, with a 0.02 rating in the key P18–49 demographic. For comparison, the May 21, 2026 episode drew 178,000 viewers with a 0.03 rating in the key P18–49 demographic, an increase of ↑ 17,000 viewers and down by ↓ 0.01 in the demo.\n[3|heading] TNA iMPACT Week-to-Week Viewership Comparison\n[4|table]\nMetric | May 21, 2026 | May 28, 2026 | Change | % Change\n--- | --- | --- | --- | ---\nTotal Viewers | 178,000 | 195,000 | ↑ +17,000 | ↑ +9.6%\nP18–49 Demo | 0.03 | 0.02 | ↓ -0.01 | ↓ -33.3%\n[5|heading] TNA iMPACT Year-to-Date Performance (2026)\n[6|table]\nMetric | 2026 Average | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 205,760 | 195,000 | ↓ -10,760 | ↓ -5.2%\nP18–49 Demo Avg | 0.04 | 0.02 | ↓ -0.02 | ↓ -47.4%\n[7|heading] TNA iMPACT Month-to-Date Performance (May 2026)\n[8|table]\nMetric | Month Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 183,250 | 195,000 | ↑ 11,750 | ↑ 6.4%\nP18–49 Demo Avg | 0.03 | 0.02 | ↓ -0.01 | ↓ -20%\n[9|heading] TNA iMPACT 4-Week Rolling Average\n[10|table]\nMetric | 4 Week Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 183,250 | 195,000 | ↑ 11,750 | ↑ 6.4%\nP18–49 Demo Avg | 0.03 | 0.02 | ↓ -0.01 | ↓ -20%\n[11|heading] Last 12 Months Performance Summary\n[12|table]\nAverage Viewership | 205,760\n--- | ---\nHighest Viewership | 259,000 (March 12, 2026)\nLowest Viewership | 21,200 (April 16, 2026)\nAverage 18–49 Demo | 0.04\nWeeks Above 1,000,000 Viewers | 0\nWeeks Below 1,000,000 Viewers | 20\n[13|heading] Viewership Range (Last 12 Months)\n[14|table]\nHighest | March 12, 2026 | 259,000\n--- | --- | ---\nLowest | April 16, 2026 | 21,200\nDifference | — | 237,800\n[15|table]\nWeek | Viewers | 18–49 Demo\n--- | --- | ---\nMay 28, 2026 | 195,000 | 0.02\nMay 21, 2026 | 178,000 | 0.03\nMay 14, 2026 | 196,000 | 0.03\nMay 7, 2026 | 164,000 | 0.02\n[16|text] 4-Week Average: 183,250 viewers\n[17|heading] Largest Weekly Viewership Changes (Last 12 Months)\n[18|table]\nLargest Increase | April 24, 2026 | +153,800\n--- | --- | ---\nLargest Drop | April 16, 2026 | -235,800\n[19|text] Highest Viewership of 2026: 259,000 ( March 12, 2026 ) Lowest Viewership of 2026: 21,200 ( April 16, 2026 )\n[20|text] These figures reflect only linear TV viewership on AMC and do not include streaming or digital viewership. Ringside News will continue to monitor TNA iMPACT as the company builds toward its next major live event.\n[21|text] Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"TNA iMPACT: i dati sugli ascolti del 28 maggio 2026\",\n  \"body_html\": \"<p>Sono stati resi noti i nuovi dati relativi agli ascolti dell'episodio di TNA iMPACT del 28 maggio 2026 su AMC, che mostrano un leggero incremento rispetto alla settimana precedente.</p><p>Secondo quanto riportato da <em>Programming Insider</em>, la puntata di TNA iMPACT del 28 maggio 2026 ha totalizzato 195.000 telespettatori su AMC, con un rating di 0.02 nella fascia demografica chiave 18-49 anni (P18-49). Per fare un confronto, l'episodio del 21 maggio 2026 aveva registrato 178.000 spettatori con un rating dello 0.03 nella stessa fascia, segnando quindi un aumento di 17.000 unità nel numero complessivo di spettatori e un calo di 0.01 nel rating demografico.</p><h3>TNA iMPACT Week-to-Week Viewership Comparison</h3><table class=\\\"owtv-data-table\\\"><tr><th>Metric</th><th>May 21, 2026</th><th>May 28, 2026</th><th>Change</th><th>% Change</th></tr><tr><td>Total Viewers</td><td>178,000</td><td>195,000</td><td>↑ +17,000</td><td>↑ +9.6%</td></tr><tr><td>P18–49 Demo</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -33.3%</td></tr></table><h3>TNA iMPACT Year-to-Date Performance (2026)</h3><table class=\\\"owtv-data-table\\\"><tr><th>Metric</th><th>2026 Average</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>205,760</td><td>195,000</td><td>↓ -10,760</td><td>↓ -5.2%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.04</td><td>0.02</td><td>↓ -0.02</td><td>↓ -47.4%</td></tr></table><h3>TNA iMPACT Month-to-Date Performance (May 2026)</h3><table class=\\\"owtv-data-table\\\"><tr><th>Metric</th><th>Month Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table><h3>TNA iMPACT 4-Week Rolling Average</h3><table class=\\\"owtv-data-table\\\"><tr><th>Metric</th><th>4 Week Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table><h3>Last 12 Months Performance Summary</h3><table class=\\\"owtv-data-table\\\"><tr><td>Average Viewership</td><td>205,760</td></tr><tr><td>Highest Viewership</td><td>259,000 (March 12, 2026)</td></tr><tr><td>Lowest Viewership</td><td>21,200 (April 16, 2026)</td></tr><tr><td>Average 18–49 Demo</td><td>0.04</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>20</td></tr></table><h3>Viewership Range (Last 12 Months)</h3><table class=\\\"owtv-data-table\\\"><tr><td>Highest</td><td>March 12, 2026</td><td>259,000</td></tr><tr><td>Lowest</td><td>April 16, 2026</td><td>21,200</td></tr><tr><td>Difference</td><td>—</td><td>237,800</td></tr></table><table class=\\\"owtv-data-table\\\"><tr><th>Week</th><th>Viewers</th><th>18–49 Demo</th></tr><tr><td>May 28, 2026</td><td>195,000</td><td>0.02</td></tr><tr><td>May 21, 2026</td><td>178,000</td><td>0.03</td></tr><tr><td>May 14, 2026</td><td>196,000</td><td>0.03</td></tr><tr><td>May 7, 2026</td><td>164,000</td><td>0.02</td></tr></table><p>Media mobile a 4 settimane: 183.250 telespettatori.</p><h3>Largest Weekly Viewership Changes (Last 12 Months)</h3><table class=\\\"owtv-data-table\\\"><tr><td>Largest Increase</td><td>April 24, 2026</td><td>+153,800</td></tr><tr><td>Largest Drop</td><td>April 16, 2026</td><td>-235,800</td></tr></table><p>Ascolti più alti del 2026: 259.000 (12 marzo 2026); Ascolti più bassi del 2026: 21.200 (16 aprile 2026).</p><p>Questi dati riflettono esclusivamente l'audience televisiva lineare su AMC e non includono la visione in streaming o tramite piattaforme digitali. Ringside News continuerà a monitorare TNA iMPACT mentre la compagnia prosegue il percorso di costruzione verso il suo prossimo grande evento dal vivo.</p>\",\n  \"excerpt_it\": \"Leggero incremento negli ascolti per l'episodio di TNA iMPACT del 28 maggio 2026 su AMC. Analizziamo i dati nel dettaglio.\",\n  \"notes\": [\n    \"Traduzione fedele dei dati numerici e delle tabelle.\",\n    \"Mantenuta la terminologia tecnica del settore.\",\n    \"Il testo rispetta rigorosamente la struttura originale, incluse le intestazioni e le tabelle HTML richieste.\"\n  ]\n}",
+      "translation_used": true
+    },
+    {
+      "bob_notes": [
+        "Mantenute le tabelle come richiesto, formattate in HTML pulito.",
+        "Traduzione fedele dei dati numerici e delle terminologie di settore."
+      ],
+      "body_html": "<p>Sono stati diffusi i nuovi dati sugli ascolti relativi alla puntata di AEW Dynamite andata in onda su TBS il 27 maggio 2026, che evidenziano un costante trend di crescita.</p><p>Secondo quanto riportato da <em>Programming Insider</em>, l'episodio di AEW Dynamite del 27 maggio 2026 ha totalizzato 704.000 spettatori, con un rating di 0.12 nella fascia demografica chiave 18-49 anni. Per fare un confronto, la puntata del 20 maggio 2026 aveva registrato 613.000 spettatori con un rating di 0 nella medesima fascia demografica, segnando un incremento di 91.000 spettatori e una crescita di 0.12 nel rating demo.</p><p>Rispetto allo stesso periodo dell'anno precedente, AEW Dynamite aveva totalizzato 636.000 spettatori e un rating dello 0.16 nella demo il 28 maggio 2025, contro i 704.000 spettatori e lo 0.12 registrati il 27 maggio 2026. Ciò rappresenta una variazione annua del +10,7% nel numero di spettatori e del -25,0% nella demo.</p><h3>AEW Dynamite Week-to-Week Viewership Comparison</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>May 20, 2026</td><td>May 27, 2026</td><td>Change</td><td>% Change</td></tr><tr><td>Total Viewers</td><td>613,000</td><td>704,000</td><td>↑ +91,000</td><td>↑ +14.8%</td></tr><tr><td>P18–49 Demo</td><td>0</td><td>0.12</td><td>↑ +0.12</td><td>↑ —</td></tr></table><h3>AEW Dynamite Year-to-Date Performance (2026)</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>2026 Average</td><td>Current Episode</td><td>Diff</td><td>%</td></tr><tr><td>Viewers</td><td>631,833</td><td>704,000</td><td>↑ 72,167</td><td>↑ 11.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.11</td><td>0.12</td><td>↑ 0.01</td><td>↑ 8.6%</td></tr></table><h3>AEW Dynamite Month-to-Date Performance (May 2026)</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>Month Avg</td><td>Current Episode</td><td>Diff</td><td>%</td></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table><h3>AEW Dynamite 4-Week Rolling Average</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>4 Week Avg</td><td>Current Episode</td><td>Diff</td><td>%</td></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table><h3>Last 12 Months Performance Summary</h3><table class=\"owtv-data-table\"><tr><td>Average Viewership</td><td>590,837</td></tr><tr><td>Highest Viewership</td><td>765,000 (March 25, 2026)</td></tr><tr><td>Lowest Viewership</td><td>321,000 (October 7, 2025)</td></tr><tr><td>Average 18–49 Demo</td><td>0.12</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>52</td></tr></table><h3>Viewership Range (Last 12 Months)</h3><table class=\"owtv-data-table\"><tr><td>Highest</td><td>March 25, 2026</td><td>765,000</td></tr><tr><td>Lowest</td><td>October 7, 2025</td><td>321,000</td></tr><tr><td>Difference</td><td>—</td><td>444,000</td></tr></table><table class=\"owtv-data-table\"><tr><td>Week</td><td>Viewers</td><td>18–49 Demo</td></tr><tr><td>May 27, 2026</td><td>704,000</td><td>0.12</td></tr><tr><td>May 20, 2026</td><td>613,000</td><td>—</td></tr><tr><td>May 13, 2026</td><td>585,000</td><td>0.10</td></tr><tr><td>May 6, 2026</td><td>509,500</td><td>0.08</td></tr></table><p>4-Week Average: 602,875 viewers</p><h3>Largest Weekly Viewership Changes (Last 12 Months)</h3><table class=\"owtv-data-table\"><tr><td>Largest Increase</td><td>October 15, 2025</td><td>+213,000</td></tr><tr><td>Largest Drop</td><td>October 1, 2025</td><td>-173,000</td></tr></table><h3>AEW Dynamite Year-over-Year Comparison (2025 vs 2026)</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>May 28, 2025</td><td>May 27, 2026</td><td>% Change</td></tr><tr><td>Total Viewers</td><td>636,000</td><td>704,000</td><td>↑ +10.7%</td></tr><tr><td>P18–49 Demo</td><td>0.16</td><td>0.12</td><td>↓ -25.0%</td></tr></table><p>Highest Viewership of 2026: 765,000 (March 25, 2026) Lowest Viewership of 2026: 498,000 (January 21, 2026)</p><p>Questi dati riflettono esclusivamente l'audience della TV lineare su TBS e non includono la visione in streaming o tramite piattaforme digitali. Ringside News continuerà a monitorare gli ascolti di AEW Dynamite mentre la compagnia si avvicina al suo prossimo importante evento live.</p>",
       "category_hint": "AEW",
-      "clean_element_count": 15,
-      "created_at": "2026-06-01T19:03:11.136093+00:00",
+      "clean_element_count": 24,
+      "created_at": "2026-06-01T20:54:09.810831+00:00",
       "diagnostic_stage": "ready_for_alfred",
       "element_counts": {
         "embed": 0,
         "heading": 8,
         "image": 0,
         "quote": 0,
+        "table": 9,
         "text": 7
       },
       "elements": [
@@ -38,9 +414,19 @@
           "type": "heading"
         },
         {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>May 20, 2026</th><th>May 27, 2026</th><th>Change</th><th>% Change</th></tr><tr><td>Total Viewers</td><td>613,000</td><td>704,000</td><td>↑ +91,000</td><td>↑ +14.8%</td></tr><tr><td>P18–49 Demo</td><td>0</td><td>0.12</td><td>↑ +0.12</td><td>↑ —</td></tr></table>",
+          "markdown": "Metric | May 20, 2026 | May 27, 2026 | Change | % Change\n--- | --- | --- | --- | ---\nTotal Viewers | 613,000 | 704,000 | ↑ +91,000 | ↑ +14.8%\nP18–49 Demo | 0 | 0.12 | ↑ +0.12 | ↑ —",
+          "type": "table"
+        },
+        {
           "level": 3,
           "text": "AEW Dynamite Year-to-Date Performance (2026)",
           "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>2026 Average</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>631,833</td><td>704,000</td><td>↑ 72,167</td><td>↑ 11.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.11</td><td>0.12</td><td>↑ 0.01</td><td>↑ 8.6%</td></tr></table>",
+          "markdown": "Metric | 2026 Average | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 631,833 | 704,000 | ↑ 72,167 | ↑ 11.4%\nP18–49 Demo Avg | 0.11 | 0.12 | ↑ 0.01 | ↑ 8.6%",
+          "type": "table"
         },
         {
           "level": 3,
@@ -48,9 +434,19 @@
           "type": "heading"
         },
         {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>Month Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table>",
+          "markdown": "Metric | Month Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 602,875 | 704,000 | ↑ 101,125 | ↑ 16.8%\nP18–49 Demo Avg | 0.10 | 0.12 | ↑ 0.02 | ↑ 20%",
+          "type": "table"
+        },
+        {
           "level": 3,
           "text": "AEW Dynamite 4-Week Rolling Average",
           "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>4 Week Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table>",
+          "markdown": "Metric | 4 Week Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 602,875 | 704,000 | ↑ 101,125 | ↑ 16.8%\nP18–49 Demo Avg | 0.10 | 0.12 | ↑ 0.02 | ↑ 20%",
+          "type": "table"
         },
         {
           "level": 3,
@@ -58,9 +454,24 @@
           "type": "heading"
         },
         {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Average Viewership</th><th>590,837</th></tr><tr><td>Highest Viewership</td><td>765,000 (March 25, 2026)</td></tr><tr><td>Lowest Viewership</td><td>321,000 (October 7, 2025)</td></tr><tr><td>Average 18–49 Demo</td><td>0.12</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>52</td></tr></table>",
+          "markdown": "Average Viewership | 590,837\n--- | ---\nHighest Viewership | 765,000 (March 25, 2026)\nLowest Viewership | 321,000 (October 7, 2025)\nAverage 18–49 Demo | 0.12\nWeeks Above 1,000,000 Viewers | 0\nWeeks Below 1,000,000 Viewers | 52",
+          "type": "table"
+        },
+        {
           "level": 3,
           "text": "Viewership Range (Last 12 Months)",
           "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Highest</th><th>March 25, 2026</th><th>765,000</th></tr><tr><td>Lowest</td><td>October 7, 2025</td><td>321,000</td></tr><tr><td>Difference</td><td>—</td><td>444,000</td></tr></table>",
+          "markdown": "Highest | March 25, 2026 | 765,000\n--- | --- | ---\nLowest | October 7, 2025 | 321,000\nDifference | — | 444,000",
+          "type": "table"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Week</th><th>Viewers</th><th>18–49 Demo</th></tr><tr><td>May 27, 2026</td><td>704,000</td><td>0.12</td></tr><tr><td>May 20, 2026</td><td>613,000</td><td>—</td></tr><tr><td>May 13, 2026</td><td>585,000</td><td>0.10</td></tr><tr><td>May 6, 2026</td><td>509,500</td><td>0.08</td></tr></table>",
+          "markdown": "Week | Viewers | 18–49 Demo\n--- | --- | ---\nMay 27, 2026 | 704,000 | 0.12\nMay 20, 2026 | 613,000 | —\nMay 13, 2026 | 585,000 | 0.10\nMay 6, 2026 | 509,500 | 0.08",
+          "type": "table"
         },
         {
           "text": "4-Week Average: 602,875 viewers",
@@ -72,9 +483,19 @@
           "type": "heading"
         },
         {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Largest Increase</th><th>October 15, 2025</th><th>+213,000</th></tr><tr><td>Largest Drop</td><td>October 1, 2025</td><td>-173,000</td></tr></table>",
+          "markdown": "Largest Increase | October 15, 2025 | +213,000\n--- | --- | ---\nLargest Drop | October 1, 2025 | -173,000",
+          "type": "table"
+        },
+        {
           "level": 3,
           "text": "AEW Dynamite Year-over-Year Comparison (2025 vs 2026)",
           "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>May 28, 2025</th><th>May 27, 2026</th><th>% Change</th></tr><tr><td>Total Viewers</td><td>636,000</td><td>704,000</td><td>↑ +10.7%</td></tr><tr><td>P18–49 Demo</td><td>0.16</td><td>0.12</td><td>↓ -25.0%</td></tr></table>",
+          "markdown": "Metric | May 28, 2025 | May 27, 2026 | % Change\n--- | --- | --- | ---\nTotal Viewers | 636,000 | 704,000 | ↑ +10.7%\nP18–49 Demo | 0.16 | 0.12 | ↓ -25.0%",
+          "type": "table"
         },
         {
           "text": "Highest Viewership of 2026: 765,000 ( March 25, 2026 ) Lowest Viewership of 2026: 498,000 ( January 21, 2026 )",
@@ -89,31 +510,33 @@
           "type": "text"
         }
       ],
-      "excerpt_it": "Analisi degli ascolti di AEW Dynamite del 27 maggio 2026: la federazione di Tony Khan registra una crescita rispetto alla settimana precedente.",
+      "excerpt_it": "Nuovi dati sugli ascolti per AEW Dynamite del 27 maggio 2026: la puntata ha registrato una crescita rispetto alla settimana precedente, raggiungendo i 704.000 spettatori.",
       "extraction_diagnostics": {
-        "candidate_node_count": 54,
-        "clean_element_count": 15,
+        "candidate_node_count": 63,
+        "clean_element_count": 24,
         "dom_noise_reduction_enabled": false,
-        "raw_element_count": 17,
+        "quote_count": 0,
+        "raw_element_count": 26,
         "removed_by_node_count": 13,
         "removed_by_sanitize_count": 2,
         "root_name": "article",
-        "root_text_chars": 3539,
-        "stage": "complete"
+        "root_text_chars": 3559,
+        "stage": "complete",
+        "table_count": 9
       },
-      "fetched_html_chars": 482938,
+      "fetched_html_chars": 486269,
       "menzo_score": 84,
       "meta": {
         "description": "New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum. According to Programming",
         "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Dynamite-Massive-Increase-1.jpg",
         "source_title": "AEW Dynamite Viewership Sees Increase on May 27, 2026"
       },
-      "raw_element_count": 17,
+      "raw_element_count": 26,
       "raw_elements_preview": [
         {
           "alt": "AEW Dynamite Viewership Sees Increase on May 27, 2026",
           "type": "image",
-          "url": "https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Dynamite-Massive-Increase-1.jpg?x49856"
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Dynamite-Massive-Increase-1.jpg?x51578"
         },
         {
           "text": "New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum.",
@@ -133,9 +556,19 @@
           "type": "heading"
         },
         {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>May 20, 2026</th><th>May 27, 2026</th><th>Change</th><th>% Change</th></tr><tr><td>Total Viewers</td><td>613,000</td><td>704,000</td><td>↑ +91,000</td><td>↑ +14.8%</td></tr><tr><td>P18–49 Demo</td><td>0</td><td>0.12</td><td>↑ +0.12</td><td>↑ —</td></tr></table>",
+          "markdown": "Metric | May 20, 2026 | May 27, 2026 | Change | % Change\n--- | --- | --- | --- | ---\nTotal Viewers | 613,000 | 704,000 | ↑ +91,000 | ↑ +14.8%\nP18–49 Demo | 0 | 0.12 | ↑ +0.12 | ↑ —",
+          "type": "table"
+        },
+        {
           "level": 3,
           "text": "AEW Dynamite Year-to-Date Performance (2026)",
           "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>2026 Average</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>631,833</td><td>704,000</td><td>↑ 72,167</td><td>↑ 11.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.11</td><td>0.12</td><td>↑ 0.01</td><td>↑ 8.6%</td></tr></table>",
+          "markdown": "Metric | 2026 Average | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 631,833 | 704,000 | ↑ 72,167 | ↑ 11.4%\nP18–49 Demo Avg | 0.11 | 0.12 | ↑ 0.01 | ↑ 8.6%",
+          "type": "table"
         },
         {
           "level": 3,
@@ -143,9 +576,19 @@
           "type": "heading"
         },
         {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>Month Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table>",
+          "markdown": "Metric | Month Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 602,875 | 704,000 | ↑ 101,125 | ↑ 16.8%\nP18–49 Demo Avg | 0.10 | 0.12 | ↑ 0.02 | ↑ 20%",
+          "type": "table"
+        },
+        {
           "level": 3,
           "text": "AEW Dynamite 4-Week Rolling Average",
           "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>4 Week Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table>",
+          "markdown": "Metric | 4 Week Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 602,875 | 704,000 | ↑ 101,125 | ↑ 16.8%\nP18–49 Demo Avg | 0.10 | 0.12 | ↑ 0.02 | ↑ 20%",
+          "type": "table"
         },
         {
           "level": 3,
@@ -153,9 +596,24 @@
           "type": "heading"
         },
         {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Average Viewership</th><th>590,837</th></tr><tr><td>Highest Viewership</td><td>765,000 (March 25, 2026)</td></tr><tr><td>Lowest Viewership</td><td>321,000 (October 7, 2025)</td></tr><tr><td>Average 18–49 Demo</td><td>0.12</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>52</td></tr></table>",
+          "markdown": "Average Viewership | 590,837\n--- | ---\nHighest Viewership | 765,000 (March 25, 2026)\nLowest Viewership | 321,000 (October 7, 2025)\nAverage 18–49 Demo | 0.12\nWeeks Above 1,000,000 Viewers | 0\nWeeks Below 1,000,000 Viewers | 52",
+          "type": "table"
+        },
+        {
           "level": 3,
           "text": "Viewership Range (Last 12 Months)",
           "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Highest</th><th>March 25, 2026</th><th>765,000</th></tr><tr><td>Lowest</td><td>October 7, 2025</td><td>321,000</td></tr><tr><td>Difference</td><td>—</td><td>444,000</td></tr></table>",
+          "markdown": "Highest | March 25, 2026 | 765,000\n--- | --- | ---\nLowest | October 7, 2025 | 321,000\nDifference | — | 444,000",
+          "type": "table"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Week</th><th>Viewers</th><th>18–49 Demo</th></tr><tr><td>May 27, 2026</td><td>704,000</td><td>0.12</td></tr><tr><td>May 20, 2026</td><td>613,000</td><td>—</td></tr><tr><td>May 13, 2026</td><td>585,000</td><td>0.10</td></tr><tr><td>May 6, 2026</td><td>509,500</td><td>0.08</td></tr></table>",
+          "markdown": "Week | Viewers | 18–49 Demo\n--- | --- | ---\nMay 27, 2026 | 704,000 | 0.12\nMay 20, 2026 | 613,000 | —\nMay 13, 2026 | 585,000 | 0.10\nMay 6, 2026 | 509,500 | 0.08",
+          "type": "table"
         },
         {
           "text": "4-Week Average: 602,875 viewers",
@@ -167,9 +625,19 @@
           "type": "heading"
         },
         {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Largest Increase</th><th>October 15, 2025</th><th>+213,000</th></tr><tr><td>Largest Drop</td><td>October 1, 2025</td><td>-173,000</td></tr></table>",
+          "markdown": "Largest Increase | October 15, 2025 | +213,000\n--- | --- | ---\nLargest Drop | October 1, 2025 | -173,000",
+          "type": "table"
+        },
+        {
           "level": 3,
           "text": "AEW Dynamite Year-over-Year Comparison (2025 vs 2026)",
           "type": "heading"
+        },
+        {
+          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>May 28, 2025</th><th>May 27, 2026</th><th>% Change</th></tr><tr><td>Total Viewers</td><td>636,000</td><td>704,000</td><td>↑ +10.7%</td></tr><tr><td>P18–49 Demo</td><td>0.16</td><td>0.12</td><td>↓ -25.0%</td></tr></table>",
+          "markdown": "Metric | May 28, 2025 | May 27, 2026 | % Change\n--- | --- | --- | ---\nTotal Viewers | 636,000 | 704,000 | ↑ +10.7%\nP18–49 Demo | 0.16 | 0.12 | ↓ -25.0%",
+          "type": "table"
         },
         {
           "text": "Highest Viewership of 2026: 765,000 ( March 25, 2026 ) Lowest Viewership of 2026: 498,000 ( January 21, 2026 )",
@@ -184,7 +652,7 @@
           "type": "text"
         },
         {
-          "text": "Spotlight WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 1, 2026 AEW News Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post",
+          "text": "Spotlight WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW",
           "type": "text"
         }
       ],
@@ -192,87 +660,24 @@
       "removed_elements_debug": [
         {
           "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 42,
+          "node_index": 51,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Spotlight"
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196202 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
-          "node_index": 43,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 44,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "WWE Makes Major Changes to King of the Ring Tournament Lineup"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 45,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196207 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-jacob-fatu tag-roman-reigns tag-wwe-featured   ",
-          "node_index": 46,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 47,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 48,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196098 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-raw-results category-wwe-results tag-wwe-featured   ",
-          "node_index": 49,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 1, 2026"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 50,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "WWE RAW Results, Highlights and Key Moments for June 1, 2026"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 51,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196155 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-nyla-rose   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2196368 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-iyo-sky tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
           "node_index": 52,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "AEW News Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post"
+          "text_preview": "WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 53,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post"
+          "text_preview": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -282,18 +687,81 @@
           "text_preview": ""
         },
         {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196255 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-brock-lesnar tag-oba-femi tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "node_index": 55,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 56,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 57,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196202 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
+          "node_index": 58,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 59,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Makes Major Changes to King of the Ring Tournament Lineup"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 60,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196207 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news tag-jacob-fatu tag-roman-reigns tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "node_index": 61,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 62,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 63,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
           "index": 1,
           "item": {
             "alt": "AEW Dynamite Viewership Sees Increase on May 27, 2026",
             "type": "image",
-            "url": "https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Dynamite-Massive-Increase-1.jpg?x49856"
+            "url": "https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Dynamite-Massive-Increase-1.jpg?x51578"
           },
           "reason": "duplicate_featured_image"
         },
         {
-          "index": 17,
+          "index": 26,
           "item": {
-            "text": "Spotlight WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 1, 2026 AEW News Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post",
+            "text": "Spotlight WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW",
             "type": "text"
           },
           "reason": "footer_start"
@@ -303,38 +771,39 @@
       "source_title": "AEW Dynamite Viewership Sees Increase on May 27, 2026",
       "source_url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/",
       "status": "ready_for_alfred",
-      "title_it": "AEW Dynamite: i dati di ascolto dell'episodio del 27 maggio 2026",
+      "title_it": "AEW Dynamite: in crescita gli ascolti del 27 maggio 2026",
       "translation_chain_attempted": [
         "gemini-3.1-flash-lite"
       ],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/\nTitolo feed: AEW Dynamite Viewership Sees Increase on May 27, 2026\nTitolo pagina: AEW Dynamite Viewership Sees Increase on May 27, 2026\nDescrizione: New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum. According to Programming\nCategoria suggerita: AEW\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|text] New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum.\n[2|text] According to Programming Insider , AEW Dynamite on May 27, 2026 drew 704,000 viewers on TBS, with a 0.12 rating in the key P18–49 demographic. For comparison, the May 20, 2026 episode drew 613,000 viewers with a 0 rating in the key P18–49 demographic, an increase of ↑ 91,000 viewers and up by ↑ 0.12 in the demo.\n[3|text] Compared to the same week in 2025, AEW Dynamite drew 636,000 viewers and a 0.16 demo rating on May 28, 2025, versus 704,000 viewers and a 0.12 demo rating on May 27, 2026. That represents a year-over-year change of ↑ +10.7% in viewership and ↓ -25.0% in the demo.\n[4|heading] AEW Dynamite Week-to-Week Viewership Comparison\n[5|heading] AEW Dynamite Year-to-Date Performance (2026)\n[6|heading] AEW Dynamite Month-to-Date Performance (May 2026)\n[7|heading] AEW Dynamite 4-Week Rolling Average\n[8|heading] Last 12 Months Performance Summary\n[9|heading] Viewership Range (Last 12 Months)\n[10|text] 4-Week Average: 602,875 viewers\n[11|heading] Largest Weekly Viewership Changes (Last 12 Months)\n[12|heading] AEW Dynamite Year-over-Year Comparison (2025 vs 2026)\n[13|text] Highest Viewership of 2026: 765,000 ( March 25, 2026 ) Lowest Viewership of 2026: 498,000 ( January 21, 2026 )\n[14|text] These figures reflect only linear TV viewership on TBS and do not include streaming or digital viewership. Ringside News will continue to monitor AEW Dynamite as the company builds toward its next major live event.\n[15|text] Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"AEW Dynamite: i dati di ascolto dell'episodio del 27 maggio 2026\",\n  \"body_html\": \"<p>Sono stati resi noti i nuovi dati relativi agli ascolti dell'episodio di AEW Dynamite trasmesso su TBS il 27 maggio 2026, che evidenziano una costante tendenza alla crescita.</p><p>Secondo quanto riportato da Programming Insider, l'episodio di AEW Dynamite del 27 maggio 2026 ha fatto registrare 704.000 spettatori su TBS, con un rating di 0.12 nella fascia demografica chiave 18-49 anni (P18-49). Per fare un confronto, l'episodio del 20 maggio 2026 aveva totalizzato 613.000 spettatori con un rating di 0 nella stessa fascia demografica; si tratta quindi di un incremento di 91.000 spettatori e di un aumento di 0.12 punti nel rating demo.</p><p>Rispetto alla stessa settimana del 2025, quando l'episodio del 28 maggio totalizzò 636.000 spettatori con un rating demo di 0.16, il dato di 704.000 spettatori e 0.12 di rating del 27 maggio 2026 segna una variazione su base annua del +10,7% per quanto riguarda l'audience complessiva e del -25,0% nel rating demo.</p><h3>AEW Dynamite: Confronto settimanale degli ascolti</h3><h3>Prestazioni di AEW Dynamite anno corrente (2026)</h3><h3>Prestazioni di AEW Dynamite mese corrente (maggio 2026)</h3><h3>Media mobile a 4 settimane di AEW Dynamite</h3><h3>Riepilogo prestazioni ultimi 12 mesi</h3><h3>Range di ascolti (ultimi 12 mesi)</h3><p>Media a 4 settimane: 602.875 spettatori</p><h3>Maggiori variazioni settimanali negli ascolti (ultimi 12 mesi)</h3><h3>Confronto anno su anno di AEW Dynamite (2025 vs 2026)</h3><p>Ascolto più alto del 2026: 765.000 (25 marzo 2026). Ascolto più basso del 2026: 498.000 (21 gennaio 2026).</p><p>Queste cifre riflettono esclusivamente l'ascolto televisivo lineare su TBS e non includono la visione in streaming o tramite piattaforme digitali. Ringside News continuerà a monitorare l'andamento di AEW Dynamite mentre la federazione prosegue il percorso di avvicinamento al suo prossimo grande evento dal vivo.</p>\",\n  \"excerpt_it\": \"Analisi degli ascolti di AEW Dynamite del 27 maggio 2026: la federazione di Tony Khan registra una crescita rispetto alla settimana precedente.\",\n  \"notes\": [\n    \"Traduzione eseguita nel rispetto della linea editoriale v92.\",\n    \"Il testo originale includeva la biografia dell'autore (Steve Carrier), che è stata esclusa come da istruzioni.\",\n    \"I titoli dei paragrafi [4-9] e [11-12] sono stati mantenuti come intestazioni per rispecchiare la struttura originale del testo, pur essendo placeholder privi di contenuto numerico nella fonte.\"\n  ]\n}",
+      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Gli elementi [quote] vanno pubblicati come <blockquote>...</blockquote>, non come semplici <p> con virgolette.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Gli elementi [table] sono tabelle: conservali nel corpo come <table class=\"owtv-data-table\"> con righe e celle HTML semplici. Non sostituirli con soli titoli o riassunti.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/\nTitolo feed: AEW Dynamite Viewership Sees Increase on May 27, 2026\nTitolo pagina: AEW Dynamite Viewership Sees Increase on May 27, 2026\nDescrizione: New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum. According to Programming\nCategoria suggerita: AEW\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|text] New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum.\n[2|text] According to Programming Insider , AEW Dynamite on May 27, 2026 drew 704,000 viewers on TBS, with a 0.12 rating in the key P18–49 demographic. For comparison, the May 20, 2026 episode drew 613,000 viewers with a 0 rating in the key P18–49 demographic, an increase of ↑ 91,000 viewers and up by ↑ 0.12 in the demo.\n[3|text] Compared to the same week in 2025, AEW Dynamite drew 636,000 viewers and a 0.16 demo rating on May 28, 2025, versus 704,000 viewers and a 0.12 demo rating on May 27, 2026. That represents a year-over-year change of ↑ +10.7% in viewership and ↓ -25.0% in the demo.\n[4|heading] AEW Dynamite Week-to-Week Viewership Comparison\n[5|table]\nMetric | May 20, 2026 | May 27, 2026 | Change | % Change\n--- | --- | --- | --- | ---\nTotal Viewers | 613,000 | 704,000 | ↑ +91,000 | ↑ +14.8%\nP18–49 Demo | 0 | 0.12 | ↑ +0.12 | ↑ —\n[6|heading] AEW Dynamite Year-to-Date Performance (2026)\n[7|table]\nMetric | 2026 Average | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 631,833 | 704,000 | ↑ 72,167 | ↑ 11.4%\nP18–49 Demo Avg | 0.11 | 0.12 | ↑ 0.01 | ↑ 8.6%\n[8|heading] AEW Dynamite Month-to-Date Performance (May 2026)\n[9|table]\nMetric | Month Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 602,875 | 704,000 | ↑ 101,125 | ↑ 16.8%\nP18–49 Demo Avg | 0.10 | 0.12 | ↑ 0.02 | ↑ 20%\n[10|heading] AEW Dynamite 4-Week Rolling Average\n[11|table]\nMetric | 4 Week Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 602,875 | 704,000 | ↑ 101,125 | ↑ 16.8%\nP18–49 Demo Avg | 0.10 | 0.12 | ↑ 0.02 | ↑ 20%\n[12|heading] Last 12 Months Performance Summary\n[13|table]\nAverage Viewership | 590,837\n--- | ---\nHighest Viewership | 765,000 (March 25, 2026)\nLowest Viewership | 321,000 (October 7, 2025)\nAverage 18–49 Demo | 0.12\nWeeks Above 1,000,000 Viewers | 0\nWeeks Below 1,000,000 Viewers | 52\n[14|heading] Viewership Range (Last 12 Months)\n[15|table]\nHighest | March 25, 2026 | 765,000\n--- | --- | ---\nLowest | October 7, 2025 | 321,000\nDifference | — | 444,000\n[16|table]\nWeek | Viewers | 18–49 Demo\n--- | --- | ---\nMay 27, 2026 | 704,000 | 0.12\nMay 20, 2026 | 613,000 | —\nMay 13, 2026 | 585,000 | 0.10\nMay 6, 2026 | 509,500 | 0.08\n[17|text] 4-Week Average: 602,875 viewers\n[18|heading] Largest Weekly Viewership Changes (Last 12 Months)\n[19|table]\nLargest Increase | October 15, 2025 | +213,000\n--- | --- | ---\nLargest Drop | October 1, 2025 | -173,000\n[20|heading] AEW Dynamite Year-over-Year Comparison (2025 vs 2026)\n[21|table]\nMetric | May 28, 2025 | May 27, 2026 | % Change\n--- | --- | --- | ---\nTotal Viewers | 636,000 | 704,000 | ↑ +10.7%\nP18–49 Demo | 0.16 | 0.12 | ↓ -25.0%\n[22|text] Highest Viewership of 2026: 765,000 ( March 25, 2026 ) Lowest Viewership of 2026: 498,000 ( January 21, 2026 )\n[23|text] These figures reflect only linear TV viewership on TBS and do not include streaming or digital viewership. Ringside News will continue to monitor AEW Dynamite as the company builds toward its next major live event.\n[24|text] Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"AEW Dynamite: in crescita gli ascolti del 27 maggio 2026\",\n  \"body_html\": \"<p>Sono stati diffusi i nuovi dati sugli ascolti relativi alla puntata di AEW Dynamite andata in onda su TBS il 27 maggio 2026, che evidenziano un costante trend di crescita.</p><p>Secondo quanto riportato da <em>Programming Insider</em>, l'episodio di AEW Dynamite del 27 maggio 2026 ha totalizzato 704.000 spettatori, con un rating di 0.12 nella fascia demografica chiave 18-49 anni. Per fare un confronto, la puntata del 20 maggio 2026 aveva registrato 613.000 spettatori con un rating di 0 nella medesima fascia demografica, segnando un incremento di 91.000 spettatori e una crescita di 0.12 nel rating demo.</p><p>Rispetto allo stesso periodo dell'anno precedente, AEW Dynamite aveva totalizzato 636.000 spettatori e un rating dello 0.16 nella demo il 28 maggio 2025, contro i 704.000 spettatori e lo 0.12 registrati il 27 maggio 2026. Ciò rappresenta una variazione annua del +10,7% nel numero di spettatori e del -25,0% nella demo.</p><h3>AEW Dynamite Week-to-Week Viewership Comparison</h3><table class=\\\"owtv-data-table\\\"><tr><td>Metric</td><td>May 20, 2026</td><td>May 27, 2026</td><td>Change</td><td>% Change</td></tr><tr><td>Total Viewers</td><td>613,000</td><td>704,000</td><td>↑ +91,000</td><td>↑ +14.8%</td></tr><tr><td>P18–49 Demo</td><td>0</td><td>0.12</td><td>↑ +0.12</td><td>↑ —</td></tr></table><h3>AEW Dynamite Year-to-Date Performance (2026)</h3><table class=\\\"owtv-data-table\\\"><tr><td>Metric</td><td>2026 Average</td><td>Current Episode</td><td>Diff</td><td>%</td></tr><tr><td>Viewers</td><td>631,833</td><td>704,000</td><td>↑ 72,167</td><td>↑ 11.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.11</td><td>0.12</td><td>↑ 0.01</td><td>↑ 8.6%</td></tr></table><h3>AEW Dynamite Month-to-Date Performance (May 2026)</h3><table class=\\\"owtv-data-table\\\"><tr><td>Metric</td><td>Month Avg</td><td>Current Episode</td><td>Diff</td><td>%</td></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table><h3>AEW Dynamite 4-Week Rolling Average</h3><table class=\\\"owtv-data-table\\\"><tr><td>Metric</td><td>4 Week Avg</td><td>Current Episode</td><td>Diff</td><td>%</td></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table><h3>Last 12 Months Performance Summary</h3><table class=\\\"owtv-data-table\\\"><tr><td>Average Viewership</td><td>590,837</td></tr><tr><td>Highest Viewership</td><td>765,000 (March 25, 2026)</td></tr><tr><td>Lowest Viewership</td><td>321,000 (October 7, 2025)</td></tr><tr><td>Average 18–49 Demo</td><td>0.12</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>52</td></tr></table><h3>Viewership Range (Last 12 Months)</h3><table class=\\\"owtv-data-table\\\"><tr><td>Highest</td><td>March 25, 2026</td><td>765,000</td></tr><tr><td>Lowest</td><td>October 7, 2025</td><td>321,000</td></tr><tr><td>Difference</td><td>—</td><td>444,000</td></tr></table><table class=\\\"owtv-data-table\\\"><tr><td>Week</td><td>Viewers</td><td>18–49 Demo</td></tr><tr><td>May 27, 2026</td><td>704,000</td><td>0.12</td></tr><tr><td>May 20, 2026</td><td>613,000</td><td>—</td></tr><tr><td>May 13, 2026</td><td>585,000</td><td>0.10</td></tr><tr><td>May 6, 2026</td><td>509,500</td><td>0.08</td></tr></table><p>4-Week Average: 602,875 viewers</p><h3>Largest Weekly Viewership Changes (Last 12 Months)</h3><table class=\\\"owtv-data-table\\\"><tr><td>Largest Increase</td><td>October 15, 2025</td><td>+213,000</td></tr><tr><td>Largest Drop</td><td>October 1, 2025</td><td>-173,000</td></tr></table><h3>AEW Dynamite Year-over-Year Comparison (2025 vs 2026)</h3><table class=\\\"owtv-data-table\\\"><tr><td>Metric</td><td>May 28, 2025</td><td>May 27, 2026</td><td>% Change</td></tr><tr><td>Total Viewers</td><td>636,000</td><td>704,000</td><td>↑ +10.7%</td></tr><tr><td>P18–49 Demo</td><td>0.16</td><td>0.12</td><td>↓ -25.0%</td></tr></table><p>Highest Viewership of 2026: 765,000 (March 25, 2026) Lowest Viewership of 2026: 498,000 (January 21, 2026)</p><p>Questi dati riflettono esclusivamente l'audience della TV lineare su TBS e non includono la visione in streaming o tramite piattaforme digitali. Ringside News continuerà a monitorare gli ascolti di AEW Dynamite mentre la compagnia si avvicina al suo prossimo importante evento live.</p>\",\n  \"excerpt_it\": \"Nuovi dati sugli ascolti per AEW Dynamite del 27 maggio 2026: la puntata ha registrato una crescita rispetto alla settimana precedente, raggiungendo i 704.000 spettatori.\",\n  \"notes\": [\"Mantenute le tabelle come richiesto, formattate in HTML pulito.\", \"Traduzione fedele dei dati numerici e delle terminologie di settore.\"]\n}",
       "translation_used": true
     },
     {
       "bob_notes": [
-        "Traduzione effettuata mantenendo lo stile giornalistico della pipeline v92.",
-        "Terminologia tecnica (TNA World Champion, main event, star) gestita in coerenza con la lingua italiana di settore.",
-        "Nessuna informazione aggiunta o modificata rispetto al testo sorgente."
+        "Traduzione eseguita rispettando la linea editoriale v92.",
+        "Mantenuta la sequenza delle informazioni e lo stile giornalistico richiesto.",
+        "Terminologia tecnica di settore (TNA World Champion, main event, star) conservata correttamente."
       ],
-      "body_html": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x49856--></p><p>Il futuro di Mike Santana in TNA è diventato un po' più nitido, ma la sua prossima mossa resta ancora tutta da definire, dato che il suo contratto è in scadenza a breve.</p><p>Secondo quanto riportato da PWInsider il primo giugno 2026, l'attuale TNA World Champion è legato alla compagnia da un accordo che terminerà nel corso del mese di luglio. Il report ha inoltre sottolineato che la WWE ha mostrato interesse per Santana in passato.</p><p>Queste informazioni forniscono una cronologia più chiara sulla situazione contrattuale di Santana, dopo le precedenti indiscrezioni che davano l'accordo in scadenza entro l'estate. Con il mese di luglio ormai indicato, la prossima mossa di Santana potrebbe trasformarsi molto presto in una delle notizie principali del mondo del wrestling.</p><p>Santana è stato uno dei nomi di punta della TNA sin dal suo ritorno nel 2024, e il suo attuale regno come TNA World Champion rende le tempistiche ancora più interessanti. Se dovesse arrivare alla scadenza del contratto senza averne firmato uno nuovo, potrebbe avere diverse opzioni in tutto il panorama del wrestling.</p><p>Anche l'interesse della WWE assume un ruolo importante, specialmente considerando che Santana si sta già imponendo come una star da main event in TNA. Un passaggio in WWE rappresenterebbe un cambiamento significativo, ma restare in TNA gli permetterebbe di continuare a guidare la federazione in un momento in cui le sue quotazioni sono molto alte.</p><p>Per il momento, Santana rimane il campione mondiale della TNA, ma il mese di luglio non è lontano. Indipendentemente dal fatto che decida di restare o di esplorare una nuova opportunità, la sua situazione contrattuale è ora una delle storie più rilevanti da seguire per questa estate.</p>",
+      "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x51578--><p>Il futuro di Mike Santana in TNA è diventato un po' più nitido, ma la sua prossima mossa resta ancora incerta, dato che il suo contratto è in scadenza a brevissimo.</p><p>Secondo quanto riportato da PWInsider il 1° giugno 2026, l'attuale contratto dell'attuale TNA World Champion con la compagnia scadrà nel corso del mese di luglio. Il report sottolinea inoltre come la WWE abbia mostrato interesse per Santana in passato.</p><p>Queste informazioni forniscono una tempistica più precisa sulla situazione contrattuale di Santana, dopo le prime indiscrezioni che davano il suo accordo con la TNA in scadenza nel corso dell'estate. Con il mese di luglio ormai indicato come termine, la prossima mossa di Santana potrebbe diventare un argomento di grande rilievo molto presto.</p><p>Santana è stato uno dei nomi di punta della TNA dal suo ritorno nel 2024 e il suo attuale regno come TNA World Champion rende la tempistica ancora più interessante. Se dovesse giungere alla scadenza del contratto senza averne firmato uno nuovo, potrebbe avere diverse opzioni nel panorama del wrestling mondiale.</p><p>Anche l'interesse della WWE rappresenta un fattore importante, specialmente considerando che Santana si sta già imponendo come una star da main event in TNA. Un passaggio alla WWE segnerebbe un cambiamento significativo, ma rimanere in TNA potrebbe consentirgli di continuare a guidare la federazione in un momento in cui le sue quotazioni sono molto alte.</p><p>Per ora, Santana rimane il TNA World Champion, ma il mese di luglio non è lontano. Che decida di restare o di esplorare una nuova opportunità, la sua situazione contrattuale è ora una delle storie più importanti da seguire quest'estate.</p>",
       "category_hint": "TNA",
       "clean_element_count": 7,
-      "created_at": "2026-06-01T19:03:14.976927+00:00",
+      "created_at": "2026-06-01T20:54:15.717308+00:00",
       "diagnostic_stage": "ready_for_alfred",
       "element_counts": {
         "embed": 0,
         "heading": 0,
         "image": 1,
         "quote": 0,
+        "table": 0,
         "text": 6
       },
       "elements": [
         {
           "alt": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest",
           "type": "image",
-          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x49856"
+          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x51578"
         },
         {
           "text": "Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon.",
@@ -361,19 +830,21 @@
           "type": "text"
         }
       ],
-      "excerpt_it": "Il contratto di Mike Santana con la TNA scadrà nel mese di luglio. Emergono nuovi dettagli sulla situazione dell'attuale campione mondiale e sul concreto interesse da parte della WWE.",
+      "excerpt_it": "Il futuro di Mike Santana in TNA è sempre più al centro dell'attenzione: il contratto del campione è in scadenza a luglio e l'interesse della WWE resta un fattore chiave.",
       "extraction_diagnostics": {
         "candidate_node_count": 40,
         "clean_element_count": 7,
         "dom_noise_reduction_enabled": false,
+        "quote_count": 0,
         "raw_element_count": 8,
         "removed_by_node_count": 13,
         "removed_by_sanitize_count": 1,
         "root_name": "article",
-        "root_text_chars": 2269,
-        "stage": "complete"
+        "root_text_chars": 2297,
+        "stage": "complete",
+        "table_count": 0
       },
-      "fetched_html_chars": 471907,
+      "fetched_html_chars": 475781,
       "menzo_score": 78,
       "meta": {
         "description": "Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon. According to",
@@ -385,7 +856,7 @@
         {
           "alt": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest",
           "type": "image",
-          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x49856"
+          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x51578"
         },
         {
           "text": "Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon.",
@@ -412,7 +883,7 @@
           "type": "text"
         },
         {
-          "text": "Spotlight WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 1, 2026",
+          "text": "Spotlight WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup",
           "type": "text"
         }
       ],
@@ -426,18 +897,18 @@
           "text_preview": "Spotlight"
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196255 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-brock-lesnar tag-oba-femi tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2196416 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-paul-heyman tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
           "node_index": 29,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
+          "text_preview": "WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 30,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
+          "text_preview": "Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -447,18 +918,18 @@
           "text_preview": ""
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196202 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2196368 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-iyo-sky tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
           "node_index": 32,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup"
+          "text_preview": "WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 33,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "WWE Makes Major Changes to King of the Ring Tournament Lineup"
+          "text_preview": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -468,18 +939,18 @@
           "text_preview": ""
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196207 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-jacob-fatu tag-roman-reigns tag-wwe-featured   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2196255 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-brock-lesnar tag-oba-femi tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
           "node_index": 35,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
+          "text_preview": "WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 36,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
+          "text_preview": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -489,18 +960,18 @@
           "text_preview": ""
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196098 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-raw-results category-wwe-results tag-wwe-featured   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2196202 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
           "node_index": 38,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 1, 2026"
+          "text_preview": "WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 39,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "WWE RAW Results, Highlights and Key Moments for June 1, 2026"
+          "text_preview": "WWE Makes Major Changes to King of the Ring Tournament Lineup"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -512,7 +983,7 @@
         {
           "index": 8,
           "item": {
-            "text": "Spotlight WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 1, 2026",
+            "text": "Spotlight WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup",
             "type": "text"
           },
           "reason": "footer_start"
@@ -527,261 +998,12 @@
         "gemini-3.1-flash-lite"
       ],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest/\nTitolo feed: Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest\nTitolo pagina: Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest\nDescrizione: Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon. According to\nCategoria suggerita: TNA\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x49856 ALT=Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest\n[2|text] Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon.\n[3|text] According to PWInsider on June 1, 2026, the reigning TNA World Champion’s current contract with the company runs through sometime in July. The report also noted that WWE has shown interest in Santana in the past.\n[4|text] This gives a clearer timeline for Santana’s contract situation after earlier word that his TNA deal was set to expire this summer . With July now mentioned, Santana’s next move could become a major story very soon.\n[5|text] Santana has been one of TNA’s top names since returning in 2024 , and his current run as TNA World Champion makes the timing even more interesting. If he reaches the end of his deal without signing a new one, he could have options across the wrestling world.\n[6|text] The WWE interest is also important, especially with Santana already carrying himself like a main-event star in TNA. A move to WWE would be a major change, but staying with TNA could also allow him to continue leading the promotion at a time when his stock is high.\n[7|text] For now, Santana remains TNA World Champion, but July is not far away. Whether he stays put or explores a new opportunity, his contract status is now one of the bigger stories to watch this summer.\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"Aggiornamenti sul contratto di Mike Santana in TNA tra l'interesse della WWE\",\n  \"body_html\": \"<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x49856--></p><p>Il futuro di Mike Santana in TNA è diventato un po' più nitido, ma la sua prossima mossa resta ancora tutta da definire, dato che il suo contratto è in scadenza a breve.</p><p>Secondo quanto riportato da PWInsider il primo giugno 2026, l'attuale TNA World Champion è legato alla compagnia da un accordo che terminerà nel corso del mese di luglio. Il report ha inoltre sottolineato che la WWE ha mostrato interesse per Santana in passato.</p><p>Queste informazioni forniscono una cronologia più chiara sulla situazione contrattuale di Santana, dopo le precedenti indiscrezioni che davano l'accordo in scadenza entro l'estate. Con il mese di luglio ormai indicato, la prossima mossa di Santana potrebbe trasformarsi molto presto in una delle notizie principali del mondo del wrestling.</p><p>Santana è stato uno dei nomi di punta della TNA sin dal suo ritorno nel 2024, e il suo attuale regno come TNA World Champion rende le tempistiche ancora più interessanti. Se dovesse arrivare alla scadenza del contratto senza averne firmato uno nuovo, potrebbe avere diverse opzioni in tutto il panorama del wrestling.</p><p>Anche l'interesse della WWE assume un ruolo importante, specialmente considerando che Santana si sta già imponendo come una star da main event in TNA. Un passaggio in WWE rappresenterebbe un cambiamento significativo, ma restare in TNA gli permetterebbe di continuare a guidare la federazione in un momento in cui le sue quotazioni sono molto alte.</p><p>Per il momento, Santana rimane il campione mondiale della TNA, ma il mese di luglio non è lontano. Indipendentemente dal fatto che decida di restare o di esplorare una nuova opportunità, la sua situazione contrattuale è ora una delle storie più rilevanti da seguire per questa estate.</p>\",\n  \"excerpt_it\": \"Il contratto di Mike Santana con la TNA scadrà nel mese di luglio. Emergono nuovi dettagli sulla situazione dell'attuale campione mondiale e sul concreto interesse da parte della WWE.\",\n  \"notes\": [\n    \"Traduzione effettuata mantenendo lo stile giornalistico della pipeline v92.\",\n    \"Terminologia tecnica (TNA World Champion, main event, star) gestita in coerenza con la lingua italiana di settore.\",\n    \"Nessuna informazione aggiunta o modificata rispetto al testo sorgente.\"\n  ]\n}",
-      "translation_used": true
-    },
-    {
-      "bob_notes": [
-        "Traduzione fedele mantenendo le citazioni integrali come richiesto.",
-        "Terminologia tecnica di wrestling (booking, title shot, torneo, match di qualificazione) utilizzata nel contesto corretto.",
-        "Mantenuta la struttura originale dell'articolo, inclusi i riferimenti al post-show di Clash in Italy."
-      ],
-      "body_html": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/jonathan-coachman-blasts-wwe-creative-for-booking-liv-morgan-in-queen-of-the-ring-tournament-06.jpg.avif?x49856--></p><p>Jonathan Coachman ha messo in dubbio la logica della WWE dopo l'inserimento di Liv Morgan nel torneo Queen of the Ring 2026, nonostante la wrestler detenga attualmente il Women's World Championship.</p><p>Coachman ha espresso il suo parere su Twitter, sollevando una perplessità piuttosto lineare: la vincitrice del torneo Queen of the Ring ottiene di diritto un title shot a SummerSlam, ma essendo la Morgan già la campionessa mondiale, la situazione risulta contraddittoria. Coachman ha sottolineato come questo sia proprio il tipo di dettaglio a cui i fan di wrestling prestano immediatamente attenzione.</p><p>“QUESTO 👇🏾👇🏾👇🏾 è esattamente ciò di cui parlano i fan di wrestling quando si tratta di attenzione ai dettagli. A meno che io non mi stia perdendo qualcosa o non abbia capito male. La vincitrice del torneo King and Queen of the Ring ottiene una title shot mondiale a SummerSlam. Quindi, Liv Morgan è in un match di qualificazione ed è la campionessa femminile. Fatemi capire il senso”, ha dichiarato Coachman.</p><p>Coachman ha poi suggerito che l'unico modo per la WWE di giustificare tale scelta sarebbe attraverso un segmento in cui la Morgan chiarisca di essere entrata nel torneo per impedire a chiunque altra di ottenere un'opportunità titolata.</p><p>“L'UNICO modo per provare a coprire il vostro errore è fare un pre-tape con Liv e chiederle perché sia nel torneo, e lei che risponde: 'Ho intenzione di bloccare la title shot prima ancora che accada. Per la prima volta, la campionessa femminile vince il Queen of the Ring e io mi rilasserò nella mia suite VIP a SummerSlam'. Altrimenti, sappiamo già che non vincerà, il che non è il modo giusto di fare booking. 🤷🏾‍♂️”</p><p>In precedenza, durante il post-show di WWE Clash in Italy, la Morgan aveva spiegato le ragioni della sua partecipazione nonostante il titolo già in suo possesso. Ha affermato che tutte le atlete presenti nel tabellone erano già state sconfitte da lei e ha aggiunto che le critiche ricevute sul suo regno titolato l'hanno spinta a puntare anche al Queen of the Ring. Inoltre, la Morgan ha chiarito di voler conquistare tutto ciò che riguarda la divisione femminile della WWE.</p><p>“Tutte queste donne hanno avuto una serata incredibile, ma sapete cosa hanno tutte in comune? Sono state tutte battute da Liv Morgan. Quindi mi sono detta: ok, espandiamo il concetto. Mi ha fatto riflettere su tutte le persone che dicono che la Morgan non è una buona campionessa, che Liv Morgan non difende il titolo, che Liv Morgan non è degna di essere campionessa. Quindi sapete cosa mi ha fatto pensare? Mi ha fatto pensare che parteciperò al torneo Queen of the Ring perché voglio tutto. Voglio tutto quanto”, ha dichiarato la campionessa.</p><p>Il tabellone del Queen of the Ring 2026 prevede che la Morgan affronti Becky Lynch e altre avversarie nel primo round, con le finali in programma per WWE Night of Champions il 27 giugno a Riyadh, in Arabia Saudita. Poiché la vincitrice dovrebbe ottenere una title shot a SummerSlam, l'inserimento della Morgan crea, secondo Coachman, un problema di booking.</p><p>Sebbene Liv Morgan possa avere le sue ragioni per partecipare al torneo, le critiche di Coachman sollevano un interrogativo più ampio su come la WWE intenda gestire la posta in gioco se a competere è la campionessa in carica. I fan restano in attesa di vedere se la compagnia affronterà direttamente la questione o se lascerà semplicemente che il torneo faccia il suo corso.</p>",
-      "category_hint": "WWE",
-      "clean_element_count": 10,
-      "created_at": "2026-06-01T19:03:17.597898+00:00",
-      "diagnostic_stage": "ready_for_alfred",
-      "element_counts": {
-        "embed": 0,
-        "heading": 0,
-        "image": 1,
-        "quote": 3,
-        "text": 6
-      },
-      "elements": [
-        {
-          "alt": "Jonathan Coachman Blasts WWE Creative for Booking Liv Morgan in Queen of the Ring Tournament",
-          "type": "image",
-          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/jonathan-coachman-blasts-wwe-creative-for-booking-liv-morgan-in-queen-of-the-ring-tournament-06.jpg.avif?x49856"
-        },
-        {
-          "text": "Jonathan Coachman is questioning WWE’s logic after Liv Morgan was placed in the 2026 Queen of the Ring tournament while already holding the Women’s World Championship.",
-          "type": "text"
-        },
-        {
-          "text": "Coachman took to Twitter and reacted to Morgan being part of the bracket. His issue was simple: the Queen of the Ring winner is set to earn a world title shot at SummerSlam, but Morgan is already the Women’s World Champion. Coachman said this is the kind of detail wrestling fans notice right away.",
-          "type": "text"
-        },
-        {
-          "text": "“THIS 👇🏾👇🏾👇🏾 is exactly what wrestling fans are talking about when it comes to attention to detail. Unless I am completing missing something or didn’t hear correctly. The winner of the king and Queen of the Ring tournament wins a world title shot at Summerslam. So Liv Morgan is in a qualifying match and she is the women’s champion. Make it make sense.”",
-          "type": "quote",
-          "url": ""
-        },
-        {
-          "text": "Coachman then suggested the only way WWE could explain the situation would be through a segment where Morgan says she entered the tournament to block anyone else from getting a title shot.",
-          "type": "text"
-        },
-        {
-          "text": "“The ONLY way you can even try to cover your mistake is doing a pretape with Liv and ask her why she is in it and she says ‘I am going to shut down the title shot before it even happens. For the first time the womens champion wins Queen of the ring and I will kick back and chill in my vip suite at Summerslam’. Otherwise we know she isn’t winning which is not how your book. 🤷🏾‍♂️”",
-          "type": "quote",
-          "url": ""
-        },
-        {
-          "text": "Morgan previously explained during the WWE Clash in Italy post-show why she entered the tournament despite already being champion. She said every woman in the field had already been beaten by her and claimed criticism of her title reign pushed her to chase Queen of the Ring as well. Morgan also made it clear that she wants everything in WWE’s women’s division .",
-          "type": "text"
-        },
-        {
-          "text": "“All these women had an incredible night—but you know what they all have in common? They’ve all been beaten by Liv Morgan. So I was like, okay, let me expand upon this. It had me thinking about all the people who say Morgan isn’t a good champion—Liv Morgan doesn’t defend her title, Liv Morgan isn’t worthy of being champion. So you know what that made me think? That made me think I am entering the Queen of the Ring tournament because I want it all. I want it all.”",
-          "type": "quote",
-          "url": ""
-        },
-        {
-          "text": "The 2026 Queen of the Ring bracket has Morgan facing Becky Lynch and others in the opening round, with the finals scheduled for WWE Night of Champions on June 27 in Riyadh, Saudi Arabia. The winner is expected to earn a SummerSlam title shot, which is exactly why Coachman believes Morgan’s inclusion creates a booking problem.",
-          "type": "text"
-        },
-        {
-          "text": "Liv Morgan may have her own reason for entering Queen of the Ring, but Coachman’s criticism points to a bigger question about how WWE plans to explain the stakes if the champion is in the field. Now, fans will be watching to see whether WWE addresses it directly or simply lets the tournament play out.",
-          "type": "text"
-        }
-      ],
-      "excerpt_it": "Jonathan Coachman critica duramente la WWE per aver inserito la campionessa Liv Morgan nel tabellone del Queen of the Ring, evidenziando le incongruenze nel booking.",
-      "extraction_diagnostics": {
-        "candidate_node_count": 46,
-        "clean_element_count": 10,
-        "dom_noise_reduction_enabled": false,
-        "raw_element_count": 11,
-        "removed_by_node_count": 13,
-        "removed_by_sanitize_count": 1,
-        "root_name": "article",
-        "root_text_chars": 3871,
-        "stage": "complete"
-      },
-      "fetched_html_chars": 482207,
-      "menzo_score": 76,
-      "meta": {
-        "description": "Jonathan Coachman is questioning WWE’s logic after Liv Morgan was placed in the 2026 Queen of the Ring tournament while already holding the Women’s World",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/jonathan-coachman-blasts-wwe-creative-for-booking-liv-morgan-in-queen-of-the-ring-tournament-06.jpg",
-        "source_title": "Jonathan Coachman Blasts WWE Creative for Booking Liv Morgan in Queen of the Ring Tournament"
-      },
-      "raw_element_count": 11,
-      "raw_elements_preview": [
-        {
-          "alt": "Jonathan Coachman Blasts WWE Creative for Booking Liv Morgan in Queen of the Ring Tournament",
-          "type": "image",
-          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/jonathan-coachman-blasts-wwe-creative-for-booking-liv-morgan-in-queen-of-the-ring-tournament-06.jpg.avif?x49856"
-        },
-        {
-          "text": "Jonathan Coachman is questioning WWE’s logic after Liv Morgan was placed in the 2026 Queen of the Ring tournament while already holding the Women’s World Championship.",
-          "type": "text"
-        },
-        {
-          "text": "Coachman took to Twitter and reacted to Morgan being part of the bracket. His issue was simple: the Queen of the Ring winner is set to earn a world title shot at SummerSlam, but Morgan is already the Women’s World Champion. Coachman said this is the kind of detail wrestling fans notice right away.",
-          "type": "text"
-        },
-        {
-          "text": "“THIS 👇🏾👇🏾👇🏾 is exactly what wrestling fans are talking about when it comes to attention to detail. Unless I am completing missing something or didn’t hear correctly. The winner of the king and Queen of the Ring tournament wins a world title shot at Summerslam. So Liv Morgan is in a qualifying match and she is the women’s champion. Make it make sense.”",
-          "type": "quote",
-          "url": ""
-        },
-        {
-          "text": "Coachman then suggested the only way WWE could explain the situation would be through a segment where Morgan says she entered the tournament to block anyone else from getting a title shot.",
-          "type": "text"
-        },
-        {
-          "text": "“The ONLY way you can even try to cover your mistake is doing a pretape with Liv and ask her why she is in it and she says ‘I am going to shut down the title shot before it even happens. For the first time the womens champion wins Queen of the ring and I will kick back and chill in my vip suite at Summerslam’. Otherwise we know she isn’t winning which is not how your book. 🤷🏾‍♂️”",
-          "type": "quote",
-          "url": ""
-        },
-        {
-          "text": "Morgan previously explained during the WWE Clash in Italy post-show why she entered the tournament despite already being champion. She said every woman in the field had already been beaten by her and claimed criticism of her title reign pushed her to chase Queen of the Ring as well. Morgan also made it clear that she wants everything in WWE’s women’s division .",
-          "type": "text"
-        },
-        {
-          "text": "“All these women had an incredible night—but you know what they all have in common? They’ve all been beaten by Liv Morgan. So I was like, okay, let me expand upon this. It had me thinking about all the people who say Morgan isn’t a good champion—Liv Morgan doesn’t defend her title, Liv Morgan isn’t worthy of being champion. So you know what that made me think? That made me think I am entering the Queen of the Ring tournament because I want it all. I want it all.”",
-          "type": "quote",
-          "url": ""
-        },
-        {
-          "text": "The 2026 Queen of the Ring bracket has Morgan facing Becky Lynch and others in the opening round, with the finals scheduled for WWE Night of Champions on June 27 in Riyadh, Saudi Arabia. The winner is expected to earn a SummerSlam title shot, which is exactly why Coachman believes Morgan’s inclusion creates a booking problem.",
-          "type": "text"
-        },
-        {
-          "text": "Liv Morgan may have her own reason for entering Queen of the Ring, but Coachman’s criticism points to a bigger question about how WWE plans to explain the stakes if the champion is in the field. Now, fans will be watching to see whether WWE addresses it directly or simply lets the tournament play out.",
-          "type": "text"
-        },
-        {
-          "text": "Spotlight WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 1, 2026",
-          "type": "text"
-        }
-      ],
-      "removed_before_gemini": 14,
-      "removed_elements_debug": [
-        {
-          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 34,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Spotlight"
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196255 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-brock-lesnar tag-oba-femi tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 35,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 36,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 37,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196202 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
-          "node_index": 38,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 39,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "WWE Makes Major Changes to King of the Ring Tournament Lineup"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 40,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196207 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-jacob-fatu tag-roman-reigns tag-wwe-featured   ",
-          "node_index": 41,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 42,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 43,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196098 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-raw-results category-wwe-results tag-wwe-featured   ",
-          "node_index": 44,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 1, 2026"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 45,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "WWE RAW Results, Highlights and Key Moments for June 1, 2026"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 46,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "index": 11,
-          "item": {
-            "text": "Spotlight WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 1, 2026",
-            "type": "text"
-          },
-          "reason": "footer_start"
-        }
-      ],
-      "source": "ringsidenews",
-      "source_title": "Jonathan Coachman Blasts WWE Creative for Booking Liv Morgan in Queen of the Ring Tournament",
-      "source_url": "https://www.ringsidenews.com/jonathan-coachman-blasts-wwe-creative-booking-liv-morgan-queen-ring-tournament/",
-      "status": "ready_for_alfred",
-      "title_it": "WWE, Jonathan Coachman critica il booking di Liv Morgan nel Queen of the Ring",
-      "translation_chain_attempted": [
-        "gemini-3.1-flash-lite"
-      ],
-      "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/jonathan-coachman-blasts-wwe-creative-booking-liv-morgan-queen-ring-tournament/\nTitolo feed: Jonathan Coachman Blasts WWE Creative for Booking Liv Morgan in Queen of the Ring Tournament\nTitolo pagina: Jonathan Coachman Blasts WWE Creative for Booking Liv Morgan in Queen of the Ring Tournament\nDescrizione: Jonathan Coachman is questioning WWE’s logic after Liv Morgan was placed in the 2026 Queen of the Ring tournament while already holding the Women’s World\nCategoria suggerita: WWE\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/jonathan-coachman-blasts-wwe-creative-for-booking-liv-morgan-in-queen-of-the-ring-tournament-06.jpg.avif?x49856 ALT=Jonathan Coachman Blasts WWE Creative for Booking Liv Morgan in Queen of the Ring Tournament\n[2|text] Jonathan Coachman is questioning WWE’s logic after Liv Morgan was placed in the 2026 Queen of the Ring tournament while already holding the Women’s World Championship.\n[3|text] Coachman took to Twitter and reacted to Morgan being part of the bracket. His issue was simple: the Queen of the Ring winner is set to earn a world title shot at SummerSlam, but Morgan is already the Women’s World Champion. Coachman said this is the kind of detail wrestling fans notice right away.\n[4|quote] “THIS 👇🏾👇🏾👇🏾 is exactly what wrestling fans are talking about when it comes to attention to detail. Unless I am completing missing something or didn’t hear correctly. The winner of the king and Queen of the Ring tournament wins a world title shot at Summerslam. So Liv Morgan is in a qualifying match and she is the women’s champion. Make it make sense.”\n[5|text] Coachman then suggested the only way WWE could explain the situation would be through a segment where Morgan says she entered the tournament to block anyone else from getting a title shot.\n[6|quote] “The ONLY way you can even try to cover your mistake is doing a pretape with Liv and ask her why she is in it and she says ‘I am going to shut down the title shot before it even happens. For the first time the womens champion wins Queen of the ring and I will kick back and chill in my vip suite at Summerslam’. Otherwise we know she isn’t winning which is not how your book. 🤷🏾‍♂️”\n[7|text] Morgan previously explained during the WWE Clash in Italy post-show why she entered the tournament despite already being champion. She said every woman in the field had already been beaten by her and claimed criticism of her title reign pushed her to chase Queen of the Ring as well. Morgan also made it clear that she wants everything in WWE’s women’s division .\n[8|quote] “All these women had an incredible night—but you know what they all have in common? They’ve all been beaten by Liv Morgan. So I was like, okay, let me expand upon this. It had me thinking about all the people who say Morgan isn’t a good champion—Liv Morgan doesn’t defend her title, Liv Morgan isn’t worthy of being champion. So you know what that made me think? That made me think I am entering the Queen of the Ring tournament because I want it all. I want it all.”\n[9|text] The 2026 Queen of the Ring bracket has Morgan facing Becky Lynch and others in the opening round, with the finals scheduled for WWE Night of Champions on June 27 in Riyadh, Saudi Arabia. The winner is expected to earn a SummerSlam title shot, which is exactly why Coachman believes Morgan’s inclusion creates a booking problem.\n[10|text] Liv Morgan may have her own reason for entering Queen of the Ring, but Coachman’s criticism points to a bigger question about how WWE plans to explain the stakes if the champion is in the field. Now, fans will be watching to see whether WWE addresses it directly or simply lets the tournament play out.\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"WWE, Jonathan Coachman critica il booking di Liv Morgan nel Queen of the Ring\",\n  \"body_html\": \"<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/jonathan-coachman-blasts-wwe-creative-for-booking-liv-morgan-in-queen-of-the-ring-tournament-06.jpg.avif?x49856--></p><p>Jonathan Coachman ha messo in dubbio la logica della WWE dopo l'inserimento di Liv Morgan nel torneo Queen of the Ring 2026, nonostante la wrestler detenga attualmente il Women's World Championship.</p><p>Coachman ha espresso il suo parere su Twitter, sollevando una perplessità piuttosto lineare: la vincitrice del torneo Queen of the Ring ottiene di diritto un title shot a SummerSlam, ma essendo la Morgan già la campionessa mondiale, la situazione risulta contraddittoria. Coachman ha sottolineato come questo sia proprio il tipo di dettaglio a cui i fan di wrestling prestano immediatamente attenzione.</p><p>“QUESTO 👇🏾👇🏾👇🏾 è esattamente ciò di cui parlano i fan di wrestling quando si tratta di attenzione ai dettagli. A meno che io non mi stia perdendo qualcosa o non abbia capito male. La vincitrice del torneo King and Queen of the Ring ottiene una title shot mondiale a SummerSlam. Quindi, Liv Morgan è in un match di qualificazione ed è la campionessa femminile. Fatemi capire il senso”, ha dichiarato Coachman.</p><p>Coachman ha poi suggerito che l'unico modo per la WWE di giustificare tale scelta sarebbe attraverso un segmento in cui la Morgan chiarisca di essere entrata nel torneo per impedire a chiunque altra di ottenere un'opportunità titolata.</p><p>“L'UNICO modo per provare a coprire il vostro errore è fare un pre-tape con Liv e chiederle perché sia nel torneo, e lei che risponde: 'Ho intenzione di bloccare la title shot prima ancora che accada. Per la prima volta, la campionessa femminile vince il Queen of the Ring e io mi rilasserò nella mia suite VIP a SummerSlam'. Altrimenti, sappiamo già che non vincerà, il che non è il modo giusto di fare booking. 🤷🏾‍♂️”</p><p>In precedenza, durante il post-show di WWE Clash in Italy, la Morgan aveva spiegato le ragioni della sua partecipazione nonostante il titolo già in suo possesso. Ha affermato che tutte le atlete presenti nel tabellone erano già state sconfitte da lei e ha aggiunto che le critiche ricevute sul suo regno titolato l'hanno spinta a puntare anche al Queen of the Ring. Inoltre, la Morgan ha chiarito di voler conquistare tutto ciò che riguarda la divisione femminile della WWE.</p><p>“Tutte queste donne hanno avuto una serata incredibile, ma sapete cosa hanno tutte in comune? Sono state tutte battute da Liv Morgan. Quindi mi sono detta: ok, espandiamo il concetto. Mi ha fatto riflettere su tutte le persone che dicono che la Morgan non è una buona campionessa, che Liv Morgan non difende il titolo, che Liv Morgan non è degna di essere campionessa. Quindi sapete cosa mi ha fatto pensare? Mi ha fatto pensare che parteciperò al torneo Queen of the Ring perché voglio tutto. Voglio tutto quanto”, ha dichiarato la campionessa.</p><p>Il tabellone del Queen of the Ring 2026 prevede che la Morgan affronti Becky Lynch e altre avversarie nel primo round, con le finali in programma per WWE Night of Champions il 27 giugno a Riyadh, in Arabia Saudita. Poiché la vincitrice dovrebbe ottenere una title shot a SummerSlam, l'inserimento della Morgan crea, secondo Coachman, un problema di booking.</p><p>Sebbene Liv Morgan possa avere le sue ragioni per partecipare al torneo, le critiche di Coachman sollevano un interrogativo più ampio su come la WWE intenda gestire la posta in gioco se a competere è la campionessa in carica. I fan restano in attesa di vedere se la compagnia affronterà direttamente la questione o se lascerà semplicemente che il torneo faccia il suo corso.</p>\",\n  \"excerpt_it\": \"Jonathan Coachman critica duramente la WWE per aver inserito la campionessa Liv Morgan nel tabellone del Queen of the Ring, evidenziando le incongruenze nel booking.\",\n  \"notes\": [\n    \"Traduzione fedele mantenendo le citazioni integrali come richiesto.\",\n    \"Terminologia tecnica di wrestling (booking, title shot, torneo, match di qualificazione) utilizzata nel contesto corretto.\",\n    \"Mantenuta la struttura originale dell'articolo, inclusi i riferimenti al post-show di Clash in Italy.\"\n  ]\n}",
+      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Gli elementi [quote] vanno pubblicati come <blockquote>...</blockquote>, non come semplici <p> con virgolette.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Gli elementi [table] sono tabelle: conservali nel corpo come <table class=\"owtv-data-table\"> con righe e celle HTML semplici. Non sostituirli con soli titoli o riassunti.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest/\nTitolo feed: Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest\nTitolo pagina: Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest\nDescrizione: Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon. According to\nCategoria suggerita: TNA\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x51578 ALT=Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest\n[2|text] Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon.\n[3|text] According to PWInsider on June 1, 2026, the reigning TNA World Champion’s current contract with the company runs through sometime in July. The report also noted that WWE has shown interest in Santana in the past.\n[4|text] This gives a clearer timeline for Santana’s contract situation after earlier word that his TNA deal was set to expire this summer . With July now mentioned, Santana’s next move could become a major story very soon.\n[5|text] Santana has been one of TNA’s top names since returning in 2024 , and his current run as TNA World Champion makes the timing even more interesting. If he reaches the end of his deal without signing a new one, he could have options across the wrestling world.\n[6|text] The WWE interest is also important, especially with Santana already carrying himself like a main-event star in TNA. A move to WWE would be a major change, but staying with TNA could also allow him to continue leading the promotion at a time when his stock is high.\n[7|text] For now, Santana remains TNA World Champion, but July is not far away. Whether he stays put or explores a new opportunity, his contract status is now one of the bigger stories to watch this summer.\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Aggiornamenti sul contratto di Mike Santana in TNA tra l'interesse della WWE\",\n  \"body_html\": \"<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x51578--><p>Il futuro di Mike Santana in TNA è diventato un po' più nitido, ma la sua prossima mossa resta ancora incerta, dato che il suo contratto è in scadenza a brevissimo.</p><p>Secondo quanto riportato da PWInsider il 1° giugno 2026, l'attuale contratto dell'attuale TNA World Champion con la compagnia scadrà nel corso del mese di luglio. Il report sottolinea inoltre come la WWE abbia mostrato interesse per Santana in passato.</p><p>Queste informazioni forniscono una tempistica più precisa sulla situazione contrattuale di Santana, dopo le prime indiscrezioni che davano il suo accordo con la TNA in scadenza nel corso dell'estate. Con il mese di luglio ormai indicato come termine, la prossima mossa di Santana potrebbe diventare un argomento di grande rilievo molto presto.</p><p>Santana è stato uno dei nomi di punta della TNA dal suo ritorno nel 2024 e il suo attuale regno come TNA World Champion rende la tempistica ancora più interessante. Se dovesse giungere alla scadenza del contratto senza averne firmato uno nuovo, potrebbe avere diverse opzioni nel panorama del wrestling mondiale.</p><p>Anche l'interesse della WWE rappresenta un fattore importante, specialmente considerando che Santana si sta già imponendo come una star da main event in TNA. Un passaggio alla WWE segnerebbe un cambiamento significativo, ma rimanere in TNA potrebbe consentirgli di continuare a guidare la federazione in un momento in cui le sue quotazioni sono molto alte.</p><p>Per ora, Santana rimane il TNA World Champion, ma il mese di luglio non è lontano. Che decida di restare o di esplorare una nuova opportunità, la sua situazione contrattuale è ora una delle storie più importanti da seguire quest'estate.</p>\",\n  \"excerpt_it\": \"Il futuro di Mike Santana in TNA è sempre più al centro dell'attenzione: il contratto del campione è in scadenza a luglio e l'interesse della WWE resta un fattore chiave.\",\n  \"notes\": [\n    \"Traduzione eseguita rispettando la linea editoriale v92.\",\n    \"Mantenuta la sequenza delle informazioni e lo stile giornalistico richiesto.\",\n    \"Terminologia tecnica di settore (TNA World Champion, main event, star) conservata correttamente.\"\n  ]\n}",
       "translation_used": true
     }
   ],
-  "generated_at": "2026-06-01T19:03:22.346169+00:00",
+  "generated_at": "2026-06-01T20:54:18.575098+00:00",
   "handoff": {
     "errors": 0,
     "extraction_empty": 0,
@@ -792,7 +1014,7 @@
     "menzo_version": "v93_2_menzo_editorial_director",
     "selected_count": 6
   },
-  "mode": "diagnostic_clean_element_article_package_writer",
+  "mode": "structured_quote_table_article_package_writer",
   "policy": {
     "clean_before_gemini": true,
     "diagnostic_mode": true,
@@ -813,10 +1035,13 @@
       "text",
       "heading",
       "quote",
+      "table",
       "image",
       "embed"
     ],
+    "preserve_quotes_as_blockquote": true,
+    "preserve_tables_as_html_tables": true,
     "prompt_family": "v92_historical_natural_full_translation"
   },
-  "version": "v93_4_2_bob_diagnostic_clean_elements"
+  "version": "v93_8_bob_structured_quotes_tables"
 }
