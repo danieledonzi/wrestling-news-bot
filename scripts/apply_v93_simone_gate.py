@@ -7,22 +7,17 @@ if "V93_SIMONE_GATE_ACTIVE = True" in text:
     print("[V93 SIMONE GATE] gia applicato")
     raise SystemExit(0)
 
-# Add state constants near report status files. Avoid duplicating NEWSROOM_STATE_DIR
-# when Menzo gate has already added it later in the file.
+# Add state constants near report status files. Define NEWSROOM_STATE_DIR here
+# regardless of whether another later patch will also need it.
 needle = 'REPORT_STATUS_FILE = STATE_DIR / "report_status.json"\n'
 if needle not in text:
     raise SystemExit("[V93 SIMONE GATE] REPORT_STATUS_FILE marker non trovato")
-add_constants = 'V93_SIMONE_REPORTS_FILE = NEWSROOM_STATE_DIR / "simone_reports_latest.json"\nV93_SIMONE_GATE_ACTIVE = True\n'
-if 'NEWSROOM_STATE_DIR = STATE_DIR / "newsroom"' in text:
-    text = text.replace(needle, needle + add_constants, 1)
-else:
-    text = text.replace(
-        needle,
-        needle
-        + 'NEWSROOM_STATE_DIR = STATE_DIR / "newsroom"\n'
-        + add_constants,
-        1,
-    )
+constants = (
+    'NEWSROOM_STATE_DIR = STATE_DIR / "newsroom"\n'
+    'V93_SIMONE_REPORTS_FILE = NEWSROOM_STATE_DIR / "simone_reports_latest.json"\n'
+    'V93_SIMONE_GATE_ACTIVE = True\n'
+)
+text = text.replace(needle, needle + constants, 1)
 
 # Add helpers before run_report_pipeline.
 insert_before = '\n\ndef run_report_pipeline(wp_ok: bool, now: datetime) -> int:\n'
