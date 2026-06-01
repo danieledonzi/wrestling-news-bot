@@ -3,29 +3,7 @@
   "approved_articles": [
     {
       "bob_translation_model": "gemini-3.1-flash-lite",
-      "body_html": "<p>Lo scorso sabato si è tenuto lo show di punta della AAA, <em>Noche de Los Grandes</em>, che ha visto come piatto forte l'attesissimo match Mask vs. Mask tra OG El Grande Americano ed El Grande Americano. All'evento hanno preso parte anche talenti provenienti dalla WWE come Rey Fénix e Bayley. Prima dello show dal vivo, si sono tenute delle registrazioni televisive durante le quali Octagon Jr. ha riportato un infortunio: il lottatore è stato colpito da una swinging DDT che gli ha causato un trauma al collo. Sui social media sono emersi dei video che mostrano il momento in cui Octagon Jr. è stato trasportato via dal ring in barella.</p><p>Un aggiornamento sulle sue condizioni è arrivato tramite il <em>Wrestling Observer Radio</em>. Dave Meltzer ha riferito che Octagon Jr. dovrà rimanere lontano dal ring per diversi mesi. Bryan Alvarez ha aggiunto che il lottatore è stato sottoposto a una risonanza magnetica durante il fine settimana, dalla quale è emerso che \"le condizioni sono buone, ma resterà fuori dai giochi probabilmente per diversi mesi\". Alvarez ha inoltre sottolineato che l'infortunio avrebbe potuto avere conseguenze ben peggiori.</p><p>Nel giugno 2025, Octagon Jr. ha affrontato \"Dirty Dom\" Mysterio per il titolo Intercontinentale a Money in the Bank, in seguito a un incidente avvenuto durante l'evento <em>Worlds Collide</em> tenutosi nella stessa giornata. Ha inoltre gareggiato a <em>Worlds Collide</em> nel settembre 2025, dove, facendo squadra con Laredo Kid, La Parka e Mascarita Sagrada, ha ottenuto una vittoria contro il team composto da LWO, Lince Dorado e Mini Abismo Negro.</p>",
-      "category_hint": "World",
-      "element_counts": {
-        "embed": 0,
-        "heading": 0,
-        "image": 0,
-        "quote": 0,
-        "text": 3
-      },
-      "excerpt_it": "Brutto infortunio per Octagon Jr. durante i tapings della AAA: il lottatore dovrà restare fuori per diversi mesi a causa di un problema al collo rimediato su una mossa subita.",
-      "meta": {
-        "description": "Wrestling Observer provided an update on AAA's Octagon Jr. after an injury on Saturday night.",
-        "featured_image": "https://www.wrestlinginc.com/img/gallery/aaa-star-octagon-reportedly-suffers-injury-at-tv-taping-during-noche-de-los-grandes/l-intro-1780328260.jpg",
-        "source_title": "AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes - Wrestling Inc."
-      },
-      "source": "wrestlinginc",
-      "source_title": "AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes",
-      "source_url": "https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes/",
-      "title_it": "Infortunio per Octagon Jr. durante i tapings di AAA Noche de Los Grandes"
-    },
-    {
-      "bob_translation_model": "gemini-3.1-flash-lite",
-      "body_html": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x16316--></p><p>Nikkita Lyons ha colpito favorevolmente i vertici della WWE, ma questo non significa che un approdo a Monday Night RAW sia imminente. Secondo quanto riportato da <em>False Finish</em>, i funzionari della compagnia sono soddisfatti del lavoro svolto dalla wrestler dopo il suo rientro dall'infortunio. Tuttavia, nonostante le precedenti indiscrezioni su una possibile promozione nel main roster durante l'estate, tale scenario al momento appare improbabile.</p><p>“False Finish ha appreso che i vertici della WWE sono rimasti molto colpiti dal lavoro di Nikkita Lyons dal suo ritorno dall'infortunio. Sebbene ci siano state notizie riguardo a una potenziale promozione a WWE RAW in estate, non sembra probabile in questo momento. Lyons dovrebbe continuare a lavorare per EVOLVE e NXT nel prossimo futuro”, si legge nel report.</p><p>Queste informazioni arrivano dopo che <em>Rope Break</em> aveva precedentemente riferito che il nome di Lyons era stato accostato a una possibile chiamata nel main roster, con RAW indicato come potenziale destinazione in caso di promozione estiva.</p><p>Per ora, la WWE sembra intenzionata a mantenere Lyons tra EVOLVE e NXT, permettendole di ritrovare ritmo dopo i numerosi infortuni al ginocchio. Anche se non si tratta della rapida ascesa che alcuni fan si aspettavano, la scelta dimostra che la compagnia sta seguendo con attenzione il suo percorso di recupero.</p><p>Lyons è stata molto schietta riguardo al suo \"reset\". Il 29 aprile 2026 ha risposto per le rime ai critici che continuavano a chiedere il ritorno della “vecchia” Nikkita Lyons, chiarendo di considerarsi ormai guarita e pronta ad andare avanti:</p><p>“i MiSs ThE oLd nIkKiTa LyOnS” 😂 tipo… vi lamentavate anche allora 🙄 non che debba dare spiegazioni, ma quella era la nikkita post infortunio con un ragazzo di m✨rda all'epoca lmao ma non siamo nemmeno più in quella linea temporale, SIAMO GUARITI 🍃 STATE AL PASSO #NikkitaMultiMedia #DivineFeline lioness pre-wwe mind you👇🦁 BEEN THE LYONESS BABE 🎶🔮🍃”</p><p>Il tweet ha offerto ai fan uno sguardo sul percorso di rinnovamento, sia fisico che personale, che Lyons sta affrontando. Con i vertici della WWE che si dicono impressionati, la wrestler sembra trovarsi in una posizione migliore rispetto ai periodi segnati dai continui stop per infortunio. Ciononostante, l'ultima parola rimane chiara: una promozione a RAW non è prevista al momento. Lyons potrebbe ottenere la sua occasione nel main roster in futuro, ma per ora la WWE è concentrata sul permetterle di ricostruirsi attraverso il lavoro in EVOLVE e NXT.</p>",
+      "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x49856-->\n<p>Nikkita Lyons potrebbe aver fatto una buona impressione sui dirigenti della WWE, ma questo non significa che il suo approdo a Monday Night RAW sia imminente.</p><p>Secondo quanto riportato da <em>False Finish</em>, i vertici della WWE sono rimasti soddisfatti del lavoro svolto dalla lottatrice dal suo rientro dall'infortunio. Tuttavia, nonostante le precedenti indiscrezioni su una possibile promozione nel main roster durante l'estate, tale scenario al momento appare improbabile.</p><p>“False Finish ha appreso che i dirigenti WWE sono rimasti molto colpiti dal lavoro di Nikkita Lyons dal suo ritorno dall'infortunio. Sebbene circolassero voci su una potenziale chiamata a WWE RAW in estate, al momento non sembra probabile. Si prevede che Lyons continuerà a lavorare per EVOLVE e NXT per il prossimo futuro”, si legge nel report.</p><p>Queste informazioni seguono quanto riportato in precedenza da <em>Rope Break</em>, che aveva indicato la Lyons come possibile nome per un salto di categoria, con RAW individuato come potenziale destinazione in caso di promozione estiva.</p><p>Per il momento, la WWE sembra intenzionata a mantenere la Lyons tra EVOLVE e NXT, permettendole di ricostruire il proprio slancio dopo i ripetuti infortuni al ginocchio. Potrebbe non trattarsi della rapida ascesa auspicata da alcuni fan, ma conferma comunque che la compagnia sta monitorando con attenzione il suo percorso di recupero.</p><p>Lyons è stata anche molto esplicita riguardo alla sua fase di rinnovamento. Lo scorso 29 aprile 2026, ha risposto per le rime ai critici che chiedevano a gran voce il ritorno della “vecchia” Nikkita Lyons, chiarendo di considerarsi ormai guarita e pronta a guardare avanti:</p><p>“‘Mi manchi la vecchia Nikkita Lyons’ 😂 tipo... vi lamentavate anche allora 🙄 non che debba dare spiegazioni, ma quella era la Nikkita post-infortunio con un fidanzato di m***a all'epoca, ma non siamo più in quella timeline, SIAMO GUARITI 🍃 STATE AL PASSO #NikkitaMultiMedia #DivineFeline lioness pre-wwe tra l'altro👇🦁 SONO SEMPRE STATA LA LIONESS TESORO 🎶🔮🍃”</p><p>Il tweet ha offerto ai fan uno scorcio sul percorso di rinascita fisica e personale che la lottatrice sta affrontando. Ora, con il gradimento espresso dai piani alti della WWE, la sua posizione appare decisamente più solida rispetto al periodo segnato dai recenti stop forzati.</p><p>Resta il fatto che, stando agli ultimi aggiornamenti, una promozione a RAW non è prevista nel breve periodo. Lyons potrebbe senz'altro ottenere la sua chance nel main roster in futuro, ma per ora la WWE sembra concentrata sul permetterle di proseguire il suo processo di crescita costante attraverso gli show di EVOLVE e NXT.</p>",
       "category_hint": "NXT",
       "element_counts": {
         "embed": 0,
@@ -34,7 +12,7 @@
         "quote": 2,
         "text": 7
       },
-      "excerpt_it": "Nonostante l'apprezzamento dei vertici WWE, il debutto di Nikkita Lyons nel main roster non sembra imminente: ecco cosa attende la stella di NXT.",
+      "excerpt_it": "Nikkita Lyons ha colpito i vertici della WWE, ma nonostante le voci di una promozione nel main roster, il suo futuro immediato rimane legato a NXT ed EVOLVE.",
       "meta": {
         "description": "Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet. False Finish reports that WWE",
         "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg",
@@ -43,37 +21,37 @@
       "source": "ringsidenews",
       "source_title": "NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors",
       "source_url": "https://www.ringsidenews.com/nxt-stars-future-revealed-amid-wwe-main-roster-call-rumors/",
-      "title_it": "NXT: il futuro di Nikkita Lyons tra i rumor sul main roster"
+      "title_it": "Nikkita Lyons: il punto sul futuro della stella di NXT"
     },
     {
       "bob_translation_model": "gemini-3.1-flash-lite",
-      "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg.avif?x16316-->\n<p>Octagón Jr. ha ricevuto un importante aggiornamento medico in seguito al brutto infortunio al collo subito durante l'evento AAA Noche de los Grandes e, fortunatamente, le cose sarebbero potute andare decisamente peggio.</p><p>Secondo quanto riportato da Bryan Alvarez di <em>Wrestling Observer</em>, la risonanza magnetica a cui si è sottoposto Octagón Jr. ha dato esito positivo dopo l'incidente avvenuto nel corso della seconda serata delle registrazioni di Noche de los Grandes. Nonostante sia previsto uno stop, la situazione ha apparentemente evitato un epilogo ben più grave.</p><p>\"Probabilmente starà fuori per diversi mesi, ma poteva andare molto peggio\".</p><p>L'infortunio si è verificato durante un Fatal 5-Way match registrato per l'edizione del 6 giugno di Noche de los Grandes, che vedeva contrapposti Octagón Jr., Cruz Del Toro, Joaquin Wilde, Lince Dorado e Mini Vikingo. Octagón Jr. è atterrato in malo modo dopo aver subìto una DDT dal punto più alto della corda più alta per mano di Joaquin Wilde. Il wrestler è rimasto a terra mentre il match proseguiva, e la situazione è diventata rapidamente seria quando l'arbitro ha richiesto l'intervento dello staff medico tramite il classico segnale della X.</p><p>Gli addetti ai lavori hanno quindi trasportato Octagón Jr. fuori dal ring in barella, immobilizzandogli il collo, il che ha sollevato immediatamente timori sulla gravità dell'infortunio. All'epoca, non c'erano notizie ufficiali riguardo a possibili danni strutturali o se l'immobilizzazione fosse stata puramente precauzionale. L'aggiornamento di Alvarez offre ora un quadro più ottimistico, nonostante l'atleta debba comunque affrontare diversi mesi di stop.</p><p>Octagón Jr. è stato uno dei nomi più affidabili della AAA e ha continuato a essere una presenza costante anche in seguito all'acquisizione della promotion da parte della WWE. Qualsiasi assenza prolungata rappresenterà un duro colpo, ma l'esito positivo della risonanza magnetica è un enorme sollievo dopo la dinamica preoccupante vista a Monterrey. Per ora, sembra che Octagón Jr. abbia evitato lo scenario peggiore. Il percorso di rientro richiederà tempo, ma gli ultimi aggiornamenti permettono ai fan di tirare un sospiro di sollievo.</p>",
-      "category_hint": "World",
+      "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x49856-->\n<p>Il futuro di Mike Santana in TNA è diventato un po' più chiaro, ma la sua prossima mossa resta un punto interrogativo, dato che il suo contratto è in scadenza a brevissimo termine.</p>\n<p>Secondo quanto riportato da PWInsider in data 1 giugno 2026, l'attuale accordo che lega il campione del mondo TNA alla federazione scadrà nel corso del mese di luglio. Il report sottolinea inoltre come la WWE abbia già mostrato interesse per Santana in passato.</p>\n<p>Queste informazioni forniscono una tempistica più precisa sulla situazione contrattuale del wrestler, dopo le indiscrezioni iniziali che parlavano di una scadenza fissata per quest'estate. Con il mese di luglio ormai indicato come termine ultimo, la prossima mossa di Santana potrebbe diventare un tema centrale del panorama del wrestling molto presto.</p>\n<p>Santana è stato uno dei nomi di punta della TNA sin dal suo ritorno avvenuto nel 2024, e il suo attuale regno come TNA World Champion rende le tempistiche della scadenza ancora più interessanti. Qualora dovesse arrivare alla naturale conclusione dell'accordo senza averne firmato uno nuovo, il lottatore avrebbe diverse opzioni a sua disposizione nel mondo del wrestling.</p>\n<p>L'interesse da parte della WWE resta un fattore significativo, specialmente considerando che Santana si sta già imponendo come una star da main event in TNA. Un passaggio alla WWE rappresenterebbe un cambiamento importante, ma restare in TNA gli permetterebbe di continuare a guidare la federazione in un momento in cui le sue quotazioni sono in forte ascesa.</p>\n<p>Per il momento, Santana rimane il campione del mondo TNA, ma il mese di luglio non è lontano. Che decida di restare o di esplorare una nuova opportunità, la sua situazione contrattuale è ora una delle storie più rilevanti da seguire nel corso di questa estate.</p>",
+      "category_hint": "TNA",
       "element_counts": {
         "embed": 0,
         "heading": 0,
         "image": 1,
-        "quote": 1,
-        "text": 5
+        "quote": 0,
+        "text": 6
       },
-      "excerpt_it": "Arrivano aggiornamenti medici sulle condizioni di Octagón Jr. dopo il grave infortunio al collo subìto durante le registrazioni di AAA Noche de los Grandes.",
+      "excerpt_it": "Il contratto di Mike Santana con la TNA scadrà nel mese di luglio: si fanno sempre più insistenti le voci su un possibile interesse da parte della WWE per l'attuale campione del mondo.",
       "meta": {
-        "description": "Octagón Jr. has received an important medical update after his frightening neck injury at AAA Noche de los Grandes, and thankfully, things could have been",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg",
-        "source_title": "Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping"
+        "description": "Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon. According to",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg",
+        "source_title": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest"
       },
       "source": "ringsidenews",
-      "source_title": "Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping",
-      "source_url": "https://www.ringsidenews.com/octagon-jrs-recovery-timeline-revealed-injury-aaa-noche-de-los-grandes-taping/",
-      "title_it": "Octagón Jr.: rivelati i tempi di recupero dopo l'infortunio a AAA Noche de los Grandes"
+      "source_title": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest",
+      "source_url": "https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest/",
+      "title_it": "Mike Santana: aggiornamenti sul contratto con TNA tra i rumors di interesse della WWE"
     }
   ],
-  "generated_at": "2026-06-01T16:46:46.378130+00:00",
+  "generated_at": "2026-06-01T18:50:50.275712+00:00",
   "handoff": {
-    "approved": 3,
-    "blockers": 0,
+    "approved": 2,
+    "blockers": 1,
     "editorial_changes": 1,
-    "needs_revision": 0,
+    "needs_revision": 1,
     "warnings": 2
   },
   "input": {
@@ -103,50 +81,7 @@
     {
       "approved_article": {
         "bob_translation_model": "gemini-3.1-flash-lite",
-        "body_html": "<p>Lo scorso sabato si è tenuto lo show di punta della AAA, <em>Noche de Los Grandes</em>, che ha visto come piatto forte l'attesissimo match Mask vs. Mask tra OG El Grande Americano ed El Grande Americano. All'evento hanno preso parte anche talenti provenienti dalla WWE come Rey Fénix e Bayley. Prima dello show dal vivo, si sono tenute delle registrazioni televisive durante le quali Octagon Jr. ha riportato un infortunio: il lottatore è stato colpito da una swinging DDT che gli ha causato un trauma al collo. Sui social media sono emersi dei video che mostrano il momento in cui Octagon Jr. è stato trasportato via dal ring in barella.</p><p>Un aggiornamento sulle sue condizioni è arrivato tramite il <em>Wrestling Observer Radio</em>. Dave Meltzer ha riferito che Octagon Jr. dovrà rimanere lontano dal ring per diversi mesi. Bryan Alvarez ha aggiunto che il lottatore è stato sottoposto a una risonanza magnetica durante il fine settimana, dalla quale è emerso che \"le condizioni sono buone, ma resterà fuori dai giochi probabilmente per diversi mesi\". Alvarez ha inoltre sottolineato che l'infortunio avrebbe potuto avere conseguenze ben peggiori.</p><p>Nel giugno 2025, Octagon Jr. ha affrontato \"Dirty Dom\" Mysterio per il titolo Intercontinentale a Money in the Bank, in seguito a un incidente avvenuto durante l'evento <em>Worlds Collide</em> tenutosi nella stessa giornata. Ha inoltre gareggiato a <em>Worlds Collide</em> nel settembre 2025, dove, facendo squadra con Laredo Kid, La Parka e Mascarita Sagrada, ha ottenuto una vittoria contro il team composto da LWO, Lince Dorado e Mini Abismo Negro.</p>",
-        "category_hint": "World",
-        "element_counts": {
-          "embed": 0,
-          "heading": 0,
-          "image": 0,
-          "quote": 0,
-          "text": 3
-        },
-        "excerpt_it": "Brutto infortunio per Octagon Jr. durante i tapings della AAA: il lottatore dovrà restare fuori per diversi mesi a causa di un problema al collo rimediato su una mossa subita.",
-        "meta": {
-          "description": "Wrestling Observer provided an update on AAA's Octagon Jr. after an injury on Saturday night.",
-          "featured_image": "https://www.wrestlinginc.com/img/gallery/aaa-star-octagon-reportedly-suffers-injury-at-tv-taping-during-noche-de-los-grandes/l-intro-1780328260.jpg",
-          "source_title": "AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes - Wrestling Inc."
-        },
-        "source": "wrestlinginc",
-        "source_title": "AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes",
-        "source_url": "https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes/",
-        "title_it": "Infortunio per Octagon Jr. durante i tapings di AAA Noche de Los Grandes"
-      },
-      "category_hint": "World",
-      "decision": "approved",
-      "diagnostics": {
-        "bob_clean_element_count": 3,
-        "bob_diagnostic_stage": "ready_for_alfred",
-        "bob_removed_before_gemini": 1,
-        "bob_status": "ready_for_alfred",
-        "bob_translation_model": "gemini-3.1-flash-lite",
-        "editorial_changes": 0,
-        "plain_chars": 1566,
-        "title_chars": 72
-      },
-      "editorial_changes": [],
-      "issues": [],
-      "quality_score": 100,
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes/",
-      "title_it": "Infortunio per Octagon Jr. durante i tapings di AAA Noche de Los Grandes",
-      "warnings": []
-    },
-    {
-      "approved_article": {
-        "bob_translation_model": "gemini-3.1-flash-lite",
-        "body_html": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x16316--></p><p>Nikkita Lyons ha colpito favorevolmente i vertici della WWE, ma questo non significa che un approdo a Monday Night RAW sia imminente. Secondo quanto riportato da <em>False Finish</em>, i funzionari della compagnia sono soddisfatti del lavoro svolto dalla wrestler dopo il suo rientro dall'infortunio. Tuttavia, nonostante le precedenti indiscrezioni su una possibile promozione nel main roster durante l'estate, tale scenario al momento appare improbabile.</p><p>“False Finish ha appreso che i vertici della WWE sono rimasti molto colpiti dal lavoro di Nikkita Lyons dal suo ritorno dall'infortunio. Sebbene ci siano state notizie riguardo a una potenziale promozione a WWE RAW in estate, non sembra probabile in questo momento. Lyons dovrebbe continuare a lavorare per EVOLVE e NXT nel prossimo futuro”, si legge nel report.</p><p>Queste informazioni arrivano dopo che <em>Rope Break</em> aveva precedentemente riferito che il nome di Lyons era stato accostato a una possibile chiamata nel main roster, con RAW indicato come potenziale destinazione in caso di promozione estiva.</p><p>Per ora, la WWE sembra intenzionata a mantenere Lyons tra EVOLVE e NXT, permettendole di ritrovare ritmo dopo i numerosi infortuni al ginocchio. Anche se non si tratta della rapida ascesa che alcuni fan si aspettavano, la scelta dimostra che la compagnia sta seguendo con attenzione il suo percorso di recupero.</p><p>Lyons è stata molto schietta riguardo al suo \"reset\". Il 29 aprile 2026 ha risposto per le rime ai critici che continuavano a chiedere il ritorno della “vecchia” Nikkita Lyons, chiarendo di considerarsi ormai guarita e pronta ad andare avanti:</p><p>“i MiSs ThE oLd nIkKiTa LyOnS” 😂 tipo… vi lamentavate anche allora 🙄 non che debba dare spiegazioni, ma quella era la nikkita post infortunio con un ragazzo di m✨rda all'epoca lmao ma non siamo nemmeno più in quella linea temporale, SIAMO GUARITI 🍃 STATE AL PASSO #NikkitaMultiMedia #DivineFeline lioness pre-wwe mind you👇🦁 BEEN THE LYONESS BABE 🎶🔮🍃”</p><p>Il tweet ha offerto ai fan uno sguardo sul percorso di rinnovamento, sia fisico che personale, che Lyons sta affrontando. Con i vertici della WWE che si dicono impressionati, la wrestler sembra trovarsi in una posizione migliore rispetto ai periodi segnati dai continui stop per infortunio. Ciononostante, l'ultima parola rimane chiara: una promozione a RAW non è prevista al momento. Lyons potrebbe ottenere la sua occasione nel main roster in futuro, ma per ora la WWE è concentrata sul permetterle di ricostruirsi attraverso il lavoro in EVOLVE e NXT.</p>",
+        "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x49856-->\n<p>Nikkita Lyons potrebbe aver fatto una buona impressione sui dirigenti della WWE, ma questo non significa che il suo approdo a Monday Night RAW sia imminente.</p><p>Secondo quanto riportato da <em>False Finish</em>, i vertici della WWE sono rimasti soddisfatti del lavoro svolto dalla lottatrice dal suo rientro dall'infortunio. Tuttavia, nonostante le precedenti indiscrezioni su una possibile promozione nel main roster durante l'estate, tale scenario al momento appare improbabile.</p><p>“False Finish ha appreso che i dirigenti WWE sono rimasti molto colpiti dal lavoro di Nikkita Lyons dal suo ritorno dall'infortunio. Sebbene circolassero voci su una potenziale chiamata a WWE RAW in estate, al momento non sembra probabile. Si prevede che Lyons continuerà a lavorare per EVOLVE e NXT per il prossimo futuro”, si legge nel report.</p><p>Queste informazioni seguono quanto riportato in precedenza da <em>Rope Break</em>, che aveva indicato la Lyons come possibile nome per un salto di categoria, con RAW individuato come potenziale destinazione in caso di promozione estiva.</p><p>Per il momento, la WWE sembra intenzionata a mantenere la Lyons tra EVOLVE e NXT, permettendole di ricostruire il proprio slancio dopo i ripetuti infortuni al ginocchio. Potrebbe non trattarsi della rapida ascesa auspicata da alcuni fan, ma conferma comunque che la compagnia sta monitorando con attenzione il suo percorso di recupero.</p><p>Lyons è stata anche molto esplicita riguardo alla sua fase di rinnovamento. Lo scorso 29 aprile 2026, ha risposto per le rime ai critici che chiedevano a gran voce il ritorno della “vecchia” Nikkita Lyons, chiarendo di considerarsi ormai guarita e pronta a guardare avanti:</p><p>“‘Mi manchi la vecchia Nikkita Lyons’ 😂 tipo... vi lamentavate anche allora 🙄 non che debba dare spiegazioni, ma quella era la Nikkita post-infortunio con un fidanzato di m***a all'epoca, ma non siamo più in quella timeline, SIAMO GUARITI 🍃 STATE AL PASSO #NikkitaMultiMedia #DivineFeline lioness pre-wwe tra l'altro👇🦁 SONO SEMPRE STATA LA LIONESS TESORO 🎶🔮🍃”</p><p>Il tweet ha offerto ai fan uno scorcio sul percorso di rinascita fisica e personale che la lottatrice sta affrontando. Ora, con il gradimento espresso dai piani alti della WWE, la sua posizione appare decisamente più solida rispetto al periodo segnato dai recenti stop forzati.</p><p>Resta il fatto che, stando agli ultimi aggiornamenti, una promozione a RAW non è prevista nel breve periodo. Lyons potrebbe senz'altro ottenere la sua chance nel main roster in futuro, ma per ora la WWE sembra concentrata sul permetterle di proseguire il suo processo di crescita costante attraverso gli show di EVOLVE e NXT.</p>",
         "category_hint": "NXT",
         "element_counts": {
           "embed": 0,
@@ -155,7 +90,7 @@
           "quote": 2,
           "text": 7
         },
-        "excerpt_it": "Nonostante l'apprezzamento dei vertici WWE, il debutto di Nikkita Lyons nel main roster non sembra imminente: ecco cosa attende la stella di NXT.",
+        "excerpt_it": "Nikkita Lyons ha colpito i vertici della WWE, ma nonostante le voci di una promozione nel main roster, il suo futuro immediato rimane legato a NXT ed EVOLVE.",
         "meta": {
           "description": "Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet. False Finish reports that WWE",
           "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg",
@@ -164,7 +99,7 @@
         "source": "ringsidenews",
         "source_title": "NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors",
         "source_url": "https://www.ringsidenews.com/nxt-stars-future-revealed-amid-wwe-main-roster-call-rumors/",
-        "title_it": "NXT: il futuro di Nikkita Lyons tra i rumor sul main roster"
+        "title_it": "Nikkita Lyons: il punto sul futuro della stella di NXT"
       },
       "category_hint": "NXT",
       "decision": "approved",
@@ -174,16 +109,23 @@
         "bob_removed_before_gemini": 14,
         "bob_status": "ready_for_alfred",
         "bob_translation_model": "gemini-3.1-flash-lite",
-        "editorial_changes": 0,
-        "plain_chars": 2512,
-        "title_chars": 59
+        "editorial_changes": 1,
+        "plain_chars": 2618,
+        "title_chars": 54
       },
-      "editorial_changes": [],
+      "editorial_changes": [
+        {
+          "code": "image_placeholder_split",
+          "evidence": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x49856-->",
+          "message": "Placeholder immagine separato dal paragrafo di testo.",
+          "severity": "info"
+        }
+      ],
       "issues": [],
       "quality_score": 95,
       "source": "ringsidenews",
       "source_url": "https://www.ringsidenews.com/nxt-stars-future-revealed-amid-wwe-main-roster-call-rumors/",
-      "title_it": "NXT: il futuro di Nikkita Lyons tra i rumor sul main roster",
+      "title_it": "Nikkita Lyons: il punto sul futuro della stella di NXT",
       "warnings": [
         {
           "code": "image_placeholder_present",
@@ -194,29 +136,58 @@
       ]
     },
     {
+      "approved_article": null,
+      "category_hint": "AEW",
+      "decision": "needs_revision",
+      "diagnostics": {
+        "bob_clean_element_count": 15,
+        "bob_diagnostic_stage": "ready_for_alfred",
+        "bob_removed_before_gemini": 15,
+        "bob_status": "ready_for_alfred",
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "editorial_changes": 0,
+        "plain_chars": 1881,
+        "title_chars": 70
+      },
+      "editorial_changes": [],
+      "issues": [
+        {
+          "code": "untranslated_quote",
+          "evidence": "audience complessiva e un calo del -25,0% nella fascia demografica di riferimento. AEW Dynamite Week-to-Week Viewership Comparison AEW Dynamite Year-to-Date Performance (2026) AEW Dynamite Month-to-Date Performance (May 2026) AEW Dynamite 4-Week Rolling Average Last 12 Months Performance Summary Viewership Range (Last 12 Months) Media delle ultime 4 settimane: 602.875 telespettatori. Largest Weekly Viewership Changes (Last 12 Months) AEW Dynamite Year-over-Year Comparison (2025 vs 2026) Il picco massimo di ascolti del 2026 è stato raggiunto il 25 marzo con 765.000 spettatori, mentre il minimo è stato toccato il 21 gennaio con 498.000 spettatori. Questi dati riflettono esclusivamente l",
+          "message": "Citazione rimasta in inglese o non tradotta integralmente.",
+          "severity": "blocker"
+        }
+      ],
+      "quality_score": 75,
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/",
+      "title_it": "AEW Dynamite: in crescita gli ascolti della puntata del 27 maggio 2026",
+      "warnings": []
+    },
+    {
       "approved_article": {
         "bob_translation_model": "gemini-3.1-flash-lite",
-        "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg.avif?x16316-->\n<p>Octagón Jr. ha ricevuto un importante aggiornamento medico in seguito al brutto infortunio al collo subito durante l'evento AAA Noche de los Grandes e, fortunatamente, le cose sarebbero potute andare decisamente peggio.</p><p>Secondo quanto riportato da Bryan Alvarez di <em>Wrestling Observer</em>, la risonanza magnetica a cui si è sottoposto Octagón Jr. ha dato esito positivo dopo l'incidente avvenuto nel corso della seconda serata delle registrazioni di Noche de los Grandes. Nonostante sia previsto uno stop, la situazione ha apparentemente evitato un epilogo ben più grave.</p><p>\"Probabilmente starà fuori per diversi mesi, ma poteva andare molto peggio\".</p><p>L'infortunio si è verificato durante un Fatal 5-Way match registrato per l'edizione del 6 giugno di Noche de los Grandes, che vedeva contrapposti Octagón Jr., Cruz Del Toro, Joaquin Wilde, Lince Dorado e Mini Vikingo. Octagón Jr. è atterrato in malo modo dopo aver subìto una DDT dal punto più alto della corda più alta per mano di Joaquin Wilde. Il wrestler è rimasto a terra mentre il match proseguiva, e la situazione è diventata rapidamente seria quando l'arbitro ha richiesto l'intervento dello staff medico tramite il classico segnale della X.</p><p>Gli addetti ai lavori hanno quindi trasportato Octagón Jr. fuori dal ring in barella, immobilizzandogli il collo, il che ha sollevato immediatamente timori sulla gravità dell'infortunio. All'epoca, non c'erano notizie ufficiali riguardo a possibili danni strutturali o se l'immobilizzazione fosse stata puramente precauzionale. L'aggiornamento di Alvarez offre ora un quadro più ottimistico, nonostante l'atleta debba comunque affrontare diversi mesi di stop.</p><p>Octagón Jr. è stato uno dei nomi più affidabili della AAA e ha continuato a essere una presenza costante anche in seguito all'acquisizione della promotion da parte della WWE. Qualsiasi assenza prolungata rappresenterà un duro colpo, ma l'esito positivo della risonanza magnetica è un enorme sollievo dopo la dinamica preoccupante vista a Monterrey. Per ora, sembra che Octagón Jr. abbia evitato lo scenario peggiore. Il percorso di rientro richiederà tempo, ma gli ultimi aggiornamenti permettono ai fan di tirare un sospiro di sollievo.</p>",
-        "category_hint": "World",
+        "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x49856-->\n<p>Il futuro di Mike Santana in TNA è diventato un po' più chiaro, ma la sua prossima mossa resta un punto interrogativo, dato che il suo contratto è in scadenza a brevissimo termine.</p>\n<p>Secondo quanto riportato da PWInsider in data 1 giugno 2026, l'attuale accordo che lega il campione del mondo TNA alla federazione scadrà nel corso del mese di luglio. Il report sottolinea inoltre come la WWE abbia già mostrato interesse per Santana in passato.</p>\n<p>Queste informazioni forniscono una tempistica più precisa sulla situazione contrattuale del wrestler, dopo le indiscrezioni iniziali che parlavano di una scadenza fissata per quest'estate. Con il mese di luglio ormai indicato come termine ultimo, la prossima mossa di Santana potrebbe diventare un tema centrale del panorama del wrestling molto presto.</p>\n<p>Santana è stato uno dei nomi di punta della TNA sin dal suo ritorno avvenuto nel 2024, e il suo attuale regno come TNA World Champion rende le tempistiche della scadenza ancora più interessanti. Qualora dovesse arrivare alla naturale conclusione dell'accordo senza averne firmato uno nuovo, il lottatore avrebbe diverse opzioni a sua disposizione nel mondo del wrestling.</p>\n<p>L'interesse da parte della WWE resta un fattore significativo, specialmente considerando che Santana si sta già imponendo come una star da main event in TNA. Un passaggio alla WWE rappresenterebbe un cambiamento importante, ma restare in TNA gli permetterebbe di continuare a guidare la federazione in un momento in cui le sue quotazioni sono in forte ascesa.</p>\n<p>Per il momento, Santana rimane il campione del mondo TNA, ma il mese di luglio non è lontano. Che decida di restare o di esplorare una nuova opportunità, la sua situazione contrattuale è ora una delle storie più rilevanti da seguire nel corso di questa estate.</p>",
+        "category_hint": "TNA",
         "element_counts": {
           "embed": 0,
           "heading": 0,
           "image": 1,
-          "quote": 1,
-          "text": 5
+          "quote": 0,
+          "text": 6
         },
-        "excerpt_it": "Arrivano aggiornamenti medici sulle condizioni di Octagón Jr. dopo il grave infortunio al collo subìto durante le registrazioni di AAA Noche de los Grandes.",
+        "excerpt_it": "Il contratto di Mike Santana con la TNA scadrà nel mese di luglio: si fanno sempre più insistenti le voci su un possibile interesse da parte della WWE per l'attuale campione del mondo.",
         "meta": {
-          "description": "Octagón Jr. has received an important medical update after his frightening neck injury at AAA Noche de los Grandes, and thankfully, things could have been",
-          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg",
-          "source_title": "Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping"
+          "description": "Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon. According to",
+          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg",
+          "source_title": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest"
         },
         "source": "ringsidenews",
-        "source_title": "Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping",
-        "source_url": "https://www.ringsidenews.com/octagon-jrs-recovery-timeline-revealed-injury-aaa-noche-de-los-grandes-taping/",
-        "title_it": "Octagón Jr.: rivelati i tempi di recupero dopo l'infortunio a AAA Noche de los Grandes"
+        "source_title": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest",
+        "source_url": "https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest/",
+        "title_it": "Mike Santana: aggiornamenti sul contratto con TNA tra i rumors di interesse della WWE"
       },
-      "category_hint": "World",
+      "category_hint": "TNA",
       "decision": "approved",
       "diagnostics": {
         "bob_clean_element_count": 7,
@@ -224,23 +195,16 @@
         "bob_removed_before_gemini": 14,
         "bob_status": "ready_for_alfred",
         "bob_translation_model": "gemini-3.1-flash-lite",
-        "editorial_changes": 1,
-        "plain_chars": 2192,
-        "title_chars": 86
+        "editorial_changes": 0,
+        "plain_chars": 1788,
+        "title_chars": 85
       },
-      "editorial_changes": [
-        {
-          "code": "image_placeholder_split",
-          "evidence": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg.avif?x16316-->",
-          "message": "Placeholder immagine separato dal paragrafo di testo.",
-          "severity": "info"
-        }
-      ],
+      "editorial_changes": [],
       "issues": [],
       "quality_score": 95,
       "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/octagon-jrs-recovery-timeline-revealed-injury-aaa-noche-de-los-grandes-taping/",
-      "title_it": "Octagón Jr.: rivelati i tempi di recupero dopo l'infortunio a AAA Noche de los Grandes",
+      "source_url": "https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest/",
+      "title_it": "Mike Santana: aggiornamenti sul contratto con TNA tra i rumors di interesse della WWE",
       "warnings": [
         {
           "code": "image_placeholder_present",

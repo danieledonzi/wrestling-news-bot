@@ -3,111 +3,14 @@
   "articles": [
     {
       "bob_notes": [
-        "Traduzione fedele dei riferimenti temporali e dell'infortunio.",
-        "Mantenuta la terminologia tecnica legata al mondo del wrestling.",
-        "Le citazioni di Dave Meltzer e Bryan Alvarez sono state riportate integralmente come richiesto."
+        "Traduzione integrale e fedele seguendo lo stile giornalistico richiesto.",
+        "Mantenuta la formattazione dei placeholder per le immagini.",
+        "Il quote della Lyons è stato tradotto mantenendo il tono e lo slang originale, preservando gli hashtag e il significato del contenuto."
       ],
-      "body_html": "<p>Lo scorso sabato si è tenuto lo show di punta della AAA, <em>Noche de Los Grandes</em>, che ha visto come piatto forte l'attesissimo match Mask vs. Mask tra OG El Grande Americano ed El Grande Americano. All'evento hanno preso parte anche talenti provenienti dalla WWE come Rey Fénix e Bayley. Prima dello show dal vivo, si sono tenute delle registrazioni televisive durante le quali Octagon Jr. ha riportato un infortunio: il lottatore è stato colpito da una swinging DDT che gli ha causato un trauma al collo. Sui social media sono emersi dei video che mostrano il momento in cui Octagon Jr. è stato trasportato via dal ring in barella.</p><p>Un aggiornamento sulle sue condizioni è arrivato tramite il <em>Wrestling Observer Radio</em>. Dave Meltzer ha riferito che Octagon Jr. dovrà rimanere lontano dal ring per diversi mesi. Bryan Alvarez ha aggiunto che il lottatore è stato sottoposto a una risonanza magnetica durante il fine settimana, dalla quale è emerso che \"le condizioni sono buone, ma resterà fuori dai giochi probabilmente per diversi mesi\". Alvarez ha inoltre sottolineato che l'infortunio avrebbe potuto avere conseguenze ben peggiori.</p><p>Nel giugno 2025, Octagon Jr. ha affrontato \"Dirty Dom\" Mysterio per il titolo Intercontinentale a Money in the Bank, in seguito a un incidente avvenuto durante l'evento <em>Worlds Collide</em> tenutosi nella stessa giornata. Ha inoltre gareggiato a <em>Worlds Collide</em> nel settembre 2025, dove, facendo squadra con Laredo Kid, La Parka e Mascarita Sagrada, ha ottenuto una vittoria contro il team composto da LWO, Lince Dorado e Mini Abismo Negro.</p>",
-      "category_hint": "World",
-      "clean_element_count": 3,
-      "created_at": "2026-06-01T16:46:35.174795+00:00",
-      "diagnostic_stage": "ready_for_alfred",
-      "element_counts": {
-        "embed": 0,
-        "heading": 0,
-        "image": 0,
-        "quote": 0,
-        "text": 3
-      },
-      "elements": [
-        {
-          "text": "Last Saturday was AAA's big Noche de Los Grandes show which saw the highly anticipated Mask vs. Mask match between OG El Grande Americano and El Grande Americano. Other WWE talents such as Rey Fénix and Bayley also competed . Prior to the live event was a taping where Octagon Jr. was injured. He was taking a swinging DDT when his neck was injured. Video surfaced on social media that Octagon Jr. had to be stretchered from the ring.",
-          "type": "text"
-        },
-        {
-          "text": "An update was provided on Wrestling Observer Radio . Dave Meltzer reported that Octagon Jr. will be out for several months. Bryan Alvarez said that Octagon Jr. had an MRI over the weekend and was told \"it was good, but he will be out of action likely several months.\" He stated that the injury could've been much worse.",
-          "type": "text"
-        },
-        {
-          "text": "In June 2025, Octagon Jr. faced \"Dirty Dom\" Mysterio for the Men's IC title at Money in the Bank following an incident at Worlds Collide earlier in the day. He also competed at Worlds Collide in September 2025 when he teamed up with Laredo Kid, La Parka and Mascarita Sagrada where they got a victory over LWO, Lince Dorado, and Mini Abismo Negro.",
-          "type": "text"
-        }
-      ],
-      "excerpt_it": "Brutto infortunio per Octagon Jr. durante i tapings della AAA: il lottatore dovrà restare fuori per diversi mesi a causa di un problema al collo rimediato su una mossa subita.",
-      "extraction_diagnostics": {
-        "candidate_node_count": 6,
-        "clean_element_count": 3,
-        "dom_noise_reduction_enabled": false,
-        "raw_element_count": 4,
-        "removed_by_node_count": 0,
-        "removed_by_sanitize_count": 1,
-        "root_name": "article",
-        "root_text_chars": 1444,
-        "stage": "complete"
-      },
-      "fetched_html_chars": 49975,
-      "menzo_score": 86,
-      "meta": {
-        "description": "Wrestling Observer provided an update on AAA's Octagon Jr. after an injury on Saturday night.",
-        "featured_image": "https://www.wrestlinginc.com/img/gallery/aaa-star-octagon-reportedly-suffers-injury-at-tv-taping-during-noche-de-los-grandes/l-intro-1780328260.jpg",
-        "source_title": "AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes - Wrestling Inc."
-      },
-      "raw_element_count": 4,
-      "raw_elements_preview": [
-        {
-          "alt": "Octagon Jr. at WWE MITB",
-          "type": "image",
-          "url": "https://www.wrestlinginc.com/img/gallery/aaa-star-octagon-reportedly-suffers-injury-at-tv-taping-during-noche-de-los-grandes/intro-1780328260.jpg"
-        },
-        {
-          "text": "Last Saturday was AAA's big Noche de Los Grandes show which saw the highly anticipated Mask vs. Mask match between OG El Grande Americano and El Grande Americano. Other WWE talents such as Rey Fénix and Bayley also competed . Prior to the live event was a taping where Octagon Jr. was injured. He was taking a swinging DDT when his neck was injured. Video surfaced on social media that Octagon Jr. had to be stretchered from the ring.",
-          "type": "text"
-        },
-        {
-          "text": "An update was provided on Wrestling Observer Radio . Dave Meltzer reported that Octagon Jr. will be out for several months. Bryan Alvarez said that Octagon Jr. had an MRI over the weekend and was told \"it was good, but he will be out of action likely several months.\" He stated that the injury could've been much worse.",
-          "type": "text"
-        },
-        {
-          "text": "In June 2025, Octagon Jr. faced \"Dirty Dom\" Mysterio for the Men's IC title at Money in the Bank following an incident at Worlds Collide earlier in the day. He also competed at Worlds Collide in September 2025 when he teamed up with Laredo Kid, La Parka and Mascarita Sagrada where they got a victory over LWO, Lince Dorado, and Mini Abismo Negro.",
-          "type": "text"
-        }
-      ],
-      "removed_before_gemini": 1,
-      "removed_elements_debug": [
-        {
-          "index": 1,
-          "item": {
-            "alt": "Octagon Jr. at WWE MITB",
-            "type": "image",
-            "url": "https://www.wrestlinginc.com/img/gallery/aaa-star-octagon-reportedly-suffers-injury-at-tv-taping-during-noche-de-los-grandes/intro-1780328260.jpg"
-          },
-          "reason": "duplicate_featured_image"
-        }
-      ],
-      "source": "wrestlinginc",
-      "source_title": "AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes",
-      "source_url": "https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes/",
-      "status": "ready_for_alfred",
-      "title_it": "Infortunio per Octagon Jr. durante i tapings di AAA Noche de Los Grandes",
-      "translation_chain_attempted": [
-        "gemini-3.1-flash-lite"
-      ],
-      "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes/\nTitolo feed: AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes\nTitolo pagina: AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes - Wrestling Inc.\nDescrizione: Wrestling Observer provided an update on AAA's Octagon Jr. after an injury on Saturday night.\nCategoria suggerita: World\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|text] Last Saturday was AAA's big Noche de Los Grandes show which saw the highly anticipated Mask vs. Mask match between OG El Grande Americano and El Grande Americano. Other WWE talents such as Rey Fénix and Bayley also competed . Prior to the live event was a taping where Octagon Jr. was injured. He was taking a swinging DDT when his neck was injured. Video surfaced on social media that Octagon Jr. had to be stretchered from the ring.\n[2|text] An update was provided on Wrestling Observer Radio . Dave Meltzer reported that Octagon Jr. will be out for several months. Bryan Alvarez said that Octagon Jr. had an MRI over the weekend and was told \"it was good, but he will be out of action likely several months.\" He stated that the injury could've been much worse.\n[3|text] In June 2025, Octagon Jr. faced \"Dirty Dom\" Mysterio for the Men's IC title at Money in the Bank following an incident at Worlds Collide earlier in the day. He also competed at Worlds Collide in September 2025 when he teamed up with Laredo Kid, La Parka and Mascarita Sagrada where they got a victory over LWO, Lince Dorado, and Mini Abismo Negro.\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"Infortunio per Octagon Jr. durante i tapings di AAA Noche de Los Grandes\",\n  \"body_html\": \"<p>Lo scorso sabato si è tenuto lo show di punta della AAA, <em>Noche de Los Grandes</em>, che ha visto come piatto forte l'attesissimo match Mask vs. Mask tra OG El Grande Americano ed El Grande Americano. All'evento hanno preso parte anche talenti provenienti dalla WWE come Rey Fénix e Bayley. Prima dello show dal vivo, si sono tenute delle registrazioni televisive durante le quali Octagon Jr. ha riportato un infortunio: il lottatore è stato colpito da una swinging DDT che gli ha causato un trauma al collo. Sui social media sono emersi dei video che mostrano il momento in cui Octagon Jr. è stato trasportato via dal ring in barella.</p><p>Un aggiornamento sulle sue condizioni è arrivato tramite il <em>Wrestling Observer Radio</em>. Dave Meltzer ha riferito che Octagon Jr. dovrà rimanere lontano dal ring per diversi mesi. Bryan Alvarez ha aggiunto che il lottatore è stato sottoposto a una risonanza magnetica durante il fine settimana, dalla quale è emerso che \\\"le condizioni sono buone, ma resterà fuori dai giochi probabilmente per diversi mesi\\\". Alvarez ha inoltre sottolineato che l'infortunio avrebbe potuto avere conseguenze ben peggiori.</p><p>Nel giugno 2025, Octagon Jr. ha affrontato \\\"Dirty Dom\\\" Mysterio per il titolo Intercontinentale a Money in the Bank, in seguito a un incidente avvenuto durante l'evento <em>Worlds Collide</em> tenutosi nella stessa giornata. Ha inoltre gareggiato a <em>Worlds Collide</em> nel settembre 2025, dove, facendo squadra con Laredo Kid, La Parka e Mascarita Sagrada, ha ottenuto una vittoria contro il team composto da LWO, Lince Dorado e Mini Abismo Negro.</p>\",\n  \"excerpt_it\": \"Brutto infortunio per Octagon Jr. durante i tapings della AAA: il lottatore dovrà restare fuori per diversi mesi a causa di un problema al collo rimediato su una mossa subita.\",\n  \"notes\": [\n    \"Traduzione fedele dei riferimenti temporali e dell'infortunio.\",\n    \"Mantenuta la terminologia tecnica legata al mondo del wrestling.\",\n    \"Le citazioni di Dave Meltzer e Bryan Alvarez sono state riportate integralmente come richiesto.\"\n  ]\n}",
-      "translation_used": true
-    },
-    {
-      "bob_notes": [
-        "Traduzione integrale e fedele, con adattamento giornalistico del tono.",
-        "Terminologia di wrestling mantenuta coerente con il contesto (main roster, infortunio, promozioni).",
-        "Citazioni gestite in modo letterale come richiesto.",
-        "Nessuna aggiunta esterna o CTA inserita nel testo."
-      ],
-      "body_html": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x16316--></p><p>Nikkita Lyons ha colpito favorevolmente i vertici della WWE, ma questo non significa che un approdo a Monday Night RAW sia imminente. Secondo quanto riportato da <em>False Finish</em>, i funzionari della compagnia sono soddisfatti del lavoro svolto dalla wrestler dopo il suo rientro dall'infortunio. Tuttavia, nonostante le precedenti indiscrezioni su una possibile promozione nel main roster durante l'estate, tale scenario al momento appare improbabile.</p><p>“False Finish ha appreso che i vertici della WWE sono rimasti molto colpiti dal lavoro di Nikkita Lyons dal suo ritorno dall'infortunio. Sebbene ci siano state notizie riguardo a una potenziale promozione a WWE RAW in estate, non sembra probabile in questo momento. Lyons dovrebbe continuare a lavorare per EVOLVE e NXT nel prossimo futuro”, si legge nel report.</p><p>Queste informazioni arrivano dopo che <em>Rope Break</em> aveva precedentemente riferito che il nome di Lyons era stato accostato a una possibile chiamata nel main roster, con RAW indicato come potenziale destinazione in caso di promozione estiva.</p><p>Per ora, la WWE sembra intenzionata a mantenere Lyons tra EVOLVE e NXT, permettendole di ritrovare ritmo dopo i numerosi infortuni al ginocchio. Anche se non si tratta della rapida ascesa che alcuni fan si aspettavano, la scelta dimostra che la compagnia sta seguendo con attenzione il suo percorso di recupero.</p><p>Lyons è stata molto schietta riguardo al suo \"reset\". Il 29 aprile 2026 ha risposto per le rime ai critici che continuavano a chiedere il ritorno della “vecchia” Nikkita Lyons, chiarendo di considerarsi ormai guarita e pronta ad andare avanti:</p><p>“i MiSs ThE oLd nIkKiTa LyOnS” 😂 tipo… vi lamentavate anche allora 🙄 non che debba dare spiegazioni, ma quella era la nikkita post infortunio con un ragazzo di m✨rda all'epoca lmao ma non siamo nemmeno più in quella linea temporale, SIAMO GUARITI 🍃 STATE AL PASSO #NikkitaMultiMedia #DivineFeline lioness pre-wwe mind you👇🦁 BEEN THE LYONESS BABE 🎶🔮🍃”</p><p>Il tweet ha offerto ai fan uno sguardo sul percorso di rinnovamento, sia fisico che personale, che Lyons sta affrontando. Con i vertici della WWE che si dicono impressionati, la wrestler sembra trovarsi in una posizione migliore rispetto ai periodi segnati dai continui stop per infortunio. Ciononostante, l'ultima parola rimane chiara: una promozione a RAW non è prevista al momento. Lyons potrebbe ottenere la sua occasione nel main roster in futuro, ma per ora la WWE è concentrata sul permetterle di ricostruirsi attraverso il lavoro in EVOLVE e NXT.</p>",
+      "body_html": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x49856-->Nikkita Lyons potrebbe aver fatto una buona impressione sui dirigenti della WWE, ma questo non significa che il suo approdo a Monday Night RAW sia imminente.</p><p>Secondo quanto riportato da <em>False Finish</em>, i vertici della WWE sono rimasti soddisfatti del lavoro svolto dalla lottatrice dal suo rientro dall'infortunio. Tuttavia, nonostante le precedenti indiscrezioni su una possibile promozione nel main roster durante l'estate, tale scenario al momento appare improbabile.</p><p>“False Finish ha appreso che i dirigenti WWE sono rimasti molto colpiti dal lavoro di Nikkita Lyons dal suo ritorno dall'infortunio. Sebbene circolassero voci su una potenziale chiamata a WWE RAW in estate, al momento non sembra probabile. Si prevede che Lyons continuerà a lavorare per EVOLVE e NXT per il prossimo futuro”, si legge nel report.</p><p>Queste informazioni seguono quanto riportato in precedenza da <em>Rope Break</em>, che aveva indicato la Lyons come possibile nome per un salto di categoria, con RAW individuato come potenziale destinazione in caso di promozione estiva.</p><p>Per il momento, la WWE sembra intenzionata a mantenere la Lyons tra EVOLVE e NXT, permettendole di ricostruire il proprio slancio dopo i ripetuti infortuni al ginocchio. Potrebbe non trattarsi della rapida ascesa auspicata da alcuni fan, ma conferma comunque che la compagnia sta monitorando con attenzione il suo percorso di recupero.</p><p>Lyons è stata anche molto esplicita riguardo alla sua fase di rinnovamento. Lo scorso 29 aprile 2026, ha risposto per le rime ai critici che chiedevano a gran voce il ritorno della “vecchia” Nikkita Lyons, chiarendo di considerarsi ormai guarita e pronta a guardare avanti:</p><p>“‘Mi manchi la vecchia Nikkita Lyons’ 😂 tipo... vi lamentavate anche allora 🙄 non che debba dare spiegazioni, ma quella era la Nikkita post-infortunio con un fidanzato di m***a all'epoca, ma non siamo più in quella timeline, SIAMO GUARITI 🍃 STATE AL PASSO #NikkitaMultiMedia #DivineFeline lioness pre-wwe tra l'altro👇🦁 SONO SEMPRE STATA LA LIONESS TESORO 🎶🔮🍃”</p><p>Il tweet ha offerto ai fan uno scorcio sul percorso di rinascita fisica e personale che la lottatrice sta affrontando. Ora, con il gradimento espresso dai piani alti della WWE, la sua posizione appare decisamente più solida rispetto al periodo segnato dai recenti stop forzati.</p><p>Resta il fatto che, stando agli ultimi aggiornamenti, una promozione a RAW non è prevista nel breve periodo. Lyons potrebbe senz'altro ottenere la sua chance nel main roster in futuro, ma per ora la WWE sembra concentrata sul permetterle di proseguire il suo processo di crescita costante attraverso gli show di EVOLVE e NXT.</p>",
       "category_hint": "NXT",
       "clean_element_count": 10,
-      "created_at": "2026-06-01T16:46:38.788609+00:00",
+      "created_at": "2026-06-01T18:50:39.331754+00:00",
       "diagnostic_stage": "ready_for_alfred",
       "element_counts": {
         "embed": 0,
@@ -120,7 +23,7 @@
         {
           "alt": "NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors",
           "type": "image",
-          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x16316"
+          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x49856"
         },
         {
           "text": "Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet.",
@@ -161,7 +64,7 @@
           "type": "text"
         }
       ],
-      "excerpt_it": "Nonostante l'apprezzamento dei vertici WWE, il debutto di Nikkita Lyons nel main roster non sembra imminente: ecco cosa attende la stella di NXT.",
+      "excerpt_it": "Nikkita Lyons ha colpito i vertici della WWE, ma nonostante le voci di una promozione nel main roster, il suo futuro immediato rimane legato a NXT ed EVOLVE.",
       "extraction_diagnostics": {
         "candidate_node_count": 45,
         "clean_element_count": 10,
@@ -170,10 +73,10 @@
         "removed_by_node_count": 13,
         "removed_by_sanitize_count": 1,
         "root_name": "article",
-        "root_text_chars": 3151,
+        "root_text_chars": 3119,
         "stage": "complete"
       },
-      "fetched_html_chars": 477794,
+      "fetched_html_chars": 477547,
       "menzo_score": 86,
       "meta": {
         "description": "Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet. False Finish reports that WWE",
@@ -185,7 +88,7 @@
         {
           "alt": "NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors",
           "type": "image",
-          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x16316"
+          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x49856"
         },
         {
           "text": "Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet.",
@@ -226,7 +129,7 @@
           "type": "text"
         },
         {
-          "text": "Spotlight WWE News Sol Ruca Wins Women’s IC Title At WWE Clash In Italy WWE News Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy WWE News Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy WWE News WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win",
+          "text": "Spotlight WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 1, 2026 AEW News Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post",
           "type": "text"
         }
       ],
@@ -240,18 +143,18 @@
           "text_preview": "Spotlight"
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2195780 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-sol-ruca tag-wwe-clash-in-italy tag-wwe-featured   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2196202 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
           "node_index": 34,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE News Sol Ruca Wins Women’s IC Title At WWE Clash In Italy"
+          "text_preview": "WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 35,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "Sol Ruca Wins Women’s IC Title At WWE Clash In Italy"
+          "text_preview": "WWE Makes Major Changes to King of the Ring Tournament Lineup"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -261,18 +164,18 @@
           "text_preview": ""
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2195726 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-brock-lesnar tag-oba-femi tag-wwe-clash-in-italy tag-wwe-featured   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2196207 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-jacob-fatu tag-roman-reigns tag-wwe-featured   ",
           "node_index": 37,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE News Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy"
+          "text_preview": "WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 38,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy"
+          "text_preview": "Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -282,18 +185,18 @@
           "text_preview": ""
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2195718 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-jacob-fatu tag-wwe-clash-in-italy tag-wwe-featured   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2196098 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-raw-results category-wwe-results tag-wwe-featured   ",
           "node_index": 40,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE News Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy"
+          "text_preview": "WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 1, 2026"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 41,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy"
+          "text_preview": "WWE RAW Results, Highlights and Key Moments for June 1, 2026"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -303,18 +206,18 @@
           "text_preview": ""
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2195550 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-sol-ruca tag-wwe-featured   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2196155 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-nyla-rose   ",
           "node_index": 43,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE News WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win"
+          "text_preview": "AEW News Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 44,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win"
+          "text_preview": "Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -326,7 +229,7 @@
         {
           "index": 11,
           "item": {
-            "text": "Spotlight WWE News Sol Ruca Wins Women’s IC Title At WWE Clash In Italy WWE News Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy WWE News Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy WWE News WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win",
+            "text": "Spotlight WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 1, 2026 AEW News Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post",
             "type": "text"
           },
           "reason": "footer_start"
@@ -336,118 +239,426 @@
       "source_title": "NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors",
       "source_url": "https://www.ringsidenews.com/nxt-stars-future-revealed-amid-wwe-main-roster-call-rumors/",
       "status": "ready_for_alfred",
-      "title_it": "NXT: il futuro di Nikkita Lyons tra i rumor sul main roster",
+      "title_it": "Nikkita Lyons: il punto sul futuro della stella di NXT",
       "translation_chain_attempted": [
         "gemini-3.1-flash-lite"
       ],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/nxt-stars-future-revealed-amid-wwe-main-roster-call-rumors/\nTitolo feed: NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors\nTitolo pagina: NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors\nDescrizione: Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet. False Finish reports that WWE\nCategoria suggerita: NXT\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x16316 ALT=NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors\n[2|text] Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet.\n[3|text] False Finish reports that WWE officials have been happy with Lyons’ work since she returned from injury. However, despite earlier talk about a possible summer main roster call-up, that move reportedly does not look likely right now.\n[4|quote] “False Finish has learned that WWE officials have been very impressed with the work of Nikkita Lyons since returning from injury. While there were reports of a potential callup to WWE RAW in the Summer, it doesn’t appear likely at this time. Lyons is expected to continue working EVOLVE and NXT for the foreseeable future.”\n[5|text] This comes after Rope Break previously reported that Lyons had been mentioned as a possible main roster call-up , with RAW discussed as a potential landing spot if WWE decided to move her up this summer.\n[6|text] For now, though, WWE appears to be keeping Lyons in EVOLVE and NXT while she continues rebuilding momentum after multiple knee injuries. That may not be the fast-track call-up some fans expected, but it shows the company is still paying attention to her comeback.\n[7|text] Lyons has also been vocal about her reset. Back on April 29, 2026, she fired back at critics who kept asking for the “old” Nikkita Lyons to return , making it clear she sees herself as healed and moving forward.\n[8|quote] “i MiSs ThE oLd nIkKiTa LyOnS” 😂 like… y’all were complaining back then too 🙄 not that i need to explain, but that was post injury with a sh✨tty bf at the time nikkita lmao but we’re not even in that timeline anymore, WE’RE HEALED 🍃 KEEP UP #NikkitaMultiMedia #DivineFeline lioness pre-wwe mind you👇🦁 BEEN THE LYONESS BABE 🎶🔮🍃”\n[9|text] The tweet gave fans a look into the physical and personal reset Lyons has been working through. Now, with WWE officials reportedly impressed, she appears to be in a better position than she was during her injury setbacks.\n[10|text] Still, the latest word is that a RAW call-up is not expected at this time. Lyons may eventually get that main roster chance, but for now, WWE seems focused on letting her keep building herself back up through EVOLVE and NXT.\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"NXT: il futuro di Nikkita Lyons tra i rumor sul main roster\",\n  \"body_html\": \"<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x16316--></p><p>Nikkita Lyons ha colpito favorevolmente i vertici della WWE, ma questo non significa che un approdo a Monday Night RAW sia imminente. Secondo quanto riportato da <em>False Finish</em>, i funzionari della compagnia sono soddisfatti del lavoro svolto dalla wrestler dopo il suo rientro dall'infortunio. Tuttavia, nonostante le precedenti indiscrezioni su una possibile promozione nel main roster durante l'estate, tale scenario al momento appare improbabile.</p><p>“False Finish ha appreso che i vertici della WWE sono rimasti molto colpiti dal lavoro di Nikkita Lyons dal suo ritorno dall'infortunio. Sebbene ci siano state notizie riguardo a una potenziale promozione a WWE RAW in estate, non sembra probabile in questo momento. Lyons dovrebbe continuare a lavorare per EVOLVE e NXT nel prossimo futuro”, si legge nel report.</p><p>Queste informazioni arrivano dopo che <em>Rope Break</em> aveva precedentemente riferito che il nome di Lyons era stato accostato a una possibile chiamata nel main roster, con RAW indicato come potenziale destinazione in caso di promozione estiva.</p><p>Per ora, la WWE sembra intenzionata a mantenere Lyons tra EVOLVE e NXT, permettendole di ritrovare ritmo dopo i numerosi infortuni al ginocchio. Anche se non si tratta della rapida ascesa che alcuni fan si aspettavano, la scelta dimostra che la compagnia sta seguendo con attenzione il suo percorso di recupero.</p><p>Lyons è stata molto schietta riguardo al suo \\\"reset\\\". Il 29 aprile 2026 ha risposto per le rime ai critici che continuavano a chiedere il ritorno della “vecchia” Nikkita Lyons, chiarendo di considerarsi ormai guarita e pronta ad andare avanti:</p><p>“i MiSs ThE oLd nIkKiTa LyOnS” 😂 tipo… vi lamentavate anche allora 🙄 non che debba dare spiegazioni, ma quella era la nikkita post infortunio con un ragazzo di m✨rda all'epoca lmao ma non siamo nemmeno più in quella linea temporale, SIAMO GUARITI 🍃 STATE AL PASSO #NikkitaMultiMedia #DivineFeline lioness pre-wwe mind you👇🦁 BEEN THE LYONESS BABE 🎶🔮🍃”</p><p>Il tweet ha offerto ai fan uno sguardo sul percorso di rinnovamento, sia fisico che personale, che Lyons sta affrontando. Con i vertici della WWE che si dicono impressionati, la wrestler sembra trovarsi in una posizione migliore rispetto ai periodi segnati dai continui stop per infortunio. Ciononostante, l'ultima parola rimane chiara: una promozione a RAW non è prevista al momento. Lyons potrebbe ottenere la sua occasione nel main roster in futuro, ma per ora la WWE è concentrata sul permetterle di ricostruirsi attraverso il lavoro in EVOLVE e NXT.</p>\",\n  \"excerpt_it\": \"Nonostante l'apprezzamento dei vertici WWE, il debutto di Nikkita Lyons nel main roster non sembra imminente: ecco cosa attende la stella di NXT.\",\n  \"notes\": [\n    \"Traduzione integrale e fedele, con adattamento giornalistico del tono.\",\n    \"Terminologia di wrestling mantenuta coerente con il contesto (main roster, infortunio, promozioni).\",\n    \"Citazioni gestite in modo letterale come richiesto.\",\n    \"Nessuna aggiunta esterna o CTA inserita nel testo.\"\n  ]\n}",
+      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/nxt-stars-future-revealed-amid-wwe-main-roster-call-rumors/\nTitolo feed: NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors\nTitolo pagina: NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors\nDescrizione: Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet. False Finish reports that WWE\nCategoria suggerita: NXT\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x49856 ALT=NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors\n[2|text] Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet.\n[3|text] False Finish reports that WWE officials have been happy with Lyons’ work since she returned from injury. However, despite earlier talk about a possible summer main roster call-up, that move reportedly does not look likely right now.\n[4|quote] “False Finish has learned that WWE officials have been very impressed with the work of Nikkita Lyons since returning from injury. While there were reports of a potential callup to WWE RAW in the Summer, it doesn’t appear likely at this time. Lyons is expected to continue working EVOLVE and NXT for the foreseeable future.”\n[5|text] This comes after Rope Break previously reported that Lyons had been mentioned as a possible main roster call-up , with RAW discussed as a potential landing spot if WWE decided to move her up this summer.\n[6|text] For now, though, WWE appears to be keeping Lyons in EVOLVE and NXT while she continues rebuilding momentum after multiple knee injuries. That may not be the fast-track call-up some fans expected, but it shows the company is still paying attention to her comeback.\n[7|text] Lyons has also been vocal about her reset. Back on April 29, 2026, she fired back at critics who kept asking for the “old” Nikkita Lyons to return , making it clear she sees herself as healed and moving forward.\n[8|quote] “i MiSs ThE oLd nIkKiTa LyOnS” 😂 like… y’all were complaining back then too 🙄 not that i need to explain, but that was post injury with a sh✨tty bf at the time nikkita lmao but we’re not even in that timeline anymore, WE’RE HEALED 🍃 KEEP UP #NikkitaMultiMedia #DivineFeline lioness pre-wwe mind you👇🦁 BEEN THE LYONESS BABE 🎶🔮🍃”\n[9|text] The tweet gave fans a look into the physical and personal reset Lyons has been working through. Now, with WWE officials reportedly impressed, she appears to be in a better position than she was during her injury setbacks.\n[10|text] Still, the latest word is that a RAW call-up is not expected at this time. Lyons may eventually get that main roster chance, but for now, WWE seems focused on letting her keep building herself back up through EVOLVE and NXT.\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Nikkita Lyons: il punto sul futuro della stella di NXT\",\n  \"body_html\": \"<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x49856-->Nikkita Lyons potrebbe aver fatto una buona impressione sui dirigenti della WWE, ma questo non significa che il suo approdo a Monday Night RAW sia imminente.</p><p>Secondo quanto riportato da <em>False Finish</em>, i vertici della WWE sono rimasti soddisfatti del lavoro svolto dalla lottatrice dal suo rientro dall'infortunio. Tuttavia, nonostante le precedenti indiscrezioni su una possibile promozione nel main roster durante l'estate, tale scenario al momento appare improbabile.</p><p>“False Finish ha appreso che i dirigenti WWE sono rimasti molto colpiti dal lavoro di Nikkita Lyons dal suo ritorno dall'infortunio. Sebbene circolassero voci su una potenziale chiamata a WWE RAW in estate, al momento non sembra probabile. Si prevede che Lyons continuerà a lavorare per EVOLVE e NXT per il prossimo futuro”, si legge nel report.</p><p>Queste informazioni seguono quanto riportato in precedenza da <em>Rope Break</em>, che aveva indicato la Lyons come possibile nome per un salto di categoria, con RAW individuato come potenziale destinazione in caso di promozione estiva.</p><p>Per il momento, la WWE sembra intenzionata a mantenere la Lyons tra EVOLVE e NXT, permettendole di ricostruire il proprio slancio dopo i ripetuti infortuni al ginocchio. Potrebbe non trattarsi della rapida ascesa auspicata da alcuni fan, ma conferma comunque che la compagnia sta monitorando con attenzione il suo percorso di recupero.</p><p>Lyons è stata anche molto esplicita riguardo alla sua fase di rinnovamento. Lo scorso 29 aprile 2026, ha risposto per le rime ai critici che chiedevano a gran voce il ritorno della “vecchia” Nikkita Lyons, chiarendo di considerarsi ormai guarita e pronta a guardare avanti:</p><p>“‘Mi manchi la vecchia Nikkita Lyons’ 😂 tipo... vi lamentavate anche allora 🙄 non che debba dare spiegazioni, ma quella era la Nikkita post-infortunio con un fidanzato di m***a all'epoca, ma non siamo più in quella timeline, SIAMO GUARITI 🍃 STATE AL PASSO #NikkitaMultiMedia #DivineFeline lioness pre-wwe tra l'altro👇🦁 SONO SEMPRE STATA LA LIONESS TESORO 🎶🔮🍃”</p><p>Il tweet ha offerto ai fan uno scorcio sul percorso di rinascita fisica e personale che la lottatrice sta affrontando. Ora, con il gradimento espresso dai piani alti della WWE, la sua posizione appare decisamente più solida rispetto al periodo segnato dai recenti stop forzati.</p><p>Resta il fatto che, stando agli ultimi aggiornamenti, una promozione a RAW non è prevista nel breve periodo. Lyons potrebbe senz'altro ottenere la sua chance nel main roster in futuro, ma per ora la WWE sembra concentrata sul permetterle di proseguire il suo processo di crescita costante attraverso gli show di EVOLVE e NXT.</p>\",\n  \"excerpt_it\": \"Nikkita Lyons ha colpito i vertici della WWE, ma nonostante le voci di una promozione nel main roster, il suo futuro immediato rimane legato a NXT ed EVOLVE.\",\n  \"notes\": [\n    \"Traduzione integrale e fedele seguendo lo stile giornalistico richiesto.\",\n    \"Mantenuta la formattazione dei placeholder per le immagini.\",\n    \"Il quote della Lyons è stato tradotto mantenendo il tono e lo slang originale, preservando gli hashtag e il significato del contenuto.\"\n  ]\n}",
       "translation_used": true
     },
     {
       "bob_notes": [
-        "Traduzione fedele mantenendo lo stile giornalistico richiesto.",
-        "Terminologia tecnica del wrestling (Fatal 5-Way, DDT, X sign) preservata correttamente.",
-        "Nomi propri e riferimenti agli show mantenuti come da fonte originale."
+        "Traduzione eseguita mantenendo la struttura originale dei dati e delle intestazioni.",
+        "Il termine 'rating of 0' è stato reso come 'rating di 0.0' per coerenza con il formato statistico italiano.",
+        "Le intestazioni prive di testo esplicativo nel corpo sono state mantenute come da istruzioni per preservare la sequenza e la struttura del documento sorgente."
       ],
-      "body_html": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg.avif?x16316--> Octagón Jr. ha ricevuto un importante aggiornamento medico in seguito al brutto infortunio al collo subito durante l'evento AAA Noche de los Grandes e, fortunatamente, le cose sarebbero potute andare decisamente peggio.</p><p>Secondo quanto riportato da Bryan Alvarez di <em>Wrestling Observer</em>, la risonanza magnetica a cui si è sottoposto Octagón Jr. ha dato esito positivo dopo l'incidente avvenuto nel corso della seconda serata delle registrazioni di Noche de los Grandes. Nonostante sia previsto uno stop, la situazione ha apparentemente evitato un epilogo ben più grave.</p><p>\"Probabilmente starà fuori per diversi mesi, ma poteva andare molto peggio\".</p><p>L'infortunio si è verificato durante un Fatal 5-Way match registrato per l'edizione del 6 giugno di Noche de los Grandes, che vedeva contrapposti Octagón Jr., Cruz Del Toro, Joaquin Wilde, Lince Dorado e Mini Vikingo. Octagón Jr. è atterrato in malo modo dopo aver subìto una DDT dal punto più alto della corda più alta per mano di Joaquin Wilde. Il wrestler è rimasto a terra mentre il match proseguiva, e la situazione è diventata rapidamente seria quando l'arbitro ha richiesto l'intervento dello staff medico tramite il classico segnale della X.</p><p>Gli addetti ai lavori hanno quindi trasportato Octagón Jr. fuori dal ring in barella, immobilizzandogli il collo, il che ha sollevato immediatamente timori sulla gravità dell'infortunio. All'epoca, non c'erano notizie ufficiali riguardo a possibili danni strutturali o se l'immobilizzazione fosse stata puramente precauzionale. L'aggiornamento di Alvarez offre ora un quadro più ottimistico, nonostante l'atleta debba comunque affrontare diversi mesi di stop.</p><p>Octagón Jr. è stato uno dei nomi più affidabili della AAA e ha continuato a essere una presenza costante anche in seguito all'acquisizione della promotion da parte della WWE. Qualsiasi assenza prolungata rappresenterà un duro colpo, ma l'esito positivo della risonanza magnetica è un enorme sollievo dopo la dinamica preoccupante vista a Monterrey. Per ora, sembra che Octagón Jr. abbia evitato lo scenario peggiore. Il percorso di rientro richiederà tempo, ma gli ultimi aggiornamenti permettono ai fan di tirare un sospiro di sollievo.</p>",
-      "category_hint": "World",
+      "body_html": "<p>Sono stati diffusi i nuovi dati sugli ascolti relativi all'episodio di AEW Dynamite andato in onda su TBS il 27 maggio 2026, che riflettono un costante slancio positivo.</p><p>Secondo quanto riportato da <em>Programming Insider</em>, la puntata di AEW Dynamite del 27 maggio 2026 ha registrato 704.000 telespettatori, con un rating di 0.12 nella fascia demografica chiave 18-49 anni (P18-49). Per fare un confronto, l'episodio del 20 maggio 2026 aveva totalizzato 613.000 telespettatori con un rating di 0.0 nella stessa fascia demografica, segnando dunque un incremento di 91.000 unità nel numero di spettatori e un aumento di 0.12 nel rating della demo.</p><p>Rispetto alla stessa settimana del 2025, quando il 28 maggio AEW Dynamite aveva ottenuto 636.000 spettatori e un rating di 0.16 nella demo, il dato del 27 maggio 2026 (704.000 spettatori e 0.12 nella demo) rappresenta una variazione annua del +10,7% per quanto riguarda l'audience complessiva e un calo del -25,0% nella fascia demografica di riferimento.</p><h3>AEW Dynamite Week-to-Week Viewership Comparison</h3><h3>AEW Dynamite Year-to-Date Performance (2026)</h3><h3>AEW Dynamite Month-to-Date Performance (May 2026)</h3><h3>AEW Dynamite 4-Week Rolling Average</h3><h3>Last 12 Months Performance Summary</h3><h3>Viewership Range (Last 12 Months)</h3><p>Media delle ultime 4 settimane: 602.875 telespettatori.</p><h3>Largest Weekly Viewership Changes (Last 12 Months)</h3><h3>AEW Dynamite Year-over-Year Comparison (2025 vs 2026)</h3><p>Il picco massimo di ascolti del 2026 è stato raggiunto il 25 marzo con 765.000 spettatori, mentre il minimo è stato toccato il 21 gennaio con 498.000 spettatori.</p><p>Questi dati riflettono esclusivamente l'audience televisiva lineare su TBS e non includono il pubblico delle piattaforme streaming o digitale. <em>Ringside News</em> continuerà a monitorare le prestazioni di AEW Dynamite mentre la compagnia prosegue il percorso di costruzione verso il suo prossimo evento live principale.</p>",
+      "category_hint": "AEW",
+      "clean_element_count": 15,
+      "created_at": "2026-06-01T18:50:44.220176+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "element_counts": {
+        "embed": 0,
+        "heading": 8,
+        "image": 0,
+        "quote": 0,
+        "text": 7
+      },
+      "elements": [
+        {
+          "text": "New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum.",
+          "type": "text"
+        },
+        {
+          "text": "According to Programming Insider , AEW Dynamite on May 27, 2026 drew 704,000 viewers on TBS, with a 0.12 rating in the key P18–49 demographic. For comparison, the May 20, 2026 episode drew 613,000 viewers with a 0 rating in the key P18–49 demographic, an increase of ↑ 91,000 viewers and up by ↑ 0.12 in the demo.",
+          "type": "text"
+        },
+        {
+          "text": "Compared to the same week in 2025, AEW Dynamite drew 636,000 viewers and a 0.16 demo rating on May 28, 2025, versus 704,000 viewers and a 0.12 demo rating on May 27, 2026. That represents a year-over-year change of ↑ +10.7% in viewership and ↓ -25.0% in the demo.",
+          "type": "text"
+        },
+        {
+          "level": 3,
+          "text": "AEW Dynamite Week-to-Week Viewership Comparison",
+          "type": "heading"
+        },
+        {
+          "level": 3,
+          "text": "AEW Dynamite Year-to-Date Performance (2026)",
+          "type": "heading"
+        },
+        {
+          "level": 3,
+          "text": "AEW Dynamite Month-to-Date Performance (May 2026)",
+          "type": "heading"
+        },
+        {
+          "level": 3,
+          "text": "AEW Dynamite 4-Week Rolling Average",
+          "type": "heading"
+        },
+        {
+          "level": 3,
+          "text": "Last 12 Months Performance Summary",
+          "type": "heading"
+        },
+        {
+          "level": 3,
+          "text": "Viewership Range (Last 12 Months)",
+          "type": "heading"
+        },
+        {
+          "text": "4-Week Average: 602,875 viewers",
+          "type": "text"
+        },
+        {
+          "level": 3,
+          "text": "Largest Weekly Viewership Changes (Last 12 Months)",
+          "type": "heading"
+        },
+        {
+          "level": 3,
+          "text": "AEW Dynamite Year-over-Year Comparison (2025 vs 2026)",
+          "type": "heading"
+        },
+        {
+          "text": "Highest Viewership of 2026: 765,000 ( March 25, 2026 ) Lowest Viewership of 2026: 498,000 ( January 21, 2026 )",
+          "type": "text"
+        },
+        {
+          "text": "These figures reflect only linear TV viewership on TBS and do not include streaming or digital viewership. Ringside News will continue to monitor AEW Dynamite as the company builds toward its next major live event.",
+          "type": "text"
+        },
+        {
+          "text": "Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.",
+          "type": "text"
+        }
+      ],
+      "excerpt_it": "Pubblicati i dati d'ascolto per la puntata di AEW Dynamite del 27 maggio 2026: lo show registra un incremento di 91.000 spettatori rispetto alla settimana precedente.",
+      "extraction_diagnostics": {
+        "candidate_node_count": 54,
+        "clean_element_count": 15,
+        "dom_noise_reduction_enabled": false,
+        "raw_element_count": 17,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 2,
+        "root_name": "article",
+        "root_text_chars": 3539,
+        "stage": "complete"
+      },
+      "fetched_html_chars": 482938,
+      "menzo_score": 84,
+      "meta": {
+        "description": "New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum. According to Programming",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Dynamite-Massive-Increase-1.jpg",
+        "source_title": "AEW Dynamite Viewership Sees Increase on May 27, 2026"
+      },
+      "raw_element_count": 17,
+      "raw_elements_preview": [
+        {
+          "alt": "AEW Dynamite Viewership Sees Increase on May 27, 2026",
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Dynamite-Massive-Increase-1.jpg?x49856"
+        },
+        {
+          "text": "New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum.",
+          "type": "text"
+        },
+        {
+          "text": "According to Programming Insider , AEW Dynamite on May 27, 2026 drew 704,000 viewers on TBS, with a 0.12 rating in the key P18–49 demographic. For comparison, the May 20, 2026 episode drew 613,000 viewers with a 0 rating in the key P18–49 demographic, an increase of ↑ 91,000 viewers and up by ↑ 0.12 in the demo.",
+          "type": "text"
+        },
+        {
+          "text": "Compared to the same week in 2025, AEW Dynamite drew 636,000 viewers and a 0.16 demo rating on May 28, 2025, versus 704,000 viewers and a 0.12 demo rating on May 27, 2026. That represents a year-over-year change of ↑ +10.7% in viewership and ↓ -25.0% in the demo.",
+          "type": "text"
+        },
+        {
+          "level": 3,
+          "text": "AEW Dynamite Week-to-Week Viewership Comparison",
+          "type": "heading"
+        },
+        {
+          "level": 3,
+          "text": "AEW Dynamite Year-to-Date Performance (2026)",
+          "type": "heading"
+        },
+        {
+          "level": 3,
+          "text": "AEW Dynamite Month-to-Date Performance (May 2026)",
+          "type": "heading"
+        },
+        {
+          "level": 3,
+          "text": "AEW Dynamite 4-Week Rolling Average",
+          "type": "heading"
+        },
+        {
+          "level": 3,
+          "text": "Last 12 Months Performance Summary",
+          "type": "heading"
+        },
+        {
+          "level": 3,
+          "text": "Viewership Range (Last 12 Months)",
+          "type": "heading"
+        },
+        {
+          "text": "4-Week Average: 602,875 viewers",
+          "type": "text"
+        },
+        {
+          "level": 3,
+          "text": "Largest Weekly Viewership Changes (Last 12 Months)",
+          "type": "heading"
+        },
+        {
+          "level": 3,
+          "text": "AEW Dynamite Year-over-Year Comparison (2025 vs 2026)",
+          "type": "heading"
+        },
+        {
+          "text": "Highest Viewership of 2026: 765,000 ( March 25, 2026 ) Lowest Viewership of 2026: 498,000 ( January 21, 2026 )",
+          "type": "text"
+        },
+        {
+          "text": "These figures reflect only linear TV viewership on TBS and do not include streaming or digital viewership. Ringside News will continue to monitor AEW Dynamite as the company builds toward its next major live event.",
+          "type": "text"
+        },
+        {
+          "text": "Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.",
+          "type": "text"
+        },
+        {
+          "text": "Spotlight WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 1, 2026 AEW News Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post",
+          "type": "text"
+        }
+      ],
+      "removed_before_gemini": 15,
+      "removed_elements_debug": [
+        {
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "node_index": 42,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Spotlight"
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196202 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
+          "node_index": 43,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 44,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Makes Major Changes to King of the Ring Tournament Lineup"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 45,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196207 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-jacob-fatu tag-roman-reigns tag-wwe-featured   ",
+          "node_index": 46,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 47,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 48,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196098 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-raw-results category-wwe-results tag-wwe-featured   ",
+          "node_index": 49,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 1, 2026"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 50,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "WWE RAW Results, Highlights and Key Moments for June 1, 2026"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 51,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196155 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-nyla-rose   ",
+          "node_index": 52,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "AEW News Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 53,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 54,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "index": 1,
+          "item": {
+            "alt": "AEW Dynamite Viewership Sees Increase on May 27, 2026",
+            "type": "image",
+            "url": "https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Dynamite-Massive-Increase-1.jpg?x49856"
+          },
+          "reason": "duplicate_featured_image"
+        },
+        {
+          "index": 17,
+          "item": {
+            "text": "Spotlight WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 1, 2026 AEW News Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post",
+            "type": "text"
+          },
+          "reason": "footer_start"
+        }
+      ],
+      "source": "ringsidenews",
+      "source_title": "AEW Dynamite Viewership Sees Increase on May 27, 2026",
+      "source_url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/",
+      "status": "ready_for_alfred",
+      "title_it": "AEW Dynamite: in crescita gli ascolti della puntata del 27 maggio 2026",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/\nTitolo feed: AEW Dynamite Viewership Sees Increase on May 27, 2026\nTitolo pagina: AEW Dynamite Viewership Sees Increase on May 27, 2026\nDescrizione: New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum. According to Programming\nCategoria suggerita: AEW\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|text] New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum.\n[2|text] According to Programming Insider , AEW Dynamite on May 27, 2026 drew 704,000 viewers on TBS, with a 0.12 rating in the key P18–49 demographic. For comparison, the May 20, 2026 episode drew 613,000 viewers with a 0 rating in the key P18–49 demographic, an increase of ↑ 91,000 viewers and up by ↑ 0.12 in the demo.\n[3|text] Compared to the same week in 2025, AEW Dynamite drew 636,000 viewers and a 0.16 demo rating on May 28, 2025, versus 704,000 viewers and a 0.12 demo rating on May 27, 2026. That represents a year-over-year change of ↑ +10.7% in viewership and ↓ -25.0% in the demo.\n[4|heading] AEW Dynamite Week-to-Week Viewership Comparison\n[5|heading] AEW Dynamite Year-to-Date Performance (2026)\n[6|heading] AEW Dynamite Month-to-Date Performance (May 2026)\n[7|heading] AEW Dynamite 4-Week Rolling Average\n[8|heading] Last 12 Months Performance Summary\n[9|heading] Viewership Range (Last 12 Months)\n[10|text] 4-Week Average: 602,875 viewers\n[11|heading] Largest Weekly Viewership Changes (Last 12 Months)\n[12|heading] AEW Dynamite Year-over-Year Comparison (2025 vs 2026)\n[13|text] Highest Viewership of 2026: 765,000 ( March 25, 2026 ) Lowest Viewership of 2026: 498,000 ( January 21, 2026 )\n[14|text] These figures reflect only linear TV viewership on TBS and do not include streaming or digital viewership. Ringside News will continue to monitor AEW Dynamite as the company builds toward its next major live event.\n[15|text] Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"AEW Dynamite: in crescita gli ascolti della puntata del 27 maggio 2026\",\n  \"body_html\": \"<p>Sono stati diffusi i nuovi dati sugli ascolti relativi all'episodio di AEW Dynamite andato in onda su TBS il 27 maggio 2026, che riflettono un costante slancio positivo.</p><p>Secondo quanto riportato da <em>Programming Insider</em>, la puntata di AEW Dynamite del 27 maggio 2026 ha registrato 704.000 telespettatori, con un rating di 0.12 nella fascia demografica chiave 18-49 anni (P18-49). Per fare un confronto, l'episodio del 20 maggio 2026 aveva totalizzato 613.000 telespettatori con un rating di 0.0 nella stessa fascia demografica, segnando dunque un incremento di 91.000 unità nel numero di spettatori e un aumento di 0.12 nel rating della demo.</p><p>Rispetto alla stessa settimana del 2025, quando il 28 maggio AEW Dynamite aveva ottenuto 636.000 spettatori e un rating di 0.16 nella demo, il dato del 27 maggio 2026 (704.000 spettatori e 0.12 nella demo) rappresenta una variazione annua del +10,7% per quanto riguarda l'audience complessiva e un calo del -25,0% nella fascia demografica di riferimento.</p><h3>AEW Dynamite Week-to-Week Viewership Comparison</h3><h3>AEW Dynamite Year-to-Date Performance (2026)</h3><h3>AEW Dynamite Month-to-Date Performance (May 2026)</h3><h3>AEW Dynamite 4-Week Rolling Average</h3><h3>Last 12 Months Performance Summary</h3><h3>Viewership Range (Last 12 Months)</h3><p>Media delle ultime 4 settimane: 602.875 telespettatori.</p><h3>Largest Weekly Viewership Changes (Last 12 Months)</h3><h3>AEW Dynamite Year-over-Year Comparison (2025 vs 2026)</h3><p>Il picco massimo di ascolti del 2026 è stato raggiunto il 25 marzo con 765.000 spettatori, mentre il minimo è stato toccato il 21 gennaio con 498.000 spettatori.</p><p>Questi dati riflettono esclusivamente l'audience televisiva lineare su TBS e non includono il pubblico delle piattaforme streaming o digitale. <em>Ringside News</em> continuerà a monitorare le prestazioni di AEW Dynamite mentre la compagnia prosegue il percorso di costruzione verso il suo prossimo evento live principale.</p>\",\n  \"excerpt_it\": \"Pubblicati i dati d'ascolto per la puntata di AEW Dynamite del 27 maggio 2026: lo show registra un incremento di 91.000 spettatori rispetto alla settimana precedente.\",\n  \"notes\": [\n    \"Traduzione eseguita mantenendo la struttura originale dei dati e delle intestazioni.\",\n    \"Il termine 'rating of 0' è stato reso come 'rating di 0.0' per coerenza con il formato statistico italiano.\",\n    \"Le intestazioni prive di testo esplicativo nel corpo sono state mantenute come da istruzioni per preservare la sequenza e la struttura del documento sorgente.\"\n  ]\n}",
+      "translation_used": true
+    },
+    {
+      "bob_notes": [
+        "Traduzione eseguita mantenendo lo stile giornalistico richiesto dalla pipeline v92.",
+        "Terminologia tecnica (main event, campione del mondo, federazione) applicata in modo coerente con il contesto wrestling."
+      ],
+      "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x49856-->\n<p>Il futuro di Mike Santana in TNA è diventato un po' più chiaro, ma la sua prossima mossa resta un punto interrogativo, dato che il suo contratto è in scadenza a brevissimo termine.</p>\n<p>Secondo quanto riportato da PWInsider in data 1 giugno 2026, l'attuale accordo che lega il campione del mondo TNA alla federazione scadrà nel corso del mese di luglio. Il report sottolinea inoltre come la WWE abbia già mostrato interesse per Santana in passato.</p>\n<p>Queste informazioni forniscono una tempistica più precisa sulla situazione contrattuale del wrestler, dopo le indiscrezioni iniziali che parlavano di una scadenza fissata per quest'estate. Con il mese di luglio ormai indicato come termine ultimo, la prossima mossa di Santana potrebbe diventare un tema centrale del panorama del wrestling molto presto.</p>\n<p>Santana è stato uno dei nomi di punta della TNA sin dal suo ritorno avvenuto nel 2024, e il suo attuale regno come TNA World Champion rende le tempistiche della scadenza ancora più interessanti. Qualora dovesse arrivare alla naturale conclusione dell'accordo senza averne firmato uno nuovo, il lottatore avrebbe diverse opzioni a sua disposizione nel mondo del wrestling.</p>\n<p>L'interesse da parte della WWE resta un fattore significativo, specialmente considerando che Santana si sta già imponendo come una star da main event in TNA. Un passaggio alla WWE rappresenterebbe un cambiamento importante, ma restare in TNA gli permetterebbe di continuare a guidare la federazione in un momento in cui le sue quotazioni sono in forte ascesa.</p>\n<p>Per il momento, Santana rimane il campione del mondo TNA, ma il mese di luglio non è lontano. Che decida di restare o di esplorare una nuova opportunità, la sua situazione contrattuale è ora una delle storie più rilevanti da seguire nel corso di questa estate.</p>",
+      "category_hint": "TNA",
       "clean_element_count": 7,
-      "created_at": "2026-06-01T16:46:42.836442+00:00",
+      "created_at": "2026-06-01T18:50:47.271771+00:00",
       "diagnostic_stage": "ready_for_alfred",
       "element_counts": {
         "embed": 0,
         "heading": 0,
         "image": 1,
-        "quote": 1,
-        "text": 5
+        "quote": 0,
+        "text": 6
       },
       "elements": [
         {
-          "alt": "Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping",
+          "alt": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest",
           "type": "image",
-          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg.avif?x16316"
+          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x49856"
         },
         {
-          "text": "Octagón Jr. has received an important medical update after his frightening neck injury at AAA Noche de los Grandes, and thankfully, things could have been much worse.",
+          "text": "Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon.",
           "type": "text"
         },
         {
-          "text": "According to Bryan Alvarez of Wrestling Observer , Octagón Jr.’s MRI came back good after he suffered a frightening neck injury during the Noche de los Grandes Night Two taping. While he is still expected to miss time, the situation apparently avoided a much worse outcome.",
+          "text": "According to PWInsider on June 1, 2026, the reigning TNA World Champion’s current contract with the company runs through sometime in July. The report also noted that WWE has shown interest in Santana in the past.",
           "type": "text"
         },
         {
-          "text": "“He will likely be out several months but could have been much worse.”",
-          "type": "quote",
-          "url": ""
-        },
-        {
-          "text": "The injury happened during a Fatal 5-Way match taped for the June 6 edition of Noche de los Grandes, featuring Octagón Jr., Cruz Del Toro, Joaquin Wilde, Lince Dorado, and Mini Vikingo. Octagón Jr. landed badly after taking a DDT from the highest point of the top rope with Joaquin Wilde . He was left down on the mat as the match continued, and things quickly turned serious when the referee threw up the X sign for medical help.",
+          "text": "This gives a clearer timeline for Santana’s contract situation after earlier word that his TNA deal was set to expire this summer . With July now mentioned, Santana’s next move could become a major story very soon.",
           "type": "text"
         },
         {
-          "text": "Officials then removed Octagón Jr. from the match on a stretcher while his neck was immobilized, which immediately raised concern about how serious the injury might be. At the time, there was no official word on whether he had suffered structural damage or if the neck immobilization was mainly precautionary. Alvarez’s update now gives a more hopeful picture, even though Octagón Jr. may still be out for several months.",
+          "text": "Santana has been one of TNA’s top names since returning in 2024 , and his current run as TNA World Champion makes the timing even more interesting. If he reaches the end of his deal without signing a new one, he could have options across the wrestling world.",
           "type": "text"
         },
         {
-          "text": "Octagón Jr. has been one of AAA’s most reliable names and has remained heavily featured following WWE’s acquisition of the promotion. Any extended absence will still hurt, but the positive MRI result is a huge relief after how bad the spot looked in Monterrey. For now, Octagón Jr. appears to have avoided the worst-case scenario. The road back may still take time, but the latest update gives fans a reason to breathe a little easier.",
+          "text": "The WWE interest is also important, especially with Santana already carrying himself like a main-event star in TNA. A move to WWE would be a major change, but staying with TNA could also allow him to continue leading the promotion at a time when his stock is high.",
+          "type": "text"
+        },
+        {
+          "text": "For now, Santana remains TNA World Champion, but July is not far away. Whether he stays put or explores a new opportunity, his contract status is now one of the bigger stories to watch this summer.",
           "type": "text"
         }
       ],
-      "excerpt_it": "Arrivano aggiornamenti medici sulle condizioni di Octagón Jr. dopo il grave infortunio al collo subìto durante le registrazioni di AAA Noche de los Grandes.",
+      "excerpt_it": "Il contratto di Mike Santana con la TNA scadrà nel mese di luglio: si fanno sempre più insistenti le voci su un possibile interesse da parte della WWE per l'attuale campione del mondo.",
       "extraction_diagnostics": {
-        "candidate_node_count": 41,
+        "candidate_node_count": 40,
         "clean_element_count": 7,
         "dom_noise_reduction_enabled": false,
         "raw_element_count": 8,
         "removed_by_node_count": 13,
         "removed_by_sanitize_count": 1,
         "root_name": "article",
-        "root_text_chars": 2828,
+        "root_text_chars": 2265,
         "stage": "complete"
       },
-      "fetched_html_chars": 477649,
-      "menzo_score": 86,
+      "fetched_html_chars": 471792,
+      "menzo_score": 78,
       "meta": {
-        "description": "Octagón Jr. has received an important medical update after his frightening neck injury at AAA Noche de los Grandes, and thankfully, things could have been",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg",
-        "source_title": "Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping"
+        "description": "Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon. According to",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg",
+        "source_title": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest"
       },
       "raw_element_count": 8,
       "raw_elements_preview": [
         {
-          "alt": "Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping",
+          "alt": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest",
           "type": "image",
-          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg.avif?x16316"
+          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x49856"
         },
         {
-          "text": "Octagón Jr. has received an important medical update after his frightening neck injury at AAA Noche de los Grandes, and thankfully, things could have been much worse.",
+          "text": "Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon.",
           "type": "text"
         },
         {
-          "text": "According to Bryan Alvarez of Wrestling Observer , Octagón Jr.’s MRI came back good after he suffered a frightening neck injury during the Noche de los Grandes Night Two taping. While he is still expected to miss time, the situation apparently avoided a much worse outcome.",
+          "text": "According to PWInsider on June 1, 2026, the reigning TNA World Champion’s current contract with the company runs through sometime in July. The report also noted that WWE has shown interest in Santana in the past.",
           "type": "text"
         },
         {
-          "text": "“He will likely be out several months but could have been much worse.”",
-          "type": "quote",
-          "url": ""
-        },
-        {
-          "text": "The injury happened during a Fatal 5-Way match taped for the June 6 edition of Noche de los Grandes, featuring Octagón Jr., Cruz Del Toro, Joaquin Wilde, Lince Dorado, and Mini Vikingo. Octagón Jr. landed badly after taking a DDT from the highest point of the top rope with Joaquin Wilde . He was left down on the mat as the match continued, and things quickly turned serious when the referee threw up the X sign for medical help.",
+          "text": "This gives a clearer timeline for Santana’s contract situation after earlier word that his TNA deal was set to expire this summer . With July now mentioned, Santana’s next move could become a major story very soon.",
           "type": "text"
         },
         {
-          "text": "Officials then removed Octagón Jr. from the match on a stretcher while his neck was immobilized, which immediately raised concern about how serious the injury might be. At the time, there was no official word on whether he had suffered structural damage or if the neck immobilization was mainly precautionary. Alvarez’s update now gives a more hopeful picture, even though Octagón Jr. may still be out for several months.",
+          "text": "Santana has been one of TNA’s top names since returning in 2024 , and his current run as TNA World Champion makes the timing even more interesting. If he reaches the end of his deal without signing a new one, he could have options across the wrestling world.",
           "type": "text"
         },
         {
-          "text": "Octagón Jr. has been one of AAA’s most reliable names and has remained heavily featured following WWE’s acquisition of the promotion. Any extended absence will still hurt, but the positive MRI result is a huge relief after how bad the spot looked in Monterrey. For now, Octagón Jr. appears to have avoided the worst-case scenario. The road back may still take time, but the latest update gives fans a reason to breathe a little easier.",
+          "text": "The WWE interest is also important, especially with Santana already carrying himself like a main-event star in TNA. A move to WWE would be a major change, but staying with TNA could also allow him to continue leading the promotion at a time when his stock is high.",
           "type": "text"
         },
         {
-          "text": "Spotlight WWE News Sol Ruca Wins Women’s IC Title At WWE Clash In Italy WWE News Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy WWE News Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy WWE News WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win",
+          "text": "For now, Santana remains TNA World Champion, but July is not far away. Whether he stays put or explores a new opportunity, his contract status is now one of the bigger stories to watch this summer.",
+          "type": "text"
+        },
+        {
+          "text": "Spotlight WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 1, 2026 AEW News Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post",
           "type": "text"
         }
       ],
@@ -455,91 +666,91 @@
       "removed_elements_debug": [
         {
           "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 29,
+          "node_index": 28,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Spotlight"
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2195780 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-sol-ruca tag-wwe-clash-in-italy tag-wwe-featured   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2196202 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
+          "node_index": 29,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 30,
-          "node_name": "li",
+          "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "WWE News Sol Ruca Wins Women’s IC Title At WWE Clash In Italy"
+          "text_preview": "WWE Makes Major Changes to King of the Ring Tournament Lineup"
         },
         {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
           "node_index": 31,
-          "node_name": "h2",
+          "node_name": "img",
           "reason": "node_class_noise",
-          "text_preview": "Sol Ruca Wins Women’s IC Title At WWE Clash In Italy"
+          "text_preview": ""
         },
         {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2196207 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-jacob-fatu tag-roman-reigns tag-wwe-featured   ",
           "node_index": 32,
-          "node_name": "img",
+          "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": ""
+          "text_preview": "WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2195726 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-brock-lesnar tag-oba-femi tag-wwe-clash-in-italy tag-wwe-featured   ",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 33,
-          "node_name": "li",
+          "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "WWE News Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy"
+          "text_preview": "Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
         },
         {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
           "node_index": 34,
-          "node_name": "h2",
+          "node_name": "img",
           "reason": "node_class_noise",
-          "text_preview": "Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy"
+          "text_preview": ""
         },
         {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2196098 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-raw-results category-wwe-results tag-wwe-featured   ",
           "node_index": 35,
-          "node_name": "img",
+          "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": ""
+          "text_preview": "WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 1, 2026"
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2195718 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-jacob-fatu tag-wwe-clash-in-italy tag-wwe-featured   ",
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 36,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 37,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy"
+          "text_preview": "WWE RAW Results, Highlights and Key Moments for June 1, 2026"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 38,
+          "node_index": 37,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2195550 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-sol-ruca tag-wwe-featured   ",
-          "node_index": 39,
+          "classes": "gb-loop-item rsn-spotlight-item post-2196155 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-nyla-rose   ",
+          "node_index": 38,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE News WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win"
+          "text_preview": "AEW News Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 40,
+          "node_index": 39,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win"
+          "text_preview": "Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 41,
+          "node_index": 40,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
@@ -547,27 +758,27 @@
         {
           "index": 8,
           "item": {
-            "text": "Spotlight WWE News Sol Ruca Wins Women’s IC Title At WWE Clash In Italy WWE News Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy WWE News Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy WWE News WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win",
+            "text": "Spotlight WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW WWE RAW Results WWE RAW Results, Highlights and Key Moments for June 1, 2026 AEW News Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post",
             "type": "text"
           },
           "reason": "footer_start"
         }
       ],
       "source": "ringsidenews",
-      "source_title": "Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping",
-      "source_url": "https://www.ringsidenews.com/octagon-jrs-recovery-timeline-revealed-injury-aaa-noche-de-los-grandes-taping/",
+      "source_title": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest",
+      "source_url": "https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest/",
       "status": "ready_for_alfred",
-      "title_it": "Octagón Jr.: rivelati i tempi di recupero dopo l'infortunio a AAA Noche de los Grandes",
+      "title_it": "Mike Santana: aggiornamenti sul contratto con TNA tra i rumors di interesse della WWE",
       "translation_chain_attempted": [
         "gemini-3.1-flash-lite"
       ],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/octagon-jrs-recovery-timeline-revealed-injury-aaa-noche-de-los-grandes-taping/\nTitolo feed: Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping\nTitolo pagina: Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping\nDescrizione: Octagón Jr. has received an important medical update after his frightening neck injury at AAA Noche de los Grandes, and thankfully, things could have been\nCategoria suggerita: World\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg.avif?x16316 ALT=Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping\n[2|text] Octagón Jr. has received an important medical update after his frightening neck injury at AAA Noche de los Grandes, and thankfully, things could have been much worse.\n[3|text] According to Bryan Alvarez of Wrestling Observer , Octagón Jr.’s MRI came back good after he suffered a frightening neck injury during the Noche de los Grandes Night Two taping. While he is still expected to miss time, the situation apparently avoided a much worse outcome.\n[4|quote] “He will likely be out several months but could have been much worse.”\n[5|text] The injury happened during a Fatal 5-Way match taped for the June 6 edition of Noche de los Grandes, featuring Octagón Jr., Cruz Del Toro, Joaquin Wilde, Lince Dorado, and Mini Vikingo. Octagón Jr. landed badly after taking a DDT from the highest point of the top rope with Joaquin Wilde . He was left down on the mat as the match continued, and things quickly turned serious when the referee threw up the X sign for medical help.\n[6|text] Officials then removed Octagón Jr. from the match on a stretcher while his neck was immobilized, which immediately raised concern about how serious the injury might be. At the time, there was no official word on whether he had suffered structural damage or if the neck immobilization was mainly precautionary. Alvarez’s update now gives a more hopeful picture, even though Octagón Jr. may still be out for several months.\n[7|text] Octagón Jr. has been one of AAA’s most reliable names and has remained heavily featured following WWE’s acquisition of the promotion. Any extended absence will still hurt, but the positive MRI result is a huge relief after how bad the spot looked in Monterrey. For now, Octagón Jr. appears to have avoided the worst-case scenario. The road back may still take time, but the latest update gives fans a reason to breathe a little easier.\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"Octagón Jr.: rivelati i tempi di recupero dopo l'infortunio a AAA Noche de los Grandes\",\n  \"body_html\": \"<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg.avif?x16316--> Octagón Jr. ha ricevuto un importante aggiornamento medico in seguito al brutto infortunio al collo subito durante l'evento AAA Noche de los Grandes e, fortunatamente, le cose sarebbero potute andare decisamente peggio.</p><p>Secondo quanto riportato da Bryan Alvarez di <em>Wrestling Observer</em>, la risonanza magnetica a cui si è sottoposto Octagón Jr. ha dato esito positivo dopo l'incidente avvenuto nel corso della seconda serata delle registrazioni di Noche de los Grandes. Nonostante sia previsto uno stop, la situazione ha apparentemente evitato un epilogo ben più grave.</p><p>\\\"Probabilmente starà fuori per diversi mesi, ma poteva andare molto peggio\\\".</p><p>L'infortunio si è verificato durante un Fatal 5-Way match registrato per l'edizione del 6 giugno di Noche de los Grandes, che vedeva contrapposti Octagón Jr., Cruz Del Toro, Joaquin Wilde, Lince Dorado e Mini Vikingo. Octagón Jr. è atterrato in malo modo dopo aver subìto una DDT dal punto più alto della corda più alta per mano di Joaquin Wilde. Il wrestler è rimasto a terra mentre il match proseguiva, e la situazione è diventata rapidamente seria quando l'arbitro ha richiesto l'intervento dello staff medico tramite il classico segnale della X.</p><p>Gli addetti ai lavori hanno quindi trasportato Octagón Jr. fuori dal ring in barella, immobilizzandogli il collo, il che ha sollevato immediatamente timori sulla gravità dell'infortunio. All'epoca, non c'erano notizie ufficiali riguardo a possibili danni strutturali o se l'immobilizzazione fosse stata puramente precauzionale. L'aggiornamento di Alvarez offre ora un quadro più ottimistico, nonostante l'atleta debba comunque affrontare diversi mesi di stop.</p><p>Octagón Jr. è stato uno dei nomi più affidabili della AAA e ha continuato a essere una presenza costante anche in seguito all'acquisizione della promotion da parte della WWE. Qualsiasi assenza prolungata rappresenterà un duro colpo, ma l'esito positivo della risonanza magnetica è un enorme sollievo dopo la dinamica preoccupante vista a Monterrey. Per ora, sembra che Octagón Jr. abbia evitato lo scenario peggiore. Il percorso di rientro richiederà tempo, ma gli ultimi aggiornamenti permettono ai fan di tirare un sospiro di sollievo.</p>\",\n  \"excerpt_it\": \"Arrivano aggiornamenti medici sulle condizioni di Octagón Jr. dopo il grave infortunio al collo subìto durante le registrazioni di AAA Noche de los Grandes.\",\n  \"notes\": [\n    \"Traduzione fedele mantenendo lo stile giornalistico richiesto.\",\n    \"Terminologia tecnica del wrestling (Fatal 5-Way, DDT, X sign) preservata correttamente.\",\n    \"Nomi propri e riferimenti agli show mantenuti come da fonte originale.\"\n  ]\n}",
+      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest/\nTitolo feed: Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest\nTitolo pagina: Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest\nDescrizione: Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon. According to\nCategoria suggerita: TNA\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x49856 ALT=Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest\n[2|text] Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon.\n[3|text] According to PWInsider on June 1, 2026, the reigning TNA World Champion’s current contract with the company runs through sometime in July. The report also noted that WWE has shown interest in Santana in the past.\n[4|text] This gives a clearer timeline for Santana’s contract situation after earlier word that his TNA deal was set to expire this summer . With July now mentioned, Santana’s next move could become a major story very soon.\n[5|text] Santana has been one of TNA’s top names since returning in 2024 , and his current run as TNA World Champion makes the timing even more interesting. If he reaches the end of his deal without signing a new one, he could have options across the wrestling world.\n[6|text] The WWE interest is also important, especially with Santana already carrying himself like a main-event star in TNA. A move to WWE would be a major change, but staying with TNA could also allow him to continue leading the promotion at a time when his stock is high.\n[7|text] For now, Santana remains TNA World Champion, but July is not far away. Whether he stays put or explores a new opportunity, his contract status is now one of the bigger stories to watch this summer.\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Mike Santana: aggiornamenti sul contratto con TNA tra i rumors di interesse della WWE\",\n  \"body_html\": \"<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x49856-->\\n<p>Il futuro di Mike Santana in TNA è diventato un po' più chiaro, ma la sua prossima mossa resta un punto interrogativo, dato che il suo contratto è in scadenza a brevissimo termine.</p>\\n<p>Secondo quanto riportato da PWInsider in data 1 giugno 2026, l'attuale accordo che lega il campione del mondo TNA alla federazione scadrà nel corso del mese di luglio. Il report sottolinea inoltre come la WWE abbia già mostrato interesse per Santana in passato.</p>\\n<p>Queste informazioni forniscono una tempistica più precisa sulla situazione contrattuale del wrestler, dopo le indiscrezioni iniziali che parlavano di una scadenza fissata per quest'estate. Con il mese di luglio ormai indicato come termine ultimo, la prossima mossa di Santana potrebbe diventare un tema centrale del panorama del wrestling molto presto.</p>\\n<p>Santana è stato uno dei nomi di punta della TNA sin dal suo ritorno avvenuto nel 2024, e il suo attuale regno come TNA World Champion rende le tempistiche della scadenza ancora più interessanti. Qualora dovesse arrivare alla naturale conclusione dell'accordo senza averne firmato uno nuovo, il lottatore avrebbe diverse opzioni a sua disposizione nel mondo del wrestling.</p>\\n<p>L'interesse da parte della WWE resta un fattore significativo, specialmente considerando che Santana si sta già imponendo come una star da main event in TNA. Un passaggio alla WWE rappresenterebbe un cambiamento importante, ma restare in TNA gli permetterebbe di continuare a guidare la federazione in un momento in cui le sue quotazioni sono in forte ascesa.</p>\\n<p>Per il momento, Santana rimane il campione del mondo TNA, ma il mese di luglio non è lontano. Che decida di restare o di esplorare una nuova opportunità, la sua situazione contrattuale è ora una delle storie più rilevanti da seguire nel corso di questa estate.</p>\",\n  \"excerpt_it\": \"Il contratto di Mike Santana con la TNA scadrà nel mese di luglio: si fanno sempre più insistenti le voci su un possibile interesse da parte della WWE per l'attuale campione del mondo.\",\n  \"notes\": [\n    \"Traduzione eseguita mantenendo lo stile giornalistico richiesto dalla pipeline v92.\",\n    \"Terminologia tecnica (main event, campione del mondo, federazione) applicata in modo coerente con il contesto wrestling.\"\n  ]\n}",
       "translation_used": true
     }
   ],
-  "generated_at": "2026-06-01T16:46:46.368762+00:00",
+  "generated_at": "2026-06-01T18:50:50.266205+00:00",
   "handoff": {
     "errors": 0,
     "extraction_empty": 0,

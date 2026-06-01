@@ -3,14 +3,36 @@
   "already_worked": [
     {
       "decision": "already_worked",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/cody-rhodes-roman-reigns-have-tense-backstage-staredown-wwe-clash-italy",
-      "published": "Sun, 31 May 2026 23:04:38 +0000",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2184202/wwe-clash-in-italy-2026-four-titles-on-line-oba-femi-brock-lesnar",
+      "published": "Sun, 31 May 2026 16:00:00 +0000",
       "reason": "url_present_in_state",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Cody Rhodes and Roman Reigns Have Tense Backstage Staredown After WWE Clash in Italy\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/05/cody-rhodes-and-roman-reigns-have-tense-backstage-staredown-after-wwe-clash-in-italy-18.jpg?x16316\" width=\"800\" /></p>Cody Rhodes and Roman Reigns didn’t need a microphone to make things feel personal after WWE Clash in Italy, as they had a tense backstage staredown. After WWE Clash in Italy went off the air, WWE took to Twitter and uploaded a video showing Rhodes and Reigns crossing paths backstage. Reigns walked out of his ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/cody-rhodes-roman-reigns-have-tense-backstage-staredown-wwe-clash-italy/\" title=\"Cody Rhodes and Roman Reigns Have Tense Backstage Staredown After WWE Clash in Italy\">Read more</a>",
-      "title": "Cody Rhodes and Roman Reigns Have Tense Backstage Staredown After WWE Clash in Italy",
-      "url": "https://www.ringsidenews.com/cody-rhodes-roman-reigns-have-tense-backstage-staredown-wwe-clash-italy/"
+      "source": "wrestlinginc",
+      "summary": "This is  Wrestling Inc.'s results for WWE Clash In Italy 2026, with the Undisputed WWE & World Heavyweight Championships among those set to be defended!",
+      "title": "WWE Clash In Italy Results 5/31 - Four Titles On The Line, Oba Femi Faces Brock Lesnar",
+      "url": "https://www.wrestlinginc.com/2184202/wwe-clash-in-italy-2026-four-titles-on-line-oba-femi-brock-lesnar/"
+    },
+    {
+      "decision": "already_worked",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2184309/aew-collision-may-30-2026-results",
+      "published": "Sat, 30 May 2026 23:01:58 +0000",
+      "reason": "url_present_in_state",
+      "source": "wrestlinginc",
+      "summary": "On \"AEW Collision\", Divine Dominion will have a 5-min Tag Title Eliminator Challenge match and ROH Pure Champion Lee Moriarty will be in action.",
+      "title": "AEW Collision Results 5/30 - Two Titles On The Line, STARDOM's Hazuki Makes AEW Debut",
+      "url": "https://www.wrestlinginc.com/2184309/aew-collision-may-30-2026-results/"
+    },
+    {
+      "decision": "already_worked",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2184147/wwe-smackdown-may-29-cody-rhodes-gunther-jade-cargill",
+      "published": "Fri, 29 May 2026 22:58:51 +0000",
+      "reason": "url_present_in_state",
+      "source": "wrestlinginc",
+      "summary": "This is Wrestling Inc.'s results for \"SmackDown\" on May 29, with Jade Cargill appearing before she challenges Women's Champion Rhea Ripley at Clash in Italy!",
+      "title": "WWE SmackDown Results 5/29 - Cody Rhodes & GUNTHER Meet, Jade Cargill Appears",
+      "url": "https://www.wrestlinginc.com/2184147/wwe-smackdown-may-29-cody-rhodes-gunther-jade-cargill/"
     }
   ],
   "binding": {
@@ -31,24 +53,35 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-01T16:46:32.991164+00:00",
+  "generated_at": "2026-06-01T18:50:38.598254+00:00",
   "handoff": {
-    "already_worked": 1,
-    "hard_skipped": 1,
-    "to_menzo": 32,
-    "to_simone": 1
+    "already_worked": 3,
+    "hard_skipped": 2,
+    "to_menzo": 27,
+    "to_simone": 3
   },
   "hard_skipped": [
     {
       "decision": "hard_skip",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/wwe-raw-preview-june-1-2026-confirmed-matches-start-time-how-watch",
-      "published": "Mon, 01 Jun 2026 09:30:49 +0000",
-      "reason": "generic_show_preview",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"WWE RAW Preview for June 1, 2026: Confirmed Matches, Start Time and How to Watch\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/wwe-raw-preview-for-june-1-2026-confirmed-matches-start-time-and-how-to-watch-08.jpg?x16316\" width=\"800\" /></p>The June 1, 2026 episode of Monday Night Raw will deal with the fallout from the Clash in Italy Premium Live Event, so fans can expect a solid show from start to finish. Roman Reigns’ Acknowledgement Ceremony The biggest focus of the night will be Roman Reigns&#8217; acknowledgement ceremony. Reigns successfully retained the World Heavyweight ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-raw-preview-june-1-2026-confirmed-matches-start-time-how-watch/\" title=\"WWE RAW Preview for June 1, 2026: Confirmed Matches, Start Time and How to Watch\">Read more</a>",
-      "title": "WWE RAW Preview for June 1, 2026: Confirmed Matches, Start Time and How to Watch",
-      "url": "https://www.ringsidenews.com/wwe-raw-preview-june-1-2026-confirmed-matches-start-time-how-watch/"
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2184477/wwe-clash-in-italy-2026-hated-loved-opinion-review",
+      "published": "Sun, 31 May 2026 22:19:45 +0000",
+      "reason": "listicle_things_we_loved_hated",
+      "source": "wrestlinginc",
+      "summary": "On a night that saw Roman Reigns and Cody Rhodes retain their titles, here are three things we hated and three things we loved about WWE Clash in Italy 2026!",
+      "title": "WWE Clash In Italy 2026: 3 Things We Hated & 3 Things We Loved",
+      "url": "https://www.wrestlinginc.com/2184477/wwe-clash-in-italy-2026-hated-loved-opinion-review/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2184204/wwe-smackdown-may-29-2026-hated-loved-opinion-review",
+      "published": "Sat, 30 May 2026 03:57:28 +0000",
+      "reason": "listicle_things_we_loved_hated",
+      "source": "wrestlinginc",
+      "summary": "On the go home show for Clash in Italy this weekend, here are three things we hated and three things we loved about the 5/29/26 episode of \"WWE SmackDown!\"",
+      "title": "WWE SmackDown 5/29/2026: 3 Things We Hated & 3 Things We Loved",
+      "url": "https://www.wrestlinginc.com/2184204/wwe-smackdown-may-29-2026-hated-loved-opinion-review/"
     }
   ],
   "known_state_urls": 9,
@@ -58,97 +91,37 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184971/wwe-booker-t-brock-lesnar-retirement-mind-trick",
-      "published": "Mon, 01 Jun 2026 16:32:03 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2185121/wwe-nxt-booker-t-kelani-jordan-tatum-paxley-jaida-parker-lola-vice-jackson-drake-favorite-stars-summer-2026",
+      "published": "Mon, 01 Jun 2026 18:22:18 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "WWE Hall of Famer reacts to Brock Lesnar's retirement ploy, and how it reminded him of something seen in Star Wars.",
-      "title": "Booker T: Brock Lesnar's Short-Lived WWE Retirement Might've Been A 'Jedi Mind Trick'",
-      "url": "https://www.wrestlinginc.com/2184971/wwe-booker-t-brock-lesnar-retirement-mind-trick/"
+      "summary": "Although the summer solstice hasn't occurred yet, Booker T names his top-five favorite \"WWE NXT\" wrestlers of the summer.",
+      "title": "Booker T Names His Five Favorite WWE NXT Stars Heading Into Summer 2026",
+      "url": "https://www.wrestlinginc.com/2185121/wwe-nxt-booker-t-kelani-jordan-tatum-paxley-jaida-parker-lola-vice-jackson-drake-favorite-stars-summer-2026/"
     },
     {
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2172870/wwe-scarlett-pitched-bra-and-panties-match",
-      "published": "Sun, 17 May 2026 15:00:00 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results",
+      "published": "Sun, 31 May 2026 01:00:00 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "Scarlett expresses frustration with WWE shutting down her idea to bring back an old wrestling stipulation.",
-      "title": "Former WWE Star Scarlett Says She Pitched Throwback Women's Match Stipulation",
-      "url": "https://www.wrestlinginc.com/2172870/wwe-scarlett-pitched-bra-and-panties-match/"
+      "summary": "This is Wrestling Inc.'s live coverage of AAA Nocha de Los Grandes, headlined by El Grande Americano versus the Original Grande Americano in Mask vs. Mask.",
+      "title": "AAA Noche De Los Grandes Results - Mask Vs. Mask, Three Titles On The Line",
+      "url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results/"
     },
     {
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2172849/wwe-nxt-bully-ray-favorite-pro-wrestling-show",
-      "published": "Sun, 17 May 2026 14:30:00 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2185118/wwe-smackdown-two-hour-format-latest-update",
+      "published": "Mon, 01 Jun 2026 18:21:33 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "Bully Ray considers \"WWE NXT\" his favorite wrestling TV show, primarily because of how successfully it sets up the next generation of stars.",
-      "title": "Bully Ray Explains Why WWE NXT Is His Favorite Pro Wrestling Show",
-      "url": "https://www.wrestlinginc.com/2172849/wwe-nxt-bully-ray-favorite-pro-wrestling-show/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2172720/aew-wwe-adam-copeland-hulk-hogan-friendship",
-      "published": "Sun, 17 May 2026 13:30:00 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "AEW's Adam Copeland has discussed the passing of Hulk Hogan and the friendship he shared with the late WWE Hall of Famer.",
-      "title": "AEW Star Adam Copeland Discusses Friendship With Late WWE HOFer Hulk Hogan",
-      "url": "https://www.wrestlinginc.com/2172720/aew-wwe-adam-copeland-hulk-hogan-friendship/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2172321/wwe-aj-styles-thoughts-pursuing-production-role",
-      "published": "Sun, 17 May 2026 13:00:00 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "Following his in-ring retirement, AJ Styles has begun working as a scout for WWE, and he recently commented on the prospect of getting into production.",
-      "title": "AJ Styles Shares Thoughts On Pursuing WWE Production Role",
-      "url": "https://www.wrestlinginc.com/2172321/wwe-aj-styles-thoughts-pursuing-production-role/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2172130/wwe-jim-ross-alcatraz-event-infamous-island-prison",
-      "published": "Sun, 17 May 2026 12:30:00 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "According to former WWE commentator Jim Ross, the company once nearly hosted an event at a notorious prison at his suggestion.",
-      "title": "Jim Ross Says WWE Nearly Held Event At Infamous Island Prison",
-      "url": "https://www.wrestlinginc.com/2172130/wwe-jim-ross-alcatraz-event-infamous-island-prison/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184935/wwe-clash-in-italy-2026-becky-lynch-severe-hematoma-rant",
-      "published": "Mon, 01 Jun 2026 16:12:14 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "Becky Lynch sustains a hematoma at Clash In Italy and airs her frustrations about WWE referee Jessika Carr after losing the Intercontinental Title to Sol Ruca.",
-      "title": "Becky Lynch Says She Suffered 'Severe Hematoma' In Rant Following WWE Clash In Italy",
-      "url": "https://www.wrestlinginc.com/2184935/wwe-clash-in-italy-2026-becky-lynch-severe-hematoma-rant/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2172020/wwe-rikishi-ai-artificial-intelligence-real-talent",
-      "published": "Sun, 17 May 2026 03:59:00 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "Rikishi is steadfast in his belief that WWE doesn't need to use AI in their onscreen product, stating WWE needs to let the real talent come through",
-      "title": "Rikishi Doesn't Believe WWE Needs AI: We Need To Let 'Real Talent Come Through'",
-      "url": "https://www.wrestlinginc.com/2172020/wwe-rikishi-ai-artificial-intelligence-real-talent/"
+      "summary": "\"WWE SmackDown\" is set to return to a two-hour format, and Dave Meltzer has revealed when the change is set to be made.",
+      "title": "Latest Update On When WWE SmackDown Is Expected To Return To Two-Hour Format",
+      "url": "https://www.wrestlinginc.com/2185118/wwe-smackdown-two-hour-format-latest-update/"
     },
     {
       "assigned_to": "Menzo",
@@ -202,18 +175,6 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes",
-      "published": "Mon, 01 Jun 2026 15:41:06 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "Wrestling Observer provided an update on AAA's Octagon Jr. after an injury on Saturday night.",
-      "title": "AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes",
-      "url": "https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2174560/wwe-backlash-danhausen-clone-lifted-elements-independent-show",
       "published": "Sat, 16 May 2026 19:18:37 +0000",
       "reason": "requires_menzo_classification",
@@ -221,6 +182,42 @@
       "summary": "Wrestling is facing a \"clone war\" after one match at WWE Backlash copycatted a similar formula used by an independent wrestler.",
       "title": "WWE Backlash Match Reportedly Lifted Elements From Recent Independent Show",
       "url": "https://www.wrestlinginc.com/2174560/wwe-backlash-danhausen-clone-lifted-elements-independent-show/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2185116/wwe-rhea-ripley-anxiety-attack-pressure-2025-australian-tour",
+      "published": "Mon, 01 Jun 2026 18:18:46 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "Rhea Ripley reflects on one of the lowest points of her WWE career and opens up about having a panic attack backstage.",
+      "title": "Rhea Ripley Recalls Anxiety Attack After Pressure Of WWE's 2025 Australian Tour",
+      "url": "https://www.wrestlinginc.com/2185116/wwe-rhea-ripley-anxiety-attack-pressure-2025-australian-tour/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2184190/wwe-clash-in-italy-2026-predictions-winners",
+      "published": "Sat, 30 May 2026 13:00:00 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "WWE Clash in Italy is upon us, coming at you this Sunday from Turin, and as always, the Wrestling Inc. staff is here to predict the winners!",
+      "title": "WWE Clash In Italy 2026 Predictions: Wrestling Inc. Picks The Winners",
+      "url": "https://www.wrestlinginc.com/2184190/wwe-clash-in-italy-2026-predictions-winners/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2185021/wwe-hall-of-fame-jimy-hart-return-kids-show-danhausen",
+      "published": "Mon, 01 Jun 2026 17:02:04 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "A WWE Hall of Famer said he'd make a return to weekly TV if asked, and pitched a unique idea, a kids show, that would involve Danhausen.",
+      "title": "WWE HOFer Says He'd Return To TV If Asked, Pitched Kids Show With Danhausen",
+      "url": "https://www.wrestlinginc.com/2185021/wwe-hall-of-fame-jimy-hart-return-kids-show-danhausen/"
     },
     {
       "assigned_to": "Menzo",
@@ -249,38 +246,74 @@
     {
       "assigned_to": "Menzo",
       "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2174516/roh-supercard-of-honor-athena-survival-of-the-fittest",
-      "published": "Sat, 16 May 2026 17:50:06 +0000",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026",
+      "published": "Mon, 01 Jun 2026 18:34:03 +0000",
       "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "Athena successfully retained the ROH Women's World Championship and became the company's first-ever Women's Survival of the Fittest victor at Supercard of Honor.",
-      "title": "Athena Wins First-Ever Women's ROH Survival Of The Fittest Match, Extends Title Reign",
-      "url": "https://www.wrestlinginc.com/2174516/roh-supercard-of-honor-athena-survival-of-the-fittest/"
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Collision-Massive-Increase.jpg?x49856\" width=\"800\" /></p>The latest audience figures are available for the May 27, 2026 episode of AEW Collision on TBS, with the show delivering a major week-to-week surge. According to Programming Insider, AEW Collision on May 27, 2026 drew 498,000 viewers on TBS, with a 0.05 rating in the key P18–49 demographic. For comparison, the May 20, 2026 ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/\" title=\"AEW Collision Viewership Sees Massive Increase on May 27, 2026\">Read more</a>",
+      "title": "AEW Collision Viewership Sees Massive Increase on May 27, 2026",
+      "url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/"
     },
     {
       "assigned_to": "Menzo",
       "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2171275/eric-bischoff-recalls-paul-heyman-love-released-wwe-star",
-      "published": "Sat, 16 May 2026 17:30:00 +0000",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026",
+      "published": "Mon, 01 Jun 2026 18:33:32 +0000",
       "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "Eric Bischoff recalled one recently-released WWE star who Paul Heyman was high on back in 2019 when Bischoff crossed paths with him.",
-      "title": "Eric Bischoff Recalls Paul Heyman's Love For Released WWE Star",
-      "url": "https://www.wrestlinginc.com/2171275/eric-bischoff-recalls-paul-heyman-love-released-wwe-star/"
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Dynamite-Massive-Increase-1.jpg?x49856\" width=\"800\" /></p>New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum. According to Programming Insider, AEW Dynamite on May 27, 2026 drew 704,000 viewers on TBS, with a 0.12 rating in the key P18–49 demographic. For comparison, the May 20, 2026 episode drew 613,000 viewers ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/\" title=\"AEW Dynamite Viewership Sees Increase on May 27, 2026\">Read more</a>",
+      "title": "AEW Dynamite Viewership Sees Increase on May 27, 2026",
+      "url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/"
     },
     {
       "assigned_to": "Menzo",
       "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2171250/matt-hardy-kofimania-wwe-new-day",
-      "published": "Sat, 16 May 2026 17:00:00 +0000",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/wwe-makes-major-changes-king-ring-tournament-lineup",
+      "published": "Mon, 01 Jun 2026 18:28:26 +0000",
       "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "Matt hardy reflects on Kofi Kingston becoming WWE Champion at WrestleMania 35 and commented on the New Day's importance to the younger generation of fans.",
-      "title": "Matt Hardy Looks Back On KofiMania In Wake Of New Day's WWE Release",
-      "url": "https://www.wrestlinginc.com/2171250/matt-hardy-kofimania-wwe-new-day/"
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"WWE Makes Major Changes to King of the Ring Tournament Lineup\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/wwe-makes-major-changes-to-king-of-the-ring-tournament-lineup-03.jpg?x49856\" width=\"800\" /></p>WWE has already changed the 2026 King of the Ring bracket after revealing it during the Clash in Italy post-show. The bracket shown on WWE’s official website ahead of RAW is now different from the one presented after Clash in Italy. The biggest changes are on the right side of the bracket, where Ricky Saints ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-makes-major-changes-king-ring-tournament-lineup/\" title=\"WWE Makes Major Changes to King of the Ring Tournament Lineup\">Read more</a>",
+      "title": "WWE Makes Major Changes to King of the Ring Tournament Lineup",
+      "url": "https://www.ringsidenews.com/wwe-makes-major-changes-king-ring-tournament-lineup/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/jacob-fatu-acknowledges-roman-reigns-during-june-1-wwe-raw",
+      "published": "Mon, 01 Jun 2026 18:25:33 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/jacob-fatu-acknowledges-roman-reigns-during-june-1-wwe-raw-00.jpg?x49856\" width=\"800\" /></p>Jacob Fatu finally acknowledged Roman Reigns on WWE RAW, but he made sure Jey Uso caught a stray before it happened. The June 1 episode of WWE RAW opened with Roman Reigns arriving alongside The Usos after his successful title defense at Clash in Italy. Roman walked to the ring with the WWE World Heavyweight ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/jacob-fatu-acknowledges-roman-reigns-during-june-1-wwe-raw/\" title=\"Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW\">Read more</a>",
+      "title": "Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW",
+      "url": "https://www.ringsidenews.com/jacob-fatu-acknowledges-roman-reigns-during-june-1-wwe-raw/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/wwe-raw-spoiler-lineup-june-1-2026-full-match-card-backstage-notes-revealed",
+      "published": "Mon, 01 Jun 2026 18:00:53 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"WWE RAW Spoiler Lineup for February 9, 2026: Full Match Card and Backstage Notes Revealed\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/wwe-raw-spoiler-lineup-for-february-9-2026-full-match-card-and-backstage-notes-revealed-07.jpg?x49856\" width=\"800\" /></p>WWE RAW is set to deliver an exciting night of action on June 1, 2026 with a lineup featuring thrilling matches and intense rivalries. Fans can look forward to surprises and moments that could shake things up as the show unfolds. The early spoiler lineup (SUBJECT TO CHANGE) courtesy of TRNBCKL Gold full match card ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-raw-spoiler-lineup-june-1-2026-full-match-card-backstage-notes-revealed/\" title=\"WWE RAW Spoiler Lineup for June 1, 2026: Full Match Card and Backstage Notes Revealed\">Read more</a>",
+      "title": "WWE RAW Spoiler Lineup for June 1, 2026: Full Match Card and Backstage Notes Revealed",
+      "url": "https://www.ringsidenews.com/wwe-raw-spoiler-lineup-june-1-2026-full-match-card-backstage-notes-revealed/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest",
+      "published": "Mon, 01 Jun 2026 16:51:09 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg?x49856\" width=\"800\" /></p>Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon. According to PWInsider on June 1, 2026, the reigning TNA World Champion’s current contract with the company runs through sometime in July. The report also noted that WWE has shown ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest/\" title=\"Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest\">Read more</a>",
+      "title": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest",
+      "url": "https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest/"
     },
     {
       "assigned_to": "Menzo",
@@ -290,7 +323,7 @@
       "published": "Mon, 01 Jun 2026 16:25:06 +0000",
       "reason": "requires_menzo_classification",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Last Minute Matches Revealed for June 1 WWE RAW in Turin\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/last-minute-matches-revealed-for-june-1-wwe-raw-in-turin-00.jpg?x16316\" width=\"800\" /></p>WWE just added a couple of incredible matches for today&#8217;s edition of Monday Night RAW in Turin, ensuring fans have a great time from start to finish. Hours before the June 1, 2026 episode of Monday Night RAW from Turin, Italy, RAW General Manager Adam Pearce took to Instagram and revealed two additional matches for ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/last-minute-matches-revealed-june-1-wwe-raw-turin/\" title=\"Last Minute Matches Revealed for June 1 WWE RAW in Turin\">Read more</a>",
+      "summary": "<p><img alt=\"Last Minute Matches Revealed for June 1 WWE RAW in Turin\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/last-minute-matches-revealed-for-june-1-wwe-raw-in-turin-00.jpg?x49856\" width=\"800\" /></p>WWE just added a couple of incredible matches for today&#8217;s edition of Monday Night RAW in Turin, ensuring fans have a great time from start to finish. Hours before the June 1, 2026 episode of Monday Night RAW from Turin, Italy, RAW General Manager Adam Pearce took to Instagram and revealed two additional matches for ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/last-minute-matches-revealed-june-1-wwe-raw-turin/\" title=\"Last Minute Matches Revealed for June 1 WWE RAW in Turin\">Read more</a>",
       "title": "Last Minute Matches Revealed for June 1 WWE RAW in Turin",
       "url": "https://www.ringsidenews.com/last-minute-matches-revealed-june-1-wwe-raw-turin/"
     },
@@ -302,7 +335,7 @@
       "published": "Mon, 01 Jun 2026 15:24:24 +0000",
       "reason": "requires_menzo_classification",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"MJF Tells Alicia Atout Divorce Is Imminent In Wild Birthday Post\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mjf-tells-alicia-atout-divorce-is-imminent-in-wild-birthday-post-17.jpg?x16316\" width=\"800\" /></p>MJF just wished Alicia Atout a happy birthday in the most MJF way possible, as he told her that &#8220;divorce is imminent.&#8221; On June 1, 2026, MJF took to Twitter and shared a birthday post for his wife, featuring a photo of the two riding an amusement park attraction while both appeared to be screaming. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mjf-tells-alicia-atout-divorce-imminent-wild-birthday-post/\" title=\"MJF Tells Alicia Atout Divorce Is Imminent In Wild Birthday Post\">Read more</a>",
+      "summary": "<p><img alt=\"MJF Tells Alicia Atout Divorce Is Imminent In Wild Birthday Post\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mjf-tells-alicia-atout-divorce-is-imminent-in-wild-birthday-post-17.jpg?x49856\" width=\"800\" /></p>MJF just wished Alicia Atout a happy birthday in the most MJF way possible, as he told her that &#8220;divorce is imminent.&#8221; On June 1, 2026, MJF took to Twitter and shared a birthday post for his wife, featuring a photo of the two riding an amusement park attraction while both appeared to be screaming. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mjf-tells-alicia-atout-divorce-imminent-wild-birthday-post/\" title=\"MJF Tells Alicia Atout Divorce Is Imminent In Wild Birthday Post\">Read more</a>",
       "title": "MJF Tells Alicia Atout Divorce Is Imminent In Wild Birthday Post",
       "url": "https://www.ringsidenews.com/mjf-tells-alicia-atout-divorce-imminent-wild-birthday-post/"
     },
@@ -314,7 +347,7 @@
       "published": "Mon, 01 Jun 2026 15:10:34 +0000",
       "reason": "requires_menzo_classification",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/fans-call-out-aew-over-nyla-roses-absence-after-pride-month-post-22.jpg?x16316\" width=\"800\" /></p>AEW tried to celebrate Pride Month, but fans quickly turned the post into a demand for Nyla Rose to return to television. On June 1, 2026, AEW took to Twitter to mark Pride Month and stated that the company supports the celebration beyond just June: “AEW is proud to celebrate #PrideMonth this month, and every ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/fans-call-out-aew-nyla-roses-absence-pride-month-post/\" title=\"Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post\">Read more</a>",
+      "summary": "<p><img alt=\"Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/fans-call-out-aew-over-nyla-roses-absence-after-pride-month-post-22.jpg?x49856\" width=\"800\" /></p>AEW tried to celebrate Pride Month, but fans quickly turned the post into a demand for Nyla Rose to return to television. On June 1, 2026, AEW took to Twitter to mark Pride Month and stated that the company supports the celebration beyond just June: “AEW is proud to celebrate #PrideMonth this month, and every ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/fans-call-out-aew-nyla-roses-absence-pride-month-post/\" title=\"Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post\">Read more</a>",
       "title": "Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post",
       "url": "https://www.ringsidenews.com/fans-call-out-aew-nyla-roses-absence-pride-month-post/"
     },
@@ -326,7 +359,7 @@
       "published": "Mon, 01 Jun 2026 13:56:39 +0000",
       "reason": "requires_menzo_classification",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Jonathan Coachman Blasts WWE Creative for Booking Liv Morgan in Queen of the Ring Tournament\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/jonathan-coachman-blasts-wwe-creative-for-booking-liv-morgan-in-queen-of-the-ring-tournament-06.jpg?x16316\" width=\"800\" /></p>Jonathan Coachman is questioning WWE’s logic after Liv Morgan was placed in the 2026 Queen of the Ring tournament while already holding the Women’s World Championship. Coachman took to Twitter and reacted to Morgan being part of the bracket. His issue was simple: the Queen of the Ring winner is set to earn a world ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/jonathan-coachman-blasts-wwe-creative-booking-liv-morgan-queen-ring-tournament/\" title=\"Jonathan Coachman Blasts WWE Creative for Booking Liv Morgan in Queen of the Ring Tournament\">Read more</a>",
+      "summary": "<p><img alt=\"Jonathan Coachman Blasts WWE Creative for Booking Liv Morgan in Queen of the Ring Tournament\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/jonathan-coachman-blasts-wwe-creative-for-booking-liv-morgan-in-queen-of-the-ring-tournament-06.jpg?x49856\" width=\"800\" /></p>Jonathan Coachman is questioning WWE’s logic after Liv Morgan was placed in the 2026 Queen of the Ring tournament while already holding the Women’s World Championship. Coachman took to Twitter and reacted to Morgan being part of the bracket. His issue was simple: the Queen of the Ring winner is set to earn a world ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/jonathan-coachman-blasts-wwe-creative-booking-liv-morgan-queen-ring-tournament/\" title=\"Jonathan Coachman Blasts WWE Creative for Booking Liv Morgan in Queen of the Ring Tournament\">Read more</a>",
       "title": "Jonathan Coachman Blasts WWE Creative for Booking Liv Morgan in Queen of the Ring Tournament",
       "url": "https://www.ringsidenews.com/jonathan-coachman-blasts-wwe-creative-booking-liv-morgan-queen-ring-tournament/"
     },
@@ -338,7 +371,7 @@
       "published": "Mon, 01 Jun 2026 13:33:01 +0000",
       "reason": "requires_menzo_classification",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Maxxine Dupri Addresses Rumors of Her Joining The Vision\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/maxxine-dupri-addresses-rumors-of-her-joining-the-vision-34.jpg?x16316\" width=\"800\" /></p>Maxxine Dupri is finally speaking out after fans noticed her recent connection to The Vision on Monday Night RAW. While speaking to Denise Salcedo, Dupri was asked about being spotted on Monday Night RAW and what she thinks about The Vision. Instead of shutting down the speculation, Maxxine said she simply gets along with people ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/maxxine-dupri-addresses-rumors-her-joining-vision/\" title=\"Maxxine Dupri Addresses Rumors of Her Joining The Vision\">Read more</a>",
+      "summary": "<p><img alt=\"Maxxine Dupri Addresses Rumors of Her Joining The Vision\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/maxxine-dupri-addresses-rumors-of-her-joining-the-vision-34.jpg?x49856\" width=\"800\" /></p>Maxxine Dupri is finally speaking out after fans noticed her recent connection to The Vision on Monday Night RAW. While speaking to Denise Salcedo, Dupri was asked about being spotted on Monday Night RAW and what she thinks about The Vision. Instead of shutting down the speculation, Maxxine said she simply gets along with people ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/maxxine-dupri-addresses-rumors-her-joining-vision/\" title=\"Maxxine Dupri Addresses Rumors of Her Joining The Vision\">Read more</a>",
       "title": "Maxxine Dupri Addresses Rumors of Her Joining The Vision",
       "url": "https://www.ringsidenews.com/maxxine-dupri-addresses-rumors-her-joining-vision/"
     },
@@ -350,7 +383,7 @@
       "published": "Mon, 01 Jun 2026 12:32:41 +0000",
       "reason": "requires_menzo_classification",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Becky Lynch Breaks Silence After Losing Women’s Intercontinental Title at WWE Clash In Italy\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/becky-lynch-breaks-silence-after-losing-womens-intercontinental-title-at-wwe-clash-in-italy-05.jpg?x16316\" width=\"800\" /></p>Becky Lynch is not taking her WWE Clash in Italy loss quietly, as she made it clear she was robbed of her Women&#8217;s Intercontinental Title. Lynch took to Twitter to react after losing the WWE Women’s Intercontinental Championship to Sol Ruca in Turin, Italy. Instead of accepting the defeat, The Man claimed she was robbed ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/becky-lynch-breaks-silence-losing-womens-intercontinental-title-wwe-clash-italy/\" title=\"Becky Lynch Breaks Silence After Losing Women’s Intercontinental Title at WWE Clash In Italy\">Read more</a>",
+      "summary": "<p><img alt=\"Becky Lynch Breaks Silence After Losing Women’s Intercontinental Title at WWE Clash In Italy\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/becky-lynch-breaks-silence-after-losing-womens-intercontinental-title-at-wwe-clash-in-italy-05.jpg?x49856\" width=\"800\" /></p>Becky Lynch is not taking her WWE Clash in Italy loss quietly, as she made it clear she was robbed of her Women&#8217;s Intercontinental Title. Lynch took to Twitter to react after losing the WWE Women’s Intercontinental Championship to Sol Ruca in Turin, Italy. Instead of accepting the defeat, The Man claimed she was robbed ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/becky-lynch-breaks-silence-losing-womens-intercontinental-title-wwe-clash-italy/\" title=\"Becky Lynch Breaks Silence After Losing Women’s Intercontinental Title at WWE Clash In Italy\">Read more</a>",
       "title": "Becky Lynch Breaks Silence After Losing Women’s Intercontinental Title at WWE Clash In Italy",
       "url": "https://www.ringsidenews.com/becky-lynch-breaks-silence-losing-womens-intercontinental-title-wwe-clash-italy/"
     },
@@ -362,7 +395,7 @@
       "published": "Mon, 01 Jun 2026 12:18:22 +0000",
       "reason": "requires_menzo_classification",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Former WWE Star Claims Backstage Incident Led to Release\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/former-wwe-star-claims-backstage-incident-led-to-release-41.jpg?x16316\" width=\"800\" /></p>Alba Fyre may already have her first post-WWE move lined up, and it looks like Kay Lee Ray could be coming back sooner than expected. Pro Wrestling EVE took to Twitter and began teasing a mystery opponent for Molly Spartan at its History Makers / Rule Breakers event on Friday, June 5, in London. The ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-star-set-first-wrestling-appearance-release/\" title=\"WWE Star Set for First Wrestling Appearance After Release\">Read more</a>",
+      "summary": "<p><img alt=\"Former WWE Star Claims Backstage Incident Led to Release\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/former-wwe-star-claims-backstage-incident-led-to-release-41.jpg?x49856\" width=\"800\" /></p>Alba Fyre may already have her first post-WWE move lined up, and it looks like Kay Lee Ray could be coming back sooner than expected. Pro Wrestling EVE took to Twitter and began teasing a mystery opponent for Molly Spartan at its History Makers / Rule Breakers event on Friday, June 5, in London. The ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-star-set-first-wrestling-appearance-release/\" title=\"WWE Star Set for First Wrestling Appearance After Release\">Read more</a>",
       "title": "WWE Star Set for First Wrestling Appearance After Release",
       "url": "https://www.ringsidenews.com/wwe-star-set-first-wrestling-appearance-release/"
     },
@@ -374,72 +407,25 @@
       "published": "Mon, 01 Jun 2026 11:25:23 +0000",
       "reason": "requires_menzo_classification",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg?x16316\" width=\"800\" /></p>Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet. False Finish reports that WWE officials have been happy with Lyons’ work since she returned from injury. However, despite earlier talk about a possible summer main roster call-up, that move reportedly does not look ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/nxt-stars-future-revealed-amid-wwe-main-roster-call-rumors/\" title=\"NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors\">Read more</a>",
+      "summary": "<p><img alt=\"NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg?x49856\" width=\"800\" /></p>Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet. False Finish reports that WWE officials have been happy with Lyons’ work since she returned from injury. However, despite earlier talk about a possible summer main roster call-up, that move reportedly does not look ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/nxt-stars-future-revealed-amid-wwe-main-roster-call-rumors/\" title=\"NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors\">Read more</a>",
       "title": "NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors",
       "url": "https://www.ringsidenews.com/nxt-stars-future-revealed-amid-wwe-main-roster-call-rumors/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/sol-ruca-addresses-hyper-criticism-hate-since-wwe-main-roster-call",
-      "published": "Mon, 01 Jun 2026 09:53:55 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Sol Ruca Addresses Hyper-Criticism And Hate Since WWE Main Roster Call-Up\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/sol-ruca-addresses-hyper-criticism-and-hate-since-wwe-main-roster-call-up-52.jpg?x16316\" width=\"800\" /></p>Sol Ruca knows the criticism has gotten louder since she moved to WWE’s main roster, but she isn’t letting it shake her. While speaking to Sam Roberts, Ruca addressed the negativity she has received from people watching her every move. The interview came after Ruca defeated Becky Lynch to win the Women’s Intercontinental Championship at ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/sol-ruca-addresses-hyper-criticism-hate-since-wwe-main-roster-call/\" title=\"Sol Ruca Addresses Hyper-Criticism And Hate Since WWE Main Roster Call-Up\">Read more</a>",
-      "title": "Sol Ruca Addresses Hyper-Criticism And Hate Since WWE Main Roster Call-Up",
-      "url": "https://www.ringsidenews.com/sol-ruca-addresses-hyper-criticism-hate-since-wwe-main-roster-call/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/nikki-bella-reveals-scrapped-ciao-bella-segments-wwe-clash-italy",
-      "published": "Mon, 01 Jun 2026 09:36:37 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Nikki Bella Reveals Scrapped “Ciao Bella” Segments For WWE Clash In Italy\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/nikki-bella-reveals-scrapped-ciao-bella-segments-for-wwe-clash-in-italy-56.jpg?x16316\" width=\"800\" /></p>Nikki Bella had a full Italy-themed idea ready for the WWE Clash in Italy Premium Live Event, but it never made it to the screen. While speaking on The Nikki &#38; Brie Show, Nikki revealed that she pitched WWE a concept called “Ciao Bella” for the international Premium Live Event. The idea would have featured ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/nikki-bella-reveals-scrapped-ciao-bella-segments-wwe-clash-italy/\" title=\"Nikki Bella Reveals Scrapped “Ciao Bella” Segments For WWE Clash In Italy\">Read more</a>",
-      "title": "Nikki Bella Reveals Scrapped “Ciao Bella” Segments For WWE Clash In Italy",
-      "url": "https://www.ringsidenews.com/nikki-bella-reveals-scrapped-ciao-bella-segments-wwe-clash-italy/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/octagon-jrs-recovery-timeline-revealed-injury-aaa-noche-de-los-grandes-taping",
-      "published": "Mon, 01 Jun 2026 09:25:28 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg?x16316\" width=\"800\" /></p>Octagón Jr. has received an important medical update after his frightening neck injury at AAA Noche de los Grandes, and thankfully, things could have been much worse. According to Bryan Alvarez of Wrestling Observer, Octagón Jr.’s MRI came back good after he suffered a frightening neck injury during the Noche de los Grandes Night Two ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/octagon-jrs-recovery-timeline-revealed-injury-aaa-noche-de-los-grandes-taping/\" title=\"Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping\">Read more</a>",
-      "title": "Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping",
-      "url": "https://www.ringsidenews.com/octagon-jrs-recovery-timeline-revealed-injury-aaa-noche-de-los-grandes-taping/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/ric-flair-links-kid-rock-amid-david-flair-drama-health-struggles",
-      "published": "Sun, 31 May 2026 23:04:46 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Ric Flair Links Up With Kid Rock Amid David Flair Drama and Health Struggles\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/05/ric-flair-links-up-with-kid-rock-amid-david-flair-drama-and-health-struggles-01-2.jpg?x16316\" width=\"800\" /></p>Ric Flair is trying to move past a rough few days online, and he just made it clear that Kid Rock still has his back. After dealing with backlash over his recent posts about David Flair and later revealing that he was focusing on his health, Flair took to Instagram to share a lighter update. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/ric-flair-links-kid-rock-amid-david-flair-drama-health-struggles/\" title=\"Ric Flair Links Up With Kid Rock Amid David Flair Drama and Health Struggles\">Read more</a>",
-      "title": "Ric Flair Links Up With Kid Rock Amid David Flair Drama and Health Struggles",
-      "url": "https://www.ringsidenews.com/ric-flair-links-kid-rock-amid-david-flair-drama-health-struggles/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/liv-morgan-explains-why-she-entered-queen-ring-tournament-despite-champion",
-      "published": "Sun, 31 May 2026 21:30:20 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Liv Morgan Explains Why She Entered Queen of the Ring Tournament Despite Being Champion\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/05/liv-morgan-explains-why-she-entered-queen-of-the-ring-tournament-despite-being-champion-41.jpg?x16316\" width=\"800\" /></p>Liv Morgan is already Women’s World Champion, but that isn’t stopping her from chasing Queen of the Ring. During the WWE Clash in Italy post-show, Morgan explained why she entered the 2026 Queen of the Ring tournament despite already holding championship gold. Instead of backing away from the field, Morgan made it clear that she ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/liv-morgan-explains-why-she-entered-queen-ring-tournament-despite-champion/\" title=\"Liv Morgan Explains Why She Entered Queen of the Ring Tournament Despite Being Champion\">Read more</a>",
-      "title": "Liv Morgan Explains Why She Entered Queen of the Ring Tournament Despite Being Champion",
-      "url": "https://www.ringsidenews.com/liv-morgan-explains-why-she-entered-queen-ring-tournament-despite-champion/"
     }
   ],
   "report_candidates": [
+    {
+      "assigned_to": "Simone",
+      "decision": "report_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2185015/wwe-raw-june-1-2026-seth-rollins-bron-breakker-tag-team-match-more",
+      "published": "Mon, 01 Jun 2026 16:58:38 +0000",
+      "reason": "weekly_show_results",
+      "show_hint": "WWE Raw",
+      "source": "wrestlinginc",
+      "summary": "This is Wrestling Inc.'s coverage for \"WWE Raw\" on June 1, 2026, with a match between Seth Rollins & one half of the World Tag Team Champions Bron Breakker!",
+      "title": "WWE Raw Results 6/1 - Seth Rollins Faces Bron Breakker, Tag Team Match & More",
+      "url": "https://www.wrestlinginc.com/2185015/wwe-raw-june-1-2026-seth-rollins-bron-breakker-tag-team-match-more/"
+    },
     {
       "assigned_to": "Simone",
       "decision": "report_candidate",
@@ -452,6 +438,19 @@
       "summary": "\"AEW Collision\" will feature many ROH stars after last night's Supercard of Honor",
       "title": "AEW Collision Results 5/16 - World Title & TBS Title On The Line, Tag Title Eliminator",
       "url": "https://www.wrestlinginc.com/2174642/aew-collision-results-may-16-world-tbs-titles-tag-eliminator/"
+    },
+    {
+      "assigned_to": "Simone",
+      "decision": "report_candidate",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/wwe-raw-results-highlights-key-moments-june-1-2026",
+      "published": "Mon, 01 Jun 2026 17:31:00 +0000",
+      "reason": "weekly_show_results",
+      "show_hint": "WWE Raw",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"WWE RAW Preview for June 1, 2026: Confirmed Matches, Start Time and How to Watch\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/wwe-raw-preview-for-june-1-2026-confirmed-matches-start-time-and-how-to-watch-08.jpg?x49856\" width=\"800\" /></p>Today’s WWE RAW airing June 1, 2026, promises an action-packed night live from the Inalpi Arena in Turin, Piedmont Region, Italy. The post-WWE Clash In Italy show sees &#8220;The Samoan Werewolf&#8221; Jacob Fatu acknowledge WWE World Heavyweight Champion &#8220;The OTC&#8221; Roman Reigns following their Tribal Combat Match. Plus, WWE Intercontinental Champion Penta, &#8220;The Ruler&#8221; Oba ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-raw-results-highlights-key-moments-june-1-2026/\" title=\"WWE RAW Results, Highlights and Key Moments for June 1, 2026\">Read more</a>",
+      "title": "WWE RAW Results, Highlights and Key Moments for June 1, 2026",
+      "url": "https://www.ringsidenews.com/wwe-raw-results-highlights-key-moments-june-1-2026/"
     }
   ],
   "version": "v93_1_massy_sentinel_control"
