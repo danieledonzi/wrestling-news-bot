@@ -32,7 +32,6 @@ def v93_gate_key(url: str) -> str:
     if not raw:
         return ""
     raw = raw.split("#", 1)[0]
-    # Keep query only when it is not tracking noise. Feed URLs normally do not need query params.
     raw = raw.split("?", 1)[0]
     return raw.rstrip("/")
 
@@ -54,6 +53,12 @@ def v93_menzo_allows(entry: Dict[str, Any], allowed: set[str]) -> bool:
         return True
     url = v93_gate_key(str(entry.get("url") or entry.get("source_url") or ""))
     return bool(url and url in allowed)
+
+
+def v93_filter_soft_pool_items(items: List[Dict[str, Any]], allowed: set[str]) -> List[Dict[str, Any]]:
+    if not allowed:
+        return items
+    return [item for item in items if v93_menzo_allows(item, allowed)]
 '''
 text = text.replace(insert_before, helpers + insert_before, 1)
 
@@ -71,7 +76,10 @@ new = '''    entries = feed_entries(feeds_cfg.get("feeds", []))
     else:
         log("[NEWS v92] V93 Menzo gate non vincolante: allowed_urls vuoto o gate disattivato")
     hard_items: List[Dict[str, Any]] = []
-    soft_items: List[Dict[str, Any]] = hydrate_soft_pool(soft_pool, now)
+    hydrated_soft_items = hydrate_soft_pool(soft_pool, now)
+    soft_items: List[Dict[str, Any]] = v93_filter_soft_pool_items(hydrated_soft_items, allowed_urls)
+    if allowed_urls and len(soft_items) != len(hydrated_soft_items):
+        log(f"[NEWS v92] V93 Menzo gate soft_pool filtrata: kept={len(soft_items)} original={len(hydrated_soft_items)}")
     seen: set[str] = set()
 
     for entry in entries:
