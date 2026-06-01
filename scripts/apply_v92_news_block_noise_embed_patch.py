@@ -2,15 +2,10 @@ from pathlib import Path
 
 # -----------------------------------------------------------------------------
 # v92 block noise/embed patch.
-# The news block workshop now reuses report_workshop_v92.scrape_article(). This
-# patch makes that shared block scraper suitable for news pages too:
-# - removes Ringside social/follow/share/author/credit noise;
-# - rejects author avatars and small profile images;
-# - extracts real embed URLs in place and resolves shortlinks when possible;
-# - rejects social share/profile URLs such as twitter intent, YouTube channels,
-#   Instagram profiles;
-# - converts standalone quoted paragraphs into quote blocks so they render as
-#   blockquotes.
+# Shared block scraper cleanup for report/news pages.
+# Important v2 fix: never decompose the whole article/content container just
+# because it contains author/social/footer text somewhere inside. Remove only
+# small/local noise nodes and skip noisy leaf text blocks during extraction.
 # -----------------------------------------------------------------------------
 
 p = Path("modules/report_workshop_v92.py")
@@ -20,14 +15,12 @@ if "V92_BLOCK_NOISE_EMBED_PATCH = True" in text:
     print("[V92 BLOCK NOISE] patch gia applicata")
     raise SystemExit(0)
 
-# Marker after media cache.
 text = text.replace(
     "media_cache: Dict[str, Tuple[Optional[int], Optional[str]]] = {}\n",
     "media_cache: Dict[str, Tuple[Optional[int], Optional[str]]] = {}\nV92_BLOCK_NOISE_EMBED_PATCH = True\n",
     1,
 )
 
-# Add helpers before extract_blocks.
 anchor = "\n\ndef extract_blocks(content, base_url: str) -> List[Dict[str, str]]:\n"
 pos = text.find(anchor)
 if pos == -1:
@@ -56,9 +49,27 @@ def node_blob(node) -> str:
     return normalize_text(" ".join(attrs) + " " + txt)
 
 
+def text_len_of_node(node) -> int:
+    try:
+        return len(clean_text(node.get_text(" ", strip=True)))
+    except Exception:
+        return 0
+
+
+def is_core_content_node(node) -> bool:
+    blob = node_blob(node)
+    core_terms = [
+        "entry content", "rsn single content", "post content", "article content",
+        "article body", "single post content", "td post content",
+    ]
+    return any(term in blob for term in core_terms) or text_len_of_node(node) > 900
+
+
 def is_ringside_noise_node(node) -> bool:
     blob = node_blob(node)
     if not blob:
+        return False
+    if is_core_content_node(node):
         return False
     noise_terms = [
         "posts by ringsidenews", "tweets by ringsidenews", "follow us", "connect with us",
@@ -71,19 +82,47 @@ def is_ringside_noise_node(node) -> bool:
     return any(term in blob for term in noise_terms)
 
 
+def is_local_noise_node(node) -> bool:
+    if not node or is_core_content_node(node):
+        return False
+    blob = node_blob(node)
+    txt_len = text_len_of_node(node)
+    # Whole article wrappers can contain noisy footer text; only decompose compact
+    # blocks or explicit service/sidebar/author/share containers.
+    classes = " ".join(node.get("class", []) if hasattr(node, "get") else []).lower()
+    node_id = str(node.get("id", "") if hasattr(node, "get") else "").lower()
+    explicit = any(x in f"{classes} {node_id}" for x in [
+        "rsn-social", "ringside-social", "social", "share", "follow", "author", "bio",
+        "byline", "profile", "newsletter", "related", "recommended", "comments", "widget", "sidebar",
+    ])
+    if explicit:
+        return True
+    compact_noise = any(term in blob for term in [
+        "posts by ringsidenews", "tweets by ringsidenews", "follow us", "connect with us",
+        "please credit ringside news", "please cite ringside news", "if you use the transcription",
+        "derek holloway", "twitter com intent tweet", "youtube com channel", "instagram com ringsidenewscom",
+    ])
+    return compact_noise and txt_len < 500
+
+
 def remove_block_noise(content) -> None:
     remove_noise(content)
     selectors = [
-        ".rsn-social", ".ringside-social", ".social", ".social-links", ".social-share",
-        ".post-share", ".share", ".share-buttons", ".follow", ".follow-us",
+        ".rsn-social", ".ringside-social", ".social-links", ".social-share",
+        ".post-share", ".share-buttons", ".follow-us",
         ".author-box", ".author-bio", ".byline", ".post-author", ".user-profile",
         ".newsletter", ".related", ".recommended", ".comments-area", ".widget", ".sidebar",
     ]
     for sel in selectors:
         for node in list(content.select(sel)):
-            node.decompose()
-    for node in list(content.find_all(["div", "section", "aside", "ul", "nav", "footer", "figure", "p"])):
-        if is_ringside_noise_node(node):
+            if not is_core_content_node(node):
+                node.decompose()
+    # Work from leaves upward and never decompose article-sized containers.
+    candidates = list(content.find_all(["p", "li", "figure", "blockquote", "ul", "div", "section", "aside", "nav", "footer"]))
+    for node in reversed(candidates):
+        if node is content:
+            continue
+        if is_local_noise_node(node):
             node.decompose()
 
 
@@ -123,7 +162,6 @@ def canonical_embed_url(raw_url: str, base_url: str = "") -> str:
         return ""
     url = resolve_short_social_url(url)
     low = url.lower()
-    # Never embed share/profile/service URLs.
     reject_terms = [
         "twitter.com/intent/", "x.com/intent/", "twitter.com/share", "x.com/share",
         "facebook.com/sharer", "mailto:", "youtube.com/channel/", "youtube.com/user/",
@@ -159,27 +197,23 @@ def canonical_embed_url(raw_url: str, base_url: str = "") -> str:
 
 
 def extract_embed_from_node(node, base_url: str) -> str:
-    if not node or is_ringside_noise_node(node):
+    if not node or is_local_noise_node(node):
         return ""
-    # iframe first.
     iframe = node if getattr(node, "name", "") == "iframe" else node.find("iframe")
     if iframe and iframe.get("src"):
         url = canonical_embed_url(iframe.get("src"), base_url)
         if url:
             return url
-    # Native social blockquotes often have cite.
     cite = node.get("cite") if hasattr(node, "get") else None
     if cite:
         url = canonical_embed_url(cite, base_url)
         if url:
             return url
-    # Lazy/custom embeds can store URL in data attrs.
     for k, v in getattr(node, "attrs", {}).items():
         if isinstance(v, str) and any(token in k.lower() for token in ["url", "href", "src", "embed", "permalink"]):
             url = canonical_embed_url(v, base_url)
             if url:
                 return url
-    # Links inside the node, choosing the first real post/video URL.
     links: List[str] = []
     for a in node.find_all("a", href=True) if hasattr(node, "find_all") else []:
         url = canonical_embed_url(a.get("href"), base_url)
@@ -225,7 +259,6 @@ def is_standalone_quote_text(text: str) -> bool:
 '''
 text = text[:pos] + helpers + text[pos:]
 
-# Replace extract_blocks entirely.
 start = text.find("def extract_blocks(content, base_url: str) -> List[Dict[str, str]]:")
 end = text.find("\n\ndef scrape_article", start)
 if start == -1 or end == -1:
@@ -242,10 +275,11 @@ new_func = r'''def extract_blocks(content, base_url: str) -> List[Dict[str, str]
     for el in content.find_all(allowed):
         if el.find_parent(["script", "style", "nav", "footer", "header", "aside", "form"]):
             continue
-        if any(is_ringside_noise_node(parent) for parent in el.parents):
+        # Skip if inside a compact noise block, but do not skip simply because a
+        # high-level article wrapper contains noisy footer text elsewhere.
+        if any(is_local_noise_node(parent) for parent in el.parents if parent is not content):
             continue
 
-        # Social/video embeds are structural blocks, not text for Gemini.
         embed_url = extract_embed_from_node(el, base_url)
         if embed_url:
             if embed_url not in seen_embeds:
