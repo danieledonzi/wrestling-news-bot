@@ -3,28 +3,6 @@
   "already_worked": [
     {
       "decision": "already_worked",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184202/wwe-clash-in-italy-2026-four-titles-on-line-oba-femi-brock-lesnar",
-      "published": "Sun, 31 May 2026 16:00:00 +0000",
-      "reason": "url_present_in_state",
-      "source": "wrestlinginc",
-      "summary": "This is  Wrestling Inc.'s results for WWE Clash In Italy 2026, with the Undisputed WWE & World Heavyweight Championships among those set to be defended!",
-      "title": "WWE Clash In Italy Results 5/31 - Four Titles On The Line, Oba Femi Faces Brock Lesnar",
-      "url": "https://www.wrestlinginc.com/2184202/wwe-clash-in-italy-2026-four-titles-on-line-oba-femi-brock-lesnar/"
-    },
-    {
-      "decision": "already_worked",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184309/aew-collision-may-30-2026-results",
-      "published": "Sat, 30 May 2026 23:01:58 +0000",
-      "reason": "url_present_in_state",
-      "source": "wrestlinginc",
-      "summary": "On \"AEW Collision\", Divine Dominion will have a 5-min Tag Title Eliminator Challenge match and ROH Pure Champion Lee Moriarty will be in action.",
-      "title": "AEW Collision Results 5/30 - Two Titles On The Line, STARDOM's Hazuki Makes AEW Debut",
-      "url": "https://www.wrestlinginc.com/2184309/aew-collision-may-30-2026-results/"
-    },
-    {
-      "decision": "already_worked",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/cody-rhodes-roman-reigns-have-tense-backstage-staredown-wwe-clash-italy",
       "published": "Sun, 31 May 2026 23:04:38 +0000",
@@ -53,25 +31,14 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-01T15:28:15.146179+00:00",
+  "generated_at": "2026-06-01T15:37:03.470260+00:00",
   "handoff": {
-    "already_worked": 3,
-    "hard_skipped": 2,
-    "to_menzo": 29,
+    "already_worked": 1,
+    "hard_skipped": 1,
+    "to_menzo": 32,
     "to_simone": 1
   },
   "hard_skipped": [
-    {
-      "decision": "hard_skip",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184477/wwe-clash-in-italy-2026-hated-loved-opinion-review",
-      "published": "Sun, 31 May 2026 22:19:45 +0000",
-      "reason": "listicle_things_we_loved_hated",
-      "source": "wrestlinginc",
-      "summary": "On a night that saw Roman Reigns and Cody Rhodes retain their titles, here are three things we hated and three things we loved about WWE Clash in Italy 2026!",
-      "title": "WWE Clash In Italy 2026: 3 Things We Hated & 3 Things We Loved",
-      "url": "https://www.wrestlinginc.com/2184477/wwe-clash-in-italy-2026-hated-loved-opinion-review/"
-    },
     {
       "decision": "hard_skip",
       "feed_url": "https://www.ringsidenews.com/feed/",
@@ -91,13 +58,13 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184666/cody-rhodes-controversial-finish-wwe-title-gunther-clash-in-italy-rematch",
-      "published": "Mon, 01 Jun 2026 15:00:00 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2184680/eric-bischoff-wwe-creative-stepped-on-rake",
+      "published": "Mon, 01 Jun 2026 15:30:00 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "Undisputed WWE Champion Cody Rhodes has offered GUNTHER a rematch following the controversial finish to their match at WWE Clash in Italy.",
-      "title": "Cody Rhodes Addresses Controversial Finish In WWE Title Defense At Clash In Italy",
-      "url": "https://www.wrestlinginc.com/2184666/cody-rhodes-controversial-finish-wwe-title-gunther-clash-in-italy-rematch/"
+      "summary": "WWE Hall of Famer Eric Bischoff has discussed WWE's slump in recent months, but feels all is not lost and believes the company can regain its momentum.",
+      "title": "Eric Bischoff Says WWE Creative Has 'Stepped On A Rake' Over The Last Few Months",
+      "url": "https://www.wrestlinginc.com/2184680/eric-bischoff-wwe-creative-stepped-on-rake/"
     },
     {
       "assigned_to": "Menzo",
@@ -175,37 +142,13 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184793/aew-future-prospects-wbd-paramount-skydance",
-      "published": "Mon, 01 Jun 2026 14:33:29 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2184838/wwe-brock-lesnar-oba-femi-dave-meltzer-long-term-creative-plans-three-matches",
+      "published": "Mon, 01 Jun 2026 15:24:56 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "Despite some worries from those within the company initially, there is a sense of optimism surrounding AEW's future after the WBD/Paramount merger.",
-      "title": "Backstage News On AEW's Future Prospects After WBD Purchase By Paramount Skydance",
-      "url": "https://www.wrestlinginc.com/2184793/aew-future-prospects-wbd-paramount-skydance/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results",
-      "published": "Sun, 31 May 2026 01:00:00 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "This is Wrestling Inc.'s live coverage of AAA Nocha de Los Grandes, headlined by El Grande Americano versus the Original Grande Americano in Mask vs. Mask.",
-      "title": "AAA Noche De Los Grandes Results - Mask Vs. Mask, Three Titles On The Line",
-      "url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184664/wwe-aaa-triplemania-2026-night-one-las-vegas",
-      "published": "Mon, 01 Jun 2026 14:30:00 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "AAA's biggest pay-per-view of the year, TripleMania, will be held over two nights, following the trend set by WWE, with Night 1 taking place in Las Vegas.",
-      "title": "WWE Announces Night One Of AAA TripleMania 2026 Will Take Place In Las Vegas",
-      "url": "https://www.wrestlinginc.com/2184664/wwe-aaa-triplemania-2026-night-one-las-vegas/"
+      "summary": "Dave Meltzer provides a backstage report on the long-term creative plans for the feud between Brock Lesnar and Oba Femi, including plans for one last match",
+      "title": "Backstage Report On WWE's Long-Term Creative Plans For Brock Lesnar & Oba Femi Feud",
+      "url": "https://www.wrestlinginc.com/2184838/wwe-brock-lesnar-oba-femi-dave-meltzer-long-term-creative-plans-three-matches/"
     },
     {
       "assigned_to": "Menzo",
@@ -259,6 +202,18 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2184666/cody-rhodes-controversial-finish-wwe-title-gunther-clash-in-italy-rematch",
+      "published": "Mon, 01 Jun 2026 15:00:00 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "Undisputed WWE Champion Cody Rhodes has offered GUNTHER a rematch following the controversial finish to their match at WWE Clash in Italy.",
+      "title": "Cody Rhodes Addresses Controversial Finish In WWE Title Defense At Clash In Italy",
+      "url": "https://www.wrestlinginc.com/2184666/cody-rhodes-controversial-finish-wwe-title-gunther-clash-in-italy-rematch/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2174560/wwe-backlash-danhausen-clone-lifted-elements-independent-show",
       "published": "Sat, 16 May 2026 19:18:37 +0000",
       "reason": "requires_menzo_classification",
@@ -278,6 +233,54 @@
       "summary": "WWE Hall of Famer John \"Bradshaw\" Layfield once received a phone call minutes before surgery, with a former executive asking him to take a pay cut.",
       "title": "JBL Recalls Past Conversation About Restructuring WWE Contract",
       "url": "https://www.wrestlinginc.com/2171387/wwe-jbl-john-bradshaw-layfield-john-laurinaitis-conversation-restructuring-contract/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2171344/wwe-tests-wrestlers-attitude-problem-dijak-oba-femi",
+      "published": "Sat, 16 May 2026 18:30:00 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "A former WWE star explained a little in a social media post about how WWE tests its wrestlers to see \"if they have an attitude problem.\"",
+      "title": "How WWE Tests Wrestlers 'To See If They Have An Attitude Problem,' Per Former Star",
+      "url": "https://www.wrestlinginc.com/2171344/wwe-tests-wrestlers-attitude-problem-dijak-oba-femi/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2174516/roh-supercard-of-honor-athena-survival-of-the-fittest",
+      "published": "Sat, 16 May 2026 17:50:06 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "Athena successfully retained the ROH Women's World Championship and became the company's first-ever Women's Survival of the Fittest victor at Supercard of Honor.",
+      "title": "Athena Wins First-Ever Women's ROH Survival Of The Fittest Match, Extends Title Reign",
+      "url": "https://www.wrestlinginc.com/2174516/roh-supercard-of-honor-athena-survival-of-the-fittest/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2171275/eric-bischoff-recalls-paul-heyman-love-released-wwe-star",
+      "published": "Sat, 16 May 2026 17:30:00 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "Eric Bischoff recalled one recently-released WWE star who Paul Heyman was high on back in 2019 when Bischoff crossed paths with him.",
+      "title": "Eric Bischoff Recalls Paul Heyman's Love For Released WWE Star",
+      "url": "https://www.wrestlinginc.com/2171275/eric-bischoff-recalls-paul-heyman-love-released-wwe-star/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2184793/aew-future-prospects-wbd-paramount-skydance",
+      "published": "Mon, 01 Jun 2026 14:33:29 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "Despite some worries from those within the company initially, there is a sense of optimism surrounding AEW's future after the WBD/Paramount merger.",
+      "title": "Backstage News On AEW's Future Prospects After WBD Purchase By Paramount Skydance",
+      "url": "https://www.wrestlinginc.com/2184793/aew-future-prospects-wbd-paramount-skydance/"
     },
     {
       "assigned_to": "Menzo",

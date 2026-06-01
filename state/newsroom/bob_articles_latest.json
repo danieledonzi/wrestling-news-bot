@@ -1,0 +1,456 @@
+{
+  "agent": "Bob",
+  "articles": [
+    {
+      "bob_notes": [
+        "Ho omesso i blocchi 2, 7, 10, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 in quanto si riferiscono a link di navigazione, bio autore o titoli di altri articoli di approfondimento non pertinenti al corpo della notizia principale.",
+        "Il contenuto è stato tradotto e adattato mantenendo lo stile giornalistico richiesto.",
+        "La citazione nel blocco 11 è stata tradotta fedelmente mantenendo il tono colloquiale originale."
+      ],
+      "body_html": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x16316--></p><p>Nikkita Lyons ha fatto una buona impressione sui dirigenti della WWE, ma questo non significa che il suo approdo a Monday Night RAW sia imminente.</p><p>Secondo quanto riportato da <em>False Finish</em>, i funzionari della WWE sono rimasti soddisfatti del lavoro svolto dalla Lyons dal suo rientro dopo l'infortunio. Tuttavia, nonostante le voci circolate in precedenza su una possibile promozione nel main roster durante l'estate, tale eventualità appare al momento improbabile.</p><p>Ecco quanto dichiarato da <em>False Finish</em>: “False Finish ha appreso che i funzionari della WWE sono rimasti molto colpiti dal lavoro di Nikkita Lyons dal suo ritorno dopo l'infortunio. Sebbene ci fossero indiscrezioni su una potenziale promozione a WWE RAW in estate, al momento non sembra probabile. Si prevede che la Lyons continui a lavorare per EVOLVE e NXT per il prossimo futuro.”</p><p>Questa notizia giunge dopo che <em>Rope Break</em> aveva riferito in precedenza che la Lyons era stata menzionata come una possibile candidata per il main roster, con RAW identificato come potenziale destinazione in caso di un eventuale passaggio estivo.</p><p>Per ora, la WWE sembra intenzionata a mantenere la Lyons tra EVOLVE e NXT mentre continua a ritrovare slancio dopo i numerosi infortuni al ginocchio. Potrebbe non trattarsi della rapida scalata che alcuni fan si aspettavano, ma dimostra che la compagnia sta seguendo con attenzione il suo percorso di recupero.</p><p>La Lyons stessa si è espressa apertamente riguardo al suo cambiamento. Il 29 aprile 2026, ha risposto per le rime ai critici che chiedevano continuamente il ritorno della “vecchia” Nikkita Lyons, mettendo in chiaro di considerarsi guarita e pronta ad andare avanti.</p><p>Nel tweet ha scritto: “'Mi manca la vecchia Nikkita Lyons' 😂 tipo… anche allora vi lamentavate 🙄 non che debba giustificarmi, ma quella era Nikkita post-infortunio con uno str***o di fidanzato all'epoca, lmao, ma non siamo nemmeno più in quella linea temporale, SIAMO GUARITI 🍃 STATE AL PASSO #NikkitaMultiMedia #DivineFeline lioness pre-wwe mind you👇🦁 BEEN THE LYONESS BABE 🎶🔮🍃”.</p><p>Il tweet ha offerto ai fan uno sguardo sul percorso di rinascita fisica e personale che la Lyons sta affrontando. Ora, con i dirigenti della WWE apparentemente impressionati, la sua posizione appare migliore rispetto ai periodi segnati dagli infortuni.</p><p>Ad ogni modo, le ultime informazioni indicano che una promozione a RAW non è prevista per il momento. La Lyons potrebbe ottenere un'opportunità nel main roster in futuro, ma per ora la WWE sembra concentrata sul permetterle di ricostruirsi attraverso EVOLVE e NXT.</p><p>Credete che la WWE faccia bene a mantenere Nikkita Lyons a NXT e a EVOLVE per ora, o dovrebbe essere promossa a RAW quest'estate?</p>",
+      "category_hint": "NXT",
+      "created_at": "2026-06-01T15:37:03.740912+00:00",
+      "element_counts": {
+        "embed": 0,
+        "heading": 4,
+        "image": 1,
+        "link": 4,
+        "quote": 2,
+        "text": 14
+      },
+      "elements": [
+        {
+          "alt": "NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors",
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x16316"
+        },
+        {
+          "text": "蝶 Connect with us on Bluesky →",
+          "type": "link",
+          "url": "https://bsky.app/profile/ringsidenews.com"
+        },
+        {
+          "text": "Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet.",
+          "type": "text"
+        },
+        {
+          "text": "False Finish reports that WWE officials have been happy with Lyons’ work since she returned from injury. However, despite earlier talk about a possible summer main roster call-up, that move reportedly does not look likely right now.",
+          "type": "text"
+        },
+        {
+          "text": "“False Finish has learned that WWE officials have been very impressed with the work of Nikkita Lyons since returning from injury. While there were reports of a potential callup to WWE RAW in the Summer, it doesn’t appear likely at this time. Lyons is expected to continue working EVOLVE and NXT for the foreseeable future.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "This comes after Rope Break previously reported that Lyons had been mentioned as a possible main roster call-up , with RAW discussed as a potential landing spot if WWE decided to move her up this summer.",
+          "type": "text"
+        },
+        {
+          "text": "Lyons had been mentioned as a possible main roster call-up",
+          "type": "link",
+          "url": "https://www.ringsidenews.com/nxt-star-discussed-potential-wwe-main-roster-call/"
+        },
+        {
+          "text": "For now, though, WWE appears to be keeping Lyons in EVOLVE and NXT while she continues rebuilding momentum after multiple knee injuries. That may not be the fast-track call-up some fans expected, but it shows the company is still paying attention to her comeback.",
+          "type": "text"
+        },
+        {
+          "text": "Lyons has also been vocal about her reset. Back on April 29, 2026, she fired back at critics who kept asking for the “old” Nikkita Lyons to return , making it clear she sees herself as healed and moving forward.",
+          "type": "text"
+        },
+        {
+          "text": "she fired back at critics who kept asking for the “old” Nikkita Lyons to return",
+          "type": "link",
+          "url": "https://www.ringsidenews.com/nikkita-lyons-calls-out-hypocritical-fans-demanding-old-her-back/"
+        },
+        {
+          "text": "“i MiSs ThE oLd nIkKiTa LyOnS” 😂 like… y’all were complaining back then too 🙄 not that i need to explain, but that was post injury with a sh✨tty bf at the time nikkita lmao but we’re not even in that timeline anymore, WE’RE HEALED 🍃 KEEP UP #NikkitaMultiMedia #DivineFeline lioness pre-wwe mind you👇🦁 BEEN THE LYONESS BABE 🎶🔮🍃”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "The tweet gave fans a look into the physical and personal reset Lyons has been working through. Now, with WWE officials reportedly impressed, she appears to be in a better position than she was during her injury setbacks.",
+          "type": "text"
+        },
+        {
+          "text": "Still, the latest word is that a RAW call-up is not expected at this time. Lyons may eventually get that main roster chance, but for now, WWE seems focused on letting her keep building herself back up through EVOLVE and NXT.",
+          "type": "text"
+        },
+        {
+          "text": "Do you think WWE is right to keep Nikkita Lyons in NXT and EVOLVE for now, or should she be called up to RAW this summer? Sound off in the comments and let us know what you think.",
+          "type": "text"
+        },
+        {
+          "text": "G Add as a preferred source on Google",
+          "type": "link",
+          "url": "https://www.google.com/preferences/source?q=https://www.ringsidenews.com"
+        },
+        {
+          "text": "Subhojeet Mukherjee has covered pro wrestling for over 20 years, delivering trusted news and backstage updates to fans around the world.",
+          "type": "text"
+        },
+        {
+          "text": "Spotlight WWE News Sol Ruca Wins Women’s IC Title At WWE Clash In Italy WWE News Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy WWE News Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy WWE News WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win",
+          "type": "text"
+        },
+        {
+          "text": "WWE News Sol Ruca Wins Women’s IC Title At WWE Clash In Italy",
+          "type": "text"
+        },
+        {
+          "level": 2,
+          "text": "Sol Ruca Wins Women’s IC Title At WWE Clash In Italy",
+          "type": "heading"
+        },
+        {
+          "text": "WWE News Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy",
+          "type": "text"
+        },
+        {
+          "level": 2,
+          "text": "Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy",
+          "type": "heading"
+        },
+        {
+          "text": "WWE News Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy",
+          "type": "text"
+        },
+        {
+          "level": 2,
+          "text": "Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy",
+          "type": "heading"
+        },
+        {
+          "text": "WWE News WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win",
+          "type": "text"
+        },
+        {
+          "level": 2,
+          "text": "WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win",
+          "type": "heading"
+        }
+      ],
+      "excerpt_it": "Nonostante l'ottima impressione suscitata in WWE dopo il rientro dall'infortunio, il passaggio di Nikkita Lyons al main roster non sembra imminente.",
+      "menzo_score": 86,
+      "meta": {
+        "description": "Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet. False Finish reports that WWE",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg",
+        "source_title": "NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors"
+      },
+      "source": "ringsidenews",
+      "source_title": "NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors",
+      "source_url": "https://www.ringsidenews.com/nxt-stars-future-revealed-amid-wwe-main-roster-call-rumors/",
+      "status": "ready_for_alfred",
+      "title_it": "Il futuro di Nikkita Lyons in WWE: ecco cosa sappiamo",
+      "translation_model": "gemini-3.1-flash-lite"
+    },
+    {
+      "bob_notes": [
+        "Traduzione integrale e fedele, con mantenimento del tono giornalistico.",
+        "Citazione di Bryan Alvarez inserita esattamente come richiesto.",
+        "Rimossi tutti i link esterni, le call to action e i blocchi estranei al contenuto della notizia."
+      ],
+      "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg.avif?x16316-->\n<p>Octagón Jr. ha ricevuto un importante aggiornamento medico in seguito al preoccupante infortunio al collo riportato durante l'evento AAA Noche de los Grandes; fortunatamente, la situazione avrebbe potuto avere conseguenze decisamente peggiori.</p>\n<p>Secondo quanto riportato da Bryan Alvarez del <em>Wrestling Observer</em>, la risonanza magnetica effettuata da Octagón Jr. ha dato esito positivo dopo il grave infortunio subito durante la seconda serata dei taping di Noche de los Grandes. Sebbene sia previsto un periodo di stop, sembra che il wrestler abbia evitato il peggio.</p>\n<p>“Starà fuori probabilmente per diversi mesi, ma sarebbe potuta andare molto peggio”, ha dichiarato Alvarez.</p>\n<p>L'infortunio è avvenuto durante un Fatal 5-Way match registrato per l'edizione del 6 giugno di Noche de los Grandes, che vedeva contrapposti Octagón Jr., Cruz Del Toro, Joaquin Wilde, Lince Dorado e Mini Vikingo. Octagón Jr. è atterrato in modo pericoloso dopo aver subito una DDT dalla corda più alta insieme a Joaquin Wilde. Il lottatore è rimasto a terra mentre il match proseguiva, e la situazione si è fatta rapidamente seria quando l'arbitro ha segnalato la necessità di assistenza medica con il classico segno della X.</p>\n<p>I funzionari hanno quindi rimosso Octagón Jr. dal ring su una barella, mantenendo il suo collo immobilizzato, un gesto che ha immediatamente sollevato preoccupazioni sulla gravità dell'accaduto. All'epoca non c'erano notizie ufficiali se avesse riportato danni strutturali o se l'immobilizzazione fosse stata puramente precauzionale. L'aggiornamento fornito da Alvarez offre ora un quadro più ottimistico, nonostante l'atleta debba comunque affrontare un'assenza di diversi mesi.</p>\n<p>Octagón Jr. è stato uno dei nomi più affidabili della AAA ed è rimasto una figura di spicco in seguito all'acquisizione della promozione. Qualsiasi assenza prolungata rappresenta un duro colpo, ma il risultato positivo della risonanza magnetica è un grande sollievo, considerando la dinamica dell'impatto a Monterrey. Per il momento, Octagón Jr. sembra aver evitato lo scenario peggiore. Il percorso di recupero richiederà ancora del tempo, ma l'ultimo aggiornamento permette ai fan di tirare un sospiro di sollievo.</p>",
+      "category_hint": "World",
+      "created_at": "2026-06-01T15:37:09.246190+00:00",
+      "element_counts": {
+        "embed": 0,
+        "heading": 4,
+        "image": 1,
+        "link": 5,
+        "quote": 1,
+        "text": 12
+      },
+      "elements": [
+        {
+          "alt": "Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping",
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg.avif?x16316"
+        },
+        {
+          "text": "蝶 Connect with us on Bluesky →",
+          "type": "link",
+          "url": "https://bsky.app/profile/ringsidenews.com"
+        },
+        {
+          "text": "Octagón Jr. has received an important medical update after his frightening neck injury at AAA Noche de los Grandes, and thankfully, things could have been much worse.",
+          "type": "text"
+        },
+        {
+          "text": "According to Bryan Alvarez of Wrestling Observer , Octagón Jr.’s MRI came back good after he suffered a frightening neck injury during the Noche de los Grandes Night Two taping. While he is still expected to miss time, the situation apparently avoided a much worse outcome.",
+          "type": "text"
+        },
+        {
+          "text": "Bryan Alvarez of Wrestling Observer",
+          "type": "link",
+          "url": "https://www.f4wonline.com/news/mexico/octagon-jr-likely-to-be-out-several-months-following-injury-at-aaa-taping-exclusive/"
+        },
+        {
+          "text": "“He will likely be out several months but could have been much worse.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "The injury happened during a Fatal 5-Way match taped for the June 6 edition of Noche de los Grandes, featuring Octagón Jr., Cruz Del Toro, Joaquin Wilde, Lince Dorado, and Mini Vikingo. Octagón Jr. landed badly after taking a DDT from the highest point of the top rope with Joaquin Wilde . He was left down on the mat as the match continued, and things quickly turned serious when the referee threw up the X sign for medical help.",
+          "type": "text"
+        },
+        {
+          "text": "Octagón Jr. landed badly after taking a DDT from the highest point of the top rope with Joaquin Wilde",
+          "type": "link",
+          "url": "https://www.ringsidenews.com/aaa-star-suffered-injury-during-noche-de-los-grandes-taping/"
+        },
+        {
+          "text": "Officials then removed Octagón Jr. from the match on a stretcher while his neck was immobilized, which immediately raised concern about how serious the injury might be. At the time, there was no official word on whether he had suffered structural damage or if the neck immobilization was mainly precautionary. Alvarez’s update now gives a more hopeful picture, even though Octagón Jr. may still be out for several months.",
+          "type": "text"
+        },
+        {
+          "text": "Octagón Jr. has been one of AAA’s most reliable names and has remained heavily featured following WWE’s acquisition of the promotion. Any extended absence will still hurt, but the positive MRI result is a huge relief after how bad the spot looked in Monterrey. For now, Octagón Jr. appears to have avoided the worst-case scenario. The road back may still take time, but the latest update gives fans a reason to breathe a little easier.",
+          "type": "text"
+        },
+        {
+          "text": "What do you think about Octagón Jr.’s injury update after AAA Noche de los Grandes? Sound off in the comments and let us know what you think.",
+          "type": "text"
+        },
+        {
+          "text": "G Add as a preferred source on Google",
+          "type": "link",
+          "url": "https://www.google.com/preferences/source?q=https://www.ringsidenews.com"
+        },
+        {
+          "text": "AAA Noche de Los Grandes",
+          "type": "link",
+          "url": "https://www.ringsidenews.com/aaa-noche-de-los-grandes/"
+        },
+        {
+          "text": "Subhojeet Mukherjee has covered pro wrestling for over 20 years, delivering trusted news and backstage updates to fans around the world.",
+          "type": "text"
+        },
+        {
+          "text": "Spotlight WWE News Sol Ruca Wins Women’s IC Title At WWE Clash In Italy WWE News Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy WWE News Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy WWE News WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win",
+          "type": "text"
+        },
+        {
+          "text": "WWE News Sol Ruca Wins Women’s IC Title At WWE Clash In Italy",
+          "type": "text"
+        },
+        {
+          "level": 2,
+          "text": "Sol Ruca Wins Women’s IC Title At WWE Clash In Italy",
+          "type": "heading"
+        },
+        {
+          "text": "WWE News Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy",
+          "type": "text"
+        },
+        {
+          "level": 2,
+          "text": "Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy",
+          "type": "heading"
+        },
+        {
+          "text": "WWE News Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy",
+          "type": "text"
+        },
+        {
+          "level": 2,
+          "text": "Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy",
+          "type": "heading"
+        },
+        {
+          "text": "WWE News WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win",
+          "type": "text"
+        },
+        {
+          "level": 2,
+          "text": "WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win",
+          "type": "heading"
+        }
+      ],
+      "excerpt_it": "Arrivano aggiornamenti sulle condizioni di Octagón Jr. dopo il brutto infortunio al collo subito durante le registrazioni di AAA Noche de los Grandes.",
+      "menzo_score": 86,
+      "meta": {
+        "description": "Octagón Jr. has received an important medical update after his frightening neck injury at AAA Noche de los Grandes, and thankfully, things could have been",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg",
+        "source_title": "Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping"
+      },
+      "source": "ringsidenews",
+      "source_title": "Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping",
+      "source_url": "https://www.ringsidenews.com/octagon-jrs-recovery-timeline-revealed-injury-aaa-noche-de-los-grandes-taping/",
+      "status": "ready_for_alfred",
+      "title_it": "Aggiornamento medico su Octagón Jr. dopo l'infortunio in AAA",
+      "translation_model": "gemini-3.1-flash-lite"
+    },
+    {
+      "bob_notes": [
+        "Traduzione integrale e fedele, mantenendo lo stile giornalistico richiesto.",
+        "Le citazioni sono state tradotte rispettando il contenuto originale senza alterazioni.",
+        "Il contenuto è stato organizzato in blocchi coerenti, rimuovendo le parti superflue come biografia autore e link promozionali esterni."
+      ],
+      "body_html": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/jonathan-coachman-blasts-wwe-creative-for-booking-liv-morgan-in-queen-of-the-ring-tournament-06.jpg.avif?x16316--></p><p>Jonathan Coachman ha sollevato dubbi sulla logica della WWE dopo l'inserimento di Liv Morgan nel torneo Queen of the Ring del 2026, nonostante la wrestler detenga attualmente il Women’s World Championship.</p><p>Coachman ha espresso il suo disappunto su Twitter, sottolineando una contraddizione di base: la vincitrice del torneo King and Queen of the Ring ottiene di diritto un'opportunità titolata a SummerSlam, ma Morgan è già la campionessa mondiale femminile. Secondo Coachman, questo è il tipo di dettaglio che i fan del wrestling notano immediatamente:</p><p>“QUESTO 👇🏾👇🏾👇🏾 è esattamente ciò di cui parlano i fan di wrestling quando si tratta di attenzione ai dettagli. A meno che io non mi stia perdendo qualcosa o non abbia sentito correttamente. La vincitrice del torneo King and Queen of the Ring vince una title shot a SummerSlam. Quindi Liv Morgan è in un match di qualificazione ed è la campionessa femminile. Fatemelo capire.”</p><p>Coachman ha poi suggerito che l'unico modo in cui la WWE potrebbe giustificare la situazione sarebbe attraverso un segmento in cui Morgan dichiara di essere entrata nel torneo per impedire a chiunque altra di ottenere un'opportunità titolata:</p><p>“L'UNICO modo in cui potete provare a coprire il vostro errore è fare un segmento registrato con Liv e chiederle perché sia nel torneo, e lei risponde: 'Ho intenzione di bloccare la title shot prima ancora che accada. Per la prima volta la campionessa femminile vince il Queen of the Ring e io mi rilasserò nella mia suite VIP a SummerSlam'. Altrimenti sappiamo che non vincerà, il che non è un buon modo di scrivere la storia. 🤷🏾‍♂️”</p><p>Morgan, in precedenza, aveva spiegato durante il post-show di WWE Clash in Italy le ragioni della sua partecipazione, nonostante sia già campionessa. Ha affermato che ogni donna nel tabellone è già stata sconfitta da lei e ha aggiunto che le critiche sulla qualità del suo regno l'hanno spinta a puntare anche al Queen of the Ring, ribadendo di voler dominare l'intera divisione femminile WWE:</p><p>“Tutte queste donne hanno avuto una serata incredibile, ma sapete cosa hanno in comune? Sono state tutte battute da Liv Morgan. Quindi mi sono detta, okay, lasciatemi espandere la cosa. Mi ha fatto pensare a tutte le persone che dicono che la Morgan non sia una buona campionessa – Liv Morgan non difende il suo titolo, Liv Morgan non è degna di essere campionessa. Sapete cosa mi ha fatto pensare? Mi ha fatto pensare che parteciperò al torneo Queen of the Ring perché voglio tutto. Voglio tutto.”</p><p>Il tabellone del Queen of the Ring 2026 vede Morgan affrontare Becky Lynch e altre avversarie nel primo turno, con la finale prevista per il WWE Night of Champions il 27 giugno a Riyadh, in Arabia Saudita. La vincitrice dovrebbe ottenere un'opportunità titolata a SummerSlam, motivo per cui Coachman ritiene che l'inclusione di Morgan crei un problema di gestione creativa. Resta ora da vedere se la WWE affronterà direttamente la questione o se lascerà che il torneo prosegua senza ulteriori spiegazioni.</p>",
+      "category_hint": "WWE",
+      "created_at": "2026-06-01T15:37:12.682490+00:00",
+      "element_counts": {
+        "embed": 0,
+        "heading": 4,
+        "image": 1,
+        "link": 3,
+        "quote": 3,
+        "text": 13
+      },
+      "elements": [
+        {
+          "alt": "Jonathan Coachman Blasts WWE Creative for Booking Liv Morgan in Queen of the Ring Tournament",
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/jonathan-coachman-blasts-wwe-creative-for-booking-liv-morgan-in-queen-of-the-ring-tournament-06.jpg.avif?x16316"
+        },
+        {
+          "text": "蝶 Connect with us on Bluesky →",
+          "type": "link",
+          "url": "https://bsky.app/profile/ringsidenews.com"
+        },
+        {
+          "text": "Jonathan Coachman is questioning WWE’s logic after Liv Morgan was placed in the 2026 Queen of the Ring tournament while already holding the Women’s World Championship.",
+          "type": "text"
+        },
+        {
+          "text": "Coachman took to Twitter and reacted to Morgan being part of the bracket. His issue was simple: the Queen of the Ring winner is set to earn a world title shot at SummerSlam, but Morgan is already the Women’s World Champion. Coachman said this is the kind of detail wrestling fans notice right away.",
+          "type": "text"
+        },
+        {
+          "text": "“THIS 👇🏾👇🏾👇🏾 is exactly what wrestling fans are talking about when it comes to attention to detail. Unless I am completing missing something or didn’t hear correctly. The winner of the king and Queen of the Ring tournament wins a world title shot at Summerslam. So Liv Morgan is in a qualifying match and she is the women’s champion. Make it make sense.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "Coachman then suggested the only way WWE could explain the situation would be through a segment where Morgan says she entered the tournament to block anyone else from getting a title shot.",
+          "type": "text"
+        },
+        {
+          "text": "“The ONLY way you can even try to cover your mistake is doing a pretape with Liv and ask her why she is in it and she says ‘I am going to shut down the title shot before it even happens. For the first time the womens champion wins Queen of the ring and I will kick back and chill in my vip suite at Summerslam’. Otherwise we know she isn’t winning which is not how your book. 🤷🏾‍♂️”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "Morgan previously explained during the WWE Clash in Italy post-show why she entered the tournament despite already being champion. She said every woman in the field had already been beaten by her and claimed criticism of her title reign pushed her to chase Queen of the Ring as well. Morgan also made it clear that she wants everything in WWE’s women’s division .",
+          "type": "text"
+        },
+        {
+          "text": "Morgan also made it clear that she wants everything in WWE’s women’s division",
+          "type": "link",
+          "url": "https://www.ringsidenews.com/liv-morgan-explains-why-she-entered-queen-ring-tournament-despite-champion/"
+        },
+        {
+          "text": "“All these women had an incredible night—but you know what they all have in common? They’ve all been beaten by Liv Morgan. So I was like, okay, let me expand upon this. It had me thinking about all the people who say Morgan isn’t a good champion—Liv Morgan doesn’t defend her title, Liv Morgan isn’t worthy of being champion. So you know what that made me think? That made me think I am entering the Queen of the Ring tournament because I want it all. I want it all.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "The 2026 Queen of the Ring bracket has Morgan facing Becky Lynch and others in the opening round, with the finals scheduled for WWE Night of Champions on June 27 in Riyadh, Saudi Arabia. The winner is expected to earn a SummerSlam title shot, which is exactly why Coachman believes Morgan’s inclusion creates a booking problem.",
+          "type": "text"
+        },
+        {
+          "text": "Liv Morgan may have her own reason for entering Queen of the Ring, but Coachman’s criticism points to a bigger question about how WWE plans to explain the stakes if the champion is in the field. Now, fans will be watching to see whether WWE addresses it directly or simply lets the tournament play out.",
+          "type": "text"
+        },
+        {
+          "text": "What do you think about Jonathan Coachman questioning Liv Morgan’s spot in Queen of the Ring? Please share your thoughts and feedback in the comments.",
+          "type": "text"
+        },
+        {
+          "text": "G Add as a preferred source on Google",
+          "type": "link",
+          "url": "https://www.google.com/preferences/source?q=https://www.ringsidenews.com"
+        },
+        {
+          "text": "Subhojeet Mukherjee has covered pro wrestling for over 20 years, delivering trusted news and backstage updates to fans around the world.",
+          "type": "text"
+        },
+        {
+          "text": "Spotlight WWE News Sol Ruca Wins Women’s IC Title At WWE Clash In Italy WWE News Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy WWE News Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy WWE News WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win",
+          "type": "text"
+        },
+        {
+          "text": "WWE News Sol Ruca Wins Women’s IC Title At WWE Clash In Italy",
+          "type": "text"
+        },
+        {
+          "level": 2,
+          "text": "Sol Ruca Wins Women’s IC Title At WWE Clash In Italy",
+          "type": "heading"
+        },
+        {
+          "text": "WWE News Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy",
+          "type": "text"
+        },
+        {
+          "level": 2,
+          "text": "Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy",
+          "type": "heading"
+        },
+        {
+          "text": "WWE News Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy",
+          "type": "text"
+        },
+        {
+          "level": 2,
+          "text": "Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy",
+          "type": "heading"
+        },
+        {
+          "text": "WWE News WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win",
+          "type": "text"
+        },
+        {
+          "level": 2,
+          "text": "WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win",
+          "type": "heading"
+        }
+      ],
+      "excerpt_it": "Jonathan Coachman contesta la decisione della WWE di inserire la campionessa in carica Liv Morgan nel torneo Queen of the Ring, evidenziando una potenziale incongruenza narrativa.",
+      "menzo_score": 76,
+      "meta": {
+        "description": "Jonathan Coachman is questioning WWE’s logic after Liv Morgan was placed in the 2026 Queen of the Ring tournament while already holding the Women’s World",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/jonathan-coachman-blasts-wwe-creative-for-booking-liv-morgan-in-queen-of-the-ring-tournament-06.jpg",
+        "source_title": "Jonathan Coachman Blasts WWE Creative for Booking Liv Morgan in Queen of the Ring Tournament"
+      },
+      "source": "ringsidenews",
+      "source_title": "Jonathan Coachman Blasts WWE Creative for Booking Liv Morgan in Queen of the Ring Tournament",
+      "source_url": "https://www.ringsidenews.com/jonathan-coachman-blasts-wwe-creative-booking-liv-morgan-queen-ring-tournament/",
+      "status": "ready_for_alfred",
+      "title_it": "Jonathan Coachman critica la gestione creativa di Liv Morgan nel Queen of the Ring",
+      "translation_model": "gemini-3.1-flash-lite"
+    }
+  ],
+  "generated_at": "2026-06-01T15:37:16.711888+00:00",
+  "handoff": {
+    "errors": 0,
+    "ready_for_alfred": 3,
+    "translation_pending": 0
+  },
+  "input": {
+    "menzo_version": "v93_2_menzo_editorial_director",
+    "selected_count": 6
+  },
+  "mode": "article_package_writer",
+  "policy": {
+    "drop_author_bio_and_footer": true,
+    "drop_duplicate_first_featured_image": true,
+    "max_articles_per_run": 3,
+    "model_chain": [
+      "gemini-3.1-flash-lite",
+      "gemini-3-flash-preview",
+      "gemini-2.5-flash-lite",
+      "gemini-2.5-flash"
+    ],
+    "ordered_elements": [
+      "text",
+      "heading",
+      "quote",
+      "image",
+      "embed",
+      "link"
+    ]
+  },
+  "version": "v93_4_bob_article_writer"
+}
