@@ -1,11 +1,11 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-01T22:19:13.496571+00:00",
+  "generated_at": "2026-06-01T22:22:37.307433+00:00",
   "handoff": {
-    "already_published": 0,
+    "already_published": 3,
     "dry_run": 0,
     "errors": 0,
-    "published": 3,
+    "published": 0,
     "wp_not_ready": 0
   },
   "input": {
@@ -21,36 +21,21 @@
   },
   "results": [
     {
-      "categories": [
-        4
-      ],
-      "featured_media": 5793,
       "source_url": "https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit/",
-      "status": "published",
-      "title_it": "WWE sotto accusa: i querelanti dubitano della corretta conservazione delle prove nel caso ESPN",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-sotto-accusa-i-querelanti-dubitano-della-corretta-conservazione-delle-prove-nel-caso-espn/",
+      "status": "already_published",
+      "title_it": "WWE: i querelanti dubitano della corretta conservazione delle prove nella causa contro ESPN",
       "wp_post_id": 5794
     },
     {
-      "categories": [
-        8
-      ],
-      "featured_media": 5795,
       "source_url": "https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery/",
-      "status": "published",
-      "title_it": "Chad Gable annuncia una docuserie in nove parti sul recupero dall'infortunio alla spalla",
-      "wp_link": "https://news.openwrestlingtv.com/world/chad-gable-annuncia-una-docuserie-in-nove-parti-sul-recupero-dallinfortunio-alla-spalla/",
+      "status": "already_published",
+      "title_it": "Chad Gable annuncia una docuserie in nove parti sul recupero dal suo infortunio alla spalla",
       "wp_post_id": 5796
     },
     {
-      "categories": [
-        4
-      ],
-      "featured_media": 5797,
       "source_url": "https://www.wrestlinginc.com/2174268/wwe-smackdown-gunther-royce-keys-cody-rhodes-clash-in-italy/",
-      "status": "published",
+      "status": "already_published",
       "title_it": "WWE SmackDown: Gunther batte Royce Keys e sfiderà Cody Rhodes a Clash in Italy",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-smackdown-gunther-batte-royce-keys-e-sfidera-cody-rhodes-a-clash-in-italy/",
       "wp_post_id": 5798
     }
   ],
