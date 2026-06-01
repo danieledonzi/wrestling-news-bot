@@ -63,12 +63,12 @@ def v93_simone_chosen_entry(decision: Dict[str, Any]) -> Dict[str, Any]:
 '''
 text = text.replace(insert_before, helpers + insert_before, 1)
 
-old = '''    entries = feed_entries(feeds_cfg.get("feeds", []))
-    published = 0
-
-    for report in reports_cfg.get("reports", []):
+# Insert Simone gate setup after pending is loaded. This is more stable than
+# matching the feed_entries block, because several v92 patches may alter the
+# exact spacing/order of report scan code.
+setup_anchor = '''    pending = load_json(PENDING_REPORTS_FILE, [])
 '''
-new = '''    entries = feed_entries(feeds_cfg.get("feeds", []))
+setup_code = '''    pending = load_json(PENDING_REPORTS_FILE, [])
     simone_reports = load_v93_simone_reports() if v93_simone_gate_enabled() else {}
     simone_gate_active = v93_simone_gate_enabled() and v93_simone_report_decisions_available(simone_reports)
     if simone_gate_active:
@@ -76,14 +76,13 @@ new = '''    entries = feed_entries(feeds_cfg.get("feeds", []))
         log(f"[REPORT v92] V93 Simone gate attivo: ready={handoff.get('ready', 0)} waiting={handoff.get('waiting', 0)} skipped={handoff.get('skipped', 0)}")
     else:
         log("[REPORT v92] V93 Simone gate non vincolante: decisioni assenti o gate disattivato")
-    published = 0
-
-    for report in reports_cfg.get("reports", []):
 '''
-if old not in text:
-    raise SystemExit("[V93 SIMONE GATE] blocco entries report non trovato")
-text = text.replace(old, new, 1)
+if setup_anchor not in text:
+    raise SystemExit("[V93 SIMONE GATE] pending reports anchor non trovato")
+text = text.replace(setup_anchor, setup_code, 1)
 
+# Replace the point where v92 chooses the report source. Keep a fallback to the
+# old v92 choice only if the Simone decision file is absent or the gate is disabled.
 old = '''        chosen, reason = choose_report_source(report, entries, now, date_iso)
         title = build_report_title(report, date_iso)
         categories = categories_for_report(report, categories_cfg)
