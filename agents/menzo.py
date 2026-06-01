@@ -4,6 +4,7 @@ import json
 import os
 import re
 from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 from pathlib import Path
 from typing import Any
 
@@ -17,17 +18,17 @@ MENZO_DECISIONS_FILE = NEWSROOM_STATE_DIR / "menzo_decisions_latest.json"
 V92_ALLOWED_URLS_FILE = NEWSROOM_STATE_DIR / "v92_allowed_news_urls.json"
 ARTIFACT_DECISIONS_FILE = ARTIFACT_DIR / "menzo_decisions.json"
 
-MENZO_VERSION = "v93_2_menzo_editorial_director"
+MENZO_VERSION = "v93_9_editorial_value_recency_gate"
 
 HARD_SIGNALS = {
     "death": 100,
     "passes away": 100,
     "arrested": 92,
     "lawsuit": 88,
+    "legal": 82,
     "injury": 86,
     "injured": 86,
     "surgery": 82,
-    "released": 84,
     "fired": 84,
     "departs": 76,
     "signs": 80,
@@ -44,6 +45,11 @@ HARD_SIGNALS = {
     "tv deal": 84,
     "netflix": 76,
     "tko": 74,
+    "trade": 80,
+    "moves to smackdown": 80,
+    "moves to raw": 80,
+    "lineup": 62,
+    "bracket": 66,
 }
 
 STRATEGIC_SIGNALS = {
@@ -57,6 +63,8 @@ STRATEGIC_SIGNALS = {
     "queen of the ring": 58,
     "king of the ring": 58,
     "clash in italy": 58,
+    "raw": 54,
+    "smackdown": 54,
 }
 
 ENTITY_SIGNALS = {
@@ -65,12 +73,18 @@ ENTITY_SIGNALS = {
     "cm punk": 10,
     "john cena": 10,
     "the rock": 10,
+    "brock lesnar": 10,
+    "paul heyman": 8,
     "rhea ripley": 8,
     "becky lynch": 8,
     "seth rollins": 8,
     "liv morgan": 8,
     "gunther": 8,
     "mercedes mone": 8,
+    "chad gable": 8,
+    "finn balor": 8,
+    "oba femi": 8,
+    "mick foley": 5,
     "kevin nash": 5,
 }
 
@@ -78,6 +92,7 @@ SOFT_OR_SKIP_SIGNALS = {
     "addresses": -8,
     "explains why": -6,
     "recalls": -10,
+    "reflects": -10,
     "identifies": -6,
     "reacts": -10,
     "reaction": -12,
@@ -88,6 +103,8 @@ SOFT_OR_SKIP_SIGNALS = {
     "breaks silence": -4,
     "open to": -10,
     "comments from": -8,
+    "documentary": -12,
+    "docuseries": -12,
 }
 
 HARD_SKIP_PATTERNS = [
@@ -96,9 +113,30 @@ HARD_SKIP_PATTERNS = [
     (re.compile(r"\bpreview\b.*\b(start\s*time|how\s+to\s+watch|confirmed\s+matches)\b", re.I), "generic_preview"),
 ]
 
+RATINGS_PATTERNS = [
+    re.compile(r"\b(ratings?|viewership|demo|p18\s*49|viewers|ascolti)\b", re.I),
+]
+RELEASED_DATA_PATTERNS = [
+    re.compile(r"\b(data|numbers|ratings?|viewership|figures)\s+(has|have|was|were)?\s*(been\s*)?released\b", re.I),
+    re.compile(r"\breleased\s+(ratings?|viewership|figures|data|numbers)\b", re.I),
+]
+CURRENT_PRIORITY_PATTERNS = [
+    (re.compile(r"\bmajor changes?\b.*\b(king|queen)\s+of\s+the\s+ring\b|\b(king|queen)\s+of\s+the\s+ring\b.*\bmajor changes?\b", re.I), 20, "current:tournament_changes"),
+    (re.compile(r"\btrade\b|\bmoves\s+to\s+(raw|smackdown|nxt)\b", re.I), 18, "current:roster_move"),
+    (re.compile(r"\bnetflix\b.*\b(aaa|wwe|replay|unmasking)\b", re.I), 16, "current:netflix_aaa"),
+    (re.compile(r"\b(call(?:s)?\s+out|confronts?)\b.*\b(brock lesnar|roman reigns|cody rhodes|cm punk)\b", re.I), 12, "current:major_storyline"),
+    (re.compile(r"\b(plaintiffs?|lawsuit|evidence|espn)\b", re.I), 10, "current:business_legal"),
+]
+
+EVERGREEN_TERMS = {"lawsuit", "legal", "media rights", "tv deal", "tko", "contract", "acquisition"}
+
 
 def utc_now() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def now_dt() -> datetime:
+    return datetime.now(timezone.utc)
 
 
 def load_json(path: Path, default: Any) -> Any:
@@ -123,6 +161,29 @@ def normalize(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+def parse_published(value: Any) -> datetime | None:
+    if not value:
+        return None
+    raw = str(value)
+    try:
+        dt = parsedate_to_datetime(raw)
+        return dt.astimezone(timezone.utc) if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+    except Exception:
+        pass
+    try:
+        dt = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+        return dt.astimezone(timezone.utc) if dt.tzinfo else dt.replace(tzinfo=timezone.utc)
+    except Exception:
+        return None
+
+
+def age_hours(item: dict[str, Any]) -> float | None:
+    dt = parse_published(item.get("published"))
+    if not dt:
+        return None
+    return max(0.0, (now_dt() - dt).total_seconds() / 3600.0)
+
+
 def category_hint(item: dict[str, Any]) -> str:
     blob = normalize(f"{item.get('title', '')} {item.get('summary', '')} {item.get('url', '')}")
     if "nxt" in blob:
@@ -131,11 +192,44 @@ def category_hint(item: dict[str, Any]) -> str:
         return "AEW"
     if "tna" in blob or "impact" in blob:
         return "TNA"
+    if "tko" in blob or "media rights" in blob or "tv deal" in blob or "espn" in blob or "lawsuit" in blob:
+        return "Business"
     if "wwe" in blob or "raw" in blob or "smackdown" in blob or "roman reigns" in blob or "cody rhodes" in blob:
         return "WWE"
-    if "tko" in blob or "media rights" in blob or "tv deal" in blob or "netflix" in blob:
-        return "Business"
     return "World"
+
+
+def is_ratings_report(blob: str) -> bool:
+    return any(pattern.search(blob) for pattern in RATINGS_PATTERNS)
+
+
+def is_released_data_context(raw_blob: str) -> bool:
+    return any(pattern.search(raw_blob) for pattern in RELEASED_DATA_PATTERNS)
+
+
+def has_evergreen_signal(blob: str) -> bool:
+    return any(term in blob for term in EVERGREEN_TERMS)
+
+
+def apply_recency(score: int, reasons: list[str], item: dict[str, Any], blob: str) -> int:
+    hours = age_hours(item)
+    if hours is None:
+        reasons.append("recency:unknown")
+        return score - 4
+    if hours <= 12:
+        reasons.append("recency:fresh_12h")
+        return score + 8
+    if hours <= 36:
+        reasons.append("recency:fresh_36h")
+        return score + 4
+    if hours <= 72:
+        reasons.append("recency:recent_72h")
+        return score
+    if has_evergreen_signal(blob):
+        reasons.append("recency:old_but_evergreen")
+        return score - 8
+    reasons.append("recency:old_penalty")
+    return score - 35
 
 
 def classify_item(item: dict[str, Any]) -> dict[str, Any]:
@@ -146,20 +240,19 @@ def classify_item(item: dict[str, Any]) -> dict[str, Any]:
 
     for pattern, reason in HARD_SKIP_PATTERNS:
         if pattern.search(raw_blob):
-            return {
-                "decision": "skip",
-                "article_type": "low_value",
-                "priority": "skip",
-                "score": 0,
-                "reason": reason,
-            }
+            return {"decision": "skip", "article_type": "low_value", "priority": "skip", "score": 0, "reason": reason}
 
     score = 30
     reasons: list[str] = []
     article_type = "standard_useful"
+    ratings_report = is_ratings_report(raw_blob)
+    released_data_context = is_released_data_context(raw_blob)
 
     for term, value in HARD_SIGNALS.items():
         if term in blob:
+            if term == "released" and released_data_context:
+                reasons.append("disambiguated:released_data_not_hard_news")
+                continue
             score = max(score, value)
             reasons.append(f"hard:{term}")
             article_type = "hard_news"
@@ -178,23 +271,40 @@ def classify_item(item: dict[str, Any]) -> dict[str, Any]:
             reasons.append(f"entity:{term}")
     score += min(entity_bonus, 16)
 
+    for pattern, value, reason in CURRENT_PRIORITY_PATTERNS:
+        if pattern.search(raw_blob):
+            score += value
+            reasons.append(reason)
+            if article_type == "standard_useful":
+                article_type = "strategic_discussion"
+
     for term, value in SOFT_OR_SKIP_SIGNALS.items():
         if term in blob:
             score += value
             reasons.append(f"soft_penalty:{term}")
 
+    if ratings_report:
+        if re.search(r"\b(record|highest|lowest|massive|huge|surge|best|worst)\b", raw_blob, re.I):
+            score += 4
+            reasons.append("ratings:exceptional_signal")
+        else:
+            score -= 18
+            reasons.append("ratings:generic_penalty")
+            if article_type == "hard_news":
+                article_type = "data_report"
+
+    score = apply_recency(score, reasons, item, blob)
     score = max(0, min(int(score), 100))
 
     if score >= 75:
         decision = "selected"
         priority = "hard"
-        article_type = "hard_news"
-    elif score >= 58:
+        if article_type not in {"data_report", "strategic_discussion"}:
+            article_type = "hard_news"
+    elif score >= 62:
         decision = "selected"
         priority = "soft"
-        if article_type == "standard_useful":
-            article_type = "standard_useful"
-    elif score >= 48:
+    elif score >= 50:
         decision = "pending"
         priority = "soft"
         if article_type == "standard_useful":
@@ -204,17 +314,13 @@ def classify_item(item: dict[str, Any]) -> dict[str, Any]:
         priority = "skip"
         article_type = "low_value"
 
-    return {
-        "decision": decision,
-        "article_type": article_type,
-        "priority": priority,
-        "score": score,
-        "reason": ",".join(reasons[:10]) or "menzo_baseline",
-    }
+    return {"decision": decision, "article_type": article_type, "priority": priority, "score": score, "reason": ",".join(reasons[:14]) or "menzo_baseline"}
 
 
-def sort_key(item: dict[str, Any]) -> tuple[int, str]:
-    return int(item.get("score") or 0), str(item.get("published") or "")
+def sort_key(item: dict[str, Any]) -> tuple[int, float, str]:
+    hours = age_hours(item)
+    freshness = 999999.0 if hours is None else hours
+    return int(item.get("score") or 0), -freshness, str(item.get("published") or "")
 
 
 def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -230,7 +336,7 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     pending: list[dict[str, Any]] = []
     skipped: list[dict[str, Any]] = []
 
-    print(f"[MENZO v93.2] Avvio decisione editoriale | candidates={len(candidates)}", flush=True)
+    print(f"[MENZO v93.9] Avvio decisione editoriale | candidates={len(candidates)}", flush=True)
 
     for candidate in candidates:
         item = dict(candidate)
@@ -238,6 +344,7 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         item.update(classification)
         item["agent"] = "Menzo"
         item["category_hint"] = category_hint(item)
+        item["age_hours"] = age_hours(item)
         item["evaluated_at"] = utc_now()
         if item["decision"] == "selected":
             selected.append(item)
@@ -258,46 +365,32 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     pending = sorted(pending, key=sort_key, reverse=True)[:max_pending]
 
     allowed_urls = [str(item.get("url") or item.get("source_url") or "") for item in selected if item.get("url") or item.get("source_url")]
-
     result = {
         "agent": "Menzo",
         "version": MENZO_VERSION,
         "generated_at": utc_now(),
-        "mode": "deterministic_editorial_gate",
-        "daily_policy": {
-            "target_min": 20,
-            "target_max": 30,
-            "reports_excluded": True,
-            "max_selected_this_run": max_selected,
-            "max_pending_this_run": max_pending,
+        "mode": "editorial_value_recency_gate",
+        "daily_policy": {"target_min": 20, "target_max": 30, "reports_excluded": True, "max_selected_this_run": max_selected, "max_pending_this_run": max_pending},
+        "policy": {
+            "recency_penalty_after_72h": True,
+            "released_data_disambiguation": True,
+            "ratings_reports_penalized_unless_exceptional": True,
+            "current_storyline_and_roster_boosts": True,
         },
-        "input": {
-            "massy_version": board.get("version") if isinstance(board, dict) else None,
-            "candidate_count": len(candidates),
-        },
+        "input": {"massy_version": board.get("version") if isinstance(board, dict) else None, "candidate_count": len(candidates)},
         "selected": selected,
         "pending": pending,
         "skipped": skipped,
         "allowed_urls_for_v92": allowed_urls,
-        "handoff": {
-            "to_bob_or_v92": len(selected),
-            "pending": len(pending),
-            "skipped": len(skipped),
-        },
+        "handoff": {"to_bob_or_v92": len(selected), "pending": len(pending), "skipped": len(skipped)},
     }
-
     write_json(ARTIFACT_DECISIONS_FILE, result)
     write_json(MENZO_DECISIONS_FILE, result)
-    write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "allowed_urls": allowed_urls})
-
-    print(
-        "[MENZO v93.2] Decisione pronta | "
-        f"selected={len(selected)} pending={len(pending)} skipped={len(skipped)} allowed_for_v92={len(allowed_urls)}",
-        flush=True,
-    )
+    write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "version": MENZO_VERSION, "allowed_urls": allowed_urls})
+    print(f"[MENZO v93.9] Decisione pronta | selected={len(selected)} pending={len(pending)} skipped={len(skipped)} allowed_for_v92={len(allowed_urls)}", flush=True)
     return result
 
 
 if __name__ == "__main__":
-    out = run_menzo()
-    print(json.dumps(out.get("handoff", {}), ensure_ascii=False, indent=2))
+    result = run_menzo()
+    print(json.dumps(result.get("handoff", {}), ensure_ascii=False, indent=2))
