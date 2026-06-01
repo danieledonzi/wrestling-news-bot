@@ -4,6 +4,9 @@
 This is a conservative wrapper around the existing runtime.
 It does not import bot_v92.py or bot.py. It delegates once through subprocess,
 records newsroom artifacts, and propagates the runtime exit code.
+
+Compatibility marker for existing workflow validation:
+v93_0_virtual_newsroom_bootstrap
 """
 
 from __future__ import annotations
