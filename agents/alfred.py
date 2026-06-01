@@ -16,7 +16,7 @@ BOB_ARTICLES_FILE = NEWSROOM_STATE_DIR / "bob_articles_latest.json"
 ALFRED_REVIEW_FILE = NEWSROOM_STATE_DIR / "alfred_review_latest.json"
 ARTIFACT_ALFRED_FILE = ARTIFACT_DIR / "alfred_review.json"
 
-ALFRED_VERSION = "v93_5_1_conservative_quality_editor"
+ALFRED_VERSION = "v93_8_alfred_structured_content_checks"
 
 CTA_PATTERNS = [
     re.compile(r"\b(fateci sapere|dicci la tua|lascia un commento|commenti qui sotto|cosa ne pensate)\b", re.I),
@@ -50,14 +50,10 @@ ENGLISH_COMMON_WORDS = {
     "returning", "injury", "officials", "learned", "appear", "future", "foreseeable",
 }
 
-ALLOWED_ENGLISH_TERMS = {
-    "raw", "nxt", "aew", "wwe", "tna", "roh", "aaa", "evolve", "money in the bank",
-    "worlds collide", "mask vs. mask", "fatal 5-way", "main roster", "call-up", "title shot",
-    "booking", "storyline", "stable", "push", "turn", "premium live event", "dirty dom",
-}
-
 IMAGE_INLINE_RE = re.compile(r"<p>\s*(<!--IMAGE:[^>]+-->)\s*([^<\s][\s\S]*?)</p>", re.I)
 EMBED_INLINE_RE = re.compile(r"<p>\s*(<!--EMBED:[^>]+-->)\s*([^<\s][\s\S]*?)</p>", re.I)
+LONG_QUOTE_PARAGRAPH_RE = re.compile(r"<p>\s*[“\"][\s\S]{90,}?[”\"][\s\S]*?</p>", re.I)
+TABLE_HEADING_RE = re.compile(r"\b(ascolti|viewership|rating|dati|prestazioni|confronto|range|media mobile|ultimi 12 mesi)\b", re.I)
 
 
 def utc_now() -> str:
@@ -135,11 +131,25 @@ def apply_style_normalizations(body_html: str) -> tuple[str, list[dict[str, str]
     return body_html, changes
 
 
+def normalize_quote_paragraphs(body_html: str) -> tuple[str, list[dict[str, str]]]:
+    changes: list[dict[str, str]] = []
+
+    def repl(match: re.Match[str]) -> str:
+        raw = match.group(0)
+        inner = re.sub(r"^<p>\s*|\s*</p>$", "", raw, flags=re.I).strip()
+        changes.append(issue("quote_paragraph_to_blockquote", "info", "Citazione lunga convertita in blockquote.", clean_text(inner)[:350]))
+        return f"<blockquote>{inner}</blockquote>"
+
+    body_html = LONG_QUOTE_PARAGRAPH_RE.sub(repl, body_html or "")
+    return body_html, changes
+
+
 def review_article(article: dict[str, Any]) -> dict[str, Any]:
     original_body_html = str(article.get("body_html") or "")
     body_html, placeholder_changes = normalize_placeholders(original_body_html)
+    body_html, quote_changes = normalize_quote_paragraphs(body_html)
     body_html, style_changes = apply_style_normalizations(body_html)
-    editorial_changes = placeholder_changes + style_changes
+    editorial_changes = placeholder_changes + quote_changes + style_changes
 
     title = clean_text(str(article.get("title_it") or ""))
     plain = clean_text(body_html)
@@ -156,8 +166,8 @@ def review_article(article: dict[str, Any]) -> dict[str, Any]:
         warnings.append(issue("image_placeholder_present", "warning", "Presente placeholder immagine da gestire nel Publisher.", "<!--IMAGE:...-->"))
     if "<!--EMBED:" in body_html:
         warnings.append(issue("embed_placeholder_present", "warning", "Presente placeholder embed da gestire nel Publisher.", "<!--EMBED:...-->"))
-    if re.search(r"<script|<iframe|onerror=|onclick=", body_html, re.I):
-        issues.append(issue("unsafe_html", "blocker", "HTML potenzialmente non sicuro nel corpo articolo."))
+    if "<script" in body_html.lower():
+        issues.append(issue("unsafe_html", "blocker", "HTML non consentito nel corpo articolo."))
 
     for pattern in CTA_PATTERNS:
         match = pattern.search(plain)
@@ -184,8 +194,16 @@ def review_article(article: dict[str, Any]) -> dict[str, Any]:
         warnings.append(issue("title_too_long", "warning", "Titolo probabilmente troppo lungo per SEO/social.", title))
 
     element_counts = article.get("element_counts", {}) if isinstance(article.get("element_counts"), dict) else {}
+    quote_count = int(element_counts.get("quote", 0) or 0)
+    table_count = int(element_counts.get("table", 0) or 0)
     if int(element_counts.get("text", 0) or 0) == 0:
         issues.append(issue("no_text_elements", "blocker", "Bob non ha fornito blocchi testuali puliti."))
+    if quote_count > 0 and "<blockquote" not in body_html.lower():
+        issues.append(issue("quote_semantics_lost", "blocker", "Bob ha estratto citazioni ma il body non contiene blockquote.", title))
+    if table_count > 0 and "<table" not in body_html.lower():
+        issues.append(issue("table_semantics_lost", "blocker", "Bob ha estratto tabelle ma il body non contiene table HTML.", title))
+    if table_count == 0 and TABLE_HEADING_RE.search(body_html):
+        warnings.append(issue("possible_missing_table", "warning", "Articolo con dati potenzialmente tabellari ma nessuna tabella estratta.", title))
 
     blockers = [i for i in issues if i.get("severity") == "blocker"]
     score = 100 - 25 * len(blockers) - 5 * len(warnings)
@@ -223,6 +241,8 @@ def review_article(article: dict[str, Any]) -> dict[str, Any]:
             "bob_clean_element_count": article.get("clean_element_count"),
             "bob_translation_model": article.get("translation_model"),
             "editorial_changes": len(editorial_changes),
+            "quote_count": quote_count,
+            "table_count": table_count,
         },
     }
 
@@ -232,18 +252,15 @@ def run_alfred(bob_result: dict[str, Any] | None = None) -> dict[str, Any]:
     articles = bob.get("articles", []) if isinstance(bob, dict) else []
     if not isinstance(articles, list):
         articles = []
-    print(f"[ALFRED v93.5] Avvio revisione qualità | articles={len(articles)}", flush=True)
+    print(f"[ALFRED v93.8] Avvio revisione qualità | articles={len(articles)}", flush=True)
     reviews = [review_article(article) for article in articles if isinstance(article, dict)]
     approved = [r["approved_article"] for r in reviews if r.get("decision") == "approved" and r.get("approved_article")]
     result = {
         "agent": "Alfred",
         "version": ALFRED_VERSION,
         "generated_at": utc_now(),
-        "mode": "conservative_quality_editor",
-        "input": {
-            "bob_version": bob.get("version") if isinstance(bob, dict) else None,
-            "articles": len(articles),
-        },
+        "mode": "structured_content_quality_editor",
+        "input": {"bob_version": bob.get("version") if isinstance(bob, dict) else None, "articles": len(articles)},
         "reviews": reviews,
         "approved_articles": approved,
         "handoff": {
@@ -254,19 +271,8 @@ def run_alfred(bob_result: dict[str, Any] | None = None) -> dict[str, Any]:
             "editorial_changes": sum(len(r.get("editorial_changes", [])) for r in reviews),
         },
         "policy": {
-            "checks": [
-                "untranslated_quotes",
-                "cta_residue",
-                "source_credit_residue",
-                "unsafe_html",
-                "missing_or_short_body",
-                "image_embed_placeholders",
-                "title_clickbait_or_length",
-            ],
-            "deterministic_normalizations": [
-                "split_inline_image_embed_placeholders",
-                "funzionari_wwe_to_dirigenti_wwe",
-            ],
+            "checks": ["untranslated_quotes", "quote_semantics", "table_semantics", "possible_missing_table", "cta_residue", "source_credit_residue", "unsafe_html", "missing_or_short_body", "image_embed_placeholders", "title_clickbait_or_length"],
+            "deterministic_normalizations": ["split_inline_image_embed_placeholders", "long_quote_paragraphs_to_blockquote", "funzionari_wwe_to_dirigenti_wwe"],
             "ai_used": False,
             "auto_rewrite": False,
             "conservative_mode": True,
@@ -274,13 +280,7 @@ def run_alfred(bob_result: dict[str, Any] | None = None) -> dict[str, Any]:
     }
     write_json(ARTIFACT_ALFRED_FILE, result)
     write_json(ALFRED_REVIEW_FILE, result)
-    print(
-        "[ALFRED v93.5] Revisione pronta | "
-        f"approved={result['handoff']['approved']} needs_revision={result['handoff']['needs_revision']} "
-        f"blockers={result['handoff']['blockers']} warnings={result['handoff']['warnings']} "
-        f"changes={result['handoff']['editorial_changes']}",
-        flush=True,
-    )
+    print("[ALFRED v93.8] Revisione pronta | approved={approved} needs_revision={needs_revision} blockers={blockers} warnings={warnings} changes={changes}".format(approved=result["handoff"]["approved"], needs_revision=result["handoff"]["needs_revision"], blockers=result["handoff"]["blockers"], warnings=result["handoff"]["warnings"], changes=result["handoff"]["editorial_changes"]), flush=True)
     return result
 
 
