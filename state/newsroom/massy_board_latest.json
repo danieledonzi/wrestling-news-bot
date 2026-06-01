@@ -32,12 +32,12 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-01T22:42:09.378367+00:00",
+  "generated_at": "2026-06-01T22:59:37.222939+00:00",
   "handoff": {
-    "already_published_hard_skipped": 5,
+    "already_published_hard_skipped": 7,
     "already_worked": 1,
-    "hard_skipped": 7,
-    "to_menzo": 26,
+    "hard_skipped": 9,
+    "to_menzo": 24,
     "to_simone": 1
   },
   "hard_skipped": [
@@ -102,6 +102,30 @@
     {
       "decision": "hard_skip",
       "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-noche-de-los-grandes",
+      "published": "Mon, 01 Jun 2026 21:36:08 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"AAA Netflix Replay Grays Out Chad Gable’s Bloody Unmasking After Noche de Los Grandes\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-after-noche-de-los-grandes-28.jpg?x51578\" width=\"800\" /></p>Chad Gable’s unmasking was already one of the wildest moments from AAA Noche de Los Grandes, but the replay made one thing very obvious — they did not want all that blood shown in full color again. After the June 1, 2026 episode of WWE RAW, AAA aired the replay of Gable’s brutal Mask vs. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-noche-de-los-grandes/\" title=\"AAA Netflix Replay Grays Out Chad Gable’s Bloody Unmasking After Noche de Los Grandes\">Read more</a>",
+      "title": "AAA Netflix Replay Grays Out Chad Gable’s Bloody Unmasking After Noche de Los Grandes",
+      "url": "https://www.ringsidenews.com/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-noche-de-los-grandes/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/finn-balor-moves-smackdown-wwe-raw-trade",
+      "published": "Mon, 01 Jun 2026 19:35:52 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Finn Bálor Moves to SmackDown After WWE RAW Trade\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/finn-balor-moves-to-smackdown-after-wwe-raw-trade-30.jpg?x51578\" width=\"800\" /></p>Finn Bálor’s time on WWE RAW is officially over as he will now be a part of the Friday Night SmackDown roster moving forward. During the June 1, 2026 episode of Monday Night RAW, WWE announced that Bálor has been traded to Friday Night SmackDown. The move comes after weeks of tension involving Bálor, JD ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/finn-balor-moves-smackdown-wwe-raw-trade/\" title=\"Finn Bálor Moves to SmackDown After WWE RAW Trade\">Read more</a>",
+      "title": "Finn Bálor Moves to SmackDown After WWE RAW Trade",
+      "url": "https://www.ringsidenews.com/finn-balor-moves-smackdown-wwe-raw-trade/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/tna-impact-viewership-sees-slight-increase-may-28-2026",
       "published": "Mon, 01 Jun 2026 19:33:02 +0000",
       "published_guard": "publisher_history",
@@ -124,7 +148,7 @@
       "url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/"
     }
   ],
-  "known_published_urls": 10,
+  "known_published_urls": 12,
   "known_state_urls": 9,
   "mode": "sentinel_control_board",
   "news_candidates_for_menzo": [
@@ -312,6 +336,18 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war",
+      "published": "Mon, 01 Jun 2026 22:51:58 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-calls-chad-gable-the-best-wrestler-in-the-world-after-aaa-mask-vs-mask-war-24.jpg?x51578\" width=\"800\" /></p>JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes. The WWE Hall of Famer was on commentary for the May 30 match, where Ludwig Kaiser’s El Grande Americano defeated Chad Gable’s Original El Grande Americano. The loss forced Gable to remove ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/\" title=\"JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\">Read more</a>",
+      "title": "JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War",
+      "url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/seth-rollins-gives-turin-crowd-special-moment-wwe-raw-goes-off-air",
       "published": "Mon, 01 Jun 2026 22:08:44 +0000",
       "reason": "requires_menzo_classification",
@@ -331,18 +367,6 @@
       "summary": "<p><img alt=\"The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/the-miz-begs-browns-trade-news-isnt-real-after-myles-garrett-deal-02.jpg?x51578\" width=\"800\" /></p>The Cleveland Browns found a new way to crush The Miz. The WWE star and longtime Browns fan reacted after the team traded Myles Garrett on Monday, and he sounded completely defeated. Garrett was one of the few bright spots in Cleveland after putting up 23 sacks during the 2024-25 season, but the Browns still ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal/\" title=\"The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal\">Read more</a>",
       "title": "The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal",
       "url": "https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-noche-de-los-grandes",
-      "published": "Mon, 01 Jun 2026 21:36:08 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"AAA Netflix Replay Grays Out Chad Gable’s Bloody Unmasking After Noche de Los Grandes\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-after-noche-de-los-grandes-28.jpg?x51578\" width=\"800\" /></p>Chad Gable’s unmasking was already one of the wildest moments from AAA Noche de Los Grandes, but the replay made one thing very obvious — they did not want all that blood shown in full color again. After the June 1, 2026 episode of WWE RAW, AAA aired the replay of Gable’s brutal Mask vs. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-noche-de-los-grandes/\" title=\"AAA Netflix Replay Grays Out Chad Gable’s Bloody Unmasking After Noche de Los Grandes\">Read more</a>",
-      "title": "AAA Netflix Replay Grays Out Chad Gable’s Bloody Unmasking After Noche de Los Grandes",
-      "url": "https://www.ringsidenews.com/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-noche-de-los-grandes/"
     },
     {
       "assigned_to": "Menzo",
@@ -396,18 +420,6 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/finn-balor-moves-smackdown-wwe-raw-trade",
-      "published": "Mon, 01 Jun 2026 19:35:52 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Finn Bálor Moves to SmackDown After WWE RAW Trade\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/finn-balor-moves-to-smackdown-after-wwe-raw-trade-30.jpg?x51578\" width=\"800\" /></p>Finn Bálor’s time on WWE RAW is officially over as he will now be a part of the Friday Night SmackDown roster moving forward. During the June 1, 2026 episode of Monday Night RAW, WWE announced that Bálor has been traded to Friday Night SmackDown. The move comes after weeks of tension involving Bálor, JD ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/finn-balor-moves-smackdown-wwe-raw-trade/\" title=\"Finn Bálor Moves to SmackDown After WWE RAW Trade\">Read more</a>",
-      "title": "Finn Bálor Moves to SmackDown After WWE RAW Trade",
-      "url": "https://www.ringsidenews.com/finn-balor-moves-smackdown-wwe-raw-trade/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring",
       "published": "Mon, 01 Jun 2026 18:50:53 +0000",
       "reason": "requires_menzo_classification",
@@ -427,18 +439,6 @@
       "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Collision-Massive-Increase.jpg?x51578\" width=\"800\" /></p>The latest audience figures are available for the May 27, 2026 episode of AEW Collision on TBS, with the show delivering a major week-to-week surge. According to Programming Insider, AEW Collision on May 27, 2026 drew 498,000 viewers on TBS, with a 0.05 rating in the key P18–49 demographic. For comparison, the May 20, 2026 ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/\" title=\"AEW Collision Viewership Sees Massive Increase on May 27, 2026\">Read more</a>",
       "title": "AEW Collision Viewership Sees Massive Increase on May 27, 2026",
       "url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/wwe-makes-major-changes-king-ring-tournament-lineup",
-      "published": "Mon, 01 Jun 2026 18:28:26 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"WWE Makes Major Changes to King of the Ring Tournament Lineup\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/wwe-makes-major-changes-to-king-of-the-ring-tournament-lineup-03.jpg?x51578\" width=\"800\" /></p>WWE has already changed the 2026 King of the Ring bracket after revealing it during the Clash in Italy post-show. The bracket shown on WWE’s official website ahead of RAW is now different from the one presented after Clash in Italy. The biggest changes are on the right side of the bracket, where Ricky Saints ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-makes-major-changes-king-ring-tournament-lineup/\" title=\"WWE Makes Major Changes to King of the Ring Tournament Lineup\">Read more</a>",
-      "title": "WWE Makes Major Changes to King of the Ring Tournament Lineup",
-      "url": "https://www.ringsidenews.com/wwe-makes-major-changes-king-ring-tournament-lineup/"
     }
   ],
   "report_candidates": [

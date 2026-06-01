@@ -1,12 +1,12 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-01T22:42:27.994374+00:00",
+  "generated_at": "2026-06-01T23:00:13.070043+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 2,
-    "wp_not_ready": 0
+    "published": 0,
+    "wp_not_ready": 2
   },
   "input": {
     "alfred_version": "v93_8_alfred_structured_content_checks",
@@ -21,33 +21,51 @@
   },
   "results": [
     {
-      "categories": [
-        4
-      ],
-      "featured_media": 5800,
-      "source_url": "https://www.ringsidenews.com/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-noche-de-los-grandes/",
-      "status": "published",
-      "title_it": "AAA: il replay su Netflix oscura il volto insanguinato di Chad Gable",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/aaa-il-replay-su-netflix-oscura-il-volto-insanguinato-di-chad-gable/",
-      "wp_post_id": 5801
+      "content_chars": 2006,
+      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring-46.jpg",
+      "media_id": null,
+      "payload_preview": {
+        "categories": [],
+        "excerpt": "Dopo aver trionfato nel Fatal Four-Way match di RAW, Oba Femi ha lanciato un chiaro guanto di sfida a Brock Lesnar, ricordando la loro recente battaglia a Clash in Italy.",
+        "meta": {
+          "original_url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/",
+          "owtv_pipeline": "v93_6_publisher_wordpress",
+          "owtv_source": "ringsidenews"
+        },
+        "status": "publish",
+        "title": "Oba Femi sfida Brock Lesnar dopo il passaggio del turno nel King of the Ring"
+      },
+      "source_url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/",
+      "status": "wp_not_ready",
+      "title_it": "Oba Femi sfida Brock Lesnar dopo il passaggio del turno nel King of the Ring",
+      "wp_ready": false
     },
     {
-      "categories": [
-        4
-      ],
-      "featured_media": 5802,
-      "source_url": "https://www.ringsidenews.com/finn-balor-moves-smackdown-wwe-raw-trade/",
-      "status": "published",
-      "title_it": "WWE: Finn Bálor trasferito ufficialmente a SmackDown",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-finn-balor-trasferito-ufficialmente-a-smackdown/",
-      "wp_post_id": 5803
+      "content_chars": 1858,
+      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/paul-heyman-gets-speared-through-the-barricade-during-june-1-wwe-raw-49.jpg",
+      "media_id": null,
+      "payload_preview": {
+        "categories": [],
+        "excerpt": "Durante la puntata di WWE RAW del 1° giugno, Paul Heyman è rimasto coinvolto in un incidente a bordo ring, finendo travolto da una Spear di Bron Breakker contro le barricate.",
+        "meta": {
+          "original_url": "https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/",
+          "owtv_pipeline": "v93_6_publisher_wordpress",
+          "owtv_source": "ringsidenews"
+        },
+        "status": "publish",
+        "title": "Paul Heyman travolto da una Spear contro le barricate a WWE Raw"
+      },
+      "source_url": "https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/",
+      "status": "wp_not_ready",
+      "title_it": "Paul Heyman travolto da una Spear contro le barricate a WWE Raw",
+      "wp_ready": false
     }
   ],
   "version": "v93_6_publisher_wordpress",
   "wp": {
     "dry_run": false,
     "post_status": "publish",
-    "ready": true,
-    "reason": "ok"
+    "ready": false,
+    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f8e92ede510>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=25)'))"
   }
 }

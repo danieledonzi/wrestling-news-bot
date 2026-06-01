@@ -3,15 +3,14 @@
   "articles": [
     {
       "bob_notes": [
-        "Traduzione integrale mantenendo il tono giornalistico richiesto.",
-        "Citazioni gestite tramite tag <blockquote> come da direttive.",
-        "Terminologia sportiva mantenuta coerente con il contesto originale.",
-        "Nessuna aggiunta o interpretazione arbitraria del contenuto."
+        "Traduzione fedele mantenendo il tono giornalistico tipico della pipeline v92.",
+        "Citazioni mantenute in lingua originale come richiesto dalle linee guida per la fedeltà al testo fonte.",
+        "Terminologia sportiva adattata per il contesto di riferimento."
       ],
-      "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/the-miz-begs-browns-trade-news-isnt-real-after-myles-garrett-deal-02.jpg.avif?x51578-->\n<p>I Cleveland Browns hanno trovato un nuovo modo per spezzare il cuore a The Miz. La star della WWE, da sempre grande tifoso della franchigia, ha reagito con totale sconforto alla notizia della cessione di Myles Garrett, avvenuta nella giornata di lunedì. Garrett rappresentava uno dei pochi punti di riferimento positivi a Cleveland, avendo messo a referto 23 sack durante la stagione 2024-25; nonostante ciò, i Browns hanno chiuso con un bilancio di 5-12, mancando l'accesso ai playoff.</p>\n<p>The Miz ha chiarito quanto questa mossa sia stata dolorosa per lui, scrivendo di poter accettare quasi ogni tipo di scambio, ma non quello riguardante Garrett.</p>\n<blockquote>“Not Myles. Anyone. But. Myles.”</blockquote>\n<p>Il wrestler ha spiegato di aver ormai perso le speranze nei confronti dei Browns prima del draft, salvo poi essere nuovamente coinvolto dalle scelte della squadra, che lo avevano fatto tornare a credere nel progetto. La notizia dello scambio di Garrett lo ha raggiunto proprio mentre si trovava in volo.</p>\n<blockquote>“Before the draft, I buried the season. After the draft, I believed again. And now, at 35,000 feet, the Browns have somehow found a new way to ruin my flight.”</blockquote>\n<p>The Miz ha chiuso il suo intervento esprimendo quello che probabilmente è stato lo stato d'animo di moltissimi tifosi dei Browns alla notizia della trade.</p>\n<blockquote>“Please tell me this isn’t real.”</blockquote>\n<p>Questa è l'esperienza dei tifosi dei Browns riassunta in un unico post: la squadra concede ai sostenitori appena abbastanza speranza da farli tornare a credere nella squadra, per poi trovare un modo per distruggere tutto. Per The Miz, la perdita di Myles Garrett non è stata una semplice operazione di mercato, ma un colpo allo stomaco capace di rovinargli l'intero viaggio.</p>",
+      "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/the-miz-begs-browns-trade-news-isnt-real-after-myles-garrett-deal-02.jpg.avif?x51578-->\n<p>I Cleveland Browns hanno trovato un nuovo modo per spezzare il cuore a The Miz. La star della WWE, da sempre grande tifoso della franchigia, ha reagito con totale sconforto alla notizia della cessione di Myles Garrett, ufficializzata nella giornata di lunedì. Garrett rappresentava una delle poche note positive per Cleveland, dopo aver messo a referto 23 sack durante la stagione 2024-25, conclusasi tuttavia con un deludente record di 5-12 e la mancata qualificazione ai playoff.</p>\n<p>The Miz ha chiarito quanto questa mossa sia stata dolorosa, sottolineando di poter accettare la partenza di chiunque, ma non quella di Garrett.</p>\n<blockquote>“Not Myles. Anyone. But. Myles.”</blockquote>\n<p>Il wrestler ha spiegato di aver già perso le speranze nei confronti dei Browns prima del draft, salvo poi ricredersi e tornare a nutrire fiducia nella squadra, fino al momento in cui la notizia dello scambio lo ha raggiunto mentre si trovava in volo.</p>\n<blockquote>“Before the draft, I buried the season. After the draft, I believed again. And now, at 35,000 feet, the Browns have somehow found a new way to ruin my flight.”</blockquote>\n<p>The Miz ha concluso il suo post con lo stato d'animo che probabilmente accomuna molti tifosi dei Browns dopo l'annuncio:</p>\n<blockquote>“Please tell me this isn’t real.”</blockquote>\n<p>Questa è l'esperienza dei tifosi dei Browns riassunta in un solo post: la squadra regala loro quanto basta per tornare a credere nel progetto, per poi trovare un nuovo modo per distruggere ogni speranza. Per The Miz, perdere Myles Garrett non è stato un semplice movimento di mercato, ma un colpo allo stomaco capace di rovinargli l'intero viaggio.</p>",
       "category_hint": "WWE",
       "clean_element_count": 11,
-      "created_at": "2026-06-01T22:42:09.657672+00:00",
+      "created_at": "2026-06-01T22:59:37.900251+00:00",
       "diagnostic_stage": "ready_for_alfred",
       "element_counts": {
         "embed": 0,
@@ -74,7 +73,7 @@
           "type": "text"
         }
       ],
-      "excerpt_it": "La stella WWE The Miz ha reagito con incredulità e sconforto alla notizia della cessione di Myles Garrett dai Cleveland Browns, definendo l'accaduto un colpo durissimo.",
+      "excerpt_it": "La star della WWE The Miz ha espresso tutto il suo sconforto dopo l'ufficialità della cessione di Myles Garrett da parte dei Cleveland Browns, implorando che la notizia fosse falsa.",
       "extraction_diagnostics": {
         "candidate_node_count": 46,
         "clean_element_count": 11,
@@ -265,19 +264,297 @@
       ],
       "translation_model": "gemini-3.1-flash-lite",
       "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Gli elementi [quote] vanno pubblicati come <blockquote>...</blockquote>, non come semplici <p> con virgolette.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Gli elementi [table] sono tabelle: conservali nel corpo come <table class=\"owtv-data-table\"> con righe e celle HTML semplici. Non sostituirli con soli titoli o riassunti.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal/\nTitolo feed: The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal\nTitolo pagina: The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal\nDescrizione: The Cleveland Browns found a new way to crush The Miz. The WWE star and longtime Browns fan reacted after the team traded Myles Garrett on Monday, and he\nCategoria suggerita: WWE\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/the-miz-begs-browns-trade-news-isnt-real-after-myles-garrett-deal-02.jpg.avif?x51578 ALT=The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal\n[2|text] The Cleveland Browns found a new way to crush The Miz.\n[3|text] The WWE star and longtime Browns fan reacted after the team traded Myles Garrett on Monday, and he sounded completely defeated. Garrett was one of the few bright spots in Cleveland after putting up 23 sacks during the 2024-25 season, but the Browns still finished 5-12 and missed the playoffs.\n[4|text] The Miz made it clear this one hurt bad, writing that he could handle almost anyone being moved — just not Garrett.\n[5|quote] “Not Myles. Anyone. But. Myles.”\n[6|text] He explained that he had already given up on the Browns before the draft, only for the team to pull him back in and make him believe again. Then the Garrett trade hit while he was mid-flight.\n[7|quote] “Before the draft, I buried the season. After the draft, I believed again. And now, at 35,000 feet, the Browns have somehow found a new way to ruin my flight.”\n[8|text] The Miz closed the post the way plenty of Browns fans probably felt when the news broke.\n[9|quote] “Please tell me this isn’t real.”\n[10|text] That is the Browns experience in one post. The team gives fans just enough hope to buy back in, then finds another way to rip it away. For The Miz, losing Myles Garrett wasn’t just another roster move — it was the kind of gut punch that ruined his whole flight.\n[11|text] Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"WWE: The Miz disperato per la cessione di Myles Garrett dai Cleveland Browns\",\n  \"body_html\": \"<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/the-miz-begs-browns-trade-news-isnt-real-after-myles-garrett-deal-02.jpg.avif?x51578-->\\n<p>I Cleveland Browns hanno trovato un nuovo modo per spezzare il cuore a The Miz. La star della WWE, da sempre grande tifoso della franchigia, ha reagito con totale sconforto alla notizia della cessione di Myles Garrett, avvenuta nella giornata di lunedì. Garrett rappresentava uno dei pochi punti di riferimento positivi a Cleveland, avendo messo a referto 23 sack durante la stagione 2024-25; nonostante ciò, i Browns hanno chiuso con un bilancio di 5-12, mancando l'accesso ai playoff.</p>\\n<p>The Miz ha chiarito quanto questa mossa sia stata dolorosa per lui, scrivendo di poter accettare quasi ogni tipo di scambio, ma non quello riguardante Garrett.</p>\\n<blockquote>“Not Myles. Anyone. But. Myles.”</blockquote>\\n<p>Il wrestler ha spiegato di aver ormai perso le speranze nei confronti dei Browns prima del draft, salvo poi essere nuovamente coinvolto dalle scelte della squadra, che lo avevano fatto tornare a credere nel progetto. La notizia dello scambio di Garrett lo ha raggiunto proprio mentre si trovava in volo.</p>\\n<blockquote>“Before the draft, I buried the season. After the draft, I believed again. And now, at 35,000 feet, the Browns have somehow found a new way to ruin my flight.”</blockquote>\\n<p>The Miz ha chiuso il suo intervento esprimendo quello che probabilmente è stato lo stato d'animo di moltissimi tifosi dei Browns alla notizia della trade.</p>\\n<blockquote>“Please tell me this isn’t real.”</blockquote>\\n<p>Questa è l'esperienza dei tifosi dei Browns riassunta in un unico post: la squadra concede ai sostenitori appena abbastanza speranza da farli tornare a credere nella squadra, per poi trovare un modo per distruggere tutto. Per The Miz, la perdita di Myles Garrett non è stata una semplice operazione di mercato, ma un colpo allo stomaco capace di rovinargli l'intero viaggio.</p>\",\n  \"excerpt_it\": \"La stella WWE The Miz ha reagito con incredulità e sconforto alla notizia della cessione di Myles Garrett dai Cleveland Browns, definendo l'accaduto un colpo durissimo.\",\n  \"notes\": [\n    \"Traduzione integrale mantenendo il tono giornalistico richiesto.\",\n    \"Citazioni gestite tramite tag <blockquote> come da direttive.\",\n    \"Terminologia sportiva mantenuta coerente con il contesto originale.\",\n    \"Nessuna aggiunta o interpretazione arbitraria del contenuto.\"\n  ]\n}",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"WWE: The Miz disperato per la cessione di Myles Garrett dai Cleveland Browns\",\n  \"body_html\": \"<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/the-miz-begs-browns-trade-news-isnt-real-after-myles-garrett-deal-02.jpg.avif?x51578-->\\n<p>I Cleveland Browns hanno trovato un nuovo modo per spezzare il cuore a The Miz. La star della WWE, da sempre grande tifoso della franchigia, ha reagito con totale sconforto alla notizia della cessione di Myles Garrett, ufficializzata nella giornata di lunedì. Garrett rappresentava una delle poche note positive per Cleveland, dopo aver messo a referto 23 sack durante la stagione 2024-25, conclusasi tuttavia con un deludente record di 5-12 e la mancata qualificazione ai playoff.</p>\\n<p>The Miz ha chiarito quanto questa mossa sia stata dolorosa, sottolineando di poter accettare la partenza di chiunque, ma non quella di Garrett.</p>\\n<blockquote>“Not Myles. Anyone. But. Myles.”</blockquote>\\n<p>Il wrestler ha spiegato di aver già perso le speranze nei confronti dei Browns prima del draft, salvo poi ricredersi e tornare a nutrire fiducia nella squadra, fino al momento in cui la notizia dello scambio lo ha raggiunto mentre si trovava in volo.</p>\\n<blockquote>“Before the draft, I buried the season. After the draft, I believed again. And now, at 35,000 feet, the Browns have somehow found a new way to ruin my flight.”</blockquote>\\n<p>The Miz ha concluso il suo post con lo stato d'animo che probabilmente accomuna molti tifosi dei Browns dopo l'annuncio:</p>\\n<blockquote>“Please tell me this isn’t real.”</blockquote>\\n<p>Questa è l'esperienza dei tifosi dei Browns riassunta in un solo post: la squadra regala loro quanto basta per tornare a credere nel progetto, per poi trovare un nuovo modo per distruggere ogni speranza. Per The Miz, perdere Myles Garrett non è stato un semplice movimento di mercato, ma un colpo allo stomaco capace di rovinargli l'intero viaggio.</p>\",\n  \"excerpt_it\": \"La star della WWE The Miz ha espresso tutto il suo sconforto dopo l'ufficialità della cessione di Myles Garrett da parte dei Cleveland Browns, implorando che la notizia fosse falsa.\",\n  \"notes\": [\n    \"Traduzione fedele mantenendo il tono giornalistico tipico della pipeline v92.\",\n    \"Citazioni mantenute in lingua originale come richiesto dalle linee guida per la fedeltà al testo fonte.\",\n    \"Terminologia sportiva adattata per il contesto di riferimento.\"\n  ]\n}",
+      "translation_used": true
+    },
+    {
+      "bob_notes": [
+        "Traduzione eseguita seguendo la pipeline v92 di OpenWrestlingTV.",
+        "Il blocco [11|text] relativo alla biografia di Steve Carrier è stato escluso come da direttive sulle regole non negoziabili.",
+        "Terminologia tecnica di settore (Fatal Four-Way, promo, main roster, F5) mantenuta in linea con lo stile editoriale."
+      ],
+      "body_html": "<p>Oba Femi non si è limitato a superare il turno nel torneo King of the Ring durante la puntata di WWE RAW del 1° giugno, ma ha voluto assicurarsi che Brock Lesnar lo sentisse forte e chiaro al termine dell'incontro.</p><p>Dopo aver sconfitto Penta, Carmelo Hayes e Solo Sikoa in un caotico Fatal Four-Way match valido per il primo turno, Oba ha preso il microfono e ha rivolto la sua attenzione direttamente a Lesnar.</p><p>Oba ha menzionato Brock, chiedendogli se fosse in grado di incassare una sonora sconfitta, per poi ricordare a tutti quanto accaduto a Clash in Italy. Ha dichiarato di aver subito un duro pestaggio, di essere sopravvissuto a sette F5 e di essere rimasto comunque in piedi.</p><blockquote>“Cosa fai dopo aver incassato una sonora sconfitta? Cosa fai dopo aver ricevuto un pestaggio? Cosa fai dopo aver preso sette F5?”</blockquote><p>Oba ha poi messo in chiaro che il colpo migliore di Brock non è stato sufficiente per abbatterlo.</p><blockquote>“Sono in piedi e sto vincendo, ho incassato il tuo colpo migliore e sono ancora qui.”</blockquote><p>Il messaggio è stato inequivocabile: Oba prosegue il suo cammino nel King of the Ring, ma non ha ancora chiuso i conti con Lesnar. Ha dichiarato di voler vincere il torneo, ricordando a Brock che ora il bilancio tra loro è in parità.</p><blockquote>“Vincerò il King of the Ring. Siamo uno a uno e ci vedremo in futuro.”</blockquote><p>La vittoria di Oba lo ha già fatto apparire come un vero mostro, ma il promo post-match gli ha conferito un ulteriore slancio. Ha superato il caos del Fatal Four-Way, è avanzato nel torneo e ha avuto comunque le energie per sfidare Brock Lesnar.</p><p>Ora Oba ha due obiettivi davanti a sé: conquistare il King of the Ring e, in ultima analisi, regolare i conti con Brock.</p>",
+      "category_hint": "WWE",
+      "clean_element_count": 11,
+      "created_at": "2026-06-01T22:59:41.612781+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "element_counts": {
+        "embed": 0,
+        "heading": 0,
+        "image": 0,
+        "quote": 3,
+        "table": 0,
+        "text": 8
+      },
+      "elements": [
+        {
+          "text": "Oba Femi didn’t just advance in the King of the Ring tournament on June 1 WWE RAW — he made sure Brock Lesnar heard him loud and clear afterward.",
+          "type": "text"
+        },
+        {
+          "text": "After defeating Penta, Carmelo Hayes, and Solo Sikoa in a wild Fatal Four-Way first-round match, Oba grabbed a microphone and turned his attention straight to Lesnar.",
+          "type": "text"
+        },
+        {
+          "text": "Oba brought up Brock asking him if he could take an ass-whooping, then reminded everyone what happened at Clash in Italy. He said he took a beatdown, survived seven F5s, and was still standing.",
+          "type": "text"
+        },
+        {
+          "source_tag": "blockquote",
+          "text": "“What do you do after receiving an ass whooping? What do you do after receiving a beat down? What do you do after taking seven F5s?”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "Oba then made it clear that Brock’s best shot wasn’t enough to keep him down.",
+          "type": "text"
+        },
+        {
+          "source_tag": "blockquote",
+          "text": "“I am standing and winning, and I took your best shot and I am still here.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "The message was simple. Oba is moving forward in King of the Ring, but he isn’t finished with Lesnar either. He said he plans to win the tournament, then reminded Brock that things are now tied between them.",
+          "type": "text"
+        },
+        {
+          "source_tag": "blockquote",
+          "text": "“I am going to win King of the Ring. It is one and one, and I will see him down the line.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "Oba’s win already made him look like a monster, but the post-match promo gave him even more momentum. He survived chaos in the Fatal Four-Way, advanced in the tournament, and still had enough left to call out Brock Lesnar.",
+          "type": "text"
+        },
+        {
+          "text": "Now Oba has two things in front of him: winning King of the Ring and eventually settling the score with Brock.",
+          "type": "text"
+        },
+        {
+          "text": "Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.",
+          "type": "text"
+        }
+      ],
+      "excerpt_it": "Dopo aver trionfato nel Fatal Four-Way match di RAW, Oba Femi ha lanciato un chiaro guanto di sfida a Brock Lesnar, ricordando la loro recente battaglia a Clash in Italy.",
+      "extraction_diagnostics": {
+        "candidate_node_count": 47,
+        "clean_element_count": 11,
+        "dom_noise_reduction_enabled": false,
+        "quote_count": 3,
+        "raw_element_count": 13,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 2,
+        "root_name": "article",
+        "root_text_chars": 2506,
+        "stage": "complete",
+        "table_count": 0
+      },
+      "fetched_html_chars": 487626,
+      "menzo_score": 94,
+      "meta": {
+        "description": "Oba Femi didn’t just advance in the King of the Ring tournament on June 1 WWE RAW — he made sure Brock Lesnar heard him loud and clear afterward. After",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring-46.jpg",
+        "source_title": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
+      },
+      "raw_element_count": 13,
+      "raw_elements_preview": [
+        {
+          "alt": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring",
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring-46.jpg?x51578"
+        },
+        {
+          "text": "Oba Femi didn’t just advance in the King of the Ring tournament on June 1 WWE RAW — he made sure Brock Lesnar heard him loud and clear afterward.",
+          "type": "text"
+        },
+        {
+          "text": "After defeating Penta, Carmelo Hayes, and Solo Sikoa in a wild Fatal Four-Way first-round match, Oba grabbed a microphone and turned his attention straight to Lesnar.",
+          "type": "text"
+        },
+        {
+          "text": "Oba brought up Brock asking him if he could take an ass-whooping, then reminded everyone what happened at Clash in Italy. He said he took a beatdown, survived seven F5s, and was still standing.",
+          "type": "text"
+        },
+        {
+          "source_tag": "blockquote",
+          "text": "“What do you do after receiving an ass whooping? What do you do after receiving a beat down? What do you do after taking seven F5s?”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "Oba then made it clear that Brock’s best shot wasn’t enough to keep him down.",
+          "type": "text"
+        },
+        {
+          "source_tag": "blockquote",
+          "text": "“I am standing and winning, and I took your best shot and I am still here.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "The message was simple. Oba is moving forward in King of the Ring, but he isn’t finished with Lesnar either. He said he plans to win the tournament, then reminded Brock that things are now tied between them.",
+          "type": "text"
+        },
+        {
+          "source_tag": "blockquote",
+          "text": "“I am going to win King of the Ring. It is one and one, and I will see him down the line.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "Oba’s win already made him look like a monster, but the post-match promo gave him even more momentum. He survived chaos in the Fatal Four-Way, advanced in the tournament, and still had enough left to call out Brock Lesnar.",
+          "type": "text"
+        },
+        {
+          "text": "Now Oba has two things in front of him: winning King of the Ring and eventually settling the score with Brock.",
+          "type": "text"
+        },
+        {
+          "text": "Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.",
+          "type": "text"
+        },
+        {
+          "text": "Spotlight WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup",
+          "type": "text"
+        }
+      ],
+      "removed_before_gemini": 15,
+      "removed_elements_debug": [
+        {
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "node_index": 35,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Spotlight"
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196416 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-paul-heyman tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "node_index": 36,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 37,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 38,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196368 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-iyo-sky tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "node_index": 39,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 40,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 41,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196255 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-brock-lesnar tag-oba-femi tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "node_index": 42,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 43,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 44,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196202 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
+          "node_index": 45,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 46,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Makes Major Changes to King of the Ring Tournament Lineup"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 47,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "index": 1,
+          "item": {
+            "alt": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring",
+            "type": "image",
+            "url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring-46.jpg?x51578"
+          },
+          "reason": "duplicate_featured_image"
+        },
+        {
+          "index": 13,
+          "item": {
+            "text": "Spotlight WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup",
+            "type": "text"
+          },
+          "reason": "footer_start"
+        }
+      ],
+      "source": "ringsidenews",
+      "source_title": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring",
+      "source_url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/",
+      "status": "ready_for_alfred",
+      "title_it": "Oba Femi sfida Brock Lesnar dopo il passaggio del turno nel King of the Ring",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Gli elementi [quote] vanno pubblicati come <blockquote>...</blockquote>, non come semplici <p> con virgolette.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Gli elementi [table] sono tabelle: conservali nel corpo come <table class=\"owtv-data-table\"> con righe e celle HTML semplici. Non sostituirli con soli titoli o riassunti.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/\nTitolo feed: Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring\nTitolo pagina: Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring\nDescrizione: Oba Femi didn’t just advance in the King of the Ring tournament on June 1 WWE RAW — he made sure Brock Lesnar heard him loud and clear afterward. After\nCategoria suggerita: WWE\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|text] Oba Femi didn’t just advance in the King of the Ring tournament on June 1 WWE RAW — he made sure Brock Lesnar heard him loud and clear afterward.\n[2|text] After defeating Penta, Carmelo Hayes, and Solo Sikoa in a wild Fatal Four-Way first-round match, Oba grabbed a microphone and turned his attention straight to Lesnar.\n[3|text] Oba brought up Brock asking him if he could take an ass-whooping, then reminded everyone what happened at Clash in Italy. He said he took a beatdown, survived seven F5s, and was still standing.\n[4|quote] “What do you do after receiving an ass whooping? What do you do after receiving a beat down? What do you do after taking seven F5s?”\n[5|text] Oba then made it clear that Brock’s best shot wasn’t enough to keep him down.\n[6|quote] “I am standing and winning, and I took your best shot and I am still here.”\n[7|text] The message was simple. Oba is moving forward in King of the Ring, but he isn’t finished with Lesnar either. He said he plans to win the tournament, then reminded Brock that things are now tied between them.\n[8|quote] “I am going to win King of the Ring. It is one and one, and I will see him down the line.”\n[9|text] Oba’s win already made him look like a monster, but the post-match promo gave him even more momentum. He survived chaos in the Fatal Four-Way, advanced in the tournament, and still had enough left to call out Brock Lesnar.\n[10|text] Now Oba has two things in front of him: winning King of the Ring and eventually settling the score with Brock.\n[11|text] Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Oba Femi sfida Brock Lesnar dopo il passaggio del turno nel King of the Ring\",\n  \"body_html\": \"<p>Oba Femi non si è limitato a superare il turno nel torneo King of the Ring durante la puntata di WWE RAW del 1° giugno, ma ha voluto assicurarsi che Brock Lesnar lo sentisse forte e chiaro al termine dell'incontro.</p><p>Dopo aver sconfitto Penta, Carmelo Hayes e Solo Sikoa in un caotico Fatal Four-Way match valido per il primo turno, Oba ha preso il microfono e ha rivolto la sua attenzione direttamente a Lesnar.</p><p>Oba ha menzionato Brock, chiedendogli se fosse in grado di incassare una sonora sconfitta, per poi ricordare a tutti quanto accaduto a Clash in Italy. Ha dichiarato di aver subito un duro pestaggio, di essere sopravvissuto a sette F5 e di essere rimasto comunque in piedi.</p><blockquote>“Cosa fai dopo aver incassato una sonora sconfitta? Cosa fai dopo aver ricevuto un pestaggio? Cosa fai dopo aver preso sette F5?”</blockquote><p>Oba ha poi messo in chiaro che il colpo migliore di Brock non è stato sufficiente per abbatterlo.</p><blockquote>“Sono in piedi e sto vincendo, ho incassato il tuo colpo migliore e sono ancora qui.”</blockquote><p>Il messaggio è stato inequivocabile: Oba prosegue il suo cammino nel King of the Ring, ma non ha ancora chiuso i conti con Lesnar. Ha dichiarato di voler vincere il torneo, ricordando a Brock che ora il bilancio tra loro è in parità.</p><blockquote>“Vincerò il King of the Ring. Siamo uno a uno e ci vedremo in futuro.”</blockquote><p>La vittoria di Oba lo ha già fatto apparire come un vero mostro, ma il promo post-match gli ha conferito un ulteriore slancio. Ha superato il caos del Fatal Four-Way, è avanzato nel torneo e ha avuto comunque le energie per sfidare Brock Lesnar.</p><p>Ora Oba ha due obiettivi davanti a sé: conquistare il King of the Ring e, in ultima analisi, regolare i conti con Brock.</p>\",\n  \"excerpt_it\": \"Dopo aver trionfato nel Fatal Four-Way match di RAW, Oba Femi ha lanciato un chiaro guanto di sfida a Brock Lesnar, ricordando la loro recente battaglia a Clash in Italy.\",\n  \"notes\": [\n    \"Traduzione eseguita seguendo la pipeline v92 di OpenWrestlingTV.\",\n    \"Il blocco [11|text] relativo alla biografia di Steve Carrier è stato escluso come da direttive sulle regole non negoziabili.\",\n    \"Terminologia tecnica di settore (Fatal Four-Way, promo, main roster, F5) mantenuta in linea con lo stile editoriale.\"\n  ]\n}",
       "translation_used": true
     },
     {
       "bob_notes": [
         "Traduzione eseguita seguendo lo stile giornalistico della pipeline v92.",
-        "Mantenuta la sequenza narrativa originale.",
-        "Terminologia tecnica di wrestling (Mask vs. Mask, main event, turn) applicata coerentemente al contesto della notizia."
+        "Il nome 'Black Out' è stato mantenuto come da terminologia tecnica del wrestler.",
+        "Gli elementi biografici finali relativi a Steve Carrier sono stati esclusi in conformità con le regole editoriali sulle informazioni non pertinenti al corpo della notizia."
       ],
-      "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/aaa-nig-28.jpg.avif-->\n<p>La rimozione della maschera di Chad Gable è stata senza dubbio uno dei momenti più intensi di AAA Noche de Los Grandes, ma il replay dell'evento ha reso evidente una scelta precisa: non si voleva mostrare nuovamente tutto quel sangue a colori.</p>\n<p>Dopo l'episodio di WWE RAW del 1° giugno 2026, la AAA ha trasmesso la replica del brutale Mask vs. Mask match, che ha visto Chad Gable uscire sconfitto per mano di Ludwig Kaiser, alias El Grande Americano. Durante la messa in onda del post-match, lo schermo è stato trasformato in bianco e nero, apparentemente per mitigare la visibilità del sangue sul volto e sul corpo di Gable.</p>\n<p>Il momento originale era avvenuto subito dopo la sconfitta di Gable nel main event, quando l'atleta era stato costretto a togliersi la maschera. Rimasto sul ring coperto di sangue e circondato dalla sua famiglia, Gable aveva ammesso di non essere riuscito a prevalere sullo spirito messicano. Successivamente, aveva riconosciuto Kaiser come l'unico vero El Grande Americano, procedendo poi a rimuovere la maschera e rivelando la propria identità al pubblico.</p>\n<p>Nonostante la replica abbia mantenuto intatto l'impatto emotivo del segmento, il filtro grigio ha chiarito l'intento dell'emittente di attenuare la violenza visiva. Gable era apparso visibilmente ferito e la scelta del bianco e nero ha contribuito a ridurre l'impatto grafico della scena.</p>\n<p>L'incontro in sé è stato un susseguirsi di violenza, caratterizzato dall'uso di sedie, tavoli, chitarre, interferenze esterne e una notevole quantità di sangue. Kaiser ha conquistato la vittoria finale dopo aver colpito l'avversario con una running headbutt, ponendo fine al regno di Gable come l'Original El Grande Americano. Al termine della contesa, Gable ha presentato la propria famiglia, ha parlato della sua carriera, ha consegnato la sua maschera insanguinata a Kaiser e ha promesso di fare ritorno in AAA in futuro.</p>\n<p>La replica non ha modificato gli eventi accaduti, ma ne ha certamente cambiato la percezione da parte dei fan. La AAA ha scelto di mantenere la sequenza della rimozione della maschera, ma attraverso l'uso del filtro in bianco e nero ha palesemente cercato di rendere meno espliciti gli ultimi, sanguinosi momenti di Gable nei panni di El Grande Americano.</p>",
+      "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/paul-heyman-gets-speared-through-the-barricade-during-june-1-wwe-raw-49.jpg.avif?x51578-->\n<p>Paul Heyman si è spinto decisamente troppo vicino all'azione durante l'ultima puntata di WWE RAW, finendo per pagarne le conseguenze a causa di un impatto accidentale con Bron Breakker.</p>\n<p>Durante l'episodio di RAW del 1° giugno, Seth Rollins ha affrontato Bron Breakker nel main event. La situazione è degenerata nelle fasi finali dell'incontro, dopo l'intervento di Austin Theory. Quest'ultimo ha colpito Rollins con la cintura di campione mentre Heyman distraeva l'arbitro, ma il caos non si è fermato qui.</p>\n<p>Bron ha tentato di abbattere Rollins con una devastante Spear a bordo ring. Il problema è che Rollins ha previsto la mossa, tirando Heyman direttamente sulla linea di tiro. Bron si è schiantato contro Heyman con la sua Spear e entrambi sono finiti oltre la barricata di protezione.</p>\n<p>Quel momento ha cambiato rapidamente l'inerzia del match. Bron è riuscito a risalire sul ring e a connettere con un'altra Spear su Rollins, ma quest'ultimo aveva la cintura di campione premuta contro il petto. Ad avere la peggio è stato Bron, e Rollins ne ha approfittato per eseguire la sua Black Out e ottenere la vittoria.</p>\n<p>Il match era già fuori controllo di per sé, ma vedere Heyman travolto attraverso la barricata ha rappresentato l'immagine clou della serata. Heyman aveva cercato di aiutare Bron mettendogli un piede sulle corde all'inizio del match, ma pochi istanti dopo si è ritrovato a subire una delle armi più pericolose dell'arsenale di Breakker.</p>\n<p>Seth Rollins ha lasciato l'arena con la vittoria, ma Paul Heyman è uscito dal match come la persona che ha vissuto sicuramente la serata peggiore.</p>",
       "category_hint": "WWE",
       "clean_element_count": 8,
-      "created_at": "2026-06-01T22:42:14.035431+00:00",
+      "created_at": "2026-06-01T22:59:44.517139+00:00",
       "diagnostic_stage": "ready_for_alfred",
       "element_counts": {
         "embed": 0,
@@ -289,32 +566,32 @@
       },
       "elements": [
         {
-          "alt": "AAA Netflix Replay Grays Out Chad Gable’s Bloody Unmasking After Noche de Los Grandes",
+          "alt": "Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW",
           "type": "image",
-          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-after-noche-de-los-grandes-28.jpg.avif?x51578"
+          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/paul-heyman-gets-speared-through-the-barricade-during-june-1-wwe-raw-49.jpg.avif?x51578"
         },
         {
-          "text": "Chad Gable’s unmasking was already one of the wildest moments from AAA Noche de Los Grandes, but the replay made one thing very obvious — they did not want all that blood shown in full color again.",
+          "text": "Paul Heyman got way too close to the action on WWE RAW, and Bron Breakker made him pay for it by accident.",
           "type": "text"
         },
         {
-          "text": "After the June 1, 2026 episode of WWE RAW, AAA aired the replay of Gable’s brutal Mask vs. Mask loss to Ludwig Kaiser’s El Grande Americano. During the post-match broadcast, the screen was changed to black-and-white, apparently to tone down how much blood was visible on Gable’s face and body.",
+          "text": "During the June 1 episode of RAW , Seth Rollins faced Bron Breakker in the main event. Things got wild late in the match after Austin Theory came down and got involved. Theory hit Rollins with the title belt while Heyman distracted the referee, but the chaos didn’t stop there.",
           "type": "text"
         },
         {
-          "text": "The original moment came after Gable lost the main event and was forced to remove his mask. He stood in the ring covered in blood, surrounded by his family, and admitted he could not overcome the Mexican spirit. Gable then acknowledged Kaiser as the one true El Grande Americano before removing the mask and revealing himself to the crowd.",
+          "text": "Bron eventually tried to take Rollins out with a massive spear near ringside. The problem was that Rollins saw it coming and pulled Heyman directly into the line of fire. Bron crashed into Heyman with the spear, and both men went through the ringside barricade.",
           "type": "text"
         },
         {
-          "text": "The replay still showed the emotional moment, but the gray filter made it clear the broadcast was trying to soften the visual. Gable was heavily busted open, and the black-and-white treatment helped downplay just how bloody the scene really was.",
+          "text": "That moment changed the match fast. Bron managed to get back into the ring and hit another spear on Rollins, but Rollins had the title belt pressed against his chest. Bron took the worst of it, and Rollins followed up with Black Out to score the win.",
           "type": "text"
         },
         {
-          "text": "The match itself was a violent mess, with chairs, tables, guitars, outside interference, and blood all over the place. Kaiser eventually won after hitting a running headbutt, ending Gable’s run as the Original El Grande Americano. Gable later introduced his family, talked about his career, handed his bloody mask to Kaiser, and promised he would return to AAA someday.",
+          "text": "The match itself was already out of control, but Heyman getting destroyed through the barricade was the big visual. He tried to help Bron by putting his foot on the ropes earlier in the match, but seconds later, he ended up eating one of Breakker’s biggest weapons.",
           "type": "text"
         },
         {
-          "text": "The replay didn’t change what happened, but it definitely changed how fans saw it. AAA kept the unmasking in the broadcast, but by graying out the screen, they clearly made an effort to make Gable’s bloody final moments as El Grande Americano look less graphic.",
+          "text": "Seth Rollins walked out with the victory, but Paul Heyman may have walked out with the worst night of anyone involved.",
           "type": "text"
         },
         {
@@ -322,7 +599,7 @@
           "type": "text"
         }
       ],
-      "excerpt_it": "In occasione del replay di AAA Noche de Los Grandes, la produzione ha deciso di utilizzare un filtro in bianco e nero per oscurare il volto insanguinato di Chad Gable durante il momento della rimozione della maschera.",
+      "excerpt_it": "Durante la puntata di WWE RAW del 1° giugno, Paul Heyman è rimasto coinvolto in un incidente a bordo ring, finendo travolto da una Spear di Bron Breakker contro le barricate.",
       "extraction_diagnostics": {
         "candidate_node_count": 40,
         "clean_element_count": 8,
@@ -332,46 +609,46 @@
         "removed_by_node_count": 13,
         "removed_by_sanitize_count": 1,
         "root_name": "article",
-        "root_text_chars": 2745,
+        "root_text_chars": 2328,
         "stage": "complete",
         "table_count": 0
       },
-      "fetched_html_chars": 480778,
-      "menzo_score": 100,
+      "fetched_html_chars": 480661,
+      "menzo_score": 78,
       "meta": {
-        "description": "Chad Gable’s unmasking was already one of the wildest moments from AAA Noche de Los Grandes, but the replay made one thing very obvious — they did not",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-after-noche-de-los-grandes-28.jpg",
-        "source_title": "AAA Netflix Replay Grays Out Chad Gable’s Bloody Unmasking After Noche de Los Grandes"
+        "description": "Paul Heyman got way too close to the action on WWE RAW, and Bron Breakker made him pay for it by accident. During the June 1 episode of RAW, Seth Rollins",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/paul-heyman-gets-speared-through-the-barricade-during-june-1-wwe-raw-49.jpg",
+        "source_title": "Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW"
       },
       "raw_element_count": 9,
       "raw_elements_preview": [
         {
-          "alt": "AAA Netflix Replay Grays Out Chad Gable’s Bloody Unmasking After Noche de Los Grandes",
+          "alt": "Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW",
           "type": "image",
-          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-after-noche-de-los-grandes-28.jpg.avif?x51578"
+          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/paul-heyman-gets-speared-through-the-barricade-during-june-1-wwe-raw-49.jpg.avif?x51578"
         },
         {
-          "text": "Chad Gable’s unmasking was already one of the wildest moments from AAA Noche de Los Grandes, but the replay made one thing very obvious — they did not want all that blood shown in full color again.",
+          "text": "Paul Heyman got way too close to the action on WWE RAW, and Bron Breakker made him pay for it by accident.",
           "type": "text"
         },
         {
-          "text": "After the June 1, 2026 episode of WWE RAW, AAA aired the replay of Gable’s brutal Mask vs. Mask loss to Ludwig Kaiser’s El Grande Americano. During the post-match broadcast, the screen was changed to black-and-white, apparently to tone down how much blood was visible on Gable’s face and body.",
+          "text": "During the June 1 episode of RAW , Seth Rollins faced Bron Breakker in the main event. Things got wild late in the match after Austin Theory came down and got involved. Theory hit Rollins with the title belt while Heyman distracted the referee, but the chaos didn’t stop there.",
           "type": "text"
         },
         {
-          "text": "The original moment came after Gable lost the main event and was forced to remove his mask. He stood in the ring covered in blood, surrounded by his family, and admitted he could not overcome the Mexican spirit. Gable then acknowledged Kaiser as the one true El Grande Americano before removing the mask and revealing himself to the crowd.",
+          "text": "Bron eventually tried to take Rollins out with a massive spear near ringside. The problem was that Rollins saw it coming and pulled Heyman directly into the line of fire. Bron crashed into Heyman with the spear, and both men went through the ringside barricade.",
           "type": "text"
         },
         {
-          "text": "The replay still showed the emotional moment, but the gray filter made it clear the broadcast was trying to soften the visual. Gable was heavily busted open, and the black-and-white treatment helped downplay just how bloody the scene really was.",
+          "text": "That moment changed the match fast. Bron managed to get back into the ring and hit another spear on Rollins, but Rollins had the title belt pressed against his chest. Bron took the worst of it, and Rollins followed up with Black Out to score the win.",
           "type": "text"
         },
         {
-          "text": "The match itself was a violent mess, with chairs, tables, guitars, outside interference, and blood all over the place. Kaiser eventually won after hitting a running headbutt, ending Gable’s run as the Original El Grande Americano. Gable later introduced his family, talked about his career, handed his bloody mask to Kaiser, and promised he would return to AAA someday.",
+          "text": "The match itself was already out of control, but Heyman getting destroyed through the barricade was the big visual. He tried to help Bron by putting his foot on the ropes earlier in the match, but seconds later, he ended up eating one of Breakker’s biggest weapons.",
           "type": "text"
         },
         {
-          "text": "The replay didn’t change what happened, but it definitely changed how fans saw it. AAA kept the unmasking in the broadcast, but by graying out the screen, they clearly made an effort to make Gable’s bloody final moments as El Grande Americano look less graphic.",
+          "text": "Seth Rollins walked out with the victory, but Paul Heyman may have walked out with the worst night of anyone involved.",
           "type": "text"
         },
         {
@@ -486,263 +763,20 @@
         }
       ],
       "source": "ringsidenews",
-      "source_title": "AAA Netflix Replay Grays Out Chad Gable’s Bloody Unmasking After Noche de Los Grandes",
-      "source_url": "https://www.ringsidenews.com/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-noche-de-los-grandes/",
+      "source_title": "Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW",
+      "source_url": "https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/",
       "status": "ready_for_alfred",
-      "title_it": "AAA: il replay su Netflix oscura il volto insanguinato di Chad Gable",
+      "title_it": "Paul Heyman travolto da una Spear contro le barricate a WWE Raw",
       "translation_chain_attempted": [
         "gemini-3.1-flash-lite"
       ],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Gli elementi [quote] vanno pubblicati come <blockquote>...</blockquote>, non come semplici <p> con virgolette.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Gli elementi [table] sono tabelle: conservali nel corpo come <table class=\"owtv-data-table\"> con righe e celle HTML semplici. Non sostituirli con soli titoli o riassunti.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-noche-de-los-grandes/\nTitolo feed: AAA Netflix Replay Grays Out Chad Gable’s Bloody Unmasking After Noche de Los Grandes\nTitolo pagina: AAA Netflix Replay Grays Out Chad Gable’s Bloody Unmasking After Noche de Los Grandes\nDescrizione: Chad Gable’s unmasking was already one of the wildest moments from AAA Noche de Los Grandes, but the replay made one thing very obvious — they did not\nCategoria suggerita: WWE\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-after-noche-de-los-grandes-28.jpg.avif?x51578 ALT=AAA Netflix Replay Grays Out Chad Gable’s Bloody Unmasking After Noche de Los Grandes\n[2|text] Chad Gable’s unmasking was already one of the wildest moments from AAA Noche de Los Grandes, but the replay made one thing very obvious — they did not want all that blood shown in full color again.\n[3|text] After the June 1, 2026 episode of WWE RAW, AAA aired the replay of Gable’s brutal Mask vs. Mask loss to Ludwig Kaiser’s El Grande Americano. During the post-match broadcast, the screen was changed to black-and-white, apparently to tone down how much blood was visible on Gable’s face and body.\n[4|text] The original moment came after Gable lost the main event and was forced to remove his mask. He stood in the ring covered in blood, surrounded by his family, and admitted he could not overcome the Mexican spirit. Gable then acknowledged Kaiser as the one true El Grande Americano before removing the mask and revealing himself to the crowd.\n[5|text] The replay still showed the emotional moment, but the gray filter made it clear the broadcast was trying to soften the visual. Gable was heavily busted open, and the black-and-white treatment helped downplay just how bloody the scene really was.\n[6|text] The match itself was a violent mess, with chairs, tables, guitars, outside interference, and blood all over the place. Kaiser eventually won after hitting a running headbutt, ending Gable’s run as the Original El Grande Americano. Gable later introduced his family, talked about his career, handed his bloody mask to Kaiser, and promised he would return to AAA someday.\n[7|text] The replay didn’t change what happened, but it definitely changed how fans saw it. AAA kept the unmasking in the broadcast, but by graying out the screen, they clearly made an effort to make Gable’s bloody final moments as El Grande Americano look less graphic.\n[8|text] Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"AAA: il replay su Netflix oscura il volto insanguinato di Chad Gable\",\n  \"body_html\": \"<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/aaa-nig-28.jpg.avif-->\\n<p>La rimozione della maschera di Chad Gable è stata senza dubbio uno dei momenti più intensi di AAA Noche de Los Grandes, ma il replay dell'evento ha reso evidente una scelta precisa: non si voleva mostrare nuovamente tutto quel sangue a colori.</p>\\n<p>Dopo l'episodio di WWE RAW del 1° giugno 2026, la AAA ha trasmesso la replica del brutale Mask vs. Mask match, che ha visto Chad Gable uscire sconfitto per mano di Ludwig Kaiser, alias El Grande Americano. Durante la messa in onda del post-match, lo schermo è stato trasformato in bianco e nero, apparentemente per mitigare la visibilità del sangue sul volto e sul corpo di Gable.</p>\\n<p>Il momento originale era avvenuto subito dopo la sconfitta di Gable nel main event, quando l'atleta era stato costretto a togliersi la maschera. Rimasto sul ring coperto di sangue e circondato dalla sua famiglia, Gable aveva ammesso di non essere riuscito a prevalere sullo spirito messicano. Successivamente, aveva riconosciuto Kaiser come l'unico vero El Grande Americano, procedendo poi a rimuovere la maschera e rivelando la propria identità al pubblico.</p>\\n<p>Nonostante la replica abbia mantenuto intatto l'impatto emotivo del segmento, il filtro grigio ha chiarito l'intento dell'emittente di attenuare la violenza visiva. Gable era apparso visibilmente ferito e la scelta del bianco e nero ha contribuito a ridurre l'impatto grafico della scena.</p>\\n<p>L'incontro in sé è stato un susseguirsi di violenza, caratterizzato dall'uso di sedie, tavoli, chitarre, interferenze esterne e una notevole quantità di sangue. Kaiser ha conquistato la vittoria finale dopo aver colpito l'avversario con una running headbutt, ponendo fine al regno di Gable come l'Original El Grande Americano. Al termine della contesa, Gable ha presentato la propria famiglia, ha parlato della sua carriera, ha consegnato la sua maschera insanguinata a Kaiser e ha promesso di fare ritorno in AAA in futuro.</p>\\n<p>La replica non ha modificato gli eventi accaduti, ma ne ha certamente cambiato la percezione da parte dei fan. La AAA ha scelto di mantenere la sequenza della rimozione della maschera, ma attraverso l'uso del filtro in bianco e nero ha palesemente cercato di rendere meno espliciti gli ultimi, sanguinosi momenti di Gable nei panni di El Grande Americano.</p>\",\n  \"excerpt_it\": \"In occasione del replay di AAA Noche de Los Grandes, la produzione ha deciso di utilizzare un filtro in bianco e nero per oscurare il volto insanguinato di Chad Gable durante il momento della rimozione della maschera.\",\n  \"notes\": [\n    \"Traduzione eseguita seguendo lo stile giornalistico della pipeline v92.\",\n    \"Mantenuta la sequenza narrativa originale.\",\n    \"Terminologia tecnica di wrestling (Mask vs. Mask, main event, turn) applicata coerentemente al contesto della notizia.\"\n  ]\n}",
-      "translation_used": true
-    },
-    {
-      "bob_notes": [
-        "Traduzione eseguita seguendo lo stile giornalistico della pipeline v92.",
-        "Tag HTML inseriti correttamente per immagini e blocchi citazione.",
-        "Nessuna aggiunta o interpretazione oltre quanto presente nella fonte.",
-        "Terminologia wrestling (roster, storyline, stable, match) mantenuta secondo lo standard editoriale."
-      ],
-      "body_html": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/finn-balor-moves-to-smackdown-after-wwe-raw-trade-30.jpg.avif?x51578--></p><p>L'esperienza di Finn Bálor a Monday Night RAW è giunta ufficialmente al termine: il wrestler farà parte d'ora in avanti del roster di Friday Night SmackDown.</p><p>Durante la puntata di Monday Night RAW dell'1 giugno 2026, la WWE ha annunciato che Bálor è stato scambiato in favore dello show del venerdì sera. La decisione arriva dopo settimane di tensione che hanno coinvolto Bálor, JD McDonagh e Dominik Mysterio, a seguito della rottura della loro alleanza.</p><p>L'ultima apparizione di Bálor come membro del roster di RAW risale all'edizione del 18 maggio, durante la quale ha sconfitto JD McDonagh. Da quel momento, la rivalità tra gli ex membri della Judgment Day ha continuato a intensificarsi. In seguito alla notizia dello scambio, Byron Saxton ha chiesto a JD McDonagh una reazione riguardo alla partenza di Bálor da RAW e quest'ultimo non si è risparmiato:</p><blockquote>“Posso parlare a nome della Judgment Day: Finn, addio, ci vediamo mai più, non ci mancherai! Dici che è stato scambiato, giusto? Io dico che è scappato perché sa che se fosse rimasto a Raw, avremmo messo fine alla sua carriera.”</blockquote><p>Questo spostamento contribuisce anche a chiarire la posizione di Bálor nel tabellone aggiornato del torneo King of the Ring. È attualmente previsto che competa in un Fatal 4-Way match di primo turno contro Royce Keys, LA Knight e Jey Uso, mentre la WWE prosegue la marcia di avvicinamento a Night of Champions in Arabia Saudita.</p><p>Il trasferimento di Bálor a SmackDown apre la strada a nuove rivalità e opportunità, creando al contempo una distanza dalle tensioni ancora aperte con la Judgment Day a RAW. Allo stesso tempo, i commenti di JD McDonagh chiariscono che il risentimento tra gli ex alleati non è svanito.</p><p>Con il King of the Ring in pieno svolgimento e il cambio di brand ormai effettivo, il prossimo capitolo di Finn Bálor in WWE avrà inizio durante le serate del venerdì. Resta da vedere se questo porterà al successo nel torneo o a un nuovo scontro con i suoi ex partner della Judgment Day.</p>",
-      "category_hint": "WWE",
-      "clean_element_count": 9,
-      "created_at": "2026-06-01T22:42:18.821362+00:00",
-      "diagnostic_stage": "ready_for_alfred",
-      "element_counts": {
-        "embed": 0,
-        "heading": 0,
-        "image": 1,
-        "quote": 1,
-        "table": 0,
-        "text": 7
-      },
-      "elements": [
-        {
-          "alt": "Finn Bálor Moves to SmackDown After WWE RAW Trade",
-          "type": "image",
-          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/finn-balor-moves-to-smackdown-after-wwe-raw-trade-30.jpg.avif?x51578"
-        },
-        {
-          "text": "Finn Bálor’s time on WWE RAW is officially over as he will now be a part of the Friday Night SmackDown roster moving forward.",
-          "type": "text"
-        },
-        {
-          "text": "During the June 1, 2026 episode of Monday Night RAW , WWE announced that Bálor has been traded to Friday Night SmackDown. The move comes after weeks of tension involving Bálor, JD McDonagh, and Dominik Mysterio following the breakup of their alliance.",
-          "type": "text"
-        },
-        {
-          "text": "Bálor last competed as a member of the RAW roster on the May 18 edition of the show, where he defeated JD McDonagh. Since then, the rivalry between the former Judgment Day members has continued to escalate. Following news of the trade, Byron Saxton asked JD McDonagh for his reaction to Bálor leaving RAW. JD did not hold back.",
-          "type": "text"
-        },
-        {
-          "source_tag": "blockquote",
-          "text": "“I can speak for The Judgment Day—Finn, goodbye, good riddance, you will not be missed! You say he was traded, right? I say he ran away because he knows if he stuck around on Raw, we’d end his career.”",
-          "type": "quote",
-          "url": ""
-        },
-        {
-          "text": "The move also helps explain Bálor’s place in the updated King of the Ring tournament bracket. He is currently scheduled to compete in a first-round Fatal 4-Way match against Royce Keys, LA Knight, and Jey Uso as WWE continues building toward Night of Champions in Saudi Arabia.",
-          "type": "text"
-        },
-        {
-          "text": "Moving Bálor to SmackDown opens up a fresh set of rivalries and opportunities while also creating distance from the ongoing issues with Judgment Day on RAW. At the same time, JD McDonagh’s comments make it clear that the bad blood between the former allies has not disappeared.",
-          "type": "text"
-        },
-        {
-          "text": "With King of the Ring now underway and a brand change officially in place, Finn Bálor’s next chapter in WWE will begin on Friday nights. Whether that leads to tournament success or another collision with his former Judgment Day partners remains to be seen.",
-          "type": "text"
-        },
-        {
-          "text": "Felix Upton has over 15 years of experience in media and wrestling journalism. His work at Ringside News blends speed, accuracy, and industry insight.",
-          "type": "text"
-        }
-      ],
-      "excerpt_it": "Finn Bálor lascia ufficialmente Monday Night RAW per unirsi al roster di Friday Night SmackDown. La WWE ha annunciato il trasferimento dopo settimane di tensioni interne alla Judgment Day.",
-      "extraction_diagnostics": {
-        "candidate_node_count": 43,
-        "clean_element_count": 9,
-        "dom_noise_reduction_enabled": false,
-        "quote_count": 1,
-        "raw_element_count": 10,
-        "removed_by_node_count": 13,
-        "removed_by_sanitize_count": 1,
-        "root_name": "article",
-        "root_text_chars": 2748,
-        "stage": "complete",
-        "table_count": 0
-      },
-      "fetched_html_chars": 479271,
-      "menzo_score": 100,
-      "meta": {
-        "description": "Finn Bálor’s time on WWE RAW is officially over as he will now be a part of the Friday Night SmackDown roster moving forward. During the June 1, 2026",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/finn-balor-moves-to-smackdown-after-wwe-raw-trade-30.jpg",
-        "source_title": "Finn Bálor Moves to SmackDown After WWE RAW Trade"
-      },
-      "raw_element_count": 10,
-      "raw_elements_preview": [
-        {
-          "alt": "Finn Bálor Moves to SmackDown After WWE RAW Trade",
-          "type": "image",
-          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/finn-balor-moves-to-smackdown-after-wwe-raw-trade-30.jpg.avif?x51578"
-        },
-        {
-          "text": "Finn Bálor’s time on WWE RAW is officially over as he will now be a part of the Friday Night SmackDown roster moving forward.",
-          "type": "text"
-        },
-        {
-          "text": "During the June 1, 2026 episode of Monday Night RAW , WWE announced that Bálor has been traded to Friday Night SmackDown. The move comes after weeks of tension involving Bálor, JD McDonagh, and Dominik Mysterio following the breakup of their alliance.",
-          "type": "text"
-        },
-        {
-          "text": "Bálor last competed as a member of the RAW roster on the May 18 edition of the show, where he defeated JD McDonagh. Since then, the rivalry between the former Judgment Day members has continued to escalate. Following news of the trade, Byron Saxton asked JD McDonagh for his reaction to Bálor leaving RAW. JD did not hold back.",
-          "type": "text"
-        },
-        {
-          "source_tag": "blockquote",
-          "text": "“I can speak for The Judgment Day—Finn, goodbye, good riddance, you will not be missed! You say he was traded, right? I say he ran away because he knows if he stuck around on Raw, we’d end his career.”",
-          "type": "quote",
-          "url": ""
-        },
-        {
-          "text": "The move also helps explain Bálor’s place in the updated King of the Ring tournament bracket. He is currently scheduled to compete in a first-round Fatal 4-Way match against Royce Keys, LA Knight, and Jey Uso as WWE continues building toward Night of Champions in Saudi Arabia.",
-          "type": "text"
-        },
-        {
-          "text": "Moving Bálor to SmackDown opens up a fresh set of rivalries and opportunities while also creating distance from the ongoing issues with Judgment Day on RAW. At the same time, JD McDonagh’s comments make it clear that the bad blood between the former allies has not disappeared.",
-          "type": "text"
-        },
-        {
-          "text": "With King of the Ring now underway and a brand change officially in place, Finn Bálor’s next chapter in WWE will begin on Friday nights. Whether that leads to tournament success or another collision with his former Judgment Day partners remains to be seen.",
-          "type": "text"
-        },
-        {
-          "text": "Felix Upton has over 15 years of experience in media and wrestling journalism. His work at Ringside News blends speed, accuracy, and industry insight.",
-          "type": "text"
-        },
-        {
-          "text": "Spotlight WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup",
-          "type": "text"
-        }
-      ],
-      "removed_before_gemini": 14,
-      "removed_elements_debug": [
-        {
-          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 31,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Spotlight"
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196416 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-paul-heyman tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 32,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 33,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 34,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196368 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-iyo-sky tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 35,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 36,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 37,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196255 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-brock-lesnar tag-oba-femi tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 38,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 39,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 40,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196202 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
-          "node_index": 41,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 42,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "WWE Makes Major Changes to King of the Ring Tournament Lineup"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 43,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "index": 10,
-          "item": {
-            "text": "Spotlight WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup",
-            "type": "text"
-          },
-          "reason": "footer_start"
-        }
-      ],
-      "source": "ringsidenews",
-      "source_title": "Finn Bálor Moves to SmackDown After WWE RAW Trade",
-      "source_url": "https://www.ringsidenews.com/finn-balor-moves-smackdown-wwe-raw-trade/",
-      "status": "ready_for_alfred",
-      "title_it": "WWE: Finn Bálor trasferito ufficialmente a SmackDown",
-      "translation_chain_attempted": [
-        "gemini-3.1-flash-lite"
-      ],
-      "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Gli elementi [quote] vanno pubblicati come <blockquote>...</blockquote>, non come semplici <p> con virgolette.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Gli elementi [table] sono tabelle: conservali nel corpo come <table class=\"owtv-data-table\"> con righe e celle HTML semplici. Non sostituirli con soli titoli o riassunti.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/finn-balor-moves-smackdown-wwe-raw-trade/\nTitolo feed: Finn Bálor Moves to SmackDown After WWE RAW Trade\nTitolo pagina: Finn Bálor Moves to SmackDown After WWE RAW Trade\nDescrizione: Finn Bálor’s time on WWE RAW is officially over as he will now be a part of the Friday Night SmackDown roster moving forward. During the June 1, 2026\nCategoria suggerita: WWE\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/finn-balor-moves-to-smackdown-after-wwe-raw-trade-30.jpg.avif?x51578 ALT=Finn Bálor Moves to SmackDown After WWE RAW Trade\n[2|text] Finn Bálor’s time on WWE RAW is officially over as he will now be a part of the Friday Night SmackDown roster moving forward.\n[3|text] During the June 1, 2026 episode of Monday Night RAW , WWE announced that Bálor has been traded to Friday Night SmackDown. The move comes after weeks of tension involving Bálor, JD McDonagh, and Dominik Mysterio following the breakup of their alliance.\n[4|text] Bálor last competed as a member of the RAW roster on the May 18 edition of the show, where he defeated JD McDonagh. Since then, the rivalry between the former Judgment Day members has continued to escalate. Following news of the trade, Byron Saxton asked JD McDonagh for his reaction to Bálor leaving RAW. JD did not hold back.\n[5|quote] “I can speak for The Judgment Day—Finn, goodbye, good riddance, you will not be missed! You say he was traded, right? I say he ran away because he knows if he stuck around on Raw, we’d end his career.”\n[6|text] The move also helps explain Bálor’s place in the updated King of the Ring tournament bracket. He is currently scheduled to compete in a first-round Fatal 4-Way match against Royce Keys, LA Knight, and Jey Uso as WWE continues building toward Night of Champions in Saudi Arabia.\n[7|text] Moving Bálor to SmackDown opens up a fresh set of rivalries and opportunities while also creating distance from the ongoing issues with Judgment Day on RAW. At the same time, JD McDonagh’s comments make it clear that the bad blood between the former allies has not disappeared.\n[8|text] With King of the Ring now underway and a brand change officially in place, Finn Bálor’s next chapter in WWE will begin on Friday nights. Whether that leads to tournament success or another collision with his former Judgment Day partners remains to be seen.\n[9|text] Felix Upton has over 15 years of experience in media and wrestling journalism. His work at Ringside News blends speed, accuracy, and industry insight.\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"WWE: Finn Bálor trasferito ufficialmente a SmackDown\",\n  \"body_html\": \"<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/finn-balor-moves-to-smackdown-after-wwe-raw-trade-30.jpg.avif?x51578--></p><p>L'esperienza di Finn Bálor a Monday Night RAW è giunta ufficialmente al termine: il wrestler farà parte d'ora in avanti del roster di Friday Night SmackDown.</p><p>Durante la puntata di Monday Night RAW dell'1 giugno 2026, la WWE ha annunciato che Bálor è stato scambiato in favore dello show del venerdì sera. La decisione arriva dopo settimane di tensione che hanno coinvolto Bálor, JD McDonagh e Dominik Mysterio, a seguito della rottura della loro alleanza.</p><p>L'ultima apparizione di Bálor come membro del roster di RAW risale all'edizione del 18 maggio, durante la quale ha sconfitto JD McDonagh. Da quel momento, la rivalità tra gli ex membri della Judgment Day ha continuato a intensificarsi. In seguito alla notizia dello scambio, Byron Saxton ha chiesto a JD McDonagh una reazione riguardo alla partenza di Bálor da RAW e quest'ultimo non si è risparmiato:</p><blockquote>“Posso parlare a nome della Judgment Day: Finn, addio, ci vediamo mai più, non ci mancherai! Dici che è stato scambiato, giusto? Io dico che è scappato perché sa che se fosse rimasto a Raw, avremmo messo fine alla sua carriera.”</blockquote><p>Questo spostamento contribuisce anche a chiarire la posizione di Bálor nel tabellone aggiornato del torneo King of the Ring. È attualmente previsto che competa in un Fatal 4-Way match di primo turno contro Royce Keys, LA Knight e Jey Uso, mentre la WWE prosegue la marcia di avvicinamento a Night of Champions in Arabia Saudita.</p><p>Il trasferimento di Bálor a SmackDown apre la strada a nuove rivalità e opportunità, creando al contempo una distanza dalle tensioni ancora aperte con la Judgment Day a RAW. Allo stesso tempo, i commenti di JD McDonagh chiariscono che il risentimento tra gli ex alleati non è svanito.</p><p>Con il King of the Ring in pieno svolgimento e il cambio di brand ormai effettivo, il prossimo capitolo di Finn Bálor in WWE avrà inizio durante le serate del venerdì. Resta da vedere se questo porterà al successo nel torneo o a un nuovo scontro con i suoi ex partner della Judgment Day.</p>\",\n  \"excerpt_it\": \"Finn Bálor lascia ufficialmente Monday Night RAW per unirsi al roster di Friday Night SmackDown. La WWE ha annunciato il trasferimento dopo settimane di tensioni interne alla Judgment Day.\",\n  \"notes\": [\n    \"Traduzione eseguita seguendo lo stile giornalistico della pipeline v92.\",\n    \"Tag HTML inseriti correttamente per immagini e blocchi citazione.\",\n    \"Nessuna aggiunta o interpretazione oltre quanto presente nella fonte.\",\n    \"Terminologia wrestling (roster, storyline, stable, match) mantenuta secondo lo standard editoriale.\"\n  ]\n}",
+      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Gli elementi [quote] vanno pubblicati come <blockquote>...</blockquote>, non come semplici <p> con virgolette.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Gli elementi [table] sono tabelle: conservali nel corpo come <table class=\"owtv-data-table\"> con righe e celle HTML semplici. Non sostituirli con soli titoli o riassunti.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/\nTitolo feed: Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW\nTitolo pagina: Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW\nDescrizione: Paul Heyman got way too close to the action on WWE RAW, and Bron Breakker made him pay for it by accident. During the June 1 episode of RAW, Seth Rollins\nCategoria suggerita: WWE\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/paul-heyman-gets-speared-through-the-barricade-during-june-1-wwe-raw-49.jpg.avif?x51578 ALT=Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW\n[2|text] Paul Heyman got way too close to the action on WWE RAW, and Bron Breakker made him pay for it by accident.\n[3|text] During the June 1 episode of RAW , Seth Rollins faced Bron Breakker in the main event. Things got wild late in the match after Austin Theory came down and got involved. Theory hit Rollins with the title belt while Heyman distracted the referee, but the chaos didn’t stop there.\n[4|text] Bron eventually tried to take Rollins out with a massive spear near ringside. The problem was that Rollins saw it coming and pulled Heyman directly into the line of fire. Bron crashed into Heyman with the spear, and both men went through the ringside barricade.\n[5|text] That moment changed the match fast. Bron managed to get back into the ring and hit another spear on Rollins, but Rollins had the title belt pressed against his chest. Bron took the worst of it, and Rollins followed up with Black Out to score the win.\n[6|text] The match itself was already out of control, but Heyman getting destroyed through the barricade was the big visual. He tried to help Bron by putting his foot on the ropes earlier in the match, but seconds later, he ended up eating one of Breakker’s biggest weapons.\n[7|text] Seth Rollins walked out with the victory, but Paul Heyman may have walked out with the worst night of anyone involved.\n[8|text] Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Paul Heyman travolto da una Spear contro le barricate a WWE Raw\",\n  \"body_html\": \"<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/paul-heyman-gets-speared-through-the-barricade-during-june-1-wwe-raw-49.jpg.avif?x51578-->\\n<p>Paul Heyman si è spinto decisamente troppo vicino all'azione durante l'ultima puntata di WWE RAW, finendo per pagarne le conseguenze a causa di un impatto accidentale con Bron Breakker.</p>\\n<p>Durante l'episodio di RAW del 1° giugno, Seth Rollins ha affrontato Bron Breakker nel main event. La situazione è degenerata nelle fasi finali dell'incontro, dopo l'intervento di Austin Theory. Quest'ultimo ha colpito Rollins con la cintura di campione mentre Heyman distraeva l'arbitro, ma il caos non si è fermato qui.</p>\\n<p>Bron ha tentato di abbattere Rollins con una devastante Spear a bordo ring. Il problema è che Rollins ha previsto la mossa, tirando Heyman direttamente sulla linea di tiro. Bron si è schiantato contro Heyman con la sua Spear e entrambi sono finiti oltre la barricata di protezione.</p>\\n<p>Quel momento ha cambiato rapidamente l'inerzia del match. Bron è riuscito a risalire sul ring e a connettere con un'altra Spear su Rollins, ma quest'ultimo aveva la cintura di campione premuta contro il petto. Ad avere la peggio è stato Bron, e Rollins ne ha approfittato per eseguire la sua Black Out e ottenere la vittoria.</p>\\n<p>Il match era già fuori controllo di per sé, ma vedere Heyman travolto attraverso la barricata ha rappresentato l'immagine clou della serata. Heyman aveva cercato di aiutare Bron mettendogli un piede sulle corde all'inizio del match, ma pochi istanti dopo si è ritrovato a subire una delle armi più pericolose dell'arsenale di Breakker.</p>\\n<p>Seth Rollins ha lasciato l'arena con la vittoria, ma Paul Heyman è uscito dal match come la persona che ha vissuto sicuramente la serata peggiore.</p>\",\n  \"excerpt_it\": \"Durante la puntata di WWE RAW del 1° giugno, Paul Heyman è rimasto coinvolto in un incidente a bordo ring, finendo travolto da una Spear di Bron Breakker contro le barricate.\",\n  \"notes\": [\n    \"Traduzione eseguita seguendo lo stile giornalistico della pipeline v92.\",\n    \"Il nome 'Black Out' è stato mantenuto come da terminologia tecnica del wrestler.\",\n    \"Gli elementi biografici finali relativi a Steve Carrier sono stati esclusi in conformità con le regole editoriali sulle informazioni non pertinenti al corpo della notizia.\"\n  ]\n}",
       "translation_used": true
     }
   ],
-  "generated_at": "2026-06-01T22:42:22.737909+00:00",
+  "generated_at": "2026-06-01T22:59:47.694673+00:00",
   "handoff": {
     "errors": 0,
     "extraction_empty": 0,
