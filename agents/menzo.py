@@ -18,7 +18,7 @@ MENZO_DECISIONS_FILE = NEWSROOM_STATE_DIR / "menzo_decisions_latest.json"
 V92_ALLOWED_URLS_FILE = NEWSROOM_STATE_DIR / "v92_allowed_news_urls.json"
 ARTIFACT_DECISIONS_FILE = ARTIFACT_DIR / "menzo_decisions.json"
 
-MENZO_VERSION = "v93_9_editorial_value_recency_gate"
+MENZO_VERSION = "v93_10_trade_context_editorial_gate"
 
 HARD_SIGNALS = {
     "death": 100,
@@ -45,9 +45,9 @@ HARD_SIGNALS = {
     "tv deal": 84,
     "netflix": 76,
     "tko": 74,
-    "trade": 80,
     "moves to smackdown": 80,
     "moves to raw": 80,
+    "moves to nxt": 78,
     "lineup": 62,
     "bracket": 66,
 }
@@ -83,6 +83,7 @@ ENTITY_SIGNALS = {
     "mercedes mone": 8,
     "chad gable": 8,
     "finn balor": 8,
+    "finn bálor": 8,
     "oba femi": 8,
     "mick foley": 5,
     "kevin nash": 5,
@@ -113,16 +114,26 @@ HARD_SKIP_PATTERNS = [
     (re.compile(r"\bpreview\b.*\b(start\s*time|how\s+to\s+watch|confirmed\s+matches)\b", re.I), "generic_preview"),
 ]
 
-RATINGS_PATTERNS = [
-    re.compile(r"\b(ratings?|viewership|demo|p18\s*49|viewers|ascolti)\b", re.I),
-]
+RATINGS_PATTERNS = [re.compile(r"\b(ratings?|viewership|demo|p18\s*49|viewers|ascolti)\b", re.I)]
 RELEASED_DATA_PATTERNS = [
     re.compile(r"\b(data|numbers|ratings?|viewership|figures)\s+(has|have|was|were)?\s*(been\s*)?released\b", re.I),
     re.compile(r"\breleased\s+(ratings?|viewership|figures|data|numbers)\b", re.I),
 ]
+
+ROSTER_TRADE_PATTERN = re.compile(
+    r"\b(trade|traded|moves?\s+to|moved\s+to)\b.*\b(raw|smackdown|nxt|wwe|brand|roster|draft|judgment\s+day|judgement\s+day)\b|"
+    r"\b(raw|smackdown|nxt|wwe|brand|roster|draft|judgment\s+day|judgement\s+day)\b.*\b(trade|traded|moves?\s+to|moved\s+to)\b",
+    re.I,
+)
+EXTERNAL_SPORTS_PATTERN = re.compile(
+    r"\b(nfl|nba|mlb|nhl|browns|cleveland|myles\s+garrett|garrett|sacks?|playoffs?|draft\s+picks?|quarterback|touchdown|football|basketball|baseball|hockey)\b",
+    re.I,
+)
+CELEBRITY_REACTION_PATTERN = re.compile(r"\b(reacts?|reaction|begs|jokes|responds?|comments?)\b", re.I)
+
 CURRENT_PRIORITY_PATTERNS = [
     (re.compile(r"\bmajor changes?\b.*\b(king|queen)\s+of\s+the\s+ring\b|\b(king|queen)\s+of\s+the\s+ring\b.*\bmajor changes?\b", re.I), 20, "current:tournament_changes"),
-    (re.compile(r"\btrade\b|\bmoves\s+to\s+(raw|smackdown|nxt)\b", re.I), 18, "current:roster_move"),
+    (ROSTER_TRADE_PATTERN, 18, "current:roster_move"),
     (re.compile(r"\bnetflix\b.*\b(aaa|wwe|replay|unmasking)\b", re.I), 16, "current:netflix_aaa"),
     (re.compile(r"\b(call(?:s)?\s+out|confronts?)\b.*\b(brock lesnar|roman reigns|cody rhodes|cm punk)\b", re.I), 12, "current:major_storyline"),
     (re.compile(r"\b(plaintiffs?|lawsuit|evidence|espn)\b", re.I), 10, "current:business_legal"),
@@ -157,7 +168,7 @@ def write_json(path: Path, data: Any) -> None:
 
 def normalize(text: str) -> str:
     text = (text or "").lower()
-    text = re.sub(r"[^a-z0-9]+", " ", text)
+    text = re.sub(r"[^a-z0-9àèéìòùáíóúäëïöüñç]+", " ", text)
     return re.sub(r"\s+", " ", text).strip()
 
 
@@ -199,8 +210,8 @@ def category_hint(item: dict[str, Any]) -> str:
     return "World"
 
 
-def is_ratings_report(blob: str) -> bool:
-    return any(pattern.search(blob) for pattern in RATINGS_PATTERNS)
+def is_ratings_report(raw_blob: str) -> bool:
+    return any(pattern.search(raw_blob) for pattern in RATINGS_PATTERNS)
 
 
 def is_released_data_context(raw_blob: str) -> bool:
@@ -209,6 +220,14 @@ def is_released_data_context(raw_blob: str) -> bool:
 
 def has_evergreen_signal(blob: str) -> bool:
     return any(term in blob for term in EVERGREEN_TERMS)
+
+
+def is_external_sports_reaction(raw_blob: str) -> bool:
+    return bool(EXTERNAL_SPORTS_PATTERN.search(raw_blob) and CELEBRITY_REACTION_PATTERN.search(raw_blob))
+
+
+def is_external_sports_trade(raw_blob: str) -> bool:
+    return bool(EXTERNAL_SPORTS_PATTERN.search(raw_blob) and re.search(r"\b(trade|traded|deal|signs?|contract)\b", raw_blob, re.I) and not ROSTER_TRADE_PATTERN.search(raw_blob))
 
 
 def apply_recency(score: int, reasons: list[str], item: dict[str, Any], blob: str) -> int:
@@ -235,12 +254,22 @@ def apply_recency(score: int, reasons: list[str], item: dict[str, Any], blob: st
 def classify_item(item: dict[str, Any]) -> dict[str, Any]:
     title = str(item.get("title") or "")
     summary = str(item.get("summary") or "")
-    blob = normalize(f"{title} {summary} {item.get('url', '')}")
-    raw_blob = f"{title} {summary} {item.get('url', '')}"
+    url = str(item.get("url") or "")
+    blob = normalize(f"{title} {summary} {url}")
+    raw_blob = f"{title} {summary} {url}"
 
     for pattern, reason in HARD_SKIP_PATTERNS:
         if pattern.search(raw_blob):
             return {"decision": "skip", "article_type": "low_value", "priority": "skip", "score": 0, "reason": reason}
+
+    if is_external_sports_reaction(raw_blob) or is_external_sports_trade(raw_blob):
+        return {
+            "decision": "skip",
+            "article_type": "external_sports_reaction",
+            "priority": "skip",
+            "score": 18,
+            "reason": "skip:external_sports_context_not_core_wrestling",
+        }
 
     score = 30
     reasons: list[str] = []
@@ -256,6 +285,15 @@ def classify_item(item: dict[str, Any]) -> dict[str, Any]:
             score = max(score, value)
             reasons.append(f"hard:{term}")
             article_type = "hard_news"
+
+    if re.search(r"\btrade\b|\btraded\b", raw_blob, re.I):
+        if ROSTER_TRADE_PATTERN.search(raw_blob):
+            score = max(score, 80)
+            reasons.append("hard:trade_roster_context")
+            article_type = "hard_news"
+        else:
+            score -= 18
+            reasons.append("disambiguated:trade_not_roster_context")
 
     for term, value in STRATEGIC_SIGNALS.items():
         if term in blob:
@@ -314,7 +352,7 @@ def classify_item(item: dict[str, Any]) -> dict[str, Any]:
         priority = "skip"
         article_type = "low_value"
 
-    return {"decision": decision, "article_type": article_type, "priority": priority, "score": score, "reason": ",".join(reasons[:14]) or "menzo_baseline"}
+    return {"decision": decision, "article_type": article_type, "priority": priority, "score": score, "reason": ",".join(reasons[:16]) or "menzo_baseline"}
 
 
 def sort_key(item: dict[str, Any]) -> tuple[int, float, str]:
@@ -336,7 +374,7 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     pending: list[dict[str, Any]] = []
     skipped: list[dict[str, Any]] = []
 
-    print(f"[MENZO v93.9] Avvio decisione editoriale | candidates={len(candidates)}", flush=True)
+    print(f"[MENZO v93.10] Avvio decisione editoriale | candidates={len(candidates)}", flush=True)
 
     for candidate in candidates:
         item = dict(candidate)
@@ -369,13 +407,15 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
         "agent": "Menzo",
         "version": MENZO_VERSION,
         "generated_at": utc_now(),
-        "mode": "editorial_value_recency_gate",
+        "mode": "trade_context_editorial_gate",
         "daily_policy": {"target_min": 20, "target_max": 30, "reports_excluded": True, "max_selected_this_run": max_selected, "max_pending_this_run": max_pending},
         "policy": {
             "recency_penalty_after_72h": True,
             "released_data_disambiguation": True,
             "ratings_reports_penalized_unless_exceptional": True,
             "current_storyline_and_roster_boosts": True,
+            "trade_requires_wrestling_roster_context": True,
+            "external_sports_reactions_are_skipped": True,
         },
         "input": {"massy_version": board.get("version") if isinstance(board, dict) else None, "candidate_count": len(candidates)},
         "selected": selected,
@@ -387,7 +427,7 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     write_json(ARTIFACT_DECISIONS_FILE, result)
     write_json(MENZO_DECISIONS_FILE, result)
     write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "version": MENZO_VERSION, "allowed_urls": allowed_urls})
-    print(f"[MENZO v93.9] Decisione pronta | selected={len(selected)} pending={len(pending)} skipped={len(skipped)} allowed_for_v92={len(allowed_urls)}", flush=True)
+    print(f"[MENZO v93.10] Decisione pronta | selected={len(selected)} pending={len(pending)} skipped={len(skipped)} allowed_for_v92={len(allowed_urls)}", flush=True)
     return result
 
 
