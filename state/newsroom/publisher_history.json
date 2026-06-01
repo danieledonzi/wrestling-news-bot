@@ -35,6 +35,15 @@
     "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-finn-balor-trasferito-ufficialmente-a-smackdown/",
     "wp_post_id": 5803
   },
+  "https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw": {
+    "published_at": "2026-06-01T23:42:47.270564+00:00",
+    "source": "ringsidenews",
+    "source_url": "https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/",
+    "status": "publish",
+    "title_it": "Iyo Sky avanza nel torneo Queen of the Ring dopo un caotico Fatal Four-Way",
+    "wp_link": "https://news.openwrestlingtv.com/wwe/iyo-sky-avanza-nel-torneo-queen-of-the-ring-dopo-un-caotico-fatal-four-way/",
+    "wp_post_id": 5825
+  },
   "https://www.ringsidenews.com/jonathan-coachman-blasts-wwe-creative-booking-liv-morgan-queen-ring-tournament": {
     "published_at": "2026-06-01T19:03:27.136591+00:00",
     "source": "ringsidenews",
@@ -151,5 +160,23 @@
     "title_it": "Infortunio per Octagon Jr. durante i tapings di AAA Noche de Los Grandes",
     "wp_link": "https://news.openwrestlingtv.com/world/infortunio-per-octagon-jr-durante-i-tapings-di-aaa-noche-de-los-grandes/",
     "wp_post_id": 5776
+  },
+  "https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match": {
+    "published_at": "2026-06-01T23:42:45.658579+00:00",
+    "source": "wrestlinginc",
+    "source_url": "https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match/",
+    "status": "publish",
+    "title_it": "IYO SKY avanza nel torneo Queen of the Ring",
+    "wp_link": "https://news.openwrestlingtv.com/wwe/iyo-sky-avanza-nel-torneo-queen-of-the-ring/",
+    "wp_post_id": 5823
+  },
+  "https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review": {
+    "published_at": "2026-06-01T23:42:42.756358+00:00",
+    "source": "wrestlinginc",
+    "source_url": "https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review/",
+    "status": "publish",
+    "title_it": "WWE Clash In Italy 2026: Vincitori e vinti",
+    "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-clash-in-italy-2026-vincitori-e-vinti/",
+    "wp_post_id": 5821
   }
 }

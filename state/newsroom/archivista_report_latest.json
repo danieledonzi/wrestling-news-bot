@@ -6,7 +6,7 @@
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 0
+      "warnings": 1
     },
     "bob": {
       "errors": 0,
@@ -15,16 +15,16 @@
       "translation_pending": 0
     },
     "massy": {
-      "already_published_hard_skipped": 8,
+      "already_published_hard_skipped": 10,
       "already_worked": 1,
-      "hard_skipped": 10,
-      "to_menzo": 23,
+      "hard_skipped": 12,
+      "to_menzo": 21,
       "to_simone": 1
     },
     "menzo": {
       "pending": 0,
-      "skipped": 17,
-      "to_bob_or_v92": 6
+      "skipped": 18,
+      "to_bob_or_v92": 3
     },
     "publisher": {
       "already_published": 0,
@@ -43,56 +43,6 @@
   "article_dossiers": [
     {
       "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_iyo-sky-advances-in-queen-of-the-ring-after-wild-fatal-four-way-on-june-1-wwe-raw.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_iyo-sky-advances-in-queen-of-the-ring-after-wild-fatal-four-way-on-june-1-wwe-raw.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "strategic:queen of the ring,strategic:raw,recency:fresh_12h",
-        "score": 66
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw",
-      "title_it": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
-    },
-    {
-      "alfred": {
         "decision": "approved",
         "editorial_changes": [],
         "issues": [],
@@ -101,203 +51,33 @@
         "warnings": []
       },
       "bob": {
-        "clean_element_count": 18,
+        "clean_element_count": 6,
         "diagnostic_stage": "ready_for_alfred",
         "element_counts": {
-          "embed": 7,
-          "heading": 0,
-          "image": 0,
-          "quote": 3,
-          "table": 0,
-          "text": 8
-        },
-        "error": null,
-        "present": true,
-        "raw_element_count": 14,
-        "removed_before_gemini": 15,
-        "status": "ready_for_alfred",
-        "translation_model": "gemini-3.1-flash-lite",
-        "translation_used": true
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "https://x.com/Ringsidenews_\n\n<p>Oba Femi non si è limitato a superare il turno nel torneo King of the Ring durante la puntata di WWE RAW del 1° giugno: ha voluto assicurarsi che Brock Lesnar ricevesse forte e chiaro il suo messaggio.</p>\n<p>Dopo aver sconfitto Penta, Carmelo Hayes e Solo Sikoa in un caotico Fatal Four-Way valevole per il primo round, Oba ha preso il microfono e ha rivolto le sue attenzioni direttamente a Lesnar.</p>\n<p>Oba ha citato Brock, chiedendogli se fosse in grado di incassare un pestaggio, per poi ricordare a tutti quanto accaduto a Clash in Italy. Ha dichiarato di aver subito un assalto, di essere sopravvissuto a sette F5 e di essere rimasto comunque in piedi.</p>\n<blockquote>“Cosa fai dopo aver ricevuto un pestaggio? Cosa fai dopo aver subito un assalto? Cosa fai dopo aver incassato sette F5?”</blockquote>\n<p>Oba ha poi messo in chiaro che il colpo migliore di Brock non è stato sufficiente per abbatterlo.</p>\n<blockquote>“Sono ancora in piedi e sto vincendo; ho incassato il tuo colpo migliore e sono ancora qui.”</blockquote>\n<p>Il messaggio era semplice. Oba prosegue il suo cammino nel King of the Ring, ma non ha ancora chiuso i conti con Lesnar. Ha affermato di voler vincere il torneo, ricordando poi a Brock che ora i conti tra loro sono in parità.</p>\n<blockquote>“Vincerò il King of the Ring. Siamo uno a uno e ci rivedremo in futuro.”</blockquote>\n<p>La vittoria ha già fatto apparire Oba come un mostro, ma il promo post-match gli ha conferito ulteriore slancio. È sopravvissuto al caos del Fatal Four-Way, ha avanzato nel torneo e ha avuto ancora energia per sfidare Brock Lesnar.</p>\n<p>Ora davanti a Oba ci sono due obiettivi: vincere il King of the Ring ed eventualmente regolare i conti con Brock.</p>\n\nhttps://www.youtube.com/channel/UC1QdOqGPTZcRUnb5DrMQ2ng\n\n\nhttps://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.ringsidenews.com%2Foba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring%2F\n\n\nhttps://x.com/intent/tweet\n\n\nhttps://x.com/stevecarrier_\n\n\nhttps://www.facebook.com/profile.php?id=100012045279510\n\n\nhttps://www.instagram.com/stevecarrier_\n\n<p>Steve Carrier è il fondatore di Ringside News e si occupa di pro wrestling dal 1997. I suoi articoli sono stati pubblicati su TMZ, Forbes, Bleacher Report e altre testate.</p>",
-        "bob_body_html_preview": "https://x.com/Ringsidenews_\n\n<p>Oba Femi non si è limitato a superare il turno nel torneo King of the Ring durante la puntata di WWE RAW del 1° giugno: ha voluto assicurarsi che Brock Lesnar ricevesse forte e chiaro il suo messaggio.</p>\n<p>Dopo aver sconfitto Penta, Carmelo Hayes e Solo Sikoa in un caotico Fatal Four-Way valevole per il primo round, Oba ha preso il microfono e ha rivolto le sue attenzioni direttamente a Lesnar.</p>\n<p>Oba ha citato Brock, chiedendogli se fosse in grado di incassare un pestaggio, per poi ricordare a tutti quanto accaduto a Clash in Italy. Ha dichiarato di aver subito un assalto, di essere sopravvissuto a sette F5 e di essere rimasto comunque in piedi.</p>\n<blockquote>“Cosa fai dopo aver ricevuto un pestaggio? Cosa fai dopo aver subito un assalto? Cosa fai dopo aver incassato sette F5?”</blockquote>\n<p>Oba ha poi messo in chiaro che il colpo migliore di Brock non è stato sufficiente per abbatterlo.</p>\n<blockquote>“Sono ancora in piedi e sto vincendo; ho incassato il tuo colpo migliore e sono ancora qui.”</blockquote>\n<p>Il messaggio era semplice. Oba prosegue il suo cammino nel King of the Ring, ma non ha ancora chiuso i conti con Lesnar. Ha affermato di voler vincere il torneo, ricordando poi a Brock che ora i conti tra loro sono in parità.</p>\n<blockquote>“Vincerò il King of the Ring. Siamo uno a uno e ci rivedremo in futuro.”</blockquote>\n<p>La vittoria ha già fatto apparire Oba come un mostro, ma il promo post-match gli ha conferito ulteriore slancio. È sopravvissuto al caos del Fatal Four-Way, ha avanzato nel torneo e ha avuto ancora energia per sfidare Brock Lesnar.</p>\n<p>Ora davanti a Oba ci sono due obiettivi: vincere il King of the Ring ed eventualmente regolare i conti con Brock.</p>\n\nhttps://www.youtube.com/channel/UC1QdOqGPTZcRUnb5DrMQ2ng\n\n\nhttps://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.ringsidenews.com%2Foba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring%2F\n\n\nhttps://x.com/intent/tweet\n\n\nhttps://x.com/stevecarrier_\n\n\nhttps://www.facebook.com/profile.php?id=100012045279510\n\n\nhttps://www.instagram.com/stevecarrier_\n\n<p>Steve Carrier è il fondatore di Ringside News e si occupa di pro wrestling dal 1997. I suoi articoli sono stati pubblicati su TMZ, Forbes, Bleacher Report e altre testate.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_oba-femi-sfida-brock-lesnar-dopo-il-passaggio-del-turno-nel-king-of-the-ring.html",
-        "published_html_preview": "https://x.com/Ringsidenews_\n\n<p>Oba Femi non si è limitato a superare il turno nel torneo King of the Ring durante la puntata di WWE RAW del 1° giugno: ha voluto assicurarsi che Brock Lesnar ricevesse forte e chiaro il suo messaggio.</p>\n<p>Dopo aver sconfitto Penta, Carmelo Hayes e Solo Sikoa in un caotico Fatal Four-Way valevole per il primo round, Oba ha preso il microfono e ha rivolto le sue attenzioni direttamente a Lesnar.</p>\n<p>Oba ha citato Brock, chiedendogli se fosse in grado di incassare un pestaggio, per poi ricordare a tutti quanto accaduto a Clash in Italy. Ha dichiarato di aver subito un assalto, di essere sopravvissuto a sette F5 e di essere rimasto comunque in piedi.</p>\n<blockquote>“Cosa fai dopo aver ricevuto un pestaggio? Cosa fai dopo aver subito un assalto? Cosa fai dopo aver incassato sette F5?”</blockquote>\n<p>Oba ha poi messo in chiaro che il colpo migliore di Brock non è stato sufficiente per abbatterlo.</p>\n<blockquote>“Sono ancora in piedi e sto vincendo; ho incassato il tuo colpo migliore e sono ancora qui.”</blockquote>\n<p>Il messaggio era semplice. Oba prosegue il suo cammino nel King of the Ring, ma non ha ancora chiuso i conti con Lesnar. Ha affermato di voler vincere il torneo, ricordando poi a Brock che ora i conti tra loro sono in parità.</p>\n<blockquote>“Vincerò il King of the Ring. Siamo uno a uno e ci rivedremo in futuro.”</blockquote>\n<p>La vittoria ha già fatto apparire Oba come un mostro, ma il promo post-match gli ha conferito ulteriore slancio. È sopravvissuto al caos del Fatal Four-Way, ha avanzato nel torneo e ha avuto ancora energia per sfidare Brock Lesnar.</p>\n<p>Ora davanti a Oba ci sono due obiettivi: vincere il King of the Ring ed eventualmente regolare i conti con Brock.</p>\n\nhttps://www.youtube.com/channel/UC1QdOqGPTZcRUnb5DrMQ2ng\n\nhttps://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.ringsidenews.com%2Foba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring%2F\n\nhttps://x.com/intent/tweet\n\nhttps://x.com/stevecarrier_\n\nhttps://www.facebook.com/profile.php?id=100012045279510\n\nhttps://www.instagram.com/stevecarrier_\n\n<p>Steve Carrier è il fondatore di Ringside News e si occupa di pro wrestling dal 1997. I suoi articoli sono stati pubblicati su TMZ, Forbes, Bleacher Report e altre testate.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_oba-femi-sfida-brock-lesnar-dopo-il-passaggio-del-turno-nel-king-of-the-ring.html",
-        "publisher_review_html_preview": "https://x.com/Ringsidenews_\n\n<p>Oba Femi non si è limitato a superare il turno nel torneo King of the Ring durante la puntata di WWE RAW del 1° giugno: ha voluto assicurarsi che Brock Lesnar ricevesse forte e chiaro il suo messaggio.</p>\n<p>Dopo aver sconfitto Penta, Carmelo Hayes e Solo Sikoa in un caotico Fatal Four-Way valevole per il primo round, Oba ha preso il microfono e ha rivolto le sue attenzioni direttamente a Lesnar.</p>\n<p>Oba ha citato Brock, chiedendogli se fosse in grado di incassare un pestaggio, per poi ricordare a tutti quanto accaduto a Clash in Italy. Ha dichiarato di aver subito un assalto, di essere sopravvissuto a sette F5 e di essere rimasto comunque in piedi.</p>\n<blockquote>“Cosa fai dopo aver ricevuto un pestaggio? Cosa fai dopo aver subito un assalto? Cosa fai dopo aver incassato sette F5?”</blockquote>\n<p>Oba ha poi messo in chiaro che il colpo migliore di Brock non è stato sufficiente per abbatterlo.</p>\n<blockquote>“Sono ancora in piedi e sto vincendo; ho incassato il tuo colpo migliore e sono ancora qui.”</blockquote>\n<p>Il messaggio era semplice. Oba prosegue il suo cammino nel King of the Ring, ma non ha ancora chiuso i conti con Lesnar. Ha affermato di voler vincere il torneo, ricordando poi a Brock che ora i conti tra loro sono in parità.</p>\n<blockquote>“Vincerò il King of the Ring. Siamo uno a uno e ci rivedremo in futuro.”</blockquote>\n<p>La vittoria ha già fatto apparire Oba come un mostro, ma il promo post-match gli ha conferito ulteriore slancio. È sopravvissuto al caos del Fatal Four-Way, ha avanzato nel torneo e ha avuto ancora energia per sfidare Brock Lesnar.</p>\n<p>Ora davanti a Oba ci sono due obiettivi: vincere il King of the Ring ed eventualmente regolare i conti con Brock.</p>\n\nhttps://www.youtube.com/channel/UC1QdOqGPTZcRUnb5DrMQ2ng\n\nhttps://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.ringsidenews.com%2Foba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring%2F\n\nhttps://x.com/intent/tweet\n\nhttps://x.com/stevecarrier_\n\nhttps://www.facebook.com/profile.php?id=100012045279510\n\nhttps://www.instagram.com/stevecarrier_\n\n<p>Steve Carrier è il fondatore di Ringside News e si occupa di pro wrestling dal 1997. I suoi articoli sono stati pubblicati su TMZ, Forbes, Bleacher Report e altre testate.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/\nTitolo feed: Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring\nTitolo pagina: Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring\nDescrizione: Oba Femi didn’t just advance in the King of the Ring tournament on June 1 WWE RAW — he made sure Brock Lesnar heard him loud and clear afterward. After\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Oba Femi didn’t just advance in the King of the Ring tournament on June 1 WWE RAW — he made sure Brock Lesnar heard him loud and clear afterward.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"After defeating Penta, Carmelo Hayes, and Solo Sikoa in a wild Fatal Four-Way first-round match, Oba grabbed a microphone and turned his attention straight to Lesnar.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Oba brought up Brock asking him if he could take an ass-whooping, then reminded everyone what happened at Clash in Italy. He said he took a beatdown, survived seven F5s, and was still standing.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“What do you do after receiving an ass whooping? What do you do after receiving a beat down? What do you do after taking seven F5s?”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Oba then made it clear that Brock’s best shot wasn’t enough to keep him down.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“I am standing and winning, and I took your best shot and I am still here.”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"The message was simple. Oba is moving forward in King of the Ring, but he isn’t finished with Lesnar either. He said he plans to win the tournament, then reminded Brock that things are now tied between them.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"quote\",\n    \"text\": \"“I am going to win King of the Ring. It is one and one, and I will see him down the line.”\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"text\",\n    \"text\": \"Oba’s win already made him look like a monster, but the post-match promo gave him even more momentum. He survived chaos in the Fatal Four-Way, advanced in the tournament, and still had enough left to call out Brock Lesnar.\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"Now Oba has two things in front of him: winning King of the Ring and eventually settling the score with Brock.\"\n  },\n  {\n    \"id\": \"b18\",\n    \"type\": \"text\",\n    \"text\": \"Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.\"\n  }\n]\n"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "strategic:king of the ring,strategic:raw,entity:brock lesnar,entity:oba femi,current:major_storyline,recency:fresh_12h",
-        "score": 94
-      },
-      "publisher": {
-        "categories": [
-          4
-        ],
-        "error": null,
-        "featured_media": 5811,
-        "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/wwe/oba-femi-sfida-brock-lesnar-dopo-il-passaggio-del-turno-nel-king-of-the-ring/",
-        "wp_post_id": 5812
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring",
-      "title_it": "Oba Femi sfida Brock Lesnar dopo il passaggio del turno nel King of the Ring"
-    },
-    {
-      "alfred": {
-        "decision": "approved",
-        "editorial_changes": [],
-        "issues": [],
-        "present": true,
-        "quality_score": 100,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": 14,
-        "diagnostic_stage": "ready_for_alfred",
-        "element_counts": {
-          "embed": 7,
+          "embed": 0,
           "heading": 0,
           "image": 0,
           "quote": 0,
           "table": 0,
-          "text": 7
-        },
-        "error": null,
-        "present": true,
-        "raw_element_count": 10,
-        "removed_before_gemini": 15,
-        "status": "ready_for_alfred",
-        "translation_model": "gemini-3.1-flash-lite",
-        "translation_used": true
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "https://x.com/Ringsidenews_\n\n<p>Paul Heyman si è ritrovato troppo vicino all&#x27;azione durante WWE RAW, finendo accidentalmente nel mirino di Bron Breakker.</p>\n<p>Durante la puntata di RAW del 1° giugno, Seth Rollins ha affrontato Bron Breakker nel main event. La situazione si è fatta caotica nelle fasi finali dell&#x27;incontro, dopo l&#x27;interferenza di Austin Theory. Theory ha colpito Rollins con la cintura mentre Heyman distraeva l&#x27;arbitro, ma il caos non è finito lì.</p>\n<p>Bron ha tentato di abbattere Rollins con una devastante Spear a bordo ring. Il problema è che Rollins ha intuito la mossa, tirando Heyman dritto sulla traiettoria dell&#x27;impatto. Bron ha travolto Heyman con la Spear, e entrambi hanno sfondato la barricata di protezione.</p>\n<p>Quel momento ha cambiato rapidamente l&#x27;inerzia del match. Bron è riuscito a risalire sul ring e a eseguire un&#x27;altra Spear su Rollins, ma quest&#x27;ultimo ha parato il colpo con la cintura premuta contro il petto. Ad avere la peggio è stato Bron, e Rollins ha chiuso i conti con la Black Out, ottenendo la vittoria.</p>\n<p>Il match era già fuori controllo, ma vedere Heyman distrutto attraverso la barricata è stata l&#x27;immagine simbolo della serata. Poco prima, Heyman aveva provato ad aiutare Bron posizionandogli un piede sulle corde, ma pochi secondi dopo ha finito per subire una delle armi più pericolose di Breakker.</p>\n<p>Seth Rollins ha portato a casa la vittoria, ma Paul Heyman è uscito dal ring con la peggior serata tra tutti i protagonisti.</p>\n\nhttps://www.youtube.com/channel/UC1QdOqGPTZcRUnb5DrMQ2ng\n\n\nhttps://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.ringsidenews.com%2Fpaul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw%2F\n\n\nhttps://x.com/intent/tweet\n\n\nhttps://x.com/stevecarrier_\n\n\nhttps://www.facebook.com/profile.php?id=100012045279510\n\n\nhttps://www.instagram.com/stevecarrier_\n\n<p>Steve Carrier è il fondatore di Ringside News e si occupa di pro wrestling dal 1997. I suoi articoli sono stati pubblicati su TMZ, Forbes, Bleacher Report e altre testate.</p>",
-        "bob_body_html_preview": "https://x.com/Ringsidenews_\n\n<p>Paul Heyman si è ritrovato troppo vicino all&#x27;azione durante WWE RAW, finendo accidentalmente nel mirino di Bron Breakker.</p>\n<p>Durante la puntata di RAW del 1° giugno, Seth Rollins ha affrontato Bron Breakker nel main event. La situazione si è fatta caotica nelle fasi finali dell&#x27;incontro, dopo l&#x27;interferenza di Austin Theory. Theory ha colpito Rollins con la cintura mentre Heyman distraeva l&#x27;arbitro, ma il caos non è finito lì.</p>\n<p>Bron ha tentato di abbattere Rollins con una devastante Spear a bordo ring. Il problema è che Rollins ha intuito la mossa, tirando Heyman dritto sulla traiettoria dell&#x27;impatto. Bron ha travolto Heyman con la Spear, e entrambi hanno sfondato la barricata di protezione.</p>\n<p>Quel momento ha cambiato rapidamente l&#x27;inerzia del match. Bron è riuscito a risalire sul ring e a eseguire un&#x27;altra Spear su Rollins, ma quest&#x27;ultimo ha parato il colpo con la cintura premuta contro il petto. Ad avere la peggio è stato Bron, e Rollins ha chiuso i conti con la Black Out, ottenendo la vittoria.</p>\n<p>Il match era già fuori controllo, ma vedere Heyman distrutto attraverso la barricata è stata l&#x27;immagine simbolo della serata. Poco prima, Heyman aveva provato ad aiutare Bron posizionandogli un piede sulle corde, ma pochi secondi dopo ha finito per subire una delle armi più pericolose di Breakker.</p>\n<p>Seth Rollins ha portato a casa la vittoria, ma Paul Heyman è uscito dal ring con la peggior serata tra tutti i protagonisti.</p>\n\nhttps://www.youtube.com/channel/UC1QdOqGPTZcRUnb5DrMQ2ng\n\n\nhttps://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.ringsidenews.com%2Fpaul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw%2F\n\n\nhttps://x.com/intent/tweet\n\n\nhttps://x.com/stevecarrier_\n\n\nhttps://www.facebook.com/profile.php?id=100012045279510\n\n\nhttps://www.instagram.com/stevecarrier_\n\n<p>Steve Carrier è il fondatore di Ringside News e si occupa di pro wrestling dal 1997. I suoi articoli sono stati pubblicati su TMZ, Forbes, Bleacher Report e altre testate.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_paul-heyman-travolto-da-una-spear-contro-la-barricata-a-wwe-raw.html",
-        "published_html_preview": "https://x.com/Ringsidenews_\n\n<p>Paul Heyman si è ritrovato troppo vicino all&#x27;azione durante WWE RAW, finendo accidentalmente nel mirino di Bron Breakker.</p>\n<p>Durante la puntata di RAW del 1° giugno, Seth Rollins ha affrontato Bron Breakker nel main event. La situazione si è fatta caotica nelle fasi finali dell&#x27;incontro, dopo l&#x27;interferenza di Austin Theory. Theory ha colpito Rollins con la cintura mentre Heyman distraeva l&#x27;arbitro, ma il caos non è finito lì.</p>\n<p>Bron ha tentato di abbattere Rollins con una devastante Spear a bordo ring. Il problema è che Rollins ha intuito la mossa, tirando Heyman dritto sulla traiettoria dell&#x27;impatto. Bron ha travolto Heyman con la Spear, e entrambi hanno sfondato la barricata di protezione.</p>\n<p>Quel momento ha cambiato rapidamente l&#x27;inerzia del match. Bron è riuscito a risalire sul ring e a eseguire un&#x27;altra Spear su Rollins, ma quest&#x27;ultimo ha parato il colpo con la cintura premuta contro il petto. Ad avere la peggio è stato Bron, e Rollins ha chiuso i conti con la Black Out, ottenendo la vittoria.</p>\n<p>Il match era già fuori controllo, ma vedere Heyman distrutto attraverso la barricata è stata l&#x27;immagine simbolo della serata. Poco prima, Heyman aveva provato ad aiutare Bron posizionandogli un piede sulle corde, ma pochi secondi dopo ha finito per subire una delle armi più pericolose di Breakker.</p>\n<p>Seth Rollins ha portato a casa la vittoria, ma Paul Heyman è uscito dal ring con la peggior serata tra tutti i protagonisti.</p>\n\nhttps://www.youtube.com/channel/UC1QdOqGPTZcRUnb5DrMQ2ng\n\nhttps://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.ringsidenews.com%2Fpaul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw%2F\n\nhttps://x.com/intent/tweet\n\nhttps://x.com/stevecarrier_\n\nhttps://www.facebook.com/profile.php?id=100012045279510\n\nhttps://www.instagram.com/stevecarrier_\n\n<p>Steve Carrier è il fondatore di Ringside News e si occupa di pro wrestling dal 1997. I suoi articoli sono stati pubblicati su TMZ, Forbes, Bleacher Report e altre testate.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_paul-heyman-travolto-da-una-spear-contro-la-barricata-a-wwe-raw.html",
-        "publisher_review_html_preview": "https://x.com/Ringsidenews_\n\n<p>Paul Heyman si è ritrovato troppo vicino all&#x27;azione durante WWE RAW, finendo accidentalmente nel mirino di Bron Breakker.</p>\n<p>Durante la puntata di RAW del 1° giugno, Seth Rollins ha affrontato Bron Breakker nel main event. La situazione si è fatta caotica nelle fasi finali dell&#x27;incontro, dopo l&#x27;interferenza di Austin Theory. Theory ha colpito Rollins con la cintura mentre Heyman distraeva l&#x27;arbitro, ma il caos non è finito lì.</p>\n<p>Bron ha tentato di abbattere Rollins con una devastante Spear a bordo ring. Il problema è che Rollins ha intuito la mossa, tirando Heyman dritto sulla traiettoria dell&#x27;impatto. Bron ha travolto Heyman con la Spear, e entrambi hanno sfondato la barricata di protezione.</p>\n<p>Quel momento ha cambiato rapidamente l&#x27;inerzia del match. Bron è riuscito a risalire sul ring e a eseguire un&#x27;altra Spear su Rollins, ma quest&#x27;ultimo ha parato il colpo con la cintura premuta contro il petto. Ad avere la peggio è stato Bron, e Rollins ha chiuso i conti con la Black Out, ottenendo la vittoria.</p>\n<p>Il match era già fuori controllo, ma vedere Heyman distrutto attraverso la barricata è stata l&#x27;immagine simbolo della serata. Poco prima, Heyman aveva provato ad aiutare Bron posizionandogli un piede sulle corde, ma pochi secondi dopo ha finito per subire una delle armi più pericolose di Breakker.</p>\n<p>Seth Rollins ha portato a casa la vittoria, ma Paul Heyman è uscito dal ring con la peggior serata tra tutti i protagonisti.</p>\n\nhttps://www.youtube.com/channel/UC1QdOqGPTZcRUnb5DrMQ2ng\n\nhttps://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.ringsidenews.com%2Fpaul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw%2F\n\nhttps://x.com/intent/tweet\n\nhttps://x.com/stevecarrier_\n\nhttps://www.facebook.com/profile.php?id=100012045279510\n\nhttps://www.instagram.com/stevecarrier_\n\n<p>Steve Carrier è il fondatore di Ringside News e si occupa di pro wrestling dal 1997. I suoi articoli sono stati pubblicati su TMZ, Forbes, Bleacher Report e altre testate.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/\nTitolo feed: Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW\nTitolo pagina: Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW\nDescrizione: Paul Heyman got way too close to the action on WWE RAW, and Bron Breakker made him pay for it by accident. During the June 1 episode of RAW, Seth Rollins\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Paul Heyman got way too close to the action on WWE RAW, and Bron Breakker made him pay for it by accident.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"During the June 1 episode of RAW , Seth Rollins faced Bron Breakker in the main event. Things got wild late in the match after Austin Theory came down and got involved. Theory hit Rollins with the title belt while Heyman distracted the referee, but the chaos didn’t stop there.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Bron eventually tried to take Rollins out with a massive spear near ringside. The problem was that Rollins saw it coming and pulled Heyman directly into the line of fire. Bron crashed into Heyman with the spear, and both men went through the ringside barricade.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"That moment changed the match fast. Bron managed to get back into the ring and hit another spear on Rollins, but Rollins had the title belt pressed against his chest. Bron took the worst of it, and Rollins followed up with Black Out to score the win.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"The match itself was already out of control, but Heyman getting destroyed through the barricade was the big visual. He tried to help Bron by putting his foot on the ropes earlier in the match, but seconds later, he ended up eating one of Breakker’s biggest weapons.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Seth Rollins walked out with the victory, but Paul Heyman may have walked out with the worst night of anyone involved.\"\n  },\n  {\n    \"id\": \"b14\",\n    \"type\": \"text\",\n    \"text\": \"Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.\"\n  }\n]\n"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "strategic:raw,entity:paul heyman,entity:seth rollins,recency:fresh_12h",
-        "score": 78
-      },
-      "publisher": {
-        "categories": [
-          4
-        ],
-        "error": null,
-        "featured_media": 5813,
-        "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/wwe/paul-heyman-travolto-da-una-spear-contro-la-barricata-a-wwe-raw/",
-        "wp_post_id": 5814
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw",
-      "title_it": "Paul Heyman travolto da una Spear contro la barricata a WWE RAW"
-    },
-    {
-      "alfred": {
-        "decision": "approved",
-        "editorial_changes": [],
-        "issues": [],
-        "present": true,
-        "quality_score": 100,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": 9,
-        "diagnostic_stage": "ready_for_alfred",
-        "element_counts": {
-          "embed": 5,
-          "heading": 0,
-          "image": 0,
-          "quote": 0,
-          "table": 0,
-          "text": 4
+          "text": 6
         },
         "error": null,
         "present": true,
         "raw_element_count": 7,
-        "removed_before_gemini": 15,
+        "removed_before_gemini": 14,
         "status": "ready_for_alfred",
         "translation_model": "gemini-3.1-flash-lite",
         "translation_used": true
       },
       "category_hint": "WWE",
       "html_audit": {
-        "alfred_final_html_preview": "https://x.com/Ringsidenews_\n\n<p>La WWE ha ufficializzato ulteriori incontri dei tornei King e Queen of the Ring per la prossima puntata di Monday Night RAW.</p>\n<p>Nel corso dell&#x27;edizione di RAW del 1° giugno 2026, è stato annunciato che Seth Rollins, Je’Von Evans, Ricky Saints e Talla Tonga si scontreranno in un match del torneo King of the Ring durante la puntata di RAW dell&#x27;8 giugno a Parigi, in Francia. Anche il torneo Queen of the Ring proseguirà la stessa sera, con Becky Lynch, Liv Morgan, Alexa Bliss e Chelsea Green che si affronteranno in un prestigioso fatal four-way match.</p>\n<p>L&#x27;annuncio è arrivato nella stessa serata in cui Oba Femi ha superato il turno nel torneo King of the Ring, mentre IYO SKY ha avanzato nel torneo Queen of the Ring. Ciò significa che entrambi i tabelloni stanno iniziando a prendere forma, mentre la WWE prosegue la marcia verso le finali dei tornei.</p>\n\nhttps://www.youtube.com/channel/UC1QdOqGPTZcRUnb5DrMQ2ng\n\n\nhttps://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.ringsidenews.com%2Fwwe-confirms-king-queen-ring-tournament-matches-june-8-raw%2F\n\n\nhttps://x.com/intent/tweet\n\n\nhttps://x.com/felixupton_\n\n<p>Con l&#x27;approdo di RAW a Parigi, la WWE sta arricchendo la card con incontri di grande importanza per i tornei. Seth Rollins, Je’Von Evans, Ricky Saints e Talla Tonga cercheranno di fare un passo avanti verso il titolo di King of the Ring, mentre Becky Lynch, Liv Morgan, Alexa Bliss e Chelsea Green lotteranno per conquistare la corona di Queen of the Ring.</p>",
-        "bob_body_html_preview": "https://x.com/Ringsidenews_\n\n<p>La WWE ha ufficializzato ulteriori incontri dei tornei King e Queen of the Ring per la prossima puntata di Monday Night RAW.</p>\n<p>Nel corso dell&#x27;edizione di RAW del 1° giugno 2026, è stato annunciato che Seth Rollins, Je’Von Evans, Ricky Saints e Talla Tonga si scontreranno in un match del torneo King of the Ring durante la puntata di RAW dell&#x27;8 giugno a Parigi, in Francia. Anche il torneo Queen of the Ring proseguirà la stessa sera, con Becky Lynch, Liv Morgan, Alexa Bliss e Chelsea Green che si affronteranno in un prestigioso fatal four-way match.</p>\n<p>L&#x27;annuncio è arrivato nella stessa serata in cui Oba Femi ha superato il turno nel torneo King of the Ring, mentre IYO SKY ha avanzato nel torneo Queen of the Ring. Ciò significa che entrambi i tabelloni stanno iniziando a prendere forma, mentre la WWE prosegue la marcia verso le finali dei tornei.</p>\n\nhttps://www.youtube.com/channel/UC1QdOqGPTZcRUnb5DrMQ2ng\n\n\nhttps://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.ringsidenews.com%2Fwwe-confirms-king-queen-ring-tournament-matches-june-8-raw%2F\n\n\nhttps://x.com/intent/tweet\n\n\nhttps://x.com/felixupton_\n\n<p>Con l&#x27;approdo di RAW a Parigi, la WWE sta arricchendo la card con incontri di grande importanza per i tornei. Seth Rollins, Je’Von Evans, Ricky Saints e Talla Tonga cercheranno di fare un passo avanti verso il titolo di King of the Ring, mentre Becky Lynch, Liv Morgan, Alexa Bliss e Chelsea Green lotteranno per conquistare la corona di Queen of the Ring.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_wwe-annunciati-i-match-dei-tornei-king-e-queen-of-the-ring-per-raw-dell-8-giugno.html",
-        "published_html_preview": "https://x.com/Ringsidenews_\n\n<p>La WWE ha ufficializzato ulteriori incontri dei tornei King e Queen of the Ring per la prossima puntata di Monday Night RAW.</p>\n<p>Nel corso dell&#x27;edizione di RAW del 1° giugno 2026, è stato annunciato che Seth Rollins, Je’Von Evans, Ricky Saints e Talla Tonga si scontreranno in un match del torneo King of the Ring durante la puntata di RAW dell&#x27;8 giugno a Parigi, in Francia. Anche il torneo Queen of the Ring proseguirà la stessa sera, con Becky Lynch, Liv Morgan, Alexa Bliss e Chelsea Green che si affronteranno in un prestigioso fatal four-way match.</p>\n<p>L&#x27;annuncio è arrivato nella stessa serata in cui Oba Femi ha superato il turno nel torneo King of the Ring, mentre IYO SKY ha avanzato nel torneo Queen of the Ring. Ciò significa che entrambi i tabelloni stanno iniziando a prendere forma, mentre la WWE prosegue la marcia verso le finali dei tornei.</p>\n\nhttps://www.youtube.com/channel/UC1QdOqGPTZcRUnb5DrMQ2ng\n\nhttps://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.ringsidenews.com%2Fwwe-confirms-king-queen-ring-tournament-matches-june-8-raw%2F\n\nhttps://x.com/intent/tweet\n\nhttps://x.com/felixupton_\n\n<p>Con l&#x27;approdo di RAW a Parigi, la WWE sta arricchendo la card con incontri di grande importanza per i tornei. Seth Rollins, Je’Von Evans, Ricky Saints e Talla Tonga cercheranno di fare un passo avanti verso il titolo di King of the Ring, mentre Becky Lynch, Liv Morgan, Alexa Bliss e Chelsea Green lotteranno per conquistare la corona di Queen of the Ring.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/wwe-confirms-king-queen-ring-tournament-matches-june-8-raw/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_wwe-annunciati-i-match-dei-tornei-king-e-queen-of-the-ring-per-raw-dell-8-giugno.html",
-        "publisher_review_html_preview": "https://x.com/Ringsidenews_\n\n<p>La WWE ha ufficializzato ulteriori incontri dei tornei King e Queen of the Ring per la prossima puntata di Monday Night RAW.</p>\n<p>Nel corso dell&#x27;edizione di RAW del 1° giugno 2026, è stato annunciato che Seth Rollins, Je’Von Evans, Ricky Saints e Talla Tonga si scontreranno in un match del torneo King of the Ring durante la puntata di RAW dell&#x27;8 giugno a Parigi, in Francia. Anche il torneo Queen of the Ring proseguirà la stessa sera, con Becky Lynch, Liv Morgan, Alexa Bliss e Chelsea Green che si affronteranno in un prestigioso fatal four-way match.</p>\n<p>L&#x27;annuncio è arrivato nella stessa serata in cui Oba Femi ha superato il turno nel torneo King of the Ring, mentre IYO SKY ha avanzato nel torneo Queen of the Ring. Ciò significa che entrambi i tabelloni stanno iniziando a prendere forma, mentre la WWE prosegue la marcia verso le finali dei tornei.</p>\n\nhttps://www.youtube.com/channel/UC1QdOqGPTZcRUnb5DrMQ2ng\n\nhttps://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.ringsidenews.com%2Fwwe-confirms-king-queen-ring-tournament-matches-june-8-raw%2F\n\nhttps://x.com/intent/tweet\n\nhttps://x.com/felixupton_\n\n<p>Con l&#x27;approdo di RAW a Parigi, la WWE sta arricchendo la card con incontri di grande importanza per i tornei. Seth Rollins, Je’Von Evans, Ricky Saints e Talla Tonga cercheranno di fare un passo avanti verso il titolo di King of the Ring, mentre Becky Lynch, Liv Morgan, Alexa Bliss e Chelsea Green lotteranno per conquistare la corona di Queen of the Ring.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/wwe-confirms-king-queen-ring-tournament-matches-june-8-raw/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/wwe-confirms-king-queen-ring-tournament-matches-june-8-raw/\nTitolo feed: WWE Confirms King and Queen of the Ring Tournament Matches For June 8 RAW\nTitolo pagina: WWE Confirms King and Queen of the Ring Tournament Matches For June 8 RAW\nDescrizione: WWE has officially confirmed more King and Queen of the Ring tournament action for next week’s episode of Monday Night RAW. During the June 1, 2026\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"WWE has officially confirmed more King and Queen of the Ring tournament action for next week’s episode of Monday Night RAW.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"During the June 1, 2026 edition of RAW , it was announced that Seth Rollins, Je’Von Evans, Ricky Saints, and Talla Tonga will collide in a King of the Ring tournament match on the June 8 episode of RAW in Paris, France. The Queen of the Ring tournament will also continue that night, as Becky Lynch, Liv Morgan, Alexa Bliss, and Chelsea Green face off in a stacked four-way match.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"The announcement came on the same night Oba Femi advanced in the King of the Ring tournament, while IYO SKY moved forward in the Queen of the Ring tournament. That means both brackets are starting to take shape as WWE builds toward the tournament finals.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"With RAW heading to Paris, WWE is loading up the card with major tournament stakes. Seth Rollins, Je’Von Evans, Ricky Saints, and Talla Tonga will all be looking to move one step closer to becoming King of the Ring, while Becky Lynch, Liv Morgan, Alexa Bliss, and Chelsea Green will fight for their own path to the Queen of the Ring crown.\"\n  }\n]\n"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "strategic:queen of the ring,strategic:king of the ring,strategic:raw,entity:seth rollins,recency:fresh_12h",
-        "score": 74
-      },
-      "publisher": {
-        "categories": [
-          4
-        ],
-        "error": null,
-        "featured_media": 5815,
-        "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-annunciati-i-match-dei-tornei-king-e-queen-of-the-ring-per-raw-dell8-giugno/",
-        "wp_post_id": 5816
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/wwe-confirms-king-queen-ring-tournament-matches-june-8-raw",
-      "title_it": "WWE: Annunciati i match dei tornei King e Queen of the Ring per Raw dell'8 giugno"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_iyo-sky-advances-in-wwe-qotr-match.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_iyo-sky-advances-in-wwe-qotr-match.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
+        "alfred_final_html_preview": "<p>Iyo Sky prosegue il suo cammino nel torneo Queen of the Ring.</p>\n<p>Durante l&#x27;episodio di WWE RAW del 1° giugno, Sky ha sconfitto Lash Legend, Roxanne Perez e Giulia in un Fatal Four-Way match valido per il primo turno. L&#x27;incontro è stato caotico fin dall&#x27;inizio, con Lash che ha sfruttato la sua potenza nelle fasi iniziali, mentre Iyo, Giulia e Roxanne cercavano di resistere il più a lungo possibile per tentare di rubare la vittoria.</p>\n<p>Lash è apparsa come una minaccia concreta per tutto l&#x27;incontro, scagliando le avversarie da una parte all&#x27;altra del ring e andando persino a segno con la Lash Extension su Roxanne e Giulia nelle battute finali. Per un momento, è sembrato che Lash potesse staccare il pass per il turno successivo.</p>\n<p>Così non è stato. Iyo ha interrotto lo schienamento di Lash con un double stomp, per poi salire sulla terza corda e colpire Giulia con un moonsault, ottenendo il conteggio di tre. Con questa vittoria, Iyo avanza ufficialmente nel torneo Queen of the Ring.</p>\n<p>Questo successo dà una grande spinta a Iyo per il prosieguo del torneo, specialmente considerando che nomi del calibro di Lash, Roxanne e Giulia sono stati eliminati tutti nello stesso match. Non è stata una vittoria netta o facile, ma Iyo ha trovato lo spiraglio di cui aveva bisogno e lo ha sfruttato al meglio.</p>\n<p>Ora Iyo Sky è a un passo dalla corona di Queen of the Ring e, se dovesse continuare a vincere, potrebbe mettersi sulla strada per un&#x27;opportunità titolata a SummerSlam.</p>",
+        "bob_body_html_preview": "<p>Iyo Sky prosegue il suo cammino nel torneo Queen of the Ring.</p>\n<p>Durante l&#x27;episodio di WWE RAW del 1° giugno, Sky ha sconfitto Lash Legend, Roxanne Perez e Giulia in un Fatal Four-Way match valido per il primo turno. L&#x27;incontro è stato caotico fin dall&#x27;inizio, con Lash che ha sfruttato la sua potenza nelle fasi iniziali, mentre Iyo, Giulia e Roxanne cercavano di resistere il più a lungo possibile per tentare di rubare la vittoria.</p>\n<p>Lash è apparsa come una minaccia concreta per tutto l&#x27;incontro, scagliando le avversarie da una parte all&#x27;altra del ring e andando persino a segno con la Lash Extension su Roxanne e Giulia nelle battute finali. Per un momento, è sembrato che Lash potesse staccare il pass per il turno successivo.</p>\n<p>Così non è stato. Iyo ha interrotto lo schienamento di Lash con un double stomp, per poi salire sulla terza corda e colpire Giulia con un moonsault, ottenendo il conteggio di tre. Con questa vittoria, Iyo avanza ufficialmente nel torneo Queen of the Ring.</p>\n<p>Questo successo dà una grande spinta a Iyo per il prosieguo del torneo, specialmente considerando che nomi del calibro di Lash, Roxanne e Giulia sono stati eliminati tutti nello stesso match. Non è stata una vittoria netta o facile, ma Iyo ha trovato lo spiraglio di cui aveva bisogno e lo ha sfruttato al meglio.</p>\n<p>Ora Iyo Sky è a un passo dalla corona di Queen of the Ring e, se dovesse continuare a vincere, potrebbe mettersi sulla strada per un&#x27;opportunità titolata a SummerSlam.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_iyo-sky-avanza-nel-torneo-queen-of-the-ring-dopo-un-caotico-fatal-four-way.html",
+        "published_html_preview": "<p>Iyo Sky prosegue il suo cammino nel torneo Queen of the Ring.</p>\n<p>Durante l&#x27;episodio di WWE RAW del 1° giugno, Sky ha sconfitto Lash Legend, Roxanne Perez e Giulia in un Fatal Four-Way match valido per il primo turno. L&#x27;incontro è stato caotico fin dall&#x27;inizio, con Lash che ha sfruttato la sua potenza nelle fasi iniziali, mentre Iyo, Giulia e Roxanne cercavano di resistere il più a lungo possibile per tentare di rubare la vittoria.</p>\n<p>Lash è apparsa come una minaccia concreta per tutto l&#x27;incontro, scagliando le avversarie da una parte all&#x27;altra del ring e andando persino a segno con la Lash Extension su Roxanne e Giulia nelle battute finali. Per un momento, è sembrato che Lash potesse staccare il pass per il turno successivo.</p>\n<p>Così non è stato. Iyo ha interrotto lo schienamento di Lash con un double stomp, per poi salire sulla terza corda e colpire Giulia con un moonsault, ottenendo il conteggio di tre. Con questa vittoria, Iyo avanza ufficialmente nel torneo Queen of the Ring.</p>\n<p>Questo successo dà una grande spinta a Iyo per il prosieguo del torneo, specialmente considerando che nomi del calibro di Lash, Roxanne e Giulia sono stati eliminati tutti nello stesso match. Non è stata una vittoria netta o facile, ma Iyo ha trovato lo spiraglio di cui aveva bisogno e lo ha sfruttato al meglio.</p>\n<p>Ora Iyo Sky è a un passo dalla corona di Queen of the Ring e, se dovesse continuare a vincere, potrebbe mettersi sulla strada per un&#x27;opportunità titolata a SummerSlam.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_iyo-sky-avanza-nel-torneo-queen-of-the-ring-dopo-un-caotico-fatal-four-way.html",
+        "publisher_review_html_preview": "<p>Iyo Sky prosegue il suo cammino nel torneo Queen of the Ring.</p>\n<p>Durante l&#x27;episodio di WWE RAW del 1° giugno, Sky ha sconfitto Lash Legend, Roxanne Perez e Giulia in un Fatal Four-Way match valido per il primo turno. L&#x27;incontro è stato caotico fin dall&#x27;inizio, con Lash che ha sfruttato la sua potenza nelle fasi iniziali, mentre Iyo, Giulia e Roxanne cercavano di resistere il più a lungo possibile per tentare di rubare la vittoria.</p>\n<p>Lash è apparsa come una minaccia concreta per tutto l&#x27;incontro, scagliando le avversarie da una parte all&#x27;altra del ring e andando persino a segno con la Lash Extension su Roxanne e Giulia nelle battute finali. Per un momento, è sembrato che Lash potesse staccare il pass per il turno successivo.</p>\n<p>Così non è stato. Iyo ha interrotto lo schienamento di Lash con un double stomp, per poi salire sulla terza corda e colpire Giulia con un moonsault, ottenendo il conteggio di tre. Con questa vittoria, Iyo avanza ufficialmente nel torneo Queen of the Ring.</p>\n<p>Questo successo dà una grande spinta a Iyo per il prosieguo del torneo, specialmente considerando che nomi del calibro di Lash, Roxanne e Giulia sono stati eliminati tutti nello stesso match. Non è stata una vittoria netta o facile, ma Iyo ha trovato lo spiraglio di cui aveva bisogno e lo ha sfruttato al meglio.</p>\n<p>Ora Iyo Sky è a un passo dalla corona di Queen of the Ring e, se dovesse continuare a vincere, potrebbe mettersi sulla strada per un&#x27;opportunità titolata a SummerSlam.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/\nTitolo feed: Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW\nTitolo pagina: Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW\nDescrizione: Iyo Sky is moving on in the Queen of the Ring tournament. During the June 1 episode of WWE RAW, Sky defeated Lash Legend, Roxanne Perez, and Giulia in a\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Iyo Sky is moving on in the Queen of the Ring tournament.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"During the June 1 episode of WWE RAW, Sky defeated Lash Legend, Roxanne Perez, and Giulia in a first-round Fatal Four-Way match. The match was chaotic from the start, with Lash using her power early while Iyo, Giulia, and Roxanne all tried to survive long enough to steal the win.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Lash looked like a major threat throughout the match, tossing bodies around and even hitting Lash Extension on both Roxanne and Giulia late in the bout. For a moment, it looked like Lash might punch her ticket forward.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"That didn’t happen. Iyo broke up Lash’s cover with a double stomp, then climbed to the top rope and hit a moonsault on Giulia to score the three-count. With that, Iyo officially advanced in the Queen of the Ring tournament.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"The win gives Iyo a big boost as the tournament continues, especially with names like Lash, Roxanne, and Giulia all being taken out in the same match. It was not clean or easy, but Iyo found the opening she needed and made it count.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Now Iyo Sky is one step closer to Queen of the Ring, and if she keeps winning, she could be on her way to a World Championship opportunity at SummerSlam.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
@@ -306,48 +86,123 @@
         "score": 66
       },
       "publisher": {
-        "categories": null,
+        "categories": [
+          4
+        ],
         "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
+        "featured_media": 5824,
+        "present": true,
+        "status": "published",
+        "wp_link": "https://news.openwrestlingtv.com/wwe/iyo-sky-avanza-nel-torneo-queen-of-the-ring-dopo-un-caotico-fatal-four-way/",
+        "wp_post_id": 5825
       },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match",
-      "title_it": "IYO SKY Advances In WWE QOTR Match"
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw",
+      "title_it": "Iyo Sky avanza nel torneo Queen of the Ring dopo un caotico Fatal Four-Way"
     },
     {
       "alfred": {
-        "decision": null,
+        "decision": "approved",
         "editorial_changes": [],
         "issues": [],
-        "present": false,
-        "quality_score": null,
+        "present": true,
+        "quality_score": 100,
         "warnings": []
       },
       "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
+        "clean_element_count": 5,
+        "diagnostic_stage": "ready_for_alfred",
+        "element_counts": {
+          "embed": 0,
+          "heading": 0,
+          "image": 0,
+          "quote": 0,
+          "table": 0,
+          "text": 5
+        },
         "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
+        "present": true,
+        "raw_element_count": 6,
+        "removed_before_gemini": 1,
+        "status": "ready_for_alfred",
+        "translation_model": "gemini-3.1-flash-lite",
+        "translation_used": true
       },
       "category_hint": "WWE",
       "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_wwe-clash-in-italy-2026-biggest-winners-and-losers.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_wwe-clash-in-italy-2026-biggest-winners-and-losers.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
+        "alfred_final_html_preview": "<p>IYO SKY è a un passo dalla finale del Queen of the Ring a WWE Night of Champions e da un match titolato a WWE SummerSlam, dopo aver vinto il primo incontro a quattro del torneo durante &quot;WWE Raw&quot;. A Torino, SKY ha schienato Giulia, superando la concorrenza di Lash Legend e Roxanne Perez per ottenere la vittoria.</p>\n<p>In avvio di match, la Legend ha ripulito il ring, ma SKY l&#x27;ha colpita con un dropkick dalla terza corda proprio mentre la Legend aveva Giulia sulle spalle. Giulia si è però rifatta poco dopo, mettendo al tappeto tutte e tre le avversarie con un dropkick, dopo che la Legend aveva tentato di dominare fisicamente SKY e la Perez. Giulia e la Perez hanno collaborato brevemente fuori dal ring per neutralizzare la Legend, ma è stata poi la Perez a rientrare per mettere in difficoltà SKY.</p>\n<p>SKY ha steso Giulia e la Perez con un altro missile dropkick, seguito da un doppio &quot;bullet train&quot; all&#x27;angolo. La Legend l&#x27;ha sorpresa alle spalle applicandole una breve sleeper hold, ma SKY è riuscita a contrattaccare. Giulia ha tentato la sua Arrivederci Knee, ma la Perez ha interrotto lo schienamento.</p>\n<p>Giulia, SKY e la Perez hanno lottato sulle corde prima che SKY potesse tentare un Over the Moonsault, ma la Legend è riuscita a caricarsi sia la Perez che Giulia per una doppia powerbomb. Ha eseguito la Lash Extensions su entrambe, ma SKY, rimasta sulle corde, ha interrotto lo schienamento con uno stomp sulla schiena della Legend. Subito dopo, ha connesso con il moonsault su Giulia aggiudicandosi l&#x27;incontro.</p>\n<p>SKY affronterà ora la vincitrice dello scontro tra Bayley, Raquel Rodriguez, Jacy Jayne e Kiana James. La WWE non ha ancora annunciato la data di questo match.</p>",
+        "bob_body_html_preview": "<p>IYO SKY è a un passo dalla finale del Queen of the Ring a WWE Night of Champions e da un match titolato a WWE SummerSlam, dopo aver vinto il primo incontro a quattro del torneo durante &quot;WWE Raw&quot;. A Torino, SKY ha schienato Giulia, superando la concorrenza di Lash Legend e Roxanne Perez per ottenere la vittoria.</p>\n<p>In avvio di match, la Legend ha ripulito il ring, ma SKY l&#x27;ha colpita con un dropkick dalla terza corda proprio mentre la Legend aveva Giulia sulle spalle. Giulia si è però rifatta poco dopo, mettendo al tappeto tutte e tre le avversarie con un dropkick, dopo che la Legend aveva tentato di dominare fisicamente SKY e la Perez. Giulia e la Perez hanno collaborato brevemente fuori dal ring per neutralizzare la Legend, ma è stata poi la Perez a rientrare per mettere in difficoltà SKY.</p>\n<p>SKY ha steso Giulia e la Perez con un altro missile dropkick, seguito da un doppio &quot;bullet train&quot; all&#x27;angolo. La Legend l&#x27;ha sorpresa alle spalle applicandole una breve sleeper hold, ma SKY è riuscita a contrattaccare. Giulia ha tentato la sua Arrivederci Knee, ma la Perez ha interrotto lo schienamento.</p>\n<p>Giulia, SKY e la Perez hanno lottato sulle corde prima che SKY potesse tentare un Over the Moonsault, ma la Legend è riuscita a caricarsi sia la Perez che Giulia per una doppia powerbomb. Ha eseguito la Lash Extensions su entrambe, ma SKY, rimasta sulle corde, ha interrotto lo schienamento con uno stomp sulla schiena della Legend. Subito dopo, ha connesso con il moonsault su Giulia aggiudicandosi l&#x27;incontro.</p>\n<p>SKY affronterà ora la vincitrice dello scontro tra Bayley, Raquel Rodriguez, Jacy Jayne e Kiana James. La WWE non ha ancora annunciato la data di questo match.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_iyo-sky-avanza-nel-torneo-queen-of-the-ring.html",
+        "published_html_preview": "<p>IYO SKY è a un passo dalla finale del Queen of the Ring a WWE Night of Champions e da un match titolato a WWE SummerSlam, dopo aver vinto il primo incontro a quattro del torneo durante &quot;WWE Raw&quot;. A Torino, SKY ha schienato Giulia, superando la concorrenza di Lash Legend e Roxanne Perez per ottenere la vittoria.</p>\n<p>In avvio di match, la Legend ha ripulito il ring, ma SKY l&#x27;ha colpita con un dropkick dalla terza corda proprio mentre la Legend aveva Giulia sulle spalle. Giulia si è però rifatta poco dopo, mettendo al tappeto tutte e tre le avversarie con un dropkick, dopo che la Legend aveva tentato di dominare fisicamente SKY e la Perez. Giulia e la Perez hanno collaborato brevemente fuori dal ring per neutralizzare la Legend, ma è stata poi la Perez a rientrare per mettere in difficoltà SKY.</p>\n<p>SKY ha steso Giulia e la Perez con un altro missile dropkick, seguito da un doppio &quot;bullet train&quot; all&#x27;angolo. La Legend l&#x27;ha sorpresa alle spalle applicandole una breve sleeper hold, ma SKY è riuscita a contrattaccare. Giulia ha tentato la sua Arrivederci Knee, ma la Perez ha interrotto lo schienamento.</p>\n<p>Giulia, SKY e la Perez hanno lottato sulle corde prima che SKY potesse tentare un Over the Moonsault, ma la Legend è riuscita a caricarsi sia la Perez che Giulia per una doppia powerbomb. Ha eseguito la Lash Extensions su entrambe, ma SKY, rimasta sulle corde, ha interrotto lo schienamento con uno stomp sulla schiena della Legend. Subito dopo, ha connesso con il moonsault su Giulia aggiudicandosi l&#x27;incontro.</p>\n<p>SKY affronterà ora la vincitrice dello scontro tra Bayley, Raquel Rodriguez, Jacy Jayne e Kiana James. La WWE non ha ancora annunciato la data di questo match.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_iyo-sky-avanza-nel-torneo-queen-of-the-ring.html",
+        "publisher_review_html_preview": "<p>IYO SKY è a un passo dalla finale del Queen of the Ring a WWE Night of Champions e da un match titolato a WWE SummerSlam, dopo aver vinto il primo incontro a quattro del torneo durante &quot;WWE Raw&quot;. A Torino, SKY ha schienato Giulia, superando la concorrenza di Lash Legend e Roxanne Perez per ottenere la vittoria.</p>\n<p>In avvio di match, la Legend ha ripulito il ring, ma SKY l&#x27;ha colpita con un dropkick dalla terza corda proprio mentre la Legend aveva Giulia sulle spalle. Giulia si è però rifatta poco dopo, mettendo al tappeto tutte e tre le avversarie con un dropkick, dopo che la Legend aveva tentato di dominare fisicamente SKY e la Perez. Giulia e la Perez hanno collaborato brevemente fuori dal ring per neutralizzare la Legend, ma è stata poi la Perez a rientrare per mettere in difficoltà SKY.</p>\n<p>SKY ha steso Giulia e la Perez con un altro missile dropkick, seguito da un doppio &quot;bullet train&quot; all&#x27;angolo. La Legend l&#x27;ha sorpresa alle spalle applicandole una breve sleeper hold, ma SKY è riuscita a contrattaccare. Giulia ha tentato la sua Arrivederci Knee, ma la Perez ha interrotto lo schienamento.</p>\n<p>Giulia, SKY e la Perez hanno lottato sulle corde prima che SKY potesse tentare un Over the Moonsault, ma la Legend è riuscita a caricarsi sia la Perez che Giulia per una doppia powerbomb. Ha eseguito la Lash Extensions su entrambe, ma SKY, rimasta sulle corde, ha interrotto lo schienamento con uno stomp sulla schiena della Legend. Subito dopo, ha connesso con il moonsault su Giulia aggiudicandosi l&#x27;incontro.</p>\n<p>SKY affronterà ora la vincitrice dello scontro tra Bayley, Raquel Rodriguez, Jacy Jayne e Kiana James. La WWE non ha ancora annunciato la data di questo match.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match/\nTitolo feed: IYO SKY Advances In WWE QOTR Match\nTitolo pagina: IYO SKY Advances In WWE QOTR Match - Wrestling Inc.\nDescrizione: IYO SKY advanced in the Queen of the Ring tournament with a pinfall on Giulia in a four-way match in Turin, Italy on \"WWE Raw.\"\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"IYO SKY is one step closer to the Queen of the Ring finals at WWE Night of Champions, and a title match at WWE SummerSlam, after winning the first four-way match of the tournament on \\\" WWE Raw .\\\" SKY pinned Giulia in Turin, Italy, and outlasted Lash Legend and Roxanne Perez to get the win.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Legend cleared house to start off the match, but SKY hit a dropkick from the top as Legend had Giulia up to take her out. Giulia got hers back, however, and hit a dropkick of her own to take out all three women when Legend tried to overpower SKY and Perez. Giulia and Perez briefly worked together on the outside to take out Legend, but it was Perez who got back in the ring to overtake SKY.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"SKY took out Giulia and Perez with another missile dropkick, then a double bullet train attack in the corner. Legend came up behind her and put her in a brief sleeper hold, but SKY was able to counter. Giulia went for an Arrivederci Knee, Perez broke up the pin.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Giulia, SKY, and Perez battled on the ropes before SKY could hit an Over the Moonsault, but Legend got Perez and Giulia up for the double powerbomb. She hit Lash Extensions to both women, but SKY was still on the ropes and broke up the pin with a stomp to Legend's back. She then connected with the moonsault to Giulia to win.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"SKY will now go on to face whoever emerges victorious from the bout pitting Bayley, Raquel Rodriguez, Jacy Jayne, and Kiana James against one another. A date for that match has not yet been announced by WWE.\"\n  }\n]\n"
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "strategic:queen of the ring,strategic:raw,recency:fresh_12h",
+        "score": 66
+      },
+      "publisher": {
+        "categories": [
+          4
+        ],
+        "error": null,
+        "featured_media": 5822,
+        "present": true,
+        "status": "published",
+        "wp_link": "https://news.openwrestlingtv.com/wwe/iyo-sky-avanza-nel-torneo-queen-of-the-ring/",
+        "wp_post_id": 5823
+      },
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match",
+      "title_it": "IYO SKY avanza nel torneo Queen of the Ring"
+    },
+    {
+      "alfred": {
+        "decision": "approved",
+        "editorial_changes": [],
+        "issues": [],
+        "present": true,
+        "quality_score": 95,
+        "warnings": [
+          {
+            "code": "image_placeholder_present",
+            "evidence": "<!--IMAGE:...-->",
+            "message": "Presente placeholder immagine da gestire nel Publisher.",
+            "severity": "warning"
+          }
+        ]
+      },
+      "bob": {
+        "clean_element_count": 19,
+        "diagnostic_stage": "ready_for_alfred",
+        "element_counts": {
+          "embed": 0,
+          "heading": 1,
+          "image": 4,
+          "quote": 0,
+          "table": 0,
+          "text": 14
+        },
+        "error": null,
+        "present": true,
+        "raw_element_count": 20,
+        "removed_before_gemini": 1,
+        "status": "ready_for_alfred",
+        "translation_model": "gemini-3.1-flash-lite",
+        "translation_used": true
+      },
+      "category_hint": "WWE",
+      "html_audit": {
+        "alfred_final_html_preview": "<p>La WWE è approdata a Torino per il primo storico evento Clash In Italy. Lo show ha avuto l&#x27;arduo compito di seguire lo straordinario evento AAA di sabato sera, in particolare il main event, e si è percepito come il roster si sia trovato di fronte a un impegno più grande delle proprie possibilità. Per approfondire, consultate la pagina dei risultati di Clash In Italy 2026, oltre alle &quot;3 cose che abbiamo odiato&quot; e alle &quot;3 che abbiamo amato&quot;.</p>\n<p>Ora è tempo di parlare dei vincitori e dei vinti dello show di domenica. Ci sono stati molti vincitori, come Sol Ruca, che ha ottenuto una vittoria importante contro una star di primo piano, e molti vinti, come il grande &quot;distruttore di carriere&quot; austriaco che non riesce a battere l&#x27;uomo più anonimo che la WWE abbia mai avuto.</p>\n<p>Come sempre, i vincitori possono essere vinti, i vinti possono essere vincitori e anche chi non ha lottato può finire nel mio mirino. Se volete continuare la discussione, vi rimando alla sezione dei commenti. In caso contrario, è il momento di assegnare i premi ai vincitori e ai vinti.</p>\n<h2>Vincitori: El Grandes Americano</h2>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/wwe-clash-in-italy-2026-biggest-winners-and-losers/winners-el-grandes-americano-1780346266.jpg-->\n<p>WWE Clash In Italy si è svolto all&#x27;ombra del mask vs. mask match del main event di sabato sera tra El Grande Americano e OG El Grande Americano. L&#x27;incontro era già stato ampiamente elogiato prima ancora del suono della campanella, con il team di commento in lingua spagnola della AAA che ha ringraziato apertamente il booker della AAA, The Undertaker, durante il match stesso. Per questo motivo, ogni incontro a Clash In Italy è stato condizionato dai fan WWE che ricordavano di cosa è capace la compagnia quando si concentra semplicemente su ciò che il pubblico desidera.</p>\n<p>Laddove molti momenti di domenica sera sono sembrati forzati, quelli di sabato non lo erano, il che significa che le performance dei due Grandes sono rimaste impresse nella mente dei fan durante lo show, comunque dignitoso, proposto dalla WWE domenica. Francamente, nessuno a Clash In Italy ha avuto possibilità di competere e, dato che non ci occupiamo dei vincitori/vinti della AAA, dovevo per forza menzionarlo.</p>\n<p>Il main event di sabato ha alzato l&#x27;asticella per ogni altro incontro prodotto sotto il brand WWE; la compagnia, a quanto pare, non ha scuse se non la pigrizia. Certo, la WWE non troverà per fortuna una storyline perfetta come Americano contro Americano, ma resta il fatto che questo ha dimostrato che la compagnia può cambiare rotta verso qualcosa di popolare quando si impegna. Ogni infinita saga della Bloodline o ogni booking tortuoso dei midcarder sembrerà ancora più evidente, ora che sappiamo che la WWE può davvero inseguire una risposta leggendaria del pubblico quando vuole.</p>\n<p>Il match è stato così bello che lo trasmetteranno in replica dopo Raw su Netflix.</p>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/wwe-clash-in-italy-2026-biggest-winners-and-losers/loser-gunther-1780346267.jpg-->\n<p>Gunther ha ritirato John Cena, Goldberg e AJ Styles, e non ha assolutamente nulla da mostrare per tutto questo. La sua sconfitta contro Cody Rhodes nell&#x27;opener di Clash In Italy è stata un grave caso di declino terminale.</p>\n<p>Immagino possano ricostruirlo, ma anche se alla fine vincesse il WWE Title o riconquistasse il World Heavyweight Title, è apparso troppo vulnerabile. Parliamo di colui che ha ceduto a Jey Uso e ha perso contro Pat McAfee. Hanno umanizzato Gunther in una misura sfortunata, considerando quanto sia bravo.</p>\n<p>Non è stato un brutto match, ma non è servito a nessuno. Cody non ha ottenuto una vittoria definitiva, Gunther sembra un piagnucolone. L&#x27;intero segmento di apertura è sembrato un enorme passo indietro per tutti i soggetti coinvolti, e non sono sicuro che il programma di SummerSlam sarà in grado di salvarlo. Di questo passo, Gunther tornerà nel giro del titolo Intercontinentale entro WrestleMania.</p>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/wwe-clash-in-italy-2026-biggest-winners-and-losers/winner-sol-ruca-1780346268.jpg-->\n<p>C&#x27;è qualcosa di incredibile nel modo in cui Sol Ruca sia passata in fretta da &quot;surfer acerba di NXT&quot; a battere Becky Lynch in un match titolato in un PLE. Sì, Becky è sempre sembrata un po&#x27; troppo ingombrante per la divisione femminile midcard. Ma solo una persona può riportare quel titolo al suo status di midcard, ed è Sol Ruca. È un grande onore per l&#x27;ex campionessa NXT Women&#x27;s North American e un cambio di passo rinfrescante rispetto ad altre call-up più lente.</p>\n<p>Ruca ha chiaramente qualcosa di speciale e la WWE sta battendo il ferro finché è caldo. Chi sa cosa riserva il futuro per lei, ma potrà sempre dire di aver battuto &quot;The Man&quot; in un PLE. È molto probabile che questa faida possa arrivare fino a SummerSlam. Non sembra che la WWE abbia fatto le cose a metà con Sol. Questa vittoria, inoltre, la mette in un&#x27;ottima posizione per competere nel Money In The Bank Match femminile, una stipulazione che dovrebbe calzarle a pennello.</p>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/wwe-clash-in-italy-2026-biggest-winners-and-losers/loser-jacob-fatu-1780346268.jpg-->\n<p>Semplicemente non credo che la WWE punterà mai davvero su Jacob Fatu. È destinato a essere un incompiuto, che funge da muscolo per ragazzi come Roman Reigns, e forse anche Jey Uso. La WWE ha avuto molte possibilità di trasformarlo in un main eventer, e sembra che venga costantemente sacrificato sull&#x27;altare di star più grandi. È un contendente tappabuchi, in attesa che ragazzi come Drew McIntyre terminino i loro impegni cinematografici.</p>\n<p>Non ha disputato un brutto match domenica, ma non è mai stato in una posizione convincente. L&#x27;incontro è sembrato un lungo percorso verso una conclusione inevitabile, con il titolo di Reigns mai in pericolo. Usando le parole del poeta Rodney Dangerfield, Fatu non riceve &quot;Nessun rispetto, ve lo dico io. Proprio nessuno&quot;. Roman Reigns è il centro dell&#x27;universo della Bloodline e tutti gli altri devono recitare la propria parte, con entrate e uscite, ma il re resta il re e gli altri farebbero meglio a conoscere il proprio posto.</p>",
+        "bob_body_html_preview": "<p>La WWE è approdata a Torino per il primo storico evento Clash In Italy. Lo show ha avuto l&#x27;arduo compito di seguire lo straordinario evento AAA di sabato sera, in particolare il main event, e si è percepito come il roster si sia trovato di fronte a un impegno più grande delle proprie possibilità. Per approfondire, consultate la pagina dei risultati di Clash In Italy 2026, oltre alle &quot;3 cose che abbiamo odiato&quot; e alle &quot;3 che abbiamo amato&quot;.</p>\n<p>Ora è tempo di parlare dei vincitori e dei vinti dello show di domenica. Ci sono stati molti vincitori, come Sol Ruca, che ha ottenuto una vittoria importante contro una star di primo piano, e molti vinti, come il grande &quot;distruttore di carriere&quot; austriaco che non riesce a battere l&#x27;uomo più anonimo che la WWE abbia mai avuto.</p>\n<p>Come sempre, i vincitori possono essere vinti, i vinti possono essere vincitori e anche chi non ha lottato può finire nel mio mirino. Se volete continuare la discussione, vi rimando alla sezione dei commenti. In caso contrario, è il momento di assegnare i premi ai vincitori e ai vinti.</p>\n<h2>Vincitori: El Grandes Americano</h2>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/wwe-clash-in-italy-2026-biggest-winners-and-losers/winners-el-grandes-americano-1780346266.jpg-->\n<p>WWE Clash In Italy si è svolto all&#x27;ombra del mask vs. mask match del main event di sabato sera tra El Grande Americano e OG El Grande Americano. L&#x27;incontro era già stato ampiamente elogiato prima ancora del suono della campanella, con il team di commento in lingua spagnola della AAA che ha ringraziato apertamente il booker della AAA, The Undertaker, durante il match stesso. Per questo motivo, ogni incontro a Clash In Italy è stato condizionato dai fan WWE che ricordavano di cosa è capace la compagnia quando si concentra semplicemente su ciò che il pubblico desidera.</p>\n<p>Laddove molti momenti di domenica sera sono sembrati forzati, quelli di sabato non lo erano, il che significa che le performance dei due Grandes sono rimaste impresse nella mente dei fan durante lo show, comunque dignitoso, proposto dalla WWE domenica. Francamente, nessuno a Clash In Italy ha avuto possibilità di competere e, dato che non ci occupiamo dei vincitori/vinti della AAA, dovevo per forza menzionarlo.</p>\n<p>Il main event di sabato ha alzato l&#x27;asticella per ogni altro incontro prodotto sotto il brand WWE; la compagnia, a quanto pare, non ha scuse se non la pigrizia. Certo, la WWE non troverà per fortuna una storyline perfetta come Americano contro Americano, ma resta il fatto che questo ha dimostrato che la compagnia può cambiare rotta verso qualcosa di popolare quando si impegna. Ogni infinita saga della Bloodline o ogni booking tortuoso dei midcarder sembrerà ancora più evidente, ora che sappiamo che la WWE può davvero inseguire una risposta leggendaria del pubblico quando vuole.</p>\n<p>Il match è stato così bello che lo trasmetteranno in replica dopo Raw su Netflix.</p>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/wwe-clash-in-italy-2026-biggest-winners-and-losers/loser-gunther-1780346267.jpg-->\n<p>Gunther ha ritirato John Cena, Goldberg e AJ Styles, e non ha assolutamente nulla da mostrare per tutto questo. La sua sconfitta contro Cody Rhodes nell&#x27;opener di Clash In Italy è stata un grave caso di declino terminale.</p>\n<p>Immagino possano ricostruirlo, ma anche se alla fine vincesse il WWE Title o riconquistasse il World Heavyweight Title, è apparso troppo vulnerabile. Parliamo di colui che ha ceduto a Jey Uso e ha perso contro Pat McAfee. Hanno umanizzato Gunther in una misura sfortunata, considerando quanto sia bravo.</p>\n<p>Non è stato un brutto match, ma non è servito a nessuno. Cody non ha ottenuto una vittoria definitiva, Gunther sembra un piagnucolone. L&#x27;intero segmento di apertura è sembrato un enorme passo indietro per tutti i soggetti coinvolti, e non sono sicuro che il programma di SummerSlam sarà in grado di salvarlo. Di questo passo, Gunther tornerà nel giro del titolo Intercontinentale entro WrestleMania.</p>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/wwe-clash-in-italy-2026-biggest-winners-and-losers/winner-sol-ruca-1780346268.jpg-->\n<p>C&#x27;è qualcosa di incredibile nel modo in cui Sol Ruca sia passata in fretta da &quot;surfer acerba di NXT&quot; a battere Becky Lynch in un match titolato in un PLE. Sì, Becky è sempre sembrata un po&#x27; troppo ingombrante per la divisione femminile midcard. Ma solo una persona può riportare quel titolo al suo status di midcard, ed è Sol Ruca. È un grande onore per l&#x27;ex campionessa NXT Women&#x27;s North American e un cambio di passo rinfrescante rispetto ad altre call-up più lente.</p>\n<p>Ruca ha chiaramente qualcosa di speciale e la WWE sta battendo il ferro finché è caldo. Chi sa cosa riserva il futuro per lei, ma potrà sempre dire di aver battuto &quot;The Man&quot; in un PLE. È molto probabile che questa faida possa arrivare fino a SummerSlam. Non sembra che la WWE abbia fatto le cose a metà con Sol. Questa vittoria, inoltre, la mette in un&#x27;ottima posizione per competere nel Money In The Bank Match femminile, una stipulazione che dovrebbe calzarle a pennello.</p>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/wwe-clash-in-italy-2026-biggest-winners-and-losers/loser-jacob-fatu-1780346268.jpg-->\n<p>Semplicemente non credo che la WWE punterà mai davvero su Jacob Fatu. È destinato a essere un incompiuto, che funge da muscolo per ragazzi come Roman Reigns, e forse anche Jey Uso. La WWE ha avuto molte possibilità di trasformarlo in un main eventer, e sembra che venga costantemente sacrificato sull&#x27;altare di star più grandi. È un contendente tappabuchi, in attesa che ragazzi come Drew McIntyre terminino i loro impegni cinematografici.</p>\n<p>Non ha disputato un brutto match domenica, ma non è mai stato in una posizione convincente. L&#x27;incontro è sembrato un lungo percorso verso una conclusione inevitabile, con il titolo di Reigns mai in pericolo. Usando le parole del poeta Rodney Dangerfield, Fatu non riceve &quot;Nessun rispetto, ve lo dico io. Proprio nessuno&quot;. Roman Reigns è il centro dell&#x27;universo della Bloodline e tutti gli altri devono recitare la propria parte, con entrate e uscite, ma il re resta il re e gli altri farebbero meglio a conoscere il proprio posto.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_wwe-clash-in-italy-2026-vincitori-e-vinti.html",
+        "published_html_preview": "<p>La WWE è approdata a Torino per il primo storico evento Clash In Italy. Lo show ha avuto l&#x27;arduo compito di seguire lo straordinario evento AAA di sabato sera, in particolare il main event, e si è percepito come il roster si sia trovato di fronte a un impegno più grande delle proprie possibilità. Per approfondire, consultate la pagina dei risultati di Clash In Italy 2026, oltre alle &quot;3 cose che abbiamo odiato&quot; e alle &quot;3 che abbiamo amato&quot;.</p>\n<p>Ora è tempo di parlare dei vincitori e dei vinti dello show di domenica. Ci sono stati molti vincitori, come Sol Ruca, che ha ottenuto una vittoria importante contro una star di primo piano, e molti vinti, come il grande &quot;distruttore di carriere&quot; austriaco che non riesce a battere l&#x27;uomo più anonimo che la WWE abbia mai avuto.</p>\n<p>Come sempre, i vincitori possono essere vinti, i vinti possono essere vincitori e anche chi non ha lottato può finire nel mio mirino. Se volete continuare la discussione, vi rimando alla sezione dei commenti. In caso contrario, è il momento di assegnare i premi ai vincitori e ai vinti.</p>\n<h2>Vincitori: El Grandes Americano</h2>\n\n<p>WWE Clash In Italy si è svolto all&#x27;ombra del mask vs. mask match del main event di sabato sera tra El Grande Americano e OG El Grande Americano. L&#x27;incontro era già stato ampiamente elogiato prima ancora del suono della campanella, con il team di commento in lingua spagnola della AAA che ha ringraziato apertamente il booker della AAA, The Undertaker, durante il match stesso. Per questo motivo, ogni incontro a Clash In Italy è stato condizionato dai fan WWE che ricordavano di cosa è capace la compagnia quando si concentra semplicemente su ciò che il pubblico desidera.</p>\n<p>Laddove molti momenti di domenica sera sono sembrati forzati, quelli di sabato non lo erano, il che significa che le performance dei due Grandes sono rimaste impresse nella mente dei fan durante lo show, comunque dignitoso, proposto dalla WWE domenica. Francamente, nessuno a Clash In Italy ha avuto possibilità di competere e, dato che non ci occupiamo dei vincitori/vinti della AAA, dovevo per forza menzionarlo.</p>\n<p>Il main event di sabato ha alzato l&#x27;asticella per ogni altro incontro prodotto sotto il brand WWE; la compagnia, a quanto pare, non ha scuse se non la pigrizia. Certo, la WWE non troverà per fortuna una storyline perfetta come Americano contro Americano, ma resta il fatto che questo ha dimostrato che la compagnia può cambiare rotta verso qualcosa di popolare quando si impegna. Ogni infinita saga della Bloodline o ogni booking tortuoso dei midcarder sembrerà ancora più evidente, ora che sappiamo che la WWE può davvero inseguire una risposta leggendaria del pubblico quando vuole.</p>\n<p>Il match è stato così bello che lo trasmetteranno in replica dopo Raw su Netflix.</p>\n\n<p>Gunther ha ritirato John Cena, Goldberg e AJ Styles, e non ha assolutamente nulla da mostrare per tutto questo. La sua sconfitta contro Cody Rhodes nell&#x27;opener di Clash In Italy è stata un grave caso di declino terminale.</p>\n<p>Immagino possano ricostruirlo, ma anche se alla fine vincesse il WWE Title o riconquistasse il World Heavyweight Title, è apparso troppo vulnerabile. Parliamo di colui che ha ceduto a Jey Uso e ha perso contro Pat McAfee. Hanno umanizzato Gunther in una misura sfortunata, considerando quanto sia bravo.</p>\n<p>Non è stato un brutto match, ma non è servito a nessuno. Cody non ha ottenuto una vittoria definitiva, Gunther sembra un piagnucolone. L&#x27;intero segmento di apertura è sembrato un enorme passo indietro per tutti i soggetti coinvolti, e non sono sicuro che il programma di SummerSlam sarà in grado di salvarlo. Di questo passo, Gunther tornerà nel giro del titolo Intercontinentale entro WrestleMania.</p>\n\n<p>C&#x27;è qualcosa di incredibile nel modo in cui Sol Ruca sia passata in fretta da &quot;surfer acerba di NXT&quot; a battere Becky Lynch in un match titolato in un PLE. Sì, Becky è sempre sembrata un po&#x27; troppo ingombrante per la divisione femminile midcard. Ma solo una persona può riportare quel titolo al suo status di midcard, ed è Sol Ruca. È un grande onore per l&#x27;ex campionessa NXT Women&#x27;s North American e un cambio di passo rinfrescante rispetto ad altre call-up più lente.</p>\n<p>Ruca ha chiaramente qualcosa di speciale e la WWE sta battendo il ferro finché è caldo. Chi sa cosa riserva il futuro per lei, ma potrà sempre dire di aver battuto &quot;The Man&quot; in un PLE. È molto probabile che questa faida possa arrivare fino a SummerSlam. Non sembra che la WWE abbia fatto le cose a metà con Sol. Questa vittoria, inoltre, la mette in un&#x27;ottima posizione per competere nel Money In The Bank Match femminile, una stipulazione che dovrebbe calzarle a pennello.</p>\n\n<p>Semplicemente non credo che la WWE punterà mai davvero su Jacob Fatu. È destinato a essere un incompiuto, che funge da muscolo per ragazzi come Roman Reigns, e forse anche Jey Uso. La WWE ha avuto molte possibilità di trasformarlo in un main eventer, e sembra che venga costantemente sacrificato sull&#x27;altare di star più grandi. È un contendente tappabuchi, in attesa che ragazzi come Drew McIntyre terminino i loro impegni cinematografici.</p>\n<p>Non ha disputato un brutto match domenica, ma non è mai stato in una posizione convincente. L&#x27;incontro è sembrato un lungo percorso verso una conclusione inevitabile, con il titolo di Reigns mai in pericolo. Usando le parole del poeta Rodney Dangerfield, Fatu non riceve &quot;Nessun rispetto, ve lo dico io. Proprio nessuno&quot;. Roman Reigns è il centro dell&#x27;universo della Bloodline e tutti gli altri devono recitare la propria parte, con entrate e uscite, ma il re resta il re e gli altri farebbero meglio a conoscere il proprio posto.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_wwe-clash-in-italy-2026-vincitori-e-vinti.html",
+        "publisher_review_html_preview": "<p>La WWE è approdata a Torino per il primo storico evento Clash In Italy. Lo show ha avuto l&#x27;arduo compito di seguire lo straordinario evento AAA di sabato sera, in particolare il main event, e si è percepito come il roster si sia trovato di fronte a un impegno più grande delle proprie possibilità. Per approfondire, consultate la pagina dei risultati di Clash In Italy 2026, oltre alle &quot;3 cose che abbiamo odiato&quot; e alle &quot;3 che abbiamo amato&quot;.</p>\n<p>Ora è tempo di parlare dei vincitori e dei vinti dello show di domenica. Ci sono stati molti vincitori, come Sol Ruca, che ha ottenuto una vittoria importante contro una star di primo piano, e molti vinti, come il grande &quot;distruttore di carriere&quot; austriaco che non riesce a battere l&#x27;uomo più anonimo che la WWE abbia mai avuto.</p>\n<p>Come sempre, i vincitori possono essere vinti, i vinti possono essere vincitori e anche chi non ha lottato può finire nel mio mirino. Se volete continuare la discussione, vi rimando alla sezione dei commenti. In caso contrario, è il momento di assegnare i premi ai vincitori e ai vinti.</p>\n<h2>Vincitori: El Grandes Americano</h2>\n\n<p>WWE Clash In Italy si è svolto all&#x27;ombra del mask vs. mask match del main event di sabato sera tra El Grande Americano e OG El Grande Americano. L&#x27;incontro era già stato ampiamente elogiato prima ancora del suono della campanella, con il team di commento in lingua spagnola della AAA che ha ringraziato apertamente il booker della AAA, The Undertaker, durante il match stesso. Per questo motivo, ogni incontro a Clash In Italy è stato condizionato dai fan WWE che ricordavano di cosa è capace la compagnia quando si concentra semplicemente su ciò che il pubblico desidera.</p>\n<p>Laddove molti momenti di domenica sera sono sembrati forzati, quelli di sabato non lo erano, il che significa che le performance dei due Grandes sono rimaste impresse nella mente dei fan durante lo show, comunque dignitoso, proposto dalla WWE domenica. Francamente, nessuno a Clash In Italy ha avuto possibilità di competere e, dato che non ci occupiamo dei vincitori/vinti della AAA, dovevo per forza menzionarlo.</p>\n<p>Il main event di sabato ha alzato l&#x27;asticella per ogni altro incontro prodotto sotto il brand WWE; la compagnia, a quanto pare, non ha scuse se non la pigrizia. Certo, la WWE non troverà per fortuna una storyline perfetta come Americano contro Americano, ma resta il fatto che questo ha dimostrato che la compagnia può cambiare rotta verso qualcosa di popolare quando si impegna. Ogni infinita saga della Bloodline o ogni booking tortuoso dei midcarder sembrerà ancora più evidente, ora che sappiamo che la WWE può davvero inseguire una risposta leggendaria del pubblico quando vuole.</p>\n<p>Il match è stato così bello che lo trasmetteranno in replica dopo Raw su Netflix.</p>\n\n<p>Gunther ha ritirato John Cena, Goldberg e AJ Styles, e non ha assolutamente nulla da mostrare per tutto questo. La sua sconfitta contro Cody Rhodes nell&#x27;opener di Clash In Italy è stata un grave caso di declino terminale.</p>\n<p>Immagino possano ricostruirlo, ma anche se alla fine vincesse il WWE Title o riconquistasse il World Heavyweight Title, è apparso troppo vulnerabile. Parliamo di colui che ha ceduto a Jey Uso e ha perso contro Pat McAfee. Hanno umanizzato Gunther in una misura sfortunata, considerando quanto sia bravo.</p>\n<p>Non è stato un brutto match, ma non è servito a nessuno. Cody non ha ottenuto una vittoria definitiva, Gunther sembra un piagnucolone. L&#x27;intero segmento di apertura è sembrato un enorme passo indietro per tutti i soggetti coinvolti, e non sono sicuro che il programma di SummerSlam sarà in grado di salvarlo. Di questo passo, Gunther tornerà nel giro del titolo Intercontinentale entro WrestleMania.</p>\n\n<p>C&#x27;è qualcosa di incredibile nel modo in cui Sol Ruca sia passata in fretta da &quot;surfer acerba di NXT&quot; a battere Becky Lynch in un match titolato in un PLE. Sì, Becky è sempre sembrata un po&#x27; troppo ingombrante per la divisione femminile midcard. Ma solo una persona può riportare quel titolo al suo status di midcard, ed è Sol Ruca. È un grande onore per l&#x27;ex campionessa NXT Women&#x27;s North American e un cambio di passo rinfrescante rispetto ad altre call-up più lente.</p>\n<p>Ruca ha chiaramente qualcosa di speciale e la WWE sta battendo il ferro finché è caldo. Chi sa cosa riserva il futuro per lei, ma potrà sempre dire di aver battuto &quot;The Man&quot; in un PLE. È molto probabile che questa faida possa arrivare fino a SummerSlam. Non sembra che la WWE abbia fatto le cose a metà con Sol. Questa vittoria, inoltre, la mette in un&#x27;ottima posizione per competere nel Money In The Bank Match femminile, una stipulazione che dovrebbe calzarle a pennello.</p>\n\n<p>Semplicemente non credo che la WWE punterà mai davvero su Jacob Fatu. È destinato a essere un incompiuto, che funge da muscolo per ragazzi come Roman Reigns, e forse anche Jey Uso. La WWE ha avuto molte possibilità di trasformarlo in un main eventer, e sembra che venga costantemente sacrificato sull&#x27;altare di star più grandi. È un contendente tappabuchi, in attesa che ragazzi come Drew McIntyre terminino i loro impegni cinematografici.</p>\n<p>Non ha disputato un brutto match domenica, ma non è mai stato in una posizione convincente. L&#x27;incontro è sembrato un lungo percorso verso una conclusione inevitabile, con il titolo di Reigns mai in pericolo. Usando le parole del poeta Rodney Dangerfield, Fatu non riceve &quot;Nessun rispetto, ve lo dico io. Proprio nessuno&quot;. Roman Reigns è il centro dell&#x27;universo della Bloodline e tutti gli altri devono recitare la propria parte, con entrate e uscite, ma il re resta il re e gli altri farebbero meglio a conoscere il proprio posto.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review/\nTitolo feed: WWE Clash In Italy 2026: Biggest Winners And Losers\nTitolo pagina: WWE Clash In Italy 2026: Biggest Winners And Losers - Wrestling Inc.\nDescrizione: Here's who looked good, and who very much didn't, at last night's WWE Clash In Italy.\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"WWE pulled into Turin, Italy for the first ever Clash In Italy event. The show had the unfortunate job of following up Saturday night's amazing AAA show, especially the main event, and you could kind of tell everyone was in over their heads. For more, read the Clash In Italy 2026 Results Page , as well as 3 Things We Hated and 3 We Loved.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Now, it's time to talk about the Winners and the Losers from Sunday's show. There were plenty of winners, like Sol Ruca, who got a showcase victory over a major star, and plenty of losers, like the big Austrian \\\"career killer\\\" who cannot beat the most vanilla man WWE has ever seen.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"As always, winners can be losers, losers can be winners, and people who didn't even wrestle can catch strays from me. If you want to continue the conversation, I point you in the direction of the comments section. Otherwise, it's time to ascribe some winners and losers.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"heading\",\n    \"text\": \"Winners: El Grandes Americano\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"WWE Clash In Italy took place in the shadow of Saturday night's main event mask vs. mask match between El Grande Americano and OG El Grande Americano. The match was heavily praised before the final bell even rang, with the AAA Spanish commentary team outright thanking AAA booker The Undertaker during the match itself. Because of this, every match at Clash In Italy was weighted by WWE fans remembering what the company is capable of, when they simply focus on what the crowd is into.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Where many of Sunday night's moments felt forced, Saturday wasn't, and it meant that both Grandes' Saturday performances were on fans' minds during the perfectly cromulent show that WWE put on on Sunday. Quite frankly, no one at Clash In Italy had a chance to compete, and since we don't do AAA Winners/Losers, I simply had to address it.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"Saturday's main event raised the bar for literally every other match produced under the WWE banner, as the company seemingly has no excuse, outside of laziness. Now obviously, WWE won't luck itself into a perfect story line like Americano vs. Americano, but the fact still remains that it proved the company can pivot to something popular when they put their mind to it. Every endless Bloodline saga, or circuitous booking of midcarders is going to feel that much more glaring, now that we know WWE can actually chase a legendary crowd response when they try.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"The match was so good that they're replaying it after Raw on Netflix.\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"Gunther has retired John Cena, Goldberg, and AJ Styles, and has absolute d*** to show for it. His loss to Cody Rhodes in the opening of Clash In Italy was a serious case of terminal geekery.\"\n  },\n  {\n    \"id\": \"b12\",\n    \"type\": \"text\",\n    \"text\": \"I guess they could build him up again, but even if he eventually wins the WWE Title, or regains the World Heavyweight Title, he's been a little too vulnerable. This is the guy who tapped out to Jey Uso and lost to Pat McAfee. They have humanized Gunther to an unfortunate degree, considering just how good he is.\"\n  },\n  {\n    \"id\": \"b13\",\n    \"type\": \"text\",\n    \"text\": \"It wasn't a bad match, but it just didn't feel like it helped anybody. Cody didn't get a definitive win, Gunther looks like a whiny b***. The whole opening segment felt like a giant step back for everyone involved, and I'm not sure the SummerSlam program is going to be able to save it. At this rate, Gunther will be back in the Intercontinental Title scene by WrestleMania.\"\n  },\n  {\n    \"id\": \"b15\",\n    \"type\": \"text\",\n    \"text\": \"There's something pretty incredible about how quickly Sol Ruca went from Green As Grass NXT Surfer to beating Becky Lynch in a PLE title match. Yes, Becky has always felt a little big for the women's midcard division. But only one person gets to transition that title back into its midcard status, and that is Sol Ruca. It is a heavy honor for the former NXT Women's North American Champion, and a refreshing change of pace to other, slower call-ups.\"\n  },\n  {\n    \"id\": \"b16\",\n    \"type\": \"text\",\n    \"text\": \"Ruca clearly has something special, and WWE is striking while the iron is hot. Who knows what the future holds for Ruca, but she'll always be able to say she beat \\\"The Man\\\" on a PLE. It's very possible this feud could go all the way to SummerSlam. It doesn't feel like WWE has done anything by half-measures with Sol. This win also puts her in a nice position to possible compete in the women's Money In The Bank Match, a stipulation that should fit Ruca like a glove.\"\n  },\n  {\n    \"id\": \"b18\",\n    \"type\": \"text\",\n    \"text\": \"I simply do not believe that WWE will ever pull the trigger on Jacob Fatu. He is destined to be an almost-ran, who acts as muscle for guys like Roman Reigns, and possibly even Jey Uso. WWE has had many chances to make him into a main event player, and it feels like he is constantly sacrificed on the altar to bigger stars. He is a placeholder contender, until guys like Drew McIntyre wrap their feature film obligations.\"\n  },\n  {\n    \"id\": \"b19\",\n    \"type\": \"text\",\n    \"text\": \"He didn't have a bad match on Sunday, but he was never in any convincing position either. The match felt like a long walk to an inevitable conclusion, Reigns's title never in danger. In the words of the poet Rodney Dangerfield, Fatu simply gets \\\"No respect, I tell ya. None at all.\\\" Roman Reigns is the center of the Bloodline univer"
       },
       "menzo": {
         "classification": null,
@@ -356,20 +211,22 @@
         "score": 66
       },
       "publisher": {
-        "categories": null,
+        "categories": [
+          4
+        ],
         "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
+        "featured_media": 5820,
+        "present": true,
+        "status": "published",
+        "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-clash-in-italy-2026-vincitori-e-vinti/",
+        "wp_post_id": 5821
       },
       "source": "wrestlinginc",
       "source_url": "https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review",
-      "title_it": "WWE Clash In Italy 2026: Biggest Winners And Losers"
+      "title_it": "WWE Clash In Italy 2026: Vincitori e vinti"
     }
   ],
-  "generated_at": "2026-06-01T23:24:50.354917+00:00",
+  "generated_at": "2026-06-01T23:42:47.283767+00:00",
   "how_to_read": {
     "alfred_final_html_preview": "HTML dopo revisione/normalizzazioni di Alfred",
     "bob_body_html_preview": "HTML prodotto da Bob prima di Alfred",
@@ -1137,6 +994,102 @@
       "overall_status": "ok",
       "published": 3,
       "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 3,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 1
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 3,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 10,
+          "already_worked": 1,
+          "hard_skipped": 12,
+          "to_menzo": 21,
+          "to_simone": 1
+        },
+        "menzo": {
+          "pending": 0,
+          "skipped": 18,
+          "to_bob_or_v92": 3
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 3,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 6,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 3,
+      "errors": 0,
+      "generated_at": "2026-06-01T23:42:47.278516+00:00",
+      "overall_status": "ok",
+      "published": 3,
+      "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 3,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 1
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 3,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 10,
+          "already_worked": 1,
+          "hard_skipped": 12,
+          "to_menzo": 21,
+          "to_simone": 1
+        },
+        "menzo": {
+          "pending": 0,
+          "skipped": 18,
+          "to_bob_or_v92": 3
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 3,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 6,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 3,
+      "errors": 0,
+      "generated_at": "2026-06-01T23:42:47.283767+00:00",
+      "overall_status": "ok",
+      "published": 3,
+      "warnings": 0
     }
   ],
   "overall_status": "ok",
@@ -1156,7 +1109,7 @@
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 0
+      "warnings": 1
     },
     "bob_handoff": {
       "errors": 0,
@@ -1164,19 +1117,19 @@
       "ready_for_alfred": 3,
       "translation_pending": 0
     },
-    "ended_at": "2026-06-01T23:24:50.344100+00:00",
+    "ended_at": "2026-06-01T23:42:47.271904+00:00",
     "engine": "bot_v92.py",
     "massy_handoff": {
-      "already_published_hard_skipped": 8,
+      "already_published_hard_skipped": 10,
       "already_worked": 1,
-      "hard_skipped": 10,
-      "to_menzo": 23,
+      "hard_skipped": 12,
+      "to_menzo": 21,
       "to_simone": 1
     },
     "menzo_handoff": {
       "pending": 0,
-      "skipped": 17,
-      "to_bob_or_v92": 6
+      "skipped": 18,
+      "to_bob_or_v92": 3
     },
     "newsroom_engine_override": false,
     "publisher_handoff": {
@@ -1193,71 +1146,71 @@
       "skipped": 6,
       "waiting": 0
     },
-    "started_at": "2026-06-01T23:24:24.956047+00:00",
+    "started_at": "2026-06-01T23:42:26.214546+00:00",
     "version": "v93_7_archivista_audit"
   },
   "summary": {
     "anomalies": 0,
-    "article_dossiers": 6,
+    "article_dossiers": 3,
     "errors_48h": 8,
-    "published_48h": 26,
+    "published_48h": 32,
     "published_current_run": 3,
-    "runs_48h": 16
+    "runs_48h": 18
   },
   "timeline": [
     {
       "agent": "Jarvis",
       "note": "engine=bot_v92.py",
       "phase": "bootstrap_status_written",
-      "timestamp": "2026-06-01T23:24:24.956363+00:00"
+      "timestamp": "2026-06-01T23:42:26.214834+00:00"
     },
     {
       "agent": "Massy",
-      "note": "to_simone=1 to_menzo=23 hard_skip=10 already=1",
+      "note": "to_simone=1 to_menzo=21 hard_skip=12 already=1",
       "phase": "sentinel_board_ready",
-      "timestamp": "2026-06-01T23:24:25.585304+00:00"
+      "timestamp": "2026-06-01T23:42:27.505513+00:00"
     },
     {
       "agent": "Simone",
       "note": "ready=0 waiting=0 skipped=6",
       "phase": "report_decision_ready",
-      "timestamp": "2026-06-01T23:24:25.588882+00:00"
+      "timestamp": "2026-06-01T23:42:27.509073+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "selected=6 pending=0 skipped=17",
+      "note": "selected=3 pending=0 skipped=18",
       "phase": "editorial_decision_ready",
-      "timestamp": "2026-06-01T23:24:25.606724+00:00"
+      "timestamp": "2026-06-01T23:42:27.524789+00:00"
     },
     {
       "agent": "Bob",
       "note": "ready=3 pending=0 empty=0 errors=0",
       "phase": "article_packages_ready",
-      "timestamp": "2026-06-01T23:24:33.868744+00:00"
+      "timestamp": "2026-06-01T23:42:38.140683+00:00"
     },
     {
       "agent": "Alfred",
-      "note": "approved=3 needs_revision=0 blockers=0 warnings=0 changes=0",
+      "note": "approved=3 needs_revision=0 blockers=0 warnings=1 changes=0",
       "phase": "quality_review_ready",
-      "timestamp": "2026-06-01T23:24:33.876999+00:00"
+      "timestamp": "2026-06-01T23:42:38.150219+00:00"
     },
     {
       "agent": "Publisher",
       "note": "published=3 already=0 dry=0 wp_not_ready=0 errors=0",
       "phase": "publication_ready",
-      "timestamp": "2026-06-01T23:24:50.344068+00:00"
+      "timestamp": "2026-06-01T23:42:47.271866+00:00"
     },
     {
       "agent": "Jarvis",
       "note": "v93 Publisher completed; v92 fallback skipped",
       "phase": "runtime_skipped",
-      "timestamp": "2026-06-01T23:24:50.344091+00:00"
+      "timestamp": "2026-06-01T23:42:47.271894+00:00"
     },
     {
       "agent": "Archivista",
       "note": "status=ok anomalies=0",
       "phase": "audit_ready",
-      "timestamp": "2026-06-01T23:24:50.354451+00:00"
+      "timestamp": "2026-06-01T23:42:47.283364+00:00"
     }
   ],
   "version": "v93_7_archivista_audit"

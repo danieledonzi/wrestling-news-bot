@@ -1,6 +1,6 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-01T23:24:50.343604+00:00",
+  "generated_at": "2026-06-01T23:42:47.271340+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
@@ -25,34 +25,34 @@
       "categories": [
         4
       ],
-      "featured_media": 5811,
-      "source_url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/",
+      "featured_media": 5820,
+      "source_url": "https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review/",
       "status": "published",
-      "title_it": "Oba Femi sfida Brock Lesnar dopo il passaggio del turno nel King of the Ring",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/oba-femi-sfida-brock-lesnar-dopo-il-passaggio-del-turno-nel-king-of-the-ring/",
-      "wp_post_id": 5812
+      "title_it": "WWE Clash In Italy 2026: Vincitori e vinti",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-clash-in-italy-2026-vincitori-e-vinti/",
+      "wp_post_id": 5821
     },
     {
       "categories": [
         4
       ],
-      "featured_media": 5813,
-      "source_url": "https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/",
+      "featured_media": 5822,
+      "source_url": "https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match/",
       "status": "published",
-      "title_it": "Paul Heyman travolto da una Spear contro la barricata a WWE RAW",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/paul-heyman-travolto-da-una-spear-contro-la-barricata-a-wwe-raw/",
-      "wp_post_id": 5814
+      "title_it": "IYO SKY avanza nel torneo Queen of the Ring",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/iyo-sky-avanza-nel-torneo-queen-of-the-ring/",
+      "wp_post_id": 5823
     },
     {
       "categories": [
         4
       ],
-      "featured_media": 5815,
-      "source_url": "https://www.ringsidenews.com/wwe-confirms-king-queen-ring-tournament-matches-june-8-raw/",
+      "featured_media": 5824,
+      "source_url": "https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/",
       "status": "published",
-      "title_it": "WWE: Annunciati i match dei tornei King e Queen of the Ring per Raw dell'8 giugno",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-annunciati-i-match-dei-tornei-king-e-queen-of-the-ring-per-raw-dell8-giugno/",
-      "wp_post_id": 5816
+      "title_it": "Iyo Sky avanza nel torneo Queen of the Ring dopo un caotico Fatal Four-Way",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/iyo-sky-avanza-nel-torneo-queen-of-the-ring-dopo-un-caotico-fatal-four-way/",
+      "wp_post_id": 5825
     }
   ],
   "version": "v93_10_publisher_plain_oembed_urls",
