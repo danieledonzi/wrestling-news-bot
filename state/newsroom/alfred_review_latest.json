@@ -3,79 +3,79 @@
   "approved_articles": [
     {
       "bob_translation_model": "gemini-3.1-flash-lite",
-      "body_html": "<p>Sono stati resi noti i nuovi dati relativi agli ascolti dell'episodio di TNA iMPACT del 28 maggio 2026 su AMC, che mostrano un leggero incremento rispetto alla settimana precedente.</p><p>Secondo quanto riportato da <em>Programming Insider</em>, la puntata di TNA iMPACT del 28 maggio 2026 ha totalizzato 195.000 telespettatori su AMC, con un rating di 0.02 nella fascia demografica chiave 18-49 anni (P18-49). Per fare un confronto, l'episodio del 21 maggio 2026 aveva registrato 178.000 spettatori con un rating dello 0.03 nella stessa fascia, segnando quindi un aumento di 17.000 unità nel numero complessivo di spettatori e un calo di 0.01 nel rating demografico.</p><h3>TNA iMPACT Week-to-Week Viewership Comparison</h3><table class=\"owtv-data-table\"><tr><th>Metric</th><th>May 21, 2026</th><th>May 28, 2026</th><th>Change</th><th>% Change</th></tr><tr><td>Total Viewers</td><td>178,000</td><td>195,000</td><td>↑ +17,000</td><td>↑ +9.6%</td></tr><tr><td>P18–49 Demo</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -33.3%</td></tr></table><h3>TNA iMPACT Year-to-Date Performance (2026)</h3><table class=\"owtv-data-table\"><tr><th>Metric</th><th>2026 Average</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>205,760</td><td>195,000</td><td>↓ -10,760</td><td>↓ -5.2%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.04</td><td>0.02</td><td>↓ -0.02</td><td>↓ -47.4%</td></tr></table><h3>TNA iMPACT Month-to-Date Performance (May 2026)</h3><table class=\"owtv-data-table\"><tr><th>Metric</th><th>Month Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table><h3>TNA iMPACT 4-Week Rolling Average</h3><table class=\"owtv-data-table\"><tr><th>Metric</th><th>4 Week Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table><h3>Last 12 Months Performance Summary</h3><table class=\"owtv-data-table\"><tr><td>Average Viewership</td><td>205,760</td></tr><tr><td>Highest Viewership</td><td>259,000 (March 12, 2026)</td></tr><tr><td>Lowest Viewership</td><td>21,200 (April 16, 2026)</td></tr><tr><td>Average 18–49 Demo</td><td>0.04</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>20</td></tr></table><h3>Viewership Range (Last 12 Months)</h3><table class=\"owtv-data-table\"><tr><td>Highest</td><td>March 12, 2026</td><td>259,000</td></tr><tr><td>Lowest</td><td>April 16, 2026</td><td>21,200</td></tr><tr><td>Difference</td><td>—</td><td>237,800</td></tr></table><table class=\"owtv-data-table\"><tr><th>Week</th><th>Viewers</th><th>18–49 Demo</th></tr><tr><td>May 28, 2026</td><td>195,000</td><td>0.02</td></tr><tr><td>May 21, 2026</td><td>178,000</td><td>0.03</td></tr><tr><td>May 14, 2026</td><td>196,000</td><td>0.03</td></tr><tr><td>May 7, 2026</td><td>164,000</td><td>0.02</td></tr></table><p>Media mobile a 4 settimane: 183.250 telespettatori.</p><h3>Largest Weekly Viewership Changes (Last 12 Months)</h3><table class=\"owtv-data-table\"><tr><td>Largest Increase</td><td>April 24, 2026</td><td>+153,800</td></tr><tr><td>Largest Drop</td><td>April 16, 2026</td><td>-235,800</td></tr></table><p>Ascolti più alti del 2026: 259.000 (12 marzo 2026); Ascolti più bassi del 2026: 21.200 (16 aprile 2026).</p><p>Questi dati riflettono esclusivamente l'audience televisiva lineare su AMC e non includono la visione in streaming o tramite piattaforme digitali. Ringside News continuerà a monitorare TNA iMPACT mentre la compagnia prosegue il percorso di costruzione verso il suo prossimo grande evento dal vivo.</p>",
-      "category_hint": "TNA",
+      "body_html": "<p>La battaglia legale della WWE riguardante il passaggio dello streaming su ESPN si arricchisce di un nuovo capitolo, con i querelanti che puntano il dito contro un altro procedimento giudiziario in corso per sostenere la necessità di proseguire con la fase di <em>discovery</em>.</p><p>Secondo quanto riportato da Brandon Thurston, gli attori della class action relativa allo spostamento dei Premium Live Event della WWE sulla piattaforma streaming di ESPN si stanno opponendo al tentativo della compagnia di sospendere la fase di acquisizione delle prove. La loro tesi è che alla WWE non debba essere concessa tale pausa, poiché una causa separata in Delaware riguardante la fusione ha già sollevato seri dubbi sulla gestione e conservazione delle prove da parte dei vertici aziendali.</p><p>I querelanti hanno fatto specifico riferimento alla recente sentenza contro Nick Khan, in cui il tribunale ha accertato che alcune prove erano state distrutte in relazione al contenzioso sulla fusione WWE-UFC. I legali stanno ora utilizzando tale precedente per sostenere che la WWE non possa essere ritenuta affidabile nella conservazione delle prove qualora il caso sullo streaming ESPN venisse messo in stand-by.</p><p>Questo aspetto risulta cruciale, poiché la WWE sta cercando di spostare la causa sullo streaming ESPN verso un arbitrato. La compagnia ha sostenuto che, poiché i querelanti hanno sottoscritto l'abbonamento tramite ESPN Unlimited, le loro rivendicazioni dovrebbero ricadere sotto i termini di arbitrato di Disney ed ESPN, nonostante la WWE non fosse parte diretta di tale accordo di sottoscrizione.</p><p>La causa è stata intentata da Michael Diesa e Rebecca Tobak, i quali sostengono che i fan della WWE siano stati tratti in inganno sulle modalità di visione dei Premium Live Event in seguito al passaggio sull'app streaming di ESPN. L'azione legale sostiene che alcuni fan ritenessero che il loro accesso esistente a ESPN via cavo o tramite servizi di live TV streaming fosse sufficiente, per poi scoprire di dover pagare un costo aggiuntivo attraverso l'applicazione dedicata.</p><p>Attualmente, i querelanti stanno cercando di mantenere attiva la fase di <em>discovery</em> prima che il tribunale si esprima sulla richiesta di arbitrato della WWE. La loro posizione è lineare: visti i precedenti emersi nel caso separato sulla fusione, ritengono che alla WWE non debba essere consentito di ritardare la raccolta delle prove.</p><p>La causa è già di per sé significativa, giocandosi sulla possibilità che il procedimento rimanga in tribunale o venga spostato a porte chiuse tramite arbitrato. Questo nuovo deposito aggiunge un'accusa ancor più pesante alla disputa, poiché i querelanti mettono ora in dubbio la capacità della WWE di proteggere documenti e comunicazioni pertinenti al caso.</p><p>Il passaggio dei contenuti WWE su ESPN ha già generato confusione tra alcuni fan. Ora, la causa legale nata da tale transizione sta attirando nel vortice un altro problema giudiziario della compagnia, con i querelanti che utilizzano le difficoltà legali della WWE contro la compagnia stessa.</p>",
+      "category_hint": "WWE",
       "element_counts": {
         "embed": 0,
-        "heading": 7,
+        "heading": 0,
         "image": 0,
         "quote": 0,
-        "table": 8,
-        "text": 6
+        "table": 0,
+        "text": 9
       },
-      "excerpt_it": "Leggero incremento negli ascolti per l'episodio di TNA iMPACT del 28 maggio 2026 su AMC. Analizziamo i dati nel dettaglio.",
+      "excerpt_it": "I querelanti nella class action contro la WWE per lo streaming su ESPN si oppongono alla sospensione della fase di discovery, citando la distruzione di prove in un caso precedente sulla fusione WWE-UFC.",
       "meta": {
-        "description": "New ratings data has been released for the May 28, 2026 episode of TNA iMPACT on AMC, with the numbers ticking up slightly from the prior week. According",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/02/TNA-iMPACT-Massive-Increase.jpg",
-        "source_title": "TNA iMPACT Viewership Sees Slight Increase on May 28, 2026"
+        "description": "WWE’s legal fight over its move to ESPN streaming just got another layer, and the plaintiffs are now pointing to a separate WWE lawsuit to argue discovery",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/02/wwe-granted-extension-to-respond-to-espn-streaming-lawsuit-11.jpg",
+        "source_title": "WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit"
       },
       "source": "ringsidenews",
-      "source_title": "TNA iMPACT Viewership Sees Slight Increase on May 28, 2026",
-      "source_url": "https://www.ringsidenews.com/tna-impact-viewership-sees-slight-increase-may-28-2026/",
-      "title_it": "TNA iMPACT: i dati sugli ascolti del 28 maggio 2026"
+      "source_title": "WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit",
+      "source_url": "https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit/",
+      "title_it": "WWE sotto accusa: i querelanti dubitano della corretta conservazione delle prove nel caso ESPN"
     },
     {
       "bob_translation_model": "gemini-3.1-flash-lite",
-      "body_html": "<p>Sono stati diffusi i nuovi dati sugli ascolti relativi alla puntata di AEW Dynamite andata in onda su TBS il 27 maggio 2026, che evidenziano un costante trend di crescita.</p><p>Secondo quanto riportato da <em>Programming Insider</em>, l'episodio di AEW Dynamite del 27 maggio 2026 ha totalizzato 704.000 spettatori, con un rating di 0.12 nella fascia demografica chiave 18-49 anni. Per fare un confronto, la puntata del 20 maggio 2026 aveva registrato 613.000 spettatori con un rating di 0 nella medesima fascia demografica, segnando un incremento di 91.000 spettatori e una crescita di 0.12 nel rating demo.</p><p>Rispetto allo stesso periodo dell'anno precedente, AEW Dynamite aveva totalizzato 636.000 spettatori e un rating dello 0.16 nella demo il 28 maggio 2025, contro i 704.000 spettatori e lo 0.12 registrati il 27 maggio 2026. Ciò rappresenta una variazione annua del +10,7% nel numero di spettatori e del -25,0% nella demo.</p><h3>AEW Dynamite Week-to-Week Viewership Comparison</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>May 20, 2026</td><td>May 27, 2026</td><td>Change</td><td>% Change</td></tr><tr><td>Total Viewers</td><td>613,000</td><td>704,000</td><td>↑ +91,000</td><td>↑ +14.8%</td></tr><tr><td>P18–49 Demo</td><td>0</td><td>0.12</td><td>↑ +0.12</td><td>↑ —</td></tr></table><h3>AEW Dynamite Year-to-Date Performance (2026)</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>2026 Average</td><td>Current Episode</td><td>Diff</td><td>%</td></tr><tr><td>Viewers</td><td>631,833</td><td>704,000</td><td>↑ 72,167</td><td>↑ 11.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.11</td><td>0.12</td><td>↑ 0.01</td><td>↑ 8.6%</td></tr></table><h3>AEW Dynamite Month-to-Date Performance (May 2026)</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>Month Avg</td><td>Current Episode</td><td>Diff</td><td>%</td></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table><h3>AEW Dynamite 4-Week Rolling Average</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>4 Week Avg</td><td>Current Episode</td><td>Diff</td><td>%</td></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table><h3>Last 12 Months Performance Summary</h3><table class=\"owtv-data-table\"><tr><td>Average Viewership</td><td>590,837</td></tr><tr><td>Highest Viewership</td><td>765,000 (March 25, 2026)</td></tr><tr><td>Lowest Viewership</td><td>321,000 (October 7, 2025)</td></tr><tr><td>Average 18–49 Demo</td><td>0.12</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>52</td></tr></table><h3>Viewership Range (Last 12 Months)</h3><table class=\"owtv-data-table\"><tr><td>Highest</td><td>March 25, 2026</td><td>765,000</td></tr><tr><td>Lowest</td><td>October 7, 2025</td><td>321,000</td></tr><tr><td>Difference</td><td>—</td><td>444,000</td></tr></table><table class=\"owtv-data-table\"><tr><td>Week</td><td>Viewers</td><td>18–49 Demo</td></tr><tr><td>May 27, 2026</td><td>704,000</td><td>0.12</td></tr><tr><td>May 20, 2026</td><td>613,000</td><td>—</td></tr><tr><td>May 13, 2026</td><td>585,000</td><td>0.10</td></tr><tr><td>May 6, 2026</td><td>509,500</td><td>0.08</td></tr></table><p>4-Week Average: 602,875 viewers</p><h3>Largest Weekly Viewership Changes (Last 12 Months)</h3><table class=\"owtv-data-table\"><tr><td>Largest Increase</td><td>October 15, 2025</td><td>+213,000</td></tr><tr><td>Largest Drop</td><td>October 1, 2025</td><td>-173,000</td></tr></table><h3>AEW Dynamite Year-over-Year Comparison (2025 vs 2026)</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>May 28, 2025</td><td>May 27, 2026</td><td>% Change</td></tr><tr><td>Total Viewers</td><td>636,000</td><td>704,000</td><td>↑ +10.7%</td></tr><tr><td>P18–49 Demo</td><td>0.16</td><td>0.12</td><td>↓ -25.0%</td></tr></table><p>Highest Viewership of 2026: 765,000 (March 25, 2026) Lowest Viewership of 2026: 498,000 (January 21, 2026)</p><p>Questi dati riflettono esclusivamente l'audience della TV lineare su TBS e non includono la visione in streaming o tramite piattaforme digitali. Ringside News continuerà a monitorare gli ascolti di AEW Dynamite mentre la compagnia si avvicina al suo prossimo importante evento live.</p>",
-      "category_hint": "AEW",
-      "element_counts": {
-        "embed": 0,
-        "heading": 8,
-        "image": 0,
-        "quote": 0,
-        "table": 9,
-        "text": 7
-      },
-      "excerpt_it": "Nuovi dati sugli ascolti per AEW Dynamite del 27 maggio 2026: la puntata ha registrato una crescita rispetto alla settimana precedente, raggiungendo i 704.000 spettatori.",
-      "meta": {
-        "description": "New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum. According to Programming",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Dynamite-Massive-Increase-1.jpg",
-        "source_title": "AEW Dynamite Viewership Sees Increase on May 27, 2026"
-      },
-      "source": "ringsidenews",
-      "source_title": "AEW Dynamite Viewership Sees Increase on May 27, 2026",
-      "source_url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/",
-      "title_it": "AEW Dynamite: in crescita gli ascolti del 27 maggio 2026"
-    },
-    {
-      "bob_translation_model": "gemini-3.1-flash-lite",
-      "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x51578--><p>Il futuro di Mike Santana in TNA è diventato un po' più nitido, ma la sua prossima mossa resta ancora incerta, dato che il suo contratto è in scadenza a brevissimo.</p><p>Secondo quanto riportato da PWInsider il 1° giugno 2026, l'attuale contratto dell'attuale TNA World Champion con la compagnia scadrà nel corso del mese di luglio. Il report sottolinea inoltre come la WWE abbia mostrato interesse per Santana in passato.</p><p>Queste informazioni forniscono una tempistica più precisa sulla situazione contrattuale di Santana, dopo le prime indiscrezioni che davano il suo accordo con la TNA in scadenza nel corso dell'estate. Con il mese di luglio ormai indicato come termine, la prossima mossa di Santana potrebbe diventare un argomento di grande rilievo molto presto.</p><p>Santana è stato uno dei nomi di punta della TNA dal suo ritorno nel 2024 e il suo attuale regno come TNA World Champion rende la tempistica ancora più interessante. Se dovesse giungere alla scadenza del contratto senza averne firmato uno nuovo, potrebbe avere diverse opzioni nel panorama del wrestling mondiale.</p><p>Anche l'interesse della WWE rappresenta un fattore importante, specialmente considerando che Santana si sta già imponendo come una star da main event in TNA. Un passaggio alla WWE segnerebbe un cambiamento significativo, ma rimanere in TNA potrebbe consentirgli di continuare a guidare la federazione in un momento in cui le sue quotazioni sono molto alte.</p><p>Per ora, Santana rimane il TNA World Champion, ma il mese di luglio non è lontano. Che decida di restare o di esplorare una nuova opportunità, la sua situazione contrattuale è ora una delle storie più importanti da seguire quest'estate.</p>",
-      "category_hint": "TNA",
+      "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg.avif?x51578-->\n<p>Chad Gable svela i retroscena del suo ritorno sul ring. Dopo aver subito un grave infortunio alla spalla nel giugno 2025, che lo ha tenuto lontano dalle scene per il resto dell'anno, Gable ha annunciato l'uscita di una docuserie su YouTube in nove parti incentrata sul suo percorso di riabilitazione.</p><p>Prima dell'infortunio, Gable stava sostenendo un carico di lavoro raddoppiato, esibendosi regolarmente sia in WWE che in AAA, oltre a interpretare il personaggio originale di El Grande Americano. Il suo rientro è avvenuto infine alla Royal Rumble, alla fine di gennaio, tornando a vestire i panni di Americano.</p><p>Ora, Gable vuole mostrare ai fan cosa ha significato arrivare a quel momento. L'atleta ha spiegato che l'infortunio lo ha costretto a fermarsi per la prima volta nella sua carriera nel wrestling, spingendolo a capire chi fosse lontano da ciò su cui aveva costruito la propria vita.</p><blockquote>“Ho passato l'intera carriera a predicare disciplina, preparazione e responsabilità. Poi mi sono fatto male.”</blockquote><p>Gable ha spiegato che la serie seguirà l'intero processo di ricostruzione fisica e mentale, coprendo riabilitazione, allenamento, alimentazione, battute d'arresto e vittorie.</p><blockquote>“Per la prima volta nella mia carriera di wrestler professionista, sono stato costretto a fermarmi e a capire chi sono quando la cosa su cui ho costruito la mia vita mi viene portata via. Perciò, vi porto con me.”</blockquote><p>Il documentario prenderà il via questo venerdì su YouTube e si articolerà in nove episodi, con una nuova puntata in uscita ogni venerdì.</p><blockquote>“A partire da questo venerdì, seguite la mia serie YouTube in 9 parti mentre ricostruisco tutto dalle fondamenta, tra riabilitazione, allenamento, nutrizione, contrattempi, vittorie e tutto ciò che sta nel mezzo.”</blockquote><p>Gable ha concluso l'annuncio chiarendo che non si tratterà della solita storia di ritorno edulcorata in cui tutto sembra facile.</p><blockquote>“Nuovi episodi ogni venerdì. Nessuna scorciatoia. Nessuna scusa. Nessuna finzione che ogni giorno sia una buona giornata.”</blockquote><p>La serie offrirà ai fan uno sguardo approfondito su ciò che Gable ha dovuto affrontare dopo l'infortunio, specialmente dopo un periodo frenetico che ha visto incrociarsi il suo lavoro in WWE, le apparizioni in AAA e la storyline di El Grande Americano. Gable è tornato, ma questo documentario promette di mostrare il lato più difficile e crudo del suo percorso verso il ring.</p>",
+      "category_hint": "World",
       "element_counts": {
         "embed": 0,
         "heading": 0,
         "image": 1,
-        "quote": 0,
+        "quote": 4,
         "table": 0,
-        "text": 6
+        "text": 9
       },
-      "excerpt_it": "Il futuro di Mike Santana in TNA è sempre più al centro dell'attenzione: il contratto del campione è in scadenza a luglio e l'interesse della WWE resta un fattore chiave.",
+      "excerpt_it": "Chad Gable racconta il suo calvario dopo l'infortunio alla spalla del 2025 in una docuserie in nove parti in arrivo su YouTube.",
       "meta": {
-        "description": "Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon. According to",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg",
-        "source_title": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest"
+        "description": "Chad Gable is pulling the curtain back on his comeback. After suffering a legitimate shoulder injury in June 2025 that kept him out for the rest of the",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg",
+        "source_title": "Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery"
       },
       "source": "ringsidenews",
-      "source_title": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest",
-      "source_url": "https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest/",
-      "title_it": "Aggiornamenti sul contratto di Mike Santana in TNA tra l'interesse della WWE"
+      "source_title": "Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery",
+      "source_url": "https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery/",
+      "title_it": "Chad Gable annuncia una docuserie in nove parti sul recupero dall'infortunio alla spalla"
+    },
+    {
+      "bob_translation_model": "gemini-3.1-flash-lite",
+      "body_html": "<p>Gunther ha sconfitto Royce Keys nel main event dell'ultimo episodio di WWE SmackDown.</p><p>Keys aveva ottenuto il match nel corso della serata, mentre Gunther continuava a tergiversare invece di firmare il contratto per il WWE Championship in vista di Clash in Italy. Dopo essersi presentato per occupare lo spazio vacante, il \"Ring General\" ha cambiato idea sull'avversario; il General Manager Nick Aldis ha quindi stabilito che i due si sarebbero affrontati nel main event con in palio l'opportunità titolata.</p><p>Keys ha dominato gran parte della prima fase dell'incontro, assorbendo l'offensiva iniziale di Gunther e riuscendo a sovrastare il rivale, schiantandolo più volte contro il tavolo di commento e colpendolo con un superplex per riportarlo sul ring.</p><p>L'inerzia del match è cambiata rapidamente quando Gunther ha applicato una sleeper hold al centro del ring, portando Keys al tappeto e sembrando a un passo dalla vittoria. A quel punto, Solo Sikoa è apparso a bordo ring iniziando a incitare Keys, distraendo così Gunther e permettendo a Keys di reagire e colpire il \"Ring General\" per un conteggio di due.</p><p>Gunther è tornato nuovamente alla sleeper hold al centro del quadrato, costringendo Keys in ginocchio prima che quest'ultimo riuscisse a rialzarsi ancora una volta. Keys ha poi spinto Gunther contro l'arbitro; Sikoa ha quindi recuperato una sedia d'acciaio passandola a Keys, ma quest'ultimo ha colpito proprio Sikoa, rifiutando il suo aiuto. Ciò ha concesso a Gunther il tempo e lo spazio necessari per abbattere Keys con una lariat, seguita da una powerbomb che gli è valsa il pin vincente e la title shot.</p>",
+      "category_hint": "WWE",
+      "element_counts": {
+        "embed": 0,
+        "heading": 0,
+        "image": 0,
+        "quote": 0,
+        "table": 0,
+        "text": 5
+      },
+      "excerpt_it": "Gunther ha sconfitto Royce Keys nel main event di SmackDown, ottenendo ufficialmente l'opportunità di sfidare Cody Rhodes per il WWE Championship a Clash in Italy.",
+      "meta": {
+        "description": "Gunther defeated Royce Keys in the main event of \"WWE SmackDown\" to secure his shot at Cody Rhodes' WWE Championship at Clash in Italy.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/gunther-defeats-royce-keys-on-wwe-smackdown-will-face-cody-rhodes-at-clash-in-italy/l-intro-1778900776.jpg",
+        "source_title": "GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy - Wrestling Inc."
+      },
+      "source": "wrestlinginc",
+      "source_title": "GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy",
+      "source_url": "https://www.wrestlinginc.com/2174268/wwe-smackdown-gunther-royce-keys-cody-rhodes-clash-in-italy/",
+      "title_it": "WWE SmackDown: Gunther batte Royce Keys e sfiderà Cody Rhodes a Clash in Italy"
     }
   ],
-  "generated_at": "2026-06-01T20:54:18.585810+00:00",
+  "generated_at": "2026-06-01T22:19:05.246066+00:00",
   "handoff": {
     "approved": 3,
     "blockers": 0,
-    "editorial_changes": 0,
+    "editorial_changes": 1,
     "needs_revision": 0,
     "warnings": 1
   },
@@ -110,139 +110,100 @@
     {
       "approved_article": {
         "bob_translation_model": "gemini-3.1-flash-lite",
-        "body_html": "<p>Sono stati resi noti i nuovi dati relativi agli ascolti dell'episodio di TNA iMPACT del 28 maggio 2026 su AMC, che mostrano un leggero incremento rispetto alla settimana precedente.</p><p>Secondo quanto riportato da <em>Programming Insider</em>, la puntata di TNA iMPACT del 28 maggio 2026 ha totalizzato 195.000 telespettatori su AMC, con un rating di 0.02 nella fascia demografica chiave 18-49 anni (P18-49). Per fare un confronto, l'episodio del 21 maggio 2026 aveva registrato 178.000 spettatori con un rating dello 0.03 nella stessa fascia, segnando quindi un aumento di 17.000 unità nel numero complessivo di spettatori e un calo di 0.01 nel rating demografico.</p><h3>TNA iMPACT Week-to-Week Viewership Comparison</h3><table class=\"owtv-data-table\"><tr><th>Metric</th><th>May 21, 2026</th><th>May 28, 2026</th><th>Change</th><th>% Change</th></tr><tr><td>Total Viewers</td><td>178,000</td><td>195,000</td><td>↑ +17,000</td><td>↑ +9.6%</td></tr><tr><td>P18–49 Demo</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -33.3%</td></tr></table><h3>TNA iMPACT Year-to-Date Performance (2026)</h3><table class=\"owtv-data-table\"><tr><th>Metric</th><th>2026 Average</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>205,760</td><td>195,000</td><td>↓ -10,760</td><td>↓ -5.2%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.04</td><td>0.02</td><td>↓ -0.02</td><td>↓ -47.4%</td></tr></table><h3>TNA iMPACT Month-to-Date Performance (May 2026)</h3><table class=\"owtv-data-table\"><tr><th>Metric</th><th>Month Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table><h3>TNA iMPACT 4-Week Rolling Average</h3><table class=\"owtv-data-table\"><tr><th>Metric</th><th>4 Week Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table><h3>Last 12 Months Performance Summary</h3><table class=\"owtv-data-table\"><tr><td>Average Viewership</td><td>205,760</td></tr><tr><td>Highest Viewership</td><td>259,000 (March 12, 2026)</td></tr><tr><td>Lowest Viewership</td><td>21,200 (April 16, 2026)</td></tr><tr><td>Average 18–49 Demo</td><td>0.04</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>20</td></tr></table><h3>Viewership Range (Last 12 Months)</h3><table class=\"owtv-data-table\"><tr><td>Highest</td><td>March 12, 2026</td><td>259,000</td></tr><tr><td>Lowest</td><td>April 16, 2026</td><td>21,200</td></tr><tr><td>Difference</td><td>—</td><td>237,800</td></tr></table><table class=\"owtv-data-table\"><tr><th>Week</th><th>Viewers</th><th>18–49 Demo</th></tr><tr><td>May 28, 2026</td><td>195,000</td><td>0.02</td></tr><tr><td>May 21, 2026</td><td>178,000</td><td>0.03</td></tr><tr><td>May 14, 2026</td><td>196,000</td><td>0.03</td></tr><tr><td>May 7, 2026</td><td>164,000</td><td>0.02</td></tr></table><p>Media mobile a 4 settimane: 183.250 telespettatori.</p><h3>Largest Weekly Viewership Changes (Last 12 Months)</h3><table class=\"owtv-data-table\"><tr><td>Largest Increase</td><td>April 24, 2026</td><td>+153,800</td></tr><tr><td>Largest Drop</td><td>April 16, 2026</td><td>-235,800</td></tr></table><p>Ascolti più alti del 2026: 259.000 (12 marzo 2026); Ascolti più bassi del 2026: 21.200 (16 aprile 2026).</p><p>Questi dati riflettono esclusivamente l'audience televisiva lineare su AMC e non includono la visione in streaming o tramite piattaforme digitali. Ringside News continuerà a monitorare TNA iMPACT mentre la compagnia prosegue il percorso di costruzione verso il suo prossimo grande evento dal vivo.</p>",
-        "category_hint": "TNA",
+        "body_html": "<p>La battaglia legale della WWE riguardante il passaggio dello streaming su ESPN si arricchisce di un nuovo capitolo, con i querelanti che puntano il dito contro un altro procedimento giudiziario in corso per sostenere la necessità di proseguire con la fase di <em>discovery</em>.</p><p>Secondo quanto riportato da Brandon Thurston, gli attori della class action relativa allo spostamento dei Premium Live Event della WWE sulla piattaforma streaming di ESPN si stanno opponendo al tentativo della compagnia di sospendere la fase di acquisizione delle prove. La loro tesi è che alla WWE non debba essere concessa tale pausa, poiché una causa separata in Delaware riguardante la fusione ha già sollevato seri dubbi sulla gestione e conservazione delle prove da parte dei vertici aziendali.</p><p>I querelanti hanno fatto specifico riferimento alla recente sentenza contro Nick Khan, in cui il tribunale ha accertato che alcune prove erano state distrutte in relazione al contenzioso sulla fusione WWE-UFC. I legali stanno ora utilizzando tale precedente per sostenere che la WWE non possa essere ritenuta affidabile nella conservazione delle prove qualora il caso sullo streaming ESPN venisse messo in stand-by.</p><p>Questo aspetto risulta cruciale, poiché la WWE sta cercando di spostare la causa sullo streaming ESPN verso un arbitrato. La compagnia ha sostenuto che, poiché i querelanti hanno sottoscritto l'abbonamento tramite ESPN Unlimited, le loro rivendicazioni dovrebbero ricadere sotto i termini di arbitrato di Disney ed ESPN, nonostante la WWE non fosse parte diretta di tale accordo di sottoscrizione.</p><p>La causa è stata intentata da Michael Diesa e Rebecca Tobak, i quali sostengono che i fan della WWE siano stati tratti in inganno sulle modalità di visione dei Premium Live Event in seguito al passaggio sull'app streaming di ESPN. L'azione legale sostiene che alcuni fan ritenessero che il loro accesso esistente a ESPN via cavo o tramite servizi di live TV streaming fosse sufficiente, per poi scoprire di dover pagare un costo aggiuntivo attraverso l'applicazione dedicata.</p><p>Attualmente, i querelanti stanno cercando di mantenere attiva la fase di <em>discovery</em> prima che il tribunale si esprima sulla richiesta di arbitrato della WWE. La loro posizione è lineare: visti i precedenti emersi nel caso separato sulla fusione, ritengono che alla WWE non debba essere consentito di ritardare la raccolta delle prove.</p><p>La causa è già di per sé significativa, giocandosi sulla possibilità che il procedimento rimanga in tribunale o venga spostato a porte chiuse tramite arbitrato. Questo nuovo deposito aggiunge un'accusa ancor più pesante alla disputa, poiché i querelanti mettono ora in dubbio la capacità della WWE di proteggere documenti e comunicazioni pertinenti al caso.</p><p>Il passaggio dei contenuti WWE su ESPN ha già generato confusione tra alcuni fan. Ora, la causa legale nata da tale transizione sta attirando nel vortice un altro problema giudiziario della compagnia, con i querelanti che utilizzano le difficoltà legali della WWE contro la compagnia stessa.</p>",
+        "category_hint": "WWE",
         "element_counts": {
           "embed": 0,
-          "heading": 7,
+          "heading": 0,
           "image": 0,
           "quote": 0,
-          "table": 8,
-          "text": 6
+          "table": 0,
+          "text": 9
         },
-        "excerpt_it": "Leggero incremento negli ascolti per l'episodio di TNA iMPACT del 28 maggio 2026 su AMC. Analizziamo i dati nel dettaglio.",
+        "excerpt_it": "I querelanti nella class action contro la WWE per lo streaming su ESPN si oppongono alla sospensione della fase di discovery, citando la distruzione di prove in un caso precedente sulla fusione WWE-UFC.",
         "meta": {
-          "description": "New ratings data has been released for the May 28, 2026 episode of TNA iMPACT on AMC, with the numbers ticking up slightly from the prior week. According",
-          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/02/TNA-iMPACT-Massive-Increase.jpg",
-          "source_title": "TNA iMPACT Viewership Sees Slight Increase on May 28, 2026"
+          "description": "WWE’s legal fight over its move to ESPN streaming just got another layer, and the plaintiffs are now pointing to a separate WWE lawsuit to argue discovery",
+          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/02/wwe-granted-extension-to-respond-to-espn-streaming-lawsuit-11.jpg",
+          "source_title": "WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit"
         },
         "source": "ringsidenews",
-        "source_title": "TNA iMPACT Viewership Sees Slight Increase on May 28, 2026",
-        "source_url": "https://www.ringsidenews.com/tna-impact-viewership-sees-slight-increase-may-28-2026/",
-        "title_it": "TNA iMPACT: i dati sugli ascolti del 28 maggio 2026"
+        "source_title": "WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit",
+        "source_url": "https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit/",
+        "title_it": "WWE sotto accusa: i querelanti dubitano della corretta conservazione delle prove nel caso ESPN"
       },
-      "category_hint": "TNA",
+      "category_hint": "WWE",
       "decision": "approved",
       "diagnostics": {
-        "bob_clean_element_count": 21,
+        "bob_clean_element_count": 9,
         "bob_diagnostic_stage": "ready_for_alfred",
         "bob_removed_before_gemini": 15,
         "bob_status": "ready_for_alfred",
         "bob_translation_model": "gemini-3.1-flash-lite",
         "editorial_changes": 0,
-        "plain_chars": 2394,
+        "plain_chars": 3045,
         "quote_count": 0,
-        "table_count": 8,
-        "title_chars": 51
+        "table_count": 0,
+        "title_chars": 94
       },
       "editorial_changes": [],
       "issues": [],
       "quality_score": 100,
       "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/tna-impact-viewership-sees-slight-increase-may-28-2026/",
-      "title_it": "TNA iMPACT: i dati sugli ascolti del 28 maggio 2026",
+      "source_url": "https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit/",
+      "title_it": "WWE sotto accusa: i querelanti dubitano della corretta conservazione delle prove nel caso ESPN",
       "warnings": []
     },
     {
       "approved_article": {
         "bob_translation_model": "gemini-3.1-flash-lite",
-        "body_html": "<p>Sono stati diffusi i nuovi dati sugli ascolti relativi alla puntata di AEW Dynamite andata in onda su TBS il 27 maggio 2026, che evidenziano un costante trend di crescita.</p><p>Secondo quanto riportato da <em>Programming Insider</em>, l'episodio di AEW Dynamite del 27 maggio 2026 ha totalizzato 704.000 spettatori, con un rating di 0.12 nella fascia demografica chiave 18-49 anni. Per fare un confronto, la puntata del 20 maggio 2026 aveva registrato 613.000 spettatori con un rating di 0 nella medesima fascia demografica, segnando un incremento di 91.000 spettatori e una crescita di 0.12 nel rating demo.</p><p>Rispetto allo stesso periodo dell'anno precedente, AEW Dynamite aveva totalizzato 636.000 spettatori e un rating dello 0.16 nella demo il 28 maggio 2025, contro i 704.000 spettatori e lo 0.12 registrati il 27 maggio 2026. Ciò rappresenta una variazione annua del +10,7% nel numero di spettatori e del -25,0% nella demo.</p><h3>AEW Dynamite Week-to-Week Viewership Comparison</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>May 20, 2026</td><td>May 27, 2026</td><td>Change</td><td>% Change</td></tr><tr><td>Total Viewers</td><td>613,000</td><td>704,000</td><td>↑ +91,000</td><td>↑ +14.8%</td></tr><tr><td>P18–49 Demo</td><td>0</td><td>0.12</td><td>↑ +0.12</td><td>↑ —</td></tr></table><h3>AEW Dynamite Year-to-Date Performance (2026)</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>2026 Average</td><td>Current Episode</td><td>Diff</td><td>%</td></tr><tr><td>Viewers</td><td>631,833</td><td>704,000</td><td>↑ 72,167</td><td>↑ 11.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.11</td><td>0.12</td><td>↑ 0.01</td><td>↑ 8.6%</td></tr></table><h3>AEW Dynamite Month-to-Date Performance (May 2026)</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>Month Avg</td><td>Current Episode</td><td>Diff</td><td>%</td></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table><h3>AEW Dynamite 4-Week Rolling Average</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>4 Week Avg</td><td>Current Episode</td><td>Diff</td><td>%</td></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table><h3>Last 12 Months Performance Summary</h3><table class=\"owtv-data-table\"><tr><td>Average Viewership</td><td>590,837</td></tr><tr><td>Highest Viewership</td><td>765,000 (March 25, 2026)</td></tr><tr><td>Lowest Viewership</td><td>321,000 (October 7, 2025)</td></tr><tr><td>Average 18–49 Demo</td><td>0.12</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>52</td></tr></table><h3>Viewership Range (Last 12 Months)</h3><table class=\"owtv-data-table\"><tr><td>Highest</td><td>March 25, 2026</td><td>765,000</td></tr><tr><td>Lowest</td><td>October 7, 2025</td><td>321,000</td></tr><tr><td>Difference</td><td>—</td><td>444,000</td></tr></table><table class=\"owtv-data-table\"><tr><td>Week</td><td>Viewers</td><td>18–49 Demo</td></tr><tr><td>May 27, 2026</td><td>704,000</td><td>0.12</td></tr><tr><td>May 20, 2026</td><td>613,000</td><td>—</td></tr><tr><td>May 13, 2026</td><td>585,000</td><td>0.10</td></tr><tr><td>May 6, 2026</td><td>509,500</td><td>0.08</td></tr></table><p>4-Week Average: 602,875 viewers</p><h3>Largest Weekly Viewership Changes (Last 12 Months)</h3><table class=\"owtv-data-table\"><tr><td>Largest Increase</td><td>October 15, 2025</td><td>+213,000</td></tr><tr><td>Largest Drop</td><td>October 1, 2025</td><td>-173,000</td></tr></table><h3>AEW Dynamite Year-over-Year Comparison (2025 vs 2026)</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>May 28, 2025</td><td>May 27, 2026</td><td>% Change</td></tr><tr><td>Total Viewers</td><td>636,000</td><td>704,000</td><td>↑ +10.7%</td></tr><tr><td>P18–49 Demo</td><td>0.16</td><td>0.12</td><td>↓ -25.0%</td></tr></table><p>Highest Viewership of 2026: 765,000 (March 25, 2026) Lowest Viewership of 2026: 498,000 (January 21, 2026)</p><p>Questi dati riflettono esclusivamente l'audience della TV lineare su TBS e non includono la visione in streaming o tramite piattaforme digitali. Ringside News continuerà a monitorare gli ascolti di AEW Dynamite mentre la compagnia si avvicina al suo prossimo importante evento live.</p>",
-        "category_hint": "AEW",
-        "element_counts": {
-          "embed": 0,
-          "heading": 8,
-          "image": 0,
-          "quote": 0,
-          "table": 9,
-          "text": 7
-        },
-        "excerpt_it": "Nuovi dati sugli ascolti per AEW Dynamite del 27 maggio 2026: la puntata ha registrato una crescita rispetto alla settimana precedente, raggiungendo i 704.000 spettatori.",
-        "meta": {
-          "description": "New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum. According to Programming",
-          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Dynamite-Massive-Increase-1.jpg",
-          "source_title": "AEW Dynamite Viewership Sees Increase on May 27, 2026"
-        },
-        "source": "ringsidenews",
-        "source_title": "AEW Dynamite Viewership Sees Increase on May 27, 2026",
-        "source_url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/",
-        "title_it": "AEW Dynamite: in crescita gli ascolti del 27 maggio 2026"
-      },
-      "category_hint": "AEW",
-      "decision": "approved",
-      "diagnostics": {
-        "bob_clean_element_count": 24,
-        "bob_diagnostic_stage": "ready_for_alfred",
-        "bob_removed_before_gemini": 15,
-        "bob_status": "ready_for_alfred",
-        "bob_translation_model": "gemini-3.1-flash-lite",
-        "editorial_changes": 0,
-        "plain_chars": 2790,
-        "quote_count": 0,
-        "table_count": 9,
-        "title_chars": 56
-      },
-      "editorial_changes": [],
-      "issues": [],
-      "quality_score": 100,
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/",
-      "title_it": "AEW Dynamite: in crescita gli ascolti del 27 maggio 2026",
-      "warnings": []
-    },
-    {
-      "approved_article": {
-        "bob_translation_model": "gemini-3.1-flash-lite",
-        "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x51578--><p>Il futuro di Mike Santana in TNA è diventato un po' più nitido, ma la sua prossima mossa resta ancora incerta, dato che il suo contratto è in scadenza a brevissimo.</p><p>Secondo quanto riportato da PWInsider il 1° giugno 2026, l'attuale contratto dell'attuale TNA World Champion con la compagnia scadrà nel corso del mese di luglio. Il report sottolinea inoltre come la WWE abbia mostrato interesse per Santana in passato.</p><p>Queste informazioni forniscono una tempistica più precisa sulla situazione contrattuale di Santana, dopo le prime indiscrezioni che davano il suo accordo con la TNA in scadenza nel corso dell'estate. Con il mese di luglio ormai indicato come termine, la prossima mossa di Santana potrebbe diventare un argomento di grande rilievo molto presto.</p><p>Santana è stato uno dei nomi di punta della TNA dal suo ritorno nel 2024 e il suo attuale regno come TNA World Champion rende la tempistica ancora più interessante. Se dovesse giungere alla scadenza del contratto senza averne firmato uno nuovo, potrebbe avere diverse opzioni nel panorama del wrestling mondiale.</p><p>Anche l'interesse della WWE rappresenta un fattore importante, specialmente considerando che Santana si sta già imponendo come una star da main event in TNA. Un passaggio alla WWE segnerebbe un cambiamento significativo, ma rimanere in TNA potrebbe consentirgli di continuare a guidare la federazione in un momento in cui le sue quotazioni sono molto alte.</p><p>Per ora, Santana rimane il TNA World Champion, ma il mese di luglio non è lontano. Che decida di restare o di esplorare una nuova opportunità, la sua situazione contrattuale è ora una delle storie più importanti da seguire quest'estate.</p>",
-        "category_hint": "TNA",
+        "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg.avif?x51578-->\n<p>Chad Gable svela i retroscena del suo ritorno sul ring. Dopo aver subito un grave infortunio alla spalla nel giugno 2025, che lo ha tenuto lontano dalle scene per il resto dell'anno, Gable ha annunciato l'uscita di una docuserie su YouTube in nove parti incentrata sul suo percorso di riabilitazione.</p><p>Prima dell'infortunio, Gable stava sostenendo un carico di lavoro raddoppiato, esibendosi regolarmente sia in WWE che in AAA, oltre a interpretare il personaggio originale di El Grande Americano. Il suo rientro è avvenuto infine alla Royal Rumble, alla fine di gennaio, tornando a vestire i panni di Americano.</p><p>Ora, Gable vuole mostrare ai fan cosa ha significato arrivare a quel momento. L'atleta ha spiegato che l'infortunio lo ha costretto a fermarsi per la prima volta nella sua carriera nel wrestling, spingendolo a capire chi fosse lontano da ciò su cui aveva costruito la propria vita.</p><blockquote>“Ho passato l'intera carriera a predicare disciplina, preparazione e responsabilità. Poi mi sono fatto male.”</blockquote><p>Gable ha spiegato che la serie seguirà l'intero processo di ricostruzione fisica e mentale, coprendo riabilitazione, allenamento, alimentazione, battute d'arresto e vittorie.</p><blockquote>“Per la prima volta nella mia carriera di wrestler professionista, sono stato costretto a fermarmi e a capire chi sono quando la cosa su cui ho costruito la mia vita mi viene portata via. Perciò, vi porto con me.”</blockquote><p>Il documentario prenderà il via questo venerdì su YouTube e si articolerà in nove episodi, con una nuova puntata in uscita ogni venerdì.</p><blockquote>“A partire da questo venerdì, seguite la mia serie YouTube in 9 parti mentre ricostruisco tutto dalle fondamenta, tra riabilitazione, allenamento, nutrizione, contrattempi, vittorie e tutto ciò che sta nel mezzo.”</blockquote><p>Gable ha concluso l'annuncio chiarendo che non si tratterà della solita storia di ritorno edulcorata in cui tutto sembra facile.</p><blockquote>“Nuovi episodi ogni venerdì. Nessuna scorciatoia. Nessuna scusa. Nessuna finzione che ogni giorno sia una buona giornata.”</blockquote><p>La serie offrirà ai fan uno sguardo approfondito su ciò che Gable ha dovuto affrontare dopo l'infortunio, specialmente dopo un periodo frenetico che ha visto incrociarsi il suo lavoro in WWE, le apparizioni in AAA e la storyline di El Grande Americano. Gable è tornato, ma questo documentario promette di mostrare il lato più difficile e crudo del suo percorso verso il ring.</p>",
+        "category_hint": "World",
         "element_counts": {
           "embed": 0,
           "heading": 0,
           "image": 1,
-          "quote": 0,
+          "quote": 4,
           "table": 0,
-          "text": 6
+          "text": 9
         },
-        "excerpt_it": "Il futuro di Mike Santana in TNA è sempre più al centro dell'attenzione: il contratto del campione è in scadenza a luglio e l'interesse della WWE resta un fattore chiave.",
+        "excerpt_it": "Chad Gable racconta il suo calvario dopo l'infortunio alla spalla del 2025 in una docuserie in nove parti in arrivo su YouTube.",
         "meta": {
-          "description": "Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon. According to",
-          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg",
-          "source_title": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest"
+          "description": "Chad Gable is pulling the curtain back on his comeback. After suffering a legitimate shoulder injury in June 2025 that kept him out for the rest of the",
+          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg",
+          "source_title": "Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery"
         },
         "source": "ringsidenews",
-        "source_title": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest",
-        "source_url": "https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest/",
-        "title_it": "Aggiornamenti sul contratto di Mike Santana in TNA tra l'interesse della WWE"
+        "source_title": "Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery",
+        "source_url": "https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery/",
+        "title_it": "Chad Gable annuncia una docuserie in nove parti sul recupero dall'infortunio alla spalla"
       },
-      "category_hint": "TNA",
+      "category_hint": "World",
       "decision": "approved",
       "diagnostics": {
-        "bob_clean_element_count": 7,
+        "bob_clean_element_count": 14,
         "bob_diagnostic_stage": "ready_for_alfred",
         "bob_removed_before_gemini": 14,
         "bob_status": "ready_for_alfred",
         "bob_translation_model": "gemini-3.1-flash-lite",
-        "editorial_changes": 0,
-        "plain_chars": 1668,
-        "quote_count": 0,
+        "editorial_changes": 1,
+        "plain_chars": 2371,
+        "quote_count": 4,
         "table_count": 0,
-        "title_chars": 76
+        "title_chars": 88
       },
-      "editorial_changes": [],
+      "editorial_changes": [
+        {
+          "code": "image_placeholder_split",
+          "evidence": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg.avif?x51578-->",
+          "message": "Placeholder immagine separato dal paragrafo di testo.",
+          "severity": "info"
+        }
+      ],
       "issues": [],
       "quality_score": 95,
       "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest/",
-      "title_it": "Aggiornamenti sul contratto di Mike Santana in TNA tra l'interesse della WWE",
+      "source_url": "https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery/",
+      "title_it": "Chad Gable annuncia una docuserie in nove parti sul recupero dall'infortunio alla spalla",
       "warnings": [
         {
           "code": "image_placeholder_present",
@@ -251,6 +212,52 @@
           "severity": "warning"
         }
       ]
+    },
+    {
+      "approved_article": {
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "body_html": "<p>Gunther ha sconfitto Royce Keys nel main event dell'ultimo episodio di WWE SmackDown.</p><p>Keys aveva ottenuto il match nel corso della serata, mentre Gunther continuava a tergiversare invece di firmare il contratto per il WWE Championship in vista di Clash in Italy. Dopo essersi presentato per occupare lo spazio vacante, il \"Ring General\" ha cambiato idea sull'avversario; il General Manager Nick Aldis ha quindi stabilito che i due si sarebbero affrontati nel main event con in palio l'opportunità titolata.</p><p>Keys ha dominato gran parte della prima fase dell'incontro, assorbendo l'offensiva iniziale di Gunther e riuscendo a sovrastare il rivale, schiantandolo più volte contro il tavolo di commento e colpendolo con un superplex per riportarlo sul ring.</p><p>L'inerzia del match è cambiata rapidamente quando Gunther ha applicato una sleeper hold al centro del ring, portando Keys al tappeto e sembrando a un passo dalla vittoria. A quel punto, Solo Sikoa è apparso a bordo ring iniziando a incitare Keys, distraendo così Gunther e permettendo a Keys di reagire e colpire il \"Ring General\" per un conteggio di due.</p><p>Gunther è tornato nuovamente alla sleeper hold al centro del quadrato, costringendo Keys in ginocchio prima che quest'ultimo riuscisse a rialzarsi ancora una volta. Keys ha poi spinto Gunther contro l'arbitro; Sikoa ha quindi recuperato una sedia d'acciaio passandola a Keys, ma quest'ultimo ha colpito proprio Sikoa, rifiutando il suo aiuto. Ciò ha concesso a Gunther il tempo e lo spazio necessari per abbattere Keys con una lariat, seguita da una powerbomb che gli è valsa il pin vincente e la title shot.</p>",
+        "category_hint": "WWE",
+        "element_counts": {
+          "embed": 0,
+          "heading": 0,
+          "image": 0,
+          "quote": 0,
+          "table": 0,
+          "text": 5
+        },
+        "excerpt_it": "Gunther ha sconfitto Royce Keys nel main event di SmackDown, ottenendo ufficialmente l'opportunità di sfidare Cody Rhodes per il WWE Championship a Clash in Italy.",
+        "meta": {
+          "description": "Gunther defeated Royce Keys in the main event of \"WWE SmackDown\" to secure his shot at Cody Rhodes' WWE Championship at Clash in Italy.",
+          "featured_image": "https://www.wrestlinginc.com/img/gallery/gunther-defeats-royce-keys-on-wwe-smackdown-will-face-cody-rhodes-at-clash-in-italy/l-intro-1778900776.jpg",
+          "source_title": "GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy - Wrestling Inc."
+        },
+        "source": "wrestlinginc",
+        "source_title": "GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy",
+        "source_url": "https://www.wrestlinginc.com/2174268/wwe-smackdown-gunther-royce-keys-cody-rhodes-clash-in-italy/",
+        "title_it": "WWE SmackDown: Gunther batte Royce Keys e sfiderà Cody Rhodes a Clash in Italy"
+      },
+      "category_hint": "WWE",
+      "decision": "approved",
+      "diagnostics": {
+        "bob_clean_element_count": 5,
+        "bob_diagnostic_stage": "ready_for_alfred",
+        "bob_removed_before_gemini": 1,
+        "bob_status": "ready_for_alfred",
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "editorial_changes": 0,
+        "plain_chars": 1618,
+        "quote_count": 0,
+        "table_count": 0,
+        "title_chars": 78
+      },
+      "editorial_changes": [],
+      "issues": [],
+      "quality_score": 100,
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2174268/wwe-smackdown-gunther-royce-keys-cody-rhodes-clash-in-italy/",
+      "title_it": "WWE SmackDown: Gunther batte Royce Keys e sfiderà Cody Rhodes a Clash in Italy",
+      "warnings": []
     }
   ],
   "version": "v93_8_alfred_structured_content_checks"

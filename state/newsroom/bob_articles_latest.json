@@ -3,117 +3,54 @@
   "articles": [
     {
       "bob_notes": [
-        "Traduzione fedele dei dati numerici e delle tabelle.",
-        "Mantenuta la terminologia tecnica del settore.",
-        "Il testo rispetta rigorosamente la struttura originale, incluse le intestazioni e le tabelle HTML richieste."
+        "Traduzione conforme alla linea editoriale di OpenWrestlingTV.",
+        "Terminologia tecnica (Premium Live Event, discovery, class action) mantenuta per precisione giornalistica.",
+        "Il paragrafo relativo a Steve Carrier è stato omesso in quanto trattasi di bio autore, come da regole non negoziabili."
       ],
-      "body_html": "<p>Sono stati resi noti i nuovi dati relativi agli ascolti dell'episodio di TNA iMPACT del 28 maggio 2026 su AMC, che mostrano un leggero incremento rispetto alla settimana precedente.</p><p>Secondo quanto riportato da <em>Programming Insider</em>, la puntata di TNA iMPACT del 28 maggio 2026 ha totalizzato 195.000 telespettatori su AMC, con un rating di 0.02 nella fascia demografica chiave 18-49 anni (P18-49). Per fare un confronto, l'episodio del 21 maggio 2026 aveva registrato 178.000 spettatori con un rating dello 0.03 nella stessa fascia, segnando quindi un aumento di 17.000 unità nel numero complessivo di spettatori e un calo di 0.01 nel rating demografico.</p><h3>TNA iMPACT Week-to-Week Viewership Comparison</h3><table class=\"owtv-data-table\"><tr><th>Metric</th><th>May 21, 2026</th><th>May 28, 2026</th><th>Change</th><th>% Change</th></tr><tr><td>Total Viewers</td><td>178,000</td><td>195,000</td><td>↑ +17,000</td><td>↑ +9.6%</td></tr><tr><td>P18–49 Demo</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -33.3%</td></tr></table><h3>TNA iMPACT Year-to-Date Performance (2026)</h3><table class=\"owtv-data-table\"><tr><th>Metric</th><th>2026 Average</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>205,760</td><td>195,000</td><td>↓ -10,760</td><td>↓ -5.2%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.04</td><td>0.02</td><td>↓ -0.02</td><td>↓ -47.4%</td></tr></table><h3>TNA iMPACT Month-to-Date Performance (May 2026)</h3><table class=\"owtv-data-table\"><tr><th>Metric</th><th>Month Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table><h3>TNA iMPACT 4-Week Rolling Average</h3><table class=\"owtv-data-table\"><tr><th>Metric</th><th>4 Week Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table><h3>Last 12 Months Performance Summary</h3><table class=\"owtv-data-table\"><tr><td>Average Viewership</td><td>205,760</td></tr><tr><td>Highest Viewership</td><td>259,000 (March 12, 2026)</td></tr><tr><td>Lowest Viewership</td><td>21,200 (April 16, 2026)</td></tr><tr><td>Average 18–49 Demo</td><td>0.04</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>20</td></tr></table><h3>Viewership Range (Last 12 Months)</h3><table class=\"owtv-data-table\"><tr><td>Highest</td><td>March 12, 2026</td><td>259,000</td></tr><tr><td>Lowest</td><td>April 16, 2026</td><td>21,200</td></tr><tr><td>Difference</td><td>—</td><td>237,800</td></tr></table><table class=\"owtv-data-table\"><tr><th>Week</th><th>Viewers</th><th>18–49 Demo</th></tr><tr><td>May 28, 2026</td><td>195,000</td><td>0.02</td></tr><tr><td>May 21, 2026</td><td>178,000</td><td>0.03</td></tr><tr><td>May 14, 2026</td><td>196,000</td><td>0.03</td></tr><tr><td>May 7, 2026</td><td>164,000</td><td>0.02</td></tr></table><p>Media mobile a 4 settimane: 183.250 telespettatori.</p><h3>Largest Weekly Viewership Changes (Last 12 Months)</h3><table class=\"owtv-data-table\"><tr><td>Largest Increase</td><td>April 24, 2026</td><td>+153,800</td></tr><tr><td>Largest Drop</td><td>April 16, 2026</td><td>-235,800</td></tr></table><p>Ascolti più alti del 2026: 259.000 (12 marzo 2026); Ascolti più bassi del 2026: 21.200 (16 aprile 2026).</p><p>Questi dati riflettono esclusivamente l'audience televisiva lineare su AMC e non includono la visione in streaming o tramite piattaforme digitali. Ringside News continuerà a monitorare TNA iMPACT mentre la compagnia prosegue il percorso di costruzione verso il suo prossimo grande evento dal vivo.</p>",
-      "category_hint": "TNA",
-      "clean_element_count": 21,
-      "created_at": "2026-06-01T20:54:04.066267+00:00",
+      "body_html": "<p>La battaglia legale della WWE riguardante il passaggio dello streaming su ESPN si arricchisce di un nuovo capitolo, con i querelanti che puntano il dito contro un altro procedimento giudiziario in corso per sostenere la necessità di proseguire con la fase di <em>discovery</em>.</p><p>Secondo quanto riportato da Brandon Thurston, gli attori della class action relativa allo spostamento dei Premium Live Event della WWE sulla piattaforma streaming di ESPN si stanno opponendo al tentativo della compagnia di sospendere la fase di acquisizione delle prove. La loro tesi è che alla WWE non debba essere concessa tale pausa, poiché una causa separata in Delaware riguardante la fusione ha già sollevato seri dubbi sulla gestione e conservazione delle prove da parte dei vertici aziendali.</p><p>I querelanti hanno fatto specifico riferimento alla recente sentenza contro Nick Khan, in cui il tribunale ha accertato che alcune prove erano state distrutte in relazione al contenzioso sulla fusione WWE-UFC. I legali stanno ora utilizzando tale precedente per sostenere che la WWE non possa essere ritenuta affidabile nella conservazione delle prove qualora il caso sullo streaming ESPN venisse messo in stand-by.</p><p>Questo aspetto risulta cruciale, poiché la WWE sta cercando di spostare la causa sullo streaming ESPN verso un arbitrato. La compagnia ha sostenuto che, poiché i querelanti hanno sottoscritto l'abbonamento tramite ESPN Unlimited, le loro rivendicazioni dovrebbero ricadere sotto i termini di arbitrato di Disney ed ESPN, nonostante la WWE non fosse parte diretta di tale accordo di sottoscrizione.</p><p>La causa è stata intentata da Michael Diesa e Rebecca Tobak, i quali sostengono che i fan della WWE siano stati tratti in inganno sulle modalità di visione dei Premium Live Event in seguito al passaggio sull'app streaming di ESPN. L'azione legale sostiene che alcuni fan ritenessero che il loro accesso esistente a ESPN via cavo o tramite servizi di live TV streaming fosse sufficiente, per poi scoprire di dover pagare un costo aggiuntivo attraverso l'applicazione dedicata.</p><p>Attualmente, i querelanti stanno cercando di mantenere attiva la fase di <em>discovery</em> prima che il tribunale si esprima sulla richiesta di arbitrato della WWE. La loro posizione è lineare: visti i precedenti emersi nel caso separato sulla fusione, ritengono che alla WWE non debba essere consentito di ritardare la raccolta delle prove.</p><p>La causa è già di per sé significativa, giocandosi sulla possibilità che il procedimento rimanga in tribunale o venga spostato a porte chiuse tramite arbitrato. Questo nuovo deposito aggiunge un'accusa ancor più pesante alla disputa, poiché i querelanti mettono ora in dubbio la capacità della WWE di proteggere documenti e comunicazioni pertinenti al caso.</p><p>Il passaggio dei contenuti WWE su ESPN ha già generato confusione tra alcuni fan. Ora, la causa legale nata da tale transizione sta attirando nel vortice un altro problema giudiziario della compagnia, con i querelanti che utilizzano le difficoltà legali della WWE contro la compagnia stessa.</p>",
+      "category_hint": "WWE",
+      "clean_element_count": 9,
+      "created_at": "2026-06-01T22:18:52.677119+00:00",
       "diagnostic_stage": "ready_for_alfred",
       "element_counts": {
         "embed": 0,
-        "heading": 7,
+        "heading": 0,
         "image": 0,
         "quote": 0,
-        "table": 8,
-        "text": 6
+        "table": 0,
+        "text": 9
       },
       "elements": [
         {
-          "text": "New ratings data has been released for the May 28, 2026 episode of TNA iMPACT on AMC, with the numbers ticking up slightly from the prior week.",
+          "text": "WWE’s legal fight over its move to ESPN streaming just got another layer, and the plaintiffs are now pointing to a separate WWE lawsuit to argue discovery should move forward.",
           "type": "text"
         },
         {
-          "text": "According to Programming Insider , TNA iMPACT on May 28, 2026 drew 195,000 viewers on AMC, with a 0.02 rating in the key P18–49 demographic. For comparison, the May 21, 2026 episode drew 178,000 viewers with a 0.03 rating in the key P18–49 demographic, an increase of ↑ 17,000 viewers and down by ↓ 0.01 in the demo.",
+          "text": "According to Brandon Thurston , plaintiffs in the class action lawsuit over WWE Premium Live Events moving to ESPN streaming are pushing back against WWE’s attempt to pause discovery. Their argument is that WWE should not get that pause because a separate Delaware merger lawsuit already raised serious questions about evidence preservation involving company leadership.",
           "type": "text"
         },
         {
-          "level": 3,
-          "text": "TNA iMPACT Week-to-Week Viewership Comparison",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>May 21, 2026</th><th>May 28, 2026</th><th>Change</th><th>% Change</th></tr><tr><td>Total Viewers</td><td>178,000</td><td>195,000</td><td>↑ +17,000</td><td>↑ +9.6%</td></tr><tr><td>P18–49 Demo</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -33.3%</td></tr></table>",
-          "markdown": "Metric | May 21, 2026 | May 28, 2026 | Change | % Change\n--- | --- | --- | --- | ---\nTotal Viewers | 178,000 | 195,000 | ↑ +17,000 | ↑ +9.6%\nP18–49 Demo | 0.03 | 0.02 | ↓ -0.01 | ↓ -33.3%",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "TNA iMPACT Year-to-Date Performance (2026)",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>2026 Average</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>205,760</td><td>195,000</td><td>↓ -10,760</td><td>↓ -5.2%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.04</td><td>0.02</td><td>↓ -0.02</td><td>↓ -47.4%</td></tr></table>",
-          "markdown": "Metric | 2026 Average | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 205,760 | 195,000 | ↓ -10,760 | ↓ -5.2%\nP18–49 Demo Avg | 0.04 | 0.02 | ↓ -0.02 | ↓ -47.4%",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "TNA iMPACT Month-to-Date Performance (May 2026)",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>Month Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table>",
-          "markdown": "Metric | Month Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 183,250 | 195,000 | ↑ 11,750 | ↑ 6.4%\nP18–49 Demo Avg | 0.03 | 0.02 | ↓ -0.01 | ↓ -20%",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "TNA iMPACT 4-Week Rolling Average",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>4 Week Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table>",
-          "markdown": "Metric | 4 Week Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 183,250 | 195,000 | ↑ 11,750 | ↑ 6.4%\nP18–49 Demo Avg | 0.03 | 0.02 | ↓ -0.01 | ↓ -20%",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "Last 12 Months Performance Summary",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Average Viewership</th><th>205,760</th></tr><tr><td>Highest Viewership</td><td>259,000 (March 12, 2026)</td></tr><tr><td>Lowest Viewership</td><td>21,200 (April 16, 2026)</td></tr><tr><td>Average 18–49 Demo</td><td>0.04</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>20</td></tr></table>",
-          "markdown": "Average Viewership | 205,760\n--- | ---\nHighest Viewership | 259,000 (March 12, 2026)\nLowest Viewership | 21,200 (April 16, 2026)\nAverage 18–49 Demo | 0.04\nWeeks Above 1,000,000 Viewers | 0\nWeeks Below 1,000,000 Viewers | 20",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "Viewership Range (Last 12 Months)",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Highest</th><th>March 12, 2026</th><th>259,000</th></tr><tr><td>Lowest</td><td>April 16, 2026</td><td>21,200</td></tr><tr><td>Difference</td><td>—</td><td>237,800</td></tr></table>",
-          "markdown": "Highest | March 12, 2026 | 259,000\n--- | --- | ---\nLowest | April 16, 2026 | 21,200\nDifference | — | 237,800",
-          "type": "table"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Week</th><th>Viewers</th><th>18–49 Demo</th></tr><tr><td>May 28, 2026</td><td>195,000</td><td>0.02</td></tr><tr><td>May 21, 2026</td><td>178,000</td><td>0.03</td></tr><tr><td>May 14, 2026</td><td>196,000</td><td>0.03</td></tr><tr><td>May 7, 2026</td><td>164,000</td><td>0.02</td></tr></table>",
-          "markdown": "Week | Viewers | 18–49 Demo\n--- | --- | ---\nMay 28, 2026 | 195,000 | 0.02\nMay 21, 2026 | 178,000 | 0.03\nMay 14, 2026 | 196,000 | 0.03\nMay 7, 2026 | 164,000 | 0.02",
-          "type": "table"
-        },
-        {
-          "text": "4-Week Average: 183,250 viewers",
+          "text": "The plaintiffs specifically pointed to the recent ruling against Nick Khan, where the court found that evidence had been destroyed in connection with the WWE-UFC merger litigation. They are now using that ruling to argue that WWE cannot simply be trusted to preserve evidence while the ESPN streaming case sits on hold.",
           "type": "text"
         },
         {
-          "level": 3,
-          "text": "Largest Weekly Viewership Changes (Last 12 Months)",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Largest Increase</th><th>April 24, 2026</th><th>+153,800</th></tr><tr><td>Largest Drop</td><td>April 16, 2026</td><td>-235,800</td></tr></table>",
-          "markdown": "Largest Increase | April 24, 2026 | +153,800\n--- | --- | ---\nLargest Drop | April 16, 2026 | -235,800",
-          "type": "table"
-        },
-        {
-          "text": "Highest Viewership of 2026: 259,000 ( March 12, 2026 ) Lowest Viewership of 2026: 21,200 ( April 16, 2026 )",
+          "text": "That matters because WWE has been trying to force the ESPN streaming lawsuit into arbitration. The company argued that because the plaintiffs subscribed through ESPN Unlimited, their claims should be covered by Disney and ESPN’s arbitration terms, even though WWE itself was not directly part of that subscriber agreement.",
           "type": "text"
         },
         {
-          "text": "These figures reflect only linear TV viewership on AMC and do not include streaming or digital viewership. Ringside News will continue to monitor TNA iMPACT as the company builds toward its next major live event.",
+          "text": "The lawsuit was filed by Michael Diesa and Rebecca Tobak, who claim WWE fans were misled about how they could watch Premium Live Events after WWE moved them to ESPN’s streaming app. The lawsuit alleges that some fans believed their existing ESPN access through cable or live TV streaming would be enough, only to discover they had to pay extra through the ESPN app.",
+          "type": "text"
+        },
+        {
+          "text": "Now the plaintiffs are trying to keep discovery moving before the court rules on WWE’s arbitration push. Their position is simple: after what happened in the separate merger case, they do not believe WWE should be allowed to delay evidence collection.",
+          "type": "text"
+        },
+        {
+          "text": "The case already had a lot riding on whether it stays in court or moves behind closed doors into arbitration. This new filing adds a sharper accusation to the fight, because plaintiffs are now directly questioning whether WWE can be trusted to protect documents and communications tied to the case.",
+          "type": "text"
+        },
+        {
+          "text": "WWE’s move to ESPN streaming already created confusion for some fans. Now the lawsuit over that rollout is pulling in another WWE legal headache, and plaintiffs are using the company’s own courtroom problems against it.",
           "type": "text"
         },
         {
@@ -121,127 +58,64 @@
           "type": "text"
         }
       ],
-      "excerpt_it": "Leggero incremento negli ascolti per l'episodio di TNA iMPACT del 28 maggio 2026 su AMC. Analizziamo i dati nel dettaglio.",
+      "excerpt_it": "I querelanti nella class action contro la WWE per lo streaming su ESPN si oppongono alla sospensione della fase di discovery, citando la distruzione di prove in un caso precedente sulla fusione WWE-UFC.",
       "extraction_diagnostics": {
-        "candidate_node_count": 60,
-        "clean_element_count": 21,
+        "candidate_node_count": 43,
+        "clean_element_count": 9,
         "dom_noise_reduction_enabled": false,
         "quote_count": 0,
-        "raw_element_count": 23,
+        "raw_element_count": 11,
         "removed_by_node_count": 13,
         "removed_by_sanitize_count": 2,
         "root_name": "article",
-        "root_text_chars": 3144,
+        "root_text_chars": 3370,
         "stage": "complete",
-        "table_count": 8
+        "table_count": 0
       },
-      "fetched_html_chars": 485525,
-      "menzo_score": 84,
+      "fetched_html_chars": 482316,
+      "menzo_score": 88,
       "meta": {
-        "description": "New ratings data has been released for the May 28, 2026 episode of TNA iMPACT on AMC, with the numbers ticking up slightly from the prior week. According",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/02/TNA-iMPACT-Massive-Increase.jpg",
-        "source_title": "TNA iMPACT Viewership Sees Slight Increase on May 28, 2026"
+        "description": "WWE’s legal fight over its move to ESPN streaming just got another layer, and the plaintiffs are now pointing to a separate WWE lawsuit to argue discovery",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/02/wwe-granted-extension-to-respond-to-espn-streaming-lawsuit-11.jpg",
+        "source_title": "WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit"
       },
-      "raw_element_count": 23,
+      "raw_element_count": 11,
       "raw_elements_preview": [
         {
-          "alt": "TNA iMPACT Viewership Sees Slight Increase on May 28, 2026",
+          "alt": "WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit",
           "type": "image",
-          "url": "https://www.ringsidenews.com/wp-content/uploads/2026/02/TNA-iMPACT-Massive-Increase.jpg?x51578"
+          "url": "https://www.ringsidenews.com/wp-content/uploads/2026/02/wwe-granted-extension-to-respond-to-espn-streaming-lawsuit-11.jpg?x51578"
         },
         {
-          "text": "New ratings data has been released for the May 28, 2026 episode of TNA iMPACT on AMC, with the numbers ticking up slightly from the prior week.",
+          "text": "WWE’s legal fight over its move to ESPN streaming just got another layer, and the plaintiffs are now pointing to a separate WWE lawsuit to argue discovery should move forward.",
           "type": "text"
         },
         {
-          "text": "According to Programming Insider , TNA iMPACT on May 28, 2026 drew 195,000 viewers on AMC, with a 0.02 rating in the key P18–49 demographic. For comparison, the May 21, 2026 episode drew 178,000 viewers with a 0.03 rating in the key P18–49 demographic, an increase of ↑ 17,000 viewers and down by ↓ 0.01 in the demo.",
+          "text": "According to Brandon Thurston , plaintiffs in the class action lawsuit over WWE Premium Live Events moving to ESPN streaming are pushing back against WWE’s attempt to pause discovery. Their argument is that WWE should not get that pause because a separate Delaware merger lawsuit already raised serious questions about evidence preservation involving company leadership.",
           "type": "text"
         },
         {
-          "level": 3,
-          "text": "TNA iMPACT Week-to-Week Viewership Comparison",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>May 21, 2026</th><th>May 28, 2026</th><th>Change</th><th>% Change</th></tr><tr><td>Total Viewers</td><td>178,000</td><td>195,000</td><td>↑ +17,000</td><td>↑ +9.6%</td></tr><tr><td>P18–49 Demo</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -33.3%</td></tr></table>",
-          "markdown": "Metric | May 21, 2026 | May 28, 2026 | Change | % Change\n--- | --- | --- | --- | ---\nTotal Viewers | 178,000 | 195,000 | ↑ +17,000 | ↑ +9.6%\nP18–49 Demo | 0.03 | 0.02 | ↓ -0.01 | ↓ -33.3%",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "TNA iMPACT Year-to-Date Performance (2026)",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>2026 Average</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>205,760</td><td>195,000</td><td>↓ -10,760</td><td>↓ -5.2%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.04</td><td>0.02</td><td>↓ -0.02</td><td>↓ -47.4%</td></tr></table>",
-          "markdown": "Metric | 2026 Average | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 205,760 | 195,000 | ↓ -10,760 | ↓ -5.2%\nP18–49 Demo Avg | 0.04 | 0.02 | ↓ -0.02 | ↓ -47.4%",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "TNA iMPACT Month-to-Date Performance (May 2026)",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>Month Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table>",
-          "markdown": "Metric | Month Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 183,250 | 195,000 | ↑ 11,750 | ↑ 6.4%\nP18–49 Demo Avg | 0.03 | 0.02 | ↓ -0.01 | ↓ -20%",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "TNA iMPACT 4-Week Rolling Average",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>4 Week Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table>",
-          "markdown": "Metric | 4 Week Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 183,250 | 195,000 | ↑ 11,750 | ↑ 6.4%\nP18–49 Demo Avg | 0.03 | 0.02 | ↓ -0.01 | ↓ -20%",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "Last 12 Months Performance Summary",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Average Viewership</th><th>205,760</th></tr><tr><td>Highest Viewership</td><td>259,000 (March 12, 2026)</td></tr><tr><td>Lowest Viewership</td><td>21,200 (April 16, 2026)</td></tr><tr><td>Average 18–49 Demo</td><td>0.04</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>20</td></tr></table>",
-          "markdown": "Average Viewership | 205,760\n--- | ---\nHighest Viewership | 259,000 (March 12, 2026)\nLowest Viewership | 21,200 (April 16, 2026)\nAverage 18–49 Demo | 0.04\nWeeks Above 1,000,000 Viewers | 0\nWeeks Below 1,000,000 Viewers | 20",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "Viewership Range (Last 12 Months)",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Highest</th><th>March 12, 2026</th><th>259,000</th></tr><tr><td>Lowest</td><td>April 16, 2026</td><td>21,200</td></tr><tr><td>Difference</td><td>—</td><td>237,800</td></tr></table>",
-          "markdown": "Highest | March 12, 2026 | 259,000\n--- | --- | ---\nLowest | April 16, 2026 | 21,200\nDifference | — | 237,800",
-          "type": "table"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Week</th><th>Viewers</th><th>18–49 Demo</th></tr><tr><td>May 28, 2026</td><td>195,000</td><td>0.02</td></tr><tr><td>May 21, 2026</td><td>178,000</td><td>0.03</td></tr><tr><td>May 14, 2026</td><td>196,000</td><td>0.03</td></tr><tr><td>May 7, 2026</td><td>164,000</td><td>0.02</td></tr></table>",
-          "markdown": "Week | Viewers | 18–49 Demo\n--- | --- | ---\nMay 28, 2026 | 195,000 | 0.02\nMay 21, 2026 | 178,000 | 0.03\nMay 14, 2026 | 196,000 | 0.03\nMay 7, 2026 | 164,000 | 0.02",
-          "type": "table"
-        },
-        {
-          "text": "4-Week Average: 183,250 viewers",
+          "text": "The plaintiffs specifically pointed to the recent ruling against Nick Khan, where the court found that evidence had been destroyed in connection with the WWE-UFC merger litigation. They are now using that ruling to argue that WWE cannot simply be trusted to preserve evidence while the ESPN streaming case sits on hold.",
           "type": "text"
         },
         {
-          "level": 3,
-          "text": "Largest Weekly Viewership Changes (Last 12 Months)",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Largest Increase</th><th>April 24, 2026</th><th>+153,800</th></tr><tr><td>Largest Drop</td><td>April 16, 2026</td><td>-235,800</td></tr></table>",
-          "markdown": "Largest Increase | April 24, 2026 | +153,800\n--- | --- | ---\nLargest Drop | April 16, 2026 | -235,800",
-          "type": "table"
-        },
-        {
-          "text": "Highest Viewership of 2026: 259,000 ( March 12, 2026 ) Lowest Viewership of 2026: 21,200 ( April 16, 2026 )",
+          "text": "That matters because WWE has been trying to force the ESPN streaming lawsuit into arbitration. The company argued that because the plaintiffs subscribed through ESPN Unlimited, their claims should be covered by Disney and ESPN’s arbitration terms, even though WWE itself was not directly part of that subscriber agreement.",
           "type": "text"
         },
         {
-          "text": "These figures reflect only linear TV viewership on AMC and do not include streaming or digital viewership. Ringside News will continue to monitor TNA iMPACT as the company builds toward its next major live event.",
+          "text": "The lawsuit was filed by Michael Diesa and Rebecca Tobak, who claim WWE fans were misled about how they could watch Premium Live Events after WWE moved them to ESPN’s streaming app. The lawsuit alleges that some fans believed their existing ESPN access through cable or live TV streaming would be enough, only to discover they had to pay extra through the ESPN app.",
+          "type": "text"
+        },
+        {
+          "text": "Now the plaintiffs are trying to keep discovery moving before the court rules on WWE’s arbitration push. Their position is simple: after what happened in the separate merger case, they do not believe WWE should be allowed to delay evidence collection.",
+          "type": "text"
+        },
+        {
+          "text": "The case already had a lot riding on whether it stays in court or moves behind closed doors into arbitration. This new filing adds a sharper accusation to the fight, because plaintiffs are now directly questioning whether WWE can be trusted to protect documents and communications tied to the case.",
+          "type": "text"
+        },
+        {
+          "text": "WWE’s move to ESPN streaming already created confusion for some fans. Now the lawsuit over that rollout is pulling in another WWE legal headache, and plaintiffs are using the company’s own courtroom problems against it.",
           "type": "text"
         },
         {
@@ -249,7 +123,7 @@
           "type": "text"
         },
         {
-          "text": "Spotlight WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW",
+          "text": "Spotlight WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup",
           "type": "text"
         }
       ],
@@ -257,91 +131,91 @@
       "removed_elements_debug": [
         {
           "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 48,
+          "node_index": 31,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Spotlight"
         },
         {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196416 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-paul-heyman tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "node_index": 32,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 33,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 34,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
           "classes": "gb-loop-item rsn-spotlight-item post-2196368 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-iyo-sky tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 49,
+          "node_index": 35,
           "node_name": "li",
           "reason": "node_class_noise",
           "text_preview": "WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 50,
+          "node_index": 36,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 51,
+          "node_index": 37,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
         },
         {
           "classes": "gb-loop-item rsn-spotlight-item post-2196255 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-brock-lesnar tag-oba-femi tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 52,
+          "node_index": 38,
           "node_name": "li",
           "reason": "node_class_noise",
           "text_preview": "WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 53,
+          "node_index": 39,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 54,
+          "node_index": 40,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
         },
         {
           "classes": "gb-loop-item rsn-spotlight-item post-2196202 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
-          "node_index": 55,
+          "node_index": 41,
           "node_name": "li",
           "reason": "node_class_noise",
           "text_preview": "WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 56,
+          "node_index": 42,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "WWE Makes Major Changes to King of the Ring Tournament Lineup"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 57,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196207 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news tag-jacob-fatu tag-roman-reigns tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 58,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 59,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 60,
+          "node_index": 43,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
@@ -349,537 +223,206 @@
         {
           "index": 1,
           "item": {
-            "alt": "TNA iMPACT Viewership Sees Slight Increase on May 28, 2026",
+            "alt": "WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit",
             "type": "image",
-            "url": "https://www.ringsidenews.com/wp-content/uploads/2026/02/TNA-iMPACT-Massive-Increase.jpg?x51578"
+            "url": "https://www.ringsidenews.com/wp-content/uploads/2026/02/wwe-granted-extension-to-respond-to-espn-streaming-lawsuit-11.jpg?x51578"
           },
           "reason": "duplicate_featured_image"
         },
         {
-          "index": 23,
+          "index": 11,
           "item": {
-            "text": "Spotlight WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW",
+            "text": "Spotlight WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup",
             "type": "text"
           },
           "reason": "footer_start"
         }
       ],
       "source": "ringsidenews",
-      "source_title": "TNA iMPACT Viewership Sees Slight Increase on May 28, 2026",
-      "source_url": "https://www.ringsidenews.com/tna-impact-viewership-sees-slight-increase-may-28-2026/",
+      "source_title": "WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit",
+      "source_url": "https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit/",
       "status": "ready_for_alfred",
-      "title_it": "TNA iMPACT: i dati sugli ascolti del 28 maggio 2026",
+      "title_it": "WWE sotto accusa: i querelanti dubitano della corretta conservazione delle prove nel caso ESPN",
       "translation_chain_attempted": [
         "gemini-3.1-flash-lite"
       ],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Gli elementi [quote] vanno pubblicati come <blockquote>...</blockquote>, non come semplici <p> con virgolette.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Gli elementi [table] sono tabelle: conservali nel corpo come <table class=\"owtv-data-table\"> con righe e celle HTML semplici. Non sostituirli con soli titoli o riassunti.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/tna-impact-viewership-sees-slight-increase-may-28-2026/\nTitolo feed: TNA iMPACT Viewership Sees Slight Increase on May 28, 2026\nTitolo pagina: TNA iMPACT Viewership Sees Slight Increase on May 28, 2026\nDescrizione: New ratings data has been released for the May 28, 2026 episode of TNA iMPACT on AMC, with the numbers ticking up slightly from the prior week. According\nCategoria suggerita: TNA\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|text] New ratings data has been released for the May 28, 2026 episode of TNA iMPACT on AMC, with the numbers ticking up slightly from the prior week.\n[2|text] According to Programming Insider , TNA iMPACT on May 28, 2026 drew 195,000 viewers on AMC, with a 0.02 rating in the key P18–49 demographic. For comparison, the May 21, 2026 episode drew 178,000 viewers with a 0.03 rating in the key P18–49 demographic, an increase of ↑ 17,000 viewers and down by ↓ 0.01 in the demo.\n[3|heading] TNA iMPACT Week-to-Week Viewership Comparison\n[4|table]\nMetric | May 21, 2026 | May 28, 2026 | Change | % Change\n--- | --- | --- | --- | ---\nTotal Viewers | 178,000 | 195,000 | ↑ +17,000 | ↑ +9.6%\nP18–49 Demo | 0.03 | 0.02 | ↓ -0.01 | ↓ -33.3%\n[5|heading] TNA iMPACT Year-to-Date Performance (2026)\n[6|table]\nMetric | 2026 Average | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 205,760 | 195,000 | ↓ -10,760 | ↓ -5.2%\nP18–49 Demo Avg | 0.04 | 0.02 | ↓ -0.02 | ↓ -47.4%\n[7|heading] TNA iMPACT Month-to-Date Performance (May 2026)\n[8|table]\nMetric | Month Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 183,250 | 195,000 | ↑ 11,750 | ↑ 6.4%\nP18–49 Demo Avg | 0.03 | 0.02 | ↓ -0.01 | ↓ -20%\n[9|heading] TNA iMPACT 4-Week Rolling Average\n[10|table]\nMetric | 4 Week Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 183,250 | 195,000 | ↑ 11,750 | ↑ 6.4%\nP18–49 Demo Avg | 0.03 | 0.02 | ↓ -0.01 | ↓ -20%\n[11|heading] Last 12 Months Performance Summary\n[12|table]\nAverage Viewership | 205,760\n--- | ---\nHighest Viewership | 259,000 (March 12, 2026)\nLowest Viewership | 21,200 (April 16, 2026)\nAverage 18–49 Demo | 0.04\nWeeks Above 1,000,000 Viewers | 0\nWeeks Below 1,000,000 Viewers | 20\n[13|heading] Viewership Range (Last 12 Months)\n[14|table]\nHighest | March 12, 2026 | 259,000\n--- | --- | ---\nLowest | April 16, 2026 | 21,200\nDifference | — | 237,800\n[15|table]\nWeek | Viewers | 18–49 Demo\n--- | --- | ---\nMay 28, 2026 | 195,000 | 0.02\nMay 21, 2026 | 178,000 | 0.03\nMay 14, 2026 | 196,000 | 0.03\nMay 7, 2026 | 164,000 | 0.02\n[16|text] 4-Week Average: 183,250 viewers\n[17|heading] Largest Weekly Viewership Changes (Last 12 Months)\n[18|table]\nLargest Increase | April 24, 2026 | +153,800\n--- | --- | ---\nLargest Drop | April 16, 2026 | -235,800\n[19|text] Highest Viewership of 2026: 259,000 ( March 12, 2026 ) Lowest Viewership of 2026: 21,200 ( April 16, 2026 )\n[20|text] These figures reflect only linear TV viewership on AMC and do not include streaming or digital viewership. Ringside News will continue to monitor TNA iMPACT as the company builds toward its next major live event.\n[21|text] Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"TNA iMPACT: i dati sugli ascolti del 28 maggio 2026\",\n  \"body_html\": \"<p>Sono stati resi noti i nuovi dati relativi agli ascolti dell'episodio di TNA iMPACT del 28 maggio 2026 su AMC, che mostrano un leggero incremento rispetto alla settimana precedente.</p><p>Secondo quanto riportato da <em>Programming Insider</em>, la puntata di TNA iMPACT del 28 maggio 2026 ha totalizzato 195.000 telespettatori su AMC, con un rating di 0.02 nella fascia demografica chiave 18-49 anni (P18-49). Per fare un confronto, l'episodio del 21 maggio 2026 aveva registrato 178.000 spettatori con un rating dello 0.03 nella stessa fascia, segnando quindi un aumento di 17.000 unità nel numero complessivo di spettatori e un calo di 0.01 nel rating demografico.</p><h3>TNA iMPACT Week-to-Week Viewership Comparison</h3><table class=\\\"owtv-data-table\\\"><tr><th>Metric</th><th>May 21, 2026</th><th>May 28, 2026</th><th>Change</th><th>% Change</th></tr><tr><td>Total Viewers</td><td>178,000</td><td>195,000</td><td>↑ +17,000</td><td>↑ +9.6%</td></tr><tr><td>P18–49 Demo</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -33.3%</td></tr></table><h3>TNA iMPACT Year-to-Date Performance (2026)</h3><table class=\\\"owtv-data-table\\\"><tr><th>Metric</th><th>2026 Average</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>205,760</td><td>195,000</td><td>↓ -10,760</td><td>↓ -5.2%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.04</td><td>0.02</td><td>↓ -0.02</td><td>↓ -47.4%</td></tr></table><h3>TNA iMPACT Month-to-Date Performance (May 2026)</h3><table class=\\\"owtv-data-table\\\"><tr><th>Metric</th><th>Month Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table><h3>TNA iMPACT 4-Week Rolling Average</h3><table class=\\\"owtv-data-table\\\"><tr><th>Metric</th><th>4 Week Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>183,250</td><td>195,000</td><td>↑ 11,750</td><td>↑ 6.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.03</td><td>0.02</td><td>↓ -0.01</td><td>↓ -20%</td></tr></table><h3>Last 12 Months Performance Summary</h3><table class=\\\"owtv-data-table\\\"><tr><td>Average Viewership</td><td>205,760</td></tr><tr><td>Highest Viewership</td><td>259,000 (March 12, 2026)</td></tr><tr><td>Lowest Viewership</td><td>21,200 (April 16, 2026)</td></tr><tr><td>Average 18–49 Demo</td><td>0.04</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>20</td></tr></table><h3>Viewership Range (Last 12 Months)</h3><table class=\\\"owtv-data-table\\\"><tr><td>Highest</td><td>March 12, 2026</td><td>259,000</td></tr><tr><td>Lowest</td><td>April 16, 2026</td><td>21,200</td></tr><tr><td>Difference</td><td>—</td><td>237,800</td></tr></table><table class=\\\"owtv-data-table\\\"><tr><th>Week</th><th>Viewers</th><th>18–49 Demo</th></tr><tr><td>May 28, 2026</td><td>195,000</td><td>0.02</td></tr><tr><td>May 21, 2026</td><td>178,000</td><td>0.03</td></tr><tr><td>May 14, 2026</td><td>196,000</td><td>0.03</td></tr><tr><td>May 7, 2026</td><td>164,000</td><td>0.02</td></tr></table><p>Media mobile a 4 settimane: 183.250 telespettatori.</p><h3>Largest Weekly Viewership Changes (Last 12 Months)</h3><table class=\\\"owtv-data-table\\\"><tr><td>Largest Increase</td><td>April 24, 2026</td><td>+153,800</td></tr><tr><td>Largest Drop</td><td>April 16, 2026</td><td>-235,800</td></tr></table><p>Ascolti più alti del 2026: 259.000 (12 marzo 2026); Ascolti più bassi del 2026: 21.200 (16 aprile 2026).</p><p>Questi dati riflettono esclusivamente l'audience televisiva lineare su AMC e non includono la visione in streaming o tramite piattaforme digitali. Ringside News continuerà a monitorare TNA iMPACT mentre la compagnia prosegue il percorso di costruzione verso il suo prossimo grande evento dal vivo.</p>\",\n  \"excerpt_it\": \"Leggero incremento negli ascolti per l'episodio di TNA iMPACT del 28 maggio 2026 su AMC. Analizziamo i dati nel dettaglio.\",\n  \"notes\": [\n    \"Traduzione fedele dei dati numerici e delle tabelle.\",\n    \"Mantenuta la terminologia tecnica del settore.\",\n    \"Il testo rispetta rigorosamente la struttura originale, incluse le intestazioni e le tabelle HTML richieste.\"\n  ]\n}",
+      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Gli elementi [quote] vanno pubblicati come <blockquote>...</blockquote>, non come semplici <p> con virgolette.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Gli elementi [table] sono tabelle: conservali nel corpo come <table class=\"owtv-data-table\"> con righe e celle HTML semplici. Non sostituirli con soli titoli o riassunti.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit/\nTitolo feed: WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit\nTitolo pagina: WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit\nDescrizione: WWE’s legal fight over its move to ESPN streaming just got another layer, and the plaintiffs are now pointing to a separate WWE lawsuit to argue discovery\nCategoria suggerita: WWE\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|text] WWE’s legal fight over its move to ESPN streaming just got another layer, and the plaintiffs are now pointing to a separate WWE lawsuit to argue discovery should move forward.\n[2|text] According to Brandon Thurston , plaintiffs in the class action lawsuit over WWE Premium Live Events moving to ESPN streaming are pushing back against WWE’s attempt to pause discovery. Their argument is that WWE should not get that pause because a separate Delaware merger lawsuit already raised serious questions about evidence preservation involving company leadership.\n[3|text] The plaintiffs specifically pointed to the recent ruling against Nick Khan, where the court found that evidence had been destroyed in connection with the WWE-UFC merger litigation. They are now using that ruling to argue that WWE cannot simply be trusted to preserve evidence while the ESPN streaming case sits on hold.\n[4|text] That matters because WWE has been trying to force the ESPN streaming lawsuit into arbitration. The company argued that because the plaintiffs subscribed through ESPN Unlimited, their claims should be covered by Disney and ESPN’s arbitration terms, even though WWE itself was not directly part of that subscriber agreement.\n[5|text] The lawsuit was filed by Michael Diesa and Rebecca Tobak, who claim WWE fans were misled about how they could watch Premium Live Events after WWE moved them to ESPN’s streaming app. The lawsuit alleges that some fans believed their existing ESPN access through cable or live TV streaming would be enough, only to discover they had to pay extra through the ESPN app.\n[6|text] Now the plaintiffs are trying to keep discovery moving before the court rules on WWE’s arbitration push. Their position is simple: after what happened in the separate merger case, they do not believe WWE should be allowed to delay evidence collection.\n[7|text] The case already had a lot riding on whether it stays in court or moves behind closed doors into arbitration. This new filing adds a sharper accusation to the fight, because plaintiffs are now directly questioning whether WWE can be trusted to protect documents and communications tied to the case.\n[8|text] WWE’s move to ESPN streaming already created confusion for some fans. Now the lawsuit over that rollout is pulling in another WWE legal headache, and plaintiffs are using the company’s own courtroom problems against it.\n[9|text] Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"WWE sotto accusa: i querelanti dubitano della corretta conservazione delle prove nel caso ESPN\",\n  \"body_html\": \"<p>La battaglia legale della WWE riguardante il passaggio dello streaming su ESPN si arricchisce di un nuovo capitolo, con i querelanti che puntano il dito contro un altro procedimento giudiziario in corso per sostenere la necessità di proseguire con la fase di <em>discovery</em>.</p><p>Secondo quanto riportato da Brandon Thurston, gli attori della class action relativa allo spostamento dei Premium Live Event della WWE sulla piattaforma streaming di ESPN si stanno opponendo al tentativo della compagnia di sospendere la fase di acquisizione delle prove. La loro tesi è che alla WWE non debba essere concessa tale pausa, poiché una causa separata in Delaware riguardante la fusione ha già sollevato seri dubbi sulla gestione e conservazione delle prove da parte dei vertici aziendali.</p><p>I querelanti hanno fatto specifico riferimento alla recente sentenza contro Nick Khan, in cui il tribunale ha accertato che alcune prove erano state distrutte in relazione al contenzioso sulla fusione WWE-UFC. I legali stanno ora utilizzando tale precedente per sostenere che la WWE non possa essere ritenuta affidabile nella conservazione delle prove qualora il caso sullo streaming ESPN venisse messo in stand-by.</p><p>Questo aspetto risulta cruciale, poiché la WWE sta cercando di spostare la causa sullo streaming ESPN verso un arbitrato. La compagnia ha sostenuto che, poiché i querelanti hanno sottoscritto l'abbonamento tramite ESPN Unlimited, le loro rivendicazioni dovrebbero ricadere sotto i termini di arbitrato di Disney ed ESPN, nonostante la WWE non fosse parte diretta di tale accordo di sottoscrizione.</p><p>La causa è stata intentata da Michael Diesa e Rebecca Tobak, i quali sostengono che i fan della WWE siano stati tratti in inganno sulle modalità di visione dei Premium Live Event in seguito al passaggio sull'app streaming di ESPN. L'azione legale sostiene che alcuni fan ritenessero che il loro accesso esistente a ESPN via cavo o tramite servizi di live TV streaming fosse sufficiente, per poi scoprire di dover pagare un costo aggiuntivo attraverso l'applicazione dedicata.</p><p>Attualmente, i querelanti stanno cercando di mantenere attiva la fase di <em>discovery</em> prima che il tribunale si esprima sulla richiesta di arbitrato della WWE. La loro posizione è lineare: visti i precedenti emersi nel caso separato sulla fusione, ritengono che alla WWE non debba essere consentito di ritardare la raccolta delle prove.</p><p>La causa è già di per sé significativa, giocandosi sulla possibilità che il procedimento rimanga in tribunale o venga spostato a porte chiuse tramite arbitrato. Questo nuovo deposito aggiunge un'accusa ancor più pesante alla disputa, poiché i querelanti mettono ora in dubbio la capacità della WWE di proteggere documenti e comunicazioni pertinenti al caso.</p><p>Il passaggio dei contenuti WWE su ESPN ha già generato confusione tra alcuni fan. Ora, la causa legale nata da tale transizione sta attirando nel vortice un altro problema giudiziario della compagnia, con i querelanti che utilizzano le difficoltà legali della WWE contro la compagnia stessa.</p>\",\n  \"excerpt_it\": \"I querelanti nella class action contro la WWE per lo streaming su ESPN si oppongono alla sospensione della fase di discovery, citando la distruzione di prove in un caso precedente sulla fusione WWE-UFC.\",\n  \"notes\": [\n    \"Traduzione conforme alla linea editoriale di OpenWrestlingTV.\",\n    \"Terminologia tecnica (Premium Live Event, discovery, class action) mantenuta per precisione giornalistica.\",\n    \"Il paragrafo relativo a Steve Carrier è stato omesso in quanto trattasi di bio autore, come da regole non negoziabili.\"\n  ]\n}",
       "translation_used": true
     },
     {
       "bob_notes": [
-        "Mantenute le tabelle come richiesto, formattate in HTML pulito.",
-        "Traduzione fedele dei dati numerici e delle terminologie di settore."
+        "Traduzione conforme alla linea editoriale v92, rispettando la formattazione richiesta (HTML per quote e immagini).",
+        "Mantenuti i nomi dei soggetti e delle promotion senza traduzioni improprie.",
+        "Terminologia tecnica di wrestling utilizzata coerentemente col contesto della notizia."
       ],
-      "body_html": "<p>Sono stati diffusi i nuovi dati sugli ascolti relativi alla puntata di AEW Dynamite andata in onda su TBS il 27 maggio 2026, che evidenziano un costante trend di crescita.</p><p>Secondo quanto riportato da <em>Programming Insider</em>, l'episodio di AEW Dynamite del 27 maggio 2026 ha totalizzato 704.000 spettatori, con un rating di 0.12 nella fascia demografica chiave 18-49 anni. Per fare un confronto, la puntata del 20 maggio 2026 aveva registrato 613.000 spettatori con un rating di 0 nella medesima fascia demografica, segnando un incremento di 91.000 spettatori e una crescita di 0.12 nel rating demo.</p><p>Rispetto allo stesso periodo dell'anno precedente, AEW Dynamite aveva totalizzato 636.000 spettatori e un rating dello 0.16 nella demo il 28 maggio 2025, contro i 704.000 spettatori e lo 0.12 registrati il 27 maggio 2026. Ciò rappresenta una variazione annua del +10,7% nel numero di spettatori e del -25,0% nella demo.</p><h3>AEW Dynamite Week-to-Week Viewership Comparison</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>May 20, 2026</td><td>May 27, 2026</td><td>Change</td><td>% Change</td></tr><tr><td>Total Viewers</td><td>613,000</td><td>704,000</td><td>↑ +91,000</td><td>↑ +14.8%</td></tr><tr><td>P18–49 Demo</td><td>0</td><td>0.12</td><td>↑ +0.12</td><td>↑ —</td></tr></table><h3>AEW Dynamite Year-to-Date Performance (2026)</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>2026 Average</td><td>Current Episode</td><td>Diff</td><td>%</td></tr><tr><td>Viewers</td><td>631,833</td><td>704,000</td><td>↑ 72,167</td><td>↑ 11.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.11</td><td>0.12</td><td>↑ 0.01</td><td>↑ 8.6%</td></tr></table><h3>AEW Dynamite Month-to-Date Performance (May 2026)</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>Month Avg</td><td>Current Episode</td><td>Diff</td><td>%</td></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table><h3>AEW Dynamite 4-Week Rolling Average</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>4 Week Avg</td><td>Current Episode</td><td>Diff</td><td>%</td></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table><h3>Last 12 Months Performance Summary</h3><table class=\"owtv-data-table\"><tr><td>Average Viewership</td><td>590,837</td></tr><tr><td>Highest Viewership</td><td>765,000 (March 25, 2026)</td></tr><tr><td>Lowest Viewership</td><td>321,000 (October 7, 2025)</td></tr><tr><td>Average 18–49 Demo</td><td>0.12</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>52</td></tr></table><h3>Viewership Range (Last 12 Months)</h3><table class=\"owtv-data-table\"><tr><td>Highest</td><td>March 25, 2026</td><td>765,000</td></tr><tr><td>Lowest</td><td>October 7, 2025</td><td>321,000</td></tr><tr><td>Difference</td><td>—</td><td>444,000</td></tr></table><table class=\"owtv-data-table\"><tr><td>Week</td><td>Viewers</td><td>18–49 Demo</td></tr><tr><td>May 27, 2026</td><td>704,000</td><td>0.12</td></tr><tr><td>May 20, 2026</td><td>613,000</td><td>—</td></tr><tr><td>May 13, 2026</td><td>585,000</td><td>0.10</td></tr><tr><td>May 6, 2026</td><td>509,500</td><td>0.08</td></tr></table><p>4-Week Average: 602,875 viewers</p><h3>Largest Weekly Viewership Changes (Last 12 Months)</h3><table class=\"owtv-data-table\"><tr><td>Largest Increase</td><td>October 15, 2025</td><td>+213,000</td></tr><tr><td>Largest Drop</td><td>October 1, 2025</td><td>-173,000</td></tr></table><h3>AEW Dynamite Year-over-Year Comparison (2025 vs 2026)</h3><table class=\"owtv-data-table\"><tr><td>Metric</td><td>May 28, 2025</td><td>May 27, 2026</td><td>% Change</td></tr><tr><td>Total Viewers</td><td>636,000</td><td>704,000</td><td>↑ +10.7%</td></tr><tr><td>P18–49 Demo</td><td>0.16</td><td>0.12</td><td>↓ -25.0%</td></tr></table><p>Highest Viewership of 2026: 765,000 (March 25, 2026) Lowest Viewership of 2026: 498,000 (January 21, 2026)</p><p>Questi dati riflettono esclusivamente l'audience della TV lineare su TBS e non includono la visione in streaming o tramite piattaforme digitali. Ringside News continuerà a monitorare gli ascolti di AEW Dynamite mentre la compagnia si avvicina al suo prossimo importante evento live.</p>",
-      "category_hint": "AEW",
-      "clean_element_count": 24,
-      "created_at": "2026-06-01T20:54:09.810831+00:00",
-      "diagnostic_stage": "ready_for_alfred",
-      "element_counts": {
-        "embed": 0,
-        "heading": 8,
-        "image": 0,
-        "quote": 0,
-        "table": 9,
-        "text": 7
-      },
-      "elements": [
-        {
-          "text": "New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum.",
-          "type": "text"
-        },
-        {
-          "text": "According to Programming Insider , AEW Dynamite on May 27, 2026 drew 704,000 viewers on TBS, with a 0.12 rating in the key P18–49 demographic. For comparison, the May 20, 2026 episode drew 613,000 viewers with a 0 rating in the key P18–49 demographic, an increase of ↑ 91,000 viewers and up by ↑ 0.12 in the demo.",
-          "type": "text"
-        },
-        {
-          "text": "Compared to the same week in 2025, AEW Dynamite drew 636,000 viewers and a 0.16 demo rating on May 28, 2025, versus 704,000 viewers and a 0.12 demo rating on May 27, 2026. That represents a year-over-year change of ↑ +10.7% in viewership and ↓ -25.0% in the demo.",
-          "type": "text"
-        },
-        {
-          "level": 3,
-          "text": "AEW Dynamite Week-to-Week Viewership Comparison",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>May 20, 2026</th><th>May 27, 2026</th><th>Change</th><th>% Change</th></tr><tr><td>Total Viewers</td><td>613,000</td><td>704,000</td><td>↑ +91,000</td><td>↑ +14.8%</td></tr><tr><td>P18–49 Demo</td><td>0</td><td>0.12</td><td>↑ +0.12</td><td>↑ —</td></tr></table>",
-          "markdown": "Metric | May 20, 2026 | May 27, 2026 | Change | % Change\n--- | --- | --- | --- | ---\nTotal Viewers | 613,000 | 704,000 | ↑ +91,000 | ↑ +14.8%\nP18–49 Demo | 0 | 0.12 | ↑ +0.12 | ↑ —",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "AEW Dynamite Year-to-Date Performance (2026)",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>2026 Average</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>631,833</td><td>704,000</td><td>↑ 72,167</td><td>↑ 11.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.11</td><td>0.12</td><td>↑ 0.01</td><td>↑ 8.6%</td></tr></table>",
-          "markdown": "Metric | 2026 Average | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 631,833 | 704,000 | ↑ 72,167 | ↑ 11.4%\nP18–49 Demo Avg | 0.11 | 0.12 | ↑ 0.01 | ↑ 8.6%",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "AEW Dynamite Month-to-Date Performance (May 2026)",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>Month Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table>",
-          "markdown": "Metric | Month Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 602,875 | 704,000 | ↑ 101,125 | ↑ 16.8%\nP18–49 Demo Avg | 0.10 | 0.12 | ↑ 0.02 | ↑ 20%",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "AEW Dynamite 4-Week Rolling Average",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>4 Week Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table>",
-          "markdown": "Metric | 4 Week Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 602,875 | 704,000 | ↑ 101,125 | ↑ 16.8%\nP18–49 Demo Avg | 0.10 | 0.12 | ↑ 0.02 | ↑ 20%",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "Last 12 Months Performance Summary",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Average Viewership</th><th>590,837</th></tr><tr><td>Highest Viewership</td><td>765,000 (March 25, 2026)</td></tr><tr><td>Lowest Viewership</td><td>321,000 (October 7, 2025)</td></tr><tr><td>Average 18–49 Demo</td><td>0.12</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>52</td></tr></table>",
-          "markdown": "Average Viewership | 590,837\n--- | ---\nHighest Viewership | 765,000 (March 25, 2026)\nLowest Viewership | 321,000 (October 7, 2025)\nAverage 18–49 Demo | 0.12\nWeeks Above 1,000,000 Viewers | 0\nWeeks Below 1,000,000 Viewers | 52",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "Viewership Range (Last 12 Months)",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Highest</th><th>March 25, 2026</th><th>765,000</th></tr><tr><td>Lowest</td><td>October 7, 2025</td><td>321,000</td></tr><tr><td>Difference</td><td>—</td><td>444,000</td></tr></table>",
-          "markdown": "Highest | March 25, 2026 | 765,000\n--- | --- | ---\nLowest | October 7, 2025 | 321,000\nDifference | — | 444,000",
-          "type": "table"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Week</th><th>Viewers</th><th>18–49 Demo</th></tr><tr><td>May 27, 2026</td><td>704,000</td><td>0.12</td></tr><tr><td>May 20, 2026</td><td>613,000</td><td>—</td></tr><tr><td>May 13, 2026</td><td>585,000</td><td>0.10</td></tr><tr><td>May 6, 2026</td><td>509,500</td><td>0.08</td></tr></table>",
-          "markdown": "Week | Viewers | 18–49 Demo\n--- | --- | ---\nMay 27, 2026 | 704,000 | 0.12\nMay 20, 2026 | 613,000 | —\nMay 13, 2026 | 585,000 | 0.10\nMay 6, 2026 | 509,500 | 0.08",
-          "type": "table"
-        },
-        {
-          "text": "4-Week Average: 602,875 viewers",
-          "type": "text"
-        },
-        {
-          "level": 3,
-          "text": "Largest Weekly Viewership Changes (Last 12 Months)",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Largest Increase</th><th>October 15, 2025</th><th>+213,000</th></tr><tr><td>Largest Drop</td><td>October 1, 2025</td><td>-173,000</td></tr></table>",
-          "markdown": "Largest Increase | October 15, 2025 | +213,000\n--- | --- | ---\nLargest Drop | October 1, 2025 | -173,000",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "AEW Dynamite Year-over-Year Comparison (2025 vs 2026)",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>May 28, 2025</th><th>May 27, 2026</th><th>% Change</th></tr><tr><td>Total Viewers</td><td>636,000</td><td>704,000</td><td>↑ +10.7%</td></tr><tr><td>P18–49 Demo</td><td>0.16</td><td>0.12</td><td>↓ -25.0%</td></tr></table>",
-          "markdown": "Metric | May 28, 2025 | May 27, 2026 | % Change\n--- | --- | --- | ---\nTotal Viewers | 636,000 | 704,000 | ↑ +10.7%\nP18–49 Demo | 0.16 | 0.12 | ↓ -25.0%",
-          "type": "table"
-        },
-        {
-          "text": "Highest Viewership of 2026: 765,000 ( March 25, 2026 ) Lowest Viewership of 2026: 498,000 ( January 21, 2026 )",
-          "type": "text"
-        },
-        {
-          "text": "These figures reflect only linear TV viewership on TBS and do not include streaming or digital viewership. Ringside News will continue to monitor AEW Dynamite as the company builds toward its next major live event.",
-          "type": "text"
-        },
-        {
-          "text": "Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.",
-          "type": "text"
-        }
-      ],
-      "excerpt_it": "Nuovi dati sugli ascolti per AEW Dynamite del 27 maggio 2026: la puntata ha registrato una crescita rispetto alla settimana precedente, raggiungendo i 704.000 spettatori.",
-      "extraction_diagnostics": {
-        "candidate_node_count": 63,
-        "clean_element_count": 24,
-        "dom_noise_reduction_enabled": false,
-        "quote_count": 0,
-        "raw_element_count": 26,
-        "removed_by_node_count": 13,
-        "removed_by_sanitize_count": 2,
-        "root_name": "article",
-        "root_text_chars": 3559,
-        "stage": "complete",
-        "table_count": 9
-      },
-      "fetched_html_chars": 486269,
-      "menzo_score": 84,
-      "meta": {
-        "description": "New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum. According to Programming",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Dynamite-Massive-Increase-1.jpg",
-        "source_title": "AEW Dynamite Viewership Sees Increase on May 27, 2026"
-      },
-      "raw_element_count": 26,
-      "raw_elements_preview": [
-        {
-          "alt": "AEW Dynamite Viewership Sees Increase on May 27, 2026",
-          "type": "image",
-          "url": "https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Dynamite-Massive-Increase-1.jpg?x51578"
-        },
-        {
-          "text": "New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum.",
-          "type": "text"
-        },
-        {
-          "text": "According to Programming Insider , AEW Dynamite on May 27, 2026 drew 704,000 viewers on TBS, with a 0.12 rating in the key P18–49 demographic. For comparison, the May 20, 2026 episode drew 613,000 viewers with a 0 rating in the key P18–49 demographic, an increase of ↑ 91,000 viewers and up by ↑ 0.12 in the demo.",
-          "type": "text"
-        },
-        {
-          "text": "Compared to the same week in 2025, AEW Dynamite drew 636,000 viewers and a 0.16 demo rating on May 28, 2025, versus 704,000 viewers and a 0.12 demo rating on May 27, 2026. That represents a year-over-year change of ↑ +10.7% in viewership and ↓ -25.0% in the demo.",
-          "type": "text"
-        },
-        {
-          "level": 3,
-          "text": "AEW Dynamite Week-to-Week Viewership Comparison",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>May 20, 2026</th><th>May 27, 2026</th><th>Change</th><th>% Change</th></tr><tr><td>Total Viewers</td><td>613,000</td><td>704,000</td><td>↑ +91,000</td><td>↑ +14.8%</td></tr><tr><td>P18–49 Demo</td><td>0</td><td>0.12</td><td>↑ +0.12</td><td>↑ —</td></tr></table>",
-          "markdown": "Metric | May 20, 2026 | May 27, 2026 | Change | % Change\n--- | --- | --- | --- | ---\nTotal Viewers | 613,000 | 704,000 | ↑ +91,000 | ↑ +14.8%\nP18–49 Demo | 0 | 0.12 | ↑ +0.12 | ↑ —",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "AEW Dynamite Year-to-Date Performance (2026)",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>2026 Average</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>631,833</td><td>704,000</td><td>↑ 72,167</td><td>↑ 11.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.11</td><td>0.12</td><td>↑ 0.01</td><td>↑ 8.6%</td></tr></table>",
-          "markdown": "Metric | 2026 Average | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 631,833 | 704,000 | ↑ 72,167 | ↑ 11.4%\nP18–49 Demo Avg | 0.11 | 0.12 | ↑ 0.01 | ↑ 8.6%",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "AEW Dynamite Month-to-Date Performance (May 2026)",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>Month Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table>",
-          "markdown": "Metric | Month Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 602,875 | 704,000 | ↑ 101,125 | ↑ 16.8%\nP18–49 Demo Avg | 0.10 | 0.12 | ↑ 0.02 | ↑ 20%",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "AEW Dynamite 4-Week Rolling Average",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>4 Week Avg</th><th>Current Episode</th><th>Diff</th><th>%</th></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table>",
-          "markdown": "Metric | 4 Week Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 602,875 | 704,000 | ↑ 101,125 | ↑ 16.8%\nP18–49 Demo Avg | 0.10 | 0.12 | ↑ 0.02 | ↑ 20%",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "Last 12 Months Performance Summary",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Average Viewership</th><th>590,837</th></tr><tr><td>Highest Viewership</td><td>765,000 (March 25, 2026)</td></tr><tr><td>Lowest Viewership</td><td>321,000 (October 7, 2025)</td></tr><tr><td>Average 18–49 Demo</td><td>0.12</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>52</td></tr></table>",
-          "markdown": "Average Viewership | 590,837\n--- | ---\nHighest Viewership | 765,000 (March 25, 2026)\nLowest Viewership | 321,000 (October 7, 2025)\nAverage 18–49 Demo | 0.12\nWeeks Above 1,000,000 Viewers | 0\nWeeks Below 1,000,000 Viewers | 52",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "Viewership Range (Last 12 Months)",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Highest</th><th>March 25, 2026</th><th>765,000</th></tr><tr><td>Lowest</td><td>October 7, 2025</td><td>321,000</td></tr><tr><td>Difference</td><td>—</td><td>444,000</td></tr></table>",
-          "markdown": "Highest | March 25, 2026 | 765,000\n--- | --- | ---\nLowest | October 7, 2025 | 321,000\nDifference | — | 444,000",
-          "type": "table"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Week</th><th>Viewers</th><th>18–49 Demo</th></tr><tr><td>May 27, 2026</td><td>704,000</td><td>0.12</td></tr><tr><td>May 20, 2026</td><td>613,000</td><td>—</td></tr><tr><td>May 13, 2026</td><td>585,000</td><td>0.10</td></tr><tr><td>May 6, 2026</td><td>509,500</td><td>0.08</td></tr></table>",
-          "markdown": "Week | Viewers | 18–49 Demo\n--- | --- | ---\nMay 27, 2026 | 704,000 | 0.12\nMay 20, 2026 | 613,000 | —\nMay 13, 2026 | 585,000 | 0.10\nMay 6, 2026 | 509,500 | 0.08",
-          "type": "table"
-        },
-        {
-          "text": "4-Week Average: 602,875 viewers",
-          "type": "text"
-        },
-        {
-          "level": 3,
-          "text": "Largest Weekly Viewership Changes (Last 12 Months)",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Largest Increase</th><th>October 15, 2025</th><th>+213,000</th></tr><tr><td>Largest Drop</td><td>October 1, 2025</td><td>-173,000</td></tr></table>",
-          "markdown": "Largest Increase | October 15, 2025 | +213,000\n--- | --- | ---\nLargest Drop | October 1, 2025 | -173,000",
-          "type": "table"
-        },
-        {
-          "level": 3,
-          "text": "AEW Dynamite Year-over-Year Comparison (2025 vs 2026)",
-          "type": "heading"
-        },
-        {
-          "html": "<table class=\"owtv-data-table\"><tr><th>Metric</th><th>May 28, 2025</th><th>May 27, 2026</th><th>% Change</th></tr><tr><td>Total Viewers</td><td>636,000</td><td>704,000</td><td>↑ +10.7%</td></tr><tr><td>P18–49 Demo</td><td>0.16</td><td>0.12</td><td>↓ -25.0%</td></tr></table>",
-          "markdown": "Metric | May 28, 2025 | May 27, 2026 | % Change\n--- | --- | --- | ---\nTotal Viewers | 636,000 | 704,000 | ↑ +10.7%\nP18–49 Demo | 0.16 | 0.12 | ↓ -25.0%",
-          "type": "table"
-        },
-        {
-          "text": "Highest Viewership of 2026: 765,000 ( March 25, 2026 ) Lowest Viewership of 2026: 498,000 ( January 21, 2026 )",
-          "type": "text"
-        },
-        {
-          "text": "These figures reflect only linear TV viewership on TBS and do not include streaming or digital viewership. Ringside News will continue to monitor AEW Dynamite as the company builds toward its next major live event.",
-          "type": "text"
-        },
-        {
-          "text": "Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.",
-          "type": "text"
-        },
-        {
-          "text": "Spotlight WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW",
-          "type": "text"
-        }
-      ],
-      "removed_before_gemini": 15,
-      "removed_elements_debug": [
-        {
-          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 51,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Spotlight"
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196368 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-iyo-sky tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 52,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 53,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 54,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196255 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-brock-lesnar tag-oba-femi tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 55,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 56,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 57,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196202 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
-          "node_index": 58,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 59,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "WWE Makes Major Changes to King of the Ring Tournament Lineup"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 60,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196207 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news tag-jacob-fatu tag-roman-reigns tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 61,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 62,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 63,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "index": 1,
-          "item": {
-            "alt": "AEW Dynamite Viewership Sees Increase on May 27, 2026",
-            "type": "image",
-            "url": "https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Dynamite-Massive-Increase-1.jpg?x51578"
-          },
-          "reason": "duplicate_featured_image"
-        },
-        {
-          "index": 26,
-          "item": {
-            "text": "Spotlight WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup WWE News Jacob Fatu Acknowledges Roman Reigns During June 1 WWE RAW",
-            "type": "text"
-          },
-          "reason": "footer_start"
-        }
-      ],
-      "source": "ringsidenews",
-      "source_title": "AEW Dynamite Viewership Sees Increase on May 27, 2026",
-      "source_url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/",
-      "status": "ready_for_alfred",
-      "title_it": "AEW Dynamite: in crescita gli ascolti del 27 maggio 2026",
-      "translation_chain_attempted": [
-        "gemini-3.1-flash-lite"
-      ],
-      "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Gli elementi [quote] vanno pubblicati come <blockquote>...</blockquote>, non come semplici <p> con virgolette.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Gli elementi [table] sono tabelle: conservali nel corpo come <table class=\"owtv-data-table\"> con righe e celle HTML semplici. Non sostituirli con soli titoli o riassunti.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/\nTitolo feed: AEW Dynamite Viewership Sees Increase on May 27, 2026\nTitolo pagina: AEW Dynamite Viewership Sees Increase on May 27, 2026\nDescrizione: New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum. According to Programming\nCategoria suggerita: AEW\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|text] New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum.\n[2|text] According to Programming Insider , AEW Dynamite on May 27, 2026 drew 704,000 viewers on TBS, with a 0.12 rating in the key P18–49 demographic. For comparison, the May 20, 2026 episode drew 613,000 viewers with a 0 rating in the key P18–49 demographic, an increase of ↑ 91,000 viewers and up by ↑ 0.12 in the demo.\n[3|text] Compared to the same week in 2025, AEW Dynamite drew 636,000 viewers and a 0.16 demo rating on May 28, 2025, versus 704,000 viewers and a 0.12 demo rating on May 27, 2026. That represents a year-over-year change of ↑ +10.7% in viewership and ↓ -25.0% in the demo.\n[4|heading] AEW Dynamite Week-to-Week Viewership Comparison\n[5|table]\nMetric | May 20, 2026 | May 27, 2026 | Change | % Change\n--- | --- | --- | --- | ---\nTotal Viewers | 613,000 | 704,000 | ↑ +91,000 | ↑ +14.8%\nP18–49 Demo | 0 | 0.12 | ↑ +0.12 | ↑ —\n[6|heading] AEW Dynamite Year-to-Date Performance (2026)\n[7|table]\nMetric | 2026 Average | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 631,833 | 704,000 | ↑ 72,167 | ↑ 11.4%\nP18–49 Demo Avg | 0.11 | 0.12 | ↑ 0.01 | ↑ 8.6%\n[8|heading] AEW Dynamite Month-to-Date Performance (May 2026)\n[9|table]\nMetric | Month Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 602,875 | 704,000 | ↑ 101,125 | ↑ 16.8%\nP18–49 Demo Avg | 0.10 | 0.12 | ↑ 0.02 | ↑ 20%\n[10|heading] AEW Dynamite 4-Week Rolling Average\n[11|table]\nMetric | 4 Week Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 602,875 | 704,000 | ↑ 101,125 | ↑ 16.8%\nP18–49 Demo Avg | 0.10 | 0.12 | ↑ 0.02 | ↑ 20%\n[12|heading] Last 12 Months Performance Summary\n[13|table]\nAverage Viewership | 590,837\n--- | ---\nHighest Viewership | 765,000 (March 25, 2026)\nLowest Viewership | 321,000 (October 7, 2025)\nAverage 18–49 Demo | 0.12\nWeeks Above 1,000,000 Viewers | 0\nWeeks Below 1,000,000 Viewers | 52\n[14|heading] Viewership Range (Last 12 Months)\n[15|table]\nHighest | March 25, 2026 | 765,000\n--- | --- | ---\nLowest | October 7, 2025 | 321,000\nDifference | — | 444,000\n[16|table]\nWeek | Viewers | 18–49 Demo\n--- | --- | ---\nMay 27, 2026 | 704,000 | 0.12\nMay 20, 2026 | 613,000 | —\nMay 13, 2026 | 585,000 | 0.10\nMay 6, 2026 | 509,500 | 0.08\n[17|text] 4-Week Average: 602,875 viewers\n[18|heading] Largest Weekly Viewership Changes (Last 12 Months)\n[19|table]\nLargest Increase | October 15, 2025 | +213,000\n--- | --- | ---\nLargest Drop | October 1, 2025 | -173,000\n[20|heading] AEW Dynamite Year-over-Year Comparison (2025 vs 2026)\n[21|table]\nMetric | May 28, 2025 | May 27, 2026 | % Change\n--- | --- | --- | ---\nTotal Viewers | 636,000 | 704,000 | ↑ +10.7%\nP18–49 Demo | 0.16 | 0.12 | ↓ -25.0%\n[22|text] Highest Viewership of 2026: 765,000 ( March 25, 2026 ) Lowest Viewership of 2026: 498,000 ( January 21, 2026 )\n[23|text] These figures reflect only linear TV viewership on TBS and do not include streaming or digital viewership. Ringside News will continue to monitor AEW Dynamite as the company builds toward its next major live event.\n[24|text] Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"AEW Dynamite: in crescita gli ascolti del 27 maggio 2026\",\n  \"body_html\": \"<p>Sono stati diffusi i nuovi dati sugli ascolti relativi alla puntata di AEW Dynamite andata in onda su TBS il 27 maggio 2026, che evidenziano un costante trend di crescita.</p><p>Secondo quanto riportato da <em>Programming Insider</em>, l'episodio di AEW Dynamite del 27 maggio 2026 ha totalizzato 704.000 spettatori, con un rating di 0.12 nella fascia demografica chiave 18-49 anni. Per fare un confronto, la puntata del 20 maggio 2026 aveva registrato 613.000 spettatori con un rating di 0 nella medesima fascia demografica, segnando un incremento di 91.000 spettatori e una crescita di 0.12 nel rating demo.</p><p>Rispetto allo stesso periodo dell'anno precedente, AEW Dynamite aveva totalizzato 636.000 spettatori e un rating dello 0.16 nella demo il 28 maggio 2025, contro i 704.000 spettatori e lo 0.12 registrati il 27 maggio 2026. Ciò rappresenta una variazione annua del +10,7% nel numero di spettatori e del -25,0% nella demo.</p><h3>AEW Dynamite Week-to-Week Viewership Comparison</h3><table class=\\\"owtv-data-table\\\"><tr><td>Metric</td><td>May 20, 2026</td><td>May 27, 2026</td><td>Change</td><td>% Change</td></tr><tr><td>Total Viewers</td><td>613,000</td><td>704,000</td><td>↑ +91,000</td><td>↑ +14.8%</td></tr><tr><td>P18–49 Demo</td><td>0</td><td>0.12</td><td>↑ +0.12</td><td>↑ —</td></tr></table><h3>AEW Dynamite Year-to-Date Performance (2026)</h3><table class=\\\"owtv-data-table\\\"><tr><td>Metric</td><td>2026 Average</td><td>Current Episode</td><td>Diff</td><td>%</td></tr><tr><td>Viewers</td><td>631,833</td><td>704,000</td><td>↑ 72,167</td><td>↑ 11.4%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.11</td><td>0.12</td><td>↑ 0.01</td><td>↑ 8.6%</td></tr></table><h3>AEW Dynamite Month-to-Date Performance (May 2026)</h3><table class=\\\"owtv-data-table\\\"><tr><td>Metric</td><td>Month Avg</td><td>Current Episode</td><td>Diff</td><td>%</td></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table><h3>AEW Dynamite 4-Week Rolling Average</h3><table class=\\\"owtv-data-table\\\"><tr><td>Metric</td><td>4 Week Avg</td><td>Current Episode</td><td>Diff</td><td>%</td></tr><tr><td>Viewers</td><td>602,875</td><td>704,000</td><td>↑ 101,125</td><td>↑ 16.8%</td></tr><tr><td>P18–49 Demo Avg</td><td>0.10</td><td>0.12</td><td>↑ 0.02</td><td>↑ 20%</td></tr></table><h3>Last 12 Months Performance Summary</h3><table class=\\\"owtv-data-table\\\"><tr><td>Average Viewership</td><td>590,837</td></tr><tr><td>Highest Viewership</td><td>765,000 (March 25, 2026)</td></tr><tr><td>Lowest Viewership</td><td>321,000 (October 7, 2025)</td></tr><tr><td>Average 18–49 Demo</td><td>0.12</td></tr><tr><td>Weeks Above 1,000,000 Viewers</td><td>0</td></tr><tr><td>Weeks Below 1,000,000 Viewers</td><td>52</td></tr></table><h3>Viewership Range (Last 12 Months)</h3><table class=\\\"owtv-data-table\\\"><tr><td>Highest</td><td>March 25, 2026</td><td>765,000</td></tr><tr><td>Lowest</td><td>October 7, 2025</td><td>321,000</td></tr><tr><td>Difference</td><td>—</td><td>444,000</td></tr></table><table class=\\\"owtv-data-table\\\"><tr><td>Week</td><td>Viewers</td><td>18–49 Demo</td></tr><tr><td>May 27, 2026</td><td>704,000</td><td>0.12</td></tr><tr><td>May 20, 2026</td><td>613,000</td><td>—</td></tr><tr><td>May 13, 2026</td><td>585,000</td><td>0.10</td></tr><tr><td>May 6, 2026</td><td>509,500</td><td>0.08</td></tr></table><p>4-Week Average: 602,875 viewers</p><h3>Largest Weekly Viewership Changes (Last 12 Months)</h3><table class=\\\"owtv-data-table\\\"><tr><td>Largest Increase</td><td>October 15, 2025</td><td>+213,000</td></tr><tr><td>Largest Drop</td><td>October 1, 2025</td><td>-173,000</td></tr></table><h3>AEW Dynamite Year-over-Year Comparison (2025 vs 2026)</h3><table class=\\\"owtv-data-table\\\"><tr><td>Metric</td><td>May 28, 2025</td><td>May 27, 2026</td><td>% Change</td></tr><tr><td>Total Viewers</td><td>636,000</td><td>704,000</td><td>↑ +10.7%</td></tr><tr><td>P18–49 Demo</td><td>0.16</td><td>0.12</td><td>↓ -25.0%</td></tr></table><p>Highest Viewership of 2026: 765,000 (March 25, 2026) Lowest Viewership of 2026: 498,000 (January 21, 2026)</p><p>Questi dati riflettono esclusivamente l'audience della TV lineare su TBS e non includono la visione in streaming o tramite piattaforme digitali. Ringside News continuerà a monitorare gli ascolti di AEW Dynamite mentre la compagnia si avvicina al suo prossimo importante evento live.</p>\",\n  \"excerpt_it\": \"Nuovi dati sugli ascolti per AEW Dynamite del 27 maggio 2026: la puntata ha registrato una crescita rispetto alla settimana precedente, raggiungendo i 704.000 spettatori.\",\n  \"notes\": [\"Mantenute le tabelle come richiesto, formattate in HTML pulito.\", \"Traduzione fedele dei dati numerici e delle terminologie di settore.\"]\n}",
-      "translation_used": true
-    },
-    {
-      "bob_notes": [
-        "Traduzione eseguita rispettando la linea editoriale v92.",
-        "Mantenuta la sequenza delle informazioni e lo stile giornalistico richiesto.",
-        "Terminologia tecnica di settore (TNA World Champion, main event, star) conservata correttamente."
-      ],
-      "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x51578--><p>Il futuro di Mike Santana in TNA è diventato un po' più nitido, ma la sua prossima mossa resta ancora incerta, dato che il suo contratto è in scadenza a brevissimo.</p><p>Secondo quanto riportato da PWInsider il 1° giugno 2026, l'attuale contratto dell'attuale TNA World Champion con la compagnia scadrà nel corso del mese di luglio. Il report sottolinea inoltre come la WWE abbia mostrato interesse per Santana in passato.</p><p>Queste informazioni forniscono una tempistica più precisa sulla situazione contrattuale di Santana, dopo le prime indiscrezioni che davano il suo accordo con la TNA in scadenza nel corso dell'estate. Con il mese di luglio ormai indicato come termine, la prossima mossa di Santana potrebbe diventare un argomento di grande rilievo molto presto.</p><p>Santana è stato uno dei nomi di punta della TNA dal suo ritorno nel 2024 e il suo attuale regno come TNA World Champion rende la tempistica ancora più interessante. Se dovesse giungere alla scadenza del contratto senza averne firmato uno nuovo, potrebbe avere diverse opzioni nel panorama del wrestling mondiale.</p><p>Anche l'interesse della WWE rappresenta un fattore importante, specialmente considerando che Santana si sta già imponendo come una star da main event in TNA. Un passaggio alla WWE segnerebbe un cambiamento significativo, ma rimanere in TNA potrebbe consentirgli di continuare a guidare la federazione in un momento in cui le sue quotazioni sono molto alte.</p><p>Per ora, Santana rimane il TNA World Champion, ma il mese di luglio non è lontano. Che decida di restare o di esplorare una nuova opportunità, la sua situazione contrattuale è ora una delle storie più importanti da seguire quest'estate.</p>",
-      "category_hint": "TNA",
-      "clean_element_count": 7,
-      "created_at": "2026-06-01T20:54:15.717308+00:00",
+      "body_html": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg.avif?x51578-->Chad Gable svela i retroscena del suo ritorno sul ring. Dopo aver subito un grave infortunio alla spalla nel giugno 2025, che lo ha tenuto lontano dalle scene per il resto dell'anno, Gable ha annunciato l'uscita di una docuserie su YouTube in nove parti incentrata sul suo percorso di riabilitazione.</p><p>Prima dell'infortunio, Gable stava sostenendo un carico di lavoro raddoppiato, esibendosi regolarmente sia in WWE che in AAA, oltre a interpretare il personaggio originale di El Grande Americano. Il suo rientro è avvenuto infine alla Royal Rumble, alla fine di gennaio, tornando a vestire i panni di Americano.</p><p>Ora, Gable vuole mostrare ai fan cosa ha significato arrivare a quel momento. L'atleta ha spiegato che l'infortunio lo ha costretto a fermarsi per la prima volta nella sua carriera nel wrestling, spingendolo a capire chi fosse lontano da ciò su cui aveva costruito la propria vita.</p><blockquote>“Ho passato l'intera carriera a predicare disciplina, preparazione e responsabilità. Poi mi sono fatto male.”</blockquote><p>Gable ha spiegato che la serie seguirà l'intero processo di ricostruzione fisica e mentale, coprendo riabilitazione, allenamento, alimentazione, battute d'arresto e vittorie.</p><blockquote>“Per la prima volta nella mia carriera di wrestler professionista, sono stato costretto a fermarmi e a capire chi sono quando la cosa su cui ho costruito la mia vita mi viene portata via. Perciò, vi porto con me.”</blockquote><p>Il documentario prenderà il via questo venerdì su YouTube e si articolerà in nove episodi, con una nuova puntata in uscita ogni venerdì.</p><blockquote>“A partire da questo venerdì, seguite la mia serie YouTube in 9 parti mentre ricostruisco tutto dalle fondamenta, tra riabilitazione, allenamento, nutrizione, contrattempi, vittorie e tutto ciò che sta nel mezzo.”</blockquote><p>Gable ha concluso l'annuncio chiarendo che non si tratterà della solita storia di ritorno edulcorata in cui tutto sembra facile.</p><blockquote>“Nuovi episodi ogni venerdì. Nessuna scorciatoia. Nessuna scusa. Nessuna finzione che ogni giorno sia una buona giornata.”</blockquote><p>La serie offrirà ai fan uno sguardo approfondito su ciò che Gable ha dovuto affrontare dopo l'infortunio, specialmente dopo un periodo frenetico che ha visto incrociarsi il suo lavoro in WWE, le apparizioni in AAA e la storyline di El Grande Americano. Gable è tornato, ma questo documentario promette di mostrare il lato più difficile e crudo del suo percorso verso il ring.</p>",
+      "category_hint": "World",
+      "clean_element_count": 14,
+      "created_at": "2026-06-01T22:18:57.959476+00:00",
       "diagnostic_stage": "ready_for_alfred",
       "element_counts": {
         "embed": 0,
         "heading": 0,
         "image": 1,
-        "quote": 0,
+        "quote": 4,
         "table": 0,
-        "text": 6
+        "text": 9
       },
       "elements": [
         {
-          "alt": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest",
+          "alt": "Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery",
           "type": "image",
-          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x51578"
+          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg.avif?x51578"
         },
         {
-          "text": "Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon.",
+          "text": "Chad Gable is pulling the curtain back on his comeback.",
           "type": "text"
         },
         {
-          "text": "According to PWInsider on June 1, 2026, the reigning TNA World Champion’s current contract with the company runs through sometime in July. The report also noted that WWE has shown interest in Santana in the past.",
+          "text": "After suffering a legitimate shoulder injury in June 2025 that kept him out for the rest of the year, Gable announced that he is releasing a nine-part YouTube documentary series focused on his recovery.",
           "type": "text"
         },
         {
-          "text": "This gives a clearer timeline for Santana’s contract situation after earlier word that his TNA deal was set to expire this summer . With July now mentioned, Santana’s next move could become a major story very soon.",
+          "text": "Gable had been working double duty before the injury, wrestling as himself in WWE and AAA while also competing as the original El Grande Americano. He eventually returned at the Royal Rumble at the end of January, stepping back into the Americano role.",
           "type": "text"
         },
         {
-          "text": "Santana has been one of TNA’s top names since returning in 2024 , and his current run as TNA World Champion makes the timing even more interesting. If he reaches the end of his deal without signing a new one, he could have options across the wrestling world.",
+          "text": "Now, Gable is showing fans what it took to get there. He said the injury forced him to stop for the first time in his wrestling career and figure out who he was without the thing he built his life around.",
           "type": "text"
         },
         {
-          "text": "The WWE interest is also important, especially with Santana already carrying himself like a main-event star in TNA. A move to WWE would be a major change, but staying with TNA could also allow him to continue leading the promotion at a time when his stock is high.",
+          "source_tag": "blockquote",
+          "text": "“I’ve spent my entire career preaching discipline, preparation, and accountability. Then I got hurt.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "Gable explained that the series will follow his full rebuild, including rehab, training, nutrition, setbacks, and victories.",
           "type": "text"
         },
         {
-          "text": "For now, Santana remains TNA World Champion, but July is not far away. Whether he stays put or explores a new opportunity, his contract status is now one of the bigger stories to watch this summer.",
+          "source_tag": "blockquote",
+          "text": "“For the first time in my professional wrestling career, I was forced to stop and figure out who I am when the thing I’ve built my life around gets taken away. So I’m bringing you with me.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "The documentary will begin this Friday on YouTube and run for nine episodes, with new installments dropping every Friday.",
+          "type": "text"
+        },
+        {
+          "source_tag": "blockquote",
+          "text": "“Starting this Friday, follow my 9-part YouTube series as I rebuild from the ground up through rehab, training, nutrition, setbacks, victories, and everything in between.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "Gable closed the announcement by making it clear this won’t be some polished comeback story where everything looks easy.",
+          "type": "text"
+        },
+        {
+          "source_tag": "blockquote",
+          "text": "“New episodes every Friday. No shortcuts. No excuses. No pretending every day is a good day.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "The series should give fans a closer look at what Gable went through after the injury, especially after a wild run that included his WWE work, AAA appearances, and his El Grande Americano story. Gable is back now, but this documentary looks like it will show the ugly part of getting there.",
+          "type": "text"
+        },
+        {
+          "text": "Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.",
           "type": "text"
         }
       ],
-      "excerpt_it": "Il futuro di Mike Santana in TNA è sempre più al centro dell'attenzione: il contratto del campione è in scadenza a luglio e l'interesse della WWE resta un fattore chiave.",
+      "excerpt_it": "Chad Gable racconta il suo calvario dopo l'infortunio alla spalla del 2025 in una docuserie in nove parti in arrivo su YouTube.",
       "extraction_diagnostics": {
-        "candidate_node_count": 40,
-        "clean_element_count": 7,
+        "candidate_node_count": 50,
+        "clean_element_count": 14,
         "dom_noise_reduction_enabled": false,
-        "quote_count": 0,
-        "raw_element_count": 8,
+        "quote_count": 4,
+        "raw_element_count": 15,
         "removed_by_node_count": 13,
         "removed_by_sanitize_count": 1,
         "root_name": "article",
-        "root_text_chars": 2297,
+        "root_text_chars": 2984,
         "stage": "complete",
         "table_count": 0
       },
-      "fetched_html_chars": 475781,
-      "menzo_score": 78,
+      "fetched_html_chars": 481499,
+      "menzo_score": 86,
       "meta": {
-        "description": "Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon. According to",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg",
-        "source_title": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest"
+        "description": "Chad Gable is pulling the curtain back on his comeback. After suffering a legitimate shoulder injury in June 2025 that kept him out for the rest of the",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg",
+        "source_title": "Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery"
       },
-      "raw_element_count": 8,
+      "raw_element_count": 15,
       "raw_elements_preview": [
         {
-          "alt": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest",
+          "alt": "Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery",
           "type": "image",
-          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x51578"
+          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg.avif?x51578"
         },
         {
-          "text": "Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon.",
+          "text": "Chad Gable is pulling the curtain back on his comeback.",
           "type": "text"
         },
         {
-          "text": "According to PWInsider on June 1, 2026, the reigning TNA World Champion’s current contract with the company runs through sometime in July. The report also noted that WWE has shown interest in Santana in the past.",
+          "text": "After suffering a legitimate shoulder injury in June 2025 that kept him out for the rest of the year, Gable announced that he is releasing a nine-part YouTube documentary series focused on his recovery.",
           "type": "text"
         },
         {
-          "text": "This gives a clearer timeline for Santana’s contract situation after earlier word that his TNA deal was set to expire this summer . With July now mentioned, Santana’s next move could become a major story very soon.",
+          "text": "Gable had been working double duty before the injury, wrestling as himself in WWE and AAA while also competing as the original El Grande Americano. He eventually returned at the Royal Rumble at the end of January, stepping back into the Americano role.",
           "type": "text"
         },
         {
-          "text": "Santana has been one of TNA’s top names since returning in 2024 , and his current run as TNA World Champion makes the timing even more interesting. If he reaches the end of his deal without signing a new one, he could have options across the wrestling world.",
+          "text": "Now, Gable is showing fans what it took to get there. He said the injury forced him to stop for the first time in his wrestling career and figure out who he was without the thing he built his life around.",
           "type": "text"
         },
         {
-          "text": "The WWE interest is also important, especially with Santana already carrying himself like a main-event star in TNA. A move to WWE would be a major change, but staying with TNA could also allow him to continue leading the promotion at a time when his stock is high.",
+          "source_tag": "blockquote",
+          "text": "“I’ve spent my entire career preaching discipline, preparation, and accountability. Then I got hurt.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "Gable explained that the series will follow his full rebuild, including rehab, training, nutrition, setbacks, and victories.",
           "type": "text"
         },
         {
-          "text": "For now, Santana remains TNA World Champion, but July is not far away. Whether he stays put or explores a new opportunity, his contract status is now one of the bigger stories to watch this summer.",
+          "source_tag": "blockquote",
+          "text": "“For the first time in my professional wrestling career, I was forced to stop and figure out who I am when the thing I’ve built my life around gets taken away. So I’m bringing you with me.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "The documentary will begin this Friday on YouTube and run for nine episodes, with new installments dropping every Friday.",
+          "type": "text"
+        },
+        {
+          "source_tag": "blockquote",
+          "text": "“Starting this Friday, follow my 9-part YouTube series as I rebuild from the ground up through rehab, training, nutrition, setbacks, victories, and everything in between.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "Gable closed the announcement by making it clear this won’t be some polished comeback story where everything looks easy.",
+          "type": "text"
+        },
+        {
+          "source_tag": "blockquote",
+          "text": "“New episodes every Friday. No shortcuts. No excuses. No pretending every day is a good day.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "The series should give fans a closer look at what Gable went through after the injury, especially after a wild run that included his WWE work, AAA appearances, and his El Grande Americano story. Gable is back now, but this documentary looks like it will show the ugly part of getting there.",
+          "type": "text"
+        },
+        {
+          "text": "Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.",
           "type": "text"
         },
         {
@@ -891,97 +434,97 @@
       "removed_elements_debug": [
         {
           "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 28,
+          "node_index": 38,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Spotlight"
         },
         {
           "classes": "gb-loop-item rsn-spotlight-item post-2196416 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-paul-heyman tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 29,
+          "node_index": 39,
           "node_name": "li",
           "reason": "node_class_noise",
           "text_preview": "WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 30,
+          "node_index": 40,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 31,
+          "node_index": 41,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
         },
         {
           "classes": "gb-loop-item rsn-spotlight-item post-2196368 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-iyo-sky tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 32,
+          "node_index": 42,
           "node_name": "li",
           "reason": "node_class_noise",
           "text_preview": "WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 33,
+          "node_index": 43,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 34,
+          "node_index": 44,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
         },
         {
           "classes": "gb-loop-item rsn-spotlight-item post-2196255 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-brock-lesnar tag-oba-femi tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 35,
+          "node_index": 45,
           "node_name": "li",
           "reason": "node_class_noise",
           "text_preview": "WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 36,
+          "node_index": 46,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 37,
+          "node_index": 47,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
         },
         {
           "classes": "gb-loop-item rsn-spotlight-item post-2196202 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
-          "node_index": 38,
+          "node_index": 48,
           "node_name": "li",
           "reason": "node_class_noise",
           "text_preview": "WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 39,
+          "node_index": 49,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "WWE Makes Major Changes to King of the Ring Tournament Lineup"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 40,
+          "node_index": 50,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
         },
         {
-          "index": 8,
+          "index": 15,
           "item": {
             "text": "Spotlight WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup",
             "type": "text"
@@ -990,20 +533,133 @@
         }
       ],
       "source": "ringsidenews",
-      "source_title": "Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest",
-      "source_url": "https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest/",
+      "source_title": "Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery",
+      "source_url": "https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery/",
       "status": "ready_for_alfred",
-      "title_it": "Aggiornamenti sul contratto di Mike Santana in TNA tra l'interesse della WWE",
+      "title_it": "Chad Gable annuncia una docuserie in nove parti sul recupero dall'infortunio alla spalla",
       "translation_chain_attempted": [
         "gemini-3.1-flash-lite"
       ],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Gli elementi [quote] vanno pubblicati come <blockquote>...</blockquote>, non come semplici <p> con virgolette.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Gli elementi [table] sono tabelle: conservali nel corpo come <table class=\"owtv-data-table\"> con righe e celle HTML semplici. Non sostituirli con soli titoli o riassunti.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest/\nTitolo feed: Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest\nTitolo pagina: Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest\nDescrizione: Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon. According to\nCategoria suggerita: TNA\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x51578 ALT=Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest\n[2|text] Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon.\n[3|text] According to PWInsider on June 1, 2026, the reigning TNA World Champion’s current contract with the company runs through sometime in July. The report also noted that WWE has shown interest in Santana in the past.\n[4|text] This gives a clearer timeline for Santana’s contract situation after earlier word that his TNA deal was set to expire this summer . With July now mentioned, Santana’s next move could become a major story very soon.\n[5|text] Santana has been one of TNA’s top names since returning in 2024 , and his current run as TNA World Champion makes the timing even more interesting. If he reaches the end of his deal without signing a new one, he could have options across the wrestling world.\n[6|text] The WWE interest is also important, especially with Santana already carrying himself like a main-event star in TNA. A move to WWE would be a major change, but staying with TNA could also allow him to continue leading the promotion at a time when his stock is high.\n[7|text] For now, Santana remains TNA World Champion, but July is not far away. Whether he stays put or explores a new opportunity, his contract status is now one of the bigger stories to watch this summer.\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"Aggiornamenti sul contratto di Mike Santana in TNA tra l'interesse della WWE\",\n  \"body_html\": \"<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x51578--><p>Il futuro di Mike Santana in TNA è diventato un po' più nitido, ma la sua prossima mossa resta ancora incerta, dato che il suo contratto è in scadenza a brevissimo.</p><p>Secondo quanto riportato da PWInsider il 1° giugno 2026, l'attuale contratto dell'attuale TNA World Champion con la compagnia scadrà nel corso del mese di luglio. Il report sottolinea inoltre come la WWE abbia mostrato interesse per Santana in passato.</p><p>Queste informazioni forniscono una tempistica più precisa sulla situazione contrattuale di Santana, dopo le prime indiscrezioni che davano il suo accordo con la TNA in scadenza nel corso dell'estate. Con il mese di luglio ormai indicato come termine, la prossima mossa di Santana potrebbe diventare un argomento di grande rilievo molto presto.</p><p>Santana è stato uno dei nomi di punta della TNA dal suo ritorno nel 2024 e il suo attuale regno come TNA World Champion rende la tempistica ancora più interessante. Se dovesse giungere alla scadenza del contratto senza averne firmato uno nuovo, potrebbe avere diverse opzioni nel panorama del wrestling mondiale.</p><p>Anche l'interesse della WWE rappresenta un fattore importante, specialmente considerando che Santana si sta già imponendo come una star da main event in TNA. Un passaggio alla WWE segnerebbe un cambiamento significativo, ma rimanere in TNA potrebbe consentirgli di continuare a guidare la federazione in un momento in cui le sue quotazioni sono molto alte.</p><p>Per ora, Santana rimane il TNA World Champion, ma il mese di luglio non è lontano. Che decida di restare o di esplorare una nuova opportunità, la sua situazione contrattuale è ora una delle storie più importanti da seguire quest'estate.</p>\",\n  \"excerpt_it\": \"Il futuro di Mike Santana in TNA è sempre più al centro dell'attenzione: il contratto del campione è in scadenza a luglio e l'interesse della WWE resta un fattore chiave.\",\n  \"notes\": [\n    \"Traduzione eseguita rispettando la linea editoriale v92.\",\n    \"Mantenuta la sequenza delle informazioni e lo stile giornalistico richiesto.\",\n    \"Terminologia tecnica di settore (TNA World Champion, main event, star) conservata correttamente.\"\n  ]\n}",
+      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Gli elementi [quote] vanno pubblicati come <blockquote>...</blockquote>, non come semplici <p> con virgolette.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Gli elementi [table] sono tabelle: conservali nel corpo come <table class=\"owtv-data-table\"> con righe e celle HTML semplici. Non sostituirli con soli titoli o riassunti.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery/\nTitolo feed: Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery\nTitolo pagina: Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery\nDescrizione: Chad Gable is pulling the curtain back on his comeback. After suffering a legitimate shoulder injury in June 2025 that kept him out for the rest of the\nCategoria suggerita: World\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg.avif?x51578 ALT=Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery\n[2|text] Chad Gable is pulling the curtain back on his comeback.\n[3|text] After suffering a legitimate shoulder injury in June 2025 that kept him out for the rest of the year, Gable announced that he is releasing a nine-part YouTube documentary series focused on his recovery.\n[4|text] Gable had been working double duty before the injury, wrestling as himself in WWE and AAA while also competing as the original El Grande Americano. He eventually returned at the Royal Rumble at the end of January, stepping back into the Americano role.\n[5|text] Now, Gable is showing fans what it took to get there. He said the injury forced him to stop for the first time in his wrestling career and figure out who he was without the thing he built his life around.\n[6|quote] “I’ve spent my entire career preaching discipline, preparation, and accountability. Then I got hurt.”\n[7|text] Gable explained that the series will follow his full rebuild, including rehab, training, nutrition, setbacks, and victories.\n[8|quote] “For the first time in my professional wrestling career, I was forced to stop and figure out who I am when the thing I’ve built my life around gets taken away. So I’m bringing you with me.”\n[9|text] The documentary will begin this Friday on YouTube and run for nine episodes, with new installments dropping every Friday.\n[10|quote] “Starting this Friday, follow my 9-part YouTube series as I rebuild from the ground up through rehab, training, nutrition, setbacks, victories, and everything in between.”\n[11|text] Gable closed the announcement by making it clear this won’t be some polished comeback story where everything looks easy.\n[12|quote] “New episodes every Friday. No shortcuts. No excuses. No pretending every day is a good day.”\n[13|text] The series should give fans a closer look at what Gable went through after the injury, especially after a wild run that included his WWE work, AAA appearances, and his El Grande Americano story. Gable is back now, but this documentary looks like it will show the ugly part of getting there.\n[14|text] Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Chad Gable annuncia una docuserie in nove parti sul recupero dall'infortunio alla spalla\",\n  \"body_html\": \"<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg.avif?x51578-->Chad Gable svela i retroscena del suo ritorno sul ring. Dopo aver subito un grave infortunio alla spalla nel giugno 2025, che lo ha tenuto lontano dalle scene per il resto dell'anno, Gable ha annunciato l'uscita di una docuserie su YouTube in nove parti incentrata sul suo percorso di riabilitazione.</p><p>Prima dell'infortunio, Gable stava sostenendo un carico di lavoro raddoppiato, esibendosi regolarmente sia in WWE che in AAA, oltre a interpretare il personaggio originale di El Grande Americano. Il suo rientro è avvenuto infine alla Royal Rumble, alla fine di gennaio, tornando a vestire i panni di Americano.</p><p>Ora, Gable vuole mostrare ai fan cosa ha significato arrivare a quel momento. L'atleta ha spiegato che l'infortunio lo ha costretto a fermarsi per la prima volta nella sua carriera nel wrestling, spingendolo a capire chi fosse lontano da ciò su cui aveva costruito la propria vita.</p><blockquote>“Ho passato l'intera carriera a predicare disciplina, preparazione e responsabilità. Poi mi sono fatto male.”</blockquote><p>Gable ha spiegato che la serie seguirà l'intero processo di ricostruzione fisica e mentale, coprendo riabilitazione, allenamento, alimentazione, battute d'arresto e vittorie.</p><blockquote>“Per la prima volta nella mia carriera di wrestler professionista, sono stato costretto a fermarmi e a capire chi sono quando la cosa su cui ho costruito la mia vita mi viene portata via. Perciò, vi porto con me.”</blockquote><p>Il documentario prenderà il via questo venerdì su YouTube e si articolerà in nove episodi, con una nuova puntata in uscita ogni venerdì.</p><blockquote>“A partire da questo venerdì, seguite la mia serie YouTube in 9 parti mentre ricostruisco tutto dalle fondamenta, tra riabilitazione, allenamento, nutrizione, contrattempi, vittorie e tutto ciò che sta nel mezzo.”</blockquote><p>Gable ha concluso l'annuncio chiarendo che non si tratterà della solita storia di ritorno edulcorata in cui tutto sembra facile.</p><blockquote>“Nuovi episodi ogni venerdì. Nessuna scorciatoia. Nessuna scusa. Nessuna finzione che ogni giorno sia una buona giornata.”</blockquote><p>La serie offrirà ai fan uno sguardo approfondito su ciò che Gable ha dovuto affrontare dopo l'infortunio, specialmente dopo un periodo frenetico che ha visto incrociarsi il suo lavoro in WWE, le apparizioni in AAA e la storyline di El Grande Americano. Gable è tornato, ma questo documentario promette di mostrare il lato più difficile e crudo del suo percorso verso il ring.</p>\",\n  \"excerpt_it\": \"Chad Gable racconta il suo calvario dopo l'infortunio alla spalla del 2025 in una docuserie in nove parti in arrivo su YouTube.\",\n  \"notes\": [\n    \"Traduzione conforme alla linea editoriale v92, rispettando la formattazione richiesta (HTML per quote e immagini).\",\n    \"Mantenuti i nomi dei soggetti e delle promotion senza traduzioni improprie.\",\n    \"Terminologia tecnica di wrestling utilizzata coerentemente col contesto della notizia.\"\n  ]\n}",
+      "translation_used": true
+    },
+    {
+      "bob_notes": [
+        "Traduzione fedele e terminologia tecnica mantenuta (main event, sleeper hold, superplex, lariat, powerbomb, title shot, pinfall)."
+      ],
+      "body_html": "<p>Gunther ha sconfitto Royce Keys nel main event dell'ultimo episodio di WWE SmackDown.</p><p>Keys aveva ottenuto il match nel corso della serata, mentre Gunther continuava a tergiversare invece di firmare il contratto per il WWE Championship in vista di Clash in Italy. Dopo essersi presentato per occupare lo spazio vacante, il \"Ring General\" ha cambiato idea sull'avversario; il General Manager Nick Aldis ha quindi stabilito che i due si sarebbero affrontati nel main event con in palio l'opportunità titolata.</p><p>Keys ha dominato gran parte della prima fase dell'incontro, assorbendo l'offensiva iniziale di Gunther e riuscendo a sovrastare il rivale, schiantandolo più volte contro il tavolo di commento e colpendolo con un superplex per riportarlo sul ring.</p><p>L'inerzia del match è cambiata rapidamente quando Gunther ha applicato una sleeper hold al centro del ring, portando Keys al tappeto e sembrando a un passo dalla vittoria. A quel punto, Solo Sikoa è apparso a bordo ring iniziando a incitare Keys, distraendo così Gunther e permettendo a Keys di reagire e colpire il \"Ring General\" per un conteggio di due.</p><p>Gunther è tornato nuovamente alla sleeper hold al centro del quadrato, costringendo Keys in ginocchio prima che quest'ultimo riuscisse a rialzarsi ancora una volta. Keys ha poi spinto Gunther contro l'arbitro; Sikoa ha quindi recuperato una sedia d'acciaio passandola a Keys, ma quest'ultimo ha colpito proprio Sikoa, rifiutando il suo aiuto. Ciò ha concesso a Gunther il tempo e lo spazio necessari per abbattere Keys con una lariat, seguita da una powerbomb che gli è valsa il pin vincente e la title shot.</p>",
+      "category_hint": "WWE",
+      "clean_element_count": 5,
+      "created_at": "2026-06-01T22:19:02.534450+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "element_counts": {
+        "embed": 0,
+        "heading": 0,
+        "image": 0,
+        "quote": 0,
+        "table": 0,
+        "text": 5
+      },
+      "elements": [
+        {
+          "text": "Gunther defeated Royce Keys in the main event of \"WWE SmackDown.\"",
+          "type": "text"
+        },
+        {
+          "text": "Keys got his match earlier in the night as Gunther continued to play games rather than signing the WWE Championship contract for Clash in Italy , coming out to fill the spot until Gunther changed his mind with the opposition. Nick Aldis thus decided they would compete in the main event for the WWE Championship opportunity.",
+          "type": "text"
+        },
+        {
+          "text": "Keys dominated most of the early half of the bout, absorbing Gunther's opening flurry and overpowering the \"Ring General\" to smash him multiple times against the announcer's desk and superplex him back in the ring.",
+          "type": "text"
+        },
+        {
+          "text": "The tide changed quickly as Gunther cinched in the sleeper hold in the middle of the ring, dropping Keys to the floor and looking to have the match won. Solo Sikoa then emerged at ringside and started to rally for Keys, thus distracting Gunther and prompting a comeback run where he got back up and dropped Gunther for a near-fall.",
+          "type": "text"
+        },
+        {
+          "text": "Gunther went back to the sleeper again in the middle of the ring, dropping Keys to his knees until he once again found his feet. Keys sent Gunther into the referee and Sikoa grabbed a steel chair for him to use, but Keys hit Sikoa instead to reject his help. That allowed Gunther the time and space to drop Keys with a lariat, following up with a powerbomb to get the winning pinfall and the title shot.",
+          "type": "text"
+        }
+      ],
+      "excerpt_it": "Gunther ha sconfitto Royce Keys nel main event di SmackDown, ottenendo ufficialmente l'opportunità di sfidare Cody Rhodes per il WWE Championship a Clash in Italy.",
+      "extraction_diagnostics": {
+        "candidate_node_count": 6,
+        "clean_element_count": 5,
+        "dom_noise_reduction_enabled": false,
+        "quote_count": 0,
+        "raw_element_count": 6,
+        "removed_by_node_count": 0,
+        "removed_by_sanitize_count": 1,
+        "root_name": "article",
+        "root_text_chars": 1471,
+        "stage": "complete",
+        "table_count": 0
+      },
+      "fetched_html_chars": 49865,
+      "menzo_score": 84,
+      "meta": {
+        "description": "Gunther defeated Royce Keys in the main event of \"WWE SmackDown\" to secure his shot at Cody Rhodes' WWE Championship at Clash in Italy.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/gunther-defeats-royce-keys-on-wwe-smackdown-will-face-cody-rhodes-at-clash-in-italy/l-intro-1778900776.jpg",
+        "source_title": "GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy - Wrestling Inc."
+      },
+      "raw_element_count": 6,
+      "raw_elements_preview": [
+        {
+          "alt": "Gunther celebrates victory during \"WWE SmackDown\"",
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/gunther-defeats-royce-keys-on-wwe-smackdown-will-face-cody-rhodes-at-clash-in-italy/intro-1778900776.jpg"
+        },
+        {
+          "text": "Gunther defeated Royce Keys in the main event of \"WWE SmackDown.\"",
+          "type": "text"
+        },
+        {
+          "text": "Keys got his match earlier in the night as Gunther continued to play games rather than signing the WWE Championship contract for Clash in Italy , coming out to fill the spot until Gunther changed his mind with the opposition. Nick Aldis thus decided they would compete in the main event for the WWE Championship opportunity.",
+          "type": "text"
+        },
+        {
+          "text": "Keys dominated most of the early half of the bout, absorbing Gunther's opening flurry and overpowering the \"Ring General\" to smash him multiple times against the announcer's desk and superplex him back in the ring.",
+          "type": "text"
+        },
+        {
+          "text": "The tide changed quickly as Gunther cinched in the sleeper hold in the middle of the ring, dropping Keys to the floor and looking to have the match won. Solo Sikoa then emerged at ringside and started to rally for Keys, thus distracting Gunther and prompting a comeback run where he got back up and dropped Gunther for a near-fall.",
+          "type": "text"
+        },
+        {
+          "text": "Gunther went back to the sleeper again in the middle of the ring, dropping Keys to his knees until he once again found his feet. Keys sent Gunther into the referee and Sikoa grabbed a steel chair for him to use, but Keys hit Sikoa instead to reject his help. That allowed Gunther the time and space to drop Keys with a lariat, following up with a powerbomb to get the winning pinfall and the title shot.",
+          "type": "text"
+        }
+      ],
+      "removed_before_gemini": 1,
+      "removed_elements_debug": [
+        {
+          "index": 1,
+          "item": {
+            "alt": "Gunther celebrates victory during \"WWE SmackDown\"",
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/gunther-defeats-royce-keys-on-wwe-smackdown-will-face-cody-rhodes-at-clash-in-italy/intro-1778900776.jpg"
+          },
+          "reason": "duplicate_featured_image"
+        }
+      ],
+      "source": "wrestlinginc",
+      "source_title": "GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy",
+      "source_url": "https://www.wrestlinginc.com/2174268/wwe-smackdown-gunther-royce-keys-cody-rhodes-clash-in-italy/",
+      "status": "ready_for_alfred",
+      "title_it": "WWE SmackDown: Gunther batte Royce Keys e sfiderà Cody Rhodes a Clash in Italy",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Gli elementi [quote] vanno pubblicati come <blockquote>...</blockquote>, non come semplici <p> con virgolette.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Gli elementi [table] sono tabelle: conservali nel corpo come <table class=\"owtv-data-table\"> con righe e celle HTML semplici. Non sostituirli con soli titoli o riassunti.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2174268/wwe-smackdown-gunther-royce-keys-cody-rhodes-clash-in-italy/\nTitolo feed: GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy\nTitolo pagina: GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy - Wrestling Inc.\nDescrizione: Gunther defeated Royce Keys in the main event of \"WWE SmackDown\" to secure his shot at Cody Rhodes' WWE Championship at Clash in Italy.\nCategoria suggerita: WWE\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|text] Gunther defeated Royce Keys in the main event of \"WWE SmackDown.\"\n[2|text] Keys got his match earlier in the night as Gunther continued to play games rather than signing the WWE Championship contract for Clash in Italy , coming out to fill the spot until Gunther changed his mind with the opposition. Nick Aldis thus decided they would compete in the main event for the WWE Championship opportunity.\n[3|text] Keys dominated most of the early half of the bout, absorbing Gunther's opening flurry and overpowering the \"Ring General\" to smash him multiple times against the announcer's desk and superplex him back in the ring.\n[4|text] The tide changed quickly as Gunther cinched in the sleeper hold in the middle of the ring, dropping Keys to the floor and looking to have the match won. Solo Sikoa then emerged at ringside and started to rally for Keys, thus distracting Gunther and prompting a comeback run where he got back up and dropped Gunther for a near-fall.\n[5|text] Gunther went back to the sleeper again in the middle of the ring, dropping Keys to his knees until he once again found his feet. Keys sent Gunther into the referee and Sikoa grabbed a steel chair for him to use, but Keys hit Sikoa instead to reject his help. That allowed Gunther the time and space to drop Keys with a lariat, following up with a powerbomb to get the winning pinfall and the title shot.\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"WWE SmackDown: Gunther batte Royce Keys e sfiderà Cody Rhodes a Clash in Italy\",\n  \"body_html\": \"<p>Gunther ha sconfitto Royce Keys nel main event dell'ultimo episodio di WWE SmackDown.</p><p>Keys aveva ottenuto il match nel corso della serata, mentre Gunther continuava a tergiversare invece di firmare il contratto per il WWE Championship in vista di Clash in Italy. Dopo essersi presentato per occupare lo spazio vacante, il \\\"Ring General\\\" ha cambiato idea sull'avversario; il General Manager Nick Aldis ha quindi stabilito che i due si sarebbero affrontati nel main event con in palio l'opportunità titolata.</p><p>Keys ha dominato gran parte della prima fase dell'incontro, assorbendo l'offensiva iniziale di Gunther e riuscendo a sovrastare il rivale, schiantandolo più volte contro il tavolo di commento e colpendolo con un superplex per riportarlo sul ring.</p><p>L'inerzia del match è cambiata rapidamente quando Gunther ha applicato una sleeper hold al centro del ring, portando Keys al tappeto e sembrando a un passo dalla vittoria. A quel punto, Solo Sikoa è apparso a bordo ring iniziando a incitare Keys, distraendo così Gunther e permettendo a Keys di reagire e colpire il \\\"Ring General\\\" per un conteggio di due.</p><p>Gunther è tornato nuovamente alla sleeper hold al centro del quadrato, costringendo Keys in ginocchio prima che quest'ultimo riuscisse a rialzarsi ancora una volta. Keys ha poi spinto Gunther contro l'arbitro; Sikoa ha quindi recuperato una sedia d'acciaio passandola a Keys, ma quest'ultimo ha colpito proprio Sikoa, rifiutando il suo aiuto. Ciò ha concesso a Gunther il tempo e lo spazio necessari per abbattere Keys con una lariat, seguita da una powerbomb che gli è valsa il pin vincente e la title shot.</p>\",\n  \"excerpt_it\": \"Gunther ha sconfitto Royce Keys nel main event di SmackDown, ottenendo ufficialmente l'opportunità di sfidare Cody Rhodes per il WWE Championship a Clash in Italy.\",\n  \"notes\": [\n    \"Traduzione fedele e terminologia tecnica mantenuta (main event, sleeper hold, superplex, lariat, powerbomb, title shot, pinfall).\"\n  ]\n}",
       "translation_used": true
     }
   ],
-  "generated_at": "2026-06-01T20:54:18.575098+00:00",
+  "generated_at": "2026-06-01T22:19:05.235080+00:00",
   "handoff": {
     "errors": 0,
     "extraction_empty": 0,
