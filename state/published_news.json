@@ -560,6 +560,21 @@
     "story_core": "shift-broadcasting-diritti-tv-giappone",
     "wp_post_id": 5535
   },
+  "https://www.ringsidenews.com/octagon-jrs-recovery-timeline-revealed-injury-aaa-noche-de-los-grandes-taping/": {
+    "article_type": "standard_useful",
+    "categories": [
+      "World"
+    ],
+    "link": "https://news.openwrestlingtv.com/world/svelati-i-tempi-di-recupero-di-octagon-jr-dopo-linfortunio-a-aaa-noche-de-los-grandes/",
+    "priority": "soft",
+    "published_at": "2026-06-01T10:37:57.504101",
+    "score": 72,
+    "source": "ringsidenews",
+    "source_title": "Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping",
+    "status": "published",
+    "story_core": "aggiornamento-medico-infortunio-octagon-jr",
+    "wp_post_id": 5762
+  },
   "https://www.ringsidenews.com/pagano-walks-out-psycho-clown-war-raiders-win-aaa-tag-team-titles-noche-de-los-grandes/": {
     "article_type": "event_outcome",
     "categories": [
@@ -859,6 +874,21 @@
     "status": "published",
     "story_core": "mcmahon-merger-lawsuit-unsealed-filings",
     "wp_post_id": 5612
+  },
+  "https://www.ringsidenews.com/wwe-announces-2026-queen-ring-tournament-bracket/": {
+    "article_type": "hard_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/annunciato-il-tabellone-del-torneo-queen-of-the-ring-2026-della-wwe/",
+    "priority": "soft",
+    "published_at": "2026-06-01T10:38:01.937564",
+    "score": 70,
+    "source": "ringsidenews",
+    "source_title": "WWE Announces 2026 Queen of the Ring Tournament Bracket",
+    "status": "published",
+    "story_core": "annuncio-bracket-torneo-2026",
+    "wp_post_id": 5764
   },
   "https://www.ringsidenews.com/wwe-announces-raw-smackdown-september-tapings-mexico-city/": {
     "article_type": "hard_news",

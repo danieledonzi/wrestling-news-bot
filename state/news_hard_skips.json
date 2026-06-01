@@ -391,6 +391,14 @@
     "stage": "phase_b",
     "title": "Natalya’s Memoir Could Be Heading To Hollywood As Interest Builds For Hart Family Movie"
   },
+  "https://www.ringsidenews.com/nikki-bella-reveals-scrapped-ciao-bella-segments-wwe-clash-italy/": {
+    "created_at": "2026-06-01T10:37:46.025834",
+    "reason": "phase_b_soft_news",
+    "score": 45,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Nikki Bella Reveals Scrapped “Ciao Bella” Segments For WWE Clash In Italy"
+  },
   "https://www.ringsidenews.com/nikki-bella-says-bryan-danielson-will-coach-her-wwe-comeback-run/": {
     "created_at": "2026-05-29T07:28:39.918348",
     "reason": "phase_b_soft_news",
@@ -543,6 +551,14 @@
     "stage": "phase_b",
     "title": "Sol Ruca Addresses Brutal NXT Fall That Left Her with Staples"
   },
+  "https://www.ringsidenews.com/sol-ruca-addresses-hyper-criticism-hate-since-wwe-main-roster-call/": {
+    "created_at": "2026-06-01T10:37:44.529815",
+    "reason": "phase_b_soft_news",
+    "score": 48,
+    "source": "ringsidenews",
+    "stage": "phase_b",
+    "title": "Sol Ruca Addresses Hyper-Criticism And Hate Since WWE Main Roster Call-Up"
+  },
   "https://www.ringsidenews.com/tiffany-stratton-turns-heads-spain-photo-drop-ahead-wwe-weekend-italy/": {
     "created_at": "2026-05-30T19:49:36.779804",
     "reason": "phase_b_low_value",
@@ -646,6 +662,14 @@
     "source": "ringsidenews",
     "stage": "phase_b",
     "title": "WWE Clash In Italy Results, Highlights and Key Moments for May 31, 2026"
+  },
+  "https://www.ringsidenews.com/wwe-raw-preview-june-1-2026-confirmed-matches-start-time-how-watch/": {
+    "created_at": "2026-06-01T10:37:46.025914",
+    "reason": "report_like",
+    "score": 0,
+    "source": "ringsidenews",
+    "stage": "deterministic",
+    "title": "WWE RAW Preview for June 1, 2026: Confirmed Matches, Start Time and How to Watch"
   },
   "https://www.ringsidenews.com/wwe-smackdown-preview-may-29-2026-confirmed-matches-start-time-how-watch/": {
     "created_at": "2026-05-29T21:23:40.155046",
@@ -1286,5 +1310,13 @@
     "source": "wrestlinginc",
     "stage": "phase_a",
     "title": "WWE Clash In Italy 2026: 3 Things We Hated & 3 Things We Loved"
+  },
+  "https://www.wrestlinginc.com/2184527/konosuke-takeshita-first-defense-aew-international-title-collision/": {
+    "created_at": "2026-06-01T10:37:41.289308",
+    "reason": "event_outcome_after_report",
+    "score": 71,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Konosuke Takeshita Wins First AEW International Title Defense On Collision"
   }
 }
