@@ -1,16 +1,16 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-01T22:22:37.307433+00:00",
+  "generated_at": "2026-06-01T22:42:27.994374+00:00",
   "handoff": {
-    "already_published": 3,
+    "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 0,
+    "published": 2,
     "wp_not_ready": 0
   },
   "input": {
     "alfred_version": "v93_8_alfred_structured_content_checks",
-    "approved_articles": 3
+    "approved_articles": 2
   },
   "mode": "wordpress_publisher",
   "policy": {
@@ -21,22 +21,26 @@
   },
   "results": [
     {
-      "source_url": "https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit/",
-      "status": "already_published",
-      "title_it": "WWE: i querelanti dubitano della corretta conservazione delle prove nella causa contro ESPN",
-      "wp_post_id": 5794
+      "categories": [
+        4
+      ],
+      "featured_media": 5800,
+      "source_url": "https://www.ringsidenews.com/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-noche-de-los-grandes/",
+      "status": "published",
+      "title_it": "AAA: il replay su Netflix oscura il volto insanguinato di Chad Gable",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/aaa-il-replay-su-netflix-oscura-il-volto-insanguinato-di-chad-gable/",
+      "wp_post_id": 5801
     },
     {
-      "source_url": "https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery/",
-      "status": "already_published",
-      "title_it": "Chad Gable annuncia una docuserie in nove parti sul recupero dal suo infortunio alla spalla",
-      "wp_post_id": 5796
-    },
-    {
-      "source_url": "https://www.wrestlinginc.com/2174268/wwe-smackdown-gunther-royce-keys-cody-rhodes-clash-in-italy/",
-      "status": "already_published",
-      "title_it": "WWE SmackDown: Gunther batte Royce Keys e sfiderà Cody Rhodes a Clash in Italy",
-      "wp_post_id": 5798
+      "categories": [
+        4
+      ],
+      "featured_media": 5802,
+      "source_url": "https://www.ringsidenews.com/finn-balor-moves-smackdown-wwe-raw-trade/",
+      "status": "published",
+      "title_it": "WWE: Finn Bálor trasferito ufficialmente a SmackDown",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-finn-balor-trasferito-ufficialmente-a-smackdown/",
+      "wp_post_id": 5803
     }
   ],
   "version": "v93_6_publisher_wordpress",

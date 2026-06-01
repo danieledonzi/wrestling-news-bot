@@ -374,5 +374,101 @@
     "overall_status": "ok",
     "published": 0,
     "warnings": 0
+  },
+  {
+    "agent_handoffs": {
+      "alfred": {
+        "approved": 2,
+        "blockers": 1,
+        "editorial_changes": 0,
+        "needs_revision": 1,
+        "warnings": 3
+      },
+      "bob": {
+        "errors": 0,
+        "extraction_empty": 0,
+        "ready_for_alfred": 3,
+        "translation_pending": 0
+      },
+      "massy": {
+        "already_published_hard_skipped": 5,
+        "already_worked": 1,
+        "hard_skipped": 7,
+        "to_menzo": 26,
+        "to_simone": 1
+      },
+      "menzo": {
+        "pending": 6,
+        "skipped": 14,
+        "to_bob_or_v92": 6
+      },
+      "publisher": {
+        "already_published": 0,
+        "dry_run": 0,
+        "errors": 0,
+        "published": 2,
+        "wp_not_ready": 0
+      },
+      "simone": {
+        "ready": 0,
+        "skipped": 6,
+        "waiting": 0
+      }
+    },
+    "already_published": 0,
+    "article_count": 6,
+    "errors": 1,
+    "generated_at": "2026-06-01T22:42:28.001124+00:00",
+    "overall_status": "error",
+    "published": 2,
+    "warnings": 2
+  },
+  {
+    "agent_handoffs": {
+      "alfred": {
+        "approved": 2,
+        "blockers": 1,
+        "editorial_changes": 0,
+        "needs_revision": 1,
+        "warnings": 3
+      },
+      "bob": {
+        "errors": 0,
+        "extraction_empty": 0,
+        "ready_for_alfred": 3,
+        "translation_pending": 0
+      },
+      "massy": {
+        "already_published_hard_skipped": 5,
+        "already_worked": 1,
+        "hard_skipped": 7,
+        "to_menzo": 26,
+        "to_simone": 1
+      },
+      "menzo": {
+        "pending": 6,
+        "skipped": 14,
+        "to_bob_or_v92": 6
+      },
+      "publisher": {
+        "already_published": 0,
+        "dry_run": 0,
+        "errors": 0,
+        "published": 2,
+        "wp_not_ready": 0
+      },
+      "simone": {
+        "ready": 0,
+        "skipped": 6,
+        "waiting": 0
+      }
+    },
+    "already_published": 0,
+    "article_count": 6,
+    "errors": 1,
+    "generated_at": "2026-06-01T22:42:28.005379+00:00",
+    "overall_status": "error",
+    "published": 2,
+    "warnings": 2
   }
 ]

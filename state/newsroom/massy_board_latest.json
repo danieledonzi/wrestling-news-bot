@@ -14,8 +14,9 @@
     }
   ],
   "binding": {
-    "bot_v92_runtime_still_delegated_until_menzo_simone_takeover": true,
-    "hard_skips_are_binding_for_newsroom": true
+    "bot_v92_runtime_still_delegated_until_menzo_simone_takeover": false,
+    "hard_skips_are_binding_for_newsroom": true,
+    "published_urls_are_hard_skips": true
   },
   "feed_errors": [],
   "feeds": [
@@ -31,11 +32,12 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-01T22:22:23.848231+00:00",
+  "generated_at": "2026-06-01T22:42:09.378367+00:00",
   "handoff": {
+    "already_published_hard_skipped": 5,
     "already_worked": 1,
-    "hard_skipped": 2,
-    "to_menzo": 31,
+    "hard_skipped": 7,
+    "to_menzo": 26,
     "to_simone": 1
   },
   "hard_skipped": [
@@ -60,8 +62,69 @@
       "summary": "On a night that saw a new No. 1 contender crowned, here are three things we hated and three things we loved about the 5/15/26 episode of \"WWE SmackDown!\"",
       "title": "WWE SmackDown 5/15/2026: 3 Things We Hated & 3 Things We Loved",
       "url": "https://www.wrestlinginc.com/2174279/wwe-smackdown-may-15-2026-hated-loved-opinion-review/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2174268/wwe-smackdown-gunther-royce-keys-cody-rhodes-clash-in-italy",
+      "published": "Sat, 16 May 2026 03:07:43 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "wrestlinginc",
+      "summary": "Gunther defeated Royce Keys in the main event of \"WWE SmackDown\" to secure his shot at Cody Rhodes' WWE Championship at Clash in Italy.",
+      "title": "GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy",
+      "url": "https://www.wrestlinginc.com/2174268/wwe-smackdown-gunther-royce-keys-cody-rhodes-clash-in-italy/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery",
+      "published": "Mon, 01 Jun 2026 22:07:20 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg?x51578\" width=\"800\" /></p>Chad Gable is pulling the curtain back on his comeback. After suffering a legitimate shoulder injury in June 2025 that kept him out for the rest of the year, Gable announced that he is releasing a nine-part YouTube documentary series focused on his recovery. Gable had been working double duty before the injury, wrestling as ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery/\" title=\"Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery\">Read more</a>",
+      "title": "Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery",
+      "url": "https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit",
+      "published": "Mon, 01 Jun 2026 21:46:43 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"WWE Granted Extension to Respond to ESPN Streaming Lawsuit\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/wwe-granted-extension-to-respond-to-espn-streaming-lawsuit-11.jpg?x51578\" width=\"800\" /></p>WWE’s legal fight over its move to ESPN streaming just got another layer, and the plaintiffs are now pointing to a separate WWE lawsuit to argue discovery should move forward. According to Brandon Thurston, plaintiffs in the class action lawsuit over WWE Premium Live Events moving to ESPN streaming are pushing back against WWE’s attempt ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit/\" title=\"WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit\">Read more</a>",
+      "title": "WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit",
+      "url": "https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/tna-impact-viewership-sees-slight-increase-may-28-2026",
+      "published": "Mon, 01 Jun 2026 19:33:02 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/TNA-iMPACT-Massive-Increase.jpg?x51578\" width=\"800\" /></p>New ratings data has been released for the May 28, 2026 episode of TNA iMPACT on AMC, with the numbers ticking up slightly from the prior week. According to Programming Insider, TNA iMPACT on May 28, 2026 drew 195,000 viewers on AMC, with a 0.02 rating in the key P18–49 demographic. For comparison, the May ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/tna-impact-viewership-sees-slight-increase-may-28-2026/\" title=\"TNA iMPACT Viewership Sees Slight Increase on May 28, 2026\">Read more</a>",
+      "title": "TNA iMPACT Viewership Sees Slight Increase on May 28, 2026",
+      "url": "https://www.ringsidenews.com/tna-impact-viewership-sees-slight-increase-may-28-2026/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026",
+      "published": "Mon, 01 Jun 2026 18:33:32 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Dynamite-Massive-Increase-1.jpg?x51578\" width=\"800\" /></p>New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum. According to Programming Insider, AEW Dynamite on May 27, 2026 drew 704,000 viewers on TBS, with a 0.12 rating in the key P18–49 demographic. For comparison, the May 20, 2026 episode drew 613,000 viewers ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/\" title=\"AEW Dynamite Viewership Sees Increase on May 27, 2026\">Read more</a>",
+      "title": "AEW Dynamite Viewership Sees Increase on May 27, 2026",
+      "url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/"
     }
   ],
+  "known_published_urls": 10,
   "known_state_urls": 9,
   "mode": "sentinel_control_board",
   "news_candidates_for_menzo": [
@@ -225,18 +288,6 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2174268/wwe-smackdown-gunther-royce-keys-cody-rhodes-clash-in-italy",
-      "published": "Sat, 16 May 2026 03:07:43 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "Gunther defeated Royce Keys in the main event of \"WWE SmackDown\" to secure his shot at Cody Rhodes' WWE Championship at Clash in Italy.",
-      "title": "GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy",
-      "url": "https://www.wrestlinginc.com/2174268/wwe-smackdown-gunther-royce-keys-cody-rhodes-clash-in-italy/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2174267/jade-cargill-rhea-ripley-wwe-clash-in-italy",
       "published": "Sat, 16 May 2026 03:01:22 +0000",
       "reason": "requires_menzo_classification",
@@ -273,18 +324,6 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery",
-      "published": "Mon, 01 Jun 2026 22:07:20 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg?x51578\" width=\"800\" /></p>Chad Gable is pulling the curtain back on his comeback. After suffering a legitimate shoulder injury in June 2025 that kept him out for the rest of the year, Gable announced that he is releasing a nine-part YouTube documentary series focused on his recovery. Gable had been working double duty before the injury, wrestling as ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery/\" title=\"Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery\">Read more</a>",
-      "title": "Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery",
-      "url": "https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal",
       "published": "Mon, 01 Jun 2026 21:56:35 +0000",
       "reason": "requires_menzo_classification",
@@ -292,18 +331,6 @@
       "summary": "<p><img alt=\"The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/the-miz-begs-browns-trade-news-isnt-real-after-myles-garrett-deal-02.jpg?x51578\" width=\"800\" /></p>The Cleveland Browns found a new way to crush The Miz. The WWE star and longtime Browns fan reacted after the team traded Myles Garrett on Monday, and he sounded completely defeated. Garrett was one of the few bright spots in Cleveland after putting up 23 sacks during the 2024-25 season, but the Browns still ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal/\" title=\"The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal\">Read more</a>",
       "title": "The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal",
       "url": "https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit",
-      "published": "Mon, 01 Jun 2026 21:46:43 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"WWE Granted Extension to Respond to ESPN Streaming Lawsuit\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/wwe-granted-extension-to-respond-to-espn-streaming-lawsuit-11.jpg?x51578\" width=\"800\" /></p>WWE’s legal fight over its move to ESPN streaming just got another layer, and the plaintiffs are now pointing to a separate WWE lawsuit to argue discovery should move forward. According to Brandon Thurston, plaintiffs in the class action lawsuit over WWE Premium Live Events moving to ESPN streaming are pushing back against WWE’s attempt ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit/\" title=\"WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit\">Read more</a>",
-      "title": "WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit",
-      "url": "https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit/"
     },
     {
       "assigned_to": "Menzo",
@@ -381,18 +408,6 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/tna-impact-viewership-sees-slight-increase-may-28-2026",
-      "published": "Mon, 01 Jun 2026 19:33:02 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/TNA-iMPACT-Massive-Increase.jpg?x51578\" width=\"800\" /></p>New ratings data has been released for the May 28, 2026 episode of TNA iMPACT on AMC, with the numbers ticking up slightly from the prior week. According to Programming Insider, TNA iMPACT on May 28, 2026 drew 195,000 viewers on AMC, with a 0.02 rating in the key P18–49 demographic. For comparison, the May ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/tna-impact-viewership-sees-slight-increase-may-28-2026/\" title=\"TNA iMPACT Viewership Sees Slight Increase on May 28, 2026\">Read more</a>",
-      "title": "TNA iMPACT Viewership Sees Slight Increase on May 28, 2026",
-      "url": "https://www.ringsidenews.com/tna-impact-viewership-sees-slight-increase-may-28-2026/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring",
       "published": "Mon, 01 Jun 2026 18:50:53 +0000",
       "reason": "requires_menzo_classification",
@@ -412,18 +427,6 @@
       "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Collision-Massive-Increase.jpg?x51578\" width=\"800\" /></p>The latest audience figures are available for the May 27, 2026 episode of AEW Collision on TBS, with the show delivering a major week-to-week surge. According to Programming Insider, AEW Collision on May 27, 2026 drew 498,000 viewers on TBS, with a 0.05 rating in the key P18–49 demographic. For comparison, the May 20, 2026 ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/\" title=\"AEW Collision Viewership Sees Massive Increase on May 27, 2026\">Read more</a>",
       "title": "AEW Collision Viewership Sees Massive Increase on May 27, 2026",
       "url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026",
-      "published": "Mon, 01 Jun 2026 18:33:32 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Dynamite-Massive-Increase-1.jpg?x51578\" width=\"800\" /></p>New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum. According to Programming Insider, AEW Dynamite on May 27, 2026 drew 704,000 viewers on TBS, with a 0.12 rating in the key P18–49 demographic. For comparison, the May 20, 2026 episode drew 613,000 viewers ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/\" title=\"AEW Dynamite Viewership Sees Increase on May 27, 2026\">Read more</a>",
-      "title": "AEW Dynamite Viewership Sees Increase on May 27, 2026",
-      "url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/"
     },
     {
       "assigned_to": "Menzo",
@@ -453,5 +456,5 @@
       "url": "https://www.wrestlinginc.com/2185015/wwe-raw-june-1-2026-seth-rollins-bron-breakker-tag-team-match-more/"
     }
   ],
-  "version": "v93_1_massy_sentinel_control"
+  "version": "v93_9_massy_published_hard_skip"
 }

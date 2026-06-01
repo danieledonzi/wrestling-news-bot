@@ -3,81 +3,58 @@
   "approved_articles": [
     {
       "bob_translation_model": "gemini-3.1-flash-lite",
-      "body_html": "<p>La battaglia legale della WWE riguardante il passaggio dello streaming su ESPN si è arricchita di un nuovo capitolo: i querelanti stanno citando un altro procedimento giudiziario a carico della federazione per sostenere che la fase di acquisizione delle prove (discovery) debba proseguire senza sosta.</p><p>Secondo quanto riportato da Brandon Thurston, i querelanti nella class action relativa allo spostamento dei Premium Live Event della WWE sulla piattaforma streaming di ESPN si stanno opponendo fermamente al tentativo della compagnia di sospendere la fase di discovery. La loro tesi è che la WWE non debba ottenere alcun rallentamento, poiché una distinta causa legale nel Delaware, riguardante la fusione societaria, ha già sollevato seri dubbi sulla gestione e la conservazione delle prove da parte dei vertici aziendali.</p><p>I querelanti hanno fatto specifico riferimento alla recente sentenza contro Nick Khan, nella quale il tribunale ha accertato la distruzione di prove in relazione al contenzioso sulla fusione WWE-UFC. Stanno utilizzando questa pronuncia per argomentare che la WWE non può essere considerata affidabile nel preservare le prove mentre la causa sullo streaming ESPN rimane in sospeso.</p><p>Questo aspetto è cruciale, poiché la WWE sta cercando di spostare la causa sullo streaming ESPN verso un arbitrato. La compagnia ha sostenuto che, poiché i querelanti hanno sottoscritto l'abbonamento tramite ESPN Unlimited, le loro rivendicazioni dovrebbero ricadere sotto le clausole arbitrali di Disney ed ESPN, nonostante la WWE non sia stata parte diretta di tale accordo di sottoscrizione.</p><p>La causa è stata intentata da Michael Diesa e Rebecca Tobak, i quali sostengono che i fan della WWE siano stati tratti in inganno riguardo alle modalità di visione dei Premium Live Event dopo il trasferimento sulla piattaforma streaming di ESPN. L'accusa afferma che alcuni fan credevano che il loro accesso esistente a ESPN, tramite cavo o live TV streaming, fosse sufficiente, solo per scoprire successivamente di dover pagare un extra tramite l'app di ESPN.</p><p>Ora i querelanti stanno tentando di mantenere attiva la fase di discovery prima che la corte si pronunci sulla richiesta di arbitrato avanzata dalla WWE. La loro posizione è chiara: visti i precedenti emersi nel caso sulla fusione, ritengono che alla WWE non debba essere concesso alcun ritardo nella raccolta delle prove.</p><p>La vicenda poggiava già in larga misura sulla questione se il caso debba rimanere in tribunale o spostarsi a porte chiuse in arbitrato. Questo nuovo deposito aggiunge un'accusa ancor più netta alla disputa, poiché i querelanti mettono ora in dubbio la capacità della WWE di proteggere documenti e comunicazioni inerenti alla causa.</p><p>Il passaggio della WWE allo streaming di ESPN aveva già generato confusione tra i fan. Ora, la causa legale sorta in merito a tale transizione sta coinvolgendo un altro spinoso problema giudiziario della federazione, con i querelanti che stanno utilizzando le difficoltà legali dell'azienda a proprio vantaggio.</p>",
+      "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/aaa-nig-28.jpg.avif-->\n<p>La rimozione della maschera di Chad Gable è stata senza dubbio uno dei momenti più intensi di AAA Noche de Los Grandes, ma il replay dell'evento ha reso evidente una scelta precisa: non si voleva mostrare nuovamente tutto quel sangue a colori.</p>\n<p>Dopo l'episodio di WWE RAW del 1° giugno 2026, la AAA ha trasmesso la replica del brutale Mask vs. Mask match, che ha visto Chad Gable uscire sconfitto per mano di Ludwig Kaiser, alias El Grande Americano. Durante la messa in onda del post-match, lo schermo è stato trasformato in bianco e nero, apparentemente per mitigare la visibilità del sangue sul volto e sul corpo di Gable.</p>\n<p>Il momento originale era avvenuto subito dopo la sconfitta di Gable nel main event, quando l'atleta era stato costretto a togliersi la maschera. Rimasto sul ring coperto di sangue e circondato dalla sua famiglia, Gable aveva ammesso di non essere riuscito a prevalere sullo spirito messicano. Successivamente, aveva riconosciuto Kaiser come l'unico vero El Grande Americano, procedendo poi a rimuovere la maschera e rivelando la propria identità al pubblico.</p>\n<p>Nonostante la replica abbia mantenuto intatto l'impatto emotivo del segmento, il filtro grigio ha chiarito l'intento dell'emittente di attenuare la violenza visiva. Gable era apparso visibilmente ferito e la scelta del bianco e nero ha contribuito a ridurre l'impatto grafico della scena.</p>\n<p>L'incontro in sé è stato un susseguirsi di violenza, caratterizzato dall'uso di sedie, tavoli, chitarre, interferenze esterne e una notevole quantità di sangue. Kaiser ha conquistato la vittoria finale dopo aver colpito l'avversario con una running headbutt, ponendo fine al regno di Gable come l'Original El Grande Americano. Al termine della contesa, Gable ha presentato la propria famiglia, ha parlato della sua carriera, ha consegnato la sua maschera insanguinata a Kaiser e ha promesso di fare ritorno in AAA in futuro.</p>\n<p>La replica non ha modificato gli eventi accaduti, ma ne ha certamente cambiato la percezione da parte dei fan. La AAA ha scelto di mantenere la sequenza della rimozione della maschera, ma attraverso l'uso del filtro in bianco e nero ha palesemente cercato di rendere meno espliciti gli ultimi, sanguinosi momenti di Gable nei panni di El Grande Americano.</p>",
       "category_hint": "WWE",
-      "element_counts": {
-        "embed": 0,
-        "heading": 0,
-        "image": 0,
-        "quote": 0,
-        "table": 0,
-        "text": 9
-      },
-      "excerpt_it": "I querelanti nella class action contro la WWE per il passaggio dei PLE su ESPN chiedono di proseguire con la raccolta delle prove, citando come precedente la distruzione di documenti avvenuta durante la causa sulla fusione WWE-UFC.",
-      "meta": {
-        "description": "WWE’s legal fight over its move to ESPN streaming just got another layer, and the plaintiffs are now pointing to a separate WWE lawsuit to argue discovery",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/02/wwe-granted-extension-to-respond-to-espn-streaming-lawsuit-11.jpg",
-        "source_title": "WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit"
-      },
-      "source": "ringsidenews",
-      "source_title": "WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit",
-      "source_url": "https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit/",
-      "title_it": "WWE: i querelanti dubitano della corretta conservazione delle prove nella causa contro ESPN"
-    },
-    {
-      "bob_translation_model": "gemini-3.1-flash-lite",
-      "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg.avif?x51578-->\n<p>Chad Gable alza il sipario sul suo ritorno in scena.</p><p>Dopo aver subito un serio infortunio alla spalla nel giugno 2025, che lo ha tenuto lontano dal ring per il resto dell'anno, Gable ha annunciato l'uscita di una docuserie in nove parti su YouTube incentrata sul suo percorso di riabilitazione.</p><p>Prima dell'infortunio, Gable stava lavorando su due fronti, esibendosi come se stesso in WWE e in AAA, oltre a competere come l'originale El Grande Americano. Ha fatto il suo ritorno ufficiale alla Royal Rumble alla fine di gennaio, riprendendo il ruolo di Americano.</p><p>Ora, Gable vuole mostrare ai fan cosa ha significato arrivare a quel punto. Ha spiegato che l'infortunio lo ha costretto a fermarsi per la prima volta nella sua carriera nel wrestling, obbligandolo a capire chi fosse senza ciò attorno a cui aveva costruito la propria vita.</p><blockquote>“Ho passato l'intera carriera a predicare disciplina, preparazione e responsabilità. Poi mi sono fatto male.”</blockquote><p>Gable ha spiegato che la serie seguirà l'intero processo di ricostruzione, includendo riabilitazione, allenamento, nutrizione, contrattempi e vittorie.</p><blockquote>“Per la prima volta nella mia carriera di wrestler professionista, sono stato costretto a fermarmi e a capire chi sono quando la cosa attorno a cui ho costruito la mia vita mi viene portata via. Quindi, vi porto con me.”</blockquote><p>Il documentario inizierà questo venerdì su YouTube e si articolerà in nove episodi, con una nuova puntata in uscita ogni venerdì.</p><blockquote>“A partire da questo venerdì, seguite la mia serie YouTube in 9 parti mentre ricostruisco tutto dalle fondamenta attraverso riabilitazione, allenamento, nutrizione, contrattempi, vittorie e tutto ciò che sta nel mezzo.”</blockquote><p>Gable ha concluso l'annuncio chiarendo che non si tratterà della classica storia di ritorno patinata in cui tutto sembra facile.</p><blockquote>“Nuovi episodi ogni venerdì. Niente scorciatoie. Niente scuse. Senza fingere che ogni giorno sia una buona giornata.”</blockquote><p>La serie offrirà ai fan uno sguardo approfondito su ciò che Gable ha affrontato dopo l'infortunio, specialmente dopo un periodo frenetico che ha visto incrociarsi il suo lavoro in WWE, le apparizioni in AAA e la storyline di El Grande Americano. Gable è tornato, ma questo documentario promette di mostrare anche i lati più difficili di quel percorso.</p>",
-      "category_hint": "World",
       "element_counts": {
         "embed": 0,
         "heading": 0,
         "image": 1,
-        "quote": 4,
+        "quote": 0,
         "table": 0,
-        "text": 9
+        "text": 7
       },
-      "excerpt_it": "Chad Gable racconterà il suo complesso recupero dall'infortunio alla spalla del 2025 in una docuserie inedita in nove parti su YouTube.",
+      "excerpt_it": "In occasione del replay di AAA Noche de Los Grandes, la produzione ha deciso di utilizzare un filtro in bianco e nero per oscurare il volto insanguinato di Chad Gable durante il momento della rimozione della maschera.",
       "meta": {
-        "description": "Chad Gable is pulling the curtain back on his comeback. After suffering a legitimate shoulder injury in June 2025 that kept him out for the rest of the",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg",
-        "source_title": "Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery"
+        "description": "Chad Gable’s unmasking was already one of the wildest moments from AAA Noche de Los Grandes, but the replay made one thing very obvious — they did not",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-after-noche-de-los-grandes-28.jpg",
+        "source_title": "AAA Netflix Replay Grays Out Chad Gable’s Bloody Unmasking After Noche de Los Grandes"
       },
       "source": "ringsidenews",
-      "source_title": "Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery",
-      "source_url": "https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery/",
-      "title_it": "Chad Gable annuncia una docuserie in nove parti sul recupero dal suo infortunio alla spalla"
+      "source_title": "AAA Netflix Replay Grays Out Chad Gable’s Bloody Unmasking After Noche de Los Grandes",
+      "source_url": "https://www.ringsidenews.com/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-noche-de-los-grandes/",
+      "title_it": "AAA: il replay su Netflix oscura il volto insanguinato di Chad Gable"
     },
     {
       "bob_translation_model": "gemini-3.1-flash-lite",
-      "body_html": "<p>Gunther ha sconfitto Royce Keys nel main event dell'ultimo episodio di WWE SmackDown.</p><p>La sfida di Keys era stata ufficializzata nel corso della serata, mentre Gunther continuava a tergiversare invece di firmare il contratto per il match titolato contro Cody Rhodes a Clash in Italy. Dopo essersi presentato inizialmente per occupare lo spazio vacante, il leader dell'Imperium ha cambiato idea sull'avversario, portando Nick Aldis a decidere che i due si sarebbero affrontati nel main event con in palio la title shot per il WWE Championship.</p><p>Keys ha dominato gran parte della prima metà dell'incontro, assorbendo le offensive iniziali di Gunther e riuscendo a sopraffare il \"Ring General\", schiantandolo più volte contro il tavolo dei commentatori prima di eseguire un superplex per riportarlo sul ring.</p><p>L'inerzia del match è cambiata rapidamente quando Gunther ha applicato una sleeper hold al centro del ring, mandando Keys al tappeto e sembrando vicino alla vittoria. In quel momento, Solo Sikoa è apparso a bordo ring iniziando a incitare Keys; la distrazione ha favorito il ritorno del contendente, che si è rialzato mettendo a segno una manovra ai danni di Gunther che è valsa un conteggio di due.</p><p>Gunther è tornato nuovamente alla carica con la sleeper hold, costringendo Keys in ginocchio prima che quest'ultimo riuscisse a tornare in piedi. Nelle fasi finali, Keys ha spinto Gunther contro l'arbitro; Sikoa gli ha quindi passato una sedia d'acciaio, ma Keys ha colpito Sikoa rifiutando il suo aiuto. Questo ha concesso a Gunther il tempo e lo spazio necessari per stendere Keys con una lariat, seguita da una powerbomb che ha sancito il pinfall vincente e la conquista della title shot.</p>",
+      "body_html": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/finn-balor-moves-to-smackdown-after-wwe-raw-trade-30.jpg.avif?x51578--></p><p>L'esperienza di Finn Bálor a Monday Night RAW è giunta ufficialmente al termine: il wrestler farà parte d'ora in avanti del roster di Friday Night SmackDown.</p><p>Durante la puntata di Monday Night RAW dell'1 giugno 2026, la WWE ha annunciato che Bálor è stato scambiato in favore dello show del venerdì sera. La decisione arriva dopo settimane di tensione che hanno coinvolto Bálor, JD McDonagh e Dominik Mysterio, a seguito della rottura della loro alleanza.</p><p>L'ultima apparizione di Bálor come membro del roster di RAW risale all'edizione del 18 maggio, durante la quale ha sconfitto JD McDonagh. Da quel momento, la rivalità tra gli ex membri della Judgment Day ha continuato a intensificarsi. In seguito alla notizia dello scambio, Byron Saxton ha chiesto a JD McDonagh una reazione riguardo alla partenza di Bálor da RAW e quest'ultimo non si è risparmiato:</p><blockquote>“Posso parlare a nome della Judgment Day: Finn, addio, ci vediamo mai più, non ci mancherai! Dici che è stato scambiato, giusto? Io dico che è scappato perché sa che se fosse rimasto a Raw, avremmo messo fine alla sua carriera.”</blockquote><p>Questo spostamento contribuisce anche a chiarire la posizione di Bálor nel tabellone aggiornato del torneo King of the Ring. È attualmente previsto che competa in un Fatal 4-Way match di primo turno contro Royce Keys, LA Knight e Jey Uso, mentre la WWE prosegue la marcia di avvicinamento a Night of Champions in Arabia Saudita.</p><p>Il trasferimento di Bálor a SmackDown apre la strada a nuove rivalità e opportunità, creando al contempo una distanza dalle tensioni ancora aperte con la Judgment Day a RAW. Allo stesso tempo, i commenti di JD McDonagh chiariscono che il risentimento tra gli ex alleati non è svanito.</p><p>Con il King of the Ring in pieno svolgimento e il cambio di brand ormai effettivo, il prossimo capitolo di Finn Bálor in WWE avrà inizio durante le serate del venerdì. Resta da vedere se questo porterà al successo nel torneo o a un nuovo scontro con i suoi ex partner della Judgment Day.</p>",
       "category_hint": "WWE",
       "element_counts": {
         "embed": 0,
         "heading": 0,
-        "image": 0,
-        "quote": 0,
+        "image": 1,
+        "quote": 1,
         "table": 0,
-        "text": 5
+        "text": 7
       },
-      "excerpt_it": "Gunther ha avuto la meglio su Royce Keys nel main event di SmackDown, ottenendo ufficialmente il match titolato contro Cody Rhodes per il prossimo Premium Live Event, Clash in Italy.",
+      "excerpt_it": "Finn Bálor lascia ufficialmente Monday Night RAW per unirsi al roster di Friday Night SmackDown. La WWE ha annunciato il trasferimento dopo settimane di tensioni interne alla Judgment Day.",
       "meta": {
-        "description": "Gunther defeated Royce Keys in the main event of \"WWE SmackDown\" to secure his shot at Cody Rhodes' WWE Championship at Clash in Italy.",
-        "featured_image": "https://www.wrestlinginc.com/img/gallery/gunther-defeats-royce-keys-on-wwe-smackdown-will-face-cody-rhodes-at-clash-in-italy/l-intro-1778900776.jpg",
-        "source_title": "GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy - Wrestling Inc."
+        "description": "Finn Bálor’s time on WWE RAW is officially over as he will now be a part of the Friday Night SmackDown roster moving forward. During the June 1, 2026",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/finn-balor-moves-to-smackdown-after-wwe-raw-trade-30.jpg",
+        "source_title": "Finn Bálor Moves to SmackDown After WWE RAW Trade"
       },
-      "source": "wrestlinginc",
-      "source_title": "GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy",
-      "source_url": "https://www.wrestlinginc.com/2174268/wwe-smackdown-gunther-royce-keys-cody-rhodes-clash-in-italy/",
-      "title_it": "WWE SmackDown: Gunther batte Royce Keys e sfiderà Cody Rhodes a Clash in Italy"
+      "source": "ringsidenews",
+      "source_title": "Finn Bálor Moves to SmackDown After WWE RAW Trade",
+      "source_url": "https://www.ringsidenews.com/finn-balor-moves-smackdown-wwe-raw-trade/",
+      "title_it": "WWE: Finn Bálor trasferito ufficialmente a SmackDown"
     }
   ],
-  "generated_at": "2026-06-01T22:22:36.148495+00:00",
+  "generated_at": "2026-06-01T22:42:22.749356+00:00",
   "handoff": {
-    "approved": 3,
-    "blockers": 0,
-    "editorial_changes": 1,
-    "needs_revision": 0,
-    "warnings": 1
+    "approved": 2,
+    "blockers": 1,
+    "editorial_changes": 0,
+    "needs_revision": 1,
+    "warnings": 3
   },
   "input": {
     "articles": 3,
@@ -108,102 +85,34 @@
   },
   "reviews": [
     {
-      "approved_article": {
-        "bob_translation_model": "gemini-3.1-flash-lite",
-        "body_html": "<p>La battaglia legale della WWE riguardante il passaggio dello streaming su ESPN si è arricchita di un nuovo capitolo: i querelanti stanno citando un altro procedimento giudiziario a carico della federazione per sostenere che la fase di acquisizione delle prove (discovery) debba proseguire senza sosta.</p><p>Secondo quanto riportato da Brandon Thurston, i querelanti nella class action relativa allo spostamento dei Premium Live Event della WWE sulla piattaforma streaming di ESPN si stanno opponendo fermamente al tentativo della compagnia di sospendere la fase di discovery. La loro tesi è che la WWE non debba ottenere alcun rallentamento, poiché una distinta causa legale nel Delaware, riguardante la fusione societaria, ha già sollevato seri dubbi sulla gestione e la conservazione delle prove da parte dei vertici aziendali.</p><p>I querelanti hanno fatto specifico riferimento alla recente sentenza contro Nick Khan, nella quale il tribunale ha accertato la distruzione di prove in relazione al contenzioso sulla fusione WWE-UFC. Stanno utilizzando questa pronuncia per argomentare che la WWE non può essere considerata affidabile nel preservare le prove mentre la causa sullo streaming ESPN rimane in sospeso.</p><p>Questo aspetto è cruciale, poiché la WWE sta cercando di spostare la causa sullo streaming ESPN verso un arbitrato. La compagnia ha sostenuto che, poiché i querelanti hanno sottoscritto l'abbonamento tramite ESPN Unlimited, le loro rivendicazioni dovrebbero ricadere sotto le clausole arbitrali di Disney ed ESPN, nonostante la WWE non sia stata parte diretta di tale accordo di sottoscrizione.</p><p>La causa è stata intentata da Michael Diesa e Rebecca Tobak, i quali sostengono che i fan della WWE siano stati tratti in inganno riguardo alle modalità di visione dei Premium Live Event dopo il trasferimento sulla piattaforma streaming di ESPN. L'accusa afferma che alcuni fan credevano che il loro accesso esistente a ESPN, tramite cavo o live TV streaming, fosse sufficiente, solo per scoprire successivamente di dover pagare un extra tramite l'app di ESPN.</p><p>Ora i querelanti stanno tentando di mantenere attiva la fase di discovery prima che la corte si pronunci sulla richiesta di arbitrato avanzata dalla WWE. La loro posizione è chiara: visti i precedenti emersi nel caso sulla fusione, ritengono che alla WWE non debba essere concesso alcun ritardo nella raccolta delle prove.</p><p>La vicenda poggiava già in larga misura sulla questione se il caso debba rimanere in tribunale o spostarsi a porte chiuse in arbitrato. Questo nuovo deposito aggiunge un'accusa ancor più netta alla disputa, poiché i querelanti mettono ora in dubbio la capacità della WWE di proteggere documenti e comunicazioni inerenti alla causa.</p><p>Il passaggio della WWE allo streaming di ESPN aveva già generato confusione tra i fan. Ora, la causa legale sorta in merito a tale transizione sta coinvolgendo un altro spinoso problema giudiziario della federazione, con i querelanti che stanno utilizzando le difficoltà legali dell'azienda a proprio vantaggio.</p>",
-        "category_hint": "WWE",
-        "element_counts": {
-          "embed": 0,
-          "heading": 0,
-          "image": 0,
-          "quote": 0,
-          "table": 0,
-          "text": 9
-        },
-        "excerpt_it": "I querelanti nella class action contro la WWE per il passaggio dei PLE su ESPN chiedono di proseguire con la raccolta delle prove, citando come precedente la distruzione di documenti avvenuta durante la causa sulla fusione WWE-UFC.",
-        "meta": {
-          "description": "WWE’s legal fight over its move to ESPN streaming just got another layer, and the plaintiffs are now pointing to a separate WWE lawsuit to argue discovery",
-          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/02/wwe-granted-extension-to-respond-to-espn-streaming-lawsuit-11.jpg",
-          "source_title": "WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit"
-        },
-        "source": "ringsidenews",
-        "source_title": "WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit",
-        "source_url": "https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit/",
-        "title_it": "WWE: i querelanti dubitano della corretta conservazione delle prove nella causa contro ESPN"
-      },
+      "approved_article": null,
       "category_hint": "WWE",
-      "decision": "approved",
+      "decision": "needs_revision",
       "diagnostics": {
-        "bob_clean_element_count": 9,
-        "bob_diagnostic_stage": "ready_for_alfred",
-        "bob_removed_before_gemini": 15,
-        "bob_status": "ready_for_alfred",
-        "bob_translation_model": "gemini-3.1-flash-lite",
-        "editorial_changes": 0,
-        "plain_chars": 3028,
-        "quote_count": 0,
-        "table_count": 0,
-        "title_chars": 91
-      },
-      "editorial_changes": [],
-      "issues": [],
-      "quality_score": 100,
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit/",
-      "title_it": "WWE: i querelanti dubitano della corretta conservazione delle prove nella causa contro ESPN",
-      "warnings": []
-    },
-    {
-      "approved_article": {
-        "bob_translation_model": "gemini-3.1-flash-lite",
-        "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg.avif?x51578-->\n<p>Chad Gable alza il sipario sul suo ritorno in scena.</p><p>Dopo aver subito un serio infortunio alla spalla nel giugno 2025, che lo ha tenuto lontano dal ring per il resto dell'anno, Gable ha annunciato l'uscita di una docuserie in nove parti su YouTube incentrata sul suo percorso di riabilitazione.</p><p>Prima dell'infortunio, Gable stava lavorando su due fronti, esibendosi come se stesso in WWE e in AAA, oltre a competere come l'originale El Grande Americano. Ha fatto il suo ritorno ufficiale alla Royal Rumble alla fine di gennaio, riprendendo il ruolo di Americano.</p><p>Ora, Gable vuole mostrare ai fan cosa ha significato arrivare a quel punto. Ha spiegato che l'infortunio lo ha costretto a fermarsi per la prima volta nella sua carriera nel wrestling, obbligandolo a capire chi fosse senza ciò attorno a cui aveva costruito la propria vita.</p><blockquote>“Ho passato l'intera carriera a predicare disciplina, preparazione e responsabilità. Poi mi sono fatto male.”</blockquote><p>Gable ha spiegato che la serie seguirà l'intero processo di ricostruzione, includendo riabilitazione, allenamento, nutrizione, contrattempi e vittorie.</p><blockquote>“Per la prima volta nella mia carriera di wrestler professionista, sono stato costretto a fermarmi e a capire chi sono quando la cosa attorno a cui ho costruito la mia vita mi viene portata via. Quindi, vi porto con me.”</blockquote><p>Il documentario inizierà questo venerdì su YouTube e si articolerà in nove episodi, con una nuova puntata in uscita ogni venerdì.</p><blockquote>“A partire da questo venerdì, seguite la mia serie YouTube in 9 parti mentre ricostruisco tutto dalle fondamenta attraverso riabilitazione, allenamento, nutrizione, contrattempi, vittorie e tutto ciò che sta nel mezzo.”</blockquote><p>Gable ha concluso l'annuncio chiarendo che non si tratterà della classica storia di ritorno patinata in cui tutto sembra facile.</p><blockquote>“Nuovi episodi ogni venerdì. Niente scorciatoie. Niente scuse. Senza fingere che ogni giorno sia una buona giornata.”</blockquote><p>La serie offrirà ai fan uno sguardo approfondito su ciò che Gable ha affrontato dopo l'infortunio, specialmente dopo un periodo frenetico che ha visto incrociarsi il suo lavoro in WWE, le apparizioni in AAA e la storyline di El Grande Americano. Gable è tornato, ma questo documentario promette di mostrare anche i lati più difficili di quel percorso.</p>",
-        "category_hint": "World",
-        "element_counts": {
-          "embed": 0,
-          "heading": 0,
-          "image": 1,
-          "quote": 4,
-          "table": 0,
-          "text": 9
-        },
-        "excerpt_it": "Chad Gable racconterà il suo complesso recupero dall'infortunio alla spalla del 2025 in una docuserie inedita in nove parti su YouTube.",
-        "meta": {
-          "description": "Chad Gable is pulling the curtain back on his comeback. After suffering a legitimate shoulder injury in June 2025 that kept him out for the rest of the",
-          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg",
-          "source_title": "Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery"
-        },
-        "source": "ringsidenews",
-        "source_title": "Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery",
-        "source_url": "https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery/",
-        "title_it": "Chad Gable annuncia una docuserie in nove parti sul recupero dal suo infortunio alla spalla"
-      },
-      "category_hint": "World",
-      "decision": "approved",
-      "diagnostics": {
-        "bob_clean_element_count": 14,
+        "bob_clean_element_count": 11,
         "bob_diagnostic_stage": "ready_for_alfred",
         "bob_removed_before_gemini": 14,
         "bob_status": "ready_for_alfred",
         "bob_translation_model": "gemini-3.1-flash-lite",
-        "editorial_changes": 1,
-        "plain_chars": 2268,
-        "quote_count": 4,
+        "editorial_changes": 0,
+        "plain_chars": 1707,
+        "quote_count": 3,
         "table_count": 0,
-        "title_chars": 91
+        "title_chars": 76
       },
-      "editorial_changes": [
+      "editorial_changes": [],
+      "issues": [
         {
-          "code": "image_placeholder_split",
-          "evidence": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg.avif?x51578-->",
-          "message": "Placeholder immagine separato dal paragrafo di testo.",
-          "severity": "info"
+          "code": "untranslated_quote",
+          "evidence": "Before the draft, I buried the season. After the draft, I believed again. And now, at 35,000 feet, the Browns have somehow found a new way to ruin my flight.",
+          "message": "Citazione rimasta in inglese o non tradotta integralmente.",
+          "severity": "blocker"
         }
       ],
-      "issues": [],
-      "quality_score": 95,
+      "quality_score": 70,
       "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery/",
-      "title_it": "Chad Gable annuncia una docuserie in nove parti sul recupero dal suo infortunio alla spalla",
+      "source_url": "https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal/",
+      "title_it": "WWE: The Miz disperato per la cessione di Myles Garrett dai Cleveland Browns",
       "warnings": [
         {
           "code": "image_placeholder_present",
@@ -216,48 +125,108 @@
     {
       "approved_article": {
         "bob_translation_model": "gemini-3.1-flash-lite",
-        "body_html": "<p>Gunther ha sconfitto Royce Keys nel main event dell'ultimo episodio di WWE SmackDown.</p><p>La sfida di Keys era stata ufficializzata nel corso della serata, mentre Gunther continuava a tergiversare invece di firmare il contratto per il match titolato contro Cody Rhodes a Clash in Italy. Dopo essersi presentato inizialmente per occupare lo spazio vacante, il leader dell'Imperium ha cambiato idea sull'avversario, portando Nick Aldis a decidere che i due si sarebbero affrontati nel main event con in palio la title shot per il WWE Championship.</p><p>Keys ha dominato gran parte della prima metà dell'incontro, assorbendo le offensive iniziali di Gunther e riuscendo a sopraffare il \"Ring General\", schiantandolo più volte contro il tavolo dei commentatori prima di eseguire un superplex per riportarlo sul ring.</p><p>L'inerzia del match è cambiata rapidamente quando Gunther ha applicato una sleeper hold al centro del ring, mandando Keys al tappeto e sembrando vicino alla vittoria. In quel momento, Solo Sikoa è apparso a bordo ring iniziando a incitare Keys; la distrazione ha favorito il ritorno del contendente, che si è rialzato mettendo a segno una manovra ai danni di Gunther che è valsa un conteggio di due.</p><p>Gunther è tornato nuovamente alla carica con la sleeper hold, costringendo Keys in ginocchio prima che quest'ultimo riuscisse a tornare in piedi. Nelle fasi finali, Keys ha spinto Gunther contro l'arbitro; Sikoa gli ha quindi passato una sedia d'acciaio, ma Keys ha colpito Sikoa rifiutando il suo aiuto. Questo ha concesso a Gunther il tempo e lo spazio necessari per stendere Keys con una lariat, seguita da una powerbomb che ha sancito il pinfall vincente e la conquista della title shot.</p>",
+        "body_html": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/aaa-nig-28.jpg.avif-->\n<p>La rimozione della maschera di Chad Gable è stata senza dubbio uno dei momenti più intensi di AAA Noche de Los Grandes, ma il replay dell'evento ha reso evidente una scelta precisa: non si voleva mostrare nuovamente tutto quel sangue a colori.</p>\n<p>Dopo l'episodio di WWE RAW del 1° giugno 2026, la AAA ha trasmesso la replica del brutale Mask vs. Mask match, che ha visto Chad Gable uscire sconfitto per mano di Ludwig Kaiser, alias El Grande Americano. Durante la messa in onda del post-match, lo schermo è stato trasformato in bianco e nero, apparentemente per mitigare la visibilità del sangue sul volto e sul corpo di Gable.</p>\n<p>Il momento originale era avvenuto subito dopo la sconfitta di Gable nel main event, quando l'atleta era stato costretto a togliersi la maschera. Rimasto sul ring coperto di sangue e circondato dalla sua famiglia, Gable aveva ammesso di non essere riuscito a prevalere sullo spirito messicano. Successivamente, aveva riconosciuto Kaiser come l'unico vero El Grande Americano, procedendo poi a rimuovere la maschera e rivelando la propria identità al pubblico.</p>\n<p>Nonostante la replica abbia mantenuto intatto l'impatto emotivo del segmento, il filtro grigio ha chiarito l'intento dell'emittente di attenuare la violenza visiva. Gable era apparso visibilmente ferito e la scelta del bianco e nero ha contribuito a ridurre l'impatto grafico della scena.</p>\n<p>L'incontro in sé è stato un susseguirsi di violenza, caratterizzato dall'uso di sedie, tavoli, chitarre, interferenze esterne e una notevole quantità di sangue. Kaiser ha conquistato la vittoria finale dopo aver colpito l'avversario con una running headbutt, ponendo fine al regno di Gable come l'Original El Grande Americano. Al termine della contesa, Gable ha presentato la propria famiglia, ha parlato della sua carriera, ha consegnato la sua maschera insanguinata a Kaiser e ha promesso di fare ritorno in AAA in futuro.</p>\n<p>La replica non ha modificato gli eventi accaduti, ma ne ha certamente cambiato la percezione da parte dei fan. La AAA ha scelto di mantenere la sequenza della rimozione della maschera, ma attraverso l'uso del filtro in bianco e nero ha palesemente cercato di rendere meno espliciti gli ultimi, sanguinosi momenti di Gable nei panni di El Grande Americano.</p>",
         "category_hint": "WWE",
         "element_counts": {
           "embed": 0,
           "heading": 0,
-          "image": 0,
+          "image": 1,
           "quote": 0,
           "table": 0,
-          "text": 5
+          "text": 7
         },
-        "excerpt_it": "Gunther ha avuto la meglio su Royce Keys nel main event di SmackDown, ottenendo ufficialmente il match titolato contro Cody Rhodes per il prossimo Premium Live Event, Clash in Italy.",
+        "excerpt_it": "In occasione del replay di AAA Noche de Los Grandes, la produzione ha deciso di utilizzare un filtro in bianco e nero per oscurare il volto insanguinato di Chad Gable durante il momento della rimozione della maschera.",
         "meta": {
-          "description": "Gunther defeated Royce Keys in the main event of \"WWE SmackDown\" to secure his shot at Cody Rhodes' WWE Championship at Clash in Italy.",
-          "featured_image": "https://www.wrestlinginc.com/img/gallery/gunther-defeats-royce-keys-on-wwe-smackdown-will-face-cody-rhodes-at-clash-in-italy/l-intro-1778900776.jpg",
-          "source_title": "GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy - Wrestling Inc."
+          "description": "Chad Gable’s unmasking was already one of the wildest moments from AAA Noche de Los Grandes, but the replay made one thing very obvious — they did not",
+          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-after-noche-de-los-grandes-28.jpg",
+          "source_title": "AAA Netflix Replay Grays Out Chad Gable’s Bloody Unmasking After Noche de Los Grandes"
         },
-        "source": "wrestlinginc",
-        "source_title": "GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy",
-        "source_url": "https://www.wrestlinginc.com/2174268/wwe-smackdown-gunther-royce-keys-cody-rhodes-clash-in-italy/",
-        "title_it": "WWE SmackDown: Gunther batte Royce Keys e sfiderà Cody Rhodes a Clash in Italy"
+        "source": "ringsidenews",
+        "source_title": "AAA Netflix Replay Grays Out Chad Gable’s Bloody Unmasking After Noche de Los Grandes",
+        "source_url": "https://www.ringsidenews.com/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-noche-de-los-grandes/",
+        "title_it": "AAA: il replay su Netflix oscura il volto insanguinato di Chad Gable"
       },
       "category_hint": "WWE",
       "decision": "approved",
       "diagnostics": {
-        "bob_clean_element_count": 5,
+        "bob_clean_element_count": 8,
         "bob_diagnostic_stage": "ready_for_alfred",
-        "bob_removed_before_gemini": 1,
+        "bob_removed_before_gemini": 14,
         "bob_status": "ready_for_alfred",
         "bob_translation_model": "gemini-3.1-flash-lite",
         "editorial_changes": 0,
-        "plain_chars": 1695,
+        "plain_chars": 2253,
         "quote_count": 0,
         "table_count": 0,
-        "title_chars": 78
+        "title_chars": 68
       },
       "editorial_changes": [],
       "issues": [],
-      "quality_score": 100,
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2174268/wwe-smackdown-gunther-royce-keys-cody-rhodes-clash-in-italy/",
-      "title_it": "WWE SmackDown: Gunther batte Royce Keys e sfiderà Cody Rhodes a Clash in Italy",
-      "warnings": []
+      "quality_score": 95,
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/aaa-netflix-replay-grays-out-chad-gables-bloody-unmasking-noche-de-los-grandes/",
+      "title_it": "AAA: il replay su Netflix oscura il volto insanguinato di Chad Gable",
+      "warnings": [
+        {
+          "code": "image_placeholder_present",
+          "evidence": "<!--IMAGE:...-->",
+          "message": "Presente placeholder immagine da gestire nel Publisher.",
+          "severity": "warning"
+        }
+      ]
+    },
+    {
+      "approved_article": {
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "body_html": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/finn-balor-moves-to-smackdown-after-wwe-raw-trade-30.jpg.avif?x51578--></p><p>L'esperienza di Finn Bálor a Monday Night RAW è giunta ufficialmente al termine: il wrestler farà parte d'ora in avanti del roster di Friday Night SmackDown.</p><p>Durante la puntata di Monday Night RAW dell'1 giugno 2026, la WWE ha annunciato che Bálor è stato scambiato in favore dello show del venerdì sera. La decisione arriva dopo settimane di tensione che hanno coinvolto Bálor, JD McDonagh e Dominik Mysterio, a seguito della rottura della loro alleanza.</p><p>L'ultima apparizione di Bálor come membro del roster di RAW risale all'edizione del 18 maggio, durante la quale ha sconfitto JD McDonagh. Da quel momento, la rivalità tra gli ex membri della Judgment Day ha continuato a intensificarsi. In seguito alla notizia dello scambio, Byron Saxton ha chiesto a JD McDonagh una reazione riguardo alla partenza di Bálor da RAW e quest'ultimo non si è risparmiato:</p><blockquote>“Posso parlare a nome della Judgment Day: Finn, addio, ci vediamo mai più, non ci mancherai! Dici che è stato scambiato, giusto? Io dico che è scappato perché sa che se fosse rimasto a Raw, avremmo messo fine alla sua carriera.”</blockquote><p>Questo spostamento contribuisce anche a chiarire la posizione di Bálor nel tabellone aggiornato del torneo King of the Ring. È attualmente previsto che competa in un Fatal 4-Way match di primo turno contro Royce Keys, LA Knight e Jey Uso, mentre la WWE prosegue la marcia di avvicinamento a Night of Champions in Arabia Saudita.</p><p>Il trasferimento di Bálor a SmackDown apre la strada a nuove rivalità e opportunità, creando al contempo una distanza dalle tensioni ancora aperte con la Judgment Day a RAW. Allo stesso tempo, i commenti di JD McDonagh chiariscono che il risentimento tra gli ex alleati non è svanito.</p><p>Con il King of the Ring in pieno svolgimento e il cambio di brand ormai effettivo, il prossimo capitolo di Finn Bálor in WWE avrà inizio durante le serate del venerdì. Resta da vedere se questo porterà al successo nel torneo o a un nuovo scontro con i suoi ex partner della Judgment Day.</p>",
+        "category_hint": "WWE",
+        "element_counts": {
+          "embed": 0,
+          "heading": 0,
+          "image": 1,
+          "quote": 1,
+          "table": 0,
+          "text": 7
+        },
+        "excerpt_it": "Finn Bálor lascia ufficialmente Monday Night RAW per unirsi al roster di Friday Night SmackDown. La WWE ha annunciato il trasferimento dopo settimane di tensioni interne alla Judgment Day.",
+        "meta": {
+          "description": "Finn Bálor’s time on WWE RAW is officially over as he will now be a part of the Friday Night SmackDown roster moving forward. During the June 1, 2026",
+          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/finn-balor-moves-to-smackdown-after-wwe-raw-trade-30.jpg",
+          "source_title": "Finn Bálor Moves to SmackDown After WWE RAW Trade"
+        },
+        "source": "ringsidenews",
+        "source_title": "Finn Bálor Moves to SmackDown After WWE RAW Trade",
+        "source_url": "https://www.ringsidenews.com/finn-balor-moves-smackdown-wwe-raw-trade/",
+        "title_it": "WWE: Finn Bálor trasferito ufficialmente a SmackDown"
+      },
+      "category_hint": "WWE",
+      "decision": "approved",
+      "diagnostics": {
+        "bob_clean_element_count": 9,
+        "bob_diagnostic_stage": "ready_for_alfred",
+        "bob_removed_before_gemini": 14,
+        "bob_status": "ready_for_alfred",
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "editorial_changes": 0,
+        "plain_chars": 1988,
+        "quote_count": 1,
+        "table_count": 0,
+        "title_chars": 52
+      },
+      "editorial_changes": [],
+      "issues": [],
+      "quality_score": 95,
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/finn-balor-moves-smackdown-wwe-raw-trade/",
+      "title_it": "WWE: Finn Bálor trasferito ufficialmente a SmackDown",
+      "warnings": [
+        {
+          "code": "image_placeholder_present",
+          "evidence": "<!--IMAGE:...-->",
+          "message": "Presente placeholder immagine da gestire nel Publisher.",
+          "severity": "warning"
+        }
+      ]
     }
   ],
   "version": "v93_8_alfred_structured_content_checks"
