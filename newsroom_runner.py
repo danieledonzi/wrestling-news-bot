@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-NEWSROOM_VERSION = "v93_2_menzo_editorial_director"
+NEWSROOM_VERSION = "v93_3_simone_report_director"
 ARTIFACT_DIR = Path("artifacts") / "newsroom"
 
 AGENTS = [
@@ -114,6 +114,50 @@ def run_massy_sentinel(timeline: list[dict[str, str]]) -> dict[str, Any]:
         return error
 
 
+def run_simone_reports(timeline: list[dict[str, str]], massy_board: dict[str, Any]) -> dict[str, Any]:
+    try:
+        from agents.simone import run_simone
+    except Exception as exc:
+        error = {
+            "agent": "Simone",
+            "version": NEWSROOM_VERSION,
+            "generated_at": utc_now(),
+            "status": "error",
+            "error": f"import_failed: {exc}",
+            "handoff": {"ready": 0, "waiting": 0, "skipped": 0},
+        }
+        write_json(ARTIFACT_DIR / "simone_reports.json", error)
+        add_timeline(timeline, "Simone", "error", f"import_failed={exc}")
+        return error
+
+    try:
+        decision = run_simone(massy_board)
+        handoff = decision.get("handoff", {}) if isinstance(decision, dict) else {}
+        add_timeline(
+            timeline,
+            "Simone",
+            "report_decision_ready",
+            "ready={ready} waiting={waiting} skipped={skipped}".format(
+                ready=handoff.get("ready", 0),
+                waiting=handoff.get("waiting", 0),
+                skipped=handoff.get("skipped", 0),
+            ),
+        )
+        return decision
+    except Exception as exc:
+        error = {
+            "agent": "Simone",
+            "version": NEWSROOM_VERSION,
+            "generated_at": utc_now(),
+            "status": "error",
+            "error": str(exc),
+            "handoff": {"ready": 0, "waiting": 0, "skipped": 0},
+        }
+        write_json(ARTIFACT_DIR / "simone_reports.json", error)
+        add_timeline(timeline, "Simone", "error", str(exc))
+        return error
+
+
 def run_menzo_editorial(timeline: list[dict[str, str]], massy_board: dict[str, Any]) -> dict[str, Any]:
     try:
         from agents.menzo import run_menzo
@@ -165,7 +209,7 @@ def main() -> int:
 
     print(f"===== NEWSROOM RUN START [{started_at}] VERSION [{NEWSROOM_VERSION}] =====", flush=True)
     print("[NEWSROOM v93] Avvio Virtual Newsroom", flush=True)
-    print("[NEWSROOM v93] Massy and Menzo are real; downstream runtime still delegated during staged takeover", flush=True)
+    print("[NEWSROOM v93] Massy, Simone and Menzo are real; downstream runtime still delegated during staged takeover", flush=True)
 
     command = runtime_command()
     engine = command[1] if len(command) > 1 else "unknown"
@@ -182,7 +226,7 @@ def main() -> int:
         "can_translate": "delegated_to_existing_runtime",
         "can_publish": "delegated_to_existing_runtime",
         "notes": [
-            "Jarvis wrapper does not duplicate WordPress checks in v93.2",
+            "Jarvis wrapper does not duplicate WordPress checks in v93.3",
             "Existing runtime owns real WordPress diagnostics and stop-before-translation behavior",
         ],
     }
@@ -190,10 +234,10 @@ def main() -> int:
     add_timeline(timeline, "Jarvis", "bootstrap_status_written", f"engine={engine}")
 
     massy_board = run_massy_sentinel(timeline)
+    simone_decision = run_simone_reports(timeline, massy_board)
     menzo_decision = run_menzo_editorial(timeline, massy_board)
 
     for agent, note in [
-        ("Simone", "report discretion will consume Massy report_candidates in a future step"),
         ("Bob", "translation delegated to existing runtime"),
         ("Alfred", "guardrails/QA delegated to existing runtime"),
         ("Publisher", "WordPress publication delegated to existing runtime"),
@@ -211,6 +255,7 @@ def main() -> int:
 
     ended_at = utc_now()
     massy_handoff = massy_board.get("handoff", {}) if isinstance(massy_board, dict) else {}
+    simone_handoff = simone_decision.get("handoff", {}) if isinstance(simone_decision, dict) else {}
     menzo_handoff = menzo_decision.get("handoff", {}) if isinstance(menzo_decision, dict) else {}
     run_summary = {
         "version": NEWSROOM_VERSION,
@@ -223,21 +268,22 @@ def main() -> int:
         "agents": {
             "jarvis": "wrapped",
             "massy": "real_sentinel_control",
+            "simone": "real_report_director",
             "menzo": "real_editorial_director",
-            "simone": "wrapped_pending_takeover",
             "bob": "wrapped",
             "alfred": "wrapped",
             "publisher": "wrapped",
             "archivista": "wrapped",
         },
         "massy_handoff": massy_handoff,
+        "simone_handoff": simone_handoff,
         "menzo_handoff": menzo_handoff,
         "notes": [
-            "v93.2 introduces Menzo as deterministic editorial director",
+            "v93.3 introduces Simone as report director",
+            "Simone consumes Massy report_candidates and stores state/newsroom/simone_reports_latest.json",
             "Menzo selects URLs for Bob/v92 and stores state/newsroom/v92_allowed_news_urls.json",
             "bot_v92 remains delegated until Bob/Publisher takeover is completed",
             "Reports remain excluded from the daily news target by design documentation",
-            "Target daily news volume is documented as 20-30 news excluding reports",
         ],
     }
 
