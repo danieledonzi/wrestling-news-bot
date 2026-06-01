@@ -31,7 +31,7 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-01T16:09:28.729121+00:00",
+  "generated_at": "2026-06-01T16:22:41.776998+00:00",
   "handoff": {
     "already_worked": 1,
     "hard_skipped": 1,
@@ -58,13 +58,13 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes",
-      "published": "Mon, 01 Jun 2026 15:41:06 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2184935/wwe-clash-in-italy-2026-becky-lynch-severe-hematoma-rant",
+      "published": "Mon, 01 Jun 2026 16:12:14 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "Wrestling Observer provided an update on AAA's Octagon Jr. after an injury on Saturday night.",
-      "title": "AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes",
-      "url": "https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes/"
+      "summary": "Becky Lynch sustains a hematoma at Clash In Italy and airs her frustrations about WWE referee Jessika Carr after losing the Intercontinental Title to Sol Ruca.",
+      "title": "Becky Lynch Says She Suffered 'Severe Hematoma' In Rant Following WWE Clash In Italy",
+      "url": "https://www.wrestlinginc.com/2184935/wwe-clash-in-italy-2026-becky-lynch-severe-hematoma-rant/"
     },
     {
       "assigned_to": "Menzo",
@@ -142,13 +142,13 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184680/eric-bischoff-wwe-creative-stepped-on-rake",
-      "published": "Mon, 01 Jun 2026 15:30:00 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes",
+      "published": "Mon, 01 Jun 2026 15:41:06 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "WWE Hall of Famer Eric Bischoff has discussed WWE's slump in recent months, but feels all is not lost and believes the company can regain its momentum.",
-      "title": "Eric Bischoff Says WWE Creative Has 'Stepped On A Rake' Over The Last Few Months",
-      "url": "https://www.wrestlinginc.com/2184680/eric-bischoff-wwe-creative-stepped-on-rake/"
+      "summary": "Wrestling Observer provided an update on AAA's Octagon Jr. after an injury on Saturday night.",
+      "title": "AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes",
+      "url": "https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes/"
     },
     {
       "assigned_to": "Menzo",
@@ -214,13 +214,13 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184838/wwe-brock-lesnar-oba-femi-dave-meltzer-long-term-creative-plans-three-matches",
-      "published": "Mon, 01 Jun 2026 15:24:56 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2184680/eric-bischoff-wwe-creative-stepped-on-rake",
+      "published": "Mon, 01 Jun 2026 15:30:00 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "Dave Meltzer provides a backstage report on the long-term creative plans for the feud between Brock Lesnar and Oba Femi, including plans for one last match",
-      "title": "Backstage Report On WWE's Long-Term Creative Plans For Brock Lesnar & Oba Femi Feud",
-      "url": "https://www.wrestlinginc.com/2184838/wwe-brock-lesnar-oba-femi-dave-meltzer-long-term-creative-plans-three-matches/"
+      "summary": "WWE Hall of Famer Eric Bischoff has discussed WWE's slump in recent months, but feels all is not lost and believes the company can regain its momentum.",
+      "title": "Eric Bischoff Says WWE Creative Has 'Stepped On A Rake' Over The Last Few Months",
+      "url": "https://www.wrestlinginc.com/2184680/eric-bischoff-wwe-creative-stepped-on-rake/"
     },
     {
       "assigned_to": "Menzo",
