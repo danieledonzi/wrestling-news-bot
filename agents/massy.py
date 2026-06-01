@@ -19,13 +19,17 @@ ARTIFACT_DIR = ROOT / "artifacts" / "newsroom"
 NEWSROOM_STATE_DIR = STATE_DIR / "newsroom"
 FEEDS_CONFIG = CONFIG_DIR / "feeds_v92.json"
 
-MASSY_VERSION = "v93_1_massy_sentinel_control"
+MASSY_VERSION = "v93_9_massy_published_hard_skip"
 
 TRACKED_STATE_FILES = [
     STATE_DIR / "report_status.json",
     STATE_DIR / "manual_runs.json",
     STATE_DIR / "pending_reports.json",
     STATE_DIR / "pending_news.json",
+]
+PUBLISHED_HISTORY_FILES = [
+    NEWSROOM_STATE_DIR / "publisher_history.json",
+    NEWSROOM_STATE_DIR / "publisher_status_latest.json",
 ]
 
 LOW_VALUE_PATTERNS = [
@@ -81,13 +85,8 @@ def normalize_url(url: str) -> str:
         scheme = (parts.scheme or "https").lower()
         netloc = parts.netloc.lower()
         path = re.sub(r"/+$", "", parts.path or "/")
-        query_items = [
-            (k, v)
-            for k, v in parse_qsl(parts.query, keep_blank_values=True)
-            if not k.lower().startswith("utm_") and k.lower() not in {"fbclid", "gclid"}
-        ]
-        query = urlencode(query_items, doseq=True)
-        return urlunsplit((scheme, netloc, path, query, ""))
+        query_items = [(k, v) for k, v in parse_qsl(parts.query, keep_blank_values=True) if not k.lower().startswith("utm_") and k.lower() not in {"fbclid", "gclid"}]
+        return urlunsplit((scheme, netloc, path, urlencode(query_items, doseq=True), ""))
     except Exception:
         return raw.rstrip("/")
 
@@ -130,7 +129,14 @@ def collect_urls(value: Any, found: set[str]) -> None:
 def worked_urls() -> set[str]:
     found: set[str] = set()
     for path in TRACKED_STATE_FILES:
-        collect_urls(load_json(path, {} if path.suffix == ".json" else []), found)
+        collect_urls(load_json(path, {}), found)
+    return found
+
+
+def published_urls() -> set[str]:
+    found: set[str] = set()
+    for path in PUBLISHED_HISTORY_FILES:
+        collect_urls(load_json(path, {}), found)
     return found
 
 
@@ -152,7 +158,7 @@ def read_feed_entries(feeds: list[dict[str, Any]]) -> tuple[list[dict[str, Any]]
             parsed = feedparser.parse(feed_url)
             for raw in parsed.entries:
                 url = getattr(raw, "link", "") or ""
-                entry = {
+                entries.append({
                     "source": source,
                     "feed_url": feed_url,
                     "title": getattr(raw, "title", "") or "",
@@ -160,8 +166,7 @@ def read_feed_entries(feeds: list[dict[str, Any]]) -> tuple[list[dict[str, Any]]
                     "normalized_url": normalize_url(url),
                     "published": getattr(raw, "published", "") or getattr(raw, "updated", "") or "",
                     "summary": getattr(raw, "summary", "") or "",
-                }
-                entries.append(entry)
+                })
         except Exception as exc:
             errors.append({"feed_url": feed_url, "source": source, "error": str(exc)})
     return entries, errors
@@ -189,7 +194,7 @@ def report_hint(entry: dict[str, Any]) -> tuple[str | None, str | None]:
     return None, None
 
 
-def classify_entries(entries: list[dict[str, Any]], already_worked_urls: set[str]) -> dict[str, Any]:
+def classify_entries(entries: list[dict[str, Any]], already_worked_urls: set[str], already_published_urls: set[str]) -> dict[str, Any]:
     seen_scan: set[str] = set()
     already_worked: list[dict[str, Any]] = []
     hard_skipped: list[dict[str, Any]] = []
@@ -206,6 +211,9 @@ def classify_entries(entries: list[dict[str, Any]], already_worked_urls: set[str
             hard_skipped.append(compact_entry(entry, "hard_skip", "duplicate_in_feed_scan"))
             continue
         seen_scan.add(normalized)
+        if normalized in already_published_urls:
+            hard_skipped.append(compact_entry(entry, "hard_skip", "url_already_published", published_guard="publisher_history"))
+            continue
         if normalized in already_worked_urls:
             already_worked.append(compact_entry(entry, "already_worked", "url_present_in_state"))
             continue
@@ -215,35 +223,20 @@ def classify_entries(entries: list[dict[str, Any]], already_worked_urls: set[str
             continue
         show_hint, report_reason = report_hint(entry)
         if show_hint:
-            report_candidates.append(compact_entry(
-                entry,
-                "report_candidate",
-                report_reason or "report_like_title",
-                assigned_to="Simone",
-                show_hint=show_hint,
-            ))
+            report_candidates.append(compact_entry(entry, "report_candidate", report_reason or "report_like_title", assigned_to="Simone", show_hint=show_hint))
             continue
-        news_candidates.append(compact_entry(
-            entry,
-            "news_candidate",
-            "requires_menzo_classification",
-            assigned_to="Menzo",
-        ))
+        news_candidates.append(compact_entry(entry, "news_candidate", "requires_menzo_classification", assigned_to="Menzo"))
 
-    return {
-        "already_worked": already_worked,
-        "hard_skipped": hard_skipped,
-        "report_candidates": report_candidates,
-        "news_candidates_for_menzo": news_candidates,
-    }
+    return {"already_worked": already_worked, "hard_skipped": hard_skipped, "report_candidates": report_candidates, "news_candidates_for_menzo": news_candidates}
 
 
 def run_massy() -> dict[str, Any]:
     feeds = read_feeds_config()
-    print(f"[MASSY v93.1] Avvio sentinella feed | feeds={len(feeds)}", flush=True)
+    print(f"[MASSY v93.9] Avvio sentinella feed | feeds={len(feeds)}", flush=True)
     entries, feed_errors = read_feed_entries(feeds)
     known_urls = worked_urls()
-    classified = classify_entries(entries, known_urls)
+    published = published_urls()
+    classified = classify_entries(entries, known_urls, published)
     board = {
         "agent": "Massy",
         "version": MASSY_VERSION,
@@ -251,27 +244,30 @@ def run_massy() -> dict[str, Any]:
         "mode": "sentinel_control_board",
         "binding": {
             "hard_skips_are_binding_for_newsroom": True,
-            "bot_v92_runtime_still_delegated_until_menzo_simone_takeover": True,
+            "published_urls_are_hard_skips": True,
+            "bot_v92_runtime_still_delegated_until_menzo_simone_takeover": False,
         },
         "feeds": feeds,
         "feed_errors": feed_errors,
         "found_urls": len(entries),
         "known_state_urls": len(known_urls),
+        "known_published_urls": len(published),
         **classified,
         "handoff": {
             "to_simone": len(classified["report_candidates"]),
             "to_menzo": len(classified["news_candidates_for_menzo"]),
             "already_worked": len(classified["already_worked"]),
             "hard_skipped": len(classified["hard_skipped"]),
+            "already_published_hard_skipped": sum(1 for x in classified["hard_skipped"] if x.get("reason") == "url_already_published"),
         },
     }
     write_json(ARTIFACT_DIR / "massy_board.json", board)
     write_json(NEWSROOM_STATE_DIR / "massy_board_latest.json", board)
     print(
-        "[MASSY v93.1] Board pronta | "
+        "[MASSY v93.9] Board pronta | "
         f"found={board['found_urls']} to_simone={board['handoff']['to_simone']} "
         f"to_menzo={board['handoff']['to_menzo']} hard_skip={board['handoff']['hard_skipped']} "
-        f"already={board['handoff']['already_worked']}",
+        f"published_skip={board['handoff']['already_published_hard_skipped']} already={board['handoff']['already_worked']}",
         flush=True,
     )
     return board
