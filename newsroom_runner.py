@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-NEWSROOM_VERSION = "v93_4_bob_article_writer"
+NEWSROOM_VERSION = "v93_5_alfred_quality_editor"
 ARTIFACT_DIR = Path("artifacts") / "newsroom"
 
 AGENTS = [
@@ -245,6 +245,50 @@ def run_bob_writer(timeline: list[dict[str, str]], menzo_decision: dict[str, Any
         return error
 
 
+def run_alfred_review(timeline: list[dict[str, str]], bob_result: dict[str, Any]) -> dict[str, Any]:
+    try:
+        from agents.alfred import run_alfred
+    except Exception as exc:
+        error = {
+            "agent": "Alfred",
+            "version": NEWSROOM_VERSION,
+            "generated_at": utc_now(),
+            "status": "error",
+            "error": f"import_failed: {exc}",
+            "handoff": {"approved": 0, "needs_revision": 0, "warnings": 0, "blockers": 0},
+        }
+        write_json(ARTIFACT_DIR / "alfred_review.json", error)
+        add_timeline(timeline, "Alfred", "error", f"import_failed={exc}")
+        return error
+    try:
+        result = run_alfred(bob_result)
+        handoff = result.get("handoff", {}) if isinstance(result, dict) else {}
+        add_timeline(
+            timeline,
+            "Alfred",
+            "quality_review_ready",
+            "approved={approved} needs_revision={needs_revision} blockers={blockers} warnings={warnings}".format(
+                approved=handoff.get("approved", 0),
+                needs_revision=handoff.get("needs_revision", 0),
+                blockers=handoff.get("blockers", 0),
+                warnings=handoff.get("warnings", 0),
+            ),
+        )
+        return result
+    except Exception as exc:
+        error = {
+            "agent": "Alfred",
+            "version": NEWSROOM_VERSION,
+            "generated_at": utc_now(),
+            "status": "error",
+            "error": str(exc),
+            "handoff": {"approved": 0, "needs_revision": 0, "warnings": 0, "blockers": 0},
+        }
+        write_json(ARTIFACT_DIR / "alfred_review.json", error)
+        add_timeline(timeline, "Alfred", "error", str(exc))
+        return error
+
+
 def main() -> int:
     ensure_artifacts()
     started_at = utc_now()
@@ -252,7 +296,7 @@ def main() -> int:
 
     print(f"===== NEWSROOM RUN START [{started_at}] VERSION [{NEWSROOM_VERSION}] =====", flush=True)
     print("[NEWSROOM v93] Avvio Virtual Newsroom", flush=True)
-    print("[NEWSROOM v93] Massy, Simone, Menzo and Bob are real; Publisher still delegated during staged takeover", flush=True)
+    print("[NEWSROOM v93] Massy, Simone, Menzo, Bob and Alfred are real; Publisher still pending takeover", flush=True)
 
     command = runtime_command()
     engine = command[1] if len(command) > 1 else "unknown"
@@ -266,11 +310,12 @@ def main() -> int:
         "engine": engine,
         "newsroom_engine_override": is_test_override,
         "wp_status_source": "existing_runtime",
-        "can_translate": "v93_bob_for_news_delegated_runtime_for_publish",
-        "can_publish": "delegated_to_existing_runtime",
+        "can_translate": "v93_bob",
+        "can_review": "v93_alfred",
+        "can_publish": "pending_v93_publisher",
         "notes": [
-            "Jarvis wrapper does not duplicate WordPress checks in v93.4",
-            "Bob creates v93 article packages before any v92 fallback runtime",
+            "Jarvis wrapper does not duplicate WordPress checks in v93.5",
+            "Bob creates v93 article packages and Alfred reviews them before Publisher takeover",
         ],
     }
     write_json(ARTIFACT_DIR / "jarvis_status.json", jarvis_status)
@@ -280,18 +325,15 @@ def main() -> int:
     simone_decision = run_simone_reports(timeline, massy_board)
     menzo_decision = run_menzo_editorial(timeline, massy_board)
     bob_result = run_bob_writer(timeline, menzo_decision)
+    alfred_result = run_alfred_review(timeline, bob_result)
 
-    for agent, note in [
-        ("Alfred", "guardrails/QA delegated to future v93 step"),
-        ("Publisher", "WordPress publication delegated to existing runtime"),
-    ]:
-        add_timeline(timeline, agent, "wrapped", note)
+    add_timeline(timeline, "Publisher", "wrapped", "WordPress publication pending v93 takeover")
 
     runtime_delegations = 0
     runtime_exit_code = 0
     skip_v92 = str(os.getenv("V93_SKIP_V92_AFTER_BOB", "1")).strip().lower() not in {"0", "false", "no", "off"}
     if skip_v92 and not is_test_override:
-        add_timeline(timeline, "Jarvis", "runtime_skipped", "Bob packages generated; v92 fallback skipped to avoid legacy side effects")
+        add_timeline(timeline, "Jarvis", "runtime_skipped", "Bob/Alfred packages generated; v92 fallback skipped to avoid legacy side effects")
         print("[NEWSROOM v93] v92 fallback skipped because V93_SKIP_V92_AFTER_BOB=1", flush=True)
     else:
         runtime_delegations = 1
@@ -306,6 +348,7 @@ def main() -> int:
     simone_handoff = simone_decision.get("handoff", {}) if isinstance(simone_decision, dict) else {}
     menzo_handoff = menzo_decision.get("handoff", {}) if isinstance(menzo_decision, dict) else {}
     bob_handoff = bob_result.get("handoff", {}) if isinstance(bob_result, dict) else {}
+    alfred_handoff = alfred_result.get("handoff", {}) if isinstance(alfred_result, dict) else {}
     run_summary = {
         "version": NEWSROOM_VERSION,
         "started_at": started_at,
@@ -320,7 +363,7 @@ def main() -> int:
             "simone": "real_report_director",
             "menzo": "real_editorial_director",
             "bob": "real_article_writer",
-            "alfred": "wrapped_pending_takeover",
+            "alfred": "real_quality_editor",
             "publisher": "wrapped_pending_takeover",
             "archivista": "wrapped",
         },
@@ -328,12 +371,12 @@ def main() -> int:
         "simone_handoff": simone_handoff,
         "menzo_handoff": menzo_handoff,
         "bob_handoff": bob_handoff,
+        "alfred_handoff": alfred_handoff,
         "notes": [
-            "v93.4 introduces Bob as article writer",
-            "Bob consumes Menzo selected URLs and writes ordered article packages",
-            "Bob removes duplicate first featured image and source bio/footer sections",
-            "v92 fallback is skipped by default after Bob to avoid legacy patch side effects",
+            "v93.5 introduces Alfred as deterministic quality editor",
+            "Alfred consumes Bob article packages and approves only clean articles",
             "Publisher remains a future v93 takeover step",
+            "v92 fallback is skipped by default after Bob/Alfred to avoid legacy patch side effects",
         ],
     }
 
