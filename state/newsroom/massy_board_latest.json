@@ -11,28 +11,6 @@
       "summary": "This is  Wrestling Inc.'s results for WWE Clash In Italy 2026, with the Undisputed WWE & World Heavyweight Championships among those set to be defended!",
       "title": "WWE Clash In Italy Results 5/31 - Four Titles On The Line, Oba Femi Faces Brock Lesnar",
       "url": "https://www.wrestlinginc.com/2184202/wwe-clash-in-italy-2026-four-titles-on-line-oba-femi-brock-lesnar/"
-    },
-    {
-      "decision": "already_worked",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184309/aew-collision-may-30-2026-results",
-      "published": "Sat, 30 May 2026 23:01:58 +0000",
-      "reason": "url_present_in_state",
-      "source": "wrestlinginc",
-      "summary": "On \"AEW Collision\", Divine Dominion will have a 5-min Tag Title Eliminator Challenge match and ROH Pure Champion Lee Moriarty will be in action.",
-      "title": "AEW Collision Results 5/30 - Two Titles On The Line, STARDOM's Hazuki Makes AEW Debut",
-      "url": "https://www.wrestlinginc.com/2184309/aew-collision-may-30-2026-results/"
-    },
-    {
-      "decision": "already_worked",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184147/wwe-smackdown-may-29-cody-rhodes-gunther-jade-cargill",
-      "published": "Fri, 29 May 2026 22:58:51 +0000",
-      "reason": "url_present_in_state",
-      "source": "wrestlinginc",
-      "summary": "This is Wrestling Inc.'s results for \"SmackDown\" on May 29, with Jade Cargill appearing before she challenges Women's Champion Rhea Ripley at Clash in Italy!",
-      "title": "WWE SmackDown Results 5/29 - Cody Rhodes & GUNTHER Meet, Jade Cargill Appears",
-      "url": "https://www.wrestlinginc.com/2184147/wwe-smackdown-may-29-cody-rhodes-gunther-jade-cargill/"
     }
   ],
   "binding": {
@@ -53,11 +31,11 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-01T18:50:38.598254+00:00",
+  "generated_at": "2026-06-01T19:03:10.867123+00:00",
   "handoff": {
-    "already_worked": 3,
-    "hard_skipped": 2,
-    "to_menzo": 27,
+    "already_worked": 1,
+    "hard_skipped": 1,
+    "to_menzo": 30,
     "to_simone": 3
   },
   "hard_skipped": [
@@ -71,17 +49,6 @@
       "summary": "On a night that saw Roman Reigns and Cody Rhodes retain their titles, here are three things we hated and three things we loved about WWE Clash in Italy 2026!",
       "title": "WWE Clash In Italy 2026: 3 Things We Hated & 3 Things We Loved",
       "url": "https://www.wrestlinginc.com/2184477/wwe-clash-in-italy-2026-hated-loved-opinion-review/"
-    },
-    {
-      "decision": "hard_skip",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184204/wwe-smackdown-may-29-2026-hated-loved-opinion-review",
-      "published": "Sat, 30 May 2026 03:57:28 +0000",
-      "reason": "listicle_things_we_loved_hated",
-      "source": "wrestlinginc",
-      "summary": "On the go home show for Clash in Italy this weekend, here are three things we hated and three things we loved about the 5/29/26 episode of \"WWE SmackDown!\"",
-      "title": "WWE SmackDown 5/29/2026: 3 Things We Hated & 3 Things We Loved",
-      "url": "https://www.wrestlinginc.com/2184204/wwe-smackdown-may-29-2026-hated-loved-opinion-review/"
     }
   ],
   "known_state_urls": 9,
@@ -91,37 +58,13 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185121/wwe-nxt-booker-t-kelani-jordan-tatum-paxley-jaida-parker-lola-vice-jackson-drake-favorite-stars-summer-2026",
-      "published": "Mon, 01 Jun 2026 18:22:18 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2185164/oba-femi-avenges-clash-italy-loss-advancing-wwe-kotr-tournament",
+      "published": "Mon, 01 Jun 2026 18:54:42 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "Although the summer solstice hasn't occurred yet, Booker T names his top-five favorite \"WWE NXT\" wrestlers of the summer.",
-      "title": "Booker T Names His Five Favorite WWE NXT Stars Heading Into Summer 2026",
-      "url": "https://www.wrestlinginc.com/2185121/wwe-nxt-booker-t-kelani-jordan-tatum-paxley-jaida-parker-lola-vice-jackson-drake-favorite-stars-summer-2026/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results",
-      "published": "Sun, 31 May 2026 01:00:00 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "This is Wrestling Inc.'s live coverage of AAA Nocha de Los Grandes, headlined by El Grande Americano versus the Original Grande Americano in Mask vs. Mask.",
-      "title": "AAA Noche De Los Grandes Results - Mask Vs. Mask, Three Titles On The Line",
-      "url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185118/wwe-smackdown-two-hour-format-latest-update",
-      "published": "Mon, 01 Jun 2026 18:21:33 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "\"WWE SmackDown\" is set to return to a two-hour format, and Dave Meltzer has revealed when the change is set to be made.",
-      "title": "Latest Update On When WWE SmackDown Is Expected To Return To Two-Hour Format",
-      "url": "https://www.wrestlinginc.com/2185118/wwe-smackdown-two-hour-format-latest-update/"
+      "summary": "Oba Femi won the first match of the King of the Ring tournament during \"WWE Raw\" to advance to the semi-finals.",
+      "title": "Oba Femi Avenges Clash In Italy Loss By Advancing In WWE KOTR Tournament",
+      "url": "https://www.wrestlinginc.com/2185164/oba-femi-avenges-clash-italy-loss-advancing-wwe-kotr-tournament/"
     },
     {
       "assigned_to": "Menzo",
@@ -187,42 +130,6 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185116/wwe-rhea-ripley-anxiety-attack-pressure-2025-australian-tour",
-      "published": "Mon, 01 Jun 2026 18:18:46 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "Rhea Ripley reflects on one of the lowest points of her WWE career and opens up about having a panic attack backstage.",
-      "title": "Rhea Ripley Recalls Anxiety Attack After Pressure Of WWE's 2025 Australian Tour",
-      "url": "https://www.wrestlinginc.com/2185116/wwe-rhea-ripley-anxiety-attack-pressure-2025-australian-tour/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184190/wwe-clash-in-italy-2026-predictions-winners",
-      "published": "Sat, 30 May 2026 13:00:00 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "WWE Clash in Italy is upon us, coming at you this Sunday from Turin, and as always, the Wrestling Inc. staff is here to predict the winners!",
-      "title": "WWE Clash In Italy 2026 Predictions: Wrestling Inc. Picks The Winners",
-      "url": "https://www.wrestlinginc.com/2184190/wwe-clash-in-italy-2026-predictions-winners/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185021/wwe-hall-of-fame-jimy-hart-return-kids-show-danhausen",
-      "published": "Mon, 01 Jun 2026 17:02:04 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "A WWE Hall of Famer said he'd make a return to weekly TV if asked, and pitched a unique idea, a kids show, that would involve Danhausen.",
-      "title": "WWE HOFer Says He'd Return To TV If Asked, Pitched Kids Show With Danhausen",
-      "url": "https://www.wrestlinginc.com/2185021/wwe-hall-of-fame-jimy-hart-return-kids-show-danhausen/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2171387/wwe-jbl-john-bradshaw-layfield-john-laurinaitis-conversation-restructuring-contract",
       "published": "Sat, 16 May 2026 19:00:00 +0000",
       "reason": "requires_menzo_classification",
@@ -235,6 +142,18 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2185158/aew-cmll-star-mistico-announces-member-mexico-world-cup-roster",
+      "published": "Mon, 01 Jun 2026 18:51:14 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "AEW/CMLL luchador Mistico is one of the many Mexican celebrities who participated in the announcement of Mexico's roster for the 2026 FIFA World Cup",
+      "title": "AEW/CMLL Star Mistico Announces Member Of Mexico's World Cup Roster",
+      "url": "https://www.wrestlinginc.com/2185158/aew-cmll-star-mistico-announces-member-mexico-world-cup-roster/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2171344/wwe-tests-wrestlers-attitude-problem-dijak-oba-femi",
       "published": "Sat, 16 May 2026 18:30:00 +0000",
       "reason": "requires_menzo_classification",
@@ -242,6 +161,102 @@
       "summary": "A former WWE star explained a little in a social media post about how WWE tests its wrestlers to see \"if they have an attitude problem.\"",
       "title": "How WWE Tests Wrestlers 'To See If They Have An Attitude Problem,' Per Former Star",
       "url": "https://www.wrestlinginc.com/2171344/wwe-tests-wrestlers-attitude-problem-dijak-oba-femi/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2174516/roh-supercard-of-honor-athena-survival-of-the-fittest",
+      "published": "Sat, 16 May 2026 17:50:06 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "Athena successfully retained the ROH Women's World Championship and became the company's first-ever Women's Survival of the Fittest victor at Supercard of Honor.",
+      "title": "Athena Wins First-Ever Women's ROH Survival Of The Fittest Match, Extends Title Reign",
+      "url": "https://www.wrestlinginc.com/2174516/roh-supercard-of-honor-athena-survival-of-the-fittest/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2171275/eric-bischoff-recalls-paul-heyman-love-released-wwe-star",
+      "published": "Sat, 16 May 2026 17:30:00 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "Eric Bischoff recalled one recently-released WWE star who Paul Heyman was high on back in 2019 when Bischoff crossed paths with him.",
+      "title": "Eric Bischoff Recalls Paul Heyman's Love For Released WWE Star",
+      "url": "https://www.wrestlinginc.com/2171275/eric-bischoff-recalls-paul-heyman-love-released-wwe-star/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2171250/matt-hardy-kofimania-wwe-new-day",
+      "published": "Sat, 16 May 2026 17:00:00 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "Matt hardy reflects on Kofi Kingston becoming WWE Champion at WrestleMania 35 and commented on the New Day's importance to the younger generation of fans.",
+      "title": "Matt Hardy Looks Back On KofiMania In Wake Of New Day's WWE Release",
+      "url": "https://www.wrestlinginc.com/2171250/matt-hardy-kofimania-wwe-new-day/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2174471/aew-swerve-strickland-roh-supercard-of-honor-bandido-world-title",
+      "published": "Sat, 16 May 2026 16:30:53 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "AEW's Swerve Strickland gave several warning shots towards ROH World Champion Bandido ahead of their upcoming first round match in the Owen Hart Cup Tournament.",
+      "title": "AEW's Swerve Strickland Attacks Bandido After ROH Supercard Of Honor World Title Match",
+      "url": "https://www.wrestlinginc.com/2174471/aew-swerve-strickland-roh-supercard-of-honor-bandido-world-title/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2171248/wwe-royal-rumble-2026-kit-wilson-emotional-struggle-left-out",
+      "published": "Sat, 16 May 2026 16:30:00 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "WWE's Kit Wilson struggled with his emotions after being left off this year's Royal Rumble card, but some advice from Cody Rhodes and AJ Styles helped.",
+      "title": "Kit Wilson Details Emotional Struggle After Being Left Out Of 2026 WWE Royal Rumble",
+      "url": "https://www.wrestlinginc.com/2171248/wwe-royal-rumble-2026-kit-wilson-emotional-struggle-left-out/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2185121/wwe-nxt-booker-t-kelani-jordan-tatum-paxley-jaida-parker-lola-vice-jackson-drake-favorite-stars-summer-2026",
+      "published": "Mon, 01 Jun 2026 18:22:18 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "Although the summer solstice hasn't occurred yet, Booker T names his top-five favorite \"WWE NXT\" wrestlers of the summer.",
+      "title": "Booker T Names His Five Favorite WWE NXT Stars Heading Into Summer 2026",
+      "url": "https://www.wrestlinginc.com/2185121/wwe-nxt-booker-t-kelani-jordan-tatum-paxley-jaida-parker-lola-vice-jackson-drake-favorite-stars-summer-2026/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results",
+      "published": "Sun, 31 May 2026 01:00:00 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "This is Wrestling Inc.'s live coverage of AAA Nocha de Los Grandes, headlined by El Grande Americano versus the Original Grande Americano in Mask vs. Mask.",
+      "title": "AAA Noche De Los Grandes Results - Mask Vs. Mask, Three Titles On The Line",
+      "url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring",
+      "published": "Mon, 01 Jun 2026 18:50:53 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring-46.jpg?x49856\" width=\"800\" /></p>Oba Femi didn’t just advance in the King of the Ring tournament on June 1 WWE RAW — he made sure Brock Lesnar heard him loud and clear afterward. After defeating Penta, Carmelo Hayes, and Solo Sikoa in a wild Fatal Four-Way first-round match, Oba grabbed a microphone and turned his attention straight to Lesnar. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/\" title=\"Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring\">Read more</a>",
+      "title": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring",
+      "url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/"
     },
     {
       "assigned_to": "Menzo",
@@ -398,34 +413,9 @@
       "summary": "<p><img alt=\"Former WWE Star Claims Backstage Incident Led to Release\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/former-wwe-star-claims-backstage-incident-led-to-release-41.jpg?x49856\" width=\"800\" /></p>Alba Fyre may already have her first post-WWE move lined up, and it looks like Kay Lee Ray could be coming back sooner than expected. Pro Wrestling EVE took to Twitter and began teasing a mystery opponent for Molly Spartan at its History Makers / Rule Breakers event on Friday, June 5, in London. The ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-star-set-first-wrestling-appearance-release/\" title=\"WWE Star Set for First Wrestling Appearance After Release\">Read more</a>",
       "title": "WWE Star Set for First Wrestling Appearance After Release",
       "url": "https://www.ringsidenews.com/wwe-star-set-first-wrestling-appearance-release/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/nxt-stars-future-revealed-amid-wwe-main-roster-call-rumors",
-      "published": "Mon, 01 Jun 2026 11:25:23 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg?x49856\" width=\"800\" /></p>Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet. False Finish reports that WWE officials have been happy with Lyons’ work since she returned from injury. However, despite earlier talk about a possible summer main roster call-up, that move reportedly does not look ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/nxt-stars-future-revealed-amid-wwe-main-roster-call-rumors/\" title=\"NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors\">Read more</a>",
-      "title": "NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors",
-      "url": "https://www.ringsidenews.com/nxt-stars-future-revealed-amid-wwe-main-roster-call-rumors/"
     }
   ],
   "report_candidates": [
-    {
-      "assigned_to": "Simone",
-      "decision": "report_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185015/wwe-raw-june-1-2026-seth-rollins-bron-breakker-tag-team-match-more",
-      "published": "Mon, 01 Jun 2026 16:58:38 +0000",
-      "reason": "weekly_show_results",
-      "show_hint": "WWE Raw",
-      "source": "wrestlinginc",
-      "summary": "This is Wrestling Inc.'s coverage for \"WWE Raw\" on June 1, 2026, with a match between Seth Rollins & one half of the World Tag Team Champions Bron Breakker!",
-      "title": "WWE Raw Results 6/1 - Seth Rollins Faces Bron Breakker, Tag Team Match & More",
-      "url": "https://www.wrestlinginc.com/2185015/wwe-raw-june-1-2026-seth-rollins-bron-breakker-tag-team-match-more/"
-    },
     {
       "assigned_to": "Simone",
       "decision": "report_candidate",
@@ -438,6 +428,19 @@
       "summary": "\"AEW Collision\" will feature many ROH stars after last night's Supercard of Honor",
       "title": "AEW Collision Results 5/16 - World Title & TBS Title On The Line, Tag Title Eliminator",
       "url": "https://www.wrestlinginc.com/2174642/aew-collision-results-may-16-world-tbs-titles-tag-eliminator/"
+    },
+    {
+      "assigned_to": "Simone",
+      "decision": "report_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2185015/wwe-raw-june-1-2026-seth-rollins-bron-breakker-tag-team-match-more",
+      "published": "Mon, 01 Jun 2026 16:58:38 +0000",
+      "reason": "weekly_show_results",
+      "show_hint": "WWE Raw",
+      "source": "wrestlinginc",
+      "summary": "This is Wrestling Inc.'s coverage for \"WWE Raw\" on June 1, 2026, with a match between Seth Rollins & one half of the World Tag Team Champions Bron Breakker!",
+      "title": "WWE Raw Results 6/1 - Seth Rollins Faces Bron Breakker, Tag Team Match & More",
+      "url": "https://www.wrestlinginc.com/2185015/wwe-raw-june-1-2026-seth-rollins-bron-breakker-tag-team-match-more/"
     },
     {
       "assigned_to": "Simone",

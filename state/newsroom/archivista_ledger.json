@@ -1,0 +1,96 @@
+[
+  {
+    "agent_handoffs": {
+      "alfred": {
+        "approved": 3,
+        "blockers": 0,
+        "editorial_changes": 0,
+        "needs_revision": 0,
+        "warnings": 2
+      },
+      "bob": {
+        "errors": 0,
+        "extraction_empty": 0,
+        "ready_for_alfred": 3,
+        "translation_pending": 0
+      },
+      "massy": {
+        "already_worked": 1,
+        "hard_skipped": 1,
+        "to_menzo": 30,
+        "to_simone": 3
+      },
+      "menzo": {
+        "pending": 10,
+        "skipped": 14,
+        "to_bob_or_v92": 6
+      },
+      "publisher": {
+        "already_published": 1,
+        "dry_run": 0,
+        "errors": 0,
+        "published": 2,
+        "wp_not_ready": 0
+      },
+      "simone": {
+        "ready": 0,
+        "skipped": 6,
+        "waiting": 0
+      }
+    },
+    "already_published": 1,
+    "article_count": 6,
+    "errors": 0,
+    "generated_at": "2026-06-01T19:03:27.143825+00:00",
+    "overall_status": "ok",
+    "published": 2,
+    "warnings": 0
+  },
+  {
+    "agent_handoffs": {
+      "alfred": {
+        "approved": 3,
+        "blockers": 0,
+        "editorial_changes": 0,
+        "needs_revision": 0,
+        "warnings": 2
+      },
+      "bob": {
+        "errors": 0,
+        "extraction_empty": 0,
+        "ready_for_alfred": 3,
+        "translation_pending": 0
+      },
+      "massy": {
+        "already_worked": 1,
+        "hard_skipped": 1,
+        "to_menzo": 30,
+        "to_simone": 3
+      },
+      "menzo": {
+        "pending": 10,
+        "skipped": 14,
+        "to_bob_or_v92": 6
+      },
+      "publisher": {
+        "already_published": 1,
+        "dry_run": 0,
+        "errors": 0,
+        "published": 2,
+        "wp_not_ready": 0
+      },
+      "simone": {
+        "ready": 0,
+        "skipped": 6,
+        "waiting": 0
+      }
+    },
+    "already_published": 1,
+    "article_count": 6,
+    "errors": 0,
+    "generated_at": "2026-06-01T19:03:27.146714+00:00",
+    "overall_status": "ok",
+    "published": 2,
+    "warnings": 0
+  }
+]

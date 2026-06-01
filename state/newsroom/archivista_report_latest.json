@@ -1,0 +1,605 @@
+{
+  "agent": "Archivista",
+  "agent_handoffs": {
+    "alfred": {
+      "approved": 3,
+      "blockers": 0,
+      "editorial_changes": 0,
+      "needs_revision": 0,
+      "warnings": 2
+    },
+    "bob": {
+      "errors": 0,
+      "extraction_empty": 0,
+      "ready_for_alfred": 3,
+      "translation_pending": 0
+    },
+    "massy": {
+      "already_worked": 1,
+      "hard_skipped": 1,
+      "to_menzo": 30,
+      "to_simone": 3
+    },
+    "menzo": {
+      "pending": 10,
+      "skipped": 14,
+      "to_bob_or_v92": 6
+    },
+    "publisher": {
+      "already_published": 1,
+      "dry_run": 0,
+      "errors": 0,
+      "published": 2,
+      "wp_not_ready": 0
+    },
+    "simone": {
+      "ready": 0,
+      "skipped": 6,
+      "waiting": 0
+    }
+  },
+  "anomalies": [],
+  "article_dossiers": [
+    {
+      "alfred": {
+        "decision": "approved",
+        "editorial_changes": [],
+        "issues": [],
+        "present": true,
+        "quality_score": 100,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": 15,
+        "diagnostic_stage": "ready_for_alfred",
+        "element_counts": {
+          "embed": 0,
+          "heading": 8,
+          "image": 0,
+          "quote": 0,
+          "text": 7
+        },
+        "error": null,
+        "present": true,
+        "raw_element_count": 17,
+        "removed_before_gemini": 15,
+        "status": "ready_for_alfred",
+        "translation_model": "gemini-3.1-flash-lite",
+        "translation_used": true
+      },
+      "category_hint": "AEW",
+      "html_audit": {
+        "alfred_final_html_preview": "<p>Sono stati resi noti i nuovi dati relativi agli ascolti dell'episodio di AEW Dynamite trasmesso su TBS il 27 maggio 2026, che evidenziano una costante tendenza alla crescita.</p><p>Secondo quanto riportato da Programming Insider, l'episodio di AEW Dynamite del 27 maggio 2026 ha fatto registrare 704.000 spettatori su TBS, con un rating di 0.12 nella fascia demografica chiave 18-49 anni (P18-49). Per fare un confronto, l'episodio del 20 maggio 2026 aveva totalizzato 613.000 spettatori con un rating di 0 nella stessa fascia demografica; si tratta quindi di un incremento di 91.000 spettatori e di un aumento di 0.12 punti nel rating demo.</p><p>Rispetto alla stessa settimana del 2025, quando l'episodio del 28 maggio totalizzò 636.000 spettatori con un rating demo di 0.16, il dato di 704.000 spettatori e 0.12 di rating del 27 maggio 2026 segna una variazione su base annua del +10,7% per quanto riguarda l'audience complessiva e del -25,0% nel rating demo.</p><h3>AEW Dynamite: Confronto settimanale degli ascolti</h3><h3>Prestazioni di AEW Dynamite anno corrente (2026)</h3><h3>Prestazioni di AEW Dynamite mese corrente (maggio 2026)</h3><h3>Media mobile a 4 settimane di AEW Dynamite</h3><h3>Riepilogo prestazioni ultimi 12 mesi</h3><h3>Range di ascolti (ultimi 12 mesi)</h3><p>Media a 4 settimane: 602.875 spettatori</p><h3>Maggiori variazioni settimanali negli ascolti (ultimi 12 mesi)</h3><h3>Confronto anno su anno di AEW Dynamite (2025 vs 2026)</h3><p>Ascolto più alto del 2026: 765.000 (25 marzo 2026). Ascolto più basso del 2026: 498.000 (21 gennaio 2026).</p><p>Queste cifre riflettono esclusivamente l'ascolto televisivo lineare su TBS e non includono la visione in streaming o tramite piattaforme digitali. Ringside News continuerà a monitorare l'andamento di AEW Dynamite mentre la federazione prosegue il percorso di avvicinamento al suo prossimo grande evento dal vivo.</p>",
+        "bob_body_html_preview": "<p>Sono stati resi noti i nuovi dati relativi agli ascolti dell'episodio di AEW Dynamite trasmesso su TBS il 27 maggio 2026, che evidenziano una costante tendenza alla crescita.</p><p>Secondo quanto riportato da Programming Insider, l'episodio di AEW Dynamite del 27 maggio 2026 ha fatto registrare 704.000 spettatori su TBS, con un rating di 0.12 nella fascia demografica chiave 18-49 anni (P18-49). Per fare un confronto, l'episodio del 20 maggio 2026 aveva totalizzato 613.000 spettatori con un rating di 0 nella stessa fascia demografica; si tratta quindi di un incremento di 91.000 spettatori e di un aumento di 0.12 punti nel rating demo.</p><p>Rispetto alla stessa settimana del 2025, quando l'episodio del 28 maggio totalizzò 636.000 spettatori con un rating demo di 0.16, il dato di 704.000 spettatori e 0.12 di rating del 27 maggio 2026 segna una variazione su base annua del +10,7% per quanto riguarda l'audience complessiva e del -25,0% nel rating demo.</p><h3>AEW Dynamite: Confronto settimanale degli ascolti</h3><h3>Prestazioni di AEW Dynamite anno corrente (2026)</h3><h3>Prestazioni di AEW Dynamite mese corrente (maggio 2026)</h3><h3>Media mobile a 4 settimane di AEW Dynamite</h3><h3>Riepilogo prestazioni ultimi 12 mesi</h3><h3>Range di ascolti (ultimi 12 mesi)</h3><p>Media a 4 settimane: 602.875 spettatori</p><h3>Maggiori variazioni settimanali negli ascolti (ultimi 12 mesi)</h3><h3>Confronto anno su anno di AEW Dynamite (2025 vs 2026)</h3><p>Ascolto più alto del 2026: 765.000 (25 marzo 2026). Ascolto più basso del 2026: 498.000 (21 gennaio 2026).</p><p>Queste cifre riflettono esclusivamente l'ascolto televisivo lineare su TBS e non includono la visione in streaming o tramite piattaforme digitali. Ringside News continuerà a monitorare l'andamento di AEW Dynamite mentre la federazione prosegue il percorso di avvicinamento al suo prossimo grande evento dal vivo.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_aew-dynamite-i-dati-di-ascolto-dell-episodio-del-27-maggio-2026.html",
+        "published_html_preview": "<p>Sono stati resi noti i nuovi dati relativi agli ascolti dell'episodio di AEW Dynamite trasmesso su TBS il 27 maggio 2026, che evidenziano una costante tendenza alla crescita.</p><p>Secondo quanto riportato da Programming Insider, l'episodio di AEW Dynamite del 27 maggio 2026 ha fatto registrare 704.000 spettatori su TBS, con un rating di 0.12 nella fascia demografica chiave 18-49 anni (P18-49). Per fare un confronto, l'episodio del 20 maggio 2026 aveva totalizzato 613.000 spettatori con un rating di 0 nella stessa fascia demografica; si tratta quindi di un incremento di 91.000 spettatori e di un aumento di 0.12 punti nel rating demo.</p><p>Rispetto alla stessa settimana del 2025, quando l'episodio del 28 maggio totalizzò 636.000 spettatori con un rating demo di 0.16, il dato di 704.000 spettatori e 0.12 di rating del 27 maggio 2026 segna una variazione su base annua del +10,7% per quanto riguarda l'audience complessiva e del -25,0% nel rating demo.</p><h3>AEW Dynamite: Confronto settimanale degli ascolti</h3><h3>Prestazioni di AEW Dynamite anno corrente (2026)</h3><h3>Prestazioni di AEW Dynamite mese corrente (maggio 2026)</h3><h3>Media mobile a 4 settimane di AEW Dynamite</h3><h3>Riepilogo prestazioni ultimi 12 mesi</h3><h3>Range di ascolti (ultimi 12 mesi)</h3><p>Media a 4 settimane: 602.875 spettatori</p><h3>Maggiori variazioni settimanali negli ascolti (ultimi 12 mesi)</h3><h3>Confronto anno su anno di AEW Dynamite (2025 vs 2026)</h3><p>Ascolto più alto del 2026: 765.000 (25 marzo 2026). Ascolto più basso del 2026: 498.000 (21 gennaio 2026).</p><p>Queste cifre riflettono esclusivamente l'ascolto televisivo lineare su TBS e non includono la visione in streaming o tramite piattaforme digitali. Ringside News continuerà a monitorare l'andamento di AEW Dynamite mentre la federazione prosegue il percorso di avvicinamento al suo prossimo grande evento dal vivo.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_aew-dynamite-i-dati-di-ascolto-dell-episodio-del-27-maggio-2026.html",
+        "publisher_review_html_preview": "<p>Sono stati resi noti i nuovi dati relativi agli ascolti dell'episodio di AEW Dynamite trasmesso su TBS il 27 maggio 2026, che evidenziano una costante tendenza alla crescita.</p><p>Secondo quanto riportato da Programming Insider, l'episodio di AEW Dynamite del 27 maggio 2026 ha fatto registrare 704.000 spettatori su TBS, con un rating di 0.12 nella fascia demografica chiave 18-49 anni (P18-49). Per fare un confronto, l'episodio del 20 maggio 2026 aveva totalizzato 613.000 spettatori con un rating di 0 nella stessa fascia demografica; si tratta quindi di un incremento di 91.000 spettatori e di un aumento di 0.12 punti nel rating demo.</p><p>Rispetto alla stessa settimana del 2025, quando l'episodio del 28 maggio totalizzò 636.000 spettatori con un rating demo di 0.16, il dato di 704.000 spettatori e 0.12 di rating del 27 maggio 2026 segna una variazione su base annua del +10,7% per quanto riguarda l'audience complessiva e del -25,0% nel rating demo.</p><h3>AEW Dynamite: Confronto settimanale degli ascolti</h3><h3>Prestazioni di AEW Dynamite anno corrente (2026)</h3><h3>Prestazioni di AEW Dynamite mese corrente (maggio 2026)</h3><h3>Media mobile a 4 settimane di AEW Dynamite</h3><h3>Riepilogo prestazioni ultimi 12 mesi</h3><h3>Range di ascolti (ultimi 12 mesi)</h3><p>Media a 4 settimane: 602.875 spettatori</p><h3>Maggiori variazioni settimanali negli ascolti (ultimi 12 mesi)</h3><h3>Confronto anno su anno di AEW Dynamite (2025 vs 2026)</h3><p>Ascolto più alto del 2026: 765.000 (25 marzo 2026). Ascolto più basso del 2026: 498.000 (21 gennaio 2026).</p><p>Queste cifre riflettono esclusivamente l'ascolto televisivo lineare su TBS e non includono la visione in streaming o tramite piattaforme digitali. Ringside News continuerà a monitorare l'andamento di AEW Dynamite mentre la federazione prosegue il percorso di avvicinamento al suo prossimo grande evento dal vivo.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/\nTitolo feed: AEW Dynamite Viewership Sees Increase on May 27, 2026\nTitolo pagina: AEW Dynamite Viewership Sees Increase on May 27, 2026\nDescrizione: New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum. According to Programming\nCategoria suggerita: AEW\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|text] New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum.\n[2|text] According to Programming Insider , AEW Dynamite on May 27, 2026 drew 704,000 viewers on TBS, with a 0.12 rating in the key P18–49 demographic. For comparison, the May 20, 2026 episode drew 613,000 viewers with a 0 rating in the key P18–49 demographic, an increase of ↑ 91,000 viewers and up by ↑ 0.12 in the demo.\n[3|text] Compared to the same week in 2025, AEW Dynamite drew 636,000 viewers and a 0.16 demo rating on May 28, 2025, versus 704,000 viewers and a 0.12 demo rating on May 27, 2026. That represents a year-over-year change of ↑ +10.7% in viewership and ↓ -25.0% in the demo.\n[4|heading] AEW Dynamite Week-to-Week Viewership Comparison\n[5|heading] AEW Dynamite Year-to-Date Performance (2026)\n[6|heading] AEW Dynamite Month-to-Date Performance (May 2026)\n[7|heading] AEW Dynamite 4-Week Rolling Average\n[8|heading] Last 12 Months Performance Summary\n[9|heading] Viewership Range (Last 12 Months)\n[10|text] 4-Week Average: 602,875 viewers\n[11|heading] Largest Weekly Viewership Changes (Last 12 Months)\n[12|heading] AEW Dynamite Year-over-Year Comparison (2025 vs 2026)\n[13|text] Highest Viewership of 2026: 765,000 ( March 25, 2026 ) Lowest Viewership of 2026: 498,000 ( January 21, 2026 )\n[14|text] These figures reflect only linear TV viewership on TBS and do not include streaming or digital viewership. Ringside News will continue to monitor AEW Dynamite as the company builds toward its next major live event.\n[15|text] Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.\n"
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "hard:released",
+        "score": 84
+      },
+      "publisher": {
+        "categories": [
+          5
+        ],
+        "error": null,
+        "featured_media": 5785,
+        "present": true,
+        "status": "published",
+        "wp_link": "https://news.openwrestlingtv.com/aew/aew-dynamite-i-dati-di-ascolto-dellepisodio-del-27-maggio-2026/",
+        "wp_post_id": 5786
+      },
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026",
+      "title_it": "AEW Dynamite: i dati di ascolto dell'episodio del 27 maggio 2026"
+    },
+    {
+      "alfred": {
+        "decision": "approved",
+        "editorial_changes": [],
+        "issues": [],
+        "present": true,
+        "quality_score": 95,
+        "warnings": [
+          {
+            "code": "image_placeholder_present",
+            "evidence": "<!--IMAGE:...-->",
+            "message": "Presente placeholder immagine da gestire nel Publisher.",
+            "severity": "warning"
+          }
+        ]
+      },
+      "bob": {
+        "clean_element_count": 10,
+        "diagnostic_stage": "ready_for_alfred",
+        "element_counts": {
+          "embed": 0,
+          "heading": 0,
+          "image": 1,
+          "quote": 3,
+          "text": 6
+        },
+        "error": null,
+        "present": true,
+        "raw_element_count": 11,
+        "removed_before_gemini": 14,
+        "status": "ready_for_alfred",
+        "translation_model": "gemini-3.1-flash-lite",
+        "translation_used": true
+      },
+      "category_hint": "WWE",
+      "html_audit": {
+        "alfred_final_html_preview": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/jonathan-coachman-blasts-wwe-creative-for-booking-liv-morgan-in-queen-of-the-ring-tournament-06.jpg.avif?x49856--></p><p>Jonathan Coachman ha messo in dubbio la logica della WWE dopo l'inserimento di Liv Morgan nel torneo Queen of the Ring 2026, nonostante la wrestler detenga attualmente il Women's World Championship.</p><p>Coachman ha espresso il suo parere su Twitter, sollevando una perplessità piuttosto lineare: la vincitrice del torneo Queen of the Ring ottiene di diritto un title shot a SummerSlam, ma essendo la Morgan già la campionessa mondiale, la situazione risulta contraddittoria. Coachman ha sottolineato come questo sia proprio il tipo di dettaglio a cui i fan di wrestling prestano immediatamente attenzione.</p><p>“QUESTO 👇🏾👇🏾👇🏾 è esattamente ciò di cui parlano i fan di wrestling quando si tratta di attenzione ai dettagli. A meno che io non mi stia perdendo qualcosa o non abbia capito male. La vincitrice del torneo King and Queen of the Ring ottiene una title shot mondiale a SummerSlam. Quindi, Liv Morgan è in un match di qualificazione ed è la campionessa femminile. Fatemi capire il senso”, ha dichiarato Coachman.</p><p>Coachman ha poi suggerito che l'unico modo per la WWE di giustificare tale scelta sarebbe attraverso un segmento in cui la Morgan chiarisca di essere entrata nel torneo per impedire a chiunque altra di ottenere un'opportunità titolata.</p><p>“L'UNICO modo per provare a coprire il vostro errore è fare un pre-tape con Liv e chiederle perché sia nel torneo, e lei che risponde: 'Ho intenzione di bloccare la title shot prima ancora che accada. Per la prima volta, la campionessa femminile vince il Queen of the Ring e io mi rilasserò nella mia suite VIP a SummerSlam'. Altrimenti, sappiamo già che non vincerà, il che non è il modo giusto di fare booking. 🤷🏾‍♂️”</p><p>In precedenza, durante il post-show di WWE Clash in Italy, la Morgan aveva spiegato le ragioni della sua partecipazione nonostante il titolo già in suo possesso. Ha affermato che tutte le atlete presenti nel tabellone erano già state sconfitte da lei e ha aggiunto che le critiche ricevute sul suo regno titolato l'hanno spinta a puntare anche al Queen of the Ring. Inoltre, la Morgan ha chiarito di voler conquistare tutto ciò che riguarda la divisione femminile della WWE.</p><p>“Tutte queste donne hanno avuto una serata incredibile, ma sapete cosa hanno tutte in comune? Sono state tutte battute da Liv Morgan. Quindi mi sono detta: ok, espandiamo il concetto. Mi ha fatto riflettere su tutte le persone che dicono che la Morgan non è una buona campionessa, che Liv Morgan non difende il titolo, che Liv Morgan non è degna di essere campionessa. Quindi sapete cosa mi ha fatto pensare? Mi ha fatto pensare che parteciperò al torneo Queen of the Ring perché voglio tutto. Voglio tutto quanto”, ha dichiarato la campionessa.</p><p>Il tabellone del Queen of the Ring 2026 prevede che la Morgan affronti Becky Lynch e altre avversarie nel primo round, con le finali in programma per WWE Night of Champions il 27 giugno a Riyadh, in Arabia Saudita. Poiché la vincitrice dovrebbe ottenere una title shot a SummerSlam, l'inserimento della Morgan crea, secondo Coachman, un problema di booking.</p><p>Sebbene Liv Morgan possa avere le sue ragioni per partecipare al torneo, le critiche di Coachman sollevano un interrogativo più ampio su come la WWE intenda gestire la posta in gioco se a competere è la campionessa in carica. I fan restano in attesa di vedere se la compagnia affronterà direttamente la questione o se lascerà semplicemente che il torneo faccia il suo corso.</p>",
+        "bob_body_html_preview": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/jonathan-coachman-blasts-wwe-creative-for-booking-liv-morgan-in-queen-of-the-ring-tournament-06.jpg.avif?x49856--></p><p>Jonathan Coachman ha messo in dubbio la logica della WWE dopo l'inserimento di Liv Morgan nel torneo Queen of the Ring 2026, nonostante la wrestler detenga attualmente il Women's World Championship.</p><p>Coachman ha espresso il suo parere su Twitter, sollevando una perplessità piuttosto lineare: la vincitrice del torneo Queen of the Ring ottiene di diritto un title shot a SummerSlam, ma essendo la Morgan già la campionessa mondiale, la situazione risulta contraddittoria. Coachman ha sottolineato come questo sia proprio il tipo di dettaglio a cui i fan di wrestling prestano immediatamente attenzione.</p><p>“QUESTO 👇🏾👇🏾👇🏾 è esattamente ciò di cui parlano i fan di wrestling quando si tratta di attenzione ai dettagli. A meno che io non mi stia perdendo qualcosa o non abbia capito male. La vincitrice del torneo King and Queen of the Ring ottiene una title shot mondiale a SummerSlam. Quindi, Liv Morgan è in un match di qualificazione ed è la campionessa femminile. Fatemi capire il senso”, ha dichiarato Coachman.</p><p>Coachman ha poi suggerito che l'unico modo per la WWE di giustificare tale scelta sarebbe attraverso un segmento in cui la Morgan chiarisca di essere entrata nel torneo per impedire a chiunque altra di ottenere un'opportunità titolata.</p><p>“L'UNICO modo per provare a coprire il vostro errore è fare un pre-tape con Liv e chiederle perché sia nel torneo, e lei che risponde: 'Ho intenzione di bloccare la title shot prima ancora che accada. Per la prima volta, la campionessa femminile vince il Queen of the Ring e io mi rilasserò nella mia suite VIP a SummerSlam'. Altrimenti, sappiamo già che non vincerà, il che non è il modo giusto di fare booking. 🤷🏾‍♂️”</p><p>In precedenza, durante il post-show di WWE Clash in Italy, la Morgan aveva spiegato le ragioni della sua partecipazione nonostante il titolo già in suo possesso. Ha affermato che tutte le atlete presenti nel tabellone erano già state sconfitte da lei e ha aggiunto che le critiche ricevute sul suo regno titolato l'hanno spinta a puntare anche al Queen of the Ring. Inoltre, la Morgan ha chiarito di voler conquistare tutto ciò che riguarda la divisione femminile della WWE.</p><p>“Tutte queste donne hanno avuto una serata incredibile, ma sapete cosa hanno tutte in comune? Sono state tutte battute da Liv Morgan. Quindi mi sono detta: ok, espandiamo il concetto. Mi ha fatto riflettere su tutte le persone che dicono che la Morgan non è una buona campionessa, che Liv Morgan non difende il titolo, che Liv Morgan non è degna di essere campionessa. Quindi sapete cosa mi ha fatto pensare? Mi ha fatto pensare che parteciperò al torneo Queen of the Ring perché voglio tutto. Voglio tutto quanto”, ha dichiarato la campionessa.</p><p>Il tabellone del Queen of the Ring 2026 prevede che la Morgan affronti Becky Lynch e altre avversarie nel primo round, con le finali in programma per WWE Night of Champions il 27 giugno a Riyadh, in Arabia Saudita. Poiché la vincitrice dovrebbe ottenere una title shot a SummerSlam, l'inserimento della Morgan crea, secondo Coachman, un problema di booking.</p><p>Sebbene Liv Morgan possa avere le sue ragioni per partecipare al torneo, le critiche di Coachman sollevano un interrogativo più ampio su come la WWE intenda gestire la posta in gioco se a competere è la campionessa in carica. I fan restano in attesa di vedere se la compagnia affronterà direttamente la questione o se lascerà semplicemente che il torneo faccia il suo corso.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_wwe-jonathan-coachman-critica-il-booking-di-liv-morgan-nel-queen-of-the-ring.html",
+        "published_html_preview": "<p>Jonathan Coachman ha messo in dubbio la logica della WWE dopo l'inserimento di Liv Morgan nel torneo Queen of the Ring 2026, nonostante la wrestler detenga attualmente il Women's World Championship.</p><p>Coachman ha espresso il suo parere su Twitter, sollevando una perplessità piuttosto lineare: la vincitrice del torneo Queen of the Ring ottiene di diritto un title shot a SummerSlam, ma essendo la Morgan già la campionessa mondiale, la situazione risulta contraddittoria. Coachman ha sottolineato come questo sia proprio il tipo di dettaglio a cui i fan di wrestling prestano immediatamente attenzione.</p><p>“QUESTO 👇🏾👇🏾👇🏾 è esattamente ciò di cui parlano i fan di wrestling quando si tratta di attenzione ai dettagli. A meno che io non mi stia perdendo qualcosa o non abbia capito male. La vincitrice del torneo King and Queen of the Ring ottiene una title shot mondiale a SummerSlam. Quindi, Liv Morgan è in un match di qualificazione ed è la campionessa femminile. Fatemi capire il senso”, ha dichiarato Coachman.</p><p>Coachman ha poi suggerito che l'unico modo per la WWE di giustificare tale scelta sarebbe attraverso un segmento in cui la Morgan chiarisca di essere entrata nel torneo per impedire a chiunque altra di ottenere un'opportunità titolata.</p><p>“L'UNICO modo per provare a coprire il vostro errore è fare un pre-tape con Liv e chiederle perché sia nel torneo, e lei che risponde: 'Ho intenzione di bloccare la title shot prima ancora che accada. Per la prima volta, la campionessa femminile vince il Queen of the Ring e io mi rilasserò nella mia suite VIP a SummerSlam'. Altrimenti, sappiamo già che non vincerà, il che non è il modo giusto di fare booking. 🤷🏾‍♂️”</p><p>In precedenza, durante il post-show di WWE Clash in Italy, la Morgan aveva spiegato le ragioni della sua partecipazione nonostante il titolo già in suo possesso. Ha affermato che tutte le atlete presenti nel tabellone erano già state sconfitte da lei e ha aggiunto che le critiche ricevute sul suo regno titolato l'hanno spinta a puntare anche al Queen of the Ring. Inoltre, la Morgan ha chiarito di voler conquistare tutto ciò che riguarda la divisione femminile della WWE.</p><p>“Tutte queste donne hanno avuto una serata incredibile, ma sapete cosa hanno tutte in comune? Sono state tutte battute da Liv Morgan. Quindi mi sono detta: ok, espandiamo il concetto. Mi ha fatto riflettere su tutte le persone che dicono che la Morgan non è una buona campionessa, che Liv Morgan non difende il titolo, che Liv Morgan non è degna di essere campionessa. Quindi sapete cosa mi ha fatto pensare? Mi ha fatto pensare che parteciperò al torneo Queen of the Ring perché voglio tutto. Voglio tutto quanto”, ha dichiarato la campionessa.</p><p>Il tabellone del Queen of the Ring 2026 prevede che la Morgan affronti Becky Lynch e altre avversarie nel primo round, con le finali in programma per WWE Night of Champions il 27 giugno a Riyadh, in Arabia Saudita. Poiché la vincitrice dovrebbe ottenere una title shot a SummerSlam, l'inserimento della Morgan crea, secondo Coachman, un problema di booking.</p><p>Sebbene Liv Morgan possa avere le sue ragioni per partecipare al torneo, le critiche di Coachman sollevano un interrogativo più ampio su come la WWE intenda gestire la posta in gioco se a competere è la campionessa in carica. I fan restano in attesa di vedere se la compagnia affronterà direttamente la questione o se lascerà semplicemente che il torneo faccia il suo corso.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/jonathan-coachman-blasts-wwe-creative-booking-liv-morgan-queen-ring-tournament/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_wwe-jonathan-coachman-critica-il-booking-di-liv-morgan-nel-queen-of-the-ring.html",
+        "publisher_review_html_preview": "<p>Jonathan Coachman ha messo in dubbio la logica della WWE dopo l'inserimento di Liv Morgan nel torneo Queen of the Ring 2026, nonostante la wrestler detenga attualmente il Women's World Championship.</p><p>Coachman ha espresso il suo parere su Twitter, sollevando una perplessità piuttosto lineare: la vincitrice del torneo Queen of the Ring ottiene di diritto un title shot a SummerSlam, ma essendo la Morgan già la campionessa mondiale, la situazione risulta contraddittoria. Coachman ha sottolineato come questo sia proprio il tipo di dettaglio a cui i fan di wrestling prestano immediatamente attenzione.</p><p>“QUESTO 👇🏾👇🏾👇🏾 è esattamente ciò di cui parlano i fan di wrestling quando si tratta di attenzione ai dettagli. A meno che io non mi stia perdendo qualcosa o non abbia capito male. La vincitrice del torneo King and Queen of the Ring ottiene una title shot mondiale a SummerSlam. Quindi, Liv Morgan è in un match di qualificazione ed è la campionessa femminile. Fatemi capire il senso”, ha dichiarato Coachman.</p><p>Coachman ha poi suggerito che l'unico modo per la WWE di giustificare tale scelta sarebbe attraverso un segmento in cui la Morgan chiarisca di essere entrata nel torneo per impedire a chiunque altra di ottenere un'opportunità titolata.</p><p>“L'UNICO modo per provare a coprire il vostro errore è fare un pre-tape con Liv e chiederle perché sia nel torneo, e lei che risponde: 'Ho intenzione di bloccare la title shot prima ancora che accada. Per la prima volta, la campionessa femminile vince il Queen of the Ring e io mi rilasserò nella mia suite VIP a SummerSlam'. Altrimenti, sappiamo già che non vincerà, il che non è il modo giusto di fare booking. 🤷🏾‍♂️”</p><p>In precedenza, durante il post-show di WWE Clash in Italy, la Morgan aveva spiegato le ragioni della sua partecipazione nonostante il titolo già in suo possesso. Ha affermato che tutte le atlete presenti nel tabellone erano già state sconfitte da lei e ha aggiunto che le critiche ricevute sul suo regno titolato l'hanno spinta a puntare anche al Queen of the Ring. Inoltre, la Morgan ha chiarito di voler conquistare tutto ciò che riguarda la divisione femminile della WWE.</p><p>“Tutte queste donne hanno avuto una serata incredibile, ma sapete cosa hanno tutte in comune? Sono state tutte battute da Liv Morgan. Quindi mi sono detta: ok, espandiamo il concetto. Mi ha fatto riflettere su tutte le persone che dicono che la Morgan non è una buona campionessa, che Liv Morgan non difende il titolo, che Liv Morgan non è degna di essere campionessa. Quindi sapete cosa mi ha fatto pensare? Mi ha fatto pensare che parteciperò al torneo Queen of the Ring perché voglio tutto. Voglio tutto quanto”, ha dichiarato la campionessa.</p><p>Il tabellone del Queen of the Ring 2026 prevede che la Morgan affronti Becky Lynch e altre avversarie nel primo round, con le finali in programma per WWE Night of Champions il 27 giugno a Riyadh, in Arabia Saudita. Poiché la vincitrice dovrebbe ottenere una title shot a SummerSlam, l'inserimento della Morgan crea, secondo Coachman, un problema di booking.</p><p>Sebbene Liv Morgan possa avere le sue ragioni per partecipare al torneo, le critiche di Coachman sollevano un interrogativo più ampio su come la WWE intenda gestire la posta in gioco se a competere è la campionessa in carica. I fan restano in attesa di vedere se la compagnia affronterà direttamente la questione o se lascerà semplicemente che il torneo faccia il suo corso.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/jonathan-coachman-blasts-wwe-creative-booking-liv-morgan-queen-ring-tournament/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/jonathan-coachman-blasts-wwe-creative-booking-liv-morgan-queen-ring-tournament/\nTitolo feed: Jonathan Coachman Blasts WWE Creative for Booking Liv Morgan in Queen of the Ring Tournament\nTitolo pagina: Jonathan Coachman Blasts WWE Creative for Booking Liv Morgan in Queen of the Ring Tournament\nDescrizione: Jonathan Coachman is questioning WWE’s logic after Liv Morgan was placed in the 2026 Queen of the Ring tournament while already holding the Women’s World\nCategoria suggerita: WWE\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/jonathan-coachman-blasts-wwe-creative-for-booking-liv-morgan-in-queen-of-the-ring-tournament-06.jpg.avif?x49856 ALT=Jonathan Coachman Blasts WWE Creative for Booking Liv Morgan in Queen of the Ring Tournament\n[2|text] Jonathan Coachman is questioning WWE’s logic after Liv Morgan was placed in the 2026 Queen of the Ring tournament while already holding the Women’s World Championship.\n[3|text] Coachman took to Twitter and reacted to Morgan being part of the bracket. His issue was simple: the Queen of the Ring winner is set to earn a world title shot at SummerSlam, but Morgan is already the Women’s World Champion. Coachman said this is the kind of detail wrestling fans notice right away.\n[4|quote] “THIS 👇🏾👇🏾👇🏾 is exactly what wrestling fans are talking about when it comes to attention to detail. Unless I am completing missing something or didn’t hear correctly. The winner of the king and Queen of the Ring tournament wins a world title shot at Summerslam. So Liv Morgan is in a qualifying match and she is the women’s champion. Make it make sense.”\n[5|text] Coachman then suggested the only way WWE could explain the situation would be through a segment where Morgan says she entered the tournament to block anyone else from getting a title shot.\n[6|quote] “The ONLY way you can even try to cover your mistake is doing a pretape with Liv and ask her why she is in it and she says ‘I am going to shut down the title shot before it even happens. For the first time the womens champion wins Queen of the ring and I will kick back and chill in my vip suite at Summerslam’. Otherwise we know she isn’t winning which is not how your book. 🤷🏾‍♂️”\n[7|text] Morgan previously explained during the WWE Clash in Italy post-show why she entered the tournament despite already being champion. She said every woman in the field had already been beaten by her and claimed criticism of her title reign pushed her to chase Queen of the Ring as well. Morgan also made it clear that she wants everything in WWE’s women’s division .\n[8|quote] “All these women had an incredible night—but you know what they all have in common? They’ve all been beaten by Liv Morgan. So I was like, okay, let me expand upon this. It had me thinking about all the people who say Morgan isn’t a good champion—Liv Morgan doesn’t defend her title, Liv Morgan isn’t worthy of being champion. So you know what that made me think? That made me think I am entering the Queen of the Ring tournament because I want it all. I want it all.”\n[9|text] The 2026 Queen of the Ring bracket has Morgan facing Becky Lynch and others in the opening round, with the finals scheduled for WWE Night of Champions on June 27 in Riyadh, Saudi Arabia. The winner is expected to earn a SummerSlam title shot, which is exactly why Coachman believes Morgan’s inclusion creates a booking problem.\n[10|text] Liv Morgan may have her own reason for entering Queen of the Ring, but Coachman’s criticism points to a bigger question about how WWE plans to explain the stakes if the champion is in the field. Now, fans will be watching to see whether WWE addresses it directly or simply lets the tournament play out.\n"
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "hard:championship,strategic:creative,strategic:booking,strategic:queen of the ring,entity:liv morgan",
+        "score": 76
+      },
+      "publisher": {
+        "categories": [
+          4
+        ],
+        "error": null,
+        "featured_media": 5787,
+        "present": true,
+        "status": "published",
+        "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-jonathan-coachman-critica-il-booking-di-liv-morgan-nel-queen-of-the-ring/",
+        "wp_post_id": 5788
+      },
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/jonathan-coachman-blasts-wwe-creative-booking-liv-morgan-queen-ring-tournament",
+      "title_it": "WWE, Jonathan Coachman critica il booking di Liv Morgan nel Queen of the Ring"
+    },
+    {
+      "alfred": {
+        "decision": "approved",
+        "editorial_changes": [],
+        "issues": [],
+        "present": true,
+        "quality_score": 95,
+        "warnings": [
+          {
+            "code": "image_placeholder_present",
+            "evidence": "<!--IMAGE:...-->",
+            "message": "Presente placeholder immagine da gestire nel Publisher.",
+            "severity": "warning"
+          }
+        ]
+      },
+      "bob": {
+        "clean_element_count": 7,
+        "diagnostic_stage": "ready_for_alfred",
+        "element_counts": {
+          "embed": 0,
+          "heading": 0,
+          "image": 1,
+          "quote": 0,
+          "text": 6
+        },
+        "error": null,
+        "present": true,
+        "raw_element_count": 8,
+        "removed_before_gemini": 14,
+        "status": "ready_for_alfred",
+        "translation_model": "gemini-3.1-flash-lite",
+        "translation_used": true
+      },
+      "category_hint": "TNA",
+      "html_audit": {
+        "alfred_final_html_preview": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x49856--></p><p>Il futuro di Mike Santana in TNA è diventato un po' più nitido, ma la sua prossima mossa resta ancora tutta da definire, dato che il suo contratto è in scadenza a breve.</p><p>Secondo quanto riportato da PWInsider il primo giugno 2026, l'attuale TNA World Champion è legato alla compagnia da un accordo che terminerà nel corso del mese di luglio. Il report ha inoltre sottolineato che la WWE ha mostrato interesse per Santana in passato.</p><p>Queste informazioni forniscono una cronologia più chiara sulla situazione contrattuale di Santana, dopo le precedenti indiscrezioni che davano l'accordo in scadenza entro l'estate. Con il mese di luglio ormai indicato, la prossima mossa di Santana potrebbe trasformarsi molto presto in una delle notizie principali del mondo del wrestling.</p><p>Santana è stato uno dei nomi di punta della TNA sin dal suo ritorno nel 2024, e il suo attuale regno come TNA World Champion rende le tempistiche ancora più interessanti. Se dovesse arrivare alla scadenza del contratto senza averne firmato uno nuovo, potrebbe avere diverse opzioni in tutto il panorama del wrestling.</p><p>Anche l'interesse della WWE assume un ruolo importante, specialmente considerando che Santana si sta già imponendo come una star da main event in TNA. Un passaggio in WWE rappresenterebbe un cambiamento significativo, ma restare in TNA gli permetterebbe di continuare a guidare la federazione in un momento in cui le sue quotazioni sono molto alte.</p><p>Per il momento, Santana rimane il campione mondiale della TNA, ma il mese di luglio non è lontano. Indipendentemente dal fatto che decida di restare o di esplorare una nuova opportunità, la sua situazione contrattuale è ora una delle storie più rilevanti da seguire per questa estate.</p>",
+        "bob_body_html_preview": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x49856--></p><p>Il futuro di Mike Santana in TNA è diventato un po' più nitido, ma la sua prossima mossa resta ancora tutta da definire, dato che il suo contratto è in scadenza a breve.</p><p>Secondo quanto riportato da PWInsider il primo giugno 2026, l'attuale TNA World Champion è legato alla compagnia da un accordo che terminerà nel corso del mese di luglio. Il report ha inoltre sottolineato che la WWE ha mostrato interesse per Santana in passato.</p><p>Queste informazioni forniscono una cronologia più chiara sulla situazione contrattuale di Santana, dopo le precedenti indiscrezioni che davano l'accordo in scadenza entro l'estate. Con il mese di luglio ormai indicato, la prossima mossa di Santana potrebbe trasformarsi molto presto in una delle notizie principali del mondo del wrestling.</p><p>Santana è stato uno dei nomi di punta della TNA sin dal suo ritorno nel 2024, e il suo attuale regno come TNA World Champion rende le tempistiche ancora più interessanti. Se dovesse arrivare alla scadenza del contratto senza averne firmato uno nuovo, potrebbe avere diverse opzioni in tutto il panorama del wrestling.</p><p>Anche l'interesse della WWE assume un ruolo importante, specialmente considerando che Santana si sta già imponendo come una star da main event in TNA. Un passaggio in WWE rappresenterebbe un cambiamento significativo, ma restare in TNA gli permetterebbe di continuare a guidare la federazione in un momento in cui le sue quotazioni sono molto alte.</p><p>Per il momento, Santana rimane il campione mondiale della TNA, ma il mese di luglio non è lontano. Indipendentemente dal fatto che decida di restare o di esplorare una nuova opportunità, la sua situazione contrattuale è ora una delle storie più rilevanti da seguire per questa estate.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_aggiornamenti-sul-contratto-di-mike-santana-in-tna-tra-l-interesse-della-wwe.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_aggiornamenti-sul-contratto-di-mike-santana-in-tna-tra-l-interesse-della-wwe.html",
+        "publisher_review_html_preview": "",
+        "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest/\nTitolo feed: Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest\nTitolo pagina: Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest\nDescrizione: Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon. According to\nCategoria suggerita: TNA\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest-41.jpg.avif?x49856 ALT=Mike Santana’s TNA Contract Status Gets Major Update Amid WWE Interest\n[2|text] Mike Santana’s TNA future just got a little clearer, but his next move is still wide open as his contract will be expiring very soon.\n[3|text] According to PWInsider on June 1, 2026, the reigning TNA World Champion’s current contract with the company runs through sometime in July. The report also noted that WWE has shown interest in Santana in the past.\n[4|text] This gives a clearer timeline for Santana’s contract situation after earlier word that his TNA deal was set to expire this summer . With July now mentioned, Santana’s next move could become a major story very soon.\n[5|text] Santana has been one of TNA’s top names since returning in 2024 , and his current run as TNA World Champion makes the timing even more interesting. If he reaches the end of his deal without signing a new one, he could have options across the wrestling world.\n[6|text] The WWE interest is also important, especially with Santana already carrying himself like a main-event star in TNA. A move to WWE would be a major change, but staying with TNA could also allow him to continue leading the promotion at a time when his stock is high.\n[7|text] For now, Santana remains TNA World Champion, but July is not far away. Whether he stays put or explores a new opportunity, his contract status is now one of the bigger stories to watch this summer.\n"
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "hard:contract,strategic:future",
+        "score": 78
+      },
+      "publisher": {
+        "categories": null,
+        "error": null,
+        "featured_media": null,
+        "present": true,
+        "status": "already_published",
+        "wp_link": null,
+        "wp_post_id": 5784
+      },
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest",
+      "title_it": "Aggiornamenti sul contratto di Mike Santana in TNA tra l'interesse della WWE"
+    },
+    {
+      "alfred": {
+        "decision": null,
+        "editorial_changes": [],
+        "issues": [],
+        "present": false,
+        "quality_score": null,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": null,
+        "diagnostic_stage": null,
+        "element_counts": null,
+        "error": null,
+        "present": false,
+        "raw_element_count": null,
+        "removed_before_gemini": null,
+        "status": null,
+        "translation_model": null,
+        "translation_used": null
+      },
+      "category_hint": "WWE",
+      "html_audit": {
+        "alfred_final_html_preview": "",
+        "bob_body_html_preview": "",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_eric-bischoff-recalls-paul-heyman-s-love-for-released-wwe-star.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_eric-bischoff-recalls-paul-heyman-s-love-for-released-wwe-star.html",
+        "publisher_review_html_preview": "",
+        "translation_prompt_preview": ""
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "hard:released,soft_penalty:recalls",
+        "score": 74
+      },
+      "publisher": {
+        "categories": null,
+        "error": null,
+        "featured_media": null,
+        "present": false,
+        "status": null,
+        "wp_link": null,
+        "wp_post_id": null
+      },
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2171275/eric-bischoff-recalls-paul-heyman-love-released-wwe-star",
+      "title_it": "Eric Bischoff Recalls Paul Heyman's Love For Released WWE Star"
+    },
+    {
+      "alfred": {
+        "decision": null,
+        "editorial_changes": [],
+        "issues": [],
+        "present": false,
+        "quality_score": null,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": null,
+        "diagnostic_stage": null,
+        "element_counts": null,
+        "error": null,
+        "present": false,
+        "raw_element_count": null,
+        "removed_before_gemini": null,
+        "status": null,
+        "translation_model": null,
+        "translation_used": null
+      },
+      "category_hint": "WWE",
+      "html_audit": {
+        "alfred_final_html_preview": "",
+        "bob_body_html_preview": "",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_jbl-recalls-past-conversation-about-restructuring-wwe-contract.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_jbl-recalls-past-conversation-about-restructuring-wwe-contract.html",
+        "publisher_review_html_preview": "",
+        "translation_prompt_preview": ""
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "hard:surgery,hard:contract,soft_penalty:recalls",
+        "score": 72
+      },
+      "publisher": {
+        "categories": null,
+        "error": null,
+        "featured_media": null,
+        "present": false,
+        "status": null,
+        "wp_link": null,
+        "wp_post_id": null
+      },
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2171387/wwe-jbl-john-bradshaw-layfield-john-laurinaitis-conversation-restructuring-contract",
+      "title_it": "JBL Recalls Past Conversation About Restructuring WWE Contract"
+    },
+    {
+      "alfred": {
+        "decision": null,
+        "editorial_changes": [],
+        "issues": [],
+        "present": false,
+        "quality_score": null,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": null,
+        "diagnostic_stage": null,
+        "element_counts": null,
+        "error": null,
+        "present": false,
+        "raw_element_count": null,
+        "removed_before_gemini": null,
+        "status": null,
+        "translation_model": null,
+        "translation_used": null
+      },
+      "category_hint": "WWE",
+      "html_audit": {
+        "alfred_final_html_preview": "",
+        "bob_body_html_preview": "",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_kevin-nash-identifies-point-of-no-return-regarding-his-involvement-with-wwe.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_kevin-nash-identifies-point-of-no-return-regarding-his-involvement-with-wwe.html",
+        "publisher_review_html_preview": "",
+        "translation_prompt_preview": ""
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "hard:return,hard:tko,entity:kevin nash,soft_penalty:identifies",
+        "score": 73
+      },
+      "publisher": {
+        "categories": null,
+        "error": null,
+        "featured_media": null,
+        "present": false,
+        "status": null,
+        "wp_link": null,
+        "wp_post_id": null
+      },
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2171388/wwe-kevin-nash-paul-levesque-triple-h-point-no-return-involvement",
+      "title_it": "Kevin Nash Identifies Point Of No Return Regarding His Involvement With WWE"
+    }
+  ],
+  "generated_at": "2026-06-01T19:03:27.146714+00:00",
+  "how_to_read": {
+    "alfred_final_html_preview": "HTML dopo revisione/normalizzazioni di Alfred",
+    "bob_body_html_preview": "HTML prodotto da Bob prima di Alfred",
+    "published_html_preview": "HTML salvato dopo pubblicazione",
+    "publisher_review_html_preview": "HTML finale preparato per WordPress con fonte in coda",
+    "translation_prompt_preview": "testo pulito dato a Gemini da Bob"
+  },
+  "ledger_48h": [
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 3,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 2
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 3,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_worked": 1,
+          "hard_skipped": 1,
+          "to_menzo": 30,
+          "to_simone": 3
+        },
+        "menzo": {
+          "pending": 10,
+          "skipped": 14,
+          "to_bob_or_v92": 6
+        },
+        "publisher": {
+          "already_published": 1,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 2,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 6,
+          "waiting": 0
+        }
+      },
+      "already_published": 1,
+      "article_count": 6,
+      "errors": 0,
+      "generated_at": "2026-06-01T19:03:27.143825+00:00",
+      "overall_status": "ok",
+      "published": 2,
+      "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 3,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 2
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 3,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_worked": 1,
+          "hard_skipped": 1,
+          "to_menzo": 30,
+          "to_simone": 3
+        },
+        "menzo": {
+          "pending": 10,
+          "skipped": 14,
+          "to_bob_or_v92": 6
+        },
+        "publisher": {
+          "already_published": 1,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 2,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 6,
+          "waiting": 0
+        }
+      },
+      "already_published": 1,
+      "article_count": 6,
+      "errors": 0,
+      "generated_at": "2026-06-01T19:03:27.146714+00:00",
+      "overall_status": "ok",
+      "published": 2,
+      "warnings": 0
+    }
+  ],
+  "overall_status": "ok",
+  "run_summary_input": {
+    "agents": {
+      "alfred": "real_quality_editor",
+      "archivista": "real_audit_agent",
+      "bob": "real_article_writer",
+      "jarvis": "real_orchestrator",
+      "massy": "real_sentinel_control",
+      "menzo": "real_editorial_director",
+      "publisher": "real_wordpress_publisher",
+      "simone": "real_report_director"
+    },
+    "alfred_handoff": {
+      "approved": 3,
+      "blockers": 0,
+      "editorial_changes": 0,
+      "needs_revision": 0,
+      "warnings": 2
+    },
+    "bob_handoff": {
+      "errors": 0,
+      "extraction_empty": 0,
+      "ready_for_alfred": 3,
+      "translation_pending": 0
+    },
+    "ended_at": "2026-06-01T19:03:27.137647+00:00",
+    "engine": "bot_v92.py",
+    "massy_handoff": {
+      "already_worked": 1,
+      "hard_skipped": 1,
+      "to_menzo": 30,
+      "to_simone": 3
+    },
+    "menzo_handoff": {
+      "pending": 10,
+      "skipped": 14,
+      "to_bob_or_v92": 6
+    },
+    "newsroom_engine_override": false,
+    "publisher_handoff": {
+      "already_published": 1,
+      "dry_run": 0,
+      "errors": 0,
+      "published": 2,
+      "wp_not_ready": 0
+    },
+    "runtime_delegations": 0,
+    "runtime_exit_code": 0,
+    "simone_handoff": {
+      "ready": 0,
+      "skipped": 6,
+      "waiting": 0
+    },
+    "started_at": "2026-06-01T19:03:08.041950+00:00",
+    "version": "v93_7_archivista_audit"
+  },
+  "summary": {
+    "anomalies": 0,
+    "article_dossiers": 6,
+    "errors_48h": 0,
+    "published_48h": 4,
+    "published_current_run": 2,
+    "runs_48h": 2
+  },
+  "timeline": [
+    {
+      "agent": "Jarvis",
+      "note": "engine=bot_v92.py",
+      "phase": "bootstrap_status_written",
+      "timestamp": "2026-06-01T19:03:08.042215+00:00"
+    },
+    {
+      "agent": "Massy",
+      "note": "to_simone=3 to_menzo=30 hard_skip=1 already=1",
+      "phase": "sentinel_board_ready",
+      "timestamp": "2026-06-01T19:03:10.868708+00:00"
+    },
+    {
+      "agent": "Simone",
+      "note": "ready=0 waiting=0 skipped=6",
+      "phase": "report_decision_ready",
+      "timestamp": "2026-06-01T19:03:10.871990+00:00"
+    },
+    {
+      "agent": "Menzo",
+      "note": "selected=6 pending=10 skipped=14",
+      "phase": "editorial_decision_ready",
+      "timestamp": "2026-06-01T19:03:10.880933+00:00"
+    },
+    {
+      "agent": "Bob",
+      "note": "ready=3 pending=0 empty=0 errors=0",
+      "phase": "article_packages_ready",
+      "timestamp": "2026-06-01T19:03:22.349515+00:00"
+    },
+    {
+      "agent": "Alfred",
+      "note": "approved=3 needs_revision=0 blockers=0 warnings=2 changes=0",
+      "phase": "quality_review_ready",
+      "timestamp": "2026-06-01T19:03:22.357775+00:00"
+    },
+    {
+      "agent": "Publisher",
+      "note": "published=2 already=1 dry=0 wp_not_ready=0 errors=0",
+      "phase": "publication_ready",
+      "timestamp": "2026-06-01T19:03:27.137602+00:00"
+    },
+    {
+      "agent": "Jarvis",
+      "note": "v93 Publisher completed; v92 fallback skipped",
+      "phase": "runtime_skipped",
+      "timestamp": "2026-06-01T19:03:27.137633+00:00"
+    },
+    {
+      "agent": "Archivista",
+      "note": "status=ok anomalies=0",
+      "phase": "audit_ready",
+      "timestamp": "2026-06-01T19:03:27.146111+00:00"
+    }
+  ],
+  "version": "v93_7_archivista_audit"
+}

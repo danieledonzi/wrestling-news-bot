@@ -1,16 +1,16 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-01T18:50:54.107598+00:00",
+  "generated_at": "2026-06-01T19:03:27.137065+00:00",
   "handoff": {
     "already_published": 1,
     "dry_run": 0,
     "errors": 0,
-    "published": 1,
+    "published": 2,
     "wp_not_ready": 0
   },
   "input": {
     "alfred_version": "v93_5_1_conservative_quality_editor",
-    "approved_articles": 2
+    "approved_articles": 3
   },
   "mode": "wordpress_publisher",
   "policy": {
@@ -21,22 +21,32 @@
   },
   "results": [
     {
-      "source_url": "https://www.ringsidenews.com/nxt-stars-future-revealed-amid-wwe-main-roster-call-rumors/",
+      "categories": [
+        5
+      ],
+      "featured_media": 5785,
+      "source_url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/",
+      "status": "published",
+      "title_it": "AEW Dynamite: i dati di ascolto dell'episodio del 27 maggio 2026",
+      "wp_link": "https://news.openwrestlingtv.com/aew/aew-dynamite-i-dati-di-ascolto-dellepisodio-del-27-maggio-2026/",
+      "wp_post_id": 5786
+    },
+    {
+      "source_url": "https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest/",
       "status": "already_published",
-      "title_it": "Nikkita Lyons: il punto sul futuro della stella di NXT",
-      "wp_post_id": 5778
+      "title_it": "Aggiornamenti sul contratto di Mike Santana in TNA tra l'interesse della WWE",
+      "wp_post_id": 5784
     },
     {
       "categories": [
-        7,
-        8
+        4
       ],
-      "featured_media": 5783,
-      "source_url": "https://www.ringsidenews.com/mike-santanas-tna-contract-status-gets-major-update-amid-wwe-interest/",
+      "featured_media": 5787,
+      "source_url": "https://www.ringsidenews.com/jonathan-coachman-blasts-wwe-creative-booking-liv-morgan-queen-ring-tournament/",
       "status": "published",
-      "title_it": "Mike Santana: aggiornamenti sul contratto con TNA tra i rumors di interesse della WWE",
-      "wp_link": "https://news.openwrestlingtv.com/tna/mike-santana-aggiornamenti-sul-contratto-con-tna-tra-i-rumors-di-interesse-della-wwe/",
-      "wp_post_id": 5784
+      "title_it": "WWE, Jonathan Coachman critica il booking di Liv Morgan nel Queen of the Ring",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-jonathan-coachman-critica-il-booking-di-liv-morgan-nel-queen-of-the-ring/",
+      "wp_post_id": 5788
     }
   ],
   "version": "v93_6_publisher_wordpress",
