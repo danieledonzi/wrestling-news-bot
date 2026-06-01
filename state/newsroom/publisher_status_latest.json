@@ -1,16 +1,16 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-01T23:12:40.512950+00:00",
+  "generated_at": "2026-06-01T23:24:50.343604+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 2,
+    "published": 3,
     "wp_not_ready": 0
   },
   "input": {
     "alfred_version": "v93_8_alfred_structured_content_checks",
-    "approved_articles": 2
+    "approved_articles": 3
   },
   "mode": "wordpress_publisher_plain_oembed_urls",
   "policy": {
@@ -23,25 +23,36 @@
   "results": [
     {
       "categories": [
-        5
+        4
       ],
-      "featured_media": 5805,
-      "source_url": "https://www.ringsidenews.com/mick-foley-says-aew-reminds-him-wwes-attitude-era/",
+      "featured_media": 5811,
+      "source_url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/",
       "status": "published",
-      "title_it": "Mick Foley: \"La AEW mi ricorda la WWE dell'Attitude Era\"",
-      "wp_link": "https://news.openwrestlingtv.com/aew/mick-foley-la-aew-mi-ricorda-la-wwe-dellattitude-era/",
-      "wp_post_id": 5806
+      "title_it": "Oba Femi sfida Brock Lesnar dopo il passaggio del turno nel King of the Ring",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/oba-femi-sfida-brock-lesnar-dopo-il-passaggio-del-turno-nel-king-of-the-ring/",
+      "wp_post_id": 5812
     },
     {
       "categories": [
         4
       ],
-      "featured_media": 5807,
-      "source_url": "https://www.ringsidenews.com/seth-rollins-gives-turin-crowd-special-moment-wwe-raw-goes-off-air/",
+      "featured_media": 5813,
+      "source_url": "https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/",
       "status": "published",
-      "title_it": "Il momento speciale di Seth Rollins per il pubblico di Torino dopo WWE RAW",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/il-momento-speciale-di-seth-rollins-per-il-pubblico-di-torino-dopo-wwe-raw/",
-      "wp_post_id": 5808
+      "title_it": "Paul Heyman travolto da una Spear contro la barricata a WWE RAW",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/paul-heyman-travolto-da-una-spear-contro-la-barricata-a-wwe-raw/",
+      "wp_post_id": 5814
+    },
+    {
+      "categories": [
+        4
+      ],
+      "featured_media": 5815,
+      "source_url": "https://www.ringsidenews.com/wwe-confirms-king-queen-ring-tournament-matches-june-8-raw/",
+      "status": "published",
+      "title_it": "WWE: Annunciati i match dei tornei King e Queen of the Ring per Raw dell'8 giugno",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-annunciati-i-match-dei-tornei-king-e-queen-of-the-ring-per-raw-dell8-giugno/",
+      "wp_post_id": 5816
     }
   ],
   "version": "v93_10_publisher_plain_oembed_urls",

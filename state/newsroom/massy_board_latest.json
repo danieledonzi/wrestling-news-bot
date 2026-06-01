@@ -32,7 +32,7 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-01T23:12:18.136185+00:00",
+  "generated_at": "2026-06-01T23:24:25.583595+00:00",
   "handoff": {
     "already_published_hard_skipped": 8,
     "already_worked": 1,
@@ -78,6 +78,18 @@
     {
       "decision": "hard_skip",
       "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/seth-rollins-gives-turin-crowd-special-moment-wwe-raw-goes-off-air",
+      "published": "Mon, 01 Jun 2026 22:08:44 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Seth Rollins Gives Turin Crowd a Special Moment After WWE RAW Goes Off the Air\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/seth-rollins-gives-turin-crowd-a-special-moment-after-wwe-raw-goes-off-the-air-03.jpg?x51578\" width=\"800\" /></p>Seth Rollins ended WWE RAW with a big win over Bron Breakker, and the celebration didn’t stop when the cameras went off. After the June 1 episode of RAW ended, Rollins was seen standing tall in the ring while Breakker continued selling the effects of his main event loss. Rollins then climbed over the barricade ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/seth-rollins-gives-turin-crowd-special-moment-wwe-raw-goes-off-air/\" title=\"Seth Rollins Gives Turin Crowd a Special Moment After WWE RAW Goes Off the Air\">Read more</a>",
+      "title": "Seth Rollins Gives Turin Crowd a Special Moment After WWE RAW Goes Off the Air",
+      "url": "https://www.ringsidenews.com/seth-rollins-gives-turin-crowd-special-moment-wwe-raw-goes-off-air/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery",
       "published": "Mon, 01 Jun 2026 22:07:20 +0000",
       "published_guard": "publisher_history",
@@ -114,14 +126,14 @@
     {
       "decision": "hard_skip",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw",
-      "published": "Mon, 01 Jun 2026 20:34:51 +0000",
+      "normalized_url": "https://www.ringsidenews.com/mick-foley-says-aew-reminds-him-wwes-attitude-era",
+      "published": "Mon, 01 Jun 2026 20:39:52 +0000",
       "published_guard": "publisher_history",
       "reason": "url_already_published",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/paul-heyman-gets-speared-through-the-barricade-during-june-1-wwe-raw-49.jpg?x51578\" width=\"800\" /></p>Paul Heyman got way too close to the action on WWE RAW, and Bron Breakker made him pay for it by accident. During the June 1 episode of RAW, Seth Rollins faced Bron Breakker in the main event. Things got wild late in the match after Austin Theory came down and got involved. Theory hit ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/\" title=\"Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW\">Read more</a>",
-      "title": "Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW",
-      "url": "https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/"
+      "summary": "<p><img alt=\"Mick Foley Says AEW Reminds Him of WWE’s Attitude Era\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mick-foley-says-aew-reminds-him-of-wwes-attitude-era-12.jpg?x51578\" width=\"800\" /></p>Mick Foley is embracing his new chapter in AEW, and his latest comments make it clear that he sees something special in the company. Foley took to Instagram and uploaded a video reflecting on his first experiences with AEW. While many legends return to wrestling promotions for a quick nostalgia appearance, Foley said the reaction ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mick-foley-says-aew-reminds-him-wwes-attitude-era/\" title=\"Mick Foley Says AEW Reminds Him of WWE’s Attitude Era\">Read more</a>",
+      "title": "Mick Foley Says AEW Reminds Him of WWE’s Attitude Era",
+      "url": "https://www.ringsidenews.com/mick-foley-says-aew-reminds-him-wwes-attitude-era/"
     },
     {
       "decision": "hard_skip",
@@ -146,21 +158,9 @@
       "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/TNA-iMPACT-Massive-Increase.jpg?x51578\" width=\"800\" /></p>New ratings data has been released for the May 28, 2026 episode of TNA iMPACT on AMC, with the numbers ticking up slightly from the prior week. According to Programming Insider, TNA iMPACT on May 28, 2026 drew 195,000 viewers on AMC, with a 0.02 rating in the key P18–49 demographic. For comparison, the May ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/tna-impact-viewership-sees-slight-increase-may-28-2026/\" title=\"TNA iMPACT Viewership Sees Slight Increase on May 28, 2026\">Read more</a>",
       "title": "TNA iMPACT Viewership Sees Slight Increase on May 28, 2026",
       "url": "https://www.ringsidenews.com/tna-impact-viewership-sees-slight-increase-may-28-2026/"
-    },
-    {
-      "decision": "hard_skip",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring",
-      "published": "Mon, 01 Jun 2026 18:50:53 +0000",
-      "published_guard": "publisher_history",
-      "reason": "url_already_published",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring-46.jpg?x51578\" width=\"800\" /></p>Oba Femi didn’t just advance in the King of the Ring tournament on June 1 WWE RAW — he made sure Brock Lesnar heard him loud and clear afterward. After defeating Penta, Carmelo Hayes, and Solo Sikoa in a wild Fatal Four-Way first-round match, Oba grabbed a microphone and turned his attention straight to Lesnar. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/\" title=\"Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring\">Read more</a>",
-      "title": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring",
-      "url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/"
     }
   ],
-  "known_published_urls": 16,
+  "known_published_urls": 14,
   "known_state_urls": 9,
   "mode": "sentinel_control_board",
   "news_candidates_for_menzo": [
@@ -372,18 +372,6 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/seth-rollins-gives-turin-crowd-special-moment-wwe-raw-goes-off-air",
-      "published": "Mon, 01 Jun 2026 22:08:44 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Seth Rollins Gives Turin Crowd a Special Moment After WWE RAW Goes Off the Air\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/seth-rollins-gives-turin-crowd-a-special-moment-after-wwe-raw-goes-off-the-air-03.jpg?x51578\" width=\"800\" /></p>Seth Rollins ended WWE RAW with a big win over Bron Breakker, and the celebration didn’t stop when the cameras went off. After the June 1 episode of RAW ended, Rollins was seen standing tall in the ring while Breakker continued selling the effects of his main event loss. Rollins then climbed over the barricade ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/seth-rollins-gives-turin-crowd-special-moment-wwe-raw-goes-off-air/\" title=\"Seth Rollins Gives Turin Crowd a Special Moment After WWE RAW Goes Off the Air\">Read more</a>",
-      "title": "Seth Rollins Gives Turin Crowd a Special Moment After WWE RAW Goes Off the Air",
-      "url": "https://www.ringsidenews.com/seth-rollins-gives-turin-crowd-special-moment-wwe-raw-goes-off-air/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal",
       "published": "Mon, 01 Jun 2026 21:56:35 +0000",
       "reason": "requires_menzo_classification",
@@ -396,13 +384,13 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/mick-foley-says-aew-reminds-him-wwes-attitude-era",
-      "published": "Mon, 01 Jun 2026 20:39:52 +0000",
+      "normalized_url": "https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw",
+      "published": "Mon, 01 Jun 2026 20:34:51 +0000",
       "reason": "requires_menzo_classification",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Mick Foley Says AEW Reminds Him of WWE’s Attitude Era\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mick-foley-says-aew-reminds-him-of-wwes-attitude-era-12.jpg?x51578\" width=\"800\" /></p>Mick Foley is embracing his new chapter in AEW, and his latest comments make it clear that he sees something special in the company. Foley took to Instagram and uploaded a video reflecting on his first experiences with AEW. While many legends return to wrestling promotions for a quick nostalgia appearance, Foley said the reaction ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mick-foley-says-aew-reminds-him-wwes-attitude-era/\" title=\"Mick Foley Says AEW Reminds Him of WWE’s Attitude Era\">Read more</a>",
-      "title": "Mick Foley Says AEW Reminds Him of WWE’s Attitude Era",
-      "url": "https://www.ringsidenews.com/mick-foley-says-aew-reminds-him-wwes-attitude-era/"
+      "summary": "<p><img alt=\"Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/paul-heyman-gets-speared-through-the-barricade-during-june-1-wwe-raw-49.jpg?x51578\" width=\"800\" /></p>Paul Heyman got way too close to the action on WWE RAW, and Bron Breakker made him pay for it by accident. During the June 1 episode of RAW, Seth Rollins faced Bron Breakker in the main event. Things got wild late in the match after Austin Theory came down and got involved. Theory hit ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/\" title=\"Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW\">Read more</a>",
+      "title": "Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW",
+      "url": "https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/"
     },
     {
       "assigned_to": "Menzo",
@@ -427,6 +415,18 @@
       "summary": "<p><img alt=\"Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/iyo-sky-advances-in-queen-of-the-ring-after-wild-fatal-four-way-on-june-1-wwe-raw-49.jpg?x51578\" width=\"800\" /></p>Iyo Sky is moving on in the Queen of the Ring tournament. During the June 1 episode of WWE RAW, Sky defeated Lash Legend, Roxanne Perez, and Giulia in a first-round Fatal Four-Way match. The match was chaotic from the start, with Lash using her power early while Iyo, Giulia, and Roxanne all tried to ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/\" title=\"Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW\">Read more</a>",
       "title": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW",
       "url": "https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring",
+      "published": "Mon, 01 Jun 2026 18:50:53 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring-46.jpg?x51578\" width=\"800\" /></p>Oba Femi didn’t just advance in the King of the Ring tournament on June 1 WWE RAW — he made sure Brock Lesnar heard him loud and clear afterward. After defeating Penta, Carmelo Hayes, and Solo Sikoa in a wild Fatal Four-Way first-round match, Oba grabbed a microphone and turned his attention straight to Lesnar. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/\" title=\"Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring\">Read more</a>",
+      "title": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring",
+      "url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/"
     },
     {
       "assigned_to": "Menzo",
