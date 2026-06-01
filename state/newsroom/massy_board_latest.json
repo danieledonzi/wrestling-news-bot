@@ -31,7 +31,7 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-01T15:37:03.470260+00:00",
+  "generated_at": "2026-06-01T15:55:43.530723+00:00",
   "handoff": {
     "already_worked": 1,
     "hard_skipped": 1,
@@ -58,13 +58,13 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184680/eric-bischoff-wwe-creative-stepped-on-rake",
-      "published": "Mon, 01 Jun 2026 15:30:00 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes",
+      "published": "Mon, 01 Jun 2026 15:41:06 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "WWE Hall of Famer Eric Bischoff has discussed WWE's slump in recent months, but feels all is not lost and believes the company can regain its momentum.",
-      "title": "Eric Bischoff Says WWE Creative Has 'Stepped On A Rake' Over The Last Few Months",
-      "url": "https://www.wrestlinginc.com/2184680/eric-bischoff-wwe-creative-stepped-on-rake/"
+      "summary": "Wrestling Observer provided an update on AAA's Octagon Jr. after an injury on Saturday night.",
+      "title": "AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes",
+      "url": "https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes/"
     },
     {
       "assigned_to": "Menzo",
@@ -142,13 +142,13 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184838/wwe-brock-lesnar-oba-femi-dave-meltzer-long-term-creative-plans-three-matches",
-      "published": "Mon, 01 Jun 2026 15:24:56 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2184680/eric-bischoff-wwe-creative-stepped-on-rake",
+      "published": "Mon, 01 Jun 2026 15:30:00 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "Dave Meltzer provides a backstage report on the long-term creative plans for the feud between Brock Lesnar and Oba Femi, including plans for one last match",
-      "title": "Backstage Report On WWE's Long-Term Creative Plans For Brock Lesnar & Oba Femi Feud",
-      "url": "https://www.wrestlinginc.com/2184838/wwe-brock-lesnar-oba-femi-dave-meltzer-long-term-creative-plans-three-matches/"
+      "summary": "WWE Hall of Famer Eric Bischoff has discussed WWE's slump in recent months, but feels all is not lost and believes the company can regain its momentum.",
+      "title": "Eric Bischoff Says WWE Creative Has 'Stepped On A Rake' Over The Last Few Months",
+      "url": "https://www.wrestlinginc.com/2184680/eric-bischoff-wwe-creative-stepped-on-rake/"
     },
     {
       "assigned_to": "Menzo",
@@ -202,18 +202,6 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184666/cody-rhodes-controversial-finish-wwe-title-gunther-clash-in-italy-rematch",
-      "published": "Mon, 01 Jun 2026 15:00:00 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "Undisputed WWE Champion Cody Rhodes has offered GUNTHER a rematch following the controversial finish to their match at WWE Clash in Italy.",
-      "title": "Cody Rhodes Addresses Controversial Finish In WWE Title Defense At Clash In Italy",
-      "url": "https://www.wrestlinginc.com/2184666/cody-rhodes-controversial-finish-wwe-title-gunther-clash-in-italy-rematch/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2174560/wwe-backlash-danhausen-clone-lifted-elements-independent-show",
       "published": "Sat, 16 May 2026 19:18:37 +0000",
       "reason": "requires_menzo_classification",
@@ -221,6 +209,18 @@
       "summary": "Wrestling is facing a \"clone war\" after one match at WWE Backlash copycatted a similar formula used by an independent wrestler.",
       "title": "WWE Backlash Match Reportedly Lifted Elements From Recent Independent Show",
       "url": "https://www.wrestlinginc.com/2174560/wwe-backlash-danhausen-clone-lifted-elements-independent-show/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2184838/wwe-brock-lesnar-oba-femi-dave-meltzer-long-term-creative-plans-three-matches",
+      "published": "Mon, 01 Jun 2026 15:24:56 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "Dave Meltzer provides a backstage report on the long-term creative plans for the feud between Brock Lesnar and Oba Femi, including plans for one last match",
+      "title": "Backstage Report On WWE's Long-Term Creative Plans For Brock Lesnar & Oba Femi Feud",
+      "url": "https://www.wrestlinginc.com/2184838/wwe-brock-lesnar-oba-femi-dave-meltzer-long-term-creative-plans-three-matches/"
     },
     {
       "assigned_to": "Menzo",
@@ -274,13 +274,13 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184793/aew-future-prospects-wbd-paramount-skydance",
-      "published": "Mon, 01 Jun 2026 14:33:29 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2171250/matt-hardy-kofimania-wwe-new-day",
+      "published": "Sat, 16 May 2026 17:00:00 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "Despite some worries from those within the company initially, there is a sense of optimism surrounding AEW's future after the WBD/Paramount merger.",
-      "title": "Backstage News On AEW's Future Prospects After WBD Purchase By Paramount Skydance",
-      "url": "https://www.wrestlinginc.com/2184793/aew-future-prospects-wbd-paramount-skydance/"
+      "summary": "Matt hardy reflects on Kofi Kingston becoming WWE Champion at WrestleMania 35 and commented on the New Day's importance to the younger generation of fans.",
+      "title": "Matt Hardy Looks Back On KofiMania In Wake Of New Day's WWE Release",
+      "url": "https://www.wrestlinginc.com/2171250/matt-hardy-kofimania-wwe-new-day/"
     },
     {
       "assigned_to": "Menzo",
