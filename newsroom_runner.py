@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-NEWSROOM_VERSION = "v93_5_alfred_quality_editor"
+NEWSROOM_VERSION = "v93_6_publisher_wordpress"
 ARTIFACT_DIR = Path("artifacts") / "newsroom"
 
 AGENTS = [
@@ -255,7 +255,7 @@ def run_alfred_review(timeline: list[dict[str, str]], bob_result: dict[str, Any]
             "generated_at": utc_now(),
             "status": "error",
             "error": f"import_failed: {exc}",
-            "handoff": {"approved": 0, "needs_revision": 0, "warnings": 0, "blockers": 0},
+            "handoff": {"approved": 0, "needs_revision": 0, "warnings": 0, "blockers": 0, "editorial_changes": 0},
         }
         write_json(ARTIFACT_DIR / "alfred_review.json", error)
         add_timeline(timeline, "Alfred", "error", f"import_failed={exc}")
@@ -282,10 +282,55 @@ def run_alfred_review(timeline: list[dict[str, str]], bob_result: dict[str, Any]
             "generated_at": utc_now(),
             "status": "error",
             "error": str(exc),
-            "handoff": {"approved": 0, "needs_revision": 0, "warnings": 0, "blockers": 0},
+            "handoff": {"approved": 0, "needs_revision": 0, "warnings": 0, "blockers": 0, "editorial_changes": 0},
         }
         write_json(ARTIFACT_DIR / "alfred_review.json", error)
         add_timeline(timeline, "Alfred", "error", str(exc))
+        return error
+
+
+def run_publisher_agent(timeline: list[dict[str, str]], alfred_result: dict[str, Any]) -> dict[str, Any]:
+    try:
+        from agents.publisher import run_publisher
+    except Exception as exc:
+        error = {
+            "agent": "Publisher",
+            "version": NEWSROOM_VERSION,
+            "generated_at": utc_now(),
+            "status": "error",
+            "error": f"import_failed: {exc}",
+            "handoff": {"published": 0, "already_published": 0, "dry_run": 0, "wp_not_ready": 0, "errors": 0},
+        }
+        write_json(ARTIFACT_DIR / "publisher_result.json", error)
+        add_timeline(timeline, "Publisher", "error", f"import_failed={exc}")
+        return error
+    try:
+        result = run_publisher(alfred_result)
+        handoff = result.get("handoff", {}) if isinstance(result, dict) else {}
+        add_timeline(
+            timeline,
+            "Publisher",
+            "publication_ready",
+            "published={published} already={already} dry={dry} wp_not_ready={wp_not_ready} errors={errors}".format(
+                published=handoff.get("published", 0),
+                already=handoff.get("already_published", 0),
+                dry=handoff.get("dry_run", 0),
+                wp_not_ready=handoff.get("wp_not_ready", 0),
+                errors=handoff.get("errors", 0),
+            ),
+        )
+        return result
+    except Exception as exc:
+        error = {
+            "agent": "Publisher",
+            "version": NEWSROOM_VERSION,
+            "generated_at": utc_now(),
+            "status": "error",
+            "error": str(exc),
+            "handoff": {"published": 0, "already_published": 0, "dry_run": 0, "wp_not_ready": 0, "errors": 1},
+        }
+        write_json(ARTIFACT_DIR / "publisher_result.json", error)
+        add_timeline(timeline, "Publisher", "error", str(exc))
         return error
 
 
@@ -296,7 +341,7 @@ def main() -> int:
 
     print(f"===== NEWSROOM RUN START [{started_at}] VERSION [{NEWSROOM_VERSION}] =====", flush=True)
     print("[NEWSROOM v93] Avvio Virtual Newsroom", flush=True)
-    print("[NEWSROOM v93] Massy, Simone, Menzo, Bob and Alfred are real; Publisher still pending takeover", flush=True)
+    print("[NEWSROOM v93] Massy, Simone, Menzo, Bob, Alfred and Publisher are real", flush=True)
 
     command = runtime_command()
     engine = command[1] if len(command) > 1 else "unknown"
@@ -309,13 +354,13 @@ def main() -> int:
         "mode": "bootstrap_wrapper",
         "engine": engine,
         "newsroom_engine_override": is_test_override,
-        "wp_status_source": "existing_runtime",
+        "wp_status_source": "v93_publisher",
         "can_translate": "v93_bob",
         "can_review": "v93_alfred",
-        "can_publish": "pending_v93_publisher",
+        "can_publish": "v93_publisher",
         "notes": [
-            "Jarvis wrapper does not duplicate WordPress checks in v93.5",
-            "Bob creates v93 article packages and Alfred reviews them before Publisher takeover",
+            "Jarvis wrapper uses v93 Publisher for WordPress publication in v93.6",
+            "v92 fallback remains skipped by default to avoid legacy patch side effects",
         ],
     }
     write_json(ARTIFACT_DIR / "jarvis_status.json", jarvis_status)
@@ -326,14 +371,13 @@ def main() -> int:
     menzo_decision = run_menzo_editorial(timeline, massy_board)
     bob_result = run_bob_writer(timeline, menzo_decision)
     alfred_result = run_alfred_review(timeline, bob_result)
-
-    add_timeline(timeline, "Publisher", "wrapped", "WordPress publication pending v93 takeover")
+    publisher_result = run_publisher_agent(timeline, alfred_result)
 
     runtime_delegations = 0
     runtime_exit_code = 0
     skip_v92 = str(os.getenv("V93_SKIP_V92_AFTER_BOB", "1")).strip().lower() not in {"0", "false", "no", "off"}
     if skip_v92 and not is_test_override:
-        add_timeline(timeline, "Jarvis", "runtime_skipped", "Bob/Alfred packages generated; v92 fallback skipped to avoid legacy side effects")
+        add_timeline(timeline, "Jarvis", "runtime_skipped", "v93 Publisher completed; v92 fallback skipped")
         print("[NEWSROOM v93] v92 fallback skipped because V93_SKIP_V92_AFTER_BOB=1", flush=True)
     else:
         runtime_delegations = 1
@@ -349,6 +393,7 @@ def main() -> int:
     menzo_handoff = menzo_decision.get("handoff", {}) if isinstance(menzo_decision, dict) else {}
     bob_handoff = bob_result.get("handoff", {}) if isinstance(bob_result, dict) else {}
     alfred_handoff = alfred_result.get("handoff", {}) if isinstance(alfred_result, dict) else {}
+    publisher_handoff = publisher_result.get("handoff", {}) if isinstance(publisher_result, dict) else {}
     run_summary = {
         "version": NEWSROOM_VERSION,
         "started_at": started_at,
@@ -364,7 +409,7 @@ def main() -> int:
             "menzo": "real_editorial_director",
             "bob": "real_article_writer",
             "alfred": "real_quality_editor",
-            "publisher": "wrapped_pending_takeover",
+            "publisher": "real_wordpress_publisher",
             "archivista": "wrapped",
         },
         "massy_handoff": massy_handoff,
@@ -372,11 +417,11 @@ def main() -> int:
         "menzo_handoff": menzo_handoff,
         "bob_handoff": bob_handoff,
         "alfred_handoff": alfred_handoff,
+        "publisher_handoff": publisher_handoff,
         "notes": [
-            "v93.5 introduces Alfred as deterministic quality editor",
-            "Alfred consumes Bob article packages and approves only clean articles",
-            "Publisher remains a future v93 takeover step",
-            "v92 fallback is skipped by default after Bob/Alfred to avoid legacy patch side effects",
+            "v93.6 introduces Publisher as WordPress publisher",
+            "Publisher consumes Alfred approved_articles and writes publisher history by source URL",
+            "v92 fallback is skipped by default after v93 Publisher",
         ],
     }
 
