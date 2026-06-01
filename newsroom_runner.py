@@ -16,7 +16,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-NEWSROOM_VERSION = "v93_0_virtual_newsroom_bootstrap"
+NEWSROOM_VERSION = "v93_1_massy_sentinel_control"
 ARTIFACT_DIR = Path("artifacts") / "newsroom"
 
 AGENTS = [
@@ -66,14 +66,66 @@ def runtime_command() -> list[str]:
     return [sys.executable, "bot_v92.py"]
 
 
+def run_massy_sentinel(timeline: list[dict[str, str]]) -> dict[str, Any]:
+    """Run Massy before the legacy runtime.
+
+    In v93.1 Massy is a real sentinel and its hard skips/report/news split
+    is written to artifacts and state. The legacy runtime is still delegated
+    afterward while Menzo and Simone are progressively moved to real control.
+    """
+
+    try:
+        from agents.massy import run_massy
+    except Exception as exc:
+        error = {
+            "agent": "Massy",
+            "version": NEWSROOM_VERSION,
+            "generated_at": utc_now(),
+            "status": "error",
+            "error": f"import_failed: {exc}",
+            "handoff": {"to_simone": 0, "to_menzo": 0, "hard_skipped": 0, "already_worked": 0},
+        }
+        write_json(ARTIFACT_DIR / "massy_board.json", error)
+        add_timeline(timeline, "Massy", "error", f"import_failed={exc}")
+        return error
+
+    try:
+        board = run_massy()
+        handoff = board.get("handoff", {}) if isinstance(board, dict) else {}
+        add_timeline(
+            timeline,
+            "Massy",
+            "sentinel_board_ready",
+            "to_simone={to_simone} to_menzo={to_menzo} hard_skip={hard_skipped} already={already_worked}".format(
+                to_simone=handoff.get("to_simone", 0),
+                to_menzo=handoff.get("to_menzo", 0),
+                hard_skipped=handoff.get("hard_skipped", 0),
+                already_worked=handoff.get("already_worked", 0),
+            ),
+        )
+        return board
+    except Exception as exc:
+        error = {
+            "agent": "Massy",
+            "version": NEWSROOM_VERSION,
+            "generated_at": utc_now(),
+            "status": "error",
+            "error": str(exc),
+            "handoff": {"to_simone": 0, "to_menzo": 0, "hard_skipped": 0, "already_worked": 0},
+        }
+        write_json(ARTIFACT_DIR / "massy_board.json", error)
+        add_timeline(timeline, "Massy", "error", str(exc))
+        return error
+
+
 def main() -> int:
     ensure_artifacts()
     started_at = utc_now()
     timeline: list[dict[str, str]] = []
 
     print(f"===== NEWSROOM RUN START [{started_at}] VERSION [{NEWSROOM_VERSION}] =====", flush=True)
-    print("[NEWSROOM v93] Avvio Virtual Newsroom bootstrap", flush=True)
-    print("[NEWSROOM v93] Core runtime delegated to existing engine; no scoring/dedupe/translation changes", flush=True)
+    print("[NEWSROOM v93] Avvio Virtual Newsroom", flush=True)
+    print("[NEWSROOM v93] Massy is real; downstream runtime still delegated during staged takeover", flush=True)
 
     command = runtime_command()
     engine = command[1] if len(command) > 1 else "unknown"
@@ -90,17 +142,18 @@ def main() -> int:
         "can_translate": "delegated_to_existing_runtime",
         "can_publish": "delegated_to_existing_runtime",
         "notes": [
-            "Jarvis wrapper does not duplicate WordPress checks in v93.0",
+            "Jarvis wrapper does not duplicate WordPress checks in v93.1",
             "Existing runtime owns real WordPress diagnostics and stop-before-translation behavior",
         ],
     }
     write_json(ARTIFACT_DIR / "jarvis_status.json", jarvis_status)
     add_timeline(timeline, "Jarvis", "bootstrap_status_written", f"engine={engine}")
 
+    massy_board = run_massy_sentinel(timeline)
+
     for agent, note in [
-        ("Massy", "feed scan delegated to existing runtime"),
-        ("Simone", "report pipeline delegated to existing runtime"),
-        ("Menzo", "news decision delegated to existing runtime"),
+        ("Simone", "report discretion will consume Massy report_candidates in a future step"),
+        ("Menzo", "news decision will consume Massy news_candidates_for_menzo in a future step"),
         ("Bob", "translation delegated to existing runtime"),
         ("Alfred", "guardrails/QA delegated to existing runtime"),
         ("Publisher", "WordPress publication delegated to existing runtime"),
@@ -117,6 +170,7 @@ def main() -> int:
     add_timeline(timeline, "Publisher", "runtime_finished", f"exit_code={runtime_exit_code}")
 
     ended_at = utc_now()
+    handoff = massy_board.get("handoff", {}) if isinstance(massy_board, dict) else {}
     run_summary = {
         "version": NEWSROOM_VERSION,
         "started_at": started_at,
@@ -125,10 +179,20 @@ def main() -> int:
         "newsroom_engine_override": is_test_override,
         "runtime_delegations": runtime_delegations,
         "runtime_exit_code": runtime_exit_code,
-        "agents": {agent.lower(): "wrapped" for agent in AGENTS},
+        "agents": {
+            "jarvis": "wrapped",
+            "massy": "real_sentinel_control",
+            "simone": "wrapped_pending_takeover",
+            "menzo": "wrapped_pending_takeover",
+            "bob": "wrapped",
+            "alfred": "wrapped",
+            "publisher": "wrapped",
+            "archivista": "wrapped",
+        },
+        "massy_handoff": handoff,
         "notes": [
-            "v93.0 is a conservative wrapper/bootstrap release",
-            "Core publishing logic is delegated to the existing runtime",
+            "v93.1 introduces Massy as a real sentinel-control board",
+            "Massy hard skips are binding for newsroom planning, while bot_v92 remains delegated until Menzo/Simone takeover",
             "Reports remain excluded from the daily news target by design documentation",
             "Target daily news volume is documented as 20-30 news excluding reports",
         ],
