@@ -30,12 +30,18 @@ permissions:
   contents: write
   actions: read
 
+concurrency:
+  group: owtv-newsroom
+  cancel-in-progress: false
+
 env:
+  USE_NEWSROOM_RUNNER: "1"
   BOT_ARTIFACT_PATHS: |
     logs/
     state/
     published/
     published_html_review/
+    artifacts/newsroom/
     review_bundle_latest.zip
     .bot_exit_code
 
@@ -70,7 +76,7 @@ jobs:
           set -e
           python scripts/apply_v92_report_workshop.py
 
-      - name: Verify v92 source
+      - name: Verify v92/v93 source
         run: |
           set -e
           python -m json.tool config/reports_v92.json >/dev/null
@@ -78,11 +84,13 @@ jobs:
           python -m json.tool config/categories_v92.json >/dev/null
           python -m py_compile bot_v92.py
           python -m py_compile manual_v92.py
+          python -m py_compile newsroom_runner.py
           python -m py_compile modules/report_workshop_v92.py
           python - <<'PY'
           from pathlib import Path
           text = Path('bot_v92.py').read_text(encoding='utf-8')
           manual = Path('manual_v92.py').read_text(encoding='utf-8')
+          newsroom = Path('newsroom_runner.py').read_text(encoding='utf-8')
           required = [
               'v92_0_2_report_workshop_publish',
               'run_report_pipeline',
@@ -95,10 +103,11 @@ jobs:
               'MAX_NEWS_PER_RUN',
           ]
           manual_required = ['V92_MANUAL_URL', 'V92_MANUAL_KIND', 'run_manual_report', 'V92_MANUAL_HTML_PATH']
-          missing = [m for m in required if m not in text] + [m for m in manual_required if m not in manual]
+          newsroom_required = ['v93_0_virtual_newsroom_bootstrap', 'NEWSROOM_ENGINE', 'subprocess', 'runtime_delegations']
+          missing = [m for m in required if m not in text] + [m for m in manual_required if m not in manual] + [m for m in newsroom_required if m not in newsroom]
           if missing:
-              raise SystemExit('[V92 VERIFY] missing markers: ' + ', '.join(missing))
-          print('[V92 VERIFY] v92 sources ok')
+              raise SystemExit('[V92/V93 VERIFY] missing markers: ' + ', '.join(missing))
+          print('[V92/V93 VERIFY] sources ok')
           PY
 
       - name: Reset v92 report status for testing
@@ -133,7 +142,7 @@ jobs:
           echo "$status" > .bot_exit_code
           exit 0
 
-      - name: Run bot v92
+      - name: Run scheduled v93 newsroom or v92 bot
         if: ${{ github.event.inputs.manual_url == '' }}
         id: run_bot
         env:
@@ -147,7 +156,11 @@ jobs:
           V92_MAX_NEWS_PER_RUN: "3"
         run: |
           set +e
-          python bot_v92.py
+          if [ "${USE_NEWSROOM_RUNNER}" = "1" ]; then
+            python newsroom_runner.py
+          else
+            python bot_v92.py
+          fi
           status=$?
           echo "$status" > .bot_exit_code
           exit 0
@@ -176,6 +189,7 @@ jobs:
             state/
             published/
             published_html_review/
+            artifacts/newsroom/
             review_bundle_latest.zip
             .bot_exit_code
 
@@ -187,6 +201,6 @@ jobs:
             code=$(cat .bot_exit_code)
           fi
           if [ "$code" != "0" ]; then
-            echo "[BOT v92] Bot terminato con exit code $code"
+            echo "[BOT v92/v93] Bot terminato con exit code $code"
             exit "$code"
           fi
