@@ -22,7 +22,7 @@ MENZO_DECISIONS_FILE = NEWSROOM_STATE_DIR / "menzo_decisions_latest.json"
 BOB_ARTICLES_FILE = NEWSROOM_STATE_DIR / "bob_articles_latest.json"
 ARTIFACT_BOB_FILE = ARTIFACT_DIR / "bob_articles.json"
 
-BOB_VERSION = "v93_11_block_translation_clean_embeds"
+BOB_VERSION = "v93_12_prudent_embed_cleanup"
 REQUEST_TIMEOUT = int(os.getenv("V93_BOB_REQUEST_TIMEOUT", "18"))
 MAX_ARTICLES_PER_RUN = int(os.getenv("V93_BOB_MAX_ARTICLES_PER_RUN", "3"))
 AUDIT_CHARS = int(os.getenv("V93_BOB_AUDIT_CHARS", "24000"))
@@ -34,11 +34,15 @@ EMBED_DOMAINS = ["x.com", "twitter.com", "instagram.com", "youtube.com", "youtub
 
 BIO_PATTERNS = [
     re.compile(r"\babout\s+the\s+author\b", re.I),
+    re.compile(r"\bfounder\s+of\s+ringside\s+news\b", re.I),
+    re.compile(r"\bfelix\s+upton\b.*\bringside\s+news\b", re.I),
+    re.compile(r"\bsteve\s+carrier\b.*\bringside\s+news\b", re.I),
     re.compile(r"\bfollow\s+.+\s+on\s+(twitter|x|instagram|facebook|bluesky)\b", re.I),
     re.compile(r"\bhas\s+(over\s+)?\d+\s+years\s+of\s+experience\b", re.I),
-    re.compile(r"\bhas\s+been\s+covering\s+(pro\s+)?wrestling\b", re.I),
-    re.compile(r"\bhis\s+work\s+(at|on)\s+ringside\s+news\b", re.I),
-    re.compile(r"\bher\s+work\s+(at|on)\s+ringside\s+news\b", re.I),
+    re.compile(r"\bhas\s+been\s+(reporting\s+on|covering)\s+(pro\s+)?wrestling\b", re.I),
+    re.compile(r"\bhis\s+(stories|work)\s+(have\s+been\s+featured|at|on)\b", re.I),
+    re.compile(r"\bher\s+(stories|work)\s+(have\s+been\s+featured|at|on)\b", re.I),
+    re.compile(r"\b(tmz|forbes|bleacher\s+report)\b.*\b(ringside\s+news|featured)\b", re.I),
     re.compile(r"\bdelivering\s+trusted\s+news\s+and\s+backstage\s+updates\b", re.I),
     re.compile(r"\b(more|read more)\s+from\s+[A-Z][a-z]+", re.I),
     re.compile(r"\bthanks\s+to\s+.+\s+for\s+the\s+transcription\b", re.I),
@@ -58,10 +62,12 @@ CTA_PATTERNS = [
     re.compile(r"\bsubscribe\b|\bnewsletter\b|\bclick\s+here\b", re.I),
 ]
 FOOTER_START_PATTERNS = [
+    re.compile(r"\babout\s+the\s+author\b", re.I),
+    re.compile(r"\bfounder\s+of\s+ringside\s+news\b", re.I),
     re.compile(r"\badd\s+as\s+a\s+preferred\s+source\s+on\s+google\b", re.I),
     re.compile(r"\bhas\s+(over\s+)?\d+\s+years\s+of\s+experience\b", re.I),
-    re.compile(r"\bhis\s+work\s+(at|on)\s+ringside\s+news\b", re.I),
-    re.compile(r"\bhas\s+been\s+covering\s+(pro\s+)?wrestling\b", re.I),
+    re.compile(r"\bhas\s+been\s+(reporting\s+on|covering)\s+(pro\s+)?wrestling\b", re.I),
+    re.compile(r"\bhis\s+(stories|work)\s+(have\s+been\s+featured|at|on)\b", re.I),
     re.compile(r"^\s*spotlight\b", re.I),
     re.compile(r"\bspotlight\s+(wwe|aew|nxt|tna|roh)?\s*(videos|news)?\b", re.I),
     re.compile(r"\brelated\s+(articles|posts|news)\b", re.I),
@@ -156,30 +162,40 @@ def node_classes(node: Tag) -> str:
     return " ".join(str(v) for v in vals).lower()
 
 
-def is_embed_url(url: str) -> bool:
-    return any(domain in (url or "").lower() for domain in EMBED_DOMAINS)
-
-
 def canonical_embed_url(url: str) -> str:
     url = html.unescape((url or "").replace("\\/", "/").strip())
     url = url.replace("https://twitter.com/", "https://x.com/").replace("http://twitter.com/", "https://x.com/")
     if "x.com/" in url or "twitter.com/" in url:
         url = re.sub(r"\?.*$", "", url)
-    return url
+    return url.rstrip("/")
 
 
-def is_source_social_bar_url(url: str) -> bool:
-    parsed = urlparse(canonical_embed_url(url))
+def is_valid_editorial_embed_url(url: str) -> bool:
+    url = canonical_embed_url(url)
+    parsed = urlparse(url)
     host = parsed.netloc.lower().replace("www.", "")
-    path = parsed.path.strip("/").lower()
-    if host == "facebook.com" and path in {"ringsidenews", "ringsidenewscom"}:
-        return True
-    if host == "bsky.app" and (path.startswith("profile/ringsidenews") or path in {"profile/ringsidenews.com"}):
-        return True
-    if host in {"x.com", "twitter.com"} and path in {"ringsidenews", "ringsidenewscom"}:
-        return True
-    if host == "instagram.com" and path in {"ringsidenews", "ringsidenewscom"}:
-        return True
+    path = parsed.path.lower()
+    query = parsed.query.lower()
+    if not host or not path:
+        return False
+    if any(bad in url.lower() for bad in ["intent/tweet", "sharer.php", "share?", "/profile.php", "addthis", "mailto:"]):
+        return False
+    if host in {"x.com", "twitter.com"}:
+        return "/status/" in path or "/statuses/" in path
+    if host == "bsky.app":
+        return "/post/" in path
+    if host == "instagram.com":
+        return path.startswith(("/p/", "/reel/", "/tv/"))
+    if host in {"youtube.com", "youtube-nocookie.com"}:
+        return path.startswith(("/watch", "/embed/", "/shorts/")) and ("v=" in query or path.startswith(("/embed/", "/shorts/")))
+    if host == "youtu.be":
+        return len(path.strip("/")) > 4
+    if host == "tiktok.com":
+        return "/video/" in path
+    if host == "threads.net":
+        return "/post/" in path or "/t/" in path
+    if host == "facebook.com":
+        return any(token in path for token in ["/posts/", "/videos/", "/watch/"])
     return False
 
 
@@ -205,15 +221,11 @@ def is_probable_long_quote(text: str) -> bool:
 
 def extract_embed_urls_from_text(raw: str, base_url: str) -> list[str]:
     text = html.unescape((raw or "").replace("\\/", "/"))
-    urls: list[str] = []
-    for match in EMBED_URL_RE.findall(text):
-        url = canonical_embed_url(absolute_url(base_url, match))
-        if is_embed_url(url) and not is_source_social_bar_url(url):
-            urls.append(url)
     out: list[str] = []
     seen: set[str] = set()
-    for url in urls:
-        if url not in seen:
+    for match in EMBED_URL_RE.findall(text):
+        url = canonical_embed_url(absolute_url(base_url, match))
+        if is_valid_editorial_embed_url(url) and url not in seen:
             seen.add(url)
             out.append(url)
     return out
@@ -230,7 +242,7 @@ def extract_embed_url(node: Tag, base_url: str) -> str:
     candidates.extend(extract_embed_urls_from_text(str(node), base_url))
     for raw in candidates:
         url = canonical_embed_url(absolute_url(base_url, raw))
-        if is_embed_url(url) and not is_source_social_bar_url(url):
+        if is_valid_editorial_embed_url(url):
             return url
     return ""
 
@@ -277,7 +289,9 @@ def element_from_node(node: Tag, base_url: str) -> dict[str, Any] | None:
         text = clean_text(node.get_text(" "))
         if is_bio_or_footer_text(text) or any(p.search(text) for p in SOURCE_INTRO_PATTERNS):
             return None
-        return {"type": "quote" if is_probable_long_quote(text) else "text", "text": text, "source_tag": name} if is_probable_long_quote(text) else {"type": "text", "text": text}
+        if is_probable_long_quote(text):
+            return {"type": "quote", "text": text, "source_tag": name}
+        return {"type": "text", "text": text}
     if name in {"h2", "h3", "h4"}:
         text = clean_text(node.get_text(" "))
         if not text or is_bio_or_footer_text(text) or is_footer_start_text(text):
@@ -318,8 +332,8 @@ def sanitize_elements(elements: list[dict[str, Any]], featured_image: str) -> tu
             item["url"] = url
             if not url or url in seen_embeds:
                 reason = "duplicate_or_empty_embed"
-            elif is_source_social_bar_url(url):
-                reason = "source_social_bar_embed"
+            elif not is_valid_editorial_embed_url(url):
+                reason = "non_editorial_embed_or_social_bar"
             else:
                 seen_embeds.add(url)
         elif text and is_footer_start_text(text):
@@ -346,7 +360,7 @@ def sanitize_elements(elements: list[dict[str, Any]], featured_image: str) -> tu
 
 
 def extract_elements(source_url: str, raw_html: str) -> tuple[dict[str, str], list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
-    diagnostics: dict[str, Any] = {"dom_noise_reduction_enabled": False, "stage": "parse_html"}
+    diagnostics: dict[str, Any] = {"dom_noise_reduction_enabled": False, "stage": "parse_html", "global_embed_recovery_enabled": False}
     soup = BeautifulSoup(raw_html, "html.parser")
     meta = extract_meta(soup, source_url)
     root = choose_article_root(soup)
@@ -380,11 +394,6 @@ def extract_elements(source_url: str, raw_html: str) -> tuple[dict[str, str], li
         except Exception as exc:
             removed_by_node.append({"node_index": node_idx, "reason": "node_exception", "node_name": getattr(node, "name", ""), "error": str(exc)[:1000]})
     clean_elements, removed_by_sanitize = sanitize_elements(raw_elements, meta.get("featured_image", ""))
-    existing = {e.get("url") for e in clean_elements if e.get("type") == "embed"}
-    for url in extract_embed_urls_from_text(str(root) if root else raw_html, source_url):
-        if url not in existing:
-            clean_elements.insert(max(0, len(clean_elements) - 1), {"type": "embed", "url": url, "source_tag": "global_recovery"})
-            existing.add(url)
     diagnostics.update({
         "root_name": getattr(root, "name", ""),
         "root_text_chars": len(clean_text(root.get_text(" "))) if root else 0,
@@ -504,7 +513,7 @@ def render_body(elements: list[dict[str, Any]], translations: dict[str, str]) ->
             out.append(f"<!--IMAGE:{item.get('url', '')}-->")
         elif kind == "embed":
             url = canonical_embed_url(str(item.get("url") or ""))
-            if url and not is_source_social_bar_url(url):
+            if is_valid_editorial_embed_url(url):
                 out.append("\n" + html.escape(url) + "\n")
     return "\n".join(x for x in out if x).strip()
 
@@ -515,7 +524,7 @@ def article_package(item: dict[str, Any]) -> dict[str, Any]:
     try:
         raw = fetch_html(url)
         package["fetched_html_chars"] = len(raw)
-        package["source_html_contains_embed_hint"] = bool(re.search(r"twitter-tweet|x\.com|twitter\.com|instagram\.com|youtube\.com|youtu\.be|iframe|youtube-nocookie", raw, re.I))
+        package["source_html_contains_embed_hint"] = bool(re.search(r"twitter-tweet|x\.com/.+?/status|twitter\.com/.+?/status|instagram\.com/(p|reel)|youtube\.com/(watch|embed|shorts)|youtu\.be/|iframe|youtube-nocookie", raw, re.I))
         meta, raw_elements, elements, removed, extraction_diag = extract_elements(url, raw)
         units = build_translation_units(elements)
         package.update({
@@ -573,13 +582,13 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
     if not isinstance(selected, list):
         selected = []
     selected = selected[:MAX_ARTICLES_PER_RUN]
-    print(f"[BOB v93.11] Avvio traduzione a blocchi | selected={len(selected)}", flush=True)
+    print(f"[BOB v93.12] Avvio traduzione a blocchi | selected={len(selected)}", flush=True)
     articles = [article_package(item) for item in selected if isinstance(item, dict)]
     result = {
         "agent": "Bob",
         "version": BOB_VERSION,
         "generated_at": utc_now(),
-        "mode": "block_translation_clean_embeds",
+        "mode": "block_translation_prudent_embed_cleanup",
         "policy": {
             "clean_before_gemini": True,
             "gemini_receives_only_text_units": True,
@@ -588,7 +597,8 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
             "filter_source_social_bars": True,
             "filter_author_bios_before_gemini": True,
             "filter_cta_before_gemini": True,
-            "recover_embeds_from_raw_html": True,
+            "recover_embeds_from_raw_html": False,
+            "embed_urls_require_post_or_video_shape": True,
             "preserve_quotes_as_blockquote": True,
             "preserve_tables_as_html_tables": True,
             "ordered_elements": ["text", "heading", "quote", "table", "image", "embed"],
@@ -609,7 +619,7 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
     }
     write_json(ARTIFACT_BOB_FILE, result)
     write_json(BOB_ARTICLES_FILE, result)
-    print("[BOB v93.11] Pacchetti pronti | ready={ready} pending={pending} empty={empty} errors={errors}".format(ready=result["handoff"]["ready_for_alfred"], pending=result["handoff"]["translation_pending"], empty=result["handoff"]["extraction_empty"], errors=result["handoff"]["errors"]), flush=True)
+    print("[BOB v93.12] Pacchetti pronti | ready={ready} pending={pending} empty={empty} errors={errors}".format(ready=result["handoff"]["ready_for_alfred"], pending=result["handoff"]["translation_pending"], empty=result["handoff"]["extraction_empty"], errors=result["handoff"]["errors"]), flush=True)
     return result
 
 
