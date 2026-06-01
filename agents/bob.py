@@ -4,6 +4,7 @@ import html
 import json
 import os
 import re
+import traceback
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
@@ -21,7 +22,7 @@ MENZO_DECISIONS_FILE = NEWSROOM_STATE_DIR / "menzo_decisions_latest.json"
 BOB_ARTICLES_FILE = NEWSROOM_STATE_DIR / "bob_articles_latest.json"
 ARTIFACT_BOB_FILE = ARTIFACT_DIR / "bob_articles.json"
 
-BOB_VERSION = "v93_4_1_bob_clean_source_writer"
+BOB_VERSION = "v93_4_2_bob_diagnostic_clean_elements"
 REQUEST_TIMEOUT = int(os.getenv("V93_BOB_REQUEST_TIMEOUT", "18"))
 MAX_ARTICLES_PER_RUN = int(os.getenv("V93_BOB_MAX_ARTICLES_PER_RUN", "3"))
 AUDIT_CHARS = int(os.getenv("V93_BOB_AUDIT_CHARS", "24000"))
@@ -29,16 +30,6 @@ MODEL_CHAIN = [m.strip() for m in os.getenv(
     "GEMINI_MODEL_CHAIN",
     "gemini-3.1-flash-lite,gemini-3-flash-preview,gemini-2.5-flash-lite,gemini-2.5-flash",
 ).split(",") if m.strip()]
-
-DROP_CONTAINER_SELECTORS = [
-    "script", "style", "noscript", "iframe[src*='googletagmanager']", "form",
-    ".ad", ".ads", ".advertisement", ".newsletter", ".related", ".read-more",
-    ".author-bio", ".bio", ".article-footer", ".post-footer", ".share", ".social-share",
-    ".sharedaddy", ".jp-relatedposts", ".yarpp-related", ".more-stories", ".recommended",
-    ".spotlight", ".trending", ".popular-posts", ".author-box", ".byline-box",
-    "[class*='social']", "[class*='share']", "[class*='newsletter']", "[class*='related']",
-    "[id*='social']", "[id*='share']", "[id*='newsletter']", "[id*='related']",
-]
 
 ARTICLE_SELECTORS = [
     "article",
@@ -57,6 +48,10 @@ BIO_PATTERNS = [
     re.compile(r"\bdelivering\s+trusted\s+news\s+and\s+backstage\s+updates\b", re.I),
     re.compile(r"\b(more|read more)\s+from\s+[A-Z][a-z]+", re.I),
     re.compile(r"\bthanks\s+to\s+.+\s+for\s+the\s+transcription\b", re.I),
+    re.compile(r"\bplease\s+credit\b", re.I),
+    re.compile(r"\bh/?t\s+to\b", re.I),
+    re.compile(r"\bfor\s+the\s+transcription\b", re.I),
+    re.compile(r"\bwe\s+at\s+wrestling\s+inc\.?\s+wish\b", re.I),
 ]
 
 CTA_PATTERNS = [
@@ -127,6 +122,7 @@ def image_signature(url: str) -> str:
     name = path.rsplit("/", 1)[-1]
     name = re.sub(r"\.(avif|webp|jpg|jpeg|png)$", "", name)
     name = re.sub(r"\.(avif|webp)$", "", name)
+    name = re.sub(r"^l-", "", name)
     return name
 
 
@@ -177,22 +173,6 @@ def choose_article_root(soup: BeautifulSoup) -> Tag:
     return soup.body or soup
 
 
-def remove_noise(root: Tag) -> None:
-    for selector in DROP_CONTAINER_SELECTORS:
-        for node in root.select(selector):
-            node.decompose()
-    for node in list(root.find_all(True)):
-        attrs = " ".join(str(node.get(attr, "")) for attr in ["class", "id", "aria-label", "role"]).lower()
-        if any(token in attrs for token in ["share", "social", "newsletter", "related", "author-bio", "authorbox", "recommended", "spotlight"]):
-            node.decompose()
-            continue
-        text = clean_text(node.get_text(" "))
-        if text and any(pattern.search(text) for pattern in FOOTER_START_PATTERNS):
-            # remove compact widgets without deleting the whole article root
-            if len(text) < 900 or node.name in {"aside", "section", "div"}:
-                node.decompose()
-
-
 def is_social_or_noise_url(url: str) -> bool:
     lowered = (url or "").lower()
     return any(domain in lowered for domain in SOCIAL_OR_NOISE_DOMAINS)
@@ -214,6 +194,17 @@ def is_bio_or_footer_text(text: str) -> bool:
     if is_cta_text(text):
         return True
     return any(pattern.search(text) for pattern in BIO_PATTERNS)
+
+
+def node_classes(node: Tag) -> str:
+    values: list[str] = []
+    for attr in ["class", "id", "aria-label", "role"]:
+        raw = node.get(attr, "")
+        if isinstance(raw, list):
+            values.extend(str(x) for x in raw)
+        else:
+            values.append(str(raw))
+    return " ".join(values).lower()
 
 
 def element_from_node(node: Tag, base_url: str) -> dict[str, Any] | None:
@@ -259,50 +250,97 @@ def element_from_node(node: Tag, base_url: str) -> dict[str, Any] | None:
     return None
 
 
-def sanitize_elements(elements: list[dict[str, Any]], featured_image: str) -> list[dict[str, Any]]:
+def sanitize_elements(elements: list[dict[str, Any]], featured_image: str) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     cleaned: list[dict[str, Any]] = []
+    removed: list[dict[str, Any]] = []
     first_image_seen = False
-    for item in elements:
+    for idx, item in enumerate(elements, start=1):
         kind = item.get("type")
         text = clean_text(item.get("text", "")) if kind in {"text", "heading", "quote"} else ""
+        remove_reason = ""
+        stop_after = False
         if text and is_footer_start_text(text):
-            break
-        if text and (is_cta_text(text) or any(pattern.search(text) for pattern in BIO_PATTERNS)):
-            # comment bait can be skipped; author bio/spotlight starts footer and stops extraction
-            if is_footer_start_text(text) or any(pattern.search(text) for pattern in BIO_PATTERNS):
-                break
-            continue
-        if kind == "image" and not first_image_seen:
+            remove_reason = "footer_start"
+            stop_after = True
+        elif text and any(pattern.search(text) for pattern in BIO_PATTERNS):
+            remove_reason = "bio_or_credit"
+            stop_after = True
+        elif text and is_cta_text(text):
+            remove_reason = "cta_or_comment_bait"
+        elif kind == "image" and not first_image_seen:
             first_image_seen = True
             if same_image(item.get("url", ""), featured_image):
-                continue
-        if kind == "image" and same_image(item.get("url", ""), featured_image) and cleaned:
+                remove_reason = "duplicate_featured_image"
+        elif kind == "image" and same_image(item.get("url", ""), featured_image) and cleaned:
+            remove_reason = "duplicate_featured_image"
+
+        if remove_reason:
+            removed.append({"index": idx, "reason": remove_reason, "item": item})
+            if stop_after:
+                break
             continue
         cleaned.append(item)
-    return cleaned
+    return cleaned, removed
 
 
-def extract_elements(source_url: str, raw_html: str) -> tuple[dict[str, str], list[dict[str, Any]], list[dict[str, Any]]]:
+def extract_elements(source_url: str, raw_html: str) -> tuple[dict[str, str], list[dict[str, Any]], list[dict[str, Any]], list[dict[str, Any]], dict[str, Any]]:
+    diagnostics: dict[str, Any] = {
+        "dom_noise_reduction_enabled": False,
+        "stage": "parse_html",
+    }
     soup = BeautifulSoup(raw_html, "html.parser")
+    diagnostics["stage"] = "extract_meta"
     meta = extract_meta(soup, source_url)
+    diagnostics["stage"] = "choose_article_root"
     root = choose_article_root(soup)
-    remove_noise(root)
+    diagnostics["root_name"] = getattr(root, "name", "")
+    diagnostics["root_text_chars"] = len(clean_text(root.get_text(" "))) if root else 0
 
+    # Important: no DOM node decomposition here. Bob must stay diagnostic for now.
+    diagnostics["stage"] = "scan_nodes"
     raw_elements: list[dict[str, Any]] = []
+    removed_by_node: list[dict[str, Any]] = []
     seen_text: set[str] = set()
-    for node in root.find_all(["h2", "h3", "h4", "p", "li", "blockquote", "img", "iframe"], recursive=True):
-        item = element_from_node(node, source_url)
-        if not item:
-            continue
-        if item["type"] in {"text", "heading", "quote"}:
-            key = text_key(item.get("text", ""))
-            if not key or key in seen_text:
+    scan_nodes = list(root.find_all(["h2", "h3", "h4", "p", "li", "blockquote", "img", "iframe"], recursive=True)) if root else []
+    diagnostics["candidate_node_count"] = len(scan_nodes)
+    for node_idx, node in enumerate(scan_nodes, start=1):
+        try:
+            classes = node_classes(node)
+            if any(token in classes for token in ["share", "social", "newsletter", "related", "author-bio", "authorbox", "recommended", "spotlight"]):
+                removed_by_node.append({
+                    "node_index": node_idx,
+                    "reason": "node_class_noise",
+                    "node_name": node.name,
+                    "classes": classes[:500],
+                    "text_preview": clean_text(node.get_text(" "))[:500],
+                })
                 continue
-            seen_text.add(key)
-        raw_elements.append(item)
+            item = element_from_node(node, source_url)
+            if not item:
+                continue
+            if item["type"] in {"text", "heading", "quote"}:
+                key = text_key(item.get("text", ""))
+                if not key or key in seen_text:
+                    continue
+                seen_text.add(key)
+            raw_elements.append(item)
+        except Exception as exc:
+            removed_by_node.append({
+                "node_index": node_idx,
+                "reason": "node_exception",
+                "node_name": getattr(node, "name", ""),
+                "error": str(exc)[:1000],
+            })
 
-    clean_elements = sanitize_elements(raw_elements, meta.get("featured_image", ""))
-    return meta, raw_elements, clean_elements
+    diagnostics["stage"] = "sanitize_elements"
+    clean_elements, removed_by_sanitize = sanitize_elements(raw_elements, meta.get("featured_image", ""))
+    diagnostics["raw_element_count"] = len(raw_elements)
+    diagnostics["clean_element_count"] = len(clean_elements)
+    diagnostics["removed_by_node_count"] = len(removed_by_node)
+    diagnostics["removed_by_sanitize_count"] = len(removed_by_sanitize)
+    diagnostics["stage"] = "complete"
+    removed = removed_by_node + removed_by_sanitize
+    return meta, raw_elements, clean_elements, removed, diagnostics
 
 
 def elements_to_translation_source(elements: list[dict[str, Any]]) -> str:
@@ -423,40 +461,58 @@ def article_package(item: dict[str, Any]) -> dict[str, Any]:
         "menzo_score": item.get("score"),
         "status": "error",
         "created_at": utc_now(),
+        "diagnostic_stage": "start",
     }
     try:
+        package["diagnostic_stage"] = "fetch_html"
         raw = fetch_html(url)
-        meta, raw_elements, elements = extract_elements(url, raw)
+        package["fetched_html_chars"] = len(raw)
+
+        package["diagnostic_stage"] = "extract_elements"
+        meta, raw_elements, elements, removed, extraction_diag = extract_elements(url, raw)
         package["meta"] = meta
+        package["extraction_diagnostics"] = extraction_diag
         package["raw_element_count"] = len(raw_elements)
-        package["removed_before_gemini"] = max(0, len(raw_elements) - len(elements))
+        package["clean_element_count"] = len(elements)
+        package["removed_before_gemini"] = len(removed)
+        package["removed_elements_debug"] = removed[:30]
+        package["raw_elements_preview"] = raw_elements[:30]
         package["elements"] = elements
         package["element_counts"] = {kind: sum(1 for e in elements if e.get("type") == kind) for kind in ["text", "heading", "quote", "image", "embed"]}
         if not elements:
             package["status"] = "extraction_empty"
+            package["diagnostic_stage"] = "extraction_empty"
             return package
+
+        package["diagnostic_stage"] = "build_prompt"
         prompt = build_translation_prompt(item, meta, elements)
         package["translation_prompt_preview"] = prompt[:AUDIT_CHARS]
+
+        package["diagnostic_stage"] = "call_gemini"
         translated, model_or_error, attempts = call_gemini(prompt)
         package["translation_chain_attempted"] = attempts
         package["translation_model"] = model_or_error
         package["translation_used"] = bool(translated)
         if translated:
             package["translation_raw_response_preview"] = translated[:AUDIT_CHARS]
+            package["diagnostic_stage"] = "parse_json"
             data = parse_bob_json(translated)
             package["title_it"] = clean_text(data.get("title_it") or meta.get("source_title") or item.get("title") or "")
             package["body_html"] = data.get("body_html") or fallback_body(elements)
             package["excerpt_it"] = clean_text(data.get("excerpt_it") or "")
             package["bob_notes"] = data.get("notes") if isinstance(data.get("notes"), list) else []
             package["status"] = "ready_for_alfred"
+            package["diagnostic_stage"] = "ready_for_alfred"
         else:
             package["title_it"] = meta.get("source_title") or item.get("title") or ""
             package["body_html"] = fallback_body(elements)
             package["excerpt_it"] = meta.get("description", "")
             package["bob_notes"] = ["translation_unavailable", model_or_error]
             package["status"] = "extraction_ready_translation_pending"
+            package["diagnostic_stage"] = "translation_pending"
     except Exception as exc:
         package["error"] = str(exc)[:1200]
+        package["traceback_preview"] = traceback.format_exc()[-4000:]
         package["status"] = "error"
     return package
 
@@ -473,9 +529,10 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
         "agent": "Bob",
         "version": BOB_VERSION,
         "generated_at": utc_now(),
-        "mode": "clean_source_article_package_writer",
+        "mode": "diagnostic_clean_element_article_package_writer",
         "policy": {
             "clean_before_gemini": True,
+            "dom_noise_reduction_enabled": False,
             "drop_cta_comment_bait_social_bars_before_gemini": True,
             "drop_spotlight_related_blocks_before_gemini": True,
             "drop_duplicate_first_featured_image": True,
@@ -484,6 +541,8 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
             "model_chain": MODEL_CHAIN,
             "max_articles_per_run": MAX_ARTICLES_PER_RUN,
             "prompt_family": "v92_historical_natural_full_translation",
+            "diagnostic_mode": True,
+            "fallback_mode": False,
         },
         "input": {
             "menzo_version": decision.get("version") if isinstance(decision, dict) else None,
@@ -494,13 +553,15 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
             "ready_for_alfred": sum(1 for article in articles if article.get("status") == "ready_for_alfred"),
             "translation_pending": sum(1 for article in articles if article.get("status") == "extraction_ready_translation_pending"),
             "errors": sum(1 for article in articles if article.get("status") == "error"),
+            "extraction_empty": sum(1 for article in articles if article.get("status") == "extraction_empty"),
         },
     }
     write_json(ARTIFACT_BOB_FILE, result)
     write_json(BOB_ARTICLES_FILE, result)
     print(
         "[BOB v93.4] Pacchetti pronti | "
-        f"ready={result['handoff']['ready_for_alfred']} pending={result['handoff']['translation_pending']} errors={result['handoff']['errors']}",
+        f"ready={result['handoff']['ready_for_alfred']} pending={result['handoff']['translation_pending']} "
+        f"empty={result['handoff']['extraction_empty']} errors={result['handoff']['errors']}",
         flush=True,
     )
     return result
