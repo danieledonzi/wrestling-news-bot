@@ -1040,6 +1040,21 @@
     "story_core": "smackdown-ratings-update",
     "wp_post_id": 5496
   },
+  "https://www.wrestlinginc.com/2171388/wwe-kevin-nash-paul-levesque-triple-h-point-no-return-involvement/": {
+    "article_type": "soft_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/kevin-nash-svela-il-punto-di-non-ritorno-nei-rapporti-con-la-wwe/",
+    "priority": "soft",
+    "published_at": "2026-06-01T14:16:37.796658",
+    "score": 72,
+    "source": "wrestlinginc",
+    "source_title": "Kevin Nash Identifies Point Of No Return Regarding His Involvement With WWE",
+    "status": "published",
+    "story_core": "kevin-nash-opinione-tko-wwe",
+    "wp_post_id": 5771
+  },
   "https://www.wrestlinginc.com/2173643/wwe-hofer-jeff-jarrett-doesnt-think-tko-copy-aew-fairway-hell/": {
     "article_type": "strategic_discussion",
     "categories": [
@@ -1354,5 +1369,20 @@
     "status": "published",
     "story_core": "risultato-clash-in-italy-main-event",
     "wp_post_id": 5730
+  },
+  "https://www.wrestlinginc.com/2184636/wwe-raw-smackdown-mexico-september-15-years/": {
+    "article_type": "hard_news",
+    "categories": [
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-raw-e-smackdown-tornano-in-messico-dopo-15-anni-di-assenza/",
+    "priority": "hard",
+    "published_at": "2026-06-01T14:16:31.413571",
+    "score": 86,
+    "source": "wrestlinginc",
+    "source_title": "WWE Raw & SmackDown Returning To Mexico For The First Time In 15 Years In September",
+    "status": "published",
+    "story_core": "wwe-ritorno-mexico-raw-smackdown",
+    "wp_post_id": 5768
   }
 }
