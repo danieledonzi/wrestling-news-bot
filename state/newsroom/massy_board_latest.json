@@ -31,7 +31,7 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-01T16:22:41.776998+00:00",
+  "generated_at": "2026-06-01T16:35:22.850239+00:00",
   "handoff": {
     "already_worked": 1,
     "hard_skipped": 1,
@@ -58,13 +58,13 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184935/wwe-clash-in-italy-2026-becky-lynch-severe-hematoma-rant",
-      "published": "Mon, 01 Jun 2026 16:12:14 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2184971/wwe-booker-t-brock-lesnar-retirement-mind-trick",
+      "published": "Mon, 01 Jun 2026 16:32:03 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "Becky Lynch sustains a hematoma at Clash In Italy and airs her frustrations about WWE referee Jessika Carr after losing the Intercontinental Title to Sol Ruca.",
-      "title": "Becky Lynch Says She Suffered 'Severe Hematoma' In Rant Following WWE Clash In Italy",
-      "url": "https://www.wrestlinginc.com/2184935/wwe-clash-in-italy-2026-becky-lynch-severe-hematoma-rant/"
+      "summary": "WWE Hall of Famer reacts to Brock Lesnar's retirement ploy, and how it reminded him of something seen in Star Wars.",
+      "title": "Booker T: Brock Lesnar's Short-Lived WWE Retirement Might've Been A 'Jedi Mind Trick'",
+      "url": "https://www.wrestlinginc.com/2184971/wwe-booker-t-brock-lesnar-retirement-mind-trick/"
     },
     {
       "assigned_to": "Menzo",
@@ -130,6 +130,18 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2184935/wwe-clash-in-italy-2026-becky-lynch-severe-hematoma-rant",
+      "published": "Mon, 01 Jun 2026 16:12:14 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "Becky Lynch sustains a hematoma at Clash In Italy and airs her frustrations about WWE referee Jessika Carr after losing the Intercontinental Title to Sol Ruca.",
+      "title": "Becky Lynch Says She Suffered 'Severe Hematoma' In Rant Following WWE Clash In Italy",
+      "url": "https://www.wrestlinginc.com/2184935/wwe-clash-in-italy-2026-becky-lynch-severe-hematoma-rant/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2172020/wwe-rikishi-ai-artificial-intelligence-real-talent",
       "published": "Sun, 17 May 2026 03:59:00 +0000",
       "reason": "requires_menzo_classification",
@@ -137,18 +149,6 @@
       "summary": "Rikishi is steadfast in his belief that WWE doesn't need to use AI in their onscreen product, stating WWE needs to let the real talent come through",
       "title": "Rikishi Doesn't Believe WWE Needs AI: We Need To Let 'Real Talent Come Through'",
       "url": "https://www.wrestlinginc.com/2172020/wwe-rikishi-ai-artificial-intelligence-real-talent/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes",
-      "published": "Mon, 01 Jun 2026 15:41:06 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "Wrestling Observer provided an update on AAA's Octagon Jr. after an injury on Saturday night.",
-      "title": "AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes",
-      "url": "https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes/"
     },
     {
       "assigned_to": "Menzo",
@@ -202,6 +202,18 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes",
+      "published": "Mon, 01 Jun 2026 15:41:06 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "Wrestling Observer provided an update on AAA's Octagon Jr. after an injury on Saturday night.",
+      "title": "AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes",
+      "url": "https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2174560/wwe-backlash-danhausen-clone-lifted-elements-independent-show",
       "published": "Sat, 16 May 2026 19:18:37 +0000",
       "reason": "requires_menzo_classification",
@@ -209,18 +221,6 @@
       "summary": "Wrestling is facing a \"clone war\" after one match at WWE Backlash copycatted a similar formula used by an independent wrestler.",
       "title": "WWE Backlash Match Reportedly Lifted Elements From Recent Independent Show",
       "url": "https://www.wrestlinginc.com/2174560/wwe-backlash-danhausen-clone-lifted-elements-independent-show/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184680/eric-bischoff-wwe-creative-stepped-on-rake",
-      "published": "Mon, 01 Jun 2026 15:30:00 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "WWE Hall of Famer Eric Bischoff has discussed WWE's slump in recent months, but feels all is not lost and believes the company can regain its momentum.",
-      "title": "Eric Bischoff Says WWE Creative Has 'Stepped On A Rake' Over The Last Few Months",
-      "url": "https://www.wrestlinginc.com/2184680/eric-bischoff-wwe-creative-stepped-on-rake/"
     },
     {
       "assigned_to": "Menzo",
@@ -281,6 +281,18 @@
       "summary": "Matt hardy reflects on Kofi Kingston becoming WWE Champion at WrestleMania 35 and commented on the New Day's importance to the younger generation of fans.",
       "title": "Matt Hardy Looks Back On KofiMania In Wake Of New Day's WWE Release",
       "url": "https://www.wrestlinginc.com/2171250/matt-hardy-kofimania-wwe-new-day/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/last-minute-matches-revealed-june-1-wwe-raw-turin",
+      "published": "Mon, 01 Jun 2026 16:25:06 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Last Minute Matches Revealed for June 1 WWE RAW in Turin\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/last-minute-matches-revealed-for-june-1-wwe-raw-in-turin-00.jpg?x16316\" width=\"800\" /></p>WWE just added a couple of incredible matches for today&#8217;s edition of Monday Night RAW in Turin, ensuring fans have a great time from start to finish. Hours before the June 1, 2026 episode of Monday Night RAW from Turin, Italy, RAW General Manager Adam Pearce took to Instagram and revealed two additional matches for ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/last-minute-matches-revealed-june-1-wwe-raw-turin/\" title=\"Last Minute Matches Revealed for June 1 WWE RAW in Turin\">Read more</a>",
+      "title": "Last Minute Matches Revealed for June 1 WWE RAW in Turin",
+      "url": "https://www.ringsidenews.com/last-minute-matches-revealed-june-1-wwe-raw-turin/"
     },
     {
       "assigned_to": "Menzo",
@@ -425,18 +437,6 @@
       "summary": "<p><img alt=\"Liv Morgan Explains Why She Entered Queen of the Ring Tournament Despite Being Champion\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/05/liv-morgan-explains-why-she-entered-queen-of-the-ring-tournament-despite-being-champion-41.jpg?x16316\" width=\"800\" /></p>Liv Morgan is already Women’s World Champion, but that isn’t stopping her from chasing Queen of the Ring. During the WWE Clash in Italy post-show, Morgan explained why she entered the 2026 Queen of the Ring tournament despite already holding championship gold. Instead of backing away from the field, Morgan made it clear that she ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/liv-morgan-explains-why-she-entered-queen-ring-tournament-despite-champion/\" title=\"Liv Morgan Explains Why She Entered Queen of the Ring Tournament Despite Being Champion\">Read more</a>",
       "title": "Liv Morgan Explains Why She Entered Queen of the Ring Tournament Despite Being Champion",
       "url": "https://www.ringsidenews.com/liv-morgan-explains-why-she-entered-queen-ring-tournament-despite-champion/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/wwe-announces-2026-queen-ring-tournament-bracket",
-      "published": "Sun, 31 May 2026 21:17:31 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"WWE Reveals Bracket For 2026 King of the Ring Tournament\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-reveals-bracket-for-2026-king-of-the-ring-tournament-18.jpg?x16316\" width=\"800\" /></p>WWE Clash in Italy took place on Sunday, May 31, 2026, at the Inalpi Arena in Turin, Italy. After the event was over, WWE got right to work on hyping their next big event. During the Clash in Italy post show, they revealed the brackets for this year&#8217;s tournaments. Needless to say, fans are in ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-announces-2026-queen-ring-tournament-bracket/\" title=\"WWE Announces 2026 Queen of the Ring Tournament Bracket\">Read more</a>",
-      "title": "WWE Announces 2026 Queen of the Ring Tournament Bracket",
-      "url": "https://www.ringsidenews.com/wwe-announces-2026-queen-ring-tournament-bracket/"
     }
   ],
   "report_candidates": [
