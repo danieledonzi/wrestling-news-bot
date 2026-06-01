@@ -53,7 +53,7 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-01T15:18:34.991335+00:00",
+  "generated_at": "2026-06-01T15:24:34.430230+00:00",
   "handoff": {
     "already_worked": 3,
     "hard_skipped": 2,
@@ -283,6 +283,18 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/mjf-tells-alicia-atout-divorce-imminent-wild-birthday-post",
+      "published": "Mon, 01 Jun 2026 15:24:24 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"MJF Tells Alicia Atout Divorce Is Imminent In Wild Birthday Post\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mjf-tells-alicia-atout-divorce-is-imminent-in-wild-birthday-post-17.jpg?x16316\" width=\"800\" /></p>MJF just wished Alicia Atout a happy birthday in the most MJF way possible, as he told her that &#8220;divorce is imminent.&#8221; On June 1, 2026, MJF took to Twitter and shared a birthday post for his wife, featuring a photo of the two riding an amusement park attraction while both appeared to be screaming. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mjf-tells-alicia-atout-divorce-imminent-wild-birthday-post/\" title=\"MJF Tells Alicia Atout Divorce Is Imminent In Wild Birthday Post\">Read more</a>",
+      "title": "MJF Tells Alicia Atout Divorce Is Imminent In Wild Birthday Post",
+      "url": "https://www.ringsidenews.com/mjf-tells-alicia-atout-divorce-imminent-wild-birthday-post/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/fans-call-out-aew-nyla-roses-absence-pride-month-post",
       "published": "Mon, 01 Jun 2026 15:10:34 +0000",
       "reason": "requires_menzo_classification",
@@ -422,18 +434,6 @@
       "summary": "<p><img alt=\"WWE Reveals Bracket For 2026 King of the Ring Tournament\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-reveals-bracket-for-2026-king-of-the-ring-tournament-18.jpg?x16316\" width=\"800\" /></p>WWE Clash in Italy took place on Sunday, May 31, 2026, at the Inalpi Arena in Turin, Italy. After the event was over, WWE got right to work on hyping their next big event. During the Clash in Italy post show, they revealed the brackets for this year&#8217;s tournaments. Needless to say, fans are in ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-announces-2026-queen-ring-tournament-bracket/\" title=\"WWE Announces 2026 Queen of the Ring Tournament Bracket\">Read more</a>",
       "title": "WWE Announces 2026 Queen of the Ring Tournament Bracket",
       "url": "https://www.ringsidenews.com/wwe-announces-2026-queen-ring-tournament-bracket/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/wwe-reveals-bracket-2026-king-ring-tournament",
-      "published": "Sun, 31 May 2026 21:17:06 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"WWE Reveals Bracket For 2026 King of the Ring Tournament\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-reveals-bracket-for-2026-king-of-the-ring-tournament-23.jpg?x16316\" width=\"800\" /></p>WWE Clash in Italy took place on Sunday, May 31, 2026, at the Inalpi Arena in Turin, Italy. After the event was over, WWE got right to work on hyping their next big event. During the post-show after WWE Clash in Italy, they revealed the bracket for the 2026 King of the Ring tournament. It ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-reveals-bracket-2026-king-ring-tournament/\" title=\"WWE Reveals Bracket For 2026 King of the Ring Tournament\">Read more</a>",
-      "title": "WWE Reveals Bracket For 2026 King of the Ring Tournament",
-      "url": "https://www.ringsidenews.com/wwe-reveals-bracket-2026-king-ring-tournament/"
     }
   ],
   "report_candidates": [
