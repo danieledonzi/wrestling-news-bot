@@ -16,7 +16,7 @@ BOB_ARTICLES_FILE = NEWSROOM_STATE_DIR / "bob_articles_latest.json"
 ALFRED_REVIEW_FILE = NEWSROOM_STATE_DIR / "alfred_review_latest.json"
 ARTIFACT_ALFRED_FILE = ARTIFACT_DIR / "alfred_review.json"
 
-ALFRED_VERSION = "v93_5_alfred_quality_editor"
+ALFRED_VERSION = "v93_5_1_conservative_quality_editor"
 
 CTA_PATTERNS = [
     re.compile(r"\b(fateci sapere|dicci la tua|lascia un commento|commenti qui sotto|cosa ne pensate)\b", re.I),
@@ -39,9 +39,9 @@ CLICKBAIT_TITLE_PATTERNS = [
     re.compile(r"\bnon ci crederai\b", re.I),
 ]
 
-WRESTLING_STYLE_WARNINGS = [
-    (re.compile(r"\bfunzionari della WWE\b", re.I), "Preferire 'dirigenti WWE' a 'funzionari della WWE'."),
-    (re.compile(r"\blottatore\b", re.I), "Valutare 'wrestler' quando il registro editoriale lo consente."),
+STYLE_NORMALIZATIONS = [
+    (re.compile(r"\bfunzionari\s+della\s+WWE\b", re.I), "dirigenti WWE"),
+    (re.compile(r"\bfunzionari\s+WWE\b", re.I), "dirigenti WWE"),
 ]
 
 ENGLISH_COMMON_WORDS = {
@@ -55,6 +55,9 @@ ALLOWED_ENGLISH_TERMS = {
     "worlds collide", "mask vs. mask", "fatal 5-way", "main roster", "call-up", "title shot",
     "booking", "storyline", "stable", "push", "turn", "premium live event", "dirty dom",
 }
+
+IMAGE_INLINE_RE = re.compile(r"<p>\s*(<!--IMAGE:[^>]+-->)\s*([^<\s][\s\S]*?)</p>", re.I)
+EMBED_INLINE_RE = re.compile(r"<p>\s*(<!--EMBED:[^>]+-->)\s*([^<\s][\s\S]*?)</p>", re.I)
 
 
 def utc_now() -> str:
@@ -93,9 +96,6 @@ def extract_quoted_segments(text: str) -> list[str]:
 
 def likely_english(text: str) -> bool:
     lowered = (text or "").lower()
-    if any(term in lowered for term in ALLOWED_ENGLISH_TERMS):
-        # Allowed terms do not exempt a full English sentence, but reduce false positives.
-        pass
     words = re.findall(r"[a-zA-Z']+", lowered)
     if len(words) < 4:
         return False
@@ -110,8 +110,37 @@ def issue(code: str, severity: str, message: str, evidence: str = "") -> dict[st
     return out
 
 
+def normalize_placeholders(body_html: str) -> tuple[str, list[dict[str, str]]]:
+    changes: list[dict[str, str]] = []
+
+    def image_repl(match: re.Match[str]) -> str:
+        changes.append(issue("image_placeholder_split", "info", "Placeholder immagine separato dal paragrafo di testo.", match.group(1)))
+        return f"{match.group(1)}\n<p>{match.group(2).strip()}</p>"
+
+    def embed_repl(match: re.Match[str]) -> str:
+        changes.append(issue("embed_placeholder_split", "info", "Placeholder embed separato dal paragrafo di testo.", match.group(1)))
+        return f"{match.group(1)}\n<p>{match.group(2).strip()}</p>"
+
+    body_html = IMAGE_INLINE_RE.sub(image_repl, body_html)
+    body_html = EMBED_INLINE_RE.sub(embed_repl, body_html)
+    return body_html, changes
+
+
+def apply_style_normalizations(body_html: str) -> tuple[str, list[dict[str, str]]]:
+    changes: list[dict[str, str]] = []
+    for pattern, replacement in STYLE_NORMALIZATIONS:
+        if pattern.search(body_html):
+            body_html = pattern.sub(replacement, body_html)
+            changes.append(issue("style_normalization", "info", f"Normalizzato in '{replacement}'.", pattern.pattern))
+    return body_html, changes
+
+
 def review_article(article: dict[str, Any]) -> dict[str, Any]:
-    body_html = str(article.get("body_html") or "")
+    original_body_html = str(article.get("body_html") or "")
+    body_html, placeholder_changes = normalize_placeholders(original_body_html)
+    body_html, style_changes = apply_style_normalizations(body_html)
+    editorial_changes = placeholder_changes + style_changes
+
     title = clean_text(str(article.get("title_it") or ""))
     plain = clean_text(body_html)
     issues: list[dict[str, str]] = []
@@ -146,9 +175,6 @@ def review_article(article: dict[str, Any]) -> dict[str, Any]:
             issues.append(issue("untranslated_quote", "blocker", "Citazione rimasta in inglese o non tradotta integralmente.", segment))
             break
 
-    if likely_english(plain[:1200]):
-        warnings.append(issue("possible_english_residue", "warning", "Possibile residuo inglese nel corpo articolo. Da verificare manualmente.", plain[:500]))
-
     for pattern in CLICKBAIT_TITLE_PATTERNS:
         match = pattern.search(title)
         if match:
@@ -156,11 +182,6 @@ def review_article(article: dict[str, Any]) -> dict[str, Any]:
             break
     if len(title) > 95:
         warnings.append(issue("title_too_long", "warning", "Titolo probabilmente troppo lungo per SEO/social.", title))
-
-    for pattern, message in WRESTLING_STYLE_WARNINGS:
-        match = pattern.search(plain)
-        if match:
-            warnings.append(issue("style_warning", "warning", message, match.group(0)))
 
     element_counts = article.get("element_counts", {}) if isinstance(article.get("element_counts"), dict) else {}
     if int(element_counts.get("text", 0) or 0) == 0:
@@ -180,6 +201,7 @@ def review_article(article: dict[str, Any]) -> dict[str, Any]:
         "quality_score": score,
         "issues": issues,
         "warnings": warnings,
+        "editorial_changes": editorial_changes,
         "approved_article": {
             "source_url": article.get("source_url"),
             "source_title": article.get("source_title"),
@@ -200,6 +222,7 @@ def review_article(article: dict[str, Any]) -> dict[str, Any]:
             "bob_removed_before_gemini": article.get("removed_before_gemini"),
             "bob_clean_element_count": article.get("clean_element_count"),
             "bob_translation_model": article.get("translation_model"),
+            "editorial_changes": len(editorial_changes),
         },
     }
 
@@ -216,7 +239,7 @@ def run_alfred(bob_result: dict[str, Any] | None = None) -> dict[str, Any]:
         "agent": "Alfred",
         "version": ALFRED_VERSION,
         "generated_at": utc_now(),
-        "mode": "deterministic_quality_editor",
+        "mode": "conservative_quality_editor",
         "input": {
             "bob_version": bob.get("version") if isinstance(bob, dict) else None,
             "articles": len(articles),
@@ -228,6 +251,7 @@ def run_alfred(bob_result: dict[str, Any] | None = None) -> dict[str, Any]:
             "needs_revision": sum(1 for r in reviews if r.get("decision") == "needs_revision"),
             "warnings": sum(len(r.get("warnings", [])) for r in reviews),
             "blockers": sum(len(r.get("issues", [])) for r in reviews),
+            "editorial_changes": sum(len(r.get("editorial_changes", [])) for r in reviews),
         },
         "policy": {
             "checks": [
@@ -238,10 +262,14 @@ def run_alfred(bob_result: dict[str, Any] | None = None) -> dict[str, Any]:
                 "missing_or_short_body",
                 "image_embed_placeholders",
                 "title_clickbait_or_length",
-                "wrestling_style_warnings",
+            ],
+            "deterministic_normalizations": [
+                "split_inline_image_embed_placeholders",
+                "funzionari_wwe_to_dirigenti_wwe",
             ],
             "ai_used": False,
             "auto_rewrite": False,
+            "conservative_mode": True,
         },
     }
     write_json(ARTIFACT_ALFRED_FILE, result)
@@ -249,7 +277,8 @@ def run_alfred(bob_result: dict[str, Any] | None = None) -> dict[str, Any]:
     print(
         "[ALFRED v93.5] Revisione pronta | "
         f"approved={result['handoff']['approved']} needs_revision={result['handoff']['needs_revision']} "
-        f"blockers={result['handoff']['blockers']} warnings={result['handoff']['warnings']}",
+        f"blockers={result['handoff']['blockers']} warnings={result['handoff']['warnings']} "
+        f"changes={result['handoff']['editorial_changes']}",
         flush=True,
     )
     return result
