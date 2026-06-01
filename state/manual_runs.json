@@ -250,5 +250,27 @@
     "wp_post_id": 5724,
     "link": "https://news.openwrestlingtv.com/wwe/wwe-clash-in-italy-2026-risultati-e-momenti-salienti/",
     "created_at": "2026-05-31T21:27:23.169835"
+  },
+  {
+    "job": {
+      "kind": "report",
+      "report_key": "manual_report_cody-rhodes-and-roman-reigns-have-tense-backstage-staredown-after-wwe-clash-in-italy_20260601083829",
+      "report_id": "manual_report",
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/cody-rhodes-roman-reigns-have-tense-backstage-staredown-wwe-clash-italy/",
+      "source_title": "Cody Rhodes and Roman Reigns Have Tense Backstage Staredown After WWE Clash in Italy",
+      "title": "Cody Rhodes and Roman Reigns Have Tense Backstage Staredown After WWE Clash in Italy",
+      "date": "2026-06-01",
+      "categories": [
+        "WWE"
+      ],
+      "title_policy": "source_title",
+      "translation_mode": "report",
+      "created_at": "2026-06-01T08:38:29.213817",
+      "status": "manual_ready_to_publish"
+    },
+    "wp_post_id": 5755,
+    "link": "https://news.openwrestlingtv.com/wwe/cody-rhodes-and-roman-reigns-have-tense-backstage-staredown-after-wwe-clash-in-italy/",
+    "created_at": "2026-06-01T08:38:49.967460"
   }
 ]
