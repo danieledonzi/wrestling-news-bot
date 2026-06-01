@@ -3,6 +3,28 @@
   "already_worked": [
     {
       "decision": "already_worked",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2184202/wwe-clash-in-italy-2026-four-titles-on-line-oba-femi-brock-lesnar",
+      "published": "Sun, 31 May 2026 16:00:00 +0000",
+      "reason": "url_present_in_state",
+      "source": "wrestlinginc",
+      "summary": "This is  Wrestling Inc.'s results for WWE Clash In Italy 2026, with the Undisputed WWE & World Heavyweight Championships among those set to be defended!",
+      "title": "WWE Clash In Italy Results 5/31 - Four Titles On The Line, Oba Femi Faces Brock Lesnar",
+      "url": "https://www.wrestlinginc.com/2184202/wwe-clash-in-italy-2026-four-titles-on-line-oba-femi-brock-lesnar/"
+    },
+    {
+      "decision": "already_worked",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2184309/aew-collision-may-30-2026-results",
+      "published": "Sat, 30 May 2026 23:01:58 +0000",
+      "reason": "url_present_in_state",
+      "source": "wrestlinginc",
+      "summary": "On \"AEW Collision\", Divine Dominion will have a 5-min Tag Title Eliminator Challenge match and ROH Pure Champion Lee Moriarty will be in action.",
+      "title": "AEW Collision Results 5/30 - Two Titles On The Line, STARDOM's Hazuki Makes AEW Debut",
+      "url": "https://www.wrestlinginc.com/2184309/aew-collision-may-30-2026-results/"
+    },
+    {
+      "decision": "already_worked",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/cody-rhodes-roman-reigns-have-tense-backstage-staredown-wwe-clash-italy",
       "published": "Sun, 31 May 2026 23:04:38 +0000",
@@ -31,14 +53,25 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-01T14:33:25.167519+00:00",
+  "generated_at": "2026-06-01T14:47:02.015070+00:00",
   "handoff": {
-    "already_worked": 1,
-    "hard_skipped": 1,
-    "to_menzo": 32,
+    "already_worked": 3,
+    "hard_skipped": 2,
+    "to_menzo": 29,
     "to_simone": 1
   },
   "hard_skipped": [
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2184477/wwe-clash-in-italy-2026-hated-loved-opinion-review",
+      "published": "Sun, 31 May 2026 22:19:45 +0000",
+      "reason": "listicle_things_we_loved_hated",
+      "source": "wrestlinginc",
+      "summary": "On a night that saw Roman Reigns and Cody Rhodes retain their titles, here are three things we hated and three things we loved about WWE Clash in Italy 2026!",
+      "title": "WWE Clash In Italy 2026: 3 Things We Hated & 3 Things We Loved",
+      "url": "https://www.wrestlinginc.com/2184477/wwe-clash-in-italy-2026-hated-loved-opinion-review/"
+    },
     {
       "decision": "hard_skip",
       "feed_url": "https://www.ringsidenews.com/feed/",
@@ -58,49 +91,37 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184643/roman-reigns-la-knight-royce-keys-wwe-clash-in-italy",
-      "published": "Mon, 01 Jun 2026 14:00:00 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2184793/aew-future-prospects-wbd-paramount-skydance",
+      "published": "Mon, 01 Jun 2026 14:33:29 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "After retaining his world title at WWE Clash in Italy, Roman Reigns has now turned his attention to Royce Keys and LA Knight and sent a warning their way.",
-      "title": "Roman Reigns Addresses Comments From LA Knight, Royce Keys After WWE Clash In Italy",
-      "url": "https://www.wrestlinginc.com/2184643/roman-reigns-la-knight-royce-keys-wwe-clash-in-italy/"
+      "summary": "Despite some worries from those within the company initially, there is a sense of optimism surrounding AEW's future after the WBD/Paramount merger.",
+      "title": "Backstage News On AEW's Future Prospects After WBD Purchase By Paramount Skydance",
+      "url": "https://www.wrestlinginc.com/2184793/aew-future-prospects-wbd-paramount-skydance/"
     },
     {
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2173128/eric-bischoff-respects-aew-tony-khan-rebel",
-      "published": "Sun, 17 May 2026 16:30:00 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results",
+      "published": "Sun, 31 May 2026 01:00:00 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "Eric Bischoff hasn't been shy in criticizing Tony Khan, but during an episode of \"83 Weeks,\" Bischoff expressed respect for the AEW president instead.",
-      "title": "Eric Bischoff Talks Recent Development That Makes Him Respect AEW's Tony Khan",
-      "url": "https://www.wrestlinginc.com/2173128/eric-bischoff-respects-aew-tony-khan-rebel/"
+      "summary": "This is Wrestling Inc.'s live coverage of AAA Nocha de Los Grandes, headlined by El Grande Americano versus the Original Grande Americano in Mask vs. Mask.",
+      "title": "AAA Noche De Los Grandes Results - Mask Vs. Mask, Three Titles On The Line",
+      "url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results/"
     },
     {
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2174876/wwe-hofer-jeff-jarrett-dsotr-episode-opportunity",
-      "published": "Sun, 17 May 2026 15:40:02 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2184664/wwe-aaa-triplemania-2026-night-one-las-vegas",
+      "published": "Mon, 01 Jun 2026 14:30:00 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "Jeff Jarrett explains why he saw the \"Dark Side of the Ring\" episode covering him and TNA Wrestling as an \"opportunity.\"",
-      "title": "WWE HOFer Jeff Jarrett Saw DSOTR Episode As 'Opportunity'",
-      "url": "https://www.wrestlinginc.com/2174876/wwe-hofer-jeff-jarrett-dsotr-episode-opportunity/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2172951/aew-jeff-jarrett-tony-khan-booking-brilliant",
-      "published": "Sun, 17 May 2026 15:30:00 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "Jeff Jarrett explains why he thinks that Tony Khan's AEW booking philosophy when it comes to having a larger than usual roster is, in fact, \"brilliant\"",
-      "title": "Jeff Jarrett Explains Why Tony Khan's AEW Booking Philosophy Is 'Brilliant'",
-      "url": "https://www.wrestlinginc.com/2172951/aew-jeff-jarrett-tony-khan-booking-brilliant/"
+      "summary": "AAA's biggest pay-per-view of the year, TripleMania, will be held over two nights, following the trend set by WWE, with Night 1 taking place in Las Vegas.",
+      "title": "WWE Announces Night One Of AAA TripleMania 2026 Will Take Place In Las Vegas",
+      "url": "https://www.wrestlinginc.com/2184664/wwe-aaa-triplemania-2026-night-one-las-vegas/"
     },
     {
       "assigned_to": "Menzo",
@@ -125,18 +146,6 @@
       "summary": "Bully Ray considers \"WWE NXT\" his favorite wrestling TV show, primarily because of how successfully it sets up the next generation of stars.",
       "title": "Bully Ray Explains Why WWE NXT Is His Favorite Pro Wrestling Show",
       "url": "https://www.wrestlinginc.com/2172849/wwe-nxt-bully-ray-favorite-pro-wrestling-show/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184636/wwe-raw-smackdown-mexico-september-15-years",
-      "published": "Mon, 01 Jun 2026 13:30:00 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "WWE will return to Mexico for Raw and SmackDown for the first time in 15 years, with both shows set to take place in Mexico City.",
-      "title": "WWE Raw & SmackDown Returning To Mexico For The First Time In 15 Years In September",
-      "url": "https://www.wrestlinginc.com/2184636/wwe-raw-smackdown-mexico-september-15-years/"
     },
     {
       "assigned_to": "Menzo",
@@ -190,6 +199,18 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2184643/roman-reigns-la-knight-royce-keys-wwe-clash-in-italy",
+      "published": "Mon, 01 Jun 2026 14:00:00 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "After retaining his world title at WWE Clash in Italy, Roman Reigns has now turned his attention to Royce Keys and LA Knight and sent a warning their way.",
+      "title": "Roman Reigns Addresses Comments From LA Knight, Royce Keys After WWE Clash In Italy",
+      "url": "https://www.wrestlinginc.com/2184643/roman-reigns-la-knight-royce-keys-wwe-clash-in-italy/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2171978/wwe-hofer-eric-bischoff-thrilled-danhausen",
       "published": "Sat, 16 May 2026 21:00:00 +0000",
       "reason": "requires_menzo_classification",
@@ -209,18 +230,6 @@
       "summary": "A former WWE star who worked under Shawn Michaels and Triple H on WWE NXT has discussed the major differences in how the two run the brand.",
       "title": "Former WWE NXT Star Reveals How Things Changed When Shawn Michaels Took Over",
       "url": "https://www.wrestlinginc.com/2171776/wwe-nxt-ridge-holland-shawn-michaels/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184628/liv-morgan-wwe-queen-of-the-ring-2026-womens-world-title",
-      "published": "Mon, 01 Jun 2026 13:00:00 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "Liv Morgan has revealed why she is eager to compete in the Queen of the Ring tournament, despite already holding the WWE Women's World Championship.",
-      "title": "Liv Morgan Explains Why She's In WWE Queen Of The Ring 2026 Despite Holding Title",
-      "url": "https://www.wrestlinginc.com/2184628/liv-morgan-wwe-queen-of-the-ring-2026-womens-world-title/"
     },
     {
       "assigned_to": "Menzo",
@@ -262,25 +271,13 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2171387/wwe-jbl-john-bradshaw-layfield-john-laurinaitis-conversation-restructuring-contract",
-      "published": "Sat, 16 May 2026 19:00:00 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2184636/wwe-raw-smackdown-mexico-september-15-years",
+      "published": "Mon, 01 Jun 2026 13:30:00 +0000",
       "reason": "requires_menzo_classification",
       "source": "wrestlinginc",
-      "summary": "WWE Hall of Famer John \"Bradshaw\" Layfield once received a phone call minutes before surgery, with a former executive asking him to take a pay cut.",
-      "title": "JBL Recalls Past Conversation About Restructuring WWE Contract",
-      "url": "https://www.wrestlinginc.com/2171387/wwe-jbl-john-bradshaw-layfield-john-laurinaitis-conversation-restructuring-contract/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2171344/wwe-tests-wrestlers-attitude-problem-dijak-oba-femi",
-      "published": "Sat, 16 May 2026 18:30:00 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "A former WWE star explained a little in a social media post about how WWE tests its wrestlers to see \"if they have an attitude problem.\"",
-      "title": "How WWE Tests Wrestlers 'To See If They Have An Attitude Problem,' Per Former Star",
-      "url": "https://www.wrestlinginc.com/2171344/wwe-tests-wrestlers-attitude-problem-dijak-oba-femi/"
+      "summary": "WWE will return to Mexico for Raw and SmackDown for the first time in 15 years, with both shows set to take place in Mexico City.",
+      "title": "WWE Raw & SmackDown Returning To Mexico For The First Time In 15 Years In September",
+      "url": "https://www.wrestlinginc.com/2184636/wwe-raw-smackdown-mexico-september-15-years/"
     },
     {
       "assigned_to": "Menzo",
