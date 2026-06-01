@@ -1,0 +1,65 @@
+{
+  "agent": "Publisher",
+  "generated_at": "2026-06-01T16:46:56.045089+00:00",
+  "handoff": {
+    "already_published": 0,
+    "dry_run": 0,
+    "errors": 0,
+    "published": 3,
+    "wp_not_ready": 0
+  },
+  "input": {
+    "alfred_version": "v93_5_1_conservative_quality_editor",
+    "approved_articles": 3
+  },
+  "mode": "wordpress_publisher",
+  "policy": {
+    "featured_image_source": "meta.featured_image_or_first_placeholder",
+    "idempotency": "state/newsroom/publisher_history.json by source_url",
+    "source_attribution": true,
+    "strip_inline_image_placeholders": true
+  },
+  "results": [
+    {
+      "categories": [
+        8
+      ],
+      "featured_media": 5775,
+      "source_url": "https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes/",
+      "status": "published",
+      "title_it": "Infortunio per Octagon Jr. durante i tapings di AAA Noche de Los Grandes",
+      "wp_link": "https://news.openwrestlingtv.com/world/infortunio-per-octagon-jr-durante-i-tapings-di-aaa-noche-de-los-grandes/",
+      "wp_post_id": 5776
+    },
+    {
+      "categories": [
+        6,
+        4
+      ],
+      "featured_media": 5777,
+      "source_url": "https://www.ringsidenews.com/nxt-stars-future-revealed-amid-wwe-main-roster-call-rumors/",
+      "status": "published",
+      "title_it": "NXT: il futuro di Nikkita Lyons tra i rumor sul main roster",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/nxt-il-futuro-di-nikkita-lyons-tra-i-rumor-sul-main-roster/",
+      "wp_post_id": 5778
+    },
+    {
+      "categories": [
+        8
+      ],
+      "featured_media": 5779,
+      "source_url": "https://www.ringsidenews.com/octagon-jrs-recovery-timeline-revealed-injury-aaa-noche-de-los-grandes-taping/",
+      "status": "published",
+      "title_it": "Octagón Jr.: rivelati i tempi di recupero dopo l'infortunio a AAA Noche de los Grandes",
+      "wp_link": "https://news.openwrestlingtv.com/world/octagon-jr-rivelati-i-tempi-di-recupero-dopo-linfortunio-a-aaa-noche-de-los-grandes/",
+      "wp_post_id": 5780
+    }
+  ],
+  "version": "v93_6_publisher_wordpress",
+  "wp": {
+    "dry_run": false,
+    "post_status": "publish",
+    "ready": true,
+    "reason": "ok"
+  }
+}
