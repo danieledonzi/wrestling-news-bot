@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-NEWSROOM_VERSION = "v93_3_simone_report_director"
+NEWSROOM_VERSION = "v93_4_bob_article_writer"
 ARTIFACT_DIR = Path("artifacts") / "newsroom"
 
 AGENTS = [
@@ -202,6 +202,49 @@ def run_menzo_editorial(timeline: list[dict[str, str]], massy_board: dict[str, A
         return error
 
 
+def run_bob_writer(timeline: list[dict[str, str]], menzo_decision: dict[str, Any]) -> dict[str, Any]:
+    try:
+        from agents.bob import run_bob
+    except Exception as exc:
+        error = {
+            "agent": "Bob",
+            "version": NEWSROOM_VERSION,
+            "generated_at": utc_now(),
+            "status": "error",
+            "error": f"import_failed: {exc}",
+            "handoff": {"ready_for_alfred": 0, "translation_pending": 0, "errors": 0},
+        }
+        write_json(ARTIFACT_DIR / "bob_articles.json", error)
+        add_timeline(timeline, "Bob", "error", f"import_failed={exc}")
+        return error
+    try:
+        result = run_bob(menzo_decision)
+        handoff = result.get("handoff", {}) if isinstance(result, dict) else {}
+        add_timeline(
+            timeline,
+            "Bob",
+            "article_packages_ready",
+            "ready={ready} pending={pending} errors={errors}".format(
+                ready=handoff.get("ready_for_alfred", 0),
+                pending=handoff.get("translation_pending", 0),
+                errors=handoff.get("errors", 0),
+            ),
+        )
+        return result
+    except Exception as exc:
+        error = {
+            "agent": "Bob",
+            "version": NEWSROOM_VERSION,
+            "generated_at": utc_now(),
+            "status": "error",
+            "error": str(exc),
+            "handoff": {"ready_for_alfred": 0, "translation_pending": 0, "errors": 0},
+        }
+        write_json(ARTIFACT_DIR / "bob_articles.json", error)
+        add_timeline(timeline, "Bob", "error", str(exc))
+        return error
+
+
 def main() -> int:
     ensure_artifacts()
     started_at = utc_now()
@@ -209,7 +252,7 @@ def main() -> int:
 
     print(f"===== NEWSROOM RUN START [{started_at}] VERSION [{NEWSROOM_VERSION}] =====", flush=True)
     print("[NEWSROOM v93] Avvio Virtual Newsroom", flush=True)
-    print("[NEWSROOM v93] Massy, Simone and Menzo are real; downstream runtime still delegated during staged takeover", flush=True)
+    print("[NEWSROOM v93] Massy, Simone, Menzo and Bob are real; Publisher still delegated during staged takeover", flush=True)
 
     command = runtime_command()
     engine = command[1] if len(command) > 1 else "unknown"
@@ -223,11 +266,11 @@ def main() -> int:
         "engine": engine,
         "newsroom_engine_override": is_test_override,
         "wp_status_source": "existing_runtime",
-        "can_translate": "delegated_to_existing_runtime",
+        "can_translate": "v93_bob_for_news_delegated_runtime_for_publish",
         "can_publish": "delegated_to_existing_runtime",
         "notes": [
-            "Jarvis wrapper does not duplicate WordPress checks in v93.3",
-            "Existing runtime owns real WordPress diagnostics and stop-before-translation behavior",
+            "Jarvis wrapper does not duplicate WordPress checks in v93.4",
+            "Bob creates v93 article packages before any v92 fallback runtime",
         ],
     }
     write_json(ARTIFACT_DIR / "jarvis_status.json", jarvis_status)
@@ -236,27 +279,33 @@ def main() -> int:
     massy_board = run_massy_sentinel(timeline)
     simone_decision = run_simone_reports(timeline, massy_board)
     menzo_decision = run_menzo_editorial(timeline, massy_board)
+    bob_result = run_bob_writer(timeline, menzo_decision)
 
     for agent, note in [
-        ("Bob", "translation delegated to existing runtime"),
-        ("Alfred", "guardrails/QA delegated to existing runtime"),
+        ("Alfred", "guardrails/QA delegated to future v93 step"),
         ("Publisher", "WordPress publication delegated to existing runtime"),
     ]:
         add_timeline(timeline, agent, "wrapped", note)
 
-    runtime_delegations = 1
-    add_timeline(timeline, "Jarvis", "runtime_start", "delegating once via subprocess")
-    print(f"[NEWSROOM v93] Runtime command: {' '.join(command)}", flush=True)
-
-    result = subprocess.run(command, check=False)
-    runtime_exit_code = int(result.returncode)
-
-    add_timeline(timeline, "Publisher", "runtime_finished", f"exit_code={runtime_exit_code}")
+    runtime_delegations = 0
+    runtime_exit_code = 0
+    skip_v92 = str(os.getenv("V93_SKIP_V92_AFTER_BOB", "1")).strip().lower() not in {"0", "false", "no", "off"}
+    if skip_v92 and not is_test_override:
+        add_timeline(timeline, "Jarvis", "runtime_skipped", "Bob packages generated; v92 fallback skipped to avoid legacy side effects")
+        print("[NEWSROOM v93] v92 fallback skipped because V93_SKIP_V92_AFTER_BOB=1", flush=True)
+    else:
+        runtime_delegations = 1
+        add_timeline(timeline, "Jarvis", "runtime_start", "delegating once via subprocess")
+        print(f"[NEWSROOM v93] Runtime command: {' '.join(command)}", flush=True)
+        result = subprocess.run(command, check=False)
+        runtime_exit_code = int(result.returncode)
+        add_timeline(timeline, "Publisher", "runtime_finished", f"exit_code={runtime_exit_code}")
 
     ended_at = utc_now()
     massy_handoff = massy_board.get("handoff", {}) if isinstance(massy_board, dict) else {}
     simone_handoff = simone_decision.get("handoff", {}) if isinstance(simone_decision, dict) else {}
     menzo_handoff = menzo_decision.get("handoff", {}) if isinstance(menzo_decision, dict) else {}
+    bob_handoff = bob_result.get("handoff", {}) if isinstance(bob_result, dict) else {}
     run_summary = {
         "version": NEWSROOM_VERSION,
         "started_at": started_at,
@@ -270,20 +319,21 @@ def main() -> int:
             "massy": "real_sentinel_control",
             "simone": "real_report_director",
             "menzo": "real_editorial_director",
-            "bob": "wrapped",
-            "alfred": "wrapped",
-            "publisher": "wrapped",
+            "bob": "real_article_writer",
+            "alfred": "wrapped_pending_takeover",
+            "publisher": "wrapped_pending_takeover",
             "archivista": "wrapped",
         },
         "massy_handoff": massy_handoff,
         "simone_handoff": simone_handoff,
         "menzo_handoff": menzo_handoff,
+        "bob_handoff": bob_handoff,
         "notes": [
-            "v93.3 introduces Simone as report director",
-            "Simone consumes Massy report_candidates and stores state/newsroom/simone_reports_latest.json",
-            "Menzo selects URLs for Bob/v92 and stores state/newsroom/v92_allowed_news_urls.json",
-            "bot_v92 remains delegated until Bob/Publisher takeover is completed",
-            "Reports remain excluded from the daily news target by design documentation",
+            "v93.4 introduces Bob as article writer",
+            "Bob consumes Menzo selected URLs and writes ordered article packages",
+            "Bob removes duplicate first featured image and source bio/footer sections",
+            "v92 fallback is skipped by default after Bob to avoid legacy patch side effects",
+            "Publisher remains a future v93 takeover step",
         ],
     }
 
