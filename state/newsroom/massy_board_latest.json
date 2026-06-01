@@ -32,12 +32,12 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-01T22:59:37.222939+00:00",
+  "generated_at": "2026-06-01T23:12:18.136185+00:00",
   "handoff": {
-    "already_published_hard_skipped": 7,
+    "already_published_hard_skipped": 8,
     "already_worked": 1,
-    "hard_skipped": 9,
-    "to_menzo": 24,
+    "hard_skipped": 10,
+    "to_menzo": 23,
     "to_simone": 1
   },
   "hard_skipped": [
@@ -114,6 +114,18 @@
     {
       "decision": "hard_skip",
       "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw",
+      "published": "Mon, 01 Jun 2026 20:34:51 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/paul-heyman-gets-speared-through-the-barricade-during-june-1-wwe-raw-49.jpg?x51578\" width=\"800\" /></p>Paul Heyman got way too close to the action on WWE RAW, and Bron Breakker made him pay for it by accident. During the June 1 episode of RAW, Seth Rollins faced Bron Breakker in the main event. Things got wild late in the match after Austin Theory came down and got involved. Theory hit ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/\" title=\"Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW\">Read more</a>",
+      "title": "Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW",
+      "url": "https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/finn-balor-moves-smackdown-wwe-raw-trade",
       "published": "Mon, 01 Jun 2026 19:35:52 +0000",
       "published_guard": "publisher_history",
@@ -138,17 +150,17 @@
     {
       "decision": "hard_skip",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026",
-      "published": "Mon, 01 Jun 2026 18:33:32 +0000",
+      "normalized_url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring",
+      "published": "Mon, 01 Jun 2026 18:50:53 +0000",
       "published_guard": "publisher_history",
       "reason": "url_already_published",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Dynamite-Massive-Increase-1.jpg?x51578\" width=\"800\" /></p>New ratings data has been released for the May 27, 2026 episode of AEW Dynamite on TBS, reflecting steady upward momentum. According to Programming Insider, AEW Dynamite on May 27, 2026 drew 704,000 viewers on TBS, with a 0.12 rating in the key P18–49 demographic. For comparison, the May 20, 2026 episode drew 613,000 viewers ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/\" title=\"AEW Dynamite Viewership Sees Increase on May 27, 2026\">Read more</a>",
-      "title": "AEW Dynamite Viewership Sees Increase on May 27, 2026",
-      "url": "https://www.ringsidenews.com/aew-dynamite-viewership-sees-increase-may-27-2026/"
+      "summary": "<p><img alt=\"Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring-46.jpg?x51578\" width=\"800\" /></p>Oba Femi didn’t just advance in the King of the Ring tournament on June 1 WWE RAW — he made sure Brock Lesnar heard him loud and clear afterward. After defeating Penta, Carmelo Hayes, and Solo Sikoa in a wild Fatal Four-Way first-round match, Oba grabbed a microphone and turned his attention straight to Lesnar. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/\" title=\"Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring\">Read more</a>",
+      "title": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring",
+      "url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/"
     }
   ],
-  "known_published_urls": 12,
+  "known_published_urls": 16,
   "known_state_urls": 9,
   "mode": "sentinel_control_board",
   "news_candidates_for_menzo": [
@@ -336,6 +348,18 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary",
+      "published": "Mon, 01 Jun 2026 23:10:51 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/aj-francis-calls-out-mike-santana-for-tna-world-title-match-at-slammiversary-55.jpg?x51578\" width=\"800\" /></p>AJ Francis wants the big spot at TNA Slammiversary, and he’s calling out Mike Santana to make it happen. Santana is currently TNA World Champion, but his challenger for Slammiversary has not been confirmed yet. Francis made it clear during a new interview with Jim Varsallone that he believes he should be the one standing ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/\" title=\"AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary\">Read more</a>",
+      "title": "AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary",
+      "url": "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war",
       "published": "Mon, 01 Jun 2026 22:51:58 +0000",
       "reason": "requires_menzo_classification",
@@ -384,18 +408,6 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw",
-      "published": "Mon, 01 Jun 2026 20:34:51 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/paul-heyman-gets-speared-through-the-barricade-during-june-1-wwe-raw-49.jpg?x51578\" width=\"800\" /></p>Paul Heyman got way too close to the action on WWE RAW, and Bron Breakker made him pay for it by accident. During the June 1 episode of RAW, Seth Rollins faced Bron Breakker in the main event. Things got wild late in the match after Austin Theory came down and got involved. Theory hit ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/\" title=\"Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW\">Read more</a>",
-      "title": "Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW",
-      "url": "https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/wwe-confirms-king-queen-ring-tournament-matches-june-8-raw",
       "published": "Mon, 01 Jun 2026 20:08:24 +0000",
       "reason": "requires_menzo_classification",
@@ -415,18 +427,6 @@
       "summary": "<p><img alt=\"Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/iyo-sky-advances-in-queen-of-the-ring-after-wild-fatal-four-way-on-june-1-wwe-raw-49.jpg?x51578\" width=\"800\" /></p>Iyo Sky is moving on in the Queen of the Ring tournament. During the June 1 episode of WWE RAW, Sky defeated Lash Legend, Roxanne Perez, and Giulia in a first-round Fatal Four-Way match. The match was chaotic from the start, with Lash using her power early while Iyo, Giulia, and Roxanne all tried to ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/\" title=\"Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW\">Read more</a>",
       "title": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW",
       "url": "https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring",
-      "published": "Mon, 01 Jun 2026 18:50:53 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring-46.jpg?x51578\" width=\"800\" /></p>Oba Femi didn’t just advance in the King of the Ring tournament on June 1 WWE RAW — he made sure Brock Lesnar heard him loud and clear afterward. After defeating Penta, Carmelo Hayes, and Solo Sikoa in a wild Fatal Four-Way first-round match, Oba grabbed a microphone and turned his attention straight to Lesnar. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/\" title=\"Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring\">Read more</a>",
-      "title": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring",
-      "url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/"
     },
     {
       "assigned_to": "Menzo",

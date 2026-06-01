@@ -6,7 +6,7 @@
       "blockers": 1,
       "editorial_changes": 0,
       "needs_revision": 1,
-      "warnings": 2
+      "warnings": 0
     },
     "bob": {
       "errors": 0,
@@ -15,23 +15,23 @@
       "translation_pending": 0
     },
     "massy": {
-      "already_published_hard_skipped": 7,
+      "already_published_hard_skipped": 8,
       "already_worked": 1,
-      "hard_skipped": 9,
-      "to_menzo": 24,
+      "hard_skipped": 10,
+      "to_menzo": 23,
       "to_simone": 1
     },
     "menzo": {
-      "pending": 3,
-      "skipped": 15,
+      "pending": 0,
+      "skipped": 17,
       "to_bob_or_v92": 6
     },
     "publisher": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 0,
-      "wp_not_ready": 2
+      "published": 2,
+      "wp_not_ready": 0
     },
     "simone": {
       "ready": 0,
@@ -47,7 +47,7 @@
         "blockers": 1,
         "editorial_changes": 0,
         "needs_revision": 1,
-        "warnings": 2
+        "warnings": 0
       },
       "message": "Alfred ha trovato blocker qualitativi.",
       "severity": "error"
@@ -59,22 +59,10 @@
         "blockers": 1,
         "editorial_changes": 0,
         "needs_revision": 1,
-        "warnings": 2
+        "warnings": 0
       },
       "message": "Alfred ha mandato articoli in revisione.",
       "severity": "warning"
-    },
-    {
-      "code": "wp_not_ready",
-      "context": {
-        "already_published": 0,
-        "dry_run": 0,
-        "errors": 0,
-        "published": 0,
-        "wp_not_ready": 2
-      },
-      "message": "WordPress non era pronto/raggiungibile.",
-      "severity": "error"
     },
     {
       "code": "article_needs_revision",
@@ -82,12 +70,12 @@
         "issues": [
           {
             "code": "untranslated_quote",
-            "evidence": "Before the draft, I buried the season. After the draft, I believed again. And now, at 35,000 feet, the Browns have somehow found a new way to ruin my flight.",
+            "evidence": "annuncio è arrivato nella stessa serata in cui Oba Femi ha superato il turno nel torneo King of the Ring, mentre IYO SKY ha fatto lo stesso nel torneo Queen of the Ring. Ciò significa che entrambi i tabelloni stanno iniziando a prendere forma, mentre la WWE si prepara verso le finali dei tornei. Con il trasferimento di RAW a Parigi, la WWE sta arricchendo la card con incontri dal peso specifico notevole. Seth Rollins, Je’Von Evans, Ricky Saints e Talla Tonga cercheranno tutti di avvicinarsi alla conquista della corona di King of the Ring, mentre Becky Lynch, Liv Morgan, Alexa Bliss e Chelsea Green lotteranno per proseguire il proprio cammino verso il titolo di Queen of the Ring. La puntata d",
             "message": "Citazione rimasta in inglese o non tradotta integralmente.",
             "severity": "blocker"
           }
         ],
-        "source_url": "https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal"
+        "source_url": "https://www.ringsidenews.com/wwe-confirms-king-queen-ring-tournament-matches-june-8-raw"
       },
       "message": "Articolo fermato da Alfred.",
       "severity": "warning"
@@ -115,21 +103,21 @@
         "translation_model": null,
         "translation_used": null
       },
-      "category_hint": "AEW",
+      "category_hint": "WWE",
       "html_audit": {
         "alfred_final_html_preview": "",
         "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_mick-foley-says-aew-reminds-him-of-wwe-s-attitude-era.html",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_iyo-sky-advances-in-queen-of-the-ring-after-wild-fatal-four-way-on-june-1-wwe-raw.html",
         "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_mick-foley-says-aew-reminds-him-of-wwe-s-attitude-era.html",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_iyo-sky-advances-in-queen-of-the-ring-after-wild-fatal-four-way-on-june-1-wwe-raw.html",
         "publisher_review_html_preview": "",
         "translation_prompt_preview": ""
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "hard:return,entity:mick foley,soft_penalty:reaction,recency:fresh_12h",
-        "score": 73
+        "reason": "strategic:queen of the ring,strategic:raw,recency:fresh_12h",
+        "score": 66
       },
       "publisher": {
         "categories": null,
@@ -141,79 +129,8 @@
         "wp_post_id": null
       },
       "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/mick-foley-says-aew-reminds-him-wwes-attitude-era",
-      "title_it": "Mick Foley Says AEW Reminds Him of WWE’s Attitude Era"
-    },
-    {
-      "alfred": {
-        "decision": "needs_revision",
-        "editorial_changes": [],
-        "issues": [
-          {
-            "code": "untranslated_quote",
-            "evidence": "Before the draft, I buried the season. After the draft, I believed again. And now, at 35,000 feet, the Browns have somehow found a new way to ruin my flight.",
-            "message": "Citazione rimasta in inglese o non tradotta integralmente.",
-            "severity": "blocker"
-          }
-        ],
-        "present": true,
-        "quality_score": 70,
-        "warnings": [
-          {
-            "code": "image_placeholder_present",
-            "evidence": "<!--IMAGE:...-->",
-            "message": "Presente placeholder immagine da gestire nel Publisher.",
-            "severity": "warning"
-          }
-        ]
-      },
-      "bob": {
-        "clean_element_count": 11,
-        "diagnostic_stage": "ready_for_alfred",
-        "element_counts": {
-          "embed": 0,
-          "heading": 0,
-          "image": 1,
-          "quote": 3,
-          "table": 0,
-          "text": 7
-        },
-        "error": null,
-        "present": true,
-        "raw_element_count": 12,
-        "removed_before_gemini": 14,
-        "status": "ready_for_alfred",
-        "translation_model": "gemini-3.1-flash-lite",
-        "translation_used": true
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/the-miz-begs-browns-trade-news-isnt-real-after-myles-garrett-deal-02.jpg.avif?x51578-->\n<p>I Cleveland Browns hanno trovato un nuovo modo per spezzare il cuore a The Miz. La star della WWE, da sempre grande tifoso della franchigia, ha reagito con totale sconforto alla notizia della cessione di Myles Garrett, ufficializzata nella giornata di lunedì. Garrett rappresentava una delle poche note positive per Cleveland, dopo aver messo a referto 23 sack durante la stagione 2024-25, conclusasi tuttavia con un deludente record di 5-12 e la mancata qualificazione ai playoff.</p>\n<p>The Miz ha chiarito quanto questa mossa sia stata dolorosa, sottolineando di poter accettare la partenza di chiunque, ma non quella di Garrett.</p>\n<blockquote>“Not Myles. Anyone. But. Myles.”</blockquote>\n<p>Il wrestler ha spiegato di aver già perso le speranze nei confronti dei Browns prima del draft, salvo poi ricredersi e tornare a nutrire fiducia nella squadra, fino al momento in cui la notizia dello scambio lo ha raggiunto mentre si trovava in volo.</p>\n<blockquote>“Before the draft, I buried the season. After the draft, I believed again. And now, at 35,000 feet, the Browns have somehow found a new way to ruin my flight.”</blockquote>\n<p>The Miz ha concluso il suo post con lo stato d'animo che probabilmente accomuna molti tifosi dei Browns dopo l'annuncio:</p>\n<blockquote>“Please tell me this isn’t real.”</blockquote>\n<p>Questa è l'esperienza dei tifosi dei Browns riassunta in un solo post: la squadra regala loro quanto basta per tornare a credere nel progetto, per poi trovare un nuovo modo per distruggere ogni speranza. Per The Miz, perdere Myles Garrett non è stato un semplice movimento di mercato, ma un colpo allo stomaco capace di rovinargli l'intero viaggio.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_wwe-the-miz-disperato-per-la-cessione-di-myles-garrett-dai-cleveland-browns.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_wwe-the-miz-disperato-per-la-cessione-di-myles-garrett-dai-cleveland-browns.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Gli elementi [quote] vanno pubblicati come <blockquote>...</blockquote>, non come semplici <p> con virgolette.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Gli elementi [table] sono tabelle: conservali nel corpo come <table class=\"owtv-data-table\"> con righe e celle HTML semplici. Non sostituirli con soli titoli o riassunti.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal/\nTitolo feed: The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal\nTitolo pagina: The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal\nDescrizione: The Cleveland Browns found a new way to crush The Miz. The WWE star and longtime Browns fan reacted after the team traded Myles Garrett on Monday, and he\nCategoria suggerita: WWE\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/the-miz-begs-browns-trade-news-isnt-real-after-myles-garrett-deal-02.jpg.avif?x51578 ALT=The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal\n[2|text] The Cleveland Browns found a new way to crush The Miz.\n[3|text] The WWE star and longtime Browns fan reacted after the team traded Myles Garrett on Monday, and he sounded completely defeated. Garrett was one of the few bright spots in Cleveland after putting up 23 sacks during the 2024-25 season, but the Browns still finished 5-12 and missed the playoffs.\n[4|text] The Miz made it clear this one hurt bad, writing that he could handle almost anyone being moved — just not Garrett.\n[5|quote] “Not Myles. Anyone. But. Myles.”\n[6|text] He explained that he had already given up on the Browns before the draft, only for the team to pull him back in and make him believe again. Then the Garrett trade hit while he was mid-flight.\n[7|quote] “Before the draft, I buried the season. After the draft, I believed again. And now, at 35,000 feet, the Browns have somehow found a new way to ruin my flight.”\n[8|text] The Miz closed the post the way plenty of Browns fans probably felt when the news broke.\n[9|quote] “Please tell me this isn’t real.”\n[10|text] That is the Browns experience in one post. The team gives fans just enough hope to buy back in, then finds another way to rip it away. For The Miz, losing Myles Garrett wasn’t just another roster move — it was the kind of gut punch that ruined his whole flight.\n[11|text] Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.\n"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "hard:trade,current:roster_move,recency:fresh_12h",
-        "score": 100
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal",
-      "title_it": "WWE: The Miz disperato per la cessione di Myles Garrett dai Cleveland Browns"
+      "source_url": "https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw",
+      "title_it": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
     },
     {
       "alfred": {
@@ -225,52 +142,54 @@
         "warnings": []
       },
       "bob": {
-        "clean_element_count": 11,
+        "clean_element_count": 17,
         "diagnostic_stage": "ready_for_alfred",
         "element_counts": {
-          "embed": 0,
+          "embed": 3,
           "heading": 0,
           "image": 0,
-          "quote": 3,
+          "quote": 5,
           "table": 0,
-          "text": 8
+          "text": 9
         },
         "error": null,
         "present": true,
-        "raw_element_count": 13,
+        "raw_element_count": 19,
         "removed_before_gemini": 15,
         "status": "ready_for_alfred",
         "translation_model": "gemini-3.1-flash-lite",
         "translation_used": true
       },
-      "category_hint": "WWE",
+      "category_hint": "AEW",
       "html_audit": {
-        "alfred_final_html_preview": "<p>Oba Femi non si è limitato a superare il turno nel torneo King of the Ring durante la puntata di WWE RAW del 1° giugno, ma ha voluto assicurarsi che Brock Lesnar lo sentisse forte e chiaro al termine dell'incontro.</p><p>Dopo aver sconfitto Penta, Carmelo Hayes e Solo Sikoa in un caotico Fatal Four-Way match valido per il primo turno, Oba ha preso il microfono e ha rivolto la sua attenzione direttamente a Lesnar.</p><p>Oba ha menzionato Brock, chiedendogli se fosse in grado di incassare una sonora sconfitta, per poi ricordare a tutti quanto accaduto a Clash in Italy. Ha dichiarato di aver subito un duro pestaggio, di essere sopravvissuto a sette F5 e di essere rimasto comunque in piedi.</p><blockquote>“Cosa fai dopo aver incassato una sonora sconfitta? Cosa fai dopo aver ricevuto un pestaggio? Cosa fai dopo aver preso sette F5?”</blockquote><p>Oba ha poi messo in chiaro che il colpo migliore di Brock non è stato sufficiente per abbatterlo.</p><blockquote>“Sono in piedi e sto vincendo, ho incassato il tuo colpo migliore e sono ancora qui.”</blockquote><p>Il messaggio è stato inequivocabile: Oba prosegue il suo cammino nel King of the Ring, ma non ha ancora chiuso i conti con Lesnar. Ha dichiarato di voler vincere il torneo, ricordando a Brock che ora il bilancio tra loro è in parità.</p><blockquote>“Vincerò il King of the Ring. Siamo uno a uno e ci vedremo in futuro.”</blockquote><p>La vittoria di Oba lo ha già fatto apparire come un vero mostro, ma il promo post-match gli ha conferito un ulteriore slancio. Ha superato il caos del Fatal Four-Way, è avanzato nel torneo e ha avuto comunque le energie per sfidare Brock Lesnar.</p><p>Ora Oba ha due obiettivi davanti a sé: conquistare il King of the Ring e, in ultima analisi, regolare i conti con Brock.</p>",
-        "bob_body_html_preview": "<p>Oba Femi non si è limitato a superare il turno nel torneo King of the Ring durante la puntata di WWE RAW del 1° giugno, ma ha voluto assicurarsi che Brock Lesnar lo sentisse forte e chiaro al termine dell'incontro.</p><p>Dopo aver sconfitto Penta, Carmelo Hayes e Solo Sikoa in un caotico Fatal Four-Way match valido per il primo turno, Oba ha preso il microfono e ha rivolto la sua attenzione direttamente a Lesnar.</p><p>Oba ha menzionato Brock, chiedendogli se fosse in grado di incassare una sonora sconfitta, per poi ricordare a tutti quanto accaduto a Clash in Italy. Ha dichiarato di aver subito un duro pestaggio, di essere sopravvissuto a sette F5 e di essere rimasto comunque in piedi.</p><blockquote>“Cosa fai dopo aver incassato una sonora sconfitta? Cosa fai dopo aver ricevuto un pestaggio? Cosa fai dopo aver preso sette F5?”</blockquote><p>Oba ha poi messo in chiaro che il colpo migliore di Brock non è stato sufficiente per abbatterlo.</p><blockquote>“Sono in piedi e sto vincendo, ho incassato il tuo colpo migliore e sono ancora qui.”</blockquote><p>Il messaggio è stato inequivocabile: Oba prosegue il suo cammino nel King of the Ring, ma non ha ancora chiuso i conti con Lesnar. Ha dichiarato di voler vincere il torneo, ricordando a Brock che ora il bilancio tra loro è in parità.</p><blockquote>“Vincerò il King of the Ring. Siamo uno a uno e ci vedremo in futuro.”</blockquote><p>La vittoria di Oba lo ha già fatto apparire come un vero mostro, ma il promo post-match gli ha conferito un ulteriore slancio. Ha superato il caos del Fatal Four-Way, è avanzato nel torneo e ha avuto comunque le energie per sfidare Brock Lesnar.</p><p>Ora Oba ha due obiettivi davanti a sé: conquistare il King of the Ring e, in ultima analisi, regolare i conti con Brock.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_oba-femi-sfida-brock-lesnar-dopo-il-passaggio-del-turno-nel-king-of-the-ring.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_oba-femi-sfida-brock-lesnar-dopo-il-passaggio-del-turno-nel-king-of-the-ring.html",
-        "publisher_review_html_preview": "<p>Oba Femi non si è limitato a superare il turno nel torneo King of the Ring durante la puntata di WWE RAW del 1° giugno, ma ha voluto assicurarsi che Brock Lesnar lo sentisse forte e chiaro al termine dell'incontro.</p><p>Dopo aver sconfitto Penta, Carmelo Hayes e Solo Sikoa in un caotico Fatal Four-Way match valido per il primo turno, Oba ha preso il microfono e ha rivolto la sua attenzione direttamente a Lesnar.</p><p>Oba ha menzionato Brock, chiedendogli se fosse in grado di incassare una sonora sconfitta, per poi ricordare a tutti quanto accaduto a Clash in Italy. Ha dichiarato di aver subito un duro pestaggio, di essere sopravvissuto a sette F5 e di essere rimasto comunque in piedi.</p><blockquote>“Cosa fai dopo aver incassato una sonora sconfitta? Cosa fai dopo aver ricevuto un pestaggio? Cosa fai dopo aver preso sette F5?”</blockquote><p>Oba ha poi messo in chiaro che il colpo migliore di Brock non è stato sufficiente per abbatterlo.</p><blockquote>“Sono in piedi e sto vincendo, ho incassato il tuo colpo migliore e sono ancora qui.”</blockquote><p>Il messaggio è stato inequivocabile: Oba prosegue il suo cammino nel King of the Ring, ma non ha ancora chiuso i conti con Lesnar. Ha dichiarato di voler vincere il torneo, ricordando a Brock che ora il bilancio tra loro è in parità.</p><blockquote>“Vincerò il King of the Ring. Siamo uno a uno e ci vedremo in futuro.”</blockquote><p>La vittoria di Oba lo ha già fatto apparire come un vero mostro, ma il promo post-match gli ha conferito un ulteriore slancio. Ha superato il caos del Fatal Four-Way, è avanzato nel torneo e ha avuto comunque le energie per sfidare Brock Lesnar.</p><p>Ora Oba ha due obiettivi davanti a sé: conquistare il King of the Ring e, in ultima analisi, regolare i conti con Brock.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Gli elementi [quote] vanno pubblicati come <blockquote>...</blockquote>, non come semplici <p> con virgolette.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Gli elementi [table] sono tabelle: conservali nel corpo come <table class=\"owtv-data-table\"> con righe e celle HTML semplici. Non sostituirli con soli titoli o riassunti.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/\nTitolo feed: Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring\nTitolo pagina: Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring\nDescrizione: Oba Femi didn’t just advance in the King of the Ring tournament on June 1 WWE RAW — he made sure Brock Lesnar heard him loud and clear afterward. After\nCategoria suggerita: WWE\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|text] Oba Femi didn’t just advance in the King of the Ring tournament on June 1 WWE RAW — he made sure Brock Lesnar heard him loud and clear afterward.\n[2|text] After defeating Penta, Carmelo Hayes, and Solo Sikoa in a wild Fatal Four-Way first-round match, Oba grabbed a microphone and turned his attention straight to Lesnar.\n[3|text] Oba brought up Brock asking him if he could take an ass-whooping, then reminded everyone what happened at Clash in Italy. He said he took a beatdown, survived seven F5s, and was still standing.\n[4|quote] “What do you do after receiving an ass whooping? What do you do after receiving a beat down? What do you do after taking seven F5s?”\n[5|text] Oba then made it clear that Brock’s best shot wasn’t enough to keep him down.\n[6|quote] “I am standing and winning, and I took your best shot and I am still here.”\n[7|text] The message was simple. Oba is moving forward in King of the Ring, but he isn’t finished with Lesnar either. He said he plans to win the tournament, then reminded Brock that things are now tied between them.\n[8|quote] “I am going to win King of the Ring. It is one and one, and I will see him down the line.”\n[9|text] Oba’s win already made him look like a monster, but the post-match promo gave him even more momentum. He survived chaos in the Fatal Four-Way, advanced in the tournament, and still had enough left to call out Brock Lesnar.\n[10|text] Now Oba has two things in front of him: winning King of the Ring and eventually settling the score with Brock.\n[11|text] Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.\n"
+        "alfred_final_html_preview": "https://www.facebook.com/ringsidenews\n\n\nhttps://bsky.app/profile/ringsidenews.com\n\n\nhttps://www.instagram.com/reel/DZDjMfZhEq0/?utm_source=ig_web_copy_link&amp;igsh=NTc4MTIwNjQ2YQ==\n\n<p>Mick Foley sta abbracciando il suo nuovo capitolo in AEW e i suoi ultimi commenti chiariscono che vede qualcosa di speciale nella compagnia.</p>\n<p>Foley ha pubblicato un video su Instagram in cui riflette sulle sue prime esperienze in AEW. Sebbene molte leggende tornino nelle federazioni di wrestling solo per un&#x27;apparizione nostalgica, Foley ha detto che la reazione ricevuta dai fan è sembrata qualcosa di molto più profondo.</p>\n<blockquote>“Non c&#x27;è nulla di male nel ricevere un pop per nostalgia: ne abbiamo visti molti e fanno sempre piacere. La reazione che ho ricevuto a New York è stata diversa. È stata una reazione che diceva: ‘Siamo felici che tu sia qui’, e che potevo fare la differenza.”</blockquote>\n<p>Foley ci ha tenuto anche a precisare che le sue lodi per la AEW non devono essere viste come una critica alla WWE. Il WWE Hall of Famer ha affermato di rimanere grato per tutto ciò che la WWE gli ha dato durante la sua carriera.</p>\n<blockquote>“Non sono affatto qui per scagliare pietre contro la WWE. Amo la compagnia, e la amerò sempre. Sono riconoscente per ogni opportunità che mi hanno concesso.”</blockquote>\n<p>Detto questo, Foley ha ammesso che l&#x27;entusiasmo del proprietario della AEW, Tony Khan, lo ha colpito fin dal suo arrivo. Pur sottolineando che Vince McMahon avesse il suo stile di leadership, Foley ritiene che l&#x27;atmosfera in AEW sia diversa.</p>\n<blockquote>“Ma c&#x27;è qualcosa di unico nel vedere il proprietario della All Elite Wrestling così felice ed entusiasta. Vince McMahon aveva un modo diverso di fare le cose, ma si trattava di un tipo di gioia differente.”</blockquote>\n<p>Foley ha poi discusso della mentalità che riscontra tra i wrestler della AEW. Secondo lui, i talenti appaiono più disposti a correre rischi perché non sono costantemente preoccupati dalle conseguenze di un eventuale fallimento.</p>\n<blockquote>“Mi sembra proprio che i wrestler AEW salgano sul ring giocando per vincere, perché sanno che il fallimento fa parte del processo. Negli anni ho visto così tante persone quasi pietrificate all&#x27;idea di varcare la soglia, perché non sapevano se avrebbero ricevuto il pollice verso o meno, metaforicamente parlando.”</blockquote>\n<p>Ha attribuito all&#x27;atteggiamento di Khan il merito di aver contribuito a creare questo ambiente, aggiungendo che gli ricorda una delle epoche più famose del wrestling. Foley si è detto entusiasta per il futuro e ritiene che la AEW sia un luogo in cui i wrestler sono incoraggiati a osare.</p>\n<blockquote>“Tony, quel tipo di entusiasmo mi rende entusiasta a mia volta. L&#x27;energia nel backstage mi ricorda quella della WWE durante l&#x27;Attitude Era, dove tutti facevamo il tifo l&#x27;uno per l&#x27;altro, pur consapevoli che sbagliare un colpo facesse parte del processo per arrivare a fare dei fuoricampo monumentali. Quindi sono felice di essere in un posto dove i wrestler sono incoraggiati a puntare in alto. Sono eccitato per dove mi porterà questa avventura. Mi considero un coltellino svizzero e sono entusiasta per il futuro, e per fare wrestling come non mi capitava da molti anni.”</blockquote>\n<p>Queste dichiarazioni arrivano mentre il ruolo di Foley in AEW continua a espandersi. Dopo aver debuttato durante il weekend di Double or Nothing ed essere stato coinvolto nella storyline di MJF, i report indicano che Foley dovrebbe restare una presenza regolare nella programmazione AEW. Tony Khan ha anche suggerito che ci siano ottime possibilità che Foley sia presente quando la AEW andrà a Montreal per Redemption a luglio.</p>\n<p>Le prime settimane di Foley in AEW sono già andate ben oltre una singola apparizione e i suoi recenti commenti suggeriscono che intraveda un&#x27;opportunità a lungo termine. Che si tratti di condurre eventi, apparire in TV o essere coinvolto nelle storyline, Foley sembra rinvigorito da ciò che ha trovato in AEW.</p>\n<p>Felix Upton ha oltre 15 anni di esperienza nel giornalismo sportivo e di wrestling. Il suo lavoro su Ringside News unisce velocità, accuratezza e approfondimenti sul settore.</p>",
+        "bob_body_html_preview": "https://www.facebook.com/ringsidenews\n\n\nhttps://bsky.app/profile/ringsidenews.com\n\n\nhttps://www.instagram.com/reel/DZDjMfZhEq0/?utm_source=ig_web_copy_link&amp;igsh=NTc4MTIwNjQ2YQ==\n\n<p>Mick Foley sta abbracciando il suo nuovo capitolo in AEW e i suoi ultimi commenti chiariscono che vede qualcosa di speciale nella compagnia.</p>\n<p>Foley ha pubblicato un video su Instagram in cui riflette sulle sue prime esperienze in AEW. Sebbene molte leggende tornino nelle federazioni di wrestling solo per un&#x27;apparizione nostalgica, Foley ha detto che la reazione ricevuta dai fan è sembrata qualcosa di molto più profondo.</p>\n<blockquote>“Non c&#x27;è nulla di male nel ricevere un pop per nostalgia: ne abbiamo visti molti e fanno sempre piacere. La reazione che ho ricevuto a New York è stata diversa. È stata una reazione che diceva: ‘Siamo felici che tu sia qui’, e che potevo fare la differenza.”</blockquote>\n<p>Foley ci ha tenuto anche a precisare che le sue lodi per la AEW non devono essere viste come una critica alla WWE. Il WWE Hall of Famer ha affermato di rimanere grato per tutto ciò che la WWE gli ha dato durante la sua carriera.</p>\n<blockquote>“Non sono affatto qui per scagliare pietre contro la WWE. Amo la compagnia, e la amerò sempre. Sono riconoscente per ogni opportunità che mi hanno concesso.”</blockquote>\n<p>Detto questo, Foley ha ammesso che l&#x27;entusiasmo del proprietario della AEW, Tony Khan, lo ha colpito fin dal suo arrivo. Pur sottolineando che Vince McMahon avesse il suo stile di leadership, Foley ritiene che l&#x27;atmosfera in AEW sia diversa.</p>\n<blockquote>“Ma c&#x27;è qualcosa di unico nel vedere il proprietario della All Elite Wrestling così felice ed entusiasta. Vince McMahon aveva un modo diverso di fare le cose, ma si trattava di un tipo di gioia differente.”</blockquote>\n<p>Foley ha poi discusso della mentalità che riscontra tra i wrestler della AEW. Secondo lui, i talenti appaiono più disposti a correre rischi perché non sono costantemente preoccupati dalle conseguenze di un eventuale fallimento.</p>\n<blockquote>“Mi sembra proprio che i wrestler AEW salgano sul ring giocando per vincere, perché sanno che il fallimento fa parte del processo. Negli anni ho visto così tante persone quasi pietrificate all&#x27;idea di varcare la soglia, perché non sapevano se avrebbero ricevuto il pollice verso o meno, metaforicamente parlando.”</blockquote>\n<p>Ha attribuito all&#x27;atteggiamento di Khan il merito di aver contribuito a creare questo ambiente, aggiungendo che gli ricorda una delle epoche più famose del wrestling. Foley si è detto entusiasta per il futuro e ritiene che la AEW sia un luogo in cui i wrestler sono incoraggiati a osare.</p>\n<blockquote>“Tony, quel tipo di entusiasmo mi rende entusiasta a mia volta. L&#x27;energia nel backstage mi ricorda quella della WWE durante l&#x27;Attitude Era, dove tutti facevamo il tifo l&#x27;uno per l&#x27;altro, pur consapevoli che sbagliare un colpo facesse parte del processo per arrivare a fare dei fuoricampo monumentali. Quindi sono felice di essere in un posto dove i wrestler sono incoraggiati a puntare in alto. Sono eccitato per dove mi porterà questa avventura. Mi considero un coltellino svizzero e sono entusiasta per il futuro, e per fare wrestling come non mi capitava da molti anni.”</blockquote>\n<p>Queste dichiarazioni arrivano mentre il ruolo di Foley in AEW continua a espandersi. Dopo aver debuttato durante il weekend di Double or Nothing ed essere stato coinvolto nella storyline di MJF, i report indicano che Foley dovrebbe restare una presenza regolare nella programmazione AEW. Tony Khan ha anche suggerito che ci siano ottime possibilità che Foley sia presente quando la AEW andrà a Montreal per Redemption a luglio.</p>\n<p>Le prime settimane di Foley in AEW sono già andate ben oltre una singola apparizione e i suoi recenti commenti suggeriscono che intraveda un&#x27;opportunità a lungo termine. Che si tratti di condurre eventi, apparire in TV o essere coinvolto nelle storyline, Foley sembra rinvigorito da ciò che ha trovato in AEW.</p>\n<p>Felix Upton ha oltre 15 anni di esperienza nel giornalismo sportivo e di wrestling. Il suo lavoro su Ringside News unisce velocità, accuratezza e approfondimenti sul settore.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_mick-foley-la-aew-mi-ricorda-la-wwe-dell-attitude-era.html",
+        "published_html_preview": "https://www.facebook.com/ringsidenews\n\nhttps://bsky.app/profile/ringsidenews.com\n\nhttps://www.instagram.com/reel/DZDjMfZhEq0/?utm_source=ig_web_copy_link&amp;amp;igsh=NTc4MTIwNjQ2YQ==\n\n<p>Mick Foley sta abbracciando il suo nuovo capitolo in AEW e i suoi ultimi commenti chiariscono che vede qualcosa di speciale nella compagnia.</p>\n<p>Foley ha pubblicato un video su Instagram in cui riflette sulle sue prime esperienze in AEW. Sebbene molte leggende tornino nelle federazioni di wrestling solo per un&#x27;apparizione nostalgica, Foley ha detto che la reazione ricevuta dai fan è sembrata qualcosa di molto più profondo.</p>\n<blockquote>“Non c&#x27;è nulla di male nel ricevere un pop per nostalgia: ne abbiamo visti molti e fanno sempre piacere. La reazione che ho ricevuto a New York è stata diversa. È stata una reazione che diceva: ‘Siamo felici che tu sia qui’, e che potevo fare la differenza.”</blockquote>\n<p>Foley ci ha tenuto anche a precisare che le sue lodi per la AEW non devono essere viste come una critica alla WWE. Il WWE Hall of Famer ha affermato di rimanere grato per tutto ciò che la WWE gli ha dato durante la sua carriera.</p>\n<blockquote>“Non sono affatto qui per scagliare pietre contro la WWE. Amo la compagnia, e la amerò sempre. Sono riconoscente per ogni opportunità che mi hanno concesso.”</blockquote>\n<p>Detto questo, Foley ha ammesso che l&#x27;entusiasmo del proprietario della AEW, Tony Khan, lo ha colpito fin dal suo arrivo. Pur sottolineando che Vince McMahon avesse il suo stile di leadership, Foley ritiene che l&#x27;atmosfera in AEW sia diversa.</p>\n<blockquote>“Ma c&#x27;è qualcosa di unico nel vedere il proprietario della All Elite Wrestling così felice ed entusiasta. Vince McMahon aveva un modo diverso di fare le cose, ma si trattava di un tipo di gioia differente.”</blockquote>\n<p>Foley ha poi discusso della mentalità che riscontra tra i wrestler della AEW. Secondo lui, i talenti appaiono più disposti a correre rischi perché non sono costantemente preoccupati dalle conseguenze di un eventuale fallimento.</p>\n<blockquote>“Mi sembra proprio che i wrestler AEW salgano sul ring giocando per vincere, perché sanno che il fallimento fa parte del processo. Negli anni ho visto così tante persone quasi pietrificate all&#x27;idea di varcare la soglia, perché non sapevano se avrebbero ricevuto il pollice verso o meno, metaforicamente parlando.”</blockquote>\n<p>Ha attribuito all&#x27;atteggiamento di Khan il merito di aver contribuito a creare questo ambiente, aggiungendo che gli ricorda una delle epoche più famose del wrestling. Foley si è detto entusiasta per il futuro e ritiene che la AEW sia un luogo in cui i wrestler sono incoraggiati a osare.</p>\n<blockquote>“Tony, quel tipo di entusiasmo mi rende entusiasta a mia volta. L&#x27;energia nel backstage mi ricorda quella della WWE durante l&#x27;Attitude Era, dove tutti facevamo il tifo l&#x27;uno per l&#x27;altro, pur consapevoli che sbagliare un colpo facesse parte del processo per arrivare a fare dei fuoricampo monumentali. Quindi sono felice di essere in un posto dove i wrestler sono incoraggiati a puntare in alto. Sono eccitato per dove mi porterà questa avventura. Mi considero un coltellino svizzero e sono entusiasta per il futuro, e per fare wrestling come non mi capitava da molti anni.”</blockquote>\n<p>Queste dichiarazioni arrivano mentre il ruolo di Foley in AEW continua a espandersi. Dopo aver debuttato durante il weekend di Double or Nothing ed essere stato coinvolto nella storyline di MJF, i report indicano che Foley dovrebbe restare una presenza regolare nella programmazione AEW. Tony Khan ha anche suggerito che ci siano ottime possibilità che Foley sia presente quando la AEW andrà a Montreal per Redemption a luglio.</p>\n<p>Le prime settimane di Foley in AEW sono già andate ben oltre una singola apparizione e i suoi recenti commenti suggeriscono che intraveda un&#x27;opportunità a lungo termine. Che si tratti di condurre eventi, apparire in TV o essere coinvolto nelle storyline, Foley sembra rinvigorito da ciò che ha trovato in AEW.</p>\n<p>Felix Upton ha oltre 15 anni di esperienza nel giornalismo sportivo e di wrestling. Il suo lavoro su Ringside News unisce velocità, accuratezza e approfondimenti sul settore.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/mick-foley-says-aew-reminds-him-wwes-attitude-era/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_mick-foley-la-aew-mi-ricorda-la-wwe-dell-attitude-era.html",
+        "publisher_review_html_preview": "https://www.facebook.com/ringsidenews\n\nhttps://bsky.app/profile/ringsidenews.com\n\nhttps://www.instagram.com/reel/DZDjMfZhEq0/?utm_source=ig_web_copy_link&amp;amp;igsh=NTc4MTIwNjQ2YQ==\n\n<p>Mick Foley sta abbracciando il suo nuovo capitolo in AEW e i suoi ultimi commenti chiariscono che vede qualcosa di speciale nella compagnia.</p>\n<p>Foley ha pubblicato un video su Instagram in cui riflette sulle sue prime esperienze in AEW. Sebbene molte leggende tornino nelle federazioni di wrestling solo per un&#x27;apparizione nostalgica, Foley ha detto che la reazione ricevuta dai fan è sembrata qualcosa di molto più profondo.</p>\n<blockquote>“Non c&#x27;è nulla di male nel ricevere un pop per nostalgia: ne abbiamo visti molti e fanno sempre piacere. La reazione che ho ricevuto a New York è stata diversa. È stata una reazione che diceva: ‘Siamo felici che tu sia qui’, e che potevo fare la differenza.”</blockquote>\n<p>Foley ci ha tenuto anche a precisare che le sue lodi per la AEW non devono essere viste come una critica alla WWE. Il WWE Hall of Famer ha affermato di rimanere grato per tutto ciò che la WWE gli ha dato durante la sua carriera.</p>\n<blockquote>“Non sono affatto qui per scagliare pietre contro la WWE. Amo la compagnia, e la amerò sempre. Sono riconoscente per ogni opportunità che mi hanno concesso.”</blockquote>\n<p>Detto questo, Foley ha ammesso che l&#x27;entusiasmo del proprietario della AEW, Tony Khan, lo ha colpito fin dal suo arrivo. Pur sottolineando che Vince McMahon avesse il suo stile di leadership, Foley ritiene che l&#x27;atmosfera in AEW sia diversa.</p>\n<blockquote>“Ma c&#x27;è qualcosa di unico nel vedere il proprietario della All Elite Wrestling così felice ed entusiasta. Vince McMahon aveva un modo diverso di fare le cose, ma si trattava di un tipo di gioia differente.”</blockquote>\n<p>Foley ha poi discusso della mentalità che riscontra tra i wrestler della AEW. Secondo lui, i talenti appaiono più disposti a correre rischi perché non sono costantemente preoccupati dalle conseguenze di un eventuale fallimento.</p>\n<blockquote>“Mi sembra proprio che i wrestler AEW salgano sul ring giocando per vincere, perché sanno che il fallimento fa parte del processo. Negli anni ho visto così tante persone quasi pietrificate all&#x27;idea di varcare la soglia, perché non sapevano se avrebbero ricevuto il pollice verso o meno, metaforicamente parlando.”</blockquote>\n<p>Ha attribuito all&#x27;atteggiamento di Khan il merito di aver contribuito a creare questo ambiente, aggiungendo che gli ricorda una delle epoche più famose del wrestling. Foley si è detto entusiasta per il futuro e ritiene che la AEW sia un luogo in cui i wrestler sono incoraggiati a osare.</p>\n<blockquote>“Tony, quel tipo di entusiasmo mi rende entusiasta a mia volta. L&#x27;energia nel backstage mi ricorda quella della WWE durante l&#x27;Attitude Era, dove tutti facevamo il tifo l&#x27;uno per l&#x27;altro, pur consapevoli che sbagliare un colpo facesse parte del processo per arrivare a fare dei fuoricampo monumentali. Quindi sono felice di essere in un posto dove i wrestler sono incoraggiati a puntare in alto. Sono eccitato per dove mi porterà questa avventura. Mi considero un coltellino svizzero e sono entusiasta per il futuro, e per fare wrestling come non mi capitava da molti anni.”</blockquote>\n<p>Queste dichiarazioni arrivano mentre il ruolo di Foley in AEW continua a espandersi. Dopo aver debuttato durante il weekend di Double or Nothing ed essere stato coinvolto nella storyline di MJF, i report indicano che Foley dovrebbe restare una presenza regolare nella programmazione AEW. Tony Khan ha anche suggerito che ci siano ottime possibilità che Foley sia presente quando la AEW andrà a Montreal per Redemption a luglio.</p>\n<p>Le prime settimane di Foley in AEW sono già andate ben oltre una singola apparizione e i suoi recenti commenti suggeriscono che intraveda un&#x27;opportunità a lungo termine. Che si tratti di condurre eventi, apparire in TV o essere coinvolto nelle storyline, Foley sembra rinvigorito da ciò che ha trovato in AEW.</p>\n<p>Felix Upton ha oltre 15 anni di esperienza nel giornalismo sportivo e di wrestling. Il suo lavoro su Ringside News unisce velocità, accuratezza e approfondimenti sul settore.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/mick-foley-says-aew-reminds-him-wwes-attitude-era/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\n    \"b1\": \"traduzione blocco 1\",\n    \"b2\": \"traduzione blocco 2\"\n  },\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/mick-foley-says-aew-reminds-him-wwes-attitude-era/\nTitolo feed: Mick Foley Says AEW Reminds Him of WWE’s Attitude Era\nTitolo pagina: Mick Foley Says AEW Reminds Him of WWE’s Attitude Era\nDescrizione: Mick Foley is embracing his new chapter in AEW, and his latest comments make it clear that he sees something special in the company. Foley took to\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Mick Foley is embracing his new chapter in AEW, and his latest comments make it clear that he sees something special in the company.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Foley took to Instagram and uploaded a video reflecting on his first experiences with AEW. While many legends return to wrestling promotions for a quick nostalgia appearance, Foley said the reaction he received from fans felt like something much deeper.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“Now, there’s nothing wrong with getting a nostalgia pop—we’ve seen plenty of those, and they feel good. The reaction I got in New York was different. It was a reaction that said, ‘We’re glad you’re here,’ and that I could make a difference.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Foley was also careful to make it clear that his praise for AEW should not be viewed as criticism of WWE. The WWE Hall of Famer said he remains grateful for everything WWE gave him throughout his career.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“In no way am I here to throw stones at WWE. I love the company—I always will. I’m appreciative of every opportunity they afforded me.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"That said, Foley admitted that AEW owner Tony Khan’s enthusiasm has stood out to him since arriving in the company. While he noted that Vince McMahon had his own style of leadership, Foley believes the atmosphere is different in AEW.\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"quote\",\n    \"text\": \"“But there’s something unique about the owner of All Elite Wrestling being so happy and excited. Vince McMahon had a different way of doing things, but it was a different type of joy.”\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"Foley then discussed the mindset he sees among AEW wrestlers. According to him, talent appears more willing to take risks because they are not constantly worried about the consequences of failure.\"\n  },\n  {\n    \"id\": \"b12\",\n    \"type\": \"quote\",\n    \"text\": \"“It just seems to me that AEW wrestlers are out there, and they are playing to win because they know failure is part of the process. I’ve seen so many people over the years almost petrified to walk through the curtain because they didn’t know whether they’d get the thumbs up or down, figuratively speaking.”\"\n  },\n  {\n    \"id\": \"b13\",\n    \"type\": \"text\",\n    \"text\": \"He credited Khan’s attitude for helping create that environment and said it reminds him of one of wrestling’s most famous eras. Foley said he is excited about what comes next and believes AEW is a place where wrestlers are encouraged to take chances.\"\n  },\n  {\n    \"id\": \"b14\",\n    \"type\": \"quote\",\n    \"text\": \"“Tony—that type of enthusiasm makes me feel enthusiastic. The energy backstage reminds me of the way WWE felt in the Attitude Era, where we were all pulling for each other but understood striking out was part of the process of hitting monumental home runs. So I’m glad to be in a place where wrestlers are encouraged to swing for the fences. I’m excited where this adventure will take me. I consider myself to be a Swiss Army knife, and I’m excited about the future—and wrestling that I haven’t been in many years.”\"\n  },\n  {\n    \"id\": \"b15\",\n    \"type\": \"text\",\n    \"text\": \"The comments come as Foley’s role in AEW continues to expand. After debuting during Double or Nothing weekend and becoming involved in MJF’s storyline , reports have indicated that Foley is expected to remain a regular part of AEW programming moving forward . Tony Khan has also suggested there is a strong chance Foley will be involved when AEW heads to Montreal for Redemption in July.\"\n  },\n  {\n    \"id\": \"b16\",\n    \"type\": \"text\",\n    \"text\": \"Foley’s first weeks in AEW have already gone beyond a one-off appearance, and his latest comments suggest he sees a long-term opportunity ahead. Whether he’s hosting events, appearing on television, or getting involved in storylines, Foley sounds energized by what he has found in AEW.\"\n  },\n  {\n    \"id\": \"b17\",\n    \"type\": \"text\",\n    \"text\": \"Felix Upton has over 15 years of experience in media and wrestling journalism. His work at Ringside News blends speed, accuracy, and industry insight.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "strategic:king of the ring,strategic:raw,entity:brock lesnar,entity:oba femi,current:major_storyline,recency:fresh_12h",
-        "score": 94
+        "reason": "hard:return,entity:mick foley,soft_penalty:reaction,recency:fresh_12h",
+        "score": 73
       },
       "publisher": {
-        "categories": null,
+        "categories": [
+          5
+        ],
         "error": null,
-        "featured_media": null,
+        "featured_media": 5805,
         "present": true,
-        "status": "wp_not_ready",
-        "wp_link": null,
-        "wp_post_id": null
+        "status": "published",
+        "wp_link": "https://news.openwrestlingtv.com/aew/mick-foley-la-aew-mi-ricorda-la-wwe-dellattitude-era/",
+        "wp_post_id": 5806
       },
       "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring",
-      "title_it": "Oba Femi sfida Brock Lesnar dopo il passaggio del turno nel King of the Ring"
+      "source_url": "https://www.ringsidenews.com/mick-foley-says-aew-reminds-him-wwes-attitude-era",
+      "title_it": "Mick Foley: \"La AEW mi ricorda la WWE dell'Attitude Era\""
     },
     {
       "alfred": {
@@ -278,94 +197,37 @@
         "editorial_changes": [],
         "issues": [],
         "present": true,
-        "quality_score": 95,
-        "warnings": [
-          {
-            "code": "image_placeholder_present",
-            "evidence": "<!--IMAGE:...-->",
-            "message": "Presente placeholder immagine da gestire nel Publisher.",
-            "severity": "warning"
-          }
-        ]
+        "quality_score": 100,
+        "warnings": []
       },
       "bob": {
         "clean_element_count": 8,
         "diagnostic_stage": "ready_for_alfred",
         "element_counts": {
-          "embed": 0,
+          "embed": 2,
           "heading": 0,
-          "image": 1,
+          "image": 0,
           "quote": 0,
           "table": 0,
-          "text": 7
+          "text": 6
         },
         "error": null,
         "present": true,
-        "raw_element_count": 9,
-        "removed_before_gemini": 14,
+        "raw_element_count": 10,
+        "removed_before_gemini": 15,
         "status": "ready_for_alfred",
         "translation_model": "gemini-3.1-flash-lite",
         "translation_used": true
       },
       "category_hint": "WWE",
       "html_audit": {
-        "alfred_final_html_preview": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/paul-heyman-gets-speared-through-the-barricade-during-june-1-wwe-raw-49.jpg.avif?x51578-->\n<p>Paul Heyman si è spinto decisamente troppo vicino all'azione durante l'ultima puntata di WWE RAW, finendo per pagarne le conseguenze a causa di un impatto accidentale con Bron Breakker.</p>\n<p>Durante l'episodio di RAW del 1° giugno, Seth Rollins ha affrontato Bron Breakker nel main event. La situazione è degenerata nelle fasi finali dell'incontro, dopo l'intervento di Austin Theory. Quest'ultimo ha colpito Rollins con la cintura di campione mentre Heyman distraeva l'arbitro, ma il caos non si è fermato qui.</p>\n<p>Bron ha tentato di abbattere Rollins con una devastante Spear a bordo ring. Il problema è che Rollins ha previsto la mossa, tirando Heyman direttamente sulla linea di tiro. Bron si è schiantato contro Heyman con la sua Spear e entrambi sono finiti oltre la barricata di protezione.</p>\n<p>Quel momento ha cambiato rapidamente l'inerzia del match. Bron è riuscito a risalire sul ring e a connettere con un'altra Spear su Rollins, ma quest'ultimo aveva la cintura di campione premuta contro il petto. Ad avere la peggio è stato Bron, e Rollins ne ha approfittato per eseguire la sua Black Out e ottenere la vittoria.</p>\n<p>Il match era già fuori controllo di per sé, ma vedere Heyman travolto attraverso la barricata ha rappresentato l'immagine clou della serata. Heyman aveva cercato di aiutare Bron mettendogli un piede sulle corde all'inizio del match, ma pochi istanti dopo si è ritrovato a subire una delle armi più pericolose dell'arsenale di Breakker.</p>\n<p>Seth Rollins ha lasciato l'arena con la vittoria, ma Paul Heyman è uscito dal match come la persona che ha vissuto sicuramente la serata peggiore.</p>",
-        "bob_body_html_preview": "<!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/paul-heyman-gets-speared-through-the-barricade-during-june-1-wwe-raw-49.jpg.avif?x51578-->\n<p>Paul Heyman si è spinto decisamente troppo vicino all'azione durante l'ultima puntata di WWE RAW, finendo per pagarne le conseguenze a causa di un impatto accidentale con Bron Breakker.</p>\n<p>Durante l'episodio di RAW del 1° giugno, Seth Rollins ha affrontato Bron Breakker nel main event. La situazione è degenerata nelle fasi finali dell'incontro, dopo l'intervento di Austin Theory. Quest'ultimo ha colpito Rollins con la cintura di campione mentre Heyman distraeva l'arbitro, ma il caos non si è fermato qui.</p>\n<p>Bron ha tentato di abbattere Rollins con una devastante Spear a bordo ring. Il problema è che Rollins ha previsto la mossa, tirando Heyman direttamente sulla linea di tiro. Bron si è schiantato contro Heyman con la sua Spear e entrambi sono finiti oltre la barricata di protezione.</p>\n<p>Quel momento ha cambiato rapidamente l'inerzia del match. Bron è riuscito a risalire sul ring e a connettere con un'altra Spear su Rollins, ma quest'ultimo aveva la cintura di campione premuta contro il petto. Ad avere la peggio è stato Bron, e Rollins ne ha approfittato per eseguire la sua Black Out e ottenere la vittoria.</p>\n<p>Il match era già fuori controllo di per sé, ma vedere Heyman travolto attraverso la barricata ha rappresentato l'immagine clou della serata. Heyman aveva cercato di aiutare Bron mettendogli un piede sulle corde all'inizio del match, ma pochi istanti dopo si è ritrovato a subire una delle armi più pericolose dell'arsenale di Breakker.</p>\n<p>Seth Rollins ha lasciato l'arena con la vittoria, ma Paul Heyman è uscito dal match come la persona che ha vissuto sicuramente la serata peggiore.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_paul-heyman-travolto-da-una-spear-contro-le-barricate-a-wwe-raw.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_paul-heyman-travolto-da-una-spear-contro-le-barricate-a-wwe-raw.html",
-        "publisher_review_html_preview": "<p>Paul Heyman si è spinto decisamente troppo vicino all'azione durante l'ultima puntata di WWE RAW, finendo per pagarne le conseguenze a causa di un impatto accidentale con Bron Breakker.</p>\n<p>Durante l'episodio di RAW del 1° giugno, Seth Rollins ha affrontato Bron Breakker nel main event. La situazione è degenerata nelle fasi finali dell'incontro, dopo l'intervento di Austin Theory. Quest'ultimo ha colpito Rollins con la cintura di campione mentre Heyman distraeva l'arbitro, ma il caos non si è fermato qui.</p>\n<p>Bron ha tentato di abbattere Rollins con una devastante Spear a bordo ring. Il problema è che Rollins ha previsto la mossa, tirando Heyman direttamente sulla linea di tiro. Bron si è schiantato contro Heyman con la sua Spear e entrambi sono finiti oltre la barricata di protezione.</p>\n<p>Quel momento ha cambiato rapidamente l'inerzia del match. Bron è riuscito a risalire sul ring e a connettere con un'altra Spear su Rollins, ma quest'ultimo aveva la cintura di campione premuta contro il petto. Ad avere la peggio è stato Bron, e Rollins ne ha approfittato per eseguire la sua Black Out e ottenere la vittoria.</p>\n<p>Il match era già fuori controllo di per sé, ma vedere Heyman travolto attraverso la barricata ha rappresentato l'immagine clou della serata. Heyman aveva cercato di aiutare Bron mettendogli un piede sulle corde all'inizio del match, ma pochi istanti dopo si è ritrovato a subire una delle armi più pericolose dell'arsenale di Breakker.</p>\n<p>Seth Rollins ha lasciato l'arena con la vittoria, ma Paul Heyman è uscito dal match come la persona che ha vissuto sicuramente la serata peggiore.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Gli elementi [quote] vanno pubblicati come <blockquote>...</blockquote>, non come semplici <p> con virgolette.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Gli elementi [table] sono tabelle: conservali nel corpo come <table class=\"owtv-data-table\"> con righe e celle HTML semplici. Non sostituirli con soli titoli o riassunti.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/\nTitolo feed: Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW\nTitolo pagina: Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW\nDescrizione: Paul Heyman got way too close to the action on WWE RAW, and Bron Breakker made him pay for it by accident. During the June 1 episode of RAW, Seth Rollins\nCategoria suggerita: WWE\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/paul-heyman-gets-speared-through-the-barricade-during-june-1-wwe-raw-49.jpg.avif?x51578 ALT=Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW\n[2|text] Paul Heyman got way too close to the action on WWE RAW, and Bron Breakker made him pay for it by accident.\n[3|text] During the June 1 episode of RAW , Seth Rollins faced Bron Breakker in the main event. Things got wild late in the match after Austin Theory came down and got involved. Theory hit Rollins with the title belt while Heyman distracted the referee, but the chaos didn’t stop there.\n[4|text] Bron eventually tried to take Rollins out with a massive spear near ringside. The problem was that Rollins saw it coming and pulled Heyman directly into the line of fire. Bron crashed into Heyman with the spear, and both men went through the ringside barricade.\n[5|text] That moment changed the match fast. Bron managed to get back into the ring and hit another spear on Rollins, but Rollins had the title belt pressed against his chest. Bron took the worst of it, and Rollins followed up with Black Out to score the win.\n[6|text] The match itself was already out of control, but Heyman getting destroyed through the barricade was the big visual. He tried to help Bron by putting his foot on the ropes earlier in the match, but seconds later, he ended up eating one of Breakker’s biggest weapons.\n[7|text] Seth Rollins walked out with the victory, but Paul Heyman may have walked out with the worst night of anyone involved.\n[8|text] Steve Carrier is the founder of Ringside News and has been reporting on pro wrestling since 1997. His stories have been featured on TMZ, Forbes, Bleacher Report, and more.\n"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "strategic:raw,entity:paul heyman,entity:seth rollins,recency:fresh_12h",
-        "score": 78
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": true,
-        "status": "wp_not_ready",
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw",
-      "title_it": "Paul Heyman travolto da una Spear contro le barricate a WWE Raw"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_seth-rollins-gives-turin-crowd-a-special-moment-after-wwe-raw-goes-off-the-air.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_seth-rollins-gives-turin-crowd-a-special-moment-after-wwe-raw-goes-off-the-air.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
+        "alfred_final_html_preview": "https://www.facebook.com/ringsidenews\n\n\nhttps://bsky.app/profile/ringsidenews.com\n\n<p>Seth Rollins ha chiuso WWE RAW con una grande vittoria su Bron Breakker, e i festeggiamenti non si sono fermati quando le telecamere si sono spente.</p>\n<p>Al termine della puntata di RAW dell&#x27;1 giugno, Rollins è rimasto trionfante sul ring mentre Breakker accusava ancora i postumi della sconfitta nel main event. Rollins ha poi scavalcato la barricata e si è immerso tra il pubblico, mentre i fan continuavano a cantare la sua theme song.</p>\n<p>Il momento si è trasformato in una vera e propria festa. Rollins è salito sulle gradinate, ha incitato la folla e i fan sono esplosi in un boato attorno a lui. L&#x27;intera arena si è unita a lui mentre si godeva la reazione del pubblico dopo la vittoria. Rollins si è poi diretto verso il backstage, stringendo la mano ai fan lungo il percorso e regalando ai presenti un ultimo ricordo dopo la chiusura del collegamento televisivo.</p>\n<p>I festeggiamenti post-show sono arrivati al termine di un caotico main event che ha visto protagonisti Rollins, Breakker, Paul Heyman e Austin Theory. Durante il match, Breakker ha colpito accidentalmente Heyman con una Spear attraverso la barricata dopo che Rollins lo aveva attirato sulla traiettoria. In seguito, Breakker ha tentato nuovamente una Spear su Rollins, ma quest&#x27;ultimo ha utilizzato la cintura da campione per difendersi prima di connettere con la Black Out per la vittoria.</p>\n<p>Nonostante Paul Heyman abbia subito il colpo peggiore della serata, Rollins ha lasciato il ring vittorioso, regalando al pubblico di Torino un saluto memorabile dopo lo show. È stata un&#x27;immagine finale di grande impatto per RAW, specialmente con i fan ancora intenti a cantare la sua theme song molto tempo dopo la fine del match.</p>\n<p>Felix Upton ha oltre 15 anni di esperienza nel campo dei media e del giornalismo di wrestling. Il suo lavoro su Ringside News unisce rapidità, accuratezza e approfondimenti sul settore.</p>",
+        "bob_body_html_preview": "https://www.facebook.com/ringsidenews\n\n\nhttps://bsky.app/profile/ringsidenews.com\n\n<p>Seth Rollins ha chiuso WWE RAW con una grande vittoria su Bron Breakker, e i festeggiamenti non si sono fermati quando le telecamere si sono spente.</p>\n<p>Al termine della puntata di RAW dell&#x27;1 giugno, Rollins è rimasto trionfante sul ring mentre Breakker accusava ancora i postumi della sconfitta nel main event. Rollins ha poi scavalcato la barricata e si è immerso tra il pubblico, mentre i fan continuavano a cantare la sua theme song.</p>\n<p>Il momento si è trasformato in una vera e propria festa. Rollins è salito sulle gradinate, ha incitato la folla e i fan sono esplosi in un boato attorno a lui. L&#x27;intera arena si è unita a lui mentre si godeva la reazione del pubblico dopo la vittoria. Rollins si è poi diretto verso il backstage, stringendo la mano ai fan lungo il percorso e regalando ai presenti un ultimo ricordo dopo la chiusura del collegamento televisivo.</p>\n<p>I festeggiamenti post-show sono arrivati al termine di un caotico main event che ha visto protagonisti Rollins, Breakker, Paul Heyman e Austin Theory. Durante il match, Breakker ha colpito accidentalmente Heyman con una Spear attraverso la barricata dopo che Rollins lo aveva attirato sulla traiettoria. In seguito, Breakker ha tentato nuovamente una Spear su Rollins, ma quest&#x27;ultimo ha utilizzato la cintura da campione per difendersi prima di connettere con la Black Out per la vittoria.</p>\n<p>Nonostante Paul Heyman abbia subito il colpo peggiore della serata, Rollins ha lasciato il ring vittorioso, regalando al pubblico di Torino un saluto memorabile dopo lo show. È stata un&#x27;immagine finale di grande impatto per RAW, specialmente con i fan ancora intenti a cantare la sua theme song molto tempo dopo la fine del match.</p>\n<p>Felix Upton ha oltre 15 anni di esperienza nel campo dei media e del giornalismo di wrestling. Il suo lavoro su Ringside News unisce rapidità, accuratezza e approfondimenti sul settore.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_il-momento-speciale-di-seth-rollins-per-il-pubblico-di-torino-dopo-wwe-raw.html",
+        "published_html_preview": "https://www.facebook.com/ringsidenews\n\nhttps://bsky.app/profile/ringsidenews.com\n\n<p>Seth Rollins ha chiuso WWE RAW con una grande vittoria su Bron Breakker, e i festeggiamenti non si sono fermati quando le telecamere si sono spente.</p>\n<p>Al termine della puntata di RAW dell&#x27;1 giugno, Rollins è rimasto trionfante sul ring mentre Breakker accusava ancora i postumi della sconfitta nel main event. Rollins ha poi scavalcato la barricata e si è immerso tra il pubblico, mentre i fan continuavano a cantare la sua theme song.</p>\n<p>Il momento si è trasformato in una vera e propria festa. Rollins è salito sulle gradinate, ha incitato la folla e i fan sono esplosi in un boato attorno a lui. L&#x27;intera arena si è unita a lui mentre si godeva la reazione del pubblico dopo la vittoria. Rollins si è poi diretto verso il backstage, stringendo la mano ai fan lungo il percorso e regalando ai presenti un ultimo ricordo dopo la chiusura del collegamento televisivo.</p>\n<p>I festeggiamenti post-show sono arrivati al termine di un caotico main event che ha visto protagonisti Rollins, Breakker, Paul Heyman e Austin Theory. Durante il match, Breakker ha colpito accidentalmente Heyman con una Spear attraverso la barricata dopo che Rollins lo aveva attirato sulla traiettoria. In seguito, Breakker ha tentato nuovamente una Spear su Rollins, ma quest&#x27;ultimo ha utilizzato la cintura da campione per difendersi prima di connettere con la Black Out per la vittoria.</p>\n<p>Nonostante Paul Heyman abbia subito il colpo peggiore della serata, Rollins ha lasciato il ring vittorioso, regalando al pubblico di Torino un saluto memorabile dopo lo show. È stata un&#x27;immagine finale di grande impatto per RAW, specialmente con i fan ancora intenti a cantare la sua theme song molto tempo dopo la fine del match.</p>\n<p>Felix Upton ha oltre 15 anni di esperienza nel campo dei media e del giornalismo di wrestling. Il suo lavoro su Ringside News unisce rapidità, accuratezza e approfondimenti sul settore.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/seth-rollins-gives-turin-crowd-special-moment-wwe-raw-goes-off-air/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_il-momento-speciale-di-seth-rollins-per-il-pubblico-di-torino-dopo-wwe-raw.html",
+        "publisher_review_html_preview": "https://www.facebook.com/ringsidenews\n\nhttps://bsky.app/profile/ringsidenews.com\n\n<p>Seth Rollins ha chiuso WWE RAW con una grande vittoria su Bron Breakker, e i festeggiamenti non si sono fermati quando le telecamere si sono spente.</p>\n<p>Al termine della puntata di RAW dell&#x27;1 giugno, Rollins è rimasto trionfante sul ring mentre Breakker accusava ancora i postumi della sconfitta nel main event. Rollins ha poi scavalcato la barricata e si è immerso tra il pubblico, mentre i fan continuavano a cantare la sua theme song.</p>\n<p>Il momento si è trasformato in una vera e propria festa. Rollins è salito sulle gradinate, ha incitato la folla e i fan sono esplosi in un boato attorno a lui. L&#x27;intera arena si è unita a lui mentre si godeva la reazione del pubblico dopo la vittoria. Rollins si è poi diretto verso il backstage, stringendo la mano ai fan lungo il percorso e regalando ai presenti un ultimo ricordo dopo la chiusura del collegamento televisivo.</p>\n<p>I festeggiamenti post-show sono arrivati al termine di un caotico main event che ha visto protagonisti Rollins, Breakker, Paul Heyman e Austin Theory. Durante il match, Breakker ha colpito accidentalmente Heyman con una Spear attraverso la barricata dopo che Rollins lo aveva attirato sulla traiettoria. In seguito, Breakker ha tentato nuovamente una Spear su Rollins, ma quest&#x27;ultimo ha utilizzato la cintura da campione per difendersi prima di connettere con la Black Out per la vittoria.</p>\n<p>Nonostante Paul Heyman abbia subito il colpo peggiore della serata, Rollins ha lasciato il ring vittorioso, regalando al pubblico di Torino un saluto memorabile dopo lo show. È stata un&#x27;immagine finale di grande impatto per RAW, specialmente con i fan ancora intenti a cantare la sua theme song molto tempo dopo la fine del match.</p>\n<p>Felix Upton ha oltre 15 anni di esperienza nel campo dei media e del giornalismo di wrestling. Il suo lavoro su Ringside News unisce rapidità, accuratezza e approfondimenti sul settore.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/seth-rollins-gives-turin-crowd-special-moment-wwe-raw-goes-off-air/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\n    \"b1\": \"traduzione blocco 1\",\n    \"b2\": \"traduzione blocco 2\"\n  },\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/seth-rollins-gives-turin-crowd-special-moment-wwe-raw-goes-off-air/\nTitolo feed: Seth Rollins Gives Turin Crowd a Special Moment After WWE RAW Goes Off the Air\nTitolo pagina: Seth Rollins Gives Turin Crowd a Special Moment After WWE RAW Goes Off the Air\nDescrizione: Seth Rollins ended WWE RAW with a big win over Bron Breakker, and the celebration didn’t stop when the cameras went off. After the June 1 episode of RAW\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Seth Rollins ended WWE RAW with a big win over Bron Breakker, and the celebration didn’t stop when the cameras went off.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"After the June 1 episode of RAW ended, Rollins was seen standing tall in the ring while Breakker continued selling the effects of his main event loss. Rollins then climbed over the barricade and made his way into the crowd as fans kept singing his entrance theme.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"The moment turned into a full celebration. Rollins walked up the stairs, roared to the crowd, and fans immediately erupted around him. The arena joined in as Rollins soaked in the reaction following his victory. Rollins then made his way toward the back while shaking hands with fans along the way, giving the live crowd one final moment after RAW went off the air.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"The post-show celebration came after a chaotic main event involving Rollins, Breakker, Paul Heyman, and Austin Theory. During the match, Breakker accidentally speared Heyman through the ringside barricade after Rollins pulled him into the line of fire. Breakker later tried to spear Rollins again, but Rollins used the title belt against him before hitting Black Out for the win .\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"While Paul Heyman took the worst hit of the night, Rollins walked out victorious and then gave the Turin crowd a memorable sendoff after the show. It was a strong final image for RAW, especially with fans still singing his theme long after the match ended.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"Felix Upton has over 15 years of experience in media and wrestling journalism. His work at Ringside News blends speed, accuracy, and industry insight.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
@@ -374,48 +236,64 @@
         "score": 70
       },
       "publisher": {
-        "categories": null,
+        "categories": [
+          4
+        ],
         "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
+        "featured_media": 5807,
+        "present": true,
+        "status": "published",
+        "wp_link": "https://news.openwrestlingtv.com/wwe/il-momento-speciale-di-seth-rollins-per-il-pubblico-di-torino-dopo-wwe-raw/",
+        "wp_post_id": 5808
       },
       "source": "ringsidenews",
       "source_url": "https://www.ringsidenews.com/seth-rollins-gives-turin-crowd-special-moment-wwe-raw-goes-off-air",
-      "title_it": "Seth Rollins Gives Turin Crowd a Special Moment After WWE RAW Goes Off the Air"
+      "title_it": "Il momento speciale di Seth Rollins per il pubblico di Torino dopo WWE RAW"
     },
     {
       "alfred": {
-        "decision": null,
+        "decision": "needs_revision",
         "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
+        "issues": [
+          {
+            "code": "untranslated_quote",
+            "evidence": "annuncio è arrivato nella stessa serata in cui Oba Femi ha superato il turno nel torneo King of the Ring, mentre IYO SKY ha fatto lo stesso nel torneo Queen of the Ring. Ciò significa che entrambi i tabelloni stanno iniziando a prendere forma, mentre la WWE si prepara verso le finali dei tornei. Con il trasferimento di RAW a Parigi, la WWE sta arricchendo la card con incontri dal peso specifico notevole. Seth Rollins, Je’Von Evans, Ricky Saints e Talla Tonga cercheranno tutti di avvicinarsi alla conquista della corona di King of the Ring, mentre Becky Lynch, Liv Morgan, Alexa Bliss e Chelsea Green lotteranno per proseguire il proprio cammino verso il titolo di Queen of the Ring. La puntata d",
+            "message": "Citazione rimasta in inglese o non tradotta integralmente.",
+            "severity": "blocker"
+          }
+        ],
+        "present": true,
+        "quality_score": 75,
         "warnings": []
       },
       "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
+        "clean_element_count": 8,
+        "diagnostic_stage": "ready_for_alfred",
+        "element_counts": {
+          "embed": 2,
+          "heading": 0,
+          "image": 0,
+          "quote": 0,
+          "table": 0,
+          "text": 6
+        },
         "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
+        "present": true,
+        "raw_element_count": 10,
+        "removed_before_gemini": 15,
+        "status": "ready_for_alfred",
+        "translation_model": "gemini-3.1-flash-lite",
+        "translation_used": true
       },
       "category_hint": "WWE",
       "html_audit": {
         "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_wwe-confirms-king-and-queen-of-the-ring-tournament-matches-for-june-8-raw.html",
+        "bob_body_html_preview": "https://www.facebook.com/ringsidenews\n\n\nhttps://bsky.app/profile/ringsidenews.com\n\n<p>La WWE ha ufficialmente confermato ulteriori match valevoli per il torneo King and Queen of the Ring per la prossima puntata di Monday Night RAW.</p>\n<p>Durante l&#x27;edizione di RAW del 1° giugno 2026, è stato annunciato che Seth Rollins, Je’Von Evans, Ricky Saints e Talla Tonga si scontreranno in un match del torneo King of the Ring nella puntata di RAW dell&#x27;8 giugno, che si terrà a Parigi, in Francia. Anche il torneo Queen of the Ring proseguirà nella stessa serata, con Becky Lynch, Liv Morgan, Alexa Bliss e Chelsea Green che si affronteranno in un prestigioso fatal four-way match.</p>\n<p>L&#x27;annuncio è arrivato nella stessa serata in cui Oba Femi ha superato il turno nel torneo King of the Ring, mentre IYO SKY ha fatto lo stesso nel torneo Queen of the Ring. Ciò significa che entrambi i tabelloni stanno iniziando a prendere forma, mentre la WWE si prepara verso le finali dei tornei.</p>\n<p>Con il trasferimento di RAW a Parigi, la WWE sta arricchendo la card con incontri dal peso specifico notevole. Seth Rollins, Je’Von Evans, Ricky Saints e Talla Tonga cercheranno tutti di avvicinarsi alla conquista della corona di King of the Ring, mentre Becky Lynch, Liv Morgan, Alexa Bliss e Chelsea Green lotteranno per proseguire il proprio cammino verso il titolo di Queen of the Ring.</p>\n<p>La puntata di RAW dell&#x27;8 giugno vanta ora due importanti incontri di torneo confermati, e la strada verso Night of Champions si fa sempre più avvincente. Resta dunque da vedere chi riuscirà ad avanzare nei match della prossima settimana.</p>\n<p>Felix Upton ha oltre 15 anni di esperienza nei media e nel giornalismo dedicato al wrestling. Il suo lavoro su Ringside News combina rapidità, accuratezza e una profonda conoscenza del settore.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_wwe-annunciati-i-match-del-torneo-king-queen-of-the-ring-per-raw-dell-8-giugno.html",
         "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_wwe-confirms-king-and-queen-of-the-ring-tournament-matches-for-june-8-raw.html",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_wwe-annunciati-i-match-del-torneo-king-queen-of-the-ring-per-raw-dell-8-giugno.html",
         "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\n    \"b1\": \"traduzione blocco 1\",\n    \"b2\": \"traduzione blocco 2\"\n  },\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/wwe-confirms-king-queen-ring-tournament-matches-june-8-raw/\nTitolo feed: WWE Confirms King and Queen of the Ring Tournament Matches For June 8 RAW\nTitolo pagina: WWE Confirms King and Queen of the Ring Tournament Matches For June 8 RAW\nDescrizione: WWE has officially confirmed more King and Queen of the Ring tournament action for next week’s episode of Monday Night RAW. During the June 1, 2026\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"WWE has officially confirmed more King and Queen of the Ring tournament action for next week’s episode of Monday Night RAW.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"During the June 1, 2026 edition of RAW , it was announced that Seth Rollins, Je’Von Evans, Ricky Saints, and Talla Tonga will collide in a King of the Ring tournament match on the June 8 episode of RAW in Paris, France. The Queen of the Ring tournament will also continue that night, as Becky Lynch, Liv Morgan, Alexa Bliss, and Chelsea Green face off in a stacked four-way match.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"The announcement came on the same night Oba Femi advanced in the King of the Ring tournament, while IYO SKY moved forward in the Queen of the Ring tournament. That means both brackets are starting to take shape as WWE builds toward the tournament finals.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"With RAW heading to Paris, WWE is loading up the card with major tournament stakes. Seth Rollins, Je’Von Evans, Ricky Saints, and Talla Tonga will all be looking to move one step closer to becoming King of the Ring, while Becky Lynch, Liv Morgan, Alexa Bliss, and Chelsea Green will fight for their own path to the Queen of the Ring crown.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"The June 8 episode of RAW now has two major tournament matches confirmed, and the road to Night of Champions is only getting more interesting. So it remains to be seen who will advance in the matches next week.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"Felix Upton has over 15 years of experience in media and wrestling journalism. His work at Ringside News blends speed, accuracy, and industry insight.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
@@ -434,10 +312,110 @@
       },
       "source": "ringsidenews",
       "source_url": "https://www.ringsidenews.com/wwe-confirms-king-queen-ring-tournament-matches-june-8-raw",
-      "title_it": "WWE Confirms King and Queen of the Ring Tournament Matches For June 8 RAW"
+      "title_it": "WWE: Annunciati i match del torneo King & Queen of the Ring per Raw dell'8 giugno"
+    },
+    {
+      "alfred": {
+        "decision": null,
+        "editorial_changes": [],
+        "issues": [],
+        "present": false,
+        "quality_score": null,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": null,
+        "diagnostic_stage": null,
+        "element_counts": null,
+        "error": null,
+        "present": false,
+        "raw_element_count": null,
+        "removed_before_gemini": null,
+        "status": null,
+        "translation_model": null,
+        "translation_used": null
+      },
+      "category_hint": "WWE",
+      "html_audit": {
+        "alfred_final_html_preview": "",
+        "bob_body_html_preview": "",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_iyo-sky-advances-in-wwe-qotr-match.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_iyo-sky-advances-in-wwe-qotr-match.html",
+        "publisher_review_html_preview": "",
+        "translation_prompt_preview": ""
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "strategic:queen of the ring,strategic:raw,recency:fresh_12h",
+        "score": 66
+      },
+      "publisher": {
+        "categories": null,
+        "error": null,
+        "featured_media": null,
+        "present": false,
+        "status": null,
+        "wp_link": null,
+        "wp_post_id": null
+      },
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match",
+      "title_it": "IYO SKY Advances In WWE QOTR Match"
+    },
+    {
+      "alfred": {
+        "decision": null,
+        "editorial_changes": [],
+        "issues": [],
+        "present": false,
+        "quality_score": null,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": null,
+        "diagnostic_stage": null,
+        "element_counts": null,
+        "error": null,
+        "present": false,
+        "raw_element_count": null,
+        "removed_before_gemini": null,
+        "status": null,
+        "translation_model": null,
+        "translation_used": null
+      },
+      "category_hint": "WWE",
+      "html_audit": {
+        "alfred_final_html_preview": "",
+        "bob_body_html_preview": "",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_wwe-clash-in-italy-2026-biggest-winners-and-losers.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_wwe-clash-in-italy-2026-biggest-winners-and-losers.html",
+        "publisher_review_html_preview": "",
+        "translation_prompt_preview": ""
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "strategic:clash in italy,recency:fresh_12h",
+        "score": 66
+      },
+      "publisher": {
+        "categories": null,
+        "error": null,
+        "featured_media": null,
+        "present": false,
+        "status": null,
+        "wp_link": null,
+        "wp_post_id": null
+      },
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review",
+      "title_it": "WWE Clash In Italy 2026: Biggest Winners And Losers"
     }
   ],
-  "generated_at": "2026-06-01T23:00:13.082926+00:00",
+  "generated_at": "2026-06-01T23:12:40.523821+00:00",
   "how_to_read": {
     "alfred_final_html_preview": "HTML dopo revisione/normalizzazioni di Alfred",
     "bob_body_html_preview": "HTML prodotto da Bob prima di Alfred",
@@ -1013,6 +991,102 @@
       "overall_status": "error",
       "published": 0,
       "warnings": 2
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 2,
+          "blockers": 1,
+          "editorial_changes": 0,
+          "needs_revision": 1,
+          "warnings": 0
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 3,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 8,
+          "already_worked": 1,
+          "hard_skipped": 10,
+          "to_menzo": 23,
+          "to_simone": 1
+        },
+        "menzo": {
+          "pending": 0,
+          "skipped": 17,
+          "to_bob_or_v92": 6
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 2,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 6,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 6,
+      "errors": 1,
+      "generated_at": "2026-06-01T23:12:40.519330+00:00",
+      "overall_status": "error",
+      "published": 2,
+      "warnings": 2
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 2,
+          "blockers": 1,
+          "editorial_changes": 0,
+          "needs_revision": 1,
+          "warnings": 0
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 3,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 8,
+          "already_worked": 1,
+          "hard_skipped": 10,
+          "to_menzo": 23,
+          "to_simone": 1
+        },
+        "menzo": {
+          "pending": 0,
+          "skipped": 17,
+          "to_bob_or_v92": 6
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 2,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 6,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 6,
+      "errors": 1,
+      "generated_at": "2026-06-01T23:12:40.523821+00:00",
+      "overall_status": "error",
+      "published": 2,
+      "warnings": 2
     }
   ],
   "overall_status": "error",
@@ -1032,7 +1106,7 @@
       "blockers": 1,
       "editorial_changes": 0,
       "needs_revision": 1,
-      "warnings": 2
+      "warnings": 0
     },
     "bob_handoff": {
       "errors": 0,
@@ -1040,18 +1114,18 @@
       "ready_for_alfred": 3,
       "translation_pending": 0
     },
-    "ended_at": "2026-06-01T23:00:13.070682+00:00",
+    "ended_at": "2026-06-01T23:12:40.513491+00:00",
     "engine": "bot_v92.py",
     "massy_handoff": {
-      "already_published_hard_skipped": 7,
+      "already_published_hard_skipped": 8,
       "already_worked": 1,
-      "hard_skipped": 9,
-      "to_menzo": 24,
+      "hard_skipped": 10,
+      "to_menzo": 23,
       "to_simone": 1
     },
     "menzo_handoff": {
-      "pending": 3,
-      "skipped": 15,
+      "pending": 0,
+      "skipped": 17,
       "to_bob_or_v92": 6
     },
     "newsroom_engine_override": false,
@@ -1059,8 +1133,8 @@
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 0,
-      "wp_not_ready": 2
+      "published": 2,
+      "wp_not_ready": 0
     },
     "runtime_delegations": 0,
     "runtime_exit_code": 0,
@@ -1069,71 +1143,71 @@
       "skipped": 6,
       "waiting": 0
     },
-    "started_at": "2026-06-01T22:59:36.338618+00:00",
+    "started_at": "2026-06-01T23:12:17.645362+00:00",
     "version": "v93_7_archivista_audit"
   },
   "summary": {
-    "anomalies": 4,
+    "anomalies": 3,
     "article_dossiers": 6,
-    "errors_48h": 6,
-    "published_48h": 16,
-    "published_current_run": 0,
-    "runs_48h": 12
+    "errors_48h": 8,
+    "published_48h": 20,
+    "published_current_run": 2,
+    "runs_48h": 14
   },
   "timeline": [
     {
       "agent": "Jarvis",
       "note": "engine=bot_v92.py",
       "phase": "bootstrap_status_written",
-      "timestamp": "2026-06-01T22:59:36.338943+00:00"
+      "timestamp": "2026-06-01T23:12:17.645630+00:00"
     },
     {
       "agent": "Massy",
-      "note": "to_simone=1 to_menzo=24 hard_skip=9 already=1",
+      "note": "to_simone=1 to_menzo=23 hard_skip=10 already=1",
       "phase": "sentinel_board_ready",
-      "timestamp": "2026-06-01T22:59:37.224662+00:00"
+      "timestamp": "2026-06-01T23:12:18.137794+00:00"
     },
     {
       "agent": "Simone",
       "note": "ready=0 waiting=0 skipped=6",
       "phase": "report_decision_ready",
-      "timestamp": "2026-06-01T22:59:37.228333+00:00"
+      "timestamp": "2026-06-01T23:12:18.141542+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "selected=6 pending=3 skipped=15",
+      "note": "selected=6 pending=0 skipped=17",
       "phase": "editorial_decision_ready",
-      "timestamp": "2026-06-01T22:59:37.242715+00:00"
+      "timestamp": "2026-06-01T23:12:18.159626+00:00"
     },
     {
       "agent": "Bob",
       "note": "ready=3 pending=0 empty=0 errors=0",
       "phase": "article_packages_ready",
-      "timestamp": "2026-06-01T22:59:47.697809+00:00"
+      "timestamp": "2026-06-01T23:12:29.629618+00:00"
     },
     {
       "agent": "Alfred",
-      "note": "approved=2 needs_revision=1 blockers=1 warnings=2 changes=0",
+      "note": "approved=2 needs_revision=1 blockers=1 warnings=0 changes=0",
       "phase": "quality_review_ready",
-      "timestamp": "2026-06-01T22:59:47.705677+00:00"
+      "timestamp": "2026-06-01T23:12:29.638851+00:00"
     },
     {
       "agent": "Publisher",
-      "note": "published=0 already=0 dry=0 wp_not_ready=2 errors=0",
+      "note": "published=2 already=0 dry=0 wp_not_ready=0 errors=0",
       "phase": "publication_ready",
-      "timestamp": "2026-06-01T23:00:13.070637+00:00"
+      "timestamp": "2026-06-01T23:12:40.513458+00:00"
     },
     {
       "agent": "Jarvis",
       "note": "v93 Publisher completed; v92 fallback skipped",
       "phase": "runtime_skipped",
-      "timestamp": "2026-06-01T23:00:13.070668+00:00"
+      "timestamp": "2026-06-01T23:12:40.513481+00:00"
     },
     {
       "agent": "Archivista",
-      "note": "status=error anomalies=4",
+      "note": "status=error anomalies=3",
       "phase": "audit_ready",
-      "timestamp": "2026-06-01T23:00:13.082480+00:00"
+      "timestamp": "2026-06-01T23:12:40.523372+00:00"
     }
   ],
   "version": "v93_7_archivista_audit"

@@ -1,71 +1,54 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-01T23:00:13.070043+00:00",
+  "generated_at": "2026-06-01T23:12:40.512950+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 0,
-    "wp_not_ready": 2
+    "published": 2,
+    "wp_not_ready": 0
   },
   "input": {
     "alfred_version": "v93_8_alfred_structured_content_checks",
     "approved_articles": 2
   },
-  "mode": "wordpress_publisher",
+  "mode": "wordpress_publisher_plain_oembed_urls",
   "policy": {
     "featured_image_source": "meta.featured_image_or_first_placeholder",
     "idempotency": "state/newsroom/publisher_history.json by source_url",
+    "preserve_plain_embed_urls_for_wordpress_oembed": true,
     "source_attribution": true,
     "strip_inline_image_placeholders": true
   },
   "results": [
     {
-      "content_chars": 2006,
-      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring-46.jpg",
-      "media_id": null,
-      "payload_preview": {
-        "categories": [],
-        "excerpt": "Dopo aver trionfato nel Fatal Four-Way match di RAW, Oba Femi ha lanciato un chiaro guanto di sfida a Brock Lesnar, ricordando la loro recente battaglia a Clash in Italy.",
-        "meta": {
-          "original_url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/",
-          "owtv_pipeline": "v93_6_publisher_wordpress",
-          "owtv_source": "ringsidenews"
-        },
-        "status": "publish",
-        "title": "Oba Femi sfida Brock Lesnar dopo il passaggio del turno nel King of the Ring"
-      },
-      "source_url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/",
-      "status": "wp_not_ready",
-      "title_it": "Oba Femi sfida Brock Lesnar dopo il passaggio del turno nel King of the Ring",
-      "wp_ready": false
+      "categories": [
+        5
+      ],
+      "featured_media": 5805,
+      "source_url": "https://www.ringsidenews.com/mick-foley-says-aew-reminds-him-wwes-attitude-era/",
+      "status": "published",
+      "title_it": "Mick Foley: \"La AEW mi ricorda la WWE dell'Attitude Era\"",
+      "wp_link": "https://news.openwrestlingtv.com/aew/mick-foley-la-aew-mi-ricorda-la-wwe-dellattitude-era/",
+      "wp_post_id": 5806
     },
     {
-      "content_chars": 1858,
-      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/paul-heyman-gets-speared-through-the-barricade-during-june-1-wwe-raw-49.jpg",
-      "media_id": null,
-      "payload_preview": {
-        "categories": [],
-        "excerpt": "Durante la puntata di WWE RAW del 1° giugno, Paul Heyman è rimasto coinvolto in un incidente a bordo ring, finendo travolto da una Spear di Bron Breakker contro le barricate.",
-        "meta": {
-          "original_url": "https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/",
-          "owtv_pipeline": "v93_6_publisher_wordpress",
-          "owtv_source": "ringsidenews"
-        },
-        "status": "publish",
-        "title": "Paul Heyman travolto da una Spear contro le barricate a WWE Raw"
-      },
-      "source_url": "https://www.ringsidenews.com/paul-heyman-gets-speared-through-barricade-during-june-1-wwe-raw/",
-      "status": "wp_not_ready",
-      "title_it": "Paul Heyman travolto da una Spear contro le barricate a WWE Raw",
-      "wp_ready": false
+      "categories": [
+        4
+      ],
+      "featured_media": 5807,
+      "source_url": "https://www.ringsidenews.com/seth-rollins-gives-turin-crowd-special-moment-wwe-raw-goes-off-air/",
+      "status": "published",
+      "title_it": "Il momento speciale di Seth Rollins per il pubblico di Torino dopo WWE RAW",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/il-momento-speciale-di-seth-rollins-per-il-pubblico-di-torino-dopo-wwe-raw/",
+      "wp_post_id": 5808
     }
   ],
-  "version": "v93_6_publisher_wordpress",
+  "version": "v93_10_publisher_plain_oembed_urls",
   "wp": {
     "dry_run": false,
     "post_status": "publish",
-    "ready": false,
-    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f8e92ede510>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=25)'))"
+    "ready": true,
+    "reason": "ok"
   }
 }
