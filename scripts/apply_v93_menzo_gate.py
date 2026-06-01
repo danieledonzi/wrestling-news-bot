@@ -28,6 +28,20 @@ insert_before = '\n\ndef run_news_pipeline(wp_ok: bool, now: datetime) -> int:\n
 if insert_before not in text:
     raise SystemExit("[V93 MENZO GATE] run_news_pipeline marker non trovato")
 
+soft_pool_fallback = ""
+if "def hydrate_soft_pool(" not in text:
+    soft_pool_fallback = r'''
+
+def hydrate_soft_pool(soft_pool: Any, now: datetime) -> List[Dict[str, Any]]:
+    if isinstance(soft_pool, list):
+        return [item for item in soft_pool if isinstance(item, dict)]
+    if isinstance(soft_pool, dict):
+        items = soft_pool.get("items") or soft_pool.get("soft_items") or soft_pool.get("pool") or []
+        if isinstance(items, list):
+            return [item for item in items if isinstance(item, dict)]
+    return []
+'''
+
 helpers = r'''
 
 def v93_gate_key(url: str) -> str:
@@ -63,7 +77,7 @@ def v93_filter_soft_pool_items(items: List[Dict[str, Any]], allowed: set[str]) -
         return items
     return [item for item in items if v93_menzo_allows(item, allowed)]
 '''
-text = text.replace(insert_before, helpers + insert_before, 1)
+text = text.replace(insert_before, soft_pool_fallback + helpers + insert_before, 1)
 
 old = '''    entries = feed_entries(feeds_cfg.get("feeds", []))
     hard_items: List[Dict[str, Any]] = []
