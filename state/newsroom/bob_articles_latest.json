@@ -3,22 +3,56 @@
   "articles": [
     {
       "bob_notes": [
-        "Traduzione integrale mantenendo il tono giornalistico richiesto.",
-        "Rispettata la sequenza dei paragrafi e la formattazione dei placeholder immagine.",
-        "Le virgolette sono state tradotte fedelmente come da direttive.",
-        "Terminologia tecnica (taping, ring, titolo) adattata al contesto italiano di wrestling."
+        "Il testo originale menziona date nel futuro (giugno/settembre 2025), riportate fedelmente come da istruzioni di non modificare o interpretare i dettagli della fonte.",
+        "Mantenuta la terminologia tecnica del wrestling (swinging DDT, Mask vs. Mask, titolo Intercontinentale)."
       ],
-      "body_html": "<p><!--IMAGE:https://www.wrestlinginc.com/img/gallery/aaa-star-octagon-reportedly-suffers-injury-at-tv-taping-during-noche-de-los-grandes/intro-1780328260.jpg--></p><p>Lo scorso sabato si è tenuto il grande evento della AAA, Noche de Los Grandes, caratterizzato dall'atteso Mask vs. Mask match tra l'originale El Grande Americano ed El Grande Americano. Alla serata hanno preso parte anche talenti WWE come Rey Fénix e Bayley. Tuttavia, durante le registrazioni televisive che hanno preceduto l'evento dal vivo, Octagon Jr. ha riportato un infortunio nel corso dell'esecuzione di una swinging DDT che ha colpito il suo collo. Sui social media è emerso un video che mostra il wrestler costretto ad abbandonare il ring in barella.</p><p>Un aggiornamento sulle sue condizioni è arrivato tramite Wrestling Observer Radio. Dave Meltzer ha riferito che Octagon Jr. dovrà restare lontano dal ring per diversi mesi. Bryan Alvarez ha spiegato che il lottatore è stato sottoposto a una risonanza magnetica durante il fine settimana, ottenendo un esito che, sebbene positivo, conferma che <em>\"starà lontano dall'azione probabilmente per diversi mesi\"</em>. Alvarez ha inoltre aggiunto che la situazione avrebbe potuto avere conseguenze ben peggiori.</p><p>Nel giugno 2025, Octagon Jr. aveva affrontato \"Dirty Dom\" Mysterio per il titolo Intercontinentale maschile a Money in the Bank, dopo un incidente avvenuto poche ore prima a Worlds Collide. È apparso anche nel medesimo evento di settembre 2025, quando ha fatto squadra con Laredo Kid, La Parka e Mascarita Sagrada, ottenendo una vittoria contro l'LWO, Lince Dorado e Mini Abismo Negro.</p><p>Tutto lo staff di Wrestling Inc. augura a Octagon Jr. una pronta guarigione.</p>",
+      "body_html": "<p>Lo scorso sabato si è tenuto lo show di punta della AAA, <em>Noche de Los Grandes</em>, che ha visto come piatto forte l'attesissimo match <em>Mask vs. Mask</em> tra El Grande Americano e il suo omonimo originale. L'evento ha visto la partecipazione anche di talenti provenienti dalla WWE, tra cui Rey Fénix e Bayley. Prima dello spettacolo dal vivo, si sono svolte le registrazioni televisive durante le quali Octagon Jr. ha riportato un infortunio. Il luchador si è fatto male al collo nel subire una <em>swinging DDT</em>; sui social media sono emersi dei video che mostrano come Octagon Jr. sia stato portato via dal ring in barella.</p><p>Un aggiornamento sulle sue condizioni è arrivato tramite <em>Wrestling Observer Radio</em>. Dave Meltzer ha riferito che Octagon Jr. resterà lontano dal ring per diversi mesi. Bryan Alvarez ha aggiunto che il lottatore si è sottoposto a una risonanza magnetica durante il fine settimana, ottenendo un responso che, sebbene indichi uno stop di diversi mesi, lascia ben sperare: \"it was good, but he will be out of action likely several months\". Alvarez ha inoltre sottolineato che l'infortunio avrebbe potuto avere conseguenze ben più gravi.</p><p>Nel giugno 2025, Octagon Jr. aveva affrontato \"Dirty Dom\" Mysterio per il titolo Intercontinentale a <em>Money in the Bank</em>, in seguito a un incidente avvenuto poche ore prima a <em>Worlds Collide</em>. Sempre a <em>Worlds Collide</em>, nel settembre 2025, aveva combattuto al fianco di Laredo Kid, La Parka e Mascarita Sagrada, ottenendo una vittoria contro il team composto da LWO, Lince Dorado e Mini Abismo Negro.</p>",
       "category_hint": "World",
-      "created_at": "2026-06-01T15:55:43.781362+00:00",
+      "clean_element_count": 3,
+      "created_at": "2026-06-01T16:09:29.016135+00:00",
+      "diagnostic_stage": "ready_for_alfred",
       "element_counts": {
         "embed": 0,
         "heading": 0,
-        "image": 1,
+        "image": 0,
         "quote": 0,
-        "text": 5
+        "text": 3
       },
       "elements": [
+        {
+          "text": "Last Saturday was AAA's big Noche de Los Grandes show which saw the highly anticipated Mask vs. Mask match between OG El Grande Americano and El Grande Americano. Other WWE talents such as Rey Fénix and Bayley also competed . Prior to the live event was a taping where Octagon Jr. was injured. He was taking a swinging DDT when his neck was injured. Video surfaced on social media that Octagon Jr. had to be stretchered from the ring.",
+          "type": "text"
+        },
+        {
+          "text": "An update was provided on Wrestling Observer Radio . Dave Meltzer reported that Octagon Jr. will be out for several months. Bryan Alvarez said that Octagon Jr. had an MRI over the weekend and was told \"it was good, but he will be out of action likely several months.\" He stated that the injury could've been much worse.",
+          "type": "text"
+        },
+        {
+          "text": "In June 2025, Octagon Jr. faced \"Dirty Dom\" Mysterio for the Men's IC title at Money in the Bank following an incident at Worlds Collide earlier in the day. He also competed at Worlds Collide in September 2025 when he teamed up with Laredo Kid, La Parka and Mascarita Sagrada where they got a victory over LWO, Lince Dorado, and Mini Abismo Negro.",
+          "type": "text"
+        }
+      ],
+      "excerpt_it": "Brutte notizie per la AAA: Octagon Jr. è stato costretto ad abbandonare il ring in barella durante le recenti registrazioni televisive. Previsto uno stop di diversi mesi.",
+      "extraction_diagnostics": {
+        "candidate_node_count": 6,
+        "clean_element_count": 3,
+        "dom_noise_reduction_enabled": false,
+        "raw_element_count": 4,
+        "removed_by_node_count": 0,
+        "removed_by_sanitize_count": 1,
+        "root_name": "article",
+        "root_text_chars": 1444,
+        "stage": "complete"
+      },
+      "fetched_html_chars": 49975,
+      "menzo_score": 86,
+      "meta": {
+        "description": "Wrestling Observer provided an update on AAA's Octagon Jr. after an injury on Saturday night.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/aaa-star-octagon-reportedly-suffers-injury-at-tv-taping-during-noche-de-los-grandes/l-intro-1780328260.jpg",
+        "source_title": "AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes - Wrestling Inc."
+      },
+      "raw_element_count": 4,
+      "raw_elements_preview": [
         {
           "alt": "Octagon Jr. at WWE MITB",
           "type": "image",
@@ -35,76 +69,523 @@
         {
           "text": "In June 2025, Octagon Jr. faced \"Dirty Dom\" Mysterio for the Men's IC title at Money in the Bank following an incident at Worlds Collide earlier in the day. He also competed at Worlds Collide in September 2025 when he teamed up with Laredo Kid, La Parka and Mascarita Sagrada where they got a victory over LWO, Lince Dorado, and Mini Abismo Negro.",
           "type": "text"
-        },
-        {
-          "text": "We at Wrestling Inc. wish Octagon Jr. the best during his recovery.",
-          "type": "text"
-        },
-        {
-          "text": "If you use any quotes from this article, please credit Wrestling Observer Radio and provide a h/t to Wrestling Inc. for the transcription.",
-          "type": "text"
         }
       ],
-      "excerpt_it": "Brutto infortunio per Octagon Jr. durante i taping della AAA: il wrestler sarà costretto a uno stop di diversi mesi dopo un incidente al collo.",
-      "menzo_score": 86,
-      "meta": {
-        "description": "Wrestling Observer provided an update on AAA's Octagon Jr. after an injury on Saturday night.",
-        "featured_image": "https://www.wrestlinginc.com/img/gallery/aaa-star-octagon-reportedly-suffers-injury-at-tv-taping-during-noche-de-los-grandes/l-intro-1780328260.jpg",
-        "source_title": "AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes - Wrestling Inc."
-      },
-      "raw_element_count": 6,
-      "removed_before_gemini": 0,
+      "removed_before_gemini": 1,
+      "removed_elements_debug": [
+        {
+          "index": 1,
+          "item": {
+            "alt": "Octagon Jr. at WWE MITB",
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/aaa-star-octagon-reportedly-suffers-injury-at-tv-taping-during-noche-de-los-grandes/intro-1780328260.jpg"
+          },
+          "reason": "duplicate_featured_image"
+        }
+      ],
       "source": "wrestlinginc",
       "source_title": "AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes",
       "source_url": "https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes/",
       "status": "ready_for_alfred",
-      "title_it": "Brutto infortunio per Octagon Jr. durante un taping della AAA",
+      "title_it": "AAA: Octagon Jr. infortunato durante le registrazioni televisive",
       "translation_chain_attempted": [
         "gemini-3.1-flash-lite"
       ],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes/\nTitolo feed: AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes\nTitolo pagina: AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes - Wrestling Inc.\nDescrizione: Wrestling Observer provided an update on AAA's Octagon Jr. after an injury on Saturday night.\nCategoria suggerita: World\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.wrestlinginc.com/img/gallery/aaa-star-octagon-reportedly-suffers-injury-at-tv-taping-during-noche-de-los-grandes/intro-1780328260.jpg ALT=Octagon Jr. at WWE MITB\n[2|text] Last Saturday was AAA's big Noche de Los Grandes show which saw the highly anticipated Mask vs. Mask match between OG El Grande Americano and El Grande Americano. Other WWE talents such as Rey Fénix and Bayley also competed . Prior to the live event was a taping where Octagon Jr. was injured. He was taking a swinging DDT when his neck was injured. Video surfaced on social media that Octagon Jr. had to be stretchered from the ring.\n[3|text] An update was provided on Wrestling Observer Radio . Dave Meltzer reported that Octagon Jr. will be out for several months. Bryan Alvarez said that Octagon Jr. had an MRI over the weekend and was told \"it was good, but he will be out of action likely several months.\" He stated that the injury could've been much worse.\n[4|text] In June 2025, Octagon Jr. faced \"Dirty Dom\" Mysterio for the Men's IC title at Money in the Bank following an incident at Worlds Collide earlier in the day. He also competed at Worlds Collide in September 2025 when he teamed up with Laredo Kid, La Parka and Mascarita Sagrada where they got a victory over LWO, Lince Dorado, and Mini Abismo Negro.\n[5|text] We at Wrestling Inc. wish Octagon Jr. the best during his recovery.\n[6|text] If you use any quotes from this article, please credit Wrestling Observer Radio and provide a h/t to Wrestling Inc. for the transcription.\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"Brutto infortunio per Octagon Jr. durante un taping della AAA\",\n  \"body_html\": \"<p><!--IMAGE:https://www.wrestlinginc.com/img/gallery/aaa-star-octagon-reportedly-suffers-injury-at-tv-taping-during-noche-de-los-grandes/intro-1780328260.jpg--></p><p>Lo scorso sabato si è tenuto il grande evento della AAA, Noche de Los Grandes, caratterizzato dall'atteso Mask vs. Mask match tra l'originale El Grande Americano ed El Grande Americano. Alla serata hanno preso parte anche talenti WWE come Rey Fénix e Bayley. Tuttavia, durante le registrazioni televisive che hanno preceduto l'evento dal vivo, Octagon Jr. ha riportato un infortunio nel corso dell'esecuzione di una swinging DDT che ha colpito il suo collo. Sui social media è emerso un video che mostra il wrestler costretto ad abbandonare il ring in barella.</p><p>Un aggiornamento sulle sue condizioni è arrivato tramite Wrestling Observer Radio. Dave Meltzer ha riferito che Octagon Jr. dovrà restare lontano dal ring per diversi mesi. Bryan Alvarez ha spiegato che il lottatore è stato sottoposto a una risonanza magnetica durante il fine settimana, ottenendo un esito che, sebbene positivo, conferma che <em>\\\"starà lontano dall'azione probabilmente per diversi mesi\\\"</em>. Alvarez ha inoltre aggiunto che la situazione avrebbe potuto avere conseguenze ben peggiori.</p><p>Nel giugno 2025, Octagon Jr. aveva affrontato \\\"Dirty Dom\\\" Mysterio per il titolo Intercontinentale maschile a Money in the Bank, dopo un incidente avvenuto poche ore prima a Worlds Collide. È apparso anche nel medesimo evento di settembre 2025, quando ha fatto squadra con Laredo Kid, La Parka e Mascarita Sagrada, ottenendo una vittoria contro l'LWO, Lince Dorado e Mini Abismo Negro.</p><p>Tutto lo staff di Wrestling Inc. augura a Octagon Jr. una pronta guarigione.</p>\",\n  \"excerpt_it\": \"Brutto infortunio per Octagon Jr. durante i taping della AAA: il wrestler sarà costretto a uno stop di diversi mesi dopo un incidente al collo.\",\n  \"notes\": [\n    \"Traduzione integrale mantenendo il tono giornalistico richiesto.\",\n    \"Rispettata la sequenza dei paragrafi e la formattazione dei placeholder immagine.\",\n    \"Le virgolette sono state tradotte fedelmente come da direttive.\",\n    \"Terminologia tecnica (taping, ring, titolo) adattata al contesto italiano di wrestling.\"\n  ]\n}",
+      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2184859/aaa-octagon-injury-tv-taping-noche-de-los-grandes/\nTitolo feed: AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes\nTitolo pagina: AAA Star Octagon Reportedly Suffers Injury At TV Taping During Noche De Los Grandes - Wrestling Inc.\nDescrizione: Wrestling Observer provided an update on AAA's Octagon Jr. after an injury on Saturday night.\nCategoria suggerita: World\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|text] Last Saturday was AAA's big Noche de Los Grandes show which saw the highly anticipated Mask vs. Mask match between OG El Grande Americano and El Grande Americano. Other WWE talents such as Rey Fénix and Bayley also competed . Prior to the live event was a taping where Octagon Jr. was injured. He was taking a swinging DDT when his neck was injured. Video surfaced on social media that Octagon Jr. had to be stretchered from the ring.\n[2|text] An update was provided on Wrestling Observer Radio . Dave Meltzer reported that Octagon Jr. will be out for several months. Bryan Alvarez said that Octagon Jr. had an MRI over the weekend and was told \"it was good, but he will be out of action likely several months.\" He stated that the injury could've been much worse.\n[3|text] In June 2025, Octagon Jr. faced \"Dirty Dom\" Mysterio for the Men's IC title at Money in the Bank following an incident at Worlds Collide earlier in the day. He also competed at Worlds Collide in September 2025 when he teamed up with Laredo Kid, La Parka and Mascarita Sagrada where they got a victory over LWO, Lince Dorado, and Mini Abismo Negro.\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"AAA: Octagon Jr. infortunato durante le registrazioni televisive\",\n  \"body_html\": \"<p>Lo scorso sabato si è tenuto lo show di punta della AAA, <em>Noche de Los Grandes</em>, che ha visto come piatto forte l'attesissimo match <em>Mask vs. Mask</em> tra El Grande Americano e il suo omonimo originale. L'evento ha visto la partecipazione anche di talenti provenienti dalla WWE, tra cui Rey Fénix e Bayley. Prima dello spettacolo dal vivo, si sono svolte le registrazioni televisive durante le quali Octagon Jr. ha riportato un infortunio. Il luchador si è fatto male al collo nel subire una <em>swinging DDT</em>; sui social media sono emersi dei video che mostrano come Octagon Jr. sia stato portato via dal ring in barella.</p><p>Un aggiornamento sulle sue condizioni è arrivato tramite <em>Wrestling Observer Radio</em>. Dave Meltzer ha riferito che Octagon Jr. resterà lontano dal ring per diversi mesi. Bryan Alvarez ha aggiunto che il lottatore si è sottoposto a una risonanza magnetica durante il fine settimana, ottenendo un responso che, sebbene indichi uno stop di diversi mesi, lascia ben sperare: \\\"it was good, but he will be out of action likely several months\\\". Alvarez ha inoltre sottolineato che l'infortunio avrebbe potuto avere conseguenze ben più gravi.</p><p>Nel giugno 2025, Octagon Jr. aveva affrontato \\\"Dirty Dom\\\" Mysterio per il titolo Intercontinentale a <em>Money in the Bank</em>, in seguito a un incidente avvenuto poche ore prima a <em>Worlds Collide</em>. Sempre a <em>Worlds Collide</em>, nel settembre 2025, aveva combattuto al fianco di Laredo Kid, La Parka e Mascarita Sagrada, ottenendo una vittoria contro il team composto da LWO, Lince Dorado e Mini Abismo Negro.</p>\",\n  \"excerpt_it\": \"Brutte notizie per la AAA: Octagon Jr. è stato costretto ad abbandonare il ring in barella durante le recenti registrazioni televisive. Previsto uno stop di diversi mesi.\",\n  \"notes\": [\n    \"Il testo originale menziona date nel futuro (giugno/settembre 2025), riportate fedelmente come da istruzioni di non modificare o interpretare i dettagli della fonte.\",\n    \"Mantenuta la terminologia tecnica del wrestling (swinging DDT, Mask vs. Mask, titolo Intercontinentale).\"\n  ]\n}",
       "translation_used": true
     },
     {
+      "bob_notes": [
+        "Traduzione fedele e adattamento in stile giornalistico sportivo italiano.",
+        "Mantenuta la struttura originale dei paragrafi e delle citazioni.",
+        "I nomi propri e i termini tecnici (call-up, main roster, storyline) sono stati gestiti nel rispetto del glossario specifico del wrestling."
+      ],
+      "body_html": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x16316--></p><p>Nikkita Lyons potrebbe aver impressionato i vertici della WWE, ma questo non significa che il suo approdo a Monday Night RAW sia imminente.</p><p>Secondo quanto riportato da <em>False Finish</em>, la dirigenza WWE è soddisfatta del lavoro svolto dalla Lyons dal suo rientro dall'infortunio. Tuttavia, nonostante le precedenti indiscrezioni su un possibile passaggio al main roster durante l'estate, tale eventualità non sembra attualmente probabile.</p><p>“False Finish ha appreso che i funzionari della WWE sono rimasti molto colpiti dal lavoro di Nikkita Lyons dal suo ritorno dopo l'infortunio. Sebbene ci fossero voci su un potenziale passaggio a WWE RAW in estate, al momento non sembra probabile. Si prevede che la Lyons continuerà a lavorare per EVOLVE e NXT per il prossimo futuro”, si legge nel report.</p><p>Questi aggiornamenti seguono quanto riferito in precedenza da <em>Rope Break</em>, secondo cui il nome della Lyons era stato inserito tra i possibili nomi per un call-up, con RAW indicato come destinazione ideale qualora la WWE avesse deciso di promuoverla quest'estate.</p><p>Per il momento, tuttavia, la WWE sembra intenzionata a mantenere la Lyons tra le fila di EVOLVE e NXT mentre continua a ritrovare slancio dopo i ripetuti infortuni alle ginocchia. Anche se non si tratta della rapida promozione sperata da alcuni fan, questa scelta dimostra che la compagnia sta seguendo con attenzione il suo percorso di recupero.</p><p>La stessa Lyons è stata piuttosto esplicita riguardo al suo percorso di rinnovamento. Lo scorso 29 aprile 2026, ha risposto per le rime ai critici che chiedevano a gran voce il ritorno della “vecchia” Nikkita Lyons, chiarendo di sentirsi guarita e pronta a guardare avanti:</p><p>“'Mi manchi la vecchia Nikkita Lyons' 😂 tipo... vi lamentavate anche allora 🙄 non che debba giustificarmi, ma quella era la Nikkita post-infortunio con un fidanzato di m*rda all'epoca, lmao ma non siamo nemmeno più in quella timeline, SIAMO GUARITI 🍃 STATE AL PASSO #NikkitaMultiMedia #DivineFeline lionessa pre-wwe tra l'altro👇🦁 SEMPRE STATA LA LIONESS TESORO 🎶🔮🍃”</p><p>Il tweet ha offerto ai fan uno sguardo sul reset fisico e personale che la Lyons sta affrontando. Ora, con i dirigenti WWE apparentemente impressionati, la wrestler sembra trovarsi in una posizione migliore rispetto ai momenti più bui legati agli infortuni. Resta inteso, però, che un approdo a RAW non è previsto al momento: la Lyons potrebbe ottenere la sua chance nel main roster in futuro, ma per ora la WWE sembra concentrata sul permetterle di ricostruirsi attraverso il lavoro in EVOLVE e NXT.</p>",
       "category_hint": "NXT",
-      "created_at": "2026-06-01T15:55:47.796625+00:00",
-      "error": "'NoneType' object has no attribute 'get'",
+      "clean_element_count": 10,
+      "created_at": "2026-06-01T16:09:33.816410+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "element_counts": {
+        "embed": 0,
+        "heading": 0,
+        "image": 1,
+        "quote": 2,
+        "text": 7
+      },
+      "elements": [
+        {
+          "alt": "NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors",
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x16316"
+        },
+        {
+          "text": "Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet.",
+          "type": "text"
+        },
+        {
+          "text": "False Finish reports that WWE officials have been happy with Lyons’ work since she returned from injury. However, despite earlier talk about a possible summer main roster call-up, that move reportedly does not look likely right now.",
+          "type": "text"
+        },
+        {
+          "text": "“False Finish has learned that WWE officials have been very impressed with the work of Nikkita Lyons since returning from injury. While there were reports of a potential callup to WWE RAW in the Summer, it doesn’t appear likely at this time. Lyons is expected to continue working EVOLVE and NXT for the foreseeable future.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "This comes after Rope Break previously reported that Lyons had been mentioned as a possible main roster call-up , with RAW discussed as a potential landing spot if WWE decided to move her up this summer.",
+          "type": "text"
+        },
+        {
+          "text": "For now, though, WWE appears to be keeping Lyons in EVOLVE and NXT while she continues rebuilding momentum after multiple knee injuries. That may not be the fast-track call-up some fans expected, but it shows the company is still paying attention to her comeback.",
+          "type": "text"
+        },
+        {
+          "text": "Lyons has also been vocal about her reset. Back on April 29, 2026, she fired back at critics who kept asking for the “old” Nikkita Lyons to return , making it clear she sees herself as healed and moving forward.",
+          "type": "text"
+        },
+        {
+          "text": "“i MiSs ThE oLd nIkKiTa LyOnS” 😂 like… y’all were complaining back then too 🙄 not that i need to explain, but that was post injury with a sh✨tty bf at the time nikkita lmao but we’re not even in that timeline anymore, WE’RE HEALED 🍃 KEEP UP #NikkitaMultiMedia #DivineFeline lioness pre-wwe mind you👇🦁 BEEN THE LYONESS BABE 🎶🔮🍃”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "The tweet gave fans a look into the physical and personal reset Lyons has been working through. Now, with WWE officials reportedly impressed, she appears to be in a better position than she was during her injury setbacks.",
+          "type": "text"
+        },
+        {
+          "text": "Still, the latest word is that a RAW call-up is not expected at this time. Lyons may eventually get that main roster chance, but for now, WWE seems focused on letting her keep building herself back up through EVOLVE and NXT.",
+          "type": "text"
+        }
+      ],
+      "excerpt_it": "Nonostante i rumors di un imminente approdo nel main roster, il futuro di Nikkita Lyons rimane saldamente legato a NXT e EVOLVE mentre prosegue il suo percorso di ripresa.",
+      "extraction_diagnostics": {
+        "candidate_node_count": 45,
+        "clean_element_count": 10,
+        "dom_noise_reduction_enabled": false,
+        "raw_element_count": 11,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 1,
+        "root_name": "article",
+        "root_text_chars": 3151,
+        "stage": "complete"
+      },
+      "fetched_html_chars": 477794,
       "menzo_score": 86,
+      "meta": {
+        "description": "Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet. False Finish reports that WWE",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg",
+        "source_title": "NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors"
+      },
+      "raw_element_count": 11,
+      "raw_elements_preview": [
+        {
+          "alt": "NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors",
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x16316"
+        },
+        {
+          "text": "Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet.",
+          "type": "text"
+        },
+        {
+          "text": "False Finish reports that WWE officials have been happy with Lyons’ work since she returned from injury. However, despite earlier talk about a possible summer main roster call-up, that move reportedly does not look likely right now.",
+          "type": "text"
+        },
+        {
+          "text": "“False Finish has learned that WWE officials have been very impressed with the work of Nikkita Lyons since returning from injury. While there were reports of a potential callup to WWE RAW in the Summer, it doesn’t appear likely at this time. Lyons is expected to continue working EVOLVE and NXT for the foreseeable future.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "This comes after Rope Break previously reported that Lyons had been mentioned as a possible main roster call-up , with RAW discussed as a potential landing spot if WWE decided to move her up this summer.",
+          "type": "text"
+        },
+        {
+          "text": "For now, though, WWE appears to be keeping Lyons in EVOLVE and NXT while she continues rebuilding momentum after multiple knee injuries. That may not be the fast-track call-up some fans expected, but it shows the company is still paying attention to her comeback.",
+          "type": "text"
+        },
+        {
+          "text": "Lyons has also been vocal about her reset. Back on April 29, 2026, she fired back at critics who kept asking for the “old” Nikkita Lyons to return , making it clear she sees herself as healed and moving forward.",
+          "type": "text"
+        },
+        {
+          "text": "“i MiSs ThE oLd nIkKiTa LyOnS” 😂 like… y’all were complaining back then too 🙄 not that i need to explain, but that was post injury with a sh✨tty bf at the time nikkita lmao but we’re not even in that timeline anymore, WE’RE HEALED 🍃 KEEP UP #NikkitaMultiMedia #DivineFeline lioness pre-wwe mind you👇🦁 BEEN THE LYONESS BABE 🎶🔮🍃”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "The tweet gave fans a look into the physical and personal reset Lyons has been working through. Now, with WWE officials reportedly impressed, she appears to be in a better position than she was during her injury setbacks.",
+          "type": "text"
+        },
+        {
+          "text": "Still, the latest word is that a RAW call-up is not expected at this time. Lyons may eventually get that main roster chance, but for now, WWE seems focused on letting her keep building herself back up through EVOLVE and NXT.",
+          "type": "text"
+        },
+        {
+          "text": "Spotlight WWE News Sol Ruca Wins Women’s IC Title At WWE Clash In Italy WWE News Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy WWE News Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy WWE News WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win",
+          "type": "text"
+        }
+      ],
+      "removed_before_gemini": 14,
+      "removed_elements_debug": [
+        {
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "node_index": 33,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Spotlight"
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2195780 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-sol-ruca tag-wwe-clash-in-italy tag-wwe-featured   ",
+          "node_index": 34,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Sol Ruca Wins Women’s IC Title At WWE Clash In Italy"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 35,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Sol Ruca Wins Women’s IC Title At WWE Clash In Italy"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 36,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2195726 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-brock-lesnar tag-oba-femi tag-wwe-clash-in-italy tag-wwe-featured   ",
+          "node_index": 37,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 38,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 39,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2195718 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-jacob-fatu tag-wwe-clash-in-italy tag-wwe-featured   ",
+          "node_index": 40,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 41,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 42,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2195550 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-sol-ruca tag-wwe-featured   ",
+          "node_index": 43,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 44,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 45,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "index": 11,
+          "item": {
+            "text": "Spotlight WWE News Sol Ruca Wins Women’s IC Title At WWE Clash In Italy WWE News Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy WWE News Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy WWE News WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win",
+            "type": "text"
+          },
+          "reason": "footer_start"
+        }
+      ],
       "source": "ringsidenews",
       "source_title": "NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors",
       "source_url": "https://www.ringsidenews.com/nxt-stars-future-revealed-amid-wwe-main-roster-call-rumors/",
-      "status": "error"
+      "status": "ready_for_alfred",
+      "title_it": "NXT: il futuro di Nikkita Lyons tra i rumors di un call-up nel main roster",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/nxt-stars-future-revealed-amid-wwe-main-roster-call-rumors/\nTitolo feed: NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors\nTitolo pagina: NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors\nDescrizione: Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet. False Finish reports that WWE\nCategoria suggerita: NXT\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x16316 ALT=NXT Star’s Future Revealed Amid WWE Main Roster Call-Up Rumors\n[2|text] Nikkita Lyons may have WWE officials impressed, but that does not mean she is heading to Monday Night RAW just yet.\n[3|text] False Finish reports that WWE officials have been happy with Lyons’ work since she returned from injury. However, despite earlier talk about a possible summer main roster call-up, that move reportedly does not look likely right now.\n[4|quote] “False Finish has learned that WWE officials have been very impressed with the work of Nikkita Lyons since returning from injury. While there were reports of a potential callup to WWE RAW in the Summer, it doesn’t appear likely at this time. Lyons is expected to continue working EVOLVE and NXT for the foreseeable future.”\n[5|text] This comes after Rope Break previously reported that Lyons had been mentioned as a possible main roster call-up , with RAW discussed as a potential landing spot if WWE decided to move her up this summer.\n[6|text] For now, though, WWE appears to be keeping Lyons in EVOLVE and NXT while she continues rebuilding momentum after multiple knee injuries. That may not be the fast-track call-up some fans expected, but it shows the company is still paying attention to her comeback.\n[7|text] Lyons has also been vocal about her reset. Back on April 29, 2026, she fired back at critics who kept asking for the “old” Nikkita Lyons to return , making it clear she sees herself as healed and moving forward.\n[8|quote] “i MiSs ThE oLd nIkKiTa LyOnS” 😂 like… y’all were complaining back then too 🙄 not that i need to explain, but that was post injury with a sh✨tty bf at the time nikkita lmao but we’re not even in that timeline anymore, WE’RE HEALED 🍃 KEEP UP #NikkitaMultiMedia #DivineFeline lioness pre-wwe mind you👇🦁 BEEN THE LYONESS BABE 🎶🔮🍃”\n[9|text] The tweet gave fans a look into the physical and personal reset Lyons has been working through. Now, with WWE officials reportedly impressed, she appears to be in a better position than she was during her injury setbacks.\n[10|text] Still, the latest word is that a RAW call-up is not expected at this time. Lyons may eventually get that main roster chance, but for now, WWE seems focused on letting her keep building herself back up through EVOLVE and NXT.\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"NXT: il futuro di Nikkita Lyons tra i rumors di un call-up nel main roster\",\n  \"body_html\": \"<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/nxt-stars-future-revealed-amid-wwe-main-roster-call-up-rumors-49.jpg.avif?x16316--></p><p>Nikkita Lyons potrebbe aver impressionato i vertici della WWE, ma questo non significa che il suo approdo a Monday Night RAW sia imminente.</p><p>Secondo quanto riportato da <em>False Finish</em>, la dirigenza WWE è soddisfatta del lavoro svolto dalla Lyons dal suo rientro dall'infortunio. Tuttavia, nonostante le precedenti indiscrezioni su un possibile passaggio al main roster durante l'estate, tale eventualità non sembra attualmente probabile.</p><p>“False Finish ha appreso che i funzionari della WWE sono rimasti molto colpiti dal lavoro di Nikkita Lyons dal suo ritorno dopo l'infortunio. Sebbene ci fossero voci su un potenziale passaggio a WWE RAW in estate, al momento non sembra probabile. Si prevede che la Lyons continuerà a lavorare per EVOLVE e NXT per il prossimo futuro”, si legge nel report.</p><p>Questi aggiornamenti seguono quanto riferito in precedenza da <em>Rope Break</em>, secondo cui il nome della Lyons era stato inserito tra i possibili nomi per un call-up, con RAW indicato come destinazione ideale qualora la WWE avesse deciso di promuoverla quest'estate.</p><p>Per il momento, tuttavia, la WWE sembra intenzionata a mantenere la Lyons tra le fila di EVOLVE e NXT mentre continua a ritrovare slancio dopo i ripetuti infortuni alle ginocchia. Anche se non si tratta della rapida promozione sperata da alcuni fan, questa scelta dimostra che la compagnia sta seguendo con attenzione il suo percorso di recupero.</p><p>La stessa Lyons è stata piuttosto esplicita riguardo al suo percorso di rinnovamento. Lo scorso 29 aprile 2026, ha risposto per le rime ai critici che chiedevano a gran voce il ritorno della “vecchia” Nikkita Lyons, chiarendo di sentirsi guarita e pronta a guardare avanti:</p><p>“'Mi manchi la vecchia Nikkita Lyons' 😂 tipo... vi lamentavate anche allora 🙄 non che debba giustificarmi, ma quella era la Nikkita post-infortunio con un fidanzato di m*rda all'epoca, lmao ma non siamo nemmeno più in quella timeline, SIAMO GUARITI 🍃 STATE AL PASSO #NikkitaMultiMedia #DivineFeline lionessa pre-wwe tra l'altro👇🦁 SEMPRE STATA LA LIONESS TESORO 🎶🔮🍃”</p><p>Il tweet ha offerto ai fan uno sguardo sul reset fisico e personale che la Lyons sta affrontando. Ora, con i dirigenti WWE apparentemente impressionati, la wrestler sembra trovarsi in una posizione migliore rispetto ai momenti più bui legati agli infortuni. Resta inteso, però, che un approdo a RAW non è previsto al momento: la Lyons potrebbe ottenere la sua chance nel main roster in futuro, ma per ora la WWE sembra concentrata sul permetterle di ricostruirsi attraverso il lavoro in EVOLVE e NXT.</p>\",\n  \"excerpt_it\": \"Nonostante i rumors di un imminente approdo nel main roster, il futuro di Nikkita Lyons rimane saldamente legato a NXT e EVOLVE mentre prosegue il suo percorso di ripresa.\",\n  \"notes\": [\n    \"Traduzione fedele e adattamento in stile giornalistico sportivo italiano.\",\n    \"Mantenuta la struttura originale dei paragrafi e delle citazioni.\",\n    \"I nomi propri e i termini tecnici (call-up, main roster, storyline) sono stati gestiti nel rispetto del glossario specifico del wrestling.\"\n  ]\n}",
+      "translation_used": true
     },
     {
+      "bob_notes": [
+        "Traduzione eseguita mantenendo il registro giornalistico richiesto.",
+        "Terminologia tecnica di wrestling utilizzata correttamente (Fatal 5-Way, taping, promotion, ecc.).",
+        "La citazione di Bryan Alvarez è stata tradotta fedelmente tra virgolette come richiesto dalle regole non negoziabili."
+      ],
+      "body_html": "<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg.avif?x16316--></p><p>Octagón Jr. ha ricevuto un importante aggiornamento medico in seguito al brutto infortunio al collo riportato durante l'evento AAA Noche de los Grandes; fortunatamente, la situazione avrebbe potuto avere risvolti ben peggiori.</p><p>Secondo quanto riferito da Bryan Alvarez del Wrestling Observer, la risonanza magnetica a cui si è sottoposto Octagón Jr. ha dato esito positivo dopo l'incidente occorso durante la seconda serata dei taping di Noche de los Grandes. Sebbene sia previsto un periodo di stop, sembra che l'atleta abbia evitato le conseguenze più gravi.</p><p>\"Probabilmente starà fuori diversi mesi, ma avrebbe potuto andare molto peggio\", ha dichiarato Alvarez.</p><p>L'infortunio si è verificato nel corso di un Fatal 5-Way match, registrato per la puntata del 6 giugno di Noche de los Grandes, che vedeva contrapposti Octagón Jr., Cruz Del Toro, Joaquin Wilde, Lince Dorado e Mini Vikingo. Octagón Jr. è atterrato in modo pericoloso dopo aver subito una DDT dal punto più alto della terza corda da parte di Joaquin Wilde. Il wrestler è rimasto a terra mentre l'incontro proseguiva, ma la situazione si è fatta rapidamente seria quando l'arbitro ha richiesto l'intervento dei soccorsi medici tramite il segnale della X.</p><p>I funzionari hanno successivamente trasportato Octagón Jr. fuori dal ring in barella con il collo immobilizzato, un'immagine che ha immediatamente sollevato serie preoccupazioni sulla gravità dell'accaduto. All'epoca non c'erano notizie ufficiali riguardo a eventuali danni strutturali o se l'immobilizzazione fosse stata adottata principalmente a scopo precauzionale. L'aggiornamento fornito da Alvarez offre ora un quadro più ottimistico, nonostante il lottatore dovrà restare lontano dal ring per diversi mesi.</p><p>Octagón Jr. è uno dei nomi più affidabili della AAA ed è rimasto una figura di primo piano dopo l'acquisizione della promotion da parte della WWE. Qualsiasi assenza prolungata rappresenterà comunque una perdita significativa, ma l'esito positivo della risonanza magnetica è un enorme sollievo dopo la dinamica preoccupante vista a Monterrey. Per ora, Octagón Jr. sembra aver evitato lo scenario peggiore. Il percorso di recupero richiederà tempo, ma gli ultimi aggiornamenti permettono ai fan di tirare un respiro di sollievo.</p>",
       "category_hint": "World",
-      "created_at": "2026-06-01T15:55:48.122964+00:00",
-      "error": "'NoneType' object has no attribute 'get'",
+      "clean_element_count": 7,
+      "created_at": "2026-06-01T16:10:14.459480+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "element_counts": {
+        "embed": 0,
+        "heading": 0,
+        "image": 1,
+        "quote": 1,
+        "text": 5
+      },
+      "elements": [
+        {
+          "alt": "Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping",
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg.avif?x16316"
+        },
+        {
+          "text": "Octagón Jr. has received an important medical update after his frightening neck injury at AAA Noche de los Grandes, and thankfully, things could have been much worse.",
+          "type": "text"
+        },
+        {
+          "text": "According to Bryan Alvarez of Wrestling Observer , Octagón Jr.’s MRI came back good after he suffered a frightening neck injury during the Noche de los Grandes Night Two taping. While he is still expected to miss time, the situation apparently avoided a much worse outcome.",
+          "type": "text"
+        },
+        {
+          "text": "“He will likely be out several months but could have been much worse.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "The injury happened during a Fatal 5-Way match taped for the June 6 edition of Noche de los Grandes, featuring Octagón Jr., Cruz Del Toro, Joaquin Wilde, Lince Dorado, and Mini Vikingo. Octagón Jr. landed badly after taking a DDT from the highest point of the top rope with Joaquin Wilde . He was left down on the mat as the match continued, and things quickly turned serious when the referee threw up the X sign for medical help.",
+          "type": "text"
+        },
+        {
+          "text": "Officials then removed Octagón Jr. from the match on a stretcher while his neck was immobilized, which immediately raised concern about how serious the injury might be. At the time, there was no official word on whether he had suffered structural damage or if the neck immobilization was mainly precautionary. Alvarez’s update now gives a more hopeful picture, even though Octagón Jr. may still be out for several months.",
+          "type": "text"
+        },
+        {
+          "text": "Octagón Jr. has been one of AAA’s most reliable names and has remained heavily featured following WWE’s acquisition of the promotion. Any extended absence will still hurt, but the positive MRI result is a huge relief after how bad the spot looked in Monterrey. For now, Octagón Jr. appears to have avoided the worst-case scenario. The road back may still take time, but the latest update gives fans a reason to breathe a little easier.",
+          "type": "text"
+        }
+      ],
+      "excerpt_it": "Importanti aggiornamenti medici per Octagón Jr. dopo il brutto infortunio al collo subito durante i taping di AAA Noche de los Grandes.",
+      "extraction_diagnostics": {
+        "candidate_node_count": 41,
+        "clean_element_count": 7,
+        "dom_noise_reduction_enabled": false,
+        "raw_element_count": 8,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 1,
+        "root_name": "article",
+        "root_text_chars": 2828,
+        "stage": "complete"
+      },
+      "fetched_html_chars": 477649,
       "menzo_score": 86,
+      "meta": {
+        "description": "Octagón Jr. has received an important medical update after his frightening neck injury at AAA Noche de los Grandes, and thankfully, things could have been",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg",
+        "source_title": "Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping"
+      },
+      "raw_element_count": 8,
+      "raw_elements_preview": [
+        {
+          "alt": "Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping",
+          "type": "image",
+          "url": "https://www.ringsidenews.com/wp-content/smush-avif/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg.avif?x16316"
+        },
+        {
+          "text": "Octagón Jr. has received an important medical update after his frightening neck injury at AAA Noche de los Grandes, and thankfully, things could have been much worse.",
+          "type": "text"
+        },
+        {
+          "text": "According to Bryan Alvarez of Wrestling Observer , Octagón Jr.’s MRI came back good after he suffered a frightening neck injury during the Noche de los Grandes Night Two taping. While he is still expected to miss time, the situation apparently avoided a much worse outcome.",
+          "type": "text"
+        },
+        {
+          "text": "“He will likely be out several months but could have been much worse.”",
+          "type": "quote",
+          "url": ""
+        },
+        {
+          "text": "The injury happened during a Fatal 5-Way match taped for the June 6 edition of Noche de los Grandes, featuring Octagón Jr., Cruz Del Toro, Joaquin Wilde, Lince Dorado, and Mini Vikingo. Octagón Jr. landed badly after taking a DDT from the highest point of the top rope with Joaquin Wilde . He was left down on the mat as the match continued, and things quickly turned serious when the referee threw up the X sign for medical help.",
+          "type": "text"
+        },
+        {
+          "text": "Officials then removed Octagón Jr. from the match on a stretcher while his neck was immobilized, which immediately raised concern about how serious the injury might be. At the time, there was no official word on whether he had suffered structural damage or if the neck immobilization was mainly precautionary. Alvarez’s update now gives a more hopeful picture, even though Octagón Jr. may still be out for several months.",
+          "type": "text"
+        },
+        {
+          "text": "Octagón Jr. has been one of AAA’s most reliable names and has remained heavily featured following WWE’s acquisition of the promotion. Any extended absence will still hurt, but the positive MRI result is a huge relief after how bad the spot looked in Monterrey. For now, Octagón Jr. appears to have avoided the worst-case scenario. The road back may still take time, but the latest update gives fans a reason to breathe a little easier.",
+          "type": "text"
+        },
+        {
+          "text": "Spotlight WWE News Sol Ruca Wins Women’s IC Title At WWE Clash In Italy WWE News Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy WWE News Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy WWE News WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win",
+          "type": "text"
+        }
+      ],
+      "removed_before_gemini": 14,
+      "removed_elements_debug": [
+        {
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "node_index": 29,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Spotlight"
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2195780 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-sol-ruca tag-wwe-clash-in-italy tag-wwe-featured   ",
+          "node_index": 30,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Sol Ruca Wins Women’s IC Title At WWE Clash In Italy"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 31,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Sol Ruca Wins Women’s IC Title At WWE Clash In Italy"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 32,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2195726 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-brock-lesnar tag-oba-femi tag-wwe-clash-in-italy tag-wwe-featured   ",
+          "node_index": 33,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 34,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 35,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2195718 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-jacob-fatu tag-wwe-clash-in-italy tag-wwe-featured   ",
+          "node_index": 36,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 37,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 38,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2195550 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-sol-ruca tag-wwe-featured   ",
+          "node_index": 39,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 40,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 41,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "index": 8,
+          "item": {
+            "text": "Spotlight WWE News Sol Ruca Wins Women’s IC Title At WWE Clash In Italy WWE News Brock Lesnar Beats Oba Femi After Seven F5 Finishers at WWE Clash in Italy WWE News Alternative Injury Plans Revealed for Jacob Fatu at WWE Clash In Italy WWE News WWE Had Internal Talk Over Sol Ruca Getting Title Match Without Main Roster Pinfall Win",
+            "type": "text"
+          },
+          "reason": "footer_start"
+        }
+      ],
       "source": "ringsidenews",
       "source_title": "Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping",
       "source_url": "https://www.ringsidenews.com/octagon-jrs-recovery-timeline-revealed-injury-aaa-noche-de-los-grandes-taping/",
-      "status": "error"
+      "status": "ready_for_alfred",
+      "title_it": "Octagón Jr., aggiornamenti sulle condizioni dopo l'infortunio a AAA Noche de los Grandes",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_prompt_preview": "Sei Bob, traduttore e redattore di OpenWrestlingTV.\n\nUsa la linea editoriale storica della pipeline v92: traduzione completa, naturale, fedele, non meccanica, con tono giornalistico italiano e massima attenzione al contesto wrestling.\n\nOBIETTIVO\nTrasforma la news americana in un articolo italiano pubblicabile su OpenWrestlingTV.\n\nREGOLE NON NEGOZIABILI\n- Non riassumere: lavora tutto il contenuto pulito fornito nei blocchi ordinati.\n- Non inventare nulla e non aggiungere dettagli non presenti nella fonte.\n- Mantieni tutte le informazioni sostanziali presenti nella fonte.\n- Le frasi tra virgolette vanno tradotte integralmente e fedelmente, senza parafrasi libera.\n- Conserva attribuzioni, fonti citate e relazioni logiche tra soggetti.\n- Usa italiano naturale, fluido, giornalistico, non letterale e non scolastico.\n- Usa terminologia wrestling corretta: main roster, premium live event, stable, storyline, push, turn, title shot, booking, campione/campionessa, cintura/titolo solo quando appropriato.\n- Non inserire CTA, domande ai lettori, inviti a commentare, bio autore, social bar, disclaimer o blocchi Spotlight/related. Se li vedi, ignorali.\n- Mantieni la sequenza degli elementi. Per immagini/embed usa placeholder HTML comment: <!--IMAGE:URL--> o <!--EMBED:URL-->.\n- Non tradurre nomi propri, nomi degli show, nomi delle promotion o hashtag se non necessario.\n- Titolo italiano breve, chiaro, SEO-friendly ma non clickbait.\n\nRispondi SOLO in JSON valido con questa forma:\n{\n  \"title_it\": \"...\",\n  \"body_html\": \"<p>...</p>\",\n  \"excerpt_it\": \"...\",\n  \"notes\": [\"...\"]\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/octagon-jrs-recovery-timeline-revealed-injury-aaa-noche-de-los-grandes-taping/\nTitolo feed: Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping\nTitolo pagina: Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping\nDescrizione: Octagón Jr. has received an important medical update after his frightening neck injury at AAA Noche de los Grandes, and thankfully, things could have been\nCategoria suggerita: World\n\nTESTO PULITO DA TRADURRE, GIA' RIPULITO DA CTA, BIO, SOCIAL BAR E BLOCCHI RELATED:\n[1|image] https://www.ringsidenews.com/wp-content/smush-avif/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg.avif?x16316 ALT=Octagón Jr.’s Recovery Timeline Revealed After Injury at AAA Noche de los Grandes Taping\n[2|text] Octagón Jr. has received an important medical update after his frightening neck injury at AAA Noche de los Grandes, and thankfully, things could have been much worse.\n[3|text] According to Bryan Alvarez of Wrestling Observer , Octagón Jr.’s MRI came back good after he suffered a frightening neck injury during the Noche de los Grandes Night Two taping. While he is still expected to miss time, the situation apparently avoided a much worse outcome.\n[4|quote] “He will likely be out several months but could have been much worse.”\n[5|text] The injury happened during a Fatal 5-Way match taped for the June 6 edition of Noche de los Grandes, featuring Octagón Jr., Cruz Del Toro, Joaquin Wilde, Lince Dorado, and Mini Vikingo. Octagón Jr. landed badly after taking a DDT from the highest point of the top rope with Joaquin Wilde . He was left down on the mat as the match continued, and things quickly turned serious when the referee threw up the X sign for medical help.\n[6|text] Officials then removed Octagón Jr. from the match on a stretcher while his neck was immobilized, which immediately raised concern about how serious the injury might be. At the time, there was no official word on whether he had suffered structural damage or if the neck immobilization was mainly precautionary. Alvarez’s update now gives a more hopeful picture, even though Octagón Jr. may still be out for several months.\n[7|text] Octagón Jr. has been one of AAA’s most reliable names and has remained heavily featured following WWE’s acquisition of the promotion. Any extended absence will still hurt, but the positive MRI result is a huge relief after how bad the spot looked in Monterrey. For now, Octagón Jr. appears to have avoided the worst-case scenario. The road back may still take time, but the latest update gives fans a reason to breathe a little easier.\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Octagón Jr., aggiornamenti sulle condizioni dopo l'infortunio a AAA Noche de los Grandes\",\n  \"body_html\": \"<p><!--IMAGE:https://www.ringsidenews.com/wp-content/smush-avif/2026/06/octagon-jr-s-recovery-timeline-revealed-after-injury-at-aaa-noche-de-los-grandes-taping-42.jpg.avif?x16316--></p><p>Octagón Jr. ha ricevuto un importante aggiornamento medico in seguito al brutto infortunio al collo riportato durante l'evento AAA Noche de los Grandes; fortunatamente, la situazione avrebbe potuto avere risvolti ben peggiori.</p><p>Secondo quanto riferito da Bryan Alvarez del Wrestling Observer, la risonanza magnetica a cui si è sottoposto Octagón Jr. ha dato esito positivo dopo l'incidente occorso durante la seconda serata dei taping di Noche de los Grandes. Sebbene sia previsto un periodo di stop, sembra che l'atleta abbia evitato le conseguenze più gravi.</p><p>\\\"Probabilmente starà fuori diversi mesi, ma avrebbe potuto andare molto peggio\\\", ha dichiarato Alvarez.</p><p>L'infortunio si è verificato nel corso di un Fatal 5-Way match, registrato per la puntata del 6 giugno di Noche de los Grandes, che vedeva contrapposti Octagón Jr., Cruz Del Toro, Joaquin Wilde, Lince Dorado e Mini Vikingo. Octagón Jr. è atterrato in modo pericoloso dopo aver subito una DDT dal punto più alto della terza corda da parte di Joaquin Wilde. Il wrestler è rimasto a terra mentre l'incontro proseguiva, ma la situazione si è fatta rapidamente seria quando l'arbitro ha richiesto l'intervento dei soccorsi medici tramite il segnale della X.</p><p>I funzionari hanno successivamente trasportato Octagón Jr. fuori dal ring in barella con il collo immobilizzato, un'immagine che ha immediatamente sollevato serie preoccupazioni sulla gravità dell'accaduto. All'epoca non c'erano notizie ufficiali riguardo a eventuali danni strutturali o se l'immobilizzazione fosse stata adottata principalmente a scopo precauzionale. L'aggiornamento fornito da Alvarez offre ora un quadro più ottimistico, nonostante il lottatore dovrà restare lontano dal ring per diversi mesi.</p><p>Octagón Jr. è uno dei nomi più affidabili della AAA ed è rimasto una figura di primo piano dopo l'acquisizione della promotion da parte della WWE. Qualsiasi assenza prolungata rappresenterà comunque una perdita significativa, ma l'esito positivo della risonanza magnetica è un enorme sollievo dopo la dinamica preoccupante vista a Monterrey. Per ora, Octagón Jr. sembra aver evitato lo scenario peggiore. Il percorso di recupero richiederà tempo, ma gli ultimi aggiornamenti permettono ai fan di tirare un respiro di sollievo.</p>\",\n  \"excerpt_it\": \"Importanti aggiornamenti medici per Octagón Jr. dopo il brutto infortunio al collo subito durante i taping di AAA Noche de los Grandes.\",\n  \"notes\": [\n    \"Traduzione eseguita mantenendo il registro giornalistico richiesto.\",\n    \"Terminologia tecnica di wrestling utilizzata correttamente (Fatal 5-Way, taping, promotion, ecc.).\",\n    \"La citazione di Bryan Alvarez è stata tradotta fedelmente tra virgolette come richiesto dalle regole non negoziabili.\"\n  ]\n}",
+      "translation_used": true
     }
   ],
-  "generated_at": "2026-06-01T15:55:48.465990+00:00",
+  "generated_at": "2026-06-01T16:10:18.121470+00:00",
   "handoff": {
-    "errors": 2,
-    "ready_for_alfred": 1,
+    "errors": 0,
+    "extraction_empty": 0,
+    "ready_for_alfred": 3,
     "translation_pending": 0
   },
   "input": {
     "menzo_version": "v93_2_menzo_editorial_director",
     "selected_count": 6
   },
-  "mode": "clean_source_article_package_writer",
+  "mode": "diagnostic_clean_element_article_package_writer",
   "policy": {
     "clean_before_gemini": true,
+    "diagnostic_mode": true,
+    "dom_noise_reduction_enabled": false,
     "drop_author_bio_and_footer": true,
     "drop_cta_comment_bait_social_bars_before_gemini": true,
     "drop_duplicate_first_featured_image": true,
     "drop_spotlight_related_blocks_before_gemini": true,
+    "fallback_mode": false,
     "max_articles_per_run": 3,
     "model_chain": [
       "gemini-3.1-flash-lite",
@@ -121,5 +602,5 @@
     ],
     "prompt_family": "v92_historical_natural_full_translation"
   },
-  "version": "v93_4_1_bob_clean_source_writer"
+  "version": "v93_4_2_bob_diagnostic_clean_elements"
 }
