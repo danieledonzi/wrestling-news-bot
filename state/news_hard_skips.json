@@ -695,6 +695,14 @@
     "stage": "phase_b",
     "title": "Zelina Vega Details Terrifying Rental Car Accident After Movie Shoot"
   },
+  "https://www.wrestlinginc.com/2171344/wwe-tests-wrestlers-attitude-problem-dijak-oba-femi/": {
+    "created_at": "2026-06-01T14:25:03.744365",
+    "reason": "phase_b_soft_news",
+    "score": 43,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "How WWE Tests Wrestlers 'To See If They Have An Attitude Problem,' Per Former Star"
+  },
   "https://www.wrestlinginc.com/2171461/aew-thekla-tony-khan-perfect-fit/": {
     "created_at": "2026-05-31T20:37:27.431425",
     "reason": "phase_b_soft_news",
@@ -1326,5 +1334,13 @@
     "source": "wrestlinginc",
     "stage": "phase_b",
     "title": "Konosuke Takeshita Wins First AEW International Title Defense On Collision"
+  },
+  "https://www.wrestlinginc.com/2184628/liv-morgan-wwe-queen-of-the-ring-2026-womens-world-title/": {
+    "created_at": "2026-06-01T14:25:00.634303",
+    "reason": "phase_b_soft_news",
+    "score": 48,
+    "source": "wrestlinginc",
+    "stage": "phase_b",
+    "title": "Liv Morgan Explains Why She's In WWE Queen Of The Ring 2026 Despite Holding Title"
   }
 }
