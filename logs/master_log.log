@@ -22702,3 +22702,21 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [REPORT v92] Non dovuto oggi: tna_impact expected_day_after=Friday
 [FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
 [FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+===== RUN START [2026-06-01T17:14:12] VERSION [v92_0_2_report_workshop_publish] =====
+[WP v92] BOT WP DIAG DNS news.openwrestlingtv.com: 89.40.173.112
+[WP v92] BOT WP DIAG health attempt 1/2 timeout=10s
+[WP v92] BOT WP DIAG probe status=200 elapsed=1.21s endpoint=https://news.openwrestlingtv.com/
+[WP v92] BOT WP DIAG probe status=200 elapsed=1.00s endpoint=https://news.openwrestlingtv.com/wp-json/
+[WP v92] Health check API OK: status_200 label=rest_root | tentativo 1/2
+[RUN v92] wp_ok=True wp_status=status_200
+[REPORT v92] V93 Simone gate attivo: ready=0 waiting=0 skipped=6
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/
+[REPORT v92] Non dovuto oggi: wwe_raw expected_day_after=Tuesday
+[REPORT v92] Non dovuto oggi: wwe_smackdown expected_day_after=Saturday
+[REPORT v92] Non dovuto oggi: wwe_nxt expected_day_after=Wednesday
+[REPORT v92] Non dovuto oggi: aew_dynamite expected_day_after=Thursday
+[REPORT v92] Non dovuto oggi: aew_collision expected_day_after=Sunday
+[REPORT v92] Non dovuto oggi: tna_impact expected_day_after=Friday
+[FEED v92] Scansione feed: https://www.wrestlinginc.com/feed/
+[FEED v92] Scansione feed: https://www.ringsidenews.com/feed/

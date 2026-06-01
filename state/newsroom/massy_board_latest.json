@@ -53,7 +53,7 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-01T15:10:31.916907+00:00",
+  "generated_at": "2026-06-01T15:14:11.304696+00:00",
   "handoff": {
     "already_worked": 3,
     "hard_skipped": 2,
@@ -283,6 +283,18 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/fans-call-out-aew-nyla-roses-absence-pride-month-post",
+      "published": "Mon, 01 Jun 2026 15:10:34 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/fans-call-out-aew-over-nyla-roses-absence-after-pride-month-post-22.jpg?x16316\" width=\"800\" /></p>AEW tried to celebrate Pride Month, but fans quickly turned the post into a demand for Nyla Rose to return to television. On June 1, 2026, AEW took to Twitter to mark Pride Month and stated that the company supports the celebration beyond just June: “AEW is proud to celebrate #PrideMonth this month, and every ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/fans-call-out-aew-nyla-roses-absence-pride-month-post/\" title=\"Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post\">Read more</a>",
+      "title": "Fans Call Out AEW Over Nyla Rose’s Absence After Pride Month Post",
+      "url": "https://www.ringsidenews.com/fans-call-out-aew-nyla-roses-absence-pride-month-post/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/jonathan-coachman-blasts-wwe-creative-booking-liv-morgan-queen-ring-tournament",
       "published": "Mon, 01 Jun 2026 13:56:39 +0000",
       "reason": "requires_menzo_classification",
@@ -422,18 +434,6 @@
       "summary": "<p><img alt=\"WWE Reveals Bracket For 2026 King of the Ring Tournament\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-reveals-bracket-for-2026-king-of-the-ring-tournament-23.jpg?x16316\" width=\"800\" /></p>WWE Clash in Italy took place on Sunday, May 31, 2026, at the Inalpi Arena in Turin, Italy. After the event was over, WWE got right to work on hyping their next big event. During the post-show after WWE Clash in Italy, they revealed the bracket for the 2026 King of the Ring tournament. It ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-reveals-bracket-2026-king-ring-tournament/\" title=\"WWE Reveals Bracket For 2026 King of the Ring Tournament\">Read more</a>",
       "title": "WWE Reveals Bracket For 2026 King of the Ring Tournament",
       "url": "https://www.ringsidenews.com/wwe-reveals-bracket-2026-king-ring-tournament/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/cody-rhodes-responds-roman-reigns-antagonizing-comments-wwe-clash-italy",
-      "published": "Sun, 31 May 2026 21:11:55 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Cody Rhodes Responds To Roman Reigns&#039; Antagonizing Comments After WWE Clash in Italy\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/05/cody-rhodes-responds-to-roman-reigns-antagonizing-comments-after-wwe-clash-in-italy-20.jpg?x16316\" width=\"800\" /></p>WWE Clash in Italy took place on Sunday, May 31, 2026, at the Inalpi Arena in Turin, Italy. After the event was over, WWE got right to work on hyping their next big event. The event closed out with Roman Reigns celebrating, but then things got a bit mouthy. As WWE Clash in Italy went ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/cody-rhodes-responds-roman-reigns-antagonizing-comments-wwe-clash-italy/\" title=\"Cody Rhodes Responds To Roman Reigns&#8217; Antagonizing Comments After WWE Clash in Italy\">Read more</a>",
-      "title": "Cody Rhodes Responds To Roman Reigns’ Antagonizing Comments After WWE Clash in Italy",
-      "url": "https://www.ringsidenews.com/cody-rhodes-responds-roman-reigns-antagonizing-comments-wwe-clash-italy/"
     }
   ],
   "report_candidates": [
