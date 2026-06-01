@@ -1,9 +1,11 @@
 {
   "allowed_urls": [
-    "https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review/",
-    "https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match/",
-    "https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/"
+    "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/",
+    "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/",
+    "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/",
+    "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/",
+    "https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles/"
   ],
-  "generated_at": "2026-06-01T23:42:27.524554+00:00",
-  "version": "v93_10_trade_context_editorial_gate"
+  "generated_at": "2026-06-01T23:52:55.752271+00:00",
+  "version": "v93_13_ai_editorial_review"
 }

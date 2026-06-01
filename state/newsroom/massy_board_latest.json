@@ -32,15 +32,27 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-01T23:42:27.503844+00:00",
+  "generated_at": "2026-06-01T23:52:49.760674+00:00",
   "handoff": {
-    "already_published_hard_skipped": 10,
+    "already_published_hard_skipped": 13,
     "already_worked": 1,
-    "hard_skipped": 12,
-    "to_menzo": 21,
+    "hard_skipped": 15,
+    "to_menzo": 18,
     "to_simone": 1
   },
   "hard_skipped": [
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match",
+      "published": "Mon, 01 Jun 2026 20:05:03 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "wrestlinginc",
+      "summary": "IYO SKY advanced in the Queen of the Ring tournament with a pinfall on Giulia in a four-way match in Turin, Italy on \"WWE Raw.\"",
+      "title": "IYO SKY Advances In WWE QOTR Match",
+      "url": "https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match/"
+    },
     {
       "decision": "hard_skip",
       "feed_url": "https://www.wrestlinginc.com/feed/",
@@ -51,6 +63,18 @@
       "summary": "The best and the worst of Monday Night Raw in Turin, Italy.",
       "title": "WWE Raw - 6/1/2026: 3 Things We Hated And 3 We Loved",
       "url": "https://www.wrestlinginc.com/2185398/wwe-raw-june-1-2026-3-things-loved-hated-opinion-review/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review",
+      "published": "Mon, 01 Jun 2026 20:39:17 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "wrestlinginc",
+      "summary": "Here's who looked good, and who very much didn't, at last night's WWE Clash In Italy.",
+      "title": "WWE Clash In Italy 2026: Biggest Winners And Losers",
+      "url": "https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review/"
     },
     {
       "decision": "hard_skip",
@@ -150,6 +174,18 @@
     {
       "decision": "hard_skip",
       "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw",
+      "published": "Mon, 01 Jun 2026 19:53:32 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/iyo-sky-advances-in-queen-of-the-ring-after-wild-fatal-four-way-on-june-1-wwe-raw-49.jpg?x51578\" width=\"800\" /></p>Iyo Sky is moving on in the Queen of the Ring tournament. During the June 1 episode of WWE RAW, Sky defeated Lash Legend, Roxanne Perez, and Giulia in a first-round Fatal Four-Way match. The match was chaotic from the start, with Lash using her power early while Iyo, Giulia, and Roxanne all tried to ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/\" title=\"Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW\">Read more</a>",
+      "title": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW",
+      "url": "https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/finn-balor-moves-smackdown-wwe-raw-trade",
       "published": "Mon, 01 Jun 2026 19:35:52 +0000",
       "published_guard": "publisher_history",
@@ -184,7 +220,7 @@
       "url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/"
     }
   ],
-  "known_published_urls": 17,
+  "known_published_urls": 20,
   "known_state_urls": 9,
   "mode": "sentinel_control_board",
   "news_candidates_for_menzo": [
@@ -276,18 +312,6 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match",
-      "published": "Mon, 01 Jun 2026 20:05:03 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "IYO SKY advanced in the Queen of the Ring tournament with a pinfall on Giulia in a four-way match in Turin, Italy on \"WWE Raw.\"",
-      "title": "IYO SKY Advances In WWE QOTR Match",
-      "url": "https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2170973/wwe-aj-styles-harder-improvise-modern-era",
       "published": "Sat, 16 May 2026 15:30:00 +0000",
       "reason": "requires_menzo_classification",
@@ -371,18 +395,6 @@
     {
       "assigned_to": "Menzo",
       "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review",
-      "published": "Mon, 01 Jun 2026 20:39:17 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "Here's who looked good, and who very much didn't, at last night's WWE Clash In Italy.",
-      "title": "WWE Clash In Italy 2026: Biggest Winners And Losers",
-      "url": "https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary",
       "published": "Mon, 01 Jun 2026 23:10:51 +0000",
@@ -415,18 +427,6 @@
       "summary": "<p><img alt=\"The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/the-miz-begs-browns-trade-news-isnt-real-after-myles-garrett-deal-02.jpg?x51578\" width=\"800\" /></p>The Cleveland Browns found a new way to crush The Miz. The WWE star and longtime Browns fan reacted after the team traded Myles Garrett on Monday, and he sounded completely defeated. Garrett was one of the few bright spots in Cleveland after putting up 23 sacks during the 2024-25 season, but the Browns still ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal/\" title=\"The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal\">Read more</a>",
       "title": "The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal",
       "url": "https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw",
-      "published": "Mon, 01 Jun 2026 19:53:32 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/iyo-sky-advances-in-queen-of-the-ring-after-wild-fatal-four-way-on-june-1-wwe-raw-49.jpg?x51578\" width=\"800\" /></p>Iyo Sky is moving on in the Queen of the Ring tournament. During the June 1 episode of WWE RAW, Sky defeated Lash Legend, Roxanne Perez, and Giulia in a first-round Fatal Four-Way match. The match was chaotic from the start, with Lash using her power early while Iyo, Giulia, and Roxanne all tried to ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/\" title=\"Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW\">Read more</a>",
-      "title": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW",
-      "url": "https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/"
     },
     {
       "assigned_to": "Menzo",

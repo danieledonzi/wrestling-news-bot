@@ -15,23 +15,23 @@
       "translation_pending": 0
     },
     "massy": {
-      "already_published_hard_skipped": 10,
+      "already_published_hard_skipped": 13,
       "already_worked": 1,
-      "hard_skipped": 12,
-      "to_menzo": 21,
+      "hard_skipped": 15,
+      "to_menzo": 18,
       "to_simone": 1
     },
     "menzo": {
       "pending": 0,
-      "skipped": 18,
-      "to_bob_or_v92": 3
+      "skipped": 13,
+      "to_bob_or_v92": 5
     },
     "publisher": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 3,
-      "wp_not_ready": 0
+      "published": 0,
+      "wp_not_ready": 3
     },
     "simone": {
       "ready": 0,
@@ -39,7 +39,20 @@
       "waiting": 0
     }
   },
-  "anomalies": [],
+  "anomalies": [
+    {
+      "code": "wp_not_ready",
+      "context": {
+        "already_published": 0,
+        "dry_run": 0,
+        "errors": 0,
+        "published": 0,
+        "wp_not_ready": 3
+      },
+      "message": "WordPress non era pronto/raggiungibile.",
+      "severity": "error"
+    }
+  ],
   "article_dossiers": [
     {
       "alfred": {
@@ -51,54 +64,102 @@
         "warnings": []
       },
       "bob": {
-        "clean_element_count": 6,
+        "clean_element_count": 23,
         "diagnostic_stage": "ready_for_alfred",
         "element_counts": {
           "embed": 0,
-          "heading": 0,
+          "heading": 8,
           "image": 0,
           "quote": 0,
-          "table": 0,
+          "table": 9,
           "text": 6
         },
         "error": null,
         "present": true,
-        "raw_element_count": 7,
+        "raw_element_count": 24,
         "removed_before_gemini": 14,
         "status": "ready_for_alfred",
         "translation_model": "gemini-3.1-flash-lite",
         "translation_used": true
       },
-      "category_hint": "WWE",
+      "category_hint": "AEW",
       "html_audit": {
-        "alfred_final_html_preview": "<p>Iyo Sky prosegue il suo cammino nel torneo Queen of the Ring.</p>\n<p>Durante l&#x27;episodio di WWE RAW del 1° giugno, Sky ha sconfitto Lash Legend, Roxanne Perez e Giulia in un Fatal Four-Way match valido per il primo turno. L&#x27;incontro è stato caotico fin dall&#x27;inizio, con Lash che ha sfruttato la sua potenza nelle fasi iniziali, mentre Iyo, Giulia e Roxanne cercavano di resistere il più a lungo possibile per tentare di rubare la vittoria.</p>\n<p>Lash è apparsa come una minaccia concreta per tutto l&#x27;incontro, scagliando le avversarie da una parte all&#x27;altra del ring e andando persino a segno con la Lash Extension su Roxanne e Giulia nelle battute finali. Per un momento, è sembrato che Lash potesse staccare il pass per il turno successivo.</p>\n<p>Così non è stato. Iyo ha interrotto lo schienamento di Lash con un double stomp, per poi salire sulla terza corda e colpire Giulia con un moonsault, ottenendo il conteggio di tre. Con questa vittoria, Iyo avanza ufficialmente nel torneo Queen of the Ring.</p>\n<p>Questo successo dà una grande spinta a Iyo per il prosieguo del torneo, specialmente considerando che nomi del calibro di Lash, Roxanne e Giulia sono stati eliminati tutti nello stesso match. Non è stata una vittoria netta o facile, ma Iyo ha trovato lo spiraglio di cui aveva bisogno e lo ha sfruttato al meglio.</p>\n<p>Ora Iyo Sky è a un passo dalla corona di Queen of the Ring e, se dovesse continuare a vincere, potrebbe mettersi sulla strada per un&#x27;opportunità titolata a SummerSlam.</p>",
-        "bob_body_html_preview": "<p>Iyo Sky prosegue il suo cammino nel torneo Queen of the Ring.</p>\n<p>Durante l&#x27;episodio di WWE RAW del 1° giugno, Sky ha sconfitto Lash Legend, Roxanne Perez e Giulia in un Fatal Four-Way match valido per il primo turno. L&#x27;incontro è stato caotico fin dall&#x27;inizio, con Lash che ha sfruttato la sua potenza nelle fasi iniziali, mentre Iyo, Giulia e Roxanne cercavano di resistere il più a lungo possibile per tentare di rubare la vittoria.</p>\n<p>Lash è apparsa come una minaccia concreta per tutto l&#x27;incontro, scagliando le avversarie da una parte all&#x27;altra del ring e andando persino a segno con la Lash Extension su Roxanne e Giulia nelle battute finali. Per un momento, è sembrato che Lash potesse staccare il pass per il turno successivo.</p>\n<p>Così non è stato. Iyo ha interrotto lo schienamento di Lash con un double stomp, per poi salire sulla terza corda e colpire Giulia con un moonsault, ottenendo il conteggio di tre. Con questa vittoria, Iyo avanza ufficialmente nel torneo Queen of the Ring.</p>\n<p>Questo successo dà una grande spinta a Iyo per il prosieguo del torneo, specialmente considerando che nomi del calibro di Lash, Roxanne e Giulia sono stati eliminati tutti nello stesso match. Non è stata una vittoria netta o facile, ma Iyo ha trovato lo spiraglio di cui aveva bisogno e lo ha sfruttato al meglio.</p>\n<p>Ora Iyo Sky è a un passo dalla corona di Queen of the Ring e, se dovesse continuare a vincere, potrebbe mettersi sulla strada per un&#x27;opportunità titolata a SummerSlam.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_iyo-sky-avanza-nel-torneo-queen-of-the-ring-dopo-un-caotico-fatal-four-way.html",
-        "published_html_preview": "<p>Iyo Sky prosegue il suo cammino nel torneo Queen of the Ring.</p>\n<p>Durante l&#x27;episodio di WWE RAW del 1° giugno, Sky ha sconfitto Lash Legend, Roxanne Perez e Giulia in un Fatal Four-Way match valido per il primo turno. L&#x27;incontro è stato caotico fin dall&#x27;inizio, con Lash che ha sfruttato la sua potenza nelle fasi iniziali, mentre Iyo, Giulia e Roxanne cercavano di resistere il più a lungo possibile per tentare di rubare la vittoria.</p>\n<p>Lash è apparsa come una minaccia concreta per tutto l&#x27;incontro, scagliando le avversarie da una parte all&#x27;altra del ring e andando persino a segno con la Lash Extension su Roxanne e Giulia nelle battute finali. Per un momento, è sembrato che Lash potesse staccare il pass per il turno successivo.</p>\n<p>Così non è stato. Iyo ha interrotto lo schienamento di Lash con un double stomp, per poi salire sulla terza corda e colpire Giulia con un moonsault, ottenendo il conteggio di tre. Con questa vittoria, Iyo avanza ufficialmente nel torneo Queen of the Ring.</p>\n<p>Questo successo dà una grande spinta a Iyo per il prosieguo del torneo, specialmente considerando che nomi del calibro di Lash, Roxanne e Giulia sono stati eliminati tutti nello stesso match. Non è stata una vittoria netta o facile, ma Iyo ha trovato lo spiraglio di cui aveva bisogno e lo ha sfruttato al meglio.</p>\n<p>Ora Iyo Sky è a un passo dalla corona di Queen of the Ring e, se dovesse continuare a vincere, potrebbe mettersi sulla strada per un&#x27;opportunità titolata a SummerSlam.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_iyo-sky-avanza-nel-torneo-queen-of-the-ring-dopo-un-caotico-fatal-four-way.html",
-        "publisher_review_html_preview": "<p>Iyo Sky prosegue il suo cammino nel torneo Queen of the Ring.</p>\n<p>Durante l&#x27;episodio di WWE RAW del 1° giugno, Sky ha sconfitto Lash Legend, Roxanne Perez e Giulia in un Fatal Four-Way match valido per il primo turno. L&#x27;incontro è stato caotico fin dall&#x27;inizio, con Lash che ha sfruttato la sua potenza nelle fasi iniziali, mentre Iyo, Giulia e Roxanne cercavano di resistere il più a lungo possibile per tentare di rubare la vittoria.</p>\n<p>Lash è apparsa come una minaccia concreta per tutto l&#x27;incontro, scagliando le avversarie da una parte all&#x27;altra del ring e andando persino a segno con la Lash Extension su Roxanne e Giulia nelle battute finali. Per un momento, è sembrato che Lash potesse staccare il pass per il turno successivo.</p>\n<p>Così non è stato. Iyo ha interrotto lo schienamento di Lash con un double stomp, per poi salire sulla terza corda e colpire Giulia con un moonsault, ottenendo il conteggio di tre. Con questa vittoria, Iyo avanza ufficialmente nel torneo Queen of the Ring.</p>\n<p>Questo successo dà una grande spinta a Iyo per il prosieguo del torneo, specialmente considerando che nomi del calibro di Lash, Roxanne e Giulia sono stati eliminati tutti nello stesso match. Non è stata una vittoria netta o facile, ma Iyo ha trovato lo spiraglio di cui aveva bisogno e lo ha sfruttato al meglio.</p>\n<p>Ora Iyo Sky è a un passo dalla corona di Queen of the Ring e, se dovesse continuare a vincere, potrebbe mettersi sulla strada per un&#x27;opportunità titolata a SummerSlam.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/\nTitolo feed: Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW\nTitolo pagina: Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW\nDescrizione: Iyo Sky is moving on in the Queen of the Ring tournament. During the June 1 episode of WWE RAW, Sky defeated Lash Legend, Roxanne Perez, and Giulia in a\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Iyo Sky is moving on in the Queen of the Ring tournament.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"During the June 1 episode of WWE RAW, Sky defeated Lash Legend, Roxanne Perez, and Giulia in a first-round Fatal Four-Way match. The match was chaotic from the start, with Lash using her power early while Iyo, Giulia, and Roxanne all tried to survive long enough to steal the win.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Lash looked like a major threat throughout the match, tossing bodies around and even hitting Lash Extension on both Roxanne and Giulia late in the bout. For a moment, it looked like Lash might punch her ticket forward.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"That didn’t happen. Iyo broke up Lash’s cover with a double stomp, then climbed to the top rope and hit a moonsault on Giulia to score the three-count. With that, Iyo officially advanced in the Queen of the Ring tournament.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"The win gives Iyo a big boost as the tournament continues, especially with names like Lash, Roxanne, and Giulia all being taken out in the same match. It was not clean or easy, but Iyo found the opening she needed and made it count.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Now Iyo Sky is one step closer to Queen of the Ring, and if she keeps winning, she could be on her way to a World Championship opportunity at SummerSlam.\"\n  }\n]\n"
+        "alfred_final_html_preview": "<p>Sono disponibili i dati di ascolto dell&#x27;episodio di AEW Collision del 27 maggio 2026 su TBS, con lo show che ha registrato un importante balzo rispetto alla settimana precedente.</p>\n<p>Secondo Programming Insider, AEW Collision del 27 maggio 2026 ha totalizzato 498.000 spettatori su TBS, con un rating di 0.05 nella fascia demografica chiave P18–49. Per fare un confronto, l&#x27;episodio del 20 maggio 2026 aveva ottenuto 413.000 spettatori con un rating di 0.06 nella stessa fascia demografica, segnando un aumento di ↑ 85.000 spettatori e un calo di ↓ 0.01 nel demo.</p>\n<p>Rispetto alla stessa settimana del 2025, AEW Collision aveva totalizzato 504.000 spettatori e un rating demo di 0.18 il 31 maggio 2025, contro i 498.000 spettatori e il rating di 0.05 del 27 maggio 2026. Ciò rappresenta una variazione su base annua di ↓ -1.2% negli ascolti e di ↓ -72.2% nel demo.</p>\n<h3>Confronto ascolti AEW Collision settimana su settimana</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>20 maggio 2026</th><th>27 maggio 2026</th><th>Variazione</th><th>% Variazione</th></tr><tr><td>Spettatori totali</td><td>413.000</td><td>498.000</td><td>↑ +85.000</td><td>↑ +20.6%</td></tr><tr><td>Demo P18–49</td><td>0.06</td><td>0.05</td><td>↓ -0.01</td><td>↓ -16.7%</td></tr></table>\n<h3>Prestazioni AEW Collision anno in corso (2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media 2026</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>421.684</td><td>498.000</td><td>↑ 76.316</td><td>↑ 18.1%</td></tr><tr><td>Media demo P18–49</td><td>0.08</td><td>0.05</td><td>↓ -0.03</td><td>↓ -34%</td></tr></table>\n<h3>Prestazioni AEW Collision mese corrente (maggio 2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media mensile</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>396.800</td><td>498.000</td><td>↑ 101.200</td><td>↑ 25.5%</td></tr><tr><td>Media demo P18–49</td><td>0.05</td><td>0.05</td><td>↓ 0.00</td><td>↓ -7.4%</td></tr></table>\n<h3>Media mobile 4 settimane AEW Collision</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media 4 settimane</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>409.250</td><td>498.000</td><td>↑ 88.750</td><td>↑ 21.7%</td></tr><tr><td>Media demo P18–49</td><td>0.05</td><td>0.05</td><td>↓ 0.00</td><td>↓ -4.8%</td></tr></table>\n<h3>Riepilogo prestazioni ultimi 12 mesi</h3>\n<table class=\"owtv-data-table\"><tr><th>Media spettatori</th><th>354.761</th></tr><tr><td>Picco ascolti</td><td>616.000 (22 marzo 2026)</td></tr><tr><td>Ascolto minimo</td><td>184.000 (20 settembre 2025)</td></tr><tr><td>Media demo 18–49</td><td>0.07</td></tr><tr><td>Settimane sopra 1.000.000 spettatori</td><td>0</td></tr><tr><td>Settimane sotto 1.000.000 spettatori</td><td>46</td></tr></table>\n<h3>Range ascolti (ultimi 12 mesi)</h3>\n<table class=\"owtv-data-table\"><tr><th>Massimo</th><th>22 marzo 2026</th><th>616.000</th></tr><tr><td>Minimo</td><td>20 settembre 2025</td><td>184.000</td></tr><tr><td>Differenza</td><td>—</td><td>432.000</td></tr></table>\n<table class=\"owtv-data-table\"><tr><th>Settimana</th><th>Spettatori</th><th>Demo 18–49</th></tr><tr><td>27 maggio 2026</td><td>498.000</td><td>0.05</td></tr><tr><td>20 maggio 2026</td><td>413.000</td><td>0.06</td></tr><tr><td>16 maggio 2026</td><td>384.000</td><td>0.05</td></tr><tr><td>9 maggio 2026</td><td>342.000</td><td>0.05</td></tr></table>\n<p>Media 4 settimane: 409.250 spettatori</p>\n<h3>Maggiori variazioni settimanali negli ascolti (ultimi 12 mesi)</h3>\n<table class=\"owtv-data-table\"><tr><th>Maggior aumento</th><th>31 gennaio 2026</th><th>+239.000</th></tr><tr><td>Maggior calo</td><td>25 ottobre 2025</td><td>-172.000</td></tr></table>\n<h3>Confronto AEW Collision anno su anno (2025 vs 2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>31 maggio 2025</th><th>27 maggio 2026</th><th>% Variazione</th></tr><tr><td>Spettatori totali</td><td>504.000</td><td>498.000</td><td>↓ -1.2%</td></tr><tr><td>Demo P18–49</td><td>0.18</td><td>0.05</td><td>↓ -72.2%</td></tr></table>\n<p>Ascolto massimo del 2026: 616.000 (22 marzo 2026) Ascolto minimo del 2026: 253.000 (24 gennaio 2026)</p>\n<p>Questi dati riflettono esclusivamente l&#x27;ascolto televisivo lineare su TBS e non includono quello in streaming o digitale. Ringside News continuerà a monitorare AEW Collision mentre la compagnia si avvicina al suo prossimo grande evento dal vivo.</p>",
+        "bob_body_html_preview": "<p>Sono disponibili i dati di ascolto dell&#x27;episodio di AEW Collision del 27 maggio 2026 su TBS, con lo show che ha registrato un importante balzo rispetto alla settimana precedente.</p>\n<p>Secondo Programming Insider, AEW Collision del 27 maggio 2026 ha totalizzato 498.000 spettatori su TBS, con un rating di 0.05 nella fascia demografica chiave P18–49. Per fare un confronto, l&#x27;episodio del 20 maggio 2026 aveva ottenuto 413.000 spettatori con un rating di 0.06 nella stessa fascia demografica, segnando un aumento di ↑ 85.000 spettatori e un calo di ↓ 0.01 nel demo.</p>\n<p>Rispetto alla stessa settimana del 2025, AEW Collision aveva totalizzato 504.000 spettatori e un rating demo di 0.18 il 31 maggio 2025, contro i 498.000 spettatori e il rating di 0.05 del 27 maggio 2026. Ciò rappresenta una variazione su base annua di ↓ -1.2% negli ascolti e di ↓ -72.2% nel demo.</p>\n<h3>Confronto ascolti AEW Collision settimana su settimana</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>20 maggio 2026</th><th>27 maggio 2026</th><th>Variazione</th><th>% Variazione</th></tr><tr><td>Spettatori totali</td><td>413.000</td><td>498.000</td><td>↑ +85.000</td><td>↑ +20.6%</td></tr><tr><td>Demo P18–49</td><td>0.06</td><td>0.05</td><td>↓ -0.01</td><td>↓ -16.7%</td></tr></table>\n<h3>Prestazioni AEW Collision anno in corso (2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media 2026</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>421.684</td><td>498.000</td><td>↑ 76.316</td><td>↑ 18.1%</td></tr><tr><td>Media demo P18–49</td><td>0.08</td><td>0.05</td><td>↓ -0.03</td><td>↓ -34%</td></tr></table>\n<h3>Prestazioni AEW Collision mese corrente (maggio 2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media mensile</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>396.800</td><td>498.000</td><td>↑ 101.200</td><td>↑ 25.5%</td></tr><tr><td>Media demo P18–49</td><td>0.05</td><td>0.05</td><td>↓ 0.00</td><td>↓ -7.4%</td></tr></table>\n<h3>Media mobile 4 settimane AEW Collision</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media 4 settimane</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>409.250</td><td>498.000</td><td>↑ 88.750</td><td>↑ 21.7%</td></tr><tr><td>Media demo P18–49</td><td>0.05</td><td>0.05</td><td>↓ 0.00</td><td>↓ -4.8%</td></tr></table>\n<h3>Riepilogo prestazioni ultimi 12 mesi</h3>\n<table class=\"owtv-data-table\"><tr><th>Media spettatori</th><th>354.761</th></tr><tr><td>Picco ascolti</td><td>616.000 (22 marzo 2026)</td></tr><tr><td>Ascolto minimo</td><td>184.000 (20 settembre 2025)</td></tr><tr><td>Media demo 18–49</td><td>0.07</td></tr><tr><td>Settimane sopra 1.000.000 spettatori</td><td>0</td></tr><tr><td>Settimane sotto 1.000.000 spettatori</td><td>46</td></tr></table>\n<h3>Range ascolti (ultimi 12 mesi)</h3>\n<table class=\"owtv-data-table\"><tr><th>Massimo</th><th>22 marzo 2026</th><th>616.000</th></tr><tr><td>Minimo</td><td>20 settembre 2025</td><td>184.000</td></tr><tr><td>Differenza</td><td>—</td><td>432.000</td></tr></table>\n<table class=\"owtv-data-table\"><tr><th>Settimana</th><th>Spettatori</th><th>Demo 18–49</th></tr><tr><td>27 maggio 2026</td><td>498.000</td><td>0.05</td></tr><tr><td>20 maggio 2026</td><td>413.000</td><td>0.06</td></tr><tr><td>16 maggio 2026</td><td>384.000</td><td>0.05</td></tr><tr><td>9 maggio 2026</td><td>342.000</td><td>0.05</td></tr></table>\n<p>Media 4 settimane: 409.250 spettatori</p>\n<h3>Maggiori variazioni settimanali negli ascolti (ultimi 12 mesi)</h3>\n<table class=\"owtv-data-table\"><tr><th>Maggior aumento</th><th>31 gennaio 2026</th><th>+239.000</th></tr><tr><td>Maggior calo</td><td>25 ottobre 2025</td><td>-172.000</td></tr></table>\n<h3>Confronto AEW Collision anno su anno (2025 vs 2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>31 maggio 2025</th><th>27 maggio 2026</th><th>% Variazione</th></tr><tr><td>Spettatori totali</td><td>504.000</td><td>498.000</td><td>↓ -1.2%</td></tr><tr><td>Demo P18–49</td><td>0.18</td><td>0.05</td><td>↓ -72.2%</td></tr></table>\n<p>Ascolto massimo del 2026: 616.000 (22 marzo 2026) Ascolto minimo del 2026: 253.000 (24 gennaio 2026)</p>\n<p>Questi dati riflettono esclusivamente l&#x27;ascolto televisivo lineare su TBS e non includono quello in streaming o digitale. Ringside News continuerà a monitorare AEW Collision mentre la compagnia si avvicina al suo prossimo grande evento dal vivo.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_aew-collision-netto-aumento-negli-ascolti-del-27-maggio-2026.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_aew-collision-netto-aumento-negli-ascolti-del-27-maggio-2026.html",
+        "publisher_review_html_preview": "<p>Sono disponibili i dati di ascolto dell&#x27;episodio di AEW Collision del 27 maggio 2026 su TBS, con lo show che ha registrato un importante balzo rispetto alla settimana precedente.</p>\n<p>Secondo Programming Insider, AEW Collision del 27 maggio 2026 ha totalizzato 498.000 spettatori su TBS, con un rating di 0.05 nella fascia demografica chiave P18–49. Per fare un confronto, l&#x27;episodio del 20 maggio 2026 aveva ottenuto 413.000 spettatori con un rating di 0.06 nella stessa fascia demografica, segnando un aumento di ↑ 85.000 spettatori e un calo di ↓ 0.01 nel demo.</p>\n<p>Rispetto alla stessa settimana del 2025, AEW Collision aveva totalizzato 504.000 spettatori e un rating demo di 0.18 il 31 maggio 2025, contro i 498.000 spettatori e il rating di 0.05 del 27 maggio 2026. Ciò rappresenta una variazione su base annua di ↓ -1.2% negli ascolti e di ↓ -72.2% nel demo.</p>\n<h3>Confronto ascolti AEW Collision settimana su settimana</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>20 maggio 2026</th><th>27 maggio 2026</th><th>Variazione</th><th>% Variazione</th></tr><tr><td>Spettatori totali</td><td>413.000</td><td>498.000</td><td>↑ +85.000</td><td>↑ +20.6%</td></tr><tr><td>Demo P18–49</td><td>0.06</td><td>0.05</td><td>↓ -0.01</td><td>↓ -16.7%</td></tr></table>\n<h3>Prestazioni AEW Collision anno in corso (2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media 2026</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>421.684</td><td>498.000</td><td>↑ 76.316</td><td>↑ 18.1%</td></tr><tr><td>Media demo P18–49</td><td>0.08</td><td>0.05</td><td>↓ -0.03</td><td>↓ -34%</td></tr></table>\n<h3>Prestazioni AEW Collision mese corrente (maggio 2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media mensile</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>396.800</td><td>498.000</td><td>↑ 101.200</td><td>↑ 25.5%</td></tr><tr><td>Media demo P18–49</td><td>0.05</td><td>0.05</td><td>↓ 0.00</td><td>↓ -7.4%</td></tr></table>\n<h3>Media mobile 4 settimane AEW Collision</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media 4 settimane</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>409.250</td><td>498.000</td><td>↑ 88.750</td><td>↑ 21.7%</td></tr><tr><td>Media demo P18–49</td><td>0.05</td><td>0.05</td><td>↓ 0.00</td><td>↓ -4.8%</td></tr></table>\n<h3>Riepilogo prestazioni ultimi 12 mesi</h3>\n<table class=\"owtv-data-table\"><tr><th>Media spettatori</th><th>354.761</th></tr><tr><td>Picco ascolti</td><td>616.000 (22 marzo 2026)</td></tr><tr><td>Ascolto minimo</td><td>184.000 (20 settembre 2025)</td></tr><tr><td>Media demo 18–49</td><td>0.07</td></tr><tr><td>Settimane sopra 1.000.000 spettatori</td><td>0</td></tr><tr><td>Settimane sotto 1.000.000 spettatori</td><td>46</td></tr></table>\n<h3>Range ascolti (ultimi 12 mesi)</h3>\n<table class=\"owtv-data-table\"><tr><th>Massimo</th><th>22 marzo 2026</th><th>616.000</th></tr><tr><td>Minimo</td><td>20 settembre 2025</td><td>184.000</td></tr><tr><td>Differenza</td><td>—</td><td>432.000</td></tr></table>\n<table class=\"owtv-data-table\"><tr><th>Settimana</th><th>Spettatori</th><th>Demo 18–49</th></tr><tr><td>27 maggio 2026</td><td>498.000</td><td>0.05</td></tr><tr><td>20 maggio 2026</td><td>413.000</td><td>0.06</td></tr><tr><td>16 maggio 2026</td><td>384.000</td><td>0.05</td></tr><tr><td>9 maggio 2026</td><td>342.000</td><td>0.05</td></tr></table>\n<p>Media 4 settimane: 409.250 spettatori</p>\n<h3>Maggiori variazioni settimanali negli ascolti (ultimi 12 mesi)</h3>\n<table class=\"owtv-data-table\"><tr><th>Maggior aumento</th><th>31 gennaio 2026</th><th>+239.000</th></tr><tr><td>Maggior calo</td><td>25 ottobre 2025</td><td>-172.000</td></tr></table>\n<h3>Confronto AEW Collision anno su anno (2025 vs 2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>31 maggio 2025</th><th>27 maggio 2026</th><th>% Variazione</th></tr><tr><td>Spettatori totali</td><td>504.000</td><td>498.000</td><td>↓ -1.2%</td></tr><tr><td>Demo P18–49</td><td>0.18</td><td>0.05</td><td>↓ -72.2%</td></tr></table>\n<p>Ascolto massimo del 2026: 616.000 (22 marzo 2026) Ascolto minimo del 2026: 253.000 (24 gennaio 2026)</p>\n<p>Questi dati riflettono esclusivamente l&#x27;ascolto televisivo lineare su TBS e non includono quello in streaming o digitale. Ringside News continuerà a monitorare AEW Collision mentre la compagnia si avvicina al suo prossimo grande evento dal vivo.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/\nTitolo feed: AEW Collision Viewership Sees Massive Increase on May 27, 2026\nTitolo pagina: AEW Collision Viewership Sees Massive Increase on May 27, 2026\nDescrizione: The latest audience figures are available for the May 27, 2026 episode of AEW Collision on TBS, with the show delivering a major week-to-week surge.\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"The latest audience figures are available for the May 27, 2026 episode of AEW Collision on TBS, with the show delivering a major week-to-week surge.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"According to Programming Insider , AEW Collision on May 27, 2026 drew 498,000 viewers on TBS, with a 0.05 rating in the key P18–49 demographic. For comparison, the May 20, 2026 episode drew 413,000 viewers with a 0.06 rating in the key P18–49 demographic, an increase of ↑ 85,000 viewers and down by ↓ 0.01 in the demo.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Compared to the same week in 2025, AEW Collision drew 504,000 viewers and a 0.18 demo rating on May 31, 2025, versus 498,000 viewers and a 0.05 demo rating on May 27, 2026. That represents a year-over-year change of ↓ -1.2% in viewership and ↓ -72.2% in the demo.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"heading\",\n    \"text\": \"AEW Collision Week-to-Week Viewership Comparison\"\n  },\n  {\n    \"id\": \"b5_r0_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Metric\"\n  },\n  {\n    \"id\": \"b5_r0_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"May 20, 2026\"\n  },\n  {\n    \"id\": \"b5_r0_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"May 27, 2026\"\n  },\n  {\n    \"id\": \"b5_r0_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"Change\"\n  },\n  {\n    \"id\": \"b5_r0_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"% Change\"\n  },\n  {\n    \"id\": \"b5_r1_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Total Viewers\"\n  },\n  {\n    \"id\": \"b5_r1_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"413,000\"\n  },\n  {\n    \"id\": \"b5_r1_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"498,000\"\n  },\n  {\n    \"id\": \"b5_r1_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ +85,000\"\n  },\n  {\n    \"id\": \"b5_r1_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ +20.6%\"\n  },\n  {\n    \"id\": \"b5_r2_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"P18–49 Demo\"\n  },\n  {\n    \"id\": \"b5_r2_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.06\"\n  },\n  {\n    \"id\": \"b5_r2_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.05\"\n  },\n  {\n    \"id\": \"b5_r2_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ -0.01\"\n  },\n  {\n    \"id\": \"b5_r2_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ -16.7%\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"heading\",\n    \"text\": \"AEW Collision Year-to-Date Performance (2026)\"\n  },\n  {\n    \"id\": \"b7_r0_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Metric\"\n  },\n  {\n    \"id\": \"b7_r0_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"2026 Average\"\n  },\n  {\n    \"id\": \"b7_r0_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"Current Episode\"\n  },\n  {\n    \"id\": \"b7_r0_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"Diff\"\n  },\n  {\n    \"id\": \"b7_r0_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"%\"\n  },\n  {\n    \"id\": \"b7_r1_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Viewers\"\n  },\n  {\n    \"id\": \"b7_r1_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"421,684\"\n  },\n  {\n    \"id\": \"b7_r1_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"498,000\"\n  },\n  {\n    \"id\": \"b7_r1_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ 76,316\"\n  },\n  {\n    \"id\": \"b7_r1_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ 18.1%\"\n  },\n  {\n    \"id\": \"b7_r2_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"P18–49 Demo Avg\"\n  },\n  {\n    \"id\": \"b7_r2_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.08\"\n  },\n  {\n    \"id\": \"b7_r2_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.05\"\n  },\n  {\n    \"id\": \"b7_r2_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ -0.03\"\n  },\n  {\n    \"id\": \"b7_r2_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ -34%\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"heading\",\n    \"text\": \"AEW Collision Month-to-Date Performance (May 2026)\"\n  },\n  {\n    \"id\": \"b9_r0_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Metric\"\n  },\n  {\n    \"id\": \"b9_r0_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"Month Avg\"\n  },\n  {\n    \"id\": \"b9_r0_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"Current Episode\"\n  },\n  {\n    \"id\": \"b9_r0_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"Diff\"\n  },\n  {\n    \"id\": \"b9_r0_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"%\"\n  },\n  {\n    \"id\": \"b9_r1_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Viewers\"\n  },\n  {\n    \"id\": \"b9_r1_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"396,800\"\n  },\n  {\n    \"id\": \"b9_r1_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"498,000\"\n  },\n  {\n    \"id\": \"b9_r1_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ 101,200\"\n  },\n  {\n    \"id\": \"b9_r1_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ 25.5%\"\n  },\n  {\n    \"id\": \"b9_r2_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"P18–49 Demo Avg\"\n  },\n  {\n    \"id\": \"b9_r2_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.05\"\n  },\n  {\n    \"id\": \"b9_r2_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.05\"\n  },\n  {\n    \"id\": \"b9_r2_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ 0.00\"\n  },\n  {\n    \"id\": \"b9_r2_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ -7.4%\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"heading\",\n    \"text\": \"AEW Collision 4-Week Rolling Average\"\n  },\n  {\n    \"id\": \"b11_r0_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Metric\"\n  },\n  {\n    \"id\": \"b11_r0_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"4 Week Avg\"\n  },\n  {\n    \"id\": \"b11_r0_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"Current Episode\"\n  },\n  {\n    \"id\": \"b11_r0_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"Diff\"\n  },\n  {\n    \"id\": \"b11_r0_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"%\"\n  },\n  {\n    \"id\": \"b11_r1_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Viewers\"\n  },\n  {\n    \"id\": \"b11_r1_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"409,250\"\n  },\n  {\n    \"id\": \"b11_r1_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"498,000\"\n  },\n  {\n    \"id\": \"b11_r1_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ 88,750\"\n  },\n  {\n    \"id\": \"b11_r1_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ 21.7%\"\n  },\n  {\n    \"id\": \"b11_r2_c0\",\n    \"type\": \"table"
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "strategic:queen of the ring,strategic:raw,recency:fresh_12h",
-        "score": 66
+        "reason": "ai:Dato positivo di ascolti per AEW Collision, necessario per il report settimanale.; deterministic:ratings:exceptional_signal,recency:fresh_12h",
+        "score": 24
       },
       "publisher": {
-        "categories": [
-          4
-        ],
+        "categories": null,
         "error": null,
-        "featured_media": 5824,
+        "featured_media": null,
         "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/wwe/iyo-sky-avanza-nel-torneo-queen-of-the-ring-dopo-un-caotico-fatal-four-way/",
-        "wp_post_id": 5825
+        "status": "wp_not_ready",
+        "wp_link": null,
+        "wp_post_id": null
       },
       "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw",
-      "title_it": "Iyo Sky avanza nel torneo Queen of the Ring dopo un caotico Fatal Four-Way"
+      "source_url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026",
+      "title_it": "AEW Collision: netto aumento negli ascolti del 27 maggio 2026"
+    },
+    {
+      "alfred": {
+        "decision": null,
+        "editorial_changes": [],
+        "issues": [],
+        "present": false,
+        "quality_score": null,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": null,
+        "diagnostic_stage": null,
+        "element_counts": null,
+        "error": null,
+        "present": false,
+        "raw_element_count": null,
+        "removed_before_gemini": null,
+        "status": null,
+        "translation_model": null,
+        "translation_used": null
+      },
+      "category_hint": "TNA",
+      "html_audit": {
+        "alfred_final_html_preview": "",
+        "bob_body_html_preview": "",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_aj-francis-calls-out-mike-santana-for-tna-world-title-match-at-slammiversary.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_aj-francis-calls-out-mike-santana-for-tna-world-title-match-at-slammiversary.html",
+        "publisher_review_html_preview": "",
+        "translation_prompt_preview": ""
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "ai:Sviluppo diretto verso il prossimo PPV di TNA, notizia di servizio per i fan.; deterministic:recency:fresh_12h",
+        "score": 22
+      },
+      "publisher": {
+        "categories": null,
+        "error": null,
+        "featured_media": null,
+        "present": false,
+        "status": null,
+        "wp_link": null,
+        "wp_post_id": null
+      },
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary",
+      "title_it": "AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary"
     },
     {
       "alfred": {
@@ -110,54 +171,102 @@
         "warnings": []
       },
       "bob": {
-        "clean_element_count": 5,
+        "clean_element_count": 14,
         "diagnostic_stage": "ready_for_alfred",
         "element_counts": {
           "embed": 0,
           "heading": 0,
           "image": 0,
-          "quote": 0,
+          "quote": 5,
           "table": 0,
-          "text": 5
+          "text": 9
         },
         "error": null,
         "present": true,
-        "raw_element_count": 6,
-        "removed_before_gemini": 1,
+        "raw_element_count": 15,
+        "removed_before_gemini": 14,
         "status": "ready_for_alfred",
         "translation_model": "gemini-3.1-flash-lite",
         "translation_used": true
       },
       "category_hint": "WWE",
       "html_audit": {
-        "alfred_final_html_preview": "<p>IYO SKY è a un passo dalla finale del Queen of the Ring a WWE Night of Champions e da un match titolato a WWE SummerSlam, dopo aver vinto il primo incontro a quattro del torneo durante &quot;WWE Raw&quot;. A Torino, SKY ha schienato Giulia, superando la concorrenza di Lash Legend e Roxanne Perez per ottenere la vittoria.</p>\n<p>In avvio di match, la Legend ha ripulito il ring, ma SKY l&#x27;ha colpita con un dropkick dalla terza corda proprio mentre la Legend aveva Giulia sulle spalle. Giulia si è però rifatta poco dopo, mettendo al tappeto tutte e tre le avversarie con un dropkick, dopo che la Legend aveva tentato di dominare fisicamente SKY e la Perez. Giulia e la Perez hanno collaborato brevemente fuori dal ring per neutralizzare la Legend, ma è stata poi la Perez a rientrare per mettere in difficoltà SKY.</p>\n<p>SKY ha steso Giulia e la Perez con un altro missile dropkick, seguito da un doppio &quot;bullet train&quot; all&#x27;angolo. La Legend l&#x27;ha sorpresa alle spalle applicandole una breve sleeper hold, ma SKY è riuscita a contrattaccare. Giulia ha tentato la sua Arrivederci Knee, ma la Perez ha interrotto lo schienamento.</p>\n<p>Giulia, SKY e la Perez hanno lottato sulle corde prima che SKY potesse tentare un Over the Moonsault, ma la Legend è riuscita a caricarsi sia la Perez che Giulia per una doppia powerbomb. Ha eseguito la Lash Extensions su entrambe, ma SKY, rimasta sulle corde, ha interrotto lo schienamento con uno stomp sulla schiena della Legend. Subito dopo, ha connesso con il moonsault su Giulia aggiudicandosi l&#x27;incontro.</p>\n<p>SKY affronterà ora la vincitrice dello scontro tra Bayley, Raquel Rodriguez, Jacy Jayne e Kiana James. La WWE non ha ancora annunciato la data di questo match.</p>",
-        "bob_body_html_preview": "<p>IYO SKY è a un passo dalla finale del Queen of the Ring a WWE Night of Champions e da un match titolato a WWE SummerSlam, dopo aver vinto il primo incontro a quattro del torneo durante &quot;WWE Raw&quot;. A Torino, SKY ha schienato Giulia, superando la concorrenza di Lash Legend e Roxanne Perez per ottenere la vittoria.</p>\n<p>In avvio di match, la Legend ha ripulito il ring, ma SKY l&#x27;ha colpita con un dropkick dalla terza corda proprio mentre la Legend aveva Giulia sulle spalle. Giulia si è però rifatta poco dopo, mettendo al tappeto tutte e tre le avversarie con un dropkick, dopo che la Legend aveva tentato di dominare fisicamente SKY e la Perez. Giulia e la Perez hanno collaborato brevemente fuori dal ring per neutralizzare la Legend, ma è stata poi la Perez a rientrare per mettere in difficoltà SKY.</p>\n<p>SKY ha steso Giulia e la Perez con un altro missile dropkick, seguito da un doppio &quot;bullet train&quot; all&#x27;angolo. La Legend l&#x27;ha sorpresa alle spalle applicandole una breve sleeper hold, ma SKY è riuscita a contrattaccare. Giulia ha tentato la sua Arrivederci Knee, ma la Perez ha interrotto lo schienamento.</p>\n<p>Giulia, SKY e la Perez hanno lottato sulle corde prima che SKY potesse tentare un Over the Moonsault, ma la Legend è riuscita a caricarsi sia la Perez che Giulia per una doppia powerbomb. Ha eseguito la Lash Extensions su entrambe, ma SKY, rimasta sulle corde, ha interrotto lo schienamento con uno stomp sulla schiena della Legend. Subito dopo, ha connesso con il moonsault su Giulia aggiudicandosi l&#x27;incontro.</p>\n<p>SKY affronterà ora la vincitrice dello scontro tra Bayley, Raquel Rodriguez, Jacy Jayne e Kiana James. La WWE non ha ancora annunciato la data di questo match.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_iyo-sky-avanza-nel-torneo-queen-of-the-ring.html",
-        "published_html_preview": "<p>IYO SKY è a un passo dalla finale del Queen of the Ring a WWE Night of Champions e da un match titolato a WWE SummerSlam, dopo aver vinto il primo incontro a quattro del torneo durante &quot;WWE Raw&quot;. A Torino, SKY ha schienato Giulia, superando la concorrenza di Lash Legend e Roxanne Perez per ottenere la vittoria.</p>\n<p>In avvio di match, la Legend ha ripulito il ring, ma SKY l&#x27;ha colpita con un dropkick dalla terza corda proprio mentre la Legend aveva Giulia sulle spalle. Giulia si è però rifatta poco dopo, mettendo al tappeto tutte e tre le avversarie con un dropkick, dopo che la Legend aveva tentato di dominare fisicamente SKY e la Perez. Giulia e la Perez hanno collaborato brevemente fuori dal ring per neutralizzare la Legend, ma è stata poi la Perez a rientrare per mettere in difficoltà SKY.</p>\n<p>SKY ha steso Giulia e la Perez con un altro missile dropkick, seguito da un doppio &quot;bullet train&quot; all&#x27;angolo. La Legend l&#x27;ha sorpresa alle spalle applicandole una breve sleeper hold, ma SKY è riuscita a contrattaccare. Giulia ha tentato la sua Arrivederci Knee, ma la Perez ha interrotto lo schienamento.</p>\n<p>Giulia, SKY e la Perez hanno lottato sulle corde prima che SKY potesse tentare un Over the Moonsault, ma la Legend è riuscita a caricarsi sia la Perez che Giulia per una doppia powerbomb. Ha eseguito la Lash Extensions su entrambe, ma SKY, rimasta sulle corde, ha interrotto lo schienamento con uno stomp sulla schiena della Legend. Subito dopo, ha connesso con il moonsault su Giulia aggiudicandosi l&#x27;incontro.</p>\n<p>SKY affronterà ora la vincitrice dello scontro tra Bayley, Raquel Rodriguez, Jacy Jayne e Kiana James. La WWE non ha ancora annunciato la data di questo match.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_iyo-sky-avanza-nel-torneo-queen-of-the-ring.html",
-        "publisher_review_html_preview": "<p>IYO SKY è a un passo dalla finale del Queen of the Ring a WWE Night of Champions e da un match titolato a WWE SummerSlam, dopo aver vinto il primo incontro a quattro del torneo durante &quot;WWE Raw&quot;. A Torino, SKY ha schienato Giulia, superando la concorrenza di Lash Legend e Roxanne Perez per ottenere la vittoria.</p>\n<p>In avvio di match, la Legend ha ripulito il ring, ma SKY l&#x27;ha colpita con un dropkick dalla terza corda proprio mentre la Legend aveva Giulia sulle spalle. Giulia si è però rifatta poco dopo, mettendo al tappeto tutte e tre le avversarie con un dropkick, dopo che la Legend aveva tentato di dominare fisicamente SKY e la Perez. Giulia e la Perez hanno collaborato brevemente fuori dal ring per neutralizzare la Legend, ma è stata poi la Perez a rientrare per mettere in difficoltà SKY.</p>\n<p>SKY ha steso Giulia e la Perez con un altro missile dropkick, seguito da un doppio &quot;bullet train&quot; all&#x27;angolo. La Legend l&#x27;ha sorpresa alle spalle applicandole una breve sleeper hold, ma SKY è riuscita a contrattaccare. Giulia ha tentato la sua Arrivederci Knee, ma la Perez ha interrotto lo schienamento.</p>\n<p>Giulia, SKY e la Perez hanno lottato sulle corde prima che SKY potesse tentare un Over the Moonsault, ma la Legend è riuscita a caricarsi sia la Perez che Giulia per una doppia powerbomb. Ha eseguito la Lash Extensions su entrambe, ma SKY, rimasta sulle corde, ha interrotto lo schienamento con uno stomp sulla schiena della Legend. Subito dopo, ha connesso con il moonsault su Giulia aggiudicandosi l&#x27;incontro.</p>\n<p>SKY affronterà ora la vincitrice dello scontro tra Bayley, Raquel Rodriguez, Jacy Jayne e Kiana James. La WWE non ha ancora annunciato la data di questo match.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match/\nTitolo feed: IYO SKY Advances In WWE QOTR Match\nTitolo pagina: IYO SKY Advances In WWE QOTR Match - Wrestling Inc.\nDescrizione: IYO SKY advanced in the Queen of the Ring tournament with a pinfall on Giulia in a four-way match in Turin, Italy on \"WWE Raw.\"\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"IYO SKY is one step closer to the Queen of the Ring finals at WWE Night of Champions, and a title match at WWE SummerSlam, after winning the first four-way match of the tournament on \\\" WWE Raw .\\\" SKY pinned Giulia in Turin, Italy, and outlasted Lash Legend and Roxanne Perez to get the win.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Legend cleared house to start off the match, but SKY hit a dropkick from the top as Legend had Giulia up to take her out. Giulia got hers back, however, and hit a dropkick of her own to take out all three women when Legend tried to overpower SKY and Perez. Giulia and Perez briefly worked together on the outside to take out Legend, but it was Perez who got back in the ring to overtake SKY.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"SKY took out Giulia and Perez with another missile dropkick, then a double bullet train attack in the corner. Legend came up behind her and put her in a brief sleeper hold, but SKY was able to counter. Giulia went for an Arrivederci Knee, Perez broke up the pin.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Giulia, SKY, and Perez battled on the ropes before SKY could hit an Over the Moonsault, but Legend got Perez and Giulia up for the double powerbomb. She hit Lash Extensions to both women, but SKY was still on the ropes and broke up the pin with a stomp to Legend's back. She then connected with the moonsault to Giulia to win.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"SKY will now go on to face whoever emerges victorious from the bout pitting Bayley, Raquel Rodriguez, Jacy Jayne, and Kiana James against one another. A date for that match has not yet been announced by WWE.\"\n  }\n]\n"
+        "alfred_final_html_preview": "<p>JBL ha elogiato Chad Gable e Ludwig Kaiser dopo il loro cruento Mask vs. Mask match ad AAA Noche de Los Grandes.</p>\n<p>Il WWE Hall of Famer era al commento per l&#x27;incontro del 30 maggio, in cui l&#x27;El Grande Americano di Ludwig Kaiser ha sconfitto l&#x27;Original El Grande Americano di Chad Gable. La sconfitta ha costretto Gable a togliersi la maschera davanti al pubblico, ponendo fine a una delle storyline più importanti dell&#x27;anno in AAA.</p>\n<p>I fan hanno elogiato il match sin dal suo svolgimento e JBL è chiaramente della stessa opinione. Intervenuto a Busted Open, ha affermato che il pubblico messicano ha contribuito a rendere il momento davvero epico.</p>\n<blockquote>“I fan messicani sono appassionati, punto. Amano la Lucha Libre e le loro stelle. Si lasciano coinvolgere e si divertono. È quello che abbiamo visto: loro, nel loro massimo splendore.”</blockquote>\n<p>JBL ha dichiarato che il match ha mostrato il pro-wrestling ai massimi livelli, ammettendo di essere rimasto sbalordito da quanto realizzato da Gable e Kaiser.</p>\n<blockquote>“E penso che abbiate visto il wrestling al suo meglio. Sono rimasto assolutamente sbalordito da ciò che hanno fatto sul ring.”</blockquote>\n<p>Ha dato grande merito a Kaiser per aver costruito il personaggio di El Grande Americano nel modo giusto, in particolare imparando la lingua e comprendendo il pubblico in Messico.</p>\n<blockquote>“Kaiser ha creato tutto questo. L&#x27;ha fatto imparando la lingua, e non solo imparandola: come si diceva in Texas, non stava imparando lo spagnolo, stava imparando il &#x27;messicano&#x27;. Ha imparato il dialetto locale, ed è stato assolutamente incredibile quello che ha fatto.”</blockquote>\n<p>JBL ha anche sottolineato che il lavoro di Gable in Messico è stato ben diverso dall&#x27;interpretare un heel sopra le righe nella televisione WWE. Ha spiegato che ottenere vero &#x27;heat&#x27; in Messico è una sfida completamente differente.</p>\n<blockquote>“Quando Chad è tornato per la prima volta, ci siamo messi a riflettere: è facile essere un heel scanzonato come lo era in WWE con i video del Varsity Club o qualsiasi diavoleria fosse. Ma cercare di ottenere heat in Messico è un altro livello. Non è nemmeno lo stesso business.”</blockquote>\n<p>JBL ha poi scommesso tutto su Gable, definendolo il miglior wrestler al mondo e affermando che il match con Kaiser è stato su un altro pianeta.</p>\n<blockquote>“Penso che Chad Gable sia il miglior wrestler al mondo, e non credo sia nemmeno una questione vicina. È stato assolutamente incredibile quello che lui e Kaiser hanno fatto.”</blockquote>\n<p>Si tratta di un elogio enorme da parte di JBL, specialmente dopo un match che ha già fatto molto parlare i fan. La perdita della maschera da parte di Gable è stata un momento fondamentale, ma i commenti di JBL chiariscono che, a suo avviso, entrambi gli atleti hanno dato vita a qualcosa di molto più importante di un semplice match con stipulazione.</p>\n<p>La storia di El Grande Americano ha dato a Kaiser e Gable la possibilità di mettersi alla prova davanti a uno dei pubblici più esigenti del wrestling, e JBL è convinto che abbiano superato l&#x27;esame a pieni voti.</p>",
+        "bob_body_html_preview": "<p>JBL ha elogiato Chad Gable e Ludwig Kaiser dopo il loro cruento Mask vs. Mask match ad AAA Noche de Los Grandes.</p>\n<p>Il WWE Hall of Famer era al commento per l&#x27;incontro del 30 maggio, in cui l&#x27;El Grande Americano di Ludwig Kaiser ha sconfitto l&#x27;Original El Grande Americano di Chad Gable. La sconfitta ha costretto Gable a togliersi la maschera davanti al pubblico, ponendo fine a una delle storyline più importanti dell&#x27;anno in AAA.</p>\n<p>I fan hanno elogiato il match sin dal suo svolgimento e JBL è chiaramente della stessa opinione. Intervenuto a Busted Open, ha affermato che il pubblico messicano ha contribuito a rendere il momento davvero epico.</p>\n<blockquote>“I fan messicani sono appassionati, punto. Amano la Lucha Libre e le loro stelle. Si lasciano coinvolgere e si divertono. È quello che abbiamo visto: loro, nel loro massimo splendore.”</blockquote>\n<p>JBL ha dichiarato che il match ha mostrato il pro-wrestling ai massimi livelli, ammettendo di essere rimasto sbalordito da quanto realizzato da Gable e Kaiser.</p>\n<blockquote>“E penso che abbiate visto il wrestling al suo meglio. Sono rimasto assolutamente sbalordito da ciò che hanno fatto sul ring.”</blockquote>\n<p>Ha dato grande merito a Kaiser per aver costruito il personaggio di El Grande Americano nel modo giusto, in particolare imparando la lingua e comprendendo il pubblico in Messico.</p>\n<blockquote>“Kaiser ha creato tutto questo. L&#x27;ha fatto imparando la lingua, e non solo imparandola: come si diceva in Texas, non stava imparando lo spagnolo, stava imparando il &#x27;messicano&#x27;. Ha imparato il dialetto locale, ed è stato assolutamente incredibile quello che ha fatto.”</blockquote>\n<p>JBL ha anche sottolineato che il lavoro di Gable in Messico è stato ben diverso dall&#x27;interpretare un heel sopra le righe nella televisione WWE. Ha spiegato che ottenere vero &#x27;heat&#x27; in Messico è una sfida completamente differente.</p>\n<blockquote>“Quando Chad è tornato per la prima volta, ci siamo messi a riflettere: è facile essere un heel scanzonato come lo era in WWE con i video del Varsity Club o qualsiasi diavoleria fosse. Ma cercare di ottenere heat in Messico è un altro livello. Non è nemmeno lo stesso business.”</blockquote>\n<p>JBL ha poi scommesso tutto su Gable, definendolo il miglior wrestler al mondo e affermando che il match con Kaiser è stato su un altro pianeta.</p>\n<blockquote>“Penso che Chad Gable sia il miglior wrestler al mondo, e non credo sia nemmeno una questione vicina. È stato assolutamente incredibile quello che lui e Kaiser hanno fatto.”</blockquote>\n<p>Si tratta di un elogio enorme da parte di JBL, specialmente dopo un match che ha già fatto molto parlare i fan. La perdita della maschera da parte di Gable è stata un momento fondamentale, ma i commenti di JBL chiariscono che, a suo avviso, entrambi gli atleti hanno dato vita a qualcosa di molto più importante di un semplice match con stipulazione.</p>\n<p>La storia di El Grande Americano ha dato a Kaiser e Gable la possibilità di mettersi alla prova davanti a uno dei pubblici più esigenti del wrestling, e JBL è convinto che abbiano superato l&#x27;esame a pieni voti.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_jbl-elogia-chad-gable-il-miglior-wrestler-al-mondo.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_jbl-elogia-chad-gable-il-miglior-wrestler-al-mondo.html",
+        "publisher_review_html_preview": "<p>JBL ha elogiato Chad Gable e Ludwig Kaiser dopo il loro cruento Mask vs. Mask match ad AAA Noche de Los Grandes.</p>\n<p>Il WWE Hall of Famer era al commento per l&#x27;incontro del 30 maggio, in cui l&#x27;El Grande Americano di Ludwig Kaiser ha sconfitto l&#x27;Original El Grande Americano di Chad Gable. La sconfitta ha costretto Gable a togliersi la maschera davanti al pubblico, ponendo fine a una delle storyline più importanti dell&#x27;anno in AAA.</p>\n<p>I fan hanno elogiato il match sin dal suo svolgimento e JBL è chiaramente della stessa opinione. Intervenuto a Busted Open, ha affermato che il pubblico messicano ha contribuito a rendere il momento davvero epico.</p>\n<blockquote>“I fan messicani sono appassionati, punto. Amano la Lucha Libre e le loro stelle. Si lasciano coinvolgere e si divertono. È quello che abbiamo visto: loro, nel loro massimo splendore.”</blockquote>\n<p>JBL ha dichiarato che il match ha mostrato il pro-wrestling ai massimi livelli, ammettendo di essere rimasto sbalordito da quanto realizzato da Gable e Kaiser.</p>\n<blockquote>“E penso che abbiate visto il wrestling al suo meglio. Sono rimasto assolutamente sbalordito da ciò che hanno fatto sul ring.”</blockquote>\n<p>Ha dato grande merito a Kaiser per aver costruito il personaggio di El Grande Americano nel modo giusto, in particolare imparando la lingua e comprendendo il pubblico in Messico.</p>\n<blockquote>“Kaiser ha creato tutto questo. L&#x27;ha fatto imparando la lingua, e non solo imparandola: come si diceva in Texas, non stava imparando lo spagnolo, stava imparando il &#x27;messicano&#x27;. Ha imparato il dialetto locale, ed è stato assolutamente incredibile quello che ha fatto.”</blockquote>\n<p>JBL ha anche sottolineato che il lavoro di Gable in Messico è stato ben diverso dall&#x27;interpretare un heel sopra le righe nella televisione WWE. Ha spiegato che ottenere vero &#x27;heat&#x27; in Messico è una sfida completamente differente.</p>\n<blockquote>“Quando Chad è tornato per la prima volta, ci siamo messi a riflettere: è facile essere un heel scanzonato come lo era in WWE con i video del Varsity Club o qualsiasi diavoleria fosse. Ma cercare di ottenere heat in Messico è un altro livello. Non è nemmeno lo stesso business.”</blockquote>\n<p>JBL ha poi scommesso tutto su Gable, definendolo il miglior wrestler al mondo e affermando che il match con Kaiser è stato su un altro pianeta.</p>\n<blockquote>“Penso che Chad Gable sia il miglior wrestler al mondo, e non credo sia nemmeno una questione vicina. È stato assolutamente incredibile quello che lui e Kaiser hanno fatto.”</blockquote>\n<p>Si tratta di un elogio enorme da parte di JBL, specialmente dopo un match che ha già fatto molto parlare i fan. La perdita della maschera da parte di Gable è stata un momento fondamentale, ma i commenti di JBL chiariscono che, a suo avviso, entrambi gli atleti hanno dato vita a qualcosa di molto più importante di un semplice match con stipulazione.</p>\n<p>La storia di El Grande Americano ha dato a Kaiser e Gable la possibilità di mettersi alla prova davanti a uno dei pubblici più esigenti del wrestling, e JBL è convinto che abbiano superato l&#x27;esame a pieni voti.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/\nTitolo feed: JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\nTitolo pagina: JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\nDescrizione: JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes. The WWE Hall of Famer was on\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes .\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"The WWE Hall of Famer was on commentary for the May 30 match, where Ludwig Kaiser’s El Grande Americano defeated Chad Gable’s Original El Grande Americano. The loss forced Gable to remove his mask in front of the crowd, ending one of AAA’s biggest storylines of the year.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Fans have been praising the match since it happened, and JBL clearly feels the same way. Speaking on Busted Open , he said the Mexican crowd helped make the moment feel massive.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“Mexican fans are just passionate fans. They love their Lucha Libre and they love their stars. They get into things and they enjoy it. That’s what you saw – them at their very best.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"JBL said the match showed pro wrestling at its highest level and admitted he was blown away by what Gable and Kaiser pulled off.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“And I thought you saw wrestling at its very best. I was absolutely blown away by what they did in the match.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"He gave Kaiser a lot of credit for building the El Grande Americano character the right way, especially by learning the language and understanding the audience in Mexico.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“Kaiser created all this. Kaiser created all this with learning the language, not just learning the language – as we used to say in Texas, he wasn’t learning Spanish, he was learning Mexican. The local dialect language was what he was learning, which was absolutely amazing, what he’s done.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"JBL also pointed out that Gable’s work in Mexico was not the same as playing a goofy heel on WWE television. He said getting real heat in Mexico is a completely different challenge.\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"quote\",\n    \"text\": \"“When Chad first came back, we’re sitting there thinking about it, it’s easy to be a campy heel like he was in WWE with the videos with the varsity club or whatever the heck it was. But then all of a sudden to try to get heat down in Mexico, that’s different level. It’s not even the same business.”\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"JBL then went all in on Gable, calling him the best wrestler in the world and saying the match with Kaiser was on another level.\"\n  },\n  {\n    \"id\": \"b12\",\n    \"type\": \"quote\",\n    \"text\": \"“I think Chad Gable’s the best wrestler in the world, and I don’t think it’s close. That was absolutely amazing what he and Kaiser did.”\"\n  },\n  {\n    \"id\": \"b13\",\n    \"type\": \"text\",\n    \"text\": \"That is huge praise from JBL, especially after a match that already had fans talking. Gable losing the mask was a major moment, but JBL’s comments make it clear he believes both men delivered something bigger than just another stipulation match.\"\n  },\n  {\n    \"id\": \"b14\",\n    \"type\": \"text\",\n    \"text\": \"The El Grande Americano story gave Kaiser and Gable a chance to prove themselves in front of one of wrestling’s toughest crowds, and JBL believes they nailed it.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "strategic:queen of the ring,strategic:raw,recency:fresh_12h",
-        "score": 66
+        "reason": "ai:Notizia fresca e di impatto narrativo, coinvolge talenti WWE in un contesto internazionale rilevante.; deterministic:entity:chad gable,recency:fresh_12h",
+        "score": 26
       },
       "publisher": {
-        "categories": [
-          4
-        ],
+        "categories": null,
         "error": null,
-        "featured_media": 5822,
+        "featured_media": null,
         "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/wwe/iyo-sky-avanza-nel-torneo-queen-of-the-ring/",
-        "wp_post_id": 5823
+        "status": "wp_not_ready",
+        "wp_link": null,
+        "wp_post_id": null
+      },
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war",
+      "title_it": "JBL elogia Chad Gable: \"È il miglior wrestler al mondo\""
+    },
+    {
+      "alfred": {
+        "decision": null,
+        "editorial_changes": [],
+        "issues": [],
+        "present": false,
+        "quality_score": null,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": null,
+        "diagnostic_stage": null,
+        "element_counts": null,
+        "error": null,
+        "present": false,
+        "raw_element_count": null,
+        "removed_before_gemini": null,
+        "status": null,
+        "translation_model": null,
+        "translation_used": null
+      },
+      "category_hint": "AEW",
+      "html_audit": {
+        "alfred_final_html_preview": "",
+        "bob_body_html_preview": "",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_jim-ross-details-health-travel-struggles-surrounding-aew-double-or-nothing-2026.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_jim-ross-details-health-travel-struggles-surrounding-aew-double-or-nothing-2026.html",
+        "publisher_review_html_preview": "",
+        "translation_prompt_preview": ""
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "ai:Notizia riguardante una figura iconica; aggiornamento sulle condizioni lavorative di JR post-PPV.; deterministic:recency:fresh_12h",
+        "score": 21
+      },
+      "publisher": {
+        "categories": null,
+        "error": null,
+        "featured_media": null,
+        "present": false,
+        "status": null,
+        "wp_link": null,
+        "wp_post_id": null
       },
       "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match",
-      "title_it": "IYO SKY avanza nel torneo Queen of the Ring"
+      "source_url": "https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles",
+      "title_it": "Jim Ross Details Health & Travel Struggles Surrounding AEW Double Or Nothing 2026"
     },
     {
       "alfred": {
@@ -168,65 +277,63 @@
         "quality_score": 95,
         "warnings": [
           {
-            "code": "image_placeholder_present",
-            "evidence": "<!--IMAGE:...-->",
-            "message": "Presente placeholder immagine da gestire nel Publisher.",
+            "code": "possible_missing_table",
+            "evidence": "Report rating e ascolti di TNA Impact (28 maggio 2026)",
+            "message": "Articolo con dati potenzialmente tabellari ma nessuna tabella estratta.",
             "severity": "warning"
           }
         ]
       },
       "bob": {
-        "clean_element_count": 19,
+        "clean_element_count": 4,
         "diagnostic_stage": "ready_for_alfred",
         "element_counts": {
           "embed": 0,
-          "heading": 1,
-          "image": 4,
-          "quote": 0,
+          "heading": 0,
+          "image": 0,
+          "quote": 1,
           "table": 0,
-          "text": 14
+          "text": 3
         },
         "error": null,
         "present": true,
-        "raw_element_count": 20,
+        "raw_element_count": 5,
         "removed_before_gemini": 1,
         "status": "ready_for_alfred",
         "translation_model": "gemini-3.1-flash-lite",
         "translation_used": true
       },
-      "category_hint": "WWE",
+      "category_hint": "TNA",
       "html_audit": {
-        "alfred_final_html_preview": "<p>La WWE è approdata a Torino per il primo storico evento Clash In Italy. Lo show ha avuto l&#x27;arduo compito di seguire lo straordinario evento AAA di sabato sera, in particolare il main event, e si è percepito come il roster si sia trovato di fronte a un impegno più grande delle proprie possibilità. Per approfondire, consultate la pagina dei risultati di Clash In Italy 2026, oltre alle &quot;3 cose che abbiamo odiato&quot; e alle &quot;3 che abbiamo amato&quot;.</p>\n<p>Ora è tempo di parlare dei vincitori e dei vinti dello show di domenica. Ci sono stati molti vincitori, come Sol Ruca, che ha ottenuto una vittoria importante contro una star di primo piano, e molti vinti, come il grande &quot;distruttore di carriere&quot; austriaco che non riesce a battere l&#x27;uomo più anonimo che la WWE abbia mai avuto.</p>\n<p>Come sempre, i vincitori possono essere vinti, i vinti possono essere vincitori e anche chi non ha lottato può finire nel mio mirino. Se volete continuare la discussione, vi rimando alla sezione dei commenti. In caso contrario, è il momento di assegnare i premi ai vincitori e ai vinti.</p>\n<h2>Vincitori: El Grandes Americano</h2>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/wwe-clash-in-italy-2026-biggest-winners-and-losers/winners-el-grandes-americano-1780346266.jpg-->\n<p>WWE Clash In Italy si è svolto all&#x27;ombra del mask vs. mask match del main event di sabato sera tra El Grande Americano e OG El Grande Americano. L&#x27;incontro era già stato ampiamente elogiato prima ancora del suono della campanella, con il team di commento in lingua spagnola della AAA che ha ringraziato apertamente il booker della AAA, The Undertaker, durante il match stesso. Per questo motivo, ogni incontro a Clash In Italy è stato condizionato dai fan WWE che ricordavano di cosa è capace la compagnia quando si concentra semplicemente su ciò che il pubblico desidera.</p>\n<p>Laddove molti momenti di domenica sera sono sembrati forzati, quelli di sabato non lo erano, il che significa che le performance dei due Grandes sono rimaste impresse nella mente dei fan durante lo show, comunque dignitoso, proposto dalla WWE domenica. Francamente, nessuno a Clash In Italy ha avuto possibilità di competere e, dato che non ci occupiamo dei vincitori/vinti della AAA, dovevo per forza menzionarlo.</p>\n<p>Il main event di sabato ha alzato l&#x27;asticella per ogni altro incontro prodotto sotto il brand WWE; la compagnia, a quanto pare, non ha scuse se non la pigrizia. Certo, la WWE non troverà per fortuna una storyline perfetta come Americano contro Americano, ma resta il fatto che questo ha dimostrato che la compagnia può cambiare rotta verso qualcosa di popolare quando si impegna. Ogni infinita saga della Bloodline o ogni booking tortuoso dei midcarder sembrerà ancora più evidente, ora che sappiamo che la WWE può davvero inseguire una risposta leggendaria del pubblico quando vuole.</p>\n<p>Il match è stato così bello che lo trasmetteranno in replica dopo Raw su Netflix.</p>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/wwe-clash-in-italy-2026-biggest-winners-and-losers/loser-gunther-1780346267.jpg-->\n<p>Gunther ha ritirato John Cena, Goldberg e AJ Styles, e non ha assolutamente nulla da mostrare per tutto questo. La sua sconfitta contro Cody Rhodes nell&#x27;opener di Clash In Italy è stata un grave caso di declino terminale.</p>\n<p>Immagino possano ricostruirlo, ma anche se alla fine vincesse il WWE Title o riconquistasse il World Heavyweight Title, è apparso troppo vulnerabile. Parliamo di colui che ha ceduto a Jey Uso e ha perso contro Pat McAfee. Hanno umanizzato Gunther in una misura sfortunata, considerando quanto sia bravo.</p>\n<p>Non è stato un brutto match, ma non è servito a nessuno. Cody non ha ottenuto una vittoria definitiva, Gunther sembra un piagnucolone. L&#x27;intero segmento di apertura è sembrato un enorme passo indietro per tutti i soggetti coinvolti, e non sono sicuro che il programma di SummerSlam sarà in grado di salvarlo. Di questo passo, Gunther tornerà nel giro del titolo Intercontinentale entro WrestleMania.</p>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/wwe-clash-in-italy-2026-biggest-winners-and-losers/winner-sol-ruca-1780346268.jpg-->\n<p>C&#x27;è qualcosa di incredibile nel modo in cui Sol Ruca sia passata in fretta da &quot;surfer acerba di NXT&quot; a battere Becky Lynch in un match titolato in un PLE. Sì, Becky è sempre sembrata un po&#x27; troppo ingombrante per la divisione femminile midcard. Ma solo una persona può riportare quel titolo al suo status di midcard, ed è Sol Ruca. È un grande onore per l&#x27;ex campionessa NXT Women&#x27;s North American e un cambio di passo rinfrescante rispetto ad altre call-up più lente.</p>\n<p>Ruca ha chiaramente qualcosa di speciale e la WWE sta battendo il ferro finché è caldo. Chi sa cosa riserva il futuro per lei, ma potrà sempre dire di aver battuto &quot;The Man&quot; in un PLE. È molto probabile che questa faida possa arrivare fino a SummerSlam. Non sembra che la WWE abbia fatto le cose a metà con Sol. Questa vittoria, inoltre, la mette in un&#x27;ottima posizione per competere nel Money In The Bank Match femminile, una stipulazione che dovrebbe calzarle a pennello.</p>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/wwe-clash-in-italy-2026-biggest-winners-and-losers/loser-jacob-fatu-1780346268.jpg-->\n<p>Semplicemente non credo che la WWE punterà mai davvero su Jacob Fatu. È destinato a essere un incompiuto, che funge da muscolo per ragazzi come Roman Reigns, e forse anche Jey Uso. La WWE ha avuto molte possibilità di trasformarlo in un main eventer, e sembra che venga costantemente sacrificato sull&#x27;altare di star più grandi. È un contendente tappabuchi, in attesa che ragazzi come Drew McIntyre terminino i loro impegni cinematografici.</p>\n<p>Non ha disputato un brutto match domenica, ma non è mai stato in una posizione convincente. L&#x27;incontro è sembrato un lungo percorso verso una conclusione inevitabile, con il titolo di Reigns mai in pericolo. Usando le parole del poeta Rodney Dangerfield, Fatu non riceve &quot;Nessun rispetto, ve lo dico io. Proprio nessuno&quot;. Roman Reigns è il centro dell&#x27;universo della Bloodline e tutti gli altri devono recitare la propria parte, con entrate e uscite, ma il re resta il re e gli altri farebbero meglio a conoscere il proprio posto.</p>",
-        "bob_body_html_preview": "<p>La WWE è approdata a Torino per il primo storico evento Clash In Italy. Lo show ha avuto l&#x27;arduo compito di seguire lo straordinario evento AAA di sabato sera, in particolare il main event, e si è percepito come il roster si sia trovato di fronte a un impegno più grande delle proprie possibilità. Per approfondire, consultate la pagina dei risultati di Clash In Italy 2026, oltre alle &quot;3 cose che abbiamo odiato&quot; e alle &quot;3 che abbiamo amato&quot;.</p>\n<p>Ora è tempo di parlare dei vincitori e dei vinti dello show di domenica. Ci sono stati molti vincitori, come Sol Ruca, che ha ottenuto una vittoria importante contro una star di primo piano, e molti vinti, come il grande &quot;distruttore di carriere&quot; austriaco che non riesce a battere l&#x27;uomo più anonimo che la WWE abbia mai avuto.</p>\n<p>Come sempre, i vincitori possono essere vinti, i vinti possono essere vincitori e anche chi non ha lottato può finire nel mio mirino. Se volete continuare la discussione, vi rimando alla sezione dei commenti. In caso contrario, è il momento di assegnare i premi ai vincitori e ai vinti.</p>\n<h2>Vincitori: El Grandes Americano</h2>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/wwe-clash-in-italy-2026-biggest-winners-and-losers/winners-el-grandes-americano-1780346266.jpg-->\n<p>WWE Clash In Italy si è svolto all&#x27;ombra del mask vs. mask match del main event di sabato sera tra El Grande Americano e OG El Grande Americano. L&#x27;incontro era già stato ampiamente elogiato prima ancora del suono della campanella, con il team di commento in lingua spagnola della AAA che ha ringraziato apertamente il booker della AAA, The Undertaker, durante il match stesso. Per questo motivo, ogni incontro a Clash In Italy è stato condizionato dai fan WWE che ricordavano di cosa è capace la compagnia quando si concentra semplicemente su ciò che il pubblico desidera.</p>\n<p>Laddove molti momenti di domenica sera sono sembrati forzati, quelli di sabato non lo erano, il che significa che le performance dei due Grandes sono rimaste impresse nella mente dei fan durante lo show, comunque dignitoso, proposto dalla WWE domenica. Francamente, nessuno a Clash In Italy ha avuto possibilità di competere e, dato che non ci occupiamo dei vincitori/vinti della AAA, dovevo per forza menzionarlo.</p>\n<p>Il main event di sabato ha alzato l&#x27;asticella per ogni altro incontro prodotto sotto il brand WWE; la compagnia, a quanto pare, non ha scuse se non la pigrizia. Certo, la WWE non troverà per fortuna una storyline perfetta come Americano contro Americano, ma resta il fatto che questo ha dimostrato che la compagnia può cambiare rotta verso qualcosa di popolare quando si impegna. Ogni infinita saga della Bloodline o ogni booking tortuoso dei midcarder sembrerà ancora più evidente, ora che sappiamo che la WWE può davvero inseguire una risposta leggendaria del pubblico quando vuole.</p>\n<p>Il match è stato così bello che lo trasmetteranno in replica dopo Raw su Netflix.</p>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/wwe-clash-in-italy-2026-biggest-winners-and-losers/loser-gunther-1780346267.jpg-->\n<p>Gunther ha ritirato John Cena, Goldberg e AJ Styles, e non ha assolutamente nulla da mostrare per tutto questo. La sua sconfitta contro Cody Rhodes nell&#x27;opener di Clash In Italy è stata un grave caso di declino terminale.</p>\n<p>Immagino possano ricostruirlo, ma anche se alla fine vincesse il WWE Title o riconquistasse il World Heavyweight Title, è apparso troppo vulnerabile. Parliamo di colui che ha ceduto a Jey Uso e ha perso contro Pat McAfee. Hanno umanizzato Gunther in una misura sfortunata, considerando quanto sia bravo.</p>\n<p>Non è stato un brutto match, ma non è servito a nessuno. Cody non ha ottenuto una vittoria definitiva, Gunther sembra un piagnucolone. L&#x27;intero segmento di apertura è sembrato un enorme passo indietro per tutti i soggetti coinvolti, e non sono sicuro che il programma di SummerSlam sarà in grado di salvarlo. Di questo passo, Gunther tornerà nel giro del titolo Intercontinentale entro WrestleMania.</p>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/wwe-clash-in-italy-2026-biggest-winners-and-losers/winner-sol-ruca-1780346268.jpg-->\n<p>C&#x27;è qualcosa di incredibile nel modo in cui Sol Ruca sia passata in fretta da &quot;surfer acerba di NXT&quot; a battere Becky Lynch in un match titolato in un PLE. Sì, Becky è sempre sembrata un po&#x27; troppo ingombrante per la divisione femminile midcard. Ma solo una persona può riportare quel titolo al suo status di midcard, ed è Sol Ruca. È un grande onore per l&#x27;ex campionessa NXT Women&#x27;s North American e un cambio di passo rinfrescante rispetto ad altre call-up più lente.</p>\n<p>Ruca ha chiaramente qualcosa di speciale e la WWE sta battendo il ferro finché è caldo. Chi sa cosa riserva il futuro per lei, ma potrà sempre dire di aver battuto &quot;The Man&quot; in un PLE. È molto probabile che questa faida possa arrivare fino a SummerSlam. Non sembra che la WWE abbia fatto le cose a metà con Sol. Questa vittoria, inoltre, la mette in un&#x27;ottima posizione per competere nel Money In The Bank Match femminile, una stipulazione che dovrebbe calzarle a pennello.</p>\n<!--IMAGE:https://www.wrestlinginc.com/img/gallery/wwe-clash-in-italy-2026-biggest-winners-and-losers/loser-jacob-fatu-1780346268.jpg-->\n<p>Semplicemente non credo che la WWE punterà mai davvero su Jacob Fatu. È destinato a essere un incompiuto, che funge da muscolo per ragazzi come Roman Reigns, e forse anche Jey Uso. La WWE ha avuto molte possibilità di trasformarlo in un main eventer, e sembra che venga costantemente sacrificato sull&#x27;altare di star più grandi. È un contendente tappabuchi, in attesa che ragazzi come Drew McIntyre terminino i loro impegni cinematografici.</p>\n<p>Non ha disputato un brutto match domenica, ma non è mai stato in una posizione convincente. L&#x27;incontro è sembrato un lungo percorso verso una conclusione inevitabile, con il titolo di Reigns mai in pericolo. Usando le parole del poeta Rodney Dangerfield, Fatu non riceve &quot;Nessun rispetto, ve lo dico io. Proprio nessuno&quot;. Roman Reigns è il centro dell&#x27;universo della Bloodline e tutti gli altri devono recitare la propria parte, con entrate e uscite, ma il re resta il re e gli altri farebbero meglio a conoscere il proprio posto.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_wwe-clash-in-italy-2026-vincitori-e-vinti.html",
-        "published_html_preview": "<p>La WWE è approdata a Torino per il primo storico evento Clash In Italy. Lo show ha avuto l&#x27;arduo compito di seguire lo straordinario evento AAA di sabato sera, in particolare il main event, e si è percepito come il roster si sia trovato di fronte a un impegno più grande delle proprie possibilità. Per approfondire, consultate la pagina dei risultati di Clash In Italy 2026, oltre alle &quot;3 cose che abbiamo odiato&quot; e alle &quot;3 che abbiamo amato&quot;.</p>\n<p>Ora è tempo di parlare dei vincitori e dei vinti dello show di domenica. Ci sono stati molti vincitori, come Sol Ruca, che ha ottenuto una vittoria importante contro una star di primo piano, e molti vinti, come il grande &quot;distruttore di carriere&quot; austriaco che non riesce a battere l&#x27;uomo più anonimo che la WWE abbia mai avuto.</p>\n<p>Come sempre, i vincitori possono essere vinti, i vinti possono essere vincitori e anche chi non ha lottato può finire nel mio mirino. Se volete continuare la discussione, vi rimando alla sezione dei commenti. In caso contrario, è il momento di assegnare i premi ai vincitori e ai vinti.</p>\n<h2>Vincitori: El Grandes Americano</h2>\n\n<p>WWE Clash In Italy si è svolto all&#x27;ombra del mask vs. mask match del main event di sabato sera tra El Grande Americano e OG El Grande Americano. L&#x27;incontro era già stato ampiamente elogiato prima ancora del suono della campanella, con il team di commento in lingua spagnola della AAA che ha ringraziato apertamente il booker della AAA, The Undertaker, durante il match stesso. Per questo motivo, ogni incontro a Clash In Italy è stato condizionato dai fan WWE che ricordavano di cosa è capace la compagnia quando si concentra semplicemente su ciò che il pubblico desidera.</p>\n<p>Laddove molti momenti di domenica sera sono sembrati forzati, quelli di sabato non lo erano, il che significa che le performance dei due Grandes sono rimaste impresse nella mente dei fan durante lo show, comunque dignitoso, proposto dalla WWE domenica. Francamente, nessuno a Clash In Italy ha avuto possibilità di competere e, dato che non ci occupiamo dei vincitori/vinti della AAA, dovevo per forza menzionarlo.</p>\n<p>Il main event di sabato ha alzato l&#x27;asticella per ogni altro incontro prodotto sotto il brand WWE; la compagnia, a quanto pare, non ha scuse se non la pigrizia. Certo, la WWE non troverà per fortuna una storyline perfetta come Americano contro Americano, ma resta il fatto che questo ha dimostrato che la compagnia può cambiare rotta verso qualcosa di popolare quando si impegna. Ogni infinita saga della Bloodline o ogni booking tortuoso dei midcarder sembrerà ancora più evidente, ora che sappiamo che la WWE può davvero inseguire una risposta leggendaria del pubblico quando vuole.</p>\n<p>Il match è stato così bello che lo trasmetteranno in replica dopo Raw su Netflix.</p>\n\n<p>Gunther ha ritirato John Cena, Goldberg e AJ Styles, e non ha assolutamente nulla da mostrare per tutto questo. La sua sconfitta contro Cody Rhodes nell&#x27;opener di Clash In Italy è stata un grave caso di declino terminale.</p>\n<p>Immagino possano ricostruirlo, ma anche se alla fine vincesse il WWE Title o riconquistasse il World Heavyweight Title, è apparso troppo vulnerabile. Parliamo di colui che ha ceduto a Jey Uso e ha perso contro Pat McAfee. Hanno umanizzato Gunther in una misura sfortunata, considerando quanto sia bravo.</p>\n<p>Non è stato un brutto match, ma non è servito a nessuno. Cody non ha ottenuto una vittoria definitiva, Gunther sembra un piagnucolone. L&#x27;intero segmento di apertura è sembrato un enorme passo indietro per tutti i soggetti coinvolti, e non sono sicuro che il programma di SummerSlam sarà in grado di salvarlo. Di questo passo, Gunther tornerà nel giro del titolo Intercontinentale entro WrestleMania.</p>\n\n<p>C&#x27;è qualcosa di incredibile nel modo in cui Sol Ruca sia passata in fretta da &quot;surfer acerba di NXT&quot; a battere Becky Lynch in un match titolato in un PLE. Sì, Becky è sempre sembrata un po&#x27; troppo ingombrante per la divisione femminile midcard. Ma solo una persona può riportare quel titolo al suo status di midcard, ed è Sol Ruca. È un grande onore per l&#x27;ex campionessa NXT Women&#x27;s North American e un cambio di passo rinfrescante rispetto ad altre call-up più lente.</p>\n<p>Ruca ha chiaramente qualcosa di speciale e la WWE sta battendo il ferro finché è caldo. Chi sa cosa riserva il futuro per lei, ma potrà sempre dire di aver battuto &quot;The Man&quot; in un PLE. È molto probabile che questa faida possa arrivare fino a SummerSlam. Non sembra che la WWE abbia fatto le cose a metà con Sol. Questa vittoria, inoltre, la mette in un&#x27;ottima posizione per competere nel Money In The Bank Match femminile, una stipulazione che dovrebbe calzarle a pennello.</p>\n\n<p>Semplicemente non credo che la WWE punterà mai davvero su Jacob Fatu. È destinato a essere un incompiuto, che funge da muscolo per ragazzi come Roman Reigns, e forse anche Jey Uso. La WWE ha avuto molte possibilità di trasformarlo in un main eventer, e sembra che venga costantemente sacrificato sull&#x27;altare di star più grandi. È un contendente tappabuchi, in attesa che ragazzi come Drew McIntyre terminino i loro impegni cinematografici.</p>\n<p>Non ha disputato un brutto match domenica, ma non è mai stato in una posizione convincente. L&#x27;incontro è sembrato un lungo percorso verso una conclusione inevitabile, con il titolo di Reigns mai in pericolo. Usando le parole del poeta Rodney Dangerfield, Fatu non riceve &quot;Nessun rispetto, ve lo dico io. Proprio nessuno&quot;. Roman Reigns è il centro dell&#x27;universo della Bloodline e tutti gli altri devono recitare la propria parte, con entrate e uscite, ma il re resta il re e gli altri farebbero meglio a conoscere il proprio posto.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_wwe-clash-in-italy-2026-vincitori-e-vinti.html",
-        "publisher_review_html_preview": "<p>La WWE è approdata a Torino per il primo storico evento Clash In Italy. Lo show ha avuto l&#x27;arduo compito di seguire lo straordinario evento AAA di sabato sera, in particolare il main event, e si è percepito come il roster si sia trovato di fronte a un impegno più grande delle proprie possibilità. Per approfondire, consultate la pagina dei risultati di Clash In Italy 2026, oltre alle &quot;3 cose che abbiamo odiato&quot; e alle &quot;3 che abbiamo amato&quot;.</p>\n<p>Ora è tempo di parlare dei vincitori e dei vinti dello show di domenica. Ci sono stati molti vincitori, come Sol Ruca, che ha ottenuto una vittoria importante contro una star di primo piano, e molti vinti, come il grande &quot;distruttore di carriere&quot; austriaco che non riesce a battere l&#x27;uomo più anonimo che la WWE abbia mai avuto.</p>\n<p>Come sempre, i vincitori possono essere vinti, i vinti possono essere vincitori e anche chi non ha lottato può finire nel mio mirino. Se volete continuare la discussione, vi rimando alla sezione dei commenti. In caso contrario, è il momento di assegnare i premi ai vincitori e ai vinti.</p>\n<h2>Vincitori: El Grandes Americano</h2>\n\n<p>WWE Clash In Italy si è svolto all&#x27;ombra del mask vs. mask match del main event di sabato sera tra El Grande Americano e OG El Grande Americano. L&#x27;incontro era già stato ampiamente elogiato prima ancora del suono della campanella, con il team di commento in lingua spagnola della AAA che ha ringraziato apertamente il booker della AAA, The Undertaker, durante il match stesso. Per questo motivo, ogni incontro a Clash In Italy è stato condizionato dai fan WWE che ricordavano di cosa è capace la compagnia quando si concentra semplicemente su ciò che il pubblico desidera.</p>\n<p>Laddove molti momenti di domenica sera sono sembrati forzati, quelli di sabato non lo erano, il che significa che le performance dei due Grandes sono rimaste impresse nella mente dei fan durante lo show, comunque dignitoso, proposto dalla WWE domenica. Francamente, nessuno a Clash In Italy ha avuto possibilità di competere e, dato che non ci occupiamo dei vincitori/vinti della AAA, dovevo per forza menzionarlo.</p>\n<p>Il main event di sabato ha alzato l&#x27;asticella per ogni altro incontro prodotto sotto il brand WWE; la compagnia, a quanto pare, non ha scuse se non la pigrizia. Certo, la WWE non troverà per fortuna una storyline perfetta come Americano contro Americano, ma resta il fatto che questo ha dimostrato che la compagnia può cambiare rotta verso qualcosa di popolare quando si impegna. Ogni infinita saga della Bloodline o ogni booking tortuoso dei midcarder sembrerà ancora più evidente, ora che sappiamo che la WWE può davvero inseguire una risposta leggendaria del pubblico quando vuole.</p>\n<p>Il match è stato così bello che lo trasmetteranno in replica dopo Raw su Netflix.</p>\n\n<p>Gunther ha ritirato John Cena, Goldberg e AJ Styles, e non ha assolutamente nulla da mostrare per tutto questo. La sua sconfitta contro Cody Rhodes nell&#x27;opener di Clash In Italy è stata un grave caso di declino terminale.</p>\n<p>Immagino possano ricostruirlo, ma anche se alla fine vincesse il WWE Title o riconquistasse il World Heavyweight Title, è apparso troppo vulnerabile. Parliamo di colui che ha ceduto a Jey Uso e ha perso contro Pat McAfee. Hanno umanizzato Gunther in una misura sfortunata, considerando quanto sia bravo.</p>\n<p>Non è stato un brutto match, ma non è servito a nessuno. Cody non ha ottenuto una vittoria definitiva, Gunther sembra un piagnucolone. L&#x27;intero segmento di apertura è sembrato un enorme passo indietro per tutti i soggetti coinvolti, e non sono sicuro che il programma di SummerSlam sarà in grado di salvarlo. Di questo passo, Gunther tornerà nel giro del titolo Intercontinentale entro WrestleMania.</p>\n\n<p>C&#x27;è qualcosa di incredibile nel modo in cui Sol Ruca sia passata in fretta da &quot;surfer acerba di NXT&quot; a battere Becky Lynch in un match titolato in un PLE. Sì, Becky è sempre sembrata un po&#x27; troppo ingombrante per la divisione femminile midcard. Ma solo una persona può riportare quel titolo al suo status di midcard, ed è Sol Ruca. È un grande onore per l&#x27;ex campionessa NXT Women&#x27;s North American e un cambio di passo rinfrescante rispetto ad altre call-up più lente.</p>\n<p>Ruca ha chiaramente qualcosa di speciale e la WWE sta battendo il ferro finché è caldo. Chi sa cosa riserva il futuro per lei, ma potrà sempre dire di aver battuto &quot;The Man&quot; in un PLE. È molto probabile che questa faida possa arrivare fino a SummerSlam. Non sembra che la WWE abbia fatto le cose a metà con Sol. Questa vittoria, inoltre, la mette in un&#x27;ottima posizione per competere nel Money In The Bank Match femminile, una stipulazione che dovrebbe calzarle a pennello.</p>\n\n<p>Semplicemente non credo che la WWE punterà mai davvero su Jacob Fatu. È destinato a essere un incompiuto, che funge da muscolo per ragazzi come Roman Reigns, e forse anche Jey Uso. La WWE ha avuto molte possibilità di trasformarlo in un main eventer, e sembra che venga costantemente sacrificato sull&#x27;altare di star più grandi. È un contendente tappabuchi, in attesa che ragazzi come Drew McIntyre terminino i loro impegni cinematografici.</p>\n<p>Non ha disputato un brutto match domenica, ma non è mai stato in una posizione convincente. L&#x27;incontro è sembrato un lungo percorso verso una conclusione inevitabile, con il titolo di Reigns mai in pericolo. Usando le parole del poeta Rodney Dangerfield, Fatu non riceve &quot;Nessun rispetto, ve lo dico io. Proprio nessuno&quot;. Roman Reigns è il centro dell&#x27;universo della Bloodline e tutti gli altri devono recitare la propria parte, con entrate e uscite, ma il re resta il re e gli altri farebbero meglio a conoscere il proprio posto.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review/\nTitolo feed: WWE Clash In Italy 2026: Biggest Winners And Losers\nTitolo pagina: WWE Clash In Italy 2026: Biggest Winners And Losers - Wrestling Inc.\nDescrizione: Here's who looked good, and who very much didn't, at last night's WWE Clash In Italy.\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"WWE pulled into Turin, Italy for the first ever Clash In Italy event. The show had the unfortunate job of following up Saturday night's amazing AAA show, especially the main event, and you could kind of tell everyone was in over their heads. For more, read the Clash In Italy 2026 Results Page , as well as 3 Things We Hated and 3 We Loved.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Now, it's time to talk about the Winners and the Losers from Sunday's show. There were plenty of winners, like Sol Ruca, who got a showcase victory over a major star, and plenty of losers, like the big Austrian \\\"career killer\\\" who cannot beat the most vanilla man WWE has ever seen.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"As always, winners can be losers, losers can be winners, and people who didn't even wrestle can catch strays from me. If you want to continue the conversation, I point you in the direction of the comments section. Otherwise, it's time to ascribe some winners and losers.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"heading\",\n    \"text\": \"Winners: El Grandes Americano\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"WWE Clash In Italy took place in the shadow of Saturday night's main event mask vs. mask match between El Grande Americano and OG El Grande Americano. The match was heavily praised before the final bell even rang, with the AAA Spanish commentary team outright thanking AAA booker The Undertaker during the match itself. Because of this, every match at Clash In Italy was weighted by WWE fans remembering what the company is capable of, when they simply focus on what the crowd is into.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Where many of Sunday night's moments felt forced, Saturday wasn't, and it meant that both Grandes' Saturday performances were on fans' minds during the perfectly cromulent show that WWE put on on Sunday. Quite frankly, no one at Clash In Italy had a chance to compete, and since we don't do AAA Winners/Losers, I simply had to address it.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"Saturday's main event raised the bar for literally every other match produced under the WWE banner, as the company seemingly has no excuse, outside of laziness. Now obviously, WWE won't luck itself into a perfect story line like Americano vs. Americano, but the fact still remains that it proved the company can pivot to something popular when they put their mind to it. Every endless Bloodline saga, or circuitous booking of midcarders is going to feel that much more glaring, now that we know WWE can actually chase a legendary crowd response when they try.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"The match was so good that they're replaying it after Raw on Netflix.\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"Gunther has retired John Cena, Goldberg, and AJ Styles, and has absolute d*** to show for it. His loss to Cody Rhodes in the opening of Clash In Italy was a serious case of terminal geekery.\"\n  },\n  {\n    \"id\": \"b12\",\n    \"type\": \"text\",\n    \"text\": \"I guess they could build him up again, but even if he eventually wins the WWE Title, or regains the World Heavyweight Title, he's been a little too vulnerable. This is the guy who tapped out to Jey Uso and lost to Pat McAfee. They have humanized Gunther to an unfortunate degree, considering just how good he is.\"\n  },\n  {\n    \"id\": \"b13\",\n    \"type\": \"text\",\n    \"text\": \"It wasn't a bad match, but it just didn't feel like it helped anybody. Cody didn't get a definitive win, Gunther looks like a whiny b***. The whole opening segment felt like a giant step back for everyone involved, and I'm not sure the SummerSlam program is going to be able to save it. At this rate, Gunther will be back in the Intercontinental Title scene by WrestleMania.\"\n  },\n  {\n    \"id\": \"b15\",\n    \"type\": \"text\",\n    \"text\": \"There's something pretty incredible about how quickly Sol Ruca went from Green As Grass NXT Surfer to beating Becky Lynch in a PLE title match. Yes, Becky has always felt a little big for the women's midcard division. But only one person gets to transition that title back into its midcard status, and that is Sol Ruca. It is a heavy honor for the former NXT Women's North American Champion, and a refreshing change of pace to other, slower call-ups.\"\n  },\n  {\n    \"id\": \"b16\",\n    \"type\": \"text\",\n    \"text\": \"Ruca clearly has something special, and WWE is striking while the iron is hot. Who knows what the future holds for Ruca, but she'll always be able to say she beat \\\"The Man\\\" on a PLE. It's very possible this feud could go all the way to SummerSlam. It doesn't feel like WWE has done anything by half-measures with Sol. This win also puts her in a nice position to possible compete in the women's Money In The Bank Match, a stipulation that should fit Ruca like a glove.\"\n  },\n  {\n    \"id\": \"b18\",\n    \"type\": \"text\",\n    \"text\": \"I simply do not believe that WWE will ever pull the trigger on Jacob Fatu. He is destined to be an almost-ran, who acts as muscle for guys like Roman Reigns, and possibly even Jey Uso. WWE has had many chances to make him into a main event player, and it feels like he is constantly sacrificed on the altar to bigger stars. He is a placeholder contender, until guys like Drew McIntyre wrap their feature film obligations.\"\n  },\n  {\n    \"id\": \"b19\",\n    \"type\": \"text\",\n    \"text\": \"He didn't have a bad match on Sunday, but he was never in any convincing position either. The match felt like a long walk to an inevitable conclusion, Reigns's title never in danger. In the words of the poet Rodney Dangerfield, Fatu simply gets \\\"No respect, I tell ya. None at all.\\\" Roman Reigns is the center of the Bloodline univer"
+        "alfred_final_html_preview": "<p>A causa della concorrenza dei playoff NBA e NHL e dell&#x27;ennesima modifica al sistema di rilevazione Nielsen, &quot;TNA Impact&quot; ha visto i propri numeri calare nell&#x27;ultimo mese, passando da una media costante sopra i 200.000 spettatori a cifre comprese tra i 150.000 e i 190.000. Tuttavia, per l&#x27;episodio del 28 maggio, la TNA è andata vicina a ritornare nel range dei 200.000, pur a scapito del pubblico più giovane.</p>\n<p>Wrestlenomics e Programming Insider riportano che &quot;Impact&quot; ha totalizzato 195.000 spettatori, con uno 0.02 nel fondamentale target demografico 18-49. Il numero totale di spettatori è cresciuto del 10% rispetto ai 178.000 della settimana precedente, ma il dato ancora più incoraggiante riguarda il confronto con la media delle ultime quattro settimane: seppur di poco, il dato è salito del 4% rispetto ai 187.000 di media. Si tratta del secondo miglior risultato di maggio per la TNA, dopo i 196.000 spettatori dell&#x27;episodio del 14 maggio.</p>\n<p>Meno positivo, tuttavia, è il dato relativo al target 18-49. Nonostante l&#x27;aumento del numero totale di spettatori, la fascia demografica chiave ha subito un calo del 33% rispetto allo 0.03 della settimana precedente. Lo scenario non cambia se confrontato con la media delle quattro settimane, anch&#x27;essa pari a 0.03, contro la quale il rating 18-49 ha registrato una flessione analoga del 33%.</p>\n<blockquote>&quot;Impact&quot; ha visto il debutto sul ring di Fabian Aichner, due settimane dopo l&#x27;apparizione dell&#x27;ex star WWE al termine di &quot;Impact&quot;, dove aveva messo nel mirino il nuovo TNA X-Division Champion Cedric Alexander. Il match, il primo per Aichner dal dicembre 2024, ha visto l&#x27;italiano sconfiggere per squalifica Eddie Edwards, compagno di stable di Alexander nel System, dopo che lo stesso Alexander, Bear Bronson e Brian Myers sono intervenuti per attaccare Aichner. Lo show ha visto anche Santino Marella in azione, sconfitto dal suo futuro genero Channing Lorenzo in seguito all&#x27;interferenza di Arianna Grace.&quot;</blockquote>",
+        "bob_body_html_preview": "<p>A causa della concorrenza dei playoff NBA e NHL e dell&#x27;ennesima modifica al sistema di rilevazione Nielsen, &quot;TNA Impact&quot; ha visto i propri numeri calare nell&#x27;ultimo mese, passando da una media costante sopra i 200.000 spettatori a cifre comprese tra i 150.000 e i 190.000. Tuttavia, per l&#x27;episodio del 28 maggio, la TNA è andata vicina a ritornare nel range dei 200.000, pur a scapito del pubblico più giovane.</p>\n<p>Wrestlenomics e Programming Insider riportano che &quot;Impact&quot; ha totalizzato 195.000 spettatori, con uno 0.02 nel fondamentale target demografico 18-49. Il numero totale di spettatori è cresciuto del 10% rispetto ai 178.000 della settimana precedente, ma il dato ancora più incoraggiante riguarda il confronto con la media delle ultime quattro settimane: seppur di poco, il dato è salito del 4% rispetto ai 187.000 di media. Si tratta del secondo miglior risultato di maggio per la TNA, dopo i 196.000 spettatori dell&#x27;episodio del 14 maggio.</p>\n<p>Meno positivo, tuttavia, è il dato relativo al target 18-49. Nonostante l&#x27;aumento del numero totale di spettatori, la fascia demografica chiave ha subito un calo del 33% rispetto allo 0.03 della settimana precedente. Lo scenario non cambia se confrontato con la media delle quattro settimane, anch&#x27;essa pari a 0.03, contro la quale il rating 18-49 ha registrato una flessione analoga del 33%.</p>\n<blockquote>&quot;Impact&quot; ha visto il debutto sul ring di Fabian Aichner, due settimane dopo l&#x27;apparizione dell&#x27;ex star WWE al termine di &quot;Impact&quot;, dove aveva messo nel mirino il nuovo TNA X-Division Champion Cedric Alexander. Il match, il primo per Aichner dal dicembre 2024, ha visto l&#x27;italiano sconfiggere per squalifica Eddie Edwards, compagno di stable di Alexander nel System, dopo che lo stesso Alexander, Bear Bronson e Brian Myers sono intervenuti per attaccare Aichner. Lo show ha visto anche Santino Marella in azione, sconfitto dal suo futuro genero Channing Lorenzo in seguito all&#x27;interferenza di Arianna Grace.&quot;</blockquote>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_report-rating-e-ascolti-di-tna-impact-28-maggio-2026.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_report-rating-e-ascolti-di-tna-impact-28-maggio-2026.html",
+        "publisher_review_html_preview": "<p>A causa della concorrenza dei playoff NBA e NHL e dell&#x27;ennesima modifica al sistema di rilevazione Nielsen, &quot;TNA Impact&quot; ha visto i propri numeri calare nell&#x27;ultimo mese, passando da una media costante sopra i 200.000 spettatori a cifre comprese tra i 150.000 e i 190.000. Tuttavia, per l&#x27;episodio del 28 maggio, la TNA è andata vicina a ritornare nel range dei 200.000, pur a scapito del pubblico più giovane.</p>\n<p>Wrestlenomics e Programming Insider riportano che &quot;Impact&quot; ha totalizzato 195.000 spettatori, con uno 0.02 nel fondamentale target demografico 18-49. Il numero totale di spettatori è cresciuto del 10% rispetto ai 178.000 della settimana precedente, ma il dato ancora più incoraggiante riguarda il confronto con la media delle ultime quattro settimane: seppur di poco, il dato è salito del 4% rispetto ai 187.000 di media. Si tratta del secondo miglior risultato di maggio per la TNA, dopo i 196.000 spettatori dell&#x27;episodio del 14 maggio.</p>\n<p>Meno positivo, tuttavia, è il dato relativo al target 18-49. Nonostante l&#x27;aumento del numero totale di spettatori, la fascia demografica chiave ha subito un calo del 33% rispetto allo 0.03 della settimana precedente. Lo scenario non cambia se confrontato con la media delle quattro settimane, anch&#x27;essa pari a 0.03, contro la quale il rating 18-49 ha registrato una flessione analoga del 33%.</p>\n<blockquote>&quot;Impact&quot; ha visto il debutto sul ring di Fabian Aichner, due settimane dopo l&#x27;apparizione dell&#x27;ex star WWE al termine di &quot;Impact&quot;, dove aveva messo nel mirino il nuovo TNA X-Division Champion Cedric Alexander. Il match, il primo per Aichner dal dicembre 2024, ha visto l&#x27;italiano sconfiggere per squalifica Eddie Edwards, compagno di stable di Alexander nel System, dopo che lo stesso Alexander, Bear Bronson e Brian Myers sono intervenuti per attaccare Aichner. Lo show ha visto anche Santino Marella in azione, sconfitto dal suo futuro genero Channing Lorenzo in seguito all&#x27;interferenza di Arianna Grace.&quot;</blockquote>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/\nTitolo feed: TNA Impact Ratings & Viewership Report: 5/28/2026\nTitolo pagina: TNA Impact Ratings & Viewership Report: 5/28/2026 - Wrestling Inc.\nDescrizione: TNA Impact's total viewership reaches its second highest total in May, but continues to struggle in the 18-49 demo going against the NBA and NHL Playoffs\nCategoria suggerita: TNA\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Thanks to competition from the NBA and NHL Playoffs and another change in Nielsen's rating system, \\\"TNA Impact\\\" has seen its numbers take a dip over the last month, going from consistently drawing in the 200K's to the mid to high 100K's. But for the May 28 episode , TNA found themselves close to getting back into the 200K range, though it was at the expense of their younger viewers.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Wrestlenomics and Programming Insider report that \\\"Impact\\\" drew 195K total viewers, and a 0.02 in the coveted 18-49 demographic. Total viewership was up 10% from the previous week's 178K , though the better news was the number compared to the four week average. While only up slightly, the number did rise 4% from 187K. It's the second highest rating TNA has drawn in May, following the May 14 episode bringing in 196K total viewers .\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Less positive, however, was the 18-49 number. Despite a rise in total viewership, the key demo saw a decline, falling 33% from the previous week's 0.03. The song remained the same when it came to the four week average, which was also 0.03, with the 18-49 number falling a similar 33% against that.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"Impact\\\" featured the in-ring debut of Fabian Aichner, two weeks after the former WWE star appeared at the end of \\\"Impact,\\\" confronting new TNA X-Division Champion Cedric Alexander. The match, Aichner's first since December 2024, saw the Italian defeat Alexander's System stablemate and long-time TNA star Eddie Edwards by disqualification, after Alexander, Bear Bronson, and Brian Myers ran down to attack Aichner. The show also featured Santino Marella in action, losing a match to his future son-in-law Channing Lorenzo, after interference from Arianna Grace.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "strategic:clash in italy,recency:fresh_12h",
-        "score": 66
+        "reason": "ai:I dati sugli ascolti sono essenziali per il business report settimanale di TNA.; deterministic:ratings:exceptional_signal,recency:fresh_12h",
+        "score": 24
       },
       "publisher": {
-        "categories": [
-          4
-        ],
+        "categories": null,
         "error": null,
-        "featured_media": 5820,
+        "featured_media": null,
         "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-clash-in-italy-2026-vincitori-e-vinti/",
-        "wp_post_id": 5821
+        "status": "wp_not_ready",
+        "wp_link": null,
+        "wp_post_id": null
       },
       "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review",
-      "title_it": "WWE Clash In Italy 2026: Vincitori e vinti"
+      "source_url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026",
+      "title_it": "Report rating e ascolti di TNA Impact (28 maggio 2026)"
     }
   ],
-  "generated_at": "2026-06-01T23:42:47.283767+00:00",
+  "generated_at": "2026-06-01T23:53:34.920296+00:00",
   "how_to_read": {
     "alfred_final_html_preview": "HTML dopo revisione/normalizzazioni di Alfred",
     "bob_body_html_preview": "HTML prodotto da Bob prima di Alfred",
@@ -1090,9 +1197,105 @@
       "overall_status": "ok",
       "published": 3,
       "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 3,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 1
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 3,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 13,
+          "already_worked": 1,
+          "hard_skipped": 15,
+          "to_menzo": 18,
+          "to_simone": 1
+        },
+        "menzo": {
+          "pending": 0,
+          "skipped": 13,
+          "to_bob_or_v92": 5
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 0,
+          "wp_not_ready": 3
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 6,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 5,
+      "errors": 1,
+      "generated_at": "2026-06-01T23:53:34.914979+00:00",
+      "overall_status": "error",
+      "published": 0,
+      "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 3,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 1
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 3,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 13,
+          "already_worked": 1,
+          "hard_skipped": 15,
+          "to_menzo": 18,
+          "to_simone": 1
+        },
+        "menzo": {
+          "pending": 0,
+          "skipped": 13,
+          "to_bob_or_v92": 5
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 0,
+          "wp_not_ready": 3
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 6,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 5,
+      "errors": 1,
+      "generated_at": "2026-06-01T23:53:34.920296+00:00",
+      "overall_status": "error",
+      "published": 0,
+      "warnings": 0
     }
   ],
-  "overall_status": "ok",
+  "overall_status": "error",
   "run_summary_input": {
     "agents": {
       "alfred": "real_quality_editor",
@@ -1117,27 +1320,27 @@
       "ready_for_alfred": 3,
       "translation_pending": 0
     },
-    "ended_at": "2026-06-01T23:42:47.271904+00:00",
+    "ended_at": "2026-06-01T23:53:34.908611+00:00",
     "engine": "bot_v92.py",
     "massy_handoff": {
-      "already_published_hard_skipped": 10,
+      "already_published_hard_skipped": 13,
       "already_worked": 1,
-      "hard_skipped": 12,
-      "to_menzo": 21,
+      "hard_skipped": 15,
+      "to_menzo": 18,
       "to_simone": 1
     },
     "menzo_handoff": {
       "pending": 0,
-      "skipped": 18,
-      "to_bob_or_v92": 3
+      "skipped": 13,
+      "to_bob_or_v92": 5
     },
     "newsroom_engine_override": false,
     "publisher_handoff": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 3,
-      "wp_not_ready": 0
+      "published": 0,
+      "wp_not_ready": 3
     },
     "runtime_delegations": 0,
     "runtime_exit_code": 0,
@@ -1146,71 +1349,71 @@
       "skipped": 6,
       "waiting": 0
     },
-    "started_at": "2026-06-01T23:42:26.214546+00:00",
+    "started_at": "2026-06-01T23:52:48.442394+00:00",
     "version": "v93_7_archivista_audit"
   },
   "summary": {
-    "anomalies": 0,
-    "article_dossiers": 3,
-    "errors_48h": 8,
+    "anomalies": 1,
+    "article_dossiers": 5,
+    "errors_48h": 10,
     "published_48h": 32,
-    "published_current_run": 3,
-    "runs_48h": 18
+    "published_current_run": 0,
+    "runs_48h": 20
   },
   "timeline": [
     {
       "agent": "Jarvis",
       "note": "engine=bot_v92.py",
       "phase": "bootstrap_status_written",
-      "timestamp": "2026-06-01T23:42:26.214834+00:00"
+      "timestamp": "2026-06-01T23:52:48.442642+00:00"
     },
     {
       "agent": "Massy",
-      "note": "to_simone=1 to_menzo=21 hard_skip=12 already=1",
+      "note": "to_simone=1 to_menzo=18 hard_skip=15 already=1",
       "phase": "sentinel_board_ready",
-      "timestamp": "2026-06-01T23:42:27.505513+00:00"
+      "timestamp": "2026-06-01T23:52:49.762268+00:00"
     },
     {
       "agent": "Simone",
       "note": "ready=0 waiting=0 skipped=6",
       "phase": "report_decision_ready",
-      "timestamp": "2026-06-01T23:42:27.509073+00:00"
+      "timestamp": "2026-06-01T23:52:49.765938+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "selected=3 pending=0 skipped=18",
+      "note": "selected=5 pending=0 skipped=13",
       "phase": "editorial_decision_ready",
-      "timestamp": "2026-06-01T23:42:27.524789+00:00"
+      "timestamp": "2026-06-01T23:52:55.752481+00:00"
     },
     {
       "agent": "Bob",
       "note": "ready=3 pending=0 empty=0 errors=0",
       "phase": "article_packages_ready",
-      "timestamp": "2026-06-01T23:42:38.140683+00:00"
+      "timestamp": "2026-06-01T23:53:09.531381+00:00"
     },
     {
       "agent": "Alfred",
       "note": "approved=3 needs_revision=0 blockers=0 warnings=1 changes=0",
       "phase": "quality_review_ready",
-      "timestamp": "2026-06-01T23:42:38.150219+00:00"
+      "timestamp": "2026-06-01T23:53:09.541515+00:00"
     },
     {
       "agent": "Publisher",
-      "note": "published=3 already=0 dry=0 wp_not_ready=0 errors=0",
+      "note": "published=0 already=0 dry=0 wp_not_ready=3 errors=0",
       "phase": "publication_ready",
-      "timestamp": "2026-06-01T23:42:47.271866+00:00"
+      "timestamp": "2026-06-01T23:53:34.908580+00:00"
     },
     {
       "agent": "Jarvis",
       "note": "v93 Publisher completed; v92 fallback skipped",
       "phase": "runtime_skipped",
-      "timestamp": "2026-06-01T23:42:47.271894+00:00"
+      "timestamp": "2026-06-01T23:53:34.908602+00:00"
     },
     {
       "agent": "Archivista",
-      "note": "status=ok anomalies=0",
+      "note": "status=error anomalies=1",
       "phase": "audit_ready",
-      "timestamp": "2026-06-01T23:42:47.283364+00:00"
+      "timestamp": "2026-06-01T23:53:34.919821+00:00"
     }
   ],
   "version": "v93_7_archivista_audit"

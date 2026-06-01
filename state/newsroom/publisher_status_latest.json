@@ -1,12 +1,12 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-01T23:42:47.271340+00:00",
+  "generated_at": "2026-06-01T23:53:34.907925+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 3,
-    "wp_not_ready": 0
+    "published": 0,
+    "wp_not_ready": 3
   },
   "input": {
     "alfred_version": "v93_8_alfred_structured_content_checks",
@@ -22,44 +22,71 @@
   },
   "results": [
     {
-      "categories": [
-        4
-      ],
-      "featured_media": 5820,
-      "source_url": "https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review/",
-      "status": "published",
-      "title_it": "WWE Clash In Italy 2026: Vincitori e vinti",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-clash-in-italy-2026-vincitori-e-vinti/",
-      "wp_post_id": 5821
+      "content_chars": 3411,
+      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-calls-chad-gable-the-best-wrestler-in-the-world-after-aaa-mask-vs-mask-war-24.jpg",
+      "media_id": null,
+      "payload_preview": {
+        "categories": [],
+        "excerpt": "JBL tesse le lodi di Chad Gable e Ludwig Kaiser dopo il cruento Mask vs. Mask match disputato ad AAA Noche de Los Grandes.",
+        "meta": {
+          "original_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/",
+          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
+          "owtv_source": "ringsidenews"
+        },
+        "status": "publish",
+        "title": "JBL elogia Chad Gable: \"È il miglior wrestler al mondo\""
+      },
+      "source_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/",
+      "status": "wp_not_ready",
+      "title_it": "JBL elogia Chad Gable: \"È il miglior wrestler al mondo\"",
+      "wp_ready": false
     },
     {
-      "categories": [
-        4
-      ],
-      "featured_media": 5822,
-      "source_url": "https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match/",
-      "status": "published",
-      "title_it": "IYO SKY avanza nel torneo Queen of the Ring",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/iyo-sky-avanza-nel-torneo-queen-of-the-ring/",
-      "wp_post_id": 5823
+      "content_chars": 2297,
+      "image_url": "https://www.wrestlinginc.com/img/gallery/tna-impact-ratings-viewership-report-5282026/l-intro-1780350939.jpg",
+      "media_id": null,
+      "payload_preview": {
+        "categories": [],
+        "excerpt": "TNA Impact sfiora nuovamente la soglia dei 200.000 spettatori, ma continua a soffrire nel target demografico 18-49 a causa della concorrenza dei playoff NBA e NHL.",
+        "meta": {
+          "original_url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/",
+          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
+          "owtv_source": "wrestlinginc"
+        },
+        "status": "publish",
+        "title": "Report rating e ascolti di TNA Impact (28 maggio 2026)"
+      },
+      "source_url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/",
+      "status": "wp_not_ready",
+      "title_it": "Report rating e ascolti di TNA Impact (28 maggio 2026)",
+      "wp_ready": false
     },
     {
-      "categories": [
-        4
-      ],
-      "featured_media": 5824,
-      "source_url": "https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/",
-      "status": "published",
-      "title_it": "Iyo Sky avanza nel torneo Queen of the Ring dopo un caotico Fatal Four-Way",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/iyo-sky-avanza-nel-torneo-queen-of-the-ring-dopo-un-caotico-fatal-four-way/",
-      "wp_post_id": 5825
+      "content_chars": 4708,
+      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Collision-Massive-Increase.jpg",
+      "media_id": null,
+      "payload_preview": {
+        "categories": [],
+        "excerpt": "Resi noti i dati di ascolto dell'episodio di AEW Collision del 27 maggio 2026 su TBS: lo show registra un significativo incremento settimanale.",
+        "meta": {
+          "original_url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/",
+          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
+          "owtv_source": "ringsidenews"
+        },
+        "status": "publish",
+        "title": "AEW Collision: netto aumento negli ascolti del 27 maggio 2026"
+      },
+      "source_url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/",
+      "status": "wp_not_ready",
+      "title_it": "AEW Collision: netto aumento negli ascolti del 27 maggio 2026",
+      "wp_ready": false
     }
   ],
   "version": "v93_10_publisher_plain_oembed_urls",
   "wp": {
     "dry_run": false,
     "post_status": "publish",
-    "ready": true,
-    "reason": "ok"
+    "ready": false,
+    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f7ea38d9a10>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=25)'))"
   }
 }

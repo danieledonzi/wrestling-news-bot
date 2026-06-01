@@ -1,9 +1,11 @@
 {
   "agent": "Menzo",
   "allowed_urls_for_v92": [
-    "https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review/",
-    "https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match/",
-    "https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/"
+    "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/",
+    "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/",
+    "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/",
+    "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/",
+    "https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles/"
   ],
   "daily_policy": {
     "max_pending_this_run": 12,
@@ -12,21 +14,238 @@
     "target_max": 30,
     "target_min": 20
   },
-  "generated_at": "2026-06-01T23:42:27.523104+00:00",
+  "generated_at": "2026-06-01T23:52:55.749789+00:00",
   "handoff": {
     "pending": 0,
-    "skipped": 18,
-    "to_bob_or_v92": 3
+    "skipped": 13,
+    "to_bob_or_v92": 5
   },
   "input": {
-    "candidate_count": 21,
+    "candidate_count": 18,
     "massy_version": "v93_9_massy_published_hard_skip"
   },
-  "mode": "trade_context_editorial_gate",
+  "menzo_ai": {
+    "attempts": [
+      "gemini-3.1-flash-lite"
+    ],
+    "enabled": true,
+    "error": "",
+    "model": "gemini-3.1-flash-lite",
+    "prompt_count": 12,
+    "raw_preview": "{\n  \"reviews\": [\n    {\n      \"id\": \"c1\",\n      \"decision\": \"selected\",\n      \"priority\": 2,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"gable_aaa_match\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia fresca e di impatto narrativo, coinvolge talenti WWE in un contesto internazionale rilevante.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"youtube\", \"instagram\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"embed video/tweet se presente\", \"citazioni dirette\"],\n        \"source_specific_notes\": \"Ringsidenews spesso mette immagini pesanti, verifica se c'è materiale video dell'evento AAA.\"\n      }\n    },\n    {\n      \"id\": \"c2\",\n      \"decision\": \"selected\",\n      \"priority\": 1,\n      \"category_hint\": \"TNA\",\n      \"article_type\": \"data_report\",\n      \"event_key\": \"tna_ratings_0528\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"I dati sugli ascolti sono essenziali per il business report settimanale di TNA.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": true,\n        \"possible_noise\": [\"author_bio\", \"cta\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Trasforma i dati in una tabella leggibile per il pubblico italiano.\"\n      }\n    },\n    {\n      \"id\": \"c3\",\n      \"decision\": \"selected\",\n      \"priority\": 1,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"data_report\",\n      \"event_key\": \"aew_collision_ratings_0527\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Dato positivo di ascolti per AEW Collision, necessario per il report settimanale.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": true,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\"],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"Verifica i dati di Programming Insider citati nel testo.\"\n      }\n    },\n    {\n      \"id\": \"c4\",\n      \"decision\": \"selected\",\n      \"priority\": 2,\n      \"category_hint\": \"TNA\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"tna_slammiversary_build\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Sviluppo diretto verso il prossimo PPV di TNA, notizia di servizio per i fan.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"x_tweet\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Focus sulla sfida al titolo mondiale.\"\n      }\n    },\n    {\n      \"id\": \"c5\",\n      \"decision\": \"selected\",\n      \"priority\": 1,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"hard_news\",\n      \"event_key\": \"jim_ross_health_update\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia riguardante una figura iconica; aggiornamento sulle condizioni lavorative di JR post-PPV.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Sii rispettoso nel tono riguardante le condizioni di salute.\"\n      }\n    },\n    {\n      \"id\": \"c6\",\n      \"decision\": \"skip\",\n      \"priority\": 0,\n      \"category_hint\": \"ROH\",\n      \"article_type\": \"duplicate\",\n      \"event_key\": \"roh_supercard_athena\",\n      \"duplicate_of\": \"c6\",\n      \"editorial_reason\": \"Notizia troppo vecchia (oltre 2 settimane).\",\n      \"bob_brief\": null\n    },\n    {\n      \"id\": \"c7\",\n      \"decision\": \"skip\",\n      \"priority\": 0,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"duplicate\",\n      \"event_key\": \"braun_strowman_debut\",\n      \"duplicate_of\": \"c7\",\n      \"editorial_rea",
+    "reviews": [
+      {
+        "article_type": "storyline_development",
+        "bob_brief": {
+          "expected_embeds": [
+            "youtube",
+            "instagram"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "embed video/tweet se presente",
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": "Ringsidenews spesso mette immagini pesanti, verifica se c'è materiale video dell'evento AAA."
+        },
+        "category_hint": "WWE",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Notizia fresca e di impatto narrativo, coinvolge talenti WWE in un contesto internazionale rilevante.",
+        "event_key": "gable_aaa_match",
+        "id": "c1",
+        "priority": 2
+      },
+      {
+        "article_type": "data_report",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": true,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "author_bio",
+            "cta"
+          ],
+          "source_specific_notes": "Trasforma i dati in una tabella leggibile per il pubblico italiano."
+        },
+        "category_hint": "TNA",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "I dati sugli ascolti sono essenziali per il business report settimanale di TNA.",
+        "event_key": "tna_ratings_0528",
+        "id": "c2",
+        "priority": 1
+      },
+      {
+        "article_type": "data_report",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": true,
+          "must_preserve": [],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta"
+          ],
+          "source_specific_notes": "Verifica i dati di Programming Insider citati nel testo."
+        },
+        "category_hint": "AEW",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Dato positivo di ascolti per AEW Collision, necessario per il report settimanale.",
+        "event_key": "aew_collision_ratings_0527",
+        "id": "c3",
+        "priority": 1
+      },
+      {
+        "article_type": "storyline_development",
+        "bob_brief": {
+          "expected_embeds": [
+            "x_tweet"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta"
+          ],
+          "source_specific_notes": "Focus sulla sfida al titolo mondiale."
+        },
+        "category_hint": "TNA",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Sviluppo diretto verso il prossimo PPV di TNA, notizia di servizio per i fan.",
+        "event_key": "tna_slammiversary_build",
+        "id": "c4",
+        "priority": 2
+      },
+      {
+        "article_type": "hard_news",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": "Sii rispettoso nel tono riguardante le condizioni di salute."
+        },
+        "category_hint": "AEW",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Notizia riguardante una figura iconica; aggiornamento sulle condizioni lavorative di JR post-PPV.",
+        "event_key": "jim_ross_health_update",
+        "id": "c5",
+        "priority": 1
+      },
+      {
+        "article_type": "duplicate",
+        "bob_brief": null,
+        "category_hint": "ROH",
+        "decision": "skip",
+        "duplicate_of": "c6",
+        "editorial_reason": "Notizia troppo vecchia (oltre 2 settimane).",
+        "event_key": "roh_supercard_athena",
+        "id": "c6",
+        "priority": 0
+      },
+      {
+        "article_type": "duplicate",
+        "bob_brief": null,
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "c7",
+        "editorial_reason": "Notizia vecchia, valore storico trascurabile.",
+        "event_key": "braun_strowman_debut",
+        "id": "c7",
+        "priority": 0
+      },
+      {
+        "article_type": "low_value",
+        "bob_brief": null,
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Sport esterno, non rilevante per il wrestling giocato.",
+        "event_key": "miz_nfl_reaction",
+        "id": "c8",
+        "priority": 0
+      },
+      {
+        "article_type": "duplicate",
+        "bob_brief": null,
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "c9",
+        "editorial_reason": "Notizia datata.",
+        "event_key": "kit_wilson_rumble",
+        "id": "c9",
+        "priority": 0
+      },
+      {
+        "article_type": "duplicate",
+        "bob_brief": null,
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "c10",
+        "editorial_reason": "Notizia datata.",
+        "event_key": "jacob_fatu_relation",
+        "id": "c10",
+        "priority": 0
+      },
+      {
+        "article_type": "duplicate",
+        "bob_brief": null,
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "c11",
+        "editorial_reason": "Notizia datata, speculazione retrospettiva.",
+        "event_key": "bischoff_heyman",
+        "id": "c11",
+        "priority": 0
+      },
+      {
+        "article_type": "duplicate",
+        "bob_brief": null,
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "c12",
+        "editorial_reason": "Notizia datata.",
+        "event_key": "matt_hardy_kofi",
+        "id": "c12",
+        "priority": 0
+      }
+    ],
+    "used": true
+  },
+  "mode": "ai_editorial_review_with_bob_briefs",
   "pending": [],
   "policy": {
+    "ai_duplicate_detection": true,
+    "bob_briefs_enabled": true,
     "current_storyline_and_roster_boosts": true,
     "external_sports_reactions_are_skipped": true,
+    "gemini_editorial_review": true,
     "ratings_reports_penalized_unless_exceptional": true,
     "recency_penalty_after_72h": true,
     "released_data_disambiguation": true,
@@ -34,115 +253,384 @@
   },
   "selected": [
     {
-      "age_hours": 3.0529220158333334,
+      "age_hours": 1.0143830519444446,
       "agent": "Menzo",
-      "article_type": "strategic_discussion",
+      "ai_editorial_reason": "Notizia fresca e di impatto narrativo, coinvolge talenti WWE in un contesto internazionale rilevante.",
+      "ai_id": "c1",
+      "ai_priority": 2,
+      "article_type": "storyline_development",
       "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [
+          "youtube",
+          "instagram"
+        ],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "embed video/tweet se presente",
+          "citazioni dirette"
+        ],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "source_specific_notes": "Ringsidenews spesso mette immagini pesanti, verifica se c'è materiale video dell'evento AAA."
+      },
       "category_hint": "WWE",
       "decision": "selected",
-      "evaluated_at": "2026-06-01T23:42:27.519259+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review",
-      "priority": "soft",
-      "published": "Mon, 01 Jun 2026 20:39:17 +0000",
-      "reason": "strategic:clash in italy,recency:fresh_12h",
-      "score": 66,
-      "source": "wrestlinginc",
-      "summary": "Here's who looked good, and who very much didn't, at last night's WWE Clash In Italy.",
-      "title": "WWE Clash In Italy 2026: Biggest Winners And Losers",
-      "url": "https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review/"
-    },
-    {
-      "age_hours": 3.6234769655555557,
-      "agent": "Menzo",
-      "article_type": "strategic_discussion",
-      "assigned_to": "Menzo",
-      "category_hint": "WWE",
-      "decision": "selected",
-      "evaluated_at": "2026-06-01T23:42:27.517078+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match",
-      "priority": "soft",
-      "published": "Mon, 01 Jun 2026 20:05:03 +0000",
-      "reason": "strategic:queen of the ring,strategic:raw,recency:fresh_12h",
-      "score": 66,
-      "source": "wrestlinginc",
-      "summary": "IYO SKY advanced in the Queen of the Ring tournament with a pinfall on Giulia in a four-way match in Turin, Italy on \"WWE Raw.\"",
-      "title": "IYO SKY Advances In WWE QOTR Match",
-      "url": "https://www.wrestlinginc.com/2185251/iyo-sky-advances-wwe-qotr-match/"
-    },
-    {
-      "age_hours": 3.8154228994444446,
-      "agent": "Menzo",
-      "article_type": "strategic_discussion",
-      "assigned_to": "Menzo",
-      "category_hint": "WWE",
-      "decision": "selected",
-      "evaluated_at": "2026-06-01T23:42:27.522440+00:00",
+      "deterministic_score": 46,
+      "evaluated_at": "2026-06-01T23:52:49.778988+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw",
-      "priority": "soft",
-      "published": "Mon, 01 Jun 2026 19:53:32 +0000",
-      "reason": "strategic:queen of the ring,strategic:raw,recency:fresh_12h",
-      "score": 66,
+      "menzo_ai_review": {
+        "article_type": "storyline_development",
+        "bob_brief": {
+          "expected_embeds": [
+            "youtube",
+            "instagram"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "embed video/tweet se presente",
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": "Ringsidenews spesso mette immagini pesanti, verifica se c'è materiale video dell'evento AAA."
+        },
+        "category_hint": "WWE",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Notizia fresca e di impatto narrativo, coinvolge talenti WWE in un contesto internazionale rilevante.",
+        "event_key": "gable_aaa_match",
+        "id": "c1",
+        "priority": 2
+      },
+      "normalized_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war",
+      "priority": "skip",
+      "published": "Mon, 01 Jun 2026 22:51:58 +0000",
+      "reason": "ai:Notizia fresca e di impatto narrativo, coinvolge talenti WWE in un contesto internazionale rilevante.; deterministic:entity:chad gable,recency:fresh_12h",
+      "score": 26,
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/iyo-sky-advances-in-queen-of-the-ring-after-wild-fatal-four-way-on-june-1-wwe-raw-49.jpg?x51578\" width=\"800\" /></p>Iyo Sky is moving on in the Queen of the Ring tournament. During the June 1 episode of WWE RAW, Sky defeated Lash Legend, Roxanne Perez, and Giulia in a first-round Fatal Four-Way match. The match was chaotic from the start, with Lash using her power early while Iyo, Giulia, and Roxanne all tried to ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/\" title=\"Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW\">Read more</a>",
-      "title": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW",
-      "url": "https://www.ringsidenews.com/iyo-sky-advances-queen-ring-wild-fatal-four-way-june-1-wwe-raw/"
-    }
-  ],
-  "skipped": [
+      "summary": "<p><img alt=\"JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-calls-chad-gable-the-best-wrestler-in-the-world-after-aaa-mask-vs-mask-war-24.jpg?x51578\" width=\"800\" /></p>JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes. The WWE Hall of Famer was on commentary for the May 30 match, where Ludwig Kaiser’s El Grande Americano defeated Chad Gable’s Original El Grande Americano. The loss forced Gable to remove ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/\" title=\"JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\">Read more</a>",
+      "title": "JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War",
+      "url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/"
+    },
     {
-      "age_hours": 2.8240319666666664,
+      "age_hours": 1.8810492597222221,
       "agent": "Menzo",
-      "article_type": "low_value",
+      "ai_editorial_reason": "I dati sugli ascolti sono essenziali per il business report settimanale di TNA.",
+      "ai_id": "c2",
+      "ai_priority": 1,
+      "article_type": "data_report",
       "assigned_to": "Menzo",
-      "category_hint": "AEW",
-      "decision": "skip",
-      "evaluated_at": "2026-06-01T23:42:27.515081+00:00",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": false,
+        "expected_tables": true,
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "possible_noise": [
+          "author_bio",
+          "cta"
+        ],
+        "source_specific_notes": "Trasforma i dati in una tabella leggibile per il pubblico italiano."
+      },
+      "category_hint": "TNA",
+      "decision": "selected",
+      "deterministic_score": 42,
+      "evaluated_at": "2026-06-01T23:52:49.777336+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "data_report",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": true,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "author_bio",
+            "cta"
+          ],
+          "source_specific_notes": "Trasforma i dati in una tabella leggibile per il pubblico italiano."
+        },
+        "category_hint": "TNA",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "I dati sugli ascolti sono essenziali per il business report settimanale di TNA.",
+        "event_key": "tna_ratings_0528",
+        "id": "c2",
+        "priority": 1
+      },
+      "normalized_url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026",
+      "priority": "skip",
+      "published": "Mon, 01 Jun 2026 21:59:58 +0000",
+      "reason": "ai:I dati sugli ascolti sono essenziali per il business report settimanale di TNA.; deterministic:ratings:exceptional_signal,recency:fresh_12h",
+      "score": 24,
+      "source": "wrestlinginc",
+      "summary": "TNA Impact's total viewership reaches its second highest total in May, but continues to struggle in the 18-49 demo going against the NBA and NHL Playoffs",
+      "title": "TNA Impact Ratings & Viewership Report: 5/28/2026",
+      "url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/"
+    },
+    {
+      "age_hours": 5.312994414444444,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Dato positivo di ascolti per AEW Collision, necessario per il report settimanale.",
+      "ai_id": "c3",
+      "ai_priority": 1,
+      "article_type": "data_report",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": false,
+        "expected_tables": true,
+        "must_preserve": [],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta"
+        ],
+        "source_specific_notes": "Verifica i dati di Programming Insider citati nel testo."
+      },
+      "category_hint": "AEW",
+      "decision": "selected",
+      "deterministic_score": 42,
+      "evaluated_at": "2026-06-01T23:52:49.779893+00:00",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "data_report",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": true,
+          "must_preserve": [],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta"
+          ],
+          "source_specific_notes": "Verifica i dati di Programming Insider citati nel testo."
+        },
+        "category_hint": "AEW",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Dato positivo di ascolti per AEW Collision, necessario per il report settimanale.",
+        "event_key": "aew_collision_ratings_0527",
+        "id": "c3",
+        "priority": 1
+      },
+      "normalized_url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026",
+      "priority": "skip",
+      "published": "Mon, 01 Jun 2026 18:34:03 +0000",
+      "reason": "ai:Dato positivo di ascolti per AEW Collision, necessario per il report settimanale.; deterministic:ratings:exceptional_signal,recency:fresh_12h",
+      "score": 24,
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Collision-Massive-Increase.jpg?x51578\" width=\"800\" /></p>The latest audience figures are available for the May 27, 2026 episode of AEW Collision on TBS, with the show delivering a major week-to-week surge. According to Programming Insider, AEW Collision on May 27, 2026 drew 498,000 viewers on TBS, with a 0.05 rating in the key P18–49 demographic. For comparison, the May 20, 2026 ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/\" title=\"AEW Collision Viewership Sees Massive Increase on May 27, 2026\">Read more</a>",
+      "title": "AEW Collision Viewership Sees Massive Increase on May 27, 2026",
+      "url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/"
+    },
+    {
+      "age_hours": 0.6996606052777777,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Sviluppo diretto verso il prossimo PPV di TNA, notizia di servizio per i fan.",
+      "ai_id": "c4",
+      "ai_priority": 2,
+      "article_type": "storyline_development",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [
+          "x_tweet"
+        ],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta"
+        ],
+        "source_specific_notes": "Focus sulla sfida al titolo mondiale."
+      },
+      "category_hint": "TNA",
+      "decision": "selected",
+      "deterministic_score": 38,
+      "evaluated_at": "2026-06-01T23:52:49.778181+00:00",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "storyline_development",
+        "bob_brief": {
+          "expected_embeds": [
+            "x_tweet"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta"
+          ],
+          "source_specific_notes": "Focus sulla sfida al titolo mondiale."
+        },
+        "category_hint": "TNA",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Sviluppo diretto verso il prossimo PPV di TNA, notizia di servizio per i fan.",
+        "event_key": "tna_slammiversary_build",
+        "id": "c4",
+        "priority": 2
+      },
+      "normalized_url": "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary",
+      "priority": "skip",
+      "published": "Mon, 01 Jun 2026 23:10:51 +0000",
+      "reason": "ai:Sviluppo diretto verso il prossimo PPV di TNA, notizia di servizio per i fan.; deterministic:recency:fresh_12h",
+      "score": 22,
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/aj-francis-calls-out-mike-santana-for-tna-world-title-match-at-slammiversary-55.jpg?x51578\" width=\"800\" /></p>AJ Francis wants the big spot at TNA Slammiversary, and he’s calling out Mike Santana to make it happen. Santana is currently TNA World Champion, but his challenger for Slammiversary has not been confirmed yet. Francis made it clear during a new interview with Jim Varsallone that he believes he should be the one standing ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/\" title=\"AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary\">Read more</a>",
+      "title": "AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary",
+      "url": "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/"
+    },
+    {
+      "age_hours": 2.996881623888889,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Notizia riguardante una figura iconica; aggiornamento sulle condizioni lavorative di JR post-PPV.",
+      "ai_id": "c5",
+      "ai_priority": 1,
+      "article_type": "hard_news",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "possible_noise": [
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "source_specific_notes": "Sii rispettoso nel tono riguardante le condizioni di salute."
+      },
+      "category_hint": "AEW",
+      "decision": "selected",
+      "deterministic_score": 38,
+      "evaluated_at": "2026-06-01T23:52:49.773848+00:00",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "hard_news",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": "Sii rispettoso nel tono riguardante le condizioni di salute."
+        },
+        "category_hint": "AEW",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Notizia riguardante una figura iconica; aggiornamento sulle condizioni lavorative di JR post-PPV.",
+        "event_key": "jim_ross_health_update",
+        "id": "c5",
+        "priority": 1
+      },
       "normalized_url": "https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles",
       "priority": "skip",
       "published": "Mon, 01 Jun 2026 20:53:01 +0000",
-      "reason": "recency:fresh_12h",
-      "score": 38,
+      "reason": "ai:Notizia riguardante una figura iconica; aggiornamento sulle condizioni lavorative di JR post-PPV.; deterministic:recency:fresh_12h",
+      "score": 21,
       "source": "wrestlinginc",
       "summary": "AEW announcer Jim Ross details both the health and travel struggles he suffered through when trying to make AEW Double or Nothing 2026 last weekend",
       "title": "Jim Ross Details Health & Travel Struggles Surrounding AEW Double Or Nothing 2026",
       "url": "https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles/"
-    },
+    }
+  ],
+  "skipped": [
     {
-      "age_hours": 389.8726431611111,
+      "age_hours": 390.04549281444446,
       "agent": "Menzo",
-      "article_type": "low_value",
+      "ai_editorial_reason": "Notizia troppo vecchia (oltre 2 settimane).",
+      "ai_id": "c6",
+      "ai_priority": 0,
+      "article_type": "duplicate",
       "assigned_to": "Menzo",
-      "category_hint": "World",
+      "category_hint": "ROH",
       "decision": "skip",
-      "evaluated_at": "2026-06-01T23:42:27.515381+00:00",
+      "deterministic_score": 33,
+      "duplicate_of": "c6",
+      "evaluated_at": "2026-06-01T23:52:49.774134+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "duplicate",
+        "bob_brief": null,
+        "category_hint": "ROH",
+        "decision": "skip",
+        "duplicate_of": "c6",
+        "editorial_reason": "Notizia troppo vecchia (oltre 2 settimane).",
+        "event_key": "roh_supercard_athena",
+        "id": "c6",
+        "priority": 0
+      },
       "normalized_url": "https://www.wrestlinginc.com/2174516/roh-supercard-of-honor-athena-survival-of-the-fittest",
       "priority": "skip",
       "published": "Sat, 16 May 2026 17:50:06 +0000",
-      "reason": "hard:championship,recency:old_penalty",
-      "score": 33,
+      "reason": "ai_duplicate_of:c6; hard:championship,recency:old_penalty",
+      "score": 18,
       "source": "wrestlinginc",
       "summary": "Athena successfully retained the ROH Women's World Championship and became the company's first-ever Women's Survival of the Fittest victor at Supercard of Honor.",
       "title": "Athena Wins First-Ever Women's ROH Survival Of The Fittest Match, Extends Title Reign",
       "url": "https://www.wrestlinginc.com/2174516/roh-supercard-of-honor-athena-survival-of-the-fittest/"
     },
     {
-      "age_hours": 390.2076432286111,
+      "age_hours": 390.38049288083334,
       "agent": "Menzo",
-      "article_type": "low_value",
+      "ai_editorial_reason": "Notizia datata, speculazione retrospettiva.",
+      "ai_id": "c11",
+      "ai_priority": 0,
+      "article_type": "duplicate",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
-      "evaluated_at": "2026-06-01T23:42:27.515624+00:00",
+      "deterministic_score": 0,
+      "duplicate_of": "c11",
+      "evaluated_at": "2026-06-01T23:52:49.774372+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "duplicate",
+        "bob_brief": null,
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "c11",
+        "editorial_reason": "Notizia datata, speculazione retrospettiva.",
+        "event_key": "bischoff_heyman",
+        "id": "c11",
+        "priority": 0
+      },
       "normalized_url": "https://www.wrestlinginc.com/2171275/eric-bischoff-recalls-paul-heyman-love-released-wwe-star",
       "priority": "skip",
       "published": "Sat, 16 May 2026 17:30:00 +0000",
-      "reason": "entity:paul heyman,soft_penalty:recalls,recency:old_penalty",
+      "reason": "ai_duplicate_of:c11; entity:paul heyman,soft_penalty:recalls,recency:old_penalty",
       "score": 0,
       "source": "wrestlinginc",
       "summary": "Eric Bischoff recalled one recently-released WWE star who Paul Heyman was high on back in 2019 when Bischoff crossed paths with him.",
@@ -150,18 +638,34 @@
       "url": "https://www.wrestlinginc.com/2171275/eric-bischoff-recalls-paul-heyman-love-released-wwe-star/"
     },
     {
-      "age_hours": 390.70764330000003,
+      "age_hours": 390.88049295111114,
       "agent": "Menzo",
-      "article_type": "low_value",
+      "ai_editorial_reason": "Notizia datata.",
+      "ai_id": "c12",
+      "ai_priority": 0,
+      "article_type": "duplicate",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
-      "evaluated_at": "2026-06-01T23:42:27.515882+00:00",
+      "deterministic_score": 0,
+      "duplicate_of": "c12",
+      "evaluated_at": "2026-06-01T23:52:49.774626+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "duplicate",
+        "bob_brief": null,
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "c12",
+        "editorial_reason": "Notizia datata.",
+        "event_key": "matt_hardy_kofi",
+        "id": "c12",
+        "priority": 0
+      },
       "normalized_url": "https://www.wrestlinginc.com/2171250/matt-hardy-kofimania-wwe-new-day",
       "priority": "skip",
       "published": "Sat, 16 May 2026 17:00:00 +0000",
-      "reason": "soft_penalty:reflects,recency:old_penalty",
+      "reason": "ai_duplicate_of:c12; soft_penalty:reflects,recency:old_penalty",
       "score": 0,
       "source": "wrestlinginc",
       "summary": "Matt hardy reflects on Kofi Kingston becoming WWE Champion at WrestleMania 35 and commented on the New Day's importance to the younger generation of fans.",
@@ -169,13 +673,14 @@
       "url": "https://www.wrestlinginc.com/2171250/matt-hardy-kofimania-wwe-new-day/"
     },
     {
-      "age_hours": 391.1929211658333,
+      "age_hours": 391.36577079722224,
       "agent": "Menzo",
       "article_type": "low_value",
       "assigned_to": "Menzo",
       "category_hint": "AEW",
       "decision": "skip",
-      "evaluated_at": "2026-06-01T23:42:27.516200+00:00",
+      "deterministic_score": 0,
+      "evaluated_at": "2026-06-01T23:52:49.774872+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2174471/aew-swerve-strickland-roh-supercard-of-honor-bandido-world-title",
       "priority": "skip",
@@ -188,51 +693,84 @@
       "url": "https://www.wrestlinginc.com/2174471/aew-swerve-strickland-roh-supercard-of-honor-bandido-world-title/"
     },
     {
-      "age_hours": 391.2076435061111,
+      "age_hours": 391.38049311027777,
       "agent": "Menzo",
-      "article_type": "low_value",
+      "ai_editorial_reason": "Notizia datata.",
+      "ai_id": "c9",
+      "ai_priority": 0,
+      "article_type": "duplicate",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
-      "evaluated_at": "2026-06-01T23:42:27.516625+00:00",
+      "deterministic_score": 5,
+      "duplicate_of": "c9",
+      "evaluated_at": "2026-06-01T23:52:49.775199+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "duplicate",
+        "bob_brief": null,
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "c9",
+        "editorial_reason": "Notizia datata.",
+        "event_key": "kit_wilson_rumble",
+        "id": "c9",
+        "priority": 0
+      },
       "normalized_url": "https://www.wrestlinginc.com/2171248/wwe-royal-rumble-2026-kit-wilson-emotional-struggle-left-out",
       "priority": "skip",
       "published": "Sat, 16 May 2026 16:30:00 +0000",
-      "reason": "entity:cody rhodes,recency:old_penalty",
-      "score": 5,
+      "reason": "ai_duplicate_of:c9; entity:cody rhodes,recency:old_penalty",
+      "score": 3,
       "source": "wrestlinginc",
       "summary": "WWE's Kit Wilson struggled with his emotions after being left off this year's Royal Rumble card, but some advice from Cody Rhodes and AJ Styles helped.",
       "title": "Kit Wilson Details Emotional Struggle After Being Left Out Of 2026 WWE Royal Rumble",
       "url": "https://www.wrestlinginc.com/2171248/wwe-royal-rumble-2026-kit-wilson-emotional-struggle-left-out/"
     },
     {
-      "age_hours": 391.7076435702778,
+      "age_hours": 391.88049317166667,
       "agent": "Menzo",
-      "article_type": "low_value",
+      "ai_editorial_reason": "Notizia datata.",
+      "ai_id": "c10",
+      "ai_priority": 0,
+      "article_type": "duplicate",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
-      "evaluated_at": "2026-06-01T23:42:27.516854+00:00",
+      "deterministic_score": 5,
+      "duplicate_of": "c10",
+      "evaluated_at": "2026-06-01T23:52:49.775420+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "duplicate",
+        "bob_brief": null,
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "c10",
+        "editorial_reason": "Notizia datata.",
+        "event_key": "jacob_fatu_relation",
+        "id": "c10",
+        "priority": 0
+      },
       "normalized_url": "https://www.wrestlinginc.com/2171076/wwe-jacob-fatu-roman-reigns-uncle",
       "priority": "skip",
       "published": "Sat, 16 May 2026 16:00:00 +0000",
-      "reason": "entity:roman reigns,recency:old_penalty",
-      "score": 5,
+      "reason": "ai_duplicate_of:c10; entity:roman reigns,recency:old_penalty",
+      "score": 3,
       "source": "wrestlinginc",
       "summary": "Although WWE's Jacob Fatu refers to Roman Reigns as his cousin, they actually have a different relationship within the Anoa'i family.",
       "title": "WWE's Jacob Fatu Clarifies Familial Relationship With Roman Reigns",
       "url": "https://www.wrestlinginc.com/2171076/wwe-jacob-fatu-roman-reigns-uncle/"
     },
     {
-      "age_hours": 392.20764370555554,
+      "age_hours": 392.38049323666667,
       "agent": "Menzo",
       "article_type": "low_value",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
-      "evaluated_at": "2026-06-01T23:42:27.517342+00:00",
+      "deterministic_score": 0,
+      "evaluated_at": "2026-06-01T23:52:49.775653+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2170973/wwe-aj-styles-harder-improvise-modern-era",
       "priority": "skip",
@@ -245,13 +783,14 @@
       "url": "https://www.wrestlinginc.com/2170973/wwe-aj-styles-harder-improvise-modern-era/"
     },
     {
-      "age_hours": 392.70764377583333,
+      "age_hours": 392.8804933036111,
       "agent": "Menzo",
       "article_type": "low_value",
       "assigned_to": "Menzo",
       "category_hint": "AEW",
       "decision": "skip",
-      "evaluated_at": "2026-06-01T23:42:27.517594+00:00",
+      "deterministic_score": 0,
+      "evaluated_at": "2026-06-01T23:52:49.775894+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2170949/aew-jeff-jarrett-orange-cassidy-combines-in-ring-character-work-better",
       "priority": "skip",
@@ -264,13 +803,14 @@
       "url": "https://www.wrestlinginc.com/2170949/aew-jeff-jarrett-orange-cassidy-combines-in-ring-character-work-better/"
     },
     {
-      "age_hours": 393.2076438402778,
+      "age_hours": 393.38049337916664,
       "agent": "Menzo",
       "article_type": "low_value",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
-      "evaluated_at": "2026-06-01T23:42:27.517826+00:00",
+      "deterministic_score": 0,
+      "evaluated_at": "2026-06-01T23:52:49.776166+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2170762/wwe-wrestlemania-42-jacob-fatu-drew-mcintyre-bloodline",
       "priority": "skip",
@@ -283,32 +823,49 @@
       "url": "https://www.wrestlinginc.com/2170762/wwe-wrestlemania-42-jacob-fatu-drew-mcintyre-bloodline/"
     },
     {
-      "age_hours": 394.20764390777776,
+      "age_hours": 394.3804934452778,
       "agent": "Menzo",
-      "article_type": "low_value",
+      "ai_editorial_reason": "Notizia vecchia, valore storico trascurabile.",
+      "ai_id": "c7",
+      "ai_priority": 0,
+      "article_type": "duplicate",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
-      "evaluated_at": "2026-06-01T23:42:27.518070+00:00",
+      "deterministic_score": 33,
+      "duplicate_of": "c7",
+      "evaluated_at": "2026-06-01T23:52:49.776404+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "duplicate",
+        "bob_brief": null,
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "c7",
+        "editorial_reason": "Notizia vecchia, valore storico trascurabile.",
+        "event_key": "braun_strowman_debut",
+        "id": "c7",
+        "priority": 0
+      },
       "normalized_url": "https://www.wrestlinginc.com/2170628/wwe-braun-strowman-wyatt-family-main-roster-debut",
       "priority": "skip",
       "published": "Sat, 16 May 2026 13:30:00 +0000",
-      "reason": "hard:debut,strategic:main roster,soft_penalty:reflects,recency:old_penalty",
-      "score": 33,
+      "reason": "ai_duplicate_of:c7; hard:debut,strategic:main roster,soft_penalty:reflects,recency:old_penalty",
+      "score": 18,
       "source": "wrestlinginc",
       "summary": "Former WWE star Braun Strowman has recalled his debut in the promotion and how terrified he was before stepping into the ring.",
       "title": "Braun Strowman Reflects On WWE Main Roster Debut Alongside The Wyatt Family",
       "url": "https://www.wrestlinginc.com/2170628/wwe-braun-strowman-wyatt-family-main-roster-debut/"
     },
     {
-      "age_hours": 394.7076439791667,
+      "age_hours": 394.8804935086111,
       "agent": "Menzo",
       "article_type": "low_value",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
-      "evaluated_at": "2026-06-01T23:42:27.518326+00:00",
+      "deterministic_score": 0,
+      "evaluated_at": "2026-06-01T23:52:49.776633+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2170585/wwe-hofer-eric-bischoff-lambasts-3-hour-weekly-shows",
       "priority": "skip",
@@ -321,13 +878,14 @@
       "url": "https://www.wrestlinginc.com/2170585/wwe-hofer-eric-bischoff-lambasts-3-hour-weekly-shows/"
     },
     {
-      "age_hours": 395.2076440497222,
+      "age_hours": 395.3804935758333,
       "agent": "Menzo",
       "article_type": "low_value",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
-      "evaluated_at": "2026-06-01T23:42:27.518580+00:00",
+      "deterministic_score": 0,
+      "evaluated_at": "2026-06-01T23:52:49.776874+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2170560/ronda-rousey-reflects-main-eventing-wwe-wrestlemania-35",
       "priority": "skip",
@@ -340,100 +898,38 @@
       "url": "https://www.wrestlinginc.com/2170560/ronda-rousey-reflects-main-eventing-wwe-wrestlemania-35/"
     },
     {
-      "age_hours": 1.7081997305555556,
+      "age_hours": 1.9374386827777776,
       "agent": "Menzo",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "TNA",
-      "decision": "skip",
-      "evaluated_at": "2026-06-01T23:42:27.519031+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026",
-      "priority": "skip",
-      "published": "Mon, 01 Jun 2026 21:59:58 +0000",
-      "reason": "ratings:exceptional_signal,recency:fresh_12h",
-      "score": 42,
-      "source": "wrestlinginc",
-      "summary": "TNA Impact's total viewership reaches its second highest total in May, but continues to struggle in the 18-49 demo going against the NBA and NHL Playoffs",
-      "title": "TNA Impact Ratings & Viewership Report: 5/28/2026",
-      "url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/"
-    },
-    {
-      "age_hours": 0.5268111383333334,
-      "agent": "Menzo",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "TNA",
-      "decision": "skip",
-      "evaluated_at": "2026-06-01T23:42:27.520099+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary",
-      "priority": "skip",
-      "published": "Mon, 01 Jun 2026 23:10:51 +0000",
-      "reason": "recency:fresh_12h",
-      "score": 38,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/aj-francis-calls-out-mike-santana-for-tna-world-title-match-at-slammiversary-55.jpg?x51578\" width=\"800\" /></p>AJ Francis wants the big spot at TNA Slammiversary, and he’s calling out Mike Santana to make it happen. Santana is currently TNA World Champion, but his challenger for Slammiversary has not been confirmed yet. Francis made it clear during a new interview with Jim Varsallone that he believes he should be the one standing ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/\" title=\"AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary\">Read more</a>",
-      "title": "AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary",
-      "url": "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/"
-    },
-    {
-      "age_hours": 0.8415336063888889,
-      "agent": "Menzo",
+      "ai_editorial_reason": "Sport esterno, non rilevante per il wrestling giocato.",
+      "ai_id": "c8",
+      "ai_priority": 0,
       "article_type": "low_value",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
-      "evaluated_at": "2026-06-01T23:42:27.520985+00:00",
+      "evaluated_at": "2026-06-01T23:52:49.779261+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war",
-      "priority": "skip",
-      "published": "Mon, 01 Jun 2026 22:51:58 +0000",
-      "reason": "entity:chad gable,recency:fresh_12h",
-      "score": 46,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-calls-chad-gable-the-best-wrestler-in-the-world-after-aaa-mask-vs-mask-war-24.jpg?x51578\" width=\"800\" /></p>JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes. The WWE Hall of Famer was on commentary for the May 30 match, where Ludwig Kaiser’s El Grande Americano defeated Chad Gable’s Original El Grande Americano. The loss forced Gable to remove ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/\" title=\"JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\">Read more</a>",
-      "title": "JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War",
-      "url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/"
-    },
-    {
-      "age_hours": 1.7645892463888888,
-      "agent": "Menzo",
-      "article_type": "external_sports_reaction",
-      "assigned_to": "Menzo",
-      "category_hint": "WWE",
-      "decision": "skip",
-      "evaluated_at": "2026-06-01T23:42:27.521290+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "low_value",
+        "bob_brief": null,
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Sport esterno, non rilevante per il wrestling giocato.",
+        "event_key": "miz_nfl_reaction",
+        "id": "c8",
+        "priority": 0
+      },
       "normalized_url": "https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal",
       "priority": "skip",
       "published": "Mon, 01 Jun 2026 21:56:35 +0000",
-      "reason": "skip:external_sports_context_not_core_wrestling",
-      "score": 18,
+      "reason": "ai:Sport esterno, non rilevante per il wrestling giocato.; deterministic:skip:external_sports_context_not_core_wrestling",
+      "score": 10,
       "source": "ringsidenews",
       "summary": "<p><img alt=\"The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/the-miz-begs-browns-trade-news-isnt-real-after-myles-garrett-deal-02.jpg?x51578\" width=\"800\" /></p>The Cleveland Browns found a new way to crush The Miz. The WWE star and longtime Browns fan reacted after the team traded Myles Garrett on Monday, and he sounded completely defeated. Garrett was one of the few bright spots in Cleveland after putting up 23 sacks during the 2024-25 season, but the Browns still ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal/\" title=\"The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal\">Read more</a>",
       "title": "The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal",
       "url": "https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal/"
-    },
-    {
-      "age_hours": 5.140145297777778,
-      "agent": "Menzo",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "AEW",
-      "decision": "skip",
-      "evaluated_at": "2026-06-01T23:42:27.523073+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026",
-      "priority": "skip",
-      "published": "Mon, 01 Jun 2026 18:34:03 +0000",
-      "reason": "ratings:exceptional_signal,recency:fresh_12h",
-      "score": 42,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Collision-Massive-Increase.jpg?x51578\" width=\"800\" /></p>The latest audience figures are available for the May 27, 2026 episode of AEW Collision on TBS, with the show delivering a major week-to-week surge. According to Programming Insider, AEW Collision on May 27, 2026 drew 498,000 viewers on TBS, with a 0.05 rating in the key P18–49 demographic. For comparison, the May 20, 2026 ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/\" title=\"AEW Collision Viewership Sees Massive Increase on May 27, 2026\">Read more</a>",
-      "title": "AEW Collision Viewership Sees Massive Increase on May 27, 2026",
-      "url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/"
     }
   ],
-  "version": "v93_10_trade_context_editorial_gate"
+  "version": "v93_13_ai_editorial_review"
 }
