@@ -1,19 +1,19 @@
 [
   {
-    "article_type": "event_outcome",
+    "article_type": "hard_news",
     "categories": [
       "WWE"
     ],
-    "created_at": "2026-05-31T23:01:58.551466",
+    "created_at": "2026-06-01T00:14:05.543405",
     "error": "News block extraction too short for safe publication: chars=0 url=https://www.wrestlinginc.com/2184478/wwe-reveals-full-king-queen-of-the-ring-tournament-brackets/",
     "kind": "news",
     "news_key": "news:https-www-wrestlinginc-com-2184478-wwe-reveals-full-king-queen-of-the-ring-tournament-brackets",
     "priority": "hard",
-    "score": 92,
+    "score": 94,
     "source": "wrestlinginc",
     "source_title": "WWE Reveals Full King & Queen Of The Ring Tournament Brackets",
     "source_url": "https://www.wrestlinginc.com/2184478/wwe-reveals-full-king-queen-of-the-ring-tournament-brackets/",
     "status": "failed_technical",
-    "story_core": "rvelazione-bracket-tornei-kotr-qotr"
+    "story_core": "king-queen-ring-brackets-announcement"
   }
 ]
