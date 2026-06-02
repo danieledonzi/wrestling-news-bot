@@ -3,194 +3,172 @@
   "articles": [
     {
       "bob_notes": [],
-      "body_html": "<p>JBL ha elogiato Chad Gable e Ludwig Kaiser dopo il loro cruento Mask vs. Mask match ad AAA Noche de Los Grandes.</p>\n<p>Il WWE Hall of Famer era al commento per l&#x27;incontro del 30 maggio, in cui l&#x27;El Grande Americano di Ludwig Kaiser ha sconfitto l&#x27;Original El Grande Americano di Chad Gable. La sconfitta ha costretto Gable a togliersi la maschera davanti al pubblico, ponendo fine a una delle storyline più importanti dell&#x27;anno in AAA.</p>\n<p>I fan hanno elogiato il match sin dal suo svolgimento e JBL è chiaramente della stessa opinione. Intervenuto a Busted Open, ha affermato che il pubblico messicano ha contribuito a rendere il momento davvero epico.</p>\n<blockquote>“I fan messicani sono appassionati, punto. Amano la Lucha Libre e le loro stelle. Si lasciano coinvolgere e si divertono. È quello che abbiamo visto: loro, nel loro massimo splendore.”</blockquote>\n<p>JBL ha dichiarato che il match ha mostrato il pro-wrestling ai massimi livelli, ammettendo di essere rimasto sbalordito da quanto realizzato da Gable e Kaiser.</p>\n<blockquote>“E penso che abbiate visto il wrestling al suo meglio. Sono rimasto assolutamente sbalordito da ciò che hanno fatto sul ring.”</blockquote>\n<p>Ha dato grande merito a Kaiser per aver costruito il personaggio di El Grande Americano nel modo giusto, in particolare imparando la lingua e comprendendo il pubblico in Messico.</p>\n<blockquote>“Kaiser ha creato tutto questo. L&#x27;ha fatto imparando la lingua, e non solo imparandola: come si diceva in Texas, non stava imparando lo spagnolo, stava imparando il &#x27;messicano&#x27;. Ha imparato il dialetto locale, ed è stato assolutamente incredibile quello che ha fatto.”</blockquote>\n<p>JBL ha anche sottolineato che il lavoro di Gable in Messico è stato ben diverso dall&#x27;interpretare un heel sopra le righe nella televisione WWE. Ha spiegato che ottenere vero &#x27;heat&#x27; in Messico è una sfida completamente differente.</p>\n<blockquote>“Quando Chad è tornato per la prima volta, ci siamo messi a riflettere: è facile essere un heel scanzonato come lo era in WWE con i video del Varsity Club o qualsiasi diavoleria fosse. Ma cercare di ottenere heat in Messico è un altro livello. Non è nemmeno lo stesso business.”</blockquote>\n<p>JBL ha poi scommesso tutto su Gable, definendolo il miglior wrestler al mondo e affermando che il match con Kaiser è stato su un altro pianeta.</p>\n<blockquote>“Penso che Chad Gable sia il miglior wrestler al mondo, e non credo sia nemmeno una questione vicina. È stato assolutamente incredibile quello che lui e Kaiser hanno fatto.”</blockquote>\n<p>Si tratta di un elogio enorme da parte di JBL, specialmente dopo un match che ha già fatto molto parlare i fan. La perdita della maschera da parte di Gable è stata un momento fondamentale, ma i commenti di JBL chiariscono che, a suo avviso, entrambi gli atleti hanno dato vita a qualcosa di molto più importante di un semplice match con stipulazione.</p>\n<p>La storia di El Grande Americano ha dato a Kaiser e Gable la possibilità di mettersi alla prova davanti a uno dei pubblici più esigenti del wrestling, e JBL è convinto che abbiano superato l&#x27;esame a pieni voti.</p>",
-      "category_hint": "WWE",
-      "clean_element_count": 14,
-      "created_at": "2026-06-01T23:52:55.846203+00:00",
+      "body_html": "https://www.youtube.com/watch?v=zAwcJ3-gqss\n\n<p>AJ Francis punta al palcoscenico principale di TNA Slammiversary e ha lanciato una sfida diretta al campione del mondo Mike Santana per far sì che accada.</p>\n<p>Santana è l&#x27;attuale TNA World Champion, ma il suo sfidante per Slammiversary non è ancora stato confermato. Durante una recente intervista con Jim Varsallone, Francis ha messo in chiaro di ritenere di dover essere lui a contendere il titolo a Santana nel main event.</p>\n<p>Francis ha fatto riferimento al loro precedente match singolo, sottolineando come sia stato così valido da essere candidato a Match dell&#x27;Anno, nonostante non si sia svolto in un pay-per-view.</p>\n<blockquote>“Io contro Mike Santana a Slammiversary con il titolo mondiale in palio sarebbe probabilmente uno dei più grandi incontri nella storia della TNA.”</blockquote>\n<p>Francis ha osservato come Santana, dopo il loro incontro, sia diventato campione mondiale, mentre lui ha continuato a offrire ottime prestazioni sul ring. A suo avviso, concedere loro 25 minuti sul palcoscenico più importante creerebbe qualcosa che i fan non potrebbero dimenticare.</p>\n<blockquote>“Penso sinceramente che se dessi a me e a Mike Santana 25 minuti per il titolo mondiale nel main event di Slammiversary, uscireste da lì pensando che sia uno dei migliori match che abbiate mai visto in vita vostra e uno dei più grandi incontri di tutti i tempi.”</blockquote>\n<p>In seguito, Francis ha alzato il tiro, mettendo in dubbio che Santana abbia il coraggio di accettare di difendere il titolo contro di lui.</p>\n<blockquote>“Ora, se poi Mike Santana abbia davvero le palle di concedermi una title shot, è un altro paio di maniche.”</blockquote>\n<p>Francis ha inoltre sostenuto che altri campioni abbiano evitato di offrirgli opportunità finché non è stato lui a forzare la mano, citando come esempi Leon Slater e Nic Nemeth.</p>\n<p>Per il momento, l&#x27;avversario di Santana per Slammiversary rimane un&#x27;incognita, ma AJ Francis ha espresso le sue intenzioni in modo chiaro e inequivocabile. Vuole il match per il TNA World Title, vuole il main event e crede che lui e Santana possano rubare la scena.</p>",
+      "category_hint": "TNA",
+      "clean_element_count": 11,
+      "created_at": "2026-06-02T00:07:01.949202+00:00",
       "diagnostic_stage": "ready_for_alfred",
       "element_counts": {
-        "embed": 0,
+        "embed": 1,
         "heading": 0,
         "image": 0,
-        "quote": 5,
+        "quote": 3,
         "table": 0,
-        "text": 9
+        "text": 7
       },
       "elements": [
         {
           "block_id": "b1",
-          "text": "JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes .",
-          "type": "text"
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=zAwcJ3-gqss"
         },
         {
           "block_id": "b2",
-          "text": "The WWE Hall of Famer was on commentary for the May 30 match, where Ludwig Kaiser’s El Grande Americano defeated Chad Gable’s Original El Grande Americano. The loss forced Gable to remove his mask in front of the crowd, ending one of AAA’s biggest storylines of the year.",
+          "text": "AJ Francis wants the big spot at TNA Slammiversary, and he’s calling out Mike Santana to make it happen.",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "text": "Fans have been praising the match since it happened, and JBL clearly feels the same way. Speaking on Busted Open , he said the Mexican crowd helped make the moment feel massive.",
+          "text": "Santana is currently TNA World Champion, but his challenger for Slammiversary has not been confirmed yet. Francis made it clear during a new interview wit h Jim Varsallone that he believes he should be the one standing across from Santana in the main event.",
           "type": "text"
         },
         {
           "block_id": "b4",
-          "source_tag": "blockquote",
-          "text": "“Mexican fans are just passionate fans. They love their Lucha Libre and they love their stars. They get into things and they enjoy it. That’s what you saw – them at their very best.”",
-          "type": "quote"
+          "text": "Francis pointed to their previous singles match, saying it was so good that it was nominated for Match of the Year despite not even happening on pay-per-view.",
+          "type": "text"
         },
         {
           "block_id": "b5",
-          "text": "JBL said the match showed pro wrestling at its highest level and admitted he was blown away by what Gable and Kaiser pulled off.",
-          "type": "text"
+          "source_tag": "blockquote",
+          "text": "“Me versus Mike Santana at Slammiversary for the world title would probably be one of the greatest matches in the history of TNA.”",
+          "type": "quote"
         },
         {
           "block_id": "b6",
-          "source_tag": "blockquote",
-          "text": "“And I thought you saw wrestling at its very best. I was absolutely blown away by what they did in the match.”",
-          "type": "quote"
+          "text": "Francis said Santana went from their match to becoming world champion, while he has continued putting on strong matches of his own. In his mind, giving them 25 minutes on the biggest stage would create something fans would not forget.",
+          "type": "text"
         },
         {
           "block_id": "b7",
-          "text": "He gave Kaiser a lot of credit for building the El Grande Americano character the right way, especially by learning the language and understanding the audience in Mexico.",
-          "type": "text"
+          "source_tag": "blockquote",
+          "text": "“I genuinely think if you gave me and Mike Santana 25 minutes for the world title in the main event of Slammiversary, you would walk away from that thinking this is one of the best matches I’ve ever seen in my life and one of the greatest matches of all time.”",
+          "type": "quote"
         },
         {
           "block_id": "b8",
-          "source_tag": "blockquote",
-          "text": "“Kaiser created all this. Kaiser created all this with learning the language, not just learning the language – as we used to say in Texas, he wasn’t learning Spanish, he was learning Mexican. The local dialect language was what he was learning, which was absolutely amazing, what he’s done.”",
-          "type": "quote"
+          "text": "Then Francis took the trash talk up a notch, questioning whether Santana would actually agree to defend the title against him.",
+          "type": "text"
         },
         {
           "block_id": "b9",
-          "text": "JBL also pointed out that Gable’s work in Mexico was not the same as playing a goofy heel on WWE television. He said getting real heat in Mexico is a completely different challenge.",
-          "type": "text"
+          "source_tag": "blockquote",
+          "text": "“Now, whether Mike Santana actually has the balls to give me a title shot is a whole different thing.”",
+          "type": "quote"
         },
         {
           "block_id": "b10",
-          "source_tag": "blockquote",
-          "text": "“When Chad first came back, we’re sitting there thinking about it, it’s easy to be a campy heel like he was in WWE with the videos with the varsity club or whatever the heck it was. But then all of a sudden to try to get heat down in Mexico, that’s different level. It’s not even the same business.”",
-          "type": "quote"
+          "text": "Francis also claimed other champions have avoided giving him opportunities until he forced the issue, naming Leon Slater and Nic Nemeth as examples.",
+          "type": "text"
         },
         {
           "block_id": "b11",
-          "text": "JBL then went all in on Gable, calling him the best wrestler in the world and saying the match with Kaiser was on another level.",
-          "type": "text"
-        },
-        {
-          "block_id": "b12",
-          "source_tag": "blockquote",
-          "text": "“I think Chad Gable’s the best wrestler in the world, and I don’t think it’s close. That was absolutely amazing what he and Kaiser did.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b13",
-          "text": "That is huge praise from JBL, especially after a match that already had fans talking. Gable losing the mask was a major moment, but JBL’s comments make it clear he believes both men delivered something bigger than just another stipulation match.",
-          "type": "text"
-        },
-        {
-          "block_id": "b14",
-          "text": "The El Grande Americano story gave Kaiser and Gable a chance to prove themselves in front of one of wrestling’s toughest crowds, and JBL believes they nailed it.",
+          "text": "For now, Santana’s Slammiversary opponent is still up in the air, but AJ Francis is making his pitch loud and clear. He wants the TNA World Title match, he wants the main event, and he believes he and Santana could steal the whole show.",
           "type": "text"
         }
       ],
-      "excerpt_it": "JBL tesse le lodi di Chad Gable e Ludwig Kaiser dopo il cruento Mask vs. Mask match disputato ad AAA Noche de Los Grandes.",
+      "excerpt_it": "AJ Francis punta al palcoscenico principale di TNA Slammiversary e ha lanciato una sfida diretta al campione del mondo Mike Santana.",
       "extraction_diagnostics": {
-        "candidate_node_count": 108,
-        "clean_element_count": 14,
+        "candidate_node_count": 103,
+        "clean_element_count": 11,
         "dom_noise_reduction_enabled": false,
-        "embed_count": 0,
+        "embed_count": 1,
         "global_embed_recovery_enabled": false,
-        "quote_count": 5,
-        "raw_element_count": 15,
+        "quote_count": 3,
+        "raw_element_count": 14,
         "removed_by_node_count": 13,
-        "removed_by_sanitize_count": 1,
+        "removed_by_sanitize_count": 3,
         "root_name": "article",
-        "root_text_chars": 3697,
+        "root_text_chars": 2837,
         "stage": "complete",
         "table_count": 0
       },
-      "fetched_html_chars": 486410,
-      "menzo_score": 26,
+      "fetched_html_chars": 486215,
+      "menzo_score": 53,
       "meta": {
-        "description": "JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes. The WWE Hall of Famer was on",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-calls-chad-gable-the-best-wrestler-in-the-world-after-aaa-mask-vs-mask-war-24.jpg",
-        "source_title": "JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War"
+        "description": "AJ Francis wants the big spot at TNA Slammiversary, and he’s calling out Mike Santana to make it happen. Santana is currently TNA World Champion, but his",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/aj-francis-calls-out-mike-santana-for-tna-world-title-match-at-slammiversary-55.jpg",
+        "source_title": "AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary"
       },
-      "raw_element_count": 15,
+      "raw_element_count": 14,
       "raw_elements_preview": [
         {
           "block_id": "b1",
-          "text": "JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes .",
-          "type": "text"
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=zAwcJ3-gqss"
+        },
+        {
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=zAwcJ3-gqss"
+        },
+        {
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=zAwcJ3-gqss"
         },
         {
           "block_id": "b2",
-          "text": "The WWE Hall of Famer was on commentary for the May 30 match, where Ludwig Kaiser’s El Grande Americano defeated Chad Gable’s Original El Grande Americano. The loss forced Gable to remove his mask in front of the crowd, ending one of AAA’s biggest storylines of the year.",
+          "text": "AJ Francis wants the big spot at TNA Slammiversary, and he’s calling out Mike Santana to make it happen.",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "text": "Fans have been praising the match since it happened, and JBL clearly feels the same way. Speaking on Busted Open , he said the Mexican crowd helped make the moment feel massive.",
+          "text": "Santana is currently TNA World Champion, but his challenger for Slammiversary has not been confirmed yet. Francis made it clear during a new interview wit h Jim Varsallone that he believes he should be the one standing across from Santana in the main event.",
           "type": "text"
         },
         {
           "block_id": "b4",
-          "source_tag": "blockquote",
-          "text": "“Mexican fans are just passionate fans. They love their Lucha Libre and they love their stars. They get into things and they enjoy it. That’s what you saw – them at their very best.”",
-          "type": "quote"
+          "text": "Francis pointed to their previous singles match, saying it was so good that it was nominated for Match of the Year despite not even happening on pay-per-view.",
+          "type": "text"
         },
         {
           "block_id": "b5",
-          "text": "JBL said the match showed pro wrestling at its highest level and admitted he was blown away by what Gable and Kaiser pulled off.",
-          "type": "text"
+          "source_tag": "blockquote",
+          "text": "“Me versus Mike Santana at Slammiversary for the world title would probably be one of the greatest matches in the history of TNA.”",
+          "type": "quote"
         },
         {
           "block_id": "b6",
-          "source_tag": "blockquote",
-          "text": "“And I thought you saw wrestling at its very best. I was absolutely blown away by what they did in the match.”",
-          "type": "quote"
+          "text": "Francis said Santana went from their match to becoming world champion, while he has continued putting on strong matches of his own. In his mind, giving them 25 minutes on the biggest stage would create something fans would not forget.",
+          "type": "text"
         },
         {
           "block_id": "b7",
-          "text": "He gave Kaiser a lot of credit for building the El Grande Americano character the right way, especially by learning the language and understanding the audience in Mexico.",
-          "type": "text"
+          "source_tag": "blockquote",
+          "text": "“I genuinely think if you gave me and Mike Santana 25 minutes for the world title in the main event of Slammiversary, you would walk away from that thinking this is one of the best matches I’ve ever seen in my life and one of the greatest matches of all time.”",
+          "type": "quote"
         },
         {
           "block_id": "b8",
-          "source_tag": "blockquote",
-          "text": "“Kaiser created all this. Kaiser created all this with learning the language, not just learning the language – as we used to say in Texas, he wasn’t learning Spanish, he was learning Mexican. The local dialect language was what he was learning, which was absolutely amazing, what he’s done.”",
-          "type": "quote"
+          "text": "Then Francis took the trash talk up a notch, questioning whether Santana would actually agree to defend the title against him.",
+          "type": "text"
         },
         {
           "block_id": "b9",
-          "text": "JBL also pointed out that Gable’s work in Mexico was not the same as playing a goofy heel on WWE television. He said getting real heat in Mexico is a completely different challenge.",
-          "type": "text"
+          "source_tag": "blockquote",
+          "text": "“Now, whether Mike Santana actually has the balls to give me a title shot is a whole different thing.”",
+          "type": "quote"
         },
         {
           "block_id": "b10",
-          "source_tag": "blockquote",
-          "text": "“When Chad first came back, we’re sitting there thinking about it, it’s easy to be a campy heel like he was in WWE with the videos with the varsity club or whatever the heck it was. But then all of a sudden to try to get heat down in Mexico, that’s different level. It’s not even the same business.”",
-          "type": "quote"
+          "text": "Francis also claimed other champions have avoided giving him opportunities until he forced the issue, naming Leon Slater and Nic Nemeth as examples.",
+          "type": "text"
         },
         {
           "block_id": "b11",
-          "text": "JBL then went all in on Gable, calling him the best wrestler in the world and saying the match with Kaiser was on another level.",
-          "type": "text"
-        },
-        {
-          "block_id": "b12",
-          "source_tag": "blockquote",
-          "text": "“I think Chad Gable’s the best wrestler in the world, and I don’t think it’s close. That was absolutely amazing what he and Kaiser did.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b13",
-          "text": "That is huge praise from JBL, especially after a match that already had fans talking. Gable losing the mask was a major moment, but JBL’s comments make it clear he believes both men delivered something bigger than just another stipulation match.",
-          "type": "text"
-        },
-        {
-          "block_id": "b14",
-          "text": "The El Grande Americano story gave Kaiser and Gable a chance to prove themselves in front of one of wrestling’s toughest crowds, and JBL believes they nailed it.",
+          "text": "For now, Santana’s Slammiversary opponent is still up in the air, but AJ Francis is making his pitch loud and clear. He wants the TNA World Title match, he wants the main event, and he believes he and Santana could steal the whole show.",
           "type": "text"
         },
         {
@@ -198,28 +176,49 @@
           "type": "text"
         }
       ],
-      "removed_before_gemini": 14,
+      "removed_before_gemini": 16,
       "removed_elements_debug": [
         {
           "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 85,
+          "node_index": 80,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Spotlight"
         },
         {
           "classes": "gb-loop-item rsn-spotlight-item post-2196416 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-paul-heyman tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 89,
+          "node_index": 84,
           "node_name": "li",
           "reason": "node_class_noise",
           "text_preview": "WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 92,
+          "node_index": 87,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 88,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196368 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-iyo-sky tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "node_index": 89,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 92,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -229,18 +228,18 @@
           "text_preview": ""
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196368 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-iyo-sky tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2196255 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-brock-lesnar tag-oba-femi tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
           "node_index": 94,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
+          "text_preview": "WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 97,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
+          "text_preview": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -250,18 +249,18 @@
           "text_preview": ""
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196255 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-brock-lesnar tag-oba-femi tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2196202 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
           "node_index": 99,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
+          "text_preview": "WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 102,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
+          "text_preview": "WWE Makes Major Changes to King of the Ring Tournament Lineup"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -271,28 +270,25 @@
           "text_preview": ""
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196202 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
-          "node_index": 104,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup"
+          "index": 2,
+          "item": {
+            "source_tag": "div",
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=zAwcJ3-gqss"
+          },
+          "reason": "duplicate_or_empty_embed"
         },
         {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 107,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "WWE Makes Major Changes to King of the Ring Tournament Lineup"
+          "index": 3,
+          "item": {
+            "source_tag": "div",
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=zAwcJ3-gqss"
+          },
+          "reason": "duplicate_or_empty_embed"
         },
         {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 108,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "index": 15,
+          "index": 14,
           "item": {
             "text": "Spotlight WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup",
             "type": "text"
@@ -302,948 +298,187 @@
       ],
       "source": "ringsidenews",
       "source_html_contains_embed_hint": true,
-      "source_title": "JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War",
-      "source_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/",
+      "source_title": "AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary",
+      "source_url": "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/",
       "status": "ready_for_alfred",
-      "title_it": "JBL elogia Chad Gable: \"È il miglior wrestler al mondo\"",
+      "title_it": "AJ Francis sfida Mike Santana per il titolo mondiale a Slammiversary",
       "translation_chain_attempted": [
         "gemini-3.1-flash-lite"
       ],
       "translation_missing_units": [],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/\nTitolo feed: JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\nTitolo pagina: JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\nDescrizione: JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes. The WWE Hall of Famer was on\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes .\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"The WWE Hall of Famer was on commentary for the May 30 match, where Ludwig Kaiser’s El Grande Americano defeated Chad Gable’s Original El Grande Americano. The loss forced Gable to remove his mask in front of the crowd, ending one of AAA’s biggest storylines of the year.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Fans have been praising the match since it happened, and JBL clearly feels the same way. Speaking on Busted Open , he said the Mexican crowd helped make the moment feel massive.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“Mexican fans are just passionate fans. They love their Lucha Libre and they love their stars. They get into things and they enjoy it. That’s what you saw – them at their very best.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"JBL said the match showed pro wrestling at its highest level and admitted he was blown away by what Gable and Kaiser pulled off.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“And I thought you saw wrestling at its very best. I was absolutely blown away by what they did in the match.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"He gave Kaiser a lot of credit for building the El Grande Americano character the right way, especially by learning the language and understanding the audience in Mexico.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“Kaiser created all this. Kaiser created all this with learning the language, not just learning the language – as we used to say in Texas, he wasn’t learning Spanish, he was learning Mexican. The local dialect language was what he was learning, which was absolutely amazing, what he’s done.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"JBL also pointed out that Gable’s work in Mexico was not the same as playing a goofy heel on WWE television. He said getting real heat in Mexico is a completely different challenge.\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"quote\",\n    \"text\": \"“When Chad first came back, we’re sitting there thinking about it, it’s easy to be a campy heel like he was in WWE with the videos with the varsity club or whatever the heck it was. But then all of a sudden to try to get heat down in Mexico, that’s different level. It’s not even the same business.”\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"JBL then went all in on Gable, calling him the best wrestler in the world and saying the match with Kaiser was on another level.\"\n  },\n  {\n    \"id\": \"b12\",\n    \"type\": \"quote\",\n    \"text\": \"“I think Chad Gable’s the best wrestler in the world, and I don’t think it’s close. That was absolutely amazing what he and Kaiser did.”\"\n  },\n  {\n    \"id\": \"b13\",\n    \"type\": \"text\",\n    \"text\": \"That is huge praise from JBL, especially after a match that already had fans talking. Gable losing the mask was a major moment, but JBL’s comments make it clear he believes both men delivered something bigger than just another stipulation match.\"\n  },\n  {\n    \"id\": \"b14\",\n    \"type\": \"text\",\n    \"text\": \"The El Grande Americano story gave Kaiser and Gable a chance to prove themselves in front of one of wrestling’s toughest crowds, and JBL believes they nailed it.\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"JBL elogia Chad Gable: \\\"È il miglior wrestler al mondo\\\"\",\n  \"excerpt_it\": \"JBL tesse le lodi di Chad Gable e Ludwig Kaiser dopo il cruento Mask vs. Mask match disputato ad AAA Noche de Los Grandes.\",\n  \"translations\": {\n    \"b1\": \"JBL ha elogiato Chad Gable e Ludwig Kaiser dopo il loro cruento Mask vs. Mask match ad AAA Noche de Los Grandes.\",\n    \"b2\": \"Il WWE Hall of Famer era al commento per l'incontro del 30 maggio, in cui l'El Grande Americano di Ludwig Kaiser ha sconfitto l'Original El Grande Americano di Chad Gable. La sconfitta ha costretto Gable a togliersi la maschera davanti al pubblico, ponendo fine a una delle storyline più importanti dell'anno in AAA.\",\n    \"b3\": \"I fan hanno elogiato il match sin dal suo svolgimento e JBL è chiaramente della stessa opinione. Intervenuto a Busted Open, ha affermato che il pubblico messicano ha contribuito a rendere il momento davvero epico.\",\n    \"b4\": \"“I fan messicani sono appassionati, punto. Amano la Lucha Libre e le loro stelle. Si lasciano coinvolgere e si divertono. È quello che abbiamo visto: loro, nel loro massimo splendore.”\",\n    \"b5\": \"JBL ha dichiarato che il match ha mostrato il pro-wrestling ai massimi livelli, ammettendo di essere rimasto sbalordito da quanto realizzato da Gable e Kaiser.\",\n    \"b6\": \"“E penso che abbiate visto il wrestling al suo meglio. Sono rimasto assolutamente sbalordito da ciò che hanno fatto sul ring.”\",\n    \"b7\": \"Ha dato grande merito a Kaiser per aver costruito il personaggio di El Grande Americano nel modo giusto, in particolare imparando la lingua e comprendendo il pubblico in Messico.\",\n    \"b8\": \"“Kaiser ha creato tutto questo. L'ha fatto imparando la lingua, e non solo imparandola: come si diceva in Texas, non stava imparando lo spagnolo, stava imparando il 'messicano'. Ha imparato il dialetto locale, ed è stato assolutamente incredibile quello che ha fatto.”\",\n    \"b9\": \"JBL ha anche sottolineato che il lavoro di Gable in Messico è stato ben diverso dall'interpretare un heel sopra le righe nella televisione WWE. Ha spiegato che ottenere vero 'heat' in Messico è una sfida completamente differente.\",\n    \"b10\": \"“Quando Chad è tornato per la prima volta, ci siamo messi a riflettere: è facile essere un heel scanzonato come lo era in WWE con i video del Varsity Club o qualsiasi diavoleria fosse. Ma cercare di ottenere heat in Messico è un altro livello. Non è nemmeno lo stesso business.”\",\n    \"b11\": \"JBL ha poi scommesso tutto su Gable, definendolo il miglior wrestler al mondo e affermando che il match con Kaiser è stato su un altro pianeta.\",\n    \"b12\": \"“Penso che Chad Gable sia il miglior wrestler al mondo, e non credo sia nemmeno una questione vicina. È stato assolutamente incredibile quello che lui e Kaiser hanno fatto.”\",\n    \"b13\": \"Si tratta di un elogio enorme da parte di JBL, specialmente dopo un match che ha già fatto molto parlare i fan. La perdita della maschera da parte di Gable è stata un momento fondamentale, ma i commenti di JBL chiariscono che, a suo avviso, entrambi gli atleti hanno dato vita a qualcosa di molto più importante di un semplice match con stipulazione.\",\n    \"b14\": \"La storia di El Grande Americano ha dato a Kaiser e Gable la possibilità di mettersi alla prova davanti a uno dei pubblici più esigenti del wrestling, e JBL è convinto che abbiano superato l'esame a pieni voti.\"\n  },\n  \"notes\": []\n}",
-      "translation_unit_count": 14,
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/\nTitolo feed: AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary\nTitolo pagina: AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary\nDescrizione: AJ Francis wants the big spot at TNA Slammiversary, and he’s calling out Mike Santana to make it happen. Santana is currently TNA World Champion, but his\nCategoria suggerita: TNA\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"AJ Francis wants the big spot at TNA Slammiversary, and he’s calling out Mike Santana to make it happen.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Santana is currently TNA World Champion, but his challenger for Slammiversary has not been confirmed yet. Francis made it clear during a new interview wit h Jim Varsallone that he believes he should be the one standing across from Santana in the main event.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Francis pointed to their previous singles match, saying it was so good that it was nominated for Match of the Year despite not even happening on pay-per-view.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“Me versus Mike Santana at Slammiversary for the world title would probably be one of the greatest matches in the history of TNA.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Francis said Santana went from their match to becoming world champion, while he has continued putting on strong matches of his own. In his mind, giving them 25 minutes on the biggest stage would create something fans would not forget.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“I genuinely think if you gave me and Mike Santana 25 minutes for the world title in the main event of Slammiversary, you would walk away from that thinking this is one of the best matches I’ve ever seen in my life and one of the greatest matches of all time.”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"Then Francis took the trash talk up a notch, questioning whether Santana would actually agree to defend the title against him.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"quote\",\n    \"text\": \"“Now, whether Mike Santana actually has the balls to give me a title shot is a whole different thing.”\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"text\",\n    \"text\": \"Francis also claimed other champions have avoided giving him opportunities until he forced the issue, naming Leon Slater and Nic Nemeth as examples.\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"For now, Santana’s Slammiversary opponent is still up in the air, but AJ Francis is making his pitch loud and clear. He wants the TNA World Title match, he wants the main event, and he believes he and Santana could steal the whole show.\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"AJ Francis sfida Mike Santana per il titolo mondiale a Slammiversary\",\n  \"excerpt_it\": \"AJ Francis punta al palcoscenico principale di TNA Slammiversary e ha lanciato una sfida diretta al campione del mondo Mike Santana.\",\n  \"translations\": {\n    \"b2\": \"AJ Francis punta al palcoscenico principale di TNA Slammiversary e ha lanciato una sfida diretta al campione del mondo Mike Santana per far sì che accada.\",\n    \"b3\": \"Santana è l'attuale TNA World Champion, ma il suo sfidante per Slammiversary non è ancora stato confermato. Durante una recente intervista con Jim Varsallone, Francis ha messo in chiaro di ritenere di dover essere lui a contendere il titolo a Santana nel main event.\",\n    \"b4\": \"Francis ha fatto riferimento al loro precedente match singolo, sottolineando come sia stato così valido da essere candidato a Match dell'Anno, nonostante non si sia svolto in un pay-per-view.\",\n    \"b5\": \"“Io contro Mike Santana a Slammiversary con il titolo mondiale in palio sarebbe probabilmente uno dei più grandi incontri nella storia della TNA.”\",\n    \"b6\": \"Francis ha osservato come Santana, dopo il loro incontro, sia diventato campione mondiale, mentre lui ha continuato a offrire ottime prestazioni sul ring. A suo avviso, concedere loro 25 minuti sul palcoscenico più importante creerebbe qualcosa che i fan non potrebbero dimenticare.\",\n    \"b7\": \"“Penso sinceramente che se dessi a me e a Mike Santana 25 minuti per il titolo mondiale nel main event di Slammiversary, uscireste da lì pensando che sia uno dei migliori match che abbiate mai visto in vita vostra e uno dei più grandi incontri di tutti i tempi.”\",\n    \"b8\": \"In seguito, Francis ha alzato il tiro, mettendo in dubbio che Santana abbia il coraggio di accettare di difendere il titolo contro di lui.\",\n    \"b9\": \"“Ora, se poi Mike Santana abbia davvero le palle di concedermi una title shot, è un altro paio di maniche.”\",\n    \"b10\": \"Francis ha inoltre sostenuto che altri campioni abbiano evitato di offrirgli opportunità finché non è stato lui a forzare la mano, citando come esempi Leon Slater e Nic Nemeth.\",\n    \"b11\": \"Per il momento, l'avversario di Santana per Slammiversary rimane un'incognita, ma AJ Francis ha espresso le sue intenzioni in modo chiaro e inequivocabile. Vuole il match per il TNA World Title, vuole il main event e crede che lui e Santana possano rubare la scena.\"\n  },\n  \"notes\": []\n}",
+      "translation_unit_count": 10,
       "translation_used": true
     },
     {
       "bob_notes": [],
-      "body_html": "<p>A causa della concorrenza dei playoff NBA e NHL e dell&#x27;ennesima modifica al sistema di rilevazione Nielsen, &quot;TNA Impact&quot; ha visto i propri numeri calare nell&#x27;ultimo mese, passando da una media costante sopra i 200.000 spettatori a cifre comprese tra i 150.000 e i 190.000. Tuttavia, per l&#x27;episodio del 28 maggio, la TNA è andata vicina a ritornare nel range dei 200.000, pur a scapito del pubblico più giovane.</p>\n<p>Wrestlenomics e Programming Insider riportano che &quot;Impact&quot; ha totalizzato 195.000 spettatori, con uno 0.02 nel fondamentale target demografico 18-49. Il numero totale di spettatori è cresciuto del 10% rispetto ai 178.000 della settimana precedente, ma il dato ancora più incoraggiante riguarda il confronto con la media delle ultime quattro settimane: seppur di poco, il dato è salito del 4% rispetto ai 187.000 di media. Si tratta del secondo miglior risultato di maggio per la TNA, dopo i 196.000 spettatori dell&#x27;episodio del 14 maggio.</p>\n<p>Meno positivo, tuttavia, è il dato relativo al target 18-49. Nonostante l&#x27;aumento del numero totale di spettatori, la fascia demografica chiave ha subito un calo del 33% rispetto allo 0.03 della settimana precedente. Lo scenario non cambia se confrontato con la media delle quattro settimane, anch&#x27;essa pari a 0.03, contro la quale il rating 18-49 ha registrato una flessione analoga del 33%.</p>\n<blockquote>&quot;Impact&quot; ha visto il debutto sul ring di Fabian Aichner, due settimane dopo l&#x27;apparizione dell&#x27;ex star WWE al termine di &quot;Impact&quot;, dove aveva messo nel mirino il nuovo TNA X-Division Champion Cedric Alexander. Il match, il primo per Aichner dal dicembre 2024, ha visto l&#x27;italiano sconfiggere per squalifica Eddie Edwards, compagno di stable di Alexander nel System, dopo che lo stesso Alexander, Bear Bronson e Brian Myers sono intervenuti per attaccare Aichner. Lo show ha visto anche Santino Marella in azione, sconfitto dal suo futuro genero Channing Lorenzo in seguito all&#x27;interferenza di Arianna Grace.&quot;</blockquote>",
-      "category_hint": "TNA",
-      "clean_element_count": 4,
-      "created_at": "2026-06-01T23:52:59.527903+00:00",
+      "body_html": "https://www.youtube.com/watch?v=t94Vw4vvVuE\n\n<p>Per molti, AEW Double or Nothing è stato uno dei migliori eventi di wrestling dell&#x27;anno. Per Jim Ross, tuttavia, è stato un viaggio infernale. Nell&#x27;ultima puntata di &quot;Grilling JR&quot;, Ross ha ripercorso il suo viaggio dall&#x27;Oklahoma a New York per commentare il match tra Jon Moxley e Kyle O&#x27;Reilly a Double or Nothing, rivelando che le cose avrebbero potuto andare decisamente meglio. Le difficoltà sono iniziate sabato mattina, quando Ross era pronto a partire per New York.</p>\n<blockquote>&quot;Avevamo puntato la sveglia&quot;, ha raccontato Ross. &quot;Un autista doveva venirmi a prendere. Improvvisamente, sono caduto. Non cadevo da settimane. Sono caduto e ho battuto il sedere. Ho distrutto il telefono. Non so come sia successo, ma deve esserci un modo... immagino di averlo semplicemente messo in tasca. Diavolo, non lo so. Se avessi avuto il telefono con me, avrei potuto chiedere un po&#x27; di aiuto. Di conseguenza, ho perso il volo.&quot;</blockquote>\n<p>La caduta e il volo perso hanno messo di pessimo umore Ross, che non è mai stato un grande amante dei viaggi aerei, ma è riuscito a riprogrammare il volo e ad arrivare a New York sabato sera, incontrando poi il collega commentatore della AEW Excalibur e il suo agente Barry Bloom per una birra. Purtroppo, la situazione è peggiorata una volta arrivato nella sua stanza d&#x27;albergo.</p>\n<blockquote>&quot;Mi sono sdraiato sul letto, mi sono seduto sul bordo e mi sono rilassato&quot;, ha spiegato Ross. &quot;Beh, non avrei mai immaginato che la schiena mi avrebbe tradito. Così mi sono ritrovato in hotel, bloccato con la schiena, incapace di muovermi. È stata davvero un&#x27;esperienza orribile.&quot;</blockquote>\n<p>Col senno di poi, Ross afferma che avrebbe dovuto parlare con il proprietario della AEW, Tony Khan, della possibilità di saltare lo show, visti i suoi problemi di salute e il fatto che dovesse commentare un solo match. Fortunatamente, nonostante le disavventure, Ross è riuscito a tornare a casa in volo lunedì sera.</p>",
+      "category_hint": "AEW",
+      "clean_element_count": 6,
+      "created_at": "2026-06-02T00:07:05.882175+00:00",
       "diagnostic_stage": "ready_for_alfred",
       "element_counts": {
-        "embed": 0,
+        "embed": 1,
         "heading": 0,
         "image": 0,
-        "quote": 1,
+        "quote": 2,
         "table": 0,
         "text": 3
       },
       "elements": [
         {
           "block_id": "b1",
-          "text": "Thanks to competition from the NBA and NHL Playoffs and another change in Nielsen's rating system, \"TNA Impact\" has seen its numbers take a dip over the last month, going from consistently drawing in the 200K's to the mid to high 100K's. But for the May 28 episode , TNA found themselves close to getting back into the 200K range, though it was at the expense of their younger viewers.",
-          "type": "text"
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=t94Vw4vvVuE"
         },
         {
           "block_id": "b2",
-          "text": "Wrestlenomics and Programming Insider report that \"Impact\" drew 195K total viewers, and a 0.02 in the coveted 18-49 demographic. Total viewership was up 10% from the previous week's 178K , though the better news was the number compared to the four week average. While only up slightly, the number did rise 4% from 187K. It's the second highest rating TNA has drawn in May, following the May 14 episode bringing in 196K total viewers .",
+          "text": "For many, AEW Double or Nothing was one of the greatest wrestling events of the year. For Jim Ross, however, it was the trip from hell. On the latest \"Grilling JR,\" Ross documented his trip from Oklahoma to New York City to call the Jon Moxley vs. Kyle O'Reilly match at Double or Nothing , and revealed the trip could've gone better. The hardship started on Saturday morning, when Ross was set to travel to New York.",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "text": "Less positive, however, was the 18-49 number. Despite a rise in total viewership, the key demo saw a decline, falling 33% from the previous week's 0.03. The song remained the same when it came to the four week average, which was also 0.03, with the 18-49 number falling a similar 33% against that.",
-          "type": "text"
+          "source_tag": "p",
+          "text": "\"We have the alarm set,\" Ross said. \"A driver was going to pick me up. And all of a sudden, I fell. I hadn't had a fall in weeks. So I fell and busted my ass. I wasted my phone. I don't know how you do it but there's got to be a way...I guess I just put it in my pocket. Hell I don't know. If I had my phone with me, I could've gotten a little bit of help. So I, as a result of that, I missed my flight.\"",
+          "type": "quote"
         },
         {
           "block_id": "b4",
+          "text": "The fall and missing his flight put Ross, who isn't a fan of flying to begin with, in a foul mood, but he was able to reschedule and arrive to New York on Saturday night, later having a beer with fellow AEW announcer Excalibur and his agent Barry Bloom. Unfortunately, things got worse when Ross made his way to his hotel room.",
+          "type": "text"
+        },
+        {
+          "block_id": "b5",
           "source_tag": "p",
-          "text": "\"Impact\" featured the in-ring debut of Fabian Aichner, two weeks after the former WWE star appeared at the end of \"Impact,\" confronting new TNA X-Division Champion Cedric Alexander. The match, Aichner's first since December 2024, saw the Italian defeat Alexander's System stablemate and long-time TNA star Eddie Edwards by disqualification, after Alexander, Bear Bronson, and Brian Myers ran down to attack Aichner. The show also featured Santino Marella in action, losing a match to his future son-in-law Channing Lorenzo, after interference from Arianna Grace.",
+          "text": "\"I laid on the bed, put my ass on the edge of the bed, and just relaxed,\" Ross said. \"Well, little did I know my back was going to go out on me. So now I'm in my hotel, with my back out, and I can't function. So it was just a horrible experience.\"",
           "type": "quote"
+        },
+        {
+          "block_id": "b6",
+          "text": "In hindsight, Ross says he would've talked to AEW owner Tony Khan about skipping the show, given his health issues and the fact he only called one match. Fortunately, despite the hardships, Ross was able to fly home on Monday night.",
+          "type": "text"
         }
       ],
-      "excerpt_it": "TNA Impact sfiora nuovamente la soglia dei 200.000 spettatori, ma continua a soffrire nel target demografico 18-49 a causa della concorrenza dei playoff NBA e NHL.",
+      "excerpt_it": "Il leggendario commentatore della AEW, Jim Ross, ha svelato i retroscena movimentati che hanno caratterizzato il suo viaggio verso l'evento Double or Nothing dello scorso weekend.",
       "extraction_diagnostics": {
-        "candidate_node_count": 11,
-        "clean_element_count": 4,
+        "candidate_node_count": 13,
+        "clean_element_count": 6,
         "dom_noise_reduction_enabled": false,
-        "embed_count": 0,
+        "embed_count": 1,
         "global_embed_recovery_enabled": false,
-        "quote_count": 1,
-        "raw_element_count": 5,
+        "quote_count": 2,
+        "raw_element_count": 8,
         "removed_by_node_count": 0,
-        "removed_by_sanitize_count": 1,
+        "removed_by_sanitize_count": 2,
         "root_name": "article",
-        "root_text_chars": 1803,
+        "root_text_chars": 1903,
         "stage": "complete",
         "table_count": 0
       },
-      "fetched_html_chars": 50362,
-      "menzo_score": 24,
+      "fetched_html_chars": 50571,
+      "menzo_score": 53,
       "meta": {
-        "description": "TNA Impact's total viewership reaches its second highest total in May, but continues to struggle in the 18-49 demo going against the NBA and NHL Playoffs",
-        "featured_image": "https://www.wrestlinginc.com/img/gallery/tna-impact-ratings-viewership-report-5282026/l-intro-1780350939.jpg",
-        "source_title": "TNA Impact Ratings & Viewership Report: 5/28/2026 - Wrestling Inc."
+        "description": "AEW announcer Jim Ross details both the health and travel struggles he suffered through when trying to make AEW Double or Nothing 2026 last weekend",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/jim-ross-details-health-travel-struggles-surrounding-aew-double-or-nothing-2026/l-intro-1780347066.jpg",
+        "source_title": "Jim Ross Details Health & Travel Struggles Surrounding AEW Double Or Nothing 2026 - Wrestling Inc."
       },
-      "raw_element_count": 5,
+      "raw_element_count": 8,
       "raw_elements_preview": [
         {
-          "alt": "Fabian Aichner portraying Giovanni Vinci",
-          "type": "image",
-          "url": "https://www.wrestlinginc.com/img/gallery/tna-impact-ratings-viewership-report-5282026/intro-1780350939.jpg"
+          "block_id": "b1",
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=t94Vw4vvVuE"
         },
         {
-          "block_id": "b1",
-          "text": "Thanks to competition from the NBA and NHL Playoffs and another change in Nielsen's rating system, \"TNA Impact\" has seen its numbers take a dip over the last month, going from consistently drawing in the 200K's to the mid to high 100K's. But for the May 28 episode , TNA found themselves close to getting back into the 200K range, though it was at the expense of their younger viewers.",
-          "type": "text"
+          "alt": "Jim Ross looking weary",
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/jim-ross-details-health-travel-struggles-surrounding-aew-double-or-nothing-2026/intro-1780347066.jpg"
+        },
+        {
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://www.youtube.com/watch?v=t94Vw4vvVuE"
         },
         {
           "block_id": "b2",
-          "text": "Wrestlenomics and Programming Insider report that \"Impact\" drew 195K total viewers, and a 0.02 in the coveted 18-49 demographic. Total viewership was up 10% from the previous week's 178K , though the better news was the number compared to the four week average. While only up slightly, the number did rise 4% from 187K. It's the second highest rating TNA has drawn in May, following the May 14 episode bringing in 196K total viewers .",
+          "text": "For many, AEW Double or Nothing was one of the greatest wrestling events of the year. For Jim Ross, however, it was the trip from hell. On the latest \"Grilling JR,\" Ross documented his trip from Oklahoma to New York City to call the Jon Moxley vs. Kyle O'Reilly match at Double or Nothing , and revealed the trip could've gone better. The hardship started on Saturday morning, when Ross was set to travel to New York.",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "text": "Less positive, however, was the 18-49 number. Despite a rise in total viewership, the key demo saw a decline, falling 33% from the previous week's 0.03. The song remained the same when it came to the four week average, which was also 0.03, with the 18-49 number falling a similar 33% against that.",
-          "type": "text"
+          "source_tag": "p",
+          "text": "\"We have the alarm set,\" Ross said. \"A driver was going to pick me up. And all of a sudden, I fell. I hadn't had a fall in weeks. So I fell and busted my ass. I wasted my phone. I don't know how you do it but there's got to be a way...I guess I just put it in my pocket. Hell I don't know. If I had my phone with me, I could've gotten a little bit of help. So I, as a result of that, I missed my flight.\"",
+          "type": "quote"
         },
         {
           "block_id": "b4",
+          "text": "The fall and missing his flight put Ross, who isn't a fan of flying to begin with, in a foul mood, but he was able to reschedule and arrive to New York on Saturday night, later having a beer with fellow AEW announcer Excalibur and his agent Barry Bloom. Unfortunately, things got worse when Ross made his way to his hotel room.",
+          "type": "text"
+        },
+        {
+          "block_id": "b5",
           "source_tag": "p",
-          "text": "\"Impact\" featured the in-ring debut of Fabian Aichner, two weeks after the former WWE star appeared at the end of \"Impact,\" confronting new TNA X-Division Champion Cedric Alexander. The match, Aichner's first since December 2024, saw the Italian defeat Alexander's System stablemate and long-time TNA star Eddie Edwards by disqualification, after Alexander, Bear Bronson, and Brian Myers ran down to attack Aichner. The show also featured Santino Marella in action, losing a match to his future son-in-law Channing Lorenzo, after interference from Arianna Grace.",
+          "text": "\"I laid on the bed, put my ass on the edge of the bed, and just relaxed,\" Ross said. \"Well, little did I know my back was going to go out on me. So now I'm in my hotel, with my back out, and I can't function. So it was just a horrible experience.\"",
           "type": "quote"
+        },
+        {
+          "block_id": "b6",
+          "text": "In hindsight, Ross says he would've talked to AEW owner Tony Khan about skipping the show, given his health issues and the fact he only called one match. Fortunately, despite the hardships, Ross was able to fly home on Monday night.",
+          "type": "text"
         }
       ],
-      "removed_before_gemini": 1,
+      "removed_before_gemini": 2,
       "removed_elements_debug": [
         {
-          "index": 1,
+          "index": 2,
           "item": {
-            "alt": "Fabian Aichner portraying Giovanni Vinci",
+            "alt": "Jim Ross looking weary",
             "type": "image",
-            "url": "https://www.wrestlinginc.com/img/gallery/tna-impact-ratings-viewership-report-5282026/intro-1780350939.jpg"
+            "url": "https://www.wrestlinginc.com/img/gallery/jim-ross-details-health-travel-struggles-surrounding-aew-double-or-nothing-2026/intro-1780347066.jpg"
           },
           "reason": "duplicate_featured_image"
+        },
+        {
+          "index": 3,
+          "item": {
+            "source_tag": "div",
+            "type": "embed",
+            "url": "https://www.youtube.com/watch?v=t94Vw4vvVuE"
+          },
+          "reason": "duplicate_or_empty_embed"
         }
       ],
       "source": "wrestlinginc",
       "source_html_contains_embed_hint": true,
-      "source_title": "TNA Impact Ratings & Viewership Report: 5/28/2026",
-      "source_url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/",
+      "source_title": "Jim Ross Details Health & Travel Struggles Surrounding AEW Double Or Nothing 2026",
+      "source_url": "https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles/",
       "status": "ready_for_alfred",
-      "title_it": "Report rating e ascolti di TNA Impact (28 maggio 2026)",
+      "title_it": "Jim Ross racconta le difficoltà di salute e viaggio per AEW Double or Nothing 2026",
       "translation_chain_attempted": [
         "gemini-3.1-flash-lite"
       ],
       "translation_missing_units": [],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/\nTitolo feed: TNA Impact Ratings & Viewership Report: 5/28/2026\nTitolo pagina: TNA Impact Ratings & Viewership Report: 5/28/2026 - Wrestling Inc.\nDescrizione: TNA Impact's total viewership reaches its second highest total in May, but continues to struggle in the 18-49 demo going against the NBA and NHL Playoffs\nCategoria suggerita: TNA\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Thanks to competition from the NBA and NHL Playoffs and another change in Nielsen's rating system, \\\"TNA Impact\\\" has seen its numbers take a dip over the last month, going from consistently drawing in the 200K's to the mid to high 100K's. But for the May 28 episode , TNA found themselves close to getting back into the 200K range, though it was at the expense of their younger viewers.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Wrestlenomics and Programming Insider report that \\\"Impact\\\" drew 195K total viewers, and a 0.02 in the coveted 18-49 demographic. Total viewership was up 10% from the previous week's 178K , though the better news was the number compared to the four week average. While only up slightly, the number did rise 4% from 187K. It's the second highest rating TNA has drawn in May, following the May 14 episode bringing in 196K total viewers .\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Less positive, however, was the 18-49 number. Despite a rise in total viewership, the key demo saw a decline, falling 33% from the previous week's 0.03. The song remained the same when it came to the four week average, which was also 0.03, with the 18-49 number falling a similar 33% against that.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"Impact\\\" featured the in-ring debut of Fabian Aichner, two weeks after the former WWE star appeared at the end of \\\"Impact,\\\" confronting new TNA X-Division Champion Cedric Alexander. The match, Aichner's first since December 2024, saw the Italian defeat Alexander's System stablemate and long-time TNA star Eddie Edwards by disqualification, after Alexander, Bear Bronson, and Brian Myers ran down to attack Aichner. The show also featured Santino Marella in action, losing a match to his future son-in-law Channing Lorenzo, after interference from Arianna Grace.\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"Report rating e ascolti di TNA Impact (28 maggio 2026)\",\n  \"excerpt_it\": \"TNA Impact sfiora nuovamente la soglia dei 200.000 spettatori, ma continua a soffrire nel target demografico 18-49 a causa della concorrenza dei playoff NBA e NHL.\",\n  \"translations\": {\n    \"b1\": \"A causa della concorrenza dei playoff NBA e NHL e dell'ennesima modifica al sistema di rilevazione Nielsen, \\\"TNA Impact\\\" ha visto i propri numeri calare nell'ultimo mese, passando da una media costante sopra i 200.000 spettatori a cifre comprese tra i 150.000 e i 190.000. Tuttavia, per l'episodio del 28 maggio, la TNA è andata vicina a ritornare nel range dei 200.000, pur a scapito del pubblico più giovane.\",\n    \"b2\": \"Wrestlenomics e Programming Insider riportano che \\\"Impact\\\" ha totalizzato 195.000 spettatori, con uno 0.02 nel fondamentale target demografico 18-49. Il numero totale di spettatori è cresciuto del 10% rispetto ai 178.000 della settimana precedente, ma il dato ancora più incoraggiante riguarda il confronto con la media delle ultime quattro settimane: seppur di poco, il dato è salito del 4% rispetto ai 187.000 di media. Si tratta del secondo miglior risultato di maggio per la TNA, dopo i 196.000 spettatori dell'episodio del 14 maggio.\",\n    \"b3\": \"Meno positivo, tuttavia, è il dato relativo al target 18-49. Nonostante l'aumento del numero totale di spettatori, la fascia demografica chiave ha subito un calo del 33% rispetto allo 0.03 della settimana precedente. Lo scenario non cambia se confrontato con la media delle quattro settimane, anch'essa pari a 0.03, contro la quale il rating 18-49 ha registrato una flessione analoga del 33%.\",\n    \"b4\": \"\\\"Impact\\\" ha visto il debutto sul ring di Fabian Aichner, due settimane dopo l'apparizione dell'ex star WWE al termine di \\\"Impact\\\", dove aveva messo nel mirino il nuovo TNA X-Division Champion Cedric Alexander. Il match, il primo per Aichner dal dicembre 2024, ha visto l'italiano sconfiggere per squalifica Eddie Edwards, compagno di stable di Alexander nel System, dopo che lo stesso Alexander, Bear Bronson e Brian Myers sono intervenuti per attaccare Aichner. Lo show ha visto anche Santino Marella in azione, sconfitto dal suo futuro genero Channing Lorenzo in seguito all'interferenza di Arianna Grace.\\\"\"\n  },\n  \"notes\": []\n}",
-      "translation_unit_count": 4,
-      "translation_used": true
-    },
-    {
-      "bob_notes": [],
-      "body_html": "<p>Sono disponibili i dati di ascolto dell&#x27;episodio di AEW Collision del 27 maggio 2026 su TBS, con lo show che ha registrato un importante balzo rispetto alla settimana precedente.</p>\n<p>Secondo Programming Insider, AEW Collision del 27 maggio 2026 ha totalizzato 498.000 spettatori su TBS, con un rating di 0.05 nella fascia demografica chiave P18–49. Per fare un confronto, l&#x27;episodio del 20 maggio 2026 aveva ottenuto 413.000 spettatori con un rating di 0.06 nella stessa fascia demografica, segnando un aumento di ↑ 85.000 spettatori e un calo di ↓ 0.01 nel demo.</p>\n<p>Rispetto alla stessa settimana del 2025, AEW Collision aveva totalizzato 504.000 spettatori e un rating demo di 0.18 il 31 maggio 2025, contro i 498.000 spettatori e il rating di 0.05 del 27 maggio 2026. Ciò rappresenta una variazione su base annua di ↓ -1.2% negli ascolti e di ↓ -72.2% nel demo.</p>\n<h3>Confronto ascolti AEW Collision settimana su settimana</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>20 maggio 2026</th><th>27 maggio 2026</th><th>Variazione</th><th>% Variazione</th></tr><tr><td>Spettatori totali</td><td>413.000</td><td>498.000</td><td>↑ +85.000</td><td>↑ +20.6%</td></tr><tr><td>Demo P18–49</td><td>0.06</td><td>0.05</td><td>↓ -0.01</td><td>↓ -16.7%</td></tr></table>\n<h3>Prestazioni AEW Collision anno in corso (2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media 2026</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>421.684</td><td>498.000</td><td>↑ 76.316</td><td>↑ 18.1%</td></tr><tr><td>Media demo P18–49</td><td>0.08</td><td>0.05</td><td>↓ -0.03</td><td>↓ -34%</td></tr></table>\n<h3>Prestazioni AEW Collision mese corrente (maggio 2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media mensile</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>396.800</td><td>498.000</td><td>↑ 101.200</td><td>↑ 25.5%</td></tr><tr><td>Media demo P18–49</td><td>0.05</td><td>0.05</td><td>↓ 0.00</td><td>↓ -7.4%</td></tr></table>\n<h3>Media mobile 4 settimane AEW Collision</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media 4 settimane</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>409.250</td><td>498.000</td><td>↑ 88.750</td><td>↑ 21.7%</td></tr><tr><td>Media demo P18–49</td><td>0.05</td><td>0.05</td><td>↓ 0.00</td><td>↓ -4.8%</td></tr></table>\n<h3>Riepilogo prestazioni ultimi 12 mesi</h3>\n<table class=\"owtv-data-table\"><tr><th>Media spettatori</th><th>354.761</th></tr><tr><td>Picco ascolti</td><td>616.000 (22 marzo 2026)</td></tr><tr><td>Ascolto minimo</td><td>184.000 (20 settembre 2025)</td></tr><tr><td>Media demo 18–49</td><td>0.07</td></tr><tr><td>Settimane sopra 1.000.000 spettatori</td><td>0</td></tr><tr><td>Settimane sotto 1.000.000 spettatori</td><td>46</td></tr></table>\n<h3>Range ascolti (ultimi 12 mesi)</h3>\n<table class=\"owtv-data-table\"><tr><th>Massimo</th><th>22 marzo 2026</th><th>616.000</th></tr><tr><td>Minimo</td><td>20 settembre 2025</td><td>184.000</td></tr><tr><td>Differenza</td><td>—</td><td>432.000</td></tr></table>\n<table class=\"owtv-data-table\"><tr><th>Settimana</th><th>Spettatori</th><th>Demo 18–49</th></tr><tr><td>27 maggio 2026</td><td>498.000</td><td>0.05</td></tr><tr><td>20 maggio 2026</td><td>413.000</td><td>0.06</td></tr><tr><td>16 maggio 2026</td><td>384.000</td><td>0.05</td></tr><tr><td>9 maggio 2026</td><td>342.000</td><td>0.05</td></tr></table>\n<p>Media 4 settimane: 409.250 spettatori</p>\n<h3>Maggiori variazioni settimanali negli ascolti (ultimi 12 mesi)</h3>\n<table class=\"owtv-data-table\"><tr><th>Maggior aumento</th><th>31 gennaio 2026</th><th>+239.000</th></tr><tr><td>Maggior calo</td><td>25 ottobre 2025</td><td>-172.000</td></tr></table>\n<h3>Confronto AEW Collision anno su anno (2025 vs 2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>31 maggio 2025</th><th>27 maggio 2026</th><th>% Variazione</th></tr><tr><td>Spettatori totali</td><td>504.000</td><td>498.000</td><td>↓ -1.2%</td></tr><tr><td>Demo P18–49</td><td>0.18</td><td>0.05</td><td>↓ -72.2%</td></tr></table>\n<p>Ascolto massimo del 2026: 616.000 (22 marzo 2026) Ascolto minimo del 2026: 253.000 (24 gennaio 2026)</p>\n<p>Questi dati riflettono esclusivamente l&#x27;ascolto televisivo lineare su TBS e non includono quello in streaming o digitale. Ringside News continuerà a monitorare AEW Collision mentre la compagnia si avvicina al suo prossimo grande evento dal vivo.</p>",
-      "category_hint": "AEW",
-      "clean_element_count": 23,
-      "created_at": "2026-06-01T23:53:01.977148+00:00",
-      "diagnostic_stage": "ready_for_alfred",
-      "element_counts": {
-        "embed": 0,
-        "heading": 8,
-        "image": 0,
-        "quote": 0,
-        "table": 9,
-        "text": 6
-      },
-      "elements": [
-        {
-          "block_id": "b1",
-          "text": "The latest audience figures are available for the May 27, 2026 episode of AEW Collision on TBS, with the show delivering a major week-to-week surge.",
-          "type": "text"
-        },
-        {
-          "block_id": "b2",
-          "text": "According to Programming Insider , AEW Collision on May 27, 2026 drew 498,000 viewers on TBS, with a 0.05 rating in the key P18–49 demographic. For comparison, the May 20, 2026 episode drew 413,000 viewers with a 0.06 rating in the key P18–49 demographic, an increase of ↑ 85,000 viewers and down by ↓ 0.01 in the demo.",
-          "type": "text"
-        },
-        {
-          "block_id": "b3",
-          "text": "Compared to the same week in 2025, AEW Collision drew 504,000 viewers and a 0.18 demo rating on May 31, 2025, versus 498,000 viewers and a 0.05 demo rating on May 27, 2026. That represents a year-over-year change of ↓ -1.2% in viewership and ↓ -72.2% in the demo.",
-          "type": "text"
-        },
-        {
-          "block_id": "b4",
-          "level": 3,
-          "text": "AEW Collision Week-to-Week Viewership Comparison",
-          "type": "heading"
-        },
-        {
-          "block_id": "b5",
-          "markdown": "Metric | May 20, 2026 | May 27, 2026 | Change | % Change\n--- | --- | --- | --- | ---\nTotal Viewers | 413,000 | 498,000 | ↑ +85,000 | ↑ +20.6%\nP18–49 Demo | 0.06 | 0.05 | ↓ -0.01 | ↓ -16.7%",
-          "rows": [
-            [
-              "Metric",
-              "May 20, 2026",
-              "May 27, 2026",
-              "Change",
-              "% Change"
-            ],
-            [
-              "Total Viewers",
-              "413,000",
-              "498,000",
-              "↑ +85,000",
-              "↑ +20.6%"
-            ],
-            [
-              "P18–49 Demo",
-              "0.06",
-              "0.05",
-              "↓ -0.01",
-              "↓ -16.7%"
-            ]
-          ],
-          "type": "table"
-        },
-        {
-          "block_id": "b6",
-          "level": 3,
-          "text": "AEW Collision Year-to-Date Performance (2026)",
-          "type": "heading"
-        },
-        {
-          "block_id": "b7",
-          "markdown": "Metric | 2026 Average | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 421,684 | 498,000 | ↑ 76,316 | ↑ 18.1%\nP18–49 Demo Avg | 0.08 | 0.05 | ↓ -0.03 | ↓ -34%",
-          "rows": [
-            [
-              "Metric",
-              "2026 Average",
-              "Current Episode",
-              "Diff",
-              "%"
-            ],
-            [
-              "Viewers",
-              "421,684",
-              "498,000",
-              "↑ 76,316",
-              "↑ 18.1%"
-            ],
-            [
-              "P18–49 Demo Avg",
-              "0.08",
-              "0.05",
-              "↓ -0.03",
-              "↓ -34%"
-            ]
-          ],
-          "type": "table"
-        },
-        {
-          "block_id": "b8",
-          "level": 3,
-          "text": "AEW Collision Month-to-Date Performance (May 2026)",
-          "type": "heading"
-        },
-        {
-          "block_id": "b9",
-          "markdown": "Metric | Month Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 396,800 | 498,000 | ↑ 101,200 | ↑ 25.5%\nP18–49 Demo Avg | 0.05 | 0.05 | ↓ 0.00 | ↓ -7.4%",
-          "rows": [
-            [
-              "Metric",
-              "Month Avg",
-              "Current Episode",
-              "Diff",
-              "%"
-            ],
-            [
-              "Viewers",
-              "396,800",
-              "498,000",
-              "↑ 101,200",
-              "↑ 25.5%"
-            ],
-            [
-              "P18–49 Demo Avg",
-              "0.05",
-              "0.05",
-              "↓ 0.00",
-              "↓ -7.4%"
-            ]
-          ],
-          "type": "table"
-        },
-        {
-          "block_id": "b10",
-          "level": 3,
-          "text": "AEW Collision 4-Week Rolling Average",
-          "type": "heading"
-        },
-        {
-          "block_id": "b11",
-          "markdown": "Metric | 4 Week Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 409,250 | 498,000 | ↑ 88,750 | ↑ 21.7%\nP18–49 Demo Avg | 0.05 | 0.05 | ↓ 0.00 | ↓ -4.8%",
-          "rows": [
-            [
-              "Metric",
-              "4 Week Avg",
-              "Current Episode",
-              "Diff",
-              "%"
-            ],
-            [
-              "Viewers",
-              "409,250",
-              "498,000",
-              "↑ 88,750",
-              "↑ 21.7%"
-            ],
-            [
-              "P18–49 Demo Avg",
-              "0.05",
-              "0.05",
-              "↓ 0.00",
-              "↓ -4.8%"
-            ]
-          ],
-          "type": "table"
-        },
-        {
-          "block_id": "b12",
-          "level": 3,
-          "text": "Last 12 Months Performance Summary",
-          "type": "heading"
-        },
-        {
-          "block_id": "b13",
-          "markdown": "Average Viewership | 354,761\n--- | ---\nHighest Viewership | 616,000 (March 22, 2026)\nLowest Viewership | 184,000 (September 20, 2025)\nAverage 18–49 Demo | 0.07\nWeeks Above 1,000,000 Viewers | 0\nWeeks Below 1,000,000 Viewers | 46",
-          "rows": [
-            [
-              "Average Viewership",
-              "354,761"
-            ],
-            [
-              "Highest Viewership",
-              "616,000 (March 22, 2026)"
-            ],
-            [
-              "Lowest Viewership",
-              "184,000 (September 20, 2025)"
-            ],
-            [
-              "Average 18–49 Demo",
-              "0.07"
-            ],
-            [
-              "Weeks Above 1,000,000 Viewers",
-              "0"
-            ],
-            [
-              "Weeks Below 1,000,000 Viewers",
-              "46"
-            ]
-          ],
-          "type": "table"
-        },
-        {
-          "block_id": "b14",
-          "level": 3,
-          "text": "Viewership Range (Last 12 Months)",
-          "type": "heading"
-        },
-        {
-          "block_id": "b15",
-          "markdown": "Highest | March 22, 2026 | 616,000\n--- | --- | ---\nLowest | September 20, 2025 | 184,000\nDifference | — | 432,000",
-          "rows": [
-            [
-              "Highest",
-              "March 22, 2026",
-              "616,000"
-            ],
-            [
-              "Lowest",
-              "September 20, 2025",
-              "184,000"
-            ],
-            [
-              "Difference",
-              "—",
-              "432,000"
-            ]
-          ],
-          "type": "table"
-        },
-        {
-          "block_id": "b16",
-          "markdown": "Week | Viewers | 18–49 Demo\n--- | --- | ---\nMay 27, 2026 | 498,000 | 0.05\nMay 20, 2026 | 413,000 | 0.06\nMay 16, 2026 | 384,000 | 0.05\nMay 9, 2026 | 342,000 | 0.05",
-          "rows": [
-            [
-              "Week",
-              "Viewers",
-              "18–49 Demo"
-            ],
-            [
-              "May 27, 2026",
-              "498,000",
-              "0.05"
-            ],
-            [
-              "May 20, 2026",
-              "413,000",
-              "0.06"
-            ],
-            [
-              "May 16, 2026",
-              "384,000",
-              "0.05"
-            ],
-            [
-              "May 9, 2026",
-              "342,000",
-              "0.05"
-            ]
-          ],
-          "type": "table"
-        },
-        {
-          "block_id": "b17",
-          "text": "4-Week Average: 409,250 viewers",
-          "type": "text"
-        },
-        {
-          "block_id": "b18",
-          "level": 3,
-          "text": "Largest Weekly Viewership Changes (Last 12 Months)",
-          "type": "heading"
-        },
-        {
-          "block_id": "b19",
-          "markdown": "Largest Increase | January 31, 2026 | +239,000\n--- | --- | ---\nLargest Drop | October 25, 2025 | -172,000",
-          "rows": [
-            [
-              "Largest Increase",
-              "January 31, 2026",
-              "+239,000"
-            ],
-            [
-              "Largest Drop",
-              "October 25, 2025",
-              "-172,000"
-            ]
-          ],
-          "type": "table"
-        },
-        {
-          "block_id": "b20",
-          "level": 3,
-          "text": "AEW Collision Year-over-Year Comparison (2025 vs 2026)",
-          "type": "heading"
-        },
-        {
-          "block_id": "b21",
-          "markdown": "Metric | May 31, 2025 | May 27, 2026 | % Change\n--- | --- | --- | ---\nTotal Viewers | 504,000 | 498,000 | ↓ -1.2%\nP18–49 Demo | 0.18 | 0.05 | ↓ -72.2%",
-          "rows": [
-            [
-              "Metric",
-              "May 31, 2025",
-              "May 27, 2026",
-              "% Change"
-            ],
-            [
-              "Total Viewers",
-              "504,000",
-              "498,000",
-              "↓ -1.2%"
-            ],
-            [
-              "P18–49 Demo",
-              "0.18",
-              "0.05",
-              "↓ -72.2%"
-            ]
-          ],
-          "type": "table"
-        },
-        {
-          "block_id": "b22",
-          "text": "Highest Viewership of 2026: 616,000 ( March 22, 2026 ) Lowest Viewership of 2026: 253,000 ( January 24, 2026 )",
-          "type": "text"
-        },
-        {
-          "block_id": "b23",
-          "text": "These figures reflect only linear TV viewership on TBS and do not include streaming or digital viewership. Ringside News will continue to monitor AEW Collision as the company builds toward its next major live event.",
-          "type": "text"
-        }
-      ],
-      "excerpt_it": "Resi noti i dati di ascolto dell'episodio di AEW Collision del 27 maggio 2026 su TBS: lo show registra un significativo incremento settimanale.",
-      "extraction_diagnostics": {
-        "candidate_node_count": 127,
-        "clean_element_count": 23,
-        "dom_noise_reduction_enabled": false,
-        "embed_count": 0,
-        "global_embed_recovery_enabled": false,
-        "quote_count": 0,
-        "raw_element_count": 24,
-        "removed_by_node_count": 13,
-        "removed_by_sanitize_count": 1,
-        "root_name": "article",
-        "root_text_chars": 3643,
-        "stage": "complete",
-        "table_count": 9
-      },
-      "fetched_html_chars": 488784,
-      "menzo_score": 24,
-      "meta": {
-        "description": "The latest audience figures are available for the May 27, 2026 episode of AEW Collision on TBS, with the show delivering a major week-to-week surge.",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Collision-Massive-Increase.jpg",
-        "source_title": "AEW Collision Viewership Sees Massive Increase on May 27, 2026"
-      },
-      "raw_element_count": 24,
-      "raw_elements_preview": [
-        {
-          "block_id": "b1",
-          "text": "The latest audience figures are available for the May 27, 2026 episode of AEW Collision on TBS, with the show delivering a major week-to-week surge.",
-          "type": "text"
-        },
-        {
-          "block_id": "b2",
-          "text": "According to Programming Insider , AEW Collision on May 27, 2026 drew 498,000 viewers on TBS, with a 0.05 rating in the key P18–49 demographic. For comparison, the May 20, 2026 episode drew 413,000 viewers with a 0.06 rating in the key P18–49 demographic, an increase of ↑ 85,000 viewers and down by ↓ 0.01 in the demo.",
-          "type": "text"
-        },
-        {
-          "block_id": "b3",
-          "text": "Compared to the same week in 2025, AEW Collision drew 504,000 viewers and a 0.18 demo rating on May 31, 2025, versus 498,000 viewers and a 0.05 demo rating on May 27, 2026. That represents a year-over-year change of ↓ -1.2% in viewership and ↓ -72.2% in the demo.",
-          "type": "text"
-        },
-        {
-          "block_id": "b4",
-          "level": 3,
-          "text": "AEW Collision Week-to-Week Viewership Comparison",
-          "type": "heading"
-        },
-        {
-          "block_id": "b5",
-          "markdown": "Metric | May 20, 2026 | May 27, 2026 | Change | % Change\n--- | --- | --- | --- | ---\nTotal Viewers | 413,000 | 498,000 | ↑ +85,000 | ↑ +20.6%\nP18–49 Demo | 0.06 | 0.05 | ↓ -0.01 | ↓ -16.7%",
-          "rows": [
-            [
-              "Metric",
-              "May 20, 2026",
-              "May 27, 2026",
-              "Change",
-              "% Change"
-            ],
-            [
-              "Total Viewers",
-              "413,000",
-              "498,000",
-              "↑ +85,000",
-              "↑ +20.6%"
-            ],
-            [
-              "P18–49 Demo",
-              "0.06",
-              "0.05",
-              "↓ -0.01",
-              "↓ -16.7%"
-            ]
-          ],
-          "type": "table"
-        },
-        {
-          "block_id": "b6",
-          "level": 3,
-          "text": "AEW Collision Year-to-Date Performance (2026)",
-          "type": "heading"
-        },
-        {
-          "block_id": "b7",
-          "markdown": "Metric | 2026 Average | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 421,684 | 498,000 | ↑ 76,316 | ↑ 18.1%\nP18–49 Demo Avg | 0.08 | 0.05 | ↓ -0.03 | ↓ -34%",
-          "rows": [
-            [
-              "Metric",
-              "2026 Average",
-              "Current Episode",
-              "Diff",
-              "%"
-            ],
-            [
-              "Viewers",
-              "421,684",
-              "498,000",
-              "↑ 76,316",
-              "↑ 18.1%"
-            ],
-            [
-              "P18–49 Demo Avg",
-              "0.08",
-              "0.05",
-              "↓ -0.03",
-              "↓ -34%"
-            ]
-          ],
-          "type": "table"
-        },
-        {
-          "block_id": "b8",
-          "level": 3,
-          "text": "AEW Collision Month-to-Date Performance (May 2026)",
-          "type": "heading"
-        },
-        {
-          "block_id": "b9",
-          "markdown": "Metric | Month Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 396,800 | 498,000 | ↑ 101,200 | ↑ 25.5%\nP18–49 Demo Avg | 0.05 | 0.05 | ↓ 0.00 | ↓ -7.4%",
-          "rows": [
-            [
-              "Metric",
-              "Month Avg",
-              "Current Episode",
-              "Diff",
-              "%"
-            ],
-            [
-              "Viewers",
-              "396,800",
-              "498,000",
-              "↑ 101,200",
-              "↑ 25.5%"
-            ],
-            [
-              "P18–49 Demo Avg",
-              "0.05",
-              "0.05",
-              "↓ 0.00",
-              "↓ -7.4%"
-            ]
-          ],
-          "type": "table"
-        },
-        {
-          "block_id": "b10",
-          "level": 3,
-          "text": "AEW Collision 4-Week Rolling Average",
-          "type": "heading"
-        },
-        {
-          "block_id": "b11",
-          "markdown": "Metric | 4 Week Avg | Current Episode | Diff | %\n--- | --- | --- | --- | ---\nViewers | 409,250 | 498,000 | ↑ 88,750 | ↑ 21.7%\nP18–49 Demo Avg | 0.05 | 0.05 | ↓ 0.00 | ↓ -4.8%",
-          "rows": [
-            [
-              "Metric",
-              "4 Week Avg",
-              "Current Episode",
-              "Diff",
-              "%"
-            ],
-            [
-              "Viewers",
-              "409,250",
-              "498,000",
-              "↑ 88,750",
-              "↑ 21.7%"
-            ],
-            [
-              "P18–49 Demo Avg",
-              "0.05",
-              "0.05",
-              "↓ 0.00",
-              "↓ -4.8%"
-            ]
-          ],
-          "type": "table"
-        },
-        {
-          "block_id": "b12",
-          "level": 3,
-          "text": "Last 12 Months Performance Summary",
-          "type": "heading"
-        },
-        {
-          "block_id": "b13",
-          "markdown": "Average Viewership | 354,761\n--- | ---\nHighest Viewership | 616,000 (March 22, 2026)\nLowest Viewership | 184,000 (September 20, 2025)\nAverage 18–49 Demo | 0.07\nWeeks Above 1,000,000 Viewers | 0\nWeeks Below 1,000,000 Viewers | 46",
-          "rows": [
-            [
-              "Average Viewership",
-              "354,761"
-            ],
-            [
-              "Highest Viewership",
-              "616,000 (March 22, 2026)"
-            ],
-            [
-              "Lowest Viewership",
-              "184,000 (September 20, 2025)"
-            ],
-            [
-              "Average 18–49 Demo",
-              "0.07"
-            ],
-            [
-              "Weeks Above 1,000,000 Viewers",
-              "0"
-            ],
-            [
-              "Weeks Below 1,000,000 Viewers",
-              "46"
-            ]
-          ],
-          "type": "table"
-        },
-        {
-          "block_id": "b14",
-          "level": 3,
-          "text": "Viewership Range (Last 12 Months)",
-          "type": "heading"
-        },
-        {
-          "block_id": "b15",
-          "markdown": "Highest | March 22, 2026 | 616,000\n--- | --- | ---\nLowest | September 20, 2025 | 184,000\nDifference | — | 432,000",
-          "rows": [
-            [
-              "Highest",
-              "March 22, 2026",
-              "616,000"
-            ],
-            [
-              "Lowest",
-              "September 20, 2025",
-              "184,000"
-            ],
-            [
-              "Difference",
-              "—",
-              "432,000"
-            ]
-          ],
-          "type": "table"
-        },
-        {
-          "block_id": "b16",
-          "markdown": "Week | Viewers | 18–49 Demo\n--- | --- | ---\nMay 27, 2026 | 498,000 | 0.05\nMay 20, 2026 | 413,000 | 0.06\nMay 16, 2026 | 384,000 | 0.05\nMay 9, 2026 | 342,000 | 0.05",
-          "rows": [
-            [
-              "Week",
-              "Viewers",
-              "18–49 Demo"
-            ],
-            [
-              "May 27, 2026",
-              "498,000",
-              "0.05"
-            ],
-            [
-              "May 20, 2026",
-              "413,000",
-              "0.06"
-            ],
-            [
-              "May 16, 2026",
-              "384,000",
-              "0.05"
-            ],
-            [
-              "May 9, 2026",
-              "342,000",
-              "0.05"
-            ]
-          ],
-          "type": "table"
-        },
-        {
-          "block_id": "b17",
-          "text": "4-Week Average: 409,250 viewers",
-          "type": "text"
-        },
-        {
-          "block_id": "b18",
-          "level": 3,
-          "text": "Largest Weekly Viewership Changes (Last 12 Months)",
-          "type": "heading"
-        },
-        {
-          "block_id": "b19",
-          "markdown": "Largest Increase | January 31, 2026 | +239,000\n--- | --- | ---\nLargest Drop | October 25, 2025 | -172,000",
-          "rows": [
-            [
-              "Largest Increase",
-              "January 31, 2026",
-              "+239,000"
-            ],
-            [
-              "Largest Drop",
-              "October 25, 2025",
-              "-172,000"
-            ]
-          ],
-          "type": "table"
-        },
-        {
-          "block_id": "b20",
-          "level": 3,
-          "text": "AEW Collision Year-over-Year Comparison (2025 vs 2026)",
-          "type": "heading"
-        },
-        {
-          "block_id": "b21",
-          "markdown": "Metric | May 31, 2025 | May 27, 2026 | % Change\n--- | --- | --- | ---\nTotal Viewers | 504,000 | 498,000 | ↓ -1.2%\nP18–49 Demo | 0.18 | 0.05 | ↓ -72.2%",
-          "rows": [
-            [
-              "Metric",
-              "May 31, 2025",
-              "May 27, 2026",
-              "% Change"
-            ],
-            [
-              "Total Viewers",
-              "504,000",
-              "498,000",
-              "↓ -1.2%"
-            ],
-            [
-              "P18–49 Demo",
-              "0.18",
-              "0.05",
-              "↓ -72.2%"
-            ]
-          ],
-          "type": "table"
-        },
-        {
-          "block_id": "b22",
-          "text": "Highest Viewership of 2026: 616,000 ( March 22, 2026 ) Lowest Viewership of 2026: 253,000 ( January 24, 2026 )",
-          "type": "text"
-        },
-        {
-          "block_id": "b23",
-          "text": "These figures reflect only linear TV viewership on TBS and do not include streaming or digital viewership. Ringside News will continue to monitor AEW Collision as the company builds toward its next major live event.",
-          "type": "text"
-        },
-        {
-          "text": "Spotlight WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup",
-          "type": "text"
-        }
-      ],
-      "removed_before_gemini": 14,
-      "removed_elements_debug": [
-        {
-          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 104,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Spotlight"
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196416 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-paul-heyman tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 108,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 111,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 112,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196368 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-iyo-sky tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 113,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 116,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 117,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196255 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-brock-lesnar tag-oba-femi tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 118,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 121,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 122,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196202 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
-          "node_index": 123,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 126,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "WWE Makes Major Changes to King of the Ring Tournament Lineup"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 127,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "index": 24,
-          "item": {
-            "text": "Spotlight WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup",
-            "type": "text"
-          },
-          "reason": "footer_start"
-        }
-      ],
-      "source": "ringsidenews",
-      "source_html_contains_embed_hint": true,
-      "source_title": "AEW Collision Viewership Sees Massive Increase on May 27, 2026",
-      "source_url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/",
-      "status": "ready_for_alfred",
-      "title_it": "AEW Collision: netto aumento negli ascolti del 27 maggio 2026",
-      "translation_chain_attempted": [
-        "gemini-3.1-flash-lite"
-      ],
-      "translation_missing_units": [],
-      "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/\nTitolo feed: AEW Collision Viewership Sees Massive Increase on May 27, 2026\nTitolo pagina: AEW Collision Viewership Sees Massive Increase on May 27, 2026\nDescrizione: The latest audience figures are available for the May 27, 2026 episode of AEW Collision on TBS, with the show delivering a major week-to-week surge.\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"The latest audience figures are available for the May 27, 2026 episode of AEW Collision on TBS, with the show delivering a major week-to-week surge.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"According to Programming Insider , AEW Collision on May 27, 2026 drew 498,000 viewers on TBS, with a 0.05 rating in the key P18–49 demographic. For comparison, the May 20, 2026 episode drew 413,000 viewers with a 0.06 rating in the key P18–49 demographic, an increase of ↑ 85,000 viewers and down by ↓ 0.01 in the demo.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Compared to the same week in 2025, AEW Collision drew 504,000 viewers and a 0.18 demo rating on May 31, 2025, versus 498,000 viewers and a 0.05 demo rating on May 27, 2026. That represents a year-over-year change of ↓ -1.2% in viewership and ↓ -72.2% in the demo.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"heading\",\n    \"text\": \"AEW Collision Week-to-Week Viewership Comparison\"\n  },\n  {\n    \"id\": \"b5_r0_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Metric\"\n  },\n  {\n    \"id\": \"b5_r0_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"May 20, 2026\"\n  },\n  {\n    \"id\": \"b5_r0_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"May 27, 2026\"\n  },\n  {\n    \"id\": \"b5_r0_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"Change\"\n  },\n  {\n    \"id\": \"b5_r0_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"% Change\"\n  },\n  {\n    \"id\": \"b5_r1_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Total Viewers\"\n  },\n  {\n    \"id\": \"b5_r1_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"413,000\"\n  },\n  {\n    \"id\": \"b5_r1_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"498,000\"\n  },\n  {\n    \"id\": \"b5_r1_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ +85,000\"\n  },\n  {\n    \"id\": \"b5_r1_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ +20.6%\"\n  },\n  {\n    \"id\": \"b5_r2_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"P18–49 Demo\"\n  },\n  {\n    \"id\": \"b5_r2_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.06\"\n  },\n  {\n    \"id\": \"b5_r2_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.05\"\n  },\n  {\n    \"id\": \"b5_r2_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ -0.01\"\n  },\n  {\n    \"id\": \"b5_r2_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ -16.7%\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"heading\",\n    \"text\": \"AEW Collision Year-to-Date Performance (2026)\"\n  },\n  {\n    \"id\": \"b7_r0_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Metric\"\n  },\n  {\n    \"id\": \"b7_r0_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"2026 Average\"\n  },\n  {\n    \"id\": \"b7_r0_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"Current Episode\"\n  },\n  {\n    \"id\": \"b7_r0_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"Diff\"\n  },\n  {\n    \"id\": \"b7_r0_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"%\"\n  },\n  {\n    \"id\": \"b7_r1_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Viewers\"\n  },\n  {\n    \"id\": \"b7_r1_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"421,684\"\n  },\n  {\n    \"id\": \"b7_r1_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"498,000\"\n  },\n  {\n    \"id\": \"b7_r1_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ 76,316\"\n  },\n  {\n    \"id\": \"b7_r1_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ 18.1%\"\n  },\n  {\n    \"id\": \"b7_r2_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"P18–49 Demo Avg\"\n  },\n  {\n    \"id\": \"b7_r2_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.08\"\n  },\n  {\n    \"id\": \"b7_r2_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.05\"\n  },\n  {\n    \"id\": \"b7_r2_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ -0.03\"\n  },\n  {\n    \"id\": \"b7_r2_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ -34%\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"heading\",\n    \"text\": \"AEW Collision Month-to-Date Performance (May 2026)\"\n  },\n  {\n    \"id\": \"b9_r0_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Metric\"\n  },\n  {\n    \"id\": \"b9_r0_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"Month Avg\"\n  },\n  {\n    \"id\": \"b9_r0_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"Current Episode\"\n  },\n  {\n    \"id\": \"b9_r0_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"Diff\"\n  },\n  {\n    \"id\": \"b9_r0_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"%\"\n  },\n  {\n    \"id\": \"b9_r1_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Viewers\"\n  },\n  {\n    \"id\": \"b9_r1_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"396,800\"\n  },\n  {\n    \"id\": \"b9_r1_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"498,000\"\n  },\n  {\n    \"id\": \"b9_r1_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ 101,200\"\n  },\n  {\n    \"id\": \"b9_r1_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ 25.5%\"\n  },\n  {\n    \"id\": \"b9_r2_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"P18–49 Demo Avg\"\n  },\n  {\n    \"id\": \"b9_r2_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.05\"\n  },\n  {\n    \"id\": \"b9_r2_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.05\"\n  },\n  {\n    \"id\": \"b9_r2_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ 0.00\"\n  },\n  {\n    \"id\": \"b9_r2_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ -7.4%\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"heading\",\n    \"text\": \"AEW Collision 4-Week Rolling Average\"\n  },\n  {\n    \"id\": \"b11_r0_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Metric\"\n  },\n  {\n    \"id\": \"b11_r0_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"4 Week Avg\"\n  },\n  {\n    \"id\": \"b11_r0_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"Current Episode\"\n  },\n  {\n    \"id\": \"b11_r0_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"Diff\"\n  },\n  {\n    \"id\": \"b11_r0_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"%\"\n  },\n  {\n    \"id\": \"b11_r1_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Viewers\"\n  },\n  {\n    \"id\": \"b11_r1_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"409,250\"\n  },\n  {\n    \"id\": \"b11_r1_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"498,000\"\n  },\n  {\n    \"id\": \"b11_r1_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ 88,750\"\n  },\n  {\n    \"id\": \"b11_r1_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ 21.7%\"\n  },\n  {\n    \"id\": \"b11_r2_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"P18–49 Demo Avg\"\n  },\n  {\n    \"id\": \"b11_r2_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.05\"\n  },\n  {\n    \"id\": \"b11_r2_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.05\"\n  },\n  {\n    \"id\": \"b11_r2_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ 0.00\"\n  },\n  {\n    \"id\": \"b11_r2_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ -4.8%\"\n  },\n  {\n    \"id\": \"b12\",\n    \"type\": \"heading\",\n    \"text\": \"Last 12 Months Performance Summary\"\n  },\n  {\n    \"id\": \"b13_r0_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Average Viewership\"\n  },\n  {\n    \"id\": \"b13_r0_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"354,761\"\n  },\n  {\n    \"id\": \"b13_r1_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Highest Viewership\"\n  },\n  {\n    \"id\": \"b13_r1_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"616,000 (March 22, 2026)\"\n  },\n  {\n    \"id\": \"b13_r2_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Lowest Viewership\"\n  },\n  {\n    \"id\": \"b13_r2_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"184,000 (September 20, 2025)\"\n  },\n  {\n    \"id\": \"b13_r3_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Average 18–49 Demo\"\n  },\n  {\n    \"id\": \"b13_r3_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.07\"\n  },\n  {\n    \"id\": \"b13_r4_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Weeks Above 1,000,000 Viewers\"\n  },\n  {\n    \"id\": \"b13_r4_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"0\"\n  },\n  {\n    \"id\": \"b13_r5_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Weeks Below 1,000,000 Viewers\"\n  },\n  {\n    \"id\": \"b13_r5_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"46\"\n  },\n  {\n    \"id\": \"b14\",\n    \"type\": \"heading\",\n    \"text\": \"Viewership Range (Last 12 Months)\"\n  },\n  {\n    \"id\": \"b15_r0_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Highest\"\n  },\n  {\n    \"id\": \"b15_r0_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"March 22, 2026\"\n  },\n  {\n    \"id\": \"b15_r0_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"616,000\"\n  },\n  {\n    \"id\": \"b15_r1_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Lowest\"\n  },\n  {\n    \"id\": \"b15_r1_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"September 20, 2025\"\n  },\n  {\n    \"id\": \"b15_r1_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"184,000\"\n  },\n  {\n    \"id\": \"b15_r2_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Difference\"\n  },\n  {\n    \"id\": \"b15_r2_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"—\"\n  },\n  {\n    \"id\": \"b15_r2_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"432,000\"\n  },\n  {\n    \"id\": \"b16_r0_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Week\"\n  },\n  {\n    \"id\": \"b16_r0_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"Viewers\"\n  },\n  {\n    \"id\": \"b16_r0_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"18–49 Demo\"\n  },\n  {\n    \"id\": \"b16_r1_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"May 27, 2026\"\n  },\n  {\n    \"id\": \"b16_r1_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"498,000\"\n  },\n  {\n    \"id\": \"b16_r1_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.05\"\n  },\n  {\n    \"id\": \"b16_r2_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"May 20, 2026\"\n  },\n  {\n    \"id\": \"b16_r2_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"413,000\"\n  },\n  {\n    \"id\": \"b16_r2_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.06\"\n  },\n  {\n    \"id\": \"b16_r3_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"May 16, 2026\"\n  },\n  {\n    \"id\": \"b16_r3_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"384,000\"\n  },\n  {\n    \"id\": \"b16_r3_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.05\"\n  },\n  {\n    \"id\": \"b16_r4_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"May 9, 2026\"\n  },\n  {\n    \"id\": \"b16_r4_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"342,000\"\n  },\n  {\n    \"id\": \"b16_r4_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.05\"\n  },\n  {\n    \"id\": \"b17\",\n    \"type\": \"text\",\n    \"text\": \"4-Week Average: 409,250 viewers\"\n  },\n  {\n    \"id\": \"b18\",\n    \"type\": \"heading\",\n    \"text\": \"Largest Weekly Viewership Changes (Last 12 Months)\"\n  },\n  {\n    \"id\": \"b19_r0_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Largest Increase\"\n  },\n  {\n    \"id\": \"b19_r0_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"January 31, 2026\"\n  },\n  {\n    \"id\": \"b19_r0_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"+239,000\"\n  },\n  {\n    \"id\": \"b19_r1_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Largest Drop\"\n  },\n  {\n    \"id\": \"b19_r1_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"October 25, 2025\"\n  },\n  {\n    \"id\": \"b19_r1_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"-172,000\"\n  },\n  {\n    \"id\": \"b20\",\n    \"type\": \"heading\",\n    \"text\": \"AEW Collision Year-over-Year Comparison (2025 vs 2026)\"\n  },\n  {\n    \"id\": \"b21_r0_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Metric\"\n  },\n  {\n    \"id\": \"b21_r0_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"May 31, 2025\"\n  },\n  {\n    \"id\": \"b21_r0_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"May 27, 2026\"\n  },\n  {\n    \"id\": \"b21_r0_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"% Change\"\n  },\n  {\n    \"id\": \"b21_r1_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Total Viewers\"\n  },\n  {\n    \"id\": \"b21_r1_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"504,000\"\n  },\n  {\n    \"id\": \"b21_r1_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"498,000\"\n  },\n  {\n    \"id\": \"b21_r1_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ -1.2%\"\n  },\n  {\n    \"id\": \"b21_r2_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"P18–49 Demo\"\n  },\n  {\n    \"id\": \"b21_r2_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.18\"\n  },\n  {\n    \"id\": \"b21_r2_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.05\"\n  },\n  {\n    \"id\": \"b21_r2_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ -72.2%\"\n  },\n  {\n    \"id\": \"b22\",\n    \"type\": \"text\",\n    \"text\": \"Highest Viewership of 2026: 616,000 ( March 22, 2026 ) Lowest Viewership of 2026: 253,000 ( January 24, 2026 )\"\n  },\n  {\n    \"id\": \"b23\",\n    \"type\": \"text\",\n    \"text\": \"These figures reflect only linear TV viewership on TBS and do not include streaming or digital viewership. Ringside News will continue to monitor AEW Collision as the company builds toward its next major live event.\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"AEW Collision: netto aumento negli ascolti del 27 maggio 2026\",\n  \"excerpt_it\": \"Resi noti i dati di ascolto dell'episodio di AEW Collision del 27 maggio 2026 su TBS: lo show registra un significativo incremento settimanale.\",\n  \"translations\": {\n    \"b1\": \"Sono disponibili i dati di ascolto dell'episodio di AEW Collision del 27 maggio 2026 su TBS, con lo show che ha registrato un importante balzo rispetto alla settimana precedente.\",\n    \"b2\": \"Secondo Programming Insider, AEW Collision del 27 maggio 2026 ha totalizzato 498.000 spettatori su TBS, con un rating di 0.05 nella fascia demografica chiave P18–49. Per fare un confronto, l'episodio del 20 maggio 2026 aveva ottenuto 413.000 spettatori con un rating di 0.06 nella stessa fascia demografica, segnando un aumento di ↑ 85.000 spettatori e un calo di ↓ 0.01 nel demo.\",\n    \"b3\": \"Rispetto alla stessa settimana del 2025, AEW Collision aveva totalizzato 504.000 spettatori e un rating demo di 0.18 il 31 maggio 2025, contro i 498.000 spettatori e il rating di 0.05 del 27 maggio 2026. Ciò rappresenta una variazione su base annua di ↓ -1.2% negli ascolti e di ↓ -72.2% nel demo.\",\n    \"b4\": \"Confronto ascolti AEW Collision settimana su settimana\",\n    \"b5_r0_c0\": \"Metrica\",\n    \"b5_r0_c1\": \"20 maggio 2026\",\n    \"b5_r0_c2\": \"27 maggio 2026\",\n    \"b5_r0_c3\": \"Variazione\",\n    \"b5_r0_c4\": \"% Variazione\",\n    \"b5_r1_c0\": \"Spettatori totali\",\n    \"b5_r1_c1\": \"413.000\",\n    \"b5_r1_c2\": \"498.000\",\n    \"b5_r1_c3\": \"↑ +85.000\",\n    \"b5_r1_c4\": \"↑ +20.6%\",\n    \"b5_r2_c0\": \"Demo P18–49\",\n    \"b5_r2_c1\": \"0.06\",\n    \"b5_r2_c2\": \"0.05\",\n    \"b5_r2_c3\": \"↓ -0.01\",\n    \"b5_r2_c4\": \"↓ -16.7%\",\n    \"b6\": \"Prestazioni AEW Collision anno in corso (2026)\",\n    \"b7_r0_c0\": \"Metrica\",\n    \"b7_r0_c1\": \"Media 2026\",\n    \"b7_r0_c2\": \"Episodio attuale\",\n    \"b7_r0_c3\": \"Diff.\",\n    \"b7_r0_c4\": \"%\",\n    \"b7_r1_c0\": \"Spettatori\",\n    \"b7_r1_c1\": \"421.684\",\n    \"b7_r1_c2\": \"498.000\",\n    \"b7_r1_c3\": \"↑ 76.316\",\n    \"b7_r1_c4\": \"↑ 18.1%\",\n    \"b7_r2_c0\": \"Media demo P18–49\",\n    \"b7_r2_c1\": \"0.08\",\n    \"b7_r2_c2\": \"0.05\",\n    \"b7_r2_c3\": \"↓ -0.03\",\n    \"b7_r2_c4\": \"↓ -34%\",\n    \"b8\": \"Prestazioni AEW Collision mese corrente (maggio 2026)\",\n    \"b9_r0_c0\": \"Metrica\",\n    \"b9_r0_c1\": \"Media mensile\",\n    \"b9_r0_c2\": \"Episodio attuale\",\n    \"b9_r0_c3\": \"Diff.\",\n    \"b9_r0_c4\": \"%\",\n    \"b9_r1_c0\": \"Spettatori\",\n    \"b9_r1_c1\": \"396.800\",\n    \"b9_r1_c2\": \"498.000\",\n    \"b9_r1_c3\": \"↑ 101.200\",\n    \"b9_r1_c4\": \"↑ 25.5%\",\n    \"b9_r2_c0\": \"Media demo P18–49\",\n    \"b9_r2_c1\": \"0.05\",\n    \"b9_r2_c2\": \"0.05\",\n    \"b9_r2_c3\": \"↓ 0.00\",\n    \"b9_r2_c4\": \"↓ -7.4%\",\n    \"b10\": \"Media mobile 4 settimane AEW Collision\",\n    \"b11_r0_c0\": \"Metrica\",\n    \"b11_r0_c1\": \"Media 4 settimane\",\n    \"b11_r0_c2\": \"Episodio attuale\",\n    \"b11_r0_c3\": \"Diff.\",\n    \"b11_r0_c4\": \"%\",\n    \"b11_r1_c0\": \"Spettatori\",\n    \"b11_r1_c1\": \"409.250\",\n    \"b11_r1_c2\": \"498.000\",\n    \"b11_r1_c3\": \"↑ 88.750\",\n    \"b11_r1_c4\": \"↑ 21.7%\",\n    \"b11_r2_c0\": \"Media demo P18–49\",\n    \"b11_r2_c1\": \"0.05\",\n    \"b11_r2_c2\": \"0.05\",\n    \"b11_r2_c3\": \"↓ 0.00\",\n    \"b11_r2_c4\": \"↓ -4.8%\",\n    \"b12\": \"Riepilogo prestazioni ultimi 12 mesi\",\n    \"b13_r0_c0\": \"Media spettatori\",\n    \"b13_r0_c1\": \"354.761\",\n    \"b13_r1_c0\": \"Picco ascolti\",\n    \"b13_r1_c1\": \"616.000 (22 marzo 2026)\",\n    \"b13_r2_c0\": \"Ascolto minimo\",\n    \"b13_r2_c1\": \"184.000 (20 settembre 2025)\",\n    \"b13_r3_c0\": \"Media demo 18–49\",\n    \"b13_r3_c1\": \"0.07\",\n    \"b13_r4_c0\": \"Settimane sopra 1.000.000 spettatori\",\n    \"b13_r4_c1\": \"0\",\n    \"b13_r5_c0\": \"Settimane sotto 1.000.000 spettatori\",\n    \"b13_r5_c1\": \"46\",\n    \"b14\": \"Range ascolti (ultimi 12 mesi)\",\n    \"b15_r0_c0\": \"Massimo\",\n    \"b15_r0_c1\": \"22 marzo 2026\",\n    \"b15_r0_c2\": \"616.000\",\n    \"b15_r1_c0\": \"Minimo\",\n    \"b15_r1_c1\": \"20 settembre 2025\",\n    \"b15_r1_c2\": \"184.000\",\n    \"b15_r2_c0\": \"Differenza\",\n    \"b15_r2_c1\": \"—\",\n    \"b15_r2_c2\": \"432.000\",\n    \"b16_r0_c0\": \"Settimana\",\n    \"b16_r0_c1\": \"Spettatori\",\n    \"b16_r0_c2\": \"Demo 18–49\",\n    \"b16_r1_c0\": \"27 maggio 2026\",\n    \"b16_r1_c1\": \"498.000\",\n    \"b16_r1_c2\": \"0.05\",\n    \"b16_r2_c0\": \"20 maggio 2026\",\n    \"b16_r2_c1\": \"413.000\",\n    \"b16_r2_c2\": \"0.06\",\n    \"b16_r3_c0\": \"16 maggio 2026\",\n    \"b16_r3_c1\": \"384.000\",\n    \"b16_r3_c2\": \"0.05\",\n    \"b16_r4_c0\": \"9 maggio 2026\",\n    \"b16_r4_c1\": \"342.000\",\n    \"b16_r4_c2\": \"0.05\",\n    \"b17\": \"Media 4 settimane: 409.250 spettatori\",\n    \"b18\": \"Maggiori variazioni settimanali negli ascolti (ultimi 12 mesi)\",\n    \"b19_r0_c0\": \"Maggior aumento\",\n    \"b19_r0_c1\": \"31 gennaio 2026\",\n    \"b19_r0_c2\": \"+239.000\",\n    \"b19_r1_c0\": \"Maggior calo\",\n    \"b19_r1_c1\": \"25 ottobre 2025\",\n    \"b19_r1_c2\": \"-172.000\",\n    \"b20\": \"Confronto AEW Collision anno su anno (2025 vs 2026)\",\n    \"b21_r0_c0\": \"Metrica\",\n    \"b21_r0_c1\": \"31 maggio 2025\",\n    \"b21_r0_c2\": \"27 maggio 2026\",\n    \"b21_r0_c3\": \"% Variazione\",\n    \"b21_r1_c0\": \"Spettatori totali\",\n    \"b21_r1_c1\": \"504.000\",\n    \"b21_r1_c2\": \"498.000\",\n    \"b21_r1_c3\": \"↓ -1.2%\",\n    \"b21_r2_c0\": \"Demo P18–49\",\n    \"b21_r2_c1\": \"0.18\",\n    \"b21_r2_c2\": \"0.05\",\n    \"b21_r2_c3\": \"↓ -72.2%\",\n    \"b22\": \"Ascolto massimo del 2026: 616.000 (22 marzo 2026) Ascolto minimo del 2026: 253.000 (24 gennaio 2026)\",\n    \"b23\": \"Questi dati riflettono esclusivamente l'ascolto televisivo lineare su TBS e non includono quello in streaming o digitale. Ringside News continuerà a monitorare AEW Collision mentre la compagnia si avvicina al suo prossimo grande evento dal vivo.\"\n  },\n  \"notes\": []\n}",
-      "translation_unit_count": 128,
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles/\nTitolo feed: Jim Ross Details Health & Travel Struggles Surrounding AEW Double Or Nothing 2026\nTitolo pagina: Jim Ross Details Health & Travel Struggles Surrounding AEW Double Or Nothing 2026 - Wrestling Inc.\nDescrizione: AEW announcer Jim Ross details both the health and travel struggles he suffered through when trying to make AEW Double or Nothing 2026 last weekend\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"For many, AEW Double or Nothing was one of the greatest wrestling events of the year. For Jim Ross, however, it was the trip from hell. On the latest \\\"Grilling JR,\\\" Ross documented his trip from Oklahoma to New York City to call the Jon Moxley vs. Kyle O'Reilly match at Double or Nothing , and revealed the trip could've gone better. The hardship started on Saturday morning, when Ross was set to travel to New York.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"We have the alarm set,\\\" Ross said. \\\"A driver was going to pick me up. And all of a sudden, I fell. I hadn't had a fall in weeks. So I fell and busted my ass. I wasted my phone. I don't know how you do it but there's got to be a way...I guess I just put it in my pocket. Hell I don't know. If I had my phone with me, I could've gotten a little bit of help. So I, as a result of that, I missed my flight.\\\"\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"The fall and missing his flight put Ross, who isn't a fan of flying to begin with, in a foul mood, but he was able to reschedule and arrive to New York on Saturday night, later having a beer with fellow AEW announcer Excalibur and his agent Barry Bloom. Unfortunately, things got worse when Ross made his way to his hotel room.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"I laid on the bed, put my ass on the edge of the bed, and just relaxed,\\\" Ross said. \\\"Well, little did I know my back was going to go out on me. So now I'm in my hotel, with my back out, and I can't function. So it was just a horrible experience.\\\"\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"In hindsight, Ross says he would've talked to AEW owner Tony Khan about skipping the show, given his health issues and the fact he only called one match. Fortunately, despite the hardships, Ross was able to fly home on Monday night.\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Jim Ross racconta le difficoltà di salute e viaggio per AEW Double or Nothing 2026\",\n  \"excerpt_it\": \"Il leggendario commentatore della AEW, Jim Ross, ha svelato i retroscena movimentati che hanno caratterizzato il suo viaggio verso l'evento Double or Nothing dello scorso weekend.\",\n  \"translations\": {\n    \"b2\": \"Per molti, AEW Double or Nothing è stato uno dei migliori eventi di wrestling dell'anno. Per Jim Ross, tuttavia, è stato un viaggio infernale. Nell'ultima puntata di \\\"Grilling JR\\\", Ross ha ripercorso il suo viaggio dall'Oklahoma a New York per commentare il match tra Jon Moxley e Kyle O'Reilly a Double or Nothing, rivelando che le cose avrebbero potuto andare decisamente meglio. Le difficoltà sono iniziate sabato mattina, quando Ross era pronto a partire per New York.\",\n    \"b3\": \"\\\"Avevamo puntato la sveglia\\\", ha raccontato Ross. \\\"Un autista doveva venirmi a prendere. Improvvisamente, sono caduto. Non cadevo da settimane. Sono caduto e ho battuto il sedere. Ho distrutto il telefono. Non so come sia successo, ma deve esserci un modo... immagino di averlo semplicemente messo in tasca. Diavolo, non lo so. Se avessi avuto il telefono con me, avrei potuto chiedere un po' di aiuto. Di conseguenza, ho perso il volo.\\\"\",\n    \"b4\": \"La caduta e il volo perso hanno messo di pessimo umore Ross, che non è mai stato un grande amante dei viaggi aerei, ma è riuscito a riprogrammare il volo e ad arrivare a New York sabato sera, incontrando poi il collega commentatore della AEW Excalibur e il suo agente Barry Bloom per una birra. Purtroppo, la situazione è peggiorata una volta arrivato nella sua stanza d'albergo.\",\n    \"b5\": \"\\\"Mi sono sdraiato sul letto, mi sono seduto sul bordo e mi sono rilassato\\\", ha spiegato Ross. \\\"Beh, non avrei mai immaginato che la schiena mi avrebbe tradito. Così mi sono ritrovato in hotel, bloccato con la schiena, incapace di muovermi. È stata davvero un'esperienza orribile.\\\"\",\n    \"b6\": \"Col senno di poi, Ross afferma che avrebbe dovuto parlare con il proprietario della AEW, Tony Khan, della possibilità di saltare lo show, visti i suoi problemi di salute e il fatto che dovesse commentare un solo match. Fortunatamente, nonostante le disavventure, Ross è riuscito a tornare a casa in volo lunedì sera.\"\n  },\n  \"notes\": []\n}",
+      "translation_unit_count": 5,
       "translation_used": true
     }
   ],
-  "generated_at": "2026-06-01T23:53:09.527662+00:00",
+  "generated_at": "2026-06-02T00:07:08.675991+00:00",
   "handoff": {
     "errors": 0,
     "extraction_empty": 0,
-    "ready_for_alfred": 3,
+    "ready_for_alfred": 2,
     "translation_pending": 0
   },
   "input": {
-    "menzo_version": "v93_13_ai_editorial_review",
-    "selected_count": 5
+    "menzo_version": "v93_14_priority_label_bob_brief_guard",
+    "selected_count": 2
   },
   "mode": "block_translation_prudent_embed_cleanup",
   "policy": {

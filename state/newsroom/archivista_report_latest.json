@@ -2,7 +2,7 @@
   "agent": "Archivista",
   "agent_handoffs": {
     "alfred": {
-      "approved": 3,
+      "approved": 2,
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
@@ -11,27 +11,27 @@
     "bob": {
       "errors": 0,
       "extraction_empty": 0,
-      "ready_for_alfred": 3,
+      "ready_for_alfred": 2,
       "translation_pending": 0
     },
     "massy": {
-      "already_published_hard_skipped": 13,
+      "already_published_hard_skipped": 15,
       "already_worked": 1,
-      "hard_skipped": 15,
-      "to_menzo": 18,
+      "hard_skipped": 17,
+      "to_menzo": 16,
       "to_simone": 1
     },
     "menzo": {
-      "pending": 0,
+      "pending": 1,
       "skipped": 13,
-      "to_bob_or_v92": 5
+      "to_bob_or_v92": 2
     },
     "publisher": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 0,
-      "wp_not_ready": 3
+      "published": 2,
+      "wp_not_ready": 0
     },
     "simone": {
       "ready": 0,
@@ -39,235 +39,8 @@
       "waiting": 0
     }
   },
-  "anomalies": [
-    {
-      "code": "wp_not_ready",
-      "context": {
-        "already_published": 0,
-        "dry_run": 0,
-        "errors": 0,
-        "published": 0,
-        "wp_not_ready": 3
-      },
-      "message": "WordPress non era pronto/raggiungibile.",
-      "severity": "error"
-    }
-  ],
+  "anomalies": [],
   "article_dossiers": [
-    {
-      "alfred": {
-        "decision": "approved",
-        "editorial_changes": [],
-        "issues": [],
-        "present": true,
-        "quality_score": 100,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": 23,
-        "diagnostic_stage": "ready_for_alfred",
-        "element_counts": {
-          "embed": 0,
-          "heading": 8,
-          "image": 0,
-          "quote": 0,
-          "table": 9,
-          "text": 6
-        },
-        "error": null,
-        "present": true,
-        "raw_element_count": 24,
-        "removed_before_gemini": 14,
-        "status": "ready_for_alfred",
-        "translation_model": "gemini-3.1-flash-lite",
-        "translation_used": true
-      },
-      "category_hint": "AEW",
-      "html_audit": {
-        "alfred_final_html_preview": "<p>Sono disponibili i dati di ascolto dell&#x27;episodio di AEW Collision del 27 maggio 2026 su TBS, con lo show che ha registrato un importante balzo rispetto alla settimana precedente.</p>\n<p>Secondo Programming Insider, AEW Collision del 27 maggio 2026 ha totalizzato 498.000 spettatori su TBS, con un rating di 0.05 nella fascia demografica chiave P18–49. Per fare un confronto, l&#x27;episodio del 20 maggio 2026 aveva ottenuto 413.000 spettatori con un rating di 0.06 nella stessa fascia demografica, segnando un aumento di ↑ 85.000 spettatori e un calo di ↓ 0.01 nel demo.</p>\n<p>Rispetto alla stessa settimana del 2025, AEW Collision aveva totalizzato 504.000 spettatori e un rating demo di 0.18 il 31 maggio 2025, contro i 498.000 spettatori e il rating di 0.05 del 27 maggio 2026. Ciò rappresenta una variazione su base annua di ↓ -1.2% negli ascolti e di ↓ -72.2% nel demo.</p>\n<h3>Confronto ascolti AEW Collision settimana su settimana</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>20 maggio 2026</th><th>27 maggio 2026</th><th>Variazione</th><th>% Variazione</th></tr><tr><td>Spettatori totali</td><td>413.000</td><td>498.000</td><td>↑ +85.000</td><td>↑ +20.6%</td></tr><tr><td>Demo P18–49</td><td>0.06</td><td>0.05</td><td>↓ -0.01</td><td>↓ -16.7%</td></tr></table>\n<h3>Prestazioni AEW Collision anno in corso (2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media 2026</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>421.684</td><td>498.000</td><td>↑ 76.316</td><td>↑ 18.1%</td></tr><tr><td>Media demo P18–49</td><td>0.08</td><td>0.05</td><td>↓ -0.03</td><td>↓ -34%</td></tr></table>\n<h3>Prestazioni AEW Collision mese corrente (maggio 2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media mensile</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>396.800</td><td>498.000</td><td>↑ 101.200</td><td>↑ 25.5%</td></tr><tr><td>Media demo P18–49</td><td>0.05</td><td>0.05</td><td>↓ 0.00</td><td>↓ -7.4%</td></tr></table>\n<h3>Media mobile 4 settimane AEW Collision</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media 4 settimane</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>409.250</td><td>498.000</td><td>↑ 88.750</td><td>↑ 21.7%</td></tr><tr><td>Media demo P18–49</td><td>0.05</td><td>0.05</td><td>↓ 0.00</td><td>↓ -4.8%</td></tr></table>\n<h3>Riepilogo prestazioni ultimi 12 mesi</h3>\n<table class=\"owtv-data-table\"><tr><th>Media spettatori</th><th>354.761</th></tr><tr><td>Picco ascolti</td><td>616.000 (22 marzo 2026)</td></tr><tr><td>Ascolto minimo</td><td>184.000 (20 settembre 2025)</td></tr><tr><td>Media demo 18–49</td><td>0.07</td></tr><tr><td>Settimane sopra 1.000.000 spettatori</td><td>0</td></tr><tr><td>Settimane sotto 1.000.000 spettatori</td><td>46</td></tr></table>\n<h3>Range ascolti (ultimi 12 mesi)</h3>\n<table class=\"owtv-data-table\"><tr><th>Massimo</th><th>22 marzo 2026</th><th>616.000</th></tr><tr><td>Minimo</td><td>20 settembre 2025</td><td>184.000</td></tr><tr><td>Differenza</td><td>—</td><td>432.000</td></tr></table>\n<table class=\"owtv-data-table\"><tr><th>Settimana</th><th>Spettatori</th><th>Demo 18–49</th></tr><tr><td>27 maggio 2026</td><td>498.000</td><td>0.05</td></tr><tr><td>20 maggio 2026</td><td>413.000</td><td>0.06</td></tr><tr><td>16 maggio 2026</td><td>384.000</td><td>0.05</td></tr><tr><td>9 maggio 2026</td><td>342.000</td><td>0.05</td></tr></table>\n<p>Media 4 settimane: 409.250 spettatori</p>\n<h3>Maggiori variazioni settimanali negli ascolti (ultimi 12 mesi)</h3>\n<table class=\"owtv-data-table\"><tr><th>Maggior aumento</th><th>31 gennaio 2026</th><th>+239.000</th></tr><tr><td>Maggior calo</td><td>25 ottobre 2025</td><td>-172.000</td></tr></table>\n<h3>Confronto AEW Collision anno su anno (2025 vs 2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>31 maggio 2025</th><th>27 maggio 2026</th><th>% Variazione</th></tr><tr><td>Spettatori totali</td><td>504.000</td><td>498.000</td><td>↓ -1.2%</td></tr><tr><td>Demo P18–49</td><td>0.18</td><td>0.05</td><td>↓ -72.2%</td></tr></table>\n<p>Ascolto massimo del 2026: 616.000 (22 marzo 2026) Ascolto minimo del 2026: 253.000 (24 gennaio 2026)</p>\n<p>Questi dati riflettono esclusivamente l&#x27;ascolto televisivo lineare su TBS e non includono quello in streaming o digitale. Ringside News continuerà a monitorare AEW Collision mentre la compagnia si avvicina al suo prossimo grande evento dal vivo.</p>",
-        "bob_body_html_preview": "<p>Sono disponibili i dati di ascolto dell&#x27;episodio di AEW Collision del 27 maggio 2026 su TBS, con lo show che ha registrato un importante balzo rispetto alla settimana precedente.</p>\n<p>Secondo Programming Insider, AEW Collision del 27 maggio 2026 ha totalizzato 498.000 spettatori su TBS, con un rating di 0.05 nella fascia demografica chiave P18–49. Per fare un confronto, l&#x27;episodio del 20 maggio 2026 aveva ottenuto 413.000 spettatori con un rating di 0.06 nella stessa fascia demografica, segnando un aumento di ↑ 85.000 spettatori e un calo di ↓ 0.01 nel demo.</p>\n<p>Rispetto alla stessa settimana del 2025, AEW Collision aveva totalizzato 504.000 spettatori e un rating demo di 0.18 il 31 maggio 2025, contro i 498.000 spettatori e il rating di 0.05 del 27 maggio 2026. Ciò rappresenta una variazione su base annua di ↓ -1.2% negli ascolti e di ↓ -72.2% nel demo.</p>\n<h3>Confronto ascolti AEW Collision settimana su settimana</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>20 maggio 2026</th><th>27 maggio 2026</th><th>Variazione</th><th>% Variazione</th></tr><tr><td>Spettatori totali</td><td>413.000</td><td>498.000</td><td>↑ +85.000</td><td>↑ +20.6%</td></tr><tr><td>Demo P18–49</td><td>0.06</td><td>0.05</td><td>↓ -0.01</td><td>↓ -16.7%</td></tr></table>\n<h3>Prestazioni AEW Collision anno in corso (2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media 2026</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>421.684</td><td>498.000</td><td>↑ 76.316</td><td>↑ 18.1%</td></tr><tr><td>Media demo P18–49</td><td>0.08</td><td>0.05</td><td>↓ -0.03</td><td>↓ -34%</td></tr></table>\n<h3>Prestazioni AEW Collision mese corrente (maggio 2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media mensile</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>396.800</td><td>498.000</td><td>↑ 101.200</td><td>↑ 25.5%</td></tr><tr><td>Media demo P18–49</td><td>0.05</td><td>0.05</td><td>↓ 0.00</td><td>↓ -7.4%</td></tr></table>\n<h3>Media mobile 4 settimane AEW Collision</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media 4 settimane</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>409.250</td><td>498.000</td><td>↑ 88.750</td><td>↑ 21.7%</td></tr><tr><td>Media demo P18–49</td><td>0.05</td><td>0.05</td><td>↓ 0.00</td><td>↓ -4.8%</td></tr></table>\n<h3>Riepilogo prestazioni ultimi 12 mesi</h3>\n<table class=\"owtv-data-table\"><tr><th>Media spettatori</th><th>354.761</th></tr><tr><td>Picco ascolti</td><td>616.000 (22 marzo 2026)</td></tr><tr><td>Ascolto minimo</td><td>184.000 (20 settembre 2025)</td></tr><tr><td>Media demo 18–49</td><td>0.07</td></tr><tr><td>Settimane sopra 1.000.000 spettatori</td><td>0</td></tr><tr><td>Settimane sotto 1.000.000 spettatori</td><td>46</td></tr></table>\n<h3>Range ascolti (ultimi 12 mesi)</h3>\n<table class=\"owtv-data-table\"><tr><th>Massimo</th><th>22 marzo 2026</th><th>616.000</th></tr><tr><td>Minimo</td><td>20 settembre 2025</td><td>184.000</td></tr><tr><td>Differenza</td><td>—</td><td>432.000</td></tr></table>\n<table class=\"owtv-data-table\"><tr><th>Settimana</th><th>Spettatori</th><th>Demo 18–49</th></tr><tr><td>27 maggio 2026</td><td>498.000</td><td>0.05</td></tr><tr><td>20 maggio 2026</td><td>413.000</td><td>0.06</td></tr><tr><td>16 maggio 2026</td><td>384.000</td><td>0.05</td></tr><tr><td>9 maggio 2026</td><td>342.000</td><td>0.05</td></tr></table>\n<p>Media 4 settimane: 409.250 spettatori</p>\n<h3>Maggiori variazioni settimanali negli ascolti (ultimi 12 mesi)</h3>\n<table class=\"owtv-data-table\"><tr><th>Maggior aumento</th><th>31 gennaio 2026</th><th>+239.000</th></tr><tr><td>Maggior calo</td><td>25 ottobre 2025</td><td>-172.000</td></tr></table>\n<h3>Confronto AEW Collision anno su anno (2025 vs 2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>31 maggio 2025</th><th>27 maggio 2026</th><th>% Variazione</th></tr><tr><td>Spettatori totali</td><td>504.000</td><td>498.000</td><td>↓ -1.2%</td></tr><tr><td>Demo P18–49</td><td>0.18</td><td>0.05</td><td>↓ -72.2%</td></tr></table>\n<p>Ascolto massimo del 2026: 616.000 (22 marzo 2026) Ascolto minimo del 2026: 253.000 (24 gennaio 2026)</p>\n<p>Questi dati riflettono esclusivamente l&#x27;ascolto televisivo lineare su TBS e non includono quello in streaming o digitale. Ringside News continuerà a monitorare AEW Collision mentre la compagnia si avvicina al suo prossimo grande evento dal vivo.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_aew-collision-netto-aumento-negli-ascolti-del-27-maggio-2026.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_aew-collision-netto-aumento-negli-ascolti-del-27-maggio-2026.html",
-        "publisher_review_html_preview": "<p>Sono disponibili i dati di ascolto dell&#x27;episodio di AEW Collision del 27 maggio 2026 su TBS, con lo show che ha registrato un importante balzo rispetto alla settimana precedente.</p>\n<p>Secondo Programming Insider, AEW Collision del 27 maggio 2026 ha totalizzato 498.000 spettatori su TBS, con un rating di 0.05 nella fascia demografica chiave P18–49. Per fare un confronto, l&#x27;episodio del 20 maggio 2026 aveva ottenuto 413.000 spettatori con un rating di 0.06 nella stessa fascia demografica, segnando un aumento di ↑ 85.000 spettatori e un calo di ↓ 0.01 nel demo.</p>\n<p>Rispetto alla stessa settimana del 2025, AEW Collision aveva totalizzato 504.000 spettatori e un rating demo di 0.18 il 31 maggio 2025, contro i 498.000 spettatori e il rating di 0.05 del 27 maggio 2026. Ciò rappresenta una variazione su base annua di ↓ -1.2% negli ascolti e di ↓ -72.2% nel demo.</p>\n<h3>Confronto ascolti AEW Collision settimana su settimana</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>20 maggio 2026</th><th>27 maggio 2026</th><th>Variazione</th><th>% Variazione</th></tr><tr><td>Spettatori totali</td><td>413.000</td><td>498.000</td><td>↑ +85.000</td><td>↑ +20.6%</td></tr><tr><td>Demo P18–49</td><td>0.06</td><td>0.05</td><td>↓ -0.01</td><td>↓ -16.7%</td></tr></table>\n<h3>Prestazioni AEW Collision anno in corso (2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media 2026</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>421.684</td><td>498.000</td><td>↑ 76.316</td><td>↑ 18.1%</td></tr><tr><td>Media demo P18–49</td><td>0.08</td><td>0.05</td><td>↓ -0.03</td><td>↓ -34%</td></tr></table>\n<h3>Prestazioni AEW Collision mese corrente (maggio 2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media mensile</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>396.800</td><td>498.000</td><td>↑ 101.200</td><td>↑ 25.5%</td></tr><tr><td>Media demo P18–49</td><td>0.05</td><td>0.05</td><td>↓ 0.00</td><td>↓ -7.4%</td></tr></table>\n<h3>Media mobile 4 settimane AEW Collision</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>Media 4 settimane</th><th>Episodio attuale</th><th>Diff.</th><th>%</th></tr><tr><td>Spettatori</td><td>409.250</td><td>498.000</td><td>↑ 88.750</td><td>↑ 21.7%</td></tr><tr><td>Media demo P18–49</td><td>0.05</td><td>0.05</td><td>↓ 0.00</td><td>↓ -4.8%</td></tr></table>\n<h3>Riepilogo prestazioni ultimi 12 mesi</h3>\n<table class=\"owtv-data-table\"><tr><th>Media spettatori</th><th>354.761</th></tr><tr><td>Picco ascolti</td><td>616.000 (22 marzo 2026)</td></tr><tr><td>Ascolto minimo</td><td>184.000 (20 settembre 2025)</td></tr><tr><td>Media demo 18–49</td><td>0.07</td></tr><tr><td>Settimane sopra 1.000.000 spettatori</td><td>0</td></tr><tr><td>Settimane sotto 1.000.000 spettatori</td><td>46</td></tr></table>\n<h3>Range ascolti (ultimi 12 mesi)</h3>\n<table class=\"owtv-data-table\"><tr><th>Massimo</th><th>22 marzo 2026</th><th>616.000</th></tr><tr><td>Minimo</td><td>20 settembre 2025</td><td>184.000</td></tr><tr><td>Differenza</td><td>—</td><td>432.000</td></tr></table>\n<table class=\"owtv-data-table\"><tr><th>Settimana</th><th>Spettatori</th><th>Demo 18–49</th></tr><tr><td>27 maggio 2026</td><td>498.000</td><td>0.05</td></tr><tr><td>20 maggio 2026</td><td>413.000</td><td>0.06</td></tr><tr><td>16 maggio 2026</td><td>384.000</td><td>0.05</td></tr><tr><td>9 maggio 2026</td><td>342.000</td><td>0.05</td></tr></table>\n<p>Media 4 settimane: 409.250 spettatori</p>\n<h3>Maggiori variazioni settimanali negli ascolti (ultimi 12 mesi)</h3>\n<table class=\"owtv-data-table\"><tr><th>Maggior aumento</th><th>31 gennaio 2026</th><th>+239.000</th></tr><tr><td>Maggior calo</td><td>25 ottobre 2025</td><td>-172.000</td></tr></table>\n<h3>Confronto AEW Collision anno su anno (2025 vs 2026)</h3>\n<table class=\"owtv-data-table\"><tr><th>Metrica</th><th>31 maggio 2025</th><th>27 maggio 2026</th><th>% Variazione</th></tr><tr><td>Spettatori totali</td><td>504.000</td><td>498.000</td><td>↓ -1.2%</td></tr><tr><td>Demo P18–49</td><td>0.18</td><td>0.05</td><td>↓ -72.2%</td></tr></table>\n<p>Ascolto massimo del 2026: 616.000 (22 marzo 2026) Ascolto minimo del 2026: 253.000 (24 gennaio 2026)</p>\n<p>Questi dati riflettono esclusivamente l&#x27;ascolto televisivo lineare su TBS e non includono quello in streaming o digitale. Ringside News continuerà a monitorare AEW Collision mentre la compagnia si avvicina al suo prossimo grande evento dal vivo.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/\nTitolo feed: AEW Collision Viewership Sees Massive Increase on May 27, 2026\nTitolo pagina: AEW Collision Viewership Sees Massive Increase on May 27, 2026\nDescrizione: The latest audience figures are available for the May 27, 2026 episode of AEW Collision on TBS, with the show delivering a major week-to-week surge.\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"The latest audience figures are available for the May 27, 2026 episode of AEW Collision on TBS, with the show delivering a major week-to-week surge.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"According to Programming Insider , AEW Collision on May 27, 2026 drew 498,000 viewers on TBS, with a 0.05 rating in the key P18–49 demographic. For comparison, the May 20, 2026 episode drew 413,000 viewers with a 0.06 rating in the key P18–49 demographic, an increase of ↑ 85,000 viewers and down by ↓ 0.01 in the demo.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Compared to the same week in 2025, AEW Collision drew 504,000 viewers and a 0.18 demo rating on May 31, 2025, versus 498,000 viewers and a 0.05 demo rating on May 27, 2026. That represents a year-over-year change of ↓ -1.2% in viewership and ↓ -72.2% in the demo.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"heading\",\n    \"text\": \"AEW Collision Week-to-Week Viewership Comparison\"\n  },\n  {\n    \"id\": \"b5_r0_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Metric\"\n  },\n  {\n    \"id\": \"b5_r0_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"May 20, 2026\"\n  },\n  {\n    \"id\": \"b5_r0_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"May 27, 2026\"\n  },\n  {\n    \"id\": \"b5_r0_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"Change\"\n  },\n  {\n    \"id\": \"b5_r0_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"% Change\"\n  },\n  {\n    \"id\": \"b5_r1_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Total Viewers\"\n  },\n  {\n    \"id\": \"b5_r1_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"413,000\"\n  },\n  {\n    \"id\": \"b5_r1_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"498,000\"\n  },\n  {\n    \"id\": \"b5_r1_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ +85,000\"\n  },\n  {\n    \"id\": \"b5_r1_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ +20.6%\"\n  },\n  {\n    \"id\": \"b5_r2_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"P18–49 Demo\"\n  },\n  {\n    \"id\": \"b5_r2_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.06\"\n  },\n  {\n    \"id\": \"b5_r2_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.05\"\n  },\n  {\n    \"id\": \"b5_r2_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ -0.01\"\n  },\n  {\n    \"id\": \"b5_r2_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ -16.7%\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"heading\",\n    \"text\": \"AEW Collision Year-to-Date Performance (2026)\"\n  },\n  {\n    \"id\": \"b7_r0_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Metric\"\n  },\n  {\n    \"id\": \"b7_r0_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"2026 Average\"\n  },\n  {\n    \"id\": \"b7_r0_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"Current Episode\"\n  },\n  {\n    \"id\": \"b7_r0_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"Diff\"\n  },\n  {\n    \"id\": \"b7_r0_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"%\"\n  },\n  {\n    \"id\": \"b7_r1_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Viewers\"\n  },\n  {\n    \"id\": \"b7_r1_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"421,684\"\n  },\n  {\n    \"id\": \"b7_r1_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"498,000\"\n  },\n  {\n    \"id\": \"b7_r1_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ 76,316\"\n  },\n  {\n    \"id\": \"b7_r1_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ 18.1%\"\n  },\n  {\n    \"id\": \"b7_r2_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"P18–49 Demo Avg\"\n  },\n  {\n    \"id\": \"b7_r2_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.08\"\n  },\n  {\n    \"id\": \"b7_r2_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.05\"\n  },\n  {\n    \"id\": \"b7_r2_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ -0.03\"\n  },\n  {\n    \"id\": \"b7_r2_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ -34%\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"heading\",\n    \"text\": \"AEW Collision Month-to-Date Performance (May 2026)\"\n  },\n  {\n    \"id\": \"b9_r0_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Metric\"\n  },\n  {\n    \"id\": \"b9_r0_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"Month Avg\"\n  },\n  {\n    \"id\": \"b9_r0_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"Current Episode\"\n  },\n  {\n    \"id\": \"b9_r0_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"Diff\"\n  },\n  {\n    \"id\": \"b9_r0_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"%\"\n  },\n  {\n    \"id\": \"b9_r1_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Viewers\"\n  },\n  {\n    \"id\": \"b9_r1_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"396,800\"\n  },\n  {\n    \"id\": \"b9_r1_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"498,000\"\n  },\n  {\n    \"id\": \"b9_r1_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ 101,200\"\n  },\n  {\n    \"id\": \"b9_r1_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ 25.5%\"\n  },\n  {\n    \"id\": \"b9_r2_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"P18–49 Demo Avg\"\n  },\n  {\n    \"id\": \"b9_r2_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.05\"\n  },\n  {\n    \"id\": \"b9_r2_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"0.05\"\n  },\n  {\n    \"id\": \"b9_r2_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ 0.00\"\n  },\n  {\n    \"id\": \"b9_r2_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↓ -7.4%\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"heading\",\n    \"text\": \"AEW Collision 4-Week Rolling Average\"\n  },\n  {\n    \"id\": \"b11_r0_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Metric\"\n  },\n  {\n    \"id\": \"b11_r0_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"4 Week Avg\"\n  },\n  {\n    \"id\": \"b11_r0_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"Current Episode\"\n  },\n  {\n    \"id\": \"b11_r0_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"Diff\"\n  },\n  {\n    \"id\": \"b11_r0_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"%\"\n  },\n  {\n    \"id\": \"b11_r1_c0\",\n    \"type\": \"table_cell\",\n    \"text\": \"Viewers\"\n  },\n  {\n    \"id\": \"b11_r1_c1\",\n    \"type\": \"table_cell\",\n    \"text\": \"409,250\"\n  },\n  {\n    \"id\": \"b11_r1_c2\",\n    \"type\": \"table_cell\",\n    \"text\": \"498,000\"\n  },\n  {\n    \"id\": \"b11_r1_c3\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ 88,750\"\n  },\n  {\n    \"id\": \"b11_r1_c4\",\n    \"type\": \"table_cell\",\n    \"text\": \"↑ 21.7%\"\n  },\n  {\n    \"id\": \"b11_r2_c0\",\n    \"type\": \"table"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Dato positivo di ascolti per AEW Collision, necessario per il report settimanale.; deterministic:ratings:exceptional_signal,recency:fresh_12h",
-        "score": 24
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": true,
-        "status": "wp_not_ready",
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026",
-      "title_it": "AEW Collision: netto aumento negli ascolti del 27 maggio 2026"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "TNA",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_aj-francis-calls-out-mike-santana-for-tna-world-title-match-at-slammiversary.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_aj-francis-calls-out-mike-santana-for-tna-world-title-match-at-slammiversary.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Sviluppo diretto verso il prossimo PPV di TNA, notizia di servizio per i fan.; deterministic:recency:fresh_12h",
-        "score": 22
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary",
-      "title_it": "AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary"
-    },
-    {
-      "alfred": {
-        "decision": "approved",
-        "editorial_changes": [],
-        "issues": [],
-        "present": true,
-        "quality_score": 100,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": 14,
-        "diagnostic_stage": "ready_for_alfred",
-        "element_counts": {
-          "embed": 0,
-          "heading": 0,
-          "image": 0,
-          "quote": 5,
-          "table": 0,
-          "text": 9
-        },
-        "error": null,
-        "present": true,
-        "raw_element_count": 15,
-        "removed_before_gemini": 14,
-        "status": "ready_for_alfred",
-        "translation_model": "gemini-3.1-flash-lite",
-        "translation_used": true
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "<p>JBL ha elogiato Chad Gable e Ludwig Kaiser dopo il loro cruento Mask vs. Mask match ad AAA Noche de Los Grandes.</p>\n<p>Il WWE Hall of Famer era al commento per l&#x27;incontro del 30 maggio, in cui l&#x27;El Grande Americano di Ludwig Kaiser ha sconfitto l&#x27;Original El Grande Americano di Chad Gable. La sconfitta ha costretto Gable a togliersi la maschera davanti al pubblico, ponendo fine a una delle storyline più importanti dell&#x27;anno in AAA.</p>\n<p>I fan hanno elogiato il match sin dal suo svolgimento e JBL è chiaramente della stessa opinione. Intervenuto a Busted Open, ha affermato che il pubblico messicano ha contribuito a rendere il momento davvero epico.</p>\n<blockquote>“I fan messicani sono appassionati, punto. Amano la Lucha Libre e le loro stelle. Si lasciano coinvolgere e si divertono. È quello che abbiamo visto: loro, nel loro massimo splendore.”</blockquote>\n<p>JBL ha dichiarato che il match ha mostrato il pro-wrestling ai massimi livelli, ammettendo di essere rimasto sbalordito da quanto realizzato da Gable e Kaiser.</p>\n<blockquote>“E penso che abbiate visto il wrestling al suo meglio. Sono rimasto assolutamente sbalordito da ciò che hanno fatto sul ring.”</blockquote>\n<p>Ha dato grande merito a Kaiser per aver costruito il personaggio di El Grande Americano nel modo giusto, in particolare imparando la lingua e comprendendo il pubblico in Messico.</p>\n<blockquote>“Kaiser ha creato tutto questo. L&#x27;ha fatto imparando la lingua, e non solo imparandola: come si diceva in Texas, non stava imparando lo spagnolo, stava imparando il &#x27;messicano&#x27;. Ha imparato il dialetto locale, ed è stato assolutamente incredibile quello che ha fatto.”</blockquote>\n<p>JBL ha anche sottolineato che il lavoro di Gable in Messico è stato ben diverso dall&#x27;interpretare un heel sopra le righe nella televisione WWE. Ha spiegato che ottenere vero &#x27;heat&#x27; in Messico è una sfida completamente differente.</p>\n<blockquote>“Quando Chad è tornato per la prima volta, ci siamo messi a riflettere: è facile essere un heel scanzonato come lo era in WWE con i video del Varsity Club o qualsiasi diavoleria fosse. Ma cercare di ottenere heat in Messico è un altro livello. Non è nemmeno lo stesso business.”</blockquote>\n<p>JBL ha poi scommesso tutto su Gable, definendolo il miglior wrestler al mondo e affermando che il match con Kaiser è stato su un altro pianeta.</p>\n<blockquote>“Penso che Chad Gable sia il miglior wrestler al mondo, e non credo sia nemmeno una questione vicina. È stato assolutamente incredibile quello che lui e Kaiser hanno fatto.”</blockquote>\n<p>Si tratta di un elogio enorme da parte di JBL, specialmente dopo un match che ha già fatto molto parlare i fan. La perdita della maschera da parte di Gable è stata un momento fondamentale, ma i commenti di JBL chiariscono che, a suo avviso, entrambi gli atleti hanno dato vita a qualcosa di molto più importante di un semplice match con stipulazione.</p>\n<p>La storia di El Grande Americano ha dato a Kaiser e Gable la possibilità di mettersi alla prova davanti a uno dei pubblici più esigenti del wrestling, e JBL è convinto che abbiano superato l&#x27;esame a pieni voti.</p>",
-        "bob_body_html_preview": "<p>JBL ha elogiato Chad Gable e Ludwig Kaiser dopo il loro cruento Mask vs. Mask match ad AAA Noche de Los Grandes.</p>\n<p>Il WWE Hall of Famer era al commento per l&#x27;incontro del 30 maggio, in cui l&#x27;El Grande Americano di Ludwig Kaiser ha sconfitto l&#x27;Original El Grande Americano di Chad Gable. La sconfitta ha costretto Gable a togliersi la maschera davanti al pubblico, ponendo fine a una delle storyline più importanti dell&#x27;anno in AAA.</p>\n<p>I fan hanno elogiato il match sin dal suo svolgimento e JBL è chiaramente della stessa opinione. Intervenuto a Busted Open, ha affermato che il pubblico messicano ha contribuito a rendere il momento davvero epico.</p>\n<blockquote>“I fan messicani sono appassionati, punto. Amano la Lucha Libre e le loro stelle. Si lasciano coinvolgere e si divertono. È quello che abbiamo visto: loro, nel loro massimo splendore.”</blockquote>\n<p>JBL ha dichiarato che il match ha mostrato il pro-wrestling ai massimi livelli, ammettendo di essere rimasto sbalordito da quanto realizzato da Gable e Kaiser.</p>\n<blockquote>“E penso che abbiate visto il wrestling al suo meglio. Sono rimasto assolutamente sbalordito da ciò che hanno fatto sul ring.”</blockquote>\n<p>Ha dato grande merito a Kaiser per aver costruito il personaggio di El Grande Americano nel modo giusto, in particolare imparando la lingua e comprendendo il pubblico in Messico.</p>\n<blockquote>“Kaiser ha creato tutto questo. L&#x27;ha fatto imparando la lingua, e non solo imparandola: come si diceva in Texas, non stava imparando lo spagnolo, stava imparando il &#x27;messicano&#x27;. Ha imparato il dialetto locale, ed è stato assolutamente incredibile quello che ha fatto.”</blockquote>\n<p>JBL ha anche sottolineato che il lavoro di Gable in Messico è stato ben diverso dall&#x27;interpretare un heel sopra le righe nella televisione WWE. Ha spiegato che ottenere vero &#x27;heat&#x27; in Messico è una sfida completamente differente.</p>\n<blockquote>“Quando Chad è tornato per la prima volta, ci siamo messi a riflettere: è facile essere un heel scanzonato come lo era in WWE con i video del Varsity Club o qualsiasi diavoleria fosse. Ma cercare di ottenere heat in Messico è un altro livello. Non è nemmeno lo stesso business.”</blockquote>\n<p>JBL ha poi scommesso tutto su Gable, definendolo il miglior wrestler al mondo e affermando che il match con Kaiser è stato su un altro pianeta.</p>\n<blockquote>“Penso che Chad Gable sia il miglior wrestler al mondo, e non credo sia nemmeno una questione vicina. È stato assolutamente incredibile quello che lui e Kaiser hanno fatto.”</blockquote>\n<p>Si tratta di un elogio enorme da parte di JBL, specialmente dopo un match che ha già fatto molto parlare i fan. La perdita della maschera da parte di Gable è stata un momento fondamentale, ma i commenti di JBL chiariscono che, a suo avviso, entrambi gli atleti hanno dato vita a qualcosa di molto più importante di un semplice match con stipulazione.</p>\n<p>La storia di El Grande Americano ha dato a Kaiser e Gable la possibilità di mettersi alla prova davanti a uno dei pubblici più esigenti del wrestling, e JBL è convinto che abbiano superato l&#x27;esame a pieni voti.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_jbl-elogia-chad-gable-il-miglior-wrestler-al-mondo.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_jbl-elogia-chad-gable-il-miglior-wrestler-al-mondo.html",
-        "publisher_review_html_preview": "<p>JBL ha elogiato Chad Gable e Ludwig Kaiser dopo il loro cruento Mask vs. Mask match ad AAA Noche de Los Grandes.</p>\n<p>Il WWE Hall of Famer era al commento per l&#x27;incontro del 30 maggio, in cui l&#x27;El Grande Americano di Ludwig Kaiser ha sconfitto l&#x27;Original El Grande Americano di Chad Gable. La sconfitta ha costretto Gable a togliersi la maschera davanti al pubblico, ponendo fine a una delle storyline più importanti dell&#x27;anno in AAA.</p>\n<p>I fan hanno elogiato il match sin dal suo svolgimento e JBL è chiaramente della stessa opinione. Intervenuto a Busted Open, ha affermato che il pubblico messicano ha contribuito a rendere il momento davvero epico.</p>\n<blockquote>“I fan messicani sono appassionati, punto. Amano la Lucha Libre e le loro stelle. Si lasciano coinvolgere e si divertono. È quello che abbiamo visto: loro, nel loro massimo splendore.”</blockquote>\n<p>JBL ha dichiarato che il match ha mostrato il pro-wrestling ai massimi livelli, ammettendo di essere rimasto sbalordito da quanto realizzato da Gable e Kaiser.</p>\n<blockquote>“E penso che abbiate visto il wrestling al suo meglio. Sono rimasto assolutamente sbalordito da ciò che hanno fatto sul ring.”</blockquote>\n<p>Ha dato grande merito a Kaiser per aver costruito il personaggio di El Grande Americano nel modo giusto, in particolare imparando la lingua e comprendendo il pubblico in Messico.</p>\n<blockquote>“Kaiser ha creato tutto questo. L&#x27;ha fatto imparando la lingua, e non solo imparandola: come si diceva in Texas, non stava imparando lo spagnolo, stava imparando il &#x27;messicano&#x27;. Ha imparato il dialetto locale, ed è stato assolutamente incredibile quello che ha fatto.”</blockquote>\n<p>JBL ha anche sottolineato che il lavoro di Gable in Messico è stato ben diverso dall&#x27;interpretare un heel sopra le righe nella televisione WWE. Ha spiegato che ottenere vero &#x27;heat&#x27; in Messico è una sfida completamente differente.</p>\n<blockquote>“Quando Chad è tornato per la prima volta, ci siamo messi a riflettere: è facile essere un heel scanzonato come lo era in WWE con i video del Varsity Club o qualsiasi diavoleria fosse. Ma cercare di ottenere heat in Messico è un altro livello. Non è nemmeno lo stesso business.”</blockquote>\n<p>JBL ha poi scommesso tutto su Gable, definendolo il miglior wrestler al mondo e affermando che il match con Kaiser è stato su un altro pianeta.</p>\n<blockquote>“Penso che Chad Gable sia il miglior wrestler al mondo, e non credo sia nemmeno una questione vicina. È stato assolutamente incredibile quello che lui e Kaiser hanno fatto.”</blockquote>\n<p>Si tratta di un elogio enorme da parte di JBL, specialmente dopo un match che ha già fatto molto parlare i fan. La perdita della maschera da parte di Gable è stata un momento fondamentale, ma i commenti di JBL chiariscono che, a suo avviso, entrambi gli atleti hanno dato vita a qualcosa di molto più importante di un semplice match con stipulazione.</p>\n<p>La storia di El Grande Americano ha dato a Kaiser e Gable la possibilità di mettersi alla prova davanti a uno dei pubblici più esigenti del wrestling, e JBL è convinto che abbiano superato l&#x27;esame a pieni voti.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/\nTitolo feed: JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\nTitolo pagina: JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\nDescrizione: JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes. The WWE Hall of Famer was on\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes .\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"The WWE Hall of Famer was on commentary for the May 30 match, where Ludwig Kaiser’s El Grande Americano defeated Chad Gable’s Original El Grande Americano. The loss forced Gable to remove his mask in front of the crowd, ending one of AAA’s biggest storylines of the year.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Fans have been praising the match since it happened, and JBL clearly feels the same way. Speaking on Busted Open , he said the Mexican crowd helped make the moment feel massive.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“Mexican fans are just passionate fans. They love their Lucha Libre and they love their stars. They get into things and they enjoy it. That’s what you saw – them at their very best.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"JBL said the match showed pro wrestling at its highest level and admitted he was blown away by what Gable and Kaiser pulled off.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“And I thought you saw wrestling at its very best. I was absolutely blown away by what they did in the match.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"He gave Kaiser a lot of credit for building the El Grande Americano character the right way, especially by learning the language and understanding the audience in Mexico.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“Kaiser created all this. Kaiser created all this with learning the language, not just learning the language – as we used to say in Texas, he wasn’t learning Spanish, he was learning Mexican. The local dialect language was what he was learning, which was absolutely amazing, what he’s done.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"JBL also pointed out that Gable’s work in Mexico was not the same as playing a goofy heel on WWE television. He said getting real heat in Mexico is a completely different challenge.\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"quote\",\n    \"text\": \"“When Chad first came back, we’re sitting there thinking about it, it’s easy to be a campy heel like he was in WWE with the videos with the varsity club or whatever the heck it was. But then all of a sudden to try to get heat down in Mexico, that’s different level. It’s not even the same business.”\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"JBL then went all in on Gable, calling him the best wrestler in the world and saying the match with Kaiser was on another level.\"\n  },\n  {\n    \"id\": \"b12\",\n    \"type\": \"quote\",\n    \"text\": \"“I think Chad Gable’s the best wrestler in the world, and I don’t think it’s close. That was absolutely amazing what he and Kaiser did.”\"\n  },\n  {\n    \"id\": \"b13\",\n    \"type\": \"text\",\n    \"text\": \"That is huge praise from JBL, especially after a match that already had fans talking. Gable losing the mask was a major moment, but JBL’s comments make it clear he believes both men delivered something bigger than just another stipulation match.\"\n  },\n  {\n    \"id\": \"b14\",\n    \"type\": \"text\",\n    \"text\": \"The El Grande Americano story gave Kaiser and Gable a chance to prove themselves in front of one of wrestling’s toughest crowds, and JBL believes they nailed it.\"\n  }\n]\n"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Notizia fresca e di impatto narrativo, coinvolge talenti WWE in un contesto internazionale rilevante.; deterministic:entity:chad gable,recency:fresh_12h",
-        "score": 26
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": true,
-        "status": "wp_not_ready",
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war",
-      "title_it": "JBL elogia Chad Gable: \"È il miglior wrestler al mondo\""
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "AEW",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_jim-ross-details-health-travel-struggles-surrounding-aew-double-or-nothing-2026.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_jim-ross-details-health-travel-struggles-surrounding-aew-double-or-nothing-2026.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Notizia riguardante una figura iconica; aggiornamento sulle condizioni lavorative di JR post-PPV.; deterministic:recency:fresh_12h",
-        "score": 21
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles",
-      "title_it": "Jim Ross Details Health & Travel Struggles Surrounding AEW Double Or Nothing 2026"
-    },
     {
       "alfred": {
         "decision": "approved",
@@ -278,62 +51,124 @@
         "warnings": [
           {
             "code": "possible_missing_table",
-            "evidence": "Report rating e ascolti di TNA Impact (28 maggio 2026)",
+            "evidence": "AJ Francis sfida Mike Santana per il titolo mondiale a Slammiversary",
             "message": "Articolo con dati potenzialmente tabellari ma nessuna tabella estratta.",
             "severity": "warning"
           }
         ]
       },
       "bob": {
-        "clean_element_count": 4,
+        "clean_element_count": 11,
         "diagnostic_stage": "ready_for_alfred",
         "element_counts": {
-          "embed": 0,
+          "embed": 1,
           "heading": 0,
           "image": 0,
-          "quote": 1,
+          "quote": 3,
           "table": 0,
-          "text": 3
+          "text": 7
         },
         "error": null,
         "present": true,
-        "raw_element_count": 5,
-        "removed_before_gemini": 1,
+        "raw_element_count": 14,
+        "removed_before_gemini": 16,
         "status": "ready_for_alfred",
         "translation_model": "gemini-3.1-flash-lite",
         "translation_used": true
       },
       "category_hint": "TNA",
       "html_audit": {
-        "alfred_final_html_preview": "<p>A causa della concorrenza dei playoff NBA e NHL e dell&#x27;ennesima modifica al sistema di rilevazione Nielsen, &quot;TNA Impact&quot; ha visto i propri numeri calare nell&#x27;ultimo mese, passando da una media costante sopra i 200.000 spettatori a cifre comprese tra i 150.000 e i 190.000. Tuttavia, per l&#x27;episodio del 28 maggio, la TNA è andata vicina a ritornare nel range dei 200.000, pur a scapito del pubblico più giovane.</p>\n<p>Wrestlenomics e Programming Insider riportano che &quot;Impact&quot; ha totalizzato 195.000 spettatori, con uno 0.02 nel fondamentale target demografico 18-49. Il numero totale di spettatori è cresciuto del 10% rispetto ai 178.000 della settimana precedente, ma il dato ancora più incoraggiante riguarda il confronto con la media delle ultime quattro settimane: seppur di poco, il dato è salito del 4% rispetto ai 187.000 di media. Si tratta del secondo miglior risultato di maggio per la TNA, dopo i 196.000 spettatori dell&#x27;episodio del 14 maggio.</p>\n<p>Meno positivo, tuttavia, è il dato relativo al target 18-49. Nonostante l&#x27;aumento del numero totale di spettatori, la fascia demografica chiave ha subito un calo del 33% rispetto allo 0.03 della settimana precedente. Lo scenario non cambia se confrontato con la media delle quattro settimane, anch&#x27;essa pari a 0.03, contro la quale il rating 18-49 ha registrato una flessione analoga del 33%.</p>\n<blockquote>&quot;Impact&quot; ha visto il debutto sul ring di Fabian Aichner, due settimane dopo l&#x27;apparizione dell&#x27;ex star WWE al termine di &quot;Impact&quot;, dove aveva messo nel mirino il nuovo TNA X-Division Champion Cedric Alexander. Il match, il primo per Aichner dal dicembre 2024, ha visto l&#x27;italiano sconfiggere per squalifica Eddie Edwards, compagno di stable di Alexander nel System, dopo che lo stesso Alexander, Bear Bronson e Brian Myers sono intervenuti per attaccare Aichner. Lo show ha visto anche Santino Marella in azione, sconfitto dal suo futuro genero Channing Lorenzo in seguito all&#x27;interferenza di Arianna Grace.&quot;</blockquote>",
-        "bob_body_html_preview": "<p>A causa della concorrenza dei playoff NBA e NHL e dell&#x27;ennesima modifica al sistema di rilevazione Nielsen, &quot;TNA Impact&quot; ha visto i propri numeri calare nell&#x27;ultimo mese, passando da una media costante sopra i 200.000 spettatori a cifre comprese tra i 150.000 e i 190.000. Tuttavia, per l&#x27;episodio del 28 maggio, la TNA è andata vicina a ritornare nel range dei 200.000, pur a scapito del pubblico più giovane.</p>\n<p>Wrestlenomics e Programming Insider riportano che &quot;Impact&quot; ha totalizzato 195.000 spettatori, con uno 0.02 nel fondamentale target demografico 18-49. Il numero totale di spettatori è cresciuto del 10% rispetto ai 178.000 della settimana precedente, ma il dato ancora più incoraggiante riguarda il confronto con la media delle ultime quattro settimane: seppur di poco, il dato è salito del 4% rispetto ai 187.000 di media. Si tratta del secondo miglior risultato di maggio per la TNA, dopo i 196.000 spettatori dell&#x27;episodio del 14 maggio.</p>\n<p>Meno positivo, tuttavia, è il dato relativo al target 18-49. Nonostante l&#x27;aumento del numero totale di spettatori, la fascia demografica chiave ha subito un calo del 33% rispetto allo 0.03 della settimana precedente. Lo scenario non cambia se confrontato con la media delle quattro settimane, anch&#x27;essa pari a 0.03, contro la quale il rating 18-49 ha registrato una flessione analoga del 33%.</p>\n<blockquote>&quot;Impact&quot; ha visto il debutto sul ring di Fabian Aichner, due settimane dopo l&#x27;apparizione dell&#x27;ex star WWE al termine di &quot;Impact&quot;, dove aveva messo nel mirino il nuovo TNA X-Division Champion Cedric Alexander. Il match, il primo per Aichner dal dicembre 2024, ha visto l&#x27;italiano sconfiggere per squalifica Eddie Edwards, compagno di stable di Alexander nel System, dopo che lo stesso Alexander, Bear Bronson e Brian Myers sono intervenuti per attaccare Aichner. Lo show ha visto anche Santino Marella in azione, sconfitto dal suo futuro genero Channing Lorenzo in seguito all&#x27;interferenza di Arianna Grace.&quot;</blockquote>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_report-rating-e-ascolti-di-tna-impact-28-maggio-2026.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_report-rating-e-ascolti-di-tna-impact-28-maggio-2026.html",
-        "publisher_review_html_preview": "<p>A causa della concorrenza dei playoff NBA e NHL e dell&#x27;ennesima modifica al sistema di rilevazione Nielsen, &quot;TNA Impact&quot; ha visto i propri numeri calare nell&#x27;ultimo mese, passando da una media costante sopra i 200.000 spettatori a cifre comprese tra i 150.000 e i 190.000. Tuttavia, per l&#x27;episodio del 28 maggio, la TNA è andata vicina a ritornare nel range dei 200.000, pur a scapito del pubblico più giovane.</p>\n<p>Wrestlenomics e Programming Insider riportano che &quot;Impact&quot; ha totalizzato 195.000 spettatori, con uno 0.02 nel fondamentale target demografico 18-49. Il numero totale di spettatori è cresciuto del 10% rispetto ai 178.000 della settimana precedente, ma il dato ancora più incoraggiante riguarda il confronto con la media delle ultime quattro settimane: seppur di poco, il dato è salito del 4% rispetto ai 187.000 di media. Si tratta del secondo miglior risultato di maggio per la TNA, dopo i 196.000 spettatori dell&#x27;episodio del 14 maggio.</p>\n<p>Meno positivo, tuttavia, è il dato relativo al target 18-49. Nonostante l&#x27;aumento del numero totale di spettatori, la fascia demografica chiave ha subito un calo del 33% rispetto allo 0.03 della settimana precedente. Lo scenario non cambia se confrontato con la media delle quattro settimane, anch&#x27;essa pari a 0.03, contro la quale il rating 18-49 ha registrato una flessione analoga del 33%.</p>\n<blockquote>&quot;Impact&quot; ha visto il debutto sul ring di Fabian Aichner, due settimane dopo l&#x27;apparizione dell&#x27;ex star WWE al termine di &quot;Impact&quot;, dove aveva messo nel mirino il nuovo TNA X-Division Champion Cedric Alexander. Il match, il primo per Aichner dal dicembre 2024, ha visto l&#x27;italiano sconfiggere per squalifica Eddie Edwards, compagno di stable di Alexander nel System, dopo che lo stesso Alexander, Bear Bronson e Brian Myers sono intervenuti per attaccare Aichner. Lo show ha visto anche Santino Marella in azione, sconfitto dal suo futuro genero Channing Lorenzo in seguito all&#x27;interferenza di Arianna Grace.&quot;</blockquote>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/\nTitolo feed: TNA Impact Ratings & Viewership Report: 5/28/2026\nTitolo pagina: TNA Impact Ratings & Viewership Report: 5/28/2026 - Wrestling Inc.\nDescrizione: TNA Impact's total viewership reaches its second highest total in May, but continues to struggle in the 18-49 demo going against the NBA and NHL Playoffs\nCategoria suggerita: TNA\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Thanks to competition from the NBA and NHL Playoffs and another change in Nielsen's rating system, \\\"TNA Impact\\\" has seen its numbers take a dip over the last month, going from consistently drawing in the 200K's to the mid to high 100K's. But for the May 28 episode , TNA found themselves close to getting back into the 200K range, though it was at the expense of their younger viewers.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Wrestlenomics and Programming Insider report that \\\"Impact\\\" drew 195K total viewers, and a 0.02 in the coveted 18-49 demographic. Total viewership was up 10% from the previous week's 178K , though the better news was the number compared to the four week average. While only up slightly, the number did rise 4% from 187K. It's the second highest rating TNA has drawn in May, following the May 14 episode bringing in 196K total viewers .\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Less positive, however, was the 18-49 number. Despite a rise in total viewership, the key demo saw a decline, falling 33% from the previous week's 0.03. The song remained the same when it came to the four week average, which was also 0.03, with the 18-49 number falling a similar 33% against that.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"Impact\\\" featured the in-ring debut of Fabian Aichner, two weeks after the former WWE star appeared at the end of \\\"Impact,\\\" confronting new TNA X-Division Champion Cedric Alexander. The match, Aichner's first since December 2024, saw the Italian defeat Alexander's System stablemate and long-time TNA star Eddie Edwards by disqualification, after Alexander, Bear Bronson, and Brian Myers ran down to attack Aichner. The show also featured Santino Marella in action, losing a match to his future son-in-law Channing Lorenzo, after interference from Arianna Grace.\"\n  }\n]\n"
+        "alfred_final_html_preview": "https://www.youtube.com/watch?v=zAwcJ3-gqss\n\n<p>AJ Francis punta al palcoscenico principale di TNA Slammiversary e ha lanciato una sfida diretta al campione del mondo Mike Santana per far sì che accada.</p>\n<p>Santana è l&#x27;attuale TNA World Champion, ma il suo sfidante per Slammiversary non è ancora stato confermato. Durante una recente intervista con Jim Varsallone, Francis ha messo in chiaro di ritenere di dover essere lui a contendere il titolo a Santana nel main event.</p>\n<p>Francis ha fatto riferimento al loro precedente match singolo, sottolineando come sia stato così valido da essere candidato a Match dell&#x27;Anno, nonostante non si sia svolto in un pay-per-view.</p>\n<blockquote>“Io contro Mike Santana a Slammiversary con il titolo mondiale in palio sarebbe probabilmente uno dei più grandi incontri nella storia della TNA.”</blockquote>\n<p>Francis ha osservato come Santana, dopo il loro incontro, sia diventato campione mondiale, mentre lui ha continuato a offrire ottime prestazioni sul ring. A suo avviso, concedere loro 25 minuti sul palcoscenico più importante creerebbe qualcosa che i fan non potrebbero dimenticare.</p>\n<blockquote>“Penso sinceramente che se dessi a me e a Mike Santana 25 minuti per il titolo mondiale nel main event di Slammiversary, uscireste da lì pensando che sia uno dei migliori match che abbiate mai visto in vita vostra e uno dei più grandi incontri di tutti i tempi.”</blockquote>\n<p>In seguito, Francis ha alzato il tiro, mettendo in dubbio che Santana abbia il coraggio di accettare di difendere il titolo contro di lui.</p>\n<blockquote>“Ora, se poi Mike Santana abbia davvero le palle di concedermi una title shot, è un altro paio di maniche.”</blockquote>\n<p>Francis ha inoltre sostenuto che altri campioni abbiano evitato di offrirgli opportunità finché non è stato lui a forzare la mano, citando come esempi Leon Slater e Nic Nemeth.</p>\n<p>Per il momento, l&#x27;avversario di Santana per Slammiversary rimane un&#x27;incognita, ma AJ Francis ha espresso le sue intenzioni in modo chiaro e inequivocabile. Vuole il match per il TNA World Title, vuole il main event e crede che lui e Santana possano rubare la scena.</p>",
+        "bob_body_html_preview": "https://www.youtube.com/watch?v=zAwcJ3-gqss\n\n<p>AJ Francis punta al palcoscenico principale di TNA Slammiversary e ha lanciato una sfida diretta al campione del mondo Mike Santana per far sì che accada.</p>\n<p>Santana è l&#x27;attuale TNA World Champion, ma il suo sfidante per Slammiversary non è ancora stato confermato. Durante una recente intervista con Jim Varsallone, Francis ha messo in chiaro di ritenere di dover essere lui a contendere il titolo a Santana nel main event.</p>\n<p>Francis ha fatto riferimento al loro precedente match singolo, sottolineando come sia stato così valido da essere candidato a Match dell&#x27;Anno, nonostante non si sia svolto in un pay-per-view.</p>\n<blockquote>“Io contro Mike Santana a Slammiversary con il titolo mondiale in palio sarebbe probabilmente uno dei più grandi incontri nella storia della TNA.”</blockquote>\n<p>Francis ha osservato come Santana, dopo il loro incontro, sia diventato campione mondiale, mentre lui ha continuato a offrire ottime prestazioni sul ring. A suo avviso, concedere loro 25 minuti sul palcoscenico più importante creerebbe qualcosa che i fan non potrebbero dimenticare.</p>\n<blockquote>“Penso sinceramente che se dessi a me e a Mike Santana 25 minuti per il titolo mondiale nel main event di Slammiversary, uscireste da lì pensando che sia uno dei migliori match che abbiate mai visto in vita vostra e uno dei più grandi incontri di tutti i tempi.”</blockquote>\n<p>In seguito, Francis ha alzato il tiro, mettendo in dubbio che Santana abbia il coraggio di accettare di difendere il titolo contro di lui.</p>\n<blockquote>“Ora, se poi Mike Santana abbia davvero le palle di concedermi una title shot, è un altro paio di maniche.”</blockquote>\n<p>Francis ha inoltre sostenuto che altri campioni abbiano evitato di offrirgli opportunità finché non è stato lui a forzare la mano, citando come esempi Leon Slater e Nic Nemeth.</p>\n<p>Per il momento, l&#x27;avversario di Santana per Slammiversary rimane un&#x27;incognita, ma AJ Francis ha espresso le sue intenzioni in modo chiaro e inequivocabile. Vuole il match per il TNA World Title, vuole il main event e crede che lui e Santana possano rubare la scena.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_aj-francis-sfida-mike-santana-per-il-titolo-mondiale-a-slammiversary.html",
+        "published_html_preview": "https://www.youtube.com/watch?v=zAwcJ3-gqss\n\n<p>AJ Francis punta al palcoscenico principale di TNA Slammiversary e ha lanciato una sfida diretta al campione del mondo Mike Santana per far sì che accada.</p>\n<p>Santana è l&#x27;attuale TNA World Champion, ma il suo sfidante per Slammiversary non è ancora stato confermato. Durante una recente intervista con Jim Varsallone, Francis ha messo in chiaro di ritenere di dover essere lui a contendere il titolo a Santana nel main event.</p>\n<p>Francis ha fatto riferimento al loro precedente match singolo, sottolineando come sia stato così valido da essere candidato a Match dell&#x27;Anno, nonostante non si sia svolto in un pay-per-view.</p>\n<blockquote>“Io contro Mike Santana a Slammiversary con il titolo mondiale in palio sarebbe probabilmente uno dei più grandi incontri nella storia della TNA.”</blockquote>\n<p>Francis ha osservato come Santana, dopo il loro incontro, sia diventato campione mondiale, mentre lui ha continuato a offrire ottime prestazioni sul ring. A suo avviso, concedere loro 25 minuti sul palcoscenico più importante creerebbe qualcosa che i fan non potrebbero dimenticare.</p>\n<blockquote>“Penso sinceramente che se dessi a me e a Mike Santana 25 minuti per il titolo mondiale nel main event di Slammiversary, uscireste da lì pensando che sia uno dei migliori match che abbiate mai visto in vita vostra e uno dei più grandi incontri di tutti i tempi.”</blockquote>\n<p>In seguito, Francis ha alzato il tiro, mettendo in dubbio che Santana abbia il coraggio di accettare di difendere il titolo contro di lui.</p>\n<blockquote>“Ora, se poi Mike Santana abbia davvero le palle di concedermi una title shot, è un altro paio di maniche.”</blockquote>\n<p>Francis ha inoltre sostenuto che altri campioni abbiano evitato di offrirgli opportunità finché non è stato lui a forzare la mano, citando come esempi Leon Slater e Nic Nemeth.</p>\n<p>Per il momento, l&#x27;avversario di Santana per Slammiversary rimane un&#x27;incognita, ma AJ Francis ha espresso le sue intenzioni in modo chiaro e inequivocabile. Vuole il match per il TNA World Title, vuole il main event e crede che lui e Santana possano rubare la scena.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_aj-francis-sfida-mike-santana-per-il-titolo-mondiale-a-slammiversary.html",
+        "publisher_review_html_preview": "https://www.youtube.com/watch?v=zAwcJ3-gqss\n\n<p>AJ Francis punta al palcoscenico principale di TNA Slammiversary e ha lanciato una sfida diretta al campione del mondo Mike Santana per far sì che accada.</p>\n<p>Santana è l&#x27;attuale TNA World Champion, ma il suo sfidante per Slammiversary non è ancora stato confermato. Durante una recente intervista con Jim Varsallone, Francis ha messo in chiaro di ritenere di dover essere lui a contendere il titolo a Santana nel main event.</p>\n<p>Francis ha fatto riferimento al loro precedente match singolo, sottolineando come sia stato così valido da essere candidato a Match dell&#x27;Anno, nonostante non si sia svolto in un pay-per-view.</p>\n<blockquote>“Io contro Mike Santana a Slammiversary con il titolo mondiale in palio sarebbe probabilmente uno dei più grandi incontri nella storia della TNA.”</blockquote>\n<p>Francis ha osservato come Santana, dopo il loro incontro, sia diventato campione mondiale, mentre lui ha continuato a offrire ottime prestazioni sul ring. A suo avviso, concedere loro 25 minuti sul palcoscenico più importante creerebbe qualcosa che i fan non potrebbero dimenticare.</p>\n<blockquote>“Penso sinceramente che se dessi a me e a Mike Santana 25 minuti per il titolo mondiale nel main event di Slammiversary, uscireste da lì pensando che sia uno dei migliori match che abbiate mai visto in vita vostra e uno dei più grandi incontri di tutti i tempi.”</blockquote>\n<p>In seguito, Francis ha alzato il tiro, mettendo in dubbio che Santana abbia il coraggio di accettare di difendere il titolo contro di lui.</p>\n<blockquote>“Ora, se poi Mike Santana abbia davvero le palle di concedermi una title shot, è un altro paio di maniche.”</blockquote>\n<p>Francis ha inoltre sostenuto che altri campioni abbiano evitato di offrirgli opportunità finché non è stato lui a forzare la mano, citando come esempi Leon Slater e Nic Nemeth.</p>\n<p>Per il momento, l&#x27;avversario di Santana per Slammiversary rimane un&#x27;incognita, ma AJ Francis ha espresso le sue intenzioni in modo chiaro e inequivocabile. Vuole il match per il TNA World Title, vuole il main event e crede che lui e Santana possano rubare la scena.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/\nTitolo feed: AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary\nTitolo pagina: AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary\nDescrizione: AJ Francis wants the big spot at TNA Slammiversary, and he’s calling out Mike Santana to make it happen. Santana is currently TNA World Champion, but his\nCategoria suggerita: TNA\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"AJ Francis wants the big spot at TNA Slammiversary, and he’s calling out Mike Santana to make it happen.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Santana is currently TNA World Champion, but his challenger for Slammiversary has not been confirmed yet. Francis made it clear during a new interview wit h Jim Varsallone that he believes he should be the one standing across from Santana in the main event.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Francis pointed to their previous singles match, saying it was so good that it was nominated for Match of the Year despite not even happening on pay-per-view.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“Me versus Mike Santana at Slammiversary for the world title would probably be one of the greatest matches in the history of TNA.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Francis said Santana went from their match to becoming world champion, while he has continued putting on strong matches of his own. In his mind, giving them 25 minutes on the biggest stage would create something fans would not forget.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“I genuinely think if you gave me and Mike Santana 25 minutes for the world title in the main event of Slammiversary, you would walk away from that thinking this is one of the best matches I’ve ever seen in my life and one of the greatest matches of all time.”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"Then Francis took the trash talk up a notch, questioning whether Santana would actually agree to defend the title against him.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"quote\",\n    \"text\": \"“Now, whether Mike Santana actually has the balls to give me a title shot is a whole different thing.”\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"text\",\n    \"text\": \"Francis also claimed other champions have avoided giving him opportunities until he forced the issue, naming Leon Slater and Nic Nemeth as examples.\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"For now, Santana’s Slammiversary opponent is still up in the air, but AJ Francis is making his pitch loud and clear. He wants the TNA World Title match, he wants the main event, and he believes he and Santana could steal the whole show.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "ai:I dati sugli ascolti sono essenziali per il business report settimanale di TNA.; deterministic:ratings:exceptional_signal,recency:fresh_12h",
-        "score": 24
+        "reason": "ai:Sviluppo diretto della storyline verso il PPV. Notizia importante per il pubblico italiano che segue la TNA.; deterministic:recency:fresh_12h",
+        "score": 53
       },
       "publisher": {
-        "categories": null,
+        "categories": [
+          7,
+          8
+        ],
         "error": null,
-        "featured_media": null,
+        "featured_media": 5829,
         "present": true,
-        "status": "wp_not_ready",
-        "wp_link": null,
-        "wp_post_id": null
+        "status": "published",
+        "wp_link": "https://news.openwrestlingtv.com/tna/aj-francis-sfida-mike-santana-per-il-titolo-mondiale-a-slammiversary/",
+        "wp_post_id": 5830
+      },
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary",
+      "title_it": "AJ Francis sfida Mike Santana per il titolo mondiale a Slammiversary"
+    },
+    {
+      "alfred": {
+        "decision": "approved",
+        "editorial_changes": [],
+        "issues": [],
+        "present": true,
+        "quality_score": 100,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": 6,
+        "diagnostic_stage": "ready_for_alfred",
+        "element_counts": {
+          "embed": 1,
+          "heading": 0,
+          "image": 0,
+          "quote": 2,
+          "table": 0,
+          "text": 3
+        },
+        "error": null,
+        "present": true,
+        "raw_element_count": 8,
+        "removed_before_gemini": 2,
+        "status": "ready_for_alfred",
+        "translation_model": "gemini-3.1-flash-lite",
+        "translation_used": true
+      },
+      "category_hint": "AEW",
+      "html_audit": {
+        "alfred_final_html_preview": "https://www.youtube.com/watch?v=t94Vw4vvVuE\n\n<p>Per molti, AEW Double or Nothing è stato uno dei migliori eventi di wrestling dell&#x27;anno. Per Jim Ross, tuttavia, è stato un viaggio infernale. Nell&#x27;ultima puntata di &quot;Grilling JR&quot;, Ross ha ripercorso il suo viaggio dall&#x27;Oklahoma a New York per commentare il match tra Jon Moxley e Kyle O&#x27;Reilly a Double or Nothing, rivelando che le cose avrebbero potuto andare decisamente meglio. Le difficoltà sono iniziate sabato mattina, quando Ross era pronto a partire per New York.</p>\n<blockquote>&quot;Avevamo puntato la sveglia&quot;, ha raccontato Ross. &quot;Un autista doveva venirmi a prendere. Improvvisamente, sono caduto. Non cadevo da settimane. Sono caduto e ho battuto il sedere. Ho distrutto il telefono. Non so come sia successo, ma deve esserci un modo... immagino di averlo semplicemente messo in tasca. Diavolo, non lo so. Se avessi avuto il telefono con me, avrei potuto chiedere un po&#x27; di aiuto. Di conseguenza, ho perso il volo.&quot;</blockquote>\n<p>La caduta e il volo perso hanno messo di pessimo umore Ross, che non è mai stato un grande amante dei viaggi aerei, ma è riuscito a riprogrammare il volo e ad arrivare a New York sabato sera, incontrando poi il collega commentatore della AEW Excalibur e il suo agente Barry Bloom per una birra. Purtroppo, la situazione è peggiorata una volta arrivato nella sua stanza d&#x27;albergo.</p>\n<blockquote>&quot;Mi sono sdraiato sul letto, mi sono seduto sul bordo e mi sono rilassato&quot;, ha spiegato Ross. &quot;Beh, non avrei mai immaginato che la schiena mi avrebbe tradito. Così mi sono ritrovato in hotel, bloccato con la schiena, incapace di muovermi. È stata davvero un&#x27;esperienza orribile.&quot;</blockquote>\n<p>Col senno di poi, Ross afferma che avrebbe dovuto parlare con il proprietario della AEW, Tony Khan, della possibilità di saltare lo show, visti i suoi problemi di salute e il fatto che dovesse commentare un solo match. Fortunatamente, nonostante le disavventure, Ross è riuscito a tornare a casa in volo lunedì sera.</p>",
+        "bob_body_html_preview": "https://www.youtube.com/watch?v=t94Vw4vvVuE\n\n<p>Per molti, AEW Double or Nothing è stato uno dei migliori eventi di wrestling dell&#x27;anno. Per Jim Ross, tuttavia, è stato un viaggio infernale. Nell&#x27;ultima puntata di &quot;Grilling JR&quot;, Ross ha ripercorso il suo viaggio dall&#x27;Oklahoma a New York per commentare il match tra Jon Moxley e Kyle O&#x27;Reilly a Double or Nothing, rivelando che le cose avrebbero potuto andare decisamente meglio. Le difficoltà sono iniziate sabato mattina, quando Ross era pronto a partire per New York.</p>\n<blockquote>&quot;Avevamo puntato la sveglia&quot;, ha raccontato Ross. &quot;Un autista doveva venirmi a prendere. Improvvisamente, sono caduto. Non cadevo da settimane. Sono caduto e ho battuto il sedere. Ho distrutto il telefono. Non so come sia successo, ma deve esserci un modo... immagino di averlo semplicemente messo in tasca. Diavolo, non lo so. Se avessi avuto il telefono con me, avrei potuto chiedere un po&#x27; di aiuto. Di conseguenza, ho perso il volo.&quot;</blockquote>\n<p>La caduta e il volo perso hanno messo di pessimo umore Ross, che non è mai stato un grande amante dei viaggi aerei, ma è riuscito a riprogrammare il volo e ad arrivare a New York sabato sera, incontrando poi il collega commentatore della AEW Excalibur e il suo agente Barry Bloom per una birra. Purtroppo, la situazione è peggiorata una volta arrivato nella sua stanza d&#x27;albergo.</p>\n<blockquote>&quot;Mi sono sdraiato sul letto, mi sono seduto sul bordo e mi sono rilassato&quot;, ha spiegato Ross. &quot;Beh, non avrei mai immaginato che la schiena mi avrebbe tradito. Così mi sono ritrovato in hotel, bloccato con la schiena, incapace di muovermi. È stata davvero un&#x27;esperienza orribile.&quot;</blockquote>\n<p>Col senno di poi, Ross afferma che avrebbe dovuto parlare con il proprietario della AEW, Tony Khan, della possibilità di saltare lo show, visti i suoi problemi di salute e il fatto che dovesse commentare un solo match. Fortunatamente, nonostante le disavventure, Ross è riuscito a tornare a casa in volo lunedì sera.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_jim-ross-racconta-le-difficolt-di-salute-e-viaggio-per-aew-double-or-nothing-2026.html",
+        "published_html_preview": "https://www.youtube.com/watch?v=t94Vw4vvVuE\n\n<p>Per molti, AEW Double or Nothing è stato uno dei migliori eventi di wrestling dell&#x27;anno. Per Jim Ross, tuttavia, è stato un viaggio infernale. Nell&#x27;ultima puntata di &quot;Grilling JR&quot;, Ross ha ripercorso il suo viaggio dall&#x27;Oklahoma a New York per commentare il match tra Jon Moxley e Kyle O&#x27;Reilly a Double or Nothing, rivelando che le cose avrebbero potuto andare decisamente meglio. Le difficoltà sono iniziate sabato mattina, quando Ross era pronto a partire per New York.</p>\n<blockquote>&quot;Avevamo puntato la sveglia&quot;, ha raccontato Ross. &quot;Un autista doveva venirmi a prendere. Improvvisamente, sono caduto. Non cadevo da settimane. Sono caduto e ho battuto il sedere. Ho distrutto il telefono. Non so come sia successo, ma deve esserci un modo... immagino di averlo semplicemente messo in tasca. Diavolo, non lo so. Se avessi avuto il telefono con me, avrei potuto chiedere un po&#x27; di aiuto. Di conseguenza, ho perso il volo.&quot;</blockquote>\n<p>La caduta e il volo perso hanno messo di pessimo umore Ross, che non è mai stato un grande amante dei viaggi aerei, ma è riuscito a riprogrammare il volo e ad arrivare a New York sabato sera, incontrando poi il collega commentatore della AEW Excalibur e il suo agente Barry Bloom per una birra. Purtroppo, la situazione è peggiorata una volta arrivato nella sua stanza d&#x27;albergo.</p>\n<blockquote>&quot;Mi sono sdraiato sul letto, mi sono seduto sul bordo e mi sono rilassato&quot;, ha spiegato Ross. &quot;Beh, non avrei mai immaginato che la schiena mi avrebbe tradito. Così mi sono ritrovato in hotel, bloccato con la schiena, incapace di muovermi. È stata davvero un&#x27;esperienza orribile.&quot;</blockquote>\n<p>Col senno di poi, Ross afferma che avrebbe dovuto parlare con il proprietario della AEW, Tony Khan, della possibilità di saltare lo show, visti i suoi problemi di salute e il fatto che dovesse commentare un solo match. Fortunatamente, nonostante le disavventure, Ross è riuscito a tornare a casa in volo lunedì sera.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_jim-ross-racconta-le-difficolt-di-salute-e-viaggio-per-aew-double-or-nothing-2026.html",
+        "publisher_review_html_preview": "https://www.youtube.com/watch?v=t94Vw4vvVuE\n\n<p>Per molti, AEW Double or Nothing è stato uno dei migliori eventi di wrestling dell&#x27;anno. Per Jim Ross, tuttavia, è stato un viaggio infernale. Nell&#x27;ultima puntata di &quot;Grilling JR&quot;, Ross ha ripercorso il suo viaggio dall&#x27;Oklahoma a New York per commentare il match tra Jon Moxley e Kyle O&#x27;Reilly a Double or Nothing, rivelando che le cose avrebbero potuto andare decisamente meglio. Le difficoltà sono iniziate sabato mattina, quando Ross era pronto a partire per New York.</p>\n<blockquote>&quot;Avevamo puntato la sveglia&quot;, ha raccontato Ross. &quot;Un autista doveva venirmi a prendere. Improvvisamente, sono caduto. Non cadevo da settimane. Sono caduto e ho battuto il sedere. Ho distrutto il telefono. Non so come sia successo, ma deve esserci un modo... immagino di averlo semplicemente messo in tasca. Diavolo, non lo so. Se avessi avuto il telefono con me, avrei potuto chiedere un po&#x27; di aiuto. Di conseguenza, ho perso il volo.&quot;</blockquote>\n<p>La caduta e il volo perso hanno messo di pessimo umore Ross, che non è mai stato un grande amante dei viaggi aerei, ma è riuscito a riprogrammare il volo e ad arrivare a New York sabato sera, incontrando poi il collega commentatore della AEW Excalibur e il suo agente Barry Bloom per una birra. Purtroppo, la situazione è peggiorata una volta arrivato nella sua stanza d&#x27;albergo.</p>\n<blockquote>&quot;Mi sono sdraiato sul letto, mi sono seduto sul bordo e mi sono rilassato&quot;, ha spiegato Ross. &quot;Beh, non avrei mai immaginato che la schiena mi avrebbe tradito. Così mi sono ritrovato in hotel, bloccato con la schiena, incapace di muovermi. È stata davvero un&#x27;esperienza orribile.&quot;</blockquote>\n<p>Col senno di poi, Ross afferma che avrebbe dovuto parlare con il proprietario della AEW, Tony Khan, della possibilità di saltare lo show, visti i suoi problemi di salute e il fatto che dovesse commentare un solo match. Fortunatamente, nonostante le disavventure, Ross è riuscito a tornare a casa in volo lunedì sera.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles/\nTitolo feed: Jim Ross Details Health & Travel Struggles Surrounding AEW Double Or Nothing 2026\nTitolo pagina: Jim Ross Details Health & Travel Struggles Surrounding AEW Double Or Nothing 2026 - Wrestling Inc.\nDescrizione: AEW announcer Jim Ross details both the health and travel struggles he suffered through when trying to make AEW Double or Nothing 2026 last weekend\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"For many, AEW Double or Nothing was one of the greatest wrestling events of the year. For Jim Ross, however, it was the trip from hell. On the latest \\\"Grilling JR,\\\" Ross documented his trip from Oklahoma to New York City to call the Jon Moxley vs. Kyle O'Reilly match at Double or Nothing , and revealed the trip could've gone better. The hardship started on Saturday morning, when Ross was set to travel to New York.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"We have the alarm set,\\\" Ross said. \\\"A driver was going to pick me up. And all of a sudden, I fell. I hadn't had a fall in weeks. So I fell and busted my ass. I wasted my phone. I don't know how you do it but there's got to be a way...I guess I just put it in my pocket. Hell I don't know. If I had my phone with me, I could've gotten a little bit of help. So I, as a result of that, I missed my flight.\\\"\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"The fall and missing his flight put Ross, who isn't a fan of flying to begin with, in a foul mood, but he was able to reschedule and arrive to New York on Saturday night, later having a beer with fellow AEW announcer Excalibur and his agent Barry Bloom. Unfortunately, things got worse when Ross made his way to his hotel room.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"I laid on the bed, put my ass on the edge of the bed, and just relaxed,\\\" Ross said. \\\"Well, little did I know my back was going to go out on me. So now I'm in my hotel, with my back out, and I can't function. So it was just a horrible experience.\\\"\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"In hindsight, Ross says he would've talked to AEW owner Tony Khan about skipping the show, given his health issues and the fact he only called one match. Fortunately, despite the hardships, Ross was able to fly home on Monday night.\"\n  }\n]\n"
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "ai:Jim Ross è un personaggio iconico, notizia rilevante per il contesto post-PPV.; deterministic:recency:fresh_12h",
+        "score": 53
+      },
+      "publisher": {
+        "categories": [
+          5
+        ],
+        "error": null,
+        "featured_media": 5831,
+        "present": true,
+        "status": "published",
+        "wp_link": "https://news.openwrestlingtv.com/aew/jim-ross-racconta-le-difficolta-di-salute-e-viaggio-per-aew-double-or-nothing-2026/",
+        "wp_post_id": 5832
       },
       "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026",
-      "title_it": "Report rating e ascolti di TNA Impact (28 maggio 2026)"
+      "source_url": "https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles",
+      "title_it": "Jim Ross racconta le difficoltà di salute e viaggio per AEW Double or Nothing 2026"
     }
   ],
-  "generated_at": "2026-06-01T23:53:34.920296+00:00",
+  "generated_at": "2026-06-02T00:07:15.493890+00:00",
   "how_to_read": {
     "alfred_final_html_preview": "HTML dopo revisione/normalizzazioni di Alfred",
     "bob_body_html_preview": "HTML prodotto da Bob prima di Alfred",
@@ -1293,9 +1128,105 @@
       "overall_status": "error",
       "published": 0,
       "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 2,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 1
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 2,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 15,
+          "already_worked": 1,
+          "hard_skipped": 17,
+          "to_menzo": 16,
+          "to_simone": 1
+        },
+        "menzo": {
+          "pending": 1,
+          "skipped": 13,
+          "to_bob_or_v92": 2
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 2,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 6,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 2,
+      "errors": 0,
+      "generated_at": "2026-06-02T00:07:15.488939+00:00",
+      "overall_status": "ok",
+      "published": 2,
+      "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 2,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 1
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 2,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 15,
+          "already_worked": 1,
+          "hard_skipped": 17,
+          "to_menzo": 16,
+          "to_simone": 1
+        },
+        "menzo": {
+          "pending": 1,
+          "skipped": 13,
+          "to_bob_or_v92": 2
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 2,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 6,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 2,
+      "errors": 0,
+      "generated_at": "2026-06-02T00:07:15.493890+00:00",
+      "overall_status": "ok",
+      "published": 2,
+      "warnings": 0
     }
   ],
-  "overall_status": "error",
+  "overall_status": "ok",
   "run_summary_input": {
     "agents": {
       "alfred": "real_quality_editor",
@@ -1308,7 +1239,7 @@
       "simone": "real_report_director"
     },
     "alfred_handoff": {
-      "approved": 3,
+      "approved": 2,
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
@@ -1317,30 +1248,30 @@
     "bob_handoff": {
       "errors": 0,
       "extraction_empty": 0,
-      "ready_for_alfred": 3,
+      "ready_for_alfred": 2,
       "translation_pending": 0
     },
-    "ended_at": "2026-06-01T23:53:34.908611+00:00",
+    "ended_at": "2026-06-02T00:07:15.482901+00:00",
     "engine": "bot_v92.py",
     "massy_handoff": {
-      "already_published_hard_skipped": 13,
+      "already_published_hard_skipped": 15,
       "already_worked": 1,
-      "hard_skipped": 15,
-      "to_menzo": 18,
+      "hard_skipped": 17,
+      "to_menzo": 16,
       "to_simone": 1
     },
     "menzo_handoff": {
-      "pending": 0,
+      "pending": 1,
       "skipped": 13,
-      "to_bob_or_v92": 5
+      "to_bob_or_v92": 2
     },
     "newsroom_engine_override": false,
     "publisher_handoff": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 0,
-      "wp_not_ready": 3
+      "published": 2,
+      "wp_not_ready": 0
     },
     "runtime_delegations": 0,
     "runtime_exit_code": 0,
@@ -1349,71 +1280,89 @@
       "skipped": 6,
       "waiting": 0
     },
-    "started_at": "2026-06-01T23:52:48.442394+00:00",
-    "version": "v93_7_archivista_audit"
+    "started_at": "2026-06-02T00:06:51.154399+00:00",
+    "version": "v93_14_priority_label_bob_brief_guard"
   },
   "summary": {
-    "anomalies": 1,
-    "article_dossiers": 5,
+    "anomalies": 0,
+    "article_dossiers": 2,
     "errors_48h": 10,
-    "published_48h": 32,
-    "published_current_run": 0,
-    "runs_48h": 20
+    "published_48h": 36,
+    "published_current_run": 2,
+    "runs_48h": 22
   },
   "timeline": [
     {
       "agent": "Jarvis",
       "note": "engine=bot_v92.py",
       "phase": "bootstrap_status_written",
-      "timestamp": "2026-06-01T23:52:48.442642+00:00"
+      "timestamp": "2026-06-02T00:06:51.154662+00:00"
     },
     {
       "agent": "Massy",
-      "note": "to_simone=1 to_menzo=18 hard_skip=15 already=1",
+      "note": "to_simone=1 to_menzo=16 hard_skip=17 already=1",
       "phase": "sentinel_board_ready",
-      "timestamp": "2026-06-01T23:52:49.762268+00:00"
+      "timestamp": "2026-06-02T00:06:52.358024+00:00"
     },
     {
       "agent": "Simone",
       "note": "ready=0 waiting=0 skipped=6",
       "phase": "report_decision_ready",
-      "timestamp": "2026-06-01T23:52:49.765938+00:00"
+      "timestamp": "2026-06-02T00:06:52.361445+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "selected=5 pending=0 skipped=13",
+      "note": "selected=2 pending=1 skipped=13",
       "phase": "editorial_decision_ready",
-      "timestamp": "2026-06-01T23:52:55.752481+00:00"
+      "timestamp": "2026-06-02T00:07:01.853475+00:00"
+    },
+    {
+      "agent": "Menzo",
+      "note": "selected=2",
+      "phase": "priority_label_guard_applied",
+      "timestamp": "2026-06-02T00:07:01.854822+00:00"
     },
     {
       "agent": "Bob",
-      "note": "ready=3 pending=0 empty=0 errors=0",
+      "note": "ready=2 pending=0 empty=0 errors=0",
       "phase": "article_packages_ready",
-      "timestamp": "2026-06-01T23:53:09.531381+00:00"
+      "timestamp": "2026-06-02T00:07:08.677932+00:00"
+    },
+    {
+      "agent": "Bob",
+      "note": "warnings=0",
+      "phase": "bob_brief_guard_applied",
+      "timestamp": "2026-06-02T00:07:08.678975+00:00"
     },
     {
       "agent": "Alfred",
-      "note": "approved=3 needs_revision=0 blockers=0 warnings=1 changes=0",
+      "note": "approved=2 needs_revision=0 blockers=0 warnings=1 changes=0",
       "phase": "quality_review_ready",
-      "timestamp": "2026-06-01T23:53:09.541515+00:00"
+      "timestamp": "2026-06-02T00:07:08.686277+00:00"
+    },
+    {
+      "agent": "Alfred",
+      "note": "surfaced=0",
+      "phase": "bob_warning_guard_applied",
+      "timestamp": "2026-06-02T00:07:08.686793+00:00"
     },
     {
       "agent": "Publisher",
-      "note": "published=0 already=0 dry=0 wp_not_ready=3 errors=0",
+      "note": "published=2 already=0 dry=0 wp_not_ready=0 errors=0",
       "phase": "publication_ready",
-      "timestamp": "2026-06-01T23:53:34.908580+00:00"
+      "timestamp": "2026-06-02T00:07:15.482848+00:00"
     },
     {
       "agent": "Jarvis",
       "note": "v93 Publisher completed; v92 fallback skipped",
       "phase": "runtime_skipped",
-      "timestamp": "2026-06-01T23:53:34.908602+00:00"
+      "timestamp": "2026-06-02T00:07:15.482879+00:00"
     },
     {
       "agent": "Archivista",
-      "note": "status=error anomalies=1",
+      "note": "status=ok anomalies=0",
       "phase": "audit_ready",
-      "timestamp": "2026-06-01T23:53:34.919821+00:00"
+      "timestamp": "2026-06-02T00:07:15.493521+00:00"
     }
   ],
   "version": "v93_7_archivista_audit"

@@ -32,12 +32,12 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-01T23:52:49.760674+00:00",
+  "generated_at": "2026-06-02T00:06:52.356473+00:00",
   "handoff": {
-    "already_published_hard_skipped": 13,
+    "already_published_hard_skipped": 15,
     "already_worked": 1,
-    "hard_skipped": 15,
-    "to_menzo": 18,
+    "hard_skipped": 17,
+    "to_menzo": 16,
     "to_simone": 1
   },
   "hard_skipped": [
@@ -67,6 +67,18 @@
     {
       "decision": "hard_skip",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026",
+      "published": "Mon, 01 Jun 2026 21:59:58 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "wrestlinginc",
+      "summary": "TNA Impact's total viewership reaches its second highest total in May, but continues to struggle in the 18-49 demo going against the NBA and NHL Playoffs",
+      "title": "TNA Impact Ratings & Viewership Report: 5/28/2026",
+      "url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review",
       "published": "Mon, 01 Jun 2026 20:39:17 +0000",
       "published_guard": "publisher_history",
@@ -86,6 +98,18 @@
       "summary": "On a night that saw Roman Reigns and Cody Rhodes retain their titles, here are three things we hated and three things we loved about WWE Clash in Italy 2026!",
       "title": "WWE Clash In Italy 2026: 3 Things We Hated & 3 Things We Loved",
       "url": "https://www.wrestlinginc.com/2184477/wwe-clash-in-italy-2026-hated-loved-opinion-review/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war",
+      "published": "Mon, 01 Jun 2026 22:51:58 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-calls-chad-gable-the-best-wrestler-in-the-world-after-aaa-mask-vs-mask-war-24.jpg?x51578\" width=\"800\" /></p>JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes. The WWE Hall of Famer was on commentary for the May 30 match, where Ludwig Kaiser’s El Grande Americano defeated Chad Gable’s Original El Grande Americano. The loss forced Gable to remove ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/\" title=\"JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\">Read more</a>",
+      "title": "JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War",
+      "url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/"
     },
     {
       "decision": "hard_skip",
@@ -220,7 +244,7 @@
       "url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/"
     }
   ],
-  "known_published_urls": 20,
+  "known_published_urls": 26,
   "known_state_urls": 9,
   "mode": "sentinel_control_board",
   "news_candidates_for_menzo": [
@@ -383,14 +407,14 @@
     {
       "assigned_to": "Menzo",
       "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026",
-      "published": "Mon, 01 Jun 2026 21:59:58 +0000",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/steph-de-lander-posts-cryptic-tweet-about-women-wrestling-told-more-feminine",
+      "published": "Mon, 01 Jun 2026 23:58:53 +0000",
       "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "TNA Impact's total viewership reaches its second highest total in May, but continues to struggle in the 18-49 demo going against the NBA and NHL Playoffs",
-      "title": "TNA Impact Ratings & Viewership Report: 5/28/2026",
-      "url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/"
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Steph De Lander Posts Cryptic Tweet About Women In Wrestling Being Told To Be More Feminine\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/steph-de-lander-posts-cryptic-tweet-about-women-in-wrestling-being-told-to-be-more-feminine-58.jpg?x51578\" width=\"800\" /></p>Steph De Lander had something to say, and she didn’t need many words to make the point. On June 1, 2026, the former TNA talent took to Twitter and posted a cryptic message about women in wrestling still being told how they should present themselves. De Lander wrote: “Dang in 2026 we’re still telling women ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/steph-de-lander-posts-cryptic-tweet-about-women-wrestling-told-more-feminine/\" title=\"Steph De Lander Posts Cryptic Tweet About Women In Wrestling Being Told To Be More Feminine\">Read more</a>",
+      "title": "Steph De Lander Posts Cryptic Tweet About Women In Wrestling Being Told To Be More Feminine",
+      "url": "https://www.ringsidenews.com/steph-de-lander-posts-cryptic-tweet-about-women-wrestling-told-more-feminine/"
     },
     {
       "assigned_to": "Menzo",
@@ -408,18 +432,6 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war",
-      "published": "Mon, 01 Jun 2026 22:51:58 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-calls-chad-gable-the-best-wrestler-in-the-world-after-aaa-mask-vs-mask-war-24.jpg?x51578\" width=\"800\" /></p>JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes. The WWE Hall of Famer was on commentary for the May 30 match, where Ludwig Kaiser’s El Grande Americano defeated Chad Gable’s Original El Grande Americano. The loss forced Gable to remove ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/\" title=\"JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\">Read more</a>",
-      "title": "JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War",
-      "url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal",
       "published": "Mon, 01 Jun 2026 21:56:35 +0000",
       "reason": "requires_menzo_classification",
@@ -427,18 +439,6 @@
       "summary": "<p><img alt=\"The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/the-miz-begs-browns-trade-news-isnt-real-after-myles-garrett-deal-02.jpg?x51578\" width=\"800\" /></p>The Cleveland Browns found a new way to crush The Miz. The WWE star and longtime Browns fan reacted after the team traded Myles Garrett on Monday, and he sounded completely defeated. Garrett was one of the few bright spots in Cleveland after putting up 23 sacks during the 2024-25 season, but the Browns still ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal/\" title=\"The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal\">Read more</a>",
       "title": "The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal",
       "url": "https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026",
-      "published": "Mon, 01 Jun 2026 18:34:03 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Collision-Massive-Increase.jpg?x51578\" width=\"800\" /></p>The latest audience figures are available for the May 27, 2026 episode of AEW Collision on TBS, with the show delivering a major week-to-week surge. According to Programming Insider, AEW Collision on May 27, 2026 drew 498,000 viewers on TBS, with a 0.05 rating in the key P18–49 demographic. For comparison, the May 20, 2026 ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/\" title=\"AEW Collision Viewership Sees Massive Increase on May 27, 2026\">Read more</a>",
-      "title": "AEW Collision Viewership Sees Massive Increase on May 27, 2026",
-      "url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/"
     }
   ],
   "report_candidates": [

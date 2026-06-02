@@ -1,16 +1,16 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-01T23:53:34.907925+00:00",
+  "generated_at": "2026-06-02T00:07:15.482235+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 0,
-    "wp_not_ready": 3
+    "published": 2,
+    "wp_not_ready": 0
   },
   "input": {
     "alfred_version": "v93_8_alfred_structured_content_checks",
-    "approved_articles": 3
+    "approved_articles": 2
   },
   "mode": "wordpress_publisher_plain_oembed_urls",
   "policy": {
@@ -22,71 +22,34 @@
   },
   "results": [
     {
-      "content_chars": 3411,
-      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-calls-chad-gable-the-best-wrestler-in-the-world-after-aaa-mask-vs-mask-war-24.jpg",
-      "media_id": null,
-      "payload_preview": {
-        "categories": [],
-        "excerpt": "JBL tesse le lodi di Chad Gable e Ludwig Kaiser dopo il cruento Mask vs. Mask match disputato ad AAA Noche de Los Grandes.",
-        "meta": {
-          "original_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/",
-          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
-          "owtv_source": "ringsidenews"
-        },
-        "status": "publish",
-        "title": "JBL elogia Chad Gable: \"È il miglior wrestler al mondo\""
-      },
-      "source_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/",
-      "status": "wp_not_ready",
-      "title_it": "JBL elogia Chad Gable: \"È il miglior wrestler al mondo\"",
-      "wp_ready": false
+      "categories": [
+        7,
+        8
+      ],
+      "featured_media": 5829,
+      "source_url": "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/",
+      "status": "published",
+      "title_it": "AJ Francis sfida Mike Santana per il titolo mondiale a Slammiversary",
+      "wp_link": "https://news.openwrestlingtv.com/tna/aj-francis-sfida-mike-santana-per-il-titolo-mondiale-a-slammiversary/",
+      "wp_post_id": 5830
     },
     {
-      "content_chars": 2297,
-      "image_url": "https://www.wrestlinginc.com/img/gallery/tna-impact-ratings-viewership-report-5282026/l-intro-1780350939.jpg",
-      "media_id": null,
-      "payload_preview": {
-        "categories": [],
-        "excerpt": "TNA Impact sfiora nuovamente la soglia dei 200.000 spettatori, ma continua a soffrire nel target demografico 18-49 a causa della concorrenza dei playoff NBA e NHL.",
-        "meta": {
-          "original_url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/",
-          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
-          "owtv_source": "wrestlinginc"
-        },
-        "status": "publish",
-        "title": "Report rating e ascolti di TNA Impact (28 maggio 2026)"
-      },
-      "source_url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/",
-      "status": "wp_not_ready",
-      "title_it": "Report rating e ascolti di TNA Impact (28 maggio 2026)",
-      "wp_ready": false
-    },
-    {
-      "content_chars": 4708,
-      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW-Collision-Massive-Increase.jpg",
-      "media_id": null,
-      "payload_preview": {
-        "categories": [],
-        "excerpt": "Resi noti i dati di ascolto dell'episodio di AEW Collision del 27 maggio 2026 su TBS: lo show registra un significativo incremento settimanale.",
-        "meta": {
-          "original_url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/",
-          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
-          "owtv_source": "ringsidenews"
-        },
-        "status": "publish",
-        "title": "AEW Collision: netto aumento negli ascolti del 27 maggio 2026"
-      },
-      "source_url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-increase-may-27-2026/",
-      "status": "wp_not_ready",
-      "title_it": "AEW Collision: netto aumento negli ascolti del 27 maggio 2026",
-      "wp_ready": false
+      "categories": [
+        5
+      ],
+      "featured_media": 5831,
+      "source_url": "https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles/",
+      "status": "published",
+      "title_it": "Jim Ross racconta le difficoltà di salute e viaggio per AEW Double or Nothing 2026",
+      "wp_link": "https://news.openwrestlingtv.com/aew/jim-ross-racconta-le-difficolta-di-salute-e-viaggio-per-aew-double-or-nothing-2026/",
+      "wp_post_id": 5832
     }
   ],
   "version": "v93_10_publisher_plain_oembed_urls",
   "wp": {
     "dry_run": false,
     "post_status": "publish",
-    "ready": false,
-    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f7ea38d9a10>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=25)'))"
+    "ready": true,
+    "reason": "ok"
   }
 }
