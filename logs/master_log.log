@@ -22796,3 +22796,14 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [MANUAL v92] WP probe timeout/errore elapsed=10.17s endpoint=https://news.openwrestlingtv.com/wp-json/wp/v2/posts?per_page=1: HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/wp/v2/posts?per_page=1 (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f06849c2cd0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=10)'))
 [MANUAL v92] wp_ok=False wp_status=wp_error
 [MANUAL v92] WordPress non disponibile: interrompo prima di scrape/traduzione
+[MANUAL v92] DNS news.openwrestlingtv.com: 89.40.173.112
+[MANUAL v92] WP health check attempt 1/2 timeout=10s
+[MANUAL v92] WP probe status=200 elapsed=1.01s endpoint=https://news.openwrestlingtv.com/
+[MANUAL v92] WP probe status=200 elapsed=0.79s endpoint=https://news.openwrestlingtv.com/wp-json/
+[MANUAL v92] WP health check OK label=rest_root status=status_200 | tentativo 1/2
+[MANUAL v92] wp_ok=True wp_status=status_200
+[MANUAL v92] Avvio manual report url=https://www.wrestlinginc.com/2185015/wwe-raw-june-1-2026-seth-rollins-bron-breakker-tag-team-match-more/
+[MANUAL v92] source=wrestlinginc source_title=WWE Raw Results 6/1 - Seth Rollins Faces Bron Breakker, Tag Team Match & More - Wrestling Inc.
+[MANUAL v92] title=WWE Raw dell'1 Giugno  2026 - Risultati e momenti salienti
+[MANUAL v92] categories=Editoriali, WWE
+[MANUAL v92] Pubblicato post_id=5840 link=https://news.openwrestlingtv.com/wwe/wwe-raw-dell1-giugno-2026-risultati-e-momenti-salienti/

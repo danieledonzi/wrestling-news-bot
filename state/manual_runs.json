@@ -272,5 +272,28 @@
     "wp_post_id": 5755,
     "link": "https://news.openwrestlingtv.com/wwe/cody-rhodes-and-roman-reigns-have-tense-backstage-staredown-after-wwe-clash-in-italy/",
     "created_at": "2026-06-01T08:38:49.967460"
+  },
+  {
+    "job": {
+      "kind": "report",
+      "report_key": "manual_report_wwe-raw-dell-1-giugno-2026-risultati-e-momenti-salienti_20260602000838",
+      "report_id": "manual_report",
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2185015/wwe-raw-june-1-2026-seth-rollins-bron-breakker-tag-team-match-more/",
+      "source_title": "WWE Raw Results 6/1 - Seth Rollins Faces Bron Breakker, Tag Team Match & More - Wrestling Inc.",
+      "title": "WWE Raw dell'1 Giugno  2026 - Risultati e momenti salienti",
+      "date": "2026-06-02",
+      "categories": [
+        "Editoriali",
+        "WWE"
+      ],
+      "title_policy": "manual",
+      "translation_mode": "report",
+      "created_at": "2026-06-02T00:08:38.010809",
+      "status": "manual_ready_to_publish"
+    },
+    "wp_post_id": 5840,
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-raw-dell1-giugno-2026-risultati-e-momenti-salienti/",
+    "created_at": "2026-06-02T00:09:34.818473"
   }
 ]
