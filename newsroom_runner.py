@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
-NEWSROOM_VERSION = "v93_14_priority_label_bob_brief_guard"
+NEWSROOM_VERSION = "v93_15_forced_menzo_softpool_bob_cleanup"
 ARTIFACT_DIR = Path("artifacts") / "newsroom"
 
 
@@ -59,103 +59,6 @@ def handoff(data: dict[str, Any]) -> dict[str, Any]:
 
 def source_key(value: str) -> str:
     return str(value or "").split("#", 1)[0].split("?", 1)[0].rstrip("/").lower()
-
-
-def priority_label_from_review(review: dict[str, Any]) -> str:
-    label = str(review.get("priority_label") or "").strip().lower()
-    if label in {"high", "medium", "low", "skip"}:
-        return label
-    try:
-        numeric = int(review.get("priority", 0))
-    except Exception:
-        numeric = 0
-    if numeric >= 80:
-        return "high"
-    if numeric >= 50:
-        return "medium"
-    if numeric > 0:
-        # Backward compatibility for the first v93.13 prompt, where Gemini used 1/2.
-        return "medium" if numeric >= 2 else "low"
-    return "skip"
-
-
-def priority_score(label: str) -> int:
-    return {"high": 92, "medium": 72, "low": 48, "skip": 0}.get(label, 48)
-
-
-def sort_item(item: dict[str, Any]) -> tuple[int, float, str]:
-    age = item.get("age_hours")
-    try:
-        age_float = float(age)
-    except Exception:
-        age_float = 999999.0
-    try:
-        score = int(item.get("score", 0) or 0)
-    except Exception:
-        score = 0
-    return score, -age_float, str(item.get("published") or "")
-
-
-def normalize_menzo_priority_labels(menzo: dict[str, Any]) -> dict[str, Any]:
-    """Post-process Menzo v93.13 until the agent file itself fully owns v93.14.
-
-    Converts numeric AI priority into priority_label, applies a conservative score blend,
-    avoids duplicate_of=self, and caps selected data_report/rating articles to one per run.
-    """
-    if not isinstance(menzo, dict):
-        return menzo
-    reviews = ((menzo.get("menzo_ai") or {}).get("reviews") or []) if isinstance(menzo.get("menzo_ai"), dict) else []
-    review_by_id = {str(r.get("id")): r for r in reviews if isinstance(r, dict) and r.get("id")}
-    touched = 0
-    for section in ["selected", "pending", "skipped"]:
-        for item in menzo.get(section, []) if isinstance(menzo.get(section), list) else []:
-            if not isinstance(item, dict):
-                continue
-            review = item.get("menzo_ai_review") if isinstance(item.get("menzo_ai_review"), dict) else review_by_id.get(str(item.get("ai_id")), {})
-            if not isinstance(review, dict) or not review:
-                continue
-            label = priority_label_from_review(review)
-            review["priority_label"] = label
-            item["menzo_ai_review"] = review
-            item["ai_priority_label"] = label
-            item["ai_priority"] = priority_score(label)
-            det = int(item.get("deterministic_score", item.get("score", 0)) or 0)
-            item["score"] = int(round(det * 0.55 + priority_score(label) * 0.45))
-            duplicate_of = str(review.get("duplicate_of") or "").strip()
-            if duplicate_of and duplicate_of == str(item.get("ai_id")):
-                review["duplicate_of"] = ""
-                item.pop("duplicate_of", None)
-            touched += 1
-    selected = [x for x in menzo.get("selected", []) if isinstance(x, dict)]
-    pending = [x for x in menzo.get("pending", []) if isinstance(x, dict)]
-    kept: list[dict[str, Any]] = []
-    moved: list[dict[str, Any]] = []
-    max_data = int(os.getenv("V93_MENZO_MAX_DATA_REPORTS_PER_RUN", "1"))
-    data_seen = 0
-    for item in sorted(selected, key=sort_item, reverse=True):
-        if str(item.get("article_type")) == "data_report":
-            data_seen += 1
-            if data_seen > max_data:
-                item = dict(item)
-                item["decision"] = "pending"
-                item["priority"] = "soft"
-                item["reason"] = f"data_report_cap:{max_data}; {item.get('reason', '')}"
-                moved.append(item)
-                continue
-        kept.append(item)
-    if moved:
-        menzo["selected"] = kept
-        menzo["pending"] = sorted(pending + moved, key=sort_item, reverse=True)
-        menzo["allowed_urls_for_v92"] = [str(i.get("url") or i.get("source_url") or "") for i in kept if i.get("url") or i.get("source_url")]
-        if isinstance(menzo.get("handoff"), dict):
-            menzo["handoff"]["to_bob_or_v92"] = len(kept)
-            menzo["handoff"]["pending"] = len(menzo["pending"])
-    menzo.setdefault("policy", {})["priority_schema"] = "priority_label_high_medium_low_skip"
-    menzo.setdefault("policy", {})["data_report_cap_enabled"] = True
-    menzo["version"] = "v93_14_priority_label_bob_brief_guard"
-    menzo["mode"] = "ai_editorial_review_priority_label_guard"
-    menzo.setdefault("postprocess", {})["priority_label_normalized"] = touched
-    return menzo
 
 
 def attach_bob_brief_warnings(bob: dict[str, Any], menzo: dict[str, Any]) -> dict[str, Any]:
@@ -224,7 +127,17 @@ def surface_bob_warnings_in_alfred(alfred: dict[str, Any], bob: dict[str, Any]) 
     return alfred
 
 
-def safe_agent(*, timeline: list[dict[str, str]], agent: str, phase: str, import_fn: Callable[[], Callable[..., dict[str, Any]]], call_args: tuple[Any, ...] = (), artifact_name: str, default_handoff: dict[str, Any], note_fn: Callable[[dict[str, Any]], str]) -> dict[str, Any]:
+def safe_agent(
+    *,
+    timeline: list[dict[str, str]],
+    agent: str,
+    phase: str,
+    import_fn: Callable[[], Callable[..., dict[str, Any]]],
+    call_args: tuple[Any, ...] = (),
+    artifact_name: str,
+    default_handoff: dict[str, Any],
+    note_fn: Callable[[dict[str, Any]], str],
+) -> dict[str, Any]:
     try:
         fn = import_fn()
     except Exception as exc:
@@ -254,13 +167,21 @@ def import_simone():
 
 
 def import_menzo():
-    from agents.menzo import run_menzo
-    return run_menzo
+    try:
+        from agents.menzo_policy_v93_15 import run_menzo
+        return run_menzo
+    except Exception:
+        from agents.menzo import run_menzo
+        return run_menzo
 
 
 def import_bob():
-    from agents.bob import run_bob
-    return run_bob
+    try:
+        from agents.bob_policy_v93_15 import run_bob
+        return run_bob
+    except Exception:
+        from agents.bob import run_bob
+        return run_bob
 
 
 def import_alfred():
@@ -295,9 +216,7 @@ def main() -> int:
     massy_board = safe_agent(timeline=timeline, agent="Massy", phase="sentinel_board_ready", import_fn=import_massy, artifact_name="massy_board.json", default_handoff={"to_simone": 0, "to_menzo": 0, "hard_skipped": 0, "already_worked": 0}, note_fn=lambda r: "to_simone={to_simone} to_menzo={to_menzo} hard_skip={hard_skipped} already={already_worked}".format(**{**{"to_simone": 0, "to_menzo": 0, "hard_skipped": 0, "already_worked": 0}, **handoff(r)}))
     simone_decision = safe_agent(timeline=timeline, agent="Simone", phase="report_decision_ready", import_fn=import_simone, call_args=(massy_board,), artifact_name="simone_reports.json", default_handoff={"ready": 0, "waiting": 0, "skipped": 0}, note_fn=lambda r: "ready={ready} waiting={waiting} skipped={skipped}".format(**{**{"ready": 0, "waiting": 0, "skipped": 0}, **handoff(r)}))
     menzo_decision = safe_agent(timeline=timeline, agent="Menzo", phase="editorial_decision_ready", import_fn=import_menzo, call_args=(massy_board,), artifact_name="menzo_decisions.json", default_handoff={"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, note_fn=lambda r: "selected={to_bob_or_v92} pending={pending} skipped={skipped}".format(**{**{"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, **handoff(r)}))
-    menzo_decision = normalize_menzo_priority_labels(menzo_decision)
-    write_json(ARTIFACT_DIR / "menzo_decisions.json", menzo_decision)
-    add_timeline(timeline, "Menzo", "priority_label_guard_applied", f"selected={handoff(menzo_decision).get('to_bob_or_v92', 0)}")
+    add_timeline(timeline, "Menzo", "forced_policy_active", f"version={menzo_decision.get('version')}")
 
     bob_result = safe_agent(timeline=timeline, agent="Bob", phase="article_packages_ready", import_fn=import_bob, call_args=(menzo_decision,), artifact_name="bob_articles.json", default_handoff={"ready_for_alfred": 0, "translation_pending": 0, "errors": 0, "extraction_empty": 0}, note_fn=lambda r: "ready={ready_for_alfred} pending={translation_pending} empty={extraction_empty} errors={errors}".format(**{**{"ready_for_alfred": 0, "translation_pending": 0, "errors": 0, "extraction_empty": 0}, **handoff(r)}))
     bob_result = attach_bob_brief_warnings(bob_result, menzo_decision)
