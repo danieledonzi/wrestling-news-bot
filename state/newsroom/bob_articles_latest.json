@@ -3,194 +3,264 @@
   "articles": [
     {
       "bob_notes": [],
-      "body_html": "<p>JBL ha elogiato Chad Gable e Ludwig Kaiser dopo il sanguinoso Mask vs. Mask match andato in scena a AAA Noche de Los Grandes.</p>\n<p>Il WWE Hall of Famer era al commento tecnico durante l&#x27;incontro del 30 maggio, in cui l&#x27;El Grande Americano di Ludwig Kaiser ha sconfitto l&#x27;originale El Grande Americano di Chad Gable. La sconfitta ha costretto Gable a togliersi la maschera davanti al pubblico, mettendo fine a una delle storyline più importanti dell&#x27;anno in AAA.</p>\n<p>I fan hanno elogiato il match sin dal suo svolgimento e JBL è chiaramente della stessa opinione. Intervenuto ai microfoni di Busted Open, ha dichiarato che il pubblico messicano ha contribuito a rendere il momento davvero epocale.</p>\n<blockquote>“I fan messicani sono semplicemente appassionati. Amano la Lucha Libre e amano le loro star. Si lasciano coinvolgere e si divertono. È questo ciò che avete visto: loro, al massimo del loro splendore.”</blockquote>\n<p>JBL ha affermato che il match ha mostrato il wrestling professionistico ai massimi livelli e ha ammesso di essere rimasto sbalordito da quanto realizzato da Gable e Kaiser.</p>\n<blockquote>“E penso che abbiate visto il wrestling al suo meglio. Sono rimasto assolutamente sbalordito da ciò che hanno fatto durante il match.”</blockquote>\n<p>Ha dato grande merito a Kaiser per aver costruito il personaggio di El Grande Americano nel modo giusto, in particolare imparando la lingua e comprendendo il pubblico messicano.</p>\n<blockquote>“Kaiser ha creato tutto questo. Kaiser ha costruito tutto imparando la lingua, e non solo la lingua: come dicevamo in Texas, non stava imparando lo spagnolo, stava imparando il &#x27;messicano&#x27;. Stava imparando il dialetto locale, ed è stato assolutamente incredibile quello che ha fatto.”</blockquote>\n<p>JBL ha inoltre sottolineato che il lavoro di Gable in Messico è stato molto diverso dall&#x27;interpretare un heel caricaturale nella televisione WWE. Ha spiegato che ottenere vero &#x27;heat&#x27; in Messico è una sfida completamente diversa.</p>\n<blockquote>“Quando Chad è tornato per la prima volta, ne parlavamo: è facile essere un heel grottesco come lo era in WWE con i video del Varsity Club o qualsiasi altra cosa fosse. Ma poi, all&#x27;improvviso, cercare di ottenere &#x27;heat&#x27; in Messico è un altro livello. Non è nemmeno lo stesso business.”</blockquote>\n<p>JBL si è poi sbilanciato su Gable, definendolo il miglior wrestler al mondo e affermando che il match con Kaiser è stato su un altro livello.</p>\n<blockquote>“Penso che Chad Gable sia il miglior wrestler al mondo, e non credo ci sia nemmeno paragone. È stato assolutamente incredibile quello che hanno fatto lui e Kaiser.”</blockquote>\n<p>Si tratta di un elogio importante da parte di JBL, specialmente dopo un match che ha già fatto molto discutere i fan. La perdita della maschera da parte di Gable è stato un momento fondamentale, ma i commenti di JBL chiariscono che, a suo avviso, entrambi gli atleti hanno dato vita a qualcosa di molto più profondo di un semplice incontro con stipulazione.</p>\n<p>La storia di El Grande Americano ha dato a Kaiser e Gable la possibilità di mettersi alla prova davanti a uno dei pubblici più esigenti del wrestling, e JBL ritiene che abbiano centrato l&#x27;obiettivo.</p>",
-      "category_hint": "WWE",
-      "clean_element_count": 14,
-      "created_at": "2026-06-02T00:20:06.295458+00:00",
+      "body_html": "https://youtu.be/FPyacCODvSw?si=hslw99CGgj3ebvZH\n\n<p>Cody Rhodes ha mantenuto l&#x27;Undisputed WWE Championship in modo controverso a Clash in Italy. Il piede di GUNTHER era sotto la corda durante lo schienamento di Rhodes; l&#x27;arbitro, con la visuale ostruita, ha comunque decretato la vittoria di Rhodes.</p>\n<blockquote>Durante un&#x27;intervista con Joe Tessitore su ESPN, Rhodes ha commentato il punt ricevuto da Randy Orton: &quot;Tutto quello che c&#x27;è da sapere su di me viene dopo. Mi sono rialzato e ho cercato di incrociare lo sguardo di tutti per far capire due cose: sono ancora il campione e sono ancora qui. E se quello è stato il miglior colpo di Randy, e Randy è al massimo della sua forma, allora cosa dice questo di me? Non voglio sembrare arrogante. Sono stato piuttosto fortunato, ma non so quanta fortuna mi sia rimasta ancora.&quot;</blockquote>\n<blockquote>Dopo WrestleMania 42, ha trascorso del tempo con la sua famiglia. Ha ripensato a quando suo padre gli diceva che, dopo gli incontri, sarebbe tornato a casa malconcio dovendo spiegare ai figli di stare bene. La storia si è ripetuta quando la figlia di quattro anni gli ha chiesto cosa gli fosse successo e se stesse bene. Un Rhodes visibilmente emozionato ha dichiarato: &quot;Niente ti prepara a una cosa del genere e spero che non diventi un&#x27;abitudine&quot;.</blockquote>\n<blockquote>Tessitore gli ha chiesto cosa significhi essere il &quot;QB1&quot;. Rhodes ha risposto che il QB1 è colui che garantisce maggiore costanza, settimana dopo settimana. &quot;Ci sono tutte queste battute sul fatto che io segua il modello di John Cena, e non mi danno affatto fastidio, perché è un modello straordinario&quot;. Ha ammesso di non essersi sentito un vincitore dopo WrestleMania e di aver bisogno di sfidanti, perché è &quot;dipendente dalla posizione di vertice. Non ho paura di dirlo a nessuno&quot;.</blockquote>",
+      "category_hint": "Business",
+      "clean_element_count": 5,
+      "created_at": "2026-06-02T05:10:18.092056+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "element_counts": {
+        "embed": 1,
+        "heading": 0,
+        "image": 0,
+        "quote": 3,
+        "table": 0,
+        "text": 1
+      },
+      "elements": [
+        {
+          "block_id": "b1",
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://youtu.be/FPyacCODvSw?si=hslw99CGgj3ebvZH"
+        },
+        {
+          "block_id": "b2",
+          "text": "Cody Rhodes retained the Undisputed WWE Championship in controversial fashion at Clash in Italy . GUNTHER's foot was under the rope as Rhodes pinned him. The referee's view was obstructed and he declared Rhodes the victor.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "source_tag": "p",
+          "text": "During an ESPN interview with Joe Tessitore, Rhodes discussed being punted by Randy Orton . \"Everything you need to know about me happens after. I got up and I tried to make eye contact with everyone and let them know two things; I'm still the champ, still here. And if that's Randy's best shot and Randy is at his best ever, then what does that say about me? I don't mean this with arrogance. I'm pretty lucky and I don't know how much more luck I have.\"",
+          "type": "quote"
+        },
+        {
+          "block_id": "b4",
+          "source_tag": "p",
+          "text": "After WrestleMania 42, he spent time with his family. He reflected on his dad telling him that he'd have to come home after matches beat up and explain to his kids that he was okay. History repeated itself when Rhodes' four-year-old daughter asked what happened to him and if he was okay. An emotional Rhodes said, \"nothing prepares you for that and I hope that's not a regular occurrence.\"",
+          "type": "quote"
+        },
+        {
+          "block_id": "b5",
+          "source_tag": "p",
+          "text": "Tessitore asked him about being QB1. Rhodes said that QB1 is the most consistent, week in and week out. \"There's all these jokes that I follow the John Cena model and I don't mind those jokes at all because that's a hell of a model.\" He didn't feel like a winner after WrestleMania and needs challengers because he's \"addicted to the top spot. I'm not afraid to tell anybody that.\"",
+          "type": "quote"
+        }
+      ],
+      "excerpt_it": "Il campione indiscusso WWE Cody Rhodes riflette sul suo regno, il confronto con Randy Orton e le difficoltà di conciliare carriera e famiglia.",
+      "extraction_diagnostics": {
+        "candidate_node_count": 12,
+        "clean_element_count": 5,
+        "dom_noise_reduction_enabled": false,
+        "embed_count": 1,
+        "global_embed_recovery_enabled": false,
+        "quote_count": 3,
+        "raw_element_count": 7,
+        "removed_by_node_count": 0,
+        "removed_by_sanitize_count": 2,
+        "root_name": "article",
+        "root_text_chars": 1686,
+        "stage": "complete",
+        "table_count": 0
+      },
+      "fetched_html_chars": 49871,
+      "menzo_score": 83,
+      "meta": {
+        "description": "WWE Undisputed Champion Cody Rhodes sat down with Joe Tessitore in an ESPN interview prior to his match with GUNTHER at Clash in Italy.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/wwe-champ-cody-rhodes-says-he-feels-like-his-luck-is-running-out/l-intro-1780372450.jpg",
+        "source_title": "WWE Champ Cody Rhodes Says He Feels Like His Luck Is Running Out - Wrestling Inc."
+      },
+      "raw_element_count": 7,
+      "raw_elements_preview": [
+        {
+          "block_id": "b1",
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://youtu.be/FPyacCODvSw?si=hslw99CGgj3ebvZH"
+        },
+        {
+          "alt": "Cody Rhodes raises the WWE Undisputed Champion over his head",
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/wwe-champ-cody-rhodes-says-he-feels-like-his-luck-is-running-out/intro-1780372450.jpg"
+        },
+        {
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://youtu.be/FPyacCODvSw?si=hslw99CGgj3ebvZH"
+        },
+        {
+          "block_id": "b2",
+          "text": "Cody Rhodes retained the Undisputed WWE Championship in controversial fashion at Clash in Italy . GUNTHER's foot was under the rope as Rhodes pinned him. The referee's view was obstructed and he declared Rhodes the victor.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "source_tag": "p",
+          "text": "During an ESPN interview with Joe Tessitore, Rhodes discussed being punted by Randy Orton . \"Everything you need to know about me happens after. I got up and I tried to make eye contact with everyone and let them know two things; I'm still the champ, still here. And if that's Randy's best shot and Randy is at his best ever, then what does that say about me? I don't mean this with arrogance. I'm pretty lucky and I don't know how much more luck I have.\"",
+          "type": "quote"
+        },
+        {
+          "block_id": "b4",
+          "source_tag": "p",
+          "text": "After WrestleMania 42, he spent time with his family. He reflected on his dad telling him that he'd have to come home after matches beat up and explain to his kids that he was okay. History repeated itself when Rhodes' four-year-old daughter asked what happened to him and if he was okay. An emotional Rhodes said, \"nothing prepares you for that and I hope that's not a regular occurrence.\"",
+          "type": "quote"
+        },
+        {
+          "block_id": "b5",
+          "source_tag": "p",
+          "text": "Tessitore asked him about being QB1. Rhodes said that QB1 is the most consistent, week in and week out. \"There's all these jokes that I follow the John Cena model and I don't mind those jokes at all because that's a hell of a model.\" He didn't feel like a winner after WrestleMania and needs challengers because he's \"addicted to the top spot. I'm not afraid to tell anybody that.\"",
+          "type": "quote"
+        }
+      ],
+      "removed_before_gemini": 2,
+      "removed_elements_debug": [
+        {
+          "index": 2,
+          "item": {
+            "alt": "Cody Rhodes raises the WWE Undisputed Champion over his head",
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/wwe-champ-cody-rhodes-says-he-feels-like-his-luck-is-running-out/intro-1780372450.jpg"
+          },
+          "reason": "duplicate_featured_image"
+        },
+        {
+          "index": 3,
+          "item": {
+            "source_tag": "div",
+            "type": "embed",
+            "url": "https://youtu.be/FPyacCODvSw?si=hslw99CGgj3ebvZH"
+          },
+          "reason": "duplicate_or_empty_embed"
+        }
+      ],
+      "source": "wrestlinginc",
+      "source_html_contains_embed_hint": true,
+      "source_title": "WWE Champ Cody Rhodes Says He Feels Like His Luck Is Running Out",
+      "source_url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ/",
+      "status": "ready_for_alfred",
+      "title_it": "Cody Rhodes: \"La mia fortuna sta finendo\"",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_missing_units": [],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ/\nTitolo feed: WWE Champ Cody Rhodes Says He Feels Like His Luck Is Running Out\nTitolo pagina: WWE Champ Cody Rhodes Says He Feels Like His Luck Is Running Out - Wrestling Inc.\nDescrizione: WWE Undisputed Champion Cody Rhodes sat down with Joe Tessitore in an ESPN interview prior to his match with GUNTHER at Clash in Italy.\nCategoria suggerita: Business\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Cody Rhodes retained the Undisputed WWE Championship in controversial fashion at Clash in Italy . GUNTHER's foot was under the rope as Rhodes pinned him. The referee's view was obstructed and he declared Rhodes the victor.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"During an ESPN interview with Joe Tessitore, Rhodes discussed being punted by Randy Orton . \\\"Everything you need to know about me happens after. I got up and I tried to make eye contact with everyone and let them know two things; I'm still the champ, still here. And if that's Randy's best shot and Randy is at his best ever, then what does that say about me? I don't mean this with arrogance. I'm pretty lucky and I don't know how much more luck I have.\\\"\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"After WrestleMania 42, he spent time with his family. He reflected on his dad telling him that he'd have to come home after matches beat up and explain to his kids that he was okay. History repeated itself when Rhodes' four-year-old daughter asked what happened to him and if he was okay. An emotional Rhodes said, \\\"nothing prepares you for that and I hope that's not a regular occurrence.\\\"\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"Tessitore asked him about being QB1. Rhodes said that QB1 is the most consistent, week in and week out. \\\"There's all these jokes that I follow the John Cena model and I don't mind those jokes at all because that's a hell of a model.\\\" He didn't feel like a winner after WrestleMania and needs challengers because he's \\\"addicted to the top spot. I'm not afraid to tell anybody that.\\\"\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Cody Rhodes: \\\"La mia fortuna sta finendo\\\"\",\n  \"excerpt_it\": \"Il campione indiscusso WWE Cody Rhodes riflette sul suo regno, il confronto con Randy Orton e le difficoltà di conciliare carriera e famiglia.\",\n  \"translations\": {\n    \"b2\": \"Cody Rhodes ha mantenuto l'Undisputed WWE Championship in modo controverso a Clash in Italy. Il piede di GUNTHER era sotto la corda durante lo schienamento di Rhodes; l'arbitro, con la visuale ostruita, ha comunque decretato la vittoria di Rhodes.\",\n    \"b3\": \"Durante un'intervista con Joe Tessitore su ESPN, Rhodes ha commentato il punt ricevuto da Randy Orton: \\\"Tutto quello che c'è da sapere su di me viene dopo. Mi sono rialzato e ho cercato di incrociare lo sguardo di tutti per far capire due cose: sono ancora il campione e sono ancora qui. E se quello è stato il miglior colpo di Randy, e Randy è al massimo della sua forma, allora cosa dice questo di me? Non voglio sembrare arrogante. Sono stato piuttosto fortunato, ma non so quanta fortuna mi sia rimasta ancora.\\\"\",\n    \"b4\": \"Dopo WrestleMania 42, ha trascorso del tempo con la sua famiglia. Ha ripensato a quando suo padre gli diceva che, dopo gli incontri, sarebbe tornato a casa malconcio dovendo spiegare ai figli di stare bene. La storia si è ripetuta quando la figlia di quattro anni gli ha chiesto cosa gli fosse successo e se stesse bene. Un Rhodes visibilmente emozionato ha dichiarato: \\\"Niente ti prepara a una cosa del genere e spero che non diventi un'abitudine\\\".\",\n    \"b5\": \"Tessitore gli ha chiesto cosa significhi essere il \\\"QB1\\\". Rhodes ha risposto che il QB1 è colui che garantisce maggiore costanza, settimana dopo settimana. \\\"Ci sono tutte queste battute sul fatto che io segua il modello di John Cena, e non mi danno affatto fastidio, perché è un modello straordinario\\\". Ha ammesso di non essersi sentito un vincitore dopo WrestleMania e di aver bisogno di sfidanti, perché è \\\"dipendente dalla posizione di vertice. Non ho paura di dirlo a nessuno\\\".\"\n  },\n  \"notes\": []\n}",
+      "translation_unit_count": 4,
+      "translation_used": true
+    },
+    {
+      "bob_notes": [],
+      "body_html": "<p>JBL ritiene che il recente slancio della AAA possa presto tradursi in qualcosa di più importante.</p>\n<p>La AAA sta trasmettendo i propri show su YouTube per i fan al di fuori dei suoi mercati principali in Messico, America Centrale e Sud America. Questo facile accesso ha aiutato molti più fan in tutto il mondo a seguire la promotion, specialmente grazie alla presenza di talenti WWE e a importanti storyline crossover che hanno attirato maggiore attenzione sul brand.</p>\n<p>Durante una recente intervista a Busted Open Radio, JBL ha chiarito di non possedere informazioni riservate, ma di ritenere che la AAA possa presto siglare un nuovo accordo televisivo.</p>\n<blockquote>“Non ho informazioni privilegiate a riguardo, non sto rivelando nulla proveniente da meeting o altro, ma penso che presto otterranno un ottimo accordo televisivo. Hanno già un buon accordo con Fox Deportes che copre dal Messico al Sud America e credo che ne otterranno un altro.”</blockquote>\n<p>Si tratterebbe di un passo importante per la AAA, considerando che la promotion sta già guadagnando sempre più attenzione internazionale grazie a YouTube e alla sua attuale presenza su Fox Deportes.</p>\n<p>Le considerazioni di JBL arrivano in un momento in cui la AAA è al centro delle discussioni tra i fan, dopo grandi eventi come Noche de Los Grandes e il Mask vs. Mask match tra El Grande Americano e l&#x27;Original El Grande Americano. Non c&#x27;è ancora nulla di ufficiale e JBL ha sottolineato di aver espresso solo un&#x27;opinione personale. Tuttavia, appare convinto che il recente momento positivo della AAA possa portare a un nuovo accordo televisivo.</p>\n<p>Derek Holloway è un autore di Ringside News specializzato in notizie, rumor e risultati di wrestling. Si occupa di fornire una copertura affidabile su WWE, AEW e sulle principali federazioni di wrestling.</p>",
+      "category_hint": "Business",
+      "clean_element_count": 7,
+      "created_at": "2026-06-02T05:10:20.349073+00:00",
       "diagnostic_stage": "ready_for_alfred",
       "element_counts": {
         "embed": 0,
         "heading": 0,
         "image": 0,
-        "quote": 5,
+        "quote": 1,
         "table": 0,
-        "text": 9
+        "text": 6
       },
       "elements": [
         {
           "block_id": "b1",
-          "text": "JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes .",
+          "text": "JBL thinks AAA’s momentum may be about to turn into something bigger.",
           "type": "text"
         },
         {
           "block_id": "b2",
-          "text": "The WWE Hall of Famer was on commentary for the May 30 match, where Ludwig Kaiser’s El Grande Americano defeated Chad Gable’s Original El Grande Americano. The loss forced Gable to remove his mask in front of the crowd, ending one of AAA’s biggest storylines of the year.",
+          "text": "AAA has been airing shows on YouTube for fans outside its regular markets in Mexico, Central America, and South America. That easy access has helped more fans around the world follow the promotion, especially with WWE talent and bigger crossover stories bringing more attention to the brand.",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "text": "Fans have been praising the match since it happened, and JBL clearly feels the same way. Speaking on Busted Open , he said the Mexican crowd helped make the moment feel massive.",
+          "text": "During a new interview on Busted Open Radio , JBL made it clear that he does not have inside information, but he believes AAA could end up landing another television deal soon.",
           "type": "text"
         },
         {
           "block_id": "b4",
           "source_tag": "blockquote",
-          "text": "“Mexican fans are just passionate fans. They love their Lucha Libre and they love their stars. They get into things and they enjoy it. That’s what you saw – them at their very best.”",
+          "text": "“I don’t have any insight about this, I’m not giving away anything from meetings or anything but I think they’re going to get a pretty good TV deal coming up. They’ve got a good Fox Deportes deal down from Mexico to South America, I think they’ll get another TV deal.”",
           "type": "quote"
         },
         {
           "block_id": "b5",
-          "text": "JBL said the match showed pro wrestling at its highest level and admitted he was blown away by what Gable and Kaiser pulled off.",
+          "text": "That would be a major step for AAA, especially with the promotion already gaining more international attention through YouTube and its current Fox Deportes presence.",
           "type": "text"
         },
         {
           "block_id": "b6",
-          "source_tag": "blockquote",
-          "text": "“And I thought you saw wrestling at its very best. I was absolutely blown away by what they did in the match.”",
-          "type": "quote"
+          "text": "JBL’s comments come at a time when AAA has been getting a lot more discussion from fans after major events like Noche de Los Grandes and the Mask vs. Mask match between El Grande Americano and the Original El Grande Americano. Nothing has been officially announced yet, and JBL made it clear he was only giving his opinion. Still, he seems convinced AAA’s recent momentum could lead to another TV deal.",
+          "type": "text"
         },
         {
           "block_id": "b7",
-          "text": "He gave Kaiser a lot of credit for building the El Grande Americano character the right way, especially by learning the language and understanding the audience in Mexico.",
-          "type": "text"
-        },
-        {
-          "block_id": "b8",
-          "source_tag": "blockquote",
-          "text": "“Kaiser created all this. Kaiser created all this with learning the language, not just learning the language – as we used to say in Texas, he wasn’t learning Spanish, he was learning Mexican. The local dialect language was what he was learning, which was absolutely amazing, what he’s done.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b9",
-          "text": "JBL also pointed out that Gable’s work in Mexico was not the same as playing a goofy heel on WWE television. He said getting real heat in Mexico is a completely different challenge.",
-          "type": "text"
-        },
-        {
-          "block_id": "b10",
-          "source_tag": "blockquote",
-          "text": "“When Chad first came back, we’re sitting there thinking about it, it’s easy to be a campy heel like he was in WWE with the videos with the varsity club or whatever the heck it was. But then all of a sudden to try to get heat down in Mexico, that’s different level. It’s not even the same business.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b11",
-          "text": "JBL then went all in on Gable, calling him the best wrestler in the world and saying the match with Kaiser was on another level.",
-          "type": "text"
-        },
-        {
-          "block_id": "b12",
-          "source_tag": "blockquote",
-          "text": "“I think Chad Gable’s the best wrestler in the world, and I don’t think it’s close. That was absolutely amazing what he and Kaiser did.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b13",
-          "text": "That is huge praise from JBL, especially after a match that already had fans talking. Gable losing the mask was a major moment, but JBL’s comments make it clear he believes both men delivered something bigger than just another stipulation match.",
-          "type": "text"
-        },
-        {
-          "block_id": "b14",
-          "text": "The El Grande Americano story gave Kaiser and Gable a chance to prove themselves in front of one of wrestling’s toughest crowds, and JBL believes they nailed it.",
+          "text": "Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.",
           "type": "text"
         }
       ],
-      "excerpt_it": "Dopo il sanguinoso Mask vs. Mask match alla AAA, JBL ha espresso parole di grande ammirazione per la prestazione di Chad Gable e Ludwig Kaiser.",
+      "excerpt_it": "JBL ritiene che il recente slancio della AAA possa presto tradursi in qualcosa di più importante.",
       "extraction_diagnostics": {
-        "candidate_node_count": 108,
-        "clean_element_count": 14,
+        "candidate_node_count": 91,
+        "clean_element_count": 7,
         "dom_noise_reduction_enabled": false,
         "embed_count": 0,
         "global_embed_recovery_enabled": false,
-        "quote_count": 5,
-        "raw_element_count": 15,
+        "quote_count": 1,
+        "raw_element_count": 8,
         "removed_by_node_count": 13,
         "removed_by_sanitize_count": 1,
         "root_name": "article",
-        "root_text_chars": 3697,
+        "root_text_chars": 2378,
         "stage": "complete",
         "table_count": 0
       },
-      "fetched_html_chars": 486410,
-      "menzo_score": 67,
+      "fetched_html_chars": 479569,
+      "menzo_score": 83,
       "meta": {
-        "description": "JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes. The WWE Hall of Famer was on",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-calls-chad-gable-the-best-wrestler-in-the-world-after-aaa-mask-vs-mask-war-24.jpg",
-        "source_title": "JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War"
+        "description": "JBL thinks AAA’s momentum may be about to turn into something bigger. AAA has been airing shows on YouTube for fans outside its regular markets in Mexico,",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-believes-aaa-could-land-another-tv-deal-soon-01.jpg",
+        "source_title": "JBL Believes AAA Could Land Another TV Deal Soon"
       },
-      "raw_element_count": 15,
+      "raw_element_count": 8,
       "raw_elements_preview": [
         {
           "block_id": "b1",
-          "text": "JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes .",
+          "text": "JBL thinks AAA’s momentum may be about to turn into something bigger.",
           "type": "text"
         },
         {
           "block_id": "b2",
-          "text": "The WWE Hall of Famer was on commentary for the May 30 match, where Ludwig Kaiser’s El Grande Americano defeated Chad Gable’s Original El Grande Americano. The loss forced Gable to remove his mask in front of the crowd, ending one of AAA’s biggest storylines of the year.",
+          "text": "AAA has been airing shows on YouTube for fans outside its regular markets in Mexico, Central America, and South America. That easy access has helped more fans around the world follow the promotion, especially with WWE talent and bigger crossover stories bringing more attention to the brand.",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "text": "Fans have been praising the match since it happened, and JBL clearly feels the same way. Speaking on Busted Open , he said the Mexican crowd helped make the moment feel massive.",
+          "text": "During a new interview on Busted Open Radio , JBL made it clear that he does not have inside information, but he believes AAA could end up landing another television deal soon.",
           "type": "text"
         },
         {
           "block_id": "b4",
           "source_tag": "blockquote",
-          "text": "“Mexican fans are just passionate fans. They love their Lucha Libre and they love their stars. They get into things and they enjoy it. That’s what you saw – them at their very best.”",
+          "text": "“I don’t have any insight about this, I’m not giving away anything from meetings or anything but I think they’re going to get a pretty good TV deal coming up. They’ve got a good Fox Deportes deal down from Mexico to South America, I think they’ll get another TV deal.”",
           "type": "quote"
         },
         {
           "block_id": "b5",
-          "text": "JBL said the match showed pro wrestling at its highest level and admitted he was blown away by what Gable and Kaiser pulled off.",
+          "text": "That would be a major step for AAA, especially with the promotion already gaining more international attention through YouTube and its current Fox Deportes presence.",
           "type": "text"
         },
         {
           "block_id": "b6",
-          "source_tag": "blockquote",
-          "text": "“And I thought you saw wrestling at its very best. I was absolutely blown away by what they did in the match.”",
-          "type": "quote"
+          "text": "JBL’s comments come at a time when AAA has been getting a lot more discussion from fans after major events like Noche de Los Grandes and the Mask vs. Mask match between El Grande Americano and the Original El Grande Americano. Nothing has been officially announced yet, and JBL made it clear he was only giving his opinion. Still, he seems convinced AAA’s recent momentum could lead to another TV deal.",
+          "type": "text"
         },
         {
           "block_id": "b7",
-          "text": "He gave Kaiser a lot of credit for building the El Grande Americano character the right way, especially by learning the language and understanding the audience in Mexico.",
-          "type": "text"
-        },
-        {
-          "block_id": "b8",
-          "source_tag": "blockquote",
-          "text": "“Kaiser created all this. Kaiser created all this with learning the language, not just learning the language – as we used to say in Texas, he wasn’t learning Spanish, he was learning Mexican. The local dialect language was what he was learning, which was absolutely amazing, what he’s done.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b9",
-          "text": "JBL also pointed out that Gable’s work in Mexico was not the same as playing a goofy heel on WWE television. He said getting real heat in Mexico is a completely different challenge.",
-          "type": "text"
-        },
-        {
-          "block_id": "b10",
-          "source_tag": "blockquote",
-          "text": "“When Chad first came back, we’re sitting there thinking about it, it’s easy to be a campy heel like he was in WWE with the videos with the varsity club or whatever the heck it was. But then all of a sudden to try to get heat down in Mexico, that’s different level. It’s not even the same business.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b11",
-          "text": "JBL then went all in on Gable, calling him the best wrestler in the world and saying the match with Kaiser was on another level.",
-          "type": "text"
-        },
-        {
-          "block_id": "b12",
-          "source_tag": "blockquote",
-          "text": "“I think Chad Gable’s the best wrestler in the world, and I don’t think it’s close. That was absolutely amazing what he and Kaiser did.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b13",
-          "text": "That is huge praise from JBL, especially after a match that already had fans talking. Gable losing the mask was a major moment, but JBL’s comments make it clear he believes both men delivered something bigger than just another stipulation match.",
-          "type": "text"
-        },
-        {
-          "block_id": "b14",
-          "text": "The El Grande Americano story gave Kaiser and Gable a chance to prove themselves in front of one of wrestling’s toughest crowds, and JBL believes they nailed it.",
+          "text": "Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.",
           "type": "text"
         },
         {
@@ -202,97 +272,97 @@
       "removed_elements_debug": [
         {
           "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 85,
+          "node_index": 68,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Spotlight"
         },
         {
           "classes": "gb-loop-item rsn-spotlight-item post-2196416 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-paul-heyman tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 89,
+          "node_index": 72,
           "node_name": "li",
           "reason": "node_class_noise",
           "text_preview": "WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 92,
+          "node_index": 75,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 93,
+          "node_index": 76,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
         },
         {
           "classes": "gb-loop-item rsn-spotlight-item post-2196368 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-iyo-sky tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 94,
+          "node_index": 77,
           "node_name": "li",
           "reason": "node_class_noise",
           "text_preview": "WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 97,
+          "node_index": 80,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 98,
+          "node_index": 81,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
         },
         {
           "classes": "gb-loop-item rsn-spotlight-item post-2196255 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-brock-lesnar tag-oba-femi tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 99,
+          "node_index": 82,
           "node_name": "li",
           "reason": "node_class_noise",
           "text_preview": "WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 102,
+          "node_index": 85,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 103,
+          "node_index": 86,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
         },
         {
           "classes": "gb-loop-item rsn-spotlight-item post-2196202 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
-          "node_index": 104,
+          "node_index": 87,
           "node_name": "li",
           "reason": "node_class_noise",
           "text_preview": "WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 107,
+          "node_index": 90,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "WWE Makes Major Changes to King of the Ring Tournament Lineup"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 108,
+          "node_index": 91,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
         },
         {
-          "index": 15,
+          "index": 8,
           "item": {
             "text": "Spotlight WWE Videos Paul Heyman Gets Speared Through The Barricade During June 1 WWE RAW WWE Videos Iyo Sky Advances In Queen Of The Ring After Wild Fatal Four-Way On June 1 WWE RAW WWE Videos Oba Femi Calls Out Brock Lesnar After Advancing In King Of The Ring WWE News WWE Makes Major Changes to King of the Ring Tournament Lineup",
             "type": "text"
@@ -302,149 +372,167 @@
       ],
       "source": "ringsidenews",
       "source_html_contains_embed_hint": true,
-      "source_title": "JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War",
-      "source_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/",
+      "source_title": "JBL Believes AAA Could Land Another TV Deal Soon",
+      "source_url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/",
       "status": "ready_for_alfred",
-      "title_it": "JBL elogia Chad Gable: \"È il miglior wrestler al mondo\"",
+      "title_it": "JBL prevede un nuovo accordo televisivo per la AAA",
       "translation_chain_attempted": [
         "gemini-3.1-flash-lite"
       ],
       "translation_missing_units": [],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/\nTitolo feed: JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\nTitolo pagina: JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\nDescrizione: JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes. The WWE Hall of Famer was on\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes .\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"The WWE Hall of Famer was on commentary for the May 30 match, where Ludwig Kaiser’s El Grande Americano defeated Chad Gable’s Original El Grande Americano. The loss forced Gable to remove his mask in front of the crowd, ending one of AAA’s biggest storylines of the year.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Fans have been praising the match since it happened, and JBL clearly feels the same way. Speaking on Busted Open , he said the Mexican crowd helped make the moment feel massive.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“Mexican fans are just passionate fans. They love their Lucha Libre and they love their stars. They get into things and they enjoy it. That’s what you saw – them at their very best.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"JBL said the match showed pro wrestling at its highest level and admitted he was blown away by what Gable and Kaiser pulled off.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“And I thought you saw wrestling at its very best. I was absolutely blown away by what they did in the match.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"He gave Kaiser a lot of credit for building the El Grande Americano character the right way, especially by learning the language and understanding the audience in Mexico.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“Kaiser created all this. Kaiser created all this with learning the language, not just learning the language – as we used to say in Texas, he wasn’t learning Spanish, he was learning Mexican. The local dialect language was what he was learning, which was absolutely amazing, what he’s done.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"JBL also pointed out that Gable’s work in Mexico was not the same as playing a goofy heel on WWE television. He said getting real heat in Mexico is a completely different challenge.\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"quote\",\n    \"text\": \"“When Chad first came back, we’re sitting there thinking about it, it’s easy to be a campy heel like he was in WWE with the videos with the varsity club or whatever the heck it was. But then all of a sudden to try to get heat down in Mexico, that’s different level. It’s not even the same business.”\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"JBL then went all in on Gable, calling him the best wrestler in the world and saying the match with Kaiser was on another level.\"\n  },\n  {\n    \"id\": \"b12\",\n    \"type\": \"quote\",\n    \"text\": \"“I think Chad Gable’s the best wrestler in the world, and I don’t think it’s close. That was absolutely amazing what he and Kaiser did.”\"\n  },\n  {\n    \"id\": \"b13\",\n    \"type\": \"text\",\n    \"text\": \"That is huge praise from JBL, especially after a match that already had fans talking. Gable losing the mask was a major moment, but JBL’s comments make it clear he believes both men delivered something bigger than just another stipulation match.\"\n  },\n  {\n    \"id\": \"b14\",\n    \"type\": \"text\",\n    \"text\": \"The El Grande Americano story gave Kaiser and Gable a chance to prove themselves in front of one of wrestling’s toughest crowds, and JBL believes they nailed it.\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"JBL elogia Chad Gable: \\\"È il miglior wrestler al mondo\\\"\",\n  \"excerpt_it\": \"Dopo il sanguinoso Mask vs. Mask match alla AAA, JBL ha espresso parole di grande ammirazione per la prestazione di Chad Gable e Ludwig Kaiser.\",\n  \"translations\": {\n    \"b1\": \"JBL ha elogiato Chad Gable e Ludwig Kaiser dopo il sanguinoso Mask vs. Mask match andato in scena a AAA Noche de Los Grandes.\",\n    \"b2\": \"Il WWE Hall of Famer era al commento tecnico durante l'incontro del 30 maggio, in cui l'El Grande Americano di Ludwig Kaiser ha sconfitto l'originale El Grande Americano di Chad Gable. La sconfitta ha costretto Gable a togliersi la maschera davanti al pubblico, mettendo fine a una delle storyline più importanti dell'anno in AAA.\",\n    \"b3\": \"I fan hanno elogiato il match sin dal suo svolgimento e JBL è chiaramente della stessa opinione. Intervenuto ai microfoni di Busted Open, ha dichiarato che il pubblico messicano ha contribuito a rendere il momento davvero epocale.\",\n    \"b4\": \"“I fan messicani sono semplicemente appassionati. Amano la Lucha Libre e amano le loro star. Si lasciano coinvolgere e si divertono. È questo ciò che avete visto: loro, al massimo del loro splendore.”\",\n    \"b5\": \"JBL ha affermato che il match ha mostrato il wrestling professionistico ai massimi livelli e ha ammesso di essere rimasto sbalordito da quanto realizzato da Gable e Kaiser.\",\n    \"b6\": \"“E penso che abbiate visto il wrestling al suo meglio. Sono rimasto assolutamente sbalordito da ciò che hanno fatto durante il match.”\",\n    \"b7\": \"Ha dato grande merito a Kaiser per aver costruito il personaggio di El Grande Americano nel modo giusto, in particolare imparando la lingua e comprendendo il pubblico messicano.\",\n    \"b8\": \"“Kaiser ha creato tutto questo. Kaiser ha costruito tutto imparando la lingua, e non solo la lingua: come dicevamo in Texas, non stava imparando lo spagnolo, stava imparando il 'messicano'. Stava imparando il dialetto locale, ed è stato assolutamente incredibile quello che ha fatto.”\",\n    \"b9\": \"JBL ha inoltre sottolineato che il lavoro di Gable in Messico è stato molto diverso dall'interpretare un heel caricaturale nella televisione WWE. Ha spiegato che ottenere vero 'heat' in Messico è una sfida completamente diversa.\",\n    \"b10\": \"“Quando Chad è tornato per la prima volta, ne parlavamo: è facile essere un heel grottesco come lo era in WWE con i video del Varsity Club o qualsiasi altra cosa fosse. Ma poi, all'improvviso, cercare di ottenere 'heat' in Messico è un altro livello. Non è nemmeno lo stesso business.”\",\n    \"b11\": \"JBL si è poi sbilanciato su Gable, definendolo il miglior wrestler al mondo e affermando che il match con Kaiser è stato su un altro livello.\",\n    \"b12\": \"“Penso che Chad Gable sia il miglior wrestler al mondo, e non credo ci sia nemmeno paragone. È stato assolutamente incredibile quello che hanno fatto lui e Kaiser.”\",\n    \"b13\": \"Si tratta di un elogio importante da parte di JBL, specialmente dopo un match che ha già fatto molto discutere i fan. La perdita della maschera da parte di Gable è stato un momento fondamentale, ma i commenti di JBL chiariscono che, a suo avviso, entrambi gli atleti hanno dato vita a qualcosa di molto più profondo di un semplice incontro con stipulazione.\",\n    \"b14\": \"La storia di El Grande Americano ha dato a Kaiser e Gable la possibilità di mettersi alla prova davanti a uno dei pubblici più esigenti del wrestling, e JBL ritiene che abbiano centrato l'obiettivo.\"\n  },\n  \"notes\": []\n}",
-      "translation_unit_count": 14,
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/\nTitolo feed: JBL Believes AAA Could Land Another TV Deal Soon\nTitolo pagina: JBL Believes AAA Could Land Another TV Deal Soon\nDescrizione: JBL thinks AAA’s momentum may be about to turn into something bigger. AAA has been airing shows on YouTube for fans outside its regular markets in Mexico,\nCategoria suggerita: Business\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"JBL thinks AAA’s momentum may be about to turn into something bigger.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"AAA has been airing shows on YouTube for fans outside its regular markets in Mexico, Central America, and South America. That easy access has helped more fans around the world follow the promotion, especially with WWE talent and bigger crossover stories bringing more attention to the brand.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"During a new interview on Busted Open Radio , JBL made it clear that he does not have inside information, but he believes AAA could end up landing another television deal soon.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“I don’t have any insight about this, I’m not giving away anything from meetings or anything but I think they’re going to get a pretty good TV deal coming up. They’ve got a good Fox Deportes deal down from Mexico to South America, I think they’ll get another TV deal.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"That would be a major step for AAA, especially with the promotion already gaining more international attention through YouTube and its current Fox Deportes presence.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"JBL’s comments come at a time when AAA has been getting a lot more discussion from fans after major events like Noche de Los Grandes and the Mask vs. Mask match between El Grande Americano and the Original El Grande Americano. Nothing has been officially announced yet, and JBL made it clear he was only giving his opinion. Still, he seems convinced AAA’s recent momentum could lead to another TV deal.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.\"\n  }\n]\n",
+      "translation_raw_response_preview": "```json\n{\n  \"title_it\": \"JBL prevede un nuovo accordo televisivo per la AAA\",\n  \"excerpt_it\": \"JBL ritiene che il recente slancio della AAA possa presto tradursi in qualcosa di più importante.\",\n  \"translations\": {\n    \"b1\": \"JBL ritiene che il recente slancio della AAA possa presto tradursi in qualcosa di più importante.\",\n    \"b2\": \"La AAA sta trasmettendo i propri show su YouTube per i fan al di fuori dei suoi mercati principali in Messico, America Centrale e Sud America. Questo facile accesso ha aiutato molti più fan in tutto il mondo a seguire la promotion, specialmente grazie alla presenza di talenti WWE e a importanti storyline crossover che hanno attirato maggiore attenzione sul brand.\",\n    \"b3\": \"Durante una recente intervista a Busted Open Radio, JBL ha chiarito di non possedere informazioni riservate, ma di ritenere che la AAA possa presto siglare un nuovo accordo televisivo.\",\n    \"b4\": \"“Non ho informazioni privilegiate a riguardo, non sto rivelando nulla proveniente da meeting o altro, ma penso che presto otterranno un ottimo accordo televisivo. Hanno già un buon accordo con Fox Deportes che copre dal Messico al Sud America e credo che ne otterranno un altro.”\",\n    \"b5\": \"Si tratterebbe di un passo importante per la AAA, considerando che la promotion sta già guadagnando sempre più attenzione internazionale grazie a YouTube e alla sua attuale presenza su Fox Deportes.\",\n    \"b6\": \"Le considerazioni di JBL arrivano in un momento in cui la AAA è al centro delle discussioni tra i fan, dopo grandi eventi come Noche de Los Grandes e il Mask vs. Mask match tra El Grande Americano e l'Original El Grande Americano. Non c'è ancora nulla di ufficiale e JBL ha sottolineato di aver espresso solo un'opinione personale. Tuttavia, appare convinto che il recente momento positivo della AAA possa portare a un nuovo accordo televisivo.\",\n    \"b7\": \"Derek Holloway è un autore di Ringside News specializzato in notizie, rumor e risultati di wrestling. Si occupa di fornire una copertura affidabile su WWE, AEW e sulle principali federazioni di wrestling.\"\n  },\n  \"notes\": []\n}\n```",
+      "translation_unit_count": 7,
       "translation_used": true
     },
     {
       "bob_notes": [],
-      "body_html": "<p>A causa della concorrenza dei playoff NBA e NHL e di un ulteriore cambiamento nel sistema di rilevazione Nielsen, &quot;TNA Impact&quot; ha visto i propri numeri calare nell&#x27;ultimo mese, passando da una media costante sopra i 200.000 spettatori a una fascia tra i 150.000 e i 190.000. Tuttavia, per l&#x27;episodio del 28 maggio, la TNA è andata vicina a tornare sulla soglia dei 200.000, sebbene a discapito del pubblico più giovane.</p>\n<p>Wrestlenomics e Programming Insider riportano che &quot;Impact&quot; ha totalizzato 195.000 spettatori e un rating dello 0.02 nella ambita fascia demografica 18-49. Il numero totale di spettatori è aumentato del 10% rispetto ai 178.000 della settimana precedente; una notizia ancora migliore riguarda il confronto con la media delle quattro settimane precedenti: il dato è salito del 4% rispetto ai 187.000. Si tratta del secondo miglior risultato ottenuto dalla TNA nel mese di maggio, dopo i 196.000 spettatori registrati nell&#x27;episodio del 14 maggio.</p>\n<p>Meno positivo, tuttavia, è stato il dato relativo alla fascia 18-49. Nonostante l&#x27;aumento degli spettatori totali, il target di riferimento ha subito un calo, scendendo del 33% rispetto allo 0.03 della settimana precedente. La situazione è rimasta pressoché identica nel confronto con la media delle quattro settimane (anch&#x27;essa pari a 0.03), con il numero dei 18-49 che ha fatto registrare un calo del 33% anche in quel caso.</p>\n<blockquote>La puntata di &quot;Impact&quot; ha visto il debutto sul ring di Fabian Aichner, a due settimane dalla comparsa dell&#x27;ex stella WWE al termine di &quot;Impact&quot;, dove aveva affrontato il nuovo TNA X-Division Champion Cedric Alexander. Il match, il primo per Aichner dal dicembre 2024, ha visto l&#x27;italiano sconfiggere per squalifica Eddie Edwards, storico volto TNA e compagno di stable di Alexander nel System, dopo l&#x27;interferenza di Alexander, Bear Bronson e Brian Myers, accorsi per attaccare Aichner. Lo show ha visto anche Santino Marella in azione, sconfitto dal futuro genero Channing Lorenzo in seguito all&#x27;interferenza di Arianna Grace.</blockquote>",
-      "category_hint": "TNA",
+      "body_html": "https://youtu.be/mwl7onrv5U0?si=ZNz6xKI6SYhXgaQp\n\n<p>Dopo aver ottenuto una title shot a WWE SNME in seguito a una vittoria per squalifica, Sol Ruca ha sconfitto Becky Lynch laureandosi Women&#x27;s IC Champion a &quot;Clash in Italy&quot;. Sebbene sia stata una doppia campionessa a &quot;NXT&quot;, la Ruca fa parte del main roster solo dalla puntata di &quot;Raw&quot; successiva a WrestleMania 42.</p>\n<blockquote>La Ruca ha riflettuto sulla sua vittoria ai microfoni di &quot;WWE Now&quot;, dichiarando di aver vissuto un vero e proprio turbine di emozioni. &quot;Ho avuto un momento particolare non appena è suonata la campanella e dopo aver eseguito la mia finisher su Becky; mi sono emozionata. Ero sotto shock, pensavo &#x27;mio Dio, ce l&#x27;ho fatta&#x27;. È stato, in un certo senso, il mio momento decisivo. L&#x27;inizio del mio prossimo capitolo&quot;. La wrestler ha aggiunto di aver ricevuto un affetto e un supporto travolgenti dai fan dopo la conquista del titolo.</blockquote>\n<blockquote>La nuova campionessa ha intenzione di essere una lottatrice attiva. &quot;Voglio difendere questo titolo il maggior numero di volte possibile. Sono stata una doppia campionessa a &#x27;NXT&#x27;, detentrice sia dello Speed Championship che dell&#x27;NXT Championship, ma sento che i miei regni non sono stati all&#x27;altezza di ciò che posso offrire come campionessa&quot;. La Ruca vuole dimostrare il suo valore con questa cintura ed è pronta a concedere opportunità a chiunque sia all&#x27;altezza, aprendo anche a sfidanti provenienti dal roster di &quot;NXT&quot;.</blockquote>",
+      "category_hint": "WWE",
       "clean_element_count": 4,
-      "created_at": "2026-06-02T00:20:14.130441+00:00",
+      "created_at": "2026-06-02T05:10:22.694100+00:00",
       "diagnostic_stage": "ready_for_alfred",
       "element_counts": {
-        "embed": 0,
+        "embed": 1,
         "heading": 0,
         "image": 0,
-        "quote": 1,
+        "quote": 2,
         "table": 0,
-        "text": 3
+        "text": 1
       },
       "elements": [
         {
           "block_id": "b1",
-          "text": "Thanks to competition from the NBA and NHL Playoffs and another change in Nielsen's rating system, \"TNA Impact\" has seen its numbers take a dip over the last month, going from consistently drawing in the 200K's to the mid to high 100K's. But for the May 28 episode , TNA found themselves close to getting back into the 200K range, though it was at the expense of their younger viewers.",
-          "type": "text"
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://youtu.be/mwl7onrv5U0?si=ZNz6xKI6SYhXgaQp"
         },
         {
           "block_id": "b2",
-          "text": "Wrestlenomics and Programming Insider report that \"Impact\" drew 195K total viewers, and a 0.02 in the coveted 18-49 demographic. Total viewership was up 10% from the previous week's 178K , though the better news was the number compared to the four week average. While only up slightly, the number did rise 4% from 187K. It's the second highest rating TNA has drawn in May, following the May 14 episode bringing in 196K total viewers .",
+          "text": "After earning a title shot at WWE SNME due to a match disqualification, Sol Ruca defeated Becky Lynch to become the Women's IC Champion at \"Clash in Italy\" . While Ruca was a double champion in \"NXT\", she's only been on the main roster since the \"Raw\" after WrestleMania 42 .",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "text": "Less positive, however, was the 18-49 number. Despite a rise in total viewership, the key demo saw a decline, falling 33% from the previous week's 0.03. The song remained the same when it came to the four week average, which was also 0.03, with the 18-49 number falling a similar 33% against that.",
-          "type": "text"
+          "source_tag": "p",
+          "text": "Ruca reflected on her win on \"WWE Now\" . She says she was an emotional and physical mess. \"I had a moment as soon as the bell rang and as soon as I hit my finisher on Becky, I kind of got a little bit emotional. I was a bit shocked, like 'oh my God, I did it'. This is like, my defining moment. The start of my next chapter in a sense.\" Ruca says since her win, she's received an overwhelming amount of love and acceptance from her fans.",
+          "type": "quote"
         },
         {
           "block_id": "b4",
           "source_tag": "p",
-          "text": "\"Impact\" featured the in-ring debut of Fabian Aichner, two weeks after the former WWE star appeared at the end of \"Impact,\" confronting new TNA X-Division Champion Cedric Alexander. The match, Aichner's first since December 2024, saw the Italian defeat Alexander's System stablemate and long-time TNA star Eddie Edwards by disqualification, after Alexander, Bear Bronson, and Brian Myers ran down to attack Aichner. The show also featured Santino Marella in action, losing a match to his future son-in-law Channing Lorenzo, after interference from Arianna Grace.",
+          "text": "She wants to be a fighting champion. \"I want to defend this thing as many times as I physically possibly can. I was a double champion in \"NXT\" with the Speed Championship and the NXT Championship and I feel like my reigns weren't up to par with how I feel like I can be a champion.\" Ruca wants to prove herself with this title and is open to giving opportunities to whoever is ready. She'd like to give opportunities to women in \"NXT\" to get title shots.",
           "type": "quote"
         }
       ],
-      "excerpt_it": "TNA Impact registra il secondo miglior dato di ascolti del mese di maggio, ma continua a faticare nella fascia demografica 18-49 a causa della concorrenza dei playoff NBA e NHL.",
+      "excerpt_it": "Sol Ruca ha battuto Becky Lynch a WWE Clash in Italy diventando la nuova Women's IC Champion.",
       "extraction_diagnostics": {
         "candidate_node_count": 11,
         "clean_element_count": 4,
         "dom_noise_reduction_enabled": false,
-        "embed_count": 0,
+        "embed_count": 1,
         "global_embed_recovery_enabled": false,
-        "quote_count": 1,
-        "raw_element_count": 5,
+        "quote_count": 2,
+        "raw_element_count": 6,
         "removed_by_node_count": 0,
-        "removed_by_sanitize_count": 1,
+        "removed_by_sanitize_count": 2,
         "root_name": "article",
-        "root_text_chars": 1803,
+        "root_text_chars": 1423,
         "stage": "complete",
         "table_count": 0
       },
-      "fetched_html_chars": 50362,
-      "menzo_score": 56,
+      "fetched_html_chars": 49911,
+      "menzo_score": 73,
       "meta": {
-        "description": "TNA Impact's total viewership reaches its second highest total in May, but continues to struggle in the 18-49 demo going against the NBA and NHL Playoffs",
-        "featured_image": "https://www.wrestlinginc.com/img/gallery/tna-impact-ratings-viewership-report-5282026/l-intro-1780350939.jpg",
-        "source_title": "TNA Impact Ratings & Viewership Report: 5/28/2026 - Wrestling Inc."
+        "description": "Sol Ruca defeated Becky Lynch at WWE Clash in Italy to become the Women's IC Champion.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/sol-ruca-says-wwe-clash-in-italy-victory-over-becky-lynch-was-a-defining-moment/l-intro-1780368487.jpg",
+        "source_title": "Sol Ruca Says WWE Clash In Italy Victory Over Becky Lynch Was A 'Defining Moment' - Wrestling Inc."
       },
-      "raw_element_count": 5,
+      "raw_element_count": 6,
       "raw_elements_preview": [
         {
-          "alt": "Fabian Aichner portraying Giovanni Vinci",
-          "type": "image",
-          "url": "https://www.wrestlinginc.com/img/gallery/tna-impact-ratings-viewership-report-5282026/intro-1780350939.jpg"
+          "block_id": "b1",
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://youtu.be/mwl7onrv5U0?si=ZNz6xKI6SYhXgaQp"
         },
         {
-          "block_id": "b1",
-          "text": "Thanks to competition from the NBA and NHL Playoffs and another change in Nielsen's rating system, \"TNA Impact\" has seen its numbers take a dip over the last month, going from consistently drawing in the 200K's to the mid to high 100K's. But for the May 28 episode , TNA found themselves close to getting back into the 200K range, though it was at the expense of their younger viewers.",
-          "type": "text"
+          "alt": "Sol Ruca holds the WWE Women's IC title above her head",
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/sol-ruca-says-wwe-clash-in-italy-victory-over-becky-lynch-was-a-defining-moment/intro-1780368487.jpg"
+        },
+        {
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://youtu.be/mwl7onrv5U0?si=ZNz6xKI6SYhXgaQp"
         },
         {
           "block_id": "b2",
-          "text": "Wrestlenomics and Programming Insider report that \"Impact\" drew 195K total viewers, and a 0.02 in the coveted 18-49 demographic. Total viewership was up 10% from the previous week's 178K , though the better news was the number compared to the four week average. While only up slightly, the number did rise 4% from 187K. It's the second highest rating TNA has drawn in May, following the May 14 episode bringing in 196K total viewers .",
+          "text": "After earning a title shot at WWE SNME due to a match disqualification, Sol Ruca defeated Becky Lynch to become the Women's IC Champion at \"Clash in Italy\" . While Ruca was a double champion in \"NXT\", she's only been on the main roster since the \"Raw\" after WrestleMania 42 .",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "text": "Less positive, however, was the 18-49 number. Despite a rise in total viewership, the key demo saw a decline, falling 33% from the previous week's 0.03. The song remained the same when it came to the four week average, which was also 0.03, with the 18-49 number falling a similar 33% against that.",
-          "type": "text"
+          "source_tag": "p",
+          "text": "Ruca reflected on her win on \"WWE Now\" . She says she was an emotional and physical mess. \"I had a moment as soon as the bell rang and as soon as I hit my finisher on Becky, I kind of got a little bit emotional. I was a bit shocked, like 'oh my God, I did it'. This is like, my defining moment. The start of my next chapter in a sense.\" Ruca says since her win, she's received an overwhelming amount of love and acceptance from her fans.",
+          "type": "quote"
         },
         {
           "block_id": "b4",
           "source_tag": "p",
-          "text": "\"Impact\" featured the in-ring debut of Fabian Aichner, two weeks after the former WWE star appeared at the end of \"Impact,\" confronting new TNA X-Division Champion Cedric Alexander. The match, Aichner's first since December 2024, saw the Italian defeat Alexander's System stablemate and long-time TNA star Eddie Edwards by disqualification, after Alexander, Bear Bronson, and Brian Myers ran down to attack Aichner. The show also featured Santino Marella in action, losing a match to his future son-in-law Channing Lorenzo, after interference from Arianna Grace.",
+          "text": "She wants to be a fighting champion. \"I want to defend this thing as many times as I physically possibly can. I was a double champion in \"NXT\" with the Speed Championship and the NXT Championship and I feel like my reigns weren't up to par with how I feel like I can be a champion.\" Ruca wants to prove herself with this title and is open to giving opportunities to whoever is ready. She'd like to give opportunities to women in \"NXT\" to get title shots.",
           "type": "quote"
         }
       ],
-      "removed_before_gemini": 1,
+      "removed_before_gemini": 2,
       "removed_elements_debug": [
         {
-          "index": 1,
+          "index": 2,
           "item": {
-            "alt": "Fabian Aichner portraying Giovanni Vinci",
+            "alt": "Sol Ruca holds the WWE Women's IC title above her head",
             "type": "image",
-            "url": "https://www.wrestlinginc.com/img/gallery/tna-impact-ratings-viewership-report-5282026/intro-1780350939.jpg"
+            "url": "https://www.wrestlinginc.com/img/gallery/sol-ruca-says-wwe-clash-in-italy-victory-over-becky-lynch-was-a-defining-moment/intro-1780368487.jpg"
           },
           "reason": "duplicate_featured_image"
+        },
+        {
+          "index": 3,
+          "item": {
+            "source_tag": "div",
+            "type": "embed",
+            "url": "https://youtu.be/mwl7onrv5U0?si=ZNz6xKI6SYhXgaQp"
+          },
+          "reason": "duplicate_or_empty_embed"
         }
       ],
       "source": "wrestlinginc",
       "source_html_contains_embed_hint": true,
-      "source_title": "TNA Impact Ratings & Viewership Report: 5/28/2026",
-      "source_url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/",
+      "source_title": "Sol Ruca Says WWE Clash In Italy Victory Over Becky Lynch Was A 'Defining Moment'",
+      "source_url": "https://www.wrestlinginc.com/2185431/wwe-clash-in-italy-2026-sol-ruca-becky-lynch-victory-defining-moment/",
       "status": "ready_for_alfred",
-      "title_it": "Report ascolti TNA Impact: i dati del 28 maggio 2026",
+      "title_it": "Sol Ruca descrive la vittoria su Becky Lynch a Clash in Italy come un momento decisivo",
       "translation_chain_attempted": [
         "gemini-3.1-flash-lite"
       ],
       "translation_missing_units": [],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/\nTitolo feed: TNA Impact Ratings & Viewership Report: 5/28/2026\nTitolo pagina: TNA Impact Ratings & Viewership Report: 5/28/2026 - Wrestling Inc.\nDescrizione: TNA Impact's total viewership reaches its second highest total in May, but continues to struggle in the 18-49 demo going against the NBA and NHL Playoffs\nCategoria suggerita: TNA\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Thanks to competition from the NBA and NHL Playoffs and another change in Nielsen's rating system, \\\"TNA Impact\\\" has seen its numbers take a dip over the last month, going from consistently drawing in the 200K's to the mid to high 100K's. But for the May 28 episode , TNA found themselves close to getting back into the 200K range, though it was at the expense of their younger viewers.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Wrestlenomics and Programming Insider report that \\\"Impact\\\" drew 195K total viewers, and a 0.02 in the coveted 18-49 demographic. Total viewership was up 10% from the previous week's 178K , though the better news was the number compared to the four week average. While only up slightly, the number did rise 4% from 187K. It's the second highest rating TNA has drawn in May, following the May 14 episode bringing in 196K total viewers .\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Less positive, however, was the 18-49 number. Despite a rise in total viewership, the key demo saw a decline, falling 33% from the previous week's 0.03. The song remained the same when it came to the four week average, which was also 0.03, with the 18-49 number falling a similar 33% against that.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"Impact\\\" featured the in-ring debut of Fabian Aichner, two weeks after the former WWE star appeared at the end of \\\"Impact,\\\" confronting new TNA X-Division Champion Cedric Alexander. The match, Aichner's first since December 2024, saw the Italian defeat Alexander's System stablemate and long-time TNA star Eddie Edwards by disqualification, after Alexander, Bear Bronson, and Brian Myers ran down to attack Aichner. The show also featured Santino Marella in action, losing a match to his future son-in-law Channing Lorenzo, after interference from Arianna Grace.\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"Report ascolti TNA Impact: i dati del 28 maggio 2026\",\n  \"excerpt_it\": \"TNA Impact registra il secondo miglior dato di ascolti del mese di maggio, ma continua a faticare nella fascia demografica 18-49 a causa della concorrenza dei playoff NBA e NHL.\",\n  \"translations\": {\n    \"b1\": \"A causa della concorrenza dei playoff NBA e NHL e di un ulteriore cambiamento nel sistema di rilevazione Nielsen, \\\"TNA Impact\\\" ha visto i propri numeri calare nell'ultimo mese, passando da una media costante sopra i 200.000 spettatori a una fascia tra i 150.000 e i 190.000. Tuttavia, per l'episodio del 28 maggio, la TNA è andata vicina a tornare sulla soglia dei 200.000, sebbene a discapito del pubblico più giovane.\",\n    \"b2\": \"Wrestlenomics e Programming Insider riportano che \\\"Impact\\\" ha totalizzato 195.000 spettatori e un rating dello 0.02 nella ambita fascia demografica 18-49. Il numero totale di spettatori è aumentato del 10% rispetto ai 178.000 della settimana precedente; una notizia ancora migliore riguarda il confronto con la media delle quattro settimane precedenti: il dato è salito del 4% rispetto ai 187.000. Si tratta del secondo miglior risultato ottenuto dalla TNA nel mese di maggio, dopo i 196.000 spettatori registrati nell'episodio del 14 maggio.\",\n    \"b3\": \"Meno positivo, tuttavia, è stato il dato relativo alla fascia 18-49. Nonostante l'aumento degli spettatori totali, il target di riferimento ha subito un calo, scendendo del 33% rispetto allo 0.03 della settimana precedente. La situazione è rimasta pressoché identica nel confronto con la media delle quattro settimane (anch'essa pari a 0.03), con il numero dei 18-49 che ha fatto registrare un calo del 33% anche in quel caso.\",\n    \"b4\": \"La puntata di \\\"Impact\\\" ha visto il debutto sul ring di Fabian Aichner, a due settimane dalla comparsa dell'ex stella WWE al termine di \\\"Impact\\\", dove aveva affrontato il nuovo TNA X-Division Champion Cedric Alexander. Il match, il primo per Aichner dal dicembre 2024, ha visto l'italiano sconfiggere per squalifica Eddie Edwards, storico volto TNA e compagno di stable di Alexander nel System, dopo l'interferenza di Alexander, Bear Bronson e Brian Myers, accorsi per attaccare Aichner. Lo show ha visto anche Santino Marella in azione, sconfitto dal futuro genero Channing Lorenzo in seguito all'interferenza di Arianna Grace.\"\n  },\n  \"notes\": []\n}",
-      "translation_unit_count": 4,
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185431/wwe-clash-in-italy-2026-sol-ruca-becky-lynch-victory-defining-moment/\nTitolo feed: Sol Ruca Says WWE Clash In Italy Victory Over Becky Lynch Was A 'Defining Moment'\nTitolo pagina: Sol Ruca Says WWE Clash In Italy Victory Over Becky Lynch Was A 'Defining Moment' - Wrestling Inc.\nDescrizione: Sol Ruca defeated Becky Lynch at WWE Clash in Italy to become the Women's IC Champion.\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"After earning a title shot at WWE SNME due to a match disqualification, Sol Ruca defeated Becky Lynch to become the Women's IC Champion at \\\"Clash in Italy\\\" . While Ruca was a double champion in \\\"NXT\\\", she's only been on the main roster since the \\\"Raw\\\" after WrestleMania 42 .\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"Ruca reflected on her win on \\\"WWE Now\\\" . She says she was an emotional and physical mess. \\\"I had a moment as soon as the bell rang and as soon as I hit my finisher on Becky, I kind of got a little bit emotional. I was a bit shocked, like 'oh my God, I did it'. This is like, my defining moment. The start of my next chapter in a sense.\\\" Ruca says since her win, she's received an overwhelming amount of love and acceptance from her fans.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"She wants to be a fighting champion. \\\"I want to defend this thing as many times as I physically possibly can. I was a double champion in \\\"NXT\\\" with the Speed Championship and the NXT Championship and I feel like my reigns weren't up to par with how I feel like I can be a champion.\\\" Ruca wants to prove herself with this title and is open to giving opportunities to whoever is ready. She'd like to give opportunities to women in \\\"NXT\\\" to get title shots.\"\n  }\n]\n",
+      "translation_raw_response_preview": "```json\n{\n  \"title_it\": \"Sol Ruca descrive la vittoria su Becky Lynch a Clash in Italy come un momento decisivo\",\n  \"excerpt_it\": \"Sol Ruca ha battuto Becky Lynch a WWE Clash in Italy diventando la nuova Women's IC Champion.\",\n  \"translations\": {\n    \"b2\": \"Dopo aver ottenuto una title shot a WWE SNME in seguito a una vittoria per squalifica, Sol Ruca ha sconfitto Becky Lynch laureandosi Women's IC Champion a \\\"Clash in Italy\\\". Sebbene sia stata una doppia campionessa a \\\"NXT\\\", la Ruca fa parte del main roster solo dalla puntata di \\\"Raw\\\" successiva a WrestleMania 42.\",\n    \"b3\": \"La Ruca ha riflettuto sulla sua vittoria ai microfoni di \\\"WWE Now\\\", dichiarando di aver vissuto un vero e proprio turbine di emozioni. \\\"Ho avuto un momento particolare non appena è suonata la campanella e dopo aver eseguito la mia finisher su Becky; mi sono emozionata. Ero sotto shock, pensavo 'mio Dio, ce l'ho fatta'. È stato, in un certo senso, il mio momento decisivo. L'inizio del mio prossimo capitolo\\\". La wrestler ha aggiunto di aver ricevuto un affetto e un supporto travolgenti dai fan dopo la conquista del titolo.\",\n    \"b4\": \"La nuova campionessa ha intenzione di essere una lottatrice attiva. \\\"Voglio difendere questo titolo il maggior numero di volte possibile. Sono stata una doppia campionessa a 'NXT', detentrice sia dello Speed Championship che dell'NXT Championship, ma sento che i miei regni non sono stati all'altezza di ciò che posso offrire come campionessa\\\". La Ruca vuole dimostrare il suo valore con questa cintura ed è pronta a concedere opportunità a chiunque sia all'altezza, aprendo anche a sfidanti provenienti dal roster di \\\"NXT\\\".\"\n  },\n  \"notes\": []\n}\n```",
+      "translation_unit_count": 3,
       "translation_used": true
     }
   ],
-  "generated_at": "2026-06-02T00:20:16.969555+00:00",
+  "generated_at": "2026-06-02T05:10:24.712203+00:00",
   "handoff": {
     "errors": 0,
     "extraction_empty": 0,
-    "ready_for_alfred": 2,
+    "ready_for_alfred": 3,
     "translation_pending": 0
   },
   "input": {
     "menzo_version": "v93_14_priority_label_bob_brief_guard",
-    "selected_count": 2
+    "selected_count": 3
   },
   "mode": "block_translation_prudent_embed_cleanup",
   "policy": {

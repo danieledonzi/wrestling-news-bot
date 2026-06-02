@@ -1,10 +1,10 @@
 {
   "agent": "Simone",
-  "generated_at": "2026-06-02T00:19:59.989009+00:00",
+  "generated_at": "2026-06-02T05:10:12.279390+00:00",
   "handoff": {
     "ready": 0,
-    "skipped": 6,
-    "waiting": 0
+    "skipped": 5,
+    "waiting": 1
   },
   "input": {
     "configured_reports": 6,
@@ -14,13 +14,6 @@
   "mode": "report_director",
   "ready_reports": [],
   "skipped_reports": [
-    {
-      "decision": "skip",
-      "reason": "not_due_today:Tuesday",
-      "report_id": "wwe_raw",
-      "report_key": "wwe_raw_2026_06_01",
-      "title": "WWE Raw del 1 giugno 2026 - risultati e momenti salienti"
-    },
     {
       "decision": "skip",
       "reason": "not_due_today:Saturday",
@@ -58,5 +51,14 @@
     }
   ],
   "version": "v93_3_simone_report_director",
-  "waiting_reports": []
+  "waiting_reports": [
+    {
+      "date": "2026-06-01",
+      "decision": "waiting",
+      "reason": "no_candidate",
+      "report_id": "wwe_raw",
+      "report_key": "wwe_raw_2026_06_01",
+      "title": "WWE Raw del 1 giugno 2026 - risultati e momenti salienti"
+    }
+  ]
 }
