@@ -3,29 +3,29 @@
   "approved_articles": [
     {
       "bob_translation_model": "gemini-3.1-flash-lite",
-      "body_html": "<p>Bronson Reed ha vissuto un momento di paura lontano dagli schermi della WWE, ma fortunatamente sembra che stiano tutti bene.</p>\n<p>Bronson Reed ha raccontato tramite una storia su Instagram di essere rimasto coinvolto in un tamponamento. La star di RAW ha dichiarato che nessuno è rimasto ferito, cogliendo l&#x27;occasione per mettere in guardia le persone sui rischi della guida distratta.</p>\n<blockquote>“Appena avuto un tamponamento. Fortunatamente, stanno tutti bene. Ma la gente smetta di guidare usando quei maledetti telefoni, fate attenzione. Ci sono persone che trasportano bambini nelle proprie auto.”</blockquote>\n<p>L&#x27;episodio avviene mentre Reed è ancora lontano dalla programmazione WWE a causa di un infortunio. È fuori dalle scene da quando ha subito la rottura del bicipite distale del braccio destro durante una puntata di RAW a febbraio; la WWE non ha ancora confermato una data per il suo rientro.</p>\n<p>Reed ha recentemente fatto discutere i fan dopo aver pubblicato una nuova foto su X che mostra un fisico decisamente più imponente e definito. Ha accompagnato il post con un messaggio lapidario: “Mandare in crash internet.”</p>\n<p>Mentre prosegue il suo recupero, questo incidente stradale gli ha dato un ulteriore motivo per farsi sentire, in particolare sulla necessità che gli automobilisti non usino il telefono alla guida. Per ora, la notizia più importante è che Reed ha confermato che tutti i coinvolti nello scontro stanno bene. Il suo avvertimento è stato diretto, ma il messaggio era chiaro: fate attenzione al volante.</p>",
-      "category_hint": "WWE",
+      "body_html": "<p>La fusione tra WWE e UFC ha dato vita a TKO Group Holdings, ma le ripercussioni legali dell&#x27;accordo comportano ora un potenziale conto salatissimo.</p>\n<p>Una causa promossa dagli azionisti in merito alla fusione si sta avviando verso il processo; qualora i querelanti dovessero avere la meglio, i danni richiesti potrebbero avvicinarsi al miliardo di dollari. Il fulcro del caso riguarda l&#x27;accusa secondo cui Vince McMahon avrebbe spinto per l&#x27;accordo con Endeavor per tutelare il proprio potere, anziché garantire il miglior risultato possibile per gli azionisti della WWE.</p>\n<p>Secondo Brandon Thurston di POST Wrestling, i legali che rappresentano un gruppo di azionisti WWE stanno richiedendo un risarcimento danni ingente legato alla fusione.</p>\n<blockquote>“I danni monetari richiesti dai querelanti oscillano tra i 466 e i 957 milioni di dollari, oltre agli interessi maturati dalla chiusura della fusione, avvenuta quasi tre anni fa. La cifra deriva da un&#x27;analisi redatta all&#x27;inizio di quest&#x27;anno da James L. Canessa, economista finanziario incaricato dai querelanti.”</blockquote>\n<p>La causa scaturisce dalla fusione tra WWE e UFC sotto l&#x27;egida di Endeavor, che ha portato alla creazione di TKO Group Holdings. I querelanti sostengono che McMahon avesse già indirizzato il processo verso Endeavor mentre si trovava sotto esame per le accuse di cattiva condotta sessuale.</p>\n<p>L&#x27;accusa principale è che il futuro personale di McMahon all&#x27;interno dell&#x27;azienda sia stato un fattore determinante nell&#x27;accordo. I querelanti sostengono che gli azionisti WWE abbiano subito un danno poiché McMahon era concentrato sull&#x27;assicurarsi un ruolo per sé stesso, anziché massimizzare il processo di vendita.</p>\n<p>Tra gli imputati nel caso figurano Vince McMahon, il presidente della WWE Nick Khan, il Chief Content Officer Paul “Triple H” Levesque e gli ex co-presidenti della WWE George Barrios e Michelle Wilson.</p>\n<p>Gli imputati hanno negato qualsiasi illecito. La loro linea di difesa sostiene che gli azionisti WWE non abbiano subito danni e che il processo di fusione sia stato equo. Sostengono inoltre che l&#x27;accordo abbia portato benefici agli investitori dopo l&#x27;unione di WWE e UFC sotto il marchio TKO.</p>\n<p>Le tempistiche rendono la vicenda ancora più rilevante. Il processo è attualmente fissato per lunedì 8 giugno, il che significa che una delle battaglie legali più importanti nella storia aziendale della WWE è ormai alle porte.</p>",
+      "category_hint": "Business",
       "element_counts": {
         "embed": 0,
         "heading": 0,
         "image": 0,
         "quote": 1,
         "table": 0,
-        "text": 5
+        "text": 8
       },
-      "excerpt_it": "Bronson Reed ha vissuto un momento di paura lontano dagli schermi della WWE, ma fortunatamente tutti i coinvolti stanno bene.",
+      "excerpt_it": "La fusione tra WWE e UFC che ha dato vita a TKO Group Holdings è al centro di una pesante disputa legale che potrebbe costare quasi un miliardo di dollari.",
       "meta": {
-        "description": "Bronson Reed had a scary moment away from WWE television, but thankfully, everyone appears to be okay. Bronson Reed took to his Instagram Story and",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/bronson-reed-involved-in-a-car-accident-50.jpg",
-        "source_title": "Bronson Reed Involved in a Car Accident"
+        "description": "WWE’s merger with UFC may have created TKO Group Holdings, but the legal fallout from that deal is now carrying a massive potential price tag. A",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/03/judge-orders-wwe-sale-bidding-details-to-be-unsealed-in-shareholder-lawsuit-15.jpg",
+        "source_title": "WWE Shareholder Lawsuit Could Put Nearly $1 Billion On The Line Before Trial"
       },
       "source": "ringsidenews",
-      "source_title": "Bronson Reed Involved in a Car Accident",
-      "source_url": "https://www.ringsidenews.com/bronson-reed-involved-car-accident/",
-      "title_it": "Bronson Reed coinvolto in un incidente stradale"
+      "source_title": "WWE Shareholder Lawsuit Could Put Nearly $1 Billion On The Line Before Trial",
+      "source_url": "https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/",
+      "title_it": "WWE: causa degli azionisti in vista, in ballo quasi un miliardo di dollari"
     }
   ],
-  "generated_at": "2026-06-02T22:23:48.090363+00:00",
+  "generated_at": "2026-06-02T23:18:03.590752+00:00",
   "handoff": {
     "approved": 1,
     "blockers": 0,
@@ -64,47 +64,47 @@
     {
       "approved_article": {
         "bob_translation_model": "gemini-3.1-flash-lite",
-        "body_html": "<p>Bronson Reed ha vissuto un momento di paura lontano dagli schermi della WWE, ma fortunatamente sembra che stiano tutti bene.</p>\n<p>Bronson Reed ha raccontato tramite una storia su Instagram di essere rimasto coinvolto in un tamponamento. La star di RAW ha dichiarato che nessuno è rimasto ferito, cogliendo l&#x27;occasione per mettere in guardia le persone sui rischi della guida distratta.</p>\n<blockquote>“Appena avuto un tamponamento. Fortunatamente, stanno tutti bene. Ma la gente smetta di guidare usando quei maledetti telefoni, fate attenzione. Ci sono persone che trasportano bambini nelle proprie auto.”</blockquote>\n<p>L&#x27;episodio avviene mentre Reed è ancora lontano dalla programmazione WWE a causa di un infortunio. È fuori dalle scene da quando ha subito la rottura del bicipite distale del braccio destro durante una puntata di RAW a febbraio; la WWE non ha ancora confermato una data per il suo rientro.</p>\n<p>Reed ha recentemente fatto discutere i fan dopo aver pubblicato una nuova foto su X che mostra un fisico decisamente più imponente e definito. Ha accompagnato il post con un messaggio lapidario: “Mandare in crash internet.”</p>\n<p>Mentre prosegue il suo recupero, questo incidente stradale gli ha dato un ulteriore motivo per farsi sentire, in particolare sulla necessità che gli automobilisti non usino il telefono alla guida. Per ora, la notizia più importante è che Reed ha confermato che tutti i coinvolti nello scontro stanno bene. Il suo avvertimento è stato diretto, ma il messaggio era chiaro: fate attenzione al volante.</p>",
-        "category_hint": "WWE",
+        "body_html": "<p>La fusione tra WWE e UFC ha dato vita a TKO Group Holdings, ma le ripercussioni legali dell&#x27;accordo comportano ora un potenziale conto salatissimo.</p>\n<p>Una causa promossa dagli azionisti in merito alla fusione si sta avviando verso il processo; qualora i querelanti dovessero avere la meglio, i danni richiesti potrebbero avvicinarsi al miliardo di dollari. Il fulcro del caso riguarda l&#x27;accusa secondo cui Vince McMahon avrebbe spinto per l&#x27;accordo con Endeavor per tutelare il proprio potere, anziché garantire il miglior risultato possibile per gli azionisti della WWE.</p>\n<p>Secondo Brandon Thurston di POST Wrestling, i legali che rappresentano un gruppo di azionisti WWE stanno richiedendo un risarcimento danni ingente legato alla fusione.</p>\n<blockquote>“I danni monetari richiesti dai querelanti oscillano tra i 466 e i 957 milioni di dollari, oltre agli interessi maturati dalla chiusura della fusione, avvenuta quasi tre anni fa. La cifra deriva da un&#x27;analisi redatta all&#x27;inizio di quest&#x27;anno da James L. Canessa, economista finanziario incaricato dai querelanti.”</blockquote>\n<p>La causa scaturisce dalla fusione tra WWE e UFC sotto l&#x27;egida di Endeavor, che ha portato alla creazione di TKO Group Holdings. I querelanti sostengono che McMahon avesse già indirizzato il processo verso Endeavor mentre si trovava sotto esame per le accuse di cattiva condotta sessuale.</p>\n<p>L&#x27;accusa principale è che il futuro personale di McMahon all&#x27;interno dell&#x27;azienda sia stato un fattore determinante nell&#x27;accordo. I querelanti sostengono che gli azionisti WWE abbiano subito un danno poiché McMahon era concentrato sull&#x27;assicurarsi un ruolo per sé stesso, anziché massimizzare il processo di vendita.</p>\n<p>Tra gli imputati nel caso figurano Vince McMahon, il presidente della WWE Nick Khan, il Chief Content Officer Paul “Triple H” Levesque e gli ex co-presidenti della WWE George Barrios e Michelle Wilson.</p>\n<p>Gli imputati hanno negato qualsiasi illecito. La loro linea di difesa sostiene che gli azionisti WWE non abbiano subito danni e che il processo di fusione sia stato equo. Sostengono inoltre che l&#x27;accordo abbia portato benefici agli investitori dopo l&#x27;unione di WWE e UFC sotto il marchio TKO.</p>\n<p>Le tempistiche rendono la vicenda ancora più rilevante. Il processo è attualmente fissato per lunedì 8 giugno, il che significa che una delle battaglie legali più importanti nella storia aziendale della WWE è ormai alle porte.</p>",
+        "category_hint": "Business",
         "element_counts": {
           "embed": 0,
           "heading": 0,
           "image": 0,
           "quote": 1,
           "table": 0,
-          "text": 5
+          "text": 8
         },
-        "excerpt_it": "Bronson Reed ha vissuto un momento di paura lontano dagli schermi della WWE, ma fortunatamente tutti i coinvolti stanno bene.",
+        "excerpt_it": "La fusione tra WWE e UFC che ha dato vita a TKO Group Holdings è al centro di una pesante disputa legale che potrebbe costare quasi un miliardo di dollari.",
         "meta": {
-          "description": "Bronson Reed had a scary moment away from WWE television, but thankfully, everyone appears to be okay. Bronson Reed took to his Instagram Story and",
-          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/bronson-reed-involved-in-a-car-accident-50.jpg",
-          "source_title": "Bronson Reed Involved in a Car Accident"
+          "description": "WWE’s merger with UFC may have created TKO Group Holdings, but the legal fallout from that deal is now carrying a massive potential price tag. A",
+          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/03/judge-orders-wwe-sale-bidding-details-to-be-unsealed-in-shareholder-lawsuit-15.jpg",
+          "source_title": "WWE Shareholder Lawsuit Could Put Nearly $1 Billion On The Line Before Trial"
         },
         "source": "ringsidenews",
-        "source_title": "Bronson Reed Involved in a Car Accident",
-        "source_url": "https://www.ringsidenews.com/bronson-reed-involved-car-accident/",
-        "title_it": "Bronson Reed coinvolto in un incidente stradale"
+        "source_title": "WWE Shareholder Lawsuit Could Put Nearly $1 Billion On The Line Before Trial",
+        "source_url": "https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/",
+        "title_it": "WWE: causa degli azionisti in vista, in ballo quasi un miliardo di dollari"
       },
-      "category_hint": "WWE",
+      "category_hint": "Business",
       "decision": "approved",
       "diagnostics": {
-        "bob_clean_element_count": 6,
+        "bob_clean_element_count": 9,
         "bob_diagnostic_stage": "ready_for_alfred",
         "bob_removed_before_gemini": 14,
         "bob_status": "ready_for_alfred",
         "bob_translation_model": "gemini-3.1-flash-lite",
         "editorial_changes": 0,
-        "plain_chars": 1499,
+        "plain_chars": 2377,
         "quote_count": 1,
         "table_count": 0,
-        "title_chars": 47
+        "title_chars": 74
       },
       "editorial_changes": [],
       "issues": [],
       "quality_score": 100,
       "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/bronson-reed-involved-car-accident/",
-      "title_it": "Bronson Reed coinvolto in un incidente stradale",
+      "source_url": "https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/",
+      "title_it": "WWE: causa degli azionisti in vista, in ballo quasi un miliardo di dollari",
       "warnings": []
     }
   ],

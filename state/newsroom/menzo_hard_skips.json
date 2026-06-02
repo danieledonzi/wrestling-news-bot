@@ -215,9 +215,27 @@
       "reason": "ai_duplicate_event:el grande americano match; ai_duplicate_of:c3; recency:fresh_12h",
       "title": "WWE HOFer Bully Ray On El Grande Americano Storyline: 'The Beauty Of Simplicity'",
       "url": "https://www.wrestlinginc.com/2186222/wwe-bully-ray-el-grande-americano-storyline-beauty-simplicity/"
+    },
+    {
+      "added_at": "2026-06-02T23:18:00.787323+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2186249/aew-mick-foley-leaving-wwe-donald-trump",
+      "reason": "ai:Notizia basata su opinioni personali e politica esterna, poco valore per l'audience di wrestling puro.; deterministic:entity:mick foley,recency:fresh_12h",
+      "title": "AEW's Mick Foley Opens Up About Leaving WWE Due To Company's Support For Donald Trump",
+      "url": "https://www.wrestlinginc.com/2186249/aew-mick-foley-leaving-wwe-donald-trump/"
+    },
+    {
+      "added_at": "2026-06-02T23:18:00.787323+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2186177/wwe-hofer-jeff-jarrett-wants-special-stipulation-brock-lesnar-oba-femi-iii",
+      "reason": "ai:Opinione/speculazione non necessaria. Curiosità debole.; deterministic:entity:brock lesnar,entity:oba femi,recency:fresh_12h",
+      "title": "WWE HOFer Jeff Jarrett Wants Special Stipulation For Brock Lesnar/Oba Femi III",
+      "url": "https://www.wrestlinginc.com/2186177/wwe-hofer-jeff-jarrett-wants-special-stipulation-brock-lesnar-oba-femi-iii/"
     }
   ],
   "ttl_hours": 168,
-  "updated_at": "2026-06-02T22:23:44.094443+00:00",
+  "updated_at": "2026-06-02T23:18:00.787323+00:00",
   "version": "v93_15_forced_priority_label_softpool"
 }

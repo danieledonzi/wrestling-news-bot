@@ -1918,5 +1918,105 @@
     "overall_status": "error",
     "published": 0,
     "warnings": 0
+  },
+  {
+    "agent_handoffs": {
+      "alfred": {
+        "approved": 1,
+        "blockers": 0,
+        "editorial_changes": 0,
+        "needs_revision": 0,
+        "warnings": 0
+      },
+      "bob": {
+        "errors": 0,
+        "extraction_empty": 0,
+        "ready_for_alfred": 1,
+        "translation_pending": 0
+      },
+      "massy": {
+        "already_published_hard_skipped": 5,
+        "already_worked": 0,
+        "hard_skipped": 30,
+        "menzo_memory_hard_skipped": 18,
+        "old_news_hard_skipped": 6,
+        "to_menzo": 4,
+        "to_simone": 1
+      },
+      "menzo": {
+        "pending": 2,
+        "skipped": 2,
+        "to_bob_or_v92": 1
+      },
+      "publisher": {
+        "already_published": 0,
+        "dry_run": 0,
+        "errors": 0,
+        "published": 0,
+        "wp_not_ready": 1
+      },
+      "simone": {
+        "ready": 0,
+        "skipped": 6,
+        "waiting": 0
+      }
+    },
+    "already_published": 0,
+    "article_count": 1,
+    "errors": 1,
+    "generated_at": "2026-06-02T23:18:28.947799+00:00",
+    "overall_status": "error",
+    "published": 0,
+    "warnings": 0
+  },
+  {
+    "agent_handoffs": {
+      "alfred": {
+        "approved": 1,
+        "blockers": 0,
+        "editorial_changes": 0,
+        "needs_revision": 0,
+        "warnings": 0
+      },
+      "bob": {
+        "errors": 0,
+        "extraction_empty": 0,
+        "ready_for_alfred": 1,
+        "translation_pending": 0
+      },
+      "massy": {
+        "already_published_hard_skipped": 5,
+        "already_worked": 0,
+        "hard_skipped": 30,
+        "menzo_memory_hard_skipped": 18,
+        "old_news_hard_skipped": 6,
+        "to_menzo": 4,
+        "to_simone": 1
+      },
+      "menzo": {
+        "pending": 2,
+        "skipped": 2,
+        "to_bob_or_v92": 1
+      },
+      "publisher": {
+        "already_published": 0,
+        "dry_run": 0,
+        "errors": 0,
+        "published": 0,
+        "wp_not_ready": 1
+      },
+      "simone": {
+        "ready": 0,
+        "skipped": 6,
+        "waiting": 0
+      }
+    },
+    "already_published": 0,
+    "article_count": 1,
+    "errors": 1,
+    "generated_at": "2026-06-02T23:18:28.956411+00:00",
+    "overall_status": "error",
+    "published": 0,
+    "warnings": 0
   }
 ]

@@ -1,7 +1,7 @@
 {
   "agent": "Menzo",
   "allowed_urls_for_v92": [
-    "https://www.ringsidenews.com/bronson-reed-involved-car-accident/"
+    "https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/"
   ],
   "daily_policy": {
     "max_pending_this_run": 12,
@@ -10,10 +10,10 @@
     "target_max": 30,
     "target_min": 20
   },
-  "generated_at": "2026-06-02T22:23:44.091961+00:00",
+  "generated_at": "2026-06-02T23:18:00.785013+00:00",
   "handoff": {
-    "pending": 3,
-    "skipped": 1,
+    "pending": 2,
+    "skipped": 2,
     "to_bob_or_v92": 1
   },
   "input": {
@@ -28,34 +28,50 @@
     "error": "",
     "model": "gemini-3.1-flash-lite",
     "prompt_count": 5,
-    "raw_preview": "{\n  \"reviews\": [\n    {\n      \"id\": \"c1\",\n      \"decision\": \"selected\",\n      \"priority\": 7,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"hard_news\",\n      \"event_key\": \"bronson_reed_accident\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia di cronaca diretta su una superstar WWE. Nota: corretta categoria da AEW a WWE.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"instagram\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Ringsidenews tende ad avere molto rumore nelle immagini, pulisci il testo dalle descrizioni del tag img.\"\n      }\n    },\n    {\n      \"id\": \"c2\",\n      \"decision\": \"selected\",\n      \"priority\": 5,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"jarrett_lesnar_femi\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Spunto di discussione interessante su un feud di cartello. Utile per il pubblico italiano che segue le storyline principali.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Focus sulla proposta di Jarrett, mantieni il tono analitico.\"\n      }\n    },\n    {\n      \"id\": \"c3\",\n      \"decision\": \"selected\",\n      \"priority\": 6,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"hard_news\",\n      \"event_key\": \"el_grande_americano_match\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia di backstage rilevante su un match importante a livello internazionale con atleti WWE coinvolti.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Verifica il nome del produttore citato nel corpo del testo, è il fulcro della news.\"\n      }\n    },\n    {\n      \"id\": \"c4\",\n      \"decision\": \"skip\",\n      \"priority\": 1,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"duplicate\",\n      \"event_key\": \"el_grande_americano_match\",\n      \"duplicate_of\": \"c3\",\n      \"editorial_reason\": \"Opinione di un veterano sul match già trattato in c3. Non aggiunge valore informativo nuovo.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"Ignora.\"\n      }\n    },\n    {\n      \"id\": \"c5\",\n      \"decision\": \"selected\",\n      \"priority\": 4,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"business_legal\",\n      \"event_key\": \"aew_visa_issues\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia di natura gestionale che spiega l'assenza di atleti dagli show televisivi.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\"],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"Sii sintetico, spiega bene il contesto della partnership con CMLL.\"\n      }\n    }\n  ]\n}",
+    "raw_preview": "{\n  \"reviews\": [\n    {\n      \"id\": \"c1\",\n      \"decision\": \"selected\",\n      \"priority\": 10,\n      \"category_hint\": \"Business\",\n      \"article_type\": \"business_legal\",\n      \"event_key\": \"tko_lawsuit_2026\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia di primaria importanza finanziaria riguardante TKO/WWE, essenziale per il nostro pubblico business.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"author_bio\", \"cta\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Focus tecnico e legale, mantenere tono serio.\"\n      }\n    },\n    {\n      \"id\": \"c2\",\n      \"decision\": \"skip\",\n      \"priority\": 0,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"jarrett_opinion_lesnar_femi\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Opinione/speculazione non necessaria. Curiosità debole.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"\"\n      }\n    },\n    {\n      \"id\": \"c3\",\n      \"decision\": \"pending\",\n      \"priority\": 5,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"gable_kaiser_mask_match\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Dietro le quinte interessante per i fan di Gable e del prodotto internazionale.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Semplificare il testo rimuovendo la parte iniziale di Ringsidenews.\"\n      }\n    },\n    {\n      \"id\": \"c4\",\n      \"decision\": \"skip\",\n      \"priority\": 0,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"foley_politics\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia basata su opinioni personali e politica esterna, poco valore per l'audience di wrestling puro.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"author_bio\", \"cta\"],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"\"\n      }\n    },\n    {\n      \"id\": \"c5\",\n      \"decision\": \"pending\",\n      \"priority\": 4,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"hard_news\",\n      \"event_key\": \"aew_visa_issues\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia rilevante per il roster AEW e la collaborazione con CMLL, impatto operativo diretto.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"author_bio\"],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"Breve report informativo.\"\n      }\n    }\n  ]\n}",
     "reviews": [
       {
-        "article_type": "hard_news",
+        "article_type": "business_legal",
         "bob_brief": {
-          "expected_embeds": [
-            "instagram"
-          ],
+          "expected_embeds": [],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
             "citazioni dirette"
           ],
           "possible_noise": [
-            "source_social_bar",
             "author_bio",
             "cta"
           ],
-          "source_specific_notes": "Ringsidenews tende ad avere molto rumore nelle immagini, pulisci il testo dalle descrizioni del tag img."
+          "source_specific_notes": "Focus tecnico e legale, mantenere tono serio."
         },
-        "category_hint": "WWE",
+        "category_hint": "Business",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Notizia di cronaca diretta su una superstar WWE. Nota: corretta categoria da AEW a WWE.",
-        "event_key": "bronson_reed_accident",
+        "editorial_reason": "Notizia di primaria importanza finanziaria riguardante TKO/WWE, essenziale per il nostro pubblico business.",
+        "event_key": "tko_lawsuit_2026",
         "id": "c1",
-        "priority": 7,
+        "priority": 10,
         "priority_label": "medium"
+      },
+      {
+        "article_type": "low_value",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Opinione/speculazione non necessaria. Curiosità debole.",
+        "event_key": "jarrett_opinion_lesnar_femi",
+        "id": "c2",
+        "priority": 0,
+        "priority_label": "skip"
       },
       {
         "article_type": "storyline_development",
@@ -68,82 +84,57 @@
           ],
           "possible_noise": [
             "source_social_bar",
+            "author_bio"
+          ],
+          "source_specific_notes": "Semplificare il testo rimuovendo la parte iniziale di Ringsidenews."
+        },
+        "category_hint": "WWE",
+        "decision": "pending",
+        "duplicate_of": "",
+        "editorial_reason": "Dietro le quinte interessante per i fan di Gable e del prodotto internazionale.",
+        "event_key": "gable_kaiser_mask_match",
+        "id": "c3",
+        "priority": 5,
+        "priority_label": "medium"
+      },
+      {
+        "article_type": "low_value",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [
             "author_bio",
             "cta"
           ],
-          "source_specific_notes": "Focus sulla proposta di Jarrett, mantieni il tono analitico."
+          "source_specific_notes": ""
         },
-        "category_hint": "WWE",
-        "decision": "selected",
+        "category_hint": "AEW",
+        "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Spunto di discussione interessante su un feud di cartello. Utile per il pubblico italiano che segue le storyline principali.",
-        "event_key": "jarrett_lesnar_femi",
-        "id": "c2",
-        "priority": 5,
-        "priority_label": "medium"
+        "editorial_reason": "Notizia basata su opinioni personali e politica esterna, poco valore per l'audience di wrestling puro.",
+        "event_key": "foley_politics",
+        "id": "c4",
+        "priority": 0,
+        "priority_label": "skip"
       },
       {
         "article_type": "hard_news",
         "bob_brief": {
           "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta"
-          ],
-          "source_specific_notes": "Verifica il nome del produttore citato nel corpo del testo, è il fulcro della news."
-        },
-        "category_hint": "WWE",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Notizia di backstage rilevante su un match importante a livello internazionale con atleti WWE coinvolti.",
-        "event_key": "el_grande_americano_match",
-        "id": "c3",
-        "priority": 6,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "duplicate",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": "Ignora."
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "c3",
-        "editorial_reason": "Opinione di un veterano sul match già trattato in c3. Non aggiunge valore informativo nuovo.",
-        "event_key": "el_grande_americano_match",
-        "id": "c4",
-        "priority": 1,
-        "priority_label": "low"
-      },
-      {
-        "article_type": "business_legal",
-        "bob_brief": {
-          "expected_embeds": [],
           "expected_quotes": false,
           "expected_tables": false,
           "must_preserve": [],
           "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta"
+            "author_bio"
           ],
-          "source_specific_notes": "Sii sintetico, spiega bene il contesto della partnership con CMLL."
+          "source_specific_notes": "Breve report informativo."
         },
         "category_hint": "AEW",
-        "decision": "selected",
+        "decision": "pending",
         "duplicate_of": "",
-        "editorial_reason": "Notizia di natura gestionale che spiega l'assenza di atleti dagli show televisivi.",
+        "editorial_reason": "Notizia rilevante per il roster AEW e la collaborazione con CMLL, impatto operativo diretto.",
         "event_key": "aew_visa_issues",
         "id": "c5",
         "priority": 4,
@@ -155,10 +146,10 @@
   "mode": "forced_priority_label_softpool",
   "pending": [
     {
-      "age_hours": 1.2714434808333333,
+      "age_hours": 2.310914493888889,
       "agent": "Menzo",
-      "ai_editorial_reason": "Spunto di discussione interessante su un feud di cartello. Utile per il pubblico italiano che segue le storyline principali.",
-      "ai_id": "c2",
+      "ai_editorial_reason": "Dietro le quinte interessante per i fan di Gable e del prodotto internazionale.",
+      "ai_id": "c3",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "storyline_development",
@@ -172,16 +163,15 @@
         ],
         "possible_noise": [
           "source_social_bar",
-          "author_bio",
-          "cta"
+          "author_bio"
         ],
-        "source_specific_notes": "Focus sulla proposta di Jarrett, mantieni il tono analitico."
+        "source_specific_notes": "Semplificare il testo rimuovendo la parte iniziale di Ringsidenews."
       },
       "category_hint": "WWE",
       "decision": "pending",
-      "deterministic_score": 54,
-      "evaluated_at": "2026-06-02T22:23:40.196533+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "deterministic_score": 46,
+      "evaluated_at": "2026-06-02T23:17:56.292180+00:00",
+      "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
         "article_type": "storyline_development",
         "bob_brief": {
@@ -193,87 +183,23 @@
           ],
           "possible_noise": [
             "source_social_bar",
-            "author_bio",
-            "cta"
+            "author_bio"
           ],
-          "source_specific_notes": "Focus sulla proposta di Jarrett, mantieni il tono analitico."
+          "source_specific_notes": "Semplificare il testo rimuovendo la parte iniziale di Ringsidenews."
         },
         "category_hint": "WWE",
-        "decision": "selected",
+        "decision": "pending",
         "duplicate_of": "",
-        "editorial_reason": "Spunto di discussione interessante su un feud di cartello. Utile per il pubblico italiano che segue le storyline principali.",
-        "event_key": "jarrett_lesnar_femi",
-        "id": "c2",
-        "priority": 5,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.wrestlinginc.com/2186177/wwe-hofer-jeff-jarrett-wants-special-stipulation-brock-lesnar-oba-femi-iii",
-      "priority": "soft",
-      "published": "Tue, 02 Jun 2026 21:07:23 +0000",
-      "reason": "ai:Spunto di discussione interessante su un feud di cartello. Utile per il pubblico italiano che segue le storyline principali.; deterministic:entity:brock lesnar,entity:oba femi,recency:fresh_12h",
-      "score": 62,
-      "source": "wrestlinginc",
-      "summary": "WWE Hall of Famer Jeff Jarrett reveals the stipulation he wants attached to the inevitable third Brock Lesnar-Oba Femi clash.",
-      "title": "WWE HOFer Jeff Jarrett Wants Special Stipulation For Brock Lesnar/Oba Femi III",
-      "url": "https://www.wrestlinginc.com/2186177/wwe-hofer-jeff-jarrett-wants-special-stipulation-brock-lesnar-oba-femi-iii/"
-    },
-    {
-      "age_hours": 1.4064437002777777,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Notizia di backstage rilevante su un match importante a livello internazionale con atleti WWE coinvolti.",
-      "ai_id": "c3",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "hard_news",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [
-          "citazioni dirette"
-        ],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta"
-        ],
-        "source_specific_notes": "Verifica il nome del produttore citato nel corpo del testo, è il fulcro della news."
-      },
-      "category_hint": "WWE",
-      "decision": "pending",
-      "deterministic_score": 46,
-      "evaluated_at": "2026-06-02T22:23:40.197323+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "hard_news",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta"
-          ],
-          "source_specific_notes": "Verifica il nome del produttore citato nel corpo del testo, è il fulcro della news."
-        },
-        "category_hint": "WWE",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Notizia di backstage rilevante su un match importante a livello internazionale con atleti WWE coinvolti.",
-        "event_key": "el_grande_americano_match",
+        "editorial_reason": "Dietro le quinte interessante per i fan di Gable e del prodotto internazionale.",
+        "event_key": "gable_kaiser_mask_match",
         "id": "c3",
-        "priority": 6,
+        "priority": 5,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed",
       "priority": "soft",
       "published": "Tue, 02 Jun 2026 20:59:17 +0000",
-      "reason": "ai:Notizia di backstage rilevante su un match importante a livello internazionale con atleti WWE coinvolti.; deterministic:entity:chad gable,recency:fresh_12h",
+      "reason": "ai:Dietro le quinte interessante per i fan di Gable e del prodotto internazionale.; deterministic:entity:chad gable,recency:fresh_12h",
       "score": 58,
       "source": "ringsidenews",
       "summary": "<p><img alt=\"Producer Behind El Grande Americano Mask vs. Mask Match Revealed\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/producer-behind-el-grande-americano-mask-vs-mask-match-revealed-48.jpg?x37732\" width=\"800\" /></p>Chad Gable and Ludwig Kaiser’s bloody Mask vs. Mask match at AAA Noche de Los Grandes had another WWE name involved behind the scenes According to Mexican journalist Ernesto Ocampo, Pete Dunne was the producer for the match between Ludwig Kaiser’s El Grande Americano and Chad Gable’s Original El Grande Americano. Ocampo noted that Dunne ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed/\" title=\"Producer Behind El Grande Americano Mask vs. Mask Match Revealed\">Read more</a>",
@@ -281,13 +207,13 @@
       "url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed/"
     },
     {
-      "age_hours": 0.5256100791666667,
+      "age_hours": 1.4300806586111112,
       "agent": "Menzo",
-      "ai_editorial_reason": "Notizia di natura gestionale che spiega l'assenza di atleti dagli show televisivi.",
+      "ai_editorial_reason": "Notizia rilevante per il roster AEW e la collaborazione con CMLL, impatto operativo diretto.",
       "ai_id": "c5",
       "ai_priority": 72,
       "ai_priority_label": "medium",
-      "article_type": "business_legal",
+      "article_type": "hard_news",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [],
@@ -295,35 +221,31 @@
         "expected_tables": false,
         "must_preserve": [],
         "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta"
+          "author_bio"
         ],
-        "source_specific_notes": "Sii sintetico, spiega bene il contesto della partnership con CMLL."
+        "source_specific_notes": "Breve report informativo."
       },
       "category_hint": "AEW",
       "decision": "pending",
       "deterministic_score": 38,
-      "evaluated_at": "2026-06-02T22:23:40.196287+00:00",
+      "evaluated_at": "2026-06-02T23:17:56.290373+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "menzo_ai_review": {
-        "article_type": "business_legal",
+        "article_type": "hard_news",
         "bob_brief": {
           "expected_embeds": [],
           "expected_quotes": false,
           "expected_tables": false,
           "must_preserve": [],
           "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta"
+            "author_bio"
           ],
-          "source_specific_notes": "Sii sintetico, spiega bene il contesto della partnership con CMLL."
+          "source_specific_notes": "Breve report informativo."
         },
         "category_hint": "AEW",
-        "decision": "selected",
+        "decision": "pending",
         "duplicate_of": "",
-        "editorial_reason": "Notizia di natura gestionale che spiega l'assenza di atleti dagli show televisivi.",
+        "editorial_reason": "Notizia rilevante per il roster AEW e la collaborazione con CMLL, impatto operativo diretto.",
         "event_key": "aew_visa_issues",
         "id": "c5",
         "priority": 4,
@@ -332,7 +254,7 @@
       "normalized_url": "https://www.wrestlinginc.com/2186205/two-aew-luchadors-still-struggling-visa-issues",
       "priority": "soft",
       "published": "Tue, 02 Jun 2026 21:52:08 +0000",
-      "reason": "ai:Notizia di natura gestionale che spiega l'assenza di atleti dagli show televisivi.; deterministic:recency:fresh_12h",
+      "reason": "ai:Notizia rilevante per il roster AEW e la collaborazione con CMLL, impatto operativo diretto.; deterministic:recency:fresh_12h",
       "score": 53,
       "source": "wrestlinginc",
       "summary": "Two AEW luchadors are continuing to have struggles with visa issues, leading to them working with AEW's promotional partner CMLL in Mexico for the time being",
@@ -357,125 +279,179 @@
   },
   "selected": [
     {
-      "age_hours": 3.332277216111111,
+      "age_hours": 0.5870253713888889,
       "agent": "Menzo",
-      "ai_editorial_reason": "Notizia di cronaca diretta su una superstar WWE. Nota: corretta categoria da AEW a WWE.",
+      "ai_editorial_reason": "Notizia di primaria importanza finanziaria riguardante TKO/WWE, essenziale per il nostro pubblico business.",
       "ai_id": "c1",
       "ai_priority": 72,
       "ai_priority_label": "medium",
-      "article_type": "hard_news",
+      "article_type": "business_legal",
       "assigned_to": "Menzo",
       "bob_brief": {
-        "expected_embeds": [
-          "instagram"
-        ],
+        "expected_embeds": [],
         "expected_quotes": true,
         "expected_tables": false,
         "must_preserve": [
           "citazioni dirette"
         ],
         "possible_noise": [
-          "source_social_bar",
           "author_bio",
           "cta"
         ],
-        "source_specific_notes": "Ringsidenews tende ad avere molto rumore nelle immagini, pulisci il testo dalle descrizioni del tag img."
+        "source_specific_notes": "Focus tecnico e legale, mantenere tono serio."
       },
-      "category_hint": "WWE",
+      "category_hint": "Business",
       "decision": "selected",
-      "deterministic_score": 62,
-      "evaluated_at": "2026-06-02T22:23:40.197980+00:00",
+      "deterministic_score": 100,
+      "evaluated_at": "2026-06-02T23:17:56.291339+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
-        "article_type": "hard_news",
+        "article_type": "business_legal",
         "bob_brief": {
-          "expected_embeds": [
-            "instagram"
-          ],
+          "expected_embeds": [],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
             "citazioni dirette"
           ],
           "possible_noise": [
-            "source_social_bar",
             "author_bio",
             "cta"
           ],
-          "source_specific_notes": "Ringsidenews tende ad avere molto rumore nelle immagini, pulisci il testo dalle descrizioni del tag img."
+          "source_specific_notes": "Focus tecnico e legale, mantenere tono serio."
         },
-        "category_hint": "WWE",
+        "category_hint": "Business",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Notizia di cronaca diretta su una superstar WWE. Nota: corretta categoria da AEW a WWE.",
-        "event_key": "bronson_reed_accident",
+        "editorial_reason": "Notizia di primaria importanza finanziaria riguardante TKO/WWE, essenziale per il nostro pubblico business.",
+        "event_key": "tko_lawsuit_2026",
         "id": "c1",
-        "priority": 7,
+        "priority": 10,
         "priority_label": "medium"
       },
-      "normalized_url": "https://www.ringsidenews.com/bronson-reed-involved-car-accident",
-      "priority": "soft",
-      "published": "Tue, 02 Jun 2026 19:03:44 +0000",
-      "reason": "ai:Notizia di cronaca diretta su una superstar WWE. Nota: corretta categoria da AEW a WWE.; deterministic:strategic:raw,recency:fresh_12h",
-      "score": 66,
+      "normalized_url": "https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial",
+      "priority": "hard",
+      "published": "Tue, 02 Jun 2026 22:42:43 +0000",
+      "reason": "ai:Notizia di primaria importanza finanziaria riguardante TKO/WWE, essenziale per il nostro pubblico business.; deterministic:hard:lawsuit,hard:legal,hard:tko,current:business_legal,recency:fresh_12h",
+      "score": 87,
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Bronson Reed Involved in a Car Accident\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/bronson-reed-involved-in-a-car-accident-50.jpg?x37732\" width=\"800\" /></p>Bronson Reed had a scary moment away from WWE television, but thankfully, everyone appears to be okay. Bronson Reed took to his Instagram Story and revealed that he was involved in a rear-end collision. The RAW star said no one was hurt, but he used the moment to warn people about distracted driving. “Just had ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/bronson-reed-involved-car-accident/\" title=\"Bronson Reed Involved in a Car Accident\">Read more</a>",
-      "title": "Bronson Reed Involved in a Car Accident",
-      "url": "https://www.ringsidenews.com/bronson-reed-involved-car-accident/"
+      "summary": "<p><img alt=\"Judge Orders WWE Sale Bidding Details to Be Unsealed in Shareholder Lawsuit\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/03/judge-orders-wwe-sale-bidding-details-to-be-unsealed-in-shareholder-lawsuit-15.jpg?x37732\" width=\"800\" /></p>WWE’s merger with UFC may have created TKO Group Holdings, but the legal fallout from that deal is now carrying a massive potential price tag. A shareholder lawsuit tied to the merger is heading toward trial, and the damages being sought could come close to $1 billion if the plaintiffs win in court. The case ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/\" title=\"WWE Shareholder Lawsuit Could Put Nearly $1 Billion On The Line Before Trial\">Read more</a>",
+      "title": "WWE Shareholder Lawsuit Could Put Nearly $1 Billion On The Line Before Trial",
+      "url": "https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/"
     }
   ],
   "skipped": [
     {
-      "age_hours": 0.11422112777777778,
+      "age_hours": 0.09202503472222222,
       "agent": "Menzo",
-      "ai_editorial_reason": "Opinione di un veterano sul match già trattato in c3. Non aggiunge valore informativo nuovo.",
+      "ai_editorial_reason": "Notizia basata su opinioni personali e politica esterna, poco valore per l'audience di wrestling puro.",
       "ai_id": "c4",
-      "ai_priority": 48,
-      "ai_priority_label": "low",
-      "article_type": "duplicate",
+      "ai_priority": 0,
+      "ai_priority_label": "skip",
+      "article_type": "low_value",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [],
-        "expected_quotes": false,
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [],
+        "possible_noise": [
+          "author_bio",
+          "cta"
+        ],
+        "source_specific_notes": ""
+      },
+      "category_hint": "AEW",
+      "decision": "skip",
+      "deterministic_score": 43,
+      "evaluated_at": "2026-06-02T23:17:56.290126+00:00",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "low_value",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [
+            "author_bio",
+            "cta"
+          ],
+          "source_specific_notes": ""
+        },
+        "category_hint": "AEW",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Notizia basata su opinioni personali e politica esterna, poco valore per l'audience di wrestling puro.",
+        "event_key": "foley_politics",
+        "id": "c4",
+        "priority": 0,
+        "priority_label": "skip"
+      },
+      "normalized_url": "https://www.wrestlinginc.com/2186249/aew-mick-foley-leaving-wwe-donald-trump",
+      "priority": "skip",
+      "published": "Tue, 02 Jun 2026 23:12:25 +0000",
+      "reason": "ai:Notizia basata su opinioni personali e politica esterna, poco valore per l'audience di wrestling puro.; deterministic:entity:mick foley,recency:fresh_12h",
+      "score": 24,
+      "source": "wrestlinginc",
+      "summary": "AEW's Mick Foley explained more about his decision to leave WWE, due to the company's support of the Trump administration.",
+      "title": "AEW's Mick Foley Opens Up About Leaving WWE Due To Company's Support For Donald Trump",
+      "url": "https://www.wrestlinginc.com/2186249/aew-mick-foley-leaving-wwe-donald-trump/"
+    },
+    {
+      "age_hours": 2.1759145730555556,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Opinione/speculazione non necessaria. Curiosità debole.",
+      "ai_id": "c2",
+      "ai_priority": 0,
+      "ai_priority_label": "skip",
+      "article_type": "low_value",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
         "expected_tables": false,
         "must_preserve": [],
         "possible_noise": [],
-        "source_specific_notes": "Ignora."
+        "source_specific_notes": ""
       },
       "category_hint": "WWE",
       "decision": "skip",
-      "deterministic_score": 38,
-      "duplicate_of": "c3",
-      "evaluated_at": "2026-06-02T22:23:40.196062+00:00",
+      "deterministic_score": 54,
+      "evaluated_at": "2026-06-02T23:17:56.292465+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "from_softpool": true,
+      "last_seen_at": "2026-06-02T22:23:44.093802+00:00",
       "menzo_ai_review": {
-        "article_type": "duplicate",
+        "article_type": "low_value",
         "bob_brief": {
           "expected_embeds": [],
-          "expected_quotes": false,
+          "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [],
           "possible_noise": [],
-          "source_specific_notes": "Ignora."
+          "source_specific_notes": ""
         },
         "category_hint": "WWE",
         "decision": "skip",
-        "duplicate_of": "c3",
-        "editorial_reason": "Opinione di un veterano sul match già trattato in c3. Non aggiunge valore informativo nuovo.",
-        "event_key": "el_grande_americano_match",
-        "id": "c4",
-        "priority": 1,
-        "priority_label": "low"
+        "duplicate_of": "",
+        "editorial_reason": "Opinione/speculazione non necessaria. Curiosità debole.",
+        "event_key": "jarrett_opinion_lesnar_femi",
+        "id": "c2",
+        "priority": 0,
+        "priority_label": "skip"
       },
-      "normalized_url": "https://www.wrestlinginc.com/2186222/wwe-bully-ray-el-grande-americano-storyline-beauty-simplicity",
+      "normalized_url": "https://www.wrestlinginc.com/2186177/wwe-hofer-jeff-jarrett-wants-special-stipulation-brock-lesnar-oba-femi-iii",
       "priority": "skip",
-      "published": "Tue, 02 Jun 2026 22:16:49 +0000",
-      "reason": "ai_duplicate_event:el grande americano match; ai_duplicate_of:c3; recency:fresh_12h",
-      "score": 42,
+      "published": "Tue, 02 Jun 2026 21:07:23 +0000",
+      "reason": "ai:Opinione/speculazione non necessaria. Curiosità debole.; deterministic:entity:brock lesnar,entity:oba femi,recency:fresh_12h",
+      "score": 30,
+      "softpool_added_at": "2026-06-02T22:23:44.093802+00:00",
+      "softpool_reason": "medium_or_borderline_candidate",
       "source": "wrestlinginc",
-      "summary": "WWE Hall of Famer Bully Ray praises the storyline and recent match pitting the two El Grande Americanos against one another.",
-      "title": "WWE HOFer Bully Ray On El Grande Americano Storyline: 'The Beauty Of Simplicity'",
-      "url": "https://www.wrestlinginc.com/2186222/wwe-bully-ray-el-grande-americano-storyline-beauty-simplicity/"
+      "summary": "WWE Hall of Famer Jeff Jarrett reveals the stipulation he wants attached to the inevitable third Brock Lesnar-Oba Femi clash.",
+      "title": "WWE HOFer Jeff Jarrett Wants Special Stipulation For Brock Lesnar/Oba Femi III",
+      "url": "https://www.wrestlinginc.com/2186177/wwe-hofer-jeff-jarrett-wants-special-stipulation-brock-lesnar-oba-femi-iii/"
     }
   ],
   "version": "v93_15_forced_priority_label_softpool"

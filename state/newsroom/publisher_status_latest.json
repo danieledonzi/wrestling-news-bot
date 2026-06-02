@@ -1,6 +1,6 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-02T22:24:13.455787+00:00",
+  "generated_at": "2026-06-02T23:18:28.941548+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
@@ -54,23 +54,23 @@
   },
   "results": [
     {
-      "content_chars": 1758,
-      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/bronson-reed-involved-in-a-car-accident-50.jpg",
+      "content_chars": 2751,
+      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/03/judge-orders-wwe-sale-bidding-details-to-be-unsealed-in-shareholder-lawsuit-15.jpg",
       "media_id": null,
       "payload_preview": {
         "categories": [],
-        "excerpt": "Bronson Reed ha vissuto un momento di paura lontano dagli schermi della WWE, ma fortunatamente tutti i coinvolti stanno bene.",
+        "excerpt": "La fusione tra WWE e UFC che ha dato vita a TKO Group Holdings è al centro di una pesante disputa legale che potrebbe costare quasi un miliardo di dollari.",
         "meta": {
-          "original_url": "https://www.ringsidenews.com/bronson-reed-involved-car-accident/",
+          "original_url": "https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/",
           "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
           "owtv_source": "ringsidenews"
         },
         "status": "publish",
-        "title": "Bronson Reed coinvolto in un incidente stradale"
+        "title": "WWE: causa degli azionisti in vista, in ballo quasi un miliardo di dollari"
       },
-      "source_url": "https://www.ringsidenews.com/bronson-reed-involved-car-accident/",
+      "source_url": "https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/",
       "status": "wp_not_ready",
-      "title_it": "Bronson Reed coinvolto in un incidente stradale",
+      "title_it": "WWE: causa degli azionisti in vista, in ballo quasi un miliardo di dollari",
       "wp_ready": false
     }
   ],
@@ -79,6 +79,6 @@
     "dry_run": false,
     "post_status": "publish",
     "ready": false,
-    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7ff95c6fafd0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=25)'))"
+    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=25)"
   }
 }

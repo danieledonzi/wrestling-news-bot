@@ -6,7 +6,7 @@
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 1
+      "warnings": 0
     },
     "bob": {
       "errors": 0,
@@ -18,14 +18,14 @@
       "already_published_hard_skipped": 5,
       "already_worked": 0,
       "hard_skipped": 30,
-      "menzo_memory_hard_skipped": 21,
-      "old_news_hard_skipped": 3,
-      "to_menzo": 5,
-      "to_simone": 0
+      "menzo_memory_hard_skipped": 18,
+      "old_news_hard_skipped": 6,
+      "to_menzo": 4,
+      "to_simone": 1
     },
     "menzo": {
-      "pending": 3,
-      "skipped": 1,
+      "pending": 2,
+      "skipped": 2,
       "to_bob_or_v92": 1
     },
     "publisher": {
@@ -63,20 +63,10 @@
         "issues": [],
         "present": true,
         "quality_score": 100,
-        "warnings": [
-          {
-            "code": "possible_missing_embed_from_menzo_brief",
-            "expected_embeds": [
-              "instagram"
-            ],
-            "message": "Menzo AI si aspettava embed/video/tweet, ma Bob non ne ha estratti.",
-            "severity": "warning",
-            "source_specific_notes": "Ringsidenews tende ad avere molto rumore nelle immagini, pulisci il testo dalle descrizioni del tag img."
-          }
-        ]
+        "warnings": []
       },
       "bob": {
-        "clean_element_count": 6,
+        "clean_element_count": 9,
         "diagnostic_stage": "ready_for_alfred",
         "element_counts": {
           "embed": 0,
@@ -84,31 +74,31 @@
           "image": 0,
           "quote": 1,
           "table": 0,
-          "text": 5
+          "text": 8
         },
         "error": null,
         "present": true,
-        "raw_element_count": 7,
+        "raw_element_count": 11,
         "removed_before_gemini": 14,
         "status": "ready_for_alfred",
         "translation_model": "gemini-3.1-flash-lite",
         "translation_used": true
       },
-      "category_hint": "WWE",
+      "category_hint": "Business",
       "html_audit": {
-        "alfred_final_html_preview": "<p>Bronson Reed ha vissuto un momento di paura lontano dagli schermi della WWE, ma fortunatamente sembra che stiano tutti bene.</p>\n<p>Bronson Reed ha raccontato tramite una storia su Instagram di essere rimasto coinvolto in un tamponamento. La star di RAW ha dichiarato che nessuno è rimasto ferito, cogliendo l&#x27;occasione per mettere in guardia le persone sui rischi della guida distratta.</p>\n<blockquote>“Appena avuto un tamponamento. Fortunatamente, stanno tutti bene. Ma la gente smetta di guidare usando quei maledetti telefoni, fate attenzione. Ci sono persone che trasportano bambini nelle proprie auto.”</blockquote>\n<p>L&#x27;episodio avviene mentre Reed è ancora lontano dalla programmazione WWE a causa di un infortunio. È fuori dalle scene da quando ha subito la rottura del bicipite distale del braccio destro durante una puntata di RAW a febbraio; la WWE non ha ancora confermato una data per il suo rientro.</p>\n<p>Reed ha recentemente fatto discutere i fan dopo aver pubblicato una nuova foto su X che mostra un fisico decisamente più imponente e definito. Ha accompagnato il post con un messaggio lapidario: “Mandare in crash internet.”</p>\n<p>Mentre prosegue il suo recupero, questo incidente stradale gli ha dato un ulteriore motivo per farsi sentire, in particolare sulla necessità che gli automobilisti non usino il telefono alla guida. Per ora, la notizia più importante è che Reed ha confermato che tutti i coinvolti nello scontro stanno bene. Il suo avvertimento è stato diretto, ma il messaggio era chiaro: fate attenzione al volante.</p>",
-        "bob_body_html_preview": "<p>Bronson Reed ha vissuto un momento di paura lontano dagli schermi della WWE, ma fortunatamente sembra che stiano tutti bene.</p>\n<p>Bronson Reed ha raccontato tramite una storia su Instagram di essere rimasto coinvolto in un tamponamento. La star di RAW ha dichiarato che nessuno è rimasto ferito, cogliendo l&#x27;occasione per mettere in guardia le persone sui rischi della guida distratta.</p>\n<blockquote>“Appena avuto un tamponamento. Fortunatamente, stanno tutti bene. Ma la gente smetta di guidare usando quei maledetti telefoni, fate attenzione. Ci sono persone che trasportano bambini nelle proprie auto.”</blockquote>\n<p>L&#x27;episodio avviene mentre Reed è ancora lontano dalla programmazione WWE a causa di un infortunio. È fuori dalle scene da quando ha subito la rottura del bicipite distale del braccio destro durante una puntata di RAW a febbraio; la WWE non ha ancora confermato una data per il suo rientro.</p>\n<p>Reed ha recentemente fatto discutere i fan dopo aver pubblicato una nuova foto su X che mostra un fisico decisamente più imponente e definito. Ha accompagnato il post con un messaggio lapidario: “Mandare in crash internet.”</p>\n<p>Mentre prosegue il suo recupero, questo incidente stradale gli ha dato un ulteriore motivo per farsi sentire, in particolare sulla necessità che gli automobilisti non usino il telefono alla guida. Per ora, la notizia più importante è che Reed ha confermato che tutti i coinvolti nello scontro stanno bene. Il suo avvertimento è stato diretto, ma il messaggio era chiaro: fate attenzione al volante.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_bronson-reed-coinvolto-in-un-incidente-stradale.html",
+        "alfred_final_html_preview": "<p>La fusione tra WWE e UFC ha dato vita a TKO Group Holdings, ma le ripercussioni legali dell&#x27;accordo comportano ora un potenziale conto salatissimo.</p>\n<p>Una causa promossa dagli azionisti in merito alla fusione si sta avviando verso il processo; qualora i querelanti dovessero avere la meglio, i danni richiesti potrebbero avvicinarsi al miliardo di dollari. Il fulcro del caso riguarda l&#x27;accusa secondo cui Vince McMahon avrebbe spinto per l&#x27;accordo con Endeavor per tutelare il proprio potere, anziché garantire il miglior risultato possibile per gli azionisti della WWE.</p>\n<p>Secondo Brandon Thurston di POST Wrestling, i legali che rappresentano un gruppo di azionisti WWE stanno richiedendo un risarcimento danni ingente legato alla fusione.</p>\n<blockquote>“I danni monetari richiesti dai querelanti oscillano tra i 466 e i 957 milioni di dollari, oltre agli interessi maturati dalla chiusura della fusione, avvenuta quasi tre anni fa. La cifra deriva da un&#x27;analisi redatta all&#x27;inizio di quest&#x27;anno da James L. Canessa, economista finanziario incaricato dai querelanti.”</blockquote>\n<p>La causa scaturisce dalla fusione tra WWE e UFC sotto l&#x27;egida di Endeavor, che ha portato alla creazione di TKO Group Holdings. I querelanti sostengono che McMahon avesse già indirizzato il processo verso Endeavor mentre si trovava sotto esame per le accuse di cattiva condotta sessuale.</p>\n<p>L&#x27;accusa principale è che il futuro personale di McMahon all&#x27;interno dell&#x27;azienda sia stato un fattore determinante nell&#x27;accordo. I querelanti sostengono che gli azionisti WWE abbiano subito un danno poiché McMahon era concentrato sull&#x27;assicurarsi un ruolo per sé stesso, anziché massimizzare il processo di vendita.</p>\n<p>Tra gli imputati nel caso figurano Vince McMahon, il presidente della WWE Nick Khan, il Chief Content Officer Paul “Triple H” Levesque e gli ex co-presidenti della WWE George Barrios e Michelle Wilson.</p>\n<p>Gli imputati hanno negato qualsiasi illecito. La loro linea di difesa sostiene che gli azionisti WWE non abbiano subito danni e che il processo di fusione sia stato equo. Sostengono inoltre che l&#x27;accordo abbia portato benefici agli investitori dopo l&#x27;unione di WWE e UFC sotto il marchio TKO.</p>\n<p>Le tempistiche rendono la vicenda ancora più rilevante. Il processo è attualmente fissato per lunedì 8 giugno, il che significa che una delle battaglie legali più importanti nella storia aziendale della WWE è ormai alle porte.</p>",
+        "bob_body_html_preview": "<p>La fusione tra WWE e UFC ha dato vita a TKO Group Holdings, ma le ripercussioni legali dell&#x27;accordo comportano ora un potenziale conto salatissimo.</p>\n<p>Una causa promossa dagli azionisti in merito alla fusione si sta avviando verso il processo; qualora i querelanti dovessero avere la meglio, i danni richiesti potrebbero avvicinarsi al miliardo di dollari. Il fulcro del caso riguarda l&#x27;accusa secondo cui Vince McMahon avrebbe spinto per l&#x27;accordo con Endeavor per tutelare il proprio potere, anziché garantire il miglior risultato possibile per gli azionisti della WWE.</p>\n<p>Secondo Brandon Thurston di POST Wrestling, i legali che rappresentano un gruppo di azionisti WWE stanno richiedendo un risarcimento danni ingente legato alla fusione.</p>\n<blockquote>“I danni monetari richiesti dai querelanti oscillano tra i 466 e i 957 milioni di dollari, oltre agli interessi maturati dalla chiusura della fusione, avvenuta quasi tre anni fa. La cifra deriva da un&#x27;analisi redatta all&#x27;inizio di quest&#x27;anno da James L. Canessa, economista finanziario incaricato dai querelanti.”</blockquote>\n<p>La causa scaturisce dalla fusione tra WWE e UFC sotto l&#x27;egida di Endeavor, che ha portato alla creazione di TKO Group Holdings. I querelanti sostengono che McMahon avesse già indirizzato il processo verso Endeavor mentre si trovava sotto esame per le accuse di cattiva condotta sessuale.</p>\n<p>L&#x27;accusa principale è che il futuro personale di McMahon all&#x27;interno dell&#x27;azienda sia stato un fattore determinante nell&#x27;accordo. I querelanti sostengono che gli azionisti WWE abbiano subito un danno poiché McMahon era concentrato sull&#x27;assicurarsi un ruolo per sé stesso, anziché massimizzare il processo di vendita.</p>\n<p>Tra gli imputati nel caso figurano Vince McMahon, il presidente della WWE Nick Khan, il Chief Content Officer Paul “Triple H” Levesque e gli ex co-presidenti della WWE George Barrios e Michelle Wilson.</p>\n<p>Gli imputati hanno negato qualsiasi illecito. La loro linea di difesa sostiene che gli azionisti WWE non abbiano subito danni e che il processo di fusione sia stato equo. Sostengono inoltre che l&#x27;accordo abbia portato benefici agli investitori dopo l&#x27;unione di WWE e UFC sotto il marchio TKO.</p>\n<p>Le tempistiche rendono la vicenda ancora più rilevante. Il processo è attualmente fissato per lunedì 8 giugno, il che significa che una delle battaglie legali più importanti nella storia aziendale della WWE è ormai alle porte.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_wwe-causa-degli-azionisti-in-vista-in-ballo-quasi-un-miliardo-di-dollari.html",
         "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_bronson-reed-coinvolto-in-un-incidente-stradale.html",
-        "publisher_review_html_preview": "<p>Bronson Reed ha vissuto un momento di paura lontano dagli schermi della WWE, ma fortunatamente sembra che stiano tutti bene.</p>\n<p>Bronson Reed ha raccontato tramite una storia su Instagram di essere rimasto coinvolto in un tamponamento. La star di RAW ha dichiarato che nessuno è rimasto ferito, cogliendo l&#x27;occasione per mettere in guardia le persone sui rischi della guida distratta.</p>\n<blockquote>“Appena avuto un tamponamento. Fortunatamente, stanno tutti bene. Ma la gente smetta di guidare usando quei maledetti telefoni, fate attenzione. Ci sono persone che trasportano bambini nelle proprie auto.”</blockquote>\n<p>L&#x27;episodio avviene mentre Reed è ancora lontano dalla programmazione WWE a causa di un infortunio. È fuori dalle scene da quando ha subito la rottura del bicipite distale del braccio destro durante una puntata di RAW a febbraio; la WWE non ha ancora confermato una data per il suo rientro.</p>\n<p>Reed ha recentemente fatto discutere i fan dopo aver pubblicato una nuova foto su X che mostra un fisico decisamente più imponente e definito. Ha accompagnato il post con un messaggio lapidario: “Mandare in crash internet.”</p>\n<p>Mentre prosegue il suo recupero, questo incidente stradale gli ha dato un ulteriore motivo per farsi sentire, in particolare sulla necessità che gli automobilisti non usino il telefono alla guida. Per ora, la notizia più importante è che Reed ha confermato che tutti i coinvolti nello scontro stanno bene. Il suo avvertimento è stato diretto, ma il messaggio era chiaro: fate attenzione al volante.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/bronson-reed-involved-car-accident/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/bronson-reed-involved-car-accident/\nTitolo feed: Bronson Reed Involved in a Car Accident\nTitolo pagina: Bronson Reed Involved in a Car Accident\nDescrizione: Bronson Reed had a scary moment away from WWE television, but thankfully, everyone appears to be okay. Bronson Reed took to his Instagram Story and\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Bronson Reed had a scary moment away from WWE television, but thankfully, everyone appears to be okay.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Bronson Reed took to his Instagram Story and revealed that he was involved in a rear-end collision. The RAW star said no one was hurt, but he used the moment to warn people about distracted driving.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"“Just had a rear collision. Thankfully, everyone is okay. But people stop driving on your damn phones, pay attention. People have kids in their cars.”\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"This comes while Reed remains away from WWE programming due to injury. He has been out since suffering a torn distal biceps in his right arm during a February episode of RAW , and WWE has not confirmed when he will return.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Reed recently got fans talking after posting a new photo on X showing off a much bigger and more shredded physique. He captioned the post with a simple message: “Break the internet.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"While he continues recovering, this car accident clearly gave him another reason to speak out, especially about drivers staying off their phones. For now, the most important news is that Reed said everyone involved in the collision is okay. His warning was blunt, but the message was clear: pay attention behind the wheel.\"\n  }\n]\n"
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_wwe-causa-degli-azionisti-in-vista-in-ballo-quasi-un-miliardo-di-dollari.html",
+        "publisher_review_html_preview": "<p>La fusione tra WWE e UFC ha dato vita a TKO Group Holdings, ma le ripercussioni legali dell&#x27;accordo comportano ora un potenziale conto salatissimo.</p>\n<p>Una causa promossa dagli azionisti in merito alla fusione si sta avviando verso il processo; qualora i querelanti dovessero avere la meglio, i danni richiesti potrebbero avvicinarsi al miliardo di dollari. Il fulcro del caso riguarda l&#x27;accusa secondo cui Vince McMahon avrebbe spinto per l&#x27;accordo con Endeavor per tutelare il proprio potere, anziché garantire il miglior risultato possibile per gli azionisti della WWE.</p>\n<p>Secondo Brandon Thurston di POST Wrestling, i legali che rappresentano un gruppo di azionisti WWE stanno richiedendo un risarcimento danni ingente legato alla fusione.</p>\n<blockquote>“I danni monetari richiesti dai querelanti oscillano tra i 466 e i 957 milioni di dollari, oltre agli interessi maturati dalla chiusura della fusione, avvenuta quasi tre anni fa. La cifra deriva da un&#x27;analisi redatta all&#x27;inizio di quest&#x27;anno da James L. Canessa, economista finanziario incaricato dai querelanti.”</blockquote>\n<p>La causa scaturisce dalla fusione tra WWE e UFC sotto l&#x27;egida di Endeavor, che ha portato alla creazione di TKO Group Holdings. I querelanti sostengono che McMahon avesse già indirizzato il processo verso Endeavor mentre si trovava sotto esame per le accuse di cattiva condotta sessuale.</p>\n<p>L&#x27;accusa principale è che il futuro personale di McMahon all&#x27;interno dell&#x27;azienda sia stato un fattore determinante nell&#x27;accordo. I querelanti sostengono che gli azionisti WWE abbiano subito un danno poiché McMahon era concentrato sull&#x27;assicurarsi un ruolo per sé stesso, anziché massimizzare il processo di vendita.</p>\n<p>Tra gli imputati nel caso figurano Vince McMahon, il presidente della WWE Nick Khan, il Chief Content Officer Paul “Triple H” Levesque e gli ex co-presidenti della WWE George Barrios e Michelle Wilson.</p>\n<p>Gli imputati hanno negato qualsiasi illecito. La loro linea di difesa sostiene che gli azionisti WWE non abbiano subito danni e che il processo di fusione sia stato equo. Sostengono inoltre che l&#x27;accordo abbia portato benefici agli investitori dopo l&#x27;unione di WWE e UFC sotto il marchio TKO.</p>\n<p>Le tempistiche rendono la vicenda ancora più rilevante. Il processo è attualmente fissato per lunedì 8 giugno, il che significa che una delle battaglie legali più importanti nella storia aziendale della WWE è ormai alle porte.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/\nTitolo feed: WWE Shareholder Lawsuit Could Put Nearly $1 Billion On The Line Before Trial\nTitolo pagina: WWE Shareholder Lawsuit Could Put Nearly $1 Billion On The Line Before Trial\nDescrizione: WWE’s merger with UFC may have created TKO Group Holdings, but the legal fallout from that deal is now carrying a massive potential price tag. A\nCategoria suggerita: Business\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"WWE’s merger with UFC may have created TKO Group Holdings, but the legal fallout from that deal is now carrying a massive potential price tag.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"A shareholder lawsuit tied to the merger is heading toward trial, and the damages being sought could come close to $1 billion if the plaintiffs win in court. The case centers on claims that Vince McMahon pushed the Endeavor deal while protecting his own power instead of securing the best possible outcome for WWE shareholders.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"According to Brandon Thurston of POST Wrestling , attorneys representing a class of WWE shareholders are seeking damages in a massive range tied to the merger.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“The monetary damages the plaintiffs are seeking range between $466 million and $957 million, plus interest accrued since the merger closed nearly three years ago. The range comes from an analysis written earlier this year by James L. Canessa, a financial economist retained by the plaintiffs.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"The lawsuit stems from WWE’s merger with UFC under Endeavor, which led to the formation of TKO Group Holdings. The plaintiffs claim McMahon had already steered the process toward Endeavor while he was under scrutiny connected to sexual misconduct allegations.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"The core accusation is that McMahon’s personal future inside the company became a major factor in the deal. The plaintiffs argue that WWE shareholders may have lost out because McMahon was focused on securing a role for himself instead of maximizing the sale process.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"The defendants in the case include Vince McMahon, WWE President Nick Khan, WWE Chief Content Officer Paul “Triple H” Levesque, and former WWE co-presidents George Barrios and Michelle Wilson.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"The defendants have denied wrongdoing. Their side maintains that WWE shareholders were not damaged and that the merger process was fair. They also argue that the deal ultimately benefited investors after WWE and UFC were combined under the TKO banner.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"The timing makes this even bigger. The case is currently scheduled to go to trial on Monday, June 8, which means one of the most important legal battles tied to WWE’s corporate history is now right around the corner.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "ai:Notizia di cronaca diretta su una superstar WWE. Nota: corretta categoria da AEW a WWE.; deterministic:strategic:raw,recency:fresh_12h",
-        "score": 66
+        "reason": "ai:Notizia di primaria importanza finanziaria riguardante TKO/WWE, essenziale per il nostro pubblico business.; deterministic:hard:lawsuit,hard:legal,hard:tko,current:business_legal,recency:fresh_12h",
+        "score": 87
       },
       "publisher": {
         "categories": null,
@@ -120,11 +110,11 @@
         "wp_post_id": null
       },
       "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/bronson-reed-involved-car-accident",
-      "title_it": "Bronson Reed coinvolto in un incidente stradale"
+      "source_url": "https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial",
+      "title_it": "WWE: causa degli azionisti in vista, in ballo quasi un miliardo di dollari"
     }
   ],
-  "generated_at": "2026-06-02T22:24:13.469954+00:00",
+  "generated_at": "2026-06-02T23:18:28.956411+00:00",
   "how_to_read": {
     "alfred_final_html_preview": "HTML dopo revisione/normalizzazioni di Alfred",
     "bob_body_html_preview": "HTML prodotto da Bob prima di Alfred",
@@ -2052,6 +2042,106 @@
       "overall_status": "error",
       "published": 0,
       "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 1,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 0
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 1,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 5,
+          "already_worked": 0,
+          "hard_skipped": 30,
+          "menzo_memory_hard_skipped": 18,
+          "old_news_hard_skipped": 6,
+          "to_menzo": 4,
+          "to_simone": 1
+        },
+        "menzo": {
+          "pending": 2,
+          "skipped": 2,
+          "to_bob_or_v92": 1
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 0,
+          "wp_not_ready": 1
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 6,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 1,
+      "errors": 1,
+      "generated_at": "2026-06-02T23:18:28.947799+00:00",
+      "overall_status": "error",
+      "published": 0,
+      "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 1,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 0
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 1,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 5,
+          "already_worked": 0,
+          "hard_skipped": 30,
+          "menzo_memory_hard_skipped": 18,
+          "old_news_hard_skipped": 6,
+          "to_menzo": 4,
+          "to_simone": 1
+        },
+        "menzo": {
+          "pending": 2,
+          "skipped": 2,
+          "to_bob_or_v92": 1
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 0,
+          "wp_not_ready": 1
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 6,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 1,
+      "errors": 1,
+      "generated_at": "2026-06-02T23:18:28.956411+00:00",
+      "overall_status": "error",
+      "published": 0,
+      "warnings": 0
     }
   ],
   "overall_status": "error",
@@ -2071,7 +2161,7 @@
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 1
+      "warnings": 0
     },
     "bob_handoff": {
       "errors": 0,
@@ -2079,20 +2169,20 @@
       "ready_for_alfred": 1,
       "translation_pending": 0
     },
-    "ended_at": "2026-06-02T22:24:13.457018+00:00",
+    "ended_at": "2026-06-02T23:18:28.942599+00:00",
     "engine": "bot_v92.py",
     "massy_handoff": {
       "already_published_hard_skipped": 5,
       "already_worked": 0,
       "hard_skipped": 30,
-      "menzo_memory_hard_skipped": 21,
-      "old_news_hard_skipped": 3,
-      "to_menzo": 5,
-      "to_simone": 0
+      "menzo_memory_hard_skipped": 18,
+      "old_news_hard_skipped": 6,
+      "to_menzo": 4,
+      "to_simone": 1
     },
     "menzo_handoff": {
-      "pending": 3,
-      "skipped": 1,
+      "pending": 2,
+      "skipped": 2,
       "to_bob_or_v92": 1
     },
     "newsroom_engine_override": false,
@@ -2110,95 +2200,95 @@
       "skipped": 6,
       "waiting": 0
     },
-    "started_at": "2026-06-02T22:23:34.835334+00:00",
+    "started_at": "2026-06-02T23:17:54.715859+00:00",
     "version": "v93_16_massy_publisher_bob_policy"
   },
   "summary": {
     "anomalies": 1,
     "article_dossiers": 1,
-    "errors_48h": 16,
+    "errors_48h": 18,
     "published_48h": 66,
     "published_current_run": 0,
-    "runs_48h": 40
+    "runs_48h": 42
   },
   "timeline": [
     {
       "agent": "Jarvis",
       "note": "engine=bot_v92.py",
       "phase": "bootstrap_status_written",
-      "timestamp": "2026-06-02T22:23:34.835620+00:00"
+      "timestamp": "2026-06-02T23:17:54.716140+00:00"
     },
     {
       "agent": "Massy",
-      "note": "to_simone=0 to_menzo=5 hard_skip=30 already=0",
+      "note": "to_simone=1 to_menzo=4 hard_skip=30 already=0",
       "phase": "sentinel_board_ready",
-      "timestamp": "2026-06-02T22:23:40.180729+00:00"
+      "timestamp": "2026-06-02T23:17:56.274748+00:00"
     },
     {
       "agent": "Massy",
       "note": "version=v93_16_massy_old_news_and_menzo_skip_memory",
       "phase": "forced_policy_active",
-      "timestamp": "2026-06-02T22:23:40.180745+00:00"
+      "timestamp": "2026-06-02T23:17:56.274763+00:00"
     },
     {
       "agent": "Simone",
       "note": "ready=0 waiting=0 skipped=6",
       "phase": "report_decision_ready",
-      "timestamp": "2026-06-02T22:23:40.184446+00:00"
+      "timestamp": "2026-06-02T23:17:56.278283+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "selected=1 pending=3 skipped=1",
+      "note": "selected=1 pending=2 skipped=2",
       "phase": "editorial_decision_ready",
-      "timestamp": "2026-06-02T22:23:44.096860+00:00"
+      "timestamp": "2026-06-02T23:18:00.789709+00:00"
     },
     {
       "agent": "Menzo",
       "note": "version=v93_15_forced_priority_label_softpool",
       "phase": "forced_policy_active",
-      "timestamp": "2026-06-02T22:23:44.096873+00:00"
+      "timestamp": "2026-06-02T23:18:00.789722+00:00"
     },
     {
       "agent": "Bob",
       "note": "ready=1 pending=0 empty=0 errors=0",
       "phase": "article_packages_ready",
-      "timestamp": "2026-06-02T22:23:48.084134+00:00"
+      "timestamp": "2026-06-02T23:18:03.584128+00:00"
     },
     {
       "agent": "Bob",
-      "note": "warnings=1",
+      "note": "warnings=0",
       "phase": "bob_brief_guard_applied",
-      "timestamp": "2026-06-02T22:23:48.084824+00:00"
+      "timestamp": "2026-06-02T23:18:03.584881+00:00"
     },
     {
       "agent": "Alfred",
       "note": "approved=1 needs_revision=0 blockers=0 warnings=0 changes=0",
       "phase": "quality_review_ready",
-      "timestamp": "2026-06-02T22:23:48.091034+00:00"
+      "timestamp": "2026-06-02T23:18:03.591414+00:00"
     },
     {
       "agent": "Alfred",
-      "note": "surfaced=1",
+      "note": "surfaced=0",
       "phase": "bob_warning_guard_applied",
-      "timestamp": "2026-06-02T22:23:48.091427+00:00"
+      "timestamp": "2026-06-02T23:18:03.591782+00:00"
     },
     {
       "agent": "Publisher",
       "note": "published=0 already=0 dry=0 wp_not_ready=1 errors=0",
       "phase": "publication_ready",
-      "timestamp": "2026-06-02T22:24:13.456976+00:00"
+      "timestamp": "2026-06-02T23:18:28.942562+00:00"
     },
     {
       "agent": "Jarvis",
       "note": "v93 Publisher completed; v92 fallback skipped",
       "phase": "runtime_skipped",
-      "timestamp": "2026-06-02T22:24:13.457007+00:00"
+      "timestamp": "2026-06-02T23:18:28.942590+00:00"
     },
     {
       "agent": "Archivista",
       "note": "status=error anomalies=1",
       "phase": "audit_ready",
-      "timestamp": "2026-06-02T22:24:13.469747+00:00"
+      "timestamp": "2026-06-02T23:18:28.956217+00:00"
     }
   ],
   "version": "v93_7_archivista_audit"
