@@ -1,6 +1,6 @@
 {
   "agent": "Simone",
-  "generated_at": "2026-06-02T00:06:52.360918+00:00",
+  "generated_at": "2026-06-02T00:19:59.989009+00:00",
   "handoff": {
     "ready": 0,
     "skipped": 6,
@@ -9,7 +9,7 @@
   "input": {
     "configured_reports": 6,
     "massy_version": "v93_9_massy_published_hard_skip",
-    "report_candidates": 1
+    "report_candidates": 0
   },
   "mode": "report_director",
   "ready_reports": [],

@@ -53,6 +53,15 @@
     "wp_link": "https://news.openwrestlingtv.com/wwe/iyo-sky-avanza-nel-torneo-queen-of-the-ring-dopo-un-caotico-fatal-four-way/",
     "wp_post_id": 5825
   },
+  "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war": {
+    "published_at": "2026-06-02T00:20:21.486984+00:00",
+    "source": "ringsidenews",
+    "source_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/",
+    "status": "publish",
+    "title_it": "JBL elogia Chad Gable: \"È il miglior wrestler al mondo\"",
+    "wp_link": "https://news.openwrestlingtv.com/wwe/jbl-elogia-chad-gable-e-il-miglior-wrestler-al-mondo/",
+    "wp_post_id": 5842
+  },
   "https://www.ringsidenews.com/jonathan-coachman-blasts-wwe-creative-booking-liv-morgan-queen-ring-tournament": {
     "published_at": "2026-06-01T19:03:27.136591+00:00",
     "source": "ringsidenews",
@@ -196,5 +205,14 @@
     "title_it": "Jim Ross racconta le difficoltà di salute e viaggio per AEW Double or Nothing 2026",
     "wp_link": "https://news.openwrestlingtv.com/aew/jim-ross-racconta-le-difficolta-di-salute-e-viaggio-per-aew-double-or-nothing-2026/",
     "wp_post_id": 5832
+  },
+  "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026": {
+    "published_at": "2026-06-02T00:20:25.143403+00:00",
+    "source": "wrestlinginc",
+    "source_url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/",
+    "status": "publish",
+    "title_it": "Report ascolti TNA Impact: i dati del 28 maggio 2026",
+    "wp_link": "https://news.openwrestlingtv.com/tna/report-ascolti-tna-impact-i-dati-del-28-maggio-2026/",
+    "wp_post_id": 5844
   }
 }

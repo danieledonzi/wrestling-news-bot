@@ -1,6 +1,6 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-02T00:07:15.482235+00:00",
+  "generated_at": "2026-06-02T00:20:25.144101+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
@@ -23,26 +23,26 @@
   "results": [
     {
       "categories": [
-        7,
-        8
+        4
       ],
-      "featured_media": 5829,
-      "source_url": "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/",
+      "featured_media": 5841,
+      "source_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/",
       "status": "published",
-      "title_it": "AJ Francis sfida Mike Santana per il titolo mondiale a Slammiversary",
-      "wp_link": "https://news.openwrestlingtv.com/tna/aj-francis-sfida-mike-santana-per-il-titolo-mondiale-a-slammiversary/",
-      "wp_post_id": 5830
+      "title_it": "JBL elogia Chad Gable: \"È il miglior wrestler al mondo\"",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/jbl-elogia-chad-gable-e-il-miglior-wrestler-al-mondo/",
+      "wp_post_id": 5842
     },
     {
       "categories": [
-        5
+        7,
+        8
       ],
-      "featured_media": 5831,
-      "source_url": "https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles/",
+      "featured_media": 5843,
+      "source_url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/",
       "status": "published",
-      "title_it": "Jim Ross racconta le difficoltà di salute e viaggio per AEW Double or Nothing 2026",
-      "wp_link": "https://news.openwrestlingtv.com/aew/jim-ross-racconta-le-difficolta-di-salute-e-viaggio-per-aew-double-or-nothing-2026/",
-      "wp_post_id": 5832
+      "title_it": "Report ascolti TNA Impact: i dati del 28 maggio 2026",
+      "wp_link": "https://news.openwrestlingtv.com/tna/report-ascolti-tna-impact-i-dati-del-28-maggio-2026/",
+      "wp_post_id": 5844
     }
   ],
   "version": "v93_10_publisher_plain_oembed_urls",

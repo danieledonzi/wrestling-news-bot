@@ -4,6 +4,17 @@
     {
       "decision": "already_worked",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2185015/wwe-raw-june-1-2026-seth-rollins-bron-breakker-tag-team-match-more",
+      "published": "Mon, 01 Jun 2026 16:58:38 +0000",
+      "reason": "url_present_in_state",
+      "source": "wrestlinginc",
+      "summary": "This is Wrestling Inc.'s results for \"WWE Raw\" on June 1, 2026, with a match between Seth Rollins & one half of the World Tag Team Champions Bron Breakker!",
+      "title": "WWE Raw Results 6/1 - Seth Rollins Faces Bron Breakker, Tag Team Match & More",
+      "url": "https://www.wrestlinginc.com/2185015/wwe-raw-june-1-2026-seth-rollins-bron-breakker-tag-team-match-more/"
+    },
+    {
+      "decision": "already_worked",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2184202/wwe-clash-in-italy-2026-four-titles-on-line-oba-femi-brock-lesnar",
       "published": "Sun, 31 May 2026 16:00:00 +0000",
       "reason": "url_present_in_state",
@@ -32,15 +43,27 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-02T00:06:52.356473+00:00",
+  "generated_at": "2026-06-02T00:19:59.984546+00:00",
   "handoff": {
     "already_published_hard_skipped": 15,
-    "already_worked": 1,
+    "already_worked": 2,
     "hard_skipped": 17,
     "to_menzo": 16,
-    "to_simone": 1
+    "to_simone": 0
   },
   "hard_skipped": [
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles",
+      "published": "Mon, 01 Jun 2026 20:53:01 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "wrestlinginc",
+      "summary": "AEW announcer Jim Ross details both the health and travel struggles he suffered through when trying to make AEW Double or Nothing 2026 last weekend",
+      "title": "Jim Ross Details Health & Travel Struggles Surrounding AEW Double Or Nothing 2026",
+      "url": "https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles/"
+    },
     {
       "decision": "hard_skip",
       "feed_url": "https://www.wrestlinginc.com/feed/",
@@ -63,18 +86,6 @@
       "summary": "The best and the worst of Monday Night Raw in Turin, Italy.",
       "title": "WWE Raw - 6/1/2026: 3 Things We Hated And 3 We Loved",
       "url": "https://www.wrestlinginc.com/2185398/wwe-raw-june-1-2026-3-things-loved-hated-opinion-review/"
-    },
-    {
-      "decision": "hard_skip",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026",
-      "published": "Mon, 01 Jun 2026 21:59:58 +0000",
-      "published_guard": "publisher_history",
-      "reason": "url_already_published",
-      "source": "wrestlinginc",
-      "summary": "TNA Impact's total viewership reaches its second highest total in May, but continues to struggle in the 18-49 demo going against the NBA and NHL Playoffs",
-      "title": "TNA Impact Ratings & Viewership Report: 5/28/2026",
-      "url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/"
     },
     {
       "decision": "hard_skip",
@@ -102,14 +113,14 @@
     {
       "decision": "hard_skip",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war",
-      "published": "Mon, 01 Jun 2026 22:51:58 +0000",
+      "normalized_url": "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary",
+      "published": "Mon, 01 Jun 2026 23:10:51 +0000",
       "published_guard": "publisher_history",
       "reason": "url_already_published",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-calls-chad-gable-the-best-wrestler-in-the-world-after-aaa-mask-vs-mask-war-24.jpg?x51578\" width=\"800\" /></p>JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes. The WWE Hall of Famer was on commentary for the May 30 match, where Ludwig Kaiser’s El Grande Americano defeated Chad Gable’s Original El Grande Americano. The loss forced Gable to remove ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/\" title=\"JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\">Read more</a>",
-      "title": "JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War",
-      "url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/"
+      "summary": "<p><img alt=\"AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/aj-francis-calls-out-mike-santana-for-tna-world-title-match-at-slammiversary-55.jpg?x51578\" width=\"800\" /></p>AJ Francis wants the big spot at TNA Slammiversary, and he’s calling out Mike Santana to make it happen. Santana is currently TNA World Champion, but his challenger for Slammiversary has not been confirmed yet. Francis made it clear during a new interview with Jim Varsallone that he believes he should be the one standing ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/\" title=\"AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary\">Read more</a>",
+      "title": "AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary",
+      "url": "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/"
     },
     {
       "decision": "hard_skip",
@@ -244,22 +255,10 @@
       "url": "https://www.ringsidenews.com/oba-femi-calls-out-brock-lesnar-after-advancing-in-king-of-the-ring/"
     }
   ],
-  "known_published_urls": 26,
-  "known_state_urls": 9,
+  "known_published_urls": 22,
+  "known_state_urls": 10,
   "mode": "sentinel_control_board",
   "news_candidates_for_menzo": [
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles",
-      "published": "Mon, 01 Jun 2026 20:53:01 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "AEW announcer Jim Ross details both the health and travel struggles he suffered through when trying to make AEW Double or Nothing 2026 last weekend",
-      "title": "Jim Ross Details Health & Travel Struggles Surrounding AEW Double Or Nothing 2026",
-      "url": "https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles/"
-    },
     {
       "assigned_to": "Menzo",
       "decision": "news_candidate",
@@ -407,6 +406,18 @@
     {
       "assigned_to": "Menzo",
       "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026",
+      "published": "Mon, 01 Jun 2026 21:59:58 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "TNA Impact's total viewership reaches its second highest total in May, but continues to struggle in the 18-49 demo going against the NBA and NHL Playoffs",
+      "title": "TNA Impact Ratings & Viewership Report: 5/28/2026",
+      "url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/steph-de-lander-posts-cryptic-tweet-about-women-wrestling-told-more-feminine",
       "published": "Mon, 01 Jun 2026 23:58:53 +0000",
@@ -420,13 +431,13 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary",
-      "published": "Mon, 01 Jun 2026 23:10:51 +0000",
+      "normalized_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war",
+      "published": "Mon, 01 Jun 2026 22:51:58 +0000",
       "reason": "requires_menzo_classification",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/aj-francis-calls-out-mike-santana-for-tna-world-title-match-at-slammiversary-55.jpg?x51578\" width=\"800\" /></p>AJ Francis wants the big spot at TNA Slammiversary, and he’s calling out Mike Santana to make it happen. Santana is currently TNA World Champion, but his challenger for Slammiversary has not been confirmed yet. Francis made it clear during a new interview with Jim Varsallone that he believes he should be the one standing ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/\" title=\"AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary\">Read more</a>",
-      "title": "AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary",
-      "url": "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/"
+      "summary": "<p><img alt=\"JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-calls-chad-gable-the-best-wrestler-in-the-world-after-aaa-mask-vs-mask-war-24.jpg?x51578\" width=\"800\" /></p>JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes. The WWE Hall of Famer was on commentary for the May 30 match, where Ludwig Kaiser’s El Grande Americano defeated Chad Gable’s Original El Grande Americano. The loss forced Gable to remove ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/\" title=\"JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\">Read more</a>",
+      "title": "JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War",
+      "url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/"
     },
     {
       "assigned_to": "Menzo",
@@ -441,20 +452,6 @@
       "url": "https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal/"
     }
   ],
-  "report_candidates": [
-    {
-      "assigned_to": "Simone",
-      "decision": "report_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185015/wwe-raw-june-1-2026-seth-rollins-bron-breakker-tag-team-match-more",
-      "published": "Mon, 01 Jun 2026 16:58:38 +0000",
-      "reason": "weekly_show_results",
-      "show_hint": "WWE Raw",
-      "source": "wrestlinginc",
-      "summary": "This is Wrestling Inc.'s results for \"WWE Raw\" on June 1, 2026, with a match between Seth Rollins & one half of the World Tag Team Champions Bron Breakker!",
-      "title": "WWE Raw Results 6/1 - Seth Rollins Faces Bron Breakker, Tag Team Match & More",
-      "url": "https://www.wrestlinginc.com/2185015/wwe-raw-june-1-2026-seth-rollins-bron-breakker-tag-team-match-more/"
-    }
-  ],
+  "report_candidates": [],
   "version": "v93_9_massy_published_hard_skip"
 }

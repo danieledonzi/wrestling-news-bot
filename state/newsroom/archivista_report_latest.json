@@ -6,7 +6,7 @@
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 1
+      "warnings": 2
     },
     "bob": {
       "errors": 0,
@@ -16,10 +16,10 @@
     },
     "massy": {
       "already_published_hard_skipped": 15,
-      "already_worked": 1,
+      "already_worked": 2,
       "hard_skipped": 17,
       "to_menzo": 16,
-      "to_simone": 1
+      "to_simone": 0
     },
     "menzo": {
       "pending": 1,
@@ -47,66 +47,69 @@
         "editorial_changes": [],
         "issues": [],
         "present": true,
-        "quality_score": 95,
+        "quality_score": 100,
         "warnings": [
           {
-            "code": "possible_missing_table",
-            "evidence": "AJ Francis sfida Mike Santana per il titolo mondiale a Slammiversary",
-            "message": "Articolo con dati potenzialmente tabellari ma nessuna tabella estratta.",
-            "severity": "warning"
+            "code": "possible_missing_embed_from_menzo_brief",
+            "expected_embeds": [
+              "youtube",
+              "x_tweet"
+            ],
+            "message": "Menzo AI si aspettava embed/video/tweet, ma Bob non ne ha estratti.",
+            "severity": "warning",
+            "source_specific_notes": "Ringsidenews è spesso prolisso, estrai solo la dichiarazione di JBL e il contesto del match."
           }
         ]
       },
       "bob": {
-        "clean_element_count": 11,
+        "clean_element_count": 14,
         "diagnostic_stage": "ready_for_alfred",
         "element_counts": {
-          "embed": 1,
+          "embed": 0,
           "heading": 0,
           "image": 0,
-          "quote": 3,
+          "quote": 5,
           "table": 0,
-          "text": 7
+          "text": 9
         },
         "error": null,
         "present": true,
-        "raw_element_count": 14,
-        "removed_before_gemini": 16,
+        "raw_element_count": 15,
+        "removed_before_gemini": 14,
         "status": "ready_for_alfred",
         "translation_model": "gemini-3.1-flash-lite",
         "translation_used": true
       },
-      "category_hint": "TNA",
+      "category_hint": "WWE",
       "html_audit": {
-        "alfred_final_html_preview": "https://www.youtube.com/watch?v=zAwcJ3-gqss\n\n<p>AJ Francis punta al palcoscenico principale di TNA Slammiversary e ha lanciato una sfida diretta al campione del mondo Mike Santana per far sì che accada.</p>\n<p>Santana è l&#x27;attuale TNA World Champion, ma il suo sfidante per Slammiversary non è ancora stato confermato. Durante una recente intervista con Jim Varsallone, Francis ha messo in chiaro di ritenere di dover essere lui a contendere il titolo a Santana nel main event.</p>\n<p>Francis ha fatto riferimento al loro precedente match singolo, sottolineando come sia stato così valido da essere candidato a Match dell&#x27;Anno, nonostante non si sia svolto in un pay-per-view.</p>\n<blockquote>“Io contro Mike Santana a Slammiversary con il titolo mondiale in palio sarebbe probabilmente uno dei più grandi incontri nella storia della TNA.”</blockquote>\n<p>Francis ha osservato come Santana, dopo il loro incontro, sia diventato campione mondiale, mentre lui ha continuato a offrire ottime prestazioni sul ring. A suo avviso, concedere loro 25 minuti sul palcoscenico più importante creerebbe qualcosa che i fan non potrebbero dimenticare.</p>\n<blockquote>“Penso sinceramente che se dessi a me e a Mike Santana 25 minuti per il titolo mondiale nel main event di Slammiversary, uscireste da lì pensando che sia uno dei migliori match che abbiate mai visto in vita vostra e uno dei più grandi incontri di tutti i tempi.”</blockquote>\n<p>In seguito, Francis ha alzato il tiro, mettendo in dubbio che Santana abbia il coraggio di accettare di difendere il titolo contro di lui.</p>\n<blockquote>“Ora, se poi Mike Santana abbia davvero le palle di concedermi una title shot, è un altro paio di maniche.”</blockquote>\n<p>Francis ha inoltre sostenuto che altri campioni abbiano evitato di offrirgli opportunità finché non è stato lui a forzare la mano, citando come esempi Leon Slater e Nic Nemeth.</p>\n<p>Per il momento, l&#x27;avversario di Santana per Slammiversary rimane un&#x27;incognita, ma AJ Francis ha espresso le sue intenzioni in modo chiaro e inequivocabile. Vuole il match per il TNA World Title, vuole il main event e crede che lui e Santana possano rubare la scena.</p>",
-        "bob_body_html_preview": "https://www.youtube.com/watch?v=zAwcJ3-gqss\n\n<p>AJ Francis punta al palcoscenico principale di TNA Slammiversary e ha lanciato una sfida diretta al campione del mondo Mike Santana per far sì che accada.</p>\n<p>Santana è l&#x27;attuale TNA World Champion, ma il suo sfidante per Slammiversary non è ancora stato confermato. Durante una recente intervista con Jim Varsallone, Francis ha messo in chiaro di ritenere di dover essere lui a contendere il titolo a Santana nel main event.</p>\n<p>Francis ha fatto riferimento al loro precedente match singolo, sottolineando come sia stato così valido da essere candidato a Match dell&#x27;Anno, nonostante non si sia svolto in un pay-per-view.</p>\n<blockquote>“Io contro Mike Santana a Slammiversary con il titolo mondiale in palio sarebbe probabilmente uno dei più grandi incontri nella storia della TNA.”</blockquote>\n<p>Francis ha osservato come Santana, dopo il loro incontro, sia diventato campione mondiale, mentre lui ha continuato a offrire ottime prestazioni sul ring. A suo avviso, concedere loro 25 minuti sul palcoscenico più importante creerebbe qualcosa che i fan non potrebbero dimenticare.</p>\n<blockquote>“Penso sinceramente che se dessi a me e a Mike Santana 25 minuti per il titolo mondiale nel main event di Slammiversary, uscireste da lì pensando che sia uno dei migliori match che abbiate mai visto in vita vostra e uno dei più grandi incontri di tutti i tempi.”</blockquote>\n<p>In seguito, Francis ha alzato il tiro, mettendo in dubbio che Santana abbia il coraggio di accettare di difendere il titolo contro di lui.</p>\n<blockquote>“Ora, se poi Mike Santana abbia davvero le palle di concedermi una title shot, è un altro paio di maniche.”</blockquote>\n<p>Francis ha inoltre sostenuto che altri campioni abbiano evitato di offrirgli opportunità finché non è stato lui a forzare la mano, citando come esempi Leon Slater e Nic Nemeth.</p>\n<p>Per il momento, l&#x27;avversario di Santana per Slammiversary rimane un&#x27;incognita, ma AJ Francis ha espresso le sue intenzioni in modo chiaro e inequivocabile. Vuole il match per il TNA World Title, vuole il main event e crede che lui e Santana possano rubare la scena.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_aj-francis-sfida-mike-santana-per-il-titolo-mondiale-a-slammiversary.html",
-        "published_html_preview": "https://www.youtube.com/watch?v=zAwcJ3-gqss\n\n<p>AJ Francis punta al palcoscenico principale di TNA Slammiversary e ha lanciato una sfida diretta al campione del mondo Mike Santana per far sì che accada.</p>\n<p>Santana è l&#x27;attuale TNA World Champion, ma il suo sfidante per Slammiversary non è ancora stato confermato. Durante una recente intervista con Jim Varsallone, Francis ha messo in chiaro di ritenere di dover essere lui a contendere il titolo a Santana nel main event.</p>\n<p>Francis ha fatto riferimento al loro precedente match singolo, sottolineando come sia stato così valido da essere candidato a Match dell&#x27;Anno, nonostante non si sia svolto in un pay-per-view.</p>\n<blockquote>“Io contro Mike Santana a Slammiversary con il titolo mondiale in palio sarebbe probabilmente uno dei più grandi incontri nella storia della TNA.”</blockquote>\n<p>Francis ha osservato come Santana, dopo il loro incontro, sia diventato campione mondiale, mentre lui ha continuato a offrire ottime prestazioni sul ring. A suo avviso, concedere loro 25 minuti sul palcoscenico più importante creerebbe qualcosa che i fan non potrebbero dimenticare.</p>\n<blockquote>“Penso sinceramente che se dessi a me e a Mike Santana 25 minuti per il titolo mondiale nel main event di Slammiversary, uscireste da lì pensando che sia uno dei migliori match che abbiate mai visto in vita vostra e uno dei più grandi incontri di tutti i tempi.”</blockquote>\n<p>In seguito, Francis ha alzato il tiro, mettendo in dubbio che Santana abbia il coraggio di accettare di difendere il titolo contro di lui.</p>\n<blockquote>“Ora, se poi Mike Santana abbia davvero le palle di concedermi una title shot, è un altro paio di maniche.”</blockquote>\n<p>Francis ha inoltre sostenuto che altri campioni abbiano evitato di offrirgli opportunità finché non è stato lui a forzare la mano, citando come esempi Leon Slater e Nic Nemeth.</p>\n<p>Per il momento, l&#x27;avversario di Santana per Slammiversary rimane un&#x27;incognita, ma AJ Francis ha espresso le sue intenzioni in modo chiaro e inequivocabile. Vuole il match per il TNA World Title, vuole il main event e crede che lui e Santana possano rubare la scena.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_aj-francis-sfida-mike-santana-per-il-titolo-mondiale-a-slammiversary.html",
-        "publisher_review_html_preview": "https://www.youtube.com/watch?v=zAwcJ3-gqss\n\n<p>AJ Francis punta al palcoscenico principale di TNA Slammiversary e ha lanciato una sfida diretta al campione del mondo Mike Santana per far sì che accada.</p>\n<p>Santana è l&#x27;attuale TNA World Champion, ma il suo sfidante per Slammiversary non è ancora stato confermato. Durante una recente intervista con Jim Varsallone, Francis ha messo in chiaro di ritenere di dover essere lui a contendere il titolo a Santana nel main event.</p>\n<p>Francis ha fatto riferimento al loro precedente match singolo, sottolineando come sia stato così valido da essere candidato a Match dell&#x27;Anno, nonostante non si sia svolto in un pay-per-view.</p>\n<blockquote>“Io contro Mike Santana a Slammiversary con il titolo mondiale in palio sarebbe probabilmente uno dei più grandi incontri nella storia della TNA.”</blockquote>\n<p>Francis ha osservato come Santana, dopo il loro incontro, sia diventato campione mondiale, mentre lui ha continuato a offrire ottime prestazioni sul ring. A suo avviso, concedere loro 25 minuti sul palcoscenico più importante creerebbe qualcosa che i fan non potrebbero dimenticare.</p>\n<blockquote>“Penso sinceramente che se dessi a me e a Mike Santana 25 minuti per il titolo mondiale nel main event di Slammiversary, uscireste da lì pensando che sia uno dei migliori match che abbiate mai visto in vita vostra e uno dei più grandi incontri di tutti i tempi.”</blockquote>\n<p>In seguito, Francis ha alzato il tiro, mettendo in dubbio che Santana abbia il coraggio di accettare di difendere il titolo contro di lui.</p>\n<blockquote>“Ora, se poi Mike Santana abbia davvero le palle di concedermi una title shot, è un altro paio di maniche.”</blockquote>\n<p>Francis ha inoltre sostenuto che altri campioni abbiano evitato di offrirgli opportunità finché non è stato lui a forzare la mano, citando come esempi Leon Slater e Nic Nemeth.</p>\n<p>Per il momento, l&#x27;avversario di Santana per Slammiversary rimane un&#x27;incognita, ma AJ Francis ha espresso le sue intenzioni in modo chiaro e inequivocabile. Vuole il match per il TNA World Title, vuole il main event e crede che lui e Santana possano rubare la scena.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary/\nTitolo feed: AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary\nTitolo pagina: AJ Francis Calls Out Mike Santana For TNA World Title Match At Slammiversary\nDescrizione: AJ Francis wants the big spot at TNA Slammiversary, and he’s calling out Mike Santana to make it happen. Santana is currently TNA World Champion, but his\nCategoria suggerita: TNA\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"AJ Francis wants the big spot at TNA Slammiversary, and he’s calling out Mike Santana to make it happen.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Santana is currently TNA World Champion, but his challenger for Slammiversary has not been confirmed yet. Francis made it clear during a new interview wit h Jim Varsallone that he believes he should be the one standing across from Santana in the main event.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Francis pointed to their previous singles match, saying it was so good that it was nominated for Match of the Year despite not even happening on pay-per-view.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“Me versus Mike Santana at Slammiversary for the world title would probably be one of the greatest matches in the history of TNA.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Francis said Santana went from their match to becoming world champion, while he has continued putting on strong matches of his own. In his mind, giving them 25 minutes on the biggest stage would create something fans would not forget.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“I genuinely think if you gave me and Mike Santana 25 minutes for the world title in the main event of Slammiversary, you would walk away from that thinking this is one of the best matches I’ve ever seen in my life and one of the greatest matches of all time.”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"Then Francis took the trash talk up a notch, questioning whether Santana would actually agree to defend the title against him.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"quote\",\n    \"text\": \"“Now, whether Mike Santana actually has the balls to give me a title shot is a whole different thing.”\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"text\",\n    \"text\": \"Francis also claimed other champions have avoided giving him opportunities until he forced the issue, naming Leon Slater and Nic Nemeth as examples.\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"For now, Santana’s Slammiversary opponent is still up in the air, but AJ Francis is making his pitch loud and clear. He wants the TNA World Title match, he wants the main event, and he believes he and Santana could steal the whole show.\"\n  }\n]\n"
+        "alfred_final_html_preview": "<p>JBL ha elogiato Chad Gable e Ludwig Kaiser dopo il sanguinoso Mask vs. Mask match andato in scena a AAA Noche de Los Grandes.</p>\n<p>Il WWE Hall of Famer era al commento tecnico durante l&#x27;incontro del 30 maggio, in cui l&#x27;El Grande Americano di Ludwig Kaiser ha sconfitto l&#x27;originale El Grande Americano di Chad Gable. La sconfitta ha costretto Gable a togliersi la maschera davanti al pubblico, mettendo fine a una delle storyline più importanti dell&#x27;anno in AAA.</p>\n<p>I fan hanno elogiato il match sin dal suo svolgimento e JBL è chiaramente della stessa opinione. Intervenuto ai microfoni di Busted Open, ha dichiarato che il pubblico messicano ha contribuito a rendere il momento davvero epocale.</p>\n<blockquote>“I fan messicani sono semplicemente appassionati. Amano la Lucha Libre e amano le loro star. Si lasciano coinvolgere e si divertono. È questo ciò che avete visto: loro, al massimo del loro splendore.”</blockquote>\n<p>JBL ha affermato che il match ha mostrato il wrestling professionistico ai massimi livelli e ha ammesso di essere rimasto sbalordito da quanto realizzato da Gable e Kaiser.</p>\n<blockquote>“E penso che abbiate visto il wrestling al suo meglio. Sono rimasto assolutamente sbalordito da ciò che hanno fatto durante il match.”</blockquote>\n<p>Ha dato grande merito a Kaiser per aver costruito il personaggio di El Grande Americano nel modo giusto, in particolare imparando la lingua e comprendendo il pubblico messicano.</p>\n<blockquote>“Kaiser ha creato tutto questo. Kaiser ha costruito tutto imparando la lingua, e non solo la lingua: come dicevamo in Texas, non stava imparando lo spagnolo, stava imparando il &#x27;messicano&#x27;. Stava imparando il dialetto locale, ed è stato assolutamente incredibile quello che ha fatto.”</blockquote>\n<p>JBL ha inoltre sottolineato che il lavoro di Gable in Messico è stato molto diverso dall&#x27;interpretare un heel caricaturale nella televisione WWE. Ha spiegato che ottenere vero &#x27;heat&#x27; in Messico è una sfida completamente diversa.</p>\n<blockquote>“Quando Chad è tornato per la prima volta, ne parlavamo: è facile essere un heel grottesco come lo era in WWE con i video del Varsity Club o qualsiasi altra cosa fosse. Ma poi, all&#x27;improvviso, cercare di ottenere &#x27;heat&#x27; in Messico è un altro livello. Non è nemmeno lo stesso business.”</blockquote>\n<p>JBL si è poi sbilanciato su Gable, definendolo il miglior wrestler al mondo e affermando che il match con Kaiser è stato su un altro livello.</p>\n<blockquote>“Penso che Chad Gable sia il miglior wrestler al mondo, e non credo ci sia nemmeno paragone. È stato assolutamente incredibile quello che hanno fatto lui e Kaiser.”</blockquote>\n<p>Si tratta di un elogio importante da parte di JBL, specialmente dopo un match che ha già fatto molto discutere i fan. La perdita della maschera da parte di Gable è stato un momento fondamentale, ma i commenti di JBL chiariscono che, a suo avviso, entrambi gli atleti hanno dato vita a qualcosa di molto più profondo di un semplice incontro con stipulazione.</p>\n<p>La storia di El Grande Americano ha dato a Kaiser e Gable la possibilità di mettersi alla prova davanti a uno dei pubblici più esigenti del wrestling, e JBL ritiene che abbiano centrato l&#x27;obiettivo.</p>",
+        "bob_body_html_preview": "<p>JBL ha elogiato Chad Gable e Ludwig Kaiser dopo il sanguinoso Mask vs. Mask match andato in scena a AAA Noche de Los Grandes.</p>\n<p>Il WWE Hall of Famer era al commento tecnico durante l&#x27;incontro del 30 maggio, in cui l&#x27;El Grande Americano di Ludwig Kaiser ha sconfitto l&#x27;originale El Grande Americano di Chad Gable. La sconfitta ha costretto Gable a togliersi la maschera davanti al pubblico, mettendo fine a una delle storyline più importanti dell&#x27;anno in AAA.</p>\n<p>I fan hanno elogiato il match sin dal suo svolgimento e JBL è chiaramente della stessa opinione. Intervenuto ai microfoni di Busted Open, ha dichiarato che il pubblico messicano ha contribuito a rendere il momento davvero epocale.</p>\n<blockquote>“I fan messicani sono semplicemente appassionati. Amano la Lucha Libre e amano le loro star. Si lasciano coinvolgere e si divertono. È questo ciò che avete visto: loro, al massimo del loro splendore.”</blockquote>\n<p>JBL ha affermato che il match ha mostrato il wrestling professionistico ai massimi livelli e ha ammesso di essere rimasto sbalordito da quanto realizzato da Gable e Kaiser.</p>\n<blockquote>“E penso che abbiate visto il wrestling al suo meglio. Sono rimasto assolutamente sbalordito da ciò che hanno fatto durante il match.”</blockquote>\n<p>Ha dato grande merito a Kaiser per aver costruito il personaggio di El Grande Americano nel modo giusto, in particolare imparando la lingua e comprendendo il pubblico messicano.</p>\n<blockquote>“Kaiser ha creato tutto questo. Kaiser ha costruito tutto imparando la lingua, e non solo la lingua: come dicevamo in Texas, non stava imparando lo spagnolo, stava imparando il &#x27;messicano&#x27;. Stava imparando il dialetto locale, ed è stato assolutamente incredibile quello che ha fatto.”</blockquote>\n<p>JBL ha inoltre sottolineato che il lavoro di Gable in Messico è stato molto diverso dall&#x27;interpretare un heel caricaturale nella televisione WWE. Ha spiegato che ottenere vero &#x27;heat&#x27; in Messico è una sfida completamente diversa.</p>\n<blockquote>“Quando Chad è tornato per la prima volta, ne parlavamo: è facile essere un heel grottesco come lo era in WWE con i video del Varsity Club o qualsiasi altra cosa fosse. Ma poi, all&#x27;improvviso, cercare di ottenere &#x27;heat&#x27; in Messico è un altro livello. Non è nemmeno lo stesso business.”</blockquote>\n<p>JBL si è poi sbilanciato su Gable, definendolo il miglior wrestler al mondo e affermando che il match con Kaiser è stato su un altro livello.</p>\n<blockquote>“Penso che Chad Gable sia il miglior wrestler al mondo, e non credo ci sia nemmeno paragone. È stato assolutamente incredibile quello che hanno fatto lui e Kaiser.”</blockquote>\n<p>Si tratta di un elogio importante da parte di JBL, specialmente dopo un match che ha già fatto molto discutere i fan. La perdita della maschera da parte di Gable è stato un momento fondamentale, ma i commenti di JBL chiariscono che, a suo avviso, entrambi gli atleti hanno dato vita a qualcosa di molto più profondo di un semplice incontro con stipulazione.</p>\n<p>La storia di El Grande Americano ha dato a Kaiser e Gable la possibilità di mettersi alla prova davanti a uno dei pubblici più esigenti del wrestling, e JBL ritiene che abbiano centrato l&#x27;obiettivo.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_jbl-elogia-chad-gable-il-miglior-wrestler-al-mondo.html",
+        "published_html_preview": "<p>JBL ha elogiato Chad Gable e Ludwig Kaiser dopo il sanguinoso Mask vs. Mask match andato in scena a AAA Noche de Los Grandes.</p>\n<p>Il WWE Hall of Famer era al commento tecnico durante l&#x27;incontro del 30 maggio, in cui l&#x27;El Grande Americano di Ludwig Kaiser ha sconfitto l&#x27;originale El Grande Americano di Chad Gable. La sconfitta ha costretto Gable a togliersi la maschera davanti al pubblico, mettendo fine a una delle storyline più importanti dell&#x27;anno in AAA.</p>\n<p>I fan hanno elogiato il match sin dal suo svolgimento e JBL è chiaramente della stessa opinione. Intervenuto ai microfoni di Busted Open, ha dichiarato che il pubblico messicano ha contribuito a rendere il momento davvero epocale.</p>\n<blockquote>“I fan messicani sono semplicemente appassionati. Amano la Lucha Libre e amano le loro star. Si lasciano coinvolgere e si divertono. È questo ciò che avete visto: loro, al massimo del loro splendore.”</blockquote>\n<p>JBL ha affermato che il match ha mostrato il wrestling professionistico ai massimi livelli e ha ammesso di essere rimasto sbalordito da quanto realizzato da Gable e Kaiser.</p>\n<blockquote>“E penso che abbiate visto il wrestling al suo meglio. Sono rimasto assolutamente sbalordito da ciò che hanno fatto durante il match.”</blockquote>\n<p>Ha dato grande merito a Kaiser per aver costruito il personaggio di El Grande Americano nel modo giusto, in particolare imparando la lingua e comprendendo il pubblico messicano.</p>\n<blockquote>“Kaiser ha creato tutto questo. Kaiser ha costruito tutto imparando la lingua, e non solo la lingua: come dicevamo in Texas, non stava imparando lo spagnolo, stava imparando il &#x27;messicano&#x27;. Stava imparando il dialetto locale, ed è stato assolutamente incredibile quello che ha fatto.”</blockquote>\n<p>JBL ha inoltre sottolineato che il lavoro di Gable in Messico è stato molto diverso dall&#x27;interpretare un heel caricaturale nella televisione WWE. Ha spiegato che ottenere vero &#x27;heat&#x27; in Messico è una sfida completamente diversa.</p>\n<blockquote>“Quando Chad è tornato per la prima volta, ne parlavamo: è facile essere un heel grottesco come lo era in WWE con i video del Varsity Club o qualsiasi altra cosa fosse. Ma poi, all&#x27;improvviso, cercare di ottenere &#x27;heat&#x27; in Messico è un altro livello. Non è nemmeno lo stesso business.”</blockquote>\n<p>JBL si è poi sbilanciato su Gable, definendolo il miglior wrestler al mondo e affermando che il match con Kaiser è stato su un altro livello.</p>\n<blockquote>“Penso che Chad Gable sia il miglior wrestler al mondo, e non credo ci sia nemmeno paragone. È stato assolutamente incredibile quello che hanno fatto lui e Kaiser.”</blockquote>\n<p>Si tratta di un elogio importante da parte di JBL, specialmente dopo un match che ha già fatto molto discutere i fan. La perdita della maschera da parte di Gable è stato un momento fondamentale, ma i commenti di JBL chiariscono che, a suo avviso, entrambi gli atleti hanno dato vita a qualcosa di molto più profondo di un semplice incontro con stipulazione.</p>\n<p>La storia di El Grande Americano ha dato a Kaiser e Gable la possibilità di mettersi alla prova davanti a uno dei pubblici più esigenti del wrestling, e JBL ritiene che abbiano centrato l&#x27;obiettivo.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_jbl-elogia-chad-gable-il-miglior-wrestler-al-mondo.html",
+        "publisher_review_html_preview": "<p>JBL ha elogiato Chad Gable e Ludwig Kaiser dopo il sanguinoso Mask vs. Mask match andato in scena a AAA Noche de Los Grandes.</p>\n<p>Il WWE Hall of Famer era al commento tecnico durante l&#x27;incontro del 30 maggio, in cui l&#x27;El Grande Americano di Ludwig Kaiser ha sconfitto l&#x27;originale El Grande Americano di Chad Gable. La sconfitta ha costretto Gable a togliersi la maschera davanti al pubblico, mettendo fine a una delle storyline più importanti dell&#x27;anno in AAA.</p>\n<p>I fan hanno elogiato il match sin dal suo svolgimento e JBL è chiaramente della stessa opinione. Intervenuto ai microfoni di Busted Open, ha dichiarato che il pubblico messicano ha contribuito a rendere il momento davvero epocale.</p>\n<blockquote>“I fan messicani sono semplicemente appassionati. Amano la Lucha Libre e amano le loro star. Si lasciano coinvolgere e si divertono. È questo ciò che avete visto: loro, al massimo del loro splendore.”</blockquote>\n<p>JBL ha affermato che il match ha mostrato il wrestling professionistico ai massimi livelli e ha ammesso di essere rimasto sbalordito da quanto realizzato da Gable e Kaiser.</p>\n<blockquote>“E penso che abbiate visto il wrestling al suo meglio. Sono rimasto assolutamente sbalordito da ciò che hanno fatto durante il match.”</blockquote>\n<p>Ha dato grande merito a Kaiser per aver costruito il personaggio di El Grande Americano nel modo giusto, in particolare imparando la lingua e comprendendo il pubblico messicano.</p>\n<blockquote>“Kaiser ha creato tutto questo. Kaiser ha costruito tutto imparando la lingua, e non solo la lingua: come dicevamo in Texas, non stava imparando lo spagnolo, stava imparando il &#x27;messicano&#x27;. Stava imparando il dialetto locale, ed è stato assolutamente incredibile quello che ha fatto.”</blockquote>\n<p>JBL ha inoltre sottolineato che il lavoro di Gable in Messico è stato molto diverso dall&#x27;interpretare un heel caricaturale nella televisione WWE. Ha spiegato che ottenere vero &#x27;heat&#x27; in Messico è una sfida completamente diversa.</p>\n<blockquote>“Quando Chad è tornato per la prima volta, ne parlavamo: è facile essere un heel grottesco come lo era in WWE con i video del Varsity Club o qualsiasi altra cosa fosse. Ma poi, all&#x27;improvviso, cercare di ottenere &#x27;heat&#x27; in Messico è un altro livello. Non è nemmeno lo stesso business.”</blockquote>\n<p>JBL si è poi sbilanciato su Gable, definendolo il miglior wrestler al mondo e affermando che il match con Kaiser è stato su un altro livello.</p>\n<blockquote>“Penso che Chad Gable sia il miglior wrestler al mondo, e non credo ci sia nemmeno paragone. È stato assolutamente incredibile quello che hanno fatto lui e Kaiser.”</blockquote>\n<p>Si tratta di un elogio importante da parte di JBL, specialmente dopo un match che ha già fatto molto discutere i fan. La perdita della maschera da parte di Gable è stato un momento fondamentale, ma i commenti di JBL chiariscono che, a suo avviso, entrambi gli atleti hanno dato vita a qualcosa di molto più profondo di un semplice incontro con stipulazione.</p>\n<p>La storia di El Grande Americano ha dato a Kaiser e Gable la possibilità di mettersi alla prova davanti a uno dei pubblici più esigenti del wrestling, e JBL ritiene che abbiano centrato l&#x27;obiettivo.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war/\nTitolo feed: JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\nTitolo pagina: JBL Calls Chad Gable “The Best Wrestler In The World” After AAA Mask vs. Mask War\nDescrizione: JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes. The WWE Hall of Famer was on\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"JBL is giving Chad Gable and Ludwig Kaiser their flowers after their bloody Mask vs. Mask match at AAA Noche de Los Grandes .\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"The WWE Hall of Famer was on commentary for the May 30 match, where Ludwig Kaiser’s El Grande Americano defeated Chad Gable’s Original El Grande Americano. The loss forced Gable to remove his mask in front of the crowd, ending one of AAA’s biggest storylines of the year.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Fans have been praising the match since it happened, and JBL clearly feels the same way. Speaking on Busted Open , he said the Mexican crowd helped make the moment feel massive.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“Mexican fans are just passionate fans. They love their Lucha Libre and they love their stars. They get into things and they enjoy it. That’s what you saw – them at their very best.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"JBL said the match showed pro wrestling at its highest level and admitted he was blown away by what Gable and Kaiser pulled off.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“And I thought you saw wrestling at its very best. I was absolutely blown away by what they did in the match.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"He gave Kaiser a lot of credit for building the El Grande Americano character the right way, especially by learning the language and understanding the audience in Mexico.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“Kaiser created all this. Kaiser created all this with learning the language, not just learning the language – as we used to say in Texas, he wasn’t learning Spanish, he was learning Mexican. The local dialect language was what he was learning, which was absolutely amazing, what he’s done.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"JBL also pointed out that Gable’s work in Mexico was not the same as playing a goofy heel on WWE television. He said getting real heat in Mexico is a completely different challenge.\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"quote\",\n    \"text\": \"“When Chad first came back, we’re sitting there thinking about it, it’s easy to be a campy heel like he was in WWE with the videos with the varsity club or whatever the heck it was. But then all of a sudden to try to get heat down in Mexico, that’s different level. It’s not even the same business.”\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"JBL then went all in on Gable, calling him the best wrestler in the world and saying the match with Kaiser was on another level.\"\n  },\n  {\n    \"id\": \"b12\",\n    \"type\": \"quote\",\n    \"text\": \"“I think Chad Gable’s the best wrestler in the world, and I don’t think it’s close. That was absolutely amazing what he and Kaiser did.”\"\n  },\n  {\n    \"id\": \"b13\",\n    \"type\": \"text\",\n    \"text\": \"That is huge praise from JBL, especially after a match that already had fans talking. Gable losing the mask was a major moment, but JBL’s comments make it clear he believes both men delivered something bigger than just another stipulation match.\"\n  },\n  {\n    \"id\": \"b14\",\n    \"type\": \"text\",\n    \"text\": \"The El Grande Americano story gave Kaiser and Gable a chance to prove themselves in front of one of wrestling’s toughest crowds, and JBL believes they nailed it.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "ai:Sviluppo diretto della storyline verso il PPV. Notizia importante per il pubblico italiano che segue la TNA.; deterministic:recency:fresh_12h",
-        "score": 53
+        "reason": "ai:Notizia fresca su una collaborazione inter-promozionale rilevante (AAA/WWE). Utile per il pubblico italiano che segue le evoluzioni del personaggio di Gable.; deterministic:entity:chad gable,recency:fresh_12h",
+        "score": 67
       },
       "publisher": {
         "categories": [
-          7,
-          8
+          4
         ],
         "error": null,
-        "featured_media": 5829,
+        "featured_media": 5841,
         "present": true,
         "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/tna/aj-francis-sfida-mike-santana-per-il-titolo-mondiale-a-slammiversary/",
-        "wp_post_id": 5830
+        "wp_link": "https://news.openwrestlingtv.com/wwe/jbl-elogia-chad-gable-e-il-miglior-wrestler-al-mondo/",
+        "wp_post_id": 5842
       },
       "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/aj-francis-calls-out-mike-santana-tna-world-title-match-slammiversary",
-      "title_it": "AJ Francis sfida Mike Santana per il titolo mondiale a Slammiversary"
+      "source_url": "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war",
+      "title_it": "JBL elogia Chad Gable: \"È il miglior wrestler al mondo\""
     },
     {
       "alfred": {
@@ -114,61 +117,69 @@
         "editorial_changes": [],
         "issues": [],
         "present": true,
-        "quality_score": 100,
-        "warnings": []
+        "quality_score": 95,
+        "warnings": [
+          {
+            "code": "possible_missing_table",
+            "evidence": "Report ascolti TNA Impact: i dati del 28 maggio 2026",
+            "message": "Articolo con dati potenzialmente tabellari ma nessuna tabella estratta.",
+            "severity": "warning"
+          }
+        ]
       },
       "bob": {
-        "clean_element_count": 6,
+        "clean_element_count": 4,
         "diagnostic_stage": "ready_for_alfred",
         "element_counts": {
-          "embed": 1,
+          "embed": 0,
           "heading": 0,
           "image": 0,
-          "quote": 2,
+          "quote": 1,
           "table": 0,
           "text": 3
         },
         "error": null,
         "present": true,
-        "raw_element_count": 8,
-        "removed_before_gemini": 2,
+        "raw_element_count": 5,
+        "removed_before_gemini": 1,
         "status": "ready_for_alfred",
         "translation_model": "gemini-3.1-flash-lite",
         "translation_used": true
       },
-      "category_hint": "AEW",
+      "category_hint": "TNA",
       "html_audit": {
-        "alfred_final_html_preview": "https://www.youtube.com/watch?v=t94Vw4vvVuE\n\n<p>Per molti, AEW Double or Nothing è stato uno dei migliori eventi di wrestling dell&#x27;anno. Per Jim Ross, tuttavia, è stato un viaggio infernale. Nell&#x27;ultima puntata di &quot;Grilling JR&quot;, Ross ha ripercorso il suo viaggio dall&#x27;Oklahoma a New York per commentare il match tra Jon Moxley e Kyle O&#x27;Reilly a Double or Nothing, rivelando che le cose avrebbero potuto andare decisamente meglio. Le difficoltà sono iniziate sabato mattina, quando Ross era pronto a partire per New York.</p>\n<blockquote>&quot;Avevamo puntato la sveglia&quot;, ha raccontato Ross. &quot;Un autista doveva venirmi a prendere. Improvvisamente, sono caduto. Non cadevo da settimane. Sono caduto e ho battuto il sedere. Ho distrutto il telefono. Non so come sia successo, ma deve esserci un modo... immagino di averlo semplicemente messo in tasca. Diavolo, non lo so. Se avessi avuto il telefono con me, avrei potuto chiedere un po&#x27; di aiuto. Di conseguenza, ho perso il volo.&quot;</blockquote>\n<p>La caduta e il volo perso hanno messo di pessimo umore Ross, che non è mai stato un grande amante dei viaggi aerei, ma è riuscito a riprogrammare il volo e ad arrivare a New York sabato sera, incontrando poi il collega commentatore della AEW Excalibur e il suo agente Barry Bloom per una birra. Purtroppo, la situazione è peggiorata una volta arrivato nella sua stanza d&#x27;albergo.</p>\n<blockquote>&quot;Mi sono sdraiato sul letto, mi sono seduto sul bordo e mi sono rilassato&quot;, ha spiegato Ross. &quot;Beh, non avrei mai immaginato che la schiena mi avrebbe tradito. Così mi sono ritrovato in hotel, bloccato con la schiena, incapace di muovermi. È stata davvero un&#x27;esperienza orribile.&quot;</blockquote>\n<p>Col senno di poi, Ross afferma che avrebbe dovuto parlare con il proprietario della AEW, Tony Khan, della possibilità di saltare lo show, visti i suoi problemi di salute e il fatto che dovesse commentare un solo match. Fortunatamente, nonostante le disavventure, Ross è riuscito a tornare a casa in volo lunedì sera.</p>",
-        "bob_body_html_preview": "https://www.youtube.com/watch?v=t94Vw4vvVuE\n\n<p>Per molti, AEW Double or Nothing è stato uno dei migliori eventi di wrestling dell&#x27;anno. Per Jim Ross, tuttavia, è stato un viaggio infernale. Nell&#x27;ultima puntata di &quot;Grilling JR&quot;, Ross ha ripercorso il suo viaggio dall&#x27;Oklahoma a New York per commentare il match tra Jon Moxley e Kyle O&#x27;Reilly a Double or Nothing, rivelando che le cose avrebbero potuto andare decisamente meglio. Le difficoltà sono iniziate sabato mattina, quando Ross era pronto a partire per New York.</p>\n<blockquote>&quot;Avevamo puntato la sveglia&quot;, ha raccontato Ross. &quot;Un autista doveva venirmi a prendere. Improvvisamente, sono caduto. Non cadevo da settimane. Sono caduto e ho battuto il sedere. Ho distrutto il telefono. Non so come sia successo, ma deve esserci un modo... immagino di averlo semplicemente messo in tasca. Diavolo, non lo so. Se avessi avuto il telefono con me, avrei potuto chiedere un po&#x27; di aiuto. Di conseguenza, ho perso il volo.&quot;</blockquote>\n<p>La caduta e il volo perso hanno messo di pessimo umore Ross, che non è mai stato un grande amante dei viaggi aerei, ma è riuscito a riprogrammare il volo e ad arrivare a New York sabato sera, incontrando poi il collega commentatore della AEW Excalibur e il suo agente Barry Bloom per una birra. Purtroppo, la situazione è peggiorata una volta arrivato nella sua stanza d&#x27;albergo.</p>\n<blockquote>&quot;Mi sono sdraiato sul letto, mi sono seduto sul bordo e mi sono rilassato&quot;, ha spiegato Ross. &quot;Beh, non avrei mai immaginato che la schiena mi avrebbe tradito. Così mi sono ritrovato in hotel, bloccato con la schiena, incapace di muovermi. È stata davvero un&#x27;esperienza orribile.&quot;</blockquote>\n<p>Col senno di poi, Ross afferma che avrebbe dovuto parlare con il proprietario della AEW, Tony Khan, della possibilità di saltare lo show, visti i suoi problemi di salute e il fatto che dovesse commentare un solo match. Fortunatamente, nonostante le disavventure, Ross è riuscito a tornare a casa in volo lunedì sera.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_jim-ross-racconta-le-difficolt-di-salute-e-viaggio-per-aew-double-or-nothing-2026.html",
-        "published_html_preview": "https://www.youtube.com/watch?v=t94Vw4vvVuE\n\n<p>Per molti, AEW Double or Nothing è stato uno dei migliori eventi di wrestling dell&#x27;anno. Per Jim Ross, tuttavia, è stato un viaggio infernale. Nell&#x27;ultima puntata di &quot;Grilling JR&quot;, Ross ha ripercorso il suo viaggio dall&#x27;Oklahoma a New York per commentare il match tra Jon Moxley e Kyle O&#x27;Reilly a Double or Nothing, rivelando che le cose avrebbero potuto andare decisamente meglio. Le difficoltà sono iniziate sabato mattina, quando Ross era pronto a partire per New York.</p>\n<blockquote>&quot;Avevamo puntato la sveglia&quot;, ha raccontato Ross. &quot;Un autista doveva venirmi a prendere. Improvvisamente, sono caduto. Non cadevo da settimane. Sono caduto e ho battuto il sedere. Ho distrutto il telefono. Non so come sia successo, ma deve esserci un modo... immagino di averlo semplicemente messo in tasca. Diavolo, non lo so. Se avessi avuto il telefono con me, avrei potuto chiedere un po&#x27; di aiuto. Di conseguenza, ho perso il volo.&quot;</blockquote>\n<p>La caduta e il volo perso hanno messo di pessimo umore Ross, che non è mai stato un grande amante dei viaggi aerei, ma è riuscito a riprogrammare il volo e ad arrivare a New York sabato sera, incontrando poi il collega commentatore della AEW Excalibur e il suo agente Barry Bloom per una birra. Purtroppo, la situazione è peggiorata una volta arrivato nella sua stanza d&#x27;albergo.</p>\n<blockquote>&quot;Mi sono sdraiato sul letto, mi sono seduto sul bordo e mi sono rilassato&quot;, ha spiegato Ross. &quot;Beh, non avrei mai immaginato che la schiena mi avrebbe tradito. Così mi sono ritrovato in hotel, bloccato con la schiena, incapace di muovermi. È stata davvero un&#x27;esperienza orribile.&quot;</blockquote>\n<p>Col senno di poi, Ross afferma che avrebbe dovuto parlare con il proprietario della AEW, Tony Khan, della possibilità di saltare lo show, visti i suoi problemi di salute e il fatto che dovesse commentare un solo match. Fortunatamente, nonostante le disavventure, Ross è riuscito a tornare a casa in volo lunedì sera.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_jim-ross-racconta-le-difficolt-di-salute-e-viaggio-per-aew-double-or-nothing-2026.html",
-        "publisher_review_html_preview": "https://www.youtube.com/watch?v=t94Vw4vvVuE\n\n<p>Per molti, AEW Double or Nothing è stato uno dei migliori eventi di wrestling dell&#x27;anno. Per Jim Ross, tuttavia, è stato un viaggio infernale. Nell&#x27;ultima puntata di &quot;Grilling JR&quot;, Ross ha ripercorso il suo viaggio dall&#x27;Oklahoma a New York per commentare il match tra Jon Moxley e Kyle O&#x27;Reilly a Double or Nothing, rivelando che le cose avrebbero potuto andare decisamente meglio. Le difficoltà sono iniziate sabato mattina, quando Ross era pronto a partire per New York.</p>\n<blockquote>&quot;Avevamo puntato la sveglia&quot;, ha raccontato Ross. &quot;Un autista doveva venirmi a prendere. Improvvisamente, sono caduto. Non cadevo da settimane. Sono caduto e ho battuto il sedere. Ho distrutto il telefono. Non so come sia successo, ma deve esserci un modo... immagino di averlo semplicemente messo in tasca. Diavolo, non lo so. Se avessi avuto il telefono con me, avrei potuto chiedere un po&#x27; di aiuto. Di conseguenza, ho perso il volo.&quot;</blockquote>\n<p>La caduta e il volo perso hanno messo di pessimo umore Ross, che non è mai stato un grande amante dei viaggi aerei, ma è riuscito a riprogrammare il volo e ad arrivare a New York sabato sera, incontrando poi il collega commentatore della AEW Excalibur e il suo agente Barry Bloom per una birra. Purtroppo, la situazione è peggiorata una volta arrivato nella sua stanza d&#x27;albergo.</p>\n<blockquote>&quot;Mi sono sdraiato sul letto, mi sono seduto sul bordo e mi sono rilassato&quot;, ha spiegato Ross. &quot;Beh, non avrei mai immaginato che la schiena mi avrebbe tradito. Così mi sono ritrovato in hotel, bloccato con la schiena, incapace di muovermi. È stata davvero un&#x27;esperienza orribile.&quot;</blockquote>\n<p>Col senno di poi, Ross afferma che avrebbe dovuto parlare con il proprietario della AEW, Tony Khan, della possibilità di saltare lo show, visti i suoi problemi di salute e il fatto che dovesse commentare un solo match. Fortunatamente, nonostante le disavventure, Ross è riuscito a tornare a casa in volo lunedì sera.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles/\nTitolo feed: Jim Ross Details Health & Travel Struggles Surrounding AEW Double Or Nothing 2026\nTitolo pagina: Jim Ross Details Health & Travel Struggles Surrounding AEW Double Or Nothing 2026 - Wrestling Inc.\nDescrizione: AEW announcer Jim Ross details both the health and travel struggles he suffered through when trying to make AEW Double or Nothing 2026 last weekend\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"For many, AEW Double or Nothing was one of the greatest wrestling events of the year. For Jim Ross, however, it was the trip from hell. On the latest \\\"Grilling JR,\\\" Ross documented his trip from Oklahoma to New York City to call the Jon Moxley vs. Kyle O'Reilly match at Double or Nothing , and revealed the trip could've gone better. The hardship started on Saturday morning, when Ross was set to travel to New York.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"We have the alarm set,\\\" Ross said. \\\"A driver was going to pick me up. And all of a sudden, I fell. I hadn't had a fall in weeks. So I fell and busted my ass. I wasted my phone. I don't know how you do it but there's got to be a way...I guess I just put it in my pocket. Hell I don't know. If I had my phone with me, I could've gotten a little bit of help. So I, as a result of that, I missed my flight.\\\"\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"The fall and missing his flight put Ross, who isn't a fan of flying to begin with, in a foul mood, but he was able to reschedule and arrive to New York on Saturday night, later having a beer with fellow AEW announcer Excalibur and his agent Barry Bloom. Unfortunately, things got worse when Ross made his way to his hotel room.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"I laid on the bed, put my ass on the edge of the bed, and just relaxed,\\\" Ross said. \\\"Well, little did I know my back was going to go out on me. So now I'm in my hotel, with my back out, and I can't function. So it was just a horrible experience.\\\"\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"In hindsight, Ross says he would've talked to AEW owner Tony Khan about skipping the show, given his health issues and the fact he only called one match. Fortunately, despite the hardships, Ross was able to fly home on Monday night.\"\n  }\n]\n"
+        "alfred_final_html_preview": "<p>A causa della concorrenza dei playoff NBA e NHL e di un ulteriore cambiamento nel sistema di rilevazione Nielsen, &quot;TNA Impact&quot; ha visto i propri numeri calare nell&#x27;ultimo mese, passando da una media costante sopra i 200.000 spettatori a una fascia tra i 150.000 e i 190.000. Tuttavia, per l&#x27;episodio del 28 maggio, la TNA è andata vicina a tornare sulla soglia dei 200.000, sebbene a discapito del pubblico più giovane.</p>\n<p>Wrestlenomics e Programming Insider riportano che &quot;Impact&quot; ha totalizzato 195.000 spettatori e un rating dello 0.02 nella ambita fascia demografica 18-49. Il numero totale di spettatori è aumentato del 10% rispetto ai 178.000 della settimana precedente; una notizia ancora migliore riguarda il confronto con la media delle quattro settimane precedenti: il dato è salito del 4% rispetto ai 187.000. Si tratta del secondo miglior risultato ottenuto dalla TNA nel mese di maggio, dopo i 196.000 spettatori registrati nell&#x27;episodio del 14 maggio.</p>\n<p>Meno positivo, tuttavia, è stato il dato relativo alla fascia 18-49. Nonostante l&#x27;aumento degli spettatori totali, il target di riferimento ha subito un calo, scendendo del 33% rispetto allo 0.03 della settimana precedente. La situazione è rimasta pressoché identica nel confronto con la media delle quattro settimane (anch&#x27;essa pari a 0.03), con il numero dei 18-49 che ha fatto registrare un calo del 33% anche in quel caso.</p>\n<blockquote>La puntata di &quot;Impact&quot; ha visto il debutto sul ring di Fabian Aichner, a due settimane dalla comparsa dell&#x27;ex stella WWE al termine di &quot;Impact&quot;, dove aveva affrontato il nuovo TNA X-Division Champion Cedric Alexander. Il match, il primo per Aichner dal dicembre 2024, ha visto l&#x27;italiano sconfiggere per squalifica Eddie Edwards, storico volto TNA e compagno di stable di Alexander nel System, dopo l&#x27;interferenza di Alexander, Bear Bronson e Brian Myers, accorsi per attaccare Aichner. Lo show ha visto anche Santino Marella in azione, sconfitto dal futuro genero Channing Lorenzo in seguito all&#x27;interferenza di Arianna Grace.</blockquote>",
+        "bob_body_html_preview": "<p>A causa della concorrenza dei playoff NBA e NHL e di un ulteriore cambiamento nel sistema di rilevazione Nielsen, &quot;TNA Impact&quot; ha visto i propri numeri calare nell&#x27;ultimo mese, passando da una media costante sopra i 200.000 spettatori a una fascia tra i 150.000 e i 190.000. Tuttavia, per l&#x27;episodio del 28 maggio, la TNA è andata vicina a tornare sulla soglia dei 200.000, sebbene a discapito del pubblico più giovane.</p>\n<p>Wrestlenomics e Programming Insider riportano che &quot;Impact&quot; ha totalizzato 195.000 spettatori e un rating dello 0.02 nella ambita fascia demografica 18-49. Il numero totale di spettatori è aumentato del 10% rispetto ai 178.000 della settimana precedente; una notizia ancora migliore riguarda il confronto con la media delle quattro settimane precedenti: il dato è salito del 4% rispetto ai 187.000. Si tratta del secondo miglior risultato ottenuto dalla TNA nel mese di maggio, dopo i 196.000 spettatori registrati nell&#x27;episodio del 14 maggio.</p>\n<p>Meno positivo, tuttavia, è stato il dato relativo alla fascia 18-49. Nonostante l&#x27;aumento degli spettatori totali, il target di riferimento ha subito un calo, scendendo del 33% rispetto allo 0.03 della settimana precedente. La situazione è rimasta pressoché identica nel confronto con la media delle quattro settimane (anch&#x27;essa pari a 0.03), con il numero dei 18-49 che ha fatto registrare un calo del 33% anche in quel caso.</p>\n<blockquote>La puntata di &quot;Impact&quot; ha visto il debutto sul ring di Fabian Aichner, a due settimane dalla comparsa dell&#x27;ex stella WWE al termine di &quot;Impact&quot;, dove aveva affrontato il nuovo TNA X-Division Champion Cedric Alexander. Il match, il primo per Aichner dal dicembre 2024, ha visto l&#x27;italiano sconfiggere per squalifica Eddie Edwards, storico volto TNA e compagno di stable di Alexander nel System, dopo l&#x27;interferenza di Alexander, Bear Bronson e Brian Myers, accorsi per attaccare Aichner. Lo show ha visto anche Santino Marella in azione, sconfitto dal futuro genero Channing Lorenzo in seguito all&#x27;interferenza di Arianna Grace.</blockquote>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_report-ascolti-tna-impact-i-dati-del-28-maggio-2026.html",
+        "published_html_preview": "<p>A causa della concorrenza dei playoff NBA e NHL e di un ulteriore cambiamento nel sistema di rilevazione Nielsen, &quot;TNA Impact&quot; ha visto i propri numeri calare nell&#x27;ultimo mese, passando da una media costante sopra i 200.000 spettatori a una fascia tra i 150.000 e i 190.000. Tuttavia, per l&#x27;episodio del 28 maggio, la TNA è andata vicina a tornare sulla soglia dei 200.000, sebbene a discapito del pubblico più giovane.</p>\n<p>Wrestlenomics e Programming Insider riportano che &quot;Impact&quot; ha totalizzato 195.000 spettatori e un rating dello 0.02 nella ambita fascia demografica 18-49. Il numero totale di spettatori è aumentato del 10% rispetto ai 178.000 della settimana precedente; una notizia ancora migliore riguarda il confronto con la media delle quattro settimane precedenti: il dato è salito del 4% rispetto ai 187.000. Si tratta del secondo miglior risultato ottenuto dalla TNA nel mese di maggio, dopo i 196.000 spettatori registrati nell&#x27;episodio del 14 maggio.</p>\n<p>Meno positivo, tuttavia, è stato il dato relativo alla fascia 18-49. Nonostante l&#x27;aumento degli spettatori totali, il target di riferimento ha subito un calo, scendendo del 33% rispetto allo 0.03 della settimana precedente. La situazione è rimasta pressoché identica nel confronto con la media delle quattro settimane (anch&#x27;essa pari a 0.03), con il numero dei 18-49 che ha fatto registrare un calo del 33% anche in quel caso.</p>\n<blockquote>La puntata di &quot;Impact&quot; ha visto il debutto sul ring di Fabian Aichner, a due settimane dalla comparsa dell&#x27;ex stella WWE al termine di &quot;Impact&quot;, dove aveva affrontato il nuovo TNA X-Division Champion Cedric Alexander. Il match, il primo per Aichner dal dicembre 2024, ha visto l&#x27;italiano sconfiggere per squalifica Eddie Edwards, storico volto TNA e compagno di stable di Alexander nel System, dopo l&#x27;interferenza di Alexander, Bear Bronson e Brian Myers, accorsi per attaccare Aichner. Lo show ha visto anche Santino Marella in azione, sconfitto dal futuro genero Channing Lorenzo in seguito all&#x27;interferenza di Arianna Grace.</blockquote>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_report-ascolti-tna-impact-i-dati-del-28-maggio-2026.html",
+        "publisher_review_html_preview": "<p>A causa della concorrenza dei playoff NBA e NHL e di un ulteriore cambiamento nel sistema di rilevazione Nielsen, &quot;TNA Impact&quot; ha visto i propri numeri calare nell&#x27;ultimo mese, passando da una media costante sopra i 200.000 spettatori a una fascia tra i 150.000 e i 190.000. Tuttavia, per l&#x27;episodio del 28 maggio, la TNA è andata vicina a tornare sulla soglia dei 200.000, sebbene a discapito del pubblico più giovane.</p>\n<p>Wrestlenomics e Programming Insider riportano che &quot;Impact&quot; ha totalizzato 195.000 spettatori e un rating dello 0.02 nella ambita fascia demografica 18-49. Il numero totale di spettatori è aumentato del 10% rispetto ai 178.000 della settimana precedente; una notizia ancora migliore riguarda il confronto con la media delle quattro settimane precedenti: il dato è salito del 4% rispetto ai 187.000. Si tratta del secondo miglior risultato ottenuto dalla TNA nel mese di maggio, dopo i 196.000 spettatori registrati nell&#x27;episodio del 14 maggio.</p>\n<p>Meno positivo, tuttavia, è stato il dato relativo alla fascia 18-49. Nonostante l&#x27;aumento degli spettatori totali, il target di riferimento ha subito un calo, scendendo del 33% rispetto allo 0.03 della settimana precedente. La situazione è rimasta pressoché identica nel confronto con la media delle quattro settimane (anch&#x27;essa pari a 0.03), con il numero dei 18-49 che ha fatto registrare un calo del 33% anche in quel caso.</p>\n<blockquote>La puntata di &quot;Impact&quot; ha visto il debutto sul ring di Fabian Aichner, a due settimane dalla comparsa dell&#x27;ex stella WWE al termine di &quot;Impact&quot;, dove aveva affrontato il nuovo TNA X-Division Champion Cedric Alexander. Il match, il primo per Aichner dal dicembre 2024, ha visto l&#x27;italiano sconfiggere per squalifica Eddie Edwards, storico volto TNA e compagno di stable di Alexander nel System, dopo l&#x27;interferenza di Alexander, Bear Bronson e Brian Myers, accorsi per attaccare Aichner. Lo show ha visto anche Santino Marella in azione, sconfitto dal futuro genero Channing Lorenzo in seguito all&#x27;interferenza di Arianna Grace.</blockquote>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026/\nTitolo feed: TNA Impact Ratings & Viewership Report: 5/28/2026\nTitolo pagina: TNA Impact Ratings & Viewership Report: 5/28/2026 - Wrestling Inc.\nDescrizione: TNA Impact's total viewership reaches its second highest total in May, but continues to struggle in the 18-49 demo going against the NBA and NHL Playoffs\nCategoria suggerita: TNA\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Thanks to competition from the NBA and NHL Playoffs and another change in Nielsen's rating system, \\\"TNA Impact\\\" has seen its numbers take a dip over the last month, going from consistently drawing in the 200K's to the mid to high 100K's. But for the May 28 episode , TNA found themselves close to getting back into the 200K range, though it was at the expense of their younger viewers.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Wrestlenomics and Programming Insider report that \\\"Impact\\\" drew 195K total viewers, and a 0.02 in the coveted 18-49 demographic. Total viewership was up 10% from the previous week's 178K , though the better news was the number compared to the four week average. While only up slightly, the number did rise 4% from 187K. It's the second highest rating TNA has drawn in May, following the May 14 episode bringing in 196K total viewers .\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Less positive, however, was the 18-49 number. Despite a rise in total viewership, the key demo saw a decline, falling 33% from the previous week's 0.03. The song remained the same when it came to the four week average, which was also 0.03, with the 18-49 number falling a similar 33% against that.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"Impact\\\" featured the in-ring debut of Fabian Aichner, two weeks after the former WWE star appeared at the end of \\\"Impact,\\\" confronting new TNA X-Division Champion Cedric Alexander. The match, Aichner's first since December 2024, saw the Italian defeat Alexander's System stablemate and long-time TNA star Eddie Edwards by disqualification, after Alexander, Bear Bronson, and Brian Myers ran down to attack Aichner. The show also featured Santino Marella in action, losing a match to his future son-in-law Channing Lorenzo, after interference from Arianna Grace.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "ai:Jim Ross è un personaggio iconico, notizia rilevante per il contesto post-PPV.; deterministic:recency:fresh_12h",
-        "score": 53
+        "reason": "ai:Report dati di visione TNA. Fondamentale per monitorare lo stato di salute della promotion nel mercato USA.; deterministic:ratings:exceptional_signal,recency:fresh_12h",
+        "score": 56
       },
       "publisher": {
         "categories": [
-          5
+          7,
+          8
         ],
         "error": null,
-        "featured_media": 5831,
+        "featured_media": 5843,
         "present": true,
         "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/aew/jim-ross-racconta-le-difficolta-di-salute-e-viaggio-per-aew-double-or-nothing-2026/",
-        "wp_post_id": 5832
+        "wp_link": "https://news.openwrestlingtv.com/tna/report-ascolti-tna-impact-i-dati-del-28-maggio-2026/",
+        "wp_post_id": 5844
       },
       "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2185294/aew-double-or-nothing-2026-jim-ross-health-travel-struggles",
-      "title_it": "Jim Ross racconta le difficoltà di salute e viaggio per AEW Double or Nothing 2026"
+      "source_url": "https://www.wrestlinginc.com/2185355/tna-impact-ratings-viewership-may-28-2026",
+      "title_it": "Report ascolti TNA Impact: i dati del 28 maggio 2026"
     }
   ],
-  "generated_at": "2026-06-02T00:07:15.493890+00:00",
+  "generated_at": "2026-06-02T00:20:25.155971+00:00",
   "how_to_read": {
     "alfred_final_html_preview": "HTML dopo revisione/normalizzazioni di Alfred",
     "bob_body_html_preview": "HTML prodotto da Bob prima di Alfred",
@@ -1224,6 +1235,102 @@
       "overall_status": "ok",
       "published": 2,
       "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 2,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 2
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 2,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 15,
+          "already_worked": 2,
+          "hard_skipped": 17,
+          "to_menzo": 16,
+          "to_simone": 0
+        },
+        "menzo": {
+          "pending": 1,
+          "skipped": 13,
+          "to_bob_or_v92": 2
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 2,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 6,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 2,
+      "errors": 0,
+      "generated_at": "2026-06-02T00:20:25.150689+00:00",
+      "overall_status": "ok",
+      "published": 2,
+      "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 2,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 2
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 2,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 15,
+          "already_worked": 2,
+          "hard_skipped": 17,
+          "to_menzo": 16,
+          "to_simone": 0
+        },
+        "menzo": {
+          "pending": 1,
+          "skipped": 13,
+          "to_bob_or_v92": 2
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 2,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 6,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 2,
+      "errors": 0,
+      "generated_at": "2026-06-02T00:20:25.155971+00:00",
+      "overall_status": "ok",
+      "published": 2,
+      "warnings": 0
     }
   ],
   "overall_status": "ok",
@@ -1243,7 +1350,7 @@
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 1
+      "warnings": 2
     },
     "bob_handoff": {
       "errors": 0,
@@ -1251,14 +1358,14 @@
       "ready_for_alfred": 2,
       "translation_pending": 0
     },
-    "ended_at": "2026-06-02T00:07:15.482901+00:00",
+    "ended_at": "2026-06-02T00:20:25.144700+00:00",
     "engine": "bot_v92.py",
     "massy_handoff": {
       "already_published_hard_skipped": 15,
-      "already_worked": 1,
+      "already_worked": 2,
       "hard_skipped": 17,
       "to_menzo": 16,
-      "to_simone": 1
+      "to_simone": 0
     },
     "menzo_handoff": {
       "pending": 1,
@@ -1280,89 +1387,89 @@
       "skipped": 6,
       "waiting": 0
     },
-    "started_at": "2026-06-02T00:06:51.154399+00:00",
+    "started_at": "2026-06-02T00:19:58.259276+00:00",
     "version": "v93_14_priority_label_bob_brief_guard"
   },
   "summary": {
     "anomalies": 0,
     "article_dossiers": 2,
     "errors_48h": 10,
-    "published_48h": 36,
+    "published_48h": 40,
     "published_current_run": 2,
-    "runs_48h": 22
+    "runs_48h": 24
   },
   "timeline": [
     {
       "agent": "Jarvis",
       "note": "engine=bot_v92.py",
       "phase": "bootstrap_status_written",
-      "timestamp": "2026-06-02T00:06:51.154662+00:00"
+      "timestamp": "2026-06-02T00:19:58.259534+00:00"
     },
     {
       "agent": "Massy",
-      "note": "to_simone=1 to_menzo=16 hard_skip=17 already=1",
+      "note": "to_simone=0 to_menzo=16 hard_skip=17 already=2",
       "phase": "sentinel_board_ready",
-      "timestamp": "2026-06-02T00:06:52.358024+00:00"
+      "timestamp": "2026-06-02T00:19:59.986132+00:00"
     },
     {
       "agent": "Simone",
       "note": "ready=0 waiting=0 skipped=6",
       "phase": "report_decision_ready",
-      "timestamp": "2026-06-02T00:06:52.361445+00:00"
+      "timestamp": "2026-06-02T00:19:59.989480+00:00"
     },
     {
       "agent": "Menzo",
       "note": "selected=2 pending=1 skipped=13",
       "phase": "editorial_decision_ready",
-      "timestamp": "2026-06-02T00:07:01.853475+00:00"
+      "timestamp": "2026-06-02T00:20:06.196770+00:00"
     },
     {
       "agent": "Menzo",
       "note": "selected=2",
       "phase": "priority_label_guard_applied",
-      "timestamp": "2026-06-02T00:07:01.854822+00:00"
+      "timestamp": "2026-06-02T00:20:06.198014+00:00"
     },
     {
       "agent": "Bob",
       "note": "ready=2 pending=0 empty=0 errors=0",
       "phase": "article_packages_ready",
-      "timestamp": "2026-06-02T00:07:08.677932+00:00"
+      "timestamp": "2026-06-02T00:20:16.971467+00:00"
     },
     {
       "agent": "Bob",
-      "note": "warnings=0",
+      "note": "warnings=1",
       "phase": "bob_brief_guard_applied",
-      "timestamp": "2026-06-02T00:07:08.678975+00:00"
+      "timestamp": "2026-06-02T00:20:16.972629+00:00"
     },
     {
       "agent": "Alfred",
       "note": "approved=2 needs_revision=0 blockers=0 warnings=1 changes=0",
       "phase": "quality_review_ready",
-      "timestamp": "2026-06-02T00:07:08.686277+00:00"
+      "timestamp": "2026-06-02T00:20:16.980556+00:00"
     },
     {
       "agent": "Alfred",
-      "note": "surfaced=0",
+      "note": "surfaced=1",
       "phase": "bob_warning_guard_applied",
-      "timestamp": "2026-06-02T00:07:08.686793+00:00"
+      "timestamp": "2026-06-02T00:20:16.981222+00:00"
     },
     {
       "agent": "Publisher",
       "note": "published=2 already=0 dry=0 wp_not_ready=0 errors=0",
       "phase": "publication_ready",
-      "timestamp": "2026-06-02T00:07:15.482848+00:00"
+      "timestamp": "2026-06-02T00:20:25.144661+00:00"
     },
     {
       "agent": "Jarvis",
       "note": "v93 Publisher completed; v92 fallback skipped",
       "phase": "runtime_skipped",
-      "timestamp": "2026-06-02T00:07:15.482879+00:00"
+      "timestamp": "2026-06-02T00:20:25.144689+00:00"
     },
     {
       "agent": "Archivista",
       "note": "status=ok anomalies=0",
       "phase": "audit_ready",
-      "timestamp": "2026-06-02T00:07:15.493521+00:00"
+      "timestamp": "2026-06-02T00:20:25.155666+00:00"
     }
   ],
   "version": "v93_7_archivista_audit"
