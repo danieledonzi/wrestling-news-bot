@@ -1,16 +1,16 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-02T08:11:52.471174+00:00",
+  "generated_at": "2026-06-02T09:48:19.892562+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 1,
+    "published": 3,
     "wp_not_ready": 0
   },
   "input": {
     "alfred_version": "v93_8_alfred_structured_content_checks",
-    "approved_articles": 1
+    "approved_articles": 3
   },
   "mode": "wordpress_publisher_plain_oembed_urls",
   "policy": {
@@ -25,12 +25,36 @@
       "categories": [
         4
       ],
-      "featured_media": 5847,
-      "source_url": "https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy/",
+      "featured_media": 5850,
+      "source_url": "https://www.ringsidenews.com/why-finn-balor-moved-wwe-smackdown/",
       "status": "published",
-      "title_it": "Un fan molesta Roman Reigns dopo WWE Clash in Italy",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/un-fan-molesta-roman-reigns-dopo-wwe-clash-in-italy/",
-      "wp_post_id": 5848
+      "title_it": "Il motivo dietro il passaggio di Finn Bálor a SmackDown",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/il-motivo-dietro-il-passaggio-di-finn-balor-a-smackdown/",
+      "wp_post_id": 5851
+    },
+    {
+      "categories": [
+        15,
+        8
+      ],
+      "featured_media": 5852,
+      "source_url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ/",
+      "status": "published",
+      "title_it": "Cody Rhodes: \"La mia fortuna sta finendo\"",
+      "wp_link": "https://news.openwrestlingtv.com/world/cody-rhodes-la-mia-fortuna-sta-finendo/",
+      "wp_post_id": 5853
+    },
+    {
+      "categories": [
+        15,
+        8
+      ],
+      "featured_media": 5854,
+      "source_url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/",
+      "status": "published",
+      "title_it": "Secondo JBL, la AAA potrebbe presto chiudere un nuovo accordo televisivo",
+      "wp_link": "https://news.openwrestlingtv.com/world/secondo-jbl-la-aaa-potrebbe-presto-chiudere-un-nuovo-accordo-televisivo/",
+      "wp_post_id": 5855
     }
   ],
   "version": "v93_10_publisher_plain_oembed_urls",

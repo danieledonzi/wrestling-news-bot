@@ -3,38 +3,84 @@
   "approved_articles": [
     {
       "bob_translation_model": "gemini-3.1-flash-lite",
-      "body_html": "<p>Roman Reigns ha difeso con successo il suo World Heavyweight Championship a WWE Clash in Italy, ma nel post-match si è vissuto un momento di tensione quando un fan troppo zelante si è spinto un po&#x27; troppo oltre.</p>\n<p>Come mostrato da alcuni filmati che stanno circolando online, Reigns stava tornando verso il backstage insieme ai membri della Bloodline dopo la sua vittoria in un Tribal Combat contro Jacob Fatu. Mentre attraversava l&#x27;area riservata al pubblico, un fan ha allungato la mano afferrando Reigns per un braccio.</p>\n<p>La situazione è diventata rapidamente spiacevole quando il fan ha continuato a trattenere Reigns invece di lasciarlo andare. Il campione è apparso visibilmente infastidito dall&#x27;interazione mentre cercava di proseguire verso il backstage. Prima che la situazione potesse degenerare, Jey Uso è intervenuto immediatamente per proteggere il suo familiare e rivolgersi al fan: &quot;Andiamo, amico!&quot;. L&#x27;intervento di Jey è stato sufficiente a riportare la situazione sotto controllo, permettendo a Reigns e alla Bloodline di completare l&#x27;uscita senza ulteriori intoppi.</p>\n<p>L&#x27;incidente si è verificato poco dopo che Reigns aveva chiuso WWE Clash in Italy sconfiggendo Jacob Fatu in un brutale Tribal Combat match. L&#x27;incontro è stato caratterizzato dall&#x27;uso di armi, tavoli, impatti contro le barricate e diverse Spear, prima che Reigns riuscisse finalmente a mantenere il titolo.</p>\n<p>Sebbene le interazioni con i fan facciano spesso parte dell&#x27;esperienza durante gli eventi di wrestling, momenti come questo ricordano che esiste un confine tra il mostrare sostegno e l&#x27;invadere lo spazio personale di un performer. Fortunatamente, la situazione è stata gestita rapidamente e Reigns è riuscito a lasciare l&#x27;arena in sicurezza dopo un&#x27;altra difesa titolata riuscita.</p>",
+      "body_html": "https://www.youtube.com/watch?v=WL9DRH9mfIg\n\n<p>Il passaggio di Finn Bálor a SmackDown potrebbe non essere stato parte di una manovra legata al Draft; sembra infatti che la WWE volesse semplicemente allontanarlo da Dominik Mysterio e JD McDonagh.</p>\n<p>Intervenuto durante il Wrestling Observer Radio, Dave Meltzer ha spiegato che la WWE ha spostato Bálor a Friday Night SmackDown perché la compagnia voleva distanziarlo da Dominik Mysterio e JD McDonagh dopo la loro recente faida a RAW.</p>\n<blockquote>“Non ho mai sentito parlare di alcun Draft. L&#x27;idea è che vogliano semplicemente tenerlo lontano da Dominik Mysterio e JD.”</blockquote>\n<p>Bálor ha lottato per l&#x27;ultima volta come membro del roster di RAW nella puntata del 18 maggio, dove ha sconfitto JD McDonagh. Successivamente, la WWE si è trovata di fronte a un problema logistico: se Bálor fosse rimasto a RAW, sarebbe stato difficile evitare interazioni con gli ex membri del Judgment Day.</p>\n<blockquote>“Ha battuto JD e, se rimane a Raw, come si può evitare che lavori con quei ragazzi? Quindi hanno pensato che fosse finita lì — hanno chiuso con quel capitolo per Finn Bálor — e volevano dargli un nuovo inizio.”</blockquote>\n<p>La spiegazione ha paragonato il trasferimento di Bálor a quanto fatto in precedenza dalla WWE per separare Rey Mysterio e Dominik Mysterio una volta conclusa la loro faida. Il confronto prosegue citando come anche Rey e Dominik siano stati separati al termine della loro storyline.</p>\n<blockquote>“Succede spesso: portano avanti una faida, questa finisce e, per la natura stessa della rivalità, semplicemente non vogliono che interagiscano più. È successo lo stesso quando Rey Mysterio e Dominik hanno chiuso il loro programma. Hanno spostato Rey e in teoria non avrebbero dovuto interagire, anche se ora lo stanno facendo, o comunque sono in procinto di farlo.”</blockquote>\n<p>Lo scambio di Bálor verso SmackDown è stato annunciato durante la puntata di Monday Night RAW del primo giugno. JD McDonagh ha reagito affermando che Bálor non mancherà a nessuno, sostenendo che sia scappato perché il Judgment Day avrebbe messo fine alla sua carriera se fosse rimasto a RAW.</p>\n<p>Il trasferimento offre inoltre a Bálor un nuovo percorso nel torneo King of the Ring, dove è previsto un Fatal 4-Way al primo turno contro Royce Keys, LA Knight e Jey Uso. Per il momento, il passaggio di Bálor a SmackDown sembra meno legato a un rimescolamento generale dei roster e più alla volontà di lasciargli spazio rispetto al Judgment Day, dopo che la WWE ha archiviato quel capitolo a RAW. Resta da vedere se questo porterà alla vittoria del torneo.</p>\n<p>Derek Holloway è un autore di Ringside News specializzato in notizie, rumor e risultati di wrestling professionistico. Si occupa di fornire una copertura affidabile su WWE, AEW e le principali federazioni di wrestling.</p>",
       "category_hint": "WWE",
+      "element_counts": {
+        "embed": 1,
+        "heading": 0,
+        "image": 0,
+        "quote": 3,
+        "table": 0,
+        "text": 7
+      },
+      "excerpt_it": "Il trasferimento di Finn Bálor a SmackDown non sarebbe legato a un Draft, ma alla volontà della WWE di allontanarlo da Dominik Mysterio e JD McDonagh.",
+      "meta": {
+        "description": "Finn Bálor’s move to SmackDown may not have been part of a major draft situation after all, as WWE just wanted him away from Dominik Mysterio and JD",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/why-finn-balor-was-moved-to-wwe-smackdown-14.jpg",
+        "source_title": "Why Finn Bálor Was Moved to WWE SmackDown"
+      },
+      "source": "ringsidenews",
+      "source_title": "Why Finn Bálor Was Moved to WWE SmackDown",
+      "source_url": "https://www.ringsidenews.com/why-finn-balor-moved-wwe-smackdown/",
+      "title_it": "Il motivo dietro il passaggio di Finn Bálor a SmackDown"
+    },
+    {
+      "bob_translation_model": "gemini-3.1-flash-lite",
+      "body_html": "https://youtu.be/FPyacCODvSw?si=hslw99CGgj3ebvZH\n\n<p>Cody Rhodes ha mantenuto l&#x27;Undisputed WWE Championship in modo controverso a Clash in Italy. Il piede di GUNTHER era sotto la corda durante lo schienamento di Rhodes, ma l&#x27;arbitro, con la visuale ostruita, ha convalidato la vittoria del campione.</p>\n<blockquote>Durante un&#x27;intervista su ESPN con Joe Tessitore, Rhodes ha parlato del punt kick ricevuto da Randy Orton: &quot;Tutto quello che c&#x27;è da sapere su di me è successo dopo. Mi sono rialzato e ho cercato di incrociare lo sguardo di tutti per far capire due cose: sono ancora il campione e sono ancora qui. E se quello è il colpo migliore di Randy, e Randy è nel suo momento migliore di sempre, allora cosa dice questo di me? Non lo dico con arroganza. Sono stato piuttosto fortunato, ma non so quanta fortuna mi sia rimasta ancora&quot;.</blockquote>\n<blockquote>Dopo WrestleMania 42, il campione ha trascorso del tempo con la sua famiglia. Ha ripensato a quando suo padre gli diceva che, dopo gli incontri, sarebbe tornato a casa malconcio dovendo spiegare ai figli di stare bene. La storia si è ripetuta quando la figlia di quattro anni gli ha chiesto cosa gli fosse successo e se stesse bene. Un emozionato Rhodes ha dichiarato: &quot;Niente ti prepara a una cosa del genere e spero che non diventi un&#x27;abitudine&quot;.</blockquote>\n<blockquote>Tessitore gli ha chiesto cosa significhi essere il volto della compagnia (QB1). Rhodes ha risposto che essere il numero uno significa essere costanti, settimana dopo settimana: &quot;Ci sono tutte queste battute sul fatto che segua il modello di John Cena, ma non mi danno affatto fastidio, perché è un modello incredibile&quot;. Ha aggiunto di non essersi sentito un vincitore dopo WrestleMania e di aver bisogno di sfidanti perché è &quot;dipendente dal vertice. Non ho paura di dirlo a nessuno&quot;.</blockquote>",
+      "category_hint": "Business",
+      "element_counts": {
+        "embed": 1,
+        "heading": 0,
+        "image": 0,
+        "quote": 3,
+        "table": 0,
+        "text": 1
+      },
+      "excerpt_it": "Il campione indiscusso WWE Cody Rhodes riflette sul suo regno, sugli scontri con Randy Orton e sul difficile equilibrio tra vita professionale e privata.",
+      "meta": {
+        "description": "WWE Undisputed Champion Cody Rhodes sat down with Joe Tessitore in an ESPN interview prior to his match with GUNTHER at Clash in Italy.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/wwe-champ-cody-rhodes-says-he-feels-like-his-luck-is-running-out/l-intro-1780372450.jpg",
+        "source_title": "WWE Champ Cody Rhodes Says He Feels Like His Luck Is Running Out - Wrestling Inc."
+      },
+      "source": "wrestlinginc",
+      "source_title": "WWE Champ Cody Rhodes Says He Feels Like His Luck Is Running Out",
+      "source_url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ/",
+      "title_it": "Cody Rhodes: \"La mia fortuna sta finendo\""
+    },
+    {
+      "bob_translation_model": "gemini-3.1-flash-lite",
+      "body_html": "<p>JBL ritiene che il momento positivo della AAA possa tradursi in qualcosa di più importante.</p>\n<p>La AAA sta trasmettendo i propri show su YouTube per i fan al di fuori dei suoi mercati abituali in Messico, America Centrale e Sud America. Questo facile accesso ha aiutato molti appassionati in tutto il mondo a seguire la promotion, specialmente grazie alla presenza di talenti WWE e a crossover di rilievo che hanno attirato maggiore attenzione sul brand.</p>\n<p>Durante una recente intervista a Busted Open Radio, JBL ha chiarito di non avere informazioni privilegiate, ma di essere convinto che la AAA possa presto siglare un nuovo accordo televisivo.</p>\n<blockquote>“Non ho informazioni interne a riguardo, non sto rivelando nulla proveniente da meeting o altro, ma penso che presto otterranno un ottimo accordo televisivo. Hanno già un buon accordo con Fox Deportes che copre dal Messico al Sud America e credo che ne chiuderanno un altro.”</blockquote>\n<p>Si tratterebbe di un passo importante per la AAA, considerando che la compagnia sta già guadagnando maggiore visibilità internazionale grazie a YouTube e all&#x27;attuale presenza su Fox Deportes.</p>\n<p>Le parole di JBL arrivano in un momento in cui la AAA è al centro delle discussioni dei fan, dopo eventi di grande risonanza come Noche de Los Grandes e il Mask vs. Mask match tra El Grande Americano e l&#x27;Original El Grande Americano. Non è stato ancora annunciato nulla di ufficiale e JBL ha precisato di aver espresso soltanto la sua opinione. Tuttavia, appare convinto che il recente slancio della AAA possa portare a un nuovo contratto televisivo.</p>\n<p>Derek Holloway è un autore di Ringside News specializzato in notizie, rumor e risultati di wrestling. Si occupa di fornire una copertura affidabile su WWE, AEW e sulle principali federazioni di settore.</p>",
+      "category_hint": "Business",
       "element_counts": {
         "embed": 0,
         "heading": 0,
         "image": 0,
-        "quote": 0,
+        "quote": 1,
         "table": 0,
-        "text": 5
+        "text": 6
       },
-      "excerpt_it": "Un momento di tensione dopo WWE Clash in Italy: un fan ha afferrato Roman Reigns durante il rientro nel backstage.",
+      "excerpt_it": "JBL ritiene che il momento positivo della AAA possa tradursi in qualcosa di più importante nel prossimo futuro.",
       "meta": {
-        "description": "Roman Reigns successfully retained his World Heavyweight Championship at WWE Clash in Italy, but a tense moment happened after the match when an",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/footage-shows-fan-grabbing-and-harassing-roman-reigns-after-wwe-clash-in-italy-25.jpg",
-        "source_title": "Footage Shows Fan Grabbing and Harassing Roman Reigns After WWE Clash In Italy"
+        "description": "JBL thinks AAA’s momentum may be about to turn into something bigger. AAA has been airing shows on YouTube for fans outside its regular markets in Mexico,",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-believes-aaa-could-land-another-tv-deal-soon-01.jpg",
+        "source_title": "JBL Believes AAA Could Land Another TV Deal Soon"
       },
       "source": "ringsidenews",
-      "source_title": "Footage Shows Fan Grabbing and Harassing Roman Reigns After WWE Clash In Italy",
-      "source_url": "https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy/",
-      "title_it": "Un fan molesta Roman Reigns dopo WWE Clash in Italy"
+      "source_title": "JBL Believes AAA Could Land Another TV Deal Soon",
+      "source_url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/",
+      "title_it": "Secondo JBL, la AAA potrebbe presto chiudere un nuovo accordo televisivo"
     }
   ],
-  "generated_at": "2026-06-02T08:11:48.708544+00:00",
+  "generated_at": "2026-06-02T09:48:10.600645+00:00",
   "handoff": {
-    "approved": 1,
+    "approved": 3,
     "blockers": 0,
     "editorial_changes": 0,
     "needs_revision": 0,
-    "warnings": 0
+    "warnings": 1
   },
   "input": {
-    "articles": 1,
+    "articles": 3,
     "bob_version": "v93_12_prudent_embed_cleanup"
   },
   "mode": "structured_content_quality_editor",
@@ -64,47 +110,146 @@
     {
       "approved_article": {
         "bob_translation_model": "gemini-3.1-flash-lite",
-        "body_html": "<p>Roman Reigns ha difeso con successo il suo World Heavyweight Championship a WWE Clash in Italy, ma nel post-match si è vissuto un momento di tensione quando un fan troppo zelante si è spinto un po&#x27; troppo oltre.</p>\n<p>Come mostrato da alcuni filmati che stanno circolando online, Reigns stava tornando verso il backstage insieme ai membri della Bloodline dopo la sua vittoria in un Tribal Combat contro Jacob Fatu. Mentre attraversava l&#x27;area riservata al pubblico, un fan ha allungato la mano afferrando Reigns per un braccio.</p>\n<p>La situazione è diventata rapidamente spiacevole quando il fan ha continuato a trattenere Reigns invece di lasciarlo andare. Il campione è apparso visibilmente infastidito dall&#x27;interazione mentre cercava di proseguire verso il backstage. Prima che la situazione potesse degenerare, Jey Uso è intervenuto immediatamente per proteggere il suo familiare e rivolgersi al fan: &quot;Andiamo, amico!&quot;. L&#x27;intervento di Jey è stato sufficiente a riportare la situazione sotto controllo, permettendo a Reigns e alla Bloodline di completare l&#x27;uscita senza ulteriori intoppi.</p>\n<p>L&#x27;incidente si è verificato poco dopo che Reigns aveva chiuso WWE Clash in Italy sconfiggendo Jacob Fatu in un brutale Tribal Combat match. L&#x27;incontro è stato caratterizzato dall&#x27;uso di armi, tavoli, impatti contro le barricate e diverse Spear, prima che Reigns riuscisse finalmente a mantenere il titolo.</p>\n<p>Sebbene le interazioni con i fan facciano spesso parte dell&#x27;esperienza durante gli eventi di wrestling, momenti come questo ricordano che esiste un confine tra il mostrare sostegno e l&#x27;invadere lo spazio personale di un performer. Fortunatamente, la situazione è stata gestita rapidamente e Reigns è riuscito a lasciare l&#x27;arena in sicurezza dopo un&#x27;altra difesa titolata riuscita.</p>",
+        "body_html": "https://www.youtube.com/watch?v=WL9DRH9mfIg\n\n<p>Il passaggio di Finn Bálor a SmackDown potrebbe non essere stato parte di una manovra legata al Draft; sembra infatti che la WWE volesse semplicemente allontanarlo da Dominik Mysterio e JD McDonagh.</p>\n<p>Intervenuto durante il Wrestling Observer Radio, Dave Meltzer ha spiegato che la WWE ha spostato Bálor a Friday Night SmackDown perché la compagnia voleva distanziarlo da Dominik Mysterio e JD McDonagh dopo la loro recente faida a RAW.</p>\n<blockquote>“Non ho mai sentito parlare di alcun Draft. L&#x27;idea è che vogliano semplicemente tenerlo lontano da Dominik Mysterio e JD.”</blockquote>\n<p>Bálor ha lottato per l&#x27;ultima volta come membro del roster di RAW nella puntata del 18 maggio, dove ha sconfitto JD McDonagh. Successivamente, la WWE si è trovata di fronte a un problema logistico: se Bálor fosse rimasto a RAW, sarebbe stato difficile evitare interazioni con gli ex membri del Judgment Day.</p>\n<blockquote>“Ha battuto JD e, se rimane a Raw, come si può evitare che lavori con quei ragazzi? Quindi hanno pensato che fosse finita lì — hanno chiuso con quel capitolo per Finn Bálor — e volevano dargli un nuovo inizio.”</blockquote>\n<p>La spiegazione ha paragonato il trasferimento di Bálor a quanto fatto in precedenza dalla WWE per separare Rey Mysterio e Dominik Mysterio una volta conclusa la loro faida. Il confronto prosegue citando come anche Rey e Dominik siano stati separati al termine della loro storyline.</p>\n<blockquote>“Succede spesso: portano avanti una faida, questa finisce e, per la natura stessa della rivalità, semplicemente non vogliono che interagiscano più. È successo lo stesso quando Rey Mysterio e Dominik hanno chiuso il loro programma. Hanno spostato Rey e in teoria non avrebbero dovuto interagire, anche se ora lo stanno facendo, o comunque sono in procinto di farlo.”</blockquote>\n<p>Lo scambio di Bálor verso SmackDown è stato annunciato durante la puntata di Monday Night RAW del primo giugno. JD McDonagh ha reagito affermando che Bálor non mancherà a nessuno, sostenendo che sia scappato perché il Judgment Day avrebbe messo fine alla sua carriera se fosse rimasto a RAW.</p>\n<p>Il trasferimento offre inoltre a Bálor un nuovo percorso nel torneo King of the Ring, dove è previsto un Fatal 4-Way al primo turno contro Royce Keys, LA Knight e Jey Uso. Per il momento, il passaggio di Bálor a SmackDown sembra meno legato a un rimescolamento generale dei roster e più alla volontà di lasciargli spazio rispetto al Judgment Day, dopo che la WWE ha archiviato quel capitolo a RAW. Resta da vedere se questo porterà alla vittoria del torneo.</p>\n<p>Derek Holloway è un autore di Ringside News specializzato in notizie, rumor e risultati di wrestling professionistico. Si occupa di fornire una copertura affidabile su WWE, AEW e le principali federazioni di wrestling.</p>",
         "category_hint": "WWE",
         "element_counts": {
-          "embed": 0,
+          "embed": 1,
           "heading": 0,
           "image": 0,
-          "quote": 0,
+          "quote": 3,
           "table": 0,
-          "text": 5
+          "text": 7
         },
-        "excerpt_it": "Un momento di tensione dopo WWE Clash in Italy: un fan ha afferrato Roman Reigns durante il rientro nel backstage.",
+        "excerpt_it": "Il trasferimento di Finn Bálor a SmackDown non sarebbe legato a un Draft, ma alla volontà della WWE di allontanarlo da Dominik Mysterio e JD McDonagh.",
         "meta": {
-          "description": "Roman Reigns successfully retained his World Heavyweight Championship at WWE Clash in Italy, but a tense moment happened after the match when an",
-          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/footage-shows-fan-grabbing-and-harassing-roman-reigns-after-wwe-clash-in-italy-25.jpg",
-          "source_title": "Footage Shows Fan Grabbing and Harassing Roman Reigns After WWE Clash In Italy"
+          "description": "Finn Bálor’s move to SmackDown may not have been part of a major draft situation after all, as WWE just wanted him away from Dominik Mysterio and JD",
+          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/why-finn-balor-was-moved-to-wwe-smackdown-14.jpg",
+          "source_title": "Why Finn Bálor Was Moved to WWE SmackDown"
         },
         "source": "ringsidenews",
-        "source_title": "Footage Shows Fan Grabbing and Harassing Roman Reigns After WWE Clash In Italy",
-        "source_url": "https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy/",
-        "title_it": "Un fan molesta Roman Reigns dopo WWE Clash in Italy"
+        "source_title": "Why Finn Bálor Was Moved to WWE SmackDown",
+        "source_url": "https://www.ringsidenews.com/why-finn-balor-moved-wwe-smackdown/",
+        "title_it": "Il motivo dietro il passaggio di Finn Bálor a SmackDown"
       },
       "category_hint": "WWE",
       "decision": "approved",
       "diagnostics": {
+        "bob_clean_element_count": 11,
+        "bob_diagnostic_stage": "ready_for_alfred",
+        "bob_removed_before_gemini": 16,
+        "bob_status": "ready_for_alfred",
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "editorial_changes": 0,
+        "plain_chars": 2737,
+        "quote_count": 3,
+        "table_count": 0,
+        "title_chars": 55
+      },
+      "editorial_changes": [],
+      "issues": [],
+      "quality_score": 95,
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/why-finn-balor-moved-wwe-smackdown/",
+      "title_it": "Il motivo dietro il passaggio di Finn Bálor a SmackDown",
+      "warnings": [
+        {
+          "code": "possible_missing_table",
+          "evidence": "Il motivo dietro il passaggio di Finn Bálor a SmackDown",
+          "message": "Articolo con dati potenzialmente tabellari ma nessuna tabella estratta.",
+          "severity": "warning"
+        }
+      ]
+    },
+    {
+      "approved_article": {
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "body_html": "https://youtu.be/FPyacCODvSw?si=hslw99CGgj3ebvZH\n\n<p>Cody Rhodes ha mantenuto l&#x27;Undisputed WWE Championship in modo controverso a Clash in Italy. Il piede di GUNTHER era sotto la corda durante lo schienamento di Rhodes, ma l&#x27;arbitro, con la visuale ostruita, ha convalidato la vittoria del campione.</p>\n<blockquote>Durante un&#x27;intervista su ESPN con Joe Tessitore, Rhodes ha parlato del punt kick ricevuto da Randy Orton: &quot;Tutto quello che c&#x27;è da sapere su di me è successo dopo. Mi sono rialzato e ho cercato di incrociare lo sguardo di tutti per far capire due cose: sono ancora il campione e sono ancora qui. E se quello è il colpo migliore di Randy, e Randy è nel suo momento migliore di sempre, allora cosa dice questo di me? Non lo dico con arroganza. Sono stato piuttosto fortunato, ma non so quanta fortuna mi sia rimasta ancora&quot;.</blockquote>\n<blockquote>Dopo WrestleMania 42, il campione ha trascorso del tempo con la sua famiglia. Ha ripensato a quando suo padre gli diceva che, dopo gli incontri, sarebbe tornato a casa malconcio dovendo spiegare ai figli di stare bene. La storia si è ripetuta quando la figlia di quattro anni gli ha chiesto cosa gli fosse successo e se stesse bene. Un emozionato Rhodes ha dichiarato: &quot;Niente ti prepara a una cosa del genere e spero che non diventi un&#x27;abitudine&quot;.</blockquote>\n<blockquote>Tessitore gli ha chiesto cosa significhi essere il volto della compagnia (QB1). Rhodes ha risposto che essere il numero uno significa essere costanti, settimana dopo settimana: &quot;Ci sono tutte queste battute sul fatto che segua il modello di John Cena, ma non mi danno affatto fastidio, perché è un modello incredibile&quot;. Ha aggiunto di non essersi sentito un vincitore dopo WrestleMania e di aver bisogno di sfidanti perché è &quot;dipendente dal vertice. Non ho paura di dirlo a nessuno&quot;.</blockquote>",
+        "category_hint": "Business",
+        "element_counts": {
+          "embed": 1,
+          "heading": 0,
+          "image": 0,
+          "quote": 3,
+          "table": 0,
+          "text": 1
+        },
+        "excerpt_it": "Il campione indiscusso WWE Cody Rhodes riflette sul suo regno, sugli scontri con Randy Orton e sul difficile equilibrio tra vita professionale e privata.",
+        "meta": {
+          "description": "WWE Undisputed Champion Cody Rhodes sat down with Joe Tessitore in an ESPN interview prior to his match with GUNTHER at Clash in Italy.",
+          "featured_image": "https://www.wrestlinginc.com/img/gallery/wwe-champ-cody-rhodes-says-he-feels-like-his-luck-is-running-out/l-intro-1780372450.jpg",
+          "source_title": "WWE Champ Cody Rhodes Says He Feels Like His Luck Is Running Out - Wrestling Inc."
+        },
+        "source": "wrestlinginc",
+        "source_title": "WWE Champ Cody Rhodes Says He Feels Like His Luck Is Running Out",
+        "source_url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ/",
+        "title_it": "Cody Rhodes: \"La mia fortuna sta finendo\""
+      },
+      "category_hint": "Business",
+      "decision": "approved",
+      "diagnostics": {
         "bob_clean_element_count": 5,
+        "bob_diagnostic_stage": "ready_for_alfred",
+        "bob_removed_before_gemini": 2,
+        "bob_status": "ready_for_alfred",
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "editorial_changes": 0,
+        "plain_chars": 1751,
+        "quote_count": 3,
+        "table_count": 0,
+        "title_chars": 41
+      },
+      "editorial_changes": [],
+      "issues": [],
+      "quality_score": 100,
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ/",
+      "title_it": "Cody Rhodes: \"La mia fortuna sta finendo\"",
+      "warnings": []
+    },
+    {
+      "approved_article": {
+        "bob_translation_model": "gemini-3.1-flash-lite",
+        "body_html": "<p>JBL ritiene che il momento positivo della AAA possa tradursi in qualcosa di più importante.</p>\n<p>La AAA sta trasmettendo i propri show su YouTube per i fan al di fuori dei suoi mercati abituali in Messico, America Centrale e Sud America. Questo facile accesso ha aiutato molti appassionati in tutto il mondo a seguire la promotion, specialmente grazie alla presenza di talenti WWE e a crossover di rilievo che hanno attirato maggiore attenzione sul brand.</p>\n<p>Durante una recente intervista a Busted Open Radio, JBL ha chiarito di non avere informazioni privilegiate, ma di essere convinto che la AAA possa presto siglare un nuovo accordo televisivo.</p>\n<blockquote>“Non ho informazioni interne a riguardo, non sto rivelando nulla proveniente da meeting o altro, ma penso che presto otterranno un ottimo accordo televisivo. Hanno già un buon accordo con Fox Deportes che copre dal Messico al Sud America e credo che ne chiuderanno un altro.”</blockquote>\n<p>Si tratterebbe di un passo importante per la AAA, considerando che la compagnia sta già guadagnando maggiore visibilità internazionale grazie a YouTube e all&#x27;attuale presenza su Fox Deportes.</p>\n<p>Le parole di JBL arrivano in un momento in cui la AAA è al centro delle discussioni dei fan, dopo eventi di grande risonanza come Noche de Los Grandes e il Mask vs. Mask match tra El Grande Americano e l&#x27;Original El Grande Americano. Non è stato ancora annunciato nulla di ufficiale e JBL ha precisato di aver espresso soltanto la sua opinione. Tuttavia, appare convinto che il recente slancio della AAA possa portare a un nuovo contratto televisivo.</p>\n<p>Derek Holloway è un autore di Ringside News specializzato in notizie, rumor e risultati di wrestling. Si occupa di fornire una copertura affidabile su WWE, AEW e sulle principali federazioni di settore.</p>",
+        "category_hint": "Business",
+        "element_counts": {
+          "embed": 0,
+          "heading": 0,
+          "image": 0,
+          "quote": 1,
+          "table": 0,
+          "text": 6
+        },
+        "excerpt_it": "JBL ritiene che il momento positivo della AAA possa tradursi in qualcosa di più importante nel prossimo futuro.",
+        "meta": {
+          "description": "JBL thinks AAA’s momentum may be about to turn into something bigger. AAA has been airing shows on YouTube for fans outside its regular markets in Mexico,",
+          "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-believes-aaa-could-land-another-tv-deal-soon-01.jpg",
+          "source_title": "JBL Believes AAA Could Land Another TV Deal Soon"
+        },
+        "source": "ringsidenews",
+        "source_title": "JBL Believes AAA Could Land Another TV Deal Soon",
+        "source_url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/",
+        "title_it": "Secondo JBL, la AAA potrebbe presto chiudere un nuovo accordo televisivo"
+      },
+      "category_hint": "Business",
+      "decision": "approved",
+      "diagnostics": {
+        "bob_clean_element_count": 7,
         "bob_diagnostic_stage": "ready_for_alfred",
         "bob_removed_before_gemini": 14,
         "bob_status": "ready_for_alfred",
         "bob_translation_model": "gemini-3.1-flash-lite",
         "editorial_changes": 0,
-        "plain_chars": 1767,
-        "quote_count": 0,
+        "plain_chars": 1763,
+        "quote_count": 1,
         "table_count": 0,
-        "title_chars": 51
+        "title_chars": 72
       },
       "editorial_changes": [],
       "issues": [],
       "quality_score": 100,
       "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy/",
-      "title_it": "Un fan molesta Roman Reigns dopo WWE Clash in Italy",
+      "source_url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/",
+      "title_it": "Secondo JBL, la AAA potrebbe presto chiudere un nuovo accordo televisivo",
       "warnings": []
     }
   ],

@@ -62,6 +62,15 @@
     "wp_link": "https://news.openwrestlingtv.com/wwe/iyo-sky-avanza-nel-torneo-queen-of-the-ring-dopo-un-caotico-fatal-four-way/",
     "wp_post_id": 5825
   },
+  "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon": {
+    "published_at": "2026-06-02T09:48:19.891886+00:00",
+    "source": "ringsidenews",
+    "source_url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/",
+    "status": "publish",
+    "title_it": "Secondo JBL, la AAA potrebbe presto chiudere un nuovo accordo televisivo",
+    "wp_link": "https://news.openwrestlingtv.com/world/secondo-jbl-la-aaa-potrebbe-presto-chiudere-un-nuovo-accordo-televisivo/",
+    "wp_post_id": 5855
+  },
   "https://www.ringsidenews.com/jbl-calls-chad-gable-best-wrestler-world-aaa-mask-vs-mask-war": {
     "published_at": "2026-06-02T00:20:21.486984+00:00",
     "source": "ringsidenews",
@@ -152,6 +161,15 @@
     "wp_link": "https://news.openwrestlingtv.com/tna/tna-impact-i-dati-sugli-ascolti-del-28-maggio-2026/",
     "wp_post_id": 5792
   },
+  "https://www.ringsidenews.com/why-finn-balor-moved-wwe-smackdown": {
+    "published_at": "2026-06-02T09:48:14.842105+00:00",
+    "source": "ringsidenews",
+    "source_url": "https://www.ringsidenews.com/why-finn-balor-moved-wwe-smackdown/",
+    "status": "publish",
+    "title_it": "Il motivo dietro il passaggio di Finn Bálor a SmackDown",
+    "wp_link": "https://news.openwrestlingtv.com/wwe/il-motivo-dietro-il-passaggio-di-finn-balor-a-smackdown/",
+    "wp_post_id": 5851
+  },
   "https://www.ringsidenews.com/wwe-confirms-king-queen-ring-tournament-matches-june-8-raw": {
     "published_at": "2026-06-01T23:24:50.342956+00:00",
     "source": "ringsidenews",
@@ -223,5 +241,14 @@
     "title_it": "Report ascolti TNA Impact: i dati del 28 maggio 2026",
     "wp_link": "https://news.openwrestlingtv.com/tna/report-ascolti-tna-impact-i-dati-del-28-maggio-2026/",
     "wp_post_id": 5844
+  },
+  "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ": {
+    "published_at": "2026-06-02T09:48:18.517998+00:00",
+    "source": "wrestlinginc",
+    "source_url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ/",
+    "status": "publish",
+    "title_it": "Cody Rhodes: \"La mia fortuna sta finendo\"",
+    "wp_link": "https://news.openwrestlingtv.com/world/cody-rhodes-la-mia-fortuna-sta-finendo/",
+    "wp_post_id": 5853
   }
 }

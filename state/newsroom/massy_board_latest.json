@@ -43,27 +43,15 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-02T08:11:39.225538+00:00",
+  "generated_at": "2026-06-02T09:47:54.236314+00:00",
   "handoff": {
-    "already_published_hard_skipped": 9,
+    "already_published_hard_skipped": 6,
     "already_worked": 2,
-    "hard_skipped": 12,
-    "to_menzo": 21,
+    "hard_skipped": 9,
+    "to_menzo": 24,
     "to_simone": 0
   },
   "hard_skipped": [
-    {
-      "decision": "hard_skip",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ",
-      "published": "Tue, 02 Jun 2026 03:57:12 +0000",
-      "published_guard": "publisher_history",
-      "reason": "url_already_published",
-      "source": "wrestlinginc",
-      "summary": "WWE Undisputed Champion Cody Rhodes sat down with Joe Tessitore in an ESPN interview prior to his match with GUNTHER at Clash in Italy.",
-      "title": "WWE Champ Cody Rhodes Says He Feels Like His Luck Is Running Out",
-      "url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ/"
-    },
     {
       "decision": "hard_skip",
       "feed_url": "https://www.wrestlinginc.com/feed/",
@@ -101,18 +89,6 @@
     {
       "decision": "hard_skip",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185431/wwe-clash-in-italy-2026-sol-ruca-becky-lynch-victory-defining-moment",
-      "published": "Tue, 02 Jun 2026 02:57:24 +0000",
-      "published_guard": "publisher_history",
-      "reason": "url_already_published",
-      "source": "wrestlinginc",
-      "summary": "Sol Ruca defeated Becky Lynch at WWE Clash in Italy to become the Women's IC Champion.",
-      "title": "Sol Ruca Says WWE Clash In Italy Victory Over Becky Lynch Was A 'Defining Moment'",
-      "url": "https://www.wrestlinginc.com/2185431/wwe-clash-in-italy-2026-sol-ruca-becky-lynch-victory-defining-moment/"
-    },
-    {
-      "decision": "hard_skip",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2174279/wwe-smackdown-may-15-2026-hated-loved-opinion-review",
       "published": "Sat, 16 May 2026 05:15:13 +0000",
       "reason": "listicle_things_we_loved_hated",
@@ -136,14 +112,14 @@
     {
       "decision": "hard_skip",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon",
-      "published": "Tue, 02 Jun 2026 01:45:05 +0000",
+      "normalized_url": "https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy",
+      "published": "Tue, 02 Jun 2026 08:00:48 +0000",
       "published_guard": "publisher_history",
       "reason": "url_already_published",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"JBL Believes AAA Could Land Another TV Deal Soon\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-believes-aaa-could-land-another-tv-deal-soon-01.jpg?x79046\" width=\"800\" /></p>JBL thinks AAA’s momentum may be about to turn into something bigger. AAA has been airing shows on YouTube for fans outside its regular markets in Mexico, Central America, and South America. That easy access has helped more fans around the world follow the promotion, especially with WWE talent and bigger crossover stories bringing more ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/\" title=\"JBL Believes AAA Could Land Another TV Deal Soon\">Read more</a>",
-      "title": "JBL Believes AAA Could Land Another TV Deal Soon",
-      "url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/"
+      "summary": "<p><img alt=\"Footage Shows Fan Grabbing And Harassing Roman Reigns After WWE Clash In Italy\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/footage-shows-fan-grabbing-and-harassing-roman-reigns-after-wwe-clash-in-italy-25.jpg?x79046\" width=\"800\" /></p>Roman Reigns successfully retained his World Heavyweight Championship at WWE Clash in Italy, but a tense moment happened after the match when an overzealous fan got a little too close. As revealed in footage making the rounds online, Reigns was making his way to the back alongside members of The Bloodline following his Tribal Combat ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy/\" title=\"Footage Shows Fan Grabbing and Harassing Roman Reigns After WWE Clash In Italy\">Read more</a>",
+      "title": "Footage Shows Fan Grabbing and Harassing Roman Reigns After WWE Clash In Italy",
+      "url": "https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy/"
     },
     {
       "decision": "hard_skip",
@@ -180,24 +156,24 @@
       "summary": "<p><img alt=\"Seth Rollins Gives Turin Crowd a Special Moment After WWE RAW Goes Off the Air\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/seth-rollins-gives-turin-crowd-a-special-moment-after-wwe-raw-goes-off-the-air-03.jpg?x79046\" width=\"800\" /></p>Seth Rollins ended WWE RAW with a big win over Bron Breakker, and the celebration didn’t stop when the cameras went off. After the June 1 episode of RAW ended, Rollins was seen standing tall in the ring while Breakker continued selling the effects of his main event loss. Rollins then climbed over the barricade ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/seth-rollins-gives-turin-crowd-special-moment-wwe-raw-goes-off-air/\" title=\"Seth Rollins Gives Turin Crowd a Special Moment After WWE RAW Goes Off the Air\">Read more</a>",
       "title": "Seth Rollins Gives Turin Crowd a Special Moment After WWE RAW Goes Off the Air",
       "url": "https://www.ringsidenews.com/seth-rollins-gives-turin-crowd-special-moment-wwe-raw-goes-off-air/"
-    },
-    {
-      "decision": "hard_skip",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery",
-      "published": "Mon, 01 Jun 2026 22:07:20 +0000",
-      "published_guard": "publisher_history",
-      "reason": "url_already_published",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg?x79046\" width=\"800\" /></p>Chad Gable is pulling the curtain back on his comeback. After suffering a legitimate shoulder injury in June 2025 that kept him out for the rest of the year, Gable announced that he is releasing a nine-part YouTube documentary series focused on his recovery. Gable had been working double duty before the injury, wrestling as ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery/\" title=\"Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery\">Read more</a>",
-      "title": "Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery",
-      "url": "https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery/"
     }
   ],
-  "known_published_urls": 30,
+  "known_published_urls": 25,
   "known_state_urls": 10,
   "mode": "sentinel_control_board",
   "news_candidates_for_menzo": [
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ",
+      "published": "Tue, 02 Jun 2026 03:57:12 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "WWE Undisputed Champion Cody Rhodes sat down with Joe Tessitore in an ESPN interview prior to his match with GUNTHER at Clash in Italy.",
+      "title": "WWE Champ Cody Rhodes Says He Feels Like His Luck Is Running Out",
+      "url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ/"
+    },
     {
       "assigned_to": "Menzo",
       "decision": "news_candidate",
@@ -209,6 +185,18 @@
       "summary": "This is Wrestling Inc.'s live coverage of AAA Nocha de Los Grandes, headlined by El Grande Americano versus the Original Grande Americano in Mask vs. Mask.",
       "title": "AAA Noche De Los Grandes Results - Mask Vs. Mask, Three Titles On The Line",
       "url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2185431/wwe-clash-in-italy-2026-sol-ruca-becky-lynch-victory-defining-moment",
+      "published": "Tue, 02 Jun 2026 02:57:24 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "Sol Ruca defeated Becky Lynch at WWE Clash in Italy to become the Women's IC Champion.",
+      "title": "Sol Ruca Says WWE Clash In Italy Victory Over Becky Lynch Was A 'Defining Moment'",
+      "url": "https://www.wrestlinginc.com/2185431/wwe-clash-in-italy-2026-sol-ruca-becky-lynch-victory-defining-moment/"
     },
     {
       "assigned_to": "Menzo",
@@ -334,13 +322,25 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy",
-      "published": "Tue, 02 Jun 2026 08:00:48 +0000",
+      "normalized_url": "https://www.ringsidenews.com/spoiler-winner-wwe-king-ring-tournament",
+      "published": "Tue, 02 Jun 2026 08:43:00 +0000",
       "reason": "requires_menzo_classification",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Footage Shows Fan Grabbing And Harassing Roman Reigns After WWE Clash In Italy\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/footage-shows-fan-grabbing-and-harassing-roman-reigns-after-wwe-clash-in-italy-25.jpg?x79046\" width=\"800\" /></p>Roman Reigns successfully retained his World Heavyweight Championship at WWE Clash in Italy, but a tense moment happened after the match when an overzealous fan got a little too close. As revealed in footage making the rounds online, Reigns was making his way to the back alongside members of The Bloodline following his Tribal Combat ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy/\" title=\"Footage Shows Fan Grabbing and Harassing Roman Reigns After WWE Clash In Italy\">Read more</a>",
-      "title": "Footage Shows Fan Grabbing and Harassing Roman Reigns After WWE Clash In Italy",
-      "url": "https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy/"
+      "summary": "<p><img alt=\"Spoiler on Winner of WWE King of the Ring Tournament\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/spoiler-on-winner-of-wwe-king-of-the-ring-tournament-05.jpg?x79046\" width=\"800\" /></p>Seth Rollins may already be lined up for a massive program this Summer, as he&#8217;s expected to win the King of the Ring tournament. While speaking during a Self Made Session, Self Made Pro revealed that Rollins is currently expected to win the tournament. It was further noted that WWE’s present plan is for Rollins ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/spoiler-winner-wwe-king-ring-tournament/\" title=\"Spoiler on Winner of WWE King of the Ring Tournament\">Read more</a>",
+      "title": "Spoiler on Winner of WWE King of the Ring Tournament",
+      "url": "https://www.ringsidenews.com/spoiler-winner-wwe-king-ring-tournament/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/why-finn-balor-moved-wwe-smackdown",
+      "published": "Tue, 02 Jun 2026 08:29:20 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Why Finn Bálor Was Moved to WWE SmackDown\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/why-finn-balor-was-moved-to-wwe-smackdown-14.jpg?x79046\" width=\"800\" /></p>Finn Bálor’s move to SmackDown may not have been part of a major draft situation after all, as WWE just wanted him away from Dominik Mysterio and JD McDonagh. While speaking on Wrestling Observer Radio, Dave Meltzer explained that WWE moved Bálor to Friday Night SmackDown because the company wanted to get him away from ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/why-finn-balor-moved-wwe-smackdown/\" title=\"Why Finn Bálor Was Moved to WWE SmackDown\">Read more</a>",
+      "title": "Why Finn Bálor Was Moved to WWE SmackDown",
+      "url": "https://www.ringsidenews.com/why-finn-balor-moved-wwe-smackdown/"
     },
     {
       "assigned_to": "Menzo",
@@ -418,6 +418,18 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon",
+      "published": "Tue, 02 Jun 2026 01:45:05 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"JBL Believes AAA Could Land Another TV Deal Soon\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-believes-aaa-could-land-another-tv-deal-soon-01.jpg?x79046\" width=\"800\" /></p>JBL thinks AAA’s momentum may be about to turn into something bigger. AAA has been airing shows on YouTube for fans outside its regular markets in Mexico, Central America, and South America. That easy access has helped more fans around the world follow the promotion, especially with WWE talent and bigger crossover stories bringing more ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/\" title=\"JBL Believes AAA Could Land Another TV Deal Soon\">Read more</a>",
+      "title": "JBL Believes AAA Could Land Another TV Deal Soon",
+      "url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/paul-walter-hauser-explains-why-hes-away-wrestling",
       "published": "Tue, 02 Jun 2026 00:28:23 +0000",
       "reason": "requires_menzo_classification",
@@ -437,18 +449,6 @@
       "summary": "<p><img alt=\"Steph De Lander Posts Cryptic Tweet About Women In Wrestling Being Told To Be More Feminine\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/steph-de-lander-posts-cryptic-tweet-about-women-in-wrestling-being-told-to-be-more-feminine-58.jpg?x79046\" width=\"800\" /></p>Steph De Lander had something to say, and she didn’t need many words to make the point. On June 1, 2026, the former TNA talent took to Twitter and posted a cryptic message about women in wrestling still being told how they should present themselves. De Lander wrote: “Dang in 2026 we’re still telling women ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/steph-de-lander-posts-cryptic-tweet-about-women-wrestling-told-more-feminine/\" title=\"Steph De Lander Posts Cryptic Tweet About Women In Wrestling Being Told To Be More Feminine\">Read more</a>",
       "title": "Steph De Lander Posts Cryptic Tweet About Women In Wrestling Being Told To Be More Feminine",
       "url": "https://www.ringsidenews.com/steph-de-lander-posts-cryptic-tweet-about-women-wrestling-told-more-feminine/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal",
-      "published": "Mon, 01 Jun 2026 21:56:35 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/the-miz-begs-browns-trade-news-isnt-real-after-myles-garrett-deal-02.jpg?x79046\" width=\"800\" /></p>The Cleveland Browns found a new way to crush The Miz. The WWE star and longtime Browns fan reacted after the team traded Myles Garrett on Monday, and he sounded completely defeated. Garrett was one of the few bright spots in Cleveland after putting up 23 sacks during the 2024-25 season, but the Browns still ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal/\" title=\"The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal\">Read more</a>",
-      "title": "The Miz Begs Browns Trade News Isn’t Real After Myles Garrett Deal",
-      "url": "https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal/"
     }
   ],
   "report_candidates": [],
