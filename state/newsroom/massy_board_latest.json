@@ -43,15 +43,27 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-02T05:10:12.274672+00:00",
+  "generated_at": "2026-06-02T08:11:39.225538+00:00",
   "handoff": {
-    "already_published_hard_skipped": 7,
+    "already_published_hard_skipped": 9,
     "already_worked": 2,
-    "hard_skipped": 10,
-    "to_menzo": 23,
+    "hard_skipped": 12,
+    "to_menzo": 21,
     "to_simone": 0
   },
   "hard_skipped": [
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ",
+      "published": "Tue, 02 Jun 2026 03:57:12 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "wrestlinginc",
+      "summary": "WWE Undisputed Champion Cody Rhodes sat down with Joe Tessitore in an ESPN interview prior to his match with GUNTHER at Clash in Italy.",
+      "title": "WWE Champ Cody Rhodes Says He Feels Like His Luck Is Running Out",
+      "url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ/"
+    },
     {
       "decision": "hard_skip",
       "feed_url": "https://www.wrestlinginc.com/feed/",
@@ -89,6 +101,18 @@
     {
       "decision": "hard_skip",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2185431/wwe-clash-in-italy-2026-sol-ruca-becky-lynch-victory-defining-moment",
+      "published": "Tue, 02 Jun 2026 02:57:24 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "wrestlinginc",
+      "summary": "Sol Ruca defeated Becky Lynch at WWE Clash in Italy to become the Women's IC Champion.",
+      "title": "Sol Ruca Says WWE Clash In Italy Victory Over Becky Lynch Was A 'Defining Moment'",
+      "url": "https://www.wrestlinginc.com/2185431/wwe-clash-in-italy-2026-sol-ruca-becky-lynch-victory-defining-moment/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2174279/wwe-smackdown-may-15-2026-hated-loved-opinion-review",
       "published": "Sat, 16 May 2026 05:15:13 +0000",
       "reason": "listicle_things_we_loved_hated",
@@ -108,6 +132,18 @@
       "summary": "Gunther defeated Royce Keys in the main event of \"WWE SmackDown\" to secure his shot at Cody Rhodes' WWE Championship at Clash in Italy.",
       "title": "GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy",
       "url": "https://www.wrestlinginc.com/2174268/wwe-smackdown-gunther-royce-keys-cody-rhodes-clash-in-italy/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon",
+      "published": "Tue, 02 Jun 2026 01:45:05 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"JBL Believes AAA Could Land Another TV Deal Soon\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-believes-aaa-could-land-another-tv-deal-soon-01.jpg?x79046\" width=\"800\" /></p>JBL thinks AAA’s momentum may be about to turn into something bigger. AAA has been airing shows on YouTube for fans outside its regular markets in Mexico, Central America, and South America. That easy access has helped more fans around the world follow the promotion, especially with WWE talent and bigger crossover stories bringing more ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/\" title=\"JBL Believes AAA Could Land Another TV Deal Soon\">Read more</a>",
+      "title": "JBL Believes AAA Could Land Another TV Deal Soon",
+      "url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/"
     },
     {
       "decision": "hard_skip",
@@ -156,36 +192,12 @@
       "summary": "<p><img alt=\"Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/chad-gable-announces-nine-part-documentary-on-shoulder-injury-recovery-49.jpg?x79046\" width=\"800\" /></p>Chad Gable is pulling the curtain back on his comeback. After suffering a legitimate shoulder injury in June 2025 that kept him out for the rest of the year, Gable announced that he is releasing a nine-part YouTube documentary series focused on his recovery. Gable had been working double duty before the injury, wrestling as ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery/\" title=\"Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery\">Read more</a>",
       "title": "Chad Gable Announces Nine-Part Documentary On Shoulder Injury Recovery",
       "url": "https://www.ringsidenews.com/chad-gable-announces-nine-part-documentary-shoulder-injury-recovery/"
-    },
-    {
-      "decision": "hard_skip",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit",
-      "published": "Mon, 01 Jun 2026 21:46:43 +0000",
-      "published_guard": "publisher_history",
-      "reason": "url_already_published",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"WWE Granted Extension to Respond to ESPN Streaming Lawsuit\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/wwe-granted-extension-to-respond-to-espn-streaming-lawsuit-11.jpg?x79046\" width=\"800\" /></p>WWE’s legal fight over its move to ESPN streaming just got another layer, and the plaintiffs are now pointing to a separate WWE lawsuit to argue discovery should move forward. According to Brandon Thurston, plaintiffs in the class action lawsuit over WWE Premium Live Events moving to ESPN streaming are pushing back against WWE’s attempt ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit/\" title=\"WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit\">Read more</a>",
-      "title": "WWE Plaintiffs Claim Company Can’t Be Trusted To Preserve Evidence In ESPN Lawsuit",
-      "url": "https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit/"
     }
   ],
-  "known_published_urls": 24,
+  "known_published_urls": 30,
   "known_state_urls": 10,
   "mode": "sentinel_control_board",
   "news_candidates_for_menzo": [
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ",
-      "published": "Tue, 02 Jun 2026 03:57:12 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "WWE Undisputed Champion Cody Rhodes sat down with Joe Tessitore in an ESPN interview prior to his match with GUNTHER at Clash in Italy.",
-      "title": "WWE Champ Cody Rhodes Says He Feels Like His Luck Is Running Out",
-      "url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ/"
-    },
     {
       "assigned_to": "Menzo",
       "decision": "news_candidate",
@@ -197,18 +209,6 @@
       "summary": "This is Wrestling Inc.'s live coverage of AAA Nocha de Los Grandes, headlined by El Grande Americano versus the Original Grande Americano in Mask vs. Mask.",
       "title": "AAA Noche De Los Grandes Results - Mask Vs. Mask, Three Titles On The Line",
       "url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185431/wwe-clash-in-italy-2026-sol-ruca-becky-lynch-victory-defining-moment",
-      "published": "Tue, 02 Jun 2026 02:57:24 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "Sol Ruca defeated Becky Lynch at WWE Clash in Italy to become the Women's IC Champion.",
-      "title": "Sol Ruca Says WWE Clash In Italy Victory Over Becky Lynch Was A 'Defining Moment'",
-      "url": "https://www.wrestlinginc.com/2185431/wwe-clash-in-italy-2026-sol-ruca-becky-lynch-victory-defining-moment/"
     },
     {
       "assigned_to": "Menzo",
@@ -334,6 +334,18 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy",
+      "published": "Tue, 02 Jun 2026 08:00:48 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Footage Shows Fan Grabbing And Harassing Roman Reigns After WWE Clash In Italy\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/footage-shows-fan-grabbing-and-harassing-roman-reigns-after-wwe-clash-in-italy-25.jpg?x79046\" width=\"800\" /></p>Roman Reigns successfully retained his World Heavyweight Championship at WWE Clash in Italy, but a tense moment happened after the match when an overzealous fan got a little too close. As revealed in footage making the rounds online, Reigns was making his way to the back alongside members of The Bloodline following his Tribal Combat ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy/\" title=\"Footage Shows Fan Grabbing and Harassing Roman Reigns After WWE Clash In Italy\">Read more</a>",
+      "title": "Footage Shows Fan Grabbing and Harassing Roman Reigns After WWE Clash In Italy",
+      "url": "https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/danny-davis-says-vince-mcmahon-kept-him-ending-dead-jail",
       "published": "Tue, 02 Jun 2026 05:05:12 +0000",
       "reason": "requires_menzo_classification",
@@ -401,18 +413,6 @@
       "summary": "<p><img alt=\"Giulia Thanks Italian Crowd After Huge Ovation On June 1 WWE RAW\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/giulia-thanks-italian-crowd-after-huge-ovation-on-june-1-wwe-raw-27.jpg?x79046\" width=\"800\" /></p>Giulia had a special moment on the June 1 WWE RAW in Turin, Italy. The former Women’s United States Champion competed in the Queen of the Ring tournament and received a huge ovation from the Italian crowd. The reaction clearly meant a lot to her, especially because of her Italian roots. Giulia’s father is Italian, ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/giulia-thanks-italian-crowd-huge-ovation-june-1-wwe-raw/\" title=\"Giulia Thanks Italian Crowd After Huge Ovation On June 1 WWE RAW\">Read more</a>",
       "title": "Giulia Thanks Italian Crowd After Huge Ovation On June 1 WWE RAW",
       "url": "https://www.ringsidenews.com/giulia-thanks-italian-crowd-huge-ovation-june-1-wwe-raw/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon",
-      "published": "Tue, 02 Jun 2026 01:45:05 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"JBL Believes AAA Could Land Another TV Deal Soon\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-believes-aaa-could-land-another-tv-deal-soon-01.jpg?x79046\" width=\"800\" /></p>JBL thinks AAA’s momentum may be about to turn into something bigger. AAA has been airing shows on YouTube for fans outside its regular markets in Mexico, Central America, and South America. That easy access has helped more fans around the world follow the promotion, especially with WWE talent and bigger crossover stories bringing more ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/\" title=\"JBL Believes AAA Could Land Another TV Deal Soon\">Read more</a>",
-      "title": "JBL Believes AAA Could Land Another TV Deal Soon",
-      "url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/"
     },
     {
       "assigned_to": "Menzo",

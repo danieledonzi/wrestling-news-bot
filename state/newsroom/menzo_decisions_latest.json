@@ -1,9 +1,7 @@
 {
   "agent": "Menzo",
   "allowed_urls_for_v92": [
-    "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ/",
-    "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/",
-    "https://www.wrestlinginc.com/2185431/wwe-clash-in-italy-2026-sol-ruca-becky-lynch-victory-defining-moment/"
+    "https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy/"
   ],
   "daily_policy": {
     "max_pending_this_run": 12,
@@ -12,14 +10,14 @@
     "target_max": 30,
     "target_min": 20
   },
-  "generated_at": "2026-06-02T05:10:17.977517+00:00",
+  "generated_at": "2026-06-02T08:11:46.531163+00:00",
   "handoff": {
-    "pending": 0,
-    "skipped": 20,
-    "to_bob_or_v92": 3
+    "pending": 1,
+    "skipped": 19,
+    "to_bob_or_v92": 1
   },
   "input": {
-    "candidate_count": 23,
+    "candidate_count": 21,
     "massy_version": "v93_9_massy_published_hard_skip"
   },
   "menzo_ai": {
@@ -30,181 +28,382 @@
     "error": "",
     "model": "gemini-3.1-flash-lite",
     "prompt_count": 12,
-    "raw_preview": "{\n  \"reviews\": [\n    {\n      \"id\": \"c1\",\n      \"decision\": \"selected\",\n      \"priority\": 10,\n      \"category_hint\": \"Business\",\n      \"article_type\": \"business_legal\",\n      \"event_key\": \"cody_rhodes_interview\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Intervista di rilievo su un top name in vista di Clash in Italy. Fondamentale per il pubblico italiano.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"author_bio\", \"cta\", \"source_social_bar\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Focus sulla dichiarazione di Cody, traduci accuratamente il sentimento di 'luck running out'.\"\n      }\n    },\n    {\n      \"id\": \"c2\",\n      \"decision\": \"selected\",\n      \"priority\": 8,\n      \"category_hint\": \"Business\",\n      \"article_type\": \"business_legal\",\n      \"event_key\": \"aaa_tv_deal\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Analisi di mercato rilevante per il settore Business.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"author_bio\", \"cta\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Rimuovi l'immagine del tag img nel corpo del testo.\"\n      }\n    },\n    {\n      \"id\": \"c3\",\n      \"decision\": \"selected\",\n      \"priority\": 9,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"clash_in_italy_results\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia cruciale: cambio titolo in un evento svoltosi in Italia.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Evidenzia la conquista del titolo di Sol Ruca.\"\n      }\n    },\n    {\n      \"id\": \"c4\",\n      \"decision\": \"skip\",\n      \"priority\": 2,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"ahmed_johnson_rant\",\n      \"duplicate_of\": \"c8\",\n      \"editorial_reason\": \"Dichiarazioni di veterani su fatti del passato, poco valore per il pubblico attuale.\",\n      \"bob_brief\": null\n    },\n    {\n      \"id\": \"c5\",\n      \"decision\": \"skip\",\n      \"priority\": 3,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"soft_news\",\n      \"event_key\": \"giulia_italy_ovation\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia di colore/reaction social. Troppo leggera.\",\n      \"bob_brief\": null\n    },\n    {\n      \"id\": \"c6\",\n      \"decision\": \"skip\",\n      \"priority\": 2,\n      \"category_hint\": \"World\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"ahmed_johnson_rock\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Curiosità storica senza impatto attuale.\",\n      \"bob_brief\": null\n    },\n    {\n      \"id\": \"c7\",\n      \"decision\": \"skip\",\n      \"priority\": 2,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"danny_davis_vince\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Opinione esterna su vicende controverse, non necessaria.\",\n      \"bob_brief\": null\n    },\n    {\n      \"id\": \"c8\",\n      \"decision\": \"skip\",\n      \"priority\": 2,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"ahmed_johnson_locker_room\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Polemica di backstage datata.\",\n      \"bob_brief\": null\n    },\n    {\n      \"id\": \"c9\",\n      \"decision\": \"skip\",\n      \"priority\": 4,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"soft_news\",\n      \"event_key\": \"aj_styles_ospreay_praise\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Pura opinione tra wrestler, non sposta le storyline.\",\n      \"bob_brief\": null\n    },\n    {\n      \"id\": \"c10\",\n      \"decision\": \"skip\",\n      \"priority\": 2,\n      \"category_hint\": \"TNA\"",
+    "raw_preview": "{\n  \"reviews\": [\n    {\n      \"id\": \"c1\",\n      \"decision\": \"selected\",\n      \"priority\": 10,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"hard_news\",\n      \"event_key\": \"roman_reigns_italy_incident\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia di cronaca rilevante per il pubblico italiano che ha ospitato l'evento.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"video\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"embed video/tweet se presente\", \"citazioni dirette\"],\n        \"source_specific_notes\": \"Massima attenzione alla delicatezza dell'episodio, riportare i fatti senza sensazionalismo.\"\n      }\n    },\n    {\n      \"id\": \"c2\",\n      \"decision\": \"skip\",\n      \"priority\": 0,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"duplicate\",\n      \"event_key\": \"ahmed_johnson_interview\",\n      \"duplicate_of\": \"c2\",\n      \"editorial_reason\": \"Curiosità di retroscena non prioritaria.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"youtube\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"\"\n      }\n    },\n    {\n      \"id\": \"c3\",\n      \"decision\": \"skip\",\n      \"priority\": 2,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"soft_news\",\n      \"event_key\": \"giulia_italy_ovation\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia soft/reaction, poco valore informativo rispetto ai fatti di cronaca.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"\"\n      }\n    },\n    {\n      \"id\": \"c4\",\n      \"decision\": \"skip\",\n      \"priority\": 0,\n      \"category_hint\": \"World\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"ahmed_johnson_interview\",\n      \"duplicate_of\": \"c2\",\n      \"editorial_reason\": \"Dichiarazioni di epoca passata, interesse marginale.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"\"\n      }\n    },\n    {\n      \"id\": \"c5\",\n      \"decision\": \"skip\",\n      \"priority\": 0,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"vince_mcmahon_comments\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Commenti soggettivi su figure controverse, non costituisce notizia di attualità.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"\"\n      }\n    },\n    {\n      \"id\": \"c6\",\n      \"decision\": \"skip\",\n      \"priority\": 0,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"ahmed_johnson_interview\",\n      \"duplicate_of\": \"c2\",\n      \"editorial_reason\": \"Retroscena di spogliatoio datato.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"\"\n      }\n    },\n    {\n      \"id\": \"c7\",\n      \"decision\": \"skip\",\n      \"priority\": 1,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"soft_news\",\n      \"event_key\": \"aj_styles_ospreay_reaction\",\n      \"duplicate_of\": \"\",\n      \"editor",
     "reviews": [
       {
-        "article_type": "business_legal",
+        "article_type": "hard_news",
         "bob_brief": {
-          "expected_embeds": [],
+          "expected_embeds": [
+            "video"
+          ],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
+            "embed video/tweet se presente",
             "citazioni dirette"
           ],
           "possible_noise": [
+            "source_social_bar",
             "author_bio",
             "cta",
-            "source_social_bar"
+            "share_links"
           ],
-          "source_specific_notes": "Focus sulla dichiarazione di Cody, traduci accuratamente il sentimento di 'luck running out'."
+          "source_specific_notes": "Massima attenzione alla delicatezza dell'episodio, riportare i fatti senza sensazionalismo."
         },
-        "category_hint": "Business",
+        "category_hint": "WWE",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Intervista di rilievo su un top name in vista di Clash in Italy. Fondamentale per il pubblico italiano.",
-        "event_key": "cody_rhodes_interview",
+        "editorial_reason": "Notizia di cronaca rilevante per il pubblico italiano che ha ospitato l'evento.",
+        "event_key": "roman_reigns_italy_incident",
         "id": "c1",
         "priority": 10
       },
       {
-        "article_type": "business_legal",
+        "article_type": "duplicate",
         "bob_brief": {
-          "expected_embeds": [],
+          "expected_embeds": [
+            "youtube"
+          ],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
             "citazioni dirette"
           ],
           "possible_noise": [
+            "source_social_bar",
             "author_bio",
-            "cta"
-          ],
-          "source_specific_notes": "Rimuovi l'immagine del tag img nel corpo del testo."
-        },
-        "category_hint": "Business",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Analisi di mercato rilevante per il settore Business.",
-        "event_key": "aaa_tv_deal",
-        "id": "c2",
-        "priority": 8
-      },
-      {
-        "article_type": "storyline_development",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
+            "cta",
             "share_links"
           ],
-          "source_specific_notes": "Evidenzia la conquista del titolo di Sol Ruca."
+          "source_specific_notes": ""
         },
         "category_hint": "WWE",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Notizia cruciale: cambio titolo in un evento svoltosi in Italia.",
-        "event_key": "clash_in_italy_results",
-        "id": "c3",
-        "priority": 9
-      },
-      {
-        "article_type": "low_value",
-        "bob_brief": null,
-        "category_hint": "WWE",
         "decision": "skip",
-        "duplicate_of": "c8",
-        "editorial_reason": "Dichiarazioni di veterani su fatti del passato, poco valore per il pubblico attuale.",
-        "event_key": "ahmed_johnson_rant",
-        "id": "c4",
-        "priority": 2
+        "duplicate_of": "c2",
+        "editorial_reason": "Curiosità di retroscena non prioritaria.",
+        "event_key": "ahmed_johnson_interview",
+        "id": "c2",
+        "priority": 0
       },
       {
         "article_type": "soft_news",
-        "bob_brief": null,
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
         "category_hint": "WWE",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Notizia di colore/reaction social. Troppo leggera.",
+        "editorial_reason": "Notizia soft/reaction, poco valore informativo rispetto ai fatti di cronaca.",
         "event_key": "giulia_italy_ovation",
-        "id": "c5",
-        "priority": 3
+        "id": "c3",
+        "priority": 2
       },
       {
         "article_type": "low_value",
-        "bob_brief": null,
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
         "category_hint": "World",
         "decision": "skip",
+        "duplicate_of": "c2",
+        "editorial_reason": "Dichiarazioni di epoca passata, interesse marginale.",
+        "event_key": "ahmed_johnson_interview",
+        "id": "c4",
+        "priority": 0
+      },
+      {
+        "article_type": "low_value",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
+        "category_hint": "WWE",
+        "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Curiosità storica senza impatto attuale.",
-        "event_key": "ahmed_johnson_rock",
+        "editorial_reason": "Commenti soggettivi su figure controverse, non costituisce notizia di attualità.",
+        "event_key": "vince_mcmahon_comments",
+        "id": "c5",
+        "priority": 0
+      },
+      {
+        "article_type": "low_value",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "c2",
+        "editorial_reason": "Retroscena di spogliatoio datato.",
+        "event_key": "ahmed_johnson_interview",
         "id": "c6",
-        "priority": 2
-      },
-      {
-        "article_type": "low_value",
-        "bob_brief": null,
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Opinione esterna su vicende controverse, non necessaria.",
-        "event_key": "danny_davis_vince",
-        "id": "c7",
-        "priority": 2
-      },
-      {
-        "article_type": "low_value",
-        "bob_brief": null,
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Polemica di backstage datata.",
-        "event_key": "ahmed_johnson_locker_room",
-        "id": "c8",
-        "priority": 2
+        "priority": 0
       },
       {
         "article_type": "soft_news",
-        "bob_brief": null,
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
         "category_hint": "AEW",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Pura opinione tra wrestler, non sposta le storyline.",
-        "event_key": "aj_styles_ospreay_praise",
-        "id": "c9",
-        "priority": 4
-      },
-      {
-        "article_type": "low_value",
-        "bob_brief": null,
-        "category_hint": "TNA",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Social reaction vaga e poco informativa.",
-        "event_key": "steph_de_lander_tweet",
-        "id": "c10",
-        "priority": 2
-      },
-      {
-        "article_type": "duplicate",
-        "bob_brief": null,
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "c11",
-        "editorial_reason": "Notizia vecchia, superata.",
-        "event_key": "braun_strowman_debut",
-        "id": "c11",
+        "editorial_reason": "Reaction/commento tra atleti, valore editoriale minimo.",
+        "event_key": "aj_styles_ospreay_reaction",
+        "id": "c7",
         "priority": 1
       },
       {
         "article_type": "low_value",
-        "bob_brief": null,
+        "bob_brief": {
+          "expected_embeds": [
+            "x_tweet"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "embed tweet"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
+        "category_hint": "TNA",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Social reaction/criptica, non è una notizia.",
+        "event_key": "steph_de_lander_tweet",
+        "id": "c8",
+        "priority": 0
+      },
+      {
+        "article_type": "duplicate",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "c9",
+        "editorial_reason": "Notizia vecchia, superata.",
+        "event_key": "strowman_retro",
+        "id": "c9",
+        "priority": 0
+      },
+      {
+        "article_type": "low_value",
+        "bob_brief": {
+          "expected_embeds": [
+            "x_tweet"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "embed tweet"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
         "category_hint": "World",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Non è una notizia di wrestling rilevante.",
+        "editorial_reason": "Curiosità non centrale per il mercato italiano.",
         "event_key": "paul_walter_hauser_status",
+        "id": "c10",
+        "priority": 0
+      },
+      {
+        "article_type": "duplicate",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "c11",
+        "editorial_reason": "Notizia vecchia e superata.",
+        "event_key": "jade_cargill_old_clash",
+        "id": "c11",
+        "priority": 0
+      },
+      {
+        "article_type": "data_report",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": true,
+          "must_preserve": [
+            "tabelle risultati"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": "Riassumere brevemente i titoli e i cambi di maschera."
+        },
+        "category_hint": "World",
+        "decision": "pending",
+        "duplicate_of": "",
+        "editorial_reason": "Risultati AAA, da pubblicare solo se c'è spazio nel calendario editoriale (bassa priorità per il target italiano).",
+        "event_key": "aaa_noche_results",
         "id": "c12",
-        "priority": 2
+        "priority": 3
       }
     ],
     "used": true
   },
   "mode": "ai_editorial_review_with_bob_briefs",
-  "pending": [],
+  "pending": [
+    {
+      "age_hours": 55.19423283583333,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Risultati AAA, da pubblicare solo se c'è spazio nel calendario editoriale (bassa priorità per il target italiano).",
+      "ai_id": "c12",
+      "ai_priority": 3,
+      "article_type": "data_report",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": false,
+        "expected_tables": true,
+        "must_preserve": [
+          "tabelle risultati"
+        ],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "source_specific_notes": "Riassumere brevemente i titoli e i cambi di maschera."
+      },
+      "category_hint": "World",
+      "decision": "pending",
+      "deterministic_score": 30,
+      "evaluated_at": "2026-06-02T08:11:39.238211+00:00",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "data_report",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": true,
+          "must_preserve": [
+            "tabelle risultati"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": "Riassumere brevemente i titoli e i cambi di maschera."
+        },
+        "category_hint": "World",
+        "decision": "pending",
+        "duplicate_of": "",
+        "editorial_reason": "Risultati AAA, da pubblicare solo se c'è spazio nel calendario editoriale (bassa priorità per il target italiano).",
+        "event_key": "aaa_noche_results",
+        "id": "c12",
+        "priority": 3
+      },
+      "normalized_url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results",
+      "priority": "skip",
+      "published": "Sun, 31 May 2026 01:00:00 +0000",
+      "reason": "ai:Risultati AAA, da pubblicare solo se c'è spazio nel calendario editoriale (bassa priorità per il target italiano).; deterministic:recency:recent_72h",
+      "score": 18,
+      "source": "wrestlinginc",
+      "summary": "This is Wrestling Inc.'s live coverage of AAA Nocha de Los Grandes, headlined by El Grande Americano versus the Original Grande Americano in Mask vs. Mask.",
+      "title": "AAA Noche De Los Grandes Results - Mask Vs. Mask, Three Titles On The Line",
+      "url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results/"
+    }
+  ],
   "policy": {
     "ai_duplicate_detection": true,
     "bob_briefs_enabled": true,
@@ -218,213 +417,85 @@
   },
   "selected": [
     {
-      "age_hours": 1.2167466191666667,
+      "age_hours": 0.1809004686111111,
       "agent": "Menzo",
-      "ai_editorial_reason": "Intervista di rilievo su un top name in vista di Clash in Italy. Fondamentale per il pubblico italiano.",
+      "ai_editorial_reason": "Notizia di cronaca rilevante per il pubblico italiano che ha ospitato l'evento.",
       "ai_id": "c1",
       "ai_priority": 10,
-      "article_type": "business_legal",
+      "article_type": "hard_news",
       "assigned_to": "Menzo",
       "bob_brief": {
-        "expected_embeds": [],
+        "expected_embeds": [
+          "video"
+        ],
         "expected_quotes": true,
         "expected_tables": false,
         "must_preserve": [
+          "embed video/tweet se presente",
           "citazioni dirette"
         ],
         "possible_noise": [
+          "source_social_bar",
           "author_bio",
           "cta",
-          "source_social_bar"
-        ],
-        "source_specific_notes": "Focus sulla dichiarazione di Cody, traduci accuratamente il sentimento di 'luck running out'."
-      },
-      "category_hint": "Business",
-      "decision": "selected",
-      "deterministic_score": 92,
-      "evaluated_at": "2026-06-02T05:10:12.287831+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "business_legal",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "author_bio",
-            "cta",
-            "source_social_bar"
-          ],
-          "source_specific_notes": "Focus sulla dichiarazione di Cody, traduci accuratamente il sentimento di 'luck running out'."
-        },
-        "category_hint": "Business",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Intervista di rilievo su un top name in vista di Clash in Italy. Fondamentale per il pubblico italiano.",
-        "event_key": "cody_rhodes_interview",
-        "id": "c1",
-        "priority": 10
-      },
-      "normalized_url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ",
-      "priority": "soft",
-      "published": "Tue, 02 Jun 2026 03:57:12 +0000",
-      "reason": "ai:Intervista di rilievo su un top name in vista di Clash in Italy. Fondamentale per il pubblico italiano.; deterministic:strategic:clash in italy,entity:cody rhodes,entity:gunther,current:business_legal,recency:fresh_12h",
-      "score": 55,
-      "source": "wrestlinginc",
-      "summary": "WWE Undisputed Champion Cody Rhodes sat down with Joe Tessitore in an ESPN interview prior to his match with GUNTHER at Clash in Italy.",
-      "title": "WWE Champ Cody Rhodes Says He Feels Like His Luck Is Running Out",
-      "url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ/"
-    },
-    {
-      "age_hours": 3.418693468888889,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Analisi di mercato rilevante per il settore Business.",
-      "ai_id": "c2",
-      "ai_priority": 8,
-      "article_type": "business_legal",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [
-          "citazioni dirette"
-        ],
-        "possible_noise": [
-          "author_bio",
-          "cta"
-        ],
-        "source_specific_notes": "Rimuovi l'immagine del tag img nel corpo del testo."
-      },
-      "category_hint": "Business",
-      "decision": "selected",
-      "deterministic_score": 92,
-      "evaluated_at": "2026-06-02T05:10:12.296489+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "business_legal",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "author_bio",
-            "cta"
-          ],
-          "source_specific_notes": "Rimuovi l'immagine del tag img nel corpo del testo."
-        },
-        "category_hint": "Business",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Analisi di mercato rilevante per il settore Business.",
-        "event_key": "aaa_tv_deal",
-        "id": "c2",
-        "priority": 8
-      },
-      "normalized_url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon",
-      "priority": "soft",
-      "published": "Tue, 02 Jun 2026 01:45:05 +0000",
-      "reason": "ai:Analisi di mercato rilevante per il settore Business.; deterministic:hard:tv deal,recency:fresh_12h",
-      "score": 54,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"JBL Believes AAA Could Land Another TV Deal Soon\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-believes-aaa-could-land-another-tv-deal-soon-01.jpg?x79046\" width=\"800\" /></p>JBL thinks AAA’s momentum may be about to turn into something bigger. AAA has been airing shows on YouTube for fans outside its regular markets in Mexico, Central America, and South America. That easy access has helped more fans around the world follow the promotion, especially with WWE talent and bigger crossover stories bringing more ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/\" title=\"JBL Believes AAA Could Land Another TV Deal Soon\">Read more</a>",
-      "title": "JBL Believes AAA Could Land Another TV Deal Soon",
-      "url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/"
-    },
-    {
-      "age_hours": 2.213413421111111,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Notizia cruciale: cambio titolo in un evento svoltosi in Italia.",
-      "ai_id": "c3",
-      "ai_priority": 9,
-      "article_type": "storyline_development",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [
-          "citazioni dirette"
-        ],
-        "possible_noise": [
           "share_links"
         ],
-        "source_specific_notes": "Evidenzia la conquista del titolo di Sol Ruca."
+        "source_specific_notes": "Massima attenzione alla delicatezza dell'episodio, riportare i fatti senza sensazionalismo."
       },
       "category_hint": "WWE",
       "decision": "selected",
-      "deterministic_score": 74,
-      "evaluated_at": "2026-06-02T05:10:12.288317+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "deterministic_score": 86,
+      "evaluated_at": "2026-06-02T08:11:39.241688+00:00",
+      "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
-        "article_type": "storyline_development",
+        "article_type": "hard_news",
         "bob_brief": {
-          "expected_embeds": [],
+          "expected_embeds": [
+            "video"
+          ],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
+            "embed video/tweet se presente",
             "citazioni dirette"
           ],
           "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
             "share_links"
           ],
-          "source_specific_notes": "Evidenzia la conquista del titolo di Sol Ruca."
+          "source_specific_notes": "Massima attenzione alla delicatezza dell'episodio, riportare i fatti senza sensazionalismo."
         },
         "category_hint": "WWE",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Notizia cruciale: cambio titolo in un evento svoltosi in Italia.",
-        "event_key": "clash_in_italy_results",
-        "id": "c3",
-        "priority": 9
+        "editorial_reason": "Notizia di cronaca rilevante per il pubblico italiano che ha ospitato l'evento.",
+        "event_key": "roman_reigns_italy_incident",
+        "id": "c1",
+        "priority": 10
       },
-      "normalized_url": "https://www.wrestlinginc.com/2185431/wwe-clash-in-italy-2026-sol-ruca-becky-lynch-victory-defining-moment",
-      "priority": "skip",
-      "published": "Tue, 02 Jun 2026 02:57:24 +0000",
-      "reason": "ai:Notizia cruciale: cambio titolo in un evento svoltosi in Italia.; deterministic:strategic:clash in italy,entity:becky lynch,recency:fresh_12h",
-      "score": 45,
-      "source": "wrestlinginc",
-      "summary": "Sol Ruca defeated Becky Lynch at WWE Clash in Italy to become the Women's IC Champion.",
-      "title": "Sol Ruca Says WWE Clash In Italy Victory Over Becky Lynch Was A 'Defining Moment'",
-      "url": "https://www.wrestlinginc.com/2185431/wwe-clash-in-italy-2026-sol-ruca-becky-lynch-victory-defining-moment/"
+      "normalized_url": "https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy",
+      "priority": "soft",
+      "published": "Tue, 02 Jun 2026 08:00:48 +0000",
+      "reason": "ai:Notizia di cronaca rilevante per il pubblico italiano che ha ospitato l'evento.; deterministic:hard:championship,strategic:clash in italy,entity:roman reigns,recency:fresh_12h",
+      "score": 52,
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Footage Shows Fan Grabbing And Harassing Roman Reigns After WWE Clash In Italy\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/footage-shows-fan-grabbing-and-harassing-roman-reigns-after-wwe-clash-in-italy-25.jpg?x79046\" width=\"800\" /></p>Roman Reigns successfully retained his World Heavyweight Championship at WWE Clash in Italy, but a tense moment happened after the match when an overzealous fan got a little too close. As revealed in footage making the rounds online, Reigns was making his way to the back alongside members of The Bloodline following his Tribal Combat ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy/\" title=\"Footage Shows Fan Grabbing and Harassing Roman Reigns After WWE Clash In Italy\">Read more</a>",
+      "title": "Footage Shows Fan Grabbing and Harassing Roman Reigns After WWE Clash In Italy",
+      "url": "https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy/"
     }
   ],
   "skipped": [
     {
-      "age_hours": 52.17008002194444,
-      "agent": "Menzo",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "World",
-      "decision": "skip",
-      "deterministic_score": 30,
-      "evaluated_at": "2026-06-02T05:10:12.288080+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results",
-      "priority": "skip",
-      "published": "Sun, 31 May 2026 01:00:00 +0000",
-      "reason": "recency:recent_72h",
-      "score": 30,
-      "source": "wrestlinginc",
-      "summary": "This is Wrestling Inc.'s live coverage of AAA Nocha de Los Grandes, headlined by El Grande Americano versus the Original Grande Americano in Mask vs. Mask.",
-      "title": "AAA Noche De Los Grandes Results - Mask Vs. Mask, Three Titles On The Line",
-      "url": "https://www.wrestlinginc.com/2184321/aaa-noche-de-los-grandes-results/"
-    },
-    {
-      "age_hours": 396.6700801727778,
+      "age_hours": 399.6942329277778,
       "agent": "Menzo",
       "article_type": "low_value",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
       "deterministic_score": 5,
-      "evaluated_at": "2026-06-02T05:10:12.288624+00:00",
+      "evaluated_at": "2026-06-02T08:11:39.238541+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2171248/wwe-royal-rumble-2026-kit-wilson-emotional-struggle-left-out",
       "priority": "skip",
@@ -437,14 +508,14 @@
       "url": "https://www.wrestlinginc.com/2171248/wwe-royal-rumble-2026-kit-wilson-emotional-struggle-left-out/"
     },
     {
-      "age_hours": 397.17008023638886,
+      "age_hours": 400.1942329961111,
       "agent": "Menzo",
       "article_type": "low_value",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
       "deterministic_score": 5,
-      "evaluated_at": "2026-06-02T05:10:12.288852+00:00",
+      "evaluated_at": "2026-06-02T08:11:39.238787+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2171076/wwe-jacob-fatu-roman-reigns-uncle",
       "priority": "skip",
@@ -457,14 +528,14 @@
       "url": "https://www.wrestlinginc.com/2171076/wwe-jacob-fatu-roman-reigns-uncle/"
     },
     {
-      "age_hours": 397.6700803005556,
+      "age_hours": 400.69423306916667,
       "agent": "Menzo",
       "article_type": "low_value",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
       "deterministic_score": 0,
-      "evaluated_at": "2026-06-02T05:10:12.289084+00:00",
+      "evaluated_at": "2026-06-02T08:11:39.239051+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2170973/wwe-aj-styles-harder-improvise-modern-era",
       "priority": "skip",
@@ -477,14 +548,14 @@
       "url": "https://www.wrestlinginc.com/2170973/wwe-aj-styles-harder-improvise-modern-era/"
     },
     {
-      "age_hours": 398.17008036777776,
+      "age_hours": 401.1942331438889,
       "agent": "Menzo",
       "article_type": "low_value",
       "assigned_to": "Menzo",
       "category_hint": "AEW",
       "decision": "skip",
       "deterministic_score": 0,
-      "evaluated_at": "2026-06-02T05:10:12.289325+00:00",
+      "evaluated_at": "2026-06-02T08:11:39.239319+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2170949/aew-jeff-jarrett-orange-cassidy-combines-in-ring-character-work-better",
       "priority": "skip",
@@ -497,14 +568,14 @@
       "url": "https://www.wrestlinginc.com/2170949/aew-jeff-jarrett-orange-cassidy-combines-in-ring-character-work-better/"
     },
     {
-      "age_hours": 398.67008043305555,
+      "age_hours": 401.6942332175,
       "agent": "Menzo",
       "article_type": "low_value",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
       "deterministic_score": 0,
-      "evaluated_at": "2026-06-02T05:10:12.289561+00:00",
+      "evaluated_at": "2026-06-02T08:11:39.239584+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2170762/wwe-wrestlemania-42-jacob-fatu-drew-mcintyre-bloodline",
       "priority": "skip",
@@ -517,83 +588,137 @@
       "url": "https://www.wrestlinginc.com/2170762/wwe-wrestlemania-42-jacob-fatu-drew-mcintyre-bloodline/"
     },
     {
-      "age_hours": 399.6700805055556,
+      "age_hours": 402.6942332888889,
       "agent": "Menzo",
       "ai_editorial_reason": "Notizia vecchia, superata.",
-      "ai_id": "c11",
-      "ai_priority": 1,
+      "ai_id": "c9",
+      "ai_priority": 0,
       "article_type": "duplicate",
       "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "source_specific_notes": ""
+      },
       "category_hint": "WWE",
       "decision": "skip",
       "deterministic_score": 33,
-      "duplicate_of": "c11",
-      "evaluated_at": "2026-06-02T05:10:12.289822+00:00",
+      "duplicate_of": "c9",
+      "evaluated_at": "2026-06-02T08:11:39.239841+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "menzo_ai_review": {
         "article_type": "duplicate",
-        "bob_brief": null,
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
         "category_hint": "WWE",
         "decision": "skip",
-        "duplicate_of": "c11",
+        "duplicate_of": "c9",
         "editorial_reason": "Notizia vecchia, superata.",
-        "event_key": "braun_strowman_debut",
-        "id": "c11",
-        "priority": 1
+        "event_key": "strowman_retro",
+        "id": "c9",
+        "priority": 0
       },
       "normalized_url": "https://www.wrestlinginc.com/2170628/wwe-braun-strowman-wyatt-family-main-roster-debut",
       "priority": "skip",
       "published": "Sat, 16 May 2026 13:30:00 +0000",
-      "reason": "ai_duplicate_of:c11; hard:debut,strategic:main roster,soft_penalty:reflects,recency:old_penalty",
-      "score": 19,
+      "reason": "ai_duplicate_of:c9; hard:debut,strategic:main roster,soft_penalty:reflects,recency:old_penalty",
+      "score": 18,
       "source": "wrestlinginc",
       "summary": "Former WWE star Braun Strowman has recalled his debut in the promotion and how terrified he was before stepping into the ring.",
       "title": "Braun Strowman Reflects On WWE Main Roster Debut Alongside The Wyatt Family",
       "url": "https://www.wrestlinginc.com/2170628/wwe-braun-strowman-wyatt-family-main-roster-debut/"
     },
     {
-      "age_hours": 2.720636123333333,
+      "age_hours": 5.7447889127777785,
       "agent": "Menzo",
-      "ai_editorial_reason": "Pura opinione tra wrestler, non sposta le storyline.",
-      "ai_id": "c9",
-      "ai_priority": 4,
+      "ai_editorial_reason": "Reaction/commento tra atleti, valore editoriale minimo.",
+      "ai_id": "c7",
+      "ai_priority": 1,
       "article_type": "soft_news",
       "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "source_specific_notes": ""
+      },
       "category_hint": "AEW",
       "decision": "skip",
       "deterministic_score": 38,
-      "evaluated_at": "2026-06-02T05:10:12.290045+00:00",
+      "evaluated_at": "2026-06-02T08:11:39.240088+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "menzo_ai_review": {
         "article_type": "soft_news",
-        "bob_brief": null,
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
         "category_hint": "AEW",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Pura opinione tra wrestler, non sposta le storyline.",
-        "event_key": "aj_styles_ospreay_praise",
-        "id": "c9",
-        "priority": 4
+        "editorial_reason": "Reaction/commento tra atleti, valore editoriale minimo.",
+        "event_key": "aj_styles_ospreay_reaction",
+        "id": "c7",
+        "priority": 1
       },
       "normalized_url": "https://www.wrestlinginc.com/2185427/wwe-aew-double-or-nothing-2026-aj-styles-will-ospreay-styles-clash",
       "priority": "skip",
       "published": "Tue, 02 Jun 2026 02:26:58 +0000",
-      "reason": "ai:Pura opinione tra wrestler, non sposta le storyline.; deterministic:recency:fresh_12h",
-      "score": 23,
+      "reason": "ai:Reaction/commento tra atleti, valore editoriale minimo.; deterministic:recency:fresh_12h",
+      "score": 21,
       "source": "wrestlinginc",
       "summary": "AJ Styles has praised Will Ospreay for his \"flawless\" Styles Clash at AEW Double or Nothing 2026.",
       "title": "WWE's AJ Styles Commends Will Ospreay's Styles Clash At AEW Double Or Nothing",
       "url": "https://www.wrestlinginc.com/2185427/wwe-aew-double-or-nothing-2026-aj-styles-will-ospreay-styles-clash/"
     },
     {
-      "age_hours": 400.1700806311111,
+      "age_hours": 403.1942334255555,
       "agent": "Menzo",
       "article_type": "low_value",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
       "deterministic_score": 0,
-      "evaluated_at": "2026-06-02T05:10:12.290273+00:00",
+      "evaluated_at": "2026-06-02T08:11:39.240333+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2170585/wwe-hofer-eric-bischoff-lambasts-3-hour-weekly-shows",
       "priority": "skip",
@@ -606,14 +731,14 @@
       "url": "https://www.wrestlinginc.com/2170585/wwe-hofer-eric-bischoff-lambasts-3-hour-weekly-shows/"
     },
     {
-      "age_hours": 400.67008069944444,
+      "age_hours": 403.69423350305556,
       "agent": "Menzo",
       "article_type": "low_value",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
       "deterministic_score": 0,
-      "evaluated_at": "2026-06-02T05:10:12.290519+00:00",
+      "evaluated_at": "2026-06-02T08:11:39.240612+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "normalized_url": "https://www.wrestlinginc.com/2170560/ronda-rousey-reflects-main-eventing-wwe-wrestlemania-35",
       "priority": "skip",
@@ -626,171 +751,333 @@
       "url": "https://www.wrestlinginc.com/2170560/ronda-rousey-reflects-main-eventing-wwe-wrestlemania-35/"
     },
     {
-      "age_hours": 410.14730297777777,
+      "age_hours": 413.17145577944444,
       "agent": "Menzo",
-      "article_type": "low_value",
+      "ai_editorial_reason": "Notizia vecchia e superata.",
+      "ai_id": "c11",
+      "ai_priority": 0,
+      "article_type": "duplicate",
       "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": false,
+        "expected_tables": false,
+        "must_preserve": [],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "source_specific_notes": ""
+      },
       "category_hint": "WWE",
       "decision": "skip",
       "deterministic_score": 31,
-      "evaluated_at": "2026-06-02T05:10:12.290721+00:00",
+      "duplicate_of": "c11",
+      "evaluated_at": "2026-06-02T08:11:39.240807+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "duplicate",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
+        "category_hint": "WWE",
+        "decision": "skip",
+        "duplicate_of": "c11",
+        "editorial_reason": "Notizia vecchia e superata.",
+        "event_key": "jade_cargill_old_clash",
+        "id": "c11",
+        "priority": 0
+      },
       "normalized_url": "https://www.wrestlinginc.com/2174267/jade-cargill-rhea-ripley-wwe-clash-in-italy",
       "priority": "skip",
       "published": "Sat, 16 May 2026 03:01:22 +0000",
-      "reason": "strategic:clash in italy,entity:rhea ripley,recency:old_penalty",
-      "score": 31,
+      "reason": "ai_duplicate_of:c11; strategic:clash in italy,entity:rhea ripley,recency:old_penalty",
+      "score": 17,
       "source": "wrestlinginc",
       "summary": "Jade Cargill lost the women's title at WrestleMania 42.",
       "title": "Jade Cargill Challenges Rhea Ripley To WWE Women's Title Rematch At Clash In Italy",
       "url": "https://www.wrestlinginc.com/2174267/jade-cargill-rhea-ripley-wwe-clash-in-italy/"
     },
     {
-      "age_hours": 0.083414305,
+      "age_hours": 3.1075673808333337,
       "agent": "Menzo",
-      "ai_editorial_reason": "Opinione esterna su vicende controverse, non necessaria.",
-      "ai_id": "c7",
-      "ai_priority": 2,
+      "ai_editorial_reason": "Commenti soggettivi su figure controverse, non costituisce notizia di attualità.",
+      "ai_id": "c5",
+      "ai_priority": 0,
       "article_type": "low_value",
       "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "source_specific_notes": ""
+      },
       "category_hint": "WWE",
       "decision": "skip",
       "deterministic_score": 38,
-      "evaluated_at": "2026-06-02T05:10:12.291499+00:00",
+      "evaluated_at": "2026-06-02T08:11:39.242572+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
         "article_type": "low_value",
-        "bob_brief": null,
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
         "category_hint": "WWE",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Opinione esterna su vicende controverse, non necessaria.",
-        "event_key": "danny_davis_vince",
-        "id": "c7",
-        "priority": 2
+        "editorial_reason": "Commenti soggettivi su figure controverse, non costituisce notizia di attualità.",
+        "event_key": "vince_mcmahon_comments",
+        "id": "c5",
+        "priority": 0
       },
       "normalized_url": "https://www.ringsidenews.com/danny-davis-says-vince-mcmahon-kept-him-ending-dead-jail",
       "priority": "skip",
       "published": "Tue, 02 Jun 2026 05:05:12 +0000",
-      "reason": "ai:Opinione esterna su vicende controverse, non necessaria.; deterministic:recency:fresh_12h",
-      "score": 22,
+      "reason": "ai:Commenti soggettivi su figure controverse, non costituisce notizia di attualità.; deterministic:recency:fresh_12h",
+      "score": 21,
       "source": "ringsidenews",
       "summary": "<p><img alt=\"Danny Davis Says Vince McMahon Kept Him From Ending Up Dead Or In Jail\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/danny-davis-says-vince-mcmahon-kept-him-from-ending-up-dead-or-in-jail-45.jpg?x79046\" width=\"800\" /></p>“Dangerous” Danny Davis isn’t joining the pile-on when it comes to Vince McMahon. During a new interview with Wrestling Epicenter, the former WWE referee and wrestler was asked about his thoughts on McMahon, and Davis made it clear that his personal experience with Vince is the reason he refuses to bury him. Davis said flat-out ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/danny-davis-says-vince-mcmahon-kept-him-ending-dead-jail/\" title=\"Danny Davis Says Vince McMahon Kept Him From Ending Up Dead Or In Jail\">Read more</a>",
       "title": "Danny Davis Says Vince McMahon Kept Him From Ending Up Dead Or In Jail",
       "url": "https://www.ringsidenews.com/danny-davis-says-vince-mcmahon-kept-him-ending-dead-jail/"
     },
     {
-      "age_hours": 1.406192313888889,
+      "age_hours": 4.430345405555555,
       "agent": "Menzo",
-      "ai_editorial_reason": "Polemica di backstage datata.",
-      "ai_id": "c8",
-      "ai_priority": 2,
-      "article_type": "low_value",
+      "ai_editorial_reason": "Retroscena di spogliatoio datato.",
+      "ai_id": "c6",
+      "ai_priority": 0,
+      "article_type": "duplicate",
       "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "source_specific_notes": ""
+      },
       "category_hint": "WWE",
       "decision": "skip",
       "deterministic_score": 38,
-      "evaluated_at": "2026-06-02T05:10:12.292332+00:00",
+      "duplicate_of": "c2",
+      "evaluated_at": "2026-06-02T08:11:39.243461+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
         "article_type": "low_value",
-        "bob_brief": null,
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
         "category_hint": "WWE",
         "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Polemica di backstage datata.",
-        "event_key": "ahmed_johnson_locker_room",
-        "id": "c8",
-        "priority": 2
+        "duplicate_of": "c2",
+        "editorial_reason": "Retroscena di spogliatoio datato.",
+        "event_key": "ahmed_johnson_interview",
+        "id": "c6",
+        "priority": 0
       },
       "normalized_url": "https://www.ringsidenews.com/ahmed-johnson-claims-wwe-locker-room-jealousy-followed-his-main-event-push",
       "priority": "skip",
       "published": "Tue, 02 Jun 2026 03:45:50 +0000",
-      "reason": "ai:Polemica di backstage datata.; deterministic:recency:fresh_12h",
-      "score": 22,
+      "reason": "ai_duplicate_event:ahmed johnson interview; ai_duplicate_of:c2; recency:fresh_12h",
+      "score": 21,
       "source": "ringsidenews",
       "summary": "<p><img alt=\"Ahmed Johnson Claims WWE Locker Room Jealousy Followed His Main Event Push\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/ahmed-johnson-claims-wwe-locker-room-jealousy-followed-his-main-event-push-40.jpg?x79046\" width=\"800\" /></p>Ahmed Johnson made one of the most controversial claims of his Inside The Ropes interview when discussing his relationship with fellow members of the Nation of Domination. While reflecting on his WWE run, Ahmed was asked whether there was tension between him and other wrestlers during that era. His answer left little room for interpretation. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/ahmed-johnson-claims-wwe-locker-room-jealousy-followed-his-main-event-push/\" title=\"Ahmed Johnson Claims WWE Locker Room Jealousy Followed His Main Event Push\">Read more</a>",
       "title": "Ahmed Johnson Claims WWE Locker Room Jealousy Followed His Main Event Push",
       "url": "https://www.ringsidenews.com/ahmed-johnson-claims-wwe-locker-room-jealousy-followed-his-main-event-push/"
     },
     {
-      "age_hours": 1.5239702855555555,
+      "age_hours": 4.548123389444444,
       "agent": "Menzo",
-      "ai_editorial_reason": "Curiosità storica senza impatto attuale.",
-      "ai_id": "c6",
-      "ai_priority": 2,
-      "article_type": "low_value",
+      "ai_editorial_reason": "Dichiarazioni di epoca passata, interesse marginale.",
+      "ai_id": "c4",
+      "ai_priority": 0,
+      "article_type": "duplicate",
       "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "source_specific_notes": ""
+      },
       "category_hint": "World",
       "decision": "skip",
       "deterministic_score": 48,
-      "evaluated_at": "2026-06-02T05:10:12.293029+00:00",
+      "duplicate_of": "c2",
+      "evaluated_at": "2026-06-02T08:11:39.244203+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
         "article_type": "low_value",
-        "bob_brief": null,
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
         "category_hint": "World",
         "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Curiosità storica senza impatto attuale.",
-        "event_key": "ahmed_johnson_rock",
-        "id": "c6",
-        "priority": 2
+        "duplicate_of": "c2",
+        "editorial_reason": "Dichiarazioni di epoca passata, interesse marginale.",
+        "event_key": "ahmed_johnson_interview",
+        "id": "c4",
+        "priority": 0
       },
       "normalized_url": "https://www.ringsidenews.com/ahmed-johnson-says-rock-changed-becoming-leader-nation",
       "priority": "skip",
       "published": "Tue, 02 Jun 2026 03:38:46 +0000",
-      "reason": "ai:Curiosità storica senza impatto attuale.; deterministic:entity:the rock,recency:fresh_12h",
-      "score": 27,
+      "reason": "ai_duplicate_event:ahmed johnson interview; ai_duplicate_of:c2; entity:the rock,recency:fresh_12h",
+      "score": 26,
       "source": "ringsidenews",
       "summary": "<p><img alt=\"Ahmed Johnson Says The Rock Changed After Becoming Leader Of The Nation\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/ahmed-johnson-says-the-rock-changed-after-becoming-leader-of-the-nation-55.jpg?x79046\" width=\"800\" /></p>Ahmed Johnson has opened up about his experiences working alongside Dwayne &#8220;The Rock&#8221; Johnson before he became one of the biggest stars in wrestling history. Speaking with Inside The Ropes, Ahmed reflected on his time working with Rocky Maivia during the Nation of Domination era. According to Ahmed, he enjoyed being around Johnson before his ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/ahmed-johnson-says-rock-changed-becoming-leader-nation/\" title=\"Ahmed Johnson Says The Rock Changed After Becoming Leader Of The Nation\">Read more</a>",
       "title": "Ahmed Johnson Says The Rock Changed After Becoming Leader Of The Nation",
       "url": "https://www.ringsidenews.com/ahmed-johnson-says-rock-changed-becoming-leader-nation/"
     },
     {
-      "age_hours": 1.567581652777778,
+      "age_hours": 4.591734774444444,
       "agent": "Menzo",
-      "ai_editorial_reason": "Dichiarazioni di veterani su fatti del passato, poco valore per il pubblico attuale.",
-      "ai_id": "c4",
-      "ai_priority": 2,
+      "ai_editorial_reason": "Curiosità di retroscena non prioritaria.",
+      "ai_id": "c2",
+      "ai_priority": 0,
       "article_type": "duplicate",
       "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [
+          "youtube"
+        ],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "source_specific_notes": ""
+      },
       "category_hint": "WWE",
       "decision": "skip",
       "deterministic_score": 68,
-      "duplicate_of": "c8",
-      "evaluated_at": "2026-06-02T05:10:12.293952+00:00",
+      "duplicate_of": "c2",
+      "evaluated_at": "2026-06-02T08:11:39.245189+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
-        "article_type": "low_value",
-        "bob_brief": null,
+        "article_type": "duplicate",
+        "bob_brief": {
+          "expected_embeds": [
+            "youtube"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
         "category_hint": "WWE",
         "decision": "skip",
-        "duplicate_of": "c8",
-        "editorial_reason": "Dichiarazioni di veterani su fatti del passato, poco valore per il pubblico attuale.",
-        "event_key": "ahmed_johnson_rant",
-        "id": "c4",
-        "priority": 2
+        "duplicate_of": "c2",
+        "editorial_reason": "Curiosità di retroscena non prioritaria.",
+        "event_key": "ahmed_johnson_interview",
+        "id": "c2",
+        "priority": 0
       },
       "normalized_url": "https://www.ringsidenews.com/ahmed-johnson-fires-back-dlo-browns-long-standing-backstage-fight-story",
       "priority": "skip",
       "published": "Tue, 02 Jun 2026 03:36:09 +0000",
-      "reason": "ai_duplicate_of:c8; strategic:backstage,recency:fresh_12h",
-      "score": 38,
+      "reason": "ai_duplicate_of:c2; strategic:backstage,recency:fresh_12h",
+      "score": 37,
       "source": "ringsidenews",
       "summary": "<p><img alt=\"Ahmed Johnson Fires Back at D&#039;Lo Brown&#039;s Long-Standing Backstage Fight Story\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/ahmed-johnson-fires-back-at-dlo-browns-long-standing-backstage-fight-story-25.jpg?x79046\" width=\"800\" /></p>Ahmed Johnson is pushing back on a story that has followed him for years. During a recent appearance on Inside The Ropes, the former WWE star was asked about D&#8217;Lo Brown&#8217;s version of an alleged backstage altercation between the two men during their time together in the Nation of Domination. Ahmed made it clear that ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/ahmed-johnson-fires-back-dlo-browns-long-standing-backstage-fight-story/\" title=\"Ahmed Johnson Fires Back at D&#8217;Lo Brown&#8217;s Long-Standing Backstage Fight Story\">Read more</a>",
       "title": "Ahmed Johnson Fires Back at D’Lo Brown’s Long-Standing Backstage Fight Story",
       "url": "https://www.ringsidenews.com/ahmed-johnson-fires-back-dlo-browns-long-standing-backstage-fight-story/"
     },
     {
-      "age_hours": 1.915359670277778,
+      "age_hours": 4.93951280638889,
       "agent": "Menzo",
       "article_type": "low_value",
       "assigned_to": "Menzo",
       "category_hint": "World",
       "decision": "skip",
       "deterministic_score": 20,
-      "evaluated_at": "2026-06-02T05:10:12.294815+00:00",
+      "evaluated_at": "2026-06-02T08:11:39.246104+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/eric-bischoff-admits-biggest-mistake-nwo-storyline-still-haunts-him",
       "priority": "skip",
@@ -803,33 +1090,62 @@
       "url": "https://www.ringsidenews.com/eric-bischoff-admits-biggest-mistake-nwo-storyline-still-haunts-him/"
     },
     {
-      "age_hours": 2.4023043894444447,
+      "age_hours": 5.426457547222222,
       "agent": "Menzo",
-      "ai_editorial_reason": "Notizia di colore/reaction social. Troppo leggera.",
-      "ai_id": "c5",
-      "ai_priority": 3,
+      "ai_editorial_reason": "Notizia soft/reaction, poco valore informativo rispetto ai fatti di cronaca.",
+      "ai_id": "c3",
+      "ai_priority": 2,
       "article_type": "soft_news",
       "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "source_specific_notes": ""
+      },
       "category_hint": "WWE",
       "decision": "skip",
       "deterministic_score": 54,
-      "evaluated_at": "2026-06-02T05:10:12.295803+00:00",
+      "evaluated_at": "2026-06-02T08:11:39.247171+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
         "article_type": "soft_news",
-        "bob_brief": null,
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
         "category_hint": "WWE",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Notizia di colore/reaction social. Troppo leggera.",
+        "editorial_reason": "Notizia soft/reaction, poco valore informativo rispetto ai fatti di cronaca.",
         "event_key": "giulia_italy_ovation",
-        "id": "c5",
-        "priority": 3
+        "id": "c3",
+        "priority": 2
       },
       "normalized_url": "https://www.ringsidenews.com/giulia-thanks-italian-crowd-huge-ovation-june-1-wwe-raw",
       "priority": "skip",
       "published": "Tue, 02 Jun 2026 02:46:04 +0000",
-      "reason": "ai:Notizia di colore/reaction social. Troppo leggera.; deterministic:strategic:queen of the ring,strategic:raw,soft_penalty:reaction,recency:fresh_12h",
+      "reason": "ai:Notizia soft/reaction, poco valore informativo rispetto ai fatti di cronaca.; deterministic:strategic:queen of the ring,strategic:raw,soft_penalty:reaction,recency:fresh_12h",
       "score": 31,
       "source": "ringsidenews",
       "summary": "<p><img alt=\"Giulia Thanks Italian Crowd After Huge Ovation On June 1 WWE RAW\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/giulia-thanks-italian-crowd-after-huge-ovation-on-june-1-wwe-raw-27.jpg?x79046\" width=\"800\" /></p>Giulia had a special moment on the June 1 WWE RAW in Turin, Italy. The former Women’s United States Champion competed in the Queen of the Ring tournament and received a huge ovation from the Italian crowd. The reaction clearly meant a lot to her, especially because of her Italian roots. Giulia’s father is Italian, ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/giulia-thanks-italian-crowd-huge-ovation-june-1-wwe-raw/\" title=\"Giulia Thanks Italian Crowd After Huge Ovation On June 1 WWE RAW\">Read more</a>",
@@ -837,33 +1153,66 @@
       "url": "https://www.ringsidenews.com/giulia-thanks-italian-crowd-huge-ovation-june-1-wwe-raw/"
     },
     {
-      "age_hours": 4.697027003611112,
+      "age_hours": 7.721179987777777,
       "agent": "Menzo",
-      "ai_editorial_reason": "Non è una notizia di wrestling rilevante.",
-      "ai_id": "c12",
-      "ai_priority": 2,
+      "ai_editorial_reason": "Curiosità non centrale per il mercato italiano.",
+      "ai_id": "c10",
+      "ai_priority": 0,
       "article_type": "low_value",
       "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [
+          "x_tweet"
+        ],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "embed tweet"
+        ],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "source_specific_notes": ""
+      },
       "category_hint": "World",
       "decision": "skip",
       "deterministic_score": 32,
-      "evaluated_at": "2026-06-02T05:10:12.297215+00:00",
+      "evaluated_at": "2026-06-02T08:11:39.247958+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
         "article_type": "low_value",
-        "bob_brief": null,
+        "bob_brief": {
+          "expected_embeds": [
+            "x_tweet"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "embed tweet"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
         "category_hint": "World",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Non è una notizia di wrestling rilevante.",
+        "editorial_reason": "Curiosità non centrale per il mercato italiano.",
         "event_key": "paul_walter_hauser_status",
-        "id": "c12",
-        "priority": 2
+        "id": "c10",
+        "priority": 0
       },
       "normalized_url": "https://www.ringsidenews.com/paul-walter-hauser-explains-why-hes-away-wrestling",
       "priority": "skip",
       "published": "Tue, 02 Jun 2026 00:28:23 +0000",
-      "reason": "ai:Non è una notizia di wrestling rilevante.; deterministic:soft_penalty:explains why,recency:fresh_12h",
+      "reason": "ai:Curiosità non centrale per il mercato italiano.; deterministic:soft_penalty:explains why,recency:fresh_12h",
       "score": 18,
       "source": "ringsidenews",
       "summary": "<p><img alt=\"Paul Walter Hauser Explains Why He’s Been Away From Wrestling\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/paul-walter-hauser-explains-why-hes-been-away-from-wrestling-46.jpg?x79046\" width=\"800\" /></p>Paul Walter Hauser hasn’t disappeared from wrestling. He’s just busy in Hollywood. The actor and wrestler took to Twitter on June 1, 2026, after a fan asked if he was still actively wrestling and whether MLW ever travels to New England. Hauser explained that he is still part of the wrestling world, but he is ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/paul-walter-hauser-explains-why-hes-away-wrestling/\" title=\"Paul Walter Hauser Explains Why He’s Been Away From Wrestling\">Read more</a>",
@@ -871,47 +1220,80 @@
       "url": "https://www.ringsidenews.com/paul-walter-hauser-explains-why-hes-away-wrestling/"
     },
     {
-      "age_hours": 5.188693898333333,
+      "age_hours": 8.212846901388888,
       "agent": "Menzo",
-      "ai_editorial_reason": "Social reaction vaga e poco informativa.",
-      "ai_id": "c10",
-      "ai_priority": 2,
+      "ai_editorial_reason": "Social reaction/criptica, non è una notizia.",
+      "ai_id": "c8",
+      "ai_priority": 0,
       "article_type": "low_value",
       "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [
+          "x_tweet"
+        ],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "embed tweet"
+        ],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "source_specific_notes": ""
+      },
       "category_hint": "TNA",
       "decision": "skip",
       "deterministic_score": 38,
-      "evaluated_at": "2026-06-02T05:10:12.298035+00:00",
+      "evaluated_at": "2026-06-02T08:11:39.248846+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
         "article_type": "low_value",
-        "bob_brief": null,
+        "bob_brief": {
+          "expected_embeds": [
+            "x_tweet"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "embed tweet"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": ""
+        },
         "category_hint": "TNA",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Social reaction vaga e poco informativa.",
+        "editorial_reason": "Social reaction/criptica, non è una notizia.",
         "event_key": "steph_de_lander_tweet",
-        "id": "c10",
-        "priority": 2
+        "id": "c8",
+        "priority": 0
       },
       "normalized_url": "https://www.ringsidenews.com/steph-de-lander-posts-cryptic-tweet-about-women-wrestling-told-more-feminine",
       "priority": "skip",
       "published": "Mon, 01 Jun 2026 23:58:53 +0000",
-      "reason": "ai:Social reaction vaga e poco informativa.; deterministic:recency:fresh_12h",
-      "score": 22,
+      "reason": "ai:Social reaction/criptica, non è una notizia.; deterministic:recency:fresh_12h",
+      "score": 21,
       "source": "ringsidenews",
       "summary": "<p><img alt=\"Steph De Lander Posts Cryptic Tweet About Women In Wrestling Being Told To Be More Feminine\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/steph-de-lander-posts-cryptic-tweet-about-women-in-wrestling-being-told-to-be-more-feminine-58.jpg?x79046\" width=\"800\" /></p>Steph De Lander had something to say, and she didn’t need many words to make the point. On June 1, 2026, the former TNA talent took to Twitter and posted a cryptic message about women in wrestling still being told how they should present themselves. De Lander wrote: “Dang in 2026 we’re still telling women ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/steph-de-lander-posts-cryptic-tweet-about-women-wrestling-told-more-feminine/\" title=\"Steph De Lander Posts Cryptic Tweet About Women In Wrestling Being Told To Be More Feminine\">Read more</a>",
       "title": "Steph De Lander Posts Cryptic Tweet About Women In Wrestling Being Told To Be More Feminine",
       "url": "https://www.ringsidenews.com/steph-de-lander-posts-cryptic-tweet-about-women-wrestling-told-more-feminine/"
     },
     {
-      "age_hours": 7.2270272975,
+      "age_hours": 10.251180300833335,
       "agent": "Menzo",
       "article_type": "external_sports_reaction",
       "assigned_to": "Menzo",
       "category_hint": "WWE",
       "decision": "skip",
-      "evaluated_at": "2026-06-02T05:10:12.298272+00:00",
+      "evaluated_at": "2026-06-02T08:11:39.249084+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/miz-begs-browns-trade-news-isnt-real-myles-garrett-deal",
       "priority": "skip",

@@ -1,16 +1,16 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-02T05:10:50.167399+00:00",
+  "generated_at": "2026-06-02T08:11:52.471174+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 0,
-    "wp_not_ready": 3
+    "published": 1,
+    "wp_not_ready": 0
   },
   "input": {
     "alfred_version": "v93_8_alfred_structured_content_checks",
-    "approved_articles": 3
+    "approved_articles": 1
   },
   "mode": "wordpress_publisher_plain_oembed_urls",
   "policy": {
@@ -22,71 +22,22 @@
   },
   "results": [
     {
-      "content_chars": 2104,
-      "image_url": "https://www.wrestlinginc.com/img/gallery/wwe-champ-cody-rhodes-says-he-feels-like-his-luck-is-running-out/l-intro-1780372450.jpg",
-      "media_id": null,
-      "payload_preview": {
-        "categories": [],
-        "excerpt": "Il campione indiscusso WWE Cody Rhodes riflette sul suo regno, il confronto con Randy Orton e le difficoltà di conciliare carriera e famiglia.",
-        "meta": {
-          "original_url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ/",
-          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
-          "owtv_source": "wrestlinginc"
-        },
-        "status": "publish",
-        "title": "Cody Rhodes: \"La mia fortuna sta finendo\""
-      },
-      "source_url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ/",
-      "status": "wp_not_ready",
-      "title_it": "Cody Rhodes: \"La mia fortuna sta finendo\"",
-      "wp_ready": false
-    },
-    {
-      "content_chars": 2062,
-      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/jbl-believes-aaa-could-land-another-tv-deal-soon-01.jpg",
-      "media_id": null,
-      "payload_preview": {
-        "categories": [],
-        "excerpt": "JBL ritiene che il recente slancio della AAA possa presto tradursi in qualcosa di più importante.",
-        "meta": {
-          "original_url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/",
-          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
-          "owtv_source": "ringsidenews"
-        },
-        "status": "publish",
-        "title": "JBL prevede un nuovo accordo televisivo per la AAA"
-      },
-      "source_url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/",
-      "status": "wp_not_ready",
-      "title_it": "JBL prevede un nuovo accordo televisivo per la AAA",
-      "wp_ready": false
-    },
-    {
-      "content_chars": 1824,
-      "image_url": "https://www.wrestlinginc.com/img/gallery/sol-ruca-says-wwe-clash-in-italy-victory-over-becky-lynch-was-a-defining-moment/l-intro-1780368487.jpg",
-      "media_id": null,
-      "payload_preview": {
-        "categories": [],
-        "excerpt": "Sol Ruca ha battuto Becky Lynch a WWE Clash in Italy diventando la nuova Women's IC Champion.",
-        "meta": {
-          "original_url": "https://www.wrestlinginc.com/2185431/wwe-clash-in-italy-2026-sol-ruca-becky-lynch-victory-defining-moment/",
-          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
-          "owtv_source": "wrestlinginc"
-        },
-        "status": "publish",
-        "title": "Sol Ruca descrive la vittoria su Becky Lynch a Clash in Italy come un momento decisivo"
-      },
-      "source_url": "https://www.wrestlinginc.com/2185431/wwe-clash-in-italy-2026-sol-ruca-becky-lynch-victory-defining-moment/",
-      "status": "wp_not_ready",
-      "title_it": "Sol Ruca descrive la vittoria su Becky Lynch a Clash in Italy come un momento decisivo",
-      "wp_ready": false
+      "categories": [
+        4
+      ],
+      "featured_media": 5847,
+      "source_url": "https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy/",
+      "status": "published",
+      "title_it": "Un fan molesta Roman Reigns dopo WWE Clash in Italy",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/un-fan-molesta-roman-reigns-dopo-wwe-clash-in-italy/",
+      "wp_post_id": 5848
     }
   ],
   "version": "v93_10_publisher_plain_oembed_urls",
   "wp": {
     "dry_run": false,
     "post_status": "publish",
-    "ready": false,
-    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=25)"
+    "ready": true,
+    "reason": "ok"
   }
 }

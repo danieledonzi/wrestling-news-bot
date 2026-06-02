@@ -2,36 +2,36 @@
   "agent": "Archivista",
   "agent_handoffs": {
     "alfred": {
-      "approved": 3,
+      "approved": 1,
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 0
+      "warnings": 1
     },
     "bob": {
       "errors": 0,
       "extraction_empty": 0,
-      "ready_for_alfred": 3,
+      "ready_for_alfred": 1,
       "translation_pending": 0
     },
     "massy": {
-      "already_published_hard_skipped": 7,
+      "already_published_hard_skipped": 9,
       "already_worked": 2,
-      "hard_skipped": 10,
-      "to_menzo": 23,
+      "hard_skipped": 12,
+      "to_menzo": 21,
       "to_simone": 0
     },
     "menzo": {
-      "pending": 0,
-      "skipped": 20,
-      "to_bob_or_v92": 3
+      "pending": 1,
+      "skipped": 19,
+      "to_bob_or_v92": 1
     },
     "publisher": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 0,
-      "wp_not_ready": 3
+      "published": 1,
+      "wp_not_ready": 0
     },
     "simone": {
       "ready": 0,
@@ -39,20 +39,7 @@
       "waiting": 1
     }
   },
-  "anomalies": [
-    {
-      "code": "wp_not_ready",
-      "context": {
-        "already_published": 0,
-        "dry_run": 0,
-        "errors": 0,
-        "published": 0,
-        "wp_not_ready": 3
-      },
-      "message": "WordPress non era pronto/raggiungibile.",
-      "severity": "error"
-    }
-  ],
+  "anomalies": [],
   "article_dossiers": [
     {
       "alfred": {
@@ -61,172 +48,70 @@
         "issues": [],
         "present": true,
         "quality_score": 100,
-        "warnings": []
+        "warnings": [
+          {
+            "code": "possible_missing_embed_from_menzo_brief",
+            "expected_embeds": [
+              "video"
+            ],
+            "message": "Menzo AI si aspettava embed/video/tweet, ma Bob non ne ha estratti.",
+            "severity": "warning",
+            "source_specific_notes": "Massima attenzione alla delicatezza dell'episodio, riportare i fatti senza sensazionalismo."
+          }
+        ]
       },
       "bob": {
-        "clean_element_count": 7,
+        "clean_element_count": 5,
         "diagnostic_stage": "ready_for_alfred",
         "element_counts": {
           "embed": 0,
           "heading": 0,
           "image": 0,
-          "quote": 1,
+          "quote": 0,
           "table": 0,
-          "text": 6
-        },
-        "error": null,
-        "present": true,
-        "raw_element_count": 8,
-        "removed_before_gemini": 14,
-        "status": "ready_for_alfred",
-        "translation_model": "gemini-3.1-flash-lite",
-        "translation_used": true
-      },
-      "category_hint": "Business",
-      "html_audit": {
-        "alfred_final_html_preview": "<p>JBL ritiene che il recente slancio della AAA possa presto tradursi in qualcosa di più importante.</p>\n<p>La AAA sta trasmettendo i propri show su YouTube per i fan al di fuori dei suoi mercati principali in Messico, America Centrale e Sud America. Questo facile accesso ha aiutato molti più fan in tutto il mondo a seguire la promotion, specialmente grazie alla presenza di talenti WWE e a importanti storyline crossover che hanno attirato maggiore attenzione sul brand.</p>\n<p>Durante una recente intervista a Busted Open Radio, JBL ha chiarito di non possedere informazioni riservate, ma di ritenere che la AAA possa presto siglare un nuovo accordo televisivo.</p>\n<blockquote>“Non ho informazioni privilegiate a riguardo, non sto rivelando nulla proveniente da meeting o altro, ma penso che presto otterranno un ottimo accordo televisivo. Hanno già un buon accordo con Fox Deportes che copre dal Messico al Sud America e credo che ne otterranno un altro.”</blockquote>\n<p>Si tratterebbe di un passo importante per la AAA, considerando che la promotion sta già guadagnando sempre più attenzione internazionale grazie a YouTube e alla sua attuale presenza su Fox Deportes.</p>\n<p>Le considerazioni di JBL arrivano in un momento in cui la AAA è al centro delle discussioni tra i fan, dopo grandi eventi come Noche de Los Grandes e il Mask vs. Mask match tra El Grande Americano e l&#x27;Original El Grande Americano. Non c&#x27;è ancora nulla di ufficiale e JBL ha sottolineato di aver espresso solo un&#x27;opinione personale. Tuttavia, appare convinto che il recente momento positivo della AAA possa portare a un nuovo accordo televisivo.</p>\n<p>Derek Holloway è un autore di Ringside News specializzato in notizie, rumor e risultati di wrestling. Si occupa di fornire una copertura affidabile su WWE, AEW e sulle principali federazioni di wrestling.</p>",
-        "bob_body_html_preview": "<p>JBL ritiene che il recente slancio della AAA possa presto tradursi in qualcosa di più importante.</p>\n<p>La AAA sta trasmettendo i propri show su YouTube per i fan al di fuori dei suoi mercati principali in Messico, America Centrale e Sud America. Questo facile accesso ha aiutato molti più fan in tutto il mondo a seguire la promotion, specialmente grazie alla presenza di talenti WWE e a importanti storyline crossover che hanno attirato maggiore attenzione sul brand.</p>\n<p>Durante una recente intervista a Busted Open Radio, JBL ha chiarito di non possedere informazioni riservate, ma di ritenere che la AAA possa presto siglare un nuovo accordo televisivo.</p>\n<blockquote>“Non ho informazioni privilegiate a riguardo, non sto rivelando nulla proveniente da meeting o altro, ma penso che presto otterranno un ottimo accordo televisivo. Hanno già un buon accordo con Fox Deportes che copre dal Messico al Sud America e credo che ne otterranno un altro.”</blockquote>\n<p>Si tratterebbe di un passo importante per la AAA, considerando che la promotion sta già guadagnando sempre più attenzione internazionale grazie a YouTube e alla sua attuale presenza su Fox Deportes.</p>\n<p>Le considerazioni di JBL arrivano in un momento in cui la AAA è al centro delle discussioni tra i fan, dopo grandi eventi come Noche de Los Grandes e il Mask vs. Mask match tra El Grande Americano e l&#x27;Original El Grande Americano. Non c&#x27;è ancora nulla di ufficiale e JBL ha sottolineato di aver espresso solo un&#x27;opinione personale. Tuttavia, appare convinto che il recente momento positivo della AAA possa portare a un nuovo accordo televisivo.</p>\n<p>Derek Holloway è un autore di Ringside News specializzato in notizie, rumor e risultati di wrestling. Si occupa di fornire una copertura affidabile su WWE, AEW e sulle principali federazioni di wrestling.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_jbl-prevede-un-nuovo-accordo-televisivo-per-la-aaa.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_jbl-prevede-un-nuovo-accordo-televisivo-per-la-aaa.html",
-        "publisher_review_html_preview": "<p>JBL ritiene che il recente slancio della AAA possa presto tradursi in qualcosa di più importante.</p>\n<p>La AAA sta trasmettendo i propri show su YouTube per i fan al di fuori dei suoi mercati principali in Messico, America Centrale e Sud America. Questo facile accesso ha aiutato molti più fan in tutto il mondo a seguire la promotion, specialmente grazie alla presenza di talenti WWE e a importanti storyline crossover che hanno attirato maggiore attenzione sul brand.</p>\n<p>Durante una recente intervista a Busted Open Radio, JBL ha chiarito di non possedere informazioni riservate, ma di ritenere che la AAA possa presto siglare un nuovo accordo televisivo.</p>\n<blockquote>“Non ho informazioni privilegiate a riguardo, non sto rivelando nulla proveniente da meeting o altro, ma penso che presto otterranno un ottimo accordo televisivo. Hanno già un buon accordo con Fox Deportes che copre dal Messico al Sud America e credo che ne otterranno un altro.”</blockquote>\n<p>Si tratterebbe di un passo importante per la AAA, considerando che la promotion sta già guadagnando sempre più attenzione internazionale grazie a YouTube e alla sua attuale presenza su Fox Deportes.</p>\n<p>Le considerazioni di JBL arrivano in un momento in cui la AAA è al centro delle discussioni tra i fan, dopo grandi eventi come Noche de Los Grandes e il Mask vs. Mask match tra El Grande Americano e l&#x27;Original El Grande Americano. Non c&#x27;è ancora nulla di ufficiale e JBL ha sottolineato di aver espresso solo un&#x27;opinione personale. Tuttavia, appare convinto che il recente momento positivo della AAA possa portare a un nuovo accordo televisivo.</p>\n<p>Derek Holloway è un autore di Ringside News specializzato in notizie, rumor e risultati di wrestling. Si occupa di fornire una copertura affidabile su WWE, AEW e sulle principali federazioni di wrestling.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon/\nTitolo feed: JBL Believes AAA Could Land Another TV Deal Soon\nTitolo pagina: JBL Believes AAA Could Land Another TV Deal Soon\nDescrizione: JBL thinks AAA’s momentum may be about to turn into something bigger. AAA has been airing shows on YouTube for fans outside its regular markets in Mexico,\nCategoria suggerita: Business\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"JBL thinks AAA’s momentum may be about to turn into something bigger.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"AAA has been airing shows on YouTube for fans outside its regular markets in Mexico, Central America, and South America. That easy access has helped more fans around the world follow the promotion, especially with WWE talent and bigger crossover stories bringing more attention to the brand.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"During a new interview on Busted Open Radio , JBL made it clear that he does not have inside information, but he believes AAA could end up landing another television deal soon.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“I don’t have any insight about this, I’m not giving away anything from meetings or anything but I think they’re going to get a pretty good TV deal coming up. They’ve got a good Fox Deportes deal down from Mexico to South America, I think they’ll get another TV deal.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"That would be a major step for AAA, especially with the promotion already gaining more international attention through YouTube and its current Fox Deportes presence.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"JBL’s comments come at a time when AAA has been getting a lot more discussion from fans after major events like Noche de Los Grandes and the Mask vs. Mask match between El Grande Americano and the Original El Grande Americano. Nothing has been officially announced yet, and JBL made it clear he was only giving his opinion. Still, he seems convinced AAA’s recent momentum could lead to another TV deal.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.\"\n  }\n]\n"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Analisi di mercato rilevante per il settore Business.; deterministic:hard:tv deal,recency:fresh_12h",
-        "score": 83
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": true,
-        "status": "wp_not_ready",
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/jbl-believes-aaa-could-land-another-tv-deal-soon",
-      "title_it": "JBL prevede un nuovo accordo televisivo per la AAA"
-    },
-    {
-      "alfred": {
-        "decision": "approved",
-        "editorial_changes": [],
-        "issues": [],
-        "present": true,
-        "quality_score": 100,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": 4,
-        "diagnostic_stage": "ready_for_alfred",
-        "element_counts": {
-          "embed": 1,
-          "heading": 0,
-          "image": 0,
-          "quote": 2,
-          "table": 0,
-          "text": 1
+          "text": 5
         },
         "error": null,
         "present": true,
         "raw_element_count": 6,
-        "removed_before_gemini": 2,
+        "removed_before_gemini": 14,
         "status": "ready_for_alfred",
         "translation_model": "gemini-3.1-flash-lite",
         "translation_used": true
       },
       "category_hint": "WWE",
       "html_audit": {
-        "alfred_final_html_preview": "https://youtu.be/mwl7onrv5U0?si=ZNz6xKI6SYhXgaQp\n\n<p>Dopo aver ottenuto una title shot a WWE SNME in seguito a una vittoria per squalifica, Sol Ruca ha sconfitto Becky Lynch laureandosi Women&#x27;s IC Champion a &quot;Clash in Italy&quot;. Sebbene sia stata una doppia campionessa a &quot;NXT&quot;, la Ruca fa parte del main roster solo dalla puntata di &quot;Raw&quot; successiva a WrestleMania 42.</p>\n<blockquote>La Ruca ha riflettuto sulla sua vittoria ai microfoni di &quot;WWE Now&quot;, dichiarando di aver vissuto un vero e proprio turbine di emozioni. &quot;Ho avuto un momento particolare non appena è suonata la campanella e dopo aver eseguito la mia finisher su Becky; mi sono emozionata. Ero sotto shock, pensavo &#x27;mio Dio, ce l&#x27;ho fatta&#x27;. È stato, in un certo senso, il mio momento decisivo. L&#x27;inizio del mio prossimo capitolo&quot;. La wrestler ha aggiunto di aver ricevuto un affetto e un supporto travolgenti dai fan dopo la conquista del titolo.</blockquote>\n<blockquote>La nuova campionessa ha intenzione di essere una lottatrice attiva. &quot;Voglio difendere questo titolo il maggior numero di volte possibile. Sono stata una doppia campionessa a &#x27;NXT&#x27;, detentrice sia dello Speed Championship che dell&#x27;NXT Championship, ma sento che i miei regni non sono stati all&#x27;altezza di ciò che posso offrire come campionessa&quot;. La Ruca vuole dimostrare il suo valore con questa cintura ed è pronta a concedere opportunità a chiunque sia all&#x27;altezza, aprendo anche a sfidanti provenienti dal roster di &quot;NXT&quot;.</blockquote>",
-        "bob_body_html_preview": "https://youtu.be/mwl7onrv5U0?si=ZNz6xKI6SYhXgaQp\n\n<p>Dopo aver ottenuto una title shot a WWE SNME in seguito a una vittoria per squalifica, Sol Ruca ha sconfitto Becky Lynch laureandosi Women&#x27;s IC Champion a &quot;Clash in Italy&quot;. Sebbene sia stata una doppia campionessa a &quot;NXT&quot;, la Ruca fa parte del main roster solo dalla puntata di &quot;Raw&quot; successiva a WrestleMania 42.</p>\n<blockquote>La Ruca ha riflettuto sulla sua vittoria ai microfoni di &quot;WWE Now&quot;, dichiarando di aver vissuto un vero e proprio turbine di emozioni. &quot;Ho avuto un momento particolare non appena è suonata la campanella e dopo aver eseguito la mia finisher su Becky; mi sono emozionata. Ero sotto shock, pensavo &#x27;mio Dio, ce l&#x27;ho fatta&#x27;. È stato, in un certo senso, il mio momento decisivo. L&#x27;inizio del mio prossimo capitolo&quot;. La wrestler ha aggiunto di aver ricevuto un affetto e un supporto travolgenti dai fan dopo la conquista del titolo.</blockquote>\n<blockquote>La nuova campionessa ha intenzione di essere una lottatrice attiva. &quot;Voglio difendere questo titolo il maggior numero di volte possibile. Sono stata una doppia campionessa a &#x27;NXT&#x27;, detentrice sia dello Speed Championship che dell&#x27;NXT Championship, ma sento che i miei regni non sono stati all&#x27;altezza di ciò che posso offrire come campionessa&quot;. La Ruca vuole dimostrare il suo valore con questa cintura ed è pronta a concedere opportunità a chiunque sia all&#x27;altezza, aprendo anche a sfidanti provenienti dal roster di &quot;NXT&quot;.</blockquote>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_sol-ruca-descrive-la-vittoria-su-becky-lynch-a-clash-in-italy-come-un-momento-decisivo.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_sol-ruca-descrive-la-vittoria-su-becky-lynch-a-clash-in-italy-come-un-momento-decisivo.html",
-        "publisher_review_html_preview": "https://youtu.be/mwl7onrv5U0?si=ZNz6xKI6SYhXgaQp\n\n<p>Dopo aver ottenuto una title shot a WWE SNME in seguito a una vittoria per squalifica, Sol Ruca ha sconfitto Becky Lynch laureandosi Women&#x27;s IC Champion a &quot;Clash in Italy&quot;. Sebbene sia stata una doppia campionessa a &quot;NXT&quot;, la Ruca fa parte del main roster solo dalla puntata di &quot;Raw&quot; successiva a WrestleMania 42.</p>\n<blockquote>La Ruca ha riflettuto sulla sua vittoria ai microfoni di &quot;WWE Now&quot;, dichiarando di aver vissuto un vero e proprio turbine di emozioni. &quot;Ho avuto un momento particolare non appena è suonata la campanella e dopo aver eseguito la mia finisher su Becky; mi sono emozionata. Ero sotto shock, pensavo &#x27;mio Dio, ce l&#x27;ho fatta&#x27;. È stato, in un certo senso, il mio momento decisivo. L&#x27;inizio del mio prossimo capitolo&quot;. La wrestler ha aggiunto di aver ricevuto un affetto e un supporto travolgenti dai fan dopo la conquista del titolo.</blockquote>\n<blockquote>La nuova campionessa ha intenzione di essere una lottatrice attiva. &quot;Voglio difendere questo titolo il maggior numero di volte possibile. Sono stata una doppia campionessa a &#x27;NXT&#x27;, detentrice sia dello Speed Championship che dell&#x27;NXT Championship, ma sento che i miei regni non sono stati all&#x27;altezza di ciò che posso offrire come campionessa&quot;. La Ruca vuole dimostrare il suo valore con questa cintura ed è pronta a concedere opportunità a chiunque sia all&#x27;altezza, aprendo anche a sfidanti provenienti dal roster di &quot;NXT&quot;.</blockquote>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185431/wwe-clash-in-italy-2026-sol-ruca-becky-lynch-victory-defining-moment/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185431/wwe-clash-in-italy-2026-sol-ruca-becky-lynch-victory-defining-moment/\nTitolo feed: Sol Ruca Says WWE Clash In Italy Victory Over Becky Lynch Was A 'Defining Moment'\nTitolo pagina: Sol Ruca Says WWE Clash In Italy Victory Over Becky Lynch Was A 'Defining Moment' - Wrestling Inc.\nDescrizione: Sol Ruca defeated Becky Lynch at WWE Clash in Italy to become the Women's IC Champion.\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"After earning a title shot at WWE SNME due to a match disqualification, Sol Ruca defeated Becky Lynch to become the Women's IC Champion at \\\"Clash in Italy\\\" . While Ruca was a double champion in \\\"NXT\\\", she's only been on the main roster since the \\\"Raw\\\" after WrestleMania 42 .\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"Ruca reflected on her win on \\\"WWE Now\\\" . She says she was an emotional and physical mess. \\\"I had a moment as soon as the bell rang and as soon as I hit my finisher on Becky, I kind of got a little bit emotional. I was a bit shocked, like 'oh my God, I did it'. This is like, my defining moment. The start of my next chapter in a sense.\\\" Ruca says since her win, she's received an overwhelming amount of love and acceptance from her fans.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"She wants to be a fighting champion. \\\"I want to defend this thing as many times as I physically possibly can. I was a double champion in \\\"NXT\\\" with the Speed Championship and the NXT Championship and I feel like my reigns weren't up to par with how I feel like I can be a champion.\\\" Ruca wants to prove herself with this title and is open to giving opportunities to whoever is ready. She'd like to give opportunities to women in \\\"NXT\\\" to get title shots.\"\n  }\n]\n"
+        "alfred_final_html_preview": "<p>Roman Reigns ha difeso con successo il suo World Heavyweight Championship a WWE Clash in Italy, ma nel post-match si è vissuto un momento di tensione quando un fan troppo zelante si è spinto un po&#x27; troppo oltre.</p>\n<p>Come mostrato da alcuni filmati che stanno circolando online, Reigns stava tornando verso il backstage insieme ai membri della Bloodline dopo la sua vittoria in un Tribal Combat contro Jacob Fatu. Mentre attraversava l&#x27;area riservata al pubblico, un fan ha allungato la mano afferrando Reigns per un braccio.</p>\n<p>La situazione è diventata rapidamente spiacevole quando il fan ha continuato a trattenere Reigns invece di lasciarlo andare. Il campione è apparso visibilmente infastidito dall&#x27;interazione mentre cercava di proseguire verso il backstage. Prima che la situazione potesse degenerare, Jey Uso è intervenuto immediatamente per proteggere il suo familiare e rivolgersi al fan: &quot;Andiamo, amico!&quot;. L&#x27;intervento di Jey è stato sufficiente a riportare la situazione sotto controllo, permettendo a Reigns e alla Bloodline di completare l&#x27;uscita senza ulteriori intoppi.</p>\n<p>L&#x27;incidente si è verificato poco dopo che Reigns aveva chiuso WWE Clash in Italy sconfiggendo Jacob Fatu in un brutale Tribal Combat match. L&#x27;incontro è stato caratterizzato dall&#x27;uso di armi, tavoli, impatti contro le barricate e diverse Spear, prima che Reigns riuscisse finalmente a mantenere il titolo.</p>\n<p>Sebbene le interazioni con i fan facciano spesso parte dell&#x27;esperienza durante gli eventi di wrestling, momenti come questo ricordano che esiste un confine tra il mostrare sostegno e l&#x27;invadere lo spazio personale di un performer. Fortunatamente, la situazione è stata gestita rapidamente e Reigns è riuscito a lasciare l&#x27;arena in sicurezza dopo un&#x27;altra difesa titolata riuscita.</p>",
+        "bob_body_html_preview": "<p>Roman Reigns ha difeso con successo il suo World Heavyweight Championship a WWE Clash in Italy, ma nel post-match si è vissuto un momento di tensione quando un fan troppo zelante si è spinto un po&#x27; troppo oltre.</p>\n<p>Come mostrato da alcuni filmati che stanno circolando online, Reigns stava tornando verso il backstage insieme ai membri della Bloodline dopo la sua vittoria in un Tribal Combat contro Jacob Fatu. Mentre attraversava l&#x27;area riservata al pubblico, un fan ha allungato la mano afferrando Reigns per un braccio.</p>\n<p>La situazione è diventata rapidamente spiacevole quando il fan ha continuato a trattenere Reigns invece di lasciarlo andare. Il campione è apparso visibilmente infastidito dall&#x27;interazione mentre cercava di proseguire verso il backstage. Prima che la situazione potesse degenerare, Jey Uso è intervenuto immediatamente per proteggere il suo familiare e rivolgersi al fan: &quot;Andiamo, amico!&quot;. L&#x27;intervento di Jey è stato sufficiente a riportare la situazione sotto controllo, permettendo a Reigns e alla Bloodline di completare l&#x27;uscita senza ulteriori intoppi.</p>\n<p>L&#x27;incidente si è verificato poco dopo che Reigns aveva chiuso WWE Clash in Italy sconfiggendo Jacob Fatu in un brutale Tribal Combat match. L&#x27;incontro è stato caratterizzato dall&#x27;uso di armi, tavoli, impatti contro le barricate e diverse Spear, prima che Reigns riuscisse finalmente a mantenere il titolo.</p>\n<p>Sebbene le interazioni con i fan facciano spesso parte dell&#x27;esperienza durante gli eventi di wrestling, momenti come questo ricordano che esiste un confine tra il mostrare sostegno e l&#x27;invadere lo spazio personale di un performer. Fortunatamente, la situazione è stata gestita rapidamente e Reigns è riuscito a lasciare l&#x27;arena in sicurezza dopo un&#x27;altra difesa titolata riuscita.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_un-fan-molesta-roman-reigns-dopo-wwe-clash-in-italy.html",
+        "published_html_preview": "<p>Roman Reigns ha difeso con successo il suo World Heavyweight Championship a WWE Clash in Italy, ma nel post-match si è vissuto un momento di tensione quando un fan troppo zelante si è spinto un po&#x27; troppo oltre.</p>\n<p>Come mostrato da alcuni filmati che stanno circolando online, Reigns stava tornando verso il backstage insieme ai membri della Bloodline dopo la sua vittoria in un Tribal Combat contro Jacob Fatu. Mentre attraversava l&#x27;area riservata al pubblico, un fan ha allungato la mano afferrando Reigns per un braccio.</p>\n<p>La situazione è diventata rapidamente spiacevole quando il fan ha continuato a trattenere Reigns invece di lasciarlo andare. Il campione è apparso visibilmente infastidito dall&#x27;interazione mentre cercava di proseguire verso il backstage. Prima che la situazione potesse degenerare, Jey Uso è intervenuto immediatamente per proteggere il suo familiare e rivolgersi al fan: &quot;Andiamo, amico!&quot;. L&#x27;intervento di Jey è stato sufficiente a riportare la situazione sotto controllo, permettendo a Reigns e alla Bloodline di completare l&#x27;uscita senza ulteriori intoppi.</p>\n<p>L&#x27;incidente si è verificato poco dopo che Reigns aveva chiuso WWE Clash in Italy sconfiggendo Jacob Fatu in un brutale Tribal Combat match. L&#x27;incontro è stato caratterizzato dall&#x27;uso di armi, tavoli, impatti contro le barricate e diverse Spear, prima che Reigns riuscisse finalmente a mantenere il titolo.</p>\n<p>Sebbene le interazioni con i fan facciano spesso parte dell&#x27;esperienza durante gli eventi di wrestling, momenti come questo ricordano che esiste un confine tra il mostrare sostegno e l&#x27;invadere lo spazio personale di un performer. Fortunatamente, la situazione è stata gestita rapidamente e Reigns è riuscito a lasciare l&#x27;arena in sicurezza dopo un&#x27;altra difesa titolata riuscita.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_un-fan-molesta-roman-reigns-dopo-wwe-clash-in-italy.html",
+        "publisher_review_html_preview": "<p>Roman Reigns ha difeso con successo il suo World Heavyweight Championship a WWE Clash in Italy, ma nel post-match si è vissuto un momento di tensione quando un fan troppo zelante si è spinto un po&#x27; troppo oltre.</p>\n<p>Come mostrato da alcuni filmati che stanno circolando online, Reigns stava tornando verso il backstage insieme ai membri della Bloodline dopo la sua vittoria in un Tribal Combat contro Jacob Fatu. Mentre attraversava l&#x27;area riservata al pubblico, un fan ha allungato la mano afferrando Reigns per un braccio.</p>\n<p>La situazione è diventata rapidamente spiacevole quando il fan ha continuato a trattenere Reigns invece di lasciarlo andare. Il campione è apparso visibilmente infastidito dall&#x27;interazione mentre cercava di proseguire verso il backstage. Prima che la situazione potesse degenerare, Jey Uso è intervenuto immediatamente per proteggere il suo familiare e rivolgersi al fan: &quot;Andiamo, amico!&quot;. L&#x27;intervento di Jey è stato sufficiente a riportare la situazione sotto controllo, permettendo a Reigns e alla Bloodline di completare l&#x27;uscita senza ulteriori intoppi.</p>\n<p>L&#x27;incidente si è verificato poco dopo che Reigns aveva chiuso WWE Clash in Italy sconfiggendo Jacob Fatu in un brutale Tribal Combat match. L&#x27;incontro è stato caratterizzato dall&#x27;uso di armi, tavoli, impatti contro le barricate e diverse Spear, prima che Reigns riuscisse finalmente a mantenere il titolo.</p>\n<p>Sebbene le interazioni con i fan facciano spesso parte dell&#x27;esperienza durante gli eventi di wrestling, momenti come questo ricordano che esiste un confine tra il mostrare sostegno e l&#x27;invadere lo spazio personale di un performer. Fortunatamente, la situazione è stata gestita rapidamente e Reigns è riuscito a lasciare l&#x27;arena in sicurezza dopo un&#x27;altra difesa titolata riuscita.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy/\nTitolo feed: Footage Shows Fan Grabbing and Harassing Roman Reigns After WWE Clash In Italy\nTitolo pagina: Footage Shows Fan Grabbing and Harassing Roman Reigns After WWE Clash In Italy\nDescrizione: Roman Reigns successfully retained his World Heavyweight Championship at WWE Clash in Italy, but a tense moment happened after the match when an\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Roman Reigns successfully retained his World Heavyweight Championship at WWE Clash in Italy , but a tense moment happened after the match when an overzealous fan got a little too close.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"As revealed in footage making the rounds online, Reigns was making his way to the back alongside members of The Bloodline following his Tribal Combat victory over Jacob Fatu . While walking through the crowd area, one fan reached out and grabbed Reigns by the arm.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"The situation quickly became uncomfortable as the fan continued holding onto Reigns instead of letting go. Reigns appeared visibly bothered by the interaction as he tried to continue making his way toward the back. Before things could escalate any further, Jey Uso immediately stepped in to protect his family member and address the fan: “Come on, dawg!” Jey’s intervention was enough to get the situation under control, allowing Reigns and The Bloodline to continue their exit without any further issues.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"The incident came shortly after Reigns closed out WWE Clash in Italy by defeating Jacob Fatu in a brutal Tribal Combat match. The contest featured weapons, tables, barricade crashes, and multiple spears before Reigns finally retained his championship.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"While fan interactions are often part of the experience at wrestling events, moments like this serve as a reminder that there is a line between showing support and crossing into a performer’s personal space. Fortunately, the situation was quickly handled, and Reigns was able to leave the arena safely after another successful title defense.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "ai:Notizia cruciale: cambio titolo in un evento svoltosi in Italia.; deterministic:strategic:clash in italy,entity:becky lynch,recency:fresh_12h",
-        "score": 73
+        "reason": "ai:Notizia di cronaca rilevante per il pubblico italiano che ha ospitato l'evento.; deterministic:hard:championship,strategic:clash in italy,entity:roman reigns,recency:fresh_12h",
+        "score": 80
       },
       "publisher": {
-        "categories": null,
+        "categories": [
+          4
+        ],
         "error": null,
-        "featured_media": null,
+        "featured_media": 5847,
         "present": true,
-        "status": "wp_not_ready",
-        "wp_link": null,
-        "wp_post_id": null
+        "status": "published",
+        "wp_link": "https://news.openwrestlingtv.com/wwe/un-fan-molesta-roman-reigns-dopo-wwe-clash-in-italy/",
+        "wp_post_id": 5848
       },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2185431/wwe-clash-in-italy-2026-sol-ruca-becky-lynch-victory-defining-moment",
-      "title_it": "Sol Ruca descrive la vittoria su Becky Lynch a Clash in Italy come un momento decisivo"
-    },
-    {
-      "alfred": {
-        "decision": "approved",
-        "editorial_changes": [],
-        "issues": [],
-        "present": true,
-        "quality_score": 100,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": 5,
-        "diagnostic_stage": "ready_for_alfred",
-        "element_counts": {
-          "embed": 1,
-          "heading": 0,
-          "image": 0,
-          "quote": 3,
-          "table": 0,
-          "text": 1
-        },
-        "error": null,
-        "present": true,
-        "raw_element_count": 7,
-        "removed_before_gemini": 2,
-        "status": "ready_for_alfred",
-        "translation_model": "gemini-3.1-flash-lite",
-        "translation_used": true
-      },
-      "category_hint": "Business",
-      "html_audit": {
-        "alfred_final_html_preview": "https://youtu.be/FPyacCODvSw?si=hslw99CGgj3ebvZH\n\n<p>Cody Rhodes ha mantenuto l&#x27;Undisputed WWE Championship in modo controverso a Clash in Italy. Il piede di GUNTHER era sotto la corda durante lo schienamento di Rhodes; l&#x27;arbitro, con la visuale ostruita, ha comunque decretato la vittoria di Rhodes.</p>\n<blockquote>Durante un&#x27;intervista con Joe Tessitore su ESPN, Rhodes ha commentato il punt ricevuto da Randy Orton: &quot;Tutto quello che c&#x27;è da sapere su di me viene dopo. Mi sono rialzato e ho cercato di incrociare lo sguardo di tutti per far capire due cose: sono ancora il campione e sono ancora qui. E se quello è stato il miglior colpo di Randy, e Randy è al massimo della sua forma, allora cosa dice questo di me? Non voglio sembrare arrogante. Sono stato piuttosto fortunato, ma non so quanta fortuna mi sia rimasta ancora.&quot;</blockquote>\n<blockquote>Dopo WrestleMania 42, ha trascorso del tempo con la sua famiglia. Ha ripensato a quando suo padre gli diceva che, dopo gli incontri, sarebbe tornato a casa malconcio dovendo spiegare ai figli di stare bene. La storia si è ripetuta quando la figlia di quattro anni gli ha chiesto cosa gli fosse successo e se stesse bene. Un Rhodes visibilmente emozionato ha dichiarato: &quot;Niente ti prepara a una cosa del genere e spero che non diventi un&#x27;abitudine&quot;.</blockquote>\n<blockquote>Tessitore gli ha chiesto cosa significhi essere il &quot;QB1&quot;. Rhodes ha risposto che il QB1 è colui che garantisce maggiore costanza, settimana dopo settimana. &quot;Ci sono tutte queste battute sul fatto che io segua il modello di John Cena, e non mi danno affatto fastidio, perché è un modello straordinario&quot;. Ha ammesso di non essersi sentito un vincitore dopo WrestleMania e di aver bisogno di sfidanti, perché è &quot;dipendente dalla posizione di vertice. Non ho paura di dirlo a nessuno&quot;.</blockquote>",
-        "bob_body_html_preview": "https://youtu.be/FPyacCODvSw?si=hslw99CGgj3ebvZH\n\n<p>Cody Rhodes ha mantenuto l&#x27;Undisputed WWE Championship in modo controverso a Clash in Italy. Il piede di GUNTHER era sotto la corda durante lo schienamento di Rhodes; l&#x27;arbitro, con la visuale ostruita, ha comunque decretato la vittoria di Rhodes.</p>\n<blockquote>Durante un&#x27;intervista con Joe Tessitore su ESPN, Rhodes ha commentato il punt ricevuto da Randy Orton: &quot;Tutto quello che c&#x27;è da sapere su di me viene dopo. Mi sono rialzato e ho cercato di incrociare lo sguardo di tutti per far capire due cose: sono ancora il campione e sono ancora qui. E se quello è stato il miglior colpo di Randy, e Randy è al massimo della sua forma, allora cosa dice questo di me? Non voglio sembrare arrogante. Sono stato piuttosto fortunato, ma non so quanta fortuna mi sia rimasta ancora.&quot;</blockquote>\n<blockquote>Dopo WrestleMania 42, ha trascorso del tempo con la sua famiglia. Ha ripensato a quando suo padre gli diceva che, dopo gli incontri, sarebbe tornato a casa malconcio dovendo spiegare ai figli di stare bene. La storia si è ripetuta quando la figlia di quattro anni gli ha chiesto cosa gli fosse successo e se stesse bene. Un Rhodes visibilmente emozionato ha dichiarato: &quot;Niente ti prepara a una cosa del genere e spero che non diventi un&#x27;abitudine&quot;.</blockquote>\n<blockquote>Tessitore gli ha chiesto cosa significhi essere il &quot;QB1&quot;. Rhodes ha risposto che il QB1 è colui che garantisce maggiore costanza, settimana dopo settimana. &quot;Ci sono tutte queste battute sul fatto che io segua il modello di John Cena, e non mi danno affatto fastidio, perché è un modello straordinario&quot;. Ha ammesso di non essersi sentito un vincitore dopo WrestleMania e di aver bisogno di sfidanti, perché è &quot;dipendente dalla posizione di vertice. Non ho paura di dirlo a nessuno&quot;.</blockquote>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_cody-rhodes-la-mia-fortuna-sta-finendo.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_cody-rhodes-la-mia-fortuna-sta-finendo.html",
-        "publisher_review_html_preview": "https://youtu.be/FPyacCODvSw?si=hslw99CGgj3ebvZH\n\n<p>Cody Rhodes ha mantenuto l&#x27;Undisputed WWE Championship in modo controverso a Clash in Italy. Il piede di GUNTHER era sotto la corda durante lo schienamento di Rhodes; l&#x27;arbitro, con la visuale ostruita, ha comunque decretato la vittoria di Rhodes.</p>\n<blockquote>Durante un&#x27;intervista con Joe Tessitore su ESPN, Rhodes ha commentato il punt ricevuto da Randy Orton: &quot;Tutto quello che c&#x27;è da sapere su di me viene dopo. Mi sono rialzato e ho cercato di incrociare lo sguardo di tutti per far capire due cose: sono ancora il campione e sono ancora qui. E se quello è stato il miglior colpo di Randy, e Randy è al massimo della sua forma, allora cosa dice questo di me? Non voglio sembrare arrogante. Sono stato piuttosto fortunato, ma non so quanta fortuna mi sia rimasta ancora.&quot;</blockquote>\n<blockquote>Dopo WrestleMania 42, ha trascorso del tempo con la sua famiglia. Ha ripensato a quando suo padre gli diceva che, dopo gli incontri, sarebbe tornato a casa malconcio dovendo spiegare ai figli di stare bene. La storia si è ripetuta quando la figlia di quattro anni gli ha chiesto cosa gli fosse successo e se stesse bene. Un Rhodes visibilmente emozionato ha dichiarato: &quot;Niente ti prepara a una cosa del genere e spero che non diventi un&#x27;abitudine&quot;.</blockquote>\n<blockquote>Tessitore gli ha chiesto cosa significhi essere il &quot;QB1&quot;. Rhodes ha risposto che il QB1 è colui che garantisce maggiore costanza, settimana dopo settimana. &quot;Ci sono tutte queste battute sul fatto che io segua il modello di John Cena, e non mi danno affatto fastidio, perché è un modello straordinario&quot;. Ha ammesso di non essersi sentito un vincitore dopo WrestleMania e di aver bisogno di sfidanti, perché è &quot;dipendente dalla posizione di vertice. Non ho paura di dirlo a nessuno&quot;.</blockquote>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ/\nTitolo feed: WWE Champ Cody Rhodes Says He Feels Like His Luck Is Running Out\nTitolo pagina: WWE Champ Cody Rhodes Says He Feels Like His Luck Is Running Out - Wrestling Inc.\nDescrizione: WWE Undisputed Champion Cody Rhodes sat down with Joe Tessitore in an ESPN interview prior to his match with GUNTHER at Clash in Italy.\nCategoria suggerita: Business\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Cody Rhodes retained the Undisputed WWE Championship in controversial fashion at Clash in Italy . GUNTHER's foot was under the rope as Rhodes pinned him. The referee's view was obstructed and he declared Rhodes the victor.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"During an ESPN interview with Joe Tessitore, Rhodes discussed being punted by Randy Orton . \\\"Everything you need to know about me happens after. I got up and I tried to make eye contact with everyone and let them know two things; I'm still the champ, still here. And if that's Randy's best shot and Randy is at his best ever, then what does that say about me? I don't mean this with arrogance. I'm pretty lucky and I don't know how much more luck I have.\\\"\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"After WrestleMania 42, he spent time with his family. He reflected on his dad telling him that he'd have to come home after matches beat up and explain to his kids that he was okay. History repeated itself when Rhodes' four-year-old daughter asked what happened to him and if he was okay. An emotional Rhodes said, \\\"nothing prepares you for that and I hope that's not a regular occurrence.\\\"\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"Tessitore asked him about being QB1. Rhodes said that QB1 is the most consistent, week in and week out. \\\"There's all these jokes that I follow the John Cena model and I don't mind those jokes at all because that's a hell of a model.\\\" He didn't feel like a winner after WrestleMania and needs challengers because he's \\\"addicted to the top spot. I'm not afraid to tell anybody that.\\\"\"\n  }\n]\n"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Intervista di rilievo su un top name in vista di Clash in Italy. Fondamentale per il pubblico italiano.; deterministic:strategic:clash in italy,entity:cody rhodes,entity:gunther,current:business_legal,recency:fresh_12h",
-        "score": 83
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": true,
-        "status": "wp_not_ready",
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2185442/wwe-cody-rhodes-luck-running-out-champ",
-      "title_it": "Cody Rhodes: \"La mia fortuna sta finendo\""
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/footage-shows-fan-grabbing-harassing-roman-reigns-wwe-clash-italy",
+      "title_it": "Un fan molesta Roman Reigns dopo WWE Clash in Italy"
     }
   ],
-  "generated_at": "2026-06-02T05:10:50.180751+00:00",
+  "generated_at": "2026-06-02T08:11:52.483127+00:00",
   "how_to_read": {
     "alfred_final_html_preview": "HTML dopo revisione/normalizzazioni di Alfred",
     "bob_body_html_preview": "HTML prodotto da Bob prima di Alfred",
@@ -1474,9 +1359,105 @@
       "overall_status": "error",
       "published": 0,
       "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 1,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 1
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 1,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 9,
+          "already_worked": 2,
+          "hard_skipped": 12,
+          "to_menzo": 21,
+          "to_simone": 0
+        },
+        "menzo": {
+          "pending": 1,
+          "skipped": 19,
+          "to_bob_or_v92": 1
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 1,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 5,
+          "waiting": 1
+        }
+      },
+      "already_published": 0,
+      "article_count": 1,
+      "errors": 0,
+      "generated_at": "2026-06-02T08:11:52.477766+00:00",
+      "overall_status": "ok",
+      "published": 1,
+      "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 1,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 1
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 1,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 9,
+          "already_worked": 2,
+          "hard_skipped": 12,
+          "to_menzo": 21,
+          "to_simone": 0
+        },
+        "menzo": {
+          "pending": 1,
+          "skipped": 19,
+          "to_bob_or_v92": 1
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 1,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 5,
+          "waiting": 1
+        }
+      },
+      "already_published": 0,
+      "article_count": 1,
+      "errors": 0,
+      "generated_at": "2026-06-02T08:11:52.483127+00:00",
+      "overall_status": "ok",
+      "published": 1,
+      "warnings": 0
     }
   ],
-  "overall_status": "error",
+  "overall_status": "ok",
   "run_summary_input": {
     "agents": {
       "alfred": "real_quality_editor",
@@ -1489,39 +1470,39 @@
       "simone": "real_report_director"
     },
     "alfred_handoff": {
-      "approved": 3,
+      "approved": 1,
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 0
+      "warnings": 1
     },
     "bob_handoff": {
       "errors": 0,
       "extraction_empty": 0,
-      "ready_for_alfred": 3,
+      "ready_for_alfred": 1,
       "translation_pending": 0
     },
-    "ended_at": "2026-06-02T05:10:50.168065+00:00",
+    "ended_at": "2026-06-02T08:11:52.471714+00:00",
     "engine": "bot_v92.py",
     "massy_handoff": {
-      "already_published_hard_skipped": 7,
+      "already_published_hard_skipped": 9,
       "already_worked": 2,
-      "hard_skipped": 10,
-      "to_menzo": 23,
+      "hard_skipped": 12,
+      "to_menzo": 21,
       "to_simone": 0
     },
     "menzo_handoff": {
-      "pending": 0,
-      "skipped": 20,
-      "to_bob_or_v92": 3
+      "pending": 1,
+      "skipped": 19,
+      "to_bob_or_v92": 1
     },
     "newsroom_engine_override": false,
     "publisher_handoff": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 0,
-      "wp_not_ready": 3
+      "published": 1,
+      "wp_not_ready": 0
     },
     "runtime_delegations": 0,
     "runtime_exit_code": 0,
@@ -1530,89 +1511,89 @@
       "skipped": 5,
       "waiting": 1
     },
-    "started_at": "2026-06-02T05:10:11.653253+00:00",
+    "started_at": "2026-06-02T08:11:37.156835+00:00",
     "version": "v93_14_priority_label_bob_brief_guard"
   },
   "summary": {
-    "anomalies": 1,
-    "article_dossiers": 3,
+    "anomalies": 0,
+    "article_dossiers": 1,
     "errors_48h": 12,
-    "published_48h": 40,
-    "published_current_run": 0,
-    "runs_48h": 26
+    "published_48h": 42,
+    "published_current_run": 1,
+    "runs_48h": 28
   },
   "timeline": [
     {
       "agent": "Jarvis",
       "note": "engine=bot_v92.py",
       "phase": "bootstrap_status_written",
-      "timestamp": "2026-06-02T05:10:11.653541+00:00"
+      "timestamp": "2026-06-02T08:11:37.157101+00:00"
     },
     {
       "agent": "Massy",
-      "note": "to_simone=0 to_menzo=23 hard_skip=10 already=2",
+      "note": "to_simone=0 to_menzo=21 hard_skip=12 already=2",
       "phase": "sentinel_board_ready",
-      "timestamp": "2026-06-02T05:10:12.276250+00:00"
+      "timestamp": "2026-06-02T08:11:39.227152+00:00"
     },
     {
       "agent": "Simone",
       "note": "ready=0 waiting=1 skipped=5",
       "phase": "report_decision_ready",
-      "timestamp": "2026-06-02T05:10:12.279939+00:00"
+      "timestamp": "2026-06-02T08:11:39.230588+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "selected=3 pending=0 skipped=20",
+      "note": "selected=1 pending=1 skipped=19",
       "phase": "editorial_decision_ready",
-      "timestamp": "2026-06-02T05:10:17.980542+00:00"
+      "timestamp": "2026-06-02T08:11:46.534758+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "selected=3",
+      "note": "selected=1",
       "phase": "priority_label_guard_applied",
-      "timestamp": "2026-06-02T05:10:17.981838+00:00"
+      "timestamp": "2026-06-02T08:11:46.536308+00:00"
     },
     {
       "agent": "Bob",
-      "note": "ready=3 pending=0 empty=0 errors=0",
+      "note": "ready=1 pending=0 empty=0 errors=0",
       "phase": "article_packages_ready",
-      "timestamp": "2026-06-02T05:10:24.714354+00:00"
+      "timestamp": "2026-06-02T08:11:48.702412+00:00"
     },
     {
       "agent": "Bob",
-      "note": "warnings=0",
+      "note": "warnings=1",
       "phase": "bob_brief_guard_applied",
-      "timestamp": "2026-06-02T05:10:24.715569+00:00"
+      "timestamp": "2026-06-02T08:11:48.703109+00:00"
     },
     {
       "agent": "Alfred",
-      "note": "approved=3 needs_revision=0 blockers=0 warnings=0 changes=0",
+      "note": "approved=1 needs_revision=0 blockers=0 warnings=0 changes=0",
       "phase": "quality_review_ready",
-      "timestamp": "2026-06-02T05:10:24.724518+00:00"
+      "timestamp": "2026-06-02T08:11:48.709184+00:00"
     },
     {
       "agent": "Alfred",
-      "note": "surfaced=0",
+      "note": "surfaced=1",
       "phase": "bob_warning_guard_applied",
-      "timestamp": "2026-06-02T05:10:24.725247+00:00"
+      "timestamp": "2026-06-02T08:11:48.709581+00:00"
     },
     {
       "agent": "Publisher",
-      "note": "published=0 already=0 dry=0 wp_not_ready=3 errors=0",
+      "note": "published=1 already=0 dry=0 wp_not_ready=0 errors=0",
       "phase": "publication_ready",
-      "timestamp": "2026-06-02T05:10:50.168036+00:00"
+      "timestamp": "2026-06-02T08:11:52.471674+00:00"
     },
     {
       "agent": "Jarvis",
       "note": "v93 Publisher completed; v92 fallback skipped",
       "phase": "runtime_skipped",
-      "timestamp": "2026-06-02T05:10:50.168057+00:00"
+      "timestamp": "2026-06-02T08:11:52.471701+00:00"
     },
     {
       "agent": "Archivista",
-      "note": "status=error anomalies=1",
+      "note": "status=ok anomalies=0",
       "phase": "audit_ready",
-      "timestamp": "2026-06-02T05:10:50.180334+00:00"
+      "timestamp": "2026-06-02T08:11:52.482927+00:00"
     }
   ],
   "version": "v93_7_archivista_audit"
