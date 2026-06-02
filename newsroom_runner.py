@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
-NEWSROOM_VERSION = "v93_15_forced_menzo_softpool_bob_cleanup"
+NEWSROOM_VERSION = "v93_16_massy_publisher_bob_policy"
 ARTIFACT_DIR = Path("artifacts") / "newsroom"
 
 
@@ -157,8 +157,12 @@ def safe_agent(
 
 
 def import_massy():
-    from agents.massy import run_massy
-    return run_massy
+    try:
+        from agents.massy_policy_v93_16 import run_massy
+        return run_massy
+    except Exception:
+        from agents.massy import run_massy
+        return run_massy
 
 
 def import_simone():
@@ -190,8 +194,12 @@ def import_alfred():
 
 
 def import_publisher():
-    from agents.publisher import run_publisher
-    return run_publisher
+    try:
+        from agents.publisher_policy_v93_16 import run_publisher
+        return run_publisher
+    except Exception:
+        from agents.publisher import run_publisher
+        return run_publisher
 
 
 def import_archivista():
@@ -214,6 +222,7 @@ def main() -> int:
     add_timeline(timeline, "Jarvis", "bootstrap_status_written", f"engine={engine}")
 
     massy_board = safe_agent(timeline=timeline, agent="Massy", phase="sentinel_board_ready", import_fn=import_massy, artifact_name="massy_board.json", default_handoff={"to_simone": 0, "to_menzo": 0, "hard_skipped": 0, "already_worked": 0}, note_fn=lambda r: "to_simone={to_simone} to_menzo={to_menzo} hard_skip={hard_skipped} already={already_worked}".format(**{**{"to_simone": 0, "to_menzo": 0, "hard_skipped": 0, "already_worked": 0}, **handoff(r)}))
+    add_timeline(timeline, "Massy", "forced_policy_active", f"version={massy_board.get('version')}")
     simone_decision = safe_agent(timeline=timeline, agent="Simone", phase="report_decision_ready", import_fn=import_simone, call_args=(massy_board,), artifact_name="simone_reports.json", default_handoff={"ready": 0, "waiting": 0, "skipped": 0}, note_fn=lambda r: "ready={ready} waiting={waiting} skipped={skipped}".format(**{**{"ready": 0, "waiting": 0, "skipped": 0}, **handoff(r)}))
     menzo_decision = safe_agent(timeline=timeline, agent="Menzo", phase="editorial_decision_ready", import_fn=import_menzo, call_args=(massy_board,), artifact_name="menzo_decisions.json", default_handoff={"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, note_fn=lambda r: "selected={to_bob_or_v92} pending={pending} skipped={skipped}".format(**{**{"to_bob_or_v92": 0, "pending": 0, "skipped": 0}, **handoff(r)}))
     add_timeline(timeline, "Menzo", "forced_policy_active", f"version={menzo_decision.get('version')}")
