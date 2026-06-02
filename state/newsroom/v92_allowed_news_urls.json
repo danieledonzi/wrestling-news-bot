@@ -1,10 +1,11 @@
 {
   "allowed_urls": [
-    "https://www.wrestlinginc.com/2185863/wwe-raw-bron-breakker-injured-limping/",
-    "https://www.wrestlinginc.com/2185881/roman-reigns-wwe-summerslam-wrestlemania-seth-rollins-oba-femi/",
-    "https://www.wrestlinginc.com/2185902/aew-grand-slam-mexico-2026-announces/",
-    "https://www.ringsidenews.com/wwe-nxt-great-american-bash-return-date-revealed/"
+    "https://www.ringsidenews.com/bron-breakkers-injury-status-limping-hotel-lobby-following-wwe-raw/",
+    "https://www.wrestlinginc.com/2186167/wwe-hofer-jeff-jarrett-thinks-chad-gable-aew/",
+    "https://www.wrestlinginc.com/2186098/wwe-raw-ratings-viewership-report-may-25-2026/",
+    "https://www.ringsidenews.com/wwe-nxt-great-american-bash-return-date-revealed/",
+    "https://www.ringsidenews.com/bronson-reed-involved-car-accident/"
   ],
-  "generated_at": "2026-06-02T18:07:40.586872+00:00",
-  "version": "v93_13_ai_editorial_review"
+  "generated_at": "2026-06-02T21:30:15.561632+00:00",
+  "version": "v93_15_forced_priority_label_softpool"
 }

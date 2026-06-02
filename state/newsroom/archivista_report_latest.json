@@ -6,7 +6,7 @@
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 0
+      "warnings": 2
     },
     "bob": {
       "errors": 0,
@@ -15,16 +15,16 @@
       "translation_pending": 0
     },
     "massy": {
-      "already_published_hard_skipped": 2,
-      "already_worked": 2,
-      "hard_skipped": 5,
-      "to_menzo": 28,
+      "already_published_hard_skipped": 1,
+      "already_worked": 1,
+      "hard_skipped": 3,
+      "to_menzo": 31,
       "to_simone": 0
     },
     "menzo": {
-      "pending": 1,
+      "pending": 3,
       "skipped": 23,
-      "to_bob_or_v92": 4
+      "to_bob_or_v92": 5
     },
     "publisher": {
       "already_published": 0,
@@ -41,6 +41,115 @@
   },
   "anomalies": [],
   "article_dossiers": [
+    {
+      "alfred": {
+        "decision": "approved",
+        "editorial_changes": [],
+        "issues": [],
+        "present": true,
+        "quality_score": 100,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": 8,
+        "diagnostic_stage": "ready_for_alfred",
+        "element_counts": {
+          "embed": 1,
+          "heading": 0,
+          "image": 0,
+          "quote": 1,
+          "table": 0,
+          "text": 6
+        },
+        "error": null,
+        "present": true,
+        "raw_element_count": 11,
+        "removed_before_gemini": 16,
+        "status": "ready_for_alfred",
+        "translation_model": "gemini-3.1-flash-lite",
+        "translation_used": true
+      },
+      "category_hint": "WWE",
+      "html_audit": {
+        "alfred_final_html_preview": "https://x.com/FalseFinishHQ/status/2061889988254396714\n\n<p>Bron Breakker ha fatto preoccupare i fan dopo essere stato visto zoppicare al termine di WWE RAW, ma l&#x27;ultimo aggiornamento dovrebbe placare gran parte di queste preoccupazioni.</p>\n<p>Secondo False Finish, Breakker era acciaccato dopo il match contro Seth Rollins nell&#x27;episodio di Monday Night RAW del 1° giugno 2026. Tuttavia, non si prevede che il problema possa compromettere la sua capacità di lottare in futuro.</p>\n<blockquote>“False Finish ha appreso che Bron Breakker era effettivamente acciaccato dopo il suo match contro Seth Rollins a WWE RAW, ma nulla che possa influenzarlo o impedirgli di tornare sul ring in futuro.”</blockquote>\n<p>Questo aggiornamento arriva dopo che in rete è circolato un filmato che mostrava Breakker in difficoltà nel camminare all&#x27;interno della hall di un hotel dopo RAW. È stato visto zoppicare visibilmente e sembrava avere problemi a poggiare il peso su una gamba, il che ha immediatamente destato preoccupazione.</p>\n<p>Breakker aveva appena disputato un main event molto fisico contro Rollins. Durante l&#x27;incontro, ha accidentalmente colpito Paul Heyman con una Spear attraverso la barricata a bordo ring, dopo che Rollins aveva attirato Heyman sulla traiettoria. Successivamente, Breakker ha tentato un&#x27;altra Spear su Rollins, ma quest&#x27;ultimo ha usato la cintura di campione per attutire l&#x27;impatto prima di eseguire il Black Out per la vittoria.</p>\n<p>Il filmato girato in hotel ha fatto dubitare alcuni fan se Breakker avesse subito un infortunio reale, specialmente perché continuare a vendere un infortunio in modo così marcato lontano dall&#x27;arena sarebbe insolito. Ora, questo rapporto suggerisce che, sebbene Breakker fosse dolorante, non si tratta di nulla che dovrebbe impedirgli di gareggiare.</p>\n<p>Questa è un&#x27;ottima notizia per la WWE, soprattutto con la stagione del King of the Ring in corso e Bron Breakker ancora posizionato come una delle stelle più esplosive della federazione. Ora resta da vedere come se la caverà nel torneo.</p>",
+        "bob_body_html_preview": "https://x.com/FalseFinishHQ/status/2061889988254396714\n\n<p>Bron Breakker ha fatto preoccupare i fan dopo essere stato visto zoppicare al termine di WWE RAW, ma l&#x27;ultimo aggiornamento dovrebbe placare gran parte di queste preoccupazioni.</p>\n<p>Secondo False Finish, Breakker era acciaccato dopo il match contro Seth Rollins nell&#x27;episodio di Monday Night RAW del 1° giugno 2026. Tuttavia, non si prevede che il problema possa compromettere la sua capacità di lottare in futuro.</p>\n<blockquote>“False Finish ha appreso che Bron Breakker era effettivamente acciaccato dopo il suo match contro Seth Rollins a WWE RAW, ma nulla che possa influenzarlo o impedirgli di tornare sul ring in futuro.”</blockquote>\n<p>Questo aggiornamento arriva dopo che in rete è circolato un filmato che mostrava Breakker in difficoltà nel camminare all&#x27;interno della hall di un hotel dopo RAW. È stato visto zoppicare visibilmente e sembrava avere problemi a poggiare il peso su una gamba, il che ha immediatamente destato preoccupazione.</p>\n<p>Breakker aveva appena disputato un main event molto fisico contro Rollins. Durante l&#x27;incontro, ha accidentalmente colpito Paul Heyman con una Spear attraverso la barricata a bordo ring, dopo che Rollins aveva attirato Heyman sulla traiettoria. Successivamente, Breakker ha tentato un&#x27;altra Spear su Rollins, ma quest&#x27;ultimo ha usato la cintura di campione per attutire l&#x27;impatto prima di eseguire il Black Out per la vittoria.</p>\n<p>Il filmato girato in hotel ha fatto dubitare alcuni fan se Breakker avesse subito un infortunio reale, specialmente perché continuare a vendere un infortunio in modo così marcato lontano dall&#x27;arena sarebbe insolito. Ora, questo rapporto suggerisce che, sebbene Breakker fosse dolorante, non si tratta di nulla che dovrebbe impedirgli di gareggiare.</p>\n<p>Questa è un&#x27;ottima notizia per la WWE, soprattutto con la stagione del King of the Ring in corso e Bron Breakker ancora posizionato come una delle stelle più esplosive della federazione. Ora resta da vedere come se la caverà nel torneo.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_aggiornamento-sulle-condizioni-di-bron-breakker-dopo-wwe-raw.html",
+        "published_html_preview": "https://x.com/FalseFinishHQ/status/2061889988254396714\n\n<p>Bron Breakker ha fatto preoccupare i fan dopo essere stato visto zoppicare al termine di WWE RAW, ma l&#x27;ultimo aggiornamento dovrebbe placare gran parte di queste preoccupazioni.</p>\n<p>Secondo False Finish, Breakker era acciaccato dopo il match contro Seth Rollins nell&#x27;episodio di Monday Night RAW del 1° giugno 2026. Tuttavia, non si prevede che il problema possa compromettere la sua capacità di lottare in futuro.</p>\n<blockquote>“False Finish ha appreso che Bron Breakker era effettivamente acciaccato dopo il suo match contro Seth Rollins a WWE RAW, ma nulla che possa influenzarlo o impedirgli di tornare sul ring in futuro.”</blockquote>\n<p>Questo aggiornamento arriva dopo che in rete è circolato un filmato che mostrava Breakker in difficoltà nel camminare all&#x27;interno della hall di un hotel dopo RAW. È stato visto zoppicare visibilmente e sembrava avere problemi a poggiare il peso su una gamba, il che ha immediatamente destato preoccupazione.</p>\n<p>Breakker aveva appena disputato un main event molto fisico contro Rollins. Durante l&#x27;incontro, ha accidentalmente colpito Paul Heyman con una Spear attraverso la barricata a bordo ring, dopo che Rollins aveva attirato Heyman sulla traiettoria. Successivamente, Breakker ha tentato un&#x27;altra Spear su Rollins, ma quest&#x27;ultimo ha usato la cintura di campione per attutire l&#x27;impatto prima di eseguire il Black Out per la vittoria.</p>\n<p>Il filmato girato in hotel ha fatto dubitare alcuni fan se Breakker avesse subito un infortunio reale, specialmente perché continuare a vendere un infortunio in modo così marcato lontano dall&#x27;arena sarebbe insolito. Ora, questo rapporto suggerisce che, sebbene Breakker fosse dolorante, non si tratta di nulla che dovrebbe impedirgli di gareggiare.</p>\n<p>Questa è un&#x27;ottima notizia per la WWE, soprattutto con la stagione del King of the Ring in corso e Bron Breakker ancora posizionato come una delle stelle più esplosive della federazione. Ora resta da vedere come se la caverà nel torneo.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/bron-breakkers-injury-status-limping-hotel-lobby-following-wwe-raw/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_aggiornamento-sulle-condizioni-di-bron-breakker-dopo-wwe-raw.html",
+        "publisher_review_html_preview": "https://x.com/FalseFinishHQ/status/2061889988254396714\n\n<p>Bron Breakker ha fatto preoccupare i fan dopo essere stato visto zoppicare al termine di WWE RAW, ma l&#x27;ultimo aggiornamento dovrebbe placare gran parte di queste preoccupazioni.</p>\n<p>Secondo False Finish, Breakker era acciaccato dopo il match contro Seth Rollins nell&#x27;episodio di Monday Night RAW del 1° giugno 2026. Tuttavia, non si prevede che il problema possa compromettere la sua capacità di lottare in futuro.</p>\n<blockquote>“False Finish ha appreso che Bron Breakker era effettivamente acciaccato dopo il suo match contro Seth Rollins a WWE RAW, ma nulla che possa influenzarlo o impedirgli di tornare sul ring in futuro.”</blockquote>\n<p>Questo aggiornamento arriva dopo che in rete è circolato un filmato che mostrava Breakker in difficoltà nel camminare all&#x27;interno della hall di un hotel dopo RAW. È stato visto zoppicare visibilmente e sembrava avere problemi a poggiare il peso su una gamba, il che ha immediatamente destato preoccupazione.</p>\n<p>Breakker aveva appena disputato un main event molto fisico contro Rollins. Durante l&#x27;incontro, ha accidentalmente colpito Paul Heyman con una Spear attraverso la barricata a bordo ring, dopo che Rollins aveva attirato Heyman sulla traiettoria. Successivamente, Breakker ha tentato un&#x27;altra Spear su Rollins, ma quest&#x27;ultimo ha usato la cintura di campione per attutire l&#x27;impatto prima di eseguire il Black Out per la vittoria.</p>\n<p>Il filmato girato in hotel ha fatto dubitare alcuni fan se Breakker avesse subito un infortunio reale, specialmente perché continuare a vendere un infortunio in modo così marcato lontano dall&#x27;arena sarebbe insolito. Ora, questo rapporto suggerisce che, sebbene Breakker fosse dolorante, non si tratta di nulla che dovrebbe impedirgli di gareggiare.</p>\n<p>Questa è un&#x27;ottima notizia per la WWE, soprattutto con la stagione del King of the Ring in corso e Bron Breakker ancora posizionato come una delle stelle più esplosive della federazione. Ora resta da vedere come se la caverà nel torneo.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/bron-breakkers-injury-status-limping-hotel-lobby-following-wwe-raw/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/bron-breakkers-injury-status-limping-hotel-lobby-following-wwe-raw/\nTitolo feed: Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW\nTitolo pagina: Bron Breakker's Injury Status After Limping in Hotel Lobby Following WWE RAW\nDescrizione: Bron Breakker had fans worried after he was seen limping after WWE RAW, but the latest update should calm some of those concerns. According to False\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Bron Breakker had fans worried after he was seen limping after WWE RAW, but the latest update should calm some of those concerns.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"According to False Finish , Breakker was banged up after his match with Seth Rollins on the June 1, 2026 episode of Monday Night RAW . However, the issue is not expected to affect his ability to work in the ring moving forward.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“False Finish has learned that Bron Breakker was indeed banged up after his match with Seth Rollins on WWE RAW but nothing that will affect him or working in-ring moving forward.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"This comes after footage circulated online showing Breakker struggling to walk inside a hotel lobby after RAW . He was seen limping noticeably and appeared to have trouble putting pressure on one of his legs, which immediately sparked concern.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Breakker had just competed in a physical main event against Rollins. During the match, he accidentally speared Paul Heyman through the ringside barricade after Rollins pulled Heyman into the line of fire. Breakker later hit another spear on Rollins, but Rollins used the championship belt to absorb the impact before hitting Black Out for the win .\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"The hotel footage made some wonder whether Breakker had suffered a legitimate injury, especially since selling that heavily away from the arena would be unusual. Now, this report suggests that while Breakker was hurting, it is not something that should keep him from competing.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"That is good news for WWE, especially with King of the Ring season underway and Bron Breakker still positioned as one of the company’s most explosive stars. Now it remains to be seen how he’ll fare in the tournament.\"\n  }\n]\n"
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "ai:Notizia di cronaca fisica su un top talent fresco di RAW, essenziale per il pubblico.; deterministic:hard:injury,strategic:raw,entity:seth rollins,recency:fresh_12h",
+        "score": 87
+      },
+      "publisher": {
+        "categories": [
+          4
+        ],
+        "error": null,
+        "featured_media": 5873,
+        "present": true,
+        "status": "published",
+        "wp_link": "https://news.openwrestlingtv.com/wwe/aggiornamento-sulle-condizioni-di-bron-breakker-dopo-wwe-raw/",
+        "wp_post_id": 5874
+      },
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/bron-breakkers-injury-status-limping-hotel-lobby-following-wwe-raw",
+      "title_it": "Aggiornamento sulle condizioni di Bron Breakker dopo WWE RAW"
+    },
+    {
+      "alfred": {
+        "decision": null,
+        "editorial_changes": [],
+        "issues": [],
+        "present": false,
+        "quality_score": null,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": null,
+        "diagnostic_stage": null,
+        "element_counts": null,
+        "error": null,
+        "present": false,
+        "raw_element_count": null,
+        "removed_before_gemini": null,
+        "status": null,
+        "translation_model": null,
+        "translation_used": null
+      },
+      "category_hint": "WWE",
+      "html_audit": {
+        "alfred_final_html_preview": "",
+        "bob_body_html_preview": "",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_bronson-reed-involved-in-a-car-accident.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_bronson-reed-involved-in-a-car-accident.html",
+        "publisher_review_html_preview": "",
+        "translation_prompt_preview": ""
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "ai:Aggiornamento su incolumità di un talent, importante ma circoscritto.; deterministic:strategic:raw,recency:fresh_12h",
+        "score": 66
+      },
+      "publisher": {
+        "categories": null,
+        "error": null,
+        "featured_media": null,
+        "present": false,
+        "status": null,
+        "wp_link": null,
+        "wp_post_id": null
+      },
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/bronson-reed-involved-car-accident",
+      "title_it": "Bronson Reed Involved in a Car Accident"
+    },
     {
       "alfred": {
         "decision": null,
@@ -75,7 +184,7 @@
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "ai:Annuncio ufficiale data evento speciale NXT.; deterministic:hard:return,soft_penalty:social media,recency:fresh_12h",
+        "reason": "ai:Annuncio ufficiale di un evento speciale NXT.; deterministic:hard:return,soft_penalty:social media,recency:fresh_12h",
         "score": 69
       },
       "publisher": {
@@ -97,117 +206,66 @@
         "editorial_changes": [],
         "issues": [],
         "present": true,
-        "quality_score": 100,
-        "warnings": []
+        "quality_score": 95,
+        "warnings": [
+          {
+            "code": "possible_missing_table",
+            "evidence": "Report ascolti WWE Raw: 25 maggio 2026",
+            "message": "Articolo con dati potenzialmente tabellari ma nessuna tabella estratta.",
+            "severity": "warning"
+          }
+        ]
       },
       "bob": {
         "clean_element_count": 4,
         "diagnostic_stage": "ready_for_alfred",
         "element_counts": {
-          "embed": 1,
-          "heading": 0,
-          "image": 0,
-          "quote": 1,
-          "table": 0,
-          "text": 2
-        },
-        "error": null,
-        "present": true,
-        "raw_element_count": 7,
-        "removed_before_gemini": 3,
-        "status": "ready_for_alfred",
-        "translation_model": "gemini-3.1-flash-lite",
-        "translation_used": true
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "https://x.com/domirandy17/status/2061563130585415745\n\n<blockquote>&quot;WWE Raw&quot; non si è concluso come Bron Breakker sperava: il suo rivale Seth Rollins ha avuto la meglio in un match estenuante durato ventidue minuti e mezzo. E, sfortunatamente per Breakker, questo potrebbe essere il minore dei suoi problemi. Lunedì pomeriggio, poco dopo la chiusura di &quot;Raw&quot;, l&#x27;utente X Domi Randy ha pubblicato un video in cui appare quello che sembra essere Breakker presso un hotel. La star di The Vision è stata ripresa mentre aveva evidenti difficoltà a muoversi, zoppicando pesantemente e appoggiandosi a un carrello portabagagli per spostarsi.</blockquote>\n<p>Non sono giunte notizie ufficiali riguardo alle condizioni di Breakker dopo la pubblicazione del video, il che spinge molti a chiedersi se si tratti di un infortunio rimediato nel match contro Rollins o se il wrestler fosse semplicemente &quot;acciaccato&quot; dopo una contesa così lunga. Un infortunio sarebbe una brutta battuta d&#x27;arresto per l&#x27;astro nascente, tornato sul ring da poco più di un mese dopo uno stop di oltre due mesi dovuto a un intervento chirurgico per un&#x27;ernia.</p>\n<p>Se per Breakker si trattasse davvero di un infortunio, sarebbe un altro duro colpo per la stable The Vision, che sembra alle prese con una serie infinita di problemi fisici dallo scorso autunno. Oltre a Breakker, Bronson Reed rimane fuori dai giochi dopo essersi strappato il bicipite distale durante Elimination Chamber a febbraio, mentre Logan Paul ha subito la rottura del tricipite all&#x27;ultimo Saturday Night&#x27;s Main Event, dove lui e Austin Theory hanno difeso con successo i WWE World Tag Team Championships. A causa di queste assenze, sono circolate voci su un possibile inserimento di nuovi lottatori nella stable, anche se al momento non si è ancora concretizzato nulla.</p>",
-        "bob_body_html_preview": "https://x.com/domirandy17/status/2061563130585415745\n\n<blockquote>&quot;WWE Raw&quot; non si è concluso come Bron Breakker sperava: il suo rivale Seth Rollins ha avuto la meglio in un match estenuante durato ventidue minuti e mezzo. E, sfortunatamente per Breakker, questo potrebbe essere il minore dei suoi problemi. Lunedì pomeriggio, poco dopo la chiusura di &quot;Raw&quot;, l&#x27;utente X Domi Randy ha pubblicato un video in cui appare quello che sembra essere Breakker presso un hotel. La star di The Vision è stata ripresa mentre aveva evidenti difficoltà a muoversi, zoppicando pesantemente e appoggiandosi a un carrello portabagagli per spostarsi.</blockquote>\n<p>Non sono giunte notizie ufficiali riguardo alle condizioni di Breakker dopo la pubblicazione del video, il che spinge molti a chiedersi se si tratti di un infortunio rimediato nel match contro Rollins o se il wrestler fosse semplicemente &quot;acciaccato&quot; dopo una contesa così lunga. Un infortunio sarebbe una brutta battuta d&#x27;arresto per l&#x27;astro nascente, tornato sul ring da poco più di un mese dopo uno stop di oltre due mesi dovuto a un intervento chirurgico per un&#x27;ernia.</p>\n<p>Se per Breakker si trattasse davvero di un infortunio, sarebbe un altro duro colpo per la stable The Vision, che sembra alle prese con una serie infinita di problemi fisici dallo scorso autunno. Oltre a Breakker, Bronson Reed rimane fuori dai giochi dopo essersi strappato il bicipite distale durante Elimination Chamber a febbraio, mentre Logan Paul ha subito la rottura del tricipite all&#x27;ultimo Saturday Night&#x27;s Main Event, dove lui e Austin Theory hanno difeso con successo i WWE World Tag Team Championships. A causa di queste assenze, sono circolate voci su un possibile inserimento di nuovi lottatori nella stable, anche se al momento non si è ancora concretizzato nulla.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_possibile-infortunio-per-bron-breakker-dopo-wwe-raw.html",
-        "published_html_preview": "https://x.com/domirandy17/status/2061563130585415745\n\n<blockquote>&quot;WWE Raw&quot; non si è concluso come Bron Breakker sperava: il suo rivale Seth Rollins ha avuto la meglio in un match estenuante durato ventidue minuti e mezzo. E, sfortunatamente per Breakker, questo potrebbe essere il minore dei suoi problemi. Lunedì pomeriggio, poco dopo la chiusura di &quot;Raw&quot;, l&#x27;utente X Domi Randy ha pubblicato un video in cui appare quello che sembra essere Breakker presso un hotel. La star di The Vision è stata ripresa mentre aveva evidenti difficoltà a muoversi, zoppicando pesantemente e appoggiandosi a un carrello portabagagli per spostarsi.</blockquote>\n<p>Non sono giunte notizie ufficiali riguardo alle condizioni di Breakker dopo la pubblicazione del video, il che spinge molti a chiedersi se si tratti di un infortunio rimediato nel match contro Rollins o se il wrestler fosse semplicemente &quot;acciaccato&quot; dopo una contesa così lunga. Un infortunio sarebbe una brutta battuta d&#x27;arresto per l&#x27;astro nascente, tornato sul ring da poco più di un mese dopo uno stop di oltre due mesi dovuto a un intervento chirurgico per un&#x27;ernia.</p>\n<p>Se per Breakker si trattasse davvero di un infortunio, sarebbe un altro duro colpo per la stable The Vision, che sembra alle prese con una serie infinita di problemi fisici dallo scorso autunno. Oltre a Breakker, Bronson Reed rimane fuori dai giochi dopo essersi strappato il bicipite distale durante Elimination Chamber a febbraio, mentre Logan Paul ha subito la rottura del tricipite all&#x27;ultimo Saturday Night&#x27;s Main Event, dove lui e Austin Theory hanno difeso con successo i WWE World Tag Team Championships. A causa di queste assenze, sono circolate voci su un possibile inserimento di nuovi lottatori nella stable, anche se al momento non si è ancora concretizzato nulla.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185863/wwe-raw-bron-breakker-injured-limping/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_possibile-infortunio-per-bron-breakker-dopo-wwe-raw.html",
-        "publisher_review_html_preview": "https://x.com/domirandy17/status/2061563130585415745\n\n<blockquote>&quot;WWE Raw&quot; non si è concluso come Bron Breakker sperava: il suo rivale Seth Rollins ha avuto la meglio in un match estenuante durato ventidue minuti e mezzo. E, sfortunatamente per Breakker, questo potrebbe essere il minore dei suoi problemi. Lunedì pomeriggio, poco dopo la chiusura di &quot;Raw&quot;, l&#x27;utente X Domi Randy ha pubblicato un video in cui appare quello che sembra essere Breakker presso un hotel. La star di The Vision è stata ripresa mentre aveva evidenti difficoltà a muoversi, zoppicando pesantemente e appoggiandosi a un carrello portabagagli per spostarsi.</blockquote>\n<p>Non sono giunte notizie ufficiali riguardo alle condizioni di Breakker dopo la pubblicazione del video, il che spinge molti a chiedersi se si tratti di un infortunio rimediato nel match contro Rollins o se il wrestler fosse semplicemente &quot;acciaccato&quot; dopo una contesa così lunga. Un infortunio sarebbe una brutta battuta d&#x27;arresto per l&#x27;astro nascente, tornato sul ring da poco più di un mese dopo uno stop di oltre due mesi dovuto a un intervento chirurgico per un&#x27;ernia.</p>\n<p>Se per Breakker si trattasse davvero di un infortunio, sarebbe un altro duro colpo per la stable The Vision, che sembra alle prese con una serie infinita di problemi fisici dallo scorso autunno. Oltre a Breakker, Bronson Reed rimane fuori dai giochi dopo essersi strappato il bicipite distale durante Elimination Chamber a febbraio, mentre Logan Paul ha subito la rottura del tricipite all&#x27;ultimo Saturday Night&#x27;s Main Event, dove lui e Austin Theory hanno difeso con successo i WWE World Tag Team Championships. A causa di queste assenze, sono circolate voci su un possibile inserimento di nuovi lottatori nella stable, anche se al momento non si è ancora concretizzato nulla.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185863/wwe-raw-bron-breakker-injured-limping/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185863/wwe-raw-bron-breakker-injured-limping/\nTitolo feed: Bron Breakker Possibly Injured, Spotted Limping After WWE Raw Loss\nTitolo pagina: Bron Breakker Possibly Injured, Spotted Limping After WWE Raw Loss - Wrestling Inc.\nDescrizione: Just a month after returning from injury, WWE's Bron Breakker is possibly injured again, have been spotted limping following his Raw loss to Seth Rollins\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"WWE Raw\\\" didn't end the way Bron Breakker hoped, as his rival Seth Rollins bested him in a grueling match that went twenty two and a half minutes. And unfortunately for Breakker, that may be the least of his problems. Taking to X Monday afternoon, shortly after \\\"Raw\\\" had gone off the air, user Domi Randy posted a video of what appeared to be Breakker at a hotel. And The Vision star could be seen having trouble moving around, limping heavily and needing a luggage carrier to help him move around.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"No word has emerged regarding Breakker's status since the video has been posted, leaving many to wonder whether this is a sign that Breakker was injured in his match against Rollins, or was merely showing signs of being \\\"banged up\\\" following a long match. An injury for Breakker would be an unfortunate break for the budding star, who is only a little more than a month removed from returning to the ring after being out over two months while recovering from hernia surgery .\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"While an injury would be a setback for Breakker, it would also be another setback for The Vision, which has seemingly dealt with never ending injury issues since last fall. In addition to Breakker, Bronson Reed remains out after suffering a distal torn bicep during Elimination Chamber in February , while Logan Paul tore his triceps muscle at the most recent Saturday Night's Main Event as he and Austin Theory successfully defended the WWE World Tag Team Championships. As a result of the injuries, rumors have emerged that The Vision could be adding new wrestlers to the stable , though that has yet to materialize.\"\n  }\n]\n"
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Notizia di infortunio reale, priorità massima per il fan italiano.; deterministic:hard:injury,hard:injured,hard:returning,hard:return,strategic:raw,entity:seth rollins,recency:fresh_12h",
-        "score": 87
-      },
-      "publisher": {
-        "categories": [
-          4
-        ],
-        "error": null,
-        "featured_media": 5856,
-        "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/wwe/possibile-infortunio-per-bron-breakker-dopo-wwe-raw/",
-        "wp_post_id": 5857
-      },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2185863/wwe-raw-bron-breakker-injured-limping",
-      "title_it": "Possibile infortunio per Bron Breakker dopo WWE Raw"
-    },
-    {
-      "alfred": {
-        "decision": "approved",
-        "editorial_changes": [],
-        "issues": [],
-        "present": true,
-        "quality_score": 100,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": 5,
-        "diagnostic_stage": "ready_for_alfred",
-        "element_counts": {
           "embed": 0,
           "heading": 0,
           "image": 0,
-          "quote": 2,
+          "quote": 1,
           "table": 0,
           "text": 3
         },
         "error": null,
         "present": true,
-        "raw_element_count": 6,
+        "raw_element_count": 5,
         "removed_before_gemini": 1,
         "status": "ready_for_alfred",
         "translation_model": "gemini-3.1-flash-lite",
         "translation_used": true
       },
-      "category_hint": "WWE",
+      "category_hint": "Business",
       "html_audit": {
-        "alfred_final_html_preview": "<p>Archiviato Clash in Italy, la WWE è ufficialmente sulla strada verso SummerSlam. Roman Reigns ha mantenuto il World Heavyweight Championship domenica in un Tribal Combat match, e i tornei King and Queen of the Ring hanno avuto inizio. Le finali si terranno a Night of Champions e i rispettivi vincitori guadagneranno un&#x27;opportunità titolata al &quot;Biggest Party of the Summer&quot;. Ora, un nuovo report potrebbe far luce sulla questione di chi affronterà Reigns a SummerSlam e chi invece a WrestleMania.</p>\n<p>Lunedì, Ibou di Self Made Sessions ha riferito che Reigns è destinato a lavorare con Oba Femi e Seth Rollins, entrambi partecipanti al torneo King of the Ring; Femi si è già qualificato per le semifinali.</p>\n<blockquote>&quot;Mi è stato detto che un match si terrà a SummerSlam, l&#x27;altro a WrestleMania, a meno che Dwayne non decida di lottare in Arabia Saudita&quot;, ha dichiarato Ibou riferendosi a The Rock.</blockquote>\n<blockquote>Ibou ha affermato di essere stato informato di questi piani alcuni giorni fa, ma di aver saputo lunedì che, sebbene i programmi per SummerSlam fossero ancora incerti, &quot;al momento il piano prevede che Seth Rollins vinca il torneo e affronti Roman Reigns&quot;. Presume che ciò significhi che Femi affronterà Brock Lesnar a SummerSlam in un match di bella, dopo che Lesnar ha sconfitto Femi a Clash in Italy. Se il report fosse corretto, ciò significherebbe che Femi è l&#x27;avversario designato per Reigns a WrestleMania 43, disponibilità di The Rock permettendo.</blockquote>\n<p>Sia Night of Champions che WrestleMania 43 si terranno a Riyadh, in Arabia Saudita. SummerSlam si svolgerà in due serate a Minneapolis, nel Minnesota, l&#x27;1 e il 2 agosto.</p>",
-        "bob_body_html_preview": "<p>Archiviato Clash in Italy, la WWE è ufficialmente sulla strada verso SummerSlam. Roman Reigns ha mantenuto il World Heavyweight Championship domenica in un Tribal Combat match, e i tornei King and Queen of the Ring hanno avuto inizio. Le finali si terranno a Night of Champions e i rispettivi vincitori guadagneranno un&#x27;opportunità titolata al &quot;Biggest Party of the Summer&quot;. Ora, un nuovo report potrebbe far luce sulla questione di chi affronterà Reigns a SummerSlam e chi invece a WrestleMania.</p>\n<p>Lunedì, Ibou di Self Made Sessions ha riferito che Reigns è destinato a lavorare con Oba Femi e Seth Rollins, entrambi partecipanti al torneo King of the Ring; Femi si è già qualificato per le semifinali.</p>\n<blockquote>&quot;Mi è stato detto che un match si terrà a SummerSlam, l&#x27;altro a WrestleMania, a meno che Dwayne non decida di lottare in Arabia Saudita&quot;, ha dichiarato Ibou riferendosi a The Rock.</blockquote>\n<blockquote>Ibou ha affermato di essere stato informato di questi piani alcuni giorni fa, ma di aver saputo lunedì che, sebbene i programmi per SummerSlam fossero ancora incerti, &quot;al momento il piano prevede che Seth Rollins vinca il torneo e affronti Roman Reigns&quot;. Presume che ciò significhi che Femi affronterà Brock Lesnar a SummerSlam in un match di bella, dopo che Lesnar ha sconfitto Femi a Clash in Italy. Se il report fosse corretto, ciò significherebbe che Femi è l&#x27;avversario designato per Reigns a WrestleMania 43, disponibilità di The Rock permettendo.</blockquote>\n<p>Sia Night of Champions che WrestleMania 43 si terranno a Riyadh, in Arabia Saudita. SummerSlam si svolgerà in due serate a Minneapolis, nel Minnesota, l&#x27;1 e il 2 agosto.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_report-sui-futuri-avversari-di-roman-reigns-per-summerslam-e-wrestlemania.html",
-        "published_html_preview": "<p>Archiviato Clash in Italy, la WWE è ufficialmente sulla strada verso SummerSlam. Roman Reigns ha mantenuto il World Heavyweight Championship domenica in un Tribal Combat match, e i tornei King and Queen of the Ring hanno avuto inizio. Le finali si terranno a Night of Champions e i rispettivi vincitori guadagneranno un&#x27;opportunità titolata al &quot;Biggest Party of the Summer&quot;. Ora, un nuovo report potrebbe far luce sulla questione di chi affronterà Reigns a SummerSlam e chi invece a WrestleMania.</p>\n<p>Lunedì, Ibou di Self Made Sessions ha riferito che Reigns è destinato a lavorare con Oba Femi e Seth Rollins, entrambi partecipanti al torneo King of the Ring; Femi si è già qualificato per le semifinali.</p>\n<blockquote>&quot;Mi è stato detto che un match si terrà a SummerSlam, l&#x27;altro a WrestleMania, a meno che Dwayne non decida di lottare in Arabia Saudita&quot;, ha dichiarato Ibou riferendosi a The Rock.</blockquote>\n<blockquote>Ibou ha affermato di essere stato informato di questi piani alcuni giorni fa, ma di aver saputo lunedì che, sebbene i programmi per SummerSlam fossero ancora incerti, &quot;al momento il piano prevede che Seth Rollins vinca il torneo e affronti Roman Reigns&quot;. Presume che ciò significhi che Femi affronterà Brock Lesnar a SummerSlam in un match di bella, dopo che Lesnar ha sconfitto Femi a Clash in Italy. Se il report fosse corretto, ciò significherebbe che Femi è l&#x27;avversario designato per Reigns a WrestleMania 43, disponibilità di The Rock permettendo.</blockquote>\n<p>Sia Night of Champions che WrestleMania 43 si terranno a Riyadh, in Arabia Saudita. SummerSlam si svolgerà in due serate a Minneapolis, nel Minnesota, l&#x27;1 e il 2 agosto.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185881/roman-reigns-wwe-summerslam-wrestlemania-seth-rollins-oba-femi/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_report-sui-futuri-avversari-di-roman-reigns-per-summerslam-e-wrestlemania.html",
-        "publisher_review_html_preview": "<p>Archiviato Clash in Italy, la WWE è ufficialmente sulla strada verso SummerSlam. Roman Reigns ha mantenuto il World Heavyweight Championship domenica in un Tribal Combat match, e i tornei King and Queen of the Ring hanno avuto inizio. Le finali si terranno a Night of Champions e i rispettivi vincitori guadagneranno un&#x27;opportunità titolata al &quot;Biggest Party of the Summer&quot;. Ora, un nuovo report potrebbe far luce sulla questione di chi affronterà Reigns a SummerSlam e chi invece a WrestleMania.</p>\n<p>Lunedì, Ibou di Self Made Sessions ha riferito che Reigns è destinato a lavorare con Oba Femi e Seth Rollins, entrambi partecipanti al torneo King of the Ring; Femi si è già qualificato per le semifinali.</p>\n<blockquote>&quot;Mi è stato detto che un match si terrà a SummerSlam, l&#x27;altro a WrestleMania, a meno che Dwayne non decida di lottare in Arabia Saudita&quot;, ha dichiarato Ibou riferendosi a The Rock.</blockquote>\n<blockquote>Ibou ha affermato di essere stato informato di questi piani alcuni giorni fa, ma di aver saputo lunedì che, sebbene i programmi per SummerSlam fossero ancora incerti, &quot;al momento il piano prevede che Seth Rollins vinca il torneo e affronti Roman Reigns&quot;. Presume che ciò significhi che Femi affronterà Brock Lesnar a SummerSlam in un match di bella, dopo che Lesnar ha sconfitto Femi a Clash in Italy. Se il report fosse corretto, ciò significherebbe che Femi è l&#x27;avversario designato per Reigns a WrestleMania 43, disponibilità di The Rock permettendo.</blockquote>\n<p>Sia Night of Champions che WrestleMania 43 si terranno a Riyadh, in Arabia Saudita. SummerSlam si svolgerà in due serate a Minneapolis, nel Minnesota, l&#x27;1 e il 2 agosto.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185881/roman-reigns-wwe-summerslam-wrestlemania-seth-rollins-oba-femi/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185881/roman-reigns-wwe-summerslam-wrestlemania-seth-rollins-oba-femi/\nTitolo feed: Backstage Report On Roman Reigns' Upcoming Opponents At WWE SummerSlam & WrestleMania\nTitolo pagina: Backstage Report On Roman Reigns' Upcoming Opponents At WWE SummerSlam & WrestleMania - Wrestling Inc.\nDescrizione: Roman Reigns retained the WWE World Heavyweight Championship at Clash in Italy when he defeated Jacob Fatu in a Tribal Combat match.\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"With Clash In Italy behind us, WWE is firmly on the road to SummerSlam. Roman Reigns retained the World Heavyweight Championship on Sunday in a Tribal Combat match, and the King and Queen of the Ring tournaments have begun. The finals will happen at Night of Champions and the winner of those respective tournaments will earn title shots at \\\"The Biggest Party of the Summer.\\\" Now, a new report could be shining some light on the question of who Reigns will face at SummerSlam — and who he'll face at WrestleMania.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"On Monday, Ibou of Self Made Sessions reported that Reigns is scheduled to work with Oba Femi and Seth Rollins, both of whom are in the King of the Ring tournament; Femi has already advanced to the semi-finals.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"I was told one match is gonna be at SummerSlam, the other one is gonna be at WrestleMania, unless Dwayne decides to wrestle at Saudi,\\\" Ibou said, referring to The Rock.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"Ibou said he was informed of these plans days ago, but heard earlier on Monday that while SummerSlam plans were still up in the air, \\\"right now the plan is for Seth Rollins to win the tournament and face Roman Reigns.\\\" He assumes that means Femi will face Brock Lesnar at SummerSlam in a rubber match after Lesnar defeated Femi at Clash in Italy . If the report is true, that would mean Femi is Reigns' planned opponent for WrestleMania 43, pending The Rock's availability.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Both Night of Champions and WrestleMania 43 will emanate from Riyadh, Saudi Arabia. SummerSlam will take place over two nights in Minneapolis, Minnesota on August 1 and 2.\"\n  }\n]\n"
+        "alfred_final_html_preview": "<p>Dopo due settimane di ascolti stabili, l&#x27;edizione del 25 maggio di &quot;WWE Raw&quot; ha registrato una flessione nel numero di spettatori su Netflix nell&#x27;arco di sette giorni. Lo show di avvicinamento a WWE Clash in Italy si è aperto e chiuso con due firme di contratto, che hanno visto Oba Femi e Jacob Fatu ufficializzare i loro match per l&#x27;evento.</p>\n<p>Secondo Wrestlenomics, basandosi sui dati forniti da Netflix, l&#x27;episodio del 25 maggio dello show rosso ha totalizzato 2,5 milioni di visualizzazioni globali in sette giorni, in calo rispetto ai 2,6 milioni registrati nelle due settimane precedenti. &quot;Raw&quot; sta vivendo un lento declino negli ascolti dall&#x27;episodio successivo a WWE WrestleMania 42, che con 3,3 milioni di visualizzazioni globali rimane la puntata più vista dell&#x27;anno.</p>\n<blockquote>&quot;Sono state totalizzate 4,6 milioni di ore di visione per lo show del 25 maggio. Tra le serie televisive in lingua inglese, &quot;Raw&quot; si è classificato settimo a livello globale e quinto negli Stati Uniti. Sul territorio americano, lo show è stato superato da &quot;The Borough&quot;, &quot;Nemesis&quot;, la seconda stagione di &quot;The Four Seasons&quot; e &quot;Instadocs: Alex Murdaugh, Unconvicted.&quot;</blockquote>\n<p>Femi ha aperto la serata affrontando Paul Heyman, il &quot;consulente&quot; di Brock Lesnar. Nel resto dello show, Rey Mysterio ha sconfitto Rusev diventando il primo sfidante al titolo Intercontinentale di Penta; quest&#x27;ultimo ha poi difeso la cintura contro Je&#x27;Von Evans, mentre Seth Rollins ha superato Montez Ford. Bayley e Lyra Valkyria hanno ottenuto una vittoria contro Roxanne Perez e Raquel Rodriguez del Judgment Day. Fatu e Reigns hanno chiuso la puntata con la firma del contratto: Fatu affronterà il World Heavyweight Championship in un Tribal Combat match durante l&#x27;evento in Italia.</p>",
+        "bob_body_html_preview": "<p>Dopo due settimane di ascolti stabili, l&#x27;edizione del 25 maggio di &quot;WWE Raw&quot; ha registrato una flessione nel numero di spettatori su Netflix nell&#x27;arco di sette giorni. Lo show di avvicinamento a WWE Clash in Italy si è aperto e chiuso con due firme di contratto, che hanno visto Oba Femi e Jacob Fatu ufficializzare i loro match per l&#x27;evento.</p>\n<p>Secondo Wrestlenomics, basandosi sui dati forniti da Netflix, l&#x27;episodio del 25 maggio dello show rosso ha totalizzato 2,5 milioni di visualizzazioni globali in sette giorni, in calo rispetto ai 2,6 milioni registrati nelle due settimane precedenti. &quot;Raw&quot; sta vivendo un lento declino negli ascolti dall&#x27;episodio successivo a WWE WrestleMania 42, che con 3,3 milioni di visualizzazioni globali rimane la puntata più vista dell&#x27;anno.</p>\n<blockquote>&quot;Sono state totalizzate 4,6 milioni di ore di visione per lo show del 25 maggio. Tra le serie televisive in lingua inglese, &quot;Raw&quot; si è classificato settimo a livello globale e quinto negli Stati Uniti. Sul territorio americano, lo show è stato superato da &quot;The Borough&quot;, &quot;Nemesis&quot;, la seconda stagione di &quot;The Four Seasons&quot; e &quot;Instadocs: Alex Murdaugh, Unconvicted.&quot;</blockquote>\n<p>Femi ha aperto la serata affrontando Paul Heyman, il &quot;consulente&quot; di Brock Lesnar. Nel resto dello show, Rey Mysterio ha sconfitto Rusev diventando il primo sfidante al titolo Intercontinentale di Penta; quest&#x27;ultimo ha poi difeso la cintura contro Je&#x27;Von Evans, mentre Seth Rollins ha superato Montez Ford. Bayley e Lyra Valkyria hanno ottenuto una vittoria contro Roxanne Perez e Raquel Rodriguez del Judgment Day. Fatu e Reigns hanno chiuso la puntata con la firma del contratto: Fatu affronterà il World Heavyweight Championship in un Tribal Combat match durante l&#x27;evento in Italia.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_report-ascolti-wwe-raw-25-maggio-2026.html",
+        "published_html_preview": "<p>Dopo due settimane di ascolti stabili, l&#x27;edizione del 25 maggio di &quot;WWE Raw&quot; ha registrato una flessione nel numero di spettatori su Netflix nell&#x27;arco di sette giorni. Lo show di avvicinamento a WWE Clash in Italy si è aperto e chiuso con due firme di contratto, che hanno visto Oba Femi e Jacob Fatu ufficializzare i loro match per l&#x27;evento.</p>\n<p>Secondo Wrestlenomics, basandosi sui dati forniti da Netflix, l&#x27;episodio del 25 maggio dello show rosso ha totalizzato 2,5 milioni di visualizzazioni globali in sette giorni, in calo rispetto ai 2,6 milioni registrati nelle due settimane precedenti. &quot;Raw&quot; sta vivendo un lento declino negli ascolti dall&#x27;episodio successivo a WWE WrestleMania 42, che con 3,3 milioni di visualizzazioni globali rimane la puntata più vista dell&#x27;anno.</p>\n<blockquote>&quot;Sono state totalizzate 4,6 milioni di ore di visione per lo show del 25 maggio. Tra le serie televisive in lingua inglese, &quot;Raw&quot; si è classificato settimo a livello globale e quinto negli Stati Uniti. Sul territorio americano, lo show è stato superato da &quot;The Borough&quot;, &quot;Nemesis&quot;, la seconda stagione di &quot;The Four Seasons&quot; e &quot;Instadocs: Alex Murdaugh, Unconvicted.&quot;</blockquote>\n<p>Femi ha aperto la serata affrontando Paul Heyman, il &quot;consulente&quot; di Brock Lesnar. Nel resto dello show, Rey Mysterio ha sconfitto Rusev diventando il primo sfidante al titolo Intercontinentale di Penta; quest&#x27;ultimo ha poi difeso la cintura contro Je&#x27;Von Evans, mentre Seth Rollins ha superato Montez Ford. Bayley e Lyra Valkyria hanno ottenuto una vittoria contro Roxanne Perez e Raquel Rodriguez del Judgment Day. Fatu e Reigns hanno chiuso la puntata con la firma del contratto: Fatu affronterà il World Heavyweight Championship in un Tribal Combat match durante l&#x27;evento in Italia.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2186098/wwe-raw-ratings-viewership-report-may-25-2026/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_report-ascolti-wwe-raw-25-maggio-2026.html",
+        "publisher_review_html_preview": "<p>Dopo due settimane di ascolti stabili, l&#x27;edizione del 25 maggio di &quot;WWE Raw&quot; ha registrato una flessione nel numero di spettatori su Netflix nell&#x27;arco di sette giorni. Lo show di avvicinamento a WWE Clash in Italy si è aperto e chiuso con due firme di contratto, che hanno visto Oba Femi e Jacob Fatu ufficializzare i loro match per l&#x27;evento.</p>\n<p>Secondo Wrestlenomics, basandosi sui dati forniti da Netflix, l&#x27;episodio del 25 maggio dello show rosso ha totalizzato 2,5 milioni di visualizzazioni globali in sette giorni, in calo rispetto ai 2,6 milioni registrati nelle due settimane precedenti. &quot;Raw&quot; sta vivendo un lento declino negli ascolti dall&#x27;episodio successivo a WWE WrestleMania 42, che con 3,3 milioni di visualizzazioni globali rimane la puntata più vista dell&#x27;anno.</p>\n<blockquote>&quot;Sono state totalizzate 4,6 milioni di ore di visione per lo show del 25 maggio. Tra le serie televisive in lingua inglese, &quot;Raw&quot; si è classificato settimo a livello globale e quinto negli Stati Uniti. Sul territorio americano, lo show è stato superato da &quot;The Borough&quot;, &quot;Nemesis&quot;, la seconda stagione di &quot;The Four Seasons&quot; e &quot;Instadocs: Alex Murdaugh, Unconvicted.&quot;</blockquote>\n<p>Femi ha aperto la serata affrontando Paul Heyman, il &quot;consulente&quot; di Brock Lesnar. Nel resto dello show, Rey Mysterio ha sconfitto Rusev diventando il primo sfidante al titolo Intercontinentale di Penta; quest&#x27;ultimo ha poi difeso la cintura contro Je&#x27;Von Evans, mentre Seth Rollins ha superato Montez Ford. Bayley e Lyra Valkyria hanno ottenuto una vittoria contro Roxanne Perez e Raquel Rodriguez del Judgment Day. Fatu e Reigns hanno chiuso la puntata con la firma del contratto: Fatu affronterà il World Heavyweight Championship in un Tribal Combat match durante l&#x27;evento in Italia.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2186098/wwe-raw-ratings-viewership-report-may-25-2026/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2186098/wwe-raw-ratings-viewership-report-may-25-2026/\nTitolo feed: WWE Raw Ratings & Viewership Report: 5/25/2026\nTitolo pagina: WWE Raw Ratings & Viewership Report: 5/25/2026 - Wrestling Inc.\nDescrizione: After two weeks of consistent viewership, the May 25 edition of “WWE Raw” saw a decrease in those watching the product on Netflix over a seven day period.\nCategoria suggerita: Business\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"After two weeks of consistent viewership, the May 25 edition of \\\"WWE Raw\\\" saw a decrease in those watching the product on Netflix over a seven day period. The go-home show to WWE Clash in Italy opened and closed with contract signings, with both Oba Femi and Jacob Fatu signing on the dotted line to make their matches at the event official.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"According to Wrestlenomics , with data from Netflix , the May 25 edition of the red brand drew 2.5 million global views over the course of seven days, down from 2.6 million viewers that held consistent the previous two weeks. \\\"Raw\\\" has been on a slow decline in viewership since the episode following WWE WrestleMania 42, which saw 3.3 million global views , the most-viewed episode of the year.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"A total of 4.6 million hours of the May 25 show were watched. Among English television shows, \\\"Raw\\\" ranked seventh for the week globally and fifth domestically. In the United States, the show was beaten out by \\\"The Borough,\\\" \\\"Nemesis,\\\" season two of \\\"The Four Seasons,\\\" and \\\"Instadocs: Alex Murdaugh, Unconvicted.\\\"\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Femi opened the show to confront Brock Lesnar's \\\"advocate,\\\" Paul Heyman. The rest of the show saw Rey Mysterio defeat Rusev to become the number one contender for Penta's Intercontinental Championship, Penta defend that title against Je'Von Evans, and Seth Rollins defeat Montez Ford. Bayley and Lyra Valkyria also scored a victory over Judgment Day's Roxanne Perez and Raquel Rodriguez. Fatu and Reigns then ended the show with their contract signing, with Fatu set to challenge for the World Heavyweight Championship in a Tribal Combat match at the event in Italy.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "ai:Report autorevole sui piani futuri del campione, molto rilevante.; deterministic:hard:championship,strategic:backstage,strategic:clash in italy,entity:roman reigns,entity:seth rollins,entity:oba femi,recency:fresh_12h",
-        "score": 83
+        "reason": "ai:Dati importanti sulla transizione WWE su Netflix. Seleziono WINC per sintesi migliore.; deterministic:hard:netflix,strategic:raw,current:netflix_aaa,ratings:generic_penalty,recency:fresh_12h",
+        "score": 78
       },
       "publisher": {
         "categories": [
-          4
+          15,
+          8
         ],
         "error": null,
-        "featured_media": 5858,
+        "featured_media": 5877,
         "present": true,
         "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/wwe/report-sui-futuri-avversari-di-roman-reigns-per-summerslam-e-wrestlemania/",
-        "wp_post_id": 5859
+        "wp_link": "https://news.openwrestlingtv.com/world/report-ascolti-wwe-raw-25-maggio-2026/",
+        "wp_post_id": 5878
       },
       "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2185881/roman-reigns-wwe-summerslam-wrestlemania-seth-rollins-oba-femi",
-      "title_it": "Report sui futuri avversari di Roman Reigns per SummerSlam e WrestleMania"
+      "source_url": "https://www.wrestlinginc.com/2186098/wwe-raw-ratings-viewership-report-may-25-2026",
+      "title_it": "Report ascolti WWE Raw: 25 maggio 2026"
     },
     {
       "alfred": {
@@ -215,61 +273,68 @@
         "editorial_changes": [],
         "issues": [],
         "present": true,
-        "quality_score": 100,
-        "warnings": []
+        "quality_score": 95,
+        "warnings": [
+          {
+            "code": "possible_missing_table",
+            "evidence": "Jeff Jarrett: Chad Gable dovrebbe considerare il passaggio in AEW",
+            "message": "Articolo con dati potenzialmente tabellari ma nessuna tabella estratta.",
+            "severity": "warning"
+          }
+        ]
       },
       "bob": {
-        "clean_element_count": 5,
+        "clean_element_count": 4,
         "diagnostic_stage": "ready_for_alfred",
         "element_counts": {
-          "embed": 1,
+          "embed": 0,
           "heading": 0,
           "image": 0,
-          "quote": 0,
+          "quote": 1,
           "table": 0,
-          "text": 4
+          "text": 3
         },
         "error": null,
         "present": true,
-        "raw_element_count": 8,
-        "removed_before_gemini": 3,
+        "raw_element_count": 5,
+        "removed_before_gemini": 1,
         "status": "ready_for_alfred",
         "translation_model": "gemini-3.1-flash-lite",
         "translation_used": true
       },
       "category_hint": "AEW",
       "html_audit": {
-        "alfred_final_html_preview": "https://x.com/FOXSportsMX/status/2061840272909316202\n\n<p>È passato quasi un anno da quando la AEW ha fatto tappa in Messico per la prima volta, mettendo in scena AEW Grand Slam Mexico all&#x27;Arena Mexico, casa del loro partner promozionale CMLL. E ora, la promotion è pronta per il bis. Attraverso X, nella giornata di martedì, il partner di trasmissione messicano della AEW, Fox Sports Mexico, ha annunciato che Grand Slam Mexico si terrà il 5 agosto, sempre in diretta dall&#x27;Arena Mexico. I biglietti saranno in vendita da sabato 6 giugno.</p>\n<p>Sebbene al momento non siano stati annunciati match, il poster di Grand Slam vede la presenza di diverse star della lucha libre della AEW. Tra questi figurano Andrade El Idolo, che ha iniziato la sua carriera nell&#x27;Arena Mexico come La Sombra, il Ring of Honor World Champion Bandido, i lottatori legati sia alla AEW che alla CMLL come Thunder Rosa e Mascara Dorada, e la stella di punta della CMLL, Mistico. L&#x27;unico non-luchador presente sul poster è l&#x27;AEW Men&#x27;s World Champion MJF.</p>\n<p>Grand Slam Mexico si terrà con due mesi di ritardo rispetto allo scorso anno, una decisione probabilmente influenzata dalla Coppa del Mondo FIFA 2026. La kermesse calcistica si svolgerà in parte proprio in Messico da metà giugno a metà luglio, portando la CMLL a modificare il proprio calendario per tenere show a Città del Messico, Puebla e Guadalajara ogni giorno della settimana; ciò ha reso improbabile per la AEW organizzare Grand Slam a giugno. Lo show farà ora parte della marcia di avvicinamento della AEW verso All In, previsto per fine agosto, e si terrà appena due settimane dopo AEW Redemption, in programma a Montreal il 26 luglio.</p>\n<p>La prima edizione di Grand Slam Mexico si è rivelata importante sia per la AEW che per la CMLL, poiché ha dato il via a una faida durata un mese tra MJF e Mistico dopo che quest&#x27;ultimo ha sconfitto MJF per squalifica. Le loro divergenze sono culminate al 92° Aniversario della CMLL a settembre, dove Mistico ha sconfitto MJF in un Mask vs. Title match, conquistando il CMLL World Light Heavyweight Championship.</p>",
-        "bob_body_html_preview": "https://x.com/FOXSportsMX/status/2061840272909316202\n\n<p>È passato quasi un anno da quando la AEW ha fatto tappa in Messico per la prima volta, mettendo in scena AEW Grand Slam Mexico all&#x27;Arena Mexico, casa del loro partner promozionale CMLL. E ora, la promotion è pronta per il bis. Attraverso X, nella giornata di martedì, il partner di trasmissione messicano della AEW, Fox Sports Mexico, ha annunciato che Grand Slam Mexico si terrà il 5 agosto, sempre in diretta dall&#x27;Arena Mexico. I biglietti saranno in vendita da sabato 6 giugno.</p>\n<p>Sebbene al momento non siano stati annunciati match, il poster di Grand Slam vede la presenza di diverse star della lucha libre della AEW. Tra questi figurano Andrade El Idolo, che ha iniziato la sua carriera nell&#x27;Arena Mexico come La Sombra, il Ring of Honor World Champion Bandido, i lottatori legati sia alla AEW che alla CMLL come Thunder Rosa e Mascara Dorada, e la stella di punta della CMLL, Mistico. L&#x27;unico non-luchador presente sul poster è l&#x27;AEW Men&#x27;s World Champion MJF.</p>\n<p>Grand Slam Mexico si terrà con due mesi di ritardo rispetto allo scorso anno, una decisione probabilmente influenzata dalla Coppa del Mondo FIFA 2026. La kermesse calcistica si svolgerà in parte proprio in Messico da metà giugno a metà luglio, portando la CMLL a modificare il proprio calendario per tenere show a Città del Messico, Puebla e Guadalajara ogni giorno della settimana; ciò ha reso improbabile per la AEW organizzare Grand Slam a giugno. Lo show farà ora parte della marcia di avvicinamento della AEW verso All In, previsto per fine agosto, e si terrà appena due settimane dopo AEW Redemption, in programma a Montreal il 26 luglio.</p>\n<p>La prima edizione di Grand Slam Mexico si è rivelata importante sia per la AEW che per la CMLL, poiché ha dato il via a una faida durata un mese tra MJF e Mistico dopo che quest&#x27;ultimo ha sconfitto MJF per squalifica. Le loro divergenze sono culminate al 92° Aniversario della CMLL a settembre, dove Mistico ha sconfitto MJF in un Mask vs. Title match, conquistando il CMLL World Light Heavyweight Championship.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_aew-annuncia-grand-slam-mexico-2026.html",
-        "published_html_preview": "https://x.com/FOXSportsMX/status/2061840272909316202\n\n<p>È passato quasi un anno da quando la AEW ha fatto tappa in Messico per la prima volta, mettendo in scena AEW Grand Slam Mexico all&#x27;Arena Mexico, casa del loro partner promozionale CMLL. E ora, la promotion è pronta per il bis. Attraverso X, nella giornata di martedì, il partner di trasmissione messicano della AEW, Fox Sports Mexico, ha annunciato che Grand Slam Mexico si terrà il 5 agosto, sempre in diretta dall&#x27;Arena Mexico. I biglietti saranno in vendita da sabato 6 giugno.</p>\n<p>Sebbene al momento non siano stati annunciati match, il poster di Grand Slam vede la presenza di diverse star della lucha libre della AEW. Tra questi figurano Andrade El Idolo, che ha iniziato la sua carriera nell&#x27;Arena Mexico come La Sombra, il Ring of Honor World Champion Bandido, i lottatori legati sia alla AEW che alla CMLL come Thunder Rosa e Mascara Dorada, e la stella di punta della CMLL, Mistico. L&#x27;unico non-luchador presente sul poster è l&#x27;AEW Men&#x27;s World Champion MJF.</p>\n<p>Grand Slam Mexico si terrà con due mesi di ritardo rispetto allo scorso anno, una decisione probabilmente influenzata dalla Coppa del Mondo FIFA 2026. La kermesse calcistica si svolgerà in parte proprio in Messico da metà giugno a metà luglio, portando la CMLL a modificare il proprio calendario per tenere show a Città del Messico, Puebla e Guadalajara ogni giorno della settimana; ciò ha reso improbabile per la AEW organizzare Grand Slam a giugno. Lo show farà ora parte della marcia di avvicinamento della AEW verso All In, previsto per fine agosto, e si terrà appena due settimane dopo AEW Redemption, in programma a Montreal il 26 luglio.</p>\n<p>La prima edizione di Grand Slam Mexico si è rivelata importante sia per la AEW che per la CMLL, poiché ha dato il via a una faida durata un mese tra MJF e Mistico dopo che quest&#x27;ultimo ha sconfitto MJF per squalifica. Le loro divergenze sono culminate al 92° Aniversario della CMLL a settembre, dove Mistico ha sconfitto MJF in un Mask vs. Title match, conquistando il CMLL World Light Heavyweight Championship.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185902/aew-grand-slam-mexico-2026-announces/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_aew-annuncia-grand-slam-mexico-2026.html",
-        "publisher_review_html_preview": "https://x.com/FOXSportsMX/status/2061840272909316202\n\n<p>È passato quasi un anno da quando la AEW ha fatto tappa in Messico per la prima volta, mettendo in scena AEW Grand Slam Mexico all&#x27;Arena Mexico, casa del loro partner promozionale CMLL. E ora, la promotion è pronta per il bis. Attraverso X, nella giornata di martedì, il partner di trasmissione messicano della AEW, Fox Sports Mexico, ha annunciato che Grand Slam Mexico si terrà il 5 agosto, sempre in diretta dall&#x27;Arena Mexico. I biglietti saranno in vendita da sabato 6 giugno.</p>\n<p>Sebbene al momento non siano stati annunciati match, il poster di Grand Slam vede la presenza di diverse star della lucha libre della AEW. Tra questi figurano Andrade El Idolo, che ha iniziato la sua carriera nell&#x27;Arena Mexico come La Sombra, il Ring of Honor World Champion Bandido, i lottatori legati sia alla AEW che alla CMLL come Thunder Rosa e Mascara Dorada, e la stella di punta della CMLL, Mistico. L&#x27;unico non-luchador presente sul poster è l&#x27;AEW Men&#x27;s World Champion MJF.</p>\n<p>Grand Slam Mexico si terrà con due mesi di ritardo rispetto allo scorso anno, una decisione probabilmente influenzata dalla Coppa del Mondo FIFA 2026. La kermesse calcistica si svolgerà in parte proprio in Messico da metà giugno a metà luglio, portando la CMLL a modificare il proprio calendario per tenere show a Città del Messico, Puebla e Guadalajara ogni giorno della settimana; ciò ha reso improbabile per la AEW organizzare Grand Slam a giugno. Lo show farà ora parte della marcia di avvicinamento della AEW verso All In, previsto per fine agosto, e si terrà appena due settimane dopo AEW Redemption, in programma a Montreal il 26 luglio.</p>\n<p>La prima edizione di Grand Slam Mexico si è rivelata importante sia per la AEW che per la CMLL, poiché ha dato il via a una faida durata un mese tra MJF e Mistico dopo che quest&#x27;ultimo ha sconfitto MJF per squalifica. Le loro divergenze sono culminate al 92° Aniversario della CMLL a settembre, dove Mistico ha sconfitto MJF in un Mask vs. Title match, conquistando il CMLL World Light Heavyweight Championship.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2185902/aew-grand-slam-mexico-2026-announces/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185902/aew-grand-slam-mexico-2026-announces/\nTitolo feed: AEW Announces Grand Slam Mexico 2026\nTitolo pagina: AEW Announces Grand Slam Mexico 2026 - Wrestling Inc.\nDescrizione: One year after their debut in Mexico, AEW announces their return to the country, revealing that the second \"Grand Slam Mexico\" will take place on August 5\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"It was almost a year ago that AEW journeyed down to Mexico for the first time, running AEW Grand Slam Mexico in Arena Mexico , home of their promotional partner CMLL. And now, the promotion is ready for an encore. Taking to X at noon time on Tuesday, AEW's Mexican Broadcast partner Fox Sports Mexico announced that Grand Slam Mexico would be taking place on August 5, once again airing out of Arena Mexico. Tickets go on sale Saturday, June 6.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Though no matches have been announced at this time, the Grand Slam poster advertised several notable AEW lucha libre stars as appearing. This included Andrade El Idolo, who began his career in Arena Mexico as La Sombra, Ring of Honor World Champion Bandido, dual AEW/CMLL stars Thunder Rosa and Mascara Dorada, and CMLL top star Mistico . The lone non-luchador featured on the poster was AEW Men's World Champion MJF.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Grand Slam Mexico will take place two months later than it did last year, a decision likely influenced by the 2026 FIFA World Cup . The football extravaganza will be held, in part, in Mexico from mid-June to mid-July, which has resulted in CMLL tweaking their schedule to hold shows in Mexico City, Puebla, and Guadalajara every day of the week, thus making it unlikely for AEW to hold Grand Slam in June. The show will now be part of AEW's build to All In later in August, and will come just two weeks after AEW Redemption, being held in Montreal on July 26.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"The first edition of Grand Slam Mexico proved to be important to both AEW and CMLL, as it kick-started a month-long feud between MJF and Mistico after the latter defeated MJF by DQ. Their issues would culminate at CMLL's 92nd Aniversario in September, where Mistico would defeat MJF in a Mask vs. Title match to claim the CMLL World Light Heavyweight Championship.\"\n  }\n]\n"
+        "alfred_final_html_preview": "<p>Chad Gable della WWE ha fatto discutere questo fine settimana dopo il suo match mask vs. mask, accolto in modo estremamente positivo, contro El Grande Americano, ovvero Ludwig Kaiser, a AAA Noche de los Grandes. Gable è stato sconfitto da Americano ed è stato costretto a togliersi la maschera in quanto iterazione originale del personaggio.</p>\n<p>I fan stanno speculando sul futuro di Gable e su cosa lo attenda al suo ritorno in WWE. Durante un episodio di &quot;My World&quot;, la WWE Hall of Famer e attuale stella AEW, Jeff Jarrett, ha dichiarato che Gable dovrebbe prepararsi a lasciare la compagnia quando il suo contratto scadrà. Secondo Fightful, manca ancora un anno a tale scadenza.</p>\n<blockquote>&quot;Alla fine della fiera, semplicemente non vedo la WWE cambiare idea; ha lavorato sotto il regime di Vince [McMahon] e ora, ovviamente, sotto quello di Triple H, non inizieranno magicamente a pensare: &#x27;Oh, lui è il nostro uomo&#x27;&quot;, ha detto Jarrett. &quot;Per me, e non so quale sia il suo reale valore di mercato in questo momento, ma sappiamo bene in che direzione si stia andando con TKO su tutta la linea... Chad ha perso il suo match, credo abbiano detto che ha ricevuto una grande reazione come babyface. Quindi, avrà ancora un po&#x27; di spazio, ma sappiamo che hanno Triplemania alle porte e i loro appuntamenti fissi ogni anno. Però, penso semplicemente che debba continuare a fare quello che sta facendo, ma tenendosi pronto ad andarsene.&quot;</blockquote>\n<p>Jarrett ha affermato di non vedere TKO complimentarsi con Gable per la sua performance in AAA, un match che al momento ha un rating di 9.53 da parte dei fan su Cagematch. Ha aggiunto di credere che Gable possa fare di più per monetizzare il proprio valore e ha sottolineato come non sia un segreto che l&#x27;AEW rappresenti l&#x27;alternativa.</p>",
+        "bob_body_html_preview": "<p>Chad Gable della WWE ha fatto discutere questo fine settimana dopo il suo match mask vs. mask, accolto in modo estremamente positivo, contro El Grande Americano, ovvero Ludwig Kaiser, a AAA Noche de los Grandes. Gable è stato sconfitto da Americano ed è stato costretto a togliersi la maschera in quanto iterazione originale del personaggio.</p>\n<p>I fan stanno speculando sul futuro di Gable e su cosa lo attenda al suo ritorno in WWE. Durante un episodio di &quot;My World&quot;, la WWE Hall of Famer e attuale stella AEW, Jeff Jarrett, ha dichiarato che Gable dovrebbe prepararsi a lasciare la compagnia quando il suo contratto scadrà. Secondo Fightful, manca ancora un anno a tale scadenza.</p>\n<blockquote>&quot;Alla fine della fiera, semplicemente non vedo la WWE cambiare idea; ha lavorato sotto il regime di Vince [McMahon] e ora, ovviamente, sotto quello di Triple H, non inizieranno magicamente a pensare: &#x27;Oh, lui è il nostro uomo&#x27;&quot;, ha detto Jarrett. &quot;Per me, e non so quale sia il suo reale valore di mercato in questo momento, ma sappiamo bene in che direzione si stia andando con TKO su tutta la linea... Chad ha perso il suo match, credo abbiano detto che ha ricevuto una grande reazione come babyface. Quindi, avrà ancora un po&#x27; di spazio, ma sappiamo che hanno Triplemania alle porte e i loro appuntamenti fissi ogni anno. Però, penso semplicemente che debba continuare a fare quello che sta facendo, ma tenendosi pronto ad andarsene.&quot;</blockquote>\n<p>Jarrett ha affermato di non vedere TKO complimentarsi con Gable per la sua performance in AAA, un match che al momento ha un rating di 9.53 da parte dei fan su Cagematch. Ha aggiunto di credere che Gable possa fare di più per monetizzare il proprio valore e ha sottolineato come non sia un segreto che l&#x27;AEW rappresenti l&#x27;alternativa.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_jeff-jarrett-chad-gable-dovrebbe-considerare-il-passaggio-in-aew.html",
+        "published_html_preview": "<p>Chad Gable della WWE ha fatto discutere questo fine settimana dopo il suo match mask vs. mask, accolto in modo estremamente positivo, contro El Grande Americano, ovvero Ludwig Kaiser, a AAA Noche de los Grandes. Gable è stato sconfitto da Americano ed è stato costretto a togliersi la maschera in quanto iterazione originale del personaggio.</p>\n<p>I fan stanno speculando sul futuro di Gable e su cosa lo attenda al suo ritorno in WWE. Durante un episodio di &quot;My World&quot;, la WWE Hall of Famer e attuale stella AEW, Jeff Jarrett, ha dichiarato che Gable dovrebbe prepararsi a lasciare la compagnia quando il suo contratto scadrà. Secondo Fightful, manca ancora un anno a tale scadenza.</p>\n<blockquote>&quot;Alla fine della fiera, semplicemente non vedo la WWE cambiare idea; ha lavorato sotto il regime di Vince [McMahon] e ora, ovviamente, sotto quello di Triple H, non inizieranno magicamente a pensare: &#x27;Oh, lui è il nostro uomo&#x27;&quot;, ha detto Jarrett. &quot;Per me, e non so quale sia il suo reale valore di mercato in questo momento, ma sappiamo bene in che direzione si stia andando con TKO su tutta la linea... Chad ha perso il suo match, credo abbiano detto che ha ricevuto una grande reazione come babyface. Quindi, avrà ancora un po&#x27; di spazio, ma sappiamo che hanno Triplemania alle porte e i loro appuntamenti fissi ogni anno. Però, penso semplicemente che debba continuare a fare quello che sta facendo, ma tenendosi pronto ad andarsene.&quot;</blockquote>\n<p>Jarrett ha affermato di non vedere TKO complimentarsi con Gable per la sua performance in AAA, un match che al momento ha un rating di 9.53 da parte dei fan su Cagematch. Ha aggiunto di credere che Gable possa fare di più per monetizzare il proprio valore e ha sottolineato come non sia un segreto che l&#x27;AEW rappresenti l&#x27;alternativa.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2186167/wwe-hofer-jeff-jarrett-thinks-chad-gable-aew/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_jeff-jarrett-chad-gable-dovrebbe-considerare-il-passaggio-in-aew.html",
+        "publisher_review_html_preview": "<p>Chad Gable della WWE ha fatto discutere questo fine settimana dopo il suo match mask vs. mask, accolto in modo estremamente positivo, contro El Grande Americano, ovvero Ludwig Kaiser, a AAA Noche de los Grandes. Gable è stato sconfitto da Americano ed è stato costretto a togliersi la maschera in quanto iterazione originale del personaggio.</p>\n<p>I fan stanno speculando sul futuro di Gable e su cosa lo attenda al suo ritorno in WWE. Durante un episodio di &quot;My World&quot;, la WWE Hall of Famer e attuale stella AEW, Jeff Jarrett, ha dichiarato che Gable dovrebbe prepararsi a lasciare la compagnia quando il suo contratto scadrà. Secondo Fightful, manca ancora un anno a tale scadenza.</p>\n<blockquote>&quot;Alla fine della fiera, semplicemente non vedo la WWE cambiare idea; ha lavorato sotto il regime di Vince [McMahon] e ora, ovviamente, sotto quello di Triple H, non inizieranno magicamente a pensare: &#x27;Oh, lui è il nostro uomo&#x27;&quot;, ha detto Jarrett. &quot;Per me, e non so quale sia il suo reale valore di mercato in questo momento, ma sappiamo bene in che direzione si stia andando con TKO su tutta la linea... Chad ha perso il suo match, credo abbiano detto che ha ricevuto una grande reazione come babyface. Quindi, avrà ancora un po&#x27; di spazio, ma sappiamo che hanno Triplemania alle porte e i loro appuntamenti fissi ogni anno. Però, penso semplicemente che debba continuare a fare quello che sta facendo, ma tenendosi pronto ad andarsene.&quot;</blockquote>\n<p>Jarrett ha affermato di non vedere TKO complimentarsi con Gable per la sua performance in AAA, un match che al momento ha un rating di 9.53 da parte dei fan su Cagematch. Ha aggiunto di credere che Gable possa fare di più per monetizzare il proprio valore e ha sottolineato come non sia un segreto che l&#x27;AEW rappresenti l&#x27;alternativa.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2186167/wwe-hofer-jeff-jarrett-thinks-chad-gable-aew/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2186167/wwe-hofer-jeff-jarrett-thinks-chad-gable-aew/\nTitolo feed: WWE HOFer Jeff Jarrett Thinks Chad Gable Should Go To AEW\nTitolo pagina: WWE HOFer Jeff Jarrett Thinks Chad Gable Should Go To AEW - Wrestling Inc.\nDescrizione: WWE Hall of Famer Jeff Jarrett said he thinks Chad Gable, the former Original El Grande Americano, should be prepared to depart WWE when his contract is up.\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"WWE's Chad Gable made headlines this weekend after his incredibly well-received mask vs. mask match against El Grande Americano, or Ludwig Kaiser, at AAA Noche de los Grandes . Gable was defeated by Americano, and forced to remove his own as the original iteration of the character.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Fans are speculating about Gable's future and what's next for him back in WWE. On an episode of \\\"My World,\\\" WWE Hall of Famer, and current AEW star, Jeff Jarrett, said Gable should be prepared to depart the company when his contract is up. According to Fightful , that's a year from now.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"At the end of the day, I just don't see the WWE, because, he worked under the Vince [McMahon] regime, and now, obviously he's worked under the Triple H regime, they're not all of a sudden magically going to go, 'Oh. He's our guy,'\\\" Jarrett said. \\\"To me, and I don't what his real dollar value is right now, but we kind of know where it's headed with TKO across the board... Chad lost his match, I think they said something to the fact that he got a big babyface reaction. So, he's going to have a little bit of a run, but we understand they got Triplemania coming up and they got their tent poles every year. But, I just think he needs to keep doing what he's doing, but be ready to leave.\\\"\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Jarrett said he doesn't see TKO going to Gable to congratulate him for his performance in AAA, a match with a 9.53 rating from fans, currently, on Cagematch . He said he believes Gable can do more to monetize himself, and said it's no secret AEW is the alternative.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "ai:Annuncio ufficiale di un evento live internazionale.; deterministic:hard:return,hard:debut,recency:fresh_12h",
-        "score": 80
+        "reason": "ai:Speculazioni di mercato su talent di primo piano, rilevante per il crossover tra brand.; deterministic:hard:contract,entity:chad gable,recency:fresh_12h",
+        "score": 84
       },
       "publisher": {
         "categories": [
           5
         ],
         "error": null,
-        "featured_media": 5860,
+        "featured_media": 5875,
         "present": true,
         "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/aew/aew-annuncia-grand-slam-mexico-2026/",
-        "wp_post_id": 5861
+        "wp_link": "https://news.openwrestlingtv.com/aew/jeff-jarrett-chad-gable-dovrebbe-considerare-il-passaggio-in-aew/",
+        "wp_post_id": 5876
       },
       "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2185902/aew-grand-slam-mexico-2026-announces",
-      "title_it": "AEW annuncia Grand Slam Mexico 2026"
+      "source_url": "https://www.wrestlinginc.com/2186167/wwe-hofer-jeff-jarrett-thinks-chad-gable-aew",
+      "title_it": "Jeff Jarrett: Chad Gable dovrebbe considerare il passaggio in AEW"
     }
   ],
-  "generated_at": "2026-06-02T18:08:12.432515+00:00",
+  "generated_at": "2026-06-02T21:30:36.869399+00:00",
   "how_to_read": {
     "alfred_final_html_preview": "HTML dopo revisione/normalizzazioni di Alfred",
     "bob_body_html_preview": "HTML prodotto da Bob prima di Alfred",
@@ -1901,6 +1966,102 @@
       "overall_status": "ok",
       "published": 3,
       "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 3,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 2
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 3,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 1,
+          "already_worked": 1,
+          "hard_skipped": 3,
+          "to_menzo": 31,
+          "to_simone": 0
+        },
+        "menzo": {
+          "pending": 3,
+          "skipped": 23,
+          "to_bob_or_v92": 5
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 3,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 5,
+          "waiting": 1
+        }
+      },
+      "already_published": 0,
+      "article_count": 5,
+      "errors": 0,
+      "generated_at": "2026-06-02T21:30:36.861929+00:00",
+      "overall_status": "ok",
+      "published": 3,
+      "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 3,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 2
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 3,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 1,
+          "already_worked": 1,
+          "hard_skipped": 3,
+          "to_menzo": 31,
+          "to_simone": 0
+        },
+        "menzo": {
+          "pending": 3,
+          "skipped": 23,
+          "to_bob_or_v92": 5
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 3,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 5,
+          "waiting": 1
+        }
+      },
+      "already_published": 0,
+      "article_count": 5,
+      "errors": 0,
+      "generated_at": "2026-06-02T21:30:36.869399+00:00",
+      "overall_status": "ok",
+      "published": 3,
+      "warnings": 0
     }
   ],
   "overall_status": "ok",
@@ -1920,7 +2081,7 @@
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 0
+      "warnings": 2
     },
     "bob_handoff": {
       "errors": 0,
@@ -1928,19 +2089,19 @@
       "ready_for_alfred": 3,
       "translation_pending": 0
     },
-    "ended_at": "2026-06-02T18:08:12.418941+00:00",
+    "ended_at": "2026-06-02T21:30:36.855467+00:00",
     "engine": "bot_v92.py",
     "massy_handoff": {
-      "already_published_hard_skipped": 2,
-      "already_worked": 2,
-      "hard_skipped": 5,
-      "to_menzo": 28,
+      "already_published_hard_skipped": 1,
+      "already_worked": 1,
+      "hard_skipped": 3,
+      "to_menzo": 31,
       "to_simone": 0
     },
     "menzo_handoff": {
-      "pending": 1,
+      "pending": 3,
       "skipped": 23,
-      "to_bob_or_v92": 4
+      "to_bob_or_v92": 5
     },
     "newsroom_engine_override": false,
     "publisher_handoff": {
@@ -1957,89 +2118,89 @@
       "skipped": 5,
       "waiting": 1
     },
-    "started_at": "2026-06-02T18:07:32.774059+00:00",
-    "version": "v93_14_priority_label_bob_brief_guard"
+    "started_at": "2026-06-02T21:30:03.192969+00:00",
+    "version": "v93_15_forced_menzo_softpool_bob_cleanup"
   },
   "summary": {
     "anomalies": 0,
-    "article_dossiers": 4,
+    "article_dossiers": 5,
     "errors_48h": 14,
-    "published_48h": 54,
+    "published_48h": 60,
     "published_current_run": 3,
-    "runs_48h": 34
+    "runs_48h": 36
   },
   "timeline": [
     {
       "agent": "Jarvis",
       "note": "engine=bot_v92.py",
       "phase": "bootstrap_status_written",
-      "timestamp": "2026-06-02T18:07:32.774349+00:00"
+      "timestamp": "2026-06-02T21:30:03.193258+00:00"
     },
     {
       "agent": "Massy",
-      "note": "to_simone=0 to_menzo=28 hard_skip=5 already=2",
+      "note": "to_simone=0 to_menzo=31 hard_skip=3 already=1",
       "phase": "sentinel_board_ready",
-      "timestamp": "2026-06-02T18:07:33.416756+00:00"
+      "timestamp": "2026-06-02T21:30:04.694301+00:00"
     },
     {
       "agent": "Simone",
       "note": "ready=0 waiting=1 skipped=5",
       "phase": "report_decision_ready",
-      "timestamp": "2026-06-02T18:07:33.420307+00:00"
+      "timestamp": "2026-06-02T21:30:04.697807+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "selected=4 pending=1 skipped=23",
+      "note": "selected=5 pending=3 skipped=23",
       "phase": "editorial_decision_ready",
-      "timestamp": "2026-06-02T18:07:40.587089+00:00"
+      "timestamp": "2026-06-02T21:30:15.562041+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "selected=4",
-      "phase": "priority_label_guard_applied",
-      "timestamp": "2026-06-02T18:07:40.588727+00:00"
+      "note": "version=v93_15_forced_priority_label_softpool",
+      "phase": "forced_policy_active",
+      "timestamp": "2026-06-02T21:30:15.562052+00:00"
     },
     {
       "agent": "Bob",
       "note": "ready=3 pending=0 empty=0 errors=0",
       "phase": "article_packages_ready",
-      "timestamp": "2026-06-02T18:07:47.632459+00:00"
+      "timestamp": "2026-06-02T21:30:24.919174+00:00"
     },
     {
       "agent": "Bob",
       "note": "warnings=0",
       "phase": "bob_brief_guard_applied",
-      "timestamp": "2026-06-02T18:07:47.633673+00:00"
+      "timestamp": "2026-06-02T21:30:24.920398+00:00"
     },
     {
       "agent": "Alfred",
-      "note": "approved=3 needs_revision=0 blockers=0 warnings=0 changes=0",
+      "note": "approved=3 needs_revision=0 blockers=0 warnings=2 changes=0",
       "phase": "quality_review_ready",
-      "timestamp": "2026-06-02T18:07:47.641614+00:00"
+      "timestamp": "2026-06-02T21:30:24.928429+00:00"
     },
     {
       "agent": "Alfred",
       "note": "surfaced=0",
       "phase": "bob_warning_guard_applied",
-      "timestamp": "2026-06-02T18:07:47.642204+00:00"
+      "timestamp": "2026-06-02T21:30:24.929155+00:00"
     },
     {
       "agent": "Publisher",
       "note": "published=3 already=0 dry=0 wp_not_ready=0 errors=0",
       "phase": "publication_ready",
-      "timestamp": "2026-06-02T18:08:12.418894+00:00"
+      "timestamp": "2026-06-02T21:30:36.855440+00:00"
     },
     {
       "agent": "Jarvis",
       "note": "v93 Publisher completed; v92 fallback skipped",
       "phase": "runtime_skipped",
-      "timestamp": "2026-06-02T18:08:12.418915+00:00"
+      "timestamp": "2026-06-02T21:30:36.855459+00:00"
     },
     {
       "agent": "Archivista",
       "note": "status=ok anomalies=0",
       "phase": "audit_ready",
-      "timestamp": "2026-06-02T18:08:12.432021+00:00"
+      "timestamp": "2026-06-02T21:30:36.868896+00:00"
     }
   ],
   "version": "v93_7_archivista_audit"
