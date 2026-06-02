@@ -1,12 +1,12 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-02T13:59:09.191646+00:00",
+  "generated_at": "2026-06-02T18:08:12.418367+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 0,
-    "wp_not_ready": 3
+    "published": 3,
+    "wp_not_ready": 0
   },
   "input": {
     "alfred_version": "v93_8_alfred_structured_content_checks",
@@ -22,71 +22,44 @@
   },
   "results": [
     {
-      "content_chars": 2584,
-      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/possible-plans-for-liv-morgan-at-wwe-summerslam-revealed-35.jpg",
-      "media_id": null,
-      "payload_preview": {
-        "categories": [],
-        "excerpt": "Emergono retroscena sui progetti della WWE per Liv Morgan in vista di SummerSlam, con IYO SKY inizialmente individuata come sua avversaria.",
-        "meta": {
-          "original_url": "https://www.ringsidenews.com/possible-plans-liv-morgan-wwe-summerslam-revealed/",
-          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
-          "owtv_source": "ringsidenews"
-        },
-        "status": "publish",
-        "title": "Possibili piani per Liv Morgan a WWE SummerSlam"
-      },
-      "source_url": "https://www.ringsidenews.com/possible-plans-liv-morgan-wwe-summerslam-revealed/",
-      "status": "wp_not_ready",
-      "title_it": "Possibili piani per Liv Morgan a WWE SummerSlam",
-      "wp_ready": false
+      "categories": [
+        4
+      ],
+      "featured_media": 5856,
+      "source_url": "https://www.wrestlinginc.com/2185863/wwe-raw-bron-breakker-injured-limping/",
+      "status": "published",
+      "title_it": "Possibile infortunio per Bron Breakker dopo WWE Raw",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/possibile-infortunio-per-bron-breakker-dopo-wwe-raw/",
+      "wp_post_id": 5857
     },
     {
-      "content_chars": 2204,
-      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/01/tony-khan-claims-he-took-full-control-of-aew-creative-in-2025-and-says-it-changed-everything-59.jpg",
-      "media_id": null,
-      "payload_preview": {
-        "categories": [],
-        "excerpt": "Tony Khan rivela che assicurarsi un contratto televisivo è stata una delle sfide più complesse durante la fase di lancio della AEW.",
-        "meta": {
-          "original_url": "https://www.ringsidenews.com/tony-khan-says-aew-almost-launched-without-tv-deal/",
-          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
-          "owtv_source": "ringsidenews"
-        },
-        "status": "publish",
-        "title": "Tony Khan: \"La AEW ha rischiato di debuttare senza un accordo televisivo\""
-      },
-      "source_url": "https://www.ringsidenews.com/tony-khan-says-aew-almost-launched-without-tv-deal/",
-      "status": "wp_not_ready",
-      "title_it": "Tony Khan: \"La AEW ha rischiato di debuttare senza un accordo televisivo\"",
-      "wp_ready": false
+      "categories": [
+        4
+      ],
+      "featured_media": 5858,
+      "source_url": "https://www.wrestlinginc.com/2185881/roman-reigns-wwe-summerslam-wrestlemania-seth-rollins-oba-femi/",
+      "status": "published",
+      "title_it": "Report sui futuri avversari di Roman Reigns per SummerSlam e WrestleMania",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/report-sui-futuri-avversari-di-roman-reigns-per-summerslam-e-wrestlemania/",
+      "wp_post_id": 5859
     },
     {
-      "content_chars": 3668,
-      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/aew-grand-slam-mexico-date-narrowed-down-to-two-possible-august-shows-24.jpg",
-      "media_id": null,
-      "payload_preview": {
-        "categories": [],
-        "excerpt": "Non c'è ancora una data ufficiale per AEW Grand Slam Mexico, ma l'analisi del calendario suggerisce due mercoledì di agosto come opzioni più probabili.",
-        "meta": {
-          "original_url": "https://www.ringsidenews.com/aew-grand-slam-mexico-date-narrowed-down-two-possible-august-shows/",
-          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
-          "owtv_source": "ringsidenews"
-        },
-        "status": "publish",
-        "title": "AEW Grand Slam Mexico: ristretto il campo delle date possibili ad agosto"
-      },
-      "source_url": "https://www.ringsidenews.com/aew-grand-slam-mexico-date-narrowed-down-two-possible-august-shows/",
-      "status": "wp_not_ready",
-      "title_it": "AEW Grand Slam Mexico: ristretto il campo delle date possibili ad agosto",
-      "wp_ready": false
+      "categories": [
+        5
+      ],
+      "featured_media": 5860,
+      "source_url": "https://www.wrestlinginc.com/2185902/aew-grand-slam-mexico-2026-announces/",
+      "status": "published",
+      "title_it": "AEW annuncia Grand Slam Mexico 2026",
+      "wp_link": "https://news.openwrestlingtv.com/aew/aew-annuncia-grand-slam-mexico-2026/",
+      "wp_post_id": 5861
     }
   ],
   "version": "v93_10_publisher_plain_oembed_urls",
   "wp": {
     "dry_run": false,
     "post_status": "publish",
-    "ready": false,
-    "reason": "wp_json_status_415"
+    "ready": true,
+    "reason": "ok"
   }
 }

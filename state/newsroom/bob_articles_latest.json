@@ -3,299 +3,158 @@
   "articles": [
     {
       "bob_notes": [],
-      "body_html": "https://www.youtube.com/watch?v=uu_q9uYQ4Ow\n\n<p>I piani estivi di Liv Morgan in WWE potrebbero essere più ambiziosi del solo Queen of the Ring: la compagnia aveva infatti programmato un match contro IYO SKY per SummerSlam.</p>\n<p>Durante una &quot;Self Made Session&quot;, Self Made Pro ha rivelato che la WWE aveva originariamente delineato i piani creativi dal periodo di WrestleMania fino a SummerSlam. Prima che venissero apportate modifiche, l&#x27;aspettativa era che Morgan avrebbe affrontato IYO SKY proprio a SummerSlam.</p>\n<blockquote>“Devo però avvertire che questa è la stessa azienda che, poco prima di WrestleMania, aveva definito tutta la creatività da Mania fino a SummerSlam, per poi cambiare gran parte di essa solo due settimane dopo.”</blockquote>\n<p>Self Made Pro ha chiarito che la WWE ha modificato diversi piani creativi poco dopo averli stabiliti, quindi non è chiaro se Morgan vs. IYO rimanga la direzione intrapresa.</p>\n<blockquote>“Ne hanno cambiato un bel po&#x27;. Ciò che posso dire è che, prima delle modifiche, l&#x27;aspettativa era IYO SKY contro Liv a SummerSlam; non so se tale piano sia ancora valido, ma era l&#x27;aspettativa iniziale.”</blockquote>\n<p>Questa indiscrezione arriva dopo un altro report secondo cui l&#x27;attuale direzione della WWE per Morgan coinvolgerebbe Stephanie Vaquer. Vaquer è attualmente fuori dai giochi a causa di una distorsione di secondo grado all&#x27;articolazione acromion-claveare, quindi la WWE sta mantenendo Morgan attiva nel torneo Queen of the Ring in attesa che quel piano possa concretizzarsi.</p>\n<p>Morgan affronterà Becky Lynch, Alexa Bliss e Chelsea Green nella puntata di Monday Night RAW dell&#x27;8 giugno in un Fatal 4-Way per determinare chi avanzerà nel torneo. In precedenza ha dichiarato di aver partecipato al Queen of the Ring perché &quot;vuole tutto&quot;, nonostante detenga già il Women’s World Championship.</p>\n<p>Anche IYO SKY ha superato un turno del Queen of the Ring, il che potrebbe mantenerla nell&#x27;orbita di Morgan a seconda di come si svilupperà il tabellone. Tuttavia, con i continui cambi di rotta creativi della WWE, la situazione per SummerSlam rimane incerta. Per ora, il regno titolato di Morgan sembra in una fase di stallo in attesa di Vaquer, ma il riferimento a IYO SKY suggerisce che sul tavolo ci possa essere un piano molto diverso per SummerSlam.</p>",
+      "body_html": "https://x.com/domirandy17/status/2061563130585415745\n\n<blockquote>&quot;WWE Raw&quot; non si è concluso come Bron Breakker sperava: il suo rivale Seth Rollins ha avuto la meglio in un match estenuante durato ventidue minuti e mezzo. E, sfortunatamente per Breakker, questo potrebbe essere il minore dei suoi problemi. Lunedì pomeriggio, poco dopo la chiusura di &quot;Raw&quot;, l&#x27;utente X Domi Randy ha pubblicato un video in cui appare quello che sembra essere Breakker presso un hotel. La star di The Vision è stata ripresa mentre aveva evidenti difficoltà a muoversi, zoppicando pesantemente e appoggiandosi a un carrello portabagagli per spostarsi.</blockquote>\n<p>Non sono giunte notizie ufficiali riguardo alle condizioni di Breakker dopo la pubblicazione del video, il che spinge molti a chiedersi se si tratti di un infortunio rimediato nel match contro Rollins o se il wrestler fosse semplicemente &quot;acciaccato&quot; dopo una contesa così lunga. Un infortunio sarebbe una brutta battuta d&#x27;arresto per l&#x27;astro nascente, tornato sul ring da poco più di un mese dopo uno stop di oltre due mesi dovuto a un intervento chirurgico per un&#x27;ernia.</p>\n<p>Se per Breakker si trattasse davvero di un infortunio, sarebbe un altro duro colpo per la stable The Vision, che sembra alle prese con una serie infinita di problemi fisici dallo scorso autunno. Oltre a Breakker, Bronson Reed rimane fuori dai giochi dopo essersi strappato il bicipite distale durante Elimination Chamber a febbraio, mentre Logan Paul ha subito la rottura del tricipite all&#x27;ultimo Saturday Night&#x27;s Main Event, dove lui e Austin Theory hanno difeso con successo i WWE World Tag Team Championships. A causa di queste assenze, sono circolate voci su un possibile inserimento di nuovi lottatori nella stable, anche se al momento non si è ancora concretizzato nulla.</p>",
       "category_hint": "WWE",
-      "clean_element_count": 9,
-      "created_at": "2026-06-02T13:58:49.378146+00:00",
+      "clean_element_count": 4,
+      "created_at": "2026-06-02T18:07:40.689973+00:00",
       "diagnostic_stage": "ready_for_alfred",
       "element_counts": {
         "embed": 1,
         "heading": 0,
         "image": 0,
-        "quote": 2,
+        "quote": 1,
         "table": 0,
-        "text": 6
+        "text": 2
       },
       "elements": [
         {
           "block_id": "b1",
           "source_tag": "div",
           "type": "embed",
-          "url": "https://www.youtube.com/watch?v=uu_q9uYQ4Ow"
+          "url": "https://x.com/domirandy17/status/2061563130585415745"
         },
         {
           "block_id": "b2",
-          "text": "Liv Morgan’s WWE summer plans might be bigger than just Queen of the Ring, as WWE had plans for her to face IYO SKY at SummerSlam.",
-          "type": "text"
+          "source_tag": "p",
+          "text": "\"WWE Raw\" didn't end the way Bron Breakker hoped, as his rival Seth Rollins bested him in a grueling match that went twenty two and a half minutes. And unfortunately for Breakker, that may be the least of his problems. Taking to X Monday afternoon, shortly after \"Raw\" had gone off the air, user Domi Randy posted a video of what appeared to be Breakker at a hotel. And The Vision star could be seen having trouble moving around, limping heavily and needing a luggage carrier to help him move around.",
+          "type": "quote"
         },
         {
           "block_id": "b3",
-          "text": "While speaking during a Self Made Session , Self Made Pro revealed that WWE had originally mapped out creative plans from WrestleMania through SummerSlam. Before changes were made, the expectation was that Morgan would face IYO SKY at SummerSlam.",
+          "text": "No word has emerged regarding Breakker's status since the video has been posted, leaving many to wonder whether this is a sign that Breakker was injured in his match against Rollins, or was merely showing signs of being \"banged up\" following a long match. An injury for Breakker would be an unfortunate break for the budding star, who is only a little more than a month removed from returning to the ring after being out over two months while recovering from hernia surgery .",
           "type": "text"
         },
         {
           "block_id": "b4",
-          "source_tag": "blockquote",
-          "text": "“I should caution people though in saying that this is the same company that right before Mania, they hammered out all their creative to Mania up until SummerSlam and then two weeks later they just changed a bunch of it.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b5",
-          "text": "Self Made Pro made it clear that WWE changed several creative plans shortly after laying them out, so it is unclear whether Morgan vs. IYO remains the direction.",
-          "type": "text"
-        },
-        {
-          "block_id": "b6",
-          "source_tag": "blockquote",
-          "text": "“They changed a bunch of it. What I will say is before the changes, the expectation was IYO SKY and Liv at SummerSlam, and so I don’t know if that stays, but that was an expectation.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b7",
-          "text": "This comes after another report stated that WWE’s current direction for Morgan involves Stephanie Vaquer. Vaquer is still out after suffering a legitimate second-degree AC joint sprain , so WWE is keeping Morgan active in the Queen of the Ring tournament until that plan can move forward .",
-          "type": "text"
-        },
-        {
-          "block_id": "b8",
-          "text": "Morgan is set to face Becky Lynch, Alexa Bliss, and Chelsea Green on the June 8 episode of Monday Night RAW in a Fatal 4-Way to determine who advances in the tournament. She previously said she entered Queen of the Ring because she “wants it all,” despite already holding the Women’s World Championship.",
-          "type": "text"
-        },
-        {
-          "block_id": "b9",
-          "text": "IYO SKY has also advanced in the Queen of the Ring tournament, which could keep her near Morgan’s orbit depending on how the bracket plays out. Still, with WWE’s creative plans changing so quickly, SummerSlam remains uncertain. For now, Morgan’s title reign appears to be in a holding pattern while WWE waits on Vaquer, but the mention of IYO SKY shows there may be a very different SummerSlam plan on the table.",
+          "text": "While an injury would be a setback for Breakker, it would also be another setback for The Vision, which has seemingly dealt with never ending injury issues since last fall. In addition to Breakker, Bronson Reed remains out after suffering a distal torn bicep during Elimination Chamber in February , while Logan Paul tore his triceps muscle at the most recent Saturday Night's Main Event as he and Austin Theory successfully defended the WWE World Tag Team Championships. As a result of the injuries, rumors have emerged that The Vision could be adding new wrestlers to the stable , though that has yet to materialize.",
           "type": "text"
         }
       ],
-      "excerpt_it": "Emergono retroscena sui progetti della WWE per Liv Morgan in vista di SummerSlam, con IYO SKY inizialmente individuata come sua avversaria.",
+      "excerpt_it": "Bron Breakker è stato visto zoppicare vistosamente al termine del suo match contro Seth Rollins a Raw.",
       "extraction_diagnostics": {
-        "candidate_node_count": 100,
-        "clean_element_count": 9,
+        "candidate_node_count": 14,
+        "clean_element_count": 4,
         "dom_noise_reduction_enabled": false,
         "embed_count": 1,
         "global_embed_recovery_enabled": false,
-        "quote_count": 2,
-        "raw_element_count": 12,
-        "removed_by_node_count": 13,
+        "quote_count": 1,
+        "raw_element_count": 7,
+        "removed_by_node_count": 0,
         "removed_by_sanitize_count": 3,
         "root_name": "article",
-        "root_text_chars": 3042,
+        "root_text_chars": 1857,
         "stage": "complete",
         "table_count": 0
       },
-      "fetched_html_chars": 487550,
-      "menzo_score": 82,
+      "fetched_html_chars": 51025,
+      "menzo_score": 87,
       "meta": {
-        "description": "Liv Morgan’s WWE summer plans might be bigger than just Queen of the Ring, as WWE had plans for her to face IYO SKY at SummerSlam. While speaking during a",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/possible-plans-for-liv-morgan-at-wwe-summerslam-revealed-35.jpg",
-        "source_title": "Possible Plans For Liv Morgan at WWE SummerSlam Revealed"
+        "description": "Just a month after returning from injury, WWE's Bron Breakker is possibly injured again, have been spotted limping following his Raw loss to Seth Rollins",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/bron-breakker-possibly-injured-spotted-limping-after-wwe-raw-loss/l-intro-1780418389.jpg",
+        "source_title": "Bron Breakker Possibly Injured, Spotted Limping After WWE Raw Loss - Wrestling Inc."
       },
-      "raw_element_count": 12,
+      "raw_element_count": 7,
       "raw_elements_preview": [
         {
           "block_id": "b1",
           "source_tag": "div",
           "type": "embed",
-          "url": "https://www.youtube.com/watch?v=uu_q9uYQ4Ow"
+          "url": "https://x.com/domirandy17/status/2061563130585415745"
+        },
+        {
+          "alt": "Bron Breakker screams",
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/bron-breakker-possibly-injured-spotted-limping-after-wwe-raw-loss/intro-1780418389.jpg"
         },
         {
           "source_tag": "div",
           "type": "embed",
-          "url": "https://www.youtube.com/watch?v=uu_q9uYQ4Ow"
-        },
-        {
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=uu_q9uYQ4Ow"
+          "url": "https://x.com/domirandy17/status/2061563130585415745"
         },
         {
           "block_id": "b2",
-          "text": "Liv Morgan’s WWE summer plans might be bigger than just Queen of the Ring, as WWE had plans for her to face IYO SKY at SummerSlam.",
-          "type": "text"
+          "source_tag": "p",
+          "text": "\"WWE Raw\" didn't end the way Bron Breakker hoped, as his rival Seth Rollins bested him in a grueling match that went twenty two and a half minutes. And unfortunately for Breakker, that may be the least of his problems. Taking to X Monday afternoon, shortly after \"Raw\" had gone off the air, user Domi Randy posted a video of what appeared to be Breakker at a hotel. And The Vision star could be seen having trouble moving around, limping heavily and needing a luggage carrier to help him move around.",
+          "type": "quote"
+        },
+        {
+          "source_tag": "blockquote",
+          "type": "embed",
+          "url": "https://x.com/domirandy17/status/2061563130585415745"
         },
         {
           "block_id": "b3",
-          "text": "While speaking during a Self Made Session , Self Made Pro revealed that WWE had originally mapped out creative plans from WrestleMania through SummerSlam. Before changes were made, the expectation was that Morgan would face IYO SKY at SummerSlam.",
+          "text": "No word has emerged regarding Breakker's status since the video has been posted, leaving many to wonder whether this is a sign that Breakker was injured in his match against Rollins, or was merely showing signs of being \"banged up\" following a long match. An injury for Breakker would be an unfortunate break for the budding star, who is only a little more than a month removed from returning to the ring after being out over two months while recovering from hernia surgery .",
           "type": "text"
         },
         {
           "block_id": "b4",
-          "source_tag": "blockquote",
-          "text": "“I should caution people though in saying that this is the same company that right before Mania, they hammered out all their creative to Mania up until SummerSlam and then two weeks later they just changed a bunch of it.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b5",
-          "text": "Self Made Pro made it clear that WWE changed several creative plans shortly after laying them out, so it is unclear whether Morgan vs. IYO remains the direction.",
-          "type": "text"
-        },
-        {
-          "block_id": "b6",
-          "source_tag": "blockquote",
-          "text": "“They changed a bunch of it. What I will say is before the changes, the expectation was IYO SKY and Liv at SummerSlam, and so I don’t know if that stays, but that was an expectation.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b7",
-          "text": "This comes after another report stated that WWE’s current direction for Morgan involves Stephanie Vaquer. Vaquer is still out after suffering a legitimate second-degree AC joint sprain , so WWE is keeping Morgan active in the Queen of the Ring tournament until that plan can move forward .",
-          "type": "text"
-        },
-        {
-          "block_id": "b8",
-          "text": "Morgan is set to face Becky Lynch, Alexa Bliss, and Chelsea Green on the June 8 episode of Monday Night RAW in a Fatal 4-Way to determine who advances in the tournament. She previously said she entered Queen of the Ring because she “wants it all,” despite already holding the Women’s World Championship.",
-          "type": "text"
-        },
-        {
-          "block_id": "b9",
-          "text": "IYO SKY has also advanced in the Queen of the Ring tournament, which could keep her near Morgan’s orbit depending on how the bracket plays out. Still, with WWE’s creative plans changing so quickly, SummerSlam remains uncertain. For now, Morgan’s title reign appears to be in a holding pattern while WWE waits on Vaquer, but the mention of IYO SKY shows there may be a very different SummerSlam plan on the table.",
-          "type": "text"
-        },
-        {
-          "text": "Spotlight WWE News Possible Plans For Liv Morgan at WWE SummerSlam Revealed WWE News WWE’s Backup Plan For WrestleMania 43 If The Rock Doesn’t Wrestle WWE News Nikkita Lyons Main Roster Call-Up Rumor Shut Down WWE News Real Reason WWE Booked Liv Morgan in Queen of the Ring Tournament Revealed",
+          "text": "While an injury would be a setback for Breakker, it would also be another setback for The Vision, which has seemingly dealt with never ending injury issues since last fall. In addition to Breakker, Bronson Reed remains out after suffering a distal torn bicep during Elimination Chamber in February , while Logan Paul tore his triceps muscle at the most recent Saturday Night's Main Event as he and Austin Theory successfully defended the WWE World Tag Team Championships. As a result of the injuries, rumors have emerged that The Vision could be adding new wrestlers to the stable , though that has yet to materialize.",
           "type": "text"
         }
       ],
-      "removed_before_gemini": 16,
+      "removed_before_gemini": 3,
       "removed_elements_debug": [
-        {
-          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 77,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Spotlight"
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196640 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-liv-morgan tag-wwe-featured tag-wwe-summerslam   ",
-          "node_index": 81,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Possible Plans For Liv Morgan at WWE SummerSlam Revealed"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 84,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Possible Plans For Liv Morgan at WWE SummerSlam Revealed"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 85,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196620 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-the-rock tag-wwe-featured tag-wwe-wrestlemania   ",
-          "node_index": 86,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News WWE’s Backup Plan For WrestleMania 43 If The Rock Doesn’t Wrestle"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 89,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "WWE’s Backup Plan For WrestleMania 43 If The Rock Doesn’t Wrestle"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 90,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196615 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-nikkita-lyons tag-wwe-featured   ",
-          "node_index": 91,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Nikkita Lyons Main Roster Call-Up Rumor Shut Down"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 94,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Nikkita Lyons Main Roster Call-Up Rumor Shut Down"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 95,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196595 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-liv-morgan tag-wwe-featured   ",
-          "node_index": 96,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Real Reason WWE Booked Liv Morgan in Queen of the Ring Tournament Revealed"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 99,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Real Reason WWE Booked Liv Morgan in Queen of the Ring Tournament Revealed"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 100,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
         {
           "index": 2,
           "item": {
-            "source_tag": "div",
-            "type": "embed",
-            "url": "https://www.youtube.com/watch?v=uu_q9uYQ4Ow"
+            "alt": "Bron Breakker screams",
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/bron-breakker-possibly-injured-spotted-limping-after-wwe-raw-loss/intro-1780418389.jpg"
           },
-          "reason": "duplicate_or_empty_embed"
+          "reason": "duplicate_featured_image"
         },
         {
           "index": 3,
           "item": {
             "source_tag": "div",
             "type": "embed",
-            "url": "https://www.youtube.com/watch?v=uu_q9uYQ4Ow"
+            "url": "https://x.com/domirandy17/status/2061563130585415745"
           },
           "reason": "duplicate_or_empty_embed"
         },
         {
-          "index": 12,
+          "index": 5,
           "item": {
-            "text": "Spotlight WWE News Possible Plans For Liv Morgan at WWE SummerSlam Revealed WWE News WWE’s Backup Plan For WrestleMania 43 If The Rock Doesn’t Wrestle WWE News Nikkita Lyons Main Roster Call-Up Rumor Shut Down WWE News Real Reason WWE Booked Liv Morgan in Queen of the Ring Tournament Revealed",
-            "type": "text"
+            "source_tag": "blockquote",
+            "type": "embed",
+            "url": "https://x.com/domirandy17/status/2061563130585415745"
           },
-          "reason": "footer_start"
+          "reason": "duplicate_or_empty_embed"
         }
       ],
-      "source": "ringsidenews",
+      "source": "wrestlinginc",
       "source_html_contains_embed_hint": true,
-      "source_title": "Possible Plans For Liv Morgan at WWE SummerSlam Revealed",
-      "source_url": "https://www.ringsidenews.com/possible-plans-liv-morgan-wwe-summerslam-revealed/",
+      "source_title": "Bron Breakker Possibly Injured, Spotted Limping After WWE Raw Loss",
+      "source_url": "https://www.wrestlinginc.com/2185863/wwe-raw-bron-breakker-injured-limping/",
       "status": "ready_for_alfred",
-      "title_it": "Possibili piani per Liv Morgan a WWE SummerSlam",
+      "title_it": "Possibile infortunio per Bron Breakker dopo WWE Raw",
       "translation_chain_attempted": [
         "gemini-3.1-flash-lite"
       ],
       "translation_missing_units": [],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/possible-plans-liv-morgan-wwe-summerslam-revealed/\nTitolo feed: Possible Plans For Liv Morgan at WWE SummerSlam Revealed\nTitolo pagina: Possible Plans For Liv Morgan at WWE SummerSlam Revealed\nDescrizione: Liv Morgan’s WWE summer plans might be bigger than just Queen of the Ring, as WWE had plans for her to face IYO SKY at SummerSlam. While speaking during a\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Liv Morgan’s WWE summer plans might be bigger than just Queen of the Ring, as WWE had plans for her to face IYO SKY at SummerSlam.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"While speaking during a Self Made Session , Self Made Pro revealed that WWE had originally mapped out creative plans from WrestleMania through SummerSlam. Before changes were made, the expectation was that Morgan would face IYO SKY at SummerSlam.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“I should caution people though in saying that this is the same company that right before Mania, they hammered out all their creative to Mania up until SummerSlam and then two weeks later they just changed a bunch of it.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Self Made Pro made it clear that WWE changed several creative plans shortly after laying them out, so it is unclear whether Morgan vs. IYO remains the direction.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“They changed a bunch of it. What I will say is before the changes, the expectation was IYO SKY and Liv at SummerSlam, and so I don’t know if that stays, but that was an expectation.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"This comes after another report stated that WWE’s current direction for Morgan involves Stephanie Vaquer. Vaquer is still out after suffering a legitimate second-degree AC joint sprain , so WWE is keeping Morgan active in the Queen of the Ring tournament until that plan can move forward .\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"Morgan is set to face Becky Lynch, Alexa Bliss, and Chelsea Green on the June 8 episode of Monday Night RAW in a Fatal 4-Way to determine who advances in the tournament. She previously said she entered Queen of the Ring because she “wants it all,” despite already holding the Women’s World Championship.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"IYO SKY has also advanced in the Queen of the Ring tournament, which could keep her near Morgan’s orbit depending on how the bracket plays out. Still, with WWE’s creative plans changing so quickly, SummerSlam remains uncertain. For now, Morgan’s title reign appears to be in a holding pattern while WWE waits on Vaquer, but the mention of IYO SKY shows there may be a very different SummerSlam plan on the table.\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"Possibili piani per Liv Morgan a WWE SummerSlam\",\n  \"excerpt_it\": \"Emergono retroscena sui progetti della WWE per Liv Morgan in vista di SummerSlam, con IYO SKY inizialmente individuata come sua avversaria.\",\n  \"translations\": {\n    \"b2\": \"I piani estivi di Liv Morgan in WWE potrebbero essere più ambiziosi del solo Queen of the Ring: la compagnia aveva infatti programmato un match contro IYO SKY per SummerSlam.\",\n    \"b3\": \"Durante una \\\"Self Made Session\\\", Self Made Pro ha rivelato che la WWE aveva originariamente delineato i piani creativi dal periodo di WrestleMania fino a SummerSlam. Prima che venissero apportate modifiche, l'aspettativa era che Morgan avrebbe affrontato IYO SKY proprio a SummerSlam.\",\n    \"b4\": \"“Devo però avvertire che questa è la stessa azienda che, poco prima di WrestleMania, aveva definito tutta la creatività da Mania fino a SummerSlam, per poi cambiare gran parte di essa solo due settimane dopo.”\",\n    \"b5\": \"Self Made Pro ha chiarito che la WWE ha modificato diversi piani creativi poco dopo averli stabiliti, quindi non è chiaro se Morgan vs. IYO rimanga la direzione intrapresa.\",\n    \"b6\": \"“Ne hanno cambiato un bel po'. Ciò che posso dire è che, prima delle modifiche, l'aspettativa era IYO SKY contro Liv a SummerSlam; non so se tale piano sia ancora valido, ma era l'aspettativa iniziale.”\",\n    \"b7\": \"Questa indiscrezione arriva dopo un altro report secondo cui l'attuale direzione della WWE per Morgan coinvolgerebbe Stephanie Vaquer. Vaquer è attualmente fuori dai giochi a causa di una distorsione di secondo grado all'articolazione acromion-claveare, quindi la WWE sta mantenendo Morgan attiva nel torneo Queen of the Ring in attesa che quel piano possa concretizzarsi.\",\n    \"b8\": \"Morgan affronterà Becky Lynch, Alexa Bliss e Chelsea Green nella puntata di Monday Night RAW dell'8 giugno in un Fatal 4-Way per determinare chi avanzerà nel torneo. In precedenza ha dichiarato di aver partecipato al Queen of the Ring perché \\\"vuole tutto\\\", nonostante detenga già il Women’s World Championship.\",\n    \"b9\": \"Anche IYO SKY ha superato un turno del Queen of the Ring, il che potrebbe mantenerla nell'orbita di Morgan a seconda di come si svilupperà il tabellone. Tuttavia, con i continui cambi di rotta creativi della WWE, la situazione per SummerSlam rimane incerta. Per ora, il regno titolato di Morgan sembra in una fase di stallo in attesa di Vaquer, ma il riferimento a IYO SKY suggerisce che sul tavolo ci possa essere un piano molto diverso per SummerSlam.\"\n  },\n  \"notes\": []\n}",
-      "translation_unit_count": 8,
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185863/wwe-raw-bron-breakker-injured-limping/\nTitolo feed: Bron Breakker Possibly Injured, Spotted Limping After WWE Raw Loss\nTitolo pagina: Bron Breakker Possibly Injured, Spotted Limping After WWE Raw Loss - Wrestling Inc.\nDescrizione: Just a month after returning from injury, WWE's Bron Breakker is possibly injured again, have been spotted limping following his Raw loss to Seth Rollins\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"WWE Raw\\\" didn't end the way Bron Breakker hoped, as his rival Seth Rollins bested him in a grueling match that went twenty two and a half minutes. And unfortunately for Breakker, that may be the least of his problems. Taking to X Monday afternoon, shortly after \\\"Raw\\\" had gone off the air, user Domi Randy posted a video of what appeared to be Breakker at a hotel. And The Vision star could be seen having trouble moving around, limping heavily and needing a luggage carrier to help him move around.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"No word has emerged regarding Breakker's status since the video has been posted, leaving many to wonder whether this is a sign that Breakker was injured in his match against Rollins, or was merely showing signs of being \\\"banged up\\\" following a long match. An injury for Breakker would be an unfortunate break for the budding star, who is only a little more than a month removed from returning to the ring after being out over two months while recovering from hernia surgery .\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"While an injury would be a setback for Breakker, it would also be another setback for The Vision, which has seemingly dealt with never ending injury issues since last fall. In addition to Breakker, Bronson Reed remains out after suffering a distal torn bicep during Elimination Chamber in February , while Logan Paul tore his triceps muscle at the most recent Saturday Night's Main Event as he and Austin Theory successfully defended the WWE World Tag Team Championships. As a result of the injuries, rumors have emerged that The Vision could be adding new wrestlers to the stable , though that has yet to materialize.\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Possibile infortunio per Bron Breakker dopo WWE Raw\",\n  \"excerpt_it\": \"Bron Breakker è stato visto zoppicare vistosamente al termine del suo match contro Seth Rollins a Raw.\",\n  \"translations\": {\n    \"b2\": \"\\\"WWE Raw\\\" non si è concluso come Bron Breakker sperava: il suo rivale Seth Rollins ha avuto la meglio in un match estenuante durato ventidue minuti e mezzo. E, sfortunatamente per Breakker, questo potrebbe essere il minore dei suoi problemi. Lunedì pomeriggio, poco dopo la chiusura di \\\"Raw\\\", l'utente X Domi Randy ha pubblicato un video in cui appare quello che sembra essere Breakker presso un hotel. La star di The Vision è stata ripresa mentre aveva evidenti difficoltà a muoversi, zoppicando pesantemente e appoggiandosi a un carrello portabagagli per spostarsi.\",\n    \"b3\": \"Non sono giunte notizie ufficiali riguardo alle condizioni di Breakker dopo la pubblicazione del video, il che spinge molti a chiedersi se si tratti di un infortunio rimediato nel match contro Rollins o se il wrestler fosse semplicemente \\\"acciaccato\\\" dopo una contesa così lunga. Un infortunio sarebbe una brutta battuta d'arresto per l'astro nascente, tornato sul ring da poco più di un mese dopo uno stop di oltre due mesi dovuto a un intervento chirurgico per un'ernia.\",\n    \"b4\": \"Se per Breakker si trattasse davvero di un infortunio, sarebbe un altro duro colpo per la stable The Vision, che sembra alle prese con una serie infinita di problemi fisici dallo scorso autunno. Oltre a Breakker, Bronson Reed rimane fuori dai giochi dopo essersi strappato il bicipite distale durante Elimination Chamber a febbraio, mentre Logan Paul ha subito la rottura del tricipite all'ultimo Saturday Night's Main Event, dove lui e Austin Theory hanno difeso con successo i WWE World Tag Team Championships. A causa di queste assenze, sono circolate voci su un possibile inserimento di nuovi lottatori nella stable, anche se al momento non si è ancora concretizzato nulla.\"\n  },\n  \"notes\": []\n}",
+      "translation_unit_count": 3,
       "translation_used": true
     },
     {
       "bob_notes": [],
-      "body_html": "<p>Tony Khan ha dichiarato che portare la AEW in televisione è stata una delle parti più difficili del lancio della compagnia.</p>\n<p>La AEW ha debuttato ufficialmente nel 2019 e ha rapidamente ottenuto la messa in onda di Dynamite su TNT, garantendo alla nuova promotion una piattaforma importante fin dal primo giorno. La compagnia è rimasta su TNT e TBS da allora, ma Khan sostiene che concludere quel primo accordo non sia stato affatto semplice.</p>\n<p>Intervistato da Wide World of Sports, Khan ha raccontato di aver già messo sotto contratto diversi wrestler all&#x27;inizio del 2019, pur non avendo ancora finalizzato l&#x27;accordo televisivo. Ha ammesso di aver lavorato su questo aspetto del business per quasi un anno prima che tutto si concretizzasse.</p>\n<blockquote>“L&#x27;ostacolo più grande è stato proprio trovare l&#x27;accordo televisivo. Sono arrivato a un punto, all&#x27;inizio del 2019, in cui avevo già ingaggiato i wrestler ma non avevo ancora un contratto; ci lavoravo da quasi un anno, ma era arrivato aprile e non avevo ancora nulla in mano.”</blockquote>\n<p>Khan ha descritto quel periodo come complicato, poiché la AEW stava già diventando una realtà dietro le quinte, ma la compagnia aveva bisogno di una casa televisiva per poter decollare davvero.</p>\n<blockquote>“Raggiungere il punto in cui il progetto è diventato realtà è stato molto difficile. È complicato debuttare... ma le cose sono cresciute così velocemente.”</blockquote>\n<p>Quell&#x27;accordo televisivo iniziale ha cambiato tutto per la AEW. Senza di esso, la compagnia avrebbe potuto avere talento e slancio, ma non la piattaforma settimanale necessaria per competere a livello nazionale.</p>\n<p>La AEW è cresciuta molto da allora, ma Khan ha chiarito che il percorso verso il lancio non è stato così lineare come poteva apparire dall&#x27;esterno. Aveva il roster e l&#x27;idea, ma l&#x27;accordo televisivo è stato l&#x27;ostacolo da superare affinché la AEW potesse realmente spiccare il volo.</p>",
-      "category_hint": "AEW",
-      "clean_element_count": 8,
-      "created_at": "2026-06-02T13:58:52.910600+00:00",
+      "body_html": "<p>Archiviato Clash in Italy, la WWE è ufficialmente sulla strada verso SummerSlam. Roman Reigns ha mantenuto il World Heavyweight Championship domenica in un Tribal Combat match, e i tornei King and Queen of the Ring hanno avuto inizio. Le finali si terranno a Night of Champions e i rispettivi vincitori guadagneranno un&#x27;opportunità titolata al &quot;Biggest Party of the Summer&quot;. Ora, un nuovo report potrebbe far luce sulla questione di chi affronterà Reigns a SummerSlam e chi invece a WrestleMania.</p>\n<p>Lunedì, Ibou di Self Made Sessions ha riferito che Reigns è destinato a lavorare con Oba Femi e Seth Rollins, entrambi partecipanti al torneo King of the Ring; Femi si è già qualificato per le semifinali.</p>\n<blockquote>&quot;Mi è stato detto che un match si terrà a SummerSlam, l&#x27;altro a WrestleMania, a meno che Dwayne non decida di lottare in Arabia Saudita&quot;, ha dichiarato Ibou riferendosi a The Rock.</blockquote>\n<blockquote>Ibou ha affermato di essere stato informato di questi piani alcuni giorni fa, ma di aver saputo lunedì che, sebbene i programmi per SummerSlam fossero ancora incerti, &quot;al momento il piano prevede che Seth Rollins vinca il torneo e affronti Roman Reigns&quot;. Presume che ciò significhi che Femi affronterà Brock Lesnar a SummerSlam in un match di bella, dopo che Lesnar ha sconfitto Femi a Clash in Italy. Se il report fosse corretto, ciò significherebbe che Femi è l&#x27;avversario designato per Reigns a WrestleMania 43, disponibilità di The Rock permettendo.</blockquote>\n<p>Sia Night of Champions che WrestleMania 43 si terranno a Riyadh, in Arabia Saudita. SummerSlam si svolgerà in due serate a Minneapolis, nel Minnesota, l&#x27;1 e il 2 agosto.</p>",
+      "category_hint": "WWE",
+      "clean_element_count": 5,
+      "created_at": "2026-06-02T18:07:42.921186+00:00",
       "diagnostic_stage": "ready_for_alfred",
       "element_counts": {
         "embed": 0,
@@ -303,527 +162,281 @@
         "image": 0,
         "quote": 2,
         "table": 0,
-        "text": 6
+        "text": 3
       },
       "elements": [
         {
           "block_id": "b1",
-          "text": "Tony Khan says getting AEW on television was one of the hardest parts of launching the company.",
+          "text": "With Clash In Italy behind us, WWE is firmly on the road to SummerSlam. Roman Reigns retained the World Heavyweight Championship on Sunday in a Tribal Combat match, and the King and Queen of the Ring tournaments have begun. The finals will happen at Night of Champions and the winner of those respective tournaments will earn title shots at \"The Biggest Party of the Summer.\" Now, a new report could be shining some light on the question of who Reigns will face at SummerSlam — and who he'll face at WrestleMania.",
           "type": "text"
         },
         {
           "block_id": "b2",
-          "text": "AEW officially started in 2019 and quickly landed Dynamite on TNT, giving the new promotion a major platform right out of the gate. The company has stayed on TNT and TBS ever since, but Khan says getting that first deal done was not easy.",
+          "text": "On Monday, Ibou of Self Made Sessions reported that Reigns is scheduled to work with Oba Femi and Seth Rollins, both of whom are in the King of the Ring tournament; Femi has already advanced to the semi-finals.",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "text": "Speaking with Wide World of Sports , Khan said he had already signed wrestlers in early 2019 but still did not have the TV deal finalized. He admitted he spent nearly a year working on that part of the business before things finally came together.",
-          "type": "text"
+          "source_tag": "p",
+          "text": "\"I was told one match is gonna be at SummerSlam, the other one is gonna be at WrestleMania, unless Dwayne decides to wrestle at Saudi,\" Ibou said, referring to The Rock.",
+          "type": "quote"
         },
         {
           "block_id": "b4",
-          "source_tag": "blockquote",
-          "text": "“The biggest hurdle was to make the TV deal – I reached a point in early-2019 where I had signed the wrestlers, but didn’t have a deal, I had been working on the TV portion of it for nearly a year, but I had got into April and still didn’t have a deal.”",
+          "source_tag": "p",
+          "text": "Ibou said he was informed of these plans days ago, but heard earlier on Monday that while SummerSlam plans were still up in the air, \"right now the plan is for Seth Rollins to win the tournament and face Roman Reigns.\" He assumes that means Femi will face Brock Lesnar at SummerSlam in a rubber match after Lesnar defeated Femi at Clash in Italy . If the report is true, that would mean Femi is Reigns' planned opponent for WrestleMania 43, pending The Rock's availability.",
           "type": "quote"
         },
         {
           "block_id": "b5",
-          "text": "Khan said that period was difficult because AEW was already becoming real behind the scenes, but the company still needed a television home to truly launch.",
-          "type": "text"
-        },
-        {
-          "block_id": "b6",
-          "source_tag": "blockquote",
-          "text": "“Reaching a point where it became a reality was very challenging. It’s hard to launch … but things have grown so quickly.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b7",
-          "text": "That first TV deal ended up changing everything for AEW. Without it, the company may have had talent and momentum, but not the weekly platform needed to compete on a national level.",
-          "type": "text"
-        },
-        {
-          "block_id": "b8",
-          "text": "AEW has grown a lot since then, but Khan made it clear the road to launch was not as smooth as it may have looked from the outside. He had the roster, he had the idea, but the TV deal was the hurdle that had to be cleared before AEW could really take off.",
+          "text": "Both Night of Champions and WrestleMania 43 will emanate from Riyadh, Saudi Arabia. SummerSlam will take place over two nights in Minneapolis, Minnesota on August 1 and 2.",
           "type": "text"
         }
       ],
-      "excerpt_it": "Tony Khan rivela che assicurarsi un contratto televisivo è stata una delle sfide più complesse durante la fase di lancio della AEW.",
+      "excerpt_it": "Emergono indiscrezioni sui possibili prossimi sfidanti di Roman Reigns per i due grandi eventi della WWE.",
       "extraction_diagnostics": {
-        "candidate_node_count": 96,
-        "clean_element_count": 8,
+        "candidate_node_count": 13,
+        "clean_element_count": 5,
         "dom_noise_reduction_enabled": false,
         "embed_count": 0,
         "global_embed_recovery_enabled": false,
         "quote_count": 2,
-        "raw_element_count": 9,
-        "removed_by_node_count": 13,
+        "raw_element_count": 6,
+        "removed_by_node_count": 0,
         "removed_by_sanitize_count": 1,
         "root_name": "article",
-        "root_text_chars": 2510,
+        "root_text_chars": 1809,
         "stage": "complete",
         "table_count": 0
       },
-      "fetched_html_chars": 482437,
+      "fetched_html_chars": 50429,
       "menzo_score": 83,
       "meta": {
-        "description": "Tony Khan says getting AEW on television was one of the hardest parts of launching the company. AEW officially started in 2019 and quickly landed Dynamite",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/01/tony-khan-claims-he-took-full-control-of-aew-creative-in-2025-and-says-it-changed-everything-59.jpg",
-        "source_title": "Tony Khan Says AEW Almost Launched Without A TV Deal"
+        "description": "Roman Reigns retained the WWE World Heavyweight Championship at Clash in Italy when he defeated Jacob Fatu in a Tribal Combat match.",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/roman-reigns-wwe-summerslam-wrestlemania-seth-rollins-oba-femi/l-intro-1780423293.jpg",
+        "source_title": "Backstage Report On Roman Reigns' Upcoming Opponents At WWE SummerSlam & WrestleMania - Wrestling Inc."
       },
-      "raw_element_count": 9,
+      "raw_element_count": 6,
       "raw_elements_preview": [
         {
+          "alt": "Roman Reigns holding the WWE World Heavyweight Championship in the air",
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/roman-reigns-wwe-summerslam-wrestlemania-seth-rollins-oba-femi/intro-1780423293.jpg"
+        },
+        {
           "block_id": "b1",
-          "text": "Tony Khan says getting AEW on television was one of the hardest parts of launching the company.",
+          "text": "With Clash In Italy behind us, WWE is firmly on the road to SummerSlam. Roman Reigns retained the World Heavyweight Championship on Sunday in a Tribal Combat match, and the King and Queen of the Ring tournaments have begun. The finals will happen at Night of Champions and the winner of those respective tournaments will earn title shots at \"The Biggest Party of the Summer.\" Now, a new report could be shining some light on the question of who Reigns will face at SummerSlam — and who he'll face at WrestleMania.",
           "type": "text"
         },
         {
           "block_id": "b2",
-          "text": "AEW officially started in 2019 and quickly landed Dynamite on TNT, giving the new promotion a major platform right out of the gate. The company has stayed on TNT and TBS ever since, but Khan says getting that first deal done was not easy.",
+          "text": "On Monday, Ibou of Self Made Sessions reported that Reigns is scheduled to work with Oba Femi and Seth Rollins, both of whom are in the King of the Ring tournament; Femi has already advanced to the semi-finals.",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "text": "Speaking with Wide World of Sports , Khan said he had already signed wrestlers in early 2019 but still did not have the TV deal finalized. He admitted he spent nearly a year working on that part of the business before things finally came together.",
-          "type": "text"
+          "source_tag": "p",
+          "text": "\"I was told one match is gonna be at SummerSlam, the other one is gonna be at WrestleMania, unless Dwayne decides to wrestle at Saudi,\" Ibou said, referring to The Rock.",
+          "type": "quote"
         },
         {
           "block_id": "b4",
-          "source_tag": "blockquote",
-          "text": "“The biggest hurdle was to make the TV deal – I reached a point in early-2019 where I had signed the wrestlers, but didn’t have a deal, I had been working on the TV portion of it for nearly a year, but I had got into April and still didn’t have a deal.”",
+          "source_tag": "p",
+          "text": "Ibou said he was informed of these plans days ago, but heard earlier on Monday that while SummerSlam plans were still up in the air, \"right now the plan is for Seth Rollins to win the tournament and face Roman Reigns.\" He assumes that means Femi will face Brock Lesnar at SummerSlam in a rubber match after Lesnar defeated Femi at Clash in Italy . If the report is true, that would mean Femi is Reigns' planned opponent for WrestleMania 43, pending The Rock's availability.",
           "type": "quote"
         },
         {
           "block_id": "b5",
-          "text": "Khan said that period was difficult because AEW was already becoming real behind the scenes, but the company still needed a television home to truly launch.",
-          "type": "text"
-        },
-        {
-          "block_id": "b6",
-          "source_tag": "blockquote",
-          "text": "“Reaching a point where it became a reality was very challenging. It’s hard to launch … but things have grown so quickly.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b7",
-          "text": "That first TV deal ended up changing everything for AEW. Without it, the company may have had talent and momentum, but not the weekly platform needed to compete on a national level.",
-          "type": "text"
-        },
-        {
-          "block_id": "b8",
-          "text": "AEW has grown a lot since then, but Khan made it clear the road to launch was not as smooth as it may have looked from the outside. He had the roster, he had the idea, but the TV deal was the hurdle that had to be cleared before AEW could really take off.",
-          "type": "text"
-        },
-        {
-          "text": "Spotlight WWE News Possible Plans For Liv Morgan at WWE SummerSlam Revealed WWE News WWE’s Backup Plan For WrestleMania 43 If The Rock Doesn’t Wrestle WWE News Nikkita Lyons Main Roster Call-Up Rumor Shut Down WWE News Real Reason WWE Booked Liv Morgan in Queen of the Ring Tournament Revealed",
+          "text": "Both Night of Champions and WrestleMania 43 will emanate from Riyadh, Saudi Arabia. SummerSlam will take place over two nights in Minneapolis, Minnesota on August 1 and 2.",
           "type": "text"
         }
       ],
-      "removed_before_gemini": 14,
+      "removed_before_gemini": 1,
       "removed_elements_debug": [
         {
-          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 73,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Spotlight"
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196640 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-liv-morgan tag-wwe-featured tag-wwe-summerslam   ",
-          "node_index": 77,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Possible Plans For Liv Morgan at WWE SummerSlam Revealed"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 80,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Possible Plans For Liv Morgan at WWE SummerSlam Revealed"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 81,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196620 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-the-rock tag-wwe-featured tag-wwe-wrestlemania   ",
-          "node_index": 82,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News WWE’s Backup Plan For WrestleMania 43 If The Rock Doesn’t Wrestle"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 85,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "WWE’s Backup Plan For WrestleMania 43 If The Rock Doesn’t Wrestle"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 86,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196615 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-nikkita-lyons tag-wwe-featured   ",
-          "node_index": 87,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Nikkita Lyons Main Roster Call-Up Rumor Shut Down"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 90,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Nikkita Lyons Main Roster Call-Up Rumor Shut Down"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 91,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196595 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-liv-morgan tag-wwe-featured   ",
-          "node_index": 92,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Real Reason WWE Booked Liv Morgan in Queen of the Ring Tournament Revealed"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 95,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Real Reason WWE Booked Liv Morgan in Queen of the Ring Tournament Revealed"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 96,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "index": 9,
+          "index": 1,
           "item": {
-            "text": "Spotlight WWE News Possible Plans For Liv Morgan at WWE SummerSlam Revealed WWE News WWE’s Backup Plan For WrestleMania 43 If The Rock Doesn’t Wrestle WWE News Nikkita Lyons Main Roster Call-Up Rumor Shut Down WWE News Real Reason WWE Booked Liv Morgan in Queen of the Ring Tournament Revealed",
-            "type": "text"
+            "alt": "Roman Reigns holding the WWE World Heavyweight Championship in the air",
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/roman-reigns-wwe-summerslam-wrestlemania-seth-rollins-oba-femi/intro-1780423293.jpg"
           },
-          "reason": "footer_start"
+          "reason": "duplicate_featured_image"
         }
       ],
-      "source": "ringsidenews",
+      "source": "wrestlinginc",
       "source_html_contains_embed_hint": true,
-      "source_title": "Tony Khan Says AEW Almost Launched Without A TV Deal",
-      "source_url": "https://www.ringsidenews.com/tony-khan-says-aew-almost-launched-without-tv-deal/",
+      "source_title": "Backstage Report On Roman Reigns' Upcoming Opponents At WWE SummerSlam & WrestleMania",
+      "source_url": "https://www.wrestlinginc.com/2185881/roman-reigns-wwe-summerslam-wrestlemania-seth-rollins-oba-femi/",
       "status": "ready_for_alfred",
-      "title_it": "Tony Khan: \"La AEW ha rischiato di debuttare senza un accordo televisivo\"",
+      "title_it": "Report sui futuri avversari di Roman Reigns per SummerSlam e WrestleMania",
       "translation_chain_attempted": [
         "gemini-3.1-flash-lite"
       ],
       "translation_missing_units": [],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/tony-khan-says-aew-almost-launched-without-tv-deal/\nTitolo feed: Tony Khan Says AEW Almost Launched Without A TV Deal\nTitolo pagina: Tony Khan Says AEW Almost Launched Without A TV Deal\nDescrizione: Tony Khan says getting AEW on television was one of the hardest parts of launching the company. AEW officially started in 2019 and quickly landed Dynamite\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Tony Khan says getting AEW on television was one of the hardest parts of launching the company.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"AEW officially started in 2019 and quickly landed Dynamite on TNT, giving the new promotion a major platform right out of the gate. The company has stayed on TNT and TBS ever since, but Khan says getting that first deal done was not easy.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Speaking with Wide World of Sports , Khan said he had already signed wrestlers in early 2019 but still did not have the TV deal finalized. He admitted he spent nearly a year working on that part of the business before things finally came together.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“The biggest hurdle was to make the TV deal – I reached a point in early-2019 where I had signed the wrestlers, but didn’t have a deal, I had been working on the TV portion of it for nearly a year, but I had got into April and still didn’t have a deal.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Khan said that period was difficult because AEW was already becoming real behind the scenes, but the company still needed a television home to truly launch.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“Reaching a point where it became a reality was very challenging. It’s hard to launch … but things have grown so quickly.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"That first TV deal ended up changing everything for AEW. Without it, the company may have had talent and momentum, but not the weekly platform needed to compete on a national level.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"AEW has grown a lot since then, but Khan made it clear the road to launch was not as smooth as it may have looked from the outside. He had the roster, he had the idea, but the TV deal was the hurdle that had to be cleared before AEW could really take off.\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"Tony Khan: \\\"La AEW ha rischiato di debuttare senza un accordo televisivo\\\"\",\n  \"excerpt_it\": \"Tony Khan rivela che assicurarsi un contratto televisivo è stata una delle sfide più complesse durante la fase di lancio della AEW.\",\n  \"translations\": {\n    \"b1\": \"Tony Khan ha dichiarato che portare la AEW in televisione è stata una delle parti più difficili del lancio della compagnia.\",\n    \"b2\": \"La AEW ha debuttato ufficialmente nel 2019 e ha rapidamente ottenuto la messa in onda di Dynamite su TNT, garantendo alla nuova promotion una piattaforma importante fin dal primo giorno. La compagnia è rimasta su TNT e TBS da allora, ma Khan sostiene che concludere quel primo accordo non sia stato affatto semplice.\",\n    \"b3\": \"Intervistato da Wide World of Sports, Khan ha raccontato di aver già messo sotto contratto diversi wrestler all'inizio del 2019, pur non avendo ancora finalizzato l'accordo televisivo. Ha ammesso di aver lavorato su questo aspetto del business per quasi un anno prima che tutto si concretizzasse.\",\n    \"b4\": \"“L'ostacolo più grande è stato proprio trovare l'accordo televisivo. Sono arrivato a un punto, all'inizio del 2019, in cui avevo già ingaggiato i wrestler ma non avevo ancora un contratto; ci lavoravo da quasi un anno, ma era arrivato aprile e non avevo ancora nulla in mano.”\",\n    \"b5\": \"Khan ha descritto quel periodo come complicato, poiché la AEW stava già diventando una realtà dietro le quinte, ma la compagnia aveva bisogno di una casa televisiva per poter decollare davvero.\",\n    \"b6\": \"“Raggiungere il punto in cui il progetto è diventato realtà è stato molto difficile. È complicato debuttare... ma le cose sono cresciute così velocemente.”\",\n    \"b7\": \"Quell'accordo televisivo iniziale ha cambiato tutto per la AEW. Senza di esso, la compagnia avrebbe potuto avere talento e slancio, ma non la piattaforma settimanale necessaria per competere a livello nazionale.\",\n    \"b8\": \"La AEW è cresciuta molto da allora, ma Khan ha chiarito che il percorso verso il lancio non è stato così lineare come poteva apparire dall'esterno. Aveva il roster e l'idea, ma l'accordo televisivo è stato l'ostacolo da superare affinché la AEW potesse realmente spiccare il volo.\"\n  },\n  \"notes\": []\n}",
-      "translation_unit_count": 8,
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185881/roman-reigns-wwe-summerslam-wrestlemania-seth-rollins-oba-femi/\nTitolo feed: Backstage Report On Roman Reigns' Upcoming Opponents At WWE SummerSlam & WrestleMania\nTitolo pagina: Backstage Report On Roman Reigns' Upcoming Opponents At WWE SummerSlam & WrestleMania - Wrestling Inc.\nDescrizione: Roman Reigns retained the WWE World Heavyweight Championship at Clash in Italy when he defeated Jacob Fatu in a Tribal Combat match.\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"With Clash In Italy behind us, WWE is firmly on the road to SummerSlam. Roman Reigns retained the World Heavyweight Championship on Sunday in a Tribal Combat match, and the King and Queen of the Ring tournaments have begun. The finals will happen at Night of Champions and the winner of those respective tournaments will earn title shots at \\\"The Biggest Party of the Summer.\\\" Now, a new report could be shining some light on the question of who Reigns will face at SummerSlam — and who he'll face at WrestleMania.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"On Monday, Ibou of Self Made Sessions reported that Reigns is scheduled to work with Oba Femi and Seth Rollins, both of whom are in the King of the Ring tournament; Femi has already advanced to the semi-finals.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"I was told one match is gonna be at SummerSlam, the other one is gonna be at WrestleMania, unless Dwayne decides to wrestle at Saudi,\\\" Ibou said, referring to The Rock.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"Ibou said he was informed of these plans days ago, but heard earlier on Monday that while SummerSlam plans were still up in the air, \\\"right now the plan is for Seth Rollins to win the tournament and face Roman Reigns.\\\" He assumes that means Femi will face Brock Lesnar at SummerSlam in a rubber match after Lesnar defeated Femi at Clash in Italy . If the report is true, that would mean Femi is Reigns' planned opponent for WrestleMania 43, pending The Rock's availability.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Both Night of Champions and WrestleMania 43 will emanate from Riyadh, Saudi Arabia. SummerSlam will take place over two nights in Minneapolis, Minnesota on August 1 and 2.\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Report sui futuri avversari di Roman Reigns per SummerSlam e WrestleMania\",\n  \"excerpt_it\": \"Emergono indiscrezioni sui possibili prossimi sfidanti di Roman Reigns per i due grandi eventi della WWE.\",\n  \"translations\": {\n    \"b1\": \"Archiviato Clash in Italy, la WWE è ufficialmente sulla strada verso SummerSlam. Roman Reigns ha mantenuto il World Heavyweight Championship domenica in un Tribal Combat match, e i tornei King and Queen of the Ring hanno avuto inizio. Le finali si terranno a Night of Champions e i rispettivi vincitori guadagneranno un'opportunità titolata al \\\"Biggest Party of the Summer\\\". Ora, un nuovo report potrebbe far luce sulla questione di chi affronterà Reigns a SummerSlam e chi invece a WrestleMania.\",\n    \"b2\": \"Lunedì, Ibou di Self Made Sessions ha riferito che Reigns è destinato a lavorare con Oba Femi e Seth Rollins, entrambi partecipanti al torneo King of the Ring; Femi si è già qualificato per le semifinali.\",\n    \"b3\": \"\\\"Mi è stato detto che un match si terrà a SummerSlam, l'altro a WrestleMania, a meno che Dwayne non decida di lottare in Arabia Saudita\\\", ha dichiarato Ibou riferendosi a The Rock.\",\n    \"b4\": \"Ibou ha affermato di essere stato informato di questi piani alcuni giorni fa, ma di aver saputo lunedì che, sebbene i programmi per SummerSlam fossero ancora incerti, \\\"al momento il piano prevede che Seth Rollins vinca il torneo e affronti Roman Reigns\\\". Presume che ciò significhi che Femi affronterà Brock Lesnar a SummerSlam in un match di bella, dopo che Lesnar ha sconfitto Femi a Clash in Italy. Se il report fosse corretto, ciò significherebbe che Femi è l'avversario designato per Reigns a WrestleMania 43, disponibilità di The Rock permettendo.\",\n    \"b5\": \"Sia Night of Champions che WrestleMania 43 si terranno a Riyadh, in Arabia Saudita. SummerSlam si svolgerà in due serate a Minneapolis, nel Minnesota, l'1 e il 2 agosto.\"\n  },\n  \"notes\": []\n}",
+      "translation_unit_count": 5,
       "translation_used": true
     },
     {
       "bob_notes": [],
-      "body_html": "<p>AEW Grand Slam Mexico non ha ancora una data ufficiale, ma Dave Meltzer ritiene che il calendario inizi a delineare il quadro della situazione.</p>\n<p>Durante Wrestling Observer Radio, Meltzer ha discusso dello status del ritorno della AEW in Messico, affermando che lo show dovrebbe tenersi ad agosto. Sebbene la AEW non abbia ancora annunciato la data, il giornalista l&#x27;ha ristretta a due possibili mercoledì in base all&#x27;attuale programmazione della compagnia.</p>\n<blockquote>“Sì. Basandosi sul ragionamento deduttivo, si terrà sicuramente nel mese di agosto. Non sarà il 19 agosto perché hanno uno show a Baltimora, spostato dal 12. Curiosamente, non sarà il 26 agosto perché saranno a… Dio, è in Europa. Proprio perché è il mercoledì prima di All In. Sarà a… ho dimenticato la città. Ma faranno Dynamite in Europa il 26. Quindi restano il 5 e il 12. E visto che il 12 era la data di Baltimora, poi spostata al 19, forse… non so se sarà il 5 o il 12. Dico solo che sarà uno dei due mercoledì. Ecco fatto.”</blockquote>\n<p>Bryan Alvarez ha poi sottolineato che l&#x27;episodio di Dynamite del 26 agosto si terrà a Glasgow, in Scozia. Meltzer ha confermato, lasciando il 5 e il 12 agosto come uniche date rimaste per Grand Slam Mexico.</p>\n<blockquote>“È Glasgow, Scozia. Esatto, esatto. Sì.”</blockquote>\n<p>Meltzer ha chiarito che la data non è stata ancora ufficializzata, ma prevede che la AEW finalizzerà il tutto a breve. Ha inoltre notato che Salvador Lutteroth era presente a Double or Nothing e ritiene fortemente che Grand Slam Mexico sia stato uno degli argomenti principali di discussione.</p>\n<blockquote>“Non conosciamo ancora la data. Ma presumo che la annunceranno nelle prossime settimane, sapete, e definiranno ogni dettaglio. Comunque Salvador Lutteroth era a Double or Nothing. E presumo fermamente che sia stato un argomento di discussione principale.”</blockquote>\n<p>Le tempistiche sono interessanti, dato che il Messico sta diventando un importante campo di battaglia per il wrestling. WWE e AAA stanno preparando grandi show nel Paese, mentre il rapporto della AEW con la CMLL continua a giocare un ruolo fondamentale nei suoi piani. Meltzer ha anche menzionato che i fan messicani vogliono vedere nomi come Will Ospreay e Kenny Omega, e si aspetta che Omega faccia parte di Grand Slam Mexico quest&#x27;anno.</p>\n<blockquote>“So che in Messico i fan vogliono davvero vedere Ospreay e Omega, sono i nomi che desiderano di più. Omega non ha mai lottato all&#x27;Arena Mexico. Ospreay, ovviamente, ha già lottato a Grand Slam Mexico, ma… mi aspetto che Omega sia presente a Grand Slam Mexico quest&#x27;anno. Vedremo. E potrebbe essere proprio in quell&#x27;occasione, ad agosto, che gireranno un angolo per l&#x27;anniversario.”</blockquote>\n<p>Per ora, i fan della AEW restano in attesa dell&#x27;annuncio ufficiale, ma la finestra temporale sembra restringersi. Se la lettura di Meltzer sul calendario è corretta, Grand Slam Mexico si terrà probabilmente il 5 o il 12 agosto, offrendo alla AEW un importante appuntamento estivo in Messico prima di dirigersi verso All In.</p>\n<p>La AEW non ha ancora confermato la data, ma tutti gli indizi puntano verso il mese di agosto. Con la concorrenza tra WWE e AAA in Messico e la continua sinergia della AEW con la CMLL, Grand Slam Mexico potrebbe rivelarsi un tassello del calendario estivo molto più importante di quanto i fan avessero inizialmente previsto.</p>",
+      "body_html": "https://x.com/FOXSportsMX/status/2061840272909316202\n\n<p>È passato quasi un anno da quando la AEW ha fatto tappa in Messico per la prima volta, mettendo in scena AEW Grand Slam Mexico all&#x27;Arena Mexico, casa del loro partner promozionale CMLL. E ora, la promotion è pronta per il bis. Attraverso X, nella giornata di martedì, il partner di trasmissione messicano della AEW, Fox Sports Mexico, ha annunciato che Grand Slam Mexico si terrà il 5 agosto, sempre in diretta dall&#x27;Arena Mexico. I biglietti saranno in vendita da sabato 6 giugno.</p>\n<p>Sebbene al momento non siano stati annunciati match, il poster di Grand Slam vede la presenza di diverse star della lucha libre della AEW. Tra questi figurano Andrade El Idolo, che ha iniziato la sua carriera nell&#x27;Arena Mexico come La Sombra, il Ring of Honor World Champion Bandido, i lottatori legati sia alla AEW che alla CMLL come Thunder Rosa e Mascara Dorada, e la stella di punta della CMLL, Mistico. L&#x27;unico non-luchador presente sul poster è l&#x27;AEW Men&#x27;s World Champion MJF.</p>\n<p>Grand Slam Mexico si terrà con due mesi di ritardo rispetto allo scorso anno, una decisione probabilmente influenzata dalla Coppa del Mondo FIFA 2026. La kermesse calcistica si svolgerà in parte proprio in Messico da metà giugno a metà luglio, portando la CMLL a modificare il proprio calendario per tenere show a Città del Messico, Puebla e Guadalajara ogni giorno della settimana; ciò ha reso improbabile per la AEW organizzare Grand Slam a giugno. Lo show farà ora parte della marcia di avvicinamento della AEW verso All In, previsto per fine agosto, e si terrà appena due settimane dopo AEW Redemption, in programma a Montreal il 26 luglio.</p>\n<p>La prima edizione di Grand Slam Mexico si è rivelata importante sia per la AEW che per la CMLL, poiché ha dato il via a una faida durata un mese tra MJF e Mistico dopo che quest&#x27;ultimo ha sconfitto MJF per squalifica. Le loro divergenze sono culminate al 92° Aniversario della CMLL a settembre, dove Mistico ha sconfitto MJF in un Mask vs. Title match, conquistando il CMLL World Light Heavyweight Championship.</p>",
       "category_hint": "AEW",
-      "clean_element_count": 11,
-      "created_at": "2026-06-02T13:58:55.526805+00:00",
+      "clean_element_count": 5,
+      "created_at": "2026-06-02T18:07:45.118588+00:00",
       "diagnostic_stage": "ready_for_alfred",
       "element_counts": {
-        "embed": 0,
+        "embed": 1,
         "heading": 0,
         "image": 0,
-        "quote": 4,
+        "quote": 0,
         "table": 0,
-        "text": 7
+        "text": 4
       },
       "elements": [
         {
           "block_id": "b1",
-          "text": "AEW Grand Slam Mexico still does not have an official date, but Dave Meltzer believes the schedule is starting to tell the story.",
-          "type": "text"
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://x.com/FOXSportsMX/status/2061840272909316202"
         },
         {
           "block_id": "b2",
-          "text": "During Wrestling Observer Radio, Meltzer discussed the status of AEW’s return to Mexico and said the show is expected to take place in August. While AEW has not announced the date yet, he narrowed it down to two possible Wednesdays based on the company’s current schedule.",
+          "text": "It was almost a year ago that AEW journeyed down to Mexico for the first time, running AEW Grand Slam Mexico in Arena Mexico , home of their promotional partner CMLL. And now, the promotion is ready for an encore. Taking to X at noon time on Tuesday, AEW's Mexican Broadcast partner Fox Sports Mexico announced that Grand Slam Mexico would be taking place on August 5, once again airing out of Arena Mexico. Tickets go on sale Saturday, June 6.",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "source_tag": "blockquote",
-          "text": "“Yeah. Either going to be based on deductive reasoning, it is going to be held in the month of August, for sure. It will not be on August 19th because they have a show in Baltimore which was moved from the 12th. Interestingly enough, it will not be August 26th because they’re going to be in… God, it’s in Europe. It’s because it’s the Wednesday before All In. It’ll be in… I forgot the city that they’re in. But they’re doing Dynamite in Europe on the 26th. So that leaves the 5th and the 12th. And the fact that the 12th was Baltimore, which was moved to the 19th, maybe, you know, I don’t know if it’s the 5th or the 12th. I’ll just say that it’s one or the other on a Wednesday. And there you go.”",
-          "type": "quote"
+          "text": "Though no matches have been announced at this time, the Grand Slam poster advertised several notable AEW lucha libre stars as appearing. This included Andrade El Idolo, who began his career in Arena Mexico as La Sombra, Ring of Honor World Champion Bandido, dual AEW/CMLL stars Thunder Rosa and Mascara Dorada, and CMLL top star Mistico . The lone non-luchador featured on the poster was AEW Men's World Champion MJF.",
+          "type": "text"
         },
         {
           "block_id": "b4",
-          "text": "Bryan Alvarez then pointed out that the August 26 episode of Dynamite will take place in Glasgow, Scotland. Meltzer confirmed that, which makes August 5 and August 12 the two dates left standing for Grand Slam Mexico.",
+          "text": "Grand Slam Mexico will take place two months later than it did last year, a decision likely influenced by the 2026 FIFA World Cup . The football extravaganza will be held, in part, in Mexico from mid-June to mid-July, which has resulted in CMLL tweaking their schedule to hold shows in Mexico City, Puebla, and Guadalajara every day of the week, thus making it unlikely for AEW to hold Grand Slam in June. The show will now be part of AEW's build to All In later in August, and will come just two weeks after AEW Redemption, being held in Montreal on July 26.",
           "type": "text"
         },
         {
           "block_id": "b5",
-          "source_tag": "blockquote",
-          "text": "“It’s Glasgow, Scotland. Right, right. Yep.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b6",
-          "text": "Meltzer made it clear that the date is not locked in publicly yet, but he expects AEW to finalize things soon. He also noted that Salvador Lutteroth was at Double or Nothing, and he strongly believes Grand Slam Mexico was likely one of the major topics discussed.",
-          "type": "text"
-        },
-        {
-          "block_id": "b7",
-          "source_tag": "blockquote",
-          "text": "“We don’t know the date yet. But I presume that they’ll announce it in the next couple of weeks, you know, and get everything finalized. But Salvador Luderoth was at Double or Nothing. And I presume strongly that that was a main topic of discussion.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b8",
-          "text": "The timing is interesting because Mexico is becoming a major battleground for wrestling right now. WWE and AAA are loading up big shows in Mexico, while AEW’s relationship with CMLL continues to play a major role in its own plans. Meltzer also mentioned that Mexican fans want to see names like Will Ospreay and Kenny Omega, and he expects Omega to be part of Grand Slam Mexico this year.",
-          "type": "text"
-        },
-        {
-          "block_id": "b9",
-          "source_tag": "blockquote",
-          "text": "“I know that in Mexico, I know that the fans really want Ospreay and they really want Omega, you know, as far as like the ones, the guys that they really want to see. Omega has never wrestled in Arena Mexico. Ospreay, of course, wrestled Grand Slam Mexico, but, you know, so I know… I expect Omega was going to be on the Grand Slam Mexico this year. So. But, you know, we’ll see. And that may be where they August, that may be where they shoot the angle actually is Grand Slam Mexico for the anniversary show.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b10",
-          "text": "For now, AEW fans are still waiting on the official word, but the window appears to be getting smaller. If Meltzer’s read on the schedule is correct, Grand Slam Mexico is likely coming on either August 5 or August 12, giving AEW a major summer date in Mexico before the company heads toward All In.",
-          "type": "text"
-        },
-        {
-          "block_id": "b11",
-          "text": "AEW has not confirmed the date yet, but all signs point to August being the month to watch. With WWE and AAA pushing hard in Mexico and AEW continuing its CMLL connection, Grand Slam Mexico could end up being a much bigger piece of the summer calendar than fans first expected.",
+          "text": "The first edition of Grand Slam Mexico proved to be important to both AEW and CMLL, as it kick-started a month-long feud between MJF and Mistico after the latter defeated MJF by DQ. Their issues would culminate at CMLL's 92nd Aniversario in September, where Mistico would defeat MJF in a Mask vs. Title match to claim the CMLL World Light Heavyweight Championship.",
           "type": "text"
         }
       ],
-      "excerpt_it": "Non c'è ancora una data ufficiale per AEW Grand Slam Mexico, ma l'analisi del calendario suggerisce due mercoledì di agosto come opzioni più probabili.",
+      "excerpt_it": "A un anno dal debutto in Messico, la AEW torna all'Arena Mexico per la seconda edizione di Grand Slam Mexico, prevista per il 5 agosto.",
       "extraction_diagnostics": {
-        "candidate_node_count": 101,
-        "clean_element_count": 11,
+        "candidate_node_count": 18,
+        "clean_element_count": 5,
         "dom_noise_reduction_enabled": false,
-        "embed_count": 0,
+        "embed_count": 1,
         "global_embed_recovery_enabled": false,
-        "quote_count": 4,
-        "raw_element_count": 12,
-        "removed_by_node_count": 13,
-        "removed_by_sanitize_count": 1,
+        "quote_count": 0,
+        "raw_element_count": 8,
+        "removed_by_node_count": 0,
+        "removed_by_sanitize_count": 3,
         "root_name": "article",
-        "root_text_chars": 4437,
+        "root_text_chars": 2232,
         "stage": "complete",
         "table_count": 0
       },
-      "fetched_html_chars": 486389,
-      "menzo_score": 76,
+      "fetched_html_chars": 50363,
+      "menzo_score": 80,
       "meta": {
-        "description": "AEW Grand Slam Mexico still does not have an official date, but Dave Meltzer believes the schedule is starting to tell the story. During Wrestling",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/aew-grand-slam-mexico-date-narrowed-down-to-two-possible-august-shows-24.jpg",
-        "source_title": "AEW Grand Slam Mexico Date Narrowed Down to Two Possible August Shows"
+        "description": "One year after their debut in Mexico, AEW announces their return to the country, revealing that the second \"Grand Slam Mexico\" will take place on August 5",
+        "featured_image": "https://www.wrestlinginc.com/img/gallery/aew-grand-slam-mexico-2026-announces/l-intro-1780422638.jpg",
+        "source_title": "AEW Announces Grand Slam Mexico 2026 - Wrestling Inc."
       },
-      "raw_element_count": 12,
+      "raw_element_count": 8,
       "raw_elements_preview": [
         {
           "block_id": "b1",
-          "text": "AEW Grand Slam Mexico still does not have an official date, but Dave Meltzer believes the schedule is starting to tell the story.",
-          "type": "text"
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://x.com/FOXSportsMX/status/2061840272909316202"
+        },
+        {
+          "alt": "Mistico holding up the Mexican flag",
+          "type": "image",
+          "url": "https://www.wrestlinginc.com/img/gallery/aew-grand-slam-mexico-2026-announces/intro-1780422638.jpg"
+        },
+        {
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://x.com/FOXSportsMX/status/2061840272909316202"
         },
         {
           "block_id": "b2",
-          "text": "During Wrestling Observer Radio, Meltzer discussed the status of AEW’s return to Mexico and said the show is expected to take place in August. While AEW has not announced the date yet, he narrowed it down to two possible Wednesdays based on the company’s current schedule.",
+          "text": "It was almost a year ago that AEW journeyed down to Mexico for the first time, running AEW Grand Slam Mexico in Arena Mexico , home of their promotional partner CMLL. And now, the promotion is ready for an encore. Taking to X at noon time on Tuesday, AEW's Mexican Broadcast partner Fox Sports Mexico announced that Grand Slam Mexico would be taking place on August 5, once again airing out of Arena Mexico. Tickets go on sale Saturday, June 6.",
           "type": "text"
         },
         {
           "block_id": "b3",
+          "text": "Though no matches have been announced at this time, the Grand Slam poster advertised several notable AEW lucha libre stars as appearing. This included Andrade El Idolo, who began his career in Arena Mexico as La Sombra, Ring of Honor World Champion Bandido, dual AEW/CMLL stars Thunder Rosa and Mascara Dorada, and CMLL top star Mistico . The lone non-luchador featured on the poster was AEW Men's World Champion MJF.",
+          "type": "text"
+        },
+        {
           "source_tag": "blockquote",
-          "text": "“Yeah. Either going to be based on deductive reasoning, it is going to be held in the month of August, for sure. It will not be on August 19th because they have a show in Baltimore which was moved from the 12th. Interestingly enough, it will not be August 26th because they’re going to be in… God, it’s in Europe. It’s because it’s the Wednesday before All In. It’ll be in… I forgot the city that they’re in. But they’re doing Dynamite in Europe on the 26th. So that leaves the 5th and the 12th. And the fact that the 12th was Baltimore, which was moved to the 19th, maybe, you know, I don’t know if it’s the 5th or the 12th. I’ll just say that it’s one or the other on a Wednesday. And there you go.”",
-          "type": "quote"
+          "type": "embed",
+          "url": "https://x.com/FOXSportsMX/status/2061840272909316202"
         },
         {
           "block_id": "b4",
-          "text": "Bryan Alvarez then pointed out that the August 26 episode of Dynamite will take place in Glasgow, Scotland. Meltzer confirmed that, which makes August 5 and August 12 the two dates left standing for Grand Slam Mexico.",
+          "text": "Grand Slam Mexico will take place two months later than it did last year, a decision likely influenced by the 2026 FIFA World Cup . The football extravaganza will be held, in part, in Mexico from mid-June to mid-July, which has resulted in CMLL tweaking their schedule to hold shows in Mexico City, Puebla, and Guadalajara every day of the week, thus making it unlikely for AEW to hold Grand Slam in June. The show will now be part of AEW's build to All In later in August, and will come just two weeks after AEW Redemption, being held in Montreal on July 26.",
           "type": "text"
         },
         {
           "block_id": "b5",
-          "source_tag": "blockquote",
-          "text": "“It’s Glasgow, Scotland. Right, right. Yep.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b6",
-          "text": "Meltzer made it clear that the date is not locked in publicly yet, but he expects AEW to finalize things soon. He also noted that Salvador Lutteroth was at Double or Nothing, and he strongly believes Grand Slam Mexico was likely one of the major topics discussed.",
-          "type": "text"
-        },
-        {
-          "block_id": "b7",
-          "source_tag": "blockquote",
-          "text": "“We don’t know the date yet. But I presume that they’ll announce it in the next couple of weeks, you know, and get everything finalized. But Salvador Luderoth was at Double or Nothing. And I presume strongly that that was a main topic of discussion.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b8",
-          "text": "The timing is interesting because Mexico is becoming a major battleground for wrestling right now. WWE and AAA are loading up big shows in Mexico, while AEW’s relationship with CMLL continues to play a major role in its own plans. Meltzer also mentioned that Mexican fans want to see names like Will Ospreay and Kenny Omega, and he expects Omega to be part of Grand Slam Mexico this year.",
-          "type": "text"
-        },
-        {
-          "block_id": "b9",
-          "source_tag": "blockquote",
-          "text": "“I know that in Mexico, I know that the fans really want Ospreay and they really want Omega, you know, as far as like the ones, the guys that they really want to see. Omega has never wrestled in Arena Mexico. Ospreay, of course, wrestled Grand Slam Mexico, but, you know, so I know… I expect Omega was going to be on the Grand Slam Mexico this year. So. But, you know, we’ll see. And that may be where they August, that may be where they shoot the angle actually is Grand Slam Mexico for the anniversary show.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b10",
-          "text": "For now, AEW fans are still waiting on the official word, but the window appears to be getting smaller. If Meltzer’s read on the schedule is correct, Grand Slam Mexico is likely coming on either August 5 or August 12, giving AEW a major summer date in Mexico before the company heads toward All In.",
-          "type": "text"
-        },
-        {
-          "block_id": "b11",
-          "text": "AEW has not confirmed the date yet, but all signs point to August being the month to watch. With WWE and AAA pushing hard in Mexico and AEW continuing its CMLL connection, Grand Slam Mexico could end up being a much bigger piece of the summer calendar than fans first expected.",
-          "type": "text"
-        },
-        {
-          "text": "Spotlight WWE News Possible Plans For Liv Morgan at WWE SummerSlam Revealed WWE News WWE’s Backup Plan For WrestleMania 43 If The Rock Doesn’t Wrestle WWE News Nikkita Lyons Main Roster Call-Up Rumor Shut Down WWE News Real Reason WWE Booked Liv Morgan in Queen of the Ring Tournament Revealed",
+          "text": "The first edition of Grand Slam Mexico proved to be important to both AEW and CMLL, as it kick-started a month-long feud between MJF and Mistico after the latter defeated MJF by DQ. Their issues would culminate at CMLL's 92nd Aniversario in September, where Mistico would defeat MJF in a Mask vs. Title match to claim the CMLL World Light Heavyweight Championship.",
           "type": "text"
         }
       ],
-      "removed_before_gemini": 14,
+      "removed_before_gemini": 3,
       "removed_elements_debug": [
         {
-          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 78,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Spotlight"
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196640 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-liv-morgan tag-wwe-featured tag-wwe-summerslam   ",
-          "node_index": 82,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Possible Plans For Liv Morgan at WWE SummerSlam Revealed"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 85,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Possible Plans For Liv Morgan at WWE SummerSlam Revealed"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 86,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196620 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-the-rock tag-wwe-featured tag-wwe-wrestlemania   ",
-          "node_index": 87,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News WWE’s Backup Plan For WrestleMania 43 If The Rock Doesn’t Wrestle"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 90,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "WWE’s Backup Plan For WrestleMania 43 If The Rock Doesn’t Wrestle"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 91,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196615 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-nikkita-lyons tag-wwe-featured   ",
-          "node_index": 92,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Nikkita Lyons Main Roster Call-Up Rumor Shut Down"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 95,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Nikkita Lyons Main Roster Call-Up Rumor Shut Down"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 96,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196595 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-liv-morgan tag-wwe-featured   ",
-          "node_index": 97,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Real Reason WWE Booked Liv Morgan in Queen of the Ring Tournament Revealed"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 100,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Real Reason WWE Booked Liv Morgan in Queen of the Ring Tournament Revealed"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 101,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "index": 12,
+          "index": 2,
           "item": {
-            "text": "Spotlight WWE News Possible Plans For Liv Morgan at WWE SummerSlam Revealed WWE News WWE’s Backup Plan For WrestleMania 43 If The Rock Doesn’t Wrestle WWE News Nikkita Lyons Main Roster Call-Up Rumor Shut Down WWE News Real Reason WWE Booked Liv Morgan in Queen of the Ring Tournament Revealed",
-            "type": "text"
+            "alt": "Mistico holding up the Mexican flag",
+            "type": "image",
+            "url": "https://www.wrestlinginc.com/img/gallery/aew-grand-slam-mexico-2026-announces/intro-1780422638.jpg"
           },
-          "reason": "footer_start"
+          "reason": "duplicate_featured_image"
+        },
+        {
+          "index": 3,
+          "item": {
+            "source_tag": "div",
+            "type": "embed",
+            "url": "https://x.com/FOXSportsMX/status/2061840272909316202"
+          },
+          "reason": "duplicate_or_empty_embed"
+        },
+        {
+          "index": 6,
+          "item": {
+            "source_tag": "blockquote",
+            "type": "embed",
+            "url": "https://x.com/FOXSportsMX/status/2061840272909316202"
+          },
+          "reason": "duplicate_or_empty_embed"
         }
       ],
-      "source": "ringsidenews",
+      "source": "wrestlinginc",
       "source_html_contains_embed_hint": true,
-      "source_title": "AEW Grand Slam Mexico Date Narrowed Down to Two Possible August Shows",
-      "source_url": "https://www.ringsidenews.com/aew-grand-slam-mexico-date-narrowed-down-two-possible-august-shows/",
+      "source_title": "AEW Announces Grand Slam Mexico 2026",
+      "source_url": "https://www.wrestlinginc.com/2185902/aew-grand-slam-mexico-2026-announces/",
       "status": "ready_for_alfred",
-      "title_it": "AEW Grand Slam Mexico: ristretto il campo delle date possibili ad agosto",
+      "title_it": "AEW annuncia Grand Slam Mexico 2026",
       "translation_chain_attempted": [
         "gemini-3.1-flash-lite"
       ],
       "translation_missing_units": [],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/aew-grand-slam-mexico-date-narrowed-down-two-possible-august-shows/\nTitolo feed: AEW Grand Slam Mexico Date Narrowed Down to Two Possible August Shows\nTitolo pagina: AEW Grand Slam Mexico Date Narrowed Down to Two Possible August Shows\nDescrizione: AEW Grand Slam Mexico still does not have an official date, but Dave Meltzer believes the schedule is starting to tell the story. During Wrestling\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"AEW Grand Slam Mexico still does not have an official date, but Dave Meltzer believes the schedule is starting to tell the story.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"During Wrestling Observer Radio, Meltzer discussed the status of AEW’s return to Mexico and said the show is expected to take place in August. While AEW has not announced the date yet, he narrowed it down to two possible Wednesdays based on the company’s current schedule.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"“Yeah. Either going to be based on deductive reasoning, it is going to be held in the month of August, for sure. It will not be on August 19th because they have a show in Baltimore which was moved from the 12th. Interestingly enough, it will not be August 26th because they’re going to be in… God, it’s in Europe. It’s because it’s the Wednesday before All In. It’ll be in… I forgot the city that they’re in. But they’re doing Dynamite in Europe on the 26th. So that leaves the 5th and the 12th. And the fact that the 12th was Baltimore, which was moved to the 19th, maybe, you know, I don’t know if it’s the 5th or the 12th. I’ll just say that it’s one or the other on a Wednesday. And there you go.”\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Bryan Alvarez then pointed out that the August 26 episode of Dynamite will take place in Glasgow, Scotland. Meltzer confirmed that, which makes August 5 and August 12 the two dates left standing for Grand Slam Mexico.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“It’s Glasgow, Scotland. Right, right. Yep.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Meltzer made it clear that the date is not locked in publicly yet, but he expects AEW to finalize things soon. He also noted that Salvador Lutteroth was at Double or Nothing, and he strongly believes Grand Slam Mexico was likely one of the major topics discussed.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“We don’t know the date yet. But I presume that they’ll announce it in the next couple of weeks, you know, and get everything finalized. But Salvador Luderoth was at Double or Nothing. And I presume strongly that that was a main topic of discussion.”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"The timing is interesting because Mexico is becoming a major battleground for wrestling right now. WWE and AAA are loading up big shows in Mexico, while AEW’s relationship with CMLL continues to play a major role in its own plans. Meltzer also mentioned that Mexican fans want to see names like Will Ospreay and Kenny Omega, and he expects Omega to be part of Grand Slam Mexico this year.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"quote\",\n    \"text\": \"“I know that in Mexico, I know that the fans really want Ospreay and they really want Omega, you know, as far as like the ones, the guys that they really want to see. Omega has never wrestled in Arena Mexico. Ospreay, of course, wrestled Grand Slam Mexico, but, you know, so I know… I expect Omega was going to be on the Grand Slam Mexico this year. So. But, you know, we’ll see. And that may be where they August, that may be where they shoot the angle actually is Grand Slam Mexico for the anniversary show.”\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"text\",\n    \"text\": \"For now, AEW fans are still waiting on the official word, but the window appears to be getting smaller. If Meltzer’s read on the schedule is correct, Grand Slam Mexico is likely coming on either August 5 or August 12, giving AEW a major summer date in Mexico before the company heads toward All In.\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"AEW has not confirmed the date yet, but all signs point to August being the month to watch. With WWE and AAA pushing hard in Mexico and AEW continuing its CMLL connection, Grand Slam Mexico could end up being a much bigger piece of the summer calendar than fans first expected.\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"AEW Grand Slam Mexico: ristretto il campo delle date possibili ad agosto\",\n  \"excerpt_it\": \"Non c'è ancora una data ufficiale per AEW Grand Slam Mexico, ma l'analisi del calendario suggerisce due mercoledì di agosto come opzioni più probabili.\",\n  \"translations\": {\n    \"b1\": \"AEW Grand Slam Mexico non ha ancora una data ufficiale, ma Dave Meltzer ritiene che il calendario inizi a delineare il quadro della situazione.\",\n    \"b2\": \"Durante Wrestling Observer Radio, Meltzer ha discusso dello status del ritorno della AEW in Messico, affermando che lo show dovrebbe tenersi ad agosto. Sebbene la AEW non abbia ancora annunciato la data, il giornalista l'ha ristretta a due possibili mercoledì in base all'attuale programmazione della compagnia.\",\n    \"b3\": \"“Sì. Basandosi sul ragionamento deduttivo, si terrà sicuramente nel mese di agosto. Non sarà il 19 agosto perché hanno uno show a Baltimora, spostato dal 12. Curiosamente, non sarà il 26 agosto perché saranno a… Dio, è in Europa. Proprio perché è il mercoledì prima di All In. Sarà a… ho dimenticato la città. Ma faranno Dynamite in Europa il 26. Quindi restano il 5 e il 12. E visto che il 12 era la data di Baltimora, poi spostata al 19, forse… non so se sarà il 5 o il 12. Dico solo che sarà uno dei due mercoledì. Ecco fatto.”\",\n    \"b4\": \"Bryan Alvarez ha poi sottolineato che l'episodio di Dynamite del 26 agosto si terrà a Glasgow, in Scozia. Meltzer ha confermato, lasciando il 5 e il 12 agosto come uniche date rimaste per Grand Slam Mexico.\",\n    \"b5\": \"“È Glasgow, Scozia. Esatto, esatto. Sì.”\",\n    \"b6\": \"Meltzer ha chiarito che la data non è stata ancora ufficializzata, ma prevede che la AEW finalizzerà il tutto a breve. Ha inoltre notato che Salvador Lutteroth era presente a Double or Nothing e ritiene fortemente che Grand Slam Mexico sia stato uno degli argomenti principali di discussione.\",\n    \"b7\": \"“Non conosciamo ancora la data. Ma presumo che la annunceranno nelle prossime settimane, sapete, e definiranno ogni dettaglio. Comunque Salvador Lutteroth era a Double or Nothing. E presumo fermamente che sia stato un argomento di discussione principale.”\",\n    \"b8\": \"Le tempistiche sono interessanti, dato che il Messico sta diventando un importante campo di battaglia per il wrestling. WWE e AAA stanno preparando grandi show nel Paese, mentre il rapporto della AEW con la CMLL continua a giocare un ruolo fondamentale nei suoi piani. Meltzer ha anche menzionato che i fan messicani vogliono vedere nomi come Will Ospreay e Kenny Omega, e si aspetta che Omega faccia parte di Grand Slam Mexico quest'anno.\",\n    \"b9\": \"“So che in Messico i fan vogliono davvero vedere Ospreay e Omega, sono i nomi che desiderano di più. Omega non ha mai lottato all'Arena Mexico. Ospreay, ovviamente, ha già lottato a Grand Slam Mexico, ma… mi aspetto che Omega sia presente a Grand Slam Mexico quest'anno. Vedremo. E potrebbe essere proprio in quell'occasione, ad agosto, che gireranno un angolo per l'anniversario.”\",\n    \"b10\": \"Per ora, i fan della AEW restano in attesa dell'annuncio ufficiale, ma la finestra temporale sembra restringersi. Se la lettura di Meltzer sul calendario è corretta, Grand Slam Mexico si terrà probabilmente il 5 o il 12 agosto, offrendo alla AEW un importante appuntamento estivo in Messico prima di dirigersi verso All In.\",\n    \"b11\": \"La AEW non ha ancora confermato la data, ma tutti gli indizi puntano verso il mese di agosto. Con la concorrenza tra WWE e AAA in Messico e la continua sinergia della AEW con la CMLL, Grand Slam Mexico potrebbe rivelarsi un tassello del calendario estivo molto più importante di quanto i fan avessero inizialmente previsto.\"\n  },\n  \"notes\": []\n}",
-      "translation_unit_count": 11,
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2185902/aew-grand-slam-mexico-2026-announces/\nTitolo feed: AEW Announces Grand Slam Mexico 2026\nTitolo pagina: AEW Announces Grand Slam Mexico 2026 - Wrestling Inc.\nDescrizione: One year after their debut in Mexico, AEW announces their return to the country, revealing that the second \"Grand Slam Mexico\" will take place on August 5\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"It was almost a year ago that AEW journeyed down to Mexico for the first time, running AEW Grand Slam Mexico in Arena Mexico , home of their promotional partner CMLL. And now, the promotion is ready for an encore. Taking to X at noon time on Tuesday, AEW's Mexican Broadcast partner Fox Sports Mexico announced that Grand Slam Mexico would be taking place on August 5, once again airing out of Arena Mexico. Tickets go on sale Saturday, June 6.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Though no matches have been announced at this time, the Grand Slam poster advertised several notable AEW lucha libre stars as appearing. This included Andrade El Idolo, who began his career in Arena Mexico as La Sombra, Ring of Honor World Champion Bandido, dual AEW/CMLL stars Thunder Rosa and Mascara Dorada, and CMLL top star Mistico . The lone non-luchador featured on the poster was AEW Men's World Champion MJF.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Grand Slam Mexico will take place two months later than it did last year, a decision likely influenced by the 2026 FIFA World Cup . The football extravaganza will be held, in part, in Mexico from mid-June to mid-July, which has resulted in CMLL tweaking their schedule to hold shows in Mexico City, Puebla, and Guadalajara every day of the week, thus making it unlikely for AEW to hold Grand Slam in June. The show will now be part of AEW's build to All In later in August, and will come just two weeks after AEW Redemption, being held in Montreal on July 26.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"The first edition of Grand Slam Mexico proved to be important to both AEW and CMLL, as it kick-started a month-long feud between MJF and Mistico after the latter defeated MJF by DQ. Their issues would culminate at CMLL's 92nd Aniversario in September, where Mistico would defeat MJF in a Mask vs. Title match to claim the CMLL World Light Heavyweight Championship.\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"AEW annuncia Grand Slam Mexico 2026\",\n  \"excerpt_it\": \"A un anno dal debutto in Messico, la AEW torna all'Arena Mexico per la seconda edizione di Grand Slam Mexico, prevista per il 5 agosto.\",\n  \"translations\": {\n    \"b2\": \"È passato quasi un anno da quando la AEW ha fatto tappa in Messico per la prima volta, mettendo in scena AEW Grand Slam Mexico all'Arena Mexico, casa del loro partner promozionale CMLL. E ora, la promotion è pronta per il bis. Attraverso X, nella giornata di martedì, il partner di trasmissione messicano della AEW, Fox Sports Mexico, ha annunciato che Grand Slam Mexico si terrà il 5 agosto, sempre in diretta dall'Arena Mexico. I biglietti saranno in vendita da sabato 6 giugno.\",\n    \"b3\": \"Sebbene al momento non siano stati annunciati match, il poster di Grand Slam vede la presenza di diverse star della lucha libre della AEW. Tra questi figurano Andrade El Idolo, che ha iniziato la sua carriera nell'Arena Mexico come La Sombra, il Ring of Honor World Champion Bandido, i lottatori legati sia alla AEW che alla CMLL come Thunder Rosa e Mascara Dorada, e la stella di punta della CMLL, Mistico. L'unico non-luchador presente sul poster è l'AEW Men's World Champion MJF.\",\n    \"b4\": \"Grand Slam Mexico si terrà con due mesi di ritardo rispetto allo scorso anno, una decisione probabilmente influenzata dalla Coppa del Mondo FIFA 2026. La kermesse calcistica si svolgerà in parte proprio in Messico da metà giugno a metà luglio, portando la CMLL a modificare il proprio calendario per tenere show a Città del Messico, Puebla e Guadalajara ogni giorno della settimana; ciò ha reso improbabile per la AEW organizzare Grand Slam a giugno. Lo show farà ora parte della marcia di avvicinamento della AEW verso All In, previsto per fine agosto, e si terrà appena due settimane dopo AEW Redemption, in programma a Montreal il 26 luglio.\",\n    \"b5\": \"La prima edizione di Grand Slam Mexico si è rivelata importante sia per la AEW che per la CMLL, poiché ha dato il via a una faida durata un mese tra MJF e Mistico dopo che quest'ultimo ha sconfitto MJF per squalifica. Le loro divergenze sono culminate al 92° Aniversario della CMLL a settembre, dove Mistico ha sconfitto MJF in un Mask vs. Title match, conquistando il CMLL World Light Heavyweight Championship.\"\n  },\n  \"notes\": []\n}",
+      "translation_unit_count": 4,
       "translation_used": true
     }
   ],
-  "generated_at": "2026-06-02T13:58:59.403377+00:00",
+  "generated_at": "2026-06-02T18:07:47.630368+00:00",
   "handoff": {
     "errors": 0,
     "extraction_empty": 0,
@@ -832,7 +445,7 @@
   },
   "input": {
     "menzo_version": "v93_14_priority_label_bob_brief_guard",
-    "selected_count": 5
+    "selected_count": 4
   },
   "mode": "block_translation_prudent_embed_cleanup",
   "policy": {
