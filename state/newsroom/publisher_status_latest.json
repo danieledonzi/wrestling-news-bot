@@ -1,16 +1,16 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-02T22:10:33.360416+00:00",
+  "generated_at": "2026-06-02T22:24:13.455787+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 3,
-    "wp_not_ready": 0
+    "published": 0,
+    "wp_not_ready": 1
   },
   "input": {
     "alfred_version": "v93_8_alfred_structured_content_checks",
-    "approved_articles": 3
+    "approved_articles": 1
   },
   "mode": "wordpress_publisher_plain_oembed_urls",
   "policy": {
@@ -47,61 +47,38 @@
     },
     "featured_image_source": "meta.featured_image_or_first_placeholder",
     "idempotency": "state/newsroom/publisher_history.json by source_url",
+    "plain_social_urls_rendered_as_gutenberg_embed_blocks": true,
     "preserve_plain_embed_urls_for_wordpress_oembed": true,
     "source_attribution": true,
     "strip_inline_image_placeholders": true
   },
   "results": [
     {
-      "categories": [
-        4
-      ],
-      "category_names_priority": [
-        "WWE"
-      ],
-      "featured_media": 5882,
-      "source_url": "https://www.wrestlinginc.com/2186197/wwe-aj-styles-paul-heyman-vision-curse/",
-      "status": "published",
-      "title_it": "AJ Styles accusa Paul Heyman della \"maledizione\" della Vision",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/aj-styles-accusa-paul-heyman-della-maledizione-della-vision/",
-      "wp_post_id": 5883
-    },
-    {
-      "categories": [
-        4
-      ],
-      "category_names_priority": [
-        "WWE"
-      ],
-      "featured_media": 5884,
-      "source_url": "https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv/",
-      "status": "published",
-      "title_it": "Kaitlyn: \"La pressione nel backstage WWE era peggio che combattere in TV\"",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/kaitlyn-la-pressione-nel-backstage-wwe-era-peggio-che-combattere-in-tv/",
-      "wp_post_id": 5885
-    },
-    {
-      "categories": [
-        6,
-        4
-      ],
-      "category_names_priority": [
-        "NXT",
-        "WWE"
-      ],
-      "featured_media": 5886,
-      "source_url": "https://www.ringsidenews.com/wwe-nxt-great-american-bash-return-date-revealed/",
-      "status": "published",
-      "title_it": "WWE NXT: annunciata la data di ritorno di Great American Bash",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-nxt-annunciata-la-data-di-ritorno-di-great-american-bash/",
-      "wp_post_id": 5887
+      "content_chars": 1758,
+      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/bronson-reed-involved-in-a-car-accident-50.jpg",
+      "media_id": null,
+      "payload_preview": {
+        "categories": [],
+        "excerpt": "Bronson Reed ha vissuto un momento di paura lontano dagli schermi della WWE, ma fortunatamente tutti i coinvolti stanno bene.",
+        "meta": {
+          "original_url": "https://www.ringsidenews.com/bronson-reed-involved-car-accident/",
+          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
+          "owtv_source": "ringsidenews"
+        },
+        "status": "publish",
+        "title": "Bronson Reed coinvolto in un incidente stradale"
+      },
+      "source_url": "https://www.ringsidenews.com/bronson-reed-involved-car-accident/",
+      "status": "wp_not_ready",
+      "title_it": "Bronson Reed coinvolto in un incidente stradale",
+      "wp_ready": false
     }
   ],
-  "version": "v93_16_publisher_category_priority",
+  "version": "v93_17_publisher_gutenberg_embed_blocks",
   "wp": {
     "dry_run": false,
     "post_status": "publish",
-    "ready": true,
-    "reason": "ok"
+    "ready": false,
+    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7ff95c6fafd0>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=25)'))"
   }
 }

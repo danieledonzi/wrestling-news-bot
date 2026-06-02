@@ -1,63 +1,65 @@
 {
   "items": [
     {
-      "age_hours": 1.0460877291666666,
+      "age_hours": 1.2714434808333333,
       "agent": "Menzo",
-      "ai_editorial_reason": "Opinione di un ex wrestler su un possibile scenario futuro; valore editoriale basso.",
-      "ai_id": "c5",
+      "ai_editorial_reason": "Spunto di discussione interessante su un feud di cartello. Utile per il pubblico italiano che segue le storyline principali.",
+      "ai_id": "c2",
       "ai_priority": 72,
       "ai_priority_label": "medium",
-      "article_type": "low_value",
+      "article_type": "storyline_development",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [],
         "expected_quotes": true,
         "expected_tables": false,
-        "must_preserve": [],
+        "must_preserve": [
+          "citazioni dirette"
+        ],
         "possible_noise": [
           "source_social_bar",
           "author_bio",
-          "cta",
-          "share_links"
+          "cta"
         ],
-        "source_specific_notes": "Non pubblicare se non hai spazio."
+        "source_specific_notes": "Focus sulla proposta di Jarrett, mantieni il tono analitico."
       },
       "category_hint": "WWE",
       "decision": "pending",
       "deterministic_score": 54,
-      "evaluated_at": "2026-06-02T22:10:08.915826+00:00",
+      "evaluated_at": "2026-06-02T22:23:40.196533+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "last_seen_at": "2026-06-02T22:10:14.281857+00:00",
+      "last_seen_at": "2026-06-02T22:23:44.093802+00:00",
       "menzo_ai_review": {
-        "article_type": "low_value",
+        "article_type": "storyline_development",
         "bob_brief": {
           "expected_embeds": [],
           "expected_quotes": true,
           "expected_tables": false,
-          "must_preserve": [],
+          "must_preserve": [
+            "citazioni dirette"
+          ],
           "possible_noise": [
             "source_social_bar",
             "author_bio",
-            "cta",
-            "share_links"
+            "cta"
           ],
-          "source_specific_notes": "Non pubblicare se non hai spazio."
+          "source_specific_notes": "Focus sulla proposta di Jarrett, mantieni il tono analitico."
         },
         "category_hint": "WWE",
-        "decision": "skip",
+        "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Opinione di un ex wrestler su un possibile scenario futuro; valore editoriale basso.",
-        "event_key": "jarrett_opinion",
-        "id": "c5",
-        "priority": 3,
+        "editorial_reason": "Spunto di discussione interessante su un feud di cartello. Utile per il pubblico italiano che segue le storyline principali.",
+        "event_key": "jarrett_lesnar_femi",
+        "id": "c2",
+        "priority": 5,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.wrestlinginc.com/2186177/wwe-hofer-jeff-jarrett-wants-special-stipulation-brock-lesnar-oba-femi-iii",
       "priority": "soft",
       "published": "Tue, 02 Jun 2026 21:07:23 +0000",
-      "reason": "ai:Opinione di un ex wrestler su un possibile scenario futuro; valore editoriale basso.; deterministic:entity:brock lesnar,entity:oba femi,recency:fresh_12h",
+      "reason": "ai:Spunto di discussione interessante su un feud di cartello. Utile per il pubblico italiano che segue le storyline principali.; deterministic:entity:brock lesnar,entity:oba femi,recency:fresh_12h",
       "score": 62,
-      "softpool_added_at": "2026-06-02T22:10:14.281857+00:00",
+      "softpool_added_at": "2026-06-02T22:23:44.093802+00:00",
       "softpool_reason": "medium_or_borderline_candidate",
       "source": "wrestlinginc",
       "summary": "WWE Hall of Famer Jeff Jarrett reveals the stipulation he wants attached to the inevitable third Brock Lesnar-Oba Femi clash.",
@@ -65,63 +67,65 @@
       "url": "https://www.wrestlinginc.com/2186177/wwe-hofer-jeff-jarrett-wants-special-stipulation-brock-lesnar-oba-femi-iii/"
     },
     {
-      "age_hours": 1.1810879530555556,
+      "age_hours": 1.4064437002777777,
       "agent": "Menzo",
-      "ai_editorial_reason": "Dettaglio tecnico di produzione, di nicchia per il lettore medio.",
-      "ai_id": "c6",
+      "ai_editorial_reason": "Notizia di backstage rilevante su un match importante a livello internazionale con atleti WWE coinvolti.",
+      "ai_id": "c3",
       "ai_priority": 72,
       "ai_priority_label": "medium",
-      "article_type": "soft_news",
+      "article_type": "hard_news",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [],
-        "expected_quotes": false,
+        "expected_quotes": true,
         "expected_tables": false,
-        "must_preserve": [],
+        "must_preserve": [
+          "citazioni dirette"
+        ],
         "possible_noise": [
           "source_social_bar",
           "author_bio",
-          "cta",
-          "share_links"
+          "cta"
         ],
-        "source_specific_notes": "Solo se necessario per approfondimento tecnico."
+        "source_specific_notes": "Verifica il nome del produttore citato nel corpo del testo, è il fulcro della news."
       },
       "category_hint": "WWE",
       "decision": "pending",
       "deterministic_score": 46,
-      "evaluated_at": "2026-06-02T22:10:08.916633+00:00",
+      "evaluated_at": "2026-06-02T22:23:40.197323+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "last_seen_at": "2026-06-02T22:10:14.281857+00:00",
+      "last_seen_at": "2026-06-02T22:23:44.093802+00:00",
       "menzo_ai_review": {
-        "article_type": "soft_news",
+        "article_type": "hard_news",
         "bob_brief": {
           "expected_embeds": [],
-          "expected_quotes": false,
+          "expected_quotes": true,
           "expected_tables": false,
-          "must_preserve": [],
+          "must_preserve": [
+            "citazioni dirette"
+          ],
           "possible_noise": [
             "source_social_bar",
             "author_bio",
-            "cta",
-            "share_links"
+            "cta"
           ],
-          "source_specific_notes": "Solo se necessario per approfondimento tecnico."
+          "source_specific_notes": "Verifica il nome del produttore citato nel corpo del testo, è il fulcro della news."
         },
         "category_hint": "WWE",
-        "decision": "skip",
+        "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Dettaglio tecnico di produzione, di nicchia per il lettore medio.",
-        "event_key": "producer_mask_match",
-        "id": "c6",
-        "priority": 4,
+        "editorial_reason": "Notizia di backstage rilevante su un match importante a livello internazionale con atleti WWE coinvolti.",
+        "event_key": "el_grande_americano_match",
+        "id": "c3",
+        "priority": 6,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed",
       "priority": "soft",
       "published": "Tue, 02 Jun 2026 20:59:17 +0000",
-      "reason": "ai:Dettaglio tecnico di produzione, di nicchia per il lettore medio.; deterministic:entity:chad gable,recency:fresh_12h",
+      "reason": "ai:Notizia di backstage rilevante su un match importante a livello internazionale con atleti WWE coinvolti.; deterministic:entity:chad gable,recency:fresh_12h",
       "score": 58,
-      "softpool_added_at": "2026-06-02T22:10:14.281857+00:00",
+      "softpool_added_at": "2026-06-02T22:23:44.093802+00:00",
       "softpool_reason": "medium_or_borderline_candidate",
       "source": "ringsidenews",
       "summary": "<p><img alt=\"Producer Behind El Grande Americano Mask vs. Mask Match Revealed\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/producer-behind-el-grande-americano-mask-vs-mask-match-revealed-48.jpg?x37732\" width=\"800\" /></p>Chad Gable and Ludwig Kaiser’s bloody Mask vs. Mask match at AAA Noche de Los Grandes had another WWE name involved behind the scenes According to Mexican journalist Ernesto Ocampo, Pete Dunne was the producer for the match between Ludwig Kaiser’s El Grande Americano and Chad Gable’s Original El Grande Americano. Ocampo noted that Dunne ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed/\" title=\"Producer Behind El Grande Americano Mask vs. Mask Match Revealed\">Read more</a>",
@@ -129,10 +133,10 @@
       "url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed/"
     },
     {
-      "age_hours": 0.30025425749999995,
+      "age_hours": 0.5256100791666667,
       "agent": "Menzo",
-      "ai_editorial_reason": "Notizia di natura gestionale/burocratica che impatta sul roster AEW.",
-      "ai_id": "c7",
+      "ai_editorial_reason": "Notizia di natura gestionale che spiega l'assenza di atleti dagli show televisivi.",
+      "ai_id": "c5",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "business_legal",
@@ -141,55 +145,49 @@
         "expected_embeds": [],
         "expected_quotes": false,
         "expected_tables": false,
-        "must_preserve": [
-          "impatto collaborazione CMLL"
-        ],
+        "must_preserve": [],
         "possible_noise": [
           "source_social_bar",
           "author_bio",
-          "cta",
-          "share_links"
+          "cta"
         ],
-        "source_specific_notes": "Mantieni un tono informativo e oggettivo."
+        "source_specific_notes": "Sii sintetico, spiega bene il contesto della partnership con CMLL."
       },
       "category_hint": "AEW",
       "decision": "pending",
       "deterministic_score": 38,
-      "evaluated_at": "2026-06-02T22:10:08.915329+00:00",
+      "evaluated_at": "2026-06-02T22:23:40.196287+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "last_seen_at": "2026-06-02T22:10:14.281857+00:00",
+      "last_seen_at": "2026-06-02T22:23:44.093802+00:00",
       "menzo_ai_review": {
         "article_type": "business_legal",
         "bob_brief": {
           "expected_embeds": [],
           "expected_quotes": false,
           "expected_tables": false,
-          "must_preserve": [
-            "impatto collaborazione CMLL"
-          ],
+          "must_preserve": [],
           "possible_noise": [
             "source_social_bar",
             "author_bio",
-            "cta",
-            "share_links"
+            "cta"
           ],
-          "source_specific_notes": "Mantieni un tono informativo e oggettivo."
+          "source_specific_notes": "Sii sintetico, spiega bene il contesto della partnership con CMLL."
         },
         "category_hint": "AEW",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Notizia di natura gestionale/burocratica che impatta sul roster AEW.",
+        "editorial_reason": "Notizia di natura gestionale che spiega l'assenza di atleti dagli show televisivi.",
         "event_key": "aew_visa_issues",
-        "id": "c7",
-        "priority": 6,
+        "id": "c5",
+        "priority": 4,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.wrestlinginc.com/2186205/two-aew-luchadors-still-struggling-visa-issues",
       "priority": "soft",
       "published": "Tue, 02 Jun 2026 21:52:08 +0000",
-      "reason": "ai:Notizia di natura gestionale/burocratica che impatta sul roster AEW.; deterministic:recency:fresh_12h",
+      "reason": "ai:Notizia di natura gestionale che spiega l'assenza di atleti dagli show televisivi.; deterministic:recency:fresh_12h",
       "score": 53,
-      "softpool_added_at": "2026-06-02T22:10:14.281857+00:00",
+      "softpool_added_at": "2026-06-02T22:23:44.093802+00:00",
       "softpool_reason": "medium_or_borderline_candidate",
       "source": "wrestlinginc",
       "summary": "Two AEW luchadors are continuing to have struggles with visa issues, leading to them working with AEW's promotional partner CMLL in Mexico for the time being",
@@ -198,6 +196,6 @@
     }
   ],
   "ttl_hours": 36,
-  "updated_at": "2026-06-02T22:10:14.281857+00:00",
+  "updated_at": "2026-06-02T22:23:44.093802+00:00",
   "version": "v93_15_forced_priority_label_softpool"
 }

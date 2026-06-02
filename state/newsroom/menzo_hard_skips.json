@@ -206,9 +206,18 @@
       "reason": "ai_duplicate_event:carmella surgery; ai:Approfondimento di carattere personale/soft news, priorità bassa.; deterministic:hard:surgery,strategic:smackdown,soft_penalty:explains why,recency:fresh_12h",
       "title": "Carmella Explains Why She Recently Underwent Eye Surgery Procedure",
       "url": "https://www.ringsidenews.com/carmella-explains-why-she-recently-underwent-eye-surgery-procedure/"
+    },
+    {
+      "added_at": "2026-06-02T22:23:44.094443+00:00",
+      "article_type": "duplicate",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2186222/wwe-bully-ray-el-grande-americano-storyline-beauty-simplicity",
+      "reason": "ai_duplicate_event:el grande americano match; ai_duplicate_of:c3; recency:fresh_12h",
+      "title": "WWE HOFer Bully Ray On El Grande Americano Storyline: 'The Beauty Of Simplicity'",
+      "url": "https://www.wrestlinginc.com/2186222/wwe-bully-ray-el-grande-americano-storyline-beauty-simplicity/"
     }
   ],
   "ttl_hours": 168,
-  "updated_at": "2026-06-02T22:10:14.282445+00:00",
+  "updated_at": "2026-06-02T22:23:44.094443+00:00",
   "version": "v93_15_forced_priority_label_softpool"
 }

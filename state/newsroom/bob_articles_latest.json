@@ -3,438 +3,106 @@
   "articles": [
     {
       "bob_notes": [],
-      "body_html": "<p>Forse non esiste stable nella storia della WWE, almeno nella memoria recente, più sfortunata della Vision: il gruppo è stato costantemente perseguitato dagli infortuni, che nell&#x27;ultimo anno hanno colpito quasi tutti i suoi membri. Dagli infortuni di Seth Rollins e Bron Breakker, che li hanno tenuti lontani l&#x27;uno dall&#x27;altro a WrestleMania 42, alla recente rottura del tricipite di Logan Paul, che lo terrà lontano dal ring probabilmente per sei mesi, le cose non sono andate affatto bene per la fazione.</p>\nhttps://www.youtube.com/watch?v=WgM6gPC34Qg\n\n<p>Il WWE Hall of Famer AJ Styles ha scherzato sulla Vision durante un episodio del suo &quot;Phenomenally Retro Podcast&quot; prima di WWE Clash in Italy. Styles ha puntato il dito contro un unico membro, uno dei pochi a non aver subito infortuni.</p>\n<p>&quot;La Vision è maledetta&quot;, ha dichiarato Styles.</p>\n<blockquote>&quot;È colpa di Paul Heyman. È lui la maledizione.&quot;</blockquote>\n<p>La stable ha iniziato a prendere forma quando Heyman si è unito a Rollins a WrestleMania 41, in seguito alla vittoria del &quot;Visionary&quot; su CM Punk e Roman Reigns. In seguito, Rollins ha aggiunto alla fazione Breakker e Bronson Reed, anch&#x27;egli attualmente fuori gioco per uno strappo al bicipite, prima di infortunarsi a sua volta.</p>\n<p>Rollins è stato estromesso dal gruppo da Breakker dopo aver subito un infortunio alla spalla a ottobre; successivamente, Breakker ha sofferto di un&#x27;ernia a febbraio, prima della WrestleMania di quest&#x27;anno. Entrambi, tuttavia, sono riusciti a tornare per l&#x27;evento. Paul è stato l&#x27;ultimo membro in ordine di tempo a subire un infortunio, il che ha portato Breakker a prendere il suo posto al fianco di Austin Theory come World Tag Team Champion, ma dopo Clash in Italy e la successiva puntata di &quot;WWE Raw&quot;, anche Breakker ha avuto un altro spavento per un possibile infortunio.</p>",
+      "body_html": "<p>Bronson Reed ha vissuto un momento di paura lontano dagli schermi della WWE, ma fortunatamente sembra che stiano tutti bene.</p>\n<p>Bronson Reed ha raccontato tramite una storia su Instagram di essere rimasto coinvolto in un tamponamento. La star di RAW ha dichiarato che nessuno è rimasto ferito, cogliendo l&#x27;occasione per mettere in guardia le persone sui rischi della guida distratta.</p>\n<blockquote>“Appena avuto un tamponamento. Fortunatamente, stanno tutti bene. Ma la gente smetta di guidare usando quei maledetti telefoni, fate attenzione. Ci sono persone che trasportano bambini nelle proprie auto.”</blockquote>\n<p>L&#x27;episodio avviene mentre Reed è ancora lontano dalla programmazione WWE a causa di un infortunio. È fuori dalle scene da quando ha subito la rottura del bicipite distale del braccio destro durante una puntata di RAW a febbraio; la WWE non ha ancora confermato una data per il suo rientro.</p>\n<p>Reed ha recentemente fatto discutere i fan dopo aver pubblicato una nuova foto su X che mostra un fisico decisamente più imponente e definito. Ha accompagnato il post con un messaggio lapidario: “Mandare in crash internet.”</p>\n<p>Mentre prosegue il suo recupero, questo incidente stradale gli ha dato un ulteriore motivo per farsi sentire, in particolare sulla necessità che gli automobilisti non usino il telefono alla guida. Per ora, la notizia più importante è che Reed ha confermato che tutti i coinvolti nello scontro stanno bene. Il suo avvertimento è stato diretto, ma il messaggio era chiaro: fate attenzione al volante.</p>",
       "category_hint": "WWE",
       "clean_element_count": 6,
-      "created_at": "2026-06-02T22:10:14.380033+00:00",
+      "created_at": "2026-06-02T22:23:44.208189+00:00",
       "diagnostic_stage": "ready_for_alfred",
-      "diagnostic_warnings": [],
-      "editorial_changes": [
-        {
-          "code": "leading_embed_moved_after_first_paragraph",
-          "evidence": "https://www.youtube.com/watch?v=WgM6gPC34Qg",
-          "message": "Embed iniziale spostato dopo il primo paragrafo.",
-          "severity": "info"
-        },
-        {
-          "code": "inline_quote_split",
-          "evidence": "\"La Vision è maledetta\", ha dichiarato Styles. \"È colpa di Paul Heyman. È lui la maledizione.\"",
-          "message": "Citazione tra virgolette separata in blockquote dedicato.",
-          "severity": "info"
-        }
-      ],
       "element_counts": {
-        "embed": 1,
+        "embed": 0,
         "heading": 0,
         "image": 0,
-        "quote": 0,
+        "quote": 1,
         "table": 0,
         "text": 5
       },
       "elements": [
         {
           "block_id": "b1",
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=WgM6gPC34Qg"
+          "text": "Bronson Reed had a scary moment away from WWE television, but thankfully, everyone appears to be okay.",
+          "type": "text"
         },
         {
           "block_id": "b2",
-          "text": "There is perhaps no stable in WWE history, at least in recent memory, with more bad luck than The Vision, as the group has been consistently hit by the \"injury bug\" across mostly all of its members over the last year. From injuries to Seth Rollins and Bron Breakker that kept them away from each other at WrestleMania 42, to Logan Paul's recent triceps tear that will have him out of action for possibly six months, things have not gone smoothly for the group.",
+          "text": "Bronson Reed took to his Instagram Story and revealed that he was involved in a rear-end collision. The RAW star said no one was hurt, but he used the moment to warn people about distracted driving.",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "text": "WWE Hall of Famer AJ Styles joked about The Vision on an episode of his \" Phenomenally Retro Podcast \" ahead of WWE Clash in Italy. He blamed one member, one of the only men to not go down with an injury.",
-          "type": "text"
+          "source_tag": "blockquote",
+          "text": "“Just had a rear collision. Thankfully, everyone is okay. But people stop driving on your damn phones, pay attention. People have kids in their cars.”",
+          "type": "quote"
         },
         {
           "block_id": "b4",
-          "text": "\"The Vision is cursed,\" Styles declared. \"It's Paul Heyman. He's a curse.\"",
+          "text": "This comes while Reed remains away from WWE programming due to injury. He has been out since suffering a torn distal biceps in his right arm during a February episode of RAW , and WWE has not confirmed when he will return.",
           "type": "text"
         },
         {
           "block_id": "b5",
-          "text": "The stable started to take form when Heyman joined up with Rollins at WrestleMania 41, following \"The Visionary's\" win over CM Punk and Roman Reigns. Rollins would go on to add Breakker and Bronson Reed, who is also currently on the shelf with a torn bicep , to his faction, before getting injured himself.",
+          "text": "Reed recently got fans talking after posting a new photo on X showing off a much bigger and more shredded physique. He captioned the post with a simple message: “Break the internet.”",
           "type": "text"
         },
         {
           "block_id": "b6",
-          "text": "Rollins was written out of the group by Breakker when he suffered a shoulder injury in October, then Breakker suffered a hernia in February before this year's WrestleMania. Both men returned to appear at the event, however. Paul was the most recent member to suffer an injury, leading to Breakker taking over his spot alongside Austin Theory as World Tag Team Champions, but after Clash in Italy and the subsequent \"WWE Raw,\" Breakker also seemed to suffer yet another injury scare .",
+          "text": "While he continues recovering, this car accident clearly gave him another reason to speak out, especially about drivers staying off their phones. For now, the most important news is that Reed said everyone involved in the collision is okay. His warning was blunt, but the message was clear: pay attention behind the wheel.",
           "type": "text"
         }
       ],
-      "excerpt_it": "Il WWE Hall of Famer AJ Styles ritiene Paul Heyman responsabile della scia di infortuni che sta colpendo la Vision a WWE Raw.",
+      "excerpt_it": "Bronson Reed ha vissuto un momento di paura lontano dagli schermi della WWE, ma fortunatamente tutti i coinvolti stanno bene.",
       "extraction_diagnostics": {
-        "candidate_node_count": 13,
+        "candidate_node_count": 91,
         "clean_element_count": 6,
         "dom_noise_reduction_enabled": false,
-        "embed_count": 1,
+        "embed_count": 0,
         "global_embed_recovery_enabled": false,
-        "quote_count": 0,
-        "raw_element_count": 8,
-        "removed_by_node_count": 0,
-        "removed_by_sanitize_count": 2,
-        "root_name": "article",
-        "root_text_chars": 1789,
-        "stage": "complete",
-        "table_count": 0
-      },
-      "fetched_html_chars": 50513,
-      "menzo_score": 71,
-      "meta": {
-        "description": "WWE Hall of Famer AJ Styles said he blames manager Paul Heyman for the \"curse\" plaguing The Vision on \"WWE Raw.\"",
-        "featured_image": "https://www.wrestlinginc.com/img/gallery/wwes-aj-styles-blames-paul-heyman-for-curse-placed-on-the-vision/l-intro-1780435939.jpg",
-        "source_title": "WWE's AJ Styles Blames Paul Heyman For 'Curse' Placed On The Vision - Wrestling Inc."
-      },
-      "raw_element_count": 8,
-      "raw_elements_preview": [
-        {
-          "block_id": "b1",
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=WgM6gPC34Qg"
-        },
-        {
-          "alt": "Paul Heyman cuts a promo in the ring during the May 25, 2026 edition of \"WWE Raw.\"",
-          "type": "image",
-          "url": "https://www.wrestlinginc.com/img/gallery/wwes-aj-styles-blames-paul-heyman-for-curse-placed-on-the-vision/intro-1780435939.jpg"
-        },
-        {
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=WgM6gPC34Qg"
-        },
-        {
-          "block_id": "b2",
-          "text": "There is perhaps no stable in WWE history, at least in recent memory, with more bad luck than The Vision, as the group has been consistently hit by the \"injury bug\" across mostly all of its members over the last year. From injuries to Seth Rollins and Bron Breakker that kept them away from each other at WrestleMania 42, to Logan Paul's recent triceps tear that will have him out of action for possibly six months, things have not gone smoothly for the group.",
-          "type": "text"
-        },
-        {
-          "block_id": "b3",
-          "text": "WWE Hall of Famer AJ Styles joked about The Vision on an episode of his \" Phenomenally Retro Podcast \" ahead of WWE Clash in Italy. He blamed one member, one of the only men to not go down with an injury.",
-          "type": "text"
-        },
-        {
-          "block_id": "b4",
-          "text": "\"The Vision is cursed,\" Styles declared. \"It's Paul Heyman. He's a curse.\"",
-          "type": "text"
-        },
-        {
-          "block_id": "b5",
-          "text": "The stable started to take form when Heyman joined up with Rollins at WrestleMania 41, following \"The Visionary's\" win over CM Punk and Roman Reigns. Rollins would go on to add Breakker and Bronson Reed, who is also currently on the shelf with a torn bicep , to his faction, before getting injured himself.",
-          "type": "text"
-        },
-        {
-          "block_id": "b6",
-          "text": "Rollins was written out of the group by Breakker when he suffered a shoulder injury in October, then Breakker suffered a hernia in February before this year's WrestleMania. Both men returned to appear at the event, however. Paul was the most recent member to suffer an injury, leading to Breakker taking over his spot alongside Austin Theory as World Tag Team Champions, but after Clash in Italy and the subsequent \"WWE Raw,\" Breakker also seemed to suffer yet another injury scare .",
-          "type": "text"
-        }
-      ],
-      "removed_before_gemini": 2,
-      "removed_elements_debug": [
-        {
-          "index": 2,
-          "item": {
-            "alt": "Paul Heyman cuts a promo in the ring during the May 25, 2026 edition of \"WWE Raw.\"",
-            "type": "image",
-            "url": "https://www.wrestlinginc.com/img/gallery/wwes-aj-styles-blames-paul-heyman-for-curse-placed-on-the-vision/intro-1780435939.jpg"
-          },
-          "reason": "duplicate_featured_image"
-        },
-        {
-          "index": 3,
-          "item": {
-            "source_tag": "div",
-            "type": "embed",
-            "url": "https://www.youtube.com/watch?v=WgM6gPC34Qg"
-          },
-          "reason": "duplicate_or_empty_embed"
-        }
-      ],
-      "source": "wrestlinginc",
-      "source_html_contains_embed_hint": true,
-      "source_title": "WWE's AJ Styles Blames Paul Heyman For 'Curse' Placed On The Vision",
-      "source_url": "https://www.wrestlinginc.com/2186197/wwe-aj-styles-paul-heyman-vision-curse/",
-      "status": "ready_for_alfred",
-      "title_it": "AJ Styles accusa Paul Heyman della \"maledizione\" della Vision",
-      "translation_chain_attempted": [
-        "gemini-3.1-flash-lite"
-      ],
-      "translation_missing_units": [],
-      "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2186197/wwe-aj-styles-paul-heyman-vision-curse/\nTitolo feed: WWE's AJ Styles Blames Paul Heyman For 'Curse' Placed On The Vision\nTitolo pagina: WWE's AJ Styles Blames Paul Heyman For 'Curse' Placed On The Vision - Wrestling Inc.\nDescrizione: WWE Hall of Famer AJ Styles said he blames manager Paul Heyman for the \"curse\" plaguing The Vision on \"WWE Raw.\"\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"There is perhaps no stable in WWE history, at least in recent memory, with more bad luck than The Vision, as the group has been consistently hit by the \\\"injury bug\\\" across mostly all of its members over the last year. From injuries to Seth Rollins and Bron Breakker that kept them away from each other at WrestleMania 42, to Logan Paul's recent triceps tear that will have him out of action for possibly six months, things have not gone smoothly for the group.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"WWE Hall of Famer AJ Styles joked about The Vision on an episode of his \\\" Phenomenally Retro Podcast \\\" ahead of WWE Clash in Italy. He blamed one member, one of the only men to not go down with an injury.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"\\\"The Vision is cursed,\\\" Styles declared. \\\"It's Paul Heyman. He's a curse.\\\"\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"The stable started to take form when Heyman joined up with Rollins at WrestleMania 41, following \\\"The Visionary's\\\" win over CM Punk and Roman Reigns. Rollins would go on to add Breakker and Bronson Reed, who is also currently on the shelf with a torn bicep , to his faction, before getting injured himself.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Rollins was written out of the group by Breakker when he suffered a shoulder injury in October, then Breakker suffered a hernia in February before this year's WrestleMania. Both men returned to appear at the event, however. Paul was the most recent member to suffer an injury, leading to Breakker taking over his spot alongside Austin Theory as World Tag Team Champions, but after Clash in Italy and the subsequent \\\"WWE Raw,\\\" Breakker also seemed to suffer yet another injury scare .\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"AJ Styles accusa Paul Heyman della \\\"maledizione\\\" della Vision\",\n  \"excerpt_it\": \"Il WWE Hall of Famer AJ Styles ritiene Paul Heyman responsabile della scia di infortuni che sta colpendo la Vision a WWE Raw.\",\n  \"translations\": {\n    \"b2\": \"Forse non esiste stable nella storia della WWE, almeno nella memoria recente, più sfortunata della Vision: il gruppo è stato costantemente perseguitato dagli infortuni, che nell'ultimo anno hanno colpito quasi tutti i suoi membri. Dagli infortuni di Seth Rollins e Bron Breakker, che li hanno tenuti lontani l'uno dall'altro a WrestleMania 42, alla recente rottura del tricipite di Logan Paul, che lo terrà lontano dal ring probabilmente per sei mesi, le cose non sono andate affatto bene per la fazione.\",\n    \"b3\": \"Il WWE Hall of Famer AJ Styles ha scherzato sulla Vision durante un episodio del suo \\\"Phenomenally Retro Podcast\\\" prima di WWE Clash in Italy. Styles ha puntato il dito contro un unico membro, uno dei pochi a non aver subito infortuni.\",\n    \"b4\": \"\\\"La Vision è maledetta\\\", ha dichiarato Styles. \\\"È colpa di Paul Heyman. È lui la maledizione.\\\"\",\n    \"b5\": \"La stable ha iniziato a prendere forma quando Heyman si è unito a Rollins a WrestleMania 41, in seguito alla vittoria del \\\"Visionary\\\" su CM Punk e Roman Reigns. In seguito, Rollins ha aggiunto alla fazione Breakker e Bronson Reed, anch'egli attualmente fuori gioco per uno strappo al bicipite, prima di infortunarsi a sua volta.\",\n    \"b6\": \"Rollins è stato estromesso dal gruppo da Breakker dopo aver subito un infortunio alla spalla a ottobre; successivamente, Breakker ha sofferto di un'ernia a febbraio, prima della WrestleMania di quest'anno. Entrambi, tuttavia, sono riusciti a tornare per l'evento. Paul è stato l'ultimo membro in ordine di tempo a subire un infortunio, il che ha portato Breakker a prendere il suo posto al fianco di Austin Theory come World Tag Team Champion, ma dopo Clash in Italy e la successiva puntata di \\\"WWE Raw\\\", anche Breakker ha avuto un altro spavento per un possibile infortunio.\"\n  },\n  \"notes\": []\n}",
-      "translation_unit_count": 5,
-      "translation_used": true
-    },
-    {
-      "bob_notes": [],
-      "body_html": "<p>Kaitlyn afferma che la parte più difficile della sua esperienza in WWE non è stata combattere davanti a migliaia di fan. È stato gestire la pressione nel backstage.</p>\nhttps://www.youtube.com/watch?v=kxpXrUUs4ow\n\n<p>Durante la sua intervista per &quot;Inside the Ring&quot; di TMZ, l&#x27;ex WWE Divas Champion ha parlato apertamente del peso mentale della cultura del backstage WWE durante la sua permanenza nella compagnia. Le è stato chiesto come fosse dover lavorare con le colleghe nel backstage mantenendo al contempo una facciata per esibirsi sul ring. Kaitlyn non si è trattenuta, chiarendo che l&#x27;ambiente nel backstage era per lei molto più duro rispetto alle apparizioni dal vivo in televisione.</p>\n<blockquote>“È stata letteralmente la parte più difficile. Lo dico spesso nelle interviste o nelle conversazioni con persone davvero interessate a conoscere i meccanismi interni di quella carriera, ed è la pura verità: non sto esagerando, sentivo molta più pressione nel backstage che sul ring, in televisione, davanti a – sai – 4.000 persone dal vivo e milioni a casa.”</blockquote>\n<p>Ha spiegato che le cose si sono fatte difficili dopo il suo debutto a NXT, la vittoria del competition show e il passaggio al main roster. Secondo Kaitlyn, alle donne di NXT non era inizialmente nemmeno permesso entrare nel principale spogliatoio femminile.</p>\n<blockquote>“Quando ho debuttato in televisione a NXT, ho vinto il programma e ho ottenuto un posto nel main roster, mi hanno messa a SmackDown. Innanzitutto, con NXT, noi ragazze di NXT – eravamo in sei – non potevamo stare nello spogliatoio principale con le atlete del main roster. Eravamo sempre in un&#x27;altra stanza minuscola.”</blockquote>\n<p>Le cose sono cambiate una volta approdata nel main roster, ma Kaitlyn ha raccontato che la transizione non è stata semplice. Si è ritrovata improvvisamente a dover entrare in uno spogliatoio più grande, e alcune delle atlete di punta non ne erano affatto felici.</p>\n<blockquote>“Quando ho ottenuto il mio posto nel roster, era arrivato il momento di iniziare a entrare nello spogliatoio grande. E alcune delle atlete che erano lì, alcune delle top star, non hanno gradito. Non sono state accoglienti.”</blockquote>\n<p>Kaitlyn ha tenuto a precisare che non tutte l&#x27;hanno trattata in quel modo. Ha elogiato in particolar modo Beth Phoenix, Eve Torres e Natalya per essere state gentili con lei e averla aiutata durante quel periodo.</p>\n<blockquote>“C&#x27;erano donne come Beth Phoenix, Eve Torres e Natalya che sono state così gentili e che sono state delle vere mentor sotto tanti punti di vista.”</blockquote>\n<p>L&#x27;ex Divas Champion ha anche collegato quella pressione all&#x27;ultima fase della sua esperienza in WWE. Ha dichiarato che la sua storyline con AJ Lee è stata il punto più alto della sua carriera, ma è arrivata proprio mentre affrontava una maggiore pressione, una maggiore attenzione e un caos emotivo che non sapeva come gestire.</p>\n<blockquote>“Avevo completato il mio regno titolato e poi è iniziata la storyline con AJ, che è stato praticamente il culmine della mia carriera. Ho avuto i miei match migliori con lei. Abbiamo guadagnato molto slancio insieme. Avevamo segmenti più lunghi. Avevamo segmenti crossover. Insomma, stavamo spaccando.”</blockquote>\n<p>Nonostante quel successo, Kaitlyn ha raccontato che la pressione dietro le quinte stava aumentando. Ha iniziato a prendere peso, il che ha solo alimentato l&#x27;insicurezza che già si portava dietro.</p>\n<blockquote>“In quel periodo, era un po&#x27; come dicevo prima: un accumulo di caos emotivo che non sapevo come gestire, e c&#x27;era più pressione, più riflettori. Stavo prendendo peso e questo non faceva che aumentare l&#x27;insicurezza che provavo.”</blockquote>\n<p>Al momento di richiedere il suo rilascio dalla WWE, Kaitlyn ha affermato di essere arrivata al peso più alto della sua vita.</p>\n<blockquote>“Quando ho chiesto il rilascio pesavo 13 chili in più rispetto ad oggi. Ero arrivata al punto più alto della mia vita, toccando i 77 chili (170 lbs). Ora ne peso circa 63 (140 lbs). Quando sono stata assunta ne pesavo circa 66-68 (145-150 lbs). Quindi, era davvero molto peso.”</blockquote>\n<p>Guardando indietro, Kaitlyn dice di vedere ora quell&#x27;aumento di peso come un riflesso della pressione emotiva che stava subendo all&#x27;epoca.</p>\n<blockquote>“Il modo in cui lo vedo ora è che il peso fosse una metafora della pressione e del carico emotivo che mi portavo dentro e che non sapevo come elaborare.”</blockquote>\n<p>L&#x27;esperienza di Kaitlyn in WWE ha regalato ai fan momenti memorabili, specialmente la sua rivalità con AJ Lee, ma le sue parole chiariscono che la battaglia più grande si stava combattendo lontano dalle telecamere. Poteva apparire sicura di sé in televisione, ma dietro le quinte stava gestendo una pressione che l&#x27;ha portata, alla fine, ad allontanarsi.</p>",
-      "category_hint": "WWE",
-      "clean_element_count": 19,
-      "created_at": "2026-06-02T22:10:16.721355+00:00",
-      "diagnostic_stage": "ready_for_alfred",
-      "diagnostic_warnings": [],
-      "editorial_changes": [
-        {
-          "code": "leading_embed_moved_after_first_paragraph",
-          "evidence": "https://www.youtube.com/watch?v=kxpXrUUs4ow",
-          "message": "Embed iniziale spostato dopo il primo paragrafo.",
-          "severity": "info"
-        }
-      ],
-      "element_counts": {
-        "embed": 1,
-        "heading": 0,
-        "image": 0,
-        "quote": 8,
-        "table": 0,
-        "text": 10
-      },
-      "elements": [
-        {
-          "block_id": "b1",
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=kxpXrUUs4ow"
-        },
-        {
-          "block_id": "b2",
-          "text": "Kaitlyn says the hardest part of her WWE run was not wrestling in front of thousands of fans. It was dealing with the pressure backstage.",
-          "type": "text"
-        },
-        {
-          "block_id": "b3",
-          "text": "During her interview with TMZ’s Inside the Ring, the former WWE Divas Champion opened up about the mental toll of WWE locker room culture during her time with the company. She was asked what it was like having to work with people backstage while still putting on a face and performing in the ring. Kaitlyn did not hold back, making it clear that the backstage environment was tougher on her than performing live on television.",
-          "type": "text"
-        },
-        {
-          "block_id": "b4",
-          "source_tag": "blockquote",
-          "text": "“That was literally the hardest part. And I say this sometimes in interviews or just in conversations with people that are really interested about what are the inner workings of that career, and this is so true, I’m not exaggerating, I felt more pressure backstage than I ever did in the ring on television in front of, you know, 4,000 people live and millions of people at home.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b5",
-          "text": "She explained that things got difficult after she debuted on NXT, won the competition, and moved to the main roster. According to Kaitlyn, the NXT women were not even allowed in the main women’s locker room at first.",
-          "type": "text"
-        },
-        {
-          "block_id": "b6",
-          "source_tag": "blockquote",
-          "text": "“When I debuted and was put on television for NXT and then I ended up winning NXT and I got a spot on the main roster, they put me on SmackDown. First of all, with NXT, with all of the NXT girls, like the six of us, we were not allowed to be in the main locker room with the main talent, the women. We were always in this other little tiny room.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b7",
-          "text": "That changed once she became part of the main roster, but Kaitlyn said the transition was not easy. She suddenly had to enter the bigger locker room, and some of the top women were not happy about it.",
-          "type": "text"
-        },
-        {
-          "block_id": "b8",
-          "source_tag": "blockquote",
-          "text": "“When I got my spot on the roster, it was all of a sudden time for me to start going into the bigger locker room. And some of the women that were there, some of the top women that were there did not like that. They were not welcoming.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b9",
-          "text": "Kaitlyn made sure to note that not everyone treated her that way. She specifically praised Beth Phoenix, Eve Torres, and Natalya for being kind to her and helping her during that period.",
-          "type": "text"
-        },
-        {
-          "block_id": "b10",
-          "source_tag": "blockquote",
-          "text": "“There was the women like Beth Phoenix, Eve Torres, Natalia who were so kind and truly mentors in so many ways.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b11",
-          "text": "The former Divas Champion also connected that pressure to the final stretch of her WWE run. She said her storyline with AJ Lee was the highlight of her career, but it also came while she was dealing with more pressure, more attention, and emotional chaos she did not know how to handle.",
-          "type": "text"
-        },
-        {
-          "block_id": "b12",
-          "source_tag": "blockquote",
-          "text": "“I had had my title run and then my storyline with AJ started, which was the highlight of my career pretty much. I had my best matches with her. We gained a lot of momentum together. We were getting longer segments. We were getting crossover segments. Like, we were killing it.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b13",
-          "text": "Even with that success, Kaitlyn said the pressure was building behind the scenes. She started gaining weight, and that only added to the insecurity she was already carrying.",
-          "type": "text"
-        },
-        {
-          "block_id": "b14",
-          "source_tag": "blockquote",
-          "text": "“During that time, it was kind of also what I spoke to, it was this buildup of emotional chaos that I didn’t know how to handle and it was more pressure, more spotlight. I was just gaining weight and so it was adding to this insecurity that I had.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b15",
-          "text": "By the time she asked for her WWE release, Kaitlyn said she was at the heaviest weight of her life.",
-          "type": "text"
-        },
-        {
-          "block_id": "b16",
-          "source_tag": "blockquote",
-          "text": "“By the time that I asked my release, I was 30 lbs heavier than I am now. I was at my heaviest I’ve ever been in my life, was 170 lbs. Now I sit at about 140. And when I got hired, I was about 145 or 150. So, it was a lot of weight.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b17",
-          "text": "Looking back, Kaitlyn said she now sees that weight gain as a reflection of the emotional pressure she was carrying at the time.",
-          "type": "text"
-        },
-        {
-          "block_id": "b18",
-          "source_tag": "blockquote",
-          "text": "“The way that I see it now is like the weight was like a metaphor for like the pressure and the emotional weight that I was carrying that I didn’t know how to process.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b19",
-          "text": "Kaitlyn’s WWE run gave fans memorable moments, especially her rivalry with AJ Lee, but her comments make it clear that the biggest fight was happening away from the cameras. She may have looked confident on television, but behind the scenes, she was dealing with pressure that eventually pushed her to walk away.",
-          "type": "text"
-        }
-      ],
-      "excerpt_it": "Kaitlyn rivela che la parte più difficile della sua esperienza in WWE non è stata esibirsi davanti a migliaia di fan, ma gestire la pressione nel backstage.",
-      "extraction_diagnostics": {
-        "candidate_node_count": 116,
-        "clean_element_count": 19,
-        "dom_noise_reduction_enabled": false,
-        "embed_count": 1,
-        "global_embed_recovery_enabled": false,
-        "quote_count": 8,
-        "raw_element_count": 22,
+        "quote_count": 1,
+        "raw_element_count": 7,
         "removed_by_node_count": 13,
-        "removed_by_sanitize_count": 3,
+        "removed_by_sanitize_count": 1,
         "root_name": "article",
-        "root_text_chars": 5318,
+        "root_text_chars": 2135,
         "stage": "complete",
         "table_count": 0
       },
-      "fetched_html_chars": 487625,
-      "menzo_score": 70,
+      "fetched_html_chars": 482654,
+      "menzo_score": 66,
       "meta": {
-        "description": "Kaitlyn says the hardest part of her WWE run was not wrestling in front of thousands of fans. It was dealing with the pressure backstage. During her",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/kaitlyn-says-wwe-backstage-pressure-was-harder-than-wrestling-on-tv-46.jpg",
-        "source_title": "Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV"
+        "description": "Bronson Reed had a scary moment away from WWE television, but thankfully, everyone appears to be okay. Bronson Reed took to his Instagram Story and",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/bronson-reed-involved-in-a-car-accident-50.jpg",
+        "source_title": "Bronson Reed Involved in a Car Accident"
       },
-      "raw_element_count": 22,
+      "raw_element_count": 7,
       "raw_elements_preview": [
         {
           "block_id": "b1",
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=kxpXrUUs4ow"
-        },
-        {
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=kxpXrUUs4ow"
-        },
-        {
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=kxpXrUUs4ow"
+          "text": "Bronson Reed had a scary moment away from WWE television, but thankfully, everyone appears to be okay.",
+          "type": "text"
         },
         {
           "block_id": "b2",
-          "text": "Kaitlyn says the hardest part of her WWE run was not wrestling in front of thousands of fans. It was dealing with the pressure backstage.",
+          "text": "Bronson Reed took to his Instagram Story and revealed that he was involved in a rear-end collision. The RAW star said no one was hurt, but he used the moment to warn people about distracted driving.",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "text": "During her interview with TMZ’s Inside the Ring, the former WWE Divas Champion opened up about the mental toll of WWE locker room culture during her time with the company. She was asked what it was like having to work with people backstage while still putting on a face and performing in the ring. Kaitlyn did not hold back, making it clear that the backstage environment was tougher on her than performing live on television.",
-          "type": "text"
-        },
-        {
-          "block_id": "b4",
           "source_tag": "blockquote",
-          "text": "“That was literally the hardest part. And I say this sometimes in interviews or just in conversations with people that are really interested about what are the inner workings of that career, and this is so true, I’m not exaggerating, I felt more pressure backstage than I ever did in the ring on television in front of, you know, 4,000 people live and millions of people at home.”",
+          "text": "“Just had a rear collision. Thankfully, everyone is okay. But people stop driving on your damn phones, pay attention. People have kids in their cars.”",
           "type": "quote"
         },
         {
+          "block_id": "b4",
+          "text": "This comes while Reed remains away from WWE programming due to injury. He has been out since suffering a torn distal biceps in his right arm during a February episode of RAW , and WWE has not confirmed when he will return.",
+          "type": "text"
+        },
+        {
           "block_id": "b5",
-          "text": "She explained that things got difficult after she debuted on NXT, won the competition, and moved to the main roster. According to Kaitlyn, the NXT women were not even allowed in the main women’s locker room at first.",
+          "text": "Reed recently got fans talking after posting a new photo on X showing off a much bigger and more shredded physique. He captioned the post with a simple message: “Break the internet.”",
           "type": "text"
         },
         {
           "block_id": "b6",
-          "source_tag": "blockquote",
-          "text": "“When I debuted and was put on television for NXT and then I ended up winning NXT and I got a spot on the main roster, they put me on SmackDown. First of all, with NXT, with all of the NXT girls, like the six of us, we were not allowed to be in the main locker room with the main talent, the women. We were always in this other little tiny room.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b7",
-          "text": "That changed once she became part of the main roster, but Kaitlyn said the transition was not easy. She suddenly had to enter the bigger locker room, and some of the top women were not happy about it.",
-          "type": "text"
-        },
-        {
-          "block_id": "b8",
-          "source_tag": "blockquote",
-          "text": "“When I got my spot on the roster, it was all of a sudden time for me to start going into the bigger locker room. And some of the women that were there, some of the top women that were there did not like that. They were not welcoming.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b9",
-          "text": "Kaitlyn made sure to note that not everyone treated her that way. She specifically praised Beth Phoenix, Eve Torres, and Natalya for being kind to her and helping her during that period.",
-          "type": "text"
-        },
-        {
-          "block_id": "b10",
-          "source_tag": "blockquote",
-          "text": "“There was the women like Beth Phoenix, Eve Torres, Natalia who were so kind and truly mentors in so many ways.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b11",
-          "text": "The former Divas Champion also connected that pressure to the final stretch of her WWE run. She said her storyline with AJ Lee was the highlight of her career, but it also came while she was dealing with more pressure, more attention, and emotional chaos she did not know how to handle.",
-          "type": "text"
-        },
-        {
-          "block_id": "b12",
-          "source_tag": "blockquote",
-          "text": "“I had had my title run and then my storyline with AJ started, which was the highlight of my career pretty much. I had my best matches with her. We gained a lot of momentum together. We were getting longer segments. We were getting crossover segments. Like, we were killing it.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b13",
-          "text": "Even with that success, Kaitlyn said the pressure was building behind the scenes. She started gaining weight, and that only added to the insecurity she was already carrying.",
-          "type": "text"
-        },
-        {
-          "block_id": "b14",
-          "source_tag": "blockquote",
-          "text": "“During that time, it was kind of also what I spoke to, it was this buildup of emotional chaos that I didn’t know how to handle and it was more pressure, more spotlight. I was just gaining weight and so it was adding to this insecurity that I had.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b15",
-          "text": "By the time she asked for her WWE release, Kaitlyn said she was at the heaviest weight of her life.",
-          "type": "text"
-        },
-        {
-          "block_id": "b16",
-          "source_tag": "blockquote",
-          "text": "“By the time that I asked my release, I was 30 lbs heavier than I am now. I was at my heaviest I’ve ever been in my life, was 170 lbs. Now I sit at about 140. And when I got hired, I was about 145 or 150. So, it was a lot of weight.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b17",
-          "text": "Looking back, Kaitlyn said she now sees that weight gain as a reflection of the emotional pressure she was carrying at the time.",
-          "type": "text"
-        },
-        {
-          "block_id": "b18",
-          "source_tag": "blockquote",
-          "text": "“The way that I see it now is like the weight was like a metaphor for like the pressure and the emotional weight that I was carrying that I didn’t know how to process.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b19",
-          "text": "Kaitlyn’s WWE run gave fans memorable moments, especially her rivalry with AJ Lee, but her comments make it clear that the biggest fight was happening away from the cameras. She may have looked confident on television, but behind the scenes, she was dealing with pressure that eventually pushed her to walk away.",
+          "text": "While he continues recovering, this car accident clearly gave him another reason to speak out, especially about drivers staying off their phones. For now, the most important news is that Reed said everyone involved in the collision is okay. His warning was blunt, but the message was clear: pay attention behind the wheel.",
           "type": "text"
         },
         {
@@ -442,459 +110,101 @@
           "type": "text"
         }
       ],
-      "removed_before_gemini": 16,
+      "removed_before_gemini": 14,
       "removed_elements_debug": [
         {
           "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 93,
+          "node_index": 68,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Spotlight"
         },
         {
           "classes": "gb-loop-item rsn-spotlight-item post-2196783 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-bron-breakker tag-wwe-featured   ",
-          "node_index": 97,
+          "node_index": 72,
           "node_name": "li",
           "reason": "node_class_noise",
           "text_preview": "WWE News Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 100,
+          "node_index": 75,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 101,
+          "node_index": 76,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
         },
         {
           "classes": "gb-loop-item rsn-spotlight-item post-2196772 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-bronson-reed tag-wwe-featured   ",
-          "node_index": 102,
+          "node_index": 77,
           "node_name": "li",
           "reason": "node_class_noise",
           "text_preview": "WWE News Bronson Reed Involved in a Car Accident"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 105,
+          "node_index": 80,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Bronson Reed Involved in a Car Accident"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 106,
+          "node_index": 81,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
         },
         {
           "classes": "gb-loop-item rsn-spotlight-item post-2196747 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news category-wwe-news tag-aew-featured tag-mick-foley   ",
-          "node_index": 107,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "AEW News Mick Foley Says He Hasn’t Closed the Door on WWE Forever After Exit"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 110,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Mick Foley Says He Hasn’t Closed the Door on WWE Forever After Exit"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 111,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196664 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-bron-breakker tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 112,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE Videos Bron Breakker Spotted Limping Badly In Hotel Lobby After WWE RAW"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 115,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Bron Breakker Spotted Limping Badly In Hotel Lobby After WWE RAW"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 116,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "index": 2,
-          "item": {
-            "source_tag": "div",
-            "type": "embed",
-            "url": "https://www.youtube.com/watch?v=kxpXrUUs4ow"
-          },
-          "reason": "duplicate_or_empty_embed"
-        },
-        {
-          "index": 3,
-          "item": {
-            "source_tag": "div",
-            "type": "embed",
-            "url": "https://www.youtube.com/watch?v=kxpXrUUs4ow"
-          },
-          "reason": "duplicate_or_empty_embed"
-        },
-        {
-          "index": 22,
-          "item": {
-            "text": "Spotlight WWE News Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW WWE News Bronson Reed Involved in a Car Accident AEW News Mick Foley Says He Hasn’t Closed the Door on WWE Forever After Exit WWE Videos Bron Breakker Spotted Limping Badly In Hotel Lobby After WWE RAW",
-            "type": "text"
-          },
-          "reason": "footer_start"
-        }
-      ],
-      "source": "ringsidenews",
-      "source_html_contains_embed_hint": true,
-      "source_title": "Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV",
-      "source_url": "https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv/",
-      "status": "ready_for_alfred",
-      "title_it": "Kaitlyn: \"La pressione nel backstage WWE era peggio che combattere in TV\"",
-      "translation_chain_attempted": [
-        "gemini-3.1-flash-lite"
-      ],
-      "translation_missing_units": [],
-      "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv/\nTitolo feed: Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV\nTitolo pagina: Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV\nDescrizione: Kaitlyn says the hardest part of her WWE run was not wrestling in front of thousands of fans. It was dealing with the pressure backstage. During her\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Kaitlyn says the hardest part of her WWE run was not wrestling in front of thousands of fans. It was dealing with the pressure backstage.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"During her interview with TMZ’s Inside the Ring, the former WWE Divas Champion opened up about the mental toll of WWE locker room culture during her time with the company. She was asked what it was like having to work with people backstage while still putting on a face and performing in the ring. Kaitlyn did not hold back, making it clear that the backstage environment was tougher on her than performing live on television.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“That was literally the hardest part. And I say this sometimes in interviews or just in conversations with people that are really interested about what are the inner workings of that career, and this is so true, I’m not exaggerating, I felt more pressure backstage than I ever did in the ring on television in front of, you know, 4,000 people live and millions of people at home.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"She explained that things got difficult after she debuted on NXT, won the competition, and moved to the main roster. According to Kaitlyn, the NXT women were not even allowed in the main women’s locker room at first.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“When I debuted and was put on television for NXT and then I ended up winning NXT and I got a spot on the main roster, they put me on SmackDown. First of all, with NXT, with all of the NXT girls, like the six of us, we were not allowed to be in the main locker room with the main talent, the women. We were always in this other little tiny room.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"That changed once she became part of the main roster, but Kaitlyn said the transition was not easy. She suddenly had to enter the bigger locker room, and some of the top women were not happy about it.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“When I got my spot on the roster, it was all of a sudden time for me to start going into the bigger locker room. And some of the women that were there, some of the top women that were there did not like that. They were not welcoming.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"Kaitlyn made sure to note that not everyone treated her that way. She specifically praised Beth Phoenix, Eve Torres, and Natalya for being kind to her and helping her during that period.\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"quote\",\n    \"text\": \"“There was the women like Beth Phoenix, Eve Torres, Natalia who were so kind and truly mentors in so many ways.”\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"The former Divas Champion also connected that pressure to the final stretch of her WWE run. She said her storyline with AJ Lee was the highlight of her career, but it also came while she was dealing with more pressure, more attention, and emotional chaos she did not know how to handle.\"\n  },\n  {\n    \"id\": \"b12\",\n    \"type\": \"quote\",\n    \"text\": \"“I had had my title run and then my storyline with AJ started, which was the highlight of my career pretty much. I had my best matches with her. We gained a lot of momentum together. We were getting longer segments. We were getting crossover segments. Like, we were killing it.”\"\n  },\n  {\n    \"id\": \"b13\",\n    \"type\": \"text\",\n    \"text\": \"Even with that success, Kaitlyn said the pressure was building behind the scenes. She started gaining weight, and that only added to the insecurity she was already carrying.\"\n  },\n  {\n    \"id\": \"b14\",\n    \"type\": \"quote\",\n    \"text\": \"“During that time, it was kind of also what I spoke to, it was this buildup of emotional chaos that I didn’t know how to handle and it was more pressure, more spotlight. I was just gaining weight and so it was adding to this insecurity that I had.”\"\n  },\n  {\n    \"id\": \"b15\",\n    \"type\": \"text\",\n    \"text\": \"By the time she asked for her WWE release, Kaitlyn said she was at the heaviest weight of her life.\"\n  },\n  {\n    \"id\": \"b16\",\n    \"type\": \"quote\",\n    \"text\": \"“By the time that I asked my release, I was 30 lbs heavier than I am now. I was at my heaviest I’ve ever been in my life, was 170 lbs. Now I sit at about 140. And when I got hired, I was about 145 or 150. So, it was a lot of weight.”\"\n  },\n  {\n    \"id\": \"b17\",\n    \"type\": \"text\",\n    \"text\": \"Looking back, Kaitlyn said she now sees that weight gain as a reflection of the emotional pressure she was carrying at the time.\"\n  },\n  {\n    \"id\": \"b18\",\n    \"type\": \"quote\",\n    \"text\": \"“The way that I see it now is like the weight was like a metaphor for like the pressure and the emotional weight that I was carrying that I didn’t know how to process.”\"\n  },\n  {\n    \"id\": \"b19\",\n    \"type\": \"text\",\n    \"text\": \"Kaitlyn’s WWE run gave fans memorable moments, especially her rivalry with AJ Lee, but her comments make it clear that the biggest fight was happening away from the cameras. She may have looked confident on television, but behind the scenes, she was dealing with pressure that eventually pushed her to walk away.\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"Kaitlyn: \\\"La pressione nel backstage WWE era peggio che combattere in TV\\\"\",\n  \"excerpt_it\": \"Kaitlyn rivela che la parte più difficile della sua esperienza in WWE non è stata esibirsi davanti a migliaia di fan, ma gestire la pressione nel backstage.\",\n  \"translations\": {\n    \"b2\": \"Kaitlyn afferma che la parte più difficile della sua esperienza in WWE non è stata combattere davanti a migliaia di fan. È stato gestire la pressione nel backstage.\",\n    \"b3\": \"Durante la sua intervista per \\\"Inside the Ring\\\" di TMZ, l'ex WWE Divas Champion ha parlato apertamente del peso mentale della cultura del backstage WWE durante la sua permanenza nella compagnia. Le è stato chiesto come fosse dover lavorare con le colleghe nel backstage mantenendo al contempo una facciata per esibirsi sul ring. Kaitlyn non si è trattenuta, chiarendo che l'ambiente nel backstage era per lei molto più duro rispetto alle apparizioni dal vivo in televisione.\",\n    \"b4\": \"“È stata letteralmente la parte più difficile. Lo dico spesso nelle interviste o nelle conversazioni con persone davvero interessate a conoscere i meccanismi interni di quella carriera, ed è la pura verità: non sto esagerando, sentivo molta più pressione nel backstage che sul ring, in televisione, davanti a – sai – 4.000 persone dal vivo e milioni a casa.”\",\n    \"b5\": \"Ha spiegato che le cose si sono fatte difficili dopo il suo debutto a NXT, la vittoria del competition show e il passaggio al main roster. Secondo Kaitlyn, alle donne di NXT non era inizialmente nemmeno permesso entrare nel principale spogliatoio femminile.\",\n    \"b6\": \"“Quando ho debuttato in televisione a NXT, ho vinto il programma e ho ottenuto un posto nel main roster, mi hanno messa a SmackDown. Innanzitutto, con NXT, noi ragazze di NXT – eravamo in sei – non potevamo stare nello spogliatoio principale con le atlete del main roster. Eravamo sempre in un'altra stanza minuscola.”\",\n    \"b7\": \"Le cose sono cambiate una volta approdata nel main roster, ma Kaitlyn ha raccontato che la transizione non è stata semplice. Si è ritrovata improvvisamente a dover entrare in uno spogliatoio più grande, e alcune delle atlete di punta non ne erano affatto felici.\",\n    \"b8\": \"“Quando ho ottenuto il mio posto nel roster, era arrivato il momento di iniziare a entrare nello spogliatoio grande. E alcune delle atlete che erano lì, alcune delle top star, non hanno gradito. Non sono state accoglienti.”\",\n    \"b9\": \"Kaitlyn ha tenuto a precisare che non tutte l'hanno trattata in quel modo. Ha elogiato in particolar modo Beth Phoenix, Eve Torres e Natalya per essere state gentili con lei e averla aiutata durante quel periodo.\",\n    \"b10\": \"“C'erano donne come Beth Phoenix, Eve Torres e Natalya che sono state così gentili e che sono state delle vere mentor sotto tanti punti di vista.”\",\n    \"b11\": \"L'ex Divas Champion ha anche collegato quella pressione all'ultima fase della sua esperienza in WWE. Ha dichiarato che la sua storyline con AJ Lee è stata il punto più alto della sua carriera, ma è arrivata proprio mentre affrontava una maggiore pressione, una maggiore attenzione e un caos emotivo che non sapeva come gestire.\",\n    \"b12\": \"“Avevo completato il mio regno titolato e poi è iniziata la storyline con AJ, che è stato praticamente il culmine della mia carriera. Ho avuto i miei match migliori con lei. Abbiamo guadagnato molto slancio insieme. Avevamo segmenti più lunghi. Avevamo segmenti crossover. Insomma, stavamo spaccando.”\",\n    \"b13\": \"Nonostante quel successo, Kaitlyn ha raccontato che la pressione dietro le quinte stava aumentando. Ha iniziato a prendere peso, il che ha solo alimentato l'insicurezza che già si portava dietro.\",\n    \"b14\": \"“In quel periodo, era un po' come dicevo prima: un accumulo di caos emotivo che non sapevo come gestire, e c'era più pressione, più riflettori. Stavo prendendo peso e questo non faceva che aumentare l'insicurezza che provavo.”\",\n    \"b15\": \"Al momento di richiedere il suo rilascio dalla WWE, Kaitlyn ha affermato di essere arrivata al peso più alto della sua vita.\",\n    \"b16\": \"“Quando ho chiesto il rilascio pesavo 13 chili in più rispetto ad oggi. Ero arrivata al punto più alto della mia vita, toccando i 77 chili (170 lbs). Ora ne peso circa 63 (140 lbs). Quando sono stata assunta ne pesavo circa 66-68 (145-150 lbs). Quindi, era davvero molto peso.”\",\n    \"b17\": \"Guardando indietro, Kaitlyn dice di vedere ora quell'aumento di peso come un riflesso della pressione emotiva che stava subendo all'epoca.\",\n    \"b18\": \"“Il modo in cui lo vedo ora è che il peso fosse una metafora della pressione e del carico emotivo che mi portavo dentro e che non sapevo come elaborare.”\",\n    \"b19\": \"L'esperienza di Kaitlyn in WWE ha regalato ai fan momenti memorabili, specialmente la sua rivalità con AJ Lee, ma le sue parole chiariscono che la battaglia più grande si stava combattendo lontano dalle telecamere. Poteva apparire sicura di sé in televisione, ma dietro le quinte stava gestendo una pressione che l'ha portata, alla fine, ad allontanarsi.\"\n  },\n  \"notes\": []\n}",
-      "translation_unit_count": 18,
-      "translation_used": true
-    },
-    {
-      "bob_notes": [],
-      "body_html": "<p>La WWE riporterà in scena NXT Great American Bash e ad annunciarlo è stato Shawn Michaels in persona.</p>\nhttps://x.com/ShawnMichaels/status/2061852400302878992\n\n<p>Michaels ha rivelato sui social media che NXT Great American Bash si terrà domenica 28 giugno e sarà trasmesso su The CW Network. Lo show avrà un orario di inizio speciale, fissato per le 19:00 (orario ET).</p>\n<p>L&#x27;annuncio regala a NXT un altro grande evento sulla sua attuale emittente, mentre il brand prosegue la sua programmazione su The CW Network ogni martedì sera. La location per Great American Bash non è stata ancora resa nota.</p>\n<p>Nel fare l&#x27;annuncio, Michaels si è rivolto direttamente ai fan, scherzando sul tipo di contenuti a cui il pubblico è ormai abituato a vederlo pubblicare, prima di passare alla notizia importante.</p>\n<blockquote>“Salve a tutti, ragazzi. So che ormai siete abituati a vedermi fare i miei post stravaganti su Instagram e TikTok, ma tutti continuano a chiedermi: quando ci sarà il primo PLE su The CW Network?”</blockquote>\n<p>Michaels ha quindi confermato che Great American Bash sarà l&#x27;evento che approderà su The CW Network il 28 giugno, confermando anche l&#x27;orario di inizio speciale per lo show.</p>\n<blockquote>“Bene, questo annuncio serve a dire che il 28 giugno, The CW Network e NXT vi porteranno il Great American Bash. Questa partnership prosegue con il Great American Bash del 28 giugno. Avremo un orario di inizio speciale alle 19:00.”</blockquote>\n<p>Michaels ha inoltre colto l&#x27;occasione per ricordare ai fan l&#x27;appuntamento abituale del martedì sera di NXT su The CW Network, che vedrà Tony D’Angelo difendere l’NXT Championship contro Cam Hendricks.</p>\n<blockquote>“Stasera. Non dimenticate di unirvi a noi su The CW Network alle 20:00, quando Tony D’Angelo difenderà l&#x27;NXT Championship contro Cam Hendricks. Seguiteci stasera su The CW.”</blockquote>\n<p>NXT Great American Bash è stato uno degli eventi estivi ricorrenti del brand negli ultimi anni e ora è ufficialmente tornato in calendario per il 28 giugno. Con lo show in onda su The CW Network e l&#x27;inizio alle 19:00 ET, la WWE riserva all&#x27;evento uno spazio distinto rispetto alla solita programmazione del martedì sera.</p>\n<p>La WWE non ha ancora annunciato la location per NXT Great American Bash, quindi i fan dovranno attendere ulteriori dettagli su dove si svolgerà l&#x27;evento e su quali match andranno a comporre la card.</p>\n<p>Il ritorno di NXT Great American Bash il 28 giugno offre al brand un&#x27;ulteriore vetrina di prestigio su The CW Network. Grazie all&#x27;annuncio ufficiale fatto personalmente da Shawn Michaels, la WWE ha voluto assicurarsi che i fan fossero consapevoli che lo speciale estivo è ormai confermato.</p>",
-      "category_hint": "NXT",
-      "clean_element_count": 13,
-      "created_at": "2026-06-02T22:10:21.923638+00:00",
-      "diagnostic_stage": "ready_for_alfred",
-      "diagnostic_warnings": [],
-      "editorial_changes": [
-        {
-          "code": "leading_embed_moved_after_first_paragraph",
-          "evidence": "https://x.com/ShawnMichaels/status/2061852400302878992",
-          "message": "Embed iniziale spostato dopo il primo paragrafo.",
-          "severity": "info"
-        }
-      ],
-      "element_counts": {
-        "embed": 1,
-        "heading": 0,
-        "image": 0,
-        "quote": 3,
-        "table": 0,
-        "text": 9
-      },
-      "elements": [
-        {
-          "block_id": "b1",
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://x.com/ShawnMichaels/status/2061852400302878992"
-        },
-        {
-          "block_id": "b2",
-          "text": "WWE NXT is bringing back the Great American Bash, and Shawn Michaels made the announcement himself.",
-          "type": "text"
-        },
-        {
-          "block_id": "b3",
-          "text": "Michaels revealed on social media that NXT Great American Bash will take place on Sunday, June 28, with the event airing on The CW Network. The show is set for a special start time of 7 PM ET.",
-          "type": "text"
-        },
-        {
-          "block_id": "b4",
-          "text": "The announcement gives NXT another major event on its current television home, as the brand continues its run on The CW Network every Tuesday night. A location for Great American Bash was not announced.",
-          "type": "text"
-        },
-        {
-          "block_id": "b5",
-          "text": "Michaels addressed fans directly while making the announcement, joking about the kind of content people are used to seeing from him these days before getting to the big news.",
-          "type": "text"
-        },
-        {
-          "block_id": "b6",
-          "source_tag": "blockquote",
-          "text": "“Hello, boys and girls. Now, I know everybody’s used to seeing me these days doing my crazy posts on Instagram and TikTok, but everybody’s been asking me, when is the first ple on the CW Network?”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b7",
-          "text": "Michaels then confirmed that Great American Bash will be the event coming to The CW Network on June 28. He also confirmed the special start time for the event.",
-          "type": "text"
-        },
-        {
-          "block_id": "b8",
-          "source_tag": "blockquote",
-          "text": "“Well, that’s what this announcement is for June 28, CW Network at NXT are going to bring you the Great American Bash. This partnership is moving forward at the Great American bash on June 28th.” “We’ll have a special start time of 7pm.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b9",
-          "text": "Michaels also used the announcement to remind fans about NXT’s regular Tuesday night broadcast on The CW Network, including Tony D’Angelo defending the NXT Championship against Cam Hendricks.",
-          "type": "text"
-        },
-        {
-          "block_id": "b10",
-          "source_tag": "blockquote",
-          "text": "“Tonight. Don’t forget to join us on the CW Network at 8pm as Tony D’ Angelo defends NXT championship against Cam Hendricks. Watch us tonight on the CW.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b11",
-          "text": "NXT Great American Bash has been one of the brand’s familiar summer events over the years, and now it is officially back on the calendar for June 28. With the show airing on The CW Network and starting at 7 PM ET, WWE is giving the event a clear spot outside the usual Tuesday night NXT schedule.",
-          "type": "text"
-        },
-        {
-          "block_id": "b12",
-          "text": "WWE has not announced the location for NXT Great American Bash yet, so fans will have to wait for more details about where the event will take place and what matches will be added to the card.",
-          "type": "text"
-        },
-        {
-          "block_id": "b13",
-          "text": "NXT Great American Bash returning on June 28 gives the brand another major showcase on The CW Network. With Shawn Michaels making the announcement himself, WWE made sure fans knew that the summer special is officially locked in.",
-          "type": "text"
-        }
-      ],
-      "excerpt_it": "Shawn Michaels ha ufficializzato il ritorno di NXT Great American Bash, che andrà in onda su The CW Network il prossimo 28 giugno.",
-      "extraction_diagnostics": {
-        "candidate_node_count": 105,
-        "clean_element_count": 13,
-        "dom_noise_reduction_enabled": false,
-        "embed_count": 1,
-        "global_embed_recovery_enabled": false,
-        "quote_count": 3,
-        "raw_element_count": 16,
-        "removed_by_node_count": 13,
-        "removed_by_sanitize_count": 3,
-        "root_name": "article",
-        "root_text_chars": 3365,
-        "stage": "complete",
-        "table_count": 0
-      },
-      "fetched_html_chars": 486800,
-      "menzo_score": 69,
-      "meta": {
-        "description": "WWE NXT is bringing back the Great American Bash, and Shawn Michaels made the announcement himself. Michaels revealed on social media that NXT Great",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2025/06/NXT%20Great%20American%20Bash.jpg",
-        "source_title": "WWE NXT Great American Bash Return Date Revealed"
-      },
-      "raw_element_count": 16,
-      "raw_elements_preview": [
-        {
-          "block_id": "b1",
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://x.com/ShawnMichaels/status/2061852400302878992"
-        },
-        {
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://x.com/ShawnMichaels/status/2061852400302878992"
-        },
-        {
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://x.com/ShawnMichaels/status/2061852400302878992"
-        },
-        {
-          "block_id": "b2",
-          "text": "WWE NXT is bringing back the Great American Bash, and Shawn Michaels made the announcement himself.",
-          "type": "text"
-        },
-        {
-          "block_id": "b3",
-          "text": "Michaels revealed on social media that NXT Great American Bash will take place on Sunday, June 28, with the event airing on The CW Network. The show is set for a special start time of 7 PM ET.",
-          "type": "text"
-        },
-        {
-          "block_id": "b4",
-          "text": "The announcement gives NXT another major event on its current television home, as the brand continues its run on The CW Network every Tuesday night. A location for Great American Bash was not announced.",
-          "type": "text"
-        },
-        {
-          "block_id": "b5",
-          "text": "Michaels addressed fans directly while making the announcement, joking about the kind of content people are used to seeing from him these days before getting to the big news.",
-          "type": "text"
-        },
-        {
-          "block_id": "b6",
-          "source_tag": "blockquote",
-          "text": "“Hello, boys and girls. Now, I know everybody’s used to seeing me these days doing my crazy posts on Instagram and TikTok, but everybody’s been asking me, when is the first ple on the CW Network?”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b7",
-          "text": "Michaels then confirmed that Great American Bash will be the event coming to The CW Network on June 28. He also confirmed the special start time for the event.",
-          "type": "text"
-        },
-        {
-          "block_id": "b8",
-          "source_tag": "blockquote",
-          "text": "“Well, that’s what this announcement is for June 28, CW Network at NXT are going to bring you the Great American Bash. This partnership is moving forward at the Great American bash on June 28th.” “We’ll have a special start time of 7pm.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b9",
-          "text": "Michaels also used the announcement to remind fans about NXT’s regular Tuesday night broadcast on The CW Network, including Tony D’Angelo defending the NXT Championship against Cam Hendricks.",
-          "type": "text"
-        },
-        {
-          "block_id": "b10",
-          "source_tag": "blockquote",
-          "text": "“Tonight. Don’t forget to join us on the CW Network at 8pm as Tony D’ Angelo defends NXT championship against Cam Hendricks. Watch us tonight on the CW.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b11",
-          "text": "NXT Great American Bash has been one of the brand’s familiar summer events over the years, and now it is officially back on the calendar for June 28. With the show airing on The CW Network and starting at 7 PM ET, WWE is giving the event a clear spot outside the usual Tuesday night NXT schedule.",
-          "type": "text"
-        },
-        {
-          "block_id": "b12",
-          "text": "WWE has not announced the location for NXT Great American Bash yet, so fans will have to wait for more details about where the event will take place and what matches will be added to the card.",
-          "type": "text"
-        },
-        {
-          "block_id": "b13",
-          "text": "NXT Great American Bash returning on June 28 gives the brand another major showcase on The CW Network. With Shawn Michaels making the announcement himself, WWE made sure fans knew that the summer special is officially locked in.",
-          "type": "text"
-        },
-        {
-          "text": "Spotlight WWE News Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW WWE News Bronson Reed Involved in a Car Accident AEW News Mick Foley Says He Hasn’t Closed the Door on WWE Forever After Exit WWE Videos Bron Breakker Spotted Limping Badly In Hotel Lobby After WWE RAW",
-          "type": "text"
-        }
-      ],
-      "removed_before_gemini": 16,
-      "removed_elements_debug": [
-        {
-          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
           "node_index": 82,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Spotlight"
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196783 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-bron-breakker tag-wwe-featured   ",
-          "node_index": 86,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 89,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 90,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196772 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-bronson-reed tag-wwe-featured   ",
-          "node_index": 91,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Bronson Reed Involved in a Car Accident"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 94,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Bronson Reed Involved in a Car Accident"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 95,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196747 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news category-wwe-news tag-aew-featured tag-mick-foley   ",
-          "node_index": 96,
           "node_name": "li",
           "reason": "node_class_noise",
           "text_preview": "AEW News Mick Foley Says He Hasn’t Closed the Door on WWE Forever After Exit"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 99,
+          "node_index": 85,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Mick Foley Says He Hasn’t Closed the Door on WWE Forever After Exit"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 100,
+          "node_index": 86,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
         },
         {
           "classes": "gb-loop-item rsn-spotlight-item post-2196664 post type-post status-publish format-video has-post-thumbnail hentry category-wwe-news category-wwe-videos tag-bron-breakker tag-wwe-featured post_format-post-format-video rsn-post-format-video rsn-has-post-format   ",
-          "node_index": 101,
+          "node_index": 87,
           "node_name": "li",
           "reason": "node_class_noise",
           "text_preview": "WWE Videos Bron Breakker Spotted Limping Badly In Hotel Lobby After WWE RAW"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 104,
+          "node_index": 90,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Bron Breakker Spotted Limping Badly In Hotel Lobby After WWE RAW"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 105,
+          "node_index": 91,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
         },
         {
-          "index": 2,
-          "item": {
-            "source_tag": "div",
-            "type": "embed",
-            "url": "https://x.com/ShawnMichaels/status/2061852400302878992"
-          },
-          "reason": "duplicate_or_empty_embed"
-        },
-        {
-          "index": 3,
-          "item": {
-            "source_tag": "div",
-            "type": "embed",
-            "url": "https://x.com/ShawnMichaels/status/2061852400302878992"
-          },
-          "reason": "duplicate_or_empty_embed"
-        },
-        {
-          "index": 16,
+          "index": 7,
           "item": {
             "text": "Spotlight WWE News Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW WWE News Bronson Reed Involved in a Car Accident AEW News Mick Foley Says He Hasn’t Closed the Door on WWE Forever After Exit WWE Videos Bron Breakker Spotted Limping Badly In Hotel Lobby After WWE RAW",
             "type": "text"
@@ -904,31 +214,31 @@
       ],
       "source": "ringsidenews",
       "source_html_contains_embed_hint": true,
-      "source_title": "WWE NXT Great American Bash Return Date Revealed",
-      "source_url": "https://www.ringsidenews.com/wwe-nxt-great-american-bash-return-date-revealed/",
+      "source_title": "Bronson Reed Involved in a Car Accident",
+      "source_url": "https://www.ringsidenews.com/bronson-reed-involved-car-accident/",
       "status": "ready_for_alfred",
-      "title_it": "WWE NXT: annunciata la data di ritorno di Great American Bash",
+      "title_it": "Bronson Reed coinvolto in un incidente stradale",
       "translation_chain_attempted": [
         "gemini-3.1-flash-lite"
       ],
       "translation_missing_units": [],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/wwe-nxt-great-american-bash-return-date-revealed/\nTitolo feed: WWE NXT Great American Bash Return Date Revealed\nTitolo pagina: WWE NXT Great American Bash Return Date Revealed\nDescrizione: WWE NXT is bringing back the Great American Bash, and Shawn Michaels made the announcement himself. Michaels revealed on social media that NXT Great\nCategoria suggerita: NXT\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"WWE NXT is bringing back the Great American Bash, and Shawn Michaels made the announcement himself.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Michaels revealed on social media that NXT Great American Bash will take place on Sunday, June 28, with the event airing on The CW Network. The show is set for a special start time of 7 PM ET.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"The announcement gives NXT another major event on its current television home, as the brand continues its run on The CW Network every Tuesday night. A location for Great American Bash was not announced.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Michaels addressed fans directly while making the announcement, joking about the kind of content people are used to seeing from him these days before getting to the big news.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“Hello, boys and girls. Now, I know everybody’s used to seeing me these days doing my crazy posts on Instagram and TikTok, but everybody’s been asking me, when is the first ple on the CW Network?”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Michaels then confirmed that Great American Bash will be the event coming to The CW Network on June 28. He also confirmed the special start time for the event.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“Well, that’s what this announcement is for June 28, CW Network at NXT are going to bring you the Great American Bash. This partnership is moving forward at the Great American bash on June 28th.” “We’ll have a special start time of 7pm.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"Michaels also used the announcement to remind fans about NXT’s regular Tuesday night broadcast on The CW Network, including Tony D’Angelo defending the NXT Championship against Cam Hendricks.\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"quote\",\n    \"text\": \"“Tonight. Don’t forget to join us on the CW Network at 8pm as Tony D’ Angelo defends NXT championship against Cam Hendricks. Watch us tonight on the CW.”\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"NXT Great American Bash has been one of the brand’s familiar summer events over the years, and now it is officially back on the calendar for June 28. With the show airing on The CW Network and starting at 7 PM ET, WWE is giving the event a clear spot outside the usual Tuesday night NXT schedule.\"\n  },\n  {\n    \"id\": \"b12\",\n    \"type\": \"text\",\n    \"text\": \"WWE has not announced the location for NXT Great American Bash yet, so fans will have to wait for more details about where the event will take place and what matches will be added to the card.\"\n  },\n  {\n    \"id\": \"b13\",\n    \"type\": \"text\",\n    \"text\": \"NXT Great American Bash returning on June 28 gives the brand another major showcase on The CW Network. With Shawn Michaels making the announcement himself, WWE made sure fans knew that the summer special is officially locked in.\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"WWE NXT: annunciata la data di ritorno di Great American Bash\",\n  \"excerpt_it\": \"Shawn Michaels ha ufficializzato il ritorno di NXT Great American Bash, che andrà in onda su The CW Network il prossimo 28 giugno.\",\n  \"translations\": {\n    \"b2\": \"La WWE riporterà in scena NXT Great American Bash e ad annunciarlo è stato Shawn Michaels in persona.\",\n    \"b3\": \"Michaels ha rivelato sui social media che NXT Great American Bash si terrà domenica 28 giugno e sarà trasmesso su The CW Network. Lo show avrà un orario di inizio speciale, fissato per le 19:00 (orario ET).\",\n    \"b4\": \"L'annuncio regala a NXT un altro grande evento sulla sua attuale emittente, mentre il brand prosegue la sua programmazione su The CW Network ogni martedì sera. La location per Great American Bash non è stata ancora resa nota.\",\n    \"b5\": \"Nel fare l'annuncio, Michaels si è rivolto direttamente ai fan, scherzando sul tipo di contenuti a cui il pubblico è ormai abituato a vederlo pubblicare, prima di passare alla notizia importante.\",\n    \"b6\": \"“Salve a tutti, ragazzi. So che ormai siete abituati a vedermi fare i miei post stravaganti su Instagram e TikTok, ma tutti continuano a chiedermi: quando ci sarà il primo PLE su The CW Network?”\",\n    \"b7\": \"Michaels ha quindi confermato che Great American Bash sarà l'evento che approderà su The CW Network il 28 giugno, confermando anche l'orario di inizio speciale per lo show.\",\n    \"b8\": \"“Bene, questo annuncio serve a dire che il 28 giugno, The CW Network e NXT vi porteranno il Great American Bash. Questa partnership prosegue con il Great American Bash del 28 giugno. Avremo un orario di inizio speciale alle 19:00.”\",\n    \"b9\": \"Michaels ha inoltre colto l'occasione per ricordare ai fan l'appuntamento abituale del martedì sera di NXT su The CW Network, che vedrà Tony D’Angelo difendere l’NXT Championship contro Cam Hendricks.\",\n    \"b10\": \"“Stasera. Non dimenticate di unirvi a noi su The CW Network alle 20:00, quando Tony D’Angelo difenderà l'NXT Championship contro Cam Hendricks. Seguiteci stasera su The CW.”\",\n    \"b11\": \"NXT Great American Bash è stato uno degli eventi estivi ricorrenti del brand negli ultimi anni e ora è ufficialmente tornato in calendario per il 28 giugno. Con lo show in onda su The CW Network e l'inizio alle 19:00 ET, la WWE riserva all'evento uno spazio distinto rispetto alla solita programmazione del martedì sera.\",\n    \"b12\": \"La WWE non ha ancora annunciato la location per NXT Great American Bash, quindi i fan dovranno attendere ulteriori dettagli su dove si svolgerà l'evento e su quali match andranno a comporre la card.\",\n    \"b13\": \"Il ritorno di NXT Great American Bash il 28 giugno offre al brand un'ulteriore vetrina di prestigio su The CW Network. Grazie all'annuncio ufficiale fatto personalmente da Shawn Michaels, la WWE ha voluto assicurarsi che i fan fossero consapevoli che lo speciale estivo è ormai confermato.\"\n  },\n  \"notes\": []\n}",
-      "translation_unit_count": 12,
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/bronson-reed-involved-car-accident/\nTitolo feed: Bronson Reed Involved in a Car Accident\nTitolo pagina: Bronson Reed Involved in a Car Accident\nDescrizione: Bronson Reed had a scary moment away from WWE television, but thankfully, everyone appears to be okay. Bronson Reed took to his Instagram Story and\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Bronson Reed had a scary moment away from WWE television, but thankfully, everyone appears to be okay.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Bronson Reed took to his Instagram Story and revealed that he was involved in a rear-end collision. The RAW star said no one was hurt, but he used the moment to warn people about distracted driving.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"“Just had a rear collision. Thankfully, everyone is okay. But people stop driving on your damn phones, pay attention. People have kids in their cars.”\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"This comes while Reed remains away from WWE programming due to injury. He has been out since suffering a torn distal biceps in his right arm during a February episode of RAW , and WWE has not confirmed when he will return.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Reed recently got fans talking after posting a new photo on X showing off a much bigger and more shredded physique. He captioned the post with a simple message: “Break the internet.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"While he continues recovering, this car accident clearly gave him another reason to speak out, especially about drivers staying off their phones. For now, the most important news is that Reed said everyone involved in the collision is okay. His warning was blunt, but the message was clear: pay attention behind the wheel.\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Bronson Reed coinvolto in un incidente stradale\",\n  \"excerpt_it\": \"Bronson Reed ha vissuto un momento di paura lontano dagli schermi della WWE, ma fortunatamente tutti i coinvolti stanno bene.\",\n  \"translations\": {\n    \"b1\": \"Bronson Reed ha vissuto un momento di paura lontano dagli schermi della WWE, ma fortunatamente sembra che stiano tutti bene.\",\n    \"b2\": \"Bronson Reed ha raccontato tramite una storia su Instagram di essere rimasto coinvolto in un tamponamento. La star di RAW ha dichiarato che nessuno è rimasto ferito, cogliendo l'occasione per mettere in guardia le persone sui rischi della guida distratta.\",\n    \"b3\": \"“Appena avuto un tamponamento. Fortunatamente, stanno tutti bene. Ma la gente smetta di guidare usando quei maledetti telefoni, fate attenzione. Ci sono persone che trasportano bambini nelle proprie auto.”\",\n    \"b4\": \"L'episodio avviene mentre Reed è ancora lontano dalla programmazione WWE a causa di un infortunio. È fuori dalle scene da quando ha subito la rottura del bicipite distale del braccio destro durante una puntata di RAW a febbraio; la WWE non ha ancora confermato una data per il suo rientro.\",\n    \"b5\": \"Reed ha recentemente fatto discutere i fan dopo aver pubblicato una nuova foto su X che mostra un fisico decisamente più imponente e definito. Ha accompagnato il post con un messaggio lapidario: “Mandare in crash internet.”\",\n    \"b6\": \"Mentre prosegue il suo recupero, questo incidente stradale gli ha dato un ulteriore motivo per farsi sentire, in particolare sulla necessità che gli automobilisti non usino il telefono alla guida. Per ora, la notizia più importante è che Reed ha confermato che tutti i coinvolti nello scontro stanno bene. Il suo avvertimento è stato diretto, ma il messaggio era chiaro: fate attenzione al volante.\"\n  },\n  \"notes\": []\n}",
+      "translation_unit_count": 6,
       "translation_used": true
     }
   ],
-  "generated_at": "2026-06-02T22:10:24.984297+00:00",
+  "generated_at": "2026-06-02T22:23:48.081166+00:00",
   "handoff": {
     "errors": 0,
     "extraction_empty": 0,
-    "ready_for_alfred": 3,
+    "ready_for_alfred": 1,
     "translation_pending": 0
   },
   "input": {
     "menzo_version": "v93_15_forced_priority_label_softpool",
-    "selected_count": 4
+    "selected_count": 1
   },
   "mode": "block_translation_prudent_embed_cleanup",
   "policy": {
@@ -967,7 +277,7 @@
     "unwrap_fake_data_blockquotes": true
   },
   "postprocess": {
-    "bob_v93_16_changes": 4
+    "bob_v93_16_changes": 0
   },
   "version": "v93_16_bob_embed_position_quote_cleanup"
 }

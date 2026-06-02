@@ -1,18 +1,6 @@
 {
   "agent": "Massy",
-  "already_worked": [
-    {
-      "decision": "already_worked",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185015/wwe-raw-june-1-2026-seth-rollins-bron-breakker-tag-team-match-more",
-      "published": "Mon, 01 Jun 2026 16:58:38 +0000",
-      "reason": "url_present_in_state",
-      "source": "wrestlinginc",
-      "summary": "This is Wrestling Inc.'s results for \"WWE Raw\" on June 1, 2026, with a match between Seth Rollins & one half of the World Tag Team Champions Bron Breakker!",
-      "title": "WWE Raw Results 6/1 - Seth Rollins Faces Bron Breakker, Tag Team Match & More",
-      "url": "https://www.wrestlinginc.com/2185015/wwe-raw-june-1-2026-seth-rollins-bron-breakker-tag-team-match-more/"
-    }
-  ],
+  "already_worked": [],
   "binding": {
     "bot_v92_runtime_still_delegated_until_menzo_simone_takeover": false,
     "hard_skips_are_binding_for_newsroom": true,
@@ -34,62 +22,63 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-02T22:10:08.897420+00:00",
+  "generated_at": "2026-06-02T22:23:40.177112+00:00",
   "handoff": {
-    "already_published_hard_skipped": 3,
-    "already_worked": 1,
-    "hard_skipped": 27,
-    "menzo_memory_hard_skipped": 22,
-    "old_news_hard_skipped": 0,
-    "to_menzo": 7,
+    "already_published_hard_skipped": 5,
+    "already_worked": 0,
+    "hard_skipped": 30,
+    "menzo_memory_hard_skipped": 21,
+    "old_news_hard_skipped": 3,
+    "to_menzo": 5,
     "to_simone": 0
   },
   "hard_skipped": [
     {
       "decision": "hard_skip",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185398/wwe-raw-june-1-2026-3-things-loved-hated-opinion-review",
-      "published": "Mon, 01 Jun 2026 23:32:50 +0000",
-      "reason": "listicle_things_we_loved_hated",
-      "source": "wrestlinginc",
-      "summary": "The best and the worst of Monday Night Raw in Turin, Italy.",
-      "title": "WWE Raw - 6/1/2026: 3 Things We Hated And 3 We Loved",
-      "url": "https://www.wrestlinginc.com/2185398/wwe-raw-june-1-2026-3-things-loved-hated-opinion-review/"
-    },
-    {
-      "decision": "hard_skip",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review",
-      "published": "Mon, 01 Jun 2026 20:39:17 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2186197/wwe-aj-styles-paul-heyman-vision-curse",
+      "published": "Tue, 02 Jun 2026 21:33:19 +0000",
       "published_guard": "publisher_history",
       "reason": "url_already_published",
       "source": "wrestlinginc",
-      "summary": "Here's who looked good, and who very much didn't, at last night's WWE Clash In Italy.",
-      "title": "WWE Clash In Italy 2026: Biggest Winners And Losers",
-      "url": "https://www.wrestlinginc.com/2185285/wwe-clash-italy-2026-biggest-winners-losers-opinion-review/"
+      "summary": "WWE Hall of Famer AJ Styles said he blames manager Paul Heyman for the \"curse\" plaguing The Vision on \"WWE Raw.\"",
+      "title": "WWE's AJ Styles Blames Paul Heyman For 'Curse' Placed On The Vision",
+      "url": "https://www.wrestlinginc.com/2186197/wwe-aj-styles-paul-heyman-vision-curse/"
     },
     {
       "decision": "hard_skip",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2184477/wwe-clash-in-italy-2026-hated-loved-opinion-review",
-      "published": "Sun, 31 May 2026 22:19:45 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2174279/wwe-smackdown-may-15-2026-hated-loved-opinion-review",
+      "published": "Sat, 16 May 2026 05:15:13 +0000",
       "reason": "listicle_things_we_loved_hated",
       "source": "wrestlinginc",
-      "summary": "On a night that saw Roman Reigns and Cody Rhodes retain their titles, here are three things we hated and three things we loved about WWE Clash in Italy 2026!",
-      "title": "WWE Clash In Italy 2026: 3 Things We Hated & 3 Things We Loved",
-      "url": "https://www.wrestlinginc.com/2184477/wwe-clash-in-italy-2026-hated-loved-opinion-review/"
+      "summary": "On a night that saw a new No. 1 contender crowned, here are three things we hated and three things we loved about the 5/15/26 episode of \"WWE SmackDown!\"",
+      "title": "WWE SmackDown 5/15/2026: 3 Things We Hated & 3 Things We Loved",
+      "url": "https://www.wrestlinginc.com/2174279/wwe-smackdown-may-15-2026-hated-loved-opinion-review/"
     },
     {
       "decision": "hard_skip",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2186167/wwe-hofer-jeff-jarrett-thinks-chad-gable-aew",
-      "published": "Tue, 02 Jun 2026 21:00:57 +0000",
+      "normalized_url": "https://www.wrestlinginc.com/2174268/wwe-smackdown-gunther-royce-keys-cody-rhodes-clash-in-italy",
+      "published": "Sat, 16 May 2026 03:07:43 +0000",
       "published_guard": "publisher_history",
       "reason": "url_already_published",
       "source": "wrestlinginc",
-      "summary": "WWE Hall of Famer Jeff Jarrett said he thinks Chad Gable, the former Original El Grande Americano, should be prepared to depart WWE when his contract is up.",
-      "title": "WWE HOFer Jeff Jarrett Thinks Chad Gable Should Go To AEW",
-      "url": "https://www.wrestlinginc.com/2186167/wwe-hofer-jeff-jarrett-thinks-chad-gable-aew/"
+      "summary": "Gunther defeated Royce Keys in the main event of \"WWE SmackDown\" to secure his shot at Cody Rhodes' WWE Championship at Clash in Italy.",
+      "title": "GUNTHER Defeats Royce Keys On WWE SmackDown, Will Face Cody Rhodes At Clash In Italy",
+      "url": "https://www.wrestlinginc.com/2174268/wwe-smackdown-gunther-royce-keys-cody-rhodes-clash-in-italy/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv",
+      "published": "Tue, 02 Jun 2026 20:40:58 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/kaitlyn-says-wwe-backstage-pressure-was-harder-than-wrestling-on-tv-46.jpg?x37732\" width=\"800\" /></p>Kaitlyn says the hardest part of her WWE run was not wrestling in front of thousands of fans. It was dealing with the pressure backstage. During her interview with TMZ’s Inside the Ring, the former WWE Divas Champion opened up about the mental toll of WWE locker room culture during her time with the company. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv/\" title=\"Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV\">Read more</a>",
+      "title": "Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV",
+      "url": "https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv/"
     },
     {
       "decision": "hard_skip",
@@ -102,6 +91,18 @@
       "summary": "<p><img alt=\"Bron Breakker&#039;s Injury Status After Limping in Hotel Lobby Following WWE RAW\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/bron-breakkers-injury-status-after-limping-in-hotel-lobby-following-wwe-raw-10.jpg?x37732\" width=\"800\" /></p>Bron Breakker had fans worried after he was seen limping after WWE RAW, but the latest update should calm some of those concerns. According to False Finish, Breakker was banged up after his match with Seth Rollins on the June 1, 2026 episode of Monday Night RAW. However, the issue is not expected to affect ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/bron-breakkers-injury-status-limping-hotel-lobby-following-wwe-raw/\" title=\"Bron Breakker&#8217;s Injury Status After Limping in Hotel Lobby Following WWE RAW\">Read more</a>",
       "title": "Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW",
       "url": "https://www.ringsidenews.com/bron-breakkers-injury-status-limping-hotel-lobby-following-wwe-raw/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/wwe-nxt-great-american-bash-return-date-revealed",
+      "published": "Tue, 02 Jun 2026 17:19:58 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"NXT Great American Bash\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2025/06/NXT Great American Bash.jpg?x37732\" width=\"800\" /></p>WWE NXT is bringing back the Great American Bash, and Shawn Michaels made the announcement himself. Michaels revealed on social media that NXT Great American Bash will take place on Sunday, June 28, with the event airing on The CW Network. The show is set for a special start time of 7 PM ET. The ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-nxt-great-american-bash-return-date-revealed/\" title=\"WWE NXT Great American Bash Return Date Revealed\">Read more</a>",
+      "title": "WWE NXT Great American Bash Return Date Revealed",
+      "url": "https://www.ringsidenews.com/wwe-nxt-great-american-bash-return-date-revealed/"
     },
     {
       "decision": "hard_skip",
@@ -247,17 +248,40 @@
       "url": "https://www.wrestlinginc.com/2170585/wwe-hofer-eric-bischoff-lambasts-3-hour-weekly-shows/"
     },
     {
+      "age_guard": "massy_7_day_window",
       "decision": "hard_skip",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "menzo_article_type": "listicle",
-      "menzo_reason": "ai:Listicle settimanale, non adatto al nostro formato di hard news.; deterministic:strategic:clash in italy,recency:fresh_12h",
-      "normalized_url": "https://www.wrestlinginc.com/2185999/biggest-winners-losers-week-june-2-2026",
-      "published": "Tue, 02 Jun 2026 18:39:17 +0000",
-      "reason": "menzo_hard_skip_memory",
+      "normalized_url": "https://www.wrestlinginc.com/2170560/ronda-rousey-reflects-main-eventing-wwe-wrestlemania-35",
+      "published": "Sat, 16 May 2026 12:30:00 +0000",
+      "reason": "older_than_7_days",
       "source": "wrestlinginc",
-      "summary": "After seven days that saw WWE Clash in Italy, AAA Noche de los Grandes, and much more, here are your WINC winners and losers for the week of 6/2/26!",
-      "title": "Biggest Winners And Losers Of The Week — 6/2/2026",
-      "url": "https://www.wrestlinginc.com/2185999/biggest-winners-losers-week-june-2-2026/"
+      "summary": "Former WWE star Ronda Rousey has detailed her feelings about her historic WrestleMania 35 match and how WWE didn't afford them enough time to prepare for it.",
+      "title": "Ronda Rousey Reflects On Main Eventing WWE WrestleMania 35",
+      "url": "https://www.wrestlinginc.com/2170560/ronda-rousey-reflects-main-eventing-wwe-wrestlemania-35/"
+    },
+    {
+      "age_guard": "massy_7_day_window",
+      "decision": "hard_skip",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2174267/jade-cargill-rhea-ripley-wwe-clash-in-italy",
+      "published": "Sat, 16 May 2026 03:01:22 +0000",
+      "reason": "older_than_7_days",
+      "source": "wrestlinginc",
+      "summary": "Jade Cargill lost the women's title at WrestleMania 42.",
+      "title": "Jade Cargill Challenges Rhea Ripley To WWE Women's Title Rematch At Clash In Italy",
+      "url": "https://www.wrestlinginc.com/2174267/jade-cargill-rhea-ripley-wwe-clash-in-italy/"
+    },
+    {
+      "age_guard": "massy_7_day_window",
+      "decision": "hard_skip",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2174266/wwe-saturday-nights-main-event-six-woman-tag",
+      "published": "Sat, 16 May 2026 02:55:06 +0000",
+      "reason": "older_than_7_days",
+      "source": "wrestlinginc",
+      "summary": "A six-woman tag team match was officially added to WWE Saturday Night's Main Event during \"WWE SmackDown\" on Friday.",
+      "title": "Six-Woman Tag Team Match Added To Upcoming WWE Saturday Night's Main Event",
+      "url": "https://www.wrestlinginc.com/2174266/wwe-saturday-nights-main-event-six-woman-tag/"
     },
     {
       "decision": "hard_skip",
@@ -391,10 +415,22 @@
     }
   ],
   "known_menzo_hard_skip_urls": 23,
-  "known_published_urls": 34,
+  "known_published_urls": 37,
   "known_state_urls": 10,
   "mode": "sentinel_control_board",
   "news_candidates_for_menzo": [
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "normalized_url": "https://www.wrestlinginc.com/2186222/wwe-bully-ray-el-grande-americano-storyline-beauty-simplicity",
+      "published": "Tue, 02 Jun 2026 22:16:49 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "wrestlinginc",
+      "summary": "WWE Hall of Famer Bully Ray praises the storyline and recent match pitting the two El Grande Americanos against one another.",
+      "title": "WWE HOFer Bully Ray On El Grande Americano Storyline: 'The Beauty Of Simplicity'",
+      "url": "https://www.wrestlinginc.com/2186222/wwe-bully-ray-el-grande-americano-storyline-beauty-simplicity/"
+    },
     {
       "assigned_to": "Menzo",
       "decision": "news_candidate",
@@ -406,18 +442,6 @@
       "summary": "Two AEW luchadors are continuing to have struggles with visa issues, leading to them working with AEW's promotional partner CMLL in Mexico for the time being",
       "title": "Two AEW Luchadors Still Struggling With Visa Issues",
       "url": "https://www.wrestlinginc.com/2186205/two-aew-luchadors-still-struggling-visa-issues/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2186197/wwe-aj-styles-paul-heyman-vision-curse",
-      "published": "Tue, 02 Jun 2026 21:33:19 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "wrestlinginc",
-      "summary": "WWE Hall of Famer AJ Styles said he blames manager Paul Heyman for the \"curse\" plaguing The Vision on \"WWE Raw.\"",
-      "title": "WWE's AJ Styles Blames Paul Heyman For 'Curse' Placed On The Vision",
-      "url": "https://www.wrestlinginc.com/2186197/wwe-aj-styles-paul-heyman-vision-curse/"
     },
     {
       "assigned_to": "Menzo",
@@ -447,18 +471,6 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv",
-      "published": "Tue, 02 Jun 2026 20:40:58 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/kaitlyn-says-wwe-backstage-pressure-was-harder-than-wrestling-on-tv-46.jpg?x37732\" width=\"800\" /></p>Kaitlyn says the hardest part of her WWE run was not wrestling in front of thousands of fans. It was dealing with the pressure backstage. During her interview with TMZ’s Inside the Ring, the former WWE Divas Champion opened up about the mental toll of WWE locker room culture during her time with the company. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv/\" title=\"Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV\">Read more</a>",
-      "title": "Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV",
-      "url": "https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/bronson-reed-involved-car-accident",
       "published": "Tue, 02 Jun 2026 19:03:44 +0000",
       "reason": "requires_menzo_classification",
@@ -466,18 +478,6 @@
       "summary": "<p><img alt=\"Bronson Reed Involved in a Car Accident\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/bronson-reed-involved-in-a-car-accident-50.jpg?x37732\" width=\"800\" /></p>Bronson Reed had a scary moment away from WWE television, but thankfully, everyone appears to be okay. Bronson Reed took to his Instagram Story and revealed that he was involved in a rear-end collision. The RAW star said no one was hurt, but he used the moment to warn people about distracted driving. “Just had ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/bronson-reed-involved-car-accident/\" title=\"Bronson Reed Involved in a Car Accident\">Read more</a>",
       "title": "Bronson Reed Involved in a Car Accident",
       "url": "https://www.ringsidenews.com/bronson-reed-involved-car-accident/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/wwe-nxt-great-american-bash-return-date-revealed",
-      "published": "Tue, 02 Jun 2026 17:19:58 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"NXT Great American Bash\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2025/06/NXT Great American Bash.jpg?x37732\" width=\"800\" /></p>WWE NXT is bringing back the Great American Bash, and Shawn Michaels made the announcement himself. Michaels revealed on social media that NXT Great American Bash will take place on Sunday, June 28, with the event airing on The CW Network. The show is set for a special start time of 7 PM ET. The ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-nxt-great-american-bash-return-date-revealed/\" title=\"WWE NXT Great American Bash Return Date Revealed\">Read more</a>",
-      "title": "WWE NXT Great American Bash Return Date Revealed",
-      "url": "https://www.ringsidenews.com/wwe-nxt-great-american-bash-return-date-revealed/"
     }
   ],
   "report_candidates": [],
