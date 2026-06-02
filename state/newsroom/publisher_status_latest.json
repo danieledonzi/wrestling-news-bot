@@ -1,6 +1,6 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-02T21:30:36.854884+00:00",
+  "generated_at": "2026-06-02T22:10:33.360416+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
@@ -14,6 +14,37 @@
   },
   "mode": "wordpress_publisher_plain_oembed_urls",
   "policy": {
+    "business_preferred_over_world_for_data_reports": true,
+    "category_priority": {
+      "AEW": [
+        "AEW"
+      ],
+      "Business": [
+        "Business",
+        "World"
+      ],
+      "Editoriali": [
+        "Editoriali"
+      ],
+      "NXT": [
+        "NXT",
+        "WWE"
+      ],
+      "ROH": [
+        "ROH",
+        "AEW"
+      ],
+      "TNA": [
+        "TNA",
+        "World"
+      ],
+      "WWE": [
+        "WWE"
+      ],
+      "World": [
+        "World"
+      ]
+    },
     "featured_image_source": "meta.featured_image_or_first_placeholder",
     "idempotency": "state/newsroom/publisher_history.json by source_url",
     "preserve_plain_embed_urls_for_wordpress_oembed": true,
@@ -25,38 +56,48 @@
       "categories": [
         4
       ],
-      "featured_media": 5873,
-      "source_url": "https://www.ringsidenews.com/bron-breakkers-injury-status-limping-hotel-lobby-following-wwe-raw/",
+      "category_names_priority": [
+        "WWE"
+      ],
+      "featured_media": 5882,
+      "source_url": "https://www.wrestlinginc.com/2186197/wwe-aj-styles-paul-heyman-vision-curse/",
       "status": "published",
-      "title_it": "Aggiornamento sulle condizioni di Bron Breakker dopo WWE RAW",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/aggiornamento-sulle-condizioni-di-bron-breakker-dopo-wwe-raw/",
-      "wp_post_id": 5874
+      "title_it": "AJ Styles accusa Paul Heyman della \"maledizione\" della Vision",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/aj-styles-accusa-paul-heyman-della-maledizione-della-vision/",
+      "wp_post_id": 5883
     },
     {
       "categories": [
-        5
+        4
       ],
-      "featured_media": 5875,
-      "source_url": "https://www.wrestlinginc.com/2186167/wwe-hofer-jeff-jarrett-thinks-chad-gable-aew/",
+      "category_names_priority": [
+        "WWE"
+      ],
+      "featured_media": 5884,
+      "source_url": "https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv/",
       "status": "published",
-      "title_it": "Jeff Jarrett: Chad Gable dovrebbe considerare il passaggio in AEW",
-      "wp_link": "https://news.openwrestlingtv.com/aew/jeff-jarrett-chad-gable-dovrebbe-considerare-il-passaggio-in-aew/",
-      "wp_post_id": 5876
+      "title_it": "Kaitlyn: \"La pressione nel backstage WWE era peggio che combattere in TV\"",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/kaitlyn-la-pressione-nel-backstage-wwe-era-peggio-che-combattere-in-tv/",
+      "wp_post_id": 5885
     },
     {
       "categories": [
-        15,
-        8
+        6,
+        4
       ],
-      "featured_media": 5877,
-      "source_url": "https://www.wrestlinginc.com/2186098/wwe-raw-ratings-viewership-report-may-25-2026/",
+      "category_names_priority": [
+        "NXT",
+        "WWE"
+      ],
+      "featured_media": 5886,
+      "source_url": "https://www.ringsidenews.com/wwe-nxt-great-american-bash-return-date-revealed/",
       "status": "published",
-      "title_it": "Report ascolti WWE Raw: 25 maggio 2026",
-      "wp_link": "https://news.openwrestlingtv.com/world/report-ascolti-wwe-raw-25-maggio-2026/",
-      "wp_post_id": 5878
+      "title_it": "WWE NXT: annunciata la data di ritorno di Great American Bash",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-nxt-annunciata-la-data-di-ritorno-di-great-american-bash/",
+      "wp_post_id": 5887
     }
   ],
-  "version": "v93_10_publisher_plain_oembed_urls",
+  "version": "v93_16_publisher_category_priority",
   "wp": {
     "dry_run": false,
     "post_status": "publish",

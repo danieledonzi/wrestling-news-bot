@@ -98,6 +98,15 @@
     "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-jonathan-coachman-critica-il-booking-di-liv-morgan-nel-queen-of-the-ring/",
     "wp_post_id": 5788
   },
+  "https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv": {
+    "published_at": "2026-06-02T22:10:31.262618+00:00",
+    "source": "ringsidenews",
+    "source_url": "https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv/",
+    "status": "publish",
+    "title_it": "Kaitlyn: \"La pressione nel backstage WWE era peggio che combattere in TV\"",
+    "wp_link": "https://news.openwrestlingtv.com/wwe/kaitlyn-la-pressione-nel-backstage-wwe-era-peggio-che-combattere-in-tv/",
+    "wp_post_id": 5885
+  },
   "https://www.ringsidenews.com/mick-foley-says-aew-reminds-him-wwes-attitude-era": {
     "published_at": "2026-06-01T23:12:37.383814+00:00",
     "source": "ringsidenews",
@@ -187,6 +196,15 @@
     "title_it": "WWE: Annunciati i match dei tornei King e Queen of the Ring per Raw dell'8 giugno",
     "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-annunciati-i-match-dei-tornei-king-e-queen-of-the-ring-per-raw-dell8-giugno/",
     "wp_post_id": 5816
+  },
+  "https://www.ringsidenews.com/wwe-nxt-great-american-bash-return-date-revealed": {
+    "published_at": "2026-06-02T22:10:33.359561+00:00",
+    "source": "ringsidenews",
+    "source_url": "https://www.ringsidenews.com/wwe-nxt-great-american-bash-return-date-revealed/",
+    "status": "publish",
+    "title_it": "WWE NXT: annunciata la data di ritorno di Great American Bash",
+    "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-nxt-annunciata-la-data-di-ritorno-di-great-american-bash/",
+    "wp_post_id": 5887
   },
   "https://www.ringsidenews.com/wwe-plaintiffs-claim-company-cant-trusted-preserve-evidence-espn-lawsuit": {
     "published_at": "2026-06-01T22:19:08.799090+00:00",
@@ -304,5 +322,14 @@
     "title_it": "Jeff Jarrett: Chad Gable dovrebbe considerare il passaggio in AEW",
     "wp_link": "https://news.openwrestlingtv.com/aew/jeff-jarrett-chad-gable-dovrebbe-considerare-il-passaggio-in-aew/",
     "wp_post_id": 5876
+  },
+  "https://www.wrestlinginc.com/2186197/wwe-aj-styles-paul-heyman-vision-curse": {
+    "published_at": "2026-06-02T22:10:29.677874+00:00",
+    "source": "wrestlinginc",
+    "source_url": "https://www.wrestlinginc.com/2186197/wwe-aj-styles-paul-heyman-vision-curse/",
+    "status": "publish",
+    "title_it": "AJ Styles accusa Paul Heyman della \"maledizione\" della Vision",
+    "wp_link": "https://news.openwrestlingtv.com/wwe/aj-styles-accusa-paul-heyman-della-maledizione-della-vision/",
+    "wp_post_id": 5883
   }
 }

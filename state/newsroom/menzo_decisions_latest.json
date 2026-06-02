@@ -1,9 +1,8 @@
 {
   "agent": "Menzo",
   "allowed_urls_for_v92": [
-    "https://www.ringsidenews.com/bron-breakkers-injury-status-limping-hotel-lobby-following-wwe-raw/",
-    "https://www.wrestlinginc.com/2186167/wwe-hofer-jeff-jarrett-thinks-chad-gable-aew/",
-    "https://www.wrestlinginc.com/2186098/wwe-raw-ratings-viewership-report-may-25-2026/",
+    "https://www.wrestlinginc.com/2186197/wwe-aj-styles-paul-heyman-vision-curse/",
+    "https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv/",
     "https://www.ringsidenews.com/wwe-nxt-great-american-bash-return-date-revealed/",
     "https://www.ringsidenews.com/bronson-reed-involved-car-accident/"
   ],
@@ -14,15 +13,15 @@
     "target_max": 30,
     "target_min": 20
   },
-  "generated_at": "2026-06-02T21:30:15.553814+00:00",
+  "generated_at": "2026-06-02T22:10:14.279727+00:00",
   "handoff": {
     "pending": 3,
-    "skipped": 23,
-    "to_bob_or_v92": 5
+    "skipped": 0,
+    "to_bob_or_v92": 4
   },
   "input": {
-    "candidate_count": 31,
-    "massy_version": "v93_9_massy_published_hard_skip"
+    "candidate_count": 7,
+    "massy_version": "v93_16_massy_old_news_and_menzo_skip_memory"
   },
   "menzo_ai": {
     "attempts": [
@@ -31,14 +30,14 @@
     "enabled": true,
     "error": "",
     "model": "gemini-3.1-flash-lite",
-    "prompt_count": 12,
-    "raw_preview": "{\n  \"reviews\": [\n    {\n      \"id\": \"c1\",\n      \"decision\": \"selected\",\n      \"priority\": 10,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"hard_news\",\n      \"event_key\": \"bron_breakker_injury\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia di cronaca fisica su un top talent fresco di RAW, essenziale per il pubblico.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"youtube\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Verifica se ci sono aggiornamenti medici certi nel testo.\"\n      }\n    },\n    {\n      \"id\": \"c2\",\n      \"decision\": \"selected\",\n      \"priority\": 8,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"chad_gable_future\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Speculazioni di mercato su talent di primo piano, rilevante per il crossover tra brand.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Presentare come opinione di Jarrett, non come rumor confermato.\"\n      }\n    },\n    {\n      \"id\": \"c3\",\n      \"decision\": \"skip\",\n      \"priority\": 1,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"duplicate\",\n      \"event_key\": \"carmella_surgery\",\n      \"duplicate_of\": \"c4\",\n      \"editorial_reason\": \"Notizia di gossip minore, trattata in modo ridondante da più fonti.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"\"\n      }\n    },\n    {\n      \"id\": \"c4\",\n      \"decision\": \"skip\",\n      \"priority\": 2,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"soft_news\",\n      \"event_key\": \"carmella_surgery\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Approfondimento di carattere personale/soft news, priorità bassa.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"youtube\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"\"\n      }\n    },\n    {\n      \"id\": \"c5\",\n      \"decision\": \"selected\",\n      \"priority\": 5,\n      \"category_hint\": \"Business\",\n      \"article_type\": \"data_report\",\n      \"event_key\": \"raw_ratings_netflix\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Dati importanti sulla transizione WWE su Netflix. Seleziono WINC per sintesi migliore.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"cta\"],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"Analizza i dati in modo chiaro per l'audience italiana.\"\n      }\n    },\n    {\n      \"id\": \"c6\",\n      \"decision\": \"skip\",\n      \"priority\": 0,\n      \"category_hint\": \"Business\",\n      \"article_type\": \"duplicate\",\n      \"event_key\": \"raw_ratings_netflix\",\n      \"duplicate_of\": \"c5\",\n      \"editorial_reason\": \"Duplicato report rating.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"\"\n      }\n    },\n    {\n      \"id\": \"c7\",\n      \"decision\": \"skip\",\n      \"priority\": 1,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"kaitlyn_backstage\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Contenuto nostalgia, non centrale per l'attualità.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n      ",
+    "prompt_count": 7,
+    "raw_preview": "{\n  \"reviews\": [\n    {\n      \"id\": \"c1\",\n      \"decision\": \"selected\",\n      \"priority\": 8,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"raw_styles_heyman\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia fresca e rilevante per la storyline di Raw, coinvolge nomi di primo piano.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"x_tweet\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Focus sulla dichiarazione di Styles, evita speculazioni esterne.\"\n      }\n    },\n    {\n      \"id\": \"c2\",\n      \"decision\": \"skip\",\n      \"priority\": 2,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"soft_news\",\n      \"event_key\": \"kaitlyn_backstage\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Curiosità di retroscena non prioritaria, poco valore per il pubblico attuale.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"instagram\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Trattalo come un riempitivo se necessario.\"\n      }\n    },\n    {\n      \"id\": \"c3\",\n      \"decision\": \"selected\",\n      \"priority\": 9,\n      \"category_hint\": \"NXT\",\n      \"article_type\": \"hard_news\",\n      \"event_key\": \"nxt_gab_date\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Annuncio ufficiale di una data per un PLE NXT, notizia fondamentale per il calendario.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"x_tweet\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"data evento\", \"piattaforma di trasmissione\"],\n        \"source_specific_notes\": \"Verifica bene la data citata (28 giugno).\"\n      }\n    },\n    {\n      \"id\": \"c4\",\n      \"decision\": \"selected\",\n      \"priority\": 5,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"hard_news\",\n      \"event_key\": \"bronson_reed_accident\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia di cronaca sul wrestler, corretta categoria in WWE (Bronson Reed è a Raw).\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"instagram\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"conferma che sta bene\"],\n        \"source_specific_notes\": \"Sii sintetico, evita toni allarmistici.\"\n      }\n    },\n    {\n      \"id\": \"c5\",\n      \"decision\": \"skip\",\n      \"priority\": 3,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"jarrett_opinion\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Opinione di un ex wrestler su un possibile scenario futuro; valore editoriale basso.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"Non pubblicare se non hai spazio.\"\n      }\n    },\n    {\n      \"id\": \"c6\",\n      \"decision\": \"skip\",\n      \"priority\": 4,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"soft_news\",\n      \"event_key\": \"producer_mask_match\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Dettaglio tecnico di produzione, di nicchia per il lettore medio.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"Solo se necessario per approfondimento t",
     "reviews": [
       {
-        "article_type": "hard_news",
+        "article_type": "storyline_development",
         "bob_brief": {
           "expected_embeds": [
-            "youtube"
+            "x_tweet"
           ],
           "expected_quotes": true,
           "expected_tables": false,
@@ -48,23 +47,26 @@
           "possible_noise": [
             "source_social_bar",
             "author_bio",
-            "cta"
+            "cta",
+            "share_links"
           ],
-          "source_specific_notes": "Verifica se ci sono aggiornamenti medici certi nel testo."
+          "source_specific_notes": "Focus sulla dichiarazione di Styles, evita speculazioni esterne."
         },
         "category_hint": "WWE",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Notizia di cronaca fisica su un top talent fresco di RAW, essenziale per il pubblico.",
-        "event_key": "bron_breakker_injury",
+        "editorial_reason": "Notizia fresca e rilevante per la storyline di Raw, coinvolge nomi di primo piano.",
+        "event_key": "raw_styles_heyman",
         "id": "c1",
-        "priority": 10,
+        "priority": 8,
         "priority_label": "medium"
       },
       {
-        "article_type": "storyline_development",
+        "article_type": "soft_news",
         "bob_brief": {
-          "expected_embeds": [],
+          "expected_embeds": [
+            "instagram"
+          ],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
@@ -72,164 +74,48 @@
           ],
           "possible_noise": [
             "source_social_bar",
-            "author_bio"
+            "author_bio",
+            "cta",
+            "share_links"
           ],
-          "source_specific_notes": "Presentare come opinione di Jarrett, non come rumor confermato."
+          "source_specific_notes": "Trattalo come un riempitivo se necessario."
         },
-        "category_hint": "AEW",
-        "decision": "selected",
+        "category_hint": "WWE",
+        "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Speculazioni di mercato su talent di primo piano, rilevante per il crossover tra brand.",
-        "event_key": "chad_gable_future",
+        "editorial_reason": "Curiosità di retroscena non prioritaria, poco valore per il pubblico attuale.",
+        "event_key": "kaitlyn_backstage",
         "id": "c2",
-        "priority": 8,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "duplicate",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": ""
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "c4",
-        "editorial_reason": "Notizia di gossip minore, trattata in modo ridondante da più fonti.",
-        "event_key": "carmella_surgery",
-        "id": "c3",
-        "priority": 1,
-        "priority_label": "low"
-      },
-      {
-        "article_type": "soft_news",
-        "bob_brief": {
-          "expected_embeds": [
-            "youtube"
-          ],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar"
-          ],
-          "source_specific_notes": ""
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Approfondimento di carattere personale/soft news, priorità bassa.",
-        "event_key": "carmella_surgery",
-        "id": "c4",
         "priority": 2,
         "priority_label": "medium"
-      },
-      {
-        "article_type": "data_report",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "cta"
-          ],
-          "source_specific_notes": "Analizza i dati in modo chiaro per l'audience italiana."
-        },
-        "category_hint": "Business",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Dati importanti sulla transizione WWE su Netflix. Seleziono WINC per sintesi migliore.",
-        "event_key": "raw_ratings_netflix",
-        "id": "c5",
-        "priority": 5,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "duplicate",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": ""
-        },
-        "category_hint": "Business",
-        "decision": "skip",
-        "duplicate_of": "c5",
-        "editorial_reason": "Duplicato report rating.",
-        "event_key": "raw_ratings_netflix",
-        "id": "c6",
-        "priority": 0,
-        "priority_label": "skip"
-      },
-      {
-        "article_type": "low_value",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": ""
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Contenuto nostalgia, non centrale per l'attualità.",
-        "event_key": "kaitlyn_backstage",
-        "id": "c7",
-        "priority": 1,
-        "priority_label": "low"
-      },
-      {
-        "article_type": "listicle",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": true,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": ""
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Listicle settimanale, non adatto al nostro formato di hard news.",
-        "event_key": "weekly_winners",
-        "id": "c8",
-        "priority": 0,
-        "priority_label": "skip"
       },
       {
         "article_type": "hard_news",
         "bob_brief": {
           "expected_embeds": [
-            "instagram"
+            "x_tweet"
           ],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
-            "citazioni dirette"
+            "data evento",
+            "piattaforma di trasmissione"
           ],
           "possible_noise": [
-            "source_social_bar"
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
           ],
-          "source_specific_notes": "Evidenzia la data e il canale di trasmissione."
+          "source_specific_notes": "Verifica bene la data citata (28 giugno)."
         },
         "category_hint": "NXT",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Annuncio ufficiale di un evento speciale NXT.",
+        "editorial_reason": "Annuncio ufficiale di una data per un PLE NXT, notizia fondamentale per il calendario.",
         "event_key": "nxt_gab_date",
-        "id": "c9",
-        "priority": 7,
+        "id": "c3",
+        "priority": 9,
         "priority_label": "medium"
       },
       {
@@ -241,20 +127,23 @@
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
-            "citazioni dirette"
+            "conferma che sta bene"
           ],
           "possible_noise": [
-            "source_social_bar"
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
           ],
-          "source_specific_notes": "Nota bene che il talent sta bene per evitare allarmismi."
+          "source_specific_notes": "Sii sintetico, evita toni allarmistici."
         },
         "category_hint": "WWE",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Aggiornamento su incolumità di un talent, importante ma circoscritto.",
+        "editorial_reason": "Notizia di cronaca sul wrestler, corretta categoria in WWE (Bronson Reed è a Raw).",
         "event_key": "bronson_reed_accident",
-        "id": "c10",
-        "priority": 6,
+        "id": "c4",
+        "priority": 5,
         "priority_label": "medium"
       },
       {
@@ -264,17 +153,22 @@
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": ""
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": "Non pubblicare se non hai spazio."
         },
         "category_hint": "WWE",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Opinione di un ex wrestler su match ipotetici, poco valore informativo.",
-        "event_key": "jarrett_stipulation",
-        "id": "c11",
-        "priority": 1,
-        "priority_label": "low"
+        "editorial_reason": "Opinione di un ex wrestler su un possibile scenario futuro; valore editoriale basso.",
+        "event_key": "jarrett_opinion",
+        "id": "c5",
+        "priority": 3,
+        "priority_label": "medium"
       },
       {
         "article_type": "soft_news",
@@ -283,16 +177,47 @@
           "expected_quotes": false,
           "expected_tables": false,
           "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": ""
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": "Solo se necessario per approfondimento tecnico."
         },
         "category_hint": "WWE",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Curiosità di produzione su un match già avvenuto, rilevanza limitata.",
-        "event_key": "gable_kaiser_match",
-        "id": "c12",
-        "priority": 2,
+        "editorial_reason": "Dettaglio tecnico di produzione, di nicchia per il lettore medio.",
+        "event_key": "producer_mask_match",
+        "id": "c6",
+        "priority": 4,
+        "priority_label": "medium"
+      },
+      {
+        "article_type": "business_legal",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [
+            "impatto collaborazione CMLL"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": "Mantieni un tono informativo e oggettivo."
+        },
+        "category_hint": "AEW",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Notizia di natura gestionale/burocratica che impatta sul roster AEW.",
+        "event_key": "aew_visa_issues",
+        "id": "c7",
+        "priority": 6,
         "priority_label": "medium"
       }
     ],
@@ -301,12 +226,12 @@
   "mode": "forced_priority_label_softpool",
   "pending": [
     {
-      "age_hours": 0.8185321030555556,
+      "age_hours": 1.0460877291666666,
       "agent": "Menzo",
-      "ai_editorial_reason": "Contenuto nostalgia, non centrale per l'attualità.",
-      "ai_id": "c7",
-      "ai_priority": 48,
-      "ai_priority_label": "low",
+      "ai_editorial_reason": "Opinione di un ex wrestler su un possibile scenario futuro; valore editoriale basso.",
+      "ai_id": "c5",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
       "article_type": "low_value",
       "assigned_to": "Menzo",
       "bob_brief": {
@@ -314,14 +239,19 @@
         "expected_quotes": true,
         "expected_tables": false,
         "must_preserve": [],
-        "possible_noise": [],
-        "source_specific_notes": ""
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "source_specific_notes": "Non pubblicare se non hai spazio."
       },
       "category_hint": "WWE",
       "decision": "pending",
-      "deterministic_score": 68,
-      "evaluated_at": "2026-06-02T21:30:04.715573+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
+      "deterministic_score": 54,
+      "evaluated_at": "2026-06-02T22:10:08.915826+00:00",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
       "menzo_ai_review": {
         "article_type": "low_value",
         "bob_brief": {
@@ -329,33 +259,38 @@
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": ""
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": "Non pubblicare se non hai spazio."
         },
         "category_hint": "WWE",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Contenuto nostalgia, non centrale per l'attualità.",
-        "event_key": "kaitlyn_backstage",
-        "id": "c7",
-        "priority": 1,
-        "priority_label": "low"
+        "editorial_reason": "Opinione di un ex wrestler su un possibile scenario futuro; valore editoriale basso.",
+        "event_key": "jarrett_opinion",
+        "id": "c5",
+        "priority": 3,
+        "priority_label": "medium"
       },
-      "normalized_url": "https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv",
+      "normalized_url": "https://www.wrestlinginc.com/2186177/wwe-hofer-jeff-jarrett-wants-special-stipulation-brock-lesnar-oba-femi-iii",
       "priority": "soft",
-      "published": "Tue, 02 Jun 2026 20:40:58 +0000",
-      "reason": "ai:Contenuto nostalgia, non centrale per l'attualità.; deterministic:strategic:backstage,recency:fresh_12h",
-      "score": 59,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/kaitlyn-says-wwe-backstage-pressure-was-harder-than-wrestling-on-tv-46.jpg?x37732\" width=\"800\" /></p>Kaitlyn says the hardest part of her WWE run was not wrestling in front of thousands of fans. It was dealing with the pressure backstage. During her interview with TMZ’s Inside the Ring, the former WWE Divas Champion opened up about the mental toll of WWE locker room culture during her time with the company. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv/\" title=\"Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV\">Read more</a>",
-      "title": "Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV",
-      "url": "https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv/"
+      "published": "Tue, 02 Jun 2026 21:07:23 +0000",
+      "reason": "ai:Opinione di un ex wrestler su un possibile scenario futuro; valore editoriale basso.; deterministic:entity:brock lesnar,entity:oba femi,recency:fresh_12h",
+      "score": 62,
+      "source": "wrestlinginc",
+      "summary": "WWE Hall of Famer Jeff Jarrett reveals the stipulation he wants attached to the inevitable third Brock Lesnar-Oba Femi clash.",
+      "title": "WWE HOFer Jeff Jarrett Wants Special Stipulation For Brock Lesnar/Oba Femi III",
+      "url": "https://www.wrestlinginc.com/2186177/wwe-hofer-jeff-jarrett-wants-special-stipulation-brock-lesnar-oba-femi-iii/"
     },
     {
-      "age_hours": 0.5132538352777778,
+      "age_hours": 1.1810879530555556,
       "agent": "Menzo",
-      "ai_editorial_reason": "Curiosità di produzione su un match già avvenuto, rilevanza limitata.",
-      "ai_id": "c12",
+      "ai_editorial_reason": "Dettaglio tecnico di produzione, di nicchia per il lettore medio.",
+      "ai_id": "c6",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "soft_news",
@@ -365,13 +300,18 @@
         "expected_quotes": false,
         "expected_tables": false,
         "must_preserve": [],
-        "possible_noise": [],
-        "source_specific_notes": ""
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "source_specific_notes": "Solo se necessario per approfondimento tecnico."
       },
       "category_hint": "WWE",
       "decision": "pending",
       "deterministic_score": 46,
-      "evaluated_at": "2026-06-02T21:30:04.713808+00:00",
+      "evaluated_at": "2026-06-02T22:10:08.916633+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
         "article_type": "soft_news",
@@ -380,22 +320,27 @@
           "expected_quotes": false,
           "expected_tables": false,
           "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": ""
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": "Solo se necessario per approfondimento tecnico."
         },
         "category_hint": "WWE",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Curiosità di produzione su un match già avvenuto, rilevanza limitata.",
-        "event_key": "gable_kaiser_match",
-        "id": "c12",
-        "priority": 2,
+        "editorial_reason": "Dettaglio tecnico di produzione, di nicchia per il lettore medio.",
+        "event_key": "producer_mask_match",
+        "id": "c6",
+        "priority": 4,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed",
       "priority": "soft",
       "published": "Tue, 02 Jun 2026 20:59:17 +0000",
-      "reason": "ai:Curiosità di produzione su un match già avvenuto, rilevanza limitata.; deterministic:entity:chad gable,recency:fresh_12h",
+      "reason": "ai:Dettaglio tecnico di produzione, di nicchia per il lettore medio.; deterministic:entity:chad gable,recency:fresh_12h",
       "score": 58,
       "source": "ringsidenews",
       "summary": "<p><img alt=\"Producer Behind El Grande Americano Mask vs. Mask Match Revealed\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/producer-behind-el-grande-americano-mask-vs-mask-match-revealed-48.jpg?x37732\" width=\"800\" /></p>Chad Gable and Ludwig Kaiser’s bloody Mask vs. Mask match at AAA Noche de Los Grandes had another WWE name involved behind the scenes According to Mexican journalist Ernesto Ocampo, Pete Dunne was the producer for the match between Ludwig Kaiser’s El Grande Americano and Chad Gable’s Original El Grande Americano. Ocampo noted that Dunne ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed/\" title=\"Producer Behind El Grande Americano Mask vs. Mask Match Revealed\">Read more</a>",
@@ -403,55 +348,69 @@
       "url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed/"
     },
     {
-      "age_hours": 0.37825252416666666,
+      "age_hours": 0.30025425749999995,
       "agent": "Menzo",
-      "ai_editorial_reason": "Opinione di un ex wrestler su match ipotetici, poco valore informativo.",
-      "ai_id": "c11",
-      "ai_priority": 48,
-      "ai_priority_label": "low",
-      "article_type": "low_value",
+      "ai_editorial_reason": "Notizia di natura gestionale/burocratica che impatta sul roster AEW.",
+      "ai_id": "c7",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
+      "article_type": "business_legal",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [],
-        "expected_quotes": true,
+        "expected_quotes": false,
         "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [],
-        "source_specific_notes": ""
+        "must_preserve": [
+          "impatto collaborazione CMLL"
+        ],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
+        ],
+        "source_specific_notes": "Mantieni un tono informativo e oggettivo."
       },
-      "category_hint": "WWE",
+      "category_hint": "AEW",
       "decision": "pending",
-      "deterministic_score": 54,
-      "evaluated_at": "2026-06-02T21:30:04.709089+00:00",
+      "deterministic_score": 38,
+      "evaluated_at": "2026-06-02T22:10:08.915329+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "menzo_ai_review": {
-        "article_type": "low_value",
+        "article_type": "business_legal",
         "bob_brief": {
           "expected_embeds": [],
-          "expected_quotes": true,
+          "expected_quotes": false,
           "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": ""
+          "must_preserve": [
+            "impatto collaborazione CMLL"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": "Mantieni un tono informativo e oggettivo."
         },
-        "category_hint": "WWE",
-        "decision": "skip",
+        "category_hint": "AEW",
+        "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Opinione di un ex wrestler su match ipotetici, poco valore informativo.",
-        "event_key": "jarrett_stipulation",
-        "id": "c11",
-        "priority": 1,
-        "priority_label": "low"
+        "editorial_reason": "Notizia di natura gestionale/burocratica che impatta sul roster AEW.",
+        "event_key": "aew_visa_issues",
+        "id": "c7",
+        "priority": 6,
+        "priority_label": "medium"
       },
-      "normalized_url": "https://www.wrestlinginc.com/2186177/wwe-hofer-jeff-jarrett-wants-special-stipulation-brock-lesnar-oba-femi-iii",
+      "normalized_url": "https://www.wrestlinginc.com/2186205/two-aew-luchadors-still-struggling-visa-issues",
       "priority": "soft",
-      "published": "Tue, 02 Jun 2026 21:07:23 +0000",
-      "reason": "ai:Opinione di un ex wrestler su match ipotetici, poco valore informativo.; deterministic:entity:brock lesnar,entity:oba femi,recency:fresh_12h",
-      "score": 51,
+      "published": "Tue, 02 Jun 2026 21:52:08 +0000",
+      "reason": "ai:Notizia di natura gestionale/burocratica che impatta sul roster AEW.; deterministic:recency:fresh_12h",
+      "score": 53,
       "source": "wrestlinginc",
-      "summary": "WWE Hall of Famer Jeff Jarrett reveals the stipulation he wants attached to the inevitable third Brock Lesnar-Oba Femi clash.",
-      "title": "WWE HOFer Jeff Jarrett Wants Special Stipulation For Brock Lesnar/Oba Femi III",
-      "url": "https://www.wrestlinginc.com/2186177/wwe-hofer-jeff-jarrett-wants-special-stipulation-brock-lesnar-oba-femi-iii/"
+      "summary": "Two AEW luchadors are continuing to have struggles with visa issues, leading to them working with AEW's promotional partner CMLL in Mexico for the time being",
+      "title": "Two AEW Luchadors Still Struggling With Visa Issues",
+      "url": "https://www.wrestlinginc.com/2186205/two-aew-luchadors-still-struggling-visa-issues/"
     }
   ],
   "policy": {
@@ -471,17 +430,17 @@
   },
   "selected": [
     {
-      "age_hours": 1.9254775830555557,
+      "age_hours": 0.6138654363888889,
       "agent": "Menzo",
-      "ai_editorial_reason": "Notizia di cronaca fisica su un top talent fresco di RAW, essenziale per il pubblico.",
+      "ai_editorial_reason": "Notizia fresca e rilevante per la storyline di Raw, coinvolge nomi di primo piano.",
       "ai_id": "c1",
       "ai_priority": 72,
       "ai_priority_label": "medium",
-      "article_type": "hard_news",
+      "article_type": "storyline_development",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [
-          "youtube"
+          "x_tweet"
         ],
         "expected_quotes": true,
         "expected_tables": false,
@@ -491,20 +450,21 @@
         "possible_noise": [
           "source_social_bar",
           "author_bio",
-          "cta"
+          "cta",
+          "share_links"
         ],
-        "source_specific_notes": "Verifica se ci sono aggiornamenti medici certi nel testo."
+        "source_specific_notes": "Focus sulla dichiarazione di Styles, evita speculazioni esterne."
       },
       "category_hint": "WWE",
       "decision": "selected",
-      "deterministic_score": 100,
-      "evaluated_at": "2026-06-02T21:30:04.719300+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
+      "deterministic_score": 70,
+      "evaluated_at": "2026-06-02T22:10:08.915572+00:00",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
       "menzo_ai_review": {
-        "article_type": "hard_news",
+        "article_type": "storyline_development",
         "bob_brief": {
           "expected_embeds": [
-            "youtube"
+            "x_tweet"
           ],
           "expected_quotes": true,
           "expected_tables": false,
@@ -514,40 +474,43 @@
           "possible_noise": [
             "source_social_bar",
             "author_bio",
-            "cta"
+            "cta",
+            "share_links"
           ],
-          "source_specific_notes": "Verifica se ci sono aggiornamenti medici certi nel testo."
+          "source_specific_notes": "Focus sulla dichiarazione di Styles, evita speculazioni esterne."
         },
         "category_hint": "WWE",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Notizia di cronaca fisica su un top talent fresco di RAW, essenziale per il pubblico.",
-        "event_key": "bron_breakker_injury",
+        "editorial_reason": "Notizia fresca e rilevante per la storyline di Raw, coinvolge nomi di primo piano.",
+        "event_key": "raw_styles_heyman",
         "id": "c1",
-        "priority": 10,
+        "priority": 8,
         "priority_label": "medium"
       },
-      "normalized_url": "https://www.ringsidenews.com/bron-breakkers-injury-status-limping-hotel-lobby-following-wwe-raw",
-      "priority": "hard",
-      "published": "Tue, 02 Jun 2026 19:34:33 +0000",
-      "reason": "ai:Notizia di cronaca fisica su un top talent fresco di RAW, essenziale per il pubblico.; deterministic:hard:injury,strategic:raw,entity:seth rollins,recency:fresh_12h",
-      "score": 87,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Bron Breakker&#039;s Injury Status After Limping in Hotel Lobby Following WWE RAW\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/bron-breakkers-injury-status-after-limping-in-hotel-lobby-following-wwe-raw-10.jpg?x37732\" width=\"800\" /></p>Bron Breakker had fans worried after he was seen limping after WWE RAW, but the latest update should calm some of those concerns. According to False Finish, Breakker was banged up after his match with Seth Rollins on the June 1, 2026 episode of Monday Night RAW. However, the issue is not expected to affect ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/bron-breakkers-injury-status-limping-hotel-lobby-following-wwe-raw/\" title=\"Bron Breakker&#8217;s Injury Status After Limping in Hotel Lobby Following WWE RAW\">Read more</a>",
-      "title": "Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW",
-      "url": "https://www.ringsidenews.com/bron-breakkers-injury-status-limping-hotel-lobby-following-wwe-raw/"
+      "normalized_url": "https://www.wrestlinginc.com/2186197/wwe-aj-styles-paul-heyman-vision-curse",
+      "priority": "soft",
+      "published": "Tue, 02 Jun 2026 21:33:19 +0000",
+      "reason": "ai:Notizia fresca e rilevante per la storyline di Raw, coinvolge nomi di primo piano.; deterministic:strategic:raw,entity:paul heyman,recency:fresh_12h",
+      "score": 71,
+      "source": "wrestlinginc",
+      "summary": "WWE Hall of Famer AJ Styles said he blames manager Paul Heyman for the \"curse\" plaguing The Vision on \"WWE Raw.\"",
+      "title": "WWE's AJ Styles Blames Paul Heyman For 'Curse' Placed On The Vision",
+      "url": "https://www.wrestlinginc.com/2186197/wwe-aj-styles-paul-heyman-vision-curse/"
     },
     {
-      "age_hours": 0.48547490944444444,
+      "age_hours": 1.4863659797222222,
       "agent": "Menzo",
-      "ai_editorial_reason": "Speculazioni di mercato su talent di primo piano, rilevante per il crossover tra brand.",
+      "ai_editorial_reason": "Curiosità di retroscena non prioritaria, poco valore per il pubblico attuale.",
       "ai_id": "c2",
       "ai_priority": 72,
       "ai_priority_label": "medium",
-      "article_type": "storyline_development",
+      "article_type": "soft_news",
       "assigned_to": "Menzo",
       "bob_brief": {
-        "expected_embeds": [],
+        "expected_embeds": [
+          "instagram"
+        ],
         "expected_quotes": true,
         "expected_tables": false,
         "must_preserve": [
@@ -555,19 +518,23 @@
         ],
         "possible_noise": [
           "source_social_bar",
-          "author_bio"
+          "author_bio",
+          "cta",
+          "share_links"
         ],
-        "source_specific_notes": "Presentare come opinione di Jarrett, non come rumor confermato."
+        "source_specific_notes": "Trattalo come un riempitivo se necessario."
       },
-      "category_hint": "AEW",
+      "category_hint": "WWE",
       "decision": "selected",
-      "deterministic_score": 94,
-      "evaluated_at": "2026-06-02T21:30:04.709676+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "deterministic_score": 68,
+      "evaluated_at": "2026-06-02T22:10:08.917529+00:00",
+      "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
-        "article_type": "storyline_development",
+        "article_type": "soft_news",
         "bob_brief": {
-          "expected_embeds": [],
+          "expected_embeds": [
+            "instagram"
+          ],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
@@ -575,141 +542,96 @@
           ],
           "possible_noise": [
             "source_social_bar",
-            "author_bio"
+            "author_bio",
+            "cta",
+            "share_links"
           ],
-          "source_specific_notes": "Presentare come opinione di Jarrett, non come rumor confermato."
+          "source_specific_notes": "Trattalo come un riempitivo se necessario."
         },
-        "category_hint": "AEW",
-        "decision": "selected",
+        "category_hint": "WWE",
+        "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Speculazioni di mercato su talent di primo piano, rilevante per il crossover tra brand.",
-        "event_key": "chad_gable_future",
+        "editorial_reason": "Curiosità di retroscena non prioritaria, poco valore per il pubblico attuale.",
+        "event_key": "kaitlyn_backstage",
         "id": "c2",
-        "priority": 8,
+        "priority": 2,
         "priority_label": "medium"
       },
-      "normalized_url": "https://www.wrestlinginc.com/2186167/wwe-hofer-jeff-jarrett-thinks-chad-gable-aew",
-      "priority": "hard",
-      "published": "Tue, 02 Jun 2026 21:00:57 +0000",
-      "reason": "ai:Speculazioni di mercato su talent di primo piano, rilevante per il crossover tra brand.; deterministic:hard:contract,entity:chad gable,recency:fresh_12h",
-      "score": 84,
-      "source": "wrestlinginc",
-      "summary": "WWE Hall of Famer Jeff Jarrett said he thinks Chad Gable, the former Original El Grande Americano, should be prepared to depart WWE when his contract is up.",
-      "title": "WWE HOFer Jeff Jarrett Thinks Chad Gable Should Go To AEW",
-      "url": "https://www.wrestlinginc.com/2186167/wwe-hofer-jeff-jarrett-thinks-chad-gable-aew/"
+      "normalized_url": "https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv",
+      "priority": "soft",
+      "published": "Tue, 02 Jun 2026 20:40:58 +0000",
+      "reason": "ai:Curiosità di retroscena non prioritaria, poco valore per il pubblico attuale.; deterministic:strategic:backstage,recency:fresh_12h",
+      "score": 70,
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/kaitlyn-says-wwe-backstage-pressure-was-harder-than-wrestling-on-tv-46.jpg?x37732\" width=\"800\" /></p>Kaitlyn says the hardest part of her WWE run was not wrestling in front of thousands of fans. It was dealing with the pressure backstage. During her interview with TMZ’s Inside the Ring, the former WWE Divas Champion opened up about the mental toll of WWE locker room culture during her time with the company. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv/\" title=\"Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV\">Read more</a>",
+      "title": "Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV",
+      "url": "https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv/"
     },
     {
-      "age_hours": 1.5263091758333334,
+      "age_hours": 4.83636638,
       "agent": "Menzo",
-      "ai_editorial_reason": "Dati importanti sulla transizione WWE su Netflix. Seleziono WINC per sintesi migliore.",
-      "ai_id": "c5",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "data_report",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": false,
-        "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [
-          "cta"
-        ],
-        "source_specific_notes": "Analizza i dati in modo chiaro per l'audience italiana."
-      },
-      "category_hint": "Business",
-      "decision": "selected",
-      "deterministic_score": 82,
-      "evaluated_at": "2026-06-02T21:30:04.713035+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "data_report",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "cta"
-          ],
-          "source_specific_notes": "Analizza i dati in modo chiaro per l'audience italiana."
-        },
-        "category_hint": "Business",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Dati importanti sulla transizione WWE su Netflix. Seleziono WINC per sintesi migliore.",
-        "event_key": "raw_ratings_netflix",
-        "id": "c5",
-        "priority": 5,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.wrestlinginc.com/2186098/wwe-raw-ratings-viewership-report-may-25-2026",
-      "priority": "hard",
-      "published": "Tue, 02 Jun 2026 19:58:30 +0000",
-      "reason": "ai:Dati importanti sulla transizione WWE su Netflix. Seleziono WINC per sintesi migliore.; deterministic:hard:netflix,strategic:raw,current:netflix_aaa,ratings:generic_penalty,recency:fresh_12h",
-      "score": 78,
-      "source": "wrestlinginc",
-      "summary": "After two weeks of consistent viewership, the May 25 edition of \"WWE Raw\" saw a decrease in those watching the product on Netflix over a seven day period.",
-      "title": "WWE Raw Ratings & Viewership Report: 5/25/2026",
-      "url": "https://www.wrestlinginc.com/2186098/wwe-raw-ratings-viewership-report-may-25-2026/"
-    },
-    {
-      "age_hours": 4.168534405277778,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Annuncio ufficiale di un evento speciale NXT.",
-      "ai_id": "c9",
+      "ai_editorial_reason": "Annuncio ufficiale di una data per un PLE NXT, notizia fondamentale per il calendario.",
+      "ai_id": "c3",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "hard_news",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [
-          "instagram"
+          "x_tweet"
         ],
         "expected_quotes": true,
         "expected_tables": false,
         "must_preserve": [
-          "citazioni dirette"
+          "data evento",
+          "piattaforma di trasmissione"
         ],
         "possible_noise": [
-          "source_social_bar"
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
         ],
-        "source_specific_notes": "Evidenzia la data e il canale di trasmissione."
+        "source_specific_notes": "Verifica bene la data citata (28 giugno)."
       },
       "category_hint": "NXT",
       "decision": "selected",
       "deterministic_score": 66,
-      "evaluated_at": "2026-06-02T21:30:04.723861+00:00",
+      "evaluated_at": "2026-06-02T22:10:08.918969+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
         "article_type": "hard_news",
         "bob_brief": {
           "expected_embeds": [
-            "instagram"
+            "x_tweet"
           ],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
-            "citazioni dirette"
+            "data evento",
+            "piattaforma di trasmissione"
           ],
           "possible_noise": [
-            "source_social_bar"
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
           ],
-          "source_specific_notes": "Evidenzia la data e il canale di trasmissione."
+          "source_specific_notes": "Verifica bene la data citata (28 giugno)."
         },
         "category_hint": "NXT",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Annuncio ufficiale di un evento speciale NXT.",
+        "editorial_reason": "Annuncio ufficiale di una data per un PLE NXT, notizia fondamentale per il calendario.",
         "event_key": "nxt_gab_date",
-        "id": "c9",
-        "priority": 7,
+        "id": "c3",
+        "priority": 9,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.ringsidenews.com/wwe-nxt-great-american-bash-return-date-revealed",
       "priority": "soft",
       "published": "Tue, 02 Jun 2026 17:19:58 +0000",
-      "reason": "ai:Annuncio ufficiale di un evento speciale NXT.; deterministic:hard:return,soft_penalty:social media,recency:fresh_12h",
+      "reason": "ai:Annuncio ufficiale di una data per un PLE NXT, notizia fondamentale per il calendario.; deterministic:hard:return,soft_penalty:social media,recency:fresh_12h",
       "score": 69,
       "source": "ringsidenews",
       "summary": "<p><img alt=\"NXT Great American Bash\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2025/06/NXT Great American Bash.jpg?x37732\" width=\"800\" /></p>WWE NXT is bringing back the Great American Bash, and Shawn Michaels made the announcement himself. Michaels revealed on social media that NXT Great American Bash will take place on Sunday, June 28, with the event airing on The CW Network. The show is set for a special start time of 7 PM ET. The ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-nxt-great-american-bash-return-date-revealed/\" title=\"WWE NXT Great American Bash Return Date Revealed\">Read more</a>",
@@ -717,10 +639,10 @@
       "url": "https://www.ringsidenews.com/wwe-nxt-great-american-bash-return-date-revealed/"
     },
     {
-      "age_hours": 2.4390888888888886,
+      "age_hours": 3.106921723333333,
       "agent": "Menzo",
-      "ai_editorial_reason": "Aggiornamento su incolumità di un talent, importante ma circoscritto.",
-      "ai_id": "c10",
+      "ai_editorial_reason": "Notizia di cronaca sul wrestler, corretta categoria in WWE (Bronson Reed è a Raw).",
+      "ai_id": "c4",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "hard_news",
@@ -732,17 +654,20 @@
         "expected_quotes": true,
         "expected_tables": false,
         "must_preserve": [
-          "citazioni dirette"
+          "conferma che sta bene"
         ],
         "possible_noise": [
-          "source_social_bar"
+          "source_social_bar",
+          "author_bio",
+          "cta",
+          "share_links"
         ],
-        "source_specific_notes": "Nota bene che il talent sta bene per evitare allarmismi."
+        "source_specific_notes": "Sii sintetico, evita toni allarmistici."
       },
       "category_hint": "WWE",
       "decision": "selected",
       "deterministic_score": 62,
-      "evaluated_at": "2026-06-02T21:30:04.720001+00:00",
+      "evaluated_at": "2026-06-02T22:10:08.918206+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
         "article_type": "hard_news",
@@ -753,26 +678,29 @@
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
-            "citazioni dirette"
+            "conferma che sta bene"
           ],
           "possible_noise": [
-            "source_social_bar"
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
           ],
-          "source_specific_notes": "Nota bene che il talent sta bene per evitare allarmismi."
+          "source_specific_notes": "Sii sintetico, evita toni allarmistici."
         },
         "category_hint": "WWE",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Aggiornamento su incolumità di un talent, importante ma circoscritto.",
+        "editorial_reason": "Notizia di cronaca sul wrestler, corretta categoria in WWE (Bronson Reed è a Raw).",
         "event_key": "bronson_reed_accident",
-        "id": "c10",
-        "priority": 6,
+        "id": "c4",
+        "priority": 5,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.ringsidenews.com/bronson-reed-involved-car-accident",
       "priority": "soft",
       "published": "Tue, 02 Jun 2026 19:03:44 +0000",
-      "reason": "ai:Aggiornamento su incolumità di un talent, importante ma circoscritto.; deterministic:strategic:raw,recency:fresh_12h",
+      "reason": "ai:Notizia di cronaca sul wrestler, corretta categoria in WWE (Bronson Reed è a Raw).; deterministic:strategic:raw,recency:fresh_12h",
       "score": 66,
       "source": "ringsidenews",
       "summary": "<p><img alt=\"Bronson Reed Involved in a Car Accident\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/bronson-reed-involved-in-a-car-accident-50.jpg?x37732\" width=\"800\" /></p>Bronson Reed had a scary moment away from WWE television, but thankfully, everyone appears to be okay. Bronson Reed took to his Instagram Story and revealed that he was involved in a rear-end collision. The RAW star said no one was hurt, but he used the moment to warn people about distracted driving. “Just had ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/bronson-reed-involved-car-accident/\" title=\"Bronson Reed Involved in a Car Accident\">Read more</a>",
@@ -780,625 +708,6 @@
       "url": "https://www.ringsidenews.com/bronson-reed-involved-car-accident/"
     }
   ],
-  "skipped": [
-    {
-      "age_hours": 2.8465859344444446,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Listicle settimanale, non adatto al nostro formato di hard news.",
-      "ai_id": "c8",
-      "ai_priority": 0,
-      "ai_priority_label": "skip",
-      "article_type": "listicle",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": false,
-        "expected_tables": true,
-        "must_preserve": [],
-        "possible_noise": [],
-        "source_specific_notes": ""
-      },
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 66,
-      "evaluated_at": "2026-06-02T21:30:04.709366+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "listicle",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": true,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": ""
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Listicle settimanale, non adatto al nostro formato di hard news.",
-        "event_key": "weekly_winners",
-        "id": "c8",
-        "priority": 0,
-        "priority_label": "skip"
-      },
-      "normalized_url": "https://www.wrestlinginc.com/2185999/biggest-winners-losers-week-june-2-2026",
-      "priority": "skip",
-      "published": "Tue, 02 Jun 2026 18:39:17 +0000",
-      "reason": "ai:Listicle settimanale, non adatto al nostro formato di hard news.; deterministic:strategic:clash in italy,recency:fresh_12h",
-      "score": 36,
-      "source": "wrestlinginc",
-      "summary": "After seven days that saw WWE Clash in Italy, AAA Noche de los Grandes, and much more, here are your WINC winners and losers for the week of 6/2/26!",
-      "title": "Biggest Winners And Losers Of The Week — 6/2/2026",
-      "url": "https://www.wrestlinginc.com/2185999/biggest-winners-losers-week-june-2-2026/"
-    },
-    {
-      "age_hours": 411.66630831805554,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "ROH",
-      "decision": "skip",
-      "deterministic_score": 33,
-      "evaluated_at": "2026-06-02T21:30:04.709947+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2174516/roh-supercard-of-honor-athena-survival-of-the-fittest",
-      "priority": "skip",
-      "published": "Sat, 16 May 2026 17:50:06 +0000",
-      "reason": "hard:championship,recency:old_penalty",
-      "score": 33,
-      "source": "wrestlinginc",
-      "summary": "Athena successfully retained the ROH Women's World Championship and became the company's first-ever Women's Survival of the Fittest victor at Supercard of Honor.",
-      "title": "Athena Wins First-Ever Women's ROH Survival Of The Fittest Match, Extends Title Reign",
-      "url": "https://www.wrestlinginc.com/2174516/roh-supercard-of-honor-athena-survival-of-the-fittest/"
-    },
-    {
-      "age_hours": 412.0013083836111,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 0,
-      "evaluated_at": "2026-06-02T21:30:04.710183+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2171275/eric-bischoff-recalls-paul-heyman-love-released-wwe-star",
-      "priority": "skip",
-      "published": "Sat, 16 May 2026 17:30:00 +0000",
-      "reason": "entity:paul heyman,soft_penalty:recalls,recency:old_penalty",
-      "score": 0,
-      "source": "wrestlinginc",
-      "summary": "Eric Bischoff recalled one recently-released WWE star who Paul Heyman was high on back in 2019 when Bischoff crossed paths with him.",
-      "title": "Eric Bischoff Recalls Paul Heyman's Love For Released WWE Star",
-      "url": "https://www.wrestlinginc.com/2171275/eric-bischoff-recalls-paul-heyman-love-released-wwe-star/"
-    },
-    {
-      "age_hours": 412.50130844999995,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 0,
-      "evaluated_at": "2026-06-02T21:30:04.710421+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2171250/matt-hardy-kofimania-wwe-new-day",
-      "priority": "skip",
-      "published": "Sat, 16 May 2026 17:00:00 +0000",
-      "reason": "soft_penalty:reflects,recency:old_penalty",
-      "score": 0,
-      "source": "wrestlinginc",
-      "summary": "Matt hardy reflects on Kofi Kingston becoming WWE Champion at WrestleMania 35 and commented on the New Day's importance to the younger generation of fans.",
-      "title": "Matt Hardy Looks Back On KofiMania In Wake Of New Day's WWE Release",
-      "url": "https://www.wrestlinginc.com/2171250/matt-hardy-kofimania-wwe-new-day/"
-    },
-    {
-      "age_hours": 412.98658630222224,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "AEW",
-      "decision": "skip",
-      "deterministic_score": 0,
-      "evaluated_at": "2026-06-02T21:30:04.710689+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2174471/aew-swerve-strickland-roh-supercard-of-honor-bandido-world-title",
-      "priority": "skip",
-      "published": "Sat, 16 May 2026 16:30:53 +0000",
-      "reason": "recency:old_penalty",
-      "score": 0,
-      "source": "wrestlinginc",
-      "summary": "AEW's Swerve Strickland gave several warning shots towards ROH World Champion Bandido ahead of their upcoming first round match in the Owen Hart Cup Tournament.",
-      "title": "AEW's Swerve Strickland Attacks Bandido After ROH Supercard Of Honor World Title Match",
-      "url": "https://www.wrestlinginc.com/2174471/aew-swerve-strickland-roh-supercard-of-honor-bandido-world-title/"
-    },
-    {
-      "age_hours": 413.0013086002778,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 5,
-      "evaluated_at": "2026-06-02T21:30:04.710963+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2171248/wwe-royal-rumble-2026-kit-wilson-emotional-struggle-left-out",
-      "priority": "skip",
-      "published": "Sat, 16 May 2026 16:30:00 +0000",
-      "reason": "entity:cody rhodes,recency:old_penalty",
-      "score": 5,
-      "source": "wrestlinginc",
-      "summary": "WWE's Kit Wilson struggled with his emotions after being left off this year's Royal Rumble card, but some advice from Cody Rhodes and AJ Styles helped.",
-      "title": "Kit Wilson Details Emotional Struggle After Being Left Out Of 2026 WWE Royal Rumble",
-      "url": "https://www.wrestlinginc.com/2171248/wwe-royal-rumble-2026-kit-wilson-emotional-struggle-left-out/"
-    },
-    {
-      "age_hours": 413.5013086605556,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 5,
-      "evaluated_at": "2026-06-02T21:30:04.711180+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2171076/wwe-jacob-fatu-roman-reigns-uncle",
-      "priority": "skip",
-      "published": "Sat, 16 May 2026 16:00:00 +0000",
-      "reason": "entity:roman reigns,recency:old_penalty",
-      "score": 5,
-      "source": "wrestlinginc",
-      "summary": "Although WWE's Jacob Fatu refers to Roman Reigns as his cousin, they actually have a different relationship within the Anoa'i family.",
-      "title": "WWE's Jacob Fatu Clarifies Familial Relationship With Roman Reigns",
-      "url": "https://www.wrestlinginc.com/2171076/wwe-jacob-fatu-roman-reigns-uncle/"
-    },
-    {
-      "age_hours": 1.0579753880555556,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 24,
-      "evaluated_at": "2026-06-02T21:30:04.711398+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2186129/wwe-cco-triple-h-pays-tribute-late-crew-member",
-      "priority": "skip",
-      "published": "Tue, 02 Jun 2026 20:26:36 +0000",
-      "reason": "soft_penalty:social media,recency:fresh_12h",
-      "score": 24,
-      "source": "wrestlinginc",
-      "summary": "WWE COO Paul \"Triple H\" Levesque paid tribute to a late crew member integral to international tours on social media on Tuesday.",
-      "title": "WWE CCO Triple H Pays Tribute To Late Crew Member",
-      "url": "https://www.wrestlinginc.com/2186129/wwe-cco-triple-h-pays-tribute-late-crew-member/"
-    },
-    {
-      "age_hours": 414.0013088,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 0,
-      "evaluated_at": "2026-06-02T21:30:04.711682+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2170973/wwe-aj-styles-harder-improvise-modern-era",
-      "priority": "skip",
-      "published": "Sat, 16 May 2026 15:30:00 +0000",
-      "reason": "soft_penalty:explains why,recency:old_penalty",
-      "score": 0,
-      "source": "wrestlinginc",
-      "summary": "AJ Styles claims that it's more difficult to choreograph a match in today's wrestling compared to previous generations.",
-      "title": "Former WWE Star AJ Styles Explains Why It's Harder To Improvise A Match In Modern Era",
-      "url": "https://www.wrestlinginc.com/2170973/wwe-aj-styles-harder-improvise-modern-era/"
-    },
-    {
-      "age_hours": 414.5013088688889,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "AEW",
-      "decision": "skip",
-      "deterministic_score": 0,
-      "evaluated_at": "2026-06-02T21:30:04.711929+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2170949/aew-jeff-jarrett-orange-cassidy-combines-in-ring-character-work-better",
-      "priority": "skip",
-      "published": "Sat, 16 May 2026 15:00:00 +0000",
-      "reason": "recency:old_penalty",
-      "score": 0,
-      "source": "wrestlinginc",
-      "summary": "AEW's Jeff Jarrett believes one of the company's wrestlers is better than anyone else today at bringing together character and in-ring work.",
-      "title": "Jeff Jarrett Says AEW Star Combines In-Ring & Character Work Better Than Anyone Else",
-      "url": "https://www.wrestlinginc.com/2170949/aew-jeff-jarrett-orange-cassidy-combines-in-ring-character-work-better/"
-    },
-    {
-      "age_hours": 415.0013089319445,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 0,
-      "evaluated_at": "2026-06-02T21:30:04.712157+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2170762/wwe-wrestlemania-42-jacob-fatu-drew-mcintyre-bloodline",
-      "priority": "skip",
-      "published": "Sat, 16 May 2026 14:30:00 +0000",
-      "reason": "soft_penalty:reflects,recency:old_penalty",
-      "score": 0,
-      "source": "wrestlinginc",
-      "summary": "Jacob Fatu claims that he understands Drew McIntyre's hate for the Bloodline and reflects on his rivalry with him this year.",
-      "title": "Jacob Fatu Talks WWE WrestleMania Feud, Drew McIntyre's Relationship With Bloodline",
-      "url": "https://www.wrestlinginc.com/2170762/wwe-wrestlemania-42-jacob-fatu-drew-mcintyre-bloodline/"
-    },
-    {
-      "age_hours": 416.00130899777776,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 33,
-      "evaluated_at": "2026-06-02T21:30:04.712393+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2170628/wwe-braun-strowman-wyatt-family-main-roster-debut",
-      "priority": "skip",
-      "published": "Sat, 16 May 2026 13:30:00 +0000",
-      "reason": "hard:debut,strategic:main roster,soft_penalty:reflects,recency:old_penalty",
-      "score": 33,
-      "source": "wrestlinginc",
-      "summary": "Former WWE star Braun Strowman has recalled his debut in the promotion and how terrified he was before stepping into the ring.",
-      "title": "Braun Strowman Reflects On WWE Main Roster Debut Alongside The Wyatt Family",
-      "url": "https://www.wrestlinginc.com/2170628/wwe-braun-strowman-wyatt-family-main-roster-debut/"
-    },
-    {
-      "age_hours": 416.50130906833334,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 0,
-      "evaluated_at": "2026-06-02T21:30:04.712647+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2170585/wwe-hofer-eric-bischoff-lambasts-3-hour-weekly-shows",
-      "priority": "skip",
-      "published": "Sat, 16 May 2026 13:00:00 +0000",
-      "reason": "recency:old_penalty",
-      "score": 0,
-      "source": "wrestlinginc",
-      "summary": "Former WWE and WCW executive Eric Bischoff has criticized promotions for having three-hour shows, explaining the difficulty of programming for three hours.",
-      "title": "WWE HOFer Eric Bischoff Lambasts 3 Hour Weekly Shows",
-      "url": "https://www.wrestlinginc.com/2170585/wwe-hofer-eric-bischoff-lambasts-3-hour-weekly-shows/"
-    },
-    {
-      "age_hours": 0.7985318547222222,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 38,
-      "evaluated_at": "2026-06-02T21:30:04.714678+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/kaitlyn-says-wwe-told-her-lose-weight-right-hiring-her",
-      "priority": "skip",
-      "published": "Tue, 02 Jun 2026 20:42:10 +0000",
-      "reason": "recency:fresh_12h",
-      "score": 38,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Kaitlyn Says WWE Told Her To Lose Weight Right After Hiring Her\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/kaitlyn-says-wwe-told-her-to-lose-weight-right-after-hiring-her-30.jpg?x37732\" width=\"800\" /></p>Kaitlyn is looking back at one of the roughest parts of her WWE run, and she says the body pressure hit her almost immediately. During her interview with TMZ’s Inside the Ring, the former WWE Divas Champion was asked about the pressure women faced during the Divas era, especially since she had a different look ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/kaitlyn-says-wwe-told-her-lose-weight-right-hiring-her/\" title=\"Kaitlyn Says WWE Told Her To Lose Weight Right After Hiring Her\">Read more</a>",
-      "title": "Kaitlyn Says WWE Told Her To Lose Weight Right After Hiring Her",
-      "url": "https://www.ringsidenews.com/kaitlyn-says-wwe-told-her-lose-weight-right-hiring-her/"
-    },
-    {
-      "age_hours": 1.1418656419444444,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "World",
-      "decision": "skip",
-      "deterministic_score": 24,
-      "evaluated_at": "2026-06-02T21:30:04.716313+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/ric-flair-calls-out-haters-undermining-his-contributions-wrestling",
-      "priority": "skip",
-      "published": "Tue, 02 Jun 2026 20:21:34 +0000",
-      "reason": "soft_penalty:social media,recency:fresh_12h",
-      "score": 24,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Ric Flair Calls Out Haters for Undermining His Contributions to Wrestling\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/ric-flair-calls-out-haters-for-undermining-his-contributions-to-wrestling-36.jpg?x37732\" width=\"800\" /></p>Ric Flair is done letting people downplay what he gave to professional wrestling, as he just called out his haters and made it clear he will not be denied. Flair took to Twitter and called out critics who have been taking shots at him after his recent social media drama involving David Flair, health concerns, ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/ric-flair-calls-out-haters-undermining-his-contributions-wrestling/\" title=\"Ric Flair Calls Out Haters for Undermining His Contributions to Wrestling\">Read more</a>",
-      "title": "Ric Flair Calls Out Haters for Undermining His Contributions to Wrestling",
-      "url": "https://www.ringsidenews.com/ric-flair-calls-out-haters-undermining-his-contributions-wrestling/"
-    },
-    {
-      "age_hours": 1.281310358888889,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 38,
-      "evaluated_at": "2026-06-02T21:30:04.717294+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/former-wwe-president-says-vince-mcmahon-feared-saudi-deal-could-companys-biggest-risk",
-      "priority": "skip",
-      "published": "Tue, 02 Jun 2026 20:13:12 +0000",
-      "reason": "recency:fresh_12h",
-      "score": 38,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Former WWE President Says Vince McMahon Feared Saudi Deal Could Be Company’s Biggest Risk\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/former-wwe-president-says-vince-mcmahon-feared-saudi-deal-could-be-companys-biggest-risk-32.jpg?x37732\" width=\"800\" /></p>WWE’s Saudi Arabia deal brought in massive money, but a former company president says there was serious concern behind the scenes after the disappearance of journalist Jamal Khashoggi. In 2018, WWE announced a ten-year deal with Saudi Arabia to run major events in the country. The partnership kicked off with the Greatest Royal Rumble in ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/former-wwe-president-says-vince-mcmahon-feared-saudi-deal-could-companys-biggest-risk/\" title=\"Former WWE President Says Vince McMahon Feared Saudi Deal Could Be Company’s Biggest Risk\">Read more</a>",
-      "title": "Former WWE President Says Vince McMahon Feared Saudi Deal Could Be Company’s Biggest Risk",
-      "url": "https://www.ringsidenews.com/former-wwe-president-says-vince-mcmahon-feared-saudi-deal-could-companys-biggest-risk/"
-    },
-    {
-      "age_hours": 1.8699217438888889,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Duplicato report rating.",
-      "ai_id": "c6",
-      "ai_priority": 0,
-      "ai_priority_label": "skip",
-      "article_type": "duplicate",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": false,
-        "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [],
-        "source_specific_notes": ""
-      },
-      "category_hint": "Business",
-      "decision": "skip",
-      "deterministic_score": 82,
-      "duplicate_of": "c5",
-      "evaluated_at": "2026-06-02T21:30:04.718279+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "duplicate",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": ""
-        },
-        "category_hint": "Business",
-        "decision": "skip",
-        "duplicate_of": "c5",
-        "editorial_reason": "Duplicato report rating.",
-        "event_key": "raw_ratings_netflix",
-        "id": "c6",
-        "priority": 0,
-        "priority_label": "skip"
-      },
-      "normalized_url": "https://www.ringsidenews.com/wwe-raw-ranks-7-globally-netflix-may-25-2026",
-      "priority": "skip",
-      "published": "Tue, 02 Jun 2026 19:37:53 +0000",
-      "reason": "ai_duplicate_event:raw ratings netflix; ai_duplicate_of:c5; hard:netflix,strategic:raw,current:netflix_aaa,ratings:generic_penalty,recency:fresh_12h",
-      "score": 45,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Why WWE RAW’s Netflix Viewership Numbers Don’t Always Add Up\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2025/02/why-wwe-raws-netflix-viewership-numbers-dont-always-add-up-17.jpg?x37732\" width=\"800\" /></p>WWE Raw viewership and key demo numbers are in for the May 25, 2026 episode of WWE Raw, as the numbers held fairly steady week over week. According to Tudum, WWE Raw ranked #7 globally and #5 in the United States for the week of May 25, 2026 with 2,500,000 global views, unchanged — from ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-raw-ranks-7-globally-netflix-may-25-2026/\" title=\"WWE Raw Ranks #7 Globally on Netflix for May 25, 2026\">Read more</a>",
-      "title": "WWE Raw Ranks #7 Globally on Netflix for May 25, 2026",
-      "url": "https://www.ringsidenews.com/wwe-raw-ranks-7-globally-netflix-may-25-2026/"
-    },
-    {
-      "age_hours": 3.3260335519444446,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "AEW",
-      "decision": "skip",
-      "deterministic_score": 38,
-      "evaluated_at": "2026-06-02T21:30:04.720788+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/aew-launches-rebel-heart-merch-line-support-rebel-terminal-als-diagnosis",
-      "priority": "skip",
-      "published": "Tue, 02 Jun 2026 18:10:31 +0000",
-      "reason": "recency:fresh_12h",
-      "score": 38,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Rebel Says She “Woke Up and Couldn’t Move” During Emotional Rehab Update\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/rebel-says-she-woke-up-and-couldnt-move-during-emotional-rehab-update-05.jpg?x37732\" width=\"800\" /></p>AEW is stepping up for Rebel in a big way after her heartbreaking ALS diagnosis. On Tuesday, June 2, 2026, AEW announced the launch of the Rebel Heart merchandise line in honor of the AEW talent Rebel. The new line includes a #RebelHeart tee and bracelet, with all profits going toward organizations that support people ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aew-launches-rebel-heart-merch-line-support-rebel-terminal-als-diagnosis/\" title=\"AEW Launches Rebel Heart Merch Line To Support Rebel After Terminal ALS Diagnosis\">Read more</a>",
-      "title": "AEW Launches Rebel Heart Merch Line To Support Rebel After Terminal ALS Diagnosis",
-      "url": "https://www.ringsidenews.com/aew-launches-rebel-heart-merch-line-support-rebel-terminal-als-diagnosis/"
-    },
-    {
-      "age_hours": 3.4135337583333336,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "AEW",
-      "decision": "skip",
-      "deterministic_score": 35,
-      "evaluated_at": "2026-06-02T21:30:04.721532+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/mick-foley-addresses-possibility-wrestling-one-last-match-aew",
-      "priority": "skip",
-      "published": "Tue, 02 Jun 2026 18:05:16 +0000",
-      "reason": "entity:mick foley,soft_penalty:addresses,recency:fresh_12h",
-      "score": 35,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Mick Foley Addresses Possibility of Wrestling One Last Match in AEW\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mick-foley-addresses-possibility-of-wrestling-one-last-match-in-aew-39.jpg?x37732\" width=\"800\" /></p>Mick Foley may not be rushing back into the ring, but he isn’t completely shutting the door either, especially now that he&#8217;s in AEW. While speaking to Ariel Helwani, Foley was asked whether he wants a final match in AEW. The Hardcore Legend admitted the idea has crossed his mind, especially with cinematic matches giving ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mick-foley-addresses-possibility-wrestling-one-last-match-aew/\" title=\"Mick Foley Addresses Possibility of Wrestling One Last Match in AEW\">Read more</a>",
-      "title": "Mick Foley Addresses Possibility of Wrestling One Last Match in AEW",
-      "url": "https://www.ringsidenews.com/mick-foley-addresses-possibility-wrestling-one-last-match-aew/"
-    },
-    {
-      "age_hours": 3.6429783922222225,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "AEW",
-      "decision": "skip",
-      "deterministic_score": 43,
-      "evaluated_at": "2026-06-02T21:30:04.722213+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/mick-foley-reveals-how-his-aew-deal-came-together",
-      "priority": "skip",
-      "published": "Tue, 02 Jun 2026 17:51:30 +0000",
-      "reason": "entity:mick foley,recency:fresh_12h",
-      "score": 43,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Mick Foley Reveals How His AEW Deal Came Together\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mick-foley-reveals-how-his-aew-deal-came-together-29.jpg?x37732\" width=\"800\" /></p>Mick Foley’s AEW deal didn’t come out of nowhere, and now he’s explaining how it all came together. While speaking to Ariel Helwani, Foley revealed that he has known Tony Khan for around 15 years. Even before joining AEW, Foley said he would occasionally message Khan about the product, including one idea involving Thunder Rosa. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mick-foley-reveals-how-his-aew-deal-came-together/\" title=\"Mick Foley Reveals How His AEW Deal Came Together\">Read more</a>",
-      "title": "Mick Foley Reveals How His AEW Deal Came Together",
-      "url": "https://www.ringsidenews.com/mick-foley-reveals-how-his-aew-deal-came-together/"
-    },
-    {
-      "age_hours": 3.8638119794444448,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 43,
-      "evaluated_at": "2026-06-02T21:30:04.723128+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/mick-foley-says-he-hasnt-closed-door-wwe-forever-exit",
-      "priority": "skip",
-      "published": "Tue, 02 Jun 2026 17:38:15 +0000",
-      "reason": "entity:mick foley,recency:fresh_12h",
-      "score": 43,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Mick Foley Says He Hasn’t Closed the Door on WWE Forever After Exit\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mick-foley-says-he-hasnt-closed-the-door-on-wwe-forever-after-exit-03.jpg?x37732\" width=\"800\" /></p>Mick Foley is clearing the air about his WWE exit, and he says the door is not locked forever whatsoever. While speaking to Ariel Helwani, Foley addressed his decision to step away from WWE over the company’s connection to Donald Trump. Foley said one WWE response was respectful and that he later heard from someone ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mick-foley-says-he-hasnt-closed-door-wwe-forever-exit/\" title=\"Mick Foley Says He Hasn’t Closed the Door on WWE Forever After Exit\">Read more</a>",
-      "title": "Mick Foley Says He Hasn’t Closed the Door on WWE Forever After Exit",
-      "url": "https://www.ringsidenews.com/mick-foley-says-he-hasnt-closed-door-wwe-forever-exit/"
-    },
-    {
-      "age_hours": 4.261034606111111,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Notizia di gossip minore, trattata in modo ridondante da più fonti.",
-      "ai_id": "c3",
-      "ai_priority": 48,
-      "ai_priority_label": "low",
-      "article_type": "duplicate",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": false,
-        "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [],
-        "source_specific_notes": ""
-      },
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 90,
-      "duplicate_of": "c4",
-      "evaluated_at": "2026-06-02T21:30:04.724583+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "duplicate",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": ""
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "c4",
-        "editorial_reason": "Notizia di gossip minore, trattata in modo ridondante da più fonti.",
-        "event_key": "carmella_surgery",
-        "id": "c3",
-        "priority": 1,
-        "priority_label": "low"
-      },
-      "normalized_url": "https://www.ringsidenews.com/carmella-fires-back-fans-claiming-her-eye-surgery-made-no-difference",
-      "priority": "skip",
-      "published": "Tue, 02 Jun 2026 17:14:25 +0000",
-      "reason": "ai_duplicate_of:c4; hard:surgery,recency:fresh_12h",
-      "score": 71,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Carmella Fires Back at Fans Claiming Her Eye Surgery Made No Difference\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/carmella-fires-back-at-fans-claiming-her-eye-surgery-made-no-difference-14.jpg?x37732\" width=\"800\" /></p>Carmella is done listening to people criticize her eye surgery, and she just made it clear she couldn&#8217;t care less what anyone has to say. While speaking on her YouTube channel, the former WWE star addressed the comments she has received after opening up about her blepharoplasty recovery. Carmella said people have been telling her ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/carmella-fires-back-fans-claiming-her-eye-surgery-made-no-difference/\" title=\"Carmella Fires Back at Fans Claiming Her Eye Surgery Made No Difference\">Read more</a>",
-      "title": "Carmella Fires Back at Fans Claiming Her Eye Surgery Made No Difference",
-      "url": "https://www.ringsidenews.com/carmella-fires-back-fans-claiming-her-eye-surgery-made-no-difference/"
-    },
-    {
-      "age_hours": 4.546034809166667,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Approfondimento di carattere personale/soft news, priorità bassa.",
-      "ai_id": "c4",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "duplicate",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [
-          "youtube"
-        ],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [
-          "citazioni dirette"
-        ],
-        "possible_noise": [
-          "source_social_bar"
-        ],
-        "source_specific_notes": ""
-      },
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 84,
-      "duplicate_of": "c3",
-      "evaluated_at": "2026-06-02T21:30:04.725315+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "soft_news",
-        "bob_brief": {
-          "expected_embeds": [
-            "youtube"
-          ],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar"
-          ],
-          "source_specific_notes": ""
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Approfondimento di carattere personale/soft news, priorità bassa.",
-        "event_key": "carmella_surgery",
-        "id": "c4",
-        "priority": 2,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.ringsidenews.com/carmella-explains-why-she-recently-underwent-eye-surgery-procedure",
-      "priority": "skip",
-      "published": "Tue, 02 Jun 2026 16:57:19 +0000",
-      "reason": "ai_duplicate_event:carmella surgery; ai:Approfondimento di carattere personale/soft news, priorità bassa.; deterministic:hard:surgery,strategic:smackdown,soft_penalty:explains why,recency:fresh_12h",
-      "score": 79,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Carmella Explains Why She Recently Underwent Eye Surgery Procedure\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/carmella-explains-why-she-recently-underwent-eye-surgery-procedure-19.jpg?x37732\" width=\"800\" /></p>Carmella is opening up about why she decided to get blepharoplasty, and she’s making it clear this was her choice alone. While speaking on her YouTube channel, the former SmackDown Women’s Champion addressed criticism from people who believe she should “age gracefully” or avoid cosmetic procedures. Carmella said she understands that view, but this was ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/carmella-explains-why-she-recently-underwent-eye-surgery-procedure/\" title=\"Carmella Explains Why She Recently Underwent Eye Surgery Procedure\">Read more</a>",
-      "title": "Carmella Explains Why She Recently Underwent Eye Surgery Procedure",
-      "url": "https://www.ringsidenews.com/carmella-explains-why-she-recently-underwent-eye-surgery-procedure/"
-    }
-  ],
+  "skipped": [],
   "version": "v93_15_forced_priority_label_softpool"
 }
