@@ -19,13 +19,17 @@ ARTIFACT_DECISIONS_FILE = ARTIFACT_DIR / "menzo_decisions.json"
 SOFTPOOL_FILE = NEWSROOM_STATE_DIR / "menzo_softpool.json"
 HARD_SKIP_FILE = NEWSROOM_STATE_DIR / "menzo_hard_skips.json"
 
-MENZO_VERSION = "v93_15_forced_priority_label_softpool"
+MENZO_VERSION = "v93_20_selective_softpool"
 VALID_LABELS = {"high", "medium", "low", "skip"}
 LABEL_SCORE = {"high": 92, "medium": 72, "low": 48, "skip": 0}
 SOFTPOOL_TTL_HOURS = int(os.getenv("V93_MENZO_SOFTPOOL_TTL_HOURS", "36"))
+SOFTNEWS_TTL_HOURS = int(os.getenv("V93_MENZO_SOFTNEWS_TTL_HOURS", "24"))
 HARD_SKIP_TTL_HOURS = int(os.getenv("V93_MENZO_HARD_SKIP_TTL_HOURS", "168"))
 MIN_SELECTED_SCORE = int(os.getenv("V93_MENZO_MIN_SELECTED_SCORE", "65"))
+MIN_SOFTPOOL_SCORE = int(os.getenv("V93_MENZO_MIN_SOFTPOOL_SCORE", "55"))
 MAX_DATA_REPORTS = int(os.getenv("V93_MENZO_MAX_DATA_REPORTS_PER_RUN", "1"))
+
+EXCLUDED_SOFTPOOL_TYPES = {"low_value", "duplicate", "external_sports_reaction"}
 
 
 def utc_now() -> str:
@@ -95,6 +99,12 @@ def sort_item(item: dict[str, Any]) -> tuple[int, float, str]:
     return score, -age, str(item.get("published") or "")
 
 
+def item_ttl_hours(item: dict[str, Any]) -> int:
+    if str(item.get("article_type")) == "soft_news":
+        return SOFTNEWS_TTL_HOURS
+    return SOFTPOOL_TTL_HOURS
+
+
 def load_softpool() -> list[dict[str, Any]]:
     raw = load_json(SOFTPOOL_FILE, {"items": []})
     items = raw.get("items", []) if isinstance(raw, dict) else []
@@ -104,7 +114,8 @@ def load_softpool() -> list[dict[str, Any]]:
         if not isinstance(item, dict):
             continue
         added = parse_dt(item.get("softpool_added_at")) or now
-        if now - added <= timedelta(hours=SOFTPOOL_TTL_HOURS):
+        ttl = int(item.get("softpool_ttl_hours") or item_ttl_hours(item))
+        if now - added <= timedelta(hours=ttl) and is_softpool_eligible(item):
             clone = dict(item)
             clone["from_softpool"] = True
             active.append(clone)
@@ -151,6 +162,21 @@ def normalize_ai_fields(result: dict[str, Any]) -> None:
                 item.setdefault("ai_priority_label", "high" if score >= 75 else ("medium" if score >= 60 else ("low" if score >= 45 else "skip")))
 
 
+def is_softpool_eligible(item: dict[str, Any]) -> bool:
+    label = str(item.get("ai_priority_label") or "").lower()
+    article_type = str(item.get("article_type") or "")
+    score = int(item.get("score", 0) or 0)
+    if article_type in EXCLUDED_SOFTPOOL_TYPES:
+        return False
+    if label != "medium":
+        return False
+    if score < MIN_SOFTPOOL_SCORE:
+        return False
+    if article_type == "data_report" and score < 60:
+        return False
+    return True
+
+
 def rebuild_decisions(result: dict[str, Any]) -> None:
     all_items: list[dict[str, Any]] = []
     for section in ["selected", "pending", "skipped"]:
@@ -169,13 +195,14 @@ def rebuild_decisions(result: dict[str, Any]) -> None:
             item["decision"] = "selected"
             item["priority"] = "hard" if score >= 75 else "soft"
             selected.append(item)
-        elif label == "medium" or 50 <= score < MIN_SELECTED_SCORE:
+        elif is_softpool_eligible(item):
             item["decision"] = "pending"
             item["priority"] = "soft"
             pending.append(item)
         else:
             item["decision"] = "skip"
             item["priority"] = "skip"
+            item["reason"] = f"softpool_ineligible:{item.get('reason', '')}"
             skipped.append(item)
     selected = sorted(selected, key=sort_item, reverse=True)
     pending = sorted(pending, key=sort_item, reverse=True)
@@ -187,10 +214,15 @@ def rebuild_decisions(result: dict[str, Any]) -> None:
             data_count += 1
             if data_count > MAX_DATA_REPORTS:
                 item = dict(item)
-                item["decision"] = "pending"
-                item["priority"] = "soft"
-                item["reason"] = f"data_report_cap:{MAX_DATA_REPORTS}; {item.get('reason', '')}"
-                moved.append(item)
+                if is_softpool_eligible(item):
+                    item["decision"] = "pending"
+                    item["priority"] = "soft"
+                    item["reason"] = f"data_report_cap:{MAX_DATA_REPORTS}; {item.get('reason', '')}"
+                    moved.append(item)
+                else:
+                    item["decision"] = "skip"
+                    item["priority"] = "skip"
+                    skipped.append(item)
                 continue
         kept.append(item)
     result["selected"] = kept
@@ -205,15 +237,17 @@ def save_softpool(result: dict[str, Any]) -> None:
     previous = load_softpool()
     by_url: dict[str, dict[str, Any]] = {source_key(x.get("url") or x.get("source_url") or ""): x for x in previous if isinstance(x, dict)}
     for item in result.get("pending", []) if isinstance(result.get("pending"), list) else []:
+        if not is_softpool_eligible(item):
+            continue
         key = source_key(item.get("url") or item.get("source_url") or "")
         if not key:
             continue
         clone = dict(item)
         clone.setdefault("softpool_added_at", now)
         clone["last_seen_at"] = now
-        clone["softpool_reason"] = "medium_or_borderline_candidate"
+        clone["softpool_reason"] = "medium_candidate_above_quality_threshold"
+        clone["softpool_ttl_hours"] = item_ttl_hours(clone)
         by_url[key] = clone
-    # Remove selected/skipped from softpool unless still pending.
     for section in ["selected", "skipped"]:
         for item in result.get(section, []) if isinstance(result.get(section), list) else []:
             key = source_key(item.get("url") or item.get("source_url") or "")
@@ -222,10 +256,13 @@ def save_softpool(result: dict[str, Any]) -> None:
     active = []
     now_dt = datetime.now(timezone.utc)
     for item in by_url.values():
+        if not is_softpool_eligible(item):
+            continue
         added = parse_dt(item.get("softpool_added_at")) or now_dt
-        if now_dt - added <= timedelta(hours=SOFTPOOL_TTL_HOURS):
+        ttl = int(item.get("softpool_ttl_hours") or item_ttl_hours(item))
+        if now_dt - added <= timedelta(hours=ttl):
             active.append(item)
-    write_json(SOFTPOOL_FILE, {"version": MENZO_VERSION, "updated_at": now, "ttl_hours": SOFTPOOL_TTL_HOURS, "items": sorted(active, key=sort_item, reverse=True)})
+    write_json(SOFTPOOL_FILE, {"version": MENZO_VERSION, "updated_at": now, "ttl_hours": SOFTPOOL_TTL_HOURS, "softnews_ttl_hours": SOFTNEWS_TTL_HOURS, "min_score": MIN_SOFTPOOL_SCORE, "items": sorted(active, key=sort_item, reverse=True)})
 
 
 def save_hard_skips(result: dict[str, Any]) -> None:
@@ -264,17 +301,20 @@ def run_menzo(massy_board: dict[str, Any] | None = None) -> dict[str, Any]:
     normalize_ai_fields(result)
     rebuild_decisions(result)
     result["version"] = MENZO_VERSION
-    result["mode"] = "forced_priority_label_softpool"
+    result["mode"] = "selective_softpool"
     result.setdefault("policy", {})["priority_schema"] = "priority_label_high_medium_low_skip"
     result.setdefault("policy", {})["selected_requires_high_label_or_min_score"] = MIN_SELECTED_SCORE
     result.setdefault("policy", {})["softpool_enabled"] = True
+    result.setdefault("policy", {})["softpool_min_score"] = MIN_SOFTPOOL_SCORE
+    result.setdefault("policy", {})["softpool_excludes"] = sorted(EXCLUDED_SOFTPOOL_TYPES)
+    result.setdefault("policy", {})["soft_news_ttl_hours"] = SOFTNEWS_TTL_HOURS
     result.setdefault("policy", {})["menzo_hard_skips_exported_to_massy"] = True
     save_softpool(result)
     save_hard_skips(result)
     write_json(ARTIFACT_DECISIONS_FILE, result)
     write_json(MENZO_DECISIONS_FILE, result)
     write_json(V92_ALLOWED_URLS_FILE, {"generated_at": utc_now(), "version": MENZO_VERSION, "allowed_urls": result.get("allowed_urls_for_v92", [])})
-    print(f"[MENZO v93.15] Decisione forzata | selected={len(result.get('selected', []))} pending={len(result.get('pending', []))} skipped={len(result.get('skipped', []))} softpool={len(load_softpool())}", flush=True)
+    print(f"[MENZO v93.20] Decisione selettiva | selected={len(result.get('selected', []))} pending={len(result.get('pending', []))} skipped={len(result.get('skipped', []))} softpool={len(load_softpool())}", flush=True)
     return result
 
 
