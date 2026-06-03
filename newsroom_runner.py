@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
-NEWSROOM_VERSION = "v93_19_master_log"
+NEWSROOM_VERSION = "v93_20_process_refinements"
 ARTIFACT_DIR = Path("artifacts") / "newsroom"
 
 
@@ -194,17 +194,25 @@ def import_bob():
 
 
 def import_alfred():
-    from agents.alfred import run_alfred
-    return run_alfred
+    try:
+        from agents.alfred_policy_v93_20 import run_alfred
+        return run_alfred
+    except Exception:
+        from agents.alfred import run_alfred
+        return run_alfred
 
 
 def import_publisher():
     try:
-        from agents.publisher_policy_v93_16 import run_publisher
+        from agents.publisher_policy_v93_20 import run_publisher
         return run_publisher
     except Exception:
-        from agents.publisher import run_publisher
-        return run_publisher
+        try:
+            from agents.publisher_policy_v93_16 import run_publisher
+            return run_publisher
+        except Exception:
+            from agents.publisher import run_publisher
+            return run_publisher
 
 
 def import_archivista():
