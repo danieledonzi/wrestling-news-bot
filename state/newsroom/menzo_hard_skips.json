@@ -314,9 +314,72 @@
       "reason": "softpool_ineligible:ai:Dati di ascolto, interesse limitato per il pubblico italiano.; deterministic:ratings:exceptional_signal,recency:fresh_12h",
       "title": "AEW Collision Viewership Sees Massive Drop on May 30, 2026",
       "url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-drop-may-30-2026/"
+    },
+    {
+      "added_at": "2026-06-03T17:06:48.281210+00:00",
+      "article_type": "soft_news",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2186660/wwe-bronson-reed-drivers-attention-vehicle-collision",
+      "reason": "softpool_ineligible:ai:Notizia personale non rilevante per il wrestling, categoria corretta in WWE.; deterministic:recency:fresh_12h",
+      "title": "WWE's Bronson Reed Urges Drivers To Pay Attention Following Vehicle Collision",
+      "url": "https://www.wrestlinginc.com/2186660/wwe-bronson-reed-drivers-attention-vehicle-collision/"
+    },
+    {
+      "added_at": "2026-06-03T17:06:48.281210+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2186633/aew-speedball-mike-bailey-kevin-knight-dark-side",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "AEW's Speedball Mike Bailey Doesn't Want Kevin Knight To Join 'The Dark Side'",
+      "url": "https://www.wrestlinginc.com/2186633/aew-speedball-mike-bailey-kevin-knight-dark-side/"
+    },
+    {
+      "added_at": "2026-06-03T17:06:48.281210+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/tony-schiavone-says-he-refused-let-tank-abbott-punch-him-during-wcw-angle",
+      "reason": "softpool_ineligible:ai:Aneddoto nostalgico su WCW, non prioritario.; deterministic:recency:fresh_12h",
+      "title": "Tony Schiavone Says He Refused To Let Tank Abbott Punch Him During WCW Angle",
+      "url": "https://www.ringsidenews.com/tony-schiavone-says-he-refused-let-tank-abbott-punch-him-during-wcw-angle/"
+    },
+    {
+      "added_at": "2026-06-03T17:06:48.281210+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/tony-schiavone-reveals-how-baseball-dream-accidentally-led-him-wrestling",
+      "reason": "softpool_ineligible:ai:Curiosità biografica, non notizia hard news.; deterministic:recency:fresh_12h",
+      "title": "Tony Schiavone Reveals How Baseball Dream Accidentally Led Him Into Wrestling",
+      "url": "https://www.ringsidenews.com/tony-schiavone-reveals-how-baseball-dream-accidentally-led-him-wrestling/"
+    },
+    {
+      "added_at": "2026-06-03T17:06:48.281210+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/santino-marella-calls-out-fans-who-turn-underdogs-once-wwe-pushes-them",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "Santino Marella Calls Out Fans Who Turn on Underdogs Once WWE Pushes Them",
+      "url": "https://www.ringsidenews.com/santino-marella-calls-out-fans-who-turn-underdogs-once-wwe-pushes-them/"
+    },
+    {
+      "added_at": "2026-06-03T17:06:48.281210+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/reason-behind-dominik-mysterios-limited-title-matches-aaa-revealed",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "Reason Behind Dominik Mysterio’s Limited Title Matches in AAA Revealed",
+      "url": "https://www.ringsidenews.com/reason-behind-dominik-mysterios-limited-title-matches-aaa-revealed/"
+    },
+    {
+      "added_at": "2026-06-03T17:06:48.281210+00:00",
+      "article_type": "duplicate",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed",
+      "reason": "ai_duplicate_of:notizia superata; entity:chad gable,recency:fresh_36h",
+      "title": "Producer Behind El Grande Americano Mask vs. Mask Match Revealed",
+      "url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed/"
     }
   ],
   "ttl_hours": 168,
-  "updated_at": "2026-06-03T12:19:51.806779+00:00",
+  "updated_at": "2026-06-03T17:06:48.281210+00:00",
   "version": "v93_20_selective_softpool"
 }

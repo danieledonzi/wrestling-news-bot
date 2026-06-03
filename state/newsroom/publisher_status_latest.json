@@ -1,16 +1,16 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-03T12:19:59.742551+00:00",
+  "generated_at": "2026-06-03T17:07:28.063194+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 1,
-    "wp_not_ready": 0
+    "published": 0,
+    "wp_not_ready": 3
   },
   "input": {
     "alfred_version": "v93_20_alfred_table_warning_precision",
-    "approved_articles": 1
+    "approved_articles": 3
   },
   "mode": "wordpress_publisher_plain_oembed_urls",
   "policy": {
@@ -47,6 +47,7 @@
     },
     "featured_image_source": "meta.featured_image_or_first_placeholder",
     "idempotency": "state/newsroom/publisher_history.json by source_url",
+    "paragraph_wrapped_social_urls_rendered_as_gutenberg_embed_blocks": true,
     "personal_wwe_legal_cases_category": [
       "WWE",
       "World"
@@ -60,34 +61,78 @@
   },
   "results": [
     {
-      "categories": [
-        6,
-        4
-      ],
-      "category_names_priority": [
-        "NXT",
-        "WWE"
-      ],
-      "featured_media": 5918,
-      "source_url": "https://www.ringsidenews.com/wwe-reveals-first-wave-talent-next-wwe-id-showcase-nightmare-factory/",
-      "status": "published",
-      "title_it": "WWE: Annunciati i primi talenti per il prossimo WWE ID Showcase alla Nightmare Factory",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-annunciati-i-primi-talenti-per-il-prossimo-wwe-id-showcase-alla-nightmare-factory/",
-      "wp_post_id": 5919
+      "content_chars": 3794,
+      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/trial-date-set-for-man-accused-of-stalking-wwe-star-liv-morgan-08.jpg",
+      "media_id": null,
+      "payload_preview": {
+        "categories": [],
+        "excerpt": "Il procedimento penale contro l'uomo accusato di aver perseguitato la stella della WWE Liv Morgan si avvia finalmente verso il processo.",
+        "meta": {
+          "original_url": "https://www.ringsidenews.com/trial-date-set-man-accused-stalking-wwe-star-liv-morgan/",
+          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
+          "owtv_source": "ringsidenews"
+        },
+        "status": "publish",
+        "title": "Fissata la data del processo per l'uomo accusato di stalking ai danni di Liv Morgan"
+      },
+      "source_url": "https://www.ringsidenews.com/trial-date-set-man-accused-stalking-wwe-star-liv-morgan/",
+      "status": "wp_not_ready",
+      "title_it": "Fissata la data del processo per l'uomo accusato di stalking ai danni di Liv Morgan",
+      "wp_ready": false
+    },
+    {
+      "content_chars": 5920,
+      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/jonathan-coachman-blames-wwes-crowded-event-schedule-for-rushing-storylines-11.jpg",
+      "media_id": null,
+      "payload_preview": {
+        "categories": [],
+        "excerpt": "Jonathan Coachman ritiene che la WWE abbia un problema di ritmo: il sovraccarico di eventi impedisce alle storyline di svilupparsi correttamente.",
+        "meta": {
+          "original_url": "https://www.ringsidenews.com/jonathan-coachman-blames-wwes-crowded-event-schedule-rushing-storylines/",
+          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
+          "owtv_source": "ringsidenews"
+        },
+        "status": "publish",
+        "title": "Jonathan Coachman: il calendario fitto della WWE penalizza le storyline"
+      },
+      "source_url": "https://www.ringsidenews.com/jonathan-coachman-blames-wwes-crowded-event-schedule-rushing-storylines/",
+      "status": "wp_not_ready",
+      "title_it": "Jonathan Coachman: il calendario fitto della WWE penalizza le storyline",
+      "wp_ready": false
+    },
+    {
+      "content_chars": 2310,
+      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/ryan-nemeth-accuses-straight-edge-guys-of-hypocrisy-over-ped-use-14.jpg",
+      "media_id": null,
+      "payload_preview": {
+        "categories": [],
+        "excerpt": "Ryan Nemeth ha pubblicato un tweet polemico nei confronti dello stile di vita straight edge, puntando il dito contro chi si vanta di uno stile di vita pulito pur facendo uso di sostanze dopanti.",
+        "meta": {
+          "original_url": "https://www.ringsidenews.com/ryan-nemeth-accuses-straight-edge-guys-hypocrisy-ped-use/",
+          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
+          "owtv_source": "ringsidenews"
+        },
+        "status": "publish",
+        "title": "Ryan Nemeth accusa gli atleti straight edge di ipocrisia sull'uso di PED"
+      },
+      "source_url": "https://www.ringsidenews.com/ryan-nemeth-accuses-straight-edge-guys-hypocrisy-ped-use/",
+      "status": "wp_not_ready",
+      "title_it": "Ryan Nemeth accusa gli atleti straight edge di ipocrisia sull'uso di PED",
+      "wp_ready": false
     }
   ],
   "retry_queue": {
-    "added": 0,
+    "added": 3,
     "injected": 0,
-    "resolved": 1,
+    "resolved": 0,
     "retained": 0,
-    "size": 0
+    "size": 3
   },
   "version": "v93_20_1_publisher_retry_queue_recursion_fix",
   "wp": {
     "dry_run": false,
     "post_status": "publish",
-    "ready": true,
-    "reason": "ok"
+    "ready": false,
+    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=25)"
   }
 }

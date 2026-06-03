@@ -1,7 +1,14 @@
 {
   "allowed_urls": [
-    "https://www.ringsidenews.com/wwe-reveals-first-wave-talent-next-wwe-id-showcase-nightmare-factory/"
+    "https://www.ringsidenews.com/trial-date-set-man-accused-stalking-wwe-star-liv-morgan/",
+    "https://www.ringsidenews.com/jonathan-coachman-blames-wwes-crowded-event-schedule-rushing-storylines/",
+    "https://www.ringsidenews.com/ryan-nemeth-accuses-straight-edge-guys-hypocrisy-ped-use/",
+    "https://www.wrestlinginc.com/2186399/wwe-jade-cargill-naomi-bianca-belair-resume-unresolved-rivalries/",
+    "https://www.ringsidenews.com/tko-accused-tying-triple-hs-hands-money-hungry-tactics/",
+    "https://www.ringsidenews.com/jonathan-coachman-defends-brock-lesnars-controversial-win-oba-femi-wwe-clash-italy/",
+    "https://www.ringsidenews.com/matt-cardona-explains-why-zack-ryder-die-his-wwe-return-happen/",
+    "https://www.wrestlinginc.com/2186733/wwe-hofer-nikki-bella-emily-paris-inspited-idea-clash-italy/"
   ],
-  "generated_at": "2026-06-03T12:19:51.808488+00:00",
+  "generated_at": "2026-06-03T17:06:48.285803+00:00",
   "version": "v93_20_selective_softpool"
 }

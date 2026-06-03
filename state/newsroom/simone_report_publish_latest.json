@@ -1,6 +1,6 @@
 {
   "agent": "Simone",
-  "generated_at": "2026-06-03T12:19:49.552189+00:00",
+  "generated_at": "2026-06-03T17:06:17.257924+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
@@ -28,14 +28,29 @@
         {
           "attempt": 1,
           "label": "rest_root",
-          "status": "status_200"
+          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=12)"
+        },
+        {
+          "attempt": 1,
+          "label": "posts_auth",
+          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=12)"
+        },
+        {
+          "attempt": 2,
+          "label": "rest_root",
+          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=12)"
+        },
+        {
+          "attempt": 2,
+          "label": "posts_auth",
+          "status": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=12)"
         }
       ],
       "dns": "89.40.173.112",
       "root": "https://news.openwrestlingtv.com"
     },
     "dry_run": false,
-    "ready": true,
-    "reason": "status_200"
+    "ready": false,
+    "reason": "wp_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=12)"
   }
 }
