@@ -1,12 +1,20 @@
 from __future__ import annotations
 
 # Compatibility shim: newsroom_runner imports this wrapper name.
-# The active Massy policy lives in v93.21 and adds:
-# - manually published reports block Simone
-# - present/published reports suppress episode news
-# - Menzo hard-skip memory
-# - old-news hard skip
+# Before Massy runs, rebuild the report registry from manual_runs so manually
+# published reports block Simone even if report_status.json was incomplete.
 
-from agents.massy_policy_v93_21 import run_massy
+from agents.massy_policy_v93_21 import run_massy as _run_massy_v93_21
+
+
+def run_massy():
+    try:
+        from agents.report_registry_v93_22 import rebuild_from_manual_runs
+        result = rebuild_from_manual_runs()
+        print(f"[REPORT REGISTRY v93.22] rebuilt from manual_runs | added={result.get('added')} skipped={result.get('skipped')}", flush=True)
+    except Exception as exc:
+        print(f"[REPORT REGISTRY v93.22] rebuild warning: {exc}", flush=True)
+    return _run_massy_v93_21()
+
 
 __all__ = ["run_massy"]
