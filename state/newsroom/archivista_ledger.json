@@ -2318,5 +2318,109 @@
     "overall_status": "error",
     "published": 0,
     "warnings": 1
+  },
+  {
+    "agent_handoffs": {
+      "alfred": {
+        "approved": 2,
+        "blockers": 0,
+        "editorial_changes": 0,
+        "needs_revision": 0,
+        "warnings": 0
+      },
+      "bob": {
+        "errors": 0,
+        "extraction_empty": 0,
+        "ready_for_alfred": 2,
+        "translation_pending": 0
+      },
+      "massy": {
+        "already_published_hard_skipped": 6,
+        "already_worked": 0,
+        "episode_news_blocked_by_report": 0,
+        "hard_skipped": 32,
+        "menzo_memory_hard_skipped": 20,
+        "old_news_hard_skipped": 4,
+        "report_candidates_blocked_by_manual_or_history": 0,
+        "to_menzo": 2,
+        "to_simone": 1
+      },
+      "menzo": {
+        "pending": 1,
+        "skipped": 0,
+        "to_bob_or_v92": 2
+      },
+      "publisher": {
+        "already_published": 0,
+        "dry_run": 0,
+        "errors": 0,
+        "published": 2,
+        "wp_not_ready": 0
+      },
+      "simone": {
+        "ready": 1,
+        "skipped": 5,
+        "waiting": 0
+      }
+    },
+    "already_published": 0,
+    "article_count": 2,
+    "errors": 0,
+    "generated_at": "2026-06-03T10:49:15.561454+00:00",
+    "overall_status": "ok",
+    "published": 2,
+    "warnings": 0
+  },
+  {
+    "agent_handoffs": {
+      "alfred": {
+        "approved": 2,
+        "blockers": 0,
+        "editorial_changes": 0,
+        "needs_revision": 0,
+        "warnings": 0
+      },
+      "bob": {
+        "errors": 0,
+        "extraction_empty": 0,
+        "ready_for_alfred": 2,
+        "translation_pending": 0
+      },
+      "massy": {
+        "already_published_hard_skipped": 6,
+        "already_worked": 0,
+        "episode_news_blocked_by_report": 0,
+        "hard_skipped": 32,
+        "menzo_memory_hard_skipped": 20,
+        "old_news_hard_skipped": 4,
+        "report_candidates_blocked_by_manual_or_history": 0,
+        "to_menzo": 2,
+        "to_simone": 1
+      },
+      "menzo": {
+        "pending": 1,
+        "skipped": 0,
+        "to_bob_or_v92": 2
+      },
+      "publisher": {
+        "already_published": 0,
+        "dry_run": 0,
+        "errors": 0,
+        "published": 2,
+        "wp_not_ready": 0
+      },
+      "simone": {
+        "ready": 1,
+        "skipped": 5,
+        "waiting": 0
+      }
+    },
+    "already_published": 0,
+    "article_count": 2,
+    "errors": 0,
+    "generated_at": "2026-06-03T10:49:15.570466+00:00",
+    "overall_status": "ok",
+    "published": 2,
+    "warnings": 0
   }
 ]

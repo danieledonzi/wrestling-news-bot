@@ -11,15 +11,15 @@
     "target_max": 30,
     "target_min": 20
   },
-  "generated_at": "2026-06-03T10:01:48.013682+00:00",
+  "generated_at": "2026-06-03T10:49:02.604710+00:00",
   "handoff": {
     "pending": 1,
-    "skipped": 7,
+    "skipped": 0,
     "to_bob_or_v92": 2
   },
   "input": {
-    "candidate_count": 10,
-    "massy_version": "v93_16_massy_old_news_and_menzo_skip_memory"
+    "candidate_count": 3,
+    "massy_version": "v93_21_massy_manual_report_coverage"
   },
   "menzo_ai": {
     "attempts": [
@@ -28,15 +28,13 @@
     "enabled": true,
     "error": "",
     "model": "gemini-3.1-flash-lite",
-    "prompt_count": 10,
-    "raw_preview": "{\n  \"reviews\": [\n    {\n      \"id\": \"c1\",\n      \"decision\": \"selected\",\n      \"priority\": 9,\n      \"category_hint\": \"Business\",\n      \"article_type\": \"business_legal\",\n      \"event_key\": \"bayley_contract_status\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia di business rilevante: il futuro di una top star in scadenza di contratto impatta direttamente gli show WWE.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"instagram\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Focus sul valore contrattuale, evita i rumor speculativi.\"\n      }\n    },\n    {\n      \"id\": \"c2\",\n      \"decision\": \"selected\",\n      \"priority\": 7,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"cody_tripleh_creative\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Dichiarazione ufficiale di Cody sulla direzione creativa: fondamentale per comprendere le dinamiche attuali della WWE.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"instagram\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Enfatizza il punto di vista di Cody sulla gestione Triple H.\"\n      }\n    },\n    {\n      \"id\": \"c3\",\n      \"decision\": \"skip\",\n      \"priority\": 0,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"duplicate\",\n      \"event_key\": \"ratings_smackdown\",\n      \"duplicate_of\": \"c3\",\n      \"editorial_reason\": \"Dati di ascolto generici, poco valore aggiunto per il pubblico italiano.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": true,\n        \"possible_noise\": [],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"Non pubblicare.\"\n      }\n    },\n    {\n      \"id\": \"c4\",\n      \"decision\": \"skip\",\n      \"priority\": 1,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"mjf_foley_reaction\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Social interaction non necessaria, pura curiosità di basso profilo.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"x_tweet\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"Non pubblicare.\"\n      }\n    },\n    {\n      \"id\": \"c5\",\n      \"decision\": \"skip\",\n      \"priority\": 2,\n      \"category_hint\": \"AEW\",\n      \"article_type\": \"data_report\",\n      \"event_key\": \"ratings_collision\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Dati di ascolto, interesse limitato per il pubblico italiano.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": true,\n        \"possible_noise\": [],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"Non pubblicare.\"\n      }\n    },\n    {\n      \"id\": \"c6\",\n      \"decision\": \"selected\",\n      \"priority\": 5,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"hard_news\",\n      \"event_key\": \"gable_aaa_producer\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia curiosa ma rilevante sul coinvolgimento di talenti WWE in produzioni esterne (AAA).\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"instagram\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Riporta la notizia con oggettività senza enfatizzare troppo l'aspetto 'spoilers'.\"\n      }\n    },\n    {\n      \"id\": \"c7\",\n      \"decision\": \"skip\",\n      \"priority\": 2,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"soft_news\",\n",
+    "prompt_count": 3,
+    "raw_preview": "{\n  \"reviews\": [\n    {\n      \"id\": \"c1\",\n      \"decision\": \"selected\",\n      \"priority\": 8,\n      \"category_hint\": \"Business\",\n      \"article_type\": \"business_legal\",\n      \"event_key\": \"bayley_contract_status\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia rilevante sul mercato wrestler; impatto diretto sulla divisione femminile WWE.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Ringsidenews tende ad essere verbosa, estrai solo il dato contrattuale saliente.\"\n      }\n    },\n    {\n      \"id\": \"c2\",\n      \"decision\": \"skip\",\n      \"priority\": 2,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"cody_tripleh_creative\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Dichiarazione di convenienza/opinione, non aggiunge sostanza alla narrazione di campo.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"Archiviare come bassa priorità; evitare clickbait.\"\n      }\n    },\n    {\n      \"id\": \"c3\",\n      \"decision\": \"selected\",\n      \"priority\": 5,\n      \"category_hint\": \"World\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"aaa_mask_match_producer\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Dettaglio tecnico interessante sul coinvolgimento WWE in produzioni esterne (AAA).\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Verificare bene il nome del produttore citato nella fonte.\"\n      }\n    }\n  ]\n}",
     "reviews": [
       {
         "article_type": "business_legal",
         "bob_brief": {
-          "expected_embeds": [
-            "instagram"
-          ],
+          "expected_embeds": [],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
@@ -48,110 +46,45 @@
             "cta",
             "share_links"
           ],
-          "source_specific_notes": "Focus sul valore contrattuale, evita i rumor speculativi."
+          "source_specific_notes": "Ringsidenews tende ad essere verbosa, estrai solo il dato contrattuale saliente."
         },
         "category_hint": "Business",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Notizia di business rilevante: il futuro di una top star in scadenza di contratto impatta direttamente gli show WWE.",
+        "editorial_reason": "Notizia rilevante sul mercato wrestler; impatto diretto sulla divisione femminile WWE.",
         "event_key": "bayley_contract_status",
         "id": "c1",
-        "priority": 9,
+        "priority": 8,
         "priority_label": "medium"
-      },
-      {
-        "article_type": "storyline_development",
-        "bob_brief": {
-          "expected_embeds": [
-            "instagram"
-          ],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Enfatizza il punto di vista di Cody sulla gestione Triple H."
-        },
-        "category_hint": "WWE",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Dichiarazione ufficiale di Cody sulla direzione creativa: fondamentale per comprendere le dinamiche attuali della WWE.",
-        "event_key": "cody_tripleh_creative",
-        "id": "c2",
-        "priority": 7,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "duplicate",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": true,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": "Non pubblicare."
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Dati di ascolto generici, poco valore aggiunto per il pubblico italiano.",
-        "event_key": "ratings_smackdown",
-        "id": "c3",
-        "priority": 0,
-        "priority_label": "skip"
       },
       {
         "article_type": "low_value",
         "bob_brief": {
-          "expected_embeds": [
-            "x_tweet"
-          ],
+          "expected_embeds": [],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": "Non pubblicare."
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta",
+            "share_links"
+          ],
+          "source_specific_notes": "Archiviare come bassa priorità; evitare clickbait."
         },
-        "category_hint": "AEW",
+        "category_hint": "WWE",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Social interaction non necessaria, pura curiosità di basso profilo.",
-        "event_key": "mjf_foley_reaction",
-        "id": "c4",
-        "priority": 1,
-        "priority_label": "low"
-      },
-      {
-        "article_type": "data_report",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": true,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": "Non pubblicare."
-        },
-        "category_hint": "AEW",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Dati di ascolto, interesse limitato per il pubblico italiano.",
-        "event_key": "ratings_collision",
-        "id": "c5",
+        "editorial_reason": "Dichiarazione di convenienza/opinione, non aggiunge sostanza alla narrazione di campo.",
+        "event_key": "cody_tripleh_creative",
+        "id": "c2",
         "priority": 2,
         "priority_label": "medium"
       },
       {
-        "article_type": "hard_news",
+        "article_type": "storyline_development",
         "bob_brief": {
-          "expected_embeds": [
-            "instagram"
-          ],
+          "expected_embeds": [],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
@@ -163,105 +96,15 @@
             "cta",
             "share_links"
           ],
-          "source_specific_notes": "Riporta la notizia con oggettività senza enfatizzare troppo l'aspetto 'spoilers'."
+          "source_specific_notes": "Verificare bene il nome del produttore citato nella fonte."
         },
-        "category_hint": "WWE",
+        "category_hint": "World",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Notizia curiosa ma rilevante sul coinvolgimento di talenti WWE in produzioni esterne (AAA).",
-        "event_key": "gable_aaa_producer",
-        "id": "c6",
+        "editorial_reason": "Dettaglio tecnico interessante sul coinvolgimento WWE in produzioni esterne (AAA).",
+        "event_key": "aaa_mask_match_producer",
+        "id": "c3",
         "priority": 5,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "soft_news",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": "Non pubblicare."
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Notizia minore sulla pianificazione eventi, già superata.",
-        "event_key": "mitb_date_change",
-        "id": "c7",
-        "priority": 2,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "storyline_development",
-        "bob_brief": {
-          "expected_embeds": [
-            "youtube"
-          ],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Sintetizza i risultati del match titolato."
-        },
-        "category_hint": "NXT",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Aggiornamento narrativo importante per il main title di NXT.",
-        "event_key": "nxt_results_june2",
-        "id": "c8",
-        "priority": 6,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "soft_news",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": "Non pubblicare."
-        },
-        "category_hint": "AEW",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Intervista di colore, non urgente.",
-        "event_key": "darby_allin_interview",
-        "id": "c9",
-        "priority": 1,
-        "priority_label": "low"
-      },
-      {
-        "article_type": "storyline_development",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Tieni in coda come aggiornamento rapido se c'è spazio nel palinsesto."
-        },
-        "category_hint": "NXT",
-        "decision": "pending",
-        "duplicate_of": "",
-        "editorial_reason": "Utile per il pubblico di NXT, annuncio di match e segmenti per la prossima settimana.",
-        "event_key": "nxt_upcoming_announcements",
-        "id": "c10",
-        "priority": 3,
         "priority_label": "medium"
       }
     ],
@@ -270,18 +113,16 @@
   "mode": "selective_softpool",
   "pending": [
     {
-      "age_hours": 13.040269251944444,
+      "age_hours": 13.828723065833332,
       "agent": "Menzo",
-      "ai_editorial_reason": "Notizia curiosa ma rilevante sul coinvolgimento di talenti WWE in produzioni esterne (AAA).",
-      "ai_id": "c6",
+      "ai_editorial_reason": "Dettaglio tecnico interessante sul coinvolgimento WWE in produzioni esterne (AAA).",
+      "ai_id": "c3",
       "ai_priority": 72,
       "ai_priority_label": "medium",
-      "article_type": "hard_news",
+      "article_type": "storyline_development",
       "assigned_to": "Menzo",
       "bob_brief": {
-        "expected_embeds": [
-          "instagram"
-        ],
+        "expected_embeds": [],
         "expected_quotes": true,
         "expected_tables": false,
         "must_preserve": [
@@ -293,21 +134,19 @@
           "cta",
           "share_links"
         ],
-        "source_specific_notes": "Riporta la notizia con oggettività senza enfatizzare troppo l'aspetto 'spoilers'."
+        "source_specific_notes": "Verificare bene il nome del produttore citato nella fonte."
       },
-      "category_hint": "WWE",
+      "category_hint": "World",
       "decision": "pending",
       "deterministic_score": 42,
-      "evaluated_at": "2026-06-03T10:01:41.969308+00:00",
+      "evaluated_at": "2026-06-03T10:49:00.403038+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "from_softpool": true,
-      "last_seen_at": "2026-06-03T07:21:42.347226+00:00",
+      "last_seen_at": "2026-06-03T10:01:48.016147+00:00",
       "menzo_ai_review": {
-        "article_type": "hard_news",
+        "article_type": "storyline_development",
         "bob_brief": {
-          "expected_embeds": [
-            "instagram"
-          ],
+          "expected_embeds": [],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
@@ -319,24 +158,25 @@
             "cta",
             "share_links"
           ],
-          "source_specific_notes": "Riporta la notizia con oggettività senza enfatizzare troppo l'aspetto 'spoilers'."
+          "source_specific_notes": "Verificare bene il nome del produttore citato nella fonte."
         },
-        "category_hint": "WWE",
+        "category_hint": "World",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Notizia curiosa ma rilevante sul coinvolgimento di talenti WWE in produzioni esterne (AAA).",
-        "event_key": "gable_aaa_producer",
-        "id": "c6",
+        "editorial_reason": "Dettaglio tecnico interessante sul coinvolgimento WWE in produzioni esterne (AAA).",
+        "event_key": "aaa_mask_match_producer",
+        "id": "c3",
         "priority": 5,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed",
       "priority": "soft",
       "published": "Tue, 02 Jun 2026 20:59:17 +0000",
-      "reason": "ai:Notizia curiosa ma rilevante sul coinvolgimento di talenti WWE in produzioni esterne (AAA).; deterministic:entity:chad gable,recency:fresh_36h",
+      "reason": "ai:Dettaglio tecnico interessante sul coinvolgimento WWE in produzioni esterne (AAA).; deterministic:entity:chad gable,recency:fresh_36h",
       "score": 56,
       "softpool_added_at": "2026-06-03T07:21:42.347226+00:00",
-      "softpool_reason": "medium_or_borderline_candidate",
+      "softpool_reason": "medium_candidate_above_quality_threshold",
+      "softpool_ttl_hours": 36,
       "source": "ringsidenews",
       "summary": "<p><img alt=\"Producer Behind El Grande Americano Mask vs. Mask Match Revealed\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/producer-behind-el-grande-americano-mask-vs-mask-match-revealed-48.jpg?x36463\" width=\"800\" /></p>Chad Gable and Ludwig Kaiser’s bloody Mask vs. Mask match at AAA Noche de Los Grandes had another WWE name involved behind the scenes According to Mexican journalist Ernesto Ocampo, Pete Dunne was the producer for the match between Ludwig Kaiser’s El Grande Americano and Chad Gable’s Original El Grande Americano. Ocampo noted that Dunne ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed/\" title=\"Producer Behind El Grande Americano Mask vs. Mask Match Revealed\">Read more</a>",
       "title": "Producer Behind El Grande Americano Mask vs. Mask Match Revealed",
@@ -367,18 +207,16 @@
   },
   "selected": [
     {
-      "age_hours": 1.5069347147222223,
+      "age_hours": 2.295389501388889,
       "agent": "Menzo",
-      "ai_editorial_reason": "Notizia di business rilevante: il futuro di una top star in scadenza di contratto impatta direttamente gli show WWE.",
+      "ai_editorial_reason": "Notizia rilevante sul mercato wrestler; impatto diretto sulla divisione femminile WWE.",
       "ai_id": "c1",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "business_legal",
       "assigned_to": "Menzo",
       "bob_brief": {
-        "expected_embeds": [
-          "instagram"
-        ],
+        "expected_embeds": [],
         "expected_quotes": true,
         "expected_tables": false,
         "must_preserve": [
@@ -390,19 +228,17 @@
           "cta",
           "share_links"
         ],
-        "source_specific_notes": "Focus sul valore contrattuale, evita i rumor speculativi."
+        "source_specific_notes": "Ringsidenews tende ad essere verbosa, estrai solo il dato contrattuale saliente."
       },
       "category_hint": "Business",
       "decision": "selected",
       "deterministic_score": 86,
-      "evaluated_at": "2026-06-03T10:01:41.964975+00:00",
+      "evaluated_at": "2026-06-03T10:49:00.402207+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
         "article_type": "business_legal",
         "bob_brief": {
-          "expected_embeds": [
-            "instagram"
-          ],
+          "expected_embeds": [],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
@@ -414,487 +250,89 @@
             "cta",
             "share_links"
           ],
-          "source_specific_notes": "Focus sul valore contrattuale, evita i rumor speculativi."
+          "source_specific_notes": "Ringsidenews tende ad essere verbosa, estrai solo il dato contrattuale saliente."
         },
         "category_hint": "Business",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Notizia di business rilevante: il futuro di una top star in scadenza di contratto impatta direttamente gli show WWE.",
+        "editorial_reason": "Notizia rilevante sul mercato wrestler; impatto diretto sulla divisione femminile WWE.",
         "event_key": "bayley_contract_status",
         "id": "c1",
-        "priority": 9,
+        "priority": 8,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.ringsidenews.com/bayleys-wwe-future-unclear-contract-expiration-date-draws-closer",
       "priority": "hard",
       "published": "Wed, 03 Jun 2026 08:31:17 +0000",
-      "reason": "ai:Notizia di business rilevante: il futuro di una top star in scadenza di contratto impatta direttamente gli show WWE.; deterministic:hard:contract,hard:tko,strategic:future,strategic:raw,recency:fresh_12h",
+      "reason": "ai:Notizia rilevante sul mercato wrestler; impatto diretto sulla divisione femminile WWE.; deterministic:hard:contract,hard:tko,strategic:future,strategic:raw,recency:fresh_12h",
       "score": 80,
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/bayleys-wwe-future-unclear-as-contract-expiration-date-draws-closer-55.jpg?x59068\" width=\"800\" /></p>Bayley’s future with WWE is facing new questions as her current contract continues moving toward its expiration date. Her current WWE deal is set to expire at the end of this year. WWE and TKO are said to want to keep Bayley around, particularly because she is viewed as a locker room leader. However, there ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/bayleys-wwe-future-unclear-contract-expiration-date-draws-closer/\" title=\"Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer\">Read more</a>",
+      "summary": "<p><img alt=\"Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/bayleys-wwe-future-unclear-as-contract-expiration-date-draws-closer-55.jpg?x81363\" width=\"800\" /></p>Bayley’s future with WWE is facing new questions as her current contract continues moving toward its expiration date. Her current WWE deal is set to expire at the end of this year. WWE and TKO are said to want to keep Bayley around, particularly because she is viewed as a locker room leader. However, there ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/bayleys-wwe-future-unclear-contract-expiration-date-draws-closer/\" title=\"Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer\">Read more</a>",
       "title": "Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer",
       "url": "https://www.ringsidenews.com/bayleys-wwe-future-unclear-contract-expiration-date-draws-closer/"
     },
     {
-      "age_hours": 0.9461011347222222,
+      "age_hours": 1.7345558933333334,
       "agent": "Menzo",
-      "ai_editorial_reason": "Dichiarazione ufficiale di Cody sulla direzione creativa: fondamentale per comprendere le dinamiche attuali della WWE.",
+      "ai_editorial_reason": "Dichiarazione di convenienza/opinione, non aggiunge sostanza alla narrazione di campo.",
       "ai_id": "c2",
       "ai_priority": 72,
       "ai_priority_label": "medium",
-      "article_type": "storyline_development",
+      "article_type": "low_value",
       "assigned_to": "Menzo",
       "bob_brief": {
-        "expected_embeds": [
-          "instagram"
-        ],
+        "expected_embeds": [],
         "expected_quotes": true,
         "expected_tables": false,
-        "must_preserve": [
-          "citazioni dirette"
-        ],
+        "must_preserve": [],
         "possible_noise": [
           "source_social_bar",
           "author_bio",
           "cta",
           "share_links"
         ],
-        "source_specific_notes": "Enfatizza il punto di vista di Cody sulla gestione Triple H."
+        "source_specific_notes": "Archiviare come bassa priorità; evitare clickbait."
       },
       "category_hint": "WWE",
       "decision": "selected",
       "deterministic_score": 84,
-      "evaluated_at": "2026-06-03T10:01:41.964087+00:00",
+      "evaluated_at": "2026-06-03T10:49:00.401218+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
-        "article_type": "storyline_development",
+        "article_type": "low_value",
         "bob_brief": {
-          "expected_embeds": [
-            "instagram"
-          ],
+          "expected_embeds": [],
           "expected_quotes": true,
           "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
+          "must_preserve": [],
           "possible_noise": [
             "source_social_bar",
             "author_bio",
             "cta",
             "share_links"
           ],
-          "source_specific_notes": "Enfatizza il punto di vista di Cody sulla gestione Triple H."
+          "source_specific_notes": "Archiviare come bassa priorità; evitare clickbait."
         },
         "category_hint": "WWE",
-        "decision": "selected",
+        "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Dichiarazione ufficiale di Cody sulla direzione creativa: fondamentale per comprendere le dinamiche attuali della WWE.",
+        "editorial_reason": "Dichiarazione di convenienza/opinione, non aggiunge sostanza alla narrazione di campo.",
         "event_key": "cody_tripleh_creative",
         "id": "c2",
-        "priority": 7,
+        "priority": 2,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.ringsidenews.com/cody-rhodes-defends-triple-hs-wwe-creative-style-constant-criticism",
       "priority": "hard",
       "published": "Wed, 03 Jun 2026 09:04:56 +0000",
-      "reason": "ai:Dichiarazione ufficiale di Cody sulla direzione creativa: fondamentale per comprendere le dinamiche attuali della WWE.; deterministic:strategic:creative,strategic:booking,entity:cody rhodes,recency:fresh_12h",
+      "reason": "ai:Dichiarazione di convenienza/opinione, non aggiunge sostanza alla narrazione di campo.; deterministic:strategic:creative,strategic:booking,entity:cody rhodes,recency:fresh_12h",
       "score": 79,
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/cody-rhodes-defends-triple-hs-wwe-creative-style-after-constant-criticism-41.jpg?x59068\" width=\"800\" /></p>Cody Rhodes is making it clear that Triple H’s WWE creative process works for him, even if many people don&#8217;t think his booking style is good at all. While speaking on his What Do You Wanna Talk About? podcast, Rhodes defended Triple H’s booking approach and explained why he enjoys working under his creative system. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/cody-rhodes-defends-triple-hs-wwe-creative-style-constant-criticism/\" title=\"Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism\">Read more</a>",
+      "summary": "<p><img alt=\"Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/cody-rhodes-defends-triple-hs-wwe-creative-style-after-constant-criticism-41.jpg?x81363\" width=\"800\" /></p>Cody Rhodes is making it clear that Triple H’s WWE creative process works for him, even if many people don&#8217;t think his booking style is good at all. While speaking on his What Do You Wanna Talk About? podcast, Rhodes defended Triple H’s booking approach and explained why he enjoys working under his creative system. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/cody-rhodes-defends-triple-hs-wwe-creative-style-constant-criticism/\" title=\"Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism\">Read more</a>",
       "title": "Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism",
       "url": "https://www.ringsidenews.com/cody-rhodes-defends-triple-hs-wwe-creative-style-constant-criticism/"
     }
   ],
-  "skipped": [
-    {
-      "age_hours": 7.921102045277777,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Aggiornamento narrativo importante per il main title di NXT.",
-      "ai_id": "c8",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "storyline_development",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [
-          "youtube"
-        ],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [
-          "citazioni dirette"
-        ],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Sintetizza i risultati del match titolato."
-      },
-      "category_hint": "NXT",
-      "decision": "skip",
-      "deterministic_score": 38,
-      "evaluated_at": "2026-06-03T10:01:41.967364+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "storyline_development",
-        "bob_brief": {
-          "expected_embeds": [
-            "youtube"
-          ],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Sintetizza i risultati del match titolato."
-        },
-        "category_hint": "NXT",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Aggiornamento narrativo importante per il main title di NXT.",
-        "event_key": "nxt_results_june2",
-        "id": "c8",
-        "priority": 6,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.ringsidenews.com/tony-dangelo-stands-tall-nxt-title-defense-during-june-2-episode",
-      "priority": "skip",
-      "published": "Wed, 03 Jun 2026 02:06:26 +0000",
-      "reason": "softpool_ineligible:ai:Aggiornamento narrativo importante per il main title di NXT.; deterministic:recency:fresh_12h",
-      "score": 53,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Tony D&#039;Angelo Stands Tall With NXT Title Defense During June 2 Episode\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/tony-dangelo-stands-tall-with-nxt-title-defense-during-june-2-episode-28.jpg?x59068\" width=\"800\" /></p>The June 2 episode from WWE&#8217;s NXT brand was a fun episode, and there were several big moments. An NXT Title defense always brings special attention to any episode when they come up, and this week saw an exciting matchup for the brand&#8217;s top prize. Tony D&#8217;Angelo put his NXT Title on the line against ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/tony-dangelo-stands-tall-nxt-title-defense-during-june-2-episode/\" title=\"Tony D&#8217;Angelo Stands Tall With NXT Title Defense During June 2 Episode\">Read more</a>",
-      "title": "Tony D’Angelo Stands Tall With NXT Title Defense During June 2 Episode",
-      "url": "https://www.ringsidenews.com/tony-dangelo-stands-tall-nxt-title-defense-during-june-2-episode/"
-    },
-    {
-      "age_hours": 8.099435578333333,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Utile per il pubblico di NXT, annuncio di match e segmenti per la prossima settimana.",
-      "ai_id": "c10",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "storyline_development",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": false,
-        "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Tieni in coda come aggiornamento rapido se c'è spazio nel palinsesto."
-      },
-      "category_hint": "NXT",
-      "decision": "skip",
-      "deterministic_score": 38,
-      "evaluated_at": "2026-06-03T10:01:41.968083+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "storyline_development",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Tieni in coda come aggiornamento rapido se c'è spazio nel palinsesto."
-        },
-        "category_hint": "NXT",
-        "decision": "pending",
-        "duplicate_of": "",
-        "editorial_reason": "Utile per il pubblico di NXT, annuncio di match e segmenti per la prossima settimana.",
-        "event_key": "nxt_upcoming_announcements",
-        "id": "c10",
-        "priority": 3,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.ringsidenews.com/mr-nxt-pageant-more-announced-june-9-episode",
-      "priority": "skip",
-      "published": "Wed, 03 Jun 2026 01:55:44 +0000",
-      "reason": "softpool_ineligible:ai:Utile per il pubblico di NXT, annuncio di match e segmenti per la prossima settimana.; deterministic:recency:fresh_12h",
-      "score": 53,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Mr. NXT Pageant &amp; More Announced For June 9 Episode\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mr-nxt-pageant-amp-more-announced-for-june-9-episode-21.jpg?x59068\" width=\"800\" /></p>The June 2 episode from WWE&#8217;s NXT brand was a fun show, but things are going to be even bigger next week. Along with a #1 contender match, we also have a pageant awaiting us. Tatum Paxley will put the NXT Women&#8217;s North American Title on the line next week against Zaria. The Aussie got ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mr-nxt-pageant-more-announced-june-9-episode/\" title=\"Mr. NXT Pageant &#38; More Announced For June 9 Episode\">Read more</a>",
-      "title": "Mr. NXT Pageant & More Announced For June 9 Episode",
-      "url": "https://www.ringsidenews.com/mr-nxt-pageant-more-announced-june-9-episode/"
-    },
-    {
-      "age_hours": 7.950822995555555,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Intervista di colore, non urgente.",
-      "ai_id": "c9",
-      "ai_priority": 48,
-      "ai_priority_label": "low",
-      "article_type": "soft_news",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [],
-        "source_specific_notes": "Non pubblicare."
-      },
-      "category_hint": "AEW",
-      "decision": "skip",
-      "deterministic_score": 38,
-      "evaluated_at": "2026-06-03T10:01:41.962786+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "soft_news",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": "Non pubblicare."
-        },
-        "category_hint": "AEW",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Intervista di colore, non urgente.",
-        "event_key": "darby_allin_interview",
-        "id": "c9",
-        "priority": 1,
-        "priority_label": "low"
-      },
-      "normalized_url": "https://www.wrestlinginc.com/2186287/aew-darby-allin-world-champion-succeed-year-one",
-      "priority": "skip",
-      "published": "Wed, 03 Jun 2026 02:04:39 +0000",
-      "reason": "softpool_ineligible:ai:Intervista di colore, non urgente.; deterministic:recency:fresh_12h",
-      "score": 42,
-      "source": "wrestlinginc",
-      "summary": "Darby Allin's run as AEW World Champion is over, but the man himself knew from day one that he could be the top guy in All Elite Wrestling.",
-      "title": "Darby Allin Felt In 'Year One' That He Could Succeed As AEW World Champion",
-      "url": "https://www.wrestlinginc.com/2186287/aew-darby-allin-world-champion-succeed-year-one/"
-    },
-    {
-      "age_hours": 8.755267541111111,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Dati di ascolto generici, poco valore aggiunto per il pubblico italiano.",
-      "ai_id": "c3",
-      "ai_priority": 0,
-      "ai_priority_label": "skip",
-      "article_type": "duplicate",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": false,
-        "expected_tables": true,
-        "must_preserve": [],
-        "possible_noise": [],
-        "source_specific_notes": "Non pubblicare."
-      },
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 44,
-      "evaluated_at": "2026-06-03T10:01:41.963150+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "duplicate",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": true,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": "Non pubblicare."
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Dati di ascolto generici, poco valore aggiunto per il pubblico italiano.",
-        "event_key": "ratings_smackdown",
-        "id": "c3",
-        "priority": 0,
-        "priority_label": "skip"
-      },
-      "normalized_url": "https://www.wrestlinginc.com/2186281/wwe-smackdown-ratings-viewership-report-may-29-2026",
-      "priority": "skip",
-      "published": "Wed, 03 Jun 2026 01:16:23 +0000",
-      "reason": "ai_duplicate_of:c3; strategic:smackdown,ratings:generic_penalty,recency:fresh_12h",
-      "score": 24,
-      "source": "wrestlinginc",
-      "summary": "The May 29 edition of \"WWE SmackDown\" may have ranked fourth on cable TV, but viewership for the episode was still down from the previous week.",
-      "title": "WWE SmackDown Ratings & Viewership Report: 5/29/2026",
-      "url": "https://www.wrestlinginc.com/2186281/wwe-smackdown-ratings-viewership-report-may-29-2026/"
-    },
-    {
-      "age_hours": 1.8294349247222221,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Notizia minore sulla pianificazione eventi, già superata.",
-      "ai_id": "c7",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "soft_news",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": false,
-        "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [],
-        "source_specific_notes": "Non pubblicare."
-      },
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 38,
-      "evaluated_at": "2026-06-03T10:01:41.965730+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "soft_news",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": "Non pubblicare."
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Notizia minore sulla pianificazione eventi, già superata.",
-        "event_key": "mitb_date_change",
-        "id": "c7",
-        "priority": 2,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.ringsidenews.com/real-reason-wwe-moved-money-bank-2026-date",
-      "priority": "skip",
-      "published": "Wed, 03 Jun 2026 08:11:56 +0000",
-      "reason": "softpool_ineligible:ai:Notizia minore sulla pianificazione eventi, già superata.; deterministic:recency:fresh_12h",
-      "score": 53,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Real Reason WWE Moved Money in the Bank 2026 Date\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/real-reason-wwe-moved-money-in-the-bank-2026-date-05.jpg?x59068\" width=\"800\" /></p>WWE&#8217;s decision to move Money in the Bank 2026 out of its traditional summer timeframe appears to come down to one simple issue — the company has too many major events on the calendar. After WWE announced that Money in the Bank will take place on September 6 at the Smoothie King Center in New ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/real-reason-wwe-moved-money-bank-2026-date/\" title=\"Real Reason WWE Moved Money in the Bank 2026 Date\">Read more</a>",
-      "title": "Real Reason WWE Moved Money in the Bank 2026 Date",
-      "url": "https://www.ringsidenews.com/real-reason-wwe-moved-money-bank-2026-date/"
-    },
-    {
-      "age_hours": 7.325546244444444,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Social interaction non necessaria, pura curiosità di basso profilo.",
-      "ai_id": "c4",
-      "ai_priority": 48,
-      "ai_priority_label": "low",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [
-          "x_tweet"
-        ],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [],
-        "source_specific_notes": "Non pubblicare."
-      },
-      "category_hint": "AEW",
-      "decision": "skip",
-      "deterministic_score": 43,
-      "evaluated_at": "2026-06-03T10:01:41.966481+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "low_value",
-        "bob_brief": {
-          "expected_embeds": [
-            "x_tweet"
-          ],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": "Non pubblicare."
-        },
-        "category_hint": "AEW",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Social interaction non necessaria, pura curiosità di basso profilo.",
-        "event_key": "mjf_foley_reaction",
-        "id": "c4",
-        "priority": 1,
-        "priority_label": "low"
-      },
-      "normalized_url": "https://www.ringsidenews.com/mjf-fires-back-nsfw-response-mick-foley-calls-him-best-business",
-      "priority": "skip",
-      "published": "Wed, 03 Jun 2026 02:42:10 +0000",
-      "reason": "softpool_ineligible:ai:Social interaction non necessaria, pura curiosità di basso profilo.; deterministic:entity:mick foley,recency:fresh_12h",
-      "score": 45,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"MJF Fires Back With NSFW Response After Mick Foley Calls Him ‘The Best In The Business’\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mjf-fires-back-with-nsfw-response-after-mick-foley-calls-him-the-best-in-the-business-20.jpg?x59068\" width=\"800\" /></p>MJF has responded to some major praise from Mick Foley, and he did it in the most MJF way possible. During his June 2 appearance on Ariel Helwani&#8217;s show, Foley had nothing but glowing things to say about the AEW World Champion. The WWE Hall of Famer praised MJF&#8217;s stance on not leaving a company ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mjf-fires-back-nsfw-response-mick-foley-calls-him-best-business/\" title=\"MJF Fires Back With NSFW Response After Mick Foley Calls Him ‘The Best In The Business’\">Read more</a>",
-      "title": "MJF Fires Back With NSFW Response After Mick Foley Calls Him ‘The Best In The Business’",
-      "url": "https://www.ringsidenews.com/mjf-fires-back-nsfw-response-mick-foley-calls-him-best-business/"
-    },
-    {
-      "age_hours": 8.286102395833334,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Dati di ascolto, interesse limitato per il pubblico italiano.",
-      "ai_id": "c5",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "data_report",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": false,
-        "expected_tables": true,
-        "must_preserve": [],
-        "possible_noise": [],
-        "source_specific_notes": "Non pubblicare."
-      },
-      "category_hint": "AEW",
-      "decision": "skip",
-      "deterministic_score": 42,
-      "evaluated_at": "2026-06-03T10:01:41.968627+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "data_report",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": false,
-          "expected_tables": true,
-          "must_preserve": [],
-          "possible_noise": [],
-          "source_specific_notes": "Non pubblicare."
-        },
-        "category_hint": "AEW",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Dati di ascolto, interesse limitato per il pubblico italiano.",
-        "event_key": "ratings_collision",
-        "id": "c5",
-        "priority": 2,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-drop-may-30-2026",
-      "priority": "skip",
-      "published": "Wed, 03 Jun 2026 01:44:32 +0000",
-      "reason": "softpool_ineligible:ai:Dati di ascolto, interesse limitato per il pubblico italiano.; deterministic:ratings:exceptional_signal,recency:fresh_12h",
-      "score": 56,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW Collision Massive Decrease.jpg?x59068\" width=\"800\" /></p>New ratings data has been released for the May 30, 2026 episode of AEW Collision on TNT, with the show taking a sharp week-to-week hit. According to Dave Meltzer, AEW Collision on May 30, 2026 drew 360,000 viewers on TNT, with a 0.05 rating in the key P18–49 demographic. For comparison, the May 27, 2026 ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aew-collision-viewership-sees-massive-drop-may-30-2026/\" title=\"AEW Collision Viewership Sees Massive Drop on May 30, 2026\">Read more</a>",
-      "title": "AEW Collision Viewership Sees Massive Drop on May 30, 2026",
-      "url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-drop-may-30-2026/"
-    }
-  ],
+  "skipped": [],
   "version": "v93_20_selective_softpool"
 }

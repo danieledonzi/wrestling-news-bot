@@ -1,16 +1,16 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-03T07:22:14.741863+00:00",
+  "generated_at": "2026-06-03T10:49:15.553829+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 3,
+    "published": 2,
     "wp_not_ready": 0
   },
   "input": {
-    "alfred_version": "v93_8_alfred_structured_content_checks",
-    "approved_articles": 3
+    "alfred_version": "v93_20_alfred_table_warning_precision",
+    "approved_articles": 2
   },
   "mode": "wordpress_publisher_plain_oembed_urls",
   "policy": {
@@ -47,26 +47,18 @@
     },
     "featured_image_source": "meta.featured_image_or_first_placeholder",
     "idempotency": "state/newsroom/publisher_history.json by source_url",
+    "personal_wwe_legal_cases_category": [
+      "WWE",
+      "World"
+    ],
     "plain_social_urls_rendered_as_gutenberg_embed_blocks": true,
     "preserve_plain_embed_urls_for_wordpress_oembed": true,
+    "publish_retry_queue": "state/newsroom/publish_retry_queue.json",
+    "retry_queue_before_new_articles": true,
     "source_attribution": true,
     "strip_inline_image_placeholders": true
   },
   "results": [
-    {
-      "categories": [
-        8
-      ],
-      "category_names_priority": [
-        "World"
-      ],
-      "featured_media": 5895,
-      "source_url": "https://www.ringsidenews.com/digital-evidence-turned-over-in-ludwig-kaiser-battery-case/",
-      "status": "published",
-      "title_it": "Aggiornamenti legali sul caso di Ludwig Kaiser",
-      "wp_link": "https://news.openwrestlingtv.com/world/aggiornamenti-legali-sul-caso-di-ludwig-kaiser/",
-      "wp_post_id": 5896
-    },
     {
       "categories": [
         15,
@@ -76,29 +68,38 @@
         "Business",
         "World"
       ],
-      "featured_media": 5897,
-      "source_url": "https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/",
+      "featured_media": 5912,
+      "source_url": "https://www.ringsidenews.com/bayleys-wwe-future-unclear-contract-expiration-date-draws-closer/",
       "status": "published",
-      "title_it": "Cause legali contro WWE: in gioco quasi un miliardo di dollari",
-      "wp_link": "https://news.openwrestlingtv.com/world/cause-legali-contro-wwe-in-gioco-quasi-un-miliardo-di-dollari/",
-      "wp_post_id": 5898
+      "title_it": "Incerto il futuro di Bayley in WWE con la scadenza del contratto",
+      "wp_link": "https://news.openwrestlingtv.com/world/incerto-il-futuro-di-bayley-in-wwe-con-la-scadenza-del-contratto/",
+      "wp_post_id": 5913
     },
     {
       "categories": [
-        4
+        4,
+        8
       ],
       "category_names_priority": [
-        "WWE"
+        "WWE",
+        "World"
       ],
-      "featured_media": 5899,
-      "source_url": "https://www.ringsidenews.com/why-wwe-rushing-create-its-next-generation-main-event-stars/",
+      "featured_media": 5914,
+      "source_url": "https://www.ringsidenews.com/cody-rhodes-defends-triple-hs-wwe-creative-style-constant-criticism/",
       "status": "published",
-      "title_it": "Perché la WWE sta accelerando la creazione delle sue prossime stelle",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/perche-la-wwe-sta-accelerando-la-creazione-delle-sue-prossime-stelle/",
-      "wp_post_id": 5900
+      "title_it": "Cody Rhodes difende lo stile creativo di Triple H in WWE",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/cody-rhodes-difende-lo-stile-creativo-di-triple-h-in-wwe/",
+      "wp_post_id": 5915
     }
   ],
-  "version": "v93_17_publisher_gutenberg_embed_blocks",
+  "retry_queue": {
+    "added": 0,
+    "injected": 0,
+    "resolved": 2,
+    "retained": 0,
+    "size": 0
+  },
+  "version": "v93_20_1_publisher_retry_queue_recursion_fix",
   "wp": {
     "dry_run": false,
     "post_status": "publish",

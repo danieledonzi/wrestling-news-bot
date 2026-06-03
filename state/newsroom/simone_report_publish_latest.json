@@ -1,12 +1,12 @@
 {
   "agent": "Simone",
-  "generated_at": "2026-06-03T10:01:41.951583+00:00",
+  "generated_at": "2026-06-03T10:49:00.387919+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 0,
-    "wp_not_ready": 1
+    "published": 1,
+    "wp_not_ready": 0
   },
   "input": {
     "ready_reports": 1,
@@ -22,11 +22,16 @@
   },
   "results": [
     {
-      "reason": "status_415",
+      "categories": [
+        "Editoriali",
+        "NXT"
+      ],
       "report_key": "wwe_nxt_2026_06_02",
       "source_url": "https://www.ringsidenews.com/wwe-nxt-results-highlights-key-moments-june-2-2026/",
-      "status": "wp_not_ready",
-      "title": "WWE NXT del 2 giugno 2026 - risultati e momenti salienti"
+      "status": "published",
+      "title": "WWE NXT del 2 giugno 2026 - risultati e momenti salienti",
+      "wp_link": "https://news.openwrestlingtv.com/nxt/wwe-nxt-del-2-giugno-2026-risultati-e-momenti-salienti/",
+      "wp_post_id": 5911
     }
   ],
   "version": "v93_18_simone_autonomous_report_publisher",
@@ -36,29 +41,14 @@
         {
           "attempt": 1,
           "label": "rest_root",
-          "status": "status_415"
-        },
-        {
-          "attempt": 1,
-          "label": "posts_auth",
-          "status": "status_415"
-        },
-        {
-          "attempt": 2,
-          "label": "rest_root",
-          "status": "status_415"
-        },
-        {
-          "attempt": 2,
-          "label": "posts_auth",
-          "status": "status_415"
+          "status": "status_200"
         }
       ],
       "dns": "89.40.173.112",
       "root": "https://news.openwrestlingtv.com"
     },
     "dry_run": false,
-    "ready": false,
-    "reason": "status_415"
+    "ready": true,
+    "reason": "status_200"
   }
 }

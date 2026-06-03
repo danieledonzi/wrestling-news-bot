@@ -1,18 +1,16 @@
 {
   "items": [
     {
-      "age_hours": 13.040269251944444,
+      "age_hours": 13.828723065833332,
       "agent": "Menzo",
-      "ai_editorial_reason": "Notizia curiosa ma rilevante sul coinvolgimento di talenti WWE in produzioni esterne (AAA).",
-      "ai_id": "c6",
+      "ai_editorial_reason": "Dettaglio tecnico interessante sul coinvolgimento WWE in produzioni esterne (AAA).",
+      "ai_id": "c3",
       "ai_priority": 72,
       "ai_priority_label": "medium",
-      "article_type": "hard_news",
+      "article_type": "storyline_development",
       "assigned_to": "Menzo",
       "bob_brief": {
-        "expected_embeds": [
-          "instagram"
-        ],
+        "expected_embeds": [],
         "expected_quotes": true,
         "expected_tables": false,
         "must_preserve": [
@@ -24,21 +22,19 @@
           "cta",
           "share_links"
         ],
-        "source_specific_notes": "Riporta la notizia con oggettività senza enfatizzare troppo l'aspetto 'spoilers'."
+        "source_specific_notes": "Verificare bene il nome del produttore citato nella fonte."
       },
-      "category_hint": "WWE",
+      "category_hint": "World",
       "decision": "pending",
       "deterministic_score": 42,
-      "evaluated_at": "2026-06-03T10:01:41.969308+00:00",
+      "evaluated_at": "2026-06-03T10:49:00.403038+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "from_softpool": true,
-      "last_seen_at": "2026-06-03T10:01:48.016147+00:00",
+      "last_seen_at": "2026-06-03T10:49:02.606236+00:00",
       "menzo_ai_review": {
-        "article_type": "hard_news",
+        "article_type": "storyline_development",
         "bob_brief": {
-          "expected_embeds": [
-            "instagram"
-          ],
+          "expected_embeds": [],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
@@ -50,21 +46,21 @@
             "cta",
             "share_links"
           ],
-          "source_specific_notes": "Riporta la notizia con oggettività senza enfatizzare troppo l'aspetto 'spoilers'."
+          "source_specific_notes": "Verificare bene il nome del produttore citato nella fonte."
         },
-        "category_hint": "WWE",
+        "category_hint": "World",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Notizia curiosa ma rilevante sul coinvolgimento di talenti WWE in produzioni esterne (AAA).",
-        "event_key": "gable_aaa_producer",
-        "id": "c6",
+        "editorial_reason": "Dettaglio tecnico interessante sul coinvolgimento WWE in produzioni esterne (AAA).",
+        "event_key": "aaa_mask_match_producer",
+        "id": "c3",
         "priority": 5,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed",
       "priority": "soft",
       "published": "Tue, 02 Jun 2026 20:59:17 +0000",
-      "reason": "ai:Notizia curiosa ma rilevante sul coinvolgimento di talenti WWE in produzioni esterne (AAA).; deterministic:entity:chad gable,recency:fresh_36h",
+      "reason": "ai:Dettaglio tecnico interessante sul coinvolgimento WWE in produzioni esterne (AAA).; deterministic:entity:chad gable,recency:fresh_36h",
       "score": 56,
       "softpool_added_at": "2026-06-03T07:21:42.347226+00:00",
       "softpool_reason": "medium_candidate_above_quality_threshold",
@@ -78,6 +74,6 @@
   "min_score": 55,
   "softnews_ttl_hours": 24,
   "ttl_hours": 36,
-  "updated_at": "2026-06-03T10:01:48.016147+00:00",
+  "updated_at": "2026-06-03T10:49:02.606236+00:00",
   "version": "v93_20_selective_softpool"
 }
