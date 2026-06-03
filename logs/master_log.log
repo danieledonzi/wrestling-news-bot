@@ -22818,3 +22818,14 @@ RecursionError: maximum recursion depth exceeded while calling a Python object
 [MANUAL v92] WP probe status=415 elapsed=0.75s endpoint=https://news.openwrestlingtv.com/wp-json/wp/v2/posts?per_page=1
 [MANUAL v92] wp_ok=False wp_status=status_415
 [MANUAL v92] WordPress non disponibile: interrompo prima di scrape/traduzione
+[MANUAL v92] DNS news.openwrestlingtv.com: 89.40.173.112
+[MANUAL v92] WP health check attempt 1/2 timeout=10s
+[MANUAL v92] WP probe status=200 elapsed=0.98s endpoint=https://news.openwrestlingtv.com/
+[MANUAL v92] WP probe status=200 elapsed=0.79s endpoint=https://news.openwrestlingtv.com/wp-json/
+[MANUAL v92] WP health check OK label=rest_root status=status_200 | tentativo 1/2
+[MANUAL v92] wp_ok=True wp_status=status_200
+[MANUAL v92] Avvio manual report url=https://www.wrestlinginc.com/2185340/wwe-nxt-june-2-two-championships-on-line-lizzy-rain-zaria-more/
+[MANUAL v92] source=wrestlinginc source_title=WWE NXT Results 6/2 - Two Championships On The Line, Lizzy Rain Faces Zaria & More - Wrestling Inc.
+[MANUAL v92] title=WWE NXT del 3 Giugno 2026 - Risultati e momenti salienti
+[MANUAL v92] categories=Editoriali, WWE
+[MANUAL v92] Pubblicato post_id=5909 link=https://news.openwrestlingtv.com/wwe/wwe-nxt-del-3-giugno-2026-risultati-e-momenti-salienti/

@@ -295,5 +295,28 @@
     "wp_post_id": 5840,
     "link": "https://news.openwrestlingtv.com/wwe/wwe-raw-dell1-giugno-2026-risultati-e-momenti-salienti/",
     "created_at": "2026-06-02T00:09:34.818473"
+  },
+  {
+    "job": {
+      "kind": "report",
+      "report_key": "manual_report_wwe-nxt-del-3-giugno-2026-risultati-e-momenti-salienti_20260603090454",
+      "report_id": "manual_report",
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2185340/wwe-nxt-june-2-two-championships-on-line-lizzy-rain-zaria-more/",
+      "source_title": "WWE NXT Results 6/2 - Two Championships On The Line, Lizzy Rain Faces Zaria & More - Wrestling Inc.",
+      "title": "WWE NXT del 3 Giugno 2026 - Risultati e momenti salienti",
+      "date": "2026-06-03",
+      "categories": [
+        "Editoriali",
+        "WWE"
+      ],
+      "title_policy": "manual",
+      "translation_mode": "report",
+      "created_at": "2026-06-03T09:04:54.215450",
+      "status": "manual_ready_to_publish"
+    },
+    "wp_post_id": 5909,
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-nxt-del-3-giugno-2026-risultati-e-momenti-salienti/",
+    "created_at": "2026-06-03T09:06:05.007161"
   }
 ]
