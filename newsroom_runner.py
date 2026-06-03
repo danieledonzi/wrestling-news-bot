@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
-NEWSROOM_VERSION = "v93_18_simone_autonomous_reports"
+NEWSROOM_VERSION = "v93_19_master_log"
 ARTIFACT_DIR = Path("artifacts") / "newsroom"
 
 
@@ -212,6 +212,19 @@ def import_archivista():
     return run_archivista
 
 
+def write_master_log_safe(timeline: list[dict[str, str]], **kwargs: Any) -> dict[str, Any]:
+    try:
+        from agents.master_log_v93_19 import write_master_log
+        result = write_master_log(timeline=timeline, **kwargs)
+        add_timeline(timeline, "MasterLog", "master_log_saved", f"records={result.get('records')}")
+        return result
+    except Exception as exc:
+        error = {"version": NEWSROOM_VERSION, "status": "error", "error": str(exc), "generated_at": utc_now()}
+        write_json(ARTIFACT_DIR / "master_log_error.json", error)
+        add_timeline(timeline, "MasterLog", "error", str(exc))
+        return error
+
+
 def main() -> int:
     ensure_artifacts()
     started_at = utc_now()
@@ -222,7 +235,7 @@ def main() -> int:
     command = runtime_command()
     engine = command[1] if len(command) > 1 else "unknown"
     is_test_override = bool(os.getenv("NEWSROOM_ENGINE", "").strip())
-    jarvis_status = {"version": NEWSROOM_VERSION, "created_at": utc_now(), "agent": "Jarvis", "mode": "v93_orchestrator", "engine": engine, "newsroom_engine_override": is_test_override, "wp_status_source": "v93_publisher", "can_translate": "v93_bob", "can_review": "v93_alfred", "can_publish": "v93_publisher", "can_audit": "v93_archivista", "can_publish_reports": "v93_simone_autonomous"}
+    jarvis_status = {"version": NEWSROOM_VERSION, "created_at": utc_now(), "agent": "Jarvis", "mode": "v93_orchestrator", "engine": engine, "newsroom_engine_override": is_test_override, "wp_status_source": "v93_publisher", "can_translate": "v93_bob", "can_review": "v93_alfred", "can_publish": "v93_publisher", "can_audit": "v93_archivista", "can_publish_reports": "v93_simone_autonomous", "can_write_master_log": "v93_master_log"}
     write_json(ARTIFACT_DIR / "jarvis_status.json", jarvis_status)
     add_timeline(timeline, "Jarvis", "bootstrap_status_written", f"engine={engine}")
 
@@ -262,7 +275,8 @@ def main() -> int:
         add_timeline(timeline, "Publisher", "runtime_finished", f"exit_code={runtime_exit_code}")
 
     ended_at = utc_now()
-    run_summary = {"version": NEWSROOM_VERSION, "started_at": started_at, "ended_at": ended_at, "engine": engine, "newsroom_engine_override": is_test_override, "runtime_delegations": runtime_delegations, "runtime_exit_code": runtime_exit_code, "agents": {"jarvis": "real_orchestrator", "massy": "real_sentinel_control", "simone": "real_report_director_and_autonomous_report_publisher", "menzo": "real_editorial_director", "bob": "real_article_writer", "alfred": "real_quality_editor", "publisher": "real_wordpress_publisher", "archivista": "real_audit_agent"}, "massy_handoff": handoff(massy_board), "simone_handoff": handoff(simone_decision), "simone_publish_handoff": handoff(simone_publish), "menzo_handoff": handoff(menzo_decision), "bob_handoff": handoff(bob_result), "alfred_handoff": handoff(alfred_result), "publisher_handoff": handoff(publisher_result)}
+    run_summary = {"version": NEWSROOM_VERSION, "started_at": started_at, "ended_at": ended_at, "engine": engine, "newsroom_engine_override": is_test_override, "runtime_delegations": runtime_delegations, "runtime_exit_code": runtime_exit_code, "agents": {"jarvis": "real_orchestrator", "massy": "real_sentinel_control", "simone": "real_report_director_and_autonomous_report_publisher", "menzo": "real_editorial_director", "bob": "real_article_writer", "alfred": "real_quality_editor", "publisher": "real_wordpress_publisher", "archivista": "real_audit_agent", "master_log": "real_structured_run_memory"}, "massy_handoff": handoff(massy_board), "simone_handoff": handoff(simone_decision), "simone_publish_handoff": handoff(simone_publish), "menzo_handoff": handoff(menzo_decision), "bob_handoff": handoff(bob_result), "alfred_handoff": handoff(alfred_result), "publisher_handoff": handoff(publisher_result)}
+
     archivista_result = safe_agent(timeline=timeline, agent="Archivista", phase="audit_ready", import_fn=import_archivista, call_args=(), artifact_name="archivista_report.json", default_handoff={"overall_status": "error"}, note_fn=lambda r: "status={status} anomalies={anomalies}".format(status=r.get("overall_status", "unknown"), anomalies=(r.get("summary", {}) if isinstance(r.get("summary"), dict) else {}).get("anomalies", 0)))
     if archivista_result.get("status") != "error":
         try:
@@ -273,6 +287,21 @@ def main() -> int:
             add_timeline(timeline, "Archivista", "error", str(exc))
     run_summary["archivista_handoff"] = archivista_result.get("summary", {}) if isinstance(archivista_result, dict) else {}
     run_summary["archivista_status"] = archivista_result.get("overall_status") if isinstance(archivista_result, dict) else "error"
+
+    master_log_result = write_master_log_safe(
+        timeline,
+        run_summary=run_summary,
+        massy=massy_board,
+        simone=simone_decision,
+        simone_publish=simone_publish,
+        menzo=menzo_decision,
+        bob=bob_result,
+        alfred=alfred_result,
+        publisher=publisher_result,
+        archivista=archivista_result,
+    )
+    run_summary["master_log"] = master_log_result
+
     write_json(ARTIFACT_DIR / "agent_timeline.json", timeline)
     write_json(ARTIFACT_DIR / "run_summary.json", run_summary)
     print(f"[ARCHIVISTA v93] Saved {ARTIFACT_DIR / 'run_summary.json'}", flush=True)
