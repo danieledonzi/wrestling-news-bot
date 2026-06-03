@@ -1,16 +1,16 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-02T23:18:28.941548+00:00",
+  "generated_at": "2026-06-03T02:07:55.084059+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 0,
-    "wp_not_ready": 1
+    "published": 3,
+    "wp_not_ready": 0
   },
   "input": {
     "alfred_version": "v93_8_alfred_structured_content_checks",
-    "approved_articles": 1
+    "approved_articles": 3
   },
   "mode": "wordpress_publisher_plain_oembed_urls",
   "policy": {
@@ -54,31 +54,57 @@
   },
   "results": [
     {
-      "content_chars": 2751,
-      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/03/judge-orders-wwe-sale-bidding-details-to-be-unsealed-in-shareholder-lawsuit-15.jpg",
-      "media_id": null,
-      "payload_preview": {
-        "categories": [],
-        "excerpt": "La fusione tra WWE e UFC che ha dato vita a TKO Group Holdings è al centro di una pesante disputa legale che potrebbe costare quasi un miliardo di dollari.",
-        "meta": {
-          "original_url": "https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/",
-          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
-          "owtv_source": "ringsidenews"
-        },
-        "status": "publish",
-        "title": "WWE: causa degli azionisti in vista, in ballo quasi un miliardo di dollari"
-      },
-      "source_url": "https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/",
-      "status": "wp_not_ready",
-      "title_it": "WWE: causa degli azionisti in vista, in ballo quasi un miliardo di dollari",
-      "wp_ready": false
+      "categories": [
+        15,
+        8
+      ],
+      "category_names_priority": [
+        "Business",
+        "World"
+      ],
+      "featured_media": 5889,
+      "source_url": "https://www.ringsidenews.com/nick-khan-shuts-down-talk-tko-buying-more-companies-anytime-soon/",
+      "status": "published",
+      "title_it": "Nick Khan smentisce l'ipotesi di nuove acquisizioni per TKO",
+      "wp_link": "https://news.openwrestlingtv.com/world/nick-khan-smentisce-lipotesi-di-nuove-acquisizioni-per-tko/",
+      "wp_post_id": 5890
+    },
+    {
+      "categories": [
+        6,
+        4
+      ],
+      "category_names_priority": [
+        "NXT",
+        "WWE"
+      ],
+      "featured_media": 5891,
+      "source_url": "https://www.wrestlinginc.com/2186283/lexis-king-defends-mens-wwe-speed-title-nxt-newcomer/",
+      "status": "published",
+      "title_it": "Lexis King difende il titolo WWE Speed contro un nuovo volto di NXT",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/lexis-king-difende-il-titolo-wwe-speed-contro-un-nuovo-volto-di-nxt/",
+      "wp_post_id": 5892
+    },
+    {
+      "categories": [
+        4
+      ],
+      "category_names_priority": [
+        "WWE"
+      ],
+      "featured_media": 5893,
+      "source_url": "https://www.ringsidenews.com/nick-khan-says-wwe-will-never-change-creative-plans-because-social-media-backlash/",
+      "status": "published",
+      "title_it": "Nick Khan: la WWE non cambia i piani creativi in base al malcontento sui social",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/nick-khan-la-wwe-non-cambia-i-piani-creativi-in-base-al-malcontento-sui-social/",
+      "wp_post_id": 5894
     }
   ],
   "version": "v93_17_publisher_gutenberg_embed_blocks",
   "wp": {
     "dry_run": false,
     "post_status": "publish",
-    "ready": false,
-    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=25)"
+    "ready": true,
+    "reason": "ok"
   }
 }

@@ -233,9 +233,27 @@
       "reason": "ai:Opinione/speculazione non necessaria. Curiosità debole.; deterministic:entity:brock lesnar,entity:oba femi,recency:fresh_12h",
       "title": "WWE HOFer Jeff Jarrett Wants Special Stipulation For Brock Lesnar/Oba Femi III",
       "url": "https://www.wrestlinginc.com/2186177/wwe-hofer-jeff-jarrett-wants-special-stipulation-brock-lesnar-oba-femi-iii/"
+    },
+    {
+      "added_at": "2026-06-03T02:07:22.827727+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/truth-behind-lucha-underground-comeback-teasers-revealed",
+      "reason": "soft_penalty:social media,recency:fresh_12h",
+      "title": "Truth Behind Lucha Underground Comeback Teasers Revealed",
+      "url": "https://www.ringsidenews.com/truth-behind-lucha-underground-comeback-teasers-revealed/"
+    },
+    {
+      "added_at": "2026-06-03T02:07:22.827727+00:00",
+      "article_type": "duplicate",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/wwe-smackdown-viewership-sees-no-change-may-29-2026",
+      "reason": "ai_duplicate_event:smackdown ratings may29; ai_duplicate_of:c6; strategic:smackdown,ratings:generic_penalty,recency:fresh_12h",
+      "title": "WWE SmackDown Viewership Sees No Change on May 29, 2026",
+      "url": "https://www.ringsidenews.com/wwe-smackdown-viewership-sees-no-change-may-29-2026/"
     }
   ],
   "ttl_hours": 168,
-  "updated_at": "2026-06-02T23:18:00.787323+00:00",
+  "updated_at": "2026-06-03T02:07:22.827727+00:00",
   "version": "v93_15_forced_priority_label_softpool"
 }
