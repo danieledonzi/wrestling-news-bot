@@ -63,10 +63,22 @@ Published reports: -
 Massy: to_simone=0 to_menzo=22 hard_skip=13 menzo_skip=9 old_skip=0
 Simone: ready=0 reports_published=0 wp_not_ready=0
 Menzo: selected=7 pending=1 skipped=14 ai=True model=gemini-3.1-flash-lite
-Bob: ready=3 errors=0 changes={'bob_v93_16_changes': 3, 'bob_brief_warnings_added': 0}
+Bob: ready=3 errors=0 changes={'bob_brief_warnings_added': 0, 'bob_v93_16_changes': 3}
 Alfred: approved=3 warnings=0 blockers=0
 Publisher: published=0 wp_not_ready=3 errors=0
 Archivista: status=error anomalies=1
 Selected: Comedian Michael Che Teases Writing For WWE, Talks His Favorite Performers, Logan Paul Reveals Real Pain Behind Torn Tricep Injury At WWE Saturday Night’s Main Event, Sol Ruca’s WWE Clash In Italy Match Criticized for Being Too Structured, Mick Foley On Possibility Of One More Match In AEW: 'Stranger Things Have Happened', NWA Adds World Title Match To Hard Times 6, MJF Announces He’s Stepping Away From American Independent Wrestling to Focus on AEW
+Published news: -
+Published reports: -
+
+===== NEWSROOM MASTER RUN 2026-06-03T23:03:45.430125+00:00 | v93_20_process_refinements | run_id=26918550945 =====
+Massy: to_simone=1 to_menzo=20 hard_skip=14 menzo_skip=12 old_skip=0
+Simone: ready=0 reports_published=0 wp_not_ready=0
+Menzo: selected=11 pending=1 skipped=8 ai=True model=gemini-3.1-flash-lite
+Bob: ready=3 errors=0 changes={'bob_v93_16_changes': 2, 'bob_brief_warnings_added': 1}
+Alfred: approved=3 warnings=1 blockers=0
+Publisher: published=0 wp_not_ready=3 errors=0
+Archivista: status=error anomalies=1
+Selected: Former WWF Star Mike ‘Duke’ Droese’s Criminal Case Delayed Yet Again, Mercedes Mone’s AEW Return Status After Months Away From Television, Rhea Ripley Calls Out Fan For Sharing AI-Generated WWE Render, How Women’s Wrestling Became a Major Influence Across Entertainment, Mick Foley On Possibility Of One More Match In AEW: 'Stranger Things Have Happened', Former WWE Talent Confirms Departure After Long Absence Due To Injury
 Published news: -
 Published reports: -

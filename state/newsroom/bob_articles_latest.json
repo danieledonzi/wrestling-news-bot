@@ -3,829 +3,185 @@
   "articles": [
     {
       "bob_notes": [],
-      "body_html": "<blockquote>I fan del &quot;Saturday Night Live&quot; conosceranno il comico e autore Michael Che come co-conduttore del segmento di notizie settimanale dello show, &quot;Weekend Update&quot;, che conduce insieme a Colin Jost da 12 anni al momento della stesura di questo articolo. Tuttavia, gli appassionati di wrestling ricorderanno che Che e Jost hanno avuto un piccolo ruolo in WWE nel 2019.</blockquote>\n<blockquote>Dopo un&#x27;apparizione a &quot;WWE Raw&quot;, i due presero parte alla Andre The Giant Memorial Battle Royal a WWE WrestleMania 35, che avrebbero quasi sicuramente vinto se non fosse stato per Braun Strowman. Che non è più apparso in WWE da allora, ma è stato recentemente ospite del podcast di Stephanie McMahon &quot;What&#x27;s Your Story?&quot;, dove ha ammesso che scrivere per la WWE sarebbe per lui un sogno che si avvera.</blockquote>\n<blockquote>&quot;Mi piacerebbe moltissimo, sarebbe qualcosa da fare una volta nella vita&quot;, ha dichiarato Che. &quot;Sarebbe davvero divertente. È una cosa interessante, sai, sono un fan. I performer di oggi sono... ci sono dei talenti davvero, davvero interessanti. Sai chi adoro? IYO SKY, Rhea [Ripley] e stavo dicendo Jacob [Fatu]. Adoro Jacob Fatu, ci sono così tante persone davvero divertenti da guardare. Amo The Vision, amo Paul Heyman... È una delle persone migliori che abbia mai visto in televisione, è nella lista ristretta di persone... non so perché non sia ancora un vincitore di quattro Emmy. È così bravo davanti alla telecamera e, ogni volta che appare, succede sempre qualcosa di interessante o di importante&quot;.</blockquote>\n<p>Che non è l&#x27;unico comico ad aver mostrato interesse per la scrittura in WWE: anche il conduttore di &quot;Kill Tony&quot;, Tony Hinchcliffe, ha dichiarato pubblicamente che gli era stata offerta una posizione nel team creativo della WWE, ma che ha rifiutato per continuare a concentrarsi sulla sua carriera comica.</p>\nhttps://www.youtube.com/watch?v=i5hhPcT4LKI",
-      "category_hint": "WWE",
-      "clean_element_count": 5,
-      "created_at": "2026-06-03T20:36:57.508786+00:00",
+      "body_html": "<p>Mike “Duke” Droese dovrà attendere ancora prima che il suo procedimento penale faccia passi avanti.</p>\n<p>I guai legali dell&#x27;ex star della WWF continuano a trascinarsi: stando ai registri del tribunale, la sua ultima udienza nella contea di Warren, nel Tennessee, è stata nuovamente posticipata. Il caso deriva dall&#x27;arresto di Droese nel maggio 2023 per l&#x27;accusa di tentato sfruttamento sessuale aggravato di un minore.</p>\n<p>Dopo molteplici rinvii nell&#x27;ultimo anno, la nuova udienza è stata fissata per l&#x27;8 luglio. Droese resta in libertà dietro pagamento di una cauzione di 10.000 dollari in attesa che il caso faccia il suo corso nel sistema giudiziario. È passato più di un anno dal suo arresto, ma non vi è ancora stata alcuna risoluzione.</p>\n<p>I fan del wrestling ricorderanno Droese per il suo periodo nella WWF degli anni &#x27;90 come Duke “The Dumpster” Droese. Sebbene la sua carriera da wrestler a tempo pieno si sia conclusa in gran parte nel 2001, ha continuato a fare apparizioni sporadiche nel corso degli anni, disputando il suo ultimo match noto nel 2023.</p>\n<p>Il caso attuale non è la prima volta che Droese si trova ad affrontare seri problemi legali. Nel 2013 fu incriminato per tre capi d&#x27;accusa legati allo spaccio di sostanze controllate, dopo che le autorità sostennero avesse venduto ossicodone e buprenorfina a un informatore sotto copertura. All&#x27;epoca Droese lavorava come insegnante e, in seguito alle accuse, rassegnò le dimissioni dall&#x27;incarico.</p>\n<p>Quel caso si concluse con una condanna a tre anni per Droese, che fu obbligato a scontare 30 giorni di carcere e a pagare 2.000 dollari di multa oltre alle spese processuali.</p>\n<p>Ora, più di un decennio dopo, Droese si trova nuovamente ad affrontare gravi accuse mentre l&#x27;accusa prosegue il suo iter. Con un altro rinvio agli atti, tutti gli occhi sono puntati sull&#x27;8 luglio, per capire se la vicenda finalmente progredirà o se subirà un ulteriore slittamento.</p>",
+      "category_hint": "World",
+      "clean_element_count": 7,
+      "created_at": "2026-06-03T23:03:56.419033+00:00",
       "diagnostic_stage": "ready_for_alfred",
-      "diagnostic_warnings": [],
-      "editorial_changes": [
-        {
-          "code": "leading_embed_moved_after_first_paragraph",
-          "evidence": "https://www.youtube.com/watch?v=i5hhPcT4LKI",
-          "message": "Embed iniziale spostato dopo il primo paragrafo.",
-          "severity": "info"
-        }
-      ],
       "element_counts": {
-        "embed": 1,
+        "embed": 0,
         "heading": 0,
         "image": 0,
-        "quote": 3,
+        "quote": 0,
         "table": 0,
-        "text": 1
+        "text": 7
       },
       "elements": [
         {
           "block_id": "b1",
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=i5hhPcT4LKI"
-        },
-        {
-          "block_id": "b2",
-          "source_tag": "p",
-          "text": "Fans of \"Saturday Night Live\" will know comedian and writer, Michael Che, for being one of the co-hosts of the show's weekly news segment \"Weekend Update,\" a segment he has hosted alongside Colin Jost for 12 years at the time of writing. However, wrestling fans will remember Che and Jost having a small role to play in WWE back in 2019.",
-          "type": "quote"
-        },
-        {
-          "block_id": "b3",
-          "source_tag": "p",
-          "text": "Following an appearance on \"WWE Raw,\" the two men were entered into the Andre The Giant Memorial Battle Royal at WWE WrestleMania 35, most won the match had it not been for Braun Strowman. Che hasn't been seen in WWE since, but he was a recent guest on Stephanie McMahon's \" What's Your Story? \" podcast, and he admitted that potentially writing for WWE would be a dream come true.",
-          "type": "quote"
-        },
-        {
-          "block_id": "b4",
-          "source_tag": "p",
-          "text": "\"I would love to do that, that would be like bucket list,\" Che said. \"That could be really fun. That's like a cool–I'm a fan you know? The performers now are like, there's some really, really cool–you know who I love is IYO SKY, and Rhea [Ripley], and I was saying Jacob [Fatu]. I love Jacob Fatu, there's so many like really, really fun people to watch. I love The Vision, I love Paul Heyman...He's one of the best people I've ever seen on television, like he's on the shortlist of just the people–I don't know why he's not a four-time Emmy winner. He's so good on television, and every time he's on, it's like something cool or developing.\"",
-          "type": "quote"
-        },
-        {
-          "block_id": "b5",
-          "text": "Che isn't the only comedian who has been interested in writing for WWE as the host of \"Kill Tony,\" Tony Hinchcliffe, has publicly stated that he was actually offered a position on the WWE writing team but turned it down to continue focusing on his comedy career.",
+          "text": "Mike “Duke” Droese will have to wait even longer before his criminal case moves forward.",
           "type": "text"
-        }
-      ],
-      "excerpt_it": "Il volto del \"Weekend Update\" del Saturday Night Live rivela il suo desiderio di scrivere per la WWE e tesse le lodi di diverse superstar.",
-      "extraction_diagnostics": {
-        "candidate_node_count": 12,
-        "clean_element_count": 5,
-        "dom_noise_reduction_enabled": false,
-        "embed_count": 1,
-        "global_embed_recovery_enabled": false,
-        "quote_count": 3,
-        "raw_element_count": 7,
-        "removed_by_node_count": 0,
-        "removed_by_sanitize_count": 2,
-        "root_name": "article",
-        "root_text_chars": 1892,
-        "stage": "complete",
-        "table_count": 0
-      },
-      "fetched_html_chars": 50607,
-      "menzo_score": 87,
-      "meta": {
-        "description": "Could Michael Che trade the \"Weekend Update\" desk in for a job in WWE? The man himself has opened up about how writing for WWE would be a dream.",
-        "featured_image": "https://www.wrestlinginc.com/img/gallery/comedian-michael-che-teases-writing-for-wwe-talks-his-favorite-performers/l-intro-1780113014.jpg",
-        "source_title": "Comedian Michael Che Teases Writing For WWE, Talks His Favorite Performers - Wrestling Inc."
-      },
-      "raw_element_count": 7,
-      "raw_elements_preview": [
-        {
-          "block_id": "b1",
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=i5hhPcT4LKI"
-        },
-        {
-          "alt": "Michael Che",
-          "type": "image",
-          "url": "https://www.wrestlinginc.com/img/gallery/comedian-michael-che-teases-writing-for-wwe-talks-his-favorite-performers/intro-1780113014.jpg"
-        },
-        {
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=i5hhPcT4LKI"
         },
         {
           "block_id": "b2",
-          "source_tag": "p",
-          "text": "Fans of \"Saturday Night Live\" will know comedian and writer, Michael Che, for being one of the co-hosts of the show's weekly news segment \"Weekend Update,\" a segment he has hosted alongside Colin Jost for 12 years at the time of writing. However, wrestling fans will remember Che and Jost having a small role to play in WWE back in 2019.",
-          "type": "quote"
-        },
-        {
-          "block_id": "b3",
-          "source_tag": "p",
-          "text": "Following an appearance on \"WWE Raw,\" the two men were entered into the Andre The Giant Memorial Battle Royal at WWE WrestleMania 35, most won the match had it not been for Braun Strowman. Che hasn't been seen in WWE since, but he was a recent guest on Stephanie McMahon's \" What's Your Story? \" podcast, and he admitted that potentially writing for WWE would be a dream come true.",
-          "type": "quote"
-        },
-        {
-          "block_id": "b4",
-          "source_tag": "p",
-          "text": "\"I would love to do that, that would be like bucket list,\" Che said. \"That could be really fun. That's like a cool–I'm a fan you know? The performers now are like, there's some really, really cool–you know who I love is IYO SKY, and Rhea [Ripley], and I was saying Jacob [Fatu]. I love Jacob Fatu, there's so many like really, really fun people to watch. I love The Vision, I love Paul Heyman...He's one of the best people I've ever seen on television, like he's on the shortlist of just the people–I don't know why he's not a four-time Emmy winner. He's so good on television, and every time he's on, it's like something cool or developing.\"",
-          "type": "quote"
-        },
-        {
-          "block_id": "b5",
-          "text": "Che isn't the only comedian who has been interested in writing for WWE as the host of \"Kill Tony,\" Tony Hinchcliffe, has publicly stated that he was actually offered a position on the WWE writing team but turned it down to continue focusing on his comedy career.",
-          "type": "text"
-        }
-      ],
-      "removed_before_gemini": 2,
-      "removed_elements_debug": [
-        {
-          "index": 2,
-          "item": {
-            "alt": "Michael Che",
-            "type": "image",
-            "url": "https://www.wrestlinginc.com/img/gallery/comedian-michael-che-teases-writing-for-wwe-talks-his-favorite-performers/intro-1780113014.jpg"
-          },
-          "reason": "duplicate_featured_image"
-        },
-        {
-          "index": 3,
-          "item": {
-            "source_tag": "div",
-            "type": "embed",
-            "url": "https://www.youtube.com/watch?v=i5hhPcT4LKI"
-          },
-          "reason": "duplicate_or_empty_embed"
-        }
-      ],
-      "source": "wrestlinginc",
-      "source_html_contains_embed_hint": true,
-      "source_title": "Comedian Michael Che Teases Writing For WWE, Talks His Favorite Performers",
-      "source_url": "https://www.wrestlinginc.com/2184203/michael-che-writing-wwe-favorite-performers-paul-heyman-stephanie-mcmahon/",
-      "status": "ready_for_alfred",
-      "title_it": "Il comico Michael Che apre a un ruolo come autore in WWE",
-      "translation_chain_attempted": [
-        "gemini-3.1-flash-lite"
-      ],
-      "translation_missing_units": [],
-      "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2184203/michael-che-writing-wwe-favorite-performers-paul-heyman-stephanie-mcmahon/\nTitolo feed: Comedian Michael Che Teases Writing For WWE, Talks His Favorite Performers\nTitolo pagina: Comedian Michael Che Teases Writing For WWE, Talks His Favorite Performers - Wrestling Inc.\nDescrizione: Could Michael Che trade the \"Weekend Update\" desk in for a job in WWE? The man himself has opened up about how writing for WWE would be a dream.\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"quote\",\n    \"text\": \"Fans of \\\"Saturday Night Live\\\" will know comedian and writer, Michael Che, for being one of the co-hosts of the show's weekly news segment \\\"Weekend Update,\\\" a segment he has hosted alongside Colin Jost for 12 years at the time of writing. However, wrestling fans will remember Che and Jost having a small role to play in WWE back in 2019.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"Following an appearance on \\\"WWE Raw,\\\" the two men were entered into the Andre The Giant Memorial Battle Royal at WWE WrestleMania 35, most won the match had it not been for Braun Strowman. Che hasn't been seen in WWE since, but he was a recent guest on Stephanie McMahon's \\\" What's Your Story? \\\" podcast, and he admitted that potentially writing for WWE would be a dream come true.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"I would love to do that, that would be like bucket list,\\\" Che said. \\\"That could be really fun. That's like a cool–I'm a fan you know? The performers now are like, there's some really, really cool–you know who I love is IYO SKY, and Rhea [Ripley], and I was saying Jacob [Fatu]. I love Jacob Fatu, there's so many like really, really fun people to watch. I love The Vision, I love Paul Heyman...He's one of the best people I've ever seen on television, like he's on the shortlist of just the people–I don't know why he's not a four-time Emmy winner. He's so good on television, and every time he's on, it's like something cool or developing.\\\"\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Che isn't the only comedian who has been interested in writing for WWE as the host of \\\"Kill Tony,\\\" Tony Hinchcliffe, has publicly stated that he was actually offered a position on the WWE writing team but turned it down to continue focusing on his comedy career.\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"Il comico Michael Che apre a un ruolo come autore in WWE\",\n  \"excerpt_it\": \"Il volto del \\\"Weekend Update\\\" del Saturday Night Live rivela il suo desiderio di scrivere per la WWE e tesse le lodi di diverse superstar.\",\n  \"translations\": {\n    \"b2\": \"I fan del \\\"Saturday Night Live\\\" conosceranno il comico e autore Michael Che come co-conduttore del segmento di notizie settimanale dello show, \\\"Weekend Update\\\", che conduce insieme a Colin Jost da 12 anni al momento della stesura di questo articolo. Tuttavia, gli appassionati di wrestling ricorderanno che Che e Jost hanno avuto un piccolo ruolo in WWE nel 2019.\",\n    \"b3\": \"Dopo un'apparizione a \\\"WWE Raw\\\", i due presero parte alla Andre The Giant Memorial Battle Royal a WWE WrestleMania 35, che avrebbero quasi sicuramente vinto se non fosse stato per Braun Strowman. Che non è più apparso in WWE da allora, ma è stato recentemente ospite del podcast di Stephanie McMahon \\\"What's Your Story?\\\", dove ha ammesso che scrivere per la WWE sarebbe per lui un sogno che si avvera.\",\n    \"b4\": \"\\\"Mi piacerebbe moltissimo, sarebbe qualcosa da fare una volta nella vita\\\", ha dichiarato Che. \\\"Sarebbe davvero divertente. È una cosa interessante, sai, sono un fan. I performer di oggi sono... ci sono dei talenti davvero, davvero interessanti. Sai chi adoro? IYO SKY, Rhea [Ripley] e stavo dicendo Jacob [Fatu]. Adoro Jacob Fatu, ci sono così tante persone davvero divertenti da guardare. Amo The Vision, amo Paul Heyman... È una delle persone migliori che abbia mai visto in televisione, è nella lista ristretta di persone... non so perché non sia ancora un vincitore di quattro Emmy. È così bravo davanti alla telecamera e, ogni volta che appare, succede sempre qualcosa di interessante o di importante\\\".\",\n    \"b5\": \"Che non è l'unico comico ad aver mostrato interesse per la scrittura in WWE: anche il conduttore di \\\"Kill Tony\\\", Tony Hinchcliffe, ha dichiarato pubblicamente che gli era stata offerta una posizione nel team creativo della WWE, ma che ha rifiutato per continuare a concentrarsi sulla sua carriera comica.\"\n  },\n  \"notes\": []\n}",
-      "translation_unit_count": 4,
-      "translation_used": true
-    },
-    {
-      "bob_notes": [],
-      "body_html": "<p>L&#x27;ultima avventura in WWE di Logan Paul ha subito una brutale battuta d&#x27;arresto a causa di uno strappo al tricipite riportato durante il suo match titolato a WWE Saturday Night’s Main Event.</p>\nhttps://www.youtube.com/watch?v=B6eovayusbA\n\n<p>Il 23 maggio, Paul e Austin Theory hanno difeso il WWE World Tag Team Championship contro gli Street Profits, ma il match si è concluso con Paul alle prese con un grave infortunio. La WWE ha successivamente annunciato che rimarrà lontano dal ring per &quot;diversi mesi&quot; proprio a causa dello strappo al tricipite.</p>\n<p>Parlando nel suo podcast ImPaulsive, Paul ha spiegato che l&#x27;infortunio è avvenuto quando Angelo Dawkins è volato oltre le corde verso l&#x27;esterno. Paul ha raccontato che il suo braccio era già contratto mentre tentava di afferrare Dawkins, e l&#x27;impatto è stato troppo violento per il suo corpo.</p>\n<blockquote>“Quello che è successo è stato che io ero fuori ring e un uomo di quasi 140 chili, Dawkins, è volato oltre le corde. Mi è atterrato addosso mentre il mio braccio era contratto e cercavo di prenderlo. Troppo peso, troppa tensione: ho sentito i tendini staccarsi dal gomito.”</blockquote>\n<p>Paul ha affermato di aver capito immediatamente che qualcosa non andava, vista la sua esperienza con numerosi infortuni passati. Ha inoltre sottolineato che i fan possono sentire il dolore nella sua voce durante il match.</p>\n<blockquote>“Mi sono infortunato così tante volte che l&#x27;ho capito subito. Potete sentirlo, ascoltate bene quando accade: potete sentirmi, non sto facendo selling da wrestler, quello è dolore reale. In quel momento ho capito: sono fottuto.”</blockquote>\n<p>Paul ha spiegato cosa è successo dopo il match, quando Bron Breakker ha provato a sollevargli il braccio per festeggiare. Ha rivelato di aver già comunicato ad Austin Theory, mentre erano ancora sul ring, di credere di essersi strappato il tricipite.</p>\n<blockquote>“Ho detto ad Austin mentre eravamo sul ring: &#x27;Mi sono strappato il tricipite&#x27;. Lui mi guarda – eravamo ancora in fase di lavoro – tipo: &#x27;Ma sei serio?&#x27;. &#x27;Sì, sì, sì&#x27;. Poi Bron Breakker va per alzarci le braccia perché avevamo appena vinto il match.”</blockquote>\n<p>Paul ha detto di essere andato nel panico in quel momento perché Breakker stava per sollevare proprio il braccio infortunato. Lo ha avvertito ripetutamente prima che Breakker lo sollevasse con cautela.</p>\n<blockquote>“Ho urlato: &#x27;Mi sono fatto male al braccio! Mi sono fatto male al braccio! Mi sono fatto male al braccio! Per favore, attento, attento&#x27;. Lui si è preso un secondo e poi lo ha sollevato lentamente, ed è andata bene, ma in quel momento pensavo: &#x27;Fratello, il mio partner sta per strapparmi il braccio ancora di più di quanto non sia già&#x27;.&quot;</blockquote>\n<p>Paul ha anche risposto ai fan che sostengono che la stable The Vision sia maledetta a causa della serie di infortuni del gruppo. Bron Breakker ha avuto un&#x27;ernia, Bronson Reed uno strappo al bicipite e Seth Rollins è stato rimosso dai programmi televisivi dopo un attacco di Breakker. Paul ha detto che la parte più frustrante è che l&#x27;infortunio sia avvenuto durante l&#x27;ultima mossa del match.</p>\n<blockquote>“Questa è una delle cose più deludenti: era l&#x27;ultima mossa che dovevo fare nel match. È stata l&#x27;ultima fottuta cosa, ho eseguito questa mossa e poi me ne andavo a casa.”</blockquote>\n<p>Nonostante l&#x27;infortunio, Paul ha chiarito di considerarsi ancora un campione, anche se al momento non ha la cintura con sé.</p>\n<blockquote>“Tra l&#x27;altro, sono ancora il campione, semplicemente non ho il metallo a provarlo. Non importa, perché indovinate un po&#x27;? I The Vision sono ancora i campioni di coppia.”</blockquote>\n<p>Paul ha anche respinto l&#x27;idea che la stable sia maledetta, tirando in ballo persino Danhausen.</p>\n<blockquote>“La gente dice che i The Vision sono maledetti, sei maledetto tu, Danhausen! Fratello, i The Vision non sono maledetti. Bron Breakker è indistruttibile, ernia a parte. Austin Theory lavora da anni.”</blockquote>\n<p>L&#x27;infortunio di Logan Paul arriva in un momento difficile per i The Vision, che stanno già gestendo diverse defezioni. Tuttavia, Paul ha chiarito di non essere disposto a lasciare che questo infortunio definisca il suo regno titolato o lo slancio del gruppo in WWE.</p>\n\nhttps://www.youtube.com/embed/B6eovayusbA?feature=oembed",
-      "category_hint": "WWE",
-      "clean_element_count": 19,
-      "created_at": "2026-06-03T20:36:59.781253+00:00",
-      "diagnostic_stage": "ready_for_alfred",
-      "diagnostic_warnings": [],
-      "editorial_changes": [
-        {
-          "code": "leading_embed_moved_after_first_paragraph",
-          "evidence": "https://www.youtube.com/watch?v=B6eovayusbA",
-          "message": "Embed iniziale spostato dopo il primo paragrafo.",
-          "severity": "info"
-        }
-      ],
-      "element_counts": {
-        "embed": 2,
-        "heading": 0,
-        "image": 0,
-        "quote": 7,
-        "table": 0,
-        "text": 10
-      },
-      "elements": [
-        {
-          "block_id": "b1",
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=B6eovayusbA"
-        },
-        {
-          "block_id": "b2",
-          "text": "Logan Paul’s latest WWE run hit a brutal setback after he suffered a torn tricep during his championship match at WWE Saturday Night’s Main Event.",
+          "text": "The former WWF star’s legal troubles continue to drag on, as court records show his latest hearing in Warren County, Tennessee has been postponed once again. The case stems from Droese’s May 2025 arrest on a charge of Attempted Aggravated Sexual Exploitation of a Minor .",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "text": "Paul and Austin Theory defended their WWE World Tag Team Championship against The Street Profits on May 23, but the match ended with Paul dealing with a serious injury. WWE later announced that he would be out of action for “a number of months” because of the torn tricep.",
+          "text": "After multiple delays over the past year, the latest hearing is now scheduled for July 8. Droese remains free on a $10,000 bond while the case works its way through the court system. More than a year has passed since his arrest, but there has still been no resolution.",
           "type": "text"
         },
         {
           "block_id": "b4",
-          "text": "Speaking on his ImPaulsive podcast, Paul explained that the injury happened when Angelo Dawkins came flying over the ropes to the outside. Paul said his arm was already flexed as he tried to catch Dawkins, and the impact was too much for his body to handle.",
+          "text": "Wrestling fans will remember Droese from his run as Duke “The Dumpster” Droese during the 1990s WWF boom period. While his full-time wrestling career largely ended in 2001, he continued making occasional appearances over the years, with his last known match taking place in 2023.",
           "type": "text"
         },
         {
           "block_id": "b5",
-          "source_tag": "blockquote",
-          "text": "“What had happened was, I was on the outside, a nearly 300 pound (Angelo) Dawkins comes flying over the ropes. He lands on me, my arm is flexed and trying to catch him. Too much weight, too much tension, I could feel the tendons snap off the elbow.”",
-          "type": "quote"
+          "text": "The current case isn’t the first time Droese has found himself facing serious legal issues. In 2013, he was indicted on three counts connected to the delivery of controlled substances after authorities alleged he sold oxycodone and buprenorphine to an undercover informant. At the time, Droese was working as a teacher and ultimately resigned from that position following the charges.",
+          "type": "text"
         },
         {
           "block_id": "b6",
-          "text": "Paul said he knew right away that something was badly wrong because of how many injuries he has dealt with before. He also pointed out that fans can hear the pain in his voice during the match.",
+          "text": "That case ended with Droese receiving a three-year sentence. He was ordered to serve 30 days in jail and pay $2,000 in fines and court costs.",
           "type": "text"
         },
         {
           "block_id": "b7",
-          "source_tag": "blockquote",
-          "text": "“I’ve been injured so many times, I knew immediately. You can hear, listen closely to when it happens, you can hear me, I’m not selling like a wrestler, that’s real pain. I knew in that moment, I’m f**ked.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b8",
-          "text": "Paul also explained what happened after the match when Bron Breakker went to raise his arm in celebration. He said he had already told Austin Theory in the ring that he believed he tore his tricep.",
+          "text": "Now, more than a decade later, Droese is once again facing serious allegations as prosecutors continue pursuing the current case. With another delay now in the books, all eyes turn to July 8 to see whether the matter finally moves forward or faces yet another postponement.",
           "type": "text"
-        },
-        {
-          "block_id": "b9",
-          "source_tag": "blockquote",
-          "text": "“I told Austin when we were in the ring, ‘I tore my tricep.’ He looks at me – we’re still working – like ‘Are you f**king serious?’ ‘Yeah, yeah, yeah.’ Then Bron Breakker goes to raise our arms because we had just won the match.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b10",
-          "text": "Paul said he panicked in that moment because Breakker was about to lift the injured arm. He warned him repeatedly before Breakker carefully raised it.",
-          "type": "text"
-        },
-        {
-          "block_id": "b11",
-          "source_tag": "blockquote",
-          "text": "“I go ‘I hurt my arm! I hurt my arm! I hurt my arm! Please, careful, careful.’ He takes a second and then he slowly raises it up, and it was fine, but in that moment I was like ‘Bro, my partner’s about to rip my f**king arm more than it already is.’”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b12",
-          "text": "Paul also addressed fans saying The Vision may be cursed because of the group’s run of injuries. Bron Breakker previously dealt with a hernia, Bronson Reed suffered a torn bicep, and Seth Rollins was written off WWE television after a shoulder injury angle involving Breakker. Paul said the most frustrating part was that the injury happened on the final move he was involved in during the match.",
-          "type": "text"
-        },
-        {
-          "block_id": "b13",
-          "source_tag": "blockquote",
-          "text": "“That’s one of the most disappointing parts about it, it was the last move I was a part of in the match. It was the last f**king thing, I hit this move right and I’m going home.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b14",
-          "text": "Despite the injury, Paul made it clear he still sees himself as a champion, even if he does not currently have the title belt in his possession.",
-          "type": "text"
-        },
-        {
-          "block_id": "b15",
-          "source_tag": "blockquote",
-          "text": "“By the way, I am still the champ, I just don’t have the hardware to prove it. It doesn’t matter, because guess what? The Vision are still tag team champions.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b16",
-          "text": "Paul also shut down the idea that The Vision is cursed and even brought Danhausen into the conversation.",
-          "type": "text"
-        },
-        {
-          "block_id": "b17",
-          "source_tag": "blockquote",
-          "text": "“The people are saying The Vision is cursed, you’re cursed, Danhausen! Bro, The Vision is not cursed. Bron Breakker is indestructible, minus the hernia. Austin Theory has been working for years.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b18",
-          "text": "Logan Paul’s injury comes at a rough time for The Vision, especially with the faction already dealing with multiple setbacks. Still, Paul made it clear that he is not ready to let the injury define his title reign or the group’s momentum in WWE.",
-          "type": "text"
-        },
-        {
-          "block_id": "b19",
-          "source_tag": "figure",
-          "type": "embed",
-          "url": "https://www.youtube.com/embed/B6eovayusbA?feature=oembed"
         }
       ],
-      "excerpt_it": "Logan Paul racconta i dettagli dell'infortunio subito durante un match titolato a WWE Saturday Night’s Main Event.",
+      "excerpt_it": "L'ex star della WWF Mike “Duke” Droese dovrà attendere ancora prima che il suo procedimento penale faccia passi avanti.",
       "extraction_diagnostics": {
-        "candidate_node_count": 106,
-        "clean_element_count": 19,
+        "candidate_node_count": 86,
+        "clean_element_count": 7,
         "dom_noise_reduction_enabled": false,
-        "embed_count": 2,
+        "embed_count": 0,
         "global_embed_recovery_enabled": false,
-        "quote_count": 7,
-        "raw_element_count": 24,
+        "quote_count": 0,
+        "raw_element_count": 8,
         "removed_by_node_count": 13,
-        "removed_by_sanitize_count": 5,
+        "removed_by_sanitize_count": 1,
         "root_name": "article",
-        "root_text_chars": 4643,
+        "root_text_chars": 2634,
         "stage": "complete",
         "table_count": 0
       },
-      "fetched_html_chars": 529630,
-      "menzo_score": 84,
+      "fetched_html_chars": 520752,
+      "menzo_score": 82,
       "meta": {
-        "description": "Logan Paul’s latest WWE run hit a brutal setback after he suffered a torn tricep during his championship match at WWE Saturday Night’s Main Event. Paul",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/logan-paul-reveals-real-pain-behind-torn-tricep-injury-at-wwe-saturday-nights-main-event-03.jpg",
-        "source_title": "Logan Paul Reveals Real Pain Behind Torn Tricep Injury At WWE Saturday Night’s Main Event"
+        "description": "Mike \"Duke\" Droese will have to wait even longer before his criminal case moves forward. The former WWF star's legal troubles continue to drag on, as",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/former-wwf-star-mike-duke-droeses-criminal-case-delayed-yet-again-48.jpg",
+        "source_title": "Former WWF Star Mike ‘Duke’ Droese’s Criminal Case Delayed Yet Again"
       },
-      "raw_element_count": 24,
+      "raw_element_count": 8,
       "raw_elements_preview": [
         {
           "block_id": "b1",
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=B6eovayusbA"
-        },
-        {
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=B6eovayusbA"
-        },
-        {
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=B6eovayusbA"
+          "text": "Mike “Duke” Droese will have to wait even longer before his criminal case moves forward.",
+          "type": "text"
         },
         {
           "block_id": "b2",
-          "text": "Logan Paul’s latest WWE run hit a brutal setback after he suffered a torn tricep during his championship match at WWE Saturday Night’s Main Event.",
+          "text": "The former WWF star’s legal troubles continue to drag on, as court records show his latest hearing in Warren County, Tennessee has been postponed once again. The case stems from Droese’s May 2025 arrest on a charge of Attempted Aggravated Sexual Exploitation of a Minor .",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "text": "Paul and Austin Theory defended their WWE World Tag Team Championship against The Street Profits on May 23, but the match ended with Paul dealing with a serious injury. WWE later announced that he would be out of action for “a number of months” because of the torn tricep.",
+          "text": "After multiple delays over the past year, the latest hearing is now scheduled for July 8. Droese remains free on a $10,000 bond while the case works its way through the court system. More than a year has passed since his arrest, but there has still been no resolution.",
           "type": "text"
         },
         {
           "block_id": "b4",
-          "text": "Speaking on his ImPaulsive podcast, Paul explained that the injury happened when Angelo Dawkins came flying over the ropes to the outside. Paul said his arm was already flexed as he tried to catch Dawkins, and the impact was too much for his body to handle.",
+          "text": "Wrestling fans will remember Droese from his run as Duke “The Dumpster” Droese during the 1990s WWF boom period. While his full-time wrestling career largely ended in 2001, he continued making occasional appearances over the years, with his last known match taking place in 2023.",
           "type": "text"
         },
         {
           "block_id": "b5",
-          "source_tag": "blockquote",
-          "text": "“What had happened was, I was on the outside, a nearly 300 pound (Angelo) Dawkins comes flying over the ropes. He lands on me, my arm is flexed and trying to catch him. Too much weight, too much tension, I could feel the tendons snap off the elbow.”",
-          "type": "quote"
+          "text": "The current case isn’t the first time Droese has found himself facing serious legal issues. In 2013, he was indicted on three counts connected to the delivery of controlled substances after authorities alleged he sold oxycodone and buprenorphine to an undercover informant. At the time, Droese was working as a teacher and ultimately resigned from that position following the charges.",
+          "type": "text"
         },
         {
           "block_id": "b6",
-          "text": "Paul said he knew right away that something was badly wrong because of how many injuries he has dealt with before. He also pointed out that fans can hear the pain in his voice during the match.",
+          "text": "That case ended with Droese receiving a three-year sentence. He was ordered to serve 30 days in jail and pay $2,000 in fines and court costs.",
           "type": "text"
         },
         {
           "block_id": "b7",
-          "source_tag": "blockquote",
-          "text": "“I’ve been injured so many times, I knew immediately. You can hear, listen closely to when it happens, you can hear me, I’m not selling like a wrestler, that’s real pain. I knew in that moment, I’m f**ked.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b8",
-          "text": "Paul also explained what happened after the match when Bron Breakker went to raise his arm in celebration. He said he had already told Austin Theory in the ring that he believed he tore his tricep.",
+          "text": "Now, more than a decade later, Droese is once again facing serious allegations as prosecutors continue pursuing the current case. With another delay now in the books, all eyes turn to July 8 to see whether the matter finally moves forward or faces yet another postponement.",
           "type": "text"
         },
         {
-          "block_id": "b9",
-          "source_tag": "blockquote",
-          "text": "“I told Austin when we were in the ring, ‘I tore my tricep.’ He looks at me – we’re still working – like ‘Are you f**king serious?’ ‘Yeah, yeah, yeah.’ Then Bron Breakker goes to raise our arms because we had just won the match.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b10",
-          "text": "Paul said he panicked in that moment because Breakker was about to lift the injured arm. He warned him repeatedly before Breakker carefully raised it.",
-          "type": "text"
-        },
-        {
-          "block_id": "b11",
-          "source_tag": "blockquote",
-          "text": "“I go ‘I hurt my arm! I hurt my arm! I hurt my arm! Please, careful, careful.’ He takes a second and then he slowly raises it up, and it was fine, but in that moment I was like ‘Bro, my partner’s about to rip my f**king arm more than it already is.’”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b12",
-          "text": "Paul also addressed fans saying The Vision may be cursed because of the group’s run of injuries. Bron Breakker previously dealt with a hernia, Bronson Reed suffered a torn bicep, and Seth Rollins was written off WWE television after a shoulder injury angle involving Breakker. Paul said the most frustrating part was that the injury happened on the final move he was involved in during the match.",
-          "type": "text"
-        },
-        {
-          "block_id": "b13",
-          "source_tag": "blockquote",
-          "text": "“That’s one of the most disappointing parts about it, it was the last move I was a part of in the match. It was the last f**king thing, I hit this move right and I’m going home.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b14",
-          "text": "Despite the injury, Paul made it clear he still sees himself as a champion, even if he does not currently have the title belt in his possession.",
-          "type": "text"
-        },
-        {
-          "block_id": "b15",
-          "source_tag": "blockquote",
-          "text": "“By the way, I am still the champ, I just don’t have the hardware to prove it. It doesn’t matter, because guess what? The Vision are still tag team champions.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b16",
-          "text": "Paul also shut down the idea that The Vision is cursed and even brought Danhausen into the conversation.",
-          "type": "text"
-        },
-        {
-          "block_id": "b17",
-          "source_tag": "blockquote",
-          "text": "“The people are saying The Vision is cursed, you’re cursed, Danhausen! Bro, The Vision is not cursed. Bron Breakker is indestructible, minus the hernia. Austin Theory has been working for years.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b18",
-          "text": "Logan Paul’s injury comes at a rough time for The Vision, especially with the faction already dealing with multiple setbacks. Still, Paul made it clear that he is not ready to let the injury define his title reign or the group’s momentum in WWE.",
-          "type": "text"
-        },
-        {
-          "block_id": "b19",
-          "source_tag": "figure",
-          "type": "embed",
-          "url": "https://www.youtube.com/embed/B6eovayusbA?feature=oembed"
-        },
-        {
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/embed/B6eovayusbA?feature=oembed"
-        },
-        {
-          "source_tag": "iframe",
-          "type": "embed",
-          "url": "https://www.youtube.com/embed/B6eovayusbA?feature=oembed"
-        },
-        {
-          "text": "Spotlight WWE News Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan WWE News Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer WWE News Real Reason WWE Moved Money in the Bank 2026 Date WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case",
+          "text": "Spotlight AEW News Mercedes Mone’s AEW Return Status After Months Away From Television WWE News WWE Quietly Retires NXT Heritage Cup WWE News Ilja Dragunov’s WWE Status After Absence From TV WWE News Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan",
           "type": "text"
         }
       ],
-      "removed_before_gemini": 18,
+      "removed_before_gemini": 14,
       "removed_elements_debug": [
         {
           "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 83,
+          "node_index": 63,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Spotlight"
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2197186 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-liv-morgan tag-wwe-featured   ",
-          "node_index": 87,
+          "classes": "gb-loop-item rsn-spotlight-item post-2197314 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-mercedes-mone   ",
+          "node_index": 67,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE News Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan"
+          "text_preview": "AEW News Mercedes Mone’s AEW Return Status After Months Away From Television"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 90,
+          "node_index": 70,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan"
+          "text_preview": "Mercedes Mone’s AEW Return Status After Months Away From Television"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 91,
+          "node_index": 71,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2197085 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-bayley tag-wwe-featured   ",
-          "node_index": 92,
+          "classes": "gb-loop-item rsn-spotlight-item post-2197298 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
+          "node_index": 72,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE News Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer"
+          "text_preview": "WWE News WWE Quietly Retires NXT Heritage Cup"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 95,
+          "node_index": 75,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer"
+          "text_preview": "WWE Quietly Retires NXT Heritage Cup"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 96,
+          "node_index": 76,
           "node_name": "img",
           "reason": "node_class_noise",
           "text_preview": ""
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2197076 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured tag-wwe-money-in-the-bank   ",
-          "node_index": 97,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Real Reason WWE Moved Money in the Bank 2026 Date"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 100,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Real Reason WWE Moved Money in the Bank 2026 Date"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 101,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2197072 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-ludwig-kaiser tag-wwe-featured   ",
-          "node_index": 102,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 105,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Digital Evidence Turned Over In Ludwig Kaiser Battery Case"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 106,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "index": 2,
-          "item": {
-            "source_tag": "div",
-            "type": "embed",
-            "url": "https://www.youtube.com/watch?v=B6eovayusbA"
-          },
-          "reason": "duplicate_or_empty_embed"
-        },
-        {
-          "index": 3,
-          "item": {
-            "source_tag": "div",
-            "type": "embed",
-            "url": "https://www.youtube.com/watch?v=B6eovayusbA"
-          },
-          "reason": "duplicate_or_empty_embed"
-        },
-        {
-          "index": 22,
-          "item": {
-            "source_tag": "div",
-            "type": "embed",
-            "url": "https://www.youtube.com/embed/B6eovayusbA?feature=oembed"
-          },
-          "reason": "duplicate_or_empty_embed"
-        },
-        {
-          "index": 23,
-          "item": {
-            "source_tag": "iframe",
-            "type": "embed",
-            "url": "https://www.youtube.com/embed/B6eovayusbA?feature=oembed"
-          },
-          "reason": "duplicate_or_empty_embed"
-        },
-        {
-          "index": 24,
-          "item": {
-            "text": "Spotlight WWE News Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan WWE News Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer WWE News Real Reason WWE Moved Money in the Bank 2026 Date WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case",
-            "type": "text"
-          },
-          "reason": "footer_start"
-        }
-      ],
-      "source": "ringsidenews",
-      "source_html_contains_embed_hint": true,
-      "source_title": "Logan Paul Reveals Real Pain Behind Torn Tricep Injury At WWE Saturday Night’s Main Event",
-      "source_url": "https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event/",
-      "status": "ready_for_alfred",
-      "title_it": "Logan Paul rivela il dolore dell'infortunio al tricipite durante Saturday Night’s Main Event",
-      "translation_chain_attempted": [
-        "gemini-3.1-flash-lite"
-      ],
-      "translation_missing_units": [],
-      "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event/\nTitolo feed: Logan Paul Reveals Real Pain Behind Torn Tricep Injury At WWE Saturday Night’s Main Event\nTitolo pagina: Logan Paul Reveals Real Pain Behind Torn Tricep Injury At WWE Saturday Night’s Main Event\nDescrizione: Logan Paul’s latest WWE run hit a brutal setback after he suffered a torn tricep during his championship match at WWE Saturday Night’s Main Event. Paul\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Logan Paul’s latest WWE run hit a brutal setback after he suffered a torn tricep during his championship match at WWE Saturday Night’s Main Event.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Paul and Austin Theory defended their WWE World Tag Team Championship against The Street Profits on May 23, but the match ended with Paul dealing with a serious injury. WWE later announced that he would be out of action for “a number of months” because of the torn tricep.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Speaking on his ImPaulsive podcast, Paul explained that the injury happened when Angelo Dawkins came flying over the ropes to the outside. Paul said his arm was already flexed as he tried to catch Dawkins, and the impact was too much for his body to handle.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“What had happened was, I was on the outside, a nearly 300 pound (Angelo) Dawkins comes flying over the ropes. He lands on me, my arm is flexed and trying to catch him. Too much weight, too much tension, I could feel the tendons snap off the elbow.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Paul said he knew right away that something was badly wrong because of how many injuries he has dealt with before. He also pointed out that fans can hear the pain in his voice during the match.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“I’ve been injured so many times, I knew immediately. You can hear, listen closely to when it happens, you can hear me, I’m not selling like a wrestler, that’s real pain. I knew in that moment, I’m f**ked.”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"Paul also explained what happened after the match when Bron Breakker went to raise his arm in celebration. He said he had already told Austin Theory in the ring that he believed he tore his tricep.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"quote\",\n    \"text\": \"“I told Austin when we were in the ring, ‘I tore my tricep.’ He looks at me – we’re still working – like ‘Are you f**king serious?’ ‘Yeah, yeah, yeah.’ Then Bron Breakker goes to raise our arms because we had just won the match.”\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"text\",\n    \"text\": \"Paul said he panicked in that moment because Breakker was about to lift the injured arm. He warned him repeatedly before Breakker carefully raised it.\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"quote\",\n    \"text\": \"“I go ‘I hurt my arm! I hurt my arm! I hurt my arm! Please, careful, careful.’ He takes a second and then he slowly raises it up, and it was fine, but in that moment I was like ‘Bro, my partner’s about to rip my f**king arm more than it already is.’”\"\n  },\n  {\n    \"id\": \"b12\",\n    \"type\": \"text\",\n    \"text\": \"Paul also addressed fans saying The Vision may be cursed because of the group’s run of injuries. Bron Breakker previously dealt with a hernia, Bronson Reed suffered a torn bicep, and Seth Rollins was written off WWE television after a shoulder injury angle involving Breakker. Paul said the most frustrating part was that the injury happened on the final move he was involved in during the match.\"\n  },\n  {\n    \"id\": \"b13\",\n    \"type\": \"quote\",\n    \"text\": \"“That’s one of the most disappointing parts about it, it was the last move I was a part of in the match. It was the last f**king thing, I hit this move right and I’m going home.”\"\n  },\n  {\n    \"id\": \"b14\",\n    \"type\": \"text\",\n    \"text\": \"Despite the injury, Paul made it clear he still sees himself as a champion, even if he does not currently have the title belt in his possession.\"\n  },\n  {\n    \"id\": \"b15\",\n    \"type\": \"quote\",\n    \"text\": \"“By the way, I am still the champ, I just don’t have the hardware to prove it. It doesn’t matter, because guess what? The Vision are still tag team champions.”\"\n  },\n  {\n    \"id\": \"b16\",\n    \"type\": \"text\",\n    \"text\": \"Paul also shut down the idea that The Vision is cursed and even brought Danhausen into the conversation.\"\n  },\n  {\n    \"id\": \"b17\",\n    \"type\": \"quote\",\n    \"text\": \"“The people are saying The Vision is cursed, you’re cursed, Danhausen! Bro, The Vision is not cursed. Bron Breakker is indestructible, minus the hernia. Austin Theory has been working for years.”\"\n  },\n  {\n    \"id\": \"b18\",\n    \"type\": \"text\",\n    \"text\": \"Logan Paul’s injury comes at a rough time for The Vision, especially with the faction already dealing with multiple setbacks. Still, Paul made it clear that he is not ready to let the injury define his title reign or the group’s momentum in WWE.\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"Logan Paul rivela il dolore dell'infortunio al tricipite durante Saturday Night’s Main Event\",\n  \"excerpt_it\": \"Logan Paul racconta i dettagli dell'infortunio subito durante un match titolato a WWE Saturday Night’s Main Event.\",\n  \"translations\": {\n    \"b2\": \"L'ultima avventura in WWE di Logan Paul ha subito una brutale battuta d'arresto a causa di uno strappo al tricipite riportato durante il suo match titolato a WWE Saturday Night’s Main Event.\",\n    \"b3\": \"Il 23 maggio, Paul e Austin Theory hanno difeso il WWE World Tag Team Championship contro gli Street Profits, ma il match si è concluso con Paul alle prese con un grave infortunio. La WWE ha successivamente annunciato che rimarrà lontano dal ring per \\\"diversi mesi\\\" proprio a causa dello strappo al tricipite.\",\n    \"b4\": \"Parlando nel suo podcast ImPaulsive, Paul ha spiegato che l'infortunio è avvenuto quando Angelo Dawkins è volato oltre le corde verso l'esterno. Paul ha raccontato che il suo braccio era già contratto mentre tentava di afferrare Dawkins, e l'impatto è stato troppo violento per il suo corpo.\",\n    \"b5\": \"“Quello che è successo è stato che io ero fuori ring e un uomo di quasi 140 chili, Dawkins, è volato oltre le corde. Mi è atterrato addosso mentre il mio braccio era contratto e cercavo di prenderlo. Troppo peso, troppa tensione: ho sentito i tendini staccarsi dal gomito.”\",\n    \"b6\": \"Paul ha affermato di aver capito immediatamente che qualcosa non andava, vista la sua esperienza con numerosi infortuni passati. Ha inoltre sottolineato che i fan possono sentire il dolore nella sua voce durante il match.\",\n    \"b7\": \"“Mi sono infortunato così tante volte che l'ho capito subito. Potete sentirlo, ascoltate bene quando accade: potete sentirmi, non sto facendo selling da wrestler, quello è dolore reale. In quel momento ho capito: sono fottuto.”\",\n    \"b8\": \"Paul ha spiegato cosa è successo dopo il match, quando Bron Breakker ha provato a sollevargli il braccio per festeggiare. Ha rivelato di aver già comunicato ad Austin Theory, mentre erano ancora sul ring, di credere di essersi strappato il tricipite.\",\n    \"b9\": \"“Ho detto ad Austin mentre eravamo sul ring: 'Mi sono strappato il tricipite'. Lui mi guarda – eravamo ancora in fase di lavoro – tipo: 'Ma sei serio?'. 'Sì, sì, sì'. Poi Bron Breakker va per alzarci le braccia perché avevamo appena vinto il match.”\",\n    \"b10\": \"Paul ha detto di essere andato nel panico in quel momento perché Breakker stava per sollevare proprio il braccio infortunato. Lo ha avvertito ripetutamente prima che Breakker lo sollevasse con cautela.\",\n    \"b11\": \"“Ho urlato: 'Mi sono fatto male al braccio! Mi sono fatto male al braccio! Mi sono fatto male al braccio! Per favore, attento, attento'. Lui si è preso un secondo e poi lo ha sollevato lentamente, ed è andata bene, ma in quel momento pensavo: 'Fratello, il mio partner sta per strapparmi il braccio ancora di più di quanto non sia già'.\\\"\",\n    \"b12\": \"Paul ha anche risposto ai fan che sostengono che la stable The Vision sia maledetta a causa della serie di infortuni del gruppo. Bron Breakker ha avuto un'ernia, Bronson Reed uno strappo al bicipite e Seth Rollins è stato rimosso dai programmi televisivi dopo un attacco di Breakker. Paul ha detto che la parte più frustrante è che l'infortunio sia avvenuto durante l'ultima mossa del match.\",\n    \"b13\": \"“Questa è una delle cose più deludenti: era l'ultima mossa che dovevo fare nel match. È stata l'ultima fottuta cosa, ho eseguito questa mossa e poi me ne andavo a casa.”\",\n    \"b14\": \"Nonostante l'infortunio, Paul ha chiarito di considerarsi ancora un campione, anche se al momento non ha la cintura con sé.\",\n    \"b15\": \"“Tra l'altro, sono ancora il campione, semplicemente non ho il metallo a provarlo. Non importa, perché indovinate un po'? I The Vision sono ancora i campioni di coppia.”\",\n    \"b16\": \"Paul ha anche respinto l'idea che la stable sia maledetta, tirando in ballo persino Danhausen.\",\n    \"b17\": \"“La gente dice che i The Vision sono maledetti, sei maledetto tu, Danhausen! Fratello, i The Vision non sono maledetti. Bron Breakker è indistruttibile, ernia a parte. Austin Theory lavora da anni.”\",\n    \"b18\": \"L'infortunio di Logan Paul arriva in un momento difficile per i The Vision, che stanno già gestendo diverse defezioni. Tuttavia, Paul ha chiarito di non essere disposto a lasciare che questo infortunio definisca il suo regno titolato o lo slancio del gruppo in WWE.\"\n  },\n  \"notes\": []\n}",
-      "translation_unit_count": 17,
-      "translation_used": true
-    },
-    {
-      "bob_notes": [],
-      "body_html": "<p>Booker T non boccia Sol Ruca dopo WWE Clash in Italy, ma è convinto che abbia ancora molta strada da fare per crescere.</p>\nhttps://www.youtube.com/watch?v=a_gQ1-4Ezrg\n\n<p>Durante il podcast Hall of Fame, Booker T ha commentato il match valevole per il Women’s Intercontinental Championship tra Sol Ruca e Becky Lynch a Clash in Italy. Ruca ha conquistato il titolo dopo aver eseguito la Sol Snatcher, ma Booker ritiene che l&#x27;incontro abbia messo in luce una lacuna importante su cui deve lavorare.</p>\n<blockquote>Secondo Booker, il match è apparso a tratti troppo strutturato, dando l&#x27;impressione che le due atlete si limitassero a passare da uno spot pianificato all&#x27;altro: &quot;Sembrava tutto eseguito secondo un copione, come se stessero solo seguendo degli schemi. Sol Ruca dovrà imparare davvero a improvvisare.&quot;</blockquote>\n<p>Booker ha chiarito di vedere un enorme potenziale in Ruca, pur sostenendo che le manchi esperienza per gestire gli imprevisti sul ring. Ha spiegato che saper reagire in tempo reale è una componente fondamentale per lavorare ai massimi livelli.</p>\n<blockquote>&quot;Vorrei avere la possibilità di lavorare con Sol Ruca sull&#x27;improvvisazione e sul come far sì che ogni elemento di un match si incastri alla perfezione. È così talentuosa e la sua ascesa a NXT è stata fulminea, ma quando qualcosa va storto e devi cambiare i piani in corsa, devi comunque far sembrare che fosse tutto previsto fin dall&#x27;inizio.&quot;</blockquote>\n<p>Booker T ha osservato che, essendo stata catapultata così presto in una posizione di rilievo, per Sol Ruca è inevitabile commettere degli errori. Tuttavia, ha anche aggiunto che tali sbagli sono necessari se vuole trasformarsi in una vera star di primo piano.</p>\n<blockquote>&quot;Penso che essere stata gettata nella mischia così presto comporti degli errori che deve necessariamente commettere per poter lavorare al livello successivo. Questa è la realtà dei fatti, inutile indorare la pillola.&quot;</blockquote>\n<p>Il WWE Hall of Famer si è anche chiesto quanto il match sarebbe potuto essere migliore se Sol Ruca e Becky Lynch avessero avuto modo di affrontarsi negli house show prima di arrivare a questo scontro titolato su un palcoscenico così importante.</p>\n<blockquote>&quot;Quanto sarebbe stata più preparata Sol Ruca se avesse avuto l&#x27;opportunità di fare qualche house show con Becky Lynch prima di quel match? Quanto sarebbe stato migliore l&#x27;incontro? Moltissimo. Quindi, quello che dico è: commettendo questi errori, non ha altra scelta che imparare.&quot;</blockquote>\n<p>Sol Ruca ha lasciato Clash in Italy con una delle vittorie più importanti della sua carriera, ma per Booker T la prestazione ha evidenziato come sia ancora in fase di adattamento ai livelli del main event WWE. Per lui, il talento non si discute, ma il passo successivo è imparare a far funzionare un match anche quando non tutto va secondo i piani.</p>\n\nhttps://www.youtube.com/embed/a_gQ1-4Ezrg?feature=oembed",
-      "category_hint": "WWE",
-      "clean_element_count": 12,
-      "created_at": "2026-06-03T20:37:03.769318+00:00",
-      "diagnostic_stage": "ready_for_alfred",
-      "diagnostic_warnings": [],
-      "editorial_changes": [
-        {
-          "code": "leading_embed_moved_after_first_paragraph",
-          "evidence": "https://www.youtube.com/watch?v=a_gQ1-4Ezrg",
-          "message": "Embed iniziale spostato dopo il primo paragrafo.",
-          "severity": "info"
-        }
-      ],
-      "element_counts": {
-        "embed": 2,
-        "heading": 0,
-        "image": 0,
-        "quote": 4,
-        "table": 0,
-        "text": 6
-      },
-      "elements": [
-        {
-          "block_id": "b1",
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=a_gQ1-4Ezrg"
-        },
-        {
-          "block_id": "b2",
-          "text": "Booker T isn’t writing off Sol Ruca after WWE Clash in Italy — but he definitely thinks she has some growing to do.",
-          "type": "text"
-        },
-        {
-          "block_id": "b3",
-          "text": "While speaking on the Hall of Fame podcast , Booker T reacted to Sol Ruca’s Women’s Intercontinental Championship match against Becky Lynch at Clash in Italy. Ruca walked out with the title after hitting the Sol Snatcher , but Booker felt the match exposed one major area she still needs to improve.",
-          "type": "text"
-        },
-        {
-          "block_id": "b4",
-          "source_tag": "p",
-          "text": "According to Booker, the match felt too structured at times and came across like both women were simply moving from one planned spot to the next: “It looked like it was being run by the numbers, like running the plays. Sol Ruca is going to have to really think about being able to improvise.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b5",
-          "text": "Booker made it clear that he sees major potential in Ruca, but he believes she needs more experience when things don’t go exactly as planned inside the ring. He said learning how to adjust in real time is a huge part of working at the next level.",
-          "type": "text"
-        },
-        {
-          "block_id": "b6",
-          "source_tag": "blockquote",
-          "text": "“I wish I had a chance to work with Sol Ruca on improvisation and go out and do certain things to make everything come together in a match. She’s so talented, and her having a meteoric rise in NXT—when that play gets messed up and you’ve got to call an audible, that’s how you still have to make it look like it was supposed to look that way.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b7",
-          "text": "Booker T said Sol Ruca being thrown into a major spot this quickly means mistakes are going to happen. However, he also argued that those mistakes are necessary if she wants to grow into a bigger star.",
-          "type": "text"
-        },
-        {
-          "block_id": "b8",
-          "source_tag": "blockquote",
-          "text": "“So I think being thrown into that deep water so early—but then again, it’s mistakes that she has to make in order to be able to work on that next level. That’s facts, and there’s no way to sugarcoat it.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b9",
-          "text": "The WWE Hall of Famer also questioned how much better the match could have been if Sol Ruca and Becky Lynch had worked together on house shows before getting their title match on a major WWE stage.",
-          "type": "text"
-        },
-        {
-          "block_id": "b10",
-          "source_tag": "blockquote",
-          "text": "“How much more prepared would Sol Ruca have been if she had a chance to do house show loops with Becky Lynch before they had that match? How much better would that match have been? So much better. So what I’m saying is—making those mistakes, she has no choice but to learn.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b11",
-          "text": "Sol Ruca still left Clash in Italy with one of the biggest wins of her career, but Booker T clearly believes the performance showed she is still adjusting to WWE’s main-event level. For him, the talent is obvious — but the next step is learning how to make a match work even when everything doesn’t go perfectly.",
-          "type": "text"
-        },
-        {
-          "block_id": "b12",
-          "source_tag": "figure",
-          "type": "embed",
-          "url": "https://www.youtube.com/embed/a_gQ1-4Ezrg?feature=oembed"
-        }
-      ],
-      "excerpt_it": "Booker T analizza la performance di Sol Ruca contro Becky Lynch a Clash in Italy, sottolineando la necessità di migliorare nell'improvvisazione.",
-      "extraction_diagnostics": {
-        "candidate_node_count": 96,
-        "clean_element_count": 12,
-        "dom_noise_reduction_enabled": false,
-        "embed_count": 2,
-        "global_embed_recovery_enabled": false,
-        "quote_count": 4,
-        "raw_element_count": 17,
-        "removed_by_node_count": 13,
-        "removed_by_sanitize_count": 5,
-        "root_name": "article",
-        "root_text_chars": 3595,
-        "stage": "complete",
-        "table_count": 0
-      },
-      "fetched_html_chars": 525003,
-      "menzo_score": 79,
-      "meta": {
-        "description": "Booker T isn’t writing off Sol Ruca after WWE Clash in Italy — but he definitely thinks she has some growing to do. While speaking on the Hall of Fame",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/sol-rucas-wwe-clash-in-italy-match-criticized-for-being-too-structured-54.jpg",
-        "source_title": "Sol Ruca’s WWE Clash In Italy Match Criticized for Being Too Structured"
-      },
-      "raw_element_count": 17,
-      "raw_elements_preview": [
-        {
-          "block_id": "b1",
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=a_gQ1-4Ezrg"
-        },
-        {
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=a_gQ1-4Ezrg"
-        },
-        {
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=a_gQ1-4Ezrg"
-        },
-        {
-          "block_id": "b2",
-          "text": "Booker T isn’t writing off Sol Ruca after WWE Clash in Italy — but he definitely thinks she has some growing to do.",
-          "type": "text"
-        },
-        {
-          "block_id": "b3",
-          "text": "While speaking on the Hall of Fame podcast , Booker T reacted to Sol Ruca’s Women’s Intercontinental Championship match against Becky Lynch at Clash in Italy. Ruca walked out with the title after hitting the Sol Snatcher , but Booker felt the match exposed one major area she still needs to improve.",
-          "type": "text"
-        },
-        {
-          "block_id": "b4",
-          "source_tag": "p",
-          "text": "According to Booker, the match felt too structured at times and came across like both women were simply moving from one planned spot to the next: “It looked like it was being run by the numbers, like running the plays. Sol Ruca is going to have to really think about being able to improvise.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b5",
-          "text": "Booker made it clear that he sees major potential in Ruca, but he believes she needs more experience when things don’t go exactly as planned inside the ring. He said learning how to adjust in real time is a huge part of working at the next level.",
-          "type": "text"
-        },
-        {
-          "block_id": "b6",
-          "source_tag": "blockquote",
-          "text": "“I wish I had a chance to work with Sol Ruca on improvisation and go out and do certain things to make everything come together in a match. She’s so talented, and her having a meteoric rise in NXT—when that play gets messed up and you’ve got to call an audible, that’s how you still have to make it look like it was supposed to look that way.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b7",
-          "text": "Booker T said Sol Ruca being thrown into a major spot this quickly means mistakes are going to happen. However, he also argued that those mistakes are necessary if she wants to grow into a bigger star.",
-          "type": "text"
-        },
-        {
-          "block_id": "b8",
-          "source_tag": "blockquote",
-          "text": "“So I think being thrown into that deep water so early—but then again, it’s mistakes that she has to make in order to be able to work on that next level. That’s facts, and there’s no way to sugarcoat it.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b9",
-          "text": "The WWE Hall of Famer also questioned how much better the match could have been if Sol Ruca and Becky Lynch had worked together on house shows before getting their title match on a major WWE stage.",
-          "type": "text"
-        },
-        {
-          "block_id": "b10",
-          "source_tag": "blockquote",
-          "text": "“How much more prepared would Sol Ruca have been if she had a chance to do house show loops with Becky Lynch before they had that match? How much better would that match have been? So much better. So what I’m saying is—making those mistakes, she has no choice but to learn.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b11",
-          "text": "Sol Ruca still left Clash in Italy with one of the biggest wins of her career, but Booker T clearly believes the performance showed she is still adjusting to WWE’s main-event level. For him, the talent is obvious — but the next step is learning how to make a match work even when everything doesn’t go perfectly.",
-          "type": "text"
-        },
-        {
-          "block_id": "b12",
-          "source_tag": "figure",
-          "type": "embed",
-          "url": "https://www.youtube.com/embed/a_gQ1-4Ezrg?feature=oembed"
-        },
-        {
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/embed/a_gQ1-4Ezrg?feature=oembed"
-        },
-        {
-          "source_tag": "iframe",
-          "type": "embed",
-          "url": "https://www.youtube.com/embed/a_gQ1-4Ezrg?feature=oembed"
-        },
-        {
-          "text": "Spotlight WWE News Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan WWE News Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer WWE News Real Reason WWE Moved Money in the Bank 2026 Date WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case",
-          "type": "text"
-        }
-      ],
-      "removed_before_gemini": 18,
-      "removed_elements_debug": [
-        {
-          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 73,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Spotlight"
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2197186 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-liv-morgan tag-wwe-featured   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2197287 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-ilja-dragunov tag-wwe-featured   ",
           "node_index": 77,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE News Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan"
+          "text_preview": "WWE News Ilja Dragunov’s WWE Status After Absence From TV"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 80,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan"
+          "text_preview": "Ilja Dragunov’s WWE Status After Absence From TV"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -835,18 +191,18 @@
           "text_preview": ""
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2197085 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-bayley tag-wwe-featured   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2197186 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-liv-morgan tag-wwe-featured   ",
           "node_index": 82,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE News Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer"
+          "text_preview": "WWE News Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 85,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer"
+          "text_preview": "Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -856,18 +212,497 @@
           "text_preview": ""
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2197076 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured tag-wwe-money-in-the-bank   ",
+          "index": 8,
+          "item": {
+            "text": "Spotlight AEW News Mercedes Mone’s AEW Return Status After Months Away From Television WWE News WWE Quietly Retires NXT Heritage Cup WWE News Ilja Dragunov’s WWE Status After Absence From TV WWE News Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan",
+            "type": "text"
+          },
+          "reason": "footer_start"
+        }
+      ],
+      "source": "ringsidenews",
+      "source_html_contains_embed_hint": true,
+      "source_title": "Former WWF Star Mike ‘Duke’ Droese’s Criminal Case Delayed Yet Again",
+      "source_url": "https://www.ringsidenews.com/former-wwf-star-mike-duke-droeses-criminal-case-delayed-yet-again/",
+      "status": "ready_for_alfred",
+      "title_it": "Ancora un rinvio per il processo a Mike “Duke” Droese",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_missing_units": [],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/former-wwf-star-mike-duke-droeses-criminal-case-delayed-yet-again/\nTitolo feed: Former WWF Star Mike ‘Duke’ Droese’s Criminal Case Delayed Yet Again\nTitolo pagina: Former WWF Star Mike ‘Duke’ Droese’s Criminal Case Delayed Yet Again\nDescrizione: Mike \"Duke\" Droese will have to wait even longer before his criminal case moves forward. The former WWF star's legal troubles continue to drag on, as\nCategoria suggerita: World\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Mike “Duke” Droese will have to wait even longer before his criminal case moves forward.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"The former WWF star’s legal troubles continue to drag on, as court records show his latest hearing in Warren County, Tennessee has been postponed once again. The case stems from Droese’s May 2025 arrest on a charge of Attempted Aggravated Sexual Exploitation of a Minor .\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"After multiple delays over the past year, the latest hearing is now scheduled for July 8. Droese remains free on a $10,000 bond while the case works its way through the court system. More than a year has passed since his arrest, but there has still been no resolution.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Wrestling fans will remember Droese from his run as Duke “The Dumpster” Droese during the 1990s WWF boom period. While his full-time wrestling career largely ended in 2001, he continued making occasional appearances over the years, with his last known match taking place in 2023.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"The current case isn’t the first time Droese has found himself facing serious legal issues. In 2013, he was indicted on three counts connected to the delivery of controlled substances after authorities alleged he sold oxycodone and buprenorphine to an undercover informant. At the time, Droese was working as a teacher and ultimately resigned from that position following the charges.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"That case ended with Droese receiving a three-year sentence. He was ordered to serve 30 days in jail and pay $2,000 in fines and court costs.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Now, more than a decade later, Droese is once again facing serious allegations as prosecutors continue pursuing the current case. With another delay now in the books, all eyes turn to July 8 to see whether the matter finally moves forward or faces yet another postponement.\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Ancora un rinvio per il processo a Mike “Duke” Droese\",\n  \"excerpt_it\": \"L'ex star della WWF Mike “Duke” Droese dovrà attendere ancora prima che il suo procedimento penale faccia passi avanti.\",\n  \"translations\": {\n    \"b1\": \"Mike “Duke” Droese dovrà attendere ancora prima che il suo procedimento penale faccia passi avanti.\",\n    \"b2\": \"I guai legali dell'ex star della WWF continuano a trascinarsi: stando ai registri del tribunale, la sua ultima udienza nella contea di Warren, nel Tennessee, è stata nuovamente posticipata. Il caso deriva dall'arresto di Droese nel maggio 2023 per l'accusa di tentato sfruttamento sessuale aggravato di un minore.\",\n    \"b3\": \"Dopo molteplici rinvii nell'ultimo anno, la nuova udienza è stata fissata per l'8 luglio. Droese resta in libertà dietro pagamento di una cauzione di 10.000 dollari in attesa che il caso faccia il suo corso nel sistema giudiziario. È passato più di un anno dal suo arresto, ma non vi è ancora stata alcuna risoluzione.\",\n    \"b4\": \"I fan del wrestling ricorderanno Droese per il suo periodo nella WWF degli anni '90 come Duke “The Dumpster” Droese. Sebbene la sua carriera da wrestler a tempo pieno si sia conclusa in gran parte nel 2001, ha continuato a fare apparizioni sporadiche nel corso degli anni, disputando il suo ultimo match noto nel 2023.\",\n    \"b5\": \"Il caso attuale non è la prima volta che Droese si trova ad affrontare seri problemi legali. Nel 2013 fu incriminato per tre capi d'accusa legati allo spaccio di sostanze controllate, dopo che le autorità sostennero avesse venduto ossicodone e buprenorfina a un informatore sotto copertura. All'epoca Droese lavorava come insegnante e, in seguito alle accuse, rassegnò le dimissioni dall'incarico.\",\n    \"b6\": \"Quel caso si concluse con una condanna a tre anni per Droese, che fu obbligato a scontare 30 giorni di carcere e a pagare 2.000 dollari di multa oltre alle spese processuali.\",\n    \"b7\": \"Ora, più di un decennio dopo, Droese si trova nuovamente ad affrontare gravi accuse mentre l'accusa prosegue il suo iter. Con un altro rinvio agli atti, tutti gli occhi sono puntati sull'8 luglio, per capire se la vicenda finalmente progredirà o se subirà un ulteriore slittamento.\"\n  },\n  \"notes\": []\n}",
+      "translation_unit_count": 7,
+      "translation_used": true
+    },
+    {
+      "bob_notes": [],
+      "body_html": "<p>Mercedes Moné non ha ancora disputato un solo match in AEW nel 2026, ma un nuovo aggiornamento indica che i fan potrebbero non dover attendere ancora a lungo per il suo ritorno.</p>\n<p>L&#x27;ex TBS Champion è assente dai programmi AEW da quando ha perso il titolo a New Year’s Smash, alimentando mesi di speculazioni sul suo futuro nella compagnia. Sebbene la Moné sia rimasta attiva al di fuori dell&#x27;AEW, perdendo diversi titoli che deteneva altrove nella prima parte dell&#x27;anno, non è ancora riapparsa negli show televisivi della promotion.</p>\n<p>Secondo un nuovo aggiornamento di Fightful Select, era previsto che l&#x27;assenza della Moné si protraesse oltre AEW Dynasty. Tuttavia, i vertici della AEW hanno ancora dei piani per lei, e tali progetti potrebbero avere un impatto significativo sulle storyline di cartello della compagnia.</p>\n<p>È stato riferito che la Moné è ancora sotto contratto con l&#x27;AEW e il suo ritorno resta confermato. Sebbene non sia stata fornita una tempistica precisa, le fonti indicano che il suo rientro dovrebbe avere implicazioni importanti per i vertici della card.</p>\n<p>Il report ha inoltre sottolineato che il ritorno potrebbe avvenire piuttosto presto. I fan dovrebbero aspettarsi di rivedere la Moné in tempi “relativamente brevi”, sebbene al 3 giugno non ci fossero indicazioni sulla sua presenza nel backstage degli show AEW.</p>\n<p>Un dettaglio interessante del report riguarda un&#x27;attività di allenamento svolta nel corso della giornata. Alcune fonti hanno notato una persona intenta a provare manovre comunemente associate alla Moné, dando il via a speculazioni su un possibile ritorno. Tuttavia, Fightful ha invitato alla cautela nel dare troppa importanza a questa osservazione.</p>\n<p>Come sottolineato dal report, molti wrestler utilizzano le ginocchiate in corsa nel panorama odierno del wrestling, e altri atleti hanno utilizzato delle controfigure durante le prove, tra cui Alex Windsor, che ha lavorato ad alcuni segmenti con una controfigura per Will Ospreay.</p>\n<p>Per ora, la notizia principale è che Mercedes Moné fa ancora parte dei piani della AEW e il suo ritorno sembra essere all&#x27;orizzonte. Dopo aver trascorso l&#x27;intero anno lontana dagli schermi AEW, il suo rientro potrebbe scuotere immediatamente gli equilibri titolati non appena avverrà.</p>",
+      "category_hint": "AEW",
+      "clean_element_count": 8,
+      "created_at": "2026-06-03T23:03:59.049220+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "element_counts": {
+        "embed": 0,
+        "heading": 0,
+        "image": 0,
+        "quote": 0,
+        "table": 0,
+        "text": 8
+      },
+      "elements": [
+        {
+          "block_id": "b1",
+          "text": "Mercedes Mone hasn’t wrestled for AEW a single time in 2026, but a new update indicates fans may not have to wait much longer for her return.",
+          "type": "text"
+        },
+        {
+          "block_id": "b2",
+          "text": "The former TBS Champion has been absent from AEW programming since dropping the title at New Year’s Smash, leading to months of speculation about her future with the company. While Mone remained active outside AEW and spent the first part of the year losing several championships she held elsewhere, she has yet to make an appearance back on AEW television.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "text": "According to a new Fightful Select update , Mone’s absence was always expected to last beyond AEW Dynasty. However, AEW officials still have plans for her, and those plans could have a major impact on the company’s top storylines.",
+          "type": "text"
+        },
+        {
+          "block_id": "b4",
+          "text": "It was said that Mone remains under contract with AEW and is still expected to return. While no exact timetable was provided, sources indicated that her eventual comeback is expected to carry significant implications near the top of the card.",
+          "type": "text"
+        },
+        {
+          "block_id": "b5",
+          "text": "The report also noted that a return could happen sooner rather than later. Fans should expect Mone back “relatively soon, ” although there was no indication she had been spotted backstage at AEW programming as of June 3.",
+          "type": "text"
+        },
+        {
+          "block_id": "b6",
+          "text": "One interesting detail from the report involved training activity earlier in the day. Sources noted that someone was seen practicing moves commonly associated with Mone, leading to some speculation about a possible return. However, Fightful cautioned against reading too much into that observation.",
+          "type": "text"
+        },
+        {
+          "block_id": "b7",
+          "text": "As the report pointed out, plenty of wrestlers use running knees in today’s wrestling landscape, and other performers were also using stand-ins during rehearsals, including Alex Windsor working through material with a placeholder for Will Ospreay.",
+          "type": "text"
+        },
+        {
+          "block_id": "b8",
+          "text": "For now, the biggest takeaway is that Mercedes Mone is still part of AEW’s plans and her return appears to be on the horizon. After spending the entire year away from AEW television, her comeback could immediately shake up the championship picture whenever it happens.",
+          "type": "text"
+        }
+      ],
+      "excerpt_it": "Mercedes Moné non è ancora apparsa in AEW nel 2026, ma nuove indiscrezioni suggeriscono che il suo ritorno potrebbe essere vicino.",
+      "extraction_diagnostics": {
+        "candidate_node_count": 87,
+        "clean_element_count": 8,
+        "dom_noise_reduction_enabled": false,
+        "embed_count": 0,
+        "global_embed_recovery_enabled": false,
+        "quote_count": 0,
+        "raw_element_count": 9,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 1,
+        "root_name": "article",
+        "root_text_chars": 3062,
+        "stage": "complete",
+        "table_count": 0
+      },
+      "fetched_html_chars": 521259,
+      "menzo_score": 81,
+      "meta": {
+        "description": "Mercedes Mone hasn't wrestled for AEW a single time in 2026, but a new update indicates fans may not have to wait much longer for her return. The former",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/mercedes-mones-aew-return-status-after-months-away-from-television-02.jpg",
+        "source_title": "Mercedes Mone’s AEW Return Status After Months Away From Television"
+      },
+      "raw_element_count": 9,
+      "raw_elements_preview": [
+        {
+          "block_id": "b1",
+          "text": "Mercedes Mone hasn’t wrestled for AEW a single time in 2026, but a new update indicates fans may not have to wait much longer for her return.",
+          "type": "text"
+        },
+        {
+          "block_id": "b2",
+          "text": "The former TBS Champion has been absent from AEW programming since dropping the title at New Year’s Smash, leading to months of speculation about her future with the company. While Mone remained active outside AEW and spent the first part of the year losing several championships she held elsewhere, she has yet to make an appearance back on AEW television.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "text": "According to a new Fightful Select update , Mone’s absence was always expected to last beyond AEW Dynasty. However, AEW officials still have plans for her, and those plans could have a major impact on the company’s top storylines.",
+          "type": "text"
+        },
+        {
+          "block_id": "b4",
+          "text": "It was said that Mone remains under contract with AEW and is still expected to return. While no exact timetable was provided, sources indicated that her eventual comeback is expected to carry significant implications near the top of the card.",
+          "type": "text"
+        },
+        {
+          "block_id": "b5",
+          "text": "The report also noted that a return could happen sooner rather than later. Fans should expect Mone back “relatively soon, ” although there was no indication she had been spotted backstage at AEW programming as of June 3.",
+          "type": "text"
+        },
+        {
+          "block_id": "b6",
+          "text": "One interesting detail from the report involved training activity earlier in the day. Sources noted that someone was seen practicing moves commonly associated with Mone, leading to some speculation about a possible return. However, Fightful cautioned against reading too much into that observation.",
+          "type": "text"
+        },
+        {
+          "block_id": "b7",
+          "text": "As the report pointed out, plenty of wrestlers use running knees in today’s wrestling landscape, and other performers were also using stand-ins during rehearsals, including Alex Windsor working through material with a placeholder for Will Ospreay.",
+          "type": "text"
+        },
+        {
+          "block_id": "b8",
+          "text": "For now, the biggest takeaway is that Mercedes Mone is still part of AEW’s plans and her return appears to be on the horizon. After spending the entire year away from AEW television, her comeback could immediately shake up the championship picture whenever it happens.",
+          "type": "text"
+        },
+        {
+          "text": "Spotlight AEW News Mercedes Mone’s AEW Return Status After Months Away From Television WWE News WWE Quietly Retires NXT Heritage Cup WWE News Ilja Dragunov’s WWE Status After Absence From TV WWE News Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan",
+          "type": "text"
+        }
+      ],
+      "removed_before_gemini": 14,
+      "removed_elements_debug": [
+        {
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "node_index": 64,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Spotlight"
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197314 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-mercedes-mone   ",
+          "node_index": 68,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "AEW News Mercedes Mone’s AEW Return Status After Months Away From Television"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 71,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Mercedes Mone’s AEW Return Status After Months Away From Television"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 72,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197298 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
+          "node_index": 73,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News WWE Quietly Retires NXT Heritage Cup"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 76,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Quietly Retires NXT Heritage Cup"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 77,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197287 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-ilja-dragunov tag-wwe-featured   ",
+          "node_index": 78,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Ilja Dragunov’s WWE Status After Absence From TV"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 81,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Ilja Dragunov’s WWE Status After Absence From TV"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 82,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197186 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-liv-morgan tag-wwe-featured   ",
+          "node_index": 83,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 86,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 87,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "index": 9,
+          "item": {
+            "text": "Spotlight AEW News Mercedes Mone’s AEW Return Status After Months Away From Television WWE News WWE Quietly Retires NXT Heritage Cup WWE News Ilja Dragunov’s WWE Status After Absence From TV WWE News Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan",
+            "type": "text"
+          },
+          "reason": "footer_start"
+        }
+      ],
+      "source": "ringsidenews",
+      "source_html_contains_embed_hint": true,
+      "source_title": "Mercedes Mone’s AEW Return Status After Months Away From Television",
+      "source_url": "https://www.ringsidenews.com/mercedes-mones-aew-return-status-months-away-television/",
+      "status": "ready_for_alfred",
+      "title_it": "Aggiornamenti sul ritorno di Mercedes Moné in AEW",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_missing_units": [],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/mercedes-mones-aew-return-status-months-away-television/\nTitolo feed: Mercedes Mone’s AEW Return Status After Months Away From Television\nTitolo pagina: Mercedes Mone’s AEW Return Status After Months Away From Television\nDescrizione: Mercedes Mone hasn't wrestled for AEW a single time in 2026, but a new update indicates fans may not have to wait much longer for her return. The former\nCategoria suggerita: AEW\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Mercedes Mone hasn’t wrestled for AEW a single time in 2026, but a new update indicates fans may not have to wait much longer for her return.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"The former TBS Champion has been absent from AEW programming since dropping the title at New Year’s Smash, leading to months of speculation about her future with the company. While Mone remained active outside AEW and spent the first part of the year losing several championships she held elsewhere, she has yet to make an appearance back on AEW television.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"According to a new Fightful Select update , Mone’s absence was always expected to last beyond AEW Dynasty. However, AEW officials still have plans for her, and those plans could have a major impact on the company’s top storylines.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"It was said that Mone remains under contract with AEW and is still expected to return. While no exact timetable was provided, sources indicated that her eventual comeback is expected to carry significant implications near the top of the card.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"The report also noted that a return could happen sooner rather than later. Fans should expect Mone back “relatively soon, ” although there was no indication she had been spotted backstage at AEW programming as of June 3.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"One interesting detail from the report involved training activity earlier in the day. Sources noted that someone was seen practicing moves commonly associated with Mone, leading to some speculation about a possible return. However, Fightful cautioned against reading too much into that observation.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"As the report pointed out, plenty of wrestlers use running knees in today’s wrestling landscape, and other performers were also using stand-ins during rehearsals, including Alex Windsor working through material with a placeholder for Will Ospreay.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"For now, the biggest takeaway is that Mercedes Mone is still part of AEW’s plans and her return appears to be on the horizon. After spending the entire year away from AEW television, her comeback could immediately shake up the championship picture whenever it happens.\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Aggiornamenti sul ritorno di Mercedes Moné in AEW\",\n  \"excerpt_it\": \"Mercedes Moné non è ancora apparsa in AEW nel 2026, ma nuove indiscrezioni suggeriscono che il suo ritorno potrebbe essere vicino.\",\n  \"translations\": {\n    \"b1\": \"Mercedes Moné non ha ancora disputato un solo match in AEW nel 2026, ma un nuovo aggiornamento indica che i fan potrebbero non dover attendere ancora a lungo per il suo ritorno.\",\n    \"b2\": \"L'ex TBS Champion è assente dai programmi AEW da quando ha perso il titolo a New Year’s Smash, alimentando mesi di speculazioni sul suo futuro nella compagnia. Sebbene la Moné sia rimasta attiva al di fuori dell'AEW, perdendo diversi titoli che deteneva altrove nella prima parte dell'anno, non è ancora riapparsa negli show televisivi della promotion.\",\n    \"b3\": \"Secondo un nuovo aggiornamento di Fightful Select, era previsto che l'assenza della Moné si protraesse oltre AEW Dynasty. Tuttavia, i vertici della AEW hanno ancora dei piani per lei, e tali progetti potrebbero avere un impatto significativo sulle storyline di cartello della compagnia.\",\n    \"b4\": \"È stato riferito che la Moné è ancora sotto contratto con l'AEW e il suo ritorno resta confermato. Sebbene non sia stata fornita una tempistica precisa, le fonti indicano che il suo rientro dovrebbe avere implicazioni importanti per i vertici della card.\",\n    \"b5\": \"Il report ha inoltre sottolineato che il ritorno potrebbe avvenire piuttosto presto. I fan dovrebbero aspettarsi di rivedere la Moné in tempi “relativamente brevi”, sebbene al 3 giugno non ci fossero indicazioni sulla sua presenza nel backstage degli show AEW.\",\n    \"b6\": \"Un dettaglio interessante del report riguarda un'attività di allenamento svolta nel corso della giornata. Alcune fonti hanno notato una persona intenta a provare manovre comunemente associate alla Moné, dando il via a speculazioni su un possibile ritorno. Tuttavia, Fightful ha invitato alla cautela nel dare troppa importanza a questa osservazione.\",\n    \"b7\": \"Come sottolineato dal report, molti wrestler utilizzano le ginocchiate in corsa nel panorama odierno del wrestling, e altri atleti hanno utilizzato delle controfigure durante le prove, tra cui Alex Windsor, che ha lavorato ad alcuni segmenti con una controfigura per Will Ospreay.\",\n    \"b8\": \"Per ora, la notizia principale è che Mercedes Moné fa ancora parte dei piani della AEW e il suo ritorno sembra essere all'orizzonte. Dopo aver trascorso l'intero anno lontana dagli schermi AEW, il suo rientro potrebbe scuotere immediatamente gli equilibri titolati non appena avverrà.\"\n  },\n  \"notes\": []\n}",
+      "translation_unit_count": 8,
+      "translation_used": true
+    },
+    {
+      "bob_notes": [],
+      "body_html": "<p>Rhea Ripley non ha voluto lasciar correre un&#x27;immagine di se stessa generata dall&#x27;intelligenza artificiale spacciata per autentica, richiamando immediatamente all&#x27;ordine il fan che l&#x27;aveva condivisa.</p>\nhttps://x.com/RheaRipley_WWE/status/2062210284953993446\n\n<p>La WWE Women’s Champion ha notato un tweet in cui un fan sosteneva di mostrare un render inedito della Ripley, che indossava un nuovo ring gear mentre sfoggiava la sua cintura. L&#x27;account, visibilmente colpito dall&#x27;immagine, l&#x27;aveva condivisa scrivendo:</p>\n<blockquote>&quot;Un nuovo render! Ed è f****** fantastico.&quot;</blockquote>\n<p>L&#x27;immagine ritraeva la Ripley con un completo rosso e il titolo sulla spalla, ma i fan hanno notato rapidamente diversi dettagli fuori posto. Il colore degli occhi sembrava diverso e alcuni dei suoi tatuaggi — incluso quello inconfondibile a forma di planchette — non corrispondevano al suo aspetto reale. La stessa Ripley è quindi intervenuta per fare chiarezza, mettendo in chiaro di non aver mai scattato foto con quel ring gear.</p>\n<blockquote>“Non ho mai fatto foto con questo gear 🙃”</blockquote>\n<p>Poco dopo la replica della Ripley, il fan che aveva pubblicato l&#x27;immagine ha cancellato il tweet e ammesso che la foto era stata creata tramite IA. L&#x27;account ha poi postato uno screenshot del tweet originale accompagnato da delle scuse:</p>\n<blockquote>“Devo scusarmi. Ho fatto una cavolata, gente. È IA. Ho cancellato il tweet.”</blockquote>\n<p>In definitiva, questa situazione dimostra quanto velocemente le immagini di wrestling generate dall&#x27;IA possano diffondersi online, specialmente quando sono abbastanza verosimili da ingannare i fan meno attenti. Fortunatamente, la Ripley ha provveduto a chiudere la questione sul nascere prima che assumesse proporzioni maggiori.</p>",
+      "category_hint": "WWE",
+      "clean_element_count": 8,
+      "created_at": "2026-06-03T23:04:02.579440+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "diagnostic_warnings": [],
+      "editorial_changes": [
+        {
+          "code": "leading_embed_moved_after_first_paragraph",
+          "evidence": "https://x.com/RheaRipley_WWE/status/2062210284953993446",
+          "message": "Embed iniziale spostato dopo il primo paragrafo.",
+          "severity": "info"
+        },
+        {
+          "code": "inline_quote_split",
+          "evidence": "La WWE Women’s Champion ha notato un tweet in cui un fan sosteneva di mostrare un render inedito della Ripley, che indossava un nuovo ring gear mentre sfoggiava la sua cintura. L'account, visibilmente colpito dall'immagine, l'aveva condivisa scrivendo: \"Un nuovo render! Ed è f****** fantastico.\"",
+          "message": "Citazione tra virgolette separata in blockquote dedicato.",
+          "severity": "info"
+        }
+      ],
+      "element_counts": {
+        "embed": 1,
+        "heading": 0,
+        "image": 0,
+        "quote": 2,
+        "table": 0,
+        "text": 5
+      },
+      "elements": [
+        {
+          "block_id": "b1",
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://x.com/RheaRipley_WWE/status/2062210284953993446"
+        },
+        {
+          "block_id": "b2",
+          "text": "Rhea Ripley wasn’t about to let an AI-generated image of herself pass as the real thing, as she immediately called out a fan for sharing that image.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "text": "The WWE Women’s Champion spotted a fan tweet on Twitter that claimed to show a brand-new render of Ripley wearing fresh ring gear while holding her championship. The fan account was clearly impressed with the image and shared it with followers: “A new render! And it’s f****** amazing.”",
+          "type": "text"
+        },
+        {
+          "block_id": "b4",
+          "text": "The image showed Ripley in red gear with the title around her shoulder, but fans quickly noticed several details that looked off. Her eye color appeared different, and some of her tattoos — including her recognizable planchette tattoo — did not match her actual appearance. Ripley herself then stepped in to set the record straight as she made it clear she never took photos in that gear.",
+          "type": "text"
+        },
+        {
+          "block_id": "b5",
+          "source_tag": "blockquote",
+          "text": "“I never took photos in this gear 🙃”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b6",
+          "text": "Not long after Ripley’s reply, the fan who originally posted the image deleted the tweet and admitted the picture had been generated using AI. The account then posted a screenshot of the original tweet along with an apology :",
+          "type": "text"
+        },
+        {
+          "block_id": "b7",
+          "source_tag": "blockquote",
+          "text": "“I must apologise. I f***** up folks. It’s AI. I’ve deleted the tweet.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b8",
+          "text": "So at the end of the day, this entire situation shows how quickly AI-generated wrestling images can spread online, especially when they look close enough to fool some fans if they’re not looking hard enough. Thankfully, Ripley made sure to shut the whole thing down before it became a bigger deal.",
+          "type": "text"
+        }
+      ],
+      "excerpt_it": "Rhea Ripley è intervenuta in prima persona per smentire un'immagine creata con l'intelligenza artificiale, spacciata da un fan come un nuovo render ufficiale.",
+      "extraction_diagnostics": {
+        "candidate_node_count": 96,
+        "clean_element_count": 8,
+        "dom_noise_reduction_enabled": false,
+        "embed_count": 1,
+        "global_embed_recovery_enabled": false,
+        "quote_count": 2,
+        "raw_element_count": 11,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 3,
+        "root_name": "article",
+        "root_text_chars": 2439,
+        "stage": "complete",
+        "table_count": 0
+      },
+      "fetched_html_chars": 524869,
+      "menzo_score": 79,
+      "meta": {
+        "description": "Rhea Ripley wasn’t about to let an AI-generated image of herself pass as the real thing, as she immediately called out a fan for sharing that image. The",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/rhea-ripley-calls-out-fan-for-sharing-ai-generated-wwe-render-21.jpg",
+        "source_title": "Rhea Ripley Calls Out Fan For Sharing AI-Generated WWE Render"
+      },
+      "raw_element_count": 11,
+      "raw_elements_preview": [
+        {
+          "block_id": "b1",
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://x.com/RheaRipley_WWE/status/2062210284953993446"
+        },
+        {
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://x.com/RheaRipley_WWE/status/2062210284953993446"
+        },
+        {
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://x.com/RheaRipley_WWE/status/2062210284953993446"
+        },
+        {
+          "block_id": "b2",
+          "text": "Rhea Ripley wasn’t about to let an AI-generated image of herself pass as the real thing, as she immediately called out a fan for sharing that image.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "text": "The WWE Women’s Champion spotted a fan tweet on Twitter that claimed to show a brand-new render of Ripley wearing fresh ring gear while holding her championship. The fan account was clearly impressed with the image and shared it with followers: “A new render! And it’s f****** amazing.”",
+          "type": "text"
+        },
+        {
+          "block_id": "b4",
+          "text": "The image showed Ripley in red gear with the title around her shoulder, but fans quickly noticed several details that looked off. Her eye color appeared different, and some of her tattoos — including her recognizable planchette tattoo — did not match her actual appearance. Ripley herself then stepped in to set the record straight as she made it clear she never took photos in that gear.",
+          "type": "text"
+        },
+        {
+          "block_id": "b5",
+          "source_tag": "blockquote",
+          "text": "“I never took photos in this gear 🙃”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b6",
+          "text": "Not long after Ripley’s reply, the fan who originally posted the image deleted the tweet and admitted the picture had been generated using AI. The account then posted a screenshot of the original tweet along with an apology :",
+          "type": "text"
+        },
+        {
+          "block_id": "b7",
+          "source_tag": "blockquote",
+          "text": "“I must apologise. I f***** up folks. It’s AI. I’ve deleted the tweet.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b8",
+          "text": "So at the end of the day, this entire situation shows how quickly AI-generated wrestling images can spread online, especially when they look close enough to fool some fans if they’re not looking hard enough. Thankfully, Ripley made sure to shut the whole thing down before it became a bigger deal.",
+          "type": "text"
+        },
+        {
+          "text": "Spotlight AEW News Mercedes Mone’s AEW Return Status After Months Away From Television WWE News WWE Quietly Retires NXT Heritage Cup WWE News Ilja Dragunov’s WWE Status After Absence From TV WWE News Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan",
+          "type": "text"
+        }
+      ],
+      "removed_before_gemini": 16,
+      "removed_elements_debug": [
+        {
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "node_index": 73,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Spotlight"
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197314 post type-post status-publish format-standard has-post-thumbnail hentry category-aew-news tag-aew-featured tag-mercedes-mone   ",
+          "node_index": 77,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "AEW News Mercedes Mone’s AEW Return Status After Months Away From Television"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 80,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Mercedes Mone’s AEW Return Status After Months Away From Television"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 81,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197298 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured   ",
+          "node_index": 82,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News WWE Quietly Retires NXT Heritage Cup"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 85,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "WWE Quietly Retires NXT Heritage Cup"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 86,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197287 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-ilja-dragunov tag-wwe-featured   ",
           "node_index": 87,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE News Real Reason WWE Moved Money in the Bank 2026 Date"
+          "text_preview": "WWE News Ilja Dragunov’s WWE Status After Absence From TV"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 90,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "Real Reason WWE Moved Money in the Bank 2026 Date"
+          "text_preview": "Ilja Dragunov’s WWE Status After Absence From TV"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -877,18 +712,18 @@
           "text_preview": ""
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2197072 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-ludwig-kaiser tag-wwe-featured   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2197186 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-liv-morgan tag-wwe-featured   ",
           "node_index": 92,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case"
+          "text_preview": "WWE News Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 95,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "Digital Evidence Turned Over In Ludwig Kaiser Battery Case"
+          "text_preview": "Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -902,7 +737,7 @@
           "item": {
             "source_tag": "div",
             "type": "embed",
-            "url": "https://www.youtube.com/watch?v=a_gQ1-4Ezrg"
+            "url": "https://x.com/RheaRipley_WWE/status/2062210284953993446"
           },
           "reason": "duplicate_or_empty_embed"
         },
@@ -911,32 +746,14 @@
           "item": {
             "source_tag": "div",
             "type": "embed",
-            "url": "https://www.youtube.com/watch?v=a_gQ1-4Ezrg"
+            "url": "https://x.com/RheaRipley_WWE/status/2062210284953993446"
           },
           "reason": "duplicate_or_empty_embed"
         },
         {
-          "index": 15,
+          "index": 11,
           "item": {
-            "source_tag": "div",
-            "type": "embed",
-            "url": "https://www.youtube.com/embed/a_gQ1-4Ezrg?feature=oembed"
-          },
-          "reason": "duplicate_or_empty_embed"
-        },
-        {
-          "index": 16,
-          "item": {
-            "source_tag": "iframe",
-            "type": "embed",
-            "url": "https://www.youtube.com/embed/a_gQ1-4Ezrg?feature=oembed"
-          },
-          "reason": "duplicate_or_empty_embed"
-        },
-        {
-          "index": 17,
-          "item": {
-            "text": "Spotlight WWE News Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan WWE News Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer WWE News Real Reason WWE Moved Money in the Bank 2026 Date WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case",
+            "text": "Spotlight AEW News Mercedes Mone’s AEW Return Status After Months Away From Television WWE News WWE Quietly Retires NXT Heritage Cup WWE News Ilja Dragunov’s WWE Status After Absence From TV WWE News Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan",
             "type": "text"
           },
           "reason": "footer_start"
@@ -944,22 +761,22 @@
       ],
       "source": "ringsidenews",
       "source_html_contains_embed_hint": true,
-      "source_title": "Sol Ruca’s WWE Clash In Italy Match Criticized for Being Too Structured",
-      "source_url": "https://www.ringsidenews.com/sol-rucas-wwe-clash-italy-match-criticized-too-structured/",
+      "source_title": "Rhea Ripley Calls Out Fan For Sharing AI-Generated WWE Render",
+      "source_url": "https://www.ringsidenews.com/rhea-ripley-calls-out-fan-sharing-ai-generated-wwe-render/",
       "status": "ready_for_alfred",
-      "title_it": "Booker T critica il match di Sol Ruca a Clash in Italy: \"Troppo strutturato\"",
+      "title_it": "Rhea Ripley sbugiarda un fan per un render creato con l'IA",
       "translation_chain_attempted": [
         "gemini-3.1-flash-lite"
       ],
       "translation_missing_units": [],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/sol-rucas-wwe-clash-italy-match-criticized-too-structured/\nTitolo feed: Sol Ruca’s WWE Clash In Italy Match Criticized for Being Too Structured\nTitolo pagina: Sol Ruca’s WWE Clash In Italy Match Criticized for Being Too Structured\nDescrizione: Booker T isn’t writing off Sol Ruca after WWE Clash in Italy — but he definitely thinks she has some growing to do. While speaking on the Hall of Fame\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Booker T isn’t writing off Sol Ruca after WWE Clash in Italy — but he definitely thinks she has some growing to do.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"While speaking on the Hall of Fame podcast , Booker T reacted to Sol Ruca’s Women’s Intercontinental Championship match against Becky Lynch at Clash in Italy. Ruca walked out with the title after hitting the Sol Snatcher , but Booker felt the match exposed one major area she still needs to improve.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"According to Booker, the match felt too structured at times and came across like both women were simply moving from one planned spot to the next: “It looked like it was being run by the numbers, like running the plays. Sol Ruca is going to have to really think about being able to improvise.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Booker made it clear that he sees major potential in Ruca, but he believes she needs more experience when things don’t go exactly as planned inside the ring. He said learning how to adjust in real time is a huge part of working at the next level.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“I wish I had a chance to work with Sol Ruca on improvisation and go out and do certain things to make everything come together in a match. She’s so talented, and her having a meteoric rise in NXT—when that play gets messed up and you’ve got to call an audible, that’s how you still have to make it look like it was supposed to look that way.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Booker T said Sol Ruca being thrown into a major spot this quickly means mistakes are going to happen. However, he also argued that those mistakes are necessary if she wants to grow into a bigger star.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“So I think being thrown into that deep water so early—but then again, it’s mistakes that she has to make in order to be able to work on that next level. That’s facts, and there’s no way to sugarcoat it.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"The WWE Hall of Famer also questioned how much better the match could have been if Sol Ruca and Becky Lynch had worked together on house shows before getting their title match on a major WWE stage.\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"quote\",\n    \"text\": \"“How much more prepared would Sol Ruca have been if she had a chance to do house show loops with Becky Lynch before they had that match? How much better would that match have been? So much better. So what I’m saying is—making those mistakes, she has no choice but to learn.”\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"Sol Ruca still left Clash in Italy with one of the biggest wins of her career, but Booker T clearly believes the performance showed she is still adjusting to WWE’s main-event level. For him, the talent is obvious — but the next step is learning how to make a match work even when everything doesn’t go perfectly.\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"Booker T critica il match di Sol Ruca a Clash in Italy: \\\"Troppo strutturato\\\"\",\n  \"excerpt_it\": \"Booker T analizza la performance di Sol Ruca contro Becky Lynch a Clash in Italy, sottolineando la necessità di migliorare nell'improvvisazione.\",\n  \"translations\": {\n    \"b2\": \"Booker T non boccia Sol Ruca dopo WWE Clash in Italy, ma è convinto che abbia ancora molta strada da fare per crescere.\",\n    \"b3\": \"Durante il podcast Hall of Fame, Booker T ha commentato il match valevole per il Women’s Intercontinental Championship tra Sol Ruca e Becky Lynch a Clash in Italy. Ruca ha conquistato il titolo dopo aver eseguito la Sol Snatcher, ma Booker ritiene che l'incontro abbia messo in luce una lacuna importante su cui deve lavorare.\",\n    \"b4\": \"Secondo Booker, il match è apparso a tratti troppo strutturato, dando l'impressione che le due atlete si limitassero a passare da uno spot pianificato all'altro: \\\"Sembrava tutto eseguito secondo un copione, come se stessero solo seguendo degli schemi. Sol Ruca dovrà imparare davvero a improvvisare.\\\"\",\n    \"b5\": \"Booker ha chiarito di vedere un enorme potenziale in Ruca, pur sostenendo che le manchi esperienza per gestire gli imprevisti sul ring. Ha spiegato che saper reagire in tempo reale è una componente fondamentale per lavorare ai massimi livelli.\",\n    \"b6\": \"\\\"Vorrei avere la possibilità di lavorare con Sol Ruca sull'improvvisazione e sul come far sì che ogni elemento di un match si incastri alla perfezione. È così talentuosa e la sua ascesa a NXT è stata fulminea, ma quando qualcosa va storto e devi cambiare i piani in corsa, devi comunque far sembrare che fosse tutto previsto fin dall'inizio.\\\"\",\n    \"b7\": \"Booker T ha osservato che, essendo stata catapultata così presto in una posizione di rilievo, per Sol Ruca è inevitabile commettere degli errori. Tuttavia, ha anche aggiunto che tali sbagli sono necessari se vuole trasformarsi in una vera star di primo piano.\",\n    \"b8\": \"\\\"Penso che essere stata gettata nella mischia così presto comporti degli errori che deve necessariamente commettere per poter lavorare al livello successivo. Questa è la realtà dei fatti, inutile indorare la pillola.\\\"\",\n    \"b9\": \"Il WWE Hall of Famer si è anche chiesto quanto il match sarebbe potuto essere migliore se Sol Ruca e Becky Lynch avessero avuto modo di affrontarsi negli house show prima di arrivare a questo scontro titolato su un palcoscenico così importante.\",\n    \"b10\": \"\\\"Quanto sarebbe stata più preparata Sol Ruca se avesse avuto l'opportunità di fare qualche house show con Becky Lynch prima di quel match? Quanto sarebbe stato migliore l'incontro? Moltissimo. Quindi, quello che dico è: commettendo questi errori, non ha altra scelta che imparare.\\\"\",\n    \"b11\": \"Sol Ruca ha lasciato Clash in Italy con una delle vittorie più importanti della sua carriera, ma per Booker T la prestazione ha evidenziato come sia ancora in fase di adattamento ai livelli del main event WWE. Per lui, il talento non si discute, ma il passo successivo è imparare a far funzionare un match anche quando non tutto va secondo i piani.\"\n  },\n  \"notes\": []\n}",
-      "translation_unit_count": 10,
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/rhea-ripley-calls-out-fan-sharing-ai-generated-wwe-render/\nTitolo feed: Rhea Ripley Calls Out Fan For Sharing AI-Generated WWE Render\nTitolo pagina: Rhea Ripley Calls Out Fan For Sharing AI-Generated WWE Render\nDescrizione: Rhea Ripley wasn’t about to let an AI-generated image of herself pass as the real thing, as she immediately called out a fan for sharing that image. The\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Rhea Ripley wasn’t about to let an AI-generated image of herself pass as the real thing, as she immediately called out a fan for sharing that image.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"The WWE Women’s Champion spotted a fan tweet on Twitter that claimed to show a brand-new render of Ripley wearing fresh ring gear while holding her championship. The fan account was clearly impressed with the image and shared it with followers: “A new render! And it’s f****** amazing.”\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"The image showed Ripley in red gear with the title around her shoulder, but fans quickly noticed several details that looked off. Her eye color appeared different, and some of her tattoos — including her recognizable planchette tattoo — did not match her actual appearance. Ripley herself then stepped in to set the record straight as she made it clear she never took photos in that gear.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“I never took photos in this gear 🙃”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Not long after Ripley’s reply, the fan who originally posted the image deleted the tweet and admitted the picture had been generated using AI. The account then posted a screenshot of the original tweet along with an apology :\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“I must apologise. I f***** up folks. It’s AI. I’ve deleted the tweet.”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"So at the end of the day, this entire situation shows how quickly AI-generated wrestling images can spread online, especially when they look close enough to fool some fans if they’re not looking hard enough. Thankfully, Ripley made sure to shut the whole thing down before it became a bigger deal.\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Rhea Ripley sbugiarda un fan per un render creato con l'IA\",\n  \"excerpt_it\": \"Rhea Ripley è intervenuta in prima persona per smentire un'immagine creata con l'intelligenza artificiale, spacciata da un fan come un nuovo render ufficiale.\",\n  \"translations\": {\n    \"b2\": \"Rhea Ripley non ha voluto lasciar correre un'immagine di se stessa generata dall'intelligenza artificiale spacciata per autentica, richiamando immediatamente all'ordine il fan che l'aveva condivisa.\",\n    \"b3\": \"La WWE Women’s Champion ha notato un tweet in cui un fan sosteneva di mostrare un render inedito della Ripley, che indossava un nuovo ring gear mentre sfoggiava la sua cintura. L'account, visibilmente colpito dall'immagine, l'aveva condivisa scrivendo: \\\"Un nuovo render! Ed è f****** fantastico.\\\"\",\n    \"b4\": \"L'immagine ritraeva la Ripley con un completo rosso e il titolo sulla spalla, ma i fan hanno notato rapidamente diversi dettagli fuori posto. Il colore degli occhi sembrava diverso e alcuni dei suoi tatuaggi — incluso quello inconfondibile a forma di planchette — non corrispondevano al suo aspetto reale. La stessa Ripley è quindi intervenuta per fare chiarezza, mettendo in chiaro di non aver mai scattato foto con quel ring gear.\",\n    \"b5\": \"“Non ho mai fatto foto con questo gear 🙃”\",\n    \"b6\": \"Poco dopo la replica della Ripley, il fan che aveva pubblicato l'immagine ha cancellato il tweet e ammesso che la foto era stata creata tramite IA. L'account ha poi postato uno screenshot del tweet originale accompagnato da delle scuse:\",\n    \"b7\": \"“Devo scusarmi. Ho fatto una cavolata, gente. È IA. Ho cancellato il tweet.”\",\n    \"b8\": \"In definitiva, questa situazione dimostra quanto velocemente le immagini di wrestling generate dall'IA possano diffondersi online, specialmente quando sono abbastanza verosimili da ingannare i fan meno attenti. Fortunatamente, la Ripley ha provveduto a chiudere la questione sul nascere prima che assumesse proporzioni maggiori.\"\n  },\n  \"notes\": []\n}",
+      "translation_unit_count": 7,
       "translation_used": true
     }
   ],
-  "generated_at": "2026-06-03T20:37:07.119145+00:00",
+  "generated_at": "2026-06-03T23:04:05.220253+00:00",
   "handoff": {
     "errors": 0,
     "extraction_empty": 0,
@@ -968,7 +785,7 @@
   },
   "input": {
     "menzo_version": "v93_20_selective_softpool",
-    "selected_count": 7
+    "selected_count": 11
   },
   "mode": "block_translation_prudent_embed_cleanup",
   "policy": {
@@ -1007,7 +824,7 @@
     "unwrap_fake_data_blockquotes": true
   },
   "postprocess": {
-    "bob_v93_16_changes": 3
+    "bob_v93_16_changes": 2
   },
   "version": "v93_16_bob_embed_position_quote_cleanup"
 }

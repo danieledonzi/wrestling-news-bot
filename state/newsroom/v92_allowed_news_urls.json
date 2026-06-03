@@ -1,13 +1,17 @@
 {
   "allowed_urls": [
-    "https://www.wrestlinginc.com/2184203/michael-che-writing-wwe-favorite-performers-paul-heyman-stephanie-mcmahon/",
-    "https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event/",
-    "https://www.ringsidenews.com/sol-rucas-wwe-clash-italy-match-criticized-too-structured/",
+    "https://www.ringsidenews.com/former-wwf-star-mike-duke-droeses-criminal-case-delayed-yet-again/",
+    "https://www.ringsidenews.com/mercedes-mones-aew-return-status-months-away-television/",
+    "https://www.ringsidenews.com/rhea-ripley-calls-out-fan-sharing-ai-generated-wwe-render/",
+    "https://www.ringsidenews.com/how-womens-wrestling-became-major-influence-across-entertainment/",
     "https://www.wrestlinginc.com/2186331/mick-foley-one-more-match-aew-stranger-things-happened/",
+    "https://www.ringsidenews.com/former-wwe-talent-confirms-departure-long-absence-due-injury/",
+    "https://www.ringsidenews.com/wwe-quietly-retires-nxt-heritage-cup/",
     "https://www.ringsidenews.com/nwa-adds-world-title-match-hard-times-6/",
     "https://www.ringsidenews.com/mjf-announces-hes-stepping-away-american-independent-wrestling-focus-aew/",
-    "https://www.ringsidenews.com/dark-side-ring-season-7-trailer-reveals-star-studded-lineup/"
+    "https://www.ringsidenews.com/dark-side-ring-season-7-trailer-reveals-star-studded-lineup/",
+    "https://www.wrestlinginc.com/2187009/bully-ray-jacob-fatu-bloodline-wwe-clash-in-italy-raw/"
   ],
-  "generated_at": "2026-06-03T20:36:57.493352+00:00",
+  "generated_at": "2026-06-03T23:03:56.406194+00:00",
   "version": "v93_20_selective_softpool"
 }

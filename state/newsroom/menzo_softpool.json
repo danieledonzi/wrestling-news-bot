@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "age_hours": 1.966810786111111,
+      "age_hours": 4.416002287222222,
       "agent": "Menzo",
       "ai_priority_label": "medium",
       "article_type": "strategic_discussion",
@@ -9,19 +9,19 @@
       "category_hint": "WWE",
       "decision": "pending",
       "deterministic_score": 64,
-      "evaluated_at": "2026-06-03T20:36:52.518832+00:00",
+      "evaluated_at": "2026-06-03T23:03:49.608235+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "last_seen_at": "2026-06-03T20:36:57.488006+00:00",
+      "last_seen_at": "2026-06-03T23:03:56.402634+00:00",
       "normalized_url": "https://www.ringsidenews.com/kane-reacts-undertakers-success-running-aaa-wwe-takeover",
       "priority": "soft",
       "published": "Wed, 03 Jun 2026 18:38:52 +0000",
       "reason": "strategic:creative,soft_penalty:reacts,recency:fresh_12h",
       "score": 64,
-      "softpool_added_at": "2026-06-03T20:36:57.488006+00:00",
+      "softpool_added_at": "2026-06-03T23:03:56.402634+00:00",
       "softpool_reason": "medium_candidate_above_quality_threshold",
       "softpool_ttl_hours": 36,
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Kane Reacts To Undertaker’s Success Running AAA After WWE Takeover\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/kane-reacts-to-undertakers-success-running-aaa-after-wwe-takeover-43.jpg?x31348\" width=\"800\" /></p>Kane couldn&#8217;t be happier with what his longtime storyline brother has accomplished behind the scenes in AAA. Since WWE acquired AAA, Undertaker has taken on a major creative role within the lucha libre promotion. The company hit a new high point last weekend at Noche de Los Grandes, where the mask vs. mask match between ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/kane-reacts-undertakers-success-running-aaa-wwe-takeover/\" title=\"Kane Reacts To Undertaker’s Success Running AAA After WWE Takeover\">Read more</a>",
+      "summary": "<p><img alt=\"Kane Reacts To Undertaker’s Success Running AAA After WWE Takeover\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/kane-reacts-to-undertakers-success-running-aaa-after-wwe-takeover-43.jpg?x52795\" width=\"800\" /></p>Kane couldn&#8217;t be happier with what his longtime storyline brother has accomplished behind the scenes in AAA. Since WWE acquired AAA, Undertaker has taken on a major creative role within the lucha libre promotion. The company hit a new high point last weekend at Noche de Los Grandes, where the mask vs. mask match between ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/kane-reacts-undertakers-success-running-aaa-wwe-takeover/\" title=\"Kane Reacts To Undertaker’s Success Running AAA After WWE Takeover\">Read more</a>",
       "title": "Kane Reacts To Undertaker’s Success Running AAA After WWE Takeover",
       "url": "https://www.ringsidenews.com/kane-reacts-undertakers-success-running-aaa-wwe-takeover/"
     }
@@ -29,6 +29,6 @@
   "min_score": 55,
   "softnews_ttl_hours": 24,
   "ttl_hours": 36,
-  "updated_at": "2026-06-03T20:36:57.488006+00:00",
+  "updated_at": "2026-06-03T23:03:56.402634+00:00",
   "version": "v93_20_selective_softpool"
 }

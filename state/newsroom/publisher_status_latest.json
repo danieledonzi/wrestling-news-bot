@@ -1,6 +1,6 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-03T20:37:32.430550+00:00",
+  "generated_at": "2026-06-03T23:04:30.459876+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
@@ -122,10 +122,10 @@
     }
   ],
   "retry_queue": {
-    "added": 3,
-    "injected": 0,
+    "added": 0,
+    "injected": 3,
     "resolved": 0,
-    "retained": 0,
+    "retained": 3,
     "size": 3
   },
   "version": "v93_20_1_publisher_retry_queue_recursion_fix",
@@ -133,6 +133,6 @@
     "dry_run": false,
     "post_status": "publish",
     "ready": false,
-    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=25)"
+    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Max retries exceeded with url: /wp-json/ (Caused by ConnectTimeoutError(<HTTPSConnection(host='news.openwrestlingtv.com', port=443) at 0x7f890a731350>, 'Connection to news.openwrestlingtv.com timed out. (connect timeout=25)'))"
   }
 }

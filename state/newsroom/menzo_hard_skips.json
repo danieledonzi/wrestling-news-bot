@@ -512,9 +512,81 @@
       "reason": "softpool_ineligible:ai:Approfondimento biografico vecchio, non una notizia fresca.; deterministic:hard:returning,hard:return,soft_penalty:explains why,recency:fresh_12h",
       "title": "Matt Cardona Explains Why Zack Ryder Had To Die For His WWE Return To Happen",
       "url": "https://www.ringsidenews.com/matt-cardona-explains-why-zack-ryder-die-his-wwe-return-happen/"
+    },
+    {
+      "added_at": "2026-06-03T23:03:56.402897+00:00",
+      "article_type": "soft_news",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2187001/nick-khan-cody-rhodes-roman-reigns-wwe-wrestlemania-40",
+      "reason": "softpool_ineligible:entity:roman reigns,entity:cody rhodes,entity:the rock,recency:fresh_12h",
+      "title": "Nick Khan: Cody Rhodes Beating Roman Reigns At WWE WrestleMania XL Was Always The Plan",
+      "url": "https://www.wrestlinginc.com/2187001/nick-khan-cody-rhodes-roman-reigns-wwe-wrestlemania-40/"
+    },
+    {
+      "added_at": "2026-06-03T23:03:56.402897+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2187054/aew-kevin-knight-speedball-mike-bailey-albert-einstein-deion-sanders-compares",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "AEW's Kevin Knight Compares Speedball Mike Bailey To Albert Einstein & Deion Sanders",
+      "url": "https://www.wrestlinginc.com/2187054/aew-kevin-knight-speedball-mike-bailey-albert-einstein-deion-sanders-compares/"
+    },
+    {
+      "added_at": "2026-06-03T23:03:56.402897+00:00",
+      "article_type": "duplicate",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2187053/mercedes-mone-aew-status-dynamite-owen-hart-tournament",
+      "reason": "ai_duplicate_event:mercedes mone return; ai_duplicate_of:c2; strategic:backstage,entity:mercedes mone,recency:fresh_12h",
+      "title": "Backstage Update On Mercedes Mone's AEW Status Ahead Of Tonight's Dynamite",
+      "url": "https://www.wrestlinginc.com/2187053/mercedes-mone-aew-status-dynamite-owen-hart-tournament/"
+    },
+    {
+      "added_at": "2026-06-03T23:03:56.402897+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2187049/tony-khan-aew-dark-side-of-the-ring-trailer",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "Tony Khan, Multiple AEW Stars Featured In New Dark Side Of The Ring Trailer",
+      "url": "https://www.wrestlinginc.com/2187049/tony-khan-aew-dark-side-of-the-ring-trailer/"
+    },
+    {
+      "added_at": "2026-06-03T23:03:56.402897+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2187035/aew-anthony-bowens-new-day-great-addition-wwe-release",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "AEW Star Says Former New Day Would 'Make A Great Addition' Following Their WWE Release",
+      "url": "https://www.wrestlinginc.com/2187035/aew-anthony-bowens-new-day-great-addition-wwe-release/"
+    },
+    {
+      "added_at": "2026-06-03T23:03:56.402897+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/liv-morgan-declares-her-revenge-tour",
+      "reason": "softpool_ineligible:entity:liv morgan,recency:fresh_12h",
+      "title": "Liv Morgan Declares Her Revenge Tour Is Over",
+      "url": "https://www.ringsidenews.com/liv-morgan-declares-her-revenge-tour/"
+    },
+    {
+      "added_at": "2026-06-03T23:03:56.402897+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/sol-ruca-explains-why-dating-can-difficult-wwe-superstar",
+      "reason": "softpool_ineligible:soft_penalty:explains why,recency:fresh_12h",
+      "title": "Sol Ruca Explains Why Dating Can Be Difficult as a WWE Superstar",
+      "url": "https://www.ringsidenews.com/sol-ruca-explains-why-dating-can-difficult-wwe-superstar/"
+    },
+    {
+      "added_at": "2026-06-03T23:03:56.402897+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/ilja-dragunovs-wwe-status-absence-tv",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "Ilja Dragunov’s WWE Status After Absence From TV",
+      "url": "https://www.ringsidenews.com/ilja-dragunovs-wwe-status-absence-tv/"
     }
   ],
   "ttl_hours": 168,
-  "updated_at": "2026-06-03T20:36:57.489308+00:00",
+  "updated_at": "2026-06-03T23:03:56.402897+00:00",
   "version": "v93_20_selective_softpool"
 }
