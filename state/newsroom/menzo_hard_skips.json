@@ -251,9 +251,72 @@
       "reason": "ai_duplicate_event:smackdown ratings may29; ai_duplicate_of:c6; strategic:smackdown,ratings:generic_penalty,recency:fresh_12h",
       "title": "WWE SmackDown Viewership Sees No Change on May 29, 2026",
       "url": "https://www.ringsidenews.com/wwe-smackdown-viewership-sees-no-change-may-29-2026/"
+    },
+    {
+      "added_at": "2026-06-03T10:01:48.016680+00:00",
+      "article_type": "storyline_development",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/tony-dangelo-stands-tall-nxt-title-defense-during-june-2-episode",
+      "reason": "softpool_ineligible:ai:Aggiornamento narrativo importante per il main title di NXT.; deterministic:recency:fresh_12h",
+      "title": "Tony D’Angelo Stands Tall With NXT Title Defense During June 2 Episode",
+      "url": "https://www.ringsidenews.com/tony-dangelo-stands-tall-nxt-title-defense-during-june-2-episode/"
+    },
+    {
+      "added_at": "2026-06-03T10:01:48.016680+00:00",
+      "article_type": "storyline_development",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/mr-nxt-pageant-more-announced-june-9-episode",
+      "reason": "softpool_ineligible:ai:Utile per il pubblico di NXT, annuncio di match e segmenti per la prossima settimana.; deterministic:recency:fresh_12h",
+      "title": "Mr. NXT Pageant & More Announced For June 9 Episode",
+      "url": "https://www.ringsidenews.com/mr-nxt-pageant-more-announced-june-9-episode/"
+    },
+    {
+      "added_at": "2026-06-03T10:01:48.016680+00:00",
+      "article_type": "soft_news",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2186287/aew-darby-allin-world-champion-succeed-year-one",
+      "reason": "softpool_ineligible:ai:Intervista di colore, non urgente.; deterministic:recency:fresh_12h",
+      "title": "Darby Allin Felt In 'Year One' That He Could Succeed As AEW World Champion",
+      "url": "https://www.wrestlinginc.com/2186287/aew-darby-allin-world-champion-succeed-year-one/"
+    },
+    {
+      "added_at": "2026-06-03T10:01:48.016680+00:00",
+      "article_type": "duplicate",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2186281/wwe-smackdown-ratings-viewership-report-may-29-2026",
+      "reason": "ai_duplicate_of:c3; strategic:smackdown,ratings:generic_penalty,recency:fresh_12h",
+      "title": "WWE SmackDown Ratings & Viewership Report: 5/29/2026",
+      "url": "https://www.wrestlinginc.com/2186281/wwe-smackdown-ratings-viewership-report-may-29-2026/"
+    },
+    {
+      "added_at": "2026-06-03T10:01:48.016680+00:00",
+      "article_type": "soft_news",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/real-reason-wwe-moved-money-bank-2026-date",
+      "reason": "softpool_ineligible:ai:Notizia minore sulla pianificazione eventi, già superata.; deterministic:recency:fresh_12h",
+      "title": "Real Reason WWE Moved Money in the Bank 2026 Date",
+      "url": "https://www.ringsidenews.com/real-reason-wwe-moved-money-bank-2026-date/"
+    },
+    {
+      "added_at": "2026-06-03T10:01:48.016680+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/mjf-fires-back-nsfw-response-mick-foley-calls-him-best-business",
+      "reason": "softpool_ineligible:ai:Social interaction non necessaria, pura curiosità di basso profilo.; deterministic:entity:mick foley,recency:fresh_12h",
+      "title": "MJF Fires Back With NSFW Response After Mick Foley Calls Him ‘The Best In The Business’",
+      "url": "https://www.ringsidenews.com/mjf-fires-back-nsfw-response-mick-foley-calls-him-best-business/"
+    },
+    {
+      "added_at": "2026-06-03T10:01:48.016680+00:00",
+      "article_type": "data_report",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-drop-may-30-2026",
+      "reason": "softpool_ineligible:ai:Dati di ascolto, interesse limitato per il pubblico italiano.; deterministic:ratings:exceptional_signal,recency:fresh_12h",
+      "title": "AEW Collision Viewership Sees Massive Drop on May 30, 2026",
+      "url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-drop-may-30-2026/"
     }
   ],
   "ttl_hours": 168,
-  "updated_at": "2026-06-03T07:21:42.348505+00:00",
-  "version": "v93_15_forced_priority_label_softpool"
+  "updated_at": "2026-06-03T10:01:48.016680+00:00",
+  "version": "v93_20_selective_softpool"
 }

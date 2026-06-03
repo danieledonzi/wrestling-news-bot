@@ -1,9 +1,8 @@
 {
   "allowed_urls": [
-    "https://www.ringsidenews.com/digital-evidence-turned-over-in-ludwig-kaiser-battery-case/",
-    "https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/",
-    "https://www.ringsidenews.com/why-wwe-rushing-create-its-next-generation-main-event-stars/"
+    "https://www.ringsidenews.com/bayleys-wwe-future-unclear-contract-expiration-date-draws-closer/",
+    "https://www.ringsidenews.com/cody-rhodes-defends-triple-hs-wwe-creative-style-constant-criticism/"
   ],
-  "generated_at": "2026-06-03T07:21:42.351482+00:00",
-  "version": "v93_15_forced_priority_label_softpool"
+  "generated_at": "2026-06-03T10:01:48.019417+00:00",
+  "version": "v93_20_selective_softpool"
 }

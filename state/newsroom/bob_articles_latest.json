@@ -3,393 +3,164 @@
   "articles": [
     {
       "bob_notes": [],
-      "body_html": "<p>La situazione legale di Ludwig Kaiser ha fatto un ulteriore passo avanti dopo che l&#x27;accusa ha consegnato le prove digitali al suo team di difesa, mentre il suo caso per aggressione (reato minore) prosegue il suo iter nel sistema giudiziario della Florida.</p>\n<p>Ringside News ha ottenuto un nuovo documento del tribunale, datato 1 giugno, che conferma che lo Stato della Florida ha fornito all&#x27;avvocato di Kaiser l&#x27;accesso alle prove digitali collegate al caso. Il documento specifica che l&#x27;accusa ha inviato al difensore Thomas Sommerville un link elettronico contenente il materiale probatorio, precisando che l&#x27;accesso rimarrà disponibile per 90 giorni. Il documento recita:</p>\n<blockquote>“Lo Stato ha inviato via email all&#x27;imputato un link che garantisce l&#x27;accesso agli elementi di prova digitale a tom@sommervillelaw.com in data 01/06/2026. Il link nell&#x27;email scadrà entro 90 giorni.”</blockquote>\n<p>L&#x27;accusa ha inoltre chiarito che parte del materiale potrebbe contenere ulteriori informazioni di geolocalizzazione che potrebbero non apparire immediatamente durante la revisione dei file scaricati. Il documento afferma inoltre:</p>\n<blockquote>“Si prega di notare che alcuni video potrebbero contenere informazioni di geolocalizzazione che potrebbero non essere visibili nei video scaricati.”</blockquote>\n<p>Questo ultimo sviluppo arriva mentre Kaiser, il cui vero nome è Marcel Barthel, continua a difendersi dall&#x27;accusa di aggressione minore derivante da un presunto incidente avvenuto nel suo complesso residenziale di Orlando all&#x27;inizio di quest&#x27;anno. In precedenza si è dichiarato non colpevole e rimane in libertà su cauzione.</p>\n<p>Come riportato in precedenza da Ringside News, Kaiser dovrà tornare in tribunale il 16 luglio per un&#x27;udienza preliminare. I documenti del tribunale hanno inoltre indicato un possibile periodo di processo compreso tra il 10 e il 28 agosto, qualora la vicenda non venisse risolta prima di tale data.</p>\n<p>Il procedimento legale non ha avuto ripercussioni sullo status di Kaiser in WWE. Rimane un membro attivo della programmazione WWE e continuerà regolarmente a onorare le apparizioni in programma. Con la difesa che sta ora esaminando le prove digitali e l&#x27;udienza di luglio che si avvicina, l&#x27;attenzione si sposterà sulla possibilità che le parti raggiungano un accordo o se il caso approderà effettivamente a processo nel corso dell&#x27;estate.</p>",
-      "category_hint": "World",
-      "clean_element_count": 8,
-      "created_at": "2026-06-03T07:21:42.452502+00:00",
-      "diagnostic_stage": "ready_for_alfred",
-      "element_counts": {
-        "embed": 0,
-        "heading": 0,
-        "image": 0,
-        "quote": 2,
-        "table": 0,
-        "text": 6
-      },
-      "elements": [
-        {
-          "block_id": "b1",
-          "text": "Ludwig Kaiser’s legal situation has taken another step forward after prosecutors handed over digital evidence to his defense team as his misdemeanor battery case continues through the Florida court system.",
-          "type": "text"
-        },
-        {
-          "block_id": "b2",
-          "text": "Ringside News obtained a new court filing dated June 1 that confirms the State of Florida provided Kaiser’s attorney with access to digital evidence connected to the case. The filing states that prosecutors sent defense attorney Thomas Sommerville an electronic link containing evidence and noted that access would remain available for 90 days. The court filing states:",
-          "type": "text"
-        },
-        {
-          "block_id": "b3",
-          "source_tag": "blockquote",
-          "text": "“The State emailed the defendant a link that grants access to tom@sommervillelaw.com items of digital evidence on 06/01/2026. The link in the email will expire within 90 days.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b4",
-          "text": "Prosecutors also made it clear that some of the material may contain additional location-based information that might not immediately appear when reviewing downloaded files. The filing further states:",
-          "type": "text"
-        },
-        {
-          "block_id": "b5",
-          "source_tag": "blockquote",
-          "text": "“Please note that some videos may contain geolocating information that may not be visible in the downloaded videos.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b6",
-          "text": "The latest development comes as Kaiser, whose real name is Marcel Barthel, continues fighting a misdemeanor battery charge stemming from an alleged incident at his Orlando apartment complex earlier this year. He previously entered a not guilty plea and remains free on bond.",
-          "type": "text"
-        },
-        {
-          "block_id": "b7",
-          "text": "As Ringside News previously reported, Kaiser is scheduled to return to court on July 16 for a pre-trial conference . Court records have also identified a possible trial period running from August 10 through August 28 if the case is not resolved before then.",
-          "type": "text"
-        },
-        {
-          "block_id": "b8",
-          "text": "The legal proceedings have not impacted Kaiser’s WWE status. He remains an active part of WWE programming and is expected to continue fulfilling his scheduled appearances. With the defense now reviewing the digital evidence and a July court appearance approaching, attention will turn to whether both sides can reach a resolution or if the case ultimately heads to trial later this summer.",
-          "type": "text"
-        }
-      ],
-      "excerpt_it": "Procede l'iter giudiziario per Ludwig Kaiser: la procura ha consegnato alla difesa le prove digitali relative al caso di presunta aggressione.",
-      "extraction_diagnostics": {
-        "candidate_node_count": 95,
-        "clean_element_count": 8,
-        "dom_noise_reduction_enabled": false,
-        "embed_count": 0,
-        "global_embed_recovery_enabled": false,
-        "quote_count": 2,
-        "raw_element_count": 9,
-        "removed_by_node_count": 13,
-        "removed_by_sanitize_count": 1,
-        "root_name": "article",
-        "root_text_chars": 3061,
-        "stage": "complete",
-        "table_count": 0
-      },
-      "fetched_html_chars": 485024,
-      "menzo_score": 96,
-      "meta": {
-        "description": "Ludwig Kaiser’s legal situation has taken another step forward after prosecutors handed over digital evidence to his defense team as his misdemeanor",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/digital-evidence-turned-over-in-ludwig-kaiser-battery-case-02.jpg",
-        "source_title": "Digital Evidence Turned Over In Ludwig Kaiser Battery Case"
-      },
-      "raw_element_count": 9,
-      "raw_elements_preview": [
-        {
-          "block_id": "b1",
-          "text": "Ludwig Kaiser’s legal situation has taken another step forward after prosecutors handed over digital evidence to his defense team as his misdemeanor battery case continues through the Florida court system.",
-          "type": "text"
-        },
-        {
-          "block_id": "b2",
-          "text": "Ringside News obtained a new court filing dated June 1 that confirms the State of Florida provided Kaiser’s attorney with access to digital evidence connected to the case. The filing states that prosecutors sent defense attorney Thomas Sommerville an electronic link containing evidence and noted that access would remain available for 90 days. The court filing states:",
-          "type": "text"
-        },
-        {
-          "block_id": "b3",
-          "source_tag": "blockquote",
-          "text": "“The State emailed the defendant a link that grants access to tom@sommervillelaw.com items of digital evidence on 06/01/2026. The link in the email will expire within 90 days.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b4",
-          "text": "Prosecutors also made it clear that some of the material may contain additional location-based information that might not immediately appear when reviewing downloaded files. The filing further states:",
-          "type": "text"
-        },
-        {
-          "block_id": "b5",
-          "source_tag": "blockquote",
-          "text": "“Please note that some videos may contain geolocating information that may not be visible in the downloaded videos.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b6",
-          "text": "The latest development comes as Kaiser, whose real name is Marcel Barthel, continues fighting a misdemeanor battery charge stemming from an alleged incident at his Orlando apartment complex earlier this year. He previously entered a not guilty plea and remains free on bond.",
-          "type": "text"
-        },
-        {
-          "block_id": "b7",
-          "text": "As Ringside News previously reported, Kaiser is scheduled to return to court on July 16 for a pre-trial conference . Court records have also identified a possible trial period running from August 10 through August 28 if the case is not resolved before then.",
-          "type": "text"
-        },
-        {
-          "block_id": "b8",
-          "text": "The legal proceedings have not impacted Kaiser’s WWE status. He remains an active part of WWE programming and is expected to continue fulfilling his scheduled appearances. With the defense now reviewing the digital evidence and a July court appearance approaching, attention will turn to whether both sides can reach a resolution or if the case ultimately heads to trial later this summer.",
-          "type": "text"
-        },
-        {
-          "text": "Spotlight WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case WWE NXT Results WWE NXT Results, Highlights and Key Moments for June 2, 2026 WWE News Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW WWE News Bronson Reed Involved in a Car Accident",
-          "type": "text"
-        }
-      ],
-      "removed_before_gemini": 14,
-      "removed_elements_debug": [
-        {
-          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 72,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Spotlight"
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2197072 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-ludwig-kaiser tag-wwe-featured   ",
-          "node_index": 76,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 79,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Digital Evidence Turned Over In Ludwig Kaiser Battery Case"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 80,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196652 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-nxt-results category-wwe-results tag-wwe-featured   ",
-          "node_index": 81,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE NXT Results WWE NXT Results, Highlights and Key Moments for June 2, 2026"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 84,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "WWE NXT Results, Highlights and Key Moments for June 2, 2026"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 85,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196783 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-bron-breakker tag-wwe-featured   ",
-          "node_index": 86,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 89,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 90,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196772 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-bronson-reed tag-wwe-featured   ",
-          "node_index": 91,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Bronson Reed Involved in a Car Accident"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 94,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Bronson Reed Involved in a Car Accident"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 95,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "index": 9,
-          "item": {
-            "text": "Spotlight WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case WWE NXT Results WWE NXT Results, Highlights and Key Moments for June 2, 2026 WWE News Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW WWE News Bronson Reed Involved in a Car Accident",
-            "type": "text"
-          },
-          "reason": "footer_start"
-        }
-      ],
-      "source": "ringsidenews",
-      "source_html_contains_embed_hint": true,
-      "source_title": "Digital Evidence Turned Over In Ludwig Kaiser Battery Case",
-      "source_url": "https://www.ringsidenews.com/digital-evidence-turned-over-in-ludwig-kaiser-battery-case/",
-      "status": "ready_for_alfred",
-      "title_it": "Aggiornamenti legali sul caso di Ludwig Kaiser",
-      "translation_chain_attempted": [
-        "gemini-3.1-flash-lite"
-      ],
-      "translation_missing_units": [],
-      "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/digital-evidence-turned-over-in-ludwig-kaiser-battery-case/\nTitolo feed: Digital Evidence Turned Over In Ludwig Kaiser Battery Case\nTitolo pagina: Digital Evidence Turned Over In Ludwig Kaiser Battery Case\nDescrizione: Ludwig Kaiser’s legal situation has taken another step forward after prosecutors handed over digital evidence to his defense team as his misdemeanor\nCategoria suggerita: World\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Ludwig Kaiser’s legal situation has taken another step forward after prosecutors handed over digital evidence to his defense team as his misdemeanor battery case continues through the Florida court system.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Ringside News obtained a new court filing dated June 1 that confirms the State of Florida provided Kaiser’s attorney with access to digital evidence connected to the case. The filing states that prosecutors sent defense attorney Thomas Sommerville an electronic link containing evidence and noted that access would remain available for 90 days. The court filing states:\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"“The State emailed the defendant a link that grants access to tom@sommervillelaw.com items of digital evidence on 06/01/2026. The link in the email will expire within 90 days.”\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Prosecutors also made it clear that some of the material may contain additional location-based information that might not immediately appear when reviewing downloaded files. The filing further states:\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“Please note that some videos may contain geolocating information that may not be visible in the downloaded videos.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"The latest development comes as Kaiser, whose real name is Marcel Barthel, continues fighting a misdemeanor battery charge stemming from an alleged incident at his Orlando apartment complex earlier this year. He previously entered a not guilty plea and remains free on bond.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"As Ringside News previously reported, Kaiser is scheduled to return to court on July 16 for a pre-trial conference . Court records have also identified a possible trial period running from August 10 through August 28 if the case is not resolved before then.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"The legal proceedings have not impacted Kaiser’s WWE status. He remains an active part of WWE programming and is expected to continue fulfilling his scheduled appearances. With the defense now reviewing the digital evidence and a July court appearance approaching, attention will turn to whether both sides can reach a resolution or if the case ultimately heads to trial later this summer.\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"Aggiornamenti legali sul caso di Ludwig Kaiser\",\n  \"excerpt_it\": \"Procede l'iter giudiziario per Ludwig Kaiser: la procura ha consegnato alla difesa le prove digitali relative al caso di presunta aggressione.\",\n  \"translations\": {\n    \"b1\": \"La situazione legale di Ludwig Kaiser ha fatto un ulteriore passo avanti dopo che l'accusa ha consegnato le prove digitali al suo team di difesa, mentre il suo caso per aggressione (reato minore) prosegue il suo iter nel sistema giudiziario della Florida.\",\n    \"b2\": \"Ringside News ha ottenuto un nuovo documento del tribunale, datato 1 giugno, che conferma che lo Stato della Florida ha fornito all'avvocato di Kaiser l'accesso alle prove digitali collegate al caso. Il documento specifica che l'accusa ha inviato al difensore Thomas Sommerville un link elettronico contenente il materiale probatorio, precisando che l'accesso rimarrà disponibile per 90 giorni. Il documento recita:\",\n    \"b3\": \"“Lo Stato ha inviato via email all'imputato un link che garantisce l'accesso agli elementi di prova digitale a tom@sommervillelaw.com in data 01/06/2026. Il link nell'email scadrà entro 90 giorni.”\",\n    \"b4\": \"L'accusa ha inoltre chiarito che parte del materiale potrebbe contenere ulteriori informazioni di geolocalizzazione che potrebbero non apparire immediatamente durante la revisione dei file scaricati. Il documento afferma inoltre:\",\n    \"b5\": \"“Si prega di notare che alcuni video potrebbero contenere informazioni di geolocalizzazione che potrebbero non essere visibili nei video scaricati.”\",\n    \"b6\": \"Questo ultimo sviluppo arriva mentre Kaiser, il cui vero nome è Marcel Barthel, continua a difendersi dall'accusa di aggressione minore derivante da un presunto incidente avvenuto nel suo complesso residenziale di Orlando all'inizio di quest'anno. In precedenza si è dichiarato non colpevole e rimane in libertà su cauzione.\",\n    \"b7\": \"Come riportato in precedenza da Ringside News, Kaiser dovrà tornare in tribunale il 16 luglio per un'udienza preliminare. I documenti del tribunale hanno inoltre indicato un possibile periodo di processo compreso tra il 10 e il 28 agosto, qualora la vicenda non venisse risolta prima di tale data.\",\n    \"b8\": \"Il procedimento legale non ha avuto ripercussioni sullo status di Kaiser in WWE. Rimane un membro attivo della programmazione WWE e continuerà regolarmente a onorare le apparizioni in programma. Con la difesa che sta ora esaminando le prove digitali e l'udienza di luglio che si avvicina, l'attenzione si sposterà sulla possibilità che le parti raggiungano un accordo o se il caso approderà effettivamente a processo nel corso dell'estate.\"\n  },\n  \"notes\": []\n}",
-      "translation_unit_count": 8,
-      "translation_used": true
-    },
-    {
-      "bob_notes": [],
-      "body_html": "<p>La fusione tra WWE e UFC ha dato vita a TKO Group Holdings, ma le ripercussioni legali dell&#x27;operazione potrebbero ora comportare un prezzo potenzialmente altissimo.</p>\n<p>Una causa collettiva promossa dagli azionisti in merito alla fusione si sta avviando verso il processo: se i querelanti dovessero avere la meglio in tribunale, i danni richiesti potrebbero sfiorare il miliardo di dollari. Il caso si concentra sulle accuse secondo cui Vince McMahon avrebbe spinto per l&#x27;accordo con Endeavor per tutelare il proprio potere, anziché garantire il miglior risultato possibile per gli azionisti WWE.</p>\n<p>Secondo Brandon Thurston di POST Wrestling, i legali che rappresentano un gruppo di azionisti WWE stanno richiedendo un risarcimento danni ingente legato alla fusione.</p>\n<blockquote>“I danni monetari richiesti dai querelanti oscillano tra i 466 e i 957 milioni di dollari, più gli interessi maturati dalla chiusura della fusione, avvenuta quasi tre anni fa. La forchetta deriva da un&#x27;analisi redatta all&#x27;inizio di quest&#x27;anno da James L. Canessa, un economista finanziario incaricato dai querelanti.”</blockquote>\n<p>La causa nasce dalla fusione tra WWE e UFC sotto l&#x27;egida di Endeavor, che ha portato alla creazione di TKO Group Holdings. I querelanti sostengono che McMahon avesse già indirizzato il processo verso Endeavor mentre si trovava sotto esame per le accuse di cattiva condotta sessuale.</p>\n<p>L&#x27;accusa principale è che il futuro personale di McMahon all&#x27;interno dell&#x27;azienda sia stato un fattore determinante nell&#x27;accordo. I querelanti sostengono che gli azionisti WWE abbiano subito una perdita poiché McMahon si era concentrato sull&#x27;assicurarsi un ruolo per se stesso invece di massimizzare i profitti della vendita.</p>\n<p>Tra gli imputati nel caso figurano Vince McMahon, il presidente della WWE Nick Khan, il Chief Content Officer Paul “Triple H” Levesque e gli ex co-presidenti della WWE George Barrios e Michelle Wilson.</p>\n<p>Gli imputati hanno negato ogni illecito. La difesa sostiene che gli azionisti WWE non abbiano subito danni e che il processo di fusione sia stato equo. Sostengono inoltre che l&#x27;operazione abbia beneficiato gli investitori dopo che WWE e UFC sono state unite sotto il marchio TKO.</p>\n<p>Le tempistiche rendono la vicenda ancora più rilevante. Il processo è attualmente fissato per lunedì 8 giugno: una delle battaglie legali più significative nella storia aziendale della WWE è ormai alle porte.</p>",
+      "body_html": "<p>Il futuro di Bayley in WWE torna a sollevare interrogativi man mano che il suo attuale contratto si avvicina alla scadenza.</p>\n<p>L&#x27;attuale accordo con la WWE dovrebbe terminare alla fine di quest&#x27;anno. Si dice che la WWE e TKO vogliano trattenere Bayley, in particolare perché è considerata una leader all&#x27;interno dello spogliatoio. Tuttavia, al momento non ci sono notizie riguardanti il raggiungimento di un nuovo accordo.</p>\n<p>La situazione si sviluppa dopo che Bayley ha parlato apertamente del suo futuro durante un&#x27;intervista con Chris Van Vliet nell&#x27;aprile 2025. All&#x27;epoca, ha rivelato che le rimaneva circa un anno e mezzo di contratto e ha ammesso di non essere sicura di cosa sarebbe successo una volta terminato l&#x27;accordo.</p>\n<p>Dopo aver discusso del tempo rimanente sul suo contratto, Bayley ha riconosciuto di avere interessi al di fuori del wrestling.</p>\n<blockquote>“Ci sono così tante altre cose che vorrei realizzare. Mi resta un anno e mezzo in questo contratto, quindi vedremo cosa succederà. E poi? Amico, non lo so.”</blockquote>\n<p>Bayley ha anche riflettuto su tutto ciò che ha ottenuto durante la sua carriera in WWE, pur ammettendo che ci sono ancora molti obiettivi che desidera raggiungere.</p>\n<blockquote>“Penso di aver fatto tutto quello che volevo davvero, non tutto. C&#x27;è ancora molto che voglio realizzare, ma ho fatto così tanto con la WWE e sono qui già da 12 anni; c&#x27;è un&#x27;enorme ondata di atlete in arrivo che penso siano pronte a prendere il comando, pronte a occupare quei posti.”</blockquote>\n<p>Una delle parti più rilevanti dell&#x27;intervista è arrivata quando Bayley ha discusso la possibilità che la sua carriera sul ring non duri per sempre. Allo stesso tempo, ha chiarito di sentirsi fiduciosa riguardo al futuro della divisione femminile della WWE.</p>\n<blockquote>“Quindi, quando penso: okay, potrei aver finito tra un paio d&#x27;anni, chi lo sa? So che sarà in buone mani. E questo mi rende davvero felice.”</blockquote>\n<p>Bayley è in WWE dalla fine del 2012 e ha costruito uno dei palmarès più prestigiosi nella storia della divisione femminile. Dopo aver firmato il suo attuale contratto nel dicembre 2023, rimane una delle stelle più affermate della compagnia, sia in televisione che dietro le quinte.</p>\n<p>Con l&#x27;attuale accordo che entra nella fase finale, il futuro di Bayley torna a essere una situazione da monitorare. La WWE sembra interessata a trattenerla, ma Bayley ha già chiarito di avere ambizioni oltre il wrestling mentre valuta cosa farà nel prossimo capitolo della sua carriera.</p>",
       "category_hint": "Business",
-      "clean_element_count": 9,
-      "created_at": "2026-06-03T07:21:45.673705+00:00",
+      "clean_element_count": 11,
+      "created_at": "2026-06-03T10:01:48.032135+00:00",
       "diagnostic_stage": "ready_for_alfred",
       "element_counts": {
         "embed": 0,
         "heading": 0,
         "image": 0,
-        "quote": 1,
+        "quote": 3,
         "table": 0,
         "text": 8
       },
       "elements": [
         {
           "block_id": "b1",
-          "text": "WWE’s merger with UFC may have created TKO Group Holdings, but the legal fallout from that deal is now carrying a massive potential price tag.",
+          "text": "Bayley’s future with WWE is facing new questions as her current contract continues moving toward its expiration date.",
           "type": "text"
         },
         {
           "block_id": "b2",
-          "text": "A shareholder lawsuit tied to the merger is heading toward trial, and the damages being sought could come close to $1 billion if the plaintiffs win in court. The case centers on claims that Vince McMahon pushed the Endeavor deal while protecting his own power instead of securing the best possible outcome for WWE shareholders.",
+          "text": "Her current WWE deal is set to expire at the end of this year. WWE and TKO are said to want to keep Bayley around, particularly because she is viewed as a locker room leader. However, there is currently no word on whether a new agreement has been reached.",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "text": "According to Brandon Thurston of POST Wrestling , attorneys representing a class of WWE shareholders are seeking damages in a massive range tied to the merger.",
+          "text": "The situation comes after Bayley spoke openly about her future during an interview with Chris Van Vliet in April 2025. At the time, she revealed she had about a year and a half left on her contract and admitted she wasn’t sure what would happen once that deal came to an end.",
           "type": "text"
         },
         {
           "block_id": "b4",
-          "source_tag": "blockquote",
-          "text": "“The monetary damages the plaintiffs are seeking range between $466 million and $957 million, plus interest accrued since the merger closed nearly three years ago. The range comes from an analysis written earlier this year by James L. Canessa, a financial economist retained by the plaintiffs.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b5",
-          "text": "The lawsuit stems from WWE’s merger with UFC under Endeavor, which led to the formation of TKO Group Holdings. The plaintiffs claim McMahon had already steered the process toward Endeavor while he was under scrutiny connected to sexual misconduct allegations.",
+          "text": "After discussing the time remaining on her contract, Bayley acknowledged that she has interests outside of wrestling.",
           "type": "text"
         },
         {
+          "block_id": "b5",
+          "source_tag": "blockquote",
+          "text": "“I have so many other things I want to make it into. I have a year and a half left on this current contract, so we’ll see what happens then. And then what? Man, I don’t know.”",
+          "type": "quote"
+        },
+        {
           "block_id": "b6",
-          "text": "The core accusation is that McMahon’s personal future inside the company became a major factor in the deal. The plaintiffs argue that WWE shareholders may have lost out because McMahon was focused on securing a role for himself instead of maximizing the sale process.",
+          "text": "Bayley also reflected on everything she has accomplished during her WWE career while admitting there is still more she wants to achieve.",
           "type": "text"
         },
         {
           "block_id": "b7",
-          "text": "The defendants in the case include Vince McMahon, WWE President Nick Khan, WWE Chief Content Officer Paul “Triple H” Levesque, and former WWE co-presidents George Barrios and Michelle Wilson.",
-          "type": "text"
+          "source_tag": "blockquote",
+          "text": "“I think I’ve done everything I really want to do, not everything. There’s still a lot I want to get done, but done so much with WWE and I’ve been here for already 12 years and there’s a huge wave of women coming in that I think are ready to take over, ready to be in those spots.”",
+          "type": "quote"
         },
         {
           "block_id": "b8",
-          "text": "The defendants have denied wrongdoing. Their side maintains that WWE shareholders were not damaged and that the merger process was fair. They also argue that the deal ultimately benefited investors after WWE and UFC were combined under the TKO banner.",
+          "text": "One of the more notable parts of the interview came when Bayley discussed the possibility that her in-ring career may not last forever. At the same time, she made it clear that she feels confident about the future of WWE’s women’s division.",
           "type": "text"
         },
         {
           "block_id": "b9",
-          "text": "The timing makes this even bigger. The case is currently scheduled to go to trial on Monday, June 8, which means one of the most important legal battles tied to WWE’s corporate history is now right around the corner.",
+          "source_tag": "blockquote",
+          "text": "“So when I think about okay, I might be done in a couple of years, who knows? I know that it’s going to be in good hands. So that makes me really happy.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b10",
+          "text": "Bayley has been with WWE since late 2012 and has built one of the most decorated resumes in the history of the women’s division. After signing her current contract in December 2023, she remains one of the company’s most established stars both on television and behind the scenes.",
+          "type": "text"
+        },
+        {
+          "block_id": "b11",
+          "text": "With her current deal entering its final stretch, Bayley’s future is once again becoming a story to watch. WWE appears interested in keeping her, but Bayley has already made it clear that she has ambitions beyond wrestling as she considers what comes next in her career.",
           "type": "text"
         }
       ],
-      "excerpt_it": "La fusione tra WWE e UFC, che ha dato vita a TKO Group Holdings, è al centro di una pesantissima battaglia legale che potrebbe costare cifre astronomiche.",
+      "excerpt_it": "Il futuro di Bayley in WWE torna sotto i riflettori mentre si avvicina la scadenza del suo attuale contratto.",
       "extraction_diagnostics": {
-        "candidate_node_count": 96,
-        "clean_element_count": 9,
+        "candidate_node_count": 100,
+        "clean_element_count": 11,
         "dom_noise_reduction_enabled": false,
         "embed_count": 0,
         "global_embed_recovery_enabled": false,
-        "quote_count": 1,
-        "raw_element_count": 11,
+        "quote_count": 3,
+        "raw_element_count": 12,
         "removed_by_node_count": 13,
         "removed_by_sanitize_count": 1,
         "root_name": "article",
-        "root_text_chars": 3453,
+        "root_text_chars": 3355,
         "stage": "complete",
         "table_count": 0
       },
-      "fetched_html_chars": 483578,
-      "menzo_score": 96,
+      "fetched_html_chars": 506514,
+      "menzo_score": 80,
       "meta": {
-        "description": "WWE’s merger with UFC may have created TKO Group Holdings, but the legal fallout from that deal is now carrying a massive potential price tag. A",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/03/judge-orders-wwe-sale-bidding-details-to-be-unsealed-in-shareholder-lawsuit-15.jpg",
-        "source_title": "WWE Shareholder Lawsuit Could Put Nearly $1 Billion On The Line Before Trial"
+        "description": "Bayley’s future with WWE is facing new questions as her current contract continues moving toward its expiration date. Her current WWE deal is set to",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/bayleys-wwe-future-unclear-as-contract-expiration-date-draws-closer-55.jpg",
+        "source_title": "Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer"
       },
-      "raw_element_count": 11,
+      "raw_element_count": 12,
       "raw_elements_preview": [
         {
           "block_id": "b1",
-          "text": "WWE’s merger with UFC may have created TKO Group Holdings, but the legal fallout from that deal is now carrying a massive potential price tag.",
+          "text": "Bayley’s future with WWE is facing new questions as her current contract continues moving toward its expiration date.",
           "type": "text"
         },
         {
           "block_id": "b2",
-          "text": "A shareholder lawsuit tied to the merger is heading toward trial, and the damages being sought could come close to $1 billion if the plaintiffs win in court. The case centers on claims that Vince McMahon pushed the Endeavor deal while protecting his own power instead of securing the best possible outcome for WWE shareholders.",
+          "text": "Her current WWE deal is set to expire at the end of this year. WWE and TKO are said to want to keep Bayley around, particularly because she is viewed as a locker room leader. However, there is currently no word on whether a new agreement has been reached.",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "text": "According to Brandon Thurston of POST Wrestling , attorneys representing a class of WWE shareholders are seeking damages in a massive range tied to the merger.",
+          "text": "The situation comes after Bayley spoke openly about her future during an interview with Chris Van Vliet in April 2025. At the time, she revealed she had about a year and a half left on her contract and admitted she wasn’t sure what would happen once that deal came to an end.",
           "type": "text"
         },
         {
           "block_id": "b4",
-          "source_tag": "blockquote",
-          "text": "“The monetary damages the plaintiffs are seeking range between $466 million and $957 million, plus interest accrued since the merger closed nearly three years ago. The range comes from an analysis written earlier this year by James L. Canessa, a financial economist retained by the plaintiffs.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b5",
-          "text": "The lawsuit stems from WWE’s merger with UFC under Endeavor, which led to the formation of TKO Group Holdings. The plaintiffs claim McMahon had already steered the process toward Endeavor while he was under scrutiny connected to sexual misconduct allegations.",
+          "text": "After discussing the time remaining on her contract, Bayley acknowledged that she has interests outside of wrestling.",
           "type": "text"
         },
         {
+          "block_id": "b5",
+          "source_tag": "blockquote",
+          "text": "“I have so many other things I want to make it into. I have a year and a half left on this current contract, so we’ll see what happens then. And then what? Man, I don’t know.”",
+          "type": "quote"
+        },
+        {
           "block_id": "b6",
-          "text": "The core accusation is that McMahon’s personal future inside the company became a major factor in the deal. The plaintiffs argue that WWE shareholders may have lost out because McMahon was focused on securing a role for himself instead of maximizing the sale process.",
+          "text": "Bayley also reflected on everything she has accomplished during her WWE career while admitting there is still more she wants to achieve.",
           "type": "text"
         },
         {
           "block_id": "b7",
-          "text": "The defendants in the case include Vince McMahon, WWE President Nick Khan, WWE Chief Content Officer Paul “Triple H” Levesque, and former WWE co-presidents George Barrios and Michelle Wilson.",
-          "type": "text"
+          "source_tag": "blockquote",
+          "text": "“I think I’ve done everything I really want to do, not everything. There’s still a lot I want to get done, but done so much with WWE and I’ve been here for already 12 years and there’s a huge wave of women coming in that I think are ready to take over, ready to be in those spots.”",
+          "type": "quote"
         },
         {
           "block_id": "b8",
-          "text": "The defendants have denied wrongdoing. Their side maintains that WWE shareholders were not damaged and that the merger process was fair. They also argue that the deal ultimately benefited investors after WWE and UFC were combined under the TKO banner.",
+          "text": "One of the more notable parts of the interview came when Bayley discussed the possibility that her in-ring career may not last forever. At the same time, she made it clear that she feels confident about the future of WWE’s women’s division.",
           "type": "text"
         },
         {
           "block_id": "b9",
-          "text": "The timing makes this even bigger. The case is currently scheduled to go to trial on Monday, June 8, which means one of the most important legal battles tied to WWE’s corporate history is now right around the corner.",
+          "source_tag": "blockquote",
+          "text": "“So when I think about okay, I might be done in a couple of years, who knows? I know that it’s going to be in good hands. So that makes me really happy.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b10",
+          "text": "Bayley has been with WWE since late 2012 and has built one of the most decorated resumes in the history of the women’s division. After signing her current contract in December 2023, she remains one of the company’s most established stars both on television and behind the scenes.",
           "type": "text"
         },
         {
-          "text": "WWE’s merger with UFC changed the entire wrestling business, but this lawsuit could put a very expensive spotlight back on how that deal came together. If the plaintiffs win, the financial hit could be massive. If the defendants win, it would shut down one of the biggest shareholder challenges tied to the TKO era.",
+          "block_id": "b11",
+          "text": "With her current deal entering its final stretch, Bayley’s future is once again becoming a story to watch. WWE appears interested in keeping her, but Bayley has already made it clear that she has ambitions beyond wrestling as she considers what comes next in her career.",
           "type": "text"
         },
         {
-          "text": "Spotlight WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case WWE NXT Results WWE NXT Results, Highlights and Key Moments for June 2, 2026 WWE News Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW WWE News Bronson Reed Involved in a Car Accident",
+          "text": "Spotlight WWE News Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer WWE News Real Reason WWE Moved Money in the Bank 2026 Date WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case WWE NXT Results WWE NXT Results, Highlights and Key Moments for June 2, 2026",
           "type": "text"
         }
       ],
@@ -397,338 +168,45 @@
       "removed_elements_debug": [
         {
           "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 73,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Spotlight"
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2197072 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-ludwig-kaiser tag-wwe-featured   ",
           "node_index": 77,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 80,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Digital Evidence Turned Over In Ludwig Kaiser Battery Case"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 81,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196652 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-nxt-results category-wwe-results tag-wwe-featured   ",
-          "node_index": 82,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE NXT Results WWE NXT Results, Highlights and Key Moments for June 2, 2026"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 85,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "WWE NXT Results, Highlights and Key Moments for June 2, 2026"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 86,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196783 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-bron-breakker tag-wwe-featured   ",
-          "node_index": 87,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 90,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 91,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196772 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-bronson-reed tag-wwe-featured   ",
-          "node_index": 92,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Bronson Reed Involved in a Car Accident"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 95,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Bronson Reed Involved in a Car Accident"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 96,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "index": 10,
-          "item": {
-            "text": "WWE’s merger with UFC changed the entire wrestling business, but this lawsuit could put a very expensive spotlight back on how that deal came together. If the plaintiffs win, the financial hit could be massive. If the defendants win, it would shut down one of the biggest shareholder challenges tied to the TKO era.",
-            "type": "text"
-          },
-          "reason": "footer_start"
-        }
-      ],
-      "source": "ringsidenews",
-      "source_html_contains_embed_hint": true,
-      "source_title": "WWE Shareholder Lawsuit Could Put Nearly $1 Billion On The Line Before Trial",
-      "source_url": "https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/",
-      "status": "ready_for_alfred",
-      "title_it": "Cause legali contro WWE: in gioco quasi un miliardo di dollari",
-      "translation_chain_attempted": [
-        "gemini-3.1-flash-lite"
-      ],
-      "translation_missing_units": [],
-      "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/\nTitolo feed: WWE Shareholder Lawsuit Could Put Nearly $1 Billion On The Line Before Trial\nTitolo pagina: WWE Shareholder Lawsuit Could Put Nearly $1 Billion On The Line Before Trial\nDescrizione: WWE’s merger with UFC may have created TKO Group Holdings, but the legal fallout from that deal is now carrying a massive potential price tag. A\nCategoria suggerita: Business\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"WWE’s merger with UFC may have created TKO Group Holdings, but the legal fallout from that deal is now carrying a massive potential price tag.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"A shareholder lawsuit tied to the merger is heading toward trial, and the damages being sought could come close to $1 billion if the plaintiffs win in court. The case centers on claims that Vince McMahon pushed the Endeavor deal while protecting his own power instead of securing the best possible outcome for WWE shareholders.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"According to Brandon Thurston of POST Wrestling , attorneys representing a class of WWE shareholders are seeking damages in a massive range tied to the merger.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“The monetary damages the plaintiffs are seeking range between $466 million and $957 million, plus interest accrued since the merger closed nearly three years ago. The range comes from an analysis written earlier this year by James L. Canessa, a financial economist retained by the plaintiffs.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"The lawsuit stems from WWE’s merger with UFC under Endeavor, which led to the formation of TKO Group Holdings. The plaintiffs claim McMahon had already steered the process toward Endeavor while he was under scrutiny connected to sexual misconduct allegations.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"The core accusation is that McMahon’s personal future inside the company became a major factor in the deal. The plaintiffs argue that WWE shareholders may have lost out because McMahon was focused on securing a role for himself instead of maximizing the sale process.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"The defendants in the case include Vince McMahon, WWE President Nick Khan, WWE Chief Content Officer Paul “Triple H” Levesque, and former WWE co-presidents George Barrios and Michelle Wilson.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"The defendants have denied wrongdoing. Their side maintains that WWE shareholders were not damaged and that the merger process was fair. They also argue that the deal ultimately benefited investors after WWE and UFC were combined under the TKO banner.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"The timing makes this even bigger. The case is currently scheduled to go to trial on Monday, June 8, which means one of the most important legal battles tied to WWE’s corporate history is now right around the corner.\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"Cause legali contro WWE: in gioco quasi un miliardo di dollari\",\n  \"excerpt_it\": \"La fusione tra WWE e UFC, che ha dato vita a TKO Group Holdings, è al centro di una pesantissima battaglia legale che potrebbe costare cifre astronomiche.\",\n  \"translations\": {\n    \"b1\": \"La fusione tra WWE e UFC ha dato vita a TKO Group Holdings, ma le ripercussioni legali dell'operazione potrebbero ora comportare un prezzo potenzialmente altissimo.\",\n    \"b2\": \"Una causa collettiva promossa dagli azionisti in merito alla fusione si sta avviando verso il processo: se i querelanti dovessero avere la meglio in tribunale, i danni richiesti potrebbero sfiorare il miliardo di dollari. Il caso si concentra sulle accuse secondo cui Vince McMahon avrebbe spinto per l'accordo con Endeavor per tutelare il proprio potere, anziché garantire il miglior risultato possibile per gli azionisti WWE.\",\n    \"b3\": \"Secondo Brandon Thurston di POST Wrestling, i legali che rappresentano un gruppo di azionisti WWE stanno richiedendo un risarcimento danni ingente legato alla fusione.\",\n    \"b4\": \"“I danni monetari richiesti dai querelanti oscillano tra i 466 e i 957 milioni di dollari, più gli interessi maturati dalla chiusura della fusione, avvenuta quasi tre anni fa. La forchetta deriva da un'analisi redatta all'inizio di quest'anno da James L. Canessa, un economista finanziario incaricato dai querelanti.”\",\n    \"b5\": \"La causa nasce dalla fusione tra WWE e UFC sotto l'egida di Endeavor, che ha portato alla creazione di TKO Group Holdings. I querelanti sostengono che McMahon avesse già indirizzato il processo verso Endeavor mentre si trovava sotto esame per le accuse di cattiva condotta sessuale.\",\n    \"b6\": \"L'accusa principale è che il futuro personale di McMahon all'interno dell'azienda sia stato un fattore determinante nell'accordo. I querelanti sostengono che gli azionisti WWE abbiano subito una perdita poiché McMahon si era concentrato sull'assicurarsi un ruolo per se stesso invece di massimizzare i profitti della vendita.\",\n    \"b7\": \"Tra gli imputati nel caso figurano Vince McMahon, il presidente della WWE Nick Khan, il Chief Content Officer Paul “Triple H” Levesque e gli ex co-presidenti della WWE George Barrios e Michelle Wilson.\",\n    \"b8\": \"Gli imputati hanno negato ogni illecito. La difesa sostiene che gli azionisti WWE non abbiano subito danni e che il processo di fusione sia stato equo. Sostengono inoltre che l'operazione abbia beneficiato gli investitori dopo che WWE e UFC sono state unite sotto il marchio TKO.\",\n    \"b9\": \"Le tempistiche rendono la vicenda ancora più rilevante. Il processo è attualmente fissato per lunedì 8 giugno: una delle battaglie legali più significative nella storia aziendale della WWE è ormai alle porte.\"\n  },\n  \"notes\": []\n}",
-      "translation_unit_count": 9,
-      "translation_used": true
-    },
-    {
-      "bob_notes": [],
-      "body_html": "<p>La WWE sa che all&#x27;orizzonte c&#x27;è un problema e Nick Khan non si nasconde.</p>\nhttps://www.youtube.com/watch?v=aQR4eTEUtB8\n\n<p>Intervenendo al Sports Business Journal World Congress of Sports, il Presidente della WWE ha rivelato che la dirigenza ha trascorso l&#x27;ultimo anno a discutere su come accelerare lo sviluppo di nuove stelle, man mano che alcuni dei nomi di punta della compagnia avanzano con la carriera.</p>\n<p>Khan ha spiegato che lui, Triple H, Shawn Michaels e altri alti dirigenti hanno riconosciuto che molti dei nomi più affermati della federazione non saranno in attività per sempre. Discutendo di questi confronti, Khan ha indicato direttamente diverse delle più grandi star della WWE.</p>\n<blockquote>“Un anno fa ci siamo riuniti. Triple H, LeGentil, io stesso e un tizio di nome Shawn Michaels, che gestisce il nostro sistema di sviluppo ed è un wrestler della Hall of Fame, ci siamo detti: &#x27;Ehi, guardate, John Cena è nel suo tour di ritiro. The Rock è tornato, ma ora sarà impegnato a girare Jumanji e The Smashing Machine. Le nostre altre grandi star, CM Punk, ha 46 anni. Abbiamo diversi uomini che hanno 40 anni o più e che si stanno esibendo ad alti livelli. Dobbiamo accelerare la prossima generazione di talenti&#x27;.&quot;</blockquote>\n<p>Invece di attendere che il ricambio avvenga in modo naturale, Khan ha affermato che la WWE ha iniziato immediatamente a cercare modi per velocizzare l&#x27;ascesa dei giovani. Secondo Khan, Shawn Michaels riteneva che una delle chiavi fondamentali fosse esporre i talenti in via di sviluppo al pubblico dal vivo più spesso, in modo che la WWE potesse misurare le reazioni autentiche dei fan.</p>\n<blockquote>“Quindi, cosa dobbiamo fare per accelerare? Shawn Michaels ha detto che dobbiamo portarli in tour affinché ottengano la risposta di un pubblico dal vivo. Giusto? È parte di ciò che rende unico il wrestling. Se vieni acclamato, ottimo. Se vieni fischiato, ottimo. Se non c&#x27;è risposta, terribile.”</blockquote>\n<p>Khan ha aggiunto che la WWE ha dato seguito a quel piano e ha già visto i risultati dell&#x27;investimento. Uno dei nomi che ha citato è stato Oba Femi, che è diventato rapidamente una delle stelle nascenti più discusse della compagnia.</p>\n<blockquote>“Quindi, abbiamo fatto questo investimento. E se guardate all&#x27;accelerazione delle stelle, persino il match d&#x27;apertura di domenica sera, un tizio di nome Oba Femi, ex lanciatore del peso all&#x27;Università dell&#x27;Alabama contro Brock Lesnar, è probabilmente il match di cui si è parlato di più su ESPN 1 ed ESPN Unlimited domenica.”</blockquote>\n<p>Khan ha poi sottolineato con quanta rapidità Oba Femi abbia scalato le gerarchie.</p>\n<blockquote>“Quel ragazzo è apparso come Oba nel nostro main roster solo da 6 mesi.”</blockquote>\n<p>Con nomi come Oba Femi che ricevono sempre più attenzione e opportunità, la WWE sembra determinata a evitare di trovarsi senza una nuova generazione di main eventer quando le star di oggi decideranno di farsi da parte.</p>",
-      "category_hint": "WWE",
-      "clean_element_count": 12,
-      "created_at": "2026-06-03T07:21:48.638667+00:00",
-      "diagnostic_stage": "ready_for_alfred",
-      "diagnostic_warnings": [],
-      "editorial_changes": [
-        {
-          "code": "leading_embed_moved_after_first_paragraph",
-          "evidence": "https://www.youtube.com/watch?v=aQR4eTEUtB8",
-          "message": "Embed iniziale spostato dopo il primo paragrafo.",
-          "severity": "info"
-        }
-      ],
-      "element_counts": {
-        "embed": 1,
-        "heading": 0,
-        "image": 0,
-        "quote": 4,
-        "table": 0,
-        "text": 7
-      },
-      "elements": [
-        {
-          "block_id": "b1",
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=aQR4eTEUtB8"
-        },
-        {
-          "block_id": "b2",
-          "text": "WWE knows it has a problem coming, and Nick Khan isn’t hiding from it.",
-          "type": "text"
-        },
-        {
-          "block_id": "b3",
-          "text": "While speaking at the Sports Business Journal World Congress of Sports , the WWE President revealed that company leadership has spent the last year discussing how to speed up the development of new stars as some of WWE’s biggest attractions move deeper into their careers.",
-          "type": "text"
-        },
-        {
-          "block_id": "b4",
-          "text": "Khan explained that he, Triple H, Shawn Michaels and other top executives recognized that many of the company’s most established names won’t be around forever. While discussing those conversations, Khan pointed directly to several of WWE’s biggest stars.",
-          "type": "text"
-        },
-        {
-          "block_id": "b5",
-          "source_tag": "blockquote",
-          "text": "“A year ago, we got together. Triple H, LeGentil, myself, a guy named Shawn Michaels who runs our developmental system, Hall of Fame wrestler, and we said, ‘Hey, look, we have John Cena on his retirement tour. Rock came back and now he’s going to be filming Jumanji and Smashing Machine at the time. Our other big stars, CM Punk’s 46. We got a number of men who are 40 years or older and they’re performing at a high level. We got to accelerate the next generation of talent.'”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b6",
-          "text": "Rather than waiting for the transition to happen naturally, Khan said WWE immediately began looking for ways to fast-track younger performers. According to Khan, Shawn Michaels believed one of the biggest keys was getting developing talent in front of live crowds more often so WWE could measure genuine fan reactions.",
-          "type": "text"
-        },
-        {
-          "block_id": "b7",
-          "source_tag": "blockquote",
-          "text": "“So, what do we need to do to accelerate it? Shawn Michaels said we need to take them on the road so they get the crowd response of a live crowd. Right? That’s part of what makes wrestling unique. If you’re getting cheered, great. If you’re getting booed, great. If there’s no response, terrible.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b8",
-          "text": "Khan said WWE followed through on that plan and has already seen results from the investment. One of the names he singled out was Oba Femi, who has quickly become one of the company’s most talked-about rising stars.",
-          "type": "text"
-        },
-        {
-          "block_id": "b9",
-          "source_tag": "blockquote",
-          "text": "“So, we made the investment in that. And if you look at the acceleration of stars, even the opening match on Sunday night, a guy named Oba Femi, former shot putter at the University of Alabama against Brock Lesnar, it’s probably the most talked-about match on ESPN 1 and ESPN Unlimited Sunday.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b10",
-          "text": "Khan then pointed out just how quickly Oba Femi has climbed the ladder.",
-          "type": "text"
-        },
-        {
-          "block_id": "b11",
-          "source_tag": "blockquote",
-          "text": "“That guy’s only been Oba on our main roster for 6 months.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b12",
-          "text": "With names like Oba Femi receiving increased attention and opportunities, WWE appears determined to avoid finding itself without a new generation of headliners when today’s top stars eventually step away.",
-          "type": "text"
-        }
-      ],
-      "excerpt_it": "Nick Khan ha spiegato la strategia della WWE per preparare il ricambio generazionale dei suoi top star.",
-      "extraction_diagnostics": {
-        "candidate_node_count": 105,
-        "clean_element_count": 12,
-        "dom_noise_reduction_enabled": false,
-        "embed_count": 1,
-        "global_embed_recovery_enabled": false,
-        "quote_count": 4,
-        "raw_element_count": 15,
-        "removed_by_node_count": 13,
-        "removed_by_sanitize_count": 3,
-        "root_name": "article",
-        "root_text_chars": 3712,
-        "stage": "complete",
-        "table_count": 0
-      },
-      "fetched_html_chars": 488142,
-      "menzo_score": 62,
-      "meta": {
-        "description": "WWE knows it has a problem coming, and Nick Khan isn't hiding from it. While speaking at the Sports Business Journal World Congress of Sports, the WWE",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/why-wwe-is-rushing-to-create-its-next-generation-of-main-event-stars-45.jpg",
-        "source_title": "Why WWE Is Rushing To Create Its Next Generation Of Main Event Stars"
-      },
-      "raw_element_count": 15,
-      "raw_elements_preview": [
-        {
-          "block_id": "b1",
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=aQR4eTEUtB8"
-        },
-        {
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=aQR4eTEUtB8"
-        },
-        {
-          "source_tag": "div",
-          "type": "embed",
-          "url": "https://www.youtube.com/watch?v=aQR4eTEUtB8"
-        },
-        {
-          "block_id": "b2",
-          "text": "WWE knows it has a problem coming, and Nick Khan isn’t hiding from it.",
-          "type": "text"
-        },
-        {
-          "block_id": "b3",
-          "text": "While speaking at the Sports Business Journal World Congress of Sports , the WWE President revealed that company leadership has spent the last year discussing how to speed up the development of new stars as some of WWE’s biggest attractions move deeper into their careers.",
-          "type": "text"
-        },
-        {
-          "block_id": "b4",
-          "text": "Khan explained that he, Triple H, Shawn Michaels and other top executives recognized that many of the company’s most established names won’t be around forever. While discussing those conversations, Khan pointed directly to several of WWE’s biggest stars.",
-          "type": "text"
-        },
-        {
-          "block_id": "b5",
-          "source_tag": "blockquote",
-          "text": "“A year ago, we got together. Triple H, LeGentil, myself, a guy named Shawn Michaels who runs our developmental system, Hall of Fame wrestler, and we said, ‘Hey, look, we have John Cena on his retirement tour. Rock came back and now he’s going to be filming Jumanji and Smashing Machine at the time. Our other big stars, CM Punk’s 46. We got a number of men who are 40 years or older and they’re performing at a high level. We got to accelerate the next generation of talent.'”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b6",
-          "text": "Rather than waiting for the transition to happen naturally, Khan said WWE immediately began looking for ways to fast-track younger performers. According to Khan, Shawn Michaels believed one of the biggest keys was getting developing talent in front of live crowds more often so WWE could measure genuine fan reactions.",
-          "type": "text"
-        },
-        {
-          "block_id": "b7",
-          "source_tag": "blockquote",
-          "text": "“So, what do we need to do to accelerate it? Shawn Michaels said we need to take them on the road so they get the crowd response of a live crowd. Right? That’s part of what makes wrestling unique. If you’re getting cheered, great. If you’re getting booed, great. If there’s no response, terrible.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b8",
-          "text": "Khan said WWE followed through on that plan and has already seen results from the investment. One of the names he singled out was Oba Femi, who has quickly become one of the company’s most talked-about rising stars.",
-          "type": "text"
-        },
-        {
-          "block_id": "b9",
-          "source_tag": "blockquote",
-          "text": "“So, we made the investment in that. And if you look at the acceleration of stars, even the opening match on Sunday night, a guy named Oba Femi, former shot putter at the University of Alabama against Brock Lesnar, it’s probably the most talked-about match on ESPN 1 and ESPN Unlimited Sunday.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b10",
-          "text": "Khan then pointed out just how quickly Oba Femi has climbed the ladder.",
-          "type": "text"
-        },
-        {
-          "block_id": "b11",
-          "source_tag": "blockquote",
-          "text": "“That guy’s only been Oba on our main roster for 6 months.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b12",
-          "text": "With names like Oba Femi receiving increased attention and opportunities, WWE appears determined to avoid finding itself without a new generation of headliners when today’s top stars eventually step away.",
-          "type": "text"
-        },
-        {
-          "text": "Spotlight WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case WWE NXT Results WWE NXT Results, Highlights and Key Moments for June 2, 2026 WWE News Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW WWE News Bronson Reed Involved in a Car Accident",
-          "type": "text"
-        }
-      ],
-      "removed_before_gemini": 16,
-      "removed_elements_debug": [
-        {
-          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
-          "node_index": 82,
           "node_name": "h2",
           "reason": "node_class_noise",
           "text_preview": "Spotlight"
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2197072 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-ludwig-kaiser tag-wwe-featured   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2197085 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-bayley tag-wwe-featured   ",
+          "node_index": 81,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 84,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 85,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197076 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured tag-wwe-money-in-the-bank   ",
           "node_index": 86,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case"
+          "text_preview": "WWE News Real Reason WWE Moved Money in the Bank 2026 Date"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 89,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "Digital Evidence Turned Over In Ludwig Kaiser Battery Case"
+          "text_preview": "Real Reason WWE Moved Money in the Bank 2026 Date"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -738,18 +216,18 @@
           "text_preview": ""
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196652 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-nxt-results category-wwe-results tag-wwe-featured   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2197072 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-ludwig-kaiser tag-wwe-featured   ",
           "node_index": 91,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE NXT Results WWE NXT Results, Highlights and Key Moments for June 2, 2026"
+          "text_preview": "WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 94,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "WWE NXT Results, Highlights and Key Moments for June 2, 2026"
+          "text_preview": "Digital Evidence Turned Over In Ludwig Kaiser Battery Case"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -759,18 +237,18 @@
           "text_preview": ""
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196783 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-bron-breakker tag-wwe-featured   ",
+          "classes": "gb-loop-item rsn-spotlight-item post-2196652 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-nxt-results category-wwe-results tag-wwe-featured   ",
           "node_index": 96,
           "node_name": "li",
           "reason": "node_class_noise",
-          "text_preview": "WWE News Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW"
+          "text_preview": "WWE NXT Results WWE NXT Results, Highlights and Key Moments for June 2, 2026"
         },
         {
           "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
           "node_index": 99,
           "node_name": "h2",
           "reason": "node_class_noise",
-          "text_preview": "Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW"
+          "text_preview": "WWE NXT Results, Highlights and Key Moments for June 2, 2026"
         },
         {
           "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
@@ -780,48 +258,9 @@
           "text_preview": ""
         },
         {
-          "classes": "gb-loop-item rsn-spotlight-item post-2196772 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-bronson-reed tag-wwe-featured   ",
-          "node_index": 101,
-          "node_name": "li",
-          "reason": "node_class_noise",
-          "text_preview": "WWE News Bronson Reed Involved in a Car Accident"
-        },
-        {
-          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
-          "node_index": 104,
-          "node_name": "h2",
-          "reason": "node_class_noise",
-          "text_preview": "Bronson Reed Involved in a Car Accident"
-        },
-        {
-          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
-          "node_index": 105,
-          "node_name": "img",
-          "reason": "node_class_noise",
-          "text_preview": ""
-        },
-        {
-          "index": 2,
+          "index": 12,
           "item": {
-            "source_tag": "div",
-            "type": "embed",
-            "url": "https://www.youtube.com/watch?v=aQR4eTEUtB8"
-          },
-          "reason": "duplicate_or_empty_embed"
-        },
-        {
-          "index": 3,
-          "item": {
-            "source_tag": "div",
-            "type": "embed",
-            "url": "https://www.youtube.com/watch?v=aQR4eTEUtB8"
-          },
-          "reason": "duplicate_or_empty_embed"
-        },
-        {
-          "index": 15,
-          "item": {
-            "text": "Spotlight WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case WWE NXT Results WWE NXT Results, Highlights and Key Moments for June 2, 2026 WWE News Bron Breakker’s Injury Status After Limping in Hotel Lobby Following WWE RAW WWE News Bronson Reed Involved in a Car Accident",
+            "text": "Spotlight WWE News Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer WWE News Real Reason WWE Moved Money in the Bank 2026 Date WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case WWE NXT Results WWE NXT Results, Highlights and Key Moments for June 2, 2026",
             "type": "text"
           },
           "reason": "footer_start"
@@ -829,31 +268,292 @@
       ],
       "source": "ringsidenews",
       "source_html_contains_embed_hint": true,
-      "source_title": "Why WWE Is Rushing To Create Its Next Generation Of Main Event Stars",
-      "source_url": "https://www.ringsidenews.com/why-wwe-rushing-create-its-next-generation-main-event-stars/",
+      "source_title": "Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer",
+      "source_url": "https://www.ringsidenews.com/bayleys-wwe-future-unclear-contract-expiration-date-draws-closer/",
       "status": "ready_for_alfred",
-      "title_it": "Perché la WWE sta accelerando la creazione delle sue prossime stelle",
+      "title_it": "Incerto il futuro di Bayley in WWE con la scadenza del contratto",
       "translation_chain_attempted": [
         "gemini-3.1-flash-lite"
       ],
       "translation_missing_units": [],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/why-wwe-rushing-create-its-next-generation-main-event-stars/\nTitolo feed: Why WWE Is Rushing To Create Its Next Generation Of Main Event Stars\nTitolo pagina: Why WWE Is Rushing To Create Its Next Generation Of Main Event Stars\nDescrizione: WWE knows it has a problem coming, and Nick Khan isn't hiding from it. While speaking at the Sports Business Journal World Congress of Sports, the WWE\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"WWE knows it has a problem coming, and Nick Khan isn’t hiding from it.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"While speaking at the Sports Business Journal World Congress of Sports , the WWE President revealed that company leadership has spent the last year discussing how to speed up the development of new stars as some of WWE’s biggest attractions move deeper into their careers.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Khan explained that he, Triple H, Shawn Michaels and other top executives recognized that many of the company’s most established names won’t be around forever. While discussing those conversations, Khan pointed directly to several of WWE’s biggest stars.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“A year ago, we got together. Triple H, LeGentil, myself, a guy named Shawn Michaels who runs our developmental system, Hall of Fame wrestler, and we said, ‘Hey, look, we have John Cena on his retirement tour. Rock came back and now he’s going to be filming Jumanji and Smashing Machine at the time. Our other big stars, CM Punk’s 46. We got a number of men who are 40 years or older and they’re performing at a high level. We got to accelerate the next generation of talent.'”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Rather than waiting for the transition to happen naturally, Khan said WWE immediately began looking for ways to fast-track younger performers. According to Khan, Shawn Michaels believed one of the biggest keys was getting developing talent in front of live crowds more often so WWE could measure genuine fan reactions.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“So, what do we need to do to accelerate it? Shawn Michaels said we need to take them on the road so they get the crowd response of a live crowd. Right? That’s part of what makes wrestling unique. If you’re getting cheered, great. If you’re getting booed, great. If there’s no response, terrible.”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"Khan said WWE followed through on that plan and has already seen results from the investment. One of the names he singled out was Oba Femi, who has quickly become one of the company’s most talked-about rising stars.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"quote\",\n    \"text\": \"“So, we made the investment in that. And if you look at the acceleration of stars, even the opening match on Sunday night, a guy named Oba Femi, former shot putter at the University of Alabama against Brock Lesnar, it’s probably the most talked-about match on ESPN 1 and ESPN Unlimited Sunday.”\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"text\",\n    \"text\": \"Khan then pointed out just how quickly Oba Femi has climbed the ladder.\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"quote\",\n    \"text\": \"“That guy’s only been Oba on our main roster for 6 months.”\"\n  },\n  {\n    \"id\": \"b12\",\n    \"type\": \"text\",\n    \"text\": \"With names like Oba Femi receiving increased attention and opportunities, WWE appears determined to avoid finding itself without a new generation of headliners when today’s top stars eventually step away.\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"Perché la WWE sta accelerando la creazione delle sue prossime stelle\",\n  \"excerpt_it\": \"Nick Khan ha spiegato la strategia della WWE per preparare il ricambio generazionale dei suoi top star.\",\n  \"translations\": {\n    \"b2\": \"La WWE sa che all'orizzonte c'è un problema e Nick Khan non si nasconde.\",\n    \"b3\": \"Intervenendo al Sports Business Journal World Congress of Sports, il Presidente della WWE ha rivelato che la dirigenza ha trascorso l'ultimo anno a discutere su come accelerare lo sviluppo di nuove stelle, man mano che alcuni dei nomi di punta della compagnia avanzano con la carriera.\",\n    \"b4\": \"Khan ha spiegato che lui, Triple H, Shawn Michaels e altri alti dirigenti hanno riconosciuto che molti dei nomi più affermati della federazione non saranno in attività per sempre. Discutendo di questi confronti, Khan ha indicato direttamente diverse delle più grandi star della WWE.\",\n    \"b5\": \"“Un anno fa ci siamo riuniti. Triple H, LeGentil, io stesso e un tizio di nome Shawn Michaels, che gestisce il nostro sistema di sviluppo ed è un wrestler della Hall of Fame, ci siamo detti: 'Ehi, guardate, John Cena è nel suo tour di ritiro. The Rock è tornato, ma ora sarà impegnato a girare Jumanji e The Smashing Machine. Le nostre altre grandi star, CM Punk, ha 46 anni. Abbiamo diversi uomini che hanno 40 anni o più e che si stanno esibendo ad alti livelli. Dobbiamo accelerare la prossima generazione di talenti'.\\\"\",\n    \"b6\": \"Invece di attendere che il ricambio avvenga in modo naturale, Khan ha affermato che la WWE ha iniziato immediatamente a cercare modi per velocizzare l'ascesa dei giovani. Secondo Khan, Shawn Michaels riteneva che una delle chiavi fondamentali fosse esporre i talenti in via di sviluppo al pubblico dal vivo più spesso, in modo che la WWE potesse misurare le reazioni autentiche dei fan.\",\n    \"b7\": \"“Quindi, cosa dobbiamo fare per accelerare? Shawn Michaels ha detto che dobbiamo portarli in tour affinché ottengano la risposta di un pubblico dal vivo. Giusto? È parte di ciò che rende unico il wrestling. Se vieni acclamato, ottimo. Se vieni fischiato, ottimo. Se non c'è risposta, terribile.”\",\n    \"b8\": \"Khan ha aggiunto che la WWE ha dato seguito a quel piano e ha già visto i risultati dell'investimento. Uno dei nomi che ha citato è stato Oba Femi, che è diventato rapidamente una delle stelle nascenti più discusse della compagnia.\",\n    \"b9\": \"“Quindi, abbiamo fatto questo investimento. E se guardate all'accelerazione delle stelle, persino il match d'apertura di domenica sera, un tizio di nome Oba Femi, ex lanciatore del peso all'Università dell'Alabama contro Brock Lesnar, è probabilmente il match di cui si è parlato di più su ESPN 1 ed ESPN Unlimited domenica.”\",\n    \"b10\": \"Khan ha poi sottolineato con quanta rapidità Oba Femi abbia scalato le gerarchie.\",\n    \"b11\": \"“Quel ragazzo è apparso come Oba nel nostro main roster solo da 6 mesi.”\",\n    \"b12\": \"Con nomi come Oba Femi che ricevono sempre più attenzione e opportunità, la WWE sembra determinata a evitare di trovarsi senza una nuova generazione di main eventer quando le star di oggi decideranno di farsi da parte.\"\n  },\n  \"notes\": []\n}",
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/bayleys-wwe-future-unclear-contract-expiration-date-draws-closer/\nTitolo feed: Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer\nTitolo pagina: Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer\nDescrizione: Bayley’s future with WWE is facing new questions as her current contract continues moving toward its expiration date. Her current WWE deal is set to\nCategoria suggerita: Business\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Bayley’s future with WWE is facing new questions as her current contract continues moving toward its expiration date.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Her current WWE deal is set to expire at the end of this year. WWE and TKO are said to want to keep Bayley around, particularly because she is viewed as a locker room leader. However, there is currently no word on whether a new agreement has been reached.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"The situation comes after Bayley spoke openly about her future during an interview with Chris Van Vliet in April 2025. At the time, she revealed she had about a year and a half left on her contract and admitted she wasn’t sure what would happen once that deal came to an end.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"After discussing the time remaining on her contract, Bayley acknowledged that she has interests outside of wrestling.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“I have so many other things I want to make it into. I have a year and a half left on this current contract, so we’ll see what happens then. And then what? Man, I don’t know.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Bayley also reflected on everything she has accomplished during her WWE career while admitting there is still more she wants to achieve.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“I think I’ve done everything I really want to do, not everything. There’s still a lot I want to get done, but done so much with WWE and I’ve been here for already 12 years and there’s a huge wave of women coming in that I think are ready to take over, ready to be in those spots.”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"One of the more notable parts of the interview came when Bayley discussed the possibility that her in-ring career may not last forever. At the same time, she made it clear that she feels confident about the future of WWE’s women’s division.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"quote\",\n    \"text\": \"“So when I think about okay, I might be done in a couple of years, who knows? I know that it’s going to be in good hands. So that makes me really happy.”\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"text\",\n    \"text\": \"Bayley has been with WWE since late 2012 and has built one of the most decorated resumes in the history of the women’s division. After signing her current contract in December 2023, she remains one of the company’s most established stars both on television and behind the scenes.\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"With her current deal entering its final stretch, Bayley’s future is once again becoming a story to watch. WWE appears interested in keeping her, but Bayley has already made it clear that she has ambitions beyond wrestling as she considers what comes next in her career.\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Incerto il futuro di Bayley in WWE con la scadenza del contratto\",\n  \"excerpt_it\": \"Il futuro di Bayley in WWE torna sotto i riflettori mentre si avvicina la scadenza del suo attuale contratto.\",\n  \"translations\": {\n    \"b1\": \"Il futuro di Bayley in WWE torna a sollevare interrogativi man mano che il suo attuale contratto si avvicina alla scadenza.\",\n    \"b2\": \"L'attuale accordo con la WWE dovrebbe terminare alla fine di quest'anno. Si dice che la WWE e TKO vogliano trattenere Bayley, in particolare perché è considerata una leader all'interno dello spogliatoio. Tuttavia, al momento non ci sono notizie riguardanti il raggiungimento di un nuovo accordo.\",\n    \"b3\": \"La situazione si sviluppa dopo che Bayley ha parlato apertamente del suo futuro durante un'intervista con Chris Van Vliet nell'aprile 2025. All'epoca, ha rivelato che le rimaneva circa un anno e mezzo di contratto e ha ammesso di non essere sicura di cosa sarebbe successo una volta terminato l'accordo.\",\n    \"b4\": \"Dopo aver discusso del tempo rimanente sul suo contratto, Bayley ha riconosciuto di avere interessi al di fuori del wrestling.\",\n    \"b5\": \"“Ci sono così tante altre cose che vorrei realizzare. Mi resta un anno e mezzo in questo contratto, quindi vedremo cosa succederà. E poi? Amico, non lo so.”\",\n    \"b6\": \"Bayley ha anche riflettuto su tutto ciò che ha ottenuto durante la sua carriera in WWE, pur ammettendo che ci sono ancora molti obiettivi che desidera raggiungere.\",\n    \"b7\": \"“Penso di aver fatto tutto quello che volevo davvero, non tutto. C'è ancora molto che voglio realizzare, ma ho fatto così tanto con la WWE e sono qui già da 12 anni; c'è un'enorme ondata di atlete in arrivo che penso siano pronte a prendere il comando, pronte a occupare quei posti.”\",\n    \"b8\": \"Una delle parti più rilevanti dell'intervista è arrivata quando Bayley ha discusso la possibilità che la sua carriera sul ring non duri per sempre. Allo stesso tempo, ha chiarito di sentirsi fiduciosa riguardo al futuro della divisione femminile della WWE.\",\n    \"b9\": \"“Quindi, quando penso: okay, potrei aver finito tra un paio d'anni, chi lo sa? So che sarà in buone mani. E questo mi rende davvero felice.”\",\n    \"b10\": \"Bayley è in WWE dalla fine del 2012 e ha costruito uno dei palmarès più prestigiosi nella storia della divisione femminile. Dopo aver firmato il suo attuale contratto nel dicembre 2023, rimane una delle stelle più affermate della compagnia, sia in televisione che dietro le quinte.\",\n    \"b11\": \"Con l'attuale accordo che entra nella fase finale, il futuro di Bayley torna a essere una situazione da monitorare. La WWE sembra interessata a trattenerla, ma Bayley ha già chiarito di avere ambizioni oltre il wrestling mentre valuta cosa farà nel prossimo capitolo della sua carriera.\"\n  },\n  \"notes\": []\n}",
       "translation_unit_count": 11,
+      "translation_used": true
+    },
+    {
+      "bob_notes": [],
+      "body_html": "<p>Cody Rhodes ha messo in chiaro che il processo creativo di Triple H in WWE funziona per lui, anche se molti ritengono che il suo stile di booking non sia affatto valido.</p>\n<p>Durante il suo podcast What Do You Wanna Talk About?, Rhodes ha difeso l&#x27;approccio di Triple H, spiegando perché apprezza lavorare sotto il suo sistema creativo. Cody ha affermato che Triple H opera in modo diverso rispetto a Vince McMahon e ad altri booker, poiché lascia ai talenti lo spazio necessario per proporre idee e collaborare. Rhodes ha spiegato che, come performer, desidera avere il controllo sulla propria storia e sul proprio personaggio, pur continuando a fidarsi del sistema WWE per rifinire e produrre il materiale.</p>\n<blockquote>“Il più delle volte questa è la mia storia. È il mio personaggio. Voglio renderlo il migliore possibile e poi voi ragazzi lo sistemate, lo filtrate e lo producete per me. Una delle cose che amo della WWE è prendere persone di talento e valorizzarle attraverso la produzione. Le produci e le canalizzi; al momento Hunter — Triple H — ha uno stile di canalizzazione diverso rispetto a quello che aveva Vince, o qualsiasi altro booker.”</blockquote>\n<p>Rhodes ha aggiunto che lo stile di Triple H è particolarmente stimolante per i talenti, poiché permette ai performer di sperimentare idee all&#x27;interno della struttura fornita dalla WWE. Ha poi aggiunto che il processo diventa collaborativo, con i talenti che portano le proprie intuizioni e Triple H che le modella all&#x27;interno della sua &quot;sandbox&quot; creativa.</p>\n<blockquote>“Ha uno stile diverso che è davvero divertente se sei un atleta per lui, del tipo: &#x27;Ehi, voglio essere il tuo uomo di punta. Voglio essere... ma questa è la mia idea... che ne dici di questo? Proviamoci&#x27;. Ed è stimolante provare la sua sandbox, collaborare e vedere se l&#x27;idea può funzionare.”</blockquote>\n<p>I commenti di Cody arrivano dopo che Vince Russo ha duramente criticato le recenti dichiarazioni di Triple H sul settore creativo della WWE, accusandolo di non essere adatto al suo ruolo. Russo ha sostenuto che la spiegazione di Triple H su &quot;alti e bassi&quot; (ebb and flow) sembrasse solo una scusa, incolpandolo del fatto che non guarda più la WWE.</p>\n<blockquote>“Amico, lui... ha fatto questo. Questo tizio non sa cosa sta facendo. Non merita quel posto. Non dovresti mai avere la mentalità del tipo: &#x27;Oh, questo potrebbe essere uno show passabile. Sarà mediocre, non sarà un grande spettacolo&#x27;. Amico, questo tizio non dovrebbe essere in quel ruolo. L&#x27;unica... ragazzi, smettiamola. Smettiamola. È lì solo perché ha sposato Stephanie. Punto, fine della storia, amico. Non ha nulla a che fare con quel posto. Non ha avuto successo in quel ruolo. È stato un fallimento. Il prodotto fa schifo perché lui è in quella posizione, e questo è l&#x27;unico motivo per cui si trova lì.”</blockquote>\n<p>Rhodes vede chiaramente le cose in modo diverso. Mentre critici come Russo sostengono che la visione creativa di Triple H stia danneggiando la WWE, Cody l&#x27;ha descritta come un sistema che offre ai top performer lo spazio per contribuire, pur mantenendo una produzione adatta a un pubblico di massa.</p>\n<p>La difesa di Cody è ovviamente significativa, dato che è una delle stelle principali della compagnia e ha lavorato sia sotto l&#x27;attuale struttura creativa della WWE che in altri sistemi di wrestling. Per lui, la &quot;sandbox&quot; di Triple H offre ai talenti lo spazio per esprimersi, mantenendo al contempo il prodotto ben prodotto e rifinito.</p>",
+      "category_hint": "WWE",
+      "clean_element_count": 9,
+      "created_at": "2026-06-03T10:01:51.503185+00:00",
+      "diagnostic_stage": "ready_for_alfred",
+      "element_counts": {
+        "embed": 0,
+        "heading": 0,
+        "image": 0,
+        "quote": 3,
+        "table": 0,
+        "text": 6
+      },
+      "elements": [
+        {
+          "block_id": "b1",
+          "text": "Cody Rhodes is making it clear that Triple H’s WWE creative process works for him, even if many people don’t think his booking style is good at all.",
+          "type": "text"
+        },
+        {
+          "block_id": "b2",
+          "text": "While speaking on his What Do You Wanna Talk About? podcast, Rhodes defended Triple H’s booking approach and explained why he enjoys working under his creative system. Cody said Triple H operates differently from Vince McMahon and other bookers because he gives talent room to bring ideas forward and collaborate. Rhodes explained that, as a performer, he wants ownership over his story and character while still trusting WWE’s system to polish and produce it.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "source_tag": "blockquote",
+          "text": "“Most of the time this is my story. It’s my character. I want to get it as good as I can and then you guys fix it up, filter it, produce it for me. One of the things I love about WWE is taking talented people, but then producing them. You’re producing them and funneling and right now Hunter has a different style funnel — Triple H that being — than Vince had, than any other booker’s.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b4",
+          "text": "Rhodes said Triple H’s style is especially fun for talent because it allows performers to try ideas inside the structure WWE provides. He added that the process becomes collaborative, with talent bringing ideas and Triple H helping shape them inside his creative “sandbox.”",
+          "type": "text"
+        },
+        {
+          "block_id": "b5",
+          "source_tag": "blockquote",
+          "text": "“He has a different style that’s really fun if you’re a player for him to go, ‘Hey, I want to be your main guy. I want to be — but this is my — what about this? Try it.’ And to try his sandbox, to try and collab and match that idea.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b6",
+          "text": "Cody’s comments come after Vince Russo ripped Triple H’s comments about WWE creative and accused him of being unfit for his role. Russo claimed Triple H’s “ebb and flow” explanation sounded like an excuse and blamed him for why he no longer watches WWE .",
+          "type": "text"
+        },
+        {
+          "block_id": "b7",
+          "source_tag": "blockquote",
+          "text": "“Bro, he—he did this. This guy doesn’t know what he’s doing. He does not belong in that spot. You never have the mindset, ‘Oh, this could be an okay show. This is going to be mediocre—it’s not going to be a great show.’ Bro, this guy should not be in that spot. The only—guys, let’s stop. Let’s stop. The guy’s in this spot because he married Stephanie. Period, end of story, bro. He’s got no business in this spot. He hasn’t been successful in this spot. He’s been a failure in this spot. The product sucks because he’s in this spot, and that’s the only reason he’s in this spot.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b8",
+          "text": "Rhodes clearly sees things differently. While critics like Russo argue that Triple H’s creative vision is hurting WWE, Cody described it as a system that gives top performers room to contribute while still being produced for a larger audience.",
+          "type": "text"
+        },
+        {
+          "block_id": "b9",
+          "text": "Cody’s defense is obviously important because he is one of the company’s top stars and has worked under both WWE’s current creative setup and other wrestling systems. For him, Triple H’s “sandbox” gives talent room to play while still keeping the product produced and polished.",
+          "type": "text"
+        }
+      ],
+      "excerpt_it": "Cody Rhodes risponde alle costanti critiche verso la gestione creativa di Triple H, spiegando perché il suo metodo di lavoro sia vincente per gli atleti.",
+      "extraction_diagnostics": {
+        "candidate_node_count": 100,
+        "clean_element_count": 9,
+        "dom_noise_reduction_enabled": false,
+        "embed_count": 0,
+        "global_embed_recovery_enabled": false,
+        "quote_count": 3,
+        "raw_element_count": 10,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 1,
+        "root_name": "article",
+        "root_text_chars": 3929,
+        "stage": "complete",
+        "table_count": 0
+      },
+      "fetched_html_chars": 506830,
+      "menzo_score": 79,
+      "meta": {
+        "description": "Cody Rhodes is making it clear that Triple H’s WWE creative process works for him, even if many people don't think his booking style is good at all. While",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/cody-rhodes-defends-triple-hs-wwe-creative-style-after-constant-criticism-41.jpg",
+        "source_title": "Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism"
+      },
+      "raw_element_count": 10,
+      "raw_elements_preview": [
+        {
+          "block_id": "b1",
+          "text": "Cody Rhodes is making it clear that Triple H’s WWE creative process works for him, even if many people don’t think his booking style is good at all.",
+          "type": "text"
+        },
+        {
+          "block_id": "b2",
+          "text": "While speaking on his What Do You Wanna Talk About? podcast, Rhodes defended Triple H’s booking approach and explained why he enjoys working under his creative system. Cody said Triple H operates differently from Vince McMahon and other bookers because he gives talent room to bring ideas forward and collaborate. Rhodes explained that, as a performer, he wants ownership over his story and character while still trusting WWE’s system to polish and produce it.",
+          "type": "text"
+        },
+        {
+          "block_id": "b3",
+          "source_tag": "blockquote",
+          "text": "“Most of the time this is my story. It’s my character. I want to get it as good as I can and then you guys fix it up, filter it, produce it for me. One of the things I love about WWE is taking talented people, but then producing them. You’re producing them and funneling and right now Hunter has a different style funnel — Triple H that being — than Vince had, than any other booker’s.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b4",
+          "text": "Rhodes said Triple H’s style is especially fun for talent because it allows performers to try ideas inside the structure WWE provides. He added that the process becomes collaborative, with talent bringing ideas and Triple H helping shape them inside his creative “sandbox.”",
+          "type": "text"
+        },
+        {
+          "block_id": "b5",
+          "source_tag": "blockquote",
+          "text": "“He has a different style that’s really fun if you’re a player for him to go, ‘Hey, I want to be your main guy. I want to be — but this is my — what about this? Try it.’ And to try his sandbox, to try and collab and match that idea.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b6",
+          "text": "Cody’s comments come after Vince Russo ripped Triple H’s comments about WWE creative and accused him of being unfit for his role. Russo claimed Triple H’s “ebb and flow” explanation sounded like an excuse and blamed him for why he no longer watches WWE .",
+          "type": "text"
+        },
+        {
+          "block_id": "b7",
+          "source_tag": "blockquote",
+          "text": "“Bro, he—he did this. This guy doesn’t know what he’s doing. He does not belong in that spot. You never have the mindset, ‘Oh, this could be an okay show. This is going to be mediocre—it’s not going to be a great show.’ Bro, this guy should not be in that spot. The only—guys, let’s stop. Let’s stop. The guy’s in this spot because he married Stephanie. Period, end of story, bro. He’s got no business in this spot. He hasn’t been successful in this spot. He’s been a failure in this spot. The product sucks because he’s in this spot, and that’s the only reason he’s in this spot.”",
+          "type": "quote"
+        },
+        {
+          "block_id": "b8",
+          "text": "Rhodes clearly sees things differently. While critics like Russo argue that Triple H’s creative vision is hurting WWE, Cody described it as a system that gives top performers room to contribute while still being produced for a larger audience.",
+          "type": "text"
+        },
+        {
+          "block_id": "b9",
+          "text": "Cody’s defense is obviously important because he is one of the company’s top stars and has worked under both WWE’s current creative setup and other wrestling systems. For him, Triple H’s “sandbox” gives talent room to play while still keeping the product produced and polished.",
+          "type": "text"
+        },
+        {
+          "text": "Spotlight WWE News Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer WWE News Real Reason WWE Moved Money in the Bank 2026 Date WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case WWE NXT Results WWE NXT Results, Highlights and Key Moments for June 2, 2026",
+          "type": "text"
+        }
+      ],
+      "removed_before_gemini": 14,
+      "removed_elements_debug": [
+        {
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "node_index": 77,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Spotlight"
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197085 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-bayley tag-wwe-featured   ",
+          "node_index": 81,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 84,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 85,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197076 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured tag-wwe-money-in-the-bank   ",
+          "node_index": 86,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Real Reason WWE Moved Money in the Bank 2026 Date"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 89,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Real Reason WWE Moved Money in the Bank 2026 Date"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 90,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197072 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-ludwig-kaiser tag-wwe-featured   ",
+          "node_index": 91,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 94,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Digital Evidence Turned Over In Ludwig Kaiser Battery Case"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 95,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196652 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-nxt-results category-wwe-results tag-wwe-featured   ",
+          "node_index": 96,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE NXT Results WWE NXT Results, Highlights and Key Moments for June 2, 2026"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 99,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "WWE NXT Results, Highlights and Key Moments for June 2, 2026"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 100,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "index": 10,
+          "item": {
+            "text": "Spotlight WWE News Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer WWE News Real Reason WWE Moved Money in the Bank 2026 Date WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case WWE NXT Results WWE NXT Results, Highlights and Key Moments for June 2, 2026",
+            "type": "text"
+          },
+          "reason": "footer_start"
+        }
+      ],
+      "source": "ringsidenews",
+      "source_html_contains_embed_hint": true,
+      "source_title": "Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism",
+      "source_url": "https://www.ringsidenews.com/cody-rhodes-defends-triple-hs-wwe-creative-style-constant-criticism/",
+      "status": "ready_for_alfred",
+      "title_it": "Cody Rhodes difende lo stile creativo di Triple H in WWE",
+      "translation_chain_attempted": [
+        "gemini-3.1-flash-lite"
+      ],
+      "translation_missing_units": [],
+      "translation_model": "gemini-3.1-flash-lite",
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/cody-rhodes-defends-triple-hs-wwe-creative-style-constant-criticism/\nTitolo feed: Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism\nTitolo pagina: Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism\nDescrizione: Cody Rhodes is making it clear that Triple H’s WWE creative process works for him, even if many people don't think his booking style is good at all. While\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Cody Rhodes is making it clear that Triple H’s WWE creative process works for him, even if many people don’t think his booking style is good at all.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"While speaking on his What Do You Wanna Talk About? podcast, Rhodes defended Triple H’s booking approach and explained why he enjoys working under his creative system. Cody said Triple H operates differently from Vince McMahon and other bookers because he gives talent room to bring ideas forward and collaborate. Rhodes explained that, as a performer, he wants ownership over his story and character while still trusting WWE’s system to polish and produce it.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"“Most of the time this is my story. It’s my character. I want to get it as good as I can and then you guys fix it up, filter it, produce it for me. One of the things I love about WWE is taking talented people, but then producing them. You’re producing them and funneling and right now Hunter has a different style funnel — Triple H that being — than Vince had, than any other booker’s.”\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Rhodes said Triple H’s style is especially fun for talent because it allows performers to try ideas inside the structure WWE provides. He added that the process becomes collaborative, with talent bringing ideas and Triple H helping shape them inside his creative “sandbox.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“He has a different style that’s really fun if you’re a player for him to go, ‘Hey, I want to be your main guy. I want to be — but this is my — what about this? Try it.’ And to try his sandbox, to try and collab and match that idea.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Cody’s comments come after Vince Russo ripped Triple H’s comments about WWE creative and accused him of being unfit for his role. Russo claimed Triple H’s “ebb and flow” explanation sounded like an excuse and blamed him for why he no longer watches WWE .\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“Bro, he—he did this. This guy doesn’t know what he’s doing. He does not belong in that spot. You never have the mindset, ‘Oh, this could be an okay show. This is going to be mediocre—it’s not going to be a great show.’ Bro, this guy should not be in that spot. The only—guys, let’s stop. Let’s stop. The guy’s in this spot because he married Stephanie. Period, end of story, bro. He’s got no business in this spot. He hasn’t been successful in this spot. He’s been a failure in this spot. The product sucks because he’s in this spot, and that’s the only reason he’s in this spot.”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"Rhodes clearly sees things differently. While critics like Russo argue that Triple H’s creative vision is hurting WWE, Cody described it as a system that gives top performers room to contribute while still being produced for a larger audience.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"Cody’s defense is obviously important because he is one of the company’s top stars and has worked under both WWE’s current creative setup and other wrestling systems. For him, Triple H’s “sandbox” gives talent room to play while still keeping the product produced and polished.\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"Cody Rhodes difende lo stile creativo di Triple H in WWE\",\n  \"excerpt_it\": \"Cody Rhodes risponde alle costanti critiche verso la gestione creativa di Triple H, spiegando perché il suo metodo di lavoro sia vincente per gli atleti.\",\n  \"translations\": {\n    \"b1\": \"Cody Rhodes ha messo in chiaro che il processo creativo di Triple H in WWE funziona per lui, anche se molti ritengono che il suo stile di booking non sia affatto valido.\",\n    \"b2\": \"Durante il suo podcast What Do You Wanna Talk About?, Rhodes ha difeso l'approccio di Triple H, spiegando perché apprezza lavorare sotto il suo sistema creativo. Cody ha affermato che Triple H opera in modo diverso rispetto a Vince McMahon e ad altri booker, poiché lascia ai talenti lo spazio necessario per proporre idee e collaborare. Rhodes ha spiegato che, come performer, desidera avere il controllo sulla propria storia e sul proprio personaggio, pur continuando a fidarsi del sistema WWE per rifinire e produrre il materiale.\",\n    \"b3\": \"“Il più delle volte questa è la mia storia. È il mio personaggio. Voglio renderlo il migliore possibile e poi voi ragazzi lo sistemate, lo filtrate e lo producete per me. Una delle cose che amo della WWE è prendere persone di talento e valorizzarle attraverso la produzione. Le produci e le canalizzi; al momento Hunter — Triple H — ha uno stile di canalizzazione diverso rispetto a quello che aveva Vince, o qualsiasi altro booker.”\",\n    \"b4\": \"Rhodes ha aggiunto che lo stile di Triple H è particolarmente stimolante per i talenti, poiché permette ai performer di sperimentare idee all'interno della struttura fornita dalla WWE. Ha poi aggiunto che il processo diventa collaborativo, con i talenti che portano le proprie intuizioni e Triple H che le modella all'interno della sua \\\"sandbox\\\" creativa.\",\n    \"b5\": \"“Ha uno stile diverso che è davvero divertente se sei un atleta per lui, del tipo: 'Ehi, voglio essere il tuo uomo di punta. Voglio essere... ma questa è la mia idea... che ne dici di questo? Proviamoci'. Ed è stimolante provare la sua sandbox, collaborare e vedere se l'idea può funzionare.”\",\n    \"b6\": \"I commenti di Cody arrivano dopo che Vince Russo ha duramente criticato le recenti dichiarazioni di Triple H sul settore creativo della WWE, accusandolo di non essere adatto al suo ruolo. Russo ha sostenuto che la spiegazione di Triple H su \\\"alti e bassi\\\" (ebb and flow) sembrasse solo una scusa, incolpandolo del fatto che non guarda più la WWE.\",\n    \"b7\": \"“Amico, lui... ha fatto questo. Questo tizio non sa cosa sta facendo. Non merita quel posto. Non dovresti mai avere la mentalità del tipo: 'Oh, questo potrebbe essere uno show passabile. Sarà mediocre, non sarà un grande spettacolo'. Amico, questo tizio non dovrebbe essere in quel ruolo. L'unica... ragazzi, smettiamola. Smettiamola. È lì solo perché ha sposato Stephanie. Punto, fine della storia, amico. Non ha nulla a che fare con quel posto. Non ha avuto successo in quel ruolo. È stato un fallimento. Il prodotto fa schifo perché lui è in quella posizione, e questo è l'unico motivo per cui si trova lì.”\",\n    \"b8\": \"Rhodes vede chiaramente le cose in modo diverso. Mentre critici come Russo sostengono che la visione creativa di Triple H stia danneggiando la WWE, Cody l'ha descritta come un sistema che offre ai top performer lo spazio per contribuire, pur mantenendo una produzione adatta a un pubblico di massa.\",\n    \"b9\": \"La difesa di Cody è ovviamente significativa, dato che è una delle stelle principali della compagnia e ha lavorato sia sotto l'attuale struttura creativa della WWE che in altri sistemi di wrestling. Per lui, la \\\"sandbox\\\" di Triple H offre ai talenti lo spazio per esprimersi, mantenendo al contempo il prodotto ben prodotto e rifinito.\"\n  },\n  \"notes\": []\n}",
+      "translation_unit_count": 9,
       "translation_used": true
     }
   ],
-  "generated_at": "2026-06-03T07:21:52.365313+00:00",
+  "generated_at": "2026-06-03T10:01:55.656709+00:00",
   "handoff": {
     "errors": 0,
     "extraction_empty": 0,
-    "ready_for_alfred": 3,
+    "ready_for_alfred": 2,
     "translation_pending": 0
   },
   "input": {
-    "menzo_version": "v93_15_forced_priority_label_softpool",
-    "selected_count": 3
+    "menzo_version": "v93_20_selective_softpool",
+    "selected_count": 2
   },
   "mode": "block_translation_prudent_embed_cleanup",
   "policy": {
@@ -892,7 +592,7 @@
     "unwrap_fake_data_blockquotes": true
   },
   "postprocess": {
-    "bob_v93_16_changes": 1
+    "bob_v93_16_changes": 0
   },
   "version": "v93_16_bob_embed_position_quote_cleanup"
 }

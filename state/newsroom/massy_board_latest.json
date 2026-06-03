@@ -22,14 +22,14 @@
     }
   ],
   "found_urls": 35,
-  "generated_at": "2026-06-03T07:21:35.053981+00:00",
+  "generated_at": "2026-06-03T10:01:31.814200+00:00",
   "handoff": {
-    "already_published_hard_skipped": 5,
+    "already_published_hard_skipped": 6,
     "already_worked": 0,
-    "hard_skipped": 24,
-    "menzo_memory_hard_skipped": 14,
+    "hard_skipped": 25,
+    "menzo_memory_hard_skipped": 13,
     "old_news_hard_skipped": 4,
-    "to_menzo": 10,
+    "to_menzo": 9,
     "to_simone": 1
   },
   "hard_skipped": [
@@ -71,12 +71,47 @@
     {
       "decision": "hard_skip",
       "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/aew-dynamite-preview-june-3-2026-confirmed-matches-start-time-how-watch",
+      "published": "Wed, 03 Jun 2026 09:44:06 +0000",
+      "reason": "generic_show_preview",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"AEW Dynamite Preview for June 3, 2026: Confirmed Matches, Start Time and How to Watch\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/aew-dynamite-preview-for-june-3-2026-confirmed-matches-start-time-and-how-to-watch-11.jpg?x59068\" width=\"800\" /></p>AEW is going all out for the June 3 episode of Dynamite, as it will build towards the Forbidden Door pay-per-view. That’s why the company has booked a memorable lineup with big matches to keep fans engaged from start to finish. AEW World Championship: MJF (c) vs. RUSH AEW World Champion MJF faces one of ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aew-dynamite-preview-june-3-2026-confirmed-matches-start-time-how-watch/\" title=\"AEW Dynamite Preview for June 3, 2026: Confirmed Matches, Start Time and How to Watch\">Read more</a>",
+      "title": "AEW Dynamite Preview for June 3, 2026: Confirmed Matches, Start Time and How to Watch",
+      "url": "https://www.ringsidenews.com/aew-dynamite-preview-june-3-2026-confirmed-matches-start-time-how-watch/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/digital-evidence-turned-over-in-ludwig-kaiser-battery-case",
+      "published": "Wed, 03 Jun 2026 04:09:08 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Digital Evidence Turned Over In Ludwig Kaiser Battery Case\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/digital-evidence-turned-over-in-ludwig-kaiser-battery-case-02.jpg?x59068\" width=\"800\" /></p>Ludwig Kaiser’s legal situation has taken another step forward after prosecutors handed over digital evidence to his defense team as his misdemeanor battery case continues through the Florida court system. Ringside News obtained a new court filing dated June 1 that confirms the State of Florida provided Kaiser’s attorney with access to digital evidence connected ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/digital-evidence-turned-over-in-ludwig-kaiser-battery-case/\" title=\"Digital Evidence Turned Over In Ludwig Kaiser Battery Case\">Read more</a>",
+      "title": "Digital Evidence Turned Over In Ludwig Kaiser Battery Case",
+      "url": "https://www.ringsidenews.com/digital-evidence-turned-over-in-ludwig-kaiser-battery-case/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/why-wwe-rushing-create-its-next-generation-main-event-stars",
+      "published": "Wed, 03 Jun 2026 01:24:08 +0000",
+      "published_guard": "publisher_history",
+      "reason": "url_already_published",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Why WWE Is Rushing To Create Its Next Generation Of Main Event Stars\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/why-wwe-is-rushing-to-create-its-next-generation-of-main-event-stars-45.jpg?x59068\" width=\"800\" /></p>WWE knows it has a problem coming, and Nick Khan isn&#8217;t hiding from it. While speaking at the Sports Business Journal World Congress of Sports, the WWE President revealed that company leadership has spent the last year discussing how to speed up the development of new stars as some of WWE&#8217;s biggest attractions move deeper ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/why-wwe-rushing-create-its-next-generation-main-event-stars/\" title=\"Why WWE Is Rushing To Create Its Next Generation Of Main Event Stars\">Read more</a>",
+      "title": "Why WWE Is Rushing To Create Its Next Generation Of Main Event Stars",
+      "url": "https://www.ringsidenews.com/why-wwe-rushing-create-its-next-generation-main-event-stars/"
+    },
+    {
+      "decision": "hard_skip",
+      "feed_url": "https://www.ringsidenews.com/feed/",
       "normalized_url": "https://www.ringsidenews.com/nick-khan-shuts-down-talk-tko-buying-more-companies-anytime-soon",
       "published": "Wed, 03 Jun 2026 01:09:26 +0000",
       "published_guard": "publisher_history",
       "reason": "url_already_published",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Nick Khan Shuts Down Talk Of TKO Buying More Companies Anytime Soon\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/nick-khan-shuts-down-talk-of-tko-buying-more-companies-anytime-soon-00.jpg?x36463\" width=\"800\" /></p>Nick Khan has poured cold water on speculation that TKO Group is preparing to go on a buying spree. With WWE and UFC thriving under the TKO banner and Zuffa Boxing now getting off the ground, many have wondered whether the company could start adding more sports or entertainment properties to its growing portfolio. According ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/nick-khan-shuts-down-talk-tko-buying-more-companies-anytime-soon/\" title=\"Nick Khan Shuts Down Talk Of TKO Buying More Companies Anytime Soon\">Read more</a>",
+      "summary": "<p><img alt=\"Nick Khan Shuts Down Talk Of TKO Buying More Companies Anytime Soon\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/nick-khan-shuts-down-talk-of-tko-buying-more-companies-anytime-soon-00.jpg?x59068\" width=\"800\" /></p>Nick Khan has poured cold water on speculation that TKO Group is preparing to go on a buying spree. With WWE and UFC thriving under the TKO banner and Zuffa Boxing now getting off the ground, many have wondered whether the company could start adding more sports or entertainment properties to its growing portfolio. According ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/nick-khan-shuts-down-talk-tko-buying-more-companies-anytime-soon/\" title=\"Nick Khan Shuts Down Talk Of TKO Buying More Companies Anytime Soon\">Read more</a>",
       "title": "Nick Khan Shuts Down Talk Of TKO Buying More Companies Anytime Soon",
       "url": "https://www.ringsidenews.com/nick-khan-shuts-down-talk-tko-buying-more-companies-anytime-soon/"
     },
@@ -88,21 +123,9 @@
       "published_guard": "publisher_history",
       "reason": "url_already_published",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Nick Khan Says WWE Will Never Change Creative Plans Because Of Social Media Backlash\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/nick-khan-says-wwe-will-never-change-creative-plans-because-of-social-media-backlash-48.jpg?x36463\" width=\"800\" /></p>Nick Khan isn&#8217;t buying the idea that WWE changed its WrestleMania plans because fans got loud online. The WWE President addressed the long-running controversy surrounding Cody Rhodes, Roman Reigns, and The Rock during an appearance at the Sports Business Journal World Congress of Sports. For more than two years, many fans have believed WWE pivoted ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/nick-khan-says-wwe-will-never-change-creative-plans-because-social-media-backlash/\" title=\"Nick Khan Says WWE Will Never Change Creative Plans Because Of Social Media Backlash\">Read more</a>",
+      "summary": "<p><img alt=\"Nick Khan Says WWE Will Never Change Creative Plans Because Of Social Media Backlash\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/nick-khan-says-wwe-will-never-change-creative-plans-because-of-social-media-backlash-48.jpg?x59068\" width=\"800\" /></p>Nick Khan isn&#8217;t buying the idea that WWE changed its WrestleMania plans because fans got loud online. The WWE President addressed the long-running controversy surrounding Cody Rhodes, Roman Reigns, and The Rock during an appearance at the Sports Business Journal World Congress of Sports. For more than two years, many fans have believed WWE pivoted ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/nick-khan-says-wwe-will-never-change-creative-plans-because-social-media-backlash/\" title=\"Nick Khan Says WWE Will Never Change Creative Plans Because Of Social Media Backlash\">Read more</a>",
       "title": "Nick Khan Says WWE Will Never Change Creative Plans Because Of Social Media Backlash",
       "url": "https://www.ringsidenews.com/nick-khan-says-wwe-will-never-change-creative-plans-because-social-media-backlash/"
-    },
-    {
-      "decision": "hard_skip",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv",
-      "published": "Tue, 02 Jun 2026 20:40:58 +0000",
-      "published_guard": "publisher_history",
-      "reason": "url_already_published",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/kaitlyn-says-wwe-backstage-pressure-was-harder-than-wrestling-on-tv-46.jpg?x36463\" width=\"800\" /></p>Kaitlyn says the hardest part of her WWE run was not wrestling in front of thousands of fans. It was dealing with the pressure backstage. During her interview with TMZ’s Inside the Ring, the former WWE Divas Champion opened up about the mental toll of WWE locker room culture during her time with the company. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv/\" title=\"Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV\">Read more</a>",
-      "title": "Kaitlyn Says WWE Backstage Pressure Was Harder Than Wrestling On TV",
-      "url": "https://www.ringsidenews.com/kaitlyn-says-wwe-backstage-pressure-harder-than-wrestling-tv/"
     },
     {
       "decision": "hard_skip",
@@ -304,7 +327,7 @@
       "published": "Wed, 03 Jun 2026 00:25:07 +0000",
       "reason": "menzo_hard_skip_memory",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2018/03/Lucha-Underground-Logo.png?x36463\" width=\"800\" /></p>Lucha Underground got wrestling fans excited recently when the promotion&#8217;s social media account posted a teaser and its website hinted that live events could be on the horizon. That led many fans to wonder if Lucha Underground was finally making a comeback after years of silence. According to Fightful Select, the answer appears to be ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/truth-behind-lucha-underground-comeback-teasers-revealed/\" title=\"Truth Behind Lucha Underground Comeback Teasers Revealed\">Read more</a>",
+      "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2018/03/Lucha-Underground-Logo.png?x59068\" width=\"800\" /></p>Lucha Underground got wrestling fans excited recently when the promotion&#8217;s social media account posted a teaser and its website hinted that live events could be on the horizon. That led many fans to wonder if Lucha Underground was finally making a comeback after years of silence. According to Fightful Select, the answer appears to be ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/truth-behind-lucha-underground-comeback-teasers-revealed/\" title=\"Truth Behind Lucha Underground Comeback Teasers Revealed\">Read more</a>",
       "title": "Truth Behind Lucha Underground Comeback Teasers Revealed",
       "url": "https://www.ringsidenews.com/truth-behind-lucha-underground-comeback-teasers-revealed/"
     },
@@ -317,27 +340,14 @@
       "published": "Tue, 02 Jun 2026 23:31:34 +0000",
       "reason": "menzo_hard_skip_memory",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"WWE SmackDown logo 2024\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2024/09/WWE SmackDown logo 2024.jpg?x36463\" width=\"800\" /></p>WWE SmackDown viewership and key demo numbers are in for the May 29, 2026 episode of WWE SmackDown on USA Network, as the numbers held fairly steady week over week. According to Programming Insider, WWE SmackDown on May 29, 2026 drew 1,258,000 viewers on USA Network, with a 0.29 rating in the key P18–49 demographic. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-smackdown-viewership-sees-no-change-may-29-2026/\" title=\"WWE SmackDown Viewership Sees No Change on May 29, 2026\">Read more</a>",
+      "summary": "<p><img alt=\"WWE SmackDown logo 2024\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2024/09/WWE SmackDown logo 2024.jpg?x59068\" width=\"800\" /></p>WWE SmackDown viewership and key demo numbers are in for the May 29, 2026 episode of WWE SmackDown on USA Network, as the numbers held fairly steady week over week. According to Programming Insider, WWE SmackDown on May 29, 2026 drew 1,258,000 viewers on USA Network, with a 0.29 rating in the key P18–49 demographic. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-smackdown-viewership-sees-no-change-may-29-2026/\" title=\"WWE SmackDown Viewership Sees No Change on May 29, 2026\">Read more</a>",
       "title": "WWE SmackDown Viewership Sees No Change on May 29, 2026",
       "url": "https://www.ringsidenews.com/wwe-smackdown-viewership-sees-no-change-may-29-2026/"
-    },
-    {
-      "decision": "hard_skip",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_article_type": "low_value",
-      "menzo_reason": "recency:fresh_12h",
-      "normalized_url": "https://www.ringsidenews.com/kaitlyn-says-wwe-told-her-lose-weight-right-hiring-her",
-      "published": "Tue, 02 Jun 2026 20:42:10 +0000",
-      "reason": "menzo_hard_skip_memory",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Kaitlyn Says WWE Told Her To Lose Weight Right After Hiring Her\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/kaitlyn-says-wwe-told-her-to-lose-weight-right-after-hiring-her-30.jpg?x36463\" width=\"800\" /></p>Kaitlyn is looking back at one of the roughest parts of her WWE run, and she says the body pressure hit her almost immediately. During her interview with TMZ’s Inside the Ring, the former WWE Divas Champion was asked about the pressure women faced during the Divas era, especially since she had a different look ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/kaitlyn-says-wwe-told-her-lose-weight-right-hiring-her/\" title=\"Kaitlyn Says WWE Told Her To Lose Weight Right After Hiring Her\">Read more</a>",
-      "title": "Kaitlyn Says WWE Told Her To Lose Weight Right After Hiring Her",
-      "url": "https://www.ringsidenews.com/kaitlyn-says-wwe-told-her-lose-weight-right-hiring-her/"
     }
   ],
   "known_menzo_hard_skip_urls": 28,
-  "known_published_urls": 40,
-  "known_state_urls": 10,
+  "known_published_urls": 43,
+  "known_state_urls": 11,
   "mode": "sentinel_control_board",
   "news_candidates_for_menzo": [
     {
@@ -368,13 +378,37 @@
       "assigned_to": "Menzo",
       "decision": "news_candidate",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/digital-evidence-turned-over-in-ludwig-kaiser-battery-case",
-      "published": "Wed, 03 Jun 2026 04:09:08 +0000",
+      "normalized_url": "https://www.ringsidenews.com/cody-rhodes-defends-triple-hs-wwe-creative-style-constant-criticism",
+      "published": "Wed, 03 Jun 2026 09:04:56 +0000",
       "reason": "requires_menzo_classification",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Digital Evidence Turned Over In Ludwig Kaiser Battery Case\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/digital-evidence-turned-over-in-ludwig-kaiser-battery-case-02.jpg?x36463\" width=\"800\" /></p>Ludwig Kaiser’s legal situation has taken another step forward after prosecutors handed over digital evidence to his defense team as his misdemeanor battery case continues through the Florida court system. Ringside News obtained a new court filing dated June 1 that confirms the State of Florida provided Kaiser’s attorney with access to digital evidence connected ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/digital-evidence-turned-over-in-ludwig-kaiser-battery-case/\" title=\"Digital Evidence Turned Over In Ludwig Kaiser Battery Case\">Read more</a>",
-      "title": "Digital Evidence Turned Over In Ludwig Kaiser Battery Case",
-      "url": "https://www.ringsidenews.com/digital-evidence-turned-over-in-ludwig-kaiser-battery-case/"
+      "summary": "<p><img alt=\"Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/cody-rhodes-defends-triple-hs-wwe-creative-style-after-constant-criticism-41.jpg?x59068\" width=\"800\" /></p>Cody Rhodes is making it clear that Triple H’s WWE creative process works for him, even if many people don&#8217;t think his booking style is good at all. While speaking on his What Do You Wanna Talk About? podcast, Rhodes defended Triple H’s booking approach and explained why he enjoys working under his creative system. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/cody-rhodes-defends-triple-hs-wwe-creative-style-constant-criticism/\" title=\"Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism\">Read more</a>",
+      "title": "Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism",
+      "url": "https://www.ringsidenews.com/cody-rhodes-defends-triple-hs-wwe-creative-style-constant-criticism/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/bayleys-wwe-future-unclear-contract-expiration-date-draws-closer",
+      "published": "Wed, 03 Jun 2026 08:31:17 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/bayleys-wwe-future-unclear-as-contract-expiration-date-draws-closer-55.jpg?x59068\" width=\"800\" /></p>Bayley’s future with WWE is facing new questions as her current contract continues moving toward its expiration date. Her current WWE deal is set to expire at the end of this year. WWE and TKO are said to want to keep Bayley around, particularly because she is viewed as a locker room leader. However, there ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/bayleys-wwe-future-unclear-contract-expiration-date-draws-closer/\" title=\"Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer\">Read more</a>",
+      "title": "Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer",
+      "url": "https://www.ringsidenews.com/bayleys-wwe-future-unclear-contract-expiration-date-draws-closer/"
+    },
+    {
+      "assigned_to": "Menzo",
+      "decision": "news_candidate",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "normalized_url": "https://www.ringsidenews.com/real-reason-wwe-moved-money-bank-2026-date",
+      "published": "Wed, 03 Jun 2026 08:11:56 +0000",
+      "reason": "requires_menzo_classification",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Real Reason WWE Moved Money in the Bank 2026 Date\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/real-reason-wwe-moved-money-in-the-bank-2026-date-05.jpg?x59068\" width=\"800\" /></p>WWE&#8217;s decision to move Money in the Bank 2026 out of its traditional summer timeframe appears to come down to one simple issue — the company has too many major events on the calendar. After WWE announced that Money in the Bank will take place on September 6 at the Smoothie King Center in New ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/real-reason-wwe-moved-money-bank-2026-date/\" title=\"Real Reason WWE Moved Money in the Bank 2026 Date\">Read more</a>",
+      "title": "Real Reason WWE Moved Money in the Bank 2026 Date",
+      "url": "https://www.ringsidenews.com/real-reason-wwe-moved-money-bank-2026-date/"
     },
     {
       "assigned_to": "Menzo",
@@ -384,7 +418,7 @@
       "published": "Wed, 03 Jun 2026 02:42:10 +0000",
       "reason": "requires_menzo_classification",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"MJF Fires Back With NSFW Response After Mick Foley Calls Him ‘The Best In The Business’\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mjf-fires-back-with-nsfw-response-after-mick-foley-calls-him-the-best-in-the-business-20.jpg?x36463\" width=\"800\" /></p>MJF has responded to some major praise from Mick Foley, and he did it in the most MJF way possible. During his June 2 appearance on Ariel Helwani&#8217;s show, Foley had nothing but glowing things to say about the AEW World Champion. The WWE Hall of Famer praised MJF&#8217;s stance on not leaving a company ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mjf-fires-back-nsfw-response-mick-foley-calls-him-best-business/\" title=\"MJF Fires Back With NSFW Response After Mick Foley Calls Him ‘The Best In The Business’\">Read more</a>",
+      "summary": "<p><img alt=\"MJF Fires Back With NSFW Response After Mick Foley Calls Him ‘The Best In The Business’\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mjf-fires-back-with-nsfw-response-after-mick-foley-calls-him-the-best-in-the-business-20.jpg?x59068\" width=\"800\" /></p>MJF has responded to some major praise from Mick Foley, and he did it in the most MJF way possible. During his June 2 appearance on Ariel Helwani&#8217;s show, Foley had nothing but glowing things to say about the AEW World Champion. The WWE Hall of Famer praised MJF&#8217;s stance on not leaving a company ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mjf-fires-back-nsfw-response-mick-foley-calls-him-best-business/\" title=\"MJF Fires Back With NSFW Response After Mick Foley Calls Him ‘The Best In The Business’\">Read more</a>",
       "title": "MJF Fires Back With NSFW Response After Mick Foley Calls Him ‘The Best In The Business’",
       "url": "https://www.ringsidenews.com/mjf-fires-back-nsfw-response-mick-foley-calls-him-best-business/"
     },
@@ -396,7 +430,7 @@
       "published": "Wed, 03 Jun 2026 02:06:26 +0000",
       "reason": "requires_menzo_classification",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Tony D&#039;Angelo Stands Tall With NXT Title Defense During June 2 Episode\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/tony-dangelo-stands-tall-with-nxt-title-defense-during-june-2-episode-28.jpg?x36463\" width=\"800\" /></p>The June 2 episode from WWE&#8217;s NXT brand was a fun episode, and there were several big moments. An NXT Title defense always brings special attention to any episode when they come up, and this week saw an exciting matchup for the brand&#8217;s top prize. Tony D&#8217;Angelo put his NXT Title on the line against ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/tony-dangelo-stands-tall-nxt-title-defense-during-june-2-episode/\" title=\"Tony D&#8217;Angelo Stands Tall With NXT Title Defense During June 2 Episode\">Read more</a>",
+      "summary": "<p><img alt=\"Tony D&#039;Angelo Stands Tall With NXT Title Defense During June 2 Episode\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/tony-dangelo-stands-tall-with-nxt-title-defense-during-june-2-episode-28.jpg?x59068\" width=\"800\" /></p>The June 2 episode from WWE&#8217;s NXT brand was a fun episode, and there were several big moments. An NXT Title defense always brings special attention to any episode when they come up, and this week saw an exciting matchup for the brand&#8217;s top prize. Tony D&#8217;Angelo put his NXT Title on the line against ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/tony-dangelo-stands-tall-nxt-title-defense-during-june-2-episode/\" title=\"Tony D&#8217;Angelo Stands Tall With NXT Title Defense During June 2 Episode\">Read more</a>",
       "title": "Tony D’Angelo Stands Tall With NXT Title Defense During June 2 Episode",
       "url": "https://www.ringsidenews.com/tony-dangelo-stands-tall-nxt-title-defense-during-june-2-episode/"
     },
@@ -408,7 +442,7 @@
       "published": "Wed, 03 Jun 2026 01:55:44 +0000",
       "reason": "requires_menzo_classification",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Mr. NXT Pageant &amp; More Announced For June 9 Episode\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mr-nxt-pageant-amp-more-announced-for-june-9-episode-21.jpg?x36463\" width=\"800\" /></p>The June 2 episode from WWE&#8217;s NXT brand was a fun show, but things are going to be even bigger next week. Along with a #1 contender match, we also have a pageant awaiting us. Tatum Paxley will put the NXT Women&#8217;s North American Title on the line next week against Zaria. The Aussie got ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mr-nxt-pageant-more-announced-june-9-episode/\" title=\"Mr. NXT Pageant &#38; More Announced For June 9 Episode\">Read more</a>",
+      "summary": "<p><img alt=\"Mr. NXT Pageant &amp; More Announced For June 9 Episode\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mr-nxt-pageant-amp-more-announced-for-june-9-episode-21.jpg?x59068\" width=\"800\" /></p>The June 2 episode from WWE&#8217;s NXT brand was a fun show, but things are going to be even bigger next week. Along with a #1 contender match, we also have a pageant awaiting us. Tatum Paxley will put the NXT Women&#8217;s North American Title on the line next week against Zaria. The Aussie got ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mr-nxt-pageant-more-announced-june-9-episode/\" title=\"Mr. NXT Pageant &#38; More Announced For June 9 Episode\">Read more</a>",
       "title": "Mr. NXT Pageant & More Announced For June 9 Episode",
       "url": "https://www.ringsidenews.com/mr-nxt-pageant-more-announced-june-9-episode/"
     },
@@ -420,45 +454,9 @@
       "published": "Wed, 03 Jun 2026 01:44:32 +0000",
       "reason": "requires_menzo_classification",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW Collision Massive Decrease.jpg?x36463\" width=\"800\" /></p>New ratings data has been released for the May 30, 2026 episode of AEW Collision on TNT, with the show taking a sharp week-to-week hit. According to Dave Meltzer, AEW Collision on May 30, 2026 drew 360,000 viewers on TNT, with a 0.05 rating in the key P18–49 demographic. For comparison, the May 27, 2026 ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aew-collision-viewership-sees-massive-drop-may-30-2026/\" title=\"AEW Collision Viewership Sees Massive Drop on May 30, 2026\">Read more</a>",
+      "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW Collision Massive Decrease.jpg?x59068\" width=\"800\" /></p>New ratings data has been released for the May 30, 2026 episode of AEW Collision on TNT, with the show taking a sharp week-to-week hit. According to Dave Meltzer, AEW Collision on May 30, 2026 drew 360,000 viewers on TNT, with a 0.05 rating in the key P18–49 demographic. For comparison, the May 27, 2026 ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aew-collision-viewership-sees-massive-drop-may-30-2026/\" title=\"AEW Collision Viewership Sees Massive Drop on May 30, 2026\">Read more</a>",
       "title": "AEW Collision Viewership Sees Massive Drop on May 30, 2026",
       "url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-drop-may-30-2026/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/why-wwe-rushing-create-its-next-generation-main-event-stars",
-      "published": "Wed, 03 Jun 2026 01:24:08 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Why WWE Is Rushing To Create Its Next Generation Of Main Event Stars\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/why-wwe-is-rushing-to-create-its-next-generation-of-main-event-stars-45.jpg?x36463\" width=\"800\" /></p>WWE knows it has a problem coming, and Nick Khan isn&#8217;t hiding from it. While speaking at the Sports Business Journal World Congress of Sports, the WWE President revealed that company leadership has spent the last year discussing how to speed up the development of new stars as some of WWE&#8217;s biggest attractions move deeper ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/why-wwe-rushing-create-its-next-generation-main-event-stars/\" title=\"Why WWE Is Rushing To Create Its Next Generation Of Main Event Stars\">Read more</a>",
-      "title": "Why WWE Is Rushing To Create Its Next Generation Of Main Event Stars",
-      "url": "https://www.ringsidenews.com/why-wwe-rushing-create-its-next-generation-main-event-stars/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial",
-      "published": "Tue, 02 Jun 2026 22:42:43 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Judge Orders WWE Sale Bidding Details to Be Unsealed in Shareholder Lawsuit\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/03/judge-orders-wwe-sale-bidding-details-to-be-unsealed-in-shareholder-lawsuit-15.jpg?x36463\" width=\"800\" /></p>WWE’s merger with UFC may have created TKO Group Holdings, but the legal fallout from that deal is now carrying a massive potential price tag. A shareholder lawsuit tied to the merger is heading toward trial, and the damages being sought could come close to $1 billion if the plaintiffs win in court. The case ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/\" title=\"WWE Shareholder Lawsuit Could Put Nearly $1 Billion On The Line Before Trial\">Read more</a>",
-      "title": "WWE Shareholder Lawsuit Could Put Nearly $1 Billion On The Line Before Trial",
-      "url": "https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/"
-    },
-    {
-      "assigned_to": "Menzo",
-      "decision": "news_candidate",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed",
-      "published": "Tue, 02 Jun 2026 20:59:17 +0000",
-      "reason": "requires_menzo_classification",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Producer Behind El Grande Americano Mask vs. Mask Match Revealed\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/producer-behind-el-grande-americano-mask-vs-mask-match-revealed-48.jpg?x36463\" width=\"800\" /></p>Chad Gable and Ludwig Kaiser’s bloody Mask vs. Mask match at AAA Noche de Los Grandes had another WWE name involved behind the scenes According to Mexican journalist Ernesto Ocampo, Pete Dunne was the producer for the match between Ludwig Kaiser’s El Grande Americano and Chad Gable’s Original El Grande Americano. Ocampo noted that Dunne ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed/\" title=\"Producer Behind El Grande Americano Mask vs. Mask Match Revealed\">Read more</a>",
-      "title": "Producer Behind El Grande Americano Mask vs. Mask Match Revealed",
-      "url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed/"
     }
   ],
   "report_candidates": [
@@ -471,7 +469,7 @@
       "reason": "weekly_show_results",
       "show_hint": "WWE NXT",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"WWE NXT Preview for June 2, 2026: Confirmed Matches, Start Time and How to Watch\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/wwe-nxt-preview-for-june-2-2026-confirmed-matches-start-time-and-how-to-watch-00.jpg?x36463\" width=\"800\" /></p>Tonight’s WWE NXT airing June 2, 2026, promises an action-packed night live from the Capitol Wrestling Center (WWE Performance Center) in Orlando, Florida. The show sees WWE NXT Champion Tony D&#8217;Angelo defend his title against Kam Hendrix. Plus, BirthRight&#8217;s WWE Men&#8217;s Speed Champion Lexis King will defend his title against Romeo Moreno. The show kicks ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-nxt-results-highlights-key-moments-june-2-2026/\" title=\"WWE NXT Results, Highlights and Key Moments for June 2, 2026\">Read more</a>",
+      "summary": "<p><img alt=\"WWE NXT Preview for June 2, 2026: Confirmed Matches, Start Time and How to Watch\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/wwe-nxt-preview-for-june-2-2026-confirmed-matches-start-time-and-how-to-watch-00.jpg?x59068\" width=\"800\" /></p>Tonight’s WWE NXT airing June 2, 2026, promises an action-packed night live from the Capitol Wrestling Center (WWE Performance Center) in Orlando, Florida. The show sees WWE NXT Champion Tony D&#8217;Angelo defend his title against Kam Hendrix. Plus, BirthRight&#8217;s WWE Men&#8217;s Speed Champion Lexis King will defend his title against Romeo Moreno. The show kicks ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-nxt-results-highlights-key-moments-june-2-2026/\" title=\"WWE NXT Results, Highlights and Key Moments for June 2, 2026\">Read more</a>",
       "title": "WWE NXT Results, Highlights and Key Moments for June 2, 2026",
       "url": "https://www.ringsidenews.com/wwe-nxt-results-highlights-key-moments-june-2-2026/"
     }

@@ -1,0 +1,12 @@
+
+===== NEWSROOM MASTER RUN 2026-06-03T10:01:29.135773+00:00 | v93_20_process_refinements | run_id=26877623749 =====
+Massy: to_simone=1 to_menzo=9 hard_skip=25 menzo_skip=13 old_skip=4
+Simone: ready=1 reports_published=0 wp_not_ready=1
+Menzo: selected=2 pending=1 skipped=7 ai=True model=gemini-3.1-flash-lite
+Bob: ready=2 errors=0 changes={'bob_v93_16_changes': 0, 'bob_brief_warnings_added': 2}
+Alfred: approved=2 warnings=2 blockers=0
+Publisher: published=0 wp_not_ready=0 errors=0
+Archivista: status=error anomalies=2
+Selected: Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer, Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism
+Published news: -
+Published reports: -
