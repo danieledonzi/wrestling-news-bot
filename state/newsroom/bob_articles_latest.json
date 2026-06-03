@@ -3,13 +3,22 @@
   "articles": [
     {
       "bob_notes": [],
-      "body_html": "<p>Il futuro di Bayley in WWE torna al centro di nuovi interrogativi, man mano che il suo attuale contratto si avvicina alla data di scadenza.</p>\n<p>L&#x27;attuale accordo con la WWE è previsto in scadenza alla fine di quest&#x27;anno. Si dice che la WWE e la TKO vogliano trattenere Bayley, in particolare perché è considerata un leader all&#x27;interno dello spogliatoio. Tuttavia, al momento non ci sono notizie riguardanti il raggiungimento di un nuovo accordo.</p>\n<p>La situazione emerge dopo che Bayley ha parlato apertamente del suo futuro durante un&#x27;intervista con Chris Van Vliet nell&#x27;aprile 2025. All&#x27;epoca, rivelò di avere ancora circa un anno e mezzo di contratto e ammise di non essere sicura di cosa sarebbe successo una volta terminato l&#x27;accordo.</p>\n<p>Dopo aver discusso del tempo rimanente sul suo contratto, Bayley ha riconosciuto di avere interessi al di fuori del wrestling.</p>\n<blockquote>“Ho così tante altre cose che voglio realizzare. Mi resta un anno e mezzo in questo contratto attuale, quindi vedremo cosa succederà dopo. E poi cosa? Cavolo, non lo so.”</blockquote>\n<p>Bayley ha anche riflettuto su tutto ciò che ha ottenuto durante la sua carriera in WWE, pur ammettendo che ci sono ancora molte cose che vorrebbe realizzare.</p>\n<blockquote>“Penso di aver fatto tutto ciò che volevo davvero fare, beh, non tutto. C&#x27;è ancora molto che voglio compiere, ma ho fatto così tanto con la WWE e sono qui già da 12 anni; c&#x27;è un&#x27;enorme ondata di atlete che sta arrivando e che penso sia pronta a prendere il comando, pronta a occupare quei posti.”</blockquote>\n<p>Una delle parti più rilevanti dell&#x27;intervista è arrivata quando Bayley ha discusso della possibilità che la sua carriera sul ring non duri per sempre. Allo stesso tempo, ha chiarito di sentirsi fiduciosa riguardo al futuro della divisione femminile della WWE.</p>\n<blockquote>“Quindi, quando penso: ok, potrei aver finito tra un paio d&#x27;anni, chi lo sa? So che sarà in buone mani. E questo mi rende davvero felice.”</blockquote>\n<p>Bayley è in WWE dalla fine del 2012 e ha costruito uno dei curriculum più ricchi di titoli nella storia della divisione femminile. Dopo aver firmato il suo attuale contratto nel dicembre 2023, rimane una delle stelle più affermate della compagnia, sia in televisione che dietro le quinte.</p>\n<p>Con il suo attuale accordo che entra nella fase finale, il futuro di Bayley sta diventando ancora una volta una storia da seguire. La WWE sembra interessata a trattenerla, ma Bayley ha già chiarito di avere ambizioni oltre il wrestling, mentre valuta cosa riserverà il futuro per la sua carriera.</p>",
-      "category_hint": "Business",
-      "clean_element_count": 11,
-      "created_at": "2026-06-03T10:49:02.622834+00:00",
+      "body_html": "<p>La WWE ha annunciato il primo gruppo di talenti pronti a competere nel prossimo WWE ID Showcase; la card include diversi nomi che stanno già facendo parlare di sé all&#x27;interno del percorso di sviluppo della compagnia.</p>\nhttps://x.com/WWEID/status/2061971574954070054\n\n<p>L&#x27;evento si terrà il 26 giugno presso la Nightmare Factory, il centro di allenamento gestito da Cody Rhodes e QT Marshall che è diventato uno dei punti di riferimento principali per gli atleti del programma WWE ID. L&#x27;annuncio è stato dato tramite i social media, confermando la prima lista di partecipanti allo showcase.</p>\n<blockquote>“BREAKING…. Il primo roster di talenti è pronto per il prossimo ID Showcase! Sono già confermati per l&#x27;ID Showcase presentato dalla Nightmare Factory il 26 giugno:”</blockquote>\n<p>La WWE ha poi svelato un roster che include gli attuali campioni del programma WWE ID, talenti della WWE Evolve e diversi wrestler emergenti del circuito indipendente.</p>\n<blockquote>“-WWE Evolve Champion Aaron Rourke -WWE ID Men’s Champion Chazz ‘Starboy’ Hall -WWE ID Women’s Champion Laynie Luck -WWE ID Player/Coach Timothy Thatcher -Cappuccino Jones -The Mog Squad composta da Max Abrams, CJ Valor, Santi Rivera e Jacari Ball -Sloane Jacobs -Sam Holloway -It’s Gal -Anya Rune -Gianna Capri -Veronica Haven E altri ancora saranno annunciati, inclusi i talenti della Nightmare Factory!”</blockquote>\n<p>La WWE ha inoltre anticipato che gli annunci relativi agli incontri sono in arrivo.</p>\n<blockquote>“Annunci sui match in arrivo questa settimana!”</blockquote>\n<p>Il programma WWE ID è stato lanciato nel 2024 come parte dell&#x27;iniziativa della WWE per identificare e sviluppare talenti promettenti del wrestling indipendente prima di integrarli stabilmente in compagnia. Dal suo debutto, l&#x27;iniziativa ha offerto ad alcuni wrestler selezionati l&#x27;accesso ad allenamenti, coaching e opportunità di esibirsi sotto il marchio WWE ID, permettendo loro di continuare a costruire la propria carriera.</p>\n<p>La Nightmare Factory ha svolto un ruolo fondamentale in questo processo sin dall&#x27;inizio, fungendo da uno dei principali centri di allenamento per le reclute WWE ID e contribuendo a preparare le future stelle a opportunità più importanti.</p>\n<p>Con la WWE che continua a investire massicciamente nella ricerca della prossima generazione di talenti, lo showcase del 26 giugno potrebbe offrire uno sguardo su diversi wrestler che, in futuro, potrebbero approdare a NXT, WWE Evolve o addirittura nel main roster.</p>\n<p>Derek Holloway è un autore di Ringside News specializzato in notizie, rumor e risultati di wrestling professionistico. Si occupa di fornire una copertura affidabile riguardante WWE, AEW e le principali federazioni di wrestling.</p>",
+      "category_hint": "NXT",
+      "clean_element_count": 12,
+      "created_at": "2026-06-03T12:19:51.823868+00:00",
       "diagnostic_stage": "ready_for_alfred",
+      "diagnostic_warnings": [],
+      "editorial_changes": [
+        {
+          "code": "leading_embed_moved_after_first_paragraph",
+          "evidence": "https://x.com/WWEID/status/2061971574954070054",
+          "message": "Embed iniziale spostato dopo il primo paragrafo.",
+          "severity": "info"
+        }
+      ],
       "element_counts": {
-        "embed": 0,
+        "embed": 1,
         "heading": 0,
         "image": 0,
         "quote": 3,
@@ -19,333 +28,320 @@
       "elements": [
         {
           "block_id": "b1",
-          "text": "Bayley’s future with WWE is facing new questions as her current contract continues moving toward its expiration date.",
-          "type": "text"
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://x.com/WWEID/status/2061971574954070054"
         },
         {
           "block_id": "b2",
-          "text": "Her current WWE deal is set to expire at the end of this year. WWE and TKO are said to want to keep Bayley around, particularly because she is viewed as a locker room leader. However, there is currently no word on whether a new agreement has been reached.",
+          "text": "WWE has announced the first group of talent set to compete at the next WWE ID Showcase, and the lineup includes several names already making noise through the company’s developmental pipeline.",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "text": "The situation comes after Bayley spoke openly about her future during an interview with Chris Van Vliet in April 2025. At the time, she revealed she had about a year and a half left on her contract and admitted she wasn’t sure what would happen once that deal came to an end.",
+          "text": "The event will take place on June 26 at The Nightmare Factory, the training facility operated by Cody Rhodes and QT Marshall that has become one of the key homes for WWE ID prospects. The announcement was made through social media, confirming the first batch of competitors for the showcase.",
           "type": "text"
         },
         {
           "block_id": "b4",
-          "text": "After discussing the time remaining on her contract, Bayley acknowledged that she has interests outside of wrestling.",
-          "type": "text"
+          "source_tag": "blockquote",
+          "text": "“BREAKING…. The first talent roster is set for the next ID Showcase! Already confirmed for The Nightmare Factory presents The ID Showcase on June 26th are:”",
+          "type": "quote"
         },
         {
           "block_id": "b5",
-          "source_tag": "blockquote",
-          "text": "“I have so many other things I want to make it into. I have a year and a half left on this current contract, so we’ll see what happens then. And then what? Man, I don’t know.”",
-          "type": "quote"
+          "text": "WWE then revealed a roster featuring current WWE ID champions, WWE Evolve talent, and several rising independent wrestlers.",
+          "type": "text"
         },
         {
           "block_id": "b6",
-          "text": "Bayley also reflected on everything she has accomplished during her WWE career while admitting there is still more she wants to achieve.",
-          "type": "text"
+          "source_tag": "blockquote",
+          "text": "“-WWE Evolve Champion Aaron Rourke -WWE ID Men’s Champion Chazz ‘Starboy’ Hall -WWE ID Women’s Champion Laynie Luck -WWE ID Player/Coach Timothy Thatcher -Cappuccino Jones -The Mog Squad of Max Abrams, CJ Valor, Santi Rivera and Jacari Ball -Sloane Jacobs -Sam Holloway -It’s Gal -Anya Rune -Gianna Capri -Veronica Haven Plus more to be announced including talent from The Nightmare Factory!”",
+          "type": "quote"
         },
         {
           "block_id": "b7",
-          "source_tag": "blockquote",
-          "text": "“I think I’ve done everything I really want to do, not everything. There’s still a lot I want to get done, but done so much with WWE and I’ve been here for already 12 years and there’s a huge wave of women coming in that I think are ready to take over, ready to be in those spots.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b8",
-          "text": "One of the more notable parts of the interview came when Bayley discussed the possibility that her in-ring career may not last forever. At the same time, she made it clear that she feels confident about the future of WWE’s women’s division.",
+          "text": "WWE also teased that match announcements are on the way.",
           "type": "text"
         },
         {
-          "block_id": "b9",
+          "block_id": "b8",
           "source_tag": "blockquote",
-          "text": "“So when I think about okay, I might be done in a couple of years, who knows? I know that it’s going to be in good hands. So that makes me really happy.”",
+          "text": "“Match announcements coming this week!”",
           "type": "quote"
         },
         {
+          "block_id": "b9",
+          "text": "The WWE ID program launched in 2024 as part of WWE’s effort to identify and develop promising independent wrestling talent before bringing them into the company full-time. Since its debut, the initiative has given select wrestlers access to training, coaching, and opportunities to perform under the WWE ID banner while continuing to build their careers.",
+          "type": "text"
+        },
+        {
           "block_id": "b10",
-          "text": "Bayley has been with WWE since late 2012 and has built one of the most decorated resumes in the history of the women’s division. After signing her current contract in December 2023, she remains one of the company’s most established stars both on television and behind the scenes.",
+          "text": "The Nightmare Factory has played a major role in that process from the beginning, serving as one of the primary training facilities for WWE ID recruits and helping prepare future stars for bigger opportunities.",
           "type": "text"
         },
         {
           "block_id": "b11",
-          "text": "With her current deal entering its final stretch, Bayley’s future is once again becoming a story to watch. WWE appears interested in keeping her, but Bayley has already made it clear that she has ambitions beyond wrestling as she considers what comes next in her career.",
+          "text": "With WWE continuing to invest heavily in finding the next generation of talent, the June 26 showcase could offer a glimpse at several wrestlers who may eventually find themselves on NXT, WWE Evolve, or even the main roster.",
+          "type": "text"
+        },
+        {
+          "block_id": "b12",
+          "text": "Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.",
           "type": "text"
         }
       ],
-      "excerpt_it": "Il futuro di Bayley in WWE torna a far discutere, con l'avvicinarsi della data di scadenza del suo attuale contratto.",
+      "excerpt_it": "La WWE ha svelato il primo gruppo di atleti che prenderanno parte al prossimo showcase del programma WWE ID.",
       "extraction_diagnostics": {
-        "candidate_node_count": 80,
-        "clean_element_count": 11,
+        "candidate_node_count": 108,
+        "clean_element_count": 12,
         "dom_noise_reduction_enabled": false,
-        "embed_count": 0,
+        "embed_count": 1,
         "global_embed_recovery_enabled": false,
         "quote_count": 3,
-        "raw_element_count": 11,
-        "removed_by_node_count": 0,
-        "removed_by_sanitize_count": 0,
+        "raw_element_count": 15,
+        "removed_by_node_count": 13,
+        "removed_by_sanitize_count": 3,
         "root_name": "article",
-        "root_text_chars": 3152,
+        "root_text_chars": 3150,
         "stage": "complete",
         "table_count": 0
       },
-      "fetched_html_chars": 494272,
-      "menzo_score": 80,
+      "fetched_html_chars": 352476,
+      "menzo_score": 76,
       "meta": {
-        "description": "Bayley’s future with WWE is facing new questions as her current contract continues moving toward its expiration date. Her current WWE deal is set to",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/bayleys-wwe-future-unclear-as-contract-expiration-date-draws-closer-55.jpg",
-        "source_title": "Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer"
+        "description": "WWE has announced the first group of talent set to compete at the next WWE ID Showcase, and the lineup includes several names already making noise through",
+        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/wwe-reveals-first-wave-of-talent-for-next-wwe-id-showcase-at-nightmare-factory-24.jpg",
+        "source_title": "WWE Reveals First Wave Of Talent For Next WWE ID Showcase At Nightmare Factory"
       },
-      "raw_element_count": 11,
+      "raw_element_count": 15,
       "raw_elements_preview": [
         {
           "block_id": "b1",
-          "text": "Bayley’s future with WWE is facing new questions as her current contract continues moving toward its expiration date.",
-          "type": "text"
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://x.com/WWEID/status/2061971574954070054"
+        },
+        {
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://x.com/WWEID/status/2061971574954070054"
+        },
+        {
+          "source_tag": "div",
+          "type": "embed",
+          "url": "https://x.com/WWEID/status/2061971574954070054"
         },
         {
           "block_id": "b2",
-          "text": "Her current WWE deal is set to expire at the end of this year. WWE and TKO are said to want to keep Bayley around, particularly because she is viewed as a locker room leader. However, there is currently no word on whether a new agreement has been reached.",
+          "text": "WWE has announced the first group of talent set to compete at the next WWE ID Showcase, and the lineup includes several names already making noise through the company’s developmental pipeline.",
           "type": "text"
         },
         {
           "block_id": "b3",
-          "text": "The situation comes after Bayley spoke openly about her future during an interview with Chris Van Vliet in April 2025. At the time, she revealed she had about a year and a half left on her contract and admitted she wasn’t sure what would happen once that deal came to an end.",
+          "text": "The event will take place on June 26 at The Nightmare Factory, the training facility operated by Cody Rhodes and QT Marshall that has become one of the key homes for WWE ID prospects. The announcement was made through social media, confirming the first batch of competitors for the showcase.",
           "type": "text"
         },
         {
           "block_id": "b4",
-          "text": "After discussing the time remaining on her contract, Bayley acknowledged that she has interests outside of wrestling.",
-          "type": "text"
+          "source_tag": "blockquote",
+          "text": "“BREAKING…. The first talent roster is set for the next ID Showcase! Already confirmed for The Nightmare Factory presents The ID Showcase on June 26th are:”",
+          "type": "quote"
         },
         {
           "block_id": "b5",
-          "source_tag": "blockquote",
-          "text": "“I have so many other things I want to make it into. I have a year and a half left on this current contract, so we’ll see what happens then. And then what? Man, I don’t know.”",
-          "type": "quote"
+          "text": "WWE then revealed a roster featuring current WWE ID champions, WWE Evolve talent, and several rising independent wrestlers.",
+          "type": "text"
         },
         {
           "block_id": "b6",
-          "text": "Bayley also reflected on everything she has accomplished during her WWE career while admitting there is still more she wants to achieve.",
-          "type": "text"
+          "source_tag": "blockquote",
+          "text": "“-WWE Evolve Champion Aaron Rourke -WWE ID Men’s Champion Chazz ‘Starboy’ Hall -WWE ID Women’s Champion Laynie Luck -WWE ID Player/Coach Timothy Thatcher -Cappuccino Jones -The Mog Squad of Max Abrams, CJ Valor, Santi Rivera and Jacari Ball -Sloane Jacobs -Sam Holloway -It’s Gal -Anya Rune -Gianna Capri -Veronica Haven Plus more to be announced including talent from The Nightmare Factory!”",
+          "type": "quote"
         },
         {
           "block_id": "b7",
-          "source_tag": "blockquote",
-          "text": "“I think I’ve done everything I really want to do, not everything. There’s still a lot I want to get done, but done so much with WWE and I’ve been here for already 12 years and there’s a huge wave of women coming in that I think are ready to take over, ready to be in those spots.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b8",
-          "text": "One of the more notable parts of the interview came when Bayley discussed the possibility that her in-ring career may not last forever. At the same time, she made it clear that she feels confident about the future of WWE’s women’s division.",
+          "text": "WWE also teased that match announcements are on the way.",
           "type": "text"
         },
         {
-          "block_id": "b9",
+          "block_id": "b8",
           "source_tag": "blockquote",
-          "text": "“So when I think about okay, I might be done in a couple of years, who knows? I know that it’s going to be in good hands. So that makes me really happy.”",
+          "text": "“Match announcements coming this week!”",
           "type": "quote"
         },
         {
+          "block_id": "b9",
+          "text": "The WWE ID program launched in 2024 as part of WWE’s effort to identify and develop promising independent wrestling talent before bringing them into the company full-time. Since its debut, the initiative has given select wrestlers access to training, coaching, and opportunities to perform under the WWE ID banner while continuing to build their careers.",
+          "type": "text"
+        },
+        {
           "block_id": "b10",
-          "text": "Bayley has been with WWE since late 2012 and has built one of the most decorated resumes in the history of the women’s division. After signing her current contract in December 2023, she remains one of the company’s most established stars both on television and behind the scenes.",
+          "text": "The Nightmare Factory has played a major role in that process from the beginning, serving as one of the primary training facilities for WWE ID recruits and helping prepare future stars for bigger opportunities.",
           "type": "text"
         },
         {
           "block_id": "b11",
-          "text": "With her current deal entering its final stretch, Bayley’s future is once again becoming a story to watch. WWE appears interested in keeping her, but Bayley has already made it clear that she has ambitions beyond wrestling as she considers what comes next in her career.",
+          "text": "With WWE continuing to invest heavily in finding the next generation of talent, the June 26 showcase could offer a glimpse at several wrestlers who may eventually find themselves on NXT, WWE Evolve, or even the main roster.",
+          "type": "text"
+        },
+        {
+          "block_id": "b12",
+          "text": "Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.",
+          "type": "text"
+        },
+        {
+          "text": "Spotlight WWE News Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer WWE News Real Reason WWE Moved Money in the Bank 2026 Date WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case WWE NXT Results WWE NXT Results, Highlights and Key Moments for June 2, 2026",
           "type": "text"
         }
       ],
-      "removed_before_gemini": 0,
-      "removed_elements_debug": [],
+      "removed_before_gemini": 16,
+      "removed_elements_debug": [
+        {
+          "classes": "wp-block-heading rsn-spotlight-heading h-spotlight  ",
+          "node_index": 85,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Spotlight"
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197085 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-bayley tag-wwe-featured   ",
+          "node_index": 89,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 92,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 93,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197076 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-wwe-featured tag-wwe-money-in-the-bank   ",
+          "node_index": 94,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Real Reason WWE Moved Money in the Bank 2026 Date"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 97,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Real Reason WWE Moved Money in the Bank 2026 Date"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 98,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2197072 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news tag-ludwig-kaiser tag-wwe-featured   ",
+          "node_index": 99,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 102,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "Digital Evidence Turned Over In Ludwig Kaiser Battery Case"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 103,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "classes": "gb-loop-item rsn-spotlight-item post-2196652 post type-post status-publish format-standard has-post-thumbnail hentry category-wwe-news category-wwe-nxt-results category-wwe-results tag-wwe-featured   ",
+          "node_index": 104,
+          "node_name": "li",
+          "reason": "node_class_noise",
+          "text_preview": "WWE NXT Results WWE NXT Results, Highlights and Key Moments for June 2, 2026"
+        },
+        {
+          "classes": "gb-text gbp-card__title rsn-spotlight-title   ",
+          "node_index": 107,
+          "node_name": "h2",
+          "reason": "node_class_noise",
+          "text_preview": "WWE NXT Results, Highlights and Key Moments for June 2, 2026"
+        },
+        {
+          "classes": "gb-media-d81296f1 rsn-spotlight-thumb lazyload   ",
+          "node_index": 108,
+          "node_name": "img",
+          "reason": "node_class_noise",
+          "text_preview": ""
+        },
+        {
+          "index": 2,
+          "item": {
+            "source_tag": "div",
+            "type": "embed",
+            "url": "https://x.com/WWEID/status/2061971574954070054"
+          },
+          "reason": "duplicate_or_empty_embed"
+        },
+        {
+          "index": 3,
+          "item": {
+            "source_tag": "div",
+            "type": "embed",
+            "url": "https://x.com/WWEID/status/2061971574954070054"
+          },
+          "reason": "duplicate_or_empty_embed"
+        },
+        {
+          "index": 15,
+          "item": {
+            "text": "Spotlight WWE News Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer WWE News Real Reason WWE Moved Money in the Bank 2026 Date WWE News Digital Evidence Turned Over In Ludwig Kaiser Battery Case WWE NXT Results WWE NXT Results, Highlights and Key Moments for June 2, 2026",
+            "type": "text"
+          },
+          "reason": "footer_start"
+        }
+      ],
       "source": "ringsidenews",
       "source_html_contains_embed_hint": true,
-      "source_title": "Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer",
-      "source_url": "https://www.ringsidenews.com/bayleys-wwe-future-unclear-contract-expiration-date-draws-closer/",
+      "source_title": "WWE Reveals First Wave Of Talent For Next WWE ID Showcase At Nightmare Factory",
+      "source_url": "https://www.ringsidenews.com/wwe-reveals-first-wave-talent-next-wwe-id-showcase-nightmare-factory/",
       "status": "ready_for_alfred",
-      "title_it": "Incerto il futuro di Bayley in WWE con la scadenza del contratto",
+      "title_it": "WWE: Annunciati i primi talenti per il prossimo WWE ID Showcase alla Nightmare Factory",
       "translation_chain_attempted": [
         "gemini-3.1-flash-lite"
       ],
       "translation_missing_units": [],
       "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/bayleys-wwe-future-unclear-contract-expiration-date-draws-closer/\nTitolo feed: Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer\nTitolo pagina: Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer\nDescrizione: Bayley’s future with WWE is facing new questions as her current contract continues moving toward its expiration date. Her current WWE deal is set to\nCategoria suggerita: Business\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Bayley’s future with WWE is facing new questions as her current contract continues moving toward its expiration date.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Her current WWE deal is set to expire at the end of this year. WWE and TKO are said to want to keep Bayley around, particularly because she is viewed as a locker room leader. However, there is currently no word on whether a new agreement has been reached.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"The situation comes after Bayley spoke openly about her future during an interview with Chris Van Vliet in April 2025. At the time, she revealed she had about a year and a half left on her contract and admitted she wasn’t sure what would happen once that deal came to an end.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"After discussing the time remaining on her contract, Bayley acknowledged that she has interests outside of wrestling.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“I have so many other things I want to make it into. I have a year and a half left on this current contract, so we’ll see what happens then. And then what? Man, I don’t know.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Bayley also reflected on everything she has accomplished during her WWE career while admitting there is still more she wants to achieve.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“I think I’ve done everything I really want to do, not everything. There’s still a lot I want to get done, but done so much with WWE and I’ve been here for already 12 years and there’s a huge wave of women coming in that I think are ready to take over, ready to be in those spots.”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"One of the more notable parts of the interview came when Bayley discussed the possibility that her in-ring career may not last forever. At the same time, she made it clear that she feels confident about the future of WWE’s women’s division.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"quote\",\n    \"text\": \"“So when I think about okay, I might be done in a couple of years, who knows? I know that it’s going to be in good hands. So that makes me really happy.”\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"text\",\n    \"text\": \"Bayley has been with WWE since late 2012 and has built one of the most decorated resumes in the history of the women’s division. After signing her current contract in December 2023, she remains one of the company’s most established stars both on television and behind the scenes.\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"With her current deal entering its final stretch, Bayley’s future is once again becoming a story to watch. WWE appears interested in keeping her, but Bayley has already made it clear that she has ambitions beyond wrestling as she considers what comes next in her career.\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"Incerto il futuro di Bayley in WWE con la scadenza del contratto\",\n  \"excerpt_it\": \"Il futuro di Bayley in WWE torna a far discutere, con l'avvicinarsi della data di scadenza del suo attuale contratto.\",\n  \"translations\": {\n    \"b1\": \"Il futuro di Bayley in WWE torna al centro di nuovi interrogativi, man mano che il suo attuale contratto si avvicina alla data di scadenza.\",\n    \"b2\": \"L'attuale accordo con la WWE è previsto in scadenza alla fine di quest'anno. Si dice che la WWE e la TKO vogliano trattenere Bayley, in particolare perché è considerata un leader all'interno dello spogliatoio. Tuttavia, al momento non ci sono notizie riguardanti il raggiungimento di un nuovo accordo.\",\n    \"b3\": \"La situazione emerge dopo che Bayley ha parlato apertamente del suo futuro durante un'intervista con Chris Van Vliet nell'aprile 2025. All'epoca, rivelò di avere ancora circa un anno e mezzo di contratto e ammise di non essere sicura di cosa sarebbe successo una volta terminato l'accordo.\",\n    \"b4\": \"Dopo aver discusso del tempo rimanente sul suo contratto, Bayley ha riconosciuto di avere interessi al di fuori del wrestling.\",\n    \"b5\": \"“Ho così tante altre cose che voglio realizzare. Mi resta un anno e mezzo in questo contratto attuale, quindi vedremo cosa succederà dopo. E poi cosa? Cavolo, non lo so.”\",\n    \"b6\": \"Bayley ha anche riflettuto su tutto ciò che ha ottenuto durante la sua carriera in WWE, pur ammettendo che ci sono ancora molte cose che vorrebbe realizzare.\",\n    \"b7\": \"“Penso di aver fatto tutto ciò che volevo davvero fare, beh, non tutto. C'è ancora molto che voglio compiere, ma ho fatto così tanto con la WWE e sono qui già da 12 anni; c'è un'enorme ondata di atlete che sta arrivando e che penso sia pronta a prendere il comando, pronta a occupare quei posti.”\",\n    \"b8\": \"Una delle parti più rilevanti dell'intervista è arrivata quando Bayley ha discusso della possibilità che la sua carriera sul ring non duri per sempre. Allo stesso tempo, ha chiarito di sentirsi fiduciosa riguardo al futuro della divisione femminile della WWE.\",\n    \"b9\": \"“Quindi, quando penso: ok, potrei aver finito tra un paio d'anni, chi lo sa? So che sarà in buone mani. E questo mi rende davvero felice.”\",\n    \"b10\": \"Bayley è in WWE dalla fine del 2012 e ha costruito uno dei curriculum più ricchi di titoli nella storia della divisione femminile. Dopo aver firmato il suo attuale contratto nel dicembre 2023, rimane una delle stelle più affermate della compagnia, sia in televisione che dietro le quinte.\",\n    \"b11\": \"Con il suo attuale accordo che entra nella fase finale, il futuro di Bayley sta diventando ancora una volta una storia da seguire. La WWE sembra interessata a trattenerla, ma Bayley ha già chiarito di avere ambizioni oltre il wrestling, mentre valuta cosa riserverà il futuro per la sua carriera.\"\n  },\n  \"notes\": []\n}",
+      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/wwe-reveals-first-wave-talent-next-wwe-id-showcase-nightmare-factory/\nTitolo feed: WWE Reveals First Wave Of Talent For Next WWE ID Showcase At Nightmare Factory\nTitolo pagina: WWE Reveals First Wave Of Talent For Next WWE ID Showcase At Nightmare Factory\nDescrizione: WWE has announced the first group of talent set to compete at the next WWE ID Showcase, and the lineup includes several names already making noise through\nCategoria suggerita: NXT\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"WWE has announced the first group of talent set to compete at the next WWE ID Showcase, and the lineup includes several names already making noise through the company’s developmental pipeline.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"The event will take place on June 26 at The Nightmare Factory, the training facility operated by Cody Rhodes and QT Marshall that has become one of the key homes for WWE ID prospects. The announcement was made through social media, confirming the first batch of competitors for the showcase.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“BREAKING…. The first talent roster is set for the next ID Showcase! Already confirmed for The Nightmare Factory presents The ID Showcase on June 26th are:”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"WWE then revealed a roster featuring current WWE ID champions, WWE Evolve talent, and several rising independent wrestlers.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“-WWE Evolve Champion Aaron Rourke -WWE ID Men’s Champion Chazz ‘Starboy’ Hall -WWE ID Women’s Champion Laynie Luck -WWE ID Player/Coach Timothy Thatcher -Cappuccino Jones -The Mog Squad of Max Abrams, CJ Valor, Santi Rivera and Jacari Ball -Sloane Jacobs -Sam Holloway -It’s Gal -Anya Rune -Gianna Capri -Veronica Haven Plus more to be announced including talent from The Nightmare Factory!”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"WWE also teased that match announcements are on the way.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“Match announcements coming this week!”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"The WWE ID program launched in 2024 as part of WWE’s effort to identify and develop promising independent wrestling talent before bringing them into the company full-time. Since its debut, the initiative has given select wrestlers access to training, coaching, and opportunities to perform under the WWE ID banner while continuing to build their careers.\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"text\",\n    \"text\": \"The Nightmare Factory has played a major role in that process from the beginning, serving as one of the primary training facilities for WWE ID recruits and helping prepare future stars for bigger opportunities.\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"With WWE continuing to invest heavily in finding the next generation of talent, the June 26 showcase could offer a glimpse at several wrestlers who may eventually find themselves on NXT, WWE Evolve, or even the main roster.\"\n  },\n  {\n    \"id\": \"b12\",\n    \"type\": \"text\",\n    \"text\": \"Derek Holloway is a writer at Ringside News specializing in professional wrestling news, rumors, and results. He focuses on delivering reliable coverage across WWE, AEW, and major wrestling promotions.\"\n  }\n]\n",
+      "translation_raw_response_preview": "{\n  \"title_it\": \"WWE: Annunciati i primi talenti per il prossimo WWE ID Showcase alla Nightmare Factory\",\n  \"excerpt_it\": \"La WWE ha svelato il primo gruppo di atleti che prenderanno parte al prossimo showcase del programma WWE ID.\",\n  \"translations\": {\n    \"b2\": \"La WWE ha annunciato il primo gruppo di talenti pronti a competere nel prossimo WWE ID Showcase; la card include diversi nomi che stanno già facendo parlare di sé all'interno del percorso di sviluppo della compagnia.\",\n    \"b3\": \"L'evento si terrà il 26 giugno presso la Nightmare Factory, il centro di allenamento gestito da Cody Rhodes e QT Marshall che è diventato uno dei punti di riferimento principali per gli atleti del programma WWE ID. L'annuncio è stato dato tramite i social media, confermando la prima lista di partecipanti allo showcase.\",\n    \"b4\": \"“BREAKING…. Il primo roster di talenti è pronto per il prossimo ID Showcase! Sono già confermati per l'ID Showcase presentato dalla Nightmare Factory il 26 giugno:”\",\n    \"b5\": \"La WWE ha poi svelato un roster che include gli attuali campioni del programma WWE ID, talenti della WWE Evolve e diversi wrestler emergenti del circuito indipendente.\",\n    \"b6\": \"“-WWE Evolve Champion Aaron Rourke -WWE ID Men’s Champion Chazz ‘Starboy’ Hall -WWE ID Women’s Champion Laynie Luck -WWE ID Player/Coach Timothy Thatcher -Cappuccino Jones -The Mog Squad composta da Max Abrams, CJ Valor, Santi Rivera e Jacari Ball -Sloane Jacobs -Sam Holloway -It’s Gal -Anya Rune -Gianna Capri -Veronica Haven E altri ancora saranno annunciati, inclusi i talenti della Nightmare Factory!”\",\n    \"b7\": \"La WWE ha inoltre anticipato che gli annunci relativi agli incontri sono in arrivo.\",\n    \"b8\": \"“Annunci sui match in arrivo questa settimana!”\",\n    \"b9\": \"Il programma WWE ID è stato lanciato nel 2024 come parte dell'iniziativa della WWE per identificare e sviluppare talenti promettenti del wrestling indipendente prima di integrarli stabilmente in compagnia. Dal suo debutto, l'iniziativa ha offerto ad alcuni wrestler selezionati l'accesso ad allenamenti, coaching e opportunità di esibirsi sotto il marchio WWE ID, permettendo loro di continuare a costruire la propria carriera.\",\n    \"b10\": \"La Nightmare Factory ha svolto un ruolo fondamentale in questo processo sin dall'inizio, fungendo da uno dei principali centri di allenamento per le reclute WWE ID e contribuendo a preparare le future stelle a opportunità più importanti.\",\n    \"b11\": \"Con la WWE che continua a investire massicciamente nella ricerca della prossima generazione di talenti, lo showcase del 26 giugno potrebbe offrire uno sguardo su diversi wrestler che, in futuro, potrebbero approdare a NXT, WWE Evolve o addirittura nel main roster.\",\n    \"b12\": \"Derek Holloway è un autore di Ringside News specializzato in notizie, rumor e risultati di wrestling professionistico. Si occupa di fornire una copertura affidabile riguardante WWE, AEW e le principali federazioni di wrestling.\"\n  },\n  \"notes\": []\n}",
       "translation_unit_count": 11,
-      "translation_used": true
-    },
-    {
-      "bob_notes": [],
-      "body_html": "<p>Cody Rhodes ha messo in chiaro che il processo creativo di Triple H in WWE funziona perfettamente per lui, nonostante molti ritengano che il suo stile di booking non sia affatto valido.</p>\n<p>Intervenuto nel suo podcast &quot;What Do You Wanna Talk About?&quot;, Rhodes ha difeso l&#x27;approccio di Triple H, spiegando perché apprezza lavorare all&#x27;interno del suo sistema creativo. Cody ha affermato che Triple H opera in modo diverso rispetto a Vince McMahon e ad altri booker, poiché lascia ai talenti lo spazio necessario per proporre idee e collaborare. Rhodes ha spiegato che, come performer, desidera avere il controllo sulla propria storia e sul proprio personaggio, pur continuando a fidarsi del sistema WWE per rifinire e produrre il tutto.</p>\n<blockquote>“Il più delle volte questa è la mia storia. È il mio personaggio. Voglio renderlo il migliore possibile e poi lasciare che voi ragazzi lo mettiate a punto, lo filtriate e lo produciate per me. Una delle cose che amo della WWE è prendere persone di talento e valorizzarle tramite la produzione. Le stai producendo e incanalando, e al momento Hunter – ovvero Triple H – ha un metodo diverso di gestione rispetto a Vince o a chiunque altro abbia mai ricoperto il ruolo di booker.”</blockquote>\n<p>Rhodes ha aggiunto che lo stile di Triple H è particolarmente stimolante per gli atleti, poiché permette ai performer di sperimentare idee all&#x27;interno della struttura fornita dalla WWE. Ha poi aggiunto che il processo diventa collaborativo: i talenti portano sul tavolo le proprie idee e Triple H le aiuta a prendere forma all&#x27;interno della sua &quot;sandbox&quot; creativa.</p>\n<blockquote>“Ha uno stile diverso che è davvero divertente se sei un suo atleta, perché ti dice: &#x27;Ehi, voglio che tu sia il mio uomo di punta. Voglio che tu sia... ma che ne pensi di questo? Provaci&#x27;. È stimolante provare a usare la sua sandbox, collaborare e far coincidere quell&#x27;idea.”</blockquote>\n<p>I commenti di Cody arrivano dopo che Vince Russo ha duramente criticato le recenti dichiarazioni di Triple H sulla gestione creativa della WWE, accusandolo di non essere adatto al suo ruolo. Russo ha sostenuto che la spiegazione di Triple H su un presunto &quot;flusso e riflusso&quot; sembri solo una scusa, additandolo come la causa principale per cui non guarda più la WWE.</p>\n<blockquote>“Amico, lui... lui ha fatto questo. Questo tizio non sa cosa sta facendo. Non merita quel posto. Non si può mai avere la mentalità del tipo: &#x27;Oh, questo potrebbe essere uno show passabile. Sarà mediocre, non sarà un grande spettacolo&#x27;. Amico, questo tizio non dovrebbe essere in quel ruolo. Gente, smettiamola. Smettiamola. È in quel ruolo solo perché ha sposato Stephanie. Punto, fine della storia, amico. Non ha alcun titolo per occupare quella posizione. Non ha avuto successo in quel ruolo. È stato un fallimento. Il prodotto fa schifo perché lui è in quella posizione, ed è l&#x27;unico motivo per cui si trova lì.”</blockquote>\n<p>Rhodes vede le cose in modo decisamente diverso. Mentre critici come Russo sostengono che la visione creativa di Triple H stia danneggiando la WWE, Cody l&#x27;ha descritta come un sistema che offre ai top performer lo spazio per contribuire, mantenendo comunque un alto livello di produzione per un pubblico di massa.</p>\n<p>La difesa di Cody è chiaramente rilevante, trattandosi di una delle star di punta della compagnia che ha lavorato sia sotto l&#x27;attuale assetto creativo della WWE, sia in altri sistemi di wrestling. Per lui, la &quot;sandbox&quot; di Triple H offre ai talenti la libertà di esprimersi, garantendo al contempo un prodotto curato e professionale.</p>",
-      "category_hint": "WWE",
-      "clean_element_count": 9,
-      "created_at": "2026-06-03T10:49:06.209380+00:00",
-      "diagnostic_stage": "ready_for_alfred",
-      "element_counts": {
-        "embed": 0,
-        "heading": 0,
-        "image": 0,
-        "quote": 3,
-        "table": 0,
-        "text": 6
-      },
-      "elements": [
-        {
-          "block_id": "b1",
-          "text": "Cody Rhodes is making it clear that Triple H’s WWE creative process works for him, even if many people don’t think his booking style is good at all.",
-          "type": "text"
-        },
-        {
-          "block_id": "b2",
-          "text": "While speaking on his What Do You Wanna Talk About? podcast, Rhodes defended Triple H’s booking approach and explained why he enjoys working under his creative system. Cody said Triple H operates differently from Vince McMahon and other bookers because he gives talent room to bring ideas forward and collaborate. Rhodes explained that, as a performer, he wants ownership over his story and character while still trusting WWE’s system to polish and produce it.",
-          "type": "text"
-        },
-        {
-          "block_id": "b3",
-          "source_tag": "blockquote",
-          "text": "“Most of the time this is my story. It’s my character. I want to get it as good as I can and then you guys fix it up, filter it, produce it for me. One of the things I love about WWE is taking talented people, but then producing them. You’re producing them and funneling and right now Hunter has a different style funnel — Triple H that being — than Vince had, than any other booker’s.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b4",
-          "text": "Rhodes said Triple H’s style is especially fun for talent because it allows performers to try ideas inside the structure WWE provides. He added that the process becomes collaborative, with talent bringing ideas and Triple H helping shape them inside his creative “sandbox.”",
-          "type": "text"
-        },
-        {
-          "block_id": "b5",
-          "source_tag": "blockquote",
-          "text": "“He has a different style that’s really fun if you’re a player for him to go, ‘Hey, I want to be your main guy. I want to be — but this is my — what about this? Try it.’ And to try his sandbox, to try and collab and match that idea.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b6",
-          "text": "Cody’s comments come after Vince Russo ripped Triple H’s comments about WWE creative and accused him of being unfit for his role. Russo claimed Triple H’s “ebb and flow” explanation sounded like an excuse and blamed him for why he no longer watches WWE .",
-          "type": "text"
-        },
-        {
-          "block_id": "b7",
-          "source_tag": "blockquote",
-          "text": "“Bro, he—he did this. This guy doesn’t know what he’s doing. He does not belong in that spot. You never have the mindset, ‘Oh, this could be an okay show. This is going to be mediocre—it’s not going to be a great show.’ Bro, this guy should not be in that spot. The only—guys, let’s stop. Let’s stop. The guy’s in this spot because he married Stephanie. Period, end of story, bro. He’s got no business in this spot. He hasn’t been successful in this spot. He’s been a failure in this spot. The product sucks because he’s in this spot, and that’s the only reason he’s in this spot.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b8",
-          "text": "Rhodes clearly sees things differently. While critics like Russo argue that Triple H’s creative vision is hurting WWE, Cody described it as a system that gives top performers room to contribute while still being produced for a larger audience.",
-          "type": "text"
-        },
-        {
-          "block_id": "b9",
-          "text": "Cody’s defense is obviously important because he is one of the company’s top stars and has worked under both WWE’s current creative setup and other wrestling systems. For him, Triple H’s “sandbox” gives talent room to play while still keeping the product produced and polished.",
-          "type": "text"
-        }
-      ],
-      "excerpt_it": "Cody Rhodes ha spiegato perché apprezza il processo creativo di Triple H, nonostante le recenti critiche ricevute dalla dirigenza WWE.",
-      "extraction_diagnostics": {
-        "candidate_node_count": 80,
-        "clean_element_count": 9,
-        "dom_noise_reduction_enabled": false,
-        "embed_count": 0,
-        "global_embed_recovery_enabled": false,
-        "quote_count": 3,
-        "raw_element_count": 9,
-        "removed_by_node_count": 0,
-        "removed_by_sanitize_count": 0,
-        "root_name": "article",
-        "root_text_chars": 3726,
-        "stage": "complete",
-        "table_count": 0
-      },
-      "fetched_html_chars": 494588,
-      "menzo_score": 79,
-      "meta": {
-        "description": "Cody Rhodes is making it clear that Triple H’s WWE creative process works for him, even if many people don't think his booking style is good at all. While",
-        "featured_image": "https://www.ringsidenews.com/wp-content/uploads/2026/06/cody-rhodes-defends-triple-hs-wwe-creative-style-after-constant-criticism-41.jpg",
-        "source_title": "Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism"
-      },
-      "raw_element_count": 9,
-      "raw_elements_preview": [
-        {
-          "block_id": "b1",
-          "text": "Cody Rhodes is making it clear that Triple H’s WWE creative process works for him, even if many people don’t think his booking style is good at all.",
-          "type": "text"
-        },
-        {
-          "block_id": "b2",
-          "text": "While speaking on his What Do You Wanna Talk About? podcast, Rhodes defended Triple H’s booking approach and explained why he enjoys working under his creative system. Cody said Triple H operates differently from Vince McMahon and other bookers because he gives talent room to bring ideas forward and collaborate. Rhodes explained that, as a performer, he wants ownership over his story and character while still trusting WWE’s system to polish and produce it.",
-          "type": "text"
-        },
-        {
-          "block_id": "b3",
-          "source_tag": "blockquote",
-          "text": "“Most of the time this is my story. It’s my character. I want to get it as good as I can and then you guys fix it up, filter it, produce it for me. One of the things I love about WWE is taking talented people, but then producing them. You’re producing them and funneling and right now Hunter has a different style funnel — Triple H that being — than Vince had, than any other booker’s.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b4",
-          "text": "Rhodes said Triple H’s style is especially fun for talent because it allows performers to try ideas inside the structure WWE provides. He added that the process becomes collaborative, with talent bringing ideas and Triple H helping shape them inside his creative “sandbox.”",
-          "type": "text"
-        },
-        {
-          "block_id": "b5",
-          "source_tag": "blockquote",
-          "text": "“He has a different style that’s really fun if you’re a player for him to go, ‘Hey, I want to be your main guy. I want to be — but this is my — what about this? Try it.’ And to try his sandbox, to try and collab and match that idea.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b6",
-          "text": "Cody’s comments come after Vince Russo ripped Triple H’s comments about WWE creative and accused him of being unfit for his role. Russo claimed Triple H’s “ebb and flow” explanation sounded like an excuse and blamed him for why he no longer watches WWE .",
-          "type": "text"
-        },
-        {
-          "block_id": "b7",
-          "source_tag": "blockquote",
-          "text": "“Bro, he—he did this. This guy doesn’t know what he’s doing. He does not belong in that spot. You never have the mindset, ‘Oh, this could be an okay show. This is going to be mediocre—it’s not going to be a great show.’ Bro, this guy should not be in that spot. The only—guys, let’s stop. Let’s stop. The guy’s in this spot because he married Stephanie. Period, end of story, bro. He’s got no business in this spot. He hasn’t been successful in this spot. He’s been a failure in this spot. The product sucks because he’s in this spot, and that’s the only reason he’s in this spot.”",
-          "type": "quote"
-        },
-        {
-          "block_id": "b8",
-          "text": "Rhodes clearly sees things differently. While critics like Russo argue that Triple H’s creative vision is hurting WWE, Cody described it as a system that gives top performers room to contribute while still being produced for a larger audience.",
-          "type": "text"
-        },
-        {
-          "block_id": "b9",
-          "text": "Cody’s defense is obviously important because he is one of the company’s top stars and has worked under both WWE’s current creative setup and other wrestling systems. For him, Triple H’s “sandbox” gives talent room to play while still keeping the product produced and polished.",
-          "type": "text"
-        }
-      ],
-      "removed_before_gemini": 0,
-      "removed_elements_debug": [],
-      "source": "ringsidenews",
-      "source_html_contains_embed_hint": true,
-      "source_title": "Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism",
-      "source_url": "https://www.ringsidenews.com/cody-rhodes-defends-triple-hs-wwe-creative-style-constant-criticism/",
-      "status": "ready_for_alfred",
-      "title_it": "Cody Rhodes difende lo stile creativo di Triple H in WWE",
-      "translation_chain_attempted": [
-        "gemini-3.1-flash-lite"
-      ],
-      "translation_missing_units": [],
-      "translation_model": "gemini-3.1-flash-lite",
-      "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/cody-rhodes-defends-triple-hs-wwe-creative-style-constant-criticism/\nTitolo feed: Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism\nTitolo pagina: Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism\nDescrizione: Cody Rhodes is making it clear that Triple H’s WWE creative process works for him, even if many people don't think his booking style is good at all. While\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Cody Rhodes is making it clear that Triple H’s WWE creative process works for him, even if many people don’t think his booking style is good at all.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"While speaking on his What Do You Wanna Talk About? podcast, Rhodes defended Triple H’s booking approach and explained why he enjoys working under his creative system. Cody said Triple H operates differently from Vince McMahon and other bookers because he gives talent room to bring ideas forward and collaborate. Rhodes explained that, as a performer, he wants ownership over his story and character while still trusting WWE’s system to polish and produce it.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"“Most of the time this is my story. It’s my character. I want to get it as good as I can and then you guys fix it up, filter it, produce it for me. One of the things I love about WWE is taking talented people, but then producing them. You’re producing them and funneling and right now Hunter has a different style funnel — Triple H that being — than Vince had, than any other booker’s.”\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Rhodes said Triple H’s style is especially fun for talent because it allows performers to try ideas inside the structure WWE provides. He added that the process becomes collaborative, with talent bringing ideas and Triple H helping shape them inside his creative “sandbox.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“He has a different style that’s really fun if you’re a player for him to go, ‘Hey, I want to be your main guy. I want to be — but this is my — what about this? Try it.’ And to try his sandbox, to try and collab and match that idea.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Cody’s comments come after Vince Russo ripped Triple H’s comments about WWE creative and accused him of being unfit for his role. Russo claimed Triple H’s “ebb and flow” explanation sounded like an excuse and blamed him for why he no longer watches WWE .\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“Bro, he—he did this. This guy doesn’t know what he’s doing. He does not belong in that spot. You never have the mindset, ‘Oh, this could be an okay show. This is going to be mediocre—it’s not going to be a great show.’ Bro, this guy should not be in that spot. The only—guys, let’s stop. Let’s stop. The guy’s in this spot because he married Stephanie. Period, end of story, bro. He’s got no business in this spot. He hasn’t been successful in this spot. He’s been a failure in this spot. The product sucks because he’s in this spot, and that’s the only reason he’s in this spot.”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"Rhodes clearly sees things differently. While critics like Russo argue that Triple H’s creative vision is hurting WWE, Cody described it as a system that gives top performers room to contribute while still being produced for a larger audience.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"Cody’s defense is obviously important because he is one of the company’s top stars and has worked under both WWE’s current creative setup and other wrestling systems. For him, Triple H’s “sandbox” gives talent room to play while still keeping the product produced and polished.\"\n  }\n]\n",
-      "translation_raw_response_preview": "{\n  \"title_it\": \"Cody Rhodes difende lo stile creativo di Triple H in WWE\",\n  \"excerpt_it\": \"Cody Rhodes ha spiegato perché apprezza il processo creativo di Triple H, nonostante le recenti critiche ricevute dalla dirigenza WWE.\",\n  \"translations\": {\n    \"b1\": \"Cody Rhodes ha messo in chiaro che il processo creativo di Triple H in WWE funziona perfettamente per lui, nonostante molti ritengano che il suo stile di booking non sia affatto valido.\",\n    \"b2\": \"Intervenuto nel suo podcast \\\"What Do You Wanna Talk About?\\\", Rhodes ha difeso l'approccio di Triple H, spiegando perché apprezza lavorare all'interno del suo sistema creativo. Cody ha affermato che Triple H opera in modo diverso rispetto a Vince McMahon e ad altri booker, poiché lascia ai talenti lo spazio necessario per proporre idee e collaborare. Rhodes ha spiegato che, come performer, desidera avere il controllo sulla propria storia e sul proprio personaggio, pur continuando a fidarsi del sistema WWE per rifinire e produrre il tutto.\",\n    \"b3\": \"“Il più delle volte questa è la mia storia. È il mio personaggio. Voglio renderlo il migliore possibile e poi lasciare che voi ragazzi lo mettiate a punto, lo filtriate e lo produciate per me. Una delle cose che amo della WWE è prendere persone di talento e valorizzarle tramite la produzione. Le stai producendo e incanalando, e al momento Hunter – ovvero Triple H – ha un metodo diverso di gestione rispetto a Vince o a chiunque altro abbia mai ricoperto il ruolo di booker.”\",\n    \"b4\": \"Rhodes ha aggiunto che lo stile di Triple H è particolarmente stimolante per gli atleti, poiché permette ai performer di sperimentare idee all'interno della struttura fornita dalla WWE. Ha poi aggiunto che il processo diventa collaborativo: i talenti portano sul tavolo le proprie idee e Triple H le aiuta a prendere forma all'interno della sua \\\"sandbox\\\" creativa.\",\n    \"b5\": \"“Ha uno stile diverso che è davvero divertente se sei un suo atleta, perché ti dice: 'Ehi, voglio che tu sia il mio uomo di punta. Voglio che tu sia... ma che ne pensi di questo? Provaci'. È stimolante provare a usare la sua sandbox, collaborare e far coincidere quell'idea.”\",\n    \"b6\": \"I commenti di Cody arrivano dopo che Vince Russo ha duramente criticato le recenti dichiarazioni di Triple H sulla gestione creativa della WWE, accusandolo di non essere adatto al suo ruolo. Russo ha sostenuto che la spiegazione di Triple H su un presunto \\\"flusso e riflusso\\\" sembri solo una scusa, additandolo come la causa principale per cui non guarda più la WWE.\",\n    \"b7\": \"“Amico, lui... lui ha fatto questo. Questo tizio non sa cosa sta facendo. Non merita quel posto. Non si può mai avere la mentalità del tipo: 'Oh, questo potrebbe essere uno show passabile. Sarà mediocre, non sarà un grande spettacolo'. Amico, questo tizio non dovrebbe essere in quel ruolo. Gente, smettiamola. Smettiamola. È in quel ruolo solo perché ha sposato Stephanie. Punto, fine della storia, amico. Non ha alcun titolo per occupare quella posizione. Non ha avuto successo in quel ruolo. È stato un fallimento. Il prodotto fa schifo perché lui è in quella posizione, ed è l'unico motivo per cui si trova lì.”\",\n    \"b8\": \"Rhodes vede le cose in modo decisamente diverso. Mentre critici come Russo sostengono che la visione creativa di Triple H stia danneggiando la WWE, Cody l'ha descritta come un sistema che offre ai top performer lo spazio per contribuire, mantenendo comunque un alto livello di produzione per un pubblico di massa.\",\n    \"b9\": \"La difesa di Cody è chiaramente rilevante, trattandosi di una delle star di punta della compagnia che ha lavorato sia sotto l'attuale assetto creativo della WWE, sia in altri sistemi di wrestling. Per lui, la \\\"sandbox\\\" di Triple H offre ai talenti la libertà di esprimersi, garantendo al contempo un prodotto curato e professionale.\"\n  },\n  \"notes\": []\n}",
-      "translation_unit_count": 9,
       "translation_used": true
     }
   ],
-  "generated_at": "2026-06-03T10:49:10.627427+00:00",
+  "generated_at": "2026-06-03T12:19:54.973728+00:00",
   "handoff": {
     "errors": 0,
     "extraction_empty": 0,
-    "ready_for_alfred": 2,
+    "ready_for_alfred": 1,
     "translation_pending": 0
   },
   "input": {
     "menzo_version": "v93_20_selective_softpool",
-    "selected_count": 2
+    "selected_count": 1
   },
   "mode": "block_translation_prudent_embed_cleanup",
   "policy": {
@@ -384,7 +380,7 @@
     "unwrap_fake_data_blockquotes": true
   },
   "postprocess": {
-    "bob_v93_16_changes": 0
+    "bob_v93_16_changes": 1
   },
   "version": "v93_16_bob_embed_position_quote_cleanup"
 }

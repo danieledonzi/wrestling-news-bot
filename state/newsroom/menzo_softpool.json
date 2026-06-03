@@ -1,13 +1,13 @@
 {
   "items": [
     {
-      "age_hours": 13.828723065833332,
+      "age_hours": 15.342379451666666,
       "agent": "Menzo",
-      "ai_editorial_reason": "Dettaglio tecnico interessante sul coinvolgimento WWE in produzioni esterne (AAA).",
-      "ai_id": "c3",
+      "ai_editorial_reason": "Curiosità di backstage legata a una collaborazione inter-promozionale. Interesse moderato per gli appassionati di produzione e dinamiche internazionali.",
+      "ai_id": "c2",
       "ai_priority": 72,
       "ai_priority_label": "medium",
-      "article_type": "storyline_development",
+      "article_type": "soft_news",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [],
@@ -19,20 +19,19 @@
         "possible_noise": [
           "source_social_bar",
           "author_bio",
-          "cta",
-          "share_links"
+          "cta"
         ],
-        "source_specific_notes": "Verificare bene il nome del produttore citato nella fonte."
+        "source_specific_notes": "Mantieni il focus sul coinvolgimento di figure WWE in eventi di altre federazioni (AAA)."
       },
       "category_hint": "World",
       "decision": "pending",
       "deterministic_score": 42,
-      "evaluated_at": "2026-06-03T10:49:00.403038+00:00",
+      "evaluated_at": "2026-06-03T12:19:49.566027+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "from_softpool": true,
-      "last_seen_at": "2026-06-03T10:49:02.606236+00:00",
+      "last_seen_at": "2026-06-03T12:19:51.806330+00:00",
       "menzo_ai_review": {
-        "article_type": "storyline_development",
+        "article_type": "soft_news",
         "bob_brief": {
           "expected_embeds": [],
           "expected_quotes": true,
@@ -43,28 +42,27 @@
           "possible_noise": [
             "source_social_bar",
             "author_bio",
-            "cta",
-            "share_links"
+            "cta"
           ],
-          "source_specific_notes": "Verificare bene il nome del produttore citato nella fonte."
+          "source_specific_notes": "Mantieni il focus sul coinvolgimento di figure WWE in eventi di altre federazioni (AAA)."
         },
         "category_hint": "World",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Dettaglio tecnico interessante sul coinvolgimento WWE in produzioni esterne (AAA).",
-        "event_key": "aaa_mask_match_producer",
-        "id": "c3",
-        "priority": 5,
+        "editorial_reason": "Curiosità di backstage legata a una collaborazione inter-promozionale. Interesse moderato per gli appassionati di produzione e dinamiche internazionali.",
+        "event_key": "producer_mask_match_aaa",
+        "id": "c2",
+        "priority": 4,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed",
       "priority": "soft",
       "published": "Tue, 02 Jun 2026 20:59:17 +0000",
-      "reason": "ai:Dettaglio tecnico interessante sul coinvolgimento WWE in produzioni esterne (AAA).; deterministic:entity:chad gable,recency:fresh_36h",
+      "reason": "ai:Curiosità di backstage legata a una collaborazione inter-promozionale. Interesse moderato per gli appassionati di produzione e dinamiche internazionali.; deterministic:entity:chad gable,recency:fresh_36h",
       "score": 56,
       "softpool_added_at": "2026-06-03T07:21:42.347226+00:00",
       "softpool_reason": "medium_candidate_above_quality_threshold",
-      "softpool_ttl_hours": 36,
+      "softpool_ttl_hours": 24,
       "source": "ringsidenews",
       "summary": "<p><img alt=\"Producer Behind El Grande Americano Mask vs. Mask Match Revealed\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/producer-behind-el-grande-americano-mask-vs-mask-match-revealed-48.jpg?x36463\" width=\"800\" /></p>Chad Gable and Ludwig Kaiser’s bloody Mask vs. Mask match at AAA Noche de Los Grandes had another WWE name involved behind the scenes According to Mexican journalist Ernesto Ocampo, Pete Dunne was the producer for the match between Ludwig Kaiser’s El Grande Americano and Chad Gable’s Original El Grande Americano. Ocampo noted that Dunne ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed/\" title=\"Producer Behind El Grande Americano Mask vs. Mask Match Revealed\">Read more</a>",
       "title": "Producer Behind El Grande Americano Mask vs. Mask Match Revealed",
@@ -74,6 +72,6 @@
   "min_score": 55,
   "softnews_ttl_hours": 24,
   "ttl_hours": 36,
-  "updated_at": "2026-06-03T10:49:02.606236+00:00",
+  "updated_at": "2026-06-03T12:19:51.806330+00:00",
   "version": "v93_20_selective_softpool"
 }

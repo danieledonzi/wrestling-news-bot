@@ -1,8 +1,7 @@
 {
   "agent": "Menzo",
   "allowed_urls_for_v92": [
-    "https://www.ringsidenews.com/bayleys-wwe-future-unclear-contract-expiration-date-draws-closer/",
-    "https://www.ringsidenews.com/cody-rhodes-defends-triple-hs-wwe-creative-style-constant-criticism/"
+    "https://www.ringsidenews.com/wwe-reveals-first-wave-talent-next-wwe-id-showcase-nightmare-factory/"
   ],
   "daily_policy": {
     "max_pending_this_run": 12,
@@ -11,14 +10,14 @@
     "target_max": 30,
     "target_min": 20
   },
-  "generated_at": "2026-06-03T10:49:02.604710+00:00",
+  "generated_at": "2026-06-03T12:19:51.805023+00:00",
   "handoff": {
     "pending": 1,
     "skipped": 0,
-    "to_bob_or_v92": 2
+    "to_bob_or_v92": 1
   },
   "input": {
-    "candidate_count": 3,
+    "candidate_count": 2,
     "massy_version": "v93_21_massy_manual_report_coverage"
   },
   "menzo_ai": {
@@ -28,11 +27,11 @@
     "enabled": true,
     "error": "",
     "model": "gemini-3.1-flash-lite",
-    "prompt_count": 3,
-    "raw_preview": "{\n  \"reviews\": [\n    {\n      \"id\": \"c1\",\n      \"decision\": \"selected\",\n      \"priority\": 8,\n      \"category_hint\": \"Business\",\n      \"article_type\": \"business_legal\",\n      \"event_key\": \"bayley_contract_status\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia rilevante sul mercato wrestler; impatto diretto sulla divisione femminile WWE.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Ringsidenews tende ad essere verbosa, estrai solo il dato contrattuale saliente.\"\n      }\n    },\n    {\n      \"id\": \"c2\",\n      \"decision\": \"skip\",\n      \"priority\": 2,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"cody_tripleh_creative\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Dichiarazione di convenienza/opinione, non aggiunge sostanza alla narrazione di campo.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"Archiviare come bassa priorità; evitare clickbait.\"\n      }\n    },\n    {\n      \"id\": \"c3\",\n      \"decision\": \"selected\",\n      \"priority\": 5,\n      \"category_hint\": \"World\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"aaa_mask_match_producer\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Dettaglio tecnico interessante sul coinvolgimento WWE in produzioni esterne (AAA).\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Verificare bene il nome del produttore citato nella fonte.\"\n      }\n    }\n  ]\n}",
+    "prompt_count": 2,
+    "raw_preview": "{\n  \"reviews\": [\n    {\n      \"id\": \"c1\",\n      \"decision\": \"selected\",\n      \"priority\": 8,\n      \"category_hint\": \"NXT\",\n      \"article_type\": \"hard_news\",\n      \"event_key\": \"wwe_id_nightmare_factory_showcase\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia importante sul nuovo progetto WWE ID che coinvolge il panorama indipendente, rilevante per il pubblico che segue l'evoluzione del prodotto.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Ringsidenews è spesso prolisso, sintetizza la lista dei nomi e contestualizza l'importanza del WWE ID per i lettori.\"\n      }\n    },\n    {\n      \"id\": \"c2\",\n      \"decision\": \"selected\",\n      \"priority\": 4,\n      \"category_hint\": \"World\",\n      \"article_type\": \"soft_news\",\n      \"event_key\": \"producer_mask_match_aaa\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Curiosità di backstage legata a una collaborazione inter-promozionale. Interesse moderato per gli appassionati di produzione e dinamiche internazionali.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Mantieni il focus sul coinvolgimento di figure WWE in eventi di altre federazioni (AAA).\"\n      }\n    }\n  ]\n}",
     "reviews": [
       {
-        "article_type": "business_legal",
+        "article_type": "hard_news",
         "bob_brief": {
           "expected_embeds": [],
           "expected_quotes": true,
@@ -43,46 +42,21 @@
           "possible_noise": [
             "source_social_bar",
             "author_bio",
-            "cta",
-            "share_links"
+            "cta"
           ],
-          "source_specific_notes": "Ringsidenews tende ad essere verbosa, estrai solo il dato contrattuale saliente."
+          "source_specific_notes": "Ringsidenews è spesso prolisso, sintetizza la lista dei nomi e contestualizza l'importanza del WWE ID per i lettori."
         },
-        "category_hint": "Business",
+        "category_hint": "NXT",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Notizia rilevante sul mercato wrestler; impatto diretto sulla divisione femminile WWE.",
-        "event_key": "bayley_contract_status",
+        "editorial_reason": "Notizia importante sul nuovo progetto WWE ID che coinvolge il panorama indipendente, rilevante per il pubblico che segue l'evoluzione del prodotto.",
+        "event_key": "wwe_id_nightmare_factory_showcase",
         "id": "c1",
         "priority": 8,
         "priority_label": "medium"
       },
       {
-        "article_type": "low_value",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Archiviare come bassa priorità; evitare clickbait."
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Dichiarazione di convenienza/opinione, non aggiunge sostanza alla narrazione di campo.",
-        "event_key": "cody_tripleh_creative",
-        "id": "c2",
-        "priority": 2,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "storyline_development",
+        "article_type": "soft_news",
         "bob_brief": {
           "expected_embeds": [],
           "expected_quotes": true,
@@ -93,18 +67,17 @@
           "possible_noise": [
             "source_social_bar",
             "author_bio",
-            "cta",
-            "share_links"
+            "cta"
           ],
-          "source_specific_notes": "Verificare bene il nome del produttore citato nella fonte."
+          "source_specific_notes": "Mantieni il focus sul coinvolgimento di figure WWE in eventi di altre federazioni (AAA)."
         },
         "category_hint": "World",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Dettaglio tecnico interessante sul coinvolgimento WWE in produzioni esterne (AAA).",
-        "event_key": "aaa_mask_match_producer",
-        "id": "c3",
-        "priority": 5,
+        "editorial_reason": "Curiosità di backstage legata a una collaborazione inter-promozionale. Interesse moderato per gli appassionati di produzione e dinamiche internazionali.",
+        "event_key": "producer_mask_match_aaa",
+        "id": "c2",
+        "priority": 4,
         "priority_label": "medium"
       }
     ],
@@ -113,13 +86,13 @@
   "mode": "selective_softpool",
   "pending": [
     {
-      "age_hours": 13.828723065833332,
+      "age_hours": 15.342379451666666,
       "agent": "Menzo",
-      "ai_editorial_reason": "Dettaglio tecnico interessante sul coinvolgimento WWE in produzioni esterne (AAA).",
-      "ai_id": "c3",
+      "ai_editorial_reason": "Curiosità di backstage legata a una collaborazione inter-promozionale. Interesse moderato per gli appassionati di produzione e dinamiche internazionali.",
+      "ai_id": "c2",
       "ai_priority": 72,
       "ai_priority_label": "medium",
-      "article_type": "storyline_development",
+      "article_type": "soft_news",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [],
@@ -131,20 +104,19 @@
         "possible_noise": [
           "source_social_bar",
           "author_bio",
-          "cta",
-          "share_links"
+          "cta"
         ],
-        "source_specific_notes": "Verificare bene il nome del produttore citato nella fonte."
+        "source_specific_notes": "Mantieni il focus sul coinvolgimento di figure WWE in eventi di altre federazioni (AAA)."
       },
       "category_hint": "World",
       "decision": "pending",
       "deterministic_score": 42,
-      "evaluated_at": "2026-06-03T10:49:00.403038+00:00",
+      "evaluated_at": "2026-06-03T12:19:49.566027+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "from_softpool": true,
-      "last_seen_at": "2026-06-03T10:01:48.016147+00:00",
+      "last_seen_at": "2026-06-03T10:49:02.606236+00:00",
       "menzo_ai_review": {
-        "article_type": "storyline_development",
+        "article_type": "soft_news",
         "bob_brief": {
           "expected_embeds": [],
           "expected_quotes": true,
@@ -155,24 +127,23 @@
           "possible_noise": [
             "source_social_bar",
             "author_bio",
-            "cta",
-            "share_links"
+            "cta"
           ],
-          "source_specific_notes": "Verificare bene il nome del produttore citato nella fonte."
+          "source_specific_notes": "Mantieni il focus sul coinvolgimento di figure WWE in eventi di altre federazioni (AAA)."
         },
         "category_hint": "World",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Dettaglio tecnico interessante sul coinvolgimento WWE in produzioni esterne (AAA).",
-        "event_key": "aaa_mask_match_producer",
-        "id": "c3",
-        "priority": 5,
+        "editorial_reason": "Curiosità di backstage legata a una collaborazione inter-promozionale. Interesse moderato per gli appassionati di produzione e dinamiche internazionali.",
+        "event_key": "producer_mask_match_aaa",
+        "id": "c2",
+        "priority": 4,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed",
       "priority": "soft",
       "published": "Tue, 02 Jun 2026 20:59:17 +0000",
-      "reason": "ai:Dettaglio tecnico interessante sul coinvolgimento WWE in produzioni esterne (AAA).; deterministic:entity:chad gable,recency:fresh_36h",
+      "reason": "ai:Curiosità di backstage legata a una collaborazione inter-promozionale. Interesse moderato per gli appassionati di produzione e dinamiche internazionali.; deterministic:entity:chad gable,recency:fresh_36h",
       "score": 56,
       "softpool_added_at": "2026-06-03T07:21:42.347226+00:00",
       "softpool_reason": "medium_candidate_above_quality_threshold",
@@ -207,13 +178,13 @@
   },
   "selected": [
     {
-      "age_hours": 2.295389501388889,
+      "age_hours": 0.6315458841666667,
       "agent": "Menzo",
-      "ai_editorial_reason": "Notizia rilevante sul mercato wrestler; impatto diretto sulla divisione femminile WWE.",
+      "ai_editorial_reason": "Notizia importante sul nuovo progetto WWE ID che coinvolge il panorama indipendente, rilevante per il pubblico che segue l'evoluzione del prodotto.",
       "ai_id": "c1",
       "ai_priority": 72,
       "ai_priority_label": "medium",
-      "article_type": "business_legal",
+      "article_type": "hard_news",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [],
@@ -225,18 +196,17 @@
         "possible_noise": [
           "source_social_bar",
           "author_bio",
-          "cta",
-          "share_links"
+          "cta"
         ],
-        "source_specific_notes": "Ringsidenews tende ad essere verbosa, estrai solo il dato contrattuale saliente."
+        "source_specific_notes": "Ringsidenews è spesso prolisso, sintetizza la lista dei nomi e contestualizza l'importanza del WWE ID per i lettori."
       },
-      "category_hint": "Business",
+      "category_hint": "NXT",
       "decision": "selected",
-      "deterministic_score": 86,
-      "evaluated_at": "2026-06-03T10:49:00.402207+00:00",
+      "deterministic_score": 80,
+      "evaluated_at": "2026-06-03T12:19:49.565185+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
-        "article_type": "business_legal",
+        "article_type": "hard_news",
         "bob_brief": {
           "expected_embeds": [],
           "expected_quotes": true,
@@ -247,90 +217,28 @@
           "possible_noise": [
             "source_social_bar",
             "author_bio",
-            "cta",
-            "share_links"
+            "cta"
           ],
-          "source_specific_notes": "Ringsidenews tende ad essere verbosa, estrai solo il dato contrattuale saliente."
+          "source_specific_notes": "Ringsidenews è spesso prolisso, sintetizza la lista dei nomi e contestualizza l'importanza del WWE ID per i lettori."
         },
-        "category_hint": "Business",
+        "category_hint": "NXT",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Notizia rilevante sul mercato wrestler; impatto diretto sulla divisione femminile WWE.",
-        "event_key": "bayley_contract_status",
+        "editorial_reason": "Notizia importante sul nuovo progetto WWE ID che coinvolge il panorama indipendente, rilevante per il pubblico che segue l'evoluzione del prodotto.",
+        "event_key": "wwe_id_nightmare_factory_showcase",
         "id": "c1",
         "priority": 8,
         "priority_label": "medium"
       },
-      "normalized_url": "https://www.ringsidenews.com/bayleys-wwe-future-unclear-contract-expiration-date-draws-closer",
+      "normalized_url": "https://www.ringsidenews.com/wwe-reveals-first-wave-talent-next-wwe-id-showcase-nightmare-factory",
       "priority": "hard",
-      "published": "Wed, 03 Jun 2026 08:31:17 +0000",
-      "reason": "ai:Notizia rilevante sul mercato wrestler; impatto diretto sulla divisione femminile WWE.; deterministic:hard:contract,hard:tko,strategic:future,strategic:raw,recency:fresh_12h",
-      "score": 80,
+      "published": "Wed, 03 Jun 2026 11:41:56 +0000",
+      "reason": "ai:Notizia importante sul nuovo progetto WWE ID che coinvolge il panorama indipendente, rilevante per il pubblico che segue l'evoluzione del prodotto.; deterministic:hard:lineup,entity:cody rhodes,recency:fresh_12h",
+      "score": 76,
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/bayleys-wwe-future-unclear-as-contract-expiration-date-draws-closer-55.jpg?x81363\" width=\"800\" /></p>Bayley’s future with WWE is facing new questions as her current contract continues moving toward its expiration date. Her current WWE deal is set to expire at the end of this year. WWE and TKO are said to want to keep Bayley around, particularly because she is viewed as a locker room leader. However, there ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/bayleys-wwe-future-unclear-contract-expiration-date-draws-closer/\" title=\"Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer\">Read more</a>",
-      "title": "Bayley’s WWE Future Unclear As Contract Expiration Date Draws Closer",
-      "url": "https://www.ringsidenews.com/bayleys-wwe-future-unclear-contract-expiration-date-draws-closer/"
-    },
-    {
-      "age_hours": 1.7345558933333334,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Dichiarazione di convenienza/opinione, non aggiunge sostanza alla narrazione di campo.",
-      "ai_id": "c2",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Archiviare come bassa priorità; evitare clickbait."
-      },
-      "category_hint": "WWE",
-      "decision": "selected",
-      "deterministic_score": 84,
-      "evaluated_at": "2026-06-03T10:49:00.401218+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "low_value",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Archiviare come bassa priorità; evitare clickbait."
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Dichiarazione di convenienza/opinione, non aggiunge sostanza alla narrazione di campo.",
-        "event_key": "cody_tripleh_creative",
-        "id": "c2",
-        "priority": 2,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.ringsidenews.com/cody-rhodes-defends-triple-hs-wwe-creative-style-constant-criticism",
-      "priority": "hard",
-      "published": "Wed, 03 Jun 2026 09:04:56 +0000",
-      "reason": "ai:Dichiarazione di convenienza/opinione, non aggiunge sostanza alla narrazione di campo.; deterministic:strategic:creative,strategic:booking,entity:cody rhodes,recency:fresh_12h",
-      "score": 79,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/cody-rhodes-defends-triple-hs-wwe-creative-style-after-constant-criticism-41.jpg?x81363\" width=\"800\" /></p>Cody Rhodes is making it clear that Triple H’s WWE creative process works for him, even if many people don&#8217;t think his booking style is good at all. While speaking on his What Do You Wanna Talk About? podcast, Rhodes defended Triple H’s booking approach and explained why he enjoys working under his creative system. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/cody-rhodes-defends-triple-hs-wwe-creative-style-constant-criticism/\" title=\"Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism\">Read more</a>",
-      "title": "Cody Rhodes Defends Triple H’s WWE Creative Style After Constant Criticism",
-      "url": "https://www.ringsidenews.com/cody-rhodes-defends-triple-hs-wwe-creative-style-constant-criticism/"
+      "summary": "<p><img alt=\"WWE Reveals First Wave Of Talent For Next WWE ID Showcase At Nightmare Factory\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/wwe-reveals-first-wave-of-talent-for-next-wwe-id-showcase-at-nightmare-factory-24.jpg?x62570\" width=\"800\" /></p>WWE has announced the first group of talent set to compete at the next WWE ID Showcase, and the lineup includes several names already making noise through the company&#8217;s developmental pipeline. The event will take place on June 26 at The Nightmare Factory, the training facility operated by Cody Rhodes and QT Marshall that has ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/wwe-reveals-first-wave-talent-next-wwe-id-showcase-nightmare-factory/\" title=\"WWE Reveals First Wave Of Talent For Next WWE ID Showcase At Nightmare Factory\">Read more</a>",
+      "title": "WWE Reveals First Wave Of Talent For Next WWE ID Showcase At Nightmare Factory",
+      "url": "https://www.ringsidenews.com/wwe-reveals-first-wave-talent-next-wwe-id-showcase-nightmare-factory/"
     }
   ],
   "skipped": [],

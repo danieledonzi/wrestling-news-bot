@@ -1,16 +1,16 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-03T10:49:15.553829+00:00",
+  "generated_at": "2026-06-03T12:19:59.742551+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 2,
+    "published": 1,
     "wp_not_ready": 0
   },
   "input": {
     "alfred_version": "v93_20_alfred_table_warning_precision",
-    "approved_articles": 2
+    "approved_articles": 1
   },
   "mode": "wordpress_publisher_plain_oembed_urls",
   "policy": {
@@ -61,41 +61,25 @@
   "results": [
     {
       "categories": [
-        15,
-        8
+        6,
+        4
       ],
       "category_names_priority": [
-        "Business",
-        "World"
+        "NXT",
+        "WWE"
       ],
-      "featured_media": 5912,
-      "source_url": "https://www.ringsidenews.com/bayleys-wwe-future-unclear-contract-expiration-date-draws-closer/",
+      "featured_media": 5918,
+      "source_url": "https://www.ringsidenews.com/wwe-reveals-first-wave-talent-next-wwe-id-showcase-nightmare-factory/",
       "status": "published",
-      "title_it": "Incerto il futuro di Bayley in WWE con la scadenza del contratto",
-      "wp_link": "https://news.openwrestlingtv.com/world/incerto-il-futuro-di-bayley-in-wwe-con-la-scadenza-del-contratto/",
-      "wp_post_id": 5913
-    },
-    {
-      "categories": [
-        4,
-        8
-      ],
-      "category_names_priority": [
-        "WWE",
-        "World"
-      ],
-      "featured_media": 5914,
-      "source_url": "https://www.ringsidenews.com/cody-rhodes-defends-triple-hs-wwe-creative-style-constant-criticism/",
-      "status": "published",
-      "title_it": "Cody Rhodes difende lo stile creativo di Triple H in WWE",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/cody-rhodes-difende-lo-stile-creativo-di-triple-h-in-wwe/",
-      "wp_post_id": 5915
+      "title_it": "WWE: Annunciati i primi talenti per il prossimo WWE ID Showcase alla Nightmare Factory",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/wwe-annunciati-i-primi-talenti-per-il-prossimo-wwe-id-showcase-alla-nightmare-factory/",
+      "wp_post_id": 5919
     }
   ],
   "retry_queue": {
     "added": 0,
     "injected": 0,
-    "resolved": 2,
+    "resolved": 1,
     "retained": 0,
     "size": 0
   },

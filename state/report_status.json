@@ -37,10 +37,13 @@
       "AEW"
     ],
     "link": "https://news.openwrestlingtv.com/aew/aew-dynamitecollision-del-27-maggio-2026-risultati-e-momenti-salienti/",
+    "published_at": "2026-05-28T08:14:21.451316",
     "source": "manual_runs",
+    "source_title": "AEW Dynamite & Collision Results 5/27 - Lights Out Philadelphia Street Fight, MJF Appears - Wrestling Inc.",
+    "source_url": "https://www.wrestlinginc.com/2181792/aew-dynamite-collision-may-27-lights-out-philadelphia-street-fight-mjf-appears/",
     "status": "published",
-    "title": "AEW Dynamite del 27 maggio 2026 - risultati e momenti salienti",
-    "updated_at": "2026-05-28T15:34:39.043958",
+    "title": "AEW Dynamite&Collision del 27 maggio 2026 - risultati e momenti salienti",
+    "updated_at": "2026-06-03T12:19:41.237686",
     "wp_post_id": 5516
   },
   "tna_impact_2026_05_28": {
@@ -49,10 +52,13 @@
       "TNA"
     ],
     "link": "https://news.openwrestlingtv.com/tna/tna-impact-del-28-maggio-2026-risultati-e-momenti-salienti/",
+    "published_at": "2026-05-29T07:49:27.605050",
     "source": "manual_runs",
+    "source_title": "TNA Thursday Night Impact Results 5/28 - Men's & Women's Champions Challenges, More - Wrestling Inc.",
+    "source_url": "https://www.wrestlinginc.com/2183399/tna-thursday-night-impact-may-28-mens-womens-champions-challenges-more/",
     "status": "published",
-    "title": "TNA Impact del 28 maggio 2026 - risultati e momenti salienti",
-    "updated_at": "2026-05-29T08:41:09.010674",
+    "title": "TNA Impact del 28 Maggio 2026 - risultati e momenti salienti",
+    "updated_at": "2026-06-03T12:19:41.238331",
     "wp_post_id": 5599
   },
   "wwe_nxt_2026_05_25": {
@@ -78,19 +84,50 @@
     "updated_at": "2026-05-27T06:18:15.455259",
     "wp_post_id": 5453
   },
+  "wwe_nxt_2026_06_03": {
+    "categories": [
+      "Editoriali",
+      "NXT"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-nxt-del-3-giugno-2026-risultati-e-momenti-salienti/",
+    "published_at": "2026-06-03T09:06:05.007161",
+    "source": "manual_runs",
+    "source_title": "WWE NXT Results 6/2 - Two Championships On The Line, Lizzy Rain Faces Zaria & More - Wrestling Inc.",
+    "source_url": "https://www.wrestlinginc.com/2185340/wwe-nxt-june-2-two-championships-on-line-lizzy-rain-zaria-more/",
+    "status": "published",
+    "title": "WWE NXT del 3 Giugno 2026 - Risultati e momenti salienti",
+    "updated_at": "2026-06-03T12:19:41.240380",
+    "wp_post_id": 5909
+  },
   "wwe_raw_2026_05_25": {
     "categories": [
       "Editoriali",
       "WWE"
     ],
-    "published_at": "2026-05-26T21:44:53.574679",
-    "source": "wrestlinginc",
-    "source_title": "WWE Raw Results 5/25 - Intercontinental Title Up For Grabs, Oba Femi Appears & More",
-    "source_url": "https://www.wrestlinginc.com/2180772/wwe-raw-may-25-intercontinental-title-up-for-grabs-oba-femi-appears-more/",
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-raw-del-25-maggio-2026-risultati-e-momenti-salienti/",
+    "published_at": "2026-05-27T01:32:54.845649",
+    "source": "manual_runs",
+    "source_title": "WWE RAW Results, Highlights and Key Moments for May 25, 2026",
+    "source_url": "https://www.ringsidenews.com/wwe-raw-results-highlights-key-moments-may-25-2026/",
     "status": "published",
     "title": "WWE Raw del 25 maggio 2026 - risultati e momenti salienti",
-    "updated_at": "2026-05-26T21:44:53.574688",
-    "wp_post_id": 5422
+    "updated_at": "2026-06-03T12:19:41.237075",
+    "wp_post_id": 5443
+  },
+  "wwe_raw_2026_06_01": {
+    "categories": [
+      "Editoriali",
+      "WWE"
+    ],
+    "link": "https://news.openwrestlingtv.com/wwe/wwe-raw-dell1-giugno-2026-risultati-e-momenti-salienti/",
+    "published_at": "2026-06-02T00:09:34.818473",
+    "source": "manual_runs",
+    "source_title": "WWE Raw Results 6/1 - Seth Rollins Faces Bron Breakker, Tag Team Match & More - Wrestling Inc.",
+    "source_url": "https://www.wrestlinginc.com/2185015/wwe-raw-june-1-2026-seth-rollins-bron-breakker-tag-team-match-more/",
+    "status": "published",
+    "title": "WWE Raw dell'1 Giugno  2026 - Risultati e momenti salienti",
+    "updated_at": "2026-06-03T12:19:41.239690",
+    "wp_post_id": 5840
   },
   "wwe_smackdown_2026_05_25": {
     "categories": [
@@ -107,10 +144,13 @@
       "WWE"
     ],
     "link": "https://news.openwrestlingtv.com/wwe/wwe-smackdown-del-29-maggio-2026-risultati-e-momenti-salienti/",
+    "published_at": "2026-05-29T23:50:15.868689",
     "source": "manual_runs",
+    "source_title": "WWE SmackDown Results 5/29 - Cody Rhodes & GUNTHER Meet, Jade Cargill Appears - Wrestling Inc.",
+    "source_url": "https://www.wrestlinginc.com/2184147/wwe-smackdown-may-29-cody-rhodes-gunther-jade-cargill/",
     "status": "published",
     "title": "WWE SmackDown del 29 maggio 2026 - risultati e momenti salienti",
-    "updated_at": "2026-05-30T04:34:14.187932",
+    "updated_at": "2026-06-03T12:19:41.238970",
     "wp_post_id": 5618
   }
 }
