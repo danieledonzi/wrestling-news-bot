@@ -1,10 +1,10 @@
 {
   "items": [
     {
-      "age_hours": 1.1207798197222223,
+      "age_hours": 6.3597442569444445,
       "agent": "Menzo",
-      "ai_editorial_reason": "Opinione soggettiva di un wrestler, non notizia centrale.",
-      "ai_id": "c4",
+      "ai_editorial_reason": "Opinione soggettiva non notizia, valore editoriale minimo.",
+      "ai_id": "c3",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "low_value",
@@ -14,20 +14,16 @@
         "expected_quotes": false,
         "expected_tables": false,
         "must_preserve": [],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Ignorare, poco valore per il pubblico italiano."
+        "possible_noise": [],
+        "source_specific_notes": ""
       },
       "category_hint": "WWE",
       "decision": "pending",
       "deterministic_score": 56,
-      "evaluated_at": "2026-06-03T02:07:14.807352+00:00",
+      "evaluated_at": "2026-06-03T07:21:35.079326+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "last_seen_at": "2026-06-03T02:07:22.826934+00:00",
+      "from_softpool": true,
+      "last_seen_at": "2026-06-03T07:21:42.347226+00:00",
       "menzo_ai_review": {
         "article_type": "low_value",
         "bob_brief": {
@@ -35,27 +31,22 @@
           "expected_quotes": false,
           "expected_tables": false,
           "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Ignorare, poco valore per il pubblico italiano."
+          "possible_noise": [],
+          "source_specific_notes": ""
         },
         "category_hint": "WWE",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Opinione soggettiva di un wrestler, non notizia centrale.",
-        "event_key": "big_e_opinion",
-        "id": "c4",
-        "priority": 2,
+        "editorial_reason": "Opinione soggettiva non notizia, valore editoriale minimo.",
+        "event_key": "opinion_big_e",
+        "id": "c3",
+        "priority": 10,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.wrestlinginc.com/2184200/wwe-big-e-montez-ford-street-profits-tag-team-underrated-roster",
       "priority": "soft",
       "published": "Wed, 03 Jun 2026 01:00:00 +0000",
-      "reason": "ai:Opinione soggettiva di un wrestler, non notizia centrale.; deterministic:strategic:raw,soft_penalty:identifies,recency:fresh_12h",
+      "reason": "ai:Opinione soggettiva non notizia, valore editoriale minimo.; deterministic:strategic:raw,soft_penalty:identifies,recency:fresh_12h",
       "score": 63,
       "softpool_added_at": "2026-06-03T02:07:22.826934+00:00",
       "softpool_reason": "medium_or_borderline_candidate",
@@ -65,10 +56,10 @@
       "url": "https://www.wrestlinginc.com/2184200/wwe-big-e-montez-ford-street-profits-tag-team-underrated-roster/"
     },
     {
-      "age_hours": 5.132725963888889,
+      "age_hours": 10.371688637777778,
       "agent": "Menzo",
-      "ai_editorial_reason": "Curiosità di backstage marginale, impatto nullo sugli show principali.",
-      "ai_id": "c5",
+      "ai_editorial_reason": "Curiosità di basso profilo sul backstage, poco utile per il pubblico italiano.",
+      "ai_id": "c4",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "soft_news",
@@ -78,20 +69,15 @@
         "expected_quotes": false,
         "expected_tables": false,
         "must_preserve": [],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Non pubblicare."
+        "possible_noise": [],
+        "source_specific_notes": ""
       },
       "category_hint": "WWE",
       "decision": "pending",
       "deterministic_score": 46,
-      "evaluated_at": "2026-06-03T02:07:14.813471+00:00",
+      "evaluated_at": "2026-06-03T07:21:35.079097+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "last_seen_at": "2026-06-03T02:07:22.826934+00:00",
+      "last_seen_at": "2026-06-03T07:21:42.347226+00:00",
       "menzo_ai_review": {
         "article_type": "soft_news",
         "bob_brief": {
@@ -99,97 +85,78 @@
           "expected_quotes": false,
           "expected_tables": false,
           "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Non pubblicare."
+          "possible_noise": [],
+          "source_specific_notes": ""
         },
         "category_hint": "WWE",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Curiosità di backstage marginale, impatto nullo sugli show principali.",
-        "event_key": "aaa_match_producer",
-        "id": "c5",
-        "priority": 3,
+        "editorial_reason": "Curiosità di basso profilo sul backstage, poco utile per il pubblico italiano.",
+        "event_key": "kaiser_match_producer",
+        "id": "c4",
+        "priority": 20,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed",
       "priority": "soft",
       "published": "Tue, 02 Jun 2026 20:59:17 +0000",
-      "reason": "ai:Curiosità di backstage marginale, impatto nullo sugli show principali.; deterministic:entity:chad gable,recency:fresh_12h",
+      "reason": "ai:Curiosità di basso profilo sul backstage, poco utile per il pubblico italiano.; deterministic:entity:chad gable,recency:fresh_12h",
       "score": 58,
-      "softpool_added_at": "2026-06-03T02:07:22.826934+00:00",
+      "softpool_added_at": "2026-06-03T07:21:42.347226+00:00",
       "softpool_reason": "medium_or_borderline_candidate",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Producer Behind El Grande Americano Mask vs. Mask Match Revealed\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/producer-behind-el-grande-americano-mask-vs-mask-match-revealed-48.jpg?x21965\" width=\"800\" /></p>Chad Gable and Ludwig Kaiser’s bloody Mask vs. Mask match at AAA Noche de Los Grandes had another WWE name involved behind the scenes According to Mexican journalist Ernesto Ocampo, Pete Dunne was the producer for the match between Ludwig Kaiser’s El Grande Americano and Chad Gable’s Original El Grande Americano. Ocampo noted that Dunne ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed/\" title=\"Producer Behind El Grande Americano Mask vs. Mask Match Revealed\">Read more</a>",
+      "summary": "<p><img alt=\"Producer Behind El Grande Americano Mask vs. Mask Match Revealed\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/producer-behind-el-grande-americano-mask-vs-mask-match-revealed-48.jpg?x36463\" width=\"800\" /></p>Chad Gable and Ludwig Kaiser’s bloody Mask vs. Mask match at AAA Noche de Los Grandes had another WWE name involved behind the scenes According to Mexican journalist Ernesto Ocampo, Pete Dunne was the producer for the match between Ludwig Kaiser’s El Grande Americano and Chad Gable’s Original El Grande Americano. Ocampo noted that Dunne ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed/\" title=\"Producer Behind El Grande Americano Mask vs. Mask Match Revealed\">Read more</a>",
       "title": "Producer Behind El Grande Americano Mask vs. Mask Match Revealed",
       "url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed/"
     },
     {
-      "age_hours": 0.84772421,
+      "age_hours": 6.086686825277778,
       "agent": "Menzo",
-      "ai_editorial_reason": "Dato ufficiale di ascolto. Selezionato WrestlingInc per completezza.",
-      "ai_id": "c6",
+      "ai_editorial_reason": "I rating generici settimanali sono considerati rumore, non notizia utile.",
+      "ai_id": "c5",
       "ai_priority": 72,
       "ai_priority_label": "medium",
-      "article_type": "data_report",
+      "article_type": "low_value",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [],
         "expected_quotes": false,
-        "expected_tables": true,
-        "must_preserve": [
-          "eventuali tabelle ascolti"
-        ],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Pubblicare solo il dato, evitare analisi prolisse."
+        "expected_tables": false,
+        "must_preserve": [],
+        "possible_noise": [],
+        "source_specific_notes": ""
       },
       "category_hint": "WWE",
       "decision": "pending",
       "deterministic_score": 44,
-      "evaluated_at": "2026-06-03T02:07:14.807157+00:00",
+      "evaluated_at": "2026-06-03T07:21:35.072573+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
-      "last_seen_at": "2026-06-03T02:07:22.826934+00:00",
+      "last_seen_at": "2026-06-03T07:21:42.347226+00:00",
       "menzo_ai_review": {
-        "article_type": "data_report",
+        "article_type": "low_value",
         "bob_brief": {
           "expected_embeds": [],
           "expected_quotes": false,
-          "expected_tables": true,
-          "must_preserve": [
-            "eventuali tabelle ascolti"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Pubblicare solo il dato, evitare analisi prolisse."
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
         },
         "category_hint": "WWE",
-        "decision": "selected",
+        "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Dato ufficiale di ascolto. Selezionato WrestlingInc per completezza.",
-        "event_key": "smackdown_ratings_may29",
-        "id": "c6",
+        "editorial_reason": "I rating generici settimanali sono considerati rumore, non notizia utile.",
+        "event_key": "ratings_smackdown",
+        "id": "c5",
         "priority": 5,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.wrestlinginc.com/2186281/wwe-smackdown-ratings-viewership-report-may-29-2026",
       "priority": "soft",
       "published": "Wed, 03 Jun 2026 01:16:23 +0000",
-      "reason": "ai:Dato ufficiale di ascolto. Selezionato WrestlingInc per completezza.; deterministic:strategic:smackdown,ratings:generic_penalty,recency:fresh_12h",
+      "reason": "ai:I rating generici settimanali sono considerati rumore, non notizia utile.; deterministic:strategic:smackdown,ratings:generic_penalty,recency:fresh_12h",
       "score": 57,
-      "softpool_added_at": "2026-06-03T02:07:22.826934+00:00",
+      "softpool_added_at": "2026-06-03T07:21:42.347226+00:00",
       "softpool_reason": "medium_or_borderline_candidate",
       "source": "wrestlinginc",
       "summary": "The May 29 edition of \"WWE SmackDown\" may have ranked fourth on cable TV, but viewership for the episode was still down from the previous week.",
@@ -197,150 +164,134 @@
       "url": "https://www.wrestlinginc.com/2186281/wwe-smackdown-ratings-viewership-report-may-29-2026/"
     },
     {
-      "age_hours": 0.3785581591666667,
+      "age_hours": 4.656965039999999,
       "agent": "Menzo",
-      "ai_editorial_reason": "Dato di ascolto significativo per la situazione attuale di AEW.",
-      "ai_id": "c8",
+      "ai_editorial_reason": "Solo social reaction/flame verbale, non sposta la narrazione.",
+      "ai_id": "c6",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
+      "article_type": "soft_news",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [
+          "x_tweet"
+        ],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "tweet"
+        ],
+        "possible_noise": [],
+        "source_specific_notes": ""
+      },
+      "category_hint": "AEW",
+      "decision": "pending",
+      "deterministic_score": 43,
+      "evaluated_at": "2026-06-03T07:21:35.074146+00:00",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "last_seen_at": "2026-06-03T07:21:42.347226+00:00",
+      "menzo_ai_review": {
+        "article_type": "soft_news",
+        "bob_brief": {
+          "expected_embeds": [
+            "x_tweet"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "tweet"
+          ],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "AEW",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Solo social reaction/flame verbale, non sposta la narrazione.",
+        "event_key": "mjf_reaction",
+        "id": "c6",
+        "priority": 15,
+        "priority_label": "medium"
+      },
+      "normalized_url": "https://www.ringsidenews.com/mjf-fires-back-nsfw-response-mick-foley-calls-him-best-business",
+      "priority": "soft",
+      "published": "Wed, 03 Jun 2026 02:42:10 +0000",
+      "reason": "ai:Solo social reaction/flame verbale, non sposta la narrazione.; deterministic:entity:mick foley,recency:fresh_12h",
+      "score": 56,
+      "softpool_added_at": "2026-06-03T07:21:42.347226+00:00",
+      "softpool_reason": "medium_or_borderline_candidate",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"MJF Fires Back With NSFW Response After Mick Foley Calls Him ‘The Best In The Business’\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mjf-fires-back-with-nsfw-response-after-mick-foley-calls-him-the-best-in-the-business-20.jpg?x36463\" width=\"800\" /></p>MJF has responded to some major praise from Mick Foley, and he did it in the most MJF way possible. During his June 2 appearance on Ariel Helwani&#8217;s show, Foley had nothing but glowing things to say about the AEW World Champion. The WWE Hall of Famer praised MJF&#8217;s stance on not leaving a company ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mjf-fires-back-nsfw-response-mick-foley-calls-him-best-business/\" title=\"MJF Fires Back With NSFW Response After Mick Foley Calls Him ‘The Best In The Business’\">Read more</a>",
+      "title": "MJF Fires Back With NSFW Response After Mick Foley Calls Him ‘The Best In The Business’",
+      "url": "https://www.ringsidenews.com/mjf-fires-back-nsfw-response-mick-foley-calls-him-best-business/"
+    },
+    {
+      "age_hours": 5.617521260833334,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Il calo drastico di Collision è un segnale di allarme per l'industria, merita nota.",
+      "ai_id": "c7",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "data_report",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [],
-        "expected_quotes": false,
+        "expected_quotes": true,
         "expected_tables": true,
         "must_preserve": [
-          "tabelle ascolti"
+          "dati audience"
         ],
         "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
+          "source_social_bar"
         ],
-        "source_specific_notes": "Enfatizzare il calo di ascolti."
+        "source_specific_notes": "Inserire breve analisi sul calo P18-49."
       },
       "category_hint": "AEW",
       "decision": "pending",
       "deterministic_score": 42,
-      "evaluated_at": "2026-06-03T02:07:14.809374+00:00",
+      "evaluated_at": "2026-06-03T07:21:35.076541+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "last_seen_at": "2026-06-03T02:07:22.826934+00:00",
+      "last_seen_at": "2026-06-03T07:21:42.347226+00:00",
       "menzo_ai_review": {
         "article_type": "data_report",
         "bob_brief": {
           "expected_embeds": [],
-          "expected_quotes": false,
+          "expected_quotes": true,
           "expected_tables": true,
           "must_preserve": [
-            "tabelle ascolti"
+            "dati audience"
           ],
           "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
+            "source_social_bar"
           ],
-          "source_specific_notes": "Enfatizzare il calo di ascolti."
+          "source_specific_notes": "Inserire breve analisi sul calo P18-49."
         },
         "category_hint": "AEW",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Dato di ascolto significativo per la situazione attuale di AEW.",
-        "event_key": "aew_collision_ratings_may30",
-        "id": "c8",
-        "priority": 6,
+        "editorial_reason": "Il calo drastico di Collision è un segnale di allarme per l'industria, merita nota.",
+        "event_key": "ratings_collision",
+        "id": "c7",
+        "priority": 60,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-drop-may-30-2026",
       "priority": "soft",
       "published": "Wed, 03 Jun 2026 01:44:32 +0000",
-      "reason": "ai:Dato di ascolto significativo per la situazione attuale di AEW.; deterministic:ratings:exceptional_signal,recency:fresh_12h",
+      "reason": "ai:Il calo drastico di Collision è un segnale di allarme per l'industria, merita nota.; deterministic:ratings:exceptional_signal,recency:fresh_12h",
       "score": 56,
-      "softpool_added_at": "2026-06-03T02:07:22.826934+00:00",
+      "softpool_added_at": "2026-06-03T07:21:42.347226+00:00",
       "softpool_reason": "medium_or_borderline_candidate",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW Collision Massive Decrease.jpg?x21965\" width=\"800\" /></p>New ratings data has been released for the May 30, 2026 episode of AEW Collision on TNT, with the show taking a sharp week-to-week hit. According to Dave Meltzer, AEW Collision on May 30, 2026 drew 360,000 viewers on TNT, with a 0.05 rating in the key P18–49 demographic. For comparison, the May 27, 2026 ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aew-collision-viewership-sees-massive-drop-may-30-2026/\" title=\"AEW Collision Viewership Sees Massive Drop on May 30, 2026\">Read more</a>",
+      "summary": "<p><img alt=\"\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/02/AEW Collision Massive Decrease.jpg?x36463\" width=\"800\" /></p>New ratings data has been released for the May 30, 2026 episode of AEW Collision on TNT, with the show taking a sharp week-to-week hit. According to Dave Meltzer, AEW Collision on May 30, 2026 drew 360,000 viewers on TNT, with a 0.05 rating in the key P18–49 demographic. For comparison, the May 27, 2026 ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/aew-collision-viewership-sees-massive-drop-may-30-2026/\" title=\"AEW Collision Viewership Sees Massive Drop on May 30, 2026\">Read more</a>",
       "title": "AEW Collision Viewership Sees Massive Drop on May 30, 2026",
       "url": "https://www.ringsidenews.com/aew-collision-viewership-sees-massive-drop-may-30-2026/"
     },
     {
-      "age_hours": 0.013557833333333333,
+      "age_hours": 5.252520874722222,
       "agent": "Menzo",
-      "ai_editorial_reason": "Risultato titolato di NXT.",
-      "ai_id": "c9",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "storyline_development",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [
-          "video"
-        ],
-        "expected_quotes": false,
-        "expected_tables": false,
-        "must_preserve": [
-          "embed video"
-        ],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Riassumere il successo della difesa."
-      },
-      "category_hint": "NXT",
-      "decision": "pending",
-      "deterministic_score": 38,
-      "evaluated_at": "2026-06-03T02:07:14.808202+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "last_seen_at": "2026-06-03T02:07:22.826934+00:00",
-      "menzo_ai_review": {
-        "article_type": "storyline_development",
-        "bob_brief": {
-          "expected_embeds": [
-            "video"
-          ],
-          "expected_quotes": false,
-          "expected_tables": false,
-          "must_preserve": [
-            "embed video"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Riassumere il successo della difesa."
-        },
-        "category_hint": "NXT",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Risultato titolato di NXT.",
-        "event_key": "nxt_june2_results",
-        "id": "c9",
-        "priority": 5,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.ringsidenews.com/tony-dangelo-stands-tall-nxt-title-defense-during-june-2-episode",
-      "priority": "soft",
-      "published": "Wed, 03 Jun 2026 02:06:26 +0000",
-      "reason": "ai:Risultato titolato di NXT.; deterministic:recency:fresh_12h",
-      "score": 53,
-      "softpool_added_at": "2026-06-03T02:07:22.826934+00:00",
-      "softpool_reason": "medium_or_borderline_candidate",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Tony D&#039;Angelo Stands Tall With NXT Title Defense During June 2 Episode\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/tony-dangelo-stands-tall-with-nxt-title-defense-during-june-2-episode-28.jpg?x21965\" width=\"800\" /></p>The June 2 episode from WWE&#8217;s NXT brand was a fun episode, and there were several big moments. An NXT Title defense always brings special attention to any episode when they come up, and this week saw an exciting matchup for the brand&#8217;s top prize. Tony D&#8217;Angelo put his NXT Title on the line against ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/tony-dangelo-stands-tall-nxt-title-defense-during-june-2-episode/\" title=\"Tony D&#8217;Angelo Stands Tall With NXT Title Defense During June 2 Episode\">Read more</a>",
-      "title": "Tony D’Angelo Stands Tall With NXT Title Defense During June 2 Episode",
-      "url": "https://www.ringsidenews.com/tony-dangelo-stands-tall-nxt-title-defense-during-june-2-episode/"
-    },
-    {
-      "age_hours": 0.19189135611111113,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Annunci per la prossima puntata. Utile come breve di servizio.",
-      "ai_id": "c10",
+      "ai_editorial_reason": "Resoconto di un evento titolato, utile per i fan del brand.",
+      "ai_id": "c8",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "storyline_development",
@@ -352,22 +303,19 @@
         "expected_quotes": false,
         "expected_tables": false,
         "must_preserve": [
-          "embed promo/video"
+          "video highlight"
         ],
         "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
+          "cta"
         ],
-        "source_specific_notes": "Breve nota sugli annunci."
+        "source_specific_notes": "Focus sul risultato del match."
       },
       "category_hint": "NXT",
       "decision": "pending",
       "deterministic_score": 38,
-      "evaluated_at": "2026-06-03T02:07:14.808883+00:00",
+      "evaluated_at": "2026-06-03T07:21:35.075150+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "last_seen_at": "2026-06-03T02:07:22.826934+00:00",
+      "last_seen_at": "2026-06-03T07:21:42.347226+00:00",
       "menzo_ai_review": {
         "article_type": "storyline_development",
         "bob_brief": {
@@ -377,42 +325,39 @@
           "expected_quotes": false,
           "expected_tables": false,
           "must_preserve": [
-            "embed promo/video"
+            "video highlight"
           ],
           "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
+            "cta"
           ],
-          "source_specific_notes": "Breve nota sugli annunci."
+          "source_specific_notes": "Focus sul risultato del match."
         },
         "category_hint": "NXT",
-        "decision": "pending",
+        "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Annunci per la prossima puntata. Utile come breve di servizio.",
-        "event_key": "nxt_upcoming_card",
-        "id": "c10",
-        "priority": 4,
+        "editorial_reason": "Resoconto di un evento titolato, utile per i fan del brand.",
+        "event_key": "nxt_june2",
+        "id": "c8",
+        "priority": 70,
         "priority_label": "medium"
       },
-      "normalized_url": "https://www.ringsidenews.com/mr-nxt-pageant-more-announced-june-9-episode",
+      "normalized_url": "https://www.ringsidenews.com/tony-dangelo-stands-tall-nxt-title-defense-during-june-2-episode",
       "priority": "soft",
-      "published": "Wed, 03 Jun 2026 01:55:44 +0000",
-      "reason": "ai:Annunci per la prossima puntata. Utile come breve di servizio.; deterministic:recency:fresh_12h",
+      "published": "Wed, 03 Jun 2026 02:06:26 +0000",
+      "reason": "ai:Resoconto di un evento titolato, utile per i fan del brand.; deterministic:recency:fresh_12h",
       "score": 53,
-      "softpool_added_at": "2026-06-03T02:07:22.826934+00:00",
+      "softpool_added_at": "2026-06-03T07:21:42.347226+00:00",
       "softpool_reason": "medium_or_borderline_candidate",
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Mr. NXT Pageant &amp; More Announced For June 9 Episode\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mr-nxt-pageant-amp-more-announced-for-june-9-episode-21.jpg?x21965\" width=\"800\" /></p>The June 2 episode from WWE&#8217;s NXT brand was a fun show, but things are going to be even bigger next week. Along with a #1 contender match, we also have a pageant awaiting us. Tatum Paxley will put the NXT Women&#8217;s North American Title on the line next week against Zaria. The Aussie got ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mr-nxt-pageant-more-announced-june-9-episode/\" title=\"Mr. NXT Pageant &#38; More Announced For June 9 Episode\">Read more</a>",
-      "title": "Mr. NXT Pageant & More Announced For June 9 Episode",
-      "url": "https://www.ringsidenews.com/mr-nxt-pageant-more-announced-june-9-episode/"
+      "summary": "<p><img alt=\"Tony D&#039;Angelo Stands Tall With NXT Title Defense During June 2 Episode\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/tony-dangelo-stands-tall-with-nxt-title-defense-during-june-2-episode-28.jpg?x36463\" width=\"800\" /></p>The June 2 episode from WWE&#8217;s NXT brand was a fun episode, and there were several big moments. An NXT Title defense always brings special attention to any episode when they come up, and this week saw an exciting matchup for the brand&#8217;s top prize. Tony D&#8217;Angelo put his NXT Title on the line against ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/tony-dangelo-stands-tall-nxt-title-defense-during-june-2-episode/\" title=\"Tony D&#8217;Angelo Stands Tall With NXT Title Defense During June 2 Episode\">Read more</a>",
+      "title": "Tony D’Angelo Stands Tall With NXT Title Defense During June 2 Episode",
+      "url": "https://www.ringsidenews.com/tony-dangelo-stands-tall-nxt-title-defense-during-june-2-episode/"
     },
     {
-      "age_hours": 0.7185583627777777,
+      "age_hours": 5.282242272777777,
       "agent": "Menzo",
-      "ai_editorial_reason": "Analisi speculativa non urgente.",
-      "ai_id": "c11",
+      "ai_editorial_reason": "Dichiarazione retrospettiva, non ha impatto sulla storyline attuale.",
+      "ai_id": "c9",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "soft_news",
@@ -423,14 +368,14 @@
         "expected_tables": false,
         "must_preserve": [],
         "possible_noise": [],
-        "source_specific_notes": "Ignorare per ora."
+        "source_specific_notes": ""
       },
-      "category_hint": "WWE",
+      "category_hint": "AEW",
       "decision": "pending",
       "deterministic_score": 38,
-      "evaluated_at": "2026-06-03T02:07:14.810107+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "last_seen_at": "2026-06-03T02:07:22.826934+00:00",
+      "evaluated_at": "2026-06-03T07:21:35.072184+00:00",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
+      "last_seen_at": "2026-06-03T07:21:42.347226+00:00",
       "menzo_ai_review": {
         "article_type": "soft_news",
         "bob_brief": {
@@ -439,33 +384,87 @@
           "expected_tables": false,
           "must_preserve": [],
           "possible_noise": [],
-          "source_specific_notes": "Ignorare per ora."
+          "source_specific_notes": ""
         },
-        "category_hint": "WWE",
+        "category_hint": "AEW",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Analisi speculativa non urgente.",
-        "event_key": "wwe_roster_future",
-        "id": "c11",
-        "priority": 3,
+        "editorial_reason": "Dichiarazione retrospettiva, non ha impatto sulla storyline attuale.",
+        "event_key": "darby_allin_interview",
+        "id": "c9",
+        "priority": 10,
         "priority_label": "medium"
       },
-      "normalized_url": "https://www.ringsidenews.com/why-wwe-rushing-create-its-next-generation-main-event-stars",
+      "normalized_url": "https://www.wrestlinginc.com/2186287/aew-darby-allin-world-champion-succeed-year-one",
       "priority": "soft",
-      "published": "Wed, 03 Jun 2026 01:24:08 +0000",
-      "reason": "ai:Analisi speculativa non urgente.; deterministic:recency:fresh_12h",
+      "published": "Wed, 03 Jun 2026 02:04:39 +0000",
+      "reason": "ai:Dichiarazione retrospettiva, non ha impatto sulla storyline attuale.; deterministic:recency:fresh_12h",
       "score": 53,
-      "softpool_added_at": "2026-06-03T02:07:22.826934+00:00",
+      "softpool_added_at": "2026-06-03T07:21:42.347226+00:00",
       "softpool_reason": "medium_or_borderline_candidate",
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Why WWE Is Rushing To Create Its Next Generation Of Main Event Stars\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/why-wwe-is-rushing-to-create-its-next-generation-of-main-event-stars-45.jpg?x21965\" width=\"800\" /></p>WWE knows it has a problem coming, and Nick Khan isn&#8217;t hiding from it. While speaking at the Sports Business Journal World Congress of Sports, the WWE President revealed that company leadership has spent the last year discussing how to speed up the development of new stars as some of WWE&#8217;s biggest attractions move deeper ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/why-wwe-rushing-create-its-next-generation-main-event-stars/\" title=\"Why WWE Is Rushing To Create Its Next Generation Of Main Event Stars\">Read more</a>",
-      "title": "Why WWE Is Rushing To Create Its Next Generation Of Main Event Stars",
-      "url": "https://www.ringsidenews.com/why-wwe-rushing-create-its-next-generation-main-event-stars/"
+      "source": "wrestlinginc",
+      "summary": "Darby Allin's run as AEW World Champion is over, but the man himself knew from day one that he could be the top guy in All Elite Wrestling.",
+      "title": "Darby Allin Felt In 'Year One' That He Could Succeed As AEW World Champion",
+      "url": "https://www.wrestlinginc.com/2186287/aew-darby-allin-world-champion-succeed-year-one/"
     },
     {
-      "age_hours": 4.251892683055555,
+      "age_hours": 5.4308544294444445,
       "agent": "Menzo",
-      "ai_editorial_reason": "Situazione contrattuale/burocratica che influisce sui roster TV.",
+      "ai_editorial_reason": "Annunci minori di show, integrabili eventualmente in un recap.",
+      "ai_id": "c10",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
+      "article_type": "soft_news",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [],
+        "expected_quotes": false,
+        "expected_tables": false,
+        "must_preserve": [],
+        "possible_noise": [],
+        "source_specific_notes": ""
+      },
+      "category_hint": "NXT",
+      "decision": "pending",
+      "deterministic_score": 38,
+      "evaluated_at": "2026-06-03T07:21:35.075948+00:00",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "last_seen_at": "2026-06-03T07:21:42.347226+00:00",
+      "menzo_ai_review": {
+        "article_type": "soft_news",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "NXT",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Annunci minori di show, integrabili eventualmente in un recap.",
+        "event_key": "nxt_announcements",
+        "id": "c10",
+        "priority": 25,
+        "priority_label": "medium"
+      },
+      "normalized_url": "https://www.ringsidenews.com/mr-nxt-pageant-more-announced-june-9-episode",
+      "priority": "soft",
+      "published": "Wed, 03 Jun 2026 01:55:44 +0000",
+      "reason": "ai:Annunci minori di show, integrabili eventualmente in un recap.; deterministic:recency:fresh_12h",
+      "score": 53,
+      "softpool_added_at": "2026-06-03T07:21:42.347226+00:00",
+      "softpool_reason": "medium_or_borderline_candidate",
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Mr. NXT Pageant &amp; More Announced For June 9 Episode\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/mr-nxt-pageant-amp-more-announced-for-june-9-episode-21.jpg?x36463\" width=\"800\" /></p>The June 2 episode from WWE&#8217;s NXT brand was a fun show, but things are going to be even bigger next week. Along with a #1 contender match, we also have a pageant awaiting us. Tatum Paxley will put the NXT Women&#8217;s North American Title on the line next week against Zaria. The Aussie got ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/mr-nxt-pageant-more-announced-june-9-episode/\" title=\"Mr. NXT Pageant &#38; More Announced For June 9 Episode\">Read more</a>",
+      "title": "Mr. NXT Pageant & More Announced For June 9 Episode",
+      "url": "https://www.ringsidenews.com/mr-nxt-pageant-more-announced-june-9-episode/"
+    },
+    {
+      "age_hours": 9.490855425833333,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Problemi di roster che impattano la programmazione AEW.",
       "ai_id": "c12",
       "ai_priority": 72,
       "ai_priority_label": "medium",
@@ -476,21 +475,16 @@
         "expected_quotes": false,
         "expected_tables": false,
         "must_preserve": [],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Puntuale e asciutto."
+        "possible_noise": [],
+        "source_specific_notes": "Essenziale e breve."
       },
       "category_hint": "AEW",
       "decision": "pending",
       "deterministic_score": 38,
-      "evaluated_at": "2026-06-03T02:07:14.813660+00:00",
+      "evaluated_at": "2026-06-03T07:21:35.079535+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "from_softpool": true,
-      "last_seen_at": "2026-06-03T02:07:22.826934+00:00",
+      "last_seen_at": "2026-06-03T07:21:42.347226+00:00",
       "menzo_ai_review": {
         "article_type": "business_legal",
         "bob_brief": {
@@ -498,27 +492,22 @@
           "expected_quotes": false,
           "expected_tables": false,
           "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Puntuale e asciutto."
+          "possible_noise": [],
+          "source_specific_notes": "Essenziale e breve."
         },
         "category_hint": "AEW",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Situazione contrattuale/burocratica che influisce sui roster TV.",
+        "editorial_reason": "Problemi di roster che impattano la programmazione AEW.",
         "event_key": "aew_visa_issues",
         "id": "c12",
-        "priority": 5,
+        "priority": 50,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.wrestlinginc.com/2186205/two-aew-luchadors-still-struggling-visa-issues",
       "priority": "soft",
       "published": "Tue, 02 Jun 2026 21:52:08 +0000",
-      "reason": "selected_overflow:ai:Situazione contrattuale/burocratica che influisce sui roster TV.; deterministic:recency:fresh_12h",
+      "reason": "ai:Problemi di roster che impattano la programmazione AEW.; deterministic:recency:fresh_12h",
       "score": 53,
       "softpool_added_at": "2026-06-02T23:18:00.786790+00:00",
       "softpool_reason": "medium_or_borderline_candidate",
@@ -529,6 +518,6 @@
     }
   ],
   "ttl_hours": 36,
-  "updated_at": "2026-06-03T02:07:22.826934+00:00",
+  "updated_at": "2026-06-03T07:21:42.347226+00:00",
   "version": "v93_15_forced_priority_label_softpool"
 }

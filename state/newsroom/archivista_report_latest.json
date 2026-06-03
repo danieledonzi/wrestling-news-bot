@@ -6,7 +6,7 @@
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 2
+      "warnings": 0
     },
     "bob": {
       "errors": 0,
@@ -15,17 +15,17 @@
       "translation_pending": 0
     },
     "massy": {
-      "already_published_hard_skipped": 3,
+      "already_published_hard_skipped": 5,
       "already_worked": 0,
-      "hard_skipped": 22,
+      "hard_skipped": 24,
       "menzo_memory_hard_skipped": 14,
       "old_news_hard_skipped": 4,
-      "to_menzo": 12,
+      "to_menzo": 10,
       "to_simone": 1
     },
     "menzo": {
-      "pending": 8,
-      "skipped": 2,
+      "pending": 9,
+      "skipped": 0,
       "to_bob_or_v92": 3
     },
     "publisher": {
@@ -36,8 +36,8 @@
       "wp_not_ready": 0
     },
     "simone": {
-      "ready": 0,
-      "skipped": 6,
+      "ready": 1,
+      "skipped": 5,
       "waiting": 0
     }
   },
@@ -49,65 +49,58 @@
         "editorial_changes": [],
         "issues": [],
         "present": true,
-        "quality_score": 95,
-        "warnings": [
-          {
-            "code": "possible_missing_table",
-            "evidence": "Nick Khan: la WWE non cambia i piani creativi in base al malcontento sui social",
-            "message": "Articolo con dati potenzialmente tabellari ma nessuna tabella estratta.",
-            "severity": "warning"
-          }
-        ]
+        "quality_score": 100,
+        "warnings": []
       },
       "bob": {
-        "clean_element_count": 13,
+        "clean_element_count": 8,
         "diagnostic_stage": "ready_for_alfred",
         "element_counts": {
-          "embed": 1,
+          "embed": 0,
           "heading": 0,
           "image": 0,
-          "quote": 4,
+          "quote": 2,
           "table": 0,
-          "text": 8
+          "text": 6
         },
         "error": null,
         "present": true,
-        "raw_element_count": 16,
-        "removed_before_gemini": 16,
+        "raw_element_count": 9,
+        "removed_before_gemini": 14,
         "status": "ready_for_alfred",
         "translation_model": "gemini-3.1-flash-lite",
         "translation_used": true
       },
-      "category_hint": "WWE",
+      "category_hint": "World",
       "html_audit": {
-        "alfred_final_html_preview": "<p>Nick Khan non crede all&#x27;idea che la WWE abbia cambiato i suoi piani per WrestleMania perché i fan hanno alzato la voce online.</p>\nhttps://www.youtube.com/watch?v=aQR4eTEUtB8\n\n<p>Il presidente della WWE ha affrontato la lunga controversia riguardante Cody Rhodes, Roman Reigns e The Rock durante un&#x27;apparizione allo Sports Business Journal World Congress of Sports. Per oltre due anni, molti fan hanno creduto che la WWE avesse cambiato rotta dopo il caos scatenatosi quando The Rock sembrava pronto a rubare la scena a Cody Rhodes a WrestleMania.</p>\n<p>Secondo Khan, questa narrazione non corrisponde al vero. Discutendo della situazione, Khan ha insistito sul fatto che l&#x27;epilogo visto a WrestleMania 40 fosse sempre stata la destinazione prevista.</p>\n<blockquote>“Tra l&#x27;altro, il piano è sempre stato quello che si è visto a Philly due anni fa. A volte nel wrestling il risultato è prestabilito. Vuoi sviare i fan. Vuoi lasciare che le cose maturino e poi, boom, finisce esattamente come volevamo che finisse. Non è mai cambiato nulla. Si trattava solo di voci e pettegolezzi online sul fatto che stessimo cambiando. Non è mai cambiato.”</blockquote>\n<p>La conversazione si è poi spostata sul fatto se la WWE cambi mai i propri piani quando i fan iniziano a criticare le decisioni creative sui social media. La risposta di Khan è stata immediata.</p>\n<blockquote>“Non risponderemo mai alle critiche sui social media.”</blockquote>\n<p>Ha spiegato che il processo decisionale della WWE ruota attorno ai risultati di business, non all&#x27;indignazione online.</p>\n<blockquote>“Ripeto, se gli ascolti calano, se i ricavi calano, se la rilevanza cala, tocca a noi risolvere.”</blockquote>\n<p>Khan ha poi spiegato che i dirigenti della WWE si sono concentrati molto di più sulla costruzione della prossima generazione di star piuttosto che sul monitorare le lamentele sui social. Ha fatto notare che lui, Triple H, Shawn Michaels e altri leader della WWE hanno passato l&#x27;ultimo anno a discutere di come accelerare la crescita dei giovani talenti, dato che nomi di punta come John Cena, CM Punk e The Rock stanno invecchiando. Il presidente della WWE ha anche chiarito che considera i social media solo una piccola fetta del pubblico complessivo.</p>\n<blockquote>“Non ho mai letto X o Twitter per quanto riguarda il nostro business. E certamente non l&#x27;ho mai letto per quanto riguarda me. Si tratta di una minoranza vocale.”</blockquote>\n<p>Per i fan che credono ancora che la compagnia abbia cambiato rotta a causa del movimento “We Want Cody”, i commenti di Khan lasciano poco spazio al dibattito. Dal suo punto di vista, la direzione creativa della WWE non è stata alterata dalle proteste dei fan e le critiche sui social non detteranno nemmeno i piani futuri.</p>\n<p>Se i fan siano d&#x27;accordo con questa filosofia è tutto un altro discorso, ma Khan afferma che la WWE continuerà a misurare il successo attraverso ascolti, ricavi e rilevanza, piuttosto che attraverso i trending topic.</p>",
-        "bob_body_html_preview": "<p>Nick Khan non crede all&#x27;idea che la WWE abbia cambiato i suoi piani per WrestleMania perché i fan hanno alzato la voce online.</p>\nhttps://www.youtube.com/watch?v=aQR4eTEUtB8\n\n<p>Il presidente della WWE ha affrontato la lunga controversia riguardante Cody Rhodes, Roman Reigns e The Rock durante un&#x27;apparizione allo Sports Business Journal World Congress of Sports. Per oltre due anni, molti fan hanno creduto che la WWE avesse cambiato rotta dopo il caos scatenatosi quando The Rock sembrava pronto a rubare la scena a Cody Rhodes a WrestleMania.</p>\n<p>Secondo Khan, questa narrazione non corrisponde al vero. Discutendo della situazione, Khan ha insistito sul fatto che l&#x27;epilogo visto a WrestleMania 40 fosse sempre stata la destinazione prevista.</p>\n<blockquote>“Tra l&#x27;altro, il piano è sempre stato quello che si è visto a Philly due anni fa. A volte nel wrestling il risultato è prestabilito. Vuoi sviare i fan. Vuoi lasciare che le cose maturino e poi, boom, finisce esattamente come volevamo che finisse. Non è mai cambiato nulla. Si trattava solo di voci e pettegolezzi online sul fatto che stessimo cambiando. Non è mai cambiato.”</blockquote>\n<p>La conversazione si è poi spostata sul fatto se la WWE cambi mai i propri piani quando i fan iniziano a criticare le decisioni creative sui social media. La risposta di Khan è stata immediata.</p>\n<blockquote>“Non risponderemo mai alle critiche sui social media.”</blockquote>\n<p>Ha spiegato che il processo decisionale della WWE ruota attorno ai risultati di business, non all&#x27;indignazione online.</p>\n<blockquote>“Ripeto, se gli ascolti calano, se i ricavi calano, se la rilevanza cala, tocca a noi risolvere.”</blockquote>\n<p>Khan ha poi spiegato che i dirigenti della WWE si sono concentrati molto di più sulla costruzione della prossima generazione di star piuttosto che sul monitorare le lamentele sui social. Ha fatto notare che lui, Triple H, Shawn Michaels e altri leader della WWE hanno passato l&#x27;ultimo anno a discutere di come accelerare la crescita dei giovani talenti, dato che nomi di punta come John Cena, CM Punk e The Rock stanno invecchiando. Il presidente della WWE ha anche chiarito che considera i social media solo una piccola fetta del pubblico complessivo.</p>\n<blockquote>“Non ho mai letto X o Twitter per quanto riguarda il nostro business. E certamente non l&#x27;ho mai letto per quanto riguarda me. Si tratta di una minoranza vocale.”</blockquote>\n<p>Per i fan che credono ancora che la compagnia abbia cambiato rotta a causa del movimento “We Want Cody”, i commenti di Khan lasciano poco spazio al dibattito. Dal suo punto di vista, la direzione creativa della WWE non è stata alterata dalle proteste dei fan e le critiche sui social non detteranno nemmeno i piani futuri.</p>\n<p>Se i fan siano d&#x27;accordo con questa filosofia è tutto un altro discorso, ma Khan afferma che la WWE continuerà a misurare il successo attraverso ascolti, ricavi e rilevanza, piuttosto che attraverso i trending topic.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_nick-khan-la-wwe-non-cambia-i-piani-creativi-in-base-al-malcontento-sui-social.html",
-        "published_html_preview": "<p>Nick Khan non crede all&#x27;idea che la WWE abbia cambiato i suoi piani per WrestleMania perché i fan hanno alzato la voce online.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/watch?v=aQR4eTEUtB8\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/watch?v=aQR4eTEUtB8\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Il presidente della WWE ha affrontato la lunga controversia riguardante Cody Rhodes, Roman Reigns e The Rock durante un&#x27;apparizione allo Sports Business Journal World Congress of Sports. Per oltre due anni, molti fan hanno creduto che la WWE avesse cambiato rotta dopo il caos scatenatosi quando The Rock sembrava pronto a rubare la scena a Cody Rhodes a WrestleMania.</p>\n<p>Secondo Khan, questa narrazione non corrisponde al vero. Discutendo della situazione, Khan ha insistito sul fatto che l&#x27;epilogo visto a WrestleMania 40 fosse sempre stata la destinazione prevista.</p>\n<blockquote>“Tra l&#x27;altro, il piano è sempre stato quello che si è visto a Philly due anni fa. A volte nel wrestling il risultato è prestabilito. Vuoi sviare i fan. Vuoi lasciare che le cose maturino e poi, boom, finisce esattamente come volevamo che finisse. Non è mai cambiato nulla. Si trattava solo di voci e pettegolezzi online sul fatto che stessimo cambiando. Non è mai cambiato.”</blockquote>\n<p>La conversazione si è poi spostata sul fatto se la WWE cambi mai i propri piani quando i fan iniziano a criticare le decisioni creative sui social media. La risposta di Khan è stata immediata.</p>\n<blockquote>“Non risponderemo mai alle critiche sui social media.”</blockquote>\n<p>Ha spiegato che il processo decisionale della WWE ruota attorno ai risultati di business, non all&#x27;indignazione online.</p>\n<blockquote>“Ripeto, se gli ascolti calano, se i ricavi calano, se la rilevanza cala, tocca a noi risolvere.”</blockquote>\n<p>Khan ha poi spiegato che i dirigenti della WWE si sono concentrati molto di più sulla costruzione della prossima generazione di star piuttosto che sul monitorare le lamentele sui social. Ha fatto notare che lui, Triple H, Shawn Michaels e altri leader della WWE hanno passato l&#x27;ultimo anno a discutere di come accelerare la crescita dei giovani talenti, dato che nomi di punta come John Cena, CM Punk e The Rock stanno invecchiando. Il presidente della WWE ha anche chiarito che considera i social media solo una piccola fetta del pubblico complessivo.</p>\n<blockquote>“Non ho mai letto X o Twitter per quanto riguarda il nostro business. E certamente non l&#x27;ho mai letto per quanto riguarda me. Si tratta di una minoranza vocale.”</blockquote>\n<p>Per i fan che credono ancora che la compagnia abbia cambiato rotta a causa del movimento “We Want Cody”, i commenti di Khan lasciano poco spazio al dibattito. Dal suo punto di vista, la direzione creativa della WWE non è stata alterata dalle proteste dei fan e le critiche sui social non detteranno nemmeno i piani futuri.</p>\n<p>Se i fan siano d&#x27;accordo con questa filosofia è tutto un altro discorso, ma Khan afferma che la WWE continuerà a misurare il successo attraverso ascolti, ricavi e rilevanza, piuttosto che attraverso i trending topic.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/nick-khan-says-wwe-will-never-change-creative-plans-because-social-media-backlash/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_nick-khan-la-wwe-non-cambia-i-piani-creativi-in-base-al-malcontento-sui-social.html",
-        "publisher_review_html_preview": "<p>Nick Khan non crede all&#x27;idea che la WWE abbia cambiato i suoi piani per WrestleMania perché i fan hanno alzato la voce online.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/watch?v=aQR4eTEUtB8\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/watch?v=aQR4eTEUtB8\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Il presidente della WWE ha affrontato la lunga controversia riguardante Cody Rhodes, Roman Reigns e The Rock durante un&#x27;apparizione allo Sports Business Journal World Congress of Sports. Per oltre due anni, molti fan hanno creduto che la WWE avesse cambiato rotta dopo il caos scatenatosi quando The Rock sembrava pronto a rubare la scena a Cody Rhodes a WrestleMania.</p>\n<p>Secondo Khan, questa narrazione non corrisponde al vero. Discutendo della situazione, Khan ha insistito sul fatto che l&#x27;epilogo visto a WrestleMania 40 fosse sempre stata la destinazione prevista.</p>\n<blockquote>“Tra l&#x27;altro, il piano è sempre stato quello che si è visto a Philly due anni fa. A volte nel wrestling il risultato è prestabilito. Vuoi sviare i fan. Vuoi lasciare che le cose maturino e poi, boom, finisce esattamente come volevamo che finisse. Non è mai cambiato nulla. Si trattava solo di voci e pettegolezzi online sul fatto che stessimo cambiando. Non è mai cambiato.”</blockquote>\n<p>La conversazione si è poi spostata sul fatto se la WWE cambi mai i propri piani quando i fan iniziano a criticare le decisioni creative sui social media. La risposta di Khan è stata immediata.</p>\n<blockquote>“Non risponderemo mai alle critiche sui social media.”</blockquote>\n<p>Ha spiegato che il processo decisionale della WWE ruota attorno ai risultati di business, non all&#x27;indignazione online.</p>\n<blockquote>“Ripeto, se gli ascolti calano, se i ricavi calano, se la rilevanza cala, tocca a noi risolvere.”</blockquote>\n<p>Khan ha poi spiegato che i dirigenti della WWE si sono concentrati molto di più sulla costruzione della prossima generazione di star piuttosto che sul monitorare le lamentele sui social. Ha fatto notare che lui, Triple H, Shawn Michaels e altri leader della WWE hanno passato l&#x27;ultimo anno a discutere di come accelerare la crescita dei giovani talenti, dato che nomi di punta come John Cena, CM Punk e The Rock stanno invecchiando. Il presidente della WWE ha anche chiarito che considera i social media solo una piccola fetta del pubblico complessivo.</p>\n<blockquote>“Non ho mai letto X o Twitter per quanto riguarda il nostro business. E certamente non l&#x27;ho mai letto per quanto riguarda me. Si tratta di una minoranza vocale.”</blockquote>\n<p>Per i fan che credono ancora che la compagnia abbia cambiato rotta a causa del movimento “We Want Cody”, i commenti di Khan lasciano poco spazio al dibattito. Dal suo punto di vista, la direzione creativa della WWE non è stata alterata dalle proteste dei fan e le critiche sui social non detteranno nemmeno i piani futuri.</p>\n<p>Se i fan siano d&#x27;accordo con questa filosofia è tutto un altro discorso, ma Khan afferma che la WWE continuerà a misurare il successo attraverso ascolti, ricavi e rilevanza, piuttosto che attraverso i trending topic.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/nick-khan-says-wwe-will-never-change-creative-plans-because-social-media-backlash/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/nick-khan-says-wwe-will-never-change-creative-plans-because-social-media-backlash/\nTitolo feed: Nick Khan Says WWE Will Never Change Creative Plans Because Of Social Media Backlash\nTitolo pagina: Nick Khan Says WWE Will Never Change Creative Plans Because Of Social Media Backlash\nDescrizione: Nick Khan isn't buying the idea that WWE changed its WrestleMania plans because fans got loud online. The WWE President addressed the long-running\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Nick Khan isn’t buying the idea that WWE changed its WrestleMania plans because fans got loud online.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"The WWE President addressed the long-running controversy surrounding Cody Rhodes, Roman Reigns, and The Rock during an appearance at the Sports Business Journal World Congress of Sports . For more than two years, many fans have believed WWE pivoted after backlash erupted when The Rock appeared to be taking Cody Rhodes’ WrestleMania spotlight.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"According to Khan, that narrative isn’t true. While discussing the situation, Khan insisted the outcome seen at WrestleMania 40 was always the destination.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“By the way, the plan was always how it ended up in Philly two years ago. Sometimes it’s a predetermined outcome in wrestling. You want to throw the fans off. You want to let things bake and then boom, it ends up the way that we wanted it to end up. It never changed. That was just online rumors and gossip that we were changing. Never changed.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"The conversation then turned to whether WWE ever changes plans when fans begin attacking creative decisions on social media. Khan’s answer was immediate.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“We will never respond to social media criticism.”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"He explained that WWE’s decision-making process revolves around business results, not online outrage.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"quote\",\n    \"text\": \"“Again, if ratings are down, if revenue’s down, if relevancy’s down, it’s up to us.”\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"text\",\n    \"text\": \"Khan went on to explain that WWE executives have been far more focused on building the company’s next generation of stars than monitoring social media complaints. He noted that he, Triple H, Shawn Michaels and other WWE leaders spent the past year discussing how to accelerate younger talent as top names such as John Cena, CM Punk and The Rock get older. The WWE President also made it clear that he views social media as only a small slice of the overall audience.\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"quote\",\n    \"text\": \"“I have never read X or Twitter as it relates to our business. And I’ve certainly never read it regarding me. That is a vocal minority.”\"\n  },\n  {\n    \"id\": \"b12\",\n    \"type\": \"text\",\n    \"text\": \"For fans who still believe the company changed course because of the “We Want Cody” movement, Khan’s comments leave little room for debate. From his perspective, WWE’s creative direction wasn’t altered by fan backlash, and social media criticism won’t dictate future plans either.\"\n  },\n  {\n    \"id\": \"b13\",\n    \"type\": \"text\",\n    \"text\": \"Whether fans agree with that philosophy is another story entirely, but Khan says WWE will continue measuring success through ratings, revenue and relevance rather than trending topics.\"\n  }\n]\n"
+        "alfred_final_html_preview": "<p>La situazione legale di Ludwig Kaiser ha fatto un ulteriore passo avanti dopo che l&#x27;accusa ha consegnato le prove digitali al suo team di difesa, mentre il suo caso per aggressione (reato minore) prosegue il suo iter nel sistema giudiziario della Florida.</p>\n<p>Ringside News ha ottenuto un nuovo documento del tribunale, datato 1 giugno, che conferma che lo Stato della Florida ha fornito all&#x27;avvocato di Kaiser l&#x27;accesso alle prove digitali collegate al caso. Il documento specifica che l&#x27;accusa ha inviato al difensore Thomas Sommerville un link elettronico contenente il materiale probatorio, precisando che l&#x27;accesso rimarrà disponibile per 90 giorni. Il documento recita:</p>\n<blockquote>“Lo Stato ha inviato via email all&#x27;imputato un link che garantisce l&#x27;accesso agli elementi di prova digitale a tom@sommervillelaw.com in data 01/06/2026. Il link nell&#x27;email scadrà entro 90 giorni.”</blockquote>\n<p>L&#x27;accusa ha inoltre chiarito che parte del materiale potrebbe contenere ulteriori informazioni di geolocalizzazione che potrebbero non apparire immediatamente durante la revisione dei file scaricati. Il documento afferma inoltre:</p>\n<blockquote>“Si prega di notare che alcuni video potrebbero contenere informazioni di geolocalizzazione che potrebbero non essere visibili nei video scaricati.”</blockquote>\n<p>Questo ultimo sviluppo arriva mentre Kaiser, il cui vero nome è Marcel Barthel, continua a difendersi dall&#x27;accusa di aggressione minore derivante da un presunto incidente avvenuto nel suo complesso residenziale di Orlando all&#x27;inizio di quest&#x27;anno. In precedenza si è dichiarato non colpevole e rimane in libertà su cauzione.</p>\n<p>Come riportato in precedenza da Ringside News, Kaiser dovrà tornare in tribunale il 16 luglio per un&#x27;udienza preliminare. I documenti del tribunale hanno inoltre indicato un possibile periodo di processo compreso tra il 10 e il 28 agosto, qualora la vicenda non venisse risolta prima di tale data.</p>\n<p>Il procedimento legale non ha avuto ripercussioni sullo status di Kaiser in WWE. Rimane un membro attivo della programmazione WWE e continuerà regolarmente a onorare le apparizioni in programma. Con la difesa che sta ora esaminando le prove digitali e l&#x27;udienza di luglio che si avvicina, l&#x27;attenzione si sposterà sulla possibilità che le parti raggiungano un accordo o se il caso approderà effettivamente a processo nel corso dell&#x27;estate.</p>",
+        "bob_body_html_preview": "<p>La situazione legale di Ludwig Kaiser ha fatto un ulteriore passo avanti dopo che l&#x27;accusa ha consegnato le prove digitali al suo team di difesa, mentre il suo caso per aggressione (reato minore) prosegue il suo iter nel sistema giudiziario della Florida.</p>\n<p>Ringside News ha ottenuto un nuovo documento del tribunale, datato 1 giugno, che conferma che lo Stato della Florida ha fornito all&#x27;avvocato di Kaiser l&#x27;accesso alle prove digitali collegate al caso. Il documento specifica che l&#x27;accusa ha inviato al difensore Thomas Sommerville un link elettronico contenente il materiale probatorio, precisando che l&#x27;accesso rimarrà disponibile per 90 giorni. Il documento recita:</p>\n<blockquote>“Lo Stato ha inviato via email all&#x27;imputato un link che garantisce l&#x27;accesso agli elementi di prova digitale a tom@sommervillelaw.com in data 01/06/2026. Il link nell&#x27;email scadrà entro 90 giorni.”</blockquote>\n<p>L&#x27;accusa ha inoltre chiarito che parte del materiale potrebbe contenere ulteriori informazioni di geolocalizzazione che potrebbero non apparire immediatamente durante la revisione dei file scaricati. Il documento afferma inoltre:</p>\n<blockquote>“Si prega di notare che alcuni video potrebbero contenere informazioni di geolocalizzazione che potrebbero non essere visibili nei video scaricati.”</blockquote>\n<p>Questo ultimo sviluppo arriva mentre Kaiser, il cui vero nome è Marcel Barthel, continua a difendersi dall&#x27;accusa di aggressione minore derivante da un presunto incidente avvenuto nel suo complesso residenziale di Orlando all&#x27;inizio di quest&#x27;anno. In precedenza si è dichiarato non colpevole e rimane in libertà su cauzione.</p>\n<p>Come riportato in precedenza da Ringside News, Kaiser dovrà tornare in tribunale il 16 luglio per un&#x27;udienza preliminare. I documenti del tribunale hanno inoltre indicato un possibile periodo di processo compreso tra il 10 e il 28 agosto, qualora la vicenda non venisse risolta prima di tale data.</p>\n<p>Il procedimento legale non ha avuto ripercussioni sullo status di Kaiser in WWE. Rimane un membro attivo della programmazione WWE e continuerà regolarmente a onorare le apparizioni in programma. Con la difesa che sta ora esaminando le prove digitali e l&#x27;udienza di luglio che si avvicina, l&#x27;attenzione si sposterà sulla possibilità che le parti raggiungano un accordo o se il caso approderà effettivamente a processo nel corso dell&#x27;estate.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_aggiornamenti-legali-sul-caso-di-ludwig-kaiser.html",
+        "published_html_preview": "<p>La situazione legale di Ludwig Kaiser ha fatto un ulteriore passo avanti dopo che l&#x27;accusa ha consegnato le prove digitali al suo team di difesa, mentre il suo caso per aggressione (reato minore) prosegue il suo iter nel sistema giudiziario della Florida.</p>\n<p>Ringside News ha ottenuto un nuovo documento del tribunale, datato 1 giugno, che conferma che lo Stato della Florida ha fornito all&#x27;avvocato di Kaiser l&#x27;accesso alle prove digitali collegate al caso. Il documento specifica che l&#x27;accusa ha inviato al difensore Thomas Sommerville un link elettronico contenente il materiale probatorio, precisando che l&#x27;accesso rimarrà disponibile per 90 giorni. Il documento recita:</p>\n<blockquote>“Lo Stato ha inviato via email all&#x27;imputato un link che garantisce l&#x27;accesso agli elementi di prova digitale a tom@sommervillelaw.com in data 01/06/2026. Il link nell&#x27;email scadrà entro 90 giorni.”</blockquote>\n<p>L&#x27;accusa ha inoltre chiarito che parte del materiale potrebbe contenere ulteriori informazioni di geolocalizzazione che potrebbero non apparire immediatamente durante la revisione dei file scaricati. Il documento afferma inoltre:</p>\n<blockquote>“Si prega di notare che alcuni video potrebbero contenere informazioni di geolocalizzazione che potrebbero non essere visibili nei video scaricati.”</blockquote>\n<p>Questo ultimo sviluppo arriva mentre Kaiser, il cui vero nome è Marcel Barthel, continua a difendersi dall&#x27;accusa di aggressione minore derivante da un presunto incidente avvenuto nel suo complesso residenziale di Orlando all&#x27;inizio di quest&#x27;anno. In precedenza si è dichiarato non colpevole e rimane in libertà su cauzione.</p>\n<p>Come riportato in precedenza da Ringside News, Kaiser dovrà tornare in tribunale il 16 luglio per un&#x27;udienza preliminare. I documenti del tribunale hanno inoltre indicato un possibile periodo di processo compreso tra il 10 e il 28 agosto, qualora la vicenda non venisse risolta prima di tale data.</p>\n<p>Il procedimento legale non ha avuto ripercussioni sullo status di Kaiser in WWE. Rimane un membro attivo della programmazione WWE e continuerà regolarmente a onorare le apparizioni in programma. Con la difesa che sta ora esaminando le prove digitali e l&#x27;udienza di luglio che si avvicina, l&#x27;attenzione si sposterà sulla possibilità che le parti raggiungano un accordo o se il caso approderà effettivamente a processo nel corso dell&#x27;estate.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/digital-evidence-turned-over-in-ludwig-kaiser-battery-case/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_aggiornamenti-legali-sul-caso-di-ludwig-kaiser.html",
+        "publisher_review_html_preview": "<p>La situazione legale di Ludwig Kaiser ha fatto un ulteriore passo avanti dopo che l&#x27;accusa ha consegnato le prove digitali al suo team di difesa, mentre il suo caso per aggressione (reato minore) prosegue il suo iter nel sistema giudiziario della Florida.</p>\n<p>Ringside News ha ottenuto un nuovo documento del tribunale, datato 1 giugno, che conferma che lo Stato della Florida ha fornito all&#x27;avvocato di Kaiser l&#x27;accesso alle prove digitali collegate al caso. Il documento specifica che l&#x27;accusa ha inviato al difensore Thomas Sommerville un link elettronico contenente il materiale probatorio, precisando che l&#x27;accesso rimarrà disponibile per 90 giorni. Il documento recita:</p>\n<blockquote>“Lo Stato ha inviato via email all&#x27;imputato un link che garantisce l&#x27;accesso agli elementi di prova digitale a tom@sommervillelaw.com in data 01/06/2026. Il link nell&#x27;email scadrà entro 90 giorni.”</blockquote>\n<p>L&#x27;accusa ha inoltre chiarito che parte del materiale potrebbe contenere ulteriori informazioni di geolocalizzazione che potrebbero non apparire immediatamente durante la revisione dei file scaricati. Il documento afferma inoltre:</p>\n<blockquote>“Si prega di notare che alcuni video potrebbero contenere informazioni di geolocalizzazione che potrebbero non essere visibili nei video scaricati.”</blockquote>\n<p>Questo ultimo sviluppo arriva mentre Kaiser, il cui vero nome è Marcel Barthel, continua a difendersi dall&#x27;accusa di aggressione minore derivante da un presunto incidente avvenuto nel suo complesso residenziale di Orlando all&#x27;inizio di quest&#x27;anno. In precedenza si è dichiarato non colpevole e rimane in libertà su cauzione.</p>\n<p>Come riportato in precedenza da Ringside News, Kaiser dovrà tornare in tribunale il 16 luglio per un&#x27;udienza preliminare. I documenti del tribunale hanno inoltre indicato un possibile periodo di processo compreso tra il 10 e il 28 agosto, qualora la vicenda non venisse risolta prima di tale data.</p>\n<p>Il procedimento legale non ha avuto ripercussioni sullo status di Kaiser in WWE. Rimane un membro attivo della programmazione WWE e continuerà regolarmente a onorare le apparizioni in programma. Con la difesa che sta ora esaminando le prove digitali e l&#x27;udienza di luglio che si avvicina, l&#x27;attenzione si sposterà sulla possibilità che le parti raggiungano un accordo o se il caso approderà effettivamente a processo nel corso dell&#x27;estate.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/digital-evidence-turned-over-in-ludwig-kaiser-battery-case/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/digital-evidence-turned-over-in-ludwig-kaiser-battery-case/\nTitolo feed: Digital Evidence Turned Over In Ludwig Kaiser Battery Case\nTitolo pagina: Digital Evidence Turned Over In Ludwig Kaiser Battery Case\nDescrizione: Ludwig Kaiser’s legal situation has taken another step forward after prosecutors handed over digital evidence to his defense team as his misdemeanor\nCategoria suggerita: World\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Ludwig Kaiser’s legal situation has taken another step forward after prosecutors handed over digital evidence to his defense team as his misdemeanor battery case continues through the Florida court system.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Ringside News obtained a new court filing dated June 1 that confirms the State of Florida provided Kaiser’s attorney with access to digital evidence connected to the case. The filing states that prosecutors sent defense attorney Thomas Sommerville an electronic link containing evidence and noted that access would remain available for 90 days. The court filing states:\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"“The State emailed the defendant a link that grants access to tom@sommervillelaw.com items of digital evidence on 06/01/2026. The link in the email will expire within 90 days.”\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Prosecutors also made it clear that some of the material may contain additional location-based information that might not immediately appear when reviewing downloaded files. The filing further states:\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“Please note that some videos may contain geolocating information that may not be visible in the downloaded videos.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"The latest development comes as Kaiser, whose real name is Marcel Barthel, continues fighting a misdemeanor battery charge stemming from an alleged incident at his Orlando apartment complex earlier this year. He previously entered a not guilty plea and remains free on bond.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"As Ringside News previously reported, Kaiser is scheduled to return to court on July 16 for a pre-trial conference . Court records have also identified a possible trial period running from August 10 through August 28 if the case is not resolved before then.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"The legal proceedings have not impacted Kaiser’s WWE status. He remains an active part of WWE programming and is expected to continue fulfilling his scheduled appearances. With the defense now reviewing the digital evidence and a July court appearance approaching, attention will turn to whether both sides can reach a resolution or if the case ultimately heads to trial later this summer.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "ai:Dichiarazione strategica sulla gestione creativa WWE. Utile per il dibattito dei fan.; deterministic:strategic:creative,strategic:plans,entity:roman reigns,entity:cody rhodes,entity:the rock,soft_penalty:social media,recency:fresh_12h",
-        "score": 74
+        "reason": "ai:Notizia di cronaca giudiziaria rilevante che coinvolge un wrestler attivo.; deterministic:hard:legal,current:business_legal,recency:fresh_12h",
+        "score": 96
       },
       "publisher": {
         "categories": [
-          4
+          8
         ],
         "error": null,
-        "featured_media": 5893,
+        "featured_media": 5895,
         "present": true,
         "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/wwe/nick-khan-la-wwe-non-cambia-i-piani-creativi-in-base-al-malcontento-sui-social/",
-        "wp_post_id": 5894
+        "wp_link": "https://news.openwrestlingtv.com/world/aggiornamenti-legali-sul-caso-di-ludwig-kaiser/",
+        "wp_post_id": 5896
       },
       "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/nick-khan-says-wwe-will-never-change-creative-plans-because-social-media-backlash",
-      "title_it": "Nick Khan: la WWE non cambia i piani creativi in base al malcontento sui social"
+      "source_url": "https://www.ringsidenews.com/digital-evidence-turned-over-in-ludwig-kaiser-battery-case",
+      "title_it": "Aggiornamenti legali sul caso di Ludwig Kaiser"
     },
     {
       "alfred": {
@@ -119,55 +112,54 @@
         "warnings": []
       },
       "bob": {
-        "clean_element_count": 11,
+        "clean_element_count": 12,
         "diagnostic_stage": "ready_for_alfred",
         "element_counts": {
           "embed": 1,
           "heading": 0,
           "image": 0,
-          "quote": 3,
+          "quote": 4,
           "table": 0,
           "text": 7
         },
         "error": null,
         "present": true,
-        "raw_element_count": 14,
+        "raw_element_count": 15,
         "removed_before_gemini": 16,
         "status": "ready_for_alfred",
         "translation_model": "gemini-3.1-flash-lite",
         "translation_used": true
       },
-      "category_hint": "Business",
+      "category_hint": "WWE",
       "html_audit": {
-        "alfred_final_html_preview": "<p>Nick Khan ha gettato acqua sul fuoco riguardo alle speculazioni su una possibile campagna acquisti di TKO Group.</p>\nhttps://www.youtube.com/watch?v=aQR4eTEUtB8\n\n<p>Con la WWE e l&#x27;UFC che prosperano sotto l&#x27;egida di TKO e la Zuffa Boxing che sta iniziando a decollare, molti si sono chiesti se l&#x27;azienda potesse aggiungere altre proprietà sportive o di intrattenimento al suo crescente portfolio. Secondo Khan, al momento non è questo il piano.</p>\n<p>Durante un intervento al Sports Business Journal World Congress of Sports, il Presidente della WWE ha spiegato che TKO è concentrata sull&#x27;ottenere il massimo dalle attività che già possiede.</p>\n<p>Discutendo della strategia di crescita futura dell&#x27;azienda, Khan ha sottolineato il successo che WWE, UFC e Zuffa Boxing hanno già ottenuto lavorando insieme.</p>\n<blockquote>“Dunque, guardate, l&#x27;iper-focus in questo momento è sulle nostre attività esistenti. Anche guardando ai numeri resi pubblici, il fatturato e la redditività dell&#x27;azienda, le sinergie sui costi e sui ricavi, in particolare tra WWE e UFC, e ora con Zuffa Boxing, sono fenomenali.”</blockquote>\n<p>Khan ha spiegato che l&#x27;unione di questi brand ha creato un vantaggio competitivo in termini di sponsorizzazioni, diritti media, arene e altre opportunità commerciali.</p>\n<blockquote>“Quindi, se vuoi concludere un accordo di sponsorizzazione con uno, forse devi farlo con tutti. Abbiamo riscontrato che questa leva sul mercato funziona molto bene per quanto riguarda le arene, gli accordi televisivi, i contratti sui contenuti e tutto il resto.”</blockquote>\n<p>Dopo questa spiegazione, a Khan è stato chiesto direttamente se TKO avesse in cantiere fusioni o acquisizioni. La sua risposta è stata breve e concisa.</p>\n<blockquote>“Per ora ci atterremo a ciò che abbiamo e cercheremo di farlo crescere nel modo giusto.”</blockquote>\n<p>Mentre TKO continua a costruire il proprio business attorno a WWE, UFC e al nuovo progetto nel pugilato, non aspettatevi che l&#x27;azienda inizi a collezionare ulteriori federazioni o proprietà sportive a breve. Almeno per il momento, l&#x27;attenzione è rivolta a far crescere ciò che già possiedono.</p>",
-        "bob_body_html_preview": "<p>Nick Khan ha gettato acqua sul fuoco riguardo alle speculazioni su una possibile campagna acquisti di TKO Group.</p>\nhttps://www.youtube.com/watch?v=aQR4eTEUtB8\n\n<p>Con la WWE e l&#x27;UFC che prosperano sotto l&#x27;egida di TKO e la Zuffa Boxing che sta iniziando a decollare, molti si sono chiesti se l&#x27;azienda potesse aggiungere altre proprietà sportive o di intrattenimento al suo crescente portfolio. Secondo Khan, al momento non è questo il piano.</p>\n<p>Durante un intervento al Sports Business Journal World Congress of Sports, il Presidente della WWE ha spiegato che TKO è concentrata sull&#x27;ottenere il massimo dalle attività che già possiede.</p>\n<p>Discutendo della strategia di crescita futura dell&#x27;azienda, Khan ha sottolineato il successo che WWE, UFC e Zuffa Boxing hanno già ottenuto lavorando insieme.</p>\n<blockquote>“Dunque, guardate, l&#x27;iper-focus in questo momento è sulle nostre attività esistenti. Anche guardando ai numeri resi pubblici, il fatturato e la redditività dell&#x27;azienda, le sinergie sui costi e sui ricavi, in particolare tra WWE e UFC, e ora con Zuffa Boxing, sono fenomenali.”</blockquote>\n<p>Khan ha spiegato che l&#x27;unione di questi brand ha creato un vantaggio competitivo in termini di sponsorizzazioni, diritti media, arene e altre opportunità commerciali.</p>\n<blockquote>“Quindi, se vuoi concludere un accordo di sponsorizzazione con uno, forse devi farlo con tutti. Abbiamo riscontrato che questa leva sul mercato funziona molto bene per quanto riguarda le arene, gli accordi televisivi, i contratti sui contenuti e tutto il resto.”</blockquote>\n<p>Dopo questa spiegazione, a Khan è stato chiesto direttamente se TKO avesse in cantiere fusioni o acquisizioni. La sua risposta è stata breve e concisa.</p>\n<blockquote>“Per ora ci atterremo a ciò che abbiamo e cercheremo di farlo crescere nel modo giusto.”</blockquote>\n<p>Mentre TKO continua a costruire il proprio business attorno a WWE, UFC e al nuovo progetto nel pugilato, non aspettatevi che l&#x27;azienda inizi a collezionare ulteriori federazioni o proprietà sportive a breve. Almeno per il momento, l&#x27;attenzione è rivolta a far crescere ciò che già possiedono.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_nick-khan-smentisce-l-ipotesi-di-nuove-acquisizioni-per-tko.html",
-        "published_html_preview": "<p>Nick Khan ha gettato acqua sul fuoco riguardo alle speculazioni su una possibile campagna acquisti di TKO Group.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/watch?v=aQR4eTEUtB8\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/watch?v=aQR4eTEUtB8\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Con la WWE e l&#x27;UFC che prosperano sotto l&#x27;egida di TKO e la Zuffa Boxing che sta iniziando a decollare, molti si sono chiesti se l&#x27;azienda potesse aggiungere altre proprietà sportive o di intrattenimento al suo crescente portfolio. Secondo Khan, al momento non è questo il piano.</p>\n<p>Durante un intervento al Sports Business Journal World Congress of Sports, il Presidente della WWE ha spiegato che TKO è concentrata sull&#x27;ottenere il massimo dalle attività che già possiede.</p>\n<p>Discutendo della strategia di crescita futura dell&#x27;azienda, Khan ha sottolineato il successo che WWE, UFC e Zuffa Boxing hanno già ottenuto lavorando insieme.</p>\n<blockquote>“Dunque, guardate, l&#x27;iper-focus in questo momento è sulle nostre attività esistenti. Anche guardando ai numeri resi pubblici, il fatturato e la redditività dell&#x27;azienda, le sinergie sui costi e sui ricavi, in particolare tra WWE e UFC, e ora con Zuffa Boxing, sono fenomenali.”</blockquote>\n<p>Khan ha spiegato che l&#x27;unione di questi brand ha creato un vantaggio competitivo in termini di sponsorizzazioni, diritti media, arene e altre opportunità commerciali.</p>\n<blockquote>“Quindi, se vuoi concludere un accordo di sponsorizzazione con uno, forse devi farlo con tutti. Abbiamo riscontrato che questa leva sul mercato funziona molto bene per quanto riguarda le arene, gli accordi televisivi, i contratti sui contenuti e tutto il resto.”</blockquote>\n<p>Dopo questa spiegazione, a Khan è stato chiesto direttamente se TKO avesse in cantiere fusioni o acquisizioni. La sua risposta è stata breve e concisa.</p>\n<blockquote>“Per ora ci atterremo a ciò che abbiamo e cercheremo di farlo crescere nel modo giusto.”</blockquote>\n<p>Mentre TKO continua a costruire il proprio business attorno a WWE, UFC e al nuovo progetto nel pugilato, non aspettatevi che l&#x27;azienda inizi a collezionare ulteriori federazioni o proprietà sportive a breve. Almeno per il momento, l&#x27;attenzione è rivolta a far crescere ciò che già possiedono.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/nick-khan-shuts-down-talk-tko-buying-more-companies-anytime-soon/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_nick-khan-smentisce-l-ipotesi-di-nuove-acquisizioni-per-tko.html",
-        "publisher_review_html_preview": "<p>Nick Khan ha gettato acqua sul fuoco riguardo alle speculazioni su una possibile campagna acquisti di TKO Group.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/watch?v=aQR4eTEUtB8\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/watch?v=aQR4eTEUtB8\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Con la WWE e l&#x27;UFC che prosperano sotto l&#x27;egida di TKO e la Zuffa Boxing che sta iniziando a decollare, molti si sono chiesti se l&#x27;azienda potesse aggiungere altre proprietà sportive o di intrattenimento al suo crescente portfolio. Secondo Khan, al momento non è questo il piano.</p>\n<p>Durante un intervento al Sports Business Journal World Congress of Sports, il Presidente della WWE ha spiegato che TKO è concentrata sull&#x27;ottenere il massimo dalle attività che già possiede.</p>\n<p>Discutendo della strategia di crescita futura dell&#x27;azienda, Khan ha sottolineato il successo che WWE, UFC e Zuffa Boxing hanno già ottenuto lavorando insieme.</p>\n<blockquote>“Dunque, guardate, l&#x27;iper-focus in questo momento è sulle nostre attività esistenti. Anche guardando ai numeri resi pubblici, il fatturato e la redditività dell&#x27;azienda, le sinergie sui costi e sui ricavi, in particolare tra WWE e UFC, e ora con Zuffa Boxing, sono fenomenali.”</blockquote>\n<p>Khan ha spiegato che l&#x27;unione di questi brand ha creato un vantaggio competitivo in termini di sponsorizzazioni, diritti media, arene e altre opportunità commerciali.</p>\n<blockquote>“Quindi, se vuoi concludere un accordo di sponsorizzazione con uno, forse devi farlo con tutti. Abbiamo riscontrato che questa leva sul mercato funziona molto bene per quanto riguarda le arene, gli accordi televisivi, i contratti sui contenuti e tutto il resto.”</blockquote>\n<p>Dopo questa spiegazione, a Khan è stato chiesto direttamente se TKO avesse in cantiere fusioni o acquisizioni. La sua risposta è stata breve e concisa.</p>\n<blockquote>“Per ora ci atterremo a ciò che abbiamo e cercheremo di farlo crescere nel modo giusto.”</blockquote>\n<p>Mentre TKO continua a costruire il proprio business attorno a WWE, UFC e al nuovo progetto nel pugilato, non aspettatevi che l&#x27;azienda inizi a collezionare ulteriori federazioni o proprietà sportive a breve. Almeno per il momento, l&#x27;attenzione è rivolta a far crescere ciò che già possiedono.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/nick-khan-shuts-down-talk-tko-buying-more-companies-anytime-soon/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/nick-khan-shuts-down-talk-tko-buying-more-companies-anytime-soon/\nTitolo feed: Nick Khan Shuts Down Talk Of TKO Buying More Companies Anytime Soon\nTitolo pagina: Nick Khan Shuts Down Talk Of TKO Buying More Companies Anytime Soon\nDescrizione: Nick Khan has poured cold water on speculation that TKO Group is preparing to go on a buying spree. With WWE and UFC thriving under the TKO banner and\nCategoria suggerita: Business\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Nick Khan has poured cold water on speculation that TKO Group is preparing to go on a buying spree.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"With WWE and UFC thriving under the TKO banner and Zuffa Boxing now getting off the ground, many have wondered whether the company could start adding more sports or entertainment properties to its growing portfolio. According to Khan, that’s not the plan right now.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"During an appearance at the Sports Business Journal World Congress of Sports , the WWE President explained that TKO is focused on getting the most out of the businesses it already owns.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"While discussing the company’s future growth strategy, Khan pointed to the success WWE, UFC, and Zuffa Boxing have already had working together.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“So, look, the hyperfocus right now is on our existing businesses. So, even if you look at these are all publicly, you know, released numbers, the revenue and profitability of the company, the cost synergies, the revenue synergies between WWE and UFC in particular, and now Zuffa Boxing are phenomenal.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Khan explained that combining those brands has created leverage across sponsorships, media rights, venues, and other business opportunities.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“So, if you want to do a sponsorship deal with one, maybe you have to do a sponsorship deal with all. And we found that that leverage in the marketplace has worked quite well as it applies to venues, television deals, or content deals, and everything else.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"After hearing that explanation, Khan was directly asked whether TKO had any mergers or acquisitions in the works. His answer was short and to the point.\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"quote\",\n    \"text\": \"“We’re going to stick with what we have for now and try to grow it out in the right way.”\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"As TKO continues building its business around WWE, UFC, and its new boxing venture, don’t expect the company to start collecting additional promotions or sports properties anytime soon. At least for now, the focus is on growing what they already have.\"\n  }\n]\n"
+        "alfred_final_html_preview": "<p>La WWE sa che all&#x27;orizzonte c&#x27;è un problema e Nick Khan non si nasconde.</p>\nhttps://www.youtube.com/watch?v=aQR4eTEUtB8\n\n<p>Intervenendo al Sports Business Journal World Congress of Sports, il Presidente della WWE ha rivelato che la dirigenza ha trascorso l&#x27;ultimo anno a discutere su come accelerare lo sviluppo di nuove stelle, man mano che alcuni dei nomi di punta della compagnia avanzano con la carriera.</p>\n<p>Khan ha spiegato che lui, Triple H, Shawn Michaels e altri alti dirigenti hanno riconosciuto che molti dei nomi più affermati della federazione non saranno in attività per sempre. Discutendo di questi confronti, Khan ha indicato direttamente diverse delle più grandi star della WWE.</p>\n<blockquote>“Un anno fa ci siamo riuniti. Triple H, LeGentil, io stesso e un tizio di nome Shawn Michaels, che gestisce il nostro sistema di sviluppo ed è un wrestler della Hall of Fame, ci siamo detti: &#x27;Ehi, guardate, John Cena è nel suo tour di ritiro. The Rock è tornato, ma ora sarà impegnato a girare Jumanji e The Smashing Machine. Le nostre altre grandi star, CM Punk, ha 46 anni. Abbiamo diversi uomini che hanno 40 anni o più e che si stanno esibendo ad alti livelli. Dobbiamo accelerare la prossima generazione di talenti&#x27;.&quot;</blockquote>\n<p>Invece di attendere che il ricambio avvenga in modo naturale, Khan ha affermato che la WWE ha iniziato immediatamente a cercare modi per velocizzare l&#x27;ascesa dei giovani. Secondo Khan, Shawn Michaels riteneva che una delle chiavi fondamentali fosse esporre i talenti in via di sviluppo al pubblico dal vivo più spesso, in modo che la WWE potesse misurare le reazioni autentiche dei fan.</p>\n<blockquote>“Quindi, cosa dobbiamo fare per accelerare? Shawn Michaels ha detto che dobbiamo portarli in tour affinché ottengano la risposta di un pubblico dal vivo. Giusto? È parte di ciò che rende unico il wrestling. Se vieni acclamato, ottimo. Se vieni fischiato, ottimo. Se non c&#x27;è risposta, terribile.”</blockquote>\n<p>Khan ha aggiunto che la WWE ha dato seguito a quel piano e ha già visto i risultati dell&#x27;investimento. Uno dei nomi che ha citato è stato Oba Femi, che è diventato rapidamente una delle stelle nascenti più discusse della compagnia.</p>\n<blockquote>“Quindi, abbiamo fatto questo investimento. E se guardate all&#x27;accelerazione delle stelle, persino il match d&#x27;apertura di domenica sera, un tizio di nome Oba Femi, ex lanciatore del peso all&#x27;Università dell&#x27;Alabama contro Brock Lesnar, è probabilmente il match di cui si è parlato di più su ESPN 1 ed ESPN Unlimited domenica.”</blockquote>\n<p>Khan ha poi sottolineato con quanta rapidità Oba Femi abbia scalato le gerarchie.</p>\n<blockquote>“Quel ragazzo è apparso come Oba nel nostro main roster solo da 6 mesi.”</blockquote>\n<p>Con nomi come Oba Femi che ricevono sempre più attenzione e opportunità, la WWE sembra determinata a evitare di trovarsi senza una nuova generazione di main eventer quando le star di oggi decideranno di farsi da parte.</p>",
+        "bob_body_html_preview": "<p>La WWE sa che all&#x27;orizzonte c&#x27;è un problema e Nick Khan non si nasconde.</p>\nhttps://www.youtube.com/watch?v=aQR4eTEUtB8\n\n<p>Intervenendo al Sports Business Journal World Congress of Sports, il Presidente della WWE ha rivelato che la dirigenza ha trascorso l&#x27;ultimo anno a discutere su come accelerare lo sviluppo di nuove stelle, man mano che alcuni dei nomi di punta della compagnia avanzano con la carriera.</p>\n<p>Khan ha spiegato che lui, Triple H, Shawn Michaels e altri alti dirigenti hanno riconosciuto che molti dei nomi più affermati della federazione non saranno in attività per sempre. Discutendo di questi confronti, Khan ha indicato direttamente diverse delle più grandi star della WWE.</p>\n<blockquote>“Un anno fa ci siamo riuniti. Triple H, LeGentil, io stesso e un tizio di nome Shawn Michaels, che gestisce il nostro sistema di sviluppo ed è un wrestler della Hall of Fame, ci siamo detti: &#x27;Ehi, guardate, John Cena è nel suo tour di ritiro. The Rock è tornato, ma ora sarà impegnato a girare Jumanji e The Smashing Machine. Le nostre altre grandi star, CM Punk, ha 46 anni. Abbiamo diversi uomini che hanno 40 anni o più e che si stanno esibendo ad alti livelli. Dobbiamo accelerare la prossima generazione di talenti&#x27;.&quot;</blockquote>\n<p>Invece di attendere che il ricambio avvenga in modo naturale, Khan ha affermato che la WWE ha iniziato immediatamente a cercare modi per velocizzare l&#x27;ascesa dei giovani. Secondo Khan, Shawn Michaels riteneva che una delle chiavi fondamentali fosse esporre i talenti in via di sviluppo al pubblico dal vivo più spesso, in modo che la WWE potesse misurare le reazioni autentiche dei fan.</p>\n<blockquote>“Quindi, cosa dobbiamo fare per accelerare? Shawn Michaels ha detto che dobbiamo portarli in tour affinché ottengano la risposta di un pubblico dal vivo. Giusto? È parte di ciò che rende unico il wrestling. Se vieni acclamato, ottimo. Se vieni fischiato, ottimo. Se non c&#x27;è risposta, terribile.”</blockquote>\n<p>Khan ha aggiunto che la WWE ha dato seguito a quel piano e ha già visto i risultati dell&#x27;investimento. Uno dei nomi che ha citato è stato Oba Femi, che è diventato rapidamente una delle stelle nascenti più discusse della compagnia.</p>\n<blockquote>“Quindi, abbiamo fatto questo investimento. E se guardate all&#x27;accelerazione delle stelle, persino il match d&#x27;apertura di domenica sera, un tizio di nome Oba Femi, ex lanciatore del peso all&#x27;Università dell&#x27;Alabama contro Brock Lesnar, è probabilmente il match di cui si è parlato di più su ESPN 1 ed ESPN Unlimited domenica.”</blockquote>\n<p>Khan ha poi sottolineato con quanta rapidità Oba Femi abbia scalato le gerarchie.</p>\n<blockquote>“Quel ragazzo è apparso come Oba nel nostro main roster solo da 6 mesi.”</blockquote>\n<p>Con nomi come Oba Femi che ricevono sempre più attenzione e opportunità, la WWE sembra determinata a evitare di trovarsi senza una nuova generazione di main eventer quando le star di oggi decideranno di farsi da parte.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_perch-la-wwe-sta-accelerando-la-creazione-delle-sue-prossime-stelle.html",
+        "published_html_preview": "<p>La WWE sa che all&#x27;orizzonte c&#x27;è un problema e Nick Khan non si nasconde.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/watch?v=aQR4eTEUtB8\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/watch?v=aQR4eTEUtB8\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Intervenendo al Sports Business Journal World Congress of Sports, il Presidente della WWE ha rivelato che la dirigenza ha trascorso l&#x27;ultimo anno a discutere su come accelerare lo sviluppo di nuove stelle, man mano che alcuni dei nomi di punta della compagnia avanzano con la carriera.</p>\n<p>Khan ha spiegato che lui, Triple H, Shawn Michaels e altri alti dirigenti hanno riconosciuto che molti dei nomi più affermati della federazione non saranno in attività per sempre. Discutendo di questi confronti, Khan ha indicato direttamente diverse delle più grandi star della WWE.</p>\n<blockquote>“Un anno fa ci siamo riuniti. Triple H, LeGentil, io stesso e un tizio di nome Shawn Michaels, che gestisce il nostro sistema di sviluppo ed è un wrestler della Hall of Fame, ci siamo detti: &#x27;Ehi, guardate, John Cena è nel suo tour di ritiro. The Rock è tornato, ma ora sarà impegnato a girare Jumanji e The Smashing Machine. Le nostre altre grandi star, CM Punk, ha 46 anni. Abbiamo diversi uomini che hanno 40 anni o più e che si stanno esibendo ad alti livelli. Dobbiamo accelerare la prossima generazione di talenti&#x27;.&quot;</blockquote>\n<p>Invece di attendere che il ricambio avvenga in modo naturale, Khan ha affermato che la WWE ha iniziato immediatamente a cercare modi per velocizzare l&#x27;ascesa dei giovani. Secondo Khan, Shawn Michaels riteneva che una delle chiavi fondamentali fosse esporre i talenti in via di sviluppo al pubblico dal vivo più spesso, in modo che la WWE potesse misurare le reazioni autentiche dei fan.</p>\n<blockquote>“Quindi, cosa dobbiamo fare per accelerare? Shawn Michaels ha detto che dobbiamo portarli in tour affinché ottengano la risposta di un pubblico dal vivo. Giusto? È parte di ciò che rende unico il wrestling. Se vieni acclamato, ottimo. Se vieni fischiato, ottimo. Se non c&#x27;è risposta, terribile.”</blockquote>\n<p>Khan ha aggiunto che la WWE ha dato seguito a quel piano e ha già visto i risultati dell&#x27;investimento. Uno dei nomi che ha citato è stato Oba Femi, che è diventato rapidamente una delle stelle nascenti più discusse della compagnia.</p>\n<blockquote>“Quindi, abbiamo fatto questo investimento. E se guardate all&#x27;accelerazione delle stelle, persino il match d&#x27;apertura di domenica sera, un tizio di nome Oba Femi, ex lanciatore del peso all&#x27;Università dell&#x27;Alabama contro Brock Lesnar, è probabilmente il match di cui si è parlato di più su ESPN 1 ed ESPN Unlimited domenica.”</blockquote>\n<p>Khan ha poi sottolineato con quanta rapidità Oba Femi abbia scalato le gerarchie.</p>\n<blockquote>“Quel ragazzo è apparso come Oba nel nostro main roster solo da 6 mesi.”</blockquote>\n<p>Con nomi come Oba Femi che ricevono sempre più attenzione e opportunità, la WWE sembra determinata a evitare di trovarsi senza una nuova generazione di main eventer quando le star di oggi decideranno di farsi da parte.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/why-wwe-rushing-create-its-next-generation-main-event-stars/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_perch-la-wwe-sta-accelerando-la-creazione-delle-sue-prossime-stelle.html",
+        "publisher_review_html_preview": "<p>La WWE sa che all&#x27;orizzonte c&#x27;è un problema e Nick Khan non si nasconde.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/watch?v=aQR4eTEUtB8\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/watch?v=aQR4eTEUtB8\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Intervenendo al Sports Business Journal World Congress of Sports, il Presidente della WWE ha rivelato che la dirigenza ha trascorso l&#x27;ultimo anno a discutere su come accelerare lo sviluppo di nuove stelle, man mano che alcuni dei nomi di punta della compagnia avanzano con la carriera.</p>\n<p>Khan ha spiegato che lui, Triple H, Shawn Michaels e altri alti dirigenti hanno riconosciuto che molti dei nomi più affermati della federazione non saranno in attività per sempre. Discutendo di questi confronti, Khan ha indicato direttamente diverse delle più grandi star della WWE.</p>\n<blockquote>“Un anno fa ci siamo riuniti. Triple H, LeGentil, io stesso e un tizio di nome Shawn Michaels, che gestisce il nostro sistema di sviluppo ed è un wrestler della Hall of Fame, ci siamo detti: &#x27;Ehi, guardate, John Cena è nel suo tour di ritiro. The Rock è tornato, ma ora sarà impegnato a girare Jumanji e The Smashing Machine. Le nostre altre grandi star, CM Punk, ha 46 anni. Abbiamo diversi uomini che hanno 40 anni o più e che si stanno esibendo ad alti livelli. Dobbiamo accelerare la prossima generazione di talenti&#x27;.&quot;</blockquote>\n<p>Invece di attendere che il ricambio avvenga in modo naturale, Khan ha affermato che la WWE ha iniziato immediatamente a cercare modi per velocizzare l&#x27;ascesa dei giovani. Secondo Khan, Shawn Michaels riteneva che una delle chiavi fondamentali fosse esporre i talenti in via di sviluppo al pubblico dal vivo più spesso, in modo che la WWE potesse misurare le reazioni autentiche dei fan.</p>\n<blockquote>“Quindi, cosa dobbiamo fare per accelerare? Shawn Michaels ha detto che dobbiamo portarli in tour affinché ottengano la risposta di un pubblico dal vivo. Giusto? È parte di ciò che rende unico il wrestling. Se vieni acclamato, ottimo. Se vieni fischiato, ottimo. Se non c&#x27;è risposta, terribile.”</blockquote>\n<p>Khan ha aggiunto che la WWE ha dato seguito a quel piano e ha già visto i risultati dell&#x27;investimento. Uno dei nomi che ha citato è stato Oba Femi, che è diventato rapidamente una delle stelle nascenti più discusse della compagnia.</p>\n<blockquote>“Quindi, abbiamo fatto questo investimento. E se guardate all&#x27;accelerazione delle stelle, persino il match d&#x27;apertura di domenica sera, un tizio di nome Oba Femi, ex lanciatore del peso all&#x27;Università dell&#x27;Alabama contro Brock Lesnar, è probabilmente il match di cui si è parlato di più su ESPN 1 ed ESPN Unlimited domenica.”</blockquote>\n<p>Khan ha poi sottolineato con quanta rapidità Oba Femi abbia scalato le gerarchie.</p>\n<blockquote>“Quel ragazzo è apparso come Oba nel nostro main roster solo da 6 mesi.”</blockquote>\n<p>Con nomi come Oba Femi che ricevono sempre più attenzione e opportunità, la WWE sembra determinata a evitare di trovarsi senza una nuova generazione di main eventer quando le star di oggi decideranno di farsi da parte.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/why-wwe-rushing-create-its-next-generation-main-event-stars/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/why-wwe-rushing-create-its-next-generation-main-event-stars/\nTitolo feed: Why WWE Is Rushing To Create Its Next Generation Of Main Event Stars\nTitolo pagina: Why WWE Is Rushing To Create Its Next Generation Of Main Event Stars\nDescrizione: WWE knows it has a problem coming, and Nick Khan isn't hiding from it. While speaking at the Sports Business Journal World Congress of Sports, the WWE\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"WWE knows it has a problem coming, and Nick Khan isn’t hiding from it.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"While speaking at the Sports Business Journal World Congress of Sports , the WWE President revealed that company leadership has spent the last year discussing how to speed up the development of new stars as some of WWE’s biggest attractions move deeper into their careers.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Khan explained that he, Triple H, Shawn Michaels and other top executives recognized that many of the company’s most established names won’t be around forever. While discussing those conversations, Khan pointed directly to several of WWE’s biggest stars.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“A year ago, we got together. Triple H, LeGentil, myself, a guy named Shawn Michaels who runs our developmental system, Hall of Fame wrestler, and we said, ‘Hey, look, we have John Cena on his retirement tour. Rock came back and now he’s going to be filming Jumanji and Smashing Machine at the time. Our other big stars, CM Punk’s 46. We got a number of men who are 40 years or older and they’re performing at a high level. We got to accelerate the next generation of talent.'”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Rather than waiting for the transition to happen naturally, Khan said WWE immediately began looking for ways to fast-track younger performers. According to Khan, Shawn Michaels believed one of the biggest keys was getting developing talent in front of live crowds more often so WWE could measure genuine fan reactions.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“So, what do we need to do to accelerate it? Shawn Michaels said we need to take them on the road so they get the crowd response of a live crowd. Right? That’s part of what makes wrestling unique. If you’re getting cheered, great. If you’re getting booed, great. If there’s no response, terrible.”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"Khan said WWE followed through on that plan and has already seen results from the investment. One of the names he singled out was Oba Femi, who has quickly become one of the company’s most talked-about rising stars.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"quote\",\n    \"text\": \"“So, we made the investment in that. And if you look at the acceleration of stars, even the opening match on Sunday night, a guy named Oba Femi, former shot putter at the University of Alabama against Brock Lesnar, it’s probably the most talked-about match on ESPN 1 and ESPN Unlimited Sunday.”\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"text\",\n    \"text\": \"Khan then pointed out just how quickly Oba Femi has climbed the ladder.\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"quote\",\n    \"text\": \"“That guy’s only been Oba on our main roster for 6 months.”\"\n  },\n  {\n    \"id\": \"b12\",\n    \"type\": \"text\",\n    \"text\": \"With names like Oba Femi receiving increased attention and opportunities, WWE appears determined to avoid finding itself without a new generation of headliners when today’s top stars eventually step away.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "ai:Dichiarazioni ufficiali di Nick Khan su strategia M&A di TKO. Rilevante per il business.; deterministic:hard:tko,recency:fresh_12h",
-        "score": 78
+        "reason": "ai:Dichiarazione strategica di Nick Khan sul futuro del roster, rilevante per i fan.; deterministic:recency:fresh_12h",
+        "score": 62
       },
       "publisher": {
         "categories": [
-          15,
-          8
+          4
         ],
         "error": null,
-        "featured_media": 5889,
+        "featured_media": 5899,
         "present": true,
         "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/world/nick-khan-smentisce-lipotesi-di-nuove-acquisizioni-per-tko/",
-        "wp_post_id": 5890
+        "wp_link": "https://news.openwrestlingtv.com/wwe/perche-la-wwe-sta-accelerando-la-creazione-delle-sue-prossime-stelle/",
+        "wp_post_id": 5900
       },
       "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/nick-khan-shuts-down-talk-tko-buying-more-companies-anytime-soon",
-      "title_it": "Nick Khan smentisce l'ipotesi di nuove acquisizioni per TKO"
+      "source_url": "https://www.ringsidenews.com/why-wwe-rushing-create-its-next-generation-main-event-stars",
+      "title_it": "Perché la WWE sta accelerando la creazione delle sue prossime stelle"
     },
     {
       "alfred": {
@@ -176,71 +168,61 @@
         "issues": [],
         "present": true,
         "quality_score": 100,
-        "warnings": [
-          {
-            "code": "possible_missing_embed_from_menzo_brief",
-            "expected_embeds": [
-              "video"
-            ],
-            "message": "Menzo AI si aspettava embed/video/tweet, ma Bob non ne ha estratti.",
-            "severity": "warning",
-            "source_specific_notes": "Sintetizzare il match senza troppi dettagli inutili."
-          }
-        ]
+        "warnings": []
       },
       "bob": {
-        "clean_element_count": 7,
+        "clean_element_count": 9,
         "diagnostic_stage": "ready_for_alfred",
         "element_counts": {
           "embed": 0,
           "heading": 0,
           "image": 0,
-          "quote": 0,
+          "quote": 1,
           "table": 0,
-          "text": 7
+          "text": 8
         },
         "error": null,
         "present": true,
-        "raw_element_count": 8,
-        "removed_before_gemini": 1,
+        "raw_element_count": 11,
+        "removed_before_gemini": 14,
         "status": "ready_for_alfred",
         "translation_model": "gemini-3.1-flash-lite",
         "translation_used": true
       },
-      "category_hint": "NXT",
+      "category_hint": "Business",
       "html_audit": {
-        "alfred_final_html_preview": "<p>Lexis King ha sconfitto Romeo Moreno, mantenendo il WWE Men&#x27;s Speed Championship durante l&#x27;ultima puntata di &quot;WWE NXT&quot;.</p>\n<p>Moreno si era guadagnato l&#x27;opportunità titolata grazie a una vittoria a sorpresa su Nathan Frazer durante lo show della scorsa settimana; la sfida di semifinale era stata trasformata in finale dopo che il match tra Sean Legacy e Dorian Van Dux si era concluso in un pareggio per limite di tempo.</p>\n<p>Moreno ha tentato un rapido schienamento, ma King è uscito al conto di due, continuando a incalzare il campione con manovre aeree prima di tentare un altro schienamento, rivelatosi però un near-fall. Dopo un minuto di match, King è riuscito a invertire l&#x27;inerzia, provando a sua volta tre schienamenti, tutti senza successo.</p>\n<p>King ha continuato a fiaccare la resistenza di Moreno al centro del ring con dei calci alla schiena, dando vita a uno scambio di colpi quando Moreno è riuscito a rimettersi in piedi. King ha poi tentato una single-leg Boston Crab, dalla quale Moreno è riuscito a divincolarsi.</p>\n<p>A poco più di due minuti dal termine, Moreno ha steso King tentando un altro schienamento, fermatosi al conto di due. Successivamente, ha applicato la Rings of Saturn al centro del ring, interrotta solo quando King è riuscito a trasformare la presa in un tentativo di schienamento.</p>\n<p>Moreno si è lanciato oltre le corde mentre King cercava di prendere fiato, finendo per colpire i Birthright a bordo ring e mancando il bersaglio principale. King ha poi applicato una single-leg Crab, dalla quale Moreno è fuggito con meno di un minuto sul cronometro.</p>\n<p>King è riuscito a mantenere il titolo a 27 secondi dalla fine, abbattendo Moreno con la King&#x27;s Coronation e ottenendo lo schienamento decisivo.</p>",
-        "bob_body_html_preview": "<p>Lexis King ha sconfitto Romeo Moreno, mantenendo il WWE Men&#x27;s Speed Championship durante l&#x27;ultima puntata di &quot;WWE NXT&quot;.</p>\n<p>Moreno si era guadagnato l&#x27;opportunità titolata grazie a una vittoria a sorpresa su Nathan Frazer durante lo show della scorsa settimana; la sfida di semifinale era stata trasformata in finale dopo che il match tra Sean Legacy e Dorian Van Dux si era concluso in un pareggio per limite di tempo.</p>\n<p>Moreno ha tentato un rapido schienamento, ma King è uscito al conto di due, continuando a incalzare il campione con manovre aeree prima di tentare un altro schienamento, rivelatosi però un near-fall. Dopo un minuto di match, King è riuscito a invertire l&#x27;inerzia, provando a sua volta tre schienamenti, tutti senza successo.</p>\n<p>King ha continuato a fiaccare la resistenza di Moreno al centro del ring con dei calci alla schiena, dando vita a uno scambio di colpi quando Moreno è riuscito a rimettersi in piedi. King ha poi tentato una single-leg Boston Crab, dalla quale Moreno è riuscito a divincolarsi.</p>\n<p>A poco più di due minuti dal termine, Moreno ha steso King tentando un altro schienamento, fermatosi al conto di due. Successivamente, ha applicato la Rings of Saturn al centro del ring, interrotta solo quando King è riuscito a trasformare la presa in un tentativo di schienamento.</p>\n<p>Moreno si è lanciato oltre le corde mentre King cercava di prendere fiato, finendo per colpire i Birthright a bordo ring e mancando il bersaglio principale. King ha poi applicato una single-leg Crab, dalla quale Moreno è fuggito con meno di un minuto sul cronometro.</p>\n<p>King è riuscito a mantenere il titolo a 27 secondi dalla fine, abbattendo Moreno con la King&#x27;s Coronation e ottenendo lo schienamento decisivo.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_lexis-king-difende-il-titolo-wwe-speed-contro-un-nuovo-volto-di-nxt.html",
-        "published_html_preview": "<p>Lexis King ha sconfitto Romeo Moreno, mantenendo il WWE Men&#x27;s Speed Championship durante l&#x27;ultima puntata di &quot;WWE NXT&quot;.</p>\n<p>Moreno si era guadagnato l&#x27;opportunità titolata grazie a una vittoria a sorpresa su Nathan Frazer durante lo show della scorsa settimana; la sfida di semifinale era stata trasformata in finale dopo che il match tra Sean Legacy e Dorian Van Dux si era concluso in un pareggio per limite di tempo.</p>\n<p>Moreno ha tentato un rapido schienamento, ma King è uscito al conto di due, continuando a incalzare il campione con manovre aeree prima di tentare un altro schienamento, rivelatosi però un near-fall. Dopo un minuto di match, King è riuscito a invertire l&#x27;inerzia, provando a sua volta tre schienamenti, tutti senza successo.</p>\n<p>King ha continuato a fiaccare la resistenza di Moreno al centro del ring con dei calci alla schiena, dando vita a uno scambio di colpi quando Moreno è riuscito a rimettersi in piedi. King ha poi tentato una single-leg Boston Crab, dalla quale Moreno è riuscito a divincolarsi.</p>\n<p>A poco più di due minuti dal termine, Moreno ha steso King tentando un altro schienamento, fermatosi al conto di due. Successivamente, ha applicato la Rings of Saturn al centro del ring, interrotta solo quando King è riuscito a trasformare la presa in un tentativo di schienamento.</p>\n<p>Moreno si è lanciato oltre le corde mentre King cercava di prendere fiato, finendo per colpire i Birthright a bordo ring e mancando il bersaglio principale. King ha poi applicato una single-leg Crab, dalla quale Moreno è fuggito con meno di un minuto sul cronometro.</p>\n<p>King è riuscito a mantenere il titolo a 27 secondi dalla fine, abbattendo Moreno con la King&#x27;s Coronation e ottenendo lo schienamento decisivo.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2186283/lexis-king-defends-mens-wwe-speed-title-nxt-newcomer/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_lexis-king-difende-il-titolo-wwe-speed-contro-un-nuovo-volto-di-nxt.html",
-        "publisher_review_html_preview": "<p>Lexis King ha sconfitto Romeo Moreno, mantenendo il WWE Men&#x27;s Speed Championship durante l&#x27;ultima puntata di &quot;WWE NXT&quot;.</p>\n<p>Moreno si era guadagnato l&#x27;opportunità titolata grazie a una vittoria a sorpresa su Nathan Frazer durante lo show della scorsa settimana; la sfida di semifinale era stata trasformata in finale dopo che il match tra Sean Legacy e Dorian Van Dux si era concluso in un pareggio per limite di tempo.</p>\n<p>Moreno ha tentato un rapido schienamento, ma King è uscito al conto di due, continuando a incalzare il campione con manovre aeree prima di tentare un altro schienamento, rivelatosi però un near-fall. Dopo un minuto di match, King è riuscito a invertire l&#x27;inerzia, provando a sua volta tre schienamenti, tutti senza successo.</p>\n<p>King ha continuato a fiaccare la resistenza di Moreno al centro del ring con dei calci alla schiena, dando vita a uno scambio di colpi quando Moreno è riuscito a rimettersi in piedi. King ha poi tentato una single-leg Boston Crab, dalla quale Moreno è riuscito a divincolarsi.</p>\n<p>A poco più di due minuti dal termine, Moreno ha steso King tentando un altro schienamento, fermatosi al conto di due. Successivamente, ha applicato la Rings of Saturn al centro del ring, interrotta solo quando King è riuscito a trasformare la presa in un tentativo di schienamento.</p>\n<p>Moreno si è lanciato oltre le corde mentre King cercava di prendere fiato, finendo per colpire i Birthright a bordo ring e mancando il bersaglio principale. King ha poi applicato una single-leg Crab, dalla quale Moreno è fuggito con meno di un minuto sul cronometro.</p>\n<p>King è riuscito a mantenere il titolo a 27 secondi dalla fine, abbattendo Moreno con la King&#x27;s Coronation e ottenendo lo schienamento decisivo.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2186283/lexis-king-defends-mens-wwe-speed-title-nxt-newcomer/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2186283/lexis-king-defends-mens-wwe-speed-title-nxt-newcomer/\nTitolo feed: Lexis King Defends Men's WWE Speed Title Against NXT Newcomer\nTitolo pagina: Lexis King Defends Men's WWE Speed Title Against NXT Newcomer - Wrestling Inc.\nDescrizione: Lexis King retained the WWE Men's Speed Championship during \"WWE NXT.\"\nCategoria suggerita: NXT\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"Lexis King defeated Romeo Moreno to retain the WWE Men's Speed Championship during \\\"WWE NXT.\\\"\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Moreno secured his opportunity with an upset win over Nathan Frazer during last week's show, with their semi-final contest being changed to a final after Sean Legacy and Dorian Van Dux wrestled to a time limit draw in their own semi-final clash.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Moreno went for an early pin only for King to kick out at two, continuing to rush the champion with high-flying offense before going for another cover for a near-fall. A minute into the match, King managed to reverse the momentum and went for three covers of his own to no avail.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"He continued to wear Moreno down in the middle of the ring with kicks to the spine, spurring on a striking exchange when Moreno found his feet once more. King went for a single-leg Boston Crab but Moreno escaped.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"With just over two minutes left Moreno dropped King and went for another cover for the count of two. But then he locked in the Rings of Saturn in the middle of the ring, stopped only when King turned it into a pin attempt.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Moreno flew over the ropes as King sought to gain some breathing space, taking out Birthright on the outside of the ring, missing King. King then cinched in a single-leg Crab, escaped by Moreno with less than a minute to go.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"King managed to retain his title with 27 seconds left on the clock, dropping Moreno with King's Coronation to gain the winning pinfall.\"\n  }\n]\n"
+        "alfred_final_html_preview": "<p>La fusione tra WWE e UFC ha dato vita a TKO Group Holdings, ma le ripercussioni legali dell&#x27;operazione potrebbero ora comportare un prezzo potenzialmente altissimo.</p>\n<p>Una causa collettiva promossa dagli azionisti in merito alla fusione si sta avviando verso il processo: se i querelanti dovessero avere la meglio in tribunale, i danni richiesti potrebbero sfiorare il miliardo di dollari. Il caso si concentra sulle accuse secondo cui Vince McMahon avrebbe spinto per l&#x27;accordo con Endeavor per tutelare il proprio potere, anziché garantire il miglior risultato possibile per gli azionisti WWE.</p>\n<p>Secondo Brandon Thurston di POST Wrestling, i legali che rappresentano un gruppo di azionisti WWE stanno richiedendo un risarcimento danni ingente legato alla fusione.</p>\n<blockquote>“I danni monetari richiesti dai querelanti oscillano tra i 466 e i 957 milioni di dollari, più gli interessi maturati dalla chiusura della fusione, avvenuta quasi tre anni fa. La forchetta deriva da un&#x27;analisi redatta all&#x27;inizio di quest&#x27;anno da James L. Canessa, un economista finanziario incaricato dai querelanti.”</blockquote>\n<p>La causa nasce dalla fusione tra WWE e UFC sotto l&#x27;egida di Endeavor, che ha portato alla creazione di TKO Group Holdings. I querelanti sostengono che McMahon avesse già indirizzato il processo verso Endeavor mentre si trovava sotto esame per le accuse di cattiva condotta sessuale.</p>\n<p>L&#x27;accusa principale è che il futuro personale di McMahon all&#x27;interno dell&#x27;azienda sia stato un fattore determinante nell&#x27;accordo. I querelanti sostengono che gli azionisti WWE abbiano subito una perdita poiché McMahon si era concentrato sull&#x27;assicurarsi un ruolo per se stesso invece di massimizzare i profitti della vendita.</p>\n<p>Tra gli imputati nel caso figurano Vince McMahon, il presidente della WWE Nick Khan, il Chief Content Officer Paul “Triple H” Levesque e gli ex co-presidenti della WWE George Barrios e Michelle Wilson.</p>\n<p>Gli imputati hanno negato ogni illecito. La difesa sostiene che gli azionisti WWE non abbiano subito danni e che il processo di fusione sia stato equo. Sostengono inoltre che l&#x27;operazione abbia beneficiato gli investitori dopo che WWE e UFC sono state unite sotto il marchio TKO.</p>\n<p>Le tempistiche rendono la vicenda ancora più rilevante. Il processo è attualmente fissato per lunedì 8 giugno: una delle battaglie legali più significative nella storia aziendale della WWE è ormai alle porte.</p>",
+        "bob_body_html_preview": "<p>La fusione tra WWE e UFC ha dato vita a TKO Group Holdings, ma le ripercussioni legali dell&#x27;operazione potrebbero ora comportare un prezzo potenzialmente altissimo.</p>\n<p>Una causa collettiva promossa dagli azionisti in merito alla fusione si sta avviando verso il processo: se i querelanti dovessero avere la meglio in tribunale, i danni richiesti potrebbero sfiorare il miliardo di dollari. Il caso si concentra sulle accuse secondo cui Vince McMahon avrebbe spinto per l&#x27;accordo con Endeavor per tutelare il proprio potere, anziché garantire il miglior risultato possibile per gli azionisti WWE.</p>\n<p>Secondo Brandon Thurston di POST Wrestling, i legali che rappresentano un gruppo di azionisti WWE stanno richiedendo un risarcimento danni ingente legato alla fusione.</p>\n<blockquote>“I danni monetari richiesti dai querelanti oscillano tra i 466 e i 957 milioni di dollari, più gli interessi maturati dalla chiusura della fusione, avvenuta quasi tre anni fa. La forchetta deriva da un&#x27;analisi redatta all&#x27;inizio di quest&#x27;anno da James L. Canessa, un economista finanziario incaricato dai querelanti.”</blockquote>\n<p>La causa nasce dalla fusione tra WWE e UFC sotto l&#x27;egida di Endeavor, che ha portato alla creazione di TKO Group Holdings. I querelanti sostengono che McMahon avesse già indirizzato il processo verso Endeavor mentre si trovava sotto esame per le accuse di cattiva condotta sessuale.</p>\n<p>L&#x27;accusa principale è che il futuro personale di McMahon all&#x27;interno dell&#x27;azienda sia stato un fattore determinante nell&#x27;accordo. I querelanti sostengono che gli azionisti WWE abbiano subito una perdita poiché McMahon si era concentrato sull&#x27;assicurarsi un ruolo per se stesso invece di massimizzare i profitti della vendita.</p>\n<p>Tra gli imputati nel caso figurano Vince McMahon, il presidente della WWE Nick Khan, il Chief Content Officer Paul “Triple H” Levesque e gli ex co-presidenti della WWE George Barrios e Michelle Wilson.</p>\n<p>Gli imputati hanno negato ogni illecito. La difesa sostiene che gli azionisti WWE non abbiano subito danni e che il processo di fusione sia stato equo. Sostengono inoltre che l&#x27;operazione abbia beneficiato gli investitori dopo che WWE e UFC sono state unite sotto il marchio TKO.</p>\n<p>Le tempistiche rendono la vicenda ancora più rilevante. Il processo è attualmente fissato per lunedì 8 giugno: una delle battaglie legali più significative nella storia aziendale della WWE è ormai alle porte.</p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_cause-legali-contro-wwe-in-gioco-quasi-un-miliardo-di-dollari.html",
+        "published_html_preview": "<p>La fusione tra WWE e UFC ha dato vita a TKO Group Holdings, ma le ripercussioni legali dell&#x27;operazione potrebbero ora comportare un prezzo potenzialmente altissimo.</p>\n<p>Una causa collettiva promossa dagli azionisti in merito alla fusione si sta avviando verso il processo: se i querelanti dovessero avere la meglio in tribunale, i danni richiesti potrebbero sfiorare il miliardo di dollari. Il caso si concentra sulle accuse secondo cui Vince McMahon avrebbe spinto per l&#x27;accordo con Endeavor per tutelare il proprio potere, anziché garantire il miglior risultato possibile per gli azionisti WWE.</p>\n<p>Secondo Brandon Thurston di POST Wrestling, i legali che rappresentano un gruppo di azionisti WWE stanno richiedendo un risarcimento danni ingente legato alla fusione.</p>\n<blockquote>“I danni monetari richiesti dai querelanti oscillano tra i 466 e i 957 milioni di dollari, più gli interessi maturati dalla chiusura della fusione, avvenuta quasi tre anni fa. La forchetta deriva da un&#x27;analisi redatta all&#x27;inizio di quest&#x27;anno da James L. Canessa, un economista finanziario incaricato dai querelanti.”</blockquote>\n<p>La causa nasce dalla fusione tra WWE e UFC sotto l&#x27;egida di Endeavor, che ha portato alla creazione di TKO Group Holdings. I querelanti sostengono che McMahon avesse già indirizzato il processo verso Endeavor mentre si trovava sotto esame per le accuse di cattiva condotta sessuale.</p>\n<p>L&#x27;accusa principale è che il futuro personale di McMahon all&#x27;interno dell&#x27;azienda sia stato un fattore determinante nell&#x27;accordo. I querelanti sostengono che gli azionisti WWE abbiano subito una perdita poiché McMahon si era concentrato sull&#x27;assicurarsi un ruolo per se stesso invece di massimizzare i profitti della vendita.</p>\n<p>Tra gli imputati nel caso figurano Vince McMahon, il presidente della WWE Nick Khan, il Chief Content Officer Paul “Triple H” Levesque e gli ex co-presidenti della WWE George Barrios e Michelle Wilson.</p>\n<p>Gli imputati hanno negato ogni illecito. La difesa sostiene che gli azionisti WWE non abbiano subito danni e che il processo di fusione sia stato equo. Sostengono inoltre che l&#x27;operazione abbia beneficiato gli investitori dopo che WWE e UFC sono state unite sotto il marchio TKO.</p>\n<p>Le tempistiche rendono la vicenda ancora più rilevante. Il processo è attualmente fissato per lunedì 8 giugno: una delle battaglie legali più significative nella storia aziendale della WWE è ormai alle porte.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_cause-legali-contro-wwe-in-gioco-quasi-un-miliardo-di-dollari.html",
+        "publisher_review_html_preview": "<p>La fusione tra WWE e UFC ha dato vita a TKO Group Holdings, ma le ripercussioni legali dell&#x27;operazione potrebbero ora comportare un prezzo potenzialmente altissimo.</p>\n<p>Una causa collettiva promossa dagli azionisti in merito alla fusione si sta avviando verso il processo: se i querelanti dovessero avere la meglio in tribunale, i danni richiesti potrebbero sfiorare il miliardo di dollari. Il caso si concentra sulle accuse secondo cui Vince McMahon avrebbe spinto per l&#x27;accordo con Endeavor per tutelare il proprio potere, anziché garantire il miglior risultato possibile per gli azionisti WWE.</p>\n<p>Secondo Brandon Thurston di POST Wrestling, i legali che rappresentano un gruppo di azionisti WWE stanno richiedendo un risarcimento danni ingente legato alla fusione.</p>\n<blockquote>“I danni monetari richiesti dai querelanti oscillano tra i 466 e i 957 milioni di dollari, più gli interessi maturati dalla chiusura della fusione, avvenuta quasi tre anni fa. La forchetta deriva da un&#x27;analisi redatta all&#x27;inizio di quest&#x27;anno da James L. Canessa, un economista finanziario incaricato dai querelanti.”</blockquote>\n<p>La causa nasce dalla fusione tra WWE e UFC sotto l&#x27;egida di Endeavor, che ha portato alla creazione di TKO Group Holdings. I querelanti sostengono che McMahon avesse già indirizzato il processo verso Endeavor mentre si trovava sotto esame per le accuse di cattiva condotta sessuale.</p>\n<p>L&#x27;accusa principale è che il futuro personale di McMahon all&#x27;interno dell&#x27;azienda sia stato un fattore determinante nell&#x27;accordo. I querelanti sostengono che gli azionisti WWE abbiano subito una perdita poiché McMahon si era concentrato sull&#x27;assicurarsi un ruolo per se stesso invece di massimizzare i profitti della vendita.</p>\n<p>Tra gli imputati nel caso figurano Vince McMahon, il presidente della WWE Nick Khan, il Chief Content Officer Paul “Triple H” Levesque e gli ex co-presidenti della WWE George Barrios e Michelle Wilson.</p>\n<p>Gli imputati hanno negato ogni illecito. La difesa sostiene che gli azionisti WWE non abbiano subito danni e che il processo di fusione sia stato equo. Sostengono inoltre che l&#x27;operazione abbia beneficiato gli investitori dopo che WWE e UFC sono state unite sotto il marchio TKO.</p>\n<p>Le tempistiche rendono la vicenda ancora più rilevante. Il processo è attualmente fissato per lunedì 8 giugno: una delle battaglie legali più significative nella storia aziendale della WWE è ormai alle porte.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/\nTitolo feed: WWE Shareholder Lawsuit Could Put Nearly $1 Billion On The Line Before Trial\nTitolo pagina: WWE Shareholder Lawsuit Could Put Nearly $1 Billion On The Line Before Trial\nDescrizione: WWE’s merger with UFC may have created TKO Group Holdings, but the legal fallout from that deal is now carrying a massive potential price tag. A\nCategoria suggerita: Business\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b1\",\n    \"type\": \"text\",\n    \"text\": \"WWE’s merger with UFC may have created TKO Group Holdings, but the legal fallout from that deal is now carrying a massive potential price tag.\"\n  },\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"A shareholder lawsuit tied to the merger is heading toward trial, and the damages being sought could come close to $1 billion if the plaintiffs win in court. The case centers on claims that Vince McMahon pushed the Endeavor deal while protecting his own power instead of securing the best possible outcome for WWE shareholders.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"According to Brandon Thurston of POST Wrestling , attorneys representing a class of WWE shareholders are seeking damages in a massive range tied to the merger.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"“The monetary damages the plaintiffs are seeking range between $466 million and $957 million, plus interest accrued since the merger closed nearly three years ago. The range comes from an analysis written earlier this year by James L. Canessa, a financial economist retained by the plaintiffs.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"The lawsuit stems from WWE’s merger with UFC under Endeavor, which led to the formation of TKO Group Holdings. The plaintiffs claim McMahon had already steered the process toward Endeavor while he was under scrutiny connected to sexual misconduct allegations.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"The core accusation is that McMahon’s personal future inside the company became a major factor in the deal. The plaintiffs argue that WWE shareholders may have lost out because McMahon was focused on securing a role for himself instead of maximizing the sale process.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"The defendants in the case include Vince McMahon, WWE President Nick Khan, WWE Chief Content Officer Paul “Triple H” Levesque, and former WWE co-presidents George Barrios and Michelle Wilson.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"The defendants have denied wrongdoing. Their side maintains that WWE shareholders were not damaged and that the merger process was fair. They also argue that the deal ultimately benefited investors after WWE and UFC were combined under the TKO banner.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"The timing makes this even bigger. The case is currently scheduled to go to trial on Monday, June 8, which means one of the most important legal battles tied to WWE’s corporate history is now right around the corner.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "ai:Aggiornamento su titolo attivo di NXT. Importante per la cronaca narrativa.; deterministic:hard:championship,recency:fresh_12h",
-        "score": 74
+        "reason": "ai:Impatto economico massiccio sulla TKO, notizia prioritaria per il settore business.; deterministic:hard:lawsuit,hard:legal,hard:tko,current:business_legal,recency:fresh_12h",
+        "score": 96
       },
       "publisher": {
         "categories": [
-          6,
-          4
+          15,
+          8
         ],
         "error": null,
-        "featured_media": 5891,
+        "featured_media": 5897,
         "present": true,
         "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/wwe/lexis-king-difende-il-titolo-wwe-speed-contro-un-nuovo-volto-di-nxt/",
-        "wp_post_id": 5892
+        "wp_link": "https://news.openwrestlingtv.com/world/cause-legali-contro-wwe-in-gioco-quasi-un-miliardo-di-dollari/",
+        "wp_post_id": 5898
       },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2186283/lexis-king-defends-mens-wwe-speed-title-nxt-newcomer",
-      "title_it": "Lexis King difende il titolo WWE Speed contro un nuovo volto di NXT"
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial",
+      "title_it": "Cause legali contro WWE: in gioco quasi un miliardo di dollari"
     }
   ],
-  "generated_at": "2026-06-03T02:07:55.098468+00:00",
+  "generated_at": "2026-06-03T07:22:14.757744+00:00",
   "how_to_read": {
     "alfred_final_html_preview": "HTML dopo revisione/normalizzazioni di Alfred",
     "bob_body_html_preview": "HTML prodotto da Bob prima di Alfred",
@@ -2368,6 +2350,106 @@
       "overall_status": "ok",
       "published": 3,
       "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 3,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 0
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 3,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 5,
+          "already_worked": 0,
+          "hard_skipped": 24,
+          "menzo_memory_hard_skipped": 14,
+          "old_news_hard_skipped": 4,
+          "to_menzo": 10,
+          "to_simone": 1
+        },
+        "menzo": {
+          "pending": 9,
+          "skipped": 0,
+          "to_bob_or_v92": 3
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 3,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 1,
+          "skipped": 5,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 3,
+      "errors": 0,
+      "generated_at": "2026-06-03T07:22:14.748846+00:00",
+      "overall_status": "ok",
+      "published": 3,
+      "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 3,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 0
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 3,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 5,
+          "already_worked": 0,
+          "hard_skipped": 24,
+          "menzo_memory_hard_skipped": 14,
+          "old_news_hard_skipped": 4,
+          "to_menzo": 10,
+          "to_simone": 1
+        },
+        "menzo": {
+          "pending": 9,
+          "skipped": 0,
+          "to_bob_or_v92": 3
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 3,
+          "wp_not_ready": 0
+        },
+        "simone": {
+          "ready": 1,
+          "skipped": 5,
+          "waiting": 0
+        }
+      },
+      "already_published": 0,
+      "article_count": 3,
+      "errors": 0,
+      "generated_at": "2026-06-03T07:22:14.757744+00:00",
+      "overall_status": "ok",
+      "published": 3,
+      "warnings": 0
     }
   ],
   "overall_status": "ok",
@@ -2387,7 +2469,7 @@
       "blockers": 0,
       "editorial_changes": 0,
       "needs_revision": 0,
-      "warnings": 2
+      "warnings": 0
     },
     "bob_handoff": {
       "errors": 0,
@@ -2395,20 +2477,20 @@
       "ready_for_alfred": 3,
       "translation_pending": 0
     },
-    "ended_at": "2026-06-03T02:07:55.085050+00:00",
+    "ended_at": "2026-06-03T07:22:14.743043+00:00",
     "engine": "bot_v92.py",
     "massy_handoff": {
-      "already_published_hard_skipped": 3,
+      "already_published_hard_skipped": 5,
       "already_worked": 0,
-      "hard_skipped": 22,
+      "hard_skipped": 24,
       "menzo_memory_hard_skipped": 14,
       "old_news_hard_skipped": 4,
-      "to_menzo": 12,
+      "to_menzo": 10,
       "to_simone": 1
     },
     "menzo_handoff": {
-      "pending": 8,
-      "skipped": 2,
+      "pending": 9,
+      "skipped": 0,
       "to_bob_or_v92": 3
     },
     "newsroom_engine_override": false,
@@ -2422,99 +2504,99 @@
     "runtime_delegations": 0,
     "runtime_exit_code": 0,
     "simone_handoff": {
-      "ready": 0,
-      "skipped": 6,
+      "ready": 1,
+      "skipped": 5,
       "waiting": 0
     },
-    "started_at": "2026-06-03T02:07:14.089566+00:00",
+    "started_at": "2026-06-03T07:21:34.571895+00:00",
     "version": "v93_16_massy_publisher_bob_policy"
   },
   "summary": {
     "anomalies": 0,
     "article_dossiers": 3,
     "errors_48h": 18,
-    "published_48h": 72,
+    "published_48h": 78,
     "published_current_run": 3,
-    "runs_48h": 44
+    "runs_48h": 46
   },
   "timeline": [
     {
       "agent": "Jarvis",
       "note": "engine=bot_v92.py",
       "phase": "bootstrap_status_written",
-      "timestamp": "2026-06-03T02:07:14.089838+00:00"
+      "timestamp": "2026-06-03T07:21:34.572199+00:00"
     },
     {
       "agent": "Massy",
-      "note": "to_simone=1 to_menzo=12 hard_skip=22 already=0",
+      "note": "to_simone=1 to_menzo=10 hard_skip=24 already=0",
       "phase": "sentinel_board_ready",
-      "timestamp": "2026-06-03T02:07:14.795101+00:00"
+      "timestamp": "2026-06-03T07:21:35.057686+00:00"
     },
     {
       "agent": "Massy",
       "note": "version=v93_16_massy_old_news_and_menzo_skip_memory",
       "phase": "forced_policy_active",
-      "timestamp": "2026-06-03T02:07:14.795118+00:00"
+      "timestamp": "2026-06-03T07:21:35.057702+00:00"
     },
     {
       "agent": "Simone",
-      "note": "ready=0 waiting=0 skipped=6",
+      "note": "ready=1 waiting=0 skipped=5",
       "phase": "report_decision_ready",
-      "timestamp": "2026-06-03T02:07:14.797932+00:00"
+      "timestamp": "2026-06-03T07:21:35.061256+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "selected=3 pending=8 skipped=2",
+      "note": "selected=3 pending=9 skipped=0",
       "phase": "editorial_decision_ready",
-      "timestamp": "2026-06-03T02:07:22.830680+00:00"
+      "timestamp": "2026-06-03T07:21:42.351942+00:00"
     },
     {
       "agent": "Menzo",
       "note": "version=v93_15_forced_priority_label_softpool",
       "phase": "forced_policy_active",
-      "timestamp": "2026-06-03T02:07:22.830697+00:00"
+      "timestamp": "2026-06-03T07:21:42.351961+00:00"
     },
     {
       "agent": "Bob",
       "note": "ready=3 pending=0 empty=0 errors=0",
       "phase": "article_packages_ready",
-      "timestamp": "2026-06-03T02:07:31.166945+00:00"
+      "timestamp": "2026-06-03T07:21:52.373124+00:00"
     },
     {
       "agent": "Bob",
-      "note": "warnings=1",
+      "note": "warnings=0",
       "phase": "bob_brief_guard_applied",
-      "timestamp": "2026-06-03T02:07:31.168145+00:00"
+      "timestamp": "2026-06-03T07:21:52.374590+00:00"
     },
     {
       "agent": "Alfred",
-      "note": "approved=3 needs_revision=0 blockers=0 warnings=1 changes=0",
+      "note": "approved=3 needs_revision=0 blockers=0 warnings=0 changes=0",
       "phase": "quality_review_ready",
-      "timestamp": "2026-06-03T02:07:31.175085+00:00"
+      "timestamp": "2026-06-03T07:21:52.383162+00:00"
     },
     {
       "agent": "Alfred",
-      "note": "surfaced=1",
+      "note": "surfaced=0",
       "phase": "bob_warning_guard_applied",
-      "timestamp": "2026-06-03T02:07:31.175584+00:00"
+      "timestamp": "2026-06-03T07:21:52.383753+00:00"
     },
     {
       "agent": "Publisher",
       "note": "published=3 already=0 dry=0 wp_not_ready=0 errors=0",
       "phase": "publication_ready",
-      "timestamp": "2026-06-03T02:07:55.085010+00:00"
+      "timestamp": "2026-06-03T07:22:14.742984+00:00"
     },
     {
       "agent": "Jarvis",
       "note": "v93 Publisher completed; v92 fallback skipped",
       "phase": "runtime_skipped",
-      "timestamp": "2026-06-03T02:07:55.085041+00:00"
+      "timestamp": "2026-06-03T07:22:14.743032+00:00"
     },
     {
       "agent": "Archivista",
       "note": "status=ok anomalies=0",
       "phase": "audit_ready",
-      "timestamp": "2026-06-03T02:07:55.098175+00:00"
+      "timestamp": "2026-06-03T07:22:14.757311+00:00"
     }
   ],
   "version": "v93_7_archivista_audit"

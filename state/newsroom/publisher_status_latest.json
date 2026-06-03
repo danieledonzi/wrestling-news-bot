@@ -1,6 +1,6 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-03T02:07:55.084059+00:00",
+  "generated_at": "2026-06-03T07:22:14.741863+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
@@ -55,6 +55,20 @@
   "results": [
     {
       "categories": [
+        8
+      ],
+      "category_names_priority": [
+        "World"
+      ],
+      "featured_media": 5895,
+      "source_url": "https://www.ringsidenews.com/digital-evidence-turned-over-in-ludwig-kaiser-battery-case/",
+      "status": "published",
+      "title_it": "Aggiornamenti legali sul caso di Ludwig Kaiser",
+      "wp_link": "https://news.openwrestlingtv.com/world/aggiornamenti-legali-sul-caso-di-ludwig-kaiser/",
+      "wp_post_id": 5896
+    },
+    {
+      "categories": [
         15,
         8
       ],
@@ -62,28 +76,12 @@
         "Business",
         "World"
       ],
-      "featured_media": 5889,
-      "source_url": "https://www.ringsidenews.com/nick-khan-shuts-down-talk-tko-buying-more-companies-anytime-soon/",
+      "featured_media": 5897,
+      "source_url": "https://www.ringsidenews.com/wwe-shareholder-lawsuit-could-put-nearly-1-billion-line-before-trial/",
       "status": "published",
-      "title_it": "Nick Khan smentisce l'ipotesi di nuove acquisizioni per TKO",
-      "wp_link": "https://news.openwrestlingtv.com/world/nick-khan-smentisce-lipotesi-di-nuove-acquisizioni-per-tko/",
-      "wp_post_id": 5890
-    },
-    {
-      "categories": [
-        6,
-        4
-      ],
-      "category_names_priority": [
-        "NXT",
-        "WWE"
-      ],
-      "featured_media": 5891,
-      "source_url": "https://www.wrestlinginc.com/2186283/lexis-king-defends-mens-wwe-speed-title-nxt-newcomer/",
-      "status": "published",
-      "title_it": "Lexis King difende il titolo WWE Speed contro un nuovo volto di NXT",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/lexis-king-difende-il-titolo-wwe-speed-contro-un-nuovo-volto-di-nxt/",
-      "wp_post_id": 5892
+      "title_it": "Cause legali contro WWE: in gioco quasi un miliardo di dollari",
+      "wp_link": "https://news.openwrestlingtv.com/world/cause-legali-contro-wwe-in-gioco-quasi-un-miliardo-di-dollari/",
+      "wp_post_id": 5898
     },
     {
       "categories": [
@@ -92,12 +90,12 @@
       "category_names_priority": [
         "WWE"
       ],
-      "featured_media": 5893,
-      "source_url": "https://www.ringsidenews.com/nick-khan-says-wwe-will-never-change-creative-plans-because-social-media-backlash/",
+      "featured_media": 5899,
+      "source_url": "https://www.ringsidenews.com/why-wwe-rushing-create-its-next-generation-main-event-stars/",
       "status": "published",
-      "title_it": "Nick Khan: la WWE non cambia i piani creativi in base al malcontento sui social",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/nick-khan-la-wwe-non-cambia-i-piani-creativi-in-base-al-malcontento-sui-social/",
-      "wp_post_id": 5894
+      "title_it": "Perché la WWE sta accelerando la creazione delle sue prossime stelle",
+      "wp_link": "https://news.openwrestlingtv.com/wwe/perche-la-wwe-sta-accelerando-la-creazione-delle-sue-prossime-stelle/",
+      "wp_post_id": 5900
     }
   ],
   "version": "v93_17_publisher_gutenberg_embed_blocks",
