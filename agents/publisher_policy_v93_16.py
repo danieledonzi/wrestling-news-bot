@@ -15,7 +15,7 @@ ARTIFACT_DIR = ROOT / "artifacts" / "newsroom"
 PUBLISHER_STATUS_FILE = NEWSROOM_STATE_DIR / "publisher_status_latest.json"
 ARTIFACT_PUBLISHER_FILE = ARTIFACT_DIR / "publisher_result.json"
 
-VERSION = "v93_17_publisher_gutenberg_embed_blocks"
+VERSION = "v93_23_publisher_paragraph_embed_blocks"
 
 CATEGORY_PRIORITY = {
     "Business": ["Business", "World"],
@@ -28,10 +28,10 @@ CATEGORY_PRIORITY = {
     "Editoriali": ["Editoriali"],
 }
 
-EMBED_LINE_RE = re.compile(
-    r"(?m)^\s*(https?://(?:www\.)?(?:x\.com|twitter\.com|instagram\.com|youtube\.com|youtube-nocookie\.com|youtu\.be|tiktok\.com|threads\.net|facebook\.com|bsky\.app)/\S+)\s*$",
-    re.I,
-)
+EMBED_URL_PATTERN = r"https?://(?:www\.)?(?:x\.com|twitter\.com|instagram\.com|youtube\.com|youtube-nocookie\.com|youtu\.be|tiktok\.com|threads\.net|facebook\.com|bsky\.app)/\S+"
+EMBED_LINE_RE = re.compile(rf"(?m)^\s*({EMBED_URL_PATTERN})\s*$", re.I)
+P_ONLY_EMBED_RE = re.compile(rf"<p>\s*({EMBED_URL_PATTERN})\s*</p>", re.I)
+P_START_EMBED_RE = re.compile(rf"<p>\s*({EMBED_URL_PATTERN})\s*(?:<br\s*/?>|\n|\r\n)+\s*(.*?)</p>", re.I | re.S)
 
 
 def write_json(path: Path, data: Any) -> None:
@@ -77,11 +77,15 @@ def embed_provider(url: str) -> tuple[str, str, str]:
     return "", "rich", "is-type-rich"
 
 
+def clean_url(url: str) -> str:
+    return html.unescape(str(url or "").strip()).rstrip(".,;:)]}\u201d\u2019</p>")
+
+
 def gutenberg_embed_block(url: str) -> str:
-    clean_url = html.unescape(str(url or "").strip())
-    provider, embed_type, classes = embed_provider(clean_url)
-    json_attr = json.dumps({"url": clean_url, "type": embed_type, "providerNameSlug": provider, "responsive": True}, ensure_ascii=False, separators=(",", ":"))
-    safe_url = html.escape(clean_url)
+    clean = clean_url(url)
+    provider, embed_type, classes = embed_provider(clean)
+    json_attr = json.dumps({"url": clean, "type": embed_type, "providerNameSlug": provider, "responsive": True}, ensure_ascii=False, separators=(",", ":"))
+    safe_url = html.escape(clean)
     return (
         f"<!-- wp:embed {json_attr} -->\n"
         f"<figure class=\"wp-block-embed {classes}\"><div class=\"wp-block-embed__wrapper\">\n"
@@ -92,10 +96,27 @@ def gutenberg_embed_block(url: str) -> str:
 
 
 def convert_plain_embed_urls_to_blocks(content: str) -> str:
-    def repl(match: re.Match[str]) -> str:
+    text = content or ""
+
+    def repl_p_start(match: re.Match[str]) -> str:
+        url = clean_url(match.group(1))
+        rest = (match.group(2) or "").strip()
+        block = "\n" + gutenberg_embed_block(url) + "\n"
+        if rest:
+            return block + f"\n<p>{rest}</p>"
+        return block
+
+    def repl_p_only(match: re.Match[str]) -> str:
         return "\n" + gutenberg_embed_block(match.group(1)) + "\n"
 
-    return EMBED_LINE_RE.sub(repl, content or "")
+    def repl_line(match: re.Match[str]) -> str:
+        return "\n" + gutenberg_embed_block(match.group(1)) + "\n"
+
+    # First handle WordPress-cleaned paragraphs such as <p>URL<br>next sentence</p>.
+    text = P_START_EMBED_RE.sub(repl_p_start, text)
+    text = P_ONLY_EMBED_RE.sub(repl_p_only, text)
+    text = EMBED_LINE_RE.sub(repl_line, text)
+    return text
 
 
 def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]:
@@ -151,6 +172,7 @@ def run_publisher(alfred_result: dict[str, Any] | None = None) -> dict[str, Any]
     result.setdefault("policy", {})["category_priority"] = CATEGORY_PRIORITY
     result.setdefault("policy", {})["business_preferred_over_world_for_data_reports"] = True
     result.setdefault("policy", {})["plain_social_urls_rendered_as_gutenberg_embed_blocks"] = True
+    result.setdefault("policy", {})["paragraph_wrapped_social_urls_rendered_as_gutenberg_embed_blocks"] = True
     write_json(ARTIFACT_PUBLISHER_FILE, result)
     write_json(PUBLISHER_STATUS_FILE, result)
     return result
