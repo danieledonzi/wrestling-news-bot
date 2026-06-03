@@ -39,10 +39,22 @@ Published reports: -
 Massy: to_simone=0 to_menzo=14 hard_skip=19 menzo_skip=9 old_skip=1
 Simone: ready=0 reports_published=0 wp_not_ready=0
 Menzo: selected=8 pending=0 skipped=7 ai=True model=gemini-3.1-flash-lite
-Bob: ready=3 errors=0 changes={'bob_v93_16_changes': 2, 'bob_brief_warnings_added': 0}
+Bob: ready=3 errors=0 changes={'bob_brief_warnings_added': 0, 'bob_v93_16_changes': 2}
 Alfred: approved=3 warnings=0 blockers=0
 Publisher: published=0 wp_not_ready=3 errors=0
 Archivista: status=error anomalies=1
 Selected: Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan, Jonathan Coachman Blames WWE’s Crowded Event Schedule For Rushing Storylines, Ryan Nemeth Accuses Straight Edge Guys of Hypocrisy Over PED Use, Jade Cargill Believes WWE Will Resume Unresolved Rivalries With Naomi & Bianca Belair, TKO Accused of Tying Triple H’s Hands With Money-Hungry Tactics, Jonathan Coachman Defends Brock Lesnar’s Controversial Win Over Oba Femi at WWE Clash in Italy
 Published news: -
+Published reports: -
+
+===== NEWSROOM MASTER RUN 2026-06-03T17:26:35.176950+00:00 | v93_20_process_refinements | run_id=26901506338 =====
+Massy: to_simone=0 to_menzo=7 hard_skip=26 menzo_skip=14 old_skip=1
+Simone: ready=0 reports_published=0 wp_not_ready=0
+Menzo: selected=6 pending=0 skipped=1 ai=True model=gemini-3.1-flash-lite
+Bob: ready=3 errors=0 changes={'bob_v93_16_changes': 3, 'bob_brief_warnings_added': 0}
+Alfred: approved=3 warnings=0 blockers=0
+Publisher: published=3 wp_not_ready=0 errors=0
+Archivista: status=ok anomalies=0
+Selected: Logan Paul Reveals Real Pain Behind Torn Tricep Injury At WWE Saturday Night’s Main Event, Jade Cargill Believes WWE Will Resume Unresolved Rivalries With Naomi & Bianca Belair, TKO Accused of Tying Triple H’s Hands With Money-Hungry Tactics, Jonathan Coachman Defends Brock Lesnar’s Controversial Win Over Oba Femi at WWE Clash in Italy, Matt Cardona Explains Why Zack Ryder Had To Die For His WWE Return To Happen, WWE HOFer Nikki Bella Had 'Emily In Paris' Inspired Idea For Clash In Italy
+Published news: Fissata la data del processo per l'uomo accusato di stalking ai danni di Liv Morgan, Jonathan Coachman: il calendario fitto della WWE penalizza le storyline, Ryan Nemeth accusa gli atleti straight edge di ipocrisia sull'uso di PED
 Published reports: -

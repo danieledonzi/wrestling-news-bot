@@ -1,9 +1,7 @@
 {
   "agent": "Menzo",
   "allowed_urls_for_v92": [
-    "https://www.ringsidenews.com/trial-date-set-man-accused-stalking-wwe-star-liv-morgan/",
-    "https://www.ringsidenews.com/jonathan-coachman-blames-wwes-crowded-event-schedule-rushing-storylines/",
-    "https://www.ringsidenews.com/ryan-nemeth-accuses-straight-edge-guys-hypocrisy-ped-use/",
+    "https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event/",
     "https://www.wrestlinginc.com/2186399/wwe-jade-cargill-naomi-bianca-belair-resume-unresolved-rivalries/",
     "https://www.ringsidenews.com/tko-accused-tying-triple-hs-hands-money-hungry-tactics/",
     "https://www.ringsidenews.com/jonathan-coachman-defends-brock-lesnars-controversial-win-oba-femi-wwe-clash-italy/",
@@ -17,14 +15,14 @@
     "target_max": 30,
     "target_min": 20
   },
-  "generated_at": "2026-06-03T17:06:48.277785+00:00",
+  "generated_at": "2026-06-03T17:26:40.491287+00:00",
   "handoff": {
     "pending": 0,
-    "skipped": 7,
-    "to_bob_or_v92": 8
+    "skipped": 1,
+    "to_bob_or_v92": 6
   },
   "input": {
-    "candidate_count": 15,
+    "candidate_count": 7,
     "massy_version": "v93_24_massy_show_news_before_report_closure"
   },
   "menzo_ai": {
@@ -34,13 +32,16 @@
     "enabled": true,
     "error": "",
     "model": "gemini-3.1-flash-lite",
-    "prompt_count": 12,
-    "raw_preview": "{\n  \"reviews\": [\n    {\n      \"id\": \"c1\",\n      \"decision\": \"selected\",\n      \"priority\": 10,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"hard_news\",\n      \"event_key\": \"liv_morgan_trial\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia di cronaca giudiziaria rilevante che coinvolge un top performer WWE.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Focus sulla sintesi legale, evitare sensazionalismi.\"\n      }\n    },\n    {\n      \"id\": \"c2\",\n      \"decision\": \"selected\",\n      \"priority\": 8,\n      \"category_hint\": \"Business\",\n      \"article_type\": \"business_legal\",\n      \"event_key\": \"wwe_scheduling_pace\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Analisi critica sullo stato attuale della programmazione WWE in ottica futura.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Approccio professionale, analizzare le criticità sollevate.\"\n      }\n    },\n    {\n      \"id\": \"c3\",\n      \"decision\": \"skip\",\n      \"priority\": 2,\n      \"category_hint\": \"World\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"nemeth_twitter_rant\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Opinione personale sui social, non influisce sul prodotto televisivo.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"x_tweet\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"embed tweet\"],\n        \"source_specific_notes\": \"N/A\"\n      }\n    },\n    {\n      \"id\": \"c4\",\n      \"decision\": \"selected\",\n      \"priority\": 6,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"jade_cargill_plans\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Dichiarazioni di una star sulla gestione delle rivalità, utile per i fan del roster femminile.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"N/A\"\n      }\n    },\n    {\n      \"id\": \"c5\",\n      \"decision\": \"skip\",\n      \"priority\": 3,\n      \"category_hint\": \"Business\",\n      \"article_type\": \"soft_news\",\n      \"event_key\": \"tko_management_critique\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Speculazioni di terze parti su TKO, poco valore aggiunto.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Categoria corretta in Business.\"\n      }\n    },\n    {\n      \"id\": \"c6\",\n      \"decision\": \"selected\",\n      \"priority\": 7,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"clash_italy_lesnar_femi\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Il pubblico italiano è particolarmente interessato ai fatti legati al PLE in Italia.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Enfatizzare il riferimento a 'Clash in Italy'.\"\n      }\n    },\n    {\n      \"id\": \"c7\",\n      \"decision\": \"s",
+    "prompt_count": 7,
+    "raw_preview": "{\n  \"reviews\": [\n    {\n      \"id\": \"c1\",\n      \"decision\": \"selected\",\n      \"priority\": 10,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"hard_news\",\n      \"event_key\": \"logan_paul_injury\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia di primaria importanza: infortunio reale di un main eventer durante un live event.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"youtube\", \"instagram\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\", \"cta\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Ringsidenews spesso è prolisso, vai dritto al punto sull'infortunio.\"\n      }\n    },\n    {\n      \"id\": \"c2\",\n      \"decision\": \"selected\",\n      \"priority\": 7,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"cargill_rivalries\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Sviluppo narrativo interessante per la divisione femminile WWE.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"author_bio\", \"share_links\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Taglio asciutto, focus sulle prospettive future di Cargill.\"\n      }\n    },\n    {\n      \"id\": \"c3\",\n      \"decision\": \"selected\",\n      \"priority\": 6,\n      \"category_hint\": \"Business\",\n      \"article_type\": \"business_legal\",\n      \"event_key\": \"tko_management\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Analisi interessante sulla gestione TKO, sposta la categoria da TNA a Business.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"cta\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Verifica che il contesto sia chiaro (si parla di WWE, non di TNA).\"\n      }\n    },\n    {\n      \"id\": \"c4\",\n      \"decision\": \"selected\",\n      \"priority\": 8,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"storyline_development\",\n      \"event_key\": \"clash_italy_lesnar\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Rilevanza strategica per il pubblico italiano (Clash in Italy).\",\n      \"bob_brief\": {\n        \"expected_embeds\": [\"x_tweet\"],\n        \"expected_quotes\": true,\n        \"expected_tables\": false,\n        \"possible_noise\": [\"source_social_bar\", \"author_bio\"],\n        \"must_preserve\": [\"citazioni dirette\"],\n        \"source_specific_notes\": \"Focus sul match in Italia.\"\n      }\n    },\n    {\n      \"id\": \"c5\",\n      \"decision\": \"skip\",\n      \"priority\": 2,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"cardona_interview\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Curiosità retrospettiva non urgente.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"\"\n      }\n    },\n    {\n      \"id\": \"c6\",\n      \"decision\": \"skip\",\n      \"priority\": 3,\n      \"category_hint\": \"WWE\",\n      \"article_type\": \"soft_news\",\n      \"event_key\": \"clash_italy_nikki\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Notizia di colore marginale su un'idea scartata.\",\n      \"bob_brief\": {\n        \"expected_embeds\": [],\n        \"expected_quotes\": false,\n        \"expected_tables\": false,\n        \"possible_noise\": [],\n        \"must_preserve\": [],\n        \"source_specific_notes\": \"\"\n      }\n    },\n    {\n      \"id\": \"c7\",\n      \"decision\": \"skip\",\n      \"priority\": 1,\n      \"category_hint\": \"World\",\n      \"article_type\": \"low_value\",\n      \"event_key\": \"danhausen_nba\",\n      \"duplicate_of\": \"\",\n      \"editorial_reason\": \"Sport esterno/curiosità non rilevante per il wrestling italiano.\",\n      \"bob_brief\": {\n        \"expected_em",
     "reviews": [
       {
         "article_type": "hard_news",
         "bob_brief": {
-          "expected_embeds": [],
+          "expected_embeds": [
+            "youtube",
+            "instagram"
+          ],
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
@@ -49,18 +50,41 @@
           "possible_noise": [
             "source_social_bar",
             "author_bio",
-            "cta",
-            "share_links"
+            "cta"
           ],
-          "source_specific_notes": "Focus sulla sintesi legale, evitare sensazionalismi."
+          "source_specific_notes": "Ringsidenews spesso è prolisso, vai dritto al punto sull'infortunio."
         },
         "category_hint": "WWE",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Notizia di cronaca giudiziaria rilevante che coinvolge un top performer WWE.",
-        "event_key": "liv_morgan_trial",
+        "editorial_reason": "Notizia di primaria importanza: infortunio reale di un main eventer durante un live event.",
+        "event_key": "logan_paul_injury",
         "id": "c1",
         "priority": 10,
+        "priority_label": "medium"
+      },
+      {
+        "article_type": "storyline_development",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "author_bio",
+            "share_links"
+          ],
+          "source_specific_notes": "Taglio asciutto, focus sulle prospettive future di Cargill."
+        },
+        "category_hint": "WWE",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Sviluppo narrativo interessante per la divisione femminile WWE.",
+        "event_key": "cargill_rivalries",
+        "id": "c2",
+        "priority": 7,
         "priority_label": "medium"
       },
       {
@@ -74,23 +98,21 @@
           ],
           "possible_noise": [
             "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
+            "cta"
           ],
-          "source_specific_notes": "Approccio professionale, analizzare le criticità sollevate."
+          "source_specific_notes": "Verifica che il contesto sia chiaro (si parla di WWE, non di TNA)."
         },
         "category_hint": "Business",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Analisi critica sullo stato attuale della programmazione WWE in ottica futura.",
-        "event_key": "wwe_scheduling_pace",
-        "id": "c2",
-        "priority": 8,
+        "editorial_reason": "Analisi interessante sulla gestione TKO, sposta la categoria da TNA a Business.",
+        "event_key": "tko_management",
+        "id": "c3",
+        "priority": 6,
         "priority_label": "medium"
       },
       {
-        "article_type": "low_value",
+        "article_type": "storyline_development",
         "bob_brief": {
           "expected_embeds": [
             "x_tweet"
@@ -98,248 +120,79 @@
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
-            "embed tweet"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "N/A"
-        },
-        "category_hint": "World",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Opinione personale sui social, non influisce sul prodotto televisivo.",
-        "event_key": "nemeth_twitter_rant",
-        "id": "c3",
-        "priority": 2,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "storyline_development",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
             "citazioni dirette"
           ],
           "possible_noise": [
             "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
+            "author_bio"
           ],
-          "source_specific_notes": "N/A"
+          "source_specific_notes": "Focus sul match in Italia."
         },
         "category_hint": "WWE",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Dichiarazioni di una star sulla gestione delle rivalità, utile per i fan del roster femminile.",
-        "event_key": "jade_cargill_plans",
+        "editorial_reason": "Rilevanza strategica per il pubblico italiano (Clash in Italy).",
+        "event_key": "clash_italy_lesnar",
         "id": "c4",
-        "priority": 6,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "soft_news",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Categoria corretta in Business."
-        },
-        "category_hint": "Business",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Speculazioni di terze parti su TKO, poco valore aggiunto.",
-        "event_key": "tko_management_critique",
-        "id": "c5",
-        "priority": 3,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "storyline_development",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Enfatizzare il riferimento a 'Clash in Italy'."
-        },
-        "category_hint": "WWE",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Il pubblico italiano è particolarmente interessato ai fatti legati al PLE in Italia.",
-        "event_key": "clash_italy_lesnar_femi",
-        "id": "c6",
-        "priority": 7,
+        "priority": 8,
         "priority_label": "medium"
       },
       {
         "article_type": "low_value",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "N/A"
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Intervista retrospettiva, non urgente per il pubblico italiano.",
-        "event_key": "cardona_interview",
-        "id": "c7",
-        "priority": 2,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "soft_news",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Mantenere il tono leggero."
-        },
-        "category_hint": "WWE",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Curiosità rilevante per il pubblico italiano essendo legata a Clash in Italy.",
-        "event_key": "clash_italy_nikki_bella",
-        "id": "c8",
-        "priority": 5,
-        "priority_label": "medium"
-      },
-      {
-        "article_type": "duplicate",
         "bob_brief": {
           "expected_embeds": [],
           "expected_quotes": false,
           "expected_tables": false,
           "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "N/A"
+          "possible_noise": [],
+          "source_specific_notes": ""
         },
-        "category_hint": "World",
-        "decision": "skip",
-        "duplicate_of": "notizia superata",
-        "editorial_reason": "Notizia vecchia di oltre 24 ore su un evento non WWE (AAA).",
-        "event_key": "aaa_noche_grandes",
-        "id": "c9",
-        "priority": 1,
-        "priority_label": "low"
-      },
-      {
-        "article_type": "low_value",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "N/A"
-        },
-        "category_hint": "AEW",
+        "category_hint": "WWE",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Aneddoto nostalgico su WCW, non prioritario.",
-        "event_key": "schiavone_wcw_aneddoti",
-        "id": "c10",
-        "priority": 1,
-        "priority_label": "low"
-      },
-      {
-        "article_type": "low_value",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "N/A"
-        },
-        "category_hint": "AEW",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Curiosità biografica, non notizia hard news.",
-        "event_key": "schiavone_career",
-        "id": "c11",
-        "priority": 1,
-        "priority_label": "low"
+        "editorial_reason": "Curiosità retrospettiva non urgente.",
+        "event_key": "cardona_interview",
+        "id": "c5",
+        "priority": 2,
+        "priority_label": "medium"
       },
       {
         "article_type": "soft_news",
         "bob_brief": {
           "expected_embeds": [],
-          "expected_quotes": true,
+          "expected_quotes": false,
           "expected_tables": false,
           "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Categoria corretta in WWE."
+          "possible_noise": [],
+          "source_specific_notes": ""
         },
         "category_hint": "WWE",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Notizia personale non rilevante per il wrestling, categoria corretta in WWE.",
-        "event_key": "bronson_reed_accident",
-        "id": "c12",
-        "priority": 2,
+        "editorial_reason": "Notizia di colore marginale su un'idea scartata.",
+        "event_key": "clash_italy_nikki",
+        "id": "c6",
+        "priority": 3,
         "priority_label": "medium"
+      },
+      {
+        "article_type": "low_value",
+        "bob_brief": {
+          "expected_embeds": [],
+          "expected_quotes": false,
+          "expected_tables": false,
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
+        },
+        "category_hint": "World",
+        "decision": "skip",
+        "duplicate_of": "",
+        "editorial_reason": "Sport esterno/curiosità non rilevante per il wrestling italiano.",
+        "event_key": "danhausen_nba",
+        "id": "c7",
+        "priority": 1,
+        "priority_label": "low"
       }
     ],
     "used": true
@@ -370,13 +223,82 @@
   },
   "selected": [
     {
-      "age_hours": 1.7450768063888888,
+      "age_hours": 0.09131414194444444,
       "agent": "Menzo",
-      "ai_editorial_reason": "Notizia di cronaca giudiziaria rilevante che coinvolge un top performer WWE.",
+      "ai_editorial_reason": "Notizia di primaria importanza: infortunio reale di un main eventer durante un live event.",
       "ai_id": "c1",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "hard_news",
+      "assigned_to": "Menzo",
+      "bob_brief": {
+        "expected_embeds": [
+          "youtube",
+          "instagram"
+        ],
+        "expected_quotes": true,
+        "expected_tables": false,
+        "must_preserve": [
+          "citazioni dirette"
+        ],
+        "possible_noise": [
+          "source_social_bar",
+          "author_bio",
+          "cta"
+        ],
+        "source_specific_notes": "Ringsidenews spesso è prolisso, vai dritto al punto sull'infortunio."
+      },
+      "category_hint": "WWE",
+      "decision": "selected",
+      "deterministic_score": 94,
+      "evaluated_at": "2026-06-03T17:26:36.730913+00:00",
+      "feed_url": "https://www.ringsidenews.com/feed/",
+      "menzo_ai_review": {
+        "article_type": "hard_news",
+        "bob_brief": {
+          "expected_embeds": [
+            "youtube",
+            "instagram"
+          ],
+          "expected_quotes": true,
+          "expected_tables": false,
+          "must_preserve": [
+            "citazioni dirette"
+          ],
+          "possible_noise": [
+            "source_social_bar",
+            "author_bio",
+            "cta"
+          ],
+          "source_specific_notes": "Ringsidenews spesso è prolisso, vai dritto al punto sull'infortunio."
+        },
+        "category_hint": "WWE",
+        "decision": "selected",
+        "duplicate_of": "",
+        "editorial_reason": "Notizia di primaria importanza: infortunio reale di un main eventer durante un live event.",
+        "event_key": "logan_paul_injury",
+        "id": "c1",
+        "priority": 10,
+        "priority_label": "medium"
+      },
+      "normalized_url": "https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event",
+      "priority": "hard",
+      "published": "Wed, 03 Jun 2026 17:21:08 +0000",
+      "reason": "ai:Notizia di primaria importanza: infortunio reale di un main eventer durante un live event.; deterministic:hard:injury,hard:championship,recency:fresh_12h",
+      "score": 84,
+      "source": "ringsidenews",
+      "summary": "<p><img alt=\"Logan Paul Reveals Real Pain Behind Torn Tricep Injury At WWE Saturday Night’s Main Event\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/logan-paul-reveals-real-pain-behind-torn-tricep-injury-at-wwe-saturday-nights-main-event-03.jpg?x72960\" width=\"800\" /></p>Logan Paul’s latest WWE run hit a brutal setback after he suffered a torn tricep during his championship match at WWE Saturday Night’s Main Event. Paul and Austin Theory defended their WWE World Tag Team Championship against The Street Profits on May 23, but the match ended with Paul dealing with a serious injury. WWE ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event/\" title=\"Logan Paul Reveals Real Pain Behind Torn Tricep Injury At WWE Saturday Night’s Main Event\">Read more</a>",
+      "title": "Logan Paul Reveals Real Pain Behind Torn Tricep Injury At WWE Saturday Night’s Main Event",
+      "url": "https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event/"
+    },
+    {
+      "age_hours": 1.9435358455555554,
+      "agent": "Menzo",
+      "ai_editorial_reason": "Sviluppo narrativo interessante per la divisione femminile WWE.",
+      "ai_id": "c2",
+      "ai_priority": 72,
+      "ai_priority_label": "medium",
+      "article_type": "storyline_development",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [],
@@ -386,20 +308,18 @@
           "citazioni dirette"
         ],
         "possible_noise": [
-          "source_social_bar",
           "author_bio",
-          "cta",
           "share_links"
         ],
-        "source_specific_notes": "Focus sulla sintesi legale, evitare sensazionalismi."
+        "source_specific_notes": "Taglio asciutto, focus sulle prospettive future di Cargill."
       },
       "category_hint": "WWE",
       "decision": "selected",
-      "deterministic_score": 100,
-      "evaluated_at": "2026-06-03T17:06:17.276505+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
+      "deterministic_score": 84,
+      "evaluated_at": "2026-06-03T17:26:36.729046+00:00",
+      "feed_url": "https://www.wrestlinginc.com/feed/",
       "menzo_ai_review": {
-        "article_type": "hard_news",
+        "article_type": "storyline_development",
         "bob_brief": {
           "expected_embeds": [],
           "expected_quotes": true,
@@ -408,37 +328,35 @@
             "citazioni dirette"
           ],
           "possible_noise": [
-            "source_social_bar",
             "author_bio",
-            "cta",
             "share_links"
           ],
-          "source_specific_notes": "Focus sulla sintesi legale, evitare sensazionalismi."
+          "source_specific_notes": "Taglio asciutto, focus sulle prospettive future di Cargill."
         },
         "category_hint": "WWE",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Notizia di cronaca giudiziaria rilevante che coinvolge un top performer WWE.",
-        "event_key": "liv_morgan_trial",
-        "id": "c1",
-        "priority": 10,
+        "editorial_reason": "Sviluppo narrativo interessante per la divisione femminile WWE.",
+        "event_key": "cargill_rivalries",
+        "id": "c2",
+        "priority": 7,
         "priority_label": "medium"
       },
-      "normalized_url": "https://www.ringsidenews.com/trial-date-set-man-accused-stalking-wwe-star-liv-morgan",
+      "normalized_url": "https://www.wrestlinginc.com/2186399/wwe-jade-cargill-naomi-bianca-belair-resume-unresolved-rivalries",
       "priority": "hard",
-      "published": "Wed, 03 Jun 2026 15:21:35 +0000",
-      "reason": "ai:Notizia di cronaca giudiziaria rilevante che coinvolge un top performer WWE.; deterministic:hard:arrested,entity:liv morgan,recency:fresh_12h",
-      "score": 87,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/trial-date-set-for-man-accused-of-stalking-wwe-star-liv-morgan-08.jpg?x40965\" width=\"800\" /></p>The criminal case involving the man accused of stalking WWE star Liv Morgan is finally moving toward trial. Shawn Chan, the Canadian man accused of traveling to Florida and showing up at Morgan&#8217;s home before later being arrested at the WWE Performance Center, is now scheduled to stand trial on June 15 at 9:00 a.m. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/trial-date-set-man-accused-stalking-wwe-star-liv-morgan/\" title=\"Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan\">Read more</a>",
-      "title": "Trial Date Set For Man Accused of Stalking WWE Star Liv Morgan",
-      "url": "https://www.ringsidenews.com/trial-date-set-man-accused-stalking-wwe-star-liv-morgan/"
+      "published": "Wed, 03 Jun 2026 15:30:00 +0000",
+      "reason": "ai:Sviluppo narrativo interessante per la divisione femminile WWE.; deterministic:hard:returns,hard:return,recency:fresh_12h",
+      "score": 79,
+      "source": "wrestlinginc",
+      "summary": "Jade Cargill has discussed her rivalries with Bianca Belair and Naomi, and she is hoping for their returns so she can feud with both of them in WWE.",
+      "title": "Jade Cargill Believes WWE Will Resume Unresolved Rivalries With Naomi & Bianca Belair",
+      "url": "https://www.wrestlinginc.com/2186399/wwe-jade-cargill-naomi-bianca-belair-resume-unresolved-rivalries/"
     },
     {
-      "age_hours": 4.1811883227777775,
+      "age_hours": 3.3707590405555554,
       "agent": "Menzo",
-      "ai_editorial_reason": "Analisi critica sullo stato attuale della programmazione WWE in ottica futura.",
-      "ai_id": "c2",
+      "ai_editorial_reason": "Analisi interessante sulla gestione TKO, sposta la categoria da TNA a Business.",
+      "ai_id": "c3",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "business_legal",
@@ -452,16 +370,14 @@
         ],
         "possible_noise": [
           "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
+          "cta"
         ],
-        "source_specific_notes": "Approccio professionale, analizzare le criticità sollevate."
+        "source_specific_notes": "Verifica che il contesto sia chiaro (si parla di WWE, non di TNA)."
       },
       "category_hint": "Business",
       "decision": "selected",
-      "deterministic_score": 100,
-      "evaluated_at": "2026-06-03T17:06:17.277963+00:00",
+      "deterministic_score": 82,
+      "evaluated_at": "2026-06-03T17:26:36.732548+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
         "article_type": "business_legal",
@@ -474,39 +390,37 @@
           ],
           "possible_noise": [
             "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
+            "cta"
           ],
-          "source_specific_notes": "Approccio professionale, analizzare le criticità sollevate."
+          "source_specific_notes": "Verifica che il contesto sia chiaro (si parla di WWE, non di TNA)."
         },
         "category_hint": "Business",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Analisi critica sullo stato attuale della programmazione WWE in ottica futura.",
-        "event_key": "wwe_scheduling_pace",
-        "id": "c2",
-        "priority": 8,
+        "editorial_reason": "Analisi interessante sulla gestione TKO, sposta la categoria da TNA a Business.",
+        "event_key": "tko_management",
+        "id": "c3",
+        "priority": 6,
         "priority_label": "medium"
       },
-      "normalized_url": "https://www.ringsidenews.com/jonathan-coachman-blames-wwes-crowded-event-schedule-rushing-storylines",
+      "normalized_url": "https://www.ringsidenews.com/tko-accused-tying-triple-hs-hands-money-hungry-tactics",
       "priority": "hard",
-      "published": "Wed, 03 Jun 2026 12:55:25 +0000",
-      "reason": "ai:Analisi critica sullo stato attuale della programmazione WWE in ottica futura.; deterministic:hard:netflix,current:netflix_aaa,current:business_legal,recency:fresh_12h",
-      "score": 87,
+      "published": "Wed, 03 Jun 2026 14:04:22 +0000",
+      "reason": "ai:Analisi interessante sulla gestione TKO, sposta la categoria da TNA a Business.; deterministic:hard:tko,recency:fresh_12h",
+      "score": 78,
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Jonathan Coachman Blames WWE’s Crowded Event Schedule For Rushing Storylines\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/jonathan-coachman-blames-wwes-crowded-event-schedule-for-rushing-storylines-11.jpg?x40965\" width=\"800\" /></p>Jonathan Coachman believes WWE has a major pacing problem right now — and he says the company’s packed event calendar is making it harder for stories to breathe. While speaking on 2 Count Tuesday, Coachman called out WWE’s nonstop schedule, pointing to premium live events, Saturday Night’s Main Event specials, Netflix commitments, ESPN obligations, Peacock, ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/jonathan-coachman-blames-wwes-crowded-event-schedule-rushing-storylines/\" title=\"Jonathan Coachman Blames WWE’s Crowded Event Schedule For Rushing Storylines\">Read more</a>",
-      "title": "Jonathan Coachman Blames WWE’s Crowded Event Schedule For Rushing Storylines",
-      "url": "https://www.ringsidenews.com/jonathan-coachman-blames-wwes-crowded-event-schedule-rushing-storylines/"
+      "summary": "<p><img alt=\"TKO Accused of Tying Triple H’s Hands With Money-Hungry Tactics\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/tko-accused-of-tying-triple-hs-hands-with-money-hungry-tactics-31.jpg?x72960\" width=\"800\" /></p>Chris Harris isn’t blaming Triple H for everything happening in WWE right now — he’s pointing the finger straight at TKO. The former TNA star addressed WWE’s current direction while speaking on the Tagging in with Chris Harris podcast, and he made it clear he believes Triple H is working under serious corporate pressure. His ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/tko-accused-tying-triple-hs-hands-money-hungry-tactics/\" title=\"TKO Accused of Tying Triple H’s Hands With Money-Hungry Tactics\">Read more</a>",
+      "title": "TKO Accused of Tying Triple H’s Hands With Money-Hungry Tactics",
+      "url": "https://www.ringsidenews.com/tko-accused-tying-triple-hs-hands-money-hungry-tactics/"
     },
     {
-      "age_hours": 0.056742448888888894,
+      "age_hours": 5.002426003333333,
       "agent": "Menzo",
-      "ai_editorial_reason": "Opinione personale sui social, non influisce sul prodotto televisivo.",
-      "ai_id": "c3",
+      "ai_editorial_reason": "Rilevanza strategica per il pubblico italiano (Clash in Italy).",
+      "ai_id": "c4",
       "ai_priority": 72,
       "ai_priority_label": "medium",
-      "article_type": "low_value",
+      "article_type": "storyline_development",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [
@@ -515,23 +429,21 @@
         "expected_quotes": true,
         "expected_tables": false,
         "must_preserve": [
-          "embed tweet"
+          "citazioni dirette"
         ],
         "possible_noise": [
           "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
+          "author_bio"
         ],
-        "source_specific_notes": "N/A"
+        "source_specific_notes": "Focus sul match in Italia."
       },
-      "category_hint": "World",
+      "category_hint": "WWE",
       "decision": "selected",
-      "deterministic_score": 92,
-      "evaluated_at": "2026-06-03T17:06:17.272817+00:00",
+      "deterministic_score": 82,
+      "evaluated_at": "2026-06-03T17:26:36.733614+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
-        "article_type": "low_value",
+        "article_type": "storyline_development",
         "bob_brief": {
           "expected_embeds": [
             "x_tweet"
@@ -539,350 +451,129 @@
           "expected_quotes": true,
           "expected_tables": false,
           "must_preserve": [
-            "embed tweet"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "N/A"
-        },
-        "category_hint": "World",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Opinione personale sui social, non influisce sul prodotto televisivo.",
-        "event_key": "nemeth_twitter_rant",
-        "id": "c3",
-        "priority": 2,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.ringsidenews.com/ryan-nemeth-accuses-straight-edge-guys-hypocrisy-ped-use",
-      "priority": "hard",
-      "published": "Wed, 03 Jun 2026 17:02:53 +0000",
-      "reason": "ai:Opinione personale sui social, non influisce sul prodotto televisivo.; deterministic:hard:fired,recency:fresh_12h",
-      "score": 83,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Ryan Nemeth Accuses Straight Edge Guys of Hypocrisy Over PED Use\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/ryan-nemeth-accuses-straight-edge-guys-of-hypocrisy-over-ped-use-14.jpg?x40965\" width=\"800\" /></p>Ryan Nemeth just fired off a controversial tweet about straight edge people— and he didn’t need to name names to get people talking. Nemeth took to Twitter and ripped into what he sees as hypocrisy from certain straight edge personalities, suggesting some people loudly preach about keeping their bodies clean while allegedly making an exception ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/ryan-nemeth-accuses-straight-edge-guys-hypocrisy-ped-use/\" title=\"Ryan Nemeth Accuses Straight Edge Guys of Hypocrisy Over PED Use\">Read more</a>",
-      "title": "Ryan Nemeth Accuses Straight Edge Guys of Hypocrisy Over PED Use",
-      "url": "https://www.ringsidenews.com/ryan-nemeth-accuses-straight-edge-guys-hypocrisy-ped-use/"
-    },
-    {
-      "age_hours": 1.6047976316666668,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Dichiarazioni di una star sulla gestione delle rivalità, utile per i fan del roster femminile.",
-      "ai_id": "c4",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "storyline_development",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [
-          "citazioni dirette"
-        ],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "N/A"
-      },
-      "category_hint": "WWE",
-      "decision": "selected",
-      "deterministic_score": 84,
-      "evaluated_at": "2026-06-03T17:06:17.271475+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "storyline_development",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
             "citazioni dirette"
           ],
           "possible_noise": [
             "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
+            "author_bio"
           ],
-          "source_specific_notes": "N/A"
+          "source_specific_notes": "Focus sul match in Italia."
         },
         "category_hint": "WWE",
         "decision": "selected",
         "duplicate_of": "",
-        "editorial_reason": "Dichiarazioni di una star sulla gestione delle rivalità, utile per i fan del roster femminile.",
-        "event_key": "jade_cargill_plans",
+        "editorial_reason": "Rilevanza strategica per il pubblico italiano (Clash in Italy).",
+        "event_key": "clash_italy_lesnar",
         "id": "c4",
-        "priority": 6,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.wrestlinginc.com/2186399/wwe-jade-cargill-naomi-bianca-belair-resume-unresolved-rivalries",
-      "priority": "hard",
-      "published": "Wed, 03 Jun 2026 15:30:00 +0000",
-      "reason": "ai:Dichiarazioni di una star sulla gestione delle rivalità, utile per i fan del roster femminile.; deterministic:hard:returns,hard:return,recency:fresh_12h",
-      "score": 79,
-      "source": "wrestlinginc",
-      "summary": "Jade Cargill has discussed her rivalries with Bianca Belair and Naomi, and she is hoping for their returns so she can feud with both of them in WWE.",
-      "title": "Jade Cargill Believes WWE Will Resume Unresolved Rivalries With Naomi & Bianca Belair",
-      "url": "https://www.wrestlinginc.com/2186399/wwe-jade-cargill-naomi-bianca-belair-resume-unresolved-rivalries/"
-    },
-    {
-      "age_hours": 3.0320214438888886,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Speculazioni di terze parti su TKO, poco valore aggiunto.",
-      "ai_id": "c5",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "soft_news",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [
-          "citazioni dirette"
-        ],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Categoria corretta in Business."
-      },
-      "category_hint": "Business",
-      "decision": "selected",
-      "deterministic_score": 82,
-      "evaluated_at": "2026-06-03T17:06:17.277199+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "soft_news",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Categoria corretta in Business."
-        },
-        "category_hint": "Business",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Speculazioni di terze parti su TKO, poco valore aggiunto.",
-        "event_key": "tko_management_critique",
-        "id": "c5",
-        "priority": 3,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.ringsidenews.com/tko-accused-tying-triple-hs-hands-money-hungry-tactics",
-      "priority": "hard",
-      "published": "Wed, 03 Jun 2026 14:04:22 +0000",
-      "reason": "ai:Speculazioni di terze parti su TKO, poco valore aggiunto.; deterministic:hard:tko,recency:fresh_12h",
-      "score": 78,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"TKO Accused of Tying Triple H’s Hands With Money-Hungry Tactics\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/tko-accused-of-tying-triple-hs-hands-with-money-hungry-tactics-31.jpg?x40965\" width=\"800\" /></p>Chris Harris isn’t blaming Triple H for everything happening in WWE right now — he’s pointing the finger straight at TKO. The former TNA star addressed WWE’s current direction while speaking on the Tagging in with Chris Harris podcast, and he made it clear he believes Triple H is working under serious corporate pressure. His ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/tko-accused-tying-triple-hs-hands-money-hungry-tactics/\" title=\"TKO Accused of Tying Triple H’s Hands With Money-Hungry Tactics\">Read more</a>",
-      "title": "TKO Accused of Tying Triple H’s Hands With Money-Hungry Tactics",
-      "url": "https://www.ringsidenews.com/tko-accused-tying-triple-hs-hands-money-hungry-tactics/"
-    },
-    {
-      "age_hours": 4.663688565555556,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Il pubblico italiano è particolarmente interessato ai fatti legati al PLE in Italia.",
-      "ai_id": "c6",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "storyline_development",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [
-          "citazioni dirette"
-        ],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Enfatizzare il riferimento a 'Clash in Italy'."
-      },
-      "category_hint": "WWE",
-      "decision": "selected",
-      "deterministic_score": 82,
-      "evaluated_at": "2026-06-03T17:06:17.278837+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "storyline_development",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Enfatizzare il riferimento a 'Clash in Italy'."
-        },
-        "category_hint": "WWE",
-        "decision": "selected",
-        "duplicate_of": "",
-        "editorial_reason": "Il pubblico italiano è particolarmente interessato ai fatti legati al PLE in Italia.",
-        "event_key": "clash_italy_lesnar_femi",
-        "id": "c6",
-        "priority": 7,
+        "priority": 8,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.ringsidenews.com/jonathan-coachman-defends-brock-lesnars-controversial-win-oba-femi-wwe-clash-italy",
       "priority": "hard",
       "published": "Wed, 03 Jun 2026 12:26:28 +0000",
-      "reason": "ai:Il pubblico italiano è particolarmente interessato ai fatti legati al PLE in Italia.; deterministic:strategic:clash in italy,entity:brock lesnar,entity:oba femi,recency:fresh_12h",
+      "reason": "ai:Rilevanza strategica per il pubblico italiano (Clash in Italy).; deterministic:strategic:clash in italy,entity:brock lesnar,entity:oba femi,recency:fresh_12h",
       "score": 78,
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Jonathan Coachman Defends Brock Lesnar&#039;s Controversial Win Over Oba Femi at WWE Clash in Italy\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/jonathan-coachman-defends-brock-lesnars-controversial-win-over-oba-femi-at-wwe-clash-in-italy-23.jpg?x40965\" width=\"800\" /></p>Jonathan Coachman is pushing back against the fan backlash surrounding Brock Lesnar’s victory over Oba Femi at WWE Clash in Italy. Lesnar defeated Femi in a hard-hitting bout at the Inalpi Arena in Turin, Italy, evening their rivalry after Femi scored a major win over The Beast at WrestleMania 42. While many fans blasted WWE ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/jonathan-coachman-defends-brock-lesnars-controversial-win-oba-femi-wwe-clash-italy/\" title=\"Jonathan Coachman Defends Brock Lesnar&#8217;s Controversial Win Over Oba Femi at WWE Clash in Italy\">Read more</a>",
+      "summary": "<p><img alt=\"Jonathan Coachman Defends Brock Lesnar&#039;s Controversial Win Over Oba Femi at WWE Clash in Italy\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/jonathan-coachman-defends-brock-lesnars-controversial-win-over-oba-femi-at-wwe-clash-in-italy-23.jpg?x72960\" width=\"800\" /></p>Jonathan Coachman is pushing back against the fan backlash surrounding Brock Lesnar’s victory over Oba Femi at WWE Clash in Italy. Lesnar defeated Femi in a hard-hitting bout at the Inalpi Arena in Turin, Italy, evening their rivalry after Femi scored a major win over The Beast at WrestleMania 42. While many fans blasted WWE ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/jonathan-coachman-defends-brock-lesnars-controversial-win-oba-femi-wwe-clash-italy/\" title=\"Jonathan Coachman Defends Brock Lesnar&#8217;s Controversial Win Over Oba Femi at WWE Clash in Italy\">Read more</a>",
       "title": "Jonathan Coachman Defends Brock Lesnar’s Controversial Win Over Oba Femi at WWE Clash in Italy",
       "url": "https://www.ringsidenews.com/jonathan-coachman-defends-brock-lesnars-controversial-win-oba-femi-wwe-clash-italy/"
     },
     {
-      "age_hours": 1.1134095213888888,
+      "age_hours": 1.452147721388889,
       "agent": "Menzo",
-      "ai_editorial_reason": "Intervista retrospettiva, non urgente per il pubblico italiano.",
-      "ai_id": "c7",
+      "ai_editorial_reason": "Curiosità retrospettiva non urgente.",
+      "ai_id": "c5",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "low_value",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [],
-        "expected_quotes": true,
+        "expected_quotes": false,
         "expected_tables": false,
         "must_preserve": [],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "N/A"
+        "possible_noise": [],
+        "source_specific_notes": ""
       },
       "category_hint": "WWE",
       "decision": "selected",
       "deterministic_score": 80,
-      "evaluated_at": "2026-06-03T17:06:17.274279+00:00",
+      "evaluated_at": "2026-06-03T17:26:36.731799+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
       "menzo_ai_review": {
         "article_type": "low_value",
         "bob_brief": {
           "expected_embeds": [],
-          "expected_quotes": true,
+          "expected_quotes": false,
           "expected_tables": false,
           "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "N/A"
+          "possible_noise": [],
+          "source_specific_notes": ""
         },
         "category_hint": "WWE",
         "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Intervista retrospettiva, non urgente per il pubblico italiano.",
+        "editorial_reason": "Curiosità retrospettiva non urgente.",
         "event_key": "cardona_interview",
-        "id": "c7",
+        "id": "c5",
         "priority": 2,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.ringsidenews.com/matt-cardona-explains-why-zack-ryder-die-his-wwe-return-happen",
       "priority": "hard",
       "published": "Wed, 03 Jun 2026 15:59:29 +0000",
-      "reason": "ai:Intervista retrospettiva, non urgente per il pubblico italiano.; deterministic:hard:returning,hard:return,soft_penalty:explains why,recency:fresh_12h",
+      "reason": "ai:Curiosità retrospettiva non urgente.; deterministic:hard:returning,hard:return,soft_penalty:explains why,recency:fresh_12h",
       "score": 76,
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Matt Cardona Explains Why Zack Ryder Had To Die For His WWE Return To Happen\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/matt-cardona-explains-why-zack-ryder-had-to-die-for-his-wwe-return-to-happen-50.jpg?x40965\" width=\"800\" /></p>Matt Cardona believes his WWE comeback never would have happened if he hadn&#8217;t left Zack Ryder behind. Before returning to WWE last year, Cardona spent several years rebuilding himself on the independent wrestling scene after his release from the company in 2020. Although Zack Ryder enjoyed success during his original WWE run, including capturing the ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/matt-cardona-explains-why-zack-ryder-die-his-wwe-return-happen/\" title=\"Matt Cardona Explains Why Zack Ryder Had To Die For His WWE Return To Happen\">Read more</a>",
+      "summary": "<p><img alt=\"Matt Cardona Explains Why Zack Ryder Had To Die For His WWE Return To Happen\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/matt-cardona-explains-why-zack-ryder-had-to-die-for-his-wwe-return-to-happen-50.jpg?x72960\" width=\"800\" /></p>Matt Cardona believes his WWE comeback never would have happened if he hadn&#8217;t left Zack Ryder behind. Before returning to WWE last year, Cardona spent several years rebuilding himself on the independent wrestling scene after his release from the company in 2020. Although Zack Ryder enjoyed success during his original WWE run, including capturing the ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/matt-cardona-explains-why-zack-ryder-die-his-wwe-return-happen/\" title=\"Matt Cardona Explains Why Zack Ryder Had To Die For His WWE Return To Happen\">Read more</a>",
       "title": "Matt Cardona Explains Why Zack Ryder Had To Die For His WWE Return To Happen",
       "url": "https://www.ringsidenews.com/matt-cardona-explains-why-zack-ryder-die-his-wwe-return-happen/"
     },
     {
-      "age_hours": 0.05201966416666667,
+      "age_hours": 0.3907579769444444,
       "agent": "Menzo",
-      "ai_editorial_reason": "Curiosità rilevante per il pubblico italiano essendo legata a Clash in Italy.",
-      "ai_id": "c8",
+      "ai_editorial_reason": "Notizia di colore marginale su un'idea scartata.",
+      "ai_id": "c6",
       "ai_priority": 72,
       "ai_priority_label": "medium",
       "article_type": "soft_news",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [],
-        "expected_quotes": true,
+        "expected_quotes": false,
         "expected_tables": false,
-        "must_preserve": [
-          "citazioni dirette"
-        ],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Mantenere il tono leggero."
+        "must_preserve": [],
+        "possible_noise": [],
+        "source_specific_notes": ""
       },
       "category_hint": "WWE",
       "decision": "selected",
       "deterministic_score": 66,
-      "evaluated_at": "2026-06-03T17:06:17.270792+00:00",
+      "evaluated_at": "2026-06-03T17:26:36.728718+00:00",
       "feed_url": "https://www.wrestlinginc.com/feed/",
       "menzo_ai_review": {
         "article_type": "soft_news",
         "bob_brief": {
           "expected_embeds": [],
-          "expected_quotes": true,
+          "expected_quotes": false,
           "expected_tables": false,
-          "must_preserve": [
-            "citazioni dirette"
-          ],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Mantenere il tono leggero."
+          "must_preserve": [],
+          "possible_noise": [],
+          "source_specific_notes": ""
         },
         "category_hint": "WWE",
-        "decision": "selected",
+        "decision": "skip",
         "duplicate_of": "",
-        "editorial_reason": "Curiosità rilevante per il pubblico italiano essendo legata a Clash in Italy.",
-        "event_key": "clash_italy_nikki_bella",
-        "id": "c8",
-        "priority": 5,
+        "editorial_reason": "Notizia di colore marginale su un'idea scartata.",
+        "event_key": "clash_italy_nikki",
+        "id": "c6",
+        "priority": 3,
         "priority_label": "medium"
       },
       "normalized_url": "https://www.wrestlinginc.com/2186733/wwe-hofer-nikki-bella-emily-paris-inspited-idea-clash-italy",
       "priority": "soft",
       "published": "Wed, 03 Jun 2026 17:03:10 +0000",
-      "reason": "ai:Curiosità rilevante per il pubblico italiano essendo legata a Clash in Italy.; deterministic:strategic:clash in italy,recency:fresh_12h",
+      "reason": "ai:Notizia di colore marginale su un'idea scartata.; deterministic:strategic:clash in italy,recency:fresh_12h",
       "score": 69,
       "source": "wrestlinginc",
       "summary": "WWE Hall of Famer Nikki Bella reveals she pitched an \"Emily in Paris\" inspired idea for Clash in Italy that WWE \"liked,\" but ultimately didn't go with",
@@ -892,317 +583,55 @@
   ],
   "skipped": [
     {
-      "age_hours": 0.7836863891666667,
+      "age_hours": 0.020480526111111112,
       "agent": "Menzo",
-      "ai_editorial_reason": "Notizia personale non rilevante per il wrestling, categoria corretta in WWE.",
-      "ai_id": "c12",
-      "ai_priority": 72,
-      "ai_priority_label": "medium",
-      "article_type": "soft_news",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "Categoria corretta in WWE."
-      },
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 38,
-      "evaluated_at": "2026-06-03T17:06:17.271002+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "soft_news",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "Categoria corretta in WWE."
-        },
-        "category_hint": "WWE",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Notizia personale non rilevante per il wrestling, categoria corretta in WWE.",
-        "event_key": "bronson_reed_accident",
-        "id": "c12",
-        "priority": 2,
-        "priority_label": "medium"
-      },
-      "normalized_url": "https://www.wrestlinginc.com/2186660/wwe-bronson-reed-drivers-attention-vehicle-collision",
-      "priority": "skip",
-      "published": "Wed, 03 Jun 2026 16:19:16 +0000",
-      "reason": "softpool_ineligible:ai:Notizia personale non rilevante per il wrestling, categoria corretta in WWE.; deterministic:recency:fresh_12h",
-      "score": 53,
-      "source": "wrestlinginc",
-      "summary": "Bronson Reed gets involved in a car accident on Tuesday, advises people to be more aware on the road.",
-      "title": "WWE's Bronson Reed Urges Drivers To Pay Attention Following Vehicle Collision",
-      "url": "https://www.wrestlinginc.com/2186660/wwe-bronson-reed-drivers-attention-vehicle-collision/"
-    },
-    {
-      "age_hours": 1.1250753408333334,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "AEW",
-      "decision": "skip",
-      "deterministic_score": 38,
-      "evaluated_at": "2026-06-03T17:06:17.271228+00:00",
-      "feed_url": "https://www.wrestlinginc.com/feed/",
-      "normalized_url": "https://www.wrestlinginc.com/2186633/aew-speedball-mike-bailey-kevin-knight-dark-side",
-      "priority": "skip",
-      "published": "Wed, 03 Jun 2026 15:58:47 +0000",
-      "reason": "softpool_ineligible:recency:fresh_12h",
-      "score": 38,
-      "source": "wrestlinginc",
-      "summary": "AEW's \"Speedball\" Mike Bailey isn't happy with Kevin Knight's attitude, but he still doesn't want his tag team partner to join 'The Dark Side.\"",
-      "title": "AEW's Speedball Mike Bailey Doesn't Want Kevin Knight To Join 'The Dark Side'",
-      "url": "https://www.wrestlinginc.com/2186633/aew-speedball-mike-bailey-kevin-knight-dark-side/"
-    },
-    {
-      "age_hours": 0.022020040277777778,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Aneddoto nostalgico su WCW, non prioritario.",
-      "ai_id": "c10",
+      "ai_editorial_reason": "Sport esterno/curiosità non rilevante per il wrestling italiano.",
+      "ai_id": "c7",
       "ai_priority": 48,
       "ai_priority_label": "low",
       "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "N/A"
-      },
-      "category_hint": "AEW",
-      "decision": "skip",
-      "deterministic_score": 38,
-      "evaluated_at": "2026-06-03T17:06:17.272146+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "low_value",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "N/A"
-        },
-        "category_hint": "AEW",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Aneddoto nostalgico su WCW, non prioritario.",
-        "event_key": "schiavone_wcw_aneddoti",
-        "id": "c10",
-        "priority": 1,
-        "priority_label": "low"
-      },
-      "normalized_url": "https://www.ringsidenews.com/tony-schiavone-says-he-refused-let-tank-abbott-punch-him-during-wcw-angle",
-      "priority": "skip",
-      "published": "Wed, 03 Jun 2026 17:04:58 +0000",
-      "reason": "softpool_ineligible:ai:Aneddoto nostalgico su WCW, non prioritario.; deterministic:recency:fresh_12h",
-      "score": 42,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Tony Schiavone Says He Refused To Let Tank Abbott Punch Him During WCW Angle\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/tony-schiavone-says-he-refused-to-let-tank-abbott-punch-him-during-wcw-angle-33.jpg?x40965\" width=\"800\" /></p>Tony Schiavone has been around professional wrestling long enough to see just about everything, but there was one idea he wanted absolutely no part of. During an appearance on Virginia This Morning to promote AEW Dynamite in Richmond, Schiavone was asked whether he had ever been beaten up in a wrestling angle. The longtime announcer ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/tony-schiavone-says-he-refused-let-tank-abbott-punch-him-during-wcw-angle/\" title=\"Tony Schiavone Says He Refused To Let Tank Abbott Punch Him During WCW Angle\">Read more</a>",
-      "title": "Tony Schiavone Says He Refused To Let Tank Abbott Punch Him During WCW Angle",
-      "url": "https://www.ringsidenews.com/tony-schiavone-says-he-refused-let-tank-abbott-punch-him-during-wcw-angle/"
-    },
-    {
-      "age_hours": 0.14952040833333333,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Curiosità biografica, non notizia hard news.",
-      "ai_id": "c11",
-      "ai_priority": 48,
-      "ai_priority_label": "low",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "bob_brief": {
-        "expected_embeds": [],
-        "expected_quotes": true,
-        "expected_tables": false,
-        "must_preserve": [],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "N/A"
-      },
-      "category_hint": "AEW",
-      "decision": "skip",
-      "deterministic_score": 38,
-      "evaluated_at": "2026-06-03T17:06:17.273471+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "menzo_ai_review": {
-        "article_type": "low_value",
-        "bob_brief": {
-          "expected_embeds": [],
-          "expected_quotes": true,
-          "expected_tables": false,
-          "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "N/A"
-        },
-        "category_hint": "AEW",
-        "decision": "skip",
-        "duplicate_of": "",
-        "editorial_reason": "Curiosità biografica, non notizia hard news.",
-        "event_key": "schiavone_career",
-        "id": "c11",
-        "priority": 1,
-        "priority_label": "low"
-      },
-      "normalized_url": "https://www.ringsidenews.com/tony-schiavone-reveals-how-baseball-dream-accidentally-led-him-wrestling",
-      "priority": "skip",
-      "published": "Wed, 03 Jun 2026 16:57:19 +0000",
-      "reason": "softpool_ineligible:ai:Curiosità biografica, non notizia hard news.; deterministic:recency:fresh_12h",
-      "score": 42,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Tony Schiavone Reveals How Baseball Dream Accidentally Led Him Into Wrestling\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/tony-schiavone-reveals-how-baseball-dream-accidentally-led-him-into-wrestling-01.jpg?x40965\" width=\"800\" /></p>Tony Schiavone never set out to become one of the most recognizable voices in professional wrestling, but his path into the business came through the sport he originally wanted to call for a living. During an appearance on Virginia This Morning to promote AEW Dynamite in Richmond, Schiavone opened up about his Virginia roots and ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/tony-schiavone-reveals-how-baseball-dream-accidentally-led-him-wrestling/\" title=\"Tony Schiavone Reveals How Baseball Dream Accidentally Led Him Into Wrestling\">Read more</a>",
-      "title": "Tony Schiavone Reveals How Baseball Dream Accidentally Led Him Into Wrestling",
-      "url": "https://www.ringsidenews.com/tony-schiavone-reveals-how-baseball-dream-accidentally-led-him-wrestling/"
-    },
-    {
-      "age_hours": 1.5706319694444444,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "WWE",
-      "decision": "skip",
-      "deterministic_score": 38,
-      "evaluated_at": "2026-06-03T17:06:17.275091+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/santino-marella-calls-out-fans-who-turn-underdogs-once-wwe-pushes-them",
-      "priority": "skip",
-      "published": "Wed, 03 Jun 2026 15:32:03 +0000",
-      "reason": "softpool_ineligible:recency:fresh_12h",
-      "score": 38,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Santino Marella Calls Out Fans Who Turn on Underdogs Once WWE Pushes Them\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/santino-marella-calls-out-fans-who-turn-on-underdogs-once-wwe-pushes-them-22.jpg?x40965\" width=\"800\" /></p>Santino Marella is calling out a pattern he has seen in wrestling fans for years, pointing out how many fans immediately turn on wrestlers once they&#8217;re backed by WWE. While speaking to Amir Jordan, Marella reflected on his own WWE babyface turn and explained how the audience played a major role in changing his character. ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/santino-marella-calls-out-fans-who-turn-underdogs-once-wwe-pushes-them/\" title=\"Santino Marella Calls Out Fans Who Turn on Underdogs Once WWE Pushes Them\">Read more</a>",
-      "title": "Santino Marella Calls Out Fans Who Turn on Underdogs Once WWE Pushes Them",
-      "url": "https://www.ringsidenews.com/santino-marella-calls-out-fans-who-turn-underdogs-once-wwe-pushes-them/"
-    },
-    {
-      "age_hours": 1.7142432716666667,
-      "agent": "Menzo",
-      "ai_priority_label": "skip",
-      "article_type": "low_value",
-      "assigned_to": "Menzo",
-      "category_hint": "World",
-      "decision": "skip",
-      "deterministic_score": 38,
-      "evaluated_at": "2026-06-03T17:06:17.275779+00:00",
-      "feed_url": "https://www.ringsidenews.com/feed/",
-      "normalized_url": "https://www.ringsidenews.com/reason-behind-dominik-mysterios-limited-title-matches-aaa-revealed",
-      "priority": "skip",
-      "published": "Wed, 03 Jun 2026 15:23:26 +0000",
-      "reason": "softpool_ineligible:recency:fresh_12h",
-      "score": 38,
-      "source": "ringsidenews",
-      "summary": "<p><img alt=\"Reason Behind Dominik Mysterio’s Limited Title Matches in AAA Revealed\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/reason-behind-dominik-mysterios-limited-title-matches-in-aaa-revealed-18.jpg?x40965\" width=\"800\" /></p>Dominik Mysterio hasn’t exactly been all over AAA programming as Mega Champion — and now Konnan is explaining why. While speaking on the Keeping It 100 podcast, Konnan addressed Dominik’s limited AAA schedule and made it clear there is a reason AAA hasn&#8217;t rushed him into more title matches. According to Konnan, the idea is ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/reason-behind-dominik-mysterios-limited-title-matches-aaa-revealed/\" title=\"Reason Behind Dominik Mysterio’s Limited Title Matches in AAA Revealed\">Read more</a>",
-      "title": "Reason Behind Dominik Mysterio’s Limited Title Matches in AAA Revealed",
-      "url": "https://www.ringsidenews.com/reason-behind-dominik-mysterios-limited-title-matches-aaa-revealed/"
-    },
-    {
-      "age_hours": 20.116744306111112,
-      "agent": "Menzo",
-      "ai_editorial_reason": "Notizia vecchia di oltre 24 ore su un evento non WWE (AAA).",
-      "ai_id": "c9",
-      "ai_priority": 48,
-      "ai_priority_label": "low",
-      "article_type": "duplicate",
       "assigned_to": "Menzo",
       "bob_brief": {
         "expected_embeds": [],
         "expected_quotes": false,
         "expected_tables": false,
         "must_preserve": [],
-        "possible_noise": [
-          "source_social_bar",
-          "author_bio",
-          "cta",
-          "share_links"
-        ],
-        "source_specific_notes": "N/A"
+        "possible_noise": [],
+        "source_specific_notes": ""
       },
       "category_hint": "World",
       "decision": "skip",
-      "deterministic_score": 42,
-      "duplicate_of": "notizia superata",
-      "evaluated_at": "2026-06-03T17:06:17.279503+00:00",
+      "deterministic_score": 48,
+      "evaluated_at": "2026-06-03T17:26:36.729895+00:00",
       "feed_url": "https://www.ringsidenews.com/feed/",
-      "from_softpool": true,
-      "last_seen_at": "2026-06-03T12:19:51.806330+00:00",
       "menzo_ai_review": {
-        "article_type": "duplicate",
+        "article_type": "low_value",
         "bob_brief": {
           "expected_embeds": [],
           "expected_quotes": false,
           "expected_tables": false,
           "must_preserve": [],
-          "possible_noise": [
-            "source_social_bar",
-            "author_bio",
-            "cta",
-            "share_links"
-          ],
-          "source_specific_notes": "N/A"
+          "possible_noise": [],
+          "source_specific_notes": ""
         },
         "category_hint": "World",
         "decision": "skip",
-        "duplicate_of": "notizia superata",
-        "editorial_reason": "Notizia vecchia di oltre 24 ore su un evento non WWE (AAA).",
-        "event_key": "aaa_noche_grandes",
-        "id": "c9",
+        "duplicate_of": "",
+        "editorial_reason": "Sport esterno/curiosità non rilevante per il wrestling italiano.",
+        "event_key": "danhausen_nba",
+        "id": "c7",
         "priority": 1,
         "priority_label": "low"
       },
-      "normalized_url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed",
+      "normalized_url": "https://www.ringsidenews.com/danhausen-threatens-knicks-curse-unless-stephen-smith-meets-new-demands",
       "priority": "skip",
-      "published": "Tue, 02 Jun 2026 20:59:17 +0000",
-      "reason": "ai_duplicate_of:notizia superata; entity:chad gable,recency:fresh_36h",
-      "score": 45,
-      "softpool_added_at": "2026-06-03T07:21:42.347226+00:00",
-      "softpool_reason": "medium_candidate_above_quality_threshold",
-      "softpool_ttl_hours": 24,
+      "published": "Wed, 03 Jun 2026 17:25:23 +0000",
+      "reason": "softpool_ineligible:ai:Sport esterno/curiosità non rilevante per il wrestling italiano.; deterministic:current:business_legal,recency:fresh_12h",
+      "score": 48,
       "source": "ringsidenews",
-      "summary": "<p><img alt=\"Producer Behind El Grande Americano Mask vs. Mask Match Revealed\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/producer-behind-el-grande-americano-mask-vs-mask-match-revealed-48.jpg?x36463\" width=\"800\" /></p>Chad Gable and Ludwig Kaiser’s bloody Mask vs. Mask match at AAA Noche de Los Grandes had another WWE name involved behind the scenes According to Mexican journalist Ernesto Ocampo, Pete Dunne was the producer for the match between Ludwig Kaiser’s El Grande Americano and Chad Gable’s Original El Grande Americano. Ocampo noted that Dunne ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed/\" title=\"Producer Behind El Grande Americano Mask vs. Mask Match Revealed\">Read more</a>",
-      "title": "Producer Behind El Grande Americano Mask vs. Mask Match Revealed",
-      "url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed/"
+      "summary": "<p><img alt=\"Danhausen Threatens Knicks Curse Unless Stephen A. Smith Meets New Demands\" class=\"attachment-post-thumbnail size-post-thumbnail wp-post-image\" height=\"500\" src=\"https://www.ringsidenews.com/wp-content/uploads/2026/06/danhausen-threatens-knicks-curse-unless-stephen-a-smith-meets-new-demands-59.jpg?x72960\" width=\"800\" /></p>Danhausen is not done making demands from Stephen A. Smith, and now the New York Knicks’ NBA Finals hopes may come with a much bigger price tag. The Knicks are set to face the San Antonio Spurs in the NBA Finals, and Danhausen appeared on ESPN’s First Take before Game 1 to remind Smith that ... <a class=\"read-more\" href=\"https://www.ringsidenews.com/danhausen-threatens-knicks-curse-unless-stephen-smith-meets-new-demands/\" title=\"Danhausen Threatens Knicks Curse Unless Stephen A. Smith Meets New Demands\">Read more</a>",
+      "title": "Danhausen Threatens Knicks Curse Unless Stephen A. Smith Meets New Demands",
+      "url": "https://www.ringsidenews.com/danhausen-threatens-knicks-curse-unless-stephen-smith-meets-new-demands/"
     }
   ],
   "version": "v93_20_selective_softpool"

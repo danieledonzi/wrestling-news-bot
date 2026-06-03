@@ -377,9 +377,18 @@
       "reason": "ai_duplicate_of:notizia superata; entity:chad gable,recency:fresh_36h",
       "title": "Producer Behind El Grande Americano Mask vs. Mask Match Revealed",
       "url": "https://www.ringsidenews.com/producer-behind-el-grande-americano-mask-vs-mask-match-revealed/"
+    },
+    {
+      "added_at": "2026-06-03T17:26:40.493830+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/danhausen-threatens-knicks-curse-unless-stephen-smith-meets-new-demands",
+      "reason": "softpool_ineligible:ai:Sport esterno/curiosità non rilevante per il wrestling italiano.; deterministic:current:business_legal,recency:fresh_12h",
+      "title": "Danhausen Threatens Knicks Curse Unless Stephen A. Smith Meets New Demands",
+      "url": "https://www.ringsidenews.com/danhausen-threatens-knicks-curse-unless-stephen-smith-meets-new-demands/"
     }
   ],
   "ttl_hours": 168,
-  "updated_at": "2026-06-03T17:06:48.281210+00:00",
+  "updated_at": "2026-06-03T17:26:40.493830+00:00",
   "version": "v93_20_selective_softpool"
 }

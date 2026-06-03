@@ -1,12 +1,12 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-03T17:07:28.063194+00:00",
+  "generated_at": "2026-06-03T17:27:07.979721+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 0,
-    "wp_not_ready": 3
+    "published": 3,
+    "wp_not_ready": 0
   },
   "input": {
     "alfred_version": "v93_20_alfred_table_warning_precision",
@@ -61,78 +61,64 @@
   },
   "results": [
     {
-      "content_chars": 3794,
-      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/trial-date-set-for-man-accused-of-stalking-wwe-star-liv-morgan-08.jpg",
-      "media_id": null,
-      "payload_preview": {
-        "categories": [],
-        "excerpt": "Il procedimento penale contro l'uomo accusato di aver perseguitato la stella della WWE Liv Morgan si avvia finalmente verso il processo.",
-        "meta": {
-          "original_url": "https://www.ringsidenews.com/trial-date-set-man-accused-stalking-wwe-star-liv-morgan/",
-          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
-          "owtv_source": "ringsidenews"
-        },
-        "status": "publish",
-        "title": "Fissata la data del processo per l'uomo accusato di stalking ai danni di Liv Morgan"
-      },
+      "categories": [
+        4,
+        8
+      ],
+      "category_names_priority": [
+        "WWE",
+        "World"
+      ],
+      "featured_media": 5922,
       "source_url": "https://www.ringsidenews.com/trial-date-set-man-accused-stalking-wwe-star-liv-morgan/",
-      "status": "wp_not_ready",
+      "status": "published",
       "title_it": "Fissata la data del processo per l'uomo accusato di stalking ai danni di Liv Morgan",
-      "wp_ready": false
+      "wp_link": "https://news.openwrestlingtv.com/wwe/fissata-la-data-del-processo-per-luomo-accusato-di-stalking-ai-danni-di-liv-morgan/",
+      "wp_post_id": 5923
     },
     {
-      "content_chars": 5920,
-      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/jonathan-coachman-blames-wwes-crowded-event-schedule-for-rushing-storylines-11.jpg",
-      "media_id": null,
-      "payload_preview": {
-        "categories": [],
-        "excerpt": "Jonathan Coachman ritiene che la WWE abbia un problema di ritmo: il sovraccarico di eventi impedisce alle storyline di svilupparsi correttamente.",
-        "meta": {
-          "original_url": "https://www.ringsidenews.com/jonathan-coachman-blames-wwes-crowded-event-schedule-rushing-storylines/",
-          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
-          "owtv_source": "ringsidenews"
-        },
-        "status": "publish",
-        "title": "Jonathan Coachman: il calendario fitto della WWE penalizza le storyline"
-      },
+      "categories": [
+        15,
+        8
+      ],
+      "category_names_priority": [
+        "Business",
+        "World"
+      ],
+      "featured_media": 5924,
       "source_url": "https://www.ringsidenews.com/jonathan-coachman-blames-wwes-crowded-event-schedule-rushing-storylines/",
-      "status": "wp_not_ready",
+      "status": "published",
       "title_it": "Jonathan Coachman: il calendario fitto della WWE penalizza le storyline",
-      "wp_ready": false
+      "wp_link": "https://news.openwrestlingtv.com/world/jonathan-coachman-il-calendario-fitto-della-wwe-penalizza-le-storyline/",
+      "wp_post_id": 5925
     },
     {
-      "content_chars": 2310,
-      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/ryan-nemeth-accuses-straight-edge-guys-of-hypocrisy-over-ped-use-14.jpg",
-      "media_id": null,
-      "payload_preview": {
-        "categories": [],
-        "excerpt": "Ryan Nemeth ha pubblicato un tweet polemico nei confronti dello stile di vita straight edge, puntando il dito contro chi si vanta di uno stile di vita pulito pur facendo uso di sostanze dopanti.",
-        "meta": {
-          "original_url": "https://www.ringsidenews.com/ryan-nemeth-accuses-straight-edge-guys-hypocrisy-ped-use/",
-          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
-          "owtv_source": "ringsidenews"
-        },
-        "status": "publish",
-        "title": "Ryan Nemeth accusa gli atleti straight edge di ipocrisia sull'uso di PED"
-      },
+      "categories": [
+        8
+      ],
+      "category_names_priority": [
+        "World"
+      ],
+      "featured_media": 5926,
       "source_url": "https://www.ringsidenews.com/ryan-nemeth-accuses-straight-edge-guys-hypocrisy-ped-use/",
-      "status": "wp_not_ready",
+      "status": "published",
       "title_it": "Ryan Nemeth accusa gli atleti straight edge di ipocrisia sull'uso di PED",
-      "wp_ready": false
+      "wp_link": "https://news.openwrestlingtv.com/world/ryan-nemeth-accusa-gli-atleti-straight-edge-di-ipocrisia-sulluso-di-ped/",
+      "wp_post_id": 5927
     }
   ],
   "retry_queue": {
-    "added": 3,
-    "injected": 0,
-    "resolved": 0,
+    "added": 0,
+    "injected": 3,
+    "resolved": 3,
     "retained": 0,
-    "size": 3
+    "size": 0
   },
   "version": "v93_20_1_publisher_retry_queue_recursion_fix",
   "wp": {
     "dry_run": false,
     "post_status": "publish",
-    "ready": false,
-    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=25)"
+    "ready": true,
+    "reason": "ok"
   }
 }
