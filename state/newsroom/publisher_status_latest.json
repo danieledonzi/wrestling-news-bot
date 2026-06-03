@@ -1,12 +1,12 @@
 {
   "agent": "Publisher",
-  "generated_at": "2026-06-03T17:27:07.979721+00:00",
+  "generated_at": "2026-06-03T20:37:32.430550+00:00",
   "handoff": {
     "already_published": 0,
     "dry_run": 0,
     "errors": 0,
-    "published": 3,
-    "wp_not_ready": 0
+    "published": 0,
+    "wp_not_ready": 3
   },
   "input": {
     "alfred_version": "v93_20_alfred_table_warning_precision",
@@ -61,64 +61,78 @@
   },
   "results": [
     {
-      "categories": [
-        4,
-        8
-      ],
-      "category_names_priority": [
-        "WWE",
-        "World"
-      ],
-      "featured_media": 5922,
-      "source_url": "https://www.ringsidenews.com/trial-date-set-man-accused-stalking-wwe-star-liv-morgan/",
-      "status": "published",
-      "title_it": "Fissata la data del processo per l'uomo accusato di stalking ai danni di Liv Morgan",
-      "wp_link": "https://news.openwrestlingtv.com/wwe/fissata-la-data-del-processo-per-luomo-accusato-di-stalking-ai-danni-di-liv-morgan/",
-      "wp_post_id": 5923
+      "content_chars": 2523,
+      "image_url": "https://www.wrestlinginc.com/img/gallery/comedian-michael-che-teases-writing-for-wwe-talks-his-favorite-performers/l-intro-1780113014.jpg",
+      "media_id": null,
+      "payload_preview": {
+        "categories": [],
+        "excerpt": "Il volto del \"Weekend Update\" del Saturday Night Live rivela il suo desiderio di scrivere per la WWE e tesse le lodi di diverse superstar.",
+        "meta": {
+          "original_url": "https://www.wrestlinginc.com/2184203/michael-che-writing-wwe-favorite-performers-paul-heyman-stephanie-mcmahon/",
+          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
+          "owtv_source": "wrestlinginc"
+        },
+        "status": "publish",
+        "title": "Il comico Michael Che apre a un ruolo come autore in WWE"
+      },
+      "source_url": "https://www.wrestlinginc.com/2184203/michael-che-writing-wwe-favorite-performers-paul-heyman-stephanie-mcmahon/",
+      "status": "wp_not_ready",
+      "title_it": "Il comico Michael Che apre a un ruolo come autore in WWE",
+      "wp_ready": false
     },
     {
-      "categories": [
-        15,
-        8
-      ],
-      "category_names_priority": [
-        "Business",
-        "World"
-      ],
-      "featured_media": 5924,
-      "source_url": "https://www.ringsidenews.com/jonathan-coachman-blames-wwes-crowded-event-schedule-rushing-storylines/",
-      "status": "published",
-      "title_it": "Jonathan Coachman: il calendario fitto della WWE penalizza le storyline",
-      "wp_link": "https://news.openwrestlingtv.com/world/jonathan-coachman-il-calendario-fitto-della-wwe-penalizza-le-storyline/",
-      "wp_post_id": 5925
+      "content_chars": 5311,
+      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/logan-paul-reveals-real-pain-behind-torn-tricep-injury-at-wwe-saturday-nights-main-event-03.jpg",
+      "media_id": null,
+      "payload_preview": {
+        "categories": [],
+        "excerpt": "Logan Paul racconta i dettagli dell'infortunio subito durante un match titolato a WWE Saturday Night’s Main Event.",
+        "meta": {
+          "original_url": "https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event/",
+          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
+          "owtv_source": "ringsidenews"
+        },
+        "status": "publish",
+        "title": "Logan Paul rivela il dolore dell'infortunio al tricipite durante Saturday Night’s Main Event"
+      },
+      "source_url": "https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event/",
+      "status": "wp_not_ready",
+      "title_it": "Logan Paul rivela il dolore dell'infortunio al tricipite durante Saturday Night’s Main Event",
+      "wp_ready": false
     },
     {
-      "categories": [
-        8
-      ],
-      "category_names_priority": [
-        "World"
-      ],
-      "featured_media": 5926,
-      "source_url": "https://www.ringsidenews.com/ryan-nemeth-accuses-straight-edge-guys-hypocrisy-ped-use/",
-      "status": "published",
-      "title_it": "Ryan Nemeth accusa gli atleti straight edge di ipocrisia sull'uso di PED",
-      "wp_link": "https://news.openwrestlingtv.com/world/ryan-nemeth-accusa-gli-atleti-straight-edge-di-ipocrisia-sulluso-di-ped/",
-      "wp_post_id": 5927
+      "content_chars": 3825,
+      "image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/06/sol-rucas-wwe-clash-in-italy-match-criticized-for-being-too-structured-54.jpg",
+      "media_id": null,
+      "payload_preview": {
+        "categories": [],
+        "excerpt": "Booker T analizza la performance di Sol Ruca contro Becky Lynch a Clash in Italy, sottolineando la necessità di migliorare nell'improvvisazione.",
+        "meta": {
+          "original_url": "https://www.ringsidenews.com/sol-rucas-wwe-clash-italy-match-criticized-too-structured/",
+          "owtv_pipeline": "v93_10_publisher_plain_oembed_urls",
+          "owtv_source": "ringsidenews"
+        },
+        "status": "publish",
+        "title": "Booker T critica il match di Sol Ruca a Clash in Italy: \"Troppo strutturato\""
+      },
+      "source_url": "https://www.ringsidenews.com/sol-rucas-wwe-clash-italy-match-criticized-too-structured/",
+      "status": "wp_not_ready",
+      "title_it": "Booker T critica il match di Sol Ruca a Clash in Italy: \"Troppo strutturato\"",
+      "wp_ready": false
     }
   ],
   "retry_queue": {
-    "added": 0,
-    "injected": 3,
-    "resolved": 3,
+    "added": 3,
+    "injected": 0,
+    "resolved": 0,
     "retained": 0,
-    "size": 0
+    "size": 3
   },
   "version": "v93_20_1_publisher_retry_queue_recursion_fix",
   "wp": {
     "dry_run": false,
     "post_status": "publish",
-    "ready": true,
-    "reason": "ok"
+    "ready": false,
+    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=25)"
   }
 }

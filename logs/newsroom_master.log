@@ -51,10 +51,22 @@ Published reports: -
 Massy: to_simone=0 to_menzo=7 hard_skip=26 menzo_skip=14 old_skip=1
 Simone: ready=0 reports_published=0 wp_not_ready=0
 Menzo: selected=6 pending=0 skipped=1 ai=True model=gemini-3.1-flash-lite
-Bob: ready=3 errors=0 changes={'bob_v93_16_changes': 3, 'bob_brief_warnings_added': 0}
+Bob: ready=3 errors=0 changes={'bob_brief_warnings_added': 0, 'bob_v93_16_changes': 3}
 Alfred: approved=3 warnings=0 blockers=0
 Publisher: published=3 wp_not_ready=0 errors=0
 Archivista: status=ok anomalies=0
 Selected: Logan Paul Reveals Real Pain Behind Torn Tricep Injury At WWE Saturday Night’s Main Event, Jade Cargill Believes WWE Will Resume Unresolved Rivalries With Naomi & Bianca Belair, TKO Accused of Tying Triple H’s Hands With Money-Hungry Tactics, Jonathan Coachman Defends Brock Lesnar’s Controversial Win Over Oba Femi at WWE Clash in Italy, Matt Cardona Explains Why Zack Ryder Had To Die For His WWE Return To Happen, WWE HOFer Nikki Bella Had 'Emily In Paris' Inspired Idea For Clash In Italy
 Published news: Fissata la data del processo per l'uomo accusato di stalking ai danni di Liv Morgan, Jonathan Coachman: il calendario fitto della WWE penalizza le storyline, Ryan Nemeth accusa gli atleti straight edge di ipocrisia sull'uso di PED
+Published reports: -
+
+===== NEWSROOM MASTER RUN 2026-06-03T20:36:50.760565+00:00 | v93_20_process_refinements | run_id=26911478073 =====
+Massy: to_simone=0 to_menzo=22 hard_skip=13 menzo_skip=9 old_skip=0
+Simone: ready=0 reports_published=0 wp_not_ready=0
+Menzo: selected=7 pending=1 skipped=14 ai=True model=gemini-3.1-flash-lite
+Bob: ready=3 errors=0 changes={'bob_v93_16_changes': 3, 'bob_brief_warnings_added': 0}
+Alfred: approved=3 warnings=0 blockers=0
+Publisher: published=0 wp_not_ready=3 errors=0
+Archivista: status=error anomalies=1
+Selected: Comedian Michael Che Teases Writing For WWE, Talks His Favorite Performers, Logan Paul Reveals Real Pain Behind Torn Tricep Injury At WWE Saturday Night’s Main Event, Sol Ruca’s WWE Clash In Italy Match Criticized for Being Too Structured, Mick Foley On Possibility Of One More Match In AEW: 'Stranger Things Have Happened', NWA Adds World Title Match To Hard Times 6, MJF Announces He’s Stepping Away From American Independent Wrestling to Focus on AEW
+Published news: -
 Published reports: -

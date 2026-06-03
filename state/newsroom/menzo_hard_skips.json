@@ -386,9 +386,135 @@
       "reason": "softpool_ineligible:ai:Sport esterno/curiosità non rilevante per il wrestling italiano.; deterministic:current:business_legal,recency:fresh_12h",
       "title": "Danhausen Threatens Knicks Curse Unless Stephen A. Smith Meets New Demands",
       "url": "https://www.ringsidenews.com/danhausen-threatens-knicks-curse-unless-stephen-smith-meets-new-demands/"
+    },
+    {
+      "added_at": "2026-06-03T20:36:57.489308+00:00",
+      "article_type": "strategic_discussion",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2184200/wwe-big-e-montez-ford-street-profits-tag-team-underrated-roster",
+      "reason": "softpool_ineligible:strategic:raw,soft_penalty:identifies,recency:fresh_36h",
+      "title": "Big E Identifies Tag Team Star As One Of The Most Underrated Wrestlers On WWE Roster",
+      "url": "https://www.wrestlinginc.com/2184200/wwe-big-e-montez-ford-street-profits-tag-team-underrated-roster/"
+    },
+    {
+      "added_at": "2026-06-03T20:36:57.489308+00:00",
+      "article_type": "strategic_discussion",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2186380/womens-ic-champ-sol-ruca-credits-inventive-finisher-wwe-success",
+      "reason": "softpool_ineligible:strategic:raw,soft_penalty:reaction,recency:fresh_12h",
+      "title": "Women's IC Champ Sol Ruca Credits Inventive Finisher For WWE Success",
+      "url": "https://www.wrestlinginc.com/2186380/womens-ic-champ-sol-ruca-credits-inventive-finisher-wwe-success/"
+    },
+    {
+      "added_at": "2026-06-03T20:36:57.489308+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2186927/aew-mjf-last-american-indie-match-extraordinarily-long-time",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "AEW's MJF To Wrestle His Last American Indie Match 'For An Extraordinarily Long Time'",
+      "url": "https://www.wrestlinginc.com/2186927/aew-mjf-last-american-indie-match-extraordinarily-long-time/"
+    },
+    {
+      "added_at": "2026-06-03T20:36:57.489308+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2186921/wwe-danhausen-stephen-a-smith-new-york-knicks-uncursed",
+      "reason": "softpool_ineligible:current:business_legal,recency:fresh_12h",
+      "title": "WWE's Danhausen Has New Demands For Stephen A. Smith To Keep New York Knicks Uncursed",
+      "url": "https://www.wrestlinginc.com/2186921/wwe-danhausen-stephen-a-smith-new-york-knicks-uncursed/"
+    },
+    {
+      "added_at": "2026-06-03T20:36:57.489308+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2186839/bully-ray-wwe-giulia-italy-pin-promo",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "Bully Ray Calls Out WWE For Having Giulia Take Pin In Italy, Not Giving Her A Promo",
+      "url": "https://www.wrestlinginc.com/2186839/bully-ray-wwe-giulia-italy-pin-promo/"
+    },
+    {
+      "added_at": "2026-06-03T20:36:57.489308+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2186733/wwe-hofer-nikki-bella-emily-paris-inspited-idea-clash-italy",
+      "reason": "softpool_ineligible:ai:Curiosità marginale, non ha impatto sulla storyline attuale.; deterministic:strategic:clash in italy,recency:fresh_12h",
+      "title": "WWE HOFer Nikki Bella Had 'Emily In Paris' Inspired Idea For Clash In Italy",
+      "url": "https://www.wrestlinginc.com/2186733/wwe-hofer-nikki-bella-emily-paris-inspited-idea-clash-italy/"
+    },
+    {
+      "added_at": "2026-06-03T20:36:57.489308+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2186399/wwe-jade-cargill-naomi-bianca-belair-resume-unresolved-rivalries",
+      "reason": "softpool_ineligible:ai:Speculazione basata su desideri di un'atleta, non notizia concreta.; deterministic:hard:returns,hard:return,recency:fresh_12h",
+      "title": "Jade Cargill Believes WWE Will Resume Unresolved Rivalries With Naomi & Bianca Belair",
+      "url": "https://www.wrestlinginc.com/2186399/wwe-jade-cargill-naomi-bianca-belair-resume-unresolved-rivalries/"
+    },
+    {
+      "added_at": "2026-06-03T20:36:57.489308+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2186359/wwe-nxt-judgment-day-roxanne-perez-tatum-paxley-envision-joining",
+      "reason": "softpool_ineligible:ai:Speculazione/opinione di un'atleta, non notizia di card.; deterministic:strategic:future,recency:fresh_12h",
+      "title": "Roxanne Perez Names WWE NXT Star She Could Envision Joining The Judgment Day",
+      "url": "https://www.wrestlinginc.com/2186359/wwe-nxt-judgment-day-roxanne-perez-tatum-paxley-envision-joining/"
+    },
+    {
+      "added_at": "2026-06-03T20:36:57.489308+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2186336/wwe-aj-styles-natalya-guest-training-school-couldnt-help-myself",
+      "reason": "softpool_ineligible:recency:fresh_12h",
+      "title": "WWE's AJ Styles On Guest Training At Natalya's School: 'I Couldn't Help Myself'",
+      "url": "https://www.wrestlinginc.com/2186336/wwe-aj-styles-natalya-guest-training-school-couldnt-help-myself/"
+    },
+    {
+      "added_at": "2026-06-03T20:36:57.489308+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2186326/bully-ray-oba-femi-king-of-the-ring-wwe-world-title",
+      "reason": "softpool_ineligible:ai:Opinione di un podcast, non notizia di rilievo.; deterministic:strategic:king of the ring,entity:oba femi,recency:fresh_12h",
+      "title": "Bully Ray Wants Oba Femi To Win King Of The Ring But Turn Down WWE World Title Shot",
+      "url": "https://www.wrestlinginc.com/2186326/bully-ray-oba-femi-king-of-the-ring-wwe-world-title/"
+    },
+    {
+      "added_at": "2026-06-03T20:36:57.489308+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2186290/tony-dangelo-overcomes-upstart-kam-hendrix-retain-wwe-nxt-title",
+      "reason": "softpool_ineligible:recency:fresh_36h",
+      "title": "Tony D'Angelo Overcomes Upstart To Retain WWE NXT Title",
+      "url": "https://www.wrestlinginc.com/2186290/tony-dangelo-overcomes-upstart-kam-hendrix-retain-wwe-nxt-title/"
+    },
+    {
+      "added_at": "2026-06-03T20:36:57.489308+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.wrestlinginc.com/2186272/tatum-paxley-begrudgingly-gives-wwe-nxt-womens-na-title-shot-zaria",
+      "reason": "softpool_ineligible:recency:fresh_36h",
+      "title": "Tatum Paxley Begrudgingly Gives WWE NXT Women's NA Title Shot",
+      "url": "https://www.wrestlinginc.com/2186272/tatum-paxley-begrudgingly-gives-wwe-nxt-womens-na-title-shot-zaria/"
+    },
+    {
+      "added_at": "2026-06-03T20:36:57.489308+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/bayley-shares-rare-bikini-photo-capri-during-wwe-european-tour",
+      "reason": "softpool_ineligible:soft_penalty:photo,recency:fresh_12h",
+      "title": "Bayley Shares Rare Bikini Photo From Capri During WWE European Tour",
+      "url": "https://www.ringsidenews.com/bayley-shares-rare-bikini-photo-capri-during-wwe-european-tour/"
+    },
+    {
+      "added_at": "2026-06-03T20:36:57.489308+00:00",
+      "article_type": "low_value",
+      "expires_after_hours": 168,
+      "normalized_url": "https://www.ringsidenews.com/matt-cardona-explains-why-zack-ryder-die-his-wwe-return-happen",
+      "reason": "softpool_ineligible:ai:Approfondimento biografico vecchio, non una notizia fresca.; deterministic:hard:returning,hard:return,soft_penalty:explains why,recency:fresh_12h",
+      "title": "Matt Cardona Explains Why Zack Ryder Had To Die For His WWE Return To Happen",
+      "url": "https://www.ringsidenews.com/matt-cardona-explains-why-zack-ryder-die-his-wwe-return-happen/"
     }
   ],
   "ttl_hours": 168,
-  "updated_at": "2026-06-03T17:26:40.493830+00:00",
+  "updated_at": "2026-06-03T20:36:57.489308+00:00",
   "version": "v93_20_selective_softpool"
 }

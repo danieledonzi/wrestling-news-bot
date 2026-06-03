@@ -15,30 +15,30 @@
       "translation_pending": 0
     },
     "massy": {
-      "already_published_hard_skipped": 7,
-      "already_worked": 2,
+      "already_published_hard_skipped": 3,
+      "already_worked": 0,
       "event_factual_news_to_menzo": 0,
       "event_recap_duplicates_blocked_by_report": 0,
       "event_soft_reactions_to_menzo": 0,
-      "hard_skipped": 26,
-      "menzo_memory_hard_skipped": 14,
-      "old_news_hard_skipped": 1,
+      "hard_skipped": 13,
+      "menzo_memory_hard_skipped": 9,
+      "old_news_hard_skipped": 0,
       "post_show_hard_news_to_menzo": 0,
       "report_candidates_blocked_by_manual_or_history": 0,
-      "to_menzo": 7,
+      "to_menzo": 22,
       "to_simone": 0
     },
     "menzo": {
-      "pending": 0,
-      "skipped": 1,
-      "to_bob_or_v92": 6
+      "pending": 1,
+      "skipped": 14,
+      "to_bob_or_v92": 7
     },
     "publisher": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 3,
-      "wp_not_ready": 0
+      "published": 0,
+      "wp_not_ready": 3
     },
     "simone": {
       "ready": 0,
@@ -46,7 +46,20 @@
       "waiting": 1
     }
   },
-  "anomalies": [],
+  "anomalies": [
+    {
+      "code": "wp_not_ready",
+      "context": {
+        "already_published": 0,
+        "dry_run": 0,
+        "errors": 0,
+        "published": 0,
+        "wp_not_ready": 3
+      },
+      "message": "WordPress non era pronto/raggiungibile.",
+      "severity": "error"
+    }
+  ],
   "article_dossiers": [
     {
       "alfred": {
@@ -69,74 +82,21 @@
         "translation_model": null,
         "translation_used": null
       },
-      "category_hint": null,
+      "category_hint": "World",
       "html_audit": {
         "alfred_final_html_preview": "",
         "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_jonathan-coachman-il-calendario-fitto-della-wwe-penalizza-le-storyline.html",
-        "published_html_preview": "<p>Jonathan Coachman ritiene che la WWE stia affrontando un serio problema di ritmo, sostenendo che il calendario fitto di eventi della compagnia renda difficile dare il giusto respiro alle storyline.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/watch?v=fRhqP2twR6s&amp;t=120s\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/watch?v=fRhqP2twR6s&amp;amp;t=120s\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Intervenuto durante il programma &quot;2 Count Tuesday&quot;, Coachman ha puntato il dito contro i ritmi serrati della WWE, citando come parte del problema i premium live event, gli speciali di Saturday Night’s Main Event, gli impegni con Netflix, gli accordi con ESPN, Peacock e NBC.</p>\n<p>Secondo Coachman, la WWE ha in programma così tanti show di rilievo che il team creativo è costretto ad accelerare gli angoli narrativi anziché permettere loro di svilupparsi naturalmente. L&#x27;ex commentatore ha sottolineato come l&#x27;impazienza sia sempre stata uno dei principali difetti del pro wrestling, ma che l&#x27;attuale calendario della WWE abbia ulteriormente aggravato la situazione.</p>\n<blockquote>“Il problema più grande nel pro wrestling, ed è sempre stato così, è l&#x27;impazienza. Quando hai uno show ogni singola settimana, si crea una sorta di sovraccarico. Il pubblico diventa impaziente. E di conseguenza, anche noi diventiamo impazienti con le storyline.”</blockquote>\n<p>Coachman ha poi citato Oba Femi come esempio, sostenendo che la WWE avrebbe dovuto dedicare più tempo a costruire il suo personaggio contro avversari di maggior richiamo prima di coinvolgere Brock Lesnar.</p>\n<blockquote>“Ciò che serviva era che Oba iniziasse a battere atleti con un certo valore. E poi, ogni settimana, gente come noi avrebbe potuto dire: &#x27;Oh, aspettate un secondo, è stato messo alla prova un po&#x27; di più, e ancora un po&#x27; di più&#x27;. E proprio quando pensavi che stesse per scalare la montagna, ecco che arrivava il colpo di scena, con il ritorno di Brock a fine giugno o inizio luglio.”</blockquote>\n<p>Coachman ha inoltre indicato la gestione di CM Punk e Roman Reigns come un altro esempio di storie avviate troppo in fretta. Ha argomentato che tre mesi di programmazione televisiva WWE sembrano durare molto di più a causa della produzione incessante di contenuti.</p>\n<blockquote>“Lo abbiamo visto con CM Punk e Roman Reigns. Ti ritrovi dentro le cose troppo presto. E tre mesi di TV, JD, equivalgono a tre anni di televisione normale.”</blockquote>\n<p>Coachman ha poi centrato il punto focale del problema: la WWE non ha più spazio di manovra tra i grandi eventi, evidenziando come ci sia stato a malapena il tempo di respirare tra Backlash, Saturday Night’s Main Event e Clash in Italy.</p>\n<blockquote>“Quindi dove vai a parare quando hai Backlash tre settimane dopo Mania, Saturday Night’s Main Event due settimane dopo, Clash in Italy due settimane dopo e poi Night of Champions tre settimane dopo? Non hai spazio per costruire queste storyline. Ecco perché devi puntare sull&#x27;effetto shock. È il build-up il vero problema.”</blockquote>\n<p>Ha inoltre criticato gli accordi mediatici e gli impegni di programmazione della WWE, affermando che la compagnia ha firmato così tanti contratti da essere costretta a cercare costantemente nuove date per eventi speciali.</p>\n<blockquote>“Hanno firmato dei contratti, letteralmente. Tutto ciò che descrivi riguarda Netflix, ESPN, Peacock e in parte NBC, per poi spostare tutto su Peacock solo per incassare un assegno extra.”</blockquote>\n<p>Coachman non si è fermato qui: ha aggiunto che gli speciali di Saturday Night’s Main Event alimentano il problema, dato che la WWE è stata costretta a incastrarne quattro in un calendario già saturo.</p>\n<blockquote>“Ecco perché hanno firmato per questi Saturday Night’s Main Event. E hanno dovuto trovare il modo di collocarli. Ne avevamo quattro da inserire.”</blockquote>\n<blockquote>Per Coachman, il risultato è che alcuni show importanti finiscono per perdere di valore. Ha spiegato che quando la WWE ha solo due settimane tra un evento e l&#x27;altro, questi rischiano di sembrare semplici riempitivi piuttosto che appuntamenti imperdibili: “E secondo me, se hai solo due settimane di distanza, finisci per avere essenzialmente un Collision camuffato da grande evento. E questo diventa imbarazzante.”</blockquote>\n<p>Coachman ha infine suggerito che la struttura del booking della WWE sia influenzata dal calendario, con i match a più contendenti diventati una scorciatoia quando manca il tempo necessario per costruire adeguatamente vari match singoli.</p>\n<blockquote>“A giugno e luglio è quello che stiamo vedendo. Fanno questi match perché ti permettono, in sostanza, di saltare quattro incontri, preferendo i fatal four-way ai match uno contro uno.”</blockquote>\n<p>È chiaro che per Coachman il business della WWE sia più florido che mai, ma tale successo sta creando un problema di natura creativa. Con così tanti show, piattaforme e obblighi contrattuali, la WWE continua a generare enormi profitti, ma a farne le spese, secondo Coachman, è proprio la qualità della narrazione.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/embed/fRhqP2twR6s?start=120&amp;feature=oembed\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/embed/fRhqP2twR6s?start=120&amp;amp;feature=oembed\n</div></figure>\n<!-- /wp:embed -->\n\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/jonathan-coachman-blames-wwes-crowded-event-schedule-rushing-storylines/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_jonathan-coachman-il-calendario-fitto-della-wwe-penalizza-le-storyline.html",
-        "publisher_review_html_preview": "<p>Jonathan Coachman ritiene che la WWE stia affrontando un serio problema di ritmo, sostenendo che il calendario fitto di eventi della compagnia renda difficile dare il giusto respiro alle storyline.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/watch?v=fRhqP2twR6s&amp;t=120s\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/watch?v=fRhqP2twR6s&amp;amp;t=120s\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Intervenuto durante il programma &quot;2 Count Tuesday&quot;, Coachman ha puntato il dito contro i ritmi serrati della WWE, citando come parte del problema i premium live event, gli speciali di Saturday Night’s Main Event, gli impegni con Netflix, gli accordi con ESPN, Peacock e NBC.</p>\n<p>Secondo Coachman, la WWE ha in programma così tanti show di rilievo che il team creativo è costretto ad accelerare gli angoli narrativi anziché permettere loro di svilupparsi naturalmente. L&#x27;ex commentatore ha sottolineato come l&#x27;impazienza sia sempre stata uno dei principali difetti del pro wrestling, ma che l&#x27;attuale calendario della WWE abbia ulteriormente aggravato la situazione.</p>\n<blockquote>“Il problema più grande nel pro wrestling, ed è sempre stato così, è l&#x27;impazienza. Quando hai uno show ogni singola settimana, si crea una sorta di sovraccarico. Il pubblico diventa impaziente. E di conseguenza, anche noi diventiamo impazienti con le storyline.”</blockquote>\n<p>Coachman ha poi citato Oba Femi come esempio, sostenendo che la WWE avrebbe dovuto dedicare più tempo a costruire il suo personaggio contro avversari di maggior richiamo prima di coinvolgere Brock Lesnar.</p>\n<blockquote>“Ciò che serviva era che Oba iniziasse a battere atleti con un certo valore. E poi, ogni settimana, gente come noi avrebbe potuto dire: &#x27;Oh, aspettate un secondo, è stato messo alla prova un po&#x27; di più, e ancora un po&#x27; di più&#x27;. E proprio quando pensavi che stesse per scalare la montagna, ecco che arrivava il colpo di scena, con il ritorno di Brock a fine giugno o inizio luglio.”</blockquote>\n<p>Coachman ha inoltre indicato la gestione di CM Punk e Roman Reigns come un altro esempio di storie avviate troppo in fretta. Ha argomentato che tre mesi di programmazione televisiva WWE sembrano durare molto di più a causa della produzione incessante di contenuti.</p>\n<blockquote>“Lo abbiamo visto con CM Punk e Roman Reigns. Ti ritrovi dentro le cose troppo presto. E tre mesi di TV, JD, equivalgono a tre anni di televisione normale.”</blockquote>\n<p>Coachman ha poi centrato il punto focale del problema: la WWE non ha più spazio di manovra tra i grandi eventi, evidenziando come ci sia stato a malapena il tempo di respirare tra Backlash, Saturday Night’s Main Event e Clash in Italy.</p>\n<blockquote>“Quindi dove vai a parare quando hai Backlash tre settimane dopo Mania, Saturday Night’s Main Event due settimane dopo, Clash in Italy due settimane dopo e poi Night of Champions tre settimane dopo? Non hai spazio per costruire queste storyline. Ecco perché devi puntare sull&#x27;effetto shock. È il build-up il vero problema.”</blockquote>\n<p>Ha inoltre criticato gli accordi mediatici e gli impegni di programmazione della WWE, affermando che la compagnia ha firmato così tanti contratti da essere costretta a cercare costantemente nuove date per eventi speciali.</p>\n<blockquote>“Hanno firmato dei contratti, letteralmente. Tutto ciò che descrivi riguarda Netflix, ESPN, Peacock e in parte NBC, per poi spostare tutto su Peacock solo per incassare un assegno extra.”</blockquote>\n<p>Coachman non si è fermato qui: ha aggiunto che gli speciali di Saturday Night’s Main Event alimentano il problema, dato che la WWE è stata costretta a incastrarne quattro in un calendario già saturo.</p>\n<blockquote>“Ecco perché hanno firmato per questi Saturday Night’s Main Event. E hanno dovuto trovare il modo di collocarli. Ne avevamo quattro da inserire.”</blockquote>\n<blockquote>Per Coachman, il risultato è che alcuni show importanti finiscono per perdere di valore. Ha spiegato che quando la WWE ha solo due settimane tra un evento e l&#x27;altro, questi rischiano di sembrare semplici riempitivi piuttosto che appuntamenti imperdibili: “E secondo me, se hai solo due settimane di distanza, finisci per avere essenzialmente un Collision camuffato da grande evento. E questo diventa imbarazzante.”</blockquote>\n<p>Coachman ha infine suggerito che la struttura del booking della WWE sia influenzata dal calendario, con i match a più contendenti diventati una scorciatoia quando manca il tempo necessario per costruire adeguatamente vari match singoli.</p>\n<blockquote>“A giugno e luglio è quello che stiamo vedendo. Fanno questi match perché ti permettono, in sostanza, di saltare quattro incontri, preferendo i fatal four-way ai match uno contro uno.”</blockquote>\n<p>È chiaro che per Coachman il business della WWE sia più florido che mai, ma tale successo sta creando un problema di natura creativa. Con così tanti show, piattaforme e obblighi contrattuali, la WWE continua a generare enormi profitti, ma a farne le spese, secondo Coachman, è proprio la qualità della narrazione.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/embed/fRhqP2twR6s?start=120&amp;feature=oembed\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/embed/fRhqP2twR6s?start=120&amp;amp;feature=oembed\n</div></figure>\n<!-- /wp:embed -->\n\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/jonathan-coachman-blames-wwes-crowded-event-schedule-rushing-storylines/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": false,
-        "reason": null,
-        "score": null
-      },
-      "publisher": {
-        "categories": [
-          15,
-          8
-        ],
-        "error": null,
-        "featured_media": 5924,
-        "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/world/jonathan-coachman-il-calendario-fitto-della-wwe-penalizza-le-storyline/",
-        "wp_post_id": 5925
-      },
-      "source": null,
-      "source_url": "https://www.ringsidenews.com/jonathan-coachman-blames-wwes-crowded-event-schedule-rushing-storylines",
-      "title_it": "Jonathan Coachman: il calendario fitto della WWE penalizza le storyline"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_jonathan-coachman-defends-brock-lesnar-s-controversial-win-over-oba-femi-at-wwe-clash-in-italy.html",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_dark-side-of-the-ring-season-7-trailer-reveals-star-studded-lineup.html",
         "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_jonathan-coachman-defends-brock-lesnar-s-controversial-win-over-oba-femi-at-wwe-clash-in-italy.html",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_dark-side-of-the-ring-season-7-trailer-reveals-star-studded-lineup.html",
         "publisher_review_html_preview": "",
         "translation_prompt_preview": ""
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "ai:Rilevanza strategica per il pubblico italiano (Clash in Italy).; deterministic:strategic:clash in italy,entity:brock lesnar,entity:oba femi,recency:fresh_12h",
-        "score": 78
+        "reason": "selected_overflow:ai:Notizia di costume molto seguita dal pubblico di wrestling.; deterministic:hard:lineup,recency:fresh_12h",
+        "score": 71
       },
       "publisher": {
         "categories": null,
@@ -148,8 +108,8 @@
         "wp_post_id": null
       },
       "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/jonathan-coachman-defends-brock-lesnars-controversial-win-oba-femi-wwe-clash-italy",
-      "title_it": "Jonathan Coachman Defends Brock Lesnar’s Controversial Win Over Oba Femi at WWE Clash in Italy"
+      "source_url": "https://www.ringsidenews.com/dark-side-ring-season-7-trailer-reveals-star-studded-lineup",
+      "title_it": "Dark Side of The Ring Season 7 Trailer Reveals Star-Studded Lineup"
     },
     {
       "alfred": {
@@ -181,32 +141,32 @@
       },
       "category_hint": "WWE",
       "html_audit": {
-        "alfred_final_html_preview": "<p>L&#x27;ultimo percorso di Logan Paul in WWE ha subito una brusca frenata dopo che l&#x27;atleta ha riportato uno strappo al tricipite durante il suo match titolato a WWE Saturday Night’s Main Event.</p>\nhttps://www.youtube.com/watch?v=B6eovayusbA\n\n<p>Paul e Austin Theory hanno difeso i loro WWE World Tag Team Championship contro gli Street Profits il 23 maggio, ma il match si è concluso con Paul alle prese con un grave infortunio. La WWE ha successivamente annunciato che starà lontano dal ring per &quot;diversi mesi&quot; a causa dello strappo al tricipite.</p>\n<p>Parlando nel suo podcast ImPaulsive, Paul ha spiegato che l&#x27;infortunio è avvenuto quando Angelo Dawkins è volato oltre le corde verso l&#x27;esterno. Paul ha raccontato che il suo braccio era già in tensione mentre cercava di afferrare Dawkins e l&#x27;impatto è stato troppo forte da gestire per il suo fisico.</p>\n<blockquote>“Quello che è successo è stato che io ero all&#x27;esterno e un Angelo Dawkins da quasi 300 libbre è volato oltre le corde. Mi è finito addosso, il mio braccio era in tensione perché stavo cercando di prenderlo. Troppo peso, troppa tensione, ho sentito i tendini staccarsi dal gomito.”</blockquote>\n<p>Paul ha detto di aver capito subito che c&#x27;era qualcosa che non andava, vista l&#x27;esperienza con i numerosi infortuni passati. Ha inoltre sottolineato che i fan possono sentire il dolore nella sua voce durante il match.</p>\n<blockquote>“Mi sono infortunato così tante volte che l&#x27;ho capito immediatamente. Se ascoltate bene quando succede, potete sentirmi: non sto facendo &#x27;selling&#x27; come un wrestler, quello è dolore vero. In quel momento ho capito: sono fottuto.”</blockquote>\n<p>Paul ha anche spiegato cosa è successo dopo il match, quando Bron Breakker è andato ad alzargli il braccio per festeggiare. Ha rivelato di aver già comunicato ad Austin Theory, mentre erano ancora sul ring, di credere di essersi strappato il tricipite.</p>\n<blockquote>“Ho detto ad Austin quando eravamo sul ring: &#x27;Mi sono strappato il tricipite&#x27;. Lui mi guarda – eravamo ancora in fase di esecuzione – come per dire: &#x27;Ma sei serio?&#x27;. &#x27;Sì, sì, sì&#x27;. Poi arriva Bron Breakker a sollevarci le braccia perché avevamo appena vinto il match.”</blockquote>\n<p>Paul ha detto di essere andato nel panico in quel momento perché Breakker stava per sollevargli proprio il braccio infortunato. Lo ha avvertito ripetutamente prima che Breakker lo alzasse con estrema cautela.</p>\n<blockquote>“Gli dico: &#x27;Mi sono fatto male al braccio! Mi sono fatto male al braccio! Mi sono fatto male al braccio! Per favore, attento, attento&#x27;. Si prende un secondo e poi lo solleva lentamente; è andato tutto bene, ma in quel momento ho pensato: &#x27;Amico, il mio partner sta per strapparmi il braccio ancora di più di quanto non sia già&#x27;.&quot;</blockquote>\n<p>Paul ha anche risposto ai fan secondo cui la stable The Vision sarebbe maledetta, vista la serie di infortuni che ha colpito il gruppo. Bron Breakker ha avuto un&#x27;ernia, Bronson Reed uno strappo al bicipite e Seth Rollins è stato rimosso dalla programmazione WWE dopo un angle riguardante un infortunio alla spalla che ha coinvolto proprio Breakker. Paul ha affermato che la parte più frustrante è che l&#x27;infortunio sia avvenuto proprio nell&#x27;ultima mossa del match a cui ha preso parte.</p>\n<blockquote>“Questa è una delle parti più deludenti: è stata l&#x27;ultima mossa in cui sono stato coinvolto nel match. È stata l&#x27;ultima fottuta cosa, ho eseguito questa mossa bene e me ne tornavo a casa.”</blockquote>\n<p>Nonostante l&#x27;infortunio, Paul ha chiarito che continua a considerarsi un campione, anche se al momento non ha la cintura alla vita.</p>\n<blockquote>“Tra l&#x27;altro, io sono ancora il campione, semplicemente non ho l&#x27;hardware per dimostrarlo. Non importa, perché indovinate un po&#x27;? I Vision sono ancora i campioni di coppia.”</blockquote>\n<p>Paul ha anche respinto al mittente l&#x27;idea che i The Vision siano maledetti, tirando in ballo persino Danhausen.</p>\n<blockquote>“La gente dice che i Vision sono maledetti, che sei maledetto tu, Danhausen! Fratello, i Vision non sono maledetti. Bron Breakker è indistruttibile, al netto dell&#x27;ernia. Austin Theory lavora da anni.”</blockquote>\n<p>L&#x27;infortunio di Logan Paul arriva in un momento complicato per i The Vision, specialmente con la fazione già alle prese con numerosi contrattempi. Tuttavia, Paul ha chiarito di non essere pronto a lasciare che l&#x27;infortunio definisca il suo regno titolato o lo slancio del gruppo in WWE.</p>\n\nhttps://www.youtube.com/embed/B6eovayusbA?feature=oembed",
-        "bob_body_html_preview": "<p>L&#x27;ultimo percorso di Logan Paul in WWE ha subito una brusca frenata dopo che l&#x27;atleta ha riportato uno strappo al tricipite durante il suo match titolato a WWE Saturday Night’s Main Event.</p>\nhttps://www.youtube.com/watch?v=B6eovayusbA\n\n<p>Paul e Austin Theory hanno difeso i loro WWE World Tag Team Championship contro gli Street Profits il 23 maggio, ma il match si è concluso con Paul alle prese con un grave infortunio. La WWE ha successivamente annunciato che starà lontano dal ring per &quot;diversi mesi&quot; a causa dello strappo al tricipite.</p>\n<p>Parlando nel suo podcast ImPaulsive, Paul ha spiegato che l&#x27;infortunio è avvenuto quando Angelo Dawkins è volato oltre le corde verso l&#x27;esterno. Paul ha raccontato che il suo braccio era già in tensione mentre cercava di afferrare Dawkins e l&#x27;impatto è stato troppo forte da gestire per il suo fisico.</p>\n<blockquote>“Quello che è successo è stato che io ero all&#x27;esterno e un Angelo Dawkins da quasi 300 libbre è volato oltre le corde. Mi è finito addosso, il mio braccio era in tensione perché stavo cercando di prenderlo. Troppo peso, troppa tensione, ho sentito i tendini staccarsi dal gomito.”</blockquote>\n<p>Paul ha detto di aver capito subito che c&#x27;era qualcosa che non andava, vista l&#x27;esperienza con i numerosi infortuni passati. Ha inoltre sottolineato che i fan possono sentire il dolore nella sua voce durante il match.</p>\n<blockquote>“Mi sono infortunato così tante volte che l&#x27;ho capito immediatamente. Se ascoltate bene quando succede, potete sentirmi: non sto facendo &#x27;selling&#x27; come un wrestler, quello è dolore vero. In quel momento ho capito: sono fottuto.”</blockquote>\n<p>Paul ha anche spiegato cosa è successo dopo il match, quando Bron Breakker è andato ad alzargli il braccio per festeggiare. Ha rivelato di aver già comunicato ad Austin Theory, mentre erano ancora sul ring, di credere di essersi strappato il tricipite.</p>\n<blockquote>“Ho detto ad Austin quando eravamo sul ring: &#x27;Mi sono strappato il tricipite&#x27;. Lui mi guarda – eravamo ancora in fase di esecuzione – come per dire: &#x27;Ma sei serio?&#x27;. &#x27;Sì, sì, sì&#x27;. Poi arriva Bron Breakker a sollevarci le braccia perché avevamo appena vinto il match.”</blockquote>\n<p>Paul ha detto di essere andato nel panico in quel momento perché Breakker stava per sollevargli proprio il braccio infortunato. Lo ha avvertito ripetutamente prima che Breakker lo alzasse con estrema cautela.</p>\n<blockquote>“Gli dico: &#x27;Mi sono fatto male al braccio! Mi sono fatto male al braccio! Mi sono fatto male al braccio! Per favore, attento, attento&#x27;. Si prende un secondo e poi lo solleva lentamente; è andato tutto bene, ma in quel momento ho pensato: &#x27;Amico, il mio partner sta per strapparmi il braccio ancora di più di quanto non sia già&#x27;.&quot;</blockquote>\n<p>Paul ha anche risposto ai fan secondo cui la stable The Vision sarebbe maledetta, vista la serie di infortuni che ha colpito il gruppo. Bron Breakker ha avuto un&#x27;ernia, Bronson Reed uno strappo al bicipite e Seth Rollins è stato rimosso dalla programmazione WWE dopo un angle riguardante un infortunio alla spalla che ha coinvolto proprio Breakker. Paul ha affermato che la parte più frustrante è che l&#x27;infortunio sia avvenuto proprio nell&#x27;ultima mossa del match a cui ha preso parte.</p>\n<blockquote>“Questa è una delle parti più deludenti: è stata l&#x27;ultima mossa in cui sono stato coinvolto nel match. È stata l&#x27;ultima fottuta cosa, ho eseguito questa mossa bene e me ne tornavo a casa.”</blockquote>\n<p>Nonostante l&#x27;infortunio, Paul ha chiarito che continua a considerarsi un campione, anche se al momento non ha la cintura alla vita.</p>\n<blockquote>“Tra l&#x27;altro, io sono ancora il campione, semplicemente non ho l&#x27;hardware per dimostrarlo. Non importa, perché indovinate un po&#x27;? I Vision sono ancora i campioni di coppia.”</blockquote>\n<p>Paul ha anche respinto al mittente l&#x27;idea che i The Vision siano maledetti, tirando in ballo persino Danhausen.</p>\n<blockquote>“La gente dice che i Vision sono maledetti, che sei maledetto tu, Danhausen! Fratello, i Vision non sono maledetti. Bron Breakker è indistruttibile, al netto dell&#x27;ernia. Austin Theory lavora da anni.”</blockquote>\n<p>L&#x27;infortunio di Logan Paul arriva in un momento complicato per i The Vision, specialmente con la fazione già alle prese con numerosi contrattempi. Tuttavia, Paul ha chiarito di non essere pronto a lasciare che l&#x27;infortunio definisca il suo regno titolato o lo slancio del gruppo in WWE.</p>\n\nhttps://www.youtube.com/embed/B6eovayusbA?feature=oembed",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_logan-paul-svela-il-dolore-dietro-l-infortunio-al-tricipite-a-saturday-night-s-main-event.html",
+        "alfred_final_html_preview": "<p>L&#x27;ultima avventura in WWE di Logan Paul ha subito una brutale battuta d&#x27;arresto a causa di uno strappo al tricipite riportato durante il suo match titolato a WWE Saturday Night’s Main Event.</p>\nhttps://www.youtube.com/watch?v=B6eovayusbA\n\n<p>Il 23 maggio, Paul e Austin Theory hanno difeso il WWE World Tag Team Championship contro gli Street Profits, ma il match si è concluso con Paul alle prese con un grave infortunio. La WWE ha successivamente annunciato che rimarrà lontano dal ring per &quot;diversi mesi&quot; proprio a causa dello strappo al tricipite.</p>\n<p>Parlando nel suo podcast ImPaulsive, Paul ha spiegato che l&#x27;infortunio è avvenuto quando Angelo Dawkins è volato oltre le corde verso l&#x27;esterno. Paul ha raccontato che il suo braccio era già contratto mentre tentava di afferrare Dawkins, e l&#x27;impatto è stato troppo violento per il suo corpo.</p>\n<blockquote>“Quello che è successo è stato che io ero fuori ring e un uomo di quasi 140 chili, Dawkins, è volato oltre le corde. Mi è atterrato addosso mentre il mio braccio era contratto e cercavo di prenderlo. Troppo peso, troppa tensione: ho sentito i tendini staccarsi dal gomito.”</blockquote>\n<p>Paul ha affermato di aver capito immediatamente che qualcosa non andava, vista la sua esperienza con numerosi infortuni passati. Ha inoltre sottolineato che i fan possono sentire il dolore nella sua voce durante il match.</p>\n<blockquote>“Mi sono infortunato così tante volte che l&#x27;ho capito subito. Potete sentirlo, ascoltate bene quando accade: potete sentirmi, non sto facendo selling da wrestler, quello è dolore reale. In quel momento ho capito: sono fottuto.”</blockquote>\n<p>Paul ha spiegato cosa è successo dopo il match, quando Bron Breakker ha provato a sollevargli il braccio per festeggiare. Ha rivelato di aver già comunicato ad Austin Theory, mentre erano ancora sul ring, di credere di essersi strappato il tricipite.</p>\n<blockquote>“Ho detto ad Austin mentre eravamo sul ring: &#x27;Mi sono strappato il tricipite&#x27;. Lui mi guarda – eravamo ancora in fase di lavoro – tipo: &#x27;Ma sei serio?&#x27;. &#x27;Sì, sì, sì&#x27;. Poi Bron Breakker va per alzarci le braccia perché avevamo appena vinto il match.”</blockquote>\n<p>Paul ha detto di essere andato nel panico in quel momento perché Breakker stava per sollevare proprio il braccio infortunato. Lo ha avvertito ripetutamente prima che Breakker lo sollevasse con cautela.</p>\n<blockquote>“Ho urlato: &#x27;Mi sono fatto male al braccio! Mi sono fatto male al braccio! Mi sono fatto male al braccio! Per favore, attento, attento&#x27;. Lui si è preso un secondo e poi lo ha sollevato lentamente, ed è andata bene, ma in quel momento pensavo: &#x27;Fratello, il mio partner sta per strapparmi il braccio ancora di più di quanto non sia già&#x27;.&quot;</blockquote>\n<p>Paul ha anche risposto ai fan che sostengono che la stable The Vision sia maledetta a causa della serie di infortuni del gruppo. Bron Breakker ha avuto un&#x27;ernia, Bronson Reed uno strappo al bicipite e Seth Rollins è stato rimosso dai programmi televisivi dopo un attacco di Breakker. Paul ha detto che la parte più frustrante è che l&#x27;infortunio sia avvenuto durante l&#x27;ultima mossa del match.</p>\n<blockquote>“Questa è una delle cose più deludenti: era l&#x27;ultima mossa che dovevo fare nel match. È stata l&#x27;ultima fottuta cosa, ho eseguito questa mossa e poi me ne andavo a casa.”</blockquote>\n<p>Nonostante l&#x27;infortunio, Paul ha chiarito di considerarsi ancora un campione, anche se al momento non ha la cintura con sé.</p>\n<blockquote>“Tra l&#x27;altro, sono ancora il campione, semplicemente non ho il metallo a provarlo. Non importa, perché indovinate un po&#x27;? I The Vision sono ancora i campioni di coppia.”</blockquote>\n<p>Paul ha anche respinto l&#x27;idea che la stable sia maledetta, tirando in ballo persino Danhausen.</p>\n<blockquote>“La gente dice che i The Vision sono maledetti, sei maledetto tu, Danhausen! Fratello, i The Vision non sono maledetti. Bron Breakker è indistruttibile, ernia a parte. Austin Theory lavora da anni.”</blockquote>\n<p>L&#x27;infortunio di Logan Paul arriva in un momento difficile per i The Vision, che stanno già gestendo diverse defezioni. Tuttavia, Paul ha chiarito di non essere disposto a lasciare che questo infortunio definisca il suo regno titolato o lo slancio del gruppo in WWE.</p>\n\nhttps://www.youtube.com/embed/B6eovayusbA?feature=oembed",
+        "bob_body_html_preview": "<p>L&#x27;ultima avventura in WWE di Logan Paul ha subito una brutale battuta d&#x27;arresto a causa di uno strappo al tricipite riportato durante il suo match titolato a WWE Saturday Night’s Main Event.</p>\nhttps://www.youtube.com/watch?v=B6eovayusbA\n\n<p>Il 23 maggio, Paul e Austin Theory hanno difeso il WWE World Tag Team Championship contro gli Street Profits, ma il match si è concluso con Paul alle prese con un grave infortunio. La WWE ha successivamente annunciato che rimarrà lontano dal ring per &quot;diversi mesi&quot; proprio a causa dello strappo al tricipite.</p>\n<p>Parlando nel suo podcast ImPaulsive, Paul ha spiegato che l&#x27;infortunio è avvenuto quando Angelo Dawkins è volato oltre le corde verso l&#x27;esterno. Paul ha raccontato che il suo braccio era già contratto mentre tentava di afferrare Dawkins, e l&#x27;impatto è stato troppo violento per il suo corpo.</p>\n<blockquote>“Quello che è successo è stato che io ero fuori ring e un uomo di quasi 140 chili, Dawkins, è volato oltre le corde. Mi è atterrato addosso mentre il mio braccio era contratto e cercavo di prenderlo. Troppo peso, troppa tensione: ho sentito i tendini staccarsi dal gomito.”</blockquote>\n<p>Paul ha affermato di aver capito immediatamente che qualcosa non andava, vista la sua esperienza con numerosi infortuni passati. Ha inoltre sottolineato che i fan possono sentire il dolore nella sua voce durante il match.</p>\n<blockquote>“Mi sono infortunato così tante volte che l&#x27;ho capito subito. Potete sentirlo, ascoltate bene quando accade: potete sentirmi, non sto facendo selling da wrestler, quello è dolore reale. In quel momento ho capito: sono fottuto.”</blockquote>\n<p>Paul ha spiegato cosa è successo dopo il match, quando Bron Breakker ha provato a sollevargli il braccio per festeggiare. Ha rivelato di aver già comunicato ad Austin Theory, mentre erano ancora sul ring, di credere di essersi strappato il tricipite.</p>\n<blockquote>“Ho detto ad Austin mentre eravamo sul ring: &#x27;Mi sono strappato il tricipite&#x27;. Lui mi guarda – eravamo ancora in fase di lavoro – tipo: &#x27;Ma sei serio?&#x27;. &#x27;Sì, sì, sì&#x27;. Poi Bron Breakker va per alzarci le braccia perché avevamo appena vinto il match.”</blockquote>\n<p>Paul ha detto di essere andato nel panico in quel momento perché Breakker stava per sollevare proprio il braccio infortunato. Lo ha avvertito ripetutamente prima che Breakker lo sollevasse con cautela.</p>\n<blockquote>“Ho urlato: &#x27;Mi sono fatto male al braccio! Mi sono fatto male al braccio! Mi sono fatto male al braccio! Per favore, attento, attento&#x27;. Lui si è preso un secondo e poi lo ha sollevato lentamente, ed è andata bene, ma in quel momento pensavo: &#x27;Fratello, il mio partner sta per strapparmi il braccio ancora di più di quanto non sia già&#x27;.&quot;</blockquote>\n<p>Paul ha anche risposto ai fan che sostengono che la stable The Vision sia maledetta a causa della serie di infortuni del gruppo. Bron Breakker ha avuto un&#x27;ernia, Bronson Reed uno strappo al bicipite e Seth Rollins è stato rimosso dai programmi televisivi dopo un attacco di Breakker. Paul ha detto che la parte più frustrante è che l&#x27;infortunio sia avvenuto durante l&#x27;ultima mossa del match.</p>\n<blockquote>“Questa è una delle cose più deludenti: era l&#x27;ultima mossa che dovevo fare nel match. È stata l&#x27;ultima fottuta cosa, ho eseguito questa mossa e poi me ne andavo a casa.”</blockquote>\n<p>Nonostante l&#x27;infortunio, Paul ha chiarito di considerarsi ancora un campione, anche se al momento non ha la cintura con sé.</p>\n<blockquote>“Tra l&#x27;altro, sono ancora il campione, semplicemente non ho il metallo a provarlo. Non importa, perché indovinate un po&#x27;? I The Vision sono ancora i campioni di coppia.”</blockquote>\n<p>Paul ha anche respinto l&#x27;idea che la stable sia maledetta, tirando in ballo persino Danhausen.</p>\n<blockquote>“La gente dice che i The Vision sono maledetti, sei maledetto tu, Danhausen! Fratello, i The Vision non sono maledetti. Bron Breakker è indistruttibile, ernia a parte. Austin Theory lavora da anni.”</blockquote>\n<p>L&#x27;infortunio di Logan Paul arriva in un momento difficile per i The Vision, che stanno già gestendo diverse defezioni. Tuttavia, Paul ha chiarito di non essere disposto a lasciare che questo infortunio definisca il suo regno titolato o lo slancio del gruppo in WWE.</p>\n\nhttps://www.youtube.com/embed/B6eovayusbA?feature=oembed",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_logan-paul-rivela-il-dolore-dell-infortunio-al-tricipite-durante-saturday-night-s-main-event.html",
         "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_logan-paul-svela-il-dolore-dietro-l-infortunio-al-tricipite-a-saturday-night-s-main-event.html",
-        "publisher_review_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_logan-paul-rivela-il-dolore-dell-infortunio-al-tricipite-durante-saturday-night-s-main-event.html",
+        "publisher_review_html_preview": "<p>L&#x27;ultima avventura in WWE di Logan Paul ha subito una brutale battuta d&#x27;arresto a causa di uno strappo al tricipite riportato durante il suo match titolato a WWE Saturday Night’s Main Event.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/watch?v=B6eovayusbA\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/watch?v=B6eovayusbA\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Il 23 maggio, Paul e Austin Theory hanno difeso il WWE World Tag Team Championship contro gli Street Profits, ma il match si è concluso con Paul alle prese con un grave infortunio. La WWE ha successivamente annunciato che rimarrà lontano dal ring per &quot;diversi mesi&quot; proprio a causa dello strappo al tricipite.</p>\n<p>Parlando nel suo podcast ImPaulsive, Paul ha spiegato che l&#x27;infortunio è avvenuto quando Angelo Dawkins è volato oltre le corde verso l&#x27;esterno. Paul ha raccontato che il suo braccio era già contratto mentre tentava di afferrare Dawkins, e l&#x27;impatto è stato troppo violento per il suo corpo.</p>\n<blockquote>“Quello che è successo è stato che io ero fuori ring e un uomo di quasi 140 chili, Dawkins, è volato oltre le corde. Mi è atterrato addosso mentre il mio braccio era contratto e cercavo di prenderlo. Troppo peso, troppa tensione: ho sentito i tendini staccarsi dal gomito.”</blockquote>\n<p>Paul ha affermato di aver capito immediatamente che qualcosa non andava, vista la sua esperienza con numerosi infortuni passati. Ha inoltre sottolineato che i fan possono sentire il dolore nella sua voce durante il match.</p>\n<blockquote>“Mi sono infortunato così tante volte che l&#x27;ho capito subito. Potete sentirlo, ascoltate bene quando accade: potete sentirmi, non sto facendo selling da wrestler, quello è dolore reale. In quel momento ho capito: sono fottuto.”</blockquote>\n<p>Paul ha spiegato cosa è successo dopo il match, quando Bron Breakker ha provato a sollevargli il braccio per festeggiare. Ha rivelato di aver già comunicato ad Austin Theory, mentre erano ancora sul ring, di credere di essersi strappato il tricipite.</p>\n<blockquote>“Ho detto ad Austin mentre eravamo sul ring: &#x27;Mi sono strappato il tricipite&#x27;. Lui mi guarda – eravamo ancora in fase di lavoro – tipo: &#x27;Ma sei serio?&#x27;. &#x27;Sì, sì, sì&#x27;. Poi Bron Breakker va per alzarci le braccia perché avevamo appena vinto il match.”</blockquote>\n<p>Paul ha detto di essere andato nel panico in quel momento perché Breakker stava per sollevare proprio il braccio infortunato. Lo ha avvertito ripetutamente prima che Breakker lo sollevasse con cautela.</p>\n<blockquote>“Ho urlato: &#x27;Mi sono fatto male al braccio! Mi sono fatto male al braccio! Mi sono fatto male al braccio! Per favore, attento, attento&#x27;. Lui si è preso un secondo e poi lo ha sollevato lentamente, ed è andata bene, ma in quel momento pensavo: &#x27;Fratello, il mio partner sta per strapparmi il braccio ancora di più di quanto non sia già&#x27;.&quot;</blockquote>\n<p>Paul ha anche risposto ai fan che sostengono che la stable The Vision sia maledetta a causa della serie di infortuni del gruppo. Bron Breakker ha avuto un&#x27;ernia, Bronson Reed uno strappo al bicipite e Seth Rollins è stato rimosso dai programmi televisivi dopo un attacco di Breakker. Paul ha detto che la parte più frustrante è che l&#x27;infortunio sia avvenuto durante l&#x27;ultima mossa del match.</p>\n<blockquote>“Questa è una delle cose più deludenti: era l&#x27;ultima mossa che dovevo fare nel match. È stata l&#x27;ultima fottuta cosa, ho eseguito questa mossa e poi me ne andavo a casa.”</blockquote>\n<p>Nonostante l&#x27;infortunio, Paul ha chiarito di considerarsi ancora un campione, anche se al momento non ha la cintura con sé.</p>\n<blockquote>“Tra l&#x27;altro, sono ancora il campione, semplicemente non ho il metallo a provarlo. Non importa, perché indovinate un po&#x27;? I The Vision sono ancora i campioni di coppia.”</blockquote>\n<p>Paul ha anche respinto l&#x27;idea che la stable sia maledetta, tirando in ballo persino Danhausen.</p>\n<blockquote>“La gente dice che i The Vision sono maledetti, sei maledetto tu, Danhausen! Fratello, i The Vision non sono maledetti. Bron Breakker è indistruttibile, ernia a parte. Austin Theory lavora da anni.”</blockquote>\n<p>L&#x27;infortunio di Logan Paul arriva in un momento difficile per i The Vision, che stanno già gestendo diverse defezioni. Tuttavia, Paul ha chiarito di non essere disposto a lasciare che questo infortunio definisca il suo regno titolato o lo slancio del gruppo in WWE.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/embed/B6eovayusbA?feature=oembed\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/embed/B6eovayusbA?feature=oembed\n</div></figure>\n<!-- /wp:embed -->\n\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
         "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event/\nTitolo feed: Logan Paul Reveals Real Pain Behind Torn Tricep Injury At WWE Saturday Night’s Main Event\nTitolo pagina: Logan Paul Reveals Real Pain Behind Torn Tricep Injury At WWE Saturday Night’s Main Event\nDescrizione: Logan Paul’s latest WWE run hit a brutal setback after he suffered a torn tricep during his championship match at WWE Saturday Night’s Main Event. Paul\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Logan Paul’s latest WWE run hit a brutal setback after he suffered a torn tricep during his championship match at WWE Saturday Night’s Main Event.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Paul and Austin Theory defended their WWE World Tag Team Championship against The Street Profits on May 23, but the match ended with Paul dealing with a serious injury. WWE later announced that he would be out of action for “a number of months” because of the torn tricep.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"Speaking on his ImPaulsive podcast, Paul explained that the injury happened when Angelo Dawkins came flying over the ropes to the outside. Paul said his arm was already flexed as he tried to catch Dawkins, and the impact was too much for his body to handle.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“What had happened was, I was on the outside, a nearly 300 pound (Angelo) Dawkins comes flying over the ropes. He lands on me, my arm is flexed and trying to catch him. Too much weight, too much tension, I could feel the tendons snap off the elbow.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Paul said he knew right away that something was badly wrong because of how many injuries he has dealt with before. He also pointed out that fans can hear the pain in his voice during the match.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“I’ve been injured so many times, I knew immediately. You can hear, listen closely to when it happens, you can hear me, I’m not selling like a wrestler, that’s real pain. I knew in that moment, I’m f**ked.”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"Paul also explained what happened after the match when Bron Breakker went to raise his arm in celebration. He said he had already told Austin Theory in the ring that he believed he tore his tricep.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"quote\",\n    \"text\": \"“I told Austin when we were in the ring, ‘I tore my tricep.’ He looks at me – we’re still working – like ‘Are you f**king serious?’ ‘Yeah, yeah, yeah.’ Then Bron Breakker goes to raise our arms because we had just won the match.”\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"text\",\n    \"text\": \"Paul said he panicked in that moment because Breakker was about to lift the injured arm. He warned him repeatedly before Breakker carefully raised it.\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"quote\",\n    \"text\": \"“I go ‘I hurt my arm! I hurt my arm! I hurt my arm! Please, careful, careful.’ He takes a second and then he slowly raises it up, and it was fine, but in that moment I was like ‘Bro, my partner’s about to rip my f**king arm more than it already is.’”\"\n  },\n  {\n    \"id\": \"b12\",\n    \"type\": \"text\",\n    \"text\": \"Paul also addressed fans saying The Vision may be cursed because of the group’s run of injuries. Bron Breakker previously dealt with a hernia, Bronson Reed suffered a torn bicep, and Seth Rollins was written off WWE television after a shoulder injury angle involving Breakker. Paul said the most frustrating part was that the injury happened on the final move he was involved in during the match.\"\n  },\n  {\n    \"id\": \"b13\",\n    \"type\": \"quote\",\n    \"text\": \"“That’s one of the most disappointing parts about it, it was the last move I was a part of in the match. It was the last f**king thing, I hit this move right and I’m going home.”\"\n  },\n  {\n    \"id\": \"b14\",\n    \"type\": \"text\",\n    \"text\": \"Despite the injury, Paul made it clear he still sees himself as a champion, even if he does not currently have the title belt in his possession.\"\n  },\n  {\n    \"id\": \"b15\",\n    \"type\": \"quote\",\n    \"text\": \"“By the way, I am still the champ, I just don’t have the hardware to prove it. It doesn’t matter, because guess what? The Vision are still tag team champions.”\"\n  },\n  {\n    \"id\": \"b16\",\n    \"type\": \"text\",\n    \"text\": \"Paul also shut down the idea that The Vision is cursed and even brought Danhausen into the conversation.\"\n  },\n  {\n    \"id\": \"b17\",\n    \"type\": \"quote\",\n    \"text\": \"“The people are saying The Vision is cursed, you’re cursed, Danhausen! Bro, The Vision is not cursed. Bron Breakker is indestructible, minus the hernia. Austin Theory has been working for years.”\"\n  },\n  {\n    \"id\": \"b18\",\n    \"type\": \"text\",\n    \"text\": \"Logan Paul’s injury comes at a rough time for The Vision, especially with the faction already dealing with multiple setbacks. Still, Paul made it clear that he is not ready to let the injury define his title reign or the group’s momentum in WWE.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "ai:Notizia di primaria importanza: infortunio reale di un main eventer durante un live event.; deterministic:hard:injury,hard:championship,recency:fresh_12h",
+        "reason": "ai:Infortunio di un top star in un PLE, notizia fondamentale.; deterministic:hard:injury,hard:championship,recency:fresh_12h",
         "score": 84
       },
       "publisher": {
         "categories": null,
         "error": null,
         "featured_media": null,
-        "present": false,
-        "status": null,
+        "present": true,
+        "status": "wp_not_ready",
         "wp_link": null,
         "wp_post_id": null
       },
       "source": "ringsidenews",
       "source_url": "https://www.ringsidenews.com/logan-paul-reveals-real-pain-behind-torn-tricep-injury-wwe-saturday-nights-main-event",
-      "title_it": "Logan Paul svela il dolore dietro l'infortunio al tricipite a Saturday Night's Main Event"
+      "title_it": "Logan Paul rivela il dolore dell'infortunio al tricipite durante Saturday Night’s Main Event"
     },
     {
       "alfred": {
@@ -229,21 +189,21 @@
         "translation_model": null,
         "translation_used": null
       },
-      "category_hint": "WWE",
+      "category_hint": "AEW",
       "html_audit": {
         "alfred_final_html_preview": "",
         "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_matt-cardona-explains-why-zack-ryder-had-to-die-for-his-wwe-return-to-happen.html",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_mjf-announces-he-s-stepping-away-from-american-independent-wrestling-to-focus-on-aew.html",
         "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_matt-cardona-explains-why-zack-ryder-had-to-die-for-his-wwe-return-to-happen.html",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_mjf-announces-he-s-stepping-away-from-american-independent-wrestling-to-focus-on-aew.html",
         "publisher_review_html_preview": "",
         "translation_prompt_preview": ""
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "ai:Curiosità retrospettiva non urgente.; deterministic:hard:returning,hard:return,soft_penalty:explains why,recency:fresh_12h",
-        "score": 76
+        "reason": "selected_overflow:ai:Scelta strategica di una top star AEW, impatto sul business.; deterministic:hard:championship,soft_penalty:explains why,recency:fresh_12h",
+        "score": 71
       },
       "publisher": {
         "categories": null,
@@ -255,8 +215,8 @@
         "wp_post_id": null
       },
       "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/matt-cardona-explains-why-zack-ryder-die-his-wwe-return-happen",
-      "title_it": "Matt Cardona Explains Why Zack Ryder Had To Die For His WWE Return To Happen"
+      "source_url": "https://www.ringsidenews.com/mjf-announces-hes-stepping-away-american-independent-wrestling-focus-aew",
+      "title_it": "MJF Announces He’s Stepping Away From American Independent Wrestling to Focus on AEW"
     },
     {
       "alfred": {
@@ -279,36 +239,34 @@
         "translation_model": null,
         "translation_used": null
       },
-      "category_hint": null,
+      "category_hint": "World",
       "html_audit": {
         "alfred_final_html_preview": "",
         "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_ryan-nemeth-accusa-gli-atleti-straight-edge-di-ipocrisia-sull-uso-di-ped.html",
-        "published_html_preview": "<p>Ryan Nemeth ha appena pubblicato un tweet controverso sulle persone che seguono lo stile di vita straight edge, e non ha avuto bisogno di fare nomi per far discutere.</p>\n\n<!-- wp:embed {\"url\":\"https://x.com/ryrynemnem/status/2062178268158238808\",\"type\":\"rich\",\"providerNameSlug\":\"twitter\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter\"><div class=\"wp-block-embed__wrapper\">\nhttps://x.com/ryrynemnem/status/2062178268158238808\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Nemeth si è rivolto a Twitter per criticare quella che considera ipocrisia da parte di alcuni personaggi straight edge, suggerendo che alcuni predichino ad alta voce di mantenere il proprio corpo pulito, facendo però un&#x27;eccezione per i PED (sostanze dopanti).</p>\n<blockquote>“Adoro quando i ragazzi straight edge dicono: NULLA! ENTRERÀ! MAI! NEL! MIO! CORPO! MAI! eccetto i PED che in realtà ora assumerò molto spesso perché prendo steroidi, ma ovviamente questo non infrange il mio sacro voto. Sono più disciplinato di te :)”</blockquote>\n<p>Nemeth non ha specificato a chi si riferisse, ma il post ha sicuramente lasciato il segno. Il messaggio deride l&#x27;idea di qualcuno che costruisce la propria intera identità attorno alla disciplina e al vivere in modo sano, per poi piegare le regole quando ne trae un vantaggio fisico.</p>\n<p>Lo stile di vita straight edge è sempre stato legato al rifiuto di droghe e alcol, specialmente nel wrestling, dove alcune star lo hanno reso parte della propria immagine pubblica. Il post di Nemeth mira a quella stessa immagine, trasformandola in una vera e propria denuncia di ipocrisia.</p>\n<p>Per il momento, Nemeth non ha chiarito se il tweet fosse rivolto a qualcuno in particolare. Tuttavia, le parole sono state abbastanza taglienti da far chiedere a molti chi avesse esattamente in mente. Nemeth potrà anche non aver fatto nomi, ma il messaggio è stato forte e chiaro: ritiene che alcuni esponenti dello stile straight edge non siano così puliti come sostengono, e non ha avuto problemi a dirlo pubblicamente.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/ryan-nemeth-accuses-straight-edge-guys-hypocrisy-ped-use/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_ryan-nemeth-accusa-gli-atleti-straight-edge-di-ipocrisia-sull-uso-di-ped.html",
-        "publisher_review_html_preview": "<p>Ryan Nemeth ha appena pubblicato un tweet controverso sulle persone che seguono lo stile di vita straight edge, e non ha avuto bisogno di fare nomi per far discutere.</p>\n\n<!-- wp:embed {\"url\":\"https://x.com/ryrynemnem/status/2062178268158238808\",\"type\":\"rich\",\"providerNameSlug\":\"twitter\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-rich is-provider-twitter wp-block-embed-twitter\"><div class=\"wp-block-embed__wrapper\">\nhttps://x.com/ryrynemnem/status/2062178268158238808\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Nemeth si è rivolto a Twitter per criticare quella che considera ipocrisia da parte di alcuni personaggi straight edge, suggerendo che alcuni predichino ad alta voce di mantenere il proprio corpo pulito, facendo però un&#x27;eccezione per i PED (sostanze dopanti).</p>\n<blockquote>“Adoro quando i ragazzi straight edge dicono: NULLA! ENTRERÀ! MAI! NEL! MIO! CORPO! MAI! eccetto i PED che in realtà ora assumerò molto spesso perché prendo steroidi, ma ovviamente questo non infrange il mio sacro voto. Sono più disciplinato di te :)”</blockquote>\n<p>Nemeth non ha specificato a chi si riferisse, ma il post ha sicuramente lasciato il segno. Il messaggio deride l&#x27;idea di qualcuno che costruisce la propria intera identità attorno alla disciplina e al vivere in modo sano, per poi piegare le regole quando ne trae un vantaggio fisico.</p>\n<p>Lo stile di vita straight edge è sempre stato legato al rifiuto di droghe e alcol, specialmente nel wrestling, dove alcune star lo hanno reso parte della propria immagine pubblica. Il post di Nemeth mira a quella stessa immagine, trasformandola in una vera e propria denuncia di ipocrisia.</p>\n<p>Per il momento, Nemeth non ha chiarito se il tweet fosse rivolto a qualcuno in particolare. Tuttavia, le parole sono state abbastanza taglienti da far chiedere a molti chi avesse esattamente in mente. Nemeth potrà anche non aver fatto nomi, ma il messaggio è stato forte e chiaro: ritiene che alcuni esponenti dello stile straight edge non siano così puliti come sostengono, e non ha avuto problemi a dirlo pubblicamente.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/ryan-nemeth-accuses-straight-edge-guys-hypocrisy-ped-use/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_nwa-adds-world-title-match-to-hard-times-6.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_nwa-adds-world-title-match-to-hard-times-6.html",
+        "publisher_review_html_preview": "",
         "translation_prompt_preview": ""
       },
       "menzo": {
         "classification": null,
-        "present": false,
-        "reason": null,
-        "score": null
+        "present": true,
+        "reason": "ai:Aggiornamento card evento NWA, utile per il panorama internazionale.; deterministic:hard:championship,hard:lineup,recency:fresh_12h",
+        "score": 74
       },
       "publisher": {
-        "categories": [
-          8
-        ],
+        "categories": null,
         "error": null,
-        "featured_media": 5926,
-        "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/world/ryan-nemeth-accusa-gli-atleti-straight-edge-di-ipocrisia-sulluso-di-ped/",
-        "wp_post_id": 5927
+        "featured_media": null,
+        "present": false,
+        "status": null,
+        "wp_link": null,
+        "wp_post_id": null
       },
-      "source": null,
-      "source_url": "https://www.ringsidenews.com/ryan-nemeth-accuses-straight-edge-guys-hypocrisy-ped-use",
-      "title_it": "Ryan Nemeth accusa gli atleti straight edge di ipocrisia sull'uso di PED"
+      "source": "ringsidenews",
+      "source_url": "https://www.ringsidenews.com/nwa-adds-world-title-match-hard-times-6",
+      "title_it": "NWA Adds World Title Match To Hard Times 6"
     },
     {
       "alfred": {
@@ -320,135 +278,76 @@
         "warnings": []
       },
       "bob": {
-        "clean_element_count": 11,
+        "clean_element_count": 12,
         "diagnostic_stage": "ready_for_alfred",
         "element_counts": {
           "embed": 2,
           "heading": 0,
           "image": 0,
-          "quote": 3,
+          "quote": 4,
           "table": 0,
           "text": 6
         },
         "error": null,
         "present": true,
-        "raw_element_count": 16,
+        "raw_element_count": 17,
         "removed_before_gemini": 18,
         "status": "ready_for_alfred",
         "translation_model": "gemini-3.1-flash-lite",
         "translation_used": true
       },
-      "category_hint": "Business",
+      "category_hint": "WWE",
       "html_audit": {
-        "alfred_final_html_preview": "<p>Chris Harris non attribuisce a Triple H la responsabilità di tutto ciò che sta accadendo attualmente in WWE; punta il dito direttamente contro TKO.</p>\nhttps://www.youtube.com/watch?v=Mk2B4EYX8aE\n\n<p>L&#x27;ex star della TNA ha discusso della direzione attuale della WWE durante il podcast &quot;Tagging in with Chris Harris&quot;, chiarendo di ritenere che Triple H stia operando sotto una forte pressione aziendale. I suoi commenti arrivano dopo che alcuni report hanno evidenziato come TKO stia spingendo per una ristrutturazione importante dei contratti, con alcuni talenti WWE che avrebbero già accettato accordi al ribasso.</p>\n<p>Discutendo se Triple H stia facendo un buon lavoro come leader creativo della WWE, Harris ha dichiarato di apprezzare il fatto che al comando ci sia qualcuno con una mentalità legata al wrestling vecchia scuola. Harris ha affermato che Triple H sembra aperto alla collaborazione e a nuove idee creative. Tuttavia, ritiene che il problema principale sia che Triple H potrebbe non avere più l&#x27;ultima parola su tutto. Subito dopo, Harris ha spostato l&#x27;attenzione su TKO, affermando che l&#x27;approccio &quot;business-first&quot; della compagnia ha cambiato la natura stessa della WWE, accusandola di essere avida di denaro.</p>\n<blockquote>“Sono contento che ci sia un ragazzo della vecchia scuola al comando. Credo che abbia delle buone idee, almeno da ciò che ci lasciano vedere — e ho visto molto di questo nel programma Unreal.” “Sembra aperto ad altre idee e cercano di trovare una sintesi creativa. Quindi sono felice che ci sia quella mentalità vecchia scuola a guidare il tutto. Tuttavia, sento anche che da quando TKO ha preso il controllo, ci sia un limite a ciò che una persona nella sua posizione può fare, perché ci sono dei vertici che sono chiaramente avidi di denaro e fanno tutto solo per incassare. E lo capisco — fa parte del business.”</blockquote>\n<p>Chris Harris ritiene che molte decisioni della WWE potrebbero essere diverse se Triple H avesse il controllo totale. A suo avviso, i vertici di TKO hanno l&#x27;ultima parola, il che mette Triple H in una posizione difficile, dato che non può opporsi alle loro decisioni.</p>\n<blockquote>“Ma sento anche che probabilmente molte cose sarebbero andate diversamente se il processo decisionale fosse dipeso interamente da Triple H. Dato però che TKO ha l&#x27;ultima parola, penso che siano intervenuti in molte situazioni; potrebbe non essere ciò che vuole Triple H, ma ha le mani legate.”</blockquote>\n<p>Ha inoltre affermato che Triple H non ha altra scelta se non quella di sostenere pubblicamente le decisioni, anche se personalmente potrebbe non essere d&#x27;accordo. Harris ha ribadito di ritenere Triple H la figura più adatta a gestire il lato wrestling, ma che le priorità di TKO sono chiaramente più orientate al business che allo sport.</p>\n<blockquote>“Se gli dicono di fare qualcosa, deve farla — e non solo farla, ma farla anche con il sorriso. Non può andare in giro a dire: &#x27;Non ero d&#x27;accordo con questo&#x27;. Non funziona così. Vogliono qualcuno che sia il volto della compagnia e che difenda ogni decisione. Quindi, personalmente, penso che abbiamo una brava persona al comando, ma non credo che a TKO importi tanto del lato wrestling quanto di quello commerciale. Ed è un peccato, ma è quello che stanno facendo.”</blockquote>\n<p>I commenti di Harris giungono in un momento in cui la direzione aziendale della WWE sta affrontando molte critiche, specialmente riguardo ai report sui tagli ai contratti dei talenti e alla spinta di TKO verso la riduzione dei costi. Sebbene Triple H rimanga il volto pubblico del lato creativo della WWE, Harris ritiene che il vero potere risieda sopra di lui, il che potrebbe continuare a plasmare la WWE in modi che fan e talenti potrebbero non gradire sempre.</p>\n\nhttps://www.youtube.com/embed/Mk2B4EYX8aE?feature=oembed",
-        "bob_body_html_preview": "<p>Chris Harris non attribuisce a Triple H la responsabilità di tutto ciò che sta accadendo attualmente in WWE; punta il dito direttamente contro TKO.</p>\nhttps://www.youtube.com/watch?v=Mk2B4EYX8aE\n\n<p>L&#x27;ex star della TNA ha discusso della direzione attuale della WWE durante il podcast &quot;Tagging in with Chris Harris&quot;, chiarendo di ritenere che Triple H stia operando sotto una forte pressione aziendale. I suoi commenti arrivano dopo che alcuni report hanno evidenziato come TKO stia spingendo per una ristrutturazione importante dei contratti, con alcuni talenti WWE che avrebbero già accettato accordi al ribasso.</p>\n<p>Discutendo se Triple H stia facendo un buon lavoro come leader creativo della WWE, Harris ha dichiarato di apprezzare il fatto che al comando ci sia qualcuno con una mentalità legata al wrestling vecchia scuola. Harris ha affermato che Triple H sembra aperto alla collaborazione e a nuove idee creative. Tuttavia, ritiene che il problema principale sia che Triple H potrebbe non avere più l&#x27;ultima parola su tutto. Subito dopo, Harris ha spostato l&#x27;attenzione su TKO, affermando che l&#x27;approccio &quot;business-first&quot; della compagnia ha cambiato la natura stessa della WWE, accusandola di essere avida di denaro.</p>\n<blockquote>“Sono contento che ci sia un ragazzo della vecchia scuola al comando. Credo che abbia delle buone idee, almeno da ciò che ci lasciano vedere — e ho visto molto di questo nel programma Unreal.” “Sembra aperto ad altre idee e cercano di trovare una sintesi creativa. Quindi sono felice che ci sia quella mentalità vecchia scuola a guidare il tutto. Tuttavia, sento anche che da quando TKO ha preso il controllo, ci sia un limite a ciò che una persona nella sua posizione può fare, perché ci sono dei vertici che sono chiaramente avidi di denaro e fanno tutto solo per incassare. E lo capisco — fa parte del business.”</blockquote>\n<p>Chris Harris ritiene che molte decisioni della WWE potrebbero essere diverse se Triple H avesse il controllo totale. A suo avviso, i vertici di TKO hanno l&#x27;ultima parola, il che mette Triple H in una posizione difficile, dato che non può opporsi alle loro decisioni.</p>\n<blockquote>“Ma sento anche che probabilmente molte cose sarebbero andate diversamente se il processo decisionale fosse dipeso interamente da Triple H. Dato però che TKO ha l&#x27;ultima parola, penso che siano intervenuti in molte situazioni; potrebbe non essere ciò che vuole Triple H, ma ha le mani legate.”</blockquote>\n<p>Ha inoltre affermato che Triple H non ha altra scelta se non quella di sostenere pubblicamente le decisioni, anche se personalmente potrebbe non essere d&#x27;accordo. Harris ha ribadito di ritenere Triple H la figura più adatta a gestire il lato wrestling, ma che le priorità di TKO sono chiaramente più orientate al business che allo sport.</p>\n<blockquote>“Se gli dicono di fare qualcosa, deve farla — e non solo farla, ma farla anche con il sorriso. Non può andare in giro a dire: &#x27;Non ero d&#x27;accordo con questo&#x27;. Non funziona così. Vogliono qualcuno che sia il volto della compagnia e che difenda ogni decisione. Quindi, personalmente, penso che abbiamo una brava persona al comando, ma non credo che a TKO importi tanto del lato wrestling quanto di quello commerciale. Ed è un peccato, ma è quello che stanno facendo.”</blockquote>\n<p>I commenti di Harris giungono in un momento in cui la direzione aziendale della WWE sta affrontando molte critiche, specialmente riguardo ai report sui tagli ai contratti dei talenti e alla spinta di TKO verso la riduzione dei costi. Sebbene Triple H rimanga il volto pubblico del lato creativo della WWE, Harris ritiene che il vero potere risieda sopra di lui, il che potrebbe continuare a plasmare la WWE in modi che fan e talenti potrebbero non gradire sempre.</p>\n\nhttps://www.youtube.com/embed/Mk2B4EYX8aE?feature=oembed",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_tko-accusata-di-limitare-il-potere-di-triple-h.html",
+        "alfred_final_html_preview": "<p>Booker T non boccia Sol Ruca dopo WWE Clash in Italy, ma è convinto che abbia ancora molta strada da fare per crescere.</p>\nhttps://www.youtube.com/watch?v=a_gQ1-4Ezrg\n\n<p>Durante il podcast Hall of Fame, Booker T ha commentato il match valevole per il Women’s Intercontinental Championship tra Sol Ruca e Becky Lynch a Clash in Italy. Ruca ha conquistato il titolo dopo aver eseguito la Sol Snatcher, ma Booker ritiene che l&#x27;incontro abbia messo in luce una lacuna importante su cui deve lavorare.</p>\n<blockquote>Secondo Booker, il match è apparso a tratti troppo strutturato, dando l&#x27;impressione che le due atlete si limitassero a passare da uno spot pianificato all&#x27;altro: &quot;Sembrava tutto eseguito secondo un copione, come se stessero solo seguendo degli schemi. Sol Ruca dovrà imparare davvero a improvvisare.&quot;</blockquote>\n<p>Booker ha chiarito di vedere un enorme potenziale in Ruca, pur sostenendo che le manchi esperienza per gestire gli imprevisti sul ring. Ha spiegato che saper reagire in tempo reale è una componente fondamentale per lavorare ai massimi livelli.</p>\n<blockquote>&quot;Vorrei avere la possibilità di lavorare con Sol Ruca sull&#x27;improvvisazione e sul come far sì che ogni elemento di un match si incastri alla perfezione. È così talentuosa e la sua ascesa a NXT è stata fulminea, ma quando qualcosa va storto e devi cambiare i piani in corsa, devi comunque far sembrare che fosse tutto previsto fin dall&#x27;inizio.&quot;</blockquote>\n<p>Booker T ha osservato che, essendo stata catapultata così presto in una posizione di rilievo, per Sol Ruca è inevitabile commettere degli errori. Tuttavia, ha anche aggiunto che tali sbagli sono necessari se vuole trasformarsi in una vera star di primo piano.</p>\n<blockquote>&quot;Penso che essere stata gettata nella mischia così presto comporti degli errori che deve necessariamente commettere per poter lavorare al livello successivo. Questa è la realtà dei fatti, inutile indorare la pillola.&quot;</blockquote>\n<p>Il WWE Hall of Famer si è anche chiesto quanto il match sarebbe potuto essere migliore se Sol Ruca e Becky Lynch avessero avuto modo di affrontarsi negli house show prima di arrivare a questo scontro titolato su un palcoscenico così importante.</p>\n<blockquote>&quot;Quanto sarebbe stata più preparata Sol Ruca se avesse avuto l&#x27;opportunità di fare qualche house show con Becky Lynch prima di quel match? Quanto sarebbe stato migliore l&#x27;incontro? Moltissimo. Quindi, quello che dico è: commettendo questi errori, non ha altra scelta che imparare.&quot;</blockquote>\n<p>Sol Ruca ha lasciato Clash in Italy con una delle vittorie più importanti della sua carriera, ma per Booker T la prestazione ha evidenziato come sia ancora in fase di adattamento ai livelli del main event WWE. Per lui, il talento non si discute, ma il passo successivo è imparare a far funzionare un match anche quando non tutto va secondo i piani.</p>\n\nhttps://www.youtube.com/embed/a_gQ1-4Ezrg?feature=oembed",
+        "bob_body_html_preview": "<p>Booker T non boccia Sol Ruca dopo WWE Clash in Italy, ma è convinto che abbia ancora molta strada da fare per crescere.</p>\nhttps://www.youtube.com/watch?v=a_gQ1-4Ezrg\n\n<p>Durante il podcast Hall of Fame, Booker T ha commentato il match valevole per il Women’s Intercontinental Championship tra Sol Ruca e Becky Lynch a Clash in Italy. Ruca ha conquistato il titolo dopo aver eseguito la Sol Snatcher, ma Booker ritiene che l&#x27;incontro abbia messo in luce una lacuna importante su cui deve lavorare.</p>\n<blockquote>Secondo Booker, il match è apparso a tratti troppo strutturato, dando l&#x27;impressione che le due atlete si limitassero a passare da uno spot pianificato all&#x27;altro: &quot;Sembrava tutto eseguito secondo un copione, come se stessero solo seguendo degli schemi. Sol Ruca dovrà imparare davvero a improvvisare.&quot;</blockquote>\n<p>Booker ha chiarito di vedere un enorme potenziale in Ruca, pur sostenendo che le manchi esperienza per gestire gli imprevisti sul ring. Ha spiegato che saper reagire in tempo reale è una componente fondamentale per lavorare ai massimi livelli.</p>\n<blockquote>&quot;Vorrei avere la possibilità di lavorare con Sol Ruca sull&#x27;improvvisazione e sul come far sì che ogni elemento di un match si incastri alla perfezione. È così talentuosa e la sua ascesa a NXT è stata fulminea, ma quando qualcosa va storto e devi cambiare i piani in corsa, devi comunque far sembrare che fosse tutto previsto fin dall&#x27;inizio.&quot;</blockquote>\n<p>Booker T ha osservato che, essendo stata catapultata così presto in una posizione di rilievo, per Sol Ruca è inevitabile commettere degli errori. Tuttavia, ha anche aggiunto che tali sbagli sono necessari se vuole trasformarsi in una vera star di primo piano.</p>\n<blockquote>&quot;Penso che essere stata gettata nella mischia così presto comporti degli errori che deve necessariamente commettere per poter lavorare al livello successivo. Questa è la realtà dei fatti, inutile indorare la pillola.&quot;</blockquote>\n<p>Il WWE Hall of Famer si è anche chiesto quanto il match sarebbe potuto essere migliore se Sol Ruca e Becky Lynch avessero avuto modo di affrontarsi negli house show prima di arrivare a questo scontro titolato su un palcoscenico così importante.</p>\n<blockquote>&quot;Quanto sarebbe stata più preparata Sol Ruca se avesse avuto l&#x27;opportunità di fare qualche house show con Becky Lynch prima di quel match? Quanto sarebbe stato migliore l&#x27;incontro? Moltissimo. Quindi, quello che dico è: commettendo questi errori, non ha altra scelta che imparare.&quot;</blockquote>\n<p>Sol Ruca ha lasciato Clash in Italy con una delle vittorie più importanti della sua carriera, ma per Booker T la prestazione ha evidenziato come sia ancora in fase di adattamento ai livelli del main event WWE. Per lui, il talento non si discute, ma il passo successivo è imparare a far funzionare un match anche quando non tutto va secondo i piani.</p>\n\nhttps://www.youtube.com/embed/a_gQ1-4Ezrg?feature=oembed",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_booker-t-critica-il-match-di-sol-ruca-a-clash-in-italy-troppo-strutturato.html",
         "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_tko-accusata-di-limitare-il-potere-di-triple-h.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/tko-accused-tying-triple-hs-hands-money-hungry-tactics/\nTitolo feed: TKO Accused of Tying Triple H’s Hands With Money-Hungry Tactics\nTitolo pagina: TKO Accused of Tying Triple H’s Hands With Money-Hungry Tactics\nDescrizione: Chris Harris isn’t blaming Triple H for everything happening in WWE right now — he’s pointing the finger straight at TKO. The former TNA star addressed\nCategoria suggerita: Business\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Chris Harris isn’t blaming Triple H for everything happening in WWE right now — he’s pointing the finger straight at TKO.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"The former TNA star addressed WWE’s current direction while speaking on the Tagging in with Chris Harris podcast , and he made it clear he believes Triple H is working under serious corporate pressure. His comments come after reports noted TKO has been pushing for major contract restructures , with some WWE talent already accepting reduced deals.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"text\",\n    \"text\": \"While discussing whether Triple H is doing a good job as WWE’s creative leader, Harris said he likes having someone with an old-school wrestling mind in charge . Harris said Triple H appears open to collaboration and fresh creative ideas. However, he believes the bigger issue is that Triple H may not have the final say on everything anymore. Right after that, Harris turned his attention to TKO, saying the company’s business-first approach has changed what WWE can be, accusing it of being money-hungry.\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"quote\",\n    \"text\": \"“I’m glad we have an old-school guy in charge. I think he’s got some good ideas, at least from what they allow us to see—and I’ve seen a lot of that from that Unreal program.” “It looks like he’s open to other ideas, and they try to come together on things creatively. So I’m glad we have that old-school mindset leading the way. However, I also feel like since TKO has taken over, there’s only so much that a guy in his position can do, because you’ve got higher-ups that it’s very clear are so money-hungry and are doing everything just to make a buck. And I get that—that’s part of business.”\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"text\",\n    \"text\": \"Chris Harris believes a lot of WWE’s decisions might look different if Triple H had full control. In his view, TKO’s leadership has the final say, and that leaves Triple H in a difficult position since he really can’t go against them.\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"quote\",\n    \"text\": \"“But I also feel like there’s probably a lot that would have gone differently if it was all up to Triple H in the decision-making. But because TKO has the final say, I think they’ve stepped in a lot of situations, and it may not be what Triple H wants—but his hands are tied.”\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"text\",\n    \"text\": \"He also said Triple H has no choice but to publicly support decisions, even if he may not personally agree with them. Harris stated that he believes Triple H is the right wrestling mind for the job, but TKO’s priorities are clearly more business-driven than wrestling-driven.\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"quote\",\n    \"text\": \"“If they tell him to do something, he’s got to do it—and not just do it, but do it with a smile. He can’t go out and say, ‘I didn’t agree with this.’ That’s not how it works. They want someone to be the face of the company and defend every decision. So personally, I feel like we have a good guy in charge—but I don’t think TKO cares as much about the wrestling side of things as they do about the business side. And that’s unfortunate—but that’s what they’re doing.”\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"text\",\n    \"text\": \"Harris’ comments come at a time when WWE’s corporate direction is facing lots of backlash, especially with reports of reduced talent deals and TKO’s push to cut costs . While Triple H remains the public face of WWE creative, Harris believes the real power sits above him — and that could continue shaping WWE in ways fans and talent may not always like.\"\n  }\n]\n"
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_booker-t-critica-il-match-di-sol-ruca-a-clash-in-italy-troppo-strutturato.html",
+        "publisher_review_html_preview": "<p>Booker T non boccia Sol Ruca dopo WWE Clash in Italy, ma è convinto che abbia ancora molta strada da fare per crescere.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/watch?v=a_gQ1-4Ezrg\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/watch?v=a_gQ1-4Ezrg\n</div></figure>\n<!-- /wp:embed -->\n\n<p>Durante il podcast Hall of Fame, Booker T ha commentato il match valevole per il Women’s Intercontinental Championship tra Sol Ruca e Becky Lynch a Clash in Italy. Ruca ha conquistato il titolo dopo aver eseguito la Sol Snatcher, ma Booker ritiene che l&#x27;incontro abbia messo in luce una lacuna importante su cui deve lavorare.</p>\n<blockquote>Secondo Booker, il match è apparso a tratti troppo strutturato, dando l&#x27;impressione che le due atlete si limitassero a passare da uno spot pianificato all&#x27;altro: &quot;Sembrava tutto eseguito secondo un copione, come se stessero solo seguendo degli schemi. Sol Ruca dovrà imparare davvero a improvvisare.&quot;</blockquote>\n<p>Booker ha chiarito di vedere un enorme potenziale in Ruca, pur sostenendo che le manchi esperienza per gestire gli imprevisti sul ring. Ha spiegato che saper reagire in tempo reale è una componente fondamentale per lavorare ai massimi livelli.</p>\n<blockquote>&quot;Vorrei avere la possibilità di lavorare con Sol Ruca sull&#x27;improvvisazione e sul come far sì che ogni elemento di un match si incastri alla perfezione. È così talentuosa e la sua ascesa a NXT è stata fulminea, ma quando qualcosa va storto e devi cambiare i piani in corsa, devi comunque far sembrare che fosse tutto previsto fin dall&#x27;inizio.&quot;</blockquote>\n<p>Booker T ha osservato che, essendo stata catapultata così presto in una posizione di rilievo, per Sol Ruca è inevitabile commettere degli errori. Tuttavia, ha anche aggiunto che tali sbagli sono necessari se vuole trasformarsi in una vera star di primo piano.</p>\n<blockquote>&quot;Penso che essere stata gettata nella mischia così presto comporti degli errori che deve necessariamente commettere per poter lavorare al livello successivo. Questa è la realtà dei fatti, inutile indorare la pillola.&quot;</blockquote>\n<p>Il WWE Hall of Famer si è anche chiesto quanto il match sarebbe potuto essere migliore se Sol Ruca e Becky Lynch avessero avuto modo di affrontarsi negli house show prima di arrivare a questo scontro titolato su un palcoscenico così importante.</p>\n<blockquote>&quot;Quanto sarebbe stata più preparata Sol Ruca se avesse avuto l&#x27;opportunità di fare qualche house show con Becky Lynch prima di quel match? Quanto sarebbe stato migliore l&#x27;incontro? Moltissimo. Quindi, quello che dico è: commettendo questi errori, non ha altra scelta che imparare.&quot;</blockquote>\n<p>Sol Ruca ha lasciato Clash in Italy con una delle vittorie più importanti della sua carriera, ma per Booker T la prestazione ha evidenziato come sia ancora in fase di adattamento ai livelli del main event WWE. Per lui, il talento non si discute, ma il passo successivo è imparare a far funzionare un match anche quando non tutto va secondo i piani.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/embed/a_gQ1-4Ezrg?feature=oembed\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/embed/a_gQ1-4Ezrg?feature=oembed\n</div></figure>\n<!-- /wp:embed -->\n\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/sol-rucas-wwe-clash-italy-match-criticized-too-structured/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.ringsidenews.com/sol-rucas-wwe-clash-italy-match-criticized-too-structured/\nTitolo feed: Sol Ruca’s WWE Clash In Italy Match Criticized for Being Too Structured\nTitolo pagina: Sol Ruca’s WWE Clash In Italy Match Criticized for Being Too Structured\nDescrizione: Booker T isn’t writing off Sol Ruca after WWE Clash in Italy — but he definitely thinks she has some growing to do. While speaking on the Hall of Fame\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"Booker T isn’t writing off Sol Ruca after WWE Clash in Italy — but he definitely thinks she has some growing to do.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"While speaking on the Hall of Fame podcast , Booker T reacted to Sol Ruca’s Women’s Intercontinental Championship match against Becky Lynch at Clash in Italy. Ruca walked out with the title after hitting the Sol Snatcher , but Booker felt the match exposed one major area she still needs to improve.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"According to Booker, the match felt too structured at times and came across like both women were simply moving from one planned spot to the next: “It looked like it was being run by the numbers, like running the plays. Sol Ruca is going to have to really think about being able to improvise.”\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Booker made it clear that he sees major potential in Ruca, but he believes she needs more experience when things don’t go exactly as planned inside the ring. He said learning how to adjust in real time is a huge part of working at the next level.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"“I wish I had a chance to work with Sol Ruca on improvisation and go out and do certain things to make everything come together in a match. She’s so talented, and her having a meteoric rise in NXT—when that play gets messed up and you’ve got to call an audible, that’s how you still have to make it look like it was supposed to look that way.”\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"Booker T said Sol Ruca being thrown into a major spot this quickly means mistakes are going to happen. However, he also argued that those mistakes are necessary if she wants to grow into a bigger star.\"\n  },\n  {\n    \"id\": \"b8\",\n    \"type\": \"quote\",\n    \"text\": \"“So I think being thrown into that deep water so early—but then again, it’s mistakes that she has to make in order to be able to work on that next level. That’s facts, and there’s no way to sugarcoat it.”\"\n  },\n  {\n    \"id\": \"b9\",\n    \"type\": \"text\",\n    \"text\": \"The WWE Hall of Famer also questioned how much better the match could have been if Sol Ruca and Becky Lynch had worked together on house shows before getting their title match on a major WWE stage.\"\n  },\n  {\n    \"id\": \"b10\",\n    \"type\": \"quote\",\n    \"text\": \"“How much more prepared would Sol Ruca have been if she had a chance to do house show loops with Becky Lynch before they had that match? How much better would that match have been? So much better. So what I’m saying is—making those mistakes, she has no choice but to learn.”\"\n  },\n  {\n    \"id\": \"b11\",\n    \"type\": \"text\",\n    \"text\": \"Sol Ruca still left Clash in Italy with one of the biggest wins of her career, but Booker T clearly believes the performance showed she is still adjusting to WWE’s main-event level. For him, the talent is obvious — but the next step is learning how to make a match work even when everything doesn’t go perfectly.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "ai:Analisi interessante sulla gestione TKO, sposta la categoria da TNA a Business.; deterministic:hard:tko,recency:fresh_12h",
-        "score": 78
+        "reason": "ai:Riferimento diretto al PLE in Italia, essenziale per il nostro pubblico.; deterministic:hard:championship,strategic:clash in italy,entity:becky lynch,recency:fresh_12h",
+        "score": 79
       },
       "publisher": {
         "categories": null,
         "error": null,
         "featured_media": null,
-        "present": false,
-        "status": null,
+        "present": true,
+        "status": "wp_not_ready",
         "wp_link": null,
         "wp_post_id": null
       },
       "source": "ringsidenews",
-      "source_url": "https://www.ringsidenews.com/tko-accused-tying-triple-hs-hands-money-hungry-tactics",
-      "title_it": "TKO accusata di limitare il potere di Triple H"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": null,
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_fissata-la-data-del-processo-per-l-uomo-accusato-di-stalking-ai-danni-di-liv-morgan.html",
-        "published_html_preview": "<p>Il procedimento penale a carico dell&#x27;uomo accusato di aver perseguitato la stella della WWE Liv Morgan si sta finalmente avviando verso il processo.</p>\n<p>Shawn Chan, l&#x27;uomo canadese accusato di essersi recato in Florida e di essersi presentato presso l&#x27;abitazione della Morgan, per poi essere arrestato al WWE Performance Center, dovrà comparire in tribunale il 15 giugno alle 9:00 presso la Corte Distrettuale degli Stati Uniti per il distretto centrale della Florida a Tampa.</p>\n<p>Il processo era inizialmente previsto per marzo, ma è stato rinviato più volte. Secondo gli atti giudiziari, il caso si svolgerà ora come &quot;stipulated facts bench trial&quot;, il che significa che non ci sarà una giuria e che molti dei fatti contestati sono già stati concordati da entrambe le parti, limitando la necessità di testimonianze.</p>\n<p>Chan deve rispondere dell&#x27;accusa di violenza domestica interstatale, derivante dalle denunce secondo cui l&#x27;anno scorso avrebbe viaggiato dal Canada alla Florida trascorrendo diverse ore presso la residenza della Morgan.</p>\n<p>Secondo i procuratori federali, Chan è volato da Scarborough, Ontario, a Orlando il 26 maggio 2025, lo stesso giorno in cui ha ottenuto il passaporto. Al suo arrivo in Florida, le autorità sostengono che abbia riferito agli ufficiali doganali di voler soggiornare presso il WWE Performance Center, nonostante la struttura non offra alloggi.</p>\n<p>Quattro giorni dopo, gli investigatori riferiscono che Chan si è recato a casa della Morgan, ha girato più volte intorno alla proprietà, è entrato dal cortile sul retro e ha tentato di accedere attraverso la porta d&#x27;ingresso. Secondo l&#x27;accusa, sarebbe rimasto presso l&#x27;abitazione per diverse ore prima di andarsene.</p>\n<p>Le autorità federali sostengono inoltre che Chan abbia lasciato un biglietto scritto a mano contenente il proprio nome, l&#x27;indirizzo canadese e il numero di telefono. Nel biglietto, Chan ha scritto:</p>\n<blockquote>“Sono io, Shawn, il ragazzo con cui uscite tutti online su [piattaforma di gioco rimossa]. Avete cercato di contattarmi, o meglio, di cercarmi quando sono assente da quel gioco. Quindi chi è lo stalker, eh?! NON ho MAI detto o fatto nulla di male per oltre 10 anni, eppure avete osato odiarmi senza motivo.” “Sono venuto qui solo per fare una visita amichevole, niente di più. Eppure, grazie a tutti voi, sono io quello che sembra uno stalker. E pensate tutti che io provi ancora empatia, compassione o che mi interessi ancora qualcosa di voi? Inizierò a parlare e a fare tutto ciò che voglio, nonostante tutte le vostre facce contrariate che fate. Sì, volevo solo farvi sapere che ero qui.”</blockquote>\n<p>Secondo la denuncia penale, Chan è stato arrestato dall&#x27;FBI il 3 giugno 2025, dopo che il personale di sicurezza della WWE lo avrebbe riconosciuto dalle riprese di sorveglianza effettuate presso la residenza della Morgan, allertando le autorità.</p>\n<p>Chan è stato successivamente incriminato il 25 giugno ed è rimasto in custodia dal momento del suo arresto. Gli atti giudiziari mostrano che ha tentato più volte di ottenere il rilascio prima del processo, ma tali sforzi non hanno avuto successo. Più recentemente, ha cercato di avvalersi di un&#x27;infermità mentale come linea difensiva. Se condannato, Chan rischia fino a cinque anni di carcere federale.</p>\n<p>Con il processo ora pronto a partire dopo mesi di rinvii, il caso potrebbe presto fornire risposte su uno degli episodi più inquietanti che abbiano coinvolto un performer della WWE negli ultimi anni.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/trial-date-set-man-accused-stalking-wwe-star-liv-morgan/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_fissata-la-data-del-processo-per-l-uomo-accusato-di-stalking-ai-danni-di-liv-morgan.html",
-        "publisher_review_html_preview": "<p>Il procedimento penale a carico dell&#x27;uomo accusato di aver perseguitato la stella della WWE Liv Morgan si sta finalmente avviando verso il processo.</p>\n<p>Shawn Chan, l&#x27;uomo canadese accusato di essersi recato in Florida e di essersi presentato presso l&#x27;abitazione della Morgan, per poi essere arrestato al WWE Performance Center, dovrà comparire in tribunale il 15 giugno alle 9:00 presso la Corte Distrettuale degli Stati Uniti per il distretto centrale della Florida a Tampa.</p>\n<p>Il processo era inizialmente previsto per marzo, ma è stato rinviato più volte. Secondo gli atti giudiziari, il caso si svolgerà ora come &quot;stipulated facts bench trial&quot;, il che significa che non ci sarà una giuria e che molti dei fatti contestati sono già stati concordati da entrambe le parti, limitando la necessità di testimonianze.</p>\n<p>Chan deve rispondere dell&#x27;accusa di violenza domestica interstatale, derivante dalle denunce secondo cui l&#x27;anno scorso avrebbe viaggiato dal Canada alla Florida trascorrendo diverse ore presso la residenza della Morgan.</p>\n<p>Secondo i procuratori federali, Chan è volato da Scarborough, Ontario, a Orlando il 26 maggio 2025, lo stesso giorno in cui ha ottenuto il passaporto. Al suo arrivo in Florida, le autorità sostengono che abbia riferito agli ufficiali doganali di voler soggiornare presso il WWE Performance Center, nonostante la struttura non offra alloggi.</p>\n<p>Quattro giorni dopo, gli investigatori riferiscono che Chan si è recato a casa della Morgan, ha girato più volte intorno alla proprietà, è entrato dal cortile sul retro e ha tentato di accedere attraverso la porta d&#x27;ingresso. Secondo l&#x27;accusa, sarebbe rimasto presso l&#x27;abitazione per diverse ore prima di andarsene.</p>\n<p>Le autorità federali sostengono inoltre che Chan abbia lasciato un biglietto scritto a mano contenente il proprio nome, l&#x27;indirizzo canadese e il numero di telefono. Nel biglietto, Chan ha scritto:</p>\n<blockquote>“Sono io, Shawn, il ragazzo con cui uscite tutti online su [piattaforma di gioco rimossa]. Avete cercato di contattarmi, o meglio, di cercarmi quando sono assente da quel gioco. Quindi chi è lo stalker, eh?! NON ho MAI detto o fatto nulla di male per oltre 10 anni, eppure avete osato odiarmi senza motivo.” “Sono venuto qui solo per fare una visita amichevole, niente di più. Eppure, grazie a tutti voi, sono io quello che sembra uno stalker. E pensate tutti che io provi ancora empatia, compassione o che mi interessi ancora qualcosa di voi? Inizierò a parlare e a fare tutto ciò che voglio, nonostante tutte le vostre facce contrariate che fate. Sì, volevo solo farvi sapere che ero qui.”</blockquote>\n<p>Secondo la denuncia penale, Chan è stato arrestato dall&#x27;FBI il 3 giugno 2025, dopo che il personale di sicurezza della WWE lo avrebbe riconosciuto dalle riprese di sorveglianza effettuate presso la residenza della Morgan, allertando le autorità.</p>\n<p>Chan è stato successivamente incriminato il 25 giugno ed è rimasto in custodia dal momento del suo arresto. Gli atti giudiziari mostrano che ha tentato più volte di ottenere il rilascio prima del processo, ma tali sforzi non hanno avuto successo. Più recentemente, ha cercato di avvalersi di un&#x27;infermità mentale come linea difensiva. Se condannato, Chan rischia fino a cinque anni di carcere federale.</p>\n<p>Con il processo ora pronto a partire dopo mesi di rinvii, il caso potrebbe presto fornire risposte su uno degli episodi più inquietanti che abbiano coinvolto un performer della WWE negli ultimi anni.</p>\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.ringsidenews.com/trial-date-set-man-accused-stalking-wwe-star-liv-morgan/\" target=\"_blank\" rel=\"nofollow noopener\">Ringside News</a>.</em></p>",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": false,
-        "reason": null,
-        "score": null
-      },
-      "publisher": {
-        "categories": [
-          4,
-          8
-        ],
-        "error": null,
-        "featured_media": 5922,
-        "present": true,
-        "status": "published",
-        "wp_link": "https://news.openwrestlingtv.com/wwe/fissata-la-data-del-processo-per-luomo-accusato-di-stalking-ai-danni-di-liv-morgan/",
-        "wp_post_id": 5923
-      },
-      "source": null,
-      "source_url": "https://www.ringsidenews.com/trial-date-set-man-accused-stalking-wwe-star-liv-morgan",
-      "title_it": "Fissata la data del processo per l'uomo accusato di stalking ai danni di Liv Morgan"
+      "source_url": "https://www.ringsidenews.com/sol-rucas-wwe-clash-italy-match-criticized-too-structured",
+      "title_it": "Booker T critica il match di Sol Ruca a Clash in Italy: \"Troppo strutturato\""
     },
     {
       "alfred": {
         "decision": "approved",
-        "editorial_changes": [
-          {
-            "code": "false_table_warning_removed",
-            "message": "Rimosso warning tabella: nessun segnale reale da Bob o Menzo.",
-            "severity": "info"
-          }
-        ],
+        "editorial_changes": [],
         "issues": [],
         "present": true,
         "quality_score": 100,
         "warnings": []
       },
       "bob": {
-        "clean_element_count": 7,
+        "clean_element_count": 5,
         "diagnostic_stage": "ready_for_alfred",
         "element_counts": {
           "embed": 1,
           "heading": 0,
           "image": 0,
-          "quote": 2,
+          "quote": 3,
           "table": 0,
-          "text": 4
+          "text": 1
         },
         "error": null,
         "present": true,
-        "raw_element_count": 9,
+        "raw_element_count": 7,
         "removed_before_gemini": 2,
         "status": "ready_for_alfred",
         "translation_model": "gemini-3.1-flash-lite",
@@ -456,18 +355,68 @@
       },
       "category_hint": "WWE",
       "html_audit": {
-        "alfred_final_html_preview": "<p>Jade Cargill della WWE attende con impazienza il ritorno di Bianca Belair e Naomi, delineando i dream feud che potrebbero coinvolgerle.</p>\nhttps://www.youtube.com/watch?v=zr6gfuevK4Y\n\n<p>Nel 2025, Cargill e Naomi hanno dato vita a una rivalità culminata in una serie di incontri, arrivata un anno dopo che il duo aveva fatto squadra insieme a Belair. Tuttavia, con Naomi e Belair attualmente fuori dalle scene a causa delle rispettive gravidanze, la storia tra le tre è stata messa in stand-by, un capitolo che Cargill è impaziente di riaprire.</p>\n<blockquote>&quot;L&#x27;attesa non farà che aumentare il desiderio del pubblico. Ci sono così tante storyline che si possono sviluppare tra me e Naomi, tra me e Bianca, tra Naomi e Bianca, o con tutte e tre sedute a sviscerare le questioni più profonde. Magari un triple threat tra noi. Ci sono così tante trame diverse e, sai, la vita accade, ma so che tutto ciò lascia i fan con la voglia di vederne ancora&quot;, ha dichiarato durante &#x27;The Rich Eisen Show&#x27;.</blockquote>\n<p>Cargill ha affermato che lavorare al fianco di Belair e Naomi, che considera entrambe leggende del settore, l&#x27;ha spinta ad alzare il livello delle sue prestazioni. È questo l&#x27;atteggiamento che vuole trasmettere anche a &#x27;NXT&#x27;, per continuare a favorire la crescita della divisione femminile.</p>\n<blockquote>&quot;E al momento, specialmente a &#x27;Mania, sai, in quel periodo mi sentivo molto fortunata. Stavo lavorando con due leggende, donne che entreranno senza dubbio nella Hall of Fame. Mi sono detta: &#x27;Ok, ora devo dimostrare cosa so fare&#x27;. Loro sono grandi, ma io devo essere all&#x27;altezza della situazione e devo offrire una grande performance perché questa è &#x27;black excellence&#x27;. Non voglio fare altro che continuare a portare questo sul ring, aiutare la prossima generazione, migliorare sempre di più e rappresentare sempre di più il movimento.&quot;</blockquote>\n<p>Sebbene Cargill abbia affrontato Naomi e abbia avuto la meglio su di lei, deve ancora misurarsi sul ring con la sua ex compagna di tag team, Bianca Belair.</p>",
-        "bob_body_html_preview": "<p>Jade Cargill della WWE attende con impazienza il ritorno di Bianca Belair e Naomi, delineando i dream feud che potrebbero coinvolgerle.</p>\nhttps://www.youtube.com/watch?v=zr6gfuevK4Y\n\n<p>Nel 2025, Cargill e Naomi hanno dato vita a una rivalità culminata in una serie di incontri, arrivata un anno dopo che il duo aveva fatto squadra insieme a Belair. Tuttavia, con Naomi e Belair attualmente fuori dalle scene a causa delle rispettive gravidanze, la storia tra le tre è stata messa in stand-by, un capitolo che Cargill è impaziente di riaprire.</p>\n<blockquote>&quot;L&#x27;attesa non farà che aumentare il desiderio del pubblico. Ci sono così tante storyline che si possono sviluppare tra me e Naomi, tra me e Bianca, tra Naomi e Bianca, o con tutte e tre sedute a sviscerare le questioni più profonde. Magari un triple threat tra noi. Ci sono così tante trame diverse e, sai, la vita accade, ma so che tutto ciò lascia i fan con la voglia di vederne ancora&quot;, ha dichiarato durante &#x27;The Rich Eisen Show&#x27;.</blockquote>\n<p>Cargill ha affermato che lavorare al fianco di Belair e Naomi, che considera entrambe leggende del settore, l&#x27;ha spinta ad alzare il livello delle sue prestazioni. È questo l&#x27;atteggiamento che vuole trasmettere anche a &#x27;NXT&#x27;, per continuare a favorire la crescita della divisione femminile.</p>\n<blockquote>&quot;E al momento, specialmente a &#x27;Mania, sai, in quel periodo mi sentivo molto fortunata. Stavo lavorando con due leggende, donne che entreranno senza dubbio nella Hall of Fame. Mi sono detta: &#x27;Ok, ora devo dimostrare cosa so fare&#x27;. Loro sono grandi, ma io devo essere all&#x27;altezza della situazione e devo offrire una grande performance perché questa è &#x27;black excellence&#x27;. Non voglio fare altro che continuare a portare questo sul ring, aiutare la prossima generazione, migliorare sempre di più e rappresentare sempre di più il movimento.&quot;</blockquote>\n<p>Sebbene Cargill abbia affrontato Naomi e abbia avuto la meglio su di lei, deve ancora misurarsi sul ring con la sua ex compagna di tag team, Bianca Belair.</p>",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_jade-cargill-punta-al-ritorno-di-naomi-e-bianca-belair.html",
+        "alfred_final_html_preview": "<blockquote>I fan del &quot;Saturday Night Live&quot; conosceranno il comico e autore Michael Che come co-conduttore del segmento di notizie settimanale dello show, &quot;Weekend Update&quot;, che conduce insieme a Colin Jost da 12 anni al momento della stesura di questo articolo. Tuttavia, gli appassionati di wrestling ricorderanno che Che e Jost hanno avuto un piccolo ruolo in WWE nel 2019.</blockquote>\n<blockquote>Dopo un&#x27;apparizione a &quot;WWE Raw&quot;, i due presero parte alla Andre The Giant Memorial Battle Royal a WWE WrestleMania 35, che avrebbero quasi sicuramente vinto se non fosse stato per Braun Strowman. Che non è più apparso in WWE da allora, ma è stato recentemente ospite del podcast di Stephanie McMahon &quot;What&#x27;s Your Story?&quot;, dove ha ammesso che scrivere per la WWE sarebbe per lui un sogno che si avvera.</blockquote>\n<blockquote>&quot;Mi piacerebbe moltissimo, sarebbe qualcosa da fare una volta nella vita&quot;, ha dichiarato Che. &quot;Sarebbe davvero divertente. È una cosa interessante, sai, sono un fan. I performer di oggi sono... ci sono dei talenti davvero, davvero interessanti. Sai chi adoro? IYO SKY, Rhea [Ripley] e stavo dicendo Jacob [Fatu]. Adoro Jacob Fatu, ci sono così tante persone davvero divertenti da guardare. Amo The Vision, amo Paul Heyman... È una delle persone migliori che abbia mai visto in televisione, è nella lista ristretta di persone... non so perché non sia ancora un vincitore di quattro Emmy. È così bravo davanti alla telecamera e, ogni volta che appare, succede sempre qualcosa di interessante o di importante&quot;.</blockquote>\n<p>Che non è l&#x27;unico comico ad aver mostrato interesse per la scrittura in WWE: anche il conduttore di &quot;Kill Tony&quot;, Tony Hinchcliffe, ha dichiarato pubblicamente che gli era stata offerta una posizione nel team creativo della WWE, ma che ha rifiutato per continuare a concentrarsi sulla sua carriera comica.</p>\nhttps://www.youtube.com/watch?v=i5hhPcT4LKI",
+        "bob_body_html_preview": "<blockquote>I fan del &quot;Saturday Night Live&quot; conosceranno il comico e autore Michael Che come co-conduttore del segmento di notizie settimanale dello show, &quot;Weekend Update&quot;, che conduce insieme a Colin Jost da 12 anni al momento della stesura di questo articolo. Tuttavia, gli appassionati di wrestling ricorderanno che Che e Jost hanno avuto un piccolo ruolo in WWE nel 2019.</blockquote>\n<blockquote>Dopo un&#x27;apparizione a &quot;WWE Raw&quot;, i due presero parte alla Andre The Giant Memorial Battle Royal a WWE WrestleMania 35, che avrebbero quasi sicuramente vinto se non fosse stato per Braun Strowman. Che non è più apparso in WWE da allora, ma è stato recentemente ospite del podcast di Stephanie McMahon &quot;What&#x27;s Your Story?&quot;, dove ha ammesso che scrivere per la WWE sarebbe per lui un sogno che si avvera.</blockquote>\n<blockquote>&quot;Mi piacerebbe moltissimo, sarebbe qualcosa da fare una volta nella vita&quot;, ha dichiarato Che. &quot;Sarebbe davvero divertente. È una cosa interessante, sai, sono un fan. I performer di oggi sono... ci sono dei talenti davvero, davvero interessanti. Sai chi adoro? IYO SKY, Rhea [Ripley] e stavo dicendo Jacob [Fatu]. Adoro Jacob Fatu, ci sono così tante persone davvero divertenti da guardare. Amo The Vision, amo Paul Heyman... È una delle persone migliori che abbia mai visto in televisione, è nella lista ristretta di persone... non so perché non sia ancora un vincitore di quattro Emmy. È così bravo davanti alla telecamera e, ogni volta che appare, succede sempre qualcosa di interessante o di importante&quot;.</blockquote>\n<p>Che non è l&#x27;unico comico ad aver mostrato interesse per la scrittura in WWE: anche il conduttore di &quot;Kill Tony&quot;, Tony Hinchcliffe, ha dichiarato pubblicamente che gli era stata offerta una posizione nel team creativo della WWE, ma che ha rifiutato per continuare a concentrarsi sulla sua carriera comica.</p>\nhttps://www.youtube.com/watch?v=i5hhPcT4LKI",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_il-comico-michael-che-apre-a-un-ruolo-come-autore-in-wwe.html",
         "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_jade-cargill-punta-al-ritorno-di-naomi-e-bianca-belair.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2186399/wwe-jade-cargill-naomi-bianca-belair-resume-unresolved-rivalries/\nTitolo feed: Jade Cargill Believes WWE Will Resume Unresolved Rivalries With Naomi & Bianca Belair\nTitolo pagina: Jade Cargill Believes WWE Will Resume Unresolved Rivalries With Naomi & Bianca Belair - Wrestling Inc.\nDescrizione: Jade Cargill has discussed her rivalries with Bianca Belair and Naomi, and she is hoping for their returns so she can feud with both of them in WWE.\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"text\",\n    \"text\": \"WWE's Jade Cargill is looking forward to the returns of Bianca Belair and Naomi, outlining the dream feuds they could be involved in.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"text\",\n    \"text\": \"Cargill and Naomi had a feud in 2025, resulting in a series of matches, which came a year after the duo teamed together alongside Belair. But with both Naomi and Belair currently out of action due to their pregnancies , the story between the three has been put on hold, which Cargill is eager to restart.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"The wait is going to make people want it more. There's so many storylines that can be done out of Naomi and I, out of Bianca and I, out of Naomi and Bianca, out of all three of us sitting down and getting to the nitty-gritty of it. All of us having a triple threat. It's so many different storylines and you know, life happens, but I know that it just leaves the fans wanting more,\\\" she said on \\\" The Rich Eisen Show .\\\"\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Cargill said that featuring alongside Belair and Naomi, both of whom she considers legends of the business, has forced her to up her game. That is the attitude that she wants to filter down to even \\\"NXT,\\\" to help continue the growth of the women's division.\"\n  },\n  {\n    \"id\": \"b6\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"And at the moment, especially at 'Mania, you know, at that time I was very blessed. I'm working with two legends, women who are going to be in the Hall of Fame undoubtedly. I was like, 'Okay, now I got to show them what I can do. Like they great, but I got to rise to the occasion, and I got to perform as well because it's black excellence.' And I want to do nothing but continue to bring that to the mat, and I want to do nothing but help the next generation and get better and better and better and represent more and more and more.\\\"\"\n  },\n  {\n    \"id\": \"b7\",\n    \"type\": \"text\",\n    \"text\": \"While Cargill has faced Naomi and got the better of her, she has yet to face her former tag team partner, Belair, in the ring.\"\n  }\n]\n"
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_il-comico-michael-che-apre-a-un-ruolo-come-autore-in-wwe.html",
+        "publisher_review_html_preview": "<blockquote>I fan del &quot;Saturday Night Live&quot; conosceranno il comico e autore Michael Che come co-conduttore del segmento di notizie settimanale dello show, &quot;Weekend Update&quot;, che conduce insieme a Colin Jost da 12 anni al momento della stesura di questo articolo. Tuttavia, gli appassionati di wrestling ricorderanno che Che e Jost hanno avuto un piccolo ruolo in WWE nel 2019.</blockquote>\n<blockquote>Dopo un&#x27;apparizione a &quot;WWE Raw&quot;, i due presero parte alla Andre The Giant Memorial Battle Royal a WWE WrestleMania 35, che avrebbero quasi sicuramente vinto se non fosse stato per Braun Strowman. Che non è più apparso in WWE da allora, ma è stato recentemente ospite del podcast di Stephanie McMahon &quot;What&#x27;s Your Story?&quot;, dove ha ammesso che scrivere per la WWE sarebbe per lui un sogno che si avvera.</blockquote>\n<blockquote>&quot;Mi piacerebbe moltissimo, sarebbe qualcosa da fare una volta nella vita&quot;, ha dichiarato Che. &quot;Sarebbe davvero divertente. È una cosa interessante, sai, sono un fan. I performer di oggi sono... ci sono dei talenti davvero, davvero interessanti. Sai chi adoro? IYO SKY, Rhea [Ripley] e stavo dicendo Jacob [Fatu]. Adoro Jacob Fatu, ci sono così tante persone davvero divertenti da guardare. Amo The Vision, amo Paul Heyman... È una delle persone migliori che abbia mai visto in televisione, è nella lista ristretta di persone... non so perché non sia ancora un vincitore di quattro Emmy. È così bravo davanti alla telecamera e, ogni volta che appare, succede sempre qualcosa di interessante o di importante&quot;.</blockquote>\n<p>Che non è l&#x27;unico comico ad aver mostrato interesse per la scrittura in WWE: anche il conduttore di &quot;Kill Tony&quot;, Tony Hinchcliffe, ha dichiarato pubblicamente che gli era stata offerta una posizione nel team creativo della WWE, ma che ha rifiutato per continuare a concentrarsi sulla sua carriera comica.</p>\n\n<!-- wp:embed {\"url\":\"https://www.youtube.com/watch?v=i5hhPcT4LKI\",\"type\":\"video\",\"providerNameSlug\":\"youtube\",\"responsive\":true} -->\n<figure class=\"wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube\"><div class=\"wp-block-embed__wrapper\">\nhttps://www.youtube.com/watch?v=i5hhPcT4LKI\n</div></figure>\n<!-- /wp:embed -->\n\n<p class=\"owtv-source-attribution\"><em>Fonte: <a href=\"https://www.wrestlinginc.com/2184203/michael-che-writing-wwe-favorite-performers-paul-heyman-stephanie-mcmahon/\" target=\"_blank\" rel=\"nofollow noopener\">Wrestling Inc.</a>.</em></p>",
+        "translation_prompt_preview": "Sei Bob, traduttore di OpenWrestlingTV.\n\nTraduci in italiano naturale e giornalistico SOLO i blocchi testuali indicati. Non devi ricostruire l'articolo completo: la sequenza HTML sara' ricostruita dal sistema preservando immagini, embed e tabelle.\n\nREGOLE\n- Non riassumere e non aggiungere informazioni.\n- Conserva fedelmente il significato di ogni blocco.\n- Le citazioni vanno tradotte integralmente.\n- Mantieni nomi propri, promotion, show e termini wrestling quando appropriato.\n- Usa terminologia wrestling italiana corretta e naturale.\n- Rispondi SOLO in JSON valido.\n\nForma richiesta:\n{\n  \"title_it\": \"titolo italiano breve e non clickbait\",\n  \"excerpt_it\": \"excerpt italiano breve\",\n  \"translations\": {\"b1\": \"traduzione blocco 1\"},\n  \"notes\": []\n}\n\nMetadati fonte:\nURL: https://www.wrestlinginc.com/2184203/michael-che-writing-wwe-favorite-performers-paul-heyman-stephanie-mcmahon/\nTitolo feed: Comedian Michael Che Teases Writing For WWE, Talks His Favorite Performers\nTitolo pagina: Comedian Michael Che Teases Writing For WWE, Talks His Favorite Performers - Wrestling Inc.\nDescrizione: Could Michael Che trade the \"Weekend Update\" desk in for a job in WWE? The man himself has opened up about how writing for WWE would be a dream.\nCategoria suggerita: WWE\n\nBLOCCHI DA TRADURRE:\n[\n  {\n    \"id\": \"b2\",\n    \"type\": \"quote\",\n    \"text\": \"Fans of \\\"Saturday Night Live\\\" will know comedian and writer, Michael Che, for being one of the co-hosts of the show's weekly news segment \\\"Weekend Update,\\\" a segment he has hosted alongside Colin Jost for 12 years at the time of writing. However, wrestling fans will remember Che and Jost having a small role to play in WWE back in 2019.\"\n  },\n  {\n    \"id\": \"b3\",\n    \"type\": \"quote\",\n    \"text\": \"Following an appearance on \\\"WWE Raw,\\\" the two men were entered into the Andre The Giant Memorial Battle Royal at WWE WrestleMania 35, most won the match had it not been for Braun Strowman. Che hasn't been seen in WWE since, but he was a recent guest on Stephanie McMahon's \\\" What's Your Story? \\\" podcast, and he admitted that potentially writing for WWE would be a dream come true.\"\n  },\n  {\n    \"id\": \"b4\",\n    \"type\": \"quote\",\n    \"text\": \"\\\"I would love to do that, that would be like bucket list,\\\" Che said. \\\"That could be really fun. That's like a cool–I'm a fan you know? The performers now are like, there's some really, really cool–you know who I love is IYO SKY, and Rhea [Ripley], and I was saying Jacob [Fatu]. I love Jacob Fatu, there's so many like really, really fun people to watch. I love The Vision, I love Paul Heyman...He's one of the best people I've ever seen on television, like he's on the shortlist of just the people–I don't know why he's not a four-time Emmy winner. He's so good on television, and every time he's on, it's like something cool or developing.\\\"\"\n  },\n  {\n    \"id\": \"b5\",\n    \"type\": \"text\",\n    \"text\": \"Che isn't the only comedian who has been interested in writing for WWE as the host of \\\"Kill Tony,\\\" Tony Hinchcliffe, has publicly stated that he was actually offered a position on the WWE writing team but turned it down to continue focusing on his comedy career.\"\n  }\n]\n"
       },
       "menzo": {
         "classification": null,
         "present": true,
-        "reason": "ai:Sviluppo narrativo interessante per la divisione femminile WWE.; deterministic:hard:returns,hard:return,recency:fresh_12h",
+        "reason": "ai:Notizia curiosa che coinvolge figure mainstream, ottima per il pubblico italiano.; deterministic:hard:trade_roster_context,entity:paul heyman,current:roster_move,recency:fresh_12h",
+        "score": 87
+      },
+      "publisher": {
+        "categories": null,
+        "error": null,
+        "featured_media": null,
+        "present": true,
+        "status": "wp_not_ready",
+        "wp_link": null,
+        "wp_post_id": null
+      },
+      "source": "wrestlinginc",
+      "source_url": "https://www.wrestlinginc.com/2184203/michael-che-writing-wwe-favorite-performers-paul-heyman-stephanie-mcmahon",
+      "title_it": "Il comico Michael Che apre a un ruolo come autore in WWE"
+    },
+    {
+      "alfred": {
+        "decision": null,
+        "editorial_changes": [],
+        "issues": [],
+        "present": false,
+        "quality_score": null,
+        "warnings": []
+      },
+      "bob": {
+        "clean_element_count": null,
+        "diagnostic_stage": null,
+        "element_counts": null,
+        "error": null,
+        "present": false,
+        "raw_element_count": null,
+        "removed_before_gemini": null,
+        "status": null,
+        "translation_model": null,
+        "translation_used": null
+      },
+      "category_hint": "AEW",
+      "html_audit": {
+        "alfred_final_html_preview": "",
+        "bob_body_html_preview": "",
+        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_mick-foley-on-possibility-of-one-more-match-in-aew-stranger-things-have-happened.html",
+        "published_html_preview": "",
+        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_mick-foley-on-possibility-of-one-more-match-in-aew-stranger-things-have-happened.html",
+        "publisher_review_html_preview": "",
+        "translation_prompt_preview": ""
+      },
+      "menzo": {
+        "classification": null,
+        "present": true,
+        "reason": "ai:Dichiarazioni di una leggenda su un possibile ritorno, notizia di interesse generale.; deterministic:hard:return,entity:mick foley,recency:fresh_12h",
         "score": 79
       },
       "publisher": {
@@ -480,61 +429,11 @@
         "wp_post_id": null
       },
       "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2186399/wwe-jade-cargill-naomi-bianca-belair-resume-unresolved-rivalries",
-      "title_it": "Jade Cargill punta al ritorno di Naomi e Bianca Belair"
-    },
-    {
-      "alfred": {
-        "decision": null,
-        "editorial_changes": [],
-        "issues": [],
-        "present": false,
-        "quality_score": null,
-        "warnings": []
-      },
-      "bob": {
-        "clean_element_count": null,
-        "diagnostic_stage": null,
-        "element_counts": null,
-        "error": null,
-        "present": false,
-        "raw_element_count": null,
-        "removed_before_gemini": null,
-        "status": null,
-        "translation_model": null,
-        "translation_used": null
-      },
-      "category_hint": "WWE",
-      "html_audit": {
-        "alfred_final_html_preview": "",
-        "bob_body_html_preview": "",
-        "published_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published/v93_news_wwe-hofer-nikki-bella-had-emily-in-paris-inspired-idea-for-clash-in-italy.html",
-        "published_html_preview": "",
-        "publisher_review_file": "/home/runner/work/wrestling-news-bot/wrestling-news-bot/published_html_review/v93_publisher_wwe-hofer-nikki-bella-had-emily-in-paris-inspired-idea-for-clash-in-italy.html",
-        "publisher_review_html_preview": "",
-        "translation_prompt_preview": ""
-      },
-      "menzo": {
-        "classification": null,
-        "present": true,
-        "reason": "ai:Notizia di colore marginale su un'idea scartata.; deterministic:strategic:clash in italy,recency:fresh_12h",
-        "score": 69
-      },
-      "publisher": {
-        "categories": null,
-        "error": null,
-        "featured_media": null,
-        "present": false,
-        "status": null,
-        "wp_link": null,
-        "wp_post_id": null
-      },
-      "source": "wrestlinginc",
-      "source_url": "https://www.wrestlinginc.com/2186733/wwe-hofer-nikki-bella-emily-paris-inspited-idea-clash-italy",
-      "title_it": "WWE HOFer Nikki Bella Had 'Emily In Paris' Inspired Idea For Clash In Italy"
+      "source_url": "https://www.wrestlinginc.com/2186331/mick-foley-one-more-match-aew-stranger-things-happened",
+      "title_it": "Mick Foley On Possibility Of One More Match In AEW: 'Stranger Things Have Happened'"
     }
   ],
-  "generated_at": "2026-06-03T17:27:08.000830+00:00",
+  "generated_at": "2026-06-03T20:37:32.452125+00:00",
   "how_to_read": {
     "alfred_final_html_preview": "HTML dopo revisione/normalizzazioni di Alfred",
     "bob_body_html_preview": "HTML prodotto da Bob prima di Alfred",
@@ -543,100 +442,6 @@
     "translation_prompt_preview": "testo pulito dato a Gemini da Bob"
   },
   "ledger_48h": [
-    {
-      "agent_handoffs": {
-        "alfred": {
-          "approved": 3,
-          "blockers": 0,
-          "editorial_changes": 0,
-          "needs_revision": 0,
-          "warnings": 2
-        },
-        "bob": {
-          "errors": 0,
-          "extraction_empty": 0,
-          "ready_for_alfred": 3,
-          "translation_pending": 0
-        },
-        "massy": {
-          "already_worked": 1,
-          "hard_skipped": 1,
-          "to_menzo": 30,
-          "to_simone": 3
-        },
-        "menzo": {
-          "pending": 10,
-          "skipped": 14,
-          "to_bob_or_v92": 6
-        },
-        "publisher": {
-          "already_published": 1,
-          "dry_run": 0,
-          "errors": 0,
-          "published": 2,
-          "wp_not_ready": 0
-        },
-        "simone": {
-          "ready": 0,
-          "skipped": 6,
-          "waiting": 0
-        }
-      },
-      "already_published": 1,
-      "article_count": 6,
-      "errors": 0,
-      "generated_at": "2026-06-01T19:03:27.143825+00:00",
-      "overall_status": "ok",
-      "published": 2,
-      "warnings": 0
-    },
-    {
-      "agent_handoffs": {
-        "alfred": {
-          "approved": 3,
-          "blockers": 0,
-          "editorial_changes": 0,
-          "needs_revision": 0,
-          "warnings": 2
-        },
-        "bob": {
-          "errors": 0,
-          "extraction_empty": 0,
-          "ready_for_alfred": 3,
-          "translation_pending": 0
-        },
-        "massy": {
-          "already_worked": 1,
-          "hard_skipped": 1,
-          "to_menzo": 30,
-          "to_simone": 3
-        },
-        "menzo": {
-          "pending": 10,
-          "skipped": 14,
-          "to_bob_or_v92": 6
-        },
-        "publisher": {
-          "already_published": 1,
-          "dry_run": 0,
-          "errors": 0,
-          "published": 2,
-          "wp_not_ready": 0
-        },
-        "simone": {
-          "ready": 0,
-          "skipped": 6,
-          "waiting": 0
-        }
-      },
-      "already_published": 1,
-      "article_count": 6,
-      "errors": 0,
-      "generated_at": "2026-06-01T19:03:27.146714+00:00",
-      "overall_status": "ok",
-      "published": 2,
-      "warnings": 0
-    },
     {
       "agent_handoffs": {
         "alfred": {
@@ -3290,9 +3095,119 @@
       "overall_status": "ok",
       "published": 3,
       "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 3,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 0
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 3,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 3,
+          "already_worked": 0,
+          "event_factual_news_to_menzo": 0,
+          "event_recap_duplicates_blocked_by_report": 0,
+          "event_soft_reactions_to_menzo": 0,
+          "hard_skipped": 13,
+          "menzo_memory_hard_skipped": 9,
+          "old_news_hard_skipped": 0,
+          "post_show_hard_news_to_menzo": 0,
+          "report_candidates_blocked_by_manual_or_history": 0,
+          "to_menzo": 22,
+          "to_simone": 0
+        },
+        "menzo": {
+          "pending": 1,
+          "skipped": 14,
+          "to_bob_or_v92": 7
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 0,
+          "wp_not_ready": 3
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 5,
+          "waiting": 1
+        }
+      },
+      "already_published": 0,
+      "article_count": 7,
+      "errors": 1,
+      "generated_at": "2026-06-03T20:37:32.440378+00:00",
+      "overall_status": "error",
+      "published": 0,
+      "warnings": 0
+    },
+    {
+      "agent_handoffs": {
+        "alfred": {
+          "approved": 3,
+          "blockers": 0,
+          "editorial_changes": 0,
+          "needs_revision": 0,
+          "warnings": 0
+        },
+        "bob": {
+          "errors": 0,
+          "extraction_empty": 0,
+          "ready_for_alfred": 3,
+          "translation_pending": 0
+        },
+        "massy": {
+          "already_published_hard_skipped": 3,
+          "already_worked": 0,
+          "event_factual_news_to_menzo": 0,
+          "event_recap_duplicates_blocked_by_report": 0,
+          "event_soft_reactions_to_menzo": 0,
+          "hard_skipped": 13,
+          "menzo_memory_hard_skipped": 9,
+          "old_news_hard_skipped": 0,
+          "post_show_hard_news_to_menzo": 0,
+          "report_candidates_blocked_by_manual_or_history": 0,
+          "to_menzo": 22,
+          "to_simone": 0
+        },
+        "menzo": {
+          "pending": 1,
+          "skipped": 14,
+          "to_bob_or_v92": 7
+        },
+        "publisher": {
+          "already_published": 0,
+          "dry_run": 0,
+          "errors": 0,
+          "published": 0,
+          "wp_not_ready": 3
+        },
+        "simone": {
+          "ready": 0,
+          "skipped": 5,
+          "waiting": 1
+        }
+      },
+      "already_published": 0,
+      "article_count": 7,
+      "errors": 1,
+      "generated_at": "2026-06-03T20:37:32.452125+00:00",
+      "overall_status": "error",
+      "published": 0,
+      "warnings": 0
     }
   ],
-  "overall_status": "ok",
+  "overall_status": "error",
   "run_summary_input": {
     "agents": {
       "alfred": "real_quality_editor",
@@ -3318,34 +3233,34 @@
       "ready_for_alfred": 3,
       "translation_pending": 0
     },
-    "ended_at": "2026-06-03T17:27:07.981949+00:00",
+    "ended_at": "2026-06-03T20:37:32.433418+00:00",
     "engine": "bot_v92.py",
     "massy_handoff": {
-      "already_published_hard_skipped": 7,
-      "already_worked": 2,
+      "already_published_hard_skipped": 3,
+      "already_worked": 0,
       "event_factual_news_to_menzo": 0,
       "event_recap_duplicates_blocked_by_report": 0,
       "event_soft_reactions_to_menzo": 0,
-      "hard_skipped": 26,
-      "menzo_memory_hard_skipped": 14,
-      "old_news_hard_skipped": 1,
+      "hard_skipped": 13,
+      "menzo_memory_hard_skipped": 9,
+      "old_news_hard_skipped": 0,
       "post_show_hard_news_to_menzo": 0,
       "report_candidates_blocked_by_manual_or_history": 0,
-      "to_menzo": 7,
+      "to_menzo": 22,
       "to_simone": 0
     },
     "menzo_handoff": {
-      "pending": 0,
-      "skipped": 1,
-      "to_bob_or_v92": 6
+      "pending": 1,
+      "skipped": 14,
+      "to_bob_or_v92": 7
     },
     "newsroom_engine_override": false,
     "publisher_handoff": {
       "already_published": 0,
       "dry_run": 0,
       "errors": 0,
-      "published": 3,
-      "wp_not_ready": 0
+      "published": 0,
+      "wp_not_ready": 3
     },
     "runtime_delegations": 0,
     "runtime_exit_code": 0,
@@ -3361,15 +3276,15 @@
       "published": 0,
       "wp_not_ready": 0
     },
-    "started_at": "2026-06-03T17:26:35.176950+00:00",
+    "started_at": "2026-06-03T20:36:50.760565+00:00",
     "version": "v93_20_process_refinements"
   },
   "summary": {
-    "anomalies": 0,
-    "article_dossiers": 9,
-    "errors_48h": 22,
-    "published_48h": 90,
-    "published_current_run": 3,
+    "anomalies": 1,
+    "article_dossiers": 7,
+    "errors_48h": 24,
+    "published_48h": 86,
+    "published_current_run": 0,
     "runs_48h": 56
   },
   "timeline": [
@@ -3377,85 +3292,85 @@
       "agent": "Jarvis",
       "note": "engine=bot_v92.py",
       "phase": "bootstrap_status_written",
-      "timestamp": "2026-06-03T17:26:35.177217+00:00"
+      "timestamp": "2026-06-03T20:36:50.760892+00:00"
     },
     {
       "agent": "Massy",
-      "note": "to_simone=0 to_menzo=7 hard_skip=26 already=2",
+      "note": "to_simone=0 to_menzo=22 hard_skip=13 already=0",
       "phase": "sentinel_board_ready",
-      "timestamp": "2026-06-03T17:26:35.696059+00:00"
+      "timestamp": "2026-06-03T20:36:51.291786+00:00"
     },
     {
       "agent": "Massy",
       "note": "version=v93_24_massy_show_news_before_report_closure",
       "phase": "forced_policy_active",
-      "timestamp": "2026-06-03T17:26:35.696073+00:00"
+      "timestamp": "2026-06-03T20:36:51.291804+00:00"
     },
     {
       "agent": "Simone",
       "note": "ready=0 waiting=1 skipped=5",
       "phase": "report_decision_ready",
-      "timestamp": "2026-06-03T17:26:35.699419+00:00"
+      "timestamp": "2026-06-03T20:36:51.296133+00:00"
     },
     {
       "agent": "Simone",
       "note": "published=0 already=0 wp_not_ready=0 errors=0",
       "phase": "report_publication_ready",
-      "timestamp": "2026-06-03T17:26:36.716849+00:00"
+      "timestamp": "2026-06-03T20:36:52.500223+00:00"
     },
     {
       "agent": "Menzo",
-      "note": "selected=6 pending=0 skipped=1",
+      "note": "selected=7 pending=1 skipped=14",
       "phase": "editorial_decision_ready",
-      "timestamp": "2026-06-03T17:26:40.497544+00:00"
+      "timestamp": "2026-06-03T20:36:57.493741+00:00"
     },
     {
       "agent": "Menzo",
       "note": "version=v93_20_selective_softpool",
       "phase": "forced_policy_active",
-      "timestamp": "2026-06-03T17:26:40.497556+00:00"
+      "timestamp": "2026-06-03T20:36:57.493754+00:00"
     },
     {
       "agent": "Bob",
       "note": "ready=3 pending=0 empty=0 errors=0",
       "phase": "article_packages_ready",
-      "timestamp": "2026-06-03T17:26:52.533528+00:00"
+      "timestamp": "2026-06-03T20:37:07.128017+00:00"
     },
     {
       "agent": "Bob",
       "note": "warnings=0",
       "phase": "bob_brief_guard_applied",
-      "timestamp": "2026-06-03T17:26:52.535299+00:00"
+      "timestamp": "2026-06-03T20:37:07.129826+00:00"
     },
     {
       "agent": "Alfred",
       "note": "approved=3 needs_revision=0 blockers=0 warnings=0 changes=0",
       "phase": "quality_review_ready",
-      "timestamp": "2026-06-03T17:26:52.548711+00:00"
+      "timestamp": "2026-06-03T20:37:07.143686+00:00"
     },
     {
       "agent": "Alfred",
       "note": "surfaced=0",
       "phase": "bob_warning_guard_applied",
-      "timestamp": "2026-06-03T17:26:52.549478+00:00"
+      "timestamp": "2026-06-03T20:37:07.144387+00:00"
     },
     {
       "agent": "Publisher",
-      "note": "published=3 already=0 dry=0 wp_not_ready=0 errors=0",
+      "note": "published=0 already=0 dry=0 wp_not_ready=3 errors=0",
       "phase": "publication_ready",
-      "timestamp": "2026-06-03T17:27:07.981909+00:00"
+      "timestamp": "2026-06-03T20:37:32.433387+00:00"
     },
     {
       "agent": "Jarvis",
       "note": "v93 Publisher completed; v92 fallback skipped",
       "phase": "runtime_skipped",
-      "timestamp": "2026-06-03T17:27:07.981930+00:00"
+      "timestamp": "2026-06-03T20:37:32.433410+00:00"
     },
     {
       "agent": "Archivista",
-      "note": "status=ok anomalies=0",
+      "note": "status=error anomalies=1",
       "phase": "audit_ready",
-      "timestamp": "2026-06-03T17:27:08.000133+00:00"
+      "timestamp": "2026-06-03T20:37:32.451437+00:00"
     }
   ],
   "version": "v93_7_archivista_audit"
