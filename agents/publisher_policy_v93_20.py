@@ -15,12 +15,23 @@ PUBLISHER_STATUS_FILE = NEWSROOM_STATE_DIR / "publisher_status_latest.json"
 ARTIFACT_PUBLISHER_FILE = ARTIFACT_DIR / "publisher_result.json"
 RETRY_QUEUE_FILE = NEWSROOM_STATE_DIR / "publish_retry_queue.json"
 
-VERSION = "v93_20_publisher_retry_queue_and_legal_categories"
+VERSION = "v93_20_1_publisher_retry_queue_recursion_fix"
 RETRY_TTL_HOURS = 36
 MAX_QUEUE_ITEMS = 30
 
+CATEGORY_PRIORITY = {
+    "Business": ["Business", "World"],
+    "NXT": ["NXT", "WWE"],
+    "TNA": ["TNA", "World"],
+    "ROH": ["ROH", "AEW"],
+    "AEW": ["AEW"],
+    "WWE": ["WWE"],
+    "World": ["World"],
+    "Editoriali": ["Editoriali"],
+}
+
 WWE_PERSONAL_LEGAL_RE = re.compile(
-    r"\b(wwe|raw|smackdown|nxt|ludwig\s+kaiser|bron\s+breakker|seth\s+rollins|roman\s+reigns|cody\s+rhodes|becky\s+lynch|iyo\s+sky|iyo\s+skye|liv\s+morgan|finn\s+b[áa]lor|chad\s+gable|gunther)\b",
+    r"\b(wwe|raw|smackdown|nxt|ludwig\s+kaiser|bron\s+breakker|seth\s+rollins|roman\s+reigns|cody\s+rhodes|becky\s+lynch|iyo\s+sky|iyo\s+skye|liv\s+morgan|finn\s+b[áa]lor|chad\s+gable|gunther|bayley)\b",
     re.I,
 )
 LEGAL_RE = re.compile(r"\b(legal|lawsuit|court|arrest|arrested|case|charges|trial|sentenza|causa|legale|tribunale|accuse|processo)\b", re.I)
@@ -65,13 +76,19 @@ def article_blob(article: dict[str, Any]) -> str:
     return " ".join(str(article.get(k) or "") for k in ["title_it", "source_title", "source_url", "excerpt_it", "category_hint"])
 
 
+def fallback_category_names_for_hint(hint: str, article: dict[str, Any]) -> list[str]:
+    normalized = str(hint or "").strip()
+    blob = article_blob(article).lower()
+    if normalized == "World" and any(x in blob for x in ["ratings", "ascolti", "viewership", "netflix", "tko", "media rights", "tv deal"]):
+        return CATEGORY_PRIORITY["Business"]
+    return CATEGORY_PRIORITY.get(normalized, [normalized or "World"])
+
+
 def category_names_for_hint(hint: str, article: dict[str, Any]) -> list[str]:
     blob = article_blob(article)
     if LEGAL_RE.search(blob) and WWE_PERSONAL_LEGAL_RE.search(blob) and not BUSINESS_LEGAL_RE.search(blob):
         return ["WWE", "World"]
-    if str(hint or "").strip() == "World" and LEGAL_RE.search(blob) and WWE_PERSONAL_LEGAL_RE.search(blob) and not BUSINESS_LEGAL_RE.search(blob):
-        return ["WWE", "World"]
-    return previous.category_names_for_hint(hint, article)
+    return fallback_category_names_for_hint(hint, article)
 
 
 def load_queue() -> list[dict[str, Any]]:
@@ -166,7 +183,6 @@ def update_queue_after_run(input_articles: list[dict[str, Any]], results: list[d
                 retained += 1
             else:
                 added += 1
-    # Keep old queue entries that were not attempted in this run.
     attempted = set(article_by_key)
     for entry in previous_queue:
         article = entry.get("article") if isinstance(entry.get("article"), dict) else {}
