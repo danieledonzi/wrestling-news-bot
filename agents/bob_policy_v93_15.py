@@ -14,10 +14,20 @@ ARTIFACT_DIR = ROOT / "artifacts" / "newsroom"
 BOB_ARTICLES_FILE = NEWSROOM_STATE_DIR / "bob_articles_latest.json"
 ARTIFACT_BOB_FILE = ARTIFACT_DIR / "bob_articles.json"
 
-VERSION = "v93_27_source_blockquote_only_no_inline_quote_split"
+VERSION = "v93_28_generic_author_bio_exclusions"
 
 RESIDUAL_BIO_PATTERNS = [
-    re.compile(r"\b(felix\s+upton|steve\s+carrier)\b.*\b(ringside\s+news|esperienza|fondatore|giornalismo|wrestling)\b", re.I),
+    # Known Ringside boilerplate authors.
+    re.compile(r"\b(felix\s+upton|steve\s+carrier|derek\s+holloway|steve\s+malone|aaron\s+varble)\b.*\b(ringside\s+news|esperienza|fondatore|giornalismo|wrestling|autore|notizie|indiscrezioni|risultati)\b", re.I),
+    # Generic Ringside News author bio patterns, independent from author name.
+    re.compile(r"\b[\wÀ-ÿ'’.-]+(?:\s+[\wÀ-ÿ'’.-]+){0,3}\s+è\s+un(?:a)?\s+(?:autore|autrice|giornalista|redattore|redattrice|writer|contributor|collaboratore|collaboratrice)\s+di\s+ringside\s+news\b", re.I),
+    re.compile(r"\b(?:autore|autrice|giornalista|redattore|redattrice|writer|contributor|collaboratore|collaboratrice)\s+di\s+ringside\s+news\b", re.I),
+    re.compile(r"\b(?:specializzato|specializzata|specialist|specializes?)\s+(?:in|nel|nella|nelle)\s+(?:notizie|news|indiscrezioni|rumor|risultati|copertura|wrestling)\b.*\b(ringside\s+news|wwe|aew|wrestling)\b", re.I),
+    re.compile(r"\bsi\s+occupa\s+di\s+fornire\s+una\s+copertura\s+(?:affidabile|costante|accurata)\b", re.I),
+    re.compile(r"\b(?:fornisce|offre|porta)\s+una\s+copertura\s+(?:affidabile|costante|accurata)\b.*\b(wwe|aew|wrestling|ringside\s+news)\b", re.I),
+    re.compile(r"\b(?:covering|covers)\s+(?:wwe|aew|professional\s+wrestling|pro\s+wrestling)\b.*\b(ringside\s+news|news|rumors|results)\b", re.I),
+    re.compile(r"\b(?:wwe|aew|tna|professional\s+wrestling|pro\s+wrestling)\b.*\b(?:news|rumors|results|coverage)\b.*\b(?:ringside\s+news|writer|author|contributor)\b", re.I),
+    # Legacy specific bio clues.
     re.compile(r"\b(ha\s+oltre|vanta\s+oltre)\s+\d+\s+anni\s+di\s+esperienza\b", re.I),
     re.compile(r"\bfondatore\s+di\s+ringside\s+news\b", re.I),
     re.compile(r"\b(le|i)\s+sue\s+(storie|articoli|notizie)\s+sono\s+state\s+pubblicate\b", re.I),
@@ -50,9 +60,14 @@ def clean_text(value: str) -> str:
 
 def should_remove_paragraph(inner: str) -> str:
     text = clean_text(inner)
+    lower = text.lower()
     for pattern in RESIDUAL_BIO_PATTERNS:
         if pattern.search(text):
             return "residual_author_bio"
+    # Additional high-confidence generic guard: a final short paragraph that combines Ringside News
+    # with role/coverage language is almost always an author box residue, not article content.
+    if "ringside news" in lower and any(x in lower for x in ["autore", "autrice", "giornalista", "redattore", "redattrice", "writer", "contributor", "collaboratore", "specializzato", "specializzata", "copertura", "notizie", "indiscrezioni", "risultati"]):
+        return "residual_author_bio"
     for pattern in CTA_PATTERNS:
         if pattern.search(text):
             return "residual_cta"
@@ -111,9 +126,9 @@ def postprocess_body(body_html: str) -> tuple[str, list[dict[str, str]]]:
         inner = match.group(1)
         remove_reason = should_remove_paragraph(inner)
         if remove_reason:
-            changes.append({"code": remove_reason, "severity": "info", "message": "Paragrafo residuo rimosso da Bob v93.27.", "evidence": clean_text(inner)[:300]})
+            changes.append({"code": remove_reason, "severity": "info", "message": "Paragrafo residuo rimosso da Bob v93.28.", "evidence": clean_text(inner)[:300]})
             return ""
-        # v93.27: do not split inline quotation marks into blockquotes.
+        # v93.27+: do not split inline quotation marks into blockquotes.
         # Only blocks that were already <blockquote> in the source remain styled as quotes.
         return match.group(0)
 
@@ -136,14 +151,15 @@ def run_bob(menzo_decision: dict[str, Any] | None = None) -> dict[str, Any]:
             total_changes += len(changes)
     result["version"] = VERSION
     result.setdefault("policy", {})["residual_author_bio_cleanup"] = True
+    result.setdefault("policy", {})["generic_ringside_author_bio_cleanup"] = True
     result.setdefault("policy", {})["split_inline_quoted_text"] = False
     result.setdefault("policy", {})["source_blockquote_only"] = True
     result.setdefault("policy", {})["move_leading_embeds_after_first_paragraph"] = True
     result.setdefault("policy", {})["unwrap_fake_data_blockquotes"] = True
-    result.setdefault("postprocess", {})["bob_v93_27_changes"] = total_changes
+    result.setdefault("postprocess", {})["bob_v93_28_changes"] = total_changes
     # Backward-compatible metric used by the master log.
     result.setdefault("postprocess", {})["bob_v93_16_changes"] = total_changes
     write_json(ARTIFACT_BOB_FILE, result)
     write_json(BOB_ARTICLES_FILE, result)
-    print(f"[BOB v93.27] Cleanup finale applicato | changes={total_changes}", flush=True)
+    print(f"[BOB v93.28] Cleanup finale applicato | changes={total_changes}", flush=True)
     return result
