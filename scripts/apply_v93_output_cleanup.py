@@ -105,11 +105,9 @@ def convert_plain_embed_urls_to_blocks(content: str) -> str:
 
 
 '''
-    # Replace the whole convert function in a tolerant way, regardless of small formatting drift.
     pattern = r'def convert_plain_embed_urls_to_blocks\(content: str\) -> str:\n[\s\S]*?\n\ndef run_publisher'
-    new_text, n = re.subn(pattern, replacement + 'def run_publisher', text, count=1)
+    new_text, n = re.subn(pattern, lambda _m: replacement + 'def run_publisher', text, count=1)
     if n == 0:
-        # If the function was already partly changed, insert helpers just before run_publisher.
         if 'def convert_plain_embed_urls_to_blocks' not in text:
             new_text = text.replace('def run_publisher', replacement + 'def run_publisher', 1)
         else:
