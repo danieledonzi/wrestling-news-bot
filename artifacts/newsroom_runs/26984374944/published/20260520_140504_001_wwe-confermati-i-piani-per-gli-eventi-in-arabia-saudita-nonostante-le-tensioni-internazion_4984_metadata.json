@@ -1,0 +1,20 @@
+{
+  "schema": "owtv_published_artifact_v87_6",
+  "run_id": "2026-05-20 14:04:34",
+  "bot_version": "v90_1_quality_correctness (3d7e029)",
+  "git_sha": "3d7e029621b44ba6f577644a4254232e88e0162e",
+  "created_at": "2026-05-20T14:05:04",
+  "wp_post_id": 4984,
+  "wp_status": "publish",
+  "title": "WWE: confermati i piani per gli eventi in Arabia Saudita nonostante le tensioni internazionali",
+  "source_url": "https://www.ringsidenews.com/wwe-made-big-decision-about-overseas-plans-during-internal-meeting/",
+  "semantic_id": "wwe-made-big-decision-about-overseas-plans-during-internal-meeting",
+  "event_key": "event:business:nick-khan",
+  "category": 15,
+  "featured_image_url": "https://www.ringsidenews.com/wp-content/uploads/2026/05/wwe-made-big-decision-about-overseas-plans-during-internal-meeting-44.jpg",
+  "embed_urls": [],
+  "inline_images": [],
+  "html_file": "published/20260520_140504_001_wwe-confermati-i-piani-per-gli-eventi-in-arabia-saudita-nonostante-le-tensioni-internazion_4984_final.html",
+  "metadata_file": "published/20260520_140504_001_wwe-confermati-i-piani-per-gli-eventi-in-arabia-saudita-nonostante-le-tensioni-internazion_4984_metadata.json",
+  "source_file": "published/20260520_140504_001_wwe-confermati-i-piani-per-gli-eventi-in-arabia-saudita-nonostante-le-tensioni-internazion_4984_source.txt"
+}

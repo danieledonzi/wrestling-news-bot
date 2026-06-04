@@ -1,0 +1,32 @@
+{
+  "agent": "Publisher",
+  "generated_at": "2026-06-04T21:11:39.719146+00:00",
+  "handoff": {
+    "already_published": 0,
+    "dry_run": 0,
+    "errors": 0,
+    "published": 0,
+    "wp_not_ready": 0
+  },
+  "input": {
+    "alfred_version": "v93_20_alfred_table_warning_precision",
+    "approved_articles": 0
+  },
+  "mode": "wordpress_publisher_gutenberg_embeds",
+  "policy": {
+    "featured_image_source": "meta.featured_image_or_first_placeholder",
+    "idempotency": "state/newsroom/publisher_history.json by source_url",
+    "normalized_embed_dedupe": true,
+    "plain_embed_urls_to_gutenberg_blocks": true,
+    "source_attribution": true,
+    "strip_inline_image_placeholders": true
+  },
+  "results": [],
+  "version": "v93_29_base_embed_patch",
+  "wp": {
+    "dry_run": false,
+    "post_status": "publish",
+    "ready": false,
+    "reason": "wp_json_error:HTTPSConnectionPool(host='news.openwrestlingtv.com', port=443): Read timed out. (read timeout=25)"
+  }
+}

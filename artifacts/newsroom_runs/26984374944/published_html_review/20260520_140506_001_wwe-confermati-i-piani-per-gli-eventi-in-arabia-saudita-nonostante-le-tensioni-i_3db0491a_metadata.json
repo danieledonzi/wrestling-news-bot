@@ -1,0 +1,37 @@
+{
+  "run_id": "2026-05-20 14:04:34",
+  "bot_version": "v90_1_quality_correctness (3d7e029)",
+  "git_sha": "3d7e029621b44ba6f577644a4254232e88e0162e",
+  "created_at": "2026-05-20T14:05:06",
+  "source_title": "WWE Made Big Decision About Overseas Plans During Internal Meeting",
+  "final_title": "WWE: confermati i piani per gli eventi in Arabia Saudita nonostante le tensioni internazionali",
+  "source_url": "https://www.ringsidenews.com/wwe-made-big-decision-about-overseas-plans-during-internal-meeting/",
+  "category_id": 15,
+  "category_slug": "BUSINESS",
+  "article_type": "POST_SHOW_NEWS",
+  "semantic_id": "wwe-made-big-decision-about-overseas-plans-during-internal-meeting",
+  "story_signature_v71": "stable:nick_khan|triple_h|wwe_made_big_decision_about_overseas_plans_during_internal_m|story|wwe",
+  "refined_score": 100,
+  "refined_reasons": [
+    "WWE/main roster",
+    "nomi forti lead: triple h",
+    "business/contratti WWE-TKO",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "PLE/PPV",
+    "non wrestling puro",
+    "v62 business/dirigenza",
+    "v62 categoria business"
+  ],
+  "blocks_summary": {
+    "text": 8,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260520_140506_001_wwe-confermati-i-piani-per-gli-eventi-in-arabia-saudita-nonostante-le-tensioni-i_3db0491a_original.html",
+  "final_html_file": "20260520_140506_001_wwe-confermati-i-piani-per-gli-eventi-in-arabia-saudita-nonostante-le-tensioni-i_3db0491a_final.html",
+  "metadata_file": "20260520_140506_001_wwe-confermati-i-piani-per-gli-eventi-in-arabia-saudita-nonostante-le-tensioni-i_3db0491a_metadata.json"
+}

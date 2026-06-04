@@ -1,0 +1,34 @@
+{
+  "run_id": "2026-05-15 19:04:35",
+  "bot_version": "v88_4_quality_microfixes (0001940)",
+  "git_sha": "000194002395315654998f412cda3aca958d284c",
+  "created_at": "2026-05-15T19:05:56",
+  "source_title": "Jeff Cobb Spotted Backstage at NJPW Event After WWE Release",
+  "final_title": "Jeff Cobb avvistato nel backstage di NJPW Wrestling Dontaku dopo l'addio alla WWE",
+  "source_url": "https://www.ringsidenews.com/jeff-cobb-spotted-backstage-njpw-event-wwe-release/",
+  "category_id": 8,
+  "category_slug": "WORLD",
+  "article_type": "RUMOR",
+  "semantic_id": "jeff-cobb-spotted-backstage-at-njpw-event-after-wwe-release",
+  "story_signature_v71": "stable:dave_meltzer|jeff_cobb_spotted_backstage|njpw_event_after|status|wwe",
+  "refined_score": 63,
+  "refined_reasons": [
+    "WWE/main roster",
+    "impatto roster/storyline",
+    "WWE main roster + storyline/evento",
+    "ritorno/debutto",
+    "v62 ritorno/debutto",
+    "v86.9 cap commentary/opinion 88->68",
+    "v72.3 cap rumor: niente boost raffinamento"
+  ],
+  "blocks_summary": {
+    "text": 13,
+    "image": 0,
+    "embed": 0
+  },
+  "embed_urls": [],
+  "inline_images": [],
+  "original_html_file": "20260515_190556_001_jeff-cobb-avvistato-nel-backstage-di-njpw-wrestling-dontaku-dopo-l-addio-alla-ww_2e37d216_original.html",
+  "final_html_file": "20260515_190556_001_jeff-cobb-avvistato-nel-backstage-di-njpw-wrestling-dontaku-dopo-l-addio-alla-ww_2e37d216_final.html",
+  "metadata_file": "20260515_190556_001_jeff-cobb-avvistato-nel-backstage-di-njpw-wrestling-dontaku-dopo-l-addio-alla-ww_2e37d216_metadata.json"
+}
