@@ -2,13 +2,22 @@ from pathlib import Path
 
 p = Path('agents/publisher.py')
 s = p.read_text(encoding='utf-8')
-if 'v93_29_base_embed_patch' in s:
+if 'v93_30_base_embed_shortcode_story_dedupe' in s:
     print('[V93 BASE PUBLISHER] gia applicato')
     raise SystemExit(0)
 
-s = s.replace('PUBLISHER_VERSION = "v93_10_publisher_plain_oembed_urls"', 'PUBLISHER_VERSION = "v93_29_base_embed_patch"')
-s = s.replace('from typing import Any\n', 'from typing import Any\nfrom urllib.parse import parse_qs, urlparse\n')
-s = s.replace('PLAIN_EMBED_URL_RE = re.compile(r"(?m)^\\s*(https?://(?:www\\.)?(?:x\\.com|twitter\\.com|instagram\\.com|youtube\\.com|youtu\\.be|tiktok\\.com|threads\\.net|facebook\\.com|bsky\\.app)/\\S+)\\s*$", re.I)\n', 'EMBED_URL_PATTERN = r"https?://(?:www\\.)?(?:x\\.com|twitter\\.com|instagram\\.com|youtube\\.com|youtube-nocookie\\.com|youtu\\.be|tiktok\\.com|threads\\.net|facebook\\.com|bsky\\.app)/\\S+"\nPLAIN_EMBED_URL_RE = re.compile(rf"(?m)^\\s*({EMBED_URL_PATTERN})\\s*$", re.I)\nP_ONLY_EMBED_RE = re.compile(rf"<p>\\s*({EMBED_URL_PATTERN})\\s*</p>", re.I)\nP_START_EMBED_RE = re.compile(rf"<p>\\s*({EMBED_URL_PATTERN})\\s*(?:<br\\s*/?>|\\n|\\r\\n)+\\s*(.*?)</p>", re.I | re.S)\nP_URL_THEN_TEXT_RE = re.compile(rf"<p>\\s*({EMBED_URL_PATTERN})\\s+([^<].*?)</p>", re.I | re.S)\nWP_EMBED_BLOCK_RE = re.compile(r"<!-- wp:embed [\\s\\S]*?<!-- /wp:embed -->", re.I)\nEMBED_URL_ANY_RE = re.compile(rf"({EMBED_URL_PATTERN})", re.I)\n')
+s = s.replace('PUBLISHER_VERSION = "v93_10_publisher_plain_oembed_urls"', 'PUBLISHER_VERSION = "v93_30_base_embed_shortcode_story_dedupe"')
+s = s.replace('PUBLISHER_VERSION = "v93_29_base_embed_patch"', 'PUBLISHER_VERSION = "v93_30_base_embed_shortcode_story_dedupe"')
+if 'from urllib.parse import parse_qs, urlparse' not in s:
+    s = s.replace('from typing import Any\n', 'from typing import Any\nfrom urllib.parse import parse_qs, urlparse\n')
+
+old_re = 'PLAIN_EMBED_URL_RE = re.compile(r"(?m)^\\s*(https?://(?:www\\.)?(?:x\\.com|twitter\\.com|instagram\\.com|youtube\\.com|youtu\\.be|tiktok\\.com|threads\\.net|facebook\\.com|bsky\\.app)/\\S+)\\s*$", re.I)\n'
+new_re = 'EMBED_URL_PATTERN = r"https?://(?:www\\.)?(?:x\\.com|twitter\\.com|instagram\\.com|youtube\\.com|youtube-nocookie\\.com|youtu\\.be|tiktok\\.com|threads\\.net|facebook\\.com|bsky\\.app)/\\S+"\nPLAIN_EMBED_URL_RE = re.compile(rf"(?m)^\\s*({EMBED_URL_PATTERN})\\s*$", re.I)\nP_ONLY_EMBED_RE = re.compile(rf"<p>\\s*({EMBED_URL_PATTERN})\\s*</p>", re.I)\nP_START_EMBED_RE = re.compile(rf"<p>\\s*({EMBED_URL_PATTERN})\\s*(?:<br\\s*/?>|\\n|\\r\\n)+\\s*(.*?)</p>", re.I | re.S)\nP_URL_THEN_TEXT_RE = re.compile(rf"<p>\\s*({EMBED_URL_PATTERN})\\s+([^<].*?)</p>", re.I | re.S)\nWP_EMBED_BLOCK_RE = re.compile(r"<!-- wp:embed [\\s\\S]*?<!-- /wp:embed -->", re.I)\nEMBED_URL_ANY_RE = re.compile(rf"({EMBED_URL_PATTERN})", re.I)\n'
+if 'EMBED_URL_PATTERN = r"https?' not in s:
+    if old_re not in s:
+        raise SystemExit('[V93 BASE PUBLISHER] embed regex anchor non trovato')
+    s = s.replace(old_re, new_re, 1)
+
 insert_after = '''def extract_image_placeholders(body_html: str) -> list[str]:
     return [m.group(1).strip() for m in IMAGE_PLACEHOLDER_RE.finditer(body_html or "") if m.group(1).strip()]
 
@@ -44,20 +53,23 @@ def embed_key(url: str) -> str:
 
 def display_embed_url(url: str) -> str:
     u = clean_url(url)
+    parsed = urlparse(u)
+    host = parsed.netloc.lower().replace("www.", "")
     k = embed_key(u)
     if k.startswith("youtube:"):
         return "https://www.youtube.com/watch?v=" + k.split(":", 1)[1]
+    if k.startswith("twitter:") and host in {"x.com", "twitter.com"}:
+        parts = [x for x in parsed.path.strip("/").split("/") if x]
+        if len(parts) >= 3 and parts[1] == "status":
+            return "https://twitter.com/" + parts[0] + "/status/" + parts[2]
     return u
 
 
 def embed_block(url: str) -> str:
-    u = display_embed_url(url)
-    host = urlparse(u).netloc.lower().replace("www.", "")
-    provider = "twitter" if host in {"x.com", "twitter.com"} else ("youtube" if host in {"youtube.com", "youtube-nocookie.com", "youtu.be"} else "")
-    typ = "video" if provider == "youtube" else "rich"
-    cls = "is-type-video is-provider-youtube wp-block-embed-youtube" if provider == "youtube" else "is-type-rich is-provider-twitter wp-block-embed-twitter"
-    attrs = json.dumps({"url": u, "type": typ, "providerNameSlug": provider, "responsive": True}, ensure_ascii=False, separators=(",", ":"))
-    return '<!-- wp:embed ' + attrs + ' -->\\n<figure class="wp-block-embed ' + cls + '"><div class="wp-block-embed__wrapper">\\n' + html.escape(u) + '\\n</div></figure>\\n<!-- /wp:embed -->'
+    # v93.30: shortcode block forces WordPress to resolve the oEmbed on front-end,
+    # avoiding plain-text tweets until the editor manually converts the post to blocks.
+    u = html.escape(display_embed_url(url))
+    return '<!-- wp:shortcode -->\\n[embed]' + u + '[/embed]\\n<!-- /wp:shortcode -->'
 
 
 def convert_embed_urls(body_html: str) -> str:
@@ -80,12 +92,74 @@ def convert_embed_urls(body_html: str) -> str:
     return text
 
 
+def normalized_story_blob(article: dict[str, Any]) -> str:
+    parts = [article.get("title_it"), article.get("source_title"), article.get("excerpt_it"), article.get("source_url")]
+    meta = article.get("meta") if isinstance(article.get("meta"), dict) else {}
+    parts.extend([meta.get("title"), meta.get("source_title")])
+    blob = " ".join(str(x or "") for x in parts).lower()
+    return re.sub(r"\\s+", " ", blob)
+
+
+def story_signature(article: dict[str, Any]) -> str:
+    blob = normalized_story_blob(article)
+    if "mjf" in blob and any(x in blob for x in ["injury", "infortun", "pulled", "rimosso", "rinunciare", "booking"]) and any(x in blob for x in ["indie", "independent", "evento indipendente", "beyond wrestling"]):
+        return "story:aew:mjf:indie_injury"
+    if "liv morgan" in blob and "dominik" in blob and any(x in blob for x in ["frustration", "frustrazione", "booking"]):
+        return "story:wwe:liv_morgan_dominik_booking_frustration"
+    if "jim ross" in blob and "lawsuit" in blob and any(x in blob for x in ["vince", "shareholder", "azionisti"]):
+        return "story:wwe:vince_shareholder_lawsuit_jim_ross"
+    return ""
+
+
+def existing_story_duplicate(history: dict[str, Any], signature: str) -> dict[str, Any] | None:
+    if not signature:
+        return None
+    for item in history.values():
+        if isinstance(item, dict) and item.get("story_signature") == signature:
+            return item
+    return None
+
+
 '''
-if insert_after not in s:
-    raise SystemExit('[V93 BASE PUBLISHER] image placeholder anchor non trovato')
-s = s.replace(insert_after, insert_after + helpers, 1)
+if 'def embed_key(url: str)' not in s:
+    if insert_after not in s:
+        raise SystemExit('[V93 BASE PUBLISHER] image placeholder anchor non trovato')
+    s = s.replace(insert_after, insert_after + helpers, 1)
+else:
+    # upgrade older v93.29 helper behavior without duplicating helpers
+    s = s.replace('PUBLISHER_VERSION = "v93_29_base_embed_patch"', 'PUBLISHER_VERSION = "v93_30_base_embed_shortcode_story_dedupe"')
+    start = s.find('def clean_url(url: str) -> str:')
+    end = s.find('def clean_body_for_wordpress(body_html: str) -> str:')
+    if start != -1 and end != -1:
+        s = s[:start] + helpers + s[end:]
+
 s = s.replace('    body_html = re.sub(r"<p>\\s*</p>", "", body_html)\n    body_html = re.sub(r"\\n{3,}", "\\n\\n", body_html)\n', '    body_html = convert_embed_urls(body_html)\n    body_html = re.sub(r"<p>\\s*</p>", "", body_html)\n    body_html = re.sub(r"\\n{3,}", "\\n\\n", body_html)\n', 1)
-s = s.replace('"mode": "wordpress_publisher_plain_oembed_urls",', '"mode": "wordpress_publisher_gutenberg_embeds",')
-s = s.replace('"preserve_plain_embed_urls_for_wordpress_oembed": True,', '"plain_embed_urls_to_gutenberg_blocks": True, "normalized_embed_dedupe": True,')
+
+old_dup = '''    if key in history:
+        return {"source_url": url, "status": "already_published", "wp_post_id": history[key].get("wp_post_id"), "title_it": title}
+
+    cleaned_body = clean_body_for_wordpress(str(article.get("body_html") or ""))
+'''
+new_dup = '''    if key in history:
+        return {"source_url": url, "status": "already_published", "wp_post_id": history[key].get("wp_post_id"), "title_it": title}
+    sig = story_signature(article)
+    duplicate = existing_story_duplicate(history, sig)
+    if duplicate:
+        return {"source_url": url, "title_it": title, "status": "already_published", "reason": "semantic_story_duplicate", "story_signature": sig, "duplicate_of": duplicate.get("source_url"), "wp_post_id": duplicate.get("wp_post_id")}
+
+    cleaned_body = clean_body_for_wordpress(str(article.get("body_html") or ""))
+'''
+if old_dup in s:
+    s = s.replace(old_dup, new_dup, 1)
+elif 'semantic_story_duplicate' not in s:
+    raise SystemExit('[V93 BASE PUBLISHER] duplicate guard anchor non trovato')
+
+old_hist = 'history[key] = {"source_url": url, "title_it": title, "wp_post_id": post_id, "wp_link": post_link, "published_at": utc_now(), "status": POST_STATUS, "source": source}'
+new_hist = 'history[key] = {"source_url": url, "title_it": title, "wp_post_id": post_id, "wp_link": post_link, "published_at": utc_now(), "status": POST_STATUS, "source": source, "story_signature": story_signature(article)}'
+s = s.replace(old_hist, new_hist, 1)
+s = s.replace('"mode": "wordpress_publisher_plain_oembed_urls",', '"mode": "wordpress_publisher_embed_shortcode_blocks",')
+s = s.replace('"mode": "wordpress_publisher_gutenberg_embeds",', '"mode": "wordpress_publisher_embed_shortcode_blocks",')
+s = s.replace('"preserve_plain_embed_urls_for_wordpress_oembed": True,', '"plain_embed_urls_to_shortcode_blocks": True, "normalized_embed_dedupe": True, "semantic_story_dedupe": True,')
+s = s.replace('"plain_embed_urls_to_gutenberg_blocks": True, "normalized_embed_dedupe": True,', '"plain_embed_urls_to_shortcode_blocks": True, "normalized_embed_dedupe": True, "semantic_story_dedupe": True,')
 p.write_text(s, encoding='utf-8')
 print('[V93 BASE PUBLISHER] applicato')
